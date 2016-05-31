@@ -977,6 +977,9 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 			[self refreshImmediatelyArticleAtCurrentRow];
 		}
 
+		// make sure our current selection is visible
+		[articleList scrollRowToVisible:currentSelectedRow];
+		// then try to center it in the list
 		NSInteger pageSize = [articleList rowsInRect:articleList.visibleRect].length;
 		NSInteger lastRow = articleList.numberOfRows - 1;
 		NSInteger visibleRow = currentSelectedRow + (pageSize / 2);
@@ -1165,7 +1168,11 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 			[self refreshArticlePane];
 	}
 	else
+	{
 		currentSelectedRow = -1;
+		[articleList scrollRowToVisible:0];
+	}
+
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = NO;		
 }
@@ -1580,6 +1587,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 {
 	NSString * columnName = tableColumn.identifier;
 	[articleController sortByIdentifier:columnName];
+	[self showSortDirection];
 }
 
 /* tableViewColumnDidResize

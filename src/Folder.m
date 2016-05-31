@@ -753,6 +753,15 @@ static NSArray * iconArray = nil;
   {
 	if ([fstring isEqualToString:@""])
 	{
+		if (IsGroupFolder(self))
+		{
+			NSMutableArray * articles = [NSMutableArray array];
+			NSArray * subFolders = [[Database sharedManager] arrayOfFolders:itemId];
+			for (Folder * folder in subFolders) {
+                [articles addObjectsFromArray:[folder articlesWithFilter:fstring]];
+			}
+			return [articles copy];
+		}
         if (isCached && containsBodies)
 		{
 			NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];

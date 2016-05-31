@@ -447,12 +447,11 @@
 	}
 	else
 	{
-		currentFolderId = folderId;
-		[foldersTree selectFolder:folderId];
 		// We seed guidOfArticleToSelect so that
 		// after notification of folder selection change has been processed,
 		// it will select the requisite article on our behalf.
 		guidOfArticleToSelect = guid;
+		[foldersTree selectFolder:folderId];
 	}
 }
 
@@ -550,7 +549,11 @@
 	NSMutableArray * folderArrayCopy = [NSMutableArray arrayWithArray:folderArrayOfArticles];
 	__block BOOL needReload = NO;
 	
-	[self innerMarkReadByRefsArray:articleArray readFlag:YES];
+    // if we mark deleted, mark also read and unflagged
+	if (deleteFlag) {
+	    [self innerMarkReadByRefsArray:articleArray readFlag:YES];
+        [self innerMarkReadByArray:articleArray flagged:NO];
+	}
 
 	// Iterate over every selected article in the table and set the deleted
 	// flag on the article while simultaneously removing it from our copies
@@ -653,6 +656,15 @@
 	[undoManager registerUndoWithTarget:self selector:markFlagUndoAction object:articleArray];
 	[undoManager setActionName:NSLocalizedString(@"Flag", nil)];
 
+    [self innerMarkReadByArray:articleArray flagged:flagged];
+	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
+}
+
+/* innerMarkFlaggedByArray
+ * Marks all articles in the specified array flagged or unflagged.
+ */
+-(void)innerMarkReadByArray:(NSArray *)articleArray flagged:(BOOL)flagged
+{
 	for (Article * theArticle in articleArray)
 	{
 		Folder *myFolder = [[Database sharedManager] folderFromID:theArticle.folderId];
@@ -664,8 +676,6 @@
                                            isFlagged:flagged];
         [theArticle markFlagged:flagged];
 	}
-
-	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 }
 
 /* markUnreadUndo
@@ -745,7 +755,9 @@
 		Folder * folder = [db folderFromID:folderId];
 		if (IsGoogleReaderFolder(folder)){
 			Article * article = [folder articleFromGuid:articleRef.guid];
-			[[GoogleReader sharedManager] markRead:article readFlag:readFlag];
+			if (article != nil) {
+                [[GoogleReader sharedManager] markRead:article readFlag:readFlag];
+			}
 		} else {
 			[db markArticleRead:folderId guid:articleRef.guid isRead:readFlag];
 			if (folderId != lastFolderId && lastFolderId != -1)
@@ -863,7 +875,9 @@
 		Folder * folder = [dbManager folderFromID:folderId];
         if (IsGoogleReaderFolder(folder)) {
         	Article * article = [folder articleFromGuid:theGuid];
-			[[GoogleReader sharedManager] markRead:article readFlag:readFlag];
+        	if (article != nil) {
+			    [[GoogleReader sharedManager] markRead:article readFlag:readFlag];
+			}
         } else {
 			[dbManager markArticleRead:folderId guid:theGuid isRead:readFlag];
 			if (folderId != lastFolderId && lastFolderId != -1)
