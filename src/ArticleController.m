@@ -385,7 +385,8 @@
 	if (![mainArticleView viewNextUnreadInFolder])
 	{
         // If nothing found, search if we have fresher articles from same folder
-        if ([[Database sharedManager] countOfUnread] > 1 && (![mainArticleView selectFirstUnreadInFolder] || self.selectedArticle == currentArticle))
+        if ( [[Database sharedManager] countOfUnread] > 0
+            && (currentArticle == nil || ![mainArticleView selectFirstUnreadInFolder] || self.selectedArticle == currentArticle) )
         {
             // If nothing unread found in current folder, try other folders
             NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
