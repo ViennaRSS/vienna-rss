@@ -657,9 +657,7 @@
     {
         case MA_Refresh_ReloadFromDatabase:
             [articleController reloadArrayOfArticles];
-            [articleController refilterArrayOfArticles];
-            [articleController sortArticles];
-            break;
+            return;
         case MA_Refresh_RedrawList:
             break;
         case MA_Refresh_ReapplyFilter:
