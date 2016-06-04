@@ -127,7 +127,8 @@
 		[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
 		[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
         [nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
-        
+
+        _queue = dispatch_queue_create("uk.co.opencommunity.vienna2.displayRefresh", NULL);
     }
     return self;
 }
@@ -462,8 +463,29 @@
  */
 -(void)reloadArrayOfArticles
 {
+	[self getArticlesWithCompletionBlock:^(NSArray *resultArray) {
+	    self.folderArrayOfArticles = resultArray;
+	    [self refilterArrayOfArticles];
+	    [self sortArticles];
+	    [mainArticleView refreshFolder:MA_Refresh_RedrawList];
+	}];
+}
+
+/* getArticlesWithCompletionBlock
+ * Launch articlesWithFilter on background queue and perform completion block
+ */
+- (void)getArticlesWithCompletionBlock:(void(^)(NSArray * resultArray))completionBlock {
 	Folder * folder = [[Database sharedManager] folderFromID:currentFolderId];
-	self.folderArrayOfArticles = [folder articlesWithFilter:APPCONTROLLER.filterString];
+    dispatch_async(_queue, ^{
+        NSArray * articleArray = [folder articlesWithFilter:APPCONTROLLER.filterString];    
+
+        // call the completion block with the result when finished
+        if (completionBlock) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionBlock(articleArray);
+            });
+        }        
+    });
 }
 
 /* refilterArrayOfArticles
