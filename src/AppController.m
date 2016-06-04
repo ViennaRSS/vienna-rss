@@ -143,7 +143,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	if ((self = [super init]) != nil)
 	{
 		scriptPathMappings = [[NSMutableDictionary alloc] init];
-		progressCount = 0;
+		isProgressAnimatorActive = NO;
 		persistedStatusText = nil;
 		lastCountOfUnread = 0;
 		appStatusItem = nil;
@@ -3900,8 +3900,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)startProgressIndicator
 {
-	if (progressCount++ == 0)
+	if (!isProgressAnimatorActive) {
 		[spinner startAnimation:self];
+		isProgressAnimatorActive = YES;
+	}
 }
 
 /* stopProgressIndicator
@@ -3909,11 +3911,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)stopProgressIndicator
 {
-	NSAssert(progressCount > 0, @"Called stopProgressIndicator without a matching startProgressIndicator");
-	if (--progressCount < 1)
+	NSAssert(isProgressAnimatorActive, @"Called stopProgressIndicator without a matching startProgressIndicator");
+	if (isProgressAnimatorActive)
 	{
 		[spinner stopAnimation:self];
-		progressCount = 0;
+		isProgressAnimatorActive = NO;
 	}
 }
 
@@ -4547,7 +4549,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			
 			//Ensure the spinner has the proper state; it may be added while we're refreshing
 			if (APP.refreshing)
-				[spinner startAnimation:self];
+				[self startProgressIndicator];
 		}
 		else
 		{
