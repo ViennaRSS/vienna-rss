@@ -463,10 +463,21 @@
  */
 -(void)reloadArrayOfArticles
 {
+	// add a progress indicator
+	__block NSProgressIndicator * progressIndicator = [[NSProgressIndicator alloc] initWithFrame:mainArticleView.mainView.visibleRect];
+	progressIndicator.style = NSProgressIndicatorSpinningStyle;
+	[progressIndicator setDisplayedWhenStopped:NO];
+	[mainArticleView.mainView addSubview:progressIndicator];
+	[progressIndicator startAnimation:self];
+
 	[self getArticlesWithCompletionBlock:^(NSArray *resultArray) {
 	    self.folderArrayOfArticles = resultArray;
 	    [self refilterArrayOfArticles];
 	    [self sortArticles];
+	    // stop and release the progress indicator
+	    [progressIndicator stopAnimation:self];
+	    [progressIndicator removeFromSuperviewWithoutNeedingDisplay];
+	    progressIndicator = nil;
 	    [mainArticleView refreshFolder:MA_Refresh_RedrawList];
 	}];
 }
