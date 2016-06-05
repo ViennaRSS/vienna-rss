@@ -479,6 +479,7 @@
 	    [progressIndicator removeFromSuperviewWithoutNeedingDisplay];
 	    progressIndicator = nil;
 	    [mainArticleView refreshFolder:MA_Refresh_RedrawList];
+	    [mainArticleView handleRefreshArticle:nil];
 	}];
 }
 
