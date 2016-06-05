@@ -491,6 +491,10 @@
 	{
 	    node = startingNode.parentNode.nextSibling;
 	};
+	if (node ==nil)
+	{
+		node = startingNode.parentNode.firstChild;
+	}
 	
 	if ( ((node.folder.childUnreadCount > 0) && ![outlineView isItemExpanded:node]) || (node.folder.unreadCount > 0) )
 	{
