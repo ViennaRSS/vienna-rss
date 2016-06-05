@@ -445,7 +445,7 @@
  */
 -(WebView *)webView
 {
-	ArticleCellView * cellView = (ArticleCellView *)[articleList viewAtColumn:0 row:0 makeIfNecessary:YES];
+	ArticleCellView * cellView = (ArticleCellView *)[articleList viewAtColumn:0 row:0 makeIfNecessary:NO];
 	return cellView.articleView;
 }
 
@@ -657,9 +657,7 @@
     {
         case MA_Refresh_ReloadFromDatabase:
             [articleController reloadArrayOfArticles];
-            [articleController refilterArrayOfArticles];
-            [articleController sortArticles];
-            break;
+            return;
         case MA_Refresh_RedrawList:
             break;
         case MA_Refresh_ReapplyFilter:

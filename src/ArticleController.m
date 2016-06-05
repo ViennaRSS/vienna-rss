@@ -127,7 +127,8 @@
 		[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
 		[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
         [nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
-        
+
+        _queue = dispatch_queue_create("uk.co.opencommunity.vienna2.displayRefresh", NULL);
     }
     return self;
 }
@@ -385,7 +386,8 @@
 	if (![mainArticleView viewNextUnreadInFolder])
 	{
         // If nothing found, search if we have fresher articles from same folder
-        if ([[Database sharedManager] countOfUnread] > 1 && (![mainArticleView selectFirstUnreadInFolder] || self.selectedArticle == currentArticle))
+        if ( [[Database sharedManager] countOfUnread] > 0
+            && (currentArticle == nil || ![mainArticleView selectFirstUnreadInFolder] || self.selectedArticle == currentArticle) )
         {
             // If nothing unread found in current folder, try other folders
             NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
@@ -461,8 +463,41 @@
  */
 -(void)reloadArrayOfArticles
 {
+	// add a progress indicator
+	__block NSProgressIndicator * progressIndicator = [[NSProgressIndicator alloc] initWithFrame:mainArticleView.mainView.visibleRect];
+	progressIndicator.style = NSProgressIndicatorSpinningStyle;
+	[progressIndicator setDisplayedWhenStopped:NO];
+	[mainArticleView.mainView addSubview:progressIndicator];
+	[progressIndicator startAnimation:self];
+
+	[self getArticlesWithCompletionBlock:^(NSArray *resultArray) {
+	    self.folderArrayOfArticles = resultArray;
+	    [self refilterArrayOfArticles];
+	    [self sortArticles];
+	    // stop and release the progress indicator
+	    [progressIndicator stopAnimation:self];
+	    [progressIndicator removeFromSuperviewWithoutNeedingDisplay];
+	    progressIndicator = nil;
+	    [mainArticleView refreshFolder:MA_Refresh_RedrawList];
+	    [mainArticleView handleRefreshArticle:nil];
+	}];
+}
+
+/* getArticlesWithCompletionBlock
+ * Launch articlesWithFilter on background queue and perform completion block
+ */
+- (void)getArticlesWithCompletionBlock:(void(^)(NSArray * resultArray))completionBlock {
 	Folder * folder = [[Database sharedManager] folderFromID:currentFolderId];
-	self.folderArrayOfArticles = [folder articlesWithFilter:APPCONTROLLER.filterString];
+    dispatch_async(_queue, ^{
+        NSArray * articleArray = [folder articlesWithFilter:APPCONTROLLER.filterString];    
+
+        // call the completion block with the result when finished
+        if (completionBlock) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionBlock(articleArray);
+            });
+        }        
+    });
 }
 
 /* refilterArrayOfArticles

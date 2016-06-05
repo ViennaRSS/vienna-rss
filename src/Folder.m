@@ -749,8 +749,6 @@ static NSArray * iconArray = nil;
  */
 -(NSArray *)articlesWithFilter:(NSString *)fstring
 {
-@synchronized(self)
-  {
 	if ([fstring isEqualToString:@""])
 	{
 		if (IsGroupFolder(self))
@@ -762,50 +760,51 @@ static NSArray * iconArray = nil;
 			}
 			return [articles copy];
 		}
-        if (isCached && containsBodies)
-		{
-			NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
-			for (id object in self.cachedGuids)
-			{
-				Article * theArticle = [self.cachedArticles objectForKey:object];
-				if (theArticle != nil)
-				    [articles addObject:theArticle];
-				else
-				{   // some problem
-				    NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
-				    isCached = NO;
-				    containsBodies = NO;
-				    break;
-				}
-			}
-			return [articles copy];
-		}
-        else
-        {
-            NSArray * articles = [[Database sharedManager] arrayOfArticles:itemId filterString:fstring];
-            // Only feeds folders can be cached, as they are the only ones to guarantee
-            // bijection : one article <-> one guid
-            if (IsRSSFolder(self) || IsGoogleReaderFolder(self))
+		@synchronized(self) {
+            if (isCached && containsBodies)
             {
-                isCached = NO;
-                containsBodies = NO;
-                [self.cachedArticles removeAllObjects];
-                [self.cachedGuids removeAllObjects];
-                for (id object in articles)
+                NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
+                for (id object in self.cachedGuids)
                 {
-                    NSString * guid = ((Article *)object).guid;
-                    [self.cachedArticles setObject:object forKey:[NSString stringWithString:guid]];
-                    [self.cachedGuids addObject:guid];
+                    Article * theArticle = [self.cachedArticles objectForKey:object];
+                    if (theArticle != nil)
+                        [articles addObject:theArticle];
+                    else
+                    {   // some problem
+                        NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
+                        isCached = NO;
+                        containsBodies = NO;
+                        break;
+                    }
                 }
-                isCached = YES;
-                containsBodies = YES;
+                return [articles copy];
             }
-            return articles;
-        }
+            else
+            {
+                NSArray * articles = [[Database sharedManager] arrayOfArticles:itemId filterString:fstring];
+                // Only feeds folders can be cached, as they are the only ones to guarantee
+                // bijection : one article <-> one guid
+                if (IsRSSFolder(self) || IsGoogleReaderFolder(self))
+                {
+                    isCached = NO;
+                    containsBodies = NO;
+                    [self.cachedArticles removeAllObjects];
+                    [self.cachedGuids removeAllObjects];
+                    for (id object in articles)
+                    {
+                        NSString * guid = ((Article *)object).guid;
+                        [self.cachedArticles setObject:object forKey:[NSString stringWithString:guid]];
+                        [self.cachedGuids addObject:guid];
+                    }
+                    isCached = YES;
+                    containsBodies = YES;
+                }
+                return articles;
+            }
+        } // synchronized
 	}
 	else
 	    return [[Database sharedManager] arrayOfArticles:itemId filterString:fstring];
-  } //synchronized
 }
 
 /* folderNameCompare
