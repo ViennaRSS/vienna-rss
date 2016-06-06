@@ -91,7 +91,7 @@
 	NSMutableDictionary * scriptPathMappings;
 	NSMenu * appDockMenu;
 	NSStatusItem * appStatusItem;
-	NSInteger progressCount;
+	BOOL isProgressAnimatorActive;
 	NSDictionary * standardURLs;
 	NSTimer * checkTimer;
 	NSInteger lastCountOfUnread;

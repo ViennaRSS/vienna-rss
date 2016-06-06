@@ -635,7 +635,7 @@ enum GoogleReaderStatus {
             [[refreshedFolder articleFromGuid:guid] markRead:NO];
 		}
 		LLog(@"%ld unread items for %@", [guidArray count], [request url]);
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:@(refreshedFolder.itemId)];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:@(refreshedFolder.itemId)];
 
         [[Database sharedManager] markUnreadArticlesFromFolder:refreshedFolder guidArray:guidArray];
 	    // reset starred statuses in cache : we will receive in -StarredRequestDone: the updated list
@@ -917,7 +917,9 @@ enum GoogleReaderStatus {
 		BOOL readFlag = [[request.userInfo valueForKey:@"readFlag"] boolValue];
 		[[Database sharedManager] markArticleRead:article.folderId guid:article.guid isRead:readFlag];
 		[article markRead:readFlag];
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(article.folderId)];
+		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+		[nc postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(article.folderId)];
+		[nc postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:@(article.folderId)];
 	}
 }
 

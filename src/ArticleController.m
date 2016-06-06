@@ -124,8 +124,8 @@
 		// Register for notifications
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleFilterChange:) name:@"MA_Notify_FilteringChange" object:nil];
-		[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
 		[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
+		[nc addObserver:self selector:@selector(handleArticleListContentChange:) name:@"MA_Notify_ArticleListContentChange" object:nil];
         [nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
         
     }
@@ -385,7 +385,8 @@
 	if (![mainArticleView viewNextUnreadInFolder])
 	{
         // If nothing found, search if we have fresher articles from same folder
-        if ([[Database sharedManager] countOfUnread] > 1 && (![mainArticleView selectFirstUnreadInFolder] || self.selectedArticle == currentArticle))
+        if ( [[Database sharedManager] countOfUnread] > 0
+            && (currentArticle == nil || ![mainArticleView selectFirstUnreadInFolder] || self.selectedArticle == currentArticle) )
         {
             // If nothing unread found in current folder, try other folders
             NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
@@ -989,42 +990,25 @@
     }
 }
 
-/* handleFolderUpdate
-* Called if a folder content has changed.
+/* handleArticleListStateChange
+* Called if a folder content has changed
+* but we don't need to add new articles
 */
--(void)handleFolderUpdate:(NSNotification *)nc
+-(void)handleArticleListStateChange:(NSNotification *)nc
 {
-    @synchronized(mainArticleView)
-    {
-        NSInteger folderId = ((NSNumber *)nc.object).integerValue;
-        if (folderId != currentFolderId)
-        {
-            Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
-            if ( !IsRSSFolder(currentFolder) && !IsGoogleReaderFolder(currentFolder) )
-            {
-                [mainArticleView refreshFolder:MA_Refresh_RedrawList];
-            }
-            return;
-        }
-
-        Folder * folder = [[Database sharedManager] folderFromID:folderId];
-        if (IsSmartFolder(folder) || IsTrashFolder(folder))
-        {
-            [mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
-        }
-        else
-        {
-            [mainArticleView refreshFolder:MA_Refresh_RedrawList];
-        }
+    NSInteger folderId = ((NSNumber *)nc.object).integerValue;
+    Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
+    if ( (folderId == currentFolderId) || (!IsRSSFolder(currentFolder) && !IsGoogleReaderFolder(currentFolder)) ) {
+        [mainArticleView refreshFolder:MA_Refresh_RedrawList];
     }
 }
 
-/* handleArticleListStateChange
+/* handleArticleListContentChange
  * called after a refresh
  * or any other event which may have added a removed an article
  * to the current folder
  */
--(void)handleArticleListStateChange:(NSNotification *)note
+-(void)handleArticleListContentChange:(NSNotification *)note
 {
     NSInteger folderId = ((NSNumber *)note.object).integerValue;
     Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
