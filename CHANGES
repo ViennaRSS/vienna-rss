@@ -8,6 +8,13 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.5 Release Candidate 2
+-------------------------
+- Fix 'N' key breakage when a single unread article remained below current folder selection
+- Fix 'N' key not wrapping to the first unread article under certain circumstances
+- Force images to scale correctly
+- Try to fix an assertion failure on balancing start/stop animations
+
 3.1.5 Release Candidate 1
 -------------------------
 - Fix visual issue on marking read all articles in a group folder
