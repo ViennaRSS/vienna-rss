@@ -143,7 +143,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	if ((self = [super init]) != nil)
 	{
 		scriptPathMappings = [[NSMutableDictionary alloc] init];
-		isProgressAnimatorActive = NO;
+		progressCount = 0;
 		persistedStatusText = nil;
 		lastCountOfUnread = 0;
 		appStatusItem = nil;
@@ -3900,10 +3900,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)startProgressIndicator
 {
-	if (!isProgressAnimatorActive) {
+	if (progressCount++ == 0)
 		[spinner startAnimation:self];
-		isProgressAnimatorActive = YES;
-	}
 }
 
 /* stopProgressIndicator
@@ -3911,11 +3909,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)stopProgressIndicator
 {
-	NSAssert(isProgressAnimatorActive, @"Called stopProgressIndicator without a matching startProgressIndicator");
-	if (isProgressAnimatorActive)
+	NSAssert(progressCount > 0, @"Called stopProgressIndicator without a matching startProgressIndicator");
+	if (--progressCount < 1)
 	{
 		[spinner stopAnimation:self];
-		isProgressAnimatorActive = NO;
+		progressCount = 0;
 	}
 }
 

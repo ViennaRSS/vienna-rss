@@ -84,4 +84,5 @@ img, table, td, blockquote, code, pre, textarea, input, iframe, object, embed, v
 img {
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
+	height: auto !important;
 }

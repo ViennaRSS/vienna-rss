@@ -493,6 +493,10 @@
 	};
 	if (node ==nil)
 	{
+		node = startingNode.parentNode.parentNode.firstChild;
+	}
+	if (node ==nil)
+	{
 		node = startingNode.parentNode.firstChild;
 	}
 	
