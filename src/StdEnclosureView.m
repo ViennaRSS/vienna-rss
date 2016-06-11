@@ -152,8 +152,9 @@
  */
 -(IBAction)openFile:(id)sender
 {
-	NSString * theFilename = enclosureFilename.lastPathComponent;
-	NSString * destPath = [DownloadManager fullDownloadPath:theFilename];
+	NSString * basename = [NSURL URLWithString:enclosureFilename].lastPathComponent;
+    NSString * decodedname = [basename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	NSString * destPath = [DownloadManager fullDownloadPath:decodedname];
 
 	[[NSWorkspace sharedWorkspace] openFile:destPath];
 }
