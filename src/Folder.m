@@ -763,6 +763,7 @@ static NSArray * iconArray = nil;
 		@synchronized(self) {
             if (isCached && containsBodies)
             {
+                self.cachedArticles.evictsObjectsWithDiscardedContent = NO;
                 NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
                 for (id object in self.cachedGuids)
                 {
@@ -777,6 +778,7 @@ static NSArray * iconArray = nil;
                         break;
                     }
                 }
+                self.cachedArticles.evictsObjectsWithDiscardedContent = YES;
                 return [articles copy];
             }
             else
