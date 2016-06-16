@@ -357,11 +357,22 @@ enum GoogleReaderStatus {
 	if (ignoreLimit)
 		itemsLimitation = @"&n=10000"; //just stay reasonable…
 	else
+	{
 		//Note : we don't set "r" (sorting order) here.
 		//But according to some documentation, Google Reader and TheOldReader
 		//need "r=o" order to make the "ot" time limitation work.
 		//In fact, Vienna used successfully "r=n" with Google Reader.
-		itemsLimitation = [NSString stringWithFormat:@"&ot=%@&n=500",folderLastUpdateString];
+        @try {
+            double limit = [folderLastUpdateString doubleValue] - 12 * 3600;
+            if (limit < 0.0f) {
+                limit = 0.0 ;
+            }
+            NSString * startEpoch = [NSNumber numberWithDouble:limit].stringValue;
+            itemsLimitation = [NSString stringWithFormat:@"&ot=%@&n=500",startEpoch];
+        } @catch (NSException *exception) {
+            itemsLimitation = @"&n=500";
+        }
+	}
 
     NSString* feedIdentifier;
     if( hostRequiresLastPathOnly )

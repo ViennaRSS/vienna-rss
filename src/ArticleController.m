@@ -156,6 +156,7 @@
 	{
 	    [self selectFolderAndArticle:currentFolderId guid:currentSelectedArticle.guid];
 	    [self ensureSelectedArticle:NO];
+	    [self.mainArticleView performSelector:@selector(handleRefreshArticle:) withObject:nil afterDelay:0.0];
 	}
 
 }
