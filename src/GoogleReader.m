@@ -254,6 +254,7 @@ enum GoogleReaderStatus {
 	LLog(@"Start Token Request!");
 	if (clientAuthToken == nil) {
 		LLog(@"Failed authenticate...");
+		googleReaderStatus = notAuthenticated;
 		return;
 	}
     ASIHTTPRequest * request = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
@@ -271,6 +272,7 @@ enum GoogleReaderStatus {
 		LOG_EXPR([[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding]);
 		[self setToken:nil];
 		[request clearDelegatesAndCancel];
+		googleReaderStatus = isMissingToken;
 		return;
 	}
     // Save token
