@@ -8,6 +8,13 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.5
+-----
+- Fix syncing with FeedHQ
+- Avoid unwanted eviction from cache
+- Fix enclosure “Open” button when the enclosure URL has a query part
+- Ensures the article pane displays selected article when switching from Unified to Horizontal or Vertical layout
+
 3.1.5 Release Candidate 2
 -------------------------
 - Fix 'N' key breakage when a single unread article remained below current folder selection
