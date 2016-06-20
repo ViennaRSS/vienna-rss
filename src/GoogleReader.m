@@ -373,6 +373,7 @@ enum GoogleReaderStatus {
 		//In fact, Vienna used successfully "r=n" with Google Reader.
 		if (hostRequiresBackcrawling)
 		// For FeedHQ servers, we need to search articles which are older than last refresh
+		{
             @try {
                 double limit = [folderLastUpdateString doubleValue] - 2 * 24 * 3600;
                 if (limit < 0.0f) {
@@ -383,6 +384,7 @@ enum GoogleReaderStatus {
             } @catch (NSException *exception) {
                 itemsLimitation = @"&n=500";
             }
+        }
         else
         // Bazqux.com, TheOldReader.com and Inoreader.com
         {
