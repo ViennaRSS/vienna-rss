@@ -46,6 +46,7 @@ BOOL hostSupportsLongId;
 BOOL hostRequiresSParameter;
 BOOL hostRequiresLastPathOnly;
 BOOL hostRequiresInoreaderAdditionalHeaders;
+BOOL hostRequiresBackcrawling;
 NSDictionary * inoreaderAdditionalHeaders;
 
 enum GoogleReaderStatus {
@@ -192,13 +193,19 @@ enum GoogleReaderStatus {
 	hostRequiresSParameter=NO;
 	hostRequiresLastPathOnly=NO;
 	hostRequiresInoreaderAdditionalHeaders=NO;
+	hostRequiresBackcrawling=YES;
 	if([openReaderHost isEqualToString:@"theoldreader.com"]){
 		hostSupportsLongId=YES;
 		hostRequiresSParameter=YES;
 		hostRequiresLastPathOnly=YES;
+		hostRequiresBackcrawling=NO;
 	}
 	if([openReaderHost rangeOfString:@"inoreader.com"].length !=0){
 		hostRequiresInoreaderAdditionalHeaders=YES;
+		hostRequiresBackcrawling=NO;
+	}
+	if([openReaderHost rangeOfString:@"bazqux.com"].length !=0){
+		hostRequiresBackcrawling=NO;
 	}
 
 
@@ -254,6 +261,7 @@ enum GoogleReaderStatus {
 	LLog(@"Start Token Request!");
 	if (clientAuthToken == nil) {
 		LLog(@"Failed authenticate...");
+		googleReaderStatus = notAuthenticated;
 		return;
 	}
     ASIHTTPRequest * request = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
@@ -271,6 +279,7 @@ enum GoogleReaderStatus {
 		LOG_EXPR([[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding]);
 		[self setToken:nil];
 		[request clearDelegatesAndCancel];
+		googleReaderStatus = isMissingToken;
 		return;
 	}
     // Save token
@@ -362,15 +371,24 @@ enum GoogleReaderStatus {
 		//But according to some documentation, Google Reader and TheOldReader
 		//need "r=o" order to make the "ot" time limitation work.
 		//In fact, Vienna used successfully "r=n" with Google Reader.
-        @try {
-            double limit = [folderLastUpdateString doubleValue] - 12 * 3600;
-            if (limit < 0.0f) {
-                limit = 0.0 ;
+		if (hostRequiresBackcrawling)
+		// For FeedHQ servers, we need to search articles which are older than last refresh
+		{
+            @try {
+                double limit = [folderLastUpdateString doubleValue] - 2 * 24 * 3600;
+                if (limit < 0.0f) {
+                    limit = 0.0 ;
+                }
+                NSString * startEpoch = [NSNumber numberWithDouble:limit].stringValue;
+                itemsLimitation = [NSString stringWithFormat:@"&ot=%@&n=500",startEpoch];
+            } @catch (NSException *exception) {
+                itemsLimitation = @"&n=500";
             }
-            NSString * startEpoch = [NSNumber numberWithDouble:limit].stringValue;
-            itemsLimitation = [NSString stringWithFormat:@"&ot=%@&n=500",startEpoch];
-        } @catch (NSException *exception) {
-            itemsLimitation = @"&n=500";
+        }
+        else
+        // Bazqux.com, TheOldReader.com and Inoreader.com
+        {
+            itemsLimitation = [NSString stringWithFormat:@"&ot=%@&n=500",folderLastUpdateString];
         }
 	}
 
