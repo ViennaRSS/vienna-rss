@@ -43,7 +43,6 @@
 // Public functions
 -(void)updateAlternateMenuTitle;
 -(void)saveTableSettings;
-@property (nonatomic, readonly, copy) NSArray *markedArticleRange;
 -(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 - (void)webViewLoadFinished:(NSNotification *)notification;
 @end

@@ -3672,7 +3672,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		if (foldersTree.actualSelection != db.searchFolderId)
 			[foldersTree selectFolder:db.searchFolderId];
 		else
-			[articleController.mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+			[articleController reloadArrayOfArticles];
 	}
 }
 

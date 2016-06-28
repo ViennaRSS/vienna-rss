@@ -103,6 +103,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	[nc addObserver:self selector:@selector(handleArticleListFontChange:) name:@"MA_Notify_ArticleListFontChange" object:nil];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
 	[nc addObserver:self selector:@selector(handleLoadFullHTMLChange:) name:@"MA_Notify_LoadFullHTMLChange" object:nil];
+	[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
 
 	// Make us the frame load and UI delegate for the web view
 	articleText.UIDelegate = self;
@@ -770,7 +771,14 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 {
 	NSInteger rowIndex = 0;
 	BOOL found = NO;
-	
+
+	[articleList deselectAll:self];
+	if (guid == nil)
+	{
+	    [articleList scrollRowToVisible:0];
+	    return NO;
+	}
+
 	for (Article * thisArticle in articleController.allArticles)
 	{
 		if ([thisArticle.guid isEqualToString:guid])
@@ -949,14 +957,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	isChangingOrientation = NO;
 }
 
-/* tableLayout
- * Returns the active table layout.
- */
--(NSInteger)tableLayout
-{
-	return tableLayout;
-}
-
 /* makeRowSelectedAndVisible
  * Selects the specified row in the table and makes it visible by
  * scrolling it to the center of the table.
@@ -1095,7 +1095,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)performFindPanelAction:(NSInteger)actionTag
 {
-	[self refreshFolder:MA_Refresh_ReloadFromDatabase];
+	[articleController reloadArrayOfArticles];
 	
 	// This action is send continuously by the filter field, so make sure not the mark read while searching
 	if (currentSelectedRow < 0 && articleController.allArticles.count > 0 )
@@ -1119,19 +1119,11 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)refreshFolder:(NSInteger)refreshFlag
 {
-	NSArray * allArticles = articleController.allArticles;
-	NSString * guid = nil;
-
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = YES;		
-	if (currentSelectedRow >= 0 && currentSelectedRow < allArticles.count)
-		guid = [allArticles[currentSelectedRow] guid];
 
     switch (refreshFlag)
     {
-        case MA_Refresh_ReloadFromDatabase:
-            [articleController reloadArrayOfArticles];
-            return;
         case MA_Refresh_RedrawList:
             break;
         case MA_Refresh_ReapplyFilter:
@@ -1144,32 +1136,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
     }
 
 	[articleList reloadData];
-	if (guid != nil)
-	{
-		// To avoid upsetting the current displayed article after a refresh, we check to see if the selection has stayed
-		// the same and the GUID of the article at the selection is the same.
-		allArticles = articleController.allArticles;
-		Article * currentArticle = (currentSelectedRow >= 0 && currentSelectedRow < (NSInteger)allArticles.count) ? allArticles[currentSelectedRow] : nil;
-		BOOL isUnchanged = (currentArticle != nil) && [guid isEqualToString:currentArticle.guid];
-		if (!isUnchanged)
-		{
-			if (![self scrollToArticle:guid])
-			{
-				currentSelectedRow = -1;
-				[articleList deselectAll:self];
-				[self refreshArticlePane];
-			}
-		}
-		else if (refreshFlag == MA_Refresh_ReloadFromDatabase && 
-				 [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles] && 
-				 currentArticle.revised && !currentArticle.read) // The article may have been updated, so refresh the article pane.
-			[self refreshArticlePane];
-	}
-	else
-	{
-		currentSelectedRow = -1;
-		[articleList scrollRowToVisible:0];
-	}
 
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = NO;		
@@ -1250,7 +1216,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)handleRefreshArticle:(NSNotification *)nc
 {
-	if (!isAppInitialising)
+	if (self == articleController.mainArticleView && !isAppInitialising)
 		[self refreshArticlePane];
 }
 

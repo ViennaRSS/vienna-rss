@@ -42,7 +42,6 @@
 	-(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
 	-(void)selectArticleAfterReload;
 	-(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
-	-(BOOL)scrollToArticle:(NSString *)guid;
 	-(BOOL)viewNextUnreadInCurrentFolder:(NSInteger)currentRow;
 	-(void)markCurrentRead:(NSTimer *)aTimer;
 	-(void)makeRowSelectedAndVisible:(NSInteger)rowIndex;
@@ -416,6 +415,13 @@
 	NSInteger rowIndex = 0;
 	BOOL found = NO;
 
+	[articleList deselectAll:self];
+	if (guid == nil)
+	{
+	    [articleList scrollRowToVisible:0];
+	    return NO;
+	}
+
 	for (Article * thisArticle in articleController.allArticles)
 	{
 		if ([thisArticle.guid isEqualToString:guid])
@@ -454,7 +460,7 @@
  */
 -(void)performFindPanelAction:(NSInteger)actionTag
 {
-	[self refreshFolder:MA_Refresh_ReloadFromDatabase];
+	[articleController reloadArrayOfArticles];
 
 	// This action is send continuously by the filter field, so make sure not the mark read while searching
 	if (currentSelectedRow < 0 && articleController.allArticles.count > 0 )
@@ -645,19 +651,11 @@
  */
 -(void)refreshFolder:(NSInteger)refreshFlag
 {
-	NSArray * allArticles = articleController.allArticles;
-	NSString * guid = nil;
-
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = YES;
-	if (currentSelectedRow >= 0 && currentSelectedRow < allArticles.count)
-		guid = [allArticles[currentSelectedRow] guid];
 
     switch (refreshFlag)
     {
-        case MA_Refresh_ReloadFromDatabase:
-            [articleController reloadArrayOfArticles];
-            return;
         case MA_Refresh_RedrawList:
             break;
         case MA_Refresh_ReapplyFilter:
@@ -670,47 +668,9 @@
     }
 
 	[articleList reloadData];
-	if (guid != nil)
-	{
-		// To avoid upsetting the current displayed article after a refresh, we check to see if the selection has stayed
-		// the same and the GUID of the article at the selection is the same.
-		allArticles = articleController.allArticles;
-		Article * currentArticle = (currentSelectedRow >= 0 && currentSelectedRow < (NSInteger)allArticles.count) ? allArticles[currentSelectedRow] : nil;
-		BOOL isUnchanged = (currentArticle != nil) && [guid isEqualToString:currentArticle.guid];
-		if (!isUnchanged)
-		{
-			if (![self scrollToArticle:guid])
-			{
-				currentSelectedRow = -1;
-				[articleList deselectAll:self];
-			}
-		}
-	}
-	else
-	{
-		currentSelectedRow = -1;
-		[articleList scrollRowToVisible:0];
-	}
 
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = NO;
-}
-
-/* handleRefreshArticle
- * Respond to the notification to refresh the current article
- */
--(void)handleRefreshArticle:(NSNotification *)nc
-{
-    [self refreshArticlePane];
-}
-
-/* refreshArticlePane
- * Updates the article pane for the current selected articles.
- */
--(void)refreshArticlePane
-{
-    // ???
-    // [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:currentSelectedRow] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
 }
 
 /* markCurrentRead
