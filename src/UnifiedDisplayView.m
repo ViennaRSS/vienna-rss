@@ -918,11 +918,16 @@
 
 -(BOOL)becomeFirstResponder
 {
-    if (articleList.selectedRow == -1 && articleController.allArticles.count != 0u)
+    if (currentSelectedRow >= 0 && currentSelectedRow < articleController.allArticles.count)
+    {
+		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:currentSelectedRow] byExtendingSelection:NO];
+    }
+    else if (articleController.allArticles.count != 0u)
     {
 		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
 		currentSelectedRow = 0;
     }
+	[NSApp.mainWindow makeFirstResponder:articleList];
     return YES;
 }
 
@@ -960,7 +965,6 @@
 		}
 	}
 	[articleList scrollRowToVisible:row];
-	[NSApp.mainWindow makeFirstResponder:[articleList rowViewAtRow:row makeIfNecessary:NO]];
 }
 
 @end
