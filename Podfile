@@ -12,11 +12,13 @@ target 'Vienna' do
 end
 
 target 'Vienna Tests' do
+	pod 'ASIHTTPRequest', '~> 1.8'
 	pod 'FMDB', '~> 2.4'
 	pod 'Sparkle'
 end
 
 target 'Vienna Performance Tests' do
+	pod 'ASIHTTPRequest', '~> 1.8'
 	pod 'FMDB', '~> 2.4'
 	pod 'Sparkle'
 end
