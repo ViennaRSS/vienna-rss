@@ -478,6 +478,10 @@
 	    if (reloadArrayOfArticlesSemaphor <=0)
 	    {
             self.folderArrayOfArticles = resultArray;
+            // preserve mainArticleView's selection
+            if (guidOfArticleToSelect == nil && article == articleToPreserve) {
+                guidOfArticleToSelect = articleToPreserve.guid;
+            }
             [self refilterArrayOfArticles];
             [self sortArticles];
             [mainArticleView refreshFolder:MA_Refresh_RedrawList];
