@@ -71,7 +71,6 @@
 -(void)updateAlternateMenuTitle;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
-@property (nonatomic, readonly) NSInteger tableLayout;
 -(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 -(void)loadArticleLink:(NSString *) articleLink;
 @property (nonatomic, readonly, copy) NSURL *url;
