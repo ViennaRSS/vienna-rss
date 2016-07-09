@@ -13,5 +13,10 @@ end
 
 target 'Vienna Tests' do
 	pod 'FMDB', '~> 2.4'
+	pod 'Sparkle'
 end
 
+target 'Vienna Performance Tests' do
+	pod 'FMDB', '~> 2.4'
+	pod 'Sparkle'
+end
