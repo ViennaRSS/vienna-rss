@@ -13,10 +13,10 @@ PODS:
   - ASIHTTPRequest/S3 (1.8.2):
     - ASIHTTPRequest/Core
   - CDEvents (1.2.2)
-  - FMDB (2.6):
-    - FMDB/standard (= 2.6)
-  - FMDB/standard (2.6)
-  - MASPreferences (1.1.2)
+  - FMDB (2.6.2):
+    - FMDB/standard (= 2.6.2)
+  - FMDB/standard (2.6.2)
+  - MASPreferences (1.1.4)
   - Sparkle (1.14.0)
 
 DEPENDENCIES:
@@ -29,8 +29,10 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   ASIHTTPRequest: ec013992946676b7978dcbde6396d57312d21db4
   CDEvents: f311f23de13414f4b3625f1a663b2e1d9a85d982
-  FMDB: c1968bab3ab0aed38f66cb778ae1e7fa9a652b6e
-  MASPreferences: 32d8a2c5ef1d60b63240f5676b011ff72e194cb1
+  FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
+  MASPreferences: 7bdcfe891d7840453cf48f95fa866c3e152ace7a
   Sparkle: ccd95233b12a3e3d4eeb55ff01dd4c8bb8188b07
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 9d3d9f66245239e1fe2bee4723bcf08a19ab6804
+
+COCOAPODS: 1.0.1
