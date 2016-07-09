@@ -203,7 +203,7 @@
                 NSString * appName = [[NSFileManager defaultManager] displayNameAtPath:appURL.path];
                 if ([appName isEqualToString:ourAppName])
                     onTheList = YES;
-                if (![appName isEqualToString:regAppName])
+                if (appName != nil && ![appName isEqualToString:regAppName])
                     [linksHandler addItemWithTitle:appName image:[[NSWorkspace sharedWorkspace] iconForFile:appURL.path]];
                 
                 [appToPathMap setValue:appURL forKey:appName];
