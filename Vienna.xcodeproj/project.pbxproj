@@ -475,6 +475,25 @@
 		43EE8403165EAA70000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8002165EAA6E000997FB /* RSSSources.plist */; };
 		43EE8404165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8004165EAA6E000997FB /* SearchFolder.nib */; };
 		43EE8405165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8006165EAA6E000997FB /* SearchFolder.strings */; };
+		4D3EF49F1D3429B90056B90D /* BitlyAPIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B27CD04E1100F408001F3C83 /* BitlyAPIHelper.m */; };
+		4D3EF4A01D3429C30056B90D /* Criteria.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8C72F40641DE1F00649BA2 /* Criteria.m */; };
+		4D3EF4A11D3429D50056B90D /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4D50604927300FE7994 /* Database.m */; };
+		4D3EF4A21D3429DF0056B90D /* RichXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3281A4084161EB00A7AD5A /* RichXMLParser.m */; };
+		4D3EF4A31D3429E90056B90D /* SubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 031E082F19DFA3A900194F9F /* SubscriptionModel.m */; };
+		4D3EF4A41D342A340056B90D /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 032280301A33BCD8007DE933 /* Article.m */; };
+		4D3EF4A51D342A480056B90D /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B752291B741AFD00FD3FDB /* FeedItem.m */; };
+		4D3EF4A61D342A4E0056B90D /* Field.m in Sources */ = {isa = PBXBuildFile; fileRef = AA36CD7A06100692001E33A4 /* Field.m */; };
+		4D3EF4A71D342A540056B90D /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4CB0604927300FE7994 /* Folder.m */; };
+		4D3EF4A81D342A5C0056B90D /* VNADatabaseMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */; };
+		4D3EF4A91D342B700056B90D /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 435026E5165DD8BE0018EDB7 /* ArticleRef.m */; };
+		4D3EF4AA1D342B790056B90D /* FolderImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 030C388F1AABF12D00AE1EB8 /* FolderImageCache.m */; };
+		4D3EF4AB1D342B800056B90D /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
+		4D3EF4AC1D342B880056B90D /* XMLTag.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */; };
+		4D3EF4AD1D342B9E0056B90D /* HelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA60237F08C298FB002CFD06 /* HelperFunctions.m */; };
+		4D3EF4AE1D342BB00056B90D /* Export.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502866165DE9DF0018EDB7 /* Export.m */; };
+		4D3EF4AF1D342BBC0056B90D /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9FE2EC08BC133600A9E977 /* Preferences.m */; };
+		4D3EF4B01D342BD40056B90D /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350285E165DE9DF0018EDB7 /* Constants.m */; };
+		4D3EF4B11D342BE60056B90D /* SearchMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502882165DE9DF0018EDB7 /* SearchMethod.m */; };
 		5740946816F5112B0087870F /* stylesMenuButtonSmall@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5740945416F5112B0087870F /* stylesMenuButtonSmall@2x.tiff */; };
 		5740946A16F5112B0087870F /* skipFolderButtonSmall@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5740945616F5112B0087870F /* skipFolderButtonSmall@2x.tiff */; };
 		5740946C16F5112B0087870F /* refreshButtonSmall@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5740945816F5112B0087870F /* refreshButtonSmall@2x.tiff */; };
@@ -3767,13 +3786,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D3EF4A91D342B700056B90D /* ArticleRef.m in Sources */,
+				4D3EF4AA1D342B790056B90D /* FolderImageCache.m in Sources */,
+				4D3EF4AF1D342BBC0056B90D /* Preferences.m in Sources */,
+				4D3EF4A31D3429E90056B90D /* SubscriptionModel.m in Sources */,
 				035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */,
+				4D3EF4B01D342BD40056B90D /* Constants.m in Sources */,
+				4D3EF49F1D3429B90056B90D /* BitlyAPIHelper.m in Sources */,
 				03B752421B74814B00FD3FDB /* RichXMLParserTests.m in Sources */,
+				4D3EF4B11D342BE60056B90D /* SearchMethod.m in Sources */,
+				4D3EF4A81D342A5C0056B90D /* VNADatabaseMigration.m in Sources */,
+				4D3EF4A51D342A480056B90D /* FeedItem.m in Sources */,
 				0383DC551B71B44700A11950 /* CriteriaTests.m in Sources */,
+				4D3EF4AD1D342B9E0056B90D /* HelperFunctions.m in Sources */,
+				4D3EF4AB1D342B800056B90D /* KeyChain.m in Sources */,
+				4D3EF4A41D342A340056B90D /* Article.m in Sources */,
+				4D3EF4AC1D342B880056B90D /* XMLTag.m in Sources */,
+				4D3EF4A21D3429DF0056B90D /* RichXMLParser.m in Sources */,
 				0383DC531B71A0B500A11950 /* BitlyAPIHelperTests.m in Sources */,
+				4D3EF4A61D342A4E0056B90D /* Field.m in Sources */,
 				035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */,
+				4D3EF4A11D3429D50056B90D /* Database.m in Sources */,
+				4D3EF4A01D3429C30056B90D /* Criteria.m in Sources */,
 				03A131B51AA670850037471F /* VNADatabaseTests.m in Sources */,
+				4D3EF4AE1D342BB00056B90D /* Export.m in Sources */,
 				03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */,
+				4D3EF4A71D342A540056B90D /* Folder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6937,8 +6975,11 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"\"$(PROJECT_DIR)/3rdparty\"",
+					"\"$(SRCROOT)/3rdparty\"",
+					"\"$(BUILT_PRODUCTS_DIR)\"",
+					"\"${PODS_ROOT}/Sparkle\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -6954,8 +6995,19 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/ASIHTTPRequest\"",
+					"\"${PODS_ROOT}/Headers/Public/CDEvents\"",
+					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
+					"\"${PODS_ROOT}/Headers/Public/MASPreferences\"",
+					"\"${PODS_ROOT}/Headers/Public/Sparkle\"",
+				);
 				INFOPLIST_FILE = "Vienna Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -6989,8 +7041,11 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"\"$(PROJECT_DIR)/3rdparty\"",
+					"\"$(SRCROOT)/3rdparty\"",
+					"\"$(BUILT_PRODUCTS_DIR)\"",
+					"\"${PODS_ROOT}/Sparkle\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -6999,8 +7054,19 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/ASIHTTPRequest\"",
+					"\"${PODS_ROOT}/Headers/Public/CDEvents\"",
+					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
+					"\"${PODS_ROOT}/Headers/Public/MASPreferences\"",
+					"\"${PODS_ROOT}/Headers/Public/Sparkle\"",
+				);
 				INFOPLIST_FILE = "Vienna Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.opencommunity.$(PRODUCT_NAME:rfc1034identifier)";
@@ -7033,8 +7099,8 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"\"${PODS_ROOT}/Sparkle\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -7043,8 +7109,19 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/ASIHTTPRequest\"",
+					"\"${PODS_ROOT}/Headers/Public/CDEvents\"",
+					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
+					"\"${PODS_ROOT}/Headers/Public/MASPreferences\"",
+					"\"${PODS_ROOT}/Headers/Public/Sparkle\"",
+				);
 				INFOPLIST_FILE = "Vienna Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.opencommunity.$(PRODUCT_NAME:rfc1034identifier)";
