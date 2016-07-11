@@ -80,13 +80,13 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Development" ]]; then
-  install_resource "MASPreferences/MASPreferencesWindow.xib"
+  install_resource "MASPreferences/Framework/en.lproj/MASPreferencesWindow.xib"
 fi
 if [[ "$CONFIGURATION" == "Deployment" ]]; then
-  install_resource "MASPreferences/MASPreferencesWindow.xib"
+  install_resource "MASPreferences/Framework/en.lproj/MASPreferencesWindow.xib"
 fi
 if [[ "$CONFIGURATION" == "StaticAnalyzer" ]]; then
-  install_resource "MASPreferences/MASPreferencesWindow.xib"
+  install_resource "MASPreferences/Framework/en.lproj/MASPreferencesWindow.xib"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

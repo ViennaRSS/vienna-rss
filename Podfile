@@ -4,7 +4,7 @@ platform :osx, '10.8'
 source 'https://github.com/CocoaPods/Specs.git'
 
 target 'Vienna' do
-	pod 'MASPreferences', '~> 1.1'
+	pod 'MASPreferences', '~> 1.1.4'
 	pod 'ASIHTTPRequest', '~> 1.8'
 	pod 'FMDB', '~> 2.4'
 	pod 'CDEvents'
