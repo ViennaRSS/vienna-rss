@@ -2987,7 +2987,6 @@
 				TargetAttributes = {
 					035B703419E0E4AE00197334 = {
 						CreatedOnToolsVersion = 6.1;
-						TestTargetID = 8D15AC270486D014006FF6A4;
 					};
 				};
 			};
@@ -6919,7 +6918,6 @@
 			baseConfigurationReference = F1ECA9ED54D2517E7BEDCBB7 /* Pods-Vienna Tests.development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -6962,7 +6960,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.opencommunity.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vienna.app/Contents/MacOS/Vienna";
 			};
 			name = Development;
 		};
@@ -6971,7 +6968,6 @@
 			baseConfigurationReference = CD11EE0EE1E72989D4E43515 /* Pods-Vienna Tests.deployment.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -7008,7 +7004,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.opencommunity.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vienna.app/Contents/MacOS/Vienna";
 			};
 			name = Deployment;
 		};
@@ -7017,7 +7012,6 @@
 			baseConfigurationReference = ED69423919E1DC034EA80E25 /* Pods-Vienna Tests.staticanalyzer.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -7054,7 +7048,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.opencommunity.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vienna.app/Contents/MacOS/Vienna";
 			};
 			name = StaticAnalyzer;
 		};
