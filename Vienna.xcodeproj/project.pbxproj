@@ -1399,6 +1399,7 @@
 		57F7E2EF16F534FE00D4702E /* vienna3plugin.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = vienna3plugin.icns; path = Resources/vienna3plugin.icns; sourceTree = "<group>"; };
 		57F7E2F016F534FE00D4702E /* vienna3style.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = vienna3style.icns; path = Resources/vienna3style.icns; sourceTree = "<group>"; };
 		61A2CB600A8AC68C006348E8 /* revised.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = revised.tiff; path = Resources/revised.tiff; sourceTree = SOURCE_ROOT; };
+		63DEA27414A309B4CA351B20 /* Pods-Vienna.staticanalyzer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna.staticanalyzer.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna/Pods-Vienna.staticanalyzer.xcconfig"; sourceTree = "<group>"; };
 		645F6DAE70D60381ADAE0FCF /* libPods-Vienna Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vienna Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6624683A13C5F81F00C85417 /* sync.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sync.tiff; path = Resources/sync.tiff; sourceTree = SOURCE_ROOT; };
 		664F87C513C62DFE00E266DE /* GoogleReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoogleReader.h; path = src/GoogleReader.h; sourceTree = SOURCE_ROOT; };
@@ -2593,6 +2594,7 @@
 				F1ECA9ED54D2517E7BEDCBB7 /* Pods-Vienna Tests.development.xcconfig */,
 				CD11EE0EE1E72989D4E43515 /* Pods-Vienna Tests.deployment.xcconfig */,
 				ED69423919E1DC034EA80E25 /* Pods-Vienna Tests.staticanalyzer.xcconfig */,
+				63DEA27414A309B4CA351B20 /* Pods-Vienna.staticanalyzer.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -2911,12 +2913,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 035B704019E0E4AE00197334 /* Build configuration list for PBXNativeTarget "Vienna Tests" */;
 			buildPhases = (
-				931037A1747A9E91754E171A /* Check Pods Manifest.lock */,
+				931037A1747A9E91754E171A /* [CP] Check Pods Manifest.lock */,
 				035B703119E0E4AE00197334 /* Sources */,
 				035B703219E0E4AE00197334 /* Frameworks */,
 				035B703319E0E4AE00197334 /* Resources */,
-				97341DB250FCDFB53A128410 /* Embed Pods Frameworks */,
-				B7FBAD3941ADA59D55606EC0 /* Copy Pods Resources */,
+				97341DB250FCDFB53A128410 /* [CP] Embed Pods Frameworks */,
+				B7FBAD3941ADA59D55606EC0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2951,7 +2953,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA4F9AB20855422400C18279 /* Build configuration list for PBXNativeTarget "Vienna" */;
 			buildPhases = (
-				748E656D897F801A815D8AFA /* Check Pods Manifest.lock */,
+				748E656D897F801A815D8AFA /* [CP] Check Pods Manifest.lock */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
@@ -2960,8 +2962,8 @@
 				52FDC71F0C559C7700F9F29B /* Acknowledgements */,
 				43EE8617165EF9D7000997FB /* Translations */,
 				AA65D27F083CF46F00BC387C /* Copy Frameworks */,
-				BCC8E16C7A087E24AFE60B16 /* Embed Pods Frameworks */,
-				8966991ADA99E8C138F79C0D /* Copy Pods Resources */,
+				BCC8E16C7A087E24AFE60B16 /* [CP] Embed Pods Frameworks */,
+				8966991ADA99E8C138F79C0D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3654,14 +3656,14 @@
 			shellPath = /bin/sh;
 			shellScript = ". configs/scripts/Acknowledgements.sh";
 		};
-		748E656D897F801A815D8AFA /* Check Pods Manifest.lock */ = {
+		748E656D897F801A815D8AFA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3669,14 +3671,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		8966991ADA99E8C138F79C0D /* Copy Pods Resources */ = {
+		8966991ADA99E8C138F79C0D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3684,14 +3686,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vienna/Pods-Vienna-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		931037A1747A9E91754E171A /* Check Pods Manifest.lock */ = {
+		931037A1747A9E91754E171A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3699,14 +3701,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		97341DB250FCDFB53A128410 /* Embed Pods Frameworks */ = {
+		97341DB250FCDFB53A128410 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3714,14 +3716,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vienna Tests/Pods-Vienna Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B7FBAD3941ADA59D55606EC0 /* Copy Pods Resources */ = {
+		B7FBAD3941ADA59D55606EC0 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3729,14 +3731,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vienna Tests/Pods-Vienna Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BCC8E16C7A087E24AFE60B16 /* Embed Pods Frameworks */ = {
+		BCC8E16C7A087E24AFE60B16 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7104,7 +7106,7 @@
 		};
 		43D4D6ED166FE08C00BA9675 /* StaticAnalyzer */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43D4D6F9166FE0DB00BA9675 /* Vienna-StaticAnalyzer.xcconfig */;
+			baseConfigurationReference = 63DEA27414A309B4CA351B20 /* Pods-Vienna.staticanalyzer.xcconfig */;
 			buildSettings = {
 			};
 			name = StaticAnalyzer;
