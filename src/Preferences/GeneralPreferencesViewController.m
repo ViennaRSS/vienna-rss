@@ -177,16 +177,15 @@
     }
     
     NSString * regAppName = [[NSFileManager defaultManager] displayNameAtPath:registeredAppURL];
-    if (regAppName != nil) {
-        [linksHandler addItemWithTitle:regAppName image:[[NSWorkspace sharedWorkspace] iconForFile:registeredAppURL]];
-        [linksHandler addSeparator];
-    }
-    
     // Maintain a table to map from the short name to the file URL for when
     // the user changes selection and we later need the file URL to register
     // the new selection.
-    [appToPathMap setValue:registeredAppURL forKey:regAppName];
-    
+    if (regAppName != nil) {
+        [linksHandler addItemWithTitle:regAppName image:[[NSWorkspace sharedWorkspace] iconForFile:registeredAppURL]];
+        [linksHandler addSeparator];
+        [appToPathMap setValue:registeredAppURL forKey:regAppName];
+    }
+
     // Next, add the list of all registered link handlers under the /Applications folder
     // except for the registered application.
     CFArrayRef cfArrayOfApps = LSCopyApplicationURLsForURL((__bridge CFURLRef)testURL, kLSRolesAll);
@@ -203,7 +202,7 @@
                 NSString * appName = [[NSFileManager defaultManager] displayNameAtPath:appURL.path];
                 if ([appName isEqualToString:ourAppName])
                     onTheList = YES;
-                if (![appName isEqualToString:regAppName])
+                if (appName != nil && ![appName isEqualToString:regAppName])
                     [linksHandler addItemWithTitle:appName image:[[NSWorkspace sharedWorkspace] iconForFile:appURL.path]];
                 
                 [appToPathMap setValue:appURL forKey:appName];
