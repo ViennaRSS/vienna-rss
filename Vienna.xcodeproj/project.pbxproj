@@ -7243,6 +7243,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43501CFB165D73C70018EDB7 /* Vienna-Dev.xcconfig */;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/ASIHTTPRequest\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/CDEvents\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/FMDB\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MASPreferences\"",
+				);
 			};
 			name = Development;
 		};
@@ -7250,6 +7257,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43501CFA165D73C70018EDB7 /* Vienna-Dep.xcconfig */;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/ASIHTTPRequest\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/CDEvents\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/FMDB\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MASPreferences\"",
+				);
 			};
 			name = Deployment;
 		};
