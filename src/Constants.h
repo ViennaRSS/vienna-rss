@@ -112,7 +112,6 @@ extern NSString * MA_PBoardType_urln;
 // Refresh folder options
 #define MA_Refresh_RedrawList			0
 #define MA_Refresh_ReapplyFilter		1
-#define MA_Refresh_ReloadFromDatabase	2
 #define MA_Refresh_SortAndRedraw		3
 
 // Growl contexts

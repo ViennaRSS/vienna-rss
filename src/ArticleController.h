@@ -52,6 +52,9 @@
 	Article * articleToPreserve;
 	NSString * guidOfArticleToSelect;
 	BOOL firstUnreadArticleRequired;
+	dispatch_queue_t queue;
+	NSInteger reloadArrayOfArticlesSemaphor;
+	BOOL requireSelectArticleAfterReload;
 }
 
 @property (nonatomic, strong) IBOutlet FoldersTree * foldersTree;

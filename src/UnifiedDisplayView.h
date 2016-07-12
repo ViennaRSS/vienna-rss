@@ -21,6 +21,7 @@
 #import <Cocoa/Cocoa.h>
 #import "BrowserView.h"
 #import "ArticleBaseView.h"
+#import "TableViewExtensions.h"
 
 @class AppController;
 @class ArticleController;
@@ -30,7 +31,7 @@
 {
 	IBOutlet AppController * controller;
 	IBOutlet ArticleController * articleController;
-    IBOutlet NSTableView *articleList;
+    IBOutlet ExtendedTableView *articleList;
 
 	NSInteger currentSelectedRow;
 	BOOL blockSelectionHandler;
@@ -43,7 +44,6 @@
 // Public functions
 -(void)updateAlternateMenuTitle;
 -(void)saveTableSettings;
-@property (nonatomic, readonly, copy) NSArray *markedArticleRange;
 -(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 - (void)webViewLoadFinished:(NSNotification *)notification;
 @end

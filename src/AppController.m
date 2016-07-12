@@ -261,10 +261,9 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		NSString * previousArticleGuid = [prefs stringForKey:MAPref_CachedArticleGUID];
 		if (previousArticleGuid.blank)
 			previousArticleGuid = nil;
-		// Hack for provoking first display : force a data load...
-		[articleController displayFolder:previousFolderId];
-		// ... then select to cause a notification
 		[articleController selectFolderAndArticle:previousFolderId guid:previousArticleGuid];
+
+		[mainWindow makeFirstResponder:(previousArticleGuid != nil) ? [browserView primaryTabItemView].mainView : foldersTree.mainView];
 
 		if (prefs.refreshOnStartup)
 			[self refreshAllSubscriptions:self];
@@ -3672,7 +3671,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		if (foldersTree.actualSelection != db.searchFolderId)
 			[foldersTree selectFolder:db.searchFolderId];
 		else
-			[articleController.mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+			[articleController reloadArrayOfArticles];
 	}
 }
 

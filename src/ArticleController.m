@@ -124,10 +124,12 @@
 		// Register for notifications
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleFilterChange:) name:@"MA_Notify_FilteringChange" object:nil];
-		[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
 		[nc addObserver:self selector:@selector(handleArticleListContentChange:) name:@"MA_Notify_ArticleListContentChange" object:nil];
         [nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
-        
+
+        queue = dispatch_queue_create("uk.co.opencommunity.vienna2.displayRefresh", DISPATCH_QUEUE_SERIAL);
+        reloadArrayOfArticlesSemaphor = 0;
+        requireSelectArticleAfterReload = NO;
     }
     return self;
 }
@@ -156,7 +158,7 @@
 	{
 	    [self selectFolderAndArticle:currentFolderId guid:currentSelectedArticle.guid];
 	    [self ensureSelectedArticle:NO];
-	    [self.mainArticleView performSelector:@selector(handleRefreshArticle:) withObject:nil afterDelay:0.0];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
 	}
 
 }
@@ -232,7 +234,11 @@
  */
 -(void)ensureSelectedArticle:(BOOL)singleSelection
 {
-	[mainArticleView ensureSelectedArticle:singleSelection];
+	if (reloadArrayOfArticlesSemaphor <= 0) {
+	    [mainArticleView ensureSelectedArticle:singleSelection];
+	} else {
+	    requireSelectArticleAfterReload = YES;
+	}
 }
 
 /* searchPlaceholderString
@@ -386,8 +392,8 @@
 	if (![mainArticleView viewNextUnreadInFolder])
 	{
         // If nothing found, search if we have fresher articles from same folder
-        if ( [[Database sharedManager] countOfUnread] > 0
-            && (currentArticle == nil || ![mainArticleView selectFirstUnreadInFolder] || self.selectedArticle == currentArticle) )
+        if ( ([[Database sharedManager] countOfUnread] > 1 || currentArticle == nil)
+            && (![mainArticleView selectFirstUnreadInFolder] || self.selectedArticle == currentArticle) )
         {
             // If nothing unread found in current folder, try other folders
             NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
@@ -419,19 +425,8 @@
 	if (currentFolderId != newFolderId && newFolderId != 0)
 	{
 		currentFolderId = newFolderId;
-		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+		[self reloadArrayOfArticles];
 	}
-
-	if (firstUnreadArticleRequired)
-	{
-		[mainArticleView selectFirstUnreadInFolder];
-	}
-	else if (guidOfArticleToSelect != nil)
-	{
-		[mainArticleView scrollToArticle:guidOfArticleToSelect];
-	}
-	guidOfArticleToSelect = nil;
-	firstUnreadArticleRequired = NO;
 
 }
 
@@ -463,8 +458,80 @@
  */
 -(void)reloadArrayOfArticles
 {
+    Article * article = mainArticleView.selectedArticle;
+
+	reloadArrayOfArticlesSemaphor++;
+	// add a progress indicator
+	__block NSProgressIndicator * progressIndicator = [[NSProgressIndicator alloc] initWithFrame:mainArticleView.mainView.visibleRect];
+	progressIndicator.style = NSProgressIndicatorSpinningStyle;
+	[progressIndicator setDisplayedWhenStopped:NO];
+	[mainArticleView.mainView addSubview:progressIndicator];
+	[progressIndicator startAnimation:self];
+
+	[self getArticlesWithCompletionBlock:^(NSArray *resultArray) {
+        // stop and release the progress indicator
+        [progressIndicator stopAnimation:self];
+        [progressIndicator removeFromSuperviewWithoutNeedingDisplay];
+        progressIndicator = nil;
+	    // when multiple refreshes where queued, we update folderArrayOfArticles only once
+	    reloadArrayOfArticlesSemaphor--;
+	    if (reloadArrayOfArticlesSemaphor <=0)
+	    {
+            self.folderArrayOfArticles = resultArray;
+            // preserve mainArticleView's selection
+            if (guidOfArticleToSelect == nil && article == articleToPreserve) {
+                guidOfArticleToSelect = articleToPreserve.guid;
+            }
+            [self refilterArrayOfArticles];
+            [self sortArticles];
+            [mainArticleView refreshFolder:MA_Refresh_RedrawList];
+            if (firstUnreadArticleRequired)
+            {
+                [mainArticleView selectFirstUnreadInFolder];
+            }
+            else
+            {
+                [mainArticleView scrollToArticle:guidOfArticleToSelect];
+            }
+            if (requireSelectArticleAfterReload)
+            {
+                [self ensureSelectedArticle:NO];
+            }
+
+            // To avoid upsetting the current displayed article after a refresh,
+            // we check to see if the selected article is the same
+            // and if it has been updated
+            Article * currentArticle = mainArticleView.selectedArticle;
+            if ( guidOfArticleToSelect == nil ||
+                 ( currentArticle == article &&
+                   [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]
+                   && currentArticle.revised && !currentArticle.read ) )
+			{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
+            }
+
+			guidOfArticleToSelect = nil;
+			firstUnreadArticleRequired = NO;
+			requireSelectArticleAfterReload = NO;
+		}
+	}];
+}
+
+/* getArticlesWithCompletionBlock
+ * Launch articlesWithFilter on background queue and perform completion block
+ */
+- (void)getArticlesWithCompletionBlock:(void(^)(NSArray * resultArray))completionBlock {
 	Folder * folder = [[Database sharedManager] folderFromID:currentFolderId];
-	self.folderArrayOfArticles = [folder articlesWithFilter:APPCONTROLLER.filterString];
+    dispatch_async(queue, ^{
+        NSArray * articleArray = [folder articlesWithFilter:APPCONTROLLER.filterString];    
+
+        // call the completion block with the result when finished
+        if (completionBlock) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionBlock(articleArray);
+            });
+        }        
+    });
 }
 
 /* refilterArrayOfArticles
@@ -581,7 +648,7 @@
 	self.currentArrayOfArticles = currentArrayCopy;
 	self.folderArrayOfArticles = folderArrayCopy;
 	if (needReload)
-		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+		[self reloadArrayOfArticles];
 	else
 	{
 		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
@@ -900,7 +967,7 @@
 	}
 	if (lastFolderId != -1 && !IsRSSFolder([dbManager folderFromID:currentFolderId])
 		&& !IsGoogleReaderFolder([dbManager folderFromID:currentFolderId])) {
-		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+		[self reloadArrayOfArticles];
 	}
 	else if (needRefilter) {
 		[mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
@@ -980,17 +1047,6 @@
 	}
 }
 
-/* handleRefreshArticle
-* Respond to the notification to refresh the current article pane.
-*/
--(void)handleRefreshArticle:(NSNotification *)nc
-{
-    @synchronized(mainArticleView)
-    {
-        [mainArticleView handleRefreshArticle:nc];
-    }
-}
-
 /* handleArticleListStateChange
 * Called if a folder content has changed
 * but we don't need to add new articles
@@ -1025,7 +1081,7 @@
         {
             articleToPreserve = self.selectedArticle;
         }
-        [mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+        [self reloadArrayOfArticles];
     }
 }
 
