@@ -30,4 +30,6 @@
 	@property (nonatomic, readonly, copy) NSArray *markedArticleRange;
 	-(void)saveTableSettings;
 	-(void)ensureSelectedArticle:(BOOL)singleSelection;
+	-(void)startLoadIndicator;
+	-(void)stopLoadIndicator;
 @end

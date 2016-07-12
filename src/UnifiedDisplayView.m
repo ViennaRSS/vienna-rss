@@ -673,6 +673,31 @@
 		blockSelectionHandler = NO;
 }
 
+/* startLoadIndicator
+ * add the indicator of articles' data being loaded
+ */
+-(void)startLoadIndicator
+{
+	if (progressIndicator == nil)
+	{
+		progressIndicator = [[NSProgressIndicator alloc] initWithFrame:articleList.visibleRect];
+		progressIndicator.style = NSProgressIndicatorSpinningStyle;
+		progressIndicator.displayedWhenStopped = NO;
+		[articleList addSubview:progressIndicator];
+	}
+	[progressIndicator startAnimation:self];
+}
+
+/* stopLoadIndicator
+ * remove the indicator of articles loading
+ */
+-(void)stopLoadIndicator
+{
+	[progressIndicator stopAnimation:self];
+	[progressIndicator removeFromSuperviewWithoutNeedingDisplay];
+	progressIndicator = nil;
+}
+
 /* markCurrentRead
  * Mark the current article as read.
  */

@@ -461,22 +461,14 @@
     Article * article = mainArticleView.selectedArticle;
 
 	reloadArrayOfArticlesSemaphor++;
-	// add a progress indicator
-	__block NSProgressIndicator * progressIndicator = [[NSProgressIndicator alloc] initWithFrame:mainArticleView.mainView.visibleRect];
-	progressIndicator.style = NSProgressIndicatorSpinningStyle;
-	[progressIndicator setDisplayedWhenStopped:NO];
-	[mainArticleView.mainView addSubview:progressIndicator];
-	[progressIndicator startAnimation:self];
+	[mainArticleView startLoadIndicator];
 
 	[self getArticlesWithCompletionBlock:^(NSArray *resultArray) {
-        // stop and release the progress indicator
-        [progressIndicator stopAnimation:self];
-        [progressIndicator removeFromSuperviewWithoutNeedingDisplay];
-        progressIndicator = nil;
 	    // when multiple refreshes where queued, we update folderArrayOfArticles only once
 	    reloadArrayOfArticlesSemaphor--;
 	    if (reloadArrayOfArticlesSemaphor <=0)
 	    {
+            [mainArticleView stopLoadIndicator];
             self.folderArrayOfArticles = resultArray;
             // preserve mainArticleView's selection
             if (guidOfArticleToSelect == nil && article == articleToPreserve) {

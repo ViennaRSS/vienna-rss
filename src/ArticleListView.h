@@ -65,6 +65,7 @@
 	BOOL isCurrentPageFullHTML;
 	BOOL isLoadingHTMLArticle;
 	NSError * lastError;
+	NSProgressIndicator * progressIndicator;
 }
 
 // Public functions
