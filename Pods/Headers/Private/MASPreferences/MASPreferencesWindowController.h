@@ -1,1 +1,1 @@
-../../../MASPreferences/MASPreferencesWindowController.h
+../../../MASPreferences/Framework/MASPreferencesWindowController.h
