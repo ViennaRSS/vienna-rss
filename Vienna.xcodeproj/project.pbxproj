@@ -476,6 +476,8 @@
 		43EE8404165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8004165EAA6E000997FB /* SearchFolder.nib */; };
 		43EE8405165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8006165EAA6E000997FB /* SearchFolder.strings */; };
 		4D36B44B1D37F91E009736C1 /* ArticleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D36B44A1D37F91E009736C1 /* ArticleTests.m */; };
+		4D36B44C1D37FBE4009736C1 /* CalendarExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFA8CA8062A0BE200C530A6 /* CalendarExtensions.m */; };
+		4D36B44D1D37FCC2009736C1 /* StringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF3B14106095E7B0025CC7F /* StringExtensions.m */; };
 		4D3EF49F1D3429B90056B90D /* BitlyAPIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B27CD04E1100F408001F3C83 /* BitlyAPIHelper.m */; };
 		4D3EF4A01D3429C30056B90D /* Criteria.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8C72F40641DE1F00649BA2 /* Criteria.m */; };
 		4D3EF4A11D3429D50056B90D /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4D50604927300FE7994 /* Database.m */; };
@@ -3822,6 +3824,8 @@
 				4D3EF4A01D3429C30056B90D /* Criteria.m in Sources */,
 				03A131B51AA670850037471F /* VNADatabaseTests.m in Sources */,
 				4D3EF4AE1D342BB00056B90D /* Export.m in Sources */,
+				4D36B44D1D37FCC2009736C1 /* StringExtensions.m in Sources */,
+				4D36B44C1D37FBE4009736C1 /* CalendarExtensions.m in Sources */,
 				03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */,
 				4D3EF4A71D342A540056B90D /* Folder.m in Sources */,
 			);
