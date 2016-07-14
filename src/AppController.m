@@ -2398,7 +2398,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)handleRefreshStatusChange:(NSNotification *)nc
 {
-	if (APP.refreshing)
+	if (self.connecting)
 	{
 		// Save the date/time of this refresh so we do the right thing when
 		// we apply the filter.
@@ -4545,7 +4545,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			[spinner setHidden:NO];
 			
 			//Ensure the spinner has the proper state; it may be added while we're refreshing
-			if (APP.refreshing)
+			if (self.connecting)
 				[self startProgressIndicator];
 		}
 		else
