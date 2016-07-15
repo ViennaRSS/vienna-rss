@@ -111,12 +111,6 @@
 }
 
 - (void)nqRequestStarted:(ASIHTTPRequest *)request {
-	if (!hasStarted)
-	{
-			hasStarted = YES;
-			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
-	}
-
 	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),networkQueue.requestsCount,NSLocalizedString(@"Refreshing subscriptions...", nil)];
 	[APPCONTROLLER setStatusMessage:self.statusMessageDuringRefresh persist:YES];
 }
@@ -510,6 +504,11 @@
 		[self folderRefreshCompleted:myRequest];
 	} else {
 		[self addConnection:myRequest];
+		if (!hasStarted)
+		{
+			hasStarted = YES;
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+		}
 	}
 }
 
