@@ -1141,6 +1141,31 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		blockSelectionHandler = blockMarkRead = NO;		
 }
 
+/* startLoadIndicator
+ * add the indicator of articles' data being loaded
+ */
+-(void)startLoadIndicator
+{
+	if (progressIndicator == nil)
+	{
+		progressIndicator = [[NSProgressIndicator alloc] initWithFrame:articleList.visibleRect];
+		progressIndicator.style = NSProgressIndicatorSpinningStyle;
+		progressIndicator.displayedWhenStopped = NO;
+		[articleList addSubview:progressIndicator];
+	}
+	[progressIndicator startAnimation:self];
+}
+
+/* stopLoadIndicator
+ * remove the indicator of articles loading
+ */
+-(void)stopLoadIndicator
+{
+	[progressIndicator stopAnimation:self];
+	[progressIndicator removeFromSuperviewWithoutNeedingDisplay];
+	progressIndicator = nil;
+}
+
 /* menuWillAppear
  * Called when the popup menu is opened on the table. We ensure that the item under the
  * cursor is selected.

@@ -39,6 +39,7 @@
 	NSTimer * markReadTimer;
 
 	NSMutableArray * rowHeightArray;
+	NSProgressIndicator * progressIndicator;
 }
 
 // Public functions
