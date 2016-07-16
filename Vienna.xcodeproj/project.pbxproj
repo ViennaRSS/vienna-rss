@@ -75,7 +75,6 @@
 		0383DC531B71A0B500A11950 /* BitlyAPIHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383DC521B71A0B500A11950 /* BitlyAPIHelperTests.m */; };
 		0383DC551B71B44700A11950 /* CriteriaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383DC541B71B44700A11950 /* CriteriaTests.m */; };
 		03A131B31AA54EAC0037471F /* VNADatabaseMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */; };
-		03A131B51AA670850037471F /* VNADatabaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B41AA670850037471F /* VNADatabaseTests.m */; };
 		03B35B841B75E9E0001DB06D /* NSDate+Vienna.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B35B831B75E9E0001DB06D /* NSDate+Vienna.m */; };
 		03B7522A1B741AFD00FD3FDB /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B752291B741AFD00FD3FDB /* FeedItem.m */; };
 		03B752421B74814B00FD3FDB /* RichXMLParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B752411B74814B00FD3FDB /* RichXMLParserTests.m */; };
@@ -898,7 +897,6 @@
 		0383DC541B71B44700A11950 /* CriteriaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CriteriaTests.m; sourceTree = "<group>"; };
 		03A131B11AA54EAC0037471F /* VNADatabaseMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VNADatabaseMigration.h; path = src/VNADatabaseMigration.h; sourceTree = "<group>"; };
 		03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VNADatabaseMigration.m; path = src/VNADatabaseMigration.m; sourceTree = "<group>"; };
-		03A131B41AA670850037471F /* VNADatabaseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VNADatabaseTests.m; sourceTree = "<group>"; };
 		03B35B821B75E9E0001DB06D /* NSDate+Vienna.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Vienna.h"; path = "src/NSDate+Vienna.h"; sourceTree = "<group>"; };
 		03B35B831B75E9E0001DB06D /* NSDate+Vienna.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Vienna.m"; path = "src/NSDate+Vienna.m"; sourceTree = "<group>"; };
 		03B752281B741AFD00FD3FDB /* FeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedItem.h; path = src/models/FeedItem.h; sourceTree = "<group>"; };
@@ -1721,7 +1719,6 @@
 				035B703919E0E4AE00197334 /* Vienna_Tests.m */,
 				035B703719E0E4AE00197334 /* Supporting Files */,
 				035B704119E0E4DC00197334 /* SubscriptionModelTests.m */,
-				03A131B41AA670850037471F /* VNADatabaseTests.m */,
 				0383DC521B71A0B500A11950 /* BitlyAPIHelperTests.m */,
 				0383DC541B71B44700A11950 /* CriteriaTests.m */,
 				03EFD56F1B720AB0007EF284 /* ExportTests.m */,
@@ -3828,7 +3825,6 @@
 				035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */,
 				4D3EF4A11D3429D50056B90D /* Database.m in Sources */,
 				4D3EF4A01D3429C30056B90D /* Criteria.m in Sources */,
-				03A131B51AA670850037471F /* VNADatabaseTests.m in Sources */,
 				4D3EF4AE1D342BB00056B90D /* Export.m in Sources */,
 				4D36B44D1D37FCC2009736C1 /* StringExtensions.m in Sources */,
 				4D36B44C1D37FBE4009736C1 /* CalendarExtensions.m in Sources */,
