@@ -17,6 +17,7 @@ PODS:
     - FMDB/standard (= 2.6)
   - FMDB/standard (2.6)
   - MASPreferences (1.1.4)
+  - OCMock (3.3)
   - Sparkle (1.14.0)
 
 DEPENDENCIES:
@@ -24,6 +25,7 @@ DEPENDENCIES:
   - CDEvents
   - FMDB (~> 2.4)
   - MASPreferences (~> 1.1.4)
+  - OCMock
   - Sparkle
 
 SPEC CHECKSUMS:
@@ -31,8 +33,9 @@ SPEC CHECKSUMS:
   CDEvents: f311f23de13414f4b3625f1a663b2e1d9a85d982
   FMDB: c1968bab3ab0aed38f66cb778ae1e7fa9a652b6e
   MASPreferences: 7bdcfe891d7840453cf48f95fa866c3e152ace7a
+  OCMock: d68685bde31f69cb61d518dcb39269080c78b5ed
   Sparkle: ccd95233b12a3e3d4eeb55ff01dd4c8bb8188b07
 
-PODFILE CHECKSUM: f21ab023b8e23c299d905fc5bec524fb227d90ee
+PODFILE CHECKSUM: e0b7c9c050aa48cf03b9ce5a01284aadb8cc1867
 
 COCOAPODS: 1.0.1

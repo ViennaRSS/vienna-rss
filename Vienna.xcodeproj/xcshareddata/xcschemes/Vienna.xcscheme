@@ -42,7 +42,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "39954999955F8009B9AC46A9CC8856AD"
+               BlueprintIdentifier = "4758F252F425F0EDA0DE770358099B75"
                BuildableName = "libPods-Vienna Tests.a"
                BlueprintName = "Pods-Vienna Tests"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -68,7 +68,8 @@
       buildConfiguration = "Development"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
