@@ -8,6 +8,18 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.6 Release Candidate 1
+-------------------------
+- When the user selects a folder, loading articles from database occurs on a separate thread
+- Fix again the 'N' key not selecting last unread article or not wrapping to the first unread article
+- Keep currently selected article on refresh of a group or smart folder
+- Fix article selection in Unified layout
+- Fix "Last Refresh filter"
+- Fix an exception on opening the General preferences window
+- Fix an assertion failure
+- Code refactoring
+- Reorganized tests
+
 3.1.5
 -----
 - Fix syncing with FeedHQ

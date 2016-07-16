@@ -107,24 +107,18 @@ sup {
 
 <h1 id="toc_0">Version Notes</h1>
 
-<h2 id="toc_1">3.1.5</h2>
-
-<h3 id="toc_2">Changes since 3.1.4</h3>
+<h2 id="toc_1">3.1.6 Release Candidate 1</h2>
 
 <ul>
-<li>Fix syncing with FeedHQ</li>
-<li>Fix problems with next unread article command (&lsquo;N&rsquo; or space key)</li>
-<li>Fix back and forward in Horizontal and Vertical layouts (invoked by &lt; and &gt; keys)</li>
-<li>Fix enclosure “Open” button when the enclosure URL has a query part</li>
-<li>Scrolls to top of list when selecting a folder</li>
-<li>Ensures the article pane displays selected article when switching from Unified to Horizontal or Vertical layout</li>
-<li>Fix sort indicator in Horizontal and Vertical layouts</li>
-<li>Force images to scale correctly</li>
-<li>Fix restoring Open Reader article from Trash</li>
-<li>Fix visual issue on marking read all articles in a group folder</li>
-<li>Fix deleting articles from a group folder</li>
-<li>Fix cache problem which could make articles be hidden</li>
-<li>Fix a rare occurence of crash in Preferences folder</li>
+<li>When the user selects a folder, loading articles from database occurs on a separate thread</li>
+<li>Fix again the &#39;N&#39; key not selecting last unread article or not wrapping to the first unread article</li>
+<li>Keep currently selected article on refresh of a group or smart folder</li>
+<li>Fix article selection in Unified layout</li>
+<li>Fix &quot;Last Refresh filter&quot;</li>
+<li>Fix an exception on opening the General preferences window</li>
+<li>Fix an assertion failure</li>
+<li>Code refactoring</li>
+<li>Reorganized tests</li>
 </ul>
 
 
