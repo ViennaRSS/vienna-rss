@@ -70,9 +70,9 @@
 		035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B704119E0E4DC00197334 /* SubscriptionModelTests.m */; };
 		03721E591A218CFC009C020C /* GeneralPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03721E5B1A218CFC009C020C /* GeneralPreferencesView.xib */; };
 		03721E6E1A218D4B009C020C /* AppearancePreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03721E701A218D4B009C020C /* AppearancePreferencesView.xib */; };
+		0377BDED1D3A009B00960555 /* BitlyAPIHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377BDEC1D3A009B00960555 /* BitlyAPIHelperTests.swift */; };
 		0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */; };
 		0379E23B1A20831600D58BFE /* SyncingPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */; };
-		0383DC531B71A0B500A11950 /* BitlyAPIHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383DC521B71A0B500A11950 /* BitlyAPIHelperTests.m */; };
 		0383DC551B71B44700A11950 /* CriteriaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383DC541B71B44700A11950 /* CriteriaTests.m */; };
 		03A131B31AA54EAC0037471F /* VNADatabaseMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */; };
 		03B35B841B75E9E0001DB06D /* NSDate+Vienna.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B35B831B75E9E0001DB06D /* NSDate+Vienna.m */; };
@@ -889,11 +889,12 @@
 		03721E801A218D5F009C020C /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = uk.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
 		03721E811A218D60009C020C /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt; path = pt.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
 		03721E821A218D60009C020C /* tr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = tr; path = tr.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
+		0377BDEB1D3A009B00960555 /* Vienna Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vienna Tests-Bridging-Header.h"; sourceTree = "<group>"; };
+		0377BDEC1D3A009B00960555 /* BitlyAPIHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitlyAPIHelperTests.swift; sourceTree = "<group>"; };
 		0379E2361A2082E600D58BFE /* AppearancePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppearancePreferencesViewController.h; path = src/Preferences/AppearancePreferencesViewController.h; sourceTree = "<group>"; };
 		0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppearancePreferencesViewController.m; path = src/Preferences/AppearancePreferencesViewController.m; sourceTree = "<group>"; };
 		0379E2391A20831600D58BFE /* SyncingPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SyncingPreferencesViewController.h; path = src/Preferences/SyncingPreferencesViewController.h; sourceTree = "<group>"; };
 		0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SyncingPreferencesViewController.m; path = src/Preferences/SyncingPreferencesViewController.m; sourceTree = "<group>"; };
-		0383DC521B71A0B500A11950 /* BitlyAPIHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyAPIHelperTests.m; sourceTree = "<group>"; };
 		0383DC541B71B44700A11950 /* CriteriaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CriteriaTests.m; sourceTree = "<group>"; };
 		03A131B11AA54EAC0037471F /* VNADatabaseMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VNADatabaseMigration.h; path = src/VNADatabaseMigration.h; sourceTree = "<group>"; };
 		03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VNADatabaseMigration.m; path = src/VNADatabaseMigration.m; sourceTree = "<group>"; };
@@ -1725,6 +1726,8 @@
 				03B752411B74814B00FD3FDB /* RichXMLParserTests.m */,
 				4D36B44E1D38007D009736C1 /* NSURL+URIEquivalence.h */,
 				4D36B44F1D38007D009736C1 /* NSURL+URIEquivalence.m */,
+				0377BDEC1D3A009B00960555 /* BitlyAPIHelperTests.swift */,
+				0377BDEB1D3A009B00960555 /* Vienna Tests-Bridging-Header.h */,
 			);
 			path = "Vienna Tests";
 			sourceTree = "<group>";
@@ -3018,6 +3021,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = uk.co.opencommunity;
 				TargetAttributes = {
@@ -3802,6 +3806,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D3EF4A91D342B700056B90D /* ArticleRef.m in Sources */,
+				0377BDED1D3A009B00960555 /* BitlyAPIHelperTests.swift in Sources */,
 				4D3EF4AA1D342B790056B90D /* FolderImageCache.m in Sources */,
 				4D3EF4AF1D342BBC0056B90D /* Preferences.m in Sources */,
 				4D3EF4A31D3429E90056B90D /* SubscriptionModel.m in Sources */,
@@ -3820,7 +3825,6 @@
 				4D36B4501D38007D009736C1 /* NSURL+URIEquivalence.m in Sources */,
 				4D3EF4AC1D342B880056B90D /* XMLTag.m in Sources */,
 				4D3EF4A21D3429DF0056B90D /* RichXMLParser.m in Sources */,
-				0383DC531B71A0B500A11950 /* BitlyAPIHelperTests.m in Sources */,
 				4D3EF4A61D342A4E0056B90D /* Field.m in Sources */,
 				035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */,
 				4D3EF4A11D3429D50056B90D /* Database.m in Sources */,
@@ -7032,6 +7036,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.opencommunity.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "Vienna Tests/Vienna Tests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Development;
 		};
@@ -7090,6 +7096,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.opencommunity.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "Vienna Tests/Vienna Tests-Bridging-Header.h";
 			};
 			name = Deployment;
 		};
@@ -7145,6 +7152,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.opencommunity.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "Vienna Tests/Vienna Tests-Bridging-Header.h";
 			};
 			name = StaticAnalyzer;
 		};
