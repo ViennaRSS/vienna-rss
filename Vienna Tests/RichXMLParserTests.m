@@ -27,7 +27,7 @@
 }
 
 - (void)testParseRichXML {
-    BOOL success = NO;
+//    BOOL success = NO;
     // Test extracting feeds to an array
     NSURL *url = [NSURL fileURLWithPath:@"/Users/josh/test.rdf"];
     // old parser
