@@ -52,7 +52,7 @@ static NSString * BitlyApiBaseUrl = @"http://api.bit.ly/%@?version=2.0.1&login=%
 	
 	// ... which is then finally sent to bit.ly's servers.
 	NSHTTPURLResponse* urlResponse = nil;  	
-	NSError *error = [[NSError alloc] init];
+	NSError *error = nil;
 	NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];	
 	
 	// If the response is OK, use Vienna's XML parser stuff to get the data we need.
