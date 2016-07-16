@@ -12,10 +12,10 @@
 		<key>URL</key>
 		<string>http://feeds.bbci.co.uk/news/world/rss.xml</string>
 	</dict>
-	<key>The Unofficial Apple Weblog (TUAW)</key>
+	<key>Six Colors: Apple, technology, and other stuff from Jason Snell and Friends</key>
 	<dict>
 		<key>URL</key>
-		<string>http://www.tuaw.com/rss.xml</string>
+		<string>http://feedpress.me/sixcolors</string>
 	</dict>
 	<key>World of Apple</key>
 	<dict>
