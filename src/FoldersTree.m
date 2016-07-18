@@ -486,24 +486,13 @@
  */
 -(NSInteger)nextFolderWithUnreadAfterNode:(TreeNode *)startingNode
 {
-	TreeNode * node = startingNode.nextSibling;
-	if (node == nil)
-	{
-	    node = startingNode.parentNode.nextSibling;
-	};
-	if (node ==nil)
-	{
-		node = startingNode.parentNode.parentNode.firstChild;
-	}
-	if (node ==nil)
-	{
-		node = startingNode.parentNode.firstChild;
-	}
-	
-	if ( ((node.folder.childUnreadCount > 0) && ![outlineView isItemExpanded:node]) || (node.folder.unreadCount > 0) )
-	{
-		return node.nodeId;
-	}
+    // keep track of parent (or grandparent) of starting node
+    TreeNode * parentOfStartingNode = startingNode;
+    while (parentOfStartingNode.parentNode != rootNode)
+    {
+        parentOfStartingNode = parentOfStartingNode.parentNode;
+    }
+	TreeNode * node = startingNode;
 
 	while (node != nil)
 	{
@@ -529,7 +518,8 @@
 
 		// If we've gone full circle and not found
 		// anything, we're out of unread articles
-		if (nextNode == startingNode)
+		if (nextNode == startingNode
+            || (nextNode == parentOfStartingNode && !nextNode.folder.childUnreadCount))
 			return startingNode.nodeId;
 
 		node = nextNode;
