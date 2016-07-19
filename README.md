@@ -40,7 +40,7 @@ Want to contribute? Great! There are many ways you can, even if you aren't a dev
 
 ### Localizing and translating ###
 
-We need help keeping Vienna translations up to date into different languages. Apart from English, here are the languages for which a localization effort has started :
+We need help keeping Vienna translations up to date into different languages. Apart from English, here are the languages for which a localization effort has started:
 
 * German
 * French
