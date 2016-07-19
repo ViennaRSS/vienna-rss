@@ -37,6 +37,7 @@
 	-(void)setSortColumnIdentifier:(NSString *)str;
 	-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag;
 	-(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
+	-(void)innerMarkFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged;
 @end
 
 @implementation ArticleController
@@ -613,7 +614,7 @@
     // if we mark deleted, mark also read and unflagged
 	if (deleteFlag) {
 	    [self innerMarkReadByRefsArray:articleArray readFlag:YES];
-        [self innerMarkReadByArray:articleArray flagged:NO];
+        [self innerMarkFlaggedByArray:articleArray flagged:NO];
 	}
 
 	// Iterate over every selected article in the table and set the deleted
@@ -717,14 +718,14 @@
 	[undoManager registerUndoWithTarget:self selector:markFlagUndoAction object:articleArray];
 	[undoManager setActionName:NSLocalizedString(@"Flag", nil)];
 
-    [self innerMarkReadByArray:articleArray flagged:flagged];
+    [self innerMarkFlaggedByArray:articleArray flagged:flagged];
 	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 }
 
 /* innerMarkFlaggedByArray
  * Marks all articles in the specified array flagged or unflagged.
  */
--(void)innerMarkReadByArray:(NSArray *)articleArray flagged:(BOOL)flagged
+-(void)innerMarkFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged
 {
 	for (Article * theArticle in articleArray)
 	{
