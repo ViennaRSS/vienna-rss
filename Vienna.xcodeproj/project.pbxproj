@@ -1720,7 +1720,6 @@
 				035B703919E0E4AE00197334 /* Vienna_Tests.m */,
 				035B703719E0E4AE00197334 /* Supporting Files */,
 				035B704119E0E4DC00197334 /* SubscriptionModelTests.m */,
-				0383DC521B71A0B500A11950 /* BitlyAPIHelperTests.m */,
 				0383DC541B71B44700A11950 /* CriteriaTests.m */,
 				03EFD56F1B720AB0007EF284 /* ExportTests.m */,
 				03B752411B74814B00FD3FDB /* RichXMLParserTests.m */,
@@ -1740,9 +1739,12 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		1058C7A6FEA54F5311CA2CBB /* System frameworks */ = {
+		1058C7A6FEA54F5311CA2CBB /* System Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F0E01EF717C885A900E20329 /* libsqlite3.dylib */,
+				3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */,
+				3ABA673414C7536D00251925 /* libz.dylib */,
 				43502504165DCC410018EDB7 /* AppKit.framework */,
 				435021CD165DCB980018EDB7 /* Carbon.framework */,
 				435021CF165DCB980018EDB7 /* Cocoa.framework */,
@@ -1751,11 +1753,8 @@
 				435021D3165DCB980018EDB7 /* Security.framework */,
 				435021D5165DCB980018EDB7 /* SystemConfiguration.framework */,
 				435021D7165DCB980018EDB7 /* WebKit.framework */,
-				F0E01EF717C885A900E20329 /* libsqlite3.dylib */,
-				3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */,
-				3ABA673414C7536D00251925 /* libz.dylib */,
 			);
-			name = "System frameworks";
+			name = "System Frameworks";
 			sourceTree = SOURCE_ROOT;
 		};
 		19C28FB0FE9D524F11CA2CBB /* Products */ = {
@@ -1776,8 +1775,6 @@
 				AAA568BB09EE773200C87343 /* Vienna */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 				43501F8D165DB9DD0018EDB7 /* Third Party */,
-				43501F70165DB92B0018EDB7 /* External frameworks */,
-				1058C7A6FEA54F5311CA2CBB /* System frameworks */,
 				035B703619E0E4AE00197334 /* Vienna Tests */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
 				946A341AA82976C365B67A76 /* Pods */,
@@ -1919,13 +1916,13 @@
 			name = Configs;
 			sourceTree = SOURCE_ROOT;
 		};
-		43501F70165DB92B0018EDB7 /* External frameworks */ = {
+		43501F70165DB92B0018EDB7 /* External Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				3A9903941993638900EA69B2 /* Growl.framework */,
 				EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */,
 			);
-			name = "External frameworks";
+			name = "External Frameworks";
 			sourceTree = SOURCE_ROOT;
 		};
 		43501F8D165DB9DD0018EDB7 /* Third Party */ = {
@@ -2619,8 +2616,10 @@
 		7F60B6D7AEFB47009A82F8BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7A3781B9326123EE56347D35 /* libPods-Vienna.a */,
 				645F6DAE70D60381ADAE0FCF /* libPods-Vienna Tests.a */,
+				7A3781B9326123EE56347D35 /* libPods-Vienna.a */,
+				43501F70165DB92B0018EDB7 /* External Frameworks */,
+				1058C7A6FEA54F5311CA2CBB /* System Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
