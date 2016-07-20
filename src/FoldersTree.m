@@ -520,7 +520,9 @@
 		// anything, we're out of unread articles
 		if (nextNode == startingNode
             || (nextNode == parentOfStartingNode && !nextNode.folder.childUnreadCount))
+        {
 			return startingNode.nodeId;
+		}
 
 		node = nextNode;
 	}
