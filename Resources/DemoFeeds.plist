@@ -17,10 +17,60 @@
 		<key>URL</key>
 		<string>http://feedpress.me/sixcolors</string>
 	</dict>
-	<key>World of Apple</key>
+	<key>Astronomy Picture of the Day</key>
 	<dict>
 		<key>URL</key>
-		<string>http://worldofapple.com/feed</string>
+		<string>http://apod.nasa.gov/apod.rss</string>
+	</dict>
+	<key>Amusing Planet</key>
+	<dict>
+		<key>URL</key>
+		<string>http://www.amusingplanet.com/feeds/posts/default?alt=rss</string>
+	</dict>
+	<key>Nomadic Matt</key>
+	<dict>
+		<key>URL</key>
+		<string>http://www.nomadicmatt.com/feed/</string>
+	</dict>
+	<key>Unsplash</key>
+	<dict>
+		<key>URL</key>
+		<string>https://unsplash.com/rss</string>
+	</dict>
+	<key>Kottke</key>
+	<dict>
+		<key>URL</key>
+		<string>http://feeds.kottke.org/main</string>
+	</dict>
+	<key>Cool Hunting</key>
+	<dict>
+		<key>URL</key>
+		<string>http://feeds.coolhunting.com/ch</string>
+	</dict>
+	<key>Xkcd</key>
+	<dict>
+		<key>URL</key>
+		<string>https://xkcd.com/rss.xml</string>
+	</dict>
+	<key>A Working Library</key>
+	<dict>
+		<key>URL</key>
+		<string>http://aworkinglibrary.com/feed/index.xml</string>
+	</dict>
+	<key>It&apos;s Nice That</key>
+	<dict>
+		<key>URL</key>
+		<string>http://feeds2.feedburner.com/itsnicethat/SlXC</string>
+	</dict>
+	<key>Flood Magazine music</key>
+	<dict>
+		<key>URL</key>
+		<string>http://floodmagazine.com/category/content/music/feed/</string>
+	</dict>
+	<key>Ars Technica</key>
+	<dict>
+		<key>URL</key>
+		<string>https://feeds.feedburner.com/ArsTechnica</string>
 	</dict>
 	<key>Vienna Developer Blog</key>
 	<dict>
