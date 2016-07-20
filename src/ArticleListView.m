@@ -1347,7 +1347,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 			isLoadingHTMLArticle = NO;
 			
 			// Set the article to the HTML from the RSS feed.
-			[articleText setHTML:htmlText withBase:SafeString([folder feedURL])];
+			[articleText setHTML:htmlText];
 		}
 	}
 	

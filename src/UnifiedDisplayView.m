@@ -774,7 +774,7 @@
 	ArticleView * view = cellView.articleView;
 	[view removeFromSuperviewWithoutNeedingDisplay];
 	NSString * htmlText = [view articleTextFromArray:@[theArticle]];
-	[view setHTML:htmlText withBase:feedURL];
+	[view setHTML:htmlText];
 	[cellView addSubview:view];
     return cellView;
 }
