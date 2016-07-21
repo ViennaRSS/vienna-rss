@@ -3072,11 +3072,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	if (!db.readOnly)
 	{
-		NSArray * currentSelectedFolders = foldersTree.selectedFolders;
+		[articleController markAllReadByArray:foldersTree.selectedFolders withUndo:YES withRefresh:YES];
 		NSInteger nextFolderInTree = [foldersTree nextFolderWithUnread:articleController.currentFolderId];
 		[foldersTree selectFolder:nextFolderInTree];
         [articleController ensureSelectedArticle:NO];
-		[articleController markAllReadByArray:currentSelectedFolders withUndo:YES withRefresh:YES];
 	}
 }
 
