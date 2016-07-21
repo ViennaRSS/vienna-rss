@@ -79,7 +79,6 @@
 		03B7522A1B741AFD00FD3FDB /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B752291B741AFD00FD3FDB /* FeedItem.m */; };
 		03B752421B74814B00FD3FDB /* RichXMLParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B752411B74814B00FD3FDB /* RichXMLParserTests.m */; };
 		03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EFD56F1B720AB0007EF284 /* ExportTests.m */; };
-		07B1EF13571B788D8A8FC913 /* libPods-Vienna Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 645F6DAE70D60381ADAE0FCF /* libPods-Vienna Tests.a */; };
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
 		37C650801816EBAD3C0D9DBF /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */; };
@@ -119,8 +118,6 @@
 		435021D4165DCB980018EDB7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D3165DCB980018EDB7 /* Security.framework */; };
 		435021D6165DCB980018EDB7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D5165DCB980018EDB7 /* SystemConfiguration.framework */; };
 		435021D8165DCB980018EDB7 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D7165DCB980018EDB7 /* WebKit.framework */; };
-		435021D9165DCB980018EDB7 /* libSystem.B.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
-		435021DA165DCB980018EDB7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA673414C7536D00251925 /* libz.dylib */; };
 		435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 435026E5165DD8BE0018EDB7 /* ArticleRef.m */; };
 		4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */; };
 		43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502848165DE9DF0018EDB7 /* ActivityLog.m */; };
@@ -701,7 +698,6 @@
 		EACE4C90147FA2B000A17997 /* PSMTabBarControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */; };
 		F061590419CE8A90005F61CC /* statusBarIconUnread.png in Resources */ = {isa = PBXBuildFile; fileRef = F061590319CE8A90005F61CC /* statusBarIconUnread.png */; };
 		F061590619CE8A9E005F61CC /* statusBarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = F061590519CE8A9E005F61CC /* statusBarIcon.png */; };
-		F0E01EF817C885A900E20329 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E01EF717C885A900E20329 /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -937,11 +933,9 @@
 		3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BJRVerticallyCenteredTextFieldCell.m; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
 		3A8A344C17857D3B00E2E64B /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = zh_TW; path = KnownSyncServers.plist; sourceTree = "<group>"; };
 		3A9903941993638900EA69B2 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = 3rdparty/Growl.framework; sourceTree = "<group>"; };
-		3ABA673414C7536D00251925 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3AEE7DE81695FC570018A17D /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = vienna_public_key.pem; path = signing/vienna_public_key.pem; sourceTree = "<group>"; };
 		3AF896C51CD8FDB800A9FA22 /* ViennaSparkleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViennaSparkleDelegate.h; path = src/ViennaSparkleDelegate.h; sourceTree = "<group>"; };
 		3AF896C61CD8FDB800A9FA22 /* ViennaSparkleDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViennaSparkleDelegate.m; path = src/ViennaSparkleDelegate.m; sourceTree = "<group>"; };
-		3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = usr/lib/libSystem.B.dylib; sourceTree = SDKROOT; };
 		3AFF601619A07F5A0036DBA4 /* BJRWindowWithToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BJRWindowWithToolbar.m; path = src/BJRWindowWithToolbar.m; sourceTree = "<group>"; };
 		3AFF601719A07F5A0036DBA4 /* BJRWindowWithToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BJRWindowWithToolbar.h; path = src/BJRWindowWithToolbar.h; sourceTree = "<group>"; };
 		430C4ADB1661753F0079C9FC /* autorevision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = autorevision.h; path = src/autorevision.h; sourceTree = SOURCE_ROOT; };
@@ -1425,7 +1419,6 @@
 		57F7E2F016F534FE00D4702E /* vienna3style.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = vienna3style.icns; path = Resources/vienna3style.icns; sourceTree = "<group>"; };
 		61A2CB600A8AC68C006348E8 /* revised.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = revised.tiff; path = Resources/revised.tiff; sourceTree = SOURCE_ROOT; };
 		63DEA27414A309B4CA351B20 /* Pods-Vienna.staticanalyzer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna.staticanalyzer.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna/Pods-Vienna.staticanalyzer.xcconfig"; sourceTree = "<group>"; };
-		645F6DAE70D60381ADAE0FCF /* libPods-Vienna Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vienna Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6624683A13C5F81F00C85417 /* sync.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sync.tiff; path = Resources/sync.tiff; sourceTree = SOURCE_ROOT; };
 		664F87C513C62DFE00E266DE /* GoogleReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoogleReader.h; path = src/GoogleReader.h; sourceTree = SOURCE_ROOT; };
 		664F87C613C62DFE00E266DE /* GoogleReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoogleReader.m; path = src/GoogleReader.m; sourceTree = SOURCE_ROOT; };
@@ -1632,7 +1625,6 @@
 		ED69423919E1DC034EA80E25 /* Pods-Vienna Tests.staticanalyzer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna Tests.staticanalyzer.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna Tests/Pods-Vienna Tests.staticanalyzer.xcconfig"; sourceTree = "<group>"; };
 		F061590319CE8A90005F61CC /* statusBarIconUnread.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = statusBarIconUnread.png; path = Resources/statusBarIconUnread.png; sourceTree = "<group>"; };
 		F061590519CE8A9E005F61CC /* statusBarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = statusBarIcon.png; path = Resources/statusBarIcon.png; sourceTree = "<group>"; };
-		F0E01EF717C885A900E20329 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F1ECA9ED54D2517E7BEDCBB7 /* Pods-Vienna Tests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna Tests.development.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna Tests/Pods-Vienna Tests.development.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1641,7 +1633,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07B1EF13571B788D8A8FC913 /* libPods-Vienna Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1657,7 +1648,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0E01EF817C885A900E20329 /* libsqlite3.dylib in Frameworks */,
 				EACE4C90147FA2B000A17997 /* PSMTabBarControl.framework in Frameworks */,
 				435021CE165DCB980018EDB7 /* Carbon.framework in Frameworks */,
 				3A9903951993638900EA69B2 /* Growl.framework in Frameworks */,
@@ -1666,8 +1656,6 @@
 				435021D4165DCB980018EDB7 /* Security.framework in Frameworks */,
 				435021D6165DCB980018EDB7 /* SystemConfiguration.framework in Frameworks */,
 				435021D8165DCB980018EDB7 /* WebKit.framework in Frameworks */,
-				435021D9165DCB980018EDB7 /* libSystem.B.dylib in Frameworks */,
-				435021DA165DCB980018EDB7 /* libz.dylib in Frameworks */,
 				43BA97DB1664766800B95F35 /* DisclosableView.framework in Frameworks */,
 				C6CB717DFD24F9D27350D042 /* libPods-Vienna.a in Frameworks */,
 			);
@@ -1742,9 +1730,6 @@
 		1058C7A6FEA54F5311CA2CBB /* System Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F0E01EF717C885A900E20329 /* libsqlite3.dylib */,
-				3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */,
-				3ABA673414C7536D00251925 /* libz.dylib */,
 				43502504165DCC410018EDB7 /* AppKit.framework */,
 				435021CD165DCB980018EDB7 /* Carbon.framework */,
 				435021CF165DCB980018EDB7 /* Cocoa.framework */,
@@ -2616,7 +2601,6 @@
 		7F60B6D7AEFB47009A82F8BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				645F6DAE70D60381ADAE0FCF /* libPods-Vienna Tests.a */,
 				7A3781B9326123EE56347D35 /* libPods-Vienna.a */,
 				43501F70165DB92B0018EDB7 /* External Frameworks */,
 				1058C7A6FEA54F5311CA2CBB /* System Frameworks */,
