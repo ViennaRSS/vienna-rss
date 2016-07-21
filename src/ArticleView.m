@@ -127,10 +127,10 @@ static NSMutableDictionary * stylePathMappings = nil;
 		{
 			
 			htmlTemplate = templateString;
-			cssStylesheet = [@"file://localhost" stringByAppendingString:[path stringByAppendingPathComponent:@"stylesheet.css"]];
+			cssStylesheet = [[@"file://localhost" stringByAppendingString:[path stringByAppendingPathComponent:@"stylesheet.css"]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 			NSString * javaScriptPath = [path stringByAppendingPathComponent:@"script.js"];
 			if ([[NSFileManager defaultManager] fileExistsAtPath:javaScriptPath])
-				jsScript = [@"file://localhost" stringByAppendingString:javaScriptPath];
+				jsScript = [[@"file://localhost" stringByAppendingString:javaScriptPath] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 			else
 				jsScript = nil;
 			
@@ -167,18 +167,22 @@ static NSMutableDictionary * stylePathMappings = nil;
 {
 	NSUInteger index;
 	
-	NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<!DOCTYPE html><html><head><meta charset=\"UTF-8\" />"];
+	NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<!DOCTYPE html><html><head><meta content=\"text/html; charset=UTF-8\">"];
+	// the link for the first article will be the base URL for resolving relative URLs
+	[htmlText appendString:@"<base href=\""];
+	[htmlText appendString:[SafeString(((Article *)msgArray[0]).link) stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+	[htmlText appendString:@"\">"];
 	if (cssStylesheet != nil)
 	{
 		[htmlText appendString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\""];
 		[htmlText appendString:cssStylesheet];
-		[htmlText appendString:@"\"/>"];
+		[htmlText appendString:@"\">"];
 	}
 	if (jsScript != nil)
 	{
 		[htmlText appendString:@"<script type=\"text/javascript\" src=\""];
 		[htmlText appendString:jsScript];
-		[htmlText appendString:@"\"/></script>"];
+		[htmlText appendString:@"\"></script>"];
 	}
 	[htmlText appendString:@"<meta http-equiv=\"Pragma\" content=\"no-cache\">"];
 	[htmlText appendString:@"</head><body>"];
@@ -253,7 +257,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 /* setHTML
  * Loads the web view with the specified HTML text.
  */
--(void)setHTML:(NSString *)htmlText withBase:(NSString *)urlString
+-(void)setHTML:(NSString *)htmlText
 {
 	// If the current HTML is the same as the new HTML then we don't need to
 	// do anything here. This will stop the view from spurious redraws of the same

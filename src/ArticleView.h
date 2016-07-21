@@ -32,7 +32,7 @@
 +(NSDictionary *)stylesMap;
 +(NSDictionary *)loadStylesMap;
 -(void)clearHTML;
--(void)setHTML:(NSString *)htmlText withBase:(NSString *)urlString;
+-(void)setHTML:(NSString *)htmlText;
 -(NSString *)articleTextFromArray:(NSArray *)msgArray;
 -(void)keyDown:(NSEvent *)theEvent;
 @end
