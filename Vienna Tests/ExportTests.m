@@ -53,7 +53,7 @@
 // Test helper method to return an array of folders for export
 - (NSArray *)foldersArray {
     Database *db = [Database sharedManager];
-    NSArray *foldersArray = [db arrayOfFolders:MA_Root_Folder];
+    NSArray *foldersArray = [db arrayOfAllFolders];
     return foldersArray;
 }
 
