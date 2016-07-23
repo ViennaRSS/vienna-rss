@@ -8,6 +8,14 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.6 Release Candidate 2
+-------------------------
+- New set of default feeds, thanks to Jesse Claven and Ricky Morse
+- Fix infinite loop on ‘Skip Folder’ command when no unread articles were left
+- Fix relative URLs, like in images's `srcset` attributes
+- New developer tests, thanks to György Tóth
+- Code refactoring / cleanup
+
 3.1.6 Release Candidate 1
 -------------------------
 - When the user selects a folder, loading articles from database occurs on a separate thread
