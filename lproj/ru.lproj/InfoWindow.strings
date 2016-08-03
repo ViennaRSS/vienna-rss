@@ -18,34 +18,34 @@
 "104.title" = "(Folder name)";
 
 /* Class = "NSTextFieldCell"; title = "Last Refreshed:"; ObjectID = "105"; */
-"105.title" = "Last Refreshed:";
+"105.title" = "Обновлена:";
 
 /* Class = "NSTextFieldCell"; title = "(Last refresh date)"; ObjectID = "106"; */
 "106.title" = "(Last refresh date)";
 
 /* Class = "NSButtonCell"; title = "Validate"; ObjectID = "109"; */
-"109.title" = "Validate";
+"109.title" = "Проверить";
 
 /* Class = "NSButtonCell"; title = "Feed URL:"; ObjectID = "110"; */
-"110.title" = "Feed URL:";
+"110.title" = "URL ленты:";
 
 /* Class = "NSTextFieldCell"; title = "User name:"; ObjectID = "111"; */
-"111.title" = "User name:";
+"111.title" = "Имя:";
 
 /* Class = "NSTextFieldCell"; title = "Password:\n"; ObjectID = "112"; */
-"112.title" = "Password:\n";
+"112.title" = "Пароль:\n";
 
 /* Class = "NSButtonCell"; title = "Update Authentication"; ObjectID = "115"; */
-"115.title" = "Update Authentication";
+"115.title" = "Авторизироваться";
 
 /* Class = "NSButtonCell"; title = "Authentication:"; ObjectID = "116"; */
-"116.title" = "Authentication:";
+"116.title" = "Авторизация:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "117"; */
-"117.title" = "Size:";
+"117.title" = "Статей:";
 
 /* Class = "NSTextFieldCell"; title = "Unread:\n"; ObjectID = "118"; */
-"118.title" = "Unread:\n";
+"118.title" = "Новых:\n";
 
 /* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "119"; */
 "119.title" = "\n";
@@ -54,13 +54,13 @@
 "120.title" = "\n";
 
 /* Class = "NSButtonCell"; title = "Subscribed"; ObjectID = "121"; */
-"121.title" = "Subscribed";
+"121.title" = "Подписка";
 
 /* Class = "NSButtonCell"; title = "General:"; ObjectID = "122"; */
-"122.title" = "General:";
+"122.title" = "Общие:";
 
 /* Class = "NSButtonCell"; title = "Description:"; ObjectID = "124"; */
-"124.title" = "Description:";
+"124.title" = "Описание:";
 
 /* Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126"; */
-"126.title" = "Load Full HTML Articles";
+"126.title" = "Загружать весь HTML-код";
