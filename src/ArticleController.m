@@ -350,8 +350,12 @@
  */
 -(void)displayFirstUnread
 {
-	// remember current article
+	// mark current article read
 	Article * currentArticle = self.selectedArticle;
+	if (currentArticle != nil && !currentArticle.read)
+	{
+		[self markReadByArray:@[currentArticle] readFlag:YES];
+	}
 
 	// If there are any unread articles then select the first one in the
 	// first folder.
@@ -361,7 +365,7 @@
 		NSInteger firstFolderWithUnread = foldersTree.firstFolderWithUnread;
 		if (firstFolderWithUnread == currentFolderId)
 		{
-			[self displayNextUnread];
+			[mainArticleView selectFirstUnreadInFolder];
 		}
 		else
 		{
@@ -371,13 +375,6 @@
 			[foldersTree selectFolder:firstFolderWithUnread];
 		}
 	}
-
-	// mark read previously selected article
-	if (currentArticle != nil && !currentArticle.read)
-	{
-		[self markReadByArray:@[currentArticle] readFlag:YES];
-	}
-
 }
 
 /* displayNextUnread
