@@ -350,8 +350,12 @@
  */
 -(void)displayFirstUnread
 {
-	// remember current article
+	// mark current article read
 	Article * currentArticle = self.selectedArticle;
+	if (currentArticle != nil && !currentArticle.read)
+	{
+		[self markReadByArray:@[currentArticle] readFlag:YES];
+	}
 
 	// If there are any unread articles then select the first one in the
 	// first folder.
@@ -361,7 +365,7 @@
 		NSInteger firstFolderWithUnread = foldersTree.firstFolderWithUnread;
 		if (firstFolderWithUnread == currentFolderId)
 		{
-			[self displayNextUnread];
+			[mainArticleView selectFirstUnreadInFolder];
 		}
 		else
 		{
@@ -371,13 +375,6 @@
 			[foldersTree selectFolder:firstFolderWithUnread];
 		}
 	}
-
-	// mark read previously selected article
-	if (currentArticle != nil && !currentArticle.read)
-	{
-		[self markReadByArray:@[currentArticle] readFlag:YES];
-	}
-
 }
 
 /* displayNextUnread
@@ -388,24 +385,37 @@
 {
 	// remember current article
 	Article * currentArticle = self.selectedArticle;
+	Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
 
+	BOOL currentFolderExhausted = NO;
 	// Search other articles in the same folder, starting from current position
 	if (![mainArticleView viewNextUnreadInFolder])
 	{
-        // If nothing found, search if we have fresher articles from same folder
-        if ( ([[Database sharedManager] countOfUnread] > 1 || currentArticle == nil)
-            && (![mainArticleView selectFirstUnreadInFolder] || self.selectedArticle == currentArticle) )
-        {
-            // If nothing unread found in current folder, try other folders
-            NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
-            if (nextFolderWithUnread != -1)
-            {
-                // Seed in order to select the first unread article.
-                firstUnreadArticleRequired = YES;
-                // Select the folder
-                [foldersTree selectFolder:nextFolderWithUnread];
-            }
-        }
+		// If nothing found and smart folder, search if we have other fresh articles from same folder
+		if (IsSmartFolder(currentFolder) || IsTrashFolder(currentFolder) || IsSearchFolder(currentFolder))
+		{
+			if (![mainArticleView selectFirstUnreadInFolder] || self.selectedArticle == currentArticle)
+			{
+				currentFolderExhausted = YES;
+			}
+		}
+		else
+		{
+			currentFolderExhausted = YES;
+		}
+	}
+
+	if (currentFolderExhausted  && [[Database sharedManager] countOfUnread] > 1)
+	{
+		// try other folders
+		NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
+		if (nextFolderWithUnread != -1)
+		{
+			// Seed in order to select the first unread article.
+			firstUnreadArticleRequired = YES;
+			// Select the folder
+			[foldersTree selectFolder:nextFolderWithUnread];
+		}
 	}
 
 	// mark read previously selected article

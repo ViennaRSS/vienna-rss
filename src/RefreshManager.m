@@ -102,6 +102,10 @@
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
 		hasStarted = NO;
 	}
+	else
+	{
+	    [APPCONTROLLER setStatusMessage:nil persist:YES];
+	}
 	LLog(@"Queue empty!!!");
 }
 
