@@ -765,8 +765,6 @@
 
 	Article * theArticle = allArticles[row];
 	NSInteger articleFolderId = theArticle.folderId;
-	Folder * folder = [[Database sharedManager] folderFromID:articleFolderId];
-	NSString * feedURL = SafeString([folder feedURL]);
 
 	cellView.folderId = articleFolderId;
 	cellView.articleRow = row;
