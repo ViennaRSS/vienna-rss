@@ -22,8 +22,8 @@ class BitlyAPIHelperTests: XCTestCase {
 
     func testShortenURL() {
         let bitlyHelper = BitlyAPIHelper.init(login: "viennarss", andAPIKey: "R_852929122e82d2af45fe9e238f1012d3")
-        let shortURL = bitlyHelper.shortenURL("http://www.vienna-rss.org")
-        XCTAssertTrue(shortURL.containsString("bit.ly"))
+        let shortURL = bitlyHelper?.shortenURL("http://www.vienna-rss.org")
+        XCTAssertTrue((shortURL?.contains("bit.ly"))!)
     }
 
 }
