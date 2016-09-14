@@ -3010,6 +3010,7 @@
 				TargetAttributes = {
 					035B703419E0E4AE00197334 = {
 						CreatedOnToolsVersion = 6.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -7021,6 +7022,7 @@
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "Vienna Tests/Vienna Tests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Development;
 		};
@@ -7080,6 +7082,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "Vienna Tests/Vienna Tests-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Deployment;
 		};
@@ -7136,6 +7139,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "Vienna Tests/Vienna Tests-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = StaticAnalyzer;
 		};
