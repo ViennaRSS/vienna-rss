@@ -2217,21 +2217,24 @@ const NSInteger MA_Current_DB_Version = 18;
 	// database with or without a filter string.
 	if (folderId == 0)
 	{
-		if ([filterString isNotEqualTo:@""])
+        if ([filterString isNotEqualTo:@""]) {
 			filterClause = [NSString stringWithFormat:@" where text like '%%%@%%'", filterString];
+        }
 		queryString = [NSString stringWithFormat:@"%@%@", queryString, filterClause];
 	}
 	else
 	{
 		folder = [self folderFromID:folderId];
-		if (folder == nil)
+        if (folder == nil) {
 			return nil;
+        }
 
 		// Construct a criteria tree for this query
 		CriteriaTree * tree = [self criteriaForFolder:folderId];
 
-		if ([filterString isNotEqualTo:@""])
+        if ([filterString isNotEqualTo:@""]) {
 			filterClause = [NSString stringWithFormat:@" and (title like '%%%@%%' or text like '%%%@%%')", filterString, filterString];
+        }
 		queryString = [NSString stringWithFormat:@"%@ where (%@)%@", queryString, [self criteriaToSQL:tree], filterClause];
 	}
 
@@ -2242,11 +2245,11 @@ const NSInteger MA_Current_DB_Version = 18;
 		while ([results next])
 		{
 			Article * article = [[Article alloc] initWithGuid:[results stringForColumnIndex:0]];
-			article.folderId = [results stringForColumnIndex:1].integerValue;
-			article.parentId = [results stringForColumnIndex:2].integerValue;
-			[article markRead:[results stringForColumnIndex:3].integerValue];
-			[article markFlagged:[results stringForColumnIndex:4].integerValue];
-			[article markDeleted:[results stringForColumnIndex:5].integerValue];
+			article.folderId = [results intForColumnIndex:1];
+			article.parentId = [results intForColumnIndex:2];
+			[article markRead:[results intForColumnIndex:3]];
+			[article markFlagged:[results intForColumnIndex:4]];
+			[article markDeleted:[results intForColumnIndex:5]];
 			article.title = [results stringForColumnIndex:6];
 			article.author = [results stringForColumnIndex:7];
 			article.link = [results stringForColumnIndex:8];
@@ -2254,8 +2257,8 @@ const NSInteger MA_Current_DB_Version = 18;
 			article.date = [NSDate dateWithTimeIntervalSince1970:[results stringForColumnIndex:10].doubleValue];
 			NSString * text = [results stringForColumnIndex:11];
 			article.body = text;
-			[article markRevised:[results stringForColumnIndex:12].integerValue];
-			article.hasEnclosure = [results stringForColumnIndex:13].integerValue;
+			[article markRevised:[results intForColumnIndex:12]];
+			article.hasEnclosure = [results intForColumnIndex:13];
 			article.enclosure = [results stringForColumnIndex:14];
 		
 			if (folder == nil || !article.deleted || IsTrashFolder(folder))
