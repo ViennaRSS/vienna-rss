@@ -540,6 +540,7 @@
 		61A2CB610A8AC68C006348E8 /* revised.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A2CB600A8AC68C006348E8 /* revised.tiff */; };
 		6624683B13C5F83000C85417 /* sync.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6624683A13C5F81F00C85417 /* sync.tiff */; };
 		664F87C713C62DFE00E266DE /* GoogleReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 664F87C613C62DFE00E266DE /* GoogleReader.m */; };
+		70D0A8E09ABD09D1538832EA /* libPods-Vienna Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0CEAD1B45DBBF666A25250 /* libPods-Vienna Tests.a */; };
 		793C95301C3F07FC00984D4E /* TreeFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793C952F1C3F07FC00984D4E /* TreeFilterView.m */; };
 		793C95331C42A0DD00984D4E /* FoldersFilterable.m in Sources */ = {isa = PBXBuildFile; fileRef = 793C95321C42A0DD00984D4E /* FoldersFilterable.m */; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -1616,6 +1617,7 @@
 		B2BECB1614CEF22B00706F8F /* SSTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SSTextField.m; path = src/SSTextField.m; sourceTree = SOURCE_ROOT; };
 		B2E09F2B111192B7003B530A /* DSClickableURLTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSClickableURLTextField.h; path = 3rdparty/DSClickableURLTextField/DSClickableURLTextField.h; sourceTree = SOURCE_ROOT; };
 		B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSClickableURLTextField.m; path = 3rdparty/DSClickableURLTextField/DSClickableURLTextField.m; sourceTree = SOURCE_ROOT; };
+		BA0CEAD1B45DBBF666A25250 /* libPods-Vienna Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vienna Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD11EE0EE1E72989D4E43515 /* Pods-Vienna Tests.deployment.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna Tests.deployment.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna Tests/Pods-Vienna Tests.deployment.xcconfig"; sourceTree = "<group>"; };
 		EA1A761F148FA32B004A6B8F /* googleFeed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = googleFeed.tiff; path = Resources/googleFeed.tiff; sourceTree = SOURCE_ROOT; };
 		EA43C70714A370DB00F2D843 /* VTPG_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VTPG_Common.h; path = 3rdparty/VTPG/VTPG_Common.h; sourceTree = SOURCE_ROOT; };
@@ -1633,6 +1635,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70D0A8E09ABD09D1538832EA /* libPods-Vienna Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2604,6 +2607,7 @@
 				7A3781B9326123EE56347D35 /* libPods-Vienna.a */,
 				43501F70165DB92B0018EDB7 /* External Frameworks */,
 				1058C7A6FEA54F5311CA2CBB /* System Frameworks */,
+				BA0CEAD1B45DBBF666A25250 /* libPods-Vienna Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3052,6 +3056,7 @@
 				eu,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Vienna */;
+			productRefGroup = 19C28FB0FE9D524F11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -7191,6 +7196,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 432E5192165D65AF00A8640E /* Project-All.xcconfig */;
 			buildSettings = {
+				SWIFT_VERSION = 3.0;
 			};
 			name = StaticAnalyzer;
 		};
@@ -7284,6 +7290,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 432E5192165D65AF00A8640E /* Project-All.xcconfig */;
 			buildSettings = {
+				SWIFT_VERSION = 3.0;
 			};
 			name = Development;
 		};
@@ -7291,6 +7298,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 432E5192165D65AF00A8640E /* Project-All.xcconfig */;
 			buildSettings = {
+				SWIFT_VERSION = 3.0;
 			};
 			name = Deployment;
 		};
