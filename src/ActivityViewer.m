@@ -62,7 +62,7 @@
 	[activityTable localiseHeaderStrings];
 
 	// Restore the split position
-	splitView.layout = [[Preferences standardPreferences] objectForKey:@"SplitView3Positions"];	
+	splitView.xlayout = [[Preferences standardPreferences] objectForKey:@"SplitView3Positions"];
 
 	// Set up to receive notifications when the activity log changes
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -76,7 +76,7 @@
  */
 -(BOOL)windowShouldClose:(NSNotification *)notification
 {
-	[[Preferences standardPreferences] setObject:splitView.layout forKey:@"SplitView3Positions"];
+	[[Preferences standardPreferences] setObject:splitView.xlayout forKey:@"SplitView3Positions"];
 	return YES;
 }
 
