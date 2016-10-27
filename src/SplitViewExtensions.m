@@ -30,7 +30,7 @@
 /* layout
  * Returns an NSArray of the splitview layouts.
  */
--(NSArray *)layout
+-(NSArray *)xlayout
 {
 	NSMutableArray * viewRects = [NSMutableArray array];
 	NSRect frame;
@@ -42,6 +42,7 @@
 		else
 			frame = view.frame;
 		[viewRects addObject:NSStringFromRect(frame)];
+        //view.needsLayout = YES;
 	}
 	return [viewRects copy];
 }
@@ -49,7 +50,7 @@
 /* setLayout
  * Sets the splitview layout from the specified array
  */
--(void)setLayout:(NSArray *)viewRects
+-(void)setXlayout:(NSArray *)viewRects
 {
 	NSArray * views = self.subviews;
 	NSInteger i, count;
@@ -68,6 +69,7 @@
 				frame.size.height = 0;
 		}
 		[views[i] setFrame:frame];
+        [views[i] setNeedsLayout:YES];
 	}
 }
 @end

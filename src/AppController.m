@@ -483,7 +483,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	stylesMenu.submenu = self.stylesMenu;
 	
 	// Restore the splitview layout
-	splitView1.layout = [[Preferences standardPreferences] objectForKey:@"SplitView1Positions"];	
+	splitView1.xlayout = [[Preferences standardPreferences] objectForKey:@"SplitView1Positions"];
 	splitView1.delegate = self;
 	
 	// Show the current unread count on the app icon
@@ -663,7 +663,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	{
 		// Save the splitview layout
 		Preferences * prefs = [Preferences standardPreferences];
-		[prefs setObject:splitView1.layout forKey:@"SplitView1Positions"];
+		[prefs setObject:splitView1.xlayout forKey:@"SplitView1Positions"];
 		
 		// Close the activity window explicitly to force it to
 		// save its split bar position to the preferences.
@@ -1485,13 +1485,15 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     NSOpenPanel * panel = [NSOpenPanel openPanel];
     [panel beginSheetModalForWindow:mainWindow
                   completionHandler: ^(NSInteger returnCode) {
+                      
                       if (returnCode == NSOKButton)
                       {
                           [panel orderOut:self];
                           [Import importFromFile:panel.URL.path];
                       }
                   }];
-    panel = nil;
+    
+    //panel = nil;
 }
 
 

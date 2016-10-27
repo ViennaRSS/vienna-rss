@@ -929,7 +929,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ?
 		@"SplitView2ReportLayout"
 		: @"SplitView2CondensedLayout";
-	splitView2.layout = [[Preferences standardPreferences] objectForKey:splitPrefsName];
+	splitView2.xlayout = [[Preferences standardPreferences] objectForKey:splitPrefsName];
 }
 
 /* saveSplitSettingsForLayout
@@ -940,7 +940,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ?
 		@"SplitView2ReportLayout"
 		: @"SplitView2CondensedLayout";
-	[[Preferences standardPreferences] setObject:splitView2.layout forKey:splitPrefsName];
+	[[Preferences standardPreferences] setObject:splitView2.xlayout forKey:splitPrefsName];
 }
 
 /* setOrientation
