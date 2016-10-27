@@ -33,7 +33,6 @@
 #import "ArrayExtensions.h"
 #import "StringExtensions.h"
 #import "SplitViewExtensions.h"
-#import "SquareWindow.h"
 #import "ViewExtensions.h"
 #import "BrowserView.h"
 #import "SearchFolder.h"
