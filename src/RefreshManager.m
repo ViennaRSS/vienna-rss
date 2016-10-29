@@ -486,6 +486,7 @@
         if (![theLastUpdateString isEqualToString:@""])
         {
             [myRequest addRequestHeader:@"If-Modified-Since" value:theLastUpdateString];
+            [myRequest addRequestHeader:@"A-IM" value:@"feed"];
         }
 		myRequest.userInfo = @{@"folder": folder, @"log": aItem, @"type": @(MA_Refresh_Feed)};
 		if (![folder.username isEqualToString:@""])
@@ -745,7 +746,7 @@
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
                                                                             object:@(folderId)];
 	}
-	else if (responseStatusCode == 200)
+	else if (responseStatusCode == 200 || responseStatusCode == 226)
 	{
 				
 		NSData * receivedData = [connector responseData];
