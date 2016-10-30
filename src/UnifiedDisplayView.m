@@ -250,8 +250,8 @@
  */
 -(void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)webFrame
 {
-	// Not really an error. A plugin is grabbing the URL and will handle it by itself.
-	if (!([error.domain isEqualToString:WebKitErrorDomain] && error.code == WebKitErrorPlugInWillHandleLoad))
+	// Not really errors. Load is cancelled or a plugin is grabbing the URL and will handle it by itself.
+	if (!([error.domain isEqualToString:WebKitErrorDomain] && (error.code == NSURLErrorCancelled || error.code == WebKitErrorPlugInWillHandleLoad)))
 	{
 		id obj = sender.superview;
 		if ([obj isKindOfClass:[ArticleCellView class]])
@@ -267,7 +267,7 @@
 		}
 		else
 			// TODO : what should we do ?
-			NSLog(@"Webview error associated to object of class %@", [obj class]);
+			NSLog(@"Webview error %@ associated to object of class %@", error, [obj class]);
 	}
 }
 
