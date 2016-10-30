@@ -360,9 +360,19 @@
 				{
                     NSString * type = [itemChildElement attributeForName:@"type"].stringValue;
                     if ([type isEqualToString:@"xhtml"])
+                    {
                         articleBody = [NSMutableString stringWithString:itemChildElement.XMLString];
+                    }
+                    else if ([type rangeOfString:@"text" options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound
+                              && ![type isEqualToString:@"text/xml"])
+                    // 'type' attribute is 'text*' and not 'text/xml'
+                    {
+                        articleBody = [[NSString stringByConvertingHTMLEntities:itemChildElement.stringValue] mutableCopy];
+                    }
                     else
+                    {
                         articleBody = [NSMutableString stringWithString:itemChildElement.stringValue];
+                    }
 					continue;
 				}
 				
@@ -617,9 +627,19 @@
 				{
                     NSString * type = [itemChildElement attributeForName:@"type"].stringValue;
                     if ([type isEqualToString:@"xhtml"])
+                    {
                         articleBody = [NSMutableString stringWithString:itemChildElement.XMLString];
+                    }
+                    else if ([type rangeOfString:@"text" options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound
+                              && ![type isEqualToString:@"text/xml"])
+                    // 'type' attribute is 'text*' and not 'text/xml'
+                    {
+                        articleBody = [[NSString stringByConvertingHTMLEntities:itemChildElement.stringValue] mutableCopy];
+                    }
                     else
+                    {
                         articleBody = [NSMutableString stringWithString:itemChildElement.stringValue];
+                    }
 					continue;
 				}
 				
@@ -628,9 +648,19 @@
 				{
                     NSString * type = [itemChildElement attributeForName:@"type"].stringValue;
                     if ([type isEqualToString:@"xhtml"])
+                    {
                         articleBody = [NSMutableString stringWithString:itemChildElement.XMLString];
+                    }
+                    else if ([type rangeOfString:@"text" options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound
+                              && ![type isEqualToString:@"text/xml"])
+                    // 'type' attribute is 'text*' and not 'text/xml'
+                    {
+                        articleBody = [[NSString stringByConvertingHTMLEntities:itemChildElement.stringValue] mutableCopy];
+                    }
                     else
+                    {
                         articleBody = [NSMutableString stringWithString:itemChildElement.stringValue];
+                    }
 					continue;
 				}
 				
