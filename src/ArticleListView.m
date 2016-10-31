@@ -1773,8 +1773,8 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 {
 	if (frame == articleText.mainFrame)
 	{
-		// Not really an error. A plugin is grabbing the URL and will handle it by itself.
-		if (!([error.domain isEqualToString:WebKitErrorDomain] && error.code == WebKitErrorPlugInWillHandleLoad))
+		// Not really errors. Load is cancelled or a plugin is grabbing the URL and will handle it by itself.
+		if (!([error.domain isEqualToString:WebKitErrorDomain] && (error.code == NSURLErrorCancelled || error.code == WebKitErrorPlugInWillHandleLoad)))
 			[self handleError:error withDataSource:frame.dataSource];
 		[self endMainFrameLoad];
 	}

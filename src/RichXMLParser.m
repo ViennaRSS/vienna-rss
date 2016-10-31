@@ -363,8 +363,8 @@
                     {
                         articleBody = [NSMutableString stringWithString:itemChildElement.XMLString];
                     }
-                    else if ([type rangeOfString:@"text" options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound
-                              && ![type isEqualToString:@"text/xml"])
+                    else if (type != nil && ![type isEqualToString:@"text/xml"] &&
+                      [type rangeOfString:@"text" options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound)
                     // 'type' attribute is 'text*' and not 'text/xml'
                     {
                         articleBody = [[NSString stringByConvertingHTMLEntities:itemChildElement.stringValue] mutableCopy];
@@ -630,8 +630,8 @@
                     {
                         articleBody = [NSMutableString stringWithString:itemChildElement.XMLString];
                     }
-                    else if ([type rangeOfString:@"text" options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound
-                              && ![type isEqualToString:@"text/xml"])
+                    else if (type != nil && ![type isEqualToString:@"text/xml"] &&
+                      [type rangeOfString:@"text" options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound)
                     // 'type' attribute is 'text*' and not 'text/xml'
                     {
                         articleBody = [[NSString stringByConvertingHTMLEntities:itemChildElement.stringValue] mutableCopy];
@@ -651,8 +651,8 @@
                     {
                         articleBody = [NSMutableString stringWithString:itemChildElement.XMLString];
                     }
-                    else if ([type rangeOfString:@"text" options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound
-                              && ![type isEqualToString:@"text/xml"])
+                    else if (type != nil && ![type isEqualToString:@"text/xml"] &&
+                      [type rangeOfString:@"text" options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound)
                     // 'type' attribute is 'text*' and not 'text/xml'
                     {
                         articleBody = [[NSString stringByConvertingHTMLEntities:itemChildElement.stringValue] mutableCopy];
