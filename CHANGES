@@ -8,6 +8,17 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.6
+-----
+- Add support for delta feeds (RFC3229+feed)
+- Database performance improvements
+- Fix 'N' key to not scan fresher articles from same folder, except for smart folders
+- Fix 'B' key to always go to first unread article
+- Fix retrieving article text of some feeds
+- Fix some macOS Sierra glitches
+- Fix status message after tasks like marking OpenReader articles read
+- Fixes to Danish and Russian translations, thanks to David Munch and Rinat Shaikhutdinov
+
 3.1.6 Release Candidate 2
 -------------------------
 - New set of default feeds, thanks to Jesse Claven and Ricky Morse
