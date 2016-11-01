@@ -20,29 +20,29 @@
 #import <Cocoa/Cocoa.h>
 
 @interface RichXMLParser : NSObject {
-	NSString * title;
-	NSString * link;
-	NSString * description;
-	NSDate * lastModified;
-	NSMutableArray * items;
-	NSMutableArray * orderArray;
-	@private
-	//prefixes for XML namespaces
-	NSString * rssPrefix;
-	NSString * rdfPrefix;
-	NSString * atomPrefix;
-	NSString * dcPrefix;
-	NSString * contentPrefix;
-	NSString * mediaPrefix;
-	NSString * encPrefix;
+    NSString * title;
+    NSString * link;
+    NSString * description;
+    NSDate * lastModified;
+    NSMutableArray * items;
+    NSMutableArray * orderArray;
+    @private
+    // prefixes for XML namespaces
+    NSString * rssPrefix;
+    NSString * rdfPrefix;
+    NSString * atomPrefix;
+    NSString * dcPrefix;
+    NSString * contentPrefix;
+    NSString * mediaPrefix;
+    NSString * encPrefix;
 }
 
 // General functions
 -(BOOL)parseRichXML:(NSData *)xmlData;
 +(BOOL)extractFeeds:(NSData *)xmlData toArray:(NSMutableArray *)linkArray;
-@property (nonatomic, readonly, copy) NSString *title;
-@property (nonatomic, readonly, copy) NSString *description;
-@property (nonatomic, readonly, copy) NSString *link;
-@property (nonatomic, readonly, copy) NSDate *lastModified;
-@property (nonatomic, readonly, copy) NSArray *items;
+@property (nonatomic, readonly, copy) NSString * title;
+@property (nonatomic, readonly, copy) NSString * description;
+@property (nonatomic, readonly, copy) NSString * link;
+@property (nonatomic, readonly, copy) NSDate * lastModified;
+@property (nonatomic, readonly, copy) NSArray * items;
 @end
