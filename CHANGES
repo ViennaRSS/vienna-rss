@@ -8,6 +8,10 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.7
+-----
+- Fix incorrect escaping of some feeds
+
 3.1.6
 -----
 - Add support for delta feeds (RFC3229+feed)
