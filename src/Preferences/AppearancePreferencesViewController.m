@@ -162,11 +162,14 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 -(IBAction)selectArticleFont:(id)sender
 {
     Preferences * prefs = [Preferences standardPreferences];
-    NSFontManager * manager = [NSFontManager sharedFontManager];
-    [manager setSelectedFont:[NSFont fontWithName:prefs.articleListFont size:prefs.articleListFontSize] isMultiple:NO];
-    manager.action = @selector(changeArticleFont:);
-    manager.delegate = self;
-    [manager orderFrontFontPanel:self];
+    NSFontManager * fontManager = NSFontManager.sharedFontManager;
+    fontManager.target = self;
+    fontManager.action = @selector(changeArticleFont:);
+
+    NSFontPanel *fontPanel = [fontManager fontPanel:YES];
+    [fontPanel setPanelFont:[NSFont fontWithName:prefs.articleListFont size:prefs.articleListFontSize] isMultiple:NO];
+    [fontPanel makeKeyAndOrderFront:self];
+    fontPanel.enabled = YES;
 }
 
 /* selectFolderFont
@@ -175,11 +178,14 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 -(IBAction)selectFolderFont:(id)sender
 {
     Preferences * prefs = [Preferences standardPreferences];
-    NSFontManager * manager = [NSFontManager sharedFontManager];
-    [manager setSelectedFont:[NSFont fontWithName:prefs.folderListFont size:prefs.folderListFontSize] isMultiple:NO];
-    manager.action = @selector(changeFolderFont:);
-    manager.delegate = self;
-    [manager orderFrontFontPanel:self];
+    NSFontManager * fontManager = NSFontManager.sharedFontManager;
+    fontManager.target = self;
+    fontManager.action = @selector(changeFolderFont:);
+    
+    NSFontPanel *fontPanel = [fontManager fontPanel:YES];
+    [fontPanel setPanelFont:[NSFont fontWithName:prefs.folderListFont size:prefs.folderListFontSize] isMultiple:NO];
+    [fontPanel makeKeyAndOrderFront:self];
+    fontPanel.enabled = YES;
 }
 
 /* changeArticleFont
