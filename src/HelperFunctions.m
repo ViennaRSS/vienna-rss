@@ -225,7 +225,11 @@ void runOKAlertPanel(NSString * titleString, NSString * bodyText, ...)
 	va_start(arguments, bodyText);
 	fullBodyText = [[NSString alloc] initWithFormat:bodyText arguments:arguments];
 	// Security: arguments may contain formatting characters, so don't use fullBodyText as format string.
-	NSRunAlertPanel(titleString, @"%@", NSLocalizedString(@"OK", nil), nil, nil, fullBodyText);
+    NSAlert *alert = [NSAlert init];
+    alert.alertStyle = NSAlertStyleInformational;
+    alert.messageText = titleString;
+    alert.informativeText = fullBodyText;
+    [alert runModal];
 	va_end(arguments);
 }
 
@@ -240,16 +244,14 @@ void runOKAlertSheet(NSString * titleString, NSString * bodyText, ...)
 	va_start(arguments, bodyText);
 	fullBodyText = [[NSString alloc] initWithFormat:bodyText arguments:arguments];
 	// Security: arguments may contain formatting characters, so don't use fullBodyText as format string.
-	NSBeginAlertSheet(titleString,
-					  NSLocalizedString(@"OK", nil),
-					  nil,
-					  nil,
-					  NSApp.mainWindow,
-					  nil,
-					  nil,
-					  nil, nil,
-					  @"%@",
-					  fullBodyText);
+    NSAlert *alert = [NSAlert init];
+    alert.alertStyle = NSAlertStyleInformational;
+    alert.messageText = titleString;
+    alert.informativeText = fullBodyText;
+    [alert beginSheetModalForWindow:NSApp.mainWindow completionHandler:^(NSModalResponse returnCode) {
+        // No action to take
+    }];
+    
 	va_end(arguments);
 }
 
