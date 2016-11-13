@@ -66,18 +66,23 @@ Tags should be in one of the following formats:
 
 ### On Brew Cask
 
-17. __For stable releases only :__ follow the steps on the [Brew Cask Wiki](https://github.com/caskroom/homebrew-cask/blob/master/CONTRIBUTING.md#updating-a-cask) which are summarised below:
+17. __For stable releases only :__ follow the steps listed below, adapted from the [Brew Cask Wiki](https://github.com/caskroom/homebrew-cask/blob/master/CONTRIBUTING.md#updating-a-cask):
 
->Notice an application that's out-of-date in Homebrew-Cask? In most cases, it's very simple to update it. We have a [script](https://github.com/vitorgalvao/tiny-scripts/blob/master/cask-repair) that will ask for the new version number, and take care of updating the Cask file and submitting a pull request to us:
+>We have a [script](https://github.com/vitorgalvao/tiny-scripts/blob/master/cask-repair) that will ask for the new version number, and take care of updating the Cask file and submitting a pull request to homebrew-cask:
 
 ```bash
 # install and setup script - only needed once
 brew install vitorgalvao/tiny-scripts/cask-repair
 cask-repair --help
 
+# fork homebrew-cask to your account - only needed once
+cd "$(brew --repository)/Library/Taps/caskroom/homebrew-cask/Casks"
+git config --local hub.protocol ssh
+hub fork
+
 # use to update <outdated_cask>
 outdated_cask='vienna'
-github_user='josh64x2'
+github_user='your_github_username'
 cd "$(brew --repository)/Library/Taps/caskroom/homebrew-cask/Casks"
 cask-repair --pull origin --push $github_user $outdated_cask
 ```
