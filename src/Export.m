@@ -64,8 +64,8 @@
 
 			itemDict[@"type"] = @"rss";
 			itemDict[@"text"] = [NSString stringByConvertingHTMLEntities:(name ? name : @"")];
-            itemDict[@"htmlUrl"] = [NSString stringByConvertingHTMLEntities:(link ? link : @"")];
-			itemDict[@"xmlUrl"] = [NSString stringByConvertingHTMLEntities:(url ? url : @"")];
+            itemDict[@"htmlUrl"] = SafeString(link);
+			itemDict[@"xmlUrl"] = SafeString(url);
 			itemDict[@"description"] = [NSString stringByConvertingHTMLEntities:description];
             NSXMLElement *outlineElement = [NSXMLElement elementWithName:@"outline"];
             [outlineElement setAttributesWithDictionary:itemDict];
