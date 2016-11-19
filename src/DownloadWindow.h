@@ -19,11 +19,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "SquareWindow.h"
 #import "TableViewExtensions.h"
 
 @interface DownloadWindow : NSWindowController <NSWindowDelegate,NSTableViewDelegate,NSTableViewDataSource> {
-	IBOutlet SquareWindow * downloadWindow;
+	IBOutlet NSWindow * downloadWindow;
 	IBOutlet ExtendedTableView * table;
 	IBOutlet NSButton * clearButton;
 	NSInteger lastCount;

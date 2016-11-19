@@ -244,8 +244,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		// If the statusbar is hidden, also hide the highlight line on its top and the filter button.
 		if (!self.statusBarVisible)
 		{
-			if ([mainWindow respondsToSelector:@selector(setBottomCornerRounded:)])
-				[mainWindow setBottomCornerRounded:NO];
 			[cosmeticStatusBarHighlightLine setHidden:YES];
 			[currentFilterTextField setHidden:YES];
 			[filterIconInStatusBarButton setHidden:YES];
@@ -3979,10 +3977,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 				[currentFilterTextField setHidden:YES];
 				[filterIconInStatusBarButton setHidden:YES];
 				[cosmeticStatusBarHighlightLine setHidden:YES];
-				if ([mainWindow respondsToSelector:@selector(setBottomCornerRounded:)])
-				{
-					[mainWindow setBottomCornerRounded:NO];
-				}
 			}
 			[splitView1 resizeViewWithAnimation:viewSize withTag:MA_ViewTag_Statusbar];
 		}
@@ -4021,10 +4015,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[currentFilterTextField setHidden:NO];
 		[filterIconInStatusBarButton setHidden:NO];
 		[cosmeticStatusBarHighlightLine setHidden:NO];
-		if ([mainWindow respondsToSelector:@selector(setBottomCornerRounded:)])
-		{
-			[mainWindow setBottomCornerRounded:YES];
-		}
 		return;
 	}
 	if (viewTag == MA_ViewTag_Filterbar && self.filterBarVisible)

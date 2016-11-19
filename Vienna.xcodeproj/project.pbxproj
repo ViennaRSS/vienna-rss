@@ -643,7 +643,6 @@
 		AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */; };
 		AAB90EFD061D059D00CA4741 /* searchFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAB90EFC061D059D00CA4741 /* searchFolder.tiff */; };
 		AABCF9A508FF562E00984F78 /* pressedCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */; };
-		AABCFB1B0900BA4E00984F78 /* SquareWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AABCFB190900BA4E00984F78 /* SquareWindow.m */; };
 		AACAEA3E0954E71100ACD502 /* DemoFeeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */; };
 		AAD2BF620C2C41A200AA0F11 /* DBListSplitViewBar.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BF600C2C41A200AA0F11 /* DBListSplitViewBar.tiff */; };
 		AAD2BF630C2C41A200AA0F11 /* DBListSplitViewDimple.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BF610C2C41A200AA0F11 /* DBListSplitViewDimple.tiff */; };
@@ -1550,8 +1549,6 @@
 		AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewExtensions.m; path = src/TableViewExtensions.m; sourceTree = SOURCE_ROOT; };
 		AAB90EFC061D059D00CA4741 /* searchFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = searchFolder.tiff; path = Resources/searchFolder.tiff; sourceTree = SOURCE_ROOT; };
 		AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = pressedCloseButton.tiff; path = Resources/pressedCloseButton.tiff; sourceTree = SOURCE_ROOT; };
-		AABCFB180900BA4E00984F78 /* SquareWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = SquareWindow.h; path = src/SquareWindow.h; sourceTree = SOURCE_ROOT; };
-		AABCFB190900BA4E00984F78 /* SquareWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SquareWindow.m; path = src/SquareWindow.m; sourceTree = SOURCE_ROOT; };
 		AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = DemoFeeds.plist; path = Resources/DemoFeeds.plist; plistStructureDefinitionIdentifier = "<none>"; sourceTree = SOURCE_ROOT; };
 		AAD2BF600C2C41A200AA0F11 /* DBListSplitViewBar.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = DBListSplitViewBar.tiff; path = Resources/DBListSplitViewBar.tiff; sourceTree = SOURCE_ROOT; };
 		AAD2BF610C2C41A200AA0F11 /* DBListSplitViewDimple.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = DBListSplitViewDimple.tiff; path = Resources/DBListSplitViewDimple.tiff; sourceTree = SOURCE_ROOT; };
@@ -2862,8 +2859,6 @@
 				4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */,
 				AAE7A8FF086BB5C4009A487E /* PopupButton.h */,
 				AAE7A900086BB5C4009A487E /* PopupButton.m */,
-				AABCFB180900BA4E00984F78 /* SquareWindow.h */,
-				AABCFB190900BA4E00984F78 /* SquareWindow.m */,
 				B2BECB1514CEF22B00706F8F /* SSTextField.h */,
 				B2BECB1614CEF22B00706F8F /* SSTextField.m */,
 			);
@@ -3866,7 +3861,6 @@
 				AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */,
 				031E083019DFA3A900194F9F /* SubscriptionModel.m in Sources */,
 				AAEB1A5308E74EE300917920 /* ArrayExtensions.m in Sources */,
-				AABCFB1B0900BA4E00984F78 /* SquareWindow.m in Sources */,
 				AA71168F09BEB17300E3EA8A /* AddressBarCell.m in Sources */,
 				0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */,
 				AA1A23DB0C07475B005968DC /* SplitViewExtensions.m in Sources */,
