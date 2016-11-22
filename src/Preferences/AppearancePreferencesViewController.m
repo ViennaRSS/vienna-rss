@@ -168,7 +168,7 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 
     NSFontPanel *fontPanel = [fontManager fontPanel:YES];
     [fontPanel setPanelFont:[NSFont fontWithName:prefs.articleListFont size:prefs.articleListFontSize] isMultiple:NO];
-    [fontPanel makeKeyAndOrderFront:self];
+    [fontPanel orderFront:self];
     fontPanel.enabled = YES;
 }
 
@@ -184,7 +184,7 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
     
     NSFontPanel *fontPanel = [fontManager fontPanel:YES];
     [fontPanel setPanelFont:[NSFont fontWithName:prefs.folderListFont size:prefs.folderListFontSize] isMultiple:NO];
-    [fontPanel makeKeyAndOrderFront:self];
+    [fontPanel orderFront:self];
     fontPanel.enabled = YES;
 }
 
