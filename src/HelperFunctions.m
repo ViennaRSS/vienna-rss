@@ -225,7 +225,7 @@ void runOKAlertPanel(NSString * titleString, NSString * bodyText, ...)
 	va_start(arguments, bodyText);
 	fullBodyText = [[NSString alloc] initWithFormat:bodyText arguments:arguments];
 	// Security: arguments may contain formatting characters, so don't use fullBodyText as format string.
-    NSAlert *alert = [NSAlert init];
+    NSAlert *alert = [[NSAlert alloc] init];
     alert.alertStyle = NSAlertStyleInformational;
     alert.messageText = titleString;
     alert.informativeText = fullBodyText;
@@ -244,7 +244,7 @@ void runOKAlertSheet(NSString * titleString, NSString * bodyText, ...)
 	va_start(arguments, bodyText);
 	fullBodyText = [[NSString alloc] initWithFormat:bodyText arguments:arguments];
 	// Security: arguments may contain formatting characters, so don't use fullBodyText as format string.
-    NSAlert *alert = [NSAlert init];
+    NSAlert *alert = [[NSAlert alloc] init];
     alert.alertStyle = NSAlertStyleInformational;
     alert.messageText = titleString;
     alert.informativeText = fullBodyText;
