@@ -55,7 +55,7 @@
 
     @try {
         xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
-                                                  options:NSXMLNodeOptionsNone
+                                                  options:NSXMLNodeLoadExternalEntitiesNever
                                                     error:&error];
         if (xmlDocument == nil && error != nil) {
             if ([error.domain isEqualToString:NSXMLParserErrorDomain]) {
@@ -70,7 +70,7 @@
             }
             // recover some cases like text encoding errors, non standard tags...
             xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
-                                                      options:NSXMLDocumentTidyXML
+                                                      options:NSXMLDocumentTidyXML|NSXMLNodeLoadExternalEntitiesNever
                                                         error:&error];
         }
     } @catch (NSException * exception) {
