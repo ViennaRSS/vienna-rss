@@ -39,7 +39,7 @@
     {
         NSError *error = nil;
         NSXMLDocument *opmlDocument = [[NSXMLDocument alloc] initWithData:data
-                                                                  options:NSXMLNodeOptionsNone|NSXMLNodeLoadExternalEntitiesNever
+                                                                  options:NSXMLNodeLoadExternalEntitiesNever
                                                                     error:&error];
         if (error)
         {
