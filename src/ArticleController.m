@@ -27,7 +27,6 @@
 #import "ArticleRef.h"
 #import "StringExtensions.h"
 #import "GoogleReader.h"
-#import "RefreshManager.h"
 #import "ArticleListView.h"
 #import "UnifiedDisplayView.h"
 
@@ -660,10 +659,6 @@
 		else
 			[NSApp.mainWindow makeFirstResponder:foldersTree.mainView];
 	}
-
-	// If any of the articles we deleted were unread then the
-	// folder's unread count just changed.
-	[APPCONTROLLER showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* deleteArticlesByArray
@@ -697,8 +692,6 @@
     } else {
 		[NSApp.mainWindow makeFirstResponder:foldersTree.mainView];
     }
-	// Read and/or unread count may have changed
-	[APPCONTROLLER showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* markUnflagUndo
@@ -780,10 +773,6 @@
     [self innerMarkReadByArray:articleArray readFlag:readFlag];
 
 	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
-	
-	// The info bar has a count of unread articles so we need to
-	// update that.
-	[APPCONTROLLER showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* innerMarkReadByArray
@@ -803,14 +792,18 @@
 			} else {
 				[[Database sharedManager] markArticleRead:folderId guid:theArticle.guid isRead:readFlag];
 				[theArticle markRead:readFlag];
-				if (folderId != lastFolderId && lastFolderId != -1)
-					[foldersTree updateFolder:lastFolderId recurseToParents:YES];
+				if (folderId != lastFolderId && lastFolderId != -1) {
+					[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
+																		object:@(lastFolderId)];
+				}
 				lastFolderId = folderId;
 			}
 		}
 	}
-	if (lastFolderId != -1)
-		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
+	if (lastFolderId != -1) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
+															object:@(lastFolderId)];
+	}
 }
 
 /* innerMarkReadByRefsArray
@@ -832,13 +825,17 @@
 			}
 		} else {
 			[db markArticleRead:folderId guid:articleRef.guid isRead:readFlag];
-			if (folderId != lastFolderId && lastFolderId != -1)
-				[foldersTree updateFolder:lastFolderId recurseToParents:YES];
+			if (folderId != lastFolderId && lastFolderId != -1) {
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
+																	object:@(lastFolderId)];
+			}
 			lastFolderId = folderId;
 		}
 	}
-	if (lastFolderId != -1)
-		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
+	if (lastFolderId != -1) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
+															object:@(lastFolderId)];
+	}
 }
 
 /* markAllReadUndo
@@ -874,7 +871,6 @@
     if (refreshFlag) {
 		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
     }
-	[APPCONTROLLER showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* wrappedMarkAllReadInArray
@@ -897,10 +893,9 @@
             if (undoFlag) {
 				[refArray addObjectsFromArray:[folder arrayOfUnreadArticlesRefs]];
             }
-			if ([[Database sharedManager] markFolderRead:folderId])
-			{
-				[foldersTree updateFolder:folderId recurseToParents:YES];
-                
+			if ([[Database sharedManager] markFolderRead:folderId]) {
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
+																	object:@(folderId)];
 			}
 		}
 		else if (IsGoogleReaderFolder(folder))
@@ -952,9 +947,9 @@
 			}
         } else {
 			[dbManager markArticleRead:folderId guid:theGuid isRead:readFlag];
-			if (folderId != lastFolderId && lastFolderId != -1)
-			{
-				[foldersTree updateFolder:lastFolderId recurseToParents:YES];
+			if (folderId != lastFolderId && lastFolderId != -1) {
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
+																	object:@(lastFolderId)];
 			}
 			lastFolderId = folderId;
 		}
@@ -964,9 +959,9 @@
 		}
 	}
 	
-	if (lastFolderId != -1)
-	{
-		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
+	if (lastFolderId != -1) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
+															object:@(lastFolderId)];
 	}
 	if (lastFolderId != -1 && !IsRSSFolder([dbManager folderFromID:currentFolderId])
 		&& !IsGoogleReaderFolder([dbManager folderFromID:currentFolderId])) {
@@ -975,10 +970,6 @@
 	else if (needRefilter) {
 		[mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
 	}
-	
-	// The info bar has a count of unread articles so we need to
-	// update that.
-	[APPCONTROLLER showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* addBacktrack
@@ -1072,7 +1063,9 @@
 {
     NSInteger folderId = ((NSNumber *)note.object).integerValue;
     Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
-    if ( (folderId == currentFolderId) || (!IsRSSFolder(currentFolder) && !IsGoogleReaderFolder(currentFolder)) )
+    if ( (folderId == currentFolderId)
+      // for group or smart folder, to avoid flickering, we only update when refresh process is finished
+      || (!IsRSSFolder(currentFolder) && !IsGoogleReaderFolder(currentFolder) && !APPCONTROLLER.isConnecting) )
     {
         // Note the article that the user might currently be reading
         // to be preserved when reloading the array of articles.

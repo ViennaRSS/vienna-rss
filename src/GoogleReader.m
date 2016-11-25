@@ -601,7 +601,6 @@ enum GoogleReaderStatus {
 		dispatch_async(dispatch_get_main_queue(), ^{
 			AppController *controller = APPCONTROLLER;
 			[controller setStatusMessage:nil persist:NO];
-			[controller showUnreadCountOnApplicationIconAndWindowTitle];
 			[refreshedFolder clearNonPersistedFlag:MA_FFlag_Error];
 
 			// Send status to the activity log
@@ -610,6 +609,7 @@ enum GoogleReaderStatus {
 			else
 			{
 				aItem.status = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
+				[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(refreshedFolder.itemId)];
 			}
 		});
 		
@@ -664,7 +664,6 @@ enum GoogleReaderStatus {
             [[refreshedFolder articleFromGuid:guid] markRead:NO];
 		}
 		LLog(@"%ld unread items for %@", [guidArray count], [request url]);
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:@(refreshedFolder.itemId)];
 
         [[Database sharedManager] markUnreadArticlesFromFolder:refreshedFolder guidArray:guidArray];
 	    // reset starred statuses in cache : we will receive in -StarredRequestDone: the updated list
@@ -737,7 +736,7 @@ enum GoogleReaderStatus {
 			[[refreshedFolder articleFromGuid:guid] markFlagged:YES];
 		}
 		LLog(@"%ld starred items for %@", [guidArray count], [request url]);
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:@(refreshedFolder.itemId)];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:@(refreshedFolder.itemId)];
 
         [[Database sharedManager] markStarredArticlesFromFolder:refreshedFolder guidArray:guidArray];
 

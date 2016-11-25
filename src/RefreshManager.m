@@ -100,6 +100,7 @@
 	if (hasStarted)
 	{
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:nil];
 		hasStarted = NO;
 	}
 	else
@@ -611,7 +612,8 @@
 		// Unread count may have changed
 		AppController *controller = APPCONTROLLER;
 		[controller setStatusMessage:nil persist:NO];
-		[controller showUnreadCountOnApplicationIconAndWindowTitle];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
+																object:@(folder.itemId)];
 	});
 }
 
