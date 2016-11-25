@@ -8,6 +8,14 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.8
+-----
+- Fixed an External XML Entity (XXE) vulnerability which allowed servers to steal the content of files on the machine running Vienna
+- Fix incorrect escaping of OPML export
+- Fix font preferences not working
+- Fix error on unread articles count with OpenReader feeds
+- Fix articles' list during feed refreshes when the current selection is a smart or group folder 
+
 3.1.7
 -----
 - Fix incorrect escaping of some feeds

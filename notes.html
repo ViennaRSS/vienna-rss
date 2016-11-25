@@ -4,6 +4,7 @@
 <head>
 
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 
@@ -107,35 +108,14 @@ sup {
 
 <h1 id="toc_0">Version Notes</h1>
 
-<h2 id="toc_1">3.1.7</h2>
-
-<h3 id="toc_2">Change since 3.1.6</h3>
+<h2 id="toc_1">3.1.8</h2>
 
 <ul>
-<li>Fix incorrect escaping of some feeds</li>
-</ul>
-
-<h3 id="toc_3">Changes since 3.1.5</h3>
-
-<ul>
-<li>New set of default feeds, thanks to Jesse Claven and Ricky Morse</li>
-<li>Add support for delta feeds (RFC3229+feed)</li>
-<li>When the user selects a folder, loading articles from database occurs on a separate thread</li>
-<li>Database performance improvements</li>
-<li>Fix some crashes</li>
-<li>Fix relative URLs, like in images&#39;s <code>srcset</code> attributes</li>
-<li>Fix retrieving article text of some feeds</li>
-<li>Fix &#39;Moves to the next unread article&#39; to not scan fresher articles from same folder, except for smart folders</li>
-<li>Fix &#39;Moves to the first unread article&#39;</li>
-<li>Fix infinite loop on ‘Skip Folder’ command when no unread articles were left</li>
-<li>Fix article selection in Unified layout</li>
-<li>Keep currently selected article on refresh of a group or smart folder</li>
-<li>Fix &quot;Last Refresh&quot; filter</li>
-<li>Fix some macOS Sierra glitches</li>
-<li>Fix status message after tasks like marking OpenReader articles read</li>
-<li>Fixes to Danish and Russian translations</li>
-<li>Reorganized and improved tests</li>
-<li>Code refactoring and cleanup</li>
+<li>Fixed an External XML Entity (XXE) vulnerability which allowed servers to steal the content of files on the machine running Vienna</li>
+<li>Fix incorrect escaping of OPML export</li>
+<li>Fix font preferences not working</li>
+<li>Fix error on unread articles count with OpenReader feeds</li>
+<li>Fix articles&#39; list during feed refreshes when the current selection is a smart or group folder </li>
 </ul>
 
 
