@@ -256,40 +256,40 @@ enum GoogleReaderStatus {
 
 -(void)getToken
 {
-	if(token != nil)
-		return; //We already have a transaction token
-	LLog(@"Start Token Request!");
-	if (clientAuthToken == nil) {
-		LLog(@"Failed authenticate...");
-		googleReaderStatus = notAuthenticated;
-		return;
-	}
-    ASIHTTPRequest * request = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
+//	if(token != nil)
+//		return; //We already have a transaction token
+//	LLog(@"Start Token Request!");
+//	if (clientAuthToken == nil) {
+//		LLog(@"Failed authenticate...");
+//		googleReaderStatus = notAuthenticated;
+//		return;
+//	}
+    ASIHTTPRequest *request = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
     [request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
     googleReaderStatus = isGettingToken;
-
-    request.delegate = nil;
-    [request startSynchronous];
-    if (request.error)
-    {
-		LOG_EXPR([request originalURL]);
-		LOG_EXPR([request requestHeaders]);
-		LOG_EXPR([[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding]);
-		LOG_EXPR([request responseHeaders]);
-		LOG_EXPR([[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding]);
-		[self setToken:nil];
-		[request clearDelegatesAndCancel];
-		googleReaderStatus = isMissingToken;
-		return;
-	}
-    // Save token
-    self.token = [request responseString];
-    [request clearDelegatesAndCancel];
-	googleReaderStatus = isAuthenticated;
-
-    if (tokenTimer == nil || !tokenTimer.valid)
-    	//tokens expire after 30 minutes : renew them every 25 minutes
-    	tokenTimer = [NSTimer scheduledTimerWithTimeInterval:25*60 target:self selector:@selector(renewToken) userInfo:nil repeats:YES];
+    __weak typeof(request) weakRequest = request;
+    [request setCompletionBlock:^{
+        __strong typeof(weakRequest) strongRequest = weakRequest;
+        self.token = [strongRequest responseString];
+        [strongRequest clearDelegatesAndCancel];
+        googleReaderStatus = isAuthenticated;
+        if (tokenTimer == nil || !tokenTimer.valid)
+            //tokens expire after 30 minutes : renew them every 25 minutes
+            tokenTimer = [NSTimer scheduledTimerWithTimeInterval:25*60 target:self selector:@selector(renewToken) userInfo:nil repeats:YES];
+    }];
+    [request setFailedBlock:^{
+        __strong typeof(weakRequest) strongRequest = weakRequest;
+        LOG_EXPR([strongRequest originalURL]);
+        LOG_EXPR([strongRequest requestHeaders]);
+        LOG_EXPR([[NSString alloc] initWithData:[strongRequest postBody] encoding:NSUTF8StringEncoding]);
+        LOG_EXPR([strongRequest responseHeaders]);
+        LOG_EXPR([[NSString alloc] initWithData:[strongRequest responseData] encoding:NSUTF8StringEncoding]);
+        [self setToken:nil];
+        [strongRequest clearDelegatesAndCancel];
+        googleReaderStatus = isMissingToken;
+    }];
+    
+    [request startAsynchronous];
 }
 
 -(void)renewToken
