@@ -256,14 +256,15 @@ enum GoogleReaderStatus {
 
 -(void)getToken
 {
-//	if(token != nil)
-//		return; //We already have a transaction token
-//	LLog(@"Start Token Request!");
-//	if (clientAuthToken == nil) {
-//		LLog(@"Failed authenticate...");
-//		googleReaderStatus = notAuthenticated;
-//		return;
-//	}
+    if(token != nil) {
+		return; //We already have a transaction token
+    }
+	LLog(@"Start Token Request!");
+	if (clientAuthToken == nil) {
+		LLog(@"Failed authenticate...");
+		googleReaderStatus = notAuthenticated;
+		return;
+	}
     ASIHTTPRequest *request = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
     [request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
     googleReaderStatus = isGettingToken;
