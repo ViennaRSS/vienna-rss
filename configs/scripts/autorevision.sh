@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Config
-export PATH=${PATH}:/sw/bin:/opt/local/bin:/usr/local/bin:/usr/local/git/bin
+export PATH=/sw/bin:/opt/local/bin:/usr/local/bin:/usr/local/git/bin:${PATH}
 BUILD_NUMBER="2821"
 hauto="${BUILT_PRODUCTS_DIR}/autorevision.h"
 fauto="${SRCROOT}/src/autorevision.h"
