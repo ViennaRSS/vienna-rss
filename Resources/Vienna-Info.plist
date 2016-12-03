@@ -59,8 +59,6 @@
 	<string>Vienna Help</string>
 	<key>CFBundleHelpBookName</key>
 	<string>Vienna Help</string>
-	<key>CFBundleIconFile</key>
-	<string>vienna-3.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
