@@ -4,9 +4,9 @@
 autorevision - extract current-revision metadata from version-control repositories
 
 == SYNOPSIS ==
-*autorevision* *-t* <output-type> [*-o* <cache-file> [*-f*]&#8201;] [*-U*]
+*autorevision* *-t* <output-type> [*-o* <cache-file> [*-f*]&#8201;] [*-e* <name>] [*-U*]
 
-*autorevision* *-s* <symbol> [*-o* <cache-file> [*-f*]&#8201;] [*-U*]
+*autorevision* *-s* <symbol> [*-o* <cache-file> [*-f*]&#8201;] [*-e* <name>] [*-U*]
 
 *autorevision* *-V*
 
@@ -46,6 +46,17 @@ an unpacked tarball that includes the cache file.
 
 *clojure*::
 A clojure source file setting clojure variables.
+
+*c*::
+A C/C++ source file. +
+`autorevision_declr.h` in the contribs dir is provided for use with
+this output.
+
+*cmake*::
+A cmake script file.
+
+*csharp*::
+C# file with Autorevision class
 
 *h*::
 A header file suitable for C/C++.
@@ -105,7 +116,7 @@ Ruby.
 
 *swift*::
 A Swift source file setting Swift global constants. +
-Unless set *VCS_EXTRA* and any symbols that are are missing because of
+Unless set *VCS_EXTRA* and any symbols that are missing because of
 repository support are set to `nil`.
 
 *tex*::
@@ -145,7 +156,7 @@ format, including seconds.
 The name of the branch of the commit graph that was selected when
 autoversion was run. +
 Under git, this will normally be the shortname of the current branch
-(the asterisked line in the output of of "git branch") except that
+(the asterisked line in the output of "git branch") except that
 when the branch doesn't have a shortname it will be a full
 refspec. +
 Under hg the feature that is called 'branches' is actually a sort of
@@ -169,6 +180,13 @@ Empty under Subversion.
 *VCS_EXTRA*::
 A symbol set aside specifically to be set by the user through the
 environment or via scripts.
+
+*VCS_ACTION_STAMP*::
+An "action stamp" consists of an RFC3339 timestamp in Zulu time,
+followed by an exclamation point, followed by an RFC822 address
+(technically, an "addr-spec" as defined in 6.1). +
+For svn the second part is simply the author name. +
+Not currently implemented for bzr.
 
 *VCS_FULL_HASH*::
 A full unique identifier for the current revision.
@@ -198,6 +216,10 @@ be used in the same invocation.
 
 *-o* '<cache-file>'::
 Sets the name of the cache file.
+
+*-e* '<name>'::
+Sets the output name of *VCS_EXTRA* +
+Defaults to `VCS_EXTRA`.
 
 *-f*::
 Forces the use of cache data even when in a repo; useful for speeding
@@ -238,4 +260,5 @@ https://autorevision.github.io/
 dak180 <dak180@users.sf.net>: concept, bash/C/C++/XCode/PHP/ini
 support, git and hg extraction. +
 Eric S. Raymond <esr@thyrsus.com>: Python/Perl/lua/m4 support, svn and
-bzr extraction, git-svn support, CLI design, man page.
+bzr extraction, git-svn support, CLI design, man page. +
+See AUTHORS.txt for a full list in order of number of contributions.

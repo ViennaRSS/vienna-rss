@@ -1,5 +1,26 @@
 			autorevision history
 
+1.18 @ 2016-11-22:
+  Fix some bashisms in the make file.
+  Get the short hash from git rather than assuming its length.
+
+1.17 @ 2016-11-18:
+  Fix out of repo operation.
+  Bring back the irc channel.
+  Add a script to sanity check out of repo operation.
+
+1.16 @ 2016-11-15:
+  Try to eliminate stray error output.
+  Allow the VCS_EXTRA symbol to be renamed.
+  Add an C# output.
+  Add an CMake output.
+
+1.15 @ 2016-08-08:
+  Add support for action stamps.
+  Add support for plain c/c++ source output.
+  Activate mq as needed for hg.
+  Add an .editorconfig file.
+
 1.14 @ 2016-02-22:
   Fix PHP output.
   Use constants array in PHP output.
