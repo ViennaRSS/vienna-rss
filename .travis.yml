@@ -1,14 +1,16 @@
 language: objective-c
-osx_image: xcode8
+osx_image: xcode8.2
 xcode_workspace: Vienna.xcworkspace
 xcode_scheme: Vienna
-before_script:
-  - gem install xcpretty
 
 script: xcodebuild -workspace "$TRAVIS_XCODE_WORKSPACE" -scheme "$TRAVIS_XCODE_SCHEME" test | xcpretty
+
 notifications:
-  slack:
-    secure: KaYeG8xgiCCROn0yBrDj0xMI5f1LECVgqJalp+2APy2AdQzHmYQdysiy6c1xNL1//kW3TPAakopgpBwpQ6YTVBfI9F/n9SCvMEwHKKZVT1kwqYJDNwGKXy1tXJKQfhI2x6bs2+HJOgOTLhU+otrDlYyZWEel56q/NzNVx0dwHFs=
+  webhooks:
+      urls:
+          - $MATRIX_WEBHOOK
+      on_failure: always
+      on_start: never
 
 # for container-based infrastructure
 sudo: false
