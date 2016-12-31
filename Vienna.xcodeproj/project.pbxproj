@@ -1413,7 +1413,6 @@
 		5766692616DEB694001C8786 /* skipFolderButtonPressed@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "skipFolderButtonPressed@2x.tiff"; path = "Resources/skipFolderButtonPressed@2x.tiff"; sourceTree = "<group>"; };
 		5766692916DEB69E001C8786 /* subscribeButton@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "subscribeButton@2x.tiff"; path = "Resources/subscribeButton@2x.tiff"; sourceTree = "<group>"; };
 		5766692A16DEB69E001C8786 /* subscribeButtonPressed@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "subscribeButtonPressed@2x.tiff"; path = "Resources/subscribeButtonPressed@2x.tiff"; sourceTree = "<group>"; };
-		57B1721116E9665500C011C9 /* vienna-3.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "vienna-3.icns"; path = "Resources/vienna-3.icns"; sourceTree = "<group>"; };
 		57DA9D0A16DFFCD3000889E7 /* unread@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "unread@2x.tiff"; path = "Resources/unread@2x.tiff"; sourceTree = "<group>"; };
 		57DA9D0C16DFFCDB000889E7 /* rssFeedNew@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "rssFeedNew@2x.tiff"; path = "Resources/rssFeedNew@2x.tiff"; sourceTree = "<group>"; };
 		57F7E2EF16F534FE00D4702E /* vienna3plugin.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = vienna3plugin.icns; path = Resources/vienna3plugin.icns; sourceTree = "<group>"; };
@@ -1991,7 +1990,6 @@
 		43EE754C165E82F9000997FB /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				57B1721116E9665500C011C9 /* vienna-3.icns */,
 				57F7E2EF16F534FE00D4702E /* vienna3plugin.icns */,
 				57F7E2F016F534FE00D4702E /* vienna3style.icns */,
 			);
