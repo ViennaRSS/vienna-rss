@@ -2150,14 +2150,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		if (lastCountOfUnread == 0)
 		{
-            NSImage *statusBarImage = [NSImage imageNamed:@"statusBarIcon.png"];
+            NSImage *statusBarImage = [NSImage imageNamed:@"statusBarIcon"];
             [statusBarImage setTemplate:YES];
             appStatusItem.image = statusBarImage;
 			[appStatusItem setTitle:nil];
 		}
 		else
 		{
-            NSImage *statusBarImage = [NSImage imageNamed:@"statusBarIconUnread.png"];
+            NSImage *statusBarImage = [NSImage imageNamed:@"statusBarIconUnread"];
             [statusBarImage setTemplate:YES];
             appStatusItem.image = statusBarImage;
 			appStatusItem.title = [NSString stringWithFormat:@"%ld", (long)lastCountOfUnread];

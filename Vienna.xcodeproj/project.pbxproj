@@ -696,8 +696,6 @@
 		EA1A7620148FA32B004A6B8F /* googleFeed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EA1A761F148FA32B004A6B8F /* googleFeed.tiff */; };
 		EA43C70914A370DB00F2D843 /* VTPG_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = EA43C70814A370DB00F2D843 /* VTPG_Common.m */; };
 		EACE4C90147FA2B000A17997 /* PSMTabBarControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */; };
-		F061590419CE8A90005F61CC /* statusBarIconUnread.png in Resources */ = {isa = PBXBuildFile; fileRef = F061590319CE8A90005F61CC /* statusBarIconUnread.png */; };
-		F061590619CE8A9E005F61CC /* statusBarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = F061590519CE8A9E005F61CC /* statusBarIcon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1413,7 +1411,6 @@
 		5766692616DEB694001C8786 /* skipFolderButtonPressed@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "skipFolderButtonPressed@2x.tiff"; path = "Resources/skipFolderButtonPressed@2x.tiff"; sourceTree = "<group>"; };
 		5766692916DEB69E001C8786 /* subscribeButton@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "subscribeButton@2x.tiff"; path = "Resources/subscribeButton@2x.tiff"; sourceTree = "<group>"; };
 		5766692A16DEB69E001C8786 /* subscribeButtonPressed@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "subscribeButtonPressed@2x.tiff"; path = "Resources/subscribeButtonPressed@2x.tiff"; sourceTree = "<group>"; };
-		57B1721116E9665500C011C9 /* vienna-3.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "vienna-3.icns"; path = "Resources/vienna-3.icns"; sourceTree = "<group>"; };
 		57DA9D0A16DFFCD3000889E7 /* unread@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "unread@2x.tiff"; path = "Resources/unread@2x.tiff"; sourceTree = "<group>"; };
 		57DA9D0C16DFFCDB000889E7 /* rssFeedNew@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "rssFeedNew@2x.tiff"; path = "Resources/rssFeedNew@2x.tiff"; sourceTree = "<group>"; };
 		57F7E2EF16F534FE00D4702E /* vienna3plugin.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = vienna3plugin.icns; path = Resources/vienna3plugin.icns; sourceTree = "<group>"; };
@@ -1623,8 +1620,6 @@
 		EA6D3E5914D8048C004DCB80 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Debug.h; path = src/Debug.h; sourceTree = SOURCE_ROOT; };
 		EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSMTabBarControl.framework; path = 3rdparty/PSMTabBarControl.framework; sourceTree = "<group>"; };
 		ED69423919E1DC034EA80E25 /* Pods-Vienna Tests.staticanalyzer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna Tests.staticanalyzer.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna Tests/Pods-Vienna Tests.staticanalyzer.xcconfig"; sourceTree = "<group>"; };
-		F061590319CE8A90005F61CC /* statusBarIconUnread.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = statusBarIconUnread.png; path = Resources/statusBarIconUnread.png; sourceTree = "<group>"; };
-		F061590519CE8A9E005F61CC /* statusBarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = statusBarIcon.png; path = Resources/statusBarIcon.png; sourceTree = "<group>"; };
 		F1ECA9ED54D2517E7BEDCBB7 /* Pods-Vienna Tests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna Tests.development.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna Tests/Pods-Vienna Tests.development.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1991,7 +1986,6 @@
 		43EE754C165E82F9000997FB /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				57B1721116E9665500C011C9 /* vienna-3.icns */,
 				57F7E2EF16F534FE00D4702E /* vienna3plugin.icns */,
 				57F7E2F016F534FE00D4702E /* vienna3style.icns */,
 			);
@@ -2044,8 +2038,6 @@
 				AA83A04F08D6764D001E8404 /* smallCloseButton.tiff */,
 				B2B2216211013FC400885331 /* blankButtonPressedBurned.tiff */,
 				5766690216DEB5C4001C8786 /* blankButtonPressedBurned@2x.tiff */,
-				F061590519CE8A9E005F61CC /* statusBarIcon.png */,
-				F061590319CE8A90005F61CC /* statusBarIconUnread.png */,
 				AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */,
 				AA31192C08FE5E8E0069ECD2 /* highlightedCloseButton.tiff */,
 				AA1A25150C077F49005968DC /* columnIcon.tiff */,
@@ -3194,7 +3186,6 @@
 				43E69691168A05F300AB4C09 /* GroupFolder.nib in Resources */,
 				43E69692168A05F300AB4C09 /* GroupFolder.nib in Resources */,
 				43E69693168A05F300AB4C09 /* GroupFolder.nib in Resources */,
-				F061590619CE8A9E005F61CC /* statusBarIcon.png in Resources */,
 				43E69694168A05F300AB4C09 /* GroupFolder.nib in Resources */,
 				43E69695168A05F300AB4C09 /* GroupFolder.nib in Resources */,
 				43E69696168A05F300AB4C09 /* GroupFolder.nib in Resources */,
@@ -3429,7 +3420,6 @@
 				AA3111B90901A2DC00E80DF1 /* Preferences.plist in Resources */,
 				AA32E2A40940A9970034D9CC /* folderError.tiff in Resources */,
 				AACAEA3E0954E71100ACD502 /* DemoFeeds.plist in Resources */,
-				F061590419CE8A90005F61CC /* statusBarIconUnread.png in Resources */,
 				AA04ED6B096226D30060E851 /* rssFeedNew.tiff in Resources */,
 				AA3D463A0969CF1F000E6F3B /* unreadStar1.tiff in Resources */,
 				AAE3E41C09760B42009E60D6 /* appearancePrefImage.tiff in Resources */,
