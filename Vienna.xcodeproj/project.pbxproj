@@ -74,6 +74,12 @@
 		0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */; };
 		0379E23B1A20831600D58BFE /* SyncingPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */; };
 		0383DC551B71B44700A11950 /* CriteriaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383DC541B71B44700A11950 /* CriteriaTests.m */; };
+		0386A5C01E1FA586000C10CE /* ActivityViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0386A5BA1E1FA586000C10CE /* ActivityViewer.xib */; };
+		0386A5C11E1FA586000C10CE /* BrowserPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0386A5BB1E1FA586000C10CE /* BrowserPane.xib */; };
+		0386A5C21E1FA586000C10CE /* Downloads.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0386A5BC1E1FA586000C10CE /* Downloads.xib */; };
+		0386A5C31E1FA586000C10CE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0386A5BD1E1FA586000C10CE /* MainMenu.xib */; };
+		0386A5C41E1FA586000C10CE /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0386A5BE1E1FA586000C10CE /* SearchPanel.xib */; };
+		0386A5C51E1FA586000C10CE /* XMLSource.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0386A5BF1E1FA586000C10CE /* XMLSource.xib */; };
 		03A131B31AA54EAC0037471F /* VNADatabaseMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */; };
 		03B35B841B75E9E0001DB06D /* NSDate+Vienna.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B35B831B75E9E0001DB06D /* NSDate+Vienna.m */; };
 		03B7522A1B741AFD00FD3FDB /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B752291B741AFD00FD3FDB /* FeedItem.m */; };
@@ -81,7 +87,6 @@
 		03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EFD56F1B720AB0007EF284 /* ExportTests.m */; };
 		03F33D961DF2A2F900B04FAF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03F33D951DF2A2F900B04FAF /* Images.xcassets */; };
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
-		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
 		37C650801816EBAD3C0D9DBF /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */; };
 		3A20DC581783FF8D00D75515 /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A20DC561783FF8D00D75515 /* KnownSyncServers.plist */; };
 		3A20DC5B1783FFC700D75515 /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A20DC591783FFC600D75515 /* KnownSyncServers.plist */; };
@@ -604,10 +609,6 @@
 		AA36CD7C06100692001E33A4 /* Field.m in Sources */ = {isa = PBXBuildFile; fileRef = AA36CD7A06100692001E33A4 /* Field.m */; };
 		AA3D463A0969CF1F000E6F3B /* unreadStar1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA3D46390969CF1E000E6F3B /* unreadStar1.tiff */; };
 		AA3F7B4208711F6A00D2B96F /* comments_header.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA3F7B4108711F6A00D2B96F /* comments_header.tiff */; };
-		AA5814900C4971EC003D0916 /* SearchPanel.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA58148F0C4971EC003D0916 /* SearchPanel.nib */; };
-		AA582D8D0C4A2B78003D0916 /* ActivityViewer.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA582D880C4A2B78003D0916 /* ActivityViewer.nib */; };
-		AA582DA10C4A2C66003D0916 /* BrowserPane.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA582D9C0C4A2C66003D0916 /* BrowserPane.nib */; };
-		AA582DB90C4A2D85003D0916 /* Downloads.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA582DB40C4A2D85003D0916 /* Downloads.nib */; };
 		AA5833F30C4A6A07003D0916 /* nextButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5833EF0C4A6A07003D0916 /* nextButton.tiff */; };
 		AA5833F40C4A6A07003D0916 /* nextButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5833F00C4A6A07003D0916 /* nextButtonPressed.tiff */; };
 		AA5833F50C4A6A07003D0916 /* previousButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5833F10C4A6A07003D0916 /* previousButton.tiff */; };
@@ -666,7 +667,6 @@
 		AAFA8CAA062A0BE200C530A6 /* CalendarExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFA8CA8062A0BE200C530A6 /* CalendarExtensions.m */; };
 		AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
 		AAFDB7AF0C0B1516000D1643 /* smartFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAFDB7AE0C0B1516000D1643 /* smartFolder.tiff */; };
-		B210865A109F8196001D4E7C /* XMLSource.nib in Resources */ = {isa = PBXBuildFile; fileRef = B2108659109F8196001D4E7C /* XMLSource.nib */; };
 		B2554731106913760065E9C3 /* errorpagelogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B2554730106913760065E9C3 /* errorpagelogo.png */; };
 		B25E53E11067B54600BBF14C /* browserNextButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DB1067B54600BBF14C /* browserNextButton.tiff */; };
 		B25E53E31067B54600BBF14C /* browserRefreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */; };
@@ -890,6 +890,12 @@
 		0379E2391A20831600D58BFE /* SyncingPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SyncingPreferencesViewController.h; path = src/Preferences/SyncingPreferencesViewController.h; sourceTree = "<group>"; };
 		0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SyncingPreferencesViewController.m; path = src/Preferences/SyncingPreferencesViewController.m; sourceTree = "<group>"; };
 		0383DC541B71B44700A11950 /* CriteriaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CriteriaTests.m; sourceTree = "<group>"; };
+		0386A5BA1E1FA586000C10CE /* ActivityViewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActivityViewer.xib; path = Interfaces/ActivityViewer.xib; sourceTree = "<group>"; };
+		0386A5BB1E1FA586000C10CE /* BrowserPane.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BrowserPane.xib; path = Interfaces/BrowserPane.xib; sourceTree = "<group>"; };
+		0386A5BC1E1FA586000C10CE /* Downloads.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Downloads.xib; path = Interfaces/Downloads.xib; sourceTree = "<group>"; };
+		0386A5BD1E1FA586000C10CE /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = Interfaces/MainMenu.xib; sourceTree = "<group>"; };
+		0386A5BE1E1FA586000C10CE /* SearchPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchPanel.xib; path = Interfaces/SearchPanel.xib; sourceTree = "<group>"; };
+		0386A5BF1E1FA586000C10CE /* XMLSource.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XMLSource.xib; path = Interfaces/XMLSource.xib; sourceTree = "<group>"; };
 		03A131B11AA54EAC0037471F /* VNADatabaseMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VNADatabaseMigration.h; path = src/VNADatabaseMigration.h; sourceTree = "<group>"; };
 		03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VNADatabaseMigration.m; path = src/VNADatabaseMigration.m; sourceTree = "<group>"; };
 		03B35B821B75E9E0001DB06D /* NSDate+Vienna.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Vienna.h"; path = "src/NSDate+Vienna.h"; sourceTree = "<group>"; };
@@ -903,7 +909,6 @@
 		32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Vienna_Prefix.pch; path = src/Vienna_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ClickableProgressIndicator.h; path = src/ClickableProgressIndicator.h; sourceTree = SOURCE_ROOT; };
 		34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ClickableProgressIndicator.m; path = src/ClickableProgressIndicator.m; sourceTree = SOURCE_ROOT; };
-		344D9C020C3D4B2200498CA1 /* MainMenu.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = MainMenu.nib; path = Interfaces/MainMenu.nib; sourceTree = SOURCE_ROOT; };
 		37C652B4C918F312BA9F1AB1 /* NSURL+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSURL+Utils.h"; path = "src/NSURL+Utils.h"; sourceTree = "<group>"; };
 		37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSURL+Utils.m"; path = "src/NSURL+Utils.m"; sourceTree = "<group>"; };
 		3A20DC571783FF8D00D75515 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = KnownSyncServers.plist; sourceTree = "<group>"; };
@@ -1498,10 +1503,6 @@
 		AA3F7B4108711F6A00D2B96F /* comments_header.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = comments_header.tiff; path = Resources/comments_header.tiff; sourceTree = SOURCE_ROOT; };
 		AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLTag.m; path = src/XMLTag.m; sourceTree = SOURCE_ROOT; };
 		AA4C8DEC0B9B2A8B00E0C9B8 /* XMLTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLTag.h; path = src/XMLTag.h; sourceTree = SOURCE_ROOT; };
-		AA58148F0C4971EC003D0916 /* SearchPanel.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = SearchPanel.nib; path = Interfaces/SearchPanel.nib; sourceTree = SOURCE_ROOT; };
-		AA582D880C4A2B78003D0916 /* ActivityViewer.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = ActivityViewer.nib; path = Interfaces/ActivityViewer.nib; sourceTree = SOURCE_ROOT; };
-		AA582D9C0C4A2C66003D0916 /* BrowserPane.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = BrowserPane.nib; path = Interfaces/BrowserPane.nib; sourceTree = SOURCE_ROOT; };
-		AA582DB40C4A2D85003D0916 /* Downloads.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Downloads.nib; path = Interfaces/Downloads.nib; sourceTree = SOURCE_ROOT; };
 		AA5833EF0C4A6A07003D0916 /* nextButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = nextButton.tiff; path = Resources/nextButton.tiff; sourceTree = SOURCE_ROOT; };
 		AA5833F00C4A6A07003D0916 /* nextButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = nextButtonPressed.tiff; path = Resources/nextButtonPressed.tiff; sourceTree = SOURCE_ROOT; };
 		AA5833F10C4A6A07003D0916 /* previousButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = previousButton.tiff; path = Resources/previousButton.tiff; sourceTree = SOURCE_ROOT; };
@@ -1584,7 +1585,6 @@
 		AAFAF3FB088056D800DAFF04 /* KeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = KeyChain.h; path = src/KeyChain.h; sourceTree = SOURCE_ROOT; };
 		AAFAF3FC088056D800DAFF04 /* KeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = KeyChain.m; path = src/KeyChain.m; sourceTree = SOURCE_ROOT; };
 		AAFDB7AE0C0B1516000D1643 /* smartFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = smartFolder.tiff; path = Resources/smartFolder.tiff; sourceTree = SOURCE_ROOT; };
-		B2108659109F8196001D4E7C /* XMLSource.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = XMLSource.nib; path = Interfaces/XMLSource.nib; sourceTree = SOURCE_ROOT; };
 		B2554730106913760065E9C3 /* errorpagelogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = errorpagelogo.png; path = Resources/errorpagelogo.png; sourceTree = SOURCE_ROOT; };
 		B25E53DB1067B54600BBF14C /* browserNextButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = browserNextButton.tiff; path = Resources/browserNextButton.tiff; sourceTree = SOURCE_ROOT; };
 		B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = browserRefreshButton.tiff; path = Resources/browserRefreshButton.tiff; sourceTree = SOURCE_ROOT; };
@@ -1972,13 +1972,13 @@
 		43EE7548165E81AB000997FB /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				0386A5BA1E1FA586000C10CE /* ActivityViewer.xib */,
+				0386A5BB1E1FA586000C10CE /* BrowserPane.xib */,
+				0386A5BC1E1FA586000C10CE /* Downloads.xib */,
+				0386A5BD1E1FA586000C10CE /* MainMenu.xib */,
+				0386A5BE1E1FA586000C10CE /* SearchPanel.xib */,
+				0386A5BF1E1FA586000C10CE /* XMLSource.xib */,
 				034981351A206E3C00014F29 /* Preferences */,
-				AA582D880C4A2B78003D0916 /* ActivityViewer.nib */,
-				AA582D9C0C4A2C66003D0916 /* BrowserPane.nib */,
-				AA582DB40C4A2D85003D0916 /* Downloads.nib */,
-				344D9C020C3D4B2200498CA1 /* MainMenu.nib */,
-				AA58148F0C4971EC003D0916 /* SearchPanel.nib */,
-				B2108659109F8196001D4E7C /* XMLSource.nib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -3123,6 +3123,7 @@
 				43E69633168A05F300AB4C09 /* EmptyTrashWarning.strings in Resources */,
 				43E69634168A05F300AB4C09 /* errorpage.html in Resources */,
 				43E69635168A05F300AB4C09 /* errorpage.html in Resources */,
+				0386A5C01E1FA586000C10CE /* ActivityViewer.xib in Resources */,
 				43E69636168A05F300AB4C09 /* errorpage.html in Resources */,
 				43EE83F4165EAA70000997FB /* errorpage.html in Resources */,
 				43E69637168A05F300AB4C09 /* errorpage.html in Resources */,
@@ -3139,6 +3140,7 @@
 				43E69641168A05F300AB4C09 /* errorpage.html in Resources */,
 				43E69642168A05F300AB4C09 /* errorpage.html in Resources */,
 				43E69643168A05F300AB4C09 /* errorpage.html in Resources */,
+				0386A5C51E1FA586000C10CE /* XMLSource.xib in Resources */,
 				43E69644168A05F300AB4C09 /* errorpage.html in Resources */,
 				43E69645168A05F300AB4C09 /* errorpage.html in Resources */,
 				43E69646168A05F300AB4C09 /* FeedCredentials.nib in Resources */,
@@ -3168,6 +3170,7 @@
 				43E6965C168A05F300AB4C09 /* FeedCredentials.strings in Resources */,
 				43E6965D168A05F300AB4C09 /* FeedCredentials.strings in Resources */,
 				43E6965E168A05F300AB4C09 /* FeedCredentials.strings in Resources */,
+				0386A5C31E1FA586000C10CE /* MainMenu.xib in Resources */,
 				43E6965F168A05F300AB4C09 /* FeedCredentials.strings in Resources */,
 				43E69660168A05F300AB4C09 /* FeedCredentials.strings in Resources */,
 				43E69661168A05F300AB4C09 /* FeedCredentials.strings in Resources */,
@@ -3333,6 +3336,7 @@
 				43E6971C168A05F300AB4C09 /* RSSFeed.strings in Resources */,
 				43E6971D168A05F300AB4C09 /* RSSFeed.strings in Resources */,
 				43E6971E168A05F300AB4C09 /* RSSFeed.strings in Resources */,
+				0386A5C21E1FA586000C10CE /* Downloads.xib in Resources */,
 				43E6971F168A05F300AB4C09 /* RSSSources.plist in Resources */,
 				43E69720168A05F300AB4C09 /* RSSSources.plist in Resources */,
 				43EE8403165EAA70000997FB /* RSSSources.plist in Resources */,
@@ -3383,12 +3387,12 @@
 				43E6974B168A05F300AB4C09 /* SearchFolder.strings in Resources */,
 				43E6974C168A05F300AB4C09 /* SearchFolder.strings in Resources */,
 				43E6974D168A05F300AB4C09 /* SearchFolder.strings in Resources */,
+				0386A5C11E1FA586000C10CE /* BrowserPane.xib in Resources */,
 				43E6974E168A05F300AB4C09 /* SearchFolder.strings in Resources */,
 				43E6974F168A05F300AB4C09 /* SearchFolder.strings in Resources */,
 				43E69750168A05F300AB4C09 /* SearchFolder.strings in Resources */,
 				43E69751168A05F300AB4C09 /* SearchFolder.strings in Resources */,
 				43E69752168A05F300AB4C09 /* SearchFolder.strings in Resources */,
-				B210865A109F8196001D4E7C /* XMLSource.nib in Resources */,
 				AA26F448060490BE00FE7994 /* alphaPixel.tiff in Resources */,
 				AA26F44D060490BE00FE7994 /* flagged_header.tiff in Resources */,
 				AA26F44E060490BE00FE7994 /* flagged.tiff in Resources */,
@@ -3456,7 +3460,6 @@
 				B28C95970C3A951E008A09E5 /* blogWithMenu.tiff in Resources */,
 				AA5AA8910C3C1D2700B2E14F /* emptyTrashButtonPressed.tiff in Resources */,
 				AA5AAB8A0C3C679E00B2E14F /* smartFolderButtonPressed.tiff in Resources */,
-				344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */,
 				AA5AB60B0C3D6D0100B2E14F /* mailLinkButtonPressed.tiff in Resources */,
 				AA18C4960C43F24900E11C0C /* browserBarBackground.tiff in Resources */,
 				AADD6E820C457C3800E11097 /* getInfoButton.tiff in Resources */,
@@ -3465,10 +3468,6 @@
 				AADD6F120C45870900E11097 /* stylesMenuButtonPressed.tiff in Resources */,
 				AA58FB9D0C47B703003D0916 /* cancelRefreshButton.tiff in Resources */,
 				AA58FB9E0C47B703003D0916 /* cancelRefreshButtonPressed.tiff in Resources */,
-				AA5814900C4971EC003D0916 /* SearchPanel.nib in Resources */,
-				AA582D8D0C4A2B78003D0916 /* ActivityViewer.nib in Resources */,
-				AA582DA10C4A2C66003D0916 /* BrowserPane.nib in Resources */,
-				AA582DB90C4A2D85003D0916 /* Downloads.nib in Resources */,
 				AA5833F30C4A6A07003D0916 /* nextButton.tiff in Resources */,
 				AA5833F40C4A6A07003D0916 /* nextButtonPressed.tiff in Resources */,
 				AA5833F50C4A6A07003D0916 /* previousButton.tiff in Resources */,
@@ -3553,6 +3552,7 @@
 				5740947216F5112B0087870F /* nextButtonSmall@2x.tiff in Resources */,
 				5740947416F5112B0087870F /* mailLinkButtonSmall@2x.tiff in Resources */,
 				5740947616F5112B0087870F /* getInfoButtonSmall@2x.tiff in Resources */,
+				0386A5C41E1FA586000C10CE /* SearchPanel.xib in Resources */,
 				5740947816F5112B0087870F /* emptyTrashButtonSmall@2x.tiff in Resources */,
 				5740947A16F5112B0087870F /* cancelRefreshButtonSmall@2x.tiff in Resources */,
 				57F7E2F116F534FE00D4702E /* vienna3plugin.icns in Resources */,
