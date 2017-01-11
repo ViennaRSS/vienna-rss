@@ -542,24 +542,6 @@
 		035B703819E0E4AE00197334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		035B703919E0E4AE00197334 /* Vienna_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vienna_Tests.m; sourceTree = "<group>"; };
 		035B704119E0E4DC00197334 /* SubscriptionModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionModelTests.m; sourceTree = "<group>"; };
-		03721E5C1A218D0C009C020C /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
-		03721E5D1A218D0D009C020C /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
-		03721E5E1A218D0F009C020C /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
-		03721E5F1A218D12009C020C /* sv */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = sv; path = sv.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
-		03721E601A218D13009C020C /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
-		03721E611A218D14009C020C /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
-		03721E621A218D15009C020C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/GeneralPreferencesView.xib"; sourceTree = "<group>"; };
-		03721E631A218D16009C020C /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
-		03721E641A218D17009C020C /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
-		03721E651A218D19009C020C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "pt-BR"; path = "pt-BR.lproj/GeneralPreferencesView.xib"; sourceTree = "<group>"; };
-		03721E661A218D1A009C020C /* ko */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ko; path = ko.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
-		03721E671A218D1B009C020C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/GeneralPreferencesView.xib"; sourceTree = "<group>"; };
-		03721E681A218D1C009C020C /* da */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = da; path = da.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
-		03721E691A218D1D009C020C /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = cs.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
-		03721E6A1A218D1D009C020C /* eu */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = eu; path = eu.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
-		03721E6B1A218D20009C020C /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = uk.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
-		03721E6C1A218D21009C020C /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt; path = pt.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
-		03721E6D1A218D22009C020C /* tr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = tr; path = tr.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
 		03721E711A218D4E009C020C /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
 		03721E721A218D4F009C020C /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
 		03721E731A218D50009C020C /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
@@ -1227,6 +1209,24 @@
 		F6352BE31E2720D4005CD307 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/GroupFolder.strings"; sourceTree = "<group>"; };
 		F6352BE41E2720DE005CD307 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/RSSFeed.strings"; sourceTree = "<group>"; };
 		F6352BE51E2720E0005CD307 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RSSFeed.strings"; sourceTree = "<group>"; };
+		F6352BE61E272249005CD307 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/GeneralPreferencesView.strings; sourceTree = "<group>"; };
+		F6352BE71E27224D005CD307 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/GeneralPreferencesView.strings; sourceTree = "<group>"; };
+		F6352BE81E272253005CD307 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/GeneralPreferencesView.strings; sourceTree = "<group>"; };
+		F6352BE91E272258005CD307 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/GeneralPreferencesView.strings; sourceTree = "<group>"; };
+		F6352BEA1E27225D005CD307 /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/GeneralPreferencesView.strings; sourceTree = "<group>"; };
+		F6352BEB1E272260005CD307 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/GeneralPreferencesView.strings; sourceTree = "<group>"; };
+		F6352BEC1E272266005CD307 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/GeneralPreferencesView.strings; sourceTree = "<group>"; };
+		F6352BED1E27226A005CD307 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/GeneralPreferencesView.strings; sourceTree = "<group>"; };
+		F6352BEE1E27226E005CD307 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/GeneralPreferencesView.strings; sourceTree = "<group>"; };
+		F6352BEF1E272288005CD307 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/GeneralPreferencesView.strings; sourceTree = "<group>"; };
+		F6352BF01E27228C005CD307 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/GeneralPreferencesView.strings; sourceTree = "<group>"; };
+		F6352BF11E272291005CD307 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/GeneralPreferencesView.strings"; sourceTree = "<group>"; };
+		F6352BF21E272295005CD307 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/GeneralPreferencesView.strings; sourceTree = "<group>"; };
+		F6352BF31E272298005CD307 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/GeneralPreferencesView.strings; sourceTree = "<group>"; };
+		F6352BF41E27229C005CD307 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/GeneralPreferencesView.strings; sourceTree = "<group>"; };
+		F6352BF51E2722A0005CD307 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/GeneralPreferencesView.strings; sourceTree = "<group>"; };
+		F6352BF61E2722A4005CD307 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/GeneralPreferencesView.strings"; sourceTree = "<group>"; };
+		F6352BF71E2722A9005CD307 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/GeneralPreferencesView.strings"; sourceTree = "<group>"; };
 		F6D573291E26B19D00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/EmptyTrashWarning.xib; sourceTree = "<group>"; };
 		F6D5732A1E26B19E00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeedCredentials.xib; sourceTree = "<group>"; };
 		F6D5732B1E26B19F00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GroupFolder.xib; sourceTree = "<group>"; };
@@ -2973,25 +2973,25 @@
 		03721E5B1A218CFC009C020C /* GeneralPreferencesView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				03721E5C1A218D0C009C020C /* ja */,
-				03721E5D1A218D0D009C020C /* fr */,
-				03721E5E1A218D0F009C020C /* de */,
-				03721E5F1A218D12009C020C /* sv */,
-				03721E601A218D13009C020C /* it */,
-				03721E611A218D14009C020C /* ru */,
-				03721E621A218D15009C020C /* zh-Hant */,
-				03721E631A218D16009C020C /* nl */,
-				03721E641A218D17009C020C /* es */,
-				03721E651A218D19009C020C /* pt-BR */,
-				03721E661A218D1A009C020C /* ko */,
-				03721E671A218D1B009C020C /* zh-Hans */,
-				03721E681A218D1C009C020C /* da */,
-				03721E691A218D1D009C020C /* cs */,
-				03721E6A1A218D1D009C020C /* eu */,
-				03721E6B1A218D20009C020C /* uk */,
-				03721E6C1A218D21009C020C /* pt */,
-				03721E6D1A218D22009C020C /* tr */,
 				F6D5732F1E26B1A000CDA909 /* Base */,
+				F6352BE61E272249005CD307 /* cs */,
+				F6352BE71E27224D005CD307 /* da */,
+				F6352BE81E272253005CD307 /* de */,
+				F6352BE91E272258005CD307 /* es */,
+				F6352BEA1E27225D005CD307 /* eu */,
+				F6352BEB1E272260005CD307 /* fr */,
+				F6352BEC1E272266005CD307 /* it */,
+				F6352BED1E27226A005CD307 /* ja */,
+				F6352BEE1E27226E005CD307 /* ko */,
+				F6352BEF1E272288005CD307 /* nl */,
+				F6352BF01E27228C005CD307 /* pt */,
+				F6352BF11E272291005CD307 /* pt-BR */,
+				F6352BF21E272295005CD307 /* ru */,
+				F6352BF31E272298005CD307 /* sv */,
+				F6352BF41E27229C005CD307 /* tr */,
+				F6352BF51E2722A0005CD307 /* uk */,
+				F6352BF61E2722A4005CD307 /* zh-Hant */,
+				F6352BF71E2722A9005CD307 /* zh-Hans */,
 			);
 			name = GeneralPreferencesView.xib;
 			path = Interfaces;
