@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Config
-lprojDir="./lproj"
+lprojDir="./Interfaces"
 lprojList=$(\ls -1 ${lprojDir} | sed -n 's:\.lproj$:&:p' | sed -e 's:\.lproj::')
 
 
