@@ -1,35 +1,39 @@
-/* NSButton (Cancel) : <title:Cancel> (oid:54) */
-"Cancel" = "취소";
 
-/* NSTextField (Create a new subscription ) : <title:Create a new subscription
-> (oid:64) */
-"Create a new subscription\n" = "새 구독 추가";
+/* Class = "NSWindow"; title = "RSS Feed"; ObjectID = "6"; */
+"6.title" = "RSS Feed";
 
-/* NSTextField (Edit subscription) : <title:Edit subscription> (oid:67) */
-"Edit subscription" = "구독 편집";
+/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
+"45.title" = "URL";
 
-/* NSTextField (Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.) : <title:Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.> (oid:65) */
-"Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source." = "추가하려는 뉴스 피드의 링크 주소를 입력하십시오. 또는 아래 소스 목록에서 원하는 형식을 선택해 특정 형식의 피드 주소를 입력하십시오.";
+/* Class = "NSWindow"; title = "RSS Feed"; ObjectID = "49"; */
+"49.title" = "RSS Feed";
 
-/* NSMenu : <title:OtherViews> (oid:44) */
-"OtherViews" = "OtherViews";
+/* Class = "NSButtonCell"; title = "취소"; ObjectID = "102"; */
+"102.title" = "취소";
 
-/* NSPanel (RSS Feed) : <title:RSS Feed> (oid:49) */
-"RSS Feed" = "RSS Feed";
+/* Class = "NSButtonCell"; title = "구독하기"; ObjectID = "103"; */
+"103.title" = "구독하기";
 
-/* NSButton (Save) : <title:Save> (oid:53) */
-"Save" = "저장";
+/* Class = "NSTextFieldCell"; title = "추가"; ObjectID = "104"; */
+"104.title" = "추가";
 
-/* NSTextField (Source: ) : <title:Source:
-> (oid:40) */
-"Source:\n" = "소스:";
+/* Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106"; */
+"106.title" = "Create a new subscription";
 
-/* NSButton (Subscribe) : <title:Subscribe> (oid:10) */
-"Subscribe" = "추가";
+/* Class = "NSTextFieldCell"; title = "새 구독 추가"; ObjectID = "107"; */
+"107.title" = "새 구독 추가";
 
-/* NSMenuItem : <title:URL> (oid:45) */
-"URL" = "URL";
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "URL:";
 
-/* NSTextField (URL:) : <title:URL:> (oid:97) */
-"URL:" = "URL:";
+/* Class = "NSButtonCell"; title = "URL:"; ObjectID = "111"; */
+"111.title" = "URL:";
 
+/* Class = "NSButtonCell"; title = "저장"; ObjectID = "112"; */
+"112.title" = "저장";
+
+/* Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114"; */
+"114.title" = "Edit subscription";
+
+/* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
+"116.title" = "Subscribe in Open Reader";

@@ -1,35 +1,39 @@
-/* NSButton (Cancel) : <title:Cancel> (oid:54) */
-"Cancel" = "Ezeztatu";
 
-/* NSTextField (Create a new subscription ) : <title:Create a new subscription
-> (oid:64) */
-"Create a new subscription\n" = "Harpidetza berri bat sortu\n";
+/* Class = "NSWindow"; title = "RSS Jarioa"; ObjectID = "6"; */
+"6.title" = "RSS Jarioa";
 
-/* NSTextField (Edit subscription) : <title:Edit subscription> (oid:67) */
-"Edit subscription" = "Harpidetza editatu";
+/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
+"45.title" = "URL";
 
-/* NSTextField (Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.) : <title:Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.> (oid:65) */
-"Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source." = "Sartu jarioaren URL helbidea behean, edota aukeratu bat iturrien listatik.";
+/* Class = "NSWindow"; title = "RSS Jarioa"; ObjectID = "49"; */
+"49.title" = "RSS Jarioa";
 
-/* NSMenu : <title:OtherViews> (oid:44) */
-"OtherViews" = "Bestelakoak";
+/* Class = "NSButtonCell"; title = "Ezeztatu"; ObjectID = "102"; */
+"102.title" = "Ezeztatu";
 
-/* NSPanel (RSS Feed) : <title:RSS Feed> (oid:49) */
-"RSS Feed" = "RSS Jarioa";
+/* Class = "NSButtonCell"; title = "Harpidetu"; ObjectID = "103"; */
+"103.title" = "Harpidetu";
 
-/* NSButton (Save) : <title:Save> (oid:53) */
-"Save" = "Gorde";
+/* Class = "NSTextFieldCell"; title = "Iturria:"; ObjectID = "104"; */
+"104.title" = "Iturria:";
 
-/* NSTextField (Source: ) : <title:Source:
-> (oid:40) */
-"Source:\n" = "Iturria:\n";
+/* Class = "NSTextFieldCell"; title = "Harpidetza berri bat sortu"; ObjectID = "106"; */
+"106.title" = "Harpidetza berri bat sortu";
 
-/* NSButton (Subscribe) : <title:Subscribe> (oid:10) */
-"Subscribe" = "Harpidetu";
+/* Class = "NSTextFieldCell"; title = "Sartu jarioaren URL helbidea behean, edota aukeratu bat iturrien listatik."; ObjectID = "107"; */
+"107.title" = "Sartu jarioaren URL helbidea behean, edota aukeratu bat iturrien listatik.";
 
-/* NSMenuItem : <title:URL> (oid:45) */
-"URL" = "URL";
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "URL:";
 
-/* NSTextField (URL:) : <title:URL:> (oid:97) */
-"URL:" = "URL:";
+/* Class = "NSButtonCell"; title = "Gorde"; ObjectID = "111"; */
+"111.title" = "Gorde";
 
+/* Class = "NSButtonCell"; title = "Ezeztatu"; ObjectID = "112"; */
+"112.title" = "Ezeztatu";
+
+/* Class = "NSTextFieldCell"; title = "Harpidetza editatu"; ObjectID = "114"; */
+"114.title" = "Harpidetza editatu";
+
+/* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
+"116.title" = "Subscribe in Open Reader";
