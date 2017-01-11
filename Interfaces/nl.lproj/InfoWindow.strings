@@ -1,50 +1,38 @@
 
-/* Class = "NSWindow"; title = "Window"; ObjectID = "5"; */
+/* Class = "NSWindow"; title = "Venster"; ObjectID = "5"; */
 "5.title" = "Venster";
 
-/* Class = "NSBox"; title = "Box"; ObjectID = "95"; */
-"95.title" = "Box";
-
-/* Class = "NSBox"; title = "Box"; ObjectID = "97"; */
-"97.title" = "Box";
-
-/* Class = "NSBox"; title = "Box"; ObjectID = "99"; */
-"99.title" = "Box";
-
-/* Class = "NSBox"; title = "Box"; ObjectID = "101"; */
-"101.title" = "Box";
-
-/* Class = "NSTextFieldCell"; title = "(Folder name)"; ObjectID = "104"; */
+/* Class = "NSTextFieldCell"; title = "(Mapnaam)"; ObjectID = "104"; */
 "104.title" = "(Mapnaam)";
 
-/* Class = "NSTextFieldCell"; title = "Last Refreshed:"; ObjectID = "105"; */
+/* Class = "NSTextFieldCell"; title = "Laatste keer vernieuwd:"; ObjectID = "105"; */
 "105.title" = "Laatste keer vernieuwd:";
 
-/* Class = "NSTextFieldCell"; title = "(Last refresh date)"; ObjectID = "106"; */
+/* Class = "NSTextFieldCell"; title = "(Datum laatste vernieuwing)"; ObjectID = "106"; */
 "106.title" = "(Datum laatste vernieuwing)";
 
-/* Class = "NSButtonCell"; title = "Validate"; ObjectID = "109"; */
+/* Class = "NSButtonCell"; title = "Valideer"; ObjectID = "109"; */
 "109.title" = "Valideer";
 
-/* Class = "NSButtonCell"; title = "Feed URL:"; ObjectID = "110"; */
+/* Class = "NSButtonCell"; title = "URL van feed:"; ObjectID = "110"; */
 "110.title" = "URL van feed:";
 
-/* Class = "NSTextFieldCell"; title = "User name:"; ObjectID = "111"; */
+/* Class = "NSTextFieldCell"; title = "Gebruikersnaam:"; ObjectID = "111"; */
 "111.title" = "Gebruikersnaam:";
 
-/* Class = "NSTextFieldCell"; title = "Password:\n"; ObjectID = "112"; */
+/* Class = "NSTextFieldCell"; title = "Wachtwoord:\n"; ObjectID = "112"; */
 "112.title" = "Wachtwoord:\n";
 
-/* Class = "NSButtonCell"; title = "Update Authentication"; ObjectID = "115"; */
+/* Class = "NSButtonCell"; title = "Werk authenticatie bij"; ObjectID = "115"; */
 "115.title" = "Werk authenticatie bij";
 
-/* Class = "NSButtonCell"; title = "Authentication:"; ObjectID = "116"; */
+/* Class = "NSButtonCell"; title = "Authenticatie:"; ObjectID = "116"; */
 "116.title" = "Authenticatie:";
 
-/* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "117"; */
+/* Class = "NSTextFieldCell"; title = "Grootte:"; ObjectID = "117"; */
 "117.title" = "Grootte:";
 
-/* Class = "NSTextFieldCell"; title = "Unread:\n"; ObjectID = "118"; */
+/* Class = "NSTextFieldCell"; title = "Ongelezen:\n"; ObjectID = "118"; */
 "118.title" = "Ongelezen:\n";
 
 /* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "119"; */
@@ -53,14 +41,14 @@
 /* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "120"; */
 "120.title" = "\n";
 
-/* Class = "NSButtonCell"; title = "Subscribed"; ObjectID = "121"; */
+/* Class = "NSButtonCell"; title = "Geabonneerd"; ObjectID = "121"; */
 "121.title" = "Geabonneerd";
 
-/* Class = "NSButtonCell"; title = "General:"; ObjectID = "122"; */
+/* Class = "NSButtonCell"; title = "Algemeen:"; ObjectID = "122"; */
 "122.title" = "Algemeen:";
 
-/* Class = "NSButtonCell"; title = "Description:"; ObjectID = "124"; */
+/* Class = "NSButtonCell"; title = "Omschrijving:"; ObjectID = "124"; */
 "124.title" = "Omschrijving:";
 
-/* Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126"; */
+/* Class = "NSButtonCell"; title = "Gebruik webpagina voor artikelen"; ObjectID = "126"; */
 "126.title" = "Gebruik webpagina voor artikelen";
