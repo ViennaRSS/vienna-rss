@@ -1,46 +1,66 @@
-/* NSPanel () : <title:> (oid:6) */
-"" = "";
 
-/* NSButton (+) : <title:+> (oid:31) */
-"+" = "+";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "32"; */
+"32.title" = "OtherViews";
 
-/* NSButton (-) : <title:-> (oid:29) */
-"-" = "-";
+/* Class = "NSMenuItem"; title = "Field names go here"; ObjectID = "33"; */
+"33.title" = "Field names go here";
 
-/* NSButton (Cancel) : <title:Cancel> (oid:10) */
-"Cancel" = "취소";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "34"; */
+"34.title" = "OtherViews";
 
-/* NSMenuItem : <title:Field names go here> (oid:33) */
-"Field names go here" = "Field names go here";
+/* Class = "NSMenuItem"; title = "Operators go here"; ObjectID = "56"; */
+"56.title" = "Operators go here";
 
-/* NSMenuItem : <title:Item1> (oid:88) */
-"Item1" = "Item1";
+/* Class = "NSMenuItem"; title = "Nothing"; ObjectID = "62"; */
+"62.title" = "Nothing";
 
-/* NSMenuItem : <title:Item2> (oid:90) */
-"Item2" = "Item2";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "64"; */
+"64.title" = "OtherViews";
 
-/* NSMenuItem : <title:Item3> (oid:89) */
-"Item3" = "Item3";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "74"; */
+"74.title" = "OtherViews";
 
-/* NSMenuItem : <title:Nothing> (oid:82) */
-"Nothing" = "Nothing";
+/* Class = "NSMenuItem"; title = "Item3"; ObjectID = "75"; */
+"75.title" = "Item3";
 
-/* NSMenuItem : <title:Operators go here> (oid:56) */
-"Operators go here" = "Operators go here";
+/* Class = "NSMenuItem"; title = "Item2"; ObjectID = "76"; */
+"76.title" = "Item2";
 
-/* NSMenu : <title:OtherViews> (oid:87) */
-"OtherViews" = "OtherViews";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "80"; */
+"80.title" = "OtherViews";
 
-/* NSButton (Save) : <title:Save> (oid:9) */
-"Save" = "저장";
+/* Class = "NSMenuItem"; title = "Nothing"; ObjectID = "82"; */
+"82.title" = "Nothing";
 
-/* NSTextField (Show all articles that match) : <title:Show all articles that match> (oid:58) */
-"Show all articles that match" = "다음의";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "87"; */
+"87.title" = "OtherViews";
 
-/* NSTextField (Smart folder name: ) : <title:Smart folder name:
-> (oid:7) */
-"Smart folder name:\n" = "스마트 폴더 이름:";
+/* Class = "NSMenuItem"; title = "Item1"; ObjectID = "88"; */
+"88.title" = "Item1";
 
-/* NSTextField (of the following conditions:) : <title:of the following conditions:> (oid:84) */
-"of the following conditions:" = "조건에 일치하는 모든 기사 항목:";
+/* Class = "NSMenuItem"; title = "Item3"; ObjectID = "89"; */
+"89.title" = "Item3";
 
+/* Class = "NSMenuItem"; title = "Item2"; ObjectID = "90"; */
+"90.title" = "Item2";
+
+/* Class = "NSTextFieldCell"; title = "스마트 폴더 이름:"; ObjectID = "94"; */
+"94.title" = "스마트 폴더 이름:";
+
+/* Class = "NSButtonCell"; title = "저장"; ObjectID = "96"; */
+"96.title" = "저장";
+
+/* Class = "NSButtonCell"; title = "취소"; ObjectID = "97"; */
+"97.title" = "취소";
+
+/* Class = "NSTextFieldCell"; title = "다음의"; ObjectID = "98"; */
+"98.title" = "다음의";
+
+/* Class = "NSTextFieldCell"; title = "조건에 일치하는 모든 기사 항목:"; ObjectID = "100"; */
+"100.title" = "조건에 일치하는 모든 기사 항목:";
+
+/* Class = "NSButtonCell"; title = "-"; ObjectID = "102"; */
+"102.title" = "-";
+
+/* Class = "NSButtonCell"; title = "+"; ObjectID = "104"; */
+"104.title" = "+";

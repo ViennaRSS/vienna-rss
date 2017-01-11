@@ -1,46 +1,66 @@
-/* NSPanel () : <title:> (oid:6) */
-"" = "";
 
-/* NSButton (+) : <title:+> (oid:31) */
-"+" = "+";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "32"; */
+"32.title" = "OtherViews";
 
-/* NSButton (-) : <title:-> (oid:29) */
-"-" = "-";
+/* Class = "NSMenuItem"; title = "Zde budou textová pole"; ObjectID = "33"; */
+"33.title" = "Zde budou textová pole";
 
-/* NSButton (Cancel) : <title:Cancel> (oid:10) */
-"Cancel" = "Zrušit";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "34"; */
+"34.title" = "OtherViews";
 
-/* NSMenuItem : <title:Field names go here> (oid:33) */
-"Field names go here" = "Zde budou textová pole";
+/* Class = "NSMenuItem"; title = "Zde budou operátory"; ObjectID = "56"; */
+"56.title" = "Zde budou operátory";
 
-/* NSMenuItem : <title:Item1> (oid:88) */
-"Item1" = "Item1";
+/* Class = "NSMenuItem"; title = "Nic"; ObjectID = "62"; */
+"62.title" = "Nic";
 
-/* NSMenuItem : <title:Item2> (oid:90) */
-"Item2" = "Item2";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "64"; */
+"64.title" = "OtherViews";
 
-/* NSMenuItem : <title:Item3> (oid:89) */
-"Item3" = "Item3";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "74"; */
+"74.title" = "OtherViews";
 
-/* NSMenuItem : <title:Nothing> (oid:82) */
-"Nothing" = "Nic";
+/* Class = "NSMenuItem"; title = "Item3"; ObjectID = "75"; */
+"75.title" = "Item3";
 
-/* NSMenuItem : <title:Operators go here> (oid:56) */
-"Operators go here" = "Zde budou operátory";
+/* Class = "NSMenuItem"; title = "Item2"; ObjectID = "76"; */
+"76.title" = "Item2";
 
-/* NSMenu : <title:OtherViews> (oid:87) */
-"OtherViews" = "OtherViews";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "80"; */
+"80.title" = "OtherViews";
 
-/* NSButton (Save) : <title:Save> (oid:9) */
-"Save" = "Uložit";
+/* Class = "NSMenuItem"; title = "Nic"; ObjectID = "82"; */
+"82.title" = "Nic";
 
-/* NSTextField (Show all articles that match) : <title:Show all articles that match> (oid:58) */
-"Show all articles that match" = "Zobrazit příspěvky odpovídající";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "87"; */
+"87.title" = "OtherViews";
 
-/* NSTextField (Smart folder name: ) : <title:Smart folder name:
-> (oid:7) */
-"Smart folder name:\n" = "Jméno dynamické složky:";
+/* Class = "NSMenuItem"; title = "Item1"; ObjectID = "88"; */
+"88.title" = "Item1";
 
-/* NSTextField (of the following conditions:) : <title:of the following conditions:> (oid:84) */
-"of the following conditions:" = "následujícím shodám:";
+/* Class = "NSMenuItem"; title = "Item3"; ObjectID = "89"; */
+"89.title" = "Item3";
 
+/* Class = "NSMenuItem"; title = "Item2"; ObjectID = "90"; */
+"90.title" = "Item2";
+
+/* Class = "NSTextFieldCell"; title = "Jméno dynamické složky:"; ObjectID = "94"; */
+"94.title" = "Jméno dynamické složky:";
+
+/* Class = "NSButtonCell"; title = "Uložit"; ObjectID = "96"; */
+"96.title" = "Uložit";
+
+/* Class = "NSButtonCell"; title = "Zrušit"; ObjectID = "97"; */
+"97.title" = "Zrušit";
+
+/* Class = "NSTextFieldCell"; title = "Zobrazit příspěvky odpovídající"; ObjectID = "98"; */
+"98.title" = "Zobrazit příspěvky odpovídající";
+
+/* Class = "NSTextFieldCell"; title = "následujícím shodám:"; ObjectID = "100"; */
+"100.title" = "následujícím shodám:";
+
+/* Class = "NSButtonCell"; title = "-"; ObjectID = "102"; */
+"102.title" = "-";
+
+/* Class = "NSButtonCell"; title = "+"; ObjectID = "104"; */
+"104.title" = "+";
