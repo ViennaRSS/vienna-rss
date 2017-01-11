@@ -1,0 +1,15 @@
+
+/* Class = "NSWindow"; title = "面板"; ObjectID = "5"; */
+"5.title" = "面板";
+
+/* Class = "NSTextFieldCell"; title = "新增群組檔案夾"; ObjectID = "32"; */
+"32.title" = "新增群組檔案夾";
+
+/* Class = "NSButtonCell"; title = "儲存"; ObjectID = "34"; */
+"34.title" = "儲存";
+
+/* Class = "NSButtonCell"; title = "取消"; ObjectID = "35"; */
+"35.title" = "取消";
+
+/* Class = "NSTextFieldCell"; title = "輸入群組檔案夾名稱：\n"; ObjectID = "36"; */
+"36.title" = "輸入群組檔案夾名稱：";

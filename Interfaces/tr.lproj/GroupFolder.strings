@@ -1,16 +1,15 @@
-/* NSButton (Cancel) : <title:Cancel> (oid:22) */
-"Cancel" = "İptal";
 
-/* NSTextField (Enter the group folder name: ) : <title:Enter the group folder name:
-> (oid:23) */
-"Enter the group folder name:\n" = "Grup Klasörü için bir ad girin:\n";
+/* Class = "NSWindow"; title = "Panel"; ObjectID = "5"; */
+"5.title" = "Panel";
 
-/* NSTextField (New Group Folder) : <title:New Group Folder> (oid:19) */
-"New Group Folder" = "Yeni Grup Klasörü";
+/* Class = "NSTextFieldCell"; title = "Yeni Grup Klasörü"; ObjectID = "32"; */
+"32.title" = "Yeni Grup Klasörü";
 
-/* NSPanel (Panel) : <title:Panel> (oid:5) */
-"Panel" = "Panel";
+/* Class = "NSButtonCell"; title = "Kaydet"; ObjectID = "34"; */
+"34.title" = "Kaydet";
 
-/* NSButton (Save) : <title:Save> (oid:21) */
-"Save" = "Kaydet";
+/* Class = "NSButtonCell"; title = "İptal"; ObjectID = "35"; */
+"35.title" = "İptal";
 
+/* Class = "NSTextFieldCell"; title = "Grup Klasörü için bir ad girin:\n"; ObjectID = "36"; */
+"36.title" = "Grup Klasörü için bir ad girin:";
