@@ -161,17 +161,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
  */
 -(void)awakeFromNib
 {
-
-#if ( MAC_OS_X_VERSION_MAX_ALLOWED < 1070 && !defined(NSWindowCollectionBehaviorFullScreenPrimary) )
-    enum {
-        NSWindowCollectionBehaviorFullScreenPrimary = (1 << 7)
-    };
-#endif
-	
-    //Enable FullScreen Support if we are on Lion 10.7.x
-    mainWindow.collectionBehavior = NSWindowCollectionBehaviorFullScreenPrimary;
-  	
-
 	Preferences * prefs = [Preferences standardPreferences];
 
 	// Restore the most recent layout
@@ -181,7 +170,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[self localiseMenus:NSApp.mainMenu.itemArray];
 	
 	// Set the delegates and title
-	mainWindow.delegate = self;
 	mainWindow.title = self.appName;
 	[NSApplication sharedApplication].delegate = self;
 	mainWindow.minSize = NSMakeSize(MA_Default_Main_Window_Min_Width, MA_Default_Main_Window_Min_Height);
