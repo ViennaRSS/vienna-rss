@@ -7,7 +7,7 @@
 	<key>Type</key>
 	<string>Link</string>
 	<key>URL</key>
-	<string>http://delicious.com/save?jump=close&amp;url=$ArticleLink$&amp;title=$ArticleTitle$&amp;v=5&amp;noui&amp;jump=close&amp;src=vienna</string>
+	<string>http://del.icio.us/save?url=$ArticleLink$&amp;title=$ArticleTitle$&amp;noui&amp;jump=close&amp;src=vienna</string>
 	<key>Default</key>
 	<false/>
 	<key>FriendlyName</key>
