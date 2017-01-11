@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
@@ -28,50 +28,205 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="5" userLabel="Info Window">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="100" y="100" width="270" height="488"/>
+            <rect key="contentRect" x="100" y="100" width="270" height="531"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <value key="minSize" type="size" width="270" height="461"/>
             <view key="contentView" id="6">
-                <rect key="frame" x="0.0" y="0.0" width="270" height="488"/>
+                <rect key="frame" x="0.0" y="0.0" width="270" height="531"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <userGuides>
+                    <userLayoutGuide location="244" affinity="minY"/>
+                    <userLayoutGuide location="244" affinity="minY"/>
+                </userGuides>
                 <subviews>
-                    <textField verticalHuggingPriority="750" id="32">
-                        <rect key="frame" x="43" y="461" width="220" height="17"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" lineBreakMode="truncatingMiddle" selectable="YES" sendsActionOnEndEditing="YES" title="(Folder name)" id="104">
+                    <imageView translatesAutoresizingMaskIntoConstraints="NO" id="35">
+                        <rect key="frame" x="16" y="507" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="29m-E2-n4U"/>
+                            <constraint firstAttribute="height" constant="16" id="nmQ-gB-Bhk"/>
+                        </constraints>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="107"/>
+                    </imageView>
+                    <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="32">
+                        <rect key="frame" x="46" y="506" width="210" height="17"/>
+                        <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" title="(Folder name)" id="104">
                             <font key="font" metaFont="systemBold"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="33">
-                        <rect key="frame" x="43" y="444" width="98" height="14"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="33">
+                        <rect key="frame" x="46" y="489" width="87" height="14"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Last Refreshed:" id="105">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="34">
-                        <rect key="frame" x="130" y="444" width="133" height="14"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="(Last refresh date)" id="106">
+                    <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="34">
+                        <rect key="frame" x="137" y="489" width="119" height="14"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="(Last refresh date)" id="106">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <imageView id="35">
-                        <rect key="frame" x="15" y="457" width="16" height="16"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="107"/>
-                    </imageView>
-                    <customView id="36" customClass="SNDisclosableView">
-                        <rect key="frame" x="5" y="124" width="250" height="81"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="95">
+                        <rect key="frame" x="0.0" y="479" width="270" height="5"/>
+                    </box>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="79" customClass="SNDisclosureButton">
+                        <rect key="frame" x="4" y="462" width="250" height="17"/>
+                        <buttonCell key="cell" type="square" title="Description:" bezelStyle="shadowlessSquare" imagePosition="left" alignment="left" inset="2" id="124">
+                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="toggleDisclosure:" target="78" id="80"/>
+                        </connections>
+                    </button>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="78" customClass="SNDisclosableView">
+                        <rect key="frame" x="4" y="396" width="250" height="58"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" id="62">
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="81">
+                                <rect key="frame" x="11" y="0.0" width="242" height="58"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="123">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" priority="750" constant="58" id="sAe-QQ-mvq"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="isShown">
+                                <bool key="value" value="YES"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="hiddenHeight" localized="YES">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </customView>
+                    <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="97">
+                        <rect key="frame" x="0.0" y="390" width="270" height="5"/>
+                    </box>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="65" customClass="SNDisclosureButton">
+                        <rect key="frame" x="4" y="373" width="250" height="17"/>
+                        <buttonCell key="cell" type="square" title="General:" bezelStyle="shadowlessSquare" imagePosition="left" alignment="left" inset="2" id="122">
+                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="toggleDisclosure:" target="64" id="66"/>
+                        </connections>
+                    </button>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="64" customClass="SNDisclosableView">
+                        <rect key="frame" x="4" y="292" width="250" height="73"/>
+                        <subviews>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="125">
+                                <rect key="frame" x="46" y="2" width="206" height="18"/>
+                                <buttonCell key="cell" type="check" title="Load Full HTML Articles" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="126">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="loadFullHTMLChanged:" target="-2" id="130"/>
+                                    <outlet property="nextKeyView" destination="37" id="131"/>
+                                </connections>
+                            </button>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="76">
+                                <rect key="frame" x="46" y="17" width="206" height="18"/>
+                                <buttonCell key="cell" type="check" title="Subscribed" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="121">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="subscribedChanged:" target="-2" id="89"/>
+                                    <outlet property="nextKeyView" destination="125" id="132"/>
+                                </connections>
+                            </button>
+                            <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70">
+                                <rect key="frame" x="47" y="41" width="205" height="14"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" usesSingleLineMode="YES" id="120">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="69">
+                                <rect key="frame" x="51" y="59" width="201" height="14"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="119">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="67">
+                                <rect key="frame" x="-2" y="59" width="46" height="14"/>
+                                <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="right" title="Size:" id="117">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="68">
+                                <rect key="frame" x="-2" y="41" width="46" height="14"/>
+                                <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="right" title="Unread:" id="118">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="76" firstAttribute="top" secondItem="70" secondAttribute="bottom" constant="9" id="3QN-QU-AlP"/>
+                            <constraint firstAttribute="trailing" secondItem="76" secondAttribute="trailing" id="4k8-f3-bHV"/>
+                            <constraint firstAttribute="trailing" secondItem="69" secondAttribute="trailing" id="4u9-dK-3be"/>
+                            <constraint firstItem="67" firstAttribute="baseline" secondItem="69" secondAttribute="baseline" id="5Cx-0D-RUs"/>
+                            <constraint firstItem="67" firstAttribute="leading" secondItem="64" secondAttribute="leading" id="5Jf-jP-3x3"/>
+                            <constraint firstAttribute="trailing" secondItem="125" secondAttribute="trailing" id="B9M-q6-oVh"/>
+                            <constraint firstItem="68" firstAttribute="leading" secondItem="64" secondAttribute="leading" id="H3l-fi-u4S"/>
+                            <constraint firstItem="69" firstAttribute="leading" secondItem="67" secondAttribute="trailing" constant="11" id="K8x-lw-RTw"/>
+                            <constraint firstAttribute="trailing" secondItem="70" secondAttribute="trailing" id="Khx-C3-aZa"/>
+                            <constraint firstItem="68" firstAttribute="baseline" secondItem="70" secondAttribute="baseline" id="Kl3-Rq-2sp"/>
+                            <constraint firstItem="67" firstAttribute="top" secondItem="64" secondAttribute="top" id="Or4-US-sfm"/>
+                            <constraint firstAttribute="bottom" secondItem="125" secondAttribute="bottom" constant="5" id="Sba-nQ-0fI"/>
+                            <constraint firstItem="125" firstAttribute="top" secondItem="76" secondAttribute="bottom" constant="3" id="Tz7-zF-7aE"/>
+                            <constraint firstItem="70" firstAttribute="leading" secondItem="68" secondAttribute="trailing" constant="7" id="ZhC-jZ-8CR"/>
+                            <constraint firstItem="76" firstAttribute="leading" secondItem="70" secondAttribute="leading" id="end-yx-bsE"/>
+                            <constraint firstItem="67" firstAttribute="width" secondItem="68" secondAttribute="width" id="pVz-97-zbz"/>
+                            <constraint firstItem="69" firstAttribute="top" secondItem="64" secondAttribute="top" id="riR-7U-ObD"/>
+                            <constraint firstItem="125" firstAttribute="leading" secondItem="70" secondAttribute="leading" id="vtF-gr-LJb"/>
+                            <constraint firstItem="70" firstAttribute="top" secondItem="69" secondAttribute="bottom" constant="4" id="xqb-VV-MAA"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="isShown">
+                                <bool key="value" value="YES"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="hiddenHeight" localized="YES">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </customView>
+                    <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="99">
+                        <rect key="frame" x="0.0" y="286" width="270" height="5"/>
+                    </box>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="38" customClass="SNDisclosureButton">
+                        <rect key="frame" x="4" y="266" width="250" height="17"/>
+                        <buttonCell key="cell" type="square" title="Feed URL:" bezelStyle="shadowlessSquare" imagePosition="left" alignment="left" inset="2" id="110">
+                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="toggleDisclosure:" target="36" id="39"/>
+                        </connections>
+                    </button>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="36" customClass="SNDisclosableView">
+                        <rect key="frame" x="4" y="113" width="250" height="145"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="62">
                                 <rect key="frame" x="140" y="-6" width="110" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                 <buttonCell key="cell" type="push" title="Validate" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="109">
@@ -83,8 +238,8 @@
                                     <outlet property="nextKeyView" destination="53" id="87"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" id="37">
-                                <rect key="frame" x="10" y="23" width="240" height="58"/>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="37">
+                                <rect key="frame" x="10" y="23" width="240" height="122"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <textFieldCell key="cell" controlSize="small" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="108">
                                     <font key="font" metaFont="smallSystem"/>
@@ -106,24 +261,24 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </customView>
-                    <button id="38" customClass="SNDisclosureButton">
-                        <rect key="frame" x="5" y="213" width="250" height="18"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="square" title="Feed URL:" bezelStyle="shadowlessSquare" imagePosition="left" alignment="left" inset="2" id="110">
+                    <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="101">
+                        <rect key="frame" x="0.0" y="103" width="270" height="5"/>
+                    </box>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="45" customClass="SNDisclosureButton">
+                        <rect key="frame" x="4" y="83" width="250" height="17"/>
+                        <buttonCell key="cell" type="square" title="Authentication:" bezelStyle="shadowlessSquare" imagePosition="left" alignment="left" inset="2" id="116">
                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="toggleDisclosure:" target="36" id="39"/>
+                            <action selector="toggleDisclosure:" target="44" id="46"/>
                         </connections>
                     </button>
-                    <customView id="44" customClass="SNDisclosableView">
-                        <rect key="frame" x="15" y="7" width="235" height="78"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="44" customClass="SNDisclosableView">
+                        <rect key="frame" x="4" y="7" width="250" height="68"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" id="91">
-                                <rect key="frame" x="86" y="4" width="154" height="28"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="91">
+                                <rect key="frame" x="111" y="-6" width="144" height="28"/>
                                 <buttonCell key="cell" type="push" title="Update Authentication" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="115">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
@@ -133,10 +288,9 @@
                                     <outlet property="nextKeyView" destination="76" id="93"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" id="54" customClass="NSSecureTextField">
-                                <rect key="frame" x="72" y="36" width="163" height="19"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="114">
+                            <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="54" customClass="NSSecureTextField">
+                                <rect key="frame" x="60" y="26" width="190" height="19"/>
+                                <textFieldCell key="cell" controlSize="small" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="114">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -145,10 +299,9 @@
                                     <outlet property="nextKeyView" destination="91" id="92"/>
                                 </connections>
                             </textField>
-                            <textField verticalHuggingPriority="750" id="53">
-                                <rect key="frame" x="72" y="59" width="163" height="19"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="113">
+                            <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="53">
+                                <rect key="frame" x="60" y="49" width="190" height="19"/>
+                                <textFieldCell key="cell" controlSize="small" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="113">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -157,20 +310,16 @@
                                     <outlet property="nextKeyView" destination="54" id="58"/>
                                 </connections>
                             </textField>
-                            <textField verticalHuggingPriority="750" id="52">
-                                <rect key="frame" x="-3" y="39" width="72" height="13"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" id="112">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="52">
+                                <rect key="frame" x="-2" y="29" width="59" height="13"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Password:" id="112">
                                     <font key="font" metaFont="label"/>
-                                    <string key="title">Password:
-</string>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" id="51">
-                                <rect key="frame" x="-3" y="61" width="72" height="13"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="51">
+                                <rect key="frame" x="-2" y="52" width="59" height="13"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="User name:" id="111">
                                     <font key="font" metaFont="label"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -178,6 +327,23 @@
                                 </textFieldCell>
                             </textField>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="51" firstAttribute="baseline" secondItem="53" secondAttribute="baseline" id="8fx-PJ-S09"/>
+                            <constraint firstItem="91" firstAttribute="top" secondItem="54" secondAttribute="bottom" constant="8" id="9f0-Mf-K4Z"/>
+                            <constraint firstItem="53" firstAttribute="leading" secondItem="51" secondAttribute="trailing" constant="5" id="Cwq-c8-fOd"/>
+                            <constraint firstAttribute="trailing" secondItem="54" secondAttribute="trailing" id="FFT-bq-xwV"/>
+                            <constraint firstAttribute="trailing" secondItem="53" secondAttribute="trailing" id="Q6W-fq-wrY"/>
+                            <constraint firstAttribute="bottom" secondItem="91" secondAttribute="bottom" id="SgL-11-OQj"/>
+                            <constraint firstItem="53" firstAttribute="top" secondItem="44" secondAttribute="top" id="Sue-Oe-pDb"/>
+                            <constraint firstItem="52" firstAttribute="leading" secondItem="44" secondAttribute="leading" id="VdL-fB-ayk"/>
+                            <constraint firstItem="54" firstAttribute="leading" secondItem="52" secondAttribute="trailing" constant="5" id="WJa-6L-Wzo"/>
+                            <constraint firstItem="52" firstAttribute="width" secondItem="51" secondAttribute="width" id="YEh-C7-kjc"/>
+                            <constraint firstItem="54" firstAttribute="top" secondItem="53" secondAttribute="bottom" constant="4" id="ftk-lY-Wd8"/>
+                            <constraint firstAttribute="trailing" secondItem="91" secondAttribute="trailing" id="hVd-8i-dAv"/>
+                            <constraint firstItem="91" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="44" secondAttribute="leading" constant="8" id="sh2-7p-NNh"/>
+                            <constraint firstItem="52" firstAttribute="baseline" secondItem="54" secondAttribute="baseline" id="vkY-LN-4nd"/>
+                            <constraint firstItem="51" firstAttribute="leading" secondItem="44" secondAttribute="leading" id="wxd-IT-74b"/>
+                        </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="isShown">
                                 <bool key="value" value="YES"/>
@@ -187,165 +353,62 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </customView>
-                    <button id="45" customClass="SNDisclosureButton">
-                        <rect key="frame" x="5" y="93" width="114" height="18"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="square" title="Authentication:" bezelStyle="shadowlessSquare" imagePosition="left" alignment="left" inset="2" id="116">
-                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="toggleDisclosure:" target="44" id="46"/>
-                        </connections>
-                    </button>
-                    <customView id="64" customClass="SNDisclosableView">
-                        <rect key="frame" x="15" y="240" width="240" height="80"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <subviews>
-                            <button id="125">
-                                <rect key="frame" x="66" y="2" width="167" height="18"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <buttonCell key="cell" type="check" title="Load Full HTML Articles" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="126">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="smallSystem"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="loadFullHTMLChanged:" target="-2" id="130"/>
-                                    <outlet property="nextKeyView" destination="37" id="131"/>
-                                </connections>
-                            </button>
-                            <button id="76">
-                                <rect key="frame" x="66" y="24" width="167" height="18"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <buttonCell key="cell" type="check" title="Subscribed" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="121">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="smallSystem"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="subscribedChanged:" target="-2" id="89"/>
-                                    <outlet property="nextKeyView" destination="125" id="132"/>
-                                </connections>
-                            </button>
-                            <textField verticalHuggingPriority="750" id="70">
-                                <rect key="frame" x="66" y="48" width="102" height="14"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="120">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <string key="title" base64-UTF8="YES">
-Cg
-</string>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" id="69">
-                                <rect key="frame" x="66" y="66" width="102" height="14"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="119">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <string key="title" base64-UTF8="YES">
-Cg
-</string>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" id="68">
-                                <rect key="frame" x="-3" y="48" width="66" height="14"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="right" id="118">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <string key="title">Unread:
-</string>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" id="67">
-                                <rect key="frame" x="-3" y="66" width="62" height="14"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="right" title="Size:" id="117">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="isShown">
-                                <bool key="value" value="YES"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="number" keyPath="hiddenHeight" localized="YES">
-                                <real key="value" value="0.0"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </customView>
-                    <button id="65" customClass="SNDisclosureButton">
-                        <rect key="frame" x="5" y="328" width="250" height="18"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="square" title="General:" bezelStyle="shadowlessSquare" imagePosition="left" alignment="left" inset="2" id="122">
-                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="toggleDisclosure:" target="64" id="66"/>
-                        </connections>
-                    </button>
-                    <customView id="78" customClass="SNDisclosableView">
-                        <rect key="frame" x="5" y="352" width="250" height="58"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <subviews>
-                            <textField verticalHuggingPriority="750" id="81">
-                                <rect key="frame" x="11" y="0.0" width="242" height="58"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="123">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="isShown">
-                                <bool key="value" value="YES"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="number" keyPath="hiddenHeight" localized="YES">
-                                <real key="value" value="0.0"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </customView>
-                    <button id="79" customClass="SNDisclosureButton">
-                        <rect key="frame" x="5" y="418" width="250" height="18"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="square" title="Description:" bezelStyle="shadowlessSquare" imagePosition="left" alignment="left" inset="2" id="124">
-                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="toggleDisclosure:" target="78" id="80"/>
-                        </connections>
-                    </button>
-                    <box verticalHuggingPriority="750" boxType="separator" id="95">
-                        <rect key="frame" x="0.0" y="436" width="270" height="5"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                    </box>
-                    <box verticalHuggingPriority="750" boxType="separator" id="97">
-                        <rect key="frame" x="0.0" y="346" width="270" height="5"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                    </box>
-                    <box verticalHuggingPriority="750" boxType="separator" id="99">
-                        <rect key="frame" x="0.0" y="234" width="270" height="5"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                    </box>
-                    <box verticalHuggingPriority="750" boxType="separator" id="101">
-                        <rect key="frame" x="0.0" y="114" width="270" height="5"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                    </box>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="79" firstAttribute="top" secondItem="95" secondAttribute="bottom" constant="2" id="4Gg-nv-BOX"/>
+                    <constraint firstItem="45" firstAttribute="leading" secondItem="36" secondAttribute="leading" id="8Ud-8k-fJD"/>
+                    <constraint firstItem="95" firstAttribute="top" secondItem="34" secondAttribute="bottom" constant="7" id="8gV-vd-3Nj"/>
+                    <constraint firstAttribute="trailing" secondItem="99" secondAttribute="trailing" id="8iV-tT-TAj"/>
+                    <constraint firstItem="64" firstAttribute="trailing" secondItem="65" secondAttribute="trailing" id="9ha-NC-bRV"/>
+                    <constraint firstItem="33" firstAttribute="top" secondItem="32" secondAttribute="bottom" constant="3" id="BiS-Zx-VQO"/>
+                    <constraint firstItem="44" firstAttribute="top" secondItem="45" secondAttribute="bottom" constant="8" id="Cqy-gL-EDE"/>
+                    <constraint firstItem="45" firstAttribute="trailing" secondItem="36" secondAttribute="trailing" id="F4y-t8-FA9"/>
+                    <constraint firstItem="65" firstAttribute="leading" secondItem="78" secondAttribute="leading" id="H8y-sS-NRT"/>
+                    <constraint firstItem="64" firstAttribute="top" secondItem="65" secondAttribute="bottom" constant="8" id="HNx-DB-HIH"/>
+                    <constraint firstItem="97" firstAttribute="top" secondItem="78" secondAttribute="bottom" constant="3" id="HcY-O6-bOm"/>
+                    <constraint firstItem="101" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="Iik-N1-TKk"/>
+                    <constraint firstItem="99" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="It8-kp-ZyT"/>
+                    <constraint firstItem="95" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="JfI-q7-WKQ"/>
+                    <constraint firstItem="65" firstAttribute="top" secondItem="97" secondAttribute="bottom" constant="2" id="KrD-rr-ntc"/>
+                    <constraint firstItem="38" firstAttribute="trailing" secondItem="36" secondAttribute="trailing" id="NeG-Av-cDy"/>
+                    <constraint firstItem="38" firstAttribute="leading" secondItem="64" secondAttribute="leading" id="O6d-lS-XOU"/>
+                    <constraint firstAttribute="trailing" secondItem="79" secondAttribute="trailing" constant="16" id="PDk-Rh-MEN"/>
+                    <constraint firstItem="34" firstAttribute="leading" secondItem="33" secondAttribute="trailing" constant="8" symbolic="YES" id="RqL-rX-wDM"/>
+                    <constraint firstItem="79" firstAttribute="top" secondItem="95" secondAttribute="bottom" constant="2" id="TNo-jM-CJ2"/>
+                    <constraint firstAttribute="trailing" secondItem="95" secondAttribute="trailing" id="Tod-16-UCP"/>
+                    <constraint firstItem="44" firstAttribute="trailing" secondItem="45" secondAttribute="trailing" id="Toe-8N-Kmt"/>
+                    <constraint firstAttribute="trailing" secondItem="101" secondAttribute="trailing" id="U6l-KH-YaV"/>
+                    <constraint firstItem="97" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="VJB-pe-1aJ"/>
+                    <constraint firstItem="33" firstAttribute="leading" secondItem="32" secondAttribute="leading" id="WqS-kt-s40"/>
+                    <constraint firstItem="33" firstAttribute="baseline" secondItem="34" secondAttribute="baseline" id="YUH-hq-mGA"/>
+                    <constraint firstAttribute="trailing" secondItem="34" secondAttribute="trailing" constant="16" id="Yxb-F8-6es"/>
+                    <constraint firstItem="38" firstAttribute="trailing" secondItem="64" secondAttribute="trailing" id="ZDF-lE-TY2"/>
+                    <constraint firstItem="36" firstAttribute="top" secondItem="38" secondAttribute="bottom" constant="8" id="aAc-UA-FzS"/>
+                    <constraint firstItem="32" firstAttribute="top" secondItem="6" secondAttribute="top" constant="8" id="cel-f0-d5E"/>
+                    <constraint firstItem="78" firstAttribute="top" secondItem="79" secondAttribute="bottom" constant="8" id="dGx-PT-CNd"/>
+                    <constraint firstItem="64" firstAttribute="leading" secondItem="65" secondAttribute="leading" id="dew-TN-1VV"/>
+                    <constraint firstItem="45" firstAttribute="top" secondItem="101" secondAttribute="bottom" constant="5" id="dof-js-hrC"/>
+                    <constraint firstItem="38" firstAttribute="top" secondItem="99" secondAttribute="bottom" constant="5" id="ebP-CY-drh"/>
+                    <constraint firstItem="101" firstAttribute="top" secondItem="36" secondAttribute="bottom" constant="7" id="h1a-fS-Jow"/>
+                    <constraint firstItem="78" firstAttribute="trailing" secondItem="79" secondAttribute="trailing" id="hlk-nC-jq3"/>
+                    <constraint firstItem="65" firstAttribute="trailing" secondItem="78" secondAttribute="trailing" id="krb-KN-8yb"/>
+                    <constraint firstItem="78" firstAttribute="leading" secondItem="79" secondAttribute="leading" id="lZf-Px-WLT"/>
+                    <constraint firstItem="32" firstAttribute="leading" secondItem="35" secondAttribute="trailing" constant="16" id="mO4-uB-Uq7"/>
+                    <constraint firstItem="35" firstAttribute="top" secondItem="32" secondAttribute="top" id="oKL-Lp-RAf"/>
+                    <constraint firstItem="35" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="16" id="qKK-gr-7Vj"/>
+                    <constraint firstItem="38" firstAttribute="leading" secondItem="36" secondAttribute="leading" id="sX9-go-nVf"/>
+                    <constraint firstAttribute="trailing" secondItem="97" secondAttribute="trailing" id="tgP-mX-J6Z"/>
+                    <constraint firstItem="44" firstAttribute="leading" secondItem="45" secondAttribute="leading" id="uGp-dI-sCW"/>
+                    <constraint firstAttribute="bottom" secondItem="44" secondAttribute="bottom" constant="7" id="uHm-sG-G6T"/>
+                    <constraint firstItem="99" firstAttribute="top" secondItem="64" secondAttribute="bottom" constant="3" id="wUW-Bb-IeZ"/>
+                    <constraint firstItem="79" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="4" id="y5K-T5-N0H"/>
+                    <constraint firstAttribute="trailing" secondItem="32" secondAttribute="trailing" constant="16" id="zne-Jg-kUP"/>
+                </constraints>
             </view>
             <connections>
                 <outlet property="initialFirstResponder" destination="79" id="83"/>
             </connections>
+            <point key="canvasLocation" x="412" y="183.5"/>
         </window>
         <view id="96">
             <rect key="frame" x="0.0" y="0.0" width="125" height="1"/>
