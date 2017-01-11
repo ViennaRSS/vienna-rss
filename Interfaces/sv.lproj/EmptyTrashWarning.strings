@@ -1,13 +1,15 @@
-/* NSButton (Do not show this warning again) : <title:Do not show this warning again> (oid:10) */
-"Do not show this warning again" = "Visa inte denna varning igen";
 
-/* NSButton (Don't Empty Trash) : <title:Don't Empty Trash> (oid:8) */
-"Don't Empty Trash" = "Töm inte papperskorgen";
+/* Class = "NSWindow"; title = "Töm papperskorgen"; ObjectID = "5"; */
+"5.title" = "Töm papperskorgen";
 
-/* NSButton (Empty Trash) : <title:Empty Trash> (oid:7) */
-"Empty Trash" = "Töm papperskorgen";
+/* Class = "NSButtonCell"; title = "Töm papperskorgen"; ObjectID = "17"; */
+"17.title" = "Töm papperskorgen";
 
-/* NSTextField (There are deleted articles in the trash. Would you like to empty the trash before quitting?) : <title:There are deleted articles in the trash.
-Would you like to empty the trash before quitting?> (oid:9) */
-"There are deleted articles in the trash.\nWould you like to empty the trash before quitting?" = "Det finns raderade artiklar i papperskorgen.\nVill du tömma papperskorgen innan du avslutar Vienna?";
+/* Class = "NSButtonCell"; title = "Töm inte papperskorgen"; ObjectID = "18"; */
+"18.title" = "Töm inte papperskorgen";
 
+/* Class = "NSTextFieldCell"; title = "Det finns raderade artiklar i papperskorgen.\nVill du tömma papperskorgen innan du avslutar Vienna?"; ObjectID = "19"; */
+"19.title" = "Det finns raderade artiklar i papperskorgen. Vill du tömma papperskorgen innan du avslutar Vienna?";
+
+/* Class = "NSButtonCell"; title = "Visa inte denna varning igen"; ObjectID = "20"; */
+"20.title" = "Visa inte denna varning igen";

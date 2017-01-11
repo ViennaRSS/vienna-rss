@@ -1,13 +1,15 @@
-/* NSButton (Do not show this warning again) : <title:Do not show this warning again> (oid:10) */
-"Do not show this warning again" = "Bu uyarıyı bir daha gösterme";
 
-/* NSButton (Don't Empty Trash) : <title:Don't Empty Trash> (oid:8) */
-"Don't Empty Trash" = "Çöp kutusunu boşaltma";
+/* Class = "NSWindow"; title = "Çöp kutusunu boşalt"; ObjectID = "5"; */
+"5.title" = "Çöp kutusunu boşalt";
 
-/* NSButton (Empty Trash) : <title:Empty Trash> (oid:7) */
-"Empty Trash" = "Çöp kutusunu boşalt";
+/* Class = "NSButtonCell"; title = "Çöp kutusunu boşalt"; ObjectID = "17"; */
+"17.title" = "Çöp kutusunu boşalt";
 
-/* NSTextField (There are deleted articles in the trash. Would you like to empty the trash before quitting?) : <title:There are deleted articles in the trash.
-Would you like to empty the trash before quitting?> (oid:9) */
-"There are deleted articles in the trash.\nWould you like to empty the trash before quitting?" = "Çöp kutusunda silinmiş makaleler bulunuyor. Çıkmadan önce onları silmek ister misiniz?";
+/* Class = "NSButtonCell"; title = "Çöp kutusunu boşaltma"; ObjectID = "18"; */
+"18.title" = "Çöp kutusunu boşaltma";
 
+/* Class = "NSTextFieldCell"; title = "Çöp kutusunda silinmiş makaleler bulunuyor.\nÇıkmadan önce onları silmek ister misiniz?"; ObjectID = "19"; */
+"19.title" = "Çöp kutusunda silinmiş makaleler bulunuyor. Çıkmadan önce onları silmek ister misiniz?";
+
+/* Class = "NSButtonCell"; title = "Bu uyarıyı bir daha gösterme"; ObjectID = "20"; */
+"20.title" = "Bu uyarıyı bir daha gösterme";
