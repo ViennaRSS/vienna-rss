@@ -1,16 +1,15 @@
-/* NSButton (Cancel) : <title:Cancel> (oid:22) */
-"Cancel" = "Ezeztatu";
 
-/* NSTextField (Enter the group folder name: ) : <title:Enter the group folder name:
-> (oid:23) */
-"Enter the group folder name:\n" = "Sartu taldearen direktorioaren izena:\n";
+/* Class = "NSWindow"; title = "Panela"; ObjectID = "5"; */
+"5.title" = "Panela";
 
-/* NSTextField (New Group Folder) : <title:New Group Folder> (oid:19) */
-"New Group Folder" = "Talde Berrirako Direktorioa";
+/* Class = "NSTextFieldCell"; title = "Talde Berrirako Direktorioa"; ObjectID = "32"; */
+"32.title" = "Talde Berrirako Direktorioa";
 
-/* NSPanel (Panel) : <title:Panel> (oid:5) */
-"Panel" = "Panela";
+/* Class = "NSButtonCell"; title = "Gorde"; ObjectID = "34"; */
+"34.title" = "Gorde";
 
-/* NSButton (Save) : <title:Save> (oid:21) */
-"Save" = "Gorde";
+/* Class = "NSButtonCell"; title = "Ezeztatu"; ObjectID = "35"; */
+"35.title" = "Ezeztatu";
 
+/* Class = "NSTextFieldCell"; title = "Sartu taldearen direktorioaren izena:\n"; ObjectID = "36"; */
+"36.title" = "Sartu taldearen direktorioaren izena:";

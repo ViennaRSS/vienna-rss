@@ -1,16 +1,15 @@
-/* NSButton (Cancel) : <title:Cancel> (oid:22) */
-"Cancel" = "Zrušit";
 
-/* NSTextField (Enter the group folder name: ) : <title:Enter the group folder name:
-> (oid:23) */
-"Enter the group folder name:\n" = "Zadejte jméno skupinové složky:";
+/* Class = "NSWindow"; title = "Panel"; ObjectID = "5"; */
+"5.title" = "Panel";
 
-/* NSTextField (New Group Folder) : <title:New Group Folder> (oid:19) */
-"New Group Folder" = "Nová skupinová složka";
+/* Class = "NSTextFieldCell"; title = "Nová skupinová složka"; ObjectID = "32"; */
+"32.title" = "Nová skupinová složka";
 
-/* NSPanel (Panel) : <title:Panel> (oid:5) */
-"Panel" = "Panel";
+/* Class = "NSButtonCell"; title = "Vytvořit"; ObjectID = "34"; */
+"34.title" = "Vytvořit";
 
-/* NSButton (Save) : <title:Save> (oid:21) */
-"Save" = "Vytvořit";
+/* Class = "NSButtonCell"; title = "Zrušit"; ObjectID = "35"; */
+"35.title" = "Zrušit";
 
+/* Class = "NSTextFieldCell"; title = "Zadejte jméno skupinové složky:"; ObjectID = "36"; */
+"36.title" = "Zadejte jméno skupinové složky:";

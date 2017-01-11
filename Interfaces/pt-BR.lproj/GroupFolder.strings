@@ -1,16 +1,15 @@
-/* NSButton (Cancel) : <title:Cancel> (oid:22) */
-"Cancel" = "Cancelar";
 
-/* NSTextField (Enter the group folder name: ) : <title:Enter the group folder name:
-> (oid:23) */
-"Enter the group folder name:\n" = "Entre o nome da pasta de grupo:\n";
+/* Class = "NSWindow"; title = "Painel"; ObjectID = "5"; */
+"5.title" = "Painel";
 
-/* NSTextField (New Group Folder) : <title:New Group Folder> (oid:19) */
-"New Group Folder" = "Nova pasta de grupo";
+/* Class = "NSTextFieldCell"; title = "Nova pasta de grupo"; ObjectID = "32"; */
+"32.title" = "Nova pasta de grupo";
 
-/* NSPanel (Panel) : <title:Panel> (oid:5) */
-"Panel" = "Painel";
+/* Class = "NSButtonCell"; title = "Salvar"; ObjectID = "34"; */
+"34.title" = "Salvar";
 
-/* NSButton (Save) : <title:Save> (oid:21) */
-"Save" = "Salvar";
+/* Class = "NSButtonCell"; title = "Cancelar"; ObjectID = "35"; */
+"35.title" = "Cancelar";
 
+/* Class = "NSTextFieldCell"; title = "Entre o nome da pasta de grupo:\n"; ObjectID = "36"; */
+"36.title" = "Entre o nome da pasta de grupo:";
