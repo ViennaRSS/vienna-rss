@@ -14,7 +14,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Empty Trash" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="5" userLabel="Window" customClass="NSPanel">
+        <window title="清空废纸篓" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="5" userLabel="Window" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="274" y="642" width="361" height="152"/>
@@ -27,7 +27,7 @@
                     <button verticalHuggingPriority="750" id="7">
                         <rect key="frame" x="228" y="12" width="119" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <buttonCell key="cell" type="push" title="Empty Trash" bezelStyle="rounded" alignment="center" state="on" borderStyle="border" inset="2" id="17">
+                        <buttonCell key="cell" type="push" title="清空废纸篓" bezelStyle="rounded" alignment="center" state="on" borderStyle="border" inset="2" id="17">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                             <string key="keyEquivalent" base64-UTF8="YES">
@@ -41,7 +41,7 @@ DQ
                     <button verticalHuggingPriority="750" id="8">
                         <rect key="frame" x="61" y="12" width="167" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <buttonCell key="cell" type="push" title="Don't Empty Trash" bezelStyle="rounded" alignment="center" state="on" borderStyle="border" inset="2" id="18">
+                        <buttonCell key="cell" type="push" title="不要清空废纸篓" bezelStyle="rounded" alignment="center" state="on" borderStyle="border" inset="2" id="18">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                             <string key="keyEquivalent" base64-UTF8="YES">
@@ -57,8 +57,8 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="19">
                             <font key="font" metaFont="system"/>
-                            <string key="title">There are deleted articles in the trash.
-Would you like to empty the trash before quitting?</string>
+                            <string key="title">废纸篓中有被删除的文章。
+您想在退出前清空废纸篓么？</string>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -66,7 +66,7 @@ Would you like to empty the trash before quitting?</string>
                     <button id="10">
                         <rect key="frame" x="18" y="58" width="223" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <buttonCell key="cell" type="check" title="Do not show this warning again" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="20">
+                        <buttonCell key="cell" type="check" title="不要再显示这个提示" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="20">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
