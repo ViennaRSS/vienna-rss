@@ -498,7 +498,6 @@
 		031E082F19DFA3A900194F9F /* SubscriptionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscriptionModel.m; path = src/SubscriptionModel.m; sourceTree = "<group>"; };
 		0322802F1A33BCD8007DE933 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Article.h; path = src/models/Article.h; sourceTree = "<group>"; };
 		032280301A33BCD8007DE933 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Article.m; path = src/models/Article.m; sourceTree = "<group>"; };
-		03493D1B1A303BF700AA3F36 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
 		03493D1D1A303BFA00AA3F36 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
 		03493D1E1A303BFA00AA3F36 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
 		03493D1F1A303BFB00AA3F36 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
@@ -517,7 +516,6 @@
 		03493D2C1A303C0600AA3F36 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = uk.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
 		03493D2D1A303C0600AA3F36 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt; path = pt.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
 		03493D2E1A303C0700AA3F36 /* tr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = tr; path = tr.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
-		03493D301A303C1000AA3F36 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
 		03493D321A303C1100AA3F36 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
 		03493D331A303C1200AA3F36 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
 		03493D341A303C1300AA3F36 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
@@ -544,7 +542,6 @@
 		035B703819E0E4AE00197334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		035B703919E0E4AE00197334 /* Vienna_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vienna_Tests.m; sourceTree = "<group>"; };
 		035B704119E0E4DC00197334 /* SubscriptionModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionModelTests.m; sourceTree = "<group>"; };
-		03721E5A1A218CFC009C020C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
 		03721E5C1A218D0C009C020C /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
 		03721E5D1A218D0D009C020C /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
 		03721E5E1A218D0F009C020C /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
@@ -563,7 +560,6 @@
 		03721E6B1A218D20009C020C /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = uk.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
 		03721E6C1A218D21009C020C /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt; path = pt.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
 		03721E6D1A218D22009C020C /* tr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = tr; path = tr.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
-		03721E6F1A218D4B009C020C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
 		03721E711A218D4E009C020C /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
 		03721E721A218D4F009C020C /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
 		03721E731A218D50009C020C /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
@@ -1252,6 +1248,16 @@
 		F6D573261E26AD4E00CDA909 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt; path = pt.lproj/SearchFolder.xib; sourceTree = "<group>"; };
 		F6D573271E26AD5000CDA909 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = uk.lproj/SearchFolder.xib; sourceTree = "<group>"; };
 		F6D573281E26AD5200CDA909 /* tr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = tr; path = tr.lproj/SearchFolder.xib; sourceTree = "<group>"; };
+		F6D573291E26B19D00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/EmptyTrashWarning.xib; sourceTree = "<group>"; };
+		F6D5732A1E26B19E00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeedCredentials.xib; sourceTree = "<group>"; };
+		F6D5732B1E26B19F00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GroupFolder.xib; sourceTree = "<group>"; };
+		F6D5732C1E26B19F00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/InfoWindow.xib; sourceTree = "<group>"; };
+		F6D5732D1E26B19F00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/RSSFeed.xib; sourceTree = "<group>"; };
+		F6D5732E1E26B1A000CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SearchFolder.xib; sourceTree = "<group>"; };
+		F6D5732F1E26B1A000CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		F6D573301E26B1A200CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
+		F6D573311E26B1A200CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
+		F6D573321E26B1A300CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2226,6 +2232,7 @@
 				"pt-BR",
 				"zh-Hans",
 				eu,
+				Base,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Vienna */;
 			productRefGroup = 19C28FB0FE9D524F11CA2CBB /* Products */;
@@ -2860,7 +2867,6 @@
 		03493D1C1A303BF700AA3F36 /* SyncingPreferencesView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				03493D1B1A303BF700AA3F36 /* en */,
 				03493D1D1A303BFA00AA3F36 /* ja */,
 				03493D1E1A303BFA00AA3F36 /* fr */,
 				03493D1F1A303BFB00AA3F36 /* de */,
@@ -2879,6 +2885,7 @@
 				03493D2C1A303C0600AA3F36 /* uk */,
 				03493D2D1A303C0600AA3F36 /* pt */,
 				03493D2E1A303C0700AA3F36 /* tr */,
+				F6D573311E26B1A200CDA909 /* Base */,
 			);
 			name = SyncingPreferencesView.xib;
 			path = Interfaces;
@@ -2887,7 +2894,6 @@
 		03493D311A303C1000AA3F36 /* AdvancedPreferencesView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				03493D301A303C1000AA3F36 /* en */,
 				03493D321A303C1100AA3F36 /* ja */,
 				03493D331A303C1200AA3F36 /* fr */,
 				03493D341A303C1300AA3F36 /* de */,
@@ -2906,6 +2912,7 @@
 				03493D411A303C2000AA3F36 /* cs */,
 				03493D421A303C2100AA3F36 /* eu */,
 				03493D431A303C2100AA3F36 /* tr */,
+				F6D573321E26B1A300CDA909 /* Base */,
 			);
 			name = AdvancedPreferencesView.xib;
 			path = Interfaces;
@@ -2914,7 +2921,6 @@
 		03721E5B1A218CFC009C020C /* GeneralPreferencesView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				03721E5A1A218CFC009C020C /* en */,
 				03721E5C1A218D0C009C020C /* ja */,
 				03721E5D1A218D0D009C020C /* fr */,
 				03721E5E1A218D0F009C020C /* de */,
@@ -2933,6 +2939,7 @@
 				03721E6B1A218D20009C020C /* uk */,
 				03721E6C1A218D21009C020C /* pt */,
 				03721E6D1A218D22009C020C /* tr */,
+				F6D5732F1E26B1A000CDA909 /* Base */,
 			);
 			name = GeneralPreferencesView.xib;
 			path = Interfaces;
@@ -2941,7 +2948,6 @@
 		03721E701A218D4B009C020C /* AppearancePreferencesView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				03721E6F1A218D4B009C020C /* en */,
 				03721E711A218D4E009C020C /* ja */,
 				03721E721A218D4F009C020C /* fr */,
 				03721E731A218D50009C020C /* de */,
@@ -2960,6 +2966,7 @@
 				03721E801A218D5F009C020C /* uk */,
 				03721E811A218D60009C020C /* pt */,
 				03721E821A218D60009C020C /* tr */,
+				F6D573301E26B1A200CDA909 /* Base */,
 			);
 			name = AppearancePreferencesView.xib;
 			path = Interfaces;
@@ -2968,7 +2975,6 @@
 		F6D572AD1E26AA8200CDA909 /* EmptyTrashWarning.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F6D572AC1E26AA8200CDA909 /* en */,
 				F6D572BD1E26AAF700CDA909 /* de */,
 				F6D572BE1E26AB4400CDA909 /* ja */,
 				F6D572BF1E26AB4600CDA909 /* fr */,
@@ -2987,6 +2993,7 @@
 				F6D572CC1E26AB6D00CDA909 /* pt */,
 				F6D572CD1E26AB7000CDA909 /* uk */,
 				F6D572CE1E26AB7200CDA909 /* tr */,
+				F6D573291E26B19D00CDA909 /* Base */,
 			);
 			name = EmptyTrashWarning.xib;
 			path = Interfaces;
@@ -2995,7 +3002,6 @@
 		F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F6D572AF1E26AA8A00CDA909 /* en */,
 				F6D572CF1E26AB8300CDA909 /* ja */,
 				F6D572D01E26AB8400CDA909 /* fr */,
 				F6D572D11E26AB8600CDA909 /* de */,
@@ -3014,6 +3020,7 @@
 				F6D572DE1E26ABA200CDA909 /* pt */,
 				F6D572DF1E26ABA400CDA909 /* uk */,
 				F6D572E01E26ABA600CDA909 /* tr */,
+				F6D5732A1E26B19E00CDA909 /* Base */,
 			);
 			name = FeedCredentials.xib;
 			path = Interfaces;
@@ -3022,7 +3029,6 @@
 		F6D572B31E26AA9000CDA909 /* GroupFolder.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F6D572B21E26AA9000CDA909 /* en */,
 				F6D572E11E26AC4600CDA909 /* ja */,
 				F6D572E21E26AC4800CDA909 /* fr */,
 				F6D572E31E26AC4A00CDA909 /* de */,
@@ -3041,6 +3047,7 @@
 				F6D572F01E26AC6B00CDA909 /* uk */,
 				F6D572F11E26AC6E00CDA909 /* pt */,
 				F6D572F21E26AC7000CDA909 /* tr */,
+				F6D5732B1E26B19F00CDA909 /* Base */,
 			);
 			name = GroupFolder.xib;
 			path = Interfaces;
@@ -3049,7 +3056,6 @@
 		F6D572B61E26AA9900CDA909 /* InfoWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F6D572B51E26AA9900CDA909 /* en */,
 				F6D572F31E26AC7900CDA909 /* ja */,
 				F6D572F41E26AC7E00CDA909 /* fr */,
 				F6D572F51E26AC8200CDA909 /* de */,
@@ -3068,6 +3074,7 @@
 				F6D573021E26ACCB00CDA909 /* pt */,
 				F6D573031E26ACCD00CDA909 /* uk */,
 				F6D573041E26ACD000CDA909 /* tr */,
+				F6D5732C1E26B19F00CDA909 /* Base */,
 			);
 			name = InfoWindow.xib;
 			path = Interfaces;
@@ -3076,7 +3083,6 @@
 		F6D572B91E26AAA100CDA909 /* RSSFeed.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F6D572B81E26AAA100CDA909 /* en */,
 				F6D573051E26ACDB00CDA909 /* ja */,
 				F6D573061E26ACDC00CDA909 /* fr */,
 				F6D573071E26ACDE00CDA909 /* de */,
@@ -3095,6 +3101,7 @@
 				F6D573141E26AD0700CDA909 /* uk */,
 				F6D573151E26AD0900CDA909 /* pt */,
 				F6D573161E26AD0B00CDA909 /* tr */,
+				F6D5732D1E26B19F00CDA909 /* Base */,
 			);
 			name = RSSFeed.xib;
 			path = Interfaces;
@@ -3103,7 +3110,6 @@
 		F6D572BC1E26AAA900CDA909 /* SearchFolder.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F6D572BB1E26AAA900CDA909 /* en */,
 				F6D573171E26AD1F00CDA909 /* ja */,
 				F6D573181E26AD2B00CDA909 /* fr */,
 				F6D573191E26AD2D00CDA909 /* de */,
@@ -3122,6 +3128,7 @@
 				F6D573261E26AD4E00CDA909 /* pt */,
 				F6D573271E26AD5000CDA909 /* uk */,
 				F6D573281E26AD5200CDA909 /* tr */,
+				F6D5732E1E26B1A000CDA909 /* Base */,
 			);
 			name = SearchFolder.xib;
 			path = Interfaces;
