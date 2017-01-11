@@ -1227,6 +1227,24 @@
 		F6352BF51E2722A0005CD307 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/GeneralPreferencesView.strings; sourceTree = "<group>"; };
 		F6352BF61E2722A4005CD307 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/GeneralPreferencesView.strings"; sourceTree = "<group>"; };
 		F6352BF71E2722A9005CD307 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/GeneralPreferencesView.strings"; sourceTree = "<group>"; };
+		F6352BF81E27281E005CD307 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
+		F6352BF91E272825005CD307 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
+		F6352BFA1E272829005CD307 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
+		F6352BFB1E27282D005CD307 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
+		F6352BFC1E272831005CD307 /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
+		F6352BFD1E272835005CD307 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
+		F6352BFE1E27283B005CD307 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
+		F6352BFF1E27283F005CD307 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
+		F6352C001E272843005CD307 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
+		F6352C011E272846005CD307 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
+		F6352C021E27284A005CD307 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
+		F6352C031E27284D005CD307 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/AppearancePreferencesView.strings"; sourceTree = "<group>"; };
+		F6352C041E272851005CD307 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
+		F6352C051E272855005CD307 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
+		F6352C061E272858005CD307 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
+		F6352C071E27285C005CD307 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
+		F6352C081E272864005CD307 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/AppearancePreferencesView.strings"; sourceTree = "<group>"; };
+		F6352C091E272868005CD307 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AppearancePreferencesView.strings"; sourceTree = "<group>"; };
 		F6D573291E26B19D00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/EmptyTrashWarning.xib; sourceTree = "<group>"; };
 		F6D5732A1E26B19E00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeedCredentials.xib; sourceTree = "<group>"; };
 		F6D5732B1E26B19F00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GroupFolder.xib; sourceTree = "<group>"; };
@@ -3000,25 +3018,25 @@
 		03721E701A218D4B009C020C /* AppearancePreferencesView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				03721E711A218D4E009C020C /* ja */,
-				03721E721A218D4F009C020C /* fr */,
-				03721E731A218D50009C020C /* de */,
-				03721E741A218D51009C020C /* sv */,
-				03721E751A218D52009C020C /* it */,
-				03721E761A218D53009C020C /* ru */,
-				03721E771A218D54009C020C /* zh-Hant */,
-				03721E781A218D55009C020C /* nl */,
-				03721E791A218D56009C020C /* es */,
-				03721E7A1A218D5A009C020C /* pt-BR */,
-				03721E7B1A218D5B009C020C /* ko */,
-				03721E7C1A218D5C009C020C /* zh-Hans */,
-				03721E7D1A218D5C009C020C /* da */,
-				03721E7E1A218D5D009C020C /* cs */,
-				03721E7F1A218D5E009C020C /* eu */,
-				03721E801A218D5F009C020C /* uk */,
-				03721E811A218D60009C020C /* pt */,
-				03721E821A218D60009C020C /* tr */,
 				F6D573301E26B1A200CDA909 /* Base */,
+				F6352BF81E27281E005CD307 /* cs */,
+				F6352BF91E272825005CD307 /* da */,
+				F6352BFA1E272829005CD307 /* de */,
+				F6352BFB1E27282D005CD307 /* es */,
+				F6352BFC1E272831005CD307 /* eu */,
+				F6352BFD1E272835005CD307 /* fr */,
+				F6352BFE1E27283B005CD307 /* it */,
+				F6352BFF1E27283F005CD307 /* ja */,
+				F6352C001E272843005CD307 /* ko */,
+				F6352C011E272846005CD307 /* nl */,
+				F6352C021E27284A005CD307 /* pt */,
+				F6352C031E27284D005CD307 /* pt-BR */,
+				F6352C041E272851005CD307 /* ru */,
+				F6352C051E272855005CD307 /* sv */,
+				F6352C061E272858005CD307 /* tr */,
+				F6352C071E27285C005CD307 /* uk */,
+				F6352C081E272864005CD307 /* zh-Hant */,
+				F6352C091E272868005CD307 /* zh-Hans */,
 			);
 			name = AppearancePreferencesView.xib;
 			path = Interfaces;
