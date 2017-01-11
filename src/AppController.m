@@ -181,7 +181,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[self localiseMenus:NSApp.mainMenu.itemArray];
 	
 	// Set the delegates and title
-	mainWindow.delegate = self;
 	mainWindow.title = self.appName;
 	[NSApplication sharedApplication].delegate = self;
 	mainWindow.minSize = NSMakeSize(MA_Default_Main_Window_Min_Width, MA_Default_Main_Window_Min_Height);

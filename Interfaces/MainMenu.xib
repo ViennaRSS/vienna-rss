@@ -209,6 +209,9 @@ Cg
                     </textField>
                 </subviews>
             </view>
+            <connections>
+                <outlet property="delegate" destination="233" id="1bL-FD-UdQ"/>
+            </connections>
         </window>
         <menu title="MainMenu" systemMenu="main" id="29" userLabel="MainMenu">
             <items>
@@ -987,7 +990,7 @@ CA
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <clipView key="contentView" id="TOX-JT-adF">
                                             <rect key="frame" x="0.0" y="0.0" width="698" height="298"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowHeight="15" headerView="1386" id="977" customClass="MessageListView">
                                                     <rect key="frame" x="0.0" y="0.0" width="698" height="281"/>
