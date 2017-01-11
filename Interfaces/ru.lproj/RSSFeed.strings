@@ -1,36 +1,39 @@
-/* NSButton (Cancel) : <title:Cancel> (oid:54) */
-"Cancel" = "Отмена";
 
-/* NSTextField (Create a new subscription ) : <title:Create a new subscription
-> (oid:64) */
+/* Class = "NSWindow"; title = "Канал RSS"; ObjectID = "6"; */
+"6.title" = "Канал RSS";
 
-"Create a new subscription\n" = "Создание новой подписки\n";
+/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
+"45.title" = "URL";
 
-/* NSTextField (Edit subscription) : <title:Edit subscription> (oid:67) */
-"Edit subscription" = "Изменение подписки";
+/* Class = "NSWindow"; title = "Канал RSS"; ObjectID = "49"; */
+"49.title" = "Канал RSS";
 
-/* NSTextField (Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.) : <title:Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.> (oid:65) */
-"Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source." = "Введите ссылку на канал новостей или выберите канал из списка Источник для добавления ссылки с заданного источника.";
+/* Class = "NSButtonCell"; title = "Отмена"; ObjectID = "102"; */
+"102.title" = "Отмена";
 
-/* NSMenu : <title:OtherViews> (oid:44) */
-"OtherViews" = "OtherViews";
+/* Class = "NSButtonCell"; title = "Подписаться"; ObjectID = "103"; */
+"103.title" = "Подписаться";
 
-/* NSPanel (RSS Feed) : <title:RSS Feed> (oid:49) */
-"RSS Feed" = "RSS лента";
+/* Class = "NSTextFieldCell"; title = "Источник:"; ObjectID = "104"; */
+"104.title" = "Источник:";
 
-/* NSButton (Save) : <title:Save> (oid:53) */
-"Save" = "Сохранить";
+/* Class = "NSTextFieldCell"; title = "Создание новой подписки"; ObjectID = "106"; */
+"106.title" = "Создание новой подписки";
 
-/* NSTextField (Source: ) : <title:Source:
-> (oid:40) */
+/* Class = "NSTextFieldCell"; title = "Введите ссылку на канал новостей или выберите канал из списка Источник для добавления ссылки с заданного источника."; ObjectID = "107"; */
+"107.title" = "Введите ссылку на канал новостей или выберите канал из списка Источник для добавления ссылки с заданного источника.";
 
-"Source:\n" = "Источник:\n";
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "URL:";
 
-/* NSButton (Subscribe) : <title:Subscribe> (oid:10) */
-"Subscribe" = "Подписаться";
+/* Class = "NSButtonCell"; title = "Сохранить"; ObjectID = "111"; */
+"111.title" = "Сохранить";
 
-/* NSMenuItem : <title:URL> (oid:45) */
-"URL" = "URL";
+/* Class = "NSButtonCell"; title = "Отмена"; ObjectID = "112"; */
+"112.title" = "Отмена";
 
-/* NSTextField (URL:) : <title:URL:> (oid:97) */
-"URL:" = "URL:";
+/* Class = "NSTextFieldCell"; title = "Изменение подписки"; ObjectID = "114"; */
+"114.title" = "Изменение подписки";
+
+/* Class = "NSButtonCell"; title = "Использовать Open Reader"; ObjectID = "116"; */
+"116.title" = "Использовать Open Reader";

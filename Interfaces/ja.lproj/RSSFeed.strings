@@ -1,35 +1,39 @@
-/* NSButton (Cancel) : <title:Cancel> (oid:54) */
-"Cancel" = "キャンセル";
 
-/* NSTextField (Create a new subscription ) : <title:Create a new subscription
-> (oid:64) */
-"Create a new subscription\n" = "新規購読を作成\n";
+/* Class = "NSWindow"; title = "RSS フィード"; ObjectID = "6"; */
+"6.title" = "RSS フィード";
 
-/* NSTextField (Edit subscription) : <title:Edit subscription> (oid:67) */
-"Edit subscription" = "購読を編集";
+/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
+"45.title" = "URL";
 
-/* NSTextField (Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.) : <title:Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.> (oid:65) */
-"Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source." = "ニュースフィードへのリンクを入力してください。またはソースリストからニュースフィードのショートカット名を入力してください。";
+/* Class = "NSWindow"; title = "RSS フィード"; ObjectID = "49"; */
+"49.title" = "RSS フィード";
 
-/* NSMenu : <title:OtherViews> (oid:44) */
-"OtherViews" = "OtherViews";
+/* Class = "NSButtonCell"; title = "キャンセル"; ObjectID = "102"; */
+"102.title" = "キャンセル";
 
-/* NSPanel (RSS Feed) : <title:RSS Feed> (oid:49) */
-"RSS Feed" = "RSS フィード";
+/* Class = "NSButtonCell"; title = "購読"; ObjectID = "103"; */
+"103.title" = "購読";
 
-/* NSButton (Save) : <title:Save> (oid:53) */
-"Save" = "保存";
+/* Class = "NSTextFieldCell"; title = "ソース："; ObjectID = "104"; */
+"104.title" = "ソース：";
 
-/* NSTextField (Source: ) : <title:Source:
-> (oid:40) */
-"Source:\n" = "ソース：\n";
+/* Class = "NSTextFieldCell"; title = "新規購読を作成"; ObjectID = "106"; */
+"106.title" = "新規購読を作成";
 
-/* NSButton (Subscribe) : <title:Subscribe> (oid:10) */
-"Subscribe" = "購読";
+/* Class = "NSTextFieldCell"; title = "ニュースフィードへのリンクを入力してください。またはソースリストからニュースフィードのショートカット名を入力してください。"; ObjectID = "107"; */
+"107.title" = "ニュースフィードへのリンクを入力してください。またはソースリストからニュースフィードのショートカット名を入力してください。";
 
-/* NSMenuItem : <title:URL> (oid:45) */
-"URL" = "URL";
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "URL:";
 
-/* NSTextField (URL:) : <title:URL:> (oid:97) */
-"URL:" = "URL:";
+/* Class = "NSButtonCell"; title = "保存"; ObjectID = "111"; */
+"111.title" = "保存";
 
+/* Class = "NSButtonCell"; title = "キャンセル"; ObjectID = "112"; */
+"112.title" = "キャンセル";
+
+/* Class = "NSTextFieldCell"; title = "購読を編集"; ObjectID = "114"; */
+"114.title" = "購読を編集";
+
+/* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
+"116.title" = "Subscribe in Open Reader";

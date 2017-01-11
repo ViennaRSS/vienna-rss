@@ -1,35 +1,39 @@
-/* NSButton (Cancel) : <title:Cancel> (oid:54) */
-"Cancel" = "Avbryt";
 
-/* NSTextField (Create a new subscription ) : <title:Create a new subscription
-> (oid:64) */
-"Create a new subscription\n" = "Skapa ny RSS-prenumeration\n";
+/* Class = "NSWindow"; title = "RSS Feed"; ObjectID = "6"; */
+"6.title" = "RSS Feed";
 
-/* NSTextField (Edit subscription) : <title:Edit subscription> (oid:67) */
-"Edit subscription" = "Redigera prenumeration\n";
+/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
+"45.title" = "URL";
 
-/* NSTextField (Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.) : <title:Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.> (oid:65) */
-"Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source." = "Ange länk till RSS-ström nedan. Eller välj från listan och ange ett kortnamn på RSS-ström som tillhandahålls av specificerad källa.";
+/* Class = "NSWindow"; title = "RSS Feed"; ObjectID = "49"; */
+"49.title" = "RSS Feed";
 
-/* NSMenu : <title:OtherViews> (oid:44) */
-"OtherViews" = "Andra vyer";
+/* Class = "NSButtonCell"; title = "Avbryt"; ObjectID = "102"; */
+"102.title" = "Avbryt";
 
-/* NSPanel (RSS Feed) : <title:RSS Feed> (oid:49) */
-"RSS Feed" = "RSS Feed";
+/* Class = "NSButtonCell"; title = "Prenumerera"; ObjectID = "103"; */
+"103.title" = "Prenumerera";
 
-/* NSButton (Save) : <title:Save> (oid:53) */
-"Save" = "Spara";
+/* Class = "NSTextFieldCell"; title = "Källa:"; ObjectID = "104"; */
+"104.title" = "Källa:";
 
-/* NSTextField (Source: ) : <title:Source:
-> (oid:40) */
-"Source:\n" = "Källa:\n";
+/* Class = "NSTextFieldCell"; title = "Skapa ny RSS-prenumeration"; ObjectID = "106"; */
+"106.title" = "Skapa ny RSS-prenumeration";
 
-/* NSButton (Subscribe) : <title:Subscribe> (oid:10) */
-"Subscribe" = "Prenumerera";
+/* Class = "NSTextFieldCell"; title = "Ange länk till RSS-ström nedan. Eller välj från listan och ange ett kortnamn på RSS-ström som tillhandahålls av specificerad källa."; ObjectID = "107"; */
+"107.title" = "Ange länk till RSS-ström nedan. Eller välj från listan och ange ett kortnamn på RSS-ström som tillhandahålls av specificerad källa.";
 
-/* NSMenuItem : <title:URL> (oid:45) */
-"URL" = "URL";
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "URL:";
 
-/* NSTextField (URL:) : <title:URL:> (oid:97) */
-"URL:" = "URL:";
+/* Class = "NSButtonCell"; title = "Spara"; ObjectID = "111"; */
+"111.title" = "Spara";
 
+/* Class = "NSButtonCell"; title = "Avbryt"; ObjectID = "112"; */
+"112.title" = "Avbryt";
+
+/* Class = "NSTextFieldCell"; title = "Redigera prenumeration"; ObjectID = "114"; */
+"114.title" = "Redigera prenumeration";
+
+/* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
+"116.title" = "Subscribe in Open Reader";

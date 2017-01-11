@@ -1,35 +1,39 @@
-/* NSButton (Cancel) : <title:Cancel> (oid:54) */
-"Cancel" = "Annulla";
 
-/* NSTextField (Create a new subscription ) : <title:Create a new subscription
-> (oid:64) */
-"Create a new subscription\n" = "Crea una nuova iscrizione RSS\n";
+/* Class = "NSWindow"; title = "Feed RSS"; ObjectID = "6"; */
+"6.title" = "Feed RSS";
 
-/* NSTextField (Edit subscription) : <title:Edit subscription> (oid:67) */
-"Edit subscription" = "Modifica iscrizione";
+/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
+"45.title" = "URL";
 
-/* NSTextField (Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.) : <title:Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.> (oid:65) */
-"Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source." = "Inserisci il collegamento al feed RSS in basso. Oppure scegli dalla lista Sorgente ed inserisci il nome breve per il feed RSS fornito da tale sorgente.";
+/* Class = "NSWindow"; title = "Feed RSS"; ObjectID = "49"; */
+"49.title" = "Feed RSS";
 
-/* NSMenu : <title:OtherViews> (oid:44) */
-"OtherViews" = "OtherViews";
+/* Class = "NSButtonCell"; title = "Annulla"; ObjectID = "102"; */
+"102.title" = "Annulla";
 
-/* NSPanel (RSS Feed) : <title:RSS Feed> (oid:49) */
-"RSS Feed" = "Feed RSS";
+/* Class = "NSButtonCell"; title = "Iscriviti"; ObjectID = "103"; */
+"103.title" = "Iscriviti";
 
-/* NSButton (Save) : <title:Save> (oid:53) */
-"Save" = "Registra";
+/* Class = "NSTextFieldCell"; title = "Sorgente:"; ObjectID = "104"; */
+"104.title" = "Sorgente:";
 
-/* NSTextField (Source: ) : <title:Source:
-> (oid:40) */
-"Source:\n" = "Sorgente:\n";
+/* Class = "NSTextFieldCell"; title = "Crea una nuova iscrizione RSS"; ObjectID = "106"; */
+"106.title" = "Crea una nuova iscrizione RSS";
 
-/* NSButton (Subscribe) : <title:Subscribe> (oid:10) */
-"Subscribe" = "Iscriviti";
+/* Class = "NSTextFieldCell"; title = "Inserisci il collegamento al feed RSS in basso. Oppure scegli dalla lista Sorgente ed inserisci il nome breve per il feed RSS fornito da tale sorgente."; ObjectID = "107"; */
+"107.title" = "Inserisci il collegamento al feed RSS in basso. Oppure scegli dalla lista Sorgente ed inserisci il nome breve per il feed RSS fornito da tale sorgente.";
 
-/* NSMenuItem : <title:URL> (oid:45) */
-"URL" = "URL";
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "URL:";
 
-/* NSTextField (URL:) : <title:URL:> (oid:97) */
-"URL:" = "URL:";
+/* Class = "NSButtonCell"; title = "Registra"; ObjectID = "111"; */
+"111.title" = "Registra";
 
+/* Class = "NSButtonCell"; title = "Annulla"; ObjectID = "112"; */
+"112.title" = "Annulla";
+
+/* Class = "NSTextFieldCell"; title = "Modifica iscrizione"; ObjectID = "114"; */
+"114.title" = "Modifica iscrizione";
+
+/* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
+"116.title" = "Subscribe in Open Reader";

@@ -1,35 +1,39 @@
-/* NSButton (Cancel) : <title:Cancel> (oid:54) */
-"Cancel" = "Abbrechen";
 
-/* NSTextField (Create a new subscription ) : <title:Create a new subscription
-> (oid:64) */
-"Create a new subscription\n" = "Ein neues Abonnement erstellen";
+/* Class = "NSWindow"; title = "RSS Feed"; ObjectID = "6"; */
+"6.title" = "RSS Feed";
 
-/* NSTextField (Edit subscription) : <title:Edit subscription> (oid:67) */
-"Edit subscription" = "Abonnement bearbeiten\n";
+/* Class = "NSMenuItem"; title = "Adresse"; ObjectID = "45"; */
+"45.title" = "Adresse";
 
-/* NSTextField (Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.) : <title:Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.> (oid:65) */
-"Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source." = "Geben Sie den Link für das Abonnement ein oder wählen Sie eine Quelle aus der Liste.";
+/* Class = "NSWindow"; title = "RSS Feed"; ObjectID = "49"; */
+"49.title" = "RSS Feed";
 
-/* NSMenu : <title:OtherViews> (oid:44) */
-"OtherViews" = "Andere Ansichten";
+/* Class = "NSButtonCell"; title = "Abbrechen"; ObjectID = "102"; */
+"102.title" = "Abbrechen";
 
-/* NSPanel (RSS Feed) : <title:RSS Feed> (oid:49) */
-"RSS Feed" = "RSS-Feed";
+/* Class = "NSButtonCell"; title = "Abonnieren"; ObjectID = "103"; */
+"103.title" = "Abonnieren";
 
-/* NSButton (Save) : <title:Save> (oid:53) */
-"Save" = "Speichern";
+/* Class = "NSTextFieldCell"; title = "Quelle:"; ObjectID = "104"; */
+"104.title" = "Quelle:";
 
-/* NSTextField (Source: ) : <title:Source:
-> (oid:40) */
-"Source:\n" = "Quelle:";
+/* Class = "NSTextFieldCell"; title = "Ein neues Abonnement erstellen"; ObjectID = "106"; */
+"106.title" = "Ein neues Abonnement erstellen";
 
-/* NSButton (Subscribe) : <title:Subscribe> (oid:10) */
-"Subscribe" = "Abonnieren";
+/* Class = "NSTextFieldCell"; title = "Geben Sie den Link für das Abonnement ein oder wählen Sie eine Quelle aus der Liste."; ObjectID = "107"; */
+"107.title" = "Geben Sie den Link für das Abonnement ein oder wählen Sie eine Quelle aus der Liste.";
 
-/* NSMenuItem : <title:URL> (oid:45) */
-"URL" = "Adresse";
+/* Class = "NSTextFieldCell"; title = "Adresse:"; ObjectID = "110"; */
+"110.title" = "Adresse:";
 
-/* NSTextField (URL:) : <title:URL:> (oid:97) */
-"URL:" = "Adresse:";
+/* Class = "NSButtonCell"; title = "Speichern"; ObjectID = "111"; */
+"111.title" = "Speichern";
 
+/* Class = "NSButtonCell"; title = "Abbrechen"; ObjectID = "112"; */
+"112.title" = "Abbrechen";
+
+/* Class = "NSTextFieldCell"; title = "Abonnement bearbeiten"; ObjectID = "114"; */
+"114.title" = "Abonnement bearbeiten";
+
+/* Class = "NSButtonCell"; title = "Im Open Reader abonnieren"; ObjectID = "116"; */
+"116.title" = "Im Open Reader abonnieren";
