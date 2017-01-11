@@ -161,17 +161,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
  */
 -(void)awakeFromNib
 {
-
-#if ( MAC_OS_X_VERSION_MAX_ALLOWED < 1070 && !defined(NSWindowCollectionBehaviorFullScreenPrimary) )
-    enum {
-        NSWindowCollectionBehaviorFullScreenPrimary = (1 << 7)
-    };
-#endif
-	
-    //Enable FullScreen Support if we are on Lion 10.7.x
-    mainWindow.collectionBehavior = NSWindowCollectionBehaviorFullScreenPrimary;
-  	
-
 	Preferences * prefs = [Preferences standardPreferences];
 
 	// Restore the most recent layout
