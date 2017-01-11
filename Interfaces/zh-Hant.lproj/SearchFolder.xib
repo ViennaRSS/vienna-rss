@@ -45,7 +45,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="94">
                             <font key="font" metaFont="system"/>
-                            <string key="title">Smart folder name:
+                            <string key="title">智慧型檔案夾名稱：
 </string>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -63,7 +63,7 @@
                     <button verticalHuggingPriority="750" id="9">
                         <rect key="frame" x="555" y="12" width="78" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="96">
+                        <buttonCell key="cell" type="push" title="儲存" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="96">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                             <string key="keyEquivalent" base64-UTF8="YES">
@@ -77,7 +77,7 @@ DQ
                     <button verticalHuggingPriority="750" id="10">
                         <rect key="frame" x="475" y="12" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="97">
+                        <buttonCell key="cell" type="push" title="取消" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="97">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                             <string key="keyEquivalent" base64-UTF8="YES">
@@ -91,7 +91,7 @@ Gw
                     <box titlePosition="noTitle" id="37">
                         <rect key="frame" x="17" y="56" width="613" height="54"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <view key="contentView" id="qFd-xY-dSv">
+                        <view key="contentView" id="Ac4-jr-9qt">
                             <rect key="frame" x="2" y="2" width="609" height="50"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -103,31 +103,31 @@ Gw
                         </view>
                     </box>
                     <textField verticalHuggingPriority="750" id="58">
-                        <rect key="frame" x="17" y="118" width="182" height="17"/>
+                        <rect key="frame" x="17" y="118" width="64" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Show all articles that match" id="98">
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="顯示符合" id="98">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <popUpButton verticalHuggingPriority="750" id="79">
-                        <rect key="frame" x="196" y="112" width="80" height="26"/>
+                        <rect key="frame" x="83" y="112" width="80" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="99">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
                             <menu key="menu" title="OtherViews" id="80">
                                 <items>
-                                    <menuItem title="Nothing" id="82"/>
+                                    <menuItem title="無" id="82"/>
                                 </items>
                             </menu>
                         </popUpButtonCell>
                     </popUpButton>
                     <textField verticalHuggingPriority="750" id="84">
-                        <rect key="frame" x="279" y="118" width="301" height="17"/>
+                        <rect key="frame" x="172" y="118" width="408" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="of the following conditions:" id="100">
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="條件的所有文章：" id="100">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -193,7 +193,7 @@ Gw
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" title="OtherViews" id="64">
                             <items>
-                                <menuItem title="Nothing" id="62"/>
+                                <menuItem title="無" id="62"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
