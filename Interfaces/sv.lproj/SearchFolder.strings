@@ -1,46 +1,66 @@
-/* NSPanel () : <title:> (oid:6) */
-"" = "";
 
-/* NSButton (+) : <title:+> (oid:31) */
-"+" = "+";
+/* Class = "NSMenu"; title = "Andra vyer"; ObjectID = "32"; */
+"32.title" = "Andra vyer";
 
-/* NSButton (-) : <title:-> (oid:29) */
-"-" = "-";
+/* Class = "NSMenuItem"; title = "Fältnamn här"; ObjectID = "33"; */
+"33.title" = "Fältnamn här";
 
-/* NSButton (Cancel) : <title:Cancel> (oid:10) */
-"Cancel" = "Avbryt";
+/* Class = "NSMenu"; title = "Andra vyer"; ObjectID = "34"; */
+"34.title" = "Andra vyer";
 
-/* NSMenuItem : <title:Field names go here> (oid:33) */
-"Field names go here" = "Fältnamn här";
+/* Class = "NSMenuItem"; title = "Operatörer hör"; ObjectID = "56"; */
+"56.title" = "Operatörer hör";
 
-/* NSMenuItem : <title:Item1> (oid:88) */
-"Item1" = "Objekt3";
+/* Class = "NSMenuItem"; title = "Ingenting"; ObjectID = "62"; */
+"62.title" = "Ingenting";
 
-/* NSMenuItem : <title:Item2> (oid:90) */
-"Item2" = "Objekt2";
+/* Class = "NSMenu"; title = "Andra vyer"; ObjectID = "64"; */
+"64.title" = "Andra vyer";
 
-/* NSMenuItem : <title:Item3> (oid:89) */
-"Item3" = "Objekt3";
+/* Class = "NSMenu"; title = "Andra vyer"; ObjectID = "74"; */
+"74.title" = "Andra vyer";
 
-/* NSMenuItem : <title:Nothing> (oid:82) */
-"Nothing" = "Ingenting";
+/* Class = "NSMenuItem"; title = "Objekt3"; ObjectID = "75"; */
+"75.title" = "Objekt3";
 
-/* NSMenuItem : <title:Operators go here> (oid:56) */
-"Operators go here" = "Operatörer hör";
+/* Class = "NSMenuItem"; title = "Objekt2"; ObjectID = "76"; */
+"76.title" = "Objekt2";
 
-/* NSMenu : <title:OtherViews> (oid:87) */
-"OtherViews" = "Andra vyer";
+/* Class = "NSMenu"; title = "Andra vyer"; ObjectID = "80"; */
+"80.title" = "Andra vyer";
 
-/* NSButton (Save) : <title:Save> (oid:9) */
-"Save" = "Spara";
+/* Class = "NSMenuItem"; title = "Ingenting"; ObjectID = "82"; */
+"82.title" = "Ingenting";
 
-/* NSTextField (Show all articles that match) : <title:Show all articles that match> (oid:58) */
-"Show all articles that match" = "Visa alla artiklar som matchar";
+/* Class = "NSMenu"; title = "Andra vyer"; ObjectID = "87"; */
+"87.title" = "Andra vyer";
 
-/* NSTextField (Smart folder name: ) : <title:Smart folder name:
-> (oid:7) */
-"Smart folder name:\n" = "Namn på smart mapp:\n";
+/* Class = "NSMenuItem"; title = "Objekt3"; ObjectID = "88"; */
+"88.title" = "Objekt3";
 
-/* NSTextField (of the following conditions:) : <title:of the following conditions:> (oid:84) */
-"of the following conditions:" = "av följande villkor:";
+/* Class = "NSMenuItem"; title = "Objekt3"; ObjectID = "89"; */
+"89.title" = "Objekt3";
 
+/* Class = "NSMenuItem"; title = "Objekt2"; ObjectID = "90"; */
+"90.title" = "Objekt2";
+
+/* Class = "NSTextFieldCell"; title = "Namn på smart mapp:"; ObjectID = "94"; */
+"94.title" = "Namn på smart mapp:";
+
+/* Class = "NSButtonCell"; title = "Spara"; ObjectID = "96"; */
+"96.title" = "Spara";
+
+/* Class = "NSButtonCell"; title = "Avbryt"; ObjectID = "97"; */
+"97.title" = "Avbryt";
+
+/* Class = "NSTextFieldCell"; title = "Visa alla artiklar som matchar"; ObjectID = "98"; */
+"98.title" = "Visa alla artiklar som matchar";
+
+/* Class = "NSTextFieldCell"; title = "av följande villkor:"; ObjectID = "100"; */
+"100.title" = "av följande villkor:";
+
+/* Class = "NSButtonCell"; title = "-"; ObjectID = "102"; */
+"102.title" = "-";
+
+/* Class = "NSButtonCell"; title = "+"; ObjectID = "104"; */
+"104.title" = "+";
