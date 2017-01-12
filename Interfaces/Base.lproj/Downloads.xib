@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
@@ -16,25 +16,25 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Downloads (Do not localise)" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="5" userLabel="Window">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES"/>
+        <window title="Downloads" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" tabbingMode="disallowed" id="5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowCollectionBehavior key="collectionBehavior" fullScreenAuxiliary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="827" y="444" width="315" height="412"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="contentRect" x="827" y="444" width="315" height="413"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <value key="minSize" type="size" width="213" height="107"/>
             <view key="contentView" id="6">
-                <rect key="frame" x="0.0" y="0.0" width="315" height="412"/>
+                <rect key="frame" x="0.0" y="0.0" width="315" height="413"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView autohidesScrollers="YES" horizontalLineScroll="40" horizontalPageScroll="0.0" verticalLineScroll="40" verticalPageScroll="0.0" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="7">
-                        <rect key="frame" x="-1" y="25" width="317" height="388"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="40" horizontalPageScroll="0.0" verticalLineScroll="40" verticalPageScroll="0.0" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7">
+                        <rect key="frame" x="0.0" y="22" width="315" height="391"/>
                         <clipView key="contentView" id="t1t-cw-71h">
-                            <rect key="frame" x="1" y="1" width="315" height="386"/>
+                            <rect key="frame" x="0.0" y="0.0" width="315" height="391"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="38" id="8" customClass="ExtendedTableView">
-                                    <rect key="frame" x="0.0" y="0.0" width="315" height="386"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="315" height="391"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -61,19 +61,21 @@
                                 </tableView>
                             </subviews>
                         </clipView>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="391" placeholder="YES" id="zLu-UB-3HX"/>
+                        </constraints>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="26">
                             <rect key="frame" x="-100" y="-100" width="298" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="25">
-                            <rect key="frame" x="-30" y="1" width="15" height="388"/>
+                            <rect key="frame" x="-16" y="0.0" width="16" height="0.0"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <button verticalHuggingPriority="750" id="13">
-                        <rect key="frame" x="5" y="2" width="57" height="20"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <buttonCell key="cell" type="squareTextured" title="Clear" bezelStyle="texturedSquare" alignment="center" controlSize="small" borderStyle="border" inset="2" id="23">
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="13">
+                        <rect key="frame" x="258" y="-4" width="54" height="28"/>
+                        <buttonCell key="cell" type="push" title="Clear" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="23">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="smallSystem"/>
                         </buttonCell>
@@ -81,26 +83,19 @@
                             <action selector="clearList:" target="-2" id="14"/>
                         </connections>
                     </button>
-                    <box wantsLayer="YES" verticalHuggingPriority="750" alphaValue="0.5" boxType="separator" id="28">
-                        <rect key="frame" x="0.0" y="21" width="315" height="5"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                        <contentFilters>
-                            <ciFilter name="CIColorControls">
-                                <configuration>
-                                    <real key="inputBrightness" value="1"/>
-                                    <real key="inputContrast" value="1"/>
-                                    <null key="inputImage"/>
-                                    <real key="inputSaturation" value="1"/>
-                                </configuration>
-                            </ciFilter>
-                        </contentFilters>
-                    </box>
-                    <box wantsLayer="YES" verticalHuggingPriority="750" alphaValue="0.19014084339141846" boxType="separator" id="29">
-                        <rect key="frame" x="0.0" y="22" width="315" height="5"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                    </box>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="7" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="7Ea-bD-g9e"/>
+                    <constraint firstAttribute="trailing" secondItem="13" secondAttribute="trailing" constant="8" id="HW5-T6-abc"/>
+                    <constraint firstItem="13" firstAttribute="top" secondItem="7" secondAttribute="bottom" constant="2" id="TAU-bw-oRD"/>
+                    <constraint firstAttribute="bottom" secondItem="13" secondAttribute="bottom" constant="2" id="ait-tG-Iet"/>
+                    <constraint firstAttribute="trailing" secondItem="7" secondAttribute="trailing" id="cb6-K5-09F"/>
+                    <constraint firstItem="13" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6" secondAttribute="leading" constant="8" id="d3V-ig-r57"/>
+                    <constraint firstItem="7" firstAttribute="top" secondItem="6" secondAttribute="top" id="lut-Uk-JYk"/>
+                </constraints>
             </view>
+            <contentBorderThickness minY="22"/>
+            <point key="canvasLocation" x="138.5" y="162"/>
         </window>
     </objects>
 </document>
