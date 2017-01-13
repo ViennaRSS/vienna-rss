@@ -74,7 +74,6 @@
 		0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */; };
 		0379E23B1A20831600D58BFE /* SyncingPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */; };
 		0383DC551B71B44700A11950 /* CriteriaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383DC541B71B44700A11950 /* CriteriaTests.m */; };
-		0386A5C01E1FA586000C10CE /* ActivityViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0386A5BA1E1FA586000C10CE /* ActivityViewer.xib */; };
 		0386A5C11E1FA586000C10CE /* BrowserPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0386A5BB1E1FA586000C10CE /* BrowserPane.xib */; };
 		0386A5C31E1FA586000C10CE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0386A5BD1E1FA586000C10CE /* MainMenu.xib */; };
 		0386A5C41E1FA586000C10CE /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0386A5BE1E1FA586000C10CE /* SearchPanel.xib */; };
@@ -375,6 +374,7 @@
 		EA43C70914A370DB00F2D843 /* VTPG_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = EA43C70814A370DB00F2D843 /* VTPG_Common.m */; };
 		EACE4C90147FA2B000A17997 /* PSMTabBarControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */; };
 		F6257FF51E28485F0035E43C /* Downloads.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6257FF71E28485F0035E43C /* Downloads.xib */; };
+		F625801C1E2853B90035E43C /* ActivityViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625801E1E2853B90035E43C /* ActivityViewer.xib */; };
 		F6D572AB1E26AA8200CDA909 /* EmptyTrashWarning.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572AD1E26AA8200CDA909 /* EmptyTrashWarning.xib */; };
 		F6D572AE1E26AA8A00CDA909 /* FeedCredentials.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */; };
 		F6D572B11E26AA9000CDA909 /* GroupFolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B31E26AA9000CDA909 /* GroupFolder.xib */; };
@@ -499,7 +499,6 @@
 		0379E2391A20831600D58BFE /* SyncingPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SyncingPreferencesViewController.h; path = src/Preferences/SyncingPreferencesViewController.h; sourceTree = "<group>"; };
 		0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SyncingPreferencesViewController.m; path = src/Preferences/SyncingPreferencesViewController.m; sourceTree = "<group>"; };
 		0383DC541B71B44700A11950 /* CriteriaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CriteriaTests.m; sourceTree = "<group>"; };
-		0386A5BA1E1FA586000C10CE /* ActivityViewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActivityViewer.xib; path = Interfaces/ActivityViewer.xib; sourceTree = "<group>"; };
 		0386A5BB1E1FA586000C10CE /* BrowserPane.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BrowserPane.xib; path = Interfaces/BrowserPane.xib; sourceTree = "<group>"; };
 		0386A5BD1E1FA586000C10CE /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = Interfaces/MainMenu.xib; sourceTree = "<group>"; };
 		0386A5BE1E1FA586000C10CE /* SearchPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchPanel.xib; path = Interfaces/SearchPanel.xib; sourceTree = "<group>"; };
@@ -945,6 +944,25 @@
 		F62580171E2849A10035E43C /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Downloads.strings; sourceTree = "<group>"; };
 		F62580191E2849A30035E43C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Downloads.strings"; sourceTree = "<group>"; };
 		F625801B1E2849A50035E43C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Downloads.strings"; sourceTree = "<group>"; };
+		F625801D1E2853B90035E43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ActivityViewer.xib; sourceTree = "<group>"; };
+		F62580221E2854270035E43C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
+		F62580241E2854DD0035E43C /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
+		F62580261E2854DF0035E43C /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
+		F62580281E2854E10035E43C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
+		F625802A1E2854E50035E43C /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
+		F625802C1E2854E70035E43C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
+		F625802E1E2854E90035E43C /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
+		F62580301E2854EB0035E43C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
+		F62580321E2854EC0035E43C /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
+		F62580341E2854EE0035E43C /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
+		F62580361E2854F00035E43C /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
+		F62580381E2854F10035E43C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/ActivityViewer.strings"; sourceTree = "<group>"; };
+		F625803A1E2854F30035E43C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
+		F625803C1E2854F50035E43C /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
+		F625803E1E2854F60035E43C /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
+		F62580401E2854F80035E43C /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
+		F62580421E2854FA0035E43C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/ActivityViewer.strings"; sourceTree = "<group>"; };
+		F62580441E2854FC0035E43C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ActivityViewer.strings"; sourceTree = "<group>"; };
 		F6352BB81E2706DD005CD307 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6352BB91E2706E1005CD307 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6352BBA1E2706EB005CD307 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoWindow.strings"; sourceTree = "<group>"; };
@@ -1467,7 +1485,7 @@
 		43EE7548165E81AB000997FB /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				0386A5BA1E1FA586000C10CE /* ActivityViewer.xib */,
+				F625801E1E2853B90035E43C /* ActivityViewer.xib */,
 				0386A5BB1E1FA586000C10CE /* BrowserPane.xib */,
 				F6257FF71E28485F0035E43C /* Downloads.xib */,
 				0386A5BD1E1FA586000C10CE /* MainMenu.xib */,
@@ -2074,7 +2092,7 @@
 			files = (
 				03721E6E1A218D4B009C020C /* AppearancePreferencesView.xib in Resources */,
 				03493D2F1A303C1000AA3F36 /* AdvancedPreferencesView.xib in Resources */,
-				0386A5C01E1FA586000C10CE /* ActivityViewer.xib in Resources */,
+				F625801C1E2853B90035E43C /* ActivityViewer.xib in Resources */,
 				03493D1A1A303BF700AA3F36 /* SyncingPreferencesView.xib in Resources */,
 				0386A5C51E1FA586000C10CE /* XMLSource.xib in Resources */,
 				0386A5C31E1FA586000C10CE /* MainMenu.xib in Resources */,
@@ -2777,6 +2795,33 @@
 				F625801B1E2849A50035E43C /* zh-Hans */,
 			);
 			name = Downloads.xib;
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		F625801E1E2853B90035E43C /* ActivityViewer.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F625801D1E2853B90035E43C /* Base */,
+				F62580221E2854270035E43C /* de */,
+				F62580241E2854DD0035E43C /* cs */,
+				F62580261E2854DF0035E43C /* da */,
+				F62580281E2854E10035E43C /* es */,
+				F625802A1E2854E50035E43C /* eu */,
+				F625802C1E2854E70035E43C /* fr */,
+				F625802E1E2854E90035E43C /* it */,
+				F62580301E2854EB0035E43C /* ja */,
+				F62580321E2854EC0035E43C /* ko */,
+				F62580341E2854EE0035E43C /* nl */,
+				F62580361E2854F00035E43C /* pt */,
+				F62580381E2854F10035E43C /* pt-BR */,
+				F625803A1E2854F30035E43C /* ru */,
+				F625803C1E2854F50035E43C /* sv */,
+				F625803E1E2854F60035E43C /* tr */,
+				F62580401E2854F80035E43C /* uk */,
+				F62580421E2854FA0035E43C /* zh-Hant */,
+				F62580441E2854FC0035E43C /* zh-Hans */,
+			);
+			name = ActivityViewer.xib;
 			path = Interfaces;
 			sourceTree = "<group>";
 		};
