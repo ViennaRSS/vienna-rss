@@ -102,7 +102,7 @@
 /* windowDidLoad
  * When the window has finished loading, we make sure that the WebView's WebPreferences 
  * allow the execution of JavaScript. We need that for syntax coloring, and the user might
- * have turned it off in the user preferences.
+ * have turned it off in the user preferences. Also enable the rubber-banding effect.
  */
 - (void)windowDidLoad
 {
@@ -124,6 +124,10 @@
 	self.window.title = sourceWindowTitle;
 	sourceWebView.preferencesIdentifier = @"ViennaJavaScriptEnabled";
 	[self displayXmlSource];
+
+    NSScrollView *enclosingScrollView = sourceWebView.mainFrame.frameView.documentView.enclosingScrollView;
+    [enclosingScrollView setVerticalScrollElasticity:NSScrollElasticityAllowed];
+    [enclosingScrollView setHorizontalScrollElasticity:NSScrollElasticityAllowed];
 }
 
 - (void)windowWillClose:(NSNotification *)notification
