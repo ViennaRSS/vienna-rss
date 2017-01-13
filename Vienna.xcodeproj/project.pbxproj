@@ -77,7 +77,6 @@
 		0386A5C11E1FA586000C10CE /* BrowserPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0386A5BB1E1FA586000C10CE /* BrowserPane.xib */; };
 		0386A5C31E1FA586000C10CE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0386A5BD1E1FA586000C10CE /* MainMenu.xib */; };
 		0386A5C41E1FA586000C10CE /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0386A5BE1E1FA586000C10CE /* SearchPanel.xib */; };
-		0386A5C51E1FA586000C10CE /* XMLSource.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0386A5BF1E1FA586000C10CE /* XMLSource.xib */; };
 		03A131B31AA54EAC0037471F /* VNADatabaseMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */; };
 		03B35B841B75E9E0001DB06D /* NSDate+Vienna.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B35B831B75E9E0001DB06D /* NSDate+Vienna.m */; };
 		03B7522A1B741AFD00FD3FDB /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B752291B741AFD00FD3FDB /* FeedItem.m */; };
@@ -387,6 +386,7 @@
 		F62580E11E286CDE0035E43C /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = F62580DF1E286CDE0035E43C /* errorpage.html */; };
 		F62580E41E286CE60035E43C /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = F62580E21E286CE60035E43C /* KnownSyncServers.plist */; };
 		F62580E71E286CEC0035E43C /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = F62580E51E286CEC0035E43C /* RSSSources.plist */; };
+		F62581281E2888D00035E43C /* XMLSource.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625812A1E2888D00035E43C /* XMLSource.xib */; };
 		F6D572AB1E26AA8200CDA909 /* EmptyTrashWarning.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572AD1E26AA8200CDA909 /* EmptyTrashWarning.xib */; };
 		F6D572AE1E26AA8A00CDA909 /* FeedCredentials.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */; };
 		F6D572B11E26AA9000CDA909 /* GroupFolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B31E26AA9000CDA909 /* GroupFolder.xib */; };
@@ -539,7 +539,6 @@
 		0386A5BB1E1FA586000C10CE /* BrowserPane.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BrowserPane.xib; path = Interfaces/BrowserPane.xib; sourceTree = "<group>"; };
 		0386A5BD1E1FA586000C10CE /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = Interfaces/MainMenu.xib; sourceTree = "<group>"; };
 		0386A5BE1E1FA586000C10CE /* SearchPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchPanel.xib; path = Interfaces/SearchPanel.xib; sourceTree = "<group>"; };
-		0386A5BF1E1FA586000C10CE /* XMLSource.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XMLSource.xib; path = Interfaces/XMLSource.xib; sourceTree = "<group>"; };
 		03A131B11AA54EAC0037471F /* VNADatabaseMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VNADatabaseMigration.h; path = src/VNADatabaseMigration.h; sourceTree = "<group>"; };
 		03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VNADatabaseMigration.m; path = src/VNADatabaseMigration.m; sourceTree = "<group>"; };
 		03B35B821B75E9E0001DB06D /* NSDate+Vienna.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Vienna.h"; path = "src/NSDate+Vienna.h"; sourceTree = "<group>"; };
@@ -1293,6 +1292,7 @@
 		F62581121E286D990035E43C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = Interfaces/fr.lproj/errorpage.html; sourceTree = "<group>"; };
 		F62581161E286DA60035E43C /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = nl; path = Interfaces/nl.lproj/errorpage.html; sourceTree = "<group>"; };
 		F625811F1E286E390035E43C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = Interfaces/ru.lproj/errorpage.html; sourceTree = "<group>"; };
+		F62581291E2888D00035E43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/XMLSource.xib; sourceTree = "<group>"; };
 		F6352BB81E2706DD005CD307 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6352BB91E2706E1005CD307 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6352BBA1E2706EB005CD307 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoWindow.strings"; sourceTree = "<group>"; };
@@ -1821,7 +1821,7 @@
 				F6257FF71E28485F0035E43C /* Downloads.xib */,
 				0386A5BD1E1FA586000C10CE /* MainMenu.xib */,
 				0386A5BE1E1FA586000C10CE /* SearchPanel.xib */,
-				0386A5BF1E1FA586000C10CE /* XMLSource.xib */,
+				F625812A1E2888D00035E43C /* XMLSource.xib */,
 				F6D572AD1E26AA8200CDA909 /* EmptyTrashWarning.xib */,
 				F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */,
 				F6D572B31E26AA9000CDA909 /* GroupFolder.xib */,
@@ -2473,7 +2473,7 @@
 				03493D2F1A303C1000AA3F36 /* AdvancedPreferencesView.xib in Resources */,
 				F625801C1E2853B90035E43C /* ActivityViewer.xib in Resources */,
 				03493D1A1A303BF700AA3F36 /* SyncingPreferencesView.xib in Resources */,
-				0386A5C51E1FA586000C10CE /* XMLSource.xib in Resources */,
+				F62581281E2888D00035E43C /* XMLSource.xib in Resources */,
 				0386A5C31E1FA586000C10CE /* MainMenu.xib in Resources */,
 				F6D572AE1E26AA8A00CDA909 /* FeedCredentials.xib in Resources */,
 				03721E591A218CFC009C020C /* GeneralPreferencesView.xib in Resources */,
@@ -3340,6 +3340,15 @@
 				F625810C1E286D880035E43C /* zh-Hans */,
 			);
 			name = RSSSources.plist;
+			sourceTree = "<group>";
+		};
+		F625812A1E2888D00035E43C /* XMLSource.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F62581291E2888D00035E43C /* Base */,
+			);
+			name = XMLSource.xib;
+			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		F6D572AD1E26AA8200CDA909 /* EmptyTrashWarning.xib */ = {
