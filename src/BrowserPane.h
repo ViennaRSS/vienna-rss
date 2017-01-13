@@ -36,7 +36,6 @@
 @end
 
 @interface BrowserPane : NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate> {
-	IBOutlet NSBox * boxFrame;
 	TabbedWebView * webPane;
 	IBOutlet NSButton * backButton;
 	IBOutlet NSButton * forwardButton;
