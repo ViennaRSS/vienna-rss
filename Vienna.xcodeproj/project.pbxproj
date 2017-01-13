@@ -1204,6 +1204,12 @@
 		F62580401E2854F80035E43C /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
 		F62580421E2854FA0035E43C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/ActivityViewer.strings"; sourceTree = "<group>"; };
 		F62580441E2854FC0035E43C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ActivityViewer.strings"; sourceTree = "<group>"; };
+		F62580471E285A6E0035E43C /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = gl.lproj/EmptyTrashWarning.strings; sourceTree = "<group>"; };
+		F62580491E285B030035E43C /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = gl.lproj/FeedCredentials.strings; sourceTree = "<group>"; };
+		F625804B1E285B5F0035E43C /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = gl.lproj/GroupFolder.strings; sourceTree = "<group>"; };
+		F625804D1E285BBF0035E43C /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = gl.lproj/InfoWindow.strings; sourceTree = "<group>"; };
+		F625804F1E285C710035E43C /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = gl.lproj/Downloads.strings; sourceTree = "<group>"; };
+		F62580511E285C910035E43C /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = gl.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
 		F6352BB81E2706DD005CD307 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6352BB91E2706E1005CD307 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6352BBA1E2706EB005CD307 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoWindow.strings"; sourceTree = "<group>"; };
@@ -2327,6 +2333,7 @@
 				es,
 				eu,
 				fr,
+				gl,
 				it,
 				ja,
 				ko,
@@ -3100,6 +3107,7 @@
 				F62580171E2849A10035E43C /* uk */,
 				F62580191E2849A30035E43C /* zh-Hant */,
 				F625801B1E2849A50035E43C /* zh-Hans */,
+				F625804F1E285C710035E43C /* gl */,
 			);
 			name = Downloads.xib;
 			path = Interfaces;
@@ -3127,6 +3135,7 @@
 				F62580401E2854F80035E43C /* uk */,
 				F62580421E2854FA0035E43C /* zh-Hant */,
 				F62580441E2854FC0035E43C /* zh-Hans */,
+				F62580511E285C910035E43C /* gl */,
 			);
 			name = ActivityViewer.xib;
 			path = Interfaces;
@@ -3154,6 +3163,7 @@
 				F6352BDD1E2720BB005CD307 /* eu */,
 				F6352BDE1E2720BF005CD307 /* zh-Hant */,
 				F6352BDF1E2720C1005CD307 /* zh-Hans */,
+				F62580471E285A6E0035E43C /* gl */,
 			);
 			name = EmptyTrashWarning.xib;
 			path = Interfaces;
@@ -3181,6 +3191,7 @@
 				F6D573781E26C7E800CDA909 /* tr */,
 				F6352BE01E2720C8005CD307 /* zh-Hant */,
 				F6352BE11E2720CB005CD307 /* zh-Hans */,
+				F62580491E285B030035E43C /* gl */,
 			);
 			name = FeedCredentials.xib;
 			path = Interfaces;
@@ -3208,6 +3219,7 @@
 				F6D573641E26C34800CDA909 /* eu */,
 				F6352BE21E2720D2005CD307 /* zh-Hant */,
 				F6352BE31E2720D4005CD307 /* zh-Hans */,
+				F625804B1E285B5F0035E43C /* gl */,
 			);
 			name = GroupFolder.xib;
 			path = Interfaces;
@@ -3235,6 +3247,7 @@
 				F6352BC21E270707005CD307 /* tr */,
 				F6352BD91E271FDF005CD307 /* zh-Hant */,
 				F6352BDA1E271FE4005CD307 /* zh-Hans */,
+				F625804D1E285BBF0035E43C /* gl */,
 			);
 			name = InfoWindow.xib;
 			path = Interfaces;
