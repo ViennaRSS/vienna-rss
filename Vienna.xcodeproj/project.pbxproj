@@ -1575,18 +1575,18 @@
 		43EE7548165E81AB000997FB /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				F625801E1E2853B90035E43C /* ActivityViewer.xib */,
-				0386A5BB1E1FA586000C10CE /* BrowserPane.xib */,
-				F6257FF71E28485F0035E43C /* Downloads.xib */,
 				0386A5BD1E1FA586000C10CE /* MainMenu.xib */,
+				0386A5BB1E1FA586000C10CE /* BrowserPane.xib */,
 				F625812D1E288EBC0035E43C /* SearchPanel.xib */,
-				F625812A1E2888D00035E43C /* XMLSource.xib */,
 				F6D572AD1E26AA8200CDA909 /* EmptyTrashWarning.xib */,
 				F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */,
 				F6D572B31E26AA9000CDA909 /* GroupFolder.xib */,
-				F6D572B61E26AA9900CDA909 /* InfoWindow.xib */,
 				F6D572B91E26AAA100CDA909 /* RSSFeed.xib */,
 				F6D572BC1E26AAA900CDA909 /* SearchFolder.xib */,
+				F6D572B61E26AA9900CDA909 /* InfoWindow.xib */,
+				F625812A1E2888D00035E43C /* XMLSource.xib */,
+				F625801E1E2853B90035E43C /* ActivityViewer.xib */,
+				F6257FF71E28485F0035E43C /* Downloads.xib */,
 				034981351A206E3C00014F29 /* Preferences */,
 			);
 			name = Interfaces;
