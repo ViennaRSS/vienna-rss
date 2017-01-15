@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
@@ -20,7 +20,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="302" y="347" width="942" height="625"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
             <value key="minSize" type="size" width="213" height="107"/>
             <view key="contentView" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="942" height="625"/>
@@ -70,7 +70,7 @@
                                             <nil key="backgroundColor"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="u6a-gc-Hse">
-                                            <rect key="frame" x="0.0" y="560" width="285" height="16"/>
+                                            <rect key="frame" x="0.0" y="-16" width="0.0" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="m9n-zp-NnZ">
@@ -227,7 +227,7 @@
             <connections>
                 <outlet property="delegate" destination="233" id="1bL-FD-UdQ"/>
             </connections>
-            <point key="canvasLocation" x="139" y="-277.5"/>
+            <point key="canvasLocation" x="138" y="-572"/>
         </window>
         <menu title="MainMenu" systemMenu="main" id="29" userLabel="MainMenu">
             <items>
@@ -986,27 +986,27 @@ CA
             </subviews>
         </customView>
         <customView id="971" userLabel="ArticleDisplayView" customClass="ArticleListView">
-            <rect key="frame" x="0.0" y="0.0" width="700" height="609"/>
+            <rect key="frame" x="0.0" y="0.0" width="700" height="629"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <splitView dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="972">
-                    <rect key="frame" x="0.0" y="0.0" width="700" height="609"/>
+                    <rect key="frame" x="0.0" y="0.0" width="700" height="629"/>
                     <subviews>
                         <box fixedFrame="YES" boxType="custom" borderType="none" borderWidth="0.0" title="Title" titlePosition="noTitle" id="973">
-                            <rect key="frame" x="0.0" y="0.0" width="700" height="298"/>
+                            <rect key="frame" x="0.0" y="0.0" width="700" height="308"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <view key="contentView" id="scf-1q-Ljq">
-                                <rect key="frame" x="0.0" y="0.0" width="700" height="298"/>
+                                <rect key="frame" x="0.0" y="0.0" width="700" height="308"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="976">
-                                        <rect key="frame" x="0.0" y="0.0" width="700" height="299"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="700" height="309"/>
                                         <clipView key="contentView" id="TOX-JT-adF">
-                                            <rect key="frame" x="0.0" y="0.0" width="700" height="299"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="700" height="309"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowHeight="15" headerView="1386" id="977" customClass="MessageListView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="700" height="276"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="700" height="286"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1041,11 +1041,11 @@ CA
                             <font key="titleFont" size="11" name="LucidaGrande"/>
                         </box>
                         <view id="LXW-5J-Hlt">
-                            <rect key="frame" x="0.0" y="308" width="700" height="301"/>
+                            <rect key="frame" x="0.0" y="318" width="700" height="311"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="1DK-2K-uuy" customClass="ArticleView">
-                                    <rect key="frame" x="0.0" y="0.0" width="700" height="301"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="700" height="311"/>
                                 </customView>
                             </subviews>
                             <constraints>
@@ -1076,6 +1076,7 @@ CA
                 <outlet property="splitView2" destination="972" id="998"/>
                 <outlet property="stdEnclosureView" destination="1288" id="1296"/>
             </connections>
+            <point key="canvasLocation" x="1066" y="-571"/>
         </customView>
         <customView id="1148" userLabel="UnifiedDisplayView" customClass="UnifiedDisplayView">
             <rect key="frame" x="0.0" y="0.0" width="701" height="607"/>
@@ -1127,6 +1128,7 @@ CA
                 <outlet property="articleList" destination="NgO-hM-mCz" id="x5w-1V-UjV"/>
                 <outlet property="controller" destination="233" id="1170"/>
             </connections>
+            <point key="canvasLocation" x="1066" y="109"/>
         </customView>
         <customObject id="1164" userLabel="ArticleController" customClass="ArticleController">
             <connections>
