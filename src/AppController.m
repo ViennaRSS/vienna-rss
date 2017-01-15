@@ -83,7 +83,6 @@
 	-(void)handleShowStatusBar:(NSNotification *)nc;
 	-(void)handleShowFilterBar:(NSNotification *)nc;
 	-(void)setAppStatusBarIcon;
-	-(void)localiseMenus:(NSArray *)arrayOfMenus;
 	-(void)updateNewArticlesNotification;
 	-(void)showAppInStatusBar;
 	-(void)initSortMenu;
@@ -165,9 +164,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 
 	// Restore the most recent layout
 	[self setLayout:prefs.layout withRefresh:NO];
-
-	// Localise the menus
-	[self localiseMenus:NSApp.mainMenu.itemArray];
 	
 	// Set the delegates and title
 	mainWindow.title = self.appName;
@@ -264,35 +260,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		
 	}
 	didCompleteInitialisation = YES;
-}
-
-/* localiseMenus
- * As of 2.0.1, the menu localisation is now done through the Localizable.strings file rather than
- * the NIB file due to the effort in managing localised NIBs for an increasing number of languages.
- * Also, note care is taken not to localise those commands that were added by the OS. If there is
- * no equivalent in the Localizable.strings file, we do nothing.
- */
--(void)localiseMenus:(NSArray *)arrayOfMenus
-{
-	NSUInteger count = arrayOfMenus.count;
-	
-	for (NSUInteger index = 0; index < count; ++index)
-	{
-		NSMenuItem * menuItem = arrayOfMenus[index];
-		if (menuItem != nil && !menuItem.separatorItem)
-		{
-			NSString * localisedMenuTitle = NSLocalizedString([menuItem title], nil);
-			if (menuItem.submenu)
-			{
-				NSMenu * subMenu = menuItem.submenu;
-				if (localisedMenuTitle != nil)
-					subMenu.title = localisedMenuTitle;
-				[self localiseMenus:subMenu.itemArray];
-			}
-			if (localisedMenuTitle != nil)
-				menuItem.title = localisedMenuTitle;
-		}
-	}
 }
 
 #pragma mark Accessor Methods
