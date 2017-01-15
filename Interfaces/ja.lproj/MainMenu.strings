@@ -1,0 +1,441 @@
+
+/* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
+"5.title" = "すべてを手前に移動";
+
+/* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
+"19.title" = "ウインドウ";
+
+/* Class = "NSWindow"; title = "Vienna"; ObjectID = "21"; */
+"21.title" = "Vienna";
+
+/* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
+"23.title" = "しまう";
+
+/* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
+"24.title" = "ウインドウ";
+
+/* Class = "NSMenu"; title = "MainMenu"; ObjectID = "29"; */
+"29.title" = "MainMenu";
+
+/* Class = "NSMenuItem"; title = "Vienna"; ObjectID = "56"; */
+"56.title" = "Vienna";
+
+/* Class = "NSMenu"; title = "Vienna"; ObjectID = "57"; */
+"57.title" = "Vienna";
+
+/* Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58"; */
+"58.title" = "Vienna について";
+
+/* Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "77"; */
+"77.title" = "ページ設定…";
+
+/* Class = "NSMenuItem"; title = "Print…"; ObjectID = "78"; */
+"78.title" = "印刷…";
+
+/* Class = "NSMenu"; title = "File"; ObjectID = "81"; */
+"81.title" = "ファイル";
+
+/* Class = "NSMenuItem"; title = "File"; ObjectID = "83"; */
+"83.title" = "ファイル";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "103"; */
+"103.title" = "ヘルプ";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "106"; */
+"106.title" = "ヘルプ";
+
+/* Class = "NSMenuItem"; title = "Vienna Help"; ObjectID = "111"; */
+"111.title" = "Vienna ヘルプ";
+
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
+"129.title" = "環境設定…";
+
+/* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
+"130.title" = "サービス";
+
+/* Class = "NSMenuItem"; title = "Services"; ObjectID = "131"; */
+"131.title" = "サービス";
+
+/* Class = "NSMenuItem"; title = "Hide Vienna"; ObjectID = "134"; */
+"134.title" = "Vienna を隠す";
+
+/* Class = "NSMenuItem"; title = "Quit Vienna"; ObjectID = "136"; */
+"136.title" = "Vienna を終了";
+
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
+"145.title" = "他を隠す";
+
+/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
+"150.title" = "すべてを表示";
+
+/* Class = "NSMenuItem"; title = "Find…"; ObjectID = "154"; */
+"154.title" = "検索…";
+
+/* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "155"; */
+"155.title" = "選択部分へジャンプ";
+
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "157"; */
+"157.title" = "コピー";
+
+/* Class = "NSMenuItem"; title = "Undo"; ObjectID = "158"; */
+"158.title" = "取り消し";
+
+/* Class = "NSMenu"; title = "Find"; ObjectID = "159"; */
+"159.title" = "検索";
+
+/* Class = "NSMenuItem"; title = "Cut"; ObjectID = "160"; */
+"160.title" = "カット";
+
+/* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "161"; */
+"161.title" = "選択部分を検索";
+
+/* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "162"; */
+"162.title" = "前を検索";
+
+/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "163"; */
+"163.title" = "編集";
+
+/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "164"; */
+"164.title" = "削除";
+
+/* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "167"; */
+"167.title" = "次を検索";
+
+/* Class = "NSMenuItem"; title = "Find"; ObjectID = "168"; */
+"168.title" = "検索";
+
+/* Class = "NSMenu"; title = "Edit"; ObjectID = "169"; */
+"169.title" = "編集";
+
+/* Class = "NSMenuItem"; title = "Paste"; ObjectID = "171"; */
+"171.title" = "ペースト";
+
+/* Class = "NSMenuItem"; title = "Select All"; ObjectID = "172"; */
+"172.title" = "すべてを選択";
+
+/* Class = "NSMenuItem"; title = "Redo"; ObjectID = "173"; */
+"173.title" = "やり直し";
+
+/* Class = "NSMenuItem"; title = "Spelling"; ObjectID = "184"; */
+"184.title" = "スペル";
+
+/* Class = "NSMenu"; title = "Spelling"; ObjectID = "185"; */
+"185.title" = "スペル";
+
+/* Class = "NSMenuItem"; title = "Spelling…"; ObjectID = "187"; */
+"187.title" = "スペル…";
+
+/* Class = "NSMenuItem"; title = "Check Spelling"; ObjectID = "189"; */
+"189.title" = "スペルチェック";
+
+/* Class = "NSMenuItem"; title = "Check Spelling as You Type"; ObjectID = "191"; */
+"191.title" = "入力中に自動スペルチェック";
+
+/* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "197"; */
+"197.title" = "拡大／縮小";
+
+/* Class = "NSMenuItem"; title = "View"; ObjectID = "235"; */
+"235.title" = "表示";
+
+/* Class = "NSMenu"; title = "View"; ObjectID = "237"; */
+"237.title" = "表示";
+
+/* Class = "NSMenu"; title = "Article"; ObjectID = "300"; */
+"300.title" = "記事";
+
+/* Class = "NSMenuItem"; title = "Article"; ObjectID = "301"; */
+"301.title" = "記事";
+
+/* Class = "NSMenuItem"; title = "Next Unread"; ObjectID = "344"; */
+"344.title" = "次の未読";
+
+/* Class = "NSMenuItem"; title = "Sort By"; ObjectID = "387"; */
+"387.title" = "ソート";
+
+/* Class = "NSMenu"; title = "Sort By"; ObjectID = "388"; */
+"388.title" = "ソート";
+
+/* Class = "NSMenuItem"; title = "Activity Window"; ObjectID = "402"; */
+"402.title" = "アクティビティウインドウ";
+
+/* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "406"; */
+"406.title" = "すべての購読を更新";
+
+/* Class = "NSMenuItem"; title = "Back"; ObjectID = "422"; */
+"422.title" = "戻る";
+
+/* Class = "NSMenuItem"; title = "Forward"; ObjectID = "423"; */
+"423.title" = "進む";
+
+/* Class = "NSMenuItem"; title = "Columns"; ObjectID = "442"; */
+"442.title" = "欄";
+
+/* Class = "NSMenu"; title = "Columns"; ObjectID = "443"; */
+"443.title" = "欄";
+
+/* Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "574"; */
+"574.title" = "新規スマートフォルダ…";
+
+/* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "604"; */
+"604.title" = "選択された購読を更新";
+
+/* Class = "NSMenuItem"; title = "Acknowledgements"; ObjectID = "682"; */
+"682.title" = "謝辞";
+
+/* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "690"; */
+"690.title" = "新規購読…";
+
+/* Class = "NSMenuItem"; title = "Import Subscriptions…"; ObjectID = "780"; */
+"780.title" = "購読の読み込み…";
+
+/* Class = "NSMenuItem"; title = "Export Subscriptions…"; ObjectID = "781"; */
+"781.title" = "購読を書き出し…";
+
+/* Class = "NSMenuItem"; title = "Mark Unread"; ObjectID = "789"; */
+"789.title" = "未読にする";
+
+/* Class = "NSMenuItem"; title = "Mark Flagged"; ObjectID = "790"; */
+"790.title" = "フラグあり";
+
+/* Class = "NSMenuItem"; title = "New Group Folder…"; ObjectID = "806"; */
+"806.title" = "新規グループフォルダ…";
+
+/* Class = "NSMenuItem"; title = "Style"; ObjectID = "826"; */
+"826.title" = "スタイル";
+
+/* Class = "NSMenu"; title = "Style"; ObjectID = "827"; */
+"827.title" = "スタイル";
+
+/* Class = "NSMenuItem"; title = "Stop Refreshing"; ObjectID = "858"; */
+"858.title" = "更新中止";
+
+/* Class = "NSButtonCell"; title = "Export all subscriptions"; ObjectID = "862"; */
+"862.title" = "すべての購読を書き出す";
+
+/* Class = "NSButtonCell"; title = "Export selected subscriptions"; ObjectID = "863"; */
+"863.title" = "選択中の購読を書き出す";
+
+/* Class = "NSBox"; title = "Title"; ObjectID = "881"; */
+"881.title" = "Title";
+
+/* Class = "NSMenuItem"; title = "Vienna Web Site"; ObjectID = "929"; */
+"929.title" = "Vienna ホームページ";
+
+/* Class = "NSMenuItem"; title = "Close Window"; ObjectID = "935"; */
+"935.title" = "ウインドウを閉じる";
+
+/* Class = "NSMenuItem"; title = "Main Window"; ObjectID = "940"; */
+"940.title" = "メインウインドウ";
+
+/* Class = "NSMenuItem"; title = "Empty Trash"; ObjectID = "961"; */
+"961.title" = "ゴミ箱を空にする";
+
+/* Class = "NSBox"; title = "Title"; ObjectID = "973"; */
+"973.title" = "Title";
+
+/* Class = "NSBox"; title = "Title"; ObjectID = "978"; */
+"978.title" = "Title";
+
+/* Class = "NSMenuItem"; title = "Previous Tab"; ObjectID = "1008"; */
+"1008.title" = "前のタブ";
+
+/* Class = "NSMenuItem"; title = "Next Tab"; ObjectID = "1009"; */
+"1009.title" = "次のタブ";
+
+/* Class = "NSMenuItem"; title = "Close Tab"; ObjectID = "1023"; */
+"1023.title" = "タブを閉じる";
+
+/* Class = "NSMenuItem"; title = "Reload Page"; ObjectID = "1025"; */
+"1025.title" = "ページの再読込";
+
+/* Class = "NSMenuItem"; title = "Stop Reloading Page"; ObjectID = "1027"; */
+"1027.title" = "再読込を中止";
+
+/* Class = "NSMenuItem"; title = "Close All Tabs"; ObjectID = "1036"; */
+"1036.title" = "すべてのタブを閉じる";
+
+/* Class = "NSMenuItem"; title = "Open Article Page"; ObjectID = "1040"; */
+"1040.title" = "記事のページに移動";
+
+/* Class = "NSMenuItem"; title = "Restore Article"; ObjectID = "1044"; */
+"1044.title" = "記事を復元";
+
+/* Class = "NSMenuItem"; title = "Downloads"; ObjectID = "1061"; */
+"1061.title" = "ダウンロード";
+
+/* Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067"; */
+"1067.title" = "ブラウザで記事を開く";
+
+/* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
+"1073.title" = "Send Link by Email";
+
+/* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
+"1084.title" = "Bigger Text";
+
+/* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
+"1085.title" = "Smaller Text";
+
+/* Class = "NSMenuItem"; title = "Open Web Location..."; ObjectID = "1101"; */
+"1101.title" = "Web ページを開く...";
+
+/* Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "1104"; */
+"1104.title" = "アップデートをチェック";
+
+/* Class = "NSMenuItem"; title = "Refresh Folder Images"; ObjectID = "1106"; */
+"1106.title" = "フォルダイメージを更新";
+
+/* Class = "NSMenuItem"; title = "Layout"; ObjectID = "1108"; */
+"1108.title" = "レイアウト";
+
+/* Class = "NSMenu"; title = "Layout"; ObjectID = "1109"; */
+"1109.title" = "レイアウト";
+
+/* Class = "NSMenuItem"; title = "Report"; ObjectID = "1110"; */
+"1110.title" = "レポート";
+
+/* Class = "NSMenuItem"; title = "Condensed"; ObjectID = "1116"; */
+"1116.title" = "凝縮";
+
+/* Class = "NSMenuItem"; title = "Filter By"; ObjectID = "1117"; */
+"1117.title" = "フィルター";
+
+/* Class = "NSMenu"; title = "Filter By"; ObjectID = "1118"; */
+"1118.title" = "フィルター";
+
+/* Class = "NSMenuItem"; title = "Keyboard Shortcuts"; ObjectID = "1146"; */
+"1146.title" = "キーボードショートカット";
+
+/* Class = "NSMenuItem"; title = "Unified"; ObjectID = "1160"; */
+"1160.title" = "統一";
+
+/* Class = "NSMenuItem"; title = "Folder"; ObjectID = "1177"; */
+"1177.title" = "フォルダ";
+
+/* Class = "NSMenu"; title = "Folder"; ObjectID = "1178"; */
+"1178.title" = "フォルダ";
+
+/* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "1180"; */
+"1180.title" = "編集…";
+
+/* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "1181"; */
+"1181.title" = "名称変更…";
+
+/* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "1184"; */
+"1184.title" = "削除…";
+
+/* Class = "NSMenuItem"; title = "Skip Folder"; ObjectID = "1186"; */
+"1186.title" = "フォルダをスキップ";
+
+/* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "1187"; */
+"1187.title" = "すべての記事を既読にする";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "1191"; */
+"1191.title" = "購読元のホームページに移動";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "1192"; */
+"1192.title" = "ブラウザで購読先のホームページを開く";
+
+/* Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "1195"; */
+"1195.title" = "すべての購読を既読にする";
+
+/* Class = "NSMenuItem"; title = "Delete Article"; ObjectID = "1198"; */
+"1198.title" = "記事を削除";
+
+/* Class = "NSMenuItem"; title = "Open New Tab"; ObjectID = "1214"; */
+"1214.title" = "Open New Tab";
+
+/* Class = "NSMenuItem"; title = "Download Enclosure"; ObjectID = "1216"; */
+"1216.title" = "Download Enclosure";
+
+/* Class = "NSTabViewItem"; label = "Tab"; ObjectID = "1221"; */
+"1221.label" = "Tab";
+
+/* Class = "NSMenuItem"; title = "Customize Toolbar..."; ObjectID = "1257"; */
+"1257.title" = "Customize Toolbar...";
+
+/* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
+"1258.title" = "Hide Toolbar";
+
+/* Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259"; */
+"1259.title" = "Hide Status Bar";
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "1279"; */
+"1279.title" = "Box";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "1307"; */
+"1307.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "Item3"; ObjectID = "1308"; */
+"1308.title" = "Item3";
+
+/* Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "1325"; */
+"1325.title" = "Show Filter Bar";
+
+/* Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327"; */
+"1327.title" = "Search Articles";
+
+/* Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336"; */
+"1336.title" = "Order By";
+
+/* Class = "NSMenu"; title = "Order By"; ObjectID = "1337"; */
+"1337.title" = "Order By";
+
+/* Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338"; */
+"1338.title" = "Manual";
+
+/* Class = "NSMenuItem"; title = "Name"; ObjectID = "1339"; */
+"1339.title" = "Name";
+
+/* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "1367"; */
+"1367.title" = "\n";
+
+/* Class = "NSButtonCell"; title = "Preserve group folders in exported file"; ObjectID = "1368"; */
+"1368.title" = "グループフォルダをファイルに書き出す";
+
+/* Class = "NSTextFieldCell"; title = "(label)"; ObjectID = "1373"; */
+"1373.title" = "(label)";
+
+/* Class = "NSButtonCell"; title = "(button)"; ObjectID = "1374"; */
+"1374.title" = "(button)";
+
+/* Class = "NSTextFieldCell"; title = "(filename)"; ObjectID = "1375"; */
+"1375.title" = "(filename)";
+
+/* Class = "NSTextFieldCell"; title = "Filter by:\n"; ObjectID = "1377"; */
+"1377.title" = "Filter by:\n";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "1380"; */
+"1380.title" = "Radio";
+
+/* Class = "NSMenuItem"; title = "Show XML Source"; ObjectID = "1394"; */
+"1394.title" = "Show XML Source";
+
+/* Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404"; */
+"1404.title" = "Current Filter";
+
+/* Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408"; */
+"1408.title" = "Unsubscribe from Feed";
+
+/* Class = "NSMenuItem"; title = "Get Info..."; ObjectID = "1409"; */
+"1409.title" = "情報を見る...";
+
+/* Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413"; */
+"1413.title" = "Use Current Style for Articles";
+
+/* Class = "NSMenuItem"; title = "Use Web Page for Articles"; ObjectID = "1415"; */
+"1415.title" = "Use Web Page for Articles";
+
+/* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "1425"; */
+"1425.title" = "Force Refresh Selected Subscriptions From Open Reader";
+
+/* Class = "NSMenuItem"; title = "Update Subscriptions From Open Reader"; ObjectID = "1428"; */
+"1428.title" = "Update Subscriptions From Open Reader";
+
+/* Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458"; */
+"1458.title" = "Reindex Database";
+
+/* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
+"pKl-6f-Hlc.title" = "既読にする";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "vZe-8N-E3r"; */
+"vZe-8N-E3r.title" = "Text Cell";
