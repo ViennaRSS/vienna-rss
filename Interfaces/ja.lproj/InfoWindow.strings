@@ -15,25 +15,22 @@
 "109.title" = "確認";
 
 /* Class = "NSButtonCell"; title = "フィード URL："; ObjectID = "110"; */
-"110.title" = "フィード URL：";
+"xPF-M9-oZG.title" = "フィード URL";
 
 /* Class = "NSTextFieldCell"; title = "ユーザ名："; ObjectID = "111"; */
 "111.title" = "ユーザ名：";
 
 /* Class = "NSTextFieldCell"; title = "パスワード：\n"; ObjectID = "112"; */
-"112.title" = "パスワード：\n";
+"112.title" = "パスワード：";
 
 /* Class = "NSButtonCell"; title = "アップデート認証"; ObjectID = "115"; */
 "115.title" = "アップデート認証";
-
-/* Class = "NSButtonCell"; title = "Authentication:"; ObjectID = "116"; */
-"116.title" = "Authentication:";
 
 /* Class = "NSTextFieldCell"; title = "サイズ："; ObjectID = "117"; */
 "117.title" = "サイズ：";
 
 /* Class = "NSTextFieldCell"; title = "未読：\n"; ObjectID = "118"; */
-"118.title" = "未読：\n";
+"118.title" = "未読：";
 
 /* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "119"; */
 "119.title" = "\n";
@@ -45,10 +42,10 @@
 "121.title" = "購読中";
 
 /* Class = "NSButtonCell"; title = "一般："; ObjectID = "122"; */
-"122.title" = "一般：";
+"i9j-KH-c3D.title" = "一般";
 
 /* Class = "NSButtonCell"; title = "説明："; ObjectID = "124"; */
-"124.title" = "説明：";
+"E84-Uo-ybg.title" = "説明";
 
 /* Class = "NSButtonCell"; title = "Use Web Page for Articles"; ObjectID = "126"; */
 "126.title" = "Use Web Page for Articles";

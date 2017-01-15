@@ -15,25 +15,25 @@
 "109.title" = "驗證";
 
 /* Class = "NSButtonCell"; title = "訂閱頻道 URL："; ObjectID = "110"; */
-"110.title" = "訂閱頻道 URL：";
+"xPF-M9-oZG.title" = "訂閱頻道 URL";
 
 /* Class = "NSTextFieldCell"; title = "使用者名稱："; ObjectID = "111"; */
 "111.title" = "使用者名稱：";
 
 /* Class = "NSTextFieldCell"; title = "密碼：\n"; ObjectID = "112"; */
-"112.title" = "密碼：\n";
+"112.title" = "密碼：";
 
 /* Class = "NSButtonCell"; title = "更新認證"; ObjectID = "115"; */
 "115.title" = "更新認證";
 
 /* Class = "NSButtonCell"; title = "認證："; ObjectID = "116"; */
-"116.title" = "認證：";
+"U0N-RF-bUt.title" = "認證";
 
 /* Class = "NSTextFieldCell"; title = "大小："; ObjectID = "117"; */
 "117.title" = "大小：";
 
 /* Class = "NSTextFieldCell"; title = "未讀取：\n"; ObjectID = "118"; */
-"118.title" = "未讀取：\n";
+"118.title" = "未讀取：";
 
 /* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "119"; */
 "119.title" = "\n";
@@ -45,10 +45,10 @@
 "121.title" = "已訂閱";
 
 /* Class = "NSButtonCell"; title = "一般："; ObjectID = "122"; */
-"122.title" = "一般：";
+"i9j-KH-c3D.title" = "一般";
 
 /* Class = "NSButtonCell"; title = "描述："; ObjectID = "124"; */
-"124.title" = "描述：";
+"E84-Uo-ybg.title" = "描述";
 
 /* Class = "NSButtonCell"; title = "Use Web Page for Articles"; ObjectID = "126"; */
 "126.title" = "Use Web Page for Articles";
