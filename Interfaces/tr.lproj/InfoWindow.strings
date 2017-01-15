@@ -15,7 +15,7 @@
 "109.title" = "Doğrula";
 
 /* Class = "NSButtonCell"; title = "Besleme URLsi:"; ObjectID = "110"; */
-"110.title" = "Besleme URLsi:";
+"xPF-M9-oZG.title" = "Besleme URLsi";
 
 /* Class = "NSTextFieldCell"; title = "Kullanıcı adı:"; ObjectID = "111"; */
 "111.title" = "Kullanıcı adı:";
@@ -27,13 +27,13 @@
 "115.title" = "Yetkilendirmeyi Güncelle";
 
 /* Class = "NSButtonCell"; title = "Yetki:"; ObjectID = "116"; */
-"116.title" = "Yetki:";
+"U0N-RF-bUt.title" = "Yetki";
 
 /* Class = "NSTextFieldCell"; title = "Boyut:"; ObjectID = "117"; */
 "117.title" = "Boyut:";
 
 /* Class = "NSTextFieldCell"; title = "Okunmadı:\n"; ObjectID = "118"; */
-"118.title" = "Okunmadı:\n";
+"118.title" = "Okunmadı:";
 
 /* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "119"; */
 "119.title" = "\n";
@@ -45,10 +45,10 @@
 "121.title" = "Abone olundu";
 
 /* Class = "NSButtonCell"; title = "Genel:"; ObjectID = "122"; */
-"122.title" = "Genel:";
+"i9j-KH-c3D.title" = "Genel";
 
 /* Class = "NSButtonCell"; title = "Açıklama:"; ObjectID = "124"; */
-"124.title" = "Açıklama:";
+"E84-Uo-ybg.title" = "Açıklama";
 
 /* Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126"; */
 "126.title" = "Load Full HTML Articles";

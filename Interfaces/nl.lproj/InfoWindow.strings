@@ -15,25 +15,25 @@
 "109.title" = "Valideer";
 
 /* Class = "NSButtonCell"; title = "URL van feed:"; ObjectID = "110"; */
-"110.title" = "URL van feed:";
+"xPF-M9-oZG.title" = "URL van feed";
 
 /* Class = "NSTextFieldCell"; title = "Gebruikersnaam:"; ObjectID = "111"; */
 "111.title" = "Gebruikersnaam:";
 
 /* Class = "NSTextFieldCell"; title = "Wachtwoord:\n"; ObjectID = "112"; */
-"112.title" = "Wachtwoord:\n";
+"112.title" = "Wachtwoord:";
 
 /* Class = "NSButtonCell"; title = "Werk authenticatie bij"; ObjectID = "115"; */
 "115.title" = "Werk authenticatie bij";
 
 /* Class = "NSButtonCell"; title = "Authenticatie:"; ObjectID = "116"; */
-"116.title" = "Authenticatie:";
+"U0N-RF-bUt.title" = "Authenticatie";
 
 /* Class = "NSTextFieldCell"; title = "Grootte:"; ObjectID = "117"; */
 "117.title" = "Grootte:";
 
 /* Class = "NSTextFieldCell"; title = "Ongelezen:\n"; ObjectID = "118"; */
-"118.title" = "Ongelezen:\n";
+"118.title" = "Ongelezen:";
 
 /* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "119"; */
 "119.title" = "\n";
@@ -45,10 +45,10 @@
 "121.title" = "Geabonneerd";
 
 /* Class = "NSButtonCell"; title = "Algemeen:"; ObjectID = "122"; */
-"122.title" = "Algemeen:";
+"i9j-KH-c3D.title" = "Algemeen";
 
 /* Class = "NSButtonCell"; title = "Omschrijving:"; ObjectID = "124"; */
-"124.title" = "Omschrijving:";
+"E84-Uo-ybg.title" = "Omschrijving";
 
 /* Class = "NSButtonCell"; title = "Gebruik webpagina voor artikelen"; ObjectID = "126"; */
 "126.title" = "Gebruik webpagina voor artikelen";

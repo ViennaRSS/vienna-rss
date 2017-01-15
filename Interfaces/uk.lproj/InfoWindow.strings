@@ -15,25 +15,25 @@
 "109.title" = "Валідувати";
 
 /* Class = "NSButtonCell"; title = "URL:"; ObjectID = "110"; */
-"110.title" = "URL:";
+"xPF-M9-oZG.title" = "URL";
 
 /* Class = "NSTextFieldCell"; title = "Ім'я користувача:"; ObjectID = "111"; */
 "111.title" = "Ім'я користувача:";
 
 /* Class = "NSTextFieldCell"; title = "Пароль:\n"; ObjectID = "112"; */
-"112.title" = "Пароль:\n";
+"112.title" = "Пароль:";
 
 /* Class = "NSButtonCell"; title = "Оновити"; ObjectID = "115"; */
 "115.title" = "Оновити";
 
 /* Class = "NSButtonCell"; title = "Аутентифікація:"; ObjectID = "116"; */
-"116.title" = "Аутентифікація:";
+"U0N-RF-bUt.title" = "Аутентифікація";
 
 /* Class = "NSTextFieldCell"; title = "Розмір:"; ObjectID = "117"; */
 "117.title" = "Розмір:";
 
 /* Class = "NSTextFieldCell"; title = "Непрочитані:\n"; ObjectID = "118"; */
-"118.title" = "Непрочитані:\n";
+"118.title" = "Непрочитані:";
 
 /* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "119"; */
 "119.title" = "\n";
@@ -45,10 +45,10 @@
 "121.title" = "Підписаний";
 
 /* Class = "NSButtonCell"; title = "Загальне:"; ObjectID = "122"; */
-"122.title" = "Загальне:";
+"i9j-KH-c3D.title" = "Загальне";
 
 /* Class = "NSButtonCell"; title = "Опис:"; ObjectID = "124"; */
-"124.title" = "Опис:";
+"E84-Uo-ybg.title" = "Опис";
 
 /* Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126"; */
 "126.title" = "Load Full HTML Articles";

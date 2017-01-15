@@ -15,25 +15,25 @@
 "109.title" = "认证";
 
 /* Class = "NSButtonCell"; title = "频道 URL:"; ObjectID = "110"; */
-"110.title" = "频道 URL:";
+"xPF-M9-oZG.title" = "频道 URL";
 
 /* Class = "NSTextFieldCell"; title = "用户名:"; ObjectID = "111"; */
 "111.title" = "用户名:";
 
 /* Class = "NSTextFieldCell"; title = "密码:\n"; ObjectID = "112"; */
-"112.title" = "密码:\n";
+"112.title" = "密码:";
 
 /* Class = "NSButtonCell"; title = "更新验证信息"; ObjectID = "115"; */
 "115.title" = "更新验证信息";
 
 /* Class = "NSButtonCell"; title = "验证:"; ObjectID = "116"; */
-"116.title" = "验证:";
+"U0N-RF-bUt.title" = "验证";
 
 /* Class = "NSTextFieldCell"; title = "大小:"; ObjectID = "117"; */
 "117.title" = "大小:";
 
 /* Class = "NSTextFieldCell"; title = "未读:\n"; ObjectID = "118"; */
-"118.title" = "未读:\n";
+"118.title" = "未读:";
 
 /* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "119"; */
 "119.title" = "\n";
@@ -45,10 +45,10 @@
 "121.title" = "订阅";
 
 /* Class = "NSButtonCell"; title = "通用:"; ObjectID = "122"; */
-"122.title" = "通用:";
+"i9j-KH-c3D.title" = "通用";
 
 /* Class = "NSButtonCell"; title = "介绍:"; ObjectID = "124"; */
-"124.title" = "介绍:";
+"E84-Uo-ybg.title" = "介绍";
 
 /* Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126"; */
 "126.title" = "Load Full HTML Articles";

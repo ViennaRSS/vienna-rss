@@ -15,25 +15,25 @@
 "109.title" = "Convalida";
 
 /* Class = "NSButtonCell"; title = "URL Feed:"; ObjectID = "110"; */
-"110.title" = "URL Feed:";
+"xPF-M9-oZG.title" = "URL Feed";
 
 /* Class = "NSTextFieldCell"; title = "Nome utente:"; ObjectID = "111"; */
 "111.title" = "Nome utente:";
 
 /* Class = "NSTextFieldCell"; title = "Password:\n"; ObjectID = "112"; */
-"112.title" = "Password:\n";
+"112.title" = "Password:";
 
 /* Class = "NSButtonCell"; title = "Aggiorna Autenticazione"; ObjectID = "115"; */
 "115.title" = "Aggiorna Autenticazione";
 
 /* Class = "NSButtonCell"; title = "Autenticazione:"; ObjectID = "116"; */
-"116.title" = "Autenticazione:";
+"U0N-RF-bUt.title" = "Autenticazione";
 
 /* Class = "NSTextFieldCell"; title = "Dim.:"; ObjectID = "117"; */
 "117.title" = "Dim.:";
 
 /* Class = "NSTextFieldCell"; title = "Non letti:\n"; ObjectID = "118"; */
-"118.title" = "Non letti:\n";
+"118.title" = "Non letti:";
 
 /* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "119"; */
 "119.title" = "\n";
@@ -45,10 +45,10 @@
 "121.title" = "Iscritto";
 
 /* Class = "NSButtonCell"; title = "Generale:"; ObjectID = "122"; */
-"122.title" = "Generale:";
+"i9j-KH-c3D.title" = "Generale";
 
 /* Class = "NSButtonCell"; title = "Descrizione:"; ObjectID = "124"; */
-"124.title" = "Descrizione:";
+"E84-Uo-ybg.title" = "Descrizione";
 
 /* Class = "NSButtonCell"; title = "Use Web Page for Articles"; ObjectID = "126"; */
 "126.title" = "Use Web Page for Articles";

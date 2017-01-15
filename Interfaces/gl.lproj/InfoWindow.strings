@@ -15,7 +15,7 @@
 "109.title" = "Validar";
 
 /* Class = "NSButtonCell"; title = "Feed URL:"; ObjectID = "110"; */
-"110.title" = "URL da fonte:";
+"xPF-M9-oZG.title" = "URL da fonte";
 
 /* Class = "NSTextFieldCell"; title = "User name:"; ObjectID = "111"; */
 "111.title" = "Nome de usuario:";
@@ -27,7 +27,7 @@
 "115.title" = "Actualizar autenticación";
 
 /* Class = "NSButtonCell"; title = "Authentication:"; ObjectID = "116"; */
-"116.title" = "Autenticación:";
+"U0N-RF-bUt.title" = "Autenticación";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "117"; */
 "117.title" = "Tamaño:";
@@ -39,10 +39,10 @@
 "121.title" = "Subscrito";
 
 /* Class = "NSButtonCell"; title = "General:"; ObjectID = "122"; */
-"122.title" = "Xeral:";
+"i9j-KH-c3D.title" = "Xeral";
 
 /* Class = "NSButtonCell"; title = "Description:"; ObjectID = "124"; */
-"124.title" = "Descrición:";
+"E84-Uo-ybg.title" = "Descrición";
 
 /* Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126"; */
 "126.title" = "Cargar artigos HTML completamente";

@@ -15,25 +15,25 @@
 "109.title" = "Godkend";
 
 /* Class = "NSButtonCell"; title = "Feed URL:"; ObjectID = "110"; */
-"110.title" = "Feed URL:";
+"xPF-M9-oZG.title" = "Feed URL";
 
 /* Class = "NSTextFieldCell"; title = "Brugernavn:"; ObjectID = "111"; */
 "111.title" = "Brugernavn:";
 
 /* Class = "NSTextFieldCell"; title = "Kodeord:\n"; ObjectID = "112"; */
-"112.title" = "Kodeord:\n";
+"112.title" = "Kodeord:";
 
 /* Class = "NSButtonCell"; title = "Opdater autorisering"; ObjectID = "115"; */
 "115.title" = "Opdater autorisering";
 
 /* Class = "NSButtonCell"; title = "Autorisering:"; ObjectID = "116"; */
-"116.title" = "Autorisering:";
+"U0N-RF-bUt.title" = "Autorisering";
 
 /* Class = "NSTextFieldCell"; title = "Størrelse:"; ObjectID = "117"; */
 "117.title" = "Størrelse:";
 
 /* Class = "NSTextFieldCell"; title = "Ulæst:\n"; ObjectID = "118"; */
-"118.title" = "Ulæst:\n";
+"118.title" = "Ulæst:";
 
 /* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "119"; */
 "119.title" = "\n";
@@ -45,10 +45,10 @@
 "121.title" = "Abonneret";
 
 /* Class = "NSButtonCell"; title = "Generelt:"; ObjectID = "122"; */
-"122.title" = "Generelt:";
+"i9j-KH-c3D.title" = "Generelt";
 
 /* Class = "NSButtonCell"; title = "Beskrivelse:"; ObjectID = "124"; */
-"124.title" = "Beskrivelse:";
+"E84-Uo-ybg.title" = "Beskrivelse";
 
 /* Class = "NSButtonCell"; title = "Hent fulde HTML-artikler"; ObjectID = "126"; */
 "126.title" = "Hent fulde HTML-artikler";
