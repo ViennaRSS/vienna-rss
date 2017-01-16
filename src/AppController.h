@@ -47,7 +47,7 @@
 @class TreeFilterView;
 @class ViennaSparkleDelegate;
 
-@interface AppController : NSObject <NSApplicationDelegate, GrowlApplicationBridgeDelegate,NSWindowDelegate,NSToolbarDelegate,NSSplitViewDelegate,NSMenuDelegate>
+@interface AppController : NSObject <NSApplicationDelegate, GrowlApplicationBridgeDelegate,NSWindowDelegate,NSToolbarDelegate,NSMenuDelegate>
 {
 	IBOutlet BJRWindowWithToolbar * mainWindow;
 	IBOutlet ArticleController * articleController;

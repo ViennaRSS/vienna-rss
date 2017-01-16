@@ -32,7 +32,6 @@
 #import "RefreshManager.h"
 #import "ArrayExtensions.h"
 #import "StringExtensions.h"
-#import "SplitViewExtensions.h"
 #import "ViewExtensions.h"
 #import "BrowserView.h"
 #import "SearchFolder.h"
@@ -120,8 +119,6 @@
 @end
 
 // Static constant strings that are typically never tweaked
-static const CGFloat MA_Minimum_Folder_Pane_Width = 80.0;
-static const CGFloat MA_Minimum_BrowserView_Pane_Width = 200.0;
 
 // Awake from sleep
 static io_connect_t root_port;
@@ -426,10 +423,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	// Initialize the Styles menu.
 	stylesMenu.submenu = self.stylesMenu;
 	
-	// Restore the splitview layout
-	splitView1.xlayout = [[Preferences standardPreferences] objectForKey:@"SplitView1Positions"];
-	splitView1.delegate = self;
-	
 	// Show the current unread count on the app icon
 	[self showUnreadCountOnApplicationIconAndWindowTitle];
 	
@@ -605,9 +598,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
     
 	if (didCompleteInitialisation)
 	{
-		// Save the splitview layout
 		Preferences * prefs = [Preferences standardPreferences];
-		[prefs setObject:splitView1.xlayout forKey:@"SplitView1Positions"];
 		
 		// Close the activity window explicitly to force it to
 		// save its split bar position to the preferences.
@@ -632,19 +623,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	[db close];
 }
 
-/* splitView:effectiveRect:forDrawnRect:ofDividerAtIndex [delegate]
- * Makes the dragable area around the SplitView divider larger, so that it is easier to grab.
- */
-- (NSRect)splitView:(NSSplitView *)splitView effectiveRect:(NSRect)proposedEffectiveRect forDrawnRect:(NSRect)drawnRect ofDividerAtIndex:(NSInteger)dividerIndex
-{
-	if(splitView.vertical) {
-		drawnRect.origin.x -= 4;
-		drawnRect.size.width += 6;
-		return drawnRect;
-	}
-	else
-		return drawnRect;
-}
 
 /* openFile [delegate]
  * Called when the user opens a data file associated with Vienna by clicking in the finder or dragging it onto the dock.
@@ -820,53 +798,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	return browserView;
 }
 
-/* constrainMinCoordinate
- * Make sure the folder width isn't shrunk beyond a minimum width. Otherwise it looks
- * untidy.
- */
--(CGFloat)splitView:(NSSplitView *)sender constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)offset
-{
-	return (sender == splitView1 && offset == 0) ? MA_Minimum_Folder_Pane_Width : proposedMin;
-}
-
-/* constrainMaxCoordinate
- * Make sure that the browserview isn't shrunk beyond a minimum size otherwise the splitview
- * or controls within it start resizing odd.
- */
--(CGFloat)splitView:(NSSplitView *)sender constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)offset
-{
-	if (sender == splitView1 && offset == 0)
-	{
-		NSRect mainFrame = splitView1.superview.frame;
-		return mainFrame.size.width - MA_Minimum_BrowserView_Pane_Width;
-	}
-	return proposedMax;
-}
-
-/* resizeSubviewsWithOldSize
- * Constrain the folder pane to a fixed width.
- */
--(void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
-{
-	CGFloat dividerThickness = sender.dividerThickness;
-	id sv1 = sender.subviews[0];
-	id sv2 = sender.subviews[1];
-	NSRect leftFrame = [sv1 frame];
-	NSRect rightFrame = [sv2 frame];
-	NSRect newFrame = sender.frame;
-	
-	if (sender == splitView1)
-	{
-		leftFrame.size.height = newFrame.size.height;
-		leftFrame.origin = NSMakePoint(0, 0);
-		rightFrame.size.width = newFrame.size.width - leftFrame.size.width - dividerThickness;
-		rightFrame.size.height = newFrame.size.height;
-		rightFrame.origin.x = leftFrame.size.width + dividerThickness;
-		
-		[sv1 setFrame:leftFrame];
-		[sv2 setFrame:rightFrame];
-	}
-}
 
 /* folderMenu
  * Dynamically create the popup menu. This is one less thing to
@@ -4603,7 +4534,6 @@ NSString *const kFocusedAdvancedControlIndex = @"FocusedAdvancedControlIndex";
 -(void)dealloc
 {
 	[mainWindow setDelegate:nil];
-	[splitView1 setDelegate:nil];
 	[[SUUpdater sharedUpdater] setDelegate:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
