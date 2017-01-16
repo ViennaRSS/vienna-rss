@@ -20,16 +20,16 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="302" y="347" width="942" height="625"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <value key="minSize" type="size" width="213" height="107"/>
             <view key="contentView" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="942" height="625"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="993">
+                    <splitView autosaveName="VNASplitView" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="993">
                         <rect key="frame" x="0.0" y="22" width="942" height="603"/>
                         <subviews>
-                            <view fixedFrame="YES" id="PG8-8Y-Lzt">
+                            <view id="PG8-8Y-Lzt">
                                 <rect key="frame" x="0.0" y="0.0" width="288" height="603"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -104,6 +104,9 @@
                                         </connections>
                                     </customView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="YwG-tG-A8p"/>
+                                </constraints>
                             </view>
                             <customView id="982">
                                 <rect key="frame" x="289" y="0.0" width="653" height="603"/>
@@ -145,6 +148,7 @@
                                     <constraint firstAttribute="trailing" secondItem="1218" secondAttribute="trailing" id="hZE-7g-Od6"/>
                                     <constraint firstItem="1218" firstAttribute="top" secondItem="1238" secondAttribute="bottom" id="l3o-Oy-cXB"/>
                                     <constraint firstAttribute="trailing" secondItem="1238" secondAttribute="trailing" id="rz4-f9-PzJ"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="zUd-Gj-eaw"/>
                                 </constraints>
                             </customView>
                         </subviews>
@@ -152,9 +156,6 @@
                             <real value="251"/>
                             <real value="250"/>
                         </holdingPriorities>
-                        <connections>
-                            <outlet property="delegate" destination="1164" id="1406"/>
-                        </connections>
                     </splitView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="5Fc-hn-Xm4" customClass="NSClipView">
                         <rect key="frame" x="0.0" y="0.0" width="942" height="22"/>
@@ -1087,10 +1088,10 @@ CA
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" ambiguous="YES" id="emU-La-Fur">
                         <rect key="frame" x="1" y="1" width="699" height="605"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="NgO-hM-mCz" customClass="ExtendedTableView">
-                                <rect key="frame" x="0.0" y="0.0" width="1027" height="605"/>
+                                <rect key="frame" x="0.0" y="11" width="1027" height="605"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1114,7 +1115,7 @@ CA
                         </subviews>
                     </clipView>
                     <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="S05-md-m5A">
-                        <rect key="frame" x="1" y="590" width="699" height="16"/>
+                        <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="fza-gl-TLT">
