@@ -20,7 +20,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="302" y="347" width="942" height="625"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <value key="minSize" type="size" width="213" height="107"/>
             <view key="contentView" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="942" height="625"/>
@@ -124,13 +124,103 @@
                                             <outlet property="tabView" destination="1218" id="1241"/>
                                         </connections>
                                     </customView>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="cTN-D0-dY2" customClass="DisclosureView">
+                                        <rect key="frame" x="0.0" y="552" width="653" height="29"/>
+                                        <subviews>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="1300" customClass="FilterView">
+                                                <rect key="frame" x="0.0" y="0.0" width="653" height="29"/>
+                                                <subviews>
+                                                    <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1391">
+                                                        <rect key="frame" x="0.0" y="26" width="653" height="5"/>
+                                                    </box>
+                                                    <searchField wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="1304">
+                                                        <rect key="frame" x="8" y="5" width="300" height="19"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="LD9-MT-Msv"/>
+                                                        </constraints>
+                                                        <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" bezelStyle="round" sendsWholeSearchString="YES" recentsAutosaveName="filterStrings" id="1376">
+                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </searchFieldCell>
+                                                        <connections>
+                                                            <action selector="searchUsingFilterField:" target="233" id="1316"/>
+                                                            <outlet property="nextKeyView" destination="971" id="1323"/>
+                                                        </connections>
+                                                    </searchField>
+                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="1313">
+                                                        <rect key="frame" x="633" y="9" width="12" height="13"/>
+                                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="smallCloseButton" imagePosition="only" alignment="center" alternateImage="pressedCloseButton" controlSize="small" inset="2" id="1379">
+                                                            <behavior key="behavior" lightByContents="YES"/>
+                                                            <font key="font" metaFont="smallSystem"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="hideFilterBar:" target="233" id="1314"/>
+                                                        </connections>
+                                                    </button>
+                                                    <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1306">
+                                                        <rect key="frame" x="457" y="3" width="67" height="22"/>
+                                                        <popUpButtonCell key="cell" type="push" title="Item3" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="1308" id="1378">
+                                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <menu key="menu" title="OtherViews" id="1307">
+                                                                <items>
+                                                                    <menuItem title="Item3" state="on" id="1308"/>
+                                                                </items>
+                                                            </menu>
+                                                        </popUpButtonCell>
+                                                    </popUpButton>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="1305">
+                                                        <rect key="frame" x="407" y="8" width="50" height="14"/>
+                                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Filter by:" id="1377">
+                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="1313" firstAttribute="leading" secondItem="1306" secondAttribute="trailing" multiplier="1.2" priority="250" constant="8" symbolic="YES" id="3Xe-VF-cew"/>
+                                                    <constraint firstItem="1305" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1304" secondAttribute="trailing" constant="8" symbolic="YES" id="IvL-hE-OcP"/>
+                                                    <constraint firstItem="1304" firstAttribute="leading" secondItem="1300" secondAttribute="leading" constant="8" id="Lps-7u-BwX"/>
+                                                    <constraint firstItem="1391" firstAttribute="top" secondItem="1300" secondAttribute="top" id="MBs-e8-BUg"/>
+                                                    <constraint firstItem="1305" firstAttribute="baseline" secondItem="1304" secondAttribute="baseline" id="OcX-Ni-p59"/>
+                                                    <constraint firstAttribute="trailing" secondItem="1313" secondAttribute="trailing" constant="8" id="R6r-IN-nom"/>
+                                                    <constraint firstAttribute="bottom" secondItem="1304" secondAttribute="bottom" constant="5" id="UyP-7g-tqk"/>
+                                                    <constraint firstItem="1306" firstAttribute="baseline" secondItem="1305" secondAttribute="baseline" id="XAX-I9-v7M"/>
+                                                    <constraint firstItem="1313" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1306" secondAttribute="trailing" constant="8" id="d7D-E6-dft"/>
+                                                    <constraint firstItem="1391" firstAttribute="leading" secondItem="1300" secondAttribute="leading" id="eNF-Jo-l9N"/>
+                                                    <constraint firstItem="1304" firstAttribute="top" secondItem="1300" secondAttribute="top" constant="5" id="fVe-Pk-PYH"/>
+                                                    <constraint firstItem="1306" firstAttribute="leading" secondItem="1305" secondAttribute="trailing" constant="5" id="hWZ-Ui-5cO"/>
+                                                    <constraint firstItem="1313" firstAttribute="centerY" secondItem="1306" secondAttribute="centerY" id="kL8-yf-0ec"/>
+                                                    <constraint firstItem="1305" firstAttribute="leading" secondItem="1304" secondAttribute="trailing" multiplier="1.3" priority="250" constant="8" symbolic="YES" id="uRc-Qw-3zZ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="1391" secondAttribute="trailing" id="xLw-op-kMY"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="filterByLabel" destination="1305" id="1320"/>
+                                                    <outlet property="filterCloseButton" destination="1313" id="1324"/>
+                                                    <outlet property="filterSearchField" destination="1304" id="1321"/>
+                                                    <outlet property="filterViewPopUp" destination="1306" id="1322"/>
+                                                </connections>
+                                            </customView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="1300" firstAttribute="top" secondItem="cTN-D0-dY2" secondAttribute="top" priority="600" id="As7-9V-DrG"/>
+                                            <constraint firstAttribute="trailing" secondItem="1300" secondAttribute="trailing" id="TbJ-oD-bwE"/>
+                                            <constraint firstAttribute="bottom" secondItem="1300" secondAttribute="bottom" id="fno-nO-9gE"/>
+                                            <constraint firstItem="1300" firstAttribute="leading" secondItem="cTN-D0-dY2" secondAttribute="leading" id="ld9-LP-cFr"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="disclosedView" destination="1300" id="TAx-ZZ-EUW"/>
+                                        </connections>
+                                    </customView>
                                     <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="1218">
-                                        <rect key="frame" x="0.0" y="0.0" width="653" height="581"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="653" height="552"/>
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
                                             <tabViewItem label="Tab" identifier="1" id="1221">
                                                 <view key="view" id="1222">
-                                                    <rect key="frame" x="0.0" y="0.0" width="653" height="581"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="653" height="552"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
                                             </tabViewItem>
@@ -141,12 +231,15 @@
                                     </tabView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="cTN-D0-dY2" secondAttribute="trailing" id="Dnd-04-47H"/>
+                                    <constraint firstItem="cTN-D0-dY2" firstAttribute="top" secondItem="1238" secondAttribute="bottom" id="Eeh-f9-0Xn"/>
                                     <constraint firstAttribute="bottom" secondItem="1218" secondAttribute="bottom" id="HBr-7K-RIq"/>
                                     <constraint firstItem="1218" firstAttribute="leading" secondItem="982" secondAttribute="leading" id="JdE-Xr-3cU"/>
                                     <constraint firstItem="1238" firstAttribute="top" secondItem="982" secondAttribute="top" id="TdZ-7g-fuN"/>
+                                    <constraint firstItem="cTN-D0-dY2" firstAttribute="leading" secondItem="982" secondAttribute="leading" id="Uro-ri-PsA"/>
                                     <constraint firstItem="1238" firstAttribute="leading" secondItem="982" secondAttribute="leading" id="XWo-wH-E3d"/>
                                     <constraint firstAttribute="trailing" secondItem="1218" secondAttribute="trailing" id="hZE-7g-Od6"/>
-                                    <constraint firstItem="1218" firstAttribute="top" secondItem="1238" secondAttribute="bottom" id="l3o-Oy-cXB"/>
+                                    <constraint firstItem="1218" firstAttribute="top" secondItem="cTN-D0-dY2" secondAttribute="bottom" id="mYB-Ey-lSh"/>
                                     <constraint firstAttribute="trailing" secondItem="1238" secondAttribute="trailing" id="rz4-f9-PzJ"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="zUd-Gj-eaw"/>
                                 </constraints>
@@ -181,7 +274,7 @@
                                     <action selector="showHideFilterBar:" target="233" id="1402"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" preferredMaxLayoutWidth="100" translatesAutoresizingMaskIntoConstraints="NO" id="1403">
+                            <textField verticalHuggingPriority="750" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="1403">
                                 <rect key="frame" x="838" y="4" width="74" height="14"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="right" title="Current Filter" id="1404">
                                     <font key="font" metaFont="smallSystem"/>
@@ -189,25 +282,16 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="918" customClass="ClickableProgressIndicator">
-                                <rect key="frame" x="816" y="3" width="16" height="16"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="16" id="KsP-xb-2OK"/>
-                                    <constraint firstAttribute="width" constant="16" id="hPX-lY-v2Z"/>
-                                </constraints>
-                            </progressIndicator>
                         </subviews>
                         <constraints>
                             <constraint firstItem="1403" firstAttribute="baseline" secondItem="917" secondAttribute="baseline" id="Ap7-nD-raV"/>
                             <constraint firstAttribute="trailing" secondItem="1400" secondAttribute="trailing" constant="8" id="GD6-qg-ock"/>
                             <constraint firstItem="917" firstAttribute="centerY" secondItem="5Fc-hn-Xm4" secondAttribute="centerY" id="SrZ-Dm-34a"/>
                             <constraint firstItem="1400" firstAttribute="leading" secondItem="1403" secondAttribute="trailing" constant="8" symbolic="YES" id="TXz-Sd-EOf"/>
+                            <constraint firstItem="1403" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="917" secondAttribute="trailing" constant="8" symbolic="YES" id="XyQ-gd-mxb"/>
                             <constraint firstAttribute="height" constant="22" id="YzY-By-bmd"/>
                             <constraint firstItem="1400" firstAttribute="centerY" secondItem="5Fc-hn-Xm4" secondAttribute="centerY" id="dwc-aA-7PN"/>
                             <constraint firstItem="917" firstAttribute="centerX" secondItem="5Fc-hn-Xm4" secondAttribute="centerX" id="iTz-2S-WML"/>
-                            <constraint firstItem="918" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="917" secondAttribute="trailing" constant="8" symbolic="YES" id="kdd-MW-yHD"/>
-                            <constraint firstItem="918" firstAttribute="centerY" secondItem="5Fc-hn-Xm4" secondAttribute="centerY" id="p7b-0C-KLw"/>
-                            <constraint firstItem="1403" firstAttribute="leading" secondItem="918" secondAttribute="trailing" constant="8" symbolic="YES" id="yVw-5f-5Fs"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="drawsBackground" value="NO"/>
@@ -228,8 +312,12 @@
             <connections>
                 <outlet property="delegate" destination="233" id="1bL-FD-UdQ"/>
             </connections>
-            <point key="canvasLocation" x="139" y="-277.5"/>
+            <point key="canvasLocation" x="138" y="-572.5"/>
         </window>
+        <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" id="918" customClass="ClickableProgressIndicator">
+            <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+        </progressIndicator>
         <menu title="MainMenu" systemMenu="main" id="29" userLabel="MainMenu">
             <items>
                 <menuItem title="Vienna" id="56">
@@ -922,6 +1010,7 @@ CA
                 <outlet property="exportSaveAccessory" destination="860" id="864"/>
                 <outlet property="exportSelected" destination="863" id="866"/>
                 <outlet property="exportWithGroups" destination="1052" id="1053"/>
+                <outlet property="filterDisclosureView" destination="cTN-D0-dY2" id="i7U-gE-GBj"/>
                 <outlet property="filterIconInStatusBarButton" destination="1400" id="1407"/>
                 <outlet property="filterSearchField" destination="1304" id="1315"/>
                 <outlet property="filterView" destination="1300" id="1301"/>
@@ -1003,8 +1092,8 @@ CA
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="976">
                                         <rect key="frame" x="0.0" y="0.0" width="700" height="299"/>
                                         <clipView key="contentView" id="TOX-JT-adF">
-                                            <rect key="frame" x="0.0" y="0.0" width="700" height="299"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="700" height="309"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowHeight="15" headerView="1386" id="977" customClass="MessageListView">
                                                     <rect key="frame" x="0.0" y="0.0" width="700" height="276"/>
@@ -1088,10 +1177,10 @@ CA
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" ambiguous="YES" id="emU-La-Fur">
                         <rect key="frame" x="1" y="1" width="699" height="605"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="NgO-hM-mCz" customClass="ExtendedTableView">
-                                <rect key="frame" x="0.0" y="0.0" width="1027" height="605"/>
+                                <rect key="frame" x="0.0" y="11" width="1027" height="605"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1115,7 +1204,7 @@ CA
                         </subviews>
                     </clipView>
                     <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="S05-md-m5A">
-                        <rect key="frame" x="1" y="590" width="699" height="16"/>
+                        <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="fza-gl-TLT">
@@ -1229,84 +1318,6 @@ CA
                 <outlet property="filenameField" destination="1292" id="1298"/>
                 <outlet property="filenameLabel" destination="1290" id="1299"/>
             </connections>
-        </customView>
-        <customView id="1300" userLabel="FilterView" customClass="FilterView">
-            <rect key="frame" x="0.0" y="0.0" width="599" height="29"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-            <subviews>
-                <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1391">
-                    <rect key="frame" x="0.0" y="26" width="599" height="5"/>
-                </box>
-                <searchField wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="1304">
-                    <rect key="frame" x="8" y="5" width="268" height="19"/>
-                    <constraints>
-                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="LD9-MT-Msv"/>
-                    </constraints>
-                    <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" bezelStyle="round" sendsWholeSearchString="YES" recentsAutosaveName="filterStrings" id="1376">
-                        <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </searchFieldCell>
-                    <connections>
-                        <action selector="searchUsingFilterField:" target="233" id="1316"/>
-                        <outlet property="nextKeyView" destination="971" id="1323"/>
-                    </connections>
-                </searchField>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="1313">
-                    <rect key="frame" x="579" y="9" width="12" height="13"/>
-                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="smallCloseButton" imagePosition="only" alignment="center" alternateImage="pressedCloseButton" controlSize="small" inset="2" id="1379">
-                        <behavior key="behavior" lightByContents="YES"/>
-                        <font key="font" metaFont="smallSystem"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="hideFilterBar:" target="233" id="1314"/>
-                    </connections>
-                </button>
-                <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1306">
-                    <rect key="frame" x="415" y="3" width="64" height="22"/>
-                    <popUpButtonCell key="cell" type="push" title="Item3" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="1308" id="1378">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="smallSystem"/>
-                        <menu key="menu" title="OtherViews" id="1307">
-                            <items>
-                                <menuItem title="Item3" state="on" id="1308"/>
-                            </items>
-                        </menu>
-                    </popUpButtonCell>
-                </popUpButton>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="1305">
-                    <rect key="frame" x="365" y="8" width="50" height="14"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Filter by:" id="1377">
-                        <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-            </subviews>
-            <constraints>
-                <constraint firstItem="1304" firstAttribute="top" secondItem="1391" secondAttribute="bottom" constant="4" id="0au-er-kKN"/>
-                <constraint firstItem="1313" firstAttribute="leading" secondItem="1306" secondAttribute="trailing" multiplier="1.2" priority="250" constant="8" symbolic="YES" id="3Xe-VF-cew"/>
-                <constraint firstItem="1305" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1304" secondAttribute="trailing" constant="8" symbolic="YES" id="IvL-hE-OcP"/>
-                <constraint firstItem="1304" firstAttribute="leading" secondItem="1300" secondAttribute="leading" constant="8" id="Lps-7u-BwX"/>
-                <constraint firstItem="1391" firstAttribute="top" secondItem="1300" secondAttribute="top" id="MBs-e8-BUg"/>
-                <constraint firstItem="1305" firstAttribute="baseline" secondItem="1304" secondAttribute="baseline" id="OcX-Ni-p59"/>
-                <constraint firstAttribute="trailing" secondItem="1313" secondAttribute="trailing" constant="8" id="R6r-IN-nom"/>
-                <constraint firstAttribute="bottom" secondItem="1304" secondAttribute="bottom" constant="5" id="UyP-7g-tqk"/>
-                <constraint firstItem="1306" firstAttribute="baseline" secondItem="1305" secondAttribute="baseline" id="XAX-I9-v7M"/>
-                <constraint firstItem="1313" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1306" secondAttribute="trailing" constant="8" id="d7D-E6-dft"/>
-                <constraint firstItem="1391" firstAttribute="leading" secondItem="1300" secondAttribute="leading" id="eNF-Jo-l9N"/>
-                <constraint firstItem="1306" firstAttribute="leading" secondItem="1305" secondAttribute="trailing" constant="5" id="hWZ-Ui-5cO"/>
-                <constraint firstItem="1313" firstAttribute="centerY" secondItem="1306" secondAttribute="centerY" id="kL8-yf-0ec"/>
-                <constraint firstItem="1305" firstAttribute="leading" secondItem="1304" secondAttribute="trailing" multiplier="1.3" priority="250" constant="8" symbolic="YES" id="uRc-Qw-3zZ"/>
-                <constraint firstAttribute="trailing" secondItem="1391" secondAttribute="trailing" id="xLw-op-kMY"/>
-            </constraints>
-            <connections>
-                <outlet property="filterByLabel" destination="1305" id="1320"/>
-                <outlet property="filterCloseButton" destination="1313" id="1324"/>
-                <outlet property="filterSearchField" destination="1304" id="1321"/>
-                <outlet property="filterViewPopUp" destination="1306" id="1322"/>
-            </connections>
-            <point key="canvasLocation" x="138.5" y="168.5"/>
         </customView>
     </objects>
     <resources>
