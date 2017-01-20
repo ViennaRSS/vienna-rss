@@ -51,6 +51,7 @@
 #import "HelperFunctions.h"
 #import "ArticleFilter.h"
 #import "ToolbarItem.h"
+#import "DisclosureView.h"
 #import "ClickableProgressIndicator.h"
 #import "SearchPanel.h"
 #import "SearchMethod.h"
@@ -169,6 +170,9 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	// Initialise the plugin manager now that the UI is ready
 	pluginManager = [[PluginManager alloc] init];
 	[pluginManager resetPlugins];
+
+    // Set the initial filter bar state
+    [self setFilterBarState:prefs.showFilterBar withAnimation:NO];
 	
     // We need to register the handlers early to catch events fired on launch.
     NSAppleEventManager *em = [NSAppleEventManager sharedAppleEventManager];
@@ -222,9 +226,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		[foldersTree initialiseFoldersTree];
 
 		Preferences * prefs = [Preferences standardPreferences];
-		// Set the initial filter bar state
-		[self setFilterBarState:prefs.showFilterBar withAnimation:NO];
-		
+
 		// Select the folder and article from the last session
 		NSInteger previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
 		NSString * previousArticleGuid = [prefs stringForKey:MAPref_CachedArticleGUID];
@@ -871,14 +873,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(void)setLayout:(NSInteger)newLayout withRefresh:(BOOL)refreshFlag
 {
-	BOOL visibleFilterBar = NO;
-	// Turn off the filter bar when switching layouts. This is simpler than
-	// trying to graft it onto the new layout.
-	if (self.filterBarVisible)
-		{ visibleFilterBar = YES;
-		[self setPersistedFilterBarState:NO withAnimation:NO];
-		}
-	
 	[articleController setLayout:newLayout];
     if (refreshFlag)
         [articleController.mainArticleView refreshFolder:MA_Refresh_RedrawList];
@@ -888,9 +882,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
         [mainWindow makeFirstResponder:foldersTree.mainView];
     else
         [mainWindow makeFirstResponder:[browserView primaryTabItemView].mainView];
-	//restore filter bar state if necessary
-	if (visibleFilterBar)
-		[self setPersistedFilterBarState:YES withAnimation:NO];
 	[self updateSearchPlaceholderAndSearchMethod];
 }
 
@@ -1406,7 +1397,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(BOOL)isFilterBarVisible
 {
-	return filterView.superview != nil;
+    return filterDisclosureView.isDisclosed;
 }
 
 -(void)handleGoogleAuthFailed:(NSNotification *)nc
@@ -1472,50 +1463,22 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	if (isVisible && !self.filterBarVisible)
 	{
-		NSView * parentView = articleController.mainArticleView.subviews[0];
-		NSRect filterBarRect;
-		NSRect mainRect;
-		
-		mainRect = parentView.bounds;
-		filterBarRect = filterView.bounds;
-		filterBarRect.size.width = mainRect.size.width;
-		filterBarRect.origin.y = mainRect.size.height - filterBarRect.size.height;
-		mainRect.size.height -= filterBarRect.size.height;
-		
-		[parentView.superview addSubview:filterView];
-		filterView.frame = filterBarRect;
-		if (!doAnimate)
-			parentView.frame = mainRect;
-		else
-			[parentView resizeViewWithAnimation:mainRect withTag:MA_ViewTag_Filterbar];
-		[parentView display];
-		
+        [filterDisclosureView disclose:doAnimate];
+
 		// Hook up the Tab ordering so Tab from the search field goes to the
 		// article view.
 		foldersTree.mainView.nextKeyView = filterSearchField;
 		filterSearchField.nextKeyView = [browserView primaryTabItemView].mainView;
 		
 		// Set focus only if this was user initiated
-		if (doAnimate)
+        if (doAnimate) {
 			[mainWindow makeFirstResponder:filterSearchField];
+        }
 	}
 	if (!isVisible && self.filterBarVisible)
 	{
-		NSView * parentView = articleController.mainArticleView.subviews[0];
-		NSRect filterBarRect;
-		NSRect mainRect;
-		
-		mainRect = parentView.bounds;
-		filterBarRect = filterView.bounds;
-		mainRect.size.height += filterBarRect.size.height;
-		
-		[filterView removeFromSuperview];
-		if (!doAnimate)
-			parentView.frame = mainRect;
-		else
-			[parentView resizeViewWithAnimation:mainRect withTag:MA_ViewTag_Filterbar];
-		[parentView display];
-		
+        [filterDisclosureView collapse:doAnimate];
+
 		// Fix up the tab ordering
 		foldersTree.mainView.nextKeyView = [browserView primaryTabItemView].mainView;
 		
