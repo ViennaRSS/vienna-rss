@@ -3788,36 +3788,19 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 /* setStatusBarState
  * Show or hide the status bar state. Does not persist the state - use showHideStatusBar for this.
  */
--(void)setStatusBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate
-{
-    if (isStatusBarVisible && !isVisible)
-    {
-        if (doAnimate)
-        {
-            [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context)
-            {
-                statusBarConstraint.animator.constant = 0;
-            }
-            completionHandler:^
-            {
-                isStatusBarVisible = NO;
+-(void)setStatusBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate {
+    if (isStatusBarVisible && !isVisible) {
+        [statusBarDisclosureView collapse:doAnimate];
+        isStatusBarVisible = NO;
 
-                // If the animation is interrupted, don't hide the content border
-                if (statusBarConstraint.constant == 0)
-                    [mainWindow setContentBorderThickness:0 forEdge:NSMinYEdge];
-            }];
-        }
-        else
-        {
-            statusBarConstraint.constant = 0;
+        // If the animation is interrupted, don't hide the content border
+        if (!statusBarDisclosureView.isDisclosed) {
             [mainWindow setContentBorderThickness:0 forEdge:NSMinYEdge];
-            isStatusBarVisible = NO;
         }
-    }
-    else if (!isStatusBarVisible && isVisible)
-    {
-        [mainWindow setContentBorderThickness:22 forEdge:NSMinYEdge];
-        (doAnimate ? statusBarConstraint.animator : statusBarConstraint).constant = 22;
+    } else if (!isStatusBarVisible && isVisible) {
+        CGFloat disclosedViewHeight = statusBarDisclosureView.disclosedView.frame.size.height;
+        [mainWindow setContentBorderThickness:disclosedViewHeight forEdge:NSMinYEdge];
+        [statusBarDisclosureView disclose:doAnimate];
         isStatusBarVisible = YES;
     }
 }

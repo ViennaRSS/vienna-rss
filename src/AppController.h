@@ -76,7 +76,7 @@
     IBOutlet DisclosureView * filterDisclosureView;
 	IBOutlet TreeFilterView *treeFilterView;
 	IBOutlet TreeFilterView *treeFilterSearchField;
-    IBOutlet NSLayoutConstraint *statusBarConstraint;
+    IBOutlet DisclosureView *statusBarDisclosureView;
 	IBOutlet NSTextField * currentFilterTextField;
 	IBOutlet NSButton * filterIconInStatusBarButton;
 
