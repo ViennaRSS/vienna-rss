@@ -250,61 +250,72 @@
                             <real value="250"/>
                         </holdingPriorities>
                     </splitView>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="5Fc-hn-Xm4" customClass="NSClipView">
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="659-iz-w4S" customClass="DisclosureView">
                         <rect key="frame" x="0.0" y="0.0" width="942" height="22"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" preferredMaxLayoutWidth="350" translatesAutoresizingMaskIntoConstraints="NO" id="917">
-                                <rect key="frame" x="419" y="4" width="104" height="14"/>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="5Fc-hn-Xm4">
+                                <rect key="frame" x="0.0" y="0.0" width="942" height="22"/>
+                                <subviews>
+                                    <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" preferredMaxLayoutWidth="350" translatesAutoresizingMaskIntoConstraints="NO" id="917">
+                                        <rect key="frame" x="419" y="4" width="104" height="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" placeholder="YES" id="bMh-T6-4Rv"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" alignment="center" id="1367">
+                                            <font key="font" metaFont="smallSystem"/>
+                                            <color key="textColor" name="windowFrameTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="1400">
+                                        <rect key="frame" x="918" y="3" width="16" height="16"/>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="filter-icon" imagePosition="overlaps" alignment="center" focusRingType="none" inset="2" id="1401">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="showHideFilterBar:" target="233" id="1402"/>
+                                        </connections>
+                                    </button>
+                                    <textField verticalHuggingPriority="750" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="1403">
+                                        <rect key="frame" x="838" y="4" width="74" height="14"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="right" title="Current Filter" id="1404">
+                                            <font key="font" metaFont="smallSystem"/>
+                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" placeholder="YES" id="bMh-T6-4Rv"/>
+                                    <constraint firstItem="1400" firstAttribute="centerY" secondItem="1403" secondAttribute="centerY" id="1HT-JZ-80R"/>
+                                    <constraint firstItem="1403" firstAttribute="baseline" secondItem="917" secondAttribute="baseline" id="Ap7-nD-raV"/>
+                                    <constraint firstAttribute="trailing" secondItem="1400" secondAttribute="trailing" constant="8" id="GD6-qg-ock"/>
+                                    <constraint firstItem="1400" firstAttribute="leading" secondItem="1403" secondAttribute="trailing" constant="8" symbolic="YES" id="TXz-Sd-EOf"/>
+                                    <constraint firstItem="1403" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="917" secondAttribute="trailing" constant="8" symbolic="YES" id="XyQ-gd-mxb"/>
+                                    <constraint firstItem="917" firstAttribute="centerX" secondItem="5Fc-hn-Xm4" secondAttribute="centerX" id="iTz-2S-WML"/>
+                                    <constraint firstAttribute="bottom" secondItem="917" secondAttribute="bottom" constant="4" id="wVA-ge-Yto"/>
+                                    <constraint firstItem="917" firstAttribute="top" secondItem="5Fc-hn-Xm4" secondAttribute="top" constant="4" id="xnO-hq-FTt"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" alignment="center" id="1367">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <color key="textColor" name="windowFrameTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="1400">
-                                <rect key="frame" x="918" y="3" width="16" height="16"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="filter-icon" imagePosition="overlaps" alignment="center" focusRingType="none" inset="2" id="1401">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="showHideFilterBar:" target="233" id="1402"/>
-                                </connections>
-                            </button>
-                            <textField verticalHuggingPriority="750" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="1403">
-                                <rect key="frame" x="838" y="4" width="74" height="14"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="right" title="Current Filter" id="1404">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                            </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="1403" firstAttribute="baseline" secondItem="917" secondAttribute="baseline" id="Ap7-nD-raV"/>
-                            <constraint firstAttribute="trailing" secondItem="1400" secondAttribute="trailing" constant="8" id="GD6-qg-ock"/>
-                            <constraint firstItem="917" firstAttribute="centerY" secondItem="5Fc-hn-Xm4" secondAttribute="centerY" id="SrZ-Dm-34a"/>
-                            <constraint firstItem="1400" firstAttribute="leading" secondItem="1403" secondAttribute="trailing" constant="8" symbolic="YES" id="TXz-Sd-EOf"/>
-                            <constraint firstItem="1403" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="917" secondAttribute="trailing" constant="8" symbolic="YES" id="XyQ-gd-mxb"/>
-                            <constraint firstAttribute="height" constant="22" id="YzY-By-bmd"/>
-                            <constraint firstItem="1400" firstAttribute="centerY" secondItem="5Fc-hn-Xm4" secondAttribute="centerY" id="dwc-aA-7PN"/>
-                            <constraint firstItem="917" firstAttribute="centerX" secondItem="5Fc-hn-Xm4" secondAttribute="centerX" id="iTz-2S-WML"/>
+                            <constraint firstItem="5Fc-hn-Xm4" firstAttribute="leading" secondItem="659-iz-w4S" secondAttribute="leading" id="4kS-0c-UGG"/>
+                            <constraint firstAttribute="trailing" secondItem="5Fc-hn-Xm4" secondAttribute="trailing" id="VQT-VT-S6V"/>
+                            <constraint firstItem="5Fc-hn-Xm4" firstAttribute="top" secondItem="659-iz-w4S" secondAttribute="top" id="YjK-yE-BUo"/>
+                            <constraint firstAttribute="bottom" secondItem="5Fc-hn-Xm4" secondAttribute="bottom" priority="600" id="Z8E-bZ-Zlu"/>
                         </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="drawsBackground" value="NO"/>
-                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outlet property="disclosedView" destination="5Fc-hn-Xm4" id="TtD-hy-p1N"/>
+                        </connections>
                     </customView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="5Fc-hn-Xm4" secondAttribute="bottom" id="40K-KT-1Od"/>
+                    <constraint firstItem="659-iz-w4S" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="Odf-ud-2hZ"/>
                     <constraint firstItem="993" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="PHO-d8-qak"/>
-                    <constraint firstItem="5Fc-hn-Xm4" firstAttribute="top" secondItem="993" secondAttribute="bottom" id="RtW-03-8wt"/>
-                    <constraint firstItem="5Fc-hn-Xm4" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="a86-Lp-BLF"/>
+                    <constraint firstItem="659-iz-w4S" firstAttribute="top" secondItem="993" secondAttribute="bottom" id="RG4-2b-ToH"/>
+                    <constraint firstAttribute="trailing" secondItem="659-iz-w4S" secondAttribute="trailing" id="RZ6-nX-HHh"/>
                     <constraint firstItem="993" firstAttribute="top" secondItem="2" secondAttribute="top" id="dyB-H2-9DB"/>
-                    <constraint firstAttribute="trailing" secondItem="5Fc-hn-Xm4" secondAttribute="trailing" id="uZi-66-OPm"/>
+                    <constraint firstAttribute="bottom" secondItem="659-iz-w4S" secondAttribute="bottom" id="tB9-yB-EO0"/>
                     <constraint firstAttribute="trailing" secondItem="993" secondAttribute="trailing" id="x4Z-s7-D3P"/>
                 </constraints>
             </view>
@@ -1023,7 +1034,7 @@ CA
                 <outlet property="sortByMenu" destination="387" id="1054"/>
                 <outlet property="spinner" destination="918" id="920"/>
                 <outlet property="splitView1" destination="993" id="994"/>
-                <outlet property="statusBarConstraint" destination="YzY-By-bmd" id="Zhn-OW-bNR"/>
+                <outlet property="statusBarDisclosureView" destination="659-iz-w4S" id="gjn-93-Mdy"/>
                 <outlet property="statusText" destination="917" id="919"/>
                 <outlet property="stylesMenu" destination="826" id="1051"/>
                 <outlet property="treeFilterSearchField" destination="o3u-Zs-gsz" id="KXs-yF-tdT"/>
