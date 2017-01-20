@@ -25,7 +25,7 @@
             <subviews>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5EN-Cn-aOH">
                     <rect key="frame" x="18" y="142" width="471" height="18"/>
-                    <buttonCell key="cell" type="check" title="Sync with an Open Reader server" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Lkv-md-rEW">
+                    <buttonCell key="cell" type="check" title="Sync with an Open Reader server" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Lkv-md-rEW">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="systemBold"/>
                         <connections>
@@ -44,17 +44,14 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zAy-oc-zmb" userLabel="URL">
-                    <rect key="frame" x="103" y="113" width="68" height="26"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="63" placeholder="YES" id="OQz-T5-vs2"/>
-                    </constraints>
-                    <popUpButtonCell key="cell" type="push" title="URL" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="border" tag="100" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="RMd-14-2Bl" id="xdj-NS-PwU" userLabel="URL">
+                <popUpButton verticalHuggingPriority="750" placeholderIntrinsicWidth="63" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="zAy-oc-zmb" userLabel="URL">
+                    <rect key="frame" x="103" y="112" width="68" height="26"/>
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="border" tag="100" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="RMd-14-2Bl" id="xdj-NS-PwU" userLabel="URL">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="LVH-iR-bmO">
                             <items>
-                                <menuItem title="URL" state="on" tag="100" id="RMd-14-2Bl"/>
+                                <menuItem state="on" tag="100" id="RMd-14-2Bl"/>
                             </items>
                         </menu>
                         <connections>
@@ -77,7 +74,7 @@
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0a-XC-3An">
                     <rect key="frame" x="105" y="91" width="338" height="22"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="1n4-eP-Qqp">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" usesSingleLineMode="YES" id="1n4-eP-Qqp">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -106,7 +103,7 @@
                 </button>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="418" translatesAutoresizingMaskIntoConstraints="NO" id="5uV-sN-sk6">
                     <rect key="frame" x="18" y="72" width="427" height="14"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Hint" placeholderString="" id="3WF-BJ-rBh">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" placeholderString="" id="3WF-BJ-rBh">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -133,7 +130,7 @@
                 </textField>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XVM-1J-3vY">
                     <rect key="frame" x="105" y="42" width="338" height="22"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="ixu-KQ-AHB">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" usesSingleLineMode="YES" id="ixu-KQ-AHB">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -153,7 +150,7 @@
                 </textField>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y60-8l-5RI" customClass="NSSecureTextField">
                     <rect key="frame" x="105" y="17" width="338" height="22"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="9At-zM-xFB">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" usesSingleLineMode="YES" id="9At-zM-xFB">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

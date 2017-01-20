@@ -116,39 +116,27 @@ Gw
                         </view>
                     </box>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="58">
-                        <rect key="frame" x="18" y="112" width="172" height="17"/>
+                        <rect key="frame" x="18" y="113" width="172" height="17"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Show all articles that match" id="98">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="79">
+                    <popUpButton verticalHuggingPriority="750" placeholderIntrinsicWidth="85" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="79">
                         <rect key="frame" x="194" y="106" width="90" height="26"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="85" placeholder="YES" id="Bjb-qR-T9c"/>
-                        </constraints>
-                        <popUpButtonCell key="cell" type="push" title="Nothing" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="82" id="99">
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="82" id="99">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
                             <menu key="menu" id="80">
                                 <items>
-                                    <menuItem title="Nothing" state="on" id="82" propertyAccessControl="localizable">
-                                        <attributedString key="userComments">
-                                            <fragment content="Do not localize">
-                                                <attributes>
-                                                    <font key="NSFont" metaFont="smallSystem"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                    </menuItem>
+                                    <menuItem state="on" id="82" propertyAccessControl="localizable"/>
                                 </items>
                             </menu>
                         </popUpButtonCell>
                     </popUpButton>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="84">
-                        <rect key="frame" x="287" y="112" width="168" height="17"/>
+                        <rect key="frame" x="287" y="113" width="168" height="17"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="of the following conditions:" id="100">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -186,26 +174,14 @@ Gw
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="26" userLabel="SearchCriteriaView">
             <rect key="frame" x="0.0" y="0.0" width="593" height="26"/>
             <subviews>
-                <popUpButton horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="27">
+                <popUpButton horizontalHuggingPriority="750" verticalHuggingPriority="750" placeholderIntrinsicWidth="142" placeholderIntrinsicHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="27">
                     <rect key="frame" x="5" y="1" width="148" height="22"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="142" placeholder="YES" id="FXq-aG-leM"/>
-                    </constraints>
-                    <popUpButtonCell key="cell" type="push" title="Field names go here" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="33" id="101">
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="33" id="101">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
                         <menu key="menu" id="32">
                             <items>
-                                <menuItem title="Field names go here" state="on" id="33" propertyAccessControl="localizable">
-                                    <attributedString key="userComments">
-                                        <fragment content="Do not localize">
-                                            <attributes>
-                                                <font key="NSFont" metaFont="smallSystem"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </menuItem>
+                                <menuItem state="on" id="33" propertyAccessControl="localizable"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
@@ -213,32 +189,20 @@ Gw
                         <action selector="fieldChanged:" target="-2" id="59"/>
                     </connections>
                 </popUpButton>
-                <popUpButton horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="35">
+                <popUpButton horizontalHuggingPriority="750" verticalHuggingPriority="750" placeholderIntrinsicWidth="132" placeholderIntrinsicHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="35">
                     <rect key="frame" x="155" y="1" width="138" height="22"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="132" placeholder="YES" id="n4t-TP-hYX"/>
-                    </constraints>
-                    <popUpButtonCell key="cell" type="push" title="Operators go here" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="56" id="105">
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="56" id="105">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
                         <menu key="menu" id="34">
                             <items>
-                                <menuItem title="Operators go here" state="on" id="56" propertyAccessControl="localizable">
-                                    <attributedString key="userComments">
-                                        <fragment content="Do not localize">
-                                            <attributes>
-                                                <font key="NSFont" metaFont="smallSystem"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </menuItem>
+                                <menuItem state="on" id="56" propertyAccessControl="localizable"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
                 </popUpButton>
                 <popUpButton hidden="YES" verticalHuggingPriority="750" tag="1004" translatesAutoresizingMaskIntoConstraints="NO" id="86">
-                    <rect key="frame" x="295" y="2" width="237" height="22"/>
+                    <rect key="frame" x="295" y="1" width="237" height="22"/>
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="109">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
@@ -246,7 +210,7 @@ Gw
                     </popUpButtonCell>
                 </popUpButton>
                 <textField hidden="YES" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="69">
-                    <rect key="frame" x="298" y="3" width="231" height="19"/>
+                    <rect key="frame" x="298" y="2" width="231" height="19"/>
                     <textFieldCell key="cell" controlSize="small" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="107">
                         <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0" negativeFormat="-0" localizesFormat="NO" hasThousandSeparators="NO" thousandSeparator="," id="71">
                             <attributedString key="attributedStringForZero">
@@ -261,7 +225,7 @@ Gw
                     </textFieldCell>
                 </textField>
                 <popUpButton hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="61">
-                    <rect key="frame" x="295" y="2" width="237" height="22"/>
+                    <rect key="frame" x="295" y="1" width="237" height="22"/>
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="106">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
@@ -269,7 +233,7 @@ Gw
                     </popUpButtonCell>
                 </popUpButton>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="30">
-                    <rect key="frame" x="298" y="3" width="231" height="19"/>
+                    <rect key="frame" x="298" y="2" width="231" height="19"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="103">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -277,7 +241,7 @@ Gw
                     </textFieldCell>
                 </textField>
                 <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="29">
-                    <rect key="frame" x="531" y="-5" width="32" height="32"/>
+                    <rect key="frame" x="531" y="-6" width="32" height="32"/>
                     <buttonCell key="cell" type="round" bezelStyle="circular" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" id="102">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
@@ -287,7 +251,7 @@ Gw
                     </connections>
                 </button>
                 <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="31">
-                    <rect key="frame" x="559" y="-5" width="32" height="32"/>
+                    <rect key="frame" x="559" y="-6" width="32" height="32"/>
                     <buttonCell key="cell" type="round" bezelStyle="circular" image="NSAddTemplate" imagePosition="overlaps" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" id="104">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
@@ -298,7 +262,7 @@ Gw
                     </connections>
                 </button>
                 <popUpButton hidden="YES" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" tag="1008" translatesAutoresizingMaskIntoConstraints="NO" id="73">
-                    <rect key="frame" x="295" y="2" width="237" height="22"/>
+                    <rect key="frame" x="295" y="1" width="237" height="22"/>
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="108">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>

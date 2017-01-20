@@ -33,15 +33,45 @@
                                 <rect key="frame" x="0.0" y="0.0" width="288" height="603"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8uX-2t-Ik7">
-                                        <rect key="frame" x="0.0" y="-3" width="288" height="576"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="QAa-Gc-i1V">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="576"/>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="o3u-Zs-gsz" userLabel="TreeFilterView" customClass="TreeFilterView">
+                                        <rect key="frame" x="0.0" y="574" width="288" height="29"/>
+                                        <subviews>
+                                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="2Bf-xM-DeZ">
+                                                <rect key="frame" x="0.0" y="26" width="288" height="5"/>
+                                            </box>
+                                            <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CJo-vt-zIx">
+                                                <rect key="frame" x="8" y="5" width="272" height="19"/>
+                                                <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" bezelStyle="round" sendsWholeSearchString="YES" recentsAutosaveName="filterStrings" id="lhy-4c-asJ">
+                                                    <font key="font" metaFont="smallSystem"/>
+                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    <connections>
+                                                        <action selector="searchUsingTreeFilter:" target="233" id="yen-70-Vgb"/>
+                                                    </connections>
+                                                </searchFieldCell>
+                                            </searchField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="2Bf-xM-DeZ" firstAttribute="leading" secondItem="o3u-Zs-gsz" secondAttribute="leading" id="fUY-CX-Lc9"/>
+                                            <constraint firstItem="CJo-vt-zIx" firstAttribute="top" secondItem="o3u-Zs-gsz" secondAttribute="top" constant="5" id="kTM-Re-UeS"/>
+                                            <constraint firstAttribute="bottom" secondItem="CJo-vt-zIx" secondAttribute="bottom" constant="5" id="nWB-gh-fLw"/>
+                                            <constraint firstAttribute="trailing" secondItem="2Bf-xM-DeZ" secondAttribute="trailing" id="ro4-dz-qUC"/>
+                                            <constraint firstItem="2Bf-xM-DeZ" firstAttribute="top" secondItem="o3u-Zs-gsz" secondAttribute="top" id="sBw-Ds-T5c"/>
+                                            <constraint firstItem="CJo-vt-zIx" firstAttribute="leading" secondItem="o3u-Zs-gsz" secondAttribute="leading" constant="8" id="ucW-1x-D1F"/>
+                                            <constraint firstAttribute="trailing" secondItem="CJo-vt-zIx" secondAttribute="trailing" constant="8" id="vAZ-Il-h0U"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="filterSearchField" destination="CJo-vt-zIx" id="xxg-IJ-OvH"/>
+                                        </connections>
+                                    </customView>
+                                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8uX-2t-Ik7">
+                                        <rect key="frame" x="0.0" y="0.0" width="288" height="574"/>
+                                        <clipView key="contentView" drawsBackground="NO" id="QAa-Gc-i1V">
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="574"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <outlineView focusRingType="none" verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" columnResizing="NO" autosaveName="outViewer" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="14" outlineTableColumn="xXs-dn-GMc" id="Kk7-ax-B3r" customClass="FolderView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="576"/>
+                                                <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" columnResizing="NO" autosaveName="outViewer" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="14" outlineTableColumn="xXs-dn-GMc" id="Kk7-ax-B3r" customClass="FolderView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="574"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <size key="intercellSpacing" width="3" height="0.0"/>
                                                     <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -62,50 +92,32 @@
                                                         </tableColumn>
                                                     </tableColumns>
                                                     <connections>
-                                                        <outlet property="dataSource" destination="738" id="jan-Rk-xpQ"/>
-                                                        <outlet property="delegate" destination="738" id="4I7-lq-pZ3"/>
+                                                        <outlet property="dataSource" destination="ugm-kC-yFY" id="ufn-bW-ljC"/>
+                                                        <outlet property="delegate" destination="ugm-kC-yFY" id="JKg-Jf-3i7"/>
                                                     </connections>
                                                 </outlineView>
                                             </subviews>
                                             <nil key="backgroundColor"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="u6a-gc-Hse">
-                                            <rect key="frame" x="0.0" y="-16" width="0.0" height="16"/>
+                                            <rect key="frame" x="0.0" y="560" width="256" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="m9n-zp-NnZ">
-                                            <rect key="frame" x="-16" y="0.0" width="16" height="0.0"/>
+                                            <rect key="frame" x="272" y="0.0" width="16" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o3u-Zs-gsz" userLabel="TreeFilterView" customClass="TreeFilterView">
-                                        <rect key="frame" x="0.0" y="574" width="288" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                        <subviews>
-                                            <searchField wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CJo-vt-zIx">
-                                                <rect key="frame" x="6" y="5" width="277" height="19"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                                <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" bezelStyle="round" sendsWholeSearchString="YES" recentsAutosaveName="filterStrings" id="lhy-4c-asJ">
-                                                    <font key="font" metaFont="smallSystem"/>
-                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    <connections>
-                                                        <action selector="searchUsingTreeFilter:" target="233" id="yen-70-Vgb"/>
-                                                    </connections>
-                                                </searchFieldCell>
-                                            </searchField>
-                                            <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="2Bf-xM-DeZ">
-                                                <rect key="frame" x="0.0" y="26" width="601" height="5"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                            </box>
-                                        </subviews>
-                                        <connections>
-                                            <outlet property="filterSearchField" destination="CJo-vt-zIx" id="xxg-IJ-OvH"/>
-                                        </connections>
-                                    </customView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="8uX-2t-Ik7" firstAttribute="leading" secondItem="PG8-8Y-Lzt" secondAttribute="leading" id="KYR-SE-tnC"/>
+                                    <constraint firstAttribute="trailing" secondItem="o3u-Zs-gsz" secondAttribute="trailing" id="SsN-v0-dK4"/>
+                                    <constraint firstItem="o3u-Zs-gsz" firstAttribute="leading" secondItem="PG8-8Y-Lzt" secondAttribute="leading" id="YLh-QP-Vms"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="YwG-tG-A8p"/>
+                                    <constraint firstItem="8uX-2t-Ik7" firstAttribute="top" secondItem="o3u-Zs-gsz" secondAttribute="bottom" id="dTG-45-tti"/>
+                                    <constraint firstItem="o3u-Zs-gsz" firstAttribute="top" secondItem="PG8-8Y-Lzt" secondAttribute="top" id="dxe-yN-SUT"/>
+                                    <constraint firstAttribute="bottom" secondItem="8uX-2t-Ik7" secondAttribute="bottom" id="h84-sN-cLF"/>
+                                    <constraint firstAttribute="trailing" secondItem="8uX-2t-Ik7" secondAttribute="trailing" id="uAd-Tx-1yF"/>
                                 </constraints>
                             </view>
                             <customView id="982">
@@ -172,7 +184,7 @@
                                                     </popUpButton>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="1305">
                                                         <rect key="frame" x="407" y="8" width="50" height="14"/>
-                                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Filter by:" id="1377">
+                                                        <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="right" title="Filter by:" id="1377">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -256,15 +268,12 @@
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="5Fc-hn-Xm4">
                                 <rect key="frame" x="0.0" y="0.0" width="942" height="22"/>
                                 <subviews>
-                                    <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" preferredMaxLayoutWidth="350" translatesAutoresizingMaskIntoConstraints="NO" id="917">
+                                    <textField verticalHuggingPriority="750" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="14" allowsCharacterPickerTouchBarItem="NO" preferredMaxLayoutWidth="350" translatesAutoresizingMaskIntoConstraints="NO" id="917">
                                         <rect key="frame" x="419" y="4" width="104" height="14"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="100" placeholder="YES" id="bMh-T6-4Rv"/>
-                                        </constraints>
                                         <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" alignment="center" id="1367">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="windowFrameTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                     <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="1400">
@@ -279,10 +288,10 @@
                                     </button>
                                     <textField verticalHuggingPriority="750" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="1403">
                                         <rect key="frame" x="838" y="4" width="74" height="14"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="right" title="Current Filter" id="1404">
+                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="right" title="Current Filter" id="1404">
                                             <font key="font" metaFont="smallSystem"/>
-                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="windowFrameTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                 </subviews>
@@ -1027,7 +1036,7 @@ CA
                 <outlet property="filterView" destination="1300" id="1301"/>
                 <outlet property="filterViewPopUp" destination="1306" id="1319"/>
                 <outlet property="filtersMenu" destination="1117" id="1135"/>
-                <outlet property="foldersTree" destination="738" id="9T7-fT-Mab"/>
+                <outlet property="foldersTree" destination="ugm-kC-yFY" id="lcl-Mo-hfE"/>
                 <outlet property="mainWindow" destination="21" id="239"/>
                 <outlet property="searchField" destination="1252" id="1253"/>
                 <outlet property="searchView" destination="1251" id="1254"/>
@@ -1041,14 +1050,6 @@ CA
                 <outlet property="treeFilterView" destination="o3u-Zs-gsz" id="xy6-Zn-PcY"/>
             </connections>
         </customObject>
-        <customView id="738" userLabel="FoldersTree" customClass="FoldersTree">
-            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <connections>
-                <outlet property="controller" destination="233" id="1171"/>
-                <outlet property="outlineView" destination="Kk7-ax-B3r" id="BnE-cF-C4x"/>
-            </connections>
-        </customView>
         <customView id="860" userLabel="ExportSaveAccessory">
             <rect key="frame" x="0.0" y="0.0" width="399" height="94"/>
             <autoresizingMask key="autoresizingMask"/>
@@ -1104,7 +1105,7 @@ CA
                                         <rect key="frame" x="0.0" y="0.0" width="700" height="309"/>
                                         <clipView key="contentView" id="TOX-JT-adF">
                                             <rect key="frame" x="0.0" y="0.0" width="700" height="309"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowHeight="15" headerView="1386" id="977" customClass="MessageListView">
                                                     <rect key="frame" x="0.0" y="0.0" width="700" height="286"/>
@@ -1188,10 +1189,10 @@ CA
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" ambiguous="YES" id="emU-La-Fur">
                         <rect key="frame" x="1" y="1" width="699" height="605"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="NgO-hM-mCz" customClass="ExtendedTableView">
-                                <rect key="frame" x="0.0" y="11" width="1027" height="605"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1027" height="605"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1215,7 +1216,7 @@ CA
                         </subviews>
                     </clipView>
                     <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="S05-md-m5A">
-                        <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
+                        <rect key="frame" x="1" y="590" width="699" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="fza-gl-TLT">
@@ -1234,7 +1235,7 @@ CA
         <customObject id="1164" userLabel="ArticleController" customClass="ArticleController">
             <connections>
                 <outlet property="articleListView" destination="971" id="CtF-Wy-tWn"/>
-                <outlet property="foldersTree" destination="738" id="1166"/>
+                <outlet property="foldersTree" destination="ugm-kC-yFY" id="sgV-i3-mJ1"/>
                 <outlet property="unifiedListView" destination="1148" id="BZB-bx-zs0"/>
             </connections>
         </customObject>
@@ -1279,24 +1280,23 @@ CA
                     </buttonCell>
                 </button>
             </subviews>
+            <point key="canvasLocation" x="-77" y="255"/>
         </customView>
         <customView id="1288" userLabel="StdEnclosureView" customClass="StdEnclosureView">
             <rect key="frame" x="0.0" y="0.0" width="491" height="49"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
             <subviews>
-                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1292" customClass="DSClickableURLTextField">
-                    <rect key="frame" x="64" y="8" width="311" height="14"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                    <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="(filename)" id="1375">
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="1292" customClass="DSClickableURLTextField">
+                    <rect key="frame" x="46" y="9" width="339" height="14"/>
+                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" id="1375">
                         <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1291">
-                    <rect key="frame" x="374" y="6" width="103" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
-                    <buttonCell key="cell" type="push" title="(button)" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="1374">
+                <button horizontalHuggingPriority="251" verticalHuggingPriority="750" placeholderIntrinsicWidth="80" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="1291">
+                    <rect key="frame" x="385" y="7" width="92" height="32"/>
+                    <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="1374">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -1304,32 +1304,56 @@ CA
                         <action selector="downloadFile:" target="1288" id="1293"/>
                     </connections>
                 </button>
-                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1290">
-                    <rect key="frame" x="64" y="25" width="311" height="15"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                    <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="(label)" id="1373">
+                <textField verticalHuggingPriority="750" verticalCompressionResistancePriority="751" allowsCharacterPickerTouchBarItem="NO" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="1290">
+                    <rect key="frame" x="46" y="26" width="339" height="14"/>
+                    <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" id="1373">
                         <font key="font" metaFont="smallSystemBold"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1289">
-                    <rect key="frame" x="10" y="8" width="32" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                <imageView translatesAutoresizingMaskIntoConstraints="NO" id="1289">
+                    <rect key="frame" x="8" y="8" width="32" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="32" id="DHh-hp-lMb"/>
+                        <constraint firstAttribute="height" constant="32" id="Nns-hC-vGL"/>
+                    </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="1372"/>
                 </imageView>
-                <box verticalHuggingPriority="750" fixedFrame="YES" alphaValue="0.79577457904815674" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1392">
+                <box verticalHuggingPriority="750" alphaValue="0.79577457904815674" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1392">
                     <rect key="frame" x="0.0" y="46" width="491" height="5"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                 </box>
             </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="1291" secondAttribute="trailing" constant="20" symbolic="YES" id="1DB-sF-Vau"/>
+                <constraint firstItem="1292" firstAttribute="top" secondItem="1290" secondAttribute="bottom" constant="3" id="Bbu-Il-8jH"/>
+                <constraint firstItem="1289" firstAttribute="centerY" secondItem="1288" secondAttribute="centerY" id="FHW-Sb-Cds"/>
+                <constraint firstAttribute="trailing" secondItem="1392" secondAttribute="trailing" id="GFf-Yl-lP2"/>
+                <constraint firstItem="1291" firstAttribute="centerY" secondItem="1288" secondAttribute="centerY" id="Ixf-rK-HxX"/>
+                <constraint firstItem="1290" firstAttribute="top" secondItem="1288" secondAttribute="top" constant="9" id="Ja8-HE-Dbl"/>
+                <constraint firstItem="1292" firstAttribute="leading" secondItem="1290" secondAttribute="leading" id="Kph-Bv-b6S"/>
+                <constraint firstItem="1392" firstAttribute="top" secondItem="1288" secondAttribute="top" id="LAj-tr-QQ9"/>
+                <constraint firstItem="1291" firstAttribute="leading" secondItem="1290" secondAttribute="trailing" constant="8" symbolic="YES" id="QzN-vh-t35"/>
+                <constraint firstItem="1392" firstAttribute="leading" secondItem="1288" secondAttribute="leading" id="a5m-26-m2M"/>
+                <constraint firstItem="1292" firstAttribute="trailing" secondItem="1290" secondAttribute="trailing" id="ulP-IP-Jrd"/>
+                <constraint firstItem="1289" firstAttribute="leading" secondItem="1288" secondAttribute="leading" constant="8" id="vj9-rV-wAL"/>
+                <constraint firstAttribute="bottom" secondItem="1292" secondAttribute="bottom" constant="9" id="wXn-Te-OLJ"/>
+                <constraint firstItem="1290" firstAttribute="leading" secondItem="1289" secondAttribute="trailing" constant="8" symbolic="YES" id="zKi-z6-eBu"/>
+            </constraints>
             <connections>
                 <outlet property="downloadButton" destination="1291" id="1297"/>
                 <outlet property="fileImage" destination="1289" id="1294"/>
                 <outlet property="filenameField" destination="1292" id="1298"/>
                 <outlet property="filenameLabel" destination="1290" id="1299"/>
             </connections>
+            <point key="canvasLocation" x="138.5" y="168.5"/>
         </customView>
+        <customObject id="ugm-kC-yFY" customClass="FoldersTree">
+            <connections>
+                <outlet property="controller" destination="233" id="FRY-S5-mjJ"/>
+                <outlet property="outlineView" destination="Kk7-ax-B3r" id="O2z-Mf-33v"/>
+            </connections>
+        </customObject>
     </objects>
     <resources>
         <image name="filter-icon" width="16" height="16"/>

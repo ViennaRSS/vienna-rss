@@ -22,7 +22,7 @@
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8eN-mz-Hbd">
                     <rect key="frame" x="18" y="189" width="390" height="28"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="GaX-8c-QaN">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="GaX-8c-QaN">
                         <font key="font" metaFont="smallSystem"/>
                         <string key="title">The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -31,7 +31,7 @@
                 </textField>
                 <button verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tVa-eQ-1Ic">
                     <rect key="frame" x="18" y="164" width="390" height="19"/>
-                    <buttonCell key="cell" type="check" title="Enable JavaScript in the internal browser" bezelStyle="regularSquare" imagePosition="left" inset="2" id="guK-dE-f6n">
+                    <buttonCell key="cell" type="check" title="Enable JavaScript in the internal browser" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="guK-dE-f6n">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -41,7 +41,7 @@
                 </button>
                 <button verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="E4n-wq-fUN">
                     <rect key="frame" x="18" y="144" width="390" height="18"/>
-                    <buttonCell key="cell" type="check" title="Enable Plugins in the internal browser" bezelStyle="regularSquare" imagePosition="left" inset="2" id="fIz-4t-Ogg">
+                    <buttonCell key="cell" type="check" title="Enable Plugins in the internal browser" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="fIz-4t-Ogg">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -51,17 +51,14 @@
                 </button>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="x1e-Vb-sUJ">
                     <rect key="frame" x="18" y="121" width="145" height="17"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Concurrent downloads:" id="Ngw-hP-yW4">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Concurrent downloads:" id="Ngw-hP-yW4">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H1P-vO-Noj">
+                <popUpButton verticalHuggingPriority="750" placeholderIntrinsicWidth="52" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="H1P-vO-Noj">
                     <rect key="frame" x="167" y="115" width="57" height="26"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="52" placeholder="YES" id="Y9e-cE-bk2"/>
-                    </constraints>
                     <popUpButtonCell key="cell" type="push" title="10" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="p15-eO-dBa" id="hDb-uR-Acz">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
@@ -146,7 +143,7 @@
                 </popUpButton>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lbl-Gt-1fA">
                     <rect key="frame" x="18" y="85" width="390" height="28"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="The higher the number, the quicker your subscriptions will be downloaded." id="2GQ-cu-fbh" propertyAccessControl="none">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="The higher the number, the quicker your subscriptions will be downloaded." id="2GQ-cu-fbh" propertyAccessControl="none">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -154,7 +151,7 @@
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYk-Hr-rn0">
                     <rect key="frame" x="18" y="49" width="390" height="28"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="However, high numbers also render your computer less responsive while refreshing feeds." id="S3T-cW-hys">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="However, high numbers also render your computer less responsive while refreshing feeds." id="S3T-cW-hys">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

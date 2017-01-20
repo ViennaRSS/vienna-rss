@@ -29,27 +29,11 @@
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" preferredMaxLayoutWidth="315" translatesAutoresizingMaskIntoConstraints="NO" id="20">
                         <rect key="frame" x="18" y="50" width="319" height="14"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="&lt;Prompt&gt;" id="24" propertyAccessControl="localizable">
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="24">
                             <font key="font" metaFont="smallSystemBold"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                            <attributedString key="userComments">
-                                <fragment content="DO NOT LOCALIZE">
-                                    <attributes>
-                                        <font key="NSFont" metaFont="smallSystem"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                    </attributes>
-                                </fragment>
-                            </attributedString>
                         </textFieldCell>
-                        <attributedString key="userComments">
-                            <fragment content="Do not localize">
-                                <attributes>
-                                    <font key="NSFont" metaFont="smallSystem"/>
-                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                </attributes>
-                            </fragment>
-                        </attributedString>
                     </textField>
                     <searchField wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8">
                         <rect key="frame" x="20" y="20" width="315" height="22"/>

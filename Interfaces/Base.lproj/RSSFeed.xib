@@ -36,7 +36,7 @@
                         <rect key="frame" x="18" y="245" width="384" height="17"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Create a new subscription" id="106">
                             <font key="font" metaFont="systemBold"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
@@ -45,26 +45,26 @@
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="107">
                             <font key="font" metaFont="label"/>
                             <string key="title">Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.</string>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="180" translatesAutoresizingMaskIntoConstraints="NO" id="40">
-                        <rect key="frame" x="18" y="185" width="51" height="17"/>
+                        <rect key="frame" x="18" y="186" width="51" height="17"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Source:" id="104">
                             <font key="font" metaFont="system"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <popUpButton horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="43">
-                        <rect key="frame" x="73" y="179" width="63" height="26"/>
-                        <popUpButtonCell key="cell" type="push" title="URL" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="100" imageScaling="proportionallyDown" inset="2" selectedItem="45" id="105">
+                    <popUpButton horizontalHuggingPriority="750" verticalHuggingPriority="750" placeholderIntrinsicWidth="120" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="43">
+                        <rect key="frame" x="73" y="179" width="125" height="26"/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="100" imageScaling="proportionallyDown" inset="2" selectedItem="45" id="105">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
                             <menu key="menu" id="44">
                                 <items>
-                                    <menuItem title="URL" state="on" tag="100" id="45"/>
+                                    <menuItem state="on" tag="100" id="45" propertyAccessControl="localizable"/>
                                 </items>
                             </menu>
                         </popUpButtonCell>
@@ -73,7 +73,7 @@
                         </connections>
                     </popUpButton>
                     <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="92">
-                        <rect key="frame" x="143" y="180" width="25" height="25"/>
+                        <rect key="frame" x="205" y="181" width="25" height="25"/>
                         <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="109">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -86,7 +86,7 @@
                         <rect key="frame" x="18" y="157" width="384" height="17"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="URL:" id="110">
                             <font key="font" metaFont="system"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
@@ -187,7 +187,7 @@ DQ
                         <rect key="frame" x="18" y="135" width="384" height="17"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Edit subscription" id="114">
                             <font key="font" metaFont="systemBold"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>

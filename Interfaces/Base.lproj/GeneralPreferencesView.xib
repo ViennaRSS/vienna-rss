@@ -38,7 +38,7 @@
                     <rect key="frame" x="18" y="443" width="161" height="17"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Check for new articles:" id="ewU-JH-fMC">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -47,7 +47,7 @@
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="uYS-Ag-cif" userLabel="Manually">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
-                        <menu key="menu" title="OtherViews" id="XAi-oh-7Fq">
+                        <menu key="menu" id="XAi-oh-7Fq">
                             <items>
                                 <menuItem title="Manually" id="H9Q-du-oax"/>
                                 <menuItem isSeparatorItem="YES" id="5lr-Lv-UnM">
@@ -71,10 +71,10 @@
                     </connections>
                 </popUpButton>
                 <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" preferredMaxLayoutWidth="274" translatesAutoresizingMaskIntoConstraints="NO" id="jvo-2D-Yfm">
-                    <rect key="frame" x="18" y="381" width="161" height="17"/>
+                    <rect key="frame" x="18" y="382" width="161" height="17"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Default RSS Reader:" id="kGA-Sa-RLG">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -83,9 +83,9 @@
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="eOP-c9-a3m" userLabel="Nothing">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
-                        <menu key="menu" title="OtherViews" id="HFO-4f-zYZ">
+                        <menu key="menu" id="HFO-4f-zYZ">
                             <items>
-                                <menuItem title="Nothing" id="GAY-ra-eQY"/>
+                                <menuItem id="GAY-ra-eQY"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
@@ -124,21 +124,21 @@
                     </buttonCell>
                 </button>
                 <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" preferredMaxLayoutWidth="274" translatesAutoresizingMaskIntoConstraints="NO" id="uT7-Bq-SAH">
-                    <rect key="frame" x="18" y="412" width="161" height="17"/>
+                    <rect key="frame" x="18" y="413" width="161" height="17"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Move articles to Trash:" id="k6Y-ib-PGb">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <popUpButton horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1LP-jv-eDe" userLabel="(Do not localise)">
+                <popUpButton horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1LP-jv-eDe">
                     <rect key="frame" x="183" y="406" width="154" height="26"/>
-                    <popUpButtonCell key="cell" type="push" title="(Do not localise)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="fYn-Rz-G69" id="NX4-hw-8Jr" userLabel="(Do not localise)">
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="fYn-Rz-G69" id="NX4-hw-8Jr">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
-                        <menu key="menu" title="OtherViews" id="DFg-c6-rCy">
+                        <menu key="menu" id="DFg-c6-rCy">
                             <items>
-                                <menuItem title="(Do not localise)" state="on" id="fYn-Rz-G69"/>
+                                <menuItem state="on" id="fYn-Rz-G69"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
@@ -147,25 +147,25 @@
                     </connections>
                 </popUpButton>
                 <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" preferredMaxLayoutWidth="274" translatesAutoresizingMaskIntoConstraints="NO" id="JQX-Cj-imk">
-                    <rect key="frame" x="18" y="350" width="161" height="17"/>
+                    <rect key="frame" x="18" y="351" width="161" height="17"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Save downloaded files to:" id="geD-Ws-mQm">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <popUpButton horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5fV-8g-Bux" userLabel="(Path)">
+                <popUpButton horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5fV-8g-Bux">
                     <rect key="frame" x="183" y="344" width="154" height="26"/>
-                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="Sdl-yU-zPs" userLabel="(Path)">
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="Sdl-yU-zPs">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
-                        <menu key="menu" title="OtherViews" id="Klv-JA-PvP">
+                        <menu key="menu" id="Klv-JA-PvP">
                             <items>
-                                <menuItem title="(Path)" id="5Cq-8f-vbL"/>
+                                <menuItem id="5Cq-8f-vbL"/>
                                 <menuItem isSeparatorItem="YES" id="nxI-oL-X6j">
                                     <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                 </menuItem>
-                                <menuItem title="Other..." id="FiK-E7-RnG">
+                                <menuItem title="Other…" id="FiK-E7-RnG">
                                     <connections>
                                         <action selector="changeDownloadFolder:" target="-2" id="ex0-2r-Dq5"/>
                                     </connections>
@@ -179,7 +179,7 @@
                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     <size key="cellSize" width="462" height="18"/>
                     <size key="intercellSpacing" width="4" height="2"/>
-                    <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="NAE-EF-SsE">
+                    <buttonCell key="prototype" type="radio" imagePosition="left" alignment="left" inset="2" id="NAE-EF-SsE">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -214,7 +214,7 @@
                 </button>
                 <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="cWz-UE-9Jd">
                     <rect key="frame" x="18" y="263" width="318" height="18"/>
-                    <buttonCell key="cell" type="check" title="Mark updated articles as new" bezelStyle="regularSquare" imagePosition="left" inset="2" id="meo-78-YOl">
+                    <buttonCell key="cell" type="check" title="Mark updated articles as new" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="meo-78-YOl">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                         <connections>
@@ -224,9 +224,9 @@
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" preferredMaxLayoutWidth="406" translatesAutoresizingMaskIntoConstraints="NO" id="0SP-XH-wW9">
                     <rect key="frame" x="18" y="220" width="318" height="17"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Updates:" id="qeb-at-hYb">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Updates:" id="qeb-at-hYb">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -252,15 +252,15 @@
                 </button>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" preferredMaxLayoutWidth="406" translatesAutoresizingMaskIntoConstraints="NO" id="2OY-6J-jph">
                     <rect key="frame" x="18" y="66" width="318" height="17"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Mark current article read:" id="sCl-hz-PFF">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Mark current article read:" id="sCl-hz-PFF">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Oan-Su-2SV">
                     <rect key="frame" x="30" y="109" width="306" height="18"/>
-                    <buttonCell key="cell" type="check" title="Show the unread count on the application icon" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="7e3-Hu-RB5">
+                    <buttonCell key="cell" type="check" title="Show the unread count on the application icon" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="7e3-Hu-RB5">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                         <connections>
@@ -270,7 +270,7 @@
                 </button>
                 <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="HnQ-mh-GpR">
                     <rect key="frame" x="30" y="89" width="306" height="18"/>
-                    <buttonCell key="cell" type="check" title="Bounce the application icon" bezelStyle="regularSquare" imagePosition="left" inset="2" id="gi4-ao-0yS">
+                    <buttonCell key="cell" type="check" title="Bounce the application icon" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="gi4-ao-0yS">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                         <connections>
@@ -280,15 +280,15 @@
                 </button>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" preferredMaxLayoutWidth="406" translatesAutoresizingMaskIntoConstraints="NO" id="L7n-i6-BJc">
                     <rect key="frame" x="18" y="133" width="318" height="17"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="When new unread articles are retrieved:" id="BbI-0A-zEG">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="When new unread articles are retrieved:" id="BbI-0A-zEG">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="dX2-Cd-tkI">
                     <rect key="frame" x="30" y="156" width="306" height="18"/>
-                    <buttonCell key="cell" type="check" title="Search for latest Beta versions" bezelStyle="regularSquare" imagePosition="left" inset="2" id="OID-qF-Pp0">
+                    <buttonCell key="cell" type="check" title="Search for latest Beta versions" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="OID-qF-Pp0">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

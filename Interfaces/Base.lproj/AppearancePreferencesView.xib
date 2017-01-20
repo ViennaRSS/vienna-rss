@@ -52,17 +52,17 @@
                 </button>
                 <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="omz-Xk-hdX">
                     <rect key="frame" x="121" y="119" width="275" height="22"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="(Sample)" drawsBackground="YES" usesSingleLineMode="YES" id="azr-ft-M4J">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" usesSingleLineMode="YES" id="azr-ft-M4J">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ry-8o-LiV">
                     <rect key="frame" x="121" y="87" width="275" height="22"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="(Sample)" drawsBackground="YES" usesSingleLineMode="YES" id="g63-xD-ICn">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" usesSingleLineMode="YES" id="g63-xD-ICn">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -88,7 +88,7 @@
                 </button>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FYe-O0-wsA">
                     <rect key="frame" x="18" y="62" width="465" height="17"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="When viewing articles or web pages:" id="71S-pg-AjX">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="When viewing articles or web pages:" id="71S-pg-AjX">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -104,11 +104,8 @@
                         </connections>
                     </buttonCell>
                 </button>
-                <comboBox horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="84p-cY-I9v">
+                <comboBox horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" placeholderIntrinsicWidth="44" placeholderIntrinsicHeight="20" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="84p-cY-I9v">
                     <rect key="frame" x="259" y="35" width="47" height="26"/>
-                    <constraints>
-                        <constraint firstAttribute="width" priority="250" constant="44" id="JT1-1f-CTt"/>
-                    </constraints>
                     <comboBoxCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="10" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="hia-tO-kK6">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
