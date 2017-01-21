@@ -1,0 +1,420 @@
+
+/* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
+"5.title" = "Bring All to Front";
+
+/* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
+"19.title" = "Window";
+
+/* Class = "NSWindow"; title = "Vienna"; ObjectID = "21"; */
+"21.title" = "Vienna";
+
+/* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
+"23.title" = "Minimize";
+
+/* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
+"24.title" = "Window";
+
+/* Class = "NSMenu"; title = "MainMenu"; ObjectID = "29"; */
+"29.title" = "MainMenu";
+
+/* Class = "NSMenuItem"; title = "Vienna"; ObjectID = "56"; */
+"56.title" = "Vienna";
+
+/* Class = "NSMenu"; title = "Vienna"; ObjectID = "57"; */
+"57.title" = "Vienna";
+
+/* Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58"; */
+"58.title" = "About Vienna";
+
+/* Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "77"; */
+"77.title" = "Page Setup…";
+
+/* Class = "NSMenuItem"; title = "Print…"; ObjectID = "78"; */
+"78.title" = "Print…";
+
+/* Class = "NSMenu"; title = "File"; ObjectID = "81"; */
+"81.title" = "File";
+
+/* Class = "NSMenuItem"; title = "File"; ObjectID = "83"; */
+"83.title" = "File";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "103"; */
+"103.title" = "Help";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "106"; */
+"106.title" = "Help";
+
+/* Class = "NSMenuItem"; title = "Vienna Help"; ObjectID = "111"; */
+"111.title" = "Vienna Help";
+
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
+"129.title" = "Preferences…";
+
+/* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
+"130.title" = "Services";
+
+/* Class = "NSMenuItem"; title = "Services"; ObjectID = "131"; */
+"131.title" = "Services";
+
+/* Class = "NSMenuItem"; title = "Hide Vienna"; ObjectID = "134"; */
+"134.title" = "Hide Vienna";
+
+/* Class = "NSMenuItem"; title = "Quit Vienna"; ObjectID = "136"; */
+"136.title" = "Quit Vienna";
+
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
+"145.title" = "Hide Others";
+
+/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
+"150.title" = "Show All";
+
+/* Class = "NSMenuItem"; title = "Find…"; ObjectID = "154"; */
+"154.title" = "Find…";
+
+/* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "155"; */
+"155.title" = "Jump to Selection";
+
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "157"; */
+"157.title" = "Copy";
+
+/* Class = "NSMenuItem"; title = "Undo"; ObjectID = "158"; */
+"158.title" = "Undo";
+
+/* Class = "NSMenu"; title = "Find"; ObjectID = "159"; */
+"159.title" = "Find";
+
+/* Class = "NSMenuItem"; title = "Cut"; ObjectID = "160"; */
+"160.title" = "Cut";
+
+/* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "161"; */
+"161.title" = "Use Selection for Find";
+
+/* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "162"; */
+"162.title" = "Find Previous";
+
+/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "163"; */
+"163.title" = "Edit";
+
+/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "164"; */
+"164.title" = "Delete";
+
+/* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "167"; */
+"167.title" = "Find Next";
+
+/* Class = "NSMenuItem"; title = "Find"; ObjectID = "168"; */
+"168.title" = "Find";
+
+/* Class = "NSMenu"; title = "Edit"; ObjectID = "169"; */
+"169.title" = "Edit";
+
+/* Class = "NSMenuItem"; title = "Paste"; ObjectID = "171"; */
+"171.title" = "Paste";
+
+/* Class = "NSMenuItem"; title = "Select All"; ObjectID = "172"; */
+"172.title" = "Select All";
+
+/* Class = "NSMenuItem"; title = "Redo"; ObjectID = "173"; */
+"173.title" = "Redo";
+
+/* Class = "NSMenuItem"; title = "Spelling"; ObjectID = "184"; */
+"184.title" = "Spelling";
+
+/* Class = "NSMenu"; title = "Spelling"; ObjectID = "185"; */
+"185.title" = "Spelling";
+
+/* Class = "NSMenuItem"; title = "Spelling…"; ObjectID = "187"; */
+"187.title" = "Spelling…";
+
+/* Class = "NSMenuItem"; title = "Check Spelling"; ObjectID = "189"; */
+"189.title" = "Check Spelling";
+
+/* Class = "NSMenuItem"; title = "Check Spelling as You Type"; ObjectID = "191"; */
+"191.title" = "Check Spelling as You Type";
+
+/* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "197"; */
+"197.title" = "Zoom";
+
+/* Class = "NSMenuItem"; title = "View"; ObjectID = "235"; */
+"235.title" = "View";
+
+/* Class = "NSMenu"; title = "View"; ObjectID = "237"; */
+"237.title" = "View";
+
+/* Class = "NSMenu"; title = "Article"; ObjectID = "300"; */
+"300.title" = "Article";
+
+/* Class = "NSMenuItem"; title = "Article"; ObjectID = "301"; */
+"301.title" = "Article";
+
+/* Class = "NSMenuItem"; title = "Next Unread"; ObjectID = "344"; */
+"344.title" = "Next Unread";
+
+/* Class = "NSMenuItem"; title = "Sort By"; ObjectID = "387"; */
+"387.title" = "Sort By";
+
+/* Class = "NSMenu"; title = "Sort By"; ObjectID = "388"; */
+"388.title" = "Sort By";
+
+/* Class = "NSMenuItem"; title = "Activity Window"; ObjectID = "402"; */
+"402.title" = "Activity Window";
+
+/* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "406"; */
+"406.title" = "Refresh All Subscriptions";
+
+/* Class = "NSMenuItem"; title = "Back"; ObjectID = "422"; */
+"422.title" = "Back";
+
+/* Class = "NSMenuItem"; title = "Forward"; ObjectID = "423"; */
+"423.title" = "Forward";
+
+/* Class = "NSMenuItem"; title = "Columns"; ObjectID = "442"; */
+"442.title" = "Columns";
+
+/* Class = "NSMenu"; title = "Columns"; ObjectID = "443"; */
+"443.title" = "Columns";
+
+/* Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "574"; */
+"574.title" = "New Smart Folder…";
+
+/* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "604"; */
+"604.title" = "Refresh Selected Subscriptions";
+
+/* Class = "NSMenuItem"; title = "Acknowledgements"; ObjectID = "682"; */
+"682.title" = "Acknowledgements";
+
+/* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "690"; */
+"690.title" = "New Subscription…";
+
+/* Class = "NSMenuItem"; title = "Import Subscriptions…"; ObjectID = "780"; */
+"780.title" = "Import Subscriptions…";
+
+/* Class = "NSMenuItem"; title = "Export Subscriptions…"; ObjectID = "781"; */
+"781.title" = "Export Subscriptions…";
+
+/* Class = "NSMenuItem"; title = "Mark Unread"; ObjectID = "789"; */
+"789.title" = "Mark Unread";
+
+/* Class = "NSMenuItem"; title = "Mark Flagged"; ObjectID = "790"; */
+"790.title" = "Mark Flagged";
+
+/* Class = "NSMenuItem"; title = "New Group Folder…"; ObjectID = "806"; */
+"806.title" = "New Group Folder…";
+
+/* Class = "NSMenuItem"; title = "Style"; ObjectID = "826"; */
+"826.title" = "Style";
+
+/* Class = "NSMenu"; title = "Style"; ObjectID = "827"; */
+"827.title" = "Style";
+
+/* Class = "NSMenuItem"; title = "Stop Refreshing"; ObjectID = "858"; */
+"858.title" = "Stop Refreshing";
+
+/* Class = "NSButtonCell"; title = "Export all subscriptions"; ObjectID = "862"; */
+"862.title" = "Export all subscriptions";
+
+/* Class = "NSButtonCell"; title = "Export selected subscriptions"; ObjectID = "863"; */
+"863.title" = "Export selected subscriptions";
+
+/* Class = "NSMenuItem"; title = "Vienna Web Site"; ObjectID = "929"; */
+"929.title" = "Vienna Web Site";
+
+/* Class = "NSMenuItem"; title = "Close Window"; ObjectID = "935"; */
+"935.title" = "Close Window";
+
+/* Class = "NSMenuItem"; title = "Main Window"; ObjectID = "940"; */
+"940.title" = "Main Window";
+
+/* Class = "NSMenuItem"; title = "Empty Trash"; ObjectID = "961"; */
+"961.title" = "Empty Trash";
+
+/* Class = "NSBox"; title = "Title"; ObjectID = "973"; */
+"973.title" = "Title";
+
+/* Class = "NSMenuItem"; title = "Previous Tab"; ObjectID = "1008"; */
+"1008.title" = "Previous Tab";
+
+/* Class = "NSMenuItem"; title = "Next Tab"; ObjectID = "1009"; */
+"1009.title" = "Next Tab";
+
+/* Class = "NSMenuItem"; title = "Close Tab"; ObjectID = "1023"; */
+"1023.title" = "Close Tab";
+
+/* Class = "NSMenuItem"; title = "Reload Page"; ObjectID = "1025"; */
+"1025.title" = "Reload Page";
+
+/* Class = "NSMenuItem"; title = "Stop Reloading Page"; ObjectID = "1027"; */
+"1027.title" = "Stop Reloading Page";
+
+/* Class = "NSMenuItem"; title = "Close All Tabs"; ObjectID = "1036"; */
+"1036.title" = "Close All Tabs";
+
+/* Class = "NSMenuItem"; title = "Open Article Page"; ObjectID = "1040"; */
+"1040.title" = "Open Article Page";
+
+/* Class = "NSMenuItem"; title = "Restore Article"; ObjectID = "1044"; */
+"1044.title" = "Restore Article";
+
+/* Class = "NSMenuItem"; title = "Downloads"; ObjectID = "1061"; */
+"1061.title" = "Downloads";
+
+/* Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067"; */
+"1067.title" = "Open Article Page in External Browser";
+
+/* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
+"1073.title" = "Send Link by Email";
+
+/* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
+"1084.title" = "Bigger Text";
+
+/* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
+"1085.title" = "Smaller Text";
+
+/* Class = "NSMenuItem"; title = "Open Web Location..."; ObjectID = "1101"; */
+"1101.title" = "Open Web Location...";
+
+/* Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "1104"; */
+"1104.title" = "Check for Updates";
+
+/* Class = "NSMenuItem"; title = "Refresh Folder Images"; ObjectID = "1106"; */
+"1106.title" = "Refresh Folder Images";
+
+/* Class = "NSMenuItem"; title = "Layout"; ObjectID = "1108"; */
+"1108.title" = "Layout";
+
+/* Class = "NSMenu"; title = "Layout"; ObjectID = "1109"; */
+"1109.title" = "Layout";
+
+/* Class = "NSMenuItem"; title = "Horizontal"; ObjectID = "1110"; */
+"1110.title" = "Horizontal";
+
+/* Class = "NSMenuItem"; title = "Vertical"; ObjectID = "1116"; */
+"1116.title" = "Vertical";
+
+/* Class = "NSMenuItem"; title = "Filter By"; ObjectID = "1117"; */
+"1117.title" = "Filter By";
+
+/* Class = "NSMenu"; title = "Filter By"; ObjectID = "1118"; */
+"1118.title" = "Filter By";
+
+/* Class = "NSMenuItem"; title = "Keyboard Shortcuts"; ObjectID = "1146"; */
+"1146.title" = "Keyboard Shortcuts";
+
+/* Class = "NSMenuItem"; title = "Unified"; ObjectID = "1160"; */
+"1160.title" = "Unified";
+
+/* Class = "NSMenuItem"; title = "Folder"; ObjectID = "1177"; */
+"1177.title" = "Folder";
+
+/* Class = "NSMenu"; title = "Folder"; ObjectID = "1178"; */
+"1178.title" = "Folder";
+
+/* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "1180"; */
+"1180.title" = "Edit…";
+
+/* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "1181"; */
+"1181.title" = "Rename…";
+
+/* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "1184"; */
+"1184.title" = "Delete…";
+
+/* Class = "NSMenuItem"; title = "Skip Folder"; ObjectID = "1186"; */
+"1186.title" = "Skip Folder";
+
+/* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "1187"; */
+"1187.title" = "Mark All Articles as Read";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "1191"; */
+"1191.title" = "Open Subscription Home Page";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "1192"; */
+"1192.title" = "Open Subscription Home Page in External Browser";
+
+/* Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "1195"; */
+"1195.title" = "Mark All Subscriptions as Read";
+
+/* Class = "NSMenuItem"; title = "Delete Article"; ObjectID = "1198"; */
+"1198.title" = "Delete Article";
+
+/* Class = "NSMenuItem"; title = "Open New Tab"; ObjectID = "1214"; */
+"1214.title" = "Open New Tab";
+
+/* Class = "NSMenuItem"; title = "Download Enclosure"; ObjectID = "1216"; */
+"1216.title" = "Download Enclosure";
+
+/* Class = "NSTabViewItem"; label = "Tab"; ObjectID = "1221"; */
+"1221.label" = "Tab";
+
+/* Class = "NSMenuItem"; title = "Customize Toolbar..."; ObjectID = "1257"; */
+"1257.title" = "Customize Toolbar...";
+
+/* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
+"1258.title" = "Hide Toolbar";
+
+/* Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259"; */
+"1259.title" = "Hide Status Bar";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "1307"; */
+"1307.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "Item3"; ObjectID = "1308"; */
+"1308.title" = "Item3";
+
+/* Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "1325"; */
+"1325.title" = "Show Filter Bar";
+
+/* Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327"; */
+"1327.title" = "Search Articles";
+
+/* Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336"; */
+"1336.title" = "Order By";
+
+/* Class = "NSMenu"; title = "Order By"; ObjectID = "1337"; */
+"1337.title" = "Order By";
+
+/* Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338"; */
+"1338.title" = "Manual";
+
+/* Class = "NSMenuItem"; title = "Name"; ObjectID = "1339"; */
+"1339.title" = "Name";
+
+/* Class = "NSButtonCell"; title = "Preserve group folders in exported file"; ObjectID = "1368"; */
+"1368.title" = "Preserve group folders in exported file";
+
+/* Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377"; */
+"1377.title" = "Filter by:";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "1380"; */
+"1380.title" = "Radio";
+
+/* Class = "NSMenuItem"; title = "Show XML Source"; ObjectID = "1394"; */
+"1394.title" = "Show XML Source";
+
+/* Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404"; */
+"1404.title" = "Current Filter";
+
+/* Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408"; */
+"1408.title" = "Unsubscribe";
+
+/* Class = "NSMenuItem"; title = "Get Info..."; ObjectID = "1409"; */
+"1409.title" = "Get Info...";
+
+/* Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413"; */
+"1413.title" = "Use Current Style for Articles";
+
+/* Class = "NSMenuItem"; title = "Use Web Page for Articles"; ObjectID = "1415"; */
+"1415.title" = "Use Web Page for Articles";
+
+/* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "1425"; */
+"1425.title" = "Force Refresh Selected Subscriptions From Open Reader";
+
+/* Class = "NSMenuItem"; title = "Update Subscriptions From Open Reader"; ObjectID = "1428"; */
+"1428.title" = "Update Subscriptions From Open Reader";
+
+/* Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458"; */
+"1458.title" = "Reindex Database";
+
+/* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
+"pKl-6f-Hlc.title" = "Mark Read";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "vZe-8N-E3r"; */
+"vZe-8N-E3r.title" = "Text Cell";

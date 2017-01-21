@@ -1,0 +1,24 @@
+
+/* Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "71S-pg-AjX"; */
+"71S-pg-AjX.title" = "When viewing articles or web pages:";
+
+/* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "B5v-p5-vrf"; */
+"B5v-p5-vrf.title" = "Folder list font:";
+
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "BDw-v3-mpF"; */
+"BDw-v3-mpF.title" = "Select…";
+
+/* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "MEV-HA-bdL"; */
+"MEV-HA-bdL.title" = "Show feeds icons in folder list";
+
+/* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "auD-UC-Pij"; */
+"auD-UC-Pij.title" = "Article list font:";
+
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "gGT-YP-aum"; */
+"gGT-YP-aum.title" = "Select…";
+
+/* Class = "NSComboBoxCell"; title = "10"; ObjectID = "hia-tO-kK6"; */
+"hia-tO-kK6.title" = "10";
+
+/* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "zfJ-Ge-Cxe"; */
+"zfJ-Ge-Cxe.title" = "Never use font sizes smaller than";

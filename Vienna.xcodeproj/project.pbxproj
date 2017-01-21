@@ -890,6 +890,23 @@
 		F1ECA9ED54D2517E7BEDCBB7 /* Pods-Vienna Tests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna Tests.development.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna Tests/Pods-Vienna Tests.development.xcconfig"; sourceTree = "<group>"; };
 		F6164C571E32A6660086261C /* DisclosureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisclosureView.h; sourceTree = "<group>"; };
 		F6164C581E32A6660086261C /* DisclosureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisclosureView.m; sourceTree = "<group>"; };
+		F61F2F611E33DC640097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		F61F2F631E33DC770097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/EmptyTrashWarning.strings; sourceTree = "<group>"; };
+		F61F2F651E33DC7E0097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FeedCredentials.strings; sourceTree = "<group>"; };
+		F61F2F671E33DC840097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/GroupFolder.strings; sourceTree = "<group>"; };
+		F61F2F691E33DC890097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RSSFeed.strings; sourceTree = "<group>"; };
+		F61F2F6B1E33DC900097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SearchFolder.strings; sourceTree = "<group>"; };
+		F61F2F6D1E33DC960097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoWindow.strings; sourceTree = "<group>"; };
+		F61F2F6F1E33DC9F0097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
+		F61F2F711E33DCA40097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Downloads.strings; sourceTree = "<group>"; };
+		F61F2F731E33DCAA0097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/GeneralPreferencesView.strings; sourceTree = "<group>"; };
+		F61F2F751E33DCAF0097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
+		F61F2F771E33DCB50097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SyncingPreferencesView.strings; sourceTree = "<group>"; };
+		F61F2F791E33DCB90097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AdvancedPreferencesView.strings; sourceTree = "<group>"; };
+		F61F2F7A1E33DCCD0097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Interfaces/en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F61F2F7B1E33DCD40097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = Interfaces/en.lproj/KnownSyncServers.plist; sourceTree = "<group>"; };
+		F61F2F7C1E33DCD80097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = Interfaces/en.lproj/RSSSources.plist; sourceTree = "<group>"; };
+		F61F2F7D1E33DCDD0097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Interfaces/en.lproj/errorpage.html; sourceTree = "<group>"; };
 		F6257FE31E283F250035E43C /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/SyncingPreferencesView.strings; sourceTree = "<group>"; };
 		F6257FE41E283F2A0035E43C /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/SyncingPreferencesView.strings; sourceTree = "<group>"; };
 		F6257FE51E283F2D0035E43C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/SyncingPreferencesView.strings; sourceTree = "<group>"; };
@@ -2671,6 +2688,7 @@
 				F6257FF21E283F500035E43C /* uk */,
 				F6257FF31E283F530035E43C /* zh-Hant */,
 				F6257FF41E283F550035E43C /* zh-Hans */,
+				F61F2F771E33DCB50097F29B /* en */,
 			);
 			name = SyncingPreferencesView.xib;
 			path = Interfaces;
@@ -2697,6 +2715,7 @@
 				F6B9937B1E283608005F9FAD /* uk */,
 				F6B9937C1E28360B005F9FAD /* zh-Hant */,
 				F6B9937D1E28360D005F9FAD /* zh-Hans */,
+				F61F2F791E33DCB90097F29B /* en */,
 			);
 			name = AdvancedPreferencesView.xib;
 			path = Interfaces;
@@ -2724,6 +2743,7 @@
 				F6352BF51E2722A0005CD307 /* uk */,
 				F6352BF61E2722A4005CD307 /* zh-Hant */,
 				F6352BF71E2722A9005CD307 /* zh-Hans */,
+				F61F2F731E33DCAA0097F29B /* en */,
 			);
 			name = GeneralPreferencesView.xib;
 			path = Interfaces;
@@ -2751,6 +2771,7 @@
 				F6352C071E27285C005CD307 /* uk */,
 				F6352C081E272864005CD307 /* zh-Hant */,
 				F6352C091E272868005CD307 /* zh-Hans */,
+				F61F2F751E33DCAF0097F29B /* en */,
 			);
 			name = AppearancePreferencesView.xib;
 			path = Interfaces;
@@ -2779,6 +2800,7 @@
 				F62580191E2849A30035E43C /* zh-Hant */,
 				F625801B1E2849A50035E43C /* zh-Hans */,
 				F625804F1E285C710035E43C /* gl */,
+				F61F2F711E33DCA40097F29B /* en */,
 			);
 			name = Downloads.xib;
 			path = Interfaces;
@@ -2807,6 +2829,7 @@
 				F62580421E2854FA0035E43C /* zh-Hant */,
 				F62580441E2854FC0035E43C /* zh-Hans */,
 				F62580511E285C910035E43C /* gl */,
+				F61F2F6F1E33DC9F0097F29B /* en */,
 			);
 			name = ActivityViewer.xib;
 			path = Interfaces;
@@ -2835,6 +2858,7 @@
 				F62580BB1E286AA40035E43C /* uk */,
 				F62580BC1E286AA50035E43C /* zh-Hant */,
 				F62580BD1E286AA60035E43C /* zh-Hans */,
+				F61F2F7A1E33DCCD0097F29B /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2872,6 +2896,7 @@
 				F62581121E286D990035E43C /* fr */,
 				F62581161E286DA60035E43C /* nl */,
 				F625811F1E286E390035E43C /* ru */,
+				F61F2F7D1E33DCDD0097F29B /* en */,
 			);
 			name = errorpage.html;
 			sourceTree = "<group>";
@@ -2898,6 +2923,7 @@
 				F62580F81E286D380035E43C /* uk */,
 				F62580F91E286D390035E43C /* zh-Hant */,
 				F62580FA1E286D3B0035E43C /* zh-Hans */,
+				F61F2F7B1E33DCD40097F29B /* en */,
 			);
 			name = KnownSyncServers.plist;
 			sourceTree = "<group>";
@@ -2922,6 +2948,7 @@
 				F625810A1E286D830035E43C /* uk */,
 				F625810B1E286D850035E43C /* zh-Hant */,
 				F625810C1E286D880035E43C /* zh-Hans */,
+				F61F2F7C1E33DCD80097F29B /* en */,
 			);
 			name = RSSSources.plist;
 			sourceTree = "<group>";
@@ -2949,6 +2976,7 @@
 				037F9C081E2B01CC001BFC1D /* uk */,
 				037F9C0A1E2B0287001BFC1D /* zh-Hant */,
 				037F9C0C1E2B0289001BFC1D /* zh-Hans */,
+				F61F2F611E33DC640097F29B /* en */,
 			);
 			name = MainMenu.xib;
 			path = Interfaces;
@@ -2975,6 +3003,7 @@
 				F6352BDE1E2720BF005CD307 /* zh-Hant */,
 				F6352BDF1E2720C1005CD307 /* zh-Hans */,
 				F62580471E285A6E0035E43C /* gl */,
+				F61F2F631E33DC770097F29B /* en */,
 			);
 			name = EmptyTrashWarning.xib;
 			path = Interfaces;
@@ -3003,6 +3032,7 @@
 				F6352BE01E2720C8005CD307 /* zh-Hant */,
 				F6352BE11E2720CB005CD307 /* zh-Hans */,
 				F62580491E285B030035E43C /* gl */,
+				F61F2F651E33DC7E0097F29B /* en */,
 			);
 			name = FeedCredentials.xib;
 			path = Interfaces;
@@ -3031,6 +3061,7 @@
 				F6352BE21E2720D2005CD307 /* zh-Hant */,
 				F6352BE31E2720D4005CD307 /* zh-Hans */,
 				F625804B1E285B5F0035E43C /* gl */,
+				F61F2F671E33DC840097F29B /* en */,
 			);
 			name = GroupFolder.xib;
 			path = Interfaces;
@@ -3058,6 +3089,7 @@
 				F6352BD91E271FDF005CD307 /* zh-Hant */,
 				F6352BDA1E271FE4005CD307 /* zh-Hans */,
 				F625804D1E285BBF0035E43C /* gl */,
+				F61F2F6D1E33DC960097F29B /* en */,
 			);
 			name = InfoWindow.xib;
 			path = Interfaces;
@@ -3085,6 +3117,7 @@
 				F6D5738A1E26D3E000CDA909 /* tr */,
 				F6352BE41E2720DE005CD307 /* zh-Hant */,
 				F6352BE51E2720E0005CD307 /* zh-Hans */,
+				F61F2F691E33DC890097F29B /* en */,
 			);
 			name = RSSFeed.xib;
 			path = Interfaces;
@@ -3112,6 +3145,7 @@
 				F6D5739C1E2703E100CDA909 /* tr */,
 				F6352BDB1E272078005CD307 /* zh-Hant */,
 				F6352BDC1E272087005CD307 /* zh-Hans */,
+				F61F2F6B1E33DC900097F29B /* en */,
 			);
 			name = SearchFolder.xib;
 			path = Interfaces;
