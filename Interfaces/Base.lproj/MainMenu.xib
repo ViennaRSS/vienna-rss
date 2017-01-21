@@ -100,7 +100,7 @@
                                             <nil key="backgroundColor"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="u6a-gc-Hse">
-                                            <rect key="frame" x="0.0" y="560" width="256" height="16"/>
+                                            <rect key="frame" x="0.0" y="558" width="248" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="m9n-zp-NnZ">
@@ -124,16 +124,30 @@
                                 <rect key="frame" x="289" y="0.0" width="653" height="603"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="1238" customClass="PSMTabBarControl">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="MRm-h9-mFg" customClass="DisclosureView">
                                         <rect key="frame" x="0.0" y="581" width="653" height="22"/>
+                                        <subviews>
+                                            <customView placeholderIntrinsicWidth="653" placeholderIntrinsicHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1238" customClass="PSMTabBarControl">
+                                                <rect key="frame" x="0.0" y="0.0" width="653" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="22" id="OUJ-Be-Sfm"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="delegate" destination="1227" id="1242"/>
+                                                    <outlet property="nextKeyView" destination="1218" id="1247"/>
+                                                    <outlet property="partnerView" destination="1218" id="1248"/>
+                                                    <outlet property="tabView" destination="1218" id="1241"/>
+                                                </connections>
+                                            </customView>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="22" id="zaD-zY-77i"/>
+                                            <constraint firstAttribute="trailing" secondItem="1238" secondAttribute="trailing" id="RDe-eK-VcG"/>
+                                            <constraint firstAttribute="bottom" secondItem="1238" secondAttribute="bottom" id="ebe-Ri-mFz"/>
+                                            <constraint firstItem="1238" firstAttribute="leading" secondItem="MRm-h9-mFg" secondAttribute="leading" id="wF2-4m-db3"/>
+                                            <constraint firstItem="1238" firstAttribute="top" secondItem="MRm-h9-mFg" secondAttribute="top" priority="600" id="wxL-HK-aKe"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="delegate" destination="1227" id="1242"/>
-                                            <outlet property="nextKeyView" destination="1218" id="1247"/>
-                                            <outlet property="partnerView" destination="1218" id="1248"/>
-                                            <outlet property="tabView" destination="1218" id="1241"/>
+                                            <outlet property="disclosedView" destination="1238" id="1dg-Zo-wDL"/>
                                         </connections>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="cTN-D0-dY2" customClass="DisclosureView">
@@ -244,15 +258,15 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="cTN-D0-dY2" secondAttribute="trailing" id="Dnd-04-47H"/>
-                                    <constraint firstItem="cTN-D0-dY2" firstAttribute="top" secondItem="1238" secondAttribute="bottom" id="Eeh-f9-0Xn"/>
                                     <constraint firstAttribute="bottom" secondItem="1218" secondAttribute="bottom" id="HBr-7K-RIq"/>
                                     <constraint firstItem="1218" firstAttribute="leading" secondItem="982" secondAttribute="leading" id="JdE-Xr-3cU"/>
-                                    <constraint firstItem="1238" firstAttribute="top" secondItem="982" secondAttribute="top" id="TdZ-7g-fuN"/>
+                                    <constraint firstItem="MRm-h9-mFg" firstAttribute="top" secondItem="982" secondAttribute="top" id="Mcd-W6-dnU"/>
+                                    <constraint firstItem="MRm-h9-mFg" firstAttribute="leading" secondItem="982" secondAttribute="leading" id="NCy-k7-vYU"/>
                                     <constraint firstItem="cTN-D0-dY2" firstAttribute="leading" secondItem="982" secondAttribute="leading" id="Uro-ri-PsA"/>
-                                    <constraint firstItem="1238" firstAttribute="leading" secondItem="982" secondAttribute="leading" id="XWo-wH-E3d"/>
+                                    <constraint firstAttribute="trailing" secondItem="MRm-h9-mFg" secondAttribute="trailing" id="d5Z-f4-GZ2"/>
                                     <constraint firstAttribute="trailing" secondItem="1218" secondAttribute="trailing" id="hZE-7g-Od6"/>
+                                    <constraint firstItem="cTN-D0-dY2" firstAttribute="top" secondItem="MRm-h9-mFg" secondAttribute="bottom" id="kP6-Re-Yxc"/>
                                     <constraint firstItem="1218" firstAttribute="top" secondItem="cTN-D0-dY2" secondAttribute="bottom" id="mYB-Ey-lSh"/>
-                                    <constraint firstAttribute="trailing" secondItem="1238" secondAttribute="trailing" id="rz4-f9-PzJ"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="zUd-Gj-eaw"/>
                                 </constraints>
                             </customView>
@@ -1245,6 +1259,7 @@ CA
             <autoresizingMask key="autoresizingMask"/>
             <connections>
                 <outlet property="tabBarControl" destination="1238" id="1243"/>
+                <outlet property="tabBarDisclosureView" destination="MRm-h9-mFg" id="sHl-dz-CjV"/>
                 <outlet property="tabView" destination="1218" id="1230"/>
             </connections>
         </customView>
@@ -1346,7 +1361,7 @@ CA
                 <outlet property="filenameField" destination="1292" id="1298"/>
                 <outlet property="filenameLabel" destination="1290" id="1299"/>
             </connections>
-            <point key="canvasLocation" x="138.5" y="168.5"/>
+            <point key="canvasLocation" x="-209" y="43"/>
         </customView>
         <customObject id="ugm-kC-yFY" customClass="FoldersTree">
             <connections>
