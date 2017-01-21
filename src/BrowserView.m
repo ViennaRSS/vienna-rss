@@ -24,6 +24,7 @@
 #import <PSMTabBarControl/PSMTabBarControl.h>
 #import <PSMTabBarControl/PSMRolloverButton.h>
 #import "AppController.h"
+#import "DisclosureView.h"
 
 @interface NSTabView (BrowserViewAdditions)
 	-(NSTabViewItem *)tabViewItemWithIdentifier:(id)identifier;
@@ -39,6 +40,12 @@
 	NSInteger i = [self indexOfTabViewItemWithIdentifier:identifier];
 	return (i != NSNotFound ? [self tabViewItemAtIndex:i] : nil);
 }
+@end
+
+@interface BrowserView()
+
+@property (weak) IBOutlet DisclosureView *tabBarDisclosureView;
+
 @end
 
 @implementation BrowserView
@@ -296,6 +303,14 @@
 - (BOOL)tabView:(NSTabView *)aTabView shouldAllowTabViewItem:(NSTabViewItem *)tabViewItem toLeaveTabBar:(PSMTabBarControl *)tabBarControl;
 {
 	return NO;
+}
+
+- (void)tabView:(NSTabView *)aTabView tabBarDidHide:(PSMTabBarControl *)tabBarControl {
+    [self.tabBarDisclosureView collapse:YES];
+}
+
+- (void)tabView:(NSTabView *)aTabView tabBarDidUnhide:(PSMTabBarControl *)tabBarControl {
+    [self.tabBarDisclosureView disclose:YES];
 }
 
 #pragma mark -
