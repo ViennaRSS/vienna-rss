@@ -1,0 +1,108 @@
+
+/* Class = "NSMenuItem"; title = "Hver 15 minutter"; ObjectID = "1Ll-uG-QWh"; */
+"1Ll-uG-QWh.title" = "Hver 15 minutter";
+
+/* Class = "NSButtonCell"; title = "Efter \"Næste ulæste\" kommando"; ObjectID = "2oy-1i-QQP"; */
+"2oy-1i-QQP.title" = "Efter \"Næste ulæste\" kommando";
+
+/* Class = "NSMenuItem"; title = "(Sti)"; ObjectID = "5Cq-8f-vbL"; */
+"5Cq-8f-vbL.title" = "(Sti)";
+
+/* Class = "NSMenuItem"; title = "Hver 30 minutter"; ObjectID = "5VQ-jP-2rL"; */
+"5VQ-jP-2rL.title" = "Hver 30 minutter";
+
+/* Class = "NSMenuItem"; title = "Hver 2 timer"; ObjectID = "6wU-yO-cnV"; */
+"6wU-yO-cnV.title" = "Hver 2 timer";
+
+/* Class = "NSButtonCell"; title = "Vis antallet af ulæste artikler på programikonet"; ObjectID = "7e3-Hu-RB5"; */
+"7e3-Hu-RB5.title" = "Vis antallet af ulæste artikler på programikonet";
+
+/* Class = "NSTextFieldCell"; title = "Når nye ulæste artikler er modtaget:"; ObjectID = "BbI-0A-zEG"; */
+"BbI-0A-zEG.title" = "Når nye ulæste artikler er modtaget:";
+
+/* Class = "NSMenu"; title = "AndreOversigter"; ObjectID = "DFg-c6-rCy"; */
+"DFg-c6-rCy.title" = "AndreOversigter";
+
+/* Class = "NSMenuItem"; title = "Andet..."; ObjectID = "FiK-E7-RnG"; */
+"FiK-E7-RnG.title" = "Andet...";
+
+/* Class = "NSMenuItem"; title = "Intet"; ObjectID = "GAY-ra-eQY"; */
+"GAY-ra-eQY.title" = "Intet";
+
+/* Class = "NSButtonCell"; title = "Tjek for nyere versioner af Vienna ved opstart"; ObjectID = "GnT-xT-rAZ"; */
+"GnT-xT-rAZ.title" = "Tjek for nyere versioner af Vienna ved opstart";
+
+/* Class = "NSMenuItem"; title = "Manuelt"; ObjectID = "H9Q-du-oax"; */
+"H9Q-du-oax.title" = "Manuelt";
+
+/* Class = "NSMenu"; title = "AndreOversigter"; ObjectID = "HFO-4f-zYZ"; */
+"HFO-4f-zYZ.title" = "AndreOversigter";
+
+/* Class = "NSMenuItem"; title = "Hver 6 timer"; ObjectID = "IMa-1h-lIO"; */
+"IMa-1h-lIO.title" = "Hver 6 timer";
+
+/* Class = "NSButtonCell"; title = "Efter et kort øjeblik"; ObjectID = "JDV-ek-xja"; */
+"JDV-ek-xja.title" = "Efter et kort øjeblik";
+
+/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1"; */
+"JN6-lj-bQ1.title" = "Show in menu bar";
+
+/* Class = "NSMenu"; title = "AndreOversigter"; ObjectID = "Klv-JA-PvP"; */
+"Klv-JA-PvP.title" = "AndreOversigter";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "NAE-EF-SsE"; */
+"NAE-EF-SsE.title" = "Radio";
+
+/* Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0"; */
+"OID-qF-Pp0.title" = "Search for latest Beta versions";
+
+/* Class = "NSMenu"; title = "AndreOversigter"; ObjectID = "XAi-oh-7Fq"; */
+"XAi-oh-7Fq.title" = "AndreOversigter";
+
+/* Class = "NSButtonCell"; title = "Åben henvisninger i ekstern browser"; ObjectID = "YoM-Gv-hXn"; */
+"YoM-Gv-hXn.title" = "Åben henvisninger i ekstern browser";
+
+/* Class = "NSTextFieldCell"; title = "Tjek for nye artikler:"; ObjectID = "ewU-JH-fMC"; */
+"ewU-JH-fMC.title" = "Tjek for nye artikler:";
+
+/* Class = "NSMenuItem"; title = "(Do not localise)"; ObjectID = "fYn-Rz-G69"; */
+"fYn-Rz-G69.title" = "(Do not localise)";
+
+/* Class = "NSTextFieldCell"; title = "Gem hentede filer i:"; ObjectID = "geD-Ws-mQm"; */
+"geD-Ws-mQm.title" = "Gem hentede filer i:";
+
+/* Class = "NSButtonCell"; title = "Hop programikonet"; ObjectID = "gi4-ao-0yS"; */
+"gi4-ao-0yS.title" = "Hop programikonet";
+
+/* Class = "NSMenuItem"; title = "Hver 3 timer"; ObjectID = "gnX-dW-XUD"; */
+"gnX-dW-XUD.title" = "Hver 3 timer";
+
+/* Class = "NSTextFieldCell"; title = "Flyt artikler til Papirkurven:"; ObjectID = "k6Y-ib-PGb"; */
+"k6Y-ib-PGb.title" = "Flyt artikler til Papirkurven:";
+
+/* Class = "NSTextFieldCell"; title = "Standard RSS Reader"; ObjectID = "kGA-Sa-RLG"; */
+"kGA-Sa-RLG.title" = "Standard RSS Reader";
+
+/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl"; */
+"meo-78-YOl.title" = "Mark updated articles as new";
+
+/* Class = "NSMenuItem"; title = "Hver 5 minutter"; ObjectID = "oVW-ee-uJT"; */
+"oVW-ee-uJT.title" = "Hver 5 minutter";
+
+/* Class = "NSButtonCell"; title = "Tjek for nye artikler ved opstart"; ObjectID = "pXX-MI-tJX"; */
+"pXX-MI-tJX.title" = "Tjek for nye artikler ved opstart";
+
+/* Class = "NSButtonCell"; title = "Åben nye henvisninger i baggrunden"; ObjectID = "pjg-Ze-H3l"; */
+"pjg-Ze-H3l.title" = "Åben nye henvisninger i baggrunden";
+
+/* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
+"qeb-at-hYb.title" = "Updates:";
+
+/* Class = "NSButtonCell"; title = "Include anonymous system profile"; ObjectID = "qno-Cg-EkC"; */
+"qno-Cg-EkC.title" = "Include anonymous system profile";
+
+/* Class = "NSTextFieldCell"; title = "Mark current article read:\n"; ObjectID = "sCl-hz-PFF"; */
+"sCl-hz-PFF.title" = "Mark current article read:\n";
+
+/* Class = "NSMenuItem"; title = "Hver time"; ObjectID = "sSj-zI-6RY"; */
+"sSj-zI-6RY.title" = "Hver time";

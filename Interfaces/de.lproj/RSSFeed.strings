@@ -1,0 +1,39 @@
+
+/* Class = "NSWindow"; title = "RSS Feed"; ObjectID = "6"; */
+"6.title" = "RSS Feed";
+
+/* Class = "NSMenuItem"; title = "Adresse"; ObjectID = "45"; */
+"45.title" = "Adresse";
+
+/* Class = "NSWindow"; title = "RSS Feed"; ObjectID = "49"; */
+"49.title" = "RSS Feed";
+
+/* Class = "NSButtonCell"; title = "Abbrechen"; ObjectID = "102"; */
+"102.title" = "Abbrechen";
+
+/* Class = "NSButtonCell"; title = "Abonnieren"; ObjectID = "103"; */
+"103.title" = "Abonnieren";
+
+/* Class = "NSTextFieldCell"; title = "Quelle:"; ObjectID = "104"; */
+"104.title" = "Quelle:";
+
+/* Class = "NSTextFieldCell"; title = "Ein neues Abonnement erstellen"; ObjectID = "106"; */
+"106.title" = "Ein neues Abonnement erstellen";
+
+/* Class = "NSTextFieldCell"; title = "Geben Sie den Link für das Abonnement ein oder wählen Sie eine Quelle aus der Liste."; ObjectID = "107"; */
+"107.title" = "Geben Sie den Link für das Abonnement ein oder wählen Sie eine Quelle aus der Liste.";
+
+/* Class = "NSTextFieldCell"; title = "Adresse:"; ObjectID = "110"; */
+"110.title" = "Adresse:";
+
+/* Class = "NSButtonCell"; title = "Speichern"; ObjectID = "111"; */
+"111.title" = "Speichern";
+
+/* Class = "NSButtonCell"; title = "Abbrechen"; ObjectID = "112"; */
+"112.title" = "Abbrechen";
+
+/* Class = "NSTextFieldCell"; title = "Abonnement bearbeiten"; ObjectID = "114"; */
+"114.title" = "Abonnement bearbeiten";
+
+/* Class = "NSButtonCell"; title = "Im Open Reader abonnieren"; ObjectID = "116"; */
+"116.title" = "Im Open Reader abonnieren";

@@ -1,0 +1,108 @@
+
+/* Class = "NSMenuItem"; title = "15分ごと"; ObjectID = "1Ll-uG-QWh"; */
+"1Ll-uG-QWh.title" = "15分ごと";
+
+/* Class = "NSButtonCell"; title = "\"次の未読\" コマンドの後"; ObjectID = "2oy-1i-QQP"; */
+"2oy-1i-QQP.title" = "\"次の未読\" コマンドの後";
+
+/* Class = "NSMenuItem"; title = "（パス）"; ObjectID = "5Cq-8f-vbL"; */
+"5Cq-8f-vbL.title" = "（パス）";
+
+/* Class = "NSMenuItem"; title = "３０分ごと"; ObjectID = "5VQ-jP-2rL"; */
+"5VQ-jP-2rL.title" = "３０分ごと";
+
+/* Class = "NSMenuItem"; title = "２時間ごと"; ObjectID = "6wU-yO-cnV"; */
+"6wU-yO-cnV.title" = "２時間ごと";
+
+/* Class = "NSButtonCell"; title = "未読記事数をアプリケーションアイコンに表示"; ObjectID = "7e3-Hu-RB5"; */
+"7e3-Hu-RB5.title" = "未読記事数をアプリケーションアイコンに表示";
+
+/* Class = "NSTextFieldCell"; title = "新規未読記事を取得したとき：\n"; ObjectID = "BbI-0A-zEG"; */
+"BbI-0A-zEG.title" = "新規未読記事を取得したとき：\n";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "DFg-c6-rCy"; */
+"DFg-c6-rCy.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "その他..."; ObjectID = "FiK-E7-RnG"; */
+"FiK-E7-RnG.title" = "その他...";
+
+/* Class = "NSMenuItem"; title = "なし"; ObjectID = "GAY-ra-eQY"; */
+"GAY-ra-eQY.title" = "なし";
+
+/* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "GnT-xT-rAZ"; */
+"GnT-xT-rAZ.title" = "Check for newer versions of Vienna on start up";
+
+/* Class = "NSMenuItem"; title = "手動"; ObjectID = "H9Q-du-oax"; */
+"H9Q-du-oax.title" = "手動";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "HFO-4f-zYZ"; */
+"HFO-4f-zYZ.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "６時間ごと"; ObjectID = "IMa-1h-lIO"; */
+"IMa-1h-lIO.title" = "６時間ごと";
+
+/* Class = "NSButtonCell"; title = "少したった後"; ObjectID = "JDV-ek-xja"; */
+"JDV-ek-xja.title" = "少したった後";
+
+/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1"; */
+"JN6-lj-bQ1.title" = "Show in menu bar";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "Klv-JA-PvP"; */
+"Klv-JA-PvP.title" = "OtherViews";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "NAE-EF-SsE"; */
+"NAE-EF-SsE.title" = "Radio";
+
+/* Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0"; */
+"OID-qF-Pp0.title" = "Search for latest Beta versions";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "XAi-oh-7Fq"; */
+"XAi-oh-7Fq.title" = "OtherViews";
+
+/* Class = "NSButtonCell"; title = "リンクをデフォルトブラウザで開く"; ObjectID = "YoM-Gv-hXn"; */
+"YoM-Gv-hXn.title" = "リンクをデフォルトブラウザで開く";
+
+/* Class = "NSTextFieldCell"; title = "新しい記事をチェック："; ObjectID = "ewU-JH-fMC"; */
+"ewU-JH-fMC.title" = "新しい記事をチェック：";
+
+/* Class = "NSMenuItem"; title = "(Do not localise)"; ObjectID = "fYn-Rz-G69"; */
+"fYn-Rz-G69.title" = "(Do not localise)";
+
+/* Class = "NSTextFieldCell"; title = "ダウンロードしたファイルの保存先："; ObjectID = "geD-Ws-mQm"; */
+"geD-Ws-mQm.title" = "ダウンロードしたファイルの保存先：";
+
+/* Class = "NSButtonCell"; title = "アプリケーションアイコンを跳ねさせる"; ObjectID = "gi4-ao-0yS"; */
+"gi4-ao-0yS.title" = "アプリケーションアイコンを跳ねさせる";
+
+/* Class = "NSMenuItem"; title = "3時間ごと"; ObjectID = "gnX-dW-XUD"; */
+"gnX-dW-XUD.title" = "3時間ごと";
+
+/* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "k6Y-ib-PGb"; */
+"k6Y-ib-PGb.title" = "Move articles to Trash:";
+
+/* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG"; */
+"kGA-Sa-RLG.title" = "Default RSS Reader:";
+
+/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl"; */
+"meo-78-YOl.title" = "Mark updated articles as new";
+
+/* Class = "NSMenuItem"; title = "5分ごと"; ObjectID = "oVW-ee-uJT"; */
+"oVW-ee-uJT.title" = "5分ごと";
+
+/* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "pXX-MI-tJX"; */
+"pXX-MI-tJX.title" = "Check for new articles on start up";
+
+/* Class = "NSButtonCell"; title = "新しいリンクを背面で開く"; ObjectID = "pjg-Ze-H3l"; */
+"pjg-Ze-H3l.title" = "新しいリンクを背面で開く";
+
+/* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
+"qeb-at-hYb.title" = "Updates:";
+
+/* Class = "NSButtonCell"; title = "Include anonymous system profile"; ObjectID = "qno-Cg-EkC"; */
+"qno-Cg-EkC.title" = "Include anonymous system profile";
+
+/* Class = "NSTextFieldCell"; title = "Mark current article read:\n"; ObjectID = "sCl-hz-PFF"; */
+"sCl-hz-PFF.title" = "Mark current article read:\n";
+
+/* Class = "NSMenuItem"; title = "１時間ごと"; ObjectID = "sSj-zI-6RY"; */
+"sSj-zI-6RY.title" = "１時間ごと";

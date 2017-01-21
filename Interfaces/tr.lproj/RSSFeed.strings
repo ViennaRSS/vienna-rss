@@ -1,0 +1,39 @@
+
+/* Class = "NSWindow"; title = "RSS Beslemesi"; ObjectID = "6"; */
+"6.title" = "RSS Beslemesi";
+
+/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
+"45.title" = "URL";
+
+/* Class = "NSWindow"; title = "RSS Beslemesi"; ObjectID = "49"; */
+"49.title" = "RSS Beslemesi";
+
+/* Class = "NSButtonCell"; title = "İptal"; ObjectID = "102"; */
+"102.title" = "İptal";
+
+/* Class = "NSButtonCell"; title = "Abone Ol"; ObjectID = "103"; */
+"103.title" = "Abone Ol";
+
+/* Class = "NSTextFieldCell"; title = "Kaynak:"; ObjectID = "104"; */
+"104.title" = "Kaynak:";
+
+/* Class = "NSTextFieldCell"; title = "Yeni abonelik oluştur"; ObjectID = "106"; */
+"106.title" = "Yeni abonelik oluştur";
+
+/* Class = "NSTextFieldCell"; title = "Haber beslemesi için bağlantıyı aşağıya girin. Ya da Kaynak listesinden kaynak tarafından bildirilen kısayol adını girin."; ObjectID = "107"; */
+"107.title" = "Haber beslemesi için bağlantıyı aşağıya girin. Ya da Kaynak listesinden kaynak tarafından bildirilen kısayol adını girin.";
+
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "URL:";
+
+/* Class = "NSButtonCell"; title = "Kaydet"; ObjectID = "111"; */
+"111.title" = "Kaydet";
+
+/* Class = "NSButtonCell"; title = "İptal"; ObjectID = "112"; */
+"112.title" = "İptal";
+
+/* Class = "NSTextFieldCell"; title = "Aboneliği düzenle"; ObjectID = "114"; */
+"114.title" = "Aboneliği düzenle";
+
+/* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
+"116.title" = "Subscribe in Open Reader";

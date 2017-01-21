@@ -1,0 +1,15 @@
+
+/* Class = "NSTextFieldCell"; title = "Smart folder name:"; ObjectID = "94"; */
+"94.title" = "Smart folder name:";
+
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "96"; */
+"96.title" = "Save";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97"; */
+"97.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = "Show all articles that match"; ObjectID = "98"; */
+"98.title" = "Show all articles that match";
+
+/* Class = "NSTextFieldCell"; title = "of the following conditions:"; ObjectID = "100"; */
+"100.title" = "of the following conditions:";

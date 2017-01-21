@@ -32,7 +32,6 @@
 #import "RefreshManager.h"
 #import "ArrayExtensions.h"
 #import "StringExtensions.h"
-#import "SplitViewExtensions.h"
 #import "ViewExtensions.h"
 #import "BrowserView.h"
 #import "SearchFolder.h"
@@ -52,6 +51,7 @@
 #import "HelperFunctions.h"
 #import "ArticleFilter.h"
 #import "ToolbarItem.h"
+#import "DisclosureView.h"
 #import "ClickableProgressIndicator.h"
 #import "SearchPanel.h"
 #import "SearchMethod.h"
@@ -83,7 +83,6 @@
 	-(void)handleShowStatusBar:(NSNotification *)nc;
 	-(void)handleShowFilterBar:(NSNotification *)nc;
 	-(void)setAppStatusBarIcon;
-	-(void)localiseMenus:(NSArray *)arrayOfMenus;
 	-(void)updateNewArticlesNotification;
 	-(void)showAppInStatusBar;
 	-(void)initSortMenu;
@@ -121,9 +120,6 @@
 @end
 
 // Static constant strings that are typically never tweaked
-static const CGFloat MA_Minimum_Folder_Pane_Width = 80.0;
-static const CGFloat MA_Minimum_BrowserView_Pane_Width = 200.0;
-static const CGFloat MA_StatusBarHeight = 23.0;
 
 // Awake from sleep
 static io_connect_t root_port;
@@ -165,9 +161,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 
 	// Restore the most recent layout
 	[self setLayout:prefs.layout withRefresh:NO];
-
-	// Localise the menus
-	[self localiseMenus:NSApp.mainMenu.itemArray];
 	
 	// Set the delegates and title
 	mainWindow.title = self.appName;
@@ -177,6 +170,9 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	// Initialise the plugin manager now that the UI is ready
 	pluginManager = [[PluginManager alloc] init];
 	[pluginManager resetPlugins];
+
+    // Set the initial filter bar state
+    [self setFilterBarState:prefs.showFilterBar withAnimation:NO];
 	
     // We need to register the handlers early to catch events fired on launch.
     NSAppleEventManager *em = [NSAppleEventManager sharedAppleEventManager];
@@ -228,19 +224,9 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		[ASIHTTPRequest setDefaultUserAgentString:[NSString stringWithFormat:MA_DefaultUserAgentString, ((ViennaApp *)NSApp).applicationVersion.firstWord]];
         
 		[foldersTree initialiseFoldersTree];
-		
-		// If the statusbar is hidden, also hide the highlight line on its top and the filter button.
-		if (!self.statusBarVisible)
-		{
-			[cosmeticStatusBarHighlightLine setHidden:YES];
-			[currentFilterTextField setHidden:YES];
-			[filterIconInStatusBarButton setHidden:YES];
-		}
-		
+
 		Preferences * prefs = [Preferences standardPreferences];
-		// Set the initial filter bar state
-		[self setFilterBarState:prefs.showFilterBar withAnimation:NO];
-		
+
 		// Select the folder and article from the last session
 		NSInteger previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
 		NSString * previousArticleGuid = [prefs stringForKey:MAPref_CachedArticleGUID];
@@ -264,35 +250,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		
 	}
 	didCompleteInitialisation = YES;
-}
-
-/* localiseMenus
- * As of 2.0.1, the menu localisation is now done through the Localizable.strings file rather than
- * the NIB file due to the effort in managing localised NIBs for an increasing number of languages.
- * Also, note care is taken not to localise those commands that were added by the OS. If there is
- * no equivalent in the Localizable.strings file, we do nothing.
- */
--(void)localiseMenus:(NSArray *)arrayOfMenus
-{
-	NSUInteger count = arrayOfMenus.count;
-	
-	for (NSUInteger index = 0; index < count; ++index)
-	{
-		NSMenuItem * menuItem = arrayOfMenus[index];
-		if (menuItem != nil && !menuItem.separatorItem)
-		{
-			NSString * localisedMenuTitle = NSLocalizedString([menuItem title], nil);
-			if (menuItem.submenu)
-			{
-				NSMenu * subMenu = menuItem.submenu;
-				if (localisedMenuTitle != nil)
-					subMenu.title = localisedMenuTitle;
-				[self localiseMenus:subMenu.itemArray];
-			}
-			if (localisedMenuTitle != nil)
-				menuItem.title = localisedMenuTitle;
-		}
-	}
 }
 
 #pragma mark Accessor Methods
@@ -467,10 +424,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	
 	// Initialize the Styles menu.
 	stylesMenu.submenu = self.stylesMenu;
-	
-	// Restore the splitview layout
-	splitView1.xlayout = [[Preferences standardPreferences] objectForKey:@"SplitView1Positions"];
-	splitView1.delegate = self;
 	
 	// Show the current unread count on the app icon
 	[self showUnreadCountOnApplicationIconAndWindowTitle];
@@ -647,9 +600,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
     
 	if (didCompleteInitialisation)
 	{
-		// Save the splitview layout
 		Preferences * prefs = [Preferences standardPreferences];
-		[prefs setObject:splitView1.xlayout forKey:@"SplitView1Positions"];
 		
 		// Close the activity window explicitly to force it to
 		// save its split bar position to the preferences.
@@ -674,19 +625,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	[db close];
 }
 
-/* splitView:effectiveRect:forDrawnRect:ofDividerAtIndex [delegate]
- * Makes the dragable area around the SplitView divider larger, so that it is easier to grab.
- */
-- (NSRect)splitView:(NSSplitView *)splitView effectiveRect:(NSRect)proposedEffectiveRect forDrawnRect:(NSRect)drawnRect ofDividerAtIndex:(NSInteger)dividerIndex
-{
-	if(splitView.vertical) {
-		drawnRect.origin.x -= 4;
-		drawnRect.size.width += 6;
-		return drawnRect;
-	}
-	else
-		return drawnRect;
-}
 
 /* openFile [delegate]
  * Called when the user opens a data file associated with Vienna by clicking in the finder or dragging it onto the dock.
@@ -862,53 +800,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	return browserView;
 }
 
-/* constrainMinCoordinate
- * Make sure the folder width isn't shrunk beyond a minimum width. Otherwise it looks
- * untidy.
- */
--(CGFloat)splitView:(NSSplitView *)sender constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)offset
-{
-	return (sender == splitView1 && offset == 0) ? MA_Minimum_Folder_Pane_Width : proposedMin;
-}
-
-/* constrainMaxCoordinate
- * Make sure that the browserview isn't shrunk beyond a minimum size otherwise the splitview
- * or controls within it start resizing odd.
- */
--(CGFloat)splitView:(NSSplitView *)sender constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)offset
-{
-	if (sender == splitView1 && offset == 0)
-	{
-		NSRect mainFrame = splitView1.superview.frame;
-		return mainFrame.size.width - MA_Minimum_BrowserView_Pane_Width;
-	}
-	return proposedMax;
-}
-
-/* resizeSubviewsWithOldSize
- * Constrain the folder pane to a fixed width.
- */
--(void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
-{
-	CGFloat dividerThickness = sender.dividerThickness;
-	id sv1 = sender.subviews[0];
-	id sv2 = sender.subviews[1];
-	NSRect leftFrame = [sv1 frame];
-	NSRect rightFrame = [sv2 frame];
-	NSRect newFrame = sender.frame;
-	
-	if (sender == splitView1)
-	{
-		leftFrame.size.height = newFrame.size.height;
-		leftFrame.origin = NSMakePoint(0, 0);
-		rightFrame.size.width = newFrame.size.width - leftFrame.size.width - dividerThickness;
-		rightFrame.size.height = newFrame.size.height;
-		rightFrame.origin.x = leftFrame.size.width + dividerThickness;
-		
-		[sv1 setFrame:leftFrame];
-		[sv2 setFrame:rightFrame];
-	}
-}
 
 /* folderMenu
  * Dynamically create the popup menu. This is one less thing to
@@ -982,14 +873,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(void)setLayout:(NSInteger)newLayout withRefresh:(BOOL)refreshFlag
 {
-	BOOL visibleFilterBar = NO;
-	// Turn off the filter bar when switching layouts. This is simpler than
-	// trying to graft it onto the new layout.
-	if (self.filterBarVisible)
-		{ visibleFilterBar = YES;
-		[self setPersistedFilterBarState:NO withAnimation:NO];
-		}
-	
 	[articleController setLayout:newLayout];
     if (refreshFlag)
         [articleController.mainArticleView refreshFolder:MA_Refresh_RedrawList];
@@ -999,9 +882,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
         [mainWindow makeFirstResponder:foldersTree.mainView];
     else
         [mainWindow makeFirstResponder:[browserView primaryTabItemView].mainView];
-	//restore filter bar state if necessary
-	if (visibleFilterBar)
-		[self setPersistedFilterBarState:YES withAnimation:NO];
 	[self updateSearchPlaceholderAndSearchMethod];
 }
 
@@ -1517,7 +1397,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(BOOL)isFilterBarVisible
 {
-	return filterView.superview != nil;
+    return filterDisclosureView.isDisclosed;
 }
 
 -(void)handleGoogleAuthFailed:(NSNotification *)nc
@@ -1583,50 +1463,22 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	if (isVisible && !self.filterBarVisible)
 	{
-		NSView * parentView = articleController.mainArticleView.subviews[0];
-		NSRect filterBarRect;
-		NSRect mainRect;
-		
-		mainRect = parentView.bounds;
-		filterBarRect = filterView.bounds;
-		filterBarRect.size.width = mainRect.size.width;
-		filterBarRect.origin.y = mainRect.size.height - filterBarRect.size.height;
-		mainRect.size.height -= filterBarRect.size.height;
-		
-		[parentView.superview addSubview:filterView];
-		filterView.frame = filterBarRect;
-		if (!doAnimate)
-			parentView.frame = mainRect;
-		else
-			[parentView resizeViewWithAnimation:mainRect withTag:MA_ViewTag_Filterbar];
-		[parentView display];
-		
+        [filterDisclosureView disclose:doAnimate];
+
 		// Hook up the Tab ordering so Tab from the search field goes to the
 		// article view.
 		foldersTree.mainView.nextKeyView = filterSearchField;
 		filterSearchField.nextKeyView = [browserView primaryTabItemView].mainView;
 		
 		// Set focus only if this was user initiated
-		if (doAnimate)
+        if (doAnimate) {
 			[mainWindow makeFirstResponder:filterSearchField];
+        }
 	}
 	if (!isVisible && self.filterBarVisible)
 	{
-		NSView * parentView = articleController.mainArticleView.subviews[0];
-		NSRect filterBarRect;
-		NSRect mainRect;
-		
-		mainRect = parentView.bounds;
-		filterBarRect = filterView.bounds;
-		mainRect.size.height += filterBarRect.size.height;
-		
-		[filterView removeFromSuperview];
-		if (!doAnimate)
-			parentView.frame = mainRect;
-		else
-			[parentView resizeViewWithAnimation:mainRect withTag:MA_ViewTag_Filterbar];
-		[parentView display];
-		
+        [filterDisclosureView collapse:doAnimate];
+
 		// Fix up the tab ordering
 		foldersTree.mainView.nextKeyView = [browserView primaryTabItemView].mainView;
 		
@@ -3936,42 +3788,21 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 /* setStatusBarState
  * Show or hide the status bar state. Does not persist the state - use showHideStatusBar for this.
  */
--(void)setStatusBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate
-{
-	NSRect viewSize = splitView1.frame;
-	if (isStatusBarVisible && !isVisible)
-	{
-		viewSize.size.height += MA_StatusBarHeight;
-		viewSize.origin.y -= MA_StatusBarHeight;
-	}
-	else if (!isStatusBarVisible && isVisible)
-	{
-		viewSize.size.height -= MA_StatusBarHeight;
-		viewSize.origin.y += MA_StatusBarHeight;
-	}
-	if (isStatusBarVisible != isVisible)
-	{
-		if (!doAnimate)
-		{
-			statusText.hidden = !isVisible;
-			splitView1.frame = viewSize;
-		}
-		else
-		{
-			if (!isVisible)
-			{
-				// When hiding the status bar, hide these controls BEFORE
-				// we start hiding the view. Looks cleaner.
-				[statusText setHidden:YES];
-				[currentFilterTextField setHidden:YES];
-				[filterIconInStatusBarButton setHidden:YES];
-				[cosmeticStatusBarHighlightLine setHidden:YES];
-			}
-			[splitView1 resizeViewWithAnimation:viewSize withTag:MA_ViewTag_Statusbar];
-		}
-		[mainWindow display];
-		isStatusBarVisible = isVisible;
-	}
+-(void)setStatusBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate {
+    if (isStatusBarVisible && !isVisible) {
+        [statusBarDisclosureView collapse:doAnimate];
+        isStatusBarVisible = NO;
+
+        // If the animation is interrupted, don't hide the content border
+        if (!statusBarDisclosureView.isDisclosed) {
+            [mainWindow setContentBorderThickness:0 forEdge:NSMinYEdge];
+        }
+    } else if (!isStatusBarVisible && isVisible) {
+        CGFloat disclosedViewHeight = statusBarDisclosureView.disclosedView.frame.size.height;
+        [mainWindow setContentBorderThickness:disclosedViewHeight forEdge:NSMinYEdge];
+        [statusBarDisclosureView disclose:doAnimate];
+        isStatusBarVisible = YES;
+    }
 }
 
 /* setStatusMessage
@@ -4003,7 +3834,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[statusText setHidden:NO];
 		[currentFilterTextField setHidden:NO];
 		[filterIconInStatusBarButton setHidden:NO];
-		[cosmeticStatusBarHighlightLine setHidden:NO];
 		return;
 	}
 	if (viewTag == MA_ViewTag_Filterbar && self.filterBarVisible)
@@ -4650,7 +4480,6 @@ NSString *const kFocusedAdvancedControlIndex = @"FocusedAdvancedControlIndex";
 -(void)dealloc
 {
 	[mainWindow setDelegate:nil];
-	[splitView1 setDelegate:nil];
 	[[SUUpdater sharedUpdater] setDelegate:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }

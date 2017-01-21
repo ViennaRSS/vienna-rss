@@ -1,0 +1,27 @@
+
+/* Class = "NSTextFieldCell"; title = "Weergave van artikelen en webpagina's:"; ObjectID = "71S-pg-AjX"; */
+"71S-pg-AjX.title" = "Weergave van artikelen en webpagina's:";
+
+/* Class = "NSTextFieldCell"; title = "Lettertype voor lijsten:"; ObjectID = "B5v-p5-vrf"; */
+"B5v-p5-vrf.title" = "Lettertype voor lijsten:";
+
+/* Class = "NSButtonCell"; title = "Kies…"; ObjectID = "BDw-v3-mpF"; */
+"BDw-v3-mpF.title" = "Kies…";
+
+/* Class = "NSButtonCell"; title = "Toon symbolen in mappenlijst"; ObjectID = "MEV-HA-bdL"; */
+"MEV-HA-bdL.title" = "Toon symbolen in mappenlijst";
+
+/* Class = "NSTextFieldCell"; title = "Lettertype voor artikelen:"; ObjectID = "auD-UC-Pij"; */
+"auD-UC-Pij.title" = "Lettertype voor artikelen:";
+
+/* Class = "NSTextFieldCell"; title = "(Voorbeeld)"; ObjectID = "azr-ft-M4J"; */
+"azr-ft-M4J.title" = "(Voorbeeld)";
+
+/* Class = "NSTextFieldCell"; title = "(Voorbeeld)"; ObjectID = "g63-xD-ICn"; */
+"g63-xD-ICn.title" = "(Voorbeeld)";
+
+/* Class = "NSButtonCell"; title = "Kies…"; ObjectID = "gGT-YP-aum"; */
+"gGT-YP-aum.title" = "Kies…";
+
+/* Class = "NSButtonCell"; title = "Gebruik nooit lettergrootte kleiner dan:"; ObjectID = "zfJ-Ge-Cxe"; */
+"zfJ-Ge-Cxe.title" = "Gebruik nooit lettergrootte kleiner dan:";

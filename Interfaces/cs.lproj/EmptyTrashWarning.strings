@@ -1,0 +1,15 @@
+
+/* Class = "NSWindow"; title = "Vysypat koš"; ObjectID = "5"; */
+"5.title" = "Vysypat koš";
+
+/* Class = "NSButtonCell"; title = "Vysypat koš"; ObjectID = "17"; */
+"17.title" = "Vysypat koš";
+
+/* Class = "NSButtonCell"; title = "Nevysypávat"; ObjectID = "18"; */
+"18.title" = "Nevysypávat";
+
+/* Class = "NSTextFieldCell"; title = "V koši jsou smazané příspěvky. Chcete před ukončením programu vysypat koš?"; ObjectID = "19"; */
+"19.title" = "V koši jsou smazané příspěvky. Chcete před ukončením programu vysypat koš?";
+
+/* Class = "NSButtonCell"; title = "Příště nezobrazovat"; ObjectID = "20"; */
+"20.title" = "Příště nezobrazovat";

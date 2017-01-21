@@ -1,0 +1,15 @@
+
+/* Class = "NSWindow"; title = "Panel"; ObjectID = "5"; */
+"5.title" = "Panel";
+
+/* Class = "NSTextFieldCell"; title = "Nueva carpeta de grupo"; ObjectID = "32"; */
+"32.title" = "Nueva carpeta de grupo";
+
+/* Class = "NSButtonCell"; title = "Guardar"; ObjectID = "34"; */
+"34.title" = "Guardar";
+
+/* Class = "NSButtonCell"; title = "Cancelar"; ObjectID = "35"; */
+"35.title" = "Cancelar";
+
+/* Class = "NSTextFieldCell"; title = "Introduzca el nombre de la carpeta de grupo:\n"; ObjectID = "36"; */
+"36.title" = "Introduzca el nombre de la carpeta de grupo:";

@@ -1,0 +1,15 @@
+
+/* Class = "NSWindow"; title = "Panel"; ObjectID = "5"; */
+"5.title" = "Panel";
+
+/* Class = "NSTextFieldCell"; title = "새 그룹 폴더 추가"; ObjectID = "32"; */
+"32.title" = "새 그룹 폴더 추가";
+
+/* Class = "NSButtonCell"; title = "추가"; ObjectID = "34"; */
+"34.title" = "추가";
+
+/* Class = "NSButtonCell"; title = "취소"; ObjectID = "35"; */
+"35.title" = "취소";
+
+/* Class = "NSTextFieldCell"; title = "새 그룹 폴더의 이름을 입력하십시오:"; ObjectID = "36"; */
+"36.title" = "새 그룹 폴더의 이름을 입력하십시오:";

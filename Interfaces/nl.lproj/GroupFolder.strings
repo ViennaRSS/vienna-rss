@@ -1,0 +1,15 @@
+
+/* Class = "NSWindow"; title = "Paneel"; ObjectID = "5"; */
+"5.title" = "Paneel";
+
+/* Class = "NSTextFieldCell"; title = "Nieuwe groep-map"; ObjectID = "32"; */
+"32.title" = "Nieuwe groep-map";
+
+/* Class = "NSButtonCell"; title = "Bewaar"; ObjectID = "34"; */
+"34.title" = "Bewaar";
+
+/* Class = "NSButtonCell"; title = "Annuleer"; ObjectID = "35"; */
+"35.title" = "Annuleer";
+
+/* Class = "NSTextFieldCell"; title = "Geef de naam van de groep-map:\n"; ObjectID = "36"; */
+"36.title" = "Geef de naam van de groep-map:";

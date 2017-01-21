@@ -1,0 +1,15 @@
+
+/* Class = "NSWindow"; title = "Panel"; ObjectID = "5"; */
+"5.title" = "Panel";
+
+/* Class = "NSTextFieldCell"; title = "Nová skupinová složka"; ObjectID = "32"; */
+"32.title" = "Nová skupinová složka";
+
+/* Class = "NSButtonCell"; title = "Vytvořit"; ObjectID = "34"; */
+"34.title" = "Vytvořit";
+
+/* Class = "NSButtonCell"; title = "Zrušit"; ObjectID = "35"; */
+"35.title" = "Zrušit";
+
+/* Class = "NSTextFieldCell"; title = "Zadejte jméno skupinové složky:"; ObjectID = "36"; */
+"36.title" = "Zadejte jméno skupinové složky:";

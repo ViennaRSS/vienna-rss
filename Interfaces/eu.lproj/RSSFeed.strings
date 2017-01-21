@@ -1,0 +1,39 @@
+
+/* Class = "NSWindow"; title = "RSS Jarioa"; ObjectID = "6"; */
+"6.title" = "RSS Jarioa";
+
+/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
+"45.title" = "URL";
+
+/* Class = "NSWindow"; title = "RSS Jarioa"; ObjectID = "49"; */
+"49.title" = "RSS Jarioa";
+
+/* Class = "NSButtonCell"; title = "Ezeztatu"; ObjectID = "102"; */
+"102.title" = "Ezeztatu";
+
+/* Class = "NSButtonCell"; title = "Harpidetu"; ObjectID = "103"; */
+"103.title" = "Harpidetu";
+
+/* Class = "NSTextFieldCell"; title = "Iturria:"; ObjectID = "104"; */
+"104.title" = "Iturria:";
+
+/* Class = "NSTextFieldCell"; title = "Harpidetza berri bat sortu"; ObjectID = "106"; */
+"106.title" = "Harpidetza berri bat sortu";
+
+/* Class = "NSTextFieldCell"; title = "Sartu jarioaren URL helbidea behean, edota aukeratu bat iturrien listatik."; ObjectID = "107"; */
+"107.title" = "Sartu jarioaren URL helbidea behean, edota aukeratu bat iturrien listatik.";
+
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "URL:";
+
+/* Class = "NSButtonCell"; title = "Gorde"; ObjectID = "111"; */
+"111.title" = "Gorde";
+
+/* Class = "NSButtonCell"; title = "Ezeztatu"; ObjectID = "112"; */
+"112.title" = "Ezeztatu";
+
+/* Class = "NSTextFieldCell"; title = "Harpidetza editatu"; ObjectID = "114"; */
+"114.title" = "Harpidetza editatu";
+
+/* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
+"116.title" = "Subscribe in Open Reader";

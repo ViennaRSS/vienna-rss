@@ -1,0 +1,45 @@
+
+/* Class = "NSTextFieldCell"; placeholderString = "Placeholder for server specific explanations"; ObjectID = "3WF-BJ-rBh"; */
+"3WF-BJ-rBh.placeholderString" = "Placeholder for server specific explanations";
+
+/* Class = "NSTextFieldCell"; title = "Hint (Do Not Localise)"; ObjectID = "3WF-BJ-rBh"; */
+"3WF-BJ-rBh.title" = "Hint (Do Not Localise)";
+
+/* Class = "NSButton"; ibExternalAccessibilityDescription = "Visit the website"; ObjectID = "Ar5-Qc-YTe"; */
+"Ar5-Qc-YTe.ibExternalAccessibilityDescription" = "Visit the website";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Visitar página web"; ObjectID = "Ar5-Qc-YTe"; */
+"Ar5-Qc-YTe.ibShadowedToolTip" = "Visitar página web";
+
+/* Class = "NSMenu"; title = "ServicesView"; ObjectID = "LVH-iR-bmO"; */
+"LVH-iR-bmO.title" = "ServicesView";
+
+/* Class = "NSButtonCell"; title = "Sincronizar con servidor Open Reader"; ObjectID = "Lkv-md-rEW"; */
+"Lkv-md-rEW.title" = "Sincronizar con servidor Open Reader";
+
+/* Class = "NSTextFieldCell"; title = "Contraseña:"; ObjectID = "NKI-36-zCY"; */
+"NKI-36-zCY.title" = "Contraseña:";
+
+/* Class = "NSTextFieldCell"; title = "Usuario:"; ObjectID = "O2q-8o-CSb"; */
+"O2q-8o-CSb.title" = "Usuario:";
+
+/* Class = "NSMenuItem"; title = "URL"; ObjectID = "RMd-14-2Bl"; */
+"RMd-14-2Bl.title" = "URL";
+
+/* Class = "NSButtonCell"; title = "🌍"; ObjectID = "e0z-IA-uBQ"; */
+"e0z-IA-uBQ.title" = "🌍";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "Seleccione un servidor compatible con la API Open Reader"; ObjectID = "kM0-7a-obO"; */
+"kM0-7a-obO.ibShadowedToolTip" = "Seleccione un servidor compatible con la API Open Reader";
+
+/* Class = "NSTextFieldCell"; title = "URL: https://"; ObjectID = "tec-2d-Xej"; */
+"tec-2d-Xej.title" = "URL: https://";
+
+/* Class = "NSTextFieldCell"; title = "Servidor:"; ObjectID = "uTl-XE-0ym"; */
+"uTl-XE-0ym.title" = "Servidor:";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "Dirección del servidor compatible con la API Open Reader"; ObjectID = "vZE-Pl-S9H"; */
+"vZE-Pl-S9H.ibShadowedToolTip" = "Dirección del servidor compatible con la API Open Reader";
+
+/* Class = "NSPopUpButton"; ibExternalAccessibilityDescription = "Select a server supporting the Open Reader API"; ObjectID = "zAy-oc-zmb"; */
+"zAy-oc-zmb.ibExternalAccessibilityDescription" = "Select a server supporting the Open Reader API";

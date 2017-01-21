@@ -1,0 +1,15 @@
+
+/* Class = "NSWindow"; title = "Panel"; ObjectID = "5"; */
+"5.title" = "Panel";
+
+/* Class = "NSTextFieldCell"; title = "Ny gruppemappe"; ObjectID = "32"; */
+"32.title" = "Ny gruppemappe";
+
+/* Class = "NSButtonCell"; title = "Gem"; ObjectID = "34"; */
+"34.title" = "Gem";
+
+/* Class = "NSButtonCell"; title = "Afbryd"; ObjectID = "35"; */
+"35.title" = "Afbryd";
+
+/* Class = "NSTextFieldCell"; title = "Indtast navn på gruppemappe:\n"; ObjectID = "36"; */
+"36.title" = "Indtast navn på gruppemappe:";

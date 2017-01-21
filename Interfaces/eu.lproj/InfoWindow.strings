@@ -1,0 +1,54 @@
+
+/* Class = "NSWindow"; title = "Lehioa"; ObjectID = "5"; */
+"5.title" = "Lehioa";
+
+/* Class = "NSTextFieldCell"; title = "(Direktorio izena)"; ObjectID = "104"; */
+"104.title" = "(Direktorio izena)";
+
+/* Class = "NSTextFieldCell"; title = "Azken Eguneratuak:"; ObjectID = "105"; */
+"105.title" = "Azken Eguneratuak:";
+
+/* Class = "NSTextFieldCell"; title = "(Azken eguneratze data)"; ObjectID = "106"; */
+"106.title" = "(Azken eguneratze data)";
+
+/* Class = "NSButtonCell"; title = "Frogatu"; ObjectID = "109"; */
+"109.title" = "Frogatu";
+
+/* Class = "NSButtonCell"; title = "URL jarioa:"; ObjectID = "110"; */
+"xPF-M9-oZG.title" = "URL jarioa";
+
+/* Class = "NSTextFieldCell"; title = "Erabiltzaile izena:"; ObjectID = "111"; */
+"111.title" = "Erabiltzaile izena:";
+
+/* Class = "NSTextFieldCell"; title = "Pasahitza:\n"; ObjectID = "112"; */
+"112.title" = "Pasahitza:";
+
+/* Class = "NSButtonCell"; title = "Berritu Autentifikazioa"; ObjectID = "115"; */
+"115.title" = "Berritu Autentifikazioa";
+
+/* Class = "NSButtonCell"; title = "Autentifikazioa:"; ObjectID = "116"; */
+"U0N-RF-bUt.title" = "Autentifikazioa";
+
+/* Class = "NSTextFieldCell"; title = "Tamaina:"; ObjectID = "117"; */
+"117.title" = "Tamaina:";
+
+/* Class = "NSTextFieldCell"; title = "Irakurri gabeak:\n"; ObjectID = "118"; */
+"118.title" = "Irakurri gabeak:";
+
+/* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "119"; */
+"119.title" = "\n";
+
+/* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "120"; */
+"120.title" = "\n";
+
+/* Class = "NSButtonCell"; title = "Harpidetuta"; ObjectID = "121"; */
+"121.title" = "Harpidetuta";
+
+/* Class = "NSButtonCell"; title = "Orokorra:"; ObjectID = "122"; */
+"i9j-KH-c3D.title" = "Orokorra";
+
+/* Class = "NSButtonCell"; title = "Deskripzioa:"; ObjectID = "124"; */
+"E84-Uo-ybg.title" = "Deskripzioa";
+
+/* Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126"; */
+"126.title" = "Load Full HTML Articles";

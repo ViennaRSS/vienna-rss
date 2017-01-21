@@ -1,0 +1,108 @@
+
+/* Class = "NSMenuItem"; title = "Var 15:e minut"; ObjectID = "1Ll-uG-QWh"; */
+"1Ll-uG-QWh.title" = "Var 15:e minut";
+
+/* Class = "NSButtonCell"; title = "Efter att ha valt \"Nästa olästa\""; ObjectID = "2oy-1i-QQP"; */
+"2oy-1i-QQP.title" = "Efter att ha valt \"Nästa olästa\"";
+
+/* Class = "NSMenuItem"; title = "(Sökväg)"; ObjectID = "5Cq-8f-vbL"; */
+"5Cq-8f-vbL.title" = "(Sökväg)";
+
+/* Class = "NSMenuItem"; title = "Var 30:e minut"; ObjectID = "5VQ-jP-2rL"; */
+"5VQ-jP-2rL.title" = "Var 30:e minut";
+
+/* Class = "NSMenuItem"; title = "Varannan timme"; ObjectID = "6wU-yO-cnV"; */
+"6wU-yO-cnV.title" = "Varannan timme";
+
+/* Class = "NSButtonCell"; title = "Visa antalet olästa artiklar på programikonen"; ObjectID = "7e3-Hu-RB5"; */
+"7e3-Hu-RB5.title" = "Visa antalet olästa artiklar på programikonen";
+
+/* Class = "NSTextFieldCell"; title = "När nya olästa artiklar är mottagna:\n"; ObjectID = "BbI-0A-zEG"; */
+"BbI-0A-zEG.title" = "När nya olästa artiklar är mottagna:\n";
+
+/* Class = "NSMenu"; title = "Andra vyer"; ObjectID = "DFg-c6-rCy"; */
+"DFg-c6-rCy.title" = "Andra vyer";
+
+/* Class = "NSMenuItem"; title = "Annan..."; ObjectID = "FiK-E7-RnG"; */
+"FiK-E7-RnG.title" = "Annan...";
+
+/* Class = "NSMenuItem"; title = "Ingenting"; ObjectID = "GAY-ra-eQY"; */
+"GAY-ra-eQY.title" = "Ingenting";
+
+/* Class = "NSButtonCell"; title = "Leta efter uppdateringar av Vienna vid uppstart"; ObjectID = "GnT-xT-rAZ"; */
+"GnT-xT-rAZ.title" = "Leta efter uppdateringar av Vienna vid uppstart";
+
+/* Class = "NSMenuItem"; title = "Manuellt"; ObjectID = "H9Q-du-oax"; */
+"H9Q-du-oax.title" = "Manuellt";
+
+/* Class = "NSMenu"; title = "Andra vyer"; ObjectID = "HFO-4f-zYZ"; */
+"HFO-4f-zYZ.title" = "Andra vyer";
+
+/* Class = "NSMenuItem"; title = "Var 6:e timme"; ObjectID = "IMa-1h-lIO"; */
+"IMa-1h-lIO.title" = "Var 6:e timme";
+
+/* Class = "NSButtonCell"; title = "Efter en kort stund"; ObjectID = "JDV-ek-xja"; */
+"JDV-ek-xja.title" = "Efter en kort stund";
+
+/* Class = "NSButtonCell"; title = "Visa i menyraden"; ObjectID = "JN6-lj-bQ1"; */
+"JN6-lj-bQ1.title" = "Visa i menyraden";
+
+/* Class = "NSMenu"; title = "Andra vyer"; ObjectID = "Klv-JA-PvP"; */
+"Klv-JA-PvP.title" = "Andra vyer";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "NAE-EF-SsE"; */
+"NAE-EF-SsE.title" = "Radio";
+
+/* Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0"; */
+"OID-qF-Pp0.title" = "Search for latest Beta versions";
+
+/* Class = "NSMenu"; title = "Andra vyer"; ObjectID = "XAi-oh-7Fq"; */
+"XAi-oh-7Fq.title" = "Andra vyer";
+
+/* Class = "NSButtonCell"; title = "Öppna länkar i extern webbläsare"; ObjectID = "YoM-Gv-hXn"; */
+"YoM-Gv-hXn.title" = "Öppna länkar i extern webbläsare";
+
+/* Class = "NSTextFieldCell"; title = "Uppdatera artiklar:\n"; ObjectID = "ewU-JH-fMC"; */
+"ewU-JH-fMC.title" = "Uppdatera artiklar:\n";
+
+/* Class = "NSMenuItem"; title = "(Do not localise)"; ObjectID = "fYn-Rz-G69"; */
+"fYn-Rz-G69.title" = "(Do not localise)";
+
+/* Class = "NSTextFieldCell"; title = "Spara nedladdade filer i:"; ObjectID = "geD-Ws-mQm"; */
+"geD-Ws-mQm.title" = "Spara nedladdade filer i:";
+
+/* Class = "NSButtonCell"; title = "Stutsa programikonen"; ObjectID = "gi4-ao-0yS"; */
+"gi4-ao-0yS.title" = "Stutsa programikonen";
+
+/* Class = "NSMenuItem"; title = "Var 3:e timme"; ObjectID = "gnX-dW-XUD"; */
+"gnX-dW-XUD.title" = "Var 3:e timme";
+
+/* Class = "NSTextFieldCell"; title = "Flytta artiklar till Papperskorgen:"; ObjectID = "k6Y-ib-PGb"; */
+"k6Y-ib-PGb.title" = "Flytta artiklar till Papperskorgen:";
+
+/* Class = "NSTextFieldCell"; title = "Förvald RSS-läsare:\n"; ObjectID = "kGA-Sa-RLG"; */
+"kGA-Sa-RLG.title" = "Förvald RSS-läsare:\n";
+
+/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl"; */
+"meo-78-YOl.title" = "Mark updated articles as new";
+
+/* Class = "NSMenuItem"; title = "Var 5:e minut"; ObjectID = "oVW-ee-uJT"; */
+"oVW-ee-uJT.title" = "Var 5:e minut";
+
+/* Class = "NSButtonCell"; title = "Uppdatera artiklar vid uppstart"; ObjectID = "pXX-MI-tJX"; */
+"pXX-MI-tJX.title" = "Uppdatera artiklar vid uppstart";
+
+/* Class = "NSButtonCell"; title = "Öppna nya länkar i bakgrunden"; ObjectID = "pjg-Ze-H3l"; */
+"pjg-Ze-H3l.title" = "Öppna nya länkar i bakgrunden";
+
+/* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
+"qeb-at-hYb.title" = "Updates:";
+
+/* Class = "NSButtonCell"; title = "Include anonymous system profile"; ObjectID = "qno-Cg-EkC"; */
+"qno-Cg-EkC.title" = "Include anonymous system profile";
+
+/* Class = "NSTextFieldCell"; title = "Markera nuvarande artikel som läst:\n"; ObjectID = "sCl-hz-PFF"; */
+"sCl-hz-PFF.title" = "Markera nuvarande artikel som läst:\n";
+
+/* Class = "NSMenuItem"; title = "Varje timme"; ObjectID = "sSj-zI-6RY"; */
+"sSj-zI-6RY.title" = "Varje timme";

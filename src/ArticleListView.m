@@ -952,6 +952,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	isChangingOrientation = YES;
 	tableLayout = newLayout;
 	splitView2.vertical = (newLayout == MA_Layout_Condensed);
+	splitView2.dividerStyle = (splitView2.vertical ? NSSplitViewDividerStyleThin : NSSplitViewDividerStylePaneSplitter);
 	[self loadSplitSettingsForLayout];
 	[splitView2 display];
 	isChangingOrientation = NO;

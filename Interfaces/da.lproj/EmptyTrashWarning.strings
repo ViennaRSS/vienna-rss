@@ -1,0 +1,15 @@
+
+/* Class = "NSWindow"; title = "Empty Trash"; ObjectID = "5"; */
+"5.title" = "Empty Trash";
+
+/* Class = "NSButtonCell"; title = "Tøm Papirkurven"; ObjectID = "17"; */
+"17.title" = "Tøm Papirkurven";
+
+/* Class = "NSButtonCell"; title = "Tøm ikke Papirkurven"; ObjectID = "18"; */
+"18.title" = "Tøm ikke Papirkurven";
+
+/* Class = "NSTextFieldCell"; title = "Der er slettede artikler i Papirkurven.\nVil du tømme Papirkurven før du afslutter?"; ObjectID = "19"; */
+"19.title" = "Der er slettede artikler i Papirkurven. Vil du tømme Papirkurven før du afslutter?";
+
+/* Class = "NSButtonCell"; title = "Vis ikke denne advarsel igen"; ObjectID = "20"; */
+"20.title" = "Vis ikke denne advarsel igen";

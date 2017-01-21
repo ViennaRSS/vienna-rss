@@ -1,0 +1,39 @@
+
+/* Class = "NSWindow"; title = "Канал RSS"; ObjectID = "6"; */
+"6.title" = "Канал RSS";
+
+/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
+"45.title" = "URL";
+
+/* Class = "NSWindow"; title = "Канал RSS"; ObjectID = "49"; */
+"49.title" = "Канал RSS";
+
+/* Class = "NSButtonCell"; title = "Отмена"; ObjectID = "102"; */
+"102.title" = "Отмена";
+
+/* Class = "NSButtonCell"; title = "Подписаться"; ObjectID = "103"; */
+"103.title" = "Подписаться";
+
+/* Class = "NSTextFieldCell"; title = "Источник:"; ObjectID = "104"; */
+"104.title" = "Источник:";
+
+/* Class = "NSTextFieldCell"; title = "Создание новой подписки"; ObjectID = "106"; */
+"106.title" = "Создание новой подписки";
+
+/* Class = "NSTextFieldCell"; title = "Введите ссылку на канал новостей или выберите канал из списка Источник для добавления ссылки с заданного источника."; ObjectID = "107"; */
+"107.title" = "Введите ссылку на канал новостей или выберите канал из списка Источник для добавления ссылки с заданного источника.";
+
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "URL:";
+
+/* Class = "NSButtonCell"; title = "Сохранить"; ObjectID = "111"; */
+"111.title" = "Сохранить";
+
+/* Class = "NSButtonCell"; title = "Отмена"; ObjectID = "112"; */
+"112.title" = "Отмена";
+
+/* Class = "NSTextFieldCell"; title = "Изменение подписки"; ObjectID = "114"; */
+"114.title" = "Изменение подписки";
+
+/* Class = "NSButtonCell"; title = "Использовать Open Reader"; ObjectID = "116"; */
+"116.title" = "Использовать Open Reader";

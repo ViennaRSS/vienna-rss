@@ -1,0 +1,15 @@
+
+/* Class = "NSWindow"; title = "Painel"; ObjectID = "5"; */
+"5.title" = "Painel";
+
+/* Class = "NSTextFieldCell"; title = "Nova pasta de grupo"; ObjectID = "32"; */
+"32.title" = "Nova pasta de grupo";
+
+/* Class = "NSButtonCell"; title = "Salvar"; ObjectID = "34"; */
+"34.title" = "Salvar";
+
+/* Class = "NSButtonCell"; title = "Cancelar"; ObjectID = "35"; */
+"35.title" = "Cancelar";
+
+/* Class = "NSTextFieldCell"; title = "Entre o nome da pasta de grupo:\n"; ObjectID = "36"; */
+"36.title" = "Entre o nome da pasta de grupo:";

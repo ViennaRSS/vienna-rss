@@ -1,0 +1,27 @@
+
+/* Class = "NSTextFieldCell"; title = "Quando visualizar artigos ou páginas web:"; ObjectID = "71S-pg-AjX"; */
+"71S-pg-AjX.title" = "Quando visualizar artigos ou páginas web:";
+
+/* Class = "NSTextFieldCell"; title = "Tipo de letra da lista de pastas:"; ObjectID = "B5v-p5-vrf"; */
+"B5v-p5-vrf.title" = "Tipo de letra da lista de pastas:";
+
+/* Class = "NSButtonCell"; title = "Seleccionar…"; ObjectID = "BDw-v3-mpF"; */
+"BDw-v3-mpF.title" = "Seleccionar…";
+
+/* Class = "NSButtonCell"; title = "Mostrar imagens da pastas na lista de pastas"; ObjectID = "MEV-HA-bdL"; */
+"MEV-HA-bdL.title" = "Mostrar imagens da pastas na lista de pastas";
+
+/* Class = "NSTextFieldCell"; title = "Tipo de letra da lista de artigos:"; ObjectID = "auD-UC-Pij"; */
+"auD-UC-Pij.title" = "Tipo de letra da lista de artigos:";
+
+/* Class = "NSTextFieldCell"; title = "(Sample)"; ObjectID = "azr-ft-M4J"; */
+"azr-ft-M4J.title" = "(Sample)";
+
+/* Class = "NSTextFieldCell"; title = "(Sample)"; ObjectID = "g63-xD-ICn"; */
+"g63-xD-ICn.title" = "(Sample)";
+
+/* Class = "NSButtonCell"; title = "Seleccionar…"; ObjectID = "gGT-YP-aum"; */
+"gGT-YP-aum.title" = "Seleccionar…";
+
+/* Class = "NSButtonCell"; title = "Nunca usar tipos de letra mais pequenas do que"; ObjectID = "zfJ-Ge-Cxe"; */
+"zfJ-Ge-Cxe.title" = "Nunca usar tipos de letra mais pequenas do que";

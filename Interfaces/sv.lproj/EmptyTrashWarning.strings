@@ -1,0 +1,15 @@
+
+/* Class = "NSWindow"; title = "Töm papperskorgen"; ObjectID = "5"; */
+"5.title" = "Töm papperskorgen";
+
+/* Class = "NSButtonCell"; title = "Töm papperskorgen"; ObjectID = "17"; */
+"17.title" = "Töm papperskorgen";
+
+/* Class = "NSButtonCell"; title = "Töm inte papperskorgen"; ObjectID = "18"; */
+"18.title" = "Töm inte papperskorgen";
+
+/* Class = "NSTextFieldCell"; title = "Det finns raderade artiklar i papperskorgen.\nVill du tömma papperskorgen innan du avslutar Vienna?"; ObjectID = "19"; */
+"19.title" = "Det finns raderade artiklar i papperskorgen. Vill du tömma papperskorgen innan du avslutar Vienna?";
+
+/* Class = "NSButtonCell"; title = "Visa inte denna varning igen"; ObjectID = "20"; */
+"20.title" = "Visa inte denna varning igen";

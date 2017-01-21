@@ -1,0 +1,27 @@
+
+/* Class = "NSTextFieldCell"; title = "記事やウェブページを閲覧中："; ObjectID = "71S-pg-AjX"; */
+"71S-pg-AjX.title" = "記事やウェブページを閲覧中：";
+
+/* Class = "NSTextFieldCell"; title = "フォルダリストフォント："; ObjectID = "B5v-p5-vrf"; */
+"B5v-p5-vrf.title" = "フォルダリストフォント：";
+
+/* Class = "NSButtonCell"; title = "選択…"; ObjectID = "BDw-v3-mpF"; */
+"BDw-v3-mpF.title" = "選択…";
+
+/* Class = "NSButtonCell"; title = "フォルダリストでフォルダイメージを使用する"; ObjectID = "MEV-HA-bdL"; */
+"MEV-HA-bdL.title" = "フォルダリストでフォルダイメージを使用する";
+
+/* Class = "NSTextFieldCell"; title = "記事リストフォント："; ObjectID = "auD-UC-Pij"; */
+"auD-UC-Pij.title" = "記事リストフォント：";
+
+/* Class = "NSTextFieldCell"; title = "(Sample)"; ObjectID = "azr-ft-M4J"; */
+"azr-ft-M4J.title" = "(Sample)";
+
+/* Class = "NSTextFieldCell"; title = "(Sample)"; ObjectID = "g63-xD-ICn"; */
+"g63-xD-ICn.title" = "(Sample)";
+
+/* Class = "NSButtonCell"; title = "選択…"; ObjectID = "gGT-YP-aum"; */
+"gGT-YP-aum.title" = "選択…";
+
+/* Class = "NSButtonCell"; title = "これより小さいフォントサイズを使わない："; ObjectID = "zfJ-Ge-Cxe"; */
+"zfJ-Ge-Cxe.title" = "これより小さいフォントサイズを使わない：";

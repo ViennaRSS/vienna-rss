@@ -1,0 +1,27 @@
+
+/* Class = "NSTextFieldCell"; title = "Når der læses artikler eller hjemmesider:"; ObjectID = "71S-pg-AjX"; */
+"71S-pg-AjX.title" = "Når der læses artikler eller hjemmesider:";
+
+/* Class = "NSTextFieldCell"; title = "Mappeliste skrifttype:"; ObjectID = "B5v-p5-vrf"; */
+"B5v-p5-vrf.title" = "Mappeliste skrifttype:";
+
+/* Class = "NSButtonCell"; title = "Vælg…"; ObjectID = "BDw-v3-mpF"; */
+"BDw-v3-mpF.title" = "Vælg…";
+
+/* Class = "NSButtonCell"; title = "Vis mappeikoner i mappeliste"; ObjectID = "MEV-HA-bdL"; */
+"MEV-HA-bdL.title" = "Vis mappeikoner i mappeliste";
+
+/* Class = "NSTextFieldCell"; title = "Artikelliste skrifttype:"; ObjectID = "auD-UC-Pij"; */
+"auD-UC-Pij.title" = "Artikelliste skrifttype:";
+
+/* Class = "NSTextFieldCell"; title = "(Prøve)"; ObjectID = "azr-ft-M4J"; */
+"azr-ft-M4J.title" = "(Prøve)";
+
+/* Class = "NSTextFieldCell"; title = "(Prøve)"; ObjectID = "g63-xD-ICn"; */
+"g63-xD-ICn.title" = "(Prøve)";
+
+/* Class = "NSButtonCell"; title = "Vælg…"; ObjectID = "gGT-YP-aum"; */
+"gGT-YP-aum.title" = "Vælg…";
+
+/* Class = "NSButtonCell"; title = "Brug aldrig en skrifttype mindre end"; ObjectID = "zfJ-Ge-Cxe"; */
+"zfJ-Ge-Cxe.title" = "Brug aldrig en skrifttype mindre end";

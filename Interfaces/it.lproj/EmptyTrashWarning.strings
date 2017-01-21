@@ -1,0 +1,15 @@
+
+/* Class = "NSWindow"; title = "Svuota Cestino"; ObjectID = "5"; */
+"5.title" = "Svuota Cestino";
+
+/* Class = "NSButtonCell"; title = "Svuota Cestino"; ObjectID = "17"; */
+"17.title" = "Svuota Cestino";
+
+/* Class = "NSButtonCell"; title = "Non Svuotare il Cestino"; ObjectID = "18"; */
+"18.title" = "Non Svuotare il Cestino";
+
+/* Class = "NSTextFieldCell"; title = "Ci sono degli articoli eliminati nel cestino.\nDesideri svuotare il cestino prima di uscire?"; ObjectID = "19"; */
+"19.title" = "Ci sono degli articoli eliminati nel cestino. Desideri svuotare il cestino prima di uscire?";
+
+/* Class = "NSButtonCell"; title = "Non mostrare di nuovo questo avviso"; ObjectID = "20"; */
+"20.title" = "Non mostrare di nuovo questo avviso";
