@@ -22,6 +22,7 @@
 
 @interface DisclosureView()
 
+@property (readwrite, getter=isDisclosed, nonatomic) BOOL disclosed;
 @property (readonly, nonatomic) CGFloat disclosedViewHeight;
 @property (nonatomic) NSLayoutConstraint *heightConstraint;
 
@@ -29,11 +30,11 @@
 
 @implementation DisclosureView
 
-#pragma mark Accessors
-
-- (BOOL)isDisclosed {
-    return self.frame.size.height > 0;
+- (void)awakeFromNib {
+    self.disclosed = self.frame.size.height > 0;
 }
+
+#pragma mark Accessors
 
 - (CGFloat)disclosedViewHeight {
     return self.disclosedView.frame.size.height;
@@ -55,30 +56,42 @@
 #pragma mark Methods
 
 - (void)collapse:(BOOL)animate {
+    if (!self.isDisclosed) {
+        return;
+    }
+
     [self addConstraint:self.heightConstraint];
     if (animate) {
         [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
             self.heightConstraint.animator.constant = 0;
         } completionHandler:^{
             self.disclosedView.hidden = YES;
+            self.disclosed = NO;
         }];
     } else {
         self.heightConstraint.constant = 0;
         self.disclosedView.hidden = YES;
+        self.disclosed = NO;
     }
 }
 
 - (void)disclose:(BOOL)animate {
+    if (self.isDisclosed) {
+        return;
+    }
+
     self.disclosedView.hidden = NO;
     if (animate) {
         [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
             self.heightConstraint.animator.constant = self.disclosedViewHeight;
         } completionHandler:^{
             [self removeConstraint:self.heightConstraint];
+            self.disclosed = YES;
         }];
     } else {
         self.heightConstraint.constant = self.disclosedViewHeight;
         [self removeConstraint:self.heightConstraint];
+        self.disclosed = YES;
     }
 }
 
