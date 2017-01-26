@@ -39,7 +39,7 @@
                                                 <rect key="frame" x="0.0" y="26" width="288" height="5"/>
                                             </box>
                                             <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CJo-vt-zIx">
-                                                <rect key="frame" x="8" y="5" width="272" height="19"/>
+                                                <rect key="frame" x="5" y="5" width="278" height="19"/>
                                                 <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" bezelStyle="round" sendsWholeSearchString="YES" recentsAutosaveName="filterStrings" id="lhy-4c-asJ">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -56,8 +56,8 @@
                                             <constraint firstAttribute="bottom" secondItem="CJo-vt-zIx" secondAttribute="bottom" constant="5" id="nWB-gh-fLw"/>
                                             <constraint firstAttribute="trailing" secondItem="2Bf-xM-DeZ" secondAttribute="trailing" id="ro4-dz-qUC"/>
                                             <constraint firstItem="2Bf-xM-DeZ" firstAttribute="top" secondItem="o3u-Zs-gsz" secondAttribute="top" id="sBw-Ds-T5c"/>
-                                            <constraint firstItem="CJo-vt-zIx" firstAttribute="leading" secondItem="o3u-Zs-gsz" secondAttribute="leading" constant="8" id="ucW-1x-D1F"/>
-                                            <constraint firstAttribute="trailing" secondItem="CJo-vt-zIx" secondAttribute="trailing" constant="8" id="vAZ-Il-h0U"/>
+                                            <constraint firstItem="CJo-vt-zIx" firstAttribute="leading" secondItem="o3u-Zs-gsz" secondAttribute="leading" constant="5" id="ucW-1x-D1F"/>
+                                            <constraint firstAttribute="trailing" secondItem="CJo-vt-zIx" secondAttribute="trailing" constant="5" id="vAZ-Il-h0U"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="filterSearchField" destination="CJo-vt-zIx" id="xxg-IJ-OvH"/>
@@ -124,12 +124,12 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="MRm-h9-mFg" customClass="DisclosureView">
-                                        <rect key="frame" x="0.0" y="581" width="653" height="22"/>
+                                        <rect key="frame" x="0.0" y="582" width="653" height="21"/>
                                         <subviews>
-                                            <customView placeholderIntrinsicWidth="653" placeholderIntrinsicHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1238" customClass="PSMTabBarControl">
-                                                <rect key="frame" x="0.0" y="0.0" width="653" height="22"/>
+                                            <customView placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1238" customClass="PSMTabBarControl">
+                                                <rect key="frame" x="0.0" y="-1" width="653" height="22"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="22" id="OUJ-Be-Sfm"/>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="23" id="Jqx-LT-OPI"/>
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="delegate" destination="1227" id="1242"/>
@@ -141,7 +141,7 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="1238" secondAttribute="trailing" id="RDe-eK-VcG"/>
-                                            <constraint firstAttribute="bottom" secondItem="1238" secondAttribute="bottom" id="ebe-Ri-mFz"/>
+                                            <constraint firstAttribute="bottom" secondItem="1238" secondAttribute="bottom" constant="-1" id="ebe-Ri-mFz"/>
                                             <constraint firstItem="1238" firstAttribute="leading" secondItem="MRm-h9-mFg" secondAttribute="leading" id="wF2-4m-db3"/>
                                             <constraint firstItem="1238" firstAttribute="top" secondItem="MRm-h9-mFg" secondAttribute="top" priority="600" id="wxL-HK-aKe"/>
                                         </constraints>
@@ -150,7 +150,7 @@
                                         </connections>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="cTN-D0-dY2" customClass="DisclosureView">
-                                        <rect key="frame" x="0.0" y="552" width="653" height="29"/>
+                                        <rect key="frame" x="0.0" y="553" width="653" height="29"/>
                                         <subviews>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="1300" customClass="FilterView">
                                                 <rect key="frame" x="0.0" y="0.0" width="653" height="29"/>
@@ -239,13 +239,13 @@
                                             <outlet property="disclosedView" destination="1300" id="TAx-ZZ-EUW"/>
                                         </connections>
                                     </customView>
-                                    <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="1218">
-                                        <rect key="frame" x="0.0" y="0.0" width="653" height="552"/>
+                                    <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="1218">
+                                        <rect key="frame" x="0.0" y="0.0" width="653" height="553"/>
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
-                                            <tabViewItem label="Tab" identifier="1" id="1221">
+                                            <tabViewItem identifier="1" id="1221">
                                                 <view key="view" id="1222">
-                                                    <rect key="frame" x="0.0" y="0.0" width="653" height="552"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="653" height="553"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
                                             </tabViewItem>

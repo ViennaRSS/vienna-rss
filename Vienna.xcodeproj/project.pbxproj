@@ -377,6 +377,7 @@
 		F62581431E29B9040035E43C /* XMLSource.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581421E29B9040035E43C /* XMLSource.xib */; };
 		F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581441E29B90A0035E43C /* SearchPanel.xib */; };
 		F62581591E29BEB90035E43C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625815B1E29BEB90035E43C /* MainMenu.xib */; };
+		F6C5CEFA1E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C5CEF91E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m */; };
 		F6D572AB1E26AA8200CDA909 /* EmptyTrashWarning.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572AD1E26AA8200CDA909 /* EmptyTrashWarning.xib */; };
 		F6D572AE1E26AA8A00CDA909 /* FeedCredentials.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */; };
 		F6D572B11E26AA9000CDA909 /* GroupFolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B31E26AA9000CDA909 /* GroupFolder.xib */; };
@@ -1351,6 +1352,8 @@
 		F6B9937B1E283608005F9FAD /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/AdvancedPreferencesView.strings; sourceTree = "<group>"; };
 		F6B9937C1E28360B005F9FAD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/AdvancedPreferencesView.strings"; sourceTree = "<group>"; };
 		F6B9937D1E28360D005F9FAD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AdvancedPreferencesView.strings"; sourceTree = "<group>"; };
+		F6C5CEF81E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PSMTabBarControl+IntrinsicContentSize.h"; path = "src/PSMTabBarControl+IntrinsicContentSize.h"; sourceTree = "<group>"; };
+		F6C5CEF91E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PSMTabBarControl+IntrinsicContentSize.m"; path = "src/PSMTabBarControl+IntrinsicContentSize.m"; sourceTree = "<group>"; };
 		F6D573291E26B19D00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/EmptyTrashWarning.xib; sourceTree = "<group>"; };
 		F6D5732A1E26B19E00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeedCredentials.xib; sourceTree = "<group>"; };
 		F6D5732B1E26B19F00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GroupFolder.xib; sourceTree = "<group>"; };
@@ -2058,6 +2061,8 @@
 				AAFA8CA8062A0BE200C530A6 /* CalendarExtensions.m */,
 				AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */,
 				AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */,
+				F6C5CEF81E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.h */,
+				F6C5CEF91E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m */,
 				AA1A23D80C07475B005968DC /* SplitViewExtensions.h */,
 				AA1A23D90C07475B005968DC /* SplitViewExtensions.m */,
 				AAF3B14006095E7B0025CC7F /* StringExtensions.h */,
@@ -2842,6 +2847,7 @@
 				030C38901AABF12D00AE1EB8 /* FolderImageCache.m in Sources */,
 				AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */,
 				AA86B2AB0892DCAA0071FB33 /* BezierPathExtensions.m in Sources */,
+				F6C5CEFA1E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m in Sources */,
 				AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */,
 				AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */,
 				F6164C591E32A6660086261C /* DisclosureView.m in Sources */,
