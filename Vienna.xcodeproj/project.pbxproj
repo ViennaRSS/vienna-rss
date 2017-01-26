@@ -1582,6 +1582,7 @@
 			children = (
 				793C952E1C3F07FC00984D4E /* TreeFilterView.h */,
 				793C952F1C3F07FC00984D4E /* TreeFilterView.m */,
+				AA0FB5E00869110300D9CB90 /* ActivityLog.h */,
 				43502848165DE9DF0018EDB7 /* ActivityLog.m */,
 				43502849165DE9DF0018EDB7 /* ActivityViewer.h */,
 				4350284A165DE9DF0018EDB7 /* ActivityViewer.m */,
@@ -1666,7 +1667,6 @@
 				43502894165DE9DF0018EDB7 /* XMLSourceWindow.m */,
 				43502845165DE9560018EDB7 /* RenameFolder.h */,
 				43502846165DE9560018EDB7 /* RenameFolder.m */,
-				AA0FB5E00869110300D9CB90 /* ActivityLog.h */,
 			);
 			name = Classes;
 			sourceTree = SOURCE_ROOT;

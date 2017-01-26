@@ -56,8 +56,6 @@
 	-(void)makeRowSelectedAndVisible:(NSInteger)rowIndex;
 	-(void)updateArticleListRowHeight;
 	-(void)setOrientation:(NSInteger)newLayout;
-	-(void)loadSplitSettingsForLayout;
-	-(void)saveSplitSettingsForLayout;
 	-(void)showEnclosureView;
 	-(void)hideEnclosureView;
 	-(void)printDocument;
@@ -153,7 +151,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	
 	// Set the reading pane orientation
 	[self setOrientation:prefs.layout];
-	splitView2.delegate = self;
 	
 	// Initialise the article list view
 	[self initTableView];
@@ -203,46 +200,46 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 /* resizeSubviewsWithOldSize
  * Constrain the article list pane to a fixed width.
  */
--(void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
-{
-	CGFloat dividerThickness = sender.dividerThickness;
-	BOOL isVertical = sender.vertical;
-	id sv1 = sender.subviews[0];
-	id sv2 = sender.subviews[1];
-	NSRect leftFrame = [sv1 frame];
-	NSRect rightFrame = [sv2 frame];
-	NSRect newFrame = sender.frame;
-	
-	if (sender == splitView2)
-	{
-		if (isChangingOrientation)
-			[splitView2 adjustSubviews];
-		else
-		{
-			leftFrame.origin = NSMakePoint(0, 0);
-			if (isVertical)
-			{
-				leftFrame.size.height = newFrame.size.height;
-                leftFrame.size.width = MIN(leftFrame.size.width , newFrame.size.width - dividerThickness - MA_Minimum_Article_Pane_Dimension);
-				rightFrame.size.width = newFrame.size.width - leftFrame.size.width - dividerThickness;
-				rightFrame.size.height = newFrame.size.height;
-				rightFrame.origin.x = leftFrame.size.width + dividerThickness;
-				rightFrame.origin.y = 0;
-			}
-			else
-			{
-				leftFrame.size.width = newFrame.size.width;
-                leftFrame.size.height = MIN(leftFrame.size.height , newFrame.size.height - dividerThickness - MA_Minimum_Article_Pane_Dimension);
-				rightFrame.size.height = newFrame.size.height - leftFrame.size.height - dividerThickness;
-				rightFrame.size.width = newFrame.size.width;
-				rightFrame.origin.y = leftFrame.size.height + dividerThickness;
-				rightFrame.origin.x = 0;
-			}
-			[sv1 setFrame:leftFrame];
-			[sv2 setFrame:rightFrame];
-		}
-	}
-}
+//-(void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
+//{
+//	CGFloat dividerThickness = sender.dividerThickness;
+//	BOOL isVertical = sender.vertical;
+//	id sv1 = sender.subviews[0];
+//	id sv2 = sender.subviews[1];
+//	NSRect leftFrame = [sv1 frame];
+//	NSRect rightFrame = [sv2 frame];
+//	NSRect newFrame = sender.frame;
+//	
+//	if (sender == splitView2)
+//	{
+//		if (isChangingOrientation)
+//			[splitView2 adjustSubviews];
+//		else
+//		{
+//			leftFrame.origin = NSMakePoint(0, 0);
+//			if (isVertical)
+//			{
+//				leftFrame.size.height = newFrame.size.height;
+//                leftFrame.size.width = MIN(leftFrame.size.width , newFrame.size.width - dividerThickness - MA_Minimum_Article_Pane_Dimension);
+//				rightFrame.size.width = newFrame.size.width - leftFrame.size.width - dividerThickness;
+//				rightFrame.size.height = newFrame.size.height;
+//				rightFrame.origin.x = leftFrame.size.width + dividerThickness;
+//				rightFrame.origin.y = 0;
+//			}
+//			else
+//			{
+//				leftFrame.size.width = newFrame.size.width;
+//                leftFrame.size.height = MIN(leftFrame.size.height , newFrame.size.height - dividerThickness - MA_Minimum_Article_Pane_Dimension);
+//				rightFrame.size.height = newFrame.size.height - leftFrame.size.height - dividerThickness;
+//				rightFrame.size.width = newFrame.size.width;
+//				rightFrame.origin.y = leftFrame.size.height + dividerThickness;
+//				rightFrame.origin.x = 0;
+//			}
+//			[sv1 setFrame:leftFrame];
+//			[sv2 setFrame:rightFrame];
+//		}
+//	}
+//}
 
 /* createWebViewWithRequest
  * Called when the browser wants to create a new window. The request is opened in a new tab.
@@ -679,9 +676,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	// Save these to the preferences
 	[prefs setObject:dataArray forKey:MAPref_ArticleListColumns];
 
-	// Save the split bar position
-	[self saveSplitSettingsForLayout];
-
 	// We're done
 }
 
@@ -914,33 +908,10 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 {
 	if (self == articleController.mainArticleView)
 	{
-		[self saveSplitSettingsForLayout];
 		[self setOrientation:[Preferences standardPreferences].layout];
 		[self updateVisibleColumns];
 		[articleList reloadData];
 	}
-}
-
-/* loadSplitSettingsForLayout
- * Set the splitview position for the current layout from the preferences.
- */
--(void)loadSplitSettingsForLayout
-{
-	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ?
-		@"SplitView2ReportLayout"
-		: @"SplitView2CondensedLayout";
-	splitView2.xlayout = [[Preferences standardPreferences] objectForKey:splitPrefsName];
-}
-
-/* saveSplitSettingsForLayout
- * Save the splitview position for the current layout to the preferences.
- */
--(void)saveSplitSettingsForLayout
-{
-	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ?
-		@"SplitView2ReportLayout"
-		: @"SplitView2CondensedLayout";
-	[[Preferences standardPreferences] setObject:splitView2.xlayout forKey:splitPrefsName];
 }
 
 /* setOrientation
@@ -953,7 +924,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	tableLayout = newLayout;
 	splitView2.vertical = (newLayout == MA_Layout_Condensed);
 	splitView2.dividerStyle = (splitView2.vertical ? NSSplitViewDividerStyleThin : NSSplitViewDividerStylePaneSplitter);
-	[self loadSplitSettingsForLayout];
 	[splitView2 display];
 	isChangingOrientation = NO;
 }
