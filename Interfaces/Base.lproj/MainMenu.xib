@@ -141,9 +141,9 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="1238" secondAttribute="trailing" id="RDe-eK-VcG"/>
-                                            <constraint firstAttribute="bottom" secondItem="1238" secondAttribute="bottom" constant="-1" id="ebe-Ri-mFz"/>
+                                            <constraint firstAttribute="bottom" secondItem="1238" secondAttribute="bottom" priority="600" constant="-1" id="ebe-Ri-mFz"/>
                                             <constraint firstItem="1238" firstAttribute="leading" secondItem="MRm-h9-mFg" secondAttribute="leading" id="wF2-4m-db3"/>
-                                            <constraint firstItem="1238" firstAttribute="top" secondItem="MRm-h9-mFg" secondAttribute="top" priority="600" id="wxL-HK-aKe"/>
+                                            <constraint firstItem="1238" firstAttribute="top" secondItem="MRm-h9-mFg" secondAttribute="top" id="wxL-HK-aKe"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="disclosedView" destination="1238" id="1dg-Zo-wDL"/>
