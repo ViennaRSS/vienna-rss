@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -2998,7 +2998,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = uk.co.opencommunity;
 				TargetAttributes = {
 					035B703419E0E4AE00197334 = {
@@ -3008,7 +3008,7 @@
 				};
 			};
 			buildConfigurationList = AA4F9AB60855422400C18279 /* Build configuration list for PBXProject "Vienna" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -7182,6 +7182,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 432E5192165D65AF00A8640E /* Project-All.xcconfig */;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = StaticAnalyzer;
@@ -7279,6 +7283,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 432E5192165D65AF00A8640E /* Project-All.xcconfig */;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Development;
@@ -7287,6 +7297,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 432E5192165D65AF00A8640E /* Project-All.xcconfig */;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Deployment;
