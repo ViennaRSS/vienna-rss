@@ -1159,9 +1159,6 @@ CA
                         <real value="250"/>
                         <real value="250"/>
                     </holdingPriorities>
-                    <connections>
-                        <outlet property="delegate" destination="HRR-OU-3yj" id="Khq-3b-gvv"/>
-                    </connections>
                 </splitView>
             </subviews>
             <constraints>
