@@ -239,12 +239,12 @@
                                             <outlet property="disclosedView" destination="1300" id="TAx-ZZ-EUW"/>
                                         </connections>
                                     </customView>
-                                    <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="1218">
+                                    <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="1218" userLabel="Tab View">
                                         <rect key="frame" x="0.0" y="0.0" width="653" height="553"/>
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
                                             <tabViewItem identifier="1" id="1221">
-                                                <view key="view" id="1222">
+                                                <view key="view" id="1222" userLabel="Detail View">
                                                     <rect key="frame" x="0.0" y="0.0" width="653" height="553"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
