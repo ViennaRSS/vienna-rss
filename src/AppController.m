@@ -1116,12 +1116,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		Preferences * prefs = [Preferences standardPreferences];
 		
 		BOOL openInBackground = prefs.openLinksInBackground;
-		
-		/* As Safari does, 'shift' inverts this behavior. Use GetCurrentKeyModifiers() because [NSApp currentEvent] was created
-		 * when the current event began, which may be when the contexual menu opened.
-		 */
-		if (((GetCurrentKeyModifiers() & (shiftKey | rightShiftKey)) != 0))
+        if ([NSEvent modifierFlags] & NSEventModifierFlagShift) {
 			openInBackground = !openInBackground;
+        }
 		
 		[self createNewTab:item.representedObject inBackground:openInBackground];
 	}
@@ -1186,13 +1183,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	if (openURLInVienna)
 	{
 		BOOL openInBackground = prefs.openLinksInBackground;
-		
-		/* As Safari does, 'shift' inverts this behavior. Use GetCurrentKeyModifiers() because [NSApp currentEvent] was created
-		 * when the current event began, which may be when the contexual menu opened.
-		 */
-		if (((GetCurrentKeyModifiers() & (shiftKey | rightShiftKey)) != 0))
-			openInBackground = !openInBackground;
-		
+        if ([NSEvent modifierFlags] & NSEventModifierFlagShift) {
+            openInBackground = !openInBackground;
+        }
+
 		for (NSURL * url in urls)
 			[self createNewTab:url inBackground:openInBackground];
 	}
@@ -1873,7 +1867,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)keyboardShortcutsHelp:(id)sender
 {
-	GotoHelpPage((CFStringRef)@"keyboard.html", NULL);
+    NSString *helpBook = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleHelpBookName"];
+    [[NSHelpManager sharedHelpManager] openHelpAnchor:@"KeyboardSection" inBook:helpBook];
 }
 
 /* printDocument
