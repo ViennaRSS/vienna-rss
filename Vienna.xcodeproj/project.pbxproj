@@ -117,7 +117,6 @@
 		430C4ADE166175A00079C9FC /* blankPopupMenuButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADC166175A00079C9FC /* blankPopupMenuButton.tiff */; };
 		430C4ADF166175A00079C9FC /* blankPopupMenuButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADD166175A00079C9FC /* blankPopupMenuButtonPressed.tiff */; };
 		43501F8F165DC5BC0018EDB7 /* PSMTabBarControl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		435021CE165DCB980018EDB7 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021CD165DCB980018EDB7 /* Carbon.framework */; };
 		435021D0165DCB980018EDB7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021CF165DCB980018EDB7 /* Cocoa.framework */; };
 		435021D2165DCB980018EDB7 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D1165DCB980018EDB7 /* IOKit.framework */; };
 		435021D4165DCB980018EDB7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D3165DCB980018EDB7 /* Security.framework */; };
@@ -1645,7 +1644,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EACE4C90147FA2B000A17997 /* PSMTabBarControl.framework in Frameworks */,
-				435021CE165DCB980018EDB7 /* Carbon.framework in Frameworks */,
 				3A9903951993638900EA69B2 /* Growl.framework in Frameworks */,
 				435021D0165DCB980018EDB7 /* Cocoa.framework in Frameworks */,
 				435021D2165DCB980018EDB7 /* IOKit.framework in Frameworks */,
