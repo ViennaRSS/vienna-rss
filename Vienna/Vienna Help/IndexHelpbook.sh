@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Config
-lprojDir="./Vienna/Vienna.help/Contents/Resources"
+lprojDir="${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 lprojList=$(\ls -1 ${lprojDir} | sed -n 's:\.lproj$:&:p' | sed -e 's:\.lproj::')
 
 

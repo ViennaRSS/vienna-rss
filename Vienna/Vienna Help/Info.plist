@@ -5,25 +5,27 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en-us</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.vienna-rss.Vienna.help</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_BUNDLE_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1</string>
+	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>hbwr</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>HPDBookAccessPath</key>
 	<string>Vienna.html</string>
-	<key>HPDBookIndexPath</key>
-	<string>Vienna.helpindex</string>
-  <key>HPDBookTitle</key>
-  <string>Vienna Help</string>
 	<key>HPDBookIconPath</key>
 	<string>shared/images/Vienna-Logo.jpg</string>
+	<key>HPDBookIndexPath</key>
+	<string>Vienna.helpindex</string>
+	<key>HPDBookTitle</key>
+	<string>Vienna Help</string>
 	<key>HPDBookType</key>
 	<string>3</string>
 </dict>
