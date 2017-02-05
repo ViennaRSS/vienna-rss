@@ -68,6 +68,7 @@
 		034981411A20701600014F29 /* AdvancedPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 034981401A20701600014F29 /* AdvancedPreferencesViewController.m */; };
 		035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B703919E0E4AE00197334 /* Vienna_Tests.m */; };
 		035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B704119E0E4DC00197334 /* SubscriptionModelTests.m */; };
+		035FCE6C1E4703E100B9B551 /* Vienna.help in Resources */ = {isa = PBXBuildFile; fileRef = 035FCE6B1E4703E100B9B551 /* Vienna.help */; };
 		03721E591A218CFC009C020C /* GeneralPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03721E5B1A218CFC009C020C /* GeneralPreferencesView.xib */; };
 		03721E6E1A218D4B009C020C /* AppearancePreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03721E701A218D4B009C020C /* AppearancePreferencesView.xib */; };
 		0377BDED1D3A009B00960555 /* BitlyAPIHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377BDEC1D3A009B00960555 /* BitlyAPIHelperTests.swift */; };
@@ -471,6 +472,8 @@
 		035B703819E0E4AE00197334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		035B703919E0E4AE00197334 /* Vienna_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vienna_Tests.m; sourceTree = "<group>"; };
 		035B704119E0E4DC00197334 /* SubscriptionModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionModelTests.m; sourceTree = "<group>"; };
+		035FCE6B1E4703E100B9B551 /* Vienna.help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Vienna.help; path = Vienna/Vienna.help; sourceTree = "<group>"; };
+		035FCE6D1E47070500B9B551 /* IndexHelpbook.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = IndexHelpbook.sh; path = configs/scripts/IndexHelpbook.sh; sourceTree = "<group>"; };
 		0377BDEB1D3A009B00960555 /* Vienna Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vienna Tests-Bridging-Header.h"; sourceTree = "<group>"; };
 		0377BDEC1D3A009B00960555 /* BitlyAPIHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitlyAPIHelperTests.swift; sourceTree = "<group>"; };
 		0379E2361A2082E600D58BFE /* AppearancePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppearancePreferencesViewController.h; path = src/Preferences/AppearancePreferencesViewController.h; sourceTree = "<group>"; };
@@ -626,7 +629,6 @@
 		4398241A1666B37000FFE219 /* Changes-and-Notes.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Changes-and-Notes.sh"; path = "configs/scripts/Changes-and-Notes.sh"; sourceTree = SOURCE_ROOT; };
 		4398241B1666B37000FFE219 /* Make-ID-Template.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Make-ID-Template.sh"; path = "configs/scripts/Make-ID-Template.sh"; sourceTree = SOURCE_ROOT; };
 		4398241C1666B37000FFE219 /* Release-for-upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Release-for-upload.sh"; path = "configs/scripts/Release-for-upload.sh"; sourceTree = SOURCE_ROOT; };
-		4398241D1666B37000FFE219 /* Translations.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = Translations.sh; path = configs/scripts/Translations.sh; sourceTree = SOURCE_ROOT; };
 		4398241E1666B3DB00FFE219 /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = SOURCE_ROOT; };
 		439824201666B3DB00FFE219 /* CHANGES */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES; sourceTree = SOURCE_ROOT; };
 		439824211666B3DB00FFE219 /* DatabaseSchema.doc */ = {isa = PBXFileReference; lastKnownFileType = file; path = DatabaseSchema.doc; sourceTree = SOURCE_ROOT; };
@@ -1458,6 +1460,7 @@
 				43EE754E165E83D6000997FB /* UI Images */,
 				434D6B8516937615008CBE8C /* codesignrequirement.rqset */,
 				430C4AE0166175C20079C9FC /* Vienna-Info.plist */,
+				035FCE6B1E4703E100B9B551 /* Vienna.help */,
 				F62580CA1E286CB60035E43C /* InfoPlist.strings */,
 				F62580A81E286A8B0035E43C /* Localizable.strings */,
 				F62580E21E286CE60035E43C /* KnownSyncServers.plist */,
@@ -1530,10 +1533,10 @@
 				439824181666B37000FFE219 /* Acknowledgements.sh */,
 				439824191666B37000FFE219 /* autorevision.sh */,
 				4398241A1666B37000FFE219 /* Changes-and-Notes.sh */,
+				035FCE6D1E47070500B9B551 /* IndexHelpbook.sh */,
 				4398241B1666B37000FFE219 /* Make-ID-Template.sh */,
 				4398241C1666B37000FFE219 /* Release-for-upload.sh */,
 				3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */,
-				4398241D1666B37000FFE219 /* Translations.sh */,
 			);
 			name = Scripts;
 			sourceTree = "<group>";
@@ -2015,11 +2018,11 @@
 				748E656D897F801A815D8AFA /* [CP] Check Pods Manifest.lock */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
+				43EE8617165EF9D7000997FB /* Index help book */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
 				3A5482F6168F5C1700887F91 /* Sparkle autoupdate setup */,
 				AAEF2001085D685900A0E675 /* Copy Shared Support Files */,
 				52FDC71F0C559C7700F9F29B /* Acknowledgements */,
-				43EE8617165EF9D7000997FB /* Translations */,
 				AA65D27F083CF46F00BC387C /* Copy Frameworks */,
 				BCC8E16C7A087E24AFE60B16 /* [CP] Embed Pods Frameworks */,
 				8966991ADA99E8C138F79C0D /* [CP] Copy Pods Resources */,
@@ -2175,6 +2178,7 @@
 				AAFDB7AF0C0B1516000D1643 /* smartFolder.tiff in Resources */,
 				AAD2BF620C2C41A200AA0F11 /* DBListSplitViewBar.tiff in Resources */,
 				AAD2BF630C2C41A200AA0F11 /* DBListSplitViewDimple.tiff in Resources */,
+				035FCE6C1E4703E100B9B551 /* Vienna.help in Resources */,
 				AAD2C0540C2C882D00AA0F11 /* selBlue.tiff in Resources */,
 				AAD2C0550C2C882D00AA0F11 /* selGray.tiff in Resources */,
 				AA16C2B10C2D57D5006BBAC1 /* draggerImage.png in Resources */,
@@ -2340,19 +2344,19 @@
 			shellPath = /bin/sh;
 			shellScript = ". configs/scripts/Make-ID-Template.sh";
 		};
-		43EE8617165EF9D7000997FB /* Translations */ = {
+		43EE8617165EF9D7000997FB /* Index help book */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = Translations;
+			name = "Index help book";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = ". configs/scripts/Translations.sh";
+			shellScript = ". configs/scripts/IndexHelpbook.sh";
 		};
 		52BA63FB0DE9E2E10008B3E1 /* Build Notes */ = {
 			isa = PBXShellScriptBuildPhase;
