@@ -19,11 +19,7 @@
 
 #import "HelperFunctions.h"
 #import <SystemConfiguration/SCNetworkReachability.h>
-#import <Carbon/Carbon.h>
 #import <WebKit/WebKit.h>
-
-// Private functions
-static OSStatus RegisterMyHelpBook(void);
 
 /* hasOSScriptsMenu
  * Determines whether the OS script menu is present or not.
@@ -48,15 +44,10 @@ BOOL hasOSScriptsMenu(void)
  */
 NSString * getDefaultBrowser(void)
 {
-	NSURL * testURL = [NSURL URLWithString:@"http://example.net"];
-	NSString * registeredAppURL = nil;
-	CFURLRef appURL = nil;
+    NSURL *testURL = [NSURL URLWithString:@"http://example.net"];
+    NSURL *defaultBrowserURL = [[NSWorkspace sharedWorkspace] URLForApplicationToOpenURL:testURL];
 
-	if (LSGetApplicationForURL((__bridge CFURLRef)testURL, kLSRolesAll, NULL, &appURL) != kLSApplicationNotFoundErr)
-		registeredAppURL = ((__bridge NSURL *)appURL).path;
-	if (appURL != nil)
-		CFRelease(appURL);
-	return registeredAppURL.lastPathComponent.stringByDeletingPathExtension;
+    return defaultBrowserURL.lastPathComponent.stringByDeletingPathExtension;
 }
 
 /* menuWithAction
@@ -253,63 +244,4 @@ void runOKAlertSheet(NSString * titleString, NSString * bodyText, ...)
     }];
     
 	va_end(arguments);
-}
-
-/* RegisterMyHelpBook
- * Ensure that the help book is registered before GotoHelpPage can be used.
- */
-static OSStatus RegisterMyHelpBook(void)
-{
-    OSStatus err = noErr;
-
-    CFBundleRef myApplicationBundle = CFBundleGetMainBundle();
-	if (myApplicationBundle == NULL)
-		err = fnfErr;
-	else
-	{
-		CFURLRef myBundleURL = CFBundleCopyBundleURL(myApplicationBundle);
-		if (myBundleURL == NULL)
-			err = fnfErr;
-		else
-		{
-			FSRef myBundleRef;
-			if (!CFURLGetFSRef(myBundleURL, &myBundleRef))
-				err = fnfErr;
-			if (err == noErr)
-				err = AHRegisterHelpBook(&myBundleRef);
-			CFRelease(myBundleURL);
-		}
-	}
-	return err;
-}
-
-/* GotoHelpPage
- * Displays a specified page of the help file.
- */
-OSStatus GotoHelpPage (CFStringRef pagePath, CFStringRef anchorName)
-{
-    CFBundleRef myApplicationBundle = NULL;
-    CFStringRef myBookName = NULL;
-    OSStatus err;
-
-	err = RegisterMyHelpBook();
-	if (err != noErr)
-		return err;
-    myApplicationBundle = CFBundleGetMainBundle();
-	if (myApplicationBundle == NULL)
-		err = fnfErr;
-	else
-	{
-		myBookName = CFBundleGetValueForInfoDictionaryKey(myApplicationBundle, CFSTR("CFBundleHelpBookName"));
-		if (myBookName == NULL)
-			err = fnfErr;
-		else
-		{
-			if (CFGetTypeID(myBookName) != CFStringGetTypeID())
-				err = paramErr;
-		}
-	}
-	if (err == noErr)
-		err = AHGotoPage(myBookName, pagePath, anchorName);
-	return err;
 }

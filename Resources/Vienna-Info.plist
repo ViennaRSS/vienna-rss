@@ -56,7 +56,7 @@
 	<key>CFBundleGetInfoString</key>
 	<string>Vienna version VCS_TAG :VCS_SHORT_HASH:, Copyright 2004-2016 Contributors. See Help/Acknowledgements for list of contributors.</string>
 	<key>CFBundleHelpBookFolder</key>
-	<string>Vienna Help</string>
+	<string>Vienna.help</string>
 	<key>CFBundleHelpBookName</key>
 	<string>Vienna Help</string>
 	<key>CFBundleIdentifier</key>

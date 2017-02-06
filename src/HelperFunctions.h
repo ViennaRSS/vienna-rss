@@ -47,5 +47,4 @@ NSMenuItem * copyOfMenuItemWithAction(SEL theSelector);
 NSString * getDefaultBrowser(void);
 NSURL * cleanedUpAndEscapedUrlFromString(NSString * theUrl);
 BOOL hasOSScriptsMenu(void);
-OSStatus GotoHelpPage(CFStringRef pagePath, CFStringRef anchorName);
 NSString * percentEscape(NSString *string);

@@ -40,6 +40,8 @@
 # profile - REMOVED temporarily (on double-checking, this seems incorrect; I can't find it in OS X docs?)
 #profile
 
+# Help indexes
+Vienna/**/*.helpindex
 
 ####
 # Xcode temporary files that should never be committed
@@ -172,4 +174,3 @@ configs/CS-ID.xcconfig
 src/autorevision.h
 # someone seems to keep personal notes in this file
 .idea
-
