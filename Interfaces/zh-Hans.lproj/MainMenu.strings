@@ -120,7 +120,7 @@
 "184.title" = "拼写";
 
 /* Class = "NSMenu"; title = "Spelling"; ObjectID = "185"; */
-"185.title" = "拼写";
+"fad-Nj-OFI.title" = "拼写";
 
 /* Class = "NSMenuItem"; title = "Spelling…"; ObjectID = "187"; */
 "187.title" = "拼写…";
@@ -275,8 +275,8 @@
 /* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
 "1085.title" = "缩小文章字体";
 
-/* Class = "NSMenuItem"; title = "Open Web Location..."; ObjectID = "1101"; */
-"1101.title" = "打开网络地址...";
+/* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
+"1101.title" = "打开网络地址…";
 
 /* Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "1104"; */
 "1104.title" = "核查更新";
@@ -350,8 +350,8 @@
 /* Class = "NSTabViewItem"; label = "Tab"; ObjectID = "1221"; */
 "1221.label" = "Tab";
 
-/* Class = "NSMenuItem"; title = "Customize Toolbar..."; ObjectID = "1257"; */
-"1257.title" = "自定义工具栏...";
+/* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
+"1257.title" = "自定义工具栏…";
 
 /* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
 "1258.title" = "Hide Toolbar";
@@ -416,8 +416,8 @@
 /* Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408"; */
 "1408.title" = "取消频道订阅";
 
-/* Class = "NSMenuItem"; title = "Get Info..."; ObjectID = "1409"; */
-"1409.title" = "获取信息...";
+/* Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409"; */
+"1409.title" = "获取信息…";
 
 /* Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413"; */
 "1413.title" = "Use Current Style for Articles";

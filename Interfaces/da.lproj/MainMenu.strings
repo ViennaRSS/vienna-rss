@@ -120,7 +120,7 @@
 "184.title" = "Stavekontrol";
 
 /* Class = "NSMenu"; title = "Spelling"; ObjectID = "185"; */
-"185.title" = "Stavekontrol";
+"fad-Nj-OFI.title" = "Stavekontrol";
 
 /* Class = "NSMenuItem"; title = "Spelling…"; ObjectID = "187"; */
 "187.title" = "Stavekontrol…";
@@ -275,8 +275,8 @@
 /* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
 "1085.title" = "Mindre tekst";
 
-/* Class = "NSMenuItem"; title = "Open Web Location..."; ObjectID = "1101"; */
-"1101.title" = "Åben Internet lokation...";
+/* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
+"1101.title" = "Åben Internet lokation…";
 
 /* Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "1104"; */
 "1104.title" = "Tjek for opdateringer";
@@ -350,8 +350,8 @@
 /* Class = "NSTabViewItem"; label = "Tab"; ObjectID = "1221"; */
 "1221.label" = "Tab";
 
-/* Class = "NSMenuItem"; title = "Customize Toolbar..."; ObjectID = "1257"; */
-"1257.title" = "Indstil værktøjslinie...";
+/* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
+"1257.title" = "Indstil værktøjslinie…";
 
 /* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
 "1258.title" = "Hide Toolbar";
@@ -416,8 +416,8 @@
 /* Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408"; */
 "1408.title" = "Af-abonner feedet";
 
-/* Class = "NSMenuItem"; title = "Get Info..."; ObjectID = "1409"; */
-"1409.title" = "Vis info...";
+/* Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409"; */
+"1409.title" = "Vis info…";
 
 /* Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413"; */
 "1413.title" = "Brug den nuværende stil til artikler";

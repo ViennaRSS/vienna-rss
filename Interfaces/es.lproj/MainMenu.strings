@@ -30,7 +30,7 @@
 "77.title" = "Configurar página…";
 
 /* Class = "NSMenuItem"; title = "Print…"; ObjectID = "78"; */
-"78.title" = "Imprimir...";
+"78.title" = "Imprimir…";
 
 /* Class = "NSMenu"; title = "File"; ObjectID = "81"; */
 "81.title" = "Archivo";
@@ -48,7 +48,7 @@
 "111.title" = "Ayuda de Vienna";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
-"129.title" = "Preferencias...";
+"129.title" = "Preferencias…";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
 "130.title" = "Servicios";
@@ -69,7 +69,7 @@
 "150.title" = "Mostrar todo";
 
 /* Class = "NSMenuItem"; title = "Find…"; ObjectID = "154"; */
-"154.title" = "Buscar...";
+"154.title" = "Buscar…";
 
 /* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "155"; */
 "155.title" = "Ir a la selección";
@@ -120,10 +120,10 @@
 "184.title" = "Ortografía";
 
 /* Class = "NSMenu"; title = "Spelling"; ObjectID = "185"; */
-"185.title" = "Ortografía";
+"fad-Nj-OFI.title" = "Ortografía";
 
 /* Class = "NSMenuItem"; title = "Spelling…"; ObjectID = "187"; */
-"187.title" = "Ortografía...";
+"187.title" = "Ortografía…";
 
 /* Class = "NSMenuItem"; title = "Check Spelling"; ObjectID = "189"; */
 "189.title" = "Comprobar ortografía";
@@ -174,7 +174,7 @@
 "443.title" = "Columnas";
 
 /* Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "574"; */
-"574.title" = "Nueva carpeta inteligente...";
+"574.title" = "Nueva carpeta inteligente…";
 
 /* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "604"; */
 "604.title" = "Actualizar suscripciones seleccionadas";
@@ -183,13 +183,13 @@
 "682.title" = "Agradecimientos";
 
 /* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "690"; */
-"690.title" = "Nueva suscripción...";
+"690.title" = "Nueva suscripción…";
 
 /* Class = "NSMenuItem"; title = "Import Subscriptions…"; ObjectID = "780"; */
-"780.title" = "Importar suscripciones...";
+"780.title" = "Importar suscripciones…";
 
 /* Class = "NSMenuItem"; title = "Export Subscriptions…"; ObjectID = "781"; */
-"781.title" = "Exportar suscripciones...";
+"781.title" = "Exportar suscripciones…";
 
 /* Class = "NSMenuItem"; title = "Mark Unread"; ObjectID = "789"; */
 "789.title" = "Marcar como no leído";
@@ -198,7 +198,7 @@
 "790.title" = "Marcar como destacado";
 
 /* Class = "NSMenuItem"; title = "New Group Folder…"; ObjectID = "806"; */
-"806.title" = "Nueva carpeta de grupo...";
+"806.title" = "Nueva carpeta de grupo…";
 
 /* Class = "NSMenuItem"; title = "Style"; ObjectID = "826"; */
 "826.title" = "Estilo";
@@ -275,8 +275,8 @@
 /* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
 "1085.title" = "Reducir tamaño del texto";
 
-/* Class = "NSMenuItem"; title = "Open Web Location..."; ObjectID = "1101"; */
-"1101.title" = "Abrir ubicación...";
+/* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
+"1101.title" = "Abrir ubicación…";
 
 /* Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "1104"; */
 "1104.title" = "Buscar actualizaciones";
@@ -315,13 +315,13 @@
 "1178.title" = "Carpeta";
 
 /* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "1180"; */
-"1180.title" = "Editar...";
+"1180.title" = "Editar…";
 
 /* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "1181"; */
-"1181.title" = "Renombrar...";
+"1181.title" = "Renombrar…";
 
 /* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "1184"; */
-"1184.title" = "Eliminar...";
+"1184.title" = "Eliminar…";
 
 /* Class = "NSMenuItem"; title = "Skip Folder"; ObjectID = "1186"; */
 "1186.title" = "Omitir carpeta";
@@ -350,8 +350,8 @@
 /* Class = "NSTabViewItem"; label = "Tab"; ObjectID = "1221"; */
 "1221.label" = "Tab";
 
-/* Class = "NSMenuItem"; title = "Customize Toolbar..."; ObjectID = "1257"; */
-"1257.title" = "Personalizar barra de herramientas...";
+/* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
+"1257.title" = "Personalizar barra de herramientas…";
 
 /* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
 "1258.title" = "Ocultar barra de herramientas";
@@ -416,8 +416,8 @@
 /* Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408"; */
 "1408.title" = "Cancelar suscripción";
 
-/* Class = "NSMenuItem"; title = "Get Info..."; ObjectID = "1409"; */
-"1409.title" = "Obtener información...";
+/* Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409"; */
+"1409.title" = "Obtener información…";
 
 /* Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413"; */
 "1413.title" = "Usar estilo actual para artículos";

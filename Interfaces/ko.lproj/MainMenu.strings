@@ -27,10 +27,10 @@
 "58.title" = "Vienna 에 관하여";
 
 /* Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "77"; */
-"77.title" = "페이지 설정...";
+"77.title" = "페이지 설정…";
 
 /* Class = "NSMenuItem"; title = "Print…"; ObjectID = "78"; */
-"78.title" = "프린트...";
+"78.title" = "프린트…";
 
 /* Class = "NSMenu"; title = "File"; ObjectID = "81"; */
 "81.title" = "파일";
@@ -48,7 +48,7 @@
 "111.title" = "Vienna 도움말";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
-"129.title" = "환경설정...";
+"129.title" = "환경설정…";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
 "130.title" = "서비스";
@@ -69,7 +69,7 @@
 "150.title" = "모두 보이기";
 
 /* Class = "NSMenuItem"; title = "Find…"; ObjectID = "154"; */
-"154.title" = "찾기...";
+"154.title" = "찾기…";
 
 /* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "155"; */
 "155.title" = "선택 부분으로 이동";
@@ -120,10 +120,10 @@
 "184.title" = "철자 검사";
 
 /* Class = "NSMenu"; title = "Spelling"; ObjectID = "185"; */
-"185.title" = "철자 검사";
+"fad-Nj-OFI.title" = "철자 검사";
 
 /* Class = "NSMenuItem"; title = "Spelling…"; ObjectID = "187"; */
-"187.title" = "철자 검사...";
+"187.title" = "철자 검사…";
 
 /* Class = "NSMenuItem"; title = "Check Spelling"; ObjectID = "189"; */
 "189.title" = "철자 검사";
@@ -174,7 +174,7 @@
 "443.title" = "열";
 
 /* Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "574"; */
-"574.title" = "새 스마트 폴더...";
+"574.title" = "새 스마트 폴더…";
 
 /* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "604"; */
 "604.title" = "선택된 구독 갱신";
@@ -183,13 +183,13 @@
 "682.title" = "감사의 말";
 
 /* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "690"; */
-"690.title" = "새 구독...";
+"690.title" = "새 구독…";
 
 /* Class = "NSMenuItem"; title = "Import Subscriptions…"; ObjectID = "780"; */
-"780.title" = "구독 가져오기...";
+"780.title" = "구독 가져오기…";
 
 /* Class = "NSMenuItem"; title = "Export Subscriptions…"; ObjectID = "781"; */
-"781.title" = "구독 내보내기...";
+"781.title" = "구독 내보내기…";
 
 /* Class = "NSMenuItem"; title = "Mark Unread"; ObjectID = "789"; */
 "789.title" = "읽지 않음으로 표시";
@@ -198,7 +198,7 @@
 "790.title" = "깃발 표시";
 
 /* Class = "NSMenuItem"; title = "New Group Folder…"; ObjectID = "806"; */
-"806.title" = "새 그룹 폴더...";
+"806.title" = "새 그룹 폴더…";
 
 /* Class = "NSMenuItem"; title = "Style"; ObjectID = "826"; */
 "826.title" = "스타일";
@@ -275,11 +275,11 @@
 /* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
 "1085.title" = "텍스트 작게";
 
-/* Class = "NSMenuItem"; title = "Open Web Location..."; ObjectID = "1101"; */
-"1101.title" = "웹 주소 열기...";
+/* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
+"1101.title" = "웹 주소 열기…";
 
 /* Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "1104"; */
-"1104.title" = "업데이트 확인...";
+"1104.title" = "업데이트 확인…";
 
 /* Class = "NSMenuItem"; title = "Refresh Folder Images"; ObjectID = "1106"; */
 "1106.title" = "구독 이미지 갱신";
@@ -315,13 +315,13 @@
 "1178.title" = "구독";
 
 /* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "1180"; */
-"1180.title" = "편집...";
+"1180.title" = "편집…";
 
 /* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "1181"; */
-"1181.title" = "이름 변경...";
+"1181.title" = "이름 변경…";
 
 /* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "1184"; */
-"1184.title" = "삭제...";
+"1184.title" = "삭제…";
 
 /* Class = "NSMenuItem"; title = "Skip Folder"; ObjectID = "1186"; */
 "1186.title" = "구독 생략";
@@ -350,8 +350,8 @@
 /* Class = "NSTabViewItem"; label = "Tab"; ObjectID = "1221"; */
 "1221.label" = "Tab";
 
-/* Class = "NSMenuItem"; title = "Customize Toolbar..."; ObjectID = "1257"; */
-"1257.title" = "Customize Toolbar...";
+/* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
+"1257.title" = "Customize Toolbar…";
 
 /* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
 "1258.title" = "Hide Toolbar";
@@ -416,8 +416,8 @@
 /* Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408"; */
 "1408.title" = "Unsubscribe from Feed";
 
-/* Class = "NSMenuItem"; title = "Get Info..."; ObjectID = "1409"; */
-"1409.title" = "정보 입수...";
+/* Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409"; */
+"1409.title" = "정보 입수…";
 
 /* Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413"; */
 "1413.title" = "Use Current Style for Articles";
