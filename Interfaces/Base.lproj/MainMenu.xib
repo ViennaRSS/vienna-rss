@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
@@ -368,7 +368,7 @@
                             </menuItem>
                             <menuItem title="Preferences…" keyEquivalent="," id="129">
                                 <connections>
-                                    <action selector="showPreferencePanel:" target="233" id="234"/>
+                                    <action selector="showWindow:" target="HLa-Gy-vMd" id="Fid-tD-rC8"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Check for Updates" id="1104">
@@ -1485,6 +1485,7 @@ CA
                 <outlet property="outlineView" destination="Kk7-ax-B3r" id="O2z-Mf-33v"/>
             </connections>
         </customObject>
+        <customObject id="HLa-Gy-vMd" customClass="PreferencesWindowController"/>
     </objects>
     <resources>
         <image name="filter-icon" width="16" height="16"/>
