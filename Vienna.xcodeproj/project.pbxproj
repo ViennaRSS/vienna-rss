@@ -383,6 +383,7 @@
 		F6D572B41E26AA9900CDA909 /* InfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B61E26AA9900CDA909 /* InfoWindow.xib */; };
 		F6D572B71E26AAA100CDA909 /* RSSFeed.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B91E26AAA100CDA909 /* RSSFeed.xib */; };
 		F6D572BA1E26AAA900CDA909 /* SearchFolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572BC1E26AAA900CDA909 /* SearchFolder.xib */; };
+		F6EB261C1E5BA59300570B22 /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6EB261B1E5BA59300570B22 /* PreferencesWindowController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1353,6 +1354,8 @@
 		F6D5739F1E2706B500CDA909 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6D573A01E2706BA00CDA909 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6D573A11E2706BC00CDA909 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoWindow.strings; sourceTree = "<group>"; };
+		F6EB261A1E5BA59300570B22 /* PreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreferencesWindowController.h; path = src/Preferences/PreferencesWindowController.h; sourceTree = "<group>"; };
+		F6EB261B1E5BA59300570B22 /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreferencesWindowController.m; path = src/Preferences/PreferencesWindowController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1945,6 +1948,8 @@
 			children = (
 				AA9FE2EB08BC133600A9E977 /* Preferences.h */,
 				AA9FE2EC08BC133600A9E977 /* Preferences.m */,
+				F6EB261A1E5BA59300570B22 /* PreferencesWindowController.h */,
+				F6EB261B1E5BA59300570B22 /* PreferencesWindowController.m */,
 				0349813C1A206FD900014F29 /* GeneralPreferencesViewController.h */,
 				0349813D1A206FD900014F29 /* GeneralPreferencesViewController.m */,
 				0379E2361A2082E600D58BFE /* AppearancePreferencesViewController.h */,
@@ -2780,6 +2785,7 @@
 				4350289B165DE9E00018EDB7 /* ArticleView.m in Sources */,
 				4350289C165DE9E00018EDB7 /* BrowserPane.m in Sources */,
 				4350289D165DE9E00018EDB7 /* BrowserPaneTemplate.m in Sources */,
+				F6EB261C1E5BA59300570B22 /* PreferencesWindowController.m in Sources */,
 				4350289E165DE9E00018EDB7 /* BrowserView.m in Sources */,
 				4350289F165DE9E00018EDB7 /* Constants.m in Sources */,
 				034981411A20701600014F29 /* AdvancedPreferencesViewController.m in Sources */,
