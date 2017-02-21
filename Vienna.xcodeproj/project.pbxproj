@@ -118,11 +118,6 @@
 		430C4ADE166175A00079C9FC /* blankPopupMenuButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADC166175A00079C9FC /* blankPopupMenuButton.tiff */; };
 		430C4ADF166175A00079C9FC /* blankPopupMenuButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADD166175A00079C9FC /* blankPopupMenuButtonPressed.tiff */; };
 		43501F8F165DC5BC0018EDB7 /* PSMTabBarControl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		435021D0165DCB980018EDB7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021CF165DCB980018EDB7 /* Cocoa.framework */; };
-		435021D2165DCB980018EDB7 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D1165DCB980018EDB7 /* IOKit.framework */; };
-		435021D4165DCB980018EDB7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D3165DCB980018EDB7 /* Security.framework */; };
-		435021D6165DCB980018EDB7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D5165DCB980018EDB7 /* SystemConfiguration.framework */; };
-		435021D8165DCB980018EDB7 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D7165DCB980018EDB7 /* WebKit.framework */; };
 		435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 435026E5165DD8BE0018EDB7 /* ArticleRef.m */; };
 		4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */; };
 		43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502848165DE9DF0018EDB7 /* ActivityLog.m */; };
@@ -970,14 +965,6 @@
 		43501CF9165D73C70018EDB7 /* Vienna-All.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-All.xcconfig"; path = "configs/Vienna-All.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43501CFA165D73C70018EDB7 /* Vienna-Dep.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-Dep.xcconfig"; path = "configs/Vienna-Dep.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43501CFB165D73C70018EDB7 /* Vienna-Dev.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-Dev.xcconfig"; path = "configs/Vienna-Dev.xcconfig"; sourceTree = SOURCE_ROOT; };
-		435021CD165DCB980018EDB7 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
-		435021CF165DCB980018EDB7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		435021D1165DCB980018EDB7 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
-		435021D3165DCB980018EDB7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		435021D5165DCB980018EDB7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		435021D7165DCB980018EDB7 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		43502504165DCC410018EDB7 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		43502506165DCC410018EDB7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		435026E5165DD8BE0018EDB7 /* ArticleRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ArticleRef.m; path = src/ArticleRef.m; sourceTree = SOURCE_ROOT; };
 		4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSNotificationAdditions.m; path = src/NSNotificationAdditions.m; sourceTree = SOURCE_ROOT; };
 		43502845165DE9560018EDB7 /* RenameFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenameFolder.h; path = src/RenameFolder.h; sourceTree = SOURCE_ROOT; };
@@ -1784,12 +1771,6 @@
 			files = (
 				EACE4C90147FA2B000A17997 /* PSMTabBarControl.framework in Frameworks */,
 				3A9903951993638900EA69B2 /* Growl.framework in Frameworks */,
-				435021D0165DCB980018EDB7 /* Cocoa.framework in Frameworks */,
-				435021D2165DCB980018EDB7 /* IOKit.framework in Frameworks */,
-				435021D4165DCB980018EDB7 /* Security.framework in Frameworks */,
-				435021D6165DCB980018EDB7 /* SystemConfiguration.framework in Frameworks */,
-				435021D8165DCB980018EDB7 /* WebKit.framework in Frameworks */,
-				43BA97DB1664766800B95F35 /* DisclosableView.framework in Frameworks */,
 				C6CB717DFD24F9D27350D042 /* libPods-Vienna.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1859,21 +1840,6 @@
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
-		};
-		1058C7A6FEA54F5311CA2CBB /* System Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				43502504165DCC410018EDB7 /* AppKit.framework */,
-				435021CD165DCB980018EDB7 /* Carbon.framework */,
-				435021CF165DCB980018EDB7 /* Cocoa.framework */,
-				43502506165DCC410018EDB7 /* Foundation.framework */,
-				435021D1165DCB980018EDB7 /* IOKit.framework */,
-				435021D3165DCB980018EDB7 /* Security.framework */,
-				435021D5165DCB980018EDB7 /* SystemConfiguration.framework */,
-				435021D7165DCB980018EDB7 /* WebKit.framework */,
-			);
-			name = "System Frameworks";
-			sourceTree = SOURCE_ROOT;
 		};
 		19C28FB0FE9D524F11CA2CBB /* Products */ = {
 			isa = PBXGroup;
@@ -2034,15 +2000,6 @@
 				43D4D6F9166FE0DB00BA9675 /* Vienna-StaticAnalyzer.xcconfig */,
 			);
 			name = Configs;
-			sourceTree = SOURCE_ROOT;
-		};
-		43501F70165DB92B0018EDB7 /* External Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3A9903941993638900EA69B2 /* Growl.framework */,
-				EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */,
-			);
-			name = "External Frameworks";
 			sourceTree = SOURCE_ROOT;
 		};
 		43501F8D165DB9DD0018EDB7 /* Third Party */ = {
@@ -2732,9 +2689,9 @@
 		7F60B6D7AEFB47009A82F8BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A9903941993638900EA69B2 /* Growl.framework */,
+				EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */,
 				7A3781B9326123EE56347D35 /* libPods-Vienna.a */,
-				43501F70165DB92B0018EDB7 /* External Frameworks */,
-				1058C7A6FEA54F5311CA2CBB /* System Frameworks */,
 				BA0CEAD1B45DBBF666A25250 /* libPods-Vienna Tests.a */,
 			);
 			name = Frameworks;
