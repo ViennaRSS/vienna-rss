@@ -385,8 +385,8 @@
 		F62580E11E286CDE0035E43C /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = F62580DF1E286CDE0035E43C /* errorpage.html */; };
 		F62580E41E286CE60035E43C /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = F62580E21E286CE60035E43C /* KnownSyncServers.plist */; };
 		F62580E71E286CEC0035E43C /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = F62580E51E286CEC0035E43C /* RSSSources.plist */; };
-		F62581281E2888D00035E43C /* XMLSource.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625812A1E2888D00035E43C /* XMLSource.xib */; };
-		F625812B1E288EBC0035E43C /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625812D1E288EBC0035E43C /* SearchPanel.xib */; };
+		F62581431E29B9040035E43C /* XMLSource.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581421E29B9040035E43C /* XMLSource.xib */; };
+		F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581441E29B90A0035E43C /* SearchPanel.xib */; };
 		F6D572AB1E26AA8200CDA909 /* EmptyTrashWarning.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572AD1E26AA8200CDA909 /* EmptyTrashWarning.xib */; };
 		F6D572AE1E26AA8A00CDA909 /* FeedCredentials.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */; };
 		F6D572B11E26AA9000CDA909 /* GroupFolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B31E26AA9000CDA909 /* GroupFolder.xib */; };
@@ -1309,8 +1309,8 @@
 		F62581121E286D990035E43C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = Interfaces/fr.lproj/errorpage.html; sourceTree = "<group>"; };
 		F62581161E286DA60035E43C /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = nl; path = Interfaces/nl.lproj/errorpage.html; sourceTree = "<group>"; };
 		F625811F1E286E390035E43C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = Interfaces/ru.lproj/errorpage.html; sourceTree = "<group>"; };
-		F62581291E2888D00035E43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/XMLSource.xib; sourceTree = "<group>"; };
-		F625812C1E288EBC0035E43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SearchPanel.xib; sourceTree = "<group>"; };
+		F62581421E29B9040035E43C /* XMLSource.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XMLSource.xib; path = Interfaces/XMLSource.xib; sourceTree = "<group>"; };
+		F62581441E29B90A0035E43C /* SearchPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchPanel.xib; path = Interfaces/SearchPanel.xib; sourceTree = "<group>"; };
 		F6352BB81E2706DD005CD307 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6352BB91E2706E1005CD307 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6352BBA1E2706EB005CD307 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoWindow.strings"; sourceTree = "<group>"; };
@@ -1836,14 +1836,14 @@
 			children = (
 				0386A5BD1E1FA586000C10CE /* MainMenu.xib */,
 				0386A5BB1E1FA586000C10CE /* BrowserPane.xib */,
-				F625812D1E288EBC0035E43C /* SearchPanel.xib */,
+				F62581441E29B90A0035E43C /* SearchPanel.xib */,
 				F6D572AD1E26AA8200CDA909 /* EmptyTrashWarning.xib */,
 				F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */,
 				F6D572B31E26AA9000CDA909 /* GroupFolder.xib */,
 				F6D572B91E26AAA100CDA909 /* RSSFeed.xib */,
 				F6D572BC1E26AAA900CDA909 /* SearchFolder.xib */,
 				F6D572B61E26AA9900CDA909 /* InfoWindow.xib */,
-				F625812A1E2888D00035E43C /* XMLSource.xib */,
+				F62581421E29B9040035E43C /* XMLSource.xib */,
 				F625801E1E2853B90035E43C /* ActivityViewer.xib */,
 				F6257FF71E28485F0035E43C /* Downloads.xib */,
 				034981351A206E3C00014F29 /* Preferences */,
@@ -2491,7 +2491,6 @@
 				03493D2F1A303C1000AA3F36 /* AdvancedPreferencesView.xib in Resources */,
 				F625801C1E2853B90035E43C /* ActivityViewer.xib in Resources */,
 				03493D1A1A303BF700AA3F36 /* SyncingPreferencesView.xib in Resources */,
-				F62581281E2888D00035E43C /* XMLSource.xib in Resources */,
 				0386A5C31E1FA586000C10CE /* MainMenu.xib in Resources */,
 				F6D572AE1E26AA8A00CDA909 /* FeedCredentials.xib in Resources */,
 				03721E591A218CFC009C020C /* GeneralPreferencesView.xib in Resources */,
@@ -2593,6 +2592,7 @@
 				AA077A9C0C84484B00D71D26 /* mailLinkButtonSmallPressed.tiff in Resources */,
 				AA077A9D0C84484B00D71D26 /* nextButtonSmall.tiff in Resources */,
 				AA077A9E0C84484B00D71D26 /* nextButtonSmallPressed.tiff in Resources */,
+				F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */,
 				AA077A9F0C84484B00D71D26 /* popupMenuButtonSmall.tiff in Resources */,
 				AA077AA00C84484B00D71D26 /* popupMenuButtonSmallPressed.tiff in Resources */,
 				AA077AA10C84484B00D71D26 /* previousButtonSmall.tiff in Resources */,
@@ -2609,6 +2609,7 @@
 				AA077AA90C84484B00D71D26 /* stylesMenuButtonSmall.tiff in Resources */,
 				AA077AAA0C84484B00D71D26 /* stylesMenuButtonSmallPressed.tiff in Resources */,
 				AA077AAB0C84484B00D71D26 /* subscribeButtonSmall.tiff in Resources */,
+				F62581431E29B9040035E43C /* XMLSource.xib in Resources */,
 				AA077AAC0C84484B00D71D26 /* subscribeButtonSmallPressed.tiff in Resources */,
 				B25E53E11067B54600BBF14C /* browserNextButton.tiff in Resources */,
 				B25E53E31067B54600BBF14C /* browserRefreshButton.tiff in Resources */,
@@ -2667,7 +2668,6 @@
 				5740947216F5112B0087870F /* nextButtonSmall@2x.tiff in Resources */,
 				5740947416F5112B0087870F /* mailLinkButtonSmall@2x.tiff in Resources */,
 				5740947616F5112B0087870F /* getInfoButtonSmall@2x.tiff in Resources */,
-				F625812B1E288EBC0035E43C /* SearchPanel.xib in Resources */,
 				5740947816F5112B0087870F /* emptyTrashButtonSmall@2x.tiff in Resources */,
 				5740947A16F5112B0087870F /* cancelRefreshButtonSmall@2x.tiff in Resources */,
 				57F7E2F116F534FE00D4702E /* vienna3plugin.icns in Resources */,
@@ -3358,24 +3358,6 @@
 				F625810C1E286D880035E43C /* zh-Hans */,
 			);
 			name = RSSSources.plist;
-			sourceTree = "<group>";
-		};
-		F625812A1E2888D00035E43C /* XMLSource.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F62581291E2888D00035E43C /* Base */,
-			);
-			name = XMLSource.xib;
-			path = Interfaces;
-			sourceTree = "<group>";
-		};
-		F625812D1E288EBC0035E43C /* SearchPanel.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F625812C1E288EBC0035E43C /* Base */,
-			);
-			name = SearchPanel.xib;
-			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		F6D572AD1E26AA8200CDA909 /* EmptyTrashWarning.xib */ = {
