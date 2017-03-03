@@ -3,6 +3,7 @@ osx_image: xcode8.2
 xcode_workspace: Vienna.xcworkspace
 xcode_scheme: Vienna
 
+before_install: pod repo update
 script: xcodebuild -workspace "$TRAVIS_XCODE_WORKSPACE" -scheme "$TRAVIS_XCODE_SCHEME" test | xcpretty
 
 notifications:
