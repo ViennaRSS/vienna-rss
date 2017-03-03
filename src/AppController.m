@@ -122,7 +122,6 @@
 // Static constant strings that are typically never tweaked
 static const CGFloat MA_Minimum_Folder_Pane_Width = 80.0;
 static const CGFloat MA_Minimum_BrowserView_Pane_Width = 200.0;
-static const CGFloat MA_StatusBarHeight = 23.0;
 
 // Awake from sleep
 static io_connect_t root_port;
@@ -224,15 +223,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		[ASIHTTPRequest setDefaultUserAgentString:[NSString stringWithFormat:MA_DefaultUserAgentString, ((ViennaApp *)NSApp).applicationVersion.firstWord]];
         
 		[foldersTree initialiseFoldersTree];
-		
-		// If the statusbar is hidden, also hide the highlight line on its top and the filter button.
-		if (!self.statusBarVisible)
-		{
-			[cosmeticStatusBarHighlightLine setHidden:YES];
-			[currentFilterTextField setHidden:YES];
-			[filterIconInStatusBarButton setHidden:YES];
-		}
-		
+
 		Preferences * prefs = [Preferences standardPreferences];
 		// Set the initial filter bar state
 		[self setFilterBarState:prefs.showFilterBar withAnimation:NO];
@@ -3900,40 +3891,36 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)setStatusBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate
 {
-	NSRect viewSize = splitView1.frame;
-	if (isStatusBarVisible && !isVisible)
-	{
-		viewSize.size.height += MA_StatusBarHeight;
-		viewSize.origin.y -= MA_StatusBarHeight;
-	}
-	else if (!isStatusBarVisible && isVisible)
-	{
-		viewSize.size.height -= MA_StatusBarHeight;
-		viewSize.origin.y += MA_StatusBarHeight;
-	}
-	if (isStatusBarVisible != isVisible)
-	{
-		if (!doAnimate)
-		{
-			statusText.hidden = !isVisible;
-			splitView1.frame = viewSize;
-		}
-		else
-		{
-			if (!isVisible)
-			{
-				// When hiding the status bar, hide these controls BEFORE
-				// we start hiding the view. Looks cleaner.
-				[statusText setHidden:YES];
-				[currentFilterTextField setHidden:YES];
-				[filterIconInStatusBarButton setHidden:YES];
-				[cosmeticStatusBarHighlightLine setHidden:YES];
-			}
-			[splitView1 resizeViewWithAnimation:viewSize withTag:MA_ViewTag_Statusbar];
-		}
-		[mainWindow display];
-		isStatusBarVisible = isVisible;
-	}
+    if (isStatusBarVisible && !isVisible)
+    {
+        if (doAnimate)
+        {
+            [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context)
+            {
+                statusBarConstraint.animator.constant = 0;
+            }
+            completionHandler:^
+            {
+                isStatusBarVisible = NO;
+
+                // If the animation is interrupted, don't hide the content border
+                if (statusBarConstraint.constant == 0)
+                    [mainWindow setContentBorderThickness:0 forEdge:NSMinYEdge];
+            }];
+        }
+        else
+        {
+            statusBarConstraint.constant = 0;
+            [mainWindow setContentBorderThickness:0 forEdge:NSMinYEdge];
+            isStatusBarVisible = NO;
+        }
+    }
+    else if (!isStatusBarVisible && isVisible)
+    {
+        [mainWindow setContentBorderThickness:22 forEdge:NSMinYEdge];
+        (doAnimate ? statusBarConstraint.animator : statusBarConstraint).constant = 22;
+        isStatusBarVisible = YES;
+    }
 }
 
 /* setStatusMessage
@@ -3965,7 +3952,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[statusText setHidden:NO];
 		[currentFilterTextField setHidden:NO];
 		[filterIconInStatusBarButton setHidden:NO];
-		[cosmeticStatusBarHighlightLine setHidden:NO];
 		return;
 	}
 	if (viewTag == MA_ViewTag_Filterbar && self.filterBarVisible)

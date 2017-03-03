@@ -19,7 +19,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "ThinSplitView.h"
 #import "TreeNode.h"
 
 @class FolderView;
@@ -31,7 +30,6 @@
 {
 	IBOutlet AppController * controller;
 	IBOutlet FolderView * outlineView;
-	IBOutlet ThinSplitView * folderSplitView;
 
 	TreeNode * rootNode;
 	NSFont * cellFont;
