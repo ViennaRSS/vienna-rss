@@ -120,7 +120,7 @@
 "184.title" = "Pravopis";
 
 /* Class = "NSMenu"; title = "Spelling"; ObjectID = "185"; */
-"185.title" = "Pravopis";
+"fad-Nj-OFI.title" = "Pravopis";
 
 /* Class = "NSMenuItem"; title = "Spelling…"; ObjectID = "187"; */
 "187.title" = "Pravopis…";
@@ -275,7 +275,7 @@
 /* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
 "1085.title" = "Zmenšit text";
 
-/* Class = "NSMenuItem"; title = "Open Web Location..."; ObjectID = "1101"; */
+/* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
 "1101.title" = "Otevřít webovou adresu…";
 
 /* Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "1104"; */
@@ -350,7 +350,7 @@
 /* Class = "NSTabViewItem"; label = "Tab"; ObjectID = "1221"; */
 "1221.label" = "Tab";
 
-/* Class = "NSMenuItem"; title = "Customize Toolbar..."; ObjectID = "1257"; */
+/* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
 "1257.title" = "Přizpůsobit řádek nástrojů…";
 
 /* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
@@ -416,7 +416,7 @@
 /* Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408"; */
 "1408.title" = "Ukončit odebírání kanálu";
 
-/* Class = "NSMenuItem"; title = "Get Info..."; ObjectID = "1409"; */
+/* Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409"; */
 "1409.title" = "Informace…";
 
 /* Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413"; */

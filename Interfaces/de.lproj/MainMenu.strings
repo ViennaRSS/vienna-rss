@@ -120,7 +120,7 @@
 "184.title" = "Rechtschreibung";
 
 /* Class = "NSMenu"; title = "Spelling"; ObjectID = "185"; */
-"185.title" = "Rechtschreibung";
+"fad-Nj-OFI.title" = "Rechtschreibung";
 
 /* Class = "NSMenuItem"; title = "Spelling…"; ObjectID = "187"; */
 "187.title" = "Rechtschreibung……";
@@ -275,8 +275,8 @@
 /* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
 "1085.title" = "Schrift kleiner";
 
-/* Class = "NSMenuItem"; title = "Open Web Location..."; ObjectID = "1101"; */
-"1101.title" = "Web-Adresse öffnen...";
+/* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
+"1101.title" = "Web-Adresse öffnen…";
 
 /* Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "1104"; */
 "1104.title" = "Auf Software-Aktualisierung prüfen";
@@ -350,11 +350,8 @@
 /* Class = "NSTabViewItem"; label = "Tab"; ObjectID = "1221"; */
 "1221.label" = "Tab";
 
-/* Class = "NSMenuItem"; title = "Customize Toolbar..."; ObjectID = "1257"; */
-"1257.title" = "Symbolleiste anpassen...";
-
-/* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
-"1258.title" = "Hide Toolbar";
+/* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
+"1257.title" = "Symbolleiste anpassen…";
 
 /* Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259"; */
 "1259.title" = "Statusleiste ausblenden";
@@ -375,10 +372,10 @@
 "1327.title" = "Artikel durchsuchen";
 
 /* Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336"; */
-"1336.title" = "Sortiermodus...";
+"1336.title" = "Sortiermodus…";
 
 /* Class = "NSMenu"; title = "Order By"; ObjectID = "1337"; */
-"1337.title" = "Sortiermodus...";
+"1337.title" = "Sortiermodus…";
 
 /* Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338"; */
 "1338.title" = "Manuell";
@@ -416,8 +413,8 @@
 /* Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408"; */
 "1408.title" = "Abonnement entfernen";
 
-/* Class = "NSMenuItem"; title = "Get Info..."; ObjectID = "1409"; */
-"1409.title" = "Information...";
+/* Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409"; */
+"1409.title" = "Information…";
 
 /* Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413"; */
 "1413.title" = "Aktuellen Style zur Artikel-Anzeige verwenden";
