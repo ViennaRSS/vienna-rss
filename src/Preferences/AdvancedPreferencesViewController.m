@@ -65,7 +65,8 @@
  */
 -(IBAction)showAdvancedHelp:(id)sender
 {
-    GotoHelpPage((CFStringRef)@"advanced.html", NULL);
+    NSString *helpBook = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleHelpBookName"];
+    [[NSHelpManager sharedHelpManager] openHelpAnchor:@"AdvancedSettingsSection" inBook:helpBook];
 }
 
 
