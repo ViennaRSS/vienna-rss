@@ -1,8 +1,8 @@
-![Vienna](http://vienna-rss.sourceforge.net/img/vienna_logo.png)
+![Vienna](https://vienna-rss.sourceforge.io/img/vienna_logo.png)
 
 [![Build Status](https://travis-ci.org/ViennaRSS/vienna-rss.svg?branch=master)](https://travis-ci.org/ViennaRSS/vienna-rss) [![Stories in Ready](https://badge.waffle.io/viennarss/vienna-rss.png?label=ready&title=Ready)](https://waffle.io/viennarss/vienna-rss)
 
-[Vienna](http://www.vienna-rss.org) is an RSS/Atom reader for Mac OS X.
+[Vienna](http://www.vienna-rss.com) is an RSS/Atom reader for Mac OS X.
 
 Vienna can connect directly to the websites you want to track.
 Additionally or alternatively, you can also sync with a server supporting the [Open Reader API](http://rss-sync.github.io/Open-Reader-API/rssconsensus/) (an adaptation of the now deceased Google Reader API). Vienna has been successfully tested with BazQux.com, FeedHQ.org, InoReader.com and TheOldReader.com.
@@ -24,7 +24,7 @@ Vienna is also available as a Cask for [Homebrew Cask](https://github.com/phinze
 Getting support
 ---------------
 
-If the in-application help files and the [FAQs](http://www.vienna-rss.org/?page_id=96) don’t answer your questions, head over to our [Support forum](http://forums.cocoaforge.com/viewforum.php?f=18) which is hosted by Cocoaforge.
+If the in-application help files and the [FAQs](http://www.vienna-rss.com/?page_id=96) don’t answer your questions, head over to our [Support forum](https://forums.cocoaforge.com/viewforum.php?f=18) which is hosted by Cocoaforge.
 
 Reporting an issue
 ------------------
@@ -65,19 +65,19 @@ Have a look at current localizations in their respective _.lproj_ folders. While
 
 Vienna supports a variety of different display styles for articles. These styles are provided on the Styles sub-menu off the View menu. A style is a combination of an HTML template that is used to control the placement of various parts of the article and a CSS stylesheet that controls the appearance of the article.
 
-You can write styles by referring to [this document](http://www.vienna-rss.org/?page_id=65). Have a look at existing styles in the __Styles__ folder.
+You can write styles by referring to [this document](http://www.vienna-rss.com/?page_id=65). Have a look at existing styles in the __Styles__ folder.
 
 ### Writing plugins
 
 Vienna supports plugins which are installed in menus and/or on the toolbar and can run defined actions. These plugins are XML-based and can be created by editing a simple .plist-file without any knowledge of Cocoa programming, in as little as 15 minutes.
 
-You can write plugins by referring to [this document](http://www.vienna-rss.org/?page_id=120). Have a look at existing plugins in the __Plugins__ folder.
+You can write plugins by referring to [this document](http://www.vienna-rss.com/?page_id=120). Have a look at existing plugins in the __Plugins__ folder.
 
 ### Writing code
 
 The current version of Vienna requires Xcode 7 and Mac OS X 10.11 SDK. We will be officially moving to Xcode 8 and macOS Sierra SDK once it has been released. Currently the Unit Tests require Xcode 8 and Swift 3.
 
-Vienna uses [cocoapods](http://cocoapods.org) for managing dependencies. When building, make sure to always open the Xcode workspace `Viennna.xcworkspace` instead of a project file.
+Vienna uses [cocoapods](https://cocoapods.org) for managing dependencies. When building, make sure to always open the Xcode workspace `Viennna.xcworkspace` instead of a project file.
 
 You should have a basic knowledge of Git and read these [advices on workflow](https://github.com/ViennaRSS/vienna-rss/wiki/Good-manners-with-Git).
 
