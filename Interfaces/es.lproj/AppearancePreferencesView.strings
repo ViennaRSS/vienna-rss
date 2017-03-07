@@ -1,0 +1,27 @@
+
+/* Class = "NSTextFieldCell"; title = "Al ver artículos o páginas web:"; ObjectID = "71S-pg-AjX"; */
+"71S-pg-AjX.title" = "Al ver artículos o páginas web:";
+
+/* Class = "NSTextFieldCell"; title = "Lista de carpetas:"; ObjectID = "B5v-p5-vrf"; */
+"B5v-p5-vrf.title" = "Lista de carpetas:";
+
+/* Class = "NSButtonCell"; title = "Seleccionar…"; ObjectID = "BDw-v3-mpF"; */
+"BDw-v3-mpF.title" = "Seleccionar…";
+
+/* Class = "NSButtonCell"; title = "Mostrar iconos de las fuentes en la lista de carpetas"; ObjectID = "MEV-HA-bdL"; */
+"MEV-HA-bdL.title" = "Mostrar iconos de las fuentes en la lista de carpetas";
+
+/* Class = "NSTextFieldCell"; title = "Lista de artículos:"; ObjectID = "auD-UC-Pij"; */
+"auD-UC-Pij.title" = "Lista de artículos:";
+
+/* Class = "NSTextFieldCell"; title = "(Ejemplo)"; ObjectID = "azr-ft-M4J"; */
+"azr-ft-M4J.title" = "(Ejemplo)";
+
+/* Class = "NSTextFieldCell"; title = "(Ejemplo)"; ObjectID = "g63-xD-ICn"; */
+"g63-xD-ICn.title" = "(Ejemplo)";
+
+/* Class = "NSButtonCell"; title = "Seleccionar…"; ObjectID = "gGT-YP-aum"; */
+"gGT-YP-aum.title" = "Seleccionar…";
+
+/* Class = "NSButtonCell"; title = "No usar fuentes más pequeñas de:"; ObjectID = "zfJ-Ge-Cxe"; */
+"zfJ-Ge-Cxe.title" = "No usar fuentes más pequeñas de:";

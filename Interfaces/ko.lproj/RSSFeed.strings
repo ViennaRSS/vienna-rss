@@ -1,0 +1,39 @@
+
+/* Class = "NSWindow"; title = "RSS Feed"; ObjectID = "6"; */
+"6.title" = "RSS Feed";
+
+/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
+"45.title" = "URL";
+
+/* Class = "NSWindow"; title = "RSS Feed"; ObjectID = "49"; */
+"49.title" = "RSS Feed";
+
+/* Class = "NSButtonCell"; title = "취소"; ObjectID = "102"; */
+"102.title" = "취소";
+
+/* Class = "NSButtonCell"; title = "구독하기"; ObjectID = "103"; */
+"103.title" = "구독하기";
+
+/* Class = "NSTextFieldCell"; title = "추가"; ObjectID = "104"; */
+"104.title" = "추가";
+
+/* Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106"; */
+"106.title" = "Create a new subscription";
+
+/* Class = "NSTextFieldCell"; title = "새 구독 추가"; ObjectID = "107"; */
+"107.title" = "새 구독 추가";
+
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "URL:";
+
+/* Class = "NSButtonCell"; title = "URL:"; ObjectID = "111"; */
+"111.title" = "URL:";
+
+/* Class = "NSButtonCell"; title = "저장"; ObjectID = "112"; */
+"112.title" = "저장";
+
+/* Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114"; */
+"114.title" = "Edit subscription";
+
+/* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
+"116.title" = "Subscribe in Open Reader";

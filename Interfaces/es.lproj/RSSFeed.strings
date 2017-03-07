@@ -1,0 +1,39 @@
+
+/* Class = "NSWindow"; title = "Fuente RSS"; ObjectID = "6"; */
+"6.title" = "Fuente RSS";
+
+/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
+"45.title" = "URL";
+
+/* Class = "NSWindow"; title = "Fuente RSS"; ObjectID = "49"; */
+"49.title" = "Fuente RSS";
+
+/* Class = "NSButtonCell"; title = "Cancelar"; ObjectID = "102"; */
+"102.title" = "Cancelar";
+
+/* Class = "NSButtonCell"; title = "Suscribirse"; ObjectID = "103"; */
+"103.title" = "Suscribirse";
+
+/* Class = "NSTextFieldCell"; title = "Fuente:"; ObjectID = "104"; */
+"104.title" = "Fuente:";
+
+/* Class = "NSTextFieldCell"; title = "Crear nueva suscripción "; ObjectID = "106"; */
+"106.title" = "Crear nueva suscripción ";
+
+/* Class = "NSTextFieldCell"; title = "Introduzca el enlace de la fuente de noticias a continuación, o elija de la lista de fuentes para introducir el acceso directo proporcionado por la fuente de noticias."; ObjectID = "107"; */
+"107.title" = "Introduzca el enlace de la fuente de noticias a continuación, o elija de la lista de fuentes para introducir el acceso directo proporcionado por la fuente de noticias.";
+
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "URL:";
+
+/* Class = "NSButtonCell"; title = "Guardar"; ObjectID = "111"; */
+"111.title" = "Guardar";
+
+/* Class = "NSButtonCell"; title = "Cancelar"; ObjectID = "112"; */
+"112.title" = "Cancelar";
+
+/* Class = "NSTextFieldCell"; title = "Editar suscripción:"; ObjectID = "114"; */
+"114.title" = "Editar suscripción:";
+
+/* Class = "NSButtonCell"; title = "Suscribirse a Open Reader"; ObjectID = "116"; */
+"116.title" = "Suscribirse a Open Reader";

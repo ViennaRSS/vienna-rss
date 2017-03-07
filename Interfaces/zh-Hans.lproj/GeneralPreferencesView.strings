@@ -1,0 +1,108 @@
+
+/* Class = "NSMenuItem"; title = "每15分钟"; ObjectID = "1Ll-uG-QWh"; */
+"1Ll-uG-QWh.title" = "每15分钟";
+
+/* Class = "NSButtonCell"; title = "执行 \"下一篇未读文章\" 命令后"; ObjectID = "2oy-1i-QQP"; */
+"2oy-1i-QQP.title" = "执行 \"下一篇未读文章\" 命令后";
+
+/* Class = "NSMenuItem"; title = "(路径)"; ObjectID = "5Cq-8f-vbL"; */
+"5Cq-8f-vbL.title" = "(路径)";
+
+/* Class = "NSMenuItem"; title = "每三十分钟"; ObjectID = "5VQ-jP-2rL"; */
+"5VQ-jP-2rL.title" = "每三十分钟";
+
+/* Class = "NSMenuItem"; title = "每两小时"; ObjectID = "6wU-yO-cnV"; */
+"6wU-yO-cnV.title" = "每两小时";
+
+/* Class = "NSButtonCell"; title = "在程序图标中显示未读文章数目"; ObjectID = "7e3-Hu-RB5"; */
+"7e3-Hu-RB5.title" = "在程序图标中显示未读文章数目";
+
+/* Class = "NSTextFieldCell"; title = "当接收到新文章后:\n"; ObjectID = "BbI-0A-zEG"; */
+"BbI-0A-zEG.title" = "当接收到新文章后:\n";
+
+/* Class = "NSMenu"; title = "其他显示方式"; ObjectID = "DFg-c6-rCy"; */
+"DFg-c6-rCy.title" = "其他显示方式";
+
+/* Class = "NSMenuItem"; title = "其他..."; ObjectID = "FiK-E7-RnG"; */
+"FiK-E7-RnG.title" = "其他...";
+
+/* Class = "NSMenuItem"; title = "Nothing"; ObjectID = "GAY-ra-eQY"; */
+"GAY-ra-eQY.title" = "Nothing";
+
+/* Class = "NSButtonCell"; title = "程序启动后核查 Vienna 是否有新版本"; ObjectID = "GnT-xT-rAZ"; */
+"GnT-xT-rAZ.title" = "程序启动后核查 Vienna 是否有新版本";
+
+/* Class = "NSMenuItem"; title = "手动"; ObjectID = "H9Q-du-oax"; */
+"H9Q-du-oax.title" = "手动";
+
+/* Class = "NSMenu"; title = "其他显示方式"; ObjectID = "HFO-4f-zYZ"; */
+"HFO-4f-zYZ.title" = "其他显示方式";
+
+/* Class = "NSMenuItem"; title = "每六小时"; ObjectID = "IMa-1h-lIO"; */
+"IMa-1h-lIO.title" = "每六小时";
+
+/* Class = "NSButtonCell"; title = "略微延迟一下后"; ObjectID = "JDV-ek-xja"; */
+"JDV-ek-xja.title" = "略微延迟一下后";
+
+/* Class = "NSButtonCell"; title = "在菜单栏中显示"; ObjectID = "JN6-lj-bQ1"; */
+"JN6-lj-bQ1.title" = "在菜单栏中显示";
+
+/* Class = "NSMenu"; title = "其他显示方式"; ObjectID = "Klv-JA-PvP"; */
+"Klv-JA-PvP.title" = "其他显示方式";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "NAE-EF-SsE"; */
+"NAE-EF-SsE.title" = "Radio";
+
+/* Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0"; */
+"OID-qF-Pp0.title" = "Search for latest Beta versions";
+
+/* Class = "NSMenu"; title = "其他显示方式"; ObjectID = "XAi-oh-7Fq"; */
+"XAi-oh-7Fq.title" = "其他显示方式";
+
+/* Class = "NSButtonCell"; title = "在外部浏览器中打开连接"; ObjectID = "YoM-Gv-hXn"; */
+"YoM-Gv-hXn.title" = "在外部浏览器中打开连接";
+
+/* Class = "NSTextFieldCell"; title = "检查新文章:"; ObjectID = "ewU-JH-fMC"; */
+"ewU-JH-fMC.title" = "检查新文章:";
+
+/* Class = "NSMenuItem"; title = "(Do not localise)"; ObjectID = "fYn-Rz-G69"; */
+"fYn-Rz-G69.title" = "(Do not localise)";
+
+/* Class = "NSTextFieldCell"; title = "下载文件至:"; ObjectID = "geD-Ws-mQm"; */
+"geD-Ws-mQm.title" = "下载文件至:";
+
+/* Class = "NSButtonCell"; title = "弹跳程序图标"; ObjectID = "gi4-ao-0yS"; */
+"gi4-ao-0yS.title" = "弹跳程序图标";
+
+/* Class = "NSMenuItem"; title = "每三小时"; ObjectID = "gnX-dW-XUD"; */
+"gnX-dW-XUD.title" = "每三小时";
+
+/* Class = "NSTextFieldCell"; title = "移动文章到废纸篓于:"; ObjectID = "k6Y-ib-PGb"; */
+"k6Y-ib-PGb.title" = "移动文章到废纸篓于:";
+
+/* Class = "NSTextFieldCell"; title = "默认 RSS 阅读工具:"; ObjectID = "kGA-Sa-RLG"; */
+"kGA-Sa-RLG.title" = "默认 RSS 阅读工具:";
+
+/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl"; */
+"meo-78-YOl.title" = "Mark updated articles as new";
+
+/* Class = "NSMenuItem"; title = "每5分钟"; ObjectID = "oVW-ee-uJT"; */
+"oVW-ee-uJT.title" = "每5分钟";
+
+/* Class = "NSButtonCell"; title = "程序启动后核查新文章"; ObjectID = "pXX-MI-tJX"; */
+"pXX-MI-tJX.title" = "程序启动后核查新文章";
+
+/* Class = "NSButtonCell"; title = "在当前窗口后面打开连接"; ObjectID = "pjg-Ze-H3l"; */
+"pjg-Ze-H3l.title" = "在当前窗口后面打开连接";
+
+/* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
+"qeb-at-hYb.title" = "Updates:";
+
+/* Class = "NSButtonCell"; title = "Include anonymous system profile"; ObjectID = "qno-Cg-EkC"; */
+"qno-Cg-EkC.title" = "Include anonymous system profile";
+
+/* Class = "NSTextFieldCell"; title = "标记当前文章为已读于:\n"; ObjectID = "sCl-hz-PFF"; */
+"sCl-hz-PFF.title" = "标记当前文章为已读于:\n";
+
+/* Class = "NSMenuItem"; title = "每小时"; ObjectID = "sSj-zI-6RY"; */
+"sSj-zI-6RY.title" = "每小时";

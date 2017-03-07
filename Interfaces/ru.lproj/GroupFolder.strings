@@ -1,0 +1,15 @@
+
+/* Class = "NSWindow"; title = "Панель"; ObjectID = "5"; */
+"5.title" = "Панель";
+
+/* Class = "NSTextFieldCell"; title = "Новая Группа"; ObjectID = "32"; */
+"32.title" = "Новая Группа";
+
+/* Class = "NSButtonCell"; title = "Сохранить"; ObjectID = "34"; */
+"34.title" = "Сохранить";
+
+/* Class = "NSButtonCell"; title = "Отмена"; ObjectID = "35"; */
+"35.title" = "Отмена";
+
+/* Class = "NSTextFieldCell"; title = "Введите название группы:\n"; ObjectID = "36"; */
+"36.title" = "Введите название группы:";

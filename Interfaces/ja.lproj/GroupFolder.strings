@@ -1,0 +1,15 @@
+
+/* Class = "NSWindow"; title = "パネル"; ObjectID = "5"; */
+"5.title" = "パネル";
+
+/* Class = "NSTextFieldCell"; title = "新規グループフォルダ"; ObjectID = "32"; */
+"32.title" = "新規グループフォルダ";
+
+/* Class = "NSButtonCell"; title = "保存"; ObjectID = "34"; */
+"34.title" = "保存";
+
+/* Class = "NSButtonCell"; title = "キャンセル"; ObjectID = "35"; */
+"35.title" = "キャンセル";
+
+/* Class = "NSTextFieldCell"; title = "グループフォルダ名を入力：\n"; ObjectID = "36"; */
+"36.title" = "グループフォルダ名を入力：";

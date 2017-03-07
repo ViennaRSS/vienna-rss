@@ -1,0 +1,39 @@
+
+/* Class = "NSWindow"; title = "RSS-feed"; ObjectID = "6"; */
+"6.title" = "RSS-feed";
+
+/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
+"45.title" = "URL";
+
+/* Class = "NSWindow"; title = "RSS-feed"; ObjectID = "49"; */
+"49.title" = "RSS-feed";
+
+/* Class = "NSButtonCell"; title = "Annuleer"; ObjectID = "102"; */
+"102.title" = "Annuleer";
+
+/* Class = "NSButtonCell"; title = "Abonneer"; ObjectID = "103"; */
+"103.title" = "Abonneer";
+
+/* Class = "NSTextFieldCell"; title = "Bron:"; ObjectID = "104"; */
+"104.title" = "Bron:";
+
+/* Class = "NSTextFieldCell"; title = "Neem een nieuw abonnement"; ObjectID = "106"; */
+"106.title" = "Neem een nieuw abonnement";
+
+/* Class = "NSTextFieldCell"; title = "Geef hieronder de koppeling voor het abonnement op, of kies een door de uitgever aangegeven koppeling op uit het menu hieronder."; ObjectID = "107"; */
+"107.title" = "Geef hieronder de koppeling voor het abonnement op, of kies een door de uitgever aangegeven koppeling op uit het menu hieronder.";
+
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "URL:";
+
+/* Class = "NSButtonCell"; title = "Bewaar"; ObjectID = "111"; */
+"111.title" = "Bewaar";
+
+/* Class = "NSButtonCell"; title = "Annuleer"; ObjectID = "112"; */
+"112.title" = "Annuleer";
+
+/* Class = "NSTextFieldCell"; title = "Bewerk abonnement"; ObjectID = "114"; */
+"114.title" = "Bewerk abonnement";
+
+/* Class = "NSButtonCell"; title = "Abonneer in Open Reader"; ObjectID = "116"; */
+"116.title" = "Abonneer in Open Reader";

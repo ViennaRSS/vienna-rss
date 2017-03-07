@@ -1,0 +1,27 @@
+
+/* Class = "NSTextFieldCell"; title = "Quando visualizzi articoli o pagine web:"; ObjectID = "71S-pg-AjX"; */
+"71S-pg-AjX.title" = "Quando visualizzi articoli o pagine web:";
+
+/* Class = "NSTextFieldCell"; title = "Font elenco cartelle:"; ObjectID = "B5v-p5-vrf"; */
+"B5v-p5-vrf.title" = "Font elenco cartelle:";
+
+/* Class = "NSButtonCell"; title = "Seleziona…"; ObjectID = "BDw-v3-mpF"; */
+"BDw-v3-mpF.title" = "Seleziona…";
+
+/* Class = "NSButtonCell"; title = "Mostra immagini cartelle nell'elenco cartelle"; ObjectID = "MEV-HA-bdL"; */
+"MEV-HA-bdL.title" = "Mostra immagini cartelle nell'elenco cartelle";
+
+/* Class = "NSTextFieldCell"; title = "Font elenco articoli:"; ObjectID = "auD-UC-Pij"; */
+"auD-UC-Pij.title" = "Font elenco articoli:";
+
+/* Class = "NSTextFieldCell"; title = "(Sample)"; ObjectID = "azr-ft-M4J"; */
+"azr-ft-M4J.title" = "(Sample)";
+
+/* Class = "NSTextFieldCell"; title = "(Sample)"; ObjectID = "g63-xD-ICn"; */
+"g63-xD-ICn.title" = "(Sample)";
+
+/* Class = "NSButtonCell"; title = "Seleziona…"; ObjectID = "gGT-YP-aum"; */
+"gGT-YP-aum.title" = "Seleziona…";
+
+/* Class = "NSButtonCell"; title = "Non utilizzare mai dimensioni font inferiori a"; ObjectID = "zfJ-Ge-Cxe"; */
+"zfJ-Ge-Cxe.title" = "Non utilizzare mai dimensioni font inferiori a";

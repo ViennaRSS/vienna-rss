@@ -1,0 +1,51 @@
+
+/* Class = "NSWindow"; title = "ウインドウ"; ObjectID = "5"; */
+"5.title" = "ウインドウ";
+
+/* Class = "NSTextFieldCell"; title = "(Folder name)"; ObjectID = "104"; */
+"104.title" = "(Folder name)";
+
+/* Class = "NSTextFieldCell"; title = "最後の更新："; ObjectID = "105"; */
+"105.title" = "最後の更新：";
+
+/* Class = "NSTextFieldCell"; title = "(Last refresh date)"; ObjectID = "106"; */
+"106.title" = "(Last refresh date)";
+
+/* Class = "NSButtonCell"; title = "確認"; ObjectID = "109"; */
+"109.title" = "確認";
+
+/* Class = "NSButtonCell"; title = "フィード URL："; ObjectID = "110"; */
+"xPF-M9-oZG.title" = "フィード URL";
+
+/* Class = "NSTextFieldCell"; title = "ユーザ名："; ObjectID = "111"; */
+"111.title" = "ユーザ名：";
+
+/* Class = "NSTextFieldCell"; title = "パスワード：\n"; ObjectID = "112"; */
+"112.title" = "パスワード：";
+
+/* Class = "NSButtonCell"; title = "アップデート認証"; ObjectID = "115"; */
+"115.title" = "アップデート認証";
+
+/* Class = "NSTextFieldCell"; title = "サイズ："; ObjectID = "117"; */
+"117.title" = "サイズ：";
+
+/* Class = "NSTextFieldCell"; title = "未読：\n"; ObjectID = "118"; */
+"118.title" = "未読：";
+
+/* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "119"; */
+"119.title" = "\n";
+
+/* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "120"; */
+"120.title" = "\n";
+
+/* Class = "NSButtonCell"; title = "購読中"; ObjectID = "121"; */
+"121.title" = "購読中";
+
+/* Class = "NSButtonCell"; title = "一般："; ObjectID = "122"; */
+"i9j-KH-c3D.title" = "一般";
+
+/* Class = "NSButtonCell"; title = "説明："; ObjectID = "124"; */
+"E84-Uo-ybg.title" = "説明";
+
+/* Class = "NSButtonCell"; title = "Use Web Page for Articles"; ObjectID = "126"; */
+"126.title" = "Use Web Page for Articles";

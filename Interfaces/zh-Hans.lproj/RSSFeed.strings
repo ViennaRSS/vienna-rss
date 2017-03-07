@@ -1,0 +1,42 @@
+
+/* Class = "NSWindow"; title = "RSS 频道"; ObjectID = "6"; */
+"6.title" = "RSS 频道";
+
+/* Class = "NSMenu"; title = "其他方式"; ObjectID = "44"; */
+"44.title" = "其他方式";
+
+/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
+"45.title" = "URL";
+
+/* Class = "NSWindow"; title = "RSS 频道"; ObjectID = "49"; */
+"49.title" = "RSS 频道";
+
+/* Class = "NSButtonCell"; title = "取消"; ObjectID = "102"; */
+"102.title" = "取消";
+
+/* Class = "NSButtonCell"; title = "订阅"; ObjectID = "103"; */
+"103.title" = "订阅";
+
+/* Class = "NSTextFieldCell"; title = "来源:\n"; ObjectID = "104"; */
+"104.title" = "来源:\n";
+
+/* Class = "NSTextFieldCell"; title = "订阅一个新的频道\n"; ObjectID = "106"; */
+"106.title" = "订阅一个新的频道\n";
+
+/* Class = "NSTextFieldCell"; title = "请在下面输入频道的连接。或者从来源列表中选择然后按照提示输入对应信息"; ObjectID = "107"; */
+"107.title" = "请在下面输入频道的连接。或者从来源列表中选择然后按照提示输入对应信息";
+
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "URL:";
+
+/* Class = "NSButtonCell"; title = "保存"; ObjectID = "111"; */
+"111.title" = "保存";
+
+/* Class = "NSButtonCell"; title = "取消"; ObjectID = "112"; */
+"112.title" = "取消";
+
+/* Class = "NSTextFieldCell"; title = "编辑频道信息"; ObjectID = "114"; */
+"114.title" = "编辑频道信息";
+
+/* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
+"116.title" = "Subscribe in Open Reader";

@@ -1,0 +1,27 @@
+
+/* Class = "NSTextFieldCell"; title = "Lors de l'affichage d'articles ou de pages Web :"; ObjectID = "71S-pg-AjX"; */
+"71S-pg-AjX.title" = "Lors de l'affichage d'articles ou de pages Web :";
+
+/* Class = "NSTextFieldCell"; title = "Liste des dossiers :"; ObjectID = "B5v-p5-vrf"; */
+"B5v-p5-vrf.title" = "Liste des dossiers :";
+
+/* Class = "NSButtonCell"; title = "Sélectionner…"; ObjectID = "BDw-v3-mpF"; */
+"BDw-v3-mpF.title" = "Sélectionner…";
+
+/* Class = "NSButtonCell"; title = "Afficher les icônes de flux dans la liste des dossiers"; ObjectID = "MEV-HA-bdL"; */
+"MEV-HA-bdL.title" = "Afficher les icônes de flux dans la liste des dossiers";
+
+/* Class = "NSTextFieldCell"; title = "Liste des articles :"; ObjectID = "auD-UC-Pij"; */
+"auD-UC-Pij.title" = "Liste des articles :";
+
+/* Class = "NSTextFieldCell"; title = "(Sample)"; ObjectID = "azr-ft-M4J"; */
+"azr-ft-M4J.title" = "(Sample)";
+
+/* Class = "NSTextFieldCell"; title = "(Sample)"; ObjectID = "g63-xD-ICn"; */
+"g63-xD-ICn.title" = "(Sample)";
+
+/* Class = "NSButtonCell"; title = "Sélectionner…"; ObjectID = "gGT-YP-aum"; */
+"gGT-YP-aum.title" = "Sélectionner…";
+
+/* Class = "NSButtonCell"; title = "Ne jamais utiliser de police de taille inférieure à"; ObjectID = "zfJ-Ge-Cxe"; */
+"zfJ-Ge-Cxe.title" = "Ne jamais utiliser de police de taille inférieure à";

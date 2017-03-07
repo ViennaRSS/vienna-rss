@@ -56,8 +56,6 @@
 	-(void)makeRowSelectedAndVisible:(NSInteger)rowIndex;
 	-(void)updateArticleListRowHeight;
 	-(void)setOrientation:(NSInteger)newLayout;
-	-(void)loadSplitSettingsForLayout;
-	-(void)saveSplitSettingsForLayout;
 	-(void)showEnclosureView;
 	-(void)hideEnclosureView;
 	-(void)printDocument;
@@ -80,7 +78,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
     self= [super initWithFrame:frame];
     if (self)
 	{
-		isChangingOrientation = NO;
+        isChangingOrientation = NO;
 		isInTableInit = NO;
 		blockSelectionHandler = NO;
 		blockMarkRead = NO;
@@ -153,7 +151,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	
 	// Set the reading pane orientation
 	[self setOrientation:prefs.layout];
-	splitView2.delegate = self;
 	
 	// Initialise the article list view
 	[self initTableView];
@@ -165,84 +162,8 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	isAppInitialising = NO;
 }
 
-/* constrainMinCoordinate
- * Make sure the article pane width isn't shrunk beyond a minimum size for Condensed and Report layouts.
- * Otherwise it looks untidy.
- */
--(CGFloat)splitView:(NSSplitView *)sender constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)offset
-{
-	if (sender == splitView2)
-	{
-		BOOL isVertical = sender.vertical;
-		if (isVertical)
-			return (offset == 0) ? proposedMin + MA_Minimum_ArticleList_Pane_Width : proposedMin + MA_Minimum_Article_Pane_Dimension ;
-		else
-			return (offset == 0) ? proposedMin + MA_Minimum_ArticleList_Pane_Height : proposedMin + MA_Minimum_Article_Pane_Dimension ;
-	}
-	else
-		return proposedMin;
-}
+// MARK: - WebUIDelegate methods
 
-/* constrainMaxCoordinate
- * Make sure that the article pane isn't shrunk beyond a minimum size otherwise the splitview
- * or controls within it start resizing odd.
- */
--(CGFloat)splitView:(NSSplitView *)sender constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)offset
-{
-	if (sender == splitView2)
-	{
-		BOOL isVertical = sender.vertical;
-		if (isVertical)
-			return (offset == 0) ? proposedMax - MA_Minimum_Article_Pane_Dimension : proposedMax - MA_Minimum_ArticleList_Pane_Width;
-		else
-			return (offset == 0) ? proposedMax - MA_Minimum_Article_Pane_Dimension : proposedMax - MA_Minimum_ArticleList_Pane_Height;
-	}
-	return proposedMax;
-}
-
-/* resizeSubviewsWithOldSize
- * Constrain the article list pane to a fixed width.
- */
--(void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
-{
-	CGFloat dividerThickness = sender.dividerThickness;
-	BOOL isVertical = sender.vertical;
-	id sv1 = sender.subviews[0];
-	id sv2 = sender.subviews[1];
-	NSRect leftFrame = [sv1 frame];
-	NSRect rightFrame = [sv2 frame];
-	NSRect newFrame = sender.frame;
-	
-	if (sender == splitView2)
-	{
-		if (isChangingOrientation)
-			[splitView2 adjustSubviews];
-		else
-		{
-			leftFrame.origin = NSMakePoint(0, 0);
-			if (isVertical)
-			{
-				leftFrame.size.height = newFrame.size.height;
-                leftFrame.size.width = MIN(leftFrame.size.width , newFrame.size.width - dividerThickness - MA_Minimum_Article_Pane_Dimension);
-				rightFrame.size.width = newFrame.size.width - leftFrame.size.width - dividerThickness;
-				rightFrame.size.height = newFrame.size.height;
-				rightFrame.origin.x = leftFrame.size.width + dividerThickness;
-				rightFrame.origin.y = 0;
-			}
-			else
-			{
-				leftFrame.size.width = newFrame.size.width;
-                leftFrame.size.height = MIN(leftFrame.size.height , newFrame.size.height - dividerThickness - MA_Minimum_Article_Pane_Dimension);
-				rightFrame.size.height = newFrame.size.height - leftFrame.size.height - dividerThickness;
-				rightFrame.size.width = newFrame.size.width;
-				rightFrame.origin.y = leftFrame.size.height + dividerThickness;
-				rightFrame.origin.x = 0;
-			}
-			[sv1 setFrame:leftFrame];
-			[sv2 setFrame:rightFrame];
-		}
-	}
-}
 
 /* createWebViewWithRequest
  * Called when the browser wants to create a new window. The request is opened in a new tab.
@@ -679,9 +600,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	// Save these to the preferences
 	[prefs setObject:dataArray forKey:MAPref_ArticleListColumns];
 
-	// Save the split bar position
-	[self saveSplitSettingsForLayout];
-
 	// We're done
 }
 
@@ -914,33 +832,10 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 {
 	if (self == articleController.mainArticleView)
 	{
-		[self saveSplitSettingsForLayout];
 		[self setOrientation:[Preferences standardPreferences].layout];
 		[self updateVisibleColumns];
 		[articleList reloadData];
 	}
-}
-
-/* loadSplitSettingsForLayout
- * Set the splitview position for the current layout from the preferences.
- */
--(void)loadSplitSettingsForLayout
-{
-	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ?
-		@"SplitView2ReportLayout"
-		: @"SplitView2CondensedLayout";
-	splitView2.xlayout = [[Preferences standardPreferences] objectForKey:splitPrefsName];
-}
-
-/* saveSplitSettingsForLayout
- * Save the splitview position for the current layout to the preferences.
- */
--(void)saveSplitSettingsForLayout
-{
-	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ?
-		@"SplitView2ReportLayout"
-		: @"SplitView2CondensedLayout";
-	[[Preferences standardPreferences] setObject:splitView2.xlayout forKey:splitPrefsName];
 }
 
 /* setOrientation
@@ -952,7 +847,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	isChangingOrientation = YES;
 	tableLayout = newLayout;
 	splitView2.vertical = (newLayout == MA_Layout_Condensed);
-	[self loadSplitSettingsForLayout];
+	splitView2.dividerStyle = (splitView2.vertical ? NSSplitViewDividerStyleThin : NSSplitViewDividerStylePaneSplitter);
 	[splitView2 display];
 	isChangingOrientation = NO;
 }

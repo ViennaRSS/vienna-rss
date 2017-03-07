@@ -1,0 +1,15 @@
+
+/* Class = "NSWindow"; title = "Panel"; ObjectID = "5"; */
+"5.title" = "Panel";
+
+/* Class = "NSTextFieldCell"; title = "Нова папка"; ObjectID = "32"; */
+"32.title" = "Нова папка";
+
+/* Class = "NSButtonCell"; title = "Зберегти"; ObjectID = "34"; */
+"34.title" = "Зберегти";
+
+/* Class = "NSButtonCell"; title = "Скасувати"; ObjectID = "35"; */
+"35.title" = "Скасувати";
+
+/* Class = "NSTextFieldCell"; title = "Введіть ім'я папки:\n"; ObjectID = "36"; */
+"36.title" = "Введіть ім'я папки:";

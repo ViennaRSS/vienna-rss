@@ -1,0 +1,15 @@
+
+/* Class = "NSWindow"; title = "Panel"; ObjectID = "5"; */
+"5.title" = "Panel";
+
+/* Class = "NSTextFieldCell"; title = "Yeni Grup Klasörü"; ObjectID = "32"; */
+"32.title" = "Yeni Grup Klasörü";
+
+/* Class = "NSButtonCell"; title = "Kaydet"; ObjectID = "34"; */
+"34.title" = "Kaydet";
+
+/* Class = "NSButtonCell"; title = "İptal"; ObjectID = "35"; */
+"35.title" = "İptal";
+
+/* Class = "NSTextFieldCell"; title = "Grup Klasörü için bir ad girin:\n"; ObjectID = "36"; */
+"36.title" = "Grup Klasörü için bir ad girin:";

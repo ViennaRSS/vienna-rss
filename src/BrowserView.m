@@ -24,6 +24,7 @@
 #import <PSMTabBarControl/PSMTabBarControl.h>
 #import <PSMTabBarControl/PSMRolloverButton.h>
 #import "AppController.h"
+#import "DisclosureView.h"
 
 @interface NSTabView (BrowserViewAdditions)
 	-(NSTabViewItem *)tabViewItemWithIdentifier:(id)identifier;
@@ -41,6 +42,12 @@
 }
 @end
 
+@interface BrowserView()
+
+@property (weak) IBOutlet DisclosureView *tabBarDisclosureView;
+
+@end
+
 @implementation BrowserView
 
 -(void)awakeFromNib
@@ -50,10 +57,10 @@
 	//Metal is the default
 	[tabBarControl setStyleNamed:@"Unified"];
 	
-	[tabBarControl setHideForSingleTab:YES];
+	[tabBarControl setHideForSingleTab:NO];
 	[tabBarControl setUseOverflowMenu:YES];
 	[tabBarControl setAllowsBackgroundTabClosing:YES];
-	[tabBarControl setAutomaticallyAnimates:NO];
+	[tabBarControl setAutomaticallyAnimates:YES];
 	tabBarControl.cellMinWidth = 60.0;
 	tabBarControl.cellMaxWidth = 350.0;
 
@@ -256,6 +263,12 @@
 - (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView *)tabView
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabCountChanged" object:nil];
+
+    if (tabView.numberOfTabViewItems == 1) {
+        [self.tabBarDisclosureView collapse:YES];
+    } else {
+        [self.tabBarDisclosureView disclose:YES];
+    }
 }
 
 /* disableTabCloseForTabViewItem

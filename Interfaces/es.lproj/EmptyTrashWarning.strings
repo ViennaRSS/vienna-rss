@@ -1,0 +1,15 @@
+
+/* Class = "NSWindow"; title = "Vaciar papelera"; ObjectID = "5"; */
+"5.title" = "Vaciar papelera";
+
+/* Class = "NSButtonCell"; title = "Vaciar papelera"; ObjectID = "17"; */
+"17.title" = "Vaciar papelera";
+
+/* Class = "NSButtonCell"; title = "No vaciar papelera"; ObjectID = "18"; */
+"18.title" = "No vaciar papelera";
+
+/* Class = "NSTextFieldCell"; title = "Hay artículos eliminados en la papelera.\n¿Desea vaciar la papelera antes de salir?"; ObjectID = "19"; */
+"19.title" = "Hay artículos eliminados en la papelera. ¿Desea vaciar la papelera antes de salir?";
+
+/* Class = "NSButtonCell"; title = "No volver a mostrar este mensaje"; ObjectID = "20"; */
+"20.title" = "No volver a mostrar este mensaje";

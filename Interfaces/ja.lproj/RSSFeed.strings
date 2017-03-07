@@ -1,0 +1,39 @@
+
+/* Class = "NSWindow"; title = "RSS フィード"; ObjectID = "6"; */
+"6.title" = "RSS フィード";
+
+/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
+"45.title" = "URL";
+
+/* Class = "NSWindow"; title = "RSS フィード"; ObjectID = "49"; */
+"49.title" = "RSS フィード";
+
+/* Class = "NSButtonCell"; title = "キャンセル"; ObjectID = "102"; */
+"102.title" = "キャンセル";
+
+/* Class = "NSButtonCell"; title = "購読"; ObjectID = "103"; */
+"103.title" = "購読";
+
+/* Class = "NSTextFieldCell"; title = "ソース："; ObjectID = "104"; */
+"104.title" = "ソース：";
+
+/* Class = "NSTextFieldCell"; title = "新規購読を作成"; ObjectID = "106"; */
+"106.title" = "新規購読を作成";
+
+/* Class = "NSTextFieldCell"; title = "ニュースフィードへのリンクを入力してください。またはソースリストからニュースフィードのショートカット名を入力してください。"; ObjectID = "107"; */
+"107.title" = "ニュースフィードへのリンクを入力してください。またはソースリストからニュースフィードのショートカット名を入力してください。";
+
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "URL:";
+
+/* Class = "NSButtonCell"; title = "保存"; ObjectID = "111"; */
+"111.title" = "保存";
+
+/* Class = "NSButtonCell"; title = "キャンセル"; ObjectID = "112"; */
+"112.title" = "キャンセル";
+
+/* Class = "NSTextFieldCell"; title = "購読を編集"; ObjectID = "114"; */
+"114.title" = "購読を編集";
+
+/* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
+"116.title" = "Subscribe in Open Reader";

@@ -1,0 +1,27 @@
+
+/* Class = "NSTextFieldCell"; title = "浏览文章或网页时:"; ObjectID = "71S-pg-AjX"; */
+"71S-pg-AjX.title" = "浏览文章或网页时:";
+
+/* Class = "NSTextFieldCell"; title = "文件夹列表字体:"; ObjectID = "B5v-p5-vrf"; */
+"B5v-p5-vrf.title" = "文件夹列表字体:";
+
+/* Class = "NSButtonCell"; title = "选择…"; ObjectID = "BDw-v3-mpF"; */
+"BDw-v3-mpF.title" = "选择…";
+
+/* Class = "NSButtonCell"; title = "在文件夹列表中显示文件夹图片"; ObjectID = "MEV-HA-bdL"; */
+"MEV-HA-bdL.title" = "在文件夹列表中显示文件夹图片";
+
+/* Class = "NSTextFieldCell"; title = "文章列表字体:"; ObjectID = "auD-UC-Pij"; */
+"auD-UC-Pij.title" = "文章列表字体:";
+
+/* Class = "NSTextFieldCell"; title = "(示范)"; ObjectID = "azr-ft-M4J"; */
+"azr-ft-M4J.title" = "(示范)";
+
+/* Class = "NSTextFieldCell"; title = "(示范)"; ObjectID = "g63-xD-ICn"; */
+"g63-xD-ICn.title" = "(示范)";
+
+/* Class = "NSButtonCell"; title = "选择…"; ObjectID = "gGT-YP-aum"; */
+"gGT-YP-aum.title" = "选择…";
+
+/* Class = "NSButtonCell"; title = "字体永远大于"; ObjectID = "zfJ-Ge-Cxe"; */
+"zfJ-Ge-Cxe.title" = "字体永远大于";

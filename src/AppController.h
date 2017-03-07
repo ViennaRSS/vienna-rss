@@ -45,9 +45,10 @@
 @class SearchPanel;
 @class BJRWindowWithToolbar;
 @class TreeFilterView;
+@class DisclosureView;
 @class ViennaSparkleDelegate;
 
-@interface AppController : NSObject <NSApplicationDelegate, GrowlApplicationBridgeDelegate,NSWindowDelegate,NSToolbarDelegate,NSSplitViewDelegate,NSMenuDelegate>
+@interface AppController : NSObject <NSApplicationDelegate, GrowlApplicationBridgeDelegate,NSWindowDelegate,NSToolbarDelegate,NSMenuDelegate>
 {
 	IBOutlet BJRWindowWithToolbar * mainWindow;
 	IBOutlet ArticleController * articleController;
@@ -72,9 +73,10 @@
 	IBOutlet NSMenuItem * stylesMenu;
 	IBOutlet NSMenuItem * filtersMenu;
 	IBOutlet FilterView * filterView;
+    IBOutlet DisclosureView * filterDisclosureView;
 	IBOutlet TreeFilterView *treeFilterView;
 	IBOutlet TreeFilterView *treeFilterSearchField;
-	IBOutlet NSView * cosmeticStatusBarHighlightLine;
+    IBOutlet DisclosureView *statusBarDisclosureView;
 	IBOutlet NSTextField * currentFilterTextField;
 	IBOutlet NSButton * filterIconInStatusBarButton;
 

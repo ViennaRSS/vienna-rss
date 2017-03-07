@@ -1,0 +1,15 @@
+
+/* Class = "NSWindow"; title = "Empty Trash"; ObjectID = "5"; */
+"5.title" = "Empty Trash";
+
+/* Class = "NSButtonCell"; title = "Papierkorb leeren"; ObjectID = "17"; */
+"17.title" = "Papierkorb leeren";
+
+/* Class = "NSButtonCell"; title = "Papierkorb NICHT leeren"; ObjectID = "18"; */
+"18.title" = "Papierkorb NICHT leeren";
+
+/* Class = "NSTextFieldCell"; title = "Es gibt noch gelöschte Artikel im Papierkorb.\nMöchten Sie den Papierkorb vor Beenden leeren?"; ObjectID = "19"; */
+"19.title" = "Es gibt noch gelöschte Artikel im Papierkorb. Möchten Sie den Papierkorb vor Beenden leeren?";
+
+/* Class = "NSButtonCell"; title = "Diese Warnung nicht mehr anzeigen"; ObjectID = "20"; */
+"20.title" = "Diese Warnung nicht mehr anzeigen";

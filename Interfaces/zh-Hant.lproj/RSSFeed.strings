@@ -1,0 +1,42 @@
+
+/* Class = "NSWindow"; title = "RSS Feed"; ObjectID = "6"; */
+"6.title" = "RSS Feed";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "44"; */
+"44.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
+"45.title" = "URL";
+
+/* Class = "NSWindow"; title = "RSS Feed"; ObjectID = "49"; */
+"49.title" = "RSS Feed";
+
+/* Class = "NSButtonCell"; title = "取消"; ObjectID = "102"; */
+"102.title" = "取消";
+
+/* Class = "NSButtonCell"; title = "訂閱"; ObjectID = "103"; */
+"103.title" = "訂閱";
+
+/* Class = "NSTextFieldCell"; title = "來源：\n"; ObjectID = "104"; */
+"104.title" = "來源：\n";
+
+/* Class = "NSTextFieldCell"; title = "建立新的 RSS 訂閱頻道"; ObjectID = "106"; */
+"106.title" = "建立新的 RSS 訂閱頻道";
+
+/* Class = "NSTextFieldCell"; title = "請在下方輸入 RSS 的連結網址，或是從來源列表中進行選擇，以輸入新聞訂閱頻道的捷徑名稱。"; ObjectID = "107"; */
+"107.title" = "請在下方輸入 RSS 的連結網址，或是從來源列表中進行選擇，以輸入新聞訂閱頻道的捷徑名稱。";
+
+/* Class = "NSTextFieldCell"; title = "URL："; ObjectID = "110"; */
+"110.title" = "URL：";
+
+/* Class = "NSButtonCell"; title = "儲存"; ObjectID = "111"; */
+"111.title" = "儲存";
+
+/* Class = "NSButtonCell"; title = "取消"; ObjectID = "112"; */
+"112.title" = "取消";
+
+/* Class = "NSTextFieldCell"; title = "編輯訂閱頻道"; ObjectID = "114"; */
+"114.title" = "編輯訂閱頻道";
+
+/* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
+"116.title" = "Subscribe in Open Reader";

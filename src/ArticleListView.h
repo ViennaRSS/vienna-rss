@@ -31,7 +31,7 @@
 @class MessageListView;
 @class ArticleView;
 
-@interface ArticleListView : NSView<BaseView, ArticleBaseView, NSSplitViewDelegate, NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate>
+@interface ArticleListView : NSView<BaseView, ArticleBaseView, NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate>
 {
 	IBOutlet AppController * controller;
 	IBOutlet ArticleController * articleController;

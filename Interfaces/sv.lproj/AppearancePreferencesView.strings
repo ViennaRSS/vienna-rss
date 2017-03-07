@@ -1,0 +1,27 @@
+
+/* Class = "NSTextFieldCell"; title = "Vid visning av artiklar eller webbsidor:"; ObjectID = "71S-pg-AjX"; */
+"71S-pg-AjX.title" = "Vid visning av artiklar eller webbsidor:";
+
+/* Class = "NSTextFieldCell"; title = "Mapplista:"; ObjectID = "B5v-p5-vrf"; */
+"B5v-p5-vrf.title" = "Mapplista:";
+
+/* Class = "NSButtonCell"; title = "Välj…"; ObjectID = "BDw-v3-mpF"; */
+"BDw-v3-mpF.title" = "Välj…";
+
+/* Class = "NSButtonCell"; title = "Visa ikoner i mapplistan"; ObjectID = "MEV-HA-bdL"; */
+"MEV-HA-bdL.title" = "Visa ikoner i mapplistan";
+
+/* Class = "NSTextFieldCell"; title = "Artikellista:"; ObjectID = "auD-UC-Pij"; */
+"auD-UC-Pij.title" = "Artikellista:";
+
+/* Class = "NSTextFieldCell"; title = "(Sample)"; ObjectID = "azr-ft-M4J"; */
+"azr-ft-M4J.title" = "(Sample)";
+
+/* Class = "NSTextFieldCell"; title = "(Sample)"; ObjectID = "g63-xD-ICn"; */
+"g63-xD-ICn.title" = "(Sample)";
+
+/* Class = "NSButtonCell"; title = "Välj…"; ObjectID = "gGT-YP-aum"; */
+"gGT-YP-aum.title" = "Välj…";
+
+/* Class = "NSButtonCell"; title = "Använd aldrig typsnitt mindre än"; ObjectID = "zfJ-Ge-Cxe"; */
+"zfJ-Ge-Cxe.title" = "Använd aldrig typsnitt mindre än";

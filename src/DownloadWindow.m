@@ -72,12 +72,6 @@
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Remove From List", nil) action:@selector(removeFromList:) keyEquivalent:@""];
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Cancel", nil) action:@selector(cancelDownload:) keyEquivalent:@""];
 	table.menu = downloadMenu;
-	
-	// Set Clear button caption
-	[clearButton setTitle:NSLocalizedString(@"ClearButton", nil)];
-
-	// Set the window title
-	[downloadWindow setTitle:NSLocalizedString(@"Downloads", nil)];
 }
 
 /* clearList

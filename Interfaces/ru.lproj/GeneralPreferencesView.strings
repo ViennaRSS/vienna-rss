@@ -1,0 +1,108 @@
+
+/* Class = "NSMenuItem"; title = "Каждые 15 минут"; ObjectID = "1Ll-uG-QWh"; */
+"1Ll-uG-QWh.title" = "Каждые 15 минут";
+
+/* Class = "NSButtonCell"; title = "По вызову команды \"Следующая Непрочитанная\""; ObjectID = "2oy-1i-QQP"; */
+"2oy-1i-QQP.title" = "По вызову команды \"Следующая Непрочитанная\"";
+
+/* Class = "NSMenuItem"; title = "(Path)"; ObjectID = "5Cq-8f-vbL"; */
+"5Cq-8f-vbL.title" = "(Path)";
+
+/* Class = "NSMenuItem"; title = "Каждые 30 минут"; ObjectID = "5VQ-jP-2rL"; */
+"5VQ-jP-2rL.title" = "Каждые 30 минут";
+
+/* Class = "NSMenuItem"; title = "Каждые 2 часа"; ObjectID = "6wU-yO-cnV"; */
+"6wU-yO-cnV.title" = "Каждые 2 часа";
+
+/* Class = "NSButtonCell"; title = "Отобразить их число в иконке приложения"; ObjectID = "7e3-Hu-RB5"; */
+"7e3-Hu-RB5.title" = "Отобразить их число в иконке приложения";
+
+/* Class = "NSTextFieldCell"; title = "При получении новых статей:\n"; ObjectID = "BbI-0A-zEG"; */
+"BbI-0A-zEG.title" = "При получении новых статей:\n";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "DFg-c6-rCy"; */
+"DFg-c6-rCy.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "Иное..."; ObjectID = "FiK-E7-RnG"; */
+"FiK-E7-RnG.title" = "Иное...";
+
+/* Class = "NSMenuItem"; title = "Нет"; ObjectID = "GAY-ra-eQY"; */
+"GAY-ra-eQY.title" = "Нет";
+
+/* Class = "NSButtonCell"; title = "Проверять наличие новых версий Vienna при запуске"; ObjectID = "GnT-xT-rAZ"; */
+"GnT-xT-rAZ.title" = "Проверять наличие новых версий Vienna при запуске";
+
+/* Class = "NSMenuItem"; title = "Вручную"; ObjectID = "H9Q-du-oax"; */
+"H9Q-du-oax.title" = "Вручную";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "HFO-4f-zYZ"; */
+"HFO-4f-zYZ.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "Каждые 6 часов"; ObjectID = "IMa-1h-lIO"; */
+"IMa-1h-lIO.title" = "Каждые 6 часов";
+
+/* Class = "NSButtonCell"; title = "После небольшой задержки"; ObjectID = "JDV-ek-xja"; */
+"JDV-ek-xja.title" = "После небольшой задержки";
+
+/* Class = "NSButtonCell"; title = "Отображать меню"; ObjectID = "JN6-lj-bQ1"; */
+"JN6-lj-bQ1.title" = "Отображать меню";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "Klv-JA-PvP"; */
+"Klv-JA-PvP.title" = "OtherViews";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "NAE-EF-SsE"; */
+"NAE-EF-SsE.title" = "Radio";
+
+/* Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0"; */
+"OID-qF-Pp0.title" = "Search for latest Beta versions";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "XAi-oh-7Fq"; */
+"XAi-oh-7Fq.title" = "OtherViews";
+
+/* Class = "NSButtonCell"; title = "Открывать ссылки во внешнем браузере"; ObjectID = "YoM-Gv-hXn"; */
+"YoM-Gv-hXn.title" = "Открывать ссылки во внешнем браузере";
+
+/* Class = "NSTextFieldCell"; title = "Проверять наличие статей:"; ObjectID = "ewU-JH-fMC"; */
+"ewU-JH-fMC.title" = "Проверять наличие статей:";
+
+/* Class = "NSMenuItem"; title = "(Do not localise)"; ObjectID = "fYn-Rz-G69"; */
+"fYn-Rz-G69.title" = "(Do not localise)";
+
+/* Class = "NSTextFieldCell"; title = "Загружать файлы в:"; ObjectID = "geD-Ws-mQm"; */
+"geD-Ws-mQm.title" = "Загружать файлы в:";
+
+/* Class = "NSButtonCell"; title = "Трясти иконку в Док"; ObjectID = "gi4-ao-0yS"; */
+"gi4-ao-0yS.title" = "Трясти иконку в Док";
+
+/* Class = "NSMenuItem"; title = "Каждые 3 часов"; ObjectID = "gnX-dW-XUD"; */
+"gnX-dW-XUD.title" = "Каждые 3 часов";
+
+/* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "k6Y-ib-PGb"; */
+"k6Y-ib-PGb.title" = "Move articles to Trash:";
+
+/* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG"; */
+"kGA-Sa-RLG.title" = "Default RSS Reader:";
+
+/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl"; */
+"meo-78-YOl.title" = "Mark updated articles as new";
+
+/* Class = "NSMenuItem"; title = "Каждые 5 минут"; ObjectID = "oVW-ee-uJT"; */
+"oVW-ee-uJT.title" = "Каждые 5 минут";
+
+/* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "pXX-MI-tJX"; */
+"pXX-MI-tJX.title" = "Check for new articles on start up";
+
+/* Class = "NSButtonCell"; title = "Открывать ссылки в фоне"; ObjectID = "pjg-Ze-H3l"; */
+"pjg-Ze-H3l.title" = "Открывать ссылки в фоне";
+
+/* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
+"qeb-at-hYb.title" = "Updates:";
+
+/* Class = "NSButtonCell"; title = "Include anonymous system profile"; ObjectID = "qno-Cg-EkC"; */
+"qno-Cg-EkC.title" = "Include anonymous system profile";
+
+/* Class = "NSTextFieldCell"; title = "Mark current article read:\n"; ObjectID = "sCl-hz-PFF"; */
+"sCl-hz-PFF.title" = "Mark current article read:\n";
+
+/* Class = "NSMenuItem"; title = "Ежечасно"; ObjectID = "sSj-zI-6RY"; */
+"sSj-zI-6RY.title" = "Ежечасно";
