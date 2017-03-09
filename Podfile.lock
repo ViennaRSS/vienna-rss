@@ -12,7 +12,6 @@ PODS:
     - Reachability
   - ASIHTTPRequest/S3 (1.8.2):
     - ASIHTTPRequest/Core
-  - CDEvents (1.2.2)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
@@ -22,7 +21,6 @@ PODS:
 
 DEPENDENCIES:
   - ASIHTTPRequest (~> 1.8)
-  - CDEvents
   - FMDB (~> 2.4)
   - MASPreferences (~> 1.1.4)
   - OCMock
@@ -30,12 +28,11 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   ASIHTTPRequest: ec013992946676b7978dcbde6396d57312d21db4
-  CDEvents: f311f23de13414f4b3625f1a663b2e1d9a85d982
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   MASPreferences: 7bdcfe891d7840453cf48f95fa866c3e152ace7a
   OCMock: 35ae71d6a8fcc1b59434d561d1520b9dd4f15765
   Sparkle: ccfb47699feea7b40b51cf3176f69404e5b1da6c
 
-PODFILE CHECKSUM: ba0314fdde11af2ca530cee299e440012a06db8e
+PODFILE CHECKSUM: c6df6f1abfcc778624a32430240ba415a849e066
 
 COCOAPODS: 1.2.0

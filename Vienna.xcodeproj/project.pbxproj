@@ -3463,7 +3463,6 @@
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/ASIHTTPRequest\"",
-					"\"${PODS_ROOT}/Headers/Public/CDEvents\"",
 					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
 					"\"${PODS_ROOT}/Headers/Public/MASPreferences\"",
 					"\"${PODS_ROOT}/Headers/Public/Sparkle\"",
@@ -3526,7 +3525,6 @@
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/ASIHTTPRequest\"",
-					"\"${PODS_ROOT}/Headers/Public/CDEvents\"",
 					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
 					"\"${PODS_ROOT}/Headers/Public/MASPreferences\"",
 					"\"${PODS_ROOT}/Headers/Public/Sparkle\"",
@@ -3584,7 +3582,6 @@
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/ASIHTTPRequest\"",
-					"\"${PODS_ROOT}/Headers/Public/CDEvents\"",
 					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
 					"\"${PODS_ROOT}/Headers/Public/MASPreferences\"",
 					"\"${PODS_ROOT}/Headers/Public/Sparkle\"",
@@ -3708,7 +3705,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/ASIHTTPRequest\"",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/CDEvents\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/FMDB\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/MASPreferences\"",
 				);
@@ -3728,7 +3724,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/ASIHTTPRequest\"",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/CDEvents\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/FMDB\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/MASPreferences\"",
 				);
