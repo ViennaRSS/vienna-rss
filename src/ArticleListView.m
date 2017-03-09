@@ -64,10 +64,6 @@
 	-(void)endMainFrameLoad;
 @end
 
-static const CGFloat MA_Minimum_ArticleList_Pane_Width = 150;
-static const CGFloat MA_Minimum_ArticleList_Pane_Height = 80;
-static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
-
 @implementation ArticleListView
 
 /* initWithFrame

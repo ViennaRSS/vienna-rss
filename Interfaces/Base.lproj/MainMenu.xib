@@ -112,7 +112,7 @@
                                     <constraint firstItem="8uX-2t-Ik7" firstAttribute="leading" secondItem="PG8-8Y-Lzt" secondAttribute="leading" id="KYR-SE-tnC"/>
                                     <constraint firstAttribute="trailing" secondItem="o3u-Zs-gsz" secondAttribute="trailing" id="SsN-v0-dK4"/>
                                     <constraint firstItem="o3u-Zs-gsz" firstAttribute="leading" secondItem="PG8-8Y-Lzt" secondAttribute="leading" id="YLh-QP-Vms"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="YwG-tG-A8p"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="YwG-tG-A8p"/>
                                     <constraint firstItem="8uX-2t-Ik7" firstAttribute="top" secondItem="o3u-Zs-gsz" secondAttribute="bottom" id="dTG-45-tti"/>
                                     <constraint firstItem="o3u-Zs-gsz" firstAttribute="top" secondItem="PG8-8Y-Lzt" secondAttribute="top" id="dxe-yN-SUT"/>
                                     <constraint firstAttribute="bottom" secondItem="8uX-2t-Ik7" secondAttribute="bottom" id="h84-sN-cLF"/>
@@ -266,7 +266,7 @@
                                     <constraint firstAttribute="trailing" secondItem="1218" secondAttribute="trailing" id="hZE-7g-Od6"/>
                                     <constraint firstItem="cTN-D0-dY2" firstAttribute="top" secondItem="MRm-h9-mFg" secondAttribute="bottom" id="kP6-Re-Yxc"/>
                                     <constraint firstItem="1218" firstAttribute="top" secondItem="cTN-D0-dY2" secondAttribute="bottom" id="mYB-Ey-lSh"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="zUd-Gj-eaw"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="zUd-Gj-eaw"/>
                                 </constraints>
                             </customView>
                         </subviews>
