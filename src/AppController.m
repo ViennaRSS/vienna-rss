@@ -62,6 +62,8 @@
 #import "NSURL+Utils.h"
 #import "PreferencesWindowController.h"
 
+#import "Vienna-Swift.h"
+
 @interface AppController (Private)
 	@property (nonatomic, readonly, copy) NSMenu *searchFieldMenu;
 	-(void)installSleepHandler;
@@ -115,6 +117,7 @@
 @interface AppController () <ActivityPanelDelegate>
 
 @property (nonatomic) IBOutlet ActivityPanelController *activityPanelController;
+@property (nonatomic) DirectoryMonitor *directoryMonitor;
 @property (nonatomic) PreferencesWindowController *preferencesWindowController;
 
 @end
@@ -335,14 +338,18 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  * Install a handler to notify of changes in the scripts folder.
  * The handler is a code block which triggers a refresh of the scripts menu
  */
--(void)installScriptsFolderWatcher
-{
-	NSURL * path = [NSURL fileURLWithPath:[Preferences standardPreferences].scriptsFolder];
-	_events = [[CDEvents alloc] initWithURLs:@[path]
-                                       block:^(CDEvents *watcher, CDEvent *event) {
-										   // triggers a refresh of the scripts.menu
-                                           [self initScriptsMenu];
-                                       }];
+- (void)installScriptsFolderWatcher {
+    NSURL *path = [NSURL fileURLWithPath:Preferences.standardPreferences.scriptsFolder];
+    self.directoryMonitor = [[DirectoryMonitor alloc] initWithDirectories:@[path]];
+
+    NSError *error = nil;
+    typeof(self) __weak weakSelf = self;
+    [self.directoryMonitor startAndReturnError:&error eventHandler:^{
+        [weakSelf initScriptsMenu];
+    }];
+    if (error) {
+        LLog(@"%@", error.localizedDescription);
+    }
 }
 
 /* layoutManager
@@ -1636,8 +1643,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  * are bundled with the application, and in the standard Mac OSX application script folder which
  * is where the sysem-wide script menu also looks.
  */
--(void)initScriptsMenu
-{
+- (void)initScriptsMenu {
 	// Valid script file extensions
 	NSArray * exts = @[@"scpt"];
 	
@@ -1656,11 +1662,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	// by key name.
 	NSArray * sortedMenuItems = [scriptPathMappings.allKeys sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
 	NSInteger count = sortedMenuItems.count;
-	
+
 	// Insert the Scripts menu to the left of the Help menu only if
 	// we actually have any scripts.
-	if (count > 0)
-	{
+	if (count > 0) {
 		NSMenu * scriptsMenu = [[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@""];
 		
 		NSInteger index;
@@ -1694,8 +1699,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		NSInteger helpMenuIndex = NSApp.mainMenu.numberOfItems - 1;
 		[NSApp.mainMenu insertItem:scriptsMenuItem atIndex:helpMenuIndex];
 		scriptsMenuItem.submenu = scriptsMenu;
-		
-	}
+    } else {
+        // Remove the menu item if the are no scripts anymore.
+        if (scriptsMenuItem) {
+            [NSApp.mainMenu removeItem:scriptsMenuItem];
+            scriptsMenuItem = nil;
+        }
+    }
 }
 
 /* getStylesMenu

@@ -379,6 +379,7 @@
 		F6D572B41E26AA9900CDA909 /* InfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B61E26AA9900CDA909 /* InfoWindow.xib */; };
 		F6D572B71E26AAA100CDA909 /* RSSFeed.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B91E26AAA100CDA909 /* RSSFeed.xib */; };
 		F6D572BA1E26AAA900CDA909 /* SearchFolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572BC1E26AAA900CDA909 /* SearchFolder.xib */; };
+		F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */; };
 		F6EB261C1E5BA59300570B22 /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6EB261B1E5BA59300570B22 /* PreferencesWindowController.m */; };
 /* End PBXBuildFile section */
 
@@ -1311,6 +1312,7 @@
 		F6D573A01E2706BA00CDA909 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6D573A11E2706BC00CDA909 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6DAD20A1E75892C00FE2645 /* Vienna-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Vienna-Bridging-Header.h"; path = "src/Vienna-Bridging-Header.h"; sourceTree = "<group>"; };
+		F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DirectoryMonitor.swift; path = src/DirectoryMonitor.swift; sourceTree = "<group>"; };
 		F6EB261A1E5BA59300570B22 /* PreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreferencesWindowController.h; path = src/Preferences/PreferencesWindowController.h; sourceTree = "<group>"; };
 		F6EB261B1E5BA59300570B22 /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreferencesWindowController.m; path = src/Preferences/PreferencesWindowController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2004,6 +2006,7 @@
 				3AFF601719A07F5A0036DBA4 /* BJRWindowWithToolbar.h */,
 				34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */,
 				34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */,
+				F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */,
 				AA8B36BF0C12D6480035FBD7 /* GradientView.h */,
 				AA8B36C00C12D6480035FBD7 /* GradientView.m */,
 				AA60237E08C298FB002CFD06 /* HelperFunctions.h */,
@@ -2735,6 +2738,7 @@
 				435028AB165DE9E00018EDB7 /* NewGroupFolder.m in Sources */,
 				435028AC165DE9E00018EDB7 /* NewSubscription.m in Sources */,
 				03B7522A1B741AFD00FD3FDB /* FeedItem.m in Sources */,
+				F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */,
 				435028AD165DE9E00018EDB7 /* PluginManager.m in Sources */,
 				435028AE165DE9E00018EDB7 /* ProgressTextCell.m in Sources */,
 				3AFF601819A07F5A0036DBA4 /* BJRWindowWithToolbar.m in Sources */,
@@ -3415,6 +3419,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F1ECA9ED54D2517E7BEDCBB7 /* Pods-Vienna Tests.development.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -3482,6 +3487,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD11EE0EE1E72989D4E43515 /* Pods-Vienna Tests.deployment.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -3542,6 +3548,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ED69423919E1DC034EA80E25 /* Pods-Vienna Tests.staticanalyzer.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -3643,7 +3650,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				SWIFT_OBJC_BRIDGING_HEADER = "Vienna-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "src/Vienna-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = StaticAnalyzer;
@@ -3705,7 +3712,7 @@
 					"\"$PODS_CONFIGURATION_BUILD_DIR/FMDB\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/MASPreferences\"",
 				);
-				SWIFT_OBJC_BRIDGING_HEADER = "Vienna-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "src/Vienna-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -3725,7 +3732,7 @@
 					"\"$PODS_CONFIGURATION_BUILD_DIR/FMDB\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/MASPreferences\"",
 				);
-				SWIFT_OBJC_BRIDGING_HEADER = "Vienna-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "src/Vienna-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Deployment;

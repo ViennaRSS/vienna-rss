@@ -27,7 +27,6 @@
 #import "PopupButton.h"
 #import "PluginManager.h"
 #import <AppKit/AppKit.h>
-#import "CDEvents.h"
 
 #define APPCONTROLLER ((AppController *)[NSApp delegate])
 #define APP ((ViennaApp *)NSApp)
@@ -101,7 +100,6 @@
 	NSString * searchString;
     
     NewSubscription * _rssFeed;
-    CDEvents * _events;
     ViennaSparkleDelegate * _sparkleDelegate;
 }
 
