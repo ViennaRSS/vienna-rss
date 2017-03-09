@@ -18,7 +18,7 @@ PODS:
   - FMDB/standard (2.6.2)
   - MASPreferences (1.1.4)
   - OCMock (3.4)
-  - Sparkle (1.16.0)
+  - Sparkle (1.17.0)
 
 DEPENDENCIES:
   - ASIHTTPRequest (~> 1.8)
@@ -26,7 +26,7 @@ DEPENDENCIES:
   - FMDB (~> 2.4)
   - MASPreferences (~> 1.1.4)
   - OCMock
-  - Sparkle
+  - Sparkle (~> 1.17.0)
 
 SPEC CHECKSUMS:
   ASIHTTPRequest: ec013992946676b7978dcbde6396d57312d21db4
@@ -34,8 +34,8 @@ SPEC CHECKSUMS:
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   MASPreferences: 7bdcfe891d7840453cf48f95fa866c3e152ace7a
   OCMock: 35ae71d6a8fcc1b59434d561d1520b9dd4f15765
-  Sparkle: 57650c525b8922b1ef72021f9d92287fc7d5d6f0
+  Sparkle: ccfb47699feea7b40b51cf3176f69404e5b1da6c
 
-PODFILE CHECKSUM: c75202a16ad6d4acef7090ad0a404c888863366e
+PODFILE CHECKSUM: e6ff4a6494239fe459b25171426380ddf108fd6c
 
 COCOAPODS: 1.2.0
