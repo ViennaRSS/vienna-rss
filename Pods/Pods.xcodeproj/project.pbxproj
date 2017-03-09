@@ -10,60 +10,59 @@
 		02B022AB52926B682B01492C8018E0F3 /* OCMConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B20BD23F650FC3A6B3AF52B34BA879 /* OCMConstraint.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		031B5D4326120491457096FFD25AAF13 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE956D305F2C87F28E835680780B4F16 /* SystemConfiguration.framework */; };
 		0355A4A800B2016691D47E332F2E9C36 /* OCMRealObjectForwarder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBEA3F2C45A94C1FF28A170D8379145 /* OCMRealObjectForwarder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		06D6E6C87BA3CF14856BAF0627432B32 /* ASIS3BucketRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3C2D23207728E5280C8E0FCBF96B37 /* ASIS3BucketRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		05C2A43664530F15E9DB7BF6867BD8E3 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = C0077C6CB62171BCC486BB7075F2156F /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		073F85101FF1638690E9CBDEA64317A6 /* OCMInvocationExpectation.m in Sources */ = {isa = PBXBuildFile; fileRef = CEED0738671F84C403A56CFDFDAE5CB0 /* OCMInvocationExpectation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0BDE9CBC04B641A2A922CFA1A6514489 /* ASIDataCompressor.h in Headers */ = {isa = PBXBuildFile; fileRef = 1577ED50DBD6A30997CA33E31C772547 /* ASIDataCompressor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DB9CEFF706E1EF0AB69CE780BAD5742 /* OCPartialMockObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB6D8CB9BA3B3F1CFDE3C8732D7CB46 /* OCPartialMockObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0F53FE8CDE1C42B82B36121EA0557930 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1406F4B858F7F12B06D35D55114C63B6 /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		130CACC99BCC9CF9C479F4EC070144DA /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 837F9869A55C57D9540C2FC9217E1E9C /* FMDatabaseAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		13744D21527632FB5EA4EB0E0E6811F0 /* ASICloudFilesContainerXMLParserDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AA85C7FAA63AE77621ACD0EF8879D5 /* ASICloudFilesContainerXMLParserDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		1381044797A05FE77C1346C86AAD342E /* ASICloudFilesCDNRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0AA3C21DE1910432D6F908213BE230 /* ASICloudFilesCDNRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		15BEF40E27E3325500F3811B19C9326F /* OCMBlockCaller.h in Headers */ = {isa = PBXBuildFile; fileRef = F4B0511A15A0975B794390A4BB7B00AF /* OCMBlockCaller.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		166166F6A12C4D620BDB1045FE7FD71C /* CDEventsDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D8D826415919FD3364E100E10CCEE7B5 /* CDEventsDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		17A88FDDE552800C644CA5812E0BD389 /* ASIS3ObjectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A1E89A9EA1F490898751E6EC82A102 /* ASIS3ObjectRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		1B9FA047A34962756F8DDECFB152514A /* OCMObserverRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEC6E4F0E92C0F1BFFFEEBA7C7FF0FE /* OCMObserverRecorder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1BE4C468E79C1B641CFA8D6DD78658F2 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CF0B14276D45A101053B4AA9D89C19 /* CoreServices.framework */; };
-		1C78812278F06C00B6B16572B0538A42 /* ASICloudFilesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B97F383021D07EF4B3979F1EDEFC73C /* ASICloudFilesRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1E32FBF562EFB848C5AE88165D87B93F /* ASIS3Bucket.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E712E266FF74728C23A47F1FF3E06F8 /* ASIS3Bucket.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1E61753D376D8DAF1CEAE2F3413DC88F /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 162FEDB17A0B3417E8588449EE023C61 /* ASIDataDecompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		1EB7D6E191E4664CB818BD0A71946C23 /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 01299E9DA507657C52037C9404E65020 /* ASIDownloadCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1F7B6A6CDBEF45DE9CF63ACABC2F79B4 /* OCMMacroState.h in Headers */ = {isa = PBXBuildFile; fileRef = FF286A671444174C55CE187B1EDC6053 /* OCMMacroState.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FFB58151515661DFFB7F1274D223C0D /* ASICloudFilesObjectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D996E1590B1578BE38C25C28E410729 /* ASICloudFilesObjectRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		21C7A193BA12C7BE9246A457B046FDE0 /* NSNotificationCenter+OCMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 038A8551BD9D1EB50C572828813D2320 /* NSNotificationCenter+OCMAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		229CF4CDA9CAFE6B464A6D88E8049773 /* ASICloudFilesContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EA46468D8726C4493DC0639AB08A8A5 /* ASICloudFilesContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22EBABF6E05ACA8D76B68672CF6CC13E /* OCMNotificationPoster.h in Headers */ = {isa = PBXBuildFile; fileRef = E05587D9794B2B8B09B73200CEA84EDC /* OCMNotificationPoster.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		230A4346AB471EA0D814FA1963B45D29 /* MASPreferences.h in Headers */ = {isa = PBXBuildFile; fileRef = A0C9E7B06F046EE86C588FB46C5FCE44 /* MASPreferences.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		27716A78C255F2571932A743305C92C5 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = D663D9283EF60A0059A2F9C7CB0B022A /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		27FC91D8F2E4FEBC7965729C0453C106 /* ASIInputStream.h in Headers */ = {isa = PBXBuildFile; fileRef = B6B94B3F1921C01FD6ACFD83760D789A /* ASIInputStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2A84FDA8EFACFB8BDE13034FC8B03244 /* OCMInvocationExpectation.h in Headers */ = {isa = PBXBuildFile; fileRef = 44EA102E062F9548EAF14B7D7619E88E /* OCMInvocationExpectation.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		2F3983D72182C2A9358035C8E4400038 /* ASIDownloadCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D250346FFFA03DF447A052FD5BFD8B /* ASIDownloadCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		30B870C3F194F7A3670C36BF1DC98569 /* ASIS3BucketObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 80BD62EB4B4D4B399D3CA35A4A7E079A /* ASIS3BucketObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		32C4263ADD5C4442C6B90EB8CD46B8A0 /* OCMPassByRefSetter.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D81396C7771555291379CB375874F7 /* OCMPassByRefSetter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		332DD71CEAE6102014DFBC8B9932F1B2 /* CDEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = D3C0DEFFF18AA45541BD11C6DA3A717A /* CDEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34A628809A949B8DE648FD905ADB540C /* ASICloudFilesCDNRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0AA3C21DE1910432D6F908213BE230 /* ASICloudFilesCDNRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		3685F859DD33C1EFC1B5F86D4A5739BC /* ASINSXMLParserCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 98821BD2ACA55390F81667FAFE351316 /* ASINSXMLParserCompat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3784582CFE291B2B41AC5BD515773664 /* OCMFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 87D8515C4877EBFD9D0D1E10BCB23C2D /* OCMFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A91B68FC1B34FC54604630310096645 /* ASIS3Request.h in Headers */ = {isa = PBXBuildFile; fileRef = 12F044926144AE611D532A4078D8935B /* ASIS3Request.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3B46FA505F5AAA35F7F1D605166531F1 /* ASIProgressDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AFB4CFF1035327A42E5318F9BD22223 /* ASIProgressDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3DFB947215B13BB4B018A20C7B5802B1 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADB2FF70257957A6CAE152CDEFAA70E /* ASIHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		3DFE6C447AF53A66387F37A56DE89FB5 /* OCMockObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B0100465E6C76068C987198F0F4EF /* OCMockObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3E4E1626CFA8EC340119CCBD4E5E5D6B /* OCMock.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FB15A77B1F17D06E3979B16F0875DAD /* OCMock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3F168780C53956390259FC9CA3440F62 /* OCMIndirectReturnValueProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C9E963FE977A01B5D78E6C7B935B7CD7 /* OCMIndirectReturnValueProvider.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		3F72D31A022CF92C8CCDF2DE71EA8E56 /* OCMBoxedReturnValueProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC39A3B803A39D7DA11FA04A2F0D1B1 /* OCMBoxedReturnValueProvider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4119F5D9F33E1E327AD43BA34432A1BA /* OCMExpectationRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 190E68F61EB69791D3EE1EAB497A73C6 /* OCMExpectationRecorder.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		4299ACE663957B7CBFC8B91C99CCE185 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CF0B14276D45A101053B4AA9D89C19 /* CoreServices.framework */; };
+		42C9D9084E1826795F90377F5FAF5499 /* ASICloudFilesContainerXMLParserDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AA85C7FAA63AE77621ACD0EF8879D5 /* ASICloudFilesContainerXMLParserDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		4465F5DE0D9E72EE2027AAD57FD2E62A /* OCMInvocationStub.h in Headers */ = {isa = PBXBuildFile; fileRef = CF72D042C762923434C5C09980F8A5CF /* OCMInvocationStub.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		44DB114ED6288BCA01EF2CB3322F214D /* ASIS3BucketObject.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF7864F8894C3271FB34E8EE8FD8C22 /* ASIS3BucketObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4528F2DC6CFD28F20C95EE4F7EC52903 /* OCMRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BB70576608EDE4886EBFB7773ECD4E7 /* OCMRecorder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45960D38245419288A67B07799D2CEDE /* ASIDataDecompressor.h in Headers */ = {isa = PBXBuildFile; fileRef = 814380E601E534EBCA0FAD7880D674AA /* ASIDataDecompressor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4661D63EB61DA7E67412833F7E9AABD1 /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = 33FE1B379A243068A6C23BA269F2B780 /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4672A586D74CAC8A17CDA6801F480F09 /* ASIS3ObjectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A1E89A9EA1F490898751E6EC82A102 /* ASIS3ObjectRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4E13CD10F405A1A759A6D7FC214B9BE8 /* MASPreferencesWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EDB5CA2FAD888B6DBC904E30FAF031 /* MASPreferencesWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		50A3D4FD8B311189FD9F157B146ACBC4 /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7162321B991E8C852F9694AF8EAD47 /* MASPreferencesWindowController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		53D8C83AEAE03BDE8A60A7CF1E4C7E73 /* ASIWebPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF03BEEF83A76E1C58FF7FBFF99B4D3 /* ASIWebPageRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		54D109A8C7933170C76072923E569C7F /* OCMFunctionsPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 63D13F2AA35C9DD960085453C53A4B51 /* OCMFunctionsPrivate.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		58F50CC97F2B8BF5FDFF683D324C02BE /* FMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = BBCA50D48CA31727BB2EA2D4EF5CFB00 /* FMDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5A2F48058A769355896075FAEC5F5DDF /* ASIS3Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE1012E8B62457B4F876330E78133CB /* ASIS3Request.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5A3BA82E1DCE3ED246A55D8F3517B436 /* NSNotificationCenter+OCMAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3629B91E2D6A16BC175CD4ACC78FC518 /* NSNotificationCenter+OCMAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5BC743A765FEC6D0F6475D8942096667 /* ASIFormDataRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = F48D0EB2429E603687331DEE0AB8ED64 /* ASIFormDataRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E0FFA65B43F90369473AB4C2F9F285F /* OCMMacroState.m in Sources */ = {isa = PBXBuildFile; fileRef = 662EE1B98D29FFCDA05716D1831AB18C /* OCMMacroState.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5ED89C544741F9B23BC697369F822444 /* OCClassMockObject.h in Headers */ = {isa = PBXBuildFile; fileRef = AC7C6DF92B74AC7158B172F3BC6F3D93 /* OCClassMockObject.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		637E3920F36F1653B29CAD5B3EF59273 /* ASIWebPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF03BEEF83A76E1C58FF7FBFF99B4D3 /* ASIWebPageRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		63BB32FF46CB5F42BEC3DE66315CA0C4 /* ASIWebPageRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E0F288E9DE13FBB8A568F1AD075EDA5 /* ASIWebPageRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		64B49C02571BB849C73681D11396CE0B /* ASICloudFilesContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFC06CA418C2AC2DA992BC04614EF18 /* ASICloudFilesContainer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		6604A00A99CAF53337B4D2AF22267D11 /* OCMExpectationRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = A57EC34983A5CC2022F8D5AABB31F8CF /* OCMExpectationRecorder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		669085B7B21D882669D77608A6D84314 /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0503770DDAF36ECE1A6C15DA5B6738 /* FMResultSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6996D45FCF7235BED820313DBD8D3C90 /* Pods-Vienna Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F3458A007C8ABC53CD22EEA6109115 /* Pods-Vienna Tests-dummy.m */; };
@@ -77,11 +76,9 @@
 		74B480090B165FA6B57BF7CBA41C3E6D /* OCMRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 622309C21B62B32BE90C16F62BBD4BB0 /* OCMRecorder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		754880B0CBC3AE307EBDE3E3C87F57FD /* FMDB-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFDF0E4B6ABEE6E62BE1EBBAD426308 /* FMDB-dummy.m */; };
 		75758A9E79007C7CA38C65EE231D91FF /* ASICloudFilesObjectRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A938DCAA557F0795E75348C865D4D0 /* ASICloudFilesObjectRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		770AB1E44FB5B78F190574FDF8705F10 /* ASIS3Bucket.m in Sources */ = {isa = PBXBuildFile; fileRef = DB67563E3CC9F931CF5E2478D45B8240 /* ASIS3Bucket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		77287ED0CC7F48E0A9FAC866FE6AB4B0 /* ASIHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = FF47D6FC48ABFE2107B620609C430E6E /* ASIHTTPRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7899944FBB980F5A480B7F5387C60C19 /* OCMBlockArgCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D77B2D14FE57DBB494E325B0039EB94 /* OCMBlockArgCaller.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		78EF11E51C7DB6878D03DC9265034CC1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F139F52690C7EFF49ED1EEEA657B3601 /* Cocoa.framework */; };
-		79DF4759A6117FB496772F3F68B25842 /* ASICloudFilesContainerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE844B0A288BA713E036FCF347CEE63 /* ASICloudFilesContainerRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7A1C0E211CBCA1BE51BB2FE11EAE147B /* OCMLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 349B2E400458435992829ADC8A71D109 /* OCMLocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7BB5354D1CA217114EFCFEF7F3E706F3 /* CDEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D14A1344D454F8575FEE09C34537A9D /* CDEvent.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		7C433089E61BB696665A9FC162417172 /* OCClassMockObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A451C58680AA64466D6BE590D9046F2F /* OCClassMockObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -90,20 +87,21 @@
 		7EE2995EDA6A15495C9A53D2A549C089 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F21220BED2597E6A54DC4284AC76AB /* FMDatabasePool.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		7F0EFCA82C4AD8A41399865B029BBDFE /* NSValue+OCMAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0101DD612F7F21FCEE032C245994E7D9 /* NSValue+OCMAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		7FBE56E490722C4AD3E73A4AA79C085D /* NSMethodSignature+OCMAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 677BF336A6AD48E19F21D2C57BA32FDB /* NSMethodSignature+OCMAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		8438E0ABA96825B1DC5D5EF4D089D64A /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 36848DC71010DC30B3C0F84FEDE777BB /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		84398632E99185E287B555B4CFA844F2 /* NSInvocation+OCMAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = FF291432490EB2EB3B2C7C94CD5A936C /* NSInvocation+OCMAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		861C61F693000725271C1B166CD370A1 /* ASICloudFilesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B97F383021D07EF4B3979F1EDEFC73C /* ASICloudFilesRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		87476096B6102CED81C5FBE3EC478E16 /* OCMBlockArgCaller.h in Headers */ = {isa = PBXBuildFile; fileRef = BEF2185F136B0A204C042BD5AC817C3D /* OCMBlockArgCaller.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		878E4FA4B35054247F23F56D46D4D50B /* MASPreferences-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8C74DB86FC1E4ABFF8472F603491FB /* MASPreferences-dummy.m */; };
 		87F9B891FE69B24299399C0B7B4A4FDD /* ASIHTTPRequestDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F581CFEBAA6A41188E526A6ED674DEF /* ASIHTTPRequestDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		88CA1A96EBBAF9CA1F92550C8772ECA0 /* OCMPassByRefSetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 98B6661B92A26B4F3C29D4C5E6C99E57 /* OCMPassByRefSetter.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		8904CC5A5FC0CA1711896D04888EA983 /* ASICloudFilesObjectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D996E1590B1578BE38C25C28E410729 /* ASICloudFilesObjectRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8DAFB49B76C8FEC190F8E298DB420103 /* OCMInvocationMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 141AF6CB52B2839A7AC836C7BE75BD95 /* OCMInvocationMatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8FF6DFE500B6A30323A8E4287E4AEFDB /* OCMArg.m in Sources */ = {isa = PBXBuildFile; fileRef = 07593F441D481932A11462ECCEFA86E6 /* OCMArg.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9107E1A6D09BEE8FD576806FB398E06D /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 977C3252D26F49343CDED6F57F9C45BA /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		9108C9DFE04F661531162BDC9C4DED35 /* ASIS3Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE1012E8B62457B4F876330E78133CB /* ASIS3Request.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		92585147FF8775FA86FF53C6AED015D3 /* NSInvocation+OCMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = ED6DA17A21C03807E75119BD19413B99 /* NSInvocation+OCMAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		946F72BBB08CED3B19FCD830D736048C /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8737D72C24EFE9F234B2495601EDF76D /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		9591ABB13D37D47656D036EDE726D258 /* Pods-Vienna-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B9A39F5E0365BF35B2FD6A040B84E6 /* Pods-Vienna-dummy.m */; };
 		979D96D252EDD84AB97121CDBF2F2F9B /* NSMethodSignature+OCMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C2B79AA701CFA14963B375999C2C14 /* NSMethodSignature+OCMAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		97A8E561EEF71AA6967D7D81C82757D6 /* ASIS3ServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8F21E7CDE1040F08C6EC903A023FDE /* ASIS3ServiceRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		98DBDB316F2CA4A4C6335CBE4BB07E24 /* OCMInvocationStub.m in Sources */ = {isa = PBXBuildFile; fileRef = 384A3FE29CB743B6FE2FE996E234A5A6 /* OCMInvocationStub.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9E15EF21A5138CAFD2C5BDAB696B4810 /* OCMArgAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB897E24126DE8ACFCDCC4ECE6F2CC1 /* OCMArgAction.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9FC56BEFF1D38695885EC18273E68460 /* NSObject+OCMAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 31420491DE5F64DCCA72310F41897EF7 /* NSObject+OCMAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -114,51 +112,53 @@
 		A65D726D8E5130AC078C4DFE61AFA53C /* OCProtocolMockObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 570927D8FD27745561FEF011592963C3 /* OCProtocolMockObject.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		A93A6DFDF8B1ADD88D7F63EC0F5ED201 /* OCProtocolMockObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 556E6A35B9C635F3FAB1B00479DF3BFE /* OCProtocolMockObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		AC18860E7098B766A8383E2EFB783C8B /* OCMInvocationMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 58FD65FE162D442E2A04E168CCE3DE0A /* OCMInvocationMatcher.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		AC93A84A96176942DE924D971DB699BB /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADB2FF70257957A6CAE152CDEFAA70E /* ASIHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AC733D5A096EFEDD5BCA097595BE363D /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = D663D9283EF60A0059A2F9C7CB0B022A /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		B00BC8C1362B5DB3DAB284B257990479 /* ASICloudFilesRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B81D7ADBC36DA9913D7ABBD233EF435 /* ASICloudFilesRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B08ECA9F73D7BA69C6732D2D89450152 /* OCObserverMockObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C0EBE650B1E33DDA959D7A561B4B90 /* OCObserverMockObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B30BB9261CE979FA626C13DDAD6A62A1 /* ASIS3BucketRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3C2D23207728E5280C8E0FCBF96B37 /* ASIS3BucketRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		B3DB387F0D9AC02FDBF0D70C8023356D /* OCMReturnValueProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F354CEE9629C85D8C0CB6F4F7FC9D82 /* OCMReturnValueProvider.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		B4DD018261CB36973C42A54697D1AF76 /* ASIHTTPRequest-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BC6C525B016AF4121A444D1F105CCBC3 /* ASIHTTPRequest-dummy.m */; };
 		B58A07D0D1FDEE2CDEC728718C519120 /* OCMConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = CB0C672B1A47E0CE1800535E5695476D /* OCMConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B70A0EC4ACEB186DCB8ACD50AFD0DD84 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F139F52690C7EFF49ED1EEEA657B3601 /* Cocoa.framework */; };
+		B83641D3BBFC111D62F4B451B3A62E51 /* ASICloudFilesObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C12D8B3702DBEC4B33C1578C480FE4 /* ASICloudFilesObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		BA8A6E51FBED141F279DFB8A04CD20E5 /* ASICacheDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6384DCF1FE9BFD53C4FE5E8F9C53952B /* ASICacheDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BA90B649DA8756B8462999716C341910 /* OCObserverMockObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 7191707F2E0A974AF922A42183694C42 /* OCObserverMockObject.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		BCD2DE7B8AF3A92500154A15293A1071 /* CDEvents-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F481484CD6DA06D5849C8A7CA02AE8D /* CDEvents-dummy.m */; };
 		BCD72E798FDAB408DC1B1EAE4BCD0D00 /* ASICloudFilesContainerRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 12C359EA4F119228CBB1AAAA1E49A60D /* ASICloudFilesContainerRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE61428E2E9605A5835FD1D6ACC5DBB1 /* OCMVerifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 093AB8A1943E899F226B87A86441B90B /* OCMVerifier.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		BEF1CCEEA08E4A34396ED65811388268 /* ASICloudFilesCDNRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = E8C1A99DBCA241F3B83C45DD3DD435F9 /* ASICloudFilesCDNRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C4D735942402825435CB4DF28C26E30B /* ASICloudFilesObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C12D8B3702DBEC4B33C1578C480FE4 /* ASICloudFilesObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C56F24B92EA4857E9D811FB20D84F4ED /* OCMExceptionReturnValueProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 22327B23ACF676F9AFE8BC648F8016DC /* OCMExceptionReturnValueProvider.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		C6EF2B9B667BEAA87F5D0DCFEC6ADA53 /* NSValue+OCMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7FBC37A65E650C6E527DD0A1E79E77 /* NSValue+OCMAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C7BC49642BAF654AA8E0DE5B582E3840 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F139F52690C7EFF49ED1EEEA657B3601 /* Cocoa.framework */; };
 		C80871AE1DCD282550114CE38D371781 /* OCMLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7112EE3EF5734277415E7A05193C9D /* OCMLocation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		C8094285F29D26D68E6A20C131D71502 /* ASICloudFilesContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFC06CA418C2AC2DA992BC04614EF18 /* ASICloudFilesContainer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C8AEA70078168829E0EE48E30485E5E5 /* ASICloudFilesContainerXMLParserDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AF2DC0C9A459437EB420F167AB4965CF /* ASICloudFilesContainerXMLParserDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C98CD6333FA05D9313DCFBFAACA4CFF7 /* OCMExceptionReturnValueProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1444D244A2DB297E5BD36C6BFCC3A7 /* OCMExceptionReturnValueProvider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CA5CB1909A432AFEF7C86B6B8687D2B3 /* ASICloudFilesObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 3351F42F15BAD7B9B154A8CF130CBAB7 /* ASICloudFilesObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAFF9CA50BC9EE573913B65E387BE168 /* OCMVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 68651AE03BBF9C27EC38896F5E94DFDE /* OCMVerifier.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CBAB512508168973D8021C9D110AC023 /* OCMRealObjectForwarder.h in Headers */ = {isa = PBXBuildFile; fileRef = DD405672F4AC8AFD0A279A65D034BB84 /* OCMRealObjectForwarder.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		CDEC377B5E4F4DEBAC318C6E6BB48687 /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF1AD2190B180DD0B6D453E8D366E67 /* ASIFormDataRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE7462581A6454E95A8313B915096C13 /* OCMockObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 85CE6A5935F589E8F1FC75B7FEC98A86 /* OCMockObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CEFD992710085A9C8B53E47657472E5F /* ASIHTTPRequestConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 04521BAFB7BFCF40D7B422B4EE24BCDE /* ASIHTTPRequestConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CF448618DD577D75308F71E2E0FA53F7 /* OCMReturnValueProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 064E194E9EC7898DE021C7DC4A64FC3C /* OCMReturnValueProvider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D3D836EA4B778FFEB0203FA6C0FF49BA /* ASIS3Bucket.m in Sources */ = {isa = PBXBuildFile; fileRef = DB67563E3CC9F931CF5E2478D45B8240 /* ASIS3Bucket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		D52A60840E94FD9CA8849C5102B8290C /* OCMIndirectReturnValueProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C303AE7A15B07394F947C3A9EF42D05 /* OCMIndirectReturnValueProvider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D82E00BA4A7A7F534776CCF8AA8F708E /* OCMObserverRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EEC0D1698BFC712407B0238987BDA79 /* OCMObserverRecorder.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		DA1C9E2316C673A965583634E28B3D63 /* ASIS3BucketRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7530EA8A3A7308DEE7DC7CCBEAB05B3C /* ASIS3BucketRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB803B066979B56C78E6809AA2BADB50 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 38592E3096E6701900F74E355F6F3810 /* FMDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DF13A4CD6BB608CD7F0EF683103C747D /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 162FEDB17A0B3417E8588449EE023C61 /* ASIDataDecompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		E196C686E191467DEC552A40938ACDBD /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = AC784163988EA8BBA3CA9BA6382DAF54 /* FMDatabaseQueue.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		E2E4F1C6A2648450474D7DC392E6F5E2 /* ASIS3ServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8F21E7CDE1040F08C6EC903A023FDE /* ASIS3ServiceRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E435855C6F61670D6978C56A3DD83D3A /* FMDatabaseQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 24AEB31FEA5A4D6E38B498B2C5575C58 /* FMDatabaseQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E64EC6CE1DDEB4BE6EB819D24EE35493 /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF1AD2190B180DD0B6D453E8D366E67 /* ASIFormDataRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		EA902120545CA6EF04E0AE6C7EE502F1 /* compat.h in Headers */ = {isa = PBXBuildFile; fileRef = B4BDD7829DDB80A47E92B818A0092CCB /* compat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ED04011D190B0463C252B7D1CD20AB92 /* OCPartialMockObject.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8C63368F8C29E85A07DE50D35D795E /* OCPartialMockObject.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		EEE23DD02266662F3B65C653F98B350F /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = C0077C6CB62171BCC486BB7075F2156F /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		EDCE1357075860D41F919214EAA5C358 /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 01299E9DA507657C52037C9404E65020 /* ASIDownloadCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		F04E2B0E38E574060E3C837555A91BCC /* NSObject+OCMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4BACF949C078714F1DB4A3ABD887DC /* NSObject+OCMAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FA85B836A0A34CF9BC3B677E6972BBA1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F139F52690C7EFF49ED1EEEA657B3601 /* Cocoa.framework */; };
+		FA979C5876728D9B139D54F281CA0F83 /* ASICloudFilesContainerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE844B0A288BA713E036FCF347CEE63 /* ASICloudFilesContainerRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		FB4BC39D2B5797F17E5D5385B0882B09 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F139F52690C7EFF49ED1EEEA657B3601 /* Cocoa.framework */; };
 		FBCC616A5BEF6BCFC0E4F2A388B4C4F2 /* ASINetworkQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = E22D9731D9DD563156DF478D2508A4CD /* ASINetworkQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC310F21208A0B4E9BBB25FD2903D549 /* OCMArg.h in Headers */ = {isa = PBXBuildFile; fileRef = 2041AF0D1D5B037F3BC72EFA2BE19642 /* OCMArg.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FCC4ACDB14E5FDD77BFE17A0DC7EC4E0 /* ASIS3BucketObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 80BD62EB4B4D4B399D3CA35A4A7E079A /* ASIS3BucketObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FCE548A6E340A15A85C0820030F026B5 /* OCMNotificationPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 091A867CB2060E95C44AA98545554E48 /* OCMNotificationPoster.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FE953E489193D1C4589C40B246BDD8E4 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 36848DC71010DC30B3C0F84FEDE777BB /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		FFE87F77B3B2D37FE73005BB5637DFA3 /* OCMStubRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F46021C0998F4D50E783C9D69C9DFC1 /* OCMStubRecorder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -1119,7 +1119,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0820;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1238,28 +1238,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1381044797A05FE77C1346C86AAD342E /* ASICloudFilesCDNRequest.m in Sources */,
-				C8094285F29D26D68E6A20C131D71502 /* ASICloudFilesContainer.m in Sources */,
-				79DF4759A6117FB496772F3F68B25842 /* ASICloudFilesContainerRequest.m in Sources */,
-				13744D21527632FB5EA4EB0E0E6811F0 /* ASICloudFilesContainerXMLParserDelegate.m in Sources */,
-				C4D735942402825435CB4DF28C26E30B /* ASICloudFilesObject.m in Sources */,
-				8904CC5A5FC0CA1711896D04888EA983 /* ASICloudFilesObjectRequest.m in Sources */,
-				1C78812278F06C00B6B16572B0538A42 /* ASICloudFilesRequest.m in Sources */,
-				27716A78C255F2571932A743305C92C5 /* ASIDataCompressor.m in Sources */,
-				1E61753D376D8DAF1CEAE2F3413DC88F /* ASIDataDecompressor.m in Sources */,
-				1EB7D6E191E4664CB818BD0A71946C23 /* ASIDownloadCache.m in Sources */,
-				CDEC377B5E4F4DEBAC318C6E6BB48687 /* ASIFormDataRequest.m in Sources */,
+				34A628809A949B8DE648FD905ADB540C /* ASICloudFilesCDNRequest.m in Sources */,
+				64B49C02571BB849C73681D11396CE0B /* ASICloudFilesContainer.m in Sources */,
+				FA979C5876728D9B139D54F281CA0F83 /* ASICloudFilesContainerRequest.m in Sources */,
+				42C9D9084E1826795F90377F5FAF5499 /* ASICloudFilesContainerXMLParserDelegate.m in Sources */,
+				B83641D3BBFC111D62F4B451B3A62E51 /* ASICloudFilesObject.m in Sources */,
+				1FFB58151515661DFFB7F1274D223C0D /* ASICloudFilesObjectRequest.m in Sources */,
+				861C61F693000725271C1B166CD370A1 /* ASICloudFilesRequest.m in Sources */,
+				AC733D5A096EFEDD5BCA097595BE363D /* ASIDataCompressor.m in Sources */,
+				DF13A4CD6BB608CD7F0EF683103C747D /* ASIDataDecompressor.m in Sources */,
+				EDCE1357075860D41F919214EAA5C358 /* ASIDownloadCache.m in Sources */,
+				E64EC6CE1DDEB4BE6EB819D24EE35493 /* ASIFormDataRequest.m in Sources */,
 				B4DD018261CB36973C42A54697D1AF76 /* ASIHTTPRequest-dummy.m in Sources */,
-				AC93A84A96176942DE924D971DB699BB /* ASIHTTPRequest.m in Sources */,
-				EEE23DD02266662F3B65C653F98B350F /* ASIInputStream.m in Sources */,
-				8438E0ABA96825B1DC5D5EF4D089D64A /* ASINetworkQueue.m in Sources */,
-				770AB1E44FB5B78F190574FDF8705F10 /* ASIS3Bucket.m in Sources */,
-				FCC4ACDB14E5FDD77BFE17A0DC7EC4E0 /* ASIS3BucketObject.m in Sources */,
-				06D6E6C87BA3CF14856BAF0627432B32 /* ASIS3BucketRequest.m in Sources */,
-				4672A586D74CAC8A17CDA6801F480F09 /* ASIS3ObjectRequest.m in Sources */,
-				5A2F48058A769355896075FAEC5F5DDF /* ASIS3Request.m in Sources */,
-				E2E4F1C6A2648450474D7DC392E6F5E2 /* ASIS3ServiceRequest.m in Sources */,
-				53D8C83AEAE03BDE8A60A7CF1E4C7E73 /* ASIWebPageRequest.m in Sources */,
+				3DFB947215B13BB4B018A20C7B5802B1 /* ASIHTTPRequest.m in Sources */,
+				05C2A43664530F15E9DB7BF6867BD8E3 /* ASIInputStream.m in Sources */,
+				FE953E489193D1C4589C40B246BDD8E4 /* ASINetworkQueue.m in Sources */,
+				D3D836EA4B778FFEB0203FA6C0FF49BA /* ASIS3Bucket.m in Sources */,
+				30B870C3F194F7A3670C36BF1DC98569 /* ASIS3BucketObject.m in Sources */,
+				B30BB9261CE979FA626C13DDAD6A62A1 /* ASIS3BucketRequest.m in Sources */,
+				17A88FDDE552800C644CA5812E0BD389 /* ASIS3ObjectRequest.m in Sources */,
+				9108C9DFE04F661531162BDC9C4DED35 /* ASIS3Request.m in Sources */,
+				97A8E561EEF71AA6967D7D81C82757D6 /* ASIS3ServiceRequest.m in Sources */,
+				637E3920F36F1653B29CAD5B3EF59273 /* ASIWebPageRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1431,14 +1431,18 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_RELEASE=1",
 					"$(inherited)",
@@ -1826,15 +1830,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_DEBUG=1",
@@ -1994,8 +2002,6 @@
 				EXECUTABLE_PREFIX = lib;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/ASIHTTPRequest/ASIHTTPRequest-prefix.pch";
-				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
-				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
@@ -2048,14 +2054,18 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_STATIC_ANALYZER=1",
 					"$(inherited)",
@@ -2139,14 +2149,18 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_DEPLOYMENT=1",
 					"$(inherited)",
@@ -2380,14 +2394,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_DEVELOPMENT=1",
 					"$(inherited)",
@@ -2399,6 +2418,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
 				VALIDATE_PRODUCT = YES;
