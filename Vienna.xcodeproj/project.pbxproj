@@ -680,6 +680,7 @@
 		F6A7DE4F1E471A7F0017BE5E /* Vienna.help in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DDCA1E470E980017BE5E /* Vienna.help */; };
 		F6A7DEC71E47233C0017BE5E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DEC51E47233C0017BE5E /* InfoPlist.strings */; };
 		F6B0FCA81E76C78000B374D8 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4398241E1666B3DB00FFE219 /* Credits.rtf */; };
+		F6EB261C1E5BA59300570B22 /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6EB261B1E5BA59300570B22 /* PreferencesWindowController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1688,6 +1689,8 @@
 		F6A7DEAC1E471E440017BE5E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = uk; path = Resources/uk.lproj/advanced.html; sourceTree = "<group>"; };
 		F6A7DEAD1E471E450017BE5E /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hant"; path = "Resources/zh-Hant.lproj/advanced.html"; sourceTree = "<group>"; };
 		F6A7DEAE1E471E460017BE5E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "Resources/zh-Hans.lproj/advanced.html"; sourceTree = "<group>"; };
+		F6EB261A1E5BA59300570B22 /* PreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreferencesWindowController.h; path = src/Preferences/PreferencesWindowController.h; sourceTree = "<group>"; };
+		F6EB261B1E5BA59300570B22 /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreferencesWindowController.m; path = src/Preferences/PreferencesWindowController.m; sourceTree = "<group>"; };
 		F6B1233E1E474D2A00973699 /* IndexHelpbook.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = IndexHelpbook.sh; sourceTree = "<group>"; };
 		F6B3D24F1E47237C00CEB164 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Resources/de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F6B3D2501E47237D00CEB164 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Resources/es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -2750,6 +2753,8 @@
 			children = (
 				AA9FE2EB08BC133600A9E977 /* Preferences.h */,
 				AA9FE2EC08BC133600A9E977 /* Preferences.m */,
+				F6EB261A1E5BA59300570B22 /* PreferencesWindowController.h */,
+				F6EB261B1E5BA59300570B22 /* PreferencesWindowController.m */,
 				0349813C1A206FD900014F29 /* GeneralPreferencesViewController.h */,
 				0349813D1A206FD900014F29 /* GeneralPreferencesViewController.m */,
 				0379E2361A2082E600D58BFE /* AppearancePreferencesViewController.h */,
@@ -3938,6 +3943,7 @@
 				4350289C165DE9E00018EDB7 /* BrowserPane.m in Sources */,
 				4350289D165DE9E00018EDB7 /* BrowserPaneTemplate.m in Sources */,
 				4350289E165DE9E00018EDB7 /* BrowserView.m in Sources */,
+				F6EB261C1E5BA59300570B22 /* PreferencesWindowController.m in Sources */,
 				4350289F165DE9E00018EDB7 /* Constants.m in Sources */,
 				034981411A20701600014F29 /* AdvancedPreferencesViewController.m in Sources */,
 				435028A0165DE9E00018EDB7 /* DownloadManager.m in Sources */,

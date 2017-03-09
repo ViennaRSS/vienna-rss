@@ -230,7 +230,7 @@ Cg
                             </menuItem>
                             <menuItem title="Preferences…" keyEquivalent="," id="129">
                                 <connections>
-                                    <action selector="showPreferencePanel:" target="233" id="234"/>
+                                    <action selector="showWindow:" target="HLa-Gy-vMd" id="Fid-tD-rC8"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Check for Updates" id="1104">
@@ -1262,6 +1262,7 @@ CA
                 <outlet property="filterViewPopUp" destination="1306" id="1322"/>
             </connections>
         </customView>
+        <customObject id="HLa-Gy-vMd" customClass="PreferencesWindowController"/>
     </objects>
     <resources>
         <image name="filter-icon" width="16" height="16"/>
