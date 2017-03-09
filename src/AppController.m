@@ -1694,7 +1694,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 		
 		scriptsMenuItem = [[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:@"" action:NULL keyEquivalent:@""];
-		scriptsMenuItem.image = [NSImage imageNamed:@"scriptMenu.tiff"];
+		scriptsMenuItem.image = [NSImage imageNamed:@"ScriptsTemplate"];
 		
 		NSInteger helpMenuIndex = NSApp.mainMenu.numberOfItems - 1;
 		[NSApp.mainMenu insertItem:scriptsMenuItem atIndex:helpMenuIndex];

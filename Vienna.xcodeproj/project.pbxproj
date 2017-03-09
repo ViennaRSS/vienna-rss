@@ -305,7 +305,6 @@
 		AAD2BF630C2C41A200AA0F11 /* DBListSplitViewDimple.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BF610C2C41A200AA0F11 /* DBListSplitViewDimple.tiff */; };
 		AAD2C0540C2C882D00AA0F11 /* selBlue.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD2C0520C2C882D00AA0F11 /* selBlue.tiff */; };
 		AAD2C0550C2C882D00AA0F11 /* selGray.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD2C0530C2C882D00AA0F11 /* selGray.tiff */; };
-		AAD7935C0889FA5E00E2CE5E /* scriptMenu.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD7935B0889FA5E00E2CE5E /* scriptMenu.tiff */; };
 		AAD794E7088A25D200E2CE5E /* PopUpButtonExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */; };
 		AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */; };
 		AADD6E820C457C3800E11097 /* getInfoButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AADD6E800C457C3800E11097 /* getInfoButton.tiff */; };
@@ -809,7 +808,6 @@
 		AAD2BF610C2C41A200AA0F11 /* DBListSplitViewDimple.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = DBListSplitViewDimple.tiff; path = Resources/DBListSplitViewDimple.tiff; sourceTree = SOURCE_ROOT; };
 		AAD2C0520C2C882D00AA0F11 /* selBlue.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = selBlue.tiff; path = Resources/selBlue.tiff; sourceTree = SOURCE_ROOT; };
 		AAD2C0530C2C882D00AA0F11 /* selGray.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = selGray.tiff; path = Resources/selGray.tiff; sourceTree = SOURCE_ROOT; };
-		AAD7935B0889FA5E00E2CE5E /* scriptMenu.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = scriptMenu.tiff; path = Resources/scriptMenu.tiff; sourceTree = SOURCE_ROOT; };
 		AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopUpButtonExtensions.h; path = src/PopUpButtonExtensions.h; sourceTree = SOURCE_ROOT; };
 		AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PopUpButtonExtensions.m; path = src/PopUpButtonExtensions.m; sourceTree = SOURCE_ROOT; };
 		AAD7999D088B617900E2CE5E /* AddressBarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AddressBarCell.h; path = src/AddressBarCell.h; sourceTree = SOURCE_ROOT; };
@@ -1726,7 +1724,6 @@
 				AA71096F09BA74BF00E3EA8A /* rightArrow.tiff */,
 				AA26F43D060490BD00FE7994 /* greyRightArrow.tiff */,
 				AA26F440060490BD00FE7994 /* smallFolder.tiff */,
-				AAD7935B0889FA5E00E2CE5E /* scriptMenu.tiff */,
 				AA26F441060490BD00FE7994 /* unread_header.tiff */,
 				AA20DC9D0882CCC300A226F5 /* unread.tiff */,
 				57DA9D0A16DFFCD3000889E7 /* unread@2x.tiff */,
@@ -2275,7 +2272,6 @@
 				AA3F7B4208711F6A00D2B96F /* comments_header.tiff in Resources */,
 				AA20DC9E0882CCC300A226F5 /* unread.tiff in Resources */,
 				AA6321510885F0BB006382D3 /* comments.tiff in Resources */,
-				AAD7935C0889FA5E00E2CE5E /* scriptMenu.tiff in Resources */,
 				AA67F3990897377C008BBC37 /* stopRefresh.tiff in Resources */,
 				AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */,
 				AAF6C3A308B06BA00077BAB8 /* StandardURLs.plist in Resources */,
