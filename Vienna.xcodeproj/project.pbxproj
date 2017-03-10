@@ -85,8 +85,6 @@
 		37C650801816EBAD3C0D9DBF /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */; };
 		3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBEC61733C206006DD2AB /* ArticleCellView.m */; };
 		3A7BD0DD1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */; };
-		3A9903951993638900EA69B2 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9903941993638900EA69B2 /* Growl.framework */; };
-		3A990396199363BE00EA69B2 /* Growl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9903941993638900EA69B2 /* Growl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		3AEE7DE91695FC570018A17D /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* vienna_public_key.pem */; };
 		3AF896C71CD8FDB800A9FA22 /* ViennaSparkleDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF896C61CD8FDB800A9FA22 /* ViennaSparkleDelegate.m */; };
 		3AFF601819A07F5A0036DBA4 /* BJRWindowWithToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF601619A07F5A0036DBA4 /* BJRWindowWithToolbar.m */; };
@@ -444,7 +442,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3A990396199363BE00EA69B2 /* Growl.framework in Copy Frameworks */,
 				43501F8F165DC5BC0018EDB7 /* PSMTabBarControl.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -509,7 +506,6 @@
 		3A6760101E65FA4F0078CB14 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = Resources/cs.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A7BD0DB1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BJRVerticallyCenteredTextFieldCell.h; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
 		3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BJRVerticallyCenteredTextFieldCell.m; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
-		3A9903941993638900EA69B2 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = 3rdparty/Growl.framework; sourceTree = "<group>"; };
 		3AEE7DE81695FC570018A17D /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = vienna_public_key.pem; path = signing/vienna_public_key.pem; sourceTree = "<group>"; };
 		3AF896C51CD8FDB800A9FA22 /* ViennaSparkleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViennaSparkleDelegate.h; path = src/ViennaSparkleDelegate.h; sourceTree = "<group>"; };
 		3AF896C61CD8FDB800A9FA22 /* ViennaSparkleDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViennaSparkleDelegate.m; path = src/ViennaSparkleDelegate.m; sourceTree = "<group>"; };
@@ -1322,7 +1318,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EACE4C90147FA2B000A17997 /* PSMTabBarControl.framework in Frameworks */,
-				3A9903951993638900EA69B2 /* Growl.framework in Frameworks */,
 				C6CB717DFD24F9D27350D042 /* libPods-Vienna.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1743,7 +1738,6 @@
 		7F60B6D7AEFB47009A82F8BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3A9903941993638900EA69B2 /* Growl.framework */,
 				EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */,
 				7A3781B9326123EE56347D35 /* libPods-Vienna.a */,
 				BA0CEAD1B45DBBF666A25250 /* libPods-Vienna Tests.a */,
