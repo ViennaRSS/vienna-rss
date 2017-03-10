@@ -33,7 +33,6 @@
 #define APPCONTROLLER ((AppController *)[NSApp delegate])
 #define APP ((ViennaApp *)NSApp)
 
-@class NewPreferencesController;
 @class FoldersTree;
 @class SmartFolder;
 @class NewSubscription;
@@ -103,13 +102,11 @@
 	BOOL didCompleteInitialisation;
 	NSString * searchString;
     
-    NSWindowController *_preferencesWindowController;
     NewSubscription * _rssFeed;
     CDEvents * _events;
     ViennaSparkleDelegate * _sparkleDelegate;
 }
 
-@property (weak, nonatomic, readonly) NSWindowController *preferencesWindowController;
 @property(nonatomic, strong) NewSubscription *rssFeed;
 @property(nonatomic, strong) IBOutlet FoldersTree * foldersTree;
 
@@ -117,7 +114,6 @@
 -(IBAction)handleAbout:(id)sender;
 -(IBAction)exitVienna:(id)sender;
 -(IBAction)reindexDatabase:(id)sender;
--(IBAction)showPreferencePanel:(id)sender;
 -(IBAction)deleteMessage:(id)sender;
 -(IBAction)deleteFolder:(id)sender;
 -(IBAction)searchUsingToolbarTextField:(id)sender;
