@@ -108,7 +108,7 @@
 	if (index != -1)
 	{
 		DownloadItem * item = list[index];
-		if (item && item.state == DOWNLOAD_COMPLETED)
+		if (item && item.state == DownloadStateCompleted)
 		{
 			if ([[NSWorkspace sharedWorkspace] openFile:item.filename] == NO)
 				runOKAlertSheet(NSLocalizedString(@"Vienna cannot open the file title", nil), NSLocalizedString(@"Vienna cannot open the file body", nil), item.filename.lastPathComponent);
@@ -126,7 +126,7 @@
 	if (index != -1)
 	{
 		DownloadItem * item = list[index];
-		if (item && item.state == DOWNLOAD_COMPLETED)
+		if (item && item.state == DownloadStateCompleted)
 		{
 			if ([[NSWorkspace sharedWorkspace] selectFile:item.filename inFileViewerRootedAtPath:@""] == NO)
 				runOKAlertSheet(NSLocalizedString(@"Vienna cannot show the file title", nil), NSLocalizedString(@"Vienna cannot show the file body", nil), item.filename.lastPathComponent);
@@ -209,19 +209,20 @@
 
 	// Different layout depending on the state
 	NSString * objectString = filename;
-	switch (item.state)
-	{
-		case DOWNLOAD_INIT:
+	switch (item.state) {
+        case DownloadStateInit:
+        case DownloadStateFailed:
+        case DownloadStateCancelled:
 			break;
 
-		case DOWNLOAD_COMPLETED: {
+		case DownloadStateCompleted: {
             NSString *byteCount = [NSByteCountFormatter stringFromByteCount:item.size
                                                                  countStyle:NSByteCountFormatterCountStyleFile];
-			objectString = [NSString stringWithFormat:@"%@\n%@", filename, byteCount];
+            objectString = [NSString stringWithFormat:@"%@\n%@", filename, byteCount];
 			break;
 		}
 
-		case DOWNLOAD_STARTED: {
+		case DownloadStateStarted: {
 			// Filename on top
 			// Progress gauge in middle
 			// Size gathered so far at bottom

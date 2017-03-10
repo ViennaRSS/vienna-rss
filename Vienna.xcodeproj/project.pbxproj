@@ -357,6 +357,7 @@
 		F648C2B91E7F3C2500CE4043 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */; };
 		F64C2CCC1E83825D00ED4E04 /* DateFormatterExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */; };
 		F65D6D711E74619E00A30974 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4398241E1666B3DB00FFE219 /* Credits.rtf */; };
+		F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = F69140E31E71B94200D51BFF /* AppController+Notifications.m */; };
 		F6A7DE341E47138B0017BE5E /* advanced.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2A1E47138B0017BE5E /* advanced.html */; };
 		F6A7DE351E47138B0017BE5E /* faq.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2C1E47138B0017BE5E /* faq.html */; };
 		F6A7DE361E47138B0017BE5E /* intro.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2E1E47138B0017BE5E /* intro.html */; };
@@ -1047,6 +1048,8 @@
 		F64C2CCA1E83825D00ED4E04 /* DateFormatterExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateFormatterExtension.h; path = src/DateFormatterExtension.h; sourceTree = "<group>"; };
 		F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DateFormatterExtension.m; path = src/DateFormatterExtension.m; sourceTree = "<group>"; };
 		F68F724A1E2A0937007FADA5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		F69140E21E71B94200D51BFF /* AppController+Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AppController+Notifications.h"; path = "src/AppController+Notifications.h"; sourceTree = "<group>"; };
+		F69140E31E71B94200D51BFF /* AppController+Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AppController+Notifications.m"; path = "src/AppController+Notifications.m"; sourceTree = "<group>"; };
 		F69140ED1E71D72100D51BFF /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F69140EE1E71D72400D51BFF /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F69140EF1E71D72600D51BFF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -1432,6 +1435,8 @@
 				793C952F1C3F07FC00984D4E /* TreeFilterView.m */,
 				4350284B165DE9DF0018EDB7 /* AppController.h */,
 				4350284C165DE9DF0018EDB7 /* AppController.m */,
+				F69140E21E71B94200D51BFF /* AppController+Notifications.h */,
+				F69140E31E71B94200D51BFF /* AppController+Notifications.m */,
 				4350284D165DE9DF0018EDB7 /* ArticleBaseView.h */,
 				3A4DBEC51733C206006DD2AB /* ArticleCellView.h */,
 				3A4DBEC61733C206006DD2AB /* ArticleCellView.m */,
@@ -2732,6 +2737,7 @@
 				435028BA165DE9E00018EDB7 /* XMLSourceWindow.m in Sources */,
 				3A7BD0DD1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m in Sources */,
 				43BA97FE1664804E00B95F35 /* DSClickableURLTextField.m in Sources */,
+				F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */,
 				3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */,
 				37C650801816EBAD3C0D9DBF /* NSURL+Utils.m in Sources */,
 			);
