@@ -1973,6 +1973,17 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	
 	// Make sure article viewer is active
 	[browserView setActiveTabToPrimaryTab];
+
+    // If the user selects the unread-articles smart folder, then clear the
+    // relevant user notifications.
+    if (newFolderId == [db folderFromName:NSLocalizedString(@"Unread Articles", nil)].itemId) {
+        NSUserNotificationCenter *center = NSUserNotificationCenter.defaultUserNotificationCenter;
+        [center.deliveredNotifications enumerateObjectsUsingBlock:^(NSUserNotification * notification, NSUInteger idx, BOOL *stop) {
+            if ([notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFetchCompleted]) {
+                [center removeDeliveredNotification:notification];
+            }
+        }];
+    }
 }
 
 /* handleDidBecomeKeyWindow

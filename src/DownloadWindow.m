@@ -19,6 +19,8 @@
 //
 
 #import "DownloadWindow.h"
+
+#import "AppController+Notifications.h"
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
 #import "ImageAndTextCell.h"
@@ -72,6 +74,19 @@
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Remove From List", nil) action:@selector(removeFromList:) keyEquivalent:@""];
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Cancel", nil) action:@selector(cancelDownload:) keyEquivalent:@""];
 	table.menu = downloadMenu;
+}
+
+- (void)windowDidBecomeKey:(NSNotification *)notification {
+    // Clear relevant notifications when the user views this window.
+    NSUserNotificationCenter *center = NSUserNotificationCenter.defaultUserNotificationCenter;
+    [center.deliveredNotifications enumerateObjectsUsingBlock:^(NSUserNotification *notification, NSUInteger idx, BOOL *stop) {
+        BOOL completed = [notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFileDownloadCompleted];
+        BOOL failed = [notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFileDownloadFailed];
+
+        if (completed || failed) {
+            [center removeDeliveredNotification: notification];
+        }
+    }];
 }
 
 /* clearList
