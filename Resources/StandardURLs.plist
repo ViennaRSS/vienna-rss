@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>ViennaHomePage</key>
-	<string>http://www.vienna-rss.org/</string>
+	<string>http://www.vienna-rss.com/</string>
 	<key>ViennaMoreStylesPage</key>
-	<string>http://www.vienna-rss.org/?page_id=76</string>
+	<string>http://www.vienna-rss.com/?page_id=76</string>
 	<key>ViennaMoreScriptsPage</key>
-	<string>http://www.vienna-rss.org/?page_id=76</string>
+	<string>http://www.vienna-rss.com/?page_id=76</string>
 	<key>FeedValidatorTemplate</key>
 	<string>http://feedvalidator.org/check?url=%@</string>
 </dict>

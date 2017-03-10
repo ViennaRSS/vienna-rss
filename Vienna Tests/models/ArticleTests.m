@@ -11,7 +11,7 @@
 static NSString * const GUID = @"07f446d2-8d6b-4d99-b488-cebc9eac7c33";
 static NSString * const Author = @"Author McAuthorface";
 static NSString * const Title = @"Lorem ipsum dolor sit amet";
-static NSString * const Link = @"http://www.vienna-rss.org";
+static NSString * const Link = @"http://www.vienna-rss.com";
 static NSString * const Enclosure = @"http://vienna-rss.sourceforge.net/img/vienna_logo.png";
 static NSString * const EnclosureFilename = @"vienna_logo.png"; // last path component of Enclosure
 static NSString * const Body =
@@ -224,7 +224,7 @@ static NSString * const Body =
 
 - (void)testCompatibilityLink
 {
-    NSString *link = @"http://www.vienna-rss.org";
+    NSString *link = @"http://www.vienna-rss.com";
     NSString *linkKeyPath = [@"articleData." stringByAppendingString:MA_Field_Link];
 
     self.article.link = link;
