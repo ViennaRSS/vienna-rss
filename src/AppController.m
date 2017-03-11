@@ -3363,19 +3363,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[self openURLInDefaultBrowser:[NSURL URLWithString:homePage]];
 }
 
-/* showAcknowledgements
- * Display the acknowledgements document in a new tab.
- */
--(IBAction)showAcknowledgements:(id)sender
-{
-	NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
-	NSString * pathToAckFile = [thisBundle pathForResource:@"Acknowledgements" ofType:@"html"];
-	if (pathToAckFile != nil)
-	{
-		[self createNewTab:[NSURL fileURLWithPath:pathToAckFile isDirectory:NO] inBackground:NO];
-	}
-}
-
 #pragma mark Tabs
 
 /* previousTab

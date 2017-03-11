@@ -877,11 +877,6 @@ CA
                             <menuItem isSeparatorItem="YES" id="931">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Acknowledgements" id="682">
-                                <connections>
-                                    <action selector="showAcknowledgements:" target="233" id="683"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="Vienna Web Site" id="929">
                                 <connections>
                                     <action selector="showViennaHomePage:" target="233" id="930"/>
