@@ -18,6 +18,8 @@
 //  limitations under the License.
 //
 
+@import Foundation;
+
 NSString * MA_DefaultUserAgentString = @"Mozilla/5.0 Vienna/%@";
 NSString * MA_BrowserUserAgentString = @"Vienna/%@ Version/%@ Safari/%@";
 
