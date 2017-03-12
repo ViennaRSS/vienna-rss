@@ -18,6 +18,8 @@
 //  limitations under the License.
 //
 
+@import Foundation;
+
 extern NSString * MA_DefaultStyleName;
 extern NSString * MA_DefaultUserAgentString;
 extern NSString * MA_BrowserUserAgentString;

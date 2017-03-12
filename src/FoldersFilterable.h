@@ -6,7 +6,7 @@
 //  Copyright © 2016 uk.co.opencommunity. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Cocoa;
 
 @interface FoldersFilterableDataSource : NSObject <NSOutlineViewDataSource> {
 @protected

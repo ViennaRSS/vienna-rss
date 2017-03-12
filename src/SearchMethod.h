@@ -18,6 +18,8 @@
 //  limitations under the License.
 //
 
+@import Foundation;
+
 @interface SearchMethod : NSObject <NSCoding> {
 	NSString * friendlyName;
 	NSString * searchQueryString;
