@@ -26,7 +26,6 @@
 #import "RefreshManager.h"
 #import "ArrayExtensions.h"
 #import "StringExtensions.h"
-#import "ViewExtensions.h"
 #import "BrowserView.h"
 #import "SearchFolder.h"
 #import "NewSubscription.h"
@@ -3808,27 +3807,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		if (newStatusText == nil || newStatusText.blank)
 			newStatusText = persistedStatusText;
 		statusText.stringValue = (newStatusText ? newStatusText : @"");
-	}
-}
-
-/* viewAnimationCompleted
- * Called when animation of the specified view completes.
- */
--(void)viewAnimationCompleted:(NSView *)theView withTag:(NSInteger)viewTag
-{
-	if (viewTag == MA_ViewTag_Statusbar && self.statusBarVisible)
-	{
-		// When showing the status bar, show these controls AFTER
-		// we have made the view visible. Again, looks cleaner.
-		[statusText setHidden:NO];
-		[currentFilterTextField setHidden:NO];
-		[filterIconInStatusBarButton setHidden:NO];
-		return;
-	}
-	if (viewTag == MA_ViewTag_Filterbar && self.filterBarVisible)
-	{
-		[filterView display];
-		return;
 	}
 }
 

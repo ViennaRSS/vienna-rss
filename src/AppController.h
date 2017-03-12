@@ -219,7 +219,6 @@
 @property (nonatomic, readonly, copy) NSMenu *folderMenu;
 -(void)updateStatusBarFilterButtonVisibility;
 @property (nonatomic, readonly, strong) NSLayoutManager *layoutManager;
--(void)viewAnimationCompleted:(NSView *)theView withTag:(NSInteger)viewTag;
 -(void)growlNotify:(id)notifyContext title:(NSString *)title description:(NSString *)description notificationName:(NSString *)notificationName;
 -(void)performWebSearch:(SearchMethod *)searchMethod;
 -(void)performAllArticlesSearch;
