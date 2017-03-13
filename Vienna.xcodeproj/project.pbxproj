@@ -1308,6 +1308,7 @@
 		F6D5739F1E2706B500CDA909 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6D573A01E2706BA00CDA909 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6D573A11E2706BC00CDA909 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoWindow.strings; sourceTree = "<group>"; };
+		F6DAD20A1E75892C00FE2645 /* Vienna-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Vienna-Bridging-Header.h"; path = "src/Vienna-Bridging-Header.h"; sourceTree = "<group>"; };
 		F6EB261A1E5BA59300570B22 /* PreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreferencesWindowController.h; path = src/Preferences/PreferencesWindowController.h; sourceTree = "<group>"; };
 		F6EB261B1E5BA59300570B22 /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreferencesWindowController.m; path = src/Preferences/PreferencesWindowController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1984,6 +1985,7 @@
 			isa = PBXGroup;
 			children = (
 				430C4ADB1661753F0079C9FC /* autorevision.h */,
+				F6DAD20A1E75892C00FE2645 /* Vienna-Bridging-Header.h */,
 				2A37F4B0FDCFA73011CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
@@ -2160,6 +2162,9 @@
 					035B703419E0E4AE00197334 = {
 						CreatedOnToolsVersion = 6.1;
 						LastSwiftMigration = 0800;
+					};
+					8D15AC270486D014006FF6A4 = {
+						LastSwiftMigration = 0820;
 					};
 					F6A7DDC91E470E980017BE5E = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -3624,6 +3629,10 @@
 			baseConfigurationReference = 63DEA27414A309B4CA351B20 /* Pods-Vienna.staticanalyzer.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vienna-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = StaticAnalyzer;
 		};
@@ -3675,6 +3684,8 @@
 			baseConfigurationReference = 43501CFB165D73C70018EDB7 /* Vienna-Dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/ASIHTTPRequest\"",
@@ -3682,6 +3693,9 @@
 					"\"$PODS_CONFIGURATION_BUILD_DIR/FMDB\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/MASPreferences\"",
 				);
+				SWIFT_OBJC_BRIDGING_HEADER = "Vienna-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Development;
 		};
@@ -3690,6 +3704,8 @@
 			baseConfigurationReference = 43501CFA165D73C70018EDB7 /* Vienna-Dep.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/ASIHTTPRequest\"",
@@ -3697,6 +3713,8 @@
 					"\"$PODS_CONFIGURATION_BUILD_DIR/FMDB\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/MASPreferences\"",
 				);
+				SWIFT_OBJC_BRIDGING_HEADER = "Vienna-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Deployment;
 		};
