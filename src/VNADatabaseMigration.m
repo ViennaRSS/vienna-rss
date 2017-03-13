@@ -123,7 +123,7 @@
                  @"http://www.vienna-rss.com",
                  @(viennaFolderId)];
             }
-            
+            [results close];
             [db setUserVersion:(uint32_t)19];
             NSLog(@"Updated database schema to version 19.");
         }
