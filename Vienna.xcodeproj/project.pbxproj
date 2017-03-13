@@ -243,7 +243,6 @@
 		AA1A26610C099EAA005968DC /* refreshButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A265F0C099EAA005968DC /* refreshButtonPressed.tiff */; };
 		AA1A26620C099EAA005968DC /* subscribeButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A26600C099EAA005968DC /* subscribeButton.tiff */; };
 		AA1A267D0C09A040005968DC /* skipFolderButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A267C0C09A03F005968DC /* skipFolderButton.tiff */; };
-		AA1A27560C09B27E005968DC /* ViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1A27540C09B27E005968DC /* ViewExtensions.m */; };
 		AA1A2A2B0C09D6B6005968DC /* popupMenuButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A2A2A0C09D6B6005968DC /* popupMenuButtonPressed.tiff */; };
 		AA1A2A2F0C09D83B005968DC /* skipFolderButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A2A2E0C09D83B005968DC /* skipFolderButtonPressed.tiff */; };
 		AA1A2A330C09D84E005968DC /* subscribeButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A2A320C09D84E005968DC /* subscribeButtonPressed.tiff */; };
@@ -729,8 +728,6 @@
 		AA1A265F0C099EAA005968DC /* refreshButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = refreshButtonPressed.tiff; path = Resources/refreshButtonPressed.tiff; sourceTree = SOURCE_ROOT; };
 		AA1A26600C099EAA005968DC /* subscribeButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = subscribeButton.tiff; path = Resources/subscribeButton.tiff; sourceTree = SOURCE_ROOT; };
 		AA1A267C0C09A03F005968DC /* skipFolderButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = skipFolderButton.tiff; path = Resources/skipFolderButton.tiff; sourceTree = SOURCE_ROOT; };
-		AA1A27530C09B27E005968DC /* ViewExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewExtensions.h; path = src/ViewExtensions.h; sourceTree = SOURCE_ROOT; };
-		AA1A27540C09B27E005968DC /* ViewExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewExtensions.m; path = src/ViewExtensions.m; sourceTree = SOURCE_ROOT; };
 		AA1A2A2A0C09D6B6005968DC /* popupMenuButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = popupMenuButtonPressed.tiff; path = Resources/popupMenuButtonPressed.tiff; sourceTree = SOURCE_ROOT; };
 		AA1A2A2E0C09D83B005968DC /* skipFolderButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = skipFolderButtonPressed.tiff; path = Resources/skipFolderButtonPressed.tiff; sourceTree = SOURCE_ROOT; };
 		AA1A2A320C09D84E005968DC /* subscribeButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = subscribeButtonPressed.tiff; path = Resources/subscribeButtonPressed.tiff; sourceTree = SOURCE_ROOT; };
@@ -1914,8 +1911,6 @@
 				AAF3B14106095E7B0025CC7F /* StringExtensions.m */,
 				AAA305FC0682A25200E4A6DC /* TableViewExtensions.h */,
 				AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */,
-				AA1A27530C09B27E005968DC /* ViewExtensions.h */,
-				AA1A27540C09B27E005968DC /* ViewExtensions.m */,
 				37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */,
 				37C652B4C918F312BA9F1AB1 /* NSURL+Utils.h */,
 				03B35B821B75E9E0001DB06D /* NSDate+Vienna.h */,
@@ -2684,7 +2679,6 @@
 				AA71168F09BEB17300E3EA8A /* AddressBarCell.m in Sources */,
 				0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */,
 				AA1A23DB0C07475B005968DC /* SplitViewExtensions.m in Sources */,
-				AA1A27560C09B27E005968DC /* ViewExtensions.m in Sources */,
 				34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */,
 				AA8B36C20C12D6480035FBD7 /* GradientView.m in Sources */,
 				AA5AA8000C3C0D7D00B2E14F /* ToolbarButton.m in Sources */,
