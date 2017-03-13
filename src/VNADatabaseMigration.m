@@ -110,6 +110,23 @@
 
             NSLog(@"Updated database schema to version 18.");
         }
+        case 19: {
+            // Upgrade to rev 19.
+            // Update the Vienna Developer's blog RSS URL after we changed from .org to .com
+
+            FMResultSet *results = [db executeQuery:@"SELECT folder_id FROM rss_folders WHERE feed_url LIKE ?", @"%%vienna-rss.org%%"];
+
+            if([results next]) {
+                int viennaFolderId = [results intForColumn:@"folder_id"];
+                [db executeUpdate:@"UPDATE rss_folders SET feed_url=?, home_page=? WHERE folder_id=?",
+                 @"http://www.vienna-rss.com/?feed=rss2",
+                 @"http://www.vienna-rss.com",
+                 @(viennaFolderId)];
+            }
+            [results close];
+            [db setUserVersion:(uint32_t)19];
+            NSLog(@"Updated database schema to version 19.");
+        }
     }
     
 }

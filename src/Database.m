@@ -50,7 +50,7 @@
 
 // The current database version number
 const NSInteger MA_Min_Supported_DB_Version = 12;
-const NSInteger MA_Current_DB_Version = 18;
+const NSInteger MA_Current_DB_Version = 19;
 
 
 @implementation Database
