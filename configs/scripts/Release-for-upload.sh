@@ -142,7 +142,7 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
 	<channel>
 		<title>Vienna Changelog</title>
-		<link>http://www.vienna-rss.org/</link>
+		<link>http://www.vienna-rss.com/</link>
 		<description>Vienna Changelog</description>
 		<language>en-us</language>
 		<copyright>Copyright 2010-2015, Steve Palmer and contributors</copyright>

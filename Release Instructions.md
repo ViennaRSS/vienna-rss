@@ -87,5 +87,5 @@ cd "$(brew --repository)/Library/Taps/caskroom/homebrew-cask/Casks"
 cask-repair --pull origin --push $github_user $outdated_cask
 ```
 
-Finally, consider posting an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18> and/or <http://vienna-rss.org>.
+Finally, consider posting an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18> and/or <http://vienna-rss.com>.
 

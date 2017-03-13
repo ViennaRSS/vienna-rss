@@ -27,7 +27,6 @@
 @interface BrowserView : NSView
 {
 	NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate> * primaryTabItemView;
-	IBOutlet NSTabView * tabView;
 	IBOutlet PSMTabBarControl * tabBarControl;
 }
 
