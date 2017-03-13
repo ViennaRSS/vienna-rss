@@ -135,7 +135,6 @@
 -(IBAction)newGroupFolder:(id)sender;
 -(IBAction)editFolder:(id)sender;
 -(IBAction)showXMLSource:(id)sender;
--(IBAction)showAcknowledgements:(id)sender;
 -(IBAction)showViennaHomePage:(id)sender;
 -(IBAction)viewArticlePages:(id)sender;
 -(IBAction)viewArticlePagesInAlternateBrowser:(id)sender;
