@@ -6,11 +6,10 @@ Dmitry Marakasov <amdmi3@amdmi3.ru>
 Vlad <vlad@v-lad.org>
 Dennis Biringer <github@biringer.org>
 allevo <tomallevi@gmail.com>
+Qiuwen Lu <luqiuwen@gmail.com>
 Jérôme Pouiller <jezz@sysmic.org>
 Joel C. Salomon <joelcsalomon@gmail.com>
 yuanchuan <yuanchuan23@gmail.com>
 vagrant <vagrant>
 Robert Wenner <robert@port25.com>
-Qiuwen Lu <luqiuwen@nelmail.iie.ac.cn>
-Qiuwen Lu <luqiuwen@gmail.com>
 Hironori Ichimiya <hiron@hironytic.com>
