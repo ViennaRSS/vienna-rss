@@ -20,12 +20,6 @@
 
 #import "AppController.h"
 
-#import "MASPreferencesWindowController.h"
-#import "GeneralPreferencesViewController.h"
-#import "AppearancePreferencesViewController.h"
-#import "SyncingPreferencesViewController.h"
-#import "AdvancedPreferencesViewController.h"
-
 #import "FoldersTree.h"
 #import "Import.h"
 #import "Export.h"
@@ -2110,7 +2104,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(refreshAllSubscriptions:))];
 		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(markAllSubscriptionsRead:))];
 		[statusBarMenu addItem:[NSMenuItem separatorItem]];
-		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(showPreferencePanel:))];
 		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(handleAbout:))];
 		[statusBarMenu addItem:[NSMenuItem separatorItem]];
 		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(exitVienna:))];
@@ -3363,19 +3356,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[self openURLInDefaultBrowser:[NSURL URLWithString:homePage]];
 }
 
-/* showAcknowledgements
- * Display the acknowledgements document in a new tab.
- */
--(IBAction)showAcknowledgements:(id)sender
-{
-	NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
-	NSString * pathToAckFile = [thisBundle pathForResource:@"Acknowledgements" ofType:@"html"];
-	if (pathToAckFile != nil)
-	{
-		[self createNewTab:[NSURL fileURLWithPath:pathToAckFile isDirectory:NO] inBackground:NO];
-	}
-}
-
 #pragma mark Tabs
 
 /* previousTab
@@ -4596,47 +4576,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			 @"NextButton"]
 			 arrayByAddingObjectsFromArray:pluginManager.toolbarItems
 			 ];
-}
-
-#pragma mark - MASPreferences
-
-- (NSWindowController *)preferencesWindowController
-{
-    if (_preferencesWindowController == nil)
-    {
-        NSViewController *generalViewController = [[GeneralPreferencesViewController alloc] init];
-        NSViewController *appearanceViewController = [[AppearancePreferencesViewController alloc] init];
-        NSViewController *syncingViewController = [[SyncingPreferencesViewController alloc] init];
-        NSViewController *advancedViewController = [[AdvancedPreferencesViewController alloc] init];
-        NSArray *controllers = @[generalViewController, appearanceViewController, syncingViewController, advancedViewController];
-        
-        // To add a flexible space between General and Advanced preference panes insert [NSNull null]:
-        //     NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, [NSNull null], advancedViewController, nil];
-        
-        
-        NSString *title = NSLocalizedString(@"Preferences", @"Common title for Preferences window");
-        _preferencesWindowController = [[MASPreferencesWindowController alloc] initWithViewControllers:controllers title:title];
-    }
-    return _preferencesWindowController;
-}
-
-#pragma mark - MASPreferences Actions
-
-- (IBAction)showPreferencePanel:(id)sender
-{
-    [self.preferencesWindowController showWindow:nil];
-}
-
-NSString *const kFocusedAdvancedControlIndex = @"FocusedAdvancedControlIndex";
-
-- (NSInteger)focusedAdvancedControlIndex
-{
-    return [[NSUserDefaults standardUserDefaults] integerForKey:kFocusedAdvancedControlIndex];
-}
-
-- (void)setFocusedAdvancedControlIndex:(NSInteger)focusedAdvancedControlIndex
-{
-    [[NSUserDefaults standardUserDefaults] setInteger:focusedAdvancedControlIndex forKey:kFocusedAdvancedControlIndex];
 }
 
 /* dealloc
