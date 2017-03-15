@@ -1463,7 +1463,6 @@ CA
                 <outlet property="outlineView" destination="Kk7-ax-B3r" id="O2z-Mf-33v"/>
             </connections>
         </customObject>
-        <customObject id="HRR-OU-3yj" customClass="ArticleListView"/>
         <customObject id="HLa-Gy-vMd" customClass="PreferencesWindowController"/>
     </objects>
     <resources>
