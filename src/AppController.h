@@ -41,7 +41,6 @@
 @class ClickableProgressIndicator;
 @class SearchPanel;
 @class BJRWindowWithToolbar;
-@class TreeFilterView;
 @class DisclosureView;
 @class ViennaSparkleDelegate;
 
@@ -49,12 +48,9 @@
 {
 	IBOutlet BJRWindowWithToolbar * mainWindow;
 	IBOutlet ArticleController * articleController;
-	IBOutlet NSSplitView * splitView1;
 	IBOutlet NSView * exportSaveAccessory;
-	IBOutlet NSView * searchView;
 	IBOutlet NSSearchField * filterSearchField;
 	IBOutlet NSPopUpButton * filterViewPopUp;
-	IBOutlet NSView * articleFrame;
 	IBOutlet BrowserView * browserView;
 	IBOutlet NSButtonCell * exportAll;
 	IBOutlet NSButtonCell * exportSelected;
@@ -69,10 +65,7 @@
 	IBOutlet NSMenuItem * columnsMenu;
 	IBOutlet NSMenuItem * stylesMenu;
 	IBOutlet NSMenuItem * filtersMenu;
-	IBOutlet FilterView * filterView;
     IBOutlet DisclosureView * filterDisclosureView;
-	IBOutlet TreeFilterView *treeFilterView;
-	IBOutlet TreeFilterView *treeFilterSearchField;
     IBOutlet DisclosureView *statusBarDisclosureView;
 	IBOutlet NSTextField * currentFilterTextField;
 	IBOutlet NSButton * filterIconInStatusBarButton;
