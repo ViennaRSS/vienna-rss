@@ -19,13 +19,15 @@
 //
 
 #import "ViennaApp.h"
+
 #import "AppController.h"
-#import "Preferences.h"
-#import "Import.h"
-#import "Export.h"
-#import "RefreshManager.h"
-#import "Constants.h"
 #import "BrowserPane.h"
+#import "Constants.h"
+#import "Debug.h"
+#import "Export.h"
+#import "Import.h"
+#import "Preferences.h"
+#import "RefreshManager.h"
 
 @implementation ViennaApp
 
@@ -330,6 +332,20 @@
 	AppController * controller = APPCONTROLLER;
 	NSInteger folderId = newCurrentFolder.itemId;
 	[controller selectFolder:folderId];
+}
+
+/**
+ * Show a modified About panel and print the Info.plist contents.
+ */
+- (void)orderFrontStandardAboutPanel:(id)sender {
+    NSDictionary *fileAttributes = NSBundle.mainBundle.infoDictionary;
+    LOG_EXPR(fileAttributes);
+
+    NSString *shortVersion = fileAttributes[@"CFBundleShortVersionString"];
+    NSString *version = [NSString stringWithFormat:NSLocalizedString(@"Version %@", nil), shortVersion];
+    NSDictionary *options = @{@"ApplicationVersion": version, @"Version": @""};
+
+    [self orderFrontStandardAboutPanelWithOptions:options];
 }
 
 /* Accessor getters

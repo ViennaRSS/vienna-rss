@@ -1730,20 +1730,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	} // @synchronized
 }
 
-/* handleAbout
- * Display our About Vienna... window.
- */
--(IBAction)handleAbout:(id)sender
-{
-	NSDictionary * fileAttributes = [NSBundle mainBundle].infoDictionary;
-	LOG_EXPR(fileAttributes);
-	NSString * version = fileAttributes[@"CFBundleShortVersionString"];
-	NSString * versionString = [NSString stringWithFormat:NSLocalizedString(@"Version %@", nil), version];
-	NSDictionary * d = @{@"ApplicationVersion": versionString, @"Version": @""};
-	[NSApp activateIgnoringOtherApps:YES];
-	[NSApp orderFrontStandardAboutPanelWithOptions:d];
-}
-
 /* emptyTrash
  * Delete all articles from the Trash folder.
  */
@@ -1862,7 +1848,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(refreshAllSubscriptions:))];
 		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(markAllSubscriptionsRead:))];
 		[statusBarMenu addItem:[NSMenuItem separatorItem]];
-		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(handleAbout:))];
+		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(orderFrontStandardAboutPanel:))];
 		[statusBarMenu addItem:[NSMenuItem separatorItem]];
 		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(exitVienna:))];
 		appStatusItem.menu = statusBarMenu;

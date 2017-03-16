@@ -376,7 +376,7 @@
                             <menuItem title="About Vienna" id="58">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="handleAbout:" target="233" id="950"/>
+                                    <action selector="orderFrontStandardAboutPanel:" target="-1" id="I3y-xZ-6an"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="196">
