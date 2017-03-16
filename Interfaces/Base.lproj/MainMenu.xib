@@ -440,7 +440,7 @@ CA
                             </menuItem>
                             <menuItem title="Quit Vienna" keyEquivalent="q" id="136">
                                 <connections>
-                                    <action selector="exitVienna:" target="233" id="1232"/>
+                                    <action selector="terminate:" target="-1" id="A3o-k6-T9E"/>
                                 </connections>
                             </menuItem>
                         </items>

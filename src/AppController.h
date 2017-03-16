@@ -96,7 +96,6 @@
 @property(nonatomic, strong) IBOutlet FoldersTree * foldersTree;
 
 // Menu action items
--(IBAction)exitVienna:(id)sender;
 -(IBAction)reindexDatabase:(id)sender;
 -(IBAction)deleteMessage:(id)sender;
 -(IBAction)deleteFolder:(id)sender;

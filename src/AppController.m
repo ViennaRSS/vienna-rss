@@ -795,7 +795,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	return browserView;
 }
 
-
 /* folderMenu
  * Dynamically create the popup menu. This is one less thing to
  * explicitly localise in the NIB file.
@@ -821,14 +820,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	[folderMenu addItem:[NSMenuItem separatorItem]];
 	[folderMenu addItem:copyOfMenuItemWithAction(@selector(forceRefreshSelectedSubscriptions:))];	
 	return folderMenu;
-}
-
-/* exitVienna
- * Alias for the terminate command.
- */
--(IBAction)exitVienna:(id)sender
-{
-	[NSApp terminate:nil];
 }
 
 /* reindexDatabase
@@ -1850,7 +1841,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[statusBarMenu addItem:[NSMenuItem separatorItem]];
 		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(orderFrontStandardAboutPanel:))];
 		[statusBarMenu addItem:[NSMenuItem separatorItem]];
-		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(exitVienna:))];
+		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(terminate:))];
 		appStatusItem.menu = statusBarMenu;
 	}
 	else if (!prefs.showAppInStatusBar && appStatusItem != nil)
