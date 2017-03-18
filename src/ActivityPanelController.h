@@ -18,8 +18,23 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
+
 #import "TableViewExtensions.h"
+
+@class Folder;
+
+@protocol ActivityPanelDelegate
+
+/**
+ Notifies the delegate that a folder has been selected.
+
+ @param activityPanel The panel in which the folder was selected.
+ @param folder The selected folder.
+ */
+- (void)activityPanel:(nonnull NSPanel *)activityPanel didSelectFolder:(nonnull Folder *)folder;
+
+@end
 
 @interface ActivityPanelController : NSWindowController <NSWindowDelegate> {
 	IBOutlet NSWindow * activityWindow;
@@ -28,4 +43,10 @@
 	IBOutlet NSTextView * activityDetail;
 	NSArray * allItems;
 }
+
+/**
+ The activity panel's delegate.
+ */
+@property (nullable, nonatomic) id<ActivityPanelDelegate> activityPanelDelegate;
+
 @end

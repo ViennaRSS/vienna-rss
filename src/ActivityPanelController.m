@@ -19,8 +19,9 @@
 //
 
 #import "ActivityPanelController.h"
+
 #import "ActivityLog.h"
-#import "AppController.h"
+#import "Database.h"
 #import "Preferences.h"
 #import "SplitViewExtensions.h"
 
@@ -92,11 +93,11 @@
 		Folder * folder = [db folderFromName:selectedItem.name];
 		if (folder == nil)
 			folder = [db folderFromFeedURL:selectedItem.name];
-		if (folder != nil)
-		{
-			AppController * controller = APPCONTROLLER;
-			[controller selectFolder:folder.itemId];
-		}
+
+        // Send the folder to the delegate.
+        if (folder) {
+            [self.activityPanelDelegate activityPanel:(NSPanel *)self.window didSelectFolder:folder];
+        }
 	}
 }
 
