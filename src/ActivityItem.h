@@ -18,21 +18,38 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Foundation;
 
-@interface ActivityItem : NSObject {
-    NSString * name;
-    NSString * status;
-    NSMutableArray * details;
-}
+@interface ActivityItem : NSObject
 
 extern NSNotificationName const activityItemStatusUpdatedNotification;
 extern NSNotificationName const activityItemDetailsUpdatedNotification;
 
-// Accessor functions
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *status;
-@property (nonatomic, readonly, copy) NSString *details;
--(void)appendDetail:(NSString *)aString;
--(void)clearDetails;
+/**
+ The name of the item.
+ */
+@property (copy, nonatomic) NSString *name;
+
+/**
+ The fetch status of the item.
+ */
+@property (copy, nonatomic) NSString *status;
+
+/**
+ Detailed information about the fetch status of the item.
+ */
+@property (readonly, nonatomic) NSString *details;
+
+/**
+ Appends a string to the details of the item.
+
+ @param string The string to append.
+ */
+- (void)appendDetail:(NSString *)string;
+
+/**
+ Clears all details from the item.
+ */
+- (void)clearDetails;
+
 @end

@@ -18,19 +18,30 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Foundation;
 
 #import "ActivityItem.h"
 
-@interface ActivityLog : NSObject {
-	NSMutableArray * log;
-}
+@interface ActivityLog : NSObject
 
-extern NSNotificationName const activityLogUpdatedNotification;
+extern NSNotificationName const _Nonnull activityLogUpdatedNotification;
 
-// Accessor functions
-+(ActivityLog *)defaultLog;
-@property (nonatomic, readonly, copy) NSArray *allItems;
--(ActivityItem *)itemByName:(NSString *)theName;
--(void)sortUsingDescriptors:(NSArray *)sortDescriptors;
+/**
+ The default activity log.
+ */
+@property (readonly, class, nonnull) ActivityLog *defaultLog;
+
+/**
+ An array of activity items.
+ */
+@property (readonly, copy, nonnull) NSArray<ActivityItem *> *allItems;
+
+/**
+ Returns an activity item for the name of the item.
+
+ @param name The name of the item.
+ @return An activity item.
+ */
+- (nonnull ActivityItem *)itemByName:(nonnull NSString *)name;
+
 @end
