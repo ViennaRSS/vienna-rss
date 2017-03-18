@@ -22,184 +22,76 @@
 
 #import "ActivityLog.h"
 #import "Database.h"
-#import "Preferences.h"
-#import "SplitViewExtensions.h"
+
+@interface ActivityPanelController ()
+
+@property (weak, nonatomic) IBOutlet NSTableView *tableView;
+@property (assign, nonatomic) IBOutlet NSTextView *textView;
+
+@property (nonatomic) ActivityLog *activityLog;
+
+@end
 
 @implementation ActivityPanelController
 
-/* init
- * Just init the activity window.
- */
--(instancetype)init
-{
-	if ((self = [super initWithWindowNibName:@"ActivityViewer"]) != nil)
-	{
-		allItems = [ActivityLog defaultLog].allItems;
-	}
-	return self;
+#pragma mark Initialization
+
+- (instancetype)init {
+    return [self initWithWindowNibName:@"ActivityViewer"];
 }
 
-/* windowDidLoad
- * Do the things that only make sense after the window file is loaded.
- */
--(void)windowDidLoad
-{
-	// Work around a Cocoa bug where the window positions aren't saved
-	[self setShouldCascadeWindows:NO];
-	self.windowFrameAutosaveName = @"activityViewer";
-	activityWindow.delegate = self;
-
-	// Default font for the details view
-	NSFont * detailsFont = [NSFont fontWithName:@"Monaco" size:11.0];
-	activityDetail.font = detailsFont;
-
-	// Handle double-click on an item
-	activityTable.doubleAction = @selector(handleDoubleClick:);
-	
-	// Set localised column headers
-	[activityTable localiseHeaderStrings];
-
-	// Restore the split position
-	splitView.xlayout = [[Preferences standardPreferences] objectForKey:@"SplitView3Positions"];
-
-	// Set up to receive notifications when the activity log changes
-	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc addObserver:self selector:@selector(handleLogChange:) name:activityLogUpdatedNotification object:nil];
-	[nc addObserver:self selector:@selector(handleDetailChange:) name:activityItemDetailsUpdatedNotification object:nil];
+- (void)dealloc {
+    [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
-/* windowShouldClose
- * Since we established ourselves as the delegate for the window, we will
- * get the notifications when the window closes.
- */
--(BOOL)windowShouldClose:(NSNotification *)notification
-{
-	[[Preferences standardPreferences] setObject:splitView.xlayout forKey:@"SplitView3Positions"];
-	return YES;
+#pragma mark Window life cycle
+
+- (void)windowDidLoad {
+    [super windowDidLoad];
+
+    // Set the activity log.
+    self.activityLog = [ActivityLog defaultLog];
+
+    // Set up to receive notifications when the activity log changes.
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(activityItemDidUpdateDetails:)
+                                               name:activityItemDetailsUpdatedNotification
+                                             object:nil];
 }
 
-/* handleDoubleClick
- * Handle double-click.
+#pragma mark Table-view actions
+
+/**
+ Sends a message to the delegate that contains a folder for the selected item.
+
+ @param selectedItem The selected item in the table view.
  */
--(IBAction)handleDoubleClick:(id)sender
-{
-	NSInteger selectedRow = activityTable.selectedRow;
-	if (selectedRow >= 0)
-	{
-		ActivityItem * selectedItem = allItems[selectedRow];
+- (IBAction)showFolderForItem:(ActivityItem *)selectedItem {
+    Folder *folder = [[Database sharedManager] folderFromName:selectedItem.name];
 
-		// Name might be a URL if the feed has always been invalid.
-		Database * db = [Database sharedManager];
-		Folder * folder = [db folderFromName:selectedItem.name];
-		if (folder == nil)
-			folder = [db folderFromFeedURL:selectedItem.name];
+    // If no folder could be resolved by name, try a URL.
+    if (!folder) {
+        folder = [[Database sharedManager] folderFromFeedURL:selectedItem.name];
+    }
 
-        // Send the folder to the delegate.
-        if (folder) {
-            [self.activityPanelDelegate activityPanel:(NSPanel *)self.window didSelectFolder:folder];
-        }
-	}
+    // Send the folder to the delegate.
+    if (folder) {
+        [self.activityPanelDelegate activityPanel:(NSPanel *)self.window didSelectFolder:folder];
+    }
 }
 
-/* reloadTable
- * Reloads the table with the existing log sorted and with the selection preserved.
+#pragma mark Table-view notification handlers
+
+/*
+ When the details of an item in the activity log change, update the detail view.
  */
--(void)reloadTable
-{
-	ActivityItem * selectedItem = nil;
+- (void)activityItemDidUpdateDetails:(NSNotification *)notification {
+    ActivityItem *item = notification.object;
+    NSInteger selectedRow = self.tableView.selectedRow;
 
-	NSInteger selectedRow = activityTable.selectedRow;
-	if (selectedRow >= 0 && selectedRow < allItems.count)
-		selectedItem = allItems[selectedRow];
-
-	[[ActivityLog defaultLog] sortUsingDescriptors:activityTable.sortDescriptors];
-	[activityTable reloadData];
-
-	if (selectedItem == nil)
-		activityDetail.string = @"";
-	else
-	{
-		NSUInteger rowToSelect = [allItems indexOfObject:selectedItem];
-		if (rowToSelect != NSNotFound)
-		{
-			NSIndexSet * indexes = [NSIndexSet indexSetWithIndex:rowToSelect];
-			[activityTable selectRowIndexes:indexes byExtendingSelection:NO];
-		}
-		else
-		{
-			[activityTable deselectAll:nil];
-		}
-	}
+    if (selectedRow >= 0 && item == self.activityLog.allItems[selectedRow]) {
+        self.textView.string = item.details;
+    }
 }
 
-/* handleLogChange
- * Handle the notification that is broadcast when the activity log
- * has items added, removed or changed.
- */
--(void)handleLogChange:(NSNotification *)nc
-{
-	[self reloadTable];
-}
-
-/* handleDetailChange
- * Handle the notification that is sent when an item detail is changed.
- */
--(void)handleDetailChange:(NSNotification *)nc
-{
-	ActivityItem * item = (ActivityItem *)nc.object;
-	NSInteger selectedRow = activityTable.selectedRow;
-
-	if (selectedRow >= 0 && (item == allItems[selectedRow]))
-		activityDetail.string = item.details;		
-}
-
-/* numberOfRowsInTableView [datasource]
- * Datasource for the table view. Return the total number of rows we'll display which
- * is equivalent to the number of log items.
- */
--(NSUInteger)numberOfRowsInTableView:(NSTableView *)aTableView
-{
-	return allItems.count;
-}
-
-/* tableViewSelectionDidChange [delegate]
- * Handle the selection changing in the table view. Update the details portion with the full
- * information for the selected source.
- */
--(void)tableViewSelectionDidChange:(NSNotification *)aNotification
-{
-	NSInteger selectedRow = activityTable.selectedRow;
-	if (selectedRow >= 0 && selectedRow < allItems.count)
-	{
-		ActivityItem * item = allItems[selectedRow];
-		activityDetail.string = item.details;
-	}
-}
-
-/* sortDescriptorsDidChange
- * Called to sort the status table by the specified descriptor.
- */
--(void)tableView:(NSTableView *)aTableView sortDescriptorsDidChange:(NSArray *)oldDescriptors
-{
-	[self reloadTable];
-}
-
-/* objectValueForTableColumn [datasource]
- * Called by the table view to obtain the object at the specified column and row.
- */
--(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSUInteger)rowIndex
-{
-	ActivityItem * item = allItems[rowIndex];
-	return (aTableColumn.identifier) ? [item valueForKey:aTableColumn.identifier] : @"";
-}
-
-/* dealloc
- * Clean up before we're freed.
- */
--(void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[activityWindow setDelegate:nil];
-	allItems=nil;
-}
 @end

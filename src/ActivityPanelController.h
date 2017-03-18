@@ -20,8 +20,6 @@
 
 @import Cocoa;
 
-#import "TableViewExtensions.h"
-
 @class Folder;
 
 @protocol ActivityPanelDelegate
@@ -36,13 +34,7 @@
 
 @end
 
-@interface ActivityPanelController : NSWindowController <NSWindowDelegate> {
-	IBOutlet NSWindow * activityWindow;
-	IBOutlet ExtendedTableView * activityTable;
-	IBOutlet NSSplitView * splitView;
-	IBOutlet NSTextView * activityDetail;
-	NSArray * allItems;
-}
+@interface ActivityPanelController : NSWindowController
 
 /**
  The activity panel's delegate.
