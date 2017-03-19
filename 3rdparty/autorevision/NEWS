@@ -1,5 +1,14 @@
 			autorevision history
 
+1.20 @ 2017-01-03:
+  Better determinism in the order of the author file.
+  Better tests for `local` support.
+  Make sure the cache file is not polluted from other output types.
+
+1.19 @ 2016-12-20:
+  Only use the committer date for git.
+  Only use the `local` keyword where supported.
+
 1.18 @ 2016-11-22:
   Fix some bashisms in the make file.
   Get the short hash from git rather than assuming its length.
