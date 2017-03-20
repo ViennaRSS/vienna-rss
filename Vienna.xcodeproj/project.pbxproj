@@ -361,6 +361,8 @@
 		F62581431E29B9040035E43C /* XMLSource.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581421E29B9040035E43C /* XMLSource.xib */; };
 		F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581441E29B90A0035E43C /* SearchPanel.xib */; };
 		F62581591E29BEB90035E43C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625815B1E29BEB90035E43C /* MainMenu.xib */; };
+		F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */; };
+		F648C2B91E7F3C2500CE4043 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */; };
 		F65D6D711E74619E00A30974 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4398241E1666B3DB00FFE219 /* Credits.rtf */; };
 		F6A7DE341E47138B0017BE5E /* advanced.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2A1E47138B0017BE5E /* advanced.html */; };
 		F6A7DE351E47138B0017BE5E /* faq.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2C1E47138B0017BE5E /* faq.html */; };
@@ -1056,6 +1058,7 @@
 		F6352C071E27285C005CD307 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
 		F6352C081E272864005CD307 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/AppearancePreferencesView.strings"; sourceTree = "<group>"; };
 		F6352C091E272868005CD307 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AppearancePreferencesView.strings"; sourceTree = "<group>"; };
+		F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryMonitorTests.swift; sourceTree = "<group>"; };
 		F68F724A1E2A0937007FADA5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F69140ED1E71D72100D51BFF /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F69140EE1E71D72400D51BFF /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -1394,6 +1397,7 @@
 				4D36B44E1D38007D009736C1 /* NSURL+URIEquivalence.h */,
 				4D36B44F1D38007D009736C1 /* NSURL+URIEquivalence.m */,
 				0377BDEC1D3A009B00960555 /* BitlyAPIHelperTests.swift */,
+				F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */,
 				0377BDEB1D3A009B00960555 /* Vienna Tests-Bridging-Header.h */,
 			);
 			path = "Vienna Tests";
@@ -1411,8 +1415,8 @@
 			isa = PBXGroup;
 			children = (
 				8D15AC370486D014006FF6A4 /* Vienna.app */,
-				035B703519E0E4AE00197334 /* Vienna Tests.xctest */,
 				F6A7DDCA1E470E980017BE5E /* Vienna.help */,
+				035B703519E0E4AE00197334 /* Vienna Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = SOURCE_ROOT;
@@ -2218,11 +2222,11 @@
 			targets = (
 				8D15AC270486D014006FF6A4 /* Vienna */,
 				F6A7DDC91E470E980017BE5E /* Vienna Help */,
+				035B703419E0E4AE00197334 /* Vienna Tests */,
 				430C4ACF166172BD0079C9FC /* Autorevision */,
 				52BA63FC0DE9E2E10008B3E1 /* Version Notes */,
 				430C4AF71661F07C0079C9FC /* Code Sign ID */,
 				EAAF335414BDE402002A8837 /* Archive and Prep for Upload */,
-				035B703419E0E4AE00197334 /* Vienna Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -2642,6 +2646,7 @@
 				0383DC551B71B44700A11950 /* CriteriaTests.m in Sources */,
 				4D3EF4AD1D342B9E0056B90D /* HelperFunctions.m in Sources */,
 				4D3EF4AB1D342B800056B90D /* KeyChain.m in Sources */,
+				F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */,
 				4D3EF4A41D342A340056B90D /* Article.m in Sources */,
 				4D36B4501D38007D009736C1 /* NSURL+URIEquivalence.m in Sources */,
 				4D3EF4AC1D342B880056B90D /* XMLTag.m in Sources */,
@@ -2652,6 +2657,7 @@
 				4D3EF4A01D3429C30056B90D /* Criteria.m in Sources */,
 				4D3EF4AE1D342BB00056B90D /* Export.m in Sources */,
 				4D36B44D1D37FCC2009736C1 /* StringExtensions.m in Sources */,
+				F648C2B91E7F3C2500CE4043 /* DirectoryMonitor.swift in Sources */,
 				4D36B44C1D37FBE4009736C1 /* CalendarExtensions.m in Sources */,
 				03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */,
 				4D3EF4A71D342A540056B90D /* Folder.m in Sources */,
