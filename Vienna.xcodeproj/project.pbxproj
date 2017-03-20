@@ -96,7 +96,7 @@
 		435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 435026E5165DD8BE0018EDB7 /* ArticleRef.m */; };
 		4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */; };
 		43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502848165DE9DF0018EDB7 /* ActivityLog.m */; };
-		43502896165DE9E00018EDB7 /* ActivityViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350284A165DE9DF0018EDB7 /* ActivityViewer.m */; };
+		43502896165DE9E00018EDB7 /* ActivityPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350284A165DE9DF0018EDB7 /* ActivityPanelController.m */; };
 		43502897165DE9E00018EDB7 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350284C165DE9DF0018EDB7 /* AppController.m */; };
 		43502898165DE9E00018EDB7 /* ArticleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350284F165DE9DF0018EDB7 /* ArticleController.m */; };
 		43502899165DE9E00018EDB7 /* ArticleFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502851165DE9DF0018EDB7 /* ArticleFilter.m */; };
@@ -533,8 +533,8 @@
 		43502845165DE9560018EDB7 /* RenameFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenameFolder.h; path = src/RenameFolder.h; sourceTree = SOURCE_ROOT; };
 		43502846165DE9560018EDB7 /* RenameFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RenameFolder.m; path = src/RenameFolder.m; sourceTree = SOURCE_ROOT; };
 		43502848165DE9DF0018EDB7 /* ActivityLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityLog.m; path = src/ActivityLog.m; sourceTree = SOURCE_ROOT; };
-		43502849165DE9DF0018EDB7 /* ActivityViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityViewer.h; path = src/ActivityViewer.h; sourceTree = SOURCE_ROOT; };
-		4350284A165DE9DF0018EDB7 /* ActivityViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityViewer.m; path = src/ActivityViewer.m; sourceTree = SOURCE_ROOT; };
+		43502849165DE9DF0018EDB7 /* ActivityPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityPanelController.h; path = src/ActivityPanelController.h; sourceTree = SOURCE_ROOT; };
+		4350284A165DE9DF0018EDB7 /* ActivityPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityPanelController.m; path = src/ActivityPanelController.m; sourceTree = SOURCE_ROOT; };
 		4350284B165DE9DF0018EDB7 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppController.h; path = src/AppController.h; sourceTree = SOURCE_ROOT; };
 		4350284C165DE9DF0018EDB7 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppController.m; path = src/AppController.m; sourceTree = SOURCE_ROOT; };
 		4350284D165DE9DF0018EDB7 /* ArticleBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleBaseView.h; path = src/ArticleBaseView.h; sourceTree = SOURCE_ROOT; };
@@ -1414,7 +1414,7 @@
 			name = Products;
 			sourceTree = SOURCE_ROOT;
 		};
-		2A37F4AAFDCFA73011CA2CEA = {
+		2A37F4AAFDCFA73011CA2CEA /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
 				439824161666B1ED00FFE219 /* Documentation */,
@@ -1438,8 +1438,8 @@
 				793C952F1C3F07FC00984D4E /* TreeFilterView.m */,
 				AA0FB5E00869110300D9CB90 /* ActivityLog.h */,
 				43502848165DE9DF0018EDB7 /* ActivityLog.m */,
-				43502849165DE9DF0018EDB7 /* ActivityViewer.h */,
-				4350284A165DE9DF0018EDB7 /* ActivityViewer.m */,
+				43502849165DE9DF0018EDB7 /* ActivityPanelController.h */,
+				4350284A165DE9DF0018EDB7 /* ActivityPanelController.m */,
 				4350284B165DE9DF0018EDB7 /* AppController.h */,
 				4350284C165DE9DF0018EDB7 /* AppController.m */,
 				4350284D165DE9DF0018EDB7 /* ArticleBaseView.h */,
@@ -2198,7 +2198,7 @@
 				"zh-Hant",
 				"zh-Hans",
 			);
-			mainGroup = 2A37F4AAFDCFA73011CA2CEA;
+			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Vienna */;
 			productRefGroup = 19C28FB0FE9D524F11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2694,7 +2694,7 @@
 				435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */,
 				4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */,
 				43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */,
-				43502896165DE9E00018EDB7 /* ActivityViewer.m in Sources */,
+				43502896165DE9E00018EDB7 /* ActivityPanelController.m in Sources */,
 				43502897165DE9E00018EDB7 /* AppController.m in Sources */,
 				43502898165DE9E00018EDB7 /* ArticleController.m in Sources */,
 				43502899165DE9E00018EDB7 /* ArticleFilter.m in Sources */,

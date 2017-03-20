@@ -1,5 +1,5 @@
 //
-//  ActivityViewer.m
+//  ActivityPanelController.m
 //  Vienna
 //
 //  Created by Steve on Thu Mar 18 2004.
@@ -18,13 +18,13 @@
 //  limitations under the License.
 //
 
-#import "ActivityViewer.h"
+#import "ActivityPanelController.h"
 #import "ActivityLog.h"
 #import "AppController.h"
 #import "Preferences.h"
 #import "SplitViewExtensions.h"
 
-@implementation ActivityViewer
+@implementation ActivityPanelController
 
 /* init
  * Just init the activity window.

@@ -603,8 +603,8 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 		
 		// Close the activity window explicitly to force it to
 		// save its split bar position to the preferences.
-		NSWindow * activityWindow = activityViewer.window;
-		[activityWindow performClose:self];
+		NSWindow *activityPanel = activityPanelController.window;
+		[activityPanel performClose:self];
 		
 		// Put back the original app icon
 		[NSApp.dockTile setBadgeLabel:nil];
@@ -2853,13 +2853,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)toggleActivityViewer:(id)sender
 {	
-	if (activityViewer == nil)
-		activityViewer = [[ActivityViewer alloc] init];
-	if (activityViewer != nil)
+	if (activityPanelController == nil)
+		activityPanelController = [[ActivityPanelController alloc] init];
+	if (activityPanelController != nil)
 	{
-		NSWindow * activityWindow = activityViewer.window;
+		NSWindow * activityWindow = activityPanelController.window;
 		if (!activityWindow.visible)
-			[activityViewer showWindow:self];
+			[activityPanelController showWindow:self];
 		else
 			[activityWindow performClose:self];
 	}

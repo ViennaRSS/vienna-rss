@@ -1,5 +1,5 @@
 //
-//  ActivityViewer.h
+//  ActivityPanelController.h
 //  Vienna
 //
 //  Created by Steve on Thu Mar 18 2004.
@@ -21,7 +21,7 @@
 #import <Cocoa/Cocoa.h>
 #import "TableViewExtensions.h"
 
-@interface ActivityViewer : NSWindowController <NSWindowDelegate> {
+@interface ActivityPanelController : NSWindowController <NSWindowDelegate> {
 	IBOutlet NSWindow * activityWindow;
 	IBOutlet ExtendedTableView * activityTable;
 	IBOutlet NSSplitView * splitView;

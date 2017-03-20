@@ -21,7 +21,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Database.h"
 #import "ArticleController.h"
-#import "ActivityViewer.h"
+#import "ActivityPanelController.h"
 #import <Growl/Growl.h>
 #import "DownloadWindow.h"
 #import "FilterView.h"
@@ -79,7 +79,7 @@
 	IBOutlet NSTextField * currentFilterTextField;
 	IBOutlet NSButton * filterIconInStatusBarButton;
 
-	ActivityViewer * activityViewer;
+	ActivityPanelController * activityPanelController;
 	DownloadWindow * downloadWindow;
 	SmartFolder * smartFolder;
 	NewGroupFolder * groupFolder;
