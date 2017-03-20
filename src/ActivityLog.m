@@ -23,6 +23,9 @@
 
 @implementation ActivityItem
 
+NSNotificationName const activityItemStatusUpdatedNotification = @"Activity Item Status Updated";
+NSNotificationName const activityItemDetailsUpdatedNotification = @"Activity Item Details Updated";
+
 /* init
  * Initialise a new ActivityItem object
  */
@@ -67,7 +70,7 @@
 -(void)setStatus:(NSString *)aStatus
 {
 	status = aStatus;
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityLogChange" object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:activityItemStatusUpdatedNotification object:self];
 }
 
 /* clearDetails
@@ -86,7 +89,7 @@
 	if (details == nil)
 		details = [[NSMutableArray alloc] init];
 	[details addObject:aString];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityDetailChange" object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:activityItemDetailsUpdatedNotification object:self];
 }
 
 /* details
@@ -119,6 +122,8 @@
 
 @implementation ActivityLog
 
+NSNotificationName const activityLogUpdatedNotification = @"Activity Log Updated";
+
 /* defaultLog
  * Return the default log singleton.
  */
@@ -141,7 +146,7 @@
 	if ((self = [super init]) != nil)
 	{
 		log = [[NSMutableArray alloc] init];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWillDeleteFolder:) name:@"MA_Notify_WillDeleteFolder" object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWillDeleteFolder:) name:databaseWillDeleteFolderNotification object:nil];
 	}
 	return self;
 }
@@ -154,7 +159,7 @@
 	Folder * folder = [[Database sharedManager] folderFromID:[nc.object integerValue]];
 	ActivityItem * item = [self itemByName:folder.name];
 	[log removeObject:item];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityLogChange" object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:activityLogUpdatedNotification object:nil];
 }
 
 /* getStatus

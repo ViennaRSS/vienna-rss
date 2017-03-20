@@ -26,6 +26,9 @@
 	NSMutableArray * details;
 }
 
+extern NSNotificationName const activityItemStatusUpdatedNotification;
+extern NSNotificationName const activityItemDetailsUpdatedNotification;
+
 // Accessor functions
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *status;
@@ -37,6 +40,8 @@
 @interface ActivityLog : NSObject {
 	NSMutableArray * log;
 }
+
+extern NSNotificationName const activityLogUpdatedNotification;
 
 // Accessor functions
 +(ActivityLog *)defaultLog;
