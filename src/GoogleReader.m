@@ -62,6 +62,7 @@ enum GoogleReaderStatus {
 @property (nonatomic, strong) NSTimer * tokenTimer;
 @property (nonatomic, strong) NSTimer * authTimer;
 @property (nonatomic, copy) NSMutableArray * clientAuthWaitQueue;
+@property (nonatomic, copy) NSMutableArray * tTokenWaitQueue;
 @end
 
 @implementation GoogleReader
@@ -72,6 +73,7 @@ enum GoogleReaderStatus {
 @synthesize tokenTimer;
 @synthesize authTimer;
 @synthesize clientAuthWaitQueue;
+@synthesize tTokenWaitQueue;
 
 # pragma mark initialization
 
@@ -96,6 +98,7 @@ enum GoogleReaderStatus {
 									   @"AppKey": @"rAlfs2ELSuFxZJ5adJAW54qsNbUa45Qn"
 									   };
 		clientAuthWaitQueue = [[NSMutableArray alloc] init];
+		tTokenWaitQueue = [[NSMutableArray alloc] init];
 	}
     
     return self;
@@ -282,27 +285,39 @@ enum GoogleReaderStatus {
 
 -(void)getTokenForRequest:(ASIFormDataRequest *)clientRequest;
 {
-    if (self.token != nil) {
+    static ASIHTTPRequest *myRequest;
+
+    if (googleReaderStatus == isAuthenticated) {
         [clientRequest setPostValue:self.token forKey:@"T"];
+    } else if (googleReaderStatus == isGettingToken && myRequest != nil) {
+        LLog(@"Another instance is getting T token...");
+        [clientRequest addDependency:myRequest];
+        [tTokenWaitQueue addObject:clientRequest];
+        return;
     } else {
         LLog(@"Start Token Request!");
-        ASIHTTPRequest *request = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
-        [request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
-        request.delegate = nil;
         googleReaderStatus = isGettingToken;
-        __weak typeof(request)weakRequest = request;
-        [request setCompletionBlock:^{
+        myRequest = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
+        [myRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
+        myRequest.delegate = nil;
+        __weak typeof(myRequest)weakRequest = myRequest;
+        [myRequest setCompletionBlock:^{
             __strong typeof(weakRequest)strongRequest = weakRequest;
             self.token = [strongRequest responseString];
-            [clientRequest setPostValue:self.token forKey:@"T"];
             googleReaderStatus = isAuthenticated;
+            for (id obj in tTokenWaitQueue) {
+                [(ASIFormDataRequest *)obj setPostValue:self.token forKey:@"T"];
+            }
+            for (id obj in [tTokenWaitQueue reverseObjectEnumerator]) {
+                [tTokenWaitQueue removeObject:obj];
+            }
             if (self.tokenTimer == nil || !self.tokenTimer.valid) {
                 //tokens expire after 30 minutes : renew them every 25 minutes
                 self.tokenTimer =
                 [NSTimer scheduledTimerWithTimeInterval:25 * 60 target:self selector:@selector(renewToken) userInfo:nil repeats:YES];
             }
         }];
-        [request setFailedBlock:^{
+        [myRequest setFailedBlock:^{
             __strong typeof(weakRequest)strongRequest = weakRequest;
             LOG_EXPR([strongRequest originalURL]);
             LOG_EXPR([strongRequest requestHeaders]);
@@ -312,16 +327,21 @@ enum GoogleReaderStatus {
             [self setToken:nil];
             [strongRequest clearDelegatesAndCancel];
             googleReaderStatus = isMissingToken;
-            [clientRequest cancel];
+            for (id obj in [tTokenWaitQueue reverseObjectEnumerator]) {
+                [(ASIFormDataRequest *)obj cancel];
+                [tTokenWaitQueue removeObject:obj];
+            }
         }];
-        [clientRequest addDependency:request];
-        [[RefreshManager sharedManager] addConnection:request];
+        [clientRequest addDependency:myRequest];
+        [tTokenWaitQueue addObject:clientRequest];
+        [[RefreshManager sharedManager] addConnection:myRequest];
     }
 }
 
 -(void)renewToken
 {
-	token = nil;
+	googleReaderStatus = isMissingToken;
+	[self setToken:nil];
 	[self getTokenForRequest:nil];
 }
 

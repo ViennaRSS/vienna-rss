@@ -23,6 +23,7 @@
 	NSTimer * tokenTimer;
 	NSTimer * authTimer;
 	NSMutableArray * clientAuthWaitQueue;
+	NSMutableArray * tTokenWaitQueue;
 }
 
 +(GoogleReader *)sharedManager;
