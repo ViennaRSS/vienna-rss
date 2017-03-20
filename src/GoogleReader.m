@@ -19,8 +19,6 @@
 //
 
 #import "GoogleReader.h"
-#import "ASIHTTPRequest.h"
-#import "ASIFormDataRequest.h"
 #import "HelperFunctions.h"
 #import "Folder.h"
 #import "Database.h"
@@ -138,12 +136,7 @@ enum GoogleReaderStatus {
 {
 	ASIFormDataRequest * request = [ASIFormDataRequest requestWithURL:url];
     [self commonRequestPrepare:request];
-    [self getToken];
-    if (token == nil) {
-		[request cancel];
-    } else {
-    	[request setPostValue:token forKey:@"T"];
-    }
+    [self getTokenForRequest:request];
 	return request;
 }
 
@@ -254,48 +247,54 @@ enum GoogleReaderStatus {
     	authTimer = [NSTimer scheduledTimerWithTimeInterval:6*24*3600 target:self selector:@selector(resetAuthentication) userInfo:nil repeats:YES];
 }
 
--(void)getToken
+-(void)getTokenForRequest:(ASIFormDataRequest *)clientRequest;
 {
-    if(token != nil) {
-		return; //We already have a transaction token
-    }
 	if (clientAuthToken == nil) {
 		LLog(@"Failed authenticate...");
 		googleReaderStatus = notAuthenticated;
+		[clientRequest cancel];
 		return;
 	}
-	LLog(@"Start Token Request!");
-    ASIHTTPRequest * request = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
-    [request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
-    googleReaderStatus = isGettingToken;
-    __weak typeof(request) weakRequest = request;
-    [request setCompletionBlock:^{
-        __strong typeof(weakRequest) strongRequest = weakRequest;
-        self.token = [strongRequest responseString];
-        googleReaderStatus = isAuthenticated;
-        if (tokenTimer == nil || !tokenTimer.valid)
-            //tokens expire after 30 minutes : renew them every 25 minutes
-            tokenTimer = [NSTimer scheduledTimerWithTimeInterval:25*60 target:self selector:@selector(renewToken) userInfo:nil repeats:YES];
-    }];
-    [request setFailedBlock:^{
-        __strong typeof(weakRequest) strongRequest = weakRequest;
-        LOG_EXPR([strongRequest originalURL]);
-        LOG_EXPR([strongRequest requestHeaders]);
-        LOG_EXPR([[NSString alloc] initWithData:[strongRequest postBody] encoding:NSUTF8StringEncoding]);
-        LOG_EXPR([strongRequest responseHeaders]);
-        LOG_EXPR([[NSString alloc] initWithData:[strongRequest responseData] encoding:NSUTF8StringEncoding]);
-        [self setToken:nil];
-        [strongRequest clearDelegatesAndCancel];
-        googleReaderStatus = isMissingToken;
-    }];
-    
-    [[RefreshManager sharedManager] addConnection:request];
+    if (self.token != nil) {
+        [clientRequest setPostValue:self.token forKey:@"T"];
+    } else {
+        LLog(@"Start Token Request!");
+        ASIHTTPRequest *request = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
+        [request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
+        googleReaderStatus = isGettingToken;
+        __weak typeof(request)weakRequest = request;
+        [request setCompletionBlock:^{
+            __strong typeof(weakRequest)strongRequest = weakRequest;
+            self.token = [strongRequest responseString];
+            [clientRequest setPostValue:self.token forKey:@"T"];
+            googleReaderStatus = isAuthenticated;
+            if (self.tokenTimer == nil || !self.tokenTimer.valid) {
+                //tokens expire after 30 minutes : renew them every 25 minutes
+                self.tokenTimer =
+                [NSTimer scheduledTimerWithTimeInterval:25 * 60 target:self selector:@selector(renewToken) userInfo:nil repeats:YES];
+            }
+        }];
+        [request setFailedBlock:^{
+            __strong typeof(weakRequest)strongRequest = weakRequest;
+            LOG_EXPR([strongRequest originalURL]);
+            LOG_EXPR([strongRequest requestHeaders]);
+            LOG_EXPR([[NSString alloc] initWithData:[strongRequest postBody] encoding:NSUTF8StringEncoding]);
+            LOG_EXPR([strongRequest responseHeaders]);
+            LOG_EXPR([[NSString alloc] initWithData:[strongRequest responseData] encoding:NSUTF8StringEncoding]);
+            [self setToken:nil];
+            [strongRequest clearDelegatesAndCancel];
+            googleReaderStatus = isMissingToken;
+            [clientRequest cancel];
+        }];
+        [clientRequest addDependency:request];
+        [[RefreshManager sharedManager] addConnection:request];
+    }
 }
 
 -(void)renewToken
 {
 	token = nil;
-	[self getToken];
+	[self getTokenForRequest:nil];
 }
 
 -(void)clearAuthentication

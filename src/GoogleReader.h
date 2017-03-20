@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
 #import "Folder.h"
 #import "Article.h"
 #import "ASINetworkQueue.h"
@@ -30,7 +30,7 @@
 @property (nonatomic, getter=isReady, readonly) BOOL ready;
 
 -(void)loadSubscriptions:(NSNotification*)nc;
--(void)getToken;
+-(void)getTokenForRequest:(ASIFormDataRequest *)clientRequest;
 -(void)clearAuthentication;
 -(void)resetAuthentication;
 
