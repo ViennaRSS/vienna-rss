@@ -61,7 +61,7 @@
 #import "Database.h"
 #import "BJRWindowWithToolbar.h"
 #import "NSURL+Utils.h"
-
+#import "PreferencesWindowController.h"
 
 @interface AppController (Private)
 	@property (nonatomic, readonly, copy) NSMenu *searchFieldMenu;
@@ -112,6 +112,12 @@
 	-(void)searchArticlesWithString:(NSString *)searchString;
 	-(void)sourceWindowWillClose:(NSNotification *)notification;
 	-(IBAction)cancelAllRefreshesToolbar:(id)sender;
+@end
+
+@interface AppController ()
+
+@property (nonatomic) PreferencesWindowController *preferencesWindowController;
+
 @end
 
 // Static constant strings that are typically never tweaked
@@ -4577,6 +4583,22 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			 arrayByAddingObjectsFromArray:pluginManager.toolbarItems
 			 ];
 }
+
+#pragma mark Preferences
+
+- (PreferencesWindowController *)preferencesWindowController {
+    if (!_preferencesWindowController) {
+        _preferencesWindowController = [PreferencesWindowController new];
+    }
+
+    return _preferencesWindowController;
+}
+
+- (IBAction)showPreferences:(id)sender {
+    [self.preferencesWindowController showWindow:self];
+}
+
+#pragma mark Dealloc
 
 /* dealloc
  * Clean up and release resources.
