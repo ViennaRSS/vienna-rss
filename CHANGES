@@ -8,6 +8,18 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.9
+-----
+- Change the website to vienna-rss.com as the old domain name (vienna-rss.org) could not be renewed. Perform a minor database evolution to update this.
+- Add a plug-in supporting wallabag.it
+- Show acknowledgements in "About" dialog box
+- Fix del.icio.us URL
+- Fix an issue with icon
+- Change status bar icons to scalable pdfs
+- Remove textures in some windows, change some .nib to .xib
+- Refactor things (window preferences code, delegates, organization of help files …)
+- Modernize build architecture (Xcode 8.2, update pods)
+
 3.1.8
 -----
 - Fixed an External XML Entity (XXE) vulnerability which allowed servers to steal the content of files on the machine running Vienna
