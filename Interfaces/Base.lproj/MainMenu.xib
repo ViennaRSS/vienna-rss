@@ -367,7 +367,7 @@
                             </menuItem>
                             <menuItem title="Preferences…" keyEquivalent="," id="129">
                                 <connections>
-                                    <action selector="showWindow:" target="HLa-Gy-vMd" id="Fid-tD-rC8"/>
+                                    <action selector="showPreferences:" target="-1" id="UuH-UI-a6l"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Check for Updates" id="1104">
@@ -1463,8 +1463,6 @@ CA
                 <outlet property="outlineView" destination="Kk7-ax-B3r" id="O2z-Mf-33v"/>
             </connections>
         </customObject>
-        <customObject id="HRR-OU-3yj" customClass="ArticleListView"/>
-        <customObject id="HLa-Gy-vMd" customClass="PreferencesWindowController"/>
     </objects>
     <resources>
         <image name="filter-icon" width="16" height="16"/>
