@@ -19,7 +19,6 @@
 //
 
 #import "ArticleFilter.h"
-#import "CalendarExtensions.h"
 #import "Preferences.h"
 #import "Constants.h"
 #import "Article.h"
@@ -54,7 +53,7 @@ static NSMutableArray * _filterList = nil;
  */
 +(BOOL)todayFilterComparator:(Article *)theArticle
 {
-	return ([theArticle.date compare:[NSCalendarDate today]] != NSOrderedAscending);
+    return [NSCalendar.currentCalendar isDateInToday:theArticle.date];
 }
 
 /* lastRefreshFilterComparator

@@ -21,7 +21,6 @@
 #import "Database.h"
 #import "Preferences.h"
 #import "StringExtensions.h"
-#import "CalendarExtensions.h"
 #import "Constants.h"
 #import "ArticleRef.h"
 #import "SearchString.h"

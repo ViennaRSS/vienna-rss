@@ -20,7 +20,7 @@
 
 #import "InfoWindow.h"
 #import "Database.h"
-#import "CalendarExtensions.h"
+#import "DateFormatterExtension.h"
 #import "StringExtensions.h"
 #import "AppController.h"
 #import "Folder.h"
@@ -187,8 +187,8 @@
 	if ([folder.lastUpdate isEqualToDate:[NSDate distantPast]])
 		[lastRefreshDate setStringValue:NSLocalizedString(@"Never", nil)];
 	else
-		lastRefreshDate.stringValue = [folder.lastUpdate dateWithCalendarFormat:nil timeZone:nil].friendlyDescription;
-	
+        lastRefreshDate.stringValue = [NSDateFormatter relativeDateStringFromDate:folder.lastUpdate];
+
 	// Fill out the panels
 	urlField.stringValue = folder.feedURL;
 	username.stringValue = folder.username;
