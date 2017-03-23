@@ -721,7 +721,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(NSMenu *)searchFieldMenu
 {
-	NSMenu * cellMenu = [[NSMenu alloc] initWithTitle:@"Search Menu"];
+	NSMenu * cellMenu = [NSMenu new];
 	
 	NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recent Searches", nil) action:NULL keyEquivalent:@""];
 	[item setTag:NSSearchFieldRecentsTitleMenuItemTag];
@@ -903,7 +903,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(NSMenu *)applicationDockMenu:(NSApplication *)sender
 {
-	appDockMenu = [[NSMenu alloc] initWithTitle:@"DockMenu"];
+	appDockMenu = [NSMenu new];
 	[appDockMenu addItem:copyOfMenuItemWithAction(@selector(refreshAllSubscriptions:))];
 	[appDockMenu addItem:copyOfMenuItemWithAction(@selector(markAllSubscriptionsRead:))];
 	return appDockMenu;
@@ -1560,7 +1560,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)initSortMenu
 {
-	NSMenu * sortSubmenu = [[NSMenu alloc] initWithTitle:@"Sort By"];
+	NSMenu * sortSubmenu = [NSMenu new];
 	
 	// Add the fields which are sortable to the menu.
 	for (Field * field in [db arrayOfFields])
@@ -1604,7 +1604,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)initColumnsMenu
 {
-	NSMenu * columnsSubMenu = [[NSMenu alloc] initWithTitle:@"Columns"];
+	NSMenu * columnsSubMenu = [NSMenu new];
 	
 	for (Field * field in [db arrayOfFields])
 	{
@@ -1659,7 +1659,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	// we actually have any scripts.
 	if (count > 0)
 	{
-		NSMenu * scriptsMenu = [[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"Scripts"];
+		NSMenu * scriptsMenu = [[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@""];
 		
 		NSInteger index;
 		for (index = 0; index < count; ++index)
@@ -1686,7 +1686,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			[NSApp.mainMenu removeItem:scriptsMenuItem];
 		}
 		
-		scriptsMenuItem = [[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:@"Scripts" action:NULL keyEquivalent:@""];
+		scriptsMenuItem = [[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:@"" action:NULL keyEquivalent:@""];
 		scriptsMenuItem.image = [NSImage imageNamed:@"scriptMenu.tiff"];
 		
 		NSInteger helpMenuIndex = NSApp.mainMenu.numberOfItems - 1;
@@ -1703,7 +1703,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(NSMenu *)getStylesMenu
 {
-	NSMenu * stylesSubMenu = [[NSMenu alloc] initWithTitle:@"Style"];
+	NSMenu * stylesSubMenu = [NSMenu new];
 	
 	// Reinitialise the styles map
 	NSDictionary * stylesMap = [ArticleView loadStylesMap];
@@ -1733,8 +1733,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)initFiltersMenu
 {
-	NSMenu * filterSubMenu = [[NSMenu alloc] initWithTitle:@"Filter By"];
-	NSMenu * filterPopupMenu = [[NSMenu alloc] initWithTitle:@""];
+	NSMenu * filterSubMenu = [NSMenu new];
+	NSMenu * filterPopupMenu = [NSMenu new];
 	
 	NSArray * filtersArray = [ArticleFilter arrayOfFilters];
 	NSInteger count = filtersArray.count;
@@ -1953,7 +1953,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[self setAppStatusBarIcon];
 		[appStatusItem setHighlightMode:YES];
 		
-		NSMenu * statusBarMenu = [[NSMenu alloc] initWithTitle:@"StatusBarMenu"];
+        NSMenu * statusBarMenu = [NSMenu new];
 		[statusBarMenu addItem:menuItemWithTitleAndAction(NSLocalizedString(@"Open Vienna", nil), @selector(openVienna:))];
 		[statusBarMenu addItem:[NSMenuItem separatorItem]];
 		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(refreshAllSubscriptions:))];
