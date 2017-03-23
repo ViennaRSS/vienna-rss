@@ -106,10 +106,10 @@
 "any" = "hvilken som helst";
 "all" = "alle";
 "Open Scripts Folder" = "Åben Skripter-mappen";
-"Cannot create database folder" = "Desværre, men Vienna kunne ikke lave databasemappen";
+"Cannot create database folder title" = "Desværre, men Vienna kunne ikke lave databasemappen";
 "Cannot create database folder text" = "Vienna prøvede at lave mappen \"%@\" men en fejl opstod. Tjek rettighederne på mapperne i den specificerede sti.";
 "Unrecognised database format title" = "Database filformatet er blevet ændret";
-"Unrecognised database format text" = "Database (%@) filformatet er ikke understøttet af denne udgave af Vienna. Slet eller omdøb filen og genstart Vienna.\n";
+"Unrecognised database format text" = "Database (%@) filformatet er ikke understøttet af denne udgave af Vienna. Slet eller omdøb filen og genstart Vienna.";
 "Upgrade Title" = "Database opgradering";
 "Upgrade Text" = "Din eksisterende database kræver en opdatering for at kunne virke med denne udgave af Vienna. Alternativt kan du vælge at starte med en ny, tom database. Ved begge muligheder, vil din eksisterende database blive gemt i %@. Den nye eller opgraderede database vil IKKE virke med tidligere versioner af Vienna.\n\nBemærk: For denne udgave er det anbefalet at du starter med en ny database for nemhedens skyld.\n";
 "New Database" = "Ny database";
@@ -186,11 +186,12 @@
 "Preferences" = "Indstillinger";
 "General" = "Generelt";
 "Appearance" = "Udseende";
-"Locate Title" = "Find titel";
-"Locate Text" = "Find tekst";
+// Wrong translation!
+/*"Locate Title" = "Find titel";
+"Locate Text" = "Find tekst";*/
 "Empty Trash message" = "Er du sikker på at du vil slette beskederne i Papirkurven permanent?";
 "Empty Trash message text" = "Du kan ikke fortryde denne handling";
-"Cannot open database" = "Desværre, men Vienna kunne ikke åbne databasen.";
+"Cannot open database title" = "Desværre, men Vienna kunne ikke åbne databasen.";
 "Cannot open database text" = "Databasefilen (%@) kunne ikke åbnes af samme grund. Den kan være beskadiget eller utilgængelig. Slet venligst eller omdøb databasefilen og genstart Vienna.";
 "Vienna cannot open the file title" = "Vienna kan ikke åbne filen.";
 "Vienna cannot open the file body" = "Vienna kan ikke åbne filen \"%@\" fordi den er flyttet siden du hentede den.";
@@ -442,7 +443,7 @@
 
 /* Added in 3.0.2 */
 "Close" = "Close";
-"Locate" = "Locate";
+"Locate…" = "Locate…";
 "Error retrieving RSS feed:"="Error retrieving RSS feed:";
 "Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
 "Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";

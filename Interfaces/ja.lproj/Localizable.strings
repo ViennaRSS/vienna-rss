@@ -106,10 +106,10 @@
 "any" = "いずれか";
 "all" = "すべて";
 "Open Scripts Folder" = "スクリプトフォルダを開く";
-"Cannot create database folder" = "Vienna はデータベースフォルダを作成することができません。";
+"Cannot create database folder title" = "Vienna はデータベースフォルダを作成することができません。";
 "Cannot create database folder text" = "Vienna は \"%@\" と言うフォルダを作成しようとしましたが、エラーが発生しました。フォルダのパーミッションを確認してください。";
 "Unrecognised database format title" = "データベースのファイルフォーマットが変更されました。";
-"Unrecognised database format text" = "データベース (%@) のファイルフォーマットはご利用のバージョンの Vienna でサポートされていません。ファイルを削除するか名前を変更した後、Vienna を再起動してください。\n";
+"Unrecognised database format text" = "データベース (%@) のファイルフォーマットはご利用のバージョンの Vienna でサポートされていません。ファイルを削除するか名前を変更した後、Vienna を再起動してください。";
 "Upgrade Title" = "データベースアップグレード";
 "Upgrade Text" = "既存のデータベースをこのビルドの Vienna で使用するためにはデータベースのアップデートが必要です。全く新しいデータベースを使用することもできます。どちらの場合も既存のデータベースは %@ にバックアップされます。新規またアップデートされたデータベースは古いバージョンの Vienna では使用することができません。\n\n注：このビルドでは新しいデータベースを作成することをおすすめします。\n";
 "New Database" = "新規データベース";
@@ -187,10 +187,10 @@
 "General" = "一般";
 "Appearance" = "表示";
 "Locate Title" = "Vienna データベースを作成できません。";
-"Locate Text" = "フォルダがリモートネットワーク上にあるようなので、新規データベースを \"%@\" に作成できません。このバージョンの Vienna はリモートデータベースに対応していません。ローカルディスク上の他のフォルダを選択してください。\n";
+"Locate Text" = "フォルダがリモートネットワーク上にあるようなので、新規データベースを \"%@\" に作成できません。このバージョンの Vienna はリモートデータベースに対応していません。ローカルディスク上の他のフォルダを選択してください。";
 "Empty Trash message" = "ゴミ箱にある項目を完全に取り除いてもよろしいですか？";
 "Empty Trash message text" = "この操作は取り消せません。";
-"Cannot open database" = "Vienna はデータベースを開くことができません。";
+"Cannot open database title" = "Vienna はデータベースを開くことができません。";
 "Cannot open database text" = "データベースファイル (%@) を開くことができません。データベースファイルを削除または名称を変更して Vienna を再起動してください。";
 "Vienna cannot open the file title" = "Vienna はこのファイルを開くことができません。";
 "Vienna cannot open the file body" = "\"%@\" というファイルは保存場所が移動されているためがを開くことができません。";
@@ -442,7 +442,7 @@
 
 /* Added in 3.0.2 */
 "Close" = "Close";
-"Locate" = "Locate";
+"Locate…" = "Locate…";
 "Error retrieving RSS feed:"="Error retrieving RSS feed:";
 "Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
 "Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";

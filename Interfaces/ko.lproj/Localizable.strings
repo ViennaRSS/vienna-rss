@@ -106,10 +106,10 @@
 "any" = "일부";
 "all" = "모든";
 "Open Scripts Folder" = "스크립트 폴더 열기";
-"Cannot create database folder" = "Vienna 가 데이터베이스 폴더를 생성할 수 없습니다.";
+"Cannot create database folder title" = "Vienna 가 데이터베이스 폴더를 생성할 수 없습니다.";
 "Cannot create database folder text" = "Vienna 가 \"%@\" 폴더를 생성 중에 오류가 발생했습니다. 지정한 경로에 있는 폴더의 권한을 확인하십시오.";
 "Unrecognised database format title" = "데이터베이스 파일 형식이 변경되었습니다.";
-"Unrecognised database format text" = "해당 데이터베이스 (%@) 파일 형식은 현재 버전의 Vienna 에서 지원하는 형식이 아닙니다. 해당 파일을 삭제 또는 이름을 변경한 후 Vienna 를 재실행하십시오.\n";
+"Unrecognised database format text" = "해당 데이터베이스 (%@) 파일 형식은 현재 버전의 Vienna 에서 지원하는 형식이 아닙니다. 해당 파일을 삭제 또는 이름을 변경한 후 Vienna 를 재실행하십시오.";
 "Upgrade Title" = "데이터베이스 업그레이드";
 "Upgrade Text" = "현재 버전의 Vienna 를 사용하기 위해서는 기존 데이터베이스의 업그레이드가 요구됩니다. 또는 새로운 데이타베이스를 생성해 시작할 수도 있습니다. 그 어느 경우에도 기존 데이타베이스는 %@ 에 백업됩니다. 신규 및 업데이트된 데이타베이스는 구버젼의 Vienna 에서는 사용할 수 없습니다.\n\n참고: 현재 버전에서는신규 데이터베이스를 생성해 사용할 것을 권장합니다.\n";
 "New Database" = "신규";
@@ -187,10 +187,10 @@
 "General" = "일반";
 "Appearance" = "모양새";
 "Locate Title" = "Vienna 데이터베이스를 생성할 수 없습니다.";
-"Locate Text" = "새로운 Vienna 데이터베이스를 \"%@\" 위치에 생성할 수 없습니다. 아마도 해당 폴더가 원격 네트워크 공유에 위치해 있을 것이며, 현재 버전의 Vienna 로는 원격 데이트베이스를 관리할 수 없습니다. 로컬 머신에 위치한 다른 폴더를 선택해 재시도하시기 바랍니다.\n";
+"Locate Text" = "새로운 Vienna 데이터베이스를 \"%@\" 위치에 생성할 수 없습니다. 아마도 해당 폴더가 원격 네트워크 공유에 위치해 있을 것이며, 현재 버전의 Vienna 로는 원격 데이트베이스를 관리할 수 없습니다. 로컬 머신에 위치한 다른 폴더를 선택해 재시도하시기 바랍니다.";
 "Empty Trash message" = "정말로 휴지통의 항목들을 삭제하시겠습니까?";
 "Empty Trash message text" = "이 명령은 취소할 수 없습니다.";
-"Cannot open database" = "Vienna 가 데이터베이스 파일을 열 수 없습니다.";
+"Cannot open database title" = "Vienna 가 데이터베이스 파일을 열 수 없습니다.";
 "Cannot open database text" = "해당 데이터베이스 파일 (%@) 항목은 손상되었거나 접근할 수 없습니다. 해당 파일을 삭제 또는 이름을 변경한 후 Vienna 를 재실행하십시오.";
 "Vienna cannot open the file title" = "Vienna 는 해당 파일을 열 수 없습니다.";
 "Vienna cannot open the file body" = "Vienna 는 \"%@\" 파일을 열 수 없습니다. 다운로드 후 항목이 옮겨졌습니다.";
@@ -442,7 +442,7 @@
 
 /* Added in 3.0.2 */
 "Close" = "Close";
-"Locate" = "Locate";
+"Locate…" = "Locate…";
 "Error retrieving RSS feed:"="Error retrieving RSS feed:";
 "Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
 "Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";

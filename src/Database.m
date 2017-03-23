@@ -155,8 +155,8 @@ const NSInteger MA_Current_DB_Version = 19;
         // TODO: help text for the user to fix the issue
         NSAlert *alert = [NSAlert new];
         alert.alertStyle = NSAlertStyleCritical;
-        alert.messageText = NSLocalizedString(@"Unrecognised database format", nil);
-        alert.informativeText = NSLocalizedString(@"Unrecognised database format text", nil);
+        alert.messageText = NSLocalizedString(@"Unrecognised database format title", nil);
+        alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"Unrecognised database format text", nil), databaseQueue.path];
         [alert runModal];
         return NO;
     } else if (databaseVersion == 0) {
@@ -306,8 +306,8 @@ const NSInteger MA_Current_DB_Version = 19;
     NSAlert *alert = [NSAlert new];
     alert.alertStyle = NSAlertStyleWarning;
     alert.messageText = NSLocalizedString(@"Locate Title", nil);
-    alert.informativeText = NSLocalizedString(@"Locate Text", nil);
-    [alert addButtonWithTitle:NSLocalizedString(@"Locate", "Title of a button on an alert")];
+    alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"Locate Text", nil), path];
+    [alert addButtonWithTitle:NSLocalizedString(@"Locate…", "Title of a button on an alert")];
     [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
     NSModalResponse alertResponse = [alert runModal];
 
@@ -343,8 +343,8 @@ const NSInteger MA_Current_DB_Version = 19;
 		{
             NSAlert *alert = [NSAlert new];
             alert.alertStyle = NSAlertStyleCritical;
-            alert.messageText = NSLocalizedString(@"Cannot open database", nil);
-            alert.informativeText = NSLocalizedString(@"Cannot open database text", nil);
+            alert.messageText = NSLocalizedString(@"Cannot open database title", nil);
+            alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"Cannot open database text", nil), newPath];
             [alert runModal];
 
             sqlDatabase = nil;
@@ -2570,8 +2570,8 @@ const NSInteger MA_Current_DB_Version = 19;
         {
             NSAlert *alert = [NSAlert alertWithError:error];
             alert.alertStyle = NSAlertStyleCritical;
-            alert.messageText = NSLocalizedString(@"Cannot create database folder", nil);
-            alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"Cannot create database folder text: %@", nil), error];
+            alert.messageText = NSLocalizedString(@"Cannot create database folder title", nil);
+            alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"Cannot create database folder text", nil), databaseFolder];
             [alert runModal];
 
             return NO;

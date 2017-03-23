@@ -106,10 +106,10 @@
 "any" = "任何";
 "all" = "所有";
 "Open Scripts Folder" = "打开脚本文件夹";
-"Cannot create database folder" = "抱歉，Vianna 无法创建数据库文件夹";
+"Cannot create database folder title" = "抱歉，Vianna 无法创建数据库文件夹";
 "Cannot create database folder text" = "Vienna 在创建文件夹 \"%@\" 时发生错误。请检查指定路径上文件夹的权限";
 "Unrecognised database format title" = "数据库文件格式已改变";
-"Unrecognised database format text" = "当前版本的 Vienna 不支持数据库 (%@) 的文件格式。请删除或者重新命名这个文件然后重新 Vianna。\n";
+"Unrecognised database format text" = "当前版本的 Vienna 不支持数据库 (%@) 的文件格式。请删除或者重新命名这个文件然后重新 Vianna。";
 "Upgrade Title" = "数据库升级";
 "Upgrade Text" = "您当前的数据库需要升级才能和当前版本的 Vienna 兼容。您也可以重新建立一个数据库。无论怎样，您当前的数据库都会被备份到 %@。升级后的数据库和新建立的数据库都将不兼容旧版的 Vienna。\n\n附注：对于当前版本的 Vienna，建立一个新的数据库会比较简单。\n";
 "New Database" = "新的数据库";
@@ -187,10 +187,10 @@
 "General" = "通用";
 "Appearance" = "外观";
 "Locate Title" = "无法创建 Vienna 数据库";
-"Locate Text" = "无法在 \"%@\" 创建新的 Vienna 数据库。可能是因为此文件夹处于远端共享网络上，当前版本的 Vienna 不支持远端共享网络上的数据库。请选择一个在您本地机器上的文件夹。\n";
+"Locate Text" = "无法在 \"%@\" 创建新的 Vienna 数据库。可能是因为此文件夹处于远端共享网络上，当前版本的 Vienna 不支持远端共享网络上的数据库。请选择一个在您本地机器上的文件夹。";
 "Empty Trash message" = "您确定要永久删除废纸篓中的文章么？";
 "Empty Trash message text" = "这个操作无法还原";
-"Cannot open database" = "抱歉，Vienna 无法开启这个数据库";
+"Cannot open database title" = "抱歉，Vienna 无法开启这个数据库";
 "Cannot open database text" = "由于一些原因，数据库文件 (%@) 无法被读取。它可能已损坏或者权限不足。请尝试删除或者重命名数据库文件然后重新启动 Vienna";
 "Vienna cannot open the file title" = "Vienna 无法打开这个文件";
 "Vienna cannot open the file body" = "Vienna 无法打开 \"%@\" 这个文件，可能是因为您在下载后移动了这个文件";
@@ -442,7 +442,7 @@
 
 /* Added in 3.0.2 */
 "Close" = "Close";
-"Locate" = "Locate";
+"Locate…" = "Locate…";
 "Error retrieving RSS feed:"="Error retrieving RSS feed:";
 "Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
 "Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";

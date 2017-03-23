@@ -106,10 +106,10 @@
 "any" = "något";
 "all" = "alla";
 "Open Scripts Folder" = "Öppna skriptmappen";
-"Cannot create database folder" = "Ledsen, men Vienna kunde inte skapa databasmappen";
+"Cannot create database folder title" = "Ledsen, men Vienna kunde inte skapa databasmappen";
 "Cannot create database folder text" = "Vienna försöker skapa mappen '%@' men ett fel uppstod. Kontrollera skrivrättigheter på specificerad sökväg.";
 "Unrecognised database format title" = "Databasens filformat har ändrats";
-"Unrecognised database format text" = "Din nuvarande %@ stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.\n";
+"Unrecognised database format text" = "Din nuvarande %@ stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.";
 "Upgrade Title" = "Uppdatera databas";
 "Upgrade Text" = "Din nuvarande databas måste uppgraderas för att fungera med den här versionen av Vienna. Alternativt kan du välja att starta med en ny, tom databas. Vad du än väljer kommer din nuvarande databas att sparas i %@. Den nya och uppgraderade databasen kommer INTE att fungera med tidigare versioner av Vienna.\n\n\Notera: Just för denna version så rekommenderas att du startar med en ny databas för enkelhetens skull.";
 "New Database" = "Ny databas";
@@ -187,10 +187,10 @@
 "General" = "Allmänt";
 "Appearance" = "Utseende";
 "Locate Title" = "Kan ej skapa Viennas databas";
-"Locate Text" = "En ny Vienna-databas kan ej skapas i '%@' för att mappen förmodligen finns på en nätverksdelning och den här versionen av Vienna stöder inte detta. Var vänlig och välj en mapp som finns på din lokala hårddisk.\n";
+"Locate Text" = "En ny Vienna-databas kan ej skapas i '%@' för att mappen förmodligen finns på en nätverksdelning och den här versionen av Vienna stöder inte detta. Var vänlig och välj en mapp som finns på din lokala hårddisk.";
 "Empty Trash message" = "Är du säker på att du vill radera artiklarna i papperskorgen permanent?";
 "Empty Trash message text" = "Du kan inte ångra denna åtgärd";
-"Cannot open database" = "Ursäkta, men Vienna kan inte öppna databasen";
+"Cannot open database title" = "Ursäkta, men Vienna kan inte öppna databasen";
 "Cannot open database text" = "Databasefilen (%@) kan inte öppnas av någon anledning. Den kanske är korrupt eller oåtkomlig. Var god radera eller döp om databasefilen och starta om Vienna.";
 "Vienna cannot open the file title" = "Vienna kan inte öppna filen.";
 "Vienna cannot open the file body" = "Vienna kan inte öppna filen \"%@\" eftersom den har flyttats sedan du laddade ner den.";
@@ -442,7 +442,7 @@
 
 /* Added in 3.0.2 */
 "Close" = "Close";
-"Locate" = "Locate";
+"Locate…" = "Locate…";
 "Error retrieving RSS feed:"="Error retrieving RSS feed:";
 "Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
 "Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";

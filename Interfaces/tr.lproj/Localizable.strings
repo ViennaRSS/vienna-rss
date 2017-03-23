@@ -106,10 +106,10 @@
 "any" = "herhangi";
 "all" = "tümü";
 "Open Scripts Folder" = "Scriptler klasörünü aç";
-"Cannot create database folder" = "Üzgünüm, ama Vienna veritabanı klasörünü oluşturamadı";
+"Cannot create database folder title" = "Üzgünüm, ama Vienna veritabanı klasörünü oluşturamadı";
 "Cannot create database folder text" = "Vienna \"%@\" klasörünü oluşturmaya çalışırken bir hata oluştu. Klasör izinlerinizi kontrol edin.";
 "Unrecognised database format title" = "Veritabanı dosya biçimi değişmiş";
-"Unrecognised database format text" = "Veritabanı (%@) dosya biçimi Vienna'nın bu sürümü tarafından desteklenmiyor. Dosyayı silip ya da yeniden adlandırıp Vienna'yı yeniden başlatmak ister misiniz?.\n";
+"Unrecognised database format text" = "Veritabanı (%@) dosya biçimi Vienna'nın bu sürümü tarafından desteklenmiyor. Dosyayı silip ya da yeniden adlandırıp Vienna'yı yeniden başlatmak ister misiniz?.";
 "Upgrade Title" = "Veritabanı Güncellemesi";
 "Upgrade Text" = "Geçerli veritabanınızın Vienna'nın bu sürümüyle çalışması için güncellenmesi gerek. Alternatif olarak yeni bir veritabanı ile de çalışmaya başlayabilirsiniz.. Her iki durumda da, geçerli veritabanınız %@ konumuna yedeklenecektir. Yeni ya da güncellenmiş veritabanınız, Vienna'nın eski versiyonları ile çalışmayacaktır.\n\nNot: bu sürm için, basitliği açısından yeni bir veritabanı ile başlamanız önerilir.\n";
 "New Database" = "Yeni veritabanı";
@@ -187,10 +187,10 @@
 "General" = "Genel";
 "Appearance" = "Görünüm";
 "Locate Title" = "Vienna veritabanı oluşturulamıyor";
-"Locate Text" = "Yeni bir Vienna veritabanı \"%@\" konumunda oluşturulamıyor çünkü muhtemelen o klasör ya uzaktaki bir ağa dahil, zira Vienna'nın bu versiyonu ağ üzerindeki klasörler ile çalışacak şekilde tasarlanmamıştır. Bilgisayarınız üzerinde bulunan bir klasörü seçmeyi deneyin.\n";
+"Locate Text" = "Yeni bir Vienna veritabanı \"%@\" konumunda oluşturulamıyor çünkü muhtemelen o klasör ya uzaktaki bir ağa dahil, zira Vienna'nın bu versiyonu ağ üzerindeki klasörler ile çalışacak şekilde tasarlanmamıştır. Bilgisayarınız üzerinde bulunan bir klasörü seçmeyi deneyin.";
 "Empty Trash message" = "Çöp kutusundaki bu mesajları kalıcı olarak silmek istediğinizden emin misiniz?";
 "Empty Trash message text" = "Bu işlemi geri alamazsınız";
-"Cannot open database" = "Üzgünüm ama Vienna veritabanını açamadı";
+"Cannot open database title" = "Üzgünüm ama Vienna veritabanını açamadı";
 "Cannot open database text" = "(%@) veritabanı bir sebepten ötürü açılamadı. Dosya zarar görmüş ya da ulaşılamıyor olabilir. Lütfen veritabanı dosyasını silin ya da yeniden adlandırın ve ardından Vienna'yı yeniden başlatın.";
 "Vienna cannot open the file title" = "Vienna dosyayı açamıyor.";
 "Vienna cannot open the file body" = "Vienna \"%@\" dosyasını açamıyor çünkü siz onu indirdikten sonra dosyanın yeri değişmiş.";
@@ -442,7 +442,7 @@
 
 /* Added in 3.0.2 */
 "Close" = "Close";
-"Locate" = "Locate";
+"Locate…" = "Locate…";
 "Error retrieving RSS feed:"="Error retrieving RSS feed:";
 "Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
 "Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";

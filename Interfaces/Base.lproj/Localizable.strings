@@ -106,10 +106,10 @@
 "any" = "any";
 "all" = "all";
 "Open Scripts Folder" = "Open Scripts Folder";
-"Cannot create database folder" = "Sorry, but Vienna was unable to create the database folder";
+"Cannot create database folder title" = "Sorry, but Vienna was unable to create the database folder";
 "Cannot create database folder text" = "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified.";
 "Unrecognised database format title" = "The database file format has changed";
-"Unrecognised database format text" = "The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.\n";
+"Unrecognised database format text" = "The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.";
 "Upgrade Title" = "Database Upgrade";
 "Upgrade Text" = "Your existing database needs to be upgraded to work with this build of Vienna. Alternatively you can elect to start with a new, empty database. In either case, your existing database will be backed up to %@. The new or upgraded database will NOT work with earlier versions of Vienna.\n\nNote: for this build, it is suggested that you start with a new database for simplicity.\n";
 "New Database" = "New Database";
@@ -187,10 +187,10 @@
 "General" = "General";
 "Appearance" = "Appearance";
 "Locate Title" = "Cannot create the Vienna database";
-"Locate Text" = "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.\n";
+"Locate Text" = "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.";
 "Empty Trash message" = "Are you sure you want to delete the messages in the Trash folder permanently?";
 "Empty Trash message text" = "You cannot undo this action";
-"Cannot open database" = "Sorry but Vienna was unable to open the database";
+"Cannot open database title" = "Sorry but Vienna was unable to open the database";
 "Cannot open database text" = "The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna.";
 "Vienna cannot open the file title" = "Vienna cannot open the file.";
 "Vienna cannot open the file body" = "Vienna cannot open the file \"%@\" because it moved since you downloaded it.";
@@ -442,7 +442,7 @@
 
 /* Added in 3.0.2 */
 "Close" = "Close";
-"Locate" = "Locate";
+"Locate…" = "Locate…";
 "Error retrieving RSS feed:"="Error retrieving RSS feed:";
 "Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
 "Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";
