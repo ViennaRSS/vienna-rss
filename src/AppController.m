@@ -1396,7 +1396,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
     if (mainWindow.keyWindow) {
 	NSAlert *alert = [[NSAlert alloc] init];
-    [alert addButtonWithTitle:@"OK"];
     [alert setMessageText:NSLocalizedString(@"Open Reader Authentication Failed",nil)];
     [alert setInformativeText:NSLocalizedString(@"Open Reader Authentication Failed text",nil)];
     alert.alertStyle = NSWarningAlertStyle;
