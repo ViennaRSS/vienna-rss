@@ -2245,7 +2245,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		// Save the date/time of this refresh so we do the right thing when
 		// we apply the filter.
-		[[Preferences standardPreferences] setObject:[NSCalendarDate date] forKey:MAPref_LastRefreshDate];
+		[[Preferences standardPreferences] setObject:[NSDate date] forKey:MAPref_LastRefreshDate];
 		
 		// Toggle the refresh button
 		ToolbarItem * item = [self toolbarItemWithIdentifier:@"Refresh"];

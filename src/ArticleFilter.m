@@ -69,7 +69,11 @@ static NSMutableArray * _filterList = nil;
  */
 +(BOOL)twoDaysFilterComparator:(Article *)theArticle
 {
-	return ([theArticle.date compare:[[NSCalendarDate date] dateByAddingTimeInterval:-172800]] != NSOrderedAscending);
+    NSDate *twoDaysAgo = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay
+                                                                value:-2
+                                                               toDate:[NSDate date]
+                                                              options:0];
+    return [theArticle.date compare:twoDaysAgo] != NSOrderedAscending;
 }
 
 /* unreadOrFlaggedArticleFilterComparator
