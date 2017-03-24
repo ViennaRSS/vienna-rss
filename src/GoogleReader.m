@@ -261,6 +261,7 @@ enum GoogleReaderStatus {
         LLog(@"Start Token Request!");
         ASIHTTPRequest *request = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
         [request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
+        request.delegate = nil;
         googleReaderStatus = isGettingToken;
         __weak typeof(request)weakRequest = request;
         [request setCompletionBlock:^{
