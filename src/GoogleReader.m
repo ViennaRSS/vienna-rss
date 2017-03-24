@@ -160,6 +160,8 @@ enum GoogleReaderStatus {
 	request.delegate = self;
 }
 
+/* pass the GoogleLogin authentication token
+*/
 -(void)authenticateForRequest:(ASIHTTPRequest *)clientRequest
 {
     static ASIFormDataRequest *myRequest;
@@ -167,13 +169,7 @@ enum GoogleReaderStatus {
     if (googleReaderStatus == isAuthenticated || googleReaderStatus == isMissingToken) {
         [clientRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", self.clientAuthToken]];
         return; //we are already connected
-    }
-    Preferences *prefs = [Preferences standardPreferences];
-    if (!prefs.syncGoogleReader) {
-        return;
-    }
-
-    if ((googleReaderStatus == isAuthenticating || googleReaderStatus == isGettingToken) && myRequest != nil) {
+    } else if ((googleReaderStatus == isAuthenticating || googleReaderStatus == isGettingToken) && myRequest != nil) {
         LLog(@"Another instance is authenticating...");
         [clientRequest addDependency:myRequest];
         if (clientRequest != nil) {
@@ -183,36 +179,16 @@ enum GoogleReaderStatus {
     } else {
         // start first authentication
         googleReaderStatus = isAuthenticating;
-        [APPCONTROLLER setStatusMessage:NSLocalizedString(@"Authenticating on Open Reader", nil) persist:NO];
-
-        // restore from Preferences
-        username = prefs.syncingUser;
-        openReaderHost = prefs.syncServer;
-        // set server-specific particularities
-        hostSupportsLongId = NO;
-        hostRequiresSParameter = NO;
-        hostRequiresLastPathOnly = NO;
-        hostRequiresInoreaderAdditionalHeaders = NO;
-        hostRequiresBackcrawling = YES;
-        if ([openReaderHost isEqualToString:@"theoldreader.com"]) {
-            hostSupportsLongId = YES;
-            hostRequiresSParameter = YES;
-            hostRequiresLastPathOnly = YES;
-            hostRequiresBackcrawling = NO;
+        // Do nothing if syncing is disabled in preferences
+        if (![Preferences standardPreferences].syncGoogleReader) {
+            return;
         }
-        if ([openReaderHost rangeOfString:@"inoreader.com"].length != 0) {
-            hostRequiresInoreaderAdditionalHeaders = YES;
-            hostRequiresBackcrawling = NO;
-        }
-        if ([openReaderHost rangeOfString:@"bazqux.com"].length != 0) {
-            hostRequiresBackcrawling = NO;
-        }
-        // restore from keychain
-        password = [KeyChain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"];
-        APIBaseURL = [NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost];
 
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost]];
         myRequest = [ASIFormDataRequest requestWithURL:url];
+
+        [APPCONTROLLER setStatusMessage:NSLocalizedString(@"Authenticating on Open Reader", nil) persist:NO];
+        [self configureForSpecificHost];
         if (hostRequiresInoreaderAdditionalHeaders) {
             NSMutableDictionary *theHeaders = [myRequest.requestHeaders mutableCopy];
             [theHeaders addEntriesFromDictionary:inoreaderAdditionalHeaders];
@@ -220,6 +196,7 @@ enum GoogleReaderStatus {
         }
         [myRequest setUseCookiePersistence:NO];
         myRequest.timeOutSeconds = 180;
+        myRequest.delegate = nil;
         [myRequest setPostValue:username forKey:@"Email"];
         [myRequest setPostValue:password forKey:@"Passwd"];
 
@@ -287,6 +264,41 @@ enum GoogleReaderStatus {
     }
 }
 
+/* configures oneself regarding host, username and password
+ */
+-(void)configureForSpecificHost
+{
+    // restore from Preferences
+    Preferences *prefs = [Preferences standardPreferences];
+    username = prefs.syncingUser;
+    openReaderHost = prefs.syncServer;
+    // default settings
+    hostSupportsLongId = NO;
+    hostRequiresSParameter = NO;
+    hostRequiresLastPathOnly = NO;
+    hostRequiresInoreaderAdditionalHeaders = NO;
+    hostRequiresBackcrawling = YES;
+    // settings for specific kind of servers
+    if ([openReaderHost isEqualToString:@"theoldreader.com"]) {
+        hostSupportsLongId = YES;
+        hostRequiresSParameter = YES;
+        hostRequiresLastPathOnly = YES;
+        hostRequiresBackcrawling = NO;
+    }
+    if ([openReaderHost rangeOfString:@"inoreader.com"].length != 0) {
+        hostRequiresInoreaderAdditionalHeaders = YES;
+        hostRequiresBackcrawling = NO;
+    }
+    if ([openReaderHost rangeOfString:@"bazqux.com"].length != 0) {
+        hostRequiresBackcrawling = NO;
+    }
+    // restore from keychain
+    password = [KeyChain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"];
+    APIBaseURL = [NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost];
+}
+
+/* pass the T token
+*/
 -(void)getTokenForRequest:(ASIFormDataRequest *)clientRequest;
 {
     static ASIHTTPRequest *myRequest;
