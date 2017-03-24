@@ -292,7 +292,6 @@
         
         NSGradient *g = [[NSGradient alloc] initWithStartingColor:countBackgroundColour endingColor:countBackgroundColourGradientEnd];
         [g drawInBezierPath:bp angle:-90.0];
-		[countBackgroundColour set];
 
         // Push new graphics state so we can draw using a shadow if needed
         [NSGraphicsContext saveGraphicsState];
