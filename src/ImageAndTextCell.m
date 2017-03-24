@@ -290,16 +290,14 @@
 		countFrame.size.height -= 2;
 		NSBezierPath * bp = [NSBezierPath bezierPathWithRoundRectInRect:countFrame radius:numSize.height / 2];
         
-        NSGradient *g = [[NSGradient alloc] initWithStartingColor:countBackgroundColour endingColor:countBackgroundColourGradientEnd];
-        [g drawInBezierPath:bp angle:-90.0];
+        NSGradient * countLabelGradient = [[NSGradient alloc] initWithStartingColor:countBackgroundColour endingColor:countBackgroundColourGradientEnd];
+        [countLabelGradient drawInBezierPath:bp angle:-90.0];
 
         // Push new graphics state so we can draw using a shadow if needed
         [NSGraphicsContext saveGraphicsState];
         {
             if (countLabelShadow)
-            {
                 [countLabelShadow set];
-            }
             
             // Draw the count in the rounded rectangle we just created.
             NSPoint point = NSMakePoint(NSMidX(countFrame) - numSize.width / 2.0f,  NSMidY(countFrame) - numSize.height / 2.0f );
