@@ -43,6 +43,7 @@
 		offset = 0;
 		hasCount = NO;
 		count = 0;
+        countLabelShadow = [self defaultCountLabelShadow];
 		[self setCountBackgroundColour:[NSColor shadowColor]];
 	}
 	return self;
@@ -58,7 +59,9 @@
 	cell->count = count;
 	cell->inProgress = inProgress;
 	cell->countBackgroundColour = countBackgroundColour;
-	cell->item = item;	
+    cell->countBackgroundColourGradientEnd = countBackgroundColourGradientEnd;
+    cell->countLabelShadow = countLabelShadow;
+	cell->item = item;
 
 	return cell;
 }
@@ -135,6 +138,20 @@
 -(void)setCountBackgroundColour:(NSColor *)newColour
 {
 	countBackgroundColour = newColour;
+
+    NSColor *newColourRGB = [newColour colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];
+    
+    if (newColourRGB)
+    {
+        countBackgroundColourGradientEnd = [NSColor colorWithHue:newColourRGB.hueComponent
+                                                      saturation:newColourRGB.saturationComponent - 0.07
+                                                      brightness:newColourRGB.brightnessComponent + 0.07
+                                                           alpha:newColourRGB.alphaComponent];
+    }
+    else
+    {
+        countBackgroundColourGradientEnd = countBackgroundColour.copy;
+    }
 }
 
 /* setInProgress
@@ -264,16 +281,32 @@
 			[self.backgroundColor set];
 			NSRectFill(countFrame);
 		}
+        
+        // Provide a small amount of additional visual padding beyond the actual
+        // count rectangle to ensure the text does not hit the edge of the count bubble
+        cellFrame.size.width -= 4.0;
 
 		countFrame.origin.y += 1;
 		countFrame.size.height -= 2;
 		NSBezierPath * bp = [NSBezierPath bezierPathWithRoundRectInRect:countFrame radius:numSize.height / 2];
+        
+        NSGradient *g = [[NSGradient alloc] initWithStartingColor:countBackgroundColour endingColor:countBackgroundColourGradientEnd];
+        [g drawInBezierPath:bp angle:-90.0];
 		[countBackgroundColour set];
-		[bp fill];
 
-		// Draw the count in the rounded rectangle we just created.
-		NSPoint point = NSMakePoint(NSMidX(countFrame) - numSize.width / 2.0f,  NSMidY(countFrame) - numSize.height / 2.0f );
-		[number drawAtPoint:point withAttributes:attributes];
+        // Push new graphics state so we can draw using a shadow if needed
+        [NSGraphicsContext saveGraphicsState];
+        {
+            if (countLabelShadow)
+            {
+                [countLabelShadow set];
+            }
+            
+            // Draw the count in the rounded rectangle we just created.
+            NSPoint point = NSMakePoint(NSMidX(countFrame) - numSize.width / 2.0f,  NSMidY(countFrame) - numSize.height / 2.0f );
+            [number drawAtPoint:point withAttributes:attributes];
+        }
+        [NSGraphicsContext restoreGraphicsState];
 	}
 
 	// Draw the text
@@ -325,6 +358,16 @@
             return [bits componentsJoinedByString:@", "];
     }
     return [super accessibilityAttributeValue:attribute];
+}
+
+-(NSShadow *)defaultCountLabelShadow
+{
+    NSShadow *shadow = [NSShadow new];
+    shadow.shadowColor = [NSColor colorWithWhite:0 alpha:0.1];
+    shadow.shadowBlurRadius = 1.0;
+    shadow.shadowOffset = NSMakeSize(0.0, -1.0);
+    
+    return shadow;
 }
 
 @end
