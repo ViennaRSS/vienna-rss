@@ -28,6 +28,8 @@
 	NSImage	* image;
 	NSImage * auxiliaryImage;
 	NSColor * countBackgroundColour;
+    NSColor * countBackgroundColourGradientEnd;
+    NSShadow * countLabelShadow;
 	NSInteger offset;
 	NSInteger count;
 	BOOL hasCount;
