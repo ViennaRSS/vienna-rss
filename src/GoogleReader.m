@@ -173,10 +173,12 @@ enum GoogleReaderStatus {
         return;
     }
 
-    if (googleReaderStatus != notAuthenticated && myRequest != nil) {
+    if ((googleReaderStatus == isAuthenticating || googleReaderStatus == isGettingToken) && myRequest != nil) {
         LLog(@"Another instance is authenticating...");
         [clientRequest addDependency:myRequest];
-        [clientAuthWaitQueue addObject:clientRequest];
+        if (clientRequest != nil) {
+            [clientAuthWaitQueue addObject:clientRequest];
+        }
         return;
     } else {
         // start first authentication
@@ -277,7 +279,9 @@ enum GoogleReaderStatus {
         }];
 
         [clientRequest addDependency:myRequest];
-        [clientAuthWaitQueue addObject:clientRequest];
+        if (clientRequest != nil) {
+            [clientAuthWaitQueue addObject:clientRequest];
+        }
         LLog(@"Start first authentication...");
         [[RefreshManager sharedManager] addConnection:myRequest];
     }
@@ -292,12 +296,14 @@ enum GoogleReaderStatus {
     } else if (googleReaderStatus == isGettingToken && myRequest != nil) {
         LLog(@"Another instance is getting T token...");
         [clientRequest addDependency:myRequest];
-        [tTokenWaitQueue addObject:clientRequest];
+        if (clientRequest != nil) {
+            [tTokenWaitQueue addObject:clientRequest];
+        }
         return;
     } else {
         LLog(@"Start Token Request!");
-        googleReaderStatus = isGettingToken;
         myRequest = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
+        googleReaderStatus = isGettingToken;
         [myRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
         myRequest.delegate = nil;
         __weak typeof(myRequest)weakRequest = myRequest;
@@ -333,7 +339,9 @@ enum GoogleReaderStatus {
             }
         }];
         [clientRequest addDependency:myRequest];
-        [tTokenWaitQueue addObject:clientRequest];
+        if (clientRequest != nil) {
+            [tTokenWaitQueue addObject:clientRequest];
+        }
         [[RefreshManager sharedManager] addConnection:myRequest];
     }
 }
