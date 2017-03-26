@@ -14,18 +14,18 @@
 "RSS Subscription Export Title" = "Export fertig";
 "%d subscriptions successfully exported" = "%d Abonnements erfolgreich exportiert.";
 "New unread articles retrieved" = "%d neue ungelesene Artikel empfangen.";
-"Growl refresh completed" = "Neue Artikel";
-"New articles retrieved" = "Neue Artikel";
+"Growl refresh completed" = "Growl-Aktualisierung komplett";
+"New articles retrieved" = "Neue Artikel erhalten";
 "(Untitled Feed)" = "(Unbenannter Feed)";
-"Open Link in Browser" = "Im Browser öffnen";
-"Copy Link to Clipboard" = "Link kopieren";
+"Open Link in Browser" = "Link im Browser öffnen";
+"Copy Link to Clipboard" = "Link in die Zwischenablage kopieren";
 "Refresh completed" = "Aktualisierung durchgeführt.";
 "Retrieving articles" = "Empfange Artikel";
 "ClearButton" = "Löschen";
 "Read" = "Gelesen";
 "Flagged" = "Markiert";
 "Comments" = "Kommentare";
-"Parent" = "Eltern";
+"Parent" = "Vorheriger";
 "Number" = "Nummer";
 "Subject" = "Betreff";
 "Folder" = "Ordner";
@@ -270,7 +270,7 @@
 "Skip Folder" = "Ordner überspringen";
 "Sort By" = "Sortieren nach";
 "Spelling" = "Rechtschreibung";
-"Spelling…" = "Rechtschreibung……";
+"Spelling…" = "Rechtschreibung…";
 "Stop Refreshing" = "Aktualisierung stoppen";
 "Stop Reloading Page" = "Neuladen der Seite stoppen";
 "Style" = "Stile";
@@ -416,7 +416,7 @@
 "Unread or flagged" = "Ungelesenen oder markiert";
 "Syncing" = "Synchronisiere";
 "Reindex Database" = "Indiziere Datenbank";
-"Other" = "Auswählen";
+"Other" = "Andere";
 "Authenticating on Open Reader" = "Authentifiziere bei Open Reader";
 "Connecting to Open Reader server to retrieve %@" = "Verbindung mit Open Reader Server wird hergestellt um %@ zur erhalten";
 "Retrieving folder image for Open Reader Feed" = "Empfange Ordnerbilder für den Open Reader Feed";
@@ -425,34 +425,34 @@
 "Open Reader Authentication Failed text" = "Überprüfe ob Benutzername und Passwort für den Zugang zum Open Reader Server in den Einstellungen von Vienna richtig gespeichert sind.\nÜberprüfe auch ob Zugang zum Internet besteht.";
 
 /* Added in 3.0.1 */
-"Plugin installed" = "Plugin installed";
-"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.";
-"Error loading script '%@'" = "Error loading script '%@'";
-"AppleScript Error in '%@' script" = "AppleScript Error in '%@' script";
-"No thanks" = "No thanks";
-"Include anonymous system profile when checking for updates?" = "Include anonymous system profile when checking for updates?";
-"Include anonymous system profile when checking for updates text" = "This helps Vienna development by letting us know what versions of Mac OS X are most popular amongst our users.";
-"Error: Feed not found!" = "Error: Feed not found!";
-"Loading" = "Loading";
-"Plugin could not be installed" = "Plugin could not be installed";
-"Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
-"Queue" = "Queue";
-"Forcing Refresh subscriptions..." = "Forcing Refresh subscriptions...";
-"Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
+"Plugin installed" = "Plugin installiert";
+"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Ein neues Plugin wurde installiert. Es ist nun aus dem Menü verfügbar und kann zur Toolbar hinzugefügt werden.";
+"Error loading script '%@'" = "Fehler beim Laden des Skripts '%@'";
+"AppleScript Error in '%@' script" = "AppleScript Fehler im Skript '%@'";
+"No thanks" = "Nein Danke";
+"Include anonymous system profile when checking for updates?" = "Anonymisierte Systemprofile beim Suchen nach Aktualisierungen einfügen?";
+"Include anonymous system profile when checking for updates text" = "Dies hilft den Vienna-Entwicklern herauszufinden, welche Mac OS X Version unsere Nutzer verwenden.";
+"Error: Feed not found!" = "Fehler: Feed nicht gefunden!";
+"Loading" = "Laden";
+"Plugin could not be installed" = "Plugin konnten nicht installiert werden";
+"Vienna failed to install the plugin." = "Vienna konnte das Plugin nicht installieren.";
+"Queue" = "Warteschlange";
+"Forcing Refresh subscriptions..." = "Erzwinge Aktualisierung der Abonnements...";
+"Improper infinitely looping URL redirect to %@" = "Unsaubere unendliche URL verweist auf %@";
 
 /* Added in 3.0.2 */
-"Close" = "Close";
-"Locate…" = "Locate…";
-"Error retrieving RSS feed:"="Error retrieving RSS feed:";
-"Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
-"Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";
-"RSS Icon not found!" = "RSS Icon not found!";
+"Close" = "Schliessen";
+"Locate…" = "Lokalisieren…";
+"Error retrieving RSS feed:"="Fehler beim erhalten des RSS-Feed:";
+"Got HTTP status 304 - No news from last check" = "Erhalte HTTP-Status 304 - Keine Nachricht von der letzten Aktualisierung.";
+"Error retrieving RSS Icon:" = "Fehler beim Erhalt des RSS-Icon:";
+"RSS Icon not found!" = "RSS-Icon nicht gefunden!";
 
 /*Added in 3.0.5 */
-"Redirection attempt treated as temporary for safety concern" = "Redirection attempt treated as temporary for safety concern";
+"Redirection attempt treated as temporary for safety concern" = "Verbindungsversuch aus Sicherheitsgründen nur temporär möglich";
 
 /*Added in 3.0.7 */
-"No articles in feed" = "No articles in feed";
+"No articles in feed" = "Keine Artikel im feed";
 
 /*Added in 3.1.2 */
 "Filter folders" = "Suche nach Ordnern";
