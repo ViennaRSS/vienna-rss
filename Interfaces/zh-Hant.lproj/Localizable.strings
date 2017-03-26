@@ -106,10 +106,10 @@
 "any" = "任何";
 "all" = "全部";
 "Open Scripts Folder" = "打開工序指令檔案夾";
-"Cannot create database folder" = "很抱歉，Vienna 無法建立資料庫檔案夾";
+"Cannot create database folder title" = "很抱歉，Vienna 無法建立資料庫檔案夾";
 "Cannot create database folder text" = "Vienna 嘗試建立“%@”檔案夾時發生錯誤。請檢查您所指定之路徑的檔案夾權限。";
 "Unrecognised database format title" = "資料庫檔案格式已變更";
-"Unrecognised database format text" = "此版本的 Vienna 並不支援資料庫 (%@) 的檔案格式。請刪除此檔案，或是將檔案重新命名後，再重新啟動 Vienna。\n";
+"Unrecognised database format text" = "此版本的 Vienna 並不支援資料庫 (%@) 的檔案格式。請刪除此檔案，或是將檔案重新命名後，再重新啟動 Vienna。";
 "Upgrade Title" = "資料庫升級";
 "Upgrade Text" = "您使用此版本的 Vienna 時，必須將您現有的資料庫進行升級。此外，您也可以選擇建立一個空白的新資料庫，以重新開始。無論如何，您現在的資料庫都會備份到 %@。而新的資料庫或是更新後的資料庫，都無法在舊版的 Vienna 上使用。\n\n附註：建議您在此版的 Vienna 中建立新的資料庫，較不會造成困擾。\n";
 "New Database" = "新資料庫";
@@ -187,10 +187,10 @@
 "General" = "一般";
 "Appearance" = "外觀";
 "Locate Title" = "無法建立 Vienna 資料庫";
-"Locate Text" = "無法在“%@”建立新的 Vienna 資料庫，原因可能是這個檔案夾位在遠端網路分享空間中，而 Vienna 無法管理遠端的資料庫。請在您的本機電腦上，選擇其他的檔案夾。\n";
+"Locate Text" = "無法在“%@”建立新的 Vienna 資料庫，原因可能是這個檔案夾位在遠端網路分享空間中，而 Vienna 無法管理遠端的資料庫。請在您的本機電腦上，選擇其他的檔案夾。";
 "Empty Trash message" = "您是否確定要從垃圾桶檔案夾中，永久刪除這些訊息？";
 "Empty Trash message text" = "這個動作無法還原";
-"Cannot open database" = "很抱歉，Vienna 無法打開此資料庫";
+"Cannot open database title" = "很抱歉，Vienna 無法打開此資料庫";
 "Cannot open database text" = "因為某些原因，無法打開資料庫檔案 (%@)。原因可能是載入中斷或無法使用檔案。請刪除資料庫檔案，或將資料庫檔案重新命名，然後重新啟動 Vienna 。";
 "Vienna cannot open the file title" = "Vienna 無法打開這個檔案。";
 "Vienna cannot open the file body" = "Vienna 無法打開“%@”這個檔案，原因是您完成下載後，已經把這個檔案搬移到其他地方。";
@@ -442,7 +442,7 @@
 
 /* Added in 3.0.2 */
 "Close" = "Close";
-"Locate" = "Locate";
+"Locate…" = "Locate…";
 "Error retrieving RSS feed:"="Error retrieving RSS feed:";
 "Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
 "Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";

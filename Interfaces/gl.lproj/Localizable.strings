@@ -106,10 +106,10 @@
 "any" = "algunha";
 "all" = "todas";
 "Open Scripts Folder" = "Abrir o cartafol de scripts";
-"Cannot create database folder" = "Sentímolo, mais Vienna non puido crear o cartafol da base de datos";
+"Cannot create database folder title" = "Sentímolo, mais Vienna non puido crear o cartafol da base de datos";
 "Cannot create database folder text" = "Vienna ha intentado crear la carpeta \"%@\" pero ha ocurrido un error. Compruebe los permisos de las carpetas de la ruta especificada.";
 "Unrecognised database format title" = "O formato do arquivo da base de datos cambiou";
-"Unrecognised database format text" = "O formato do archivo da base de datos (%@) non é compatible con esta versión de Vienna. Elimine o arquivo ou cambie o seu nome e reinicie Vienna.\n";
+"Unrecognised database format text" = "O formato do archivo da base de datos (%@) non é compatible con esta versión de Vienna. Elimine o arquivo ou cambie o seu nome e reinicie Vienna.";
 "Upgrade Title" = "Actualización da base de datos";
 "Upgrade Text" = "A base de datos existente precisa actualizarse para poder ser empregada con esta versión de Vienna. Si queres, podes crear unha nova baleira. De calquer modo, a base de datos actual será localizada en %@. Teña en conta que a nova base de datos non funcionará con versións anteriores de Vienna.\n\nNota: Para esta versións recoméndase iniciar unha nova base de datos.\n";/*no*/
 "New Database" = "Nova base de datos";
@@ -187,10 +187,10 @@
 "General" = "Xeral";
 "Appearance" = "Apariencia";
 "Locate Title" = "Non se pode crear a base de datos de Vienna";
-"Locate Text" = "Non se pode crear a nova base de datos de Vienna en \"%@\" debido a que probablemente o cartafol está ubicado nun recurso compartido dunha rede remota e esta versión de Vienna non pode xestionar bases de datos remotas. Por favor, escolle un cartafol alternativo ubicado no seu equipo local.\n";
+"Locate Text" = "Non se pode crear a nova base de datos de Vienna en \"%@\" debido a que probablemente o cartafol está ubicado nun recurso compartido dunha rede remota e esta versión de Vienna non pode xestionar bases de datos remotas. Por favor, escolle un cartafol alternativo ubicado no seu equipo local.";
 "Empty Trash message" = "Realmente queres eliminar permanentemente as mensaxes do lixo?";
 "Empty Trash message text" = "Esta acción non pode ser desfeita.";
-"Cannot open database" = "Vienna non puido abrir a base de datos";
+"Cannot open database title" = "Vienna non puido abrir a base de datos";
 "Cannot open database text" = "Por algún motivo, o artigo da base de datos (%@) non se puido abrir. Pode estar danado ou inaccesible. Por favor, elimine ou cambie o nome do arquivo da base de datos e reinicie Vienna.";
 "Vienna cannot open the file title" = "Vienna non pode abrir o arquivo.";
 "Vienna cannot open the file body" = "Vienna non pode abrir o arquivo \"%@\" xa que foi movido desde que foi descargado.";
@@ -443,7 +443,7 @@
 
 /* Added in 3.0.2 */
 "Close" = "Pechar";
-"Locate" = "Ubicar";
+"Locate…" = "Ubicar…";
 "Error retrieving RSS feed:"="Erro recuperando subscrición";
 "Got HTTP status 304 - No news from last check" = "Recibido estado HTTP 304 - Non hai novas dende a última procura";
 "Error retrieving RSS Icon:" = "Erro recuperando a icona da subscrición:";

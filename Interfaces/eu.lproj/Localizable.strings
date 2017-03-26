@@ -106,10 +106,10 @@
 "any" = "edozein";
 "all" = "denak";
 "Open Scripts Folder" = "Ireki Scripts Direktorioa";
-"Cannot create database folder" = "Barkatu baina Vienna-k ezin izan du datu baseko direktorioa sortu";
+"Cannot create database folder title" = "Barkatu baina Vienna-k ezin izan du datu baseko direktorioa sortu";
 "Cannot create database folder text" = "Vienna-k \"%@\" direktorioa sortzen saiatu da baina errore bat gertatu da. Begiratu direktorioa sortu nahi duzun tokiaren baimenak.";
 "Unrecognised database format title" = "Datu basearen fitxategiaren formatua aldatu egin da";
-"Unrecognised database format text" = "Vienna-ko bertsio honek ez du (%@) datu base fitxategiaren formatua ulertzen. Ezabatu edota berrizendu eta berrabiarazi Vienna.\n";
+"Unrecognised database format text" = "Vienna-ko bertsio honek ez du (%@) datu base fitxategiaren formatua ulertzen. Ezabatu edota berrizendu eta berrabiarazi Vienna.";
 "Upgrade Title" = "Datu basea eguneratuta";
 "Upgrade Text" = "Vienna-ko bertsio honetan existitzen den datu basea erabiltzeko, datu basea eguneratu behar da. Horretaz gain datu base berri eta huts batekin hasi zaitezke ere. Edozein kasutan, existitzen den datu basearen segurtasun kopia bat %@-(e)n gordeko da. Datu base berria edota eguneratua ez da aurreko Vienna-ko bertsioetan ibiliko.\n\nOharra: bertsio honetarako, datu base berria erabiltzea gomendatzen da erraztasunagaitik.\n";
 "New Database" = "Datu Base Berria";
@@ -187,10 +187,10 @@
 "General" = "Orokorrean";
 "Appearance" = "Itxura";
 "Locate Title" = "Ezin da Vienna-ko datu basea sortu";
-"Locate Text" = "Ezin da Vienna datu base berri bat sortu \"%@\" -(e)n direktorioa urruneko direktorio batean kokatua dagoelako eta Vienna-k ezin ditu urruneko datu baseak kudeatu. Mesedez aukeratu zeure disko gogorrean dagoen direktorioren bat.\n";
+"Locate Text" = "Ezin da Vienna datu base berri bat sortu \"%@\" -(e)n direktorioa urruneko direktorio batean kokatua dagoelako eta Vienna-k ezin ditu urruneko datu baseak kudeatu. Mesedez aukeratu zeure disko gogorrean dagoen direktorioren bat.";
 "Empty Trash message" = "Ziur zaude zakarrontzian dauden mezuak betiko ezabatu nahi dituzula?";
 "Empty Trash message text" = "Hurrengo ekintza ezin da desegin";
-"Cannot open database" = "Barkatu baina Vienna-k ezin izan du datu basea ireki";
+"Cannot open database title" = "Barkatu baina Vienna-k ezin izan du datu basea ireki";
 "Cannot open database text" = "Datu base fitxategia (%@) ezin izan da ireki hainbat arrazoiengatik. Agian apurtuta edota ezin izan da fitxategira sartu. Mesedez ezabatu edo berrizendu fitxategia eta Vienna berrabiarazi.";
 "Vienna cannot open the file title" = "Vienna-k ezin du fitxategia ireki.";
 "Vienna cannot open the file body" = "Vienna-k ezin du \"%@\" fitxategia ireki deskargatu denetik mugitu egin delako.";
@@ -442,7 +442,7 @@
 
 /* Added in 3.0.2 */
 "Close" = "Close";
-"Locate" = "Locate";
+"Locate…" = "Locate…";
 "Error retrieving RSS feed:"="Error retrieving RSS feed:";
 "Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
 "Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";

@@ -153,10 +153,11 @@ const NSInteger MA_Current_DB_Version = 19;
     } else if ((databaseVersion > 0) && (databaseVersion < MA_Min_Supported_DB_Version)) {
         // database version is too old or schema not supported
         // TODO: help text for the user to fix the issue
-        NSRunAlertPanel(NSLocalizedString(@"Unrecognised database format", nil),
-                        NSLocalizedString(@"Unrecognised database format text", nil),
-                        NSLocalizedString(@"Close", nil), @"", @"",
-                        databaseQueue.path);
+        NSAlert *alert = [NSAlert new];
+        alert.alertStyle = NSAlertStyleCritical;
+        alert.messageText = NSLocalizedString(@"Unrecognised database format title", nil);
+        alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"Unrecognised database format text", nil), databaseQueue.path];
+        [alert runModal];
         return NO;
     } else if (databaseVersion == 0) {
         // database is fresh
@@ -301,14 +302,21 @@ const NSInteger MA_Current_DB_Version = 19;
 -(NSString *)relocateLockedDatabase:(NSString *)path
 {
 	FMDatabase *sqlDatabase = [FMDatabase databaseWithPath:[Database databasePath]];
-    NSString * errorTitle = NSLocalizedString(@"Locate Title", nil);
-	NSString * errorText = NSLocalizedString(@"Locate Text", nil);
-	NSInteger option = NSRunAlertPanel(errorTitle, errorText, NSLocalizedString(@"Locate", nil), NSLocalizedString(@"Exit", nil), nil, path);
-	if (option == 0)
+
+    NSAlert *alert = [NSAlert new];
+    alert.alertStyle = NSAlertStyleWarning;
+    alert.messageText = NSLocalizedString(@"Locate Title", nil);
+    alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"Locate Text", nil), path];
+    [alert addButtonWithTitle:NSLocalizedString(@"Locate…", "Title of a button on an alert")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+    NSModalResponse alertResponse = [alert runModal];
+
+    // When the cancel button is pressed.
+	if (alertResponse == NSAlertSecondButtonReturn)
 		return nil;
 
-	// Locate button.
-	if (option == 1)
+	// When the locate button is pressed.
+	if (alertResponse == NSAlertFirstButtonReturn)
 	{
 		// Delete any existing database.
 		if (sqlDatabase != nil)
@@ -322,7 +330,7 @@ const NSInteger MA_Current_DB_Version = 19;
 		NSOpenPanel * openPanel = [NSOpenPanel openPanel];
 		[openPanel setCanChooseFiles:NO];
 		[openPanel setCanChooseDirectories:YES];
-		if ([openPanel runModal] == NSCancelButton)
+		if ([openPanel runModal] == NSFileHandlingPanelCancelButton)
 			return nil;
 		
 		// Make the new database name.
@@ -333,10 +341,12 @@ const NSInteger MA_Current_DB_Version = 19;
 		sqlDatabase = [[FMDatabase alloc] initWithPath:newPath];
 		if (!sqlDatabase || ![sqlDatabase open])
 		{
-			NSRunAlertPanel(NSLocalizedString(@"Cannot open database", nil),
-							NSLocalizedString(@"Cannot open database text", nil),
-							NSLocalizedString(@"Close", nil), @"", @"",
-							newPath);
+            NSAlert *alert = [NSAlert new];
+            alert.alertStyle = NSAlertStyleCritical;
+            alert.messageText = NSLocalizedString(@"Cannot open database title", nil);
+            alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"Cannot open database text", nil), newPath];
+            [alert runModal];
+
             sqlDatabase = nil;
 			return nil;
 		}
@@ -2558,10 +2568,12 @@ const NSInteger MA_Current_DB_Version = 19;
         NSError *error;
         if (![fileManager createDirectoryAtPath:databaseFolder withIntermediateDirectories:YES attributes:NULL error:&error])
         {
-            NSRunAlertPanel(NSLocalizedString(@"Cannot create database folder", nil),
-                            [NSString stringWithFormat:NSLocalizedString(@"Cannot create database folder text: %@", nil), error],
-                            NSLocalizedString(@"Close", nil), @"", @"",
-                            databaseFolder);
+            NSAlert *alert = [NSAlert alertWithError:error];
+            alert.alertStyle = NSAlertStyleCritical;
+            alert.messageText = NSLocalizedString(@"Cannot create database folder title", nil);
+            alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"Cannot create database folder text", nil), databaseFolder];
+            [alert runModal];
+
             return NO;
         }
     }

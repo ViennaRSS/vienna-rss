@@ -106,10 +106,10 @@
 "any" = "een of meer";
 "all" = "alle";
 "Open Scripts Folder" = "Open scripts-map";
-"Cannot create database folder" = "Vienna kan de databasemap niet aanmaken";
+"Cannot create database folder title" = "Vienna kan de databasemap niet aanmaken";
 "Cannot create database folder text" = "Vienna probeerde de map \"%@\" te maken, maar er ging iets fout. Controleer de bevoegdheden van de bovenliggende mappen.";
 "Unrecognised database format title" = "Het bestandsformaat van de database is veranderd";
-"Unrecognised database format text" = "Het bestandsformaat van de database (%@) wordt door deze versie van Vienna niet ondersteund. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.\n";
+"Unrecognised database format text" = "Het bestandsformaat van de database (%@) wordt door deze versie van Vienna niet ondersteund. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.";
 "Upgrade Title" = "Database-upgrade";
 "Upgrade Text" = "Uw bestaande database moet worden aangepast om door deze versie van Vienna te kunnen worden gelezen. U kunt ook kiezen om te starten met een nieuwe, lege database. Uw bestaande database wordt hoe dan ook opgeslagen als %@. De nieuwe of bijgewerkte database zal NIET meer werken met oudere versies van Vienna.\n\nOpmerking: voor deze build is het aan te raden om met een nieuwe, lege database te starten.\n";
 "New Database" = "Nieuwe database";
@@ -187,10 +187,10 @@
 "General" = "Algemeen";
 "Appearance" = "Weergave";
 "Locate Title" = "Kan de Vienna-database niet aanmaken";
-"Locate Text" = "Een nieuwe Vienna-database kan niet worden aagemaakt in \"%@\". De database staat waarschijnlijk op een andere computer in het netwerk, hetgeen door deze versie van Vienna niet wordt ondersteund. Kiest u een andere locatie op deze computer.\n";
+"Locate Text" = "Een nieuwe Vienna-database kan niet worden aagemaakt in \"%@\". De database staat waarschijnlijk op een andere computer in het netwerk, hetgeen door deze versie van Vienna niet wordt ondersteund. Kiest u een andere locatie op deze computer.";
 "Empty Trash message" = "Weet u zeker dat u de artikelen in de prullenmand definitief wilt verwijderen?";
 "Empty Trash message text" = "Dit kan niet ongedaan worden gemaakt";
-"Cannot open database" = "Vienna kon de database niet openen";
+"Cannot open database title" = "Vienna kon de database niet openen";
 "Cannot open database text" = "Het database-bestand (%@) kon niet worden geopend. Het zou beschadigd of ontoegankelijk kunnen zijn. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.";
 "Vienna cannot open the file title" = "Vienna kan het bestand niet openen.";
 "Vienna cannot open the file body" = "Vienna kan het bestand \"%@\" niet openen, omdat het is verplaatst sinds u het heeft gedownload.";
@@ -442,7 +442,7 @@
 
 /* Added in 3.0.2 */
 "Close" = "Close";
-"Locate" = "Locate";
+"Locate…" = "Locate…";
 "Error retrieving RSS feed:"="Error retrieving RSS feed:";
 "Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
 "Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";

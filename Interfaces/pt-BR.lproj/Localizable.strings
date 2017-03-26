@@ -106,10 +106,10 @@
 "any" = "qualquer";
 "all" = "todos";
 "Open Scripts Folder" = "Abrir pasta de Scripts";
-"Cannot create database folder" = "Desculpe, mas o Vienna não pode criar a pasta de dados";
+"Cannot create database folder title" = "Desculpe, mas o Vienna não pode criar a pasta de dados";
 "Cannot create database folder text" = "Vienna tentou criar a pasta \"%@\" mas um erro ocorreu. Verifique as permissões nas pastas do caminho especificado.";
 "Unrecognised database format title" = "O formato do arquivo de dados foi alterado";
-"Unrecognised database format text" = "O formato do arquivo de dados(%@) não possui suporte nessa versão do Vienna. Apague ou renomeie o arquivo e reinicie o Vienna.\n";
+"Unrecognised database format text" = "O formato do arquivo de dados(%@) não possui suporte nessa versão do Vienna. Apague ou renomeie o arquivo e reinicie o Vienna.";
 "Upgrade Title" = "Atualização do Arquivo de Dados";
 "Upgrade Text" = "O arquivo de dados existente necessita ser atualizado para ser usado por essa versão do Vienna. Alternativamente, você pode iniciar um arquivo novo, vazio. Em qualquer dos casos, o arquivo existente será guardado em %@. O arquivo novo ou atualizado NÃO poderá ser usado em versões anteriores do Vienna.\n\nNota: para esta versão é recomendável você iniciar um novo arquivo por questões de simplicidade.\n";
 "New Database" = "Novo arquivo de dados";
@@ -187,10 +187,10 @@
 "General" = "Geral";
 "Appearance" = "Aparência";
 "Locate Title" = "Impossível criar arquivo de dados do Vienna";
-"Locate Text" = "Um novo arquivo de dados do Vienna não pode ser criado em \"%@\" pois a pasta está provavelmente localizada em um disco de rede e esta versão do Vienna não gerencia dados remotos. Por favor escolha uma pasta alternativa que esteja localizada em seu computador.\n";
+"Locate Text" = "Um novo arquivo de dados do Vienna não pode ser criado em \"%@\" pois a pasta está provavelmente localizada em um disco de rede e esta versão do Vienna não gerencia dados remotos. Por favor escolha uma pasta alternativa que esteja localizada em seu computador.";
 "Empty Trash message" = "Tem certeza que deseja apagar as mensagens do Lixo permanentemente?";
 "Empty Trash message text" = "Você não poderá desfazer essa ação";
-"Cannot open database" = "Desculpe, mas o Vienna foi incapaz de abrir o arquivo de dados";
+"Cannot open database title" = "Desculpe, mas o Vienna foi incapaz de abrir o arquivo de dados";
 "Cannot open database text" = "O arquivo de dados (%@) não pode ser aberto por alguma razão. Ele deve estar corrompido ou inacessível. Por favor apague ou renomeie o arquivo de dados e reinicie o Vienna.";
 "Vienna cannot open the file title" = "Vienna não pode abrir o arquivo.";
 "Vienna cannot open the file body" = "Vienna não pode abrir o arquivo \"%@\" pois ele foi movido desde que foi descarregado.";
@@ -442,7 +442,7 @@
 
 /* Added in 3.0.2 */
 "Close" = "Close";
-"Locate" = "Locate";
+"Locate…" = "Locate…";
 "Error retrieving RSS feed:"="Error retrieving RSS feed:";
 "Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
 "Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";

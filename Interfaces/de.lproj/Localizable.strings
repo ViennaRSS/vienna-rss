@@ -106,10 +106,10 @@
 "any" = "einer";
 "all" = "allen";
 "Open Scripts Folder" = "Öffne Skriptordner";
-"Cannot create database folder" = "Beim Versuch den Datenbankordner zu erstellen ist ein Fehler aufgetreten.";
+"Cannot create database folder title" = "Beim Versuch den Datenbankordner zu erstellen ist ein Fehler aufgetreten.";
 "Cannot create database folder text" = "Beim Versuch den Ordner '%@' zu erstellen ist ein Fehler aufgetreten. Bitte überprüfen Sie die Dateizugriffsrechte des angegebenen Pfades.";
-"Unrecognised database format title" = "Das Datenbankdateiformat hat sich geändert.";
-"Unrecognised database format text" = "Ihre existierende %@ Datei wird von dieser Vienna-Version nicht unterstützt. Löschen oder benennen Sie diese Datei um und starten Sie Vienna erneut.\n";
+"Unrecognised database format title" = "Das Datenbankdateiformat hat sich geändert";
+"Unrecognised database format text" = "Ihre existierende %@ Datei wird von dieser Vienna-Version nicht unterstützt. Löschen oder benennen Sie diese Datei um und starten Sie Vienna erneut.";
 "Upgrade Title" = "Datenbank-Aktualisierung";
 "Upgrade Text" = "Ihre existierende Datenbank benötigt eine Aktualisierung um mit dieser Vienna-Version zu arbeiten. Alternativ können Sie eine neue leere Datenbank erstellen. In beiden Fällen wird ihre existierende Datenbank unter %@ gesichert. Die neue oder aktualisierte Datenbank wird NICHT von früheren Vienna-Versionen unterstützt.\n\nHinweis: Es wird empfohlen, für diese Version eine neue Datenbank zu erstellen.\n";
 "New Database" = "Neue Datenbank";
@@ -187,10 +187,10 @@
 "General" = "Allgemein";
 "Appearance" = "Erscheinungsbild";
 "Locate Title" = "Vienna konnte die Datenbank nicht erstellen";
-"Locate Text" = "Eine neue Vienna Datenbank konnte in '%@' nicht erstellt werden weil der Ordner möglicherweise auf einem Netzwerklaufwerk liegt. Diese Version von Vienna kann nicht mit entfernten Datenbanken genutzt werden. Bitte wählen Sie einen anderen Ordner der auf ihrem lokalem Rechner liegt.\n";
+"Locate Text" = "Eine neue Vienna Datenbank konnte in '%@' nicht erstellt werden weil der Ordner möglicherweise auf einem Netzwerklaufwerk liegt. Diese Version von Vienna kann nicht mit entfernten Datenbanken genutzt werden. Bitte wählen Sie einen anderen Ordner der auf ihrem lokalem Rechner liegt.";
 "Empty Trash message" = "Sind Sie sicher, dass Sie die Artikel im Papierkorb dauerhaft löschen möchten?";
 "Empty Trash message text" = "Dies kann nicht rückgängig gemacht werden";
-"Cannot open database" = "Vienna war es nicht möglich die Datenbank zu öffnen";
+"Cannot open database title" = "Vienna war es nicht möglich die Datenbank zu öffnen";
 "Cannot open database text" = "Die Datenbankdatei (%@) konnte nicht geöffnet werden. Sie ist möglicherweise beschädigt oder unerreichbar. Bitte löschen oder benennen Sie die Datenbankdatei um und starten Vienna erneut.";
 "Vienna cannot open the file title" = "Vienna konnte die Datei nicht öffnen.";
 "Vienna cannot open the file body" = "Vienna konnte die Datei \"%@\" nicht öffnen, da sie seit dem Download bewegt wurde.";
@@ -442,7 +442,7 @@
 
 /* Added in 3.0.2 */
 "Close" = "Close";
-"Locate" = "Locate";
+"Locate…" = "Locate…";
 "Error retrieving RSS feed:"="Error retrieving RSS feed:";
 "Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
 "Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";

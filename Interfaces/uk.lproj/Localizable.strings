@@ -106,10 +106,10 @@
 "any" = "будь-які";
 "all" = "всі";
 "Open Scripts Folder" = "Відкрити папку сценаріїв";
-"Cannot create database folder" = "Вибачте, але Vienna не може створити папку баз даних";
+"Cannot create database folder title" = "Вибачте, але Vienna не може створити папку баз даних";
 "Cannot create database folder text" = "Через помилку, Vienna не змогла створити папку \"%@\". Перевірте права доступу за вказаним шляхом.";
 "Unrecognised database format title" = "Формат баз даних змінився";
-"Unrecognised database format text" = "Формат баз даних файлу (%@) не підтримується цією версією Vienna. Переіменуйте або видаліть цей файл і перезапустіть Vienna.\n";
+"Unrecognised database format text" = "Формат баз даних файлу (%@) не підтримується цією версією Vienna. Переіменуйте або видаліть цей файл і перезапустіть Vienna.";
 "Upgrade Title" = "Оновлення бази даних";
 "Upgrade Text" = "Вам слід оновити існуючий файл бази даних для того, щоб його могла використовувати нова версія Vienna. Також ви можете створити нову порожню базу даних. У іншому випадку резервна копія Вашої існуюча бази даних буде збережена до %@. Нова та оновлена бази даних НЕ будуть працювати з попередніми версіями Vienna.\n\nПримітка: Для цієї версії рекомендується створити нову базу даних.\n";
 "New Database" = "Нова база даних";
@@ -187,10 +187,10 @@
 "General" = "Загальні";
 "Appearance" = "Вигляд";
 "Locate Title" = "Не можу створити базу даних Vienna";
-"Locate Text" = "Не можу створити нову базу даних Vienna  \"%@\" тому, що папка імовірно розміщення на віддаленому диску. Будь-ласка виберіть інше місце збереження бази даних на вашому локальному диску.\n";
+"Locate Text" = "Не можу створити нову базу даних Vienna  \"%@\" тому, що папка імовірно розміщення на віддаленому диску. Будь-ласка виберіть інше місце збереження бази даних на вашому локальному диску.";
 "Empty Trash message" = "Ви дійсно хочете видалити всі повідомлення зі Смітника?";
 "Empty Trash message text" = "Ви не зможете відмінити цю дію";
-"Cannot open database" = "Вибачте, але Vienna не взмозі відкрити базу даних";
+"Cannot open database title" = "Вибачте, але Vienna не взмозі відкрити базу даних";
 "Cannot open database text" = "Не можу відкрити файл бази даних (%@). Він мабуть пошкоджений або недоступний. Будь-ласка видаліть або переіменуйте цей файл і паразапустіть Vienna.";
 "Vienna cannot open the file title" = "Vienna не може відкрити файл.";
 "Vienna cannot open the file body" = "Vienna не може відкрити файл \"%@\" тому, що його перемістили з того місця куди він був завантажений.";
@@ -442,7 +442,7 @@
 
 /* Added in 3.0.2 */
 "Close" = "Close";
-"Locate" = "Locate";
+"Locate…" = "Locate…";
 "Error retrieving RSS feed:"="Error retrieving RSS feed:";
 "Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
 "Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";

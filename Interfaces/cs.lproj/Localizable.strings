@@ -106,7 +106,7 @@
 "any" = "libovolným";
 "all" = "všem";
 "Open Scripts Folder" = "Otevřít složku skriptů";
-"Cannot create database folder" = "Program Vienna nemůže vytvořit databázovou složku";
+"Cannot create database folder title" = "Program Vienna nemůže vytvořit databázovou složku";
 "Cannot create database folder text" = "Program Vienna se pokusil vytvořit složku „%@“, ale vyskytla se chyba. Ověřte, zda máte oprávnění k vytvoření složky v tomto umístění.";
 "Unrecognised database format title" = "Formát databázového soubor byl změněn";
 "Unrecognised database format text" = "Souborový formát databáze (%@) není touto verzí programu Vienna podporovaný. Smažte nebo přejmenujte tento soubor, ukončete a znovu spusťte program Vienna.";
@@ -190,7 +190,7 @@
 "Locate Text" = "Nelze vytvořit novou databázi programu Vienna v položce „%@“, protože složka je pravděpodobně umístěna v síti. Tato verze programu Vienna nemůže spravovat vzdálené databáze. Vyberte prosím jinou složku, která je umístěna v tomto počítači.";
 "Empty Trash message" = "Určitě chcete trvale odstranit příspěvky, které jsou v koši?";
 "Empty Trash message text" = "Tuto akci nelze odvolat.";
-"Cannot open database" = "Program Vienna nemůže otevřít databázi";
+"Cannot open database title" = "Program Vienna nemůže otevřít databázi";
 "Cannot open database text" = "Soubor databáze (%@) nelze z nějakých důvodů otevřít. Může být poškozený nebo nepřístupný. Smažte nebo přejmenujte tento soubor databáze, ukončete a znovu spusťte program Vienna.";
 "Vienna cannot open the file title" = "Program Vienna nemůže otevřít soubor";
 "Vienna cannot open the file body" = "Program Vienna nemůže otevřít soubor „%@“, protože byl po zkopírování přemístěn.";
@@ -442,7 +442,7 @@
 
 /* Added in 3.0.2 */
 "Close" = "Close";
-"Locate" = "Locate";
+"Locate…" = "Locate…";
 "Error retrieving RSS feed:"="Error retrieving RSS feed:";
 "Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
 "Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";
