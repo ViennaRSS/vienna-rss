@@ -123,7 +123,7 @@
 "fad-Nj-OFI.title" = "Rechtschreibung";
 
 /* Class = "NSMenuItem"; title = "Spelling…"; ObjectID = "187"; */
-"187.title" = "Rechtschreibung……";
+"187.title" = "Rechtschreibung…";
 
 /* Class = "NSMenuItem"; title = "Check Spelling"; ObjectID = "189"; */
 "189.title" = "Rechtschreibprüfung";
@@ -435,4 +435,4 @@
 "pKl-6f-Hlc.title" = "Als gelesen markieren";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "vZe-8N-E3r"; */
-"vZe-8N-E3r.title" = "Text Cell";
+"vZe-8N-E3r.title" = "Text Zelle";
