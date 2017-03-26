@@ -6,7 +6,7 @@
 "GaX-8c-QaN.title" = "Diese Einstellungen muss man für den normalen Betrieb von Vienna normalerweise nicht ändern. Bitte schauen Sie in die Hilfedatei für weitere Informationen zu den einzelnen Einstellungen.";
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "Gua-yV-73n"; */
-"Gua-yV-73n.title" = "Andere Ansichten";
+"Gua-yV-73n.title" = "OtherViews";
 
 /* Class = "NSMenuItem"; title = "30"; ObjectID = "Mlu-22-guR"; */
 "Mlu-22-guR.title" = "30";
