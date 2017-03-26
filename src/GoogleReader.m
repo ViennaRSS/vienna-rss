@@ -172,6 +172,7 @@ enum GoogleReaderStatus {
     } else if ((googleReaderStatus == isAuthenticating || googleReaderStatus == isGettingToken) && myRequest != nil) {
         LLog(@"Another instance is authenticating...");
         [clientRequest addDependency:myRequest];
+        [clientRequest setQueuePriority:NSOperationQueuePriorityLow];
         if (clientRequest != nil) {
             [clientAuthWaitQueue addObject:clientRequest];
         }
@@ -256,6 +257,7 @@ enum GoogleReaderStatus {
         }];
 
         [clientRequest addDependency:myRequest];
+        [clientRequest setQueuePriority:NSOperationQueuePriorityLow];
         if (clientRequest != nil) {
             [clientAuthWaitQueue addObject:clientRequest];
         }
@@ -308,6 +310,7 @@ enum GoogleReaderStatus {
     } else if (googleReaderStatus == isGettingToken && myRequest != nil) {
         LLog(@"Another instance is getting T token...");
         [clientRequest addDependency:myRequest];
+        [clientRequest setQueuePriority:NSOperationQueuePriorityLow];
         if (clientRequest != nil) {
             [tTokenWaitQueue addObject:clientRequest];
         }
@@ -351,6 +354,7 @@ enum GoogleReaderStatus {
             }
         }];
         [clientRequest addDependency:myRequest];
+        [clientRequest setQueuePriority:NSOperationQueuePriorityLow];
         if (clientRequest != nil) {
             [tTokenWaitQueue addObject:clientRequest];
         }
