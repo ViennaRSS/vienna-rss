@@ -426,7 +426,7 @@
 
 /* Added in 3.0.1 */
 "Plugin installed" = "Plugin installiert";
-"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Ein neues Plugin wurde installiert. Es ist nun aus dem Menü verfügbar und kann zur Toolbar hinzugefügt werden.";
+"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Ein neues Plugin wurde installiert. Es ist nun aus dem Menü verfügbar und kann zur Symbolleiste hinzugefügt werden.";
 "Error loading script '%@'" = "Fehler beim Laden des Skripts '%@'";
 "AppleScript Error in '%@' script" = "AppleScript Fehler im Skript '%@'";
 "No thanks" = "Nein Danke";
@@ -438,21 +438,21 @@
 "Vienna failed to install the plugin." = "Vienna konnte das Plugin nicht installieren.";
 "Queue" = "Warteschlange";
 "Forcing Refresh subscriptions..." = "Erzwinge Aktualisierung der Abonnements...";
-"Improper infinitely looping URL redirect to %@" = "Unsaubere unendliche URL verweist auf %@";
+"Improper infinitely looping URL redirect to %@" = "Die URL %@ steckt fest und verweist ins Nichts.";
 
 /* Added in 3.0.2 */
-"Close" = "Schliessen";
+"Close" = "Schließen";
 "Locate…" = "Lokalisieren…";
-"Error retrieving RSS feed:"="Fehler beim erhalten des RSS-Feed:";
+"Error retrieving RSS feed:"="Fehler beim Erhalten des RSS-Feed:";
 "Got HTTP status 304 - No news from last check" = "Erhalte HTTP-Status 304 - Keine Nachricht von der letzten Aktualisierung.";
-"Error retrieving RSS Icon:" = "Fehler beim Erhalt des RSS-Icon:";
+"Error retrieving RSS Icon:" = "Fehler beim Erhalten des RSS-Icon:";
 "RSS Icon not found!" = "RSS-Icon nicht gefunden!";
 
 /*Added in 3.0.5 */
 "Redirection attempt treated as temporary for safety concern" = "Verbindungsversuch aus Sicherheitsgründen nur temporär möglich";
 
 /*Added in 3.0.7 */
-"No articles in feed" = "Keine Artikel im feed";
+"No articles in feed" = "Keine Artikel im Feed";
 
 /*Added in 3.1.2 */
 "Filter folders" = "Suche nach Ordnern";
