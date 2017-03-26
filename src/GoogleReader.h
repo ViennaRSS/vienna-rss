@@ -16,12 +16,9 @@
 
 @interface GoogleReader : NSObject <ASIHTTPRequestDelegate> {
 @private
-    NSString * token;
 	NSMutableArray *localFeeds;
 	NSUInteger countOfNewArticles;
 	NSString * clientAuthToken;
-	NSTimer * tokenTimer;
-	NSTimer * authTimer;
 	NSMutableArray * clientAuthWaitQueue;
 	NSMutableArray * tTokenWaitQueue;
 }
