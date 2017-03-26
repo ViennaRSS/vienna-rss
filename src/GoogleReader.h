@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
 #import "Folder.h"
 #import "Article.h"
 #import "ASINetworkQueue.h"
@@ -22,6 +22,8 @@
 	NSString * clientAuthToken;
 	NSTimer * tokenTimer;
 	NSTimer * authTimer;
+	NSMutableArray * clientAuthWaitQueue;
+	NSMutableArray * tTokenWaitQueue;
 }
 
 +(GoogleReader *)sharedManager;
@@ -30,7 +32,7 @@
 @property (nonatomic, getter=isReady, readonly) BOOL ready;
 
 -(void)loadSubscriptions:(NSNotification*)nc;
--(void)getToken;
+-(void)getTokenForRequest:(ASIFormDataRequest *)clientRequest;
 -(void)clearAuthentication;
 -(void)resetAuthentication;
 
