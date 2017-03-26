@@ -260,7 +260,6 @@ static BOOL _credentialsChanged;
     if ((self.view.window).visible)
     {
         NSAlert *alert = [[NSAlert alloc] init];
-        [alert addButtonWithTitle:@"OK"];
         [alert setMessageText:NSLocalizedString(@"Open Reader Authentication Failed",nil)];
         [alert setInformativeText:NSLocalizedString(@"Open Reader Authentication Failed text",nil)];
         alert.alertStyle = NSWarningAlertStyle;
