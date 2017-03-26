@@ -14,8 +14,8 @@
 "RSS Subscription Export Title" = "Export fertig";
 "%d subscriptions successfully exported" = "%d Abonnements erfolgreich exportiert.";
 "New unread articles retrieved" = "%d neue ungelesene Artikel empfangen.";
-"Growl refresh completed" = "Growl-Aktualisierung komplett";
-"New articles retrieved" = "Neue Artikel erhalten";
+-"Growl refresh completed" = "Neue Artikel";
+-"New articles retrieved" = "Neue Artikel";
 "(Untitled Feed)" = "(Unbenannter Feed)";
 "Open Link in Browser" = "Link im Browser öffnen";
 "Copy Link to Clipboard" = "Link in die Zwischenablage kopieren";
