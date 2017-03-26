@@ -1,12 +1,12 @@
 
 /* Class = "NSWindow"; title = "RSS Feed"; ObjectID = "6"; */
-"6.title" = "RSS Feed";
+"6.title" = "RSS-Feed";
 
 /* Class = "NSMenuItem"; title = "Adresse"; ObjectID = "45"; */
 "45.title" = "Adresse";
 
 /* Class = "NSWindow"; title = "RSS Feed"; ObjectID = "49"; */
-"49.title" = "RSS Feed";
+"49.title" = "RSS-Feed";
 
 /* Class = "NSButtonCell"; title = "Abbrechen"; ObjectID = "102"; */
 "102.title" = "Abbrechen";
@@ -36,4 +36,4 @@
 "114.title" = "Abonnement bearbeiten";
 
 /* Class = "NSButtonCell"; title = "Im Open Reader abonnieren"; ObjectID = "116"; */
-"116.title" = "Im Open Reader abonnieren";
+"116.title" = "In Open Reader abonnieren";
