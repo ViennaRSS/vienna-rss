@@ -1,27 +1,20 @@
-
-/* Class = "NSTextFieldCell"; title = "Web sayfalarını veya makaleleri görüntülerken:"; ObjectID = "71S-pg-AjX"; */
+/* Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "71S-pg-AjX"; */
 "71S-pg-AjX.title" = "Web sayfalarını veya makaleleri görüntülerken:";
 
-/* Class = "NSTextFieldCell"; title = "Klasör liste yazıtipi:"; ObjectID = "B5v-p5-vrf"; */
+/* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "B5v-p5-vrf"; */
 "B5v-p5-vrf.title" = "Klasör liste yazıtipi:";
 
-/* Class = "NSButtonCell"; title = "Seç…"; ObjectID = "BDw-v3-mpF"; */
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "BDw-v3-mpF"; */
 "BDw-v3-mpF.title" = "Seç…";
 
-/* Class = "NSButtonCell"; title = "Klasör imajlarını klasör listesinde göster"; ObjectID = "MEV-HA-bdL"; */
+/* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "MEV-HA-bdL"; */
 "MEV-HA-bdL.title" = "Klasör imajlarını klasör listesinde göster";
 
-/* Class = "NSTextFieldCell"; title = "Makale liste yazıtipi:"; ObjectID = "auD-UC-Pij"; */
+/* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "auD-UC-Pij"; */
 "auD-UC-Pij.title" = "Makale liste yazıtipi:";
 
-/* Class = "NSTextFieldCell"; title = "(Örnek)"; ObjectID = "azr-ft-M4J"; */
-"azr-ft-M4J.title" = "(Örnek)";
-
-/* Class = "NSTextFieldCell"; title = "(Örnek)"; ObjectID = "g63-xD-ICn"; */
-"g63-xD-ICn.title" = "(Örnek)";
-
-/* Class = "NSButtonCell"; title = "Seç…"; ObjectID = "gGT-YP-aum"; */
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "gGT-YP-aum"; */
 "gGT-YP-aum.title" = "Seç…";
 
-/* Class = "NSButtonCell"; title = "Bundan daha küçük yazıtipi kullanma"; ObjectID = "zfJ-Ge-Cxe"; */
+/* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "zfJ-Ge-Cxe"; */
 "zfJ-Ge-Cxe.title" = "Bundan daha küçük yazıtipi kullanma";

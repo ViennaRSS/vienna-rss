@@ -1,27 +1,20 @@
-
-/* Class = "NSTextFieldCell"; title = "檢視文章或網頁時："; ObjectID = "71S-pg-AjX"; */
+/* Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "71S-pg-AjX"; */
 "71S-pg-AjX.title" = "檢視文章或網頁時：";
 
-/* Class = "NSTextFieldCell"; title = "檔案夾列表字體："; ObjectID = "B5v-p5-vrf"; */
+/* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "B5v-p5-vrf"; */
 "B5v-p5-vrf.title" = "檔案夾列表字體：";
 
-/* Class = "NSButtonCell"; title = "選取⋯"; ObjectID = "BDw-v3-mpF"; */
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "BDw-v3-mpF"; */
 "BDw-v3-mpF.title" = "選取⋯";
 
-/* Class = "NSButtonCell"; title = "在檔案夾列表中顯示檔案夾影像"; ObjectID = "MEV-HA-bdL"; */
+/* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "MEV-HA-bdL"; */
 "MEV-HA-bdL.title" = "在檔案夾列表中顯示檔案夾影像";
 
-/* Class = "NSTextFieldCell"; title = "文章列表字體："; ObjectID = "auD-UC-Pij"; */
+/* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "auD-UC-Pij"; */
 "auD-UC-Pij.title" = "文章列表字體：";
 
-/* Class = "NSTextFieldCell"; title = "(範例)"; ObjectID = "azr-ft-M4J"; */
-"azr-ft-M4J.title" = "(範例)";
-
-/* Class = "NSTextFieldCell"; title = "(範例)"; ObjectID = "g63-xD-ICn"; */
-"g63-xD-ICn.title" = "(範例)";
-
-/* Class = "NSButtonCell"; title = "選取⋯"; ObjectID = "gGT-YP-aum"; */
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "gGT-YP-aum"; */
 "gGT-YP-aum.title" = "選取⋯";
 
-/* Class = "NSButtonCell"; title = "不要使用小於以下大小的字體"; ObjectID = "zfJ-Ge-Cxe"; */
+/* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "zfJ-Ge-Cxe"; */
 "zfJ-Ge-Cxe.title" = "不要使用小於以下大小的字體";

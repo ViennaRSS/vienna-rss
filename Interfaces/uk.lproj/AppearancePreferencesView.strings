@@ -1,27 +1,20 @@
-
-/* Class = "NSTextFieldCell"; title = "Переглядати статті чи веб-сторінки:"; ObjectID = "71S-pg-AjX"; */
+/* Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "71S-pg-AjX"; */
 "71S-pg-AjX.title" = "Переглядати статті чи веб-сторінки:";
 
-/* Class = "NSTextFieldCell"; title = "Шрифт списку папок:"; ObjectID = "B5v-p5-vrf"; */
+/* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "B5v-p5-vrf"; */
 "B5v-p5-vrf.title" = "Шрифт списку папок:";
 
-/* Class = "NSButtonCell"; title = "Вибрати…"; ObjectID = "BDw-v3-mpF"; */
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "BDw-v3-mpF"; */
 "BDw-v3-mpF.title" = "Вибрати…";
 
-/* Class = "NSButtonCell"; title = "Показувати зображення папок у списку"; ObjectID = "MEV-HA-bdL"; */
+/* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "MEV-HA-bdL"; */
 "MEV-HA-bdL.title" = "Показувати зображення папок у списку";
 
-/* Class = "NSTextFieldCell"; title = "Шрифт списку статей:"; ObjectID = "auD-UC-Pij"; */
+/* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "auD-UC-Pij"; */
 "auD-UC-Pij.title" = "Шрифт списку статей:";
 
-/* Class = "NSTextFieldCell"; title = "(Зразок)"; ObjectID = "azr-ft-M4J"; */
-"azr-ft-M4J.title" = "(Зразок)";
-
-/* Class = "NSTextFieldCell"; title = "(Зразок)"; ObjectID = "g63-xD-ICn"; */
-"g63-xD-ICn.title" = "(Зразок)";
-
-/* Class = "NSButtonCell"; title = "Вибрати…"; ObjectID = "gGT-YP-aum"; */
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "gGT-YP-aum"; */
 "gGT-YP-aum.title" = "Вибрати…";
 
-/* Class = "NSButtonCell"; title = "Ніколи не використовувати шрифт менший за"; ObjectID = "zfJ-Ge-Cxe"; */
+/* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "zfJ-Ge-Cxe"; */
 "zfJ-Ge-Cxe.title" = "Ніколи не використовувати шрифт менший за";
