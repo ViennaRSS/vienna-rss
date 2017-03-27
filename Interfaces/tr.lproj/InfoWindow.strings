@@ -1,54 +1,38 @@
-
-/* Class = "NSWindow"; title = "Window"; ObjectID = "5"; */
-"5.title" = "Window";
-
-/* Class = "NSTextFieldCell"; title = "(Folder name)"; ObjectID = "104"; */
-"104.title" = "(Folder name)";
-
-/* Class = "NSTextFieldCell"; title = "En son yenilendi:"; ObjectID = "105"; */
+/* Class = "NSTextFieldCell"; title = "Last Refreshed:"; ObjectID = "105"; */
 "105.title" = "En son yenilendi:";
 
-/* Class = "NSTextFieldCell"; title = "(Last refresh date)"; ObjectID = "106"; */
-"106.title" = "(Last refresh date)";
-
-/* Class = "NSButtonCell"; title = "Doğrula"; ObjectID = "109"; */
+/* Class = "NSButtonCell"; title = "Validate"; ObjectID = "109"; */
 "109.title" = "Doğrula";
 
-/* Class = "NSButtonCell"; title = "Besleme URLsi:"; ObjectID = "110"; */
-"xPF-M9-oZG.title" = "Besleme URLsi";
-
-/* Class = "NSTextFieldCell"; title = "Kullanıcı adı:"; ObjectID = "111"; */
+/* Class = "NSTextFieldCell"; title = "User name:"; ObjectID = "111"; */
 "111.title" = "Kullanıcı adı:";
 
-/* Class = "NSTextFieldCell"; title = "Şifre:"; ObjectID = "112"; */
+/* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "112"; */
 "112.title" = "Şifre:";
 
-/* Class = "NSButtonCell"; title = "Yetkilendirmeyi Güncelle"; ObjectID = "115"; */
+/* Class = "NSButtonCell"; title = "Update Authentication"; ObjectID = "115"; */
 "115.title" = "Yetkilendirmeyi Güncelle";
 
-/* Class = "NSButtonCell"; title = "Yetki:"; ObjectID = "116"; */
-"U0N-RF-bUt.title" = "Yetki";
-
-/* Class = "NSTextFieldCell"; title = "Boyut:"; ObjectID = "117"; */
+/* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "117"; */
 "117.title" = "Boyut:";
 
-/* Class = "NSTextFieldCell"; title = "Okunmadı:\n"; ObjectID = "118"; */
+/* Class = "NSTextFieldCell"; title = "Unread:"; ObjectID = "118"; */
 "118.title" = "Okunmadı:";
 
-/* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "119"; */
-"119.title" = "\n";
-
-/* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "120"; */
-"120.title" = "\n";
-
-/* Class = "NSButtonCell"; title = "Abone olundu"; ObjectID = "121"; */
+/* Class = "NSButtonCell"; title = "Subscribed"; ObjectID = "121"; */
 "121.title" = "Abone olundu";
-
-/* Class = "NSButtonCell"; title = "Genel:"; ObjectID = "122"; */
-"i9j-KH-c3D.title" = "Genel";
-
-/* Class = "NSButtonCell"; title = "Açıklama:"; ObjectID = "124"; */
-"E84-Uo-ybg.title" = "Açıklama";
 
 /* Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126"; */
 "126.title" = "Load Full HTML Articles";
+
+/* Class = "NSTextFieldCell"; title = "Description"; ObjectID = "E84-Uo-ybg"; */
+"E84-Uo-ybg.title" = "Açıklama";
+
+/* Class = "NSTextFieldCell"; title = "Authentication"; ObjectID = "U0N-RF-bUt"; */
+"U0N-RF-bUt.title" = "Yetki";
+
+/* Class = "NSTextFieldCell"; title = "General"; ObjectID = "i9j-KH-c3D"; */
+"i9j-KH-c3D.title" = "Genel";
+
+/* Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG"; */
+"xPF-M9-oZG.title" = "Besleme URLsi";
