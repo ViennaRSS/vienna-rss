@@ -1,15 +1,11 @@
-
-/* Class = "NSWindow"; title = "Panela"; ObjectID = "5"; */
-"5.title" = "Panela";
-
-/* Class = "NSTextFieldCell"; title = "Talde Berrirako Direktorioa"; ObjectID = "32"; */
+/* Class = "NSTextFieldCell"; title = "New Group Folder"; ObjectID = "32"; */
 "32.title" = "Talde Berrirako Direktorioa";
 
-/* Class = "NSButtonCell"; title = "Gorde"; ObjectID = "34"; */
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "34"; */
 "34.title" = "Gorde";
 
-/* Class = "NSButtonCell"; title = "Ezeztatu"; ObjectID = "35"; */
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "35"; */
 "35.title" = "Ezeztatu";
 
-/* Class = "NSTextFieldCell"; title = "Sartu taldearen direktorioaren izena:\n"; ObjectID = "36"; */
+/* Class = "NSTextFieldCell"; title = "Enter the group folder name:"; ObjectID = "36"; */
 "36.title" = "Sartu taldearen direktorioaren izena:";

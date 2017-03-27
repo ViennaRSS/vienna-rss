@@ -1,15 +1,11 @@
-
-/* Class = "NSWindow"; title = "Panel"; ObjectID = "5"; */
-"5.title" = "Panel";
-
-/* Class = "NSTextFieldCell"; title = "Ny gruppmapp"; ObjectID = "32"; */
+/* Class = "NSTextFieldCell"; title = "New Group Folder"; ObjectID = "32"; */
 "32.title" = "Ny gruppmapp";
 
-/* Class = "NSButtonCell"; title = "Spara"; ObjectID = "34"; */
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "34"; */
 "34.title" = "Spara";
 
-/* Class = "NSButtonCell"; title = "Avbryt"; ObjectID = "35"; */
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "35"; */
 "35.title" = "Avbryt";
 
-/* Class = "NSTextFieldCell"; title = "Ange namn på gruppmappen:\n"; ObjectID = "36"; */
+/* Class = "NSTextFieldCell"; title = "Enter the group folder name:"; ObjectID = "36"; */
 "36.title" = "Ange namn på gruppmappen:";
