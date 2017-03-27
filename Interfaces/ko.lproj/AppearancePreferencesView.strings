@@ -1,27 +1,20 @@
-
-/* Class = "NSTextFieldCell"; title = "기사 및 웹페이지 보기:"; ObjectID = "71S-pg-AjX"; */
+/* Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "71S-pg-AjX"; */
 "71S-pg-AjX.title" = "기사 및 웹페이지 보기:";
 
-/* Class = "NSTextFieldCell"; title = "폴더 및 구독 목록  서체:"; ObjectID = "B5v-p5-vrf"; */
+/* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "B5v-p5-vrf"; */
 "B5v-p5-vrf.title" = "폴더 및 구독 목록  서체:";
 
-/* Class = "NSButtonCell"; title = "선택…"; ObjectID = "BDw-v3-mpF"; */
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "BDw-v3-mpF"; */
 "BDw-v3-mpF.title" = "선택…";
 
-/* Class = "NSButtonCell"; title = "구독 목록에 아이콘 이미지 사용"; ObjectID = "MEV-HA-bdL"; */
+/* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "MEV-HA-bdL"; */
 "MEV-HA-bdL.title" = "구독 목록에 아이콘 이미지 사용";
 
-/* Class = "NSTextFieldCell"; title = "기사 목록  서체:"; ObjectID = "auD-UC-Pij"; */
+/* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "auD-UC-Pij"; */
 "auD-UC-Pij.title" = "기사 목록  서체:";
 
-/* Class = "NSTextFieldCell"; title = "(Sample)"; ObjectID = "azr-ft-M4J"; */
-"azr-ft-M4J.title" = "(Sample)";
-
-/* Class = "NSTextFieldCell"; title = "(Sample)"; ObjectID = "g63-xD-ICn"; */
-"g63-xD-ICn.title" = "(Sample)";
-
-/* Class = "NSButtonCell"; title = "선택…"; ObjectID = "gGT-YP-aum"; */
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "gGT-YP-aum"; */
 "gGT-YP-aum.title" = "선택…";
 
-/* Class = "NSButtonCell"; title = "다음보다 작은 서체 크기 사용 안함:"; ObjectID = "zfJ-Ge-Cxe"; */
+/* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "zfJ-Ge-Cxe"; */
 "zfJ-Ge-Cxe.title" = "다음보다 작은 서체 크기 사용 안함:";

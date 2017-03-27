@@ -1,27 +1,20 @@
-
-/* Class = "NSTextFieldCell"; title = "Beim Betrachten von Artikeln oder Webseiten:"; ObjectID = "71S-pg-AjX"; */
+/* Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "71S-pg-AjX"; */
 "71S-pg-AjX.title" = "Beim Betrachten von Artikeln oder Webseiten:";
 
-/* Class = "NSTextFieldCell"; title = "Ordnerliste:"; ObjectID = "B5v-p5-vrf"; */
+/* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "B5v-p5-vrf"; */
 "B5v-p5-vrf.title" = "Ordnerliste:";
 
-/* Class = "NSButtonCell"; title = "Auswählen…"; ObjectID = "BDw-v3-mpF"; */
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "BDw-v3-mpF"; */
 "BDw-v3-mpF.title" = "Auswählen…";
 
-/* Class = "NSButtonCell"; title = "Abonnementenicons anzeigen"; ObjectID = "MEV-HA-bdL"; */
+/* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "MEV-HA-bdL"; */
 "MEV-HA-bdL.title" = "Abonnementenicons anzeigen";
 
-/* Class = "NSTextFieldCell"; title = "Artikelliste:"; ObjectID = "auD-UC-Pij"; */
+/* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "auD-UC-Pij"; */
 "auD-UC-Pij.title" = "Artikelliste:";
 
-/* Class = "NSTextFieldCell"; title = "(Sample)"; ObjectID = "azr-ft-M4J"; */
-"azr-ft-M4J.title" = "(Sample)";
-
-/* Class = "NSTextFieldCell"; title = "(Sample)"; ObjectID = "g63-xD-ICn"; */
-"g63-xD-ICn.title" = "(Sample)";
-
-/* Class = "NSButtonCell"; title = "Auswählen…"; ObjectID = "gGT-YP-aum"; */
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "gGT-YP-aum"; */
 "gGT-YP-aum.title" = "Auswählen…";
 
-/* Class = "NSButtonCell"; title = "Keine Schriftgrößen verwenden, die kleiner sind als"; ObjectID = "zfJ-Ge-Cxe"; */
+/* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "zfJ-Ge-Cxe"; */
 "zfJ-Ge-Cxe.title" = "Keine Schriftgrößen verwenden, die kleiner sind als";
