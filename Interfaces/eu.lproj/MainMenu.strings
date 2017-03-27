@@ -1,4 +1,3 @@
-
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
 "5.title" = "Dena aurrera eraman";
 
@@ -116,21 +115,6 @@
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "173"; */
 "173.title" = "Berregin";
 
-/* Class = "NSMenuItem"; title = "Spelling"; ObjectID = "184"; */
-"184.title" = "Idazkera";
-
-/* Class = "NSMenu"; title = "Spelling"; ObjectID = "185"; */
-"fad-Nj-OFI.title" = "Idazkera";
-
-/* Class = "NSMenuItem"; title = "Spelling…"; ObjectID = "187"; */
-"187.title" = "Idazkera…";
-
-/* Class = "NSMenuItem"; title = "Check Spelling"; ObjectID = "189"; */
-"189.title" = "Akats Ortografikoak Aztertu";
-
-/* Class = "NSMenuItem"; title = "Check Spelling as You Type"; ObjectID = "191"; */
-"191.title" = "Akats Ortografikoak Aztertu Idazten Den Heinean";
-
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "197"; */
 "197.title" = "Zoom";
 
@@ -179,9 +163,6 @@
 /* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "604"; */
 "604.title" = "Eguneratu Aukeratutako Harpidetzak";
 
-/* Class = "NSMenuItem"; title = "Acknowledgements"; ObjectID = "682"; */
-"682.title" = "Kontutan Hartu Beharrekoak";
-
 /* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "690"; */
 "690.title" = "Harpidetza Berria…";
 
@@ -215,9 +196,6 @@
 /* Class = "NSButtonCell"; title = "Export selected subscriptions"; ObjectID = "863"; */
 "863.title" = "Aukeratutako harpidetzak esportatu";
 
-/* Class = "NSBox"; title = "Title"; ObjectID = "881"; */
-"881.title" = "Title";
-
 /* Class = "NSMenuItem"; title = "Vienna Web Site"; ObjectID = "929"; */
 "929.title" = "Vienna-ren Web orria";
 
@@ -229,12 +207,6 @@
 
 /* Class = "NSMenuItem"; title = "Empty Trash"; ObjectID = "961"; */
 "961.title" = "Zakarrontzia Hustu";
-
-/* Class = "NSBox"; title = "Title"; ObjectID = "973"; */
-"973.title" = "Title";
-
-/* Class = "NSBox"; title = "Title"; ObjectID = "978"; */
-"978.title" = "Title";
 
 /* Class = "NSMenuItem"; title = "Previous Tab"; ObjectID = "1008"; */
 "1008.title" = "Aurreko Fitxa";
@@ -290,10 +262,10 @@
 /* Class = "NSMenu"; title = "Layout"; ObjectID = "1109"; */
 "1109.title" = "Eskema";
 
-/* Class = "NSMenuItem"; title = "Report"; ObjectID = "1110"; */
+/* Class = "NSMenuItem"; title = "Horizontal"; ObjectID = "1110"; */
 "1110.title" = "Txostena";
 
-/* Class = "NSMenuItem"; title = "Condensed"; ObjectID = "1116"; */
+/* Class = "NSMenuItem"; title = "Vertical"; ObjectID = "1116"; */
 "1116.title" = "Trinkotuta";
 
 /* Class = "NSMenuItem"; title = "Filter By"; ObjectID = "1117"; */
@@ -347,9 +319,6 @@
 /* Class = "NSMenuItem"; title = "Download Enclosure"; ObjectID = "1216"; */
 "1216.title" = "Download Enclosure";
 
-/* Class = "NSTabViewItem"; label = "Tab"; ObjectID = "1221"; */
-"1221.label" = "Tab";
-
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
 "1257.title" = "Customize Toolbar…";
 
@@ -358,9 +327,6 @@
 
 /* Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259"; */
 "1259.title" = "Hide Status Bar";
-
-/* Class = "NSBox"; title = "Box"; ObjectID = "1279"; */
-"1279.title" = "Box";
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "1307"; */
 "1307.title" = "OtherViews";
@@ -386,23 +352,11 @@
 /* Class = "NSMenuItem"; title = "Name"; ObjectID = "1339"; */
 "1339.title" = "Name";
 
-/* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "1367"; */
-"1367.title" = "\n";
-
 /* Class = "NSButtonCell"; title = "Preserve group folders in exported file"; ObjectID = "1368"; */
 "1368.title" = "Mantendu talde direktorioak esportatutako fitxategietan";
 
-/* Class = "NSTextFieldCell"; title = "(label)"; ObjectID = "1373"; */
-"1373.title" = "(label)";
-
-/* Class = "NSButtonCell"; title = "(button)"; ObjectID = "1374"; */
-"1374.title" = "(button)";
-
-/* Class = "NSTextFieldCell"; title = "(filename)"; ObjectID = "1375"; */
-"1375.title" = "(filename)";
-
-/* Class = "NSTextFieldCell"; title = "Filter by:\n"; ObjectID = "1377"; */
-"1377.title" = "Filter by:\n";
+/* Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377"; */
+"1377.title" = "Filter by:";
 
 /* Class = "NSButtonCell"; title = "Radio"; ObjectID = "1380"; */
 "1380.title" = "Radio";
@@ -434,8 +388,8 @@
 /* Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458"; */
 "1458.title" = "Reindex Database";
 
+/* Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI"; */
+"fad-Nj-OFI.title" = "Idazkera";
+
 /* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
 "pKl-6f-Hlc.title" = "Irakurrita Moduan Jarri";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "vZe-8N-E3r"; */
-"vZe-8N-E3r.title" = "Text Cell";
