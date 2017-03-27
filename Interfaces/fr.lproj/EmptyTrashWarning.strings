@@ -1,15 +1,11 @@
-
-/* Class = "NSWindow"; title = "Vider la corbeille"; ObjectID = "5"; */
-"5.title" = "Vider la corbeille";
-
-/* Class = "NSButtonCell"; title = "Vider la corbeille"; ObjectID = "17"; */
+/* Class = "NSButtonCell"; title = "Empty Trash"; ObjectID = "17"; */
 "17.title" = "Vider la corbeille";
 
-/* Class = "NSButtonCell"; title = "Ne pas vider la corbeille"; ObjectID = "18"; */
+/* Class = "NSButtonCell"; title = "Don't Empty Trash"; ObjectID = "18"; */
 "18.title" = "Ne pas vider la corbeille";
 
-/* Class = "NSTextFieldCell"; title = "La corbeille contient des articles supprimés.\nSouhaitez-vous la vider avant de quitter ?"; ObjectID = "19"; */
+/* Class = "NSTextFieldCell"; title = "There are deleted articles in the trash. Would you like to empty the trash before quitting?"; ObjectID = "19"; */
 "19.title" = "La corbeille contient des articles supprimés. Souhaitez-vous la vider avant de quitter ?";
 
-/* Class = "NSButtonCell"; title = "Ne plus afficher cette alerte"; ObjectID = "20"; */
+/* Class = "NSButtonCell"; title = "Do not show this warning again"; ObjectID = "20"; */
 "20.title" = "Ne plus afficher cette alerte";

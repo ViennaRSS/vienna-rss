@@ -1,15 +1,11 @@
-
-/* Class = "NSWindow"; title = "Empty Trash"; ObjectID = "5"; */
-"5.title" = "Empty Trash";
-
-/* Class = "NSButtonCell"; title = "Leeg prullenmand"; ObjectID = "17"; */
+/* Class = "NSButtonCell"; title = "Empty Trash"; ObjectID = "17"; */
 "17.title" = "Leeg prullenmand";
 
-/* Class = "NSButtonCell"; title = "Annuleer"; ObjectID = "18"; */
+/* Class = "NSButtonCell"; title = "Don't Empty Trash"; ObjectID = "18"; */
 "18.title" = "Annuleer";
 
-/* Class = "NSTextFieldCell"; title = "Er zijn gewiste artikelen in de prullenmand.\nWil u de prullenmand nu leeg maken?"; ObjectID = "19"; */
+/* Class = "NSTextFieldCell"; title = "There are deleted articles in the trash. Would you like to empty the trash before quitting?"; ObjectID = "19"; */
 "19.title" = "Er zijn gewiste artikelen in de prullenmand. Wilt u de prullenmand nu leeg maken?";
 
-/* Class = "NSButtonCell"; title = "Toon deze waarschuwing niet opnieuw"; ObjectID = "20"; */
+/* Class = "NSButtonCell"; title = "Do not show this warning again"; ObjectID = "20"; */
 "20.title" = "Toon deze waarschuwing niet opnieuw";
