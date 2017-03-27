@@ -1,66 +1,14 @@
-
-/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "32"; */
-"32.title" = "OtherViews";
-
-/* Class = "NSMenuItem"; title = "Zde budou textová pole"; ObjectID = "33"; */
-"33.title" = "Zde budou textová pole";
-
-/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "34"; */
-"34.title" = "OtherViews";
-
-/* Class = "NSMenuItem"; title = "Zde budou operátory"; ObjectID = "56"; */
-"56.title" = "Zde budou operátory";
-
-/* Class = "NSMenuItem"; title = "Nic"; ObjectID = "62"; */
-"62.title" = "Nic";
-
-/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "64"; */
-"64.title" = "OtherViews";
-
-/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "74"; */
-"74.title" = "OtherViews";
-
-/* Class = "NSMenuItem"; title = "Item3"; ObjectID = "75"; */
-"75.title" = "Item3";
-
-/* Class = "NSMenuItem"; title = "Item2"; ObjectID = "76"; */
-"76.title" = "Item2";
-
-/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "80"; */
-"80.title" = "OtherViews";
-
-/* Class = "NSMenuItem"; title = "Nic"; ObjectID = "82"; */
-"82.title" = "Nic";
-
-/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "87"; */
-"87.title" = "OtherViews";
-
-/* Class = "NSMenuItem"; title = "Item1"; ObjectID = "88"; */
-"88.title" = "Item1";
-
-/* Class = "NSMenuItem"; title = "Item3"; ObjectID = "89"; */
-"89.title" = "Item3";
-
-/* Class = "NSMenuItem"; title = "Item2"; ObjectID = "90"; */
-"90.title" = "Item2";
-
-/* Class = "NSTextFieldCell"; title = "Jméno dynamické složky:"; ObjectID = "94"; */
+/* Class = "NSTextFieldCell"; title = "Smart folder name:"; ObjectID = "94"; */
 "94.title" = "Jméno dynamické složky:";
 
-/* Class = "NSButtonCell"; title = "Uložit"; ObjectID = "96"; */
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "96"; */
 "96.title" = "Uložit";
 
-/* Class = "NSButtonCell"; title = "Zrušit"; ObjectID = "97"; */
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97"; */
 "97.title" = "Zrušit";
 
-/* Class = "NSTextFieldCell"; title = "Zobrazit příspěvky odpovídající"; ObjectID = "98"; */
+/* Class = "NSTextFieldCell"; title = "Show all articles that match"; ObjectID = "98"; */
 "98.title" = "Zobrazit příspěvky odpovídající";
 
-/* Class = "NSTextFieldCell"; title = "následujícím shodám:"; ObjectID = "100"; */
+/* Class = "NSTextFieldCell"; title = "of the following conditions:"; ObjectID = "100"; */
 "100.title" = "následujícím shodám:";
-
-/* Class = "NSButtonCell"; title = "-"; ObjectID = "102"; */
-"102.title" = "-";
-
-/* Class = "NSButtonCell"; title = "+"; ObjectID = "104"; */
-"104.title" = "+";
