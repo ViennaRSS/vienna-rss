@@ -1,54 +1,38 @@
-
-/* Class = "NSWindow"; title = "Ventana"; ObjectID = "5"; */
-"5.title" = "Ventana";
-
-/* Class = "NSTextFieldCell"; title = "(Nombre de la carpeta)"; ObjectID = "104"; */
-"104.title" = "(Nombre de la carpeta)";
-
-/* Class = "NSTextFieldCell"; title = "Última actualización:"; ObjectID = "105"; */
+/* Class = "NSTextFieldCell"; title = "Last Refreshed:"; ObjectID = "105"; */
 "105.title" = "Última actualización:";
 
-/* Class = "NSTextFieldCell"; title = "(Fecha de última actualización)"; ObjectID = "106"; */
-"106.title" = "(Fecha de última actualización)";
-
-/* Class = "NSButtonCell"; title = "Validar"; ObjectID = "109"; */
+/* Class = "NSButtonCell"; title = "Validate"; ObjectID = "109"; */
 "109.title" = "Validar";
 
-/* Class = "NSButtonCell"; title = "URL de la fuente:"; ObjectID = "110"; */
-"xPF-M9-oZG.title" = "URL de la fuente";
-
-/* Class = "NSTextFieldCell"; title = "Nombre de usuario:"; ObjectID = "111"; */
+/* Class = "NSTextFieldCell"; title = "User name:"; ObjectID = "111"; */
 "111.title" = "Nombre de usuario:";
 
-/* Class = "NSTextFieldCell"; title = "Contraseña:\n"; ObjectID = "112"; */
+/* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "112"; */
 "112.title" = "Contraseña:";
 
-/* Class = "NSButtonCell"; title = "Actualizar autenticación"; ObjectID = "115"; */
+/* Class = "NSButtonCell"; title = "Update Authentication"; ObjectID = "115"; */
 "115.title" = "Actualizar autenticación";
 
-/* Class = "NSButtonCell"; title = "Autenticación:"; ObjectID = "116"; */
-"U0N-RF-bUt.title" = "Autenticación";
-
-/* Class = "NSTextFieldCell"; title = "Tamaño:"; ObjectID = "117"; */
+/* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "117"; */
 "117.title" = "Tamaño:";
 
-/* Class = "NSTextFieldCell"; title = "No leídos:\n"; ObjectID = "118"; */
+/* Class = "NSTextFieldCell"; title = "Unread:"; ObjectID = "118"; */
 "118.title" = "No leídos:";
 
-/* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "119"; */
-"119.title" = "\n";
-
-/* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "120"; */
-"120.title" = "\n";
-
-/* Class = "NSButtonCell"; title = "Suscrito"; ObjectID = "121"; */
+/* Class = "NSButtonCell"; title = "Subscribed"; ObjectID = "121"; */
 "121.title" = "Suscrito";
 
-/* Class = "NSButtonCell"; title = "General:"; ObjectID = "122"; */
-"i9j-KH-c3D.title" = "General";
+/* Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126"; */
+"126.title" = "Cargar artículos HTML completamente";
 
-/* Class = "NSButtonCell"; title = "Descripción:"; ObjectID = "124"; */
+/* Class = "NSTextFieldCell"; title = "Description"; ObjectID = "E84-Uo-ybg"; */
 "E84-Uo-ybg.title" = "Descripción";
 
-/* Class = "NSButtonCell"; title = "Cargar artículos HTML completamente"; ObjectID = "126"; */
-"126.title" = "Cargar artículos HTML completamente";
+/* Class = "NSTextFieldCell"; title = "Authentication"; ObjectID = "U0N-RF-bUt"; */
+"U0N-RF-bUt.title" = "Autenticación";
+
+/* Class = "NSTextFieldCell"; title = "General"; ObjectID = "i9j-KH-c3D"; */
+"i9j-KH-c3D.title" = "General";
+
+/* Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG"; */
+"xPF-M9-oZG.title" = "URL de la fuente";

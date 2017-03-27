@@ -1,54 +1,38 @@
-
-/* Class = "NSWindow"; title = "Okno"; ObjectID = "5"; */
-"5.title" = "Okno";
-
-/* Class = "NSTextFieldCell"; title = "(jméno složky)"; ObjectID = "104"; */
-"104.title" = "(jméno složky)";
-
-/* Class = "NSTextFieldCell"; title = "Obnoveno:"; ObjectID = "105"; */
+/* Class = "NSTextFieldCell"; title = "Last Refreshed:"; ObjectID = "105"; */
 "105.title" = "Obnoveno:";
 
-/* Class = "NSTextFieldCell"; title = "(datum poslední obnovy)"; ObjectID = "106"; */
-"106.title" = "(datum poslední obnovy)";
-
-/* Class = "NSButtonCell"; title = "Zkontrolovat"; ObjectID = "109"; */
+/* Class = "NSButtonCell"; title = "Validate"; ObjectID = "109"; */
 "109.title" = "Zkontrolovat";
 
-/* Class = "NSButtonCell"; title = "URL zdroje:"; ObjectID = "110"; */
-"xPF-M9-oZG.title" = "URL zdroje";
-
-/* Class = "NSTextFieldCell"; title = "Jméno:"; ObjectID = "111"; */
+/* Class = "NSTextFieldCell"; title = "User name:"; ObjectID = "111"; */
 "111.title" = "Jméno:";
 
-/* Class = "NSTextFieldCell"; title = "Heslo:"; ObjectID = "112"; */
+/* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "112"; */
 "112.title" = "Heslo:";
 
-/* Class = "NSButtonCell"; title = "Automaticky aktualizovat"; ObjectID = "115"; */
+/* Class = "NSButtonCell"; title = "Update Authentication"; ObjectID = "115"; */
 "115.title" = "Automaticky aktualizovat";
 
-/* Class = "NSButtonCell"; title = "Ověření totožnosti:"; ObjectID = "116"; */
-"U0N-RF-bUt.title" = "Ověření totožnosti";
-
-/* Class = "NSTextFieldCell"; title = "Velikost:"; ObjectID = "117"; */
+/* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "117"; */
 "117.title" = "Velikost:";
 
-/* Class = "NSTextFieldCell"; title = "Nečteno:"; ObjectID = "118"; */
+/* Class = "NSTextFieldCell"; title = "Unread:"; ObjectID = "118"; */
 "118.title" = "Nečteno:";
 
-/* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "119"; */
-"119.title" = "\n";
-
-/* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "120"; */
-"120.title" = "\n";
-
-/* Class = "NSButtonCell"; title = "Odebíráno"; ObjectID = "121"; */
+/* Class = "NSButtonCell"; title = "Subscribed"; ObjectID = "121"; */
 "121.title" = "Odebíráno";
-
-/* Class = "NSButtonCell"; title = "Obecné:"; ObjectID = "122"; */
-"i9j-KH-c3D.title" = "Obecné";
-
-/* Class = "NSButtonCell"; title = "Popis:"; ObjectID = "124"; */
-"E84-Uo-ybg.title" = "Popis";
 
 /* Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126"; */
 "126.title" = "Load Full HTML Articles";
+
+/* Class = "NSTextFieldCell"; title = "Description"; ObjectID = "E84-Uo-ybg"; */
+"E84-Uo-ybg.title" = "Popis";
+
+/* Class = "NSTextFieldCell"; title = "Authentication"; ObjectID = "U0N-RF-bUt"; */
+"U0N-RF-bUt.title" = "Ověření totožnosti";
+
+/* Class = "NSTextFieldCell"; title = "General"; ObjectID = "i9j-KH-c3D"; */
+"i9j-KH-c3D.title" = "Obecné";
+
+/* Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG"; */
+"xPF-M9-oZG.title" = "URL zdroje";
