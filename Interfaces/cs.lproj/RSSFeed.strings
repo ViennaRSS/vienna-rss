@@ -1,38 +1,28 @@
-
-/* Class = "NSWindow"; title = "Zdroj RSS"; ObjectID = "6"; */
-"6.title" = "Zdroj RSS";
-
-/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
-"45.title" = "URL";
-
-/* Class = "NSWindow"; title = "Zdroj RSS"; ObjectID = "49"; */
-"49.title" = "Zdroj RSS";
-
-/* Class = "NSButtonCell"; title = "Zrušit"; ObjectID = "102"; */
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "102"; */
 "102.title" = "Zrušit";
 
-/* Class = "NSButtonCell"; title = "Odebírat"; ObjectID = "103"; */
+/* Class = "NSButtonCell"; title = "Subscribe"; ObjectID = "103"; */
 "103.title" = "Odebírat";
 
-/* Class = "NSTextFieldCell"; title = "Zdroj:"; ObjectID = "104"; */
+/* Class = "NSTextFieldCell"; title = "Source:"; ObjectID = "104"; */
 "104.title" = "Zdroj:";
 
-/* Class = "NSTextFieldCell"; title = "Vytvořit nové odebírání"; ObjectID = "106"; */
+/* Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106"; */
 "106.title" = "Vytvořit nové odebírání";
 
-/* Class = "NSTextFieldCell"; title = "Níže zadejte adresu novinek, které chcete odebírat, nebo vyberte ze seznamu zdroj novinek a zadejte jméno uživatele dané služby."; ObjectID = "107"; */
+/* Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107"; */
 "107.title" = "Níže zadejte adresu novinek, které chcete odebírat, nebo vyberte ze seznamu zdroj novinek a zadejte jméno uživatele dané služby.";
 
 /* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
 "110.title" = "URL:";
 
-/* Class = "NSButtonCell"; title = "Uložit"; ObjectID = "111"; */
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "111"; */
 "111.title" = "Uložit";
 
-/* Class = "NSButtonCell"; title = "Zrušit"; ObjectID = "112"; */
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "112"; */
 "112.title" = "Zrušit";
 
-/* Class = "NSTextFieldCell"; title = "Upravit odebírání"; ObjectID = "114"; */
+/* Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114"; */
 "114.title" = "Upravit odebírání";
 
 /* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */

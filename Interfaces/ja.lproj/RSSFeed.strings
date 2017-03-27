@@ -1,38 +1,28 @@
-
-/* Class = "NSWindow"; title = "RSS フィード"; ObjectID = "6"; */
-"6.title" = "RSS フィード";
-
-/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
-"45.title" = "URL";
-
-/* Class = "NSWindow"; title = "RSS フィード"; ObjectID = "49"; */
-"49.title" = "RSS フィード";
-
-/* Class = "NSButtonCell"; title = "キャンセル"; ObjectID = "102"; */
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "102"; */
 "102.title" = "キャンセル";
 
-/* Class = "NSButtonCell"; title = "購読"; ObjectID = "103"; */
+/* Class = "NSButtonCell"; title = "Subscribe"; ObjectID = "103"; */
 "103.title" = "購読";
 
-/* Class = "NSTextFieldCell"; title = "ソース："; ObjectID = "104"; */
+/* Class = "NSTextFieldCell"; title = "Source:"; ObjectID = "104"; */
 "104.title" = "ソース：";
 
-/* Class = "NSTextFieldCell"; title = "新規購読を作成"; ObjectID = "106"; */
+/* Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106"; */
 "106.title" = "新規購読を作成";
 
-/* Class = "NSTextFieldCell"; title = "ニュースフィードへのリンクを入力してください。またはソースリストからニュースフィードのショートカット名を入力してください。"; ObjectID = "107"; */
+/* Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107"; */
 "107.title" = "ニュースフィードへのリンクを入力してください。またはソースリストからニュースフィードのショートカット名を入力してください。";
 
 /* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
 "110.title" = "URL:";
 
-/* Class = "NSButtonCell"; title = "保存"; ObjectID = "111"; */
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "111"; */
 "111.title" = "保存";
 
-/* Class = "NSButtonCell"; title = "キャンセル"; ObjectID = "112"; */
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "112"; */
 "112.title" = "キャンセル";
 
-/* Class = "NSTextFieldCell"; title = "購読を編集"; ObjectID = "114"; */
+/* Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114"; */
 "114.title" = "購読を編集";
 
 /* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
