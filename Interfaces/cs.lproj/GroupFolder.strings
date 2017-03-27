@@ -1,15 +1,11 @@
-
-/* Class = "NSWindow"; title = "Panel"; ObjectID = "5"; */
-"5.title" = "Panel";
-
-/* Class = "NSTextFieldCell"; title = "Nová skupinová složka"; ObjectID = "32"; */
+/* Class = "NSTextFieldCell"; title = "New Group Folder"; ObjectID = "32"; */
 "32.title" = "Nová skupinová složka";
 
-/* Class = "NSButtonCell"; title = "Vytvořit"; ObjectID = "34"; */
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "34"; */
 "34.title" = "Vytvořit";
 
-/* Class = "NSButtonCell"; title = "Zrušit"; ObjectID = "35"; */
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "35"; */
 "35.title" = "Zrušit";
 
-/* Class = "NSTextFieldCell"; title = "Zadejte jméno skupinové složky:"; ObjectID = "36"; */
+/* Class = "NSTextFieldCell"; title = "Enter the group folder name:"; ObjectID = "36"; */
 "36.title" = "Zadejte jméno skupinové složky:";
