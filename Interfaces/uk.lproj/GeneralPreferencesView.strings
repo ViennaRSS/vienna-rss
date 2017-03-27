@@ -1,98 +1,73 @@
-
-/* Class = "NSMenuItem"; title = "Кожні 15 хвилин"; ObjectID = "1Ll-uG-QWh"; */
+/* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "1Ll-uG-QWh"; */
 "1Ll-uG-QWh.title" = "Кожні 15 хвилин";
 
-/* Class = "NSButtonCell"; title = "Післи команди \"Наступне непрочитане\""; ObjectID = "2oy-1i-QQP"; */
+/* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "2oy-1i-QQP"; */
 "2oy-1i-QQP.title" = "Післи команди \"Наступне непрочитане\"";
 
-/* Class = "NSMenuItem"; title = "(Шлях)"; ObjectID = "5Cq-8f-vbL"; */
-"5Cq-8f-vbL.title" = "(Шлях)";
-
-/* Class = "NSMenuItem"; title = "Кожні 30 хвилин"; ObjectID = "5VQ-jP-2rL"; */
+/* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "5VQ-jP-2rL"; */
 "5VQ-jP-2rL.title" = "Кожні 30 хвилин";
 
-/* Class = "NSMenuItem"; title = "Кожні 2 години"; ObjectID = "6wU-yO-cnV"; */
+/* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "6wU-yO-cnV"; */
 "6wU-yO-cnV.title" = "Кожні 2 години";
 
-/* Class = "NSButtonCell"; title = "Показувати кількість непрочитаних статей на іконці програми"; ObjectID = "7e3-Hu-RB5"; */
+/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "7e3-Hu-RB5"; */
 "7e3-Hu-RB5.title" = "Показувати кількість непрочитаних статей на іконці програми";
 
-/* Class = "NSTextFieldCell"; title = "Коли отримані нові статті:\n"; ObjectID = "BbI-0A-zEG"; */
-"BbI-0A-zEG.title" = "Коли отримані нові статті:\n";
+/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "BbI-0A-zEG"; */
+"BbI-0A-zEG.title" = "Коли отримані нові статті:";
 
-/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "DFg-c6-rCy"; */
-"DFg-c6-rCy.title" = "OtherViews";
-
-/* Class = "NSMenuItem"; title = "Інше..."; ObjectID = "FiK-E7-RnG"; */
+/* Class = "NSMenuItem"; title = "Other…"; ObjectID = "FiK-E7-RnG"; */
 "FiK-E7-RnG.title" = "Інше...";
 
-/* Class = "NSMenuItem"; title = "Нічого"; ObjectID = "GAY-ra-eQY"; */
-"GAY-ra-eQY.title" = "Нічого";
-
-/* Class = "NSButtonCell"; title = "Перевіряти наявність нових версій Vienna при запуску"; ObjectID = "GnT-xT-rAZ"; */
+/* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "GnT-xT-rAZ"; */
 "GnT-xT-rAZ.title" = "Перевіряти наявність нових версій Vienna при запуску";
 
-/* Class = "NSMenuItem"; title = "Вручну"; ObjectID = "H9Q-du-oax"; */
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "H9Q-du-oax"; */
 "H9Q-du-oax.title" = "Вручну";
 
-/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "HFO-4f-zYZ"; */
-"HFO-4f-zYZ.title" = "OtherViews";
-
-/* Class = "NSMenuItem"; title = "Кожні 6 годин"; ObjectID = "IMa-1h-lIO"; */
+/* Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "IMa-1h-lIO"; */
 "IMa-1h-lIO.title" = "Кожні 6 годин";
 
-/* Class = "NSButtonCell"; title = "Після невеликої паузи"; ObjectID = "JDV-ek-xja"; */
+/* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "JDV-ek-xja"; */
 "JDV-ek-xja.title" = "Після невеликої паузи";
 
-/* Class = "NSButtonCell"; title = "Показувати у меню"; ObjectID = "JN6-lj-bQ1"; */
+/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1"; */
 "JN6-lj-bQ1.title" = "Показувати у меню";
-
-/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "Klv-JA-PvP"; */
-"Klv-JA-PvP.title" = "OtherViews";
-
-/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "NAE-EF-SsE"; */
-"NAE-EF-SsE.title" = "Radio";
 
 /* Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0"; */
 "OID-qF-Pp0.title" = "Search for latest Beta versions";
 
-/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "XAi-oh-7Fq"; */
-"XAi-oh-7Fq.title" = "OtherViews";
-
-/* Class = "NSButtonCell"; title = "Відкривати посилання у зовнішньому браузері"; ObjectID = "YoM-Gv-hXn"; */
+/* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "YoM-Gv-hXn"; */
 "YoM-Gv-hXn.title" = "Відкривати посилання у зовнішньому браузері";
 
-/* Class = "NSTextFieldCell"; title = "Перевіряти наявність нових статей:"; ObjectID = "ewU-JH-fMC"; */
+/* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "ewU-JH-fMC"; */
 "ewU-JH-fMC.title" = "Перевіряти наявність нових статей:";
 
-/* Class = "NSMenuItem"; title = "(Do not localise)"; ObjectID = "fYn-Rz-G69"; */
-"fYn-Rz-G69.title" = "(Do not localise)";
-
-/* Class = "NSTextFieldCell"; title = "Зберігати завантажені файли до:"; ObjectID = "geD-Ws-mQm"; */
+/* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "geD-Ws-mQm"; */
 "geD-Ws-mQm.title" = "Зберігати завантажені файли до:";
 
-/* Class = "NSButtonCell"; title = "Заставити іконку програми стрибати"; ObjectID = "gi4-ao-0yS"; */
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "gi4-ao-0yS"; */
 "gi4-ao-0yS.title" = "Заставити іконку програми стрибати";
 
-/* Class = "NSMenuItem"; title = "Кожні 3 години"; ObjectID = "gnX-dW-XUD"; */
+/* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "gnX-dW-XUD"; */
 "gnX-dW-XUD.title" = "Кожні 3 години";
 
-/* Class = "NSTextFieldCell"; title = "Перемістити статті до Смітника:"; ObjectID = "k6Y-ib-PGb"; */
+/* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "k6Y-ib-PGb"; */
 "k6Y-ib-PGb.title" = "Перемістити статті до Смітника:";
 
-/* Class = "NSTextFieldCell"; title = "RSS-переглядач за замовчуванням:"; ObjectID = "kGA-Sa-RLG"; */
+/* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG"; */
 "kGA-Sa-RLG.title" = "RSS-переглядач за замовчуванням:";
 
 /* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl"; */
 "meo-78-YOl.title" = "Mark updated articles as new";
 
-/* Class = "NSMenuItem"; title = "Кожні 5 хвилин"; ObjectID = "oVW-ee-uJT"; */
+/* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "oVW-ee-uJT"; */
 "oVW-ee-uJT.title" = "Кожні 5 хвилин";
 
-/* Class = "NSButtonCell"; title = "Перевіряти наявність нових статей при запуску"; ObjectID = "pXX-MI-tJX"; */
+/* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "pXX-MI-tJX"; */
 "pXX-MI-tJX.title" = "Перевіряти наявність нових статей при запуску";
 
-/* Class = "NSButtonCell"; title = "Відкривати посилання на задньому плані"; ObjectID = "pjg-Ze-H3l"; */
+/* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "pjg-Ze-H3l"; */
 "pjg-Ze-H3l.title" = "Відкривати посилання на задньому плані";
 
 /* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
@@ -101,8 +76,8 @@
 /* Class = "NSButtonCell"; title = "Include anonymous system profile"; ObjectID = "qno-Cg-EkC"; */
 "qno-Cg-EkC.title" = "Include anonymous system profile";
 
-/* Class = "NSTextFieldCell"; title = "Помітити поточну статтю як прочитану:\n"; ObjectID = "sCl-hz-PFF"; */
-"sCl-hz-PFF.title" = "Помітити поточну статтю як прочитану:\n";
+/* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "sCl-hz-PFF"; */
+"sCl-hz-PFF.title" = "Помітити поточну статтю як прочитану:";
 
-/* Class = "NSMenuItem"; title = "Кожної години"; ObjectID = "sSj-zI-6RY"; */
+/* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "sSj-zI-6RY"; */
 "sSj-zI-6RY.title" = "Кожної години";
