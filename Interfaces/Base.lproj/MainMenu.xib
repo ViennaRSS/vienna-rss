@@ -174,7 +174,7 @@
                                                         </connections>
                                                     </searchField>
                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="1313">
-                                                        <rect key="frame" x="633" y="9" width="12" height="13"/>
+                                                        <rect key="frame" x="633" y="10" width="12" height="13"/>
                                                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="smallCloseButton" imagePosition="only" alignment="center" alternateImage="pressedCloseButton" controlSize="small" inset="2" id="1379">
                                                             <behavior key="behavior" lightByContents="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
@@ -184,13 +184,13 @@
                                                         </connections>
                                                     </button>
                                                     <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1306">
-                                                        <rect key="frame" x="457" y="3" width="67" height="22"/>
-                                                        <popUpButtonCell key="cell" type="push" title="Item3" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="1308" id="1378">
+                                                        <rect key="frame" x="457" y="4" width="67" height="22"/>
+                                                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="1308" id="1378">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
-                                                            <menu key="menu" title="OtherViews" id="1307">
+                                                            <menu key="menu" id="1307">
                                                                 <items>
-                                                                    <menuItem title="Item3" state="on" id="1308"/>
+                                                                    <menuItem state="on" id="1308"/>
                                                                 </items>
                                                             </menu>
                                                         </popUpButtonCell>
@@ -351,7 +351,7 @@
             <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
         </progressIndicator>
-        <menu title="MainMenu" systemMenu="main" id="29" userLabel="MainMenu">
+        <menu systemMenu="main" id="29" userLabel="MainMenu">
             <items>
                 <menuItem title="Vienna" id="56">
                     <menu key="submenu" title="Vienna" systemMenu="apple" id="57">
