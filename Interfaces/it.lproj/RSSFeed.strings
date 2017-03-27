@@ -1,38 +1,28 @@
-
-/* Class = "NSWindow"; title = "Feed RSS"; ObjectID = "6"; */
-"6.title" = "Feed RSS";
-
-/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
-"45.title" = "URL";
-
-/* Class = "NSWindow"; title = "Feed RSS"; ObjectID = "49"; */
-"49.title" = "Feed RSS";
-
-/* Class = "NSButtonCell"; title = "Annulla"; ObjectID = "102"; */
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "102"; */
 "102.title" = "Annulla";
 
-/* Class = "NSButtonCell"; title = "Iscriviti"; ObjectID = "103"; */
+/* Class = "NSButtonCell"; title = "Subscribe"; ObjectID = "103"; */
 "103.title" = "Iscriviti";
 
-/* Class = "NSTextFieldCell"; title = "Sorgente:"; ObjectID = "104"; */
+/* Class = "NSTextFieldCell"; title = "Source:"; ObjectID = "104"; */
 "104.title" = "Sorgente:";
 
-/* Class = "NSTextFieldCell"; title = "Crea una nuova iscrizione RSS"; ObjectID = "106"; */
+/* Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106"; */
 "106.title" = "Crea una nuova iscrizione RSS";
 
-/* Class = "NSTextFieldCell"; title = "Inserisci il collegamento al feed RSS in basso. Oppure scegli dalla lista Sorgente ed inserisci il nome breve per il feed RSS fornito da tale sorgente."; ObjectID = "107"; */
+/* Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107"; */
 "107.title" = "Inserisci il collegamento al feed RSS in basso. Oppure scegli dalla lista Sorgente ed inserisci il nome breve per il feed RSS fornito da tale sorgente.";
 
 /* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
 "110.title" = "URL:";
 
-/* Class = "NSButtonCell"; title = "Registra"; ObjectID = "111"; */
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "111"; */
 "111.title" = "Registra";
 
-/* Class = "NSButtonCell"; title = "Annulla"; ObjectID = "112"; */
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "112"; */
 "112.title" = "Annulla";
 
-/* Class = "NSTextFieldCell"; title = "Modifica iscrizione"; ObjectID = "114"; */
+/* Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114"; */
 "114.title" = "Modifica iscrizione";
 
 /* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */

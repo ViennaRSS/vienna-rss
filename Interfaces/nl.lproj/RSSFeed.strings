@@ -1,39 +1,29 @@
-
-/* Class = "NSWindow"; title = "RSS-feed"; ObjectID = "6"; */
-"6.title" = "RSS-feed";
-
-/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
-"45.title" = "URL";
-
-/* Class = "NSWindow"; title = "RSS-feed"; ObjectID = "49"; */
-"49.title" = "RSS-feed";
-
-/* Class = "NSButtonCell"; title = "Annuleer"; ObjectID = "102"; */
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "102"; */
 "102.title" = "Annuleer";
 
-/* Class = "NSButtonCell"; title = "Abonneer"; ObjectID = "103"; */
+/* Class = "NSButtonCell"; title = "Subscribe"; ObjectID = "103"; */
 "103.title" = "Abonneer";
 
-/* Class = "NSTextFieldCell"; title = "Bron:"; ObjectID = "104"; */
+/* Class = "NSTextFieldCell"; title = "Source:"; ObjectID = "104"; */
 "104.title" = "Bron:";
 
-/* Class = "NSTextFieldCell"; title = "Neem een nieuw abonnement"; ObjectID = "106"; */
+/* Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106"; */
 "106.title" = "Neem een nieuw abonnement";
 
-/* Class = "NSTextFieldCell"; title = "Geef hieronder de koppeling voor het abonnement op, of kies een door de uitgever aangegeven koppeling op uit het menu hieronder."; ObjectID = "107"; */
+/* Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107"; */
 "107.title" = "Geef hieronder de koppeling voor het abonnement op, of kies een door de uitgever aangegeven koppeling op uit het menu hieronder.";
 
 /* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
 "110.title" = "URL:";
 
-/* Class = "NSButtonCell"; title = "Bewaar"; ObjectID = "111"; */
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "111"; */
 "111.title" = "Bewaar";
 
-/* Class = "NSButtonCell"; title = "Annuleer"; ObjectID = "112"; */
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "112"; */
 "112.title" = "Annuleer";
 
-/* Class = "NSTextFieldCell"; title = "Bewerk abonnement"; ObjectID = "114"; */
+/* Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114"; */
 "114.title" = "Bewerk abonnement";
 
-/* Class = "NSButtonCell"; title = "Abonneer in Open Reader"; ObjectID = "116"; */
+/* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
 "116.title" = "Abonneer in Open Reader";

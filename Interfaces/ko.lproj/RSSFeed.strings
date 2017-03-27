@@ -1,35 +1,25 @@
-
-/* Class = "NSWindow"; title = "RSS Feed"; ObjectID = "6"; */
-"6.title" = "RSS Feed";
-
-/* Class = "NSMenuItem"; title = "URL"; ObjectID = "45"; */
-"45.title" = "URL";
-
-/* Class = "NSWindow"; title = "RSS Feed"; ObjectID = "49"; */
-"49.title" = "RSS Feed";
-
-/* Class = "NSButtonCell"; title = "취소"; ObjectID = "102"; */
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "102"; */
 "102.title" = "취소";
 
-/* Class = "NSButtonCell"; title = "구독하기"; ObjectID = "103"; */
+/* Class = "NSButtonCell"; title = "Subscribe"; ObjectID = "103"; */
 "103.title" = "구독하기";
 
-/* Class = "NSTextFieldCell"; title = "추가"; ObjectID = "104"; */
+/* Class = "NSTextFieldCell"; title = "Source:"; ObjectID = "104"; */
 "104.title" = "추가";
 
 /* Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106"; */
 "106.title" = "Create a new subscription";
 
-/* Class = "NSTextFieldCell"; title = "새 구독 추가"; ObjectID = "107"; */
+/* Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107"; */
 "107.title" = "새 구독 추가";
 
 /* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
 "110.title" = "URL:";
 
-/* Class = "NSButtonCell"; title = "URL:"; ObjectID = "111"; */
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "111"; */
 "111.title" = "URL:";
 
-/* Class = "NSButtonCell"; title = "저장"; ObjectID = "112"; */
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "112"; */
 "112.title" = "저장";
 
 /* Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114"; */
