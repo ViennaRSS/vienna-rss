@@ -13,9 +13,6 @@
 /* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
 "24.title" = "Вікно";
 
-/* Class = "NSMenu"; title = "MainMenu"; ObjectID = "29"; */
-"29.title" = "MainMenu";
-
 /* Class = "NSMenuItem"; title = "Vienna"; ObjectID = "56"; */
 "56.title" = "Vienna";
 
@@ -327,12 +324,6 @@
 
 /* Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259"; */
 "1259.title" = "Заховати стрічку статусу";
-
-/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "1307"; */
-"1307.title" = "OtherViews";
-
-/* Class = "NSMenuItem"; title = "Item3"; ObjectID = "1308"; */
-"1308.title" = "Item3";
 
 /* Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "1325"; */
 "1325.title" = "Показати стрічку фільтру";
