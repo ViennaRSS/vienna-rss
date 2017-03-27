@@ -1,15 +1,11 @@
-
-/* Class = "NSWindow"; title = "Esvaziar Lixeira"; ObjectID = "5"; */
-"5.title" = "Esvaziar Lixeira";
-
-/* Class = "NSButtonCell"; title = "Esvaziar Lixeira"; ObjectID = "17"; */
+/* Class = "NSButtonCell"; title = "Empty Trash"; ObjectID = "17"; */
 "17.title" = "Esvaziar Lixeira";
 
-/* Class = "NSButtonCell"; title = "Não Esvaziar Lixeira"; ObjectID = "18"; */
+/* Class = "NSButtonCell"; title = "Don't Empty Trash"; ObjectID = "18"; */
 "18.title" = "Não Esvaziar Lixeira";
 
-/* Class = "NSTextFieldCell"; title = "Existem artigos apagados na lixeira.\nVocê deseja esvaziar a lixeira antes de encerrar?"; ObjectID = "19"; */
+/* Class = "NSTextFieldCell"; title = "There are deleted articles in the trash. Would you like to empty the trash before quitting?"; ObjectID = "19"; */
 "19.title" = "Existem artigos apagados na lixeira. Você deseja esvaziar a lixeira antes de encerrar?";
 
-/* Class = "NSButtonCell"; title = "Não mostrar este aviso novamente"; ObjectID = "20"; */
+/* Class = "NSButtonCell"; title = "Do not show this warning again"; ObjectID = "20"; */
 "20.title" = "Não mostrar este aviso novamente";
