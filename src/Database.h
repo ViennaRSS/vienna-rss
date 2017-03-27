@@ -40,6 +40,9 @@
     FMDatabaseQueue *databaseQueue;
 }
 
+extern NSNotificationName const databaseWillDeleteFolderNotification;
+extern NSNotificationName const databaseDidDeleteFolderNotification;
+
 @property(nonatomic, strong) Folder * trashFolder;
 @property(nonatomic, strong) Folder * searchFolder;
 @property(nonatomic, strong) FMDatabaseQueue * databaseQueue;

@@ -1,5 +1,5 @@
 //
-//  ActivityViewer.h
+//  ActivityPanelController.h
 //  Vienna
 //
 //  Created by Steve on Thu Mar 18 2004.
@@ -18,14 +18,27 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "TableViewExtensions.h"
+@import Cocoa;
 
-@interface ActivityViewer : NSWindowController <NSWindowDelegate> {
-	IBOutlet NSWindow * activityWindow;
-	IBOutlet ExtendedTableView * activityTable;
-	IBOutlet NSSplitView * splitView;
-	IBOutlet NSTextView * activityDetail;
-	NSArray * allItems;
-}
+@class Folder;
+
+@protocol ActivityPanelDelegate
+
+/**
+ Notifies the delegate that a folder has been selected.
+
+ @param activityPanel The panel in which the folder was selected.
+ @param folder The selected folder.
+ */
+- (void)activityPanel:(nonnull NSPanel *)activityPanel didSelectFolder:(nonnull Folder *)folder;
+
+@end
+
+@interface ActivityPanelController : NSWindowController
+
+/**
+ The activity panel's delegate.
+ */
+@property (nullable, nonatomic) id<ActivityPanelDelegate> activityPanelDelegate;
+
 @end

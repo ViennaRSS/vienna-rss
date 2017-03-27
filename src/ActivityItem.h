@@ -1,5 +1,5 @@
 //
-//  ActivityLog.h
+//  ActivityItem.h
 //  Vienna
 //
 //  Created by Steve on 6/21/05.
@@ -20,28 +20,36 @@
 
 @import Foundation;
 
-#import "ActivityItem.h"
+@interface ActivityItem : NSObject
 
-@interface ActivityLog : NSObject
-
-extern NSNotificationName const _Nonnull activityLogUpdatedNotification;
-
-/**
- The default activity log.
- */
-@property (readonly, class, nonnull) ActivityLog *defaultLog;
+extern NSNotificationName const activityItemStatusUpdatedNotification;
+extern NSNotificationName const activityItemDetailsUpdatedNotification;
 
 /**
- An array of activity items.
+ The name of the item.
  */
-@property (readonly, copy, nonnull) NSArray<ActivityItem *> *allItems;
+@property (copy, nonatomic) NSString *name;
 
 /**
- Returns an activity item for the name of the item.
-
- @param name The name of the item.
- @return An activity item.
+ The fetch status of the item.
  */
-- (nonnull ActivityItem *)itemByName:(nonnull NSString *)name;
+@property (copy, nonatomic) NSString *status;
+
+/**
+ Detailed information about the fetch status of the item.
+ */
+@property (readonly, nonatomic) NSString *details;
+
+/**
+ Appends a string to the details of the item.
+
+ @param string The string to append.
+ */
+- (void)appendDetail:(NSString *)string;
+
+/**
+ Clears all details from the item.
+ */
+- (void)clearDetails;
 
 @end

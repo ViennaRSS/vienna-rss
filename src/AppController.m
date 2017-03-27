@@ -32,7 +32,7 @@
 #import "NewGroupFolder.h"
 #import "ViennaApp.h"
 #import "XMLSourceWindow.h"
-#import "ActivityLog.h"
+#import "ActivityPanelController.h"
 #import "BrowserPaneTemplate.h"
 #import "Constants.h"
 #import "ArticleView.h"
@@ -112,8 +112,9 @@
 	-(IBAction)cancelAllRefreshesToolbar:(id)sender;
 @end
 
-@interface AppController ()
+@interface AppController () <ActivityPanelDelegate>
 
+@property (nonatomic) IBOutlet ActivityPanelController *activityPanelController;
 @property (nonatomic) PreferencesWindowController *preferencesWindowController;
 
 @end
@@ -603,8 +604,8 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 		
 		// Close the activity window explicitly to force it to
 		// save its split bar position to the preferences.
-		NSWindow * activityWindow = activityViewer.window;
-		[activityWindow performClose:self];
+		NSWindow *activityPanel = self.activityPanelController.window;
+		[activityPanel performClose:self];
 		
 		// Put back the original app icon
 		[NSApp.dockTile setBadgeLabel:nil];
@@ -2848,23 +2849,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[downloadWindow.window makeKeyAndOrderFront:sender];
 }
 
-/* toggleActivityViewer
- * Toggle display of the activity viewer windows.
- */
--(IBAction)toggleActivityViewer:(id)sender
-{	
-	if (activityViewer == nil)
-		activityViewer = [[ActivityViewer alloc] init];
-	if (activityViewer != nil)
-	{
-		NSWindow * activityWindow = activityViewer.window;
-		if (!activityWindow.visible)
-			[activityViewer showWindow:self];
-		else
-			[activityWindow performClose:self];
-	}
-}
-
 /* viewFirstUnread
  * Moves the selection to the first unread article.
  */
@@ -4405,6 +4389,37 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 - (IBAction)showPreferences:(id)sender {
     [self.preferencesWindowController showWindow:self];
+}
+
+#pragma mark Activity panel
+
+- (ActivityPanelController *)activityPanelController {
+    if (!_activityPanelController) {
+        _activityPanelController = [ActivityPanelController new];
+        _activityPanelController.activityPanelDelegate = self;
+    }
+
+    return _activityPanelController;
+}
+
+/**
+ Toggle the visibility of the activity panel; show when hidden and close when
+ visible.
+ */
+- (IBAction)toggleActivityViewer:(id)sender {
+    if (!self.activityPanelController.window.visible) {
+        [self.activityPanelController showWindow:self];
+    } else {
+        [self.activityPanelController.window performClose:self];
+    }
+}
+
+/**
+ This delegate method is called when the user clicks on a row in the activity
+ panel's table view. This will be used to select a correspondng folder.
+ */
+- (void)activityPanel:(NSPanel *)activityPanel didSelectFolder:(Folder *)folder {
+    [self selectFolder:folder.itemId];
 }
 
 #pragma mark Dealloc

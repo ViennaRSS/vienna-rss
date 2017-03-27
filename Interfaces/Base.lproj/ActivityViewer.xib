@@ -6,57 +6,43 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="ActivityViewer">
+        <customObject id="-2" userLabel="File's Owner" customClass="ActivityPanelController">
             <connections>
-                <outlet property="activityDetail" destination="35" id="37"/>
-                <outlet property="activityTable" destination="17" id="22"/>
-                <outlet property="activityWindow" destination="8" id="11"/>
-                <outlet property="splitView" destination="36" id="38"/>
+                <outlet property="tableView" destination="17" id="9PO-Zp-e9d"/>
+                <outlet property="textView" destination="35" id="wga-pe-AJT"/>
                 <outlet property="window" destination="8" id="15"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Activity" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="activityViewer" animationBehavior="default" tabbingMode="disallowed" id="8" userLabel="Panel" customClass="NSPanel">
+        <window title="Activity" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="activityWindow" animationBehavior="default" tabbingMode="disallowed" id="8" userLabel="Panel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="150" y="449" width="646" height="563"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
-            <value key="minSize" type="size" width="213" height="113"/>
-            <view key="contentView" id="7">
-                <rect key="frame" x="0.0" y="0.0" width="646" height="563"/>
+            <rect key="contentRect" x="150" y="449" width="450" height="360"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <value key="minSize" type="size" width="200" height="140"/>
+            <view key="contentView" wantsLayer="YES" id="7">
+                <rect key="frame" x="0.0" y="0.0" width="450" height="360"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <splitView dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="36">
-                        <rect key="frame" x="0.0" y="0.0" width="646" height="564"/>
+                    <splitView identifier="activityWindowSplitViewIdentifier" autosaveName="activityWindowSplitView" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="36">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="361"/>
                         <subviews>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="16" horizontalPageScroll="10" verticalLineScroll="16" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="16">
-                                <rect key="frame" x="0.0" y="0.0" width="646" height="363"/>
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="16" userLabel="Master View">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="278"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <clipView key="contentView" id="vuC-mn-Vhc">
-                                    <rect key="frame" x="0.0" y="0.0" width="646" height="363"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="278"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="14" headerView="44" id="17" customClass="ExtendedTableView">
-                                            <rect key="frame" x="0.0" y="0.0" width="646" height="340"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveName="activityWindowTableView" rowHeight="15" headerView="44" id="17">
+                                            <rect key="frame" x="0.0" y="0.0" width="450" height="255"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <size key="intercellSpacing" width="3" height="2"/>
+                                            <size key="intercellSpacing" width="4" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="19" minWidth="10" maxWidth="1000" id="33">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
-                                                        <font key="font" metaFont="smallSystem"/>
-                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
-                                                    </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" id="42">
-                                                        <font key="font" metaFont="smallSystem"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </tableColumn>
-                                                <tableColumn identifier="name" editable="NO" width="309" minWidth="40" maxWidth="1000" id="18">
+                                                <tableColumn identifier="name" editable="NO" width="270" minWidth="80" maxWidth="1000" id="18">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Source">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -69,8 +55,15 @@
                                                     </textFieldCell>
                                                     <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="name"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="ngT-qn-tsD" name="value" keyPath="arrangedObjects.name" id="Oc6-o7-IYc">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="status" editable="NO" width="308.66162109375" minWidth="40.66162109375" maxWidth="1000" id="19">
+                                                <tableColumn identifier="status" editable="NO" width="172" minWidth="100" maxWidth="1000" id="19">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Status">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -83,11 +76,29 @@
                                                     </textFieldCell>
                                                     <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="status"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="ngT-qn-tsD" name="value" keyPath="arrangedObjects.status" id="V20-kf-aVQ">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
-                                                <outlet property="dataSource" destination="-2" id="32"/>
-                                                <outlet property="delegate" destination="-2" id="24"/>
+                                                <binding destination="ngT-qn-tsD" name="content" keyPath="arrangedObjects" id="z5x-op-hLm"/>
+                                                <binding destination="ngT-qn-tsD" name="doubleClickArgument" keyPath="selection.self" id="vh1-HZ-8jB">
+                                                    <dictionary key="options">
+                                                        <string key="NSSelectorName">showFolderForItem:</string>
+                                                    </dictionary>
+                                                </binding>
+                                                <binding destination="ngT-qn-tsD" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="z5x-op-hLm" id="bPS-SD-icO"/>
+                                                <binding destination="-2" name="doubleClickTarget" keyPath="self" previousBinding="vh1-HZ-8jB" id="B2a-16-hPt">
+                                                    <dictionary key="options">
+                                                        <string key="NSSelectorName">showFolderForItem:</string>
+                                                    </dictionary>
+                                                </binding>
+                                                <binding destination="ngT-qn-tsD" name="sortDescriptors" keyPath="sortDescriptors" previousBinding="bPS-SD-icO" id="SRV-SI-VSq"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -96,7 +107,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="0mm-3Z-4qd"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="43">
-                                    <rect key="frame" x="0.0" y="353" width="632" height="16"/>
+                                    <rect key="frame" x="0.0" y="262" width="450" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="45">
@@ -104,44 +115,57 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="44">
-                                    <rect key="frame" x="0.0" y="0.0" width="646" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
-                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="34">
-                                <rect key="frame" x="0.0" y="373" width="646" height="191"/>
+                            <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="34" userLabel="Detail View">
+                                <rect key="frame" x="0.0" y="288" width="450" height="73"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <clipView key="contentView" id="fSJ-fr-xBI">
-                                    <rect key="frame" x="0.0" y="0.0" width="646" height="191"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="73"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView editable="NO" importsGraphics="NO" richText="NO" usesFontPanel="YES" findStyle="panel" usesRuler="YES" quoteSubstitution="YES" dashSubstitution="YES" textReplacement="YES" smartInsertDelete="YES" id="35">
-                                            <rect key="frame" x="0.0" y="0.0" width="646" height="191"/>
+                                        <textView editable="NO" importsGraphics="NO" richText="NO" usesFontPanel="YES" findStyle="panel" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="35">
+                                            <rect key="frame" x="0.0" y="0.0" width="450" height="73"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="646" height="191"/>
+                                            <size key="minSize" width="450" height="73"/>
                                             <size key="maxSize" width="646" height="10000000"/>
+                                            <attributedString key="textStorage">
+                                                <fragment content=" ">
+                                                    <attributes>
+                                                        <font key="NSFont" metaFont="smallSystem"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <binding destination="ngT-qn-tsD" name="value" keyPath="selection.details" id="1do-fJ-mAk">
+                                                    <dictionary key="options">
+                                                        <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                        <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
                                         </textView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </clipView>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="RRg-fO-ewk"/>
-                                </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="46">
                                     <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="47">
-                                    <rect key="frame" x="630" y="0.0" width="16" height="191"/>
+                                    <rect key="frame" x="434" y="0.0" width="16" height="73"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                         </subviews>
                         <holdingPriorities>
                             <real value="250"/>
-                            <real value="250"/>
+                            <real value="251"/>
                         </holdingPriorities>
                     </splitView>
                 </subviews>
@@ -155,7 +179,16 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="14"/>
             </connections>
-            <point key="canvasLocation" x="141" y="186.5"/>
+            <point key="canvasLocation" x="50.5" y="85"/>
         </window>
+        <arrayController objectClassName="ActivityItem" editable="NO" automaticallyPreparesContent="YES" id="ngT-qn-tsD" userLabel="Activity Log">
+            <connections>
+                <binding destination="-2" name="contentArray" keyPath="activityLog.allItems" id="zXg-ws-9lx">
+                    <dictionary key="options">
+                        <bool key="NSConditionallySetsEditable" value="NO"/>
+                    </dictionary>
+                </binding>
+            </connections>
+        </arrayController>
     </objects>
 </document>

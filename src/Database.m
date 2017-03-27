@@ -55,6 +55,9 @@ const NSInteger MA_Current_DB_Version = 19;
 
 @implementation Database
 
+NSNotificationName const databaseWillDeleteFolderNotification = @"Database Will Delete Folder";
+NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did Delete Folder";
+
 @synthesize trashFolder, searchFolder;
 @synthesize databaseQueue;
 
@@ -997,7 +1000,7 @@ const NSInteger MA_Current_DB_Version = 19;
 	{
 		numFolder = @(folder.itemId);
 		[arrayOfFolderIds addObject:numFolder];
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_WillDeleteFolder" object:numFolder];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:databaseWillDeleteFolderNotification object:numFolder];
 	}
 
 	// Now do the deletion.
@@ -1006,7 +1009,7 @@ const NSInteger MA_Current_DB_Version = 19;
 	// Send the post-delete notification after we're finished. Note that the folder actually corresponding to
 	// each numFolder won't exist any more and the handlers need to be aware of this.
     for (numFolder in arrayOfFolderIds) {
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderDeleted" object:numFolder];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:databaseDidDeleteFolderNotification object:numFolder];
     }
 	
 	return result;

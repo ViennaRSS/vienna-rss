@@ -21,7 +21,6 @@
 #import <Cocoa/Cocoa.h>
 #import "Database.h"
 #import "ArticleController.h"
-#import "ActivityViewer.h"
 #import <Growl/Growl.h>
 #import "DownloadWindow.h"
 #import "FilterView.h"
@@ -79,7 +78,6 @@
 	IBOutlet NSTextField * currentFilterTextField;
 	IBOutlet NSButton * filterIconInStatusBarButton;
 
-	ActivityViewer * activityViewer;
 	DownloadWindow * downloadWindow;
 	SmartFolder * smartFolder;
 	NewGroupFolder * groupFolder;
@@ -127,7 +125,6 @@
 -(IBAction)viewFirstUnread:(id)sender;
 -(IBAction)viewNextUnread:(id)sender;
 -(IBAction)printDocument:(id)sender;
--(IBAction)toggleActivityViewer:(id)sender;
 -(IBAction)goBack:(id)sender;
 -(IBAction)goForward:(id)sender;
 -(IBAction)newSmartFolder:(id)sender;

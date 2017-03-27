@@ -96,7 +96,7 @@
 		435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 435026E5165DD8BE0018EDB7 /* ArticleRef.m */; };
 		4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */; };
 		43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502848165DE9DF0018EDB7 /* ActivityLog.m */; };
-		43502896165DE9E00018EDB7 /* ActivityViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350284A165DE9DF0018EDB7 /* ActivityViewer.m */; };
+		43502896165DE9E00018EDB7 /* ActivityPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350284A165DE9DF0018EDB7 /* ActivityPanelController.m */; };
 		43502897165DE9E00018EDB7 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350284C165DE9DF0018EDB7 /* AppController.m */; };
 		43502898165DE9E00018EDB7 /* ArticleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350284F165DE9DF0018EDB7 /* ArticleController.m */; };
 		43502899165DE9E00018EDB7 /* ArticleFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502851165DE9DF0018EDB7 /* ArticleFilter.m */; };
@@ -372,6 +372,7 @@
 		F6A7DE4F1E471A7F0017BE5E /* Vienna.help in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DDCA1E470E980017BE5E /* Vienna.help */; };
 		F6A7DEC71E47233C0017BE5E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DEC51E47233C0017BE5E /* InfoPlist.strings */; };
 		F6C5CEFA1E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C5CEF91E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m */; };
+		F6CE47131E7E3DCB0045EAD7 /* ActivityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CE47121E7E3DCB0045EAD7 /* ActivityItem.m */; };
 		F6D572AB1E26AA8200CDA909 /* EmptyTrashWarning.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572AD1E26AA8200CDA909 /* EmptyTrashWarning.xib */; };
 		F6D572AE1E26AA8A00CDA909 /* FeedCredentials.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */; };
 		F6D572B11E26AA9000CDA909 /* GroupFolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B31E26AA9000CDA909 /* GroupFolder.xib */; };
@@ -533,8 +534,8 @@
 		43502845165DE9560018EDB7 /* RenameFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenameFolder.h; path = src/RenameFolder.h; sourceTree = SOURCE_ROOT; };
 		43502846165DE9560018EDB7 /* RenameFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RenameFolder.m; path = src/RenameFolder.m; sourceTree = SOURCE_ROOT; };
 		43502848165DE9DF0018EDB7 /* ActivityLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityLog.m; path = src/ActivityLog.m; sourceTree = SOURCE_ROOT; };
-		43502849165DE9DF0018EDB7 /* ActivityViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityViewer.h; path = src/ActivityViewer.h; sourceTree = SOURCE_ROOT; };
-		4350284A165DE9DF0018EDB7 /* ActivityViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityViewer.m; path = src/ActivityViewer.m; sourceTree = SOURCE_ROOT; };
+		43502849165DE9DF0018EDB7 /* ActivityPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityPanelController.h; path = src/ActivityPanelController.h; sourceTree = SOURCE_ROOT; };
+		4350284A165DE9DF0018EDB7 /* ActivityPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityPanelController.m; path = src/ActivityPanelController.m; sourceTree = SOURCE_ROOT; };
 		4350284B165DE9DF0018EDB7 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppController.h; path = src/AppController.h; sourceTree = SOURCE_ROOT; };
 		4350284C165DE9DF0018EDB7 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppController.m; path = src/AppController.m; sourceTree = SOURCE_ROOT; };
 		4350284D165DE9DF0018EDB7 /* ArticleBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleBaseView.h; path = src/ArticleBaseView.h; sourceTree = SOURCE_ROOT; };
@@ -1215,6 +1216,8 @@
 		F6B9937D1E28360D005F9FAD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AdvancedPreferencesView.strings"; sourceTree = "<group>"; };
 		F6C5CEF81E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PSMTabBarControl+IntrinsicContentSize.h"; path = "src/PSMTabBarControl+IntrinsicContentSize.h"; sourceTree = "<group>"; };
 		F6C5CEF91E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PSMTabBarControl+IntrinsicContentSize.m"; path = "src/PSMTabBarControl+IntrinsicContentSize.m"; sourceTree = "<group>"; };
+		F6CE47111E7E3DBD0045EAD7 /* ActivityItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityItem.h; path = src/ActivityItem.h; sourceTree = "<group>"; };
+		F6CE47121E7E3DCB0045EAD7 /* ActivityItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityItem.m; path = src/ActivityItem.m; sourceTree = "<group>"; };
 		F6D573291E26B19D00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/EmptyTrashWarning.xib; sourceTree = "<group>"; };
 		F6D5732A1E26B19E00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeedCredentials.xib; sourceTree = "<group>"; };
 		F6D5732B1E26B19F00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GroupFolder.xib; sourceTree = "<group>"; };
@@ -1414,7 +1417,7 @@
 			name = Products;
 			sourceTree = SOURCE_ROOT;
 		};
-		2A37F4AAFDCFA73011CA2CEA = {
+		2A37F4AAFDCFA73011CA2CEA /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
 				439824161666B1ED00FFE219 /* Documentation */,
@@ -1436,10 +1439,6 @@
 			children = (
 				793C952E1C3F07FC00984D4E /* TreeFilterView.h */,
 				793C952F1C3F07FC00984D4E /* TreeFilterView.m */,
-				AA0FB5E00869110300D9CB90 /* ActivityLog.h */,
-				43502848165DE9DF0018EDB7 /* ActivityLog.m */,
-				43502849165DE9DF0018EDB7 /* ActivityViewer.h */,
-				4350284A165DE9DF0018EDB7 /* ActivityViewer.m */,
 				4350284B165DE9DF0018EDB7 /* AppController.h */,
 				4350284C165DE9DF0018EDB7 /* AppController.m */,
 				4350284D165DE9DF0018EDB7 /* ArticleBaseView.h */,
@@ -1969,6 +1968,7 @@
 				AA8C76C006420CA800649BA2 /* Database */,
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
 				AAC5063D082A7AE00089FF70 /* Support Classes */,
+				F6CE47101E7E3D520045EAD7 /* Activity panel */,
 				AA3113EC09020E1B00E80DF1 /* Preferences */,
 				AA5AABB50C3CD68A00B2E14F /* Toolbar */,
 				AAC5063C082A7A530089FF70 /* Other Sources */,
@@ -2077,6 +2077,19 @@
 				F6A7DE491E4717970017BE5E /* shared */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		F6CE47101E7E3D520045EAD7 /* Activity panel */ = {
+			isa = PBXGroup;
+			children = (
+				AA0FB5E00869110300D9CB90 /* ActivityLog.h */,
+				43502848165DE9DF0018EDB7 /* ActivityLog.m */,
+				F6CE47111E7E3DBD0045EAD7 /* ActivityItem.h */,
+				F6CE47121E7E3DCB0045EAD7 /* ActivityItem.m */,
+				43502849165DE9DF0018EDB7 /* ActivityPanelController.h */,
+				4350284A165DE9DF0018EDB7 /* ActivityPanelController.m */,
+			);
+			name = "Activity panel";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2198,7 +2211,7 @@
 				"zh-Hant",
 				"zh-Hans",
 			);
-			mainGroup = 2A37F4AAFDCFA73011CA2CEA;
+			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Vienna */;
 			productRefGroup = 19C28FB0FE9D524F11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2694,7 +2707,8 @@
 				435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */,
 				4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */,
 				43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */,
-				43502896165DE9E00018EDB7 /* ActivityViewer.m in Sources */,
+				43502896165DE9E00018EDB7 /* ActivityPanelController.m in Sources */,
+				F6CE47131E7E3DCB0045EAD7 /* ActivityItem.m in Sources */,
 				43502897165DE9E00018EDB7 /* AppController.m in Sources */,
 				43502898165DE9E00018EDB7 /* ArticleController.m in Sources */,
 				43502899165DE9E00018EDB7 /* ArticleFilter.m in Sources */,
