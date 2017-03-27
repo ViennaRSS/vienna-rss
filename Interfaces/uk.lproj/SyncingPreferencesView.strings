@@ -1,30 +1,17 @@
-
-/* Class = "NSTextFieldCell"; placeholderString = "Placeholder for server specific explanations"; ObjectID = "3WF-BJ-rBh"; */
-"3WF-BJ-rBh.placeholderString" = "Placeholder for server specific explanations";
-
-/* Class = "NSTextFieldCell"; title = "Hint (Do Not Localise)"; ObjectID = "3WF-BJ-rBh"; */
-"3WF-BJ-rBh.title" = "Hint (Do Not Localise)";
-
 /* Class = "NSButton"; ibExternalAccessibilityDescription = "Visit the website"; ObjectID = "Ar5-Qc-YTe"; */
 "Ar5-Qc-YTe.ibExternalAccessibilityDescription" = "Visit the website";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe"; */
 "Ar5-Qc-YTe.ibShadowedToolTip" = "Visit the website";
 
-/* Class = "NSMenu"; title = "ServicesView"; ObjectID = "LVH-iR-bmO"; */
-"LVH-iR-bmO.title" = "ServicesView";
-
 /* Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Lkv-md-rEW"; */
 "Lkv-md-rEW.title" = "Sync with an Open Reader server";
 
-/* Class = "NSTextFieldCell"; title = "Пароль:"; ObjectID = "NKI-36-zCY"; */
+/* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "NKI-36-zCY"; */
 "NKI-36-zCY.title" = "Пароль:";
 
-/* Class = "NSTextFieldCell"; title = "Ім'я:"; ObjectID = "O2q-8o-CSb"; */
+/* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "O2q-8o-CSb"; */
 "O2q-8o-CSb.title" = "Ім'я:";
-
-/* Class = "NSMenuItem"; title = "URL"; ObjectID = "RMd-14-2Bl"; */
-"RMd-14-2Bl.title" = "URL";
 
 /* Class = "NSButtonCell"; title = "🌍"; ObjectID = "e0z-IA-uBQ"; */
 "e0z-IA-uBQ.title" = "🌍";
