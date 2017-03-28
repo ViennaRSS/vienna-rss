@@ -5,7 +5,6 @@ target 'Vienna' do
 	pod 'MASPreferences', '~> 1.1.4'
 	pod 'ASIHTTPRequest', '~> 1.8', :inhibit_warnings => true
 	pod 'FMDB', '~> 2.4'
-	pod 'CDEvents'
 	pod 'Sparkle', '~> 1.17.0'
 end
 

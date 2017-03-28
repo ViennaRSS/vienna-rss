@@ -305,7 +305,6 @@
 		AAD2BF630C2C41A200AA0F11 /* DBListSplitViewDimple.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BF610C2C41A200AA0F11 /* DBListSplitViewDimple.tiff */; };
 		AAD2C0540C2C882D00AA0F11 /* selBlue.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD2C0520C2C882D00AA0F11 /* selBlue.tiff */; };
 		AAD2C0550C2C882D00AA0F11 /* selGray.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD2C0530C2C882D00AA0F11 /* selGray.tiff */; };
-		AAD7935C0889FA5E00E2CE5E /* scriptMenu.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD7935B0889FA5E00E2CE5E /* scriptMenu.tiff */; };
 		AAD794E7088A25D200E2CE5E /* PopUpButtonExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */; };
 		AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */; };
 		AADD6E820C457C3800E11097 /* getInfoButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AADD6E800C457C3800E11097 /* getInfoButton.tiff */; };
@@ -362,6 +361,8 @@
 		F62581431E29B9040035E43C /* XMLSource.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581421E29B9040035E43C /* XMLSource.xib */; };
 		F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581441E29B90A0035E43C /* SearchPanel.xib */; };
 		F62581591E29BEB90035E43C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625815B1E29BEB90035E43C /* MainMenu.xib */; };
+		F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */; };
+		F648C2B91E7F3C2500CE4043 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */; };
 		F65D6D711E74619E00A30974 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4398241E1666B3DB00FFE219 /* Credits.rtf */; };
 		F6A7DE341E47138B0017BE5E /* advanced.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2A1E47138B0017BE5E /* advanced.html */; };
 		F6A7DE351E47138B0017BE5E /* faq.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2C1E47138B0017BE5E /* faq.html */; };
@@ -379,6 +380,7 @@
 		F6D572B41E26AA9900CDA909 /* InfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B61E26AA9900CDA909 /* InfoWindow.xib */; };
 		F6D572B71E26AAA100CDA909 /* RSSFeed.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B91E26AAA100CDA909 /* RSSFeed.xib */; };
 		F6D572BA1E26AAA900CDA909 /* SearchFolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572BC1E26AAA900CDA909 /* SearchFolder.xib */; };
+		F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */; };
 		F6EB261C1E5BA59300570B22 /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6EB261B1E5BA59300570B22 /* PreferencesWindowController.m */; };
 /* End PBXBuildFile section */
 
@@ -808,7 +810,6 @@
 		AAD2BF610C2C41A200AA0F11 /* DBListSplitViewDimple.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = DBListSplitViewDimple.tiff; path = Resources/DBListSplitViewDimple.tiff; sourceTree = SOURCE_ROOT; };
 		AAD2C0520C2C882D00AA0F11 /* selBlue.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = selBlue.tiff; path = Resources/selBlue.tiff; sourceTree = SOURCE_ROOT; };
 		AAD2C0530C2C882D00AA0F11 /* selGray.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = selGray.tiff; path = Resources/selGray.tiff; sourceTree = SOURCE_ROOT; };
-		AAD7935B0889FA5E00E2CE5E /* scriptMenu.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = scriptMenu.tiff; path = Resources/scriptMenu.tiff; sourceTree = SOURCE_ROOT; };
 		AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopUpButtonExtensions.h; path = src/PopUpButtonExtensions.h; sourceTree = SOURCE_ROOT; };
 		AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PopUpButtonExtensions.m; path = src/PopUpButtonExtensions.m; sourceTree = SOURCE_ROOT; };
 		AAD7999D088B617900E2CE5E /* AddressBarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AddressBarCell.h; path = src/AddressBarCell.h; sourceTree = SOURCE_ROOT; };
@@ -1057,6 +1058,7 @@
 		F6352C071E27285C005CD307 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
 		F6352C081E272864005CD307 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/AppearancePreferencesView.strings"; sourceTree = "<group>"; };
 		F6352C091E272868005CD307 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AppearancePreferencesView.strings"; sourceTree = "<group>"; };
+		F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryMonitorTests.swift; sourceTree = "<group>"; };
 		F68F724A1E2A0937007FADA5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F69140ED1E71D72100D51BFF /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F69140EE1E71D72400D51BFF /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -1311,6 +1313,7 @@
 		F6D573A01E2706BA00CDA909 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6D573A11E2706BC00CDA909 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6DAD20A1E75892C00FE2645 /* Vienna-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Vienna-Bridging-Header.h"; path = "src/Vienna-Bridging-Header.h"; sourceTree = "<group>"; };
+		F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DirectoryMonitor.swift; path = src/DirectoryMonitor.swift; sourceTree = "<group>"; };
 		F6EB261A1E5BA59300570B22 /* PreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreferencesWindowController.h; path = src/Preferences/PreferencesWindowController.h; sourceTree = "<group>"; };
 		F6EB261B1E5BA59300570B22 /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreferencesWindowController.m; path = src/Preferences/PreferencesWindowController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1394,6 +1397,7 @@
 				4D36B44E1D38007D009736C1 /* NSURL+URIEquivalence.h */,
 				4D36B44F1D38007D009736C1 /* NSURL+URIEquivalence.m */,
 				0377BDEC1D3A009B00960555 /* BitlyAPIHelperTests.swift */,
+				F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */,
 				0377BDEB1D3A009B00960555 /* Vienna Tests-Bridging-Header.h */,
 			);
 			path = "Vienna Tests";
@@ -1411,8 +1415,8 @@
 			isa = PBXGroup;
 			children = (
 				8D15AC370486D014006FF6A4 /* Vienna.app */,
-				035B703519E0E4AE00197334 /* Vienna Tests.xctest */,
 				F6A7DDCA1E470E980017BE5E /* Vienna.help */,
+				035B703519E0E4AE00197334 /* Vienna Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = SOURCE_ROOT;
@@ -1724,7 +1728,6 @@
 				AA71096F09BA74BF00E3EA8A /* rightArrow.tiff */,
 				AA26F43D060490BD00FE7994 /* greyRightArrow.tiff */,
 				AA26F440060490BD00FE7994 /* smallFolder.tiff */,
-				AAD7935B0889FA5E00E2CE5E /* scriptMenu.tiff */,
 				AA26F441060490BD00FE7994 /* unread_header.tiff */,
 				AA20DC9D0882CCC300A226F5 /* unread.tiff */,
 				57DA9D0A16DFFCD3000889E7 /* unread@2x.tiff */,
@@ -2004,6 +2007,7 @@
 				3AFF601719A07F5A0036DBA4 /* BJRWindowWithToolbar.h */,
 				34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */,
 				34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */,
+				F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */,
 				AA8B36BF0C12D6480035FBD7 /* GradientView.h */,
 				AA8B36C00C12D6480035FBD7 /* GradientView.m */,
 				AA60237E08C298FB002CFD06 /* HelperFunctions.h */,
@@ -2218,11 +2222,11 @@
 			targets = (
 				8D15AC270486D014006FF6A4 /* Vienna */,
 				F6A7DDC91E470E980017BE5E /* Vienna Help */,
+				035B703419E0E4AE00197334 /* Vienna Tests */,
 				430C4ACF166172BD0079C9FC /* Autorevision */,
 				52BA63FC0DE9E2E10008B3E1 /* Version Notes */,
 				430C4AF71661F07C0079C9FC /* Code Sign ID */,
 				EAAF335414BDE402002A8837 /* Archive and Prep for Upload */,
-				035B703419E0E4AE00197334 /* Vienna Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -2272,7 +2276,6 @@
 				AA3F7B4208711F6A00D2B96F /* comments_header.tiff in Resources */,
 				AA20DC9E0882CCC300A226F5 /* unread.tiff in Resources */,
 				AA6321510885F0BB006382D3 /* comments.tiff in Resources */,
-				AAD7935C0889FA5E00E2CE5E /* scriptMenu.tiff in Resources */,
 				AA67F3990897377C008BBC37 /* stopRefresh.tiff in Resources */,
 				AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */,
 				AAF6C3A308B06BA00077BAB8 /* StandardURLs.plist in Resources */,
@@ -2643,6 +2646,7 @@
 				0383DC551B71B44700A11950 /* CriteriaTests.m in Sources */,
 				4D3EF4AD1D342B9E0056B90D /* HelperFunctions.m in Sources */,
 				4D3EF4AB1D342B800056B90D /* KeyChain.m in Sources */,
+				F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */,
 				4D3EF4A41D342A340056B90D /* Article.m in Sources */,
 				4D36B4501D38007D009736C1 /* NSURL+URIEquivalence.m in Sources */,
 				4D3EF4AC1D342B880056B90D /* XMLTag.m in Sources */,
@@ -2653,6 +2657,7 @@
 				4D3EF4A01D3429C30056B90D /* Criteria.m in Sources */,
 				4D3EF4AE1D342BB00056B90D /* Export.m in Sources */,
 				4D36B44D1D37FCC2009736C1 /* StringExtensions.m in Sources */,
+				F648C2B91E7F3C2500CE4043 /* DirectoryMonitor.swift in Sources */,
 				4D36B44C1D37FBE4009736C1 /* CalendarExtensions.m in Sources */,
 				03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */,
 				4D3EF4A71D342A540056B90D /* Folder.m in Sources */,
@@ -2735,6 +2740,7 @@
 				435028AB165DE9E00018EDB7 /* NewGroupFolder.m in Sources */,
 				435028AC165DE9E00018EDB7 /* NewSubscription.m in Sources */,
 				03B7522A1B741AFD00FD3FDB /* FeedItem.m in Sources */,
+				F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */,
 				435028AD165DE9E00018EDB7 /* PluginManager.m in Sources */,
 				435028AE165DE9E00018EDB7 /* ProgressTextCell.m in Sources */,
 				3AFF601819A07F5A0036DBA4 /* BJRWindowWithToolbar.m in Sources */,
@@ -3415,6 +3421,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F1ECA9ED54D2517E7BEDCBB7 /* Pods-Vienna Tests.development.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -3458,7 +3465,6 @@
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/ASIHTTPRequest\"",
-					"\"${PODS_ROOT}/Headers/Public/CDEvents\"",
 					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
 					"\"${PODS_ROOT}/Headers/Public/MASPreferences\"",
 					"\"${PODS_ROOT}/Headers/Public/Sparkle\"",
@@ -3482,6 +3488,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD11EE0EE1E72989D4E43515 /* Pods-Vienna Tests.deployment.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -3520,7 +3527,6 @@
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/ASIHTTPRequest\"",
-					"\"${PODS_ROOT}/Headers/Public/CDEvents\"",
 					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
 					"\"${PODS_ROOT}/Headers/Public/MASPreferences\"",
 					"\"${PODS_ROOT}/Headers/Public/Sparkle\"",
@@ -3542,6 +3548,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ED69423919E1DC034EA80E25 /* Pods-Vienna Tests.staticanalyzer.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -3577,7 +3584,6 @@
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/ASIHTTPRequest\"",
-					"\"${PODS_ROOT}/Headers/Public/CDEvents\"",
 					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
 					"\"${PODS_ROOT}/Headers/Public/MASPreferences\"",
 					"\"${PODS_ROOT}/Headers/Public/Sparkle\"",
@@ -3643,7 +3649,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				SWIFT_OBJC_BRIDGING_HEADER = "Vienna-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "src/Vienna-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = StaticAnalyzer;
@@ -3701,11 +3707,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/ASIHTTPRequest\"",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/CDEvents\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/FMDB\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/MASPreferences\"",
 				);
-				SWIFT_OBJC_BRIDGING_HEADER = "Vienna-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "src/Vienna-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -3721,11 +3726,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/ASIHTTPRequest\"",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/CDEvents\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/FMDB\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/MASPreferences\"",
 				);
-				SWIFT_OBJC_BRIDGING_HEADER = "Vienna-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "src/Vienna-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Deployment;
