@@ -8,17 +8,17 @@
 /* Class = "NSButtonCell"; title = "Auswählen…"; ObjectID = "BDw-v3-mpF"; */
 "BDw-v3-mpF.title" = "Auswählen…";
 
-/* Class = "NSButtonCell"; title = "Abonnementenicons anzeigen"; ObjectID = "MEV-HA-bdL"; */
-"MEV-HA-bdL.title" = "Abonnementenicons anzeigen";
+/* Class = "NSButtonCell"; title = "Icons von Abonnements anzeigen"; ObjectID = "MEV-HA-bdL"; */
+"MEV-HA-bdL.title" = "Icons von Abonnements anzeigen";
 
 /* Class = "NSTextFieldCell"; title = "Artikelliste:"; ObjectID = "auD-UC-Pij"; */
 "auD-UC-Pij.title" = "Artikelliste:";
 
-/* Class = "NSTextFieldCell"; title = "(Sample)"; ObjectID = "azr-ft-M4J"; */
-"azr-ft-M4J.title" = "(Sample)";
+/* Class = "NSTextFieldCell"; title = "(Beispiel)"; ObjectID = "azr-ft-M4J"; */
+"azr-ft-M4J.title" = "(Beispiel)";
 
-/* Class = "NSTextFieldCell"; title = "(Sample)"; ObjectID = "g63-xD-ICn"; */
-"g63-xD-ICn.title" = "(Sample)";
+/* Class = "NSTextFieldCell"; title = "(Beispiel)"; ObjectID = "g63-xD-ICn"; */
+"g63-xD-ICn.title" = "(Beispiel)";
 
 /* Class = "NSButtonCell"; title = "Auswählen…"; ObjectID = "gGT-YP-aum"; */
 "gGT-YP-aum.title" = "Auswählen…";

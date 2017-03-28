@@ -57,7 +57,7 @@
 "OID-qF-Pp0.title" = "Suche nach Betaversionen";
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "XAi-oh-7Fq"; */
-"XAi-oh-7Fq.title" = "OtherViews";
+"XAi-oh-7Fq.title" = "Andere Ansichten";
 
 /* Class = "NSButtonCell"; title = "Öffne Links im externen Browser"; ObjectID = "YoM-Gv-hXn"; */
 "YoM-Gv-hXn.title" = "Öffne Links im externen Browser";
@@ -66,7 +66,7 @@
 "ewU-JH-fMC.title" = "Neue Artikel abrufen:";
 
 /* Class = "NSMenuItem"; title = "(Do not localise)"; ObjectID = "fYn-Rz-G69"; */
-"fYn-Rz-G69.title" = "(Do not localise)";
+"fYn-Rz-G69.title" = "(Nicht lokalisieren)";
 
 /* Class = "NSTextFieldCell"; title = "Sichere geladene Dateien in:"; ObjectID = "geD-Ws-mQm"; */
 "geD-Ws-mQm.title" = "Sichere geladene Dateien in:";
@@ -96,7 +96,7 @@
 "pjg-Ze-H3l.title" = "Öffne Links im Hintergrund";
 
 /* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
-"qeb-at-hYb.title" = "Updates:";
+"qeb-at-hYb.title" = "Aktualisierungen:";
 
 /* Class = "NSButtonCell"; title = "Anonymisierten Systembericht senden"; ObjectID = "qno-Cg-EkC"; */
 "qno-Cg-EkC.title" = "Anonymisierten Systembericht senden";

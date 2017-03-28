@@ -1,24 +1,24 @@
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "32"; */
-"32.title" = "OtherViews";
+"32.title" = "Andere Ansichten";
 
 /* Class = "NSMenuItem"; title = "Field names go here"; ObjectID = "33"; */
-"33.title" = "Field names go here";
+"33.title" = "Feldnamen hier eingeben";
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "34"; */
-"34.title" = "OtherViews";
+"34.title" = "Andere Ansichten";
 
 /* Class = "NSMenuItem"; title = "Operators go here"; ObjectID = "56"; */
-"56.title" = "Operators go here";
+"56.title" = "Operatoren hier eingeben";
 
 /* Class = "NSMenuItem"; title = "Nothing"; ObjectID = "62"; */
-"62.title" = "Nothing";
+"62.title" = "Nichts";
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "64"; */
-"64.title" = "OtherViews";
+"64.title" = "Andere Ansichten";
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "74"; */
-"74.title" = "OtherViews";
+"74.title" = "Andere Ansichten";
 
 /* Class = "NSMenuItem"; title = "Item3"; ObjectID = "75"; */
 "75.title" = "Item3";
@@ -27,13 +27,13 @@
 "76.title" = "Item2";
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "80"; */
-"80.title" = "OtherViews";
+"80.title" = "Andere Ansichten";
 
 /* Class = "NSMenuItem"; title = "keiner"; ObjectID = "82"; */
 "82.title" = "keiner";
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "87"; */
-"87.title" = "OtherViews";
+"87.title" = "Andere Ansichten";
 
 /* Class = "NSMenuItem"; title = "Item1"; ObjectID = "88"; */
 "88.title" = "Item1";
