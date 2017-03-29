@@ -243,7 +243,6 @@ enum GoogleReaderStatus {
                 }
 
                 googleReaderStatus = missingTToken;
-                [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"GRSync_Autheticated" object:nil];
 
                 if (clientAuthTimer == nil || !clientAuthTimer.valid) {
                     //new request every 6 days
@@ -833,16 +832,6 @@ enum GoogleReaderStatus {
 	}); //block for dispatch_async
 }
 
--(void)submitLoadSubscriptions {
-	
-	[APPCONTROLLER setStatusMessage:NSLocalizedString(@"Fetching Open Reader Subscriptions…", nil) persist:NO];
-
-
-	ASIHTTPRequest *subscriptionRequest = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json",APIBaseURL,ClientName]]];
-	subscriptionRequest.didFinishSelector = @selector(subscriptionsRequestDone:);
-	[[RefreshManager sharedManager] addConnection:subscriptionRequest];
-}
-
 -(void)subscriptionsRequestDone:(ASIHTTPRequest *)request
 {
 	LLog(@"Ending subscriptionRequest");
@@ -933,24 +922,12 @@ enum GoogleReaderStatus {
 	
 }
 
--(void)loadSubscriptions:(NSNotification *)nc
+-(void)loadSubscriptions
 {
-	if (nc != nil) {
-		LLog(@"Firing after notification");
-		[[NSNotificationCenter defaultCenter] removeObserver:self name:@"GRSync_Autheticated" object:nil];		
-		[self submitLoadSubscriptions];
-	} else {
-		LLog(@"Firing directly");
-
-		if (clientAuthToken != nil) {
-			LLog(@"Client token available, finish subscription");
-			[self submitLoadSubscriptions];
-		} else {
-			LLog(@"Client token not available, registering for notification");
-			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadSubscriptions:) name:@"GRSync_Autheticated" object:nil];
-			[self addClientTokenToRequest:nil];
-		}
-	}
+	[APPCONTROLLER setStatusMessage:NSLocalizedString(@"Fetching Open Reader Subscriptions…", nil) persist:NO];
+	ASIHTTPRequest *subscriptionRequest = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json",APIBaseURL,ClientName]]];
+	subscriptionRequest.didFinishSelector = @selector(subscriptionsRequestDone:);
+	[[RefreshManager sharedManager] addConnection:subscriptionRequest];
 }
 
 -(void)subscribeToFeed:(NSString *)feedURL 
