@@ -24,7 +24,7 @@
 // Check if an accessToken is available
 @property (nonatomic, getter=isReady, readonly) BOOL ready;
 
--(void)loadSubscriptions:(NSNotification*)nc;
+-(void)loadSubscriptions;
 -(void)getTokenForRequest:(ASIFormDataRequest *)clientRequest;
 -(void)clearAuthentication;
 -(void)resetAuthentication;
