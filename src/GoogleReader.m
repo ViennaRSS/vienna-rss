@@ -172,7 +172,6 @@ enum GoogleReaderStatus {
     } else if ((googleReaderStatus == waitingClientToken || googleReaderStatus == waitingTToken) && myRequest != nil) {
         LLog(@"Waiting because another instance is authenticating");
         [clientRequest addDependency:myRequest];
-        [clientRequest setQueuePriority:NSOperationQueuePriorityLow];
         if (clientRequest != nil) {
             [clientAuthWaitQueue addObject:clientRequest];
         }
@@ -256,7 +255,7 @@ enum GoogleReaderStatus {
         }];
 
         [clientRequest addDependency:myRequest];
-        [clientRequest setQueuePriority:NSOperationQueuePriorityLow];
+        [myRequest setQueuePriority:NSOperationQueuePriorityHigh];
         if (clientRequest != nil) {
             [clientAuthWaitQueue addObject:clientRequest];
         }
@@ -306,10 +305,10 @@ enum GoogleReaderStatus {
 
     if (googleReaderStatus == fullyAuthenticated) {
         [clientRequest setPostValue:self.tToken forKey:@"T"];
+        return;
     } else if (googleReaderStatus == waitingTToken && myRequest != nil) {
         LLog(@"Waiting as another instance has requested T token");
         [clientRequest addDependency:myRequest];
-        [clientRequest setQueuePriority:NSOperationQueuePriorityLow];
         if (clientRequest != nil) {
             [tTokenWaitQueue addObject:clientRequest];
         }
@@ -317,7 +316,6 @@ enum GoogleReaderStatus {
     } else {
         LLog(@"Start T token Request");
         myRequest = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
-        googleReaderStatus = waitingTToken;
         [myRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
         myRequest.delegate = nil;
         __weak typeof(myRequest)weakRequest = myRequest;
@@ -353,7 +351,7 @@ enum GoogleReaderStatus {
             }
         }];
         [clientRequest addDependency:myRequest];
-        [clientRequest setQueuePriority:NSOperationQueuePriorityLow];
+        googleReaderStatus = waitingTToken;
         if (clientRequest != nil) {
             [tTokenWaitQueue addObject:clientRequest];
         }
