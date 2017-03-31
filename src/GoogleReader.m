@@ -166,10 +166,10 @@ enum GoogleReaderStatus {
 {
     static ASIFormDataRequest *myRequest;
 
-    if (googleReaderStatus == fullyAuthenticated || googleReaderStatus == missingTToken) {
+    if (googleReaderStatus == fullyAuthenticated || googleReaderStatus == waitingTToken || googleReaderStatus == missingTToken) {
         [clientRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", self.clientAuthToken]];
         return; //we are already connected
-    } else if ((googleReaderStatus == waitingClientToken || googleReaderStatus == waitingTToken) && myRequest != nil) {
+    } else if ((googleReaderStatus == waitingClientToken ) && myRequest != nil) {
         LLog(@"Waiting because another instance is authenticating");
         [clientRequest addDependency:myRequest];
         if (clientRequest != nil) {
@@ -206,11 +206,11 @@ enum GoogleReaderStatus {
             LOG_EXPR([strongRequest responseHeaders]);
             LOG_EXPR([[NSString alloc] initWithData:[strongRequest responseData] encoding:NSUTF8StringEncoding]);
             [strongRequest clearDelegatesAndCancel];
-            googleReaderStatus = notAuthenticated;
             for (id obj in [clientAuthWaitQueue reverseObjectEnumerator]) {
                 [(ASIHTTPRequest *)obj cancel];
                 [clientAuthWaitQueue removeObject:obj];
             }
+            googleReaderStatus = notAuthenticated;
         }];
         [myRequest setCompletionBlock:^{
             __strong typeof(weakRequest)strongRequest = weakRequest;
@@ -218,13 +218,13 @@ enum GoogleReaderStatus {
                 LOG_EXPR([strongRequest responseStatusCode]);
                 LOG_EXPR([strongRequest responseHeaders]);
                 [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
-                [APPCONTROLLER setStatusMessage:nil persist:NO];
                 [strongRequest clearDelegatesAndCancel];
                 googleReaderStatus = notAuthenticated;
                 for (id obj in [clientAuthWaitQueue reverseObjectEnumerator]) {
                     [(ASIHTTPRequest *)obj cancel];
                     [clientAuthWaitQueue removeObject:obj];
                 }
+                [APPCONTROLLER setStatusMessage:nil persist:NO];
             } else {
                 NSString *response = [strongRequest responseString];
                 NSArray *components = [response componentsSeparatedByString:@"\n"];
@@ -232,6 +232,7 @@ enum GoogleReaderStatus {
                 //NSString * sid = [[components objectAtIndex:0] substringFromIndex:4];		//unused
                 //NSString * lsid = [[components objectAtIndex:1] substringFromIndex:5];	//unused
                 self.clientAuthToken = [NSString stringWithString:[components[2] substringFromIndex:5]];
+                googleReaderStatus = missingTToken;
 
                 for (id obj in clientAuthWaitQueue) {
                     [(ASIHTTPRequest *)obj addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@",
@@ -240,8 +241,6 @@ enum GoogleReaderStatus {
                 for (id obj in [clientAuthWaitQueue reverseObjectEnumerator]) {
                     [clientAuthWaitQueue removeObject:obj];
                 }
-
-                googleReaderStatus = missingTToken;
 
                 if (clientAuthTimer == nil || !clientAuthTimer.valid) {
                     //new request every 6 days
@@ -313,9 +312,17 @@ enum GoogleReaderStatus {
             [tTokenWaitQueue addObject:clientRequest];
         }
         return;
+    } else if (googleReaderStatus == notAuthenticated || googleReaderStatus == waitingClientToken) {
+        if (clientRequest != nil) {
+            [tTokenWaitQueue addObject:clientRequest];
+        }
+        [clientRequest setQueuePriority:NSOperationQueuePriorityLow];
+        return;
     } else {
+        // googleReaderStatus ==  missingTToken
         LLog(@"Start T token Request");
         myRequest = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
+        googleReaderStatus = waitingTToken;
         [myRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
         myRequest.delegate = nil;
         __weak typeof(myRequest)weakRequest = myRequest;
@@ -351,7 +358,6 @@ enum GoogleReaderStatus {
             }
         }];
         [clientRequest addDependency:myRequest];
-        googleReaderStatus = waitingTToken;
         if (clientRequest != nil) {
             [tTokenWaitQueue addObject:clientRequest];
         }
