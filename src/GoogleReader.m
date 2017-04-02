@@ -236,9 +236,9 @@ enum GoogleReaderStatus {
                                                                           userInfo:nil
                                                                            repeats:YES];
                 }
-                // pause for half a second
+                // pause for a second
                 // to make sure dependent requests are launched only when the OpenReader server is ready
-                [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+                [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
             }
         }];
 
