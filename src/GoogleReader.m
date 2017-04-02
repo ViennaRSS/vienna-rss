@@ -56,24 +56,16 @@ enum GoogleReaderStatus {
 } googleReaderStatus;
 
 @interface GoogleReader()
-@property (nonatomic, copy) NSMutableArray * localFeeds;
-@property (atomic, copy) NSString *tToken;
-@property (atomic, copy) NSString *clientAuthToken;
-@property (nonatomic, strong) NSTimer * tTokenTimer;
-@property (nonatomic, strong) NSTimer * clientAuthTimer;
-@property (nonatomic, copy) NSMutableArray * clientAuthWaitQueue;
-@property (nonatomic, copy) NSMutableArray * tTokenWaitQueue;
+@property (nonatomic) NSMutableArray * localFeeds;
+@property (atomic) NSString *tToken;
+@property (atomic) NSString *clientAuthToken;
+@property (nonatomic) NSTimer * tTokenTimer;
+@property (nonatomic) NSTimer * clientAuthTimer;
+@property (nonatomic) NSMutableArray * clientAuthWaitQueue;
+@property (nonatomic) NSMutableArray * tTokenWaitQueue;
 @end
 
 @implementation GoogleReader
-
-@synthesize localFeeds;
-@synthesize tToken;
-@synthesize clientAuthToken;
-@synthesize tTokenTimer;
-@synthesize clientAuthTimer;
-@synthesize clientAuthWaitQueue;
-@synthesize tTokenWaitQueue;
 
 # pragma mark initialization
 
@@ -82,13 +74,11 @@ enum GoogleReaderStatus {
     self = [super init];
     if (self) {
         // Initialization code here.
-		localFeeds = [[NSMutableArray alloc] init];
+		_localFeeds = [[NSMutableArray alloc] init];
+		_clientAuthWaitQueue = [[NSMutableArray alloc] init];
+		_tTokenWaitQueue = [[NSMutableArray alloc] init];
 		googleReaderStatus = notAuthenticated;
 		countOfNewArticles = 0;
-		clientAuthToken= nil;
-		tToken=nil;
-		tTokenTimer=nil;
-		clientAuthTimer=nil;
 		openReaderHost=nil;
 		username=nil;
 		password=nil;
@@ -97,8 +87,6 @@ enum GoogleReaderStatus {
 									   @"AppID": @"1000001359",
 									   @"AppKey": @"rAlfs2ELSuFxZJ5adJAW54qsNbUa45Qn"
 									   };
-		clientAuthWaitQueue = [[NSMutableArray alloc] init];
-		tTokenWaitQueue = [[NSMutableArray alloc] init];
 	}
     
     return self;
@@ -172,7 +160,7 @@ enum GoogleReaderStatus {
     } else if ((googleReaderStatus == waitingClientToken ) && myRequest != nil) {
         [clientRequest addDependency:myRequest];
         if (clientRequest != nil) {
-            [clientAuthWaitQueue addObject:clientRequest];
+            [self.clientAuthWaitQueue addObject:clientRequest];
         }
         return;
     } else {
@@ -204,9 +192,9 @@ enum GoogleReaderStatus {
             LOG_EXPR([strongRequest responseHeaders]);
             LOG_EXPR([[NSString alloc] initWithData:[strongRequest responseData] encoding:NSUTF8StringEncoding]);
             [strongRequest clearDelegatesAndCancel];
-            for (id obj in [clientAuthWaitQueue reverseObjectEnumerator]) {
+            for (id obj in [self.clientAuthWaitQueue reverseObjectEnumerator]) {
                 [(ASIHTTPRequest *)obj cancel];
-                [clientAuthWaitQueue removeObject:obj];
+                [self.clientAuthWaitQueue removeObject:obj];
             }
             googleReaderStatus = notAuthenticated;
         }];
@@ -218,9 +206,9 @@ enum GoogleReaderStatus {
                 [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
                 [strongRequest clearDelegatesAndCancel];
                 googleReaderStatus = notAuthenticated;
-                for (id obj in [clientAuthWaitQueue reverseObjectEnumerator]) {
+                for (id obj in [self.clientAuthWaitQueue reverseObjectEnumerator]) {
                     [(ASIHTTPRequest *)obj cancel];
-                    [clientAuthWaitQueue removeObject:obj];
+                    [self.clientAuthWaitQueue removeObject:obj];
                 }
                 [APPCONTROLLER setStatusMessage:nil persist:NO];
             } else {
@@ -232,21 +220,21 @@ enum GoogleReaderStatus {
                 self.clientAuthToken = [NSString stringWithString:[components[2] substringFromIndex:5]];
                 googleReaderStatus = missingTToken;
 
-                for (id obj in clientAuthWaitQueue) {
+                for (id obj in self.clientAuthWaitQueue) {
                     [(ASIHTTPRequest *)obj addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@",
                                                                                  self.clientAuthToken]];
                 }
-                for (id obj in [clientAuthWaitQueue reverseObjectEnumerator]) {
-                    [clientAuthWaitQueue removeObject:obj];
+                for (id obj in [self.clientAuthWaitQueue reverseObjectEnumerator]) {
+                    [self.clientAuthWaitQueue removeObject:obj];
                 }
 
-                if (clientAuthTimer == nil || !clientAuthTimer.valid) {
+                if (self.clientAuthTimer == nil || !self.clientAuthTimer.valid) {
                     //new request every 6 days
-                    clientAuthTimer = [NSTimer scheduledTimerWithTimeInterval:6 * 24 * 3600
-                                                                 target:self
-                                                               selector:@selector(resetAuthentication)
-                                                               userInfo:nil
-                                                                repeats:YES];
+                    self.clientAuthTimer = [NSTimer scheduledTimerWithTimeInterval:6 * 24 * 3600
+                                                                            target:self
+                                                                          selector:@selector(resetAuthentication)
+                                                                          userInfo:nil
+                                                                           repeats:YES];
                 }
                 // pause for a second
                 // to make sure dependent requests are launched only when the OpenReader server is ready
@@ -257,7 +245,7 @@ enum GoogleReaderStatus {
         [clientRequest addDependency:myRequest];
         [myRequest setQueuePriority:NSOperationQueuePriorityHigh];
         if (clientRequest != nil) {
-            [clientAuthWaitQueue addObject:clientRequest];
+            [self.clientAuthWaitQueue addObject:clientRequest];
         }
         [[RefreshManager sharedManager] addConnection:myRequest];
         [APPCONTROLLER setStatusMessage:NSLocalizedString(@"Authenticating on Open Reader", nil) persist:NO];
@@ -309,12 +297,12 @@ enum GoogleReaderStatus {
     } else if (googleReaderStatus == waitingTToken && myRequest != nil) {
         [clientRequest addDependency:myRequest];
         if (clientRequest != nil) {
-            [tTokenWaitQueue addObject:clientRequest];
+            [self.tTokenWaitQueue addObject:clientRequest];
         }
         return;
     } else if (googleReaderStatus == notAuthenticated || googleReaderStatus == waitingClientToken) {
         if (clientRequest != nil) {
-            [tTokenWaitQueue addObject:clientRequest];
+            [self.tTokenWaitQueue addObject:clientRequest];
         }
         [clientRequest setQueuePriority:NSOperationQueuePriorityLow];
         return;
@@ -329,11 +317,11 @@ enum GoogleReaderStatus {
             __strong typeof(weakRequest)strongRequest = weakRequest;
             self.tToken = [strongRequest responseString];
             googleReaderStatus = fullyAuthenticated;
-            for (id obj in tTokenWaitQueue) {
+            for (id obj in self.tTokenWaitQueue) {
                 [(ASIFormDataRequest *)obj setPostValue:self.tToken forKey:@"T"];
             }
-            for (id obj in [tTokenWaitQueue reverseObjectEnumerator]) {
-                [tTokenWaitQueue removeObject:obj];
+            for (id obj in [self.tTokenWaitQueue reverseObjectEnumerator]) {
+                [self.tTokenWaitQueue removeObject:obj];
             }
             if (self.tTokenTimer == nil || !self.tTokenTimer.valid) {
                 //tokens expire after 30 minutes : renew them every 25 minutes
@@ -351,14 +339,14 @@ enum GoogleReaderStatus {
             self.tToken = nil;
             [strongRequest clearDelegatesAndCancel];
             googleReaderStatus = missingTToken;
-            for (id obj in [tTokenWaitQueue reverseObjectEnumerator]) {
+            for (id obj in [self.tTokenWaitQueue reverseObjectEnumerator]) {
                 [(ASIFormDataRequest *)obj cancel];
-                [tTokenWaitQueue removeObject:obj];
+                [self.tTokenWaitQueue removeObject:obj];
             }
         }];
         [clientRequest addDependency:myRequest];
         if (clientRequest != nil) {
-            [tTokenWaitQueue addObject:clientRequest];
+            [self.tTokenWaitQueue addObject:clientRequest];
         }
         [[RefreshManager sharedManager] addConnection:myRequest];
     }
@@ -415,7 +403,7 @@ enum GoogleReaderStatus {
 
 -(BOOL)isReady
 {
-	return (googleReaderStatus == fullyAuthenticated && tTokenTimer != nil);
+	return (googleReaderStatus == fullyAuthenticated && self.tTokenTimer != nil);
 }
 
 /* countOfNewArticles
@@ -839,12 +827,12 @@ enum GoogleReaderStatus {
 	subscriptionsDict = [NSJSONSerialization JSONObjectWithData:request.responseData
                 options:NSJSONReadingMutableContainers
                 error:&jsonError];
-	[localFeeds removeAllObjects];
+	[self.localFeeds removeAllObjects];
 	NSArray * localFolders = APPCONTROLLER.folders;
 	
 	for (Folder * f in localFolders) {
 		if (f.feedURL) {
-			[localFeeds addObject:f.feedURL];
+			[self.localFeeds addObject:f.feedURL];
 		}
 	}
 			
@@ -877,7 +865,7 @@ enum GoogleReaderStatus {
 			} 
 		}
 		
-		if (![localFeeds containsObject:feedURL])
+		if (![self.localFeeds containsObject:feedURL])
 		{
 			NSString *rssTitle = @"";
 			if (feed[@"title"]) {
