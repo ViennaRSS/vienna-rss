@@ -10,6 +10,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
             <connections>
                 <outlet property="delegate" destination="233" id="319"/>
+                <outlet property="dockMenu" destination="JWi-Bw-kAV" id="S3Z-Bl-WjG"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -351,7 +352,7 @@
             <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
         </progressIndicator>
-        <menu systemMenu="main" id="29" userLabel="MainMenu">
+        <menu systemMenu="main" id="29">
             <items>
                 <menuItem title="Vienna" id="56">
                     <menu key="submenu" title="Vienna" systemMenu="apple" id="57">
@@ -1139,6 +1140,23 @@ CA
                     </menu>
                 </menuItem>
             </items>
+        </menu>
+        <menu id="JWi-Bw-kAV">
+            <items>
+                <menuItem title="Refresh All Subscriptions" id="6yn-y8-lF1">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="refreshAllSubscriptions:" target="-1" id="i6D-zi-CKg"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Mark All Subscriptions as Read" id="ecl-HO-Kpi">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="markAllSubscriptionsRead:" target="-1" id="uou-sC-Ho7"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="-752" y="-468"/>
         </menu>
         <customObject id="233" userLabel="AppController" customClass="AppController">
             <connections>

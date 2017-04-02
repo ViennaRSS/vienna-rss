@@ -87,7 +87,6 @@
 	Database * db;
 	PluginManager * pluginManager;
 	NSMutableDictionary * scriptPathMappings;
-	NSMenu * appDockMenu;
 	NSStatusItem * appStatusItem;
 	NSInteger progressCount;
 	NSDictionary * standardURLs;

@@ -904,20 +904,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         [self.rssFeed newSubscription:mainWindow underParent:foldersTree.groupParentSelection initialURL:urlStr];
 }
 
-#pragma mark Dock Menu
-
-/* applicationDockMenu
- * Return a menu with additional commands to be displayd on the application's
- * popup dock menu.
- */
--(NSMenu *)applicationDockMenu:(NSApplication *)sender
-{
-	appDockMenu = [NSMenu new];
-	[appDockMenu addItem:copyOfMenuItemWithAction(@selector(refreshAllSubscriptions:))];
-	[appDockMenu addItem:copyOfMenuItemWithAction(@selector(markAllSubscriptionsRead:))];
-	return appDockMenu;
-}
-
 /* contextMenuItemsForElement
  * Creates a new context menu for our web pane.
  */
