@@ -21,7 +21,6 @@
 #import "Database.h"
 #import "Preferences.h"
 #import "StringExtensions.h"
-#import "CalendarExtensions.h"
 #import "Constants.h"
 #import "ArticleRef.h"
 #import "SearchString.h"
@@ -1581,12 +1580,13 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(void)purgeArticlesOlderThanDays:(NSUInteger)daysToKeep
 {
-	if (daysToKeep > 0)
-	{
-		NSInteger dayDelta = (daysToKeep % 1000);
-		NSInteger monthDelta = (daysToKeep / 1000);
-		NSTimeInterval timeDiff = [[NSCalendarDate calendarDate] dateByAddingYears:0 months:-monthDelta days:-dayDelta hours:0 minutes:0 seconds:0].timeIntervalSince1970;
-        
+    if (daysToKeep > 0) {
+        NSDate *date = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay
+                                                                value:-daysToKeep
+                                                               toDate:[NSDate date]
+                                                              options:0];
+        NSTimeInterval timeDiff = date.timeIntervalSince1970;
+
         [databaseQueue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update messages set deleted_flag=1 where deleted_flag=0 and marked_flag=0 and read_flag=1 and date < ?", @(timeDiff)];
         }];
@@ -2082,39 +2082,47 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 				}
 				
 			case MA_FieldType_Date: {
-				NSCalendarDate * startDate = [NSCalendarDate date];
-				NSString * criteriaValue = criteria.value.lowercaseString;
-				NSInteger spanOfDays = 1;
-				
-				// "yesterday" is a short hand way of specifying the previous day.
-				if ([criteriaValue isEqualToString:@"yesterday"])
-				{
-					startDate = [startDate dateByAddingYears:0 months:0 days:-1 hours:0 minutes:0 seconds:0];
-				}
-				// "last week" is a short hand way of specifying a range from 7 days ago to today.
-				else if ([criteriaValue isEqualToString:@"last week"])
-				{
-					startDate = [startDate dateByAddingYears:0 months:0 days:-6 hours:0 minutes:0 seconds:0];
-					spanOfDays = 7;
-				}
-				
-				criteriaValue = [NSString stringWithFormat:@"%ld/%ld/%ld %d:%d:%d", (long)[startDate dayOfMonth], (long)[startDate monthOfYear], (long)[startDate yearOfCommonEra], 0, 0, 0];
-				startDate = [NSCalendarDate dateWithString:criteriaValue calendarFormat:@"%d/%m/%Y %H:%M:%S"];
-				
-				if (criteria.operator == MA_CritOper_Is)
-				{
-					NSCalendarDate * endDate;
+                NSCalendar *calendar = NSCalendar.currentCalendar;
+                NSDate *startDate = [calendar startOfDayForDate:[NSDate date]];
+                NSString * criteriaValue = criteria.value.lowercaseString;
+                NSCalendarUnit calendarUnit = NSCalendarUnitDay;
 
-					// Special case for Date is <date> because the resolution of the date field is in
-					// milliseconds. So we need to translate this to a range for this to make sense.
-					endDate = [startDate dateByAddingYears:0 months:0 days:spanOfDays hours:0 minutes:0 seconds:0];
-					operatorString = [NSString stringWithFormat:@">=%f and %@<%f", startDate.timeIntervalSince1970, field.sqlField, endDate.timeIntervalSince1970];
+                // "yesterday" is a short hand way of specifying the previous day.
+                if ([criteriaValue isEqualToString:@"yesterday"])
+                {
+                    startDate = [calendar dateByAddingUnit:NSCalendarUnitDay
+                                                     value:-1
+                                                    toDate:startDate
+                                                   options:0];
+                }
+                // "last week" is a short hand way of specifying a range from 7 days ago to today.
+                else if ([criteriaValue isEqualToString:@"last week"])
+                {
+                    startDate = [calendar dateByAddingUnit:NSCalendarUnitWeekOfYear
+                                                     value:-1
+                                                    toDate:startDate
+                                                   options:0];
+                    calendarUnit = NSCalendarUnitWeekOfYear;
+                }
+
+                if (criteria.operator == MA_CritOper_Is)
+                {
+                    NSDate *endDate = [calendar dateByAddingUnit:calendarUnit
+                                                           value:1
+                                                          toDate:startDate
+                                                         options:0];
+                    operatorString = [NSString stringWithFormat:@">=%f and %@<%f", startDate.timeIntervalSince1970, field.sqlField, endDate.timeIntervalSince1970];
 					valueString = @"";
 				}
 				else
 				{
-					if ((criteria.operator == MA_CritOper_IsAfter) || (criteria.operator == MA_CritOper_IsOnOrBefore))
-						startDate = [startDate dateByAddingYears:0 months:0 days:0 hours:23 minutes:59 seconds:59];
+                    if ((criteria.operator == MA_CritOper_IsAfter) || (criteria.operator == MA_CritOper_IsOnOrBefore)) {
+                        startDate = [calendar dateByAddingUnit:NSCalendarUnitDay
+                                                         value:1
+                                                        toDate:startDate
+                                                       options:0];
+                    }
+
 					valueString = [NSString stringWithFormat:@"%f", startDate.timeIntervalSince1970];
 				}
 				break;

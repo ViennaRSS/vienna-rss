@@ -150,7 +150,7 @@
     NSXMLElement *headElement = [NSXMLElement elementWithName:@"head"];
     NSXMLElement *title = [NSXMLElement elementWithName:@"title" stringValue:@"Vienna Subscriptions"];
     NSXMLElement *dateCreated = [NSXMLElement elementWithName:@"dateCreated"
-                                                  stringValue:[NSCalendarDate date].description];
+                                                  stringValue:[NSDate new].description];
     [headElement addChild:title];
     [headElement addChild:dateCreated];
     [opmlElement addChild:headElement];

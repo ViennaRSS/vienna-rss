@@ -80,7 +80,7 @@ static BOOL threadSafe;
 
 
 /* parseXMLDate
- * Parse a date in an XML header into an NSCalendarDate.
+ * Parse a date in an XML header into an NSDate.
  *
  */
 + (NSDate *)parseXMLDate:(NSString *)dateString

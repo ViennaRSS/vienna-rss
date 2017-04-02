@@ -23,12 +23,12 @@
 #import "ArticleListView.h"
 #import "Preferences.h"
 #import "Constants.h"
+#import "DateFormatterExtension.h"
 #import "AppController.h"
 #import "ArticleController.h"
 #import "SplitViewExtensions.h"
 #import "MessageListView.h"
 #import "ArticleView.h"
-#import "CalendarExtensions.h"
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
 #import "ArticleRef.h"
@@ -1387,8 +1387,7 @@
 		}
 		if ([db fieldByName:MA_Field_Date].visible)
 		{
-			NSCalendarDate * anDate = [theArticle.date dateWithCalendarFormat:nil timeZone:nil];
-			[summaryString appendFormat:@"%@%@", delimiter,anDate.friendlyDescription];
+			[summaryString appendFormat:@"%@%@", delimiter, [NSDateFormatter relativeDateStringFromDate:theArticle.date]];
 			delimiter = @" - ";
 		}
 		if ([db fieldByName:MA_Field_Author].visible)
@@ -1408,9 +1407,7 @@
 	NSString * cellString;
 	if ([identifier isEqualToString:MA_Field_Date])
 	{
-		NSDate * date = theArticle.date;
-		NSCalendarDate * calDate = [date dateWithCalendarFormat:nil timeZone:nil];
-		cellString = calDate.friendlyDescription;
+        cellString = [NSDateFormatter relativeDateStringFromDate:theArticle.date];
 	}
 	else if ([identifier isEqualToString:MA_Field_Folder])
 	{

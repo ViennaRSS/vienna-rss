@@ -1,15 +1,14 @@
 //
-//  CalendarExtensions.h
+//  DateFormatterExtension.h
 //  Vienna
 //
-//  Created by Steve on Sun Apr 11 2004.
-//  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
+//  Copyright 2017
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
 //  You may obtain a copy of the License at
 //
-//  http://www.apache.org/licenses/LICENSE-2.0
+//  https://www.apache.org/licenses/LICENSE-2.0
 //
 //  Unless required by applicable law or agreed to in writing, software
 //  distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,10 +17,17 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Foundation;
 
-@interface NSCalendarDate (CalendarExtensions)
-	+(NSCalendarDate *)today;
-	@property (nonatomic, readonly, copy) NSString *friendlyDescription;
+@interface NSDateFormatter (RelativeDateFormatter)
+
+/**
+ Returns a string representation of a given date, formatted for the current
+ locale using relative-date formatting and short date and time styles.
+
+ @param date A date.
+ @return A localized, relative-date string representation of the date.
+ */
++ (nonnull NSString *)relativeDateStringFromDate:(nonnull NSDate *)date;
+
 @end
-
