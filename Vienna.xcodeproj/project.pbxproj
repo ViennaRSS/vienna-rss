@@ -303,8 +303,6 @@
 		AACAEA3E0954E71100ACD502 /* DemoFeeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */; };
 		AAD2BF620C2C41A200AA0F11 /* DBListSplitViewBar.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BF600C2C41A200AA0F11 /* DBListSplitViewBar.tiff */; };
 		AAD2BF630C2C41A200AA0F11 /* DBListSplitViewDimple.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BF610C2C41A200AA0F11 /* DBListSplitViewDimple.tiff */; };
-		AAD2C0540C2C882D00AA0F11 /* selBlue.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD2C0520C2C882D00AA0F11 /* selBlue.tiff */; };
-		AAD2C0550C2C882D00AA0F11 /* selGray.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD2C0530C2C882D00AA0F11 /* selGray.tiff */; };
 		AAD794E7088A25D200E2CE5E /* PopUpButtonExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */; };
 		AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */; };
 		AADD6E820C457C3800E11097 /* getInfoButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AADD6E800C457C3800E11097 /* getInfoButton.tiff */; };
@@ -808,8 +806,6 @@
 		AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = DemoFeeds.plist; path = Resources/DemoFeeds.plist; plistStructureDefinitionIdentifier = "<none>"; sourceTree = SOURCE_ROOT; };
 		AAD2BF600C2C41A200AA0F11 /* DBListSplitViewBar.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = DBListSplitViewBar.tiff; path = Resources/DBListSplitViewBar.tiff; sourceTree = SOURCE_ROOT; };
 		AAD2BF610C2C41A200AA0F11 /* DBListSplitViewDimple.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = DBListSplitViewDimple.tiff; path = Resources/DBListSplitViewDimple.tiff; sourceTree = SOURCE_ROOT; };
-		AAD2C0520C2C882D00AA0F11 /* selBlue.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = selBlue.tiff; path = Resources/selBlue.tiff; sourceTree = SOURCE_ROOT; };
-		AAD2C0530C2C882D00AA0F11 /* selGray.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = selGray.tiff; path = Resources/selGray.tiff; sourceTree = SOURCE_ROOT; };
 		AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopUpButtonExtensions.h; path = src/PopUpButtonExtensions.h; sourceTree = SOURCE_ROOT; };
 		AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PopUpButtonExtensions.m; path = src/PopUpButtonExtensions.m; sourceTree = SOURCE_ROOT; };
 		AAD7999D088B617900E2CE5E /* AddressBarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AddressBarCell.h; path = src/AddressBarCell.h; sourceTree = SOURCE_ROOT; };
@@ -1677,8 +1673,6 @@
 				AAD2BF610C2C41A200AA0F11 /* DBListSplitViewDimple.tiff */,
 				AA13A08A0C36D34C00C64338 /* filterViewBackground.tiff */,
 				AA18C4950C43F24900E11C0C /* browserBarBackground.tiff */,
-				AAD2C0520C2C882D00AA0F11 /* selBlue.tiff */,
-				AAD2C0530C2C882D00AA0F11 /* selGray.tiff */,
 				AA7F231510FA287700856924 /* blankButton.tiff */,
 				5766690116DEB5C4001C8786 /* blankButton@2x.tiff */,
 				AA7F231610FA287700856924 /* blankButtonPressedEmbossed.tiff */,
@@ -2312,8 +2306,6 @@
 				AAD2BF620C2C41A200AA0F11 /* DBListSplitViewBar.tiff in Resources */,
 				AAD2BF630C2C41A200AA0F11 /* DBListSplitViewDimple.tiff in Resources */,
 				F6A7DE4F1E471A7F0017BE5E /* Vienna.help in Resources */,
-				AAD2C0540C2C882D00AA0F11 /* selBlue.tiff in Resources */,
-				AAD2C0550C2C882D00AA0F11 /* selGray.tiff in Resources */,
 				AA16C2B10C2D57D5006BBAC1 /* draggerImage.png in Resources */,
 				AA16C5450C2DD4EB006BBAC1 /* refreshProgress.tiff in Resources */,
 				AA13A08B0C36D34C00C64338 /* filterViewBackground.tiff in Resources */,

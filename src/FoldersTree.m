@@ -98,9 +98,6 @@
 	// Create and set whatever font we're using for the folders
 	[self setFolderListFont];
 
-	// Set background colour
-	outlineView.backgroundColor = [NSColor colorWithCalibratedRed:0.84 green:0.87 blue:0.90 alpha:1.00];
-		
 	// Allow a second click in a node to edit the node
 	outlineView.action = @selector(handleSingleClick:);
 	outlineView.doubleAction = @selector(handleDoubleClick:);
@@ -121,15 +118,6 @@
 	[outlineView scrollRowToVisible:outlineView.selectedRow];
 
     [outlineView accessibilitySetOverrideValue:NSLocalizedString(@"Folders", nil) forAttribute:NSAccessibilityDescriptionAttribute];
-}
-
-/* setOutlineViewBackgroundColor
- * Sets the color of the background view. 
- */
-
--(void)setOutlineViewBackgroundColor: (NSColor *)color;
-{
-	outlineView.backgroundColor = color;
 }
 
 /* initialiseFoldersTree
@@ -917,13 +905,11 @@
 	}
 
 	Folder * folder = node.folder;
-	NSInteger rowIndex = [olv rowForItem:item];
-	NSMutableDictionary * myInfo = [NSMutableDictionary dictionaryWithDictionary:info];
-	// Set the colour of the text in the cell : default is blackColor
+    NSMutableDictionary * myInfo = [NSMutableDictionary dictionaryWithDictionary:info];
 	if (IsUnsubscribed(folder))
-		myInfo[NSForegroundColorAttributeName] = [NSColor grayColor];
-	else if (olv.selectedRow == rowIndex && olv.editedRow != rowIndex)
-		myInfo[NSForegroundColorAttributeName] = [NSColor whiteColor];
+		myInfo[NSForegroundColorAttributeName] = [NSColor secondaryLabelColor];
+    else
+        myInfo[NSForegroundColorAttributeName] = [NSColor labelColor];
 	// Set the font
 	if (folder.unreadCount ||  (folder.childUnreadCount && ![olv isItemExpanded:item]))
 		myInfo[NSFontAttributeName] = boldCellFont;
