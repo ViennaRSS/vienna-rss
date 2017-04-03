@@ -328,6 +328,9 @@ enum GoogleReaderStatus {
                 self.tTokenTimer =
                 [NSTimer scheduledTimerWithTimeInterval:25 * 60 target:self selector:@selector(renewTToken) userInfo:nil repeats:YES];
             }
+            // pause for half a second
+            // to make sure dependent requests are launched only when the OpenReader server is ready
+            [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
         }];
         [myRequest setFailedBlock:^{
             __strong typeof(weakRequest)strongRequest = weakRequest;
