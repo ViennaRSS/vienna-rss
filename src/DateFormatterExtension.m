@@ -30,6 +30,11 @@
         _relativeDateFormatter.doesRelativeDateFormatting = YES;
         _relativeDateFormatter.dateStyle = NSDateFormatterShortStyle;
         _relativeDateFormatter.timeStyle = NSDateFormatterShortStyle;
+
+        if ([_relativeDateFormatter respondsToSelector:@selector(formattingContext)]) {
+            _relativeDateFormatter.formattingContext = NSFormattingContextDynamic;
+        }
+
     });
 
     return _relativeDateFormatter;
