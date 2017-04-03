@@ -565,7 +565,9 @@ enum GoogleReaderStatus {
 		}
 	
 		// Log number of bytes we received
-		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), data.length]];
+        NSString *byteCount = [NSByteCountFormatter stringFromByteCount:data.length
+                                                             countStyle:NSByteCountFormatterCountStyleFile];
+		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%@ received", @"Number of bytes received, e.g. 1 MB received"), byteCount]];
 					
 		LLog(@"%ld items returned from %@", [subscriptionsDict[@"items"] count], [request url]);
 		NSMutableArray * articleArray = [NSMutableArray array];

@@ -586,7 +586,10 @@
 			
 			// Log additional details about this.
 			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), request.url]];
-			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [request responseData].length]];
+
+            NSString *byteCount = [NSByteCountFormatter stringFromByteCount:[request responseData].length
+                                                                 countStyle:NSByteCountFormatterCountStyleFile];
+            [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%@ received", @"Number of bytes received, e.g. 1 MB received"), byteCount]];
 		}
 	} else {
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), request.responseStatusCode]];
@@ -848,7 +851,9 @@
 			}
             
 			// Log number of bytes we received
-			[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), receivedData.length]];
+            NSString *byteCount = [NSByteCountFormatter stringFromByteCount:receivedData.length
+                                                                 countStyle:NSByteCountFormatterCountStyleFile];
+			[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%@ received", @"Number of bytes received, e.g. 1 MB received"), byteCount]];
 			
 			if(newFeed.items.count == 0)
 			{
