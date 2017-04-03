@@ -1413,7 +1413,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 }
 
 -(void)handleGoogleDownloadSubscriptions:(NSNotification *)nc {
-	[[GoogleReader sharedManager] loadSubscriptions:nil];
+	[[GoogleReader sharedManager] loadSubscriptions];
 }
 
 
@@ -2695,7 +2695,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		NSString * folderName = [db folderFromID:parentId].name;
 		if (folderName != nil)
 			[myGoogle setFolderName:folderName forFeed:urlString set:TRUE];
-		[myGoogle loadSubscriptions:nil];
+		[myGoogle loadSubscriptions];
 
 	}
 	else
@@ -3521,7 +3521,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 }
 
 -(IBAction)updateRemoteSubscriptions:(id)sender {
-	[[GoogleReader sharedManager] loadSubscriptions:nil];
+	[[GoogleReader sharedManager] loadSubscriptions];
 }
 
 

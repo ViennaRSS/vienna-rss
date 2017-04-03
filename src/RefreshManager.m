@@ -246,7 +246,7 @@
 {   
     syncType = MA_Sync_Refresh_All;
 	
-	if ([Preferences standardPreferences].syncGoogleReader) [[GoogleReader sharedManager] loadSubscriptions:nil];
+	if ([Preferences standardPreferences].syncGoogleReader) [[GoogleReader sharedManager] loadSubscriptions];
 	
     [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
