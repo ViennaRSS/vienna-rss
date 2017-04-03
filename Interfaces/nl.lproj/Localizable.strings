@@ -3,7 +3,7 @@
 "Mark Unflagged" = "Hef markering op";
 "Articles" = "Artikelen";
 "Folders" = "Mappen";
-"Loading %@..." = "%@ wordt geladen...";
+"Loading %@…" = "%@ wordt geladen…";
 "Completed" = "Voltooid";
 "Refresh RSS feeds" = "Werk abonnementen bij";
 "Refresh All Subscriptions" = "Werk alle abonnementen bij";
@@ -57,7 +57,7 @@
 "Refresh all your subscriptions" = "Werk alle abonnementen bij";
 "New style title" = "Vienna heeft een nieuwe stijl geïnstalleerd";
 "New style body" = "De stijl \"%@\" is in uw stijlenmap geïnstalleerd en toegevoegd aan het menu Stijlen.";
-"More Styles..." = "Meer stijlen…";
+"More Styles…" = "Meer stijlen…";
 "Delete selected message" = "Weet u zeker dat u de geselecteerde berichten wilt verwijderen?";
 "Delete selected message text" = "Deze actie kan niet ongedaan worden gemaakt.";
 "Cancel" = "Annuleer";
@@ -65,8 +65,8 @@
 "From" = "Van";
 "To" = "Aan";
 "(No title)" = "(Geen onderwerp)";
-"Refreshing folder images..." = "Map-iconen bijwerken...";
-"Refreshing subscriptions..." = "Abonnementen bijwerken...";
+"Refreshing folder images…" = "Map-iconen bijwerken…";
+"Refreshing subscriptions…" = "Abonnementen bijwerken…";
 "Authenticating with user name '%@'" = "Aanmelden met gebruikersnaam \"%@\"";
 "No new articles available" = "Geen nieuwe artikelen beschikbaar";
 "%d new articles retrieved" = "%d nieuwe artikelen opgehaald";
@@ -86,7 +86,7 @@
 "Error parsing XML data in feed" = "Fout tijdens het verwerken van de XML van deze feed";
 "Retrieving folder image" = "Map-icoon ophalen";
 "Folder image retrieved from %@" = "Map-icoon opgehaald van %@";
-"Contacting..." = "Verbinden...";
+"Contacting…" = "Verbinden…";
 "Connect Running" = "Er is een verbinding gaande";
 "Connect Running text" = "Wilt u de verbinding verbreken en Vienna nu afsluiten?";
 "Delete group folder" = "Wis groep";
@@ -97,7 +97,7 @@
 "Delete RSS feed" = "Zeg abonnement op";
 "Delete multiple folders text" = "Weet u zeker dat u deze %d groepen wilt verwijderen? U kunt dit niet ongedaan maken.";
 "Delete multiple folders" = "Verwijder meerdere groepen";
-"Delete folder status" = "Groep \"%@\" verwijderen...";
+"Delete folder status" = "Groep \"%@\" verwijderen…";
 "An error has occurred" = "Er is iets fout gegaan.";
 "Your software is up to date" = "U gebruikt de actuele versie van Vienna.";
 "Please try again later" = "Probeer het later nogmaals.";
@@ -120,7 +120,7 @@
 "Unread Articles" = "Ongelezen artikelen";
 "Today's Articles" = "Artikelen van vandaag";
 "Trash" = "Prullenmand";
-"Select..." = "Selecteer...";
+"Select…" = "Selecteer…";
 " (%d unread)" = " (%d ongelezen)";
 "is" = "is";
 "is not" = "is niet";
@@ -149,14 +149,14 @@
 "Recents" = "Recente onderdelen";
 "Clear" = "Wis zoekgeschiedenis";
 "Search web page" = "Doorzoek webpagina";
-"Loading..." = "Laadt...";
+"Loading…" = "Laadt…";
 "Open Image in New Tab" = "Open afbeelding in nieuwe tab";
 "Open Link in New Tab" = "Open koppeling in nieuwe tab";
 "Open Link in %@" = "Open koppeling in %@";
 "Open Page in %@" = "Open pagina in %@";
 "Copy Page Link to Clipboard" ="Kopieer locatie naar klembord";
 "%d unread articles" = "%d ongelezen artikelen";
-"More Scripts..." = "Meer scripts…";
+"More Scripts…" = "Meer scripts…";
 "Install Update" = "Installeer update";
 "Do Not Install" = "Niet nu";
 "Replace smart folder title" = "Er bestaat al een slimme map %@";
@@ -319,14 +319,14 @@
 "%u unread" = "%u ongelezen";
 "Keyboard Shortcuts" = "Toetscombinaties";
 "%@ (Filtered: %@)" = "%@ (Filter: %@)";
-"Get Info..." = "Toon info...";
-"Open Web Location..." = "Open weblocatie...";
+"Get Info…" = "Toon info…";
+"Open Web Location…" = "Open weblocatie…";
 "Refresh Folder Images" = "Werk map-iconen bij";
 "Report" = "Rapport";
 "Condensed" = "Verkort";
 "Unified" = "Verenigd";
 "Summary" = "Samevatting";
-"Blog With..." = "Blog met...";
+"Blog With…" = "Blog met…";
 "Blog with %@" = "Blog met %@";
 "Bigger Text" = "Grotere tekst";
 "Smaller Text" = "Kleinere tekst";
@@ -348,7 +348,7 @@
 "Local File" = "Lokaal bestand";
 "Hide Status Bar" = "Verberg statusbalk";
 "Show Status Bar" = "Toon statusbalk";
-"Customize Toolbar..." = "Pas knoppenbalk aan...";
+"Customize Toolbar…" = "Pas knoppenbalk aan…";
 "Search Articles" = "Zoek artikelen";
 "Progress" = "Voortgang";
 "Delete all articles in the trash" = "Wis alle artikelen in de prullenmand";
@@ -399,7 +399,7 @@
 
 /* Added in 2.6.0 */
 "Article load completed" = "Artikel laden compleet";
-"Loading HTML article..." = "Laadt HTML artikel...";
+"Loading HTML article…" = "Laadt HTML artikel…";
 "Ascending" = "Oplopend";
 "Descending" = "Aflopend";
 "Use Current Style for Articles" = "Gebruik huidige stijl voor artikelen";
@@ -420,7 +420,7 @@
 "Authenticating on Open Reader" = "Authenticating on Open Reader";
 "Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
 "Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
-"Fetching Open Reader Subscriptions..." = "Fetching Open Reader Subscriptions...";
+"Fetching Open Reader Subscriptions…" = "Fetching Open Reader Subscriptions…";
 "Open Reader Authentication Failed" = "Open Reader Authentication Failed";
 "Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
 
@@ -437,7 +437,7 @@
 "Plugin could not be installed" = "Plugin could not be installed";
 "Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
 "Queue" = "Queue";
-"Forcing Refresh subscriptions..." = "Forcing Refresh subscriptions...";
+"Forcing Refresh subscriptions…" = "Forcing Refresh subscriptions…";
 "Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
 
 /* Added in 3.0.2 */

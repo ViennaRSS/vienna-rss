@@ -588,7 +588,7 @@ enum GoogleReaderStatus {
 			} else if (newsItem[@"summary"] != nil ) {
 				article.body = newsItem[@"summary"][@"content"];
 			} else {
-				article.body = @"Not available...";
+				article.body = @"Not available…";
 			}
 			
 			for (NSString * category in (NSArray*)newsItem[@"categories"])
@@ -833,7 +833,7 @@ enum GoogleReaderStatus {
 
 -(void)submitLoadSubscriptions {
 	
-	[APPCONTROLLER setStatusMessage:NSLocalizedString(@"Fetching Open Reader Subscriptions...", nil) persist:NO];
+	[APPCONTROLLER setStatusMessage:NSLocalizedString(@"Fetching Open Reader Subscriptions…", nil) persist:NO];
 
 
 	ASIHTTPRequest *subscriptionRequest = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json",APIBaseURL,ClientName]]];

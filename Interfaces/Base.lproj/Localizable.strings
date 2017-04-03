@@ -3,7 +3,7 @@
 "Mark Unflagged" = "Mark Unflagged";
 "Articles" = "Articles";
 "Folders" = "Folders";
-"Loading %@..." = "Loading %@...";
+"Loading %@…" = "Loading %@…";
 "Completed" = "Completed";
 "Refresh RSS feeds" = "Refresh subscriptions";
 "Refresh All Subscriptions" = "Refresh All Subscriptions";
@@ -57,7 +57,7 @@
 "Refresh all your subscriptions" = "Refresh all your subscriptions";
 "New style title" = "Vienna has installed a new style";
 "New style body" = "The style \"%@\" has been installed to your Styles folder and added to the Style menu.";
-"More Styles..." = "More Styles…";
+"More Styles…" = "More Styles…";
 "Delete selected message" = "Are you sure you want to permanently delete the selected articles?";
 "Delete selected message text" = "This operation cannot be undone.";
 "Cancel" = "Cancel";
@@ -65,8 +65,8 @@
 "From" = "From";
 "To" = "To";
 "(No title)" = "(No title)";
-"Refreshing folder images..." = "Refreshing folder images...";
-"Refreshing subscriptions..." = "Refreshing subscriptions...";
+"Refreshing folder images…" = "Refreshing folder images…";
+"Refreshing subscriptions…" = "Refreshing subscriptions…";
 "Authenticating with user name '%@'" = "Authenticating with user name \"%@\"";
 "No new articles available" = "No new articles available";
 "%d new articles retrieved" = "%d new articles retrieved";
@@ -86,7 +86,7 @@
 "Error parsing XML data in feed" = "Error parsing XML data in feed";
 "Retrieving folder image" = "Retrieving folder image";
 "Folder image retrieved from %@" = "Folder image retrieved from %@";
-"Contacting..." = "Contacting...";
+"Contacting…" = "Contacting…";
 "Connect Running" = "A connection is in progress";
 "Connect Running text" = "Do you want to stop the connection and close Vienna now?";
 "Delete group folder" = "Delete group folder";
@@ -97,7 +97,7 @@
 "Delete RSS feed" = "Delete subscription";
 "Delete multiple folders text" = "Are you sure you want to delete all %d selected folders? This operation cannot be undone.";
 "Delete multiple folders" = "Delete multiple folders";
-"Delete folder status" = "Deleting folder \"%@\"...";
+"Delete folder status" = "Deleting folder \"%@\"…";
 "An error has occurred" = "An error has occurred.";
 "Your software is up to date" = "Your version of Vienna is up to date.";
 "Please try again later" = "Please try again later.";
@@ -120,7 +120,7 @@
 "Unread Articles" = "Unread Articles";
 "Today's Articles" = "Today’s Articles";
 "Trash" = "Trash";
-"Select..." = "Select...";
+"Select…" = "Select…";
 " (%d unread)" = " (%d unread)";
 "is" = "is";
 "is not" = "is not";
@@ -149,14 +149,14 @@
 "Recents" = "Recents";
 "Clear" = "Clear Recent Searches";
 "Search web page" = "Search web page";
-"Loading..." = "Loading...";
+"Loading…" = "Loading…";
 "Open Image in New Tab" = "Open Image in New Tab";
 "Open Link in New Tab" = "Open Link in New Tab";
 "Open Link in %@" = "Open Link in %@";
 "Open Page in %@" = "Open Page in %@";
 "Copy Page Link to Clipboard" ="Copy Page Link to Clipboard";
 "%d unread articles" = "%d unread articles";
-"More Scripts..." = "More Scripts…";
+"More Scripts…" = "More Scripts…";
 "Install Update" = "Install Update";
 "Do Not Install" = "Do Not Install";
 "Replace smart folder title" = "A smart folder named %@ already exists";
@@ -319,14 +319,14 @@
 "%u unread" = "%u unread";
 "Keyboard Shortcuts" = "Keyboard Shortcuts";
 "%@ (Filtered: %@)" = "%@ (Filter: %@)";
-"Get Info..." = "Get Info…";
-"Open Web Location..." = "Open Web Location…";
+"Get Info…" = "Get Info…";
+"Open Web Location…" = "Open Web Location…";
 "Refresh Folder Images" = "Refresh Folder Images";
 "Report" = "Horizontal";
 "Condensed" = "Vertical";
 "Unified" =  "Unified";
 "Summary" = "Summary";
-"Blog With..." = "Blog With…";
+"Blog With…" = "Blog With…";
 "Blog with %@" = "Blog with %@";
 "Bigger Text" = "Bigger Text";
 "Smaller Text" = "Smaller Text";
@@ -348,7 +348,7 @@
 "Local File" = "Local File";
 "Hide Status Bar" = "Hide Status Bar";
 "Show Status Bar" = "Show Status Bar";
-"Customize Toolbar..." = "Customize Toolbar…";
+"Customize Toolbar…" = "Customize Toolbar…";
 "Search Articles" = "Search Articles";
 "Progress" = "Progress";
 "Delete all articles in the trash" = "Delete all articles in the trash";
@@ -399,7 +399,7 @@
 
 /* Added in 2.6.0 */
 "Article load completed" = "Article load completed";
-"Loading HTML article..." = "Loading HTML article...";
+"Loading HTML article…" = "Loading HTML article…";
 "Ascending" = "Ascending";
 "Descending" = "Descending";
 "Use Current Style for Articles" = "Use Current Style for Articles";
@@ -420,7 +420,7 @@
 "Authenticating on Open Reader" = "Authenticating on Open Reader";
 "Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
 "Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
-"Fetching Open Reader Subscriptions..." = "Fetching Open Reader Subscriptions...";
+"Fetching Open Reader Subscriptions…" = "Fetching Open Reader Subscriptions…";
 "Open Reader Authentication Failed" = "Open Reader Authentication Failed";
 "Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
 
@@ -437,7 +437,7 @@
 "Plugin could not be installed" = "Plugin could not be installed";
 "Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
 "Queue" = "Queue";
-"Forcing Refresh subscriptions..." = "Forcing Refresh subscriptions...";
+"Forcing Refresh subscriptions…" = "Forcing Refresh subscriptions…";
 "Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
 
 /* Added in 3.0.2 */

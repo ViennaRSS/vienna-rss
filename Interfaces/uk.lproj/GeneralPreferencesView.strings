@@ -17,7 +17,7 @@
 "BbI-0A-zEG.title" = "Коли отримані нові статті:";
 
 /* Class = "NSMenuItem"; title = "Other…"; ObjectID = "FiK-E7-RnG"; */
-"FiK-E7-RnG.title" = "Інше...";
+"FiK-E7-RnG.title" = "Інше…";
 
 /* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "GnT-xT-rAZ"; */
 "GnT-xT-rAZ.title" = "Перевіряти наявність нових версій Vienna при запуску";

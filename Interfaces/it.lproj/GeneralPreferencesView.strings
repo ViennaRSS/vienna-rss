@@ -17,7 +17,7 @@
 "BbI-0A-zEG.title" = "Quando vengono recuperati nuovi articoli non letti:";
 
 /* Class = "NSMenuItem"; title = "Other…"; ObjectID = "FiK-E7-RnG"; */
-"FiK-E7-RnG.title" = "Altro...";
+"FiK-E7-RnG.title" = "Altro…";
 
 /* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "GnT-xT-rAZ"; */
 "GnT-xT-rAZ.title" = "Controlla nuove versioni di Vienna all'avvio";

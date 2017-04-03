@@ -3,7 +3,7 @@
 "Mark Unflagged" = "Supprimer le drapeau";
 "Articles" = "Articles";
 "Folders" = "Dossiers";
-"Loading %@..." = "Chargement %@…";
+"Loading %@…" = "Chargement %@…";
 "Completed" = "Terminé";
 "Refresh RSS feeds" = "Rafraîchir les abonnements";
 "Refresh All Subscriptions" = "Rafraîchir tous les abonnements";
@@ -57,7 +57,7 @@
 "Refresh all your subscriptions" = "Rafraîchir tous les abonnements";
 "New style title" = "Vienna a installé un nouveau style";
 "New style body" = "Le style '%@' a été installé dans le dossier des Styles et ajouté au menu Style.";
-"More Styles..." = "Plus de styles…";
+"More Styles…" = "Plus de styles…";
 "Delete selected message" = "Souhaitez-vous vraiment supprimer les articles sélectionnés ?";
 "Delete selected message text" = "Cette opération est irréversible.";
 "Cancel" = "Annuler";
@@ -65,8 +65,8 @@
 "From" = "De";
 "To" = "À";
 "(No title)" = "(pas de sujet)";
-"Refreshing folder images..." = "Refreshing folder images...";
-"Refreshing subscriptions..." = "Rafraîchissement des abonnements…";
+"Refreshing folder images…" = "Refreshing folder images…";
+"Refreshing subscriptions…" = "Rafraîchissement des abonnements…";
 "Authenticating with user name '%@'" = "Authentification par nom d'utilisateur '%@'";
 "No new articles available" = "Aucun nouvel article disponible";
 "%d new articles retrieved" = "%d nouveaux articles récupérés";
@@ -86,7 +86,7 @@
 "Error parsing XML data in feed" = "Erreur de traitement des données XML dans le flux";
 "Retrieving folder image" = "Récupération du dossier image";
 "Folder image retrieved from %@" = "Dossier image récupéré de %@";
-"Contacting..." = "Mise en connexion…";
+"Contacting…" = "Mise en connexion…";
 "Connect Running" = "Une connexion est en cours";
 "Connect Running text" = "Soutaitez-vous interrompre la connexion et fermer Vienna maintenant ?";
 "Delete group folder" = "Suppression d'un groupe";
@@ -120,7 +120,7 @@
 "Unread Articles" = "Articles non lus";
 "Today's Articles" = "Articles d'aujourd'hui";
 "Trash" = "Corbeille";
-"Select..." = "Sélectionner...";
+"Select…" = "Sélectionner…";
 " (%d unread)" = " (%d non lu)";
 "is" = "est";
 "is not" = "n'est pas";
@@ -149,14 +149,14 @@
 "Recents" = "Recents";
 "Clear" = "Effacer les recherches récentes";
 "Search web page" = "Rechercher dans la page Web";
-"Loading..." = "Chargement…";
+"Loading…" = "Chargement…";
 "Open Image in New Tab" = "Ouvrir l'image dans un nouvel onglet";
 "Open Link in New Tab" = "Ouvrir le lien dans un nouvel onglet";
 "Open Link in %@" = "Ouvrir le lien dans %@";
 "Open Page in %@" = "Ouvrir la page dans %@";
 "Copy Page Link to Clipboard" = "Copier le lien de la page";
 "%d unread articles" = "%d articles non lus";
-"More Scripts..." = "Plus de scripts…";
+"More Scripts…" = "Plus de scripts…";
 "Install Update" = "Installer la mise à jour";
 "Do Not Install" = "Ne pas installer";
 "Replace smart folder title" = "Un dossier intelligent nommé %@ existe déjà";
@@ -319,14 +319,14 @@
 "%u unread" = "%u non lus";
 "Keyboard Shortcuts" = "Raccourcis clavier";
 "%@ (Filtered: %@)" = "%@ (Filtre : %@)";
-"Get Info..." = "Obtenir les infos…";
-"Open Web Location..." = "Ouvrir une page Web…";
+"Get Info…" = "Obtenir les infos…";
+"Open Web Location…" = "Ouvrir une page Web…";
 "Refresh Folder Images" = "Rafraîchir le dossier des images";
 "Report" = "Horizontal";
 "Condensed" = "Vertical";
 "Unified" = "Unifié";
 "Summary" = "Résumé";
-"Blog With..." = "Blogger avec…";
+"Blog With…" = "Blogger avec…";
 "Blog with %@" = "Blogger avec %@";
 "Bigger Text" = "Texte plus gros";
 "Smaller Text" = "Texte plus petit";
@@ -348,7 +348,7 @@
 "Local File" = "Fichier local";
 "Hide Status Bar" = "Masquer la barre de status";
 "Show Status Bar" = "Afficher la barre de status";
-"Customize Toolbar..." = "Personnaliser la barre d'outils…";
+"Customize Toolbar…" = "Personnaliser la barre d'outils…";
 "Search Articles" = "Rechercher des articles";
 "Progress" = "Progression";
 "Delete all articles in the trash" = "Placer tous les articles dans la corbeille";
@@ -399,7 +399,7 @@
 
 /* Added in 2.6.0 */
 "Article load completed" = "Chargement de l'article terminé";
-"Loading HTML article..." = "Chargement de l'article en HTML...";
+"Loading HTML article…" = "Chargement de l'article en HTML…";
 "Ascending" = "Croissant";
 "Descending" = "Décroissant";
 "Use Current Style for Articles" = "Articles résumés suivant style sélectionné";
@@ -420,7 +420,7 @@
 "Authenticating on Open Reader" = "Authentification sur le serveur Open Reader";
 "Connecting to Open Reader server to retrieve %@" = "Connection sur le serveur Open Reader pour récupérer %@";
 "Retrieving folder image for Open Reader Feed" = "Récupération de l'icône associée au flux Open Reader";
-"Fetching Open Reader Subscriptions..." = "Récupération de la liste des abonnements Open Reader...";
+"Fetching Open Reader Subscriptions…" = "Récupération de la liste des abonnements Open Reader…";
 "Open Reader Authentication Failed" = "Échec d'authentification sur le serveur Open Reader";
 "Open Reader Authentication Failed text" = "Vérifiez dans les préférences le nom d'utilisateur et le mot de passe pour accéder au serveur Open Reader.\nVérifiez également votre accès réseau.";
 
@@ -437,7 +437,7 @@
 "Plugin could not be installed" = "Le plugin n'a pas pu être installé";
 "Vienna failed to install the plugin." = "Vienna n'a pas réussi à installer le plugin.";
 "Queue" = "Queue";
-"Forcing Refresh subscriptions..." = "Rafraichissement forcé des abonnements…";
+"Forcing Refresh subscriptions…" = "Rafraichissement forcé des abonnements…";
 "Improper infinitely looping URL redirect to %@" = "Problème de boucle infinie de redirections d'URL vers %@";
 
 /* Added in 3.0.2 */

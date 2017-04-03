@@ -224,7 +224,7 @@
     // Add a Select command so the user can manually pick a registered
     // application.
     [linksHandler addSeparator];
-    [linksHandler addItemWithTag:NSLocalizedString(@"Select...", nil) tag:-1];
+    [linksHandler addItemWithTag:NSLocalizedString(@"Select…", nil) tag:-1];
     
     // Select the registered item
     [linksHandler selectItemAtIndex:0];

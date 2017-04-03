@@ -111,12 +111,12 @@
 }
 
 - (void)nqRequestFinished:(ASIHTTPRequest *)request {
-	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),networkQueue.requestsCount,NSLocalizedString(@"Refreshing subscriptions...", nil)];
+	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),networkQueue.requestsCount,NSLocalizedString(@"Refreshing subscriptions…", nil)];
 	[APPCONTROLLER setStatusMessage:self.statusMessageDuringRefresh persist:YES];
 }
 
 - (void)nqRequestStarted:(ASIHTTPRequest *)request {
-	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),networkQueue.requestsCount,NSLocalizedString(@"Refreshing subscriptions...", nil)];
+	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),networkQueue.requestsCount,NSLocalizedString(@"Refreshing subscriptions…", nil)];
 	[APPCONTROLLER setStatusMessage:self.statusMessageDuringRefresh persist:YES];
 }
 
@@ -178,7 +178,7 @@
 
 -(void)forceRefreshSubscriptionForFolders:(NSArray*)foldersArray
 {
-	statusMessageDuringRefresh = NSLocalizedString(@"Forcing Refresh subscriptions...", nil);
+	statusMessageDuringRefresh = NSLocalizedString(@"Forcing Refresh subscriptions…", nil);
     
 	for (Folder * folder in foldersArray)
 	{
@@ -197,7 +197,7 @@
  */
 -(void)refreshSubscriptions:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus
 {        
-	statusMessageDuringRefresh = NSLocalizedString(@"Refreshing subscriptions...", nil);
+	statusMessageDuringRefresh = NSLocalizedString(@"Refreshing subscriptions…", nil);
     
 	for (Folder * folder in foldersArray)
 	{
@@ -256,7 +256,7 @@
  */
 -(void)refreshFolderIconCacheForSubscriptions:(NSArray *)foldersArray
 {
-	statusMessageDuringRefresh = NSLocalizedString(@"Refreshing folder images...", nil);
+	statusMessageDuringRefresh = NSLocalizedString(@"Refreshing folder images…", nil);
 	
 	for (Folder * folder in foldersArray)
 	{

@@ -1630,7 +1630,7 @@
 	if (frame == articleText.mainFrame)
 	{
 		[self setError:nil];
-		[controller setStatusMessage:NSLocalizedString( isLoadingHTMLArticle ? @"Loading HTML article..." : @"", nil) persist:YES];
+		[controller setStatusMessage:NSLocalizedString( isLoadingHTMLArticle ? @"Loading HTML article…" : @"", nil) persist:YES];
 		
 	}
 	

@@ -1683,7 +1683,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Scripts Folder", nil) action:@selector(doOpenScriptsFolder:) keyEquivalent:@""];
 		[scriptsMenu addItem:menuItem];
 		
-		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Scripts...", nil) action:@selector(moreScripts:) keyEquivalent:@""];
+		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Scripts…", nil) action:@selector(moreScripts:) keyEquivalent:@""];
 		[scriptsMenu addItem:menuItem];
 		
 		// If this is the first call to initScriptsMenu, create the scripts menu. Otherwise we just
@@ -1733,7 +1733,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	
 	// Append a link to More Styles...
 	[stylesSubMenu addItem:[NSMenuItem separatorItem]];
-	NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Styles...", nil) action:@selector(moreStyles:) keyEquivalent:@""];
+	NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Styles…", nil) action:@selector(moreStyles:) keyEquivalent:@""];
 	[stylesSubMenu addItem:menuItem];
 	return stylesSubMenu;
 }

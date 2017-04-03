@@ -3,7 +3,7 @@
 "Mark Unflagged" = "Marker som mærket";
 "Articles" = "Artikler";
 "Folders" = "Mapper";
-"Loading %@..." = "Indlæser %@...";
+"Loading %@…" = "Indlæser %@…";
 "Completed" = "Færdig";
 "Refresh RSS feeds" = "Opdater abonnementer";
 "Refresh All Subscriptions" = "Opdater alle abonnementer";
@@ -57,7 +57,7 @@
 "Refresh all your subscriptions" = "Opdater alle dine abonnementer";
 "New style title" = "Vienna har installeret en ny stil";
 "New style body" = "Stilen \"%@\" er blevet installeret i din Stil-mappe og er blevet tilføjet til Stil-menuen.";
-"More Styles..." = "Flere stile...";
+"More Styles…" = "Flere stile…";
 "Delete selected message" = "Er du sikker på at du permanent vil slette den valgte artikel?";
 "Delete selected message text" = "Denne handling kan ikke fortrydes.";
 "Cancel" = "Afbryd";
@@ -65,8 +65,8 @@
 "From" = "Fra";
 "To" = "Til";
 "(No title)" = "(Ingen titel)";
-"Refreshing folder images..." = "Opdaterer mappeikoner...";
-"Refreshing subscriptions..." = "Opdaterer abonnementer...";
+"Refreshing folder images…" = "Opdaterer mappeikoner…";
+"Refreshing subscriptions…" = "Opdaterer abonnementer…";
 "Authenticating with user name '%@'" = "Godkender med brugernavn \"%@\"";
 "No new articles available" = "Ingen nye artikler tilgængelige";
 "%d new articles retrieved" = "%d nye artikler hentet";
@@ -86,7 +86,7 @@
 "Error parsing XML data in feed" = "Fejl i håndteringen af XML data i feed";
 "Retrieving folder image" = "Modtager mappeikon";
 "Folder image retrieved from %@" = "Mappeikon modtaget fra %@";
-"Contacting..." = "Kontakter...";
+"Contacting…" = "Kontakter…";
 "Connect Running" = "En forbindelse er ved at blive lavet";
 "Connect Running text" = "Vil du stoppe forbindelserne og lukke Vienna nu?";
 "Delete group folder" = "Slet gruppemappe";
@@ -97,7 +97,7 @@
 "Delete RSS feed" = "Slet abonnement";
 "Delete multiple folders text" = "Er du sikker på at du vil slette alle %d valgte mapper? Denne handling kan ikke fortrydes.";
 "Delete multiple folders" = "Slet flere mapper";
-"Delete folder status" = "Sletter mappen \"%@\"...";
+"Delete folder status" = "Sletter mappen \"%@\"…";
 "An error has occurred" = "En fejl er opstået.";
 "Your software is up to date" = "Du har nyeste udgave af Vienna!";
 "Please try again later" = "Prøv venligst igen senere.";
@@ -120,7 +120,7 @@
 "Unread Articles" = "Ulæste artikler";
 "Today's Articles" = "Dagens artikler";
 "Trash" = "Papirkurv";
-"Select..." = "Vælg...";
+"Select…" = "Vælg…";
 " (%d unread)" = " (%d ulæste)";
 "is" = "er";
 "is not" = "er ikke";
@@ -149,14 +149,14 @@
 "Recents" = "Foregående";
 "Clear" = "Slet foregående søgninger";
 "Search web page" = "Søg på hjemmeside";
-"Loading..." = "Indlæser...";
+"Loading…" = "Indlæser…";
 "Open Image in New Tab" = "Åben billede i ny fane";
 "Open Link in New Tab" = "Åben henvisning i ny fane";
 "Open Link in %@" = "Åben henvisning i %@";
 "Open Page in %@" = "Åben side i %@";
 "Copy Page Link to Clipboard" = "Kopier sidehenvisning til skuffe";
 "%d unread articles" = "%d ulæste artikler";
-"More Scripts..." = "Flere skripter...";
+"More Scripts…" = "Flere skripter…";
 "Install Update" = "Installer opdatering";
 "Do Not Install" = "Installer ikke";
 "Replace smart folder title" = "En smartmappe ved navn %@ eksisterer allerede";
@@ -320,14 +320,14 @@
 "%u unread" = "%u ulæste";
 "Keyboard Shortcuts" = "Tastatur genveje";
 "%@ (Filtered: %@)" = "%@ (Filter: %@)";
-"Get Info..." = "Vis info...";
-"Open Web Location..." = "Åben Internet lokation...";
+"Get Info…" = "Vis info…";
+"Open Web Location…" = "Åben Internet lokation…";
 "Refresh Folder Images" = "Opdater mappeikoner";
 "Report" = "Rapporter";
 "Condensed" = "Sammenfattet";
 "Unified" = "Forenet";
 "Summary" = "Resumé";
-"Blog With..." = "Blog med...";
+"Blog With…" = "Blog med…";
 "Blog with %@" = "Blog med %@";
 "Bigger Text" = "Større tekst";
 "Smaller Text" = "Mindre tekst";
@@ -349,7 +349,7 @@
 "Local File" = "Lokalt arkiv";
 "Hide Status Bar" = "Gem statusbaren";
 "Show Status Bar" = "Vis statusbaren";
-"Customize Toolbar..." = "Indstil værktøjslinie...";
+"Customize Toolbar…" = "Indstil værktøjslinie…";
 "Search Articles" = "Søg artikler";
 "Progress" = "Behandlet";
 "Delete all articles in the trash" = "Slet alle artikler i Papirkurven";
@@ -400,7 +400,7 @@
 
 /* Added in 2.6.0 */
 "Article load completed" = "Artikelindlæsning færdig";
-"Loading HTML article..." = "Indlæser HTML-artikel...";
+"Loading HTML article…" = "Indlæser HTML-artikel…";
 "Ascending" = "Opadgående";
 "Descending" = "Nedadgående";
 "Use Current Style for Articles" = "Brug den nuværende stil til artikler";
@@ -421,7 +421,7 @@
 "Authenticating on Open Reader" = "Authenticating on Open Reader";
 "Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
 "Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
-"Fetching Open Reader Subscriptions..." = "Fetching Open Reader Subscriptions...";
+"Fetching Open Reader Subscriptions…" = "Fetching Open Reader Subscriptions…";
 "Open Reader Authentication Failed" = "Open Reader Authentication Failed";
 "Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
 
@@ -438,7 +438,7 @@
 "Plugin could not be installed" = "Plugin could not be installed";
 "Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
 "Queue" = "Queue";
-"Forcing Refresh subscriptions..." = "Forcing Refresh subscriptions...";
+"Forcing Refresh subscriptions…" = "Forcing Refresh subscriptions…";
 "Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
 
 /* Added in 3.0.2 */

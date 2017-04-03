@@ -3,7 +3,7 @@
 "Mark Unflagged" = "Desmarcar";
 "Articles" = "Artigos";
 "Folders" = "Pastas";
-"Loading %@..." = "A carregar %@...";
+"Loading %@…" = "A carregar %@…";
 "Completed" = "Completado";
 "Refresh RSS feeds" = "Actualizar subscrições";
 "Refresh All Subscriptions" = "Actualizar Todas as Subscrições";
@@ -57,7 +57,7 @@
 "Refresh all your subscriptions" = "Actualizar todas as subscrições";
 "New style title" = " O Vienna instalou um novo estilo";
 "New style body" = "O estilo \"%@\" foi instalado na sua pasta de estilos e adicionado ao menu de estilos.";
-"More Styles..." = "Mais Estilos…";
+"More Styles…" = "Mais Estilos…";
 "Delete selected message" = "Tem a certeza que deseja apagar permanentemente os estilos seleccionados?";
 "Delete selected message text" = "Esta operação não pode ser anulada.";
 "Cancel" = "Cancelar";
@@ -65,8 +65,8 @@
 "From" = "De";
 "To" = "Para";
 "(No title)" = "(Sem título)";
-"Refreshing folder images..." = "A actualizar imagens das pastas...";
-"Refreshing subscriptions..." = "A actualizar subscrições...";
+"Refreshing folder images…" = "A actualizar imagens das pastas…";
+"Refreshing subscriptions…" = "A actualizar subscrições…";
 "Authenticating with user name '%@'" = "A autenticar com o nome de utilizador \"%@\"";
 "No new articles available" = "Nenhum artigo novo disponível";
 "%d new articles retrieved" = "%d novos artigos recebidos";
@@ -86,7 +86,7 @@
 "Error parsing XML data in feed" = "Error no parsing de dados XML da fonte";
 "Retrieving folder image" = "Recebendo imagem da pasta";
 "Folder image retrieved from %@" = "Imagem de pasta recebida de %@";
-"Contacting..." = "A contactar ...";
+"Contacting…" = "A contactar …";
 "Connect Running" = "Uma conexão está activa";
 "Connect Running text" = "Deseja parar a conexão e fechar o Vienna agora?";
 "Delete group folder" = "Apagar pasta de grupo";
@@ -97,7 +97,7 @@
 "Delete RSS feed" = "Apagar subscrição";
 "Delete multiple folders text" = "Tem a certeza que deseja apagar todas as %d pastas seleccionadas? Esta operação não pode ser anulada.";
 "Delete multiple folders" = "Apagar múltiplas pastas";
-"Delete folder status" = "A apagar pasta \"%@\"...";
+"Delete folder status" = "A apagar pasta \"%@\"…";
 "An error has occurred" = "Ocorreu um erro.";
 "Your software is up to date" = "A sua versão do Vienna está actualizada.";
 "Please try again later" = "Por favor tente outra vez mais tarde.";
@@ -120,7 +120,7 @@
 "Unread Articles" = "Artigos Não Lidos";
 "Today's Articles" = "Artigos de Hoje";
 "Trash" = "Lixo";
-"Select..." = "Seleccionar...";
+"Select…" = "Seleccionar…";
 " (%d unread)" = " (%d não lidos)";
 "is" = "é";
 "is not" = "não é";
@@ -149,14 +149,14 @@
 "Recents" = "Recentes";
 "Clear" = "Limpar Pesquisas Recentes";
 "Search web page" = "Procurar página web";
-"Loading..." = "A Carregar...";
+"Loading…" = "A Carregar…";
 "Open Image in New Tab" = "Abrir Imagem num Novo Separador";
 "Open Link in New Tab" = "Abrir Link num Novo Separador";
 "Open Link in %@" = "Abri Link em %@";
 "Open Page in %@" = "Abrir Página em %@";
 "Copy Page Link to Clipboard" = "Copiar Link da Página para a Área de Transferência";
 "%d unread articles" = "%d artigos não lidos";
-"More Scripts..." = "Mais Scripts…";
+"More Scripts…" = "Mais Scripts…";
 "Install Update" = "Instalar Actualização";
 "Do Not Install" = "Não Instalar";
 "Replace smart folder title" = "Já existe uma pasta inteligente com o nome %@";
@@ -319,14 +319,14 @@
 "%u unread" = "%u não lidos";
 "Keyboard Shortcuts" = "Atalhos do Teclado";
 "%@ (Filtered: %@)" = "%@ (Filtrar: %@)";
-"Get Info..." = "Obter Informações…";
-"Open Web Location..." = "Abrir Localização Web…";
+"Get Info…" = "Obter Informações…";
+"Open Web Location…" = "Abrir Localização Web…";
 "Refresh Folder Images" = "Actualizar Imagens da Pasta";
 "Report" = "Relatório";
 "Condensed" = "Condensado";
 "Unified" = "Unificado";
 "Summary" = "Sumário";
-"Blog With..." = "Blog Com…";
+"Blog With…" = "Blog Com…";
 "Blog with %@" = "Blog Com %@";
 "Bigger Text" = "Texto Maior";
 "Smaller Text" = "Texto Menor";
@@ -348,7 +348,7 @@
 "Local File" = "Ficheiro Local";
 "Hide Status Bar" = "Ocultar Barra de Estado";
 "Show Status Bar" = "Mostrar Barra de Estado";
-"Customize Toolbar..." = "Personalizar Barra de Ferramentas…";
+"Customize Toolbar…" = "Personalizar Barra de Ferramentas…";
 "Search Articles" = "Procurar Artigos";
 "Progress" = "Progresso";
 "Delete all articles in the trash" = "Apagor todos os artigos que estão no lixo";
@@ -399,7 +399,7 @@
 
 /* Added in 2.6.0 */
 "Article load completed" = "Article load completed";
-"Loading HTML article..." = "Loading HTML article...";
+"Loading HTML article…" = "Loading HTML article…";
 "Ascending" = "Ascending";
 "Descending" = "Descending";
 "Use Current Style for Articles" = "Use Current Style for Articles";
@@ -420,7 +420,7 @@
 "Authenticating on Open Reader" = "Authenticating on Open Reader";
 "Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
 "Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
-"Fetching Open Reader Subscriptions..." = "Fetching Open Reader Subscriptions...";
+"Fetching Open Reader Subscriptions…" = "Fetching Open Reader Subscriptions…";
 "Open Reader Authentication Failed" = "Open Reader Authentication Failed";
 "Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
 
@@ -437,7 +437,7 @@
 "Plugin could not be installed" = "Plugin could not be installed";
 "Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
 "Queue" = "Queue";
-"Forcing Refresh subscriptions..." = "Forcing Refresh subscriptions...";
+"Forcing Refresh subscriptions…" = "Forcing Refresh subscriptions…";
 "Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
 
 /* Added in 3.0.2 */

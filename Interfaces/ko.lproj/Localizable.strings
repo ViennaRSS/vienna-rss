@@ -3,7 +3,7 @@
 "Mark Unflagged" = "깃발 표시 제거";
 "Articles" = "기사";
 "Folders" = "구독";
-"Loading %@..." = "%@ 로딩 중...";
+"Loading %@…" = "%@ 로딩 중…";
 "Completed" = "완료";
 "Refresh RSS feeds" = "구독 갱신";
 "Refresh All Subscriptions" = "모든 구독 갱신";
@@ -57,7 +57,7 @@
 "Refresh all your subscriptions" = "모든 구독 갱신";
 "New style title" = "Vienna 가 새 스타일을 설치했습니다.";
 "New style body" = "\"%@\" 스타일이 사용자의 스타일 폴더에 설치되었으며, 스타일 메뉴에 등록되었습니다.";
-"More Styles..." = "스타일 추가...";
+"More Styles…" = "스타일 추가…";
 "Delete selected message" = "정말로 선택된 기사를 영구히 삭제하시겠습니까?";
 "Delete selected message text" = "이 명령은 취소할 수 없습니다.";
 "Cancel" = "취소";
@@ -65,8 +65,8 @@
 "From" = "발신";
 "To" = "수신";
 "(No title)" = "(제목 없음)";
-"Refreshing folder images..." = "구독 이미지 갱신 중...";
-"Refreshing subscriptions..." = "구독 갱신 중...";
+"Refreshing folder images…" = "구독 이미지 갱신 중…";
+"Refreshing subscriptions…" = "구독 갱신 중…";
 "Authenticating with user name '%@'" = "사용자 \"%@\" 에 대한 인증";
 "No new articles available" = "가능한 새 기사를 찾을 수 없음";
 "%d new articles retrieved" = "%d 항목의 새 기사를 등록";
@@ -86,7 +86,7 @@
 "Error parsing XML data in feed" = "해당 피드의 XML 데이터 읽는 중 오류 발생";
 "Retrieving folder image" = "구독 이미지 추가 중";
 "Folder image retrieved from %@" = "%@ 로부터 구독 이미지 갱신";
-"Contacting..." = "연결 중...";
+"Contacting…" = "연결 중…";
 "Connect Running" = "연결이 진행 중입니다.";
 "Connect Running text" = "연결을 중지하고 Vienna 를 지금 종료하시겠습니까?";
 "Delete group folder" = "그룹 폴더 삭제";
@@ -97,7 +97,7 @@
 "Delete RSS feed" = "구독 삭제";
 "Delete multiple folders text" = "정말로 선택된 %d 항목을 모두 삭제하시겠습니까?\n이 명령은 취소할 수 없습니다.";
 "Delete multiple folders" = "다중 항목 삭제";
-"Delete folder status" = "\"%@\" 삭제 중...";
+"Delete folder status" = "\"%@\" 삭제 중…";
 "An error has occurred" = "오류가 발생했습니다.";
 "Your software is up to date" = "최신 버전의 Vienna 를 사용 중입니다.";
 "Please try again later" = "나중에 재시도 하십시오.";
@@ -120,7 +120,7 @@
 "Unread Articles" = "읽지 않은 기사";
 "Today's Articles" = "오늘의 기사";
 "Trash" = "휴지통";
-"Select..." = "선택...";
+"Select…" = "선택…";
 " (%d unread)" = " (%d 읽지 않음)";
 "is" = "다음과 같음";
 "is not" = "다음과 같지 않음";
@@ -149,14 +149,14 @@
 "Recents" = "최근";
 "Clear" = "최근 검색 지우기";
 "Search web page" = "웹페이지 검색";
-"Loading..." = "로딩 중...";
+"Loading…" = "로딩 중…";
 "Open Image in New Tab" = "새로운 탭에서 이미지 열기";
 "Open Link in New Tab" = "새로운 탭에서 링크 열기";
 "Open Link in %@" = "기본 브라우져에서 링크 열기";
 "Open Page in %@" = "기본 브라우져에서 페이지 열기";
 "Copy Page Link to Clipboard" = "페이지 링크 복사";
 "%d unread articles" = "%d 항목의 읽지 않은 기사";
-"More Scripts..." = "스크립트 추가...";
+"More Scripts…" = "스크립트 추가…";
 "Install Update" = "업데이트 설치";
 "Do Not Install" = "설치 안함";
 "Replace smart folder title" = "동일한 이름의 스마트 폴더가 이미 존재합니다.";
@@ -215,7 +215,7 @@
 "Bring All to Front" = "모두 앞으로 가져오기";
 "Check Spelling" = "철자 검사";
 "Check Spelling as You Type" = "입력시 철자 검사";
-"Check for Updates" = "업데이트 확인...";
+"Check for Updates" = "업데이트 확인…";
 "Close All Tabs" = "모든 탭 닫기";
 "Close Tab" = "탭 닫기";
 "Close Window" = "윈도우 닫기";
@@ -224,45 +224,45 @@
 "Cut" = "오려두기";
 "Delete" = "삭제";
 "Delete Article" = "기사 삭제";
-"Delete…" = "삭제...";
+"Delete…" = "삭제…";
 "Edit" = "편집";
-"Edit…" = "편집...";
+"Edit…" = "편집…";
 "Empty Trash" = "휴지통 비우기";
-"Export Subscriptions…" = "구독 내보내기...";
+"Export Subscriptions…" = "구독 내보내기…";
 "File" = "파일";
 "Find" = "찾기";
 "Find Next" = "다음 찾기";
 "Find Previous" = "이전 찾기";
-"Find…" = "찾기...";
+"Find…" = "찾기…";
 "Forward" = "앞으로";
 "Help" = "도움말";
 "Hide Others" = "기타 가리기";
 "Hide Vienna" = "가리기";
-"Import Subscriptions…" = "구독 가져오기...";
+"Import Subscriptions…" = "구독 가져오기…";
 "Jump to Selection" = "선택 부분으로 이동";
 "Main Window" = "메인 윈도우";
 "MainMenu" = "메인메뉴";
 "Mark All Articles as Read" = "모든 기사를 읽음으로 표시";
 "Mark Flagged" = "깃발 표시";
 "Minimize" = "최소화";
-"New Group Folder…" = "새 그룹 폴더...";
-"New Smart Folder…" = "새 스마트 폴더...";
-"New Subscription…" = "새 구독...";
+"New Group Folder…" = "새 그룹 폴더…";
+"New Smart Folder…" = "새 스마트 폴더…";
+"New Subscription…" = "새 구독…";
 "Next Tab" = "다음 탭";
 "Open Article Page" = "기사 페이지 열기";
 "Open Article Page in External Browser" = "외부 브라우져에서 기사 페이지 열기";
 "Open Subscription Home Page" = "구독 홈페이지 열기";
 "Open Subscription Home Page in External Browser" = "외부 브라우져에서 구독 홈페이지 열기";
-"Page Setup…" = "페이지 설정...";
+"Page Setup…" = "페이지 설정…";
 "Paste" = "붙이기";
-"Preferences…" = "환경설정...";
+"Preferences…" = "환경설정…";
 "Previous Tab" = "이전 탭";
-"Print…" = "프린트...";
+"Print…" = "프린트…";
 "Quit Vienna" = "종료";
 "Redo" = "복귀";
 "Refresh Selected Subscriptions" = "선택된 구독 갱신";
 "Reload Page" = "페이지 갱신";
-"Rename…" = "이름 변경...";
+"Rename…" = "이름 변경…";
 "Restore Article" = "기사 복원";
 "Select All" = "모두 선택";
 "Services" = "서비스";
@@ -270,7 +270,7 @@
 "Skip Folder" = "구독 생략";
 "Sort By" = "정렬";
 "Spelling" = "철자 검사";
-"Spelling…" = "철자 검사...";
+"Spelling…" = "철자 검사…";
 "Stop Refreshing" = "갱신 중지";
 "Stop Reloading Page" = "페이지 갱신 중지";
 "Style" = "스타일";
@@ -319,14 +319,14 @@
 "%u unread" = "%u 읽지 않음";
 "Keyboard Shortcuts" = "키보드 단축키";
 "%@ (Filtered: %@)" = "%@ (필터: %@)";
-"Get Info..." = "정보 입수...";
-"Open Web Location..." = "웹 주소 열기...";
+"Get Info…" = "정보 입수…";
+"Open Web Location…" = "웹 주소 열기…";
 "Refresh Folder Images" = "구독 이미지 갱신";
 "Report" = "일반";
 "Condensed" = "수직 배열";
 "Unified" = "통합";
 "Summary" = "요약";
-"Blog With..." = "다음으로 블로그...";
+"Blog With…" = "다음으로 블로그…";
 "Blog with %@" = "%@ 에서 블로그";
 "Bigger Text" = "텍스트 크게";
 "Smaller Text" = "텍스트 작게";
@@ -348,7 +348,7 @@
 "Local File" = "Local File";
 "Hide Status Bar" = "Hide Status Bar";
 "Show Status Bar" = "Show Status Bar";
-"Customize Toolbar..." = "Customize Toolbar...";
+"Customize Toolbar…" = "Customize Toolbar…";
 "Search Articles" = "Search Articles";
 "Progress" = "Progress";
 "Delete all articles in the trash" = "Delete all articles in the trash";
@@ -399,7 +399,7 @@
 
 /* Added in 2.6.0 */
 "Article load completed" = "Article load completed";
-"Loading HTML article..." = "Loading HTML article...";
+"Loading HTML article…" = "Loading HTML article…";
 "Ascending" = "Ascending";
 "Descending" = "Descending";
 "Use Current Style for Articles" = "Use Current Style for Articles";
@@ -420,7 +420,7 @@
 "Authenticating on Open Reader" = "Authenticating on Open Reader";
 "Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
 "Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
-"Fetching Open Reader Subscriptions..." = "Fetching Open Reader Subscriptions...";
+"Fetching Open Reader Subscriptions…" = "Fetching Open Reader Subscriptions…";
 "Open Reader Authentication Failed" = "Open Reader Authentication Failed";
 "Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
 
@@ -437,7 +437,7 @@
 "Plugin could not be installed" = "Plugin could not be installed";
 "Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
 "Queue" = "Queue";
-"Forcing Refresh subscriptions..." = "Forcing Refresh subscriptions...";
+"Forcing Refresh subscriptions…" = "Forcing Refresh subscriptions…";
 "Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
 
 /* Added in 3.0.2 */

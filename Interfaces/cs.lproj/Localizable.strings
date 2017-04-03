@@ -3,7 +3,7 @@
 "Mark Unflagged" = "Odebrat praporek";
 "Articles" = "Příspěvky";
 "Folders" = "Složky";
-"Loading %@..." = "Načítá se %@…";
+"Loading %@…" = "Načítá se %@…";
 "Completed" = "Dokončeno";
 "Refresh RSS feeds" = "Obnovit odebírání";
 "Refresh All Subscriptions" = "Obnovit všechna odebírání";
@@ -57,7 +57,7 @@
 "Refresh all your subscriptions" = "Obnoví všechna odebírání";
 "New style title" = "V programu Vienna byl instalován nový styl";
 "New style body" = "Styl „%@“ byl instalován do složky se styly a přidán do nabídky Styly.";
-"More Styles..." = "Více stylů…";
+"More Styles…" = "Více stylů…";
 "Delete selected message" = "Určitě chcete trvale odstranit vybrané příspěvky?";
 "Delete selected message text" = "Tuto operaci nelze odvolat.";
 "Cancel" = "Zrušit";
@@ -65,8 +65,8 @@
 "From" = "Od";
 "To" = "Pro";
 "(No title)" = "(není titul)";
-"Refreshing folder images..." = "Obnovují se ikony složek…";
-"Refreshing subscriptions..." = "Obnovují se odebírání…";
+"Refreshing folder images…" = "Obnovují se ikony složek…";
+"Refreshing subscriptions…" = "Obnovují se odebírání…";
 "Authenticating with user name '%@'" = "Ověření totožnosti pro uživatele: „%@“";
 "No new articles available" = "Žádné nové příspěvky";
 "%d new articles retrieved" = "Nově přijato příspěvků: %d";
@@ -86,7 +86,7 @@
 "Error parsing XML data in feed" = "Chyba při zpracování dat XML ze zdroje";
 "Retrieving folder image" = "Přijímají se obrázky složek";
 "Folder image retrieved from %@" = "Obrázek složky přijat z %@";
-"Contacting..." = "Kontaktuje se…";
+"Contacting…" = "Kontaktuje se…";
 "Connect Running" = "Je aktivní připojení";
 "Connect Running text" = "Chcete nyní zrušit připojení a ukončit program Vienna?";
 "Delete group folder" = "Smazat skupinovou složku";
@@ -120,7 +120,7 @@
 "Unread Articles" = "Nečtené příspěvky";
 "Today's Articles" = "Dnešní příspěvky";
 "Trash" = "Koš";
-"Select..." = "Vybrat…";
+"Select…" = "Vybrat…";
 " (%d unread)" = " (%d nečtených)";
 "is" = "je";
 "is not" = "není";
@@ -149,14 +149,14 @@
 "Recents" = "Poslední položky";
 "Clear" = "Odstranit poslední hledání";
 "Search web page" = "Hledat na webové stránce";
-"Loading..." = "Načítá se…";
+"Loading…" = "Načítá se…";
 "Open Image in New Tab" = "Otevřít obrázek v novém panelu";
 "Open Link in New Tab" = "Otevřít odkaz v novém panelu";
 "Open Link in %@" = "Otevřít odkaz v programu %@";
 "Open Page in %@" = "Otevřít stránku v programu %@";
 "Copy Page Link to Clipboard" = "Zkopírovat odkaz na stránku do schránky";
 "%d unread articles" = "Nečtených příspěvků: %d";
-"More Scripts..." = "Více skriptů…";
+"More Scripts…" = "Více skriptů…";
 "Install Update" = "Instalovat aktualizaci";
 "Do Not Install" = "Neinstalovat";
 "Replace smart folder title" = "Dynamická složka %@ již existuje.";
@@ -319,14 +319,14 @@
 "%u unread" = "%u nečtených";
 "Keyboard Shortcuts" = "Klávesové zkratky";
 "%@ (Filtered: %@)" = "%@ (Filtr: %@)";
-"Get Info..." = "Informace…";
-"Open Web Location..." = "Otevřít webovou adresu…";
+"Get Info…" = "Informace…";
+"Open Web Location…" = "Otevřít webovou adresu…";
 "Refresh Folder Images" = "Obnovit ikony složek";
 "Report" = "Standardní";
 "Condensed" = "Kompaktní";
 "Unified" = "Sloučené";
 "Summary" = "Souhrn";
-"Blog With..." = "Blog…";
+"Blog With…" = "Blog…";
 "Blog with %@" = "Blog s %@";
 "Bigger Text" = "Zvětšit text";
 "Smaller Text" = "Zmenšit text";
@@ -348,7 +348,7 @@
 "Local File" = "Místní soubor";
 "Hide Status Bar" = "Skrýt stavový řádek";
 "Show Status Bar" = "Zobrazit stavový řádek";
-"Customize Toolbar..." = "Přizpůsobit řádek nástrojů…";
+"Customize Toolbar…" = "Přizpůsobit řádek nástrojů…";
 "Search Articles" = "Hledat v příspěvcích";
 "Progress" = "Postup";
 "Delete all articles in the trash" = "Smaže všechny příspěvky v koši";
@@ -399,7 +399,7 @@
 
 /* Added in 2.6.0 */
 "Article load completed" = "Article load completed";
-"Loading HTML article..." = "Loading HTML article...";
+"Loading HTML article…" = "Loading HTML article…";
 "Ascending" = "Ascending";
 "Descending" = "Descending";
 "Use Current Style for Articles" = "Use Current Style for Articles";
@@ -420,7 +420,7 @@
 "Authenticating on Open Reader" = "Authenticating on Open Reader";
 "Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
 "Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
-"Fetching Open Reader Subscriptions..." = "Fetching Open Reader Subscriptions...";
+"Fetching Open Reader Subscriptions…" = "Fetching Open Reader Subscriptions…";
 "Open Reader Authentication Failed" = "Open Reader Authentication Failed";
 "Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
 
@@ -437,7 +437,7 @@
 "Plugin could not be installed" = "Plugin could not be installed";
 "Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
 "Queue" = "Queue";
-"Forcing Refresh subscriptions..." = "Forcing Refresh subscriptions...";
+"Forcing Refresh subscriptions…" = "Forcing Refresh subscriptions…";
 "Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
 
 /* Added in 3.0.2 */

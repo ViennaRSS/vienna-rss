@@ -3,7 +3,7 @@
 "Mark Unflagged" = "Зняти прапорець";
 "Articles" = "Статті";
 "Folders" = "Папки";
-"Loading %@..." = "Завантажую %@...";
+"Loading %@…" = "Завантажую %@…";
 "Completed" = "Завершено";
 "Refresh RSS feeds" = "Оновити RSS стрічки";
 "Refresh All Subscriptions" = "Оновити всі підписки";
@@ -57,7 +57,7 @@
 "Refresh all your subscriptions" = "Оновити всі підписки";
 "New style title" = "Vienna установила новий стиль";
 "New style body" = "Стиль \"%@\" установлено до Вашої папки Styles і додано до меню Стиль.";
-"More Styles..." = "Більше стилів...";
+"More Styles…" = "Більше стилів…";
 "Delete selected message" = "Ви дійсно хочете видалити виділене повідомлення?";
 "Delete selected message text" = "Цю операцію неможливо відмінити.";
 "Cancel" = "Скасувати";
@@ -65,8 +65,8 @@
 "From" = "Від";
 "To" = "До";
 "(No title)" = "(Без заголовку)";
-"Refreshing folder images..." = "Оновити зображення у папці...";
-"Refreshing subscriptions..." = "Оновити підписки...";
+"Refreshing folder images…" = "Оновити зображення у папці…";
+"Refreshing subscriptions…" = "Оновити підписки…";
 "Authenticating with user name '%@'" = "Заходжу під іменем користувача \"%@\"";
 "No new articles available" = "Немає нових статей";
 "%d new articles retrieved" = "Отримано %d нових статей";
@@ -86,7 +86,7 @@
 "Error parsing XML data in feed" = "Помилка при обробці XML-даних у стрічці";
 "Retrieving folder image" = "Отримую зображення папки";
 "Folder image retrieved from %@" = "Отримано зображення папки %@";
-"Contacting..." = "З'єднуюся...";
+"Contacting…" = "З'єднуюся…";
 "Connect Running" = "триває з'єднання";
 "Connect Running text" = "Ви хочете розірвати з'єднання і завершити Vienna зараз?";
 "Delete group folder" = "Видалити папку";
@@ -97,7 +97,7 @@
 "Delete RSS feed" = "Видалити підписку";
 "Delete multiple folders text" = "Ви дійсно хочете видалити всі %d виділених папок? Цю операцію неможливо відмінити.";
 "Delete multiple folders" = "Видалити папки";
-"Delete folder status" = "Видаляю папку \"%@\"...";
+"Delete folder status" = "Видаляю папку \"%@\"…";
 "An error has occurred" = "Трапилася помилка.";
 "Your software is up to date" = "Версія Vienna, яку ви використовуєте на даний момент не найновішою.";
 "Please try again later" = "Спробуйте ще раз.";
@@ -120,7 +120,7 @@
 "Unread Articles" = "Непрочитані статті";
 "Today's Articles" = "Сьогоднішні статті";
 "Trash" = "Смітник";
-"Select..." = "Виділити...";
+"Select…" = "Виділити…";
 " (%d unread)" = " (%d непрочитаних)";
 "is" = "є";
 "is not" = "не є";
@@ -149,14 +149,14 @@
 "Recents" = "Останні";
 "Clear" = "Очистити останні пошуки";
 "Search web page" = "Пошук по web-сторінці";
-"Loading..." = "Завантажую...";
+"Loading…" = "Завантажую…";
 "Open Image in New Tab" = "Відкрити зображення у новій вкладці";
 "Open Link in New Tab" = "Відкрити посилання у новій вкладці";
 "Open Link in %@" = "Відкрити посилання у %@";
 "Open Page in %@" = "Відкрити сторінку у %@";
 "Copy Page Link to Clipboard" = "Копіювати посилання на сторінку у буфер";
 "%d unread articles" = "%d непрочитаних статей";
-"More Scripts..." = "Більше сценаріїв...";
+"More Scripts…" = "Більше сценаріїв…";
 "Install Update" = "Установити оновлення";
 "Do Not Install" = "Не установлювати";
 "Replace smart folder title" = "Вибірка з назвою %@ уже існує";
@@ -319,14 +319,14 @@
 "%u unread" = "%u непрочитаних";
 "Keyboard Shortcuts" = "Клавіатурні скорочення";
 "%@ (Filtered: %@)" = "%@ (Фільтр: %@)";
-"Get Info..." = "Інформація...";
-"Open Web Location..." = "Відкрити веб-сторінку...";
+"Get Info…" = "Інформація…";
+"Open Web Location…" = "Відкрити веб-сторінку…";
 "Refresh Folder Images" = "Оновити зображення папок";
 "Report" = "Звіт";
 "Condensed" = "Стиснутий";
 "Unified" = "Уніфікований";
 "Summary" = "Підсумок";
-"Blog With..." = "Blog з...";
+"Blog With…" = "Blog з…";
 "Blog with %@" = "Blog з %@";
 "Bigger Text" = "Більший текст";
 "Smaller Text" = "Менший текст";
@@ -348,7 +348,7 @@
 "Local File" = "Локальний файл";
 "Hide Status Bar" = "Заховати стрічку статусу";
 "Show Status Bar" = "Показати стрічку статусу";
-"Customize Toolbar..." = "Customize Toolbar…";
+"Customize Toolbar…" = "Customize Toolbar…";
 "Search Articles" = "Шукати статті";
 "Progress" = "Прогрес";
 "Delete all articles in the trash" = "Видалити всі статті у смітнику";
@@ -399,7 +399,7 @@
 
 /* Added in 2.6.0 */
 "Article load completed" = "Article load completed";
-"Loading HTML article..." = "Loading HTML article...";
+"Loading HTML article…" = "Loading HTML article…";
 "Ascending" = "Ascending";
 "Descending" = "Descending";
 "Use Current Style for Articles" = "Use Current Style for Articles";
@@ -420,7 +420,7 @@
 "Authenticating on Open Reader" = "Authenticating on Open Reader";
 "Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
 "Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
-"Fetching Open Reader Subscriptions..." = "Fetching Open Reader Subscriptions...";
+"Fetching Open Reader Subscriptions…" = "Fetching Open Reader Subscriptions…";
 "Open Reader Authentication Failed" = "Open Reader Authentication Failed";
 "Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
 
@@ -437,7 +437,7 @@
 "Plugin could not be installed" = "Plugin could not be installed";
 "Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
 "Queue" = "Queue";
-"Forcing Refresh subscriptions..." = "Forcing Refresh subscriptions...";
+"Forcing Refresh subscriptions…" = "Forcing Refresh subscriptions…";
 "Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
 
 /* Added in 3.0.2 */

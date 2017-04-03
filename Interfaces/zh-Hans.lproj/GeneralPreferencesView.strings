@@ -17,7 +17,7 @@
 "BbI-0A-zEG.title" = "当接收到新文章后:";
 
 /* Class = "NSMenuItem"; title = "Other…"; ObjectID = "FiK-E7-RnG"; */
-"FiK-E7-RnG.title" = "其他...";
+"FiK-E7-RnG.title" = "其他…";
 
 /* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "GnT-xT-rAZ"; */
 "GnT-xT-rAZ.title" = "程序启动后核查 Vienna 是否有新版本";
