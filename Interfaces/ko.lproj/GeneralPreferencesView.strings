@@ -17,7 +17,7 @@
 "BbI-0A-zEG.title" = "읽지 않은 새 기사 추가시:";
 
 /* Class = "NSMenuItem"; title = "Other…"; ObjectID = "FiK-E7-RnG"; */
-"FiK-E7-RnG.title" = "선택...";
+"FiK-E7-RnG.title" = "선택…";
 
 /* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "GnT-xT-rAZ"; */
 "GnT-xT-rAZ.title" = "시작시 새 버전의 Vienna 확인   링크를 항상 백그라운드 상태로 열기";

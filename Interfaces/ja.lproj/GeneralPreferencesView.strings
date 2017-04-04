@@ -17,7 +17,7 @@
 "BbI-0A-zEG.title" = "新規未読記事を取得したとき：";
 
 /* Class = "NSMenuItem"; title = "Other…"; ObjectID = "FiK-E7-RnG"; */
-"FiK-E7-RnG.title" = "その他...";
+"FiK-E7-RnG.title" = "その他…";
 
 /* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "GnT-xT-rAZ"; */
 "GnT-xT-rAZ.title" = "Check for newer versions of Vienna on start up";

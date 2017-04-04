@@ -3,7 +3,7 @@
 "Mark Unflagged" = "取消精华";
 "Articles" = "文章";
 "Folders" = "文件夹";
-"Loading %@..." = "正在读取 %@...";
+"Loading %@…" = "正在读取 %@…";
 "Completed" = "完成";
 "Refresh RSS feeds" = "更新所选的频道";
 "Refresh All Subscriptions" = "更新所有的频道";
@@ -57,7 +57,7 @@
 "Refresh all your subscriptions" = "更新所有的频道";
 "New style title" = "Vienna 安装了一个新的风格";
 "New style body" = "\"%@\" 这个风格已经成功安装到了风格文件夹中，您现在可以从风格菜单中选择它了。";
-"More Styles..." = "更多风格...";
+"More Styles…" = "更多风格…";
 "Delete selected message" = "您确定要永久删除所选的文章么？";
 "Delete selected message text" = "这个操作无法还原";
 "Cancel" = "取消";
@@ -65,8 +65,8 @@
 "From" = "来自";
 "To" = "至";
 "(No title)" = "(无标题)";
-"Refreshing folder images..." = "Refreshing folder images...";
-"Refreshing subscriptions..." = "正在更新订阅...";
+"Refreshing folder images…" = "Refreshing folder images…";
+"Refreshing subscriptions…" = "正在更新订阅…";
 "Authenticating with user name '%@'" = "使用用户名 \"%@\" 来验证";
 "No new articles available" = "没有新文章";
 "%d new articles retrieved" = "有 %d 篇新文章";
@@ -86,7 +86,7 @@
 "Error parsing XML data in feed" = "解析条目中 XML 数据时出现错误";
 "Retrieving folder image" = "正在接收文件夹图片";
 "Folder image retrieved from %@" = "从 %@ 成功接收了文件夹图片";
-"Contacting..." = "正在连线...";
+"Contacting…" = "正在连线…";
 "Connect Running" = "连线进行中";
 "Connect Running text" = "您确定中止连线并且退出 Vienna 么？";
 "Delete group folder" = "删除群组文件夹";
@@ -97,7 +97,7 @@
 "Delete RSS feed" = "删除频道";
 "Delete multiple folders text" = "您确定要删除所有%d个被选中的文件夹么？这个操作不可还原";
 "Delete multiple folders" = "删除多个文件夹";
-"Delete folder status" = "正在删除文件夹 \"%@\"...";
+"Delete folder status" = "正在删除文件夹 \"%@\"…";
 "An error has occurred" = "发生错误";
 "Your software is up to date" = "您的 Vienna 是最新版的";
 "Please try again later" = "请稍候再试";
@@ -120,7 +120,7 @@
 "Unread Articles" = "未读文章";
 "Today's Articles" = "今天的文章";
 "Trash" = "废纸篓";
-"Select..." = "选择...";
+"Select…" = "选择…";
 " (%d unread)" = " (%d 篇未读)";
 "is" = "为";
 "is not" = "非";
@@ -149,14 +149,14 @@
 "Recents" = "最近";
 "Clear" = "清楚最近的搜索";
 "Search web page" = "搜索网页";
-"Loading..." = "读取中...";
+"Loading…" = "读取中…";
 "Open Image in New Tab" = "在新标签中显示图片";
 "Open Link in New Tab" = "在新标签中打开连接";
 "Open Link in %@" = "在 %@ 中打开连接";
 "Open Page in %@" = "在 %@ 中打开页面";
 "Copy Page Link to Clipboard" = "复制页面连接到粘贴板";
 "%d unread articles" = "%d 篇未读文章";
-"More Scripts..." = "更多脚本...";
+"More Scripts…" = "更多脚本…";
 "Install Update" = "安装更新";
 "Do Not Install" = "不安装";
 "Replace smart folder title" = "已经有智能文件夹使用 %@ 这个名称了";
@@ -319,14 +319,14 @@
 "%u unread" = "%u 未读";
 "Keyboard Shortcuts" = "快捷键";
 "%@ (Filtered: %@)" = "%@ (过滤条件: %@)";
-"Get Info..." = "获取信息...";
-"Open Web Location..." = "打开网络地址...";
+"Get Info…" = "获取信息…";
+"Open Web Location…" = "打开网络地址…";
 "Refresh Folder Images" = "更新文件夹图片";
 "Report" = "默认";
 "Condensed" = "三栏";
 "Unified" = "合一";
 "Summary" = "总结";
-"Blog With..." = "Blog 通过...";
+"Blog With…" = "Blog 通过…";
 "Blog with %@" = "Blog 通过 %@";
 "Bigger Text" = "发大文章字体";
 "Smaller Text" = "缩小文章字体";
@@ -348,7 +348,7 @@
 "Local File" = "本地文件";
 "Hide Status Bar" = "隐藏状态栏";
 "Show Status Bar" = "显示状态栏";
-"Customize Toolbar..." = "自定义工具栏...";
+"Customize Toolbar…" = "自定义工具栏…";
 "Search Articles" = "搜索文章";
 "Progress" = "进度";
 "Delete all articles in the trash" = "删除废纸篓中的所有文章";
@@ -399,7 +399,7 @@
 
 /* Added in 2.6.0 */
 "Article load completed" = "Article load completed";
-"Loading HTML article..." = "Loading HTML article...";
+"Loading HTML article…" = "Loading HTML article…";
 "Ascending" = "Ascending";
 "Descending" = "Descending";
 "Use Current Style for Articles" = "Use Current Style for Articles";
@@ -420,7 +420,7 @@
 "Authenticating on Open Reader" = "Authenticating on Open Reader";
 "Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
 "Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
-"Fetching Open Reader Subscriptions..." = "Fetching Open Reader Subscriptions...";
+"Fetching Open Reader Subscriptions…" = "Fetching Open Reader Subscriptions…";
 "Open Reader Authentication Failed" = "Open Reader Authentication Failed";
 "Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
 
@@ -437,7 +437,7 @@
 "Plugin could not be installed" = "Plugin could not be installed";
 "Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
 "Queue" = "Queue";
-"Forcing Refresh subscriptions..." = "Forcing Refresh subscriptions...";
+"Forcing Refresh subscriptions…" = "Forcing Refresh subscriptions…";
 "Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
 
 /* Added in 3.0.2 */

@@ -3,7 +3,7 @@
 "Mark Unflagged" = "Als unmarkiert markieren";
 "Articles" = "Artikel";
 "Folders" = "Ordner";
-"Loading %@..." = "Lade %@...";
+"Loading %@…" = "Lade %@…";
 "Completed" = "Fertig";
 "Refresh RSS feeds" = "Abonnements aktualisieren";
 "Refresh All Subscriptions" = "Alle Abonnements aktualisieren";
@@ -57,7 +57,7 @@
 "Refresh all your subscriptions" = "Alle Abonnements aktualisieren";
 "New style title" = "Vienna hat einen neuen Stil installiert";
 "New style body" = "Der Stil '%@' wurde im Stilordner installiert und zum Stilmenü hinzugefügt.";
-"More Styles..." = "Mehr Stile...";
+"More Styles…" = "Mehr Stile…";
 "Delete selected message" = "Sind Sie sich sicher, dass Sie die ausgewählte Artikel dauerhaft löschen wollen?";
 "Delete selected message text" = "Dieser Befehl kann nicht wieder rückgängig gemacht werden.";
 "Cancel" = "Abbrechen";
@@ -65,8 +65,8 @@
 "From" = "Von";
 "To" = "An";
 "(No title)" = "(Kein Betreff)";
-"Refreshing folder images..." = "Aktualisiere Ordnericons...";
-"Refreshing subscriptions..." = "Abonnements aktualisieren...";
+"Refreshing folder images…" = "Aktualisiere Ordnericons…";
+"Refreshing subscriptions…" = "Abonnements aktualisieren…";
 "Authenticating with user name '%@'" = "Authentifizieren mit Benutzername  '%@'";
 "No new articles available" = "Keine neuen Artikel verfügbar";
 "%d new articles retrieved" = "%d neue Artikel empfangen";
@@ -86,7 +86,7 @@
 "Error parsing XML data in feed" = "Fehler beim Parsen der XML-Daten des Feeds";
 "Retrieving folder image" = "Empfange Ordnerbild";
 "Folder image retrieved from %@" = "Ordnerbild von %@ empfangen";
-"Contacting..." = "Kontaktiere...";
+"Contacting…" = "Kontaktiere…";
 "Connect Running" = "Eine Verbindung ist aktiv";
 "Connect Running text" = "Wollen Sie die Verbindung unterbrechen und Vienna jetzt schließen?";
 "Delete group folder" = "Lösche Ordner";
@@ -97,7 +97,7 @@
 "Delete RSS feed" = "Lösche Abonnement";
 "Delete multiple folders text" = "Sind Sie sicher, dass Sie alle %d ausgewählten Ordner löschen möchten? Dieser Befehl kann nicht rückgängig gemacht werden.";
 "Delete multiple folders" = "Lösche mehrere Ordner";
-"Delete folder status" = "Lösche Ordner '%@'...";
+"Delete folder status" = "Lösche Ordner '%@'…";
 "An error has occurred" = "Ein Fehler ist aufgetreten.";
 "Your software is up to date" = "Ihre Version von Vienna ist aktuell.";
 "Please try again later" = "Bitte versuchen Sie es später nochmals.";
@@ -120,7 +120,7 @@
 "Unread Articles" = "Ungelesene Artikel";
 "Today's Articles" = "Artikel von heute";
 "Trash" = "Papierkorb";
-"Select..." = "Auswählen...";
+"Select…" = "Auswählen…";
 " (%d unread)" = " (%d ungelesen)";
 "is" = "ist";
 "is not" = "ist nicht";
@@ -149,14 +149,14 @@
 "Recents" = "Letzte";
 "Clear" = "Letzte Sucheinträge löschen";
 "Search web page" = "Webseite durchsuchen";
-"Loading..." = "Lade...";
+"Loading…" = "Lade…";
 "Open Image in New Tab" = "Bild im neuem Tab öffnen";
 "Open Link in New Tab" = "Link im neuem Tab öffnen";
 "Open Link in %@" = "Öffne Link in %@";
 "Open Page in %@" = "Öffne Seite in %@";
 "Copy Page Link to Clipboard" = "Seitenlink in die Zwischenablage kopieren";
 "%d unread articles" = "%d ungelesene Artikel";
-"More Scripts..." = "Mehr Skripte...";
+"More Scripts…" = "Mehr Skripte…";
 "Install Update" = "Installiere Aktualisierung";
 "Do Not Install" = "Nicht installieren";
 "Replace smart folder title" = "Ein intelligenter Ordner mit dem Namen %@ existiert bereits";
@@ -319,14 +319,14 @@
 "%u unread" = "%u ungelesen";
 "Keyboard Shortcuts" = "Tastaturbefehle";
 "%@ (Filtered: %@)" = "%@ (Filter: %@)";
-"Get Info..." = "Information...";
-"Open Web Location..." = "Web-Adresse öffnen...";
+"Get Info…" = "Information…";
+"Open Web Location…" = "Web-Adresse öffnen…";
 "Refresh Folder Images" = "Ordner-Icons aktualisieren";
 "Report" = "Horizontal";
 "Condensed" = "Vertikal";
 "Unified" = "Kompakt mit Zusammenfassung";
 "Summary" = "Zusammenfassung";
-"Blog With..." = "Bloggen mit...";
+"Blog With…" = "Bloggen mit…";
 "Blog with %@" = "Bloggen mit %@";
 "Bigger Text" = "Schrift größer";
 "Smaller Text" = "Schrift kleiner";
@@ -348,7 +348,7 @@
 "Local File" = "Lokale Datei";
 "Hide Status Bar" = "Statusleiste ausblenden";
 "Show Status Bar" = "Statusleiste anzeigen";
-"Customize Toolbar..." = "Symbolleiste anpassen...";
+"Customize Toolbar…" = "Symbolleiste anpassen…";
 "Search Articles" = "Artikel durchsuchen";
 "Progress" = "Fortschritt";
 "Delete all articles in the trash" = "Alle Artikel im Papierkorb endgültig löschen";
@@ -371,7 +371,7 @@
 "Search Results" = "Suchergebnisse";
 "Hide Filter Bar" = "Filter-Leiste ausblenden";
 "Show Filter Bar" = "Filter-Leiste anzeigen";
-"Email a link to the current article or website" = "Einen Link zum momentanen Artikel oder der momentanen Website versenden ...";
+"Email a link to the current article or website" = "Einen Link zum momentanen Artikel oder der momentanen Website versenden …";
 "Refresh" = "Aktualisieren";
 "Action" = "Aktion";
 "Get Info" = "Information";
@@ -379,7 +379,7 @@
 "Display the list of available styles" = "Liste der vorhandenen Stile anzeigen";
 
 /* Added in 2.3.0 */
-"Order By" = "Sortiermodus...";
+"Order By" = "Sortiermodus…";
 "Manual" = "Manuell";
 "Name" = "Name (alphabetisch)";
 
@@ -399,7 +399,7 @@
 
 /* Added in 2.6.0 */
 "Article load completed" = "Der Artikel wurde geladen";
-"Loading HTML article..." = "Artikel laden...";
+"Loading HTML article…" = "Artikel laden…";
 "Ascending" = "Aufsteigend";
 "Descending" = "Absteigend";
 "Use Current Style for Articles" = "Aktuellen Style zur Artikel-Anzeige verwenden";
@@ -420,7 +420,7 @@
 "Authenticating on Open Reader" = "Authentifiziere bei Open Reader";
 "Connecting to Open Reader server to retrieve %@" = "Verbindung mit Open Reader Server wird hergestellt um %@ zur erhalten";
 "Retrieving folder image for Open Reader Feed" = "Empfange Ordnerbilder für den Open Reader Feed";
-"Fetching Open Reader Subscriptions..." = "Rufe Open Reader Abonnements ab...";
+"Fetching Open Reader Subscriptions…" = "Rufe Open Reader Abonnements ab…";
 "Open Reader Authentication Failed" = "Open Reader Authentifizierungsfehler";
 "Open Reader Authentication Failed text" = "Überprüfe ob Benutzername und Passwort für den Zugang zum Open Reader Server in den Einstellungen von Vienna richtig gespeichert sind.\nÜberprüfe auch ob Zugang zum Internet besteht.";
 
@@ -437,7 +437,7 @@
 "Plugin could not be installed" = "Plugin could not be installed";
 "Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
 "Queue" = "Queue";
-"Forcing Refresh subscriptions..." = "Forcing Refresh subscriptions...";
+"Forcing Refresh subscriptions…" = "Forcing Refresh subscriptions…";
 "Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
 
 /* Added in 3.0.2 */

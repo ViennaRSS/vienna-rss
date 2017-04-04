@@ -3,7 +3,7 @@
 "Mark Unflagged" = "Ta bort flagga";
 "Articles" = "Artiklar";
 "Folders" = "Mappar";
-"Loading %@..." = "Laddar %@...";
+"Loading %@…" = "Laddar %@…";
 "Completed" = "Klart";
 "Refresh RSS feeds" = "Uppdatera prenumerationerna";
 "Refresh All Subscriptions" = "Uppdatera alla prenumerationer";
@@ -57,7 +57,7 @@
 "Refresh all your subscriptions" = "Uppdatera alla prenumerationer";
 "New style title" = "Vienna har installerat en ny stil";
 "New style body" = "Stilen '%@' har installerats i din stilmapp och har lagts till i stilmenyn.";
-"More Styles..." = "Fler stilar...";
+"More Styles…" = "Fler stilar…";
 "Delete selected message" = "Är du säker på att du vill radera de markerade artiklarna permanent?";
 "Delete selected message text" = "Det här valet går ej att ångra.";
 "Cancel" = "Avbryt";
@@ -65,8 +65,8 @@
 "From" = "Från";
 "To" = "Till";
 "(No title)" = "(Inget ämne)";
-"Refreshing folder images..." = "Refreshing folder images...";
-"Refreshing subscriptions..." = "Uppdaterar prenumerationer...";
+"Refreshing folder images…" = "Refreshing folder images…";
+"Refreshing subscriptions…" = "Uppdaterar prenumerationer…";
 "Authenticating with user name '%@'" = "Autentiserar med användarnamn '%@'";
 "No new articles available" = "Inga nya artiklar tillgängliga";
 "%d new articles retrieved" = "%d nya artiklar mottagna";
@@ -86,7 +86,7 @@
 "Error parsing XML data in feed" = "Fel vid avläsning av XML-data i strömmen";
 "Retrieving folder image" = "Mottager mappbild";
 "Folder image retrieved from %@" = "Mappbild mottagen från %@";
-"Contacting..." = "Ansluter...";
+"Contacting…" = "Ansluter…";
 "Connect Running" = "Anslutningen pågår";
 "Connect Running text" = "Vill du avbryta anslutningen och avsluta Vienna nu?";
 "Delete group folder" = "Radera gruppmapp";
@@ -97,7 +97,7 @@
 "Delete RSS feed" = "Radera prenumeration";
 "Delete multiple folders text" = "Är du säker på att du vill radera alla %d markerade mappar? Det här valet går ej att ångra.";
 "Delete multiple folders" = "Radera flera mappar";
-"Delete folder status" = "Raderar mapp '%@'...";
+"Delete folder status" = "Raderar mapp '%@'…";
 "An error has occurred" = "Ett fel har uppstått.";
 "Your software is up to date" = "Du har redan senaste versionen av Vienna.";
 "Please try again later" = "Försök igen senare.";
@@ -120,7 +120,7 @@
 "Unread Articles" = "Olästa artiklar";
 "Today's Articles" = "Dagens artiklar";
 "Trash" = "Raderade objekt";
-"Select..." = "Markera...";
+"Select…" = "Markera…";
 " (%d unread)" = " (%d oläst)";
 "is" = "är";
 "is not" = "är inte";
@@ -149,14 +149,14 @@
 "Recents" = "Senaste";
 "Clear" = "Rensa senaste sökningar";
 "Search web page" = "Sök på webbsida";
-"Loading..." = "Laddar...";
+"Loading…" = "Laddar…";
 "Open Image in New Tab" = "Öppna bild i ny tabb";
 "Open Link in New Tab" = "Öppna länk i ny tabb";
 "Open Link in %@" = "Öppna länk i %@";
 "Open Page in %@" = "Öppna sida i %@";
 "Copy Page Link to Clipboard" = "Kopiera sidlänk till urklipp";
 "%d unread articles" = "%d olästa artiklar";
-"More Scripts..." = "Fler skript...";
+"More Scripts…" = "Fler skript…";
 "Install Update" = "Installera uppdatering";
 "Do Not Install" = "Installera ej";
 "Replace smart folder title" = "En smart mapp med namnet %@ finns redan";
@@ -319,14 +319,14 @@
 "%u unread" = "%u olästa";
 "Keyboard Shortcuts" = "Kortkommandon";
 "%@ (Filtered: %@)" = "%@ (Filter: %@)";
-"Get Info..." = "Visa info...";
-"Open Web Location..." = "Öppna plats...";
+"Get Info…" = "Visa info…";
+"Open Web Location…" = "Öppna plats…";
 "Refresh Folder Images" = "Ladda om mappbilder";
 "Report" = "Rapport";
 "Condensed" = "Kompakt";
 "Unified" = "Enad";
 "Summary" = "Sammanfattning";
-"Blog With..." = "Blog med...";
+"Blog With…" = "Blog med…";
 "Blog with %@" = "Blog med %@";
 "Bigger Text" = "Större text";
 "Smaller Text" = "Mindre text";
@@ -348,7 +348,7 @@
 "Local File" = "Fil på din dator";
 "Hide Status Bar" = "Göm statusfältet";
 "Show Status Bar" = "Visa statusfältet";
-"Customize Toolbar..." = "Anpassa verktygsrad...";
+"Customize Toolbar…" = "Anpassa verktygsrad…";
 "Search Articles" = "Sök i artiklar";
 "Progress" = "Progress";
 "Delete all articles in the trash" = "Radera samtliga artiklar i papperskorgen";
@@ -399,7 +399,7 @@
 
 /* Added in 2.6.0 */
 "Article load completed" = "Article load completed";
-"Loading HTML article..." = "Loading HTML article...";
+"Loading HTML article…" = "Loading HTML article…";
 "Ascending" = "Ascending";
 "Descending" = "Descending";
 "Use Current Style for Articles" = "Use Current Style for Articles";
@@ -420,7 +420,7 @@
 "Authenticating on Open Reader" = "Authenticating on Open Reader";
 "Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
 "Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
-"Fetching Open Reader Subscriptions..." = "Fetching Open Reader Subscriptions...";
+"Fetching Open Reader Subscriptions…" = "Fetching Open Reader Subscriptions…";
 "Open Reader Authentication Failed" = "Open Reader Authentication Failed";
 "Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
 
@@ -437,7 +437,7 @@
 "Plugin could not be installed" = "Plugin could not be installed";
 "Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
 "Queue" = "Queue";
-"Forcing Refresh subscriptions..." = "Forcing Refresh subscriptions...";
+"Forcing Refresh subscriptions…" = "Forcing Refresh subscriptions…";
 "Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
 
 /* Added in 3.0.2 */

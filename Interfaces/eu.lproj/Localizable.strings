@@ -3,7 +3,7 @@
 "Mark Unflagged" = "Adierazle Batekin Jarri";
 "Articles" = "Artikuluak";
 "Folders" = "Direktorioak";
-"Loading %@..." = "Kargatzen %@...";
+"Loading %@…" = "Kargatzen %@…";
 "Completed" = "Eginda";
 "Refresh RSS feeds" = "Eguneratu Harpidetzak";
 "Refresh All Subscriptions" = "Eguneratu Harpidetza Guztiak";
@@ -57,7 +57,7 @@
 "Refresh all your subscriptions" = "Harpidetza guztiak eguneratu";
 "New style title" = "Vienna-k estilo berria istalatu du";
 "New style body" = "\"%@\" estiloa istalatu egin da Styles direktorioan eta Style menura gehitu da.";
-"More Styles..." = "Estilo gehiago...";
+"More Styles…" = "Estilo gehiago…";
 "Delete selected message" = "Ziur al zaude aukeratutako artikuluak betirako ezabatzea?";
 "Delete selected message text" = "Ekintza hau ezingo da desegin.";
 "Cancel" = "Ezeztatu";
@@ -65,8 +65,8 @@
 "From" = "Nondik";
 "To" = "Nora";
 "(No title)" = "(Titulurik ez)";
-"Refreshing folder images..." = "Direktorioen irudiak eguneratzen...";
-"Refreshing subscriptions..." = "Harpidetzak eguneratzen...";
+"Refreshing folder images…" = "Direktorioen irudiak eguneratzen…";
+"Refreshing subscriptions…" = "Harpidetzak eguneratzen…";
 "Authenticating with user name '%@'" = "\"%@\" erabiltzaile izenarekin autentifikatzen";
 "No new articles available" = "Ez daude artikulu berririk";
 "%d new articles retrieved" = "%d artikulu berri jasota";
@@ -86,7 +86,7 @@
 "Error parsing XML data in feed" = "Jarioaren XML data aztertzen errorea agertu da";
 "Retrieving folder image" = "Direktorioaren irudia jasotzen";
 "Folder image retrieved from %@" = "Direktorioaren irudia %@ -tik jasotzen";
-"Contacting..." = "Kontaktatzen...";
+"Contacting…" = "Kontaktatzen…";
 "Connect Running" = "Konexio bat martxan dago";
 "Connect Running text" = "Konexioa geratu eta Vienna itxi nahi al duzu?";
 "Delete group folder" = "Ezabatu talde direktorioa";
@@ -97,7 +97,7 @@
 "Delete RSS feed" = "Harpidetza ezabatu";
 "Delete multiple folders text" = "Ziur zaude aukeratutako %d direktorioak ezabatu nahi dituzula? Ekintza hau ezingo da desegin.";
 "Delete multiple folders" = "Ezabatu hainbat direktorio";
-"Delete folder status" = "\"%@\" direktorioa ezabatzen...";
+"Delete folder status" = "\"%@\" direktorioa ezabatzen…";
 "An error has occurred" = "Errore bat gertatu da.";
 "Your software is up to date" = "Zure Vienna bertsioa eguneratuta dago.";
 "Please try again later" = "Mesedez beranduago saiatu.";
@@ -120,7 +120,7 @@
 "Unread Articles" = "Irakurri Gabeko Artikuluak";
 "Today's Articles" = "Gaurko Artikuluak";
 "Trash" = "Zakarrontzia";
-"Select..." = "Aukeratu...";
+"Select…" = "Aukeratu…";
 " (%d unread)" = " (%d irakurri gabe)";
 "is" = "da";
 "is not" = "ez da";
@@ -149,14 +149,14 @@
 "Recents" = "Azkenak";
 "Clear" = "Ezabatu egindako azken bilaketak";
 "Search web page" = "Bilatu web orria";
-"Loading..." = "Kargatzen...";
+"Loading…" = "Kargatzen…";
 "Open Image in New Tab" = "Irudia fitxa berri batean ireki";
 "Open Link in New Tab" = "Esteka fitxa berri batean ireki";
 "Open Link in %@" = "Ireki esteka %@-(e)n";
 "Open Page in %@" = "Ireki orria %@-(e)n";
 "Copy Page Link to Clipboard" = "Orriaren esteka Paper-zorroan Kopiatu";
 "%d unread articles" = "%d artikulu irakurri gabe";
-"More Scripts..." = "Scripts Gehiago...";
+"More Scripts…" = "Scripts Gehiago…";
 "Install Update" = "Eguneraketa Istalatu";
 "Do Not Install" = "Ez Istalatu";
 "Replace smart folder title" = "%@ izena duen direktorio adimendua iada existitzen da";
@@ -319,14 +319,14 @@
 "%u unread" = "%u irakurri gabeak";
 "Keyboard Shortcuts" = "Teklatuko Laster-markak";
 "%@ (Filtered: %@)" = "%@ (Filtratu: %@)";
-"Get Info..." = "Informazioa Lortu...";
-"Open Web Location..." = "Ireki Web Tokia...";
+"Get Info…" = "Informazioa Lortu…";
+"Open Web Location…" = "Ireki Web Tokia…";
 "Refresh Folder Images" = "Eguneratu Direktorioen irudiak";
 "Report" = "Txostena";
 "Condensed" = "Trinkotuta";
 "Unified" = "Bateratua";
 "Summary" = "Laburpena";
-"Blog With..." = "Blogatu...";
+"Blog With…" = "Blogatu…";
 "Blog with %@" = "%@ -(e)kin blogatu";
 "Bigger Text" = "Testu Haundiagoa";
 "Smaller Text" = "Testu Txikiagoa";
@@ -348,7 +348,7 @@
 "Local File" = "Local File";
 "Hide Status Bar" = "Hide Status Bar";
 "Show Status Bar" = "Show Status Bar";
-"Customize Toolbar..." = "Customize Toolbar...";
+"Customize Toolbar…" = "Customize Toolbar…";
 "Search Articles" = "Search Articles";
 "Progress" = "Progress";
 "Delete all articles in the trash" = "Delete all articles in the trash";
@@ -399,7 +399,7 @@
 
 /* Added in 2.6.0 */
 "Article load completed" = "Article load completed";
-"Loading HTML article..." = "Loading HTML article...";
+"Loading HTML article…" = "Loading HTML article…";
 "Ascending" = "Ascending";
 "Descending" = "Descending";
 "Use Current Style for Articles" = "Use Current Style for Articles";
@@ -420,7 +420,7 @@
 "Authenticating on Open Reader" = "Authenticating on Open Reader";
 "Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
 "Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
-"Fetching Open Reader Subscriptions..." = "Fetching Open Reader Subscriptions...";
+"Fetching Open Reader Subscriptions…" = "Fetching Open Reader Subscriptions…";
 "Open Reader Authentication Failed" = "Open Reader Authentication Failed";
 "Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
 
@@ -437,7 +437,7 @@
 "Plugin could not be installed" = "Plugin could not be installed";
 "Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
 "Queue" = "Queue";
-"Forcing Refresh subscriptions..." = "Forcing Refresh subscriptions...";
+"Forcing Refresh subscriptions…" = "Forcing Refresh subscriptions…";
 "Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
 
 /* Added in 3.0.2 */

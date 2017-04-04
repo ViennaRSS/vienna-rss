@@ -3,7 +3,7 @@
 "Mark Unflagged" = "Önemsiz Olarak İşaretle";
 "Articles" = "Makaleler";
 "Folders" = "Klasörler";
-"Loading %@..." = "Yükleniyor %@...";
+"Loading %@…" = "Yükleniyor %@…";
 "Completed" = "Tamamlandı";
 "Refresh RSS feeds" = "RSS Beslemelerini yenile";
 "Refresh All Subscriptions" = "Tüm Abonelikleri Yenile";
@@ -57,7 +57,7 @@
 "Refresh all your subscriptions" = "Tüm aboneliklerinizi yenileyin";
 "New style title" = "Vienna yeni bir stil yükledi";
 "New style body" = "\"%@\" stili Stiller klasörünüze yüklendi ve Stil menüsüne eklendi.";
-"More Styles..." = "Daha Fazla Stil...";
+"More Styles…" = "Daha Fazla Stil…";
 "Delete selected message" = "Seçili makaleleri kalıcı olarak silmek istediğinizden emin misiniz?";
 "Delete selected message text" = "Bu özellik geri alınamaz.";
 "Cancel" = "İptal";
@@ -65,8 +65,8 @@
 "From" = "Kimden";
 "To" = "Kime";
 "(No title)" = "(Başlık Yok)";
-"Refreshing folder images..." = "Klasör imajları yenileniyor...";
-"Refreshing subscriptions..." = "Abonelikler yenileniyor...";
+"Refreshing folder images…" = "Klasör imajları yenileniyor…";
+"Refreshing subscriptions…" = "Abonelikler yenileniyor…";
 "Authenticating with user name '%@'" = "\"%@\" kullanıcı adı yetkilendiriliyor";
 "No new articles available" = "Yeni makale yok";
 "%d new articles retrieved" = "%d yeni makale alındı";
@@ -86,7 +86,7 @@
 "Error parsing XML data in feed" = "Beslemedeki XML verisi aktarımında hata";
 "Retrieving folder image" = "Klasör imajı alınıyor";
 "Folder image retrieved from %@" = "Klasör imajı şuradan alındı: %@";
-"Contacting..." = "Bağlanıyor...";
+"Contacting…" = "Bağlanıyor…";
 "Connect Running" = "Bağlantı yürürlükte";
 "Connect Running text" = "Bağlantıyı kesip Vienna'yı kapatmak istediğinize emin misiniz?";
 "Delete group folder" = "Grup klasörünü sil";
@@ -97,7 +97,7 @@
 "Delete RSS feed" = "Aboneliği sil";
 "Delete multiple folders text" = "%d seçili klasörlerini silmek istediğinize emin misiniz? Bu işlem geri alınamaz.";
 "Delete multiple folders" = "Çok sayıda klasörü sil";
-"Delete folder status" = "\"%@\" klasörü siliniyor...";
+"Delete folder status" = "\"%@\" klasörü siliniyor…";
 "An error has occurred" = "Bir hata oluştu.";
 "Your software is up to date" = "Vienna'nız güncel.";
 "Please try again later" = "Lütfen daha sonra tekrar deneyiniz.";
@@ -120,7 +120,7 @@
 "Unread Articles" = "Okunmamış Makaleler";
 "Today's Articles" = "Bugünün Makaleleri";
 "Trash" = "Çöp";
-"Select..." = "Seç...";
+"Select…" = "Seç…";
 " (%d unread)" = " (%d okunmamış)";
 "is" = "dir";
 "is not" = "değildir";
@@ -149,14 +149,14 @@
 "Recents" = "Son";
 "Clear" = "Son aramaları temizle";
 "Search web page" = "Web sayfası ara";
-"Loading..." = "Yükleniyor...";
+"Loading…" = "Yükleniyor…";
 "Open Image in New Tab" = "İmajı Yeni Sekmede Aç";
 "Open Link in New Tab" = "Bağlantıyı Yeni Sekmede Aç";
 "Open Link in %@" = "Bağlantıyı Şurada Aç %@";
 "Open Page in %@" = "Sayfayı Şurada Aç %@";
 "Copy Page Link to Clipboard" = "Sayfa Adresini Panoya Kopyala";
 "%d unread articles" = "%d okunmamış makale";
-"More Scripts..." = "Daha Fazla Script...";
+"More Scripts…" = "Daha Fazla Script…";
 "Install Update" = "Güncellemeyi Yükle";
 "Do Not Install" = "Yükleme";
 "Replace smart folder title" = "%@ adında bir akıllı klasör zaten var.";
@@ -319,14 +319,14 @@
 "%u unread" = "%u okunmayan";
 "Keyboard Shortcuts" = "Klavye Kısayolları";
 "%@ (Filtered: %@)" = "%@ (Filtre: %@)";
-"Get Info..." = "Bilgi al...";
-"Open Web Location..." = "Web Bölgesini Aç...";
+"Get Info…" = "Bilgi al…";
+"Open Web Location…" = "Web Bölgesini Aç…";
 "Refresh Folder Images" = "Klasör İmajlarını Yenile";
 "Report" = "Rapor Et";
 "Condensed" = "Yoğunlaştırılmış";
 "Unified" = "Birleştirilmiş";
 "Summary" = "Özet";
-"Blog With..." = "Şununla blogla...";
+"Blog With…" = "Şununla blogla…";
 "Blog with %@" = "Şununla blogla: %@";
 "Bigger Text" = "Daha Büyük Metin";
 "Smaller Text" = "Daha Küçük Metin";
@@ -348,7 +348,7 @@
 "Local File" = "Yerel Dosya";
 "Hide Status Bar" = "Durum Çubuğunu Gizle";
 "Show Status Bar" = "Durum Çubuğunu Göster";
-"Customize Toolbar..." = "Araç Çubuğunu Düzenle...";
+"Customize Toolbar…" = "Araç Çubuğunu Düzenle…";
 "Search Articles" = "Makalelerde Ara";
 "Progress" = "İşlem";
 "Delete all articles in the trash" = "Çöpteki tüm makaleleri sil";
@@ -399,7 +399,7 @@
 
 /* Added in 2.6.0 */
 "Article load completed" = "Article load completed";
-"Loading HTML article..." = "Loading HTML article...";
+"Loading HTML article…" = "Loading HTML article…";
 "Ascending" = "Ascending";
 "Descending" = "Descending";
 "Use Current Style for Articles" = "Use Current Style for Articles";
@@ -420,7 +420,7 @@
 "Authenticating on Open Reader" = "Authenticating on Open Reader";
 "Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
 "Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
-"Fetching Open Reader Subscriptions..." = "Fetching Open Reader Subscriptions...";
+"Fetching Open Reader Subscriptions…" = "Fetching Open Reader Subscriptions…";
 "Open Reader Authentication Failed" = "Open Reader Authentication Failed";
 "Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
 
@@ -437,7 +437,7 @@
 "Plugin could not be installed" = "Plugin could not be installed";
 "Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
 "Queue" = "Queue";
-"Forcing Refresh subscriptions..." = "Forcing Refresh subscriptions...";
+"Forcing Refresh subscriptions…" = "Forcing Refresh subscriptions…";
 "Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
 
 /* Added in 3.0.2 */

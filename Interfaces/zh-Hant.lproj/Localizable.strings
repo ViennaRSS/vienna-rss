@@ -3,7 +3,7 @@
 "Mark Unflagged" = "標示為未加上旗標";
 "Articles" = "文章";
 "Folders" = "檔案夾";
-"Loading %@..." = "正在載入“%@”⋯";
+"Loading %@…" = "正在載入“%@”⋯";
 "Completed" = "完成";
 "Refresh RSS feeds" = "重新整理 RSS 訂閱頻道";
 "Refresh All Subscriptions" = "重新整理所有訂閱頻道";
@@ -57,7 +57,7 @@
 "Refresh all your subscriptions" = "重新整理所有的訂閱頻道";
 "New style title" = "Vienna 已安裝了新的樣式";
 "New style body" = "“%@”樣式已順利安裝到您的“樣式”檔案夾，並已加入“樣式”選單。";
-"More Styles..." = "更多樣式⋯";
+"More Styles…" = "更多樣式⋯";
 "Delete selected message" = "您是否確定要永久刪除所選文章？";
 "Delete selected message text" = "此項操作無法還原。";
 "Cancel" = "取消";
@@ -65,8 +65,8 @@
 "From" = "自";
 "To" = "至";
 "(No title)" = "(無主旨)";
-"Refreshing folder images..." = "重新整理檔案夾影像⋯";
-"Refreshing subscriptions..." = "正在更新訂閱頻道⋯";
+"Refreshing folder images…" = "重新整理檔案夾影像⋯";
+"Refreshing subscriptions…" = "正在更新訂閱頻道⋯";
 "Authenticating with user name '%@'" = "正在使用使用者名稱“%@”進行認證";
 "No new articles available" = "沒有新文章";
 "%d new articles retrieved" = "已取得 %d 則新文章";
@@ -86,7 +86,7 @@
 "Error parsing XML data in feed" = "在剖析訂閱頻道的 XML 資料時發生錯誤";
 "Retrieving folder image" = "正在取得檔案夾影像";
 "Folder image retrieved from %@" = "已從 %@ 取得檔案夾影像";
-"Contacting..." = "連線中⋯";
+"Contacting…" = "連線中⋯";
 "Connect Running" = "正在進行連線";
 "Connect Running text" = "您是否確定要終止連線，並且立即結束 Vienna？";
 "Delete group folder" = "刪除群組檔案夾";
@@ -120,7 +120,7 @@
 "Unread Articles" = "Unread Articles";
 "Today's Articles" = "今天的文章";
 "Trash" = "垃圾桶";
-"Select..." = "選取⋯";
+"Select…" = "選取⋯";
 " (%d unread)" = " (%d 則未閱讀)";
 "is" = "等於";
 "is not" = "不等於";
@@ -149,14 +149,14 @@
 "Recents" = "最近記錄";
 "Clear" = "清除最近的搜尋記錄";
 "Search web page" = "搜尋網頁";
-"Loading..." = "載入中⋯";
+"Loading…" = "載入中⋯";
 "Open Image in New Tab" = "在新標籤頁中打開影像";
 "Open Link in New Tab" = "在新標籤頁中打開連結";
 "Open Link in %@" = "在 %@ 中打開連結";
 "Open Page in %@" = "在 %@ 中打開頁面";
 "Copy Page Link to Clipboard" = "將頁面連結拷貝到剪貼板";
 "%d unread articles" = "%d 則未閱讀的文章";
-"More Scripts..." = "更多工序指令⋯";
+"More Scripts…" = "更多工序指令⋯";
 "Install Update" = "安裝更新項目";
 "Do Not Install" = "不要安裝";
 "Replace smart folder title" = "系統中已有名稱為 %@ 的智慧型檔案夾";
@@ -319,14 +319,14 @@
 "%u unread" = "%u 則未閱讀";
 "Keyboard Shortcuts" = "鍵盤快速鍵";
 "%@ (Filtered: %@)" = "%@ (過濾：%@)";
-"Get Info..." = "簡介⋯";
-"Open Web Location..." = "打開網頁網址⋯";
+"Get Info…" = "簡介⋯";
+"Open Web Location…" = "打開網頁網址⋯";
 "Refresh Folder Images" = "重新整理檔案夾影像";
 "Report" = "報告";
 "Condensed" = "精簡";
 "Unified" = "Unified";
 "Summary" = "摘要";
-"Blog With..." = "網誌工具⋯";
+"Blog With…" = "網誌工具⋯";
 "Blog with %@" = "以 %@ 張貼網誌";
 "Bigger Text" = "放大字級";
 "Smaller Text" = "縮小字級";
@@ -348,7 +348,7 @@
 "Local File" = "本機檔案";
 "Hide Status Bar" = "隱藏狀態列";
 "Show Status Bar" = "顯示狀態列";
-"Customize Toolbar..." = "自定工具列⋯";
+"Customize Toolbar…" = "自定工具列⋯";
 "Search Articles" = "搜尋文章";
 "Progress" = "進度";
 "Delete all articles in the trash" = "刪除垃圾桶的所有文章";
@@ -399,7 +399,7 @@
 
 /* Added in 2.6.0 */
 "Article load completed" = "Article load completed";
-"Loading HTML article..." = "Loading HTML article...";
+"Loading HTML article…" = "Loading HTML article…";
 "Ascending" = "Ascending";
 "Descending" = "Descending";
 "Use Current Style for Articles" = "Use Current Style for Articles";
@@ -420,7 +420,7 @@
 "Authenticating on Open Reader" = "Authenticating on Open Reader";
 "Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
 "Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
-"Fetching Open Reader Subscriptions..." = "Fetching Open Reader Subscriptions...";
+"Fetching Open Reader Subscriptions…" = "Fetching Open Reader Subscriptions…";
 "Open Reader Authentication Failed" = "Open Reader Authentication Failed";
 "Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
 
@@ -437,7 +437,7 @@
 "Plugin could not be installed" = "Plugin could not be installed";
 "Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
 "Queue" = "Queue";
-"Forcing Refresh subscriptions..." = "Forcing Refresh subscriptions...";
+"Forcing Refresh subscriptions…" = "Forcing Refresh subscriptions…";
 "Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
 
 /* Added in 3.0.2 */
