@@ -170,7 +170,6 @@ enum GoogleReaderStatus {
         [clientRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", self.clientAuthToken]];
         return; //we are already connected
     } else if ((googleReaderStatus == waitingClientToken ) && myRequest != nil) {
-        LLog(@"Waiting because another instance is authenticating");
         [clientRequest addDependency:myRequest];
         if (clientRequest != nil) {
             [clientAuthWaitQueue addObject:clientRequest];
@@ -187,7 +186,6 @@ enum GoogleReaderStatus {
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost]];
         myRequest = [ASIFormDataRequest requestWithURL:url];
 
-        [APPCONTROLLER setStatusMessage:NSLocalizedString(@"Authenticating on Open Reader", nil) persist:NO];
         [self configureForSpecificHost];
         if (hostRequiresInoreaderAdditionalHeaders) {
             NSMutableDictionary *theHeaders = [myRequest.requestHeaders mutableCopy];
@@ -250,6 +248,9 @@ enum GoogleReaderStatus {
                                                                userInfo:nil
                                                                 repeats:YES];
                 }
+                // pause for a second
+                // to make sure dependent requests are launched only when the OpenReader server is ready
+                [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
             }
         }];
 
@@ -258,8 +259,8 @@ enum GoogleReaderStatus {
         if (clientRequest != nil) {
             [clientAuthWaitQueue addObject:clientRequest];
         }
-        LLog(@"Start first authentication...");
         [[RefreshManager sharedManager] addConnection:myRequest];
+        [APPCONTROLLER setStatusMessage:NSLocalizedString(@"Authenticating on Open Reader", nil) persist:NO];
     }
 }
 
@@ -306,7 +307,6 @@ enum GoogleReaderStatus {
         [clientRequest setPostValue:self.tToken forKey:@"T"];
         return;
     } else if (googleReaderStatus == waitingTToken && myRequest != nil) {
-        LLog(@"Waiting as another instance has requested T token");
         [clientRequest addDependency:myRequest];
         if (clientRequest != nil) {
             [tTokenWaitQueue addObject:clientRequest];
@@ -320,7 +320,6 @@ enum GoogleReaderStatus {
         return;
     } else {
         // googleReaderStatus ==  missingTToken
-        LLog(@"Start T token Request");
         myRequest = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
         googleReaderStatus = waitingTToken;
         [myRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
@@ -392,6 +391,7 @@ enum GoogleReaderStatus {
 {
 	LLog(@"Failed on request %@", [request originalURL]);
 	LOG_EXPR([request error]);
+	LOG_EXPR([request requestHeaders]);
 	LOG_EXPR([request responseHeaders]);
 	if (request.error.code == ASIAuthenticationErrorType) //Error caused by lack of authentication
 		[self clearAuthentication];
@@ -537,7 +537,6 @@ enum GoogleReaderStatus {
 		
 	ActivityItem *aItem = request.userInfo[@"log"];
 	Folder *refreshedFolder = request.userInfo[@"folder"];
-	LLog(@"Refresh Done: %@",[refreshedFolder feedURL]);
 
 	if (request.responseStatusCode == 404) {
 		[aItem appendDetail:NSLocalizedString(@"Error: Feed not found!", nil)];
@@ -572,7 +571,6 @@ enum GoogleReaderStatus {
                                                              countStyle:NSByteCountFormatterCountStyleFile];
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%@ received", @"Number of bytes received, e.g. 1 MB received"), byteCount]];
 					
-		LLog(@"%ld items returned from %@", [subscriptionsDict[@"items"] count], [request url]);
 		NSMutableArray * articleArray = [NSMutableArray array];
 		
 		for (NSDictionary *newsItem in (NSArray*)subscriptionsDict[@"items"]) {
@@ -739,7 +737,6 @@ enum GoogleReaderStatus {
             // now, mark relevant articles unread
             [[refreshedFolder articleFromGuid:guid] markRead:NO];
 		}
-		LLog(@"%ld unread items for %@", [guidArray count], [request url]);
 
         [[Database sharedManager] markUnreadArticlesFromFolder:refreshedFolder guidArray:guidArray];
 	    // reset starred statuses in cache : we will receive in -StarredRequestDone: the updated list
@@ -811,7 +808,6 @@ enum GoogleReaderStatus {
 			[guidArray addObject:guid];
 			[[refreshedFolder articleFromGuid:guid] markFlagged:YES];
 		}
-		LLog(@"%ld starred items for %@", [guidArray count], [request url]);
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:@(refreshedFolder.itemId)];
 
         [[Database sharedManager] markStarredArticlesFromFolder:refreshedFolder guidArray:guidArray];
@@ -838,7 +834,6 @@ enum GoogleReaderStatus {
 
 -(void)subscriptionsRequestDone:(ASIHTTPRequest *)request
 {
-	LLog(@"Ending subscriptionRequest");
 	NSDictionary * subscriptionsDict;
     NSError *jsonError;
 	subscriptionsDict = [NSJSONSerialization JSONObjectWithData:request.responseData
@@ -928,10 +923,10 @@ enum GoogleReaderStatus {
 
 -(void)loadSubscriptions
 {
-	[APPCONTROLLER setStatusMessage:NSLocalizedString(@"Fetching Open Reader Subscriptions…", nil) persist:NO];
 	ASIHTTPRequest *subscriptionRequest = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json",APIBaseURL,ClientName]]];
 	subscriptionRequest.didFinishSelector = @selector(subscriptionsRequestDone:);
 	[[RefreshManager sharedManager] addConnection:subscriptionRequest];
+	[APPCONTROLLER setStatusMessage:NSLocalizedString(@"Fetching Open Reader Subscriptions…", nil) persist:NO];
 }
 
 -(void)subscribeToFeed:(NSString *)feedURL 
@@ -943,7 +938,6 @@ enum GoogleReaderStatus {
     // Needs to be synchronous so UI doesn't refresh too soon.
     request.delegate = nil;
     [request startSynchronous];
-    LLog(@"Subscribe response status code: %d", [request responseStatusCode]);
     [request clearDelegatesAndCancel];
 }
 
@@ -970,7 +964,6 @@ enum GoogleReaderStatus {
     [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", folderName] forKey:flag ? @"a" : @"r"];
     request.delegate = nil;
     [request startSynchronous];
-    LLog(@"Set folder response status code: %d", [request responseStatusCode]);
     [request clearDelegatesAndCancel];
 }
 
@@ -1023,7 +1016,6 @@ enum GoogleReaderStatus {
 
 -(void)createNewSubscription:(NSArray *)params
 {
-	LLog(@"createNewSubscription - START");
     NSInteger underFolder = MA_Root_Folder;
     NSString * feedURL = params[0];
 	NSString *rssTitle = [NSString stringWithFormat:@""];
@@ -1041,7 +1033,6 @@ enum GoogleReaderStatus {
     
     [APPCONTROLLER createNewGoogleReaderSubscription:feedURL underFolder:underFolder withTitle:rssTitle afterChild:-1];
 
-	LLog(@"createNewSubscription - END");
 
 }
 
