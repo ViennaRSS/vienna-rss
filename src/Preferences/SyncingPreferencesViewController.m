@@ -146,7 +146,7 @@ static BOOL _credentialsChanged;
     if(syncButton.state == NSOnState && _credentialsChanged)
     {
         [[GoogleReader sharedManager] resetAuthentication];
-        [[GoogleReader sharedManager] loadSubscriptions:nil];
+        [[GoogleReader sharedManager] loadSubscriptions];
     }
 }
 

@@ -16,11 +16,7 @@
 
 @interface GoogleReader : NSObject <ASIHTTPRequestDelegate> {
 @private
-	NSMutableArray *localFeeds;
 	NSUInteger countOfNewArticles;
-	NSString * clientAuthToken;
-	NSMutableArray * clientAuthWaitQueue;
-	NSMutableArray * tTokenWaitQueue;
 }
 
 +(GoogleReader *)sharedManager;
@@ -28,7 +24,7 @@
 // Check if an accessToken is available
 @property (nonatomic, getter=isReady, readonly) BOOL ready;
 
--(void)loadSubscriptions:(NSNotification*)nc;
+-(void)loadSubscriptions;
 -(void)getTokenForRequest:(ASIFormDataRequest *)clientRequest;
 -(void)clearAuthentication;
 -(void)resetAuthentication;
