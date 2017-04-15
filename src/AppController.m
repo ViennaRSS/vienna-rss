@@ -1396,14 +1396,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     }
 }
 
--(void)handleGoogleDownloadSubscriptions:(NSNotification *)nc {
-	[[GoogleReader sharedManager] loadSubscriptions];
-}
-
-
-
-
-
 /* handleShowFilterBar
  * Respond to the filter bar being shown or hidden programmatically.
  */
