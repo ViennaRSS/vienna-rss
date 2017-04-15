@@ -55,6 +55,8 @@
 @property (nonatomic, readonly, copy) NSString *statusMessageDuringRefresh;
 -(void)refreshFavIconForFolder:(Folder *)folder;
 -(void)addConnection:(ASIHTTPRequest *)conn;
+-(void)suspendConnectionsQueue;
+-(void)resumeConnectionsQueue;
 @property (nonatomic, readonly, strong) dispatch_queue_t asyncQueue;
 @end
 
