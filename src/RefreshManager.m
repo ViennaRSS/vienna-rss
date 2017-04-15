@@ -1150,6 +1150,24 @@
 	
 }
 
+/* suspendConnectionsQueue
+ * suspend the connections queue that we manage.
+ * Useful for managing dependencies inside the queue
+ */
+-(void)suspendConnectionsQueue
+{
+	[networkQueue setSuspended:YES];
+}
+
+/* resumeConnectionsQueue
+ * release the connections queue that we manage,
+ * after we suspended it.
+ */
+-(void)resumeConnectionsQueue
+{
+	[networkQueue setSuspended:NO];
+}
+
 -(BOOL)isConnecting
 {
 	return networkQueue.requestsCount > 0;

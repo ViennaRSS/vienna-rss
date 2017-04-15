@@ -197,6 +197,7 @@ enum GoogleReaderStatus {
                 [self.clientAuthWaitQueue removeObject:obj];
             }
             googleReaderStatus = notAuthenticated;
+            [[RefreshManager sharedManager] resumeConnectionsQueue];
         }];
         [myRequest setCompletionBlock:^{
             __strong typeof(weakRequest)strongRequest = weakRequest;
@@ -236,10 +237,8 @@ enum GoogleReaderStatus {
                                                                           userInfo:nil
                                                                            repeats:YES];
                 }
-                // pause for a second
-                // to make sure dependent requests are launched only when the OpenReader server is ready
-                [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
             }
+            [[RefreshManager sharedManager] resumeConnectionsQueue];
         }];
 
         [clientRequest addDependency:myRequest];
@@ -248,6 +247,7 @@ enum GoogleReaderStatus {
             [self.clientAuthWaitQueue addObject:clientRequest];
         }
         [[RefreshManager sharedManager] addConnection:myRequest];
+        [[RefreshManager sharedManager] suspendConnectionsQueue];
         [APPCONTROLLER setStatusMessage:NSLocalizedString(@"Authenticating on Open Reader", nil) persist:NO];
     }
 }
@@ -315,6 +315,7 @@ enum GoogleReaderStatus {
         __weak typeof(myRequest)weakRequest = myRequest;
         [myRequest setCompletionBlock:^{
             __strong typeof(weakRequest)strongRequest = weakRequest;
+            [[RefreshManager sharedManager] suspendConnectionsQueue];
             self.tToken = [strongRequest responseString];
             googleReaderStatus = fullyAuthenticated;
             for (id obj in self.tTokenWaitQueue) {
@@ -328,9 +329,7 @@ enum GoogleReaderStatus {
                 self.tTokenTimer =
                 [NSTimer scheduledTimerWithTimeInterval:25 * 60 target:self selector:@selector(renewTToken) userInfo:nil repeats:YES];
             }
-            // pause for half a second
-            // to make sure dependent requests are launched only when the OpenReader server is ready
-            [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+            [[RefreshManager sharedManager] resumeConnectionsQueue];
         }];
         [myRequest setFailedBlock:^{
             __strong typeof(weakRequest)strongRequest = weakRequest;
