@@ -511,6 +511,11 @@ enum GoogleReaderStatus {
 // callback : handler for timed out feeds, etc...
 - (void)feedRequestFailed:(ASIHTTPRequest *)request
 {
+    LLog(@"Open Reader feed request Failed : %@", [request originalURL]);
+    LOG_EXPR([request error]);
+    LOG_EXPR([request requestHeaders]);
+    LOG_EXPR([[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding]);
+    LOG_EXPR([request responseHeaders]);
 	ActivityItem *aItem = request.userInfo[@"log"];
 	Folder *refreshedFolder = request.userInfo[@"folder"];
 
