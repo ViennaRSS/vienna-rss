@@ -57,7 +57,6 @@
 -(void)addConnection:(ASIHTTPRequest *)conn;
 -(void)suspendConnectionsQueue;
 -(void)resumeConnectionsQueue;
-@property (nonatomic, readonly, strong) dispatch_queue_t asyncQueue;
 @end
 
 // Refresh types
