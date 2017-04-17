@@ -93,10 +93,6 @@
 	return self;
 }
 
--(dispatch_queue_t)asyncQueue {
-	return _queue;
-}
-
 - (void)nqQueueDidFinishSelector:(ASIHTTPRequest *)request {
 	if (hasStarted)
 	{

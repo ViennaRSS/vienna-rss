@@ -64,6 +64,7 @@ enum GoogleReaderStatus {
 @property (nonatomic) NSTimer * clientAuthTimer;
 @property (nonatomic) NSMutableArray * clientAuthWaitQueue;
 @property (nonatomic) NSMutableArray * tTokenWaitQueue;
+@property (nonatomic) dispatch_queue_t asyncQueue;
 @end
 
 @implementation GoogleReader
@@ -88,6 +89,7 @@ enum GoogleReaderStatus {
 									   @"AppID": @"1000001359",
 									   @"AppKey": @"rAlfs2ELSuFxZJ5adJAW54qsNbUa45Qn"
 									   };
+		_asyncQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.openReaderTasks", NULL);
 	}
     
     return self;
@@ -528,8 +530,7 @@ enum GoogleReaderStatus {
 // callback
 - (void)feedRequestDone:(ASIHTTPRequest *)request
 {
-	dispatch_queue_t queue = [RefreshManager sharedManager].asyncQueue;
-	dispatch_async(queue, ^() {
+	dispatch_async(self.asyncQueue, ^() {
 	// TODO : refactor code to separate feed refresh code and UI
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
@@ -699,8 +700,7 @@ enum GoogleReaderStatus {
 // callback
 - (void)readRequestDone:(ASIHTTPRequest *)request
 {
-	dispatch_queue_t queue = [RefreshManager sharedManager].asyncQueue;
-	dispatch_async(queue, ^() {
+	dispatch_async(self.asyncQueue, ^() {
 
 	Folder *refreshedFolder = request.userInfo[@"folder"];
 	ActivityItem *aItem = request.userInfo[@"log"];
@@ -751,11 +751,9 @@ enum GoogleReaderStatus {
 
 
 		// If this folder also requires an image refresh, add that
-		dispatch_queue_t queue = [RefreshManager sharedManager].asyncQueue;
-		if (refreshedFolder.flags & MA_FFlag_CheckForImage)
-			dispatch_async(queue, ^() {
-				[[RefreshManager sharedManager] refreshFavIconForFolder:refreshedFolder];
-			});
+        if (refreshedFolder.flags & MA_FFlag_CheckForImage) {
+            [[RefreshManager sharedManager] refreshFavIconForFolder:refreshedFolder];
+        }
 
 	}
 	else //response status other than OK (200)
@@ -772,8 +770,7 @@ enum GoogleReaderStatus {
 // callback
 - (void)starredRequestDone:(ASIHTTPRequest *)request
 {
-	dispatch_queue_t queue = [RefreshManager sharedManager].asyncQueue;
-	dispatch_async(queue, ^() {
+	dispatch_async(self.asyncQueue, ^() {
 
 	Folder *refreshedFolder = request.userInfo[@"folder"];
 	ActivityItem *aItem = request.userInfo[@"log"];
