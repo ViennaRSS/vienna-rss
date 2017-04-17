@@ -662,21 +662,16 @@ enum GoogleReaderStatus {
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
 
-		// Unread count may have changed
-		dispatch_async(dispatch_get_main_queue(), ^{
-			AppController *controller = APPCONTROLLER;
-			[controller setStatusMessage:nil persist:NO];
-			[refreshedFolder clearNonPersistedFlag:MA_FFlag_Error];
-
-			// Send status to the activity log
-			if (newArticlesFromFeed == 0)
-				[aItem setStatus:NSLocalizedString(@"No new articles available", nil)];
-			else
-			{
-				aItem.status = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
-				[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(refreshedFolder.itemId)];
-			}
-		});
+        [APPCONTROLLER setStatusMessage:nil persist:NO];
+        [refreshedFolder clearNonPersistedFlag:MA_FFlag_Error];
+        // Send status to the activity log
+        if (newArticlesFromFeed == 0) {
+            aItem.status = NSLocalizedString(@"No new articles available", nil);
+        } else {
+            aItem.status = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
+            [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
+                                                                                object:@(refreshedFolder.itemId)];
+        }
 		
 	} else { //other HTTP status response...
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), request.responseStatusCode]];
