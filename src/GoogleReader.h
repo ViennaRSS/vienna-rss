@@ -25,7 +25,6 @@
 @property (nonatomic, getter=isReady, readonly) BOOL ready;
 
 -(void)loadSubscriptions;
--(void)getTokenForRequest:(ASIFormDataRequest *)clientRequest;
 -(void)clearAuthentication;
 -(void)resetAuthentication;
 
