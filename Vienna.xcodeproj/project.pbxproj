@@ -1733,6 +1733,7 @@
 			files = (
 				EACE4C90147FA2B000A17997 /* PSMTabBarControl.framework in Frameworks */,
 				3A9903951993638900EA69B2 /* Growl.framework in Frameworks */,
+				43BA97DB1664766800B95F35 /* DisclosableView.framework in Frameworks */,
 				C6CB717DFD24F9D27350D042 /* libPods-Vienna.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
