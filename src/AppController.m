@@ -286,9 +286,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
                     NSTimeInterval interval = -lastRefresh.timeIntervalSinceNow;
                     if (interval > frequency)
                     {
-                        if ([Preferences standardPreferences].syncGoogleReader) {
-                            [[GoogleReader sharedManager] getTokenForRequest:nil];
-						}
                         [NSTimer scheduledTimerWithTimeInterval:15.0
                                                          target:app
                                                        selector:@selector(refreshOnTimer:)
