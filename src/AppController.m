@@ -195,7 +195,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
  */
 -(void)applicationDidResignActive:(NSNotification *)aNotification
 {
-	[foldersTree setOutlineViewBackgroundColor: [NSColor colorWithCalibratedRed:0.91 green:0.91 blue:0.91 alpha:1.00]];
 	statusText.textColor = [NSColor colorWithCalibratedRed:0.43 green:0.43 blue:0.43 alpha:1.00];
 	currentFilterTextField.textColor = [NSColor colorWithCalibratedRed:0.43 green:0.43 blue:0.43 alpha:1.00];
 	[filterIconInStatusBarButton setEnabled:NO];
@@ -206,7 +205,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
  */
 -(void)applicationDidBecomeActive:(NSNotification *)notification
 {
-	[foldersTree setOutlineViewBackgroundColor: [NSColor colorWithCalibratedRed:0.84 green:0.87 blue:0.90 alpha:1.00]];
 	statusText.textColor = [NSColor blackColor];
 	currentFilterTextField.textColor = [NSColor blackColor];
 	[filterIconInStatusBarButton setEnabled:YES];
@@ -902,20 +900,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     NSString *urlStr = [event paramDescriptorForKeyword:keyDirectObject].stringValue;
     if(urlStr)
         [self.rssFeed newSubscription:mainWindow underParent:foldersTree.groupParentSelection initialURL:urlStr];
-}
-
-#pragma mark Dock Menu
-
-/* applicationDockMenu
- * Return a menu with additional commands to be displayd on the application's
- * popup dock menu.
- */
--(NSMenu *)applicationDockMenu:(NSApplication *)sender
-{
-	appDockMenu = [NSMenu new];
-	[appDockMenu addItem:copyOfMenuItemWithAction(@selector(refreshAllSubscriptions:))];
-	[appDockMenu addItem:copyOfMenuItemWithAction(@selector(markAllSubscriptionsRead:))];
-	return appDockMenu;
 }
 
 /* contextMenuItemsForElement

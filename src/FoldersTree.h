@@ -50,7 +50,6 @@
 -(BOOL)selectFolder:(NSInteger)folderId;
 -(void)renameFolder:(NSInteger)folderId;
 @property (nonatomic, readonly) NSInteger actualSelection;
--(void)setOutlineViewBackgroundColor: (NSColor *)color;
 @property (nonatomic, readonly) NSInteger groupParentSelection;
 @property (nonatomic, readonly) NSInteger countOfSelectedFolders;
 @property (nonatomic, readonly, copy) NSArray *selectedFolders;

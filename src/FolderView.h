@@ -21,9 +21,6 @@
 #import <Cocoa/Cocoa.h>
 
 @interface FolderView : NSOutlineView {
-	NSImage * blueGradient;
-	NSImage * grayGradient;
-	NSRect iRect;
 	BOOL useTooltips;
 	NSString * backupString;
 }

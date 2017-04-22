@@ -10,6 +10,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
             <connections>
                 <outlet property="delegate" destination="233" id="319"/>
+                <outlet property="dockMenu" destination="JWi-Bw-kAV" id="S3Z-Bl-WjG"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -351,7 +352,7 @@
             <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
         </progressIndicator>
-        <menu systemMenu="main" id="29" userLabel="MainMenu">
+        <menu systemMenu="main" id="29">
             <items>
                 <menuItem title="Vienna" id="56">
                     <menu key="submenu" title="Vienna" systemMenu="apple" id="57">
@@ -1140,10 +1141,26 @@ CA
                 </menuItem>
             </items>
         </menu>
+        <menu id="JWi-Bw-kAV">
+            <items>
+                <menuItem title="Refresh All Subscriptions" id="6yn-y8-lF1">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="refreshAllSubscriptions:" target="-1" id="i6D-zi-CKg"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Mark All Subscriptions as Read" id="ecl-HO-Kpi">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="markAllSubscriptionsRead:" target="-1" id="uou-sC-Ho7"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="-752" y="-468"/>
+        </menu>
         <customObject id="233" userLabel="AppController" customClass="AppController">
             <connections>
                 <outlet property="articleController" destination="1164" id="1165"/>
-                <outlet property="articleFrame" destination="982" id="1311"/>
                 <outlet property="browserView" destination="1227" id="1231"/>
                 <outlet property="closeAllTabsItem" destination="1036" id="1038"/>
                 <outlet property="closeTabItem" destination="1023" id="1035"/>
@@ -1157,21 +1174,16 @@ CA
                 <outlet property="filterDisclosureView" destination="cTN-D0-dY2" id="i7U-gE-GBj"/>
                 <outlet property="filterIconInStatusBarButton" destination="1400" id="1407"/>
                 <outlet property="filterSearchField" destination="1304" id="1315"/>
-                <outlet property="filterView" destination="1300" id="1301"/>
                 <outlet property="filterViewPopUp" destination="1306" id="1319"/>
                 <outlet property="filtersMenu" destination="1117" id="1135"/>
                 <outlet property="foldersTree" destination="ugm-kC-yFY" id="lcl-Mo-hfE"/>
                 <outlet property="mainWindow" destination="21" id="239"/>
                 <outlet property="searchField" destination="1252" id="1253"/>
-                <outlet property="searchView" destination="1251" id="1254"/>
                 <outlet property="sortByMenu" destination="387" id="1054"/>
                 <outlet property="spinner" destination="918" id="920"/>
-                <outlet property="splitView1" destination="993" id="994"/>
                 <outlet property="statusBarDisclosureView" destination="659-iz-w4S" id="gjn-93-Mdy"/>
                 <outlet property="statusText" destination="917" id="919"/>
                 <outlet property="stylesMenu" destination="826" id="1051"/>
-                <outlet property="treeFilterSearchField" destination="o3u-Zs-gsz" id="KXs-yF-tdT"/>
-                <outlet property="treeFilterView" destination="o3u-Zs-gsz" id="xy6-Zn-PcY"/>
             </connections>
         </customObject>
         <customView id="860" userLabel="ExportSaveAccessory">
