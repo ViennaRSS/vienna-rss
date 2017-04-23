@@ -19,6 +19,7 @@
 //
 
 #import "ActivityItem.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface ActivityItem ()
 
@@ -34,11 +35,16 @@ NSNotificationName const activityItemDetailsUpdatedNotification = @"Activity Ite
 #pragma mark Accessors
 
 - (void)setStatus:(NSString *)status {
-    _status = [status copy];
+	[CATransaction begin];
+	[CATransaction setDisableActions:YES];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		_status = [status copy];
 
-    NSNotificationCenter *center = NSNotificationCenter.defaultCenter;
-    [center postNotificationName:activityItemStatusUpdatedNotification
-                          object:self];
+		NSNotificationCenter *center = NSNotificationCenter.defaultCenter;
+		[center postNotificationName:activityItemStatusUpdatedNotification
+							  object:self];
+	});
+	[CATransaction commit];
 }
 
 - (NSString *)details {
@@ -66,14 +72,19 @@ NSNotificationName const activityItemDetailsUpdatedNotification = @"Activity Ite
 }
 
 - (void)appendDetail:(NSString *)string {
-    if (!self.detailsArray) {
-        self.detailsArray = [NSMutableArray new];
-    }
-    [self.detailsArray addObject:string];
+	[CATransaction begin];
+	[CATransaction setDisableActions:YES];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		if (!self.detailsArray) {
+			self.detailsArray = [NSMutableArray new];
+		}
+		[self.detailsArray addObject:string];
 
-    NSNotificationCenter *center = NSNotificationCenter.defaultCenter;
-    [center postNotificationName:activityItemDetailsUpdatedNotification
-                          object:self];
+		NSNotificationCenter *center = NSNotificationCenter.defaultCenter;
+		[center postNotificationName:activityItemDetailsUpdatedNotification
+							  object:self];
+	});
+	[CATransaction commit];
 }
 
 @end

@@ -33,6 +33,7 @@
 #import "NSNotificationAdditions.h"
 #import "VTPG_Common.h"
 #import "FeedItem.h"
+#import <QuartzCore/QuartzCore.h>
 
 // Private functions
 @interface RefreshManager (Private)
@@ -264,9 +265,7 @@
 			[self refreshFolderIconCacheForSubscriptions:[[Database sharedManager] arrayOfFolders:folder.itemId]];
 		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 		{
-			dispatch_async(dispatch_get_main_queue(), ^{
-				[self refreshFavIconForFolder:folder];
-			});
+			[self refreshFavIconForFolder:folder];
 		}
 	}
 }
@@ -611,13 +610,11 @@
 - (void)syncFinishedForFolder:(Folder *)folder 
 {
     [self setFolderUpdatingFlag:folder flag:NO];
-    dispatch_async(dispatch_get_main_queue(), ^{
-		// Unread count may have changed
-		AppController *controller = APPCONTROLLER;
-		[controller setStatusMessage:nil persist:NO];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
-																object:@(folder.itemId)];
-	});
+	// Unread count may have changed
+	AppController *controller = APPCONTROLLER;
+	[controller setStatusMessage:nil persist:NO];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
+																		object:@(folder.itemId)];
 }
 
 /* folderRefreshRedirect
