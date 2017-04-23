@@ -142,7 +142,7 @@ enum GoogleReaderStatus {
 	[self addClientTokenToRequest:request];
 	if (hostRequiresInoreaderAdditionalHeaders)
     {
-        NSMutableDictionary * theHeaders = [request.requestHeaders mutableCopy];
+        NSMutableDictionary * theHeaders = [request.requestHeaders mutableCopy] ?: [[NSMutableDictionary alloc] init];
         [theHeaders addEntriesFromDictionary:inoreaderAdditionalHeaders];
         request.requestHeaders = theHeaders;
     }
