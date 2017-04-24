@@ -20,7 +20,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "FoldersTree.h"
-#import "BacktrackArray.h"
+#import "BackTrackArray.h"
 #import "BaseView.h"
 #import "ArticleBaseView.h"
 #import "ArticleView.h"
