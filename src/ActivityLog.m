@@ -66,8 +66,10 @@
  */
 -(void)setStatus:(NSString *)aStatus
 {
-	status = aStatus;
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityLogChange" object:self];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		status = aStatus;
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityLogChange" object:self];
+	});
 }
 
 /* clearDetails
@@ -83,10 +85,13 @@
  */
 -(void)appendDetail:(NSString *)aString
 {
-	if (details == nil)
-		details = [[NSMutableArray alloc] init];
-	[details addObject:aString];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityDetailChange" object:self];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		if (details == nil) {
+			details = [[NSMutableArray alloc] init];
+		}
+		[details addObject:aString];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityDetailChange" object:self];
+	});
 }
 
 /* details
