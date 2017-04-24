@@ -8,6 +8,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.10
+------
+- Fix access to Get Info window
+- Fix CoreAnimation related problems
+
 3.1.9
 -----
 - Change the website to vienna-rss.com as the old domain name (vienna-rss.org) could not be renewed. Perform a minor database evolution to update this.
