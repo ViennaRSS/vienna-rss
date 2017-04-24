@@ -129,7 +129,7 @@ rm -rf Vienna.app
 # Output the sparkle change log
 cd "${VIENNA_UPLOADS_DIR}"
 
-pubDate="$(LC_TIME=en_US date -jf '%FT%T%z' "${VCS_DATE}" '+%a, %d %b %G %T %z')"
+pubDate="$(LC_TIME=en_US TZ=GMT date -jf '%FT%TZ' "${VCS_DATE}" '+%a, %d %b %G %T %z')"
 TGZSIZE="$(stat -f %z "${TGZ_FILENAME}")"
 SIGNATURE=$("${PROJECT_DIR}/signing/sign_update.rb" "${TGZ_FILENAME}" "${PRIVATE_KEY_PATH}")
 
