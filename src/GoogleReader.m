@@ -63,6 +63,7 @@ enum GoogleReaderStatus {
 @property (nonatomic) NSTimer * clientAuthTimer;
 @property (nonatomic) NSMutableArray * clientAuthWaitQueue;
 @property (nonatomic) NSMutableArray * tTokenWaitQueue;
+@property (nonatomic) dispatch_queue_t asyncQueue;
 @end
 
 @implementation GoogleReader
@@ -87,6 +88,7 @@ enum GoogleReaderStatus {
 									   @"AppID": @"1000001359",
 									   @"AppKey": @"rAlfs2ELSuFxZJ5adJAW54qsNbUa45Qn"
 									   };
+		_asyncQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.openReaderTasks", NULL);
 	}
     
     return self;
@@ -139,7 +141,7 @@ enum GoogleReaderStatus {
 	[self addClientTokenToRequest:request];
 	if (hostRequiresInoreaderAdditionalHeaders)
     {
-        NSMutableDictionary * theHeaders = [request.requestHeaders mutableCopy];
+        NSMutableDictionary * theHeaders = [request.requestHeaders mutableCopy] ?: [[NSMutableDictionary alloc] init];
         [theHeaders addEntriesFromDictionary:inoreaderAdditionalHeaders];
         request.requestHeaders = theHeaders;
     }
@@ -197,6 +199,7 @@ enum GoogleReaderStatus {
                 [self.clientAuthWaitQueue removeObject:obj];
             }
             googleReaderStatus = notAuthenticated;
+            [[RefreshManager sharedManager] resumeConnectionsQueue];
         }];
         [myRequest setCompletionBlock:^{
             __strong typeof(weakRequest)strongRequest = weakRequest;
@@ -236,10 +239,8 @@ enum GoogleReaderStatus {
                                                                           userInfo:nil
                                                                            repeats:YES];
                 }
-                // pause for a second
-                // to make sure dependent requests are launched only when the OpenReader server is ready
-                [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
             }
+            [[RefreshManager sharedManager] resumeConnectionsQueue];
         }];
 
         [clientRequest addDependency:myRequest];
@@ -248,6 +249,7 @@ enum GoogleReaderStatus {
             [self.clientAuthWaitQueue addObject:clientRequest];
         }
         [[RefreshManager sharedManager] addConnection:myRequest];
+        [[RefreshManager sharedManager] suspendConnectionsQueue];
         [APPCONTROLLER setStatusMessage:NSLocalizedString(@"Authenticating on Open Reader", nil) persist:NO];
     }
 }
@@ -315,6 +317,7 @@ enum GoogleReaderStatus {
         __weak typeof(myRequest)weakRequest = myRequest;
         [myRequest setCompletionBlock:^{
             __strong typeof(weakRequest)strongRequest = weakRequest;
+            [[RefreshManager sharedManager] suspendConnectionsQueue];
             self.tToken = [strongRequest responseString];
             googleReaderStatus = fullyAuthenticated;
             for (id obj in self.tTokenWaitQueue) {
@@ -328,9 +331,7 @@ enum GoogleReaderStatus {
                 self.tTokenTimer =
                 [NSTimer scheduledTimerWithTimeInterval:25 * 60 target:self selector:@selector(renewTToken) userInfo:nil repeats:YES];
             }
-            // pause for half a second
-            // to make sure dependent requests are launched only when the OpenReader server is ready
-            [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+            [[RefreshManager sharedManager] resumeConnectionsQueue];
         }];
         [myRequest setFailedBlock:^{
             __strong typeof(weakRequest)strongRequest = weakRequest;
@@ -425,7 +426,11 @@ enum GoogleReaderStatus {
 	
 	//This is a workaround throw a BAD folderupdate value on DB
 	NSString *folderLastUpdateString = ignoreLimit ? @"0" : thisFolder.lastUpdateString;
-	if ([folderLastUpdateString isEqualToString:@""] || [folderLastUpdateString isEqualToString:@"(null)"]) folderLastUpdateString=@"0";
+	if (folderLastUpdateString == nil
+	      || [folderLastUpdateString isEqualToString:@""]
+	      || [folderLastUpdateString isEqualToString:@"(null)"]) {
+	    folderLastUpdateString=@"0";
+	}
 	
 	NSString *itemsLimitation;
 	if (ignoreLimit)
@@ -511,6 +516,11 @@ enum GoogleReaderStatus {
 // callback : handler for timed out feeds, etc...
 - (void)feedRequestFailed:(ASIHTTPRequest *)request
 {
+    LLog(@"Open Reader feed request Failed : %@", [request originalURL]);
+    LOG_EXPR([request error]);
+    LOG_EXPR([request requestHeaders]);
+    LOG_EXPR([[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding]);
+    LOG_EXPR([request responseHeaders]);
 	ActivityItem *aItem = request.userInfo[@"log"];
 	Folder *refreshedFolder = request.userInfo[@"folder"];
 
@@ -523,8 +533,7 @@ enum GoogleReaderStatus {
 // callback
 - (void)feedRequestDone:(ASIHTTPRequest *)request
 {
-	dispatch_queue_t queue = [RefreshManager sharedManager].asyncQueue;
-	dispatch_async(queue, ^() {
+	dispatch_async(self.asyncQueue, ^() {
 		
 	ActivityItem *aItem = request.userInfo[@"log"];
 	Folder *refreshedFolder = request.userInfo[@"folder"];
@@ -544,7 +553,9 @@ enum GoogleReaderStatus {
                                     options:NSJSONReadingMutableContainers
                                     error:&jsonError];
 		NSString *folderLastUpdateString = [subscriptionsDict[@"updated"] stringValue];
-		if ([folderLastUpdateString isEqualToString:@""] || [folderLastUpdateString isEqualToString:@"(null)"]) {
+        if (folderLastUpdateString == nil
+              || [folderLastUpdateString isEqualToString:@""]
+              || [folderLastUpdateString isEqualToString:@"(null)"]) {
 			LOG_EXPR([request url]);
 			NSLog(@"Feed name: %@",subscriptionsDict[@"title"]);
 			NSLog(@"Last Check: %@",request.userInfo[@"lastupdatestring"]);
@@ -642,7 +653,9 @@ enum GoogleReaderStatus {
             
 		}
 
-        if ([folderLastUpdateString isEqualToString:@""] || [folderLastUpdateString isEqualToString:@"(null)"]) {
+        if (folderLastUpdateString == nil
+              || [folderLastUpdateString isEqualToString:@""]
+              || [folderLastUpdateString isEqualToString:@"(null)"]) {
             folderLastUpdateString=@"0";
         }
 
@@ -695,8 +708,7 @@ enum GoogleReaderStatus {
 // callback
 - (void)readRequestDone:(ASIHTTPRequest *)request
 {
-	dispatch_queue_t queue = [RefreshManager sharedManager].asyncQueue;
-	dispatch_async(queue, ^() {
+	dispatch_async(self.asyncQueue, ^() {
 
 	Folder *refreshedFolder = request.userInfo[@"folder"];
 	ActivityItem *aItem = request.userInfo[@"log"];
@@ -747,11 +759,9 @@ enum GoogleReaderStatus {
 
 
 		// If this folder also requires an image refresh, add that
-		dispatch_queue_t queue = [RefreshManager sharedManager].asyncQueue;
-		if (refreshedFolder.flags & MA_FFlag_CheckForImage)
-			dispatch_async(queue, ^() {
-				[[RefreshManager sharedManager] refreshFavIconForFolder:refreshedFolder];
-			});
+        if (refreshedFolder.flags & MA_FFlag_CheckForImage) {
+            [[RefreshManager sharedManager] refreshFavIconForFolder:refreshedFolder];
+        }
 
 	}
 	else //response status other than OK (200)
@@ -768,8 +778,7 @@ enum GoogleReaderStatus {
 // callback
 - (void)starredRequestDone:(ASIHTTPRequest *)request
 {
-	dispatch_queue_t queue = [RefreshManager sharedManager].asyncQueue;
-	dispatch_async(queue, ^() {
+	dispatch_async(self.asyncQueue, ^() {
 
 	Folder *refreshedFolder = request.userInfo[@"folder"];
 	ActivityItem *aItem = request.userInfo[@"log"];

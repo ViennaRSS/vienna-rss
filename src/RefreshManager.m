@@ -92,10 +92,6 @@
 	return self;
 }
 
--(dispatch_queue_t)asyncQueue {
-	return _queue;
-}
-
 - (void)nqQueueDidFinishSelector:(ASIHTTPRequest *)request {
 	if (hasStarted)
 	{
@@ -1148,6 +1144,24 @@
 		[conn clearDelegatesAndCancel];
 	}
 	
+}
+
+/* suspendConnectionsQueue
+ * suspend the connections queue that we manage.
+ * Useful for managing dependencies inside the queue
+ */
+-(void)suspendConnectionsQueue
+{
+	[networkQueue setSuspended:YES];
+}
+
+/* resumeConnectionsQueue
+ * release the connections queue that we manage,
+ * after we suspended it.
+ */
+-(void)resumeConnectionsQueue
+{
+	[networkQueue setSuspended:NO];
 }
 
 -(BOOL)isConnecting
