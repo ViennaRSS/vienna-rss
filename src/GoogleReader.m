@@ -427,7 +427,11 @@ enum GoogleReaderStatus {
 	
 	//This is a workaround throw a BAD folderupdate value on DB
 	NSString *folderLastUpdateString = ignoreLimit ? @"0" : thisFolder.lastUpdateString;
-	if ([folderLastUpdateString isEqualToString:@""] || [folderLastUpdateString isEqualToString:@"(null)"]) folderLastUpdateString=@"0";
+	if (folderLastUpdateString == nil
+	      || [folderLastUpdateString isEqualToString:@""]
+	      || [folderLastUpdateString isEqualToString:@"(null)"]) {
+	    folderLastUpdateString=@"0";
+	}
 	
 	NSString *itemsLimitation;
 	if (ignoreLimit)
@@ -553,7 +557,9 @@ enum GoogleReaderStatus {
                                     options:NSJSONReadingMutableContainers
                                     error:&jsonError];
 		NSString *folderLastUpdateString = [subscriptionsDict[@"updated"] stringValue];
-		if ([folderLastUpdateString isEqualToString:@""] || [folderLastUpdateString isEqualToString:@"(null)"]) {
+        if (folderLastUpdateString == nil
+              || [folderLastUpdateString isEqualToString:@""]
+              || [folderLastUpdateString isEqualToString:@"(null)"]) {
 			LOG_EXPR([request url]);
 			NSLog(@"Feed name: %@",subscriptionsDict[@"title"]);
 			NSLog(@"Last Check: %@",request.userInfo[@"lastupdatestring"]);
@@ -651,7 +657,9 @@ enum GoogleReaderStatus {
             
 		}
 
-        if ([folderLastUpdateString isEqualToString:@""] || [folderLastUpdateString isEqualToString:@"(null)"]) {
+        if (folderLastUpdateString == nil
+              || [folderLastUpdateString isEqualToString:@""]
+              || [folderLastUpdateString isEqualToString:@"(null)"]) {
             folderLastUpdateString=@"0";
         }
 
