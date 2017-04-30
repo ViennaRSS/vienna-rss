@@ -689,6 +689,7 @@
 -(void)folderRefreshCompleted:(ASIHTTPRequest *)connector
 {
 	dispatch_async(_queue, ^() {
+	// TODO : refactor code to separate feed refresh code and UI
 	[CATransaction begin];
 	[CATransaction setDisableActions:YES];
 		

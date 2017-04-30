@@ -526,6 +526,7 @@ enum GoogleReaderStatus {
 {
 	dispatch_queue_t queue = [RefreshManager sharedManager].asyncQueue;
 	dispatch_async(queue, ^() {
+	// TODO : refactor code to separate feed refresh code and UI
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
 
