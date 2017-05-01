@@ -21,17 +21,18 @@
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 
-// Download states
-#define DOWNLOAD_INIT			0
-#define DOWNLOAD_STARTED		1
-#define DOWNLOAD_COMPLETED		2
-#define DOWNLOAD_FAILED			3
-#define DOWNLOAD_CANCELLED		4
+typedef NS_ENUM(NSInteger, DownloadState) {
+    DownloadStateInit,
+    DownloadStateStarted,
+    DownloadStateCompleted,
+    DownloadStateFailed,
+    DownloadStateCancelled
+};
 
 @interface DownloadItem : NSObject<NSCoding> {
 	long long expectedSize;
 	long long fileSize;
-	NSInteger state;
+	DownloadState state;
 	NSImage * image;
 	NSString * filename;
 	NSURLDownload * download;
@@ -39,7 +40,7 @@
 }
 
 // Public functions
-@property (nonatomic) NSInteger state;
+@property (nonatomic) DownloadState state;
 @property (nonatomic) long long expectedSize;
 @property (nonatomic) long long size;
 @property (nonatomic, strong) NSURLDownload *download;

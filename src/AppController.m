@@ -19,6 +19,7 @@
 //
 
 #import "AppController.h"
+#import "AppController+Notifications.h"
 
 #import "FoldersTree.h"
 #import "Import.h"
@@ -106,7 +107,6 @@
 	-(void)updateCloseCommands;
 	@property (nonatomic, getter=isFilterBarVisible, readonly) BOOL filterBarVisible;
 	@property (nonatomic, getter=isStatusBarVisible, readonly) BOOL statusBarVisible;
-	@property (nonatomic, readonly, copy) NSDictionary *registrationDictionaryForGrowl;
 	@property (nonatomic, readonly, strong) NSTimer *checkTimer;
 	-(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
 	-(void)searchArticlesWithString:(NSString *)searchString;
@@ -468,27 +468,13 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	
 	// Add the app to the status bar if needed.
 	[self showAppInStatusBar];
-	
-	// Growl initialization
-	NSBundle *mainBundle = [NSBundle mainBundle];
-	NSString *path = [mainBundle.privateFrameworksPath stringByAppendingPathComponent:@"Growl.framework"];
-	LOG_NS(@"path: %@", path);
-	NSBundle *growlFramework = [NSBundle bundleWithPath:path];
-	if([growlFramework load])
-	{
-		NSDictionary *infoDictionary = growlFramework.infoDictionary;
-		LOG_NS(@"Using Growl.framework %@ (%@)",
-			  infoDictionary[@"CFBundleShortVersionString"],
-			  infoDictionary[(NSString *)kCFBundleVersionKey]);
 
-		Class GAB = NSClassFromString(@"GrowlApplicationBridge");
-		if([GAB respondsToSelector:@selector(setGrowlDelegate:)])
-			[GAB performSelector:@selector(setGrowlDelegate:) withObject:self];
-	}
-	
+    // Notification Center delegate
+    NSUserNotificationCenter.defaultUserNotificationCenter.delegate = self;
+
 	// Start the check timer
 	[self handleCheckFrequencyChange:nil];
-	
+
 	// Register to be informed when the system awakes from sleep
 	[self installSleepHandler];
 	
@@ -1480,74 +1466,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 }
 
-#pragma mark Growl Delegate
-
-/* growlNotify
- * Sends out the specified notification event if Growl is installed and ready.
- */
--(void)growlNotify:(id)notifyContext title:(NSString *)title description:(NSString *)description notificationName:(NSString *)notificationName
-{
-	Class GAB = NSClassFromString(@"GrowlApplicationBridge");
-	if([GAB respondsToSelector:@selector(notifyWithTitle:description:notificationName:iconData:priority:isSticky:clickContext:identifier:)])
-					[GAB setShouldUseBuiltInNotifications:NO];
-					[GAB		notifyWithTitle:title
-									description:description
-							   notificationName:notificationName
-									   iconData:nil
-									   priority:0
-									   isSticky:NO
-								   clickContext:notifyContext];
-}
-
-/* growlNotificationWasClicked
- * Called when the user clicked a Growl notification balloon.
- */
--(void)growlNotificationWasClicked:(id)clickContext
-{
-	NSDictionary * contextDict = (NSDictionary *)clickContext;
-	NSInteger contextValue = [[contextDict valueForKey:@"ContextType"] integerValue];
-	
-	if (contextValue == MA_GrowlContext_RefreshCompleted)
-	{
-		[self openVienna:self];
-		Folder * unreadArticles = [db folderFromName:NSLocalizedString(@"Unread Articles", nil)];
-		if (unreadArticles != nil)
-			[foldersTree selectFolder:unreadArticles.itemId];
-		return;
-	}
-	
-	// Successful download - show file in Finder. If we fail then we don't
-	// care. Definitely don't want to be popping up an error dialog.
-	if (contextValue == MA_GrowlContext_DownloadCompleted)
-	{
-		NSString * pathToFile = [contextDict valueForKey:@"ContextData"];
-		[[NSWorkspace sharedWorkspace] selectFile:pathToFile inFileViewerRootedAtPath:@""];
-		return;
-	}
-}
-
-/* registrationDictionaryForGrowl
- * Called by Growl to request the notification dictionary.
- */
--(NSDictionary *)registrationDictionaryForGrowl
-{
-	
-	NSDictionary *notificationsWithDescriptions = @{NSLocalizedString(@"Growl refresh completed", ""): @"Growl refresh completed",
-		NSLocalizedString(@"Growl download completed", ""): @"Growl download completed",
-		NSLocalizedString(@"Growl download failed", ""): @"Growl download failed"};
-
-	NSArray *allNotesArray = notificationsWithDescriptions.allKeys;
-	NSArray *defNotesArray = [allNotesArray copy];
-	
-	NSDictionary *regDict = @{GROWL_APP_NAME: self.appName, 
-							 GROWL_NOTIFICATIONS_ALL: allNotesArray, 
-							 GROWL_NOTIFICATIONS_DEFAULT: defNotesArray,
-							 GROWL_NOTIFICATIONS_HUMAN_READABLE_NAMES: notificationsWithDescriptions};
-
-
-	return regDict;
-}
-
 /* initSortMenu
  * Create the sort popup menu.
  */
@@ -2055,6 +1973,17 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	
 	// Make sure article viewer is active
 	[browserView setActiveTabToPrimaryTab];
+
+    // If the user selects the unread-articles smart folder, then clear the
+    // relevant user notifications.
+    if (newFolderId == [db folderFromName:NSLocalizedString(@"Unread Articles", nil)].itemId) {
+        NSUserNotificationCenter *center = NSUserNotificationCenter.defaultUserNotificationCenter;
+        [center.deliveredNotifications enumerateObjectsUsingBlock:^(NSUserNotification * notification, NSUInteger idx, BOOL *stop) {
+            if ([notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFetchCompleted]) {
+                [center removeDeliveredNotification:notification];
+            }
+        }];
+    }
 }
 
 /* handleDidBecomeKeyWindow
@@ -2258,18 +2187,26 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		NSInteger newUnread = [RefreshManager sharedManager].countOfNewArticles + [GoogleReader sharedManager].countOfNewArticles;
 		if (newUnread > 0 && ((prefs.newArticlesNotification & MA_NewArticlesNotification_Bounce) != 0))
 			[NSApp requestUserAttention:NSInformationalRequest];
-		
-		// Growl notification
-		if (newUnread > 0)
-		{
-			NSMutableDictionary * contextDict = [NSMutableDictionary dictionary];
-			[contextDict setValue:@MA_GrowlContext_RefreshCompleted forKey:@"ContextType"];
-			
-			[self growlNotify:contextDict
-						title:NSLocalizedString(@"New articles retrieved", nil)
-				  description:[NSString stringWithFormat:NSLocalizedString(@"New unread articles retrieved", nil), newUnread]
-			 notificationName:NSLocalizedString(@"Growl refresh completed", nil)];
-		}
+
+        // User notification
+        if (newUnread > 0) {
+            NSUserNotification *notification = [NSUserNotification new];
+            notification.title = NSLocalizedString(@"New articles retrieved", @"Notification title");
+            notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"New unread articles retrieved", @"Notification body"), newUnread];
+            notification.userInfo = @{UserNotificationContextKey: UserNotificationContextFetchCompleted};
+            notification.soundName = NSUserNotificationDefaultSoundName;
+
+            // Set a unique identifier to assure that this notifications cannot
+            // appear more than once.
+            notification.identifier = UserNotificationContextFetchCompleted;
+
+            // Remove the previous notification, if present, before sending a
+            // new one. This will assure that the user can receive an alert and
+            // and can see the updated notification in Notification Center.
+            NSUserNotificationCenter *center = NSUserNotificationCenter.defaultUserNotificationCenter;
+            [center removeDeliveredNotification:notification];
+            [center deliverNotification:notification];
+        }
 	}
 }
 

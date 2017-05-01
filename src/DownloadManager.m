@@ -19,7 +19,9 @@
 //
 
 #import "DownloadManager.h"
+
 #import "AppController.h"
+#import "AppController+Notifications.h"
 #import "Constants.h"
 #import "Preferences.h"
 
@@ -39,7 +41,7 @@
 {
 	if ((self = [super init]) != nil)
 	{
-		state = DOWNLOAD_INIT;
+		state = DownloadStateInit;
 		expectedSize = 0;
 		fileSize = 0;
 		filename = nil;
@@ -60,7 +62,7 @@
 	{
 		self.filename = [coder decodeObject];
 		[coder decodeValueOfObjCType:@encode(long long) at:&fileSize];
-		state = DOWNLOAD_COMPLETED;
+		state = DownloadStateCompleted;
 	}
 	return self;
 }
@@ -77,7 +79,7 @@
 /* setState
  * Sets the download state.
  */
--(void)setState:(NSInteger)newState
+-(void)setState:(DownloadState)newState
 {
 	state = newState;
 }
@@ -85,7 +87,7 @@
 /* state
  * Returns the download state.
  */
--(NSInteger)state
+-(DownloadState)state
 {
 	return state;
 }
@@ -251,7 +253,7 @@
 	while (index >= 0)
 	{
 		DownloadItem * item = downloadsList[index--];
-		if (item.state != DOWNLOAD_STARTED)
+		if (item.state != DownloadStateStarted)
 			[downloadsList removeObject:item];
 	}
 	[self notifyDownloadItemChange:nil];
@@ -299,7 +301,7 @@
 -(void)cancelItem:(DownloadItem *)item
 {	
 	[item.download cancel];
-	[item setState:DOWNLOAD_CANCELLED];
+	[item setState:DownloadStateCancelled];
 	NSAssert(activeDownloads > 0, @"cancelItem called with zero activeDownloads count!");
 	--activeDownloads;
 	[self notifyDownloadItemChange:item];
@@ -319,7 +321,7 @@
 	if (theDownload)
 	{
 		DownloadItem * newItem = [DownloadItem new];
-		[newItem setState:DOWNLOAD_INIT];
+		[newItem setState:DownloadStateInit];
 		newItem.download = theDownload;
 		newItem.filename = destPath;
 		[downloadsList addObject:newItem];
@@ -385,7 +387,7 @@
 		
 		if ([firstFile compare:secondFile options:NSCaseInsensitiveSearch] == NSOrderedSame)
 		{
-			if (item.state != DOWNLOAD_COMPLETED)
+			if (item.state != DownloadStateCompleted)
 				return NO;
 			
 			// File completed download but possibly moved or deleted after download
@@ -417,7 +419,7 @@
 		theItem.download = download;
 		[downloadsList addObject:theItem];
 	}
-	[theItem setState:DOWNLOAD_STARTED];
+	[theItem setState:DownloadStateStarted];
 	if (theItem.filename == nil)
 		theItem.filename = download.request.URL.path;
 
@@ -433,61 +435,57 @@
 	[APPCONTROLLER conditionalShowDownloadsWindow:self];
 }
 
-/* downloadDidFinish
- * A download has completed. Mark the associated DownloadItem as completed.
+/**
+ A download has completed. Mark the associated DownloadItem as completed.
  */
--(void)downloadDidFinish:(NSURLDownload *)download
-{
-	DownloadItem * theItem = [self itemForDownload:download];
-	[theItem setState:DOWNLOAD_COMPLETED];
-	NSAssert(activeDownloads > 0, @"downloadDidFinish called with zero activeDownloads count!");
-	--activeDownloads;
-	[self notifyDownloadItemChange:theItem];
-	[self archiveDownloadsList];
-
-	NSString * filename = theItem.filename.lastPathComponent;
-	if (filename == nil)
-		filename = theItem.filename;
-
-	NSMutableDictionary * contextDict = [[NSMutableDictionary alloc] init];
-	[contextDict setValue:@MA_GrowlContext_DownloadCompleted forKey:@"ContextType"];
-	[contextDict setValue:theItem.filename forKey:@"ContextData"];
-	
-	[APPCONTROLLER growlNotify:contextDict
-							title:NSLocalizedString(@"Download completed", nil)
-					  description:[NSString stringWithFormat:NSLocalizedString(@"File %@ downloaded", nil), filename]
-				 notificationName:NSLocalizedString(@"Growl download completed", nil)];
-	
-	// Post a notification when the download completes.
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_DownloadCompleted" object:filename];
-
+- (void)downloadDidFinish:(NSURLDownload *)download {
+    DownloadItem *item = [self itemForDownload:download];
+    item.state = DownloadStateCompleted;
+    [self deliverNotificationForDownloadItem:item];
 }
 
-/* didFailWithError
- * A download failed with an error. Mark the associated DownloadItem as broken.
+/**
+ A download failed with an error. Mark the associated DownloadItem as broken.
  */
--(void)download:(NSURLDownload *)download didFailWithError:(NSError *)error
-{
-	DownloadItem * theItem = [self itemForDownload:download];
-	[theItem setState:DOWNLOAD_FAILED];
-	NSAssert(activeDownloads > 0, @"didFailWithError called with zero activeDownloads count!");
-	--activeDownloads;
-	[self notifyDownloadItemChange:theItem];
-	[self archiveDownloadsList];
+- (void)download:(NSURLDownload *)download didFailWithError:(NSError *)error {
+    DownloadItem *item = [self itemForDownload:download];
+    item.state = DownloadStateFailed;
+    [self deliverNotificationForDownloadItem:item];
+}
 
-	NSString * filename = theItem.filename.lastPathComponent;
-	if (filename == nil)
-		filename = theItem.filename;
+/**
+ Delivers a user notification for the given download item.
+ */
+- (void)deliverNotificationForDownloadItem:(DownloadItem *)item {
+    if (item.state != DownloadStateCompleted && item.state != DownloadStateFailed) {
+        return;
+    }
 
-	NSMutableDictionary * contextDict = [[NSMutableDictionary alloc] init];
-	[contextDict setValue:@MA_GrowlContext_DownloadFailed forKey:@"ContextType"];
-	[contextDict setValue:theItem.filename forKey:@"ContextData"];
-	
-	[APPCONTROLLER growlNotify:contextDict
-							title:NSLocalizedString(@"Download failed", nil)
-					  description:[NSString stringWithFormat:NSLocalizedString(@"File %@ failed to download", nil), filename]
-				 notificationName:NSLocalizedString(@"Growl download failed", nil)];
+    NSAssert(activeDownloads > 0, @"deliverNotificationForDownloadItem called with zero activeDownloads count!");
+    --activeDownloads;
+    [self notifyDownloadItemChange:item];
+    [self archiveDownloadsList];
 
+    NSString *fileName = item.filename.lastPathComponent;
+
+    NSUserNotification *notification = [NSUserNotification new];
+    notification.soundName = NSUserNotificationDefaultSoundName;
+
+    if (item.state == DownloadStateCompleted) {
+        notification.title = NSLocalizedString(@"Download completed", @"Notification title");
+        notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"File %@ downloaded", @"Notification body"), fileName];
+        notification.userInfo = @{UserNotificationContextKey: UserNotificationContextFileDownloadCompleted,
+                                  UserNotificationFilePathKey: fileName};
+
+        [NSNotificationCenter.defaultCenter postNotificationName:@"MA_Notify_DownloadCompleted" object:fileName];
+    } else if (item.state == DownloadStateFailed) {
+        notification.title = NSLocalizedString(@"Download failed", @"Notification title");
+        notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"File %@ failed to download", @"Notification body"), fileName];
+        notification.userInfo = @{UserNotificationContextKey: UserNotificationContextFileDownloadFailed,
+                                  UserNotificationFilePathKey: fileName};
+    }
+
+    [NSUserNotificationCenter.defaultUserNotificationCenter deliverNotification:notification];
 }
 
 /* didReceiveDataOfLength

@@ -21,7 +21,6 @@
 #import <Cocoa/Cocoa.h>
 #import "Database.h"
 #import "ArticleController.h"
-#import <Growl/Growl.h>
 #import "DownloadWindow.h"
 #import "FilterView.h"
 #import "PopupButton.h"
@@ -44,7 +43,7 @@
 @class DisclosureView;
 @class ViennaSparkleDelegate;
 
-@interface AppController : NSObject <NSApplicationDelegate, GrowlApplicationBridgeDelegate,NSWindowDelegate,NSToolbarDelegate,NSMenuDelegate>
+@interface AppController : NSObject <NSApplicationDelegate,NSWindowDelegate,NSToolbarDelegate,NSMenuDelegate>
 {
 	IBOutlet BJRWindowWithToolbar * mainWindow;
 	IBOutlet ArticleController * articleController;
@@ -205,7 +204,6 @@
 @property (nonatomic, readonly, copy) NSMenu *folderMenu;
 -(void)updateStatusBarFilterButtonVisibility;
 @property (nonatomic, readonly, strong) NSLayoutManager *layoutManager;
--(void)growlNotify:(id)notifyContext title:(NSString *)title description:(NSString *)description notificationName:(NSString *)notificationName;
 -(void)performWebSearch:(SearchMethod *)searchMethod;
 -(void)performAllArticlesSearch;
 -(void)performWebPageSearch;

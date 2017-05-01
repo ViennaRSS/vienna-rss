@@ -19,6 +19,8 @@
 //
 
 #import "DownloadWindow.h"
+
+#import "AppController+Notifications.h"
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
 #import "ImageAndTextCell.h"
@@ -74,6 +76,19 @@
 	table.menu = downloadMenu;
 }
 
+- (void)windowDidBecomeKey:(NSNotification *)notification {
+    // Clear relevant notifications when the user views this window.
+    NSUserNotificationCenter *center = NSUserNotificationCenter.defaultUserNotificationCenter;
+    [center.deliveredNotifications enumerateObjectsUsingBlock:^(NSUserNotification *notification, NSUInteger idx, BOOL *stop) {
+        BOOL completed = [notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFileDownloadCompleted];
+        BOOL failed = [notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFileDownloadFailed];
+
+        if (completed || failed) {
+            [center removeDeliveredNotification: notification];
+        }
+    }];
+}
+
 /* clearList
  * Remove everything from the list.
  */
@@ -108,7 +123,7 @@
 	if (index != -1)
 	{
 		DownloadItem * item = list[index];
-		if (item && item.state == DOWNLOAD_COMPLETED)
+		if (item && item.state == DownloadStateCompleted)
 		{
 			if ([[NSWorkspace sharedWorkspace] openFile:item.filename] == NO)
 				runOKAlertSheet(NSLocalizedString(@"Vienna cannot open the file title", nil), NSLocalizedString(@"Vienna cannot open the file body", nil), item.filename.lastPathComponent);
@@ -126,7 +141,7 @@
 	if (index != -1)
 	{
 		DownloadItem * item = list[index];
-		if (item && item.state == DOWNLOAD_COMPLETED)
+		if (item && item.state == DownloadStateCompleted)
 		{
 			if ([[NSWorkspace sharedWorkspace] selectFile:item.filename inFileViewerRootedAtPath:@""] == NO)
 				runOKAlertSheet(NSLocalizedString(@"Vienna cannot show the file title", nil), NSLocalizedString(@"Vienna cannot show the file body", nil), item.filename.lastPathComponent);
@@ -209,19 +224,20 @@
 
 	// Different layout depending on the state
 	NSString * objectString = filename;
-	switch (item.state)
-	{
-		case DOWNLOAD_INIT:
+	switch (item.state) {
+        case DownloadStateInit:
+        case DownloadStateFailed:
+        case DownloadStateCancelled:
 			break;
 
-		case DOWNLOAD_COMPLETED: {
+		case DownloadStateCompleted: {
             NSString *byteCount = [NSByteCountFormatter stringFromByteCount:item.size
                                                                  countStyle:NSByteCountFormatterCountStyleFile];
-			objectString = [NSString stringWithFormat:@"%@\n%@", filename, byteCount];
+            objectString = [NSString stringWithFormat:@"%@\n%@", filename, byteCount];
 			break;
 		}
 
-		case DOWNLOAD_STARTED: {
+		case DownloadStateStarted: {
 			// Filename on top
 			// Progress gauge in middle
 			// Size gathered so far at bottom
