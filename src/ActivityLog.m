@@ -30,8 +30,6 @@
 
 @implementation ActivityLog
 
-NSNotificationName const activityLogUpdatedNotification = @"Activity Log Updated";
-
 #pragma mark Initialization
 
 + (ActivityLog *)defaultLog {
@@ -83,6 +81,14 @@ NSNotificationName const activityLogUpdatedNotification = @"Activity Log Updated
     return item;
 }
 
+/* sortUsingDescriptors
+ * Sort the log using the specified descriptors.
+ */
+-(void)sortUsingDescriptors:(NSArray *)sortDescriptors
+{
+	[self.log sortUsingDescriptors:sortDescriptors];
+}
+
 #pragma mark Helper methods
 
 /**
@@ -114,7 +120,7 @@ NSNotificationName const activityLogUpdatedNotification = @"Activity Log Updated
     Folder *folder = [[Database sharedManager] folderFromID:[nc.object integerValue]];
     [self.log removeObject:[self itemByName:folder.name]];
 
-    [NSNotificationCenter.defaultCenter postNotificationName:activityLogUpdatedNotification
+    [NSNotificationCenter.defaultCenter postNotificationName:activityItemStatusUpdatedNotification
                                                       object:nil];
 }
 
