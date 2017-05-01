@@ -34,11 +34,13 @@ NSNotificationName const activityItemDetailsUpdatedNotification = @"Activity Ite
 #pragma mark Accessors
 
 - (void)setStatus:(NSString *)status {
-    _status = [status copy];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		_status = [status copy];
 
-    NSNotificationCenter *center = NSNotificationCenter.defaultCenter;
-    [center postNotificationName:activityItemStatusUpdatedNotification
-                          object:self];
+		NSNotificationCenter *center = NSNotificationCenter.defaultCenter;
+		[center postNotificationName:activityItemStatusUpdatedNotification
+							  object:self];
+	});
 }
 
 - (NSString *)details {
@@ -66,14 +68,16 @@ NSNotificationName const activityItemDetailsUpdatedNotification = @"Activity Ite
 }
 
 - (void)appendDetail:(NSString *)string {
-    if (!self.detailsArray) {
-        self.detailsArray = [NSMutableArray new];
-    }
-    [self.detailsArray addObject:string];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		if (!self.detailsArray) {
+			self.detailsArray = [NSMutableArray new];
+		}
+		[self.detailsArray addObject:string];
 
-    NSNotificationCenter *center = NSNotificationCenter.defaultCenter;
-    [center postNotificationName:activityItemDetailsUpdatedNotification
-                          object:self];
+		NSNotificationCenter *center = NSNotificationCenter.defaultCenter;
+		[center postNotificationName:activityItemDetailsUpdatedNotification
+							  object:self];
+	});
 }
 
 @end

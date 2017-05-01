@@ -33,6 +33,7 @@
 #import "NSNotificationAdditions.h"
 #import "VTPG_Common.h"
 #import "FeedItem.h"
+#import <QuartzCore/QuartzCore.h>
 
 // Private functions
 @interface RefreshManager (Private)
@@ -264,9 +265,7 @@
 			[self refreshFolderIconCacheForSubscriptions:[[Database sharedManager] arrayOfFolders:folder.itemId]];
 		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 		{
-			dispatch_async(dispatch_get_main_queue(), ^{
-				[self refreshFavIconForFolder:folder];
-			});
+			[self refreshFavIconForFolder:folder];
 		}
 	}
 }
@@ -611,13 +610,11 @@
 - (void)syncFinishedForFolder:(Folder *)folder 
 {
     [self setFolderUpdatingFlag:folder flag:NO];
-    dispatch_async(dispatch_get_main_queue(), ^{
-		// Unread count may have changed
-		AppController *controller = APPCONTROLLER;
-		[controller setStatusMessage:nil persist:NO];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
-																object:@(folder.itemId)];
-	});
+	// Unread count may have changed
+	AppController *controller = APPCONTROLLER;
+	[controller setStatusMessage:nil persist:NO];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
+																		object:@(folder.itemId)];
 }
 
 /* folderRefreshRedirect
@@ -692,6 +689,9 @@
 -(void)folderRefreshCompleted:(ASIHTTPRequest *)connector
 {
 	dispatch_async(_queue, ^() {
+	// TODO : refactor code to separate feed refresh code and UI
+	[CATransaction begin];
+	[CATransaction setDisableActions:YES];
 		
 	Folder * folder = (Folder *)connector.userInfo[@"folder"];
 	ActivityItem *connectorItem = connector.userInfo[@"log"];
@@ -729,6 +729,7 @@
 		[connectorItem appendDetail:NSLocalizedString(@"Got HTTP status 304 - No news from last check", nil)];
 		[connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
 		[self syncFinishedForFolder:folder];
+		[CATransaction commit];
 		return;
 	}
 	else if (isCancelled) 
@@ -777,6 +778,7 @@
 
 	[self syncFinishedForFolder:folder];
 
+	[CATransaction commit];
 	}); //block for dispatch_async on _queue
 };
 
