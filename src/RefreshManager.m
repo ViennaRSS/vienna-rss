@@ -33,7 +33,6 @@
 #import "NSNotificationAdditions.h"
 #import "VTPG_Common.h"
 #import "FeedItem.h"
-#import <QuartzCore/QuartzCore.h>
 
 // Private functions
 @interface RefreshManager (Private)
@@ -686,8 +685,6 @@
 {
 	dispatch_async(_queue, ^() {
 	// TODO : refactor code to separate feed refresh code and UI
-	[CATransaction begin];
-	[CATransaction setDisableActions:YES];
 		
 	Folder * folder = (Folder *)connector.userInfo[@"folder"];
 	ActivityItem *connectorItem = connector.userInfo[@"log"];
@@ -725,7 +722,6 @@
 		[connectorItem appendDetail:NSLocalizedString(@"Got HTTP status 304 - No news from last check", nil)];
 		[connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
 		[self syncFinishedForFolder:folder];
-		[CATransaction commit];
 		return;
 	}
 	else if (isCancelled) 
@@ -774,7 +770,6 @@
 
 	[self syncFinishedForFolder:folder];
 
-	[CATransaction commit];
 	}); //block for dispatch_async on _queue
 };
 

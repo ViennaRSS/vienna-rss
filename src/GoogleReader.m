@@ -29,7 +29,6 @@
 #import "StringExtensions.h"
 #import "NSNotificationAdditions.h"
 #import "KeyChain.h"
-#import <QuartzCore/QuartzCore.h>
 
 #define TIMESTAMP [NSString stringWithFormat:@"%0.0f",[[NSDate date] timeIntervalSince1970]]
 
@@ -536,8 +535,6 @@ enum GoogleReaderStatus {
 {
 	dispatch_async(self.asyncQueue, ^() {
 	// TODO : refactor code to separate feed refresh code and UI
-    [CATransaction begin];
-    [CATransaction setDisableActions:YES];
 
 	ActivityItem *aItem = request.userInfo[@"log"];
 	Folder *refreshedFolder = request.userInfo[@"folder"];
@@ -701,7 +698,6 @@ enum GoogleReaderStatus {
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	}
-    [CATransaction commit];
 	}); //block for dispatch_async
 }
 
