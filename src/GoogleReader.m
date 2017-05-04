@@ -541,7 +541,9 @@ enum GoogleReaderStatus {
 
 	if (request.responseStatusCode == 404) {
 		[aItem appendDetail:NSLocalizedString(@"Error: Feed not found!", nil)];
-		[aItem setStatus:NSLocalizedString(@"Error", nil)];
+        dispatch_async(dispatch_get_main_queue(), ^{
+		    [aItem setStatus:NSLocalizedString(@"Error", nil)];
+        });
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	} else if (request.responseStatusCode == 200) {
@@ -680,9 +682,13 @@ enum GoogleReaderStatus {
         [refreshedFolder clearNonPersistedFlag:MA_FFlag_Error];
         // Send status to the activity log
         if (newArticlesFromFeed == 0) {
-            aItem.status = NSLocalizedString(@"No new articles available", nil);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [aItem setStatus:NSLocalizedString(@"No new articles available", nil)];
+            });
         } else {
-            aItem.status = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [aItem setStatus:[NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed]];
+            });
             [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
                                                                                 object:@(refreshedFolder.itemId)];
         }
@@ -694,7 +700,9 @@ enum GoogleReaderStatus {
 		LOG_EXPR([[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding]);
 		LOG_EXPR([request responseHeaders]);
 		LOG_EXPR([[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding]);
-		[aItem setStatus:NSLocalizedString(@"Error", nil)];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [aItem setStatus:NSLocalizedString(@"Error", nil)];
+        });
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	}
@@ -746,7 +754,9 @@ enum GoogleReaderStatus {
 
 	} @catch (NSException *exception) {
 		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),exception]];
-		[aItem setStatus:NSLocalizedString(@"Error", nil)];
+		dispatch_async(dispatch_get_main_queue(), ^{
+            [aItem setStatus:NSLocalizedString(@"Error", nil)];
+        });
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(refreshedFolder.itemId)];
@@ -811,7 +821,9 @@ enum GoogleReaderStatus {
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 	} @catch (NSException *exception) {
 		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),exception]];
-		[aItem setStatus:NSLocalizedString(@"Error", nil)];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [aItem setStatus:NSLocalizedString(@"Error", nil)];
+        });
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	}  // try/catch
@@ -819,7 +831,9 @@ enum GoogleReaderStatus {
 	else //response status other than OK (200)
 	{
 		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),request.error.localizedDescription ]];
-		[aItem setStatus:NSLocalizedString(@"Error", nil)];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [aItem setStatus:NSLocalizedString(@"Error", nil)];
+        });
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	}
