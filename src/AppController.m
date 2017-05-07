@@ -286,9 +286,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
                     NSTimeInterval interval = -lastRefresh.timeIntervalSinceNow;
                     if (interval > frequency)
                     {
-                        if ([Preferences standardPreferences].syncGoogleReader) {
-                            [[GoogleReader sharedManager] getTokenForRequest:nil];
-						}
                         [NSTimer scheduledTimerWithTimeInterval:15.0
                                                          target:app
                                                        selector:@selector(refreshOnTimer:)
@@ -1381,14 +1378,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
     }
 }
-
--(void)handleGoogleDownloadSubscriptions:(NSNotification *)nc {
-	[[GoogleReader sharedManager] loadSubscriptions];
-}
-
-
-
-
 
 /* handleShowFilterBar
  * Respond to the filter bar being shown or hidden programmatically.
