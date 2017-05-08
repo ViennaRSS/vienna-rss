@@ -26,7 +26,6 @@
 #import "DateFormatterExtension.h"
 #import "AppController.h"
 #import "ArticleController.h"
-#import "SplitViewExtensions.h"
 #import "MessageListView.h"
 #import "ArticleView.h"
 #import "StringExtensions.h"

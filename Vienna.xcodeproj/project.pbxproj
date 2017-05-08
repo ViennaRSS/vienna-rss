@@ -232,7 +232,6 @@
 		AA167A850658361B0091365D /* ViennaApp.scriptSuite in Resources */ = {isa = PBXBuildFile; fileRef = AA167A840658361B0091365D /* ViennaApp.scriptSuite */; };
 		AA16C5450C2DD4EB006BBAC1 /* refreshProgress.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA16C5440C2DD4EB006BBAC1 /* refreshProgress.tiff */; };
 		AA18C4960C43F24900E11C0C /* browserBarBackground.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA18C4950C43F24900E11C0C /* browserBarBackground.tiff */; };
-		AA1A23DB0C07475B005968DC /* SplitViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1A23D90C07475B005968DC /* SplitViewExtensions.m */; };
 		AA1A25170C077F49005968DC /* columnIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A25150C077F49005968DC /* columnIcon.tiff */; };
 		AA1A25180C077F49005968DC /* columnIconPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A25160C077F49005968DC /* columnIconPressed.tiff */; };
 		AA1A25DF0C096D68005968DC /* refreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A25DE0C096D68005968DC /* refreshButton.tiff */; };
@@ -711,8 +710,6 @@
 		AA167A840658361B0091365D /* ViennaApp.scriptSuite */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.scriptSuite; name = ViennaApp.scriptSuite; path = Resources/ViennaApp.scriptSuite; sourceTree = SOURCE_ROOT; };
 		AA16C5440C2DD4EB006BBAC1 /* refreshProgress.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = refreshProgress.tiff; path = Resources/refreshProgress.tiff; sourceTree = SOURCE_ROOT; };
 		AA18C4950C43F24900E11C0C /* browserBarBackground.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = browserBarBackground.tiff; path = Resources/browserBarBackground.tiff; sourceTree = SOURCE_ROOT; };
-		AA1A23D80C07475B005968DC /* SplitViewExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplitViewExtensions.h; path = src/SplitViewExtensions.h; sourceTree = SOURCE_ROOT; };
-		AA1A23D90C07475B005968DC /* SplitViewExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplitViewExtensions.m; path = src/SplitViewExtensions.m; sourceTree = SOURCE_ROOT; };
 		AA1A25150C077F49005968DC /* columnIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = columnIcon.tiff; path = Resources/columnIcon.tiff; sourceTree = SOURCE_ROOT; };
 		AA1A25160C077F49005968DC /* columnIconPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = columnIconPressed.tiff; path = Resources/columnIconPressed.tiff; sourceTree = SOURCE_ROOT; };
 		AA1A25DE0C096D68005968DC /* refreshButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = refreshButton.tiff; path = Resources/refreshButton.tiff; sourceTree = SOURCE_ROOT; };
@@ -1886,8 +1883,6 @@
 				AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */,
 				F6C5CEF81E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.h */,
 				F6C5CEF91E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m */,
-				AA1A23D80C07475B005968DC /* SplitViewExtensions.h */,
-				AA1A23D90C07475B005968DC /* SplitViewExtensions.m */,
 				AAF3B14006095E7B0025CC7F /* StringExtensions.h */,
 				AAF3B14106095E7B0025CC7F /* StringExtensions.m */,
 				AAA305FC0682A25200E4A6DC /* TableViewExtensions.h */,
@@ -2671,7 +2666,6 @@
 				AAEB1A5308E74EE300917920 /* ArrayExtensions.m in Sources */,
 				AA71168F09BEB17300E3EA8A /* AddressBarCell.m in Sources */,
 				0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */,
-				AA1A23DB0C07475B005968DC /* SplitViewExtensions.m in Sources */,
 				34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */,
 				AA8B36C20C12D6480035FBD7 /* GradientView.m in Sources */,
 				AA5AA8000C3C0D7D00B2E14F /* ToolbarButton.m in Sources */,
