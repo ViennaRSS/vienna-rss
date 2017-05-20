@@ -23,7 +23,6 @@
 #import "StringExtensions.h"
 #import "Constants.h"
 #import "ArticleRef.h"
-#import "SearchString.h"
 #import "NSNotificationAdditions.h"
 #import "RefreshManager.h"
 #import "Debug.h"
@@ -2167,8 +2166,14 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	if (folder == nil)
 		return nil;
 
-	if (IsSearchFolder(folder))
-		return self.searchStringToTree;
+	if (IsSearchFolder(folder)) {
+        CriteriaTree *tree = [CriteriaTree new];
+        Criteria *clause = [[Criteria alloc] initWithField:MA_Field_Text
+                                              withOperator:MA_CritOper_Contains
+                                                 withValue:searchString];
+        [tree addCriteria:clause];
+        return tree;
+    }
 	
 	if (IsTrashFolder(folder))
 	{
