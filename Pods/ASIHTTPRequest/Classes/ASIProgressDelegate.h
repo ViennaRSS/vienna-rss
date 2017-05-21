@@ -12,7 +12,7 @@
 
 @optional
 
-// These methods are used to update UIProgressViews (iPhone OS) or NSProgressIndicators (macOS)
+// These methods are used to update UIProgressViews (iPhone OS) or NSProgressIndicators (Mac OS X)
 // If you are using a custom progress delegate, you may find it easier to implement didReceiveBytes / didSendBytes instead
 #if TARGET_OS_IPHONE
 - (void)setProgress:(float)newProgress;
