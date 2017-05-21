@@ -52,6 +52,11 @@
     // Set the activity log.
     self.activityLog = [ActivityLog defaultLog];
 
+    // Set up to receive notifications when a status changes.
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(activityItemStatusDidUpdate:)
+                                               name:activityItemStatusUpdatedNotification
+                                             object:nil];
     // Set up to receive notifications when the activity log changes.
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(activityItemDidUpdateDetails:)
@@ -91,6 +96,34 @@
 
     if (selectedRow >= 0 && item == self.activityLog.allItems[selectedRow]) {
         self.textView.string = item.details;
+    }
+}
+
+/*
+ When the status of an item gets added, removed or changed,
+ reload the data with the log sorted and with the selection preserved.
+ */
+- (void)activityItemStatusDidUpdate:(NSNotification *)notification {
+    ActivityItem * selectedItem = nil;
+
+    NSInteger selectedRow = self.tableView.selectedRow;
+    if (selectedRow >= 0 && selectedRow < self.activityLog.allItems.count) {
+        selectedItem = self.activityLog.allItems[selectedRow];
+    }
+
+    [[ActivityLog defaultLog] sortUsingDescriptors:self.tableView.sortDescriptors];
+    self.activityLog = [ActivityLog defaultLog];
+
+    if (selectedItem == nil) {
+        self.textView.string = @"";
+    } else {
+        NSUInteger rowToSelect = [self.activityLog.allItems indexOfObject:selectedItem];
+        if (rowToSelect != NSNotFound) {
+            NSIndexSet * indexes = [NSIndexSet indexSetWithIndex:rowToSelect];
+            [self.tableView selectRowIndexes:indexes byExtendingSelection:NO];
+        } else {
+            [self.tableView deselectAll:nil];
+        }
     }
 }
 
