@@ -431,7 +431,7 @@
 "AppleScript Error in '%@' script" = "Ошибка AppleScript в скрипте '%@'";
 "No thanks" = "Нет, спасибо";
 "Include anonymous system profile when checking for updates?" = "Добавить анонимную информацию о системе при проверке обновлений?";
-"Include anonymous system profile when checking for updates text" = "Знание наиболее популярных версий Mac OS X среди наших пользователей, помогает дальнейшей разработке и развитию Vienna.";
+"Include anonymous system profile when checking for updates text" = "Знание наиболее популярных версий macOS среди наших пользователей, помогает дальнейшей разработке и развитию Vienna.";
 "Error: Feed not found!" = "Ошибка: Лента не найдена!";
 "Loading" = "Загрузка";
 "Plugin could not be installed" = "Плагин не может быть установлен";

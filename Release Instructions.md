@@ -44,7 +44,7 @@ Tags should be in one of the following formats:
    4. Click the "Publish" button.
 
 ### On Bintray.com:
-	
+
    5. Log in and go to <https://bintray.com/viennarss/vienna-rss/vienna-rss/view>
    6. Choose "New version".
    7. Fill the name ("3.2.0Beta4"), the description from the version notes, then click "Create version". Add the VCS tag (`v/3.2.0_beta4`) and update.
@@ -56,7 +56,7 @@ Tags should be in one of the following formats:
 
    11. Check your email and verify that you have a message from Sourceforge stating "GitHub Downloads Import Complete".
    12. Verify the downloads. Load the SourceForge Downloads page for Vienna at <https://sourceforge.net/projects/vienna-rss/files/>, download new zip files, uncompress them, and run the apps.
-   13. For stable releases only : from the Sourceforge site, edit the "Properties" of "Vienna3.2.0.tar.gz" and set it as default download for Mac OS X. Don't do this for beta releases!
+   13. For stable releases only : from the Sourceforge site, edit the "Properties" of "Vienna3.2.0.tar.gz" and set it as default download for macOS. Don't do this for beta releases!
 
 ### On viennarss.github.io
 
@@ -88,4 +88,3 @@ cask-repair --pull origin --push $github_user $outdated_cask
 ```
 
 Finally, consider posting an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18> and/or <http://vienna-rss.com>.
-

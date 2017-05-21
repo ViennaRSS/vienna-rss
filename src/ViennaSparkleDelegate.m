@@ -46,7 +46,7 @@
     [alert addButtonWithTitle:NSLocalizedString(@"OK", @"OK")];
     [alert addButtonWithTitle:NSLocalizedString(@"No thanks", @"No thanks")];
     [alert setMessageText:NSLocalizedString(@"Include anonymous system profile when checking for updates?", @"Include anonymous system profile when checking for updates?")];
-    [alert setInformativeText:NSLocalizedString(@"Include anonymous system profile when checking for updates text", @"This helps Vienna development by letting us know what versions of Mac OS X are most popular amongst our users.")];
+    [alert setInformativeText:NSLocalizedString(@"Include anonymous system profile when checking for updates text", @"This helps Vienna development by letting us know what versions of macOS are most popular amongst our users.")];
     alert.alertStyle = NSInformationalAlertStyle;
     NSModalResponse buttonClicked = alert.runModal;
     NSLog(@"buttonClicked: %ld", (long)buttonClicked);

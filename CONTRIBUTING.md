@@ -2,7 +2,7 @@
 
 ## Writing code
 
-The current version of Vienna requires Xcode 7 and Mac OS X 10.11 SDK. We will be officially moving to Xcode 8 and macOS Sierra SDK once it has been released. Currently the Unit Tests require Xcode 8 and Swift 3.
+The current version of Vienna requires Xcode 7 and macOS 10.11 SDK. We will be officially moving to Xcode 8 and macOS Sierra SDK once it has been released. Currently the Unit Tests require Xcode 8 and Swift 3.
 
 Vienna uses [cocoapods](http://cocoapods.org) for managing dependencies. When building, make sure to always open the Xcode workspace `Viennna.xcworkspace` instead of a project file.
 

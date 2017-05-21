@@ -432,7 +432,7 @@
 "AppleScript Error in '%@' script" = "Error de appleScript en script '%@'";
 "No thanks" = "No, gracias";
 "Include anonymous system profile when checking for updates?" = "¿Incluir perfil anónimo del sistema al buscar actualizaciones?";
-"Include anonymous system profile when checking for updates text" = "Esto ayuda al desarrollo de Vienna al informarnos que versiones de Mac OS X son más populares entre nuestros usuarios.";
+"Include anonymous system profile when checking for updates text" = "Esto ayuda al desarrollo de Vienna al informarnos que versiones de macOS son más populares entre nuestros usuarios.";
 "Error: Feed not found!" = "Error: ¡Fuente no encontrada!";
 "Loading" = "Cargando";
 "Plugin could not be installed" = "El plugin no se ha podido instalar";
