@@ -432,7 +432,7 @@
 "AppleScript Error in '%@' script" = "AppleScript Error in '%@' script";
 "No thanks" = "No thanks";
 "Include anonymous system profile when checking for updates?" = "Include anonymous system profile when checking for updates?";
-"Include anonymous system profile when checking for updates text" = "This helps Vienna development by letting us know what versions of Mac OS X are most popular amongst our users.";
+"Include anonymous system profile when checking for updates text" = "This helps Vienna development by letting us know what versions of macOS are most popular amongst our users.";
 "Error: Feed not found!" = "Error: Feed not found!";
 "Loading" = "Loading";
 "Plugin could not be installed" = "Plugin could not be installed";

@@ -128,7 +128,7 @@ static unsigned int runningRequestCount = 0;
 
 // You can use [ASIHTTPRequest setShouldUpdateNetworkActivityIndicator:NO] if you want to manage it yourself
 // Alternatively, override showNetworkActivityIndicator / hideNetworkActivityIndicator
-// By default this does nothing on Mac OS X, but again override the above methods for a different behaviour
+// By default this does nothing on macOS, but again override the above methods for a different behaviour
 static BOOL shouldUpdateNetworkActivityIndicator = YES;
 
 // The thread all requests will run on
@@ -3670,7 +3670,7 @@ static NSOperationQueue *sharedQueue = nil;
 		
 		// We'll use a custom error message for SSL errors, but you should always check underlying error if you want more details
 		// For some reason SecureTransport.h doesn't seem to be available on iphone, so error codes hard-coded
-		// Also, iPhone seems to handle errors differently from Mac OS X - a self-signed certificate returns a different error code on each platform, so we'll just provide a general error
+		// Also, iPhone seems to handle errors differently from macOS - a self-signed certificate returns a different error code on each platform, so we'll just provide a general error
 		if ([[underlyingError domain] isEqualToString:NSOSStatusErrorDomain]) {
 			if ([underlyingError code] <= -9800 && [underlyingError code] >= -9818) {
 				reason = [NSString stringWithFormat:@"%@: SSL problem (Possible causes may include a bad/expired/self-signed certificate, clock set to wrong date)",reason];
@@ -4418,7 +4418,7 @@ static NSOperationQueue *sharedQueue = nil;
 
 			#else
 				deviceName = @"Macintosh";
-				OSName = @"Mac OS X";
+				OSName = @"macOS";
 
 				// From http://www.cocoadev.com/index.pl?DeterminingOSVersion
 				// We won't bother to check for systems prior to 10.4, since ASIHTTPRequest only works on 10.5+
@@ -4433,7 +4433,7 @@ static NSOperationQueue *sharedQueue = nil;
 				OSVersion = [NSString stringWithFormat:@"%u.%u.%u", versionMajor, versionMinor, versionBugFix];
 			#endif
 
-			// Takes the form "My Application 1.0 (Macintosh; Mac OS X 10.5.7; en_GB)"
+			// Takes the form "My Application 1.0 (Macintosh; macOS 10.5.7; en_GB)"
 			[self setDefaultUserAgentString:[NSString stringWithFormat:@"%@ %@ (%@; %@ %@; %@)", appName, appVersion, deviceName, OSName, OSVersion, locale]];	
 		}
 		return [[defaultUserAgent retain] autorelease];

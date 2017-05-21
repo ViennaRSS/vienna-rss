@@ -13,8 +13,8 @@ Additionally or alternatively, you can also sync with a server supporting the [O
 Compatibility
 -------------
 
-Vienna 3.1.x requires a minimum of Mac OS X 10.8 (Mountain Lion).
-The next version of Vienna (3.2.x) will require a minimum of Mac OS X 10.9 (Mavericks).
+Vienna 3.1.x requires a minimum of macOS 10.8 (Mountain Lion).
+The next version of Vienna (3.2.x) will require a minimum of macOS 10.9 (Mavericks).
 
 
 Installing

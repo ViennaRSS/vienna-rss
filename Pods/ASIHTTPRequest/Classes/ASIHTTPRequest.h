@@ -335,7 +335,7 @@ typedef void (^ASIDataBlock)(NSData *data);
 	
 	// Used internally, may reflect the size of the internal buffer used by CFNetwork
 	// POST / PUT operations with body sizes greater than uploadBufferSize will not timeout unless more than uploadBufferSize bytes have been sent
-	// Likely to be 32KB on iPhone 3.0, 128KB on Mac OS X Leopard and iPhone 2.2.x
+	// Likely to be 32KB on iPhone 3.0, 128KB on macOS Leopard and iPhone 2.2.x
 	unsigned long long uploadBufferSize;
 	
 	// Text encoding for responses that do not send a Content-Type with a charset value. Defaults to NSISOLatin1StringEncoding

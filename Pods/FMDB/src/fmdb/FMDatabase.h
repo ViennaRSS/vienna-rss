@@ -127,7 +127,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
  2. An empty string (`@""`).  An empty database is created at a temporary location.  This database is deleted with the `FMDatabase` connection is closed.
  3. `nil`.  An in-memory database is created.  This database will be destroyed with the `FMDatabase` connection is closed.
 
- For example, to create/open a database in your Mac OS X `tmp` folder:
+ For example, to create/open a database in your macOS `tmp` folder:
 
     FMDatabase *db = [FMDatabase databaseWithPath:@"/tmp/tmp.db"];
 
@@ -155,7 +155,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
  2. An empty string (`@""`).  An empty database is created at a temporary location.  This database is deleted with the `FMDatabase` connection is closed.
  3. `nil`.  An in-memory database is created.  This database will be destroyed with the `FMDatabase` connection is closed.
 
- For example, to create/open a database in your Mac OS X `tmp` folder:
+ For example, to create/open a database in your macOS `tmp` folder:
 
     FMDatabase *db = [FMDatabase databaseWithPath:@"/tmp/tmp.db"];
 
