@@ -19,7 +19,6 @@
 //
 
 #import "ImageAndTextCell.h"
-#import "BezierPathExtensions.h"
 #import "FolderView.h"
 #import "TreeNode.h"
 
@@ -288,8 +287,16 @@
 
 		countFrame.origin.y += 1;
 		countFrame.size.height -= 2;
-		NSBezierPath * bp = [NSBezierPath bezierPathWithRoundRectInRect:countFrame radius:numSize.height / 2];
-        
+
+        NSBezierPath *bp = [NSBezierPath bezierPath];
+        CGFloat radius = MIN(numSize.height / 2, 0.5f * MIN(NSWidth(countFrame), NSHeight(countFrame)));
+        NSRect rect = NSInsetRect(countFrame, radius, radius);
+        [bp appendBezierPathWithArcWithCenter:NSMakePoint(NSMinX(rect), NSMinY(rect)) radius:radius startAngle:180.0 endAngle:270.0];
+        [bp appendBezierPathWithArcWithCenter:NSMakePoint(NSMaxX(rect), NSMinY(rect)) radius:radius startAngle:270.0 endAngle:360.0];
+        [bp appendBezierPathWithArcWithCenter:NSMakePoint(NSMaxX(rect), NSMaxY(rect)) radius:radius startAngle:  0.0 endAngle: 90.0];
+        [bp appendBezierPathWithArcWithCenter:NSMakePoint(NSMinX(rect), NSMaxY(rect)) radius:radius startAngle: 90.0 endAngle:180.0];
+        [bp closePath];
+
         NSGradient * countLabelGradient = [[NSGradient alloc] initWithStartingColor:countBackgroundColour endingColor:countBackgroundColourGradientEnd];
         [countLabelGradient drawInBezierPath:bp angle:-90.0];
 

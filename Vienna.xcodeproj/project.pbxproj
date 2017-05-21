@@ -286,7 +286,6 @@
 		AA7F231C10FA292700856924 /* blankSmallButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA7F231A10FA292700856924 /* blankSmallButtonPressed.tiff */; };
 		AA829D4508DA7EF800983120 /* ViennaApp.scriptTerminology in Resources */ = {isa = PBXBuildFile; fileRef = AA167A24065834DC0091365D /* ViennaApp.scriptTerminology */; };
 		AA83A05008D6764D001E8404 /* smallCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA83A04F08D6764D001E8404 /* smallCloseButton.tiff */; };
-		AA86B2AB0892DCAA0071FB33 /* BezierPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA86B2A90892DCAA0071FB33 /* BezierPathExtensions.m */; };
 		AA8B36C20C12D6480035FBD7 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8B36C00C12D6480035FBD7 /* GradientView.m */; };
 		AA8C72F60641DE1F00649BA2 /* Criteria.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8C72F40641DE1F00649BA2 /* Criteria.m */; };
 		AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9FE2EC08BC133600A9E977 /* Preferences.m */; };
@@ -774,8 +773,6 @@
 		AA7F231910FA292700856924 /* blankSmallButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = blankSmallButton.tiff; path = Resources/blankSmallButton.tiff; sourceTree = SOURCE_ROOT; };
 		AA7F231A10FA292700856924 /* blankSmallButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = blankSmallButtonPressed.tiff; path = Resources/blankSmallButtonPressed.tiff; sourceTree = SOURCE_ROOT; };
 		AA83A04F08D6764D001E8404 /* smallCloseButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = smallCloseButton.tiff; path = Resources/smallCloseButton.tiff; sourceTree = SOURCE_ROOT; };
-		AA86B2A80892DCAA0071FB33 /* BezierPathExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BezierPathExtensions.h; path = src/BezierPathExtensions.h; sourceTree = SOURCE_ROOT; };
-		AA86B2A90892DCAA0071FB33 /* BezierPathExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BezierPathExtensions.m; path = src/BezierPathExtensions.m; sourceTree = SOURCE_ROOT; };
 		AA8B36BF0C12D6480035FBD7 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = GradientView.h; path = src/GradientView.h; sourceTree = SOURCE_ROOT; };
 		AA8B36C00C12D6480035FBD7 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = GradientView.m; path = src/GradientView.m; sourceTree = SOURCE_ROOT; };
 		AA8C72F30641DE1F00649BA2 /* Criteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Criteria.h; path = src/Criteria.h; sourceTree = SOURCE_ROOT; };
@@ -1869,8 +1866,6 @@
 			children = (
 				F64C2CCA1E83825D00ED4E04 /* DateFormatterExtension.h */,
 				F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */,
-				AA86B2A80892DCAA0071FB33 /* BezierPathExtensions.h */,
-				AA86B2A90892DCAA0071FB33 /* BezierPathExtensions.m */,
 				AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */,
 				AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */,
 				F6C5CEF81E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.h */,
@@ -2647,7 +2642,6 @@
 				032280311A33BCD8007DE933 /* Article.m in Sources */,
 				030C38901AABF12D00AE1EB8 /* FolderImageCache.m in Sources */,
 				AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */,
-				AA86B2AB0892DCAA0071FB33 /* BezierPathExtensions.m in Sources */,
 				F6C5CEFA1E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m in Sources */,
 				AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */,
 				AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */,
