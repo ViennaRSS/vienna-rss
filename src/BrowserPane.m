@@ -488,25 +488,26 @@
  * Called when the browser wants to display a JavaScript alert panel containing the specified message.
  */
 - (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
-	NSRunInformationalAlertPanel(NSLocalizedString(@"JavaScript", @""),	// title
-		@"%@",	// message placeholder
-		NSLocalizedString(@"OK", @""),	// default button
-		nil,	// alt button
-		nil,	// other button
-		message);
+    NSAlert *alert = [NSAlert new];
+    alert.alertStyle = NSAlertStyleInformational;
+    alert.messageText = NSLocalizedString(@"JavaScript", @"");
+    alert.informativeText = message;
+    [alert runModal];
 }
 
 /* runJavaScriptConfirmPanelWithMessage
  * Called when the browser wants to display a JavaScript confirmation panel with the specified message.
  */
 - (BOOL)webView:(WebView *)sender runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
-	NSInteger result = NSRunInformationalAlertPanel(NSLocalizedString(@"JavaScript", @""),	// title
-		@"%@",	// message placeholder
-		NSLocalizedString(@"OK", @""),	// default button
-		NSLocalizedString(@"Cancel", @""),	// alt button
-		nil,
-		message);
-	return NSAlertDefaultReturn == result;
+    NSAlert *alert = [NSAlert new];
+    alert.alertStyle = NSAlertStyleInformational;
+    alert.messageText = NSLocalizedString(@"JavaScript", @"");
+    alert.informativeText = message;
+    [alert addButtonWithTitle:NSLocalizedString(@"OK", "Title of a button on an alert")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+    NSModalResponse alertResponse = [alert runModal];
+
+    return alertResponse == NSAlertFirstButtonReturn;
 }
 
 - (void)webView:(WebView *)sender runOpenPanelForFileButtonWithResultListener:(id < WebOpenPanelResultListener >)resultListener

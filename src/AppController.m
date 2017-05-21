@@ -519,16 +519,16 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
-	NSInteger returnCode;
-	
 	if ([DownloadManager sharedInstance].activeDownloads > 0)
 	{
-		returnCode = NSRunAlertPanel(NSLocalizedString(@"Downloads Running", nil),
-									 NSLocalizedString(@"Downloads Running text", nil),
-									 NSLocalizedString(@"Quit", nil),
-									 NSLocalizedString(@"Cancel", nil),
-									 nil);
-		if (returnCode == NSAlertAlternateReturn)
+        NSAlert *alert = [NSAlert new];
+        alert.messageText = NSLocalizedString(@"Downloads Running", nil);
+        alert.informativeText = NSLocalizedString(@"Downloads Running text", nil);
+        [alert addButtonWithTitle:NSLocalizedString(@"Quit", "Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+        NSModalResponse alertResponse = [alert runModal];
+
+		if (alertResponse == NSAlertSecondButtonReturn)
 		{
             [[NSNotificationCenter defaultCenter]  removeObserver:self];
 			return NSTerminateCancel;
@@ -657,11 +657,19 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	}
 	if ([filename.pathExtension isEqualToString:@"opml"])
 	{
-		BOOL returnCode = NSRunAlertPanel(NSLocalizedString(@"Import subscriptions from OPML file?", nil), NSLocalizedString(@"Do you really want to import the subscriptions from the specified OPML file?", nil), NSLocalizedString(@"Import", nil), NSLocalizedString(@"Cancel", nil), nil);
-		if (returnCode == NSAlertAlternateReturn)
-			return NO;
-		[Import importFromFile:filename];
-		return YES;
+        NSAlert *alert = [NSAlert new];
+        alert.messageText = NSLocalizedString(@"Import subscriptions from OPML file?", nil);
+        alert.informativeText = NSLocalizedString(@"Do you really want to import the subscriptions from the specified OPML file?", nil);
+        [alert addButtonWithTitle:NSLocalizedString(@"Import", "Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+        NSModalResponse alertResponse = [alert runModal];
+
+        if (alertResponse == NSAlertFirstButtonReturn) {
+            [Import importFromFile:filename];
+            return YES;
+        } else {
+            return NO;
+        }
 	}
     if ([filename.pathExtension isEqualToString:@"webloc"])
     {
@@ -1303,7 +1311,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             else
             {
                 // Announce how many we successfully imported
-                NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Export Title", nil), NSLocalizedString(@"%d subscriptions successfully exported", nil), NSLocalizedString(@"OK", nil), nil, nil, countExported);
+                NSAlert *alert = [NSAlert new];
+                alert.alertStyle = NSAlertStyleInformational;
+                alert.messageText = NSLocalizedString(@"RSS Subscription Export Title", nil);
+                alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully exported", nil), countExported];
+                [alert runModal];
             }
         }
     }];
@@ -2950,9 +2962,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	// Get confirmation first
 	if (needPrompt)
 	{
-		// Security: folder name could contain formatting characters, so don't use alertBody as format string.
-		NSInteger returnCode = NSRunAlertPanel(alertTitle, @"%@", NSLocalizedString(@"Delete", nil), NSLocalizedString(@"Cancel", nil), nil, alertBody);
-		if (returnCode == NSAlertAlternateReturn)
+        NSAlert *alert = [NSAlert new];
+        alert.messageText = alertTitle;
+        alert.informativeText = alertBody;
+        [alert addButtonWithTitle:NSLocalizedString(@"Delete", "Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+        NSModalResponse alertResponse = [alert runModal];
+
+		if (alertResponse == NSAlertSecondButtonReturn)
 			return;
 	}
 	
