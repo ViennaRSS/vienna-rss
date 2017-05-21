@@ -19,7 +19,6 @@
 
 #import "RichXMLParser.h"
 #import "StringExtensions.h"
-#import "ArrayExtensions.h"
 #import "XMLTag.h"
 #import "FeedItem.h"
 #import "NSDate+Vienna.h"
@@ -458,11 +457,11 @@
             [self ensureTitle:newFeedItem];
 
             // Add this item in the proper location in the array
-            NSUInteger indexOfItem = (orderArray && itemIdentifier) ? [orderArray indexOfStringInArray:itemIdentifier] : NSNotFound;
-            if (indexOfItem == NSNotFound || indexOfItem >= items.count) {
+            NSUInteger index = orderArray && itemIdentifier ? [orderArray indexOfObject:itemIdentifier] : NSNotFound;
+            if (index == NSNotFound || index >= items.count) {
                 [items addObject:newFeedItem];
             } else {
-                [items insertObject:newFeedItem atIndex:indexOfItem];
+                [items insertObject:newFeedItem atIndex:index];
             }
         }
     }
