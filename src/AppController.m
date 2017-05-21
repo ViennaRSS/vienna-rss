@@ -25,7 +25,6 @@
 #import "Import.h"
 #import "Export.h"
 #import "RefreshManager.h"
-#import "ArrayExtensions.h"
 #import "StringExtensions.h"
 #import "BrowserView.h"
 #import "SearchFolder.h"

@@ -305,7 +305,6 @@
 		AAE3E41C09760B42009E60D6 /* appearancePrefImage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAE3E41B09760B42009E60D6 /* appearancePrefImage.tiff */; };
 		AAE3E42C09760DD2009E60D6 /* generalPrefImage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAE3E42B09760DD2009E60D6 /* generalPrefImage.tiff */; };
 		AAE7A902086BB5C4009A487E /* PopupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE7A900086BB5C4009A487E /* PopupButton.m */; };
-		AAEB1A5308E74EE300917920 /* ArrayExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEB1A5108E74EE300917920 /* ArrayExtensions.m */; };
 		AAF3B14306095E7B0025CC7F /* StringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF3B14106095E7B0025CC7F /* StringExtensions.m */; };
 		AAF6C3A308B06BA00077BAB8 /* StandardURLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAF6C3A208B06BA00077BAB8 /* StandardURLs.plist */; };
 		AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
@@ -802,8 +801,6 @@
 		AAE3E42B09760DD2009E60D6 /* generalPrefImage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = generalPrefImage.tiff; path = Resources/generalPrefImage.tiff; sourceTree = SOURCE_ROOT; };
 		AAE7A8FF086BB5C4009A487E /* PopupButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = PopupButton.h; path = src/PopupButton.h; sourceTree = SOURCE_ROOT; };
 		AAE7A900086BB5C4009A487E /* PopupButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = PopupButton.m; path = src/PopupButton.m; sourceTree = SOURCE_ROOT; };
-		AAEB1A5008E74EE300917920 /* ArrayExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArrayExtensions.h; path = src/ArrayExtensions.h; sourceTree = SOURCE_ROOT; };
-		AAEB1A5108E74EE300917920 /* ArrayExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArrayExtensions.m; path = src/ArrayExtensions.m; sourceTree = SOURCE_ROOT; };
 		AAF3B14006095E7B0025CC7F /* StringExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringExtensions.h; path = src/StringExtensions.h; sourceTree = SOURCE_ROOT; };
 		AAF3B14106095E7B0025CC7F /* StringExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StringExtensions.m; path = src/StringExtensions.m; sourceTree = SOURCE_ROOT; };
 		AAF6C3A208B06BA00077BAB8 /* StandardURLs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = StandardURLs.plist; path = Resources/StandardURLs.plist; sourceTree = SOURCE_ROOT; };
@@ -1872,8 +1869,6 @@
 			children = (
 				F64C2CCA1E83825D00ED4E04 /* DateFormatterExtension.h */,
 				F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */,
-				AAEB1A5008E74EE300917920 /* ArrayExtensions.h */,
-				AAEB1A5108E74EE300917920 /* ArrayExtensions.m */,
 				AA86B2A80892DCAA0071FB33 /* BezierPathExtensions.h */,
 				AA86B2A90892DCAA0071FB33 /* BezierPathExtensions.m */,
 				AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */,
@@ -2658,7 +2653,6 @@
 				AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */,
 				F6164C591E32A6660086261C /* DisclosureView.m in Sources */,
 				031E083019DFA3A900194F9F /* SubscriptionModel.m in Sources */,
-				AAEB1A5308E74EE300917920 /* ArrayExtensions.m in Sources */,
 				AA71168F09BEB17300E3EA8A /* AddressBarCell.m in Sources */,
 				0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */,
 				34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */,

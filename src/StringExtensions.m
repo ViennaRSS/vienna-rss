@@ -19,7 +19,6 @@
 //
 
 #import "StringExtensions.h"
-#import "ArrayExtensions.h"
 #import <WebKit/WebKit.h>
 
 @implementation NSMutableString (MutableStringExtensions)
