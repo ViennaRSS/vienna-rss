@@ -259,12 +259,12 @@ static BOOL _credentialsChanged;
 {    
     if ((self.view.window).visible)
     {
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert setMessageText:NSLocalizedString(@"Open Reader Authentication Failed",nil)];
-        [alert setInformativeText:NSLocalizedString(@"Open Reader Authentication Failed text",nil)];
-        alert.alertStyle = NSWarningAlertStyle;
-        [alert beginSheetModalForWindow:self.view.window modalDelegate:self didEndSelector:nil contextInfo:nil];
-        [[GoogleReader sharedManager] clearAuthentication];
+        NSAlert *alert = [NSAlert new];
+        alert.messageText = NSLocalizedString(@"Open Reader Authentication Failed",nil);
+        alert.informativeText = NSLocalizedString(@"Open Reader Authentication Failed text",nil);
+        [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
+            [[GoogleReader sharedManager] clearAuthentication];
+        }];
     }
 }
 

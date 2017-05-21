@@ -1301,12 +1301,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             
             if (countExported < 0)
             {
-                NSBeginCriticalAlertSheet(NSLocalizedString(@"Cannot open export file message", nil),
-                                          NSLocalizedString(@"OK", nil),
-                                          nil,
-                                          nil, NSApp.mainWindow, self,
-                                          nil, nil, nil,
-                                          NSLocalizedString(@"Cannot open export file message text", nil));
+                NSAlert *alert = [NSAlert new];
+                alert.messageText = NSLocalizedString(@"Cannot open export file message", nil);
+                alert.informativeText = NSLocalizedString(@"Cannot open export file message text", nil);
+                [alert beginSheetModalForWindow:mainWindow completionHandler:nil];
             }
             else
             {
@@ -1382,11 +1380,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)handleGoogleAuthFailed:(NSNotification *)nc
 {
     if (mainWindow.keyWindow) {
-	NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:NSLocalizedString(@"Open Reader Authentication Failed",nil)];
-    [alert setInformativeText:NSLocalizedString(@"Open Reader Authentication Failed text",nil)];
-    alert.alertStyle = NSWarningAlertStyle;
-    [alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+        NSAlert *alert = [NSAlert new];
+        alert.messageText = NSLocalizedString(@"Open Reader Authentication Failed",nil);
+        alert.informativeText = NSLocalizedString(@"Open Reader Authentication Failed text",nil);
+        [alert beginSheetModalForWindow:mainWindow completionHandler:nil];
     }
 }
 
@@ -1752,25 +1749,17 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)emptyTrash:(id)sender
 {
-	NSBeginCriticalAlertSheet(NSLocalizedString(@"Empty Trash message", nil),
-							  NSLocalizedString(@"Empty", nil),
-							  NSLocalizedString(@"Cancel", nil),
-							  nil, NSApp.mainWindow, self,
-							  @selector(doConfirmedEmptyTrash:returnCode:contextInfo:), nil, nil,
-							  NSLocalizedString(@"Empty Trash message text", nil));
-}
-
-/* doConfirmedEmptyTrash
- * This function is called after the user has dismissed
- * the confirmation sheet.
- */
--(void)doConfirmedEmptyTrash:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
-{
-	if (returnCode == NSAlertDefaultReturn)
-	{
-		[self clearUndoStack];
-		[db purgeDeletedArticles];
-	}
+    NSAlert *alert = [NSAlert new];
+    alert.messageText = NSLocalizedString(@"Empty Trash message", nil);
+    alert.informativeText = NSLocalizedString(@"Empty Trash message text", nil);
+    [alert addButtonWithTitle:NSLocalizedString(@"Empty", "Title of a button on an alert")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+    [alert beginSheetModalForWindow:mainWindow completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == NSAlertFirstButtonReturn) {
+            [self clearUndoStack];
+            [db purgeDeletedArticles];
+        }
+    }];
 }
 
 /* keyboardShortcutsHelp
@@ -2695,31 +2684,23 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 		else
 		{
-			NSBeginCriticalAlertSheet(NSLocalizedString(@"Delete selected message", nil),
-									  NSLocalizedString(@"Delete", nil),
-									  NSLocalizedString(@"Cancel", nil),
-									  nil, NSApp.mainWindow, self,
-									  @selector(doConfirmedDelete:returnCode:contextInfo:), nil, nil,
-									  NSLocalizedString(@"Delete selected message text", nil));
-		}
-	}
-}
+            NSAlert *alert = [NSAlert new];
+            alert.messageText = NSLocalizedString(@"Delete selected message", nil);
+            alert.informativeText = NSLocalizedString(@"Delete selected message text", nil);
+            [alert addButtonWithTitle:NSLocalizedString(@"Delete", "Title of a button on an alert")];
+            [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+            [alert beginSheetModalForWindow:mainWindow completionHandler:^(NSModalResponse returnCode) {
+                if (returnCode == NSAlertFirstButtonReturn) {
+                    NSArray *articleArray = articleController.markedArticleRange;
+                    [articleController deleteArticlesByArray:articleArray];
 
-/* doConfirmedDelete
- * This function is called after the user has dismissed
- * the confirmation sheet.
- */
--(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
-{
-	if (returnCode == NSAlertDefaultReturn)
-	{
-		NSArray * articleArray = articleController.markedArticleRange;
-		[articleController deleteArticlesByArray:articleArray];
-		
-		// Blow away the undo stack here since undo actions may refer to
-		// articles that have been deleted. This is a bit of a cop-out but
-		// it's the easiest approach for now.
-		[self clearUndoStack];
+                    // Blow away the undo stack here since undo actions may refer to
+                    // articles that have been deleted. This is a bit of a cop-out but
+                    // it's the easiest approach for now.
+                    [self clearUndoStack];
+                }
+            }];
+		}
 	}
 }
 
