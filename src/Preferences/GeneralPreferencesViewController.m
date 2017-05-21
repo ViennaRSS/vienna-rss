@@ -292,14 +292,14 @@
         [openPanel orderOut:self];
         [prefPaneWindow makeKeyAndOrderFront:prefPaneWindow];
         
-        if (returnCode == NSOKButton)
+        if (returnCode == NSFileHandlingPanelOKButton)
         {
             NSString * downloadFolderPath = openPanel.directoryURL.path;
             [Preferences standardPreferences].downloadFolder = downloadFolderPath;
             [self updateDownloadsPopUp:downloadFolderPath];
         }
         
-        if (returnCode == NSCancelButton)
+        if (returnCode == NSFileHandlingPanelCancelButton)
             [downloadFolder selectItemAtIndex:0];
     }];
 }
@@ -372,7 +372,7 @@
         NSWindow * prefPaneWindow = linksHandler.window;
         [prefPaneWindow makeKeyAndOrderFront:self];
         
-        if (returnCode == NSOKButton)
+        if (returnCode == NSFileHandlingPanelOKButton)
             [self setDefaultLinksHandler:panel.URL];
         [self refreshLinkHandler];
     }];
