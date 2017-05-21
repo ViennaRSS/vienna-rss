@@ -45,9 +45,7 @@ static const size_t kNumberOfDateFormatters = sizeof(kDateFormats) / sizeof(kDat
 //  those we need early in the program launch and keep them in memory.
 static NSDateFormatter * dateFormatterArray[kNumberOfDateFormatters];
 
-static NSLock * dateFormatters_lock;
 static NSLocale * enUSLocale;
-static BOOL threadSafe;
 
 @implementation NSDate (Vienna)
 
@@ -64,17 +62,6 @@ static BOOL threadSafe;
 		dateFormatterArray[i].timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
         dateFormatterArray[i].dateFormat = kDateFormats[i];
 	}
-
-	// end of initialization of date formatters
-
-	if (floor(NSAppKitVersionNumber) >= NSAppKitVersionNumber10_9)
-        threadSafe=YES;
-    else
-	{
-        // Initializes our multi-thread lock
-        dateFormatters_lock = [[NSLock alloc] init];
-        threadSafe=NO;
-    }
 }
 
 
@@ -100,35 +87,16 @@ static BOOL threadSafe;
         modifiedDateString = dateString;
     }
 
-	if (threadSafe)
-	{
-        // test with the date formatters we are aware of
-        // exit as soon as we find a match
-        for (NSInteger i=0; i<kNumberOfDateFormatters; i++)
+    // test with the date formatters we are aware of
+    // exit as soon as we find a match
+    for (NSInteger i=0; i<kNumberOfDateFormatters; i++)
+    {
+        date = [dateFormatterArray[i] dateFromString:modifiedDateString];
+        if (date != nil)
         {
-            date = [dateFormatterArray[i] dateFromString:modifiedDateString];
-            if (date != nil)
-            {
-                return date;
-            }
+            return date;
         }
-	}
-	else
-	{
-        // NSDateFormatter is thread safe on OS X 10.9 and later only
-        // so we manage the issue with this lock
-        [dateFormatters_lock lock];
-        for (NSInteger i=0; i<kNumberOfDateFormatters; i++)
-        {
-            date = [dateFormatterArray[i] dateFromString:modifiedDateString];
-            if (date != nil)
-            {
-                [dateFormatters_lock unlock];
-                return date;
-            }
-        }
-        [dateFormatters_lock unlock];
-	}
+    }
 
 	// expensive last resort attempt
 	date = [NSDate dateWithNaturalLanguageString:dateString locale:enUSLocale];
