@@ -200,7 +200,6 @@
 		6624683B13C5F83000C85417 /* sync.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6624683A13C5F81F00C85417 /* sync.tiff */; };
 		664F87C713C62DFE00E266DE /* GoogleReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 664F87C613C62DFE00E266DE /* GoogleReader.m */; };
 		70D0A8E09ABD09D1538832EA /* libPods-Vienna Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0CEAD1B45DBBF666A25250 /* libPods-Vienna Tests.a */; };
-		793C95301C3F07FC00984D4E /* TreeFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793C952F1C3F07FC00984D4E /* TreeFilterView.m */; };
 		793C95331C42A0DD00984D4E /* FoldersFilterable.m in Sources */ = {isa = PBXBuildFile; fileRef = 793C95321C42A0DD00984D4E /* FoldersFilterable.m */; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		AA04ED6B096226D30060E851 /* rssFeedNew.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA04ED6A096226D30060E851 /* rssFeedNew.tiff */; };
@@ -670,8 +669,6 @@
 		6624683A13C5F81F00C85417 /* sync.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sync.tiff; path = Resources/sync.tiff; sourceTree = SOURCE_ROOT; };
 		664F87C513C62DFE00E266DE /* GoogleReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoogleReader.h; path = src/GoogleReader.h; sourceTree = SOURCE_ROOT; };
 		664F87C613C62DFE00E266DE /* GoogleReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoogleReader.m; path = src/GoogleReader.m; sourceTree = SOURCE_ROOT; };
-		793C952E1C3F07FC00984D4E /* TreeFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeFilterView.h; path = src/TreeFilterView.h; sourceTree = "<group>"; };
-		793C952F1C3F07FC00984D4E /* TreeFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeFilterView.m; path = src/TreeFilterView.m; sourceTree = "<group>"; };
 		793C95311C42A0DD00984D4E /* FoldersFilterable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FoldersFilterable.h; path = src/FoldersFilterable.h; sourceTree = "<group>"; };
 		793C95321C42A0DD00984D4E /* FoldersFilterable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FoldersFilterable.m; path = src/FoldersFilterable.m; sourceTree = "<group>"; };
 		7A3781B9326123EE56347D35 /* libPods-Vienna.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vienna.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1414,8 +1411,6 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				793C952E1C3F07FC00984D4E /* TreeFilterView.h */,
-				793C952F1C3F07FC00984D4E /* TreeFilterView.m */,
 				4350284B165DE9DF0018EDB7 /* AppController.h */,
 				4350284C165DE9DF0018EDB7 /* AppController.m */,
 				F69140E21E71B94200D51BFF /* AppController+Notifications.h */,
@@ -2629,7 +2624,6 @@
 				AA36CD7C06100692001E33A4 /* Field.m in Sources */,
 				AA8C72F60641DE1F00649BA2 /* Criteria.m in Sources */,
 				0349813E1A206FD900014F29 /* GeneralPreferencesViewController.m in Sources */,
-				793C95301C3F07FC00984D4E /* TreeFilterView.m in Sources */,
 				03B35B841B75E9E0001DB06D /* NSDate+Vienna.m in Sources */,
 				3AF896C71CD8FDB800A9FA22 /* ViennaSparkleDelegate.m in Sources */,
 				AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */,
