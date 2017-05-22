@@ -109,7 +109,6 @@
 		435028A2165DE9E00018EDB7 /* EmptyTrashWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502864165DE9DF0018EDB7 /* EmptyTrashWarning.m */; };
 		435028A3165DE9E00018EDB7 /* Export.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502866165DE9DF0018EDB7 /* Export.m */; };
 		435028A4165DE9E00018EDB7 /* FeedCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502868165DE9DF0018EDB7 /* FeedCredentials.m */; };
-		435028A5165DE9E00018EDB7 /* FilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350286A165DE9DF0018EDB7 /* FilterView.m */; };
 		435028A6165DE9E00018EDB7 /* FoldersTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350286C165DE9DF0018EDB7 /* FoldersTree.m */; };
 		435028A7165DE9E00018EDB7 /* FolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350286E165DE9DF0018EDB7 /* FolderView.m */; };
 		435028A8165DE9E00018EDB7 /* Import.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502870165DE9DF0018EDB7 /* Import.m */; };
@@ -200,7 +199,6 @@
 		6624683B13C5F83000C85417 /* sync.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6624683A13C5F81F00C85417 /* sync.tiff */; };
 		664F87C713C62DFE00E266DE /* GoogleReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 664F87C613C62DFE00E266DE /* GoogleReader.m */; };
 		70D0A8E09ABD09D1538832EA /* libPods-Vienna Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0CEAD1B45DBBF666A25250 /* libPods-Vienna Tests.a */; };
-		793C95301C3F07FC00984D4E /* TreeFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793C952F1C3F07FC00984D4E /* TreeFilterView.m */; };
 		793C95331C42A0DD00984D4E /* FoldersFilterable.m in Sources */ = {isa = PBXBuildFile; fileRef = 793C95321C42A0DD00984D4E /* FoldersFilterable.m */; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		AA04ED6B096226D30060E851 /* rssFeedNew.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA04ED6A096226D30060E851 /* rssFeedNew.tiff */; };
@@ -228,10 +226,8 @@
 		AA077AAA0C84484B00D71D26 /* stylesMenuButtonSmallPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A920C84484B00D71D26 /* stylesMenuButtonSmallPressed.tiff */; };
 		AA077AAB0C84484B00D71D26 /* subscribeButtonSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A930C84484B00D71D26 /* subscribeButtonSmall.tiff */; };
 		AA077AAC0C84484B00D71D26 /* subscribeButtonSmallPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A940C84484B00D71D26 /* subscribeButtonSmallPressed.tiff */; };
-		AA13A08B0C36D34C00C64338 /* filterViewBackground.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA13A08A0C36D34C00C64338 /* filterViewBackground.tiff */; };
 		AA167A850658361B0091365D /* ViennaApp.scriptSuite in Resources */ = {isa = PBXBuildFile; fileRef = AA167A840658361B0091365D /* ViennaApp.scriptSuite */; };
 		AA16C5450C2DD4EB006BBAC1 /* refreshProgress.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA16C5440C2DD4EB006BBAC1 /* refreshProgress.tiff */; };
-		AA18C4960C43F24900E11C0C /* browserBarBackground.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA18C4950C43F24900E11C0C /* browserBarBackground.tiff */; };
 		AA1A25170C077F49005968DC /* columnIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A25150C077F49005968DC /* columnIcon.tiff */; };
 		AA1A25180C077F49005968DC /* columnIconPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A25160C077F49005968DC /* columnIconPressed.tiff */; };
 		AA1A25DF0C096D68005968DC /* refreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A25DE0C096D68005968DC /* refreshButton.tiff */; };
@@ -347,6 +343,8 @@
 		F62581431E29B9040035E43C /* XMLSource.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581421E29B9040035E43C /* XMLSource.xib */; };
 		F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581441E29B90A0035E43C /* SearchPanel.xib */; };
 		F62581591E29BEB90035E43C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625815B1E29BEB90035E43C /* MainMenu.xib */; };
+		F628DFE31ED2698A00FACFD3 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F628DFE21ED2698A00FACFD3 /* FilterView.swift */; };
+		F63B71751ED252DD00CF9F32 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B71741ED252DD00CF9F32 /* GradientView.swift */; };
 		F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */; };
 		F648C2B91E7F3C2500CE4043 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */; };
 		F64C2CCC1E83825D00ED4E04 /* DateFormatterExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */; };
@@ -554,8 +552,6 @@
 		43502866165DE9DF0018EDB7 /* Export.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Export.m; path = src/Export.m; sourceTree = SOURCE_ROOT; };
 		43502867165DE9DF0018EDB7 /* FeedCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedCredentials.h; path = src/FeedCredentials.h; sourceTree = SOURCE_ROOT; };
 		43502868165DE9DF0018EDB7 /* FeedCredentials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedCredentials.m; path = src/FeedCredentials.m; sourceTree = SOURCE_ROOT; };
-		43502869165DE9DF0018EDB7 /* FilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilterView.h; path = src/FilterView.h; sourceTree = SOURCE_ROOT; };
-		4350286A165DE9DF0018EDB7 /* FilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilterView.m; path = src/FilterView.m; sourceTree = SOURCE_ROOT; };
 		4350286B165DE9DF0018EDB7 /* FoldersTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FoldersTree.h; path = src/FoldersTree.h; sourceTree = SOURCE_ROOT; };
 		4350286C165DE9DF0018EDB7 /* FoldersTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FoldersTree.m; path = src/FoldersTree.m; sourceTree = SOURCE_ROOT; };
 		4350286D165DE9DF0018EDB7 /* FolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FolderView.h; path = src/FolderView.h; sourceTree = SOURCE_ROOT; };
@@ -670,8 +666,6 @@
 		6624683A13C5F81F00C85417 /* sync.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sync.tiff; path = Resources/sync.tiff; sourceTree = SOURCE_ROOT; };
 		664F87C513C62DFE00E266DE /* GoogleReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoogleReader.h; path = src/GoogleReader.h; sourceTree = SOURCE_ROOT; };
 		664F87C613C62DFE00E266DE /* GoogleReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoogleReader.m; path = src/GoogleReader.m; sourceTree = SOURCE_ROOT; };
-		793C952E1C3F07FC00984D4E /* TreeFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeFilterView.h; path = src/TreeFilterView.h; sourceTree = "<group>"; };
-		793C952F1C3F07FC00984D4E /* TreeFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeFilterView.m; path = src/TreeFilterView.m; sourceTree = "<group>"; };
 		793C95311C42A0DD00984D4E /* FoldersFilterable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FoldersFilterable.h; path = src/FoldersFilterable.h; sourceTree = "<group>"; };
 		793C95321C42A0DD00984D4E /* FoldersFilterable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FoldersFilterable.m; path = src/FoldersFilterable.m; sourceTree = "<group>"; };
 		7A3781B9326123EE56347D35 /* libPods-Vienna.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vienna.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -702,11 +696,9 @@
 		AA077A930C84484B00D71D26 /* subscribeButtonSmall.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = subscribeButtonSmall.tiff; path = Resources/subscribeButtonSmall.tiff; sourceTree = SOURCE_ROOT; };
 		AA077A940C84484B00D71D26 /* subscribeButtonSmallPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = subscribeButtonSmallPressed.tiff; path = Resources/subscribeButtonSmallPressed.tiff; sourceTree = SOURCE_ROOT; };
 		AA0FB5E00869110300D9CB90 /* ActivityLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityLog.h; path = src/ActivityLog.h; sourceTree = SOURCE_ROOT; };
-		AA13A08A0C36D34C00C64338 /* filterViewBackground.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = filterViewBackground.tiff; path = Resources/filterViewBackground.tiff; sourceTree = SOURCE_ROOT; };
 		AA167A24065834DC0091365D /* ViennaApp.scriptTerminology */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.scriptTerminology; name = ViennaApp.scriptTerminology; path = Resources/ViennaApp.scriptTerminology; sourceTree = SOURCE_ROOT; };
 		AA167A840658361B0091365D /* ViennaApp.scriptSuite */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.scriptSuite; name = ViennaApp.scriptSuite; path = Resources/ViennaApp.scriptSuite; sourceTree = SOURCE_ROOT; };
 		AA16C5440C2DD4EB006BBAC1 /* refreshProgress.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = refreshProgress.tiff; path = Resources/refreshProgress.tiff; sourceTree = SOURCE_ROOT; };
-		AA18C4950C43F24900E11C0C /* browserBarBackground.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = browserBarBackground.tiff; path = Resources/browserBarBackground.tiff; sourceTree = SOURCE_ROOT; };
 		AA1A25150C077F49005968DC /* columnIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = columnIcon.tiff; path = Resources/columnIcon.tiff; sourceTree = SOURCE_ROOT; };
 		AA1A25160C077F49005968DC /* columnIconPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = columnIconPressed.tiff; path = Resources/columnIconPressed.tiff; sourceTree = SOURCE_ROOT; };
 		AA1A25DE0C096D68005968DC /* refreshButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = refreshButton.tiff; path = Resources/refreshButton.tiff; sourceTree = SOURCE_ROOT; };
@@ -969,6 +961,7 @@
 		F62581421E29B9040035E43C /* XMLSource.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XMLSource.xib; path = Interfaces/XMLSource.xib; sourceTree = "<group>"; };
 		F62581441E29B90A0035E43C /* SearchPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchPanel.xib; path = Interfaces/SearchPanel.xib; sourceTree = "<group>"; };
 		F625815A1E29BEB90035E43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		F628DFE21ED2698A00FACFD3 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterView.swift; path = src/FilterView.swift; sourceTree = "<group>"; };
 		F6352BB81E2706DD005CD307 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6352BB91E2706E1005CD307 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6352BBA1E2706EB005CD307 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoWindow.strings"; sourceTree = "<group>"; };
@@ -1028,6 +1021,7 @@
 		F6352C071E27285C005CD307 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
 		F6352C081E272864005CD307 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/AppearancePreferencesView.strings"; sourceTree = "<group>"; };
 		F6352C091E272868005CD307 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AppearancePreferencesView.strings"; sourceTree = "<group>"; };
+		F63B71741ED252DD00CF9F32 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GradientView.swift; path = src/GradientView.swift; sourceTree = "<group>"; };
 		F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryMonitorTests.swift; sourceTree = "<group>"; };
 		F64C2CCA1E83825D00ED4E04 /* DateFormatterExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateFormatterExtension.h; path = src/DateFormatterExtension.h; sourceTree = "<group>"; };
 		F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DateFormatterExtension.m; path = src/DateFormatterExtension.m; sourceTree = "<group>"; };
@@ -1414,8 +1408,6 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				793C952E1C3F07FC00984D4E /* TreeFilterView.h */,
-				793C952F1C3F07FC00984D4E /* TreeFilterView.m */,
 				4350284B165DE9DF0018EDB7 /* AppController.h */,
 				4350284C165DE9DF0018EDB7 /* AppController.m */,
 				F69140E21E71B94200D51BFF /* AppController+Notifications.h */,
@@ -1452,8 +1444,7 @@
 				43502866165DE9DF0018EDB7 /* Export.m */,
 				43502867165DE9DF0018EDB7 /* FeedCredentials.h */,
 				43502868165DE9DF0018EDB7 /* FeedCredentials.m */,
-				43502869165DE9DF0018EDB7 /* FilterView.h */,
-				4350286A165DE9DF0018EDB7 /* FilterView.m */,
+				F628DFE21ED2698A00FACFD3 /* FilterView.swift */,
 				4350286B165DE9DF0018EDB7 /* FoldersTree.h */,
 				4350286C165DE9DF0018EDB7 /* FoldersTree.m */,
 				793C95311C42A0DD00984D4E /* FoldersFilterable.h */,
@@ -1648,8 +1639,6 @@
 				6624683A13C5F81F00C85417 /* sync.tiff */,
 				B2B37ACD110A65DA0070EDA6 /* filter-icon.tiff */,
 				576668FF16DEB5A7001C8786 /* filter-icon@2x.tiff */,
-				AA13A08A0C36D34C00C64338 /* filterViewBackground.tiff */,
-				AA18C4950C43F24900E11C0C /* browserBarBackground.tiff */,
 				AA7F231510FA287700856924 /* blankButton.tiff */,
 				5766690116DEB5C4001C8786 /* blankButton@2x.tiff */,
 				AA7F231610FA287700856924 /* blankButtonPressedEmbossed.tiff */,
@@ -1968,8 +1957,7 @@
 				34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */,
 				34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */,
 				F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */,
-				AA8B36BF0C12D6480035FBD7 /* GradientView.h */,
-				AA8B36C00C12D6480035FBD7 /* GradientView.m */,
+				F63B71741ED252DD00CF9F32 /* GradientView.swift */,
 				AA60237E08C298FB002CFD06 /* HelperFunctions.h */,
 				AA60237F08C298FB002CFD06 /* HelperFunctions.m */,
 				AA71168709BEB14A00E3EA8A /* ImageAndTextCell.h */,
@@ -2270,7 +2258,6 @@
 				AAFDB7AF0C0B1516000D1643 /* smartFolder.tiff in Resources */,
 				F6A7DE4F1E471A7F0017BE5E /* Vienna.help in Resources */,
 				AA16C5450C2DD4EB006BBAC1 /* refreshProgress.tiff in Resources */,
-				AA13A08B0C36D34C00C64338 /* filterViewBackground.tiff in Resources */,
 				B28C94780C3A896B008A09E5 /* mailLinkButton.tiff in Resources */,
 				B28C95930C3A94F7008A09E5 /* smartFolderButton.tiff in Resources */,
 				B28C95950C3A950F008A09E5 /* popupMenuButton.tiff in Resources */,
@@ -2280,7 +2267,6 @@
 				F62580E11E286CDE0035E43C /* errorpage.html in Resources */,
 				AA5AAB8A0C3C679E00B2E14F /* smartFolderButtonPressed.tiff in Resources */,
 				AA5AB60B0C3D6D0100B2E14F /* mailLinkButtonPressed.tiff in Resources */,
-				AA18C4960C43F24900E11C0C /* browserBarBackground.tiff in Resources */,
 				AADD6E820C457C3800E11097 /* getInfoButton.tiff in Resources */,
 				AADD6E830C457C3800E11097 /* getInfoButtonPressed.tiff in Resources */,
 				AADD6F110C45870900E11097 /* stylesMenuButton.tiff in Resources */,
@@ -2632,7 +2618,6 @@
 				AA36CD7C06100692001E33A4 /* Field.m in Sources */,
 				AA8C72F60641DE1F00649BA2 /* Criteria.m in Sources */,
 				0349813E1A206FD900014F29 /* GeneralPreferencesViewController.m in Sources */,
-				793C95301C3F07FC00984D4E /* TreeFilterView.m in Sources */,
 				03B35B841B75E9E0001DB06D /* NSDate+Vienna.m in Sources */,
 				3AF896C71CD8FDB800A9FA22 /* ViennaSparkleDelegate.m in Sources */,
 				AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */,
@@ -2641,6 +2626,7 @@
 				AAD794E7088A25D200E2CE5E /* PopUpButtonExtensions.m in Sources */,
 				032280311A33BCD8007DE933 /* Article.m in Sources */,
 				030C38901AABF12D00AE1EB8 /* FolderImageCache.m in Sources */,
+				F63B71751ED252DD00CF9F32 /* GradientView.swift in Sources */,
 				AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */,
 				F6C5CEFA1E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m in Sources */,
 				AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */,
@@ -2650,7 +2636,6 @@
 				AA71168F09BEB17300E3EA8A /* AddressBarCell.m in Sources */,
 				0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */,
 				34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */,
-				AA8B36C20C12D6480035FBD7 /* GradientView.m in Sources */,
 				AA5AA8000C3C0D7D00B2E14F /* ToolbarButton.m in Sources */,
 				AA5AB4C80C3D511700B2E14F /* ToolbarItem.m in Sources */,
 				B27CD04F1100F408001F3C83 /* BitlyAPIHelper.m in Sources */,
@@ -2671,6 +2656,7 @@
 				4350289D165DE9E00018EDB7 /* BrowserPaneTemplate.m in Sources */,
 				F6EB261C1E5BA59300570B22 /* PreferencesWindowController.m in Sources */,
 				4350289E165DE9E00018EDB7 /* BrowserView.m in Sources */,
+				F628DFE31ED2698A00FACFD3 /* FilterView.swift in Sources */,
 				F64C2CCC1E83825D00ED4E04 /* DateFormatterExtension.m in Sources */,
 				4350289F165DE9E00018EDB7 /* Constants.m in Sources */,
 				034981411A20701600014F29 /* AdvancedPreferencesViewController.m in Sources */,
@@ -2680,7 +2666,6 @@
 				435028A2165DE9E00018EDB7 /* EmptyTrashWarning.m in Sources */,
 				435028A3165DE9E00018EDB7 /* Export.m in Sources */,
 				435028A4165DE9E00018EDB7 /* FeedCredentials.m in Sources */,
-				435028A5165DE9E00018EDB7 /* FilterView.m in Sources */,
 				435028A6165DE9E00018EDB7 /* FoldersTree.m in Sources */,
 				435028A7165DE9E00018EDB7 /* FolderView.m in Sources */,
 				435028A8165DE9E00018EDB7 /* Import.m in Sources */,
