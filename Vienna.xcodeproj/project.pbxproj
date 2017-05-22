@@ -347,6 +347,7 @@
 		F62581431E29B9040035E43C /* XMLSource.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581421E29B9040035E43C /* XMLSource.xib */; };
 		F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581441E29B90A0035E43C /* SearchPanel.xib */; };
 		F62581591E29BEB90035E43C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625815B1E29BEB90035E43C /* MainMenu.xib */; };
+		F63B71751ED252DD00CF9F32 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B71741ED252DD00CF9F32 /* GradientView.swift */; };
 		F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */; };
 		F648C2B91E7F3C2500CE4043 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */; };
 		F64C2CCC1E83825D00ED4E04 /* DateFormatterExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */; };
@@ -1028,6 +1029,7 @@
 		F6352C071E27285C005CD307 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
 		F6352C081E272864005CD307 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/AppearancePreferencesView.strings"; sourceTree = "<group>"; };
 		F6352C091E272868005CD307 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AppearancePreferencesView.strings"; sourceTree = "<group>"; };
+		F63B71741ED252DD00CF9F32 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GradientView.swift; path = src/GradientView.swift; sourceTree = "<group>"; };
 		F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryMonitorTests.swift; sourceTree = "<group>"; };
 		F64C2CCA1E83825D00ED4E04 /* DateFormatterExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateFormatterExtension.h; path = src/DateFormatterExtension.h; sourceTree = "<group>"; };
 		F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DateFormatterExtension.m; path = src/DateFormatterExtension.m; sourceTree = "<group>"; };
@@ -1970,6 +1972,7 @@
 				F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */,
 				AA8B36BF0C12D6480035FBD7 /* GradientView.h */,
 				AA8B36C00C12D6480035FBD7 /* GradientView.m */,
+				F63B71741ED252DD00CF9F32 /* GradientView.swift */,
 				AA60237E08C298FB002CFD06 /* HelperFunctions.h */,
 				AA60237F08C298FB002CFD06 /* HelperFunctions.m */,
 				AA71168709BEB14A00E3EA8A /* ImageAndTextCell.h */,
@@ -2641,6 +2644,7 @@
 				AAD794E7088A25D200E2CE5E /* PopUpButtonExtensions.m in Sources */,
 				032280311A33BCD8007DE933 /* Article.m in Sources */,
 				030C38901AABF12D00AE1EB8 /* FolderImageCache.m in Sources */,
+				F63B71751ED252DD00CF9F32 /* GradientView.swift in Sources */,
 				AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */,
 				F6C5CEFA1E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m in Sources */,
 				AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */,
