@@ -1,15 +1,14 @@
 //
-//  FilterView.h
+//  FilterView.swift
 //  Vienna
 //
-//  Created by Steve on 29/7/07.
-//  Copyright (c) 2004-2007 Steve Palmer. All rights reserved.
+//  Copyright 2017
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
 //  You may obtain a copy of the License at
 //
-//  http://www.apache.org/licenses/LICENSE-2.0
+//  https://www.apache.org/licenses/LICENSE-2.0
 //
 //  Unless required by applicable law or agreed to in writing, software
 //  distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +17,17 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+import Cocoa
 
-@interface FilterView : NSView
-{
-	IBOutlet NSTextField * filterByLabel;
-	IBOutlet NSSearchField * filterSearchField;
-	IBOutlet NSPopUpButton * filterViewPopUp;
-	IBOutlet NSButton * filterCloseButton;
-	NSImage * backgroundBrush;
+final class FilterView: GradientView {
+
+    @IBOutlet private(set) var filterSearchField: NSSearchField!
+    @IBOutlet private(set) var filterViewPopUp: NSPopUpButton!
+
+    @IBOutlet private var filterByLabel: NSTextField! {
+        didSet {
+            filterByLabel.cell?.backgroundStyle = .raised
+        }
+    }
+
 }
-@end

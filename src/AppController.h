@@ -18,14 +18,12 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 #import "Database.h"
 #import "ArticleController.h"
 #import "DownloadWindow.h"
-#import "FilterView.h"
 #import "PopupButton.h"
 #import "PluginManager.h"
-#import <AppKit/AppKit.h>
 
 #define APPCONTROLLER ((AppController *)[NSApp delegate])
 #define APP ((ViennaApp *)NSApp)

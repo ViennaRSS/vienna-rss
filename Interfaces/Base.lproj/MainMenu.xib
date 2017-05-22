@@ -62,10 +62,10 @@
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="startingColor">
-                                                <color key="value" red="0.59740012880000004" green="0.69184756280000004" blue="0.79770433900000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.59607843137254901" green="0.69184756280000004" blue="0.79770433900000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="endingColor">
-                                                <color key="value" red="0.40017843246459961" green="0.49630624055862427" blue="0.61345553398132324" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.40000000000000002" green="0.49630624055862427" blue="0.61345553398132324" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </customView>
@@ -158,13 +158,13 @@
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="cTN-D0-dY2" customClass="DisclosureView">
                                         <rect key="frame" x="0.0" y="553" width="653" height="29"/>
                                         <subviews>
-                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="1300" customClass="FilterView">
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="1300" customClass="FilterView" customModule="Vienna" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="653" height="29"/>
                                                 <subviews>
                                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1391">
                                                         <rect key="frame" x="0.0" y="26" width="653" height="5"/>
                                                     </box>
-                                                    <searchField wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="1304">
+                                                    <searchField toolTip="Filter displayed articles by matching text" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="1304">
                                                         <rect key="frame" x="8" y="5" width="300" height="19"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="LD9-MT-Msv"/>
@@ -179,20 +179,21 @@
                                                             <outlet property="nextKeyView" destination="971" id="1323"/>
                                                         </connections>
                                                     </searchField>
-                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="1313">
+                                                    <button toolTip="Close the filter bar" translatesAutoresizingMaskIntoConstraints="NO" id="1313">
                                                         <rect key="frame" x="633" y="10" width="12" height="13"/>
                                                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="smallCloseButton" imagePosition="only" alignment="center" alternateImage="pressedCloseButton" controlSize="small" inset="2" id="1379">
                                                             <behavior key="behavior" lightByContents="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
                                                         </buttonCell>
+                                                        <accessibility description="Close the filter bar"/>
                                                         <connections>
                                                             <action selector="hideFilterBar:" target="233" id="1314"/>
                                                         </connections>
                                                     </button>
-                                                    <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1306">
+                                                    <popUpButton toolTip="Filter articles" horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1306">
                                                         <rect key="frame" x="457" y="4" width="67" height="22"/>
-                                                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="1308" id="1378">
-                                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="center" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="1308" id="1378">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <menu key="menu" id="1307">
                                                                 <items>
@@ -208,6 +209,9 @@
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
+                                                        <connections>
+                                                            <accessibilityConnection property="title" destination="1306" id="BUw-GU-jKt"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -227,9 +231,16 @@
                                                     <constraint firstItem="1305" firstAttribute="leading" secondItem="1304" secondAttribute="trailing" multiplier="1.3" priority="250" constant="8" symbolic="YES" id="uRc-Qw-3zZ"/>
                                                     <constraint firstAttribute="trailing" secondItem="1391" secondAttribute="trailing" id="xLw-op-kMY"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="startingColor">
+                                                        <color key="value" red="0.59740012880000004" green="0.69184756280000004" blue="0.79770433900000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="endingColor">
+                                                        <color key="value" red="0.40017843250000001" green="0.4963062406" blue="0.61345553399999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="filterByLabel" destination="1305" id="1320"/>
-                                                    <outlet property="filterCloseButton" destination="1313" id="1324"/>
+                                                    <outlet property="filterByLabel" destination="1305" id="Toc-r7-JYz"/>
                                                     <outlet property="filterSearchField" destination="1304" id="1321"/>
                                                     <outlet property="filterViewPopUp" destination="1306" id="1322"/>
                                                 </connections>
