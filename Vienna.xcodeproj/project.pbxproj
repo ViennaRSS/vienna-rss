@@ -282,7 +282,6 @@
 		AA7F231C10FA292700856924 /* blankSmallButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA7F231A10FA292700856924 /* blankSmallButtonPressed.tiff */; };
 		AA829D4508DA7EF800983120 /* ViennaApp.scriptTerminology in Resources */ = {isa = PBXBuildFile; fileRef = AA167A24065834DC0091365D /* ViennaApp.scriptTerminology */; };
 		AA83A05008D6764D001E8404 /* smallCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA83A04F08D6764D001E8404 /* smallCloseButton.tiff */; };
-		AA8B36C20C12D6480035FBD7 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8B36C00C12D6480035FBD7 /* GradientView.m */; };
 		AA8C72F60641DE1F00649BA2 /* Criteria.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8C72F40641DE1F00649BA2 /* Criteria.m */; };
 		AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9FE2EC08BC133600A9E977 /* Preferences.m */; };
 		AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */; };
@@ -765,8 +764,6 @@
 		AA7F231910FA292700856924 /* blankSmallButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = blankSmallButton.tiff; path = Resources/blankSmallButton.tiff; sourceTree = SOURCE_ROOT; };
 		AA7F231A10FA292700856924 /* blankSmallButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = blankSmallButtonPressed.tiff; path = Resources/blankSmallButtonPressed.tiff; sourceTree = SOURCE_ROOT; };
 		AA83A04F08D6764D001E8404 /* smallCloseButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = smallCloseButton.tiff; path = Resources/smallCloseButton.tiff; sourceTree = SOURCE_ROOT; };
-		AA8B36BF0C12D6480035FBD7 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = GradientView.h; path = src/GradientView.h; sourceTree = SOURCE_ROOT; };
-		AA8B36C00C12D6480035FBD7 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = GradientView.m; path = src/GradientView.m; sourceTree = SOURCE_ROOT; };
 		AA8C72F30641DE1F00649BA2 /* Criteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Criteria.h; path = src/Criteria.h; sourceTree = SOURCE_ROOT; };
 		AA8C72F40641DE1F00649BA2 /* Criteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Criteria.m; path = src/Criteria.m; sourceTree = SOURCE_ROOT; };
 		AA9FE2EB08BC133600A9E977 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Preferences.h; path = src/Preferences.h; sourceTree = SOURCE_ROOT; };
