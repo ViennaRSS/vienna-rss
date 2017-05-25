@@ -476,7 +476,7 @@
 {
     // keep track of parent (or grandparent) of starting node
     TreeNode * parentOfStartingNode = startingNode;
-    while (parentOfStartingNode.parentNode != rootNode)
+    while (parentOfStartingNode != nil && parentOfStartingNode.parentNode != rootNode)
     {
         parentOfStartingNode = parentOfStartingNode.parentNode;
     }
