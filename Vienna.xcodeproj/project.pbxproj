@@ -306,12 +306,6 @@
 		B25E53E11067B54600BBF14C /* browserNextButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DB1067B54600BBF14C /* browserNextButton.tiff */; };
 		B25E53E31067B54600BBF14C /* browserRefreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */; };
 		B25E53E51067B54600BBF14C /* browserPreviousButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DF1067B54600BBF14C /* browserPreviousButton.tiff */; };
-		B262610810A033D700E76A37 /* shCore.css in Resources */ = {isa = PBXBuildFile; fileRef = B262610210A033D700E76A37 /* shCore.css */; };
-		B262610B10A033D700E76A37 /* shThemeDefault.css in Resources */ = {isa = PBXBuildFile; fileRef = B262610510A033D700E76A37 /* shThemeDefault.css */; };
-		B262610C10A033D700E76A37 /* XMLSyntaxHighlighter.html in Resources */ = {isa = PBXBuildFile; fileRef = B262610610A033D700E76A37 /* XMLSyntaxHighlighter.html */; };
-		B262612A10A034C500E76A37 /* shBrushXml.js in Resources */ = {isa = PBXBuildFile; fileRef = B262610110A033D700E76A37 /* shBrushXml.js */; };
-		B262612B10A034C500E76A37 /* shCore.js in Resources */ = {isa = PBXBuildFile; fileRef = B262610310A033D700E76A37 /* shCore.js */; };
-		B262612C10A034C500E76A37 /* shLegacy.js in Resources */ = {isa = PBXBuildFile; fileRef = B262610410A033D700E76A37 /* shLegacy.js */; };
 		B273E8EC106910B2001ADEF8 /* errorpagebg.png in Resources */ = {isa = PBXBuildFile; fileRef = B273E8EB106910B2001ADEF8 /* errorpagebg.png */; };
 		B27656081067BA4F00A43AB2 /* browserRSSButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B27656071067BA4F00A43AB2 /* browserRSSButton.tiff */; };
 		B27CD00C1100E728001F3C83 /* Plugins in Copy Shared Support Files */ = {isa = PBXBuildFile; fileRef = B27CCFFD1100E728001F3C83 /* Plugins */; };
@@ -793,12 +787,6 @@
 		B25E53DB1067B54600BBF14C /* browserNextButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = browserNextButton.tiff; path = Resources/browserNextButton.tiff; sourceTree = SOURCE_ROOT; };
 		B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = browserRefreshButton.tiff; path = Resources/browserRefreshButton.tiff; sourceTree = SOURCE_ROOT; };
 		B25E53DF1067B54600BBF14C /* browserPreviousButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = browserPreviousButton.tiff; path = Resources/browserPreviousButton.tiff; sourceTree = SOURCE_ROOT; };
-		B262610110A033D700E76A37 /* shBrushXml.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = shBrushXml.js; path = SyntaxHighlighter/shBrushXml.js; sourceTree = SOURCE_ROOT; };
-		B262610210A033D700E76A37 /* shCore.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = shCore.css; path = SyntaxHighlighter/shCore.css; sourceTree = SOURCE_ROOT; };
-		B262610310A033D700E76A37 /* shCore.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = shCore.js; path = SyntaxHighlighter/shCore.js; sourceTree = SOURCE_ROOT; };
-		B262610410A033D700E76A37 /* shLegacy.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = shLegacy.js; path = SyntaxHighlighter/shLegacy.js; sourceTree = SOURCE_ROOT; };
-		B262610510A033D700E76A37 /* shThemeDefault.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = shThemeDefault.css; path = SyntaxHighlighter/shThemeDefault.css; sourceTree = SOURCE_ROOT; };
-		B262610610A033D700E76A37 /* XMLSyntaxHighlighter.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = XMLSyntaxHighlighter.html; path = SyntaxHighlighter/XMLSyntaxHighlighter.html; sourceTree = SOURCE_ROOT; };
 		B273E8EB106910B2001ADEF8 /* errorpagebg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = errorpagebg.png; path = Resources/errorpagebg.png; sourceTree = SOURCE_ROOT; };
 		B27656071067BA4F00A43AB2 /* browserRSSButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = browserRSSButton.tiff; path = Resources/browserRSSButton.tiff; sourceTree = SOURCE_ROOT; };
 		B27CCFFD1100E728001F3C83 /* Plugins */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Plugins; path = SharedSupport/Plugins; sourceTree = SOURCE_ROOT; };
@@ -1488,7 +1476,6 @@
 			isa = PBXGroup;
 			children = (
 				43EE7547165E8109000997FB /* Applescript */,
-				B262610010A033D700E76A37 /* SyntaxHighlighter */,
 				B262610E10A033F700E76A37 /* ErrorPage */,
 				AA1A282E0C09BE59005968DC /* Toolbar Buttons */,
 				43EE7546165E80D4000997FB /* Public Keys */,
@@ -1963,19 +1950,6 @@
 			name = "Support Classes";
 			sourceTree = SOURCE_ROOT;
 		};
-		B262610010A033D700E76A37 /* SyntaxHighlighter */ = {
-			isa = PBXGroup;
-			children = (
-				B262610110A033D700E76A37 /* shBrushXml.js */,
-				B262610210A033D700E76A37 /* shCore.css */,
-				B262610310A033D700E76A37 /* shCore.js */,
-				B262610410A033D700E76A37 /* shLegacy.js */,
-				B262610510A033D700E76A37 /* shThemeDefault.css */,
-				B262610610A033D700E76A37 /* XMLSyntaxHighlighter.html */,
-			);
-			path = SyntaxHighlighter;
-			sourceTree = "<group>";
-		};
 		B262610E10A033F700E76A37 /* ErrorPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -2194,14 +2168,8 @@
 				AA26F44D060490BE00FE7994 /* flagged_header.tiff in Resources */,
 				AA26F44E060490BE00FE7994 /* flagged.tiff in Resources */,
 				AA26F450060490BE00FE7994 /* greyRightArrow.tiff in Resources */,
-				B262612A10A034C500E76A37 /* shBrushXml.js in Resources */,
-				B262610810A033D700E76A37 /* shCore.css in Resources */,
 				F6D572B71E26AAA100CDA909 /* RSSFeed.xib in Resources */,
 				F62580AA1E286A8C0035E43C /* Localizable.strings in Resources */,
-				B262612B10A034C500E76A37 /* shCore.js in Resources */,
-				B262612C10A034C500E76A37 /* shLegacy.js in Resources */,
-				B262610B10A033D700E76A37 /* shThemeDefault.css in Resources */,
-				B262610C10A033D700E76A37 /* XMLSyntaxHighlighter.html in Resources */,
 				AA26F453060490BE00FE7994 /* smallFolder.tiff in Resources */,
 				AA26F454060490BE00FE7994 /* unread_header.tiff in Resources */,
 				AAB90EFD061D059D00CA4741 /* searchFolder.tiff in Resources */,
