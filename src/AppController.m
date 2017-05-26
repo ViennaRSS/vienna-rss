@@ -31,7 +31,6 @@
 #import "NewSubscription.h"
 #import "NewGroupFolder.h"
 #import "ViennaApp.h"
-#import "XMLSourceWindow.h"
 #import "ActivityPanelController.h"
 #import "BrowserPaneTemplate.h"
 #import "Constants.h"
@@ -109,7 +108,6 @@
 	@property (nonatomic, readonly, strong) NSTimer *checkTimer;
 	-(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
 	-(void)searchArticlesWithString:(NSString *)searchString;
-	-(void)sourceWindowWillClose:(NSNotification *)notification;
 	-(IBAction)cancelAllRefreshesToolbar:(id)sender;
 @end
 
@@ -817,7 +815,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	[alternateItem setAlternate:YES];
 	[folderMenu addItem:alternateItem];
 	[folderMenu addItem:copyOfMenuItemWithAction(@selector(getInfo:))];
-	[folderMenu addItem:copyOfMenuItemWithAction(@selector(showXMLSource:))];
 	[folderMenu addItem:[NSMenuItem separatorItem]];
 	[folderMenu addItem:copyOfMenuItemWithAction(@selector(forceRefreshSelectedSubscriptions:))];	
 	return folderMenu;
@@ -2704,42 +2701,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 }
 
-/* sourceWindowWillClose
- * Called when the XML source window is about to close
- */
--(void)sourceWindowWillClose:(NSNotification *)notification
-{
-	XMLSourceWindow * sourceWindow = notification.object;
-	[sourceWindows removeObject:sourceWindow];
-}
-
-
-
-/* showXMLSource
- * Show the Downloads window, bringing it to the front if necessary.
- */
--(IBAction)showXMLSource:(id)sender
-{
-	for (Folder * folder in foldersTree.selectedFolders)
-	{
-		if (folder.RSSFolder)
-		{
-			XMLSourceWindow * sourceWindow = [[XMLSourceWindow alloc] initWithFolder:folder];
-			
-			if (sourceWindow != nil)
-			{
-				if (sourceWindows == nil)
-					sourceWindows = [[NSMutableArray alloc] init];
-				[sourceWindows addObject:sourceWindow];
-			}
-			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sourceWindowWillClose:) name:NSWindowWillCloseNotification object:sourceWindow];
-			
-			[sourceWindow showWindow:self];
-		}
-	}									
-}
-
-
 /* showDownloadsWindow
  * Show the Downloads window, bringing it to the front if necessary.
  */
@@ -3740,12 +3701,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		*validateFlag = !db.readOnly && isAnyArticleView && isMainWindowVisible && db.countOfUnread > 0;
 		return YES;
 	}
-	if (theAction == @selector(showXMLSource:))
-	{
-		Folder * folder = [db folderFromID:foldersTree.actualSelection];
-		*validateFlag = isMainWindowVisible && folder != nil && folder.hasFeedSource;
-		return YES;
-	}	
 	if (theAction == @selector(getInfo:))
 	{
 		Folder * folder = [db folderFromID:foldersTree.actualSelection];
