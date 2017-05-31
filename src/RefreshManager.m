@@ -25,7 +25,6 @@
 #import "StringExtensions.h"
 #import "Preferences.h"
 #import "Constants.h"
-#import "ViennaApp.h"
 #import "GoogleReader.h"
 #import "Constants.h"
 #import "AppController.h"
