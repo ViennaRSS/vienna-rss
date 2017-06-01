@@ -34,13 +34,11 @@ NSNotificationName const activityItemDetailsUpdatedNotification = @"Activity Ite
 #pragma mark Accessors
 
 - (void)setStatus:(NSString *)status {
-	dispatch_async(dispatch_get_main_queue(), ^{
-		_status = [status copy];
+    _status = [status copy];
 
-		NSNotificationCenter *center = NSNotificationCenter.defaultCenter;
-		[center postNotificationName:activityItemStatusUpdatedNotification
-							  object:self];
-	});
+    NSNotificationCenter *center = NSNotificationCenter.defaultCenter;
+    [center postNotificationName:activityItemStatusUpdatedNotification
+                          object:self];
 }
 
 - (NSString *)details {

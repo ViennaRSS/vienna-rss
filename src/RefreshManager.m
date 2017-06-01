@@ -33,7 +33,6 @@
 #import "NSNotificationAdditions.h"
 #import "VTPG_Common.h"
 #import "FeedItem.h"
-#import <QuartzCore/QuartzCore.h>
 
 // Private functions
 @interface RefreshManager (Private)
@@ -686,8 +685,6 @@
 {
 	dispatch_async(_queue, ^() {
 	// TODO : refactor code to separate feed refresh code and UI
-	[CATransaction begin];
-	[CATransaction setDisableActions:YES];
 		
 	Folder * folder = (Folder *)connector.userInfo[@"folder"];
 	ActivityItem *connectorItem = connector.userInfo[@"log"];
@@ -723,9 +720,10 @@
 
 		[self setFolderErrorFlag:folder flag:NO];
 		[connectorItem appendDetail:NSLocalizedString(@"Got HTTP status 304 - No news from last check", nil)];
-		[connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
+        });
 		[self syncFinishedForFolder:folder];
-		[CATransaction commit];
 		return;
 	}
 	else if (isCancelled) 
@@ -768,13 +766,14 @@
 	else	//other HTTP response codes like 404, 403...
 	{
 		[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), responseStatusCode]];
-		[connectorItem setStatus:NSLocalizedString(@"Error", nil)];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [connectorItem setStatus:NSLocalizedString(@"Error", nil)];
+        });
 		[self setFolderErrorFlag:folder flag:YES];
 	}
 
 	[self syncFinishedForFolder:folder];
 
-	[CATransaction commit];
 	}); //block for dispatch_async on _queue
 };
 
@@ -844,7 +843,9 @@
 			{
 				// Mark the feed as failed
 				[self setFolderErrorFlag:folder flag:YES];
-				[connectorItem setStatus:NSLocalizedString(@"Error parsing XML data in feed", nil)];
+                dispatch_async(dispatch_get_main_queue(), ^{
+				    [connectorItem setStatus:NSLocalizedString(@"Error parsing XML data in feed", nil)];
+                });
 				return;
 			}
             
@@ -857,7 +858,9 @@
 			{
 				// Mark the feed as empty
 				[self setFolderErrorFlag:folder flag:YES];
-				[connectorItem setStatus:NSLocalizedString(@"No articles in feed", nil)];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [connectorItem setStatus:NSLocalizedString(@"No articles in feed", nil)];
+                });
 				return;
 			}
 
@@ -1009,12 +1012,16 @@
 				  
 		// Send status to the activity log
         if (newArticlesFromFeed == 0) {
+            dispatch_async(dispatch_get_main_queue(), ^{
                 [connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
+            });
         }
 		else
 		{
 			NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
-			connectorItem.status = logText;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [connectorItem setStatus:logText];
+            });
 			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:@(folder.itemId)];
 		}
 		
