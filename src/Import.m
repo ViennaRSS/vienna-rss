@@ -43,9 +43,10 @@
                                                                     error:&error];
         if (error)
         {
-            NSRunAlertPanel(NSLocalizedString(@"Error importing subscriptions title", nil),
-                            NSLocalizedString(@"Error importing subscriptions body", nil),
-                            NSLocalizedString(@"OK", nil), nil, nil);
+            NSAlert *alert = [NSAlert new];
+            alert.messageText = NSLocalizedString(@"Error importing subscriptions title", nil);
+            alert.informativeText = NSLocalizedString(@"Error importing subscriptions body", nil);
+            [alert runModal];
             hasError = YES;
         }
         else
@@ -59,7 +60,11 @@
     // Announce how many we successfully imported
     if (!hasError)
     {
-        NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Import Title", nil), NSLocalizedString(@"%d subscriptions successfully imported", nil), NSLocalizedString(@"OK", nil), nil, nil, countImported);
+        NSAlert *alert = [NSAlert new];
+        alert.alertStyle = NSAlertStyleInformational;
+        alert.messageText = NSLocalizedString(@"RSS Subscription Import Title", nil);
+        alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully imported", nil), countImported];
+        [alert runModal];
     }
 }
 

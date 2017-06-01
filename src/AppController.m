@@ -519,16 +519,16 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
-	NSInteger returnCode;
-	
 	if ([DownloadManager sharedInstance].activeDownloads > 0)
 	{
-		returnCode = NSRunAlertPanel(NSLocalizedString(@"Downloads Running", nil),
-									 NSLocalizedString(@"Downloads Running text", nil),
-									 NSLocalizedString(@"Quit", nil),
-									 NSLocalizedString(@"Cancel", nil),
-									 nil);
-		if (returnCode == NSAlertAlternateReturn)
+        NSAlert *alert = [NSAlert new];
+        alert.messageText = NSLocalizedString(@"Downloads Running", nil);
+        alert.informativeText = NSLocalizedString(@"Downloads Running text", nil);
+        [alert addButtonWithTitle:NSLocalizedString(@"Quit", "Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+        NSModalResponse alertResponse = [alert runModal];
+
+		if (alertResponse == NSAlertSecondButtonReturn)
 		{
             [[NSNotificationCenter defaultCenter]  removeObserver:self];
 			return NSTerminateCancel;
@@ -657,11 +657,19 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	}
 	if ([filename.pathExtension isEqualToString:@"opml"])
 	{
-		BOOL returnCode = NSRunAlertPanel(NSLocalizedString(@"Import subscriptions from OPML file?", nil), NSLocalizedString(@"Do you really want to import the subscriptions from the specified OPML file?", nil), NSLocalizedString(@"Import", nil), NSLocalizedString(@"Cancel", nil), nil);
-		if (returnCode == NSAlertAlternateReturn)
-			return NO;
-		[Import importFromFile:filename];
-		return YES;
+        NSAlert *alert = [NSAlert new];
+        alert.messageText = NSLocalizedString(@"Import subscriptions from OPML file?", nil);
+        alert.informativeText = NSLocalizedString(@"Do you really want to import the subscriptions from the specified OPML file?", nil);
+        [alert addButtonWithTitle:NSLocalizedString(@"Import", "Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+        NSModalResponse alertResponse = [alert runModal];
+
+        if (alertResponse == NSAlertFirstButtonReturn) {
+            [Import importFromFile:filename];
+            return YES;
+        } else {
+            return NO;
+        }
 	}
     if ([filename.pathExtension isEqualToString:@"webloc"])
     {
@@ -1285,7 +1293,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     panel.accessoryView = exportSaveAccessory;
     panel.allowedFileTypes = @[@"opml"];
     [panel beginSheetModalForWindow:mainWindow completionHandler:^(NSInteger returnCode) {
-        if (returnCode == NSOKButton)
+        if (returnCode == NSFileHandlingPanelOKButton)
         {
             [panel orderOut:self];
             
@@ -1293,17 +1301,19 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             
             if (countExported < 0)
             {
-                NSBeginCriticalAlertSheet(NSLocalizedString(@"Cannot open export file message", nil),
-                                          NSLocalizedString(@"OK", nil),
-                                          nil,
-                                          nil, NSApp.mainWindow, self,
-                                          nil, nil, nil,
-                                          NSLocalizedString(@"Cannot open export file message text", nil));
+                NSAlert *alert = [NSAlert new];
+                alert.messageText = NSLocalizedString(@"Cannot open export file message", nil);
+                alert.informativeText = NSLocalizedString(@"Cannot open export file message text", nil);
+                [alert beginSheetModalForWindow:mainWindow completionHandler:nil];
             }
             else
             {
                 // Announce how many we successfully imported
-                NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Export Title", nil), NSLocalizedString(@"%d subscriptions successfully exported", nil), NSLocalizedString(@"OK", nil), nil, nil, countExported);
+                NSAlert *alert = [NSAlert new];
+                alert.alertStyle = NSAlertStyleInformational;
+                alert.messageText = NSLocalizedString(@"RSS Subscription Export Title", nil);
+                alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully exported", nil), countExported];
+                [alert runModal];
             }
         }
     }];
@@ -1319,7 +1329,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [panel beginSheetModalForWindow:mainWindow
                   completionHandler: ^(NSInteger returnCode) {
                       
-                      if (returnCode == NSOKButton)
+                      if (returnCode == NSFileHandlingPanelOKButton)
                       {
                           [panel orderOut:self];
                           [Import importFromFile:panel.URL.path];
@@ -1370,11 +1380,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)handleGoogleAuthFailed:(NSNotification *)nc
 {
     if (mainWindow.keyWindow) {
-	NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:NSLocalizedString(@"Open Reader Authentication Failed",nil)];
-    [alert setInformativeText:NSLocalizedString(@"Open Reader Authentication Failed text",nil)];
-    alert.alertStyle = NSWarningAlertStyle;
-    [alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+        NSAlert *alert = [NSAlert new];
+        alert.messageText = NSLocalizedString(@"Open Reader Authentication Failed",nil);
+        alert.informativeText = NSLocalizedString(@"Open Reader Authentication Failed text",nil);
+        [alert beginSheetModalForWindow:mainWindow completionHandler:nil];
     }
 }
 
@@ -1740,25 +1749,17 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)emptyTrash:(id)sender
 {
-	NSBeginCriticalAlertSheet(NSLocalizedString(@"Empty Trash message", nil),
-							  NSLocalizedString(@"Empty", nil),
-							  NSLocalizedString(@"Cancel", nil),
-							  nil, NSApp.mainWindow, self,
-							  @selector(doConfirmedEmptyTrash:returnCode:contextInfo:), nil, nil,
-							  NSLocalizedString(@"Empty Trash message text", nil));
-}
-
-/* doConfirmedEmptyTrash
- * This function is called after the user has dismissed
- * the confirmation sheet.
- */
--(void)doConfirmedEmptyTrash:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
-{
-	if (returnCode == NSAlertDefaultReturn)
-	{
-		[self clearUndoStack];
-		[db purgeDeletedArticles];
-	}
+    NSAlert *alert = [NSAlert new];
+    alert.messageText = NSLocalizedString(@"Empty Trash message", nil);
+    alert.informativeText = NSLocalizedString(@"Empty Trash message text", nil);
+    [alert addButtonWithTitle:NSLocalizedString(@"Empty", "Title of a button on an alert")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+    [alert beginSheetModalForWindow:mainWindow completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == NSAlertFirstButtonReturn) {
+            [self clearUndoStack];
+            [db purgeDeletedArticles];
+        }
+    }];
 }
 
 /* keyboardShortcutsHelp
@@ -2683,31 +2684,23 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 		else
 		{
-			NSBeginCriticalAlertSheet(NSLocalizedString(@"Delete selected message", nil),
-									  NSLocalizedString(@"Delete", nil),
-									  NSLocalizedString(@"Cancel", nil),
-									  nil, NSApp.mainWindow, self,
-									  @selector(doConfirmedDelete:returnCode:contextInfo:), nil, nil,
-									  NSLocalizedString(@"Delete selected message text", nil));
-		}
-	}
-}
+            NSAlert *alert = [NSAlert new];
+            alert.messageText = NSLocalizedString(@"Delete selected message", nil);
+            alert.informativeText = NSLocalizedString(@"Delete selected message text", nil);
+            [alert addButtonWithTitle:NSLocalizedString(@"Delete", "Title of a button on an alert")];
+            [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+            [alert beginSheetModalForWindow:mainWindow completionHandler:^(NSModalResponse returnCode) {
+                if (returnCode == NSAlertFirstButtonReturn) {
+                    NSArray *articleArray = articleController.markedArticleRange;
+                    [articleController deleteArticlesByArray:articleArray];
 
-/* doConfirmedDelete
- * This function is called after the user has dismissed
- * the confirmation sheet.
- */
--(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
-{
-	if (returnCode == NSAlertDefaultReturn)
-	{
-		NSArray * articleArray = articleController.markedArticleRange;
-		[articleController deleteArticlesByArray:articleArray];
-		
-		// Blow away the undo stack here since undo actions may refer to
-		// articles that have been deleted. This is a bit of a cop-out but
-		// it's the easiest approach for now.
-		[self clearUndoStack];
+                    // Blow away the undo stack here since undo actions may refer to
+                    // articles that have been deleted. This is a bit of a cop-out but
+                    // it's the easiest approach for now.
+                    [self clearUndoStack];
+                }
+            }];
+		}
 	}
 }
 
@@ -2950,9 +2943,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	// Get confirmation first
 	if (needPrompt)
 	{
-		// Security: folder name could contain formatting characters, so don't use alertBody as format string.
-		NSInteger returnCode = NSRunAlertPanel(alertTitle, @"%@", NSLocalizedString(@"Delete", nil), NSLocalizedString(@"Cancel", nil), nil, alertBody);
-		if (returnCode == NSAlertAlternateReturn)
+        NSAlert *alert = [NSAlert new];
+        alert.messageText = alertTitle;
+        alert.informativeText = alertBody;
+        [alert addButtonWithTitle:NSLocalizedString(@"Delete", "Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+        NSModalResponse alertResponse = [alert runModal];
+
+		if (alertResponse == NSAlertSecondButtonReturn)
 			return;
 	}
 	

@@ -207,9 +207,10 @@
  	// Check if we have already subscribed to this feed by seeing if a folder exists in the db
 	if ([db folderFromFeedURL:rssFeedURL.absoluteString] != nil)
 	{
-		NSRunAlertPanel(NSLocalizedString(@"Already subscribed title", @"Already subscribed title"),
-						NSLocalizedString(@"Already subscribed body", @"Already subscribed body"),
-						NSLocalizedString(@"OK", nil), nil, nil);
+        NSAlert *alert = [NSAlert new];
+        alert.messageText = NSLocalizedString(@"Already subscribed title", @"Already subscribed title");
+        alert.informativeText = NSLocalizedString(@"Already subscribed body", @"Already subscribed body");
+        [alert runModal];
 	}
 
     // call the controller to create the new subscription
