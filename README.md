@@ -89,7 +89,7 @@ You can write plugins by referring to [this document](http://www.vienna-rss.com/
 
 The current version of Vienna requires Xcode 8.x and macOS 10.12 SDK. Most of Vienna is made with Objective-C but some newer code is being created in Swift 3.x and we welcome both Objective-C and Swift contributions.
 
-Vienna uses [cocoapods](https://cocoapods.org) for managing dependencies. When building, make sure to always open the Xcode workspace `Viennna.xcworkspace` instead of a project file.
+Vienna uses [CocoaPods](https://cocoapods.org) for managing dependencies. When building, make sure to always open the Xcode workspace `Viennna.xcworkspace` instead of a project file.
 
 You should have a basic knowledge of Git and read this [suggested workflow](https://github.com/ViennaRSS/vienna-rss/wiki/Good-manners-with-Git).
 
