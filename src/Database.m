@@ -2590,7 +2590,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
             alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"Cannot create database folder text", nil), databaseFolder];
             [alert runModal];
 
-            return NO;
+            return nil;
         }
     }
     

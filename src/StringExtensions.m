@@ -49,26 +49,26 @@
 	
 	srchRange.location = 0;
 	srchRange.length = textLength;
-	while ((srchRange = [self rangeOfString:@"<img" options:NSLiteralSearch range:srchRange]), srchRange.location != NSNotFound)
-	{
-		srchRange.length = textLength - srchRange.location;
-		NSRange srcRange = [self rangeOfString:@"src=\"" options:NSLiteralSearch range:srchRange];
-		if (srcRange.location != NSNotFound)
-		{
-			// Find the src parameter range.
-			NSUInteger index = srcRange.location + srcRange.length;
-			srcRange.location += srcRange.length;
-			srcRange.length = 0;
-			while (index < textLength && [self characterAtIndex:index] != '"')
-			{
-				++index;
-				++srcRange.length;
-			}
-			
-			// Now extract the source parameter
-			NSString * srcPath = [self substringWithRange:srcRange];
-			if (![srcPath hasPrefix:@"http:"] && ![srcPath hasPrefix:@"https:"] && ![srcPath hasPrefix:@"data:"])
-			{
+    while ((void)((srchRange = [self rangeOfString:@"<img" options:NSLiteralSearch range:srchRange])), srchRange.location != NSNotFound)
+    {
+        srchRange.length = textLength - srchRange.location;
+        NSRange srcRange = [self rangeOfString:@"src=\"" options:NSLiteralSearch range:srchRange];
+        if (srcRange.location != NSNotFound)
+        {
+            // Find the src parameter range.
+            NSUInteger index = srcRange.location + srcRange.length;
+            srcRange.location += srcRange.length;
+            srcRange.length = 0;
+            while (index < textLength && [self characterAtIndex:index] != '"')
+            {
+                ++index;
+                ++srcRange.length;
+            }
+            
+            // Now extract the source parameter
+            NSString * srcPath = [self substringWithRange:srcRange];
+            if (![srcPath hasPrefix:@"http:"] && ![srcPath hasPrefix:@"https:"] && ![srcPath hasPrefix:@"data:"])
+            {
                 NSURL * imgURL = [NSURL URLWithString:srcPath relativeToURL:imgBaseURL];
                 if (imgURL != nil)
                 {
@@ -76,15 +76,15 @@
                     [self replaceCharactersInRange:srcRange withString:srcPath];
                     textLength = self.length;
                 }
-			}
-			
-			// Start searching again from beyond the URL
-			srchRange.location = srcRange.location + srcPath.length;
-		}
-		else
-			++srchRange.location;
-		srchRange.length = textLength - srchRange.location;
-	}
+            }
+            
+            // Start searching again from beyond the URL
+            srchRange.location = srcRange.location + srcPath.length;
+        }
+        else
+            ++srchRange.location;
+        srchRange.length = textLength - srchRange.location;
+    }
 }
 
 /* fixupRelativeAnchorTags
@@ -103,7 +103,7 @@
 
 	srchRange.location = 0;
 	srchRange.length = textLength;
-	while ((srchRange = [self rangeOfString:@"<a " options:NSLiteralSearch range:srchRange]), srchRange.location != NSNotFound)
+    while ((void)((srchRange = [self rangeOfString:@"<a " options:NSLiteralSearch range:srchRange])), srchRange.location != NSNotFound)
 	{
 		srchRange.length = textLength - srchRange.location;
 		NSRange srcRange = [self rangeOfString:@"href=\"" options:NSLiteralSearch range:srchRange];
@@ -157,7 +157,7 @@
 
 	srchRange.location = 0;
 	srchRange.length = textLength;
-	while ((srchRange = [self rangeOfString:@"<iframe" options:NSLiteralSearch range:srchRange]), srchRange.location != NSNotFound)
+    while ((void)((srchRange = [self rangeOfString:@"<iframe" options:NSLiteralSearch range:srchRange])), srchRange.location != NSNotFound)
 	{
 		srchRange.length = textLength - srchRange.location;
 		NSRange srcRange = [self rangeOfString:@"src=\"" options:NSLiteralSearch range:srchRange];
