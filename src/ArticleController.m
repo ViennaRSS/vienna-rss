@@ -528,8 +528,9 @@
  */
 - (void)getArticlesWithCompletionBlock:(void(^)(NSArray * resultArray))completionBlock {
 	Folder * folder = [[Database sharedManager] folderFromID:currentFolderId];
+    NSString *filterString = APPCONTROLLER.filterString;
     dispatch_async(queue, ^{
-        NSArray * articleArray = [folder articlesWithFilter:APPCONTROLLER.filterString];    
+        NSArray * articleArray = [folder articlesWithFilter:filterString];
 
         // call the completion block with the result when finished
         if (completionBlock) {
