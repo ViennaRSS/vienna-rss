@@ -722,8 +722,8 @@
 		[connectorItem appendDetail:NSLocalizedString(@"Got HTTP status 304 - No news from last check", nil)];
         dispatch_async(dispatch_get_main_queue(), ^{
             [connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
+            [self syncFinishedForFolder:folder];
         });
-		[self syncFinishedForFolder:folder];
 		return;
 	}
 	else if (isCancelled) 
@@ -772,7 +772,9 @@
 		[self setFolderErrorFlag:folder flag:YES];
 	}
 
-	[self syncFinishedForFolder:folder];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self syncFinishedForFolder:folder];
+    });
 
 	}); //block for dispatch_async on _queue
 };
