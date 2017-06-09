@@ -70,26 +70,6 @@ NSMenuItem * menuItemWithAction(SEL theSelector)
 	return nil;
 }
 
-/* menuWithAction
- * Returns the first NSMenuItem that matches the one that implements the corresponding
- * action in the application main menu. Returns nil if no match is found.
- */
-NSMenuItem * menuItemOfMenuWithAction(NSMenu * menu, SEL theSelector)
-{
-	NSArray * arrayOfMenus = menu.itemArray;
-	NSInteger count = arrayOfMenus.count;
-	NSInteger index;
-	
-	for (index = 0; index < count; ++index)
-	{
-		NSMenu * subMenu = [arrayOfMenus[index] submenu];
-		NSInteger itemIndex = [subMenu indexOfItemWithTarget:NSApp.delegate andAction:theSelector];
-		if (itemIndex >= 0)
-			return [subMenu itemAtIndex:itemIndex];
-	}
-	return nil;
-}
-
 /* percentEscape
  * Escape invalid and reserved URL characters to make string suitable 
  * for embedding in mailto: URLs and custom app-specific schemes like papers://
@@ -140,14 +120,6 @@ NSMenuItem * copyOfMenuItemWithAction(SEL theSelector)
 {
 	NSMenuItem * item = menuItemWithAction(theSelector);
 	return (item) ? [[NSMenuItem alloc] initWithTitle:item.title action:theSelector keyEquivalent:@""] : nil;
-}
-
-/* menuWithTitleAndAction
- * Returns an NSMenuItem with the specified menu and action.
- */
-NSMenuItem * menuItemWithTitleAndAction(NSString * theTitle, SEL theSelector)
-{
-	return [[NSMenuItem alloc] initWithTitle:theTitle action:theSelector keyEquivalent:@""];
 }
 
 /* loadMapFromPath
