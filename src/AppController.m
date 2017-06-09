@@ -1834,14 +1834,16 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[appStatusItem setHighlightMode:YES];
 		
         NSMenu * statusBarMenu = [NSMenu new];
-		[statusBarMenu addItem:menuItemWithTitleAndAction(NSLocalizedString(@"Open Vienna", nil), @selector(openVienna:))];
-		[statusBarMenu addItem:[NSMenuItem separatorItem]];
+        [statusBarMenu addItemWithTitle:NSLocalizedString(@"Show Main Window…", @"Title of a menu item")
+                                 action:@selector(openVienna:)
+                          keyEquivalent:@""];
+        [statusBarMenu addItem:[NSMenuItem separatorItem]];
 		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(refreshAllSubscriptions:))];
 		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(markAllSubscriptionsRead:))];
-		[statusBarMenu addItem:[NSMenuItem separatorItem]];
-		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(orderFrontStandardAboutPanel:))];
-		[statusBarMenu addItem:[NSMenuItem separatorItem]];
-		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(terminate:))];
+        [statusBarMenu addItem:[NSMenuItem separatorItem]];
+        [statusBarMenu addItemWithTitle:NSLocalizedString(@"Quit Vienna", @"Title of a menu item")
+                                 action:@selector(terminate:)
+                          keyEquivalent:@""];
 		appStatusItem.menu = statusBarMenu;
 	}
 	else if (!prefs.showAppInStatusBar && appStatusItem != nil)
@@ -4085,7 +4087,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		else 
 			menuItem.state = NSOffState;
 		return YES;
-	}
+	} else if (theAction == @selector(openVienna:)) {
+        return mainWindow.isKeyWindow == false;
+    }
+
 	return YES;
 }
 
