@@ -162,13 +162,13 @@
 -(void)handleDidWake:(NSNotification *)nc
 {
 	NSString * currentAddress = [NSHost currentHost].address ;
-	if (![currentAddress isEqualToString:riskyIPAddress])
+	if (![currentAddress isEqualToString:self.riskyIPAddress])
 	{
 		// we might have moved to a new network
 		// so, at the next occurence we should test if we can safely handle
 		// 301 redirects
-		[unsafe301RedirectionTimer invalidate];
-		unsafe301RedirectionTimer=nil;
+		[self.unsafe301RedirectionTimer invalidate];
+		self.unsafe301RedirectionTimer=nil;
 	}
 }
 
@@ -643,7 +643,7 @@
 
 -(BOOL)canTrust301Redirects:(ASIHTTPRequest *)connector
 {
-    if (unsafe301RedirectionTimer == nil || !unsafe301RedirectionTimer.valid)
+    if (self.unsafe301RedirectionTimer == nil || !self.unsafe301RedirectionTimer.valid)
     {
     	NSURL * testURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://www.example.com", connector.originalURL.scheme]];
     	ASIHTTPRequest * testRequest = [ASIHTTPRequest requestWithURL:testURL];
@@ -657,8 +657,8 @@
     		// (cf RFC 6761 http://www.iana.org/go/rfc6761)
     		// so we probably have a misconfigured router / proxy
     		// and we will not consider 301 redirections as permanent for 24 hours
-    		unsafe301RedirectionTimer = [NSTimer scheduledTimerWithTimeInterval:24*3600 target:self selector:@selector(resetUnsafe301Timer:) userInfo:nil repeats:NO];
-    		riskyIPAddress = [NSHost currentHost].address;
+    		self.unsafe301RedirectionTimer = [NSTimer scheduledTimerWithTimeInterval:24*3600 target:self selector:@selector(resetUnsafe301Timer:) userInfo:nil repeats:NO];
+    		self.riskyIPAddress = [NSHost currentHost].address;
     		return NO;
     	}
     	else
