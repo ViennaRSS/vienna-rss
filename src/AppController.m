@@ -92,8 +92,6 @@
 	-(void)setStatusBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
 	-(void)setFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
 	-(void)setPersistedFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
-	-(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
-	-(void)doConfirmedEmptyTrash:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 	-(void)runAppleScript:(NSString *)scriptName;
 	@property (nonatomic, readonly, copy) NSString *appName;
 	-(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url body:(NSString *)body author:(NSString *)author guid:(NSString *)guid;
