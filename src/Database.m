@@ -929,7 +929,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	}
 
 	// If we deleted the search folder, null out our cached handle
-	if (IsSearchFolder(folder))
+	if (folder.type == VNAFolderTypeSearch)
 	{
 		[self setSearchFolder:nil];
 	}
@@ -2173,7 +2173,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	if (folder == nil)
 		return nil;
 
-	if (IsSearchFolder(folder)) {
+	if (folder.type == VNAFolderTypeSearch) {
         CriteriaTree *tree = [CriteriaTree new];
         Criteria *clause = [[Criteria alloc] initWithField:MA_Field_Text
                                               withOperator:MA_CritOper_Contains

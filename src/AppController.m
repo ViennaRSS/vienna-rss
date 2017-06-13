@@ -2910,7 +2910,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete smart folder text", nil), folder.name];
 			alertTitle = NSLocalizedString(@"Delete smart folder", nil);
 		}
-		else if (IsSearchFolder(folder))
+		else if (folder.type == VNAFolderTypeSearch)
 			needPrompt = NO;
 		else if (folder.type == VNAFolderTypeRSS)
 		{
@@ -3923,7 +3923,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	else if (theAction == @selector(deleteFolder:))
 	{
 		Folder * folder = [db folderFromID:foldersTree.actualSelection];
-		if (IsSearchFolder(folder))
+		if (folder.type == VNAFolderTypeSearch)
 			[menuItem setTitle:NSLocalizedString(@"Delete", nil)];
 		else
 			[menuItem setTitle:NSLocalizedString(@"Delete…", nil)];
