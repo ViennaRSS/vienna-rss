@@ -187,11 +187,11 @@
 -(void)reloadDatabase:(NSArray *)stateArray
 {
 	[rootNode removeChildren];
-	if (![self loadTree:[[Database sharedManager] arrayOfFolders:MA_Root_Folder] rootNode:rootNode])
+	if (![self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:rootNode])
 	{
 		[[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_ByName];
 		[rootNode removeChildren];
-		[self loadTree:[[Database sharedManager] arrayOfFolders:MA_Root_Folder] rootNode:rootNode];
+		[self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:rootNode];
 	}
 	[outlineView reloadData];
 	[self unarchiveState:stateArray];
@@ -331,12 +331,14 @@
 	NSMutableArray * array = [NSMutableArray array];
 	TreeNode * node;
 
-	if (!folderId)
+    if (!folderId) {
 		node = rootNode;
-	else
+    } else {
 		node = [rootNode nodeFromID:folderId];
-	if (node.folder != nil && (IsRSSFolder([node folder]) || IsGoogleReaderFolder([node folder])))
+    }
+    if (node.folder != nil && (node.folder.type == VNAFolderTypeRSS || node.folder.type == VNAFolderTypeOpenReader)) {
 		[array addObject:node.folder];
+    }
 	node = node.firstChild;
 	while (node != nil)
 	{
@@ -423,7 +425,7 @@
 		if (node != nil)
 		{
 			Folder * folder = [[Database sharedManager] folderFromID:node.nodeId];
-			return folder && !IsSearchFolder(folder) && !IsTrashFolder(folder) && ![Database sharedManager].readOnly && outlineView.window.visible;
+			return folder && folder.type != VNAFolderTypeSearch && folder.type != VNAFolderTypeTrash && ![Database sharedManager].readOnly && outlineView.window.visible;
 		}
 	}
 	return NO;
@@ -551,7 +553,7 @@
 -(NSInteger)groupParentSelection
 {
 	Folder * folder = [[Database sharedManager] folderFromID:self.actualSelection];
-	return folder ? ((IsGroupFolder(folder)) ? folder.itemId : folder.parentId) : MA_Root_Folder;
+	return folder ? ((folder.type == VNAFolderTypeGroup) ? folder.itemId : folder.parentId) : VNAFolderTypeRoot;
 }
 
 /* actualSelection
@@ -682,14 +684,14 @@
 	
 	TreeNode * node = [outlineView itemAtRow:outlineView.selectedRow];
 
-	if (IsRSSFolder([node folder])||IsGoogleReaderFolder([node folder]))
+	if (node.folder.type == VNAFolderTypeRSS || node.folder.type == VNAFolderTypeOpenReader)
 	{
 		NSString * urlString = node.folder.homePage;
-		if (urlString && !urlString.blank)
+        if (urlString && !urlString.blank) {
 			[APPCONTROLLER openURLFromString:urlString inPreferredBrowser:YES];
+        }
 	}
-	else if (IsSmartFolder([node folder]))
-	{
+	else if (node.folder.type == VNAFolderTypeSmart) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_EditFolder" object:node];
 	}
 }
@@ -788,7 +790,7 @@
 	NSAssert(newFolder, @"Somehow got a NULL folder object here");
 
 	NSInteger parentId = newFolder.parentId;
-	TreeNode * node = (parentId == MA_Root_Folder) ? rootNode : [rootNode nodeFromID:parentId];
+	TreeNode * node = (parentId == VNAFolderTypeRoot) ? rootNode : [rootNode nodeFromID:parentId];
 	if (!node.canHaveChildren)
 		[node setCanHaveChildren:YES];
 	
@@ -951,7 +953,7 @@
 			[realCell setInProgress:NO];
 		}
 
-		if (IsSmartFolder(folder))  // Because if the search results contain unread articles we don't want the smart folder name to be bold.
+		if (folder.type == VNAFolderTypeSmart)  // Because if the search results contain unread articles we don't want the smart folder name to be bold.
 		{
 			[realCell clearCount];
 		}
@@ -1071,7 +1073,7 @@
 	Folder * folder = node.folder;
 	
 	// Remove the "☁️ " symbols on Open Reader feeds
-	if (IsGoogleReaderFolder(folder) && [newName hasPrefix:@"☁️ "]) {
+	if (folder.type == VNAFolderTypeOpenReader && [newName hasPrefix:@"☁️ "]) {
 		NSString *tmpName = [newName substringFromIndex:3];
 		newName = tmpName;
 	}
@@ -1102,24 +1104,29 @@
 	BOOL isOnDropTypeProposal = index == NSOutlineViewDropOnItemIndex;
 
 	// Can't drop anything onto the trash folder.
-	if (isOnDropTypeProposal && node != nil && IsTrashFolder([node folder]))
-		return NSDragOperationNone; 
+    if (isOnDropTypeProposal && node != nil && node.folder.type == VNAFolderTypeTrash) {
+		return NSDragOperationNone;
+    }
 
 	// Can't drop anything onto the search folder.
-	if (isOnDropTypeProposal && node != nil && IsSearchFolder([node folder]))
-		return NSDragOperationNone; 
+    if (isOnDropTypeProposal && node != nil && node.folder.type == VNAFolderTypeSearch) {
+		return NSDragOperationNone;
+    }
 	
 	// Can't drop anything on smart folders.
-	if (isOnDropTypeProposal && node != nil && IsSmartFolder([node folder]))
-		return NSDragOperationNone; 
+    if (isOnDropTypeProposal && node != nil && node.folder.type == VNAFolderTypeSmart) {
+		return NSDragOperationNone;
+    }
 	
 	// Can always drop something on a group folder.
-	if (isOnDropTypeProposal && node != nil && IsGroupFolder([node folder]))
+    if (isOnDropTypeProposal && node != nil && node.folder.type == VNAFolderTypeGroup) {
 		return dragType;
+    }
 	
 	// For any other folder, can't drop anything ON them.
-	if (index == NSOutlineViewDropOnItemIndex)
+    if (index == NSOutlineViewDropOnItemIndex) {
 		return NSDragOperationNone;
+    }
 	return NSDragOperationGeneric; 
 }
 
@@ -1156,14 +1163,18 @@
 		TreeNode * node = items[index];
 		Folder * folder = node.folder;
 
-		if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder) || IsSmartFolder(folder) || IsGroupFolder(folder) || IsSearchFolder(folder) || IsTrashFolder(folder))
-		{
+		if (folder.type == VNAFolderTypeRSS
+            || folder.type == VNAFolderTypeOpenReader
+            || folder.type == VNAFolderTypeSmart
+            || folder.type == VNAFolderTypeGroup
+            || folder.type == VNAFolderTypeSearch
+            || folder.type == VNAFolderTypeTrash) {
 			[internalDragData addObject:@(node.nodeId)];
 			++countOfItems;
 		}
 
-		if (IsRSSFolder(folder)||IsGoogleReaderFolder(folder))
-		{
+		if (folder.type == VNAFolderTypeRSS
+            || folder.type == VNAFolderTypeOpenReader) {
 			NSString * feedURL = folder.feedURL;
 			
 			NSMutableDictionary * dict = [NSMutableDictionary dictionary];
@@ -1265,7 +1276,7 @@
 				[newParent setCanHaveChildren:YES];
 			if ([dbManager setParent:newParentId forFolder:folderId])
 			{
-				if (IsGoogleReaderFolder(folder))
+				if (folder.type == VNAFolderTypeOpenReader)
 				{
 					GoogleReader * myGoogle = [GoogleReader sharedManager];
 					// remove old label
@@ -1340,7 +1351,7 @@
 	for (index = 0; index < count; index += 2)
 	{
 		NSInteger newParentId = [array[++index] integerValue];
-		if (newParentId != MA_Root_Folder)
+		if (newParentId != VNAFolderTypeRoot)
 		{
 			TreeNode * parentNode = [rootNode nodeFromID:newParentId];
 			if (![outlineView isItemExpanded:parentNode] && [outlineView isExpandable:parentNode])
@@ -1455,7 +1466,7 @@
 		}
 
 		// If parent was a group, expand it now
-		if (parentId != MA_Root_Folder)
+		if (parentId != VNAFolderTypeRoot)
 			[outlineView expandItem:[rootNode nodeFromID:parentId]];
 		
 		// Select a new folder
@@ -1494,7 +1505,7 @@
 		}
 		
 		// If parent was a group, expand it now
-		if (parentId != MA_Root_Folder)
+		if (parentId != VNAFolderTypeRoot)
 			[outlineView expandItem:[rootNode nodeFromID:parentId]];
 		
 		// Select a new folder

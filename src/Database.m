@@ -199,7 +199,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	[databaseQueue inDatabase:^(FMDatabase *db) {
 		// Create the trash folder
 		[db executeUpdate:@"insert into folders (parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child) values (-1, ?, 0, 0, ?, 0, 0, 0)",
-		 NSLocalizedString(@"Trash", nil), @(MA_Trash_Folder)];
+		 NSLocalizedString(@"Trash", nil), @(VNAFolderTypeTrash)];
 	
 		// Set the initial version
 		[db setUserVersion:(uint32_t)MA_Current_DB_Version];
@@ -221,7 +221,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         previousSibling = folderId;
         folderId = [allFolders[index] integerValue];
         if (index == 0u)
-            [self setFirstChild:folderId forFolder:MA_Root_Folder];
+            [self setFirstChild:folderId forFolder:VNAFolderTypeRoot];
         else
             [self setNextSibling:folderId forFolder:previousSibling];
     }
@@ -240,7 +240,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
                 NSDictionary * itemDict = demoFeedsDict[feedName];
                 NSString * feedURL = [itemDict valueForKey:@"URL"];
                 if (feedURL != nil && feedName != nil)
-                    previousSibling = [self addRSSFolder:feedName underParent:MA_Root_Folder afterChild:previousSibling subscriptionURL:feedURL];
+                    previousSibling = [self addRSSFolder:feedName underParent:VNAFolderTypeRoot afterChild:previousSibling subscriptionURL:feedURL];
             }
         }
     }
@@ -369,7 +369,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(void)createInitialSmartFolder:(NSString *)folderName withCriteria:(Criteria *)criteria
 {
-	if ([self createFolderOnDatabase:folderName underParent:MA_Root_Folder withType:MA_Smart_Folder] >= 0)
+	if ([self createFolderOnDatabase:folderName underParent:VNAFolderTypeRoot withType:VNAFolderTypeSmart] >= 0)
 	{
 		CriteriaTree * criteriaTree = [[CriteriaTree alloc] init];
 		[criteriaTree addCriteria:criteria];
@@ -573,7 +573,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     }
 	// If no change to last update, do nothing
 	Folder * folder = [self folderFromID:folderId];
-	if (folder != nil && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)))
+	if (folder != nil && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader))
 	{
         if ([folder.lastUpdate isEqualToDate:lastUpdate]) {
 			return;
@@ -602,7 +602,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     }
 	// If no change to last update string, do nothing
 	Folder * folder = [self folderFromID:folderId];
-	if (folder != nil && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)))
+	if (folder != nil && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader))
 	{
 		if ([folder.lastUpdateString isEqualToString:lastUpdateString])
 			return;
@@ -654,7 +654,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  *  @return The ID of the new folder
  */
 -(NSInteger)addGoogleReaderFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)feed_url {
-	NSInteger folderId = [self addFolder:parentId afterChild:predecessorId folderName:feedName type:MA_GoogleReader_Folder canAppendIndex:YES];
+	NSInteger folderId = [self addFolder:parentId afterChild:predecessorId folderName:feedName type:VNAFolderTypeOpenReader canAppendIndex:YES];
 	//TODO: optimization using unique add function for addRSSFolder
 	if (folderId != -1)
 	{
@@ -693,7 +693,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(NSInteger)addRSSFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)feed_url
 {
-	NSInteger folderId = [self addFolder:parentId afterChild:predecessorId folderName:feedName type:MA_RSS_Folder canAppendIndex:YES];
+	NSInteger folderId = [self addFolder:parentId afterChild:predecessorId folderName:feedName type:VNAFolderTypeRSS canAppendIndex:YES];
 	if (folderId != -1)
 	{
         FMDatabaseQueue *queue = databaseQueue;
@@ -778,7 +778,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		}
 		if (predecessorId == 0)
 		{
-			if (parentId == MA_Root_Folder)
+			if (parentId == VNAFolderTypeRoot)
 				nextSibling = self.firstFolderId;
 			else
 			{
@@ -797,7 +797,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		// folder, mark it so that somewhere down the line we'll request the
 		// image for the folder.
 		folder = [[Folder alloc] initWithId:newItemId parentId:parentId name:name type:type];
-		if ((type == MA_RSS_Folder)||(type == MA_GoogleReader_Folder))
+		if ((type == VNAFolderTypeRSS)||(type == VNAFolderTypeOpenReader))
 			[folder setFlag:MA_FFlag_CheckForImage];
 		foldersDict[@(newItemId)] = folder;
 		
@@ -836,7 +836,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	NSTimeInterval interval = lastUpdate.timeIntervalSince1970;
 
 	// Require an image check if we're a subscription folder
-    if ((type == MA_RSS_Folder) || (type == MA_GoogleReader_Folder)) {
+    if ((type == VNAFolderTypeRSS) || (type == VNAFolderTypeOpenReader)) {
 		flags = MA_FFlag_CheckForImage;
     }
 	// Create the folder in the database. One thing to watch out for here that has
@@ -887,7 +887,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	// Adjust unread counts on parents
 	folder = [self folderFromID:folderId];
 	NSInteger adjustment = -folder.unreadCount;
-	while (folder.parentId != MA_Root_Folder)
+	while (folder.parentId != VNAFolderTypeRoot)
 	{
 		folder = [self folderFromID:folder.parentId];
 		folder.childUnreadCount = folder.childUnreadCount + adjustment;
@@ -896,7 +896,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	// Delete all articles in this folder then delete ourselves.
 	folder = [self folderFromID:folderId];
 	countOfUnread -= folder.unreadCount;
-    if (IsSmartFolder(folder)) {
+    if (folder.type == VNAFolderTypeSmart) {
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"delete from smart_folders where folder_id=?", @(folderId)];
         }];
@@ -904,7 +904,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 
 	// If this is an RSS feed, delete from the feeds
 	// and delete raw feed source
-	if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
+	if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
 	{
         [queue inTransaction:^(FMDatabase *db, BOOL * rollback) {
             [db executeUpdate:@"delete from rss_folders where folder_id=?", @(folderId)];
@@ -929,7 +929,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	}
 
 	// If we deleted the search folder, null out our cached handle
-	if (IsSearchFolder(folder))
+	if (folder.type == VNAFolderTypeSearch)
 	{
 		[self setSearchFolder:nil];
 	}
@@ -955,7 +955,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	}
 	
 	// For a smart folder, the next line is a no-op but it helpfully takes care of the case where a
-	// normal folder had it's type grobbed to MA_Smart_Folder.
+	// normal folder had it's type grobbed to VNAFolderTypeSmart.
     [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
         [db executeUpdate:@"delete from messages where folder_id=?", @(folderId)];
         [db executeUpdate:@"delete from folders where folder_id=?", @(folderId)];
@@ -1195,7 +1195,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 
 	// Adjust the child unread count for the old parent.
 	NSInteger adjustment = 0;
-	if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
+	if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
 		adjustment = folder.unreadCount;
 	else if (folder.groupFolder)
 		adjustment = folder.childUnreadCount;
@@ -1245,7 +1245,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	
     FMDatabaseQueue *queue = databaseQueue;
     
-	if (folderId == MA_Root_Folder)
+	if (folderId == VNAFolderTypeRoot)
 	{
 		[queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update info set first_folder=?", @(childId)];
@@ -1327,7 +1327,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 {
 	if (self.searchFolder == nil)
 	{
-		NSInteger folderId = [self addFolder:MA_Root_Folder afterChild:0 folderName: NSLocalizedString(@"Search Results", nil) type:MA_Search_Folder canAppendIndex:YES];
+		NSInteger folderId = [self addFolder:VNAFolderTypeRoot afterChild:0 folderName: NSLocalizedString(@"Search Results", nil) type:VNAFolderTypeSearch canAppendIndex:YES];
 		self.searchFolder = [self folderFromID:folderId];
 	}
 	return (self.searchFolder).itemId;
@@ -1694,7 +1694,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		return folder.itemId;
 	}
 
-	NSInteger folderId = [self addFolder:parentId afterChild:0 folderName:folderName type:MA_Smart_Folder canAppendIndex:NO];
+	NSInteger folderId = [self addFolder:parentId afterChild:0 folderName:folderName type:VNAFolderTypeSmart canAppendIndex:NO];
 	if (folderId != -1)
 	{
         FMDatabaseQueue *queue = databaseQueue;
@@ -1773,22 +1773,26 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
                 Folder * folder = [[Folder alloc] initWithId:newItemId parentId:newParentId name:name type:type];
                 folder.nextSiblingId = nextSibling;
                 folder.firstChildId = firstChild;
-                if (!IsRSSFolder(folder) && !IsGoogleReaderFolder(folder))
+                if (folder.type != VNAFolderTypeRSS && folder.type != VNAFolderTypeOpenReader) {
                     unreadCount = 0;
+                }
                 folder.unreadCount = unreadCount;
                 folder.lastUpdate = lastUpdate;
                 [folder setFlag:flags];
-                if (unreadCount > 0)
+                if (unreadCount > 0) {
                     countOfUnread += unreadCount;
+                }
                 foldersDict[@(newItemId)] = folder;
                 
                 // Remember the trash folder
-                if (IsTrashFolder(folder))
+                if (folder.type == VNAFolderTypeTrash) {
                     self.trashFolder = folder;
+                }
                 
                 // Remember the search folder
-                if (IsSearchFolder(folder))
+                if (folder.type == VNAFolderTypeSearch) {
                     self.searchFolder = folder;
+                }
             }
             [results close];
 		
@@ -1815,7 +1819,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		// Fix the childUnreadCount for every parent
 		for (Folder * folder in [foldersDict objectEnumerator])
 		{
-			if (folder.unreadCount > 0 && folder.parentId != MA_Root_Folder)
+			if (folder.unreadCount > 0 && folder.parentId != VNAFolderTypeRoot)
 			{
 				Folder * parentFolder = [self folderFromID:folder.parentId];
 				while (parentFolder != nil)
@@ -1857,8 +1861,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 /* arrayOfSubFolders
  * Returns an NSArray of all folders from the specified folder down.
  */
--(NSArray *)arrayOfSubFolders:(Folder *)folder
-{
+-(NSArray *)arrayOfSubFolders:(Folder *)folder {
 	NSMutableArray * newArray = [NSMutableArray arrayWithObject:folder];
 	if (newArray != nil)
 	{
@@ -1868,10 +1871,12 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		{
 			if (item.parentId == parentId)
 			{
-				if (IsGroupFolder(item))
+                if (item.type == VNAFolderTypeGroup) {
 					[newArray addObjectsFromArray:[self arrayOfSubFolders:item]];
-				else
+                }
+                else {
 					[newArray addObject:item];
+                }
 			}
 		}
 	}
@@ -1981,13 +1986,14 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	}
 
 	// Group folders must always have subscope
-	if (folder && IsGroupFolder(folder))
+    if (folder && folder.type == VNAFolderTypeGroup) {
 		subScope = YES;
+    }
 
 	// Straightforward folder is <something>
-	if (!subScope)
+    if (!subScope) {
 		return [NSString stringWithFormat:@"%@%@%ld", field.sqlField, operatorString, (long)folderId];
-
+    }
 	// For under/not-under operators, we're creating a SQL statement of the format
 	// (folder_id = <value1> || folder_id = <value2>...). It is possible to try and simplify
 	// the string by looking for ranges but I suspect that given the spread of IDs this may
@@ -1998,8 +2004,9 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	NSInteger count = childFolders.count;
 	NSInteger index;
 	
-	if (count > 1)
+    if (count > 1) {
 		[sqlString appendString:@"("];
+    }
 	for (index = 0; index < count; ++index)
 	{
 		Folder * folder = childFolders[index];
@@ -2166,7 +2173,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	if (folder == nil)
 		return nil;
 
-	if (IsSearchFolder(folder)) {
+	if (folder.type == VNAFolderTypeSearch) {
         CriteriaTree *tree = [CriteriaTree new];
         Criteria *clause = [[Criteria alloc] initWithField:MA_Field_Text
                                               withOperator:MA_CritOper_Contains
@@ -2175,7 +2182,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         return tree;
     }
 	
-	if (IsTrashFolder(folder))
+	if (folder.type == VNAFolderTypeTrash)
 	{
 		CriteriaTree * tree = [[CriteriaTree alloc] init];
 		Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Deleted withOperator:MA_CritOper_Is withValue:@"Yes"];
@@ -2183,7 +2190,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		return tree;
 	}
 
-	if (IsSmartFolder(folder))
+	if (folder.type == VNAFolderTypeSmart)
 	{
 		[self initSmartfoldersDict];
 		return smartfoldersDict[@(folderId)];
@@ -2287,7 +2294,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 			article.hasEnclosure = [results intForColumnIndex:13];
 			article.enclosure = [results stringForColumnIndex:14];
 		
-			if (folder == nil || !article.deleted || IsTrashFolder(folder))
+			if (folder == nil || !article.deleted || folder.type == VNAFolderTypeTrash)
 				[newArray addObject:article];
 			
 			// Keep our own track of unread articles
@@ -2301,7 +2308,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     // This is a good time to do a quick check to ensure that our
     // own count of unread is in sync with the folders count and fix
     // them if not.
-    if (folder && [filterString isEqualTo:@""] && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)))
+    if (folder && [filterString isEqualTo:@""] && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader))
     {
         if (unread_count != folder.unreadCount)
         {
@@ -2453,7 +2460,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	// Update childUnreadCount for our parent. Since we're just working
 	// on one article, we do this the faster way.
 	Folder * tmpFolder = folder;
-	while (tmpFolder.parentId != MA_Root_Folder)
+	while (tmpFolder.parentId != VNAFolderTypeRoot)
 	{
 		tmpFolder = [self folderFromID:tmpFolder.parentId];
 		tmpFolder.childUnreadCount = tmpFolder.childUnreadCount + adjustment;

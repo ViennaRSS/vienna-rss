@@ -45,7 +45,7 @@
 		db = newDb;
 		sourcesDict = nil;
 		editFolderId = -1;
-		parentId = MA_Root_Folder;
+		parentId = VNAFolderTypeRoot;
         subscriptionModel = [[SubscriptionModel alloc] init];
 	}
 	return self;

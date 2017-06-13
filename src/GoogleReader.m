@@ -881,7 +881,7 @@ enum GoogleReaderStatus {
 				folderName = folderNames.lastObject;
 				// NNW nested folder char: — 
 				
-				NSMutableArray * params = [NSMutableArray arrayWithObjects:[folderNames mutableCopy], @(MA_Root_Folder), nil];
+				NSMutableArray * params = [NSMutableArray arrayWithObjects:[folderNames mutableCopy], @(VNAFolderTypeRoot), nil];
 				[self createFolders:params];
 				break; //In case of multiple labels, we retain only the first one
 			} 
@@ -903,9 +903,9 @@ enum GoogleReaderStatus {
 			// set HomePage if the info is available
 			NSString* homePageURL = feed[@"htmlUrl"];
 			if (homePageURL) {
-				for (Folder * f in localFolders) {
-					if (IsGoogleReaderFolder(f) && [f.feedURL isEqualToString:feedURL]) {
-                        [[Database sharedManager] setHomePage:homePageURL forFolder:f.itemId];
+				for (Folder *localFolder in localFolders) {
+					if (localFolder.type == VNAFolderTypeOpenReader && [localFolder.feedURL isEqualToString:feedURL]) {
+                        [[Database sharedManager] setHomePage:homePageURL forFolder:localFolder.itemId];
 						break;
 					}
 				}
@@ -917,7 +917,7 @@ enum GoogleReaderStatus {
 	
 	//check if we have a folder which is not registered as a Open Reader feed
 	for (Folder * f in APPCONTROLLER.folders) {
-		if (IsGoogleReaderFolder(f) && ![googleFeeds containsObject:f.feedURL])
+		if (f.type == VNAFolderTypeOpenReader && ![googleFeeds containsObject:f.feedURL])
 		{
 			[[Database sharedManager] deleteFolder:f.itemId];
 		}
@@ -1026,7 +1026,7 @@ enum GoogleReaderStatus {
 
 -(void)createNewSubscription:(NSArray *)params
 {
-    NSInteger underFolder = MA_Root_Folder;
+    NSInteger underFolder = VNAFolderTypeRoot;
     NSString * feedURL = params[0];
 	NSString *rssTitle = [NSString stringWithFormat:@""];
 	
@@ -1061,7 +1061,7 @@ enum GoogleReaderStatus {
     if (!folder)
     {
 		NSInteger newFolderId;
-        newFolderId = [dbManager addFolder:parentNumber.integerValue afterChild:-1 folderName:folderName type:MA_Group_Folder canAppendIndex:NO];
+        newFolderId = [dbManager addFolder:parentNumber.integerValue afterChild:-1 folderName:folderName type:VNAFolderTypeGroup canAppendIndex:NO];
  
         parentNumber = @(newFolderId);
     }

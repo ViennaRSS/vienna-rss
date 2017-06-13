@@ -40,7 +40,7 @@
 	{
 		NSMutableDictionary * itemDict = [[NSMutableDictionary alloc] init];
 		NSString * name = folder.name;
-		if (IsGroupFolder(folder))
+		if (folder.type == VNAFolderTypeGroup)
 		{
 			NSArray * subFolders = [foldersTree children:folder.itemId];
 			
@@ -56,7 +56,7 @@
 				countExported += [Export exportSubscriptionGroup:outlineElement fromArray:subFolders inFoldersTree:foldersTree withGroups:groupFlag];
 			}
 		}
-		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
+		else if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
 		{
 			NSString * link = folder.homePage;
 			NSString * description = folder.feedDescription;

@@ -53,7 +53,7 @@
         {
             NSArray *outlines = [opmlDocument nodesForXPath:@"opml/body/outline" error:nil];
             
-            countImported = [self importSubscriptionGroup:outlines underParent:MA_Root_Folder];
+            countImported = [self importSubscriptionGroup:outlines underParent:VNAFolderTypeRoot];
         }
     }
     
@@ -105,10 +105,10 @@
 			if (feedText != nil)
 			{
 				NSInteger folderId = [dbManager addFolder:parentId afterChild:-1
-                                         folderName:feedText type:MA_Group_Folder
+                                         folderName:feedText type:VNAFolderTypeGroup
                                      canAppendIndex:NO];
                 if (folderId == -1) {
-					folderId = MA_Root_Folder;
+					folderId = VNAFolderTypeRoot;
                 }
 				countImported += [self importSubscriptionGroup:outlineElement.children underParent:folderId];
 			}

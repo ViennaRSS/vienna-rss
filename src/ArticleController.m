@@ -391,8 +391,7 @@
 	if (![mainArticleView viewNextUnreadInFolder])
 	{
 		// If nothing found and smart folder, search if we have other fresh articles from same folder
-		if (IsSmartFolder(currentFolder) || IsTrashFolder(currentFolder) || IsSearchFolder(currentFolder))
-		{
+		if (currentFolder.type == VNAFolderTypeSmart || currentFolder.type == VNAFolderTypeTrash || currentFolder.type == VNAFolderTypeSearch) {
 			if (![mainArticleView selectFirstUnreadInFolder] || self.selectedArticle == currentArticle)
 			{
 				currentFolderExhausted = YES;
@@ -734,7 +733,7 @@
 	for (Article * theArticle in articleArray)
 	{
 		Folder *myFolder = [[Database sharedManager] folderFromID:theArticle.folderId];
-		if (IsGoogleReaderFolder(myFolder)) {
+		if (myFolder.type == VNAFolderTypeOpenReader) {
 			[[GoogleReader sharedManager] markStarred:theArticle starredFlag:flagged];
 		}
 		[[Database sharedManager] markArticleFlagged:theArticle.folderId
@@ -788,7 +787,7 @@
 		NSInteger folderId = theArticle.folderId;
 		if (theArticle.read != readFlag)
 		{
-			if (IsGoogleReaderFolder([[Database sharedManager] folderFromID:folderId])) {
+			if ([[Database sharedManager] folderFromID:folderId].type == VNAFolderTypeOpenReader) {
 				[[GoogleReader sharedManager] markRead:theArticle readFlag:readFlag];
 			} else {
 				[[Database sharedManager] markArticleRead:folderId guid:theArticle.guid isRead:readFlag];
@@ -819,7 +818,7 @@
 	{
 		NSInteger folderId = articleRef.folderId;
 		Folder * folder = [db folderFromID:folderId];
-		if (IsGoogleReaderFolder(folder)){
+		if (folder.type == VNAFolderTypeOpenReader){
 			Article * article = [folder articleFromGuid:articleRef.guid];
 			if (article != nil) {
                 [[GoogleReader sharedManager] markRead:article readFlag:readFlag];
@@ -885,11 +884,11 @@
 	for (Folder * folder in folderArray)
 	{
 		NSInteger folderId = folder.itemId;
-		if (IsGroupFolder(folder) && undoFlag)
+		if (folder.type == VNAFolderTypeGroup && undoFlag)
 		{
 			[refArray addObjectsFromArray:[self wrappedMarkAllReadInArray:[[Database sharedManager] arrayOfFolders:folderId] withUndo:undoFlag]];
 		}
-		else if (IsRSSFolder(folder))
+		else if (folder.type == VNAFolderTypeRSS)
 		{
             if (undoFlag) {
 				[refArray addObjectsFromArray:[folder arrayOfUnreadArticlesRefs]];
@@ -899,7 +898,7 @@
 																	object:@(folderId)];
 			}
 		}
-		else if (IsGoogleReaderFolder(folder))
+		else if (folder.type == VNAFolderTypeOpenReader)
 		{
 			NSArray * articleArray = [folder arrayOfUnreadArticlesRefs];
             if (undoFlag) {
@@ -941,7 +940,7 @@
 		NSInteger folderId = ref.folderId;
 		NSString * theGuid = ref.guid;
 		Folder * folder = [dbManager folderFromID:folderId];
-        if (IsGoogleReaderFolder(folder)) {
+        if (folder.type == VNAFolderTypeOpenReader) {
         	Article * article = [folder articleFromGuid:theGuid];
         	if (article != nil) {
 			    [[GoogleReader sharedManager] markRead:article readFlag:readFlag];
@@ -964,8 +963,8 @@
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
 															object:@(lastFolderId)];
 	}
-	if (lastFolderId != -1 && !IsRSSFolder([dbManager folderFromID:currentFolderId])
-		&& !IsGoogleReaderFolder([dbManager folderFromID:currentFolderId])) {
+	if (lastFolderId != -1 && [dbManager folderFromID:currentFolderId].type != VNAFolderTypeRSS
+		&& [dbManager folderFromID:currentFolderId].type != VNAFolderTypeOpenReader) {
 		[self reloadArrayOfArticles];
 	}
 	else if (needRefilter) {
@@ -1050,7 +1049,7 @@
 {
     NSInteger folderId = ((NSNumber *)nc.object).integerValue;
     Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
-    if ( (folderId == currentFolderId) || (!IsRSSFolder(currentFolder) && !IsGoogleReaderFolder(currentFolder)) ) {
+    if ((folderId == currentFolderId) || (currentFolder.type != VNAFolderTypeRSS && currentFolder.type != VNAFolderTypeOpenReader)) {
         [mainArticleView refreshFolder:MA_Refresh_RedrawList];
     }
 }
@@ -1066,7 +1065,7 @@
     Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
     if ( (folderId == currentFolderId)
       // for group or smart folder, to avoid flickering, we only update when refresh process is finished
-      || (!IsRSSFolder(currentFolder) && !IsGoogleReaderFolder(currentFolder) && !APPCONTROLLER.isConnecting) )
+      || (currentFolder.type != VNAFolderTypeRSS && currentFolder.type != VNAFolderTypeOpenReader && !APPCONTROLLER.isConnecting) )
     {
         // Note the article that the user might currently be reading
         // to be preserved when reloading the array of articles.

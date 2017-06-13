@@ -62,7 +62,7 @@
 		smartFolderId = -1;
 		db = newDb;
 		firstRun = YES;
-		parentId = MA_Root_Folder;
+		parentId = VNAFolderTypeRoot;
 		arrayOfViews = [[NSMutableArray alloc] init];
 	}
 	return self;
@@ -227,7 +227,7 @@
 	// Initialise the folder control with a list of all folders
 	// in the database.
 	[folderValueField removeAllItems];
-	[self initFolderValueField:MA_Root_Folder atIndent:0];
+	[self initFolderValueField:VNAFolderTypeRoot atIndent:0];
 	
 	// Init the folder name field and disable the Save button if it is blank
 	smartFolderName.stringValue = folderName;
@@ -244,13 +244,13 @@
 {
 	for (Folder * folder in [[db arrayOfFolders:fromId] sortedArrayUsingSelector:@selector(folderNameCompare:)])
 	{
-		if (IsRSSFolder(folder)||IsGoogleReaderFolder(folder)||IsGroupFolder(folder))
+		if (folder.type == VNAFolderTypeRSS||folder.type == VNAFolderTypeOpenReader||folder.type == VNAFolderTypeGroup)
 		{
 			[folderValueField addItemWithTitle:folder.name];
 			NSMenuItem * menuItem = [folderValueField itemWithTitle:folder.name];
 			menuItem.image = folder.image;
 			menuItem.indentationLevel = indentation;
-			if (IsGroupFolder(folder))
+			if (folder.type == VNAFolderTypeGroup)
 				[self initFolderValueField:folder.itemId atIndent:indentation + 2];
 		}
 	}

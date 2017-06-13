@@ -208,7 +208,7 @@
 	username.stringValue = folder.username;
 	password.stringValue = folder.password;
 	// for Google feeds, URL may not be changed and no authentication is supported
-	if (IsGoogleReaderFolder(folder)) {
+	if (folder.type == VNAFolderTypeOpenReader) {
 		//[urlField setSelectable:NO];
 		[urlField setEditable:NO];
 		urlField.textColor = [NSColor disabledControlTextColor];
