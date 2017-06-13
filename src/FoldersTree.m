@@ -187,11 +187,11 @@
 -(void)reloadDatabase:(NSArray *)stateArray
 {
 	[rootNode removeChildren];
-	if (![self loadTree:[[Database sharedManager] arrayOfFolders:MA_Root_Folder] rootNode:rootNode])
+	if (![self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:rootNode])
 	{
 		[[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_ByName];
 		[rootNode removeChildren];
-		[self loadTree:[[Database sharedManager] arrayOfFolders:MA_Root_Folder] rootNode:rootNode];
+		[self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:rootNode];
 	}
 	[outlineView reloadData];
 	[self unarchiveState:stateArray];
@@ -551,7 +551,7 @@
 -(NSInteger)groupParentSelection
 {
 	Folder * folder = [[Database sharedManager] folderFromID:self.actualSelection];
-	return folder ? ((IsGroupFolder(folder)) ? folder.itemId : folder.parentId) : MA_Root_Folder;
+	return folder ? ((IsGroupFolder(folder)) ? folder.itemId : folder.parentId) : VNAFolderTypeRoot;
 }
 
 /* actualSelection
@@ -788,7 +788,7 @@
 	NSAssert(newFolder, @"Somehow got a NULL folder object here");
 
 	NSInteger parentId = newFolder.parentId;
-	TreeNode * node = (parentId == MA_Root_Folder) ? rootNode : [rootNode nodeFromID:parentId];
+	TreeNode * node = (parentId == VNAFolderTypeRoot) ? rootNode : [rootNode nodeFromID:parentId];
 	if (!node.canHaveChildren)
 		[node setCanHaveChildren:YES];
 	
@@ -1340,7 +1340,7 @@
 	for (index = 0; index < count; index += 2)
 	{
 		NSInteger newParentId = [array[++index] integerValue];
-		if (newParentId != MA_Root_Folder)
+		if (newParentId != VNAFolderTypeRoot)
 		{
 			TreeNode * parentNode = [rootNode nodeFromID:newParentId];
 			if (![outlineView isItemExpanded:parentNode] && [outlineView isExpandable:parentNode])
@@ -1455,7 +1455,7 @@
 		}
 
 		// If parent was a group, expand it now
-		if (parentId != MA_Root_Folder)
+		if (parentId != VNAFolderTypeRoot)
 			[outlineView expandItem:[rootNode nodeFromID:parentId]];
 		
 		// Select a new folder
@@ -1494,7 +1494,7 @@
 		}
 		
 		// If parent was a group, expand it now
-		if (parentId != MA_Root_Folder)
+		if (parentId != VNAFolderTypeRoot)
 			[outlineView expandItem:[rootNode nodeFromID:parentId]];
 		
 		// Select a new folder

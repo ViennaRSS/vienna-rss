@@ -31,7 +31,7 @@
 {
 	if ((self = [super init]) != nil)
  	{
-		NSInteger folderId = (theFolder ? theFolder.itemId : MA_Root_Folder);
+		NSInteger folderId = (theFolder ? theFolder.itemId : VNAFolderTypeRoot);
 		folder = theFolder;
 		parentNode = parent;
 		canHaveChildren = childflag;
@@ -129,10 +129,12 @@
 	Folder * thisFolder = self.folder;
 	Folder * otherFolder = otherObject.folder;
 
-	if (FolderType(thisFolder) < FolderType(otherFolder))
+    if (thisFolder.type < otherFolder.type) {
 		return NSOrderedAscending;
-	if (FolderType(thisFolder) > FolderType(otherFolder))
+    }
+    if (thisFolder.type > otherFolder.type) {
 		return NSOrderedDescending;
+    }
 	return [thisFolder.name caseInsensitiveCompare:otherFolder.name];
 }
 

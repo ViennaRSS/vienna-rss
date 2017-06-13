@@ -881,7 +881,7 @@ enum GoogleReaderStatus {
 				folderName = folderNames.lastObject;
 				// NNW nested folder char: — 
 				
-				NSMutableArray * params = [NSMutableArray arrayWithObjects:[folderNames mutableCopy], @(MA_Root_Folder), nil];
+				NSMutableArray * params = [NSMutableArray arrayWithObjects:[folderNames mutableCopy], @(VNAFolderTypeRoot), nil];
 				[self createFolders:params];
 				break; //In case of multiple labels, we retain only the first one
 			} 
@@ -1026,7 +1026,7 @@ enum GoogleReaderStatus {
 
 -(void)createNewSubscription:(NSArray *)params
 {
-    NSInteger underFolder = MA_Root_Folder;
+    NSInteger underFolder = VNAFolderTypeRoot;
     NSString * feedURL = params[0];
 	NSString *rssTitle = [NSString stringWithFormat:@""];
 	
@@ -1061,7 +1061,7 @@ enum GoogleReaderStatus {
     if (!folder)
     {
 		NSInteger newFolderId;
-        newFolderId = [dbManager addFolder:parentNumber.integerValue afterChild:-1 folderName:folderName type:MA_Group_Folder canAppendIndex:NO];
+        newFolderId = [dbManager addFolder:parentNumber.integerValue afterChild:-1 folderName:folderName type:VNAFolderTypeGroup canAppendIndex:NO];
  
         parentNumber = @(newFolderId);
     }

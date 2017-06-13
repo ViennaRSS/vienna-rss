@@ -62,7 +62,7 @@
 		smartFolderId = -1;
 		db = newDb;
 		firstRun = YES;
-		parentId = MA_Root_Folder;
+		parentId = VNAFolderTypeRoot;
 		arrayOfViews = [[NSMutableArray alloc] init];
 	}
 	return self;
@@ -227,7 +227,7 @@
 	// Initialise the folder control with a list of all folders
 	// in the database.
 	[folderValueField removeAllItems];
-	[self initFolderValueField:MA_Root_Folder atIndent:0];
+	[self initFolderValueField:VNAFolderTypeRoot atIndent:0];
 	
 	// Init the folder name field and disable the Save button if it is blank
 	smartFolderName.stringValue = folderName;

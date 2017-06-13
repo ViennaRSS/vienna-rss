@@ -46,7 +46,7 @@ static NSArray * iconArray = nil;
 /* initWithId
  * Initialise a new folder object instance.
  */
--(instancetype)initWithId:(NSInteger)newId parentId:(NSInteger)newIdParent name:(NSString *)newName type:(NSInteger)newType
+-(instancetype)initWithId:(NSInteger)newId parentId:(NSInteger)newIdParent name:(NSString *)newName type:(VNAFolderType)newType
 {
 	if ((self = [super init]) != nil)
 	{
@@ -56,7 +56,7 @@ static NSArray * iconArray = nil;
 		nextSiblingId = 0;
 		unreadCount = 0;
 		childUnreadCount = 0;
-		type = newType;
+		_type = newType;
 		flags = 0;
 		nonPersistedFlags = 0;
 		isCached = NO;
@@ -129,13 +129,6 @@ static NSArray * iconArray = nil;
 -(NSInteger)unreadCount
 {
 	return unreadCount;
-}
-
-/* type
- */
--(NSInteger)type
-{
-	return type;
 }
 
 /* flags
@@ -374,14 +367,6 @@ static NSArray * iconArray = nil;
 -(void)setName:(NSString *)newName
 {
 	[attributes setValue:newName forKey:@"Name"];
-}
-
-/* setType
- * Changes the folder type
- */
--(void)setType:(NSInteger)newType
-{
-	type = newType;
 }
 
 /* isGroupFolder

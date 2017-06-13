@@ -60,7 +60,7 @@
 	NSInteger newFolderId = [[Database sharedManager] addFolder:parentId
 													 afterChild:-1
 													 folderName:folderNameString
-														   type:MA_Group_Folder
+														   type:VNAFolderTypeGroup
 												 canAppendIndex:NO];
 
 	// Close the window

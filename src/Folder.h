@@ -22,29 +22,30 @@
 #import "Article.h"
 
 // Folder types
-//   MA_Root_Folder = the abstract root folder
-//   MA_Smart_Folder = the articles are dynamically collected by a custom query
-//   MA_Group_Folder = a folder used to group other folders
-//   MA_RSS_Folder = folder contains RSS articles
-//   MA_Trash_Folder - a folder that contains deleted articles
-//   MA_Search_Folder - a folder that contains a search result
+//   VNAFolderTypeRoot = the abstract root folder
+//   VNAFolderTypeSmart = the articles are dynamically collected by a custom query
+//   VNAFolderTypeGroup = a folder used to group other folders
+//   VNAFolderTypeRSS = folder contains RSS articles
+//   VNAFolderTypeTrash - a folder that contains deleted articles
+//   VNAFolderTypeSearch - a folder that contains a search result
 //
-#define MA_Root_Folder			-1
-#define MA_Smart_Folder			2
-#define MA_Group_Folder			3
-#define MA_RSS_Folder			4
-#define MA_Trash_Folder			5
-#define MA_Search_Folder		6
-#define MA_GoogleReader_Folder	7
+typedef NS_ENUM(NSInteger, VNAFolderType) {
+    VNAFolderTypeRoot       = -1,
+    VNAFolderTypeSmart      = 2,
+    VNAFolderTypeGroup      = 3,
+    VNAFolderTypeRSS        = 4,
+    VNAFolderTypeTrash      = 5,
+    VNAFolderTypeSearch     = 6,
+    VNAFolderTypeOpenReader = 7
+};
 
 // Macros to simplify getting folder types
-#define FolderType(f)			([(f) type])
-#define IsSmartFolder(f)		(([(f) type]) == MA_Smart_Folder)
-#define IsRSSFolder(f)			(([(f) type]) == MA_RSS_Folder)
-#define IsGroupFolder(f)		(([(f) type]) == MA_Group_Folder)
-#define IsTrashFolder(f)		(([(f) type]) == MA_Trash_Folder)
-#define IsSearchFolder(f)		(([(f) type]) == MA_Search_Folder)
-#define IsGoogleReaderFolder(f)	(([(f) type]) == MA_GoogleReader_Folder)
+#define IsSmartFolder(f)		(([(f) type]) == VNAFolderTypeSmart)
+#define IsRSSFolder(f)			(([(f) type]) == VNAFolderTypeRSS)
+#define IsGroupFolder(f)		(([(f) type]) == VNAFolderTypeGroup)
+#define IsTrashFolder(f)		(([(f) type]) == VNAFolderTypeTrash)
+#define IsSearchFolder(f)		(([(f) type]) == VNAFolderTypeSearch)
+#define IsGoogleReaderFolder(f)	(([(f) type]) == VNAFolderTypeOpenReader)
 #define IsSameFolderType(f,g)	(([(f) type]) == ([(g) type]))
 
 // Folder flags
@@ -70,7 +71,6 @@
 	NSInteger nextSiblingId;
 	NSInteger firstChildId;
 	NSInteger unreadCount;
-	NSInteger type;
 	NSInteger childUnreadCount;
 	NSUInteger flags;
 	NSUInteger nonPersistedFlags;
@@ -82,7 +82,7 @@
 }
 
 // Initialisation functions
--(instancetype)initWithId:(NSInteger)itemId parentId:(NSInteger)parentId name:(NSString *)name type:(NSInteger)type /*NS_DESIGNATED_INITIALIZER*/;
+-(instancetype)initWithId:(NSInteger)itemId parentId:(NSInteger)parentId name:(NSString *)name type:(VNAFolderType)type /*NS_DESIGNATED_INITIALIZER*/;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *feedDescription;
 @property (nonatomic, copy) NSString *homePage;
@@ -99,7 +99,7 @@
 @property (nonatomic) NSInteger firstChildId;
 @property (nonatomic, readonly) NSInteger countOfCachedArticles;
 @property (nonatomic) NSInteger unreadCount;
-@property (nonatomic) NSInteger type;
+@property (nonatomic) VNAFolderType type;
 @property (nonatomic, readonly) NSUInteger nonPersistedFlags;
 @property (nonatomic, readonly) NSUInteger flags;
 @property (nonatomic, copy) NSImage *image;

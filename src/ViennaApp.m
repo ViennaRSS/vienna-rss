@@ -181,7 +181,7 @@
 {
 	NSDictionary * args = cmd.evaluatedArguments;
 	id argObject = args[@"Folder"];
-	NSArray * argArray = argObject ? [self evaluatedArrayOfFolders:argObject withCommand:cmd] : [[Database sharedManager] arrayOfFolders:MA_Root_Folder];
+	NSArray * argArray = argObject ? [self evaluatedArrayOfFolders:argObject withCommand:cmd] : [[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot];
 
 	NSInteger countExported = 0;
 	if (argArray != nil)
@@ -198,7 +198,7 @@
 	NSDictionary * args = cmd.evaluatedArguments;
 	Folder * folder = args[@"UnderFolder"];
 
-	NSInteger parentId = folder ? ((IsGroupFolder(folder)) ? folder.itemId : folder.parentId) : MA_Root_Folder;
+	NSInteger parentId = folder ? ((IsGroupFolder(folder)) ? folder.itemId : folder.parentId) : VNAFolderTypeRoot;
 
 	[(AppController*)self.delegate createNewSubscription:args[@"URL"] underFolder:parentId afterChild:-1];
 	return nil;
