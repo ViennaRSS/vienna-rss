@@ -23,12 +23,6 @@
 #import "AppController.h"
 #import "BrowserView.h"
 
-// Pull in the private functions we need from the delegate
-@interface AppController (Private)
-@property (nonatomic, readonly, copy) NSMenu *searchFieldMenu;
--(void)searchArticlesWithString:(NSString *)searchString;
-@end
-
 @implementation SearchPanel
 
 /* runSearchPanel

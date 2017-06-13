@@ -31,8 +31,10 @@
 #import "ToolbarItem.h"
 #import "BrowserView.h"
 
-@interface PluginManager (Private)
-	-(void)installPlugin:(NSDictionary *)onePlugin;
+@interface PluginManager ()
+
+-(void)installPlugin:(NSDictionary *)onePlugin;
+
 @end
 
 @implementation PluginManager

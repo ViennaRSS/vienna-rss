@@ -26,12 +26,13 @@
 #import "Folder.h"
 #import "Database.h"
 
-// Private functions
-@interface NewSubscription (Private)
-	-(void)loadRSSFeedBundle;
-	-(void)setLinkTitle;
-	-(void)enableSaveButton;
-	-(void)enableSubscribeButton;
+@interface NewSubscription ()
+
+-(void)loadRSSFeedBundle;
+-(void)setLinkTitle;
+-(void)enableSaveButton;
+-(void)enableSubscribeButton;
+
 @end
 
 @implementation NewSubscription

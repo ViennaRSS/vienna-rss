@@ -23,8 +23,10 @@
 #import "Constants.h"
 #import "Article.h"
 
-@interface ArticleFilter (Private)
+@interface ArticleFilter ()
+
 +(void)createFilter:(NSString *)name tag:(NSInteger)tag comparator:(SEL)comparator;
+
 @end
 
 // There's just one global filter list.

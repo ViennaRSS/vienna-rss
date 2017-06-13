@@ -66,52 +66,48 @@
 
 #import "Vienna-Swift.h"
 
-@interface AppController (Private)
-	@property (nonatomic, readonly, copy) NSMenu *searchFieldMenu;
-	-(void)installSleepHandler;
-	-(void)installScriptsFolderWatcher;
-	-(void)handleTabChange:(NSNotification *)nc;
-	-(void)handleFolderSelection:(NSNotification *)nc;
-	-(void)handleCheckFrequencyChange:(NSNotification *)nc;
-	-(void)handleFolderNameChange:(NSNotification *)nc;
-	-(void)handleDidBecomeKeyWindow:(NSNotification *)nc;
-	-(void)handleReloadPreferences:(NSNotification *)nc;
-	-(void)handleShowAppInStatusBar:(NSNotification *)nc;
-	-(void)handleShowStatusBar:(NSNotification *)nc;
-	-(void)handleShowFilterBar:(NSNotification *)nc;
-	-(void)setAppStatusBarIcon;
-	-(void)updateNewArticlesNotification;
-	-(void)showAppInStatusBar;
-	-(void)initSortMenu;
-	-(void)initColumnsMenu;
-	-(void)initScriptsMenu;
-	-(void)initFiltersMenu;
-	@property (nonatomic, getter=getStylesMenu, readonly, copy) NSMenu *stylesMenu;
-	-(void)startProgressIndicator;
-	-(void)stopProgressIndicator;
-	-(void)doEditFolder:(Folder *)folder;
-	-(void)refreshOnTimer:(NSTimer *)aTimer;
-	-(BOOL)installFilename:(NSString *)srcFile toPath:(NSString *)path;
-	-(void)setStatusBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
-	-(void)setFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
-	-(void)setPersistedFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
-	-(void)runAppleScript:(NSString *)scriptName;
-	@property (nonatomic, readonly, copy) NSString *appName;
-	-(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url body:(NSString *)body author:(NSString *)author guid:(NSString *)guid;
-	-(void)setLayout:(NSInteger)newLayout withRefresh:(BOOL)refreshFlag;
-	-(void)updateAlternateMenuTitle;
-	-(void)updateSearchPlaceholderAndSearchMethod;
-	-(void)toggleOptionKeyButtonStates;
-	-(void)updateCloseCommands;
-	@property (nonatomic, getter=isFilterBarVisible, readonly) BOOL filterBarVisible;
-	@property (nonatomic, getter=isStatusBarVisible, readonly) BOOL statusBarVisible;
-	@property (nonatomic, readonly, strong) NSTimer *checkTimer;
-	-(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
-	-(void)searchArticlesWithString:(NSString *)searchString;
-	-(IBAction)cancelAllRefreshesToolbar:(id)sender;
-@end
-
 @interface AppController () <ActivityPanelDelegate>
+
+-(void)installSleepHandler;
+-(void)installScriptsFolderWatcher;
+-(void)handleTabChange:(NSNotification *)nc;
+-(void)handleFolderSelection:(NSNotification *)nc;
+-(void)handleCheckFrequencyChange:(NSNotification *)nc;
+-(void)handleFolderNameChange:(NSNotification *)nc;
+-(void)handleDidBecomeKeyWindow:(NSNotification *)nc;
+-(void)handleReloadPreferences:(NSNotification *)nc;
+-(void)handleShowAppInStatusBar:(NSNotification *)nc;
+-(void)handleShowStatusBar:(NSNotification *)nc;
+-(void)handleShowFilterBar:(NSNotification *)nc;
+-(void)setAppStatusBarIcon;
+-(void)updateNewArticlesNotification;
+-(void)showAppInStatusBar;
+-(void)initSortMenu;
+-(void)initColumnsMenu;
+-(void)initScriptsMenu;
+-(void)initFiltersMenu;
+@property (nonatomic, getter=getStylesMenu, readonly, copy) NSMenu *stylesMenu;
+-(void)startProgressIndicator;
+-(void)stopProgressIndicator;
+-(void)doEditFolder:(Folder *)folder;
+-(void)refreshOnTimer:(NSTimer *)aTimer;
+-(BOOL)installFilename:(NSString *)srcFile toPath:(NSString *)path;
+-(void)setStatusBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
+-(void)setFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
+-(void)setPersistedFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
+-(void)runAppleScript:(NSString *)scriptName;
+@property (nonatomic, readonly, copy) NSString *appName;
+-(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url body:(NSString *)body author:(NSString *)author guid:(NSString *)guid;
+-(void)setLayout:(NSInteger)newLayout withRefresh:(BOOL)refreshFlag;
+-(void)updateAlternateMenuTitle;
+-(void)updateSearchPlaceholderAndSearchMethod;
+-(void)toggleOptionKeyButtonStates;
+-(void)updateCloseCommands;
+@property (nonatomic, getter=isFilterBarVisible, readonly) BOOL filterBarVisible;
+@property (nonatomic, getter=isStatusBarVisible, readonly) BOOL statusBarVisible;
+@property (nonatomic, readonly, strong) NSTimer *checkTimer;
+-(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
+-(IBAction)cancelAllRefreshesToolbar:(id)sender;
 
 @property (nonatomic) IBOutlet ActivityPanelController *activityPanelController;
 @property (nonatomic) DirectoryMonitor *directoryMonitor;

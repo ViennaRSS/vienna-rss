@@ -25,11 +25,12 @@
 #import "Constants.h"
 #import "Preferences.h"
 
-// Private functions
-@interface DownloadManager (Private)
-	-(void)archiveDownloadsList;
-	-(void)unarchiveDownloadsList;
-	-(void)notifyDownloadItemChange:(DownloadItem *)item;
+@interface DownloadManager ()
+
+-(void)archiveDownloadsList;
+-(void)unarchiveDownloadsList;
+-(void)notifyDownloadItemChange:(DownloadItem *)item;
+
 @end
 
 @implementation DownloadItem

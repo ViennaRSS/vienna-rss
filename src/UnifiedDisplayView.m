@@ -41,16 +41,14 @@
 #define XPOS_IN_CELL	6.0
 #define YPOS_IN_CELL	2.0
 
-// Private functions
-@interface UnifiedDisplayView (Private)
-	-(void)initTableView;
-	-(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
-	-(void)selectArticleAfterReload;
-	-(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
-	-(BOOL)viewNextUnreadInCurrentFolder:(NSInteger)currentRow;
-	-(void)markCurrentRead:(NSTimer *)aTimer;
-	-(void)makeRowSelectedAndVisible:(NSInteger)rowIndex;
-	-(void)printDocument;
+@interface UnifiedDisplayView ()
+
+-(void)initTableView;
+-(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
+-(BOOL)viewNextUnreadInCurrentFolder:(NSInteger)currentRow;
+-(void)markCurrentRead:(NSTimer *)aTimer;
+-(void)makeRowSelectedAndVisible:(NSInteger)rowIndex;
+
 @end
 
 @implementation UnifiedDisplayView

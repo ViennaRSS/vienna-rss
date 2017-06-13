@@ -30,12 +30,14 @@
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
 @end
 
-@interface TabbedWebView (Private)
-	+(NSArray *)acceptedSchemes;
-	+(NSArray *)downloadableExtensions;
-	-(BOOL)isDownloadFileType:(NSURL *)filename;
-	-(void)loadMinimumFontSize;
-	-(void)handleMinimumFontSizeChange:(NSNotification *)nc;
+@interface TabbedWebView ()
+
++(NSArray *)acceptedSchemes;
++(NSArray *)downloadableExtensions;
+-(BOOL)isDownloadFileType:(NSURL *)filename;
+-(void)loadMinimumFontSize;
+-(void)handleMinimumFontSizeChange:(NSNotification *)nc;
+
 @end
 
 static NSString * _userAgent ;

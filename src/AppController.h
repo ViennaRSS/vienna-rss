@@ -96,6 +96,7 @@
 
 @property (nonatomic, strong) NewSubscription *rssFeed;
 @property (readonly, weak) FoldersTree *foldersTree;
+@property (readonly, copy, nonatomic) NSMenu *searchFieldMenu;
 
 // Menu action items
 -(IBAction)reindexDatabase:(id)sender;
@@ -204,4 +205,6 @@
 -(void)performWebSearch:(SearchMethod *)searchMethod;
 -(void)performAllArticlesSearch;
 -(void)performWebPageSearch;
+-(void)searchArticlesWithString:(NSString *)searchString;
+
 @end

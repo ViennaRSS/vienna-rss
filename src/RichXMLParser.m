@@ -23,22 +23,22 @@
 #import "FeedItem.h"
 #import "NSDate+Vienna.h"
 
-@interface RichXMLParser (Private)
-    -(BOOL)initRSSFeed:(NSXMLElement *)rssElement isRDF:(BOOL)isRDF;
-    -(NSXMLElement *)channelElementFromRSSElement:(NSXMLElement *)rssElement;
-    -(BOOL)initRSSFeedHeaderWithElement:(NSXMLElement *)channelElement;
-    -(BOOL)initRSSFeedItems:(NSXMLElement *)startElement;
-    -(BOOL)initAtomFeed:(NSXMLElement *)atomElement;
-    -(void)parseSequence:(NSXMLElement *)seqElement;
-    -(void)setTitle:(NSString *)newTitle;
-    -(void)setLink:(NSString *)newLink;
-    -(void)setDescription:(NSString *)newDescription;
-    -(void)setLastModified:(NSDate *)newDate;
-    -(void)ensureTitle:(FeedItem *)item;
-    -(void)identifyNamespacesPrefixes:(NSXMLElement *)element;
+@interface RichXMLParser ()
+
+-(BOOL)initRSSFeed:(NSXMLElement *)rssElement isRDF:(BOOL)isRDF;
+-(NSXMLElement *)channelElementFromRSSElement:(NSXMLElement *)rssElement;
+-(BOOL)initRSSFeedHeaderWithElement:(NSXMLElement *)channelElement;
+-(BOOL)initRSSFeedItems:(NSXMLElement *)startElement;
+-(BOOL)initAtomFeed:(NSXMLElement *)atomElement;
+-(void)parseSequence:(NSXMLElement *)seqElement;
+-(void)setTitle:(NSString *)newTitle;
+-(void)setLink:(NSString *)newLink;
+-(void)setDescription:(NSString *)newDescription;
+-(void)setLastModified:(NSDate *)newDate;
+-(void)ensureTitle:(FeedItem *)item;
+-(void)identifyNamespacesPrefixes:(NSXMLElement *)element;
+
 @end
-
-
 
 @implementation RichXMLParser
 

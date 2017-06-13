@@ -34,13 +34,14 @@
 #import "Folder.h"
 #import "BackTrackArray.h"
 
-// Private functions
-@interface ArticleController (Private)
-	-(NSArray *)applyFilter:(NSArray *)unfilteredArray;
-	-(void)setSortColumnIdentifier:(NSString *)str;
-	-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag;
-	-(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
-	-(void)innerMarkFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged;
+@interface ArticleController ()
+
+-(NSArray *)applyFilter:(NSArray *)unfilteredArray;
+-(void)setSortColumnIdentifier:(NSString *)str;
+-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag;
+-(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
+-(void)innerMarkFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged;
+
 @end
 
 @implementation ArticleController

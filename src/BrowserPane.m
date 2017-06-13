@@ -62,10 +62,12 @@
 } 
 @end
 
-@interface BrowserPane (Private)
-	-(void)endFrameLoad;
-	-(void)showRssPageButton:(BOOL)showButton;
-	-(void)setError:(NSError *)newError;
+@interface BrowserPane ()
+
+-(void)endFrameLoad;
+-(void)showRssPageButton:(BOOL)showButton;
+-(void)setError:(NSError *)newError;
+
 @end
 
 @implementation BrowserPane

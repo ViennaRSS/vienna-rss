@@ -41,17 +41,19 @@
 #define MA_SFEdit_RemoveTag			1007
 #define MA_SFEdit_FolderValueTag	1008
 
-@interface SmartFolder (Private)
-	-(void)initFolderValueField:(NSInteger)parentId atIndent:(NSInteger)indentation;
-	-(void)initSearchSheet:(NSString *)folderName;
-	-(void)displaySearchSheet:(NSWindow *)window;
-	-(void)initForField:(NSString *)fieldName inRow:(NSView *)row;
-	-(void)setOperatorsPopup:(NSPopUpButton *)popUpButton, ...;
-	-(void)addCriteria:(NSUInteger)index;
-	-(void)addDefaultCriteria:(NSInteger)index;
-	-(void)removeCriteria:(NSInteger)index;
-	-(void)removeAllCriteria;
-	-(void)resizeSearchWindow;
+@interface SmartFolder ()
+
+-(void)initFolderValueField:(NSInteger)parentId atIndent:(NSInteger)indentation;
+-(void)initSearchSheet:(NSString *)folderName;
+-(void)displaySearchSheet:(NSWindow *)window;
+-(void)initForField:(NSString *)fieldName inRow:(NSView *)row;
+-(void)setOperatorsPopup:(NSPopUpButton *)popUpButton, ...;
+-(void)addCriteria:(NSUInteger)index;
+-(void)addDefaultCriteria:(NSInteger)index;
+-(void)removeCriteria:(NSInteger)index;
+-(void)removeAllCriteria;
+-(void)resizeSearchWindow;
+
 @end
 
 @implementation SmartFolder

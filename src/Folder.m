@@ -30,14 +30,13 @@
 #import "Database.h"
 #import "Article.h"
 
-// Private internal functions
-@interface Folder (Private)
-	+(NSArray<NSImage *> *)_iconArray;
-@end
-
 @interface Folder ()
-	@property (nonatomic, strong) NSCache * cachedArticles;
-	@property (nonatomic, strong) NSMutableArray * cachedGuids;
+
+@property (nonatomic, strong) NSCache * cachedArticles;
+@property (nonatomic, strong) NSMutableArray * cachedGuids;
+
++(NSArray<NSImage *> *)_iconArray;
+
 @end
 
 // Static pointers
