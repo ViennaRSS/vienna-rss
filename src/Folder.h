@@ -39,9 +39,6 @@ typedef NS_ENUM(NSInteger, VNAFolderType) {
     VNAFolderTypeOpenReader = 7
 };
 
-// Macros to simplify getting folder types
-#define IsSameFolderType(f,g)	(([(f) type]) == ([(g) type]))
-
 // Folder flags
 // (These must be bitmask values!)
 //   MA_FFlag_CheckForImage = asks the refresh code to update the folder image
