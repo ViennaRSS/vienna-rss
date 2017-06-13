@@ -91,8 +91,8 @@ typedef NS_ENUM(NSInteger, VNAFolderType) {
 @property (nonatomic, copy) NSString *lastUpdateString;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *password;
--(NSArray *)articles;
--(NSArray *)articlesWithFilter:(NSString *)fstring;
+-(NSArray<Article *> *)articles;
+-(NSArray<Article *> *)articlesWithFilter:(NSString *)filterString;
 @property (nonatomic, readonly) NSInteger parentId;
 @property (nonatomic, readonly) NSInteger itemId;
 @property (nonatomic) NSInteger nextSiblingId;

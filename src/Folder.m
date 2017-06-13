@@ -671,7 +671,7 @@ static NSArray * iconArray = nil;
 /* articles
  * Return an array of all articles in the specified folder.
  */
--(NSArray *)articles
+-(NSArray<Article *> *)articles
 {
     return [self articlesWithFilter:@""];
 }
@@ -731,19 +731,18 @@ static NSArray * iconArray = nil;
   } // synchronized
 }
 
-/* articlesWithFilter
- * Return an array of filtered articles in the specified folder.
+/*! Get an array of filtered articles in the current
+ * @return Array of filtered articles in the current
  */
--(NSArray *)articlesWithFilter:(NSString *)fstring
+-(NSArray<Article *> *)articlesWithFilter:(NSString *)filterString
 {
-	if ([fstring isEqualToString:@""])
+	if ([filterString isEqualToString:@""])
 	{
-		if (IsGroupFolder(self))
-		{
+		if (self.type == VNAFolderTypeGroup) {
 			NSMutableArray * articles = [NSMutableArray array];
 			NSArray * subFolders = [[Database sharedManager] arrayOfFolders:itemId];
 			for (Folder * folder in subFolders) {
-                [articles addObjectsFromArray:[folder articlesWithFilter:fstring]];
+                [articles addObjectsFromArray:[folder articlesWithFilter:filterString]];
 			}
 			return [articles copy];
 		}
@@ -755,8 +754,9 @@ static NSArray * iconArray = nil;
                 for (id object in self.cachedGuids)
                 {
                     Article * theArticle = [self.cachedArticles objectForKey:object];
-                    if (theArticle != nil)
+                    if (theArticle != nil) {
                         [articles addObject:theArticle];
+                    }
                     else
                     {   // some problem
                         NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
@@ -770,11 +770,10 @@ static NSArray * iconArray = nil;
             }
             else
             {
-                NSArray * articles = [[Database sharedManager] arrayOfArticles:itemId filterString:fstring];
+                NSArray * articles = [[Database sharedManager] arrayOfArticles:itemId filterString:filterString];
                 // Only feeds folders can be cached, as they are the only ones to guarantee
                 // bijection : one article <-> one guid
-                if (IsRSSFolder(self) || IsGoogleReaderFolder(self))
-                {
+                if (self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader) {
                     isCached = NO;
                     containsBodies = NO;
                     [self.cachedArticles removeAllObjects];
@@ -792,8 +791,9 @@ static NSArray * iconArray = nil;
             }
         } // synchronized
 	}
-	else
-	    return [[Database sharedManager] arrayOfArticles:itemId filterString:fstring];
+    else {
+	    return [[Database sharedManager] arrayOfArticles:itemId filterString:filterString];
+    }
 }
 
 /* folderNameCompare
