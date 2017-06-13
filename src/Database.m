@@ -32,9 +32,10 @@
 #import "Field.h"
 #import "Criteria.h"
 
-// Private scope flags
-#define MA_Scope_Inclusive        1
-#define MA_Scope_SubFolders        2
+typedef NS_ENUM(NSInteger, VNAQueryScope) {
+    VNAQueryScopeInclusive = 1,
+    VNAQueryScopeSubFolders = 2
+};
 
 @interface Database ()
 
@@ -1961,9 +1962,9 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(NSString *)sqlScopeForFolder:(Folder *)folder flags:(NSInteger)scopeFlags
 {
 	Field * field = [self fieldByName:MA_Field_Folder];
-    NSString * operatorString = (scopeFlags & MA_Scope_Inclusive) ? @"=" : @"<>";
-    NSString * conditionString = (scopeFlags & MA_Scope_Inclusive) ? @" or " : @" and ";
-    BOOL subScope = (scopeFlags & MA_Scope_SubFolders) ? YES : NO; // Avoid problems casting into BOOL.
+	NSString * operatorString = (scopeFlags & VNAQueryScopeInclusive) ? @"=" : @"<>";
+	NSString * conditionString = (scopeFlags & VNAQueryScopeInclusive) ? @" or " : @" and ";
+	BOOL subScope = (scopeFlags & VNAQueryScopeSubFolders) ? YES : NO; // Avoid problems casting into BOOL.
 	NSInteger folderId;
 
 	// If folder is nil, rather than report an error, default to some impossible value
@@ -2067,9 +2068,9 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 
 				switch (criteria.operator)
 				{
-                    case MA_CritOper_Under:        scopeFlags = MA_Scope_SubFolders|MA_Scope_Inclusive; break;
-                    case MA_CritOper_NotUnder:    scopeFlags = MA_Scope_SubFolders; break;
-                    case MA_CritOper_Is:        scopeFlags = MA_Scope_Inclusive; break;
+					case MA_CritOper_Under:		scopeFlags = VNAQueryScopeSubFolders|VNAQueryScopeInclusive; break;
+					case MA_CritOper_NotUnder:	scopeFlags = VNAQueryScopeSubFolders; break;
+					case MA_CritOper_Is:		scopeFlags = VNAQueryScopeInclusive; break;
 					case MA_CritOper_IsNot:		scopeFlags = 0; break;
 					default:					NSAssert(false, @"Invalid operator for folder field type");
 				}
