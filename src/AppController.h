@@ -72,7 +72,6 @@
 	NewGroupFolder * groupFolder;
 	EmptyTrashWarning * emptyTrashWarning;
 	SearchPanel * searchPanel;
-	NSMutableArray * sourceWindows;
 	
 	Database * db;
 	PluginManager * pluginManager;
@@ -118,7 +117,6 @@
 -(IBAction)newSubscription:(id)sender;
 -(IBAction)newGroupFolder:(id)sender;
 -(IBAction)editFolder:(id)sender;
--(IBAction)showXMLSource:(id)sender;
 -(IBAction)showViennaHomePage:(id)sender;
 -(IBAction)viewArticlePages:(id)sender;
 -(IBAction)viewArticlePagesInAlternateBrowser:(id)sender;

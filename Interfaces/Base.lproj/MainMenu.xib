@@ -997,12 +997,6 @@ CA
                                     <action selector="viewSourceHomePageInAlternateBrowser:" target="233" id="1194"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Show XML Source" id="1394">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="showXMLSource:" target="233" id="1396"/>
-                                </connections>
-                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>

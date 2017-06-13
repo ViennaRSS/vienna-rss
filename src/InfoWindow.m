@@ -25,10 +25,15 @@
 #import "AppController.h"
 #import "Folder.h"
 
-@interface InfoWindow (private)
-	-(instancetype)initWithFolder:(NSInteger)folderId;
-	-(void)enableValidateButton;
-	-(void)updateFolder;
+@interface InfoWindow ()
+
+@property (weak, nonatomic) IBOutlet NSButton *openCachedFileButton;
+@property (nonatomic) NSString *cachedFile;
+
+-(instancetype)initWithFolder:(NSInteger)folderId;
+-(void)enableValidateButton;
+-(void)updateFolder;
+
 @end
 
 @implementation InfoWindowManager
@@ -141,8 +146,12 @@
  */
 -(instancetype)initWithFolder:(NSInteger)folderId
 {
-	if ((self = [super initWithWindowNibName:@"InfoWindow"]) != nil)
+    if (self = [super initWithWindowNibName:@"InfoWindow"]) {
 		infoFolderId = folderId;
+
+        Database *database = [Database sharedManager];
+        _cachedFile = [database folderFromID:infoFolderId].feedSourceFilePath;
+    }
 
 	return self;
 }
@@ -168,6 +177,11 @@
 	[nc addObserver:self selector:@selector(handleUrlTextDidChange:) name:NSControlTextDidChangeNotification object:urlField];
 	[nc addObserver:self selector:@selector(handleFolderNameTextDidChange:) name:NSControlTextDidChangeNotification object:folderName];
 	[folderName setEditable:YES];
+
+    // Check if the source file exists. If not, disable the button.
+    NSFileManager *fileManager = NSFileManager.defaultManager;
+    self.openCachedFileButton.enabled = [fileManager fileExistsAtPath:self.cachedFile
+                                                          isDirectory:NO];
 }
 
 /* updateFolder
@@ -330,5 +344,12 @@
 	return YES;
 }
 
+/*
+ Opens the cached file of the feed using the default application associated
+ with its type.
+ */
+- (IBAction)openCachedFile:(id)sender {
+    [[NSWorkspace sharedWorkspace] openFile:self.cachedFile];
+}
 
 @end

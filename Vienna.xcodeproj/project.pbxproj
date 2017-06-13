@@ -128,7 +128,6 @@
 		435028B7165DE9E00018EDB7 /* UnifiedDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350288E165DE9DF0018EDB7 /* UnifiedDisplayView.m */; };
 		435028B8165DE9E00018EDB7 /* URLHandlerCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502890165DE9DF0018EDB7 /* URLHandlerCommand.m */; };
 		435028B9165DE9E00018EDB7 /* ViennaApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502892165DE9DF0018EDB7 /* ViennaApp.m */; };
-		435028BA165DE9E00018EDB7 /* XMLSourceWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502894165DE9DF0018EDB7 /* XMLSourceWindow.m */; };
 		43BA97FE1664804E00B95F35 /* DSClickableURLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */; };
 		4D36B44B1D37F91E009736C1 /* ArticleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D36B44A1D37F91E009736C1 /* ArticleTests.m */; };
 		4D36B44D1D37FCC2009736C1 /* StringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF3B14106095E7B0025CC7F /* StringExtensions.m */; };
@@ -307,12 +306,6 @@
 		B25E53E11067B54600BBF14C /* browserNextButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DB1067B54600BBF14C /* browserNextButton.tiff */; };
 		B25E53E31067B54600BBF14C /* browserRefreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */; };
 		B25E53E51067B54600BBF14C /* browserPreviousButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DF1067B54600BBF14C /* browserPreviousButton.tiff */; };
-		B262610810A033D700E76A37 /* shCore.css in Resources */ = {isa = PBXBuildFile; fileRef = B262610210A033D700E76A37 /* shCore.css */; };
-		B262610B10A033D700E76A37 /* shThemeDefault.css in Resources */ = {isa = PBXBuildFile; fileRef = B262610510A033D700E76A37 /* shThemeDefault.css */; };
-		B262610C10A033D700E76A37 /* XMLSyntaxHighlighter.html in Resources */ = {isa = PBXBuildFile; fileRef = B262610610A033D700E76A37 /* XMLSyntaxHighlighter.html */; };
-		B262612A10A034C500E76A37 /* shBrushXml.js in Resources */ = {isa = PBXBuildFile; fileRef = B262610110A033D700E76A37 /* shBrushXml.js */; };
-		B262612B10A034C500E76A37 /* shCore.js in Resources */ = {isa = PBXBuildFile; fileRef = B262610310A033D700E76A37 /* shCore.js */; };
-		B262612C10A034C500E76A37 /* shLegacy.js in Resources */ = {isa = PBXBuildFile; fileRef = B262610410A033D700E76A37 /* shLegacy.js */; };
 		B273E8EC106910B2001ADEF8 /* errorpagebg.png in Resources */ = {isa = PBXBuildFile; fileRef = B273E8EB106910B2001ADEF8 /* errorpagebg.png */; };
 		B27656081067BA4F00A43AB2 /* browserRSSButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B27656071067BA4F00A43AB2 /* browserRSSButton.tiff */; };
 		B27CD00C1100E728001F3C83 /* Plugins in Copy Shared Support Files */ = {isa = PBXBuildFile; fileRef = B27CCFFD1100E728001F3C83 /* Plugins */; };
@@ -339,7 +332,6 @@
 		F62580E11E286CDE0035E43C /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = F62580DF1E286CDE0035E43C /* errorpage.html */; };
 		F62580E41E286CE60035E43C /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = F62580E21E286CE60035E43C /* KnownSyncServers.plist */; };
 		F62580E71E286CEC0035E43C /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = F62580E51E286CEC0035E43C /* RSSSources.plist */; };
-		F62581431E29B9040035E43C /* XMLSource.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581421E29B9040035E43C /* XMLSource.xib */; };
 		F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581441E29B90A0035E43C /* SearchPanel.xib */; };
 		F62581591E29BEB90035E43C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625815B1E29BEB90035E43C /* MainMenu.xib */; };
 		F628DFE31ED2698A00FACFD3 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F628DFE21ED2698A00FACFD3 /* FilterView.swift */; };
@@ -589,8 +581,6 @@
 		43502890165DE9DF0018EDB7 /* URLHandlerCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = URLHandlerCommand.m; path = src/URLHandlerCommand.m; sourceTree = SOURCE_ROOT; };
 		43502891165DE9DF0018EDB7 /* ViennaApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViennaApp.h; path = src/ViennaApp.h; sourceTree = SOURCE_ROOT; };
 		43502892165DE9DF0018EDB7 /* ViennaApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViennaApp.m; path = src/ViennaApp.m; sourceTree = SOURCE_ROOT; };
-		43502893165DE9DF0018EDB7 /* XMLSourceWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLSourceWindow.h; path = src/XMLSourceWindow.h; sourceTree = SOURCE_ROOT; };
-		43502894165DE9DF0018EDB7 /* XMLSourceWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLSourceWindow.m; path = src/XMLSourceWindow.m; sourceTree = SOURCE_ROOT; };
 		439824191666B37000FFE219 /* autorevision.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = autorevision.sh; path = configs/scripts/autorevision.sh; sourceTree = SOURCE_ROOT; };
 		4398241A1666B37000FFE219 /* Changes-and-Notes.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Changes-and-Notes.sh"; path = "configs/scripts/Changes-and-Notes.sh"; sourceTree = SOURCE_ROOT; };
 		4398241B1666B37000FFE219 /* Make-ID-Template.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Make-ID-Template.sh"; path = "configs/scripts/Make-ID-Template.sh"; sourceTree = SOURCE_ROOT; };
@@ -797,12 +787,6 @@
 		B25E53DB1067B54600BBF14C /* browserNextButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = browserNextButton.tiff; path = Resources/browserNextButton.tiff; sourceTree = SOURCE_ROOT; };
 		B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = browserRefreshButton.tiff; path = Resources/browserRefreshButton.tiff; sourceTree = SOURCE_ROOT; };
 		B25E53DF1067B54600BBF14C /* browserPreviousButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = browserPreviousButton.tiff; path = Resources/browserPreviousButton.tiff; sourceTree = SOURCE_ROOT; };
-		B262610110A033D700E76A37 /* shBrushXml.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = shBrushXml.js; path = SyntaxHighlighter/shBrushXml.js; sourceTree = SOURCE_ROOT; };
-		B262610210A033D700E76A37 /* shCore.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = shCore.css; path = SyntaxHighlighter/shCore.css; sourceTree = SOURCE_ROOT; };
-		B262610310A033D700E76A37 /* shCore.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = shCore.js; path = SyntaxHighlighter/shCore.js; sourceTree = SOURCE_ROOT; };
-		B262610410A033D700E76A37 /* shLegacy.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = shLegacy.js; path = SyntaxHighlighter/shLegacy.js; sourceTree = SOURCE_ROOT; };
-		B262610510A033D700E76A37 /* shThemeDefault.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = shThemeDefault.css; path = SyntaxHighlighter/shThemeDefault.css; sourceTree = SOURCE_ROOT; };
-		B262610610A033D700E76A37 /* XMLSyntaxHighlighter.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = XMLSyntaxHighlighter.html; path = SyntaxHighlighter/XMLSyntaxHighlighter.html; sourceTree = SOURCE_ROOT; };
 		B273E8EB106910B2001ADEF8 /* errorpagebg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = errorpagebg.png; path = Resources/errorpagebg.png; sourceTree = SOURCE_ROOT; };
 		B27656071067BA4F00A43AB2 /* browserRSSButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = browserRSSButton.tiff; path = Resources/browserRSSButton.tiff; sourceTree = SOURCE_ROOT; };
 		B27CCFFD1100E728001F3C83 /* Plugins */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Plugins; path = SharedSupport/Plugins; sourceTree = SOURCE_ROOT; };
@@ -955,7 +939,6 @@
 		F62581121E286D990035E43C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = Interfaces/fr.lproj/errorpage.html; sourceTree = "<group>"; };
 		F62581161E286DA60035E43C /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = nl; path = Interfaces/nl.lproj/errorpage.html; sourceTree = "<group>"; };
 		F625811F1E286E390035E43C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = Interfaces/ru.lproj/errorpage.html; sourceTree = "<group>"; };
-		F62581421E29B9040035E43C /* XMLSource.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XMLSource.xib; path = Interfaces/XMLSource.xib; sourceTree = "<group>"; };
 		F62581441E29B90A0035E43C /* SearchPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchPanel.xib; path = Interfaces/SearchPanel.xib; sourceTree = "<group>"; };
 		F625815A1E29BEB90035E43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		F628DFE21ED2698A00FACFD3 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterView.swift; path = src/FilterView.swift; sourceTree = "<group>"; };
@@ -1483,8 +1466,6 @@
 				43502892165DE9DF0018EDB7 /* ViennaApp.m */,
 				3AF896C51CD8FDB800A9FA22 /* ViennaSparkleDelegate.h */,
 				3AF896C61CD8FDB800A9FA22 /* ViennaSparkleDelegate.m */,
-				43502893165DE9DF0018EDB7 /* XMLSourceWindow.h */,
-				43502894165DE9DF0018EDB7 /* XMLSourceWindow.m */,
 				43502845165DE9560018EDB7 /* RenameFolder.h */,
 				43502846165DE9560018EDB7 /* RenameFolder.m */,
 			);
@@ -1495,7 +1476,6 @@
 			isa = PBXGroup;
 			children = (
 				43EE7547165E8109000997FB /* Applescript */,
-				B262610010A033D700E76A37 /* SyntaxHighlighter */,
 				B262610E10A033F700E76A37 /* ErrorPage */,
 				AA1A282E0C09BE59005968DC /* Toolbar Buttons */,
 				43EE7546165E80D4000997FB /* Public Keys */,
@@ -1601,7 +1581,6 @@
 				F6D572B91E26AAA100CDA909 /* RSSFeed.xib */,
 				F6D572BC1E26AAA900CDA909 /* SearchFolder.xib */,
 				F6D572B61E26AA9900CDA909 /* InfoWindow.xib */,
-				F62581421E29B9040035E43C /* XMLSource.xib */,
 				F625801E1E2853B90035E43C /* ActivityViewer.xib */,
 				F6257FF71E28485F0035E43C /* Downloads.xib */,
 				034981351A206E3C00014F29 /* Preferences */,
@@ -1971,19 +1950,6 @@
 			name = "Support Classes";
 			sourceTree = SOURCE_ROOT;
 		};
-		B262610010A033D700E76A37 /* SyntaxHighlighter */ = {
-			isa = PBXGroup;
-			children = (
-				B262610110A033D700E76A37 /* shBrushXml.js */,
-				B262610210A033D700E76A37 /* shCore.css */,
-				B262610310A033D700E76A37 /* shCore.js */,
-				B262610410A033D700E76A37 /* shLegacy.js */,
-				B262610510A033D700E76A37 /* shThemeDefault.css */,
-				B262610610A033D700E76A37 /* XMLSyntaxHighlighter.html */,
-			);
-			path = SyntaxHighlighter;
-			sourceTree = "<group>";
-		};
 		B262610E10A033F700E76A37 /* ErrorPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -2202,14 +2168,8 @@
 				AA26F44D060490BE00FE7994 /* flagged_header.tiff in Resources */,
 				AA26F44E060490BE00FE7994 /* flagged.tiff in Resources */,
 				AA26F450060490BE00FE7994 /* greyRightArrow.tiff in Resources */,
-				B262612A10A034C500E76A37 /* shBrushXml.js in Resources */,
-				B262610810A033D700E76A37 /* shCore.css in Resources */,
 				F6D572B71E26AAA100CDA909 /* RSSFeed.xib in Resources */,
 				F62580AA1E286A8C0035E43C /* Localizable.strings in Resources */,
-				B262612B10A034C500E76A37 /* shCore.js in Resources */,
-				B262612C10A034C500E76A37 /* shLegacy.js in Resources */,
-				B262610B10A033D700E76A37 /* shThemeDefault.css in Resources */,
-				B262610C10A033D700E76A37 /* XMLSyntaxHighlighter.html in Resources */,
 				AA26F453060490BE00FE7994 /* smallFolder.tiff in Resources */,
 				AA26F454060490BE00FE7994 /* unread_header.tiff in Resources */,
 				AAB90EFD061D059D00CA4741 /* searchFolder.tiff in Resources */,
@@ -2301,7 +2261,6 @@
 				AA077AA90C84484B00D71D26 /* stylesMenuButtonSmall.tiff in Resources */,
 				AA077AAA0C84484B00D71D26 /* stylesMenuButtonSmallPressed.tiff in Resources */,
 				AA077AAB0C84484B00D71D26 /* subscribeButtonSmall.tiff in Resources */,
-				F62581431E29B9040035E43C /* XMLSource.xib in Resources */,
 				AA077AAC0C84484B00D71D26 /* subscribeButtonSmallPressed.tiff in Resources */,
 				B25E53E11067B54600BBF14C /* browserNextButton.tiff in Resources */,
 				B25E53E31067B54600BBF14C /* browserRefreshButton.tiff in Resources */,
@@ -2686,7 +2645,6 @@
 				435028B7165DE9E00018EDB7 /* UnifiedDisplayView.m in Sources */,
 				435028B8165DE9E00018EDB7 /* URLHandlerCommand.m in Sources */,
 				435028B9165DE9E00018EDB7 /* ViennaApp.m in Sources */,
-				435028BA165DE9E00018EDB7 /* XMLSourceWindow.m in Sources */,
 				3A7BD0DD1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m in Sources */,
 				43BA97FE1664804E00B95F35 /* DSClickableURLTextField.m in Sources */,
 				F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */,

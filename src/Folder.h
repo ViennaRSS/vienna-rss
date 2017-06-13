@@ -126,5 +126,4 @@
 -(NSComparisonResult)folderNameCompare:(Folder *)otherObject;
 -(NSComparisonResult)folderIDCompare:(Folder *)otherObject;
 @property (nonatomic, readonly, copy) NSString *feedSourceFilePath;
-@property (nonatomic, readonly) BOOL hasFeedSource;
 @end
