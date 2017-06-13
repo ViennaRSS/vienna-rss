@@ -5,8 +5,7 @@
 //  Created by Evan Schoenberg on 6/2/07.
 //
 
-#import <Cocoa/Cocoa.h>
-
+@import Cocoa;
 
 @interface ClickableProgressIndicator : NSProgressIndicator {
 	id target;

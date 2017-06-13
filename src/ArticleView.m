@@ -26,6 +26,7 @@
 #import "StringExtensions.h"
 #import <WebKit/WebKit.h>
 #import "BrowserView.h"
+#import "Article.h"
 
 @interface ArticleView (Private)
 	-(BOOL)initForStyle:(NSString *)styleName;

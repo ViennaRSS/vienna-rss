@@ -19,6 +19,7 @@
 //
 
 #import "Folder.h"
+
 #import "AppController.h"
 #import "Constants.h"
 #import "KeyChain.h"
@@ -26,6 +27,8 @@
 #import "StringExtensions.h"
 #import "Preferences.h"
 #import "ArticleRef.h"
+#import "Database.h"
+#import "Article.h"
 
 // Private internal functions
 @interface Folder (Private)

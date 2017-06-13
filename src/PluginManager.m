@@ -27,6 +27,9 @@
 #import "BrowserPane.h"
 #import "BitlyAPIHelper.h"
 #import "SearchMethod.h"
+#import "ToolbarButton.h"
+#import "ToolbarItem.h"
+#import "BrowserView.h"
 
 @interface PluginManager (Private)
 	-(void)installPlugin:(NSDictionary *)onePlugin;

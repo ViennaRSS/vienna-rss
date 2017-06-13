@@ -19,12 +19,15 @@
 //
 
 #import "Export.h"
+
+#import "Folder.h"
 #import "FoldersTree.h"
 #import "StringExtensions.h"
-#import "BJRWindowWithToolbar.h"
 
-@interface Export()
+@interface Export ()
+
 + (NSXMLDocument *)opmlDocumentFromFolders:(NSArray *)folders inFoldersTree:(FoldersTree *)foldersTree withGroups:(BOOL)groupFlag exportCount:(NSInteger *)countExported;
+
 @end
 
 @implementation Export

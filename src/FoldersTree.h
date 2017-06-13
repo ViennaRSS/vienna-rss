@@ -18,30 +18,10 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "TreeNode.h"
+@import Cocoa;
 
-@class FolderView;
-@class PopupButton;
-@class AppController;
-@class Database;
+@interface FoldersTree : NSView
 
-@interface FoldersTree : NSView <NSOutlineViewDataSource>
-{
-	IBOutlet AppController * controller;
-	IBOutlet FolderView * outlineView;
-
-	TreeNode * rootNode;
-	NSFont * cellFont;
-	NSFont * boldCellFont;
-	NSImage * folderErrorImage;
-	NSImage * refreshProgressImage;
-	BOOL blockSelectionHandler;
-	BOOL canRenameFolders;
-    
-}
-
-// Public functions
 -(void)initialiseFoldersTree;
 -(void)saveFolderSettings;
 -(void)updateAlternateMenuTitle;
@@ -60,4 +40,5 @@
 @property (nonatomic, readonly, strong) NSView *mainView;
 -(void)outlineViewWillBecomeFirstResponder;
 -(void)setSearch:(NSString *)string;
+
 @end

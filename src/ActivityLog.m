@@ -20,7 +20,9 @@
 
 #import "ActivityLog.h"
 
+#import "ActivityItem.h"
 #import "Database.h"
+#import "Folder.h"
 
 @interface ActivityLog ()
 

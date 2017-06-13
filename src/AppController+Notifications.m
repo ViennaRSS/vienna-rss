@@ -19,8 +19,8 @@
 
 #import "AppController+Notifications.h"
 
-#import "Constants.h"
-#import "FoldersTree.h"
+#import "Database.h"
+#import "Folder.h"
 
 @implementation AppController (Notifications)
 
@@ -38,9 +38,9 @@ NSString *const UserNotificationContextFileDownloadFailed = @"User Notification 
 - (void)userNotificationCenter:(NSUserNotificationCenter *)center
        didActivateNotification:(NSUserNotification *)notification {
     NSDictionary<NSString *, NSString *> *userInfo = notification.userInfo;
-    if ([userInfo[UserNotificationContextKey] isEqual: UserNotificationContextFetchCompleted]) {
+    if ([userInfo[UserNotificationContextKey] isEqual:UserNotificationContextFetchCompleted]) {
         [self openWindowAndShowUnreadArticles];
-    } else if ([userInfo[UserNotificationContextKey] isEqual: UserNotificationContextFileDownloadCompleted]) {
+    } else if ([userInfo[UserNotificationContextKey] isEqual:UserNotificationContextFileDownloadCompleted]) {
         [self showFileInFinderAtPath:userInfo[UserNotificationFilePathKey]];
     }
 }
@@ -57,7 +57,7 @@ NSString *const UserNotificationContextFileDownloadFailed = @"User Notification 
 
     Folder *unreadArticles = [db folderFromName:NSLocalizedString(@"Unread Articles", nil)];
     if (unreadArticles) {
-        [self.foldersTree selectFolder:unreadArticles.itemId];
+        [self selectFolder:unreadArticles.itemId];
     }
 }
 
@@ -65,7 +65,8 @@ NSString *const UserNotificationContextFileDownloadFailed = @"User Notification 
  Show the file in Finder on success, otherwise do nothing.
  */
 - (void)showFileInFinderAtPath:(NSString *)filePath {
-    [[NSWorkspace sharedWorkspace] selectFile:filePath inFileViewerRootedAtPath:@""];
+    [[NSWorkspace sharedWorkspace] selectFile:filePath
+                     inFileViewerRootedAtPath:@""];
 }
 
 @end

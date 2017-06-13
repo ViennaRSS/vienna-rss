@@ -17,8 +17,9 @@
 //  See the License for the specific language governing permissions and
 // 
 
-#import <Cocoa/Cocoa.h>
-
+@import Cocoa;
+@import WebKit;
+@import SystemConfiguration;
 
 #define kLeftArrow 0x7B
 #define kRightArrow 0x7C

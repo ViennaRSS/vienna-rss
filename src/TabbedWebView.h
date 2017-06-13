@@ -18,8 +18,8 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import <WebKit/WebKit.h>
+@import Cocoa;
+@import WebKit;
 
 @class AppController;
 

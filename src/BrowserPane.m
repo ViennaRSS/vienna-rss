@@ -26,9 +26,11 @@
 #import "HelperFunctions.h"
 #import "StringExtensions.h"
 #import "AddressBarCell.h"
-#import <WebKit/WebKit.h>
 #import "RichXMLParser.h"
 #import "SubscriptionModel.h"
+#import "Folder.h"
+#import "BrowserView.h"
+#import "SSTextField.h"
 
 @implementation BrowserPaneButtonCell
 

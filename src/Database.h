@@ -18,11 +18,13 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "FMDB.h"
-#import "Folder.h"
-#import "Field.h"
-#import "Criteria.h"
+@import Foundation;
+
+@class FMDatabaseQueue;
+@class Folder;
+@class Field;
+@class CriteriaTree;
+@class Article;
 
 @interface Database : NSObject {
 	BOOL initializedfoldersDict;

@@ -18,8 +18,6 @@
 // 
 
 #import "HelperFunctions.h"
-#import <SystemConfiguration/SCNetworkReachability.h>
-#import <WebKit/WebKit.h>
 
 /* hasOSScriptsMenu
  * Determines whether the OS script menu is present or not.

@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Foundation;
 
 /* Enum of valid criteria operators
  */

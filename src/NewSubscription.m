@@ -24,6 +24,8 @@
 #import "Preferences.h"
 #import "GoogleReader.h"
 #import "SubscriptionModel.h"
+#import "Folder.h"
+#import "Database.h"
 
 // Private functions
 @interface NewSubscription (Private)

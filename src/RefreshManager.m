@@ -20,6 +20,7 @@
 
 #import "RefreshManager.h"
 #import "FeedCredentials.h"
+#import "ActivityItem.h"
 #import "ActivityLog.h"
 #import "RichXMLParser.h"
 #import "StringExtensions.h"
@@ -32,9 +33,15 @@
 #import "NSNotificationAdditions.h"
 #import "VTPG_Common.h"
 #import "FeedItem.h"
+#import "Debug.h"
+#import "Article.h"
+#import "Folder.h"
+#import "Database.h"
+#import "FeedCredentials.h"
+#import "ASINetworkQueue.h"
 
-// Private functions
-@interface RefreshManager (Private)
+@interface RefreshManager ()
+
 -(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type;
 -(void)getCredentialsForFolder;
 -(void)setFolderErrorFlag:(Folder *)folder flag:(BOOL)theFlag;
@@ -42,14 +49,13 @@
 -(void)pumpSubscriptionRefresh:(Folder *)folder shouldForceRefresh:(BOOL)force;
 -(void)pumpFolderIconRefresh:(Folder *)folder;
 -(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem shouldForceRefresh:(BOOL)force;
--(void)beginRefreshTimer;
--(void)refreshPumper:(NSTimer *)aTimer;
 -(void)removeConnection:(ASIHTTPRequest *)conn;
--(void)folderIconRefreshCompleted:(ASIHTTPRequest *)connector;
 -(NSString *)getRedirectURL:(NSData *)data;
 - (void)syncFinishedForFolder:(Folder *)folder; 
 @property (nonatomic, retain) NSTimer * unsafe301RedirectionTimer;
 @property (atomic, copy) NSString *riskyIPAddress;
+@property (nonatomic) SyncTypes syncType;
+
 @end
 
 @implementation RefreshManager
@@ -161,13 +167,13 @@
 -(void)handleDidWake:(NSNotification *)nc
 {
 	NSString * currentAddress = [NSHost currentHost].address ;
-	if (![currentAddress isEqualToString:riskyIPAddress])
+	if (![currentAddress isEqualToString:self.riskyIPAddress])
 	{
 		// we might have moved to a new network
 		// so, at the next occurence we should test if we can safely handle
 		// 301 redirects
-		[unsafe301RedirectionTimer invalidate];
-		unsafe301RedirectionTimer=nil;
+		[self.unsafe301RedirectionTimer invalidate];
+		self.unsafe301RedirectionTimer=nil;
 	}
 }
 
@@ -212,34 +218,34 @@
 }
 
 -(void)refreshSubscriptionsAfterDelete:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
-    syncType = MA_Sync_Unsubscribe;
+    self.syncType = MA_Sync_Unsubscribe;
     [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
     
 -(void)refreshSubscriptionsAfterSubscribe:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
-    syncType = MA_Sync_Subscribe;
+    self.syncType = MA_Sync_Subscribe;
 	//   [GRSOperation setFetchFlag:YES];
     [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
 
 -(void)refreshSubscriptionsAfterUnsubscribe:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
-    syncType = MA_Sync_Unsubscribe;
+    self.syncType = MA_Sync_Unsubscribe;
     [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
 
 -(void)refreshSubscriptionsAfterMerge:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
-    syncType = MA_Sync_Merge;
+    self.syncType = MA_Sync_Merge;
     [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
 
 -(void)refreshSubscriptionsAfterRefresh:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
-    syncType = MA_Sync_Refresh;
+    self.syncType = MA_Sync_Refresh;
     [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
 
 -(void)refreshSubscriptionsAfterRefreshAll:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus 
 {   
-    syncType = MA_Sync_Refresh_All;
+    self.syncType = MA_Sync_Refresh_All;
 	
 	if ([Preferences standardPreferences].syncGoogleReader) [[GoogleReader sharedManager] loadSubscriptions];
 	
@@ -642,7 +648,7 @@
 
 -(BOOL)canTrust301Redirects:(ASIHTTPRequest *)connector
 {
-    if (unsafe301RedirectionTimer == nil || !unsafe301RedirectionTimer.valid)
+    if (self.unsafe301RedirectionTimer == nil || !self.unsafe301RedirectionTimer.valid)
     {
     	NSURL * testURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://www.example.com", connector.originalURL.scheme]];
     	ASIHTTPRequest * testRequest = [ASIHTTPRequest requestWithURL:testURL];
@@ -656,8 +662,12 @@
     		// (cf RFC 6761 http://www.iana.org/go/rfc6761)
     		// so we probably have a misconfigured router / proxy
     		// and we will not consider 301 redirections as permanent for 24 hours
-    		unsafe301RedirectionTimer = [NSTimer scheduledTimerWithTimeInterval:24*3600 target:self selector:@selector(resetUnsafe301Timer:) userInfo:nil repeats:NO];
-    		riskyIPAddress = [NSHost currentHost].address;
+    		self.unsafe301RedirectionTimer = [NSTimer scheduledTimerWithTimeInterval:24*3600
+                                                                              target:self
+                                                                            selector:@selector(resetUnsafe301Timer:)
+                                                                            userInfo:nil
+                                                                             repeats:NO];
+    		self.riskyIPAddress = [NSHost currentHost].address;
     		return NO;
     	}
     	else

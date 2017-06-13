@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 uk.co.opencommunity. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @interface FeedItem : NSObject {
     NSString * title;

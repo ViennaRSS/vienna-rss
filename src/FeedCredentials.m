@@ -20,6 +20,8 @@
 
 #import "FeedCredentials.h"
 #import "StringExtensions.h"
+#import "Folder.h"
+#import "Database.h"
 
 // Private functions
 @interface FeedCredentials (Private)

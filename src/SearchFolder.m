@@ -23,6 +23,11 @@
 #import "AppController.h"
 #import "HelperFunctions.h"
 #import "PopUpButtonExtensions.h"
+#import "Article.h"
+#import "Folder.h"
+#import "Criteria.h"
+#import "Field.h"
+#import "Database.h"
 
 // Tags for the three fields that define a criteria. We set these here
 // rather than in IB to be consistent.

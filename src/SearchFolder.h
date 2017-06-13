@@ -18,8 +18,9 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "Database.h"
+@import Cocoa;
+
+@class Database;
 
 @interface SmartFolder : NSWindowController {
 	IBOutlet NSWindow * searchWindow;

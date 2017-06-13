@@ -19,7 +19,7 @@
 //
 
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 extern NSString * MA_Field_GUID;
 extern NSString * MA_Field_Subject;

@@ -18,7 +18,8 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Foundation;
+@import WebKit;
 
 #define SafeString(s)   ((s) ?: @"")
 

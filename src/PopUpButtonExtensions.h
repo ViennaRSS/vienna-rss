@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
 @interface NSPopUpButton (PopUpButtonExtensions)
 	-(void)addItemWithTitle:(NSString *)title image:(NSImage *)image;

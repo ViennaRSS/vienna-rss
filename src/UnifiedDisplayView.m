@@ -28,6 +28,12 @@
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
 #import "BrowserPane.h"
+#import "Article.h"
+#import "Folder.h"
+#import "BrowserView.h"
+#import "ArticleBaseView.h"
+#import "TableViewExtensions.h"
+#import "Database.h"
 
 #define LISTVIEW_CELL_IDENTIFIER		@"ArticleCellView"
 // 300 seems a reasonable value to avoid calculating too many frames before being able to update display

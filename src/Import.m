@@ -22,7 +22,7 @@
 #import "StringExtensions.h"
 #import "BJRWindowWithToolbar.h"
 #import "Database.h"
-
+#import "Folder.h"
 
 @implementation Import
 

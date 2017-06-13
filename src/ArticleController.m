@@ -19,6 +19,7 @@
 //
 
 #import "ArticleController.h"
+
 #import "AppController.h"
 #import "Preferences.h"
 #import "Constants.h"
@@ -29,6 +30,11 @@
 #import "GoogleReader.h"
 #import "ArticleListView.h"
 #import "UnifiedDisplayView.h"
+#import "FoldersTree.h"
+#import "Article.h"
+#import "Folder.h"
+#import "ArticleView.h"
+#import "BackTrackArray.h"
 
 // Private functions
 @interface ArticleController (Private)
@@ -40,7 +46,7 @@
 @end
 
 @implementation ArticleController
-@synthesize foldersTree, mainArticleView, currentArrayOfArticles, folderArrayOfArticles, articleSortSpecifiers, backtrackArray;
+@synthesize mainArticleView, currentArrayOfArticles, folderArrayOfArticles, articleSortSpecifiers, backtrackArray;
 
 /* init
  * Initialise.
@@ -361,7 +367,7 @@
 	if ([Database sharedManager].countOfUnread > 0)
 	{
 		// Get the first folder with unread articles.
-		NSInteger firstFolderWithUnread = foldersTree.firstFolderWithUnread;
+		NSInteger firstFolderWithUnread = self.foldersTree.firstFolderWithUnread;
 		if (firstFolderWithUnread == currentFolderId)
 		{
 			[mainArticleView selectFirstUnreadInFolder];
@@ -371,7 +377,7 @@
 			// Seed in order to select the first unread article.
 			firstUnreadArticleRequired = YES;
 			// Select the folder in the tree view.
-			[foldersTree selectFolder:firstFolderWithUnread];
+			[self.foldersTree selectFolder:firstFolderWithUnread];
 		}
 	}
 }
@@ -406,13 +412,13 @@
 	if (currentFolderExhausted  && [[Database sharedManager] countOfUnread] > 1)
 	{
 		// try other folders
-		NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
+		NSInteger nextFolderWithUnread = [self.foldersTree nextFolderWithUnread:currentFolderId];
 		if (nextFolderWithUnread != -1)
 		{
 			// Seed in order to select the first unread article.
 			firstUnreadArticleRequired = YES;
 			// Select the folder
-			[foldersTree selectFolder:nextFolderWithUnread];
+			[self.foldersTree selectFolder:nextFolderWithUnread];
 		}
 	}
 
@@ -457,7 +463,7 @@
 		// after notification of folder selection change has been processed,
 		// it will select the requisite article on our behalf.
 		guidOfArticleToSelect = guid;
-		[foldersTree selectFolder:folderId];
+		[self.foldersTree selectFolder:folderId];
 	}
 }
 
@@ -657,7 +663,7 @@
 		if (currentArrayOfArticles.count > 0u)
 			[mainArticleView ensureSelectedArticle:YES];
 		else
-			[NSApp.mainWindow makeFirstResponder:foldersTree.mainView];
+			[NSApp.mainWindow makeFirstResponder:self.foldersTree.mainView];
 	}
 }
 
@@ -690,7 +696,7 @@
     if (currentArrayOfArticles.count > 0u) {
 		[mainArticleView ensureSelectedArticle:YES];
     } else {
-		[NSApp.mainWindow makeFirstResponder:foldersTree.mainView];
+		[NSApp.mainWindow makeFirstResponder:self.foldersTree.mainView];
     }
 }
 

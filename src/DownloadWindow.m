@@ -24,6 +24,7 @@
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
 #import "ImageAndTextCell.h"
+#import "TableViewExtensions.h"
 
 @implementation DownloadWindow
 

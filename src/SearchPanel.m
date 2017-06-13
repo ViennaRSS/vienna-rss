@@ -22,6 +22,7 @@
 #import "BrowserPane.h"
 #import "AppController.h"
 #import "StringExtensions.h"
+#import "BrowserView.h"
 
 // Pull in the private functions we need from the delegate
 @interface AppController (Private)

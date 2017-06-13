@@ -19,6 +19,7 @@
 //
 
 #import "Database.h"
+
 #import "Preferences.h"
 #import "StringExtensions.h"
 #import "Constants.h"
@@ -27,6 +28,11 @@
 #import "RefreshManager.h"
 #import "Debug.h"
 #import "VNADatabaseMigration.h"
+#import "Article.h"
+#import "Folder.h"
+#import "FMDB.h"
+#import "Field.h"
+#import "Criteria.h"
 
 // Private scope flags
 #define MA_Scope_Inclusive		1

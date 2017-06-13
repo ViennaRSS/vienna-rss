@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 The Vienna Project. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Cocoa;
 
 @interface FolderImageCache : NSObject {
     NSString * imagesCacheFolder;

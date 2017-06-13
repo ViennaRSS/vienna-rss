@@ -38,6 +38,12 @@
 #import "BrowserPane.h"
 #import "ProgressTextCell.h"
 #import "BJRVerticallyCenteredTextFieldCell.h"
+#import "Article.h"
+#import "Folder.h"
+#import "StdEnclosureView.h"
+#import "PopupButton.h"
+#import "BrowserView.h"
+#import "Database.h"
 
 // Private functions
 @interface ArticleListView (Private)

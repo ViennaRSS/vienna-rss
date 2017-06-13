@@ -6,7 +6,8 @@
 //  Copyright (c) 2015 The Vienna Project. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
+
 #import <FMDB.h>
 
 @interface VNADatabaseMigration : NSObject

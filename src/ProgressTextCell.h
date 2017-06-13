@@ -18,7 +18,8 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
+
 #import "BJRVerticallyCenteredTextFieldCell.h"
 
 /* ProgressTextCell
@@ -37,4 +38,5 @@
 
 // Accessor functions
 -(void)setInProgress:(BOOL)newInProgress forRow:(NSInteger)row;
+
 @end

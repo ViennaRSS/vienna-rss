@@ -18,7 +18,8 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
+
 #import "TabbedWebView.h"
 
 @interface ArticleView : TabbedWebView {

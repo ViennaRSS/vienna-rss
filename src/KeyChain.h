@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Foundation;
 
 @interface KeyChain : NSObject
 	+(NSString *)getPasswordFromKeychain:(NSString *)username url:(NSString *)url;

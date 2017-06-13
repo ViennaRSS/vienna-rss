@@ -18,10 +18,8 @@
 //
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
 @interface BJRWindowWithToolbar : NSWindow
-{
-}
 
 @end

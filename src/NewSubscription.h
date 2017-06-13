@@ -18,9 +18,9 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "Database.h"
+@import Cocoa;
 
+@class Database;
 @class SubscriptionModel;
 
 @interface NewSubscription : NSWindowController {
