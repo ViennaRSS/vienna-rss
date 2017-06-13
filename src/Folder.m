@@ -29,7 +29,7 @@
 
 // Private internal functions
 @interface Folder (Private)
-	+(NSArray *)_iconArray;
+	+(NSArray<NSImage *> *)_iconArray;
 @end
 
 @interface Folder ()
@@ -77,8 +77,7 @@ static NSArray * iconArray = nil;
 /* _iconArray
  * Return the internal array of pre-defined folder images
  */
-+(NSArray *)_iconArray
-{
++(NSArray<NSImage *> *)_iconArray {
 	if (iconArray == nil)
 		iconArray = @[
 					  [NSImage imageNamed:@"smallFolder.tiff"],
@@ -168,40 +167,47 @@ static NSArray * iconArray = nil;
 	return SafeString(attributes[@"HomePage"]);
 }
 
-/* image
- * Returns an NSImage item that represents the specified folder.
+/*! Folder image
+ * @return NSImage item that represents the specified folder or nil if
+ * no appropriate image is found.
  */
--(NSImage *)image
-{
-	if (IsGroupFolder(self))
-		return [Folder _iconArray][MA_RSSFolderIcon];
-	if (IsSmartFolder(self))
-		return [Folder _iconArray][MA_SmartFolderIcon];
-	if (IsTrashFolder(self))
-		return [Folder _iconArray][MA_TrashFolderIcon];
-	if (IsSearchFolder(self))
-		return [Folder _iconArray][MA_SearchFolderIcon];
-	if (IsRSSFolder(self) || IsGoogleReaderFolder(self))
-	{
-		// Try the folder icon cache.
-		NSImage * imagePtr = nil;
-		if (self.feedURL)
-		{	
-			NSString * homePageSiteRoot;
-			homePageSiteRoot = self.homePage.host.convertStringToValidPath;
-			imagePtr = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
-		}
-		NSImage *altIcon;
-		if (IsRSSFolder(self)) {
-			altIcon = [Folder _iconArray][MA_RSSFeedIcon];
-		} else {
-			altIcon = [Folder _iconArray][MA_GoogleReaderFolderIcon];
-		}
-		return (imagePtr) ? imagePtr : altIcon;
-	}
-	
-	// Use the generic folder icon for anything else
-	return [Folder _iconArray][MA_FolderIcon];
+-(NSImage * _Nullable)image {
+    NSImage *folderImage = nil;
+    switch (self.type) {
+        case VNAFolderTypeSmart:
+            folderImage = Folder._iconArray[MA_SmartFolderIcon];
+            break;
+        case VNAFolderTypeGroup:
+            folderImage = Folder._iconArray[MA_RSSFolderIcon];
+            break;
+        case VNAFolderTypeTrash:
+            folderImage = Folder._iconArray[MA_TrashFolderIcon];
+            break;
+        case VNAFolderTypeSearch:
+            folderImage = Folder._iconArray[MA_SmartFolderIcon];
+            break;
+        case VNAFolderTypeRSS: {
+            NSString *homePageSiteRoot = self.homePage.host.convertStringToValidPath;
+            folderImage = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
+            if (folderImage == nil) {
+                folderImage = Folder._iconArray[MA_RSSFeedIcon];
+            }
+            break;
+        }
+        case VNAFolderTypeOpenReader: {
+            NSString *homePageSiteRoot = self.homePage.host.convertStringToValidPath;
+            folderImage = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
+            if (folderImage == nil) {
+                folderImage = Folder._iconArray[MA_GoogleReaderFolderIcon];
+            }
+            break;
+        }
+        default: // Use the generic folder icon for anything else
+            folderImage = Folder._iconArray[MA_FolderIcon];
+            break;
+    }
+    
+    return folderImage;
 }
 
 /* hasCachedImage
@@ -372,25 +378,22 @@ static NSArray * iconArray = nil;
 /* isGroupFolder
  * Used for scripting. Returns YES if this folder is a group folder.
  */
--(BOOL)isGroupFolder
-{
-	return IsGroupFolder(self);
+-(BOOL)isGroupFolder {
+	return self.type == VNAFolderTypeGroup;
 }
 
 /* isSmartFolder
  * Used for scripting. Returns YES if this folder is a smart folder.
  */
--(BOOL)isSmartFolder
-{
-	return IsSmartFolder(self);
+-(BOOL)isSmartFolder {
+    return self.type == VNAFolderTypeSmart;
 }
 
 /* isRSSFolder
  * Used for scripting. Returns YES if this folder is an RSS feed folder.
  */
--(BOOL)isRSSFolder
-{
-	return IsRSSFolder(self);
+-(BOOL)isRSSFolder {
+    return self.type == VNAFolderTypeRSS;
 }
 
 /* loadsFullHTML
