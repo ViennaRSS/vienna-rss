@@ -400,42 +400,6 @@ static NSMutableDictionary * entityMap = nil;
 	return hasNonEmptyChars ? [self substringWithRange:NSMakeRange(indexOfFirstChr, 1u + (indexOfLastChr - indexOfFirstChr))] : @"";
 }
 
-/* stringByDeletingLastURLComponent
- * Returns a string with the last URL component removed. It is similar to stringByDeletingLastPathComponent
- * but it doesn't attempt to interpret the current string as a file path and 'fixup' slashes.
- */
--(NSString *)stringByDeletingLastURLComponent
-{
-	NSInteger index = self.length - 1;
-	NSInteger beginning = 0;
-
-	if ([self hasPrefix:@"http://"])
-		beginning = 6;
-	if ([self hasPrefix:@"https://"])
-		beginning = 7;
-	if (index > beginning && [self characterAtIndex:index] == '/')
-		--index;
-	while (index >= beginning && [self characterAtIndex:index] != '/')
-		--index;
-	if (index <= beginning)
-		return self;
-	return [self substringWithRange:NSMakeRange(0, index)];
-}
-
-/* lastURLComponent
- * Returns a string with the last URL component.
- */
--(NSString *)lastURLComponent
-{
-	NSInteger index = self.length - 1;
-
-	while (index >= 0 && [self characterAtIndex:index] != '/')
-		--index;
-	if (index <= 0)
-		return self;
-	return [self substringWithRange:NSMakeRange(index+1, self.length -1-index)];
-}
-
 /* stringByAppendingURLComponent
  * Appends the specified component to the end of our URL. It is similar to stringByAppendingPathComponent
  * but it doesn't attempt to interpret the current string as a file path and 'fixup' slashes.
