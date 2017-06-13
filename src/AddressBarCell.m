@@ -65,4 +65,5 @@
 		theRect.size.width -= imageSpace;
 	return [super drawingRectForBounds:theRect];
 }
+
 @end
