@@ -903,9 +903,9 @@ enum GoogleReaderStatus {
 			// set HomePage if the info is available
 			NSString* homePageURL = feed[@"htmlUrl"];
 			if (homePageURL) {
-				for (Folder * f in localFolders) {
-					if (IsGoogleReaderFolder(f) && [f.feedURL isEqualToString:feedURL]) {
-                        [[Database sharedManager] setHomePage:homePageURL forFolder:f.itemId];
+				for (Folder *localFolder in localFolders) {
+					if (localFolder.type == VNAFolderTypeOpenReader && [localFolder.feedURL isEqualToString:feedURL]) {
+                        [[Database sharedManager] setHomePage:homePageURL forFolder:localFolder.itemId];
 						break;
 					}
 				}
@@ -917,7 +917,7 @@ enum GoogleReaderStatus {
 	
 	//check if we have a folder which is not registered as a Open Reader feed
 	for (Folder * f in APPCONTROLLER.folders) {
-		if (IsGoogleReaderFolder(f) && ![googleFeeds containsObject:f.feedURL])
+		if (f.type == VNAFolderTypeOpenReader && ![googleFeeds containsObject:f.feedURL])
 		{
 			[[Database sharedManager] deleteFolder:f.itemId];
 		}

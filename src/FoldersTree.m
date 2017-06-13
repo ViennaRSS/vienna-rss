@@ -1073,7 +1073,7 @@
 	Folder * folder = node.folder;
 	
 	// Remove the "☁️ " symbols on Open Reader feeds
-	if (IsGoogleReaderFolder(folder) && [newName hasPrefix:@"☁️ "]) {
+	if (folder.type == VNAFolderTypeOpenReader && [newName hasPrefix:@"☁️ "]) {
 		NSString *tmpName = [newName substringFromIndex:3];
 		newName = tmpName;
 	}
@@ -1276,7 +1276,7 @@
 				[newParent setCanHaveChildren:YES];
 			if ([dbManager setParent:newParentId forFolder:folderId])
 			{
-				if (IsGoogleReaderFolder(folder))
+				if (folder.type == VNAFolderTypeOpenReader)
 				{
 					GoogleReader * myGoogle = [GoogleReader sharedManager];
 					// remove old label

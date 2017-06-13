@@ -180,7 +180,7 @@
 	{
 		if (folder.type == VNAFolderTypeGroup)
 			[self forceRefreshSubscriptionForFolders:[[Database sharedManager] arrayOfFolders:folder.itemId]];
-		else if (IsGoogleReaderFolder(folder))
+		else if (folder.type == VNAFolderTypeOpenReader)
 		{
 			if (![self isRefreshingFolder:folder ofType:MA_Refresh_GoogleFeed] && ![self isRefreshingFolder:folder ofType:MA_ForceRefresh_Google_Feed])
 				[self pumpSubscriptionRefresh:folder shouldForceRefresh:YES];
@@ -199,7 +199,7 @@
 	{
 		if (folder.type == VNAFolderTypeGroup)
 			[self refreshSubscriptions:[[Database sharedManager] arrayOfFolders:folder.itemId] ignoringSubscriptionStatus:NO];
-		else if (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder))
+		else if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
 		{
 			if (!IsUnsubscribed(folder) || ignoreSubStatus)
 			{
@@ -258,7 +258,7 @@
 	{
 		if (folder.type == VNAFolderTypeGroup)
 			[self refreshFolderIconCacheForSubscriptions:[[Database sharedManager] arrayOfFolders:folder.itemId]];
-		else if (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder))
+		else if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
 		{
 			[self refreshFavIconForFolder:folder];
 		}
@@ -278,7 +278,7 @@
 	
 	// Do nothing if there's no homepage associated with the feed
 	// or if the feed already has a favicon.
-	if ((folder.type == VNAFolderTypeRSS||IsGoogleReaderFolder(folder)) &&
+	if ((folder.type == VNAFolderTypeRSS||folder.type == VNAFolderTypeOpenReader) &&
         (folder.homePage == nil || folder.homePage.blank || folder.hasCachedImage))
 	{
         [[Database sharedManager] clearFlag:MA_FFlag_CheckForImage forFolder:folder.itemId];
@@ -456,7 +456,7 @@
 	[self setFolderUpdatingFlag:folder flag:YES];
 	
 	// Additional detail for the log
-	if (IsGoogleReaderFolder(folder)) {
+	if (folder.type == VNAFolderTypeOpenReader) {
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to Open Reader server to retrieve %@", nil), urlString]];
 	} else {
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", nil), urlString]];

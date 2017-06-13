@@ -244,7 +244,7 @@
 {
 	for (Folder * folder in [[db arrayOfFolders:fromId] sortedArrayUsingSelector:@selector(folderNameCompare:)])
 	{
-		if (folder.type == VNAFolderTypeRSS||IsGoogleReaderFolder(folder)||folder.type == VNAFolderTypeGroup)
+		if (folder.type == VNAFolderTypeRSS||folder.type == VNAFolderTypeOpenReader||folder.type == VNAFolderTypeGroup)
 		{
 			[folderValueField addItemWithTitle:folder.name];
 			NSMenuItem * menuItem = [folderValueField itemWithTitle:folder.name];

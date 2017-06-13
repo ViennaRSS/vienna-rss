@@ -733,7 +733,7 @@
 	for (Article * theArticle in articleArray)
 	{
 		Folder *myFolder = [[Database sharedManager] folderFromID:theArticle.folderId];
-		if (IsGoogleReaderFolder(myFolder)) {
+		if (myFolder.type == VNAFolderTypeOpenReader) {
 			[[GoogleReader sharedManager] markStarred:theArticle starredFlag:flagged];
 		}
 		[[Database sharedManager] markArticleFlagged:theArticle.folderId
@@ -787,7 +787,7 @@
 		NSInteger folderId = theArticle.folderId;
 		if (theArticle.read != readFlag)
 		{
-			if (IsGoogleReaderFolder([[Database sharedManager] folderFromID:folderId])) {
+			if ([[Database sharedManager] folderFromID:folderId].type == VNAFolderTypeOpenReader) {
 				[[GoogleReader sharedManager] markRead:theArticle readFlag:readFlag];
 			} else {
 				[[Database sharedManager] markArticleRead:folderId guid:theArticle.guid isRead:readFlag];
@@ -818,7 +818,7 @@
 	{
 		NSInteger folderId = articleRef.folderId;
 		Folder * folder = [db folderFromID:folderId];
-		if (IsGoogleReaderFolder(folder)){
+		if (folder.type == VNAFolderTypeOpenReader){
 			Article * article = [folder articleFromGuid:articleRef.guid];
 			if (article != nil) {
                 [[GoogleReader sharedManager] markRead:article readFlag:readFlag];
@@ -898,7 +898,7 @@
 																	object:@(folderId)];
 			}
 		}
-		else if (IsGoogleReaderFolder(folder))
+		else if (folder.type == VNAFolderTypeOpenReader)
 		{
 			NSArray * articleArray = [folder arrayOfUnreadArticlesRefs];
             if (undoFlag) {
@@ -940,7 +940,7 @@
 		NSInteger folderId = ref.folderId;
 		NSString * theGuid = ref.guid;
 		Folder * folder = [dbManager folderFromID:folderId];
-        if (IsGoogleReaderFolder(folder)) {
+        if (folder.type == VNAFolderTypeOpenReader) {
         	Article * article = [folder articleFromGuid:theGuid];
         	if (article != nil) {
 			    [[GoogleReader sharedManager] markRead:article readFlag:readFlag];

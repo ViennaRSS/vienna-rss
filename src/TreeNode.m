@@ -272,7 +272,7 @@
 -(NSString *)nodeName
 {
 	if (folder != nil) {
-		if (IsGoogleReaderFolder(folder)) {
+		if (folder.type == VNAFolderTypeOpenReader) {
 			return [NSString stringWithFormat:@"☁️ %@",folder.name];
 		} else {
 			return folder.name;

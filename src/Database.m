@@ -573,7 +573,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     }
 	// If no change to last update, do nothing
 	Folder * folder = [self folderFromID:folderId];
-	if (folder != nil && (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder)))
+	if (folder != nil && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader))
 	{
         if ([folder.lastUpdate isEqualToDate:lastUpdate]) {
 			return;
@@ -602,7 +602,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     }
 	// If no change to last update string, do nothing
 	Folder * folder = [self folderFromID:folderId];
-	if (folder != nil && (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder)))
+	if (folder != nil && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader))
 	{
 		if ([folder.lastUpdateString isEqualToString:lastUpdateString])
 			return;
@@ -904,7 +904,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 
 	// If this is an RSS feed, delete from the feeds
 	// and delete raw feed source
-	if (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder))
+	if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
 	{
         [queue inTransaction:^(FMDatabase *db, BOOL * rollback) {
             [db executeUpdate:@"delete from rss_folders where folder_id=?", @(folderId)];
@@ -1195,7 +1195,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 
 	// Adjust the child unread count for the old parent.
 	NSInteger adjustment = 0;
-	if (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder))
+	if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
 		adjustment = folder.unreadCount;
 	else if (folder.groupFolder)
 		adjustment = folder.childUnreadCount;
@@ -2308,7 +2308,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     // This is a good time to do a quick check to ensure that our
     // own count of unread is in sync with the folders count and fix
     // them if not.
-    if (folder && [filterString isEqualTo:@""] && (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder)))
+    if (folder && [filterString isEqualTo:@""] && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader))
     {
         if (unread_count != folder.unreadCount)
         {
