@@ -2661,7 +2661,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)restoreMessage:(id)sender
 {
 	Folder * folder = [db folderFromID:articleController.currentFolderId];
-	if (IsTrashFolder(folder) && self.selectedArticle != nil && !db.readOnly)
+	if (folder.type == VNAFolderTypeTrash && self.selectedArticle != nil && !db.readOnly)
 	{
 		NSArray * articleArray = articleController.markedArticleRange;
 		[articleController markDeletedByArray:articleArray deleteFlag:NO];
@@ -2678,13 +2678,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	if (self.selectedArticle != nil && !db.readOnly)
 	{
 		Folder * folder = [db folderFromID:articleController.currentFolderId];
-		if (!IsTrashFolder(folder))
-		{
+		if (folder.type != VNAFolderTypeTrash) {
 			NSArray * articleArray = articleController.markedArticleRange;
 			[articleController markDeletedByArray:articleArray deleteFlag:YES];
-		}
-		else
-		{
+		} else {
             NSAlert *alert = [NSAlert new];
             alert.messageText = NSLocalizedString(@"Delete selected message", nil);
             alert.informativeText = NSLocalizedString(@"Delete selected message text", nil);
@@ -2930,7 +2927,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete group folder text", nil), folder.name];
 			alertTitle = NSLocalizedString(@"Delete group folder", nil);
 		}
-		else if (IsTrashFolder(folder))
+		else if (folder.type == VNAFolderTypeTrash)
 			return;
 		else
 			NSAssert1(false, @"Unhandled folder type in deleteFolder: %@", [folder name]);
@@ -2980,8 +2977,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			++count;
 			continue;
 		}
-		if (!IsTrashFolder(folder))
-		{
+		if (folder.type != VNAFolderTypeTrash) {
 			// Create a status string
 			NSString * deleteStatusMsg = [NSString stringWithFormat:NSLocalizedString(@"Delete folder status", nil), folder.name];
 			[self setStatusMessage:deleteStatusMsg persist:NO];
@@ -3931,12 +3927,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			[menuItem setTitle:NSLocalizedString(@"Delete", nil)];
 		else
 			[menuItem setTitle:NSLocalizedString(@"Delete…", nil)];
-		return folder && !IsTrashFolder(folder) && !db.readOnly && isMainWindowVisible;
+		return folder && folder.type != VNAFolderTypeTrash && !db.readOnly && isMainWindowVisible;
 	}
 	else if (theAction == @selector(refreshSelectedSubscriptions:))
 	{
 		Folder * folder = [db folderFromID:foldersTree.actualSelection];
-		return folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeGroup || IsGoogleReaderFolder(folder)) && !db.readOnly;
+		return folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeGroup || folder.type == VNAFolderTypeOpenReader) && !db.readOnly;
 	}
 	else if (theAction == @selector(refreshAllFolderIcons:))
 	{
@@ -3950,7 +3946,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	else if (theAction == @selector(markAllRead:))
 	{
 		Folder * folder = [db folderFromID:foldersTree.actualSelection];
-		return folder && !IsTrashFolder(folder) && !db.readOnly && isMainWindowVisible && db.countOfUnread > 0;
+		return folder && folder.type != VNAFolderTypeTrash && !db.readOnly && isMainWindowVisible && db.countOfUnread > 0;
 	}
 	else if (theAction == @selector(markAllSubscriptionsRead:))
 	{
@@ -3993,7 +3989,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	else if (theAction == @selector(restoreMessage:))
 	{
 		Folder * folder = [db folderFromID:foldersTree.actualSelection];
-		return IsTrashFolder(folder) && self.selectedArticle != nil && !db.readOnly && isMainWindowVisible;
+		return folder.type == VNAFolderTypeTrash && self.selectedArticle != nil && !db.readOnly && isMainWindowVisible;
 	}
 	else if (theAction == @selector(deleteMessage:))
 	{

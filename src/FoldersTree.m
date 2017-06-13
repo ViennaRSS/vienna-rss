@@ -425,7 +425,7 @@
 		if (node != nil)
 		{
 			Folder * folder = [[Database sharedManager] folderFromID:node.nodeId];
-			return folder && !IsSearchFolder(folder) && !IsTrashFolder(folder) && ![Database sharedManager].readOnly && outlineView.window.visible;
+			return folder && folder.type != VNAFolderTypeSearch && folder.type != VNAFolderTypeTrash && ![Database sharedManager].readOnly && outlineView.window.visible;
 		}
 	}
 	return NO;

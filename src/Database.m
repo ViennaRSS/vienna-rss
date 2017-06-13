@@ -2182,7 +2182,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         return tree;
     }
 	
-	if (IsTrashFolder(folder))
+	if (folder.type == VNAFolderTypeTrash)
 	{
 		CriteriaTree * tree = [[CriteriaTree alloc] init];
 		Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Deleted withOperator:MA_CritOper_Is withValue:@"Yes"];
@@ -2294,7 +2294,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 			article.hasEnclosure = [results intForColumnIndex:13];
 			article.enclosure = [results stringForColumnIndex:14];
 		
-			if (folder == nil || !article.deleted || IsTrashFolder(folder))
+			if (folder == nil || !article.deleted || folder.type == VNAFolderTypeTrash)
 				[newArray addObject:article];
 			
 			// Keep our own track of unread articles
