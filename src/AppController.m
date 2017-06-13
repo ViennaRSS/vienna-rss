@@ -1938,10 +1938,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		[self.rssFeed editSubscription:mainWindow folderId:folder.itemId];
 	}
-	else if (IsSmartFolder(folder))
+	else if (folder.type == VNAFolderTypeSmart)
 	{
-		if (!smartFolder)
+        if (!smartFolder) {
 			smartFolder = [[SmartFolder alloc] initWithDatabase:db];
+        }
 		[smartFolder loadCriteria:mainWindow folderId:folder.itemId];
 	}
 }
@@ -2907,7 +2908,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	if (count == 1)
 	{
 		Folder * folder = selectedFolders[0];
-		if (IsSmartFolder(folder))
+		if (folder.type == VNAFolderTypeSmart)
 		{
 			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete smart folder text", nil), folder.name];
 			alertTitle = NSLocalizedString(@"Delete smart folder", nil);
@@ -3987,7 +3988,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	else if (theAction == @selector(editFolder:))
 	{
 		Folder * folder = [db folderFromID:foldersTree.actualSelection];
-		return folder && (IsSmartFolder(folder) || IsRSSFolder(folder)) && !db.readOnly && isMainWindowVisible;
+		return folder && (folder.type == VNAFolderTypeSmart || IsRSSFolder(folder)) && !db.readOnly && isMainWindowVisible;
 	}
 	else if (theAction == @selector(restoreMessage:))
 	{

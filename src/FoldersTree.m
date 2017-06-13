@@ -682,14 +682,14 @@
 	
 	TreeNode * node = [outlineView itemAtRow:outlineView.selectedRow];
 
-	if (IsRSSFolder([node folder])||IsGoogleReaderFolder([node folder]))
+	if (node.folder.type == VNAFolderTypeRSS || node.folder.type == VNAFolderTypeOpenReader)
 	{
 		NSString * urlString = node.folder.homePage;
-		if (urlString && !urlString.blank)
+        if (urlString && !urlString.blank) {
 			[APPCONTROLLER openURLFromString:urlString inPreferredBrowser:YES];
+        }
 	}
-	else if (IsSmartFolder([node folder]))
-	{
+	else if (node.folder.type == VNAFolderTypeSmart) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_EditFolder" object:node];
 	}
 }
@@ -951,7 +951,7 @@
 			[realCell setInProgress:NO];
 		}
 
-		if (IsSmartFolder(folder))  // Because if the search results contain unread articles we don't want the smart folder name to be bold.
+		if (folder.type == VNAFolderTypeSmart)  // Because if the search results contain unread articles we don't want the smart folder name to be bold.
 		{
 			[realCell clearCount];
 		}
@@ -1102,24 +1102,29 @@
 	BOOL isOnDropTypeProposal = index == NSOutlineViewDropOnItemIndex;
 
 	// Can't drop anything onto the trash folder.
-	if (isOnDropTypeProposal && node != nil && IsTrashFolder([node folder]))
-		return NSDragOperationNone; 
+    if (isOnDropTypeProposal && node != nil && node.folder.type == VNAFolderTypeTrash) {
+		return NSDragOperationNone;
+    }
 
 	// Can't drop anything onto the search folder.
-	if (isOnDropTypeProposal && node != nil && IsSearchFolder([node folder]))
-		return NSDragOperationNone; 
+    if (isOnDropTypeProposal && node != nil && node.folder.type == VNAFolderTypeSearch) {
+		return NSDragOperationNone;
+    }
 	
 	// Can't drop anything on smart folders.
-	if (isOnDropTypeProposal && node != nil && IsSmartFolder([node folder]))
-		return NSDragOperationNone; 
+    if (isOnDropTypeProposal && node != nil && node.folder.type == VNAFolderTypeSmart) {
+		return NSDragOperationNone;
+    }
 	
 	// Can always drop something on a group folder.
-	if (isOnDropTypeProposal && node != nil && IsGroupFolder([node folder]))
+    if (isOnDropTypeProposal && node != nil && node.folder.type == VNAFolderTypeGroup) {
 		return dragType;
+    }
 	
 	// For any other folder, can't drop anything ON them.
-	if (index == NSOutlineViewDropOnItemIndex)
+    if (index == NSOutlineViewDropOnItemIndex) {
 		return NSDragOperationNone;
+    }
 	return NSDragOperationGeneric; 
 }
 
@@ -1156,7 +1161,7 @@
 		TreeNode * node = items[index];
 		Folder * folder = node.folder;
 
-		if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder) || IsSmartFolder(folder) || IsGroupFolder(folder) || IsSearchFolder(folder) || IsTrashFolder(folder))
+		if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder) || folder.type == VNAFolderTypeSmart || IsGroupFolder(folder) || IsSearchFolder(folder) || IsTrashFolder(folder))
 		{
 			[internalDragData addObject:@(node.nodeId)];
 			++countOfItems;

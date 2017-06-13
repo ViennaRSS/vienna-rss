@@ -896,7 +896,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	// Delete all articles in this folder then delete ourselves.
 	folder = [self folderFromID:folderId];
 	countOfUnread -= folder.unreadCount;
-    if (IsSmartFolder(folder)) {
+    if (folder.type == VNAFolderTypeSmart) {
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"delete from smart_folders where folder_id=?", @(folderId)];
         }];
@@ -2183,7 +2183,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		return tree;
 	}
 
-	if (IsSmartFolder(folder))
+	if (folder.type == VNAFolderTypeSmart)
 	{
 		[self initSmartfoldersDict];
 		return smartfoldersDict[@(folderId)];

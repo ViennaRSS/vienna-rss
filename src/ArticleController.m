@@ -391,8 +391,7 @@
 	if (![mainArticleView viewNextUnreadInFolder])
 	{
 		// If nothing found and smart folder, search if we have other fresh articles from same folder
-		if (IsSmartFolder(currentFolder) || IsTrashFolder(currentFolder) || IsSearchFolder(currentFolder))
-		{
+		if (currentFolder.type == VNAFolderTypeSmart || currentFolder.type == VNAFolderTypeTrash || currentFolder.type == VNAFolderTypeSearch) {
 			if (![mainArticleView selectFirstUnreadInFolder] || self.selectedArticle == currentArticle)
 			{
 				currentFolderExhausted = YES;
