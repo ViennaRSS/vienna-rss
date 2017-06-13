@@ -1861,8 +1861,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 /* arrayOfSubFolders
  * Returns an NSArray of all folders from the specified folder down.
  */
--(NSArray *)arrayOfSubFolders:(Folder *)folder
-{
+-(NSArray *)arrayOfSubFolders:(Folder *)folder {
 	NSMutableArray * newArray = [NSMutableArray arrayWithObject:folder];
 	if (newArray != nil)
 	{
@@ -1872,10 +1871,12 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		{
 			if (item.parentId == parentId)
 			{
-				if (IsGroupFolder(item))
+                if (item.type == VNAFolderTypeGroup) {
 					[newArray addObjectsFromArray:[self arrayOfSubFolders:item]];
-				else
+                }
+                else {
 					[newArray addObject:item];
+                }
 			}
 		}
 	}
@@ -1985,13 +1986,14 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	}
 
 	// Group folders must always have subscope
-	if (folder && IsGroupFolder(folder))
+    if (folder && folder.type == VNAFolderTypeGroup) {
 		subScope = YES;
+    }
 
 	// Straightforward folder is <something>
-	if (!subScope)
+    if (!subScope) {
 		return [NSString stringWithFormat:@"%@%@%ld", field.sqlField, operatorString, (long)folderId];
-
+    }
 	// For under/not-under operators, we're creating a SQL statement of the format
 	// (folder_id = <value1> || folder_id = <value2>...). It is possible to try and simplify
 	// the string by looking for ranges but I suspect that given the spread of IDs this may
@@ -2002,8 +2004,9 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	NSInteger count = childFolders.count;
 	NSInteger index;
 	
-	if (count > 1)
+    if (count > 1) {
 		[sqlString appendString:@"("];
+    }
 	for (index = 0; index < count; ++index)
 	{
 		Folder * folder = childFolders[index];

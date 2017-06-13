@@ -244,13 +244,13 @@
 {
 	for (Folder * folder in [[db arrayOfFolders:fromId] sortedArrayUsingSelector:@selector(folderNameCompare:)])
 	{
-		if (folder.type == VNAFolderTypeRSS||IsGoogleReaderFolder(folder)||IsGroupFolder(folder))
+		if (folder.type == VNAFolderTypeRSS||IsGoogleReaderFolder(folder)||folder.type == VNAFolderTypeGroup)
 		{
 			[folderValueField addItemWithTitle:folder.name];
 			NSMenuItem * menuItem = [folderValueField itemWithTitle:folder.name];
 			menuItem.image = folder.image;
 			menuItem.indentationLevel = indentation;
-			if (IsGroupFolder(folder))
+			if (folder.type == VNAFolderTypeGroup)
 				[self initFolderValueField:folder.itemId atIndent:indentation + 2];
 		}
 	}

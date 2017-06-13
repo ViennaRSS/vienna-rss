@@ -2925,7 +2925,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete Open Reader RSS feed text", nil), folder.name];
 			alertTitle = NSLocalizedString(@"Delete Open Reader RSS feed", nil);
 		}
-		else if (IsGroupFolder(folder))
+		else if (folder.type == VNAFolderTypeGroup)
 		{
 			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete group folder text", nil), folder.name];
 			alertTitle = NSLocalizedString(@"Delete group folder", nil);
@@ -3936,7 +3936,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	else if (theAction == @selector(refreshSelectedSubscriptions:))
 	{
 		Folder * folder = [db folderFromID:foldersTree.actualSelection];
-		return folder && (folder.type == VNAFolderTypeRSS || IsGroupFolder(folder) || IsGoogleReaderFolder(folder)) && !db.readOnly;
+		return folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeGroup || IsGoogleReaderFolder(folder)) && !db.readOnly;
 	}
 	else if (theAction == @selector(refreshAllFolderIcons:))
 	{

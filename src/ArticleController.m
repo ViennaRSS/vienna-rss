@@ -884,7 +884,7 @@
 	for (Folder * folder in folderArray)
 	{
 		NSInteger folderId = folder.itemId;
-		if (IsGroupFolder(folder) && undoFlag)
+		if (folder.type == VNAFolderTypeGroup && undoFlag)
 		{
 			[refArray addObjectsFromArray:[self wrappedMarkAllReadInArray:[[Database sharedManager] arrayOfFolders:folderId] withUndo:undoFlag]];
 		}

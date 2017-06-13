@@ -553,7 +553,7 @@
 -(NSInteger)groupParentSelection
 {
 	Folder * folder = [[Database sharedManager] folderFromID:self.actualSelection];
-	return folder ? ((IsGroupFolder(folder)) ? folder.itemId : folder.parentId) : VNAFolderTypeRoot;
+	return folder ? ((folder.type == VNAFolderTypeGroup) ? folder.itemId : folder.parentId) : VNAFolderTypeRoot;
 }
 
 /* actualSelection
@@ -1163,14 +1163,18 @@
 		TreeNode * node = items[index];
 		Folder * folder = node.folder;
 
-		if (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder) || folder.type == VNAFolderTypeSmart || IsGroupFolder(folder) || IsSearchFolder(folder) || IsTrashFolder(folder))
-		{
+		if (folder.type == VNAFolderTypeRSS
+            || folder.type == VNAFolderTypeOpenReader
+            || folder.type == VNAFolderTypeSmart
+            || folder.type == VNAFolderTypeGroup
+            || folder.type == VNAFolderTypeSearch
+            || folder.type == VNAFolderTypeTrash) {
 			[internalDragData addObject:@(node.nodeId)];
 			++countOfItems;
 		}
 
-		if (folder.type == VNAFolderTypeRSS||IsGoogleReaderFolder(folder))
-		{
+		if (folder.type == VNAFolderTypeRSS
+            || folder.type == VNAFolderTypeOpenReader) {
 			NSString * feedURL = folder.feedURL;
 			
 			NSMutableDictionary * dict = [NSMutableDictionary dictionary];

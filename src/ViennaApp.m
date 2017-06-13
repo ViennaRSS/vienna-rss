@@ -198,7 +198,7 @@
 	NSDictionary * args = cmd.evaluatedArguments;
 	Folder * folder = args[@"UnderFolder"];
 
-	NSInteger parentId = folder ? ((IsGroupFolder(folder)) ? folder.itemId : folder.parentId) : VNAFolderTypeRoot;
+	NSInteger parentId = folder ? ((folder.type == VNAFolderTypeGroup) ? folder.itemId : folder.parentId) : VNAFolderTypeRoot;
 
 	[(AppController*)self.delegate createNewSubscription:args[@"URL"] underFolder:parentId afterChild:-1];
 	return nil;

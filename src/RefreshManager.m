@@ -178,7 +178,7 @@
     
 	for (Folder * folder in foldersArray)
 	{
-		if (IsGroupFolder(folder))
+		if (folder.type == VNAFolderTypeGroup)
 			[self forceRefreshSubscriptionForFolders:[[Database sharedManager] arrayOfFolders:folder.itemId]];
 		else if (IsGoogleReaderFolder(folder))
 		{
@@ -197,7 +197,7 @@
     
 	for (Folder * folder in foldersArray)
 	{
-		if (IsGroupFolder(folder))
+		if (folder.type == VNAFolderTypeGroup)
 			[self refreshSubscriptions:[[Database sharedManager] arrayOfFolders:folder.itemId] ignoringSubscriptionStatus:NO];
 		else if (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder))
 		{
@@ -256,7 +256,7 @@
 	
 	for (Folder * folder in foldersArray)
 	{
-		if (IsGroupFolder(folder))
+		if (folder.type == VNAFolderTypeGroup)
 			[self refreshFolderIconCacheForSubscriptions:[[Database sharedManager] arrayOfFolders:folder.itemId]];
 		else if (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder))
 		{

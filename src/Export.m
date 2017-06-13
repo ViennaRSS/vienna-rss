@@ -40,7 +40,7 @@
 	{
 		NSMutableDictionary * itemDict = [[NSMutableDictionary alloc] init];
 		NSString * name = folder.name;
-		if (IsGroupFolder(folder))
+		if (folder.type == VNAFolderTypeGroup)
 		{
 			NSArray * subFolders = [foldersTree children:folder.itemId];
 			
