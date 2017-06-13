@@ -199,7 +199,7 @@
 	{
 		if (IsGroupFolder(folder))
 			[self refreshSubscriptions:[[Database sharedManager] arrayOfFolders:folder.itemId] ignoringSubscriptionStatus:NO];
-		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
+		else if (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder))
 		{
 			if (!IsUnsubscribed(folder) || ignoreSubStatus)
 			{
@@ -258,7 +258,7 @@
 	{
 		if (IsGroupFolder(folder))
 			[self refreshFolderIconCacheForSubscriptions:[[Database sharedManager] arrayOfFolders:folder.itemId]];
-		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
+		else if (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder))
 		{
 			[self refreshFavIconForFolder:folder];
 		}
@@ -278,7 +278,7 @@
 	
 	// Do nothing if there's no homepage associated with the feed
 	// or if the feed already has a favicon.
-	if ((IsRSSFolder(folder)||IsGoogleReaderFolder(folder)) &&
+	if ((folder.type == VNAFolderTypeRSS||IsGoogleReaderFolder(folder)) &&
         (folder.homePage == nil || folder.homePage.blank || folder.hasCachedImage))
 	{
         [[Database sharedManager] clearFlag:MA_FFlag_CheckForImage forFolder:folder.itemId];
@@ -475,7 +475,7 @@
 {	
 	ASIHTTPRequest *myRequest;
 	
-	if (IsRSSFolder(folder)) {
+	if (folder.type == VNAFolderTypeRSS) {
 		myRequest = [ASIHTTPRequest requestWithURL:url];
 		NSString * theLastUpdateString = folder.lastUpdateString;
         if (![theLastUpdateString isEqualToString:@""])
@@ -542,7 +542,7 @@
 	
 	NSString * favIconPath;
 	
-	if (IsRSSFolder(folder)) {
+	if (folder.type == VNAFolderTypeRSS) {
 		[aItem appendDetail:NSLocalizedString(@"Retrieving folder image", nil)];
 		favIconPath = [NSString stringWithFormat:@"%@/favicon.ico", folder.homePage.trim.baseURL];
 	} else { // Open Reader feed

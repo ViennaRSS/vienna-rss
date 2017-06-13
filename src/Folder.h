@@ -40,7 +40,6 @@ typedef NS_ENUM(NSInteger, VNAFolderType) {
 };
 
 // Macros to simplify getting folder types
-#define IsRSSFolder(f)			(([(f) type]) == VNAFolderTypeRSS)
 #define IsGroupFolder(f)		(([(f) type]) == VNAFolderTypeGroup)
 #define IsTrashFolder(f)		(([(f) type]) == VNAFolderTypeTrash)
 #define IsSearchFolder(f)		(([(f) type]) == VNAFolderTypeSearch)

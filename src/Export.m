@@ -56,7 +56,7 @@
 				countExported += [Export exportSubscriptionGroup:outlineElement fromArray:subFolders inFoldersTree:foldersTree withGroups:groupFlag];
 			}
 		}
-		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
+		else if (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder))
 		{
 			NSString * link = folder.homePage;
 			NSString * description = folder.feedDescription;

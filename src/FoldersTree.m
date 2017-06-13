@@ -331,12 +331,14 @@
 	NSMutableArray * array = [NSMutableArray array];
 	TreeNode * node;
 
-	if (!folderId)
+    if (!folderId) {
 		node = rootNode;
-	else
+    } else {
 		node = [rootNode nodeFromID:folderId];
-	if (node.folder != nil && (IsRSSFolder([node folder]) || IsGoogleReaderFolder([node folder])))
+    }
+    if (node.folder != nil && (node.folder.type == VNAFolderTypeRSS || node.folder.type == VNAFolderTypeOpenReader)) {
 		[array addObject:node.folder];
+    }
 	node = node.firstChild;
 	while (node != nil)
 	{
@@ -1161,13 +1163,13 @@
 		TreeNode * node = items[index];
 		Folder * folder = node.folder;
 
-		if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder) || folder.type == VNAFolderTypeSmart || IsGroupFolder(folder) || IsSearchFolder(folder) || IsTrashFolder(folder))
+		if (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder) || folder.type == VNAFolderTypeSmart || IsGroupFolder(folder) || IsSearchFolder(folder) || IsTrashFolder(folder))
 		{
 			[internalDragData addObject:@(node.nodeId)];
 			++countOfItems;
 		}
 
-		if (IsRSSFolder(folder)||IsGoogleReaderFolder(folder))
+		if (folder.type == VNAFolderTypeRSS||IsGoogleReaderFolder(folder))
 		{
 			NSString * feedURL = folder.feedURL;
 			

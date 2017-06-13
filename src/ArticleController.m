@@ -888,7 +888,7 @@
 		{
 			[refArray addObjectsFromArray:[self wrappedMarkAllReadInArray:[[Database sharedManager] arrayOfFolders:folderId] withUndo:undoFlag]];
 		}
-		else if (IsRSSFolder(folder))
+		else if (folder.type == VNAFolderTypeRSS)
 		{
             if (undoFlag) {
 				[refArray addObjectsFromArray:[folder arrayOfUnreadArticlesRefs]];
@@ -963,8 +963,8 @@
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
 															object:@(lastFolderId)];
 	}
-	if (lastFolderId != -1 && !IsRSSFolder([dbManager folderFromID:currentFolderId])
-		&& !IsGoogleReaderFolder([dbManager folderFromID:currentFolderId])) {
+	if (lastFolderId != -1 && [dbManager folderFromID:currentFolderId].type != VNAFolderTypeRSS
+		&& [dbManager folderFromID:currentFolderId].type != VNAFolderTypeOpenReader) {
 		[self reloadArrayOfArticles];
 	}
 	else if (needRefilter) {
@@ -1049,7 +1049,7 @@
 {
     NSInteger folderId = ((NSNumber *)nc.object).integerValue;
     Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
-    if ( (folderId == currentFolderId) || (!IsRSSFolder(currentFolder) && !IsGoogleReaderFolder(currentFolder)) ) {
+    if ((folderId == currentFolderId) || (currentFolder.type != VNAFolderTypeRSS && currentFolder.type != VNAFolderTypeOpenReader)) {
         [mainArticleView refreshFolder:MA_Refresh_RedrawList];
     }
 }
@@ -1065,7 +1065,7 @@
     Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
     if ( (folderId == currentFolderId)
       // for group or smart folder, to avoid flickering, we only update when refresh process is finished
-      || (!IsRSSFolder(currentFolder) && !IsGoogleReaderFolder(currentFolder) && !APPCONTROLLER.isConnecting) )
+      || (currentFolder.type != VNAFolderTypeRSS && currentFolder.type != VNAFolderTypeOpenReader && !APPCONTROLLER.isConnecting) )
     {
         // Note the article that the user might currently be reading
         // to be preserved when reloading the array of articles.

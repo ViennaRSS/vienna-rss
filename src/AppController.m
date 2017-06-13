@@ -1934,7 +1934,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)doEditFolder:(Folder *)folder
 {
-	if (IsRSSFolder(folder))
+	if (folder.type == VNAFolderTypeRSS)
 	{
 		[self.rssFeed editSubscription:mainWindow folderId:folder.itemId];
 	}
@@ -2915,7 +2915,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 		else if (IsSearchFolder(folder))
 			needPrompt = NO;
-		else if (IsRSSFolder(folder))
+		else if (folder.type == VNAFolderTypeRSS)
 		{
 			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete RSS feed text", nil), folder.name];
 			alertTitle = NSLocalizedString(@"Delete RSS feed", nil);
@@ -3089,7 +3089,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	Article * thisArticle = self.selectedArticle;
 	Folder * folder = (thisArticle) ? [db folderFromID:thisArticle.folderId] : [db folderFromID:foldersTree.actualSelection];
-	if (thisArticle || IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
+	if (thisArticle || folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder))
 		[self openURLFromString:folder.homePage inPreferredBrowser:YES];
 }
 
@@ -3100,7 +3100,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	Article * thisArticle = self.selectedArticle;
 	Folder * folder = (thisArticle) ? [db folderFromID:thisArticle.folderId] : [db folderFromID:foldersTree.actualSelection];
-	if (thisArticle || IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
+	if (thisArticle || folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder))
 		[self openURLFromString:folder.homePage inPreferredBrowser:NO];
 }
 
@@ -3750,7 +3750,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	if (theAction == @selector(getInfo:))
 	{
 		Folder * folder = [db folderFromID:foldersTree.actualSelection];
-		*validateFlag = (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) && isMainWindowVisible;
+		*validateFlag = (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder)) && isMainWindowVisible;
 		return YES;
 	}
 	if (theAction == @selector(forceRefreshSelectedSubscriptions:)) {
@@ -3904,25 +3904,25 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			else
 				[menuItem setTitle:NSLocalizedString(@"Unsubscribe", nil)];
 		}
-		return folder && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) && !db.readOnly && isMainWindowVisible;
+		return folder && (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder)) && !db.readOnly && isMainWindowVisible;
 	}
 	else if (theAction == @selector(useCurrentStyleForArticles:))
 	{
 		Folder * folder = [db folderFromID:foldersTree.actualSelection];
-		if (folder && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) && !folder.loadsFullHTML)
+		if (folder && (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder)) && !folder.loadsFullHTML)
 			menuItem.state = NSOnState;
 		else
 			menuItem.state = NSOffState;
-		return folder && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) && !db.readOnly && isMainWindowVisible;
+		return folder && (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder)) && !db.readOnly && isMainWindowVisible;
 	}
 	else if (theAction == @selector(useWebPageForArticles:))
 	{
 		Folder * folder = [db folderFromID:foldersTree.actualSelection];
-		if (folder && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) && folder.loadsFullHTML)
+		if (folder && (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder)) && folder.loadsFullHTML)
 			menuItem.state = NSOnState;
 		else
 			menuItem.state = NSOffState;
-		return folder && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) && !db.readOnly && isMainWindowVisible;
+		return folder && (folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder)) && !db.readOnly && isMainWindowVisible;
 	}
 	else if (theAction == @selector(deleteFolder:))
 	{
@@ -3936,7 +3936,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	else if (theAction == @selector(refreshSelectedSubscriptions:))
 	{
 		Folder * folder = [db folderFromID:foldersTree.actualSelection];
-		return folder && (IsRSSFolder(folder) || IsGroupFolder(folder) || IsGoogleReaderFolder(folder)) && !db.readOnly;
+		return folder && (folder.type == VNAFolderTypeRSS || IsGroupFolder(folder) || IsGoogleReaderFolder(folder)) && !db.readOnly;
 	}
 	else if (theAction == @selector(refreshAllFolderIcons:))
 	{
@@ -3968,7 +3968,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		Article * thisArticle = self.selectedArticle;
 		Folder * folder = (thisArticle) ? [db folderFromID:thisArticle.folderId] : [db folderFromID:foldersTree.actualSelection];
-		return folder && (thisArticle || IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) && (folder.homePage && !folder.homePage.blank && isMainWindowVisible);
+		return folder && (thisArticle || folder.type == VNAFolderTypeRSS || IsGoogleReaderFolder(folder)) && (folder.homePage && !folder.homePage.blank && isMainWindowVisible);
 	}
 	else if ((theAction == @selector(viewArticlePages:)) || (theAction == @selector(viewArticlePagesInAlternateBrowser:)))
 	{
@@ -3988,7 +3988,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	else if (theAction == @selector(editFolder:))
 	{
 		Folder * folder = [db folderFromID:foldersTree.actualSelection];
-		return folder && (folder.type == VNAFolderTypeSmart || IsRSSFolder(folder)) && !db.readOnly && isMainWindowVisible;
+		return folder && (folder.type == VNAFolderTypeSmart || folder.type == VNAFolderTypeRSS) && !db.readOnly && isMainWindowVisible;
 	}
 	else if (theAction == @selector(restoreMessage:))
 	{
