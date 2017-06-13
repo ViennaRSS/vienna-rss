@@ -820,8 +820,7 @@ static NSArray * iconArray = nil;
 -(NSString *)feedSourceFilePath
 {
 	NSString * feedSourceFilePath = nil;
-	if (self.RSSFolder)
-	{
+	if (self.type == VNAFolderTypeRSS) {
 		NSString * feedSourceFileName = [NSString stringWithFormat:@"folder%li.xml", (long)self.itemId];
 		feedSourceFilePath = [[Preferences standardPreferences].feedSourcesFolder stringByAppendingPathComponent:feedSourceFileName];
 	}
