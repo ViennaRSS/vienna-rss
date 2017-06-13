@@ -508,8 +508,6 @@
 		43501CFB165D73C70018EDB7 /* Vienna-Dev.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-Dev.xcconfig"; path = "configs/Vienna-Dev.xcconfig"; sourceTree = SOURCE_ROOT; };
 		435026E5165DD8BE0018EDB7 /* ArticleRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ArticleRef.m; path = src/ArticleRef.m; sourceTree = SOURCE_ROOT; };
 		4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSNotificationAdditions.m; path = src/NSNotificationAdditions.m; sourceTree = SOURCE_ROOT; };
-		43502845165DE9560018EDB7 /* RenameFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenameFolder.h; path = src/RenameFolder.h; sourceTree = SOURCE_ROOT; };
-		43502846165DE9560018EDB7 /* RenameFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RenameFolder.m; path = src/RenameFolder.m; sourceTree = SOURCE_ROOT; };
 		43502848165DE9DF0018EDB7 /* ActivityLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityLog.m; path = src/ActivityLog.m; sourceTree = SOURCE_ROOT; };
 		43502849165DE9DF0018EDB7 /* ActivityPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityPanelController.h; path = src/ActivityPanelController.h; sourceTree = SOURCE_ROOT; };
 		4350284A165DE9DF0018EDB7 /* ActivityPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityPanelController.m; path = src/ActivityPanelController.m; sourceTree = SOURCE_ROOT; };
@@ -1466,8 +1464,6 @@
 				43502892165DE9DF0018EDB7 /* ViennaApp.m */,
 				3AF896C51CD8FDB800A9FA22 /* ViennaSparkleDelegate.h */,
 				3AF896C61CD8FDB800A9FA22 /* ViennaSparkleDelegate.m */,
-				43502845165DE9560018EDB7 /* RenameFolder.h */,
-				43502846165DE9560018EDB7 /* RenameFolder.m */,
 			);
 			name = Classes;
 			sourceTree = SOURCE_ROOT;
