@@ -26,14 +26,12 @@
 #import "Database.h"
 #import "ArticleFilter.h"
 #import "ArticleRef.h"
-#import "StringExtensions.h"
 #import "GoogleReader.h"
 #import "ArticleListView.h"
 #import "UnifiedDisplayView.h"
 #import "FoldersTree.h"
 #import "Article.h"
 #import "Folder.h"
-#import "ArticleView.h"
 #import "BackTrackArray.h"
 
 // Private functions

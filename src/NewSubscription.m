@@ -22,7 +22,6 @@
 #import "AppController.h"
 #import "StringExtensions.h"
 #import "Preferences.h"
-#import "GoogleReader.h"
 #import "SubscriptionModel.h"
 #import "Folder.h"
 #import "Database.h"

@@ -19,7 +19,6 @@
 //
 
 #import "StdEnclosureView.h"
-#import "Preferences.h"
 #import "DownloadManager.h"
 #import "DSClickableURLTextField.h"
 #import "HelperFunctions.h"

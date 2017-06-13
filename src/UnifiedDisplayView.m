@@ -31,7 +31,6 @@
 #import "Article.h"
 #import "Folder.h"
 #import "BrowserView.h"
-#import "ArticleBaseView.h"
 #import "TableViewExtensions.h"
 #import "Database.h"
 

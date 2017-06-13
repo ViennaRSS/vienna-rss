@@ -22,7 +22,6 @@
 #import "HelperFunctions.h"
 #import "Folder.h"
 #import "Database.h"
-#import <Foundation/Foundation.h>
 #import "AppController.h"
 #import "RefreshManager.h"
 #import "Preferences.h"
@@ -30,7 +29,6 @@
 #import "NSNotificationAdditions.h"
 #import "KeyChain.h"
 #import "ActivityItem.h"
-#import "ActivityLog.h"
 #import "Article.h"
 #import "Debug.h"
 #import "ASIFormDataRequest.h"

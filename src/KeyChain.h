@@ -19,6 +19,7 @@
 //
 
 @import Foundation;
+@import Security;
 
 @interface KeyChain : NSObject
 	+(NSString *)getPasswordFromKeychain:(NSString *)username url:(NSString *)url;

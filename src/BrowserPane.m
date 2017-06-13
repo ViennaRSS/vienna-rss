@@ -22,7 +22,6 @@
 #import "BrowserPane.h"
 #import "TabbedWebView.h"
 #import "AppController.h"
-#import "Preferences.h"
 #import "HelperFunctions.h"
 #import "StringExtensions.h"
 #import "AddressBarCell.h"

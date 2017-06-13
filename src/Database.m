@@ -25,12 +25,10 @@
 #import "Constants.h"
 #import "ArticleRef.h"
 #import "NSNotificationAdditions.h"
-#import "RefreshManager.h"
 #import "Debug.h"
 #import "VNADatabaseMigration.h"
 #import "Article.h"
 #import "Folder.h"
-#import "FMDB.h"
 #import "Field.h"
 #import "Criteria.h"
 

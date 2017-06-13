@@ -31,17 +31,12 @@
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
 #import "ArticleRef.h"
-#import "ArticleFilter.h"
 #import "Field.h"
-#import <WebKit/WebKit.h>
-#import "PopupButton.h"
 #import "BrowserPane.h"
 #import "ProgressTextCell.h"
-#import "BJRVerticallyCenteredTextFieldCell.h"
 #import "Article.h"
 #import "Folder.h"
 #import "StdEnclosureView.h"
-#import "PopupButton.h"
 #import "BrowserView.h"
 #import "Database.h"
 

@@ -19,8 +19,6 @@
 //
 
 #import "AppearancePreferencesViewController.h"
-#import "Constants.h"
-#import "PopUpButtonExtensions.h"
 #import "Preferences.h"
 
 // List of available font sizes. I picked the ones that matched

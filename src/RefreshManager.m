@@ -27,7 +27,6 @@
 #import "Preferences.h"
 #import "Constants.h"
 #import "GoogleReader.h"
-#import "Constants.h"
 #import "AppController.h"
 #import "ASIHTTPRequest.h"
 #import "NSNotificationAdditions.h"
@@ -37,7 +36,6 @@
 #import "Article.h"
 #import "Folder.h"
 #import "Database.h"
-#import "FeedCredentials.h"
 #import "ASINetworkQueue.h"
 
 @interface RefreshManager ()

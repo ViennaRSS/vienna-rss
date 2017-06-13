@@ -27,12 +27,10 @@
 #import "HelperFunctions.h"
 #import "StringExtensions.h"
 #import "FolderView.h"
-#import "PopupButton.h"
 #import "BrowserView.h"
 #import "GoogleReader.h"
 #import "Database.h"
 #import "TreeNode.h"
-#import "FolderView.h"
 #import "Folder.h"
 
 @interface FoldersTree () <NSOutlineViewDataSource>
