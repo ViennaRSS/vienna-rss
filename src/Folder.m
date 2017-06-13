@@ -210,32 +210,31 @@ static NSArray * iconArray = nil;
     return folderImage;
 }
 
-/* hasCachedImage
- * Returns YES if the folder has an image stored in the cache.
+/*!Check if an RSS or OpenReader folder
+ * has an image stored in cache.
+ * @return YES if the folder has an image stored in the cache.
  */
--(BOOL)hasCachedImage
-{
-	if (!IsRSSFolder(self) && !IsGoogleReaderFolder(self))
+-(BOOL)hasCachedImage {
+    if (self.type != VNAFolderTypeRSS && self.type != VNAFolderTypeOpenReader) {
 		return NO;
+    }
 	NSImage * imagePtr = nil;
-	if (self.feedURL)
-	{
+	if (self.feedURL) {
 		NSString * homePageSiteRoot = self.homePage.host.convertStringToValidPath;
 		imagePtr = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
 	}
 	return (imagePtr != nil);
 }
 
-/* standardImage
- * Returns the standard (not feed customised) image for this folder.
+/*!Get the standard (not feed customised) image for this folder.
+ * @return The standard image.
  */
--(NSImage *)standardImage
-{
-	if (IsRSSFolder(self))
-		return [Folder _iconArray][MA_RSSFeedIcon];
-	if (IsGoogleReaderFolder(self))
-		return [Folder _iconArray][MA_GoogleReaderFolderIcon];
-	return self.image;
+-(NSImage *)standardImage {
+    switch (self.type) {
+        case VNAFolderTypeRSS: return Folder._iconArray[MA_RSSFeedIcon];
+        case VNAFolderTypeOpenReader: return Folder._iconArray[MA_GoogleReaderFolderIcon];
+        default: return self.image;
+    }
 }
 
 /* setImage
