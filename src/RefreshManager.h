@@ -22,7 +22,9 @@
 #import "Database.h"
 #import "FeedCredentials.h"
 #import "Constants.h"
-#import "ASINetworkQueue.h"
+
+@class ASIHTTPRequest;
+@class ASINetworkQueue;
 
 @interface RefreshManager : NSObject {
 	NSUInteger maximumConnections;
@@ -35,8 +37,6 @@
     SyncTypes syncType;
 	ASINetworkQueue *networkQueue;
 	dispatch_queue_t _queue;
-	NSTimer * unsafe301RedirectionTimer;
-	NSString * riskyIPAddress;
 }
 
 +(RefreshManager *)sharedManager;
