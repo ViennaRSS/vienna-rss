@@ -27,7 +27,6 @@
 #import "StringExtensions.h"
 #import "FolderView.h"
 #import "PopupButton.h"
-#import "ViennaApp.h"
 #import "BrowserView.h"
 #import "GoogleReader.h"
 

@@ -376,7 +376,7 @@
                             <menuItem title="About Vienna" id="58">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="handleAbout:" target="233" id="950"/>
+                                    <action selector="orderFrontStandardAboutPanel:" target="-1" id="I3y-xZ-6an"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="196">
@@ -440,7 +440,7 @@ CA
                             </menuItem>
                             <menuItem title="Quit Vienna" keyEquivalent="q" id="136">
                                 <connections>
-                                    <action selector="exitVienna:" target="233" id="1232"/>
+                                    <action selector="terminate:" target="-1" id="A3o-k6-T9E"/>
                                 </connections>
                             </menuItem>
                         </items>

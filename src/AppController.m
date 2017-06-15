@@ -793,7 +793,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	return browserView;
 }
 
-
 /* folderMenu
  * Dynamically create the popup menu. This is one less thing to
  * explicitly localise in the NIB file.
@@ -818,14 +817,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	[folderMenu addItem:[NSMenuItem separatorItem]];
 	[folderMenu addItem:copyOfMenuItemWithAction(@selector(forceRefreshSelectedSubscriptions:))];	
 	return folderMenu;
-}
-
-/* exitVienna
- * Alias for the terminate command.
- */
--(IBAction)exitVienna:(id)sender
-{
-	[NSApp terminate:nil];
 }
 
 /* reindexDatabase
@@ -1727,20 +1718,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	} // @synchronized
 }
 
-/* handleAbout
- * Display our About Vienna... window.
- */
--(IBAction)handleAbout:(id)sender
-{
-	NSDictionary * fileAttributes = [NSBundle mainBundle].infoDictionary;
-	LOG_EXPR(fileAttributes);
-	NSString * version = fileAttributes[@"CFBundleShortVersionString"];
-	NSString * versionString = [NSString stringWithFormat:NSLocalizedString(@"Version %@", nil), version];
-	NSDictionary * d = @{@"ApplicationVersion": versionString, @"Version": @""};
-	[NSApp activateIgnoringOtherApps:YES];
-	[NSApp orderFrontStandardAboutPanelWithOptions:d];
-}
-
 /* emptyTrash
  * Delete all articles from the Trash folder.
  */
@@ -1854,14 +1831,16 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[appStatusItem setHighlightMode:YES];
 		
         NSMenu * statusBarMenu = [NSMenu new];
-		[statusBarMenu addItem:menuItemWithTitleAndAction(NSLocalizedString(@"Open Vienna", nil), @selector(openVienna:))];
-		[statusBarMenu addItem:[NSMenuItem separatorItem]];
+        [statusBarMenu addItemWithTitle:NSLocalizedString(@"Show Main Window…", @"Title of a menu item")
+                                 action:@selector(openVienna:)
+                          keyEquivalent:@""];
+        [statusBarMenu addItem:[NSMenuItem separatorItem]];
 		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(refreshAllSubscriptions:))];
 		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(markAllSubscriptionsRead:))];
-		[statusBarMenu addItem:[NSMenuItem separatorItem]];
-		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(handleAbout:))];
-		[statusBarMenu addItem:[NSMenuItem separatorItem]];
-		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(exitVienna:))];
+        [statusBarMenu addItem:[NSMenuItem separatorItem]];
+        [statusBarMenu addItemWithTitle:NSLocalizedString(@"Quit Vienna", @"Title of a menu item")
+                                 action:@selector(terminate:)
+                          keyEquivalent:@""];
 		appStatusItem.menu = statusBarMenu;
 	}
 	else if (!prefs.showAppInStatusBar && appStatusItem != nil)
@@ -4060,7 +4039,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		else 
 			menuItem.state = NSOffState;
 		return YES;
-	}
+	} else if (theAction == @selector(openVienna:)) {
+        return mainWindow.isKeyWindow == false;
+    }
+
 	return YES;
 }
 

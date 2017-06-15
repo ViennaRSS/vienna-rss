@@ -41,8 +41,6 @@ BOOL isAccessible(NSString * urlString);
 void runOKAlertPanel(NSString * titleString, NSString * bodyText, ...);
 void runOKAlertSheet(NSString * titleString, NSString * bodyText, ...);
 NSMenuItem * menuItemWithAction(SEL theSelector);
-NSMenuItem * menuItemWithTitleAndAction(NSString * theTitle, SEL theSelector);
-NSMenuItem * menuItemOfMenuWithAction(NSMenu * menu, SEL theSelector);
 NSMenuItem * copyOfMenuItemWithAction(SEL theSelector);
 NSString * getDefaultBrowser(void);
 NSURL * cleanedUpAndEscapedUrlFromString(NSString * theUrl);
