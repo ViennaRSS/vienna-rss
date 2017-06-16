@@ -1475,19 +1475,17 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				43EE7547165E8109000997FB /* Applescript */,
-				B262610E10A033F700E76A37 /* ErrorPage */,
-				AA1A282E0C09BE59005968DC /* Toolbar Buttons */,
-				43EE7546165E80D4000997FB /* Public Keys */,
 				43EE7548165E81AB000997FB /* Interfaces */,
-				43EE754C165E82F9000997FB /* Icons */,
+				F6B172881EF37F51003F0AB5 /* Images */,
+				43EE7547165E8109000997FB /* AppleScript */,
+				F6B172871EF37F18003F0AB5 /* Plug-ins */,
+				B262610E10A033F700E76A37 /* ErrorPage */,
+				43EE7546165E80D4000997FB /* Public Keys */,
 				43EE754D165E832C000997FB /* Default Lists */,
-				43EE754E165E83D6000997FB /* UI Images */,
 				434D6B8516937615008CBE8C /* codesignrequirement.rqset */,
 				F62580A81E286A8B0035E43C /* Localizable.strings */,
 				F62580E21E286CE60035E43C /* KnownSyncServers.plist */,
 				F62580E51E286CEC0035E43C /* RSSSources.plist */,
-				F62580DF1E286CDE0035E43C /* errorpage.html */,
 				430C4AE0166175C20079C9FC /* Vienna-Info.plist */,
 			);
 			name = Resources;
@@ -1560,13 +1558,13 @@
 			name = "Public Keys";
 			sourceTree = "<group>";
 		};
-		43EE7547165E8109000997FB /* Applescript */ = {
+		43EE7547165E8109000997FB /* AppleScript */ = {
 			isa = PBXGroup;
 			children = (
 				AA167A840658361B0091365D /* ViennaApp.scriptSuite */,
 				AA167A24065834DC0091365D /* ViennaApp.scriptTerminology */,
 			);
-			name = Applescript;
+			name = AppleScript;
 			sourceTree = "<group>";
 		};
 		43EE7548165E81AB000997FB /* Interfaces */ = {
@@ -1588,13 +1586,13 @@
 			name = Interfaces;
 			sourceTree = "<group>";
 		};
-		43EE754C165E82F9000997FB /* Icons */ = {
+		43EE754C165E82F9000997FB /* Bundle icons */ = {
 			isa = PBXGroup;
 			children = (
 				57F7E2EF16F534FE00D4702E /* vienna3plugin.icns */,
 				57F7E2F016F534FE00D4702E /* vienna3style.icns */,
 			);
-			name = Icons;
+			name = "Bundle icons";
 			sourceTree = "<group>";
 		};
 		43EE754D165E832C000997FB /* Default Lists */ = {
@@ -1607,7 +1605,7 @@
 			name = "Default Lists";
 			sourceTree = "<group>";
 		};
-		43EE754E165E83D6000997FB /* UI Images */ = {
+		43EE754E165E83D6000997FB /* Misc */ = {
 			isa = PBXGroup;
 			children = (
 				430C4ADC166175A00079C9FC /* blankPopupMenuButton.tiff */,
@@ -1668,7 +1666,7 @@
 				61A2CB600A8AC68C006348E8 /* revised.tiff */,
 				AA16C5440C2DD4EB006BBAC1 /* refreshProgress.tiff */,
 			);
-			name = "UI Images";
+			name = Misc;
 			sourceTree = "<group>";
 		};
 		4D36B4491D37F902009736C1 /* models */ = {
@@ -1709,7 +1707,7 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		AA1A282E0C09BE59005968DC /* Toolbar Buttons */ = {
+		AA1A282E0C09BE59005968DC /* Toolbar buttons */ = {
 			isa = PBXGroup;
 			children = (
 				5740945316F5112B0087870F /* stylesMenuButtonSmall.tiff */,
@@ -1804,7 +1802,7 @@
 				575B229116EEB63F00CAC982 /* subscribeButtonSmall@2x.tiff */,
 				AA077A940C84484B00D71D26 /* subscribeButtonSmallPressed.tiff */,
 			);
-			name = "Toolbar Buttons";
+			name = "Toolbar buttons";
 			sourceTree = "<group>";
 		};
 		AA3113EC09020E1B00E80DF1 /* Preferences */ = {
@@ -1839,8 +1837,8 @@
 				AAF3B14106095E7B0025CC7F /* StringExtensions.m */,
 				AAA305FC0682A25200E4A6DC /* TableViewExtensions.h */,
 				AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */,
-				37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */,
 				37C652B4C918F312BA9F1AB1 /* NSURL+Utils.h */,
+				37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */,
 				03B35B821B75E9E0001DB06D /* NSDate+Vienna.h */,
 				03B35B831B75E9E0001DB06D /* NSDate+Vienna.m */,
 			);
@@ -1861,8 +1859,8 @@
 		AA8C76C006420CA800649BA2 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				435026E5165DD8BE0018EDB7 /* ArticleRef.m */,
 				AA7AB45708CA742A000D34F9 /* ArticleRef.h */,
+				435026E5165DD8BE0018EDB7 /* ArticleRef.m */,
 				AA8C72F30641DE1F00649BA2 /* Criteria.h */,
 				AA8C72F40641DE1F00649BA2 /* Criteria.m */,
 				AA26F4C90604927300FE7994 /* Database.h */,
@@ -1900,9 +1898,6 @@
 				AA3113EC09020E1B00E80DF1 /* Preferences */,
 				AA5AABB50C3CD68A00B2E14F /* Toolbar */,
 				AAC5063C082A7A530089FF70 /* Other Sources */,
-				AA67F32E089727FB008BBC37 /* Styles */,
-				B27CCFFD1100E728001F3C83 /* Plugins */,
-				03F33D951DF2A2F900B04FAF /* Images.xcassets */,
 			);
 			name = Vienna;
 			sourceTree = SOURCE_ROOT;
@@ -1953,6 +1948,7 @@
 		B262610E10A033F700E76A37 /* ErrorPage */ = {
 			isa = PBXGroup;
 			children = (
+				F62580DF1E286CDE0035E43C /* errorpage.html */,
 				B273E8EB106910B2001ADEF8 /* errorpagebg.png */,
 				B2554730106913760065E9C3 /* errorpagelogo.png */,
 			);
@@ -1992,6 +1988,26 @@
 				F6A7DE491E4717970017BE5E /* shared */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		F6B172871EF37F18003F0AB5 /* Plug-ins */ = {
+			isa = PBXGroup;
+			children = (
+				B27CCFFD1100E728001F3C83 /* Plugins */,
+				AA67F32E089727FB008BBC37 /* Styles */,
+			);
+			name = "Plug-ins";
+			sourceTree = "<group>";
+		};
+		F6B172881EF37F51003F0AB5 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				03F33D951DF2A2F900B04FAF /* Images.xcassets */,
+				AA1A282E0C09BE59005968DC /* Toolbar buttons */,
+				43EE754C165E82F9000997FB /* Bundle icons */,
+				43EE754E165E83D6000997FB /* Misc */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		F6CE47101E7E3D520045EAD7 /* Activity panel */ = {
