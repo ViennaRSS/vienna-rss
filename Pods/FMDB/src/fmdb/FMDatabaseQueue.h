@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class FMDatabase;
 
 /** To perform queries and updates on multiple threads, you'll want to use `FMDatabaseQueue`.
@@ -60,20 +62,18 @@
 
  */
 
-@interface FMDatabaseQueue : NSObject {
-    NSString            *_path;
-    dispatch_queue_t    _queue;
-    FMDatabase          *_db;
-    int                 _openFlags;
-}
-
+@interface FMDatabaseQueue : NSObject
 /** Path of database */
 
-@property (atomic, retain) NSString *path;
+@property (atomic, retain, nullable) NSString *path;
 
 /** Open flags */
 
 @property (atomic, readonly) int openFlags;
+
+/**  Custom virtual file system name */
+
+@property (atomic, copy, nullable) NSString *vfsName;
 
 ///----------------------------------------------------
 /// @name Initialization, opening, and closing of queue
@@ -86,35 +86,72 @@
  @return The `FMDatabaseQueue` object. `nil` on error.
  */
 
-+ (instancetype)databaseQueueWithPath:(NSString*)aPath;
++ (instancetype)databaseQueueWithPath:(NSString * _Nullable)aPath;
+
+/** Create queue using file URL.
+ 
+ @param url The file `NSURL` of the database.
+ 
+ @return The `FMDatabaseQueue` object. `nil` on error.
+ */
+
++ (instancetype)databaseQueueWithURL:(NSURL * _Nullable)url;
 
 /** Create queue using path and specified flags.
  
  @param aPath The file path of the database.
- @param openFlags Flags passed to the openWithFlags method of the database
+ @param openFlags Flags passed to the openWithFlags method of the database.
  
  @return The `FMDatabaseQueue` object. `nil` on error.
  */
-+ (instancetype)databaseQueueWithPath:(NSString*)aPath flags:(int)openFlags;
++ (instancetype)databaseQueueWithPath:(NSString * _Nullable)aPath flags:(int)openFlags;
+
+/** Create queue using file URL and specified flags.
+ 
+ @param url The file `NSURL` of the database.
+ @param openFlags Flags passed to the openWithFlags method of the database.
+ 
+ @return The `FMDatabaseQueue` object. `nil` on error.
+ */
++ (instancetype)databaseQueueWithURL:(NSURL * _Nullable)url flags:(int)openFlags;
 
 /** Create queue using path.
-
+ 
  @param aPath The file path of the database.
-
+ 
  @return The `FMDatabaseQueue` object. `nil` on error.
  */
 
-- (instancetype)initWithPath:(NSString*)aPath;
+- (instancetype)initWithPath:(NSString * _Nullable)aPath;
+
+/** Create queue using file URL.
+ 
+ @param url The file `NSURL of the database.
+ 
+ @return The `FMDatabaseQueue` object. `nil` on error.
+ */
+
+- (instancetype)initWithURL:(NSURL * _Nullable)url;
 
 /** Create queue using path and specified flags.
  
  @param aPath The file path of the database.
- @param openFlags Flags passed to the openWithFlags method of the database
+ @param openFlags Flags passed to the openWithFlags method of the database.
  
  @return The `FMDatabaseQueue` object. `nil` on error.
  */
 
-- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags;
+- (instancetype)initWithPath:(NSString * _Nullable)aPath flags:(int)openFlags;
+
+/** Create queue using file URL and specified flags.
+ 
+ @param url The file path of the database.
+ @param openFlags Flags passed to the openWithFlags method of the database.
+ 
+ @return The `FMDatabaseQueue` object. `nil` on error.
+ */
+
+- (instancetype)initWithURL:(NSURL * _Nullable)url flags:(int)openFlags;
 
 /** Create queue using path and specified flags.
  
@@ -125,7 +162,18 @@
  @return The `FMDatabaseQueue` object. `nil` on error.
  */
 
-- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags vfs:(NSString *)vfsName;
+- (instancetype)initWithPath:(NSString * _Nullable)aPath flags:(int)openFlags vfs:(NSString * _Nullable)vfsName;
+
+/** Create queue using file URL and specified flags.
+ 
+ @param url The file `NSURL of the database.
+ @param openFlags Flags passed to the openWithFlags method of the database
+ @param vfsName The name of a custom virtual file system
+ 
+ @return The `FMDatabaseQueue` object. `nil` on error.
+ */
+
+- (instancetype)initWithURL:(NSURL * _Nullable)url flags:(int)openFlags vfs:(NSString * _Nullable)vfsName;
 
 /** Returns the Class of 'FMDatabase' subclass, that will be used to instantiate database object.
  
@@ -140,6 +188,10 @@
 
 - (void)close;
 
+/** Interupt pending database operation. */
+
+- (void)interrupt;
+
 ///-----------------------------------------------
 /// @name Dispatching database operations to queue
 ///-----------------------------------------------
@@ -149,21 +201,21 @@
  @param block The code to be run on the queue of `FMDatabaseQueue`
  */
 
-- (void)inDatabase:(void (^)(FMDatabase *db))block;
+- (void)inDatabase:(__attribute__((noescape)) void (^)(FMDatabase *db))block;
 
 /** Synchronously perform database operations on queue, using transactions.
 
  @param block The code to be run on the queue of `FMDatabaseQueue`
  */
 
-- (void)inTransaction:(void (^)(FMDatabase *db, BOOL *rollback))block;
+- (void)inTransaction:(__attribute__((noescape)) void (^)(FMDatabase *db, BOOL *rollback))block;
 
 /** Synchronously perform database operations on queue, using deferred transactions.
 
  @param block The code to be run on the queue of `FMDatabaseQueue`
  */
 
-- (void)inDeferredTransaction:(void (^)(FMDatabase *db, BOOL *rollback))block;
+- (void)inDeferredTransaction:(__attribute__((noescape)) void (^)(FMDatabase *db, BOOL *rollback))block;
 
 ///-----------------------------------------------
 /// @name Dispatching database operations to queue
@@ -176,7 +228,8 @@
 
 // NOTE: you can not nest these, since calling it will pull another database out of the pool and you'll get a deadlock.
 // If you need to nest, use FMDatabase's startSavePointWithName:error: instead.
-- (NSError*)inSavePoint:(void (^)(FMDatabase *db, BOOL *rollback))block;
+- (NSError * _Nullable)inSavePoint:(__attribute__((noescape)) void (^)(FMDatabase *db, BOOL *rollback))block;
 
 @end
 
+NS_ASSUME_NONNULL_END

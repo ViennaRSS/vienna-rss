@@ -54,8 +54,8 @@
             FMResultSet * results = [db executeQuery:@"select folder_id, parent_id from folders"];
             while([results next])
             {
-                NSNumber *folderId = [results objectForColumnName:@"folder_id"];
-                NSNumber *parentId = [results objectForColumnName:@"parent_id"];
+                NSNumber *folderId = [results objectForColumn:@"folder_id"];
+                NSNumber *parentId = [results objectForColumn:@"parent_id"];
                 [db executeUpdate:@"update folders set parent_id=? where folder_id=?",
                  parentId, folderId];
             }
