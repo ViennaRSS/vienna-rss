@@ -18,14 +18,16 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "FoldersTree.h"
-#import "BackTrackArray.h"
+@import Cocoa;
+
 #import "BaseView.h"
 #import "ArticleBaseView.h"
-#import "ArticleView.h"
-#import "ArticleListView.h"
-#import "UnifiedDisplayView.h"
+
+@class Article;
+@class ArticleListView;
+@class BackTrackArray;
+@class FoldersTree;
+@class UnifiedDisplayView;
 
 /* ArticleController
  * The ArticleController contains the controlling logic for the article view that is
@@ -37,8 +39,6 @@
  */
 @interface ArticleController : NSObject
 {
-	FoldersTree * foldersTree;
-
 	IBOutlet ArticleListView * articleListView;
 	IBOutlet UnifiedDisplayView * unifiedListView;
 	NSView<ArticleBaseView, BaseView> * mainArticleView;

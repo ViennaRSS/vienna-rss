@@ -18,8 +18,9 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "Folder.h"
+@import Cocoa;
+
+@class Folder;
 
 #define PROGRESS_INDICATOR_DIMENSION	16
 

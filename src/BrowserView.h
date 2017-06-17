@@ -18,9 +18,10 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
+@import WebKit;
+
 #import "BaseView.h"
-#import <WebKit/WebKit.h>
 
 @class PSMTabBarControl;
 

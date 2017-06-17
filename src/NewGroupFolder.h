@@ -18,8 +18,7 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "Database.h"
+@import Cocoa;
 
 @interface NewGroupFolder : NSWindowController {
 	IBOutlet NSWindow * newGroupFolderWindow;

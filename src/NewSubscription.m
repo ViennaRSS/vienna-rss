@@ -22,15 +22,17 @@
 #import "AppController.h"
 #import "StringExtensions.h"
 #import "Preferences.h"
-#import "GoogleReader.h"
 #import "SubscriptionModel.h"
+#import "Folder.h"
+#import "Database.h"
 
-// Private functions
-@interface NewSubscription (Private)
-	-(void)loadRSSFeedBundle;
-	-(void)setLinkTitle;
-	-(void)enableSaveButton;
-	-(void)enableSubscribeButton;
+@interface NewSubscription ()
+
+-(void)loadRSSFeedBundle;
+-(void)setLinkTitle;
+-(void)enableSaveButton;
+-(void)enableSubscribeButton;
+
 @end
 
 @implementation NewSubscription

@@ -19,11 +19,8 @@
 //
 
 @import Cocoa;
-#import "Database.h"
-#import "ArticleController.h"
-#import "DownloadWindow.h"
-#import "PopupButton.h"
-#import "PluginManager.h"
+@import IOKit.pwr_mgt;
+@import WebKit;
 
 #define APPCONTROLLER ((AppController *)[NSApp delegate])
 #define APP ((ViennaApp *)NSApp)
@@ -40,6 +37,12 @@
 @class BJRWindowWithToolbar;
 @class DisclosureView;
 @class ViennaSparkleDelegate;
+@class PluginManager;
+@class SearchMethod;
+@class Database;
+@class ArticleController;
+@class DownloadWindow;
+@class Article;
 
 @interface AppController : NSObject <NSApplicationDelegate,NSWindowDelegate,NSToolbarDelegate,NSMenuDelegate>
 {
@@ -91,8 +94,9 @@
     ViennaSparkleDelegate * _sparkleDelegate;
 }
 
-@property(nonatomic, strong) NewSubscription *rssFeed;
-@property(nonatomic, strong) IBOutlet FoldersTree * foldersTree;
+@property (nonatomic, strong) NewSubscription *rssFeed;
+@property (readonly, weak) FoldersTree *foldersTree;
+@property (readonly, copy, nonatomic) NSMenu *searchFieldMenu;
 
 // Menu action items
 -(IBAction)reindexDatabase:(id)sender;
@@ -201,4 +205,6 @@
 -(void)performWebSearch:(SearchMethod *)searchMethod;
 -(void)performAllArticlesSearch;
 -(void)performWebPageSearch;
+-(void)searchArticlesWithString:(NSString *)searchString;
+
 @end

@@ -19,47 +19,55 @@
 //
 
 #import "Database.h"
+
 #import "Preferences.h"
 #import "StringExtensions.h"
 #import "Constants.h"
 #import "ArticleRef.h"
 #import "NSNotificationAdditions.h"
-#import "RefreshManager.h"
 #import "Debug.h"
 #import "VNADatabaseMigration.h"
+#import "Article.h"
+#import "Folder.h"
+#import "Field.h"
+#import "Criteria.h"
 
-// Private scope flags
-#define MA_Scope_Inclusive		1
-#define MA_Scope_SubFolders		2
+typedef NS_ENUM(NSInteger, VNAQueryScope) {
+    VNAQueryScopeInclusive = 1,
+    VNAQueryScopeSubFolders = 2
+};
 
-// Private functions
 @interface Database ()
 
-@property (nonatomic, readonly) BOOL setupInitialDatabase;
+@property (nonatomic) BOOL initializedfoldersDict;
+@property (nonatomic) BOOL initializedSmartfoldersDict;
+@property (nonatomic) NSMutableArray *fieldsOrdered;
+@property (nonatomic) NSMutableDictionary *fieldsByName;
+@property (nonatomic) NSMutableDictionary *fieldsByTitle;
+@property (nonatomic) NSMutableDictionary *foldersDict;
+@property (nonatomic) NSMutableDictionary *smartfoldersDict;
+@property (readwrite, nonatomic) BOOL readOnly;
+@property (readwrite, nonatomic) NSInteger countOfUnread;
+
 - (void)initaliseFields;
--(NSString *)relocateLockedDatabase:(NSString *)path;
--(CriteriaTree *)criteriaForFolder:(NSInteger)folderId;
--(NSArray *)arrayOfSubFolders:(Folder *)folder;
--(NSString *)sqlScopeForFolder:(Folder *)folder flags:(NSInteger)scopeFlags;
--(void)createInitialSmartFolder:(NSString *)folderName withCriteria:(Criteria *)criteria;
--(NSInteger)createFolderOnDatabase:(NSString *)name underParent:(NSInteger)parentId withType:(NSInteger)type;
-+(NSString *)databasePath;
+- (NSString *)relocateLockedDatabase:(NSString *)path;
+- (CriteriaTree *)criteriaForFolder:(NSInteger)folderId;
+- (NSArray *)arrayOfSubFolders:(Folder *)folder;
+- (NSString *)sqlScopeForFolder:(Folder *)folder flags:(NSInteger)scopeFlags;
+- (void)createInitialSmartFolder:(NSString *)folderName withCriteria:(Criteria *)criteria;
+- (NSInteger)createFolderOnDatabase:(NSString *)name underParent:(NSInteger)parentId withType:(NSInteger)type;
++ (NSString *)databasePath;
+
 @end
 
 // The current database version number
 const NSInteger MA_Min_Supported_DB_Version = 12;
 const NSInteger MA_Current_DB_Version = 19;
 
-
 @implementation Database
 
 NSNotificationName const databaseWillDeleteFolderNotification = @"Database Will Delete Folder";
 NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did Delete Folder";
-
-@synthesize trashFolder, searchFolder;
-@synthesize databaseQueue;
-
-
 
 /*!
  *  initialise the Database object with a specific path
@@ -72,22 +80,22 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 {
     self = [super init];
     if (self) {
-        initializedfoldersDict = NO;
-        initializedSmartfoldersDict = NO;
-        countOfUnread = 0;
-        trashFolder = nil;
-        searchFolder = nil;
-        searchString = @"";
-        smartfoldersDict = [[NSMutableDictionary alloc] init];
-        foldersDict = [[NSMutableDictionary alloc] init];
+        _initializedfoldersDict = NO;
+        _initializedSmartfoldersDict = NO;
+        _countOfUnread = 0;
+        _trashFolder = nil;
+        _searchFolder = nil;
+        _searchString = @"";
+        _smartfoldersDict = [[NSMutableDictionary alloc] init];
+        _foldersDict = [[NSMutableDictionary alloc] init];
         [self initaliseFields];
-        databaseQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
+        _databaseQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
         // If we did not succeed getting read/write+create status,
         // then we need to prompt the user for a different location.
-        if (databaseQueue == nil) {
+        if (_databaseQueue == nil) {
         	dbPath = [self relocateLockedDatabase:dbPath];
         	if (dbPath != nil)
-        		databaseQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
+        		_databaseQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
         }
         [self initialiseDatabase];
     }
@@ -139,7 +147,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         NSString * backupDatabaseFileName = [[Database databasePath] stringByAppendingPathExtension:@"bak"];
         [[NSFileManager defaultManager] copyItemAtPath:[Database databasePath] toPath:backupDatabaseFileName error:nil];
         
-        [databaseQueue inDatabase:^(FMDatabase *db) {
+        [self.databaseQueue inDatabase:^(FMDatabase *db) {
             // Migrate the database to the newest version
             // TODO: move this into transaction so we can rollback on failure
             [VNADatabaseMigration migrateDatabase:db fromVersion:databaseVersion];
@@ -157,12 +165,12 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         NSAlert *alert = [NSAlert new];
         alert.alertStyle = NSAlertStyleCritical;
         alert.messageText = NSLocalizedString(@"Unrecognised database format title", nil);
-        alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"Unrecognised database format text", nil), databaseQueue.path];
+        alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"Unrecognised database format text", nil), self.databaseQueue.path];
         [alert runModal];
         return NO;
     } else if (databaseVersion == 0) {
         // database is fresh
-		return self.setupInitialDatabase;
+		return [self setupInitialDatabase];
     }
     
     return NO;
@@ -177,7 +185,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 - (BOOL)setupInitialDatabase {
     __block BOOL success = NO;
-	[databaseQueue inDatabase:^(FMDatabase *db) {
+	[self.databaseQueue inDatabase:^(FMDatabase *db) {
 		success = [self createTablesOnDatabase:db];
 	}];
 	if(!success) {
@@ -196,7 +204,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     Criteria * todayCriteria = [[Criteria alloc] initWithField:MA_Field_Date withOperator:MA_CritOper_Is withValue:@"today"];
     [self createInitialSmartFolder:NSLocalizedString(@"Today's Articles", nil) withCriteria:todayCriteria];
     
-	[databaseQueue inDatabase:^(FMDatabase *db) {
+	[self.databaseQueue inDatabase:^(FMDatabase *db) {
 		// Create the trash folder
 		[db executeUpdate:@"insert into folders (parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child) values (-1, ?, 0, 0, ?, 0, 0, 0)",
 		 NSLocalizedString(@"Trash", nil), @(VNAFolderTypeTrash)];
@@ -213,7 +221,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     [self initFolderArray];
     NSInteger folderId = 0;
     NSInteger previousSibling = 0;
-    NSArray * allFolders = foldersDict.allKeys;
+    NSArray * allFolders = self.foldersDict.allKeys;
     NSUInteger count = allFolders.count;
     NSUInteger index;
     for (index = 0u; index < count; ++index)
@@ -274,8 +282,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  *  the database fields and the model fields
  */
 -(void)initaliseFields {
-    fieldsByName = [[NSMutableDictionary alloc] init];
-    fieldsOrdered = [[NSMutableArray alloc] init];
+    self.fieldsByName = [[NSMutableDictionary alloc] init];
+    self.fieldsOrdered = [[NSMutableArray alloc] init];
     
     [self addField:MA_Field_Read type:MA_FieldType_Flag tag:MA_FieldID_Read sqlField:@"read_flag" visible:YES width:17];
     [self addField:MA_Field_Flagged type:MA_FieldType_Flag tag:MA_FieldID_Flagged sqlField:@"marked_flag" visible:YES width:17];
@@ -375,7 +383,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		[criteriaTree addCriteria:criteria];
 		
 		__weak NSString * preparedCriteriaString = criteriaTree.string;
-        [databaseQueue inDatabase:^(FMDatabase *db) {
+        [self.databaseQueue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"insert into smart_folders (folder_id, search_string) values (?, ?)", @([db lastInsertRowId]), preparedCriteriaString];
         }];
 	}
@@ -390,14 +398,14 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 {
     __block BOOL success;
     
-	[databaseQueue inDatabase:^(FMDatabase *db) {
+	[self.databaseQueue inDatabase:^(FMDatabase *db) {
 		success = [db executeUpdate:@"update info set last_opened=?", [NSDate date]];
 
 	}];
     if (success) {
-        readOnly = NO;
+        self.readOnly = NO;
     } else {
-        readOnly = YES;
+        self.readOnly = YES;
     }
 }
 
@@ -406,8 +414,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(NSInteger)countOfUnread
 {
-	[self initFolderArray];
-	return countOfUnread;
+    [self initFolderArray];
+    return _countOfUnread;
 }
 
 /* addField
@@ -425,8 +433,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		field.visible = visible;
 		field.width = width;
 		field.sqlField = sqlField;
-		[fieldsOrdered addObject:field];
-		[fieldsByName setValue:field forKey:name];
+		[self.fieldsOrdered addObject:field];
+		[self.fieldsByName setValue:field forKey:name];
 	}
 }
 
@@ -435,7 +443,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(NSArray *)arrayOfFields
 {
-	return fieldsOrdered;
+	return self.fieldsOrdered;
 }
 
 /* fieldByTitle
@@ -444,7 +452,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(Field *)fieldByName:(NSString *)name
 {
-	return [fieldsByName valueForKey:name];
+	return [self.fieldsByName valueForKey:name];
 }
 
 /*!
@@ -459,8 +467,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 {
     __block NSInteger dbVersion = 0;
     
-    // FMDatabaseQueue  *queue = [[Database sharedManager] databaseQueue];
-    [databaseQueue inDatabase:^(FMDatabase *db) {
+    // FMDatabaseQueue  *queue = [[Database sharedManager] self.databaseQueue];
+    [self.databaseQueue inDatabase:^(FMDatabase *db) {
         FMResultSet * results = [db executeQuery:@"select version from info"];
         dbVersion = 0;
         if ([results next])
@@ -478,22 +486,13 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     return dbVersion;
 }
 
-/* readOnly
- * Returns whether or not this database is read-only.
- */
--(BOOL)readOnly
-{
-	return readOnly;
-}
-
-
 /* compactDatabase
  * Compact the database using the vacuum command.
  */
 -(void)compactDatabase
 {
-    if (!readOnly) {
-        [databaseQueue inDatabase:^(FMDatabase *db) {
+    if (!self.readOnly) {
+        [self.databaseQueue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"vacuum"];
         }];
     }
@@ -504,8 +503,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(void)reindexDatabase
 {
-    if (!readOnly) {
-        [databaseQueue inDatabase:^(FMDatabase *db) {
+    if (!self.readOnly) {
+        [self.databaseQueue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"reindex"];
         }];
     }
@@ -520,14 +519,14 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(void)clearFlag:(NSUInteger)flag forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+	if (self.readOnly)
 		return;
 	
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil)
 	{
 		[folder clearFlag:flag];
-        FMDatabaseQueue *queue = databaseQueue;
+        FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update folders set flags=? where folder_id=?", @(folder.flags), @(folderId)];
         }];
@@ -544,7 +543,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(void)setFlag:(NSUInteger)flag forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-    if (readOnly) {
+    if (self.readOnly) {
 		return;
     }
     
@@ -552,7 +551,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	if (folder != nil)
 	{
 		[folder setFlag:flag];
-        FMDatabaseQueue *queue = databaseQueue;
+        FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update folders set flags=? where folder_id=?", @(folder.flags), @(folderId)];
         }];
@@ -568,7 +567,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(void)setLastUpdate:(NSDate *)lastUpdate forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-    if (readOnly) {
+    if (self.readOnly) {
 		return;
     }
 	// If no change to last update, do nothing
@@ -580,7 +579,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         }
 		folder.lastUpdate = lastUpdate;
 		NSTimeInterval interval = lastUpdate.timeIntervalSince1970;
-        FMDatabaseQueue *queue = databaseQueue;
+        FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update folders set last_update=? where folder_id=?", @(interval), @(folderId)];
         }];
@@ -597,7 +596,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(void)setLastUpdateString:(NSString *)lastUpdateString forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-    if (readOnly) {
+    if (self.readOnly) {
 		return;
     }
 	// If no change to last update string, do nothing
@@ -608,7 +607,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 			return;
 		
 		folder.lastUpdateString = lastUpdateString;
-        FMDatabaseQueue *queue = databaseQueue;
+        FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update rss_folders set last_update_string=? where folder_id=?",
              folder.lastUpdateString, @(folderId)];
@@ -627,7 +626,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(BOOL)setFeedURL:(NSString *)feed_url forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-    if (readOnly) {
+    if (self.readOnly) {
 		return NO;
     }
 	
@@ -635,7 +634,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	if (folder != nil && ![folder.feedURL isEqualToString:feed_url])
 	{
 		folder.feedURL = feed_url;
-        FMDatabaseQueue *queue = databaseQueue;
+        FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update rss_folders set feed_url=? where folder_id=?", feed_url, @(folderId)];
         }];
@@ -658,7 +657,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	//TODO: optimization using unique add function for addRSSFolder
 	if (folderId != -1)
 	{
-        FMDatabaseQueue *queue = databaseQueue;
+        FMDatabaseQueue *queue = self.databaseQueue;
         __block BOOL success;
         [queue inDatabase:^(FMDatabase *db) {
             success = [db executeUpdate:@"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) values (?, ?, '', '', '', ?, 0)",
@@ -696,7 +695,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	NSInteger folderId = [self addFolder:parentId afterChild:predecessorId folderName:feedName type:VNAFolderTypeRSS canAppendIndex:YES];
 	if (folderId != -1)
 	{
-        FMDatabaseQueue *queue = databaseQueue;
+        FMDatabaseQueue *queue = self.databaseQueue;
         __block BOOL success;
         [queue inDatabase:^(FMDatabase *db) {
             success = [db executeUpdate:@"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) "
@@ -730,7 +729,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	[self initFolderArray];
 
 	// Exit now if we're read-only
-	if (readOnly)
+	if (self.readOnly)
 		return -1;
 
 	if (!canAppendIndex)
@@ -764,7 +763,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		}
 		if (predecessorId < 0)
 		{
-            FMDatabaseQueue *queue = databaseQueue;
+            FMDatabaseQueue *queue = self.databaseQueue;
             
             [queue inDatabase:^(FMDatabase *db) {
                 FMResultSet * siblings = [db executeQuery:@"SELECT folder_id from folders where parent_id=? and next_sibling=0", @(parentId)];
@@ -799,7 +798,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		folder = [[Folder alloc] initWithId:newItemId parentId:parentId name:name type:type];
 		if ((type == VNAFolderTypeRSS)||(type == VNAFolderTypeOpenReader))
 			[folder setFlag:MA_FFlag_CheckForImage];
-		foldersDict[@(newItemId)] = folder;
+		self.foldersDict[@(newItemId)] = folder;
 		
 		if (manualSort)
 		{
@@ -824,7 +823,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(NSInteger)createFolderOnDatabase:(NSString *)name underParent:(NSInteger)parentId withType:(NSInteger)type
 {
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
 
 	__block NSInteger newItemId = -1;
 	NSInteger flags = 0;
@@ -877,7 +876,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 {
     NSArray * arrayOfChildFolders = [self arrayOfFolders:folderId];
     Folder * folder;
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
 
 	// Recurse and delete child folders
     for (folder in arrayOfChildFolders) {
@@ -895,7 +894,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 
 	// Delete all articles in this folder then delete ourselves.
 	folder = [self folderFromID:folderId];
-	countOfUnread -= folder.unreadCount;
+	_countOfUnread -= folder.unreadCount;
     if (folder.type == VNAFolderTypeSmart) {
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"delete from smart_folders where folder_id=?", @(folderId)];
@@ -964,7 +963,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	// Remove from the folders array. Do this after we send the notification
 	// so that the notification handlers don't fail if they try to dereference the
 	// folder.
-	[foldersDict removeObjectForKey:@(folderId)];
+	[self.foldersDict removeObjectForKey:@(folderId)];
 	return YES;
 }
 
@@ -981,7 +980,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	BOOL result;
 
 	// Exit now if we're read-only
-	if (readOnly)
+	if (self.readOnly)
 		return NO;
 
 	// Make sure this is a valid folder
@@ -1025,7 +1024,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(BOOL)setName:(NSString *)newName forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-    if (readOnly) {
+    if (self.readOnly) {
 		return NO;
     }
     
@@ -1043,7 +1042,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	folder.name = newName;
 
 	// Rename in the database
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"update folders set foldername=? where folder_id=?", newName, @(folderId)];
     }];
@@ -1066,7 +1065,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(BOOL)setDescription:(NSString *)newDescription forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-    if (readOnly) {
+    if (self.readOnly) {
 		return NO;
     }
 	// Find our folder element.
@@ -1084,7 +1083,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	folder.feedDescription = newDescription;
 	
 	// Add a new description or update the one we have
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"update rss_folders set description=? where folder_id=?",
          newDescription, @(folderId)];
@@ -1110,7 +1109,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(BOOL)setHomePage:(NSString *)homePageURL forFolder:(NSInteger)folderId;
 {
 	// Exit now if we're read-only
-    if (readOnly) {
+    if (self.readOnly) {
 		return NO;
     }
 	// Find our folder element.
@@ -1127,7 +1126,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	folder.homePage = homePageURL;
 
 	// Add a new link or update the one we have
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"update rss_folders set home_page=? where folder_id=?",
          homePageURL, @(folderId)];
@@ -1147,7 +1146,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(BOOL)setFolderUsername:(NSInteger)folderId newUsername:(NSString *)name
 {
 	// Exit now if we're read-only
-	if (readOnly) return NO;
+	if (self.readOnly) return NO;
 	
 	// Find our folder element.
 	Folder * folder = [self folderFromID:folderId];
@@ -1160,7 +1159,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	folder.username = name;
 	
 	// Add a new link or update the one we have
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"update rss_folders set username=? where folder_id=?",
          name, @(folderId)];
@@ -1175,7 +1174,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(BOOL)setParent:(NSInteger)newParentID forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-    if (readOnly) {
+    if (self.readOnly) {
 		return NO;
     }
 	
@@ -1225,7 +1224,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	}
 
 	// Update the database now
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"update folders set parent_id=? where folder_id=?",
          @(newParentID), @(folderId)];
@@ -1239,11 +1238,11 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(BOOL)setFirstChild:(NSInteger)childId forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-    if (readOnly) {
+    if (self.readOnly) {
 		return NO;
     }
 	
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
     
 	if (folderId == VNAFolderTypeRoot)
 	{
@@ -1273,7 +1272,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(BOOL)setNextSibling:(NSUInteger)nextSiblingId forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-    if (readOnly) {
+    if (self.readOnly) {
 		return NO;
     }
     
@@ -1283,7 +1282,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	
 	folder.nextSiblingId = nextSiblingId;
 	
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"update folders set next_sibling=? where folder_id=?",
          @(nextSiblingId), @(folderId)];
@@ -1298,7 +1297,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(NSInteger)firstFolderId
 {
 	__block NSInteger folderId = 0;
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
         FMResultSet * results = [db executeQuery:@"select first_folder from info"];
         if ([results next])
@@ -1316,7 +1315,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(NSInteger)trashFolderId
 {
-	return trashFolder.itemId;
+	return self.trashFolder.itemId;
 }
 
 /* searchFolderId;
@@ -1338,7 +1337,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(Folder *)folderFromID:(NSInteger)wantedId
 {
-	return foldersDict[@(wantedId)];
+	return self.foldersDict[@(wantedId)];
 }
 
 /* folderFromName
@@ -1347,7 +1346,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(Folder *)folderFromName:(NSString *)wantedName
 {	
 	Folder * folder;
-	for (folder in [foldersDict objectEnumerator])
+	for (folder in [self.foldersDict objectEnumerator])
 	{
 		if ([folder.name isEqualToString:wantedName])
 			break;
@@ -1367,7 +1366,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 {
 	Folder * folder;
 	
-	for (folder in [foldersDict objectEnumerator])
+	for (folder in [self.foldersDict objectEnumerator])
 	{
 		if ([folder.feedURL isEqualToString:wantedFeedURL])
 			break;
@@ -1381,8 +1380,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(void)handleAutoSortFoldersTreeChange:(NSNotification *)notification
 {
-    if (!readOnly) {
-        [databaseQueue inDatabase:^(FMDatabase *db) {
+    if (!self.readOnly) {
+        [self.databaseQueue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update info set folder_sort=?", @([Preferences standardPreferences].foldersTreeSortMethod)];
         }];
     }
@@ -1395,10 +1394,10 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(BOOL)addArticle:(Article *)article toFolder:(NSInteger)folderID
 {
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
 
     // Exit now if we're read-only
-	if (readOnly)
+	if (self.readOnly)
 		return NO;
 
     // Extract the article data from the dictionary.
@@ -1477,10 +1476,10 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(BOOL)updateArticle:(Article *)existingArticle ofFolder:(NSInteger)folderID withArticle:(Article *)article
 {
     // Exit now if we're read-only
-	if (readOnly)
+	if (self.readOnly)
 		return NO;
 
-	FMDatabaseQueue *queue = databaseQueue;
+	FMDatabaseQueue *queue = self.databaseQueue;
 
     // Extract the data from the new state of article
     NSString * articleBody = article.body;
@@ -1586,7 +1585,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
                                                               options:0];
         NSTimeInterval timeDiff = date.timeIntervalSince1970;
 
-        [databaseQueue inDatabase:^(FMDatabase *db) {
+        [self.databaseQueue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update messages set deleted_flag=1 where deleted_flag=0 and marked_flag=0 and read_flag=1 and date < ?", @(timeDiff)];
         }];
     }
@@ -1599,14 +1598,14 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(void)purgeDeletedArticles
 {
     __block BOOL success;
-	[databaseQueue inDatabase:^(FMDatabase *db) {
+	[self.databaseQueue inDatabase:^(FMDatabase *db) {
 		success = [db executeUpdate:@"delete from messages where deleted_flag=1"];
 	}];
 
 	if (success)
 	{
 		[self compactDatabase];
-		for (Folder * folder in [foldersDict objectEnumerator])
+		for (Folder * folder in [self.foldersDict objectEnumerator])
 			[folder clearCache];
 
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(self.trashFolderId)];
@@ -1623,7 +1622,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil)
 	{
-        FMDatabaseQueue *queue = databaseQueue;
+        FMDatabaseQueue *queue = self.databaseQueue;
         __block BOOL success;
         [queue inDatabase:^(FMDatabase *db) {
             success = [db executeUpdate:@"delete from messages where folder_id=? and message_id=?",
@@ -1648,9 +1647,9 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(void)initSmartfoldersDict
 {
-	if (!initializedSmartfoldersDict)
+	if (!self.initializedSmartfoldersDict)
 	{
-        FMDatabaseQueue *queue = databaseQueue;
+        FMDatabaseQueue *queue = self.databaseQueue;
         // Make sure we have a database queue.
 		NSAssert(queue, @"Database queue not assigned for this item");
 		
@@ -1662,11 +1661,11 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 				NSString * search_string = [results stringForColumnIndex:1];
 				
 				CriteriaTree * criteriaTree = [[CriteriaTree alloc] initWithString:search_string];
-				smartfoldersDict[@(folderId)] = criteriaTree;
+				self.smartfoldersDict[@(folderId)] = criteriaTree;
 			}
 			[results close];
 		}];
-		initializedSmartfoldersDict = YES;
+		self.initializedSmartfoldersDict = YES;
 	}
 }
 
@@ -1677,7 +1676,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(CriteriaTree *)searchStringForSmartFolder:(NSInteger)folderId
 {
 	[self initSmartfoldersDict];
-	return smartfoldersDict[@(folderId)];
+	return self.smartfoldersDict[@(folderId)];
 }
 
 /* addSmartFolder
@@ -1697,14 +1696,14 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	NSInteger folderId = [self addFolder:parentId afterChild:0 folderName:folderName type:VNAFolderTypeSmart canAppendIndex:NO];
 	if (folderId != -1)
 	{
-        FMDatabaseQueue *queue = databaseQueue;
+        FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"insert into smart_folders (folder_id, search_string) values (?, ?)",
              @(folderId),
              criteriaTree.string];
         }];
 
-		smartfoldersDict[@(folderId)] = criteriaTree;
+		self.smartfoldersDict[@(folderId)] = criteriaTree;
 	}
 	return folderId;
 }
@@ -1720,14 +1719,14 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     }
 
 	// Update the smart folder string
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"update smart_folders set search_string=? where folder_id=?",
          criteriaTree.string,
          @(folderId)];
     }];
 
-	smartfoldersDict[@(folderId)] = criteriaTree;
+	self.smartfoldersDict[@(folderId)] = criteriaTree;
 	
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
@@ -1740,15 +1739,15 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(void)initFolderArray
 {
-	if (!initializedfoldersDict)
+	if (!self.initializedfoldersDict)
 	{
 		// Make sure we have a database.
-		NSAssert(databaseQueue, @"Database not assigned for this item");
+		NSAssert(self.databaseQueue, @"Database not assigned for this item");
 		
 		// Keep running count of total unread articles
-		countOfUnread = 0;
+		_countOfUnread = 0;
         
-        FMDatabaseQueue *queue = databaseQueue;
+        FMDatabaseQueue *queue = self.databaseQueue;
         
         [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
             FMResultSet * results = [db executeQuery:@"select folder_id, parent_id, foldername, unread_count, last_update,"
@@ -1780,9 +1779,9 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
                 folder.lastUpdate = lastUpdate;
                 [folder setFlag:flags];
                 if (unreadCount > 0) {
-                    countOfUnread += unreadCount;
+                    _countOfUnread += unreadCount;
                 }
-                foldersDict[@(newItemId)] = folder;
+                self.foldersDict[@(newItemId)] = folder;
                 
                 // Remember the trash folder
                 if (folder.type == VNAFolderTypeTrash) {
@@ -1817,7 +1816,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 			[results close];
 		}];
 		// Fix the childUnreadCount for every parent
-		for (Folder * folder in [foldersDict objectEnumerator])
+		for (Folder * folder in [self.foldersDict objectEnumerator])
 		{
 			if (folder.unreadCount > 0 && folder.parentId != VNAFolderTypeRoot)
 			{
@@ -1830,7 +1829,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 			}
 		}
 		// Done
-		initializedfoldersDict = YES;
+		self.initializedfoldersDict = YES;
 	}
 }
 
@@ -1843,13 +1842,13 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(NSArray *)arrayOfFolders:(NSInteger)parentId
 {
 	// Prime the cache
-	if (initializedfoldersDict == NO)
+	if (self.initializedfoldersDict == NO)
 		[self initFolderArray];
 
 	NSMutableArray * newArray = [NSMutableArray array];
 	if (newArray != nil)
 	{		
-		for (Folder * folder in [foldersDict objectEnumerator])
+		for (Folder * folder in [self.foldersDict objectEnumerator])
 		{
 			if (folder.parentId == parentId)
 				[newArray addObject:folder];
@@ -1867,7 +1866,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	{
 		NSInteger parentId = folder.itemId;
 		
-		for (Folder * item in [foldersDict objectEnumerator])
+		for (Folder * item in [self.foldersDict objectEnumerator])
 		{
 			if (item.parentId == parentId)
 			{
@@ -1889,10 +1888,10 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(NSArray *)arrayOfAllFolders
 {
 	// Prime the cache
-	if (initializedfoldersDict == NO)
+	if (self.initializedfoldersDict == NO)
 		[self initFolderArray];
 	
-	return foldersDict.allValues;
+	return self.foldersDict.allValues;
 }
 
 /* minimalCacheForFolder
@@ -1908,7 +1907,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     __block NSInteger unread_count = 0;
 	NSMutableArray * myCache = [NSMutableArray array];
 
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
         FMResultSet * results = [db executeQueryWithFormat:@"select message_id, read_flag, marked_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure from messages where folder_id=%ld", (long)folderId];
         while([results next])
@@ -1956,14 +1955,6 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     return [myCache copy];
 }
 
-/* setSearchString
- * Sets the current search string for the search folder.
- */
--(void)setSearchString:(NSString *)newSearchString
-{
-	searchString = newSearchString;
-}
-
 /* sqlScopeForFolder
  * Create a SQL 'where' clause that scopes to either the individual folder or the folder and
  * all sub-folders.
@@ -1971,9 +1962,9 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(NSString *)sqlScopeForFolder:(Folder *)folder flags:(NSInteger)scopeFlags
 {
 	Field * field = [self fieldByName:MA_Field_Folder];
-	NSString * operatorString = (scopeFlags & MA_Scope_Inclusive) ? @"=" : @"<>";
-	NSString * conditionString = (scopeFlags & MA_Scope_Inclusive) ? @" or " : @" and ";
-	BOOL subScope = (scopeFlags & MA_Scope_SubFolders) ? YES : NO; // Avoid problems casting into BOOL.
+	NSString * operatorString = (scopeFlags & VNAQueryScopeInclusive) ? @"=" : @"<>";
+	NSString * conditionString = (scopeFlags & VNAQueryScopeInclusive) ? @" or " : @" and ";
+	BOOL subScope = (scopeFlags & VNAQueryScopeSubFolders) ? YES : NO; // Avoid problems casting into BOOL.
 	NSInteger folderId;
 
 	// If folder is nil, rather than report an error, default to some impossible value
@@ -2077,9 +2068,9 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 
 				switch (criteria.operator)
 				{
-					case MA_CritOper_Under:		scopeFlags = MA_Scope_SubFolders|MA_Scope_Inclusive; break;
-					case MA_CritOper_NotUnder:	scopeFlags = MA_Scope_SubFolders; break;
-					case MA_CritOper_Is:		scopeFlags = MA_Scope_Inclusive; break;
+					case MA_CritOper_Under:		scopeFlags = VNAQueryScopeSubFolders|VNAQueryScopeInclusive; break;
+					case MA_CritOper_NotUnder:	scopeFlags = VNAQueryScopeSubFolders; break;
+					case MA_CritOper_Is:		scopeFlags = VNAQueryScopeInclusive; break;
 					case MA_CritOper_IsNot:		scopeFlags = 0; break;
 					default:					NSAssert(false, @"Invalid operator for folder field type");
 				}
@@ -2177,7 +2168,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         CriteriaTree *tree = [CriteriaTree new];
         Criteria *clause = [[Criteria alloc] initWithField:MA_Field_Text
                                               withOperator:MA_CritOper_Contains
-                                                 withValue:searchString];
+                                                 withValue:self.searchString];
         [tree addCriteria:clause];
         return tree;
     }
@@ -2193,7 +2184,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	if (folder.type == VNAFolderTypeSmart)
 	{
 		[self initSmartfoldersDict];
-		return smartfoldersDict[@(folderId)];
+		return self.smartfoldersDict[@(folderId)];
 	}
 
 	CriteriaTree * tree = [[CriteriaTree alloc] init];
@@ -2213,7 +2204,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	if (folder != nil)
 	{
         NSMutableArray * newArray = [NSMutableArray arrayWithCapacity:folder.unreadCount];
-        FMDatabaseQueue *queue = databaseQueue;
+        FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             FMResultSet * results = [db executeQuery:@"select message_id from messages where folder_id=? and read_flag=0", @(folderId)];
             while ([results next])
@@ -2272,7 +2263,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	}
 
 	// Time to run the query
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
 		FMResultSet * results = [db executeQuery:queryString];
 		while ([results next])
@@ -2340,7 +2331,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	folder = [self folderFromID:folderId];
 	if (folder != nil && folder.unreadCount > 0)
 	{
-        FMDatabaseQueue *queue = databaseQueue;
+        FMDatabaseQueue *queue = self.databaseQueue;
         __block BOOL success;
         [queue inDatabase:^(FMDatabase *db) {
             success = [db executeUpdate:@"update messages set read_flag=1 where folder_id=? and read_flag=0",
@@ -2374,7 +2365,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		if (article != nil && isRead != article.read)
 		{
 			// Mark an individual article read
-            FMDatabaseQueue *queue = databaseQueue;
+            FMDatabaseQueue *queue = self.databaseQueue;
             __block BOOL success;
             [queue inDatabase:^(FMDatabase *db) {
                 success = [db executeUpdate:@"update messages set read_flag=? where folder_id=? and message_id=?",
@@ -2396,7 +2387,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(void)markUnreadArticlesFromFolder:(Folder *)folder guidArray:(NSArray *)guidArray
 {
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
     NSInteger folderId = folder.itemId;
 	if(guidArray.count>0)
 	{
@@ -2423,7 +2414,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(void)markStarredArticlesFromFolder:(Folder *)folder guidArray:(NSArray *)guidArray
 {
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
     NSInteger folderId = folder.itemId;
 	if(guidArray.count>0)
 	{
@@ -2449,10 +2440,10 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(void)setFolderUnreadCount:(Folder *)folder adjustment:(NSUInteger)adjustment
 {
-	countOfUnread += adjustment;
+	_countOfUnread += adjustment;
 	NSInteger newCount = folder.unreadCount + adjustment;
 	folder.unreadCount = newCount;
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"UPDATE folders set unread_count=? where folder_id=?", @(newCount), @(folder.itemId)];
     }];
@@ -2478,7 +2469,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		Article * article = [folder articleFromGuid:guid];
 		if (article != nil && isFlagged != article.flagged)
 		{
-            FMDatabaseQueue *queue = databaseQueue;
+            FMDatabaseQueue *queue = self.databaseQueue;
             __block BOOL success;
             [queue inDatabase:^(FMDatabase *db) {
                 success = [db executeUpdate:@"update messages set marked_flag=? where folder_id=? and message_id=?",
@@ -2507,7 +2498,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	if (folder !=nil) {
 		if (isDeleted && !article.read)
 			return;
-        FMDatabaseQueue *queue = databaseQueue;
+        FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update messages set deleted_flag=? where folder_id=? and message_id=?",
              @(isDeleted),
@@ -2533,7 +2524,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(BOOL)isTrashEmpty
 {
 	__block BOOL result;
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
 	[queue inDatabase:^(FMDatabase *db) {
         FMResultSet * results = [db executeQuery:@"select deleted_flag from messages where deleted_flag=1"];
         if ([results next])
@@ -2554,7 +2545,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(NSArray *)guidHistoryForFolderId:(NSInteger)folderId
 {
 	NSMutableArray * articleGuids = [NSMutableArray array];
-    FMDatabaseQueue *queue = databaseQueue;
+    FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
 		FMResultSet * results = [db executeQuery:@"select message_id from rss_guids where folder_id=?", @(folderId)];
 		while ([results next])
@@ -2612,13 +2603,13 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 -(void)close
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[foldersDict removeAllObjects];
-	[smartfoldersDict removeAllObjects];
-	[self setTrashFolder:nil];
-	[self setSearchFolder:nil];
-	initializedfoldersDict = NO;
-	initializedSmartfoldersDict = NO;
-	countOfUnread = 0;
+	[self.foldersDict removeAllObjects];
+	[self.smartfoldersDict removeAllObjects];
+	self.trashFolder = nil;
+	self.searchFolder = nil;
+	self.initializedfoldersDict = NO;
+	self.initializedSmartfoldersDict = NO;
+	_countOfUnread = 0;
     [self.databaseQueue close];
 }
 

@@ -19,14 +19,14 @@
 //
 
 #import "StdEnclosureView.h"
-#import "Preferences.h"
 #import "DownloadManager.h"
 #import "DSClickableURLTextField.h"
 #import "HelperFunctions.h"
 
-// Private functions
-@interface StdEnclosureView (Private)
-	-(IBAction)openFile:(id)sender;
+@interface StdEnclosureView ()
+
+-(IBAction)openFile:(id)sender;
+
 @end
 
 @implementation StdEnclosureView

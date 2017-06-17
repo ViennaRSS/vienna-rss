@@ -31,36 +31,35 @@
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
 #import "ArticleRef.h"
-#import "ArticleFilter.h"
 #import "Field.h"
-#import <WebKit/WebKit.h>
-#import "PopupButton.h"
 #import "BrowserPane.h"
 #import "ProgressTextCell.h"
-#import "BJRVerticallyCenteredTextFieldCell.h"
+#import "Article.h"
+#import "Folder.h"
+#import "StdEnclosureView.h"
+#import "BrowserView.h"
+#import "Database.h"
 
-// Private functions
-@interface ArticleListView (Private)
-	-(void)initTableView;
-	-(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
-	-(void)setTableViewFont;
-	-(void)showSortDirection;
-	-(void)selectArticleAfterReload;
-	-(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
-	-(BOOL)viewNextUnreadInCurrentFolder:(NSInteger)currentRow;
-	-(void)loadMinimumFontSize;
-	-(void)markCurrentRead:(NSTimer *)aTimer;
-	-(void)refreshImmediatelyArticleAtCurrentRow;
-	-(void)refreshArticleAtCurrentRow;
-	-(void)makeRowSelectedAndVisible:(NSInteger)rowIndex;
-	-(void)updateArticleListRowHeight;
-	-(void)setOrientation:(NSInteger)newLayout;
-	-(void)showEnclosureView;
-	-(void)hideEnclosureView;
-	-(void)printDocument;
-	-(void)setError:(NSError *)newError;
-	-(void)handleError:(NSError *)error withDataSource:(WebDataSource *)dataSource;
-	-(void)endMainFrameLoad;
+@interface ArticleListView ()
+
+-(void)initTableView;
+-(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
+-(void)setTableViewFont;
+-(void)showSortDirection;
+-(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
+-(BOOL)viewNextUnreadInCurrentFolder:(NSInteger)currentRow;
+-(void)markCurrentRead:(NSTimer *)aTimer;
+-(void)refreshImmediatelyArticleAtCurrentRow;
+-(void)refreshArticleAtCurrentRow;
+-(void)makeRowSelectedAndVisible:(NSInteger)rowIndex;
+-(void)updateArticleListRowHeight;
+-(void)setOrientation:(NSInteger)newLayout;
+-(void)showEnclosureView;
+-(void)hideEnclosureView;
+-(void)setError:(NSError *)newError;
+-(void)handleError:(NSError *)error withDataSource:(WebDataSource *)dataSource;
+-(void)endMainFrameLoad;
+
 @end
 
 @implementation ArticleListView

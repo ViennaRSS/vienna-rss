@@ -20,7 +20,7 @@
 
 @import Foundation;
 
-#import "ActivityItem.h"
+@class ActivityItem;
 
 @interface ActivityLog : NSObject
 
@@ -45,4 +45,5 @@ extern NSNotificationName const _Nonnull activityLogUpdatedNotification;
 - (nonnull ActivityItem *)itemByName:(nonnull NSString *)name;
 
 -(void)sortUsingDescriptors:(NSArray *_Nonnull)sortDescriptors;
+
 @end

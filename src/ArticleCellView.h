@@ -5,10 +5,10 @@
 //  Modified by Barijaona Ramaholimihaso
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
-#import "ArticleView.h"
-
+@class AppController;
+@class ArticleView;
 
 @interface ArticleCellView : NSTableCellView
 {

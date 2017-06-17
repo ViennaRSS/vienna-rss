@@ -8,11 +8,8 @@
 // Mimics the appearance of Safari 4's URL text field.
 
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
-
-@interface SSTextField : NSTextField {
-	
-}
+@interface SSTextField : NSTextField
 
 @end

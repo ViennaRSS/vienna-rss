@@ -20,7 +20,7 @@
 
 #import "DisclosureView.h"
 
-@interface DisclosureView()
+@interface DisclosureView ()
 
 @property (readwrite, getter=isDisclosed, nonatomic) BOOL disclosed;
 @property (readonly, nonatomic) CGFloat disclosedViewHeight;

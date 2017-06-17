@@ -6,14 +6,11 @@
 //  Copyright © 2016 uk.co.opencommunity. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <Sparkle/Sparkle.h>
+@import Cocoa;
+@import Sparkle;
 
 @interface ViennaSparkleDelegate : NSObject <SUUpdaterDelegate>
-{
-}
 
-// Public functions
 -(void)showSystemProfileInfoAlert;
 
 @end

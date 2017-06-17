@@ -18,9 +18,9 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
-@ class SearchMethod;
+@class SearchMethod;
 
 @interface Preferences : NSObject {
 	id userPrefs;

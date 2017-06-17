@@ -18,15 +18,17 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "BrowserView.h"
-#import "SSTextField.h"
-#import <WebKit/WebKit.h>
+@import Cocoa;
+@import WebKit;
+
+#import "BaseView.h"
 
 // This is defined somewhere but I can't find where.
 #define WebKitErrorPlugInWillHandleLoad	204
 
 @class AppController;
+@class BrowserView;
+@class SSTextField;
 @class TabbedWebView;
 
 @interface BrowserPaneButtonCell : NSCell {}

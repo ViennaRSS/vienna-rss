@@ -18,17 +18,18 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "ToolbarItem.h"
-#import "SearchMethod.h"
+@import Cocoa;
+
+@class SearchMethod;
+@class ToolbarItem;
 
 @interface PluginManager : NSObject {
 	NSMutableDictionary * allPlugins;
 }
 
 -(void)resetPlugins;
-@property (nonatomic, readonly, copy) NSArray *searchMethods;
-@property (nonatomic, readonly, copy) NSArray *toolbarItems;
+@property (nonatomic, readonly, copy) NSArray<SearchMethod *> *searchMethods;
+@property (nonatomic, readonly, copy) NSArray<ToolbarItem *> *toolbarItems;
 -(NSArray *)defaultToolbarItems;
 -(void)loadPlugin:(NSString *)pluginPath;
 -(void)toolbarItem:(ToolbarItem *)item withIdentifier:(NSString *)itemIdentifier;

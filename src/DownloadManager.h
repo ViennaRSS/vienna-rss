@@ -18,8 +18,8 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import <WebKit/WebKit.h>
+@import Cocoa;
+@import WebKit;
 
 typedef NS_ENUM(NSInteger, DownloadState) {
     DownloadStateInit,

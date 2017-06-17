@@ -47,10 +47,12 @@ NSString * const kMA_Notify_UseWebPluginsChange = @"MA_Notify_UseWebPluginsChang
 static Preferences * _standardPreferences = nil;
 
 // Private methods
-@interface Preferences (Private)
+@interface Preferences ()
+
 @property (nonatomic, readonly, copy) NSDictionary *allocFactoryDefaults;
+
 -(void)createFeedSourcesFolderIfNecessary;
--(void)handleUpdateRestart:(NSNotification *)nc;
+
 @end
 
 @implementation Preferences

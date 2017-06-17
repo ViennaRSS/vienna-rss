@@ -23,6 +23,11 @@
 #import "AppController.h"
 #import "HelperFunctions.h"
 #import "PopUpButtonExtensions.h"
+#import "Article.h"
+#import "Folder.h"
+#import "Criteria.h"
+#import "Field.h"
+#import "Database.h"
 
 // Tags for the three fields that define a criteria. We set these here
 // rather than in IB to be consistent.
@@ -36,17 +41,19 @@
 #define MA_SFEdit_RemoveTag			1007
 #define MA_SFEdit_FolderValueTag	1008
 
-@interface SmartFolder (Private)
-	-(void)initFolderValueField:(NSInteger)parentId atIndent:(NSInteger)indentation;
-	-(void)initSearchSheet:(NSString *)folderName;
-	-(void)displaySearchSheet:(NSWindow *)window;
-	-(void)initForField:(NSString *)fieldName inRow:(NSView *)row;
-	-(void)setOperatorsPopup:(NSPopUpButton *)popUpButton, ...;
-	-(void)addCriteria:(NSUInteger)index;
-	-(void)addDefaultCriteria:(NSInteger)index;
-	-(void)removeCriteria:(NSInteger)index;
-	-(void)removeAllCriteria;
-	-(void)resizeSearchWindow;
+@interface SmartFolder ()
+
+-(void)initFolderValueField:(NSInteger)parentId atIndent:(NSInteger)indentation;
+-(void)initSearchSheet:(NSString *)folderName;
+-(void)displaySearchSheet:(NSWindow *)window;
+-(void)initForField:(NSString *)fieldName inRow:(NSView *)row;
+-(void)setOperatorsPopup:(NSPopUpButton *)popUpButton, ...;
+-(void)addCriteria:(NSUInteger)index;
+-(void)addDefaultCriteria:(NSInteger)index;
+-(void)removeCriteria:(NSInteger)index;
+-(void)removeAllCriteria;
+-(void)resizeSearchWindow;
+
 @end
 
 @implementation SmartFolder

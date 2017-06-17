@@ -19,6 +19,7 @@
 //
 
 #import "Folder.h"
+
 #import "AppController.h"
 #import "Constants.h"
 #import "KeyChain.h"
@@ -26,15 +27,16 @@
 #import "StringExtensions.h"
 #import "Preferences.h"
 #import "ArticleRef.h"
-
-// Private internal functions
-@interface Folder (Private)
-	+(NSArray<NSImage *> *)_iconArray;
-@end
+#import "Database.h"
+#import "Article.h"
 
 @interface Folder ()
-	@property (nonatomic, strong) NSCache * cachedArticles;
-	@property (nonatomic, strong) NSMutableArray * cachedGuids;
+
+@property (nonatomic, strong) NSCache * cachedArticles;
+@property (nonatomic, strong) NSMutableArray * cachedGuids;
+
++(NSArray<NSImage *> *)_iconArray;
+
 @end
 
 // Static pointers

@@ -17,7 +17,7 @@
 //  See the License for the specific language governing permissions and
 //  
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
 @interface ToolbarButton : NSButton {
 	NSToolbarItem * item;

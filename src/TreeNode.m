@@ -21,6 +21,7 @@
 #import "TreeNode.h"
 #import "Preferences.h"
 #import "Constants.h"
+#import "Folder.h"
 
 @implementation TreeNode
 

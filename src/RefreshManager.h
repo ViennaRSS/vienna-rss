@@ -18,11 +18,13 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "Database.h"
-#import "FeedCredentials.h"
-#import "Constants.h"
-#import "ASINetworkQueue.h"
+@import Foundation;
+
+@class ASIHTTPRequest;
+@class ASINetworkQueue;
+@class Database;
+@class FeedCredentials;
+@class Folder;
 
 @interface RefreshManager : NSObject {
 	NSUInteger maximumConnections;
@@ -32,11 +34,8 @@
 	FeedCredentials * credentialsController;
 	BOOL hasStarted;
 	NSString * statusMessageDuringRefresh;
-    SyncTypes syncType;
 	ASINetworkQueue *networkQueue;
 	dispatch_queue_t _queue;
-	NSTimer * unsafe301RedirectionTimer;
-	NSString * riskyIPAddress;
 }
 
 +(RefreshManager *)sharedManager;

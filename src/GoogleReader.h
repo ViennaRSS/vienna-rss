@@ -6,18 +6,14 @@
 //  Copyright 2011-2014 Vienna contributors (see Help/Acknowledgements for list of contributors). All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "ASIFormDataRequest.h"
-#import "Folder.h"
-#import "Article.h"
-#import "ASINetworkQueue.h"
-#import "ActivityLog.h"
-#import "Debug.h"
+@import Foundation;
 
-@interface GoogleReader : NSObject <ASIHTTPRequestDelegate> {
-@private
-	NSUInteger countOfNewArticles;
-}
+@class ActivityItem;
+@class Article;
+@class ASIHTTPRequest;
+@class Folder;
+
+@interface GoogleReader : NSObject
 
 +(GoogleReader *)sharedManager;
 

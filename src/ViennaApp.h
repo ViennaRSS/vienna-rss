@@ -18,8 +18,10 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "Folder.h"
+@import Cocoa;
+
+@class Folder;
+@class Article;
 
 @interface ViennaApp : NSApplication
 

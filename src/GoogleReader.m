@@ -22,13 +22,16 @@
 #import "HelperFunctions.h"
 #import "Folder.h"
 #import "Database.h"
-#import <Foundation/Foundation.h>
 #import "AppController.h"
 #import "RefreshManager.h"
 #import "Preferences.h"
 #import "StringExtensions.h"
 #import "NSNotificationAdditions.h"
 #import "KeyChain.h"
+#import "ActivityItem.h"
+#import "Article.h"
+#import "Debug.h"
+#import "ASIFormDataRequest.h"
 
 #define TIMESTAMP [NSString stringWithFormat:@"%0.0f",[[NSDate date] timeIntervalSince1970]]
 
@@ -55,7 +58,9 @@ enum GoogleReaderStatus {
 	fullyAuthenticated
 } googleReaderStatus;
 
-@interface GoogleReader()
+@interface GoogleReader() <ASIHTTPRequestDelegate>
+
+@property (readwrite, nonatomic) NSUInteger countOfNewArticles;
 @property (nonatomic) NSMutableArray * localFeeds;
 @property (atomic) NSString *tToken;
 @property (atomic) NSString *clientAuthToken;
@@ -64,6 +69,7 @@ enum GoogleReaderStatus {
 @property (nonatomic) NSMutableArray * clientAuthWaitQueue;
 @property (nonatomic) NSMutableArray * tTokenWaitQueue;
 @property (nonatomic) dispatch_queue_t asyncQueue;
+
 @end
 
 @implementation GoogleReader
@@ -79,7 +85,7 @@ enum GoogleReaderStatus {
 		_clientAuthWaitQueue = [[NSMutableArray alloc] init];
 		_tTokenWaitQueue = [[NSMutableArray alloc] init];
 		googleReaderStatus = notAuthenticated;
-		countOfNewArticles = 0;
+		_countOfNewArticles = 0;
 		openReaderHost=nil;
 		username=nil;
 		password=nil;
@@ -414,8 +420,8 @@ enum GoogleReaderStatus {
  */
 -(NSUInteger)countOfNewArticles
 {
-	NSUInteger count = countOfNewArticles;
-	countOfNewArticles = 0;
+	NSUInteger count = _countOfNewArticles;
+	_countOfNewArticles = 0;
 	return count;
 }
 
@@ -676,7 +682,7 @@ enum GoogleReaderStatus {
         }
 		
 		// Add to count of new articles so far
-		countOfNewArticles += newArticlesFromFeed;
+		self.countOfNewArticles += newArticlesFromFeed;
 
         [APPCONTROLLER setStatusMessage:nil persist:NO];
         [refreshedFolder clearNonPersistedFlag:MA_FFlag_Error];

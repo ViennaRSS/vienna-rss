@@ -18,8 +18,9 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "Article.h"
+@import Cocoa;
+
+@class Article;
 
 // Folder types
 //   VNAFolderTypeRoot = the abstract root folder

@@ -18,18 +18,17 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "Database.h"
+@import Cocoa;
+@import WebKit;
+
+#import "BaseView.h"
 #import "ArticleBaseView.h"
-#import "BrowserView.h"
-#import "PopupButton.h"
-#import "StdEnclosureView.h"
-#import <WebKit/WebKit.h>
 
 @class AppController;
 @class ArticleController;
-@class MessageListView;
 @class ArticleView;
+@class MessageListView;
+@class StdEnclosureView;
 
 @interface ArticleListView : NSView<BaseView, ArticleBaseView, NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate>
 {

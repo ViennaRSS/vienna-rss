@@ -35,7 +35,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-#import <Cocoa/Cocoa.h>
+@import Foundation;
 
 
 @interface NSURL (CaminoExtensions)

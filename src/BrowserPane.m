@@ -22,13 +22,14 @@
 #import "BrowserPane.h"
 #import "TabbedWebView.h"
 #import "AppController.h"
-#import "Preferences.h"
 #import "HelperFunctions.h"
 #import "StringExtensions.h"
 #import "AddressBarCell.h"
-#import <WebKit/WebKit.h>
 #import "RichXMLParser.h"
 #import "SubscriptionModel.h"
+#import "Folder.h"
+#import "BrowserView.h"
+#import "SSTextField.h"
 
 @implementation BrowserPaneButtonCell
 
@@ -61,10 +62,12 @@
 } 
 @end
 
-@interface BrowserPane (Private)
-	-(void)endFrameLoad;
-	-(void)showRssPageButton:(BOOL)showButton;
-	-(void)setError:(NSError *)newError;
+@interface BrowserPane ()
+
+-(void)endFrameLoad;
+-(void)showRssPageButton:(BOOL)showButton;
+-(void)setError:(NSError *)newError;
+
 @end
 
 @implementation BrowserPane

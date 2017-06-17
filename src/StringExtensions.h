@@ -18,7 +18,8 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Foundation;
+@import WebKit;
 
 #define SafeString(s)   ((s) ?: @"")
 
@@ -39,8 +40,6 @@
 	-(NSUInteger)indexOfCharacterInString:(char)ch afterIndex:(NSUInteger)startIndex;
 	@property (nonatomic, readonly, copy) NSString *stringByEscapingExtendedCharacters;
 	@property (nonatomic, readonly, copy) NSString *stringByUnescapingExtendedCharacters;
-	@property (nonatomic, readonly, copy) NSString *stringByDeletingLastURLComponent;
-	@property (nonatomic, readonly, copy) NSString *lastURLComponent;
 	-(NSString *)stringByAppendingURLComponent:(NSString *)newComponent;
 	-(BOOL)hasCharacter:(char)ch;
 	@property (nonatomic, readonly, copy) NSString *firstWord;

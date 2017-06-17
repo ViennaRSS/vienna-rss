@@ -19,7 +19,6 @@
 //
 
 #import "AdvancedPreferencesViewController.h"
-#import "HelperFunctions.h"
 #import "Preferences.h"
 
 @interface AdvancedPreferencesViewController ()

@@ -21,10 +21,13 @@
 #import "NewGroupFolder.h"
 #import "StringExtensions.h"
 #import "AppController.h"
+#import "Folder.h"
+#import "Database.h"
 
-// Private functions
-@interface NewGroupFolder (Private)
-	-(void)enableSaveButton;
+@interface NewGroupFolder ()
+
+-(void)enableSaveButton;
+
 @end
 
 @implementation NewGroupFolder

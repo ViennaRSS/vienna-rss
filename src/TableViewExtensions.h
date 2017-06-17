@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
 @interface ExtendedTableView : NSTableView {
 	BOOL delegateImplementsShouldDisplayToolTips;

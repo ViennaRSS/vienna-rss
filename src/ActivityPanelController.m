@@ -20,6 +20,7 @@
 
 #import "ActivityPanelController.h"
 
+#import "ActivityItem.h"
 #import "ActivityLog.h"
 #import "Database.h"
 

@@ -18,8 +18,9 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "TableViewExtensions.h"
+@import Cocoa;
+
+@class ExtendedTableView;
 
 @interface DownloadWindow : NSWindowController <NSWindowDelegate,NSTableViewDelegate,NSTableViewDataSource> {
 	IBOutlet NSWindow * downloadWindow;

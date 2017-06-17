@@ -24,6 +24,7 @@
 #import "DateFormatterExtension.h"
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
+#import "Folder.h"
 
 // The names here are internal field names, not for localisation.
 NSString * MA_Field_GUID = @"GUID";
