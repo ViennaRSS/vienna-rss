@@ -13,4 +13,4 @@ notifications:
 
 # for container-based infrastructure
 sudo: false
-cache: cocoapods
+# cache: cocoapods
