@@ -139,7 +139,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	{
 		scriptPathMappings = [[NSMutableDictionary alloc] init];
 		progressCount = 0;
-		persistedStatusText = nil;
 		lastCountOfUnread = 0;
 		appStatusItem = nil;
 		scriptsMenuItem = nil;
@@ -176,26 +175,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
     // Initialise delegate for Sparkle
     _sparkleDelegate = [[ViennaSparkleDelegate alloc] init];
     [[SUUpdater sharedUpdater] setDelegate:_sparkleDelegate];
-}
-
-/* applicationDidResignActive
- * Do the things we need to do when Vienna becomes inactive, like greying out.
- */
--(void)applicationDidResignActive:(NSNotification *)aNotification
-{
-	statusText.textColor = [NSColor colorWithCalibratedRed:0.43 green:0.43 blue:0.43 alpha:1.00];
-	currentFilterTextField.textColor = [NSColor colorWithCalibratedRed:0.43 green:0.43 blue:0.43 alpha:1.00];
-	[filterIconInStatusBarButton setEnabled:NO];
-}
-
-/* applicationDidBecomeActive
- * Do the things we need to do when Vienna becomes active, like re-coloring view backgrounds.
- */
--(void)applicationDidBecomeActive:(NSNotification *)notification
-{
-	statusText.textColor = [NSColor blackColor];
-	currentFilterTextField.textColor = [NSColor blackColor];
-	[filterIconInStatusBarButton setEnabled:YES];
 }
 
 /* doSafeInitialisation
@@ -392,10 +371,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	[nc addObserver:self selector:@selector(showUnreadCountOnApplicationIconAndWindowTitle) name:@"MA_Notify_FoldersUpdated" object:nil];
 	//Open Reader Notifications
     [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
-		
-	// Init the progress counter and status bar.
-	[self setStatusMessage:nil persist:NO];
-	
+
 	// Initialize the database
 	if ((db = [Database sharedManager]) == nil)
 	{
@@ -414,11 +390,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	toolbar.displayMode = NSToolbarDisplayModeIconOnly;
 	[toolbar setShowsBaselineSeparator:NO];
 	self.mainWindow.toolbar = toolbar;
-	
-	// Give the status bar and filter string an embossed look
-	statusText.cell.backgroundStyle = NSBackgroundStyleRaised;
-	currentFilterTextField.cell.backgroundStyle = NSBackgroundStyleRaised;
-	currentFilterTextField.stringValue = @"";
 	
 	// Preload dictionary of standard URLs
 	NSString * pathToPList = [[NSBundle mainBundle] pathForResource:@"StandardURLs.plist" ofType:@""];
@@ -1670,7 +1641,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	if (indexOfDefaultItem != -1)
 	{
 		[filterViewPopUp selectItemAtIndex:indexOfDefaultItem];
-		currentFilterTextField.stringValue = [filterViewPopUp itemAtIndex:indexOfDefaultItem].title;
+		self.mainWindowController.filterText = [filterViewPopUp itemAtIndex:indexOfDefaultItem].title;
 	}
 }
 
@@ -2103,7 +2074,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	[self updateStatusBarFilterButtonVisibility];
 	[self updateSearchPlaceholderAndSearchMethod];
-	[self setStatusMessage:nil persist:NO];
 }
 
 /* handleTabChange
@@ -2147,8 +2117,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		// Run the auto-expire now
 		Preferences * prefs = [Preferences standardPreferences];
 		[db purgeArticlesOlderThanDays:prefs.autoExpireDuration];
-		
-		[self setStatusMessage:NSLocalizedString(@"Refresh completed", nil) persist:YES];
+
 		[self stopProgressIndicator];
 		
 		// Toggle the refresh button
@@ -2930,9 +2899,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 		if (folder.type != VNAFolderTypeTrash) {
 			// Create a status string
-			NSString * deleteStatusMsg = [NSString stringWithFormat:NSLocalizedString(@"Delete folder status", nil), folder.name];
-			[self setStatusMessage:deleteStatusMsg persist:NO];
-			
+            NSString * deleteStatusMsg = [NSString stringWithFormat:NSLocalizedString(@"Delete folder status", nil), folder.name];
+            // TODO: Use KVO
+            self.mainWindowController.statusText = deleteStatusMsg;
+
 			// Now call the database to delete the folder.
 			[db deleteFolder:folder.itemId];
             
@@ -2944,7 +2914,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	
 	// Unread count may have changed
-	[self setStatusMessage:nil persist:NO];
+    self.mainWindowController.statusText = nil;
 	[self showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
@@ -3155,13 +3125,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	NSView<BaseView> * theView = browserView.activeTabItemView;
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
-		[currentFilterTextField setHidden: YES];
-		[filterIconInStatusBarButton setHidden: YES];
+        self.mainWindowController.filterAreaIsHidden = YES;
 		[self setFilterBarState:NO withAnimation:NO];
 	}
 	else {
-		[currentFilterTextField setHidden: NO];
-		[filterIconInStatusBarButton setHidden: NO];
+        self.mainWindowController.filterAreaIsHidden = NO;
 		[self setFilterBarState:[Preferences standardPreferences].showFilterBar withAnimation:NO];
 	}
 }
@@ -3494,7 +3462,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	NSMenuItem * menuItem = (NSMenuItem *)sender;
 	[Preferences standardPreferences].filterMode = menuItem.tag;
-	currentFilterTextField.stringValue = menuItem.title;
+	self.mainWindowController.filterText = menuItem.title;
 }
 
 #pragma mark Blogging
@@ -3639,23 +3607,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         [statusBarDisclosureView disclose:doAnimate];
         isStatusBarVisible = YES;
     }
-}
-
-/* setStatusMessage
- * Sets a new status message for the status bar then updates the view. To remove
- * any existing status message, pass nil as the value.
- */
--(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag
-{
-	@synchronized(persistedStatusText){
-		if (persistenceFlag)
-		{
-			persistedStatusText = newStatusText;
-		}
-		if (newStatusText == nil || newStatusText.blank)
-			newStatusText = persistedStatusText;
-		statusText.stringValue = (newStatusText ? newStatusText : @"");
-	}
 }
 
 #pragma mark Toolbar And Menu Bar Validation
@@ -4325,7 +4276,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)dealloc
 {
-	[self.mainWindow setDelegate:nil];
 	[[SUUpdater sharedUpdater] setDelegate:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }

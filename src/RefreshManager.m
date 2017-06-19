@@ -40,6 +40,11 @@
 
 @interface RefreshManager ()
 
+@property (readwrite, copy) NSString *statusMessage;
+@property (nonatomic, retain) NSTimer * unsafe301RedirectionTimer;
+@property (atomic, copy) NSString *riskyIPAddress;
+@property (nonatomic) SyncTypes syncType;
+
 -(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type;
 -(void)getCredentialsForFolder;
 -(void)setFolderErrorFlag:(Folder *)folder flag:(BOOL)theFlag;
@@ -49,10 +54,7 @@
 -(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem shouldForceRefresh:(BOOL)force;
 -(void)removeConnection:(ASIHTTPRequest *)conn;
 -(NSString *)getRedirectURL:(NSData *)data;
-- (void)syncFinishedForFolder:(Folder *)folder; 
-@property (nonatomic, retain) NSTimer * unsafe301RedirectionTimer;
-@property (atomic, copy) NSString *riskyIPAddress;
-@property (nonatomic) SyncTypes syncType;
+- (void)syncFinishedForFolder:(Folder *)folder;
 
 @end
 
@@ -101,22 +103,23 @@
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:nil];
 		hasStarted = NO;
+        self.statusMessage = NSLocalizedString(@"Refresh completed", nil);
 	}
 	else
 	{
-	    [APPCONTROLLER setStatusMessage:nil persist:YES];
+        self.statusMessage = nil;
 	}
 	LLog(@"Queue empty!!!");
 }
 
 - (void)nqRequestFinished:(ASIHTTPRequest *)request {
 	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),networkQueue.requestsCount,NSLocalizedString(@"Refreshing subscriptions…", nil)];
-	[APPCONTROLLER setStatusMessage:self.statusMessageDuringRefresh persist:YES];
+    self.statusMessage = self.statusMessageDuringRefresh;
 }
 
 - (void)nqRequestStarted:(ASIHTTPRequest *)request {
 	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),networkQueue.requestsCount,NSLocalizedString(@"Refreshing subscriptions…", nil)];
-	[APPCONTROLLER setStatusMessage:self.statusMessageDuringRefresh persist:YES];
+    self.statusMessage = self.statusMessageDuringRefresh;
 }
 
 
@@ -609,8 +612,7 @@
 {
     [self setFolderUpdatingFlag:folder flag:NO];
 	// Unread count may have changed
-	AppController *controller = APPCONTROLLER;
-	[controller setStatusMessage:nil persist:NO];
+    self.statusMessage = nil;
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
 																		object:@(folder.itemId)];
 }

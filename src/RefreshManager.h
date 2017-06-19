@@ -39,6 +39,12 @@
 }
 
 +(RefreshManager *)sharedManager;
+
+@property (readonly, copy) NSString *statusMessage;
+@property (nonatomic, getter=isConnecting, readonly) BOOL connecting;
+@property (nonatomic, readonly) NSUInteger countOfNewArticles;
+@property (nonatomic, readonly, copy) NSString *statusMessageDuringRefresh;
+
 -(void)refreshFolderIconCacheForSubscriptions:(NSArray *)foldersArray;
 //-(void)refreshSubscriptions:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
 -(void)refreshSubscriptionsAfterRefresh:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
@@ -49,9 +55,6 @@
 -(void)refreshSubscriptionsAfterMerge:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
 -(void)forceRefreshSubscriptionForFolders:(NSArray*)foldersArray;
 -(void)cancelAll;
-@property (nonatomic, getter=isConnecting, readonly) BOOL connecting;
-@property (nonatomic, readonly) NSUInteger countOfNewArticles;
-@property (nonatomic, readonly, copy) NSString *statusMessageDuringRefresh;
 -(void)refreshFavIconForFolder:(Folder *)folder;
 -(void)addConnection:(ASIHTTPRequest *)conn;
 -(void)suspendConnectionsQueue;

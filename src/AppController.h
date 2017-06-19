@@ -45,13 +45,12 @@
 @class UnifiedDisplayView;
 @class ArticleListView;
 
-@interface AppController : NSObject <NSApplicationDelegate,NSWindowDelegate,NSToolbarDelegate,NSMenuDelegate>
+@interface AppController : NSObject <NSApplicationDelegate,NSToolbarDelegate,NSMenuDelegate>
 {
 	IBOutlet NSSearchField * filterSearchField;
 	IBOutlet NSPopUpButton * filterViewPopUp;
 	IBOutlet BrowserView * browserView;
 	IBOutlet NSSearchField * searchField;
-	IBOutlet NSTextField * statusText;
 	IBOutlet ClickableProgressIndicator * spinner;
 	IBOutlet NSMenuItem * closeTabItem;
 	IBOutlet NSMenuItem * closeAllTabsItem;
@@ -62,8 +61,6 @@
 	IBOutlet NSMenuItem * filtersMenu;
     IBOutlet DisclosureView * filterDisclosureView;
     IBOutlet DisclosureView *statusBarDisclosureView;
-	IBOutlet NSTextField * currentFilterTextField;
-	IBOutlet NSButton * filterIconInStatusBarButton;
 
 	DownloadWindow * downloadWindow;
 	SmartFolder * smartFolder;
@@ -80,7 +77,6 @@
 	NSTimer * checkTimer;
 	NSInteger lastCountOfUnread;
 	BOOL isStatusBarVisible;
-	NSString * persistedStatusText;
 	NSMenuItem * scriptsMenuItem;
 	BOOL didCompleteInitialisation;
 	NSString * searchString;
@@ -171,7 +167,6 @@
 
 
 // Public functions
--(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;
 -(NSArray *)contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems;
 -(void)showUnreadCountOnApplicationIconAndWindowTitle;
 -(void)openURLFromString:(NSString *)urlString inPreferredBrowser:(BOOL)openInPreferredBrowserFlag;

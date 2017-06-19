@@ -17,6 +17,8 @@
 
 +(OpenReader *)sharedManager;
 
+@property (readonly, copy) NSString *statusMessage;
+
 // Check if an accessToken is available
 @property (nonatomic, getter=isReady, readonly) BOOL ready;
 

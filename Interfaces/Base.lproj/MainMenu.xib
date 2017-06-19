@@ -356,7 +356,7 @@
             </view>
             <contentBorderThickness minY="22"/>
             <connections>
-                <outlet property="delegate" destination="233" id="1bL-FD-UdQ"/>
+                <outlet property="delegate" destination="TpV-Sw-bYp" id="7v9-rz-EiV"/>
             </connections>
             <point key="canvasLocation" x="138" y="-572.5"/>
         </window>
@@ -1172,9 +1172,7 @@ CA
                 <outlet property="closeTabItem" destination="1023" id="1035"/>
                 <outlet property="closeWindowItem" destination="935" id="1034"/>
                 <outlet property="columnsMenu" destination="442" id="1050"/>
-                <outlet property="currentFilterTextField" destination="1403" id="1405"/>
                 <outlet property="filterDisclosureView" destination="cTN-D0-dY2" id="i7U-gE-GBj"/>
-                <outlet property="filterIconInStatusBarButton" destination="1400" id="1407"/>
                 <outlet property="filterSearchField" destination="1304" id="1315"/>
                 <outlet property="filterViewPopUp" destination="1306" id="1319"/>
                 <outlet property="filtersMenu" destination="1117" id="1135"/>
@@ -1184,7 +1182,6 @@ CA
                 <outlet property="sortByMenu" destination="387" id="1054"/>
                 <outlet property="spinner" destination="918" id="920"/>
                 <outlet property="statusBarDisclosureView" destination="659-iz-w4S" id="gjn-93-Mdy"/>
-                <outlet property="statusText" destination="917" id="919"/>
                 <outlet property="stylesMenu" destination="826" id="1051"/>
                 <outlet property="unifiedListView" destination="1148" id="O5e-id-8Cu"/>
             </connections>
@@ -1428,6 +1425,9 @@ CA
         </customView>
         <customObject id="TpV-Sw-bYp" customClass="MainWindowController" customModule="Vienna" customModuleProvider="target">
             <connections>
+                <outlet property="filterButton" destination="1400" id="klL-0x-Gpc"/>
+                <outlet property="filterLabel" destination="1403" id="dvr-7K-18f"/>
+                <outlet property="statusLabel" destination="917" id="hnq-fT-qdI"/>
                 <outlet property="window" destination="21" id="9ep-P9-qnb"/>
             </connections>
         </customObject>
