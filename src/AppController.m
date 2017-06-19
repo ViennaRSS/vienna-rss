@@ -111,6 +111,8 @@
 -(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
 -(IBAction)cancelAllRefreshesToolbar:(id)sender;
 
+@property (nonatomic) IBOutlet MainWindowController *mainWindowController;
+@property (readonly, nonatomic) NSWindow *mainWindow;
 @property (nonatomic) IBOutlet ActivityPanelController *activityPanelController;
 @property (nonatomic) DirectoryMonitor *directoryMonitor;
 @property (nonatomic) PreferencesWindowController *preferencesWindowController;
@@ -148,6 +150,11 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		searchString = nil;
 	}
 	return self;
+}
+
+// TODO: Remove this
+- (NSWindow *)mainWindow {
+    return self.mainWindowController.window;
 }
 
 /* awakeFromNib
@@ -215,7 +222,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 			previousArticleGuid = nil;
 		[self.articleController selectFolderAndArticle:previousFolderId guid:previousArticleGuid];
 
-		[mainWindow makeFirstResponder:(previousArticleGuid != nil) ? [browserView primaryTabItemView].mainView : self.foldersTree.mainView];
+		[self.mainWindow makeFirstResponder:(previousArticleGuid != nil) ? [browserView primaryTabItemView].mainView : self.foldersTree.mainView];
 
 		if (prefs.refreshOnStartup)
 			[self refreshAllSubscriptions:self];
@@ -361,10 +368,8 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
     // Restore the most recent layout
     [self setLayout:prefs.layout withRefresh:NO];
 
-    // Set the delegates and title
-    mainWindow.title = self.appName;
+    // Set the delegates
     [NSApplication sharedApplication].delegate = self;
-    mainWindow.minSize = NSMakeSize(MA_Default_Main_Window_Min_Width, MA_Default_Main_Window_Min_Height);
 
     // Initialise the plugin manager now that the UI is ready
     pluginManager = [[PluginManager alloc] init];
@@ -408,7 +413,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	[toolbar setAutosavesConfiguration:YES]; 
 	toolbar.displayMode = NSToolbarDisplayModeIconOnly;
 	[toolbar setShowsBaselineSeparator:NO];
-	mainWindow.toolbar = toolbar;
+	self.mainWindow.toolbar = toolbar;
 	
 	// Give the status bar and filter string an embossed look
 	statusText.cell.backgroundStyle = NSBackgroundStyleRaised;
@@ -678,11 +683,11 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
     if ([filename.pathExtension isEqualToString:@"webloc"])
     {
         NSURL* url = [NSURL URLFromInetloc:filename];
-        if (!mainWindow.visible)
-        	[mainWindow makeKeyAndOrderFront:self];
+        if (!self.mainWindow.visible)
+        	[self.mainWindow makeKeyAndOrderFront:self];
         if (url != nil && !db.readOnly)
         {
-            [self.rssFeed newSubscription:mainWindow underParent:self.foldersTree.groupParentSelection initialURL:url.absoluteString];
+            [self.rssFeed newSubscription:self.mainWindow underParent:self.foldersTree.groupParentSelection initialURL:url.absoluteString];
 		    return YES;
         }
         else
@@ -869,9 +874,9 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	[browserView setPrimaryTabItemView:self.articleController.mainArticleView];
 	self.foldersTree.mainView.nextKeyView = [browserView primaryTabItemView].mainView;
     if (self.selectedArticle == nil)
-        [mainWindow makeFirstResponder:self.foldersTree.mainView];
+        [self.mainWindow makeFirstResponder:self.foldersTree.mainView];
     else
-        [mainWindow makeFirstResponder:[browserView primaryTabItemView].mainView];
+        [self.mainWindow makeFirstResponder:[browserView primaryTabItemView].mainView];
 	[self updateSearchPlaceholderAndSearchMethod];
 }
 
@@ -884,7 +889,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
     NSString *urlStr = [event paramDescriptorForKeyword:keyDirectObject].stringValue;
     if(urlStr)
-        [self.rssFeed newSubscription:mainWindow underParent:self.foldersTree.groupParentSelection initialURL:urlStr];
+        [self.rssFeed newSubscription:self.mainWindow underParent:self.foldersTree.groupParentSelection initialURL:urlStr];
 }
 
 /* contextMenuItemsForElement
@@ -1004,7 +1009,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 	// This line is a workaround for OS X bug rdar://4450641
     if (openLinksInBackground) {
-		[mainWindow orderFront:self];
+		[self.mainWindow orderFront:self];
     }
 	
 	// Launch in the foreground or background as needed
@@ -1248,7 +1253,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)showMainWindow:(id)sender
 {
-	[mainWindow makeKeyAndOrderFront:self];
+	[self.mainWindow makeKeyAndOrderFront:self];
 }
 
 /* keepFoldersArranged
@@ -1281,7 +1286,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     
     panel.accessoryView = accessoryController.view;
     panel.allowedFileTypes = @[@"opml"];
-    [panel beginSheetModalForWindow:mainWindow completionHandler:^(NSInteger returnCode) {
+    [panel beginSheetModalForWindow:self.mainWindow completionHandler:^(NSInteger returnCode) {
         if (returnCode == NSFileHandlingPanelOKButton)
         {
             [panel orderOut:self];
@@ -1296,7 +1301,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
                 NSAlert *alert = [NSAlert new];
                 alert.messageText = NSLocalizedString(@"Cannot open export file message", nil);
                 alert.informativeText = NSLocalizedString(@"Cannot open export file message text", nil);
-                [alert beginSheetModalForWindow:mainWindow completionHandler:nil];
+                [alert beginSheetModalForWindow:self.mainWindow completionHandler:nil];
             }
             else
             {
@@ -1318,7 +1323,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)importSubscriptions:(id)sender
 {
     NSOpenPanel * panel = [NSOpenPanel openPanel];
-    [panel beginSheetModalForWindow:mainWindow
+    [panel beginSheetModalForWindow:self.mainWindow
                   completionHandler: ^(NSInteger returnCode) {
                       
                       if (returnCode == NSFileHandlingPanelOKButton)
@@ -1371,11 +1376,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 -(void)handleGoogleAuthFailed:(NSNotification *)nc
 {
-    if (mainWindow.keyWindow) {
+    if (self.mainWindow.keyWindow) {
         NSAlert *alert = [NSAlert new];
         alert.messageText = NSLocalizedString(@"Open Reader Authentication Failed",nil);
         alert.informativeText = NSLocalizedString(@"Open Reader Authentication Failed text",nil);
-        [alert beginSheetModalForWindow:mainWindow completionHandler:nil];
+        [alert beginSheetModalForWindow:self.mainWindow completionHandler:nil];
     }
 }
 
@@ -1431,7 +1436,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		
 		// Set focus only if this was user initiated
         if (doAnimate) {
-			[mainWindow makeFirstResponder:filterSearchField];
+			[self.mainWindow makeFirstResponder:filterSearchField];
         }
 	}
 	if (!isVisible && self.filterBarVisible)
@@ -1449,8 +1454,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			
 			// If the focus was originally on the filter bar then we should
 			// move it to the message list
-			if (mainWindow.firstResponder == mainWindow)
-				[mainWindow makeFirstResponder:[browserView primaryTabItemView].mainView];
+			if (self.mainWindow.firstResponder == self.mainWindow)
+				[self.mainWindow makeFirstResponder:[browserView primaryTabItemView].mainView];
 		}
 	}
 }
@@ -1705,11 +1710,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	if (currentCountOfUnread <= 0)
 	{
 		[NSApp.dockTile setBadgeLabel:nil];
-		mainWindow.title = self.appName;
+		self.mainWindow.title = self.appName;
 		return;	
 	}	
 	
-	mainWindow.title = [NSString stringWithFormat:@"%@ (%li %@)", self.appName, (long)currentCountOfUnread, NSLocalizedString(@"Unread", nil)];
+	self.mainWindow.title = [NSString stringWithFormat:@"%@ (%li %@)", self.appName, (long)currentCountOfUnread, NSLocalizedString(@"Unread", nil)];
 	
 	// Exit now if we're not showing the unread count on the application icon
 	if (([Preferences standardPreferences].newArticlesNotification
@@ -1732,7 +1737,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     alert.informativeText = NSLocalizedString(@"Empty Trash message text", nil);
     [alert addButtonWithTitle:NSLocalizedString(@"Empty", "Title of a button on an alert")];
     [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
-    [alert beginSheetModalForWindow:mainWindow completionHandler:^(NSModalResponse returnCode) {
+    [alert beginSheetModalForWindow:self.mainWindow completionHandler:^(NSModalResponse returnCode) {
         if (returnCode == NSAlertFirstButtonReturn) {
             [self clearUndoStack];
             [db purgeDeletedArticles];
@@ -1804,7 +1809,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)updateCloseCommands
 {
-	if (browserView.countOfTabs < 2 || !mainWindow.keyWindow)
+	if (browserView.countOfTabs < 2 || !self.mainWindow.keyWindow)
 	{
 		closeTabItem.keyEquivalent = @"";
 		closeAllTabsItem.keyEquivalent = @"";
@@ -1916,14 +1921,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	if (folder.type == VNAFolderTypeRSS)
 	{
-		[self.rssFeed editSubscription:mainWindow folderId:folder.itemId];
+		[self.rssFeed editSubscription:self.mainWindow folderId:folder.itemId];
 	}
 	else if (folder.type == VNAFolderTypeSmart)
 	{
         if (!smartFolder) {
 			smartFolder = [[SmartFolder alloc] initWithDatabase:db];
         }
-		[smartFolder loadCriteria:mainWindow folderId:folder.itemId];
+		[smartFolder loadCriteria:self.mainWindow folderId:folder.itemId];
 	}
 }
 
@@ -2087,14 +2092,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	if (newView == [browserView primaryTabItemView])
 	{
 		if (self.selectedArticle == nil)
-			[mainWindow makeFirstResponder:self.foldersTree.mainView];
+			[self.mainWindow makeFirstResponder:self.foldersTree.mainView];
 		else
-			[mainWindow makeFirstResponder:[browserView primaryTabItemView].mainView];		
+			[self.mainWindow makeFirstResponder:[browserView primaryTabItemView].mainView];
 	}
 	else
 	{
 		BrowserPane * webPane = (BrowserPane *)newView;
-		[mainWindow makeFirstResponder:webPane.mainView];
+		[self.mainWindow makeFirstResponder:webPane.mainView];
 	}
 	[self updateStatusBarFilterButtonVisibility];
 	[self updateSearchPlaceholderAndSearchMethod];
@@ -2317,9 +2322,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 				return NO;
 			else
 			{
-				if (mainWindow.firstResponder == [browserView primaryTabItemView].mainView)
+				if (self.mainWindow.firstResponder == [browserView primaryTabItemView].mainView)
 				{
-					[mainWindow makeFirstResponder:self.foldersTree.mainView];
+					[self.mainWindow makeFirstResponder:self.foldersTree.mainView];
 					return YES;
 				}
 			}
@@ -2330,12 +2335,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 				return NO;
 			else
 			{
-				if (mainWindow.firstResponder == self.foldersTree.mainView)
+				if (self.mainWindow.firstResponder == self.foldersTree.mainView)
 				{
 					[browserView setActiveTabToPrimaryTab];
 					if (self.selectedArticle == nil)
 						[self.articleController ensureSelectedArticle:NO];
-					[mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [browserView primaryTabItemView].mainView : self.foldersTree.mainView];
+					[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [browserView primaryTabItemView].mainView : self.foldersTree.mainView];
 					return YES;
 				}
 			}
@@ -2343,12 +2348,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			
 		case NSDeleteFunctionKey:
 		case NSDeleteCharacter:
-			if (mainWindow.firstResponder == self.foldersTree.mainView)
+			if (self.mainWindow.firstResponder == self.foldersTree.mainView)
 			{
 				[self deleteFolder:self];
 				return YES;
 			}
-			else if (mainWindow.firstResponder == (self.articleController.mainArticleView).mainView)
+			else if (self.mainWindow.firstResponder == (self.articleController.mainArticleView).mainView)
 			{
 				[self deleteMessage:self];
 				return YES;
@@ -2365,7 +2370,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			if (!self.filterBarVisible)
 				[self setPersistedFilterBarState:YES withAnimation:YES];
 			else
-				[mainWindow makeFirstResponder:filterSearchField];
+				[self.mainWindow makeFirstResponder:filterSearchField];
 			return YES;
 			
 		case '>':
@@ -2412,7 +2417,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			
 		case NSEnterCharacter:
 		case NSCarriageReturnCharacter:
-			if (mainWindow.firstResponder == self.foldersTree.mainView)
+			if (self.mainWindow.firstResponder == self.foldersTree.mainView)
 			{
 				if (flags & NSAlternateKeyMask)
 					[self viewSourceHomePageInAlternateBrowser:self];
@@ -2487,7 +2492,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier
 {
-	for (ToolbarItem * theItem in mainWindow.toolbar.visibleItems)
+	for (ToolbarItem * theItem in self.mainWindow.toolbar.visibleItems)
 	{
 		if ([theItem.itemIdentifier isEqualToString:theIdentifier])
 			return theItem;
@@ -2613,7 +2618,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)newSubscription:(id)sender
 {
-	[self.rssFeed newSubscription:mainWindow underParent:self.foldersTree.groupParentSelection initialURL:nil];
+	[self.rssFeed newSubscription:self.mainWindow underParent:self.foldersTree.groupParentSelection initialURL:nil];
 }
 
 /* newSmartFolder
@@ -2623,7 +2628,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	if (!smartFolder)
 		smartFolder = [[SmartFolder alloc] initWithDatabase:db];
-	[smartFolder newCriteria:mainWindow underParent:self.foldersTree.groupParentSelection];
+	[smartFolder newCriteria:self.mainWindow underParent:self.foldersTree.groupParentSelection];
 }
 
 /* newGroupFolder
@@ -2633,7 +2638,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	if (!groupFolder)
 		groupFolder = [[NewGroupFolder alloc] init];
-	[groupFolder newGroupFolder:mainWindow underParent:self.foldersTree.groupParentSelection];
+	[groupFolder newGroupFolder:self.mainWindow underParent:self.foldersTree.groupParentSelection];
 }
 
 /* restoreMessage
@@ -2668,7 +2673,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             alert.informativeText = NSLocalizedString(@"Delete selected message text", nil);
             [alert addButtonWithTitle:NSLocalizedString(@"Delete", "Title of a button on an alert")];
             [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
-            [alert beginSheetModalForWindow:mainWindow completionHandler:^(NSModalResponse returnCode) {
+            [alert beginSheetModalForWindow:self.mainWindow completionHandler:^(NSModalResponse returnCode) {
                 if (returnCode == NSAlertFirstButtonReturn) {
                     NSArray *articleArray = self.articleController.markedArticleRange;
                     [self.articleController deleteArticlesByArray:articleArray];
@@ -2712,7 +2717,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[browserView setActiveTabToPrimaryTab];
 	if (db.countOfUnread > 0)
 		[self.articleController displayFirstUnread];
-	[mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [browserView primaryTabItemView].mainView : self.foldersTree.mainView];
+	[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [browserView primaryTabItemView].mainView : self.foldersTree.mainView];
 }
 
 /* viewNextUnread
@@ -2723,7 +2728,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[browserView setActiveTabToPrimaryTab];
 	if (db.countOfUnread > 0)
 		[self.articleController displayNextUnread];
-	[mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [browserView primaryTabItemView].mainView : self.foldersTree.mainView];
+	[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [browserView primaryTabItemView].mainView : self.foldersTree.mainView];
 }
 
 /* clearUndoStack
@@ -2732,7 +2737,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)clearUndoStack
 {
-	[mainWindow.undoManager removeAllActions];
+	[self.mainWindow.undoManager removeAllActions];
 }
 
 /* skipFolder
@@ -2902,7 +2907,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	if (smartFolder != nil)
 		[smartFolder doCancel:nil];
 	if ([(NSControl *)self.foldersTree.mainView abortEditing])
-		[mainWindow makeFirstResponder:self.foldersTree.mainView];
+		[self.mainWindow makeFirstResponder:self.foldersTree.mainView];
 	
 	
 	// Clear undo stack for this action
@@ -3226,13 +3231,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)setFocusToSearchField:(id)sender
 {
-	if (mainWindow.toolbar.visible && [self toolbarItemWithIdentifier:@"SearchItem"] && mainWindow.toolbar.displayMode != NSToolbarDisplayModeLabelOnly)
-		[mainWindow makeFirstResponder:searchField];
+	if (self.mainWindow.toolbar.visible && [self toolbarItemWithIdentifier:@"SearchItem"] && self.mainWindow.toolbar.displayMode != NSToolbarDisplayModeLabelOnly)
+		[self.mainWindow makeFirstResponder:searchField];
 	else
 	{
 		if (!searchPanel)
 			searchPanel = [[SearchPanel alloc] init];
-		[searchPanel runSearchPanel:mainWindow];
+		[searchPanel runSearchPanel:self.mainWindow];
 	}
 }
 
@@ -3626,11 +3631,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
         // If the animation is interrupted, don't hide the content border
         if (!statusBarDisclosureView.isDisclosed) {
-            [mainWindow setContentBorderThickness:0 forEdge:NSMinYEdge];
+            [self.mainWindow setContentBorderThickness:0 forEdge:NSMinYEdge];
         }
     } else if (!isStatusBarVisible && isVisible) {
         CGFloat disclosedViewHeight = statusBarDisclosureView.disclosedView.frame.size.height;
-        [mainWindow setContentBorderThickness:disclosedViewHeight forEdge:NSMinYEdge];
+        [self.mainWindow setContentBorderThickness:disclosedViewHeight forEdge:NSMinYEdge];
         [statusBarDisclosureView disclose:doAnimate];
         isStatusBarVisible = YES;
     }
@@ -3663,7 +3668,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(BOOL)validateCommonToolbarAndMenuItems:(SEL)theAction validateFlag:(BOOL *)validateFlag
 {
-	BOOL isMainWindowVisible = mainWindow.visible;
+	BOOL isMainWindowVisible = self.mainWindow.visible;
 	BOOL isAnyArticleView = browserView.activeTabItemView == [browserView primaryTabItemView];
 	
 	*validateFlag = NO;
@@ -3750,7 +3755,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
 	SEL	theAction = menuItem.action;
-	BOOL isMainWindowVisible = mainWindow.visible;
+	BOOL isMainWindowVisible = self.mainWindow.visible;
 	BOOL isAnyArticleView = browserView.activeTabItemView == [browserView primaryTabItemView];
 	BOOL isArticleView = browserView.activeTabItemView == self.articleController.mainArticleView;
 	BOOL flag;
@@ -4056,7 +4061,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			menuItem.state = NSOffState;
 		return YES;
 	} else if (theAction == @selector(openVienna:)) {
-        return mainWindow.isKeyWindow == false;
+        return self.mainWindow.isKeyWindow == false;
     }
 
 	return YES;
@@ -4320,7 +4325,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)dealloc
 {
-	[mainWindow setDelegate:nil];
+	[self.mainWindow setDelegate:nil];
 	[[SUUpdater sharedUpdater] setDelegate:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }

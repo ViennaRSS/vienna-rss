@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="17A291m" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,7 +20,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="302" y="347" width="942" height="625"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <value key="minSize" type="size" width="700" height="350"/>
             <view key="contentView" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="942" height="625"/>
@@ -1178,8 +1178,8 @@ CA
                 <outlet property="filterSearchField" destination="1304" id="1315"/>
                 <outlet property="filterViewPopUp" destination="1306" id="1319"/>
                 <outlet property="filtersMenu" destination="1117" id="1135"/>
-                <outlet property="mainWindow" destination="21" id="239"/>
                 <outlet property="outlineView" destination="Kk7-ax-B3r" id="vFt-XT-QbW"/>
+                <outlet property="mainWindowController" destination="TpV-Sw-bYp" id="zzt-Yo-pwZ"/>
                 <outlet property="searchField" destination="1252" id="1253"/>
                 <outlet property="sortByMenu" destination="387" id="1054"/>
                 <outlet property="spinner" destination="918" id="920"/>
@@ -1426,6 +1426,11 @@ CA
             </connections>
             <point key="canvasLocation" x="-209" y="43"/>
         </customView>
+        <customObject id="TpV-Sw-bYp" customClass="MainWindowController" customModule="Vienna" customModuleProvider="target">
+            <connections>
+                <outlet property="window" destination="21" id="9ep-P9-qnb"/>
+            </connections>
+        </customObject>
     </objects>
     <resources>
         <image name="filter-icon" width="16" height="16"/>

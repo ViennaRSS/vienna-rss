@@ -34,7 +34,6 @@
 @class EmptyTrashWarning;
 @class ClickableProgressIndicator;
 @class SearchPanel;
-@class BJRWindowWithToolbar;
 @class DisclosureView;
 @class ViennaSparkleDelegate;
 @class PluginManager;
@@ -48,7 +47,6 @@
 
 @interface AppController : NSObject <NSApplicationDelegate,NSWindowDelegate,NSToolbarDelegate,NSMenuDelegate>
 {
-	IBOutlet BJRWindowWithToolbar * mainWindow;
 	IBOutlet NSSearchField * filterSearchField;
 	IBOutlet NSPopUpButton * filterViewPopUp;
 	IBOutlet BrowserView * browserView;

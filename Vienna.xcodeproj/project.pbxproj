@@ -336,6 +336,7 @@
 		F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581441E29B90A0035E43C /* SearchPanel.xib */; };
 		F62581591E29BEB90035E43C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625815B1E29BEB90035E43C /* MainMenu.xib */; };
 		F628DFE31ED2698A00FACFD3 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F628DFE21ED2698A00FACFD3 /* FilterView.swift */; };
+		F63833D81EF842EA00E07213 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63833D71EF842EA00E07213 /* MainWindowController.swift */; };
 		F63B71751ED252DD00CF9F32 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B71741ED252DD00CF9F32 /* GradientView.swift */; };
 		F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */; };
 		F648C2B91E7F3C2500CE4043 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */; };
@@ -1004,6 +1005,7 @@
 		F6352C071E27285C005CD307 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
 		F6352C081E272864005CD307 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/AppearancePreferencesView.strings"; sourceTree = "<group>"; };
 		F6352C091E272868005CD307 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AppearancePreferencesView.strings"; sourceTree = "<group>"; };
+		F63833D71EF842EA00E07213 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainWindowController.swift; path = src/MainWindowController.swift; sourceTree = "<group>"; };
 		F63B71741ED252DD00CF9F32 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GradientView.swift; path = src/GradientView.swift; sourceTree = "<group>"; };
 		F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryMonitorTests.swift; sourceTree = "<group>"; };
 		F64C2CCA1E83825D00ED4E04 /* DateFormatterExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateFormatterExtension.h; path = src/DateFormatterExtension.h; sourceTree = "<group>"; };
@@ -1889,6 +1891,7 @@
 		F62EC6B91EF934D9005EE8E5 /* Main window */ = {
 			isa = PBXGroup;
 			children = (
+				F63833D71EF842EA00E07213 /* MainWindowController.swift */,
 				3AFF601719A07F5A0036DBA4 /* BJRWindowWithToolbar.h */,
 				3AFF601619A07F5A0036DBA4 /* BJRWindowWithToolbar.m */,
 				AA5AABB50C3CD68A00B2E14F /* Toolbar */,
@@ -2684,6 +2687,7 @@
 				0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */,
 				34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */,
 				AA5AA8000C3C0D7D00B2E14F /* ToolbarButton.m in Sources */,
+				F63833D81EF842EA00E07213 /* MainWindowController.swift in Sources */,
 				AA5AB4C80C3D511700B2E14F /* ToolbarItem.m in Sources */,
 				B27CD04F1100F408001F3C83 /* BitlyAPIHelper.m in Sources */,
 				664F87C713C62DFE00E266DE /* OpenReader.m in Sources */,
