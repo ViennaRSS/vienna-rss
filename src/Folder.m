@@ -38,6 +38,7 @@
 @property (nonatomic) BOOL hasPassword;
 @property (nonatomic, strong) NSCache * cachedArticles;
 @property (nonatomic, strong) NSMutableArray * cachedGuids;
+@property (nonatomic, strong) NSMutableDictionary * attributes;
 
 +(NSArray<NSImage *> *)_iconArray;
 
@@ -71,7 +72,7 @@ static NSArray * iconArray = nil;
 		_cachedArticles = [NSCache new];
 		_cachedArticles.delegate = self;
 		_cachedGuids = [NSMutableArray array];
-		attributes = [NSMutableDictionary dictionary];
+		_attributes = [NSMutableDictionary dictionary];
 		self.name = newName;
 		self.lastUpdateString = @"";
 		self.username = @"";
@@ -130,7 +131,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)feedDescription
 {
-	return SafeString(attributes[@"FeedDescription"]);
+	return SafeString(self.attributes[@"FeedDescription"]);
 }
 
 /* homePage
@@ -138,7 +139,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)homePage
 {
-	return SafeString(attributes[@"HomePage"]);
+	return SafeString(self.attributes[@"HomePage"]);
 }
 
 /*! Folder image
@@ -230,7 +231,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setFeedDescription:(NSString *)newFeedDescription
 {
-	[attributes setValue:SafeString(newFeedDescription) forKey:@"FeedDescription"];
+	[self.attributes setValue:SafeString(newFeedDescription) forKey:@"FeedDescription"];
 }
 
 /* setHomePage
@@ -238,7 +239,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setHomePage:(NSString *)newHomePage
 {
-	[attributes setValue:SafeString(newHomePage) forKey:@"HomePage"];
+	[self.attributes setValue:SafeString(newHomePage) forKey:@"HomePage"];
 }
 
 /* username
@@ -246,7 +247,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)username
 {
-	return [attributes valueForKey:@"Username"];
+	return [self.attributes valueForKey:@"Username"];
 }
 
 /* setUsername
@@ -254,7 +255,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setUsername:(NSString *)newUsername
 {
-	[attributes setValue:newUsername forKey:@"Username"];
+	[self.attributes setValue:newUsername forKey:@"Username"];
 }
 
 /* password
@@ -265,10 +266,10 @@ static NSArray * iconArray = nil;
 	if (!self.hasPassword)
 	{
 		if (self.username != nil && self.feedURL != nil)
-			[attributes setValue:[KeyChain getPasswordFromKeychain:self.username url:self.feedURL] forKey:@"Password"];
+			[self.attributes setValue:[KeyChain getPasswordFromKeychain:self.username url:self.feedURL] forKey:@"Password"];
 		self.hasPassword = YES;
 	}
-	return [attributes valueForKey:@"Password"];
+	return [self.attributes valueForKey:@"Password"];
 }
 
 /* setPassword
@@ -278,7 +279,7 @@ static NSArray * iconArray = nil;
 {
 	if (self.username != nil && self.feedURL != nil)
 		[KeyChain setPasswordInKeychain:newPassword username:self.username url:self.feedURL];
-	[attributes setValue:newPassword forKey:@"Password"];
+	[self.attributes setValue:newPassword forKey:@"Password"];
 	self.hasPassword = YES;
 }
 
@@ -287,7 +288,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)lastUpdateString
 {
-	return [attributes valueForKey:@"LastUpdateString"];
+	return [self.attributes valueForKey:@"LastUpdateString"];
 }
 
 /* setLastUpdateString
@@ -297,7 +298,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setLastUpdateString:(NSString *)newLastUpdateString
 {
-	[attributes setValue:newLastUpdateString forKey:@"LastUpdateString"];
+	[self.attributes setValue:newLastUpdateString forKey:@"LastUpdateString"];
 }
 
 /* feedURL
@@ -305,7 +306,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)feedURL
 {
-	return [attributes valueForKey:@"FeedURL"];
+	return [self.attributes valueForKey:@"FeedURL"];
 }
 
 /* setFeedURL
@@ -313,7 +314,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setFeedURL:(NSString *)newURL
 {
-	[attributes setValue:newURL forKey:@"FeedURL"];
+	[self.attributes setValue:newURL forKey:@"FeedURL"];
 }
 
 /* name
@@ -321,7 +322,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)name
 {
-	return [attributes valueForKey:@"Name"];
+	return [self.attributes valueForKey:@"Name"];
 }
 
 /* setName
@@ -329,7 +330,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setName:(NSString *)newName
 {
-	[attributes setValue:newName forKey:@"Name"];
+	[self.attributes setValue:newName forKey:@"Name"];
 }
 
 /* isGroupFolder
