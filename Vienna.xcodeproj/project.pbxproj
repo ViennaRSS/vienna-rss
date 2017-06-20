@@ -112,7 +112,7 @@
 		435028A6165DE9E00018EDB7 /* FoldersTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350286C165DE9DF0018EDB7 /* FoldersTree.m */; };
 		435028A7165DE9E00018EDB7 /* FolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350286E165DE9DF0018EDB7 /* FolderView.m */; };
 		435028A8165DE9E00018EDB7 /* Import.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502870165DE9DF0018EDB7 /* Import.m */; };
-		435028A9165DE9E00018EDB7 /* InfoWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502872165DE9DF0018EDB7 /* InfoWindow.m */; };
+		435028A9165DE9E00018EDB7 /* InfoPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502872165DE9DF0018EDB7 /* InfoPanelController.m */; };
 		435028AA165DE9E00018EDB7 /* MessageListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502874165DE9DF0018EDB7 /* MessageListView.m */; };
 		435028AB165DE9E00018EDB7 /* NewGroupFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502876165DE9DF0018EDB7 /* NewGroupFolder.m */; };
 		435028AC165DE9E00018EDB7 /* NewSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502878165DE9DF0018EDB7 /* NewSubscription.m */; };
@@ -351,6 +351,7 @@
 		F6A7DEC71E47233C0017BE5E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DEC51E47233C0017BE5E /* InfoPlist.strings */; };
 		F6C5CEFA1E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C5CEF91E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m */; };
 		F6CE47131E7E3DCB0045EAD7 /* ActivityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CE47121E7E3DCB0045EAD7 /* ActivityItem.m */; };
+		F6D0089C1EF95C9D008F2D3B /* InfoPanelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6D0089B1EF95C9D008F2D3B /* InfoPanelManager.m */; };
 		F6D572AB1E26AA8200CDA909 /* EmptyTrashWarning.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572AD1E26AA8200CDA909 /* EmptyTrashWarning.xib */; };
 		F6D572AE1E26AA8A00CDA909 /* FeedCredentials.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */; };
 		F6D572B11E26AA9000CDA909 /* GroupFolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B31E26AA9000CDA909 /* GroupFolder.xib */; };
@@ -547,8 +548,8 @@
 		4350286E165DE9DF0018EDB7 /* FolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FolderView.m; path = src/FolderView.m; sourceTree = SOURCE_ROOT; };
 		4350286F165DE9DF0018EDB7 /* Import.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Import.h; path = src/Import.h; sourceTree = SOURCE_ROOT; };
 		43502870165DE9DF0018EDB7 /* Import.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Import.m; path = src/Import.m; sourceTree = SOURCE_ROOT; };
-		43502871165DE9DF0018EDB7 /* InfoWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoWindow.h; path = src/InfoWindow.h; sourceTree = SOURCE_ROOT; };
-		43502872165DE9DF0018EDB7 /* InfoWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoWindow.m; path = src/InfoWindow.m; sourceTree = SOURCE_ROOT; };
+		43502871165DE9DF0018EDB7 /* InfoPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoPanelController.h; path = src/InfoPanelController.h; sourceTree = SOURCE_ROOT; };
+		43502872165DE9DF0018EDB7 /* InfoPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoPanelController.m; path = src/InfoPanelController.m; sourceTree = SOURCE_ROOT; };
 		43502873165DE9DF0018EDB7 /* MessageListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageListView.h; path = src/MessageListView.h; sourceTree = SOURCE_ROOT; };
 		43502874165DE9DF0018EDB7 /* MessageListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageListView.m; path = src/MessageListView.m; sourceTree = SOURCE_ROOT; };
 		43502875165DE9DF0018EDB7 /* NewGroupFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewGroupFolder.h; path = src/NewGroupFolder.h; sourceTree = SOURCE_ROOT; };
@@ -1166,6 +1167,8 @@
 		F6C5CEF91E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PSMTabBarControl+IntrinsicContentSize.m"; path = "src/PSMTabBarControl+IntrinsicContentSize.m"; sourceTree = "<group>"; };
 		F6CE47111E7E3DBD0045EAD7 /* ActivityItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityItem.h; path = src/ActivityItem.h; sourceTree = "<group>"; };
 		F6CE47121E7E3DCB0045EAD7 /* ActivityItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityItem.m; path = src/ActivityItem.m; sourceTree = "<group>"; };
+		F6D0089B1EF95C9D008F2D3B /* InfoPanelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoPanelManager.m; path = src/InfoPanelManager.m; sourceTree = "<group>"; };
+		F6D0089D1EF95CAC008F2D3B /* InfoPanelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoPanelManager.h; path = src/InfoPanelManager.h; sourceTree = "<group>"; };
 		F6D573291E26B19D00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/EmptyTrashWarning.xib; sourceTree = "<group>"; };
 		F6D5732A1E26B19E00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeedCredentials.xib; sourceTree = "<group>"; };
 		F6D5732B1E26B19F00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GroupFolder.xib; sourceTree = "<group>"; };
@@ -1986,8 +1989,10 @@
 		F6F44F0B1EF9280400E6F1B4 /* Info window */ = {
 			isa = PBXGroup;
 			children = (
-				43502871165DE9DF0018EDB7 /* InfoWindow.h */,
-				43502872165DE9DF0018EDB7 /* InfoWindow.m */,
+				43502871165DE9DF0018EDB7 /* InfoPanelController.h */,
+				43502872165DE9DF0018EDB7 /* InfoPanelController.m */,
+				F6D0089D1EF95CAC008F2D3B /* InfoPanelManager.h */,
+				F6D0089B1EF95C9D008F2D3B /* InfoPanelManager.m */,
 			);
 			name = "Info window";
 			sourceTree = "<group>";
@@ -2675,6 +2680,7 @@
 				EA43C70914A370DB00F2D843 /* VTPG_Common.m in Sources */,
 				B2BECB1714CEF22B00706F8F /* SSTextField.m in Sources */,
 				435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */,
+				F6D0089C1EF95C9D008F2D3B /* InfoPanelManager.m in Sources */,
 				4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */,
 				43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */,
 				43502896165DE9E00018EDB7 /* ActivityPanelController.m in Sources */,
@@ -2701,7 +2707,7 @@
 				435028A6165DE9E00018EDB7 /* FoldersTree.m in Sources */,
 				435028A7165DE9E00018EDB7 /* FolderView.m in Sources */,
 				435028A8165DE9E00018EDB7 /* Import.m in Sources */,
-				435028A9165DE9E00018EDB7 /* InfoWindow.m in Sources */,
+				435028A9165DE9E00018EDB7 /* InfoPanelController.m in Sources */,
 				435028AA165DE9E00018EDB7 /* MessageListView.m in Sources */,
 				435028AB165DE9E00018EDB7 /* NewGroupFolder.m in Sources */,
 				435028AC165DE9E00018EDB7 /* NewSubscription.m in Sources */,

@@ -34,7 +34,8 @@
 #import "Constants.h"
 #import "EmptyTrashWarning.h"
 #import "Preferences.h"
-#import "InfoWindow.h"
+#import "InfoPanelController.h"
+#import "InfoPanelManager.h"
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
 #import "ArticleFilter.h"
@@ -2940,7 +2941,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	NSInteger folderId = self.foldersTree.actualSelection;
 	if (folderId > 0)
-		[[InfoWindowManager infoWindowManager] showInfoWindowForFolder:folderId];
+		[[InfoPanelManager infoWindowManager] showInfoWindowForFolder:folderId];
 }
 
 /* unsubscribeFeed
