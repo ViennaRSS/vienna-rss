@@ -33,6 +33,7 @@
 @interface Folder ()
 
 @property (nonatomic) NSInteger itemId;
+@property (nonatomic) BOOL isCached;
 @property (nonatomic, strong) NSCache * cachedArticles;
 @property (nonatomic, strong) NSMutableArray * cachedGuids;
 
@@ -62,7 +63,7 @@ static NSArray * iconArray = nil;
 		_type = newType;
         flags = 0;
         nonPersistedFlags = 0;
-		isCached = NO;
+        _isCached = NO;
 		containsBodies = NO;
 		hasPassword = NO;
 		self.cachedArticles = [NSCache new];
@@ -545,7 +546,7 @@ static NSArray * iconArray = nil;
     {
 		[self.cachedArticles removeAllObjects];
 		[self.cachedGuids removeAllObjects];
-		isCached = NO;
+		self.isCached = NO;
 		containsBodies = NO;
 	}
 }
@@ -557,7 +558,7 @@ static NSArray * iconArray = nil;
 {
     @synchronized(self)
     {
-        NSAssert(isCached, @"Folder's cache of articles should be initialized before removeArticleFromCache can be used");
+        NSAssert(self.isCached, @"Folder's cache of articles should be initialized before removeArticleFromCache can be used");
         [self.cachedArticles removeObjectForKey:guid];
         [self.cachedGuids removeObject:guid];
     }
@@ -589,7 +590,7 @@ static NSArray * iconArray = nil;
  */
 -(NSInteger)countOfCachedArticles
 {
-	return isCached ? (NSInteger)self.cachedGuids.count : -1;
+	return self.isCached ? (NSInteger)self.cachedGuids.count : -1;
 }
 
 /* ensureCache
@@ -597,7 +598,7 @@ static NSArray * iconArray = nil;
  */
  -(void)ensureCache
  {
-    if (!isCached)
+    if (!self.isCached)
     {
         NSArray * myArray = [[Database sharedManager] minimalCacheForFolder:self.itemId];
         for (Article * myArticle in myArray)
@@ -606,7 +607,7 @@ static NSArray * iconArray = nil;
             [self.cachedArticles setObject:myArticle forKey:[NSString stringWithString:guid]];
             [self.cachedGuids addObject:guid];
         }
-        isCached = YES;
+        self.isCached = YES;
         // Note that this only builds a minimal cache, so we cannot set the containsBodies flag
         // Note also that articles' statuses are left at the default value (0) which is ArticleStatusEmpty
     }
@@ -653,7 +654,7 @@ static NSArray * iconArray = nil;
 {
 @synchronized(self)
   {
-    if (isCached)
+    if (self.isCached)
     {
         NSInteger count = unreadCount;
         NSMutableArray * result = [NSMutableArray arrayWithCapacity:unreadCount];
@@ -691,7 +692,7 @@ static NSArray * iconArray = nil;
 			return [articles copy];
 		}
 		@synchronized(self) {
-            if (isCached && containsBodies)
+            if (self.isCached && containsBodies)
             {
                 self.cachedArticles.evictsObjectsWithDiscardedContent = NO;
                 NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
@@ -704,7 +705,7 @@ static NSArray * iconArray = nil;
                     else
                     {   // some problem
                         NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)self.itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
-                        isCached = NO;
+                        self.isCached = NO;
                         containsBodies = NO;
                         break;
                     }
@@ -718,7 +719,7 @@ static NSArray * iconArray = nil;
                 // Only feeds folders can be cached, as they are the only ones to guarantee
                 // bijection : one article <-> one guid
                 if (self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader) {
-                    isCached = NO;
+                    self.isCached = NO;
                     containsBodies = NO;
                     [self.cachedArticles removeAllObjects];
                     [self.cachedGuids removeAllObjects];
@@ -728,7 +729,7 @@ static NSArray * iconArray = nil;
                         [self.cachedArticles setObject:object forKey:[NSString stringWithString:guid]];
                         [self.cachedGuids addObject:guid];
                     }
-                    isCached = YES;
+                    self.isCached = YES;
                     containsBodies = YES;
                 }
                 return articles;
@@ -801,9 +802,9 @@ static NSArray * iconArray = nil;
     {
         Article * theArticle = ((Article *)obj);
         NSString * guid = theArticle.guid;
-        if (isCached && !theArticle.isDeleted)
+        if (self.isCached && !theArticle.isDeleted)
         {
-            isCached = NO;
+            self.isCached = NO;
             containsBodies = NO;
         }
         [self.cachedGuids removeObject:guid];
