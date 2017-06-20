@@ -1785,7 +1785,7 @@
 				F62EC6B81EF933CB005EE8E5 /* Application */,
 				F62EC6B91EF934D9005EE8E5 /* Main window */,
 				AA3113EC09020E1B00E80DF1 /* Preferences window */,
-				F6F44F0B1EF9280400E6F1B4 /* Info window */,
+				F6F44F0B1EF9280400E6F1B4 /* Info panel */,
 				F6CE47101E7E3D520045EAD7 /* Activity panel */,
 				F6D0089E1EF968E8008F2D3B /* Download window */,
 				F6F44F101EF92DC600E6F1B4 /* Alerts */,
@@ -1986,7 +1986,7 @@
 			name = BJRVerticallyCenteredTextFieldCell;
 			sourceTree = "<group>";
 		};
-		F6F44F0B1EF9280400E6F1B4 /* Info window */ = {
+		F6F44F0B1EF9280400E6F1B4 /* Info panel */ = {
 			isa = PBXGroup;
 			children = (
 				43502871165DE9DF0018EDB7 /* InfoPanelController.h */,
@@ -1994,7 +1994,7 @@
 				F6D0089D1EF95CAC008F2D3B /* InfoPanelManager.h */,
 				F6D0089B1EF95C9D008F2D3B /* InfoPanelManager.m */,
 			);
-			name = "Info window";
+			name = "Info panel";
 			sourceTree = "<group>";
 		};
 		F6F44F0C1EF92ACB00E6F1B4 /* Browser */ = {

@@ -20,12 +20,15 @@
 
 @import Foundation;
 
+@class InfoPanelController;
+
 @interface InfoPanelManager : NSObject {
 	NSMutableDictionary * controllerList;
 }
 
 +(InfoPanelManager *)infoWindowManager;
 
--(void)showInfoWindowForFolder:(NSInteger)folderId;
+-(void)showInfoWindowForFolder:(NSInteger)folderId
+                         block:(void (^)(InfoPanelController *infoPanelController))block;
 
 @end

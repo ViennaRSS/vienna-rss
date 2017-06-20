@@ -8,7 +8,5 @@
 	<string>http://www.vienna-rss.com/?page_id=76</string>
 	<key>ViennaMoreScriptsPage</key>
 	<string>http://www.vienna-rss.com/?page_id=76</string>
-	<key>FeedValidatorTemplate</key>
-	<string>http://feedvalidator.org/check?url=%@</string>
 </dict>
 </plist>

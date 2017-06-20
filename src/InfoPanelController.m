@@ -20,7 +20,6 @@
 
 #import "InfoPanelController.h"
 
-#import "AppController.h"
 #import "Database.h"
 #import "DateFormatterExtension.h"
 #import "Folder.h"
@@ -191,29 +190,27 @@
 /* validateURL
  * Validate the URL in the text field.
  */
--(IBAction)validateURL:(id)sender
-{
-	NSString * validatorPage = [[APPCONTROLLER standardURLs] valueForKey:@"FeedValidatorTemplate"];
-	if (validatorPage != nil)
-	{
-		NSString * url = (self.urlField.stringValue).trim;
-		
-		// Escape any special query characters in the URL, because the URL itself will be in a query.
-		NSString * query = [NSURL URLWithString:url].query;
-		if (query != nil)
-		{
-			NSMutableString * escapedQuery = [NSMutableString stringWithString:query];
-			[escapedQuery replaceOccurrencesOfString:@"&" withString:@"%26" options:0u range:NSMakeRange(0u, escapedQuery.length)];
-			[escapedQuery replaceOccurrencesOfString:@"=" withString:@"%3D" options:0u range:NSMakeRange(0u, escapedQuery.length)];
-			if (![query isEqualToString:escapedQuery])
-			{
-				url = [[url substringToIndex:[url rangeOfString:query].location] stringByAppendingString:escapedQuery];
-			}
-		}
-		
-		NSString * validatorURL = [NSString stringWithFormat:validatorPage, url];
-		[APPCONTROLLER openURLFromString:validatorURL inPreferredBrowser:YES];
-	}
+- (IBAction)validateURL:(id)sender {
+    NSString *validatorURL = @"https://www.feedvalidator.org/check";
+    NSURLComponents *urlComponents = [NSURLComponents componentsWithString:validatorURL];
+
+    NSString *validatedURL = self.urlField.stringValue.trim;
+    NSCharacterSet *urlQuerySet = NSCharacterSet.URLQueryAllowedCharacterSet;
+    NSString *encodedURL = [validatedURL stringByAddingPercentEncodingWithAllowedCharacters:urlQuerySet];
+
+    // Override the text field's URL with the encoded one.
+    self.urlField.stringValue = encodedURL;
+
+    // Create the query using the encoded URL.
+    urlComponents.query = [NSString stringWithFormat:@"url=%@", encodedURL];
+
+    if (self.delegate) {
+        [self.delegate infoPanelControllerWillOpenURL:urlComponents.URL];
+    } else {
+        // For sake of completion, open the URL with the default browser if
+        // no delegate is set.
+        [NSWorkspace.sharedWorkspace openURL:urlComponents.URL];
+    }
 }
 
 /* authenticationChanged

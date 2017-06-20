@@ -108,11 +108,13 @@
 		[infoWindow updateFolder];
 }
 
-/* showInfoWindowForFolder
- * If there's an active info window for the specified folder then it is activated
- * and brought to the front. Otherwise a new window is created for the folder.
+/**
+ If there's an active info window for the specified folder then it is activated
+ and brought to the front. Otherwise a new window is created for the folder.
+
+ @todo: Replace the block.
  */
--(void)showInfoWindowForFolder:(NSInteger)folderId
+-(void)showInfoWindowForFolder:(NSInteger)folderId block:(void (^)(InfoPanelController *infoPanelController))block;
 {
 	NSNumber * folderNumber = @(folderId);
 	InfoPanelController * infoWindow;
@@ -121,6 +123,7 @@
 	if (infoWindow == nil)
 	{
 		infoWindow = [[InfoPanelController alloc] initWithFolder:folderId];
+        block(infoWindow);
 		controllerList[folderNumber] = infoWindow;
 	}
 	[infoWindow showWindow:NSApp.mainWindow];

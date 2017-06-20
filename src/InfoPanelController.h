@@ -20,10 +20,30 @@
 
 @import Cocoa;
 
+NS_ASSUME_NONNULL_BEGIN
+
+@protocol InfoPanelControllerDelegate
+
+/**
+ Tells the delegate that a URL will be opened.
+
+ @param url The URL to open.
+ */
+- (void)infoPanelControllerWillOpenURL:(NSURL *)url;
+
+@end
+
 @interface InfoPanelController : NSWindowController
+
+/**
+ The info panel controller's delegate.
+ */
+@property (weak, nullable, nonatomic) id<InfoPanelControllerDelegate> delegate;
 
 - (instancetype)initWithFolder:(NSInteger)folderId;
 
 - (void)updateFolder;
 
 @end
+
+NS_ASSUME_NONNULL_END

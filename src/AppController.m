@@ -67,7 +67,7 @@
 
 #import "Vienna-Swift.h"
 
-@interface AppController () <ActivityPanelDelegate>
+@interface AppController () <InfoPanelControllerDelegate, ActivityPanelDelegate>
 
 -(void)installSleepHandler;
 -(void)installScriptsFolderWatcher;
@@ -2940,8 +2940,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)getInfo:(id)sender
 {
 	NSInteger folderId = self.foldersTree.actualSelection;
-	if (folderId > 0)
-		[[InfoPanelManager infoWindowManager] showInfoWindowForFolder:folderId];
+    if (folderId > 0) {
+        [[InfoPanelManager infoWindowManager] showInfoWindowForFolder:folderId
+                                                                block:^(InfoPanelController *infoPanelController) {
+                                                                    infoPanelController.delegate = self;
+                                                                }];
+    }
 }
 
 /* unsubscribeFeed
@@ -4239,6 +4243,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [self.preferencesWindowController showWindow:self];
 }
 
+// MARK: Info panel delegate
+
+// This delegate method is called when the user clicks on the validate button
+// on the info panel.
+- (void)infoPanelControllerWillOpenURL:(nonnull NSURL *)url {
+    [self openURL:url inPreferredBrowser:YES];
+}
+
 #pragma mark Activity panel
 
 - (ActivityPanelController *)activityPanelController {
@@ -4281,6 +4293,5 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[[SUUpdater sharedUpdater] setDelegate:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 
 @end
