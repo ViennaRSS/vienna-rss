@@ -22,14 +22,17 @@
 
 @class Article;
 
-// Folder types
-//   VNAFolderTypeRoot = the abstract root folder
-//   VNAFolderTypeSmart = the articles are dynamically collected by a custom query
-//   VNAFolderTypeGroup = a folder used to group other folders
-//   VNAFolderTypeRSS = folder contains RSS articles
-//   VNAFolderTypeTrash - a folder that contains deleted articles
-//   VNAFolderTypeSearch - a folder that contains a search result
-//
+/**
+ Folder types
+ 
+ - VNAFolderTypeRoot: the abstract root folder
+ - VNAFolderTypeSmart: the articles are dynamically collected by a custom query
+ - VNAFolderTypeGroup: a folder used to group other folders
+ - VNAFolderTypeRSS: a folder that contains RSS articles
+ - VNAFolderTypeTrash: a folder that contains deleted articles
+ - VNAFolderTypeSearch: a folder that contains a search result
+ - VNAFolderTypeOpenReader: a folder that is on an OpenReader server
+ */
 typedef NS_ENUM(NSInteger, VNAFolderType) {
     VNAFolderTypeRoot       = -1,
     VNAFolderTypeSmart      = 2,
@@ -40,22 +43,24 @@ typedef NS_ENUM(NSInteger, VNAFolderType) {
     VNAFolderTypeOpenReader = 7
 };
 
-// Folder flags
-// (These must be bitmask values!)
-//   MA_FFlag_CheckForImage = asks the refresh code to update the folder image
-//
-#define MA_FFlag_CheckForImage		1
-#define MA_FFlag_NeedCredentials	2
-#define MA_FFlag_Error				4
-#define MA_FFlag_Unsubscribed		8
-#define MA_FFlag_Updating			16
-#define MA_FFlag_LoadFullHTML		32
-
-// Macros for testing folder flags
-#define IsUnsubscribed(f)		([(f) flags] & MA_FFlag_Unsubscribed)
-#define LoadsFullHTML(f)		([(f) flags] & MA_FFlag_LoadFullHTML)
-#define IsUpdating(f)			([(f) nonPersistedFlags] & MA_FFlag_Updating)
-#define IsError(f)				([(f) nonPersistedFlags] & MA_FFlag_Error)
+/**
+ Folder flags
+ 
+ - VNAFolderFlagCheckForImage: asks the refresh code to update the folder image
+ - VNAFolderFlagNeedCredentials: VNAFolderFlagNeedCredentials description
+ - VNAFolderFlagError: VNAFolderFlagError description
+ - VNAFolderFlagUnsubscribed: VNAFolderFlagUnsubscribed description
+ - VNAFolderFlagUpdating: VNAFolderFlagUpdating description
+ - VNAFolderFlagLoadFullHTML: VNAFolderFlagLoadFullHTML description
+ */
+typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
+    VNAFolderFlagCheckForImage   = 1 << 0,
+    VNAFolderFlagNeedCredentials = 1 << 1,
+    VNAFolderFlagError           = 1 << 2,
+    VNAFolderFlagUnsubscribed    = 1 << 3,
+    VNAFolderFlagUpdating        = 1 << 4,
+    VNAFolderFlagLoadFullHTML    = 1 << 5
+};
 
 @interface Folder : NSObject <NSCacheDelegate> {
 	NSInteger itemId;
@@ -64,8 +69,8 @@ typedef NS_ENUM(NSInteger, VNAFolderType) {
 	NSInteger firstChildId;
 	NSInteger unreadCount;
 	NSInteger childUnreadCount;
-	NSUInteger flags;
-	NSUInteger nonPersistedFlags;
+    VNAFolderFlag nonPersistedFlags;
+    VNAFolderFlag flags;
 	BOOL isCached;
 	BOOL hasPassword;
 	BOOL containsBodies;
@@ -92,8 +97,8 @@ typedef NS_ENUM(NSInteger, VNAFolderType) {
 @property (nonatomic, readonly) NSInteger countOfCachedArticles;
 @property (nonatomic) NSInteger unreadCount;
 @property (nonatomic) VNAFolderType type;
-@property (nonatomic, readonly) NSUInteger nonPersistedFlags;
-@property (nonatomic, readonly) NSUInteger flags;
+@property (nonatomic, readonly) VNAFolderFlag nonPersistedFlags;
+@property (nonatomic, readonly) VNAFolderFlag flags;
 @property (nonatomic, copy) NSImage *image;
 @property (nonatomic, readonly) BOOL hasCachedImage;
 -(NSImage *)standardImage;
@@ -103,6 +108,9 @@ typedef NS_ENUM(NSInteger, VNAFolderType) {
 @property (nonatomic, getter=isSmartFolder, readonly) BOOL smartFolder;
 @property (nonatomic, getter=isRSSFolder, readonly) BOOL RSSFolder;
 @property (nonatomic, readonly) BOOL loadsFullHTML;
+-(BOOL)isUnsubscribed;
+-(BOOL)isUpdating;
+-(BOOL)isError;
 -(void)setParent:(NSInteger)newParent;
 -(void)setFlag:(NSUInteger)flagToSet;
 -(void)clearFlag:(NSUInteger)flagToClear;

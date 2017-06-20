@@ -59,8 +59,8 @@ static NSArray * iconArray = nil;
 		unreadCount = 0;
 		childUnreadCount = 0;
 		_type = newType;
-		flags = 0;
-		nonPersistedFlags = 0;
+        flags = 0;
+        nonPersistedFlags = 0;
 		isCached = NO;
 		containsBodies = NO;
 		hasPassword = NO;
@@ -134,16 +134,16 @@ static NSArray * iconArray = nil;
 
 /* flags
  */
--(NSUInteger)flags
+-(VNAFolderFlag)flags
 {
-	return flags;
+    return flags;
 }
 
 /* nonPersistedFlags
  */
--(NSUInteger)nonPersistedFlags
+-(VNAFolderFlag)nonPersistedFlags
 {
-	return nonPersistedFlags;
+    return nonPersistedFlags;
 }
 
 /* childUnreadCount
@@ -397,12 +397,25 @@ static NSArray * iconArray = nil;
     return self.type == VNAFolderTypeRSS;
 }
 
+// MARK: - VNAFolderFlag methods
+
 /* loadsFullHTML
  * Returns YES if this folder loads the full HTML articles instead of the feed text.
  */
--(BOOL)loadsFullHTML
-{
-	return LoadsFullHTML(self);
+-(BOOL)loadsFullHTML{
+	return (self.flags & VNAFolderFlagLoadFullHTML);
+}
+
+-(BOOL)isUnsubscribed {
+    return (self.flags & VNAFolderFlagUnsubscribed);
+}
+
+-(BOOL)isUpdating {
+    return (self.nonPersistedFlags & VNAFolderFlagUpdating);
+}
+
+-(BOOL)isError {
+    return (self.nonPersistedFlags & VNAFolderFlagError);
 }
 
 /* setFlag

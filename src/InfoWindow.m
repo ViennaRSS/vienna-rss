@@ -220,8 +220,8 @@
 	folderDescription.stringValue = folder.feedDescription;
 	folderSize.stringValue = [NSString stringWithFormat:NSLocalizedString(@"%u articles", nil), MAX(0, [folder countOfCachedArticles])];
 	folderUnread.stringValue = [NSString stringWithFormat:NSLocalizedString(@"%u unread", nil), folder.unreadCount];
-	isSubscribed.state = (folder.flags & MA_FFlag_Unsubscribed) ? NSOffState : NSOnState;
-	loadFullHTML.state = (folder.flags & MA_FFlag_LoadFullHTML) ? NSOnState : NSOffState;
+	isSubscribed.state = (folder.flags & VNAFolderFlagUnsubscribed) ? NSOffState : NSOnState;
+	loadFullHTML.state = (folder.flags & VNAFolderFlagLoadFullHTML) ? NSOnState : NSOffState;
 }
 
 /* urlFieldChanged
@@ -239,10 +239,10 @@
 -(IBAction)subscribedChanged:(id)sender
 {
     if (isSubscribed.state == NSOnState) {
-        [[Database sharedManager] clearFlag:MA_FFlag_Unsubscribed forFolder:infoFolderId];
+        [[Database sharedManager] clearFlag:VNAFolderFlagUnsubscribed forFolder:infoFolderId];
     }
     else {
-		[[Database sharedManager] setFlag:MA_FFlag_Unsubscribed forFolder:infoFolderId];
+		[[Database sharedManager] setFlag:VNAFolderFlagUnsubscribed forFolder:infoFolderId];
     }
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
                                                         object:@(infoFolderId)];
@@ -254,10 +254,10 @@
 -(IBAction)loadFullHTMLChanged:(id)sender
 {
     if (loadFullHTML.state == NSOnState) {
-        [[Database sharedManager] setFlag:MA_FFlag_LoadFullHTML forFolder:infoFolderId];
+        [[Database sharedManager] setFlag:VNAFolderFlagLoadFullHTML forFolder:infoFolderId];
     }
     else {
-		[[Database sharedManager] clearFlag:MA_FFlag_LoadFullHTML forFolder:infoFolderId];
+		[[Database sharedManager] clearFlag:VNAFolderFlagLoadFullHTML forFolder:infoFolderId];
     }
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_LoadFullHTMLChange"
                                                         object:@(infoFolderId)];

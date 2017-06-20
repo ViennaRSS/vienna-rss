@@ -888,7 +888,7 @@
 	TreeNode * node = (TreeNode *)item;
 	if (node != nil)
 	{
-		if (node.folder.nonPersistedFlags & MA_FFlag_Error)
+		if (node.folder.nonPersistedFlags & VNAFolderFlagError)
 			return NSLocalizedString(@"An error occurred when this feed was last refreshed", nil);
 		if (node.folder.childUnreadCount)
 			return [NSString stringWithFormat:NSLocalizedString(@"%d unread articles", nil), node.folder.childUnreadCount];
@@ -916,10 +916,11 @@
 
 	Folder * folder = node.folder;
     NSMutableDictionary * myInfo = [NSMutableDictionary dictionaryWithDictionary:info];
-	if (IsUnsubscribed(folder))
+    if (folder.isUnsubscribed) {
 		myInfo[NSForegroundColorAttributeName] = [NSColor secondaryLabelColor];
-    else
+    } else {
         myInfo[NSForegroundColorAttributeName] = [NSColor labelColor];
+    }
 	// Set the font
 	if (folder.unreadCount ||  (folder.childUnreadCount && ![olv isItemExpanded:item]))
 		myInfo[NSFontAttributeName] = self.boldCellFont;
@@ -945,12 +946,12 @@
 		// Use the auxiliary position of the feed item to show
 		// the refresh icon if the feed is being refreshed, or an
 		// error icon if the feed failed to refresh last time.
-		if (IsUpdating(folder))
+		if (folder.isUpdating)
 		{
 			[realCell setAuxiliaryImage:nil];
 			[realCell setInProgress:YES];
 		}
-		else if (IsError(folder))
+		else if (folder.isError)
 		{
 			realCell.auxiliaryImage = self.folderErrorImage;
 			[realCell setInProgress:NO];
