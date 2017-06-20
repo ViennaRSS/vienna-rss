@@ -56,7 +56,7 @@ static NSArray * iconArray = nil;
 		_itemId = newId;
 		_parentId = newIdParent;
 		firstChildId = 0;
-		nextSiblingId = 0;
+		_nextSiblingId = 0;
 		unreadCount = 0;
 		childUnreadCount = 0;
 		_type = newType;
@@ -92,14 +92,6 @@ static NSArray * iconArray = nil;
 					  [NSImage imageNamed:@"googleFeed.tiff"],
 					  ];
 	return iconArray;
-}
-
-/* nextSiblingId
- * Returns the ID of the folder's next sibling.
- */
--(NSInteger)nextSiblingId
-{
-	return nextSiblingId;
 }
 
 /* nextSiblingId
@@ -437,14 +429,6 @@ static NSArray * iconArray = nil;
 	@synchronized(self) {
 		nonPersistedFlags &= ~flagToClear;
 	}
-}
-
-/* setNextSiblingId
- * Set the ID for the folder's next sibling.
- */
--(void)setNextSiblingId:(NSInteger)newNextSibling
-{
-	nextSiblingId = newNextSibling;
 }
 
 /* setFirstChildId
