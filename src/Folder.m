@@ -72,7 +72,7 @@ static NSArray * iconArray = nil;
 		self.name = newName;
 		self.lastUpdateString = @"";
 		self.username = @"";
-		lastUpdate = [NSDate distantPast];
+		_lastUpdate = [NSDate distantPast];
 	}
 	return self;
 }
@@ -277,22 +277,6 @@ static NSArray * iconArray = nil;
 		[KeyChain setPasswordInKeychain:newPassword username:self.username url:self.feedURL];
 	[attributes setValue:newPassword forKey:@"Password"];
 	hasPassword = YES;
-}
-
-/* lastUpdate
- * Return the date of the last update from the feed.
- */
--(NSDate *)lastUpdate
-{
-	return lastUpdate;
-}
-
-/* setLastUpdate
- * Sets the last update date for this RSS feed.
- */
--(void)setLastUpdate:(NSDate *)newLastUpdate
-{
-	lastUpdate = newLastUpdate;
 }
 
 /* lastUpdateString
