@@ -34,6 +34,7 @@
 
 @property (nonatomic) NSInteger itemId;
 @property (nonatomic) BOOL isCached;
+@property (nonatomic) BOOL containsBodies;
 @property (nonatomic, strong) NSCache * cachedArticles;
 @property (nonatomic, strong) NSMutableArray * cachedGuids;
 
@@ -64,7 +65,7 @@ static NSArray * iconArray = nil;
         flags = 0;
         nonPersistedFlags = 0;
         _isCached = NO;
-		containsBodies = NO;
+		_containsBodies = NO;
 		hasPassword = NO;
 		self.cachedArticles = [NSCache new];
 		self.cachedArticles.delegate = self;
@@ -547,7 +548,7 @@ static NSArray * iconArray = nil;
 		[self.cachedArticles removeAllObjects];
 		[self.cachedGuids removeAllObjects];
 		self.isCached = NO;
-		containsBodies = NO;
+		self.containsBodies = NO;
 	}
 }
 
@@ -577,7 +578,7 @@ static NSArray * iconArray = nil;
         // note if article has incomplete data
         if (article.createdDate == nil)
         {
-            containsBodies = NO;
+            self.containsBodies = NO;
         }
     }
 }
@@ -692,7 +693,7 @@ static NSArray * iconArray = nil;
 			return [articles copy];
 		}
 		@synchronized(self) {
-            if (self.isCached && containsBodies)
+            if (self.isCached && self.containsBodies)
             {
                 self.cachedArticles.evictsObjectsWithDiscardedContent = NO;
                 NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
@@ -706,7 +707,7 @@ static NSArray * iconArray = nil;
                     {   // some problem
                         NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)self.itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
                         self.isCached = NO;
-                        containsBodies = NO;
+                        self.containsBodies = NO;
                         break;
                     }
                 }
@@ -720,7 +721,7 @@ static NSArray * iconArray = nil;
                 // bijection : one article <-> one guid
                 if (self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader) {
                     self.isCached = NO;
-                    containsBodies = NO;
+                    self.containsBodies = NO;
                     [self.cachedArticles removeAllObjects];
                     [self.cachedGuids removeAllObjects];
                     for (id object in articles)
@@ -730,7 +731,7 @@ static NSArray * iconArray = nil;
                         [self.cachedGuids addObject:guid];
                     }
                     self.isCached = YES;
-                    containsBodies = YES;
+                    self.containsBodies = YES;
                 }
                 return articles;
             }
@@ -805,7 +806,7 @@ static NSArray * iconArray = nil;
         if (self.isCached && !theArticle.isDeleted)
         {
             self.isCached = NO;
-            containsBodies = NO;
+            self.containsBodies = NO;
         }
         [self.cachedGuids removeObject:guid];
     }
