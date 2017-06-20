@@ -63,7 +63,6 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 };
 
 @interface Folder : NSObject <NSCacheDelegate> {
-	NSInteger firstChildId;
 	NSInteger unreadCount;
 	NSInteger childUnreadCount;
     VNAFolderFlag nonPersistedFlags;

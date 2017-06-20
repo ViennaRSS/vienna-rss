@@ -55,7 +55,7 @@ static NSArray * iconArray = nil;
 	{
 		_itemId = newId;
 		_parentId = newIdParent;
-		firstChildId = 0;
+		_firstChildId = 0;
 		_nextSiblingId = 0;
 		unreadCount = 0;
 		childUnreadCount = 0;
@@ -92,14 +92,6 @@ static NSArray * iconArray = nil;
 					  [NSImage imageNamed:@"googleFeed.tiff"],
 					  ];
 	return iconArray;
-}
-
-/* nextSiblingId
- * Returns the ID of the folder's first child.
- */
--(NSInteger)firstChildId
-{
-	return firstChildId;
 }
 
 /* unreadCount
@@ -429,14 +421,6 @@ static NSArray * iconArray = nil;
 	@synchronized(self) {
 		nonPersistedFlags &= ~flagToClear;
 	}
-}
-
-/* setFirstChildId
- * Set the ID for the folder's first child.
- */
--(void)setFirstChildId:(NSInteger)newFirstChild;
-{
-	firstChildId = newFirstChild;
 }
 
 /* indexOfArticle
