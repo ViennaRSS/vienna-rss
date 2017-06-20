@@ -67,7 +67,6 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 	NSInteger childUnreadCount;
     VNAFolderFlag nonPersistedFlags;
     VNAFolderFlag flags;
-	BOOL hasPassword;
 	NSMutableDictionary * attributes;
 }
 

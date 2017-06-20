@@ -35,6 +35,7 @@
 @property (nonatomic) NSInteger itemId;
 @property (nonatomic) BOOL isCached;
 @property (nonatomic) BOOL containsBodies;
+@property (nonatomic) BOOL hasPassword;
 @property (nonatomic, strong) NSCache * cachedArticles;
 @property (nonatomic, strong) NSMutableArray * cachedGuids;
 
@@ -66,7 +67,7 @@ static NSArray * iconArray = nil;
         nonPersistedFlags = 0;
         _isCached = NO;
 		_containsBodies = NO;
-		hasPassword = NO;
+		_hasPassword = NO;
 		self.cachedArticles = [NSCache new];
 		self.cachedArticles.delegate = self;
 		self.cachedGuids = [NSMutableArray array];
@@ -261,11 +262,11 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)password
 {
-	if (!hasPassword)
+	if (!self.hasPassword)
 	{
 		if (self.username != nil && self.feedURL != nil)
 			[attributes setValue:[KeyChain getPasswordFromKeychain:self.username url:self.feedURL] forKey:@"Password"];
-		hasPassword = YES;
+		self.hasPassword = YES;
 	}
 	return [attributes valueForKey:@"Password"];
 }
@@ -278,7 +279,7 @@ static NSArray * iconArray = nil;
 	if (self.username != nil && self.feedURL != nil)
 		[KeyChain setPasswordInKeychain:newPassword username:self.username url:self.feedURL];
 	[attributes setValue:newPassword forKey:@"Password"];
-	hasPassword = YES;
+	self.hasPassword = YES;
 }
 
 /* lastUpdateString
