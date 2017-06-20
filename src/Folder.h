@@ -108,9 +108,9 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 @property (nonatomic, getter=isSmartFolder, readonly) BOOL smartFolder;
 @property (nonatomic, getter=isRSSFolder, readonly) BOOL RSSFolder;
 @property (nonatomic, readonly) BOOL loadsFullHTML;
--(BOOL)isUnsubscribed;
--(BOOL)isUpdating;
--(BOOL)isError;
+@property (nonatomic, getter=isUnsubscribed, readonly) BOOL unsubscribed;
+@property (nonatomic, getter=isUpdating, readonly) BOOL updating;
+@property (nonatomic, getter=isError, readonly) BOOL error;
 -(void)setParent:(NSInteger)newParent;
 -(void)setFlag:(NSUInteger)flagToSet;
 -(void)clearFlag:(NSUInteger)flagToClear;
