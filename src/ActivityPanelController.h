@@ -22,23 +22,26 @@
 
 @class Folder;
 
-@protocol ActivityPanelDelegate
+NS_ASSUME_NONNULL_BEGIN
+
+@protocol ActivityPanelControllerDelegate
 
 /**
- Notifies the delegate that a folder has been selected.
+ Tells the delegate that a folder has been selected.
 
- @param activityPanel The panel in which the folder was selected.
  @param folder The selected folder.
  */
-- (void)activityPanel:(nonnull NSPanel *)activityPanel didSelectFolder:(nonnull Folder *)folder;
+- (void)activityPanelControllerDidSelectFolder:(Folder *)folder;
 
 @end
 
 @interface ActivityPanelController : NSWindowController
 
 /**
- The activity panel's delegate.
+ The activity panel controller's delegate.
  */
-@property (nullable, nonatomic) id<ActivityPanelDelegate> activityPanelDelegate;
+@property (weak, nullable, nonatomic) id<ActivityPanelControllerDelegate> delegate;
 
 @end
+
+NS_ASSUME_NONNULL_END

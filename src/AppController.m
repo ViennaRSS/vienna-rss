@@ -67,7 +67,7 @@
 
 #import "Vienna-Swift.h"
 
-@interface AppController () <InfoPanelControllerDelegate, ActivityPanelDelegate>
+@interface AppController () <InfoPanelControllerDelegate, ActivityPanelControllerDelegate>
 
 -(void)installSleepHandler;
 -(void)installScriptsFolderWatcher;
@@ -4256,7 +4256,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 - (ActivityPanelController *)activityPanelController {
     if (!_activityPanelController) {
         _activityPanelController = [ActivityPanelController new];
-        _activityPanelController.activityPanelDelegate = self;
+        _activityPanelController.delegate = self;
     }
 
     return _activityPanelController;
@@ -4278,7 +4278,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  This delegate method is called when the user clicks on a row in the activity
  panel's table view. This will be used to select a correspondng folder.
  */
-- (void)activityPanel:(NSPanel *)activityPanel didSelectFolder:(Folder *)folder {
+- (void)activityPanelControllerDidSelectFolder:(Folder *)folder {
     [self selectFolder:folder.itemId];
 }
 
