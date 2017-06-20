@@ -112,10 +112,10 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 @property (nonatomic, getter=isUpdating, readonly) BOOL updating;
 @property (nonatomic, getter=isError, readonly) BOOL error;
 -(void)setParent:(NSInteger)newParent;
--(void)setFlag:(NSUInteger)flagToSet;
--(void)clearFlag:(NSUInteger)flagToClear;
--(void)setNonPersistedFlag:(NSUInteger)flagToSet;
--(void)clearNonPersistedFlag:(NSUInteger)flagToClear;
+-(void)setFlag:(VNAFolderFlag)flagToSet;
+-(void)clearFlag:(VNAFolderFlag)flagToClear;
+-(void)setNonPersistedFlag:(VNAFolderFlag)flagToSet;
+-(void)clearNonPersistedFlag:(VNAFolderFlag)flagToClear;
 -(NSUInteger)indexOfArticle:(Article *)article;
 -(Article *)articleFromGuid:(NSString *)guid;
 -(BOOL)createArticle:(Article *)article guidHistory:(NSArray *)guidHistory;

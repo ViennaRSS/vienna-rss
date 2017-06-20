@@ -421,7 +421,7 @@ static NSArray * iconArray = nil;
 /* setFlag
  * Set the specified flag on the folder.
  */
--(void)setFlag:(NSUInteger)flagToSet
+-(void)setFlag:(VNAFolderFlag)flagToSet
 {
 	flags |= flagToSet;
 }
@@ -429,7 +429,7 @@ static NSArray * iconArray = nil;
 /* clearFlag
  * Clears the specified flag on the folder.
  */
--(void)clearFlag:(NSUInteger)flagToClear
+-(void)clearFlag:(VNAFolderFlag)flagToClear
 {
 	flags &= ~flagToClear;
 }
@@ -437,7 +437,7 @@ static NSArray * iconArray = nil;
 /* setNonPersistedFlag
  * Set the specified flag on the folder.
  */
--(void)setNonPersistedFlag:(NSUInteger)flagToSet
+-(void)setNonPersistedFlag:(VNAFolderFlag)flagToSet
 {
 	@synchronized(self) {
 		nonPersistedFlags |= flagToSet;
@@ -447,7 +447,7 @@ static NSArray * iconArray = nil;
 /* clearNonPersistedFlag
  * Clears the specified flag on the folder.
  */
--(void)clearNonPersistedFlag:(NSUInteger)flagToClear
+-(void)clearNonPersistedFlag:(VNAFolderFlag)flagToClear
 {
 	@synchronized(self) {
 		nonPersistedFlags &= ~flagToClear;
