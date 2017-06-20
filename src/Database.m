@@ -1209,7 +1209,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	}
 	
 	// Do the re-parent
-	[folder setParent:newParentID];
+    folder.parentId = newParentID;
 	
 	// In addition to reparenting the child, we also need to fix up the unread count for all
 	// precedent parents.

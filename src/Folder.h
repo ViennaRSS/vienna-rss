@@ -63,7 +63,6 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 };
 
 @interface Folder : NSObject <NSCacheDelegate> {
-	NSInteger parentId;
 	NSInteger nextSiblingId;
 	NSInteger firstChildId;
 	NSInteger unreadCount;
@@ -90,7 +89,7 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 -(NSArray<Article *> *)articles;
 -(NSArray<Article *> *)articlesWithFilter:(NSString *)filterString;
 @property (nonatomic, readonly) NSInteger itemId;
-@property (nonatomic, readonly) NSInteger parentId;
+@property (nonatomic) NSInteger parentId;
 @property (nonatomic) NSInteger nextSiblingId;
 @property (nonatomic) NSInteger firstChildId;
 @property (nonatomic, readonly) NSInteger countOfCachedArticles;
@@ -110,7 +109,6 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 @property (nonatomic, getter=isUnsubscribed, readonly) BOOL unsubscribed;
 @property (nonatomic, getter=isUpdating, readonly) BOOL updating;
 @property (nonatomic, getter=isError, readonly) BOOL error;
--(void)setParent:(NSInteger)newParent;
 -(void)setFlag:(VNAFolderFlag)flagToSet;
 -(void)clearFlag:(VNAFolderFlag)flagToClear;
 -(void)setNonPersistedFlag:(VNAFolderFlag)flagToSet;
