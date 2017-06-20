@@ -32,6 +32,7 @@
 
 @interface Folder ()
 
+@property (nonatomic) NSInteger itemId;
 @property (nonatomic, strong) NSCache * cachedArticles;
 @property (nonatomic, strong) NSMutableArray * cachedGuids;
 
@@ -52,7 +53,7 @@ static NSArray * iconArray = nil;
 {
 	if ((self = [super init]) != nil)
 	{
-		itemId = newId;
+		_itemId = newId;
 		parentId = newIdParent;
 		firstChildId = 0;
 		nextSiblingId = 0;
@@ -91,14 +92,6 @@ static NSArray * iconArray = nil;
 					  [NSImage imageNamed:@"googleFeed.tiff"],
 					  ];
 	return iconArray;
-}
-
-/* itemId
- * Returns the folder's ID.
- */
--(NSInteger)itemId
-{
-	return itemId;
 }
 
 /* parentId
@@ -530,7 +523,7 @@ static NSArray * iconArray = nil;
         else
         {
             // add the article as new
-            BOOL success = [[Database sharedManager] addArticle:article toFolder:itemId];
+            BOOL success = [[Database sharedManager] addArticle:article toFolder:self.itemId];
             if(success)
             {
                 article.status = ArticleStatusNew;
@@ -555,7 +548,7 @@ static NSArray * iconArray = nil;
     }
     else
     {
-        BOOL success = [[Database sharedManager] updateArticle:existingArticle ofFolder:itemId withArticle:article];
+        BOOL success = [[Database sharedManager] updateArticle:existingArticle ofFolder:self.itemId withArticle:article];
         if (success)
         {
             // Update folder unread count if necessary
@@ -670,7 +663,7 @@ static NSArray * iconArray = nil;
  {
     if (!isCached)
     {
-        NSArray * myArray = [[Database sharedManager] minimalCacheForFolder:itemId];
+        NSArray * myArray = [[Database sharedManager] minimalCacheForFolder:self.itemId];
         for (Article * myArticle in myArray)
         {
             NSString * guid = myArticle.guid;
@@ -742,7 +735,7 @@ static NSArray * iconArray = nil;
         return [result copy];
     }
     else
-        return [[Database sharedManager] arrayOfUnreadArticlesRefs:itemId];
+        return [[Database sharedManager] arrayOfUnreadArticlesRefs:self.itemId];
   } // synchronized
 }
 
@@ -755,7 +748,7 @@ static NSArray * iconArray = nil;
 	{
 		if (self.type == VNAFolderTypeGroup) {
 			NSMutableArray * articles = [NSMutableArray array];
-			NSArray * subFolders = [[Database sharedManager] arrayOfFolders:itemId];
+			NSArray * subFolders = [[Database sharedManager] arrayOfFolders:self.itemId];
 			for (Folder * folder in subFolders) {
                 [articles addObjectsFromArray:[folder articlesWithFilter:filterString]];
 			}
@@ -774,7 +767,7 @@ static NSArray * iconArray = nil;
                     }
                     else
                     {   // some problem
-                        NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
+                        NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)self.itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
                         isCached = NO;
                         containsBodies = NO;
                         break;
@@ -785,7 +778,7 @@ static NSArray * iconArray = nil;
             }
             else
             {
-                NSArray * articles = [[Database sharedManager] arrayOfArticles:itemId filterString:filterString];
+                NSArray * articles = [[Database sharedManager] arrayOfArticles:self.itemId filterString:filterString];
                 // Only feeds folders can be cached, as they are the only ones to guarantee
                 // bijection : one article <-> one guid
                 if (self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader) {
@@ -807,7 +800,7 @@ static NSArray * iconArray = nil;
         } // synchronized
 	}
     else {
-	    return [[Database sharedManager] arrayOfArticles:itemId filterString:filterString];
+	    return [[Database sharedManager] arrayOfArticles:self.itemId filterString:filterString];
     }
 }
 
@@ -862,7 +855,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)description
 {
-	return [NSString stringWithFormat:@"Folder id %li (%@)", (long)itemId, self.name];
+	return [NSString stringWithFormat:@"Folder id %li (%@)", (long)self.itemId, self.name];
 }
 
 #pragma mark NSCacheDelegate

@@ -63,7 +63,6 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 };
 
 @interface Folder : NSObject <NSCacheDelegate> {
-	NSInteger itemId;
 	NSInteger parentId;
 	NSInteger nextSiblingId;
 	NSInteger firstChildId;
@@ -90,8 +89,8 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 @property (nonatomic, copy) NSString *password;
 -(NSArray<Article *> *)articles;
 -(NSArray<Article *> *)articlesWithFilter:(NSString *)filterString;
-@property (nonatomic, readonly) NSInteger parentId;
 @property (nonatomic, readonly) NSInteger itemId;
+@property (nonatomic, readonly) NSInteger parentId;
 @property (nonatomic) NSInteger nextSiblingId;
 @property (nonatomic) NSInteger firstChildId;
 @property (nonatomic, readonly) NSInteger countOfCachedArticles;
