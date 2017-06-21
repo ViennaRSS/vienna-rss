@@ -1090,7 +1090,7 @@ typedef NS_ENUM(NSInteger, OpenReaderStatus) {
  @return current timestamp as a string
  */
 + (NSString *)currentTimestamp {
-    return [NSString stringWithFormat:@"%0.0f",[[NSDate date] timeIntervalSince1970]];
+    return [NSString stringWithFormat:@"%0.0f", NSDate.date.timeIntervalSince1970];
 }
 
 @end
