@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="InfoWindow">
+        <customObject id="-2" userLabel="File's Owner" customClass="InfoPanelController">
             <connections>
                 <outlet property="folderDescription" destination="81" id="82"/>
                 <outlet property="folderImage" destination="35" id="42"/>

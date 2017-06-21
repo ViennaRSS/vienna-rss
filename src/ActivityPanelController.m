@@ -82,7 +82,7 @@
 
     // Send the folder to the delegate.
     if (folder) {
-        [self.activityPanelDelegate activityPanel:(NSPanel *)self.window didSelectFolder:folder];
+        [self.delegate activityPanelControllerDidSelectFolder:folder];
     }
 }
 

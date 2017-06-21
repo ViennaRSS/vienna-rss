@@ -34,7 +34,8 @@
 #import "Constants.h"
 #import "EmptyTrashWarning.h"
 #import "Preferences.h"
-#import "InfoWindow.h"
+#import "InfoPanelController.h"
+#import "InfoPanelManager.h"
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
 #import "ArticleFilter.h"
@@ -66,7 +67,7 @@
 
 #import "Vienna-Swift.h"
 
-@interface AppController () <ActivityPanelDelegate>
+@interface AppController () <InfoPanelControllerDelegate, ActivityPanelControllerDelegate>
 
 -(void)installSleepHandler;
 -(void)installScriptsFolderWatcher;
@@ -2939,8 +2940,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)getInfo:(id)sender
 {
 	NSInteger folderId = self.foldersTree.actualSelection;
-	if (folderId > 0)
-		[[InfoWindowManager infoWindowManager] showInfoWindowForFolder:folderId];
+    if (folderId > 0) {
+        [[InfoPanelManager infoWindowManager] showInfoWindowForFolder:folderId
+                                                                block:^(InfoPanelController *infoPanelController) {
+                                                                    infoPanelController.delegate = self;
+                                                                }];
+    }
 }
 
 /* unsubscribeFeed
@@ -4238,12 +4243,20 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [self.preferencesWindowController showWindow:self];
 }
 
+// MARK: Info panel delegate
+
+// This delegate method is called when the user clicks on the validate button
+// on the info panel.
+- (void)infoPanelControllerWillOpenURL:(nonnull NSURL *)url {
+    [self openURL:url inPreferredBrowser:YES];
+}
+
 #pragma mark Activity panel
 
 - (ActivityPanelController *)activityPanelController {
     if (!_activityPanelController) {
         _activityPanelController = [ActivityPanelController new];
-        _activityPanelController.activityPanelDelegate = self;
+        _activityPanelController.delegate = self;
     }
 
     return _activityPanelController;
@@ -4265,7 +4278,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  This delegate method is called when the user clicks on a row in the activity
  panel's table view. This will be used to select a correspondng folder.
  */
-- (void)activityPanel:(NSPanel *)activityPanel didSelectFolder:(Folder *)folder {
+- (void)activityPanelControllerDidSelectFolder:(Folder *)folder {
     [self selectFolder:folder.itemId];
 }
 
@@ -4280,6 +4293,5 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[[SUUpdater sharedUpdater] setDelegate:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 
 @end

@@ -1,9 +1,9 @@
 //
-//  ActivityPanelController.h
+//  InfoPanelController.h
 //  Vienna
 //
-//  Created by Steve on Thu Mar 18 2004.
-//  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
+//  Created by Steve on 4/21/06.
+//  Copyright (c) 2004-2006 Steve Palmer. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -20,27 +20,29 @@
 
 @import Cocoa;
 
-@class Folder;
-
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ActivityPanelControllerDelegate
+@protocol InfoPanelControllerDelegate
 
 /**
- Tells the delegate that a folder has been selected.
+ Tells the delegate that a URL will be opened.
 
- @param folder The selected folder.
+ @param url The URL to open.
  */
-- (void)activityPanelControllerDidSelectFolder:(Folder *)folder;
+- (void)infoPanelControllerWillOpenURL:(NSURL *)url;
 
 @end
 
-@interface ActivityPanelController : NSWindowController
+@interface InfoPanelController : NSWindowController
 
 /**
- The activity panel controller's delegate.
+ The info panel controller's delegate.
  */
-@property (weak, nullable, nonatomic) id<ActivityPanelControllerDelegate> delegate;
+@property (weak, nullable, nonatomic) id<InfoPanelControllerDelegate> delegate;
+
+- (instancetype)initWithFolder:(NSInteger)folderId;
+
+- (void)updateFolder;
 
 @end
 
