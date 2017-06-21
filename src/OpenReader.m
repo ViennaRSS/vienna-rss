@@ -33,8 +33,6 @@
 #import "Debug.h"
 #import "ASIFormDataRequest.h"
 
-#define TIMESTAMP [NSString stringWithFormat:@"%0.0f",[[NSDate date] timeIntervalSince1970]]
-
 static NSString * LoginBaseURL = @"https://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader";
 static NSString * ClientName = @"ViennaRSS";
 
@@ -480,7 +478,7 @@ typedef NS_ENUM(NSInteger, OpenReaderStatus) {
     }
 		
 	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@stream/contents/feed/%@?client=%@&comments=false&likes=false%@&ck=%@&output=json",APIBaseURL,
-                                                  percentEscape(feedIdentifier),ClientName,itemsLimitation,TIMESTAMP]];
+                                                  percentEscape(feedIdentifier),ClientName,itemsLimitation,[OpenReader currentTimestamp]]];
 		
 	ASIHTTPRequest *request = [self requestFromURL:refreshFeedUrl];
 	request.didFinishSelector = @selector(feedRequestDone:);
@@ -488,7 +486,7 @@ typedef NS_ENUM(NSInteger, OpenReaderStatus) {
 	request.userInfo = @{@"folder": thisFolder,@"log": aItem,@"lastupdatestring": folderLastUpdateString, @"type": @(MA_Refresh_GoogleFeed)};
 	
     // Request id's of unread items
-    NSString * args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&xt=user/-/state/com.google/read&n=1000&output=json", TIMESTAMP, ClientName,
+    NSString * args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&xt=user/-/state/com.google/read&n=1000&output=json", [OpenReader currentTimestamp], ClientName,
                        percentEscape(feedIdentifier)];
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
     ASIHTTPRequest *request2 = [self requestFromURL:url];
@@ -509,7 +507,7 @@ typedef NS_ENUM(NSInteger, OpenReaderStatus) {
         starredSelector=@"it=user/-/state/com.google/starred";
     }
 
-    NSString * args3 = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", TIMESTAMP, ClientName, percentEscape(feedIdentifier), starredSelector];
+    NSString * args3 = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", [OpenReader currentTimestamp], ClientName, percentEscape(feedIdentifier), starredSelector];
     NSURL * url3 = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args3]];
     ASIHTTPRequest *request3 = [self requestFromURL:url3];
     request3.userInfo = @{@"folder": thisFolder, @"log": aItem};
@@ -1083,6 +1081,16 @@ typedef NS_ENUM(NSInteger, OpenReaderStatus) {
         [params addObject:parentNumber];
         [self createFolders:params];
     }
+}
+
+
+/**
+ Get the current timestamp
+ 
+ @return current timestamp as a string
+ */
++ (NSString *)currentTimestamp {
+    return [NSString stringWithFormat:@"%0.0f",[[NSDate date] timeIntervalSince1970]];
 }
 
 @end
