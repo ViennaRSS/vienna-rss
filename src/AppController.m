@@ -2956,12 +2956,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		Folder * folder = selectedFolders[index];
         
-        if (IsUnsubscribed(folder)) {
+        if (folder.isUnsubscribed) {
             // Currently unsubscribed, so re-subscribe locally
-            [[Database sharedManager] clearFlag:MA_FFlag_Unsubscribed forFolder:folder.itemId];
+            [[Database sharedManager] clearFlag:VNAFolderFlagUnsubscribed forFolder:folder.itemId];
         } else {
             // Currently subscribed, so unsubscribe locally
-            [[Database sharedManager] setFlag:MA_FFlag_Unsubscribed forFolder:folder.itemId];
+            [[Database sharedManager] setFlag:VNAFolderFlagUnsubscribed forFolder:folder.itemId];
         }
 
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
@@ -2986,13 +2986,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		
 		if (loadFullHTMLPages)
 		{
-			[folder setFlag:MA_FFlag_LoadFullHTML];
-            [[Database sharedManager] setFlag:MA_FFlag_LoadFullHTML forFolder:folderID];
+			[folder setFlag:VNAFolderFlagLoadFullHTML];
+            [[Database sharedManager] setFlag:VNAFolderFlagLoadFullHTML forFolder:folderID];
 		}
 		else
 		{
-			[folder clearFlag:MA_FFlag_LoadFullHTML];
-            [[Database sharedManager] clearFlag:MA_FFlag_LoadFullHTML forFolder:folderID];
+			[folder clearFlag:VNAFolderFlagLoadFullHTML];
+            [[Database sharedManager] clearFlag:VNAFolderFlagLoadFullHTML forFolder:folderID];
 		}
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_LoadFullHTMLChange" object:@(folderID)];
 	}
@@ -3825,7 +3825,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
 		if (folder)
 		{
-			if (IsUnsubscribed(folder))
+			if (folder.isUnsubscribed)
 				[menuItem setTitle:NSLocalizedString(@"Resubscribe", nil)];
 			else
 				[menuItem setTitle:NSLocalizedString(@"Unsubscribe", nil)];

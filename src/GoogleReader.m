@@ -532,8 +532,8 @@ enum GoogleReaderStatus {
 
 	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),request.error.localizedDescription ]];
 	[aItem setStatus:NSLocalizedString(@"Error", nil)];
-	[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
-	[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
+	[refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
+	[refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
 }
 
 // callback
@@ -550,8 +550,8 @@ enum GoogleReaderStatus {
         dispatch_async(dispatch_get_main_queue(), ^{
 		    [aItem setStatus:NSLocalizedString(@"Error", nil)];
         });
-		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
-		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
+		[refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
+		[refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
 	} else if (request.responseStatusCode == 200) {
 	    // reset unread statuses in cache : we will receive in -ReadRequestDone: the updated list of unreads
 	    [refreshedFolder markArticlesInCacheRead];
@@ -685,7 +685,7 @@ enum GoogleReaderStatus {
 		self.countOfNewArticles += newArticlesFromFeed;
 
         [APPCONTROLLER setStatusMessage:nil persist:NO];
-        [refreshedFolder clearNonPersistedFlag:MA_FFlag_Error];
+        [refreshedFolder clearNonPersistedFlag:VNAFolderFlagError];
         // Send status to the activity log
         if (newArticlesFromFeed == 0) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -709,8 +709,8 @@ enum GoogleReaderStatus {
         dispatch_async(dispatch_get_main_queue(), ^{
             [aItem setStatus:NSLocalizedString(@"Error", nil)];
         });
-		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
-		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
+		[refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
+		[refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
 	}
 	}); //block for dispatch_async
 }
@@ -763,15 +763,15 @@ enum GoogleReaderStatus {
 		dispatch_async(dispatch_get_main_queue(), ^{
             [aItem setStatus:NSLocalizedString(@"Error", nil)];
         });
-		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
-		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
+		[refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
+		[refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(refreshedFolder.itemId)];
 		return;
 	}  // try/catch
 
 
 		// If this folder also requires an image refresh, add that
-        if (refreshedFolder.flags & MA_FFlag_CheckForImage) {
+        if (refreshedFolder.flags & VNAFolderFlagCheckForImage) {
             [[RefreshManager sharedManager] refreshFavIconForFolder:refreshedFolder];
         }
 
@@ -780,8 +780,8 @@ enum GoogleReaderStatus {
 	{
 		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),request.error.localizedDescription ]];
 		[aItem setStatus:NSLocalizedString(@"Error", nil)];
-		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
-		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
+		[refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
+		[refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
 	}
 	}); //block for dispatch_async
 
@@ -824,14 +824,14 @@ enum GoogleReaderStatus {
 
         [[Database sharedManager] markStarredArticlesFromFolder:refreshedFolder guidArray:guidArray];
 
-		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
+		[refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
 	} @catch (NSException *exception) {
 		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),exception]];
         dispatch_async(dispatch_get_main_queue(), ^{
             [aItem setStatus:NSLocalizedString(@"Error", nil)];
         });
-		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
-		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
+		[refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
+		[refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
 	}  // try/catch
 	}
 	else //response status other than OK (200)
@@ -840,8 +840,8 @@ enum GoogleReaderStatus {
         dispatch_async(dispatch_get_main_queue(), ^{
             [aItem setStatus:NSLocalizedString(@"Error", nil)];
         });
-		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
-		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
+		[refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
+		[refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
 	}
 
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(refreshedFolder.itemId)];

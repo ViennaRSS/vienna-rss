@@ -797,7 +797,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		// image for the folder.
 		folder = [[Folder alloc] initWithId:newItemId parentId:parentId name:name type:type];
 		if ((type == VNAFolderTypeRSS)||(type == VNAFolderTypeOpenReader))
-			[folder setFlag:MA_FFlag_CheckForImage];
+			[folder setFlag:VNAFolderFlagCheckForImage];
 		self.foldersDict[@(newItemId)] = folder;
 		
 		if (manualSort)
@@ -836,7 +836,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 
 	// Require an image check if we're a subscription folder
     if ((type == VNAFolderTypeRSS) || (type == VNAFolderTypeOpenReader)) {
-		flags = MA_FFlag_CheckForImage;
+		flags = VNAFolderFlagCheckForImage;
     }
 	// Create the folder in the database. One thing to watch out for here that has
 	// bit me before. When adding new fields to the folders table, remember to init
@@ -1209,7 +1209,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	}
 	
 	// Do the re-parent
-	[folder setParent:newParentID];
+    folder.parentId = newParentID;
 	
 	// In addition to reparenting the child, we also need to fix up the unread count for all
 	// precedent parents.

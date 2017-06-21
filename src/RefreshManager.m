@@ -204,7 +204,7 @@
 			[self refreshSubscriptions:[[Database sharedManager] arrayOfFolders:folder.itemId] ignoringSubscriptionStatus:NO];
 		else if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
 		{
-			if (!IsUnsubscribed(folder) || ignoreSubStatus)
+			if (!folder.isUnsubscribed || ignoreSubStatus)
 			{
 				if (![self isRefreshingFolder:folder ofType:MA_Refresh_Feed] && ![self isRefreshingFolder:folder ofType:MA_Refresh_GoogleFeed])
 				{
@@ -284,7 +284,7 @@
 	if ((folder.type == VNAFolderTypeRSS||folder.type == VNAFolderTypeOpenReader) &&
         (folder.homePage == nil || folder.homePage.blank || folder.hasCachedImage))
 	{
-        [[Database sharedManager] clearFlag:MA_FFlag_CheckForImage forFolder:folder.itemId];
+        [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
 		return;
 	}
 	
@@ -384,7 +384,7 @@
 -(void)handleGotAuthenticationForFolder:(NSNotification *)nc
 {
 	Folder * folder = (Folder *)nc.object;
-    [[Database sharedManager] clearFlag:MA_FFlag_NeedCredentials forFolder:folder.itemId];
+    [[Database sharedManager] clearFlag:VNAFolderFlagNeedCredentials forFolder:folder.itemId];
 	[authQueue removeObject:folder];
 	[self refreshSubscriptions:@[folder] ignoringSubscriptionStatus:YES];
 	
@@ -399,9 +399,9 @@
 -(void)setFolderErrorFlag:(Folder *)folder flag:(BOOL)theFlag
 {
 	if (theFlag)
-		[folder setNonPersistedFlag:MA_FFlag_Error];
+		[folder setNonPersistedFlag:VNAFolderFlagError];
 	else
-		[folder clearNonPersistedFlag:MA_FFlag_Error];
+		[folder clearNonPersistedFlag:VNAFolderFlagError];
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
 }
 
@@ -412,9 +412,9 @@
 -(void)setFolderUpdatingFlag:(Folder *)folder flag:(BOOL)theFlag
 {
 	if (theFlag)
-		[folder setNonPersistedFlag:MA_FFlag_Updating];
+		[folder setNonPersistedFlag:VNAFolderFlagUpdating];
 	else
-		[folder clearNonPersistedFlag:MA_FFlag_Updating];
+		[folder clearNonPersistedFlag:VNAFolderFlagUpdating];
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
 }
 
@@ -426,7 +426,7 @@
 {
 	// If this folder needs credentials, add the folder to the list requiring authentication
 	// and since we can't progress without it, skip this folder on the connection
-	if (folder.flags & MA_FFlag_NeedCredentials)
+	if (folder.flags & VNAFolderFlagNeedCredentials)
 	{
 		[authQueue addObject:folder];
 		[self getCredentialsForFolder];
@@ -592,7 +592,7 @@
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), request.responseStatusCode]];
 	}
 
-    [[Database sharedManager] clearFlag:MA_FFlag_CheckForImage forFolder:folder.itemId];
+    [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
 
 }
 
@@ -602,7 +602,7 @@
 	Folder * folder = (Folder *)request.userInfo[@"folder"];
 	ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:folder.name];
 	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS Icon:", nil),request.error.localizedDescription ]];
-    [[Database sharedManager] clearFlag:MA_FFlag_CheckForImage forFolder:folder.itemId];
+    [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
 }
 
 - (void)syncFinishedForFolder:(Folder *)folder 
@@ -743,12 +743,12 @@
 		// [dbManager setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
 		
 		// If this folder also requires an image refresh, add that
-        if ((folder.flags & MA_FFlag_CheckForImage)) [self refreshFavIconForFolder:folder];
+        if ((folder.flags & VNAFolderFlagCheckForImage)) [self refreshFavIconForFolder:folder];
 	}
 	else if (responseStatusCode == 410)
 	{
 		// We got HTTP 410 which means the feed has been intentionally removed so unsubscribe the feed.
-        [dbManager setFlag:MA_FFlag_Unsubscribed forFolder:folderId];
+        [dbManager setFlag:VNAFolderFlagUnsubscribed forFolder:folderId];
 
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
                                                                             object:@(folderId)];
@@ -1040,7 +1040,7 @@
 		countOfNewArticles += newArticlesFromFeed;
 	
 		// If this folder also requires an image refresh, do that
-        if ((folder.flags & MA_FFlag_CheckForImage)) {
+        if ((folder.flags & VNAFolderFlagCheckForImage)) {
                 [self refreshFavIconForFolder:folder];
         }
 
