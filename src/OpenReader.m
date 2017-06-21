@@ -1,5 +1,5 @@
 //
-//  GoogleReader.m
+//  OpenReader.m
 //  Vienna
 //
 //  Created by Adam Hartford on 7/7/11.
@@ -50,13 +50,13 @@ BOOL hostRequiresInoreaderAdditionalHeaders;
 BOOL hostRequiresBackcrawling;
 NSDictionary * inoreaderAdditionalHeaders;
 
-enum GoogleReaderStatus {
-	notAuthenticated = 0,
-	waitingClientToken,
-	missingTToken,
-	waitingTToken,
-	fullyAuthenticated
-} googleReaderStatus;
+typedef NS_ENUM(NSInteger, OpenReaderStatus) {
+    notAuthenticated = 0,
+    waitingClientToken,
+    missingTToken,
+    waitingTToken,
+    fullyAuthenticated
+};
 
 @interface OpenReader() <ASIHTTPRequestDelegate>
 
@@ -69,6 +69,7 @@ enum GoogleReaderStatus {
 @property (nonatomic) NSMutableArray * clientAuthWaitQueue;
 @property (nonatomic) NSMutableArray * tTokenWaitQueue;
 @property (nonatomic) dispatch_queue_t asyncQueue;
+@property (nonatomic) OpenReaderStatus openReaderStatus;
 
 @end
 
@@ -84,7 +85,7 @@ enum GoogleReaderStatus {
 		_localFeeds = [[NSMutableArray alloc] init];
 		_clientAuthWaitQueue = [[NSMutableArray alloc] init];
 		_tTokenWaitQueue = [[NSMutableArray alloc] init];
-		googleReaderStatus = notAuthenticated;
+        _openReaderStatus = notAuthenticated;
 		_countOfNewArticles = 0;
 		openReaderHost=nil;
 		username=nil;
@@ -106,10 +107,10 @@ enum GoogleReaderStatus {
 +(OpenReader *)sharedManager
 {
 	// Singleton
-	static OpenReader * _googleReader = nil;
+	static OpenReader * _openReader = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		_googleReader = [[OpenReader alloc] init];
+		_openReader = [[OpenReader alloc] init];
 		Preferences * prefs = [Preferences standardPreferences];
 		if (prefs.syncGoogleReader)
 		{
@@ -118,7 +119,7 @@ enum GoogleReaderStatus {
 		}
 
 	});
-	return _googleReader;
+	return _openReader;
 }
 
 # pragma mark user authentication and requests preparation
@@ -162,10 +163,10 @@ enum GoogleReaderStatus {
 {
     static ASIFormDataRequest *myRequest;
 
-    if (googleReaderStatus == fullyAuthenticated || googleReaderStatus == waitingTToken || googleReaderStatus == missingTToken) {
+    if (self.openReaderStatus == fullyAuthenticated || self.openReaderStatus == waitingTToken || self.openReaderStatus == missingTToken) {
         [clientRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", self.clientAuthToken]];
         return; //we are already connected
-    } else if ((googleReaderStatus == waitingClientToken ) && myRequest != nil) {
+    } else if ((self.openReaderStatus == waitingClientToken ) && myRequest != nil) {
         [clientRequest addDependency:myRequest];
         if (clientRequest != nil) {
             [self.clientAuthWaitQueue addObject:clientRequest];
@@ -173,7 +174,7 @@ enum GoogleReaderStatus {
         return;
     } else {
         // start first authentication
-        googleReaderStatus = waitingClientToken;
+        self.openReaderStatus = waitingClientToken;
         // Do nothing if syncing is disabled in preferences
         if (![Preferences standardPreferences].syncGoogleReader) {
             return;
@@ -204,7 +205,7 @@ enum GoogleReaderStatus {
                 [(ASIHTTPRequest *)obj cancel];
                 [self.clientAuthWaitQueue removeObject:obj];
             }
-            googleReaderStatus = notAuthenticated;
+            self.openReaderStatus = notAuthenticated;
             [[RefreshManager sharedManager] resumeConnectionsQueue];
         }];
         [myRequest setCompletionBlock:^{
@@ -214,7 +215,7 @@ enum GoogleReaderStatus {
                 LOG_EXPR([strongRequest responseHeaders]);
                 [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
                 [strongRequest clearDelegatesAndCancel];
-                googleReaderStatus = notAuthenticated;
+                self.openReaderStatus = notAuthenticated;
                 for (id obj in [self.clientAuthWaitQueue reverseObjectEnumerator]) {
                     [(ASIHTTPRequest *)obj cancel];
                     [self.clientAuthWaitQueue removeObject:obj];
@@ -227,7 +228,7 @@ enum GoogleReaderStatus {
                 //NSString * sid = [[components objectAtIndex:0] substringFromIndex:4];		//unused
                 //NSString * lsid = [[components objectAtIndex:1] substringFromIndex:5];	//unused
                 self.clientAuthToken = [NSString stringWithString:[components[2] substringFromIndex:5]];
-                googleReaderStatus = missingTToken;
+                self.openReaderStatus = missingTToken;
 
                 for (id obj in self.clientAuthWaitQueue) {
                     [(ASIHTTPRequest *)obj addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@",
@@ -299,25 +300,25 @@ enum GoogleReaderStatus {
 {
     static ASIHTTPRequest *myRequest;
 
-    if (googleReaderStatus == fullyAuthenticated) {
+    if (self.openReaderStatus == fullyAuthenticated) {
         [clientRequest setPostValue:self.tToken forKey:@"T"];
         return;
-    } else if (googleReaderStatus == waitingTToken && myRequest != nil) {
+    } else if (self.openReaderStatus == waitingTToken && myRequest != nil) {
         [clientRequest addDependency:myRequest];
         if (clientRequest != nil) {
             [self.tTokenWaitQueue addObject:clientRequest];
         }
         return;
-    } else if (googleReaderStatus == notAuthenticated || googleReaderStatus == waitingClientToken) {
+    } else if (self.openReaderStatus == notAuthenticated || self.openReaderStatus == waitingClientToken) {
         if (clientRequest != nil) {
             [self.tTokenWaitQueue addObject:clientRequest];
         }
         [clientRequest setQueuePriority:NSOperationQueuePriorityLow];
         return;
     } else {
-        // googleReaderStatus ==  missingTToken
+        // openReaderStatus ==  missingTToken
         myRequest = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
-        googleReaderStatus = waitingTToken;
+        self.openReaderStatus = waitingTToken;
         [myRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
         myRequest.delegate = nil;
         __weak typeof(myRequest)weakRequest = myRequest;
@@ -325,7 +326,7 @@ enum GoogleReaderStatus {
             __strong typeof(weakRequest)strongRequest = weakRequest;
             [[RefreshManager sharedManager] suspendConnectionsQueue];
             self.tToken = [strongRequest responseString];
-            googleReaderStatus = fullyAuthenticated;
+            self.openReaderStatus = fullyAuthenticated;
             for (id obj in self.tTokenWaitQueue) {
                 [(ASIFormDataRequest *)obj setPostValue:self.tToken forKey:@"T"];
             }
@@ -348,7 +349,7 @@ enum GoogleReaderStatus {
             LOG_EXPR([[NSString alloc] initWithData:[strongRequest responseData] encoding:NSUTF8StringEncoding]);
             self.tToken = nil;
             [strongRequest clearDelegatesAndCancel];
-            googleReaderStatus = missingTToken;
+            self.openReaderStatus = missingTToken;
             for (id obj in [self.tTokenWaitQueue reverseObjectEnumerator]) {
                 [(ASIFormDataRequest *)obj cancel];
                 [self.tTokenWaitQueue removeObject:obj];
@@ -364,14 +365,14 @@ enum GoogleReaderStatus {
 
 -(void)renewTToken
 {
-	googleReaderStatus = missingTToken;
+	self.openReaderStatus = missingTToken;
 	self.tToken=nil;
 	[self getTokenForRequest:nil];
 }
 
 -(void)clearAuthentication
 {
-	googleReaderStatus = notAuthenticated;
+	self.openReaderStatus = notAuthenticated;
 	self.clientAuthToken = nil;
 	self.tToken = nil;
 }
@@ -413,7 +414,7 @@ enum GoogleReaderStatus {
 
 -(BOOL)isReady
 {
-	return (googleReaderStatus == fullyAuthenticated && self.tTokenTimer != nil);
+	return (self.openReaderStatus == fullyAuthenticated && self.tTokenTimer != nil);
 }
 
 /* countOfNewArticles

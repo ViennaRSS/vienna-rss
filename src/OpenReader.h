@@ -1,5 +1,5 @@
 //
-//  GoogleReader.h
+//  OpenReader.h
 //  Vienna
 //
 //  Created by Adam Hartford on 7/7/11.
