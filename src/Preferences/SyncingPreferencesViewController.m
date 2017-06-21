@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import "GoogleReader.h"
+#import "OpenReader.h"
 #import "KeyChain.h"
 #import "Preferences.h"
 #import "StringExtensions.h"
@@ -145,8 +145,8 @@ static BOOL _credentialsChanged;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     if(syncButton.state == NSOnState && _credentialsChanged)
     {
-        [[GoogleReader sharedManager] resetAuthentication];
-        [[GoogleReader sharedManager] loadSubscriptions];
+        [[OpenReader sharedManager] resetAuthentication];
+        [[OpenReader sharedManager] loadSubscriptions];
     }
 }
 
@@ -170,7 +170,7 @@ static BOOL _credentialsChanged;
         [openReaderHost setEnabled:NO];
         [username setEnabled:NO];
         [password setEnabled:NO];
-        [[GoogleReader sharedManager] clearAuthentication];
+        [[OpenReader sharedManager] clearAuthentication];
     };
 }
 
@@ -263,7 +263,7 @@ static BOOL _credentialsChanged;
         alert.messageText = NSLocalizedString(@"Open Reader Authentication Failed",nil);
         alert.informativeText = NSLocalizedString(@"Open Reader Authentication Failed text",nil);
         [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
-            [[GoogleReader sharedManager] clearAuthentication];
+            [[OpenReader sharedManager] clearAuthentication];
         }];
     }
 }

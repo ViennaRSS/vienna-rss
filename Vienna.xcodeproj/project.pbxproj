@@ -196,7 +196,7 @@
 		57F7E2F216F534FE00D4702E /* vienna3style.icns in Resources */ = {isa = PBXBuildFile; fileRef = 57F7E2F016F534FE00D4702E /* vienna3style.icns */; };
 		61A2CB610A8AC68C006348E8 /* revised.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A2CB600A8AC68C006348E8 /* revised.tiff */; };
 		6624683B13C5F83000C85417 /* sync.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6624683A13C5F81F00C85417 /* sync.tiff */; };
-		664F87C713C62DFE00E266DE /* GoogleReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 664F87C613C62DFE00E266DE /* GoogleReader.m */; };
+		664F87C713C62DFE00E266DE /* OpenReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 664F87C613C62DFE00E266DE /* OpenReader.m */; };
 		70D0A8E09ABD09D1538832EA /* libPods-Vienna Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0CEAD1B45DBBF666A25250 /* libPods-Vienna Tests.a */; };
 		793C95331C42A0DD00984D4E /* FoldersFilterable.m in Sources */ = {isa = PBXBuildFile; fileRef = 793C95321C42A0DD00984D4E /* FoldersFilterable.m */; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -652,8 +652,8 @@
 		61A2CB600A8AC68C006348E8 /* revised.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = revised.tiff; path = Resources/revised.tiff; sourceTree = SOURCE_ROOT; };
 		63DEA27414A309B4CA351B20 /* Pods-Vienna.staticanalyzer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna.staticanalyzer.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna/Pods-Vienna.staticanalyzer.xcconfig"; sourceTree = "<group>"; };
 		6624683A13C5F81F00C85417 /* sync.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sync.tiff; path = Resources/sync.tiff; sourceTree = SOURCE_ROOT; };
-		664F87C513C62DFE00E266DE /* GoogleReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoogleReader.h; path = src/GoogleReader.h; sourceTree = SOURCE_ROOT; };
-		664F87C613C62DFE00E266DE /* GoogleReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoogleReader.m; path = src/GoogleReader.m; sourceTree = SOURCE_ROOT; };
+		664F87C513C62DFE00E266DE /* OpenReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenReader.h; path = src/OpenReader.h; sourceTree = SOURCE_ROOT; };
+		664F87C613C62DFE00E266DE /* OpenReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenReader.m; path = src/OpenReader.m; sourceTree = SOURCE_ROOT; };
 		793C95311C42A0DD00984D4E /* FoldersFilterable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FoldersFilterable.h; path = src/FoldersFilterable.h; sourceTree = "<group>"; };
 		793C95321C42A0DD00984D4E /* FoldersFilterable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FoldersFilterable.m; path = src/FoldersFilterable.m; sourceTree = "<group>"; };
 		7A3781B9326123EE56347D35 /* libPods-Vienna.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vienna.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1584,8 +1584,8 @@
 		660AA30914072BFD0082CCF0 /* Fetching */ = {
 			isa = PBXGroup;
 			children = (
-				664F87C513C62DFE00E266DE /* GoogleReader.h */,
-				664F87C613C62DFE00E266DE /* GoogleReader.m */,
+				664F87C513C62DFE00E266DE /* OpenReader.h */,
+				664F87C613C62DFE00E266DE /* OpenReader.m */,
 				4350287D165DE9DF0018EDB7 /* RefreshManager.h */,
 				4350287E165DE9DF0018EDB7 /* RefreshManager.m */,
 			);
@@ -2676,7 +2676,7 @@
 				AA5AA8000C3C0D7D00B2E14F /* ToolbarButton.m in Sources */,
 				AA5AB4C80C3D511700B2E14F /* ToolbarItem.m in Sources */,
 				B27CD04F1100F408001F3C83 /* BitlyAPIHelper.m in Sources */,
-				664F87C713C62DFE00E266DE /* GoogleReader.m in Sources */,
+				664F87C713C62DFE00E266DE /* OpenReader.m in Sources */,
 				EA43C70914A370DB00F2D843 /* VTPG_Common.m in Sources */,
 				B2BECB1714CEF22B00706F8F /* SSTextField.m in Sources */,
 				435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */,

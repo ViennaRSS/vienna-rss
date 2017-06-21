@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import "GoogleReader.h"
+#import "OpenReader.h"
 #import "HelperFunctions.h"
 #import "Folder.h"
 #import "Database.h"
@@ -58,7 +58,7 @@ enum GoogleReaderStatus {
 	fullyAuthenticated
 } googleReaderStatus;
 
-@interface GoogleReader() <ASIHTTPRequestDelegate>
+@interface OpenReader() <ASIHTTPRequestDelegate>
 
 @property (readwrite, nonatomic) NSUInteger countOfNewArticles;
 @property (nonatomic) NSMutableArray * localFeeds;
@@ -72,7 +72,7 @@ enum GoogleReaderStatus {
 
 @end
 
-@implementation GoogleReader
+@implementation OpenReader
 
 # pragma mark initialization
 
@@ -103,13 +103,13 @@ enum GoogleReaderStatus {
 /* sharedManager
  * Returns the single instance of the Open Reader.
  */
-+(GoogleReader *)sharedManager
++(OpenReader *)sharedManager
 {
 	// Singleton
-	static GoogleReader * _googleReader = nil;
+	static OpenReader * _googleReader = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		_googleReader = [[GoogleReader alloc] init];
+		_googleReader = [[OpenReader alloc] init];
 		Preferences * prefs = [Preferences standardPreferences];
 		if (prefs.syncGoogleReader)
 		{

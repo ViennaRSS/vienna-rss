@@ -45,7 +45,7 @@
 #import "SearchPanel.h"
 #import "SearchMethod.h"
 #import "ViennaSparkleDelegate.h"
-#import "GoogleReader.h"
+#import "OpenReader.h"
 #import "VTPG_Common.h"
 #import "Debug.h"
 #import "Database.h"
@@ -2147,7 +2147,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[self showUnreadCountOnApplicationIconAndWindowTitle];
 		
 		// Bounce the dock icon for 1 second if the bounce method has been selected.
-		NSInteger newUnread = [RefreshManager sharedManager].countOfNewArticles + [GoogleReader sharedManager].countOfNewArticles;
+		NSInteger newUnread = [RefreshManager sharedManager].countOfNewArticles + [OpenReader sharedManager].countOfNewArticles;
 		if (newUnread > 0 && ((prefs.newArticlesNotification & MA_NewArticlesNotification_Bounce) != 0))
 			[NSApp requestUserAttention:NSInformationalRequest];
 
@@ -2574,7 +2574,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	// Create the new folder.
 	if ([Preferences standardPreferences].syncGoogleReader && [Preferences standardPreferences].prefersGoogleNewSubscription)
 	{	//creates in Google
-		GoogleReader * myGoogle = [GoogleReader sharedManager];
+		OpenReader * myGoogle = [OpenReader sharedManager];
 		[myGoogle subscribeToFeed:urlString];
 		NSString * folderName = [db folderFromID:parentId].name;
 		if (folderName != nil)
@@ -2924,7 +2924,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             
 			if (folder.type == VNAFolderTypeOpenReader) {
 				NSLog(@"Unsubscribe Open Reader folder");
-				[[GoogleReader sharedManager] unsubscribeFromFeed:folder.feedURL];
+				[[OpenReader sharedManager] unsubscribeFromFeed:folder.feedURL];
 			}
 		}
 	}
@@ -3366,7 +3366,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 }
 
 -(IBAction)updateRemoteSubscriptions:(id)sender {
-	[[GoogleReader sharedManager] loadSubscriptions];
+	[[OpenReader sharedManager] loadSubscriptions];
 }
 
 

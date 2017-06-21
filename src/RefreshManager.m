@@ -26,7 +26,7 @@
 #import "StringExtensions.h"
 #import "Preferences.h"
 #import "Constants.h"
-#import "GoogleReader.h"
+#import "OpenReader.h"
 #import "AppController.h"
 #import "ASIHTTPRequest.h"
 #import "NSNotificationAdditions.h"
@@ -245,7 +245,7 @@
 {   
     self.syncType = MA_Sync_Refresh_All;
 	
-	if ([Preferences standardPreferences].syncGoogleReader) [[GoogleReader sharedManager] loadSubscriptions];
+	if ([Preferences standardPreferences].syncGoogleReader) [[OpenReader sharedManager] loadSubscriptions];
 	
     [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
@@ -499,7 +499,7 @@
 		myRequest.willRedirectSelector = @selector(folderRefreshRedirect:);
 		[myRequest addRequestHeader:@"Accept" value:@"application/rss+xml,application/rdf+xml,application/atom+xml,text/xml,application/xml,application/xhtml+xml;q=0.9,text/html;q=0.8,*/*;q=0.5"];
 	} else { // Open Reader feed
-		myRequest = [[GoogleReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
+		myRequest = [[OpenReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
 	}
 	myRequest.timeOutSeconds = 180;
 	// hack for handling file:// URLs
