@@ -1292,17 +1292,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		031E082D19DFA36900194F9F /* NewSubscription */ = {
-			isa = PBXGroup;
-			children = (
-				43502877165DE9DF0018EDB7 /* NewSubscription.h */,
-				43502878165DE9DF0018EDB7 /* NewSubscription.m */,
-				031E082E19DFA3A900194F9F /* SubscriptionModel.h */,
-				031E082F19DFA3A900194F9F /* SubscriptionModel.m */,
-			);
-			name = NewSubscription;
-			sourceTree = "<group>";
-		};
 		0322802E1A33BCC1007DE933 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1366,7 +1355,7 @@
 			name = Products;
 			sourceTree = SOURCE_ROOT;
 		};
-		2A37F4AAFDCFA73011CA2CEA = {
+		2A37F4AAFDCFA73011CA2CEA /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
 				439824161666B1ED00FFE219 /* Documentation */,
@@ -1382,91 +1371,6 @@
 			);
 			name = Vienna;
 			sourceTree = "<group>";
-		};
-		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				4350284B165DE9DF0018EDB7 /* AppController.h */,
-				4350284C165DE9DF0018EDB7 /* AppController.m */,
-				F69140E21E71B94200D51BFF /* AppController+Notifications.h */,
-				F69140E31E71B94200D51BFF /* AppController+Notifications.m */,
-				4350284D165DE9DF0018EDB7 /* ArticleBaseView.h */,
-				3A4DBEC51733C206006DD2AB /* ArticleCellView.h */,
-				3A4DBEC61733C206006DD2AB /* ArticleCellView.m */,
-				4350284E165DE9DF0018EDB7 /* ArticleController.h */,
-				4350284F165DE9DF0018EDB7 /* ArticleController.m */,
-				43502850165DE9DF0018EDB7 /* ArticleFilter.h */,
-				43502851165DE9DF0018EDB7 /* ArticleFilter.m */,
-				43502852165DE9DF0018EDB7 /* ArticleListView.h */,
-				43502853165DE9DF0018EDB7 /* ArticleListView.m */,
-				43502854165DE9DF0018EDB7 /* ArticleView.h */,
-				43502855165DE9DF0018EDB7 /* ArticleView.m */,
-				43502856165DE9DF0018EDB7 /* BaseView.h */,
-				43502857165DE9DF0018EDB7 /* BrowserPane.h */,
-				43502858165DE9DF0018EDB7 /* BrowserPane.m */,
-				43502859165DE9DF0018EDB7 /* BrowserPaneTemplate.h */,
-				4350285A165DE9DF0018EDB7 /* BrowserPaneTemplate.m */,
-				4350285B165DE9DF0018EDB7 /* BrowserView.h */,
-				4350285C165DE9DF0018EDB7 /* BrowserView.m */,
-				4350285D165DE9DF0018EDB7 /* Constants.h */,
-				4350285E165DE9DF0018EDB7 /* Constants.m */,
-				F6164C571E32A6660086261C /* DisclosureView.h */,
-				F6164C581E32A6660086261C /* DisclosureView.m */,
-				4350285F165DE9DF0018EDB7 /* DownloadManager.h */,
-				43502860165DE9DF0018EDB7 /* DownloadManager.m */,
-				43502861165DE9DF0018EDB7 /* DownloadWindow.h */,
-				43502862165DE9DF0018EDB7 /* DownloadWindow.m */,
-				43502863165DE9DF0018EDB7 /* EmptyTrashWarning.h */,
-				43502864165DE9DF0018EDB7 /* EmptyTrashWarning.m */,
-				43502865165DE9DF0018EDB7 /* Export.h */,
-				43502866165DE9DF0018EDB7 /* Export.m */,
-				43502867165DE9DF0018EDB7 /* FeedCredentials.h */,
-				43502868165DE9DF0018EDB7 /* FeedCredentials.m */,
-				F628DFE21ED2698A00FACFD3 /* FilterView.swift */,
-				4350286B165DE9DF0018EDB7 /* FoldersTree.h */,
-				4350286C165DE9DF0018EDB7 /* FoldersTree.m */,
-				793C95311C42A0DD00984D4E /* FoldersFilterable.h */,
-				793C95321C42A0DD00984D4E /* FoldersFilterable.m */,
-				4350286D165DE9DF0018EDB7 /* FolderView.h */,
-				4350286E165DE9DF0018EDB7 /* FolderView.m */,
-				4350286F165DE9DF0018EDB7 /* Import.h */,
-				43502870165DE9DF0018EDB7 /* Import.m */,
-				43502871165DE9DF0018EDB7 /* InfoWindow.h */,
-				43502872165DE9DF0018EDB7 /* InfoWindow.m */,
-				43502873165DE9DF0018EDB7 /* MessageListView.h */,
-				43502874165DE9DF0018EDB7 /* MessageListView.m */,
-				43502875165DE9DF0018EDB7 /* NewGroupFolder.h */,
-				43502876165DE9DF0018EDB7 /* NewGroupFolder.m */,
-				031E082D19DFA36900194F9F /* NewSubscription */,
-				43502879165DE9DF0018EDB7 /* PluginManager.h */,
-				4350287A165DE9DF0018EDB7 /* PluginManager.m */,
-				4350287B165DE9DF0018EDB7 /* ProgressTextCell.h */,
-				4350287C165DE9DF0018EDB7 /* ProgressTextCell.m */,
-				4350287D165DE9DF0018EDB7 /* RefreshManager.h */,
-				4350287E165DE9DF0018EDB7 /* RefreshManager.m */,
-				4350287F165DE9DF0018EDB7 /* SearchFolder.h */,
-				43502880165DE9DF0018EDB7 /* SearchFolder.m */,
-				43502881165DE9DF0018EDB7 /* SearchMethod.h */,
-				43502882165DE9DF0018EDB7 /* SearchMethod.m */,
-				43502883165DE9DF0018EDB7 /* SearchPanel.h */,
-				43502884165DE9DF0018EDB7 /* SearchPanel.m */,
-				43502885165DE9DF0018EDB7 /* StdEnclosureView.h */,
-				43502886165DE9DF0018EDB7 /* StdEnclosureView.m */,
-				43502887165DE9DF0018EDB7 /* TabbedWebView.h */,
-				43502888165DE9DF0018EDB7 /* TabbedWebView.m */,
-				4350288B165DE9DF0018EDB7 /* TreeNode.h */,
-				4350288C165DE9DF0018EDB7 /* TreeNode.m */,
-				4350288D165DE9DF0018EDB7 /* UnifiedDisplayView.h */,
-				4350288E165DE9DF0018EDB7 /* UnifiedDisplayView.m */,
-				4350288F165DE9DF0018EDB7 /* URLHandlerCommand.h */,
-				43502890165DE9DF0018EDB7 /* URLHandlerCommand.m */,
-				43502891165DE9DF0018EDB7 /* ViennaApp.h */,
-				43502892165DE9DF0018EDB7 /* ViennaApp.m */,
-				3AF896C51CD8FDB800A9FA22 /* ViennaSparkleDelegate.h */,
-				3AF896C61CD8FDB800A9FA22 /* ViennaSparkleDelegate.m */,
-			);
-			name = Classes;
-			sourceTree = SOURCE_ROOT;
 		};
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
@@ -1507,6 +1411,7 @@
 		43501F8D165DB9DD0018EDB7 /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				F6D008A11EF979F9008F2D3B /* BJRVerticallyCenteredTextFieldCell */,
 				EA43C70614A370CB00F2D843 /* DebugHelper */,
 				43501F8E165DBCCB0018EDB7 /* DSClickableURLTextField */,
 			);
@@ -1673,13 +1578,15 @@
 			path = models;
 			sourceTree = "<group>";
 		};
-		660AA30914072BFD0082CCF0 /* OpenReader Sync */ = {
+		660AA30914072BFD0082CCF0 /* Fetching */ = {
 			isa = PBXGroup;
 			children = (
 				664F87C513C62DFE00E266DE /* GoogleReader.h */,
 				664F87C613C62DFE00E266DE /* GoogleReader.m */,
+				4350287D165DE9DF0018EDB7 /* RefreshManager.h */,
+				4350287E165DE9DF0018EDB7 /* RefreshManager.m */,
 			);
-			name = "OpenReader Sync";
+			name = Fetching;
 			sourceTree = SOURCE_ROOT;
 		};
 		7F60B6D7AEFB47009A82F8BA /* Frameworks */ = {
@@ -1801,7 +1708,7 @@
 			name = "Toolbar buttons";
 			sourceTree = "<group>";
 		};
-		AA3113EC09020E1B00E80DF1 /* Preferences */ = {
+		AA3113EC09020E1B00E80DF1 /* Preferences window */ = {
 			isa = PBXGroup;
 			children = (
 				AA9FE2EB08BC133600A9E977 /* Preferences.h */,
@@ -1817,33 +1724,16 @@
 				0349813F1A20701600014F29 /* AdvancedPreferencesViewController.h */,
 				034981401A20701600014F29 /* AdvancedPreferencesViewController.m */,
 			);
-			name = Preferences;
-			sourceTree = SOURCE_ROOT;
-		};
-		AA4F657B062B873100D4837C /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				F64C2CCA1E83825D00ED4E04 /* DateFormatterExtension.h */,
-				F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */,
-				AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */,
-				AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */,
-				F6C5CEF81E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.h */,
-				F6C5CEF91E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m */,
-				AAF3B14006095E7B0025CC7F /* StringExtensions.h */,
-				AAF3B14106095E7B0025CC7F /* StringExtensions.m */,
-				AAA305FC0682A25200E4A6DC /* TableViewExtensions.h */,
-				AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */,
-				37C652B4C918F312BA9F1AB1 /* NSURL+Utils.h */,
-				37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */,
-				03B35B821B75E9E0001DB06D /* NSDate+Vienna.h */,
-				03B35B831B75E9E0001DB06D /* NSDate+Vienna.m */,
-			);
-			name = Extensions;
+			name = "Preferences window";
 			sourceTree = SOURCE_ROOT;
 		};
 		AA5AABB50C3CD68A00B2E14F /* Toolbar */ = {
 			isa = PBXGroup;
 			children = (
+				34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */,
+				34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */,
+				AAE7A8FF086BB5C4009A487E /* PopupButton.h */,
+				AAE7A900086BB5C4009A487E /* PopupButton.m */,
 				AA5AA7FD0C3C0D7D00B2E14F /* ToolbarButton.h */,
 				AA5AA7FE0C3C0D7D00B2E14F /* ToolbarButton.m */,
 				AA5AB4C50C3D511700B2E14F /* ToolbarItem.h */,
@@ -1865,65 +1755,68 @@
 				03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */,
 				AA36CD7906100692001E33A4 /* Field.h */,
 				AA36CD7A06100692001E33A4 /* Field.m */,
+				43502865165DE9DF0018EDB7 /* Export.h */,
+				43502866165DE9DF0018EDB7 /* Export.m */,
+				4350286F165DE9DF0018EDB7 /* Import.h */,
+				43502870165DE9DF0018EDB7 /* Import.m */,
 			);
 			name = Database;
 			sourceTree = SOURCE_ROOT;
 		};
-		AAA5687609EE72BE00C87343 /* NewsParser */ = {
+		AAA5687609EE72BE00C87343 /* Parsing */ = {
 			isa = PBXGroup;
 			children = (
 				AA3281A3084161EB00A7AD5A /* RichXMLParser.h */,
 				AA3281A4084161EB00A7AD5A /* RichXMLParser.m */,
 				AA4C8DEC0B9B2A8B00E0C9B8 /* XMLTag.h */,
 				AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */,
+				03B35B821B75E9E0001DB06D /* NSDate+Vienna.h */,
+				03B35B831B75E9E0001DB06D /* NSDate+Vienna.m */,
 			);
-			name = NewsParser;
+			name = Parsing;
 			sourceTree = SOURCE_ROOT;
 		};
 		AAA568BB09EE773200C87343 /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
-				660AA30914072BFD0082CCF0 /* OpenReader Sync */,
-				AAA5687609EE72BE00C87343 /* NewsParser */,
-				AA4F657B062B873100D4837C /* Extensions */,
-				0322802E1A33BCC1007DE933 /* Models */,
-				AA8C76C006420CA800649BA2 /* Database */,
-				2A37F4ABFDCFA73011CA2CEA /* Classes */,
-				AAC5063D082A7AE00089FF70 /* Support Classes */,
+				F62EC6B81EF933CB005EE8E5 /* Application */,
+				F62EC6B91EF934D9005EE8E5 /* Main window */,
+				AA3113EC09020E1B00E80DF1 /* Preferences window */,
+				F6F44F0B1EF9280400E6F1B4 /* Info window */,
 				F6CE47101E7E3D520045EAD7 /* Activity panel */,
-				AA3113EC09020E1B00E80DF1 /* Preferences */,
-				AA5AABB50C3CD68A00B2E14F /* Toolbar */,
-				AAC5063C082A7A530089FF70 /* Other Sources */,
+				F6D0089E1EF968E8008F2D3B /* Download window */,
+				F6F44F101EF92DC600E6F1B4 /* Alerts */,
+				660AA30914072BFD0082CCF0 /* Fetching */,
+				AAA5687609EE72BE00C87343 /* Parsing */,
+				AA8C76C006420CA800649BA2 /* Database */,
+				0322802E1A33BCC1007DE933 /* Models */,
+				F6F44F0D1EF92B0D00E6F1B4 /* Plug-ins */,
+				AAC5063D082A7AE00089FF70 /* Shared */,
+				AAC5063C082A7A530089FF70 /* Other */,
 			);
 			name = Vienna;
 			sourceTree = SOURCE_ROOT;
 		};
-		AAC5063C082A7A530089FF70 /* Other Sources */ = {
+		AAC5063C082A7A530089FF70 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				430C4ADB1661753F0079C9FC /* autorevision.h */,
 				F6DAD20A1E75892C00FE2645 /* Vienna-Bridging-Header.h */,
+				430C4ADB1661753F0079C9FC /* autorevision.h */,
 				2A37F4B0FDCFA73011CA2CEA /* main.m */,
 			);
-			name = "Other Sources";
+			name = Other;
 			sourceTree = SOURCE_ROOT;
 		};
-		AAC5063D082A7AE00089FF70 /* Support Classes */ = {
+		AAC5063D082A7AE00089FF70 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				AAD7999D088B617900E2CE5E /* AddressBarCell.h */,
-				AA71168E09BEB17300E3EA8A /* AddressBarCell.m */,
-				AA26F4D70604927300FE7994 /* BackTrackArray.h */,
-				AA26F4D80604927300FE7994 /* BackTrackArray.m */,
-				B27CD04D1100F408001F3C83 /* BitlyAPIHelper.h */,
-				B27CD04E1100F408001F3C83 /* BitlyAPIHelper.m */,
-				3A7BD0DB1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.h */,
-				3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */,
-				3AFF601619A07F5A0036DBA4 /* BJRWindowWithToolbar.m */,
-				3AFF601719A07F5A0036DBA4 /* BJRWindowWithToolbar.h */,
-				34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */,
-				34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */,
-				F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */,
+				43502856165DE9DF0018EDB7 /* BaseView.h */,
+				4350285D165DE9DF0018EDB7 /* Constants.h */,
+				4350285E165DE9DF0018EDB7 /* Constants.m */,
+				F64C2CCA1E83825D00ED4E04 /* DateFormatterExtension.h */,
+				F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */,
+				F6164C571E32A6660086261C /* DisclosureView.h */,
+				F6164C581E32A6660086261C /* DisclosureView.m */,
 				F63B71741ED252DD00CF9F32 /* GradientView.swift */,
 				AA60237E08C298FB002CFD06 /* HelperFunctions.h */,
 				AA60237F08C298FB002CFD06 /* HelperFunctions.m */,
@@ -1933,12 +1826,16 @@
 				AAFAF3FC088056D800DAFF04 /* KeyChain.m */,
 				3A23F13315276935008AF863 /* NSNotificationAdditions.h */,
 				4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */,
-				AAE7A8FF086BB5C4009A487E /* PopupButton.h */,
-				AAE7A900086BB5C4009A487E /* PopupButton.m */,
-				B2BECB1514CEF22B00706F8F /* SSTextField.h */,
-				B2BECB1614CEF22B00706F8F /* SSTextField.m */,
+				AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */,
+				AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */,
+				AAF3B14006095E7B0025CC7F /* StringExtensions.h */,
+				AAF3B14106095E7B0025CC7F /* StringExtensions.m */,
+				031E082E19DFA3A900194F9F /* SubscriptionModel.h */,
+				031E082F19DFA3A900194F9F /* SubscriptionModel.m */,
+				AAA305FC0682A25200E4A6DC /* TableViewExtensions.h */,
+				AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */,
 			);
-			name = "Support Classes";
+			name = Shared;
 			sourceTree = SOURCE_ROOT;
 		};
 		B262610E10A033F700E76A37 /* ErrorPage */ = {
@@ -1959,6 +1856,53 @@
 				EA6D3E5914D8048C004DCB80 /* Debug.h */,
 			);
 			name = DebugHelper;
+			sourceTree = "<group>";
+		};
+		F62EC6B81EF933CB005EE8E5 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				4350284B165DE9DF0018EDB7 /* AppController.h */,
+				4350284C165DE9DF0018EDB7 /* AppController.m */,
+				F69140E21E71B94200D51BFF /* AppController+Notifications.h */,
+				F69140E31E71B94200D51BFF /* AppController+Notifications.m */,
+				4350288F165DE9DF0018EDB7 /* URLHandlerCommand.h */,
+				43502890165DE9DF0018EDB7 /* URLHandlerCommand.m */,
+				43502891165DE9DF0018EDB7 /* ViennaApp.h */,
+				43502892165DE9DF0018EDB7 /* ViennaApp.m */,
+				3AF896C51CD8FDB800A9FA22 /* ViennaSparkleDelegate.h */,
+				3AF896C61CD8FDB800A9FA22 /* ViennaSparkleDelegate.m */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		F62EC6B91EF934D9005EE8E5 /* Main window */ = {
+			isa = PBXGroup;
+			children = (
+				3AFF601719A07F5A0036DBA4 /* BJRWindowWithToolbar.h */,
+				3AFF601619A07F5A0036DBA4 /* BJRWindowWithToolbar.m */,
+				AA5AABB50C3CD68A00B2E14F /* Toolbar */,
+				F62EC6BA1EF93610005EE8E5 /* Folder list */,
+				F6F44F0F1EF92D2500E6F1B4 /* Tab bar */,
+				F6F44F0E1EF92C2A00E6F1B4 /* Article list */,
+				F6F44F0C1EF92ACB00E6F1B4 /* Browser */,
+			);
+			name = "Main window";
+			sourceTree = "<group>";
+		};
+		F62EC6BA1EF93610005EE8E5 /* Folder list */ = {
+			isa = PBXGroup;
+			children = (
+				F628DFE21ED2698A00FACFD3 /* FilterView.swift */,
+				4350286B165DE9DF0018EDB7 /* FoldersTree.h */,
+				4350286C165DE9DF0018EDB7 /* FoldersTree.m */,
+				793C95311C42A0DD00984D4E /* FoldersFilterable.h */,
+				793C95321C42A0DD00984D4E /* FoldersFilterable.m */,
+				4350286D165DE9DF0018EDB7 /* FolderView.h */,
+				4350286E165DE9DF0018EDB7 /* FolderView.m */,
+				4350288B165DE9DF0018EDB7 /* TreeNode.h */,
+				4350288C165DE9DF0018EDB7 /* TreeNode.m */,
+			);
+			name = "Folder list";
 			sourceTree = "<group>";
 		};
 		F6A7DDCB1E470E980017BE5E /* Vienna Help */ = {
@@ -2017,6 +1961,126 @@
 				4350284A165DE9DF0018EDB7 /* ActivityPanelController.m */,
 			);
 			name = "Activity panel";
+			sourceTree = "<group>";
+		};
+		F6D0089E1EF968E8008F2D3B /* Download window */ = {
+			isa = PBXGroup;
+			children = (
+				4350285F165DE9DF0018EDB7 /* DownloadManager.h */,
+				43502860165DE9DF0018EDB7 /* DownloadManager.m */,
+				43502861165DE9DF0018EDB7 /* DownloadWindow.h */,
+				43502862165DE9DF0018EDB7 /* DownloadWindow.m */,
+			);
+			name = "Download window";
+			sourceTree = "<group>";
+		};
+		F6D008A11EF979F9008F2D3B /* BJRVerticallyCenteredTextFieldCell */ = {
+			isa = PBXGroup;
+			children = (
+				3A7BD0DB1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.h */,
+				3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */,
+			);
+			name = BJRVerticallyCenteredTextFieldCell;
+			sourceTree = "<group>";
+		};
+		F6F44F0B1EF9280400E6F1B4 /* Info window */ = {
+			isa = PBXGroup;
+			children = (
+				43502871165DE9DF0018EDB7 /* InfoWindow.h */,
+				43502872165DE9DF0018EDB7 /* InfoWindow.m */,
+			);
+			name = "Info window";
+			sourceTree = "<group>";
+		};
+		F6F44F0C1EF92ACB00E6F1B4 /* Browser */ = {
+			isa = PBXGroup;
+			children = (
+				AAD7999D088B617900E2CE5E /* AddressBarCell.h */,
+				AA71168E09BEB17300E3EA8A /* AddressBarCell.m */,
+				43502857165DE9DF0018EDB7 /* BrowserPane.h */,
+				43502858165DE9DF0018EDB7 /* BrowserPane.m */,
+				43502859165DE9DF0018EDB7 /* BrowserPaneTemplate.h */,
+				4350285A165DE9DF0018EDB7 /* BrowserPaneTemplate.m */,
+				B2BECB1514CEF22B00706F8F /* SSTextField.h */,
+				B2BECB1614CEF22B00706F8F /* SSTextField.m */,
+				43502887165DE9DF0018EDB7 /* TabbedWebView.h */,
+				43502888165DE9DF0018EDB7 /* TabbedWebView.m */,
+			);
+			name = Browser;
+			sourceTree = "<group>";
+		};
+		F6F44F0D1EF92B0D00E6F1B4 /* Plug-ins */ = {
+			isa = PBXGroup;
+			children = (
+				B27CD04D1100F408001F3C83 /* BitlyAPIHelper.h */,
+				B27CD04E1100F408001F3C83 /* BitlyAPIHelper.m */,
+				F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */,
+				43502879165DE9DF0018EDB7 /* PluginManager.h */,
+				4350287A165DE9DF0018EDB7 /* PluginManager.m */,
+				43502881165DE9DF0018EDB7 /* SearchMethod.h */,
+				43502882165DE9DF0018EDB7 /* SearchMethod.m */,
+			);
+			name = "Plug-ins";
+			sourceTree = "<group>";
+		};
+		F6F44F0E1EF92C2A00E6F1B4 /* Article list */ = {
+			isa = PBXGroup;
+			children = (
+				3A4DBEC51733C206006DD2AB /* ArticleCellView.h */,
+				3A4DBEC61733C206006DD2AB /* ArticleCellView.m */,
+				4350284E165DE9DF0018EDB7 /* ArticleController.h */,
+				4350284F165DE9DF0018EDB7 /* ArticleController.m */,
+				4350284D165DE9DF0018EDB7 /* ArticleBaseView.h */,
+				43502850165DE9DF0018EDB7 /* ArticleFilter.h */,
+				43502851165DE9DF0018EDB7 /* ArticleFilter.m */,
+				43502852165DE9DF0018EDB7 /* ArticleListView.h */,
+				43502853165DE9DF0018EDB7 /* ArticleListView.m */,
+				43502854165DE9DF0018EDB7 /* ArticleView.h */,
+				43502855165DE9DF0018EDB7 /* ArticleView.m */,
+				AA26F4D70604927300FE7994 /* BackTrackArray.h */,
+				AA26F4D80604927300FE7994 /* BackTrackArray.m */,
+				43502873165DE9DF0018EDB7 /* MessageListView.h */,
+				43502874165DE9DF0018EDB7 /* MessageListView.m */,
+				4350287B165DE9DF0018EDB7 /* ProgressTextCell.h */,
+				4350287C165DE9DF0018EDB7 /* ProgressTextCell.m */,
+				43502885165DE9DF0018EDB7 /* StdEnclosureView.h */,
+				43502886165DE9DF0018EDB7 /* StdEnclosureView.m */,
+				4350288D165DE9DF0018EDB7 /* UnifiedDisplayView.h */,
+				4350288E165DE9DF0018EDB7 /* UnifiedDisplayView.m */,
+			);
+			name = "Article list";
+			sourceTree = "<group>";
+		};
+		F6F44F0F1EF92D2500E6F1B4 /* Tab bar */ = {
+			isa = PBXGroup;
+			children = (
+				4350285B165DE9DF0018EDB7 /* BrowserView.h */,
+				4350285C165DE9DF0018EDB7 /* BrowserView.m */,
+				F6C5CEF81E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.h */,
+				F6C5CEF91E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m */,
+			);
+			name = "Tab bar";
+			sourceTree = "<group>";
+		};
+		F6F44F101EF92DC600E6F1B4 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				43502863165DE9DF0018EDB7 /* EmptyTrashWarning.h */,
+				43502864165DE9DF0018EDB7 /* EmptyTrashWarning.m */,
+				43502867165DE9DF0018EDB7 /* FeedCredentials.h */,
+				43502868165DE9DF0018EDB7 /* FeedCredentials.m */,
+				43502875165DE9DF0018EDB7 /* NewGroupFolder.h */,
+				43502876165DE9DF0018EDB7 /* NewGroupFolder.m */,
+				43502877165DE9DF0018EDB7 /* NewSubscription.h */,
+				43502878165DE9DF0018EDB7 /* NewSubscription.m */,
+				37C652B4C918F312BA9F1AB1 /* NSURL+Utils.h */,
+				37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */,
+				4350287F165DE9DF0018EDB7 /* SearchFolder.h */,
+				43502880165DE9DF0018EDB7 /* SearchFolder.m */,
+				43502883165DE9DF0018EDB7 /* SearchPanel.h */,
+				43502884165DE9DF0018EDB7 /* SearchPanel.m */,
+			);
+			name = Alerts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2138,7 +2202,7 @@
 				"zh-Hant",
 				"zh-Hans",
 			);
-			mainGroup = 2A37F4AAFDCFA73011CA2CEA;
+			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Vienna */;
 			productRefGroup = 19C28FB0FE9D524F11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
