@@ -28,7 +28,7 @@
 #import "StringExtensions.h"
 #import "FolderView.h"
 #import "BrowserView.h"
-#import "GoogleReader.h"
+#import "OpenReader.h"
 #import "Database.h"
 #import "TreeNode.h"
 #import "Folder.h"
@@ -1287,7 +1287,7 @@
 			{
 				if (folder.type == VNAFolderTypeOpenReader)
 				{
-					GoogleReader * myGoogle = [GoogleReader sharedManager];
+					OpenReader * myGoogle = [OpenReader sharedManager];
 					// remove old label
 					NSString * folderName = [dbManager folderFromID:oldParentId].name;
 					[myGoogle setFolderName:folderName forFeed:folder.feedURL set:FALSE];

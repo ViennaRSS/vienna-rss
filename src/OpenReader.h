@@ -1,5 +1,5 @@
 //
-//  GoogleReader.h
+//  OpenReader.h
 //  Vienna
 //
 //  Created by Adam Hartford on 7/7/11.
@@ -13,9 +13,9 @@
 @class ASIHTTPRequest;
 @class Folder;
 
-@interface GoogleReader : NSObject
+@interface OpenReader : NSObject
 
-+(GoogleReader *)sharedManager;
++(OpenReader *)sharedManager;
 
 // Check if an accessToken is available
 @property (nonatomic, getter=isReady, readonly) BOOL ready;

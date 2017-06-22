@@ -26,7 +26,7 @@
 #import "Database.h"
 #import "ArticleFilter.h"
 #import "ArticleRef.h"
-#import "GoogleReader.h"
+#import "OpenReader.h"
 #import "ArticleListView.h"
 #import "UnifiedDisplayView.h"
 #import "FoldersTree.h"
@@ -739,7 +739,7 @@
 	{
 		Folder *myFolder = [[Database sharedManager] folderFromID:theArticle.folderId];
 		if (myFolder.type == VNAFolderTypeOpenReader) {
-			[[GoogleReader sharedManager] markStarred:theArticle starredFlag:flagged];
+			[[OpenReader sharedManager] markStarred:theArticle starredFlag:flagged];
 		}
 		[[Database sharedManager] markArticleFlagged:theArticle.folderId
                                                 guid:theArticle.guid
@@ -793,7 +793,7 @@
 		if (theArticle.read != readFlag)
 		{
 			if ([[Database sharedManager] folderFromID:folderId].type == VNAFolderTypeOpenReader) {
-				[[GoogleReader sharedManager] markRead:theArticle readFlag:readFlag];
+				[[OpenReader sharedManager] markRead:theArticle readFlag:readFlag];
 			} else {
 				[[Database sharedManager] markArticleRead:folderId guid:theArticle.guid isRead:readFlag];
 				[theArticle markRead:readFlag];
@@ -826,7 +826,7 @@
 		if (folder.type == VNAFolderTypeOpenReader){
 			Article * article = [folder articleFromGuid:articleRef.guid];
 			if (article != nil) {
-                [[GoogleReader sharedManager] markRead:article readFlag:readFlag];
+                [[OpenReader sharedManager] markRead:article readFlag:readFlag];
 			}
 		} else {
 			[db markArticleRead:folderId guid:articleRef.guid isRead:readFlag];
@@ -948,7 +948,7 @@
         if (folder.type == VNAFolderTypeOpenReader) {
         	Article * article = [folder articleFromGuid:theGuid];
         	if (article != nil) {
-			    [[GoogleReader sharedManager] markRead:article readFlag:readFlag];
+			    [[OpenReader sharedManager] markRead:article readFlag:readFlag];
 			}
         } else {
 			[dbManager markArticleRead:folderId guid:theGuid isRead:readFlag];
