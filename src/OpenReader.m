@@ -68,6 +68,7 @@ typedef NS_ENUM(NSInteger, OpenReaderStatus) {
 @property (nonatomic) NSMutableArray * tTokenWaitQueue;
 @property (nonatomic) dispatch_queue_t asyncQueue;
 @property (nonatomic) OpenReaderStatus openReaderStatus;
+@property (readonly, class, nonatomic) NSString *currentTimestamp;
 
 @end
 
@@ -478,7 +479,7 @@ typedef NS_ENUM(NSInteger, OpenReaderStatus) {
     }
 		
 	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@stream/contents/feed/%@?client=%@&comments=false&likes=false%@&ck=%@&output=json",APIBaseURL,
-                                                  percentEscape(feedIdentifier),ClientName,itemsLimitation,[OpenReader currentTimestamp]]];
+                                                  percentEscape(feedIdentifier),ClientName,itemsLimitation,OpenReader.currentTimestamp]];
 		
 	ASIHTTPRequest *request = [self requestFromURL:refreshFeedUrl];
 	request.didFinishSelector = @selector(feedRequestDone:);
@@ -486,7 +487,7 @@ typedef NS_ENUM(NSInteger, OpenReaderStatus) {
 	request.userInfo = @{@"folder": thisFolder,@"log": aItem,@"lastupdatestring": folderLastUpdateString, @"type": @(MA_Refresh_GoogleFeed)};
 	
     // Request id's of unread items
-    NSString * args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&xt=user/-/state/com.google/read&n=1000&output=json", [OpenReader currentTimestamp], ClientName,
+    NSString * args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&xt=user/-/state/com.google/read&n=1000&output=json", OpenReader.currentTimestamp, ClientName,
                        percentEscape(feedIdentifier)];
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
     ASIHTTPRequest *request2 = [self requestFromURL:url];
@@ -507,7 +508,7 @@ typedef NS_ENUM(NSInteger, OpenReaderStatus) {
         starredSelector=@"it=user/-/state/com.google/starred";
     }
 
-    NSString * args3 = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", [OpenReader currentTimestamp], ClientName, percentEscape(feedIdentifier), starredSelector];
+    NSString * args3 = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", OpenReader.currentTimestamp, ClientName, percentEscape(feedIdentifier), starredSelector];
     NSURL * url3 = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args3]];
     ASIHTTPRequest *request3 = [self requestFromURL:url3];
     request3.userInfo = @{@"folder": thisFolder, @"log": aItem};
