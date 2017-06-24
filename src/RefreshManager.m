@@ -949,7 +949,7 @@
 				Article * article = [[Article alloc] initWithGuid:articleGuid];
 				article.folderId = folderId;
 				article.author = newsItem.author;
-				article.body = newsItem.description;
+				article.body = newsItem.feedItemDescription;
 				article.title = newsItem.title;
 				NSString * articleLink = newsItem.link;
 				if (![articleLink hasPrefix:@"http:"] && ![articleLink hasPrefix:@"https:"])
