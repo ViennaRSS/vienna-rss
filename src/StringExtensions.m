@@ -20,6 +20,10 @@
 
 #import "StringExtensions.h"
 
+NSString *SafeString(NSString *unsafeString) {
+    return unsafeString ?: @"";
+}
+
 @implementation NSMutableString (MutableStringExtensions)
 
 /* replaceString
