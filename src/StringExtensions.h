@@ -21,7 +21,7 @@
 @import Foundation;
 @import WebKit;
 
-extern NSString *SafeString(NSString *unsafeString);
+#define SafeString(s)   ((s) ?: @"")
 
 @interface NSMutableString (MutableStringExtensions)
 	-(void)replaceString:(NSString *)source withString:(NSString *)dest;
