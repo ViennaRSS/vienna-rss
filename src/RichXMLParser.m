@@ -828,7 +828,7 @@
 -(void)ensureTitle:(FeedItem *)item
 {
     if (!item.title || item.title.blank) {
-        NSString * newTitle = item.description.titleTextFromHTML.stringByUnescapingExtendedCharacters;
+        NSString * newTitle = item.feedItemDescription.titleTextFromHTML.stringByUnescapingExtendedCharacters;
         if (newTitle.blank) {
             newTitle = NSLocalizedString(@"(No title)", nil);
         }
