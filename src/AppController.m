@@ -1460,16 +1460,16 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		// Filter out columns we don't sort on. Later we should have an attribute in the
 		// field object itself based on which columns we can sort on.
-		if (field.tag != MA_FieldID_Parent &&
-			field.tag != MA_FieldID_GUID &&
-			field.tag != MA_FieldID_Comments &&
-			field.tag != MA_FieldID_Deleted &&
-			field.tag != MA_FieldID_Headlines &&
-			field.tag != MA_FieldID_Summary &&
-			field.tag != MA_FieldID_Link &&
-			field.tag != MA_FieldID_Text &&
-			field.tag != MA_FieldID_EnclosureDownloaded &&
-			field.tag != MA_FieldID_Enclosure)
+		if (field.tag != ArticleFieldIDParent &&
+			field.tag != ArticleFieldIDGUID &&
+			field.tag != ArticleFieldIDComments &&
+			field.tag != ArticleFieldIDDeleted &&
+			field.tag != ArticleFieldIDHeadlines &&
+			field.tag != ArticleFieldIDSummary &&
+			field.tag != ArticleFieldIDLink &&
+			field.tag != ArticleFieldIDText &&
+			field.tag != ArticleFieldIDEnclosureDownloaded &&
+			field.tag != ArticleFieldIDEnclosure)
 		{
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:field.displayName action:@selector(doSortColumn:) keyEquivalent:@""];
 			menuItem.representedObject = field;
@@ -1503,13 +1503,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		// Filter out columns we don't view in the article list. Later we should have an attribute in the
 		// field object based on which columns are visible in the tableview.
-		if (field.tag != MA_FieldID_Text && 
-			field.tag != MA_FieldID_GUID &&
-			field.tag != MA_FieldID_Comments &&
-			field.tag != MA_FieldID_Deleted &&
-			field.tag != MA_FieldID_Parent &&
-			field.tag != MA_FieldID_Headlines &&
-			field.tag != MA_FieldID_EnclosureDownloaded)
+		if (field.tag != ArticleFieldIDText && 
+			field.tag != ArticleFieldIDGUID &&
+			field.tag != ArticleFieldIDComments &&
+			field.tag != ArticleFieldIDDeleted &&
+			field.tag != ArticleFieldIDParent &&
+			field.tag != ArticleFieldIDHeadlines &&
+			field.tag != ArticleFieldIDEnclosureDownloaded)
 		{
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:field.displayName action:@selector(doViewColumn:) keyEquivalent:@""];
 			menuItem.representedObject = field;
