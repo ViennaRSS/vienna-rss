@@ -285,23 +285,23 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     self.fieldsByName = [[NSMutableDictionary alloc] init];
     self.fieldsOrdered = [[NSMutableArray alloc] init];
     
-    [self addField:MA_Field_Read type:MA_FieldType_Flag tag:MA_FieldID_Read sqlField:@"read_flag" visible:YES width:17];
-    [self addField:MA_Field_Flagged type:MA_FieldType_Flag tag:MA_FieldID_Flagged sqlField:@"marked_flag" visible:YES width:17];
-    [self addField:MA_Field_HasEnclosure type:MA_FieldType_Flag tag:MA_FieldID_HasEnclosure sqlField:@"hasenclosure_flag" visible:YES width:17];
-    [self addField:MA_Field_Deleted type:MA_FieldType_Flag tag:MA_FieldID_Deleted sqlField:@"deleted_flag" visible:NO width:15];
-    [self addField:MA_Field_Comments type:MA_FieldType_Integer tag:MA_FieldID_Comments sqlField:@"comment_flag" visible:NO width:15];
-    [self addField:MA_Field_GUID type:MA_FieldType_Integer tag:MA_FieldID_GUID sqlField:@"message_id" visible:NO width:72];
-    [self addField:MA_Field_Subject type:MA_FieldType_String tag:MA_FieldID_Subject sqlField:@"title" visible:YES width:472];
-    [self addField:MA_Field_Folder type:MA_FieldType_Folder tag:MA_FieldID_Folder sqlField:@"folder_id" visible:NO width:130];
-    [self addField:MA_Field_Date type:MA_FieldType_Date tag:MA_FieldID_Date sqlField:@"date" visible:YES width:152];
-    [self addField:MA_Field_Parent type:MA_FieldType_Integer tag:MA_FieldID_Parent sqlField:@"parent_id" visible:NO width:72];
-    [self addField:MA_Field_Author type:MA_FieldType_String tag:MA_FieldID_Author sqlField:@"sender" visible:YES width:138];
-    [self addField:MA_Field_Link type:MA_FieldType_String tag:MA_FieldID_Link sqlField:@"link" visible:NO width:138];
-    [self addField:MA_Field_Text type:MA_FieldType_String tag:MA_FieldID_Text sqlField:@"text" visible:NO width:152];
-    [self addField:MA_Field_Summary type:MA_FieldType_String tag:MA_FieldID_Summary sqlField:@"summary" visible:NO width:152];
-    [self addField:MA_Field_Headlines type:MA_FieldType_String tag:MA_FieldID_Headlines sqlField:@"" visible:NO width:100];
-    [self addField:MA_Field_Enclosure type:MA_FieldType_String tag:MA_FieldID_Enclosure sqlField:@"enclosure" visible:NO width:100];
-    [self addField:MA_Field_EnclosureDownloaded type:MA_FieldType_Flag tag:MA_FieldID_EnclosureDownloaded sqlField:@"enclosuredownloaded_flag" visible:NO width:100];
+    [self addField:MA_Field_Read type:MA_FieldType_Flag tag:ArticleFieldIDRead sqlField:@"read_flag" visible:YES width:17];
+    [self addField:MA_Field_Flagged type:MA_FieldType_Flag tag:ArticleFieldIDFlagged sqlField:@"marked_flag" visible:YES width:17];
+    [self addField:MA_Field_HasEnclosure type:MA_FieldType_Flag tag:ArticleFieldIDHasEnclosure sqlField:@"hasenclosure_flag" visible:YES width:17];
+    [self addField:MA_Field_Deleted type:MA_FieldType_Flag tag:ArticleFieldIDDeleted sqlField:@"deleted_flag" visible:NO width:15];
+    [self addField:MA_Field_Comments type:MA_FieldType_Integer tag:ArticleFieldIDComments sqlField:@"comment_flag" visible:NO width:15];
+    [self addField:MA_Field_GUID type:MA_FieldType_Integer tag:ArticleFieldIDGUID sqlField:@"message_id" visible:NO width:72];
+    [self addField:MA_Field_Subject type:MA_FieldType_String tag:ArticleFieldIDSubject sqlField:@"title" visible:YES width:472];
+    [self addField:MA_Field_Folder type:MA_FieldType_Folder tag:ArticleFieldIDFolder sqlField:@"folder_id" visible:NO width:130];
+    [self addField:MA_Field_Date type:MA_FieldType_Date tag:ArticleFieldIDDate sqlField:@"date" visible:YES width:152];
+    [self addField:MA_Field_Parent type:MA_FieldType_Integer tag:ArticleFieldIDParent sqlField:@"parent_id" visible:NO width:72];
+    [self addField:MA_Field_Author type:MA_FieldType_String tag:ArticleFieldIDAuthor sqlField:@"sender" visible:YES width:138];
+    [self addField:MA_Field_Link type:MA_FieldType_String tag:ArticleFieldIDLink sqlField:@"link" visible:NO width:138];
+    [self addField:MA_Field_Text type:MA_FieldType_String tag:ArticleFieldIDText sqlField:@"text" visible:NO width:152];
+    [self addField:MA_Field_Summary type:MA_FieldType_String tag:ArticleFieldIDSummary sqlField:@"summary" visible:NO width:152];
+    [self addField:MA_Field_Headlines type:MA_FieldType_String tag:ArticleFieldIDHeadlines sqlField:@"" visible:NO width:100];
+    [self addField:MA_Field_Enclosure type:MA_FieldType_String tag:ArticleFieldIDEnclosure sqlField:@"enclosure" visible:NO width:100];
+    [self addField:MA_Field_EnclosureDownloaded type:MA_FieldType_Flag tag:ArticleFieldIDEnclosureDownloaded sqlField:@"enclosuredownloaded_flag" visible:NO width:100];
 }
 
 /* relocateLockedDatabase
@@ -2126,7 +2126,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 				}
 
 			case MA_FieldType_String:
-				if (field.tag == MA_FieldID_Text)
+				if (field.tag == ArticleFieldIDText)
 				{
 					// Special case for searching the text field. We always include the title field in the
 					// search so the resulting SQL statement becomes:

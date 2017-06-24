@@ -8,18 +8,10 @@
 
 @import Foundation;
 
-@interface FeedItem : NSObject {
-    NSString * title;
-    NSString * author;
-    NSString * link;
-    NSString * guid;
-    NSDate * date;
-    NSString * description;
-    NSString * enclosure;
-}
+@interface FeedItem : NSObject 
 
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *description;
+@property (nonatomic, copy) NSString *feedItemDescription;
 @property (nonatomic, copy) NSString *author;
 @property (nonatomic, copy) NSString *guid;
 @property (nonatomic, copy) NSDate *date;

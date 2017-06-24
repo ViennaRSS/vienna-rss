@@ -186,14 +186,14 @@
 		[fieldNamePopup removeAllItems];
 		for (Field * field in [db arrayOfFields])
 		{
-			if (field.tag != MA_FieldID_Headlines &&
-				field.tag != MA_FieldID_GUID &&
-				field.tag != MA_FieldID_Link &&
-				field.tag != MA_FieldID_Comments &&
-				field.tag != MA_FieldID_Summary &&
-				field.tag != MA_FieldID_Parent &&
-				field.tag != MA_FieldID_Enclosure &&
-				field.tag != MA_FieldID_EnclosureDownloaded)
+			if (field.tag != ArticleFieldIDHeadlines &&
+				field.tag != ArticleFieldIDGUID &&
+				field.tag != ArticleFieldIDLink &&
+				field.tag != ArticleFieldIDComments &&
+				field.tag != ArticleFieldIDSummary &&
+				field.tag != ArticleFieldIDParent &&
+				field.tag != ArticleFieldIDEnclosure &&
+				field.tag != ArticleFieldIDEnclosureDownloaded)
 			{
 				[fieldNamePopup addItemWithRepresentedObject:field.displayName object:field];
 				[nameToFieldMap setValue:field forKey:field.name];

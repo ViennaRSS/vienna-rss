@@ -451,7 +451,7 @@
             [articleBody fixupRelativeImgTags:self.link];
             [articleBody fixupRelativeIframeTags:self.link];
             [articleBody fixupRelativeAnchorTags:self.link];
-            [newFeedItem setDescription:SafeString(articleBody)];
+            newFeedItem.feedItemDescription = SafeString(articleBody);
 
             // Derive any missing title
             [self ensureTitle:newFeedItem];
@@ -738,7 +738,7 @@
             [articleBody fixupRelativeImgTags:entryBase];
             [articleBody fixupRelativeIframeTags:entryBase];
             [articleBody fixupRelativeAnchorTags:entryBase];
-            [newFeedItem setDescription:SafeString(articleBody)];
+            newFeedItem.feedItemDescription = SafeString(articleBody);
 
             // Derive any missing title
             [self ensureTitle:newFeedItem];

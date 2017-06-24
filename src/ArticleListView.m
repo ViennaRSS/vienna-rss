@@ -478,13 +478,13 @@
 		// Handle which fields can be visible in the condensed (vertical) layout
 		// versus the table (horizontal) layout
 		if (tableLayout == MA_Layout_Report)
-			showField = field.visible && tag != MA_FieldID_Headlines && tag != MA_FieldID_Comments;
+			showField = field.visible && tag != ArticleFieldIDHeadlines && tag != ArticleFieldIDComments;
 		else
 		{
 			showField = NO;
-			if (tag == MA_FieldID_Read || tag == MA_FieldID_Flagged || tag == MA_FieldID_HasEnclosure)
+			if (tag == ArticleFieldIDRead || tag == ArticleFieldIDFlagged || tag == ArticleFieldIDHasEnclosure)
 				showField = field.visible;
-			if (tag == MA_FieldID_Headlines)
+			if (tag == ArticleFieldIDHeadlines)
 				showField = YES;
 		}
 
@@ -529,7 +529,7 @@
 				column.dataCell = cell;
 			}
 
-			BOOL isResizable = (tag != MA_FieldID_Read && tag != MA_FieldID_Flagged && tag != MA_FieldID_Comments && tag != MA_FieldID_HasEnclosure);
+			BOOL isResizable = (tag != ArticleFieldIDRead && tag != ArticleFieldIDFlagged && tag != ArticleFieldIDComments && tag != ArticleFieldIDHasEnclosure);
 			column.resizingMask = (isResizable ? NSTableColumnUserResizingMask : NSTableColumnNoResizing);
 			// the headline column is auto-resizable
 			column.resizingMask = column.resizingMask | ([column.identifier isEqualToString:MA_Field_Headlines] ? NSTableColumnAutoresizingMask : 0);

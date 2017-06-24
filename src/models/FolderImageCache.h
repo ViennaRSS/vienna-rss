@@ -15,7 +15,7 @@
 }
 
 // Indexes into folder image array
-enum {
+typedef NS_ENUM(NSInteger, VNAFolderIconIndex) {
     MA_FolderIcon = 0,
     MA_SmartFolderIcon,
     MA_RSSFolderIcon,
