@@ -2472,9 +2472,10 @@ const NSInteger MA_Current_DB_Version = 19;
 	NSString * guid = article.guid;
 	Folder * folder = [self folderFromID:folderId];
 	if (folder !=nil) {
-		if (isDeleted && !article.read)
-			return;
         FMDatabaseQueue *queue = databaseQueue;
+		if (isDeleted && !article.read) {
+			[self markArticleRead:folderId guid:guid isRead:YES];
+		}
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update messages set deleted_flag=? where folder_id=? and message_id=?",
              @(isDeleted),
