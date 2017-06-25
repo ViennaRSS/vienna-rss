@@ -9,6 +9,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ViennaApp">
             <connections>
+                <outlet property="articleMenu" destination="300" id="299-Bq-gOu"/>
                 <outlet property="delegate" destination="233" id="319"/>
                 <outlet property="dockMenu" destination="JWi-Bw-kAV" id="S3Z-Bl-WjG"/>
                 <outlet property="filterMenu" destination="1118" id="ulZ-To-isZ"/>

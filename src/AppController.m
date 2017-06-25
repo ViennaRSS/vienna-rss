@@ -383,6 +383,15 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	[self initSortMenu];
 	[self initColumnsMenu];
 
+    // Load the plug-ins into the main menu.
+    [self populatePluginsMenu];
+
+    // Observe changes to the plug-in count.
+    [self.pluginManager addObserver:self
+                         forKeyPath:NSStringFromSelector(@selector(numberOfPlugins))
+                            options:0
+                            context:nil];
+
 	// Initialize the Styles menu.
 	stylesMenu.submenu = self.stylesMenu;
 	
@@ -1479,6 +1488,43 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 	}
 	columnsMenu.submenu = columnsSubMenu;
+}
+
+- (void)populatePluginsMenu {
+    NSMenu *menu = ((ViennaApp *)NSApp).articleMenu;
+
+    if (self.pluginManager.numberOfPlugins > 0) {
+        [menu addItem:[NSMenuItem separatorItem]];
+    }
+    
+    for (NSMenuItem *menuItem in self.pluginManager.menuItems) {
+        [menu addItem:menuItem];
+    }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+                       context:(void *)context {
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(numberOfPlugins))]) {
+        NSMenu *menu = ((ViennaApp *)NSApp).articleMenu;
+
+        // Remove any previously added plug-in menu items.
+        for (NSMenuItem *menuItem in menu.itemArray) {
+            if (menuItem.target == self.pluginManager) {
+                [menu removeItem:menuItem];
+            }
+        }
+
+        // If the last remaining item is a separator, remove it too.
+        NSMenuItem *lastMenuItem = menu.itemArray.lastObject;
+        if (lastMenuItem.isSeparatorItem) {
+            [menu removeItem:lastMenuItem];
+        }
+
+        // Repopulate the menu.
+        [self populatePluginsMenu];
+    }
 }
 
 /* initScriptsMenu
@@ -3933,6 +3979,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)dealloc
 {
+    [self.pluginManager removeObserver:self
+                            forKeyPath:NSStringFromSelector(@selector(numberOfPlugins))];
+
 	[[SUUpdater sharedUpdater] setDelegate:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }

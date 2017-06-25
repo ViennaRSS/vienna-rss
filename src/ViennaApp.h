@@ -25,6 +25,7 @@
 
 @interface ViennaApp : NSApplication
 
+@property (nonatomic) IBOutlet NSMenu *articleMenu;
 @property (nonatomic) IBOutlet NSMenu *filterMenu;
 
 // Refresh commands
