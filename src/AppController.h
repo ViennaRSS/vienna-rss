@@ -58,7 +58,6 @@
 	IBOutlet NSMenuItem * columnsMenu;
 	IBOutlet NSMenuItem * stylesMenu;
     IBOutlet DisclosureView * filterDisclosureView;
-    IBOutlet DisclosureView *statusBarDisclosureView;
 
 	DownloadWindow * downloadWindow;
 	SmartFolder * smartFolder;
@@ -74,7 +73,6 @@
 	NSDictionary * standardURLs;
 	NSTimer * checkTimer;
 	NSInteger lastCountOfUnread;
-	BOOL isStatusBarVisible;
 	NSMenuItem * scriptsMenuItem;
 	BOOL didCompleteInitialisation;
 	NSString * searchString;
@@ -153,7 +151,6 @@
 -(IBAction)makeTextSmaller:(id)sender;
 -(IBAction)newTab:(id)sender;
 -(IBAction)downloadEnclosure:(id)sender;
--(IBAction)showHideStatusBar:(id)sender;
 -(IBAction)showHideFilterBar:(id)sender;
 -(IBAction)hideFilterBar:(id)sender;
 -(IBAction)setFocusToSearchField:(id)sender;

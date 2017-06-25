@@ -972,7 +972,7 @@ CA
                             </menuItem>
                             <menuItem title="Hide Status Bar" keyEquivalent="/" id="1259">
                                 <connections>
-                                    <action selector="showHideStatusBar:" target="233" id="1261"/>
+                                    <action selector="toggleStatusBar:" target="-1" id="3d0-Ea-3TY"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Show Filter Bar" keyEquivalent="B" id="1325">
@@ -1275,7 +1275,6 @@ CA
                 <outlet property="searchField" destination="1252" id="1253"/>
                 <outlet property="sortByMenu" destination="387" id="1054"/>
                 <outlet property="spinner" destination="918" id="920"/>
-                <outlet property="statusBarDisclosureView" destination="659-iz-w4S" id="gjn-93-Mdy"/>
                 <outlet property="stylesMenu" destination="826" id="1051"/>
                 <outlet property="unifiedListView" destination="1148" id="O5e-id-8Cu"/>
             </connections>
@@ -1521,6 +1520,7 @@ CA
             <connections>
                 <outlet property="filterButton" destination="1400" id="klL-0x-Gpc"/>
                 <outlet property="filterLabel" destination="1403" id="dvr-7K-18f"/>
+                <outlet property="statusBar" destination="659-iz-w4S" id="c8m-QE-SDv"/>
                 <outlet property="statusLabel" destination="917" id="hnq-fT-qdI"/>
                 <outlet property="window" destination="21" id="9ep-P9-qnb"/>
             </connections>

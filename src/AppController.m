@@ -78,7 +78,6 @@
 -(void)handleDidBecomeKeyWindow:(NSNotification *)nc;
 -(void)handleReloadPreferences:(NSNotification *)nc;
 -(void)handleShowAppInStatusBar:(NSNotification *)nc;
--(void)handleShowStatusBar:(NSNotification *)nc;
 -(void)handleShowFilterBar:(NSNotification *)nc;
 -(void)setAppStatusBarIcon;
 -(void)updateNewArticlesNotification;
@@ -92,7 +91,6 @@
 -(void)doEditFolder:(Folder *)folder;
 -(void)refreshOnTimer:(NSTimer *)aTimer;
 -(BOOL)installFilename:(NSString *)srcFile toPath:(NSString *)path;
--(void)setStatusBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
 -(void)setFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
 -(void)setPersistedFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
 -(void)runAppleScript:(NSString *)scriptName;
@@ -104,7 +102,6 @@
 -(void)toggleOptionKeyButtonStates;
 -(void)updateCloseCommands;
 @property (nonatomic, getter=isFilterBarVisible, readonly) BOOL filterBarVisible;
-@property (nonatomic, getter=isStatusBarVisible, readonly) BOOL statusBarVisible;
 @property (nonatomic, readonly, strong) NSTimer *checkTimer;
 -(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
 -(IBAction)cancelAllRefreshesToolbar:(id)sender;
@@ -140,7 +137,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		lastCountOfUnread = 0;
 		appStatusItem = nil;
 		scriptsMenuItem = nil;
-		isStatusBarVisible = YES;
 		checkTimer = nil;
 		didCompleteInitialisation = NO;
 		emptyTrashWarning = nil;
@@ -364,7 +360,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	[nc addObserver:self selector:@selector(handleDidBecomeKeyWindow:) name:NSWindowDidBecomeKeyNotification object:nil];
 	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
 	[nc addObserver:self selector:@selector(handleShowAppInStatusBar:) name:@"MA_Notify_ShowAppInStatusBarChanged" object:nil];
-	[nc addObserver:self selector:@selector(handleShowStatusBar:) name:@"MA_Notify_StatusBarChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleShowFilterBar:) name:@"MA_Notify_FilterBarChanged" object:nil];
 	[nc addObserver:self selector:@selector(showUnreadCountOnApplicationIconAndWindowTitle) name:@"MA_Notify_FoldersUpdated" object:nil];
 	//Open Reader Notifications
@@ -433,10 +428,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	// Add Scripts menu if we have any scripts
 	if (!hasOSScriptsMenu())
 		[self initScriptsMenu];
-	
-	// Show/hide the status bar based on the last session state
-	[self setStatusBarState:prefs.showStatusBar withAnimation:NO];
-	
+
 	// Add the app to the status bar if needed.
 	[self showAppInStatusBar];
 
@@ -3506,56 +3498,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 }
 
-#pragma mark Status Bar
-
-/* isStatusBarVisible
- * Simple function that returns whether or not the status bar is visible.
- */
--(BOOL)isStatusBarVisible
-{
-	Preferences * prefs = [Preferences standardPreferences];
-	return prefs.showStatusBar;
-}
-
-/* handleShowStatusBar
- * Respond to the status bar state being changed programmatically.
- */
--(void)handleShowStatusBar:(NSNotification *)nc
-{
-	[self setStatusBarState:[Preferences standardPreferences].showStatusBar withAnimation:YES];
-}
-
-/* showHideStatusBar
- * Toggle the status bar on/off. When off, expand the article area to fill the space.
- */
--(IBAction)showHideStatusBar:(id)sender
-{
-	BOOL newState = !self.statusBarVisible;
-	
-	[self setStatusBarState:newState withAnimation:YES];
-	[Preferences standardPreferences].showStatusBar = newState;
-}
-
-/* setStatusBarState
- * Show or hide the status bar state. Does not persist the state - use showHideStatusBar for this.
- */
--(void)setStatusBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate {
-    if (isStatusBarVisible && !isVisible) {
-        [statusBarDisclosureView collapse:doAnimate];
-        isStatusBarVisible = NO;
-
-        // If the animation is interrupted, don't hide the content border
-        if (!statusBarDisclosureView.isDisclosed) {
-            [self.mainWindow setContentBorderThickness:0 forEdge:NSMinYEdge];
-        }
-    } else if (!isStatusBarVisible && isVisible) {
-        CGFloat disclosedViewHeight = statusBarDisclosureView.disclosedView.frame.size.height;
-        [self.mainWindow setContentBorderThickness:disclosedViewHeight forEdge:NSMinYEdge];
-        [statusBarDisclosureView disclose:doAnimate];
-        isStatusBarVisible = YES;
-    }
-}
-
 #pragma mark Toolbar And Menu Bar Validation
 
 /* validateCommonToolbarAndMenuItems
@@ -3683,14 +3625,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	else if (theAction == @selector(newGroupFolder:))
 	{
 		return !db.readOnly && isMainWindowVisible;
-	}
-	else if (theAction == @selector(showHideStatusBar:))
-	{
-		if (self.statusBarVisible)
-			[menuItem setTitle:NSLocalizedString(@"Hide Status Bar", nil)];
-		else
-			[menuItem setTitle:NSLocalizedString(@"Show Status Bar", nil)];
-		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(showHideFilterBar:))
 	{

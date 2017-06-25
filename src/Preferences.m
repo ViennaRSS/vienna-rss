@@ -1084,7 +1084,6 @@ static Preferences * _standardPreferences = nil;
 	{
 		showStatusBar = show;
 		[self setBool:showStatusBar forKey:MAPref_ShowStatusBar];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_StatusBarChanged" object:nil];
 	}
 }
 

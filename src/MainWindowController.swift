@@ -26,6 +26,9 @@ final class MainWindowController: NSWindowController {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        // TODO: Move this to windowDidLoad()
+        statusBarState(disclosed: Preferences.standard().showStatusBar, animate: false)
+
         if #available(OSX 10.10, *) {
             // Leave the default
         } else {
@@ -41,6 +44,8 @@ final class MainWindowController: NSWindowController {
     }
 
     // MARK: Status bar
+
+    @IBOutlet private var statusBar: DisclosureView!
 
     // TODO: Make this private in Swift 4
     @IBOutlet fileprivate var statusLabel: NSTextField!
@@ -63,6 +68,23 @@ final class MainWindowController: NSWindowController {
         }
     }
 
+    fileprivate func statusBarState(disclosed: Bool, animate: Bool = true) {
+        if statusBar.isDisclosed && !disclosed {
+            statusBar.collapse(animate)
+            Preferences.standard().showStatusBar = false
+
+            // If the animation is interrupted, don't hide the content border.
+            if !statusBar.isDisclosed {
+                window?.setContentBorderThickness(0, for: .minY)
+            }
+        } else if !statusBar.isDisclosed && disclosed {
+            let height = statusBar.disclosedView.frame.size.height
+            window?.setContentBorderThickness(height, for: .minY)
+            statusBar.disclose(animate)
+            Preferences.standard().showStatusBar = true
+        }
+    }
+
     // MARK: Actions
 
     @IBAction func changeFiltering(_ sender: NSMenuItem) { // TODO: This should be handled by ArticleController
@@ -70,11 +92,22 @@ final class MainWindowController: NSWindowController {
         filterLabel.stringValue = sender.title
     }
 
+    @IBAction func toggleStatusBar(_ sender: AnyObject) {
+        statusBarState(disclosed: !statusBar.isDisclosed)
+    }
+
     // MARK: Validation
 
     override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(changeFiltering(_:)) {
             menuItem.state = menuItem.tag == Preferences.standard().filterMode ? NSOnState : NSOffState
+            return true
+        } else if menuItem.action == #selector(toggleStatusBar(_:)) {
+            if statusBar.isDisclosed {
+                menuItem.title = NSLocalizedString("Hide Status Bar", comment: "Title of a menu item")
+            } else {
+                menuItem.title = NSLocalizedString("Show Status Bar", comment: "Title of a menu item")
+            }
             return true
         } else {
             return super.validateMenuItem(menuItem)

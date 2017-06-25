@@ -1,3 +1,4 @@
+#import "DisclosureView.h"
 #import "OpenReader.h"
 #import "Preferences.h"
 #import "RefreshManager.h"

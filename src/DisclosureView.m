@@ -30,8 +30,13 @@
 
 @implementation DisclosureView
 
-- (void)awakeFromNib {
-    self.disclosed = self.frame.size.height > 0;
+// Override designated initializer
+- (instancetype)initWithFrame:(NSRect)frameRect {
+    if (self = [super initWithFrame:frameRect]) {
+        _disclosed = frameRect.size.height > 0;
+    }
+
+    return self;
 }
 
 #pragma mark Accessors
