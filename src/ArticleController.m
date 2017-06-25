@@ -1053,8 +1053,6 @@
  */
 -(void)handleArticleListContentChange:(NSNotification *)note
 {
-    NSInteger folderId = ((NSNumber *)note.object).integerValue;
-    Folder *currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
     if (self.selectedArticle.deleted) {
         articleToPreserve = nil;
     } else {
