@@ -574,19 +574,6 @@
 			[filteredArray removeObjectAtIndex:index];
 	}
 	
-	if (![guidOfArticleToPreserve isEqualToString:@""])
-	{
-		Article * articleToAdd = nil;
-		Folder * folder = [[Database sharedManager] folderFromID:folderIdOfArticleToPreserve];
-		if (folder != nil)
-		{
-			articleToAdd = [folder articleFromGuid:guidOfArticleToPreserve];
-		}
-		if (articleToAdd == nil)
-			articleToAdd = articleToPreserve;
-		if (articleToAdd != nil)
-            [filteredArray addObject:articleToAdd];
-	}
 	articleToPreserve=nil;
 	
 	return [filteredArray copy];
@@ -1067,23 +1054,13 @@
 -(void)handleArticleListContentChange:(NSNotification *)note
 {
     NSInteger folderId = ((NSNumber *)note.object).integerValue;
-    Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
-    if ( (folderId == currentFolderId)
-      // for group or smart folder, to avoid flickering, we only update when refresh process is finished
-      || (currentFolder.type != VNAFolderTypeRSS && currentFolder.type != VNAFolderTypeOpenReader && !APPCONTROLLER.isConnecting) )
-    {
-        // Note the article that the user might currently be reading
-        // to be preserved when reloading the array of articles.
-        if (self.selectedArticle.deleted)
-        {
-            articleToPreserve = nil;
-        }
-        else
-        {
-            articleToPreserve = self.selectedArticle;
-        }
-        [self reloadArrayOfArticles];
+    Folder *currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
+    if (self.selectedArticle.deleted) {
+        articleToPreserve = nil;
+    } else {
+        articleToPreserve = self.selectedArticle;
     }
+    [self reloadArrayOfArticles];
 }
 
 /* dealloc
