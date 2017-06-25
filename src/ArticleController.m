@@ -404,7 +404,7 @@
 		}
 	}
 
-	if (currentFolderExhausted  && [[Database sharedManager] countOfUnread] > 1)
+	if (currentFolderExhausted  && ([[Database sharedManager] countOfUnread] > 1 || currentArticle.read) )
 	{
 		// try other folders
 		NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
