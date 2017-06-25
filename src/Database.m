@@ -2496,8 +2496,9 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	NSString * guid = article.guid;
 	Folder * folder = [self folderFromID:folderId];
 	if (folder !=nil) {
-		if (isDeleted && !article.read)
-			return;
+		if (isDeleted && !article.read) {
+			[self markArticleRead:folderId guid:guid isRead:YES];
+		}
         FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update messages set deleted_flag=? where folder_id=? and message_id=?",
