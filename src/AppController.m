@@ -40,7 +40,6 @@
 #import "HelperFunctions.h"
 #import "ToolbarItem.h"
 #import "DisclosureView.h"
-#import "ClickableProgressIndicator.h"
 #import "SearchPanel.h"
 #import "SearchMethod.h"
 #import "ViennaSparkleDelegate.h"
@@ -86,8 +85,6 @@
 -(void)initColumnsMenu;
 -(void)initScriptsMenu;
 @property (nonatomic, getter=getStylesMenu, readonly, copy) NSMenu *stylesMenu;
--(void)startProgressIndicator;
--(void)stopProgressIndicator;
 -(void)doEditFolder:(Folder *)folder;
 -(void)refreshOnTimer:(NSTimer *)aTimer;
 -(BOOL)installFilename:(NSString *)srcFile toPath:(NSString *)path;
@@ -133,7 +130,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	if ((self = [super init]) != nil)
 	{
 		scriptPathMappings = [[NSMutableDictionary alloc] init];
-		progressCount = 0;
 		lastCountOfUnread = 0;
 		appStatusItem = nil;
 		scriptsMenuItem = nil;
@@ -2058,8 +2054,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		ToolbarItem * item = [self toolbarItemWithIdentifier:@"Refresh"];
 		item.action = @selector(cancelAllRefreshesToolbar:);
 		[item setButtonImage:@"cancelRefreshButton"];
-		
-		[self startProgressIndicator];
 	}
 	else
 	{
@@ -2067,8 +2061,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		Preferences * prefs = [Preferences standardPreferences];
 		[db purgeArticlesOlderThanDays:prefs.autoExpireDuration];
 
-		[self stopProgressIndicator];
-		
 		// Toggle the refresh button
 		ToolbarItem * item = [self toolbarItemWithIdentifier:@"Refresh"];
 		item.action = @selector(refreshAllSubscriptions:);
@@ -3473,31 +3465,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		NSLog(@"Error sending Apple Event: %li", (long)err );
 }
 
-#pragma mark Progress Indicator 
-
-/* startProgressIndicator
- * Gets the progress indicator on the info bar running. Because this can be called
- * nested, we use progressCount to make sure we remove it at the right time.
- */
--(void)startProgressIndicator
-{
-	if (progressCount++ == 0)
-		[spinner startAnimation:self];
-}
-
-/* stopProgressIndicator
- * Stops the progress indicator on the info bar running
- */
--(void)stopProgressIndicator
-{
-	NSAssert(progressCount > 0, @"Called stopProgressIndicator without a matching startProgressIndicator");
-	if (--progressCount < 1)
-	{
-		[spinner stopAnimation:self];
-		progressCount = 0;
-	}
-}
-
 #pragma mark Toolbar And Menu Bar Validation
 
 /* validateCommonToolbarAndMenuItems
@@ -3983,37 +3950,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		item.action = @selector(getInfo:);
 		[item setToolTip:NSLocalizedString(@"See information about the selected subscription", nil)];
 	}
-	else if ([itemIdentifier isEqualToString: @"Spinner"])
-	{
-		item.label = @"";
-		[item setPaletteLabel:NSLocalizedString(@"Progress", nil)];
-		//Only have the spinner hide when stopped for the real window, not for the customization pane
-		if (willBeInserted)
-		{
-			[item setView:spinner];
-			[spinner setDisplayedWhenStopped:NO];
-			[spinner setTarget:self];
-			[spinner setAction:@selector(toggleActivityViewer:)];
-			[spinner setHidden:NO];
-			
-			//Ensure the spinner has the proper state; it may be added while we're refreshing
-			if (self.connecting)
-				[self startProgressIndicator];
-		}
-		else
-		{
-			NSProgressIndicator *customizationPaletteSpinner = [[NSProgressIndicator alloc] initWithFrame:spinner.frame];
-			customizationPaletteSpinner.controlSize = spinner.controlSize;
-			customizationPaletteSpinner.controlTint = spinner.controlTint;
-			customizationPaletteSpinner.indeterminate = spinner.indeterminate;
-			customizationPaletteSpinner.style = spinner.style;
-			
-			[item setView:customizationPaletteSpinner];
-		}
-		
-		item.minSize = NSMakeSize(NSWidth(spinner.frame), NSHeight(spinner.frame));
-		item.maxSize = NSMakeSize(NSWidth(spinner.frame), NSHeight(spinner.frame));
-	}
 	else if ([itemIdentifier isEqualToString: @"Styles"])
 	{
 		[item setPopup:@"stylesMenuButton" withMenu:(willBeInserted ? self.stylesMenu : nil)];
@@ -4066,7 +4002,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			 @"EmptyTrash",
 			 @"Action",
 			 @"SearchItem",
-			 @"Spinner",
 			 @"MailLink",
 			 @"GetInfo",
 			 @"Styles",

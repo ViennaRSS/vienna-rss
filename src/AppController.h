@@ -32,7 +32,6 @@
 @class WebPreferences;
 @class BrowserView;
 @class EmptyTrashWarning;
-@class ClickableProgressIndicator;
 @class SearchPanel;
 @class DisclosureView;
 @class ViennaSparkleDelegate;
@@ -50,7 +49,6 @@
 	IBOutlet NSSearchField * filterSearchField;
 	IBOutlet BrowserView * browserView;
 	IBOutlet NSSearchField * searchField;
-	IBOutlet ClickableProgressIndicator * spinner;
 	IBOutlet NSMenuItem * closeTabItem;
 	IBOutlet NSMenuItem * closeAllTabsItem;
 	IBOutlet NSMenuItem * closeWindowItem;
@@ -69,7 +67,6 @@
 	PluginManager * pluginManager;
 	NSMutableDictionary * scriptPathMappings;
 	NSStatusItem * appStatusItem;
-	NSInteger progressCount;
 	NSDictionary * standardURLs;
 	NSTimer * checkTimer;
 	NSInteger lastCountOfUnread;

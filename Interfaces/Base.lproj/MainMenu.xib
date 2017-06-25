@@ -411,10 +411,6 @@
             </connections>
             <point key="canvasLocation" x="138" y="-572.5"/>
         </window>
-        <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" id="918" customClass="ClickableProgressIndicator">
-            <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-        </progressIndicator>
         <menu systemMenu="main" id="29">
             <items>
                 <menuItem title="Vienna" id="56">
@@ -1274,7 +1270,6 @@ CA
                 <outlet property="mainWindowController" destination="TpV-Sw-bYp" id="zzt-Yo-pwZ"/>
                 <outlet property="searchField" destination="1252" id="1253"/>
                 <outlet property="sortByMenu" destination="387" id="1054"/>
-                <outlet property="spinner" destination="918" id="920"/>
                 <outlet property="stylesMenu" destination="826" id="1051"/>
                 <outlet property="unifiedListView" destination="1148" id="O5e-id-8Cu"/>
             </connections>
