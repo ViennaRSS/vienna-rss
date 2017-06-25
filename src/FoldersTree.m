@@ -35,6 +35,8 @@
 
 @interface FoldersTree ()
 
+@property (nonatomic, readonly, copy) NSMenu *folderMenu;
+
 @property (nonatomic, readonly, copy) NSArray *archiveState;
 @property (nonatomic) TreeNode *rootNode;
 @property (nonatomic) NSFont *cellFont;
@@ -128,7 +130,7 @@
 	[self.outlineView setEnableTooltips:YES];
 	
 	// Set the menu for the popup button
-	self.outlineView.menu = APPCONTROLLER.folderMenu;
+	self.outlineView.menu = self.folderMenu;
 	
 	self.blockSelectionHandler = YES;
 	[self reloadDatabase:[[Preferences standardPreferences] arrayForKey:MAPref_FolderStates]];
@@ -144,6 +146,28 @@
 	[nc addObserver:self selector:@selector(handleShowFolderImagesChange:) name:@"MA_Notify_ShowFolderImages" object:nil];
 	[nc addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
     [nc addObserver:self selector:@selector(handleGRSFolderChange:) name:@"MA_Notify_GRSFolderChange" object:nil];
+}
+
+-(NSMenu *)folderMenu
+{
+    NSMenu * folderMenu = [[NSMenu alloc] init];
+    [folderMenu addItem:copyOfMenuItemWithAction(@selector(refreshSelectedSubscriptions:))];
+    [folderMenu addItem:[NSMenuItem separatorItem]];
+    [folderMenu addItem:copyOfMenuItemWithAction(@selector(editFolder:))];
+    [folderMenu addItem:copyOfMenuItemWithAction(@selector(deleteFolder:))];
+    [folderMenu addItem:copyOfMenuItemWithAction(@selector(renameFolder:))];
+    [folderMenu addItem:[NSMenuItem separatorItem]];
+    [folderMenu addItem:copyOfMenuItemWithAction(@selector(markAllRead:))];
+    [folderMenu addItem:[NSMenuItem separatorItem]];
+    [folderMenu addItem:copyOfMenuItemWithAction(@selector(viewSourceHomePage:))];
+    NSMenuItem * alternateItem = copyOfMenuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+    alternateItem.keyEquivalentModifierMask = NSAlternateKeyMask;
+    [alternateItem setAlternate:YES];
+    [folderMenu addItem:alternateItem];
+    [folderMenu addItem:copyOfMenuItemWithAction(@selector(getInfo:))];
+    [folderMenu addItem:[NSMenuItem separatorItem]];
+    [folderMenu addItem:copyOfMenuItemWithAction(@selector(forceRefreshSelectedSubscriptions:))];
+    return folderMenu;
 }
 
 -(void)handleGRSFolderChange:(NSNotification *)nc

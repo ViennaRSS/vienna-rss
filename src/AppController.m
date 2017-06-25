@@ -763,32 +763,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	return browserView;
 }
 
-/* folderMenu
- * Dynamically create the popup menu. This is one less thing to
- * explicitly localise in the NIB file.
- */
--(NSMenu *)folderMenu
-{
-	NSMenu * folderMenu = [[NSMenu alloc] init];
-	[folderMenu addItem:copyOfMenuItemWithAction(@selector(refreshSelectedSubscriptions:))];
-	[folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItem:copyOfMenuItemWithAction(@selector(editFolder:))];
-	[folderMenu addItem:copyOfMenuItemWithAction(@selector(deleteFolder:))];
-	[folderMenu addItem:copyOfMenuItemWithAction(@selector(renameFolder:))];
-	[folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItem:copyOfMenuItemWithAction(@selector(markAllRead:))];
-	[folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItem:copyOfMenuItemWithAction(@selector(viewSourceHomePage:))];
-	NSMenuItem * alternateItem = copyOfMenuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-	alternateItem.keyEquivalentModifierMask = NSAlternateKeyMask;
-	[alternateItem setAlternate:YES];
-	[folderMenu addItem:alternateItem];
-	[folderMenu addItem:copyOfMenuItemWithAction(@selector(getInfo:))];
-	[folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItem:copyOfMenuItemWithAction(@selector(forceRefreshSelectedSubscriptions:))];	
-	return folderMenu;
-}
-
 /* reindexDatabase
  * Reindex the database
  */

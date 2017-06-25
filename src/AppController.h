@@ -183,7 +183,6 @@
 @property (nonatomic, readonly, copy) NSArray *folders;
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
 -(void)toggleOptionKeyButtonStates;
-@property (nonatomic, readonly, copy) NSMenu *folderMenu;
 -(void)updateStatusBarFilterButtonVisibility;
 @property (nonatomic, readonly, strong) NSLayoutManager *layoutManager;
 -(void)performWebSearch:(SearchMethod *)searchMethod;
