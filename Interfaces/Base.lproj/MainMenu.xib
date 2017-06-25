@@ -7,10 +7,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
+        <customObject id="-2" userLabel="File's Owner" customClass="ViennaApp">
             <connections>
                 <outlet property="delegate" destination="233" id="319"/>
                 <outlet property="dockMenu" destination="JWi-Bw-kAV" id="S3Z-Bl-WjG"/>
+                <outlet property="filterMenu" destination="1118" id="ulZ-To-isZ"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -161,7 +162,7 @@
                                                         <rect key="frame" x="0.0" y="26" width="653" height="5"/>
                                                     </box>
                                                     <searchField toolTip="Filter displayed articles by matching text" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="1304">
-                                                        <rect key="frame" x="8" y="5" width="300" height="19"/>
+                                                        <rect key="frame" x="8" y="5" width="250" height="19"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="LD9-MT-Msv"/>
                                                         </constraints>
@@ -176,7 +177,7 @@
                                                         </connections>
                                                     </searchField>
                                                     <button toolTip="Close the filter bar" translatesAutoresizingMaskIntoConstraints="NO" id="1313">
-                                                        <rect key="frame" x="633" y="10" width="12" height="13"/>
+                                                        <rect key="frame" x="633" y="9" width="12" height="13"/>
                                                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="smallCloseButton" imagePosition="only" alignment="center" alternateImage="pressedCloseButton" controlSize="small" inset="2" id="1379">
                                                             <behavior key="behavior" lightByContents="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
@@ -187,19 +188,69 @@
                                                         </connections>
                                                     </button>
                                                     <popUpButton toolTip="Filter articles" horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1306">
-                                                        <rect key="frame" x="457" y="4" width="67" height="22"/>
-                                                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="center" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="1308" id="1378">
+                                                        <rect key="frame" x="392" y="3" width="132" height="22"/>
+                                                        <popUpButtonCell key="cell" type="push" title="All Articles" bezelStyle="rounded" alignment="center" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="JT2-Q7-gRj" id="1378">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <menu key="menu" id="1307">
                                                                 <items>
-                                                                    <menuItem state="on" id="1308"/>
+                                                                    <menuItem title="All Articles" state="on" id="JT2-Q7-gRj">
+                                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                                        <connections>
+                                                                            <action selector="changeFiltering:" target="-1" id="YCS-te-Yoj"/>
+                                                                        </connections>
+                                                                    </menuItem>
+                                                                    <menuItem title="Unread or Flagged" tag="6" id="ty7-ph-peE">
+                                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                                        <connections>
+                                                                            <action selector="changeFiltering:" target="-1" id="sHy-zv-gIC"/>
+                                                                        </connections>
+                                                                    </menuItem>
+                                                                    <menuItem title="Last Refresh" tag="2" id="xVH-W7-Br4">
+                                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                                        <connections>
+                                                                            <action selector="changeFiltering:" target="-1" id="cCW-xt-ofL"/>
+                                                                        </connections>
+                                                                    </menuItem>
+                                                                    <menuItem title="Today" tag="3" id="3tM-J3-kmf">
+                                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                                        <connections>
+                                                                            <action selector="changeFiltering:" target="-1" id="yW4-3n-qAN"/>
+                                                                        </connections>
+                                                                    </menuItem>
+                                                                    <menuItem title="Last 48 Hours" tag="4" id="Xw6-KX-rhd">
+                                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                                        <connections>
+                                                                            <action selector="changeFiltering:" target="-1" id="qIb-e2-uOV"/>
+                                                                        </connections>
+                                                                    </menuItem>
+                                                                    <menuItem title="Flagged" tag="5" id="8LJ-RZ-pfu">
+                                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                                        <connections>
+                                                                            <action selector="changeFiltering:" target="-1" id="TWL-I5-V0H"/>
+                                                                        </connections>
+                                                                    </menuItem>
+                                                                    <menuItem title="Unread Articles" tag="1" id="sDP-Ni-g3a">
+                                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                                        <connections>
+                                                                            <action selector="changeFiltering:" target="-1" id="2ns-ph-El7"/>
+                                                                        </connections>
+                                                                    </menuItem>
                                                                 </items>
                                                             </menu>
+                                                            <connections>
+                                                                <binding destination="fAX-Jg-YQ6" name="selectedTag" keyPath="values.FilterMode" id="hwP-PN-Ebu">
+                                                                    <dictionary key="options">
+                                                                        <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                                                        <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                                                        <integer key="NSNullPlaceholder" value="0"/>
+                                                                    </dictionary>
+                                                                </binding>
+                                                            </connections>
                                                         </popUpButtonCell>
                                                     </popUpButton>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="1305">
-                                                        <rect key="frame" x="407" y="8" width="50" height="14"/>
+                                                        <rect key="frame" x="342" y="8" width="50" height="14"/>
                                                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="right" title="Filter by:" id="1377">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -840,7 +891,52 @@ CA
                                 </menu>
                             </menuItem>
                             <menuItem title="Filter By" id="1117">
-                                <menu key="submenu" title="Filter By" id="1118"/>
+                                <menu key="submenu" title="Filter By" id="1118">
+                                    <items>
+                                        <menuItem title="All Articles" id="t1E-6n-jtA">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="K3L-iy-fUI"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Unread Articles" tag="1" id="rNG-xr-3x7">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="HZS-xT-lzD"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Last Refresh" tag="2" id="wqh-Jc-gBm">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="mBj-Ag-IAw"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Today" tag="3" id="t34-de-pMs">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="XCy-5p-4vp"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Last 48 Hours" tag="4" id="CGp-H4-UaI">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="o9D-Js-hpo"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Flagged" tag="5" id="8Z3-Bg-ry2">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="fTn-Bf-yvQ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Unread or Flagged" tag="6" id="BUc-Ki-OOg">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="TGW-od-qYr"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
                             </menuItem>
                             <menuItem title="Style" id="826">
                                 <menu key="submenu" title="Style" id="827"/>
@@ -1174,8 +1270,6 @@ CA
                 <outlet property="columnsMenu" destination="442" id="1050"/>
                 <outlet property="filterDisclosureView" destination="cTN-D0-dY2" id="i7U-gE-GBj"/>
                 <outlet property="filterSearchField" destination="1304" id="1315"/>
-                <outlet property="filterViewPopUp" destination="1306" id="1319"/>
-                <outlet property="filtersMenu" destination="1117" id="1135"/>
                 <outlet property="outlineView" destination="Kk7-ax-B3r" id="vFt-XT-QbW"/>
                 <outlet property="mainWindowController" destination="TpV-Sw-bYp" id="zzt-Yo-pwZ"/>
                 <outlet property="searchField" destination="1252" id="1253"/>
@@ -1431,6 +1525,7 @@ CA
                 <outlet property="window" destination="21" id="9ep-P9-qnb"/>
             </connections>
         </customObject>
+        <userDefaultsController representsSharedInstance="YES" id="fAX-Jg-YQ6"/>
     </objects>
     <resources>
         <image name="filter-icon" width="16" height="16"/>

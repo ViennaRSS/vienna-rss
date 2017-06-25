@@ -97,7 +97,6 @@
 		43502896165DE9E00018EDB7 /* ActivityPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350284A165DE9DF0018EDB7 /* ActivityPanelController.m */; };
 		43502897165DE9E00018EDB7 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350284C165DE9DF0018EDB7 /* AppController.m */; };
 		43502898165DE9E00018EDB7 /* ArticleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350284F165DE9DF0018EDB7 /* ArticleController.m */; };
-		43502899165DE9E00018EDB7 /* ArticleFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502851165DE9DF0018EDB7 /* ArticleFilter.m */; };
 		4350289A165DE9E00018EDB7 /* ArticleListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502853165DE9DF0018EDB7 /* ArticleListView.m */; };
 		4350289B165DE9E00018EDB7 /* ArticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502855165DE9DF0018EDB7 /* ArticleView.m */; };
 		4350289C165DE9E00018EDB7 /* BrowserPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502858165DE9DF0018EDB7 /* BrowserPane.m */; };
@@ -521,8 +520,6 @@
 		4350284D165DE9DF0018EDB7 /* ArticleBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleBaseView.h; path = src/ArticleBaseView.h; sourceTree = SOURCE_ROOT; };
 		4350284E165DE9DF0018EDB7 /* ArticleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleController.h; path = src/ArticleController.h; sourceTree = SOURCE_ROOT; };
 		4350284F165DE9DF0018EDB7 /* ArticleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleController.m; path = src/ArticleController.m; sourceTree = SOURCE_ROOT; };
-		43502850165DE9DF0018EDB7 /* ArticleFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleFilter.h; path = src/ArticleFilter.h; sourceTree = SOURCE_ROOT; };
-		43502851165DE9DF0018EDB7 /* ArticleFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleFilter.m; path = src/ArticleFilter.m; sourceTree = SOURCE_ROOT; };
 		43502852165DE9DF0018EDB7 /* ArticleListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleListView.h; path = src/ArticleListView.h; sourceTree = SOURCE_ROOT; };
 		43502853165DE9DF0018EDB7 /* ArticleListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleListView.m; path = src/ArticleListView.m; sourceTree = SOURCE_ROOT; };
 		43502854165DE9DF0018EDB7 /* ArticleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleView.h; path = src/ArticleView.h; sourceTree = SOURCE_ROOT; };
@@ -2047,8 +2044,6 @@
 				4350284E165DE9DF0018EDB7 /* ArticleController.h */,
 				4350284F165DE9DF0018EDB7 /* ArticleController.m */,
 				4350284D165DE9DF0018EDB7 /* ArticleBaseView.h */,
-				43502850165DE9DF0018EDB7 /* ArticleFilter.h */,
-				43502851165DE9DF0018EDB7 /* ArticleFilter.m */,
 				43502852165DE9DF0018EDB7 /* ArticleListView.h */,
 				43502853165DE9DF0018EDB7 /* ArticleListView.m */,
 				43502854165DE9DF0018EDB7 /* ArticleView.h */,
@@ -2701,7 +2696,6 @@
 				F6CE47131E7E3DCB0045EAD7 /* ActivityItem.m in Sources */,
 				43502897165DE9E00018EDB7 /* AppController.m in Sources */,
 				43502898165DE9E00018EDB7 /* ArticleController.m in Sources */,
-				43502899165DE9E00018EDB7 /* ArticleFilter.m in Sources */,
 				4350289A165DE9E00018EDB7 /* ArticleListView.m in Sources */,
 				4350289B165DE9E00018EDB7 /* ArticleView.m in Sources */,
 				4350289C165DE9E00018EDB7 /* BrowserPane.m in Sources */,

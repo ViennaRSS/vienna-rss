@@ -38,7 +38,6 @@
 #import "InfoPanelManager.h"
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
-#import "ArticleFilter.h"
 #import "ToolbarItem.h"
 #import "DisclosureView.h"
 #import "ClickableProgressIndicator.h"
@@ -87,7 +86,6 @@
 -(void)initSortMenu;
 -(void)initColumnsMenu;
 -(void)initScriptsMenu;
--(void)initFiltersMenu;
 @property (nonatomic, getter=getStylesMenu, readonly, copy) NSMenu *stylesMenu;
 -(void)startProgressIndicator;
 -(void)stopProgressIndicator;
@@ -399,8 +397,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	// Initialize the Sort By and Columns menu
 	[self initSortMenu];
 	[self initColumnsMenu];
-	[self initFiltersMenu];
-	
+
 	// Initialize the Styles menu.
 	stylesMenu.submenu = self.stylesMenu;
 	
@@ -1603,46 +1600,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Styles…", nil) action:@selector(moreStyles:) keyEquivalent:@""];
 	[stylesSubMenu addItem:menuItem];
 	return stylesSubMenu;
-}
-
-/* initFiltersMenu
- * Populate both the Filters submenu on the View menu and the Filters popup menu on the Filter
- * button in the article list. We need separate menus since the latter is eventually configured
- * to use a smaller font than the former.
- */
--(void)initFiltersMenu
-{
-	NSMenu * filterSubMenu = [NSMenu new];
-	NSMenu * filterPopupMenu = [NSMenu new];
-	
-	NSArray * filtersArray = [ArticleFilter arrayOfFilters];
-	NSInteger count = filtersArray.count;
-	NSInteger index;
-	
-	for (index = 0; index < count; ++index)
-	{
-		ArticleFilter * filter = filtersArray[index];
-		
-		NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString([filter name], nil) action:@selector(changeFiltering:) keyEquivalent:@""];
-		menuItem.tag = filter.tag;
-		[filterSubMenu addItem:menuItem];
-		
-		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString([filter name], nil) action:@selector(changeFiltering:) keyEquivalent:@""];
-		menuItem.tag = filter.tag;
-		[filterPopupMenu addItem:menuItem];
-	}
-	
-	// Add it to the Filters menu
-	filtersMenu.submenu = filterSubMenu;
-	filterViewPopUp.menu = filterPopupMenu;
-	
-	// Sync the popup selection with user preferences
-	NSInteger indexOfDefaultItem = [filterViewPopUp indexOfItemWithTag:[Preferences standardPreferences].filterMode];
-	if (indexOfDefaultItem != -1)
-	{
-		[filterViewPopUp selectItemAtIndex:indexOfDefaultItem];
-		self.mainWindowController.filterText = [filterViewPopUp itemAtIndex:indexOfDefaultItem].title;
-	}
 }
 
 /* updateNewArticlesNotification
@@ -3455,16 +3412,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[activeView.webView makeTextLarger:sender];
 }
 
-/* changeFiltering
- * Refresh the filtering of articles.
- */
--(IBAction)changeFiltering:(id)sender
-{
-	NSMenuItem * menuItem = (NSMenuItem *)sender;
-	[Preferences standardPreferences].filterMode = menuItem.tag;
-	self.mainWindowController.filterText = menuItem.title;
-}
-
 #pragma mark Blogging
 
 /* blogWithExternalEditor
@@ -3925,11 +3872,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		NSView<BaseView> * theView = browserView.activeTabItemView;
 		return ([theView isKindOfClass:[BrowserPane class]]) && ((BrowserPane *)theView).loading;
-	}
-	else if (theAction == @selector(changeFiltering:))
-	{
-		menuItem.state = (menuItem.tag == [Preferences standardPreferences].filterMode) ? NSOnState : NSOffState;
-		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(keepFoldersArranged:))
 	{

@@ -25,6 +25,8 @@
 
 @interface ViennaApp : NSApplication
 
+@property (nonatomic) IBOutlet NSMenu *filterMenu;
+
 // Refresh commands
 -(id)handleRefreshAllSubscriptions:(NSScriptCommand *)cmd;
 -(id)handleRefreshSubscription:(NSScriptCommand *)cmd;

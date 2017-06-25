@@ -48,7 +48,6 @@
 @interface AppController : NSObject <NSApplicationDelegate,NSToolbarDelegate,NSMenuDelegate>
 {
 	IBOutlet NSSearchField * filterSearchField;
-	IBOutlet NSPopUpButton * filterViewPopUp;
 	IBOutlet BrowserView * browserView;
 	IBOutlet NSSearchField * searchField;
 	IBOutlet ClickableProgressIndicator * spinner;
@@ -58,7 +57,6 @@
 	IBOutlet NSMenuItem * sortByMenu;
 	IBOutlet NSMenuItem * columnsMenu;
 	IBOutlet NSMenuItem * stylesMenu;
-	IBOutlet NSMenuItem * filtersMenu;
     IBOutlet DisclosureView * filterDisclosureView;
     IBOutlet DisclosureView *statusBarDisclosureView;
 
@@ -143,7 +141,6 @@
 -(IBAction)conditionalShowDownloadsWindow:(id)sender;
 -(IBAction)mailLinkToArticlePage:(id)sender;
 -(IBAction)openWebLocation:(id)sender;
--(IBAction)changeFiltering:(id)sender;
 -(IBAction)getInfo:(id)sender;
 -(IBAction)unsubscribeFeed:(id)sender;
 -(IBAction)useCurrentStyleForArticles:(id)sender;

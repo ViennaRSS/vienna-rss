@@ -32,6 +32,12 @@ final class MainWindowController: NSWindowController {
             statusLabel.cell?.backgroundStyle = .raised
             filterLabel.cell?.backgroundStyle = .raised
         }
+
+        let filterMenu = (NSApp as? ViennaApp)?.filterMenu
+        let filterMode = Preferences.standard().filterMode
+        if let menuTitle = filterMenu?.item(withTag: filterMode)?.title {
+            filterLabel.stringValue = menuTitle
+        }
     }
 
     // MARK: Status bar
@@ -50,19 +56,28 @@ final class MainWindowController: NSWindowController {
         }
     }
 
-    var filterText: String {
-        get {
-            return filterLabel.stringValue
-        }
-        set {
-            filterLabel.stringValue = newValue
-        }
-    }
-
     var filterAreaIsHidden = false {
         didSet {
             filterLabel.isHidden = filterAreaIsHidden
             filterButton.isHidden = filterAreaIsHidden
+        }
+    }
+
+    // MARK: Actions
+
+    @IBAction func changeFiltering(_ sender: NSMenuItem) { // TODO: This should be handled by ArticleController
+        Preferences.standard().filterMode = sender.tag
+        filterLabel.stringValue = sender.title
+    }
+
+    // MARK: Validation
+
+    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(changeFiltering(_:)) {
+            menuItem.state = menuItem.tag == Preferences.standard().filterMode ? NSOnState : NSOffState
+            return true
+        } else {
+            return super.validateMenuItem(menuItem)
         }
     }
 

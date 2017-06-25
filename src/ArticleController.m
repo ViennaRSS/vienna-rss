@@ -24,7 +24,6 @@
 #import "Preferences.h"
 #import "Constants.h"
 #import "Database.h"
-#import "ArticleFilter.h"
 #import "ArticleRef.h"
 #import "OpenReader.h"
 #import "ArticleListView.h"
@@ -560,9 +559,8 @@
 	
 	NSString * guidOfArticleToPreserve = (articleToPreserve != nil) ? articleToPreserve.guid : @"";
 	NSInteger folderIdOfArticleToPreserve = articleToPreserve.folderId;
-	
-	ArticleFilter * filter = [ArticleFilter filterByTag:[Preferences standardPreferences].filterMode];
-	SEL comparator = filter.comparator;
+
+    NSInteger filterMode = [Preferences standardPreferences].filterMode;
 	NSInteger count = filteredArray.count;
 	NSInteger index;
 	
@@ -571,8 +569,9 @@
 		Article * article = filteredArray[index];
 		if ((article.folderId == folderIdOfArticleToPreserve) && [article.guid isEqualToString:guidOfArticleToPreserve])
 			guidOfArticleToPreserve = @"";
-		else if ((comparator != nil) && !((BOOL)(NSInteger)[ArticleFilter performSelector:comparator withObject:article]))
+        else if ([self filterArticle:article usingMode:filterMode] == false) {
 			[filteredArray removeObjectAtIndex:index];
+        }
 	}
 	
 	articleToPreserve=nil;
@@ -1060,6 +1059,42 @@
         articleToPreserve = self.selectedArticle;
     }
     [self reloadArrayOfArticles];
+}
+
+// MARK: Filter article
+
+- (BOOL)filterArticle:(Article *)article usingMode:(NSInteger)filterMode {
+    switch (filterMode) {
+        case MA_Filter_Unread:
+            return !article.read;
+            break;
+        case MA_Filter_LastRefresh: {
+            NSDate *date = article.createdDate;
+            Preferences *prefs = [Preferences standardPreferences];
+            NSComparisonResult result = [date compare:[prefs objectForKey:MAPref_LastRefreshDate]];
+            return result != NSOrderedAscending;
+            break;
+        }
+        case MA_Filter_Today:
+            return [NSCalendar.currentCalendar isDateInToday:article.date];
+            break;
+        case MA_Filter_48h: {
+            NSDate *twoDaysAgo = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay
+                                                                        value:-2
+                                                                       toDate:[NSDate date]
+                                                                      options:0];
+            return [article.date compare:twoDaysAgo] != NSOrderedAscending;
+            break;
+        }
+        case MA_Filter_Flagged:
+            return article.flagged;
+            break;
+        case MA_Filter_Unread_Or_Flagged:
+            return (!article.read || article.flagged);
+            break;
+        default:
+            return true;
+    }
 }
 
 /* dealloc
