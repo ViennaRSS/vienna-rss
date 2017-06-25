@@ -44,7 +44,7 @@
 @class UnifiedDisplayView;
 @class ArticleListView;
 
-@interface AppController : NSObject <NSApplicationDelegate,NSToolbarDelegate,NSMenuDelegate>
+@interface AppController : NSObject <NSApplicationDelegate,NSMenuDelegate>
 {
 	IBOutlet NSSearchField * filterSearchField;
 	IBOutlet BrowserView * browserView;
@@ -64,7 +64,6 @@
 	SearchPanel * searchPanel;
 	
 	Database * db;
-	PluginManager * pluginManager;
 	NSMutableDictionary * scriptPathMappings;
 	NSStatusItem * appStatusItem;
 	NSDictionary * standardURLs;
@@ -78,6 +77,7 @@
     ViennaSparkleDelegate * _sparkleDelegate;
 }
 
+@property (nonatomic) PluginManager *pluginManager;
 @property (nonatomic) ArticleController *articleController;
 @property (nonatomic, weak) IBOutlet UnifiedDisplayView *unifiedListView;
 @property (nonatomic, weak) IBOutlet ArticleListView *articleListView;

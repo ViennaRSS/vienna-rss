@@ -161,3 +161,38 @@ extension MainWindowController: NSWindowDelegate {
     }
 
 }
+
+// MARK: - Toolbar delegate
+
+extension MainWindowController: NSToolbarDelegate {
+
+    private var pluginManager: PluginManager? {
+        return (NSApp.delegate as? AppController)?.pluginManager
+    }
+
+    func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: String, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+        let toolbarItem = ToolbarItem(itemIdentifier: itemIdentifier)
+        pluginManager?.toolbarItem(toolbarItem, withIdentifier: itemIdentifier)
+
+        return toolbarItem
+    }
+
+    func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [String] {
+        let firstIdentifiers = ["Subscribe", "PreviousButton", "NextButton",
+            "SkipFolder", "Refresh", "MailLink", "EmptyTrash", "GetInfo",
+            "Action", "Styles", "SearchItem"]
+        let pluginIdentifiers = pluginManager?.toolbarItems ?? []
+        let lastIdentifiers = [NSToolbarSpaceItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier]
+
+        return firstIdentifiers + pluginIdentifiers + lastIdentifiers
+    }
+
+    func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [String] {
+        let firstIdentifiers = ["Subscribe", "SkipFolder", "Action", "Refresh"]
+        let pluginIdentifiers = pluginManager?.defaultToolbarItems() as? [String] ?? []
+        let lastIdentifiers = [NSToolbarFlexibleSpaceItemIdentifier, "SearchItem"]
+
+        return firstIdentifiers + pluginIdentifiers + lastIdentifiers
+    }
+
+}

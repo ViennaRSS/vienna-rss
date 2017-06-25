@@ -29,7 +29,7 @@
 
 -(void)resetPlugins;
 @property (nonatomic, readonly, copy) NSArray<SearchMethod *> *searchMethods;
-@property (nonatomic, readonly, copy) NSArray<ToolbarItem *> *toolbarItems;
+@property (nonatomic, readonly, copy) NSArray<NSString *> *toolbarItems;
 -(NSArray *)defaultToolbarItems;
 -(void)loadPlugin:(NSString *)pluginPath;
 -(void)toolbarItem:(ToolbarItem *)item withIdentifier:(NSString *)itemIdentifier;

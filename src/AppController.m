@@ -146,6 +146,16 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
     return self.mainWindowController.window;
 }
 
+// TODO: Figure out where to load this
+- (PluginManager *)pluginManager {
+    if (!_pluginManager) {
+        _pluginManager = [PluginManager new];
+        [_pluginManager resetPlugins];
+    }
+
+    return _pluginManager;
+}
+
 /* awakeFromNib
  * Do all the stuff that only makes sense after our NIB has been loaded and connected.
  */
@@ -339,10 +349,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 
     // Set the delegates
     [NSApplication sharedApplication].delegate = self;
-
-    // Initialise the plugin manager now that the UI is ready
-    pluginManager = [[PluginManager alloc] init];
-    [pluginManager resetPlugins];
 	
 	// Register a bunch of notifications
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -367,19 +373,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 		[NSApp terminate:nil];
 		return;
 	}
-	
-	// Create the toolbar.
-	NSToolbar * toolbar = [[NSToolbar alloc] initWithIdentifier:@"MA_Toolbar"];
-	
-	// Set the appropriate toolbar options. We are the delegate, customization is allowed,
-	// changes made by the user are automatically saved and we start in icon mode.
-	toolbar.delegate = self;
-	[toolbar setAllowsUserCustomization:YES];
-	[toolbar setAutosavesConfiguration:YES]; 
-	toolbar.displayMode = NSToolbarDisplayModeIconOnly;
-	[toolbar setShowsBaselineSeparator:NO];
-	self.mainWindow.toolbar = toolbar;
-	
+
 	// Preload dictionary of standard URLs
 	NSString * pathToPList = [[NSBundle mainBundle] pathForResource:@"StandardURLs.plist" ofType:@""];
 	if (pathToPList != nil)
@@ -607,7 +601,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 		{
 			runOKAlertPanel(NSLocalizedString(@"Plugin installed", nil), NSLocalizedString(@"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.", nil));			
 			NSString * fullPath = [path stringByAppendingPathComponent:filename.lastPathComponent];
-			[pluginManager loadPlugin:fullPath];
+            [self.pluginManager loadPlugin:fullPath];
 		}
 		return YES;
 	}
@@ -717,7 +711,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	}
 	
 	// Add all available plugged-in search methods to the menu.
-	NSMutableArray * searchMethods = [NSMutableArray arrayWithArray:pluginManager.searchMethods];
+	NSMutableArray * searchMethods = [NSMutableArray arrayWithArray:self.pluginManager.searchMethods];
 	if (searchMethods.count > 0)
 	{	
 		[cellMenu addItem: [NSMenuItem separatorItem]];
@@ -2053,7 +2047,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		// Toggle the refresh button
 		ToolbarItem * item = [self toolbarItemWithIdentifier:@"Refresh"];
 		item.action = @selector(cancelAllRefreshesToolbar:);
-		[item setButtonImage:@"cancelRefreshButton"];
+        // TODO: Swap the images
+//      [item setButtonImage:@"cancelRefreshButton"];
 	}
 	else
 	{
@@ -2064,8 +2059,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		// Toggle the refresh button
 		ToolbarItem * item = [self toolbarItemWithIdentifier:@"Refresh"];
 		item.action = @selector(refreshAllSubscriptions:);
-		[item setButtonImage:@"refreshButton"];
-		
+        // TODO: Swap the images
+//      [item setButtonImage:@"refreshButton"];
+
 		[self showUnreadCountOnApplicationIconAndWindowTitle];
 		
 		// Bounce the dock icon for 1 second if the bounce method has been selected.
@@ -3859,156 +3855,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     }
 
 	return YES;
-}
-
-/* itemForItemIdentifier
- * This method is required of NSToolbar delegates.  It takes an identifier, and returns the matching ToolbarItem.
- * It also takes a parameter telling whether this toolbar item is going into an actual toolbar, or whether it's
- * going to be displayed in a customization palette.
- */
--(NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)willBeInserted
-{
-	ToolbarItem *item = [[ToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
-	if ([itemIdentifier isEqualToString:@"SearchItem"])
-	{
-		[item setView:searchField];
-		[item setLabel:NSLocalizedString(@"Search Articles", nil)];
-		item.paletteLabel = item.label;
-		item.target = self;
-		item.action = @selector(searchUsingToolbarTextField:);
-		[item setToolTip:NSLocalizedString(@"Search Articles", nil)];
-	}
-	else if ([itemIdentifier isEqualToString:@"Subscribe"])
-	{
-		[item setLabel:NSLocalizedString(@"Subscribe", nil)];
-		item.paletteLabel = item.label;
-		[item setButtonImage:@"subscribeButton"];
-		item.target = self;
-		item.action = @selector(newSubscription:);
-		[item setToolTip:NSLocalizedString(@"Create a new subscription", nil)];
-	}
-	else if ([itemIdentifier isEqualToString:@"PreviousButton"])
-	{
-		[item setLabel:NSLocalizedString(@"Back", nil)];
-		item.paletteLabel = item.label;
-		[item setButtonImage:@"previousButton"];
-		item.target = self;
-		item.action = @selector(goBack:);
-		[item setToolTip:NSLocalizedString(@"Back", nil)];
-	}
-	else if ([itemIdentifier isEqualToString:@"NextButton"])
-	{
-		[item setLabel:NSLocalizedString(@"Next Unread", nil)];
-		item.paletteLabel = item.label;
-		[item setButtonImage:@"nextButton"];
-		item.target = self;
-		item.action = @selector(viewNextUnread:);
-		[item setToolTip:NSLocalizedString(@"Next Unread", nil)];
-	}
-	else if ([itemIdentifier isEqualToString:@"SkipFolder"])
-	{
-		[item setLabel:NSLocalizedString(@"Skip Folder", nil)];
-		item.paletteLabel = item.label;
-		[item setButtonImage:@"skipFolderButton"];
-		item.target = self;
-		item.action = @selector(skipFolder:);
-		[item setToolTip:NSLocalizedString(@"Skip Folder", nil)];
-	}
-	else if ([itemIdentifier isEqualToString:@"Refresh"])
-	{
-		[item setLabel:NSLocalizedString(@"Refresh", nil)];
-		item.paletteLabel = item.label;
-		[item setButtonImage:@"refreshButton"];
-		item.target = self;
-		item.action = @selector(refreshAllSubscriptions:);
-		[item setToolTip:NSLocalizedString(@"Refresh all your subscriptions", nil)];
-	}
-	else if ([itemIdentifier isEqualToString:@"MailLink"])
-	{
-		[item setLabel:NSLocalizedString(@"Send Link", nil)];
-		item.paletteLabel = item.label;
-		[item setButtonImage:@"mailLinkButton"];
-		item.target = self;
-		item.action = @selector(mailLinkToArticlePage:);
-		[item setToolTip:NSLocalizedString(@"Email a link to the current article or website", nil)];
-	}
-	else if ([itemIdentifier isEqualToString:@"EmptyTrash"])
-	{
-		[item setLabel:NSLocalizedString(@"Empty Trash", nil)];
-		item.paletteLabel = item.label;
-		[item setButtonImage:@"emptyTrashButton"];
-		item.target = self;
-		item.action = @selector(emptyTrash:);
-		[item setToolTip:NSLocalizedString(@"Delete all articles in the trash", nil)];
-	}
-	else if ([itemIdentifier isEqualToString:@"GetInfo"])
-	{
-		[item setLabel:NSLocalizedString(@"Get Info", nil)];
-		item.paletteLabel = item.label;
-		[item setButtonImage:@"getInfoButton"];
-		item.target = self;
-		item.action = @selector(getInfo:);
-		[item setToolTip:NSLocalizedString(@"See information about the selected subscription", nil)];
-	}
-	else if ([itemIdentifier isEqualToString: @"Styles"])
-	{
-		[item setPopup:@"stylesMenuButton" withMenu:(willBeInserted ? self.stylesMenu : nil)];
-		[item setLabel:NSLocalizedString(@"Style", nil)];
-		item.paletteLabel = item.label;
-		[item setToolTip:NSLocalizedString(@"Display the list of available styles", nil)];
-	}
-	else if ([itemIdentifier isEqualToString: @"Action"])
-	{
-		[item setPopup:@"popupMenuButton" withMenu:(willBeInserted ? self.folderMenu : nil)];
-		[item setLabel:NSLocalizedString(@"Action", nil)];
-		item.paletteLabel = item.label;
-		[item setToolTip:NSLocalizedString(@"Additional actions for the selected folder", nil)];
-	}
-	else
-	{
-		[pluginManager toolbarItem:item withIdentifier:itemIdentifier];
-	}
-	return item;
-}
-
-/* toolbarDefaultItemIdentifiers
- * This method is required of NSToolbar delegates.  It returns an array holding identifiers for the default
- * set of toolbar items.  It can also be called by the customization palette to display the default toolbar.
- */
--(NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
-{
-	return [[@[@"Subscribe",
-			 @"SkipFolder",
-			 @"Action",
-			 @"Refresh"]
-			 arrayByAddingObjectsFromArray:[pluginManager defaultToolbarItems]]
-			 arrayByAddingObjectsFromArray:@[NSToolbarFlexibleSpaceItemIdentifier,
-			 @"SearchItem"]
-			 ];
-}
-
-/* toolbarAllowedItemIdentifiers
- * This method is required of NSToolbar delegates.  It returns an array holding identifiers for all allowed
- * toolbar items in this toolbar.  Any not listed here will not be available in the customization palette.
- */
--(NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
-{
-	return [@[NSToolbarSeparatorItemIdentifier,
-			 NSToolbarSpaceItemIdentifier,
-			 NSToolbarFlexibleSpaceItemIdentifier,
-			 @"Refresh",
-			 @"Subscribe",
-			 @"SkipFolder",
-			 @"EmptyTrash",
-			 @"Action",
-			 @"SearchItem",
-			 @"MailLink",
-			 @"GetInfo",
-			 @"Styles",
-			 @"PreviousButton",
-			 @"NextButton"]
-			 arrayByAddingObjectsFromArray:pluginManager.toolbarItems
-			 ];
 }
 
 #pragma mark Preferences

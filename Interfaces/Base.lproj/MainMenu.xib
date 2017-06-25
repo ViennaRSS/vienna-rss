@@ -405,6 +405,275 @@
                     <constraint firstAttribute="trailing" secondItem="993" secondAttribute="trailing" id="x4Z-s7-D3P"/>
                 </constraints>
             </view>
+            <toolbar key="toolbar" implicitIdentifier="9BE5691C-FD10-407B-A43E-74580FF42F4B" explicitIdentifier="MA_Toolbar" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="Vtx-1j-Pbt">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="3B81A7E6-BC01-4E5D-8598-E3749E1C39BF" explicitItemIdentifier="Subscribe" label="Add" paletteLabel="Add" toolTip="Subscribe to a feed or add a folder or smart folder." image="NSAddTemplate" id="CPA-Ha-aj1" userLabel="Add">
+                        <size key="minSize" width="41" height="28"/>
+                        <size key="maxSize" width="41" height="28"/>
+                        <popUpButton key="view" verticalHuggingPriority="750" id="DDQ-PY-F2c">
+                            <rect key="frame" x="0.0" y="14" width="41" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="pdk-MS-QME" id="xAh-aB-Ek3">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="menu"/>
+                                <menu key="menu" id="tQg-b5-Yiu">
+                                    <items>
+                                        <menuItem state="on" image="NSAddTemplate" hidden="YES" id="pdk-MS-QME"/>
+                                        <menuItem title="New Subscription…" id="psA-wp-PcZ">
+                                            <connections>
+                                                <action selector="newSubscription:" target="-1" id="ZrW-KY-2C0"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="fKm-HE-ohV"/>
+                                        <menuItem title="New Folder…" id="RaH-Yu-Ija">
+                                            <connections>
+                                                <action selector="newGroupFolder:" target="-1" id="4Bq-7h-XfS"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="New Smart Folder…" id="Pqr-dM-SQQ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="newSmartFolder:" target="-1" id="zGS-yX-GNs"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </popUpButtonCell>
+                        </popUpButton>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="0E560FB8-D8D4-477F-87CE-D3451015D08F" explicitItemIdentifier="PreviousButton" label="Back" paletteLabel="Back" toolTip="Back" image="NSGoLeftTemplate" id="gOG-UJ-Pin">
+                        <size key="minSize" width="41" height="25"/>
+                        <size key="maxSize" width="41" height="28"/>
+                        <button key="view" verticalHuggingPriority="750" id="tUv-uw-U24">
+                            <rect key="frame" x="0.0" y="14" width="41" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSGoLeftTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="waE-VF-jGb">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <connections>
+                            <action selector="goBack:" target="-1" id="vfV-Zh-Djc"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="B455B425-67E7-44CA-8DDA-7188C9BBFDF7" explicitItemIdentifier="NextButton" label="Next Unread" paletteLabel="Next Unread" toolTip="Next Unread" image="NSGoRightTemplate" id="fpY-CJ-hKU">
+                        <size key="minSize" width="41" height="25"/>
+                        <size key="maxSize" width="41" height="28"/>
+                        <button key="view" verticalHuggingPriority="750" id="DGs-HX-KGa">
+                            <rect key="frame" x="16" y="14" width="41" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSGoRightTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UUm-Eq-K34">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <connections>
+                            <action selector="viewNextUnread:" target="-1" id="bxj-nt-KuQ"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="A62CF72C-0A55-43F3-9737-DAD4E0E93C95" explicitItemIdentifier="SkipFolder" label="Skip Folder" paletteLabel="Skip Folder" toolTip="Skip Folder" image="NSGoRightTemplate" id="SoG-b2-O1S">
+                        <size key="minSize" width="41" height="25"/>
+                        <size key="maxSize" width="41" height="28"/>
+                        <button key="view" verticalHuggingPriority="750" id="Xbk-bR-TPc">
+                            <rect key="frame" x="13" y="14" width="41" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSGoRightTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0ub-7J-fFz">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <connections>
+                            <action selector="skipFolder:" target="-1" id="9Qr-v5-cZv"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="145A8A8B-193F-46E7-87FD-FE2B915C1B08" explicitItemIdentifier="Refresh" label="Refresh" paletteLabel="Refresh" toolTip="Refresh all your subscriptions" image="NSRefreshTemplate" id="Nmd-zx-Dys">
+                        <size key="minSize" width="41" height="25"/>
+                        <size key="maxSize" width="41" height="28"/>
+                        <button key="view" verticalHuggingPriority="750" id="PJJ-4H-4dE">
+                            <rect key="frame" x="4" y="14" width="41" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="F19-ww-YfI">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <connections>
+                            <action selector="refreshAllSubscriptions:" target="-1" id="SRS-ST-tVf"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="006BC31E-0D67-4BDB-95C0-FA6220913D81" explicitItemIdentifier="MailLink" label="Send Link" paletteLabel="Send Link" toolTip="Email a link to the current article or website" image="NSShareTemplate" id="10h-xf-C6T">
+                        <size key="minSize" width="41" height="25"/>
+                        <size key="maxSize" width="41" height="28"/>
+                        <button key="view" verticalHuggingPriority="750" id="EJA-2q-HQu">
+                            <rect key="frame" x="9" y="14" width="41" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8Cf-Qg-5OD">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <connections>
+                            <action selector="mailLinkToArticlePage:" target="-1" id="1ff-ox-Afg"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="1B4A5BDF-4844-487B-A764-D611A54922F0" explicitItemIdentifier="EmptyTrash" label="Empty Trash" paletteLabel="Empty Trash" toolTip="Delete all articles in the trash" image="NSActionTemplate" id="4c1-NR-ofo">
+                        <size key="minSize" width="41" height="25"/>
+                        <size key="maxSize" width="41" height="28"/>
+                        <button key="view" verticalHuggingPriority="750" id="b4P-2h-b0r">
+                            <rect key="frame" x="16" y="14" width="41" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSActionTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kxj-5W-a2Z">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <connections>
+                            <action selector="emptyTrash:" target="-1" id="LGn-HP-E1Z"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="3645E290-4147-4201-8018-6E3A685BE640" explicitItemIdentifier="GetInfo" label="Get Info" paletteLabel="Get Info" toolTip="See information about the selected subscription" image="NSQuickLookTemplate" id="7iy-IN-8oG">
+                        <size key="minSize" width="41" height="25"/>
+                        <size key="maxSize" width="41" height="28"/>
+                        <button key="view" verticalHuggingPriority="750" id="dU4-uo-rcp">
+                            <rect key="frame" x="4" y="14" width="41" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSQuickLookTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1Lf-O5-dn9">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <connections>
+                            <action selector="getInfo:" target="-1" id="Xvh-S3-PIS"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="A51AB11F-9F76-48DF-A4E8-39C7224775BA" explicitItemIdentifier="Action" label="Action" paletteLabel="Action" toolTip="Additional actions for the selected folder" image="NSActionTemplate" id="TSQ-UW-4gU">
+                        <size key="minSize" width="41" height="28"/>
+                        <size key="maxSize" width="41" height="28"/>
+                        <popUpButton key="view" verticalHuggingPriority="750" id="Tq4-6N-ErM">
+                            <rect key="frame" x="0.0" y="14" width="41" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="anL-VR-Fny">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="menu"/>
+                                <menu key="menu" id="0bc-TU-NSg">
+                                    <items>
+                                        <menuItem state="on" image="NSActionTemplate" hidden="YES" id="A67-46-hiu"/>
+                                        <menuItem title="Refresh Selected Subscriptions" id="Hs0-hu-A2g">
+                                            <connections>
+                                                <action selector="refreshSelectedSubscriptions:" target="-1" id="Ehf-dd-Y5q"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="web-Y7-7C8"/>
+                                        <menuItem title="Edit…" id="vOQ-xo-w8E">
+                                            <connections>
+                                                <action selector="editFolder:" target="-1" id="mCG-Dj-ZeY"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Rename…" id="l14-tu-w7l">
+                                            <connections>
+                                                <action selector="renameFolder:" target="-1" id="CV5-se-GZw"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Delete…" id="Rdq-QU-3hM">
+                                            <connections>
+                                                <action selector="deleteFolder:" target="-1" id="MpG-0A-YWK"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="KGk-gM-ZBr"/>
+                                        <menuItem title="Mark All Articles as Read" id="xNW-zC-IMZ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="markAllRead:" target="-1" id="eew-yQ-Ej1"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="KJR-1w-S3j"/>
+                                        <menuItem title="Open Subscription Home Page" id="Zu1-zW-uo2">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="viewSourceHomePage:" target="-1" id="7Wc-Qn-N0n"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Open Subscription Home Page in External Browser" alternate="YES" id="ZVp-Nv-0jh">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                                            <connections>
+                                                <action selector="viewSourceHomePageInAlternateBrowser:" target="-1" id="E0v-KS-lTV"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Get Info" id="Y0d-K7-46f">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="getInfo:" target="-1" id="mAW-li-bDY"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="ig3-ao-8RK"/>
+                                        <menuItem title="Force Refresh Selected Subscriptions From Open Reader" id="iqm-sr-F8U">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="forceRefreshSelectedSubscriptions:" target="-1" id="hJm-Nf-jsT"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </popUpButtonCell>
+                        </popUpButton>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="3C962AB1-0C7E-4CBA-8477-2436ED2B6383" explicitItemIdentifier="Styles" label="Style" paletteLabel="Style" toolTip="Display the list of available styles" image="NSBookmarksTemplate" id="azL-oz-mJL">
+                        <size key="minSize" width="41" height="28"/>
+                        <size key="maxSize" width="41" height="28"/>
+                        <popUpButton key="view" verticalHuggingPriority="750" id="gOd-tT-XFQ">
+                            <rect key="frame" x="0.0" y="14" width="41" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="lu2-BZ-Gxd" id="5CR-Qn-4pP">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="menu"/>
+                                <menu key="menu" id="mit-Vi-iR1">
+                                    <items>
+                                        <menuItem state="on" image="NSBookmarksTemplate" hidden="YES" id="lu2-BZ-Gxd"/>
+                                        <menuItem isSeparatorItem="YES" id="Bld-FV-QeM"/>
+                                        <menuItem title="More Styles…" id="MaO-r1-tcm">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="moreStyles:" target="-1" id="YsY-VC-HFK"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </popUpButtonCell>
+                        </popUpButton>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="D7187B4B-C4CE-486D-8310-37941E8CB2C5" explicitItemIdentifier="SearchItem" label="Search Articles" paletteLabel="Search Articles" toolTip="Search Articles" id="OIA-vb-5jR">
+                        <size key="minSize" width="210" height="22"/>
+                        <size key="maxSize" width="210" height="22"/>
+                        <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" id="uUx-PZ-LTM">
+                            <rect key="frame" x="0.0" y="14" width="210" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="cUS-QL-Jz7">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </searchFieldCell>
+                        </searchField>
+                        <connections>
+                            <action selector="searchUsingToolbarTextField:" target="-1" id="TIn-8i-3eA"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="oqq-lf-hKd"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="VNl-qM-XKj"/>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="CPA-Ha-aj1"/>
+                    <toolbarItem reference="SoG-b2-O1S"/>
+                    <toolbarItem reference="TSQ-UW-4gU"/>
+                    <toolbarItem reference="oqq-lf-hKd"/>
+                    <toolbarItem reference="Nmd-zx-Dys"/>
+                    <toolbarItem reference="10h-xf-C6T"/>
+                    <toolbarItem reference="VNl-qM-XKj"/>
+                    <toolbarItem reference="OIA-vb-5jR"/>
+                </defaultToolbarItems>
+                <connections>
+                    <outlet property="delegate" destination="TpV-Sw-bYp" id="tTP-4I-E1t"/>
+                </connections>
+            </toolbar>
             <contentBorderThickness minY="22"/>
             <connections>
                 <outlet property="delegate" destination="TpV-Sw-bYp" id="7v9-rz-EiV"/>
@@ -1268,10 +1537,10 @@ CA
                 <outlet property="filterSearchField" destination="1304" id="1315"/>
                 <outlet property="outlineView" destination="Kk7-ax-B3r" id="vFt-XT-QbW"/>
                 <outlet property="mainWindowController" destination="TpV-Sw-bYp" id="zzt-Yo-pwZ"/>
-                <outlet property="searchField" destination="1252" id="1253"/>
+                <outlet property="searchField" destination="uUx-PZ-LTM" id="6XE-04-sFM"/>
                 <outlet property="sortByMenu" destination="387" id="1054"/>
-                <outlet property="stylesMenu" destination="826" id="1051"/>
                 <outlet property="unifiedListView" destination="1148" id="O5e-id-8Cu"/>
+                <outlet property="stylesMenu" destination="lu2-BZ-Gxd" id="kep-Fa-btf"/>
             </connections>
         </customObject>
         <customView id="971" userLabel="ArticleDisplayView" customClass="ArticleListView">
@@ -1411,25 +1680,6 @@ CA
                 <outlet property="tabView" destination="1218" id="1230"/>
             </connections>
         </customView>
-        <customView id="1251" userLabel="SearchView">
-            <rect key="frame" x="0.0" y="0.0" width="239" height="22"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <subviews>
-                <searchField wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1252">
-                    <rect key="frame" x="0.0" y="0.0" width="239" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" bezelStyle="round" sendsWholeSearchString="YES" recentsAutosaveName="searchStrings" id="1370">
-                        <font key="font" metaFont="cellTitle"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </searchFieldCell>
-                    <connections>
-                        <action selector="searchUsingToolbarTextField:" target="233" id="1317"/>
-                        <outlet property="delegate" destination="233" id="1276"/>
-                    </connections>
-                </searchField>
-            </subviews>
-        </customView>
         <customView id="1267" userLabel="ActionButton">
             <rect key="frame" x="0.0" y="0.0" width="40" height="28"/>
             <autoresizingMask key="autoresizingMask"/>
@@ -1523,6 +1773,14 @@ CA
         <userDefaultsController representsSharedInstance="YES" id="fAX-Jg-YQ6"/>
     </objects>
     <resources>
+        <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSBookmarksTemplate" width="17" height="18"/>
+        <image name="NSGoLeftTemplate" width="9" height="12"/>
+        <image name="NSGoRightTemplate" width="9" height="12"/>
+        <image name="NSQuickLookTemplate" width="19" height="12"/>
+        <image name="NSRefreshTemplate" width="11" height="15"/>
+        <image name="NSShareTemplate" width="11" height="16"/>
         <image name="filter-icon" width="16" height="16"/>
         <image name="popupMenuButton.tiff" width="128" height="128"/>
         <image name="pressedCloseButton" width="12" height="13"/>

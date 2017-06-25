@@ -1,5 +1,8 @@
+#import "AppController.h"
 #import "DisclosureView.h"
 #import "OpenReader.h"
+#import "PluginManager.h"
 #import "Preferences.h"
 #import "RefreshManager.h"
+#import "ToolbarItem.h"
 #import "ViennaApp.h"

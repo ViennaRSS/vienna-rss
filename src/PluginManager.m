@@ -102,123 +102,123 @@
 		pluginInfo[@"Path"] = pluginPath;
 		allPlugins[pluginName] = pluginInfo;
 		
-		// Pop it on the menu if needed
-		[self installPlugin:pluginInfo];
+//		// Pop it on the menu if needed
+//		[self installPlugin:pluginInfo];
 	}
 }
 
 /* installPlugin
  * Installs one plugin to the menus.
  */
--(void)installPlugin:(NSDictionary *)onePlugin
-{
-	// If it's a blog editor plugin, don't show it in the menu 
-	// if the app in question is not present on the system.
-	if ([onePlugin[@"Type"] isEqualToString:@"BlogEditor"])
-	{
-		NSString * bundleIdentifier = onePlugin[@"BundleIdentifier"];
-		
-		if (![[NSWorkspace sharedWorkspace] absolutePathForAppBundleWithIdentifier: bundleIdentifier])
-			return;
-	}
-						
-	NSString * pluginName = onePlugin[@"Name"];
-	NSString * menuPath = onePlugin[@"MenuPath"];
-	if (menuPath == nil)
-		return;
-	
-	// The menu path can be specified as Menu/Title, where Menu is the
-	// unlocalized name of the top level menu under which the plugin is
-	// added and Title is the menu name representing the plugin. If the
-	// Menu part is omitted, the plugin goes at the end of the Article menu by
-	// default.
-	NSScanner * scanner = [NSScanner scannerWithString:menuPath];
-	NSString * topLevelMenu = nil;
-	NSString * menuTitle = nil;
-	
-	[scanner scanUpToString:@"/" intoString:&topLevelMenu];
-	if (scanner.atEnd || topLevelMenu == nil)
-	{
-		topLevelMenu = @"Article";
-		menuTitle = menuPath;
-	}
-	else
-	{
-		[scanner scanString:@"/" intoString:nil];
-		[scanner scanUpToString:@"" intoString:&menuTitle];
-	}
-		topLevelMenu = NSLocalizedString(topLevelMenu, nil);
-	
-	NSArray * menuArray = NSApp.mainMenu.itemArray;
-	BOOL didInstall = NO;
-	NSInteger c;
-	
-	for (c = 0; !didInstall && c < menuArray.count; ++c)
-	{
-		NSMenuItem * topMenu = menuArray[c];
-		if ([topMenu.title isEqualToString:topLevelMenu])
-		{
-			// Parse off the shortcut key, if there is one. The format is a series of
-			// control key specifiers: Cmd, Shift, Alt or Ctrl - specified in any
-			// order and separated by '+', plus a single key character. If more than
-			// one key character is given, the last one is used but generally that is
-			// a bug in the MenuKey.
-			NSString * menuKey = onePlugin[@"MenuKey"];
-			NSUInteger keyMod = 0;
-			NSString * keyChar = @"";
-			
-			if (menuKey != nil)
-			{
-				NSArray * keyArray = [menuKey componentsSeparatedByString:@"+"];
-				NSString * oneKey;
-				
-				for (oneKey in keyArray)
-				{
-					if ([oneKey isEqualToString:@"Cmd"])
-						keyMod |= NSCommandKeyMask;
-					else if ([oneKey isEqualToString:@"Shift"])
-						keyMod |= NSShiftKeyMask;
-					else if ([oneKey isEqualToString:@"Alt"])
-						keyMod |= NSAlternateKeyMask;
-					else if ([oneKey isEqualToString:@"Ctrl"])
-						keyMod |= NSControlKeyMask;
-					else
-					{
-						if (!keyChar.blank)
-							NSLog(@"Warning: malformed MenuKey found in info.plist for plugin %@", pluginName);
-						keyChar = oneKey;
-					}
-				}
-			}
-
-			// Keep the menus tidy. If the last menu item is not currently a plugin invocator then
-			// add a separator.
-			NSMenu * parentMenu = topMenu.submenu;
-			NSInteger lastItem = parentMenu.numberOfItems - 1;
-			
-			if (lastItem >= 0 && [parentMenu itemAtIndex:lastItem].action != @selector(pluginInvocator:))
-				[parentMenu addItem:[NSMenuItem separatorItem]];
-
-			// Finally add the plugin to the end of the selected menu complete with
-			// key equivalent and save the plugin object in the NSMenuItem so that we
-			// can associate it in pluginInvocator.
-			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:menuTitle action:@selector(pluginInvocator:) keyEquivalent:keyChar];
-			menuItem.target = self;
-			menuItem.keyEquivalentModifierMask = keyMod;
-			menuItem.representedObject = onePlugin;
-			[parentMenu addItem:menuItem];
-			
-			didInstall = YES;
-		}
-	}
-
-	// Warn if we failed to install a plugin
-	if (!didInstall)
-	{
-		runOKAlertPanel(NSLocalizedString(@"Plugin could not be installed", nil), NSLocalizedString(@"Vienna failed to install the plugin.", nil), pluginName);
-		NSLog(@"Warning: error in MenuPath (\"%@\") in info.plist for plugin %@", menuPath, pluginName);
-	}
-}
+//-(void)installPlugin:(NSDictionary *)onePlugin
+//{
+//	// If it's a blog editor plugin, don't show it in the menu
+//	// if the app in question is not present on the system.
+//	if ([onePlugin[@"Type"] isEqualToString:@"BlogEditor"])
+//	{
+//		NSString * bundleIdentifier = onePlugin[@"BundleIdentifier"];
+//
+//		if (![[NSWorkspace sharedWorkspace] absolutePathForAppBundleWithIdentifier: bundleIdentifier])
+//			return;
+//	}
+//
+//	NSString * pluginName = onePlugin[@"Name"];
+//	NSString * menuPath = onePlugin[@"MenuPath"];
+//	if (menuPath == nil)
+//		return;
+//
+//	// The menu path can be specified as Menu/Title, where Menu is the
+//	// unlocalized name of the top level menu under which the plugin is
+//	// added and Title is the menu name representing the plugin. If the
+//	// Menu part is omitted, the plugin goes at the end of the Article menu by
+//	// default.
+//	NSScanner * scanner = [NSScanner scannerWithString:menuPath];
+//	NSString * topLevelMenu = nil;
+//	NSString * menuTitle = nil;
+//
+//	[scanner scanUpToString:@"/" intoString:&topLevelMenu];
+//	if (scanner.atEnd || topLevelMenu == nil)
+//	{
+//		topLevelMenu = @"Article";
+//		menuTitle = menuPath;
+//	}
+//	else
+//	{
+//		[scanner scanString:@"/" intoString:nil];
+//		[scanner scanUpToString:@"" intoString:&menuTitle];
+//	}
+//		topLevelMenu = NSLocalizedString(topLevelMenu, nil);
+//
+//	NSArray * menuArray = NSApp.mainMenu.itemArray;
+//	BOOL didInstall = NO;
+//	NSInteger c;
+//
+//	for (c = 0; !didInstall && c < menuArray.count; ++c)
+//	{
+//		NSMenuItem * topMenu = menuArray[c];
+//		if ([topMenu.title isEqualToString:topLevelMenu])
+//		{
+//			// Parse off the shortcut key, if there is one. The format is a series of
+//			// control key specifiers: Cmd, Shift, Alt or Ctrl - specified in any
+//			// order and separated by '+', plus a single key character. If more than
+//			// one key character is given, the last one is used but generally that is
+//			// a bug in the MenuKey.
+//			NSString * menuKey = onePlugin[@"MenuKey"];
+//			NSUInteger keyMod = 0;
+//			NSString * keyChar = @"";
+//
+//			if (menuKey != nil)
+//			{
+//				NSArray * keyArray = [menuKey componentsSeparatedByString:@"+"];
+//				NSString * oneKey;
+//
+//				for (oneKey in keyArray)
+//				{
+//					if ([oneKey isEqualToString:@"Cmd"])
+//						keyMod |= NSCommandKeyMask;
+//					else if ([oneKey isEqualToString:@"Shift"])
+//						keyMod |= NSShiftKeyMask;
+//					else if ([oneKey isEqualToString:@"Alt"])
+//						keyMod |= NSAlternateKeyMask;
+//					else if ([oneKey isEqualToString:@"Ctrl"])
+//						keyMod |= NSControlKeyMask;
+//					else
+//					{
+//						if (!keyChar.blank)
+//							NSLog(@"Warning: malformed MenuKey found in info.plist for plugin %@", pluginName);
+//						keyChar = oneKey;
+//					}
+//				}
+//			}
+//
+//			// Keep the menus tidy. If the last menu item is not currently a plugin invocator then
+//			// add a separator.
+//			NSMenu * parentMenu = topMenu.submenu;
+//			NSInteger lastItem = parentMenu.numberOfItems - 1;
+//
+//			if (lastItem >= 0 && [parentMenu itemAtIndex:lastItem].action != @selector(pluginInvocator:))
+//				[parentMenu addItem:[NSMenuItem separatorItem]];
+//
+//			// Finally add the plugin to the end of the selected menu complete with
+//			// key equivalent and save the plugin object in the NSMenuItem so that we
+//			// can associate it in pluginInvocator.
+//			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:menuTitle action:@selector(pluginInvocator:) keyEquivalent:keyChar];
+//			menuItem.target = self;
+//			menuItem.keyEquivalentModifierMask = keyMod;
+//			menuItem.representedObject = onePlugin;
+//			[parentMenu addItem:menuItem];
+//
+//			didInstall = YES;
+//		}
+//	}
+//
+//	// Warn if we failed to install a plugin
+//	if (!didInstall)
+//	{
+//		runOKAlertPanel(NSLocalizedString(@"Plugin could not be installed", nil), NSLocalizedString(@"Vienna failed to install the plugin.", nil), pluginName);
+//		NSLog(@"Warning: error in MenuPath (\"%@\") in info.plist for plugin %@", menuPath, pluginName);
+//	}
+//}
 
 /* searchMethods
  * Returns an NSArray of SearchMethods which can be added to the search-box menu.
