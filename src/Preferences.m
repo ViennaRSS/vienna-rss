@@ -781,7 +781,6 @@ static Preferences * _standardPreferences = nil;
 	{
 		filterMode = newMode;
 		[self setInteger:filterMode forKey:MAPref_FilterMode];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FilteringChange" object:nil];
 	}
 }
 

@@ -127,9 +127,13 @@
 		
 		// Register for notifications
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self selector:@selector(handleFilterChange:) name:@"MA_Notify_FilteringChange" object:nil];
 		[nc addObserver:self selector:@selector(handleArticleListContentChange:) name:@"MA_Notify_ArticleListContentChange" object:nil];
         [nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
+
+        [NSUserDefaults.standardUserDefaults addObserver:self
+                                              forKeyPath:MAPref_FilterMode
+                                                 options:0
+                                                 context:nil];
 
         queue = dispatch_queue_create("uk.co.opencommunity.vienna2.displayRefresh", DISPATCH_QUEUE_SERIAL);
         reloadArrayOfArticlesSemaphor = 0;
@@ -1022,17 +1026,6 @@
 	return !backtrackArray.atStartOfQueue;
 }
 
-/* handleFilterChange
-* Update the list of articles when the user changes the filter.
-*/
--(void)handleFilterChange:(NSNotification *)nc
-{
-    @synchronized(mainArticleView)
-    {
-	    [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
-	}
-}
-
 /* handleArticleListStateChange
 * Called if a folder content has changed
 * but we don't need to add new articles
@@ -1097,11 +1090,24 @@
     }
 }
 
-/* dealloc
- * Clean up behind us.
- */
--(void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+// MARK: Key-value observation
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+                       context:(void *)context {
+    if (keyPath == MAPref_FilterMode) {
+        // Update the list of articles when the user changes the filter.
+        @synchronized(mainArticleView) {
+            [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
+        }
+    }
 }
+
+- (void)dealloc {
+    [NSNotificationCenter.defaultCenter removeObserver:self];
+    [NSUserDefaults.standardUserDefaults removeObserver:self
+                                             forKeyPath:MAPref_FilterMode];
+}
+
 @end
