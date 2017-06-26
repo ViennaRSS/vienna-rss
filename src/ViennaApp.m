@@ -36,20 +36,6 @@
 
 @implementation ViennaApp
 
-/* sendEvent
- * We override sendEvent in order to catch the status of the option key. 
- */
--(void)sendEvent:(NSEvent *)anEvent
-{
-	if((anEvent.type == NSFlagsChanged) && ( (anEvent.keyCode == 61) || (anEvent.keyCode == 58)))
-	{
-		[(AppController*)self.delegate toggleOptionKeyButtonStates];
-	}
-    else
-    // Only handle the events we actually need.
-        [super sendEvent:anEvent];
-}
-
 /* handleRefreshAllSubscriptions
  * Refreshes all folders.
  */

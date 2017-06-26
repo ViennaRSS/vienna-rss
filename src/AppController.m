@@ -96,7 +96,6 @@
 -(void)setLayout:(NSInteger)newLayout withRefresh:(BOOL)refreshFlag;
 -(void)updateAlternateMenuTitle;
 -(void)updateSearchPlaceholderAndSearchMethod;
--(void)toggleOptionKeyButtonStates;
 -(void)updateCloseCommands;
 @property (nonatomic, getter=isFilterBarVisible, readonly) BOOL filterBarVisible;
 @property (nonatomic, readonly, strong) NSTimer *checkTimer;
@@ -2390,27 +2389,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 	}
 	return NO;
-}
-
-/* toggleOptionKeyButtonStates
- * Toggles the appearance and function of the "Add" button while the option-key is pressed. 
- * Works and looks exactly as in the iApps. Currently only for toggling "Add Sub/Add Smart Folder", 
- * but of course it could be used for all other buttons as well.
- */
--(void)toggleOptionKeyButtonStates
-{
-	ToolbarItem * item = [self toolbarItemWithIdentifier:@"Subscribe"];
-	
-	if (!(NSApp.currentEvent.modifierFlags & NSAlternateKeyMask)) 
-	{
-		[item setButtonImage:@"subscribeButton"];
-		item.action = @selector(newSubscription:);
-	}
-	else
-	{
-		[item setButtonImage:@"smartFolderButton"];
-		item.action = @selector(newSmartFolder:);
-	}
 }
 
 /* toolbarItemWithIdentifier

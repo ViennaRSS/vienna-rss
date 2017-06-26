@@ -182,7 +182,6 @@
 @property (nonatomic, readonly, strong) BrowserView *browserView;
 @property (nonatomic, readonly, copy) NSArray *folders;
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
--(void)toggleOptionKeyButtonStates;
 -(void)updateStatusBarFilterButtonVisibility;
 @property (nonatomic, readonly, strong) NSLayoutManager *layoutManager;
 -(void)performWebSearch:(SearchMethod *)searchMethod;
