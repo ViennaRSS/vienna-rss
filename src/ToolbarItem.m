@@ -20,7 +20,6 @@
 
 #import "ToolbarItem.h"
 #import "ToolbarButton.h"
-#import "PopupButton.h"
 
 #define CenterRect(x,y) (NSMakeRect(((x).width - (y).width)/2, (((x).height - (y).height)/2), (y).width, (y).height))		
 
@@ -124,23 +123,6 @@
 	
 }
 
-/* setButtonImage
- * Define the toolbar item as a button and initialises it with the necessary
- * attributes and states using the specified image name.
- */
--(void)setButtonImage:(NSString *)imageName
-{
-	NSString * normalImage = [NSString stringWithFormat:@"%@.tiff", imageName];
-	NSString * pressedImage = [NSString stringWithFormat:@"%@Pressed.tiff", imageName];
-	NSString * smallNormalImage = [NSString stringWithFormat:@"%@Small.tiff", imageName];
-	NSString * smallPressedImage = [NSString stringWithFormat:@"%@SmallPressed.tiff", imageName];
-
-	[self setButtonImages:[NSImage imageNamed:normalImage]
-			 pressedImage:[NSImage imageNamed:pressedImage]
-		 smallNormalImage:[NSImage imageNamed:smallNormalImage]
-		smallPressedImage:[NSImage imageNamed:smallPressedImage]];
-}
-
 /* setButtonImages
  * Define the toolbar item as a button and initialises it with the necessary
  * attributes and states using the specified set of images for each state.
@@ -165,34 +147,4 @@
 
 }
 
-/* setPopup
- * Defines the toolbar item as a popup button and initialises it with the specified
- * images and menu.
- */
--(void)setPopup:(NSString *)imageName withMenu:(NSMenu *)theMenu
-{
-	NSString * normalImage = [NSString stringWithFormat:@"%@.tiff", imageName];
-	NSString * pressedImage = [NSString stringWithFormat:@"%@Pressed.tiff", imageName];
-	NSString * smallNormalImage = [NSString stringWithFormat:@"%@Small.tiff", imageName];
-	NSString * smallPressedImage = [NSString stringWithFormat:@"%@SmallPressed.tiff", imageName];
-	
-	NSImage * buttonImage = [NSImage imageNamed:normalImage];
-	NSSize buttonSize = buttonImage.size;
-	PopupButton * button = [[PopupButton alloc] initWithFrame:NSMakeRect(0, 0, buttonSize.width, buttonSize.height) withItem:self];
-	
-	button.image = buttonImage;
-	button.alternateImage = [NSImage imageNamed:pressedImage];
-	[button setSmallImage:[NSImage imageNamed:smallNormalImage]];
-	[button setSmallAlternateImage:[NSImage imageNamed:smallPressedImage]];
-	
-	[self setView:button];
-	
-	NSMenuItem * menuItem = [[NSMenuItem alloc] init];
-	button.theMenu = theMenu;
-	[button setPopupBelow:YES];
-	menuItem.submenu = button.theMenu;
-	menuItem.title = self.label;
-	self.menuFormRepresentation = menuItem;
-	
-}
 @end

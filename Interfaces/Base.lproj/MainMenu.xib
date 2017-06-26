@@ -1681,21 +1681,6 @@ CA
                 <outlet property="tabView" destination="1218" id="1230"/>
             </connections>
         </customView>
-        <customView id="1267" userLabel="ActionButton">
-            <rect key="frame" x="0.0" y="0.0" width="40" height="28"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <subviews>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1274" customClass="PopupButton">
-                    <rect key="frame" x="0.0" y="0.0" width="40" height="25"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="popupMenuButton.tiff" imagePosition="only" alignment="center" inset="2" id="1371">
-                        <behavior key="behavior" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                </button>
-            </subviews>
-            <point key="canvasLocation" x="-77" y="255"/>
-        </customView>
         <customView id="1288" userLabel="StdEnclosureView" customClass="StdEnclosureView">
             <rect key="frame" x="0.0" y="0.0" width="491" height="49"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
@@ -1783,7 +1768,6 @@ CA
         <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NSShareTemplate" width="11" height="16"/>
         <image name="filter-icon" width="16" height="16"/>
-        <image name="popupMenuButton.tiff" width="128" height="128"/>
         <image name="pressedCloseButton" width="12" height="13"/>
         <image name="smallCloseButton" width="12" height="13"/>
     </resources>

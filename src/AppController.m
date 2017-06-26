@@ -595,10 +595,8 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 		{
 			Preferences * prefs = [Preferences standardPreferences];
 			stylesMenu.submenu = self.stylesMenu;
-			[[self toolbarItemWithIdentifier:@"Styles"] setPopup:@"stylesMenuButton" withMenu:self.stylesMenu];
 			prefs.displayStyle = styleName;
-			if ([prefs.displayStyle isEqualToString:styleName])
-				runOKAlertPanel(NSLocalizedString(@"New style title", nil), NSLocalizedString(@"New style body", nil), styleName);
+            runOKAlertPanel(NSLocalizedString(@"New style title", nil), NSLocalizedString(@"New style body", nil), styleName);
 		}
 		return YES;
 	}

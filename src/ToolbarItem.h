@@ -20,17 +20,8 @@
 
 @import Cocoa;
 
-@interface ToolbarItem : NSToolbarItem {
-}
-
-// Public overrides
--(void)validate;
--(void)setEnabled:(BOOL)enabled;
--(void)setView:(NSView *)theView;
+@interface ToolbarItem : NSToolbarItem
 
 // New functions
--(void)setButtonImage:(NSString *)imageName;
--(void)setButtonImages:(NSImage *)buttonImage pressedImage:(NSImage *)pressedImage smallNormalImage:(NSImage *)smallNormalImage smallPressedImage:(NSImage *)smallPressedImage;
 -(void)compositeButtonImage:(NSString *)imageName fromPath:(NSString *)path;
--(void)setPopup:(NSString *)imageName withMenu:(NSMenu *)theMenu;
 @end
