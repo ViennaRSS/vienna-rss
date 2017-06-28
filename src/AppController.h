@@ -44,7 +44,7 @@
 @class UnifiedDisplayView;
 @class ArticleListView;
 
-@interface AppController : NSObject <NSApplicationDelegate,NSMenuDelegate>
+@interface AppController : NSObject <NSApplicationDelegate>
 {
 	IBOutlet NSSearchField * filterSearchField;
 	IBOutlet BrowserView * browserView;

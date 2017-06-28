@@ -732,7 +732,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 			[cellMenu addItem:item];
 		}
 	} 
-	cellMenu.delegate = self;
 	return cellMenu;
 }
 
