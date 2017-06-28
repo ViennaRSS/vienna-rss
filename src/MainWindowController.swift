@@ -171,10 +171,7 @@ extension MainWindowController: NSToolbarDelegate {
     }
 
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: String, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
-        let toolbarItem = ToolbarItem(itemIdentifier: itemIdentifier)
-        pluginManager?.toolbarItem(toolbarItem, withIdentifier: itemIdentifier)
-
-        return toolbarItem
+        return pluginManager?.toolbarItem(forIdentifier: itemIdentifier)
     }
 
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [String] {

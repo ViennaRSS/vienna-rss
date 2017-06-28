@@ -27,9 +27,8 @@
 #import "BrowserPane.h"
 #import "BitlyAPIHelper.h"
 #import "SearchMethod.h"
-#import "ToolbarButton.h"
-#import "ToolbarItem.h"
 #import "BrowserView.h"
+#import "Vienna-Swift.h"
 
 @implementation PluginManager
 
@@ -230,40 +229,45 @@
 /* toolbarItem
  * Defines handling the label and appearance of all plugin buttons.
  */
--(void)toolbarItem:(ToolbarItem *)item withIdentifier:(NSString *)itemIdentifier
+-(NSToolbarItem *)toolbarItemForIdentifier:(NSString *)itemIdentifier
 {
-	NSDictionary * pluginItem = allPlugins[itemIdentifier];
-	if (pluginItem != nil)
-	{
+    NSDictionary *pluginItem = allPlugins[itemIdentifier];
+    if (pluginItem) {
+        PluginToolbarItem *item = [[PluginToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
 		NSString * friendlyName = pluginItem[@"FriendlyName"];
 		NSString * tooltip = pluginItem[@"Tooltip"];
+        NSString *imagePath = [NSString stringWithFormat:@"%@/%@.tiff", pluginItem[@"Path"], pluginItem[@"ButtonImage"]];
 
 		if (friendlyName == nil)
 			friendlyName = itemIdentifier;
 		if (tooltip == nil)
 			tooltip = friendlyName;
 		
-		item.label = friendlyName;
-		item.paletteLabel = item.label;
-		[item compositeButtonImage:pluginItem[@"ButtonImage"] fromPath:pluginItem[@"Path"]];
-		item.target = self;
-		item.action = @selector(pluginInvocator:);
+        item.label = friendlyName;
+        item.paletteLabel = item.label;
+        item.image = [[NSImage alloc] initByReferencingFile:imagePath];
+        item.target = self;
+        item.action = @selector(pluginInvocator:);
 		item.toolTip = tooltip;
-	}
+
+        return item;
+    } else {
+        return nil;
+    }
 }
 
 /* validateToolbarItem
  * Check [theItem identifier] and return YES if the item is enabled, NO otherwise.
  */
--(BOOL)validateToolbarItem:(ToolbarItem *)toolbarItem
-{	
-	NSView<BaseView> * theView = APPCONTROLLER.browserView.activeTabItemView;
-	Article * thisArticle = APPCONTROLLER.selectedArticle;
-	
-	if ([theView isKindOfClass:[BrowserPane class]])
-		return ((theView.viewLink != nil) && NSApp.active);
-	else
-		return (thisArticle != nil && NSApp.active);
+-(BOOL)validateToolbarItem:(NSToolbarItem *)toolbarItem
+{
+    NSView<BaseView> * theView = APPCONTROLLER.browserView.activeTabItemView;
+    Article * thisArticle = APPCONTROLLER.selectedArticle;
+
+    if ([theView isKindOfClass:[BrowserPane class]])
+        return ((theView.viewLink != nil) && NSApp.active);
+    else
+        return (thisArticle != nil && NSApp.active);
 }
 
 /* pluginInvocator
@@ -273,10 +277,10 @@
 {
 	NSDictionary * pluginItem;
 
-	if ([sender isKindOfClass:[ToolbarButton class]])
-		pluginItem = allPlugins[[sender itemIdentifier]];
-	else
-	{
+    if ([sender isKindOfClass:[ToolbarItemButton class]]) {
+        ToolbarItemButton *button = sender;
+        pluginItem = allPlugins[button.toolbarItem.itemIdentifier];
+    } else {
 		NSMenuItem * menuItem = (NSMenuItem *)sender;
 		pluginItem = menuItem.representedObject;
 	}

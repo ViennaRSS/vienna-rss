@@ -21,7 +21,6 @@
 @import Cocoa;
 
 @class SearchMethod;
-@class ToolbarItem;
 
 @interface PluginManager : NSObject {
 	NSMutableDictionary * allPlugins;
@@ -34,5 +33,5 @@
 @property (readonly, copy, nonatomic) NSArray<NSMenuItem *> *menuItems;
 -(NSArray *)defaultToolbarItems;
 -(void)loadPlugin:(NSString *)pluginPath;
--(void)toolbarItem:(ToolbarItem *)item withIdentifier:(NSString *)itemIdentifier;
+-(NSToolbarItem *)toolbarItemForIdentifier:(NSString *)itemIdentifier;
 @end

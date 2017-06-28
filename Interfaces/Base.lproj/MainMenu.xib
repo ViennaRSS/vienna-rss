@@ -442,7 +442,7 @@
                             </popUpButtonCell>
                         </popUpButton>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="0E560FB8-D8D4-477F-87CE-D3451015D08F" explicitItemIdentifier="PreviousButton" label="Back" paletteLabel="Back" toolTip="Back" image="NSGoLeftTemplate" id="gOG-UJ-Pin">
+                    <toolbarItem implicitItemIdentifier="0E560FB8-D8D4-477F-87CE-D3451015D08F" explicitItemIdentifier="PreviousButton" label="Back" paletteLabel="Back" toolTip="Back" image="NSGoLeftTemplate" id="gOG-UJ-Pin" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="25"/>
                         <size key="maxSize" width="41" height="28"/>
                         <button key="view" verticalHuggingPriority="750" id="tUv-uw-U24">
@@ -457,7 +457,7 @@
                             <action selector="goBack:" target="-1" id="vfV-Zh-Djc"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="B455B425-67E7-44CA-8DDA-7188C9BBFDF7" explicitItemIdentifier="NextButton" label="Next Unread" paletteLabel="Next Unread" toolTip="Next Unread" image="NSGoRightTemplate" id="fpY-CJ-hKU">
+                    <toolbarItem implicitItemIdentifier="B455B425-67E7-44CA-8DDA-7188C9BBFDF7" explicitItemIdentifier="NextButton" label="Next Unread" paletteLabel="Next Unread" toolTip="Next Unread" image="NSGoRightTemplate" id="fpY-CJ-hKU" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="25"/>
                         <size key="maxSize" width="41" height="28"/>
                         <button key="view" verticalHuggingPriority="750" id="DGs-HX-KGa">
@@ -472,7 +472,7 @@
                             <action selector="viewNextUnread:" target="-1" id="bxj-nt-KuQ"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="A62CF72C-0A55-43F3-9737-DAD4E0E93C95" explicitItemIdentifier="SkipFolder" label="Skip Folder" paletteLabel="Skip Folder" toolTip="Skip Folder" image="NSGoRightTemplate" id="SoG-b2-O1S">
+                    <toolbarItem implicitItemIdentifier="A62CF72C-0A55-43F3-9737-DAD4E0E93C95" explicitItemIdentifier="SkipFolder" label="Skip Folder" paletteLabel="Skip Folder" toolTip="Skip Folder" image="NSGoRightTemplate" id="SoG-b2-O1S" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="25"/>
                         <size key="maxSize" width="41" height="28"/>
                         <button key="view" verticalHuggingPriority="750" id="Xbk-bR-TPc">
@@ -487,7 +487,7 @@
                             <action selector="skipFolder:" target="-1" id="9Qr-v5-cZv"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="145A8A8B-193F-46E7-87FD-FE2B915C1B08" explicitItemIdentifier="Refresh" label="Refresh" paletteLabel="Refresh" toolTip="Refresh all your subscriptions" image="NSRefreshTemplate" id="Nmd-zx-Dys">
+                    <toolbarItem implicitItemIdentifier="145A8A8B-193F-46E7-87FD-FE2B915C1B08" explicitItemIdentifier="Refresh" label="Refresh" paletteLabel="Refresh" toolTip="Refresh all your subscriptions" image="NSRefreshTemplate" id="Nmd-zx-Dys" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="25"/>
                         <size key="maxSize" width="41" height="28"/>
                         <button key="view" verticalHuggingPriority="750" id="PJJ-4H-4dE">
@@ -502,7 +502,7 @@
                             <action selector="refreshAllSubscriptions:" target="-1" id="SRS-ST-tVf"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="006BC31E-0D67-4BDB-95C0-FA6220913D81" explicitItemIdentifier="MailLink" label="Send Link" paletteLabel="Send Link" toolTip="Email a link to the current article or website" image="NSShareTemplate" id="10h-xf-C6T">
+                    <toolbarItem implicitItemIdentifier="006BC31E-0D67-4BDB-95C0-FA6220913D81" explicitItemIdentifier="MailLink" label="Send Link" paletteLabel="Send Link" toolTip="Email a link to the current article or website" image="NSShareTemplate" id="10h-xf-C6T" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="25"/>
                         <size key="maxSize" width="41" height="28"/>
                         <button key="view" verticalHuggingPriority="750" id="EJA-2q-HQu">
@@ -517,7 +517,7 @@
                             <action selector="mailLinkToArticlePage:" target="-1" id="1ff-ox-Afg"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="1B4A5BDF-4844-487B-A764-D611A54922F0" explicitItemIdentifier="EmptyTrash" label="Empty Trash" paletteLabel="Empty Trash" toolTip="Delete all articles in the trash" image="NSActionTemplate" id="4c1-NR-ofo">
+                    <toolbarItem implicitItemIdentifier="1B4A5BDF-4844-487B-A764-D611A54922F0" explicitItemIdentifier="EmptyTrash" label="Empty Trash" paletteLabel="Empty Trash" toolTip="Delete all articles in the trash" image="NSActionTemplate" id="4c1-NR-ofo" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="25"/>
                         <size key="maxSize" width="41" height="28"/>
                         <button key="view" verticalHuggingPriority="750" id="b4P-2h-b0r">
@@ -532,7 +532,7 @@
                             <action selector="emptyTrash:" target="-1" id="LGn-HP-E1Z"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="3645E290-4147-4201-8018-6E3A685BE640" explicitItemIdentifier="GetInfo" label="Get Info" paletteLabel="Get Info" toolTip="See information about the selected subscription" image="NSQuickLookTemplate" id="7iy-IN-8oG">
+                    <toolbarItem implicitItemIdentifier="3645E290-4147-4201-8018-6E3A685BE640" explicitItemIdentifier="GetInfo" label="Get Info" paletteLabel="Get Info" toolTip="See information about the selected subscription" image="NSQuickLookTemplate" id="7iy-IN-8oG" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="25"/>
                         <size key="maxSize" width="41" height="28"/>
                         <button key="view" verticalHuggingPriority="750" id="dU4-uo-rcp">

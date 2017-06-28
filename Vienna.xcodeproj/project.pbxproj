@@ -259,10 +259,8 @@
 		AA5833F60C4A6A07003D0916 /* previousButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5833F20C4A6A07003D0916 /* previousButtonPressed.tiff */; };
 		AA58FB9D0C47B703003D0916 /* cancelRefreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA58FB9B0C47B703003D0916 /* cancelRefreshButton.tiff */; };
 		AA58FB9E0C47B703003D0916 /* cancelRefreshButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA58FB9C0C47B703003D0916 /* cancelRefreshButtonPressed.tiff */; };
-		AA5AA8000C3C0D7D00B2E14F /* ToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5AA7FE0C3C0D7D00B2E14F /* ToolbarButton.m */; };
 		AA5AA8910C3C1D2700B2E14F /* emptyTrashButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5AA8900C3C1D2700B2E14F /* emptyTrashButtonPressed.tiff */; };
 		AA5AAB8A0C3C679E00B2E14F /* smartFolderButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5AAB890C3C679E00B2E14F /* smartFolderButtonPressed.tiff */; };
-		AA5AB4C80C3D511700B2E14F /* ToolbarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5AB4C60C3D511700B2E14F /* ToolbarItem.m */; };
 		AA5AB60B0C3D6D0100B2E14F /* mailLinkButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5AB60A0C3D6D0100B2E14F /* mailLinkButtonPressed.tiff */; };
 		AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA60237F08C298FB002CFD06 /* HelperFunctions.m */; };
 		AA6321510885F0BB006382D3 /* comments.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA6321500885F0BB006382D3 /* comments.tiff */; };
@@ -325,6 +323,8 @@
 		EACE4C90147FA2B000A17997 /* PSMTabBarControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */; };
 		F6094E331F10107800677D3B /* ExportAccessoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6094E311F10107800677D3B /* ExportAccessoryViewController.swift */; };
 		F6164C591E32A6660086261C /* DisclosureView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6164C581E32A6660086261C /* DisclosureView.m */; };
+		F61CEA661F039E57009C878E /* ButtonToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61CEA651F039E56009C878E /* ButtonToolbarItem.swift */; };
+		F61CEA681F03F277009C878E /* PluginToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61CEA671F03F277009C878E /* PluginToolbarItem.swift */; };
 		F6257FF51E28485F0035E43C /* Downloads.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6257FF71E28485F0035E43C /* Downloads.xib */; };
 		F625801C1E2853B90035E43C /* ActivityViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625801E1E2853B90035E43C /* ActivityViewer.xib */; };
 		F62580AA1E286A8C0035E43C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F62580A81E286A8B0035E43C /* Localizable.strings */; };
@@ -343,6 +343,7 @@
 		F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */; };
 		F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = F69140E31E71B94200D51BFF /* AppController+Notifications.m */; };
 		F69964F71F13029600FC8493 /* OverlayStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69964F61F13029500FC8493 /* OverlayStatusBar.swift */; };
+		F6A4E8481F040D58001C9191 /* ToolbarItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4E8471F040D58001C9191 /* ToolbarItemButton.swift */; };
 		F6A7DE341E47138B0017BE5E /* advanced.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2A1E47138B0017BE5E /* advanced.html */; };
 		F6A7DE351E47138B0017BE5E /* faq.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2C1E47138B0017BE5E /* faq.html */; };
 		F6A7DE361E47138B0017BE5E /* intro.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2E1E47138B0017BE5E /* intro.html */; };
@@ -728,12 +729,8 @@
 		AA5833F20C4A6A07003D0916 /* previousButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = previousButtonPressed.tiff; path = Resources/previousButtonPressed.tiff; sourceTree = SOURCE_ROOT; };
 		AA58FB9B0C47B703003D0916 /* cancelRefreshButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = cancelRefreshButton.tiff; path = Resources/cancelRefreshButton.tiff; sourceTree = SOURCE_ROOT; };
 		AA58FB9C0C47B703003D0916 /* cancelRefreshButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = cancelRefreshButtonPressed.tiff; path = Resources/cancelRefreshButtonPressed.tiff; sourceTree = SOURCE_ROOT; };
-		AA5AA7FD0C3C0D7D00B2E14F /* ToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToolbarButton.h; path = src/ToolbarButton.h; sourceTree = SOURCE_ROOT; };
-		AA5AA7FE0C3C0D7D00B2E14F /* ToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ToolbarButton.m; path = src/ToolbarButton.m; sourceTree = SOURCE_ROOT; };
 		AA5AA8900C3C1D2700B2E14F /* emptyTrashButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = emptyTrashButtonPressed.tiff; path = Resources/emptyTrashButtonPressed.tiff; sourceTree = SOURCE_ROOT; };
 		AA5AAB890C3C679E00B2E14F /* smartFolderButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = smartFolderButtonPressed.tiff; path = Resources/smartFolderButtonPressed.tiff; sourceTree = SOURCE_ROOT; };
-		AA5AB4C50C3D511700B2E14F /* ToolbarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToolbarItem.h; path = src/ToolbarItem.h; sourceTree = SOURCE_ROOT; };
-		AA5AB4C60C3D511700B2E14F /* ToolbarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ToolbarItem.m; path = src/ToolbarItem.m; sourceTree = SOURCE_ROOT; };
 		AA5AB60A0C3D6D0100B2E14F /* mailLinkButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = mailLinkButtonPressed.tiff; path = Resources/mailLinkButtonPressed.tiff; sourceTree = SOURCE_ROOT; };
 		AA60237E08C298FB002CFD06 /* HelperFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = HelperFunctions.h; path = src/HelperFunctions.h; sourceTree = SOURCE_ROOT; };
 		AA60237F08C298FB002CFD06 /* HelperFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = HelperFunctions.m; path = src/HelperFunctions.m; sourceTree = SOURCE_ROOT; };
@@ -813,6 +810,8 @@
 		F6094E311F10107800677D3B /* ExportAccessoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExportAccessoryViewController.swift; path = src/ExportAccessoryViewController.swift; sourceTree = "<group>"; };
 		F6164C571E32A6660086261C /* DisclosureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisclosureView.h; path = src/DisclosureView.h; sourceTree = "<group>"; };
 		F6164C581E32A6660086261C /* DisclosureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisclosureView.m; path = src/DisclosureView.m; sourceTree = "<group>"; };
+		F61CEA651F039E56009C878E /* ButtonToolbarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonToolbarItem.swift; path = src/ButtonToolbarItem.swift; sourceTree = "<group>"; };
+		F61CEA671F03F277009C878E /* PluginToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PluginToolbarItem.swift; path = src/PluginToolbarItem.swift; sourceTree = "<group>"; };
 		F6257FE31E283F250035E43C /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/SyncingPreferencesView.strings; sourceTree = "<group>"; };
 		F6257FE41E283F2A0035E43C /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/SyncingPreferencesView.strings; sourceTree = "<group>"; };
 		F6257FE51E283F2D0035E43C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/SyncingPreferencesView.strings; sourceTree = "<group>"; };
@@ -1027,6 +1026,7 @@
 		F69140FD1E71D74600D51BFF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		F69140FE1E71D74800D51BFF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		F69964F61F13029500FC8493 /* OverlayStatusBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OverlayStatusBar.swift; path = src/OverlayStatusBar.swift; sourceTree = "<group>"; };
+		F6A4E8471F040D58001C9191 /* ToolbarItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ToolbarItemButton.swift; path = src/ToolbarItemButton.swift; sourceTree = "<group>"; };
 		F6A7DDCA1E470E980017BE5E /* Vienna.help */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Vienna.help; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6A7DDCC1E470E980017BE5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6A7DE2B1E47138B0017BE5E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Resources/en.lproj/advanced.html; sourceTree = "<group>"; };
@@ -1736,12 +1736,11 @@
 		AA5AABB50C3CD68A00B2E14F /* Toolbar */ = {
 			isa = PBXGroup;
 			children = (
+				F61CEA671F03F277009C878E /* PluginToolbarItem.swift */,
+				F61CEA651F039E56009C878E /* ButtonToolbarItem.swift */,
+				F6A4E8471F040D58001C9191 /* ToolbarItemButton.swift */,
 				34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */,
 				34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */,
-				AA5AA7FD0C3C0D7D00B2E14F /* ToolbarButton.h */,
-				AA5AA7FE0C3C0D7D00B2E14F /* ToolbarButton.m */,
-				AA5AB4C50C3D511700B2E14F /* ToolbarItem.h */,
-				AA5AB4C60C3D511700B2E14F /* ToolbarItem.m */,
 			);
 			name = Toolbar;
 			sourceTree = SOURCE_ROOT;
@@ -2675,9 +2674,7 @@
 				AA71168F09BEB17300E3EA8A /* AddressBarCell.m in Sources */,
 				0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */,
 				34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */,
-				AA5AA8000C3C0D7D00B2E14F /* ToolbarButton.m in Sources */,
 				F63833D81EF842EA00E07213 /* MainWindowController.swift in Sources */,
-				AA5AB4C80C3D511700B2E14F /* ToolbarItem.m in Sources */,
 				B27CD04F1100F408001F3C83 /* BitlyAPIHelper.m in Sources */,
 				664F87C713C62DFE00E266DE /* OpenReader.m in Sources */,
 				EA43C70914A370DB00F2D843 /* VTPG_Common.m in Sources */,
@@ -2693,6 +2690,7 @@
 				4350289A165DE9E00018EDB7 /* ArticleListView.m in Sources */,
 				4350289B165DE9E00018EDB7 /* ArticleView.m in Sources */,
 				4350289C165DE9E00018EDB7 /* BrowserPane.m in Sources */,
+				F61CEA661F039E57009C878E /* ButtonToolbarItem.swift in Sources */,
 				4350289D165DE9E00018EDB7 /* BrowserPaneTemplate.m in Sources */,
 				F6094E331F10107800677D3B /* ExportAccessoryViewController.swift in Sources */,
 				F6EB261C1E5BA59300570B22 /* PreferencesWindowController.m in Sources */,
@@ -2713,6 +2711,7 @@
 				435028A9165DE9E00018EDB7 /* InfoPanelController.m in Sources */,
 				435028AA165DE9E00018EDB7 /* MessageListView.m in Sources */,
 				435028AB165DE9E00018EDB7 /* NewGroupFolder.m in Sources */,
+				F6A4E8481F040D58001C9191 /* ToolbarItemButton.swift in Sources */,
 				435028AC165DE9E00018EDB7 /* NewSubscription.m in Sources */,
 				03B7522A1B741AFD00FD3FDB /* FeedItem.m in Sources */,
 				F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */,
@@ -2731,6 +2730,7 @@
 				435028B7165DE9E00018EDB7 /* UnifiedDisplayView.m in Sources */,
 				435028B8165DE9E00018EDB7 /* URLHandlerCommand.m in Sources */,
 				435028B9165DE9E00018EDB7 /* ViennaApp.m in Sources */,
+				F61CEA681F03F277009C878E /* PluginToolbarItem.swift in Sources */,
 				3A7BD0DD1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m in Sources */,
 				43BA97FE1664804E00B95F35 /* DSClickableURLTextField.m in Sources */,
 				F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */,

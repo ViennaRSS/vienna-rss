@@ -38,7 +38,6 @@
 #import "InfoPanelManager.h"
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
-#import "ToolbarItem.h"
 #import "DisclosureView.h"
 #import "SearchPanel.h"
 #import "SearchMethod.h"
@@ -99,7 +98,6 @@
 -(void)updateCloseCommands;
 @property (nonatomic, getter=isFilterBarVisible, readonly) BOOL filterBarVisible;
 @property (nonatomic, readonly, strong) NSTimer *checkTimer;
--(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
 -(IBAction)cancelAllRefreshesToolbar:(id)sender;
 
 @property (nonatomic) IBOutlet MainWindowController *mainWindowController;
@@ -2062,7 +2060,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[[Preferences standardPreferences] setObject:[NSDate date] forKey:MAPref_LastRefreshDate];
 		
 		// Toggle the refresh button
-		ToolbarItem * item = [self toolbarItemWithIdentifier:@"Refresh"];
+		NSToolbarItem *item = [self toolbarItemWithIdentifier:@"Refresh"];
 		item.action = @selector(cancelAllRefreshesToolbar:);
         // TODO: Swap the images
 //      [item setButtonImage:@"cancelRefreshButton"];
@@ -2074,7 +2072,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[db purgeArticlesOlderThanDays:prefs.autoExpireDuration];
 
 		// Toggle the refresh button
-		ToolbarItem * item = [self toolbarItemWithIdentifier:@"Refresh"];
+		NSToolbarItem *item = [self toolbarItemWithIdentifier:@"Refresh"];
 		item.action = @selector(refreshAllSubscriptions:);
         // TODO: Swap the images
 //      [item setButtonImage:@"refreshButton"];
@@ -2392,9 +2390,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 /* toolbarItemWithIdentifier
  * Returns the toolbar button that corresponds to the specified identifier.
  */
--(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier
+-(NSToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier
 {
-	for (ToolbarItem * theItem in self.mainWindow.toolbar.visibleItems)
+	for (NSToolbarItem * theItem in self.mainWindow.toolbar.visibleItems)
 	{
 		if ([theItem.itemIdentifier isEqualToString:theIdentifier])
 			return theItem;
@@ -3511,7 +3509,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	if (theAction == @selector(goBack:))
 	{
-		*validateFlag = browserView.activeTabItemView.canGoBack && isMainWindowVisible;
+        // TODO: Make this work without the protocol check.
+        if ([browserView.activeTabItemView conformsToProtocol:@protocol(BaseView)]) {
+            *validateFlag = browserView.activeTabItemView.canGoBack && isMainWindowVisible;
+        } else {
+            *validateFlag = NO;
+        }
 		return YES;
 	}
 	if (theAction == @selector(mailLinkToArticlePage:))
@@ -3540,7 +3543,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 /* validateToolbarItem
  * Check [theItem identifier] and return YES if the item is enabled, NO otherwise.
  */
--(BOOL)validateToolbarItem:(ToolbarItem *)toolbarItem
+-(BOOL)validateToolbarItem:(NSToolbarItem *)toolbarItem
 {
 	BOOL flag;
 	[self validateCommonToolbarAndMenuItems:toolbarItem.action validateFlag:&flag];

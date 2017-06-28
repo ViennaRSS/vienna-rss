@@ -4,5 +4,4 @@
 #import "PluginManager.h"
 #import "Preferences.h"
 #import "RefreshManager.h"
-#import "ToolbarItem.h"
 #import "ViennaApp.h"
