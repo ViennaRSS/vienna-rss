@@ -87,7 +87,6 @@
 		3A7BD0DD1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */; };
 		3AEE7DE91695FC570018A17D /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* vienna_public_key.pem */; };
 		3AF896C71CD8FDB800A9FA22 /* ViennaSparkleDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF896C61CD8FDB800A9FA22 /* ViennaSparkleDelegate.m */; };
-		3AFF601819A07F5A0036DBA4 /* BJRWindowWithToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF601619A07F5A0036DBA4 /* BJRWindowWithToolbar.m */; };
 		43501F8F165DC5BC0018EDB7 /* PSMTabBarControl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 435026E5165DD8BE0018EDB7 /* ArticleRef.m */; };
 		4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */; };
@@ -407,8 +406,6 @@
 		3AEE7DE81695FC570018A17D /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = vienna_public_key.pem; path = signing/vienna_public_key.pem; sourceTree = "<group>"; };
 		3AF896C51CD8FDB800A9FA22 /* ViennaSparkleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViennaSparkleDelegate.h; path = src/ViennaSparkleDelegate.h; sourceTree = "<group>"; };
 		3AF896C61CD8FDB800A9FA22 /* ViennaSparkleDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViennaSparkleDelegate.m; path = src/ViennaSparkleDelegate.m; sourceTree = "<group>"; };
-		3AFF601619A07F5A0036DBA4 /* BJRWindowWithToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BJRWindowWithToolbar.m; path = src/BJRWindowWithToolbar.m; sourceTree = "<group>"; };
-		3AFF601719A07F5A0036DBA4 /* BJRWindowWithToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BJRWindowWithToolbar.h; path = src/BJRWindowWithToolbar.h; sourceTree = "<group>"; };
 		430C4ADB1661753F0079C9FC /* autorevision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = autorevision.h; path = src/autorevision.h; sourceTree = SOURCE_ROOT; };
 		430C4AE0166175C20079C9FC /* Vienna-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Vienna-Info.plist"; path = "Resources/Vienna-Info.plist"; sourceTree = SOURCE_ROOT; };
 		430C4B001661F3270079C9FC /* CS-ID.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "CS-ID.xcconfig"; path = "configs/CS-ID.xcconfig"; sourceTree = SOURCE_ROOT; };
@@ -1583,8 +1580,6 @@
 			isa = PBXGroup;
 			children = (
 				F63833D71EF842EA00E07213 /* MainWindowController.swift */,
-				3AFF601719A07F5A0036DBA4 /* BJRWindowWithToolbar.h */,
-				3AFF601619A07F5A0036DBA4 /* BJRWindowWithToolbar.m */,
 				AA5AABB50C3CD68A00B2E14F /* Toolbar */,
 				F62EC6BA1EF93610005EE8E5 /* Folder list */,
 				F6F44F0F1EF92D2500E6F1B4 /* Tab bar */,
@@ -2325,7 +2320,6 @@
 				F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */,
 				435028AD165DE9E00018EDB7 /* PluginManager.m in Sources */,
 				435028AE165DE9E00018EDB7 /* ProgressTextCell.m in Sources */,
-				3AFF601819A07F5A0036DBA4 /* BJRWindowWithToolbar.m in Sources */,
 				793C95331C42A0DD00984D4E /* FoldersFilterable.m in Sources */,
 				435028AF165DE9E00018EDB7 /* RefreshManager.m in Sources */,
 				435028B0165DE9E00018EDB7 /* SearchFolder.m in Sources */,

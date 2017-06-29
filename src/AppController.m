@@ -46,7 +46,6 @@
 #import "VTPG_Common.h"
 #import "Debug.h"
 #import "Database.h"
-#import "BJRWindowWithToolbar.h"
 #import "NSURL+Utils.h"
 #import "PreferencesWindowController.h"
 #import "PluginManager.h"
