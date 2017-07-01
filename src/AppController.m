@@ -2060,8 +2060,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		// Toggle the refresh button
 		NSToolbarItem *item = [self toolbarItemWithIdentifier:@"Refresh"];
 		item.action = @selector(cancelAllRefreshesToolbar:);
-        // TODO: Swap the images
-//      [item setButtonImage:@"cancelRefreshButton"];
+        item.image = [NSImage imageNamed:@"CancelTemplate"];
 	}
 	else
 	{
@@ -2072,8 +2071,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		// Toggle the refresh button
 		NSToolbarItem *item = [self toolbarItemWithIdentifier:@"Refresh"];
 		item.action = @selector(refreshAllSubscriptions:);
-        // TODO: Swap the images
-//      [item setButtonImage:@"refreshButton"];
+        item.image = [NSImage imageNamed:@"SyncTemplate"];
 
 		[self showUnreadCountOnApplicationIconAndWindowTitle];
 		

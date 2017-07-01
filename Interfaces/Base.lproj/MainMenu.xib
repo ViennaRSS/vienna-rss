@@ -408,18 +408,18 @@
             </view>
             <toolbar key="toolbar" implicitIdentifier="9BE5691C-FD10-407B-A43E-74580FF42F4B" explicitIdentifier="MA_Toolbar" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="Vtx-1j-Pbt">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="3B81A7E6-BC01-4E5D-8598-E3749E1C39BF" explicitItemIdentifier="Subscribe" label="Add" paletteLabel="Add" toolTip="Subscribe to a feed or add a folder or smart folder." image="NSAddTemplate" id="CPA-Ha-aj1" userLabel="Add">
+                    <toolbarItem implicitItemIdentifier="3B81A7E6-BC01-4E5D-8598-E3749E1C39BF" explicitItemIdentifier="Subscribe" label="Add" paletteLabel="Add" toolTip="Subscribe to a feed or add a folder or smart folder." image="NewFeedTemplate" id="CPA-Ha-aj1" userLabel="Add">
                         <size key="minSize" width="41" height="28"/>
                         <size key="maxSize" width="41" height="28"/>
                         <popUpButton key="view" verticalHuggingPriority="750" id="DDQ-PY-F2c">
                             <rect key="frame" x="0.0" y="14" width="41" height="28"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="pdk-MS-QME" id="xAh-aB-Ek3">
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NewFeedTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="pdk-MS-QME" id="xAh-aB-Ek3">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" id="tQg-b5-Yiu">
                                     <items>
-                                        <menuItem state="on" image="NSAddTemplate" hidden="YES" id="pdk-MS-QME"/>
+                                        <menuItem state="on" image="NewFeedTemplate" hidden="YES" id="pdk-MS-QME"/>
                                         <menuItem title="New Subscription…" id="psA-wp-PcZ">
                                             <connections>
                                                 <action selector="newSubscription:" target="-1" id="ZrW-KY-2C0"/>
@@ -442,13 +442,13 @@
                             </popUpButtonCell>
                         </popUpButton>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="0E560FB8-D8D4-477F-87CE-D3451015D08F" explicitItemIdentifier="PreviousButton" label="Back" paletteLabel="Back" toolTip="Back" image="NSGoLeftTemplate" id="gOG-UJ-Pin" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="0E560FB8-D8D4-477F-87CE-D3451015D08F" explicitItemIdentifier="PreviousButton" label="Back" paletteLabel="Back" toolTip="Back" image="PreviousItemTemplate" id="gOG-UJ-Pin" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="25"/>
                         <size key="maxSize" width="41" height="28"/>
                         <button key="view" verticalHuggingPriority="750" id="tUv-uw-U24">
                             <rect key="frame" x="0.0" y="14" width="41" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSGoLeftTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="waE-VF-jGb">
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="PreviousItemTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="waE-VF-jGb">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -457,13 +457,13 @@
                             <action selector="goBack:" target="-1" id="vfV-Zh-Djc"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="B455B425-67E7-44CA-8DDA-7188C9BBFDF7" explicitItemIdentifier="NextButton" label="Next Unread" paletteLabel="Next Unread" toolTip="Next Unread" image="NSGoRightTemplate" id="fpY-CJ-hKU" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="B455B425-67E7-44CA-8DDA-7188C9BBFDF7" explicitItemIdentifier="NextButton" label="Next Unread" paletteLabel="Next Unread" toolTip="Next Unread" image="NextItemTemplate" id="fpY-CJ-hKU" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="25"/>
                         <size key="maxSize" width="41" height="28"/>
                         <button key="view" verticalHuggingPriority="750" id="DGs-HX-KGa">
                             <rect key="frame" x="16" y="14" width="41" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSGoRightTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UUm-Eq-K34">
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NextItemTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UUm-Eq-K34">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -472,13 +472,13 @@
                             <action selector="viewNextUnread:" target="-1" id="bxj-nt-KuQ"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="A62CF72C-0A55-43F3-9737-DAD4E0E93C95" explicitItemIdentifier="SkipFolder" label="Skip Folder" paletteLabel="Skip Folder" toolTip="Skip Folder" image="NSGoRightTemplate" id="SoG-b2-O1S" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="A62CF72C-0A55-43F3-9737-DAD4E0E93C95" explicitItemIdentifier="SkipFolder" label="Skip Folder" paletteLabel="Skip Folder" toolTip="Skip Folder" image="NextFolderTemplate" id="SoG-b2-O1S" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="25"/>
                         <size key="maxSize" width="41" height="28"/>
                         <button key="view" verticalHuggingPriority="750" id="Xbk-bR-TPc">
                             <rect key="frame" x="13" y="14" width="41" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSGoRightTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0ub-7J-fFz">
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NextFolderTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0ub-7J-fFz">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -487,13 +487,13 @@
                             <action selector="skipFolder:" target="-1" id="9Qr-v5-cZv"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="145A8A8B-193F-46E7-87FD-FE2B915C1B08" explicitItemIdentifier="Refresh" label="Refresh" paletteLabel="Refresh" toolTip="Refresh all your subscriptions" image="NSRefreshTemplate" id="Nmd-zx-Dys" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="145A8A8B-193F-46E7-87FD-FE2B915C1B08" explicitItemIdentifier="Refresh" label="Refresh" paletteLabel="Refresh" toolTip="Refresh all your subscriptions" image="SyncTemplate" id="Nmd-zx-Dys" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="25"/>
                         <size key="maxSize" width="41" height="28"/>
                         <button key="view" verticalHuggingPriority="750" id="PJJ-4H-4dE">
                             <rect key="frame" x="4" y="14" width="41" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="F19-ww-YfI">
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="SyncTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="F19-ww-YfI">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -502,13 +502,13 @@
                             <action selector="refreshAllSubscriptions:" target="-1" id="SRS-ST-tVf"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="006BC31E-0D67-4BDB-95C0-FA6220913D81" explicitItemIdentifier="MailLink" label="Send Link" paletteLabel="Send Link" toolTip="Email a link to the current article or website" image="NSShareTemplate" id="10h-xf-C6T" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="006BC31E-0D67-4BDB-95C0-FA6220913D81" explicitItemIdentifier="MailLink" label="Send Link" paletteLabel="Send Link" toolTip="Email a link to the current article or website" image="MailTemplate" id="10h-xf-C6T" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="25"/>
                         <size key="maxSize" width="41" height="28"/>
                         <button key="view" verticalHuggingPriority="750" id="EJA-2q-HQu">
                             <rect key="frame" x="9" y="14" width="41" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8Cf-Qg-5OD">
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="MailTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8Cf-Qg-5OD">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -517,13 +517,13 @@
                             <action selector="mailLinkToArticlePage:" target="-1" id="1ff-ox-Afg"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="1B4A5BDF-4844-487B-A764-D611A54922F0" explicitItemIdentifier="EmptyTrash" label="Empty Trash" paletteLabel="Empty Trash" toolTip="Delete all articles in the trash" image="NSActionTemplate" id="4c1-NR-ofo" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="1B4A5BDF-4844-487B-A764-D611A54922F0" explicitItemIdentifier="EmptyTrash" label="Empty Trash" paletteLabel="Empty Trash" toolTip="Delete all articles in the trash" image="EmptyTrashTemplate" id="4c1-NR-ofo" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="25"/>
                         <size key="maxSize" width="41" height="28"/>
                         <button key="view" verticalHuggingPriority="750" id="b4P-2h-b0r">
                             <rect key="frame" x="16" y="14" width="41" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSActionTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kxj-5W-a2Z">
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="EmptyTrashTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kxj-5W-a2Z">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -532,13 +532,13 @@
                             <action selector="emptyTrash:" target="-1" id="LGn-HP-E1Z"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="3645E290-4147-4201-8018-6E3A685BE640" explicitItemIdentifier="GetInfo" label="Get Info" paletteLabel="Get Info" toolTip="See information about the selected subscription" image="NSQuickLookTemplate" id="7iy-IN-8oG" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="3645E290-4147-4201-8018-6E3A685BE640" explicitItemIdentifier="GetInfo" label="Get Info" paletteLabel="Get Info" toolTip="See information about the selected subscription" image="GetInfoTemplate" id="7iy-IN-8oG" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="25"/>
                         <size key="maxSize" width="41" height="28"/>
                         <button key="view" verticalHuggingPriority="750" id="dU4-uo-rcp">
                             <rect key="frame" x="4" y="14" width="41" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSQuickLookTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1Lf-O5-dn9">
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="GetInfoTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1Lf-O5-dn9">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -618,7 +618,7 @@
                             </popUpButtonCell>
                         </popUpButton>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="3C962AB1-0C7E-4CBA-8477-2436ED2B6383" explicitItemIdentifier="Styles" label="Style" paletteLabel="Style" toolTip="Display the list of available styles" image="NSBookmarksTemplate" id="azL-oz-mJL">
+                    <toolbarItem implicitItemIdentifier="3C962AB1-0C7E-4CBA-8477-2436ED2B6383" explicitItemIdentifier="Styles" label="Style" paletteLabel="Style" toolTip="Display the list of available styles" image="StyleTemplate" id="azL-oz-mJL">
                         <size key="minSize" width="41" height="28"/>
                         <size key="maxSize" width="41" height="28"/>
                         <popUpButton key="view" verticalHuggingPriority="750" id="gOd-tT-XFQ">
@@ -629,7 +629,7 @@
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" id="mit-Vi-iR1">
                                     <items>
-                                        <menuItem state="on" image="NSBookmarksTemplate" hidden="YES" id="lu2-BZ-Gxd"/>
+                                        <menuItem state="on" image="StyleTemplate" hidden="YES" id="lu2-BZ-Gxd"/>
                                         <menuItem isSeparatorItem="YES" id="Bld-FV-QeM"/>
                                         <menuItem title="More Styles…" id="MaO-r1-tcm">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -1759,14 +1759,16 @@ CA
         <userDefaultsController representsSharedInstance="YES" id="fAX-Jg-YQ6"/>
     </objects>
     <resources>
+        <image name="EmptyTrashTemplate" width="19" height="14"/>
+        <image name="GetInfoTemplate" width="7" height="14"/>
+        <image name="MailTemplate" width="17" height="12"/>
         <image name="NSActionTemplate" width="14" height="14"/>
-        <image name="NSAddTemplate" width="11" height="11"/>
-        <image name="NSBookmarksTemplate" width="17" height="18"/>
-        <image name="NSGoLeftTemplate" width="9" height="12"/>
-        <image name="NSGoRightTemplate" width="9" height="12"/>
-        <image name="NSQuickLookTemplate" width="19" height="12"/>
-        <image name="NSRefreshTemplate" width="11" height="15"/>
-        <image name="NSShareTemplate" width="11" height="16"/>
+        <image name="NewFeedTemplate" width="19" height="12"/>
+        <image name="NextFolderTemplate" width="19" height="12"/>
+        <image name="NextItemTemplate" width="18" height="12"/>
+        <image name="PreviousItemTemplate" width="18" height="12"/>
+        <image name="StyleTemplate" width="15" height="15"/>
+        <image name="SyncTemplate" width="19" height="12"/>
         <image name="filter-icon" width="16" height="16"/>
         <image name="pressedCloseButton" width="12" height="13"/>
         <image name="smallCloseButton" width="12" height="13"/>
