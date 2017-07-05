@@ -361,7 +361,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="showHideFilterBar:" target="233" id="1402"/>
+                                            <action selector="showHideFilterBar:" target="-1" id="LjF-v8-BMB"/>
                                         </connections>
                                     </button>
                                     <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="1403">
@@ -714,13 +714,13 @@ CA
 </string>
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
-                                    <action selector="emptyTrash:" target="233" id="1131"/>
+                                    <action selector="emptyTrash:" target="-1" id="6vz-wL-kIn"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Reindex Database" id="1458">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="reindexDatabase:" target="233" id="1459"/>
+                                    <action selector="reindexDatabase:" target="-1" id="BWa-1g-krh"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="962">
@@ -734,18 +734,18 @@ CA
                             </menuItem>
                             <menuItem title="Hide Vienna" keyEquivalent="h" id="134">
                                 <connections>
-                                    <action selector="hide:" target="-2" id="152"/>
+                                    <action selector="hide:" target="-1" id="eb5-m4-c32"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Hide Others" keyEquivalent="h" id="145">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
-                                    <action selector="hideOtherApplications:" target="-2" id="146"/>
+                                    <action selector="hideOtherApplications:" target="-1" id="85P-Uo-2DR"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Show All" id="150">
                                 <connections>
-                                    <action selector="unhideAllApplications:" target="-2" id="153"/>
+                                    <action selector="unhideAllApplications:" target="-1" id="EHd-yF-Sbp"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="149">
@@ -764,18 +764,18 @@ CA
                         <items>
                             <menuItem title="New Subscription…" keyEquivalent="n" id="690">
                                 <connections>
-                                    <action selector="newSubscription:" target="233" id="693"/>
+                                    <action selector="newSubscription:" target="-1" id="2Aj-my-VDX"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="New Smart Folder…" keyEquivalent="F" id="574">
                                 <connections>
-                                    <action selector="newSmartFolder:" target="233" id="580"/>
+                                    <action selector="newSmartFolder:" target="-1" id="04V-YH-B4i"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="New Group Folder…" id="806">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="newGroupFolder:" target="233" id="824"/>
+                                    <action selector="newGroupFolder:" target="-1" id="daB-kl-f5f"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="576">
@@ -783,12 +783,12 @@ CA
                             </menuItem>
                             <menuItem title="Open Web Location…" keyEquivalent="l" id="1101">
                                 <connections>
-                                    <action selector="openWebLocation:" target="233" id="1103"/>
+                                    <action selector="openWebLocation:" target="-1" id="c2j-R2-mtx"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Open New Tab" keyEquivalent="t" id="1214">
                                 <connections>
-                                    <action selector="newTab:" target="233" id="1215"/>
+                                    <action selector="newTab:" target="-1" id="joQ-qq-nUH"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="1102">
@@ -803,13 +803,13 @@ CA
                             <menuItem title="Close Tab" id="1023">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="closeTab:" target="233" id="1024"/>
+                                    <action selector="closeTab:" target="-1" id="UQG-Ie-lZB"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Close All Tabs" alternate="YES" id="1036">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
-                                    <action selector="closeAllTabs:" target="233" id="1037"/>
+                                    <action selector="closeAllTabs:" target="-1" id="Qet-88-kSV"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="289">
@@ -817,35 +817,35 @@ CA
                             </menuItem>
                             <menuItem title="Refresh All Subscriptions" keyEquivalent="r" id="406">
                                 <connections>
-                                    <action selector="refreshAllSubscriptions:" target="233" id="412"/>
+                                    <action selector="refreshAllSubscriptions:" target="-1" id="j9p-gU-Bnc"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Refresh Selected Subscriptions" keyEquivalent="R" id="604">
                                 <connections>
-                                    <action selector="refreshSelectedSubscriptions:" target="233" id="795"/>
+                                    <action selector="refreshSelectedSubscriptions:" target="-1" id="Dc1-Tn-u3l"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Force Refresh Selected Subscriptions From Open Reader" id="1425">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="forceRefreshSelectedSubscriptions:" target="233" id="1427"/>
+                                    <action selector="forceRefreshSelectedSubscriptions:" target="-1" id="uTz-IA-FY8"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Update Subscriptions From Open Reader" id="1428">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="updateRemoteSubscriptions:" target="233" id="1430"/>
+                                    <action selector="updateRemoteSubscriptions:" target="-1" id="BUW-wI-SxZ"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Refresh Folder Images" id="1106">
                                 <connections>
-                                    <action selector="refreshAllFolderIcons:" target="233" id="1107"/>
+                                    <action selector="refreshAllFolderIcons:" target="-1" id="4aF-u7-VeU"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Stop Refreshing" keyEquivalent="s" id="858">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                 <connections>
-                                    <action selector="cancelAllRefreshes:" target="233" id="859"/>
+                                    <action selector="cancelAllRefreshes:" target="-1" id="46q-rR-uT3"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="591">
@@ -853,12 +853,12 @@ CA
                             </menuItem>
                             <menuItem title="Import Subscriptions…" id="780">
                                 <connections>
-                                    <action selector="importSubscriptions:" target="233" id="1233"/>
+                                    <action selector="importSubscriptions:" target="-1" id="VmM-Gh-s5C"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Export Subscriptions…" id="781">
                                 <connections>
-                                    <action selector="exportSubscriptions:" target="233" id="1234"/>
+                                    <action selector="exportSubscriptions:" target="-1" id="phN-Qb-tH6"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="1004">
@@ -871,7 +871,7 @@ CA
                             </menuItem>
                             <menuItem title="Print…" keyEquivalent="p" id="78">
                                 <connections>
-                                    <action selector="printDocument:" target="233" id="349"/>
+                                    <action selector="printDocument:" target="-1" id="dKp-PM-A83"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -926,22 +926,22 @@ CA
                                     <items>
                                         <menuItem title="Find…" tag="1" keyEquivalent="f" id="154">
                                             <connections>
-                                                <action selector="localPerformFindPanelAction:" target="233" id="1332"/>
+                                                <action selector="localPerformFindPanelAction:" target="-1" id="NUj-Gm-lhM"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Find Next" tag="2" keyEquivalent="g" id="167">
                                             <connections>
-                                                <action selector="localPerformFindPanelAction:" target="233" id="1333"/>
+                                                <action selector="localPerformFindPanelAction:" target="-1" id="aPD-OI-r00"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Find Previous" tag="3" keyEquivalent="G" id="162">
                                             <connections>
-                                                <action selector="localPerformFindPanelAction:" target="233" id="1334"/>
+                                                <action selector="localPerformFindPanelAction:" target="-1" id="0F9-2Z-LQU"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Use Selection for Find" tag="7" keyEquivalent="e" id="161">
                                             <connections>
-                                                <action selector="localPerformFindPanelAction:" target="233" id="1335"/>
+                                                <action selector="localPerformFindPanelAction:" target="-1" id="K5c-gK-U7m"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Jump to Selection" keyEquivalent="j" id="155">
@@ -1099,12 +1099,12 @@ CA
                                     <items>
                                         <menuItem title="Manual" id="1338">
                                             <connections>
-                                                <action selector="keepFoldersArranged:" target="233" id="1341"/>
+                                                <action selector="keepFoldersArranged:" target="-1" id="fOL-nO-i8j"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Name" tag="1" id="1339">
                                             <connections>
-                                                <action selector="keepFoldersArranged:" target="233" id="1342"/>
+                                                <action selector="keepFoldersArranged:" target="-1" id="9xB-So-Nix"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -1115,7 +1115,7 @@ CA
                             </menuItem>
                             <menuItem title="Next Unread" keyEquivalent="u" id="344">
                                 <connections>
-                                    <action selector="viewNextUnread:" target="233" id="345"/>
+                                    <action selector="viewNextUnread:" target="-1" id="zjw-pE-qp9"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="1026">
@@ -1123,13 +1123,13 @@ CA
                             </menuItem>
                             <menuItem title="Stop Reloading Page" keyEquivalent="." id="1027">
                                 <connections>
-                                    <action selector="stopReloadingPage:" target="233" id="1028"/>
+                                    <action selector="stopReloadingPage:" target="-1" id="8co-E2-z9R"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Reload Page" keyEquivalent="r" id="1025">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES"/>
                                 <connections>
-                                    <action selector="reloadPage:" target="233" id="1029"/>
+                                    <action selector="reloadPage:" target="-1" id="2Pe-tj-QfU"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="498">
@@ -1140,17 +1140,17 @@ CA
                                     <items>
                                         <menuItem title="Horizontal" id="1110">
                                             <connections>
-                                                <action selector="reportLayout:" target="233" id="1162"/>
+                                                <action selector="reportLayout:" target="-1" id="0Ip-Ms-HlM"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Vertical" id="1116">
                                             <connections>
-                                                <action selector="condensedLayout:" target="233" id="1163"/>
+                                                <action selector="condensedLayout:" target="-1" id="ioq-M7-LK7"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Unified" id="1160">
                                             <connections>
-                                                <action selector="unifiedLayout:" target="233" id="1161"/>
+                                                <action selector="unifiedLayout:" target="-1" id="dF4-n7-MJd"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -1225,12 +1225,12 @@ CA
                             </menuItem>
                             <menuItem title="Back" keyEquivalent="[" id="422">
                                 <connections>
-                                    <action selector="goBack:" target="233" id="424"/>
+                                    <action selector="goBack:" target="-1" id="boc-Iz-ltd"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Forward" keyEquivalent="]" id="423">
                                 <connections>
-                                    <action selector="goForward:" target="233" id="425"/>
+                                    <action selector="goForward:" target="-1" id="W9b-gw-hWo"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="1260">
@@ -1243,7 +1243,7 @@ CA
                             </menuItem>
                             <menuItem title="Show Filter Bar" keyEquivalent="B" id="1325">
                                 <connections>
-                                    <action selector="showHideFilterBar:" target="233" id="1326"/>
+                                    <action selector="showHideFilterBar:" target="-1" id="WfC-Sk-kRK"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="1256">
@@ -1274,7 +1274,7 @@ CA
                         <items>
                             <menuItem title="Search Articles" id="1327">
                                 <connections>
-                                    <action selector="setFocusToSearchField:" target="233" id="1329"/>
+                                    <action selector="setFocusToSearchField:" target="-1" id="1po-bJ-a0K"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="1328">
@@ -1282,22 +1282,22 @@ CA
                             </menuItem>
                             <menuItem title="Edit…" keyEquivalent="E" id="1180">
                                 <connections>
-                                    <action selector="editFolder:" target="233" id="1182"/>
+                                    <action selector="editFolder:" target="-1" id="2Im-E6-9HS"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Delete…" keyEquivalent="D" id="1184">
                                 <connections>
-                                    <action selector="deleteFolder:" target="233" id="1200"/>
+                                    <action selector="deleteFolder:" target="-1" id="QzJ-sS-BSP"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Rename…" keyEquivalent="N" id="1181">
                                 <connections>
-                                    <action selector="renameFolder:" target="233" id="1183"/>
+                                    <action selector="renameFolder:" target="-1" id="1bC-5N-M0l"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Get Info…" keyEquivalent="i" id="1409">
                                 <connections>
-                                    <action selector="getInfo:" target="233" id="1410"/>
+                                    <action selector="getInfo:" target="-1" id="xhQ-n2-HGI"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="1185">
@@ -1305,20 +1305,20 @@ CA
                             </menuItem>
                             <menuItem title="Unsubscribe" id="1408">
                                 <connections>
-                                    <action selector="unsubscribeFeed:" target="233" id="1411"/>
+                                    <action selector="unsubscribeFeed:" target="-1" id="XJs-2M-kEa"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="1414"/>
                             <menuItem title="Use Current Style for Articles" id="1413">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="useCurrentStyleForArticles:" target="233" id="1416"/>
+                                    <action selector="useCurrentStyleForArticles:" target="-1" id="3kT-yl-Dii"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Use Web Page for Articles" id="1415">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="useWebPageForArticles:" target="233" id="1417"/>
+                                    <action selector="useWebPageForArticles:" target="-1" id="nQY-bA-CAo"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="1412">
@@ -1326,18 +1326,18 @@ CA
                             </menuItem>
                             <menuItem title="Skip Folder" keyEquivalent="S" id="1186">
                                 <connections>
-                                    <action selector="skipFolder:" target="233" id="1189"/>
+                                    <action selector="skipFolder:" target="-1" id="Q0o-vd-qHh"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Mark All Articles as Read" keyEquivalent="K" id="1187">
                                 <connections>
-                                    <action selector="markAllRead:" target="233" id="1188"/>
+                                    <action selector="markAllRead:" target="-1" id="6wP-8s-E4W"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Mark All Subscriptions as Read" keyEquivalent="k" id="1195">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
-                                    <action selector="markAllSubscriptionsRead:" target="233" id="1196"/>
+                                    <action selector="markAllSubscriptionsRead:" target="-1" id="pFB-HD-Zss"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="1190">
@@ -1346,13 +1346,13 @@ CA
                             <menuItem title="Open Subscription Home Page" id="1191">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="viewSourceHomePage:" target="233" id="1193"/>
+                                    <action selector="viewSourceHomePage:" target="-1" id="rHQ-Zu-nhC"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Open Subscription Home Page in External Browser" id="1192">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="viewSourceHomePageInAlternateBrowser:" target="233" id="1194"/>
+                                    <action selector="viewSourceHomePageInAlternateBrowser:" target="-1" id="6Jp-ae-p6L"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -1363,18 +1363,18 @@ CA
                         <items>
                             <menuItem title="Mark Flagged" keyEquivalent="M" id="790">
                                 <connections>
-                                    <action selector="markFlagged:" target="233" id="805"/>
+                                    <action selector="markFlagged:" target="-1" id="XQZ-kF-iNW"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Mark Read" keyEquivalent="U" id="pKl-6f-Hlc">
                                 <connections>
-                                    <action selector="markRead:" target="233" id="Zog-eg-OE1"/>
+                                    <action selector="markRead:" target="-1" id="hcC-jq-vKm"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Mark Unread" keyEquivalent="U" id="789">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
-                                    <action selector="markUnread:" target="233" id="Mre-1Y-obH"/>
+                                    <action selector="markUnread:" target="-1" id="UTn-Gi-s5P"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Delete Article" id="1198">
@@ -1383,12 +1383,12 @@ CA
 </string>
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="deleteMessage:" target="233" id="1199"/>
+                                    <action selector="deleteMessage:" target="-1" id="pX6-Cb-Bjj"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Restore Article" keyEquivalent="O" id="1044">
                                 <connections>
-                                    <action selector="restoreMessage:" target="233" id="1045"/>
+                                    <action selector="restoreMessage:" target="-1" id="Pvj-jE-Oiq"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="308">
@@ -1397,18 +1397,18 @@ CA
                             <menuItem title="Open Article Page" id="1040">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="viewArticlePages:" target="233" id="1418"/>
+                                    <action selector="viewArticlePages:" target="-1" id="ChF-ZC-cmD"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Open Article Page in External Browser" id="1067">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="viewArticlePagesInAlternateBrowser:" target="233" id="1419"/>
+                                    <action selector="viewArticlePagesInAlternateBrowser:" target="-1" id="ypC-pj-XY6"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Download Enclosure" id="1216">
                                 <connections>
-                                    <action selector="downloadEnclosure:" target="233" id="1217"/>
+                                    <action selector="downloadEnclosure:" target="-1" id="zH0-xU-GTv"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="1204">
@@ -1417,7 +1417,7 @@ CA
                             <menuItem title="Send Link by Email" keyEquivalent="s" id="1073">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
-                                    <action selector="mailLinkToArticlePage:" target="233" id="1075"/>
+                                    <action selector="mailLinkToArticlePage:" target="-1" id="WpR-9O-7tX"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -1442,13 +1442,13 @@ CA
                             <menuItem title="Previous Tab" keyEquivalent="" id="1008">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
-                                    <action selector="previousTab:" target="233" id="1011"/>
+                                    <action selector="previousTab:" target="-1" id="uIb-HR-dbe"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Next Tab" keyEquivalent="" id="1009">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
-                                    <action selector="nextTab:" target="233" id="1012"/>
+                                    <action selector="nextTab:" target="-1" id="dkJ-sH-L2U"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="1077">
@@ -1456,17 +1456,17 @@ CA
                             </menuItem>
                             <menuItem title="Activity Window" keyEquivalent="0" id="402">
                                 <connections>
-                                    <action selector="toggleActivityViewer:" target="233" id="405"/>
+                                    <action selector="toggleActivityViewer:" target="-1" id="Q19-do-Grz"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Main Window" keyEquivalent="1" id="940">
                                 <connections>
-                                    <action selector="showMainWindow:" target="233" id="941"/>
+                                    <action selector="showMainWindow:" target="-1" id="2Ea-U6-MvD"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Downloads" keyEquivalent="2" id="1061">
                                 <connections>
-                                    <action selector="showDownloadsWindow:" target="233" id="1062"/>
+                                    <action selector="showDownloadsWindow:" target="-1" id="JdX-7A-Jxj"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="403">
@@ -1479,9 +1479,6 @@ CA
                             </menuItem>
                         </items>
                     </menu>
-                    <connections>
-                        <action selector="toggleActivityViewer:" target="233" id="404"/>
-                    </connections>
                 </menuItem>
                 <menuItem title="Help" id="103">
                     <menu key="submenu" title="Help" id="106">
@@ -1493,7 +1490,7 @@ CA
                             </menuItem>
                             <menuItem title="Keyboard Shortcuts" id="1146">
                                 <connections>
-                                    <action selector="keyboardShortcutsHelp:" target="233" id="1147"/>
+                                    <action selector="keyboardShortcutsHelp:" target="-1" id="3jK-u8-f0Y"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="931">
@@ -1501,7 +1498,7 @@ CA
                             </menuItem>
                             <menuItem title="Vienna Web Site" id="929">
                                 <connections>
-                                    <action selector="showViennaHomePage:" target="233" id="930"/>
+                                    <action selector="showViennaHomePage:" target="-1" id="QcX-Jg-MIJ"/>
                                 </connections>
                             </menuItem>
                         </items>
