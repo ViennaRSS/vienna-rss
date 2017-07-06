@@ -39,8 +39,6 @@
  */
 @interface ArticleController : NSObject
 {
-	IBOutlet ArticleListView * articleListView;
-	IBOutlet UnifiedDisplayView * unifiedListView;
 	NSView<ArticleBaseView, BaseView> * mainArticleView;
 	NSArray * currentArrayOfArticles;
 	NSArray * folderArrayOfArticles;
@@ -58,6 +56,8 @@
 }
 
 @property (nonatomic, strong) IBOutlet FoldersTree * foldersTree;
+@property (nonatomic, weak) IBOutlet ArticleListView *articleListView;
+@property (nonatomic, weak) IBOutlet UnifiedDisplayView *unifiedListView;
 @property (nonatomic, strong) NSView<ArticleBaseView, BaseView> * mainArticleView;
 @property (nonatomic, copy) NSArray * currentArrayOfArticles;
 @property (nonatomic, copy) NSArray * folderArrayOfArticles;

@@ -150,11 +150,11 @@
 	{
 		case MA_Layout_Report:
 		case MA_Layout_Condensed:
-			self.mainArticleView = articleListView;
+			self.mainArticleView = self.articleListView;
 			break;
 
 		case MA_Layout_Unified:
-			self.mainArticleView = unifiedListView;
+			self.mainArticleView = self.unifiedListView;
 			break;
 	}
 
@@ -198,13 +198,13 @@
  */
  -(void)updateAlternateMenuTitle
 {
-	if (mainArticleView ==  articleListView)
+	if (mainArticleView ==  self.articleListView)
 	{
-		[articleListView updateAlternateMenuTitle];
+		[self.articleListView updateAlternateMenuTitle];
 	}
 	else
 	{
-		[unifiedListView updateAlternateMenuTitle];
+		[self.unifiedListView updateAlternateMenuTitle];
 	}
 }
 
@@ -213,8 +213,9 @@
  */
 -(void)updateVisibleColumns
 {
-    if (mainArticleView ==  articleListView)
-        [articleListView updateVisibleColumns];
+    if (mainArticleView ==  self.articleListView) {
+        [self.articleListView updateVisibleColumns];
+    }
 }
 
 /* selectedArticle
