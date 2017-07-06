@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="17A291m" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
@@ -20,8 +20,8 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="302" y="347" width="942" height="625"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
-            <value key="minSize" type="size" width="213" height="107"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <value key="minSize" type="size" width="700" height="350"/>
             <view key="contentView" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="942" height="625"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1170,7 +1170,7 @@ CA
         </menu>
         <customObject id="233" userLabel="AppController" customClass="AppController">
             <connections>
-                <outlet property="articleController" destination="1164" id="1165"/>
+                <outlet property="articleController" destination="1164" id="4Nq-qN-LcY"/>
                 <outlet property="browserView" destination="1227" id="1231"/>
                 <outlet property="closeAllTabsItem" destination="1036" id="1038"/>
                 <outlet property="closeTabItem" destination="1023" id="1035"/>
