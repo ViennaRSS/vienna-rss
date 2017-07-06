@@ -47,7 +47,6 @@
 @interface AppController : NSObject <NSApplicationDelegate,NSWindowDelegate,NSToolbarDelegate,NSMenuDelegate>
 {
 	IBOutlet BJRWindowWithToolbar * mainWindow;
-	IBOutlet ArticleController * articleController;
 	IBOutlet NSView * exportSaveAccessory;
 	IBOutlet NSSearchField * filterSearchField;
 	IBOutlet NSPopUpButton * filterViewPopUp;
@@ -94,6 +93,7 @@
     ViennaSparkleDelegate * _sparkleDelegate;
 }
 
+@property (nonatomic) IBOutlet ArticleController *articleController;
 @property (nonatomic, strong) NewSubscription *rssFeed;
 @property (readonly, weak) FoldersTree *foldersTree;
 @property (readonly, copy, nonatomic) NSMenu *searchFieldMenu;
