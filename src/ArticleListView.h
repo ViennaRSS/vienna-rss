@@ -25,7 +25,6 @@
 #import "ArticleBaseView.h"
 
 @class AppController;
-@class ArticleController;
 @class ArticleView;
 @class MessageListView;
 @class StdEnclosureView;
@@ -33,7 +32,6 @@
 @interface ArticleListView : NSView<BaseView, ArticleBaseView, NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate>
 {
 	IBOutlet AppController * controller;
-	IBOutlet ArticleController * articleController;
 	IBOutlet MessageListView * articleList;
 	IBOutlet ArticleView * articleText;
 	IBOutlet NSSplitView * splitView2;

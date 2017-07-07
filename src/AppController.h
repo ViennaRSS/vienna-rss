@@ -43,11 +43,12 @@
 @class ArticleController;
 @class DownloadWindow;
 @class Article;
+@class UnifiedDisplayView;
+@class ArticleListView;
 
 @interface AppController : NSObject <NSApplicationDelegate,NSWindowDelegate,NSToolbarDelegate,NSMenuDelegate>
 {
 	IBOutlet BJRWindowWithToolbar * mainWindow;
-	IBOutlet ArticleController * articleController;
 	IBOutlet NSView * exportSaveAccessory;
 	IBOutlet NSSearchField * filterSearchField;
 	IBOutlet NSPopUpButton * filterViewPopUp;
@@ -94,8 +95,11 @@
     ViennaSparkleDelegate * _sparkleDelegate;
 }
 
+@property (nonatomic) ArticleController *articleController;
+@property (nonatomic, weak) IBOutlet UnifiedDisplayView *unifiedListView;
+@property (nonatomic, weak) IBOutlet ArticleListView *articleListView;
 @property (nonatomic, strong) NewSubscription *rssFeed;
-@property (readonly, weak) FoldersTree *foldersTree;
+@property (nonatomic) FoldersTree *foldersTree;
 @property (readonly, copy, nonatomic) NSMenu *searchFieldMenu;
 
 // Menu action items
