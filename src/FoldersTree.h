@@ -20,7 +20,13 @@
 
 @import Cocoa;
 
-@interface FoldersTree : NSView
+@class AppController;
+@class FolderView;
+
+@interface FoldersTree : NSView <NSOutlineViewDelegate, NSOutlineViewDataSource>
+
+@property (weak, nonatomic) AppController *controller;
+@property (weak, nonatomic) FolderView *outlineView;
 
 -(void)initialiseFoldersTree;
 -(void)saveFolderSettings;

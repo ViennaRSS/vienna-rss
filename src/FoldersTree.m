@@ -33,10 +33,7 @@
 #import "TreeNode.h"
 #import "Folder.h"
 
-@interface FoldersTree () <NSOutlineViewDataSource>
-
-@property (weak, nonatomic) IBOutlet AppController *controller;
-@property (weak, nonatomic) IBOutlet FolderView *outlineView;
+@interface FoldersTree ()
 
 @property (nonatomic, readonly, copy) NSArray *archiveState;
 @property (nonatomic) TreeNode *rootNode;
@@ -84,10 +81,10 @@
 	return self;
 }
 
-/* awakeFromNib
- * Do things that only make sense once the NIB is loaded.
+/* initialiseFoldersTree
+ * Do the things to initialize the folder tree from the database
  */
--(void)awakeFromNib
+-(void)initialiseFoldersTree
 {
 	NSTableColumn * tableColumn;
 	ImageAndTextCell * imageAndTextCell;
@@ -126,13 +123,7 @@
 	[self.outlineView scrollRowToVisible:self.outlineView.selectedRow];
 
     [self.outlineView accessibilitySetOverrideValue:NSLocalizedString(@"Folders", nil) forAttribute:NSAccessibilityDescriptionAttribute];
-}
 
-/* initialiseFoldersTree
- * Do the things to initialize the folder tree from the database
- */
--(void)initialiseFoldersTree
-{
 	// Want tooltips
 	[self.outlineView setEnableTooltips:YES];
 	

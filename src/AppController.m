@@ -65,7 +65,7 @@
 #import "ArticleListView.h"
 #import "UnifiedDisplayView.h"
 #import "ArticleView.h"
-
+#import "FolderView.h"
 #import "Vienna-Swift.h"
 
 @interface AppController () <InfoPanelControllerDelegate, ActivityPanelControllerDelegate>
@@ -114,7 +114,7 @@
 @property (nonatomic) IBOutlet ActivityPanelController *activityPanelController;
 @property (nonatomic) DirectoryMonitor *directoryMonitor;
 @property (nonatomic) PreferencesWindowController *preferencesWindowController;
-@property (weak, nonatomic) IBOutlet FoldersTree *foldersTree;
+@property (weak, nonatomic) IBOutlet FolderView *outlineView;
 
 @end
 
@@ -348,6 +348,11 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 -(void)applicationDidFinishLaunching:(NSNotification *)aNot
 {
     Preferences * prefs = [Preferences standardPreferences];
+
+    self.foldersTree.controller = self;
+    self.foldersTree.outlineView = self.outlineView;
+    self.outlineView.delegate = self.foldersTree;
+    self.outlineView.dataSource = self.foldersTree;
 
     self.articleController.foldersTree = self.foldersTree;
     self.articleController.unifiedListView = self.unifiedListView;
@@ -4303,6 +4308,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     return _articleController;
 }
 
+// MARK: Folders Tree
+- (FoldersTree *)foldersTree {
+    if (!_foldersTree) {
+        _foldersTree = [FoldersTree new];
+    }
+    return _foldersTree;
+}
 
 #pragma mark Dealloc
 

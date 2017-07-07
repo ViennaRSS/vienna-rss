@@ -96,10 +96,6 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                         </tableColumn>
                                                     </tableColumns>
-                                                    <connections>
-                                                        <outlet property="dataSource" destination="ugm-kC-yFY" id="ufn-bW-ljC"/>
-                                                        <outlet property="delegate" destination="ugm-kC-yFY" id="JKg-Jf-3i7"/>
-                                                    </connections>
                                                 </outlineView>
                                             </subviews>
                                             <nil key="backgroundColor"/>
@@ -1186,8 +1182,8 @@ CA
                 <outlet property="filterSearchField" destination="1304" id="1315"/>
                 <outlet property="filterViewPopUp" destination="1306" id="1319"/>
                 <outlet property="filtersMenu" destination="1117" id="1135"/>
-                <outlet property="foldersTree" destination="ugm-kC-yFY" id="lcl-Mo-hfE"/>
                 <outlet property="mainWindow" destination="21" id="239"/>
+                <outlet property="outlineView" destination="Kk7-ax-B3r" id="vFt-XT-QbW"/>
                 <outlet property="searchField" destination="1252" id="1253"/>
                 <outlet property="sortByMenu" destination="387" id="1054"/>
                 <outlet property="spinner" destination="918" id="920"/>
@@ -1471,12 +1467,6 @@ CA
             </connections>
             <point key="canvasLocation" x="-209" y="43"/>
         </customView>
-        <customObject id="ugm-kC-yFY" customClass="FoldersTree">
-            <connections>
-                <outlet property="controller" destination="233" id="FRY-S5-mjJ"/>
-                <outlet property="outlineView" destination="Kk7-ax-B3r" id="O2z-Mf-33v"/>
-            </connections>
-        </customObject>
     </objects>
     <resources>
         <image name="filter-icon" width="16" height="16"/>
