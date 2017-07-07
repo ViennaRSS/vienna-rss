@@ -56,8 +56,8 @@
 }
 
 @property (nonatomic, strong) IBOutlet FoldersTree * foldersTree;
-@property (nonatomic, weak) IBOutlet ArticleListView *articleListView;
-@property (nonatomic, weak) IBOutlet UnifiedDisplayView *unifiedListView;
+@property (nonatomic, strong) IBOutlet ArticleListView *articleListView;
+@property (nonatomic, strong) IBOutlet UnifiedDisplayView *unifiedListView;
 @property (nonatomic, strong) NSView<ArticleBaseView, BaseView> * mainArticleView;
 @property (nonatomic, copy) NSArray * currentArrayOfArticles;
 @property (nonatomic, copy) NSArray * folderArrayOfArticles;
