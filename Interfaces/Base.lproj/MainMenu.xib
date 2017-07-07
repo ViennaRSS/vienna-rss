@@ -48,7 +48,7 @@
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <connections>
-                                                        <action selector="searchUsingTreeFilter:" target="233" id="yen-70-Vgb"/>
+                                                        <action selector="searchUsingTreeFilter:" target="-1" id="pGo-ma-Cyc"/>
                                                     </connections>
                                                 </searchFieldCell>
                                             </searchField>
@@ -173,7 +173,7 @@
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </searchFieldCell>
                                                         <connections>
-                                                            <action selector="searchUsingFilterField:" target="233" id="1316"/>
+                                                            <action selector="searchUsingFilterField:" target="-1" id="GPB-eo-7EE"/>
                                                             <outlet property="nextKeyView" destination="971" id="1323"/>
                                                         </connections>
                                                     </searchField>
@@ -185,7 +185,7 @@
                                                         </buttonCell>
                                                         <accessibility description="Close the filter bar"/>
                                                         <connections>
-                                                            <action selector="hideFilterBar:" target="233" id="1314"/>
+                                                            <action selector="hideFilterBar:" target="-1" id="FpS-o7-Ir4"/>
                                                         </connections>
                                                     </button>
                                                     <popUpButton toolTip="Filter articles" horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1306">
