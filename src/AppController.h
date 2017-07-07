@@ -49,13 +49,9 @@
 @interface AppController : NSObject <NSApplicationDelegate,NSWindowDelegate,NSToolbarDelegate,NSMenuDelegate>
 {
 	IBOutlet BJRWindowWithToolbar * mainWindow;
-	IBOutlet NSView * exportSaveAccessory;
 	IBOutlet NSSearchField * filterSearchField;
 	IBOutlet NSPopUpButton * filterViewPopUp;
 	IBOutlet BrowserView * browserView;
-	IBOutlet NSButtonCell * exportAll;
-	IBOutlet NSButtonCell * exportSelected;
-	IBOutlet NSButton * exportWithGroups;
 	IBOutlet NSSearchField * searchField;
 	IBOutlet NSTextField * statusText;
 	IBOutlet ClickableProgressIndicator * spinner;

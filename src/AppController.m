@@ -1265,34 +1265,31 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)exportSubscriptions:(id)sender
 {
-    NSSavePanel * panel = [NSSavePanel savePanel];
-    
+    NSSavePanel *panel = [NSSavePanel savePanel];
+
+    // Create the accessory view
+    ExportAccessoryViewController *accessoryController = [[ExportAccessoryViewController alloc] initWithNibName:@"ExportAccessoryViewController"
+                                                                                                         bundle:nil];
+
     // If multiple selections in the folder list, default to selected folders
     // for simplicity.
-    if (self.foldersTree.countOfSelectedFolders > 1)
-    {
-        exportSelected.state = NSOnState;
-        exportAll.state = NSOffState;
-    }
-    else
-    {
-        exportSelected.state = NSOffState;
-        exportAll.state = NSOnState;
+    if (self.foldersTree.countOfSelectedFolders > 1) {
+        accessoryController.mode = ExportModeSelectedFeeds;
+    } else {
+        accessoryController.mode = ExportModeAllFeeds;
     }
     
-    // Localise the strings
-    [exportAll setTitle:NSLocalizedString(@"Export all subscriptions", nil)];
-    [exportSelected setTitle:NSLocalizedString(@"Export selected subscriptions", nil)];
-    [exportWithGroups setTitle:NSLocalizedString(@"Preserve group folders in exported file", nil)];
-    
-    panel.accessoryView = exportSaveAccessory;
+    panel.accessoryView = accessoryController.view;
     panel.allowedFileTypes = @[@"opml"];
     [panel beginSheetModalForWindow:mainWindow completionHandler:^(NSInteger returnCode) {
         if (returnCode == NSFileHandlingPanelOKButton)
         {
             [panel orderOut:self];
             
-            NSInteger countExported = [Export exportToFile:panel.URL.path fromFoldersTree:self.foldersTree selection:(exportSelected.state == NSOnState) withGroups:(exportWithGroups.state == NSOnState)];
+            NSInteger countExported = [Export exportToFile:panel.URL.path
+                                           fromFoldersTree:self.foldersTree
+                                                 selection:accessoryController.mode == ExportModeSelectedFeeds
+                                                withGroups:accessoryController.preserveFolders];
             
             if (countExported < 0)
             {
