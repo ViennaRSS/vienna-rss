@@ -101,7 +101,7 @@
 
 @property (nonatomic) IBOutlet MainWindowController *mainWindowController;
 @property (readonly, nonatomic) NSWindow *mainWindow;
-@property (nonatomic) IBOutlet ActivityPanelController *activityPanelController;
+@property (nonatomic) ActivityPanelController *activityPanelController;
 @property (nonatomic) DirectoryMonitor *directoryMonitor;
 @property (nonatomic) PreferencesWindowController *preferencesWindowController;
 @property (weak, nonatomic) IBOutlet FolderView *outlineView;
