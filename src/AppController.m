@@ -155,24 +155,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
  */
 -(void)awakeFromNib
 {
-	Preferences * prefs = [Preferences standardPreferences];
-    
-    self.articleController.foldersTree = self.foldersTree;
-    self.articleController.unifiedListView = self.unifiedListView;
-    self.articleController.articleListView = self.articleListView;
-
-	// Restore the most recent layout
-	[self setLayout:prefs.layout withRefresh:NO];
-	
-	// Set the delegates and title
-	mainWindow.title = self.appName;
-	[NSApplication sharedApplication].delegate = self;
-	mainWindow.minSize = NSMakeSize(MA_Default_Main_Window_Min_Width, MA_Default_Main_Window_Min_Height);
-	
-	// Initialise the plugin manager now that the UI is ready
-	pluginManager = [[PluginManager alloc] init];
-	[pluginManager resetPlugins];
-	
     // We need to register the handlers early to catch events fired on launch.
     NSAppleEventManager *em = [NSAppleEventManager sharedAppleEventManager];
     [em setEventHandler:self
@@ -365,8 +347,23 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(void)applicationDidFinishLaunching:(NSNotification *)aNot
 {
-	
-	Preferences * prefs = [Preferences standardPreferences];
+    Preferences * prefs = [Preferences standardPreferences];
+
+    self.articleController.foldersTree = self.foldersTree;
+    self.articleController.unifiedListView = self.unifiedListView;
+    self.articleController.articleListView = self.articleListView;
+
+    // Restore the most recent layout
+    [self setLayout:prefs.layout withRefresh:NO];
+
+    // Set the delegates and title
+    mainWindow.title = self.appName;
+    [NSApplication sharedApplication].delegate = self;
+    mainWindow.minSize = NSMakeSize(MA_Default_Main_Window_Min_Width, MA_Default_Main_Window_Min_Height);
+
+    // Initialise the plugin manager now that the UI is ready
+    pluginManager = [[PluginManager alloc] init];
+    [pluginManager resetPlugins];
 	
 	// Register a bunch of notifications
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
