@@ -63,6 +63,7 @@
 #import "Folder.h"
 #import "BrowserView.h"
 #import "ArticleListView.h"
+#import "UnifiedDisplayView.h"
 #import "ArticleView.h"
 
 #import "Vienna-Swift.h"
@@ -155,6 +156,9 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 -(void)awakeFromNib
 {
 	Preferences * prefs = [Preferences standardPreferences];
+    
+    self.articleController.unifiedListView = self.unifiedListView;
+    self.articleController.articleListView = self.articleListView;
 
 	// Restore the most recent layout
 	[self setLayout:prefs.layout withRefresh:NO];
@@ -485,7 +489,9 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
     if([[NSUserDefaults standardUserDefaults] objectForKey:MAPref_SendSystemProfileInfo] == nil) {
         [_sparkleDelegate showSystemProfileInfoAlert];
     }
-
+    
+    
+    
 	// Do safe initialisation.
 	[self performSelector:@selector(doSafeInitialisation)
 			   withObject:nil
@@ -4290,6 +4296,15 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 - (void)activityPanelControllerDidSelectFolder:(Folder *)folder {
     [self selectFolder:folder.itemId];
 }
+
+// MARK: article controller
+- (ArticleController *)articleController {
+    if (!_articleController) {
+        _articleController = [[ArticleController alloc] init];
+    }
+    return _articleController;
+}
+
 
 #pragma mark Dealloc
 

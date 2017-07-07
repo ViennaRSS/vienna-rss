@@ -43,6 +43,8 @@
 @class ArticleController;
 @class DownloadWindow;
 @class Article;
+@class UnifiedDisplayView;
+@class ArticleListView;
 
 @interface AppController : NSObject <NSApplicationDelegate,NSWindowDelegate,NSToolbarDelegate,NSMenuDelegate>
 {
@@ -93,7 +95,9 @@
     ViennaSparkleDelegate * _sparkleDelegate;
 }
 
-@property (nonatomic) IBOutlet ArticleController *articleController;
+@property (nonatomic) ArticleController *articleController;
+@property (nonatomic, weak) IBOutlet UnifiedDisplayView *unifiedListView;
+@property (nonatomic, weak) IBOutlet ArticleListView *articleListView;
 @property (nonatomic, strong) NewSubscription *rssFeed;
 @property (readonly, weak) FoldersTree *foldersTree;
 @property (readonly, copy, nonatomic) NSMenu *searchFieldMenu;

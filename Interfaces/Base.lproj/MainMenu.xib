@@ -1170,7 +1170,7 @@ CA
         </menu>
         <customObject id="233" userLabel="AppController" customClass="AppController">
             <connections>
-                <outlet property="articleController" destination="1164" id="4Nq-qN-LcY"/>
+                <outlet property="articleListView" destination="971" id="zOq-cv-uLu"/>
                 <outlet property="browserView" destination="1227" id="1231"/>
                 <outlet property="closeAllTabsItem" destination="1036" id="1038"/>
                 <outlet property="closeTabItem" destination="1023" id="1035"/>
@@ -1194,6 +1194,7 @@ CA
                 <outlet property="statusBarDisclosureView" destination="659-iz-w4S" id="gjn-93-Mdy"/>
                 <outlet property="statusText" destination="917" id="919"/>
                 <outlet property="stylesMenu" destination="826" id="1051"/>
+                <outlet property="unifiedListView" destination="1148" id="O5e-id-8Cu"/>
             </connections>
         </customObject>
         <customView id="860" userLabel="ExportSaveAccessory">
@@ -1301,7 +1302,6 @@ CA
                 <constraint firstAttribute="bottom" secondItem="972" secondAttribute="bottom" id="vXN-hg-P2Z"/>
             </constraints>
             <connections>
-                <outlet property="articleController" destination="1164" id="1167"/>
                 <outlet property="articleList" destination="977" id="996"/>
                 <outlet property="articleText" destination="1DK-2K-uuy" id="ggQ-XF-qtz"/>
                 <outlet property="controller" destination="233" id="1169"/>
@@ -1356,19 +1356,11 @@ CA
                 </scrollView>
             </subviews>
             <connections>
-                <outlet property="articleController" destination="1164" id="1168"/>
                 <outlet property="articleList" destination="NgO-hM-mCz" id="x5w-1V-UjV"/>
                 <outlet property="controller" destination="233" id="1170"/>
             </connections>
             <point key="canvasLocation" x="1066" y="109"/>
         </customView>
-        <customObject id="1164" userLabel="ArticleController" customClass="ArticleController">
-            <connections>
-                <outlet property="articleListView" destination="971" id="CtF-Wy-tWn"/>
-                <outlet property="foldersTree" destination="ugm-kC-yFY" id="sgV-i3-mJ1"/>
-                <outlet property="unifiedListView" destination="1148" id="BZB-bx-zs0"/>
-            </connections>
-        </customObject>
         <customObject id="1175" userLabel="SUUpdater" customClass="SUUpdater"/>
         <customView id="1227" userLabel="BrowserView" customClass="BrowserView">
             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
