@@ -157,6 +157,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 {
 	Preferences * prefs = [Preferences standardPreferences];
     
+    self.articleController.foldersTree = self.foldersTree;
     self.articleController.unifiedListView = self.unifiedListView;
     self.articleController.articleListView = self.articleListView;
 
