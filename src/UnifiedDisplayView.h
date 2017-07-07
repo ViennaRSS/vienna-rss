@@ -24,13 +24,11 @@
 #import "BaseView.h"
 
 @class AppController;
-@class ArticleController;
 @class ExtendedTableView;
 
 @interface UnifiedDisplayView : NSView<BaseView, ArticleBaseView, NSTableViewDelegate, NSTableViewDataSource>
 {
 	IBOutlet AppController * controller;
-	IBOutlet ArticleController * articleController;
     IBOutlet ExtendedTableView *articleList;
 
 	NSInteger currentSelectedRow;
