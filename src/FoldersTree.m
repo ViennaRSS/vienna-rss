@@ -68,8 +68,8 @@
 
 @implementation FoldersTree
 
-- (instancetype)initWithFrame:(NSRect)frameRect {
-	if (self = [super initWithFrame:frameRect]) {
+- (instancetype)init {
+	if (self = [super init]) {
 		// Root node is never displayed since we always display from
 		// the second level down. It simply provides a convenient way
 		// of containing the other nodes.

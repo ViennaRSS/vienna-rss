@@ -23,7 +23,7 @@
 @class AppController;
 @class FolderView;
 
-@interface FoldersTree : NSView <NSOutlineViewDelegate, NSOutlineViewDataSource>
+@interface FoldersTree : NSObject <NSOutlineViewDelegate, NSOutlineViewDataSource>
 
 @property (weak, nonatomic) AppController *controller;
 @property (weak, nonatomic) FolderView *outlineView;
