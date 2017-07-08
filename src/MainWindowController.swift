@@ -27,6 +27,7 @@ final class MainWindowController: NSWindowController {
     @IBOutlet var browserView: BrowserView?
     @IBOutlet var articleListView: ArticleListView?
     @IBOutlet var unifiedDisplayView: UnifiedDisplayView?
+    @IBOutlet var filterDisclosureView: DisclosureView?
 
     // MARK: Initialization
 

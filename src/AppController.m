@@ -105,6 +105,7 @@
 @property (nonatomic) DirectoryMonitor *directoryMonitor;
 @property (nonatomic) PreferencesWindowController *preferencesWindowController;
 @property (weak, nonatomic) FolderView *outlineView;
+@property (weak, nonatomic) DisclosureView *filterDisclosureView;
 
 @end
 
@@ -344,6 +345,8 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
     self.articleController.foldersTree = self.foldersTree;
     self.articleController.unifiedListView = self.unifiedListView;
     self.articleController.articleListView = self.articleListView;
+
+	self.filterDisclosureView = self.mainWindowController.filterDisclosureView;
 
 	Preferences * prefs = [Preferences standardPreferences];
 
@@ -1297,7 +1300,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(BOOL)isFilterBarVisible
 {
-    return filterDisclosureView.isDisclosed;
+    return self.filterDisclosureView.isDisclosed;
 }
 
 -(void)handleGoogleAuthFailed:(NSNotification *)nc
@@ -1353,7 +1356,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	if (isVisible && !self.filterBarVisible)
 	{
-        [filterDisclosureView disclose:doAnimate];
+        [self.filterDisclosureView disclose:doAnimate];
 
 		// Hook up the Tab ordering so Tab from the search field goes to the
 		// article view.
@@ -1367,7 +1370,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	if (!isVisible && self.filterBarVisible)
 	{
-        [filterDisclosureView collapse:doAnimate];
+        [self.filterDisclosureView collapse:doAnimate];
 
 		// Fix up the tab ordering
 		self.foldersTree.mainView.nextKeyView = [self.browserView primaryTabItemView].mainView;

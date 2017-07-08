@@ -54,7 +54,6 @@
 	IBOutlet NSMenuItem * sortByMenu;
 	IBOutlet NSMenuItem * columnsMenu;
 	IBOutlet NSMenuItem * stylesMenu;
-    IBOutlet DisclosureView * filterDisclosureView;
 
 	DownloadWindow * downloadWindow;
 	SmartFolder * smartFolder;
