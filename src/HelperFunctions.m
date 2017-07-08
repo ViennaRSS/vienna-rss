@@ -110,16 +110,6 @@ NSURL * cleanedUpAndEscapedUrlFromString(NSString * theUrl)
 	return urlToLoad;
 }	
 
-/* copyOfMenuItemWithAction
- * Returns an NSMenuItem that matches the one that implements the corresponding
- * action in the application main menu. Returns nil if no match is found.
- */
-NSMenuItem * copyOfMenuItemWithAction(SEL theSelector)
-{
-	NSMenuItem * item = menuItemWithAction(theSelector);
-	return (item) ? [[NSMenuItem alloc] initWithTitle:item.title action:theSelector keyEquivalent:@""] : nil;
-}
-
 /* loadMapFromPath
  * Iterates all files and folders in the specified path and adds them to the given mappings
  * dictionary. If foldersOnly is YES, only folders are added. If foldersOnly is NO then only

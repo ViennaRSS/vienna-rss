@@ -150,23 +150,43 @@
 
 -(NSMenu *)folderMenu
 {
-    NSMenu * folderMenu = [[NSMenu alloc] init];
-    [folderMenu addItem:copyOfMenuItemWithAction(@selector(refreshSelectedSubscriptions:))];
+    NSMenu *folderMenu = [[NSMenu alloc] init];
+
+	[folderMenu addItemWithTitle:NSLocalizedString(@"Refresh Selected Subscriptions", @"Title of a menu item")
+						  action:@selector(refreshSelectedSubscriptions:)
+				   keyEquivalent:@""];
     [folderMenu addItem:[NSMenuItem separatorItem]];
-    [folderMenu addItem:copyOfMenuItemWithAction(@selector(editFolder:))];
-    [folderMenu addItem:copyOfMenuItemWithAction(@selector(deleteFolder:))];
-    [folderMenu addItem:copyOfMenuItemWithAction(@selector(renameFolder:))];
+	[folderMenu addItemWithTitle:NSLocalizedString(@"Edit…", @"Title of a menu item")
+						  action:@selector(editFolder:)
+				   keyEquivalent:@""];
+	[folderMenu addItemWithTitle:NSLocalizedString(@"Rename…", @"Title of a menu item")
+						  action:@selector(renameFolder:)
+				   keyEquivalent:@""];
+	[folderMenu addItemWithTitle:NSLocalizedString(@"Delete…", @"Title of a menu item")
+						  action:@selector(deleteFolder:)
+				   keyEquivalent:@""];
     [folderMenu addItem:[NSMenuItem separatorItem]];
-    [folderMenu addItem:copyOfMenuItemWithAction(@selector(markAllRead:))];
+	[folderMenu addItemWithTitle:NSLocalizedString(@"Mark All Articles as Read", @"Title of a menu item")
+						  action:@selector(markAllRead:)
+				   keyEquivalent:@""];
     [folderMenu addItem:[NSMenuItem separatorItem]];
-    [folderMenu addItem:copyOfMenuItemWithAction(@selector(viewSourceHomePage:))];
-    NSMenuItem * alternateItem = copyOfMenuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+	[folderMenu addItemWithTitle:NSLocalizedString(@"Open Subscription Home Page", @"Title of a menu item")
+						  action:@selector(viewSourceHomePage:)
+				   keyEquivalent:@""];
+    NSMenuItem *alternateItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Subscription Home Page in External Browser", @"Title of a menu item")
+														   action:@selector(viewSourceHomePageInAlternateBrowser:)
+													keyEquivalent:@""];
     alternateItem.keyEquivalentModifierMask = NSAlternateKeyMask;
-    [alternateItem setAlternate:YES];
+	alternateItem.alternate = YES;
     [folderMenu addItem:alternateItem];
-    [folderMenu addItem:copyOfMenuItemWithAction(@selector(getInfo:))];
+	[folderMenu addItemWithTitle:NSLocalizedString(@"Get Info", @"Title of a menu item")
+						  action:@selector(getInfo:)
+				   keyEquivalent:@""];
     [folderMenu addItem:[NSMenuItem separatorItem]];
-    [folderMenu addItem:copyOfMenuItemWithAction(@selector(forceRefreshSelectedSubscriptions:))];
+	[folderMenu addItemWithTitle:NSLocalizedString(@"Force Refresh Selected Subscriptions From Open Reader", @"Title of a menu item")
+						  action:@selector(forceRefreshSelectedSubscriptions:)
+				   keyEquivalent:@""];
+
     return folderMenu;
 }
 

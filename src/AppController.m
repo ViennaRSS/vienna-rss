@@ -1766,8 +1766,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
                                  action:@selector(openVienna:)
                           keyEquivalent:@""];
         [statusBarMenu addItem:[NSMenuItem separatorItem]];
-		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(refreshAllSubscriptions:))];
-		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(markAllSubscriptionsRead:))];
+		[statusBarMenu addItemWithTitle:NSLocalizedString(@"Refresh All Subscriptions", @"Title of a menu item")
+								 action:@selector(refreshAllSubscriptions:)
+						  keyEquivalent:@""];
+		[statusBarMenu addItemWithTitle:NSLocalizedString(@"Mark All Subscriptions as Read", @"Title of a menu item")
+								 action:@selector(markAllSubscriptionsRead:)
+						  keyEquivalent:@""];
         [statusBarMenu addItem:[NSMenuItem separatorItem]];
         [statusBarMenu addItemWithTitle:NSLocalizedString(@"Quit Vienna", @"Title of a menu item")
                                  action:@selector(terminate:)

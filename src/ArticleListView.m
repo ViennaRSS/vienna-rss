@@ -308,26 +308,46 @@
 	// In condensed mode, the summary field takes up the whole space.
 	articleList.columnAutoresizingStyle = NSTableViewUniformColumnAutoresizingStyle;
 
-	// Dynamically create the popup menu. This is one less thing to
-	// explicitly localise in the NIB file.
-	NSMenu * articleListMenu = [[NSMenu alloc] init];
-	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(markRead:))];
-	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(markUnread:))];
-	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(markFlagged:))];
-	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(deleteMessage:))];
-	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(restoreMessage:))];
-	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(downloadEnclosure:))];
+	NSMenu *articleListMenu = [[NSMenu alloc] init];
+
+	[articleListMenu addItemWithTitle:NSLocalizedString(@"Mark Read", @"Title of a menu item")
+							   action:@selector(markRead:)
+						keyEquivalent:@""];
+	[articleListMenu addItemWithTitle:NSLocalizedString(@"Mark Unread", @"Title of a menu item")
+							   action:@selector(markUnread:)
+						keyEquivalent:@""];
+	[articleListMenu addItemWithTitle:NSLocalizedString(@"Mark Flagged", @"Title of a menu item")
+							   action:@selector(markFlagged:)
+						keyEquivalent:@""];
+	[articleListMenu addItemWithTitle:NSLocalizedString(@"Delete Article", @"Title of a menu item")
+							   action:@selector(deleteMessage:)
+						keyEquivalent:@""];
+	[articleListMenu addItemWithTitle:NSLocalizedString(@"Restore Article", @"Title of a menu item")
+							   action:@selector(restoreMessage:)
+						keyEquivalent:@""];
+	[articleListMenu addItemWithTitle:NSLocalizedString(@"Download Enclosure", @"Title of a menu item")
+							   action:@selector(downloadEnclosure:)
+						keyEquivalent:@""];
 	[articleListMenu addItem:[NSMenuItem separatorItem]];
-	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(viewSourceHomePage:))];
-	NSMenuItem * alternateItem = copyOfMenuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-	alternateItem.keyEquivalentModifierMask = NSAlternateKeyMask;
-	[alternateItem setAlternate:YES];
-	[articleListMenu addItem:alternateItem];
-	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(viewArticlePages:))];
-	alternateItem = copyOfMenuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
-	alternateItem.keyEquivalentModifierMask = NSAlternateKeyMask;
-	[alternateItem setAlternate:YES];
-	[articleListMenu addItem:alternateItem];
+	[articleListMenu addItemWithTitle:NSLocalizedString(@"Open Subscription Home Page", @"Title of a menu item")
+							   action:@selector(viewSourceHomePage:)
+						keyEquivalent:@""];
+	NSMenuItem *openFeedInBrowser = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Subscription Home Page in External Browser", @"Title of a menu item")
+															   action:@selector(viewSourceHomePageInAlternateBrowser:)
+														keyEquivalent:@""];
+	openFeedInBrowser.keyEquivalentModifierMask = NSAlternateKeyMask;
+	openFeedInBrowser.alternate = YES;
+	[articleListMenu addItem:openFeedInBrowser];
+	[articleListMenu addItemWithTitle:NSLocalizedString(@"Open Article Page", @"Title of a menu item")
+							   action:@selector(viewArticlePages:)
+						keyEquivalent:@""];
+	NSMenuItem *openItemInBrowser = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Article Page in External Browser", @"Title of a menu item")
+															   action:@selector(viewArticlePagesInAlternateBrowser:)
+														keyEquivalent:@""];
+	openItemInBrowser.keyEquivalentModifierMask = NSAlternateKeyMask;
+	openItemInBrowser.alternate = YES;
+	[articleListMenu addItem:openItemInBrowser];
+
 	articleList.menu = articleListMenu;
 
 	// Set the target for double-click actions
