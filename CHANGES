@@ -8,6 +8,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.11
+------
+- Fix deleting article from smart folder or filtered folder
+- Fix selection of last unread article with Next Unread command
+- Update FMDB to 2.7.2
+
 3.1.10
 ------
 - Fix access to Get Info window
