@@ -104,7 +104,7 @@
 @property (nonatomic) ActivityPanelController *activityPanelController;
 @property (nonatomic) DirectoryMonitor *directoryMonitor;
 @property (nonatomic) PreferencesWindowController *preferencesWindowController;
-@property (weak, nonatomic) IBOutlet FolderView *outlineView;
+@property (weak, nonatomic) FolderView *outlineView;
 
 @end
 
@@ -335,6 +335,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	self.unifiedListView = self.mainWindowController.unifiedDisplayView;
 	self.unifiedListView.controller = self;
 
+	self.outlineView = self.mainWindowController.outlineView;
     self.foldersTree.controller = self;
     self.foldersTree.outlineView = self.outlineView;
     self.outlineView.delegate = self.foldersTree;

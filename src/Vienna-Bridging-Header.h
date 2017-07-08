@@ -2,6 +2,7 @@
 #import "ArticleListView.h"
 #import "BrowserView.h"
 #import "DisclosureView.h"
+#import "FolderView.h"
 #import "OpenReader.h"
 #import "PluginManager.h"
 #import "Preferences.h"
