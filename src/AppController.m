@@ -98,8 +98,8 @@
 @property (nonatomic, readonly, strong) NSTimer *checkTimer;
 -(IBAction)cancelAllRefreshesToolbar:(id)sender;
 
-@property (nonatomic) IBOutlet MainWindowController *mainWindowController;
-@property (readonly, nonatomic) NSWindow *mainWindow;
+@property (nonatomic) MainWindowController *mainWindowController;
+@property (weak, nonatomic) NSWindow *mainWindow;
 @property (nonatomic) ActivityPanelController *activityPanelController;
 @property (nonatomic) DirectoryMonitor *directoryMonitor;
 @property (nonatomic) PreferencesWindowController *preferencesWindowController;
@@ -137,11 +137,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		searchString = nil;
 	}
 	return self;
-}
-
-// TODO: Remove this
-- (NSWindow *)mainWindow {
-    return self.mainWindowController.window;
 }
 
 // TODO: Figure out where to load this
@@ -331,6 +326,9 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(void)applicationDidFinishLaunching:(NSNotification *)aNot
 {
+	self.mainWindowController = [[MainWindowController alloc] initWithWindowNibName:@"MainWindowController"];
+	self.mainWindow = self.mainWindowController.window;
+
 	self.browserView = self.mainWindowController.browserView;
 	self.articleListView = self.mainWindowController.articleListView;
 	self.articleListView.controller = self;
