@@ -29,6 +29,7 @@ final class MainWindowController: NSWindowController {
     @IBOutlet var unifiedDisplayView: UnifiedDisplayView?
     @IBOutlet var filterDisclosureView: DisclosureView?
     @IBOutlet var filterSearchField: NSSearchField?
+    @IBOutlet var toolbarSearchField: NSSearchField?
 
     // MARK: Initialization
 

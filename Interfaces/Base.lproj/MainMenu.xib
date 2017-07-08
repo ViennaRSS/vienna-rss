@@ -1530,7 +1530,6 @@ CA
                 <outlet property="closeWindowItem" destination="935" id="1034"/>
                 <outlet property="columnsMenu" destination="442" id="1050"/>
                 <outlet property="mainWindowController" destination="TpV-Sw-bYp" id="zzt-Yo-pwZ"/>
-                <outlet property="searchField" destination="uUx-PZ-LTM" id="6XE-04-sFM"/>
                 <outlet property="sortByMenu" destination="387" id="1054"/>
                 <outlet property="stylesMenu" destination="lu2-BZ-Gxd" id="kep-Fa-btf"/>
             </connections>
@@ -1747,6 +1746,7 @@ CA
                 <outlet property="outlineView" destination="Kk7-ax-B3r" id="ui4-0e-Rrn"/>
                 <outlet property="statusBar" destination="659-iz-w4S" id="c8m-QE-SDv"/>
                 <outlet property="statusLabel" destination="917" id="hnq-fT-qdI"/>
+                <outlet property="toolbarSearchField" destination="uUx-PZ-LTM" id="WIr-hc-JI8"/>
                 <outlet property="unifiedDisplayView" destination="1148" id="6bc-7B-fVP"/>
                 <outlet property="window" destination="21" id="9ep-P9-qnb"/>
             </connections>

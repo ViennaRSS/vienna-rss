@@ -107,6 +107,7 @@
 @property (weak, nonatomic) FolderView *outlineView;
 @property (weak, nonatomic) DisclosureView *filterDisclosureView;
 @property (weak, nonatomic) NSSearchField *filterSearchField;
+@property (weak, nonatomic) NSSearchField *toolbarSearchField;
 
 @end
 
@@ -349,6 +350,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 
 	self.filterDisclosureView = self.mainWindowController.filterDisclosureView;
 	self.filterSearchField = self.mainWindowController.filterSearchField;
+	self.toolbarSearchField = self.mainWindowController.toolbarSearchField;
 
 	Preferences * prefs = [Preferences standardPreferences];
 
@@ -425,12 +427,12 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	// Create a menu for the search field
 	// The menu title doesn't appear anywhere so we don't localise it. The titles of each
 	// item is localised though.	
-	((NSSearchFieldCell *)searchField.cell).searchMenuTemplate = self.searchFieldMenu;
+	((NSSearchFieldCell *)self.toolbarSearchField.cell).searchMenuTemplate = self.searchFieldMenu;
 	((NSSearchFieldCell *)self.filterSearchField.cell).searchMenuTemplate = self.searchFieldMenu;
 	
 	// Set the placeholder string for the global search field
 	SearchMethod * currentSearchMethod = [Preferences standardPreferences].searchMethod;
-	[searchField.cell setPlaceholderString:NSLocalizedString([currentSearchMethod friendlyName], nil)];
+	[self.toolbarSearchField.cell setPlaceholderString:NSLocalizedString([currentSearchMethod friendlyName], nil)];
 	
 	// Add Scripts menu if we have any scripts
 	if (!hasOSScriptsMenu())
@@ -751,7 +753,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 -(void)setSearchMethod:(NSMenuItem *)sender
 {
 	[Preferences standardPreferences].searchMethod = sender.representedObject;
-	((NSSearchFieldCell *)searchField.cell).placeholderString = sender.title;
+	((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = sender.title;
 }
 
 /* standardURLs
@@ -2209,7 +2211,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		case NSFindPanelActionSetFindString:
 			[self setFocusToSearchField:self];
-			searchField.stringValue = APP.currentTextSelection;
+			self.toolbarSearchField.stringValue = APP.currentTextSelection;
 			[searchPanel setSearchString:APP.currentTextSelection];
 			break;
 			
@@ -3081,11 +3083,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		// If the current view is a browser view and "Search all articles" is the current SearchMethod, switch to "Search current webpage"
 		if ([prefs.searchMethod.friendlyName isEqualToString:[SearchMethod searchAllArticlesMethod].friendlyName])
 		{
-			for (NSMenuItem * menuItem in ((NSSearchFieldCell *)searchField.cell).searchMenuTemplate.itemArray)
+			for (NSMenuItem * menuItem in ((NSSearchFieldCell *)self.toolbarSearchField.cell).searchMenuTemplate.itemArray)
 			{
 				if ([[menuItem.representedObject friendlyName] isEqualToString:[SearchMethod searchCurrentWebPageMethod].friendlyName])
 				{
-					[searchField.cell setPlaceholderString:NSLocalizedString([[SearchMethod searchCurrentWebPageMethod] friendlyName], nil)];
+					[self.toolbarSearchField.cell setPlaceholderString:NSLocalizedString([[SearchMethod searchCurrentWebPageMethod] friendlyName], nil)];
 					[Preferences standardPreferences].searchMethod = menuItem.representedObject;
 				}
 			}
@@ -3096,18 +3098,18 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		// If the current view is anything else "Search current webpage" is active, switch to "Search all articles".
 		if ([prefs.searchMethod.friendlyName isEqualToString:[SearchMethod searchCurrentWebPageMethod].friendlyName])
 		{
-			for (NSMenuItem * menuItem in ((NSSearchFieldCell *)searchField.cell).searchMenuTemplate.itemArray)
+			for (NSMenuItem * menuItem in ((NSSearchFieldCell *)self.toolbarSearchField.cell).searchMenuTemplate.itemArray)
 			{
 				if ([[menuItem.representedObject friendlyName] isEqualToString:[SearchMethod searchAllArticlesMethod].friendlyName])
 				{
-					[searchField.cell setPlaceholderString:NSLocalizedString([[SearchMethod searchAllArticlesMethod] friendlyName], nil)];
+					[self.toolbarSearchField.cell setPlaceholderString:NSLocalizedString([[SearchMethod searchAllArticlesMethod] friendlyName], nil)];
 					[Preferences standardPreferences].searchMethod = menuItem.representedObject;
 				}
 			}
 		}
 		else
 		{
-			[searchField.cell setPlaceholderString:NSLocalizedString([[prefs searchMethod] friendlyName], nil)];
+			[self.toolbarSearchField.cell setPlaceholderString:NSLocalizedString([[prefs searchMethod] friendlyName], nil)];
 		}
 	// END of switching between "Search all articles" and "Search current web page".
 	}
@@ -3132,7 +3134,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)setFocusToSearchField:(id)sender
 {
 	if (self.mainWindow.toolbar.visible && [self toolbarItemWithIdentifier:@"SearchItem"] && self.mainWindow.toolbar.displayMode != NSToolbarDisplayModeLabelOnly)
-		[self.mainWindow makeFirstResponder:searchField];
+		[self.mainWindow makeFirstResponder:self.toolbarSearchField];
 	else
 	{
 		if (!searchPanel)
@@ -3194,7 +3196,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)searchUsingToolbarTextField:(id)sender
 {
-	self.searchString = searchField.stringValue;
+	self.searchString = self.toolbarSearchField.stringValue;
 	SearchMethod * currentSearchMethod = [Preferences standardPreferences].searchMethod;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -3207,7 +3209,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)performAllArticlesSearch
 {
-	[self searchArticlesWithString:searchField.stringValue];
+	[self searchArticlesWithString:self.toolbarSearchField.stringValue];
 }
 
 /* performAllArticlesSearch

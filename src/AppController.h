@@ -46,7 +46,6 @@
 
 @interface AppController : NSObject <NSApplicationDelegate>
 {
-	IBOutlet NSSearchField * searchField;
 	IBOutlet NSMenuItem * closeTabItem;
 	IBOutlet NSMenuItem * closeAllTabsItem;
 	IBOutlet NSMenuItem * closeWindowItem;
