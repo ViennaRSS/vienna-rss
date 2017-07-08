@@ -329,7 +329,10 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(void)applicationDidFinishLaunching:(NSNotification *)aNot
 {
-    Preferences * prefs = [Preferences standardPreferences];
+	self.articleListView = self.mainWindowController.articleListView;
+	self.articleListView.controller = self;
+	self.unifiedListView = self.mainWindowController.unifiedDisplayView;
+	self.unifiedListView.controller = self;
 
     self.foldersTree.controller = self;
     self.foldersTree.outlineView = self.outlineView;
@@ -339,6 +342,8 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
     self.articleController.foldersTree = self.foldersTree;
     self.articleController.unifiedListView = self.unifiedListView;
     self.articleController.articleListView = self.articleListView;
+
+	Preferences * prefs = [Preferences standardPreferences];
 
     // Restore the most recent layout
     [self setLayout:prefs.layout withRefresh:NO];

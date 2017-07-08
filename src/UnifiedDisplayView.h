@@ -39,7 +39,7 @@
 	NSProgressIndicator * progressIndicator;
 }
 
-@property (weak, nonatomic) IBOutlet AppController *controller;
+@property (weak, nonatomic) AppController *controller;
 
 // Public functions
 -(void)updateAlternateMenuTitle;

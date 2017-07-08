@@ -1525,7 +1525,6 @@ CA
         </menu>
         <customObject id="233" userLabel="AppController" customClass="AppController">
             <connections>
-                <outlet property="articleListView" destination="971" id="zOq-cv-uLu"/>
                 <outlet property="browserView" destination="1227" id="1231"/>
                 <outlet property="closeAllTabsItem" destination="1036" id="1038"/>
                 <outlet property="closeTabItem" destination="1023" id="1035"/>
@@ -1537,7 +1536,6 @@ CA
                 <outlet property="mainWindowController" destination="TpV-Sw-bYp" id="zzt-Yo-pwZ"/>
                 <outlet property="searchField" destination="uUx-PZ-LTM" id="6XE-04-sFM"/>
                 <outlet property="sortByMenu" destination="387" id="1054"/>
-                <outlet property="unifiedListView" destination="1148" id="O5e-id-8Cu"/>
                 <outlet property="stylesMenu" destination="lu2-BZ-Gxd" id="kep-Fa-btf"/>
             </connections>
         </customObject>
@@ -1611,7 +1609,6 @@ CA
             <connections>
                 <outlet property="articleList" destination="977" id="996"/>
                 <outlet property="articleText" destination="1DK-2K-uuy" id="ggQ-XF-qtz"/>
-                <outlet property="controller" destination="233" id="1169"/>
                 <outlet property="splitView2" destination="972" id="998"/>
                 <outlet property="stdEnclosureView" destination="1288" id="1296"/>
             </connections>
@@ -1664,7 +1661,6 @@ CA
             </subviews>
             <connections>
                 <outlet property="articleList" destination="NgO-hM-mCz" id="x5w-1V-UjV"/>
-                <outlet property="controller" destination="233" id="1170"/>
             </connections>
             <point key="canvasLocation" x="1066" y="109"/>
         </customView>
@@ -1746,10 +1742,12 @@ CA
         </customView>
         <customObject id="TpV-Sw-bYp" customClass="MainWindowController" customModule="Vienna" customModuleProvider="target">
             <connections>
+                <outlet property="articleListView" destination="971" id="RCz-Ng-kVt"/>
                 <outlet property="filterButton" destination="1400" id="klL-0x-Gpc"/>
                 <outlet property="filterLabel" destination="1403" id="dvr-7K-18f"/>
                 <outlet property="statusBar" destination="659-iz-w4S" id="c8m-QE-SDv"/>
                 <outlet property="statusLabel" destination="917" id="hnq-fT-qdI"/>
+                <outlet property="unifiedDisplayView" destination="1148" id="6bc-7B-fVP"/>
                 <outlet property="window" destination="21" id="9ep-P9-qnb"/>
             </connections>
         </customObject>

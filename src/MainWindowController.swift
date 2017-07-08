@@ -21,6 +21,11 @@ import Cocoa
 
 final class MainWindowController: NSWindowController {
 
+    // MARK: Transitional outlets
+
+    @IBOutlet var articleListView: ArticleListView?
+    @IBOutlet var unifiedDisplayView: UnifiedDisplayView?
+
     // MARK: Initialization
 
     override func awakeFromNib() {

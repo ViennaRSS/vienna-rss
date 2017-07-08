@@ -79,8 +79,8 @@
 
 @property (nonatomic) PluginManager *pluginManager;
 @property (nonatomic) ArticleController *articleController;
-@property (nonatomic, weak) IBOutlet UnifiedDisplayView *unifiedListView;
-@property (nonatomic, weak) IBOutlet ArticleListView *articleListView;
+@property (nonatomic, weak) UnifiedDisplayView *unifiedListView;
+@property (nonatomic, weak) ArticleListView *articleListView;
 @property (nonatomic, strong) NewSubscription *rssFeed;
 @property (nonatomic) FoldersTree *foldersTree;
 @property (readonly, copy, nonatomic) NSMenu *searchFieldMenu;
