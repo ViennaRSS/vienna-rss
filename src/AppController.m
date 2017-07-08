@@ -106,6 +106,7 @@
 @property (nonatomic) PreferencesWindowController *preferencesWindowController;
 @property (weak, nonatomic) FolderView *outlineView;
 @property (weak, nonatomic) DisclosureView *filterDisclosureView;
+@property (weak, nonatomic) NSSearchField *filterSearchField;
 
 @end
 
@@ -347,6 +348,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
     self.articleController.articleListView = self.articleListView;
 
 	self.filterDisclosureView = self.mainWindowController.filterDisclosureView;
+	self.filterSearchField = self.mainWindowController.filterSearchField;
 
 	Preferences * prefs = [Preferences standardPreferences];
 
@@ -424,7 +426,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	// The menu title doesn't appear anywhere so we don't localise it. The titles of each
 	// item is localised though.	
 	((NSSearchFieldCell *)searchField.cell).searchMenuTemplate = self.searchFieldMenu;
-	((NSSearchFieldCell *)filterSearchField.cell).searchMenuTemplate = self.searchFieldMenu;
+	((NSSearchFieldCell *)self.filterSearchField.cell).searchMenuTemplate = self.searchFieldMenu;
 	
 	// Set the placeholder string for the global search field
 	SearchMethod * currentSearchMethod = [Preferences standardPreferences].searchMethod;
@@ -1360,12 +1362,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 		// Hook up the Tab ordering so Tab from the search field goes to the
 		// article view.
-		self.foldersTree.mainView.nextKeyView = filterSearchField;
-		filterSearchField.nextKeyView = [self.browserView primaryTabItemView].mainView;
+		self.foldersTree.mainView.nextKeyView = self.filterSearchField;
+		self.filterSearchField.nextKeyView = [self.browserView primaryTabItemView].mainView;
 		
 		// Set focus only if this was user initiated
         if (doAnimate) {
-			[self.mainWindow makeFirstResponder:filterSearchField];
+			[self.mainWindow makeFirstResponder:self.filterSearchField];
         }
 	}
 	if (!isVisible && self.filterBarVisible)
@@ -2290,7 +2292,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			if (!self.filterBarVisible)
 				[self setPersistedFilterBarState:YES withAnimation:YES];
 			else
-				[self.mainWindow makeFirstResponder:filterSearchField];
+				[self.mainWindow makeFirstResponder:self.filterSearchField];
 			return YES;
 			
 		case '>':
@@ -3112,13 +3114,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	
 	if ([Preferences standardPreferences].layout == MA_Layout_Unified)
 	{
-		[filterSearchField.cell setSendsWholeSearchString:YES];
-		((NSSearchFieldCell *)filterSearchField.cell).placeholderString = self.articleController.searchPlaceholderString;
+		[self.filterSearchField.cell setSendsWholeSearchString:YES];
+		((NSSearchFieldCell *)self.filterSearchField.cell).placeholderString = self.articleController.searchPlaceholderString;
 	}
 	else
 	{
-		[filterSearchField.cell setSendsWholeSearchString:NO];
-		((NSSearchFieldCell *)filterSearchField.cell).placeholderString = self.articleController.searchPlaceholderString;
+		[self.filterSearchField.cell setSendsWholeSearchString:NO];
+		((NSSearchFieldCell *)self.filterSearchField.cell).placeholderString = self.articleController.searchPlaceholderString;
 	}
 }
 
@@ -3162,7 +3164,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)setFilterString:(NSString *)newFilterString
 {
-	filterSearchField.stringValue = newFilterString;
+	self.filterSearchField.stringValue = newFilterString;
 }
 
 /* filterString
@@ -3170,7 +3172,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(NSString *)filterString
 {
-	return filterSearchField.stringValue;
+	return self.filterSearchField.stringValue;
 }
 
 /* searchUsingFilterField

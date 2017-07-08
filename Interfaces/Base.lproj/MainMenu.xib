@@ -1529,7 +1529,6 @@ CA
                 <outlet property="closeTabItem" destination="1023" id="1035"/>
                 <outlet property="closeWindowItem" destination="935" id="1034"/>
                 <outlet property="columnsMenu" destination="442" id="1050"/>
-                <outlet property="filterSearchField" destination="1304" id="1315"/>
                 <outlet property="mainWindowController" destination="TpV-Sw-bYp" id="zzt-Yo-pwZ"/>
                 <outlet property="searchField" destination="uUx-PZ-LTM" id="6XE-04-sFM"/>
                 <outlet property="sortByMenu" destination="387" id="1054"/>
@@ -1744,6 +1743,7 @@ CA
                 <outlet property="filterButton" destination="1400" id="klL-0x-Gpc"/>
                 <outlet property="filterDisclosureView" destination="cTN-D0-dY2" id="IX0-B0-HDl"/>
                 <outlet property="filterLabel" destination="1403" id="dvr-7K-18f"/>
+                <outlet property="filterSearchField" destination="1304" id="Hpe-We-i3k"/>
                 <outlet property="outlineView" destination="Kk7-ax-B3r" id="ui4-0e-Rrn"/>
                 <outlet property="statusBar" destination="659-iz-w4S" id="c8m-QE-SDv"/>
                 <outlet property="statusLabel" destination="917" id="hnq-fT-qdI"/>
