@@ -214,3 +214,29 @@ extension MainWindowController: NSToolbarDelegate {
     }
 
 }
+
+// MARK: - Menu delegate
+
+extension MainWindowController: NSMenuDelegate {
+
+    // This method is presently only called for the style menu.
+    func menuNeedsUpdate(_ menu: NSMenu) {
+        for menuItem in menu.items {
+            if menuItem.action == #selector(AppController.doSelectStyle(_:)) {
+                menu.removeItem(menuItem)
+            }
+        }
+
+        if let styles = (Array(ArticleView.loadStylesMap().keys) as? [String])?.sorted() {
+            var index = 0
+            while index < styles.count {
+                menu.insertItem(withTitle: styles[index],
+                                action: #selector(AppController.doSelectStyle(_:)),
+                                keyEquivalent: "",
+                                at: index + 1)
+                index += 1
+            }
+        }
+    }
+
+}

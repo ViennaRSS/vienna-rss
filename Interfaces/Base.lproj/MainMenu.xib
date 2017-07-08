@@ -13,6 +13,7 @@
                 <outlet property="delegate" destination="233" id="319"/>
                 <outlet property="dockMenu" destination="JWi-Bw-kAV" id="S3Z-Bl-WjG"/>
                 <outlet property="filterMenu" destination="1118" id="ulZ-To-isZ"/>
+                <outlet property="styleMenu" destination="827" id="1mz-vS-fyL"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -638,6 +639,9 @@
                                             </connections>
                                         </menuItem>
                                     </items>
+                                    <connections>
+                                        <outlet property="delegate" destination="TpV-Sw-bYp" id="78b-rl-3ZA"/>
+                                    </connections>
                                 </menu>
                             </popUpButtonCell>
                         </popUpButton>
@@ -1205,7 +1209,17 @@ CA
                                 </menu>
                             </menuItem>
                             <menuItem title="Style" id="826">
-                                <menu key="submenu" title="Style" id="827"/>
+                                <menu key="submenu" title="Style" id="827">
+                                    <items>
+                                        <menuItem isSeparatorItem="YES" id="Pg5-JZ-O2D"/>
+                                        <menuItem title="More Styles…" id="2S3-dG-ZPg">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="moreStyles:" target="-1" id="pk4-6e-u9J"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="1088">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
@@ -1531,7 +1545,6 @@ CA
                 <outlet property="columnsMenu" destination="442" id="1050"/>
                 <outlet property="mainWindowController" destination="TpV-Sw-bYp" id="zzt-Yo-pwZ"/>
                 <outlet property="sortByMenu" destination="387" id="1054"/>
-                <outlet property="stylesMenu" destination="lu2-BZ-Gxd" id="kep-Fa-btf"/>
             </connections>
         </customObject>
         <customView id="971" userLabel="ArticleDisplayView" customClass="ArticleListView">

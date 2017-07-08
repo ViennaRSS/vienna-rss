@@ -82,7 +82,6 @@
 -(void)initSortMenu;
 -(void)initColumnsMenu;
 -(void)initScriptsMenu;
-@property (nonatomic, getter=getStylesMenu, readonly, copy) NSMenu *stylesMenu;
 -(void)doEditFolder:(Folder *)folder;
 -(void)refreshOnTimer:(NSTimer *)aTimer;
 -(BOOL)installFilename:(NSString *)srcFile toPath:(NSString *)path;
@@ -402,9 +401,9 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
                             options:0
                             context:nil];
 
-	// Initialize the Styles menu.
-	stylesMenu.submenu = self.stylesMenu;
-	
+	// Load the styles into the main menu.
+    [self populateStyleMenu];
+
 	// Show the current unread count on the app icon
 	[self showUnreadCountOnApplicationIconAndWindowTitle];
 	
@@ -605,7 +604,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 		else
 		{
 			Preferences * prefs = [Preferences standardPreferences];
-			stylesMenu.submenu = self.stylesMenu;
+            [self populateStyleMenu];
 			prefs.displayStyle = styleName;
             runOKAlertPanel(NSLocalizedString(@"New style title", nil), NSLocalizedString(@"New style body", nil), styleName);
 		}
@@ -1574,34 +1573,27 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     }
 }
 
-/* getStylesMenu
- * Returns a menu with a list of built-in and external styles. (Note that in the event of
- * duplicates the styles in the external Styles folder wins. This is intended to allow the user to
- * override the built-in styles if necessary).
- */
--(NSMenu *)getStylesMenu
-{
-	NSMenu * stylesSubMenu = [NSMenu new];
-	
-	// Reinitialise the styles map
-	NSDictionary * stylesMap = [ArticleView loadStylesMap];
-	
-	// Add the contents of the stylesPathMappings dictionary keys to the menu sorted by key name.
-	NSArray * sortedMenuItems = [stylesMap.allKeys sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-	NSInteger count = sortedMenuItems.count;
-	NSInteger index;
-	
-	for (index = 0; index < count; ++index)
-	{
-		NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:sortedMenuItems[index] action:@selector(doSelectStyle:) keyEquivalent:@""];
-		[stylesSubMenu addItem:menuItem];
+- (void)populateStyleMenu {
+    NSMenu *menu = ((ViennaApp *)NSApp).styleMenu;
+
+    // Remove any existing menu items.
+    for (NSMenuItem *item in menu.itemArray) {
+        if (item.action == @selector(doSelectStyle:)) {
+            [menu removeItem:item];
+        }
+    }
+
+	// Reinitialise the styles map.
+	NSArray *styles = [ArticleView loadStylesMap].allKeys;
+    styles = [styles sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+
+    // Create new menu items.
+	for (NSInteger index = 0; index < styles.count; ++index) {
+		NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:styles[index]
+                                                          action:@selector(doSelectStyle:)
+                                                   keyEquivalent:@""];
+		[menu insertItem:menuItem atIndex:index];
 	}
-	
-	// Append a link to More Styles...
-	[stylesSubMenu addItem:[NSMenuItem separatorItem]];
-	NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Styles…", nil) action:@selector(moreStyles:) keyEquivalent:@""];
-	[stylesSubMenu addItem:menuItem];
-	return stylesSubMenu;
 }
 
 /* updateNewArticlesNotification

@@ -51,7 +51,6 @@
 	IBOutlet NSMenuItem * closeWindowItem;
 	IBOutlet NSMenuItem * sortByMenu;
 	IBOutlet NSMenuItem * columnsMenu;
-	IBOutlet NSMenuItem * stylesMenu;
 
 	DownloadWindow * downloadWindow;
 	SmartFolder * smartFolder;
@@ -109,6 +108,7 @@
 -(IBAction)openWebElementInNewTab:(id)sender;
 -(IBAction)openWebElementInDefaultBrowser:(id)sender;
 -(IBAction)doSelectScript:(id)sender;
+-(IBAction)doSelectStyle:(id)sender;
 -(IBAction)doOpenScriptsFolder:(id)sender;
 -(IBAction)viewSourceHomePage:(id)sender;
 -(IBAction)viewSourceHomePageInAlternateBrowser:(id)sender;
