@@ -104,7 +104,7 @@
 	articleText.UIDelegate = self;
 	articleText.frameLoadDelegate = self;
 	[articleText setOpenLinksInNewBrowser:YES];
-	[articleText setController:controller];
+	[articleText setController:self.controller];
 	
 	// Make web preferences 16pt Arial to match Safari
 	articleText.preferences.standardFontFamily = @"Arial";
@@ -172,7 +172,7 @@
  */
 -(WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
 {
-	[controller openURL:request.URL inPreferredBrowser:YES];
+	[self.controller openURL:request.URL inPreferredBrowser:YES];
 	// Change this to handle modifier key?
 	// Is this covered by the webView policy?
 	return nil;
@@ -224,14 +224,14 @@
 	// If this is an URL link, do the link-specific items.
 	NSURL * urlLink = [element valueForKey:WebElementLinkURLKey];
 	if (urlLink != nil)
-		return [controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
+		return [self.controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
 	
 	// If we have a full HTML page then do the additional web-page specific items.
 	if (isCurrentPageFullHTML)
 	{
 		WebFrame * frameKey = [element valueForKey:WebElementFrameKey];
 		if (frameKey != nil)
-			return [controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
+			return [self.controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
 	}
 	
 	// Remove the reload menu item if we don't have a full HTML page.
@@ -349,7 +349,7 @@
 {
 	NSInteger row = articleList.clickedRow;
 	NSInteger column = articleList.clickedColumn;
-	NSArray * allArticles = controller.articleController.allArticles;
+	NSArray * allArticles = self.controller.articleController.allArticles;
 	
 	if (row >= 0 && row < (NSInteger)allArticles.count)
 	{
@@ -360,12 +360,12 @@
 			NSString * columnName = ((NSTableColumn *)columns[column]).identifier;
 			if ([columnName isEqualToString:MA_Field_Read])
 			{
-				[controller.articleController markReadByArray:@[theArticle] readFlag:!theArticle.read];
+				[self.controller.articleController markReadByArray:@[theArticle] readFlag:!theArticle.read];
 				return;
 			}
 			if ([columnName isEqualToString:MA_Field_Flagged])
 			{
-				[controller.articleController markFlaggedByArray:@[theArticle] flagged:!theArticle.flagged];
+				[self.controller.articleController markFlaggedByArray:@[theArticle] flagged:!theArticle.flagged];
 				return;
 			}
 			if ([columnName isEqualToString:MA_Field_HasEnclosure])
@@ -385,8 +385,8 @@
 {
 	if (currentSelectedRow != -1 && articleList.clickedRow != -1)
 	{
-		Article * theArticle = controller.articleController.allArticles[currentSelectedRow];
-		[controller openURLFromString:theArticle.link inPreferredBrowser:YES];
+		Article * theArticle = self.controller.articleController.allArticles[currentSelectedRow];
+		[self.controller openURLFromString:theArticle.link inPreferredBrowser:YES];
 	}
 }
 
@@ -432,7 +432,7 @@
 	if (singleSelection)
 	{
 		NSUInteger nextRow = articleList.selectedRowIndexes.firstIndex;
-		NSUInteger articlesCount = controller.articleController.allArticles.count;
+		NSUInteger articlesCount = self.controller.articleController.allArticles.count;
 
 		currentSelectedRow = -1;
 		if (nextRow >= articlesCount)
@@ -576,8 +576,8 @@
 	Preferences * prefs = [Preferences standardPreferences];
 	
 	// Remember the current folder and article
-	NSString * guid = (currentSelectedRow >= 0 && currentSelectedRow < controller.articleController.allArticles.count) ? [controller.articleController.allArticles[currentSelectedRow] guid] : @"";
-	[prefs setInteger:controller.articleController.currentFolderId forKey:MAPref_CachedFolderID];
+	NSString * guid = (currentSelectedRow >= 0 && currentSelectedRow < self.controller.articleController.allArticles.count) ? [self.controller.articleController.allArticles[currentSelectedRow] guid] : @"";
+	[prefs setInteger:self.controller.articleController.currentFolderId forKey:MAPref_CachedFolderID];
 	[prefs setString:guid forKey:MAPref_CachedArticleGUID];
 
 	// An array we need for the settings
@@ -658,7 +658,7 @@
  */
 -(void)showSortDirection
 {
-	NSString * sortColumnIdentifier = controller.articleController.sortColumnIdentifier;
+	NSString * sortColumnIdentifier = self.controller.articleController.sortColumnIdentifier;
 	
 	for (NSTableColumn * column in articleList.tableColumns)
 	{
@@ -692,7 +692,7 @@
 	    return NO;
 	}
 
-	for (Article * thisArticle in controller.articleController.allArticles)
+	for (Article * thisArticle in self.controller.articleController.allArticles)
 	{
 		if ([thisArticle.guid isEqualToString:guid])
 		{
@@ -734,7 +734,7 @@
  */
 -(BOOL)canGoForward
 {
-	return controller.articleController.canGoForward;
+	return self.controller.articleController.canGoForward;
 }
 
 /* canGoBack
@@ -742,7 +742,7 @@
  */
 -(BOOL)canGoBack
 {
-	return controller.articleController.canGoBack;
+	return self.controller.articleController.canGoBack;
 }
 
 /* handleGoForward
@@ -750,7 +750,7 @@
  */
 -(IBAction)handleGoForward:(id)sender
 {
-	[controller.articleController goForward];
+	[self.controller.articleController goForward];
 }
 
 /* handleGoBack
@@ -758,7 +758,7 @@
  */
 -(IBAction)handleGoBack:(id)sender
 {
-	[controller.articleController goBack];
+	[self.controller.articleController goBack];
 }
 
 - (BOOL)acceptsFirstResponder
@@ -772,7 +772,7 @@
  */
 -(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags
 {
-	return [controller handleKeyDown:keyChar withFlags:flags];
+	return [self.controller handleKeyDown:keyChar withFlags:flags];
 }
 
 /* selectedArticle
@@ -780,7 +780,7 @@
  */
 -(Article *)selectedArticle
 {
-	return (currentSelectedRow >= 0 && currentSelectedRow < controller.articleController.allArticles.count) ? controller.articleController.allArticles[currentSelectedRow] : nil;
+	return (currentSelectedRow >= 0 && currentSelectedRow < self.controller.articleController.allArticles.count) ? self.controller.articleController.allArticles[currentSelectedRow] : nil;
 }
 
 /* printDocument
@@ -805,7 +805,7 @@
 -(void)handleArticleListFontChange:(NSNotification *)note
 {
 	[self setTableViewFont];
-	if (self == controller.articleController.mainArticleView)
+	if (self == self.controller.articleController.mainArticleView)
 	{
 		[articleList reloadData];
 	}
@@ -816,7 +816,7 @@
  */
 -(void)handleLoadFullHTMLChange:(NSNotification *)note
 {
-	if (self == controller.articleController.mainArticleView)
+	if (self == self.controller.articleController.mainArticleView)
 		[self refreshArticlePane];
 }
 
@@ -825,7 +825,7 @@
  */
 -(void)handleReadingPaneChange:(NSNotificationCenter *)nc
 {
-	if (self == controller.articleController.mainArticleView)
+	if (self == self.controller.articleController.mainArticleView)
 	{
 		[self setOrientation:[Preferences standardPreferences].layout];
 		[self updateVisibleColumns];
@@ -853,7 +853,7 @@
  */
 -(void)makeRowSelectedAndVisible:(NSInteger)rowIndex
 {
-	if (controller.articleController.allArticles.count == 0u)
+	if (self.controller.articleController.allArticles.count == 0u)
 	{
 		currentSelectedRow = -1;
 		[articleList deselectAll:self];
@@ -898,7 +898,7 @@
 	if (currentRow < 0)
 		currentRow = 0;
 	
-	NSArray * allArticles = controller.articleController.allArticles;
+	NSArray * allArticles = self.controller.articleController.allArticles;
 	NSInteger totalRows = allArticles.count;
 	Article * theArticle;
 	while (currentRow < totalRows)
@@ -964,7 +964,7 @@
 	BOOL result = [self viewNextUnreadInCurrentFolder:-1];
 	if (!result)
 	{
-		NSInteger count = controller.articleController.allArticles.count;
+		NSInteger count = self.controller.articleController.allArticles.count;
 		if (count > 0)
 			[self makeRowSelectedAndVisible:0];
 	}
@@ -985,15 +985,15 @@
  */
 -(void)performFindPanelAction:(NSInteger)actionTag
 {
-	[controller.articleController reloadArrayOfArticles];
+	[self.controller.articleController reloadArrayOfArticles];
 	
 	// This action is send continuously by the filter field, so make sure not the mark read while searching
-	if (currentSelectedRow < 0 && controller.articleController.allArticles.count > 0 )
+	if (currentSelectedRow < 0 && self.controller.articleController.allArticles.count > 0 )
 	{
 		BOOL shouldSelectArticle = YES;
 		if ([Preferences standardPreferences].markReadInterval > 0.0f)
 		{
-			Article * article = controller.articleController.allArticles[0u];
+			Article * article = self.controller.articleController.allArticles[0u];
             if (!article.read) {
 				shouldSelectArticle = NO;
             }
@@ -1019,11 +1019,11 @@
         case MA_Refresh_RedrawList:
             break;
         case MA_Refresh_ReapplyFilter:
-            [controller.articleController refilterArrayOfArticles];
-            [controller.articleController sortArticles];
+            [self.controller.articleController refilterArrayOfArticles];
+            [self.controller.articleController sortArticles];
             break;
         case MA_Refresh_SortAndRedraw:
-            [controller.articleController sortArticles];
+            [self.controller.articleController sortArticles];
             break;
     }
 
@@ -1086,9 +1086,9 @@
 	[self refreshArticlePane];
 	
 	// If we mark read after an interval, start the timer here.
-	if (currentSelectedRow >= 0 && currentSelectedRow < controller.articleController.allArticles.count)
+	if (currentSelectedRow >= 0 && currentSelectedRow < self.controller.articleController.allArticles.count)
 	{
-		Article * theArticle = controller.articleController.allArticles[currentSelectedRow];
+		Article * theArticle = self.controller.articleController.allArticles[currentSelectedRow];
 		if (!theArticle.read && !blockMarkRead)
 		{
 			[markReadTimer invalidate];
@@ -1117,14 +1117,14 @@
 	}
 	else
 	{
-		NSArray * allArticles = controller.articleController.allArticles;
+		NSArray * allArticles = self.controller.articleController.allArticles;
 		NSAssert(currentSelectedRow < (NSInteger)[allArticles count], @"Out of range row index received");
 		
 		[self refreshImmediatelyArticleAtCurrentRow];
 		
 		// Add this to the backtrack list
 		NSString * guid = [allArticles[currentSelectedRow] guid];
-		[controller.articleController addBacktrack:guid];
+		[self.controller.articleController addBacktrack:guid];
 	}
 }
 
@@ -1133,7 +1133,7 @@
  */
 -(void)handleRefreshArticle:(NSNotification *)nc
 {
-	if (self == controller.articleController.mainArticleView && !isAppInitialising)
+	if (self == self.controller.articleController.mainArticleView && !isAppInitialising)
 		[self refreshArticlePane];
 }
 
@@ -1265,12 +1265,12 @@
  */
 -(void)markCurrentRead:(NSTimer *)aTimer
 {
-	NSArray * allArticles = controller.articleController.allArticles;
+	NSArray * allArticles = self.controller.articleController.allArticles;
 	if (currentSelectedRow >=0 && currentSelectedRow < (NSInteger)allArticles.count && ![Database sharedManager].readOnly)
 	{
 		Article * theArticle = allArticles[currentSelectedRow];
 		if (!theArticle.read)
-			[controller.articleController markReadByArray:@[theArticle] readFlag:YES];
+			[self.controller.articleController markReadByArray:@[theArticle] readFlag:YES];
 	}
 }
 
@@ -1280,7 +1280,7 @@
  */
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-	return controller.articleController.allArticles.count;
+	return self.controller.articleController.allArticles.count;
 }
 
 /* objectValueForTableColumn [datasource]
@@ -1290,7 +1290,7 @@
 -(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
 	Database * db = [Database sharedManager];
-	NSArray * allArticles = controller.articleController.allArticles;
+	NSArray * allArticles = self.controller.articleController.allArticles;
 	Article * theArticle;
 	
 	if(rowIndex < 0 || rowIndex >= allArticles.count)
@@ -1464,7 +1464,7 @@
 -(void)tableView:(NSTableView *)tableView didClickTableColumn:(NSTableColumn *)tableColumn
 {
 	NSString * columnName = tableColumn.identifier;
-	[controller.articleController sortByIdentifier:columnName];
+	[self.controller.articleController sortByIdentifier:columnName];
 	[self showSortDirection];
 }
 
@@ -1556,7 +1556,7 @@
 	for (index = 0; index < count; ++index)
 	{
 		NSInteger msgIndex = [rows[index] integerValue];
-		Article * thisArticle = controller.articleController.allArticles[msgIndex];
+		Article * thisArticle = self.controller.articleController.allArticles[msgIndex];
 		Folder * folder = [db folderFromID:thisArticle.folderId];
 		NSString * msgText = thisArticle.body;
 		NSString * msgTitle = thisArticle.title;
@@ -1616,7 +1616,7 @@
 		articleArray = [NSMutableArray arrayWithCapacity:rowIndexes.count];
 		while (rowIndex != NSNotFound)
 		{
-			[articleArray addObject:controller.articleController.allArticles[rowIndex]];
+			[articleArray addObject:self.controller.articleController.allArticles[rowIndex]];
 			rowIndex = [rowIndexes indexGreaterThanIndex:rowIndex];
 		}
 	}
