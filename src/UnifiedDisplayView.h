@@ -28,7 +28,6 @@
 
 @interface UnifiedDisplayView : NSView<BaseView, ArticleBaseView, NSTableViewDelegate, NSTableViewDataSource>
 {
-	IBOutlet AppController * controller;
     IBOutlet ExtendedTableView *articleList;
 
 	NSInteger currentSelectedRow;
@@ -39,6 +38,8 @@
 	NSMutableArray * rowHeightArray;
 	NSProgressIndicator * progressIndicator;
 }
+
+@property (weak, nonatomic) IBOutlet AppController *controller;
 
 // Public functions
 -(void)updateAlternateMenuTitle;
