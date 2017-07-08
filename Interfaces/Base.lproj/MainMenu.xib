@@ -1525,7 +1525,6 @@ CA
         </menu>
         <customObject id="233" userLabel="AppController" customClass="AppController">
             <connections>
-                <outlet property="browserView" destination="1227" id="1231"/>
                 <outlet property="closeAllTabsItem" destination="1036" id="1038"/>
                 <outlet property="closeTabItem" destination="1023" id="1035"/>
                 <outlet property="closeWindowItem" destination="935" id="1034"/>
@@ -1743,6 +1742,7 @@ CA
         <customObject id="TpV-Sw-bYp" customClass="MainWindowController" customModule="Vienna" customModuleProvider="target">
             <connections>
                 <outlet property="articleListView" destination="971" id="RCz-Ng-kVt"/>
+                <outlet property="browserView" destination="1227" id="Nww-Hd-aAY"/>
                 <outlet property="filterButton" destination="1400" id="klL-0x-Gpc"/>
                 <outlet property="filterLabel" destination="1403" id="dvr-7K-18f"/>
                 <outlet property="statusBar" destination="659-iz-w4S" id="c8m-QE-SDv"/>

@@ -47,7 +47,6 @@
 @interface AppController : NSObject <NSApplicationDelegate>
 {
 	IBOutlet NSSearchField * filterSearchField;
-	IBOutlet BrowserView * browserView;
 	IBOutlet NSSearchField * searchField;
 	IBOutlet NSMenuItem * closeTabItem;
 	IBOutlet NSMenuItem * closeAllTabsItem;
@@ -78,6 +77,7 @@
 }
 
 @property (nonatomic) PluginManager *pluginManager;
+@property (nonatomic, weak) BrowserView *browserView;
 @property (nonatomic) ArticleController *articleController;
 @property (nonatomic, weak) UnifiedDisplayView *unifiedListView;
 @property (nonatomic, weak) ArticleListView *articleListView;
@@ -179,7 +179,6 @@
 @property (nonatomic, getter=isConnecting, readonly) BOOL connecting;
 -(void)runAppleScript:(NSString *)scriptName;
 -(NSDictionary *)standardURLs;
-@property (nonatomic, readonly, strong) BrowserView *browserView;
 @property (nonatomic, readonly, copy) NSArray *folders;
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
 -(void)updateStatusBarFilterButtonVisibility;

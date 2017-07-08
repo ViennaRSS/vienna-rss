@@ -23,6 +23,7 @@ final class MainWindowController: NSWindowController {
 
     // MARK: Transitional outlets
 
+    @IBOutlet var browserView: BrowserView?
     @IBOutlet var articleListView: ArticleListView?
     @IBOutlet var unifiedDisplayView: UnifiedDisplayView?
 
