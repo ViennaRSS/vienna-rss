@@ -908,9 +908,17 @@
 	Folder * folder = node.folder;
     NSMutableDictionary * myInfo = [NSMutableDictionary dictionaryWithDictionary:info];
     if (folder.isUnsubscribed) {
-		myInfo[NSForegroundColorAttributeName] = [NSColor secondaryLabelColor];
+		if ([NSColor respondsToSelector:@selector(secondaryLabelColor)]) {
+			myInfo[NSForegroundColorAttributeName] = NSColor.secondaryLabelColor;
+		} else {
+			myInfo[NSForegroundColorAttributeName] = NSColor.disabledControlTextColor;
+		}
     } else {
-        myInfo[NSForegroundColorAttributeName] = [NSColor labelColor];
+		if ([NSColor respondsToSelector:@selector(labelColor)]) {
+			myInfo[NSForegroundColorAttributeName] = NSColor.labelColor;
+		} else {
+			myInfo[NSForegroundColorAttributeName] = NSColor.controlTextColor;
+		}
     }
 	// Set the font
 	if (folder.unreadCount ||  (folder.childUnreadCount && ![olv isItemExpanded:item]))
