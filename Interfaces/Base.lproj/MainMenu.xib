@@ -1173,10 +1173,6 @@ CA
                 <outlet property="closeWindowItem" destination="935" id="1034"/>
                 <outlet property="columnsMenu" destination="442" id="1050"/>
                 <outlet property="currentFilterTextField" destination="1403" id="1405"/>
-                <outlet property="exportAll" destination="862" id="865"/>
-                <outlet property="exportSaveAccessory" destination="860" id="864"/>
-                <outlet property="exportSelected" destination="863" id="866"/>
-                <outlet property="exportWithGroups" destination="1052" id="1053"/>
                 <outlet property="filterDisclosureView" destination="cTN-D0-dY2" id="i7U-gE-GBj"/>
                 <outlet property="filterIconInStatusBarButton" destination="1400" id="1407"/>
                 <outlet property="filterSearchField" destination="1304" id="1315"/>
@@ -1193,43 +1189,6 @@ CA
                 <outlet property="unifiedListView" destination="1148" id="O5e-id-8Cu"/>
             </connections>
         </customObject>
-        <customView id="860" userLabel="ExportSaveAccessory">
-            <rect key="frame" x="0.0" y="0.0" width="399" height="94"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <subviews>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1052">
-                    <rect key="frame" x="18" y="15" width="363" height="18"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <buttonCell key="cell" type="check" title="Preserve group folders in exported file" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="1368">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                </button>
-                <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="861">
-                    <rect key="frame" x="18" y="37" width="363" height="38"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    <size key="cellSize" width="363" height="18"/>
-                    <size key="intercellSpacing" width="4" height="2"/>
-                    <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="1380">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <cells>
-                        <column>
-                            <buttonCell type="radio" title="Export all subscriptions" imagePosition="left" alignment="left" state="on" inset="2" id="862">
-                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                            <buttonCell type="radio" title="Export selected subscriptions" imagePosition="left" alignment="left" tag="1" inset="2" id="863">
-                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </column>
-                    </cells>
-                </matrix>
-            </subviews>
-        </customView>
         <customView id="971" userLabel="ArticleDisplayView" customClass="ArticleListView">
             <rect key="frame" x="0.0" y="0.0" width="700" height="629"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
