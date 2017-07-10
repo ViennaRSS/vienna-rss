@@ -343,6 +343,7 @@
 		F65D6D711E74619E00A30974 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4398241E1666B3DB00FFE219 /* Credits.rtf */; };
 		F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */; };
 		F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = F69140E31E71B94200D51BFF /* AppController+Notifications.m */; };
+		F69964F71F13029600FC8493 /* OverlayStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69964F61F13029500FC8493 /* OverlayStatusBar.swift */; };
 		F6A7DE341E47138B0017BE5E /* advanced.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2A1E47138B0017BE5E /* advanced.html */; };
 		F6A7DE351E47138B0017BE5E /* faq.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2C1E47138B0017BE5E /* faq.html */; };
 		F6A7DE361E47138B0017BE5E /* intro.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2E1E47138B0017BE5E /* intro.html */; };
@@ -1029,6 +1030,7 @@
 		F69140FC1E71D74400D51BFF /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F69140FD1E71D74600D51BFF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		F69140FE1E71D74800D51BFF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
+		F69964F61F13029500FC8493 /* OverlayStatusBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OverlayStatusBar.swift; path = src/OverlayStatusBar.swift; sourceTree = "<group>"; };
 		F6A7DDCA1E470E980017BE5E /* Vienna.help */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Vienna.help; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6A7DDCC1E470E980017BE5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6A7DE2B1E47138B0017BE5E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Resources/en.lproj/advanced.html; sourceTree = "<group>"; };
@@ -1834,6 +1836,7 @@
 				AAFAF3FC088056D800DAFF04 /* KeyChain.m */,
 				3A23F13315276935008AF863 /* NSNotificationAdditions.h */,
 				4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */,
+				F69964F61F13029500FC8493 /* OverlayStatusBar.swift */,
 				AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */,
 				AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */,
 				AAF3B14006095E7B0025CC7F /* StringExtensions.h */,
@@ -2732,6 +2735,7 @@
 				435028B3165DE9E00018EDB7 /* StdEnclosureView.m in Sources */,
 				435028B4165DE9E00018EDB7 /* TabbedWebView.m in Sources */,
 				435028B6165DE9E00018EDB7 /* TreeNode.m in Sources */,
+				F69964F71F13029600FC8493 /* OverlayStatusBar.swift in Sources */,
 				435028B7165DE9E00018EDB7 /* UnifiedDisplayView.m in Sources */,
 				435028B8165DE9E00018EDB7 /* URLHandlerCommand.m in Sources */,
 				435028B9165DE9E00018EDB7 /* ViennaApp.m in Sources */,
