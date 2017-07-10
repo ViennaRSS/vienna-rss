@@ -30,6 +30,7 @@
 #import "Folder.h"
 #import "BrowserView.h"
 #import "SSTextField.h"
+#import "Vienna-Swift.h"
 
 @implementation BrowserPaneButtonCell
 
@@ -63,6 +64,8 @@
 @end
 
 @interface BrowserPane ()
+
+@property (nonatomic) OverlayStatusBar *statusBar;
 
 -(void)endFrameLoad;
 -(void)showRssPageButton:(BOOL)showButton;
@@ -123,7 +126,7 @@
 {
 	// Create our webview
 	[webPane initTabbedWebView];
-	webPane.UIDelegate = self;
+    webPane.UIDelegate = self;
 	webPane.frameLoadDelegate = self;
 	
 	// Make web preferences 16pt Arial to match Safari
@@ -160,6 +163,10 @@
 	[forwardButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Go forward to the next page", nil) forAttribute:NSAccessibilityTitleAttribute];
 	[rssPageButton setToolTip:NSLocalizedString(@"Subscribe to the feed for this page", nil)];
 	[rssPageButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Subscribe to the feed for this page", nil) forAttribute:NSAccessibilityTitleAttribute];
+
+    // Create a status bar.
+    self.statusBar = [OverlayStatusBar new];
+    [self addSubview:self.statusBar];
 }
 
 /* setController
@@ -260,10 +267,10 @@
  * Called from the webview when the user positions the mouse over an element. If it's a link
  * then echo the URL to the status bar like Safari does.
  */
--(void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation modifierFlags:(NSUInteger)modifierFlags
-{
-	NSURL * url = [elementInformation valueForKey:@"WebElementLinkURL"];
-	[controller setStatusMessage:(url ? url.absoluteString : @"") persist:NO];
+- (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation
+  modifierFlags:(NSUInteger)modifierFlags {
+    NSURL *url = [elementInformation valueForKey:@"WebElementLinkURL"];
+    self.statusBar.label = url.absoluteString;
 }
 
 /* didStartProvisionalLoadForFrame

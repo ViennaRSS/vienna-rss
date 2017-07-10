@@ -33,6 +33,7 @@
 #import "BrowserView.h"
 #import "TableViewExtensions.h"
 #import "Database.h"
+#import "Vienna-Swift.h"
 
 #define LISTVIEW_CELL_IDENTIFIER		@"ArticleCellView"
 // 300 seems a reasonable value to avoid calculating too many frames before being able to update display
@@ -42,6 +43,8 @@
 #define YPOS_IN_CELL	2.0
 
 @interface UnifiedDisplayView ()
+
+@property (nonatomic) OverlayStatusBar *statusBar;
 
 -(void)initTableView;
 -(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
@@ -120,6 +123,9 @@
 	[articleList setDelegate:self];
 	[articleList setDataSource:self];
     [articleList accessibilitySetOverrideValue:NSLocalizedString(@"Articles", nil) forAttribute:NSAccessibilityDescriptionAttribute];
+
+    self.statusBar = [OverlayStatusBar new];
+    [articleList.enclosingScrollView addSubview:self.statusBar];
 }
 
 /* dealloc
@@ -178,10 +184,10 @@
  * Called from the webview when the user positions the mouse over an element. If it's a link
  * then echo the URL to the status bar like Safari does.
  */
--(void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation modifierFlags:(NSUInteger)modifierFlags
-{
-	NSURL * url = [elementInformation valueForKey:@"WebElementLinkURL"];
-	[controller setStatusMessage:(url ? url.absoluteString : @"") persist:NO];
+- (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation
+  modifierFlags:(NSUInteger)modifierFlags {
+    NSURL *url = [elementInformation valueForKey:@"WebElementLinkURL"];
+    self.statusBar.label = url.absoluteString;
 }
 
 /* contextMenuItemsForElement
