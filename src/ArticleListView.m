@@ -158,9 +158,10 @@
 	// Done initialising
 	isAppInitialising = NO;
 
-    // Create a status bar.
-    self.statusBar = [OverlayStatusBar new];
-    [articleText addSubview:self.statusBar];
+    [NSUserDefaults.standardUserDefaults addObserver:self
+                                          forKeyPath:MAPref_ShowStatusBar
+                                             options:NSKeyValueObservingOptionInitial
+                                             context:nil];
 }
 
 // MARK: - WebUIDelegate methods
@@ -209,8 +210,10 @@
  */
 - (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation
   modifierFlags:(NSUInteger)modifierFlags {
-    NSURL *url = [elementInformation valueForKey:@"WebElementLinkURL"];
-    self.statusBar.label = url.absoluteString;
+    if (self.statusBar) {
+        NSURL *url = [elementInformation valueForKey:@"WebElementLinkURL"];
+        self.statusBar.label = url.absoluteString;
+    }
 }
 
 /* contextMenuItemsForElement
@@ -1714,9 +1717,30 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    [NSUserDefaults.standardUserDefaults removeObserver:self
+                                             forKeyPath:MAPref_ShowStatusBar];
 	[articleText setUIDelegate:nil];
 	[articleText setFrameLoadDelegate:nil];
 	[splitView2 setDelegate:nil];
 	[articleList setDelegate:nil];
 }
+
+// MARK: Key-value observation
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+                       context:(void *)context {
+    if (keyPath == MAPref_ShowStatusBar) {
+        BOOL isStatusBarShown = [Preferences standardPreferences].showStatusBar;
+        if (isStatusBarShown && !self.statusBar) {
+            self.statusBar = [OverlayStatusBar new];
+            [articleText addSubview:self.statusBar];
+        } else if (!isStatusBarShown && self.statusBar) {
+            [self.statusBar removeFromSuperview];
+            self.statusBar = nil;
+        }
+    }
+}
+
 @end

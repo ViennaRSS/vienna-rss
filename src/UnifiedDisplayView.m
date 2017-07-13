@@ -124,8 +124,10 @@
 	[articleList setDataSource:self];
     [articleList accessibilitySetOverrideValue:NSLocalizedString(@"Articles", nil) forAttribute:NSAccessibilityDescriptionAttribute];
 
-    self.statusBar = [OverlayStatusBar new];
-    [articleList.enclosingScrollView addSubview:self.statusBar];
+    [NSUserDefaults.standardUserDefaults addObserver:self
+                                          forKeyPath:MAPref_ShowStatusBar
+                                             options:NSKeyValueObservingOptionInitial
+                                             context:nil];
 }
 
 /* dealloc
@@ -133,6 +135,8 @@
  */
 -(void)dealloc
 {
+    [NSUserDefaults.standardUserDefaults removeObserver:self
+                                             forKeyPath:MAPref_ShowStatusBar];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[articleList setDataSource:nil];
 	[articleList setDelegate:nil];
@@ -186,8 +190,10 @@
  */
 - (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation
   modifierFlags:(NSUInteger)modifierFlags {
-    NSURL *url = [elementInformation valueForKey:@"WebElementLinkURL"];
-    self.statusBar.label = url.absoluteString;
+    if (self.statusBar) {
+        NSURL *url = [elementInformation valueForKey:@"WebElementLinkURL"];
+        self.statusBar.label = url.absoluteString;
+    }
 }
 
 /* contextMenuItemsForElement
@@ -988,6 +994,24 @@
 		}
 	}
 	[articleList scrollRowToVisible:row];
+}
+
+// MARK: Key-value observation
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+                       context:(void *)context {
+    if (keyPath == MAPref_ShowStatusBar) {
+        BOOL isStatusBarShown = [Preferences standardPreferences].showStatusBar;
+        if (isStatusBarShown && !self.statusBar) {
+            self.statusBar = [OverlayStatusBar new];
+            [articleList.enclosingScrollView addSubview:self.statusBar];
+        } else if (!isStatusBarShown && self.statusBar) {
+            [self.statusBar removeFromSuperview];
+            self.statusBar = nil;
+        }
+    }
 }
 
 @end
