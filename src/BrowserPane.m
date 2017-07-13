@@ -30,6 +30,9 @@
 #import "Folder.h"
 #import "BrowserView.h"
 #import "SSTextField.h"
+#import "Constants.h"
+#import "Preferences.h"
+#import "Vienna-Swift.h"
 
 @implementation BrowserPaneButtonCell
 
@@ -63,6 +66,8 @@
 @end
 
 @interface BrowserPane ()
+
+@property (nonatomic) OverlayStatusBar *statusBar;
 
 -(void)endFrameLoad;
 -(void)showRssPageButton:(BOOL)showButton;
@@ -123,7 +128,7 @@
 {
 	// Create our webview
 	[webPane initTabbedWebView];
-	webPane.UIDelegate = self;
+    webPane.UIDelegate = self;
 	webPane.frameLoadDelegate = self;
 	
 	// Make web preferences 16pt Arial to match Safari
@@ -160,6 +165,11 @@
 	[forwardButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Go forward to the next page", nil) forAttribute:NSAccessibilityTitleAttribute];
 	[rssPageButton setToolTip:NSLocalizedString(@"Subscribe to the feed for this page", nil)];
 	[rssPageButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Subscribe to the feed for this page", nil) forAttribute:NSAccessibilityTitleAttribute];
+
+    [NSUserDefaults.standardUserDefaults addObserver:self
+                                          forKeyPath:MAPref_ShowStatusBar
+                                             options:NSKeyValueObservingOptionInitial
+                                             context:nil];
 }
 
 /* setController
@@ -256,24 +266,16 @@
 	[(self.webPane).mainFrame loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
-/* setStatusText
- * Called from the webview when some JavaScript writes status text. Echo this to
- * our status bar.
- */
--(void)webView:(WebView *)sender setStatusText:(NSString *)text
-{
-	if (controller.browserView.activeTabItemView == self)
-		[controller setStatusMessage:text persist:NO];
-}
-
 /* mouseDidMoveOverElement
  * Called from the webview when the user positions the mouse over an element. If it's a link
  * then echo the URL to the status bar like Safari does.
  */
--(void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation modifierFlags:(NSUInteger)modifierFlags
-{
-	NSURL * url = [elementInformation valueForKey:@"WebElementLinkURL"];
-	[controller setStatusMessage:(url ? url.absoluteString : @"") persist:NO];
+- (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation
+  modifierFlags:(NSUInteger)modifierFlags {
+    if (self.statusBar) {
+        NSURL *url = [elementInformation valueForKey:@"WebElementLinkURL"];
+        self.statusBar.label = url.absoluteString;
+    }
 }
 
 /* didStartProvisionalLoadForFrame
@@ -775,9 +777,31 @@
  */
 -(void)dealloc
 {
+    [NSUserDefaults.standardUserDefaults removeObserver:self
+                                             forKeyPath:MAPref_ShowStatusBar];
+
 	[self handleStopLoading:nil];
 	[webPane setFrameLoadDelegate:nil];
 	[webPane setUIDelegate:nil];
 	[webPane close];
 }
+
+// MARK: Key-value observation
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+                       context:(void *)context {
+    if (keyPath == MAPref_ShowStatusBar) {
+        BOOL isStatusBarShown = [Preferences standardPreferences].showStatusBar;
+        if (isStatusBarShown && !self.statusBar) {
+            self.statusBar = [OverlayStatusBar new];
+            [self addSubview:self.statusBar];
+        } else if (!isStatusBarShown && self.statusBar) {
+            [self.statusBar removeFromSuperview];
+            self.statusBar = nil;
+        }
+    }
+}
+
 @end

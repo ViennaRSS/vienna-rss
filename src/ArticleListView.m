@@ -39,8 +39,11 @@
 #import "StdEnclosureView.h"
 #import "BrowserView.h"
 #import "Database.h"
+#import "Vienna-Swift.h"
 
 @interface ArticleListView ()
+
+@property (nonatomic) OverlayStatusBar *statusBar;
 
 -(void)initTableView;
 -(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
@@ -154,6 +157,11 @@
 	
 	// Done initialising
 	isAppInitialising = NO;
+
+    [NSUserDefaults.standardUserDefaults addObserver:self
+                                          forKeyPath:MAPref_ShowStatusBar
+                                             options:NSKeyValueObservingOptionInitial
+                                             context:nil];
 }
 
 // MARK: - WebUIDelegate methods
@@ -196,24 +204,16 @@
 	return alertResponse == NSAlertFirstButtonReturn;
 }
 
-/* setStatusText
- * Called from the webview when some JavaScript writes status text. Echo this to
- * our status bar.
- */
--(void)webView:(WebView *)sender setStatusText:(NSString *)text
-{
-	if (controller.browserView.activeTabItemView == self)
-		[controller setStatusMessage:text persist:NO];
-}
-
 /* mouseDidMoveOverElement
  * Called from the webview when the user positions the mouse over an element. If it's a link
  * then echo the URL to the status bar like Safari does.
  */
--(void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation modifierFlags:(NSUInteger)modifierFlags
-{
-	NSURL * url = [elementInformation valueForKey:@"WebElementLinkURL"];
-	[controller setStatusMessage:(url ? url.absoluteString : @"") persist:NO];
+- (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation
+  modifierFlags:(NSUInteger)modifierFlags {
+    if (self.statusBar) {
+        NSURL *url = [elementInformation valueForKey:@"WebElementLinkURL"];
+        self.statusBar.label = url.absoluteString;
+    }
 }
 
 /* contextMenuItemsForElement
@@ -1631,8 +1631,6 @@
 	if (frame == articleText.mainFrame)
 	{
 		[self setError:nil];
-		[controller setStatusMessage:NSLocalizedString( isLoadingHTMLArticle ? @"Loading HTML article…" : @"", nil) persist:YES];
-		
 	}
 	
 }
@@ -1695,7 +1693,6 @@
 {
 	if (isLoadingHTMLArticle)
 	{
-		[controller setStatusMessage:NSLocalizedString(@"Article load completed", nil) persist:YES];
 		isLoadingHTMLArticle = NO;
 		[articleList setNeedsDisplay];
 	}
@@ -1720,9 +1717,30 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    [NSUserDefaults.standardUserDefaults removeObserver:self
+                                             forKeyPath:MAPref_ShowStatusBar];
 	[articleText setUIDelegate:nil];
 	[articleText setFrameLoadDelegate:nil];
 	[splitView2 setDelegate:nil];
 	[articleList setDelegate:nil];
 }
+
+// MARK: Key-value observation
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+                       context:(void *)context {
+    if (keyPath == MAPref_ShowStatusBar) {
+        BOOL isStatusBarShown = [Preferences standardPreferences].showStatusBar;
+        if (isStatusBarShown && !self.statusBar) {
+            self.statusBar = [OverlayStatusBar new];
+            [articleText addSubview:self.statusBar];
+        } else if (!isStatusBarShown && self.statusBar) {
+            [self.statusBar removeFromSuperview];
+            self.statusBar = nil;
+        }
+    }
+}
+
 @end
