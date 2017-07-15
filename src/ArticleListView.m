@@ -44,6 +44,7 @@
 @interface ArticleListView ()
 
 @property (nonatomic) OverlayStatusBar *statusBar;
+@property (weak, nonatomic) IBOutlet NSStackView *contentStackView;
 
 -(void)initTableView;
 -(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
@@ -934,45 +935,19 @@
 	return NO;
 }
 
-/* showEnclosureView
- * Display the enclosure view below the article list view.
- */
--(void)showEnclosureView
-{
-	if (stdEnclosureView.superview == nil)
-	{
-		NSRect enclosureRect;
-		NSRect mainRect;
-
-		mainRect = articleText.bounds;
-		enclosureRect = stdEnclosureView.bounds;
-		enclosureRect.size.width = mainRect.size.width;
-		mainRect.size.height -= enclosureRect.size.height;
-		mainRect.origin.y += enclosureRect.size.height;
-
-		[articleText.superview addSubview:stdEnclosureView];
-		articleText.frame = mainRect;
-		stdEnclosureView.frame = enclosureRect;
-	}
+// Display the enclosure view below the article list view.
+- (void)showEnclosureView {
+    if (![self.contentStackView.views containsObject:stdEnclosureView]) {
+        [self.contentStackView addView:stdEnclosureView
+                            inGravity:NSStackViewGravityTop];
+    }
 }
 
-/* hideEnclosureView
- * Hide the enclosure view if it is present.
- */
--(void)hideEnclosureView
-{
-	if (stdEnclosureView.superview != nil)
-	{
-		NSRect enclosureRect;
-		NSRect mainRect;
-		
-		mainRect = articleText.bounds;
-		enclosureRect = stdEnclosureView.bounds;
-		mainRect.size.height += enclosureRect.size.height;
-		
-		[stdEnclosureView removeFromSuperview];
-		articleText.frame = mainRect;
-	}
+// Hide the enclosure view if it is present.
+- (void)hideEnclosureView {
+    if ([self.contentStackView.views containsObject:stdEnclosureView]) {
+        [self.contentStackView removeView:stdEnclosureView];
+    }
 }
 
 /* selectFirstUnreadInFolder

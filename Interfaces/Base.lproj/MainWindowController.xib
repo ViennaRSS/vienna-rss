@@ -731,21 +731,21 @@
                                 <autoresizingMask key="autoresizingMask"/>
                             </tableHeaderView>
                         </scrollView>
-                        <view id="LXW-5J-Hlt" userLabel="Content View">
+                        <stackView orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="750" verticalStackHuggingPriority="750" fixedFrame="YES" id="rHW-hk-9Of">
                             <rect key="frame" x="0.0" y="320" width="700" height="310"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <subviews>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <beginningViews>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="1DK-2K-uuy" customClass="ArticleView">
                                     <rect key="frame" x="0.0" y="0.0" width="700" height="310"/>
                                 </customView>
-                            </subviews>
-                            <constraints>
-                                <constraint firstAttribute="bottom" secondItem="1DK-2K-uuy" secondAttribute="bottom" id="1Gk-5q-XS2"/>
-                                <constraint firstItem="1DK-2K-uuy" firstAttribute="leading" secondItem="LXW-5J-Hlt" secondAttribute="leading" id="lVU-PP-6SE"/>
-                                <constraint firstAttribute="trailing" secondItem="1DK-2K-uuy" secondAttribute="trailing" id="tjs-12-2Wc"/>
-                                <constraint firstItem="1DK-2K-uuy" firstAttribute="top" secondItem="LXW-5J-Hlt" secondAttribute="top" id="vqi-1K-fJi"/>
-                            </constraints>
-                        </view>
+                            </beginningViews>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
                     </subviews>
                     <holdingPriorities>
                         <real value="250"/>
@@ -762,6 +762,7 @@
             <connections>
                 <outlet property="articleList" destination="977" id="996"/>
                 <outlet property="articleText" destination="1DK-2K-uuy" id="ggQ-XF-qtz"/>
+                <outlet property="contentStackView" destination="rHW-hk-9Of" id="oce-W6-yQd"/>
                 <outlet property="splitView2" destination="972" id="998"/>
                 <outlet property="stdEnclosureView" destination="1288" id="1296"/>
             </connections>
@@ -826,7 +827,7 @@
                 <outlet property="tabView" destination="1218" id="1230"/>
             </connections>
         </customView>
-        <customView id="1288" userLabel="StdEnclosureView" customClass="StdEnclosureView">
+        <customView id="1288" customClass="StdEnclosureView">
             <rect key="frame" x="0.0" y="0.0" width="491" height="49"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
             <subviews>
