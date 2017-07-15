@@ -763,8 +763,8 @@
                 <outlet property="articleList" destination="977" id="996"/>
                 <outlet property="articleText" destination="1DK-2K-uuy" id="ggQ-XF-qtz"/>
                 <outlet property="contentStackView" destination="rHW-hk-9Of" id="oce-W6-yQd"/>
+                <outlet property="enclosureView" destination="1288" id="1296"/>
                 <outlet property="splitView2" destination="972" id="998"/>
-                <outlet property="stdEnclosureView" destination="1288" id="1296"/>
             </connections>
             <point key="canvasLocation" x="1066" y="-571"/>
         </customView>
@@ -827,7 +827,7 @@
                 <outlet property="tabView" destination="1218" id="1230"/>
             </connections>
         </customView>
-        <customView id="1288" customClass="StdEnclosureView">
+        <customView id="1288" customClass="EnclosureView">
             <rect key="frame" x="0.0" y="0.0" width="491" height="49"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
             <subviews>

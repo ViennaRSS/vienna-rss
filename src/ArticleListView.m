@@ -36,7 +36,7 @@
 #import "ProgressTextCell.h"
 #import "Article.h"
 #import "Folder.h"
-#import "StdEnclosureView.h"
+#import "EnclosureView.h"
 #import "BrowserView.h"
 #import "Database.h"
 #import "Vienna-Swift.h"
@@ -937,16 +937,16 @@
 
 // Display the enclosure view below the article list view.
 - (void)showEnclosureView {
-    if (![self.contentStackView.views containsObject:stdEnclosureView]) {
-        [self.contentStackView addView:stdEnclosureView
+    if (![self.contentStackView.views containsObject:enclosureView]) {
+        [self.contentStackView addView:enclosureView
                             inGravity:NSStackViewGravityTop];
     }
 }
 
 // Hide the enclosure view if it is present.
 - (void)hideEnclosureView {
-    if ([self.contentStackView.views containsObject:stdEnclosureView]) {
-        [self.contentStackView removeView:stdEnclosureView];
+    if ([self.contentStackView.views containsObject:enclosureView]) {
+        [self.contentStackView removeView:enclosureView];
     }
 }
 
@@ -1250,7 +1250,7 @@
 		else
 		{
 			[self showEnclosureView];
-			[stdEnclosureView setEnclosureFile:oneArticle.enclosure];
+			[enclosureView setEnclosureFile:oneArticle.enclosure];
 		}
 	}
 }
