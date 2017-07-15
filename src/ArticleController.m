@@ -24,7 +24,6 @@
 #import "Preferences.h"
 #import "Constants.h"
 #import "Database.h"
-#import "ArticleFilter.h"
 #import "ArticleRef.h"
 #import "OpenReader.h"
 #import "ArticleListView.h"
@@ -128,9 +127,13 @@
 		
 		// Register for notifications
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self selector:@selector(handleFilterChange:) name:@"MA_Notify_FilteringChange" object:nil];
 		[nc addObserver:self selector:@selector(handleArticleListContentChange:) name:@"MA_Notify_ArticleListContentChange" object:nil];
         [nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
+
+        [NSUserDefaults.standardUserDefaults addObserver:self
+                                              forKeyPath:MAPref_FilterMode
+                                                 options:0
+                                                 context:nil];
 
         queue = dispatch_queue_create("uk.co.opencommunity.vienna2.displayRefresh", DISPATCH_QUEUE_SERIAL);
         reloadArrayOfArticlesSemaphor = 0;
@@ -560,9 +563,8 @@
 	
 	NSString * guidOfArticleToPreserve = (articleToPreserve != nil) ? articleToPreserve.guid : @"";
 	NSInteger folderIdOfArticleToPreserve = articleToPreserve.folderId;
-	
-	ArticleFilter * filter = [ArticleFilter filterByTag:[Preferences standardPreferences].filterMode];
-	SEL comparator = filter.comparator;
+
+    NSInteger filterMode = [Preferences standardPreferences].filterMode;
 	NSInteger count = filteredArray.count;
 	NSInteger index;
 	
@@ -571,8 +573,9 @@
 		Article * article = filteredArray[index];
 		if ((article.folderId == folderIdOfArticleToPreserve) && [article.guid isEqualToString:guidOfArticleToPreserve])
 			guidOfArticleToPreserve = @"";
-		else if ((comparator != nil) && !((BOOL)(NSInteger)[ArticleFilter performSelector:comparator withObject:article]))
+        else if ([self filterArticle:article usingMode:filterMode] == false) {
 			[filteredArray removeObjectAtIndex:index];
+        }
 	}
 	
 	articleToPreserve=nil;
@@ -1023,17 +1026,6 @@
 	return !backtrackArray.atStartOfQueue;
 }
 
-/* handleFilterChange
-* Update the list of articles when the user changes the filter.
-*/
--(void)handleFilterChange:(NSNotification *)nc
-{
-    @synchronized(mainArticleView)
-    {
-	    [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
-	}
-}
-
 /* handleArticleListStateChange
 * Called if a folder content has changed
 * but we don't need to add new articles
@@ -1062,11 +1054,60 @@
     [self reloadArrayOfArticles];
 }
 
-/* dealloc
- * Clean up behind us.
- */
--(void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+// MARK: Filter article
+
+- (BOOL)filterArticle:(Article *)article usingMode:(NSInteger)filterMode {
+    switch (filterMode) {
+        case MA_Filter_Unread:
+            return !article.read;
+            break;
+        case MA_Filter_LastRefresh: {
+            NSDate *date = article.createdDate;
+            Preferences *prefs = [Preferences standardPreferences];
+            NSComparisonResult result = [date compare:[prefs objectForKey:MAPref_LastRefreshDate]];
+            return result != NSOrderedAscending;
+            break;
+        }
+        case MA_Filter_Today:
+            return [NSCalendar.currentCalendar isDateInToday:article.date];
+            break;
+        case MA_Filter_48h: {
+            NSDate *twoDaysAgo = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay
+                                                                        value:-2
+                                                                       toDate:[NSDate date]
+                                                                      options:0];
+            return [article.date compare:twoDaysAgo] != NSOrderedAscending;
+            break;
+        }
+        case MA_Filter_Flagged:
+            return article.flagged;
+            break;
+        case MA_Filter_Unread_Or_Flagged:
+            return (!article.read || article.flagged);
+            break;
+        default:
+            return true;
+    }
 }
+
+// MARK: Key-value observation
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+                       context:(void *)context {
+    if (keyPath == MAPref_FilterMode) {
+        // Update the list of articles when the user changes the filter.
+        @synchronized(mainArticleView) {
+            [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
+        }
+    }
+}
+
+- (void)dealloc {
+    [NSNotificationCenter.defaultCenter removeObserver:self];
+    [NSUserDefaults.standardUserDefaults removeObserver:self
+                                             forKeyPath:MAPref_FilterMode];
+}
+
 @end

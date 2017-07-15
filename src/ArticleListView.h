@@ -31,7 +31,6 @@
 
 @interface ArticleListView : NSView<BaseView, ArticleBaseView, NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate>
 {
-	IBOutlet AppController * controller;
 	IBOutlet MessageListView * articleList;
 	IBOutlet ArticleView * articleText;
 	IBOutlet NSSplitView * splitView2;
@@ -64,6 +63,8 @@
 	NSError * lastError;
 	NSProgressIndicator * progressIndicator;
 }
+
+@property (weak, nonatomic) AppController *controller;
 
 // Public functions
 -(void)updateAlternateMenuTitle;

@@ -781,7 +781,6 @@ static Preferences * _standardPreferences = nil;
 	{
 		filterMode = newMode;
 		[self setInteger:filterMode forKey:MAPref_FilterMode];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FilteringChange" object:nil];
 	}
 }
 
@@ -1085,7 +1084,6 @@ static Preferences * _standardPreferences = nil;
 	{
 		showStatusBar = show;
 		[self setBool:showStatusBar forKey:MAPref_ShowStatusBar];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_StatusBarChanged" object:nil];
 	}
 }
 

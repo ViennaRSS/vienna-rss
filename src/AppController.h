@@ -32,9 +32,7 @@
 @class WebPreferences;
 @class BrowserView;
 @class EmptyTrashWarning;
-@class ClickableProgressIndicator;
 @class SearchPanel;
-@class BJRWindowWithToolbar;
 @class DisclosureView;
 @class ViennaSparkleDelegate;
 @class PluginManager;
@@ -46,26 +44,13 @@
 @class UnifiedDisplayView;
 @class ArticleListView;
 
-@interface AppController : NSObject <NSApplicationDelegate,NSWindowDelegate,NSToolbarDelegate,NSMenuDelegate>
+@interface AppController : NSObject <NSApplicationDelegate>
 {
-	IBOutlet BJRWindowWithToolbar * mainWindow;
-	IBOutlet NSSearchField * filterSearchField;
-	IBOutlet NSPopUpButton * filterViewPopUp;
-	IBOutlet BrowserView * browserView;
-	IBOutlet NSSearchField * searchField;
-	IBOutlet NSTextField * statusText;
-	IBOutlet ClickableProgressIndicator * spinner;
 	IBOutlet NSMenuItem * closeTabItem;
 	IBOutlet NSMenuItem * closeAllTabsItem;
 	IBOutlet NSMenuItem * closeWindowItem;
 	IBOutlet NSMenuItem * sortByMenu;
 	IBOutlet NSMenuItem * columnsMenu;
-	IBOutlet NSMenuItem * stylesMenu;
-	IBOutlet NSMenuItem * filtersMenu;
-    IBOutlet DisclosureView * filterDisclosureView;
-    IBOutlet DisclosureView *statusBarDisclosureView;
-	IBOutlet NSTextField * currentFilterTextField;
-	IBOutlet NSButton * filterIconInStatusBarButton;
 
 	DownloadWindow * downloadWindow;
 	SmartFolder * smartFolder;
@@ -74,15 +59,11 @@
 	SearchPanel * searchPanel;
 	
 	Database * db;
-	PluginManager * pluginManager;
 	NSMutableDictionary * scriptPathMappings;
 	NSStatusItem * appStatusItem;
-	NSInteger progressCount;
 	NSDictionary * standardURLs;
 	NSTimer * checkTimer;
 	NSInteger lastCountOfUnread;
-	BOOL isStatusBarVisible;
-	NSString * persistedStatusText;
 	NSMenuItem * scriptsMenuItem;
 	BOOL didCompleteInitialisation;
 	NSString * searchString;
@@ -91,9 +72,11 @@
     ViennaSparkleDelegate * _sparkleDelegate;
 }
 
+@property (nonatomic) PluginManager *pluginManager;
+@property (nonatomic, weak) BrowserView *browserView;
 @property (nonatomic) ArticleController *articleController;
-@property (nonatomic, weak) IBOutlet UnifiedDisplayView *unifiedListView;
-@property (nonatomic, weak) IBOutlet ArticleListView *articleListView;
+@property (nonatomic, weak) UnifiedDisplayView *unifiedListView;
+@property (nonatomic, weak) ArticleListView *articleListView;
 @property (nonatomic, strong) NewSubscription *rssFeed;
 @property (nonatomic) FoldersTree *foldersTree;
 @property (readonly, copy, nonatomic) NSMenu *searchFieldMenu;
@@ -125,6 +108,7 @@
 -(IBAction)openWebElementInNewTab:(id)sender;
 -(IBAction)openWebElementInDefaultBrowser:(id)sender;
 -(IBAction)doSelectScript:(id)sender;
+-(IBAction)doSelectStyle:(id)sender;
 -(IBAction)doOpenScriptsFolder:(id)sender;
 -(IBAction)viewSourceHomePage:(id)sender;
 -(IBAction)viewSourceHomePageInAlternateBrowser:(id)sender;
@@ -149,7 +133,6 @@
 -(IBAction)conditionalShowDownloadsWindow:(id)sender;
 -(IBAction)mailLinkToArticlePage:(id)sender;
 -(IBAction)openWebLocation:(id)sender;
--(IBAction)changeFiltering:(id)sender;
 -(IBAction)getInfo:(id)sender;
 -(IBAction)unsubscribeFeed:(id)sender;
 -(IBAction)useCurrentStyleForArticles:(id)sender;
@@ -162,7 +145,6 @@
 -(IBAction)makeTextSmaller:(id)sender;
 -(IBAction)newTab:(id)sender;
 -(IBAction)downloadEnclosure:(id)sender;
--(IBAction)showHideStatusBar:(id)sender;
 -(IBAction)showHideFilterBar:(id)sender;
 -(IBAction)hideFilterBar:(id)sender;
 -(IBAction)setFocusToSearchField:(id)sender;
@@ -173,7 +155,6 @@
 
 
 // Public functions
--(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;
 -(NSArray *)contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems;
 -(void)showUnreadCountOnApplicationIconAndWindowTitle;
 -(void)openURLFromString:(NSString *)urlString inPreferredBrowser:(BOOL)openInPreferredBrowserFlag;
@@ -195,11 +176,8 @@
 @property (nonatomic, getter=isConnecting, readonly) BOOL connecting;
 -(void)runAppleScript:(NSString *)scriptName;
 -(NSDictionary *)standardURLs;
-@property (nonatomic, readonly, strong) BrowserView *browserView;
 @property (nonatomic, readonly, copy) NSArray *folders;
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
--(void)toggleOptionKeyButtonStates;
-@property (nonatomic, readonly, copy) NSMenu *folderMenu;
 -(void)updateStatusBarFilterButtonVisibility;
 @property (nonatomic, readonly, strong) NSLayoutManager *layoutManager;
 -(void)performWebSearch:(SearchMethod *)searchMethod;

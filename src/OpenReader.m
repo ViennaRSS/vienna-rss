@@ -58,6 +58,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
 @interface OpenReader () <ASIHTTPRequestDelegate>
 
+@property (readwrite, copy) NSString *statusMessage;
 @property (readwrite, nonatomic) NSUInteger countOfNewArticles;
 @property (nonatomic) NSMutableArray *localFeeds;
 @property (atomic) NSString *tToken;
@@ -216,7 +217,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     [(ASIHTTPRequest *)obj cancel];
                     [self.clientAuthWaitQueue removeObject:obj];
                 }
-                [APPCONTROLLER setStatusMessage:nil persist:NO];
+                self.statusMessage = nil;
             } else {
                 NSString *response = [strongRequest responseString];
                 NSArray *components = [response componentsSeparatedByString:@"\n"];
@@ -253,7 +254,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         }
         [[RefreshManager sharedManager] addConnection:myRequest];
         [[RefreshManager sharedManager] suspendConnectionsQueue];
-        [APPCONTROLLER setStatusMessage:NSLocalizedString(@"Authenticating on Open Reader", nil) persist:NO];
+        self.statusMessage = NSLocalizedString(@"Authenticating on Open Reader", nil);
     }
 } // addClientTokenToRequest
 
@@ -685,7 +686,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             // Add to count of new articles so far
             self.countOfNewArticles += newArticlesFromFeed;
 
-            [APPCONTROLLER setStatusMessage:nil persist:NO];
+            self.statusMessage = nil;
             [refreshedFolder clearNonPersistedFlag:VNAFolderFlagError];
             // Send status to the activity log
             if (newArticlesFromFeed == 0) {
@@ -910,10 +911,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         }
     }
 
-    AppController *controller = APPCONTROLLER;
-
     // Unread count may have changed
-    [controller setStatusMessage:nil persist:NO];
+    self.statusMessage = nil;
 } // subscriptionsRequestDone
 
 -(void)loadSubscriptions
@@ -923,7 +922,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                                                    ClientName]]];
     subscriptionRequest.didFinishSelector = @selector(subscriptionsRequestDone:);
     [[RefreshManager sharedManager] addConnection:subscriptionRequest];
-    [APPCONTROLLER setStatusMessage:NSLocalizedString(@"Fetching Open Reader Subscriptions…", nil) persist:NO];
+    self.statusMessage = NSLocalizedString(@"Fetching Open Reader Subscriptions…", nil);
 }
 
 -(void)subscribeToFeed:(NSString *)feedURL
