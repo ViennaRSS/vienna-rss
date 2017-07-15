@@ -3504,6 +3504,16 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		*validateFlag = db.countOfUnread > 0;
 		return YES;
 	}
+    if (theAction == @selector(markAllRead:))
+    {
+        Folder *folder = [db folderFromID:self.foldersTree.actualSelection];
+        if (folder.type == VNAFolderTypeRSS) {
+            *validateFlag = folder && folder.unreadCount > 0 && !db.readOnly && isMainWindowVisible;
+        } else if (folder.type != VNAFolderTypeTrash) {
+            *validateFlag = folder && !db.readOnly && db.countOfUnread > 0 && isMainWindowVisible;
+        }
+        return YES;
+    }
 	if (theAction == @selector(goBack:))
 	{
         // TODO: Make this work without the protocol check.
@@ -3686,11 +3696,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
 		return folder && !db.readOnly && isMainWindowVisible;
-	}
-	else if (theAction == @selector(markAllRead:))
-	{
-		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
-		return folder && folder.type != VNAFolderTypeTrash && !db.readOnly && isMainWindowVisible && db.countOfUnread > 0;
 	}
 	else if (theAction == @selector(markAllSubscriptionsRead:))
 	{
