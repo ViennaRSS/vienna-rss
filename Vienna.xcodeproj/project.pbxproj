@@ -199,7 +199,6 @@
 		AA26F4ED0604927300FE7994 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4D50604927300FE7994 /* Database.m */; };
 		AA26F4F00604927300FE7994 /* BackTrackArray.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4D80604927300FE7994 /* BackTrackArray.m */; };
 		AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA2A1DFC089F2B940038770C /* trashFolder.tiff */; };
-		AA3111B90901A2DC00E80DF1 /* Preferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA3111B80901A2DC00E80DF1 /* Preferences.plist */; };
 		AA31192D08FE5E8E0069ECD2 /* highlightedCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA31192C08FE5E8E0069ECD2 /* highlightedCloseButton.tiff */; };
 		AA32E2A40940A9970034D9CC /* folderError.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA32E2A30940A9970034D9CC /* folderError.tiff */; };
 		AA36CD7C06100692001E33A4 /* Field.m in Sources */ = {isa = PBXBuildFile; fileRef = AA36CD7A06100692001E33A4 /* Field.m */; };
@@ -567,7 +566,6 @@
 		AA26F4D70604927300FE7994 /* BackTrackArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = BackTrackArray.h; path = src/BackTrackArray.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AA26F4D80604927300FE7994 /* BackTrackArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = BackTrackArray.m; path = src/BackTrackArray.m; sourceTree = SOURCE_ROOT; };
 		AA2A1DFC089F2B940038770C /* trashFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = trashFolder.tiff; path = Resources/trashFolder.tiff; sourceTree = SOURCE_ROOT; };
-		AA3111B80901A2DC00E80DF1 /* Preferences.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; name = Preferences.plist; path = Resources/Preferences.plist; sourceTree = SOURCE_ROOT; };
 		AA31192C08FE5E8E0069ECD2 /* highlightedCloseButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = highlightedCloseButton.tiff; path = Resources/highlightedCloseButton.tiff; sourceTree = SOURCE_ROOT; };
 		AA3281A3084161EB00A7AD5A /* RichXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RichXMLParser.h; path = src/RichXMLParser.h; sourceTree = SOURCE_ROOT; };
 		AA3281A4084161EB00A7AD5A /* RichXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RichXMLParser.m; path = src/RichXMLParser.m; sourceTree = SOURCE_ROOT; };
@@ -1453,7 +1451,6 @@
 			isa = PBXGroup;
 			children = (
 				AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */,
-				AA3111B80901A2DC00E80DF1 /* Preferences.plist */,
 				AAF6C3A208B06BA00077BAB8 /* StandardURLs.plist */,
 			);
 			name = "Default Lists";
@@ -2118,7 +2115,6 @@
 				AA83A05008D6764D001E8404 /* smallCloseButton.tiff in Resources */,
 				AA31192D08FE5E8E0069ECD2 /* highlightedCloseButton.tiff in Resources */,
 				AABCF9A508FF562E00984F78 /* pressedCloseButton.tiff in Resources */,
-				AA3111B90901A2DC00E80DF1 /* Preferences.plist in Resources */,
 				AA32E2A40940A9970034D9CC /* folderError.tiff in Resources */,
 				AACAEA3E0954E71100ACD502 /* DemoFeeds.plist in Resources */,
 				AA04ED6B096226D30060E851 /* rssFeedNew.tiff in Resources */,
