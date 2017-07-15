@@ -1,5 +1,5 @@
 //
-//  PluginToolbarItem.swift
+//  PluginToolbarItemButton.swift
 //  Vienna
 //
 //  Copyright 2017
@@ -19,18 +19,10 @@
 
 import Cocoa
 
-/// A toolbar item with a button as its view.
-///
-/// - Note: This item should only be initialized programmatically.
-final class PluginToolbarItem: ButtonToolbarItem {
+/// A button that can be embedded within a toolbar item.
+final class PluginToolbarItemButton: NSButton {
 
-    override init(itemIdentifier: String) {
-        super.init(itemIdentifier: itemIdentifier)
-
-        let button = PluginToolbarItemButton(frame: NSMakeRect(0, 0, 41, 25))
-        button.bezelStyle = .texturedRounded
-        button.toolbarItem = self
-        view = button
-    }
+    /// The toolbar item to which the button belongs.
+    weak var toolbarItem: NSToolbarItem?
 
 }

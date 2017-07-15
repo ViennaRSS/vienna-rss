@@ -249,6 +249,7 @@
         item.target = self;
         item.action = @selector(pluginInvocator:);
 		item.toolTip = tooltip;
+        item.menuFormRepresentation.representedObject = pluginItem;
 
         return item;
     } else {
@@ -270,6 +271,20 @@
         return (thisArticle != nil && NSApp.active);
 }
 
+/* validateMenuItem
+ * Check [theItem identifier] and return YES if the item is enabled, NO otherwise.
+ */
+-(BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+    NSView<BaseView> * theView = APPCONTROLLER.browserView.activeTabItemView;
+    Article * thisArticle = APPCONTROLLER.selectedArticle;
+
+    if ([theView isKindOfClass:[BrowserPane class]])
+        return ((theView.viewLink != nil) && NSApp.active);
+    else
+        return (thisArticle != nil && NSApp.active);
+}
+
 /* pluginInvocator
  * Called when the user issues a command relating to a plugin.
  */
@@ -277,8 +292,8 @@
 {
 	NSDictionary * pluginItem;
 
-    if ([sender isKindOfClass:[ToolbarItemButton class]]) {
-        ToolbarItemButton *button = sender;
+    if ([sender isKindOfClass:[PluginToolbarItemButton class]]) {
+        PluginToolbarItemButton *button = sender;
         pluginItem = allPlugins[button.toolbarItem.itemIdentifier];
     } else {
 		NSMenuItem * menuItem = (NSMenuItem *)sender;

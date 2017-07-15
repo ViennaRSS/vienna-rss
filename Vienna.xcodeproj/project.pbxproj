@@ -252,7 +252,7 @@
 		F6832F681F10F5DA007920D4 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F661F10F5DA007920D4 /* MainWindowController.xib */; };
 		F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = F69140E31E71B94200D51BFF /* AppController+Notifications.m */; };
 		F69964F71F13029600FC8493 /* OverlayStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69964F61F13029500FC8493 /* OverlayStatusBar.swift */; };
-		F6A4E8481F040D58001C9191 /* ToolbarItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4E8471F040D58001C9191 /* ToolbarItemButton.swift */; };
+		F6A4E8481F040D58001C9191 /* PluginToolbarItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4E8471F040D58001C9191 /* PluginToolbarItemButton.swift */; };
 		F6A7DE341E47138B0017BE5E /* advanced.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2A1E47138B0017BE5E /* advanced.html */; };
 		F6A7DE351E47138B0017BE5E /* faq.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2C1E47138B0017BE5E /* faq.html */; };
 		F6A7DE361E47138B0017BE5E /* intro.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2E1E47138B0017BE5E /* intro.html */; };
@@ -264,6 +264,8 @@
 		F6C5CEFA1E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C5CEF91E39D88500B44F3A /* PSMTabBarControl+IntrinsicContentSize.m */; };
 		F6CE47131E7E3DCB0045EAD7 /* ActivityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CE47121E7E3DCB0045EAD7 /* ActivityItem.m */; };
 		F6D0089C1EF95C9D008F2D3B /* InfoPanelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6D0089B1EF95C9D008F2D3B /* InfoPanelManager.m */; };
+		F6D282621F1A87A900FF865E /* PopUpButtonToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D282611F1A87A900FF865E /* PopUpButtonToolbarItem.swift */; };
+		F6D282641F1A8BEA00FF865E /* SearchFieldToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D282631F1A8BEA00FF865E /* SearchFieldToolbarItem.swift */; };
 		F6D572AB1E26AA8200CDA909 /* EmptyTrashWarning.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572AD1E26AA8200CDA909 /* EmptyTrashWarning.xib */; };
 		F6D572AE1E26AA8A00CDA909 /* FeedCredentials.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */; };
 		F6D572B11E26AA9000CDA909 /* GroupFolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B31E26AA9000CDA909 /* GroupFolder.xib */; };
@@ -833,7 +835,7 @@
 		F69140FD1E71D74600D51BFF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		F69140FE1E71D74800D51BFF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		F69964F61F13029500FC8493 /* OverlayStatusBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OverlayStatusBar.swift; path = src/OverlayStatusBar.swift; sourceTree = "<group>"; };
-		F6A4E8471F040D58001C9191 /* ToolbarItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ToolbarItemButton.swift; path = src/ToolbarItemButton.swift; sourceTree = "<group>"; };
+		F6A4E8471F040D58001C9191 /* PluginToolbarItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PluginToolbarItemButton.swift; path = src/PluginToolbarItemButton.swift; sourceTree = "<group>"; };
 		F6A7DDCA1E470E980017BE5E /* Vienna.help */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Vienna.help; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6A7DDCC1E470E980017BE5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6A7DE2B1E47138B0017BE5E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Resources/en.lproj/advanced.html; sourceTree = "<group>"; };
@@ -978,6 +980,8 @@
 		F6CE47121E7E3DCB0045EAD7 /* ActivityItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityItem.m; path = src/ActivityItem.m; sourceTree = "<group>"; };
 		F6D0089B1EF95C9D008F2D3B /* InfoPanelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoPanelManager.m; path = src/InfoPanelManager.m; sourceTree = "<group>"; };
 		F6D0089D1EF95CAC008F2D3B /* InfoPanelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoPanelManager.h; path = src/InfoPanelManager.h; sourceTree = "<group>"; };
+		F6D282611F1A87A900FF865E /* PopUpButtonToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PopUpButtonToolbarItem.swift; path = src/PopUpButtonToolbarItem.swift; sourceTree = "<group>"; };
+		F6D282631F1A8BEA00FF865E /* SearchFieldToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchFieldToolbarItem.swift; path = src/SearchFieldToolbarItem.swift; sourceTree = "<group>"; };
 		F6D573291E26B19D00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/EmptyTrashWarning.xib; sourceTree = "<group>"; };
 		F6D5732A1E26B19E00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeedCredentials.xib; sourceTree = "<group>"; };
 		F6D5732B1E26B19F00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GroupFolder.xib; sourceTree = "<group>"; };
@@ -1436,9 +1440,11 @@
 		AA5AABB50C3CD68A00B2E14F /* Toolbar */ = {
 			isa = PBXGroup;
 			children = (
-				F61CEA671F03F277009C878E /* PluginToolbarItem.swift */,
 				F61CEA651F039E56009C878E /* ButtonToolbarItem.swift */,
-				F6A4E8471F040D58001C9191 /* ToolbarItemButton.swift */,
+				F6D282631F1A8BEA00FF865E /* SearchFieldToolbarItem.swift */,
+				F6D282611F1A87A900FF865E /* PopUpButtonToolbarItem.swift */,
+				F61CEA671F03F277009C878E /* PluginToolbarItem.swift */,
+				F6A4E8471F040D58001C9191 /* PluginToolbarItemButton.swift */,
 				34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */,
 				34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */,
 			);
@@ -2282,8 +2288,10 @@
 				0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */,
 				34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */,
 				F63833D81EF842EA00E07213 /* MainWindowController.swift in Sources */,
+				F6D282641F1A8BEA00FF865E /* SearchFieldToolbarItem.swift in Sources */,
 				B27CD04F1100F408001F3C83 /* BitlyAPIHelper.m in Sources */,
 				664F87C713C62DFE00E266DE /* OpenReader.m in Sources */,
+				F6D282621F1A87A900FF865E /* PopUpButtonToolbarItem.swift in Sources */,
 				EA43C70914A370DB00F2D843 /* VTPG_Common.m in Sources */,
 				B2BECB1714CEF22B00706F8F /* SSTextField.m in Sources */,
 				435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */,
@@ -2318,7 +2326,7 @@
 				435028A9165DE9E00018EDB7 /* InfoPanelController.m in Sources */,
 				435028AA165DE9E00018EDB7 /* MessageListView.m in Sources */,
 				435028AB165DE9E00018EDB7 /* NewGroupFolder.m in Sources */,
-				F6A4E8481F040D58001C9191 /* ToolbarItemButton.swift in Sources */,
+				F6A4E8481F040D58001C9191 /* PluginToolbarItemButton.swift in Sources */,
 				435028AC165DE9E00018EDB7 /* NewSubscription.m in Sources */,
 				03B7522A1B741AFD00FD3FDB /* FeedItem.m in Sources */,
 				F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */,

@@ -416,13 +416,13 @@
             </view>
             <toolbar key="toolbar" implicitIdentifier="9BE5691C-FD10-407B-A43E-74580FF42F4B" explicitIdentifier="MA_Toolbar" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="Vtx-1j-Pbt">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="3B81A7E6-BC01-4E5D-8598-E3749E1C39BF" explicitItemIdentifier="Subscribe" label="Add" paletteLabel="Add" toolTip="Subscribe to a feed or add a folder or smart folder." image="NewFeedTemplate" id="CPA-Ha-aj1" userLabel="Add">
+                    <toolbarItem implicitItemIdentifier="3B81A7E6-BC01-4E5D-8598-E3749E1C39BF" explicitItemIdentifier="Subscribe" label="Add" paletteLabel="Add" toolTip="Subscribe to a feed or add a folder or smart folder." image="NewFeedTemplate" id="CPA-Ha-aj1" userLabel="Add" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="28"/>
                         <size key="maxSize" width="41" height="28"/>
                         <popUpButton key="view" verticalHuggingPriority="750" id="DDQ-PY-F2c">
                             <rect key="frame" x="0.0" y="14" width="41" height="28"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="pdk-MS-QME" id="xAh-aB-Ek3">
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NewFeedTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="pdk-MS-QME" id="xAh-aB-Ek3">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" id="tQg-b5-Yiu">
@@ -555,7 +555,7 @@
                             <action selector="getInfo:" target="-1" id="Xvh-S3-PIS"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="A51AB11F-9F76-48DF-A4E8-39C7224775BA" explicitItemIdentifier="Action" label="Action" paletteLabel="Action" toolTip="Additional actions for the selected folder" image="NSActionTemplate" id="TSQ-UW-4gU">
+                    <toolbarItem implicitItemIdentifier="A51AB11F-9F76-48DF-A4E8-39C7224775BA" explicitItemIdentifier="Action" label="Action" paletteLabel="Action" toolTip="Additional actions for the selected folder" image="NSActionTemplate" id="TSQ-UW-4gU" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="28"/>
                         <size key="maxSize" width="41" height="28"/>
                         <popUpButton key="view" verticalHuggingPriority="750" id="Tq4-6N-ErM">
@@ -626,13 +626,13 @@
                             </popUpButtonCell>
                         </popUpButton>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="3C962AB1-0C7E-4CBA-8477-2436ED2B6383" explicitItemIdentifier="Styles" label="Style" paletteLabel="Style" toolTip="Display the list of available styles" image="StyleTemplate" id="azL-oz-mJL">
+                    <toolbarItem implicitItemIdentifier="3C962AB1-0C7E-4CBA-8477-2436ED2B6383" explicitItemIdentifier="Styles" label="Style" paletteLabel="Style" toolTip="Display the list of available styles" image="StyleTemplate" id="azL-oz-mJL" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="28"/>
                         <size key="maxSize" width="41" height="28"/>
                         <popUpButton key="view" verticalHuggingPriority="750" id="gOd-tT-XFQ">
                             <rect key="frame" x="0.0" y="14" width="41" height="28"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="lu2-BZ-Gxd" id="5CR-Qn-4pP">
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="StyleTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="lu2-BZ-Gxd" id="5CR-Qn-4pP">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" id="mit-Vi-iR1">
@@ -653,7 +653,7 @@
                             </popUpButtonCell>
                         </popUpButton>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="D7187B4B-C4CE-486D-8310-37941E8CB2C5" explicitItemIdentifier="SearchItem" label="Search Articles" paletteLabel="Search Articles" toolTip="Search Articles" id="OIA-vb-5jR">
+                    <toolbarItem implicitItemIdentifier="D7187B4B-C4CE-486D-8310-37941E8CB2C5" explicitItemIdentifier="SearchItem" label="Search Articles" paletteLabel="Search Articles" toolTip="Search Articles" id="OIA-vb-5jR" customClass="SearchFieldToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="210" height="22"/>
                         <size key="maxSize" width="210" height="22"/>
                         <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" id="uUx-PZ-LTM">
