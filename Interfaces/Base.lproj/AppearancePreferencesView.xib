@@ -104,9 +104,12 @@
                         </connections>
                     </buttonCell>
                 </button>
-                <comboBox horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" placeholderIntrinsicWidth="44" placeholderIntrinsicHeight="20" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="84p-cY-I9v">
-                    <rect key="frame" x="259" y="35" width="47" height="26"/>
-                    <comboBoxCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="10" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="hia-tO-kK6">
+                <comboBox verticalHuggingPriority="750" placeholderIntrinsicWidth="42" placeholderIntrinsicHeight="20" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="44" translatesAutoresizingMaskIntoConstraints="NO" id="84p-cY-I9v">
+                    <rect key="frame" x="259" y="35" width="45" height="26"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="xLa-4x-MEJ"/>
+                    </constraints>
+                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="left" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="hia-tO-kK6">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -139,7 +142,6 @@
                 <constraint firstItem="ftO-a4-X4r" firstAttribute="baseline" secondItem="omz-Xk-hdX" secondAttribute="baseline" id="dyr-7Q-1Gs"/>
                 <constraint firstItem="7Ry-8o-LiV" firstAttribute="top" secondItem="omz-Xk-hdX" secondAttribute="bottom" constant="10" symbolic="YES" id="fKZ-i1-Qyg"/>
                 <constraint firstItem="o7p-1v-UGN" firstAttribute="baseline" secondItem="ftO-a4-X4r" secondAttribute="baseline" id="fyr-CN-6Gd"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="84p-cY-I9v" secondAttribute="trailing" constant="20" symbolic="YES" id="gIk-Gv-V87"/>
                 <constraint firstAttribute="trailing" secondItem="o7p-1v-UGN" secondAttribute="trailing" constant="20" symbolic="YES" id="hHb-eV-zPk"/>
                 <constraint firstAttribute="trailing" secondItem="zi1-dQ-UMg" secondAttribute="trailing" constant="20" symbolic="YES" id="iKj-LV-mjZ"/>
                 <constraint firstItem="zi1-dQ-UMg" firstAttribute="leading" secondItem="S8x-KB-PLV" secondAttribute="leading" constant="20" symbolic="YES" id="li8-JB-djr"/>
