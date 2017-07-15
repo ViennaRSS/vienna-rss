@@ -495,6 +495,21 @@
                             <action selector="skipFolder:" target="-1" id="9Qr-v5-cZv"/>
                         </connections>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="1329F46E-D435-463A-9269-8FA4B1670A89" explicitItemIdentifier="MarkAllItemsAsRead" label="All Read" paletteLabel="Mark All Items as Read" toolTip="Mark all items as read" image="MarkReadTemplate" id="Gyz-dq-ewv" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                        <size key="minSize" width="41" height="25"/>
+                        <size key="maxSize" width="41" height="28"/>
+                        <button key="view" verticalHuggingPriority="750" id="21u-wz-hAI">
+                            <rect key="frame" x="43" y="14" width="41" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="MarkReadTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uJ6-m6-sxk">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <connections>
+                            <action selector="markAllRead:" target="-1" id="Am6-Sz-pet"/>
+                        </connections>
+                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="145A8A8B-193F-46E7-87FD-FE2B915C1B08" explicitItemIdentifier="Refresh" label="Refresh" paletteLabel="Refresh" toolTip="Refresh all your subscriptions" image="SyncTemplate" id="Nmd-zx-Dys" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="25"/>
                         <size key="maxSize" width="41" height="28"/>
@@ -898,6 +913,7 @@
         <image name="EmptyTrashTemplate" width="19" height="14"/>
         <image name="GetInfoTemplate" width="7" height="14"/>
         <image name="MailTemplate" width="17" height="12"/>
+        <image name="MarkReadTemplate" width="19" height="14"/>
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NewFeedTemplate" width="19" height="12"/>
         <image name="NextFolderTemplate" width="19" height="12"/>

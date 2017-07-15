@@ -197,8 +197,8 @@ extension MainWindowController: NSToolbarDelegate {
 
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [String] {
         let firstIdentifiers = ["Subscribe", "PreviousButton", "NextButton",
-            "SkipFolder", "Refresh", "MailLink", "EmptyTrash", "GetInfo",
-            "Action", "Styles", "SearchItem"]
+            "SkipFolder", "MarkAllItemsAsRead","Refresh", "MailLink", "EmptyTrash",
+            "GetInfo", "Action", "Styles", "SearchItem"]
         let pluginIdentifiers = pluginManager?.toolbarItems ?? []
         let lastIdentifiers = [NSToolbarSpaceItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier]
 
