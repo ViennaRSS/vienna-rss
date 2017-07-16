@@ -735,7 +735,7 @@
                             <rect key="frame" x="0.0" y="320" width="700" height="310"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <beginningViews>
-                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="1DK-2K-uuy" customClass="ArticleView">
+                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1DK-2K-uuy" customClass="ArticleView">
                                     <rect key="frame" x="0.0" y="0.0" width="700" height="310"/>
                                 </customView>
                             </beginningViews>
@@ -827,63 +827,83 @@
                 <outlet property="tabView" destination="1218" id="1230"/>
             </connections>
         </customView>
-        <customView id="1288" customClass="EnclosureView">
-            <rect key="frame" x="0.0" y="0.0" width="491" height="49"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="1288" customClass="EnclosureView">
+            <rect key="frame" x="0.0" y="0.0" width="491" height="45"/>
             <subviews>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="1292" customClass="DSClickableURLTextField">
-                    <rect key="frame" x="46" y="9" width="339" height="14"/>
-                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" id="1375">
-                        <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <button horizontalHuggingPriority="251" verticalHuggingPriority="750" placeholderIntrinsicWidth="80" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="1291">
-                    <rect key="frame" x="385" y="7" width="92" height="32"/>
-                    <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="1374">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="downloadFile:" target="1288" id="1293"/>
-                    </connections>
-                </button>
-                <textField verticalHuggingPriority="750" verticalCompressionResistancePriority="751" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="1290">
-                    <rect key="frame" x="46" y="26" width="339" height="14"/>
-                    <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" id="1373">
-                        <font key="font" metaFont="smallSystemBold"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <imageView translatesAutoresizingMaskIntoConstraints="NO" id="1289">
-                    <rect key="frame" x="8" y="8" width="32" height="32"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="32" id="DHh-hp-lMb"/>
-                        <constraint firstAttribute="height" constant="32" id="Nns-hC-vGL"/>
-                    </constraints>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="1372"/>
-                </imageView>
                 <box verticalHuggingPriority="750" alphaValue="0.79577457904815674" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1392">
-                    <rect key="frame" x="0.0" y="46" width="491" height="5"/>
+                    <rect key="frame" x="0.0" y="42" width="491" height="5"/>
                 </box>
+                <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="750" verticalStackHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PLo-xw-CXM">
+                    <rect key="frame" x="8" y="6" width="475" height="32"/>
+                    <beginningViews>
+                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="1289">
+                            <rect key="frame" x="0.0" y="0.0" width="79" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="32" id="DHh-hp-lMb"/>
+                                <constraint firstAttribute="height" constant="32" id="Nns-hC-vGL"/>
+                            </constraints>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="1372"/>
+                        </imageView>
+                        <stackView orientation="vertical" alignment="leading" spacing="3" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RFH-Us-xJO">
+                            <rect key="frame" x="87" y="0.0" width="300" height="32"/>
+                            <beginningViews>
+                                <textField verticalHuggingPriority="750" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="9000" translatesAutoresizingMaskIntoConstraints="NO" id="1290">
+                                    <rect key="frame" x="-2" y="18" width="304" height="14"/>
+                                    <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" id="1373">
+                                        <font key="font" metaFont="smallSystemBold"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="9000" translatesAutoresizingMaskIntoConstraints="NO" id="1292" customClass="DSClickableURLTextField">
+                                    <rect key="frame" x="-2" y="0.0" width="304" height="14"/>
+                                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" id="1375">
+                                        <font key="font" metaFont="smallSystem"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </beginningViews>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                        <button horizontalHuggingPriority="251" verticalHuggingPriority="750" placeholderIntrinsicWidth="80" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="1291">
+                            <rect key="frame" x="389" y="-1" width="92" height="32"/>
+                            <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="1374">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="downloadFile:" target="1288" id="1293"/>
+                            </connections>
+                        </button>
+                    </beginningViews>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="1291" secondAttribute="trailing" constant="20" symbolic="YES" id="1DB-sF-Vau"/>
-                <constraint firstItem="1292" firstAttribute="top" secondItem="1290" secondAttribute="bottom" constant="3" id="Bbu-Il-8jH"/>
-                <constraint firstItem="1289" firstAttribute="centerY" secondItem="1288" secondAttribute="centerY" id="FHW-Sb-Cds"/>
+                <constraint firstItem="PLo-xw-CXM" firstAttribute="leading" secondItem="1288" secondAttribute="leading" constant="8" id="5qU-Xm-rUe"/>
+                <constraint firstItem="PLo-xw-CXM" firstAttribute="top" secondItem="1288" secondAttribute="top" constant="7" id="CPJ-7p-dxD"/>
                 <constraint firstAttribute="trailing" secondItem="1392" secondAttribute="trailing" id="GFf-Yl-lP2"/>
-                <constraint firstItem="1291" firstAttribute="centerY" secondItem="1288" secondAttribute="centerY" id="Ixf-rK-HxX"/>
-                <constraint firstItem="1290" firstAttribute="top" secondItem="1288" secondAttribute="top" constant="9" id="Ja8-HE-Dbl"/>
-                <constraint firstItem="1292" firstAttribute="leading" secondItem="1290" secondAttribute="leading" id="Kph-Bv-b6S"/>
                 <constraint firstItem="1392" firstAttribute="top" secondItem="1288" secondAttribute="top" id="LAj-tr-QQ9"/>
-                <constraint firstItem="1291" firstAttribute="leading" secondItem="1290" secondAttribute="trailing" constant="8" symbolic="YES" id="QzN-vh-t35"/>
                 <constraint firstItem="1392" firstAttribute="leading" secondItem="1288" secondAttribute="leading" id="a5m-26-m2M"/>
-                <constraint firstItem="1292" firstAttribute="trailing" secondItem="1290" secondAttribute="trailing" id="ulP-IP-Jrd"/>
-                <constraint firstItem="1289" firstAttribute="leading" secondItem="1288" secondAttribute="leading" constant="8" id="vj9-rV-wAL"/>
-                <constraint firstAttribute="bottom" secondItem="1292" secondAttribute="bottom" constant="9" id="wXn-Te-OLJ"/>
-                <constraint firstItem="1290" firstAttribute="leading" secondItem="1289" secondAttribute="trailing" constant="8" symbolic="YES" id="zKi-z6-eBu"/>
+                <constraint firstAttribute="bottom" secondItem="PLo-xw-CXM" secondAttribute="bottom" constant="6" id="bkl-yT-hx5"/>
+                <constraint firstAttribute="trailing" secondItem="PLo-xw-CXM" secondAttribute="trailing" constant="8" id="v5m-a9-btO"/>
             </constraints>
             <connections>
                 <outlet property="downloadButton" destination="1291" id="1297"/>
@@ -891,7 +911,7 @@
                 <outlet property="filenameField" destination="1292" id="1298"/>
                 <outlet property="filenameLabel" destination="1290" id="1299"/>
             </connections>
-            <point key="canvasLocation" x="-209" y="43"/>
+            <point key="canvasLocation" x="-209.5" y="42.5"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="fAX-Jg-YQ6"/>
     </objects>
