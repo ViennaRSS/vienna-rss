@@ -1,16 +1,17 @@
 language: objective-c
 osx_image: xcode8.3
-xcode_workspace: Vienna.xcworkspace
-xcode_scheme: Vienna
 
-script: xcodebuild -workspace "$TRAVIS_XCODE_WORKSPACE" -scheme "$TRAVIS_XCODE_SCHEME" test | xcpretty
+jobs:
+  include:
+    # testing
+    - script: xcodebuild -workspace Vienna.xcworkspace -scheme Vienna test | xcpretty
+
+    # linting
+    - before_script: swiftlint version
+      script: swiftlint --lenient --reporter emoji
 
 notifications:
   webhooks:
-      urls:
-      on_failure: always
-      on_start: never
-
-# for container-based infrastructure
-sudo: false
-# cache: cocoapods
+    urls:
+    on_failure: always
+    on_start: never
