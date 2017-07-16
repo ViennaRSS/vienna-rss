@@ -118,7 +118,7 @@
 		435028B0165DE9E00018EDB7 /* SearchFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502880165DE9DF0018EDB7 /* SearchFolder.m */; };
 		435028B1165DE9E00018EDB7 /* SearchMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502882165DE9DF0018EDB7 /* SearchMethod.m */; };
 		435028B2165DE9E00018EDB7 /* SearchPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502884165DE9DF0018EDB7 /* SearchPanel.m */; };
-		435028B3165DE9E00018EDB7 /* StdEnclosureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502886165DE9DF0018EDB7 /* StdEnclosureView.m */; };
+		435028B3165DE9E00018EDB7 /* EnclosureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502886165DE9DF0018EDB7 /* EnclosureView.m */; };
 		435028B4165DE9E00018EDB7 /* TabbedWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502888165DE9DF0018EDB7 /* TabbedWebView.m */; };
 		435028B6165DE9E00018EDB7 /* TreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350288C165DE9DF0018EDB7 /* TreeNode.m */; };
 		435028B7165DE9E00018EDB7 /* UnifiedDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350288E165DE9DF0018EDB7 /* UnifiedDisplayView.m */; };
@@ -474,8 +474,8 @@
 		43502882165DE9DF0018EDB7 /* SearchMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchMethod.m; path = src/SearchMethod.m; sourceTree = SOURCE_ROOT; };
 		43502883165DE9DF0018EDB7 /* SearchPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchPanel.h; path = src/SearchPanel.h; sourceTree = SOURCE_ROOT; };
 		43502884165DE9DF0018EDB7 /* SearchPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchPanel.m; path = src/SearchPanel.m; sourceTree = SOURCE_ROOT; };
-		43502885165DE9DF0018EDB7 /* StdEnclosureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StdEnclosureView.h; path = src/StdEnclosureView.h; sourceTree = SOURCE_ROOT; };
-		43502886165DE9DF0018EDB7 /* StdEnclosureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StdEnclosureView.m; path = src/StdEnclosureView.m; sourceTree = SOURCE_ROOT; };
+		43502885165DE9DF0018EDB7 /* EnclosureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EnclosureView.h; path = src/EnclosureView.h; sourceTree = SOURCE_ROOT; };
+		43502886165DE9DF0018EDB7 /* EnclosureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EnclosureView.m; path = src/EnclosureView.m; sourceTree = SOURCE_ROOT; };
 		43502887165DE9DF0018EDB7 /* TabbedWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TabbedWebView.h; path = src/TabbedWebView.h; sourceTree = SOURCE_ROOT; };
 		43502888165DE9DF0018EDB7 /* TabbedWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TabbedWebView.m; path = src/TabbedWebView.m; sourceTree = SOURCE_ROOT; };
 		4350288B165DE9DF0018EDB7 /* TreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeNode.h; path = src/TreeNode.h; sourceTree = SOURCE_ROOT; };
@@ -1741,12 +1741,12 @@
 				43502855165DE9DF0018EDB7 /* ArticleView.m */,
 				AA26F4D70604927300FE7994 /* BackTrackArray.h */,
 				AA26F4D80604927300FE7994 /* BackTrackArray.m */,
+				43502885165DE9DF0018EDB7 /* EnclosureView.h */,
+				43502886165DE9DF0018EDB7 /* EnclosureView.m */,
 				43502873165DE9DF0018EDB7 /* MessageListView.h */,
 				43502874165DE9DF0018EDB7 /* MessageListView.m */,
 				4350287B165DE9DF0018EDB7 /* ProgressTextCell.h */,
 				4350287C165DE9DF0018EDB7 /* ProgressTextCell.m */,
-				43502885165DE9DF0018EDB7 /* StdEnclosureView.h */,
-				43502886165DE9DF0018EDB7 /* StdEnclosureView.m */,
 				4350288D165DE9DF0018EDB7 /* UnifiedDisplayView.h */,
 				4350288E165DE9DF0018EDB7 /* UnifiedDisplayView.m */,
 			);
@@ -2329,7 +2329,7 @@
 				435028B0165DE9E00018EDB7 /* SearchFolder.m in Sources */,
 				435028B1165DE9E00018EDB7 /* SearchMethod.m in Sources */,
 				435028B2165DE9E00018EDB7 /* SearchPanel.m in Sources */,
-				435028B3165DE9E00018EDB7 /* StdEnclosureView.m in Sources */,
+				435028B3165DE9E00018EDB7 /* EnclosureView.m in Sources */,
 				435028B4165DE9E00018EDB7 /* TabbedWebView.m in Sources */,
 				435028B6165DE9E00018EDB7 /* TreeNode.m in Sources */,
 				F69964F71F13029600FC8493 /* OverlayStatusBar.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  StdEnclosureView.m
+//  EnclosureView.m
 //  Vienna
 //
 //  Created by Steve on Sun Jun 24 2007.
@@ -18,18 +18,18 @@
 //  limitations under the License.
 //
 
-#import "StdEnclosureView.h"
+#import "EnclosureView.h"
 #import "DownloadManager.h"
 #import "DSClickableURLTextField.h"
 #import "HelperFunctions.h"
 
-@interface StdEnclosureView ()
+@interface EnclosureView ()
 
 -(IBAction)openFile:(id)sender;
 
 @end
 
-@implementation StdEnclosureView
+@implementation EnclosureView
 
 /* initWithFrame
  * Initialise the standard enclosure view.

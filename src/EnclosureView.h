@@ -1,5 +1,5 @@
 //
-//  StdEnclosureView.h
+//  EnclosureView.h
 //  Vienna
 //
 //  Created by Steve on Sun Jun 24 2007.
@@ -22,7 +22,7 @@
 
 @class DSClickableURLTextField;
 
-@interface StdEnclosureView : NSView
+@interface EnclosureView : NSView
 {
 	IBOutlet NSImageView * fileImage;
 	IBOutlet NSTextField * filenameLabel;

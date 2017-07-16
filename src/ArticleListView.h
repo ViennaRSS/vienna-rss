@@ -27,14 +27,14 @@
 @class AppController;
 @class ArticleView;
 @class MessageListView;
-@class StdEnclosureView;
+@class EnclosureView;
 
 @interface ArticleListView : NSView<BaseView, ArticleBaseView, NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate>
 {
 	IBOutlet MessageListView * articleList;
 	IBOutlet ArticleView * articleText;
 	IBOutlet NSSplitView * splitView2;
-	IBOutlet StdEnclosureView * stdEnclosureView;
+	IBOutlet EnclosureView * enclosureView;
 
 	NSInteger currentSelectedRow;
 	NSInteger tableLayout;
