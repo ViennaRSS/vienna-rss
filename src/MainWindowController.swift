@@ -23,6 +23,7 @@ final class MainWindowController: NSWindowController {
 
     // MARK: Transitional outlets
 
+    // swiftlint:disable private_outlet
     @IBOutlet var outlineView: FolderView?
     @IBOutlet var browserView: BrowserView?
     @IBOutlet var articleListView: ArticleListView?
@@ -187,7 +188,7 @@ extension MainWindowController: NSToolbarDelegate {
 
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [String] {
         let firstIdentifiers = ["Subscribe", "PreviousButton", "NextButton",
-            "SkipFolder", "MarkAllItemsAsRead","Refresh", "MailLink", "EmptyTrash",
+            "SkipFolder", "MarkAllItemsAsRead", "Refresh", "MailLink", "EmptyTrash",
             "GetInfo", "Action", "Styles", "SearchItem"]
         let pluginIdentifiers = pluginManager?.toolbarItems ?? []
         let lastIdentifiers = [NSToolbarSpaceItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier]
@@ -211,10 +212,8 @@ extension MainWindowController: NSMenuDelegate {
 
     // This method is presently only called for the style menu.
     func menuNeedsUpdate(_ menu: NSMenu) {
-        for menuItem in menu.items {
-            if menuItem.action == #selector(AppController.doSelectStyle(_:)) {
-                menu.removeItem(menuItem)
-            }
+        for menuItem in menu.items where menuItem.action == #selector(AppController.doSelectStyle(_:)) {
+            menu.removeItem(menuItem)
         }
 
         if let styles = (Array(ArticleView.loadStylesMap().keys) as? [String])?.sorted() {

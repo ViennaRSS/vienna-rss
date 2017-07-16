@@ -21,6 +21,7 @@ import Cocoa
 
 final class FilterView: GradientView {
 
+    // swiftlint:disable private_outlet
     @IBOutlet private(set) var filterSearchField: NSSearchField!
     @IBOutlet private(set) var filterViewPopUp: NSPopUpButton!
 

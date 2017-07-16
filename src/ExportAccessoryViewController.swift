@@ -50,7 +50,8 @@ final class ExportAccessoryViewController: NSViewController {
 
     // MARK: Nested types
 
-    @objc enum ExportMode: Int {
+    @objc
+    enum ExportMode: Int {
         /// All feeds should be exported.
         case allFeeds
 
