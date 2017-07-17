@@ -877,6 +877,10 @@ CA
                 <outlet property="sortByMenu" destination="387" id="1054"/>
             </connections>
         </customObject>
-        <customObject id="1175" userLabel="SUUpdater" customClass="SUUpdater"/>
+        <customObject id="1175" userLabel="Sparkle" customClass="SUUpdater">
+            <connections>
+                <outlet property="delegate" destination="233" id="RcS-xf-Kv5"/>
+            </connections>
+        </customObject>
     </objects>
 </document>
