@@ -135,8 +135,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         NSAlert * alert = [[NSAlert alloc] init];
         [alert setMessageText:NSLocalizedString(@"Database Upgrade", nil)];
         [alert setInformativeText:NSLocalizedString(@"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.", nil)];
-        [alert addButtonWithTitle:NSLocalizedString(@"Upgrade Database", nil)];
-        [alert addButtonWithTitle:NSLocalizedString(@"Quit Vienna", nil)];
+        [alert addButtonWithTitle:NSLocalizedString(@"Upgrade Database", @"Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Quit Vienna", @"Title of a button on an alert")];
         NSInteger modalReturn = [alert runModal];
         if (modalReturn == NSAlertSecondButtonReturn)
         {
