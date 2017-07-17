@@ -38,32 +38,4 @@
 	return URLstring;
 }
 
-/*! showSystemProfileInfoAlert
- * displays an alert asking the user to opt-in to sending anonymous system profile throug Sparkle
- */
--(void)showSystemProfileInfoAlert {
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert addButtonWithTitle:NSLocalizedString(@"OK", @"OK")];
-    [alert addButtonWithTitle:NSLocalizedString(@"No thanks", @"No thanks")];
-    [alert setMessageText:NSLocalizedString(@"Include anonymous system profile when checking for updates?", @"Include anonymous system profile when checking for updates?")];
-    [alert setInformativeText:NSLocalizedString(@"Include anonymous system profile when checking for updates text", @"This helps Vienna development by letting us know what versions of macOS are most popular amongst our users.")];
-    alert.alertStyle = NSInformationalAlertStyle;
-    NSModalResponse buttonClicked = alert.runModal;
-    NSLog(@"buttonClicked: %ld", (long)buttonClicked);
-    switch (buttonClicked) {
-        case NSAlertFirstButtonReturn:
-            /* Agreed to send system profile. Uses preferences to set value otherwise
-             the preference control is out of sync */
-            [[Preferences standardPreferences] setSendSystemSpecs:YES];
-            break;
-        case NSAlertSecondButtonReturn:
-            /* Declined to send system profile. Uses SUUpdater to set the value
-             otherwise it stays nil instead of being set to 0 */
-            [[SUUpdater sharedUpdater] setSendsSystemProfile:NO];
-            break;
-        default:
-            break;
-    }
-}
-
 @end

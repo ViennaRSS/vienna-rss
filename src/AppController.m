@@ -458,13 +458,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	
 	// Hook up the key sequence properly now that all NIBs are loaded.
 	self.foldersTree.mainView.nextKeyView = [self.browserView primaryTabItemView].mainView;
-	
-    // Check if we have previously asked the user to send anonymous system profile
-    if([[NSUserDefaults standardUserDefaults] objectForKey:MAPref_SendSystemProfileInfo] == nil) {
-        [_sparkleDelegate showSystemProfileInfoAlert];
-    }
-    
-    
     
 	// Do safe initialisation.
 	[self performSelector:@selector(doSafeInitialisation)

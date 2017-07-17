@@ -11,6 +11,4 @@
 
 @interface ViennaSparkleDelegate : NSObject <SUUpdaterDelegate>
 
--(void)showSystemProfileInfoAlert;
-
 @end
