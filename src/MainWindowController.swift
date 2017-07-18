@@ -117,16 +117,6 @@ final class MainWindowController: NSWindowController {
             } else {
                 menuItem.title = NSLocalizedString("Show Status Bar", comment: "Title of a menu item")
             }
-        } else if menuItem.action == #selector(NSWindow.toggleToolbarShown(_:)) {
-            guard let toolbar = window?.toolbar else {
-                return false
-            }
-
-            if toolbar.isVisible {
-                menuItem.title = NSLocalizedString("Hide Toolbar", comment: "Title of a menu item")
-            } else {
-                menuItem.title = NSLocalizedString("Show Toolbar", comment: "Title of a menu item")
-            }
         } else {
             return super.validateMenuItem(menuItem)
         }
