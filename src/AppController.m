@@ -20,7 +20,6 @@
 
 #import "AppController.h"
 #import "AppController+Notifications.h"
-
 #import "Import.h"
 #import "Export.h"
 #import "RefreshManager.h"
@@ -41,7 +40,6 @@
 #import "DisclosureView.h"
 #import "SearchPanel.h"
 #import "SearchMethod.h"
-#import "ViennaSparkleDelegate.h"
 #import "OpenReader.h"
 #import "VTPG_Common.h"
 #import "Debug.h"
@@ -164,10 +162,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
             andSelector:@selector(getUrl:withReplyEvent:)
           forEventClass:'WWW!'    // A particularly ancient AppleEvent that dates
              andEventID:'OURL'];  // back to the Spyglass days.
-
-    // Initialise delegate for Sparkle
-    _sparkleDelegate = [[ViennaSparkleDelegate alloc] init];
-    [[SUUpdater sharedUpdater] setDelegate:_sparkleDelegate];
 }
 
 /* doSafeInitialisation
@@ -458,13 +452,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	
 	// Hook up the key sequence properly now that all NIBs are loaded.
 	self.foldersTree.mainView.nextKeyView = [self.browserView primaryTabItemView].mainView;
-	
-    // Check if we have previously asked the user to send anonymous system profile
-    if([[NSUserDefaults standardUserDefaults] objectForKey:MAPref_SendSystemProfileInfo] == nil) {
-        [_sparkleDelegate showSystemProfileInfoAlert];
-    }
-    
-    
     
 	// Do safe initialisation.
 	[self performSelector:@selector(doSafeInitialisation)
@@ -3943,7 +3930,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [self.pluginManager removeObserver:self
                             forKeyPath:NSStringFromSelector(@selector(numberOfPlugins))];
 
-	[[SUUpdater sharedUpdater] setDelegate:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

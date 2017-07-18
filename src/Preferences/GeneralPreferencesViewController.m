@@ -100,9 +100,6 @@
     // Set check for updates when starting
     checkForUpdates.state = prefs.checkForNewOnStartup ? NSOnState : NSOffState;
     
-    // Set sending system specs when checking for updates
-    sendSystemSpecs.state = prefs.sendSystemSpecs ? NSOnState : NSOffState;
-    
     // Set search for latest Beta versions when checking for updates
     alwaysAcceptBetas.state = prefs.alwaysAcceptBetas ? NSOnState : NSOffState;
 
@@ -441,15 +438,6 @@
 {
     float newReadInterval = ([sender selectedCell] == markReadAfterNext) ? 0 : MA_Default_Read_Interval;
     [Preferences standardPreferences].markReadInterval = newReadInterval;
-}
-
-
-/* changeSendSystemSpecs
- * Set whether Vienna send system specifications when checking for updates.
- */
--(IBAction)changeSendSystemSpecs:(id)sender
-{
-    [Preferences standardPreferences].sendSystemSpecs = [sender state] == NSOnState;
 }
 
 /* changeAlwaysAcceptBetas

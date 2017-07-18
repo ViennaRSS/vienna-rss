@@ -34,7 +34,6 @@
 @class EmptyTrashWarning;
 @class SearchPanel;
 @class DisclosureView;
-@class ViennaSparkleDelegate;
 @class PluginManager;
 @class SearchMethod;
 @class Database;
@@ -69,7 +68,6 @@
 	NSString * searchString;
     
     NewSubscription * _rssFeed;
-    ViennaSparkleDelegate * _sparkleDelegate;
 }
 
 @property (nonatomic) PluginManager *pluginManager;
