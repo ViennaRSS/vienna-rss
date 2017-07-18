@@ -24,8 +24,36 @@ import os.log
 /// validation requests.
 class ButtonToolbarItem: NSToolbarItem {
 
+    // Assign the item's target to the menu-form representation.
+    override var target: AnyObject? {
+        didSet {
+            if view is NSButton {
+                menuFormRepresentation?.target = target
+            }
+        }
+    }
+
+    // Assign the item's action to the menu-form representation.
+    override var action: Selector? {
+        didSet {
+            if view is NSButton {
+                menuFormRepresentation?.action = action
+            }
+        }
+    }
+
+    // Assign the item's enabled state to the menu-form representation.
+    override var isEnabled: Bool {
+        didSet {
+            if view is NSButton {
+                menuFormRepresentation?.isEnabled = isEnabled
+            }
+        }
+    }
+
     // The default implementation of this method does nothing. Overriding this
-    // will allow any responder object to validate the toolbar item.
+    // will allow any responder object to validate the toolbar item. This method
+    // is also invoked in text-only mode.
     override func validate() {
         guard let action = action else {
             return

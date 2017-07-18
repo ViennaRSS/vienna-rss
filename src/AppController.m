@@ -3190,12 +3190,18 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)searchUsingToolbarTextField:(id)sender
 {
-	self.searchString = self.toolbarSearchField.stringValue;
-	SearchMethod * currentSearchMethod = [Preferences standardPreferences].searchMethod;
+    if ([sender isKindOfClass:[NSMenuItem class]]) {
+        if (!searchPanel)
+            searchPanel = [[SearchPanel alloc] init];
+        [searchPanel runSearchPanel:self.mainWindow];
+    } else {
+        self.searchString = self.toolbarSearchField.stringValue;
+        SearchMethod * currentSearchMethod = [Preferences standardPreferences].searchMethod;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-	[self performSelector:currentSearchMethod.handler withObject: currentSearchMethod];
+        [self performSelector:currentSearchMethod.handler withObject: currentSearchMethod];
 #pragma clang diagnostic pop
+    }
 }
 
 /* performAllArticlesSearch

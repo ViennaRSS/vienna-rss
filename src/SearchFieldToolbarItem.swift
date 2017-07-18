@@ -1,5 +1,5 @@
 //
-//  ToolbarItemButton.swift
+//  SearchFieldToolbarItem.swift
 //  Vienna
 //
 //  Copyright 2017
@@ -19,10 +19,25 @@
 
 import Cocoa
 
-/// A button that can be embedded within a toolbar item.
-final class ToolbarItemButton: NSButton {
+/// A toolbar item with a search field as its view.
+class SearchFieldToolbarItem: NSToolbarItem {
 
-    /// The toolbar item to which the button belongs.
-    weak var toolbarItem: NSToolbarItem?
+    // Assign the item's target to the menu-form representation.
+    override var target: AnyObject? {
+        didSet {
+            if view is NSSearchField {
+                menuFormRepresentation?.target = target
+            }
+        }
+    }
+
+    // Assign the item's action to the menu-form representation.
+    override var action: Selector? {
+        didSet {
+            if view is NSSearchField {
+                menuFormRepresentation?.action = action
+            }
+        }
+    }
 
 }
