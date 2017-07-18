@@ -45,38 +45,36 @@
 }
 
 /* operatorString
- * Returns the string representation of the operator.
- * Note: do NOT localise these strings. For UI display, the caller should use
- * NSLocalizedString() on the return value.
+ * Returns the localized string representation of the operator.
  */
-+(NSString *)stringFromOperator:(CriteriaOperator)op
++(NSString *)localizedStringFromOperator:(CriteriaOperator)op
 {
 	NSString * operatorString = nil;
 	switch (op)
 	{
-		case MA_CritOper_Is:					operatorString = @"is"; break;
-		case MA_CritOper_IsNot:					operatorString = @"is not"; break;
-		case MA_CritOper_IsAfter:				operatorString = @"is after"; break;
-		case MA_CritOper_IsBefore:				operatorString = @"is before"; break;
-		case MA_CritOper_IsOnOrAfter:			operatorString = @"is on or after"; break;
-		case MA_CritOper_IsOnOrBefore:			operatorString = @"is on or before"; break;
-		case MA_CritOper_Contains:				operatorString = @"contains"; break;
-		case MA_CritOper_NotContains:			operatorString = @"does not contain"; break;
-		case MA_CritOper_Under:					operatorString = @"under"; break;
-		case MA_CritOper_NotUnder:				operatorString = @"not under"; break;
-		case MA_CritOper_IsLessThan:			operatorString = @"is less than"; break;
-		case MA_CritOper_IsGreaterThan:			operatorString = @"is greater than"; break;
-		case MA_CritOper_IsLessThanOrEqual:		operatorString = @"is less than or equal to"; break;
-		case MA_CritOper_IsGreaterThanOrEqual:	operatorString = @"is greater than or equal to"; break;
+		case MA_CritOper_Is:					operatorString = NSLocalizedString(@"is", @"test for a value"); break;
+		case MA_CritOper_IsNot:					operatorString = NSLocalizedString(@"is not", @"test for a value"); break;
+		case MA_CritOper_IsAfter:				operatorString = NSLocalizedString(@"is after", @"test for a date"); break;
+		case MA_CritOper_IsBefore:				operatorString = NSLocalizedString(@"is before", @"test for a date"); break;
+		case MA_CritOper_IsOnOrAfter:			operatorString = NSLocalizedString(@"is on or after", @"test for a date"); break;
+		case MA_CritOper_IsOnOrBefore:			operatorString = NSLocalizedString(@"is on or before", @"test for a date"); break;
+		case MA_CritOper_Contains:				operatorString = NSLocalizedString(@"contains",@"test for a string"); break;
+		case MA_CritOper_NotContains:			operatorString = NSLocalizedString(@"does not contain", @"test for a string"); break;
+		case MA_CritOper_Under:					operatorString = NSLocalizedString(@"under", @"test for a folder (not operational as of Vienna 3.2)"); break;
+		case MA_CritOper_NotUnder:				operatorString = NSLocalizedString(@"not under", @"test for a folder (not operational as of Vienna 3.2)"); break;
+		case MA_CritOper_IsLessThan:			operatorString = NSLocalizedString(@"is less than", @"test for a numeric value"); break;
+		case MA_CritOper_IsGreaterThan:			operatorString = NSLocalizedString(@"is greater than", @"test for a numeric value"); break;
+		case MA_CritOper_IsLessThanOrEqual:		operatorString = NSLocalizedString(@"is less than or equal to", @"test for a numeric value"); break;
+		case MA_CritOper_IsGreaterThanOrEqual:	operatorString = NSLocalizedString(@"is greater than or equal to", @"test for a numeric value"); break;
 	}
 	return operatorString;
 }
 
-/* operatorFromString
+/* operatorFromLocalizedString
  * Given a string representing an operator, returns the CriteriaOperator value
  * that represents that string.
  */
-+(CriteriaOperator)operatorFromString:(NSString *)string
++(CriteriaOperator)operatorFromLocalizedString:(NSString *)string
 {
 	NSArray * operatorArray = [Criteria arrayOfOperators];
 	NSUInteger  index;
@@ -84,7 +82,7 @@
 	for (index = 0; index < operatorArray.count; ++index)
 	{
 		CriteriaOperator op = [operatorArray[index] integerValue];
-		if ([string isEqualToString:[Criteria stringFromOperator:op]])
+		if ([string isEqualToString:[Criteria localizedStringFromOperator:op]])
 			return op;
 	}
 	return 0;

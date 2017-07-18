@@ -116,7 +116,7 @@
 			[self initForField:criteria.field inRow:searchCriteriaView];
 
 			[fieldNamePopup selectItemWithTitle:NSLocalizedString([criteria field], nil)];
-			[operatorPopup selectItemWithTitle:NSLocalizedString([Criteria stringFromOperator:[criteria operator]], nil)];
+			[operatorPopup selectItemWithTitle:[Criteria localizedStringFromOperator:[criteria operator]]];
 
 			Field * field = [nameToFieldMap valueForKey:criteria.field];
 			switch (field.type)
@@ -412,7 +412,7 @@
 	// if operator is within the range of a CriteriaOperator...
 	while (operator >= MA_CritOper_Is && operator <= MA_CritOper_NotUnder)
 	{
-		NSString * operatorString = NSLocalizedString([Criteria stringFromOperator:operator], nil);
+		NSString * operatorString = [Criteria localizedStringFromOperator:operator];
 		[popUpButton addItemWithTag:operatorString tag:operator];
 		operator = va_arg(arguments, NSUInteger);
 	}

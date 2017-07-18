@@ -53,8 +53,8 @@ typedef NS_ENUM(NSUInteger, CriteriaCondition) {
 
 // Public functions
 -(instancetype)initWithField:(NSString *)newField withOperator:(CriteriaOperator)newOperator withValue:(NSString *)newValue NS_DESIGNATED_INITIALIZER;
-+(NSString *)stringFromOperator:(CriteriaOperator)operator;
-+(CriteriaOperator)operatorFromString:(NSString *)string;
++(NSString *)localizedStringFromOperator:(CriteriaOperator)operator;
++(CriteriaOperator)operatorFromLocalizedString:(NSString *)string;
 +(NSArray *)arrayOfOperators;
 @property (nonatomic, copy) NSString *field;
 @property (nonatomic, copy) NSString *value;
