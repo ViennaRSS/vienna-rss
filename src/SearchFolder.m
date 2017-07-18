@@ -408,10 +408,13 @@
 	va_start(arguments, popUpButton);
 	CriteriaOperator operator;
 
-	while ((operator = va_arg(arguments, NSInteger)) != 0)
+	operator = va_arg(arguments, NSUInteger);
+	// if operator is within the range of a CriteriaOperator...
+	while (operator >= MA_CritOper_Is && operator <= MA_CritOper_NotUnder)
 	{
 		NSString * operatorString = NSLocalizedString([Criteria stringFromOperator:operator], nil);
 		[popUpButton addItemWithTag:operatorString tag:operator];
+		operator = va_arg(arguments, NSUInteger);
 	}
 }
 
