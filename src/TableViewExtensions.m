@@ -91,20 +91,6 @@
 	return (columnIndex != -1) ? [(id)[self delegate] tableView:self toolTipForTableColumn:tableColumn row:rowIndex] : @"";
 }
 
-/* localiseHeaderStrings
- * Localises the table view's column header titles by calling NSLocalisedString to set them. Before
- * calling this function, the header titles should have first been initialised with the US English
- * titles.
- */
--(void)localiseHeaderStrings
-{
-	for (NSTableColumn * aColumn in self.tableColumns)
-	{
-		id headerCell = aColumn.headerCell;
-		[headerCell setStringValue:NSLocalizedString([headerCell stringValue], nil)];
-	}
-}
-
 /* menuForEvent
  * Handle menu by moving the selection.
  */
