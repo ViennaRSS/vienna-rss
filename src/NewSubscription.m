@@ -75,8 +75,9 @@
 			if (sourcesDict.count > 0)
 			{
                 for (NSString *feedSourceType in sourcesDict.allKeys) {
-					//[feedSource addItemWithTitle:NSLocalizedString(feedSourceType, nil)];
-                    NSMenuItem *feedMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(feedSourceType, nil) action:NULL keyEquivalent:@""];
+                    NSMenuItem *feedMenuItem = [[NSMenuItem alloc] initWithTitle:feedSourceType
+                                                                          action:NULL
+                                                                   keyEquivalent:@""];
                     feedMenuItem.representedObject = feedSourceType;
                     [feedSource.menu addItem:feedMenuItem];
                 }
@@ -315,7 +316,7 @@
 	}
 	if (linkTitleString == nil)
 		linkTitleString = @"Link";
-	linkTitle.stringValue = [NSString stringWithFormat:@"%@:", NSLocalizedString(linkTitleString, nil)];
+	linkTitle.stringValue = [NSString stringWithFormat:@"%@:", linkTitleString];
 	siteHomePageButton.hidden = !showButton;
 }
 
