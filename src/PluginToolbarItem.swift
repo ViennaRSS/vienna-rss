@@ -27,7 +27,7 @@ final class PluginToolbarItem: ButtonToolbarItem {
     override init(itemIdentifier: String) {
         super.init(itemIdentifier: itemIdentifier)
 
-        let button = PluginToolbarItemButton(frame: NSMakeRect(0, 0, 41, 25))
+        let button = PluginToolbarItemButton(frame: NSRect(x: 0, y: 0, width: 41, height: 25))
         button.bezelStyle = .texturedRounded
         button.toolbarItem = self
         view = button

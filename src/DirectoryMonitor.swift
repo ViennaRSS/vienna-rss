@@ -67,7 +67,7 @@ final class DirectoryMonitor: NSObject {
             if #available(macOS 10.12, *) {
                 os_log("Restarting directory monitor", log: .default, type: .debug)
             } else {
-                NSLog("Restarting directory monitor");
+                NSLog("Restarting directory monitor")
             }
         }
 
@@ -170,7 +170,7 @@ enum DirectoryMonitorError: LocalizedError {
 
 private extension FSEventStreamRef {
 
-    init(allocator: CFAllocator? = kCFAllocatorDefault, callback: @escaping FSEventStreamCallback, context: UnsafeMutablePointer<FSEventStreamContext>? = nil, directories: [URL], startAt: FSEventStreamEventId = FSEventStreamEventId.now, latency: TimeInterval = 0, configuration: FileSystemEventStreamConfiguration = .none) throws {
+    init(allocator: CFAllocator? = kCFAllocatorDefault, callback: @escaping FSEventStreamCallback, context: UnsafeMutablePointer<FSEventStreamContext>? = nil, directories: [URL], startAt: FSEventStreamEventId = .now, latency: TimeInterval = 0, configuration: FileSystemEventStreamConfiguration = .none) throws {
         let directories = directories.map({ $0.path as CFString }) as CFArray
 
         if let stream = FSEventStreamCreate(allocator, callback, context, directories, startAt, latency, configuration.rawValue) {
@@ -180,7 +180,7 @@ private extension FSEventStreamRef {
         }
     }
 
-    func schedule(runLoop: RunLoop = RunLoop.current, runLoopMode: CFRunLoopMode = CFRunLoopMode.defaultMode!) {
+    func schedule(runLoop: RunLoop = .current, runLoopMode: CFRunLoopMode = .defaultMode) {
         FSEventStreamScheduleWithRunLoop(self, runLoop.getCFRunLoop(), runLoopMode.rawValue)
     }
 
@@ -238,7 +238,7 @@ private struct FileSystemEventStreamConfiguration: OptionSet {
     private static func flag(_ flag: Int) -> FileSystemEventStreamConfiguration {
         return self.init(rawValue: FSEventStreamCreateFlags(flag))
     }
-    
+
 }
 
 private enum FileSystemEventStreamError: Error {

@@ -56,6 +56,17 @@
 			name = "Archive and Prep for Upload";
 			productName = Release;
 		};
+		F63B7CFF1F1BA146002F71BF /* SwiftLint */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = F63B7D031F1BA147002F71BF /* Build configuration list for PBXAggregateTarget "SwiftLint" */;
+			buildPhases = (
+				F63B7D041F1BA154002F71BF /* SwiftLint */,
+			);
+			dependencies = (
+			);
+			name = SwiftLint;
+			productName = Linting;
+		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
@@ -1918,6 +1929,9 @@
 					8D15AC270486D014006FF6A4 = {
 						LastSwiftMigration = 0820;
 					};
+					F63B7CFF1F1BA146002F71BF = {
+						CreatedOnToolsVersion = 9.0;
+					};
 					F6A7DDC91E470E980017BE5E = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 3T4TM2W828;
@@ -1964,6 +1978,7 @@
 				52BA63FC0DE9E2E10008B3E1 /* Version Notes */,
 				430C4AF71661F07C0079C9FC /* Code Sign ID */,
 				EAAF335414BDE402002A8837 /* Archive and Prep for Upload */,
+				F63B7CFF1F1BA146002F71BF /* SwiftLint */,
 			);
 		};
 /* End PBXProject section */
@@ -2242,6 +2257,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = ". configs/scripts/Release-for-upload.sh";
+		};
+		F63B7D041F1BA154002F71BF /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --quiet\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			showEnvVarsInLog = 0;
 		};
 		F6B123401E474EC500973699 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3466,6 +3496,27 @@
 			};
 			name = Deployment;
 		};
+		F63B7D001F1BA147002F71BF /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Development;
+		};
+		F63B7D011F1BA147002F71BF /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Deployment;
+		};
+		F63B7D021F1BA147002F71BF /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = StaticAnalyzer;
+		};
 		F6A7DDCD1E470E980017BE5E /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3686,6 +3737,16 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
+		};
+		F63B7D031F1BA147002F71BF /* Build configuration list for PBXAggregateTarget "SwiftLint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F63B7D001F1BA147002F71BF /* Development */,
+				F63B7D011F1BA147002F71BF /* Deployment */,
+				F63B7D021F1BA147002F71BF /* StaticAnalyzer */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
 		};
 		F6A7DDD01E470E980017BE5E /* Build configuration list for PBXNativeTarget "Vienna Help" */ = {
 			isa = XCConfigurationList;

@@ -33,12 +33,12 @@ final class OverlayStatusBar: NSView {
     private var backgroundView: NSView = {
         let backgroundView: NSView
         if #available(OSX 10.10, *) {
-            let view = NSVisualEffectView(frame: NSZeroRect)
+            let view = NSVisualEffectView(frame: NSRect.zero)
             view.wantsLayer = true
             view.blendingMode = .withinWindow
             backgroundView = view
         } else {
-            backgroundView = NSView(frame: NSZeroRect)
+            backgroundView = NSView(frame: NSRect.zero)
             backgroundView.wantsLayer = true
             backgroundView.layer?.backgroundColor = CGColor(gray: 0, alpha: 0.65)
         }
@@ -54,7 +54,7 @@ final class OverlayStatusBar: NSView {
         if #available(macOS 10.12, *) {
             addressField = NSTextField(labelWithString: "")
         } else {
-            addressField = NSTextField(frame: NSZeroRect)
+            addressField = NSTextField(frame: NSRect.zero)
             addressField.isBezeled = false
             addressField.isSelectable = false
             addressField.drawsBackground = false
@@ -111,9 +111,9 @@ final class OverlayStatusBar: NSView {
 
         var addressFieldConstraints: [NSLayoutConstraint] = []
         addressFieldConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-2-[label]-2-|",
-                                                               metrics: nil, views: ["label": addressField])
+                                                                  metrics: nil, views: ["label": addressField])
         addressFieldConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-6-[label]-6-|",
-                                                               metrics: nil, views: ["label": addressField])
+                                                                  metrics: nil, views: ["label": addressField])
 
         if #available(OSX 10.10, *) {
             NSLayoutConstraint.activate(backgroundViewConstraints)
