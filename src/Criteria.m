@@ -224,7 +224,7 @@
 /* conditionFromString
  * Converts a condition string to its condition value. Returns -1 if the
  * string is invalid.
- * Note: Do NOT localise these strings. They're written to the XML file.
+ * Note: the strings which are written to the XML file are NOT localized.
  */
 +(CriteriaCondition)conditionFromString:(NSString *)string
 {
@@ -236,6 +236,18 @@
 			return MA_CritCondition_All;
 	}
 	return MA_CritCondition_Invalid;
+}
+
+/*
+ the following  code NEVER runs
+ it is only there to ease localization export through Xcode
+*/
+-(void)CriteriaConditionLocalization
+{
+    NSString * dummy;
+#pragma unused(dummy)
+    dummy = NSLocalizedString(@"any", "rule for association of multiple criteria");
+    dummy = NSLocalizedString(@"all", "rule for association of multiple criteria");
 }
 
 /* conditionToString
