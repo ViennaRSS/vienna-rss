@@ -331,8 +331,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     alert.alertStyle = NSAlertStyleWarning;
     alert.messageText = NSLocalizedString(@"Locate Title", nil);
     alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"Locate Text", nil), path];
-    [alert addButtonWithTitle:NSLocalizedString(@"Locate…", "Title of a button on an alert")];
-    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Locate…", @"Title of a button on an alert")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
     NSModalResponse alertResponse = [alert runModal];
 
     // When the cancel button is pressed.

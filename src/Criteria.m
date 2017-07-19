@@ -246,8 +246,8 @@
 {
     NSString * dummy;
 #pragma unused(dummy)
-    dummy = NSLocalizedString(@"any", "rule for association of multiple criteria");
-    dummy = NSLocalizedString(@"all", "rule for association of multiple criteria");
+    dummy = NSLocalizedString(@"any", @"rule for association of multiple criteria");
+    dummy = NSLocalizedString(@"all", @"rule for association of multiple criteria");
 }
 
 /* conditionToString
