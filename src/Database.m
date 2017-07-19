@@ -302,6 +302,21 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     [self addField:MA_Field_Headlines type:MA_FieldType_String tag:ArticleFieldIDHeadlines sqlField:@"" visible:NO width:100];
     [self addField:MA_Field_Enclosure type:MA_FieldType_String tag:ArticleFieldIDEnclosure sqlField:@"enclosure" visible:NO width:100];
     [self addField:MA_Field_EnclosureDownloaded type:MA_FieldType_Flag tag:ArticleFieldIDEnclosureDownloaded sqlField:@"enclosuredownloaded_flag" visible:NO width:100];
+
+	//set user friendly and localizable names for some fields
+	[self fieldByName:MA_Field_Read].displayName = NSLocalizedString(@"Read", @"Data field name visible in menu/smart folder definition");
+	[self fieldByName:MA_Field_Flagged].displayName = NSLocalizedString(@"Flagged", @"Data field name visible in menu/smart folder definition");
+	[self fieldByName:MA_Field_HasEnclosure].displayName = NSLocalizedString(@"HasEnclosure", @"Data field name (Y/N) visible in menu/smart folder definition");
+	[self fieldByName:MA_Field_Enclosure].displayName = NSLocalizedString(@"Enclosure", @"Data field name (URL) visible in menu/article list");
+	[self fieldByName:MA_Field_Deleted].displayName = NSLocalizedString(@"Deleted", @"Data field name visible in smart folder definition");
+	[self fieldByName:MA_Field_Subject].displayName = NSLocalizedString(@"Subject", @"Data field name visible in menu/article list/smart folder definition");
+	[self fieldByName:MA_Field_Folder].displayName = NSLocalizedString(@"Folder", @"Data field name visible in menu/article list/smart folder definition");
+	[self fieldByName:MA_Field_Date].displayName = NSLocalizedString(@"Date", @"Data field name visible in menu/article list/smart folder definition");
+	[self fieldByName:MA_Field_Author].displayName = NSLocalizedString(@"Author", @"Data field name visible in menu/article list/smart folder definition");
+	[self fieldByName:MA_Field_Text].displayName = NSLocalizedString(@"Text", @"Data field name visible in smart folder definition");
+	[self fieldByName:MA_Field_Summary].displayName = NSLocalizedString(@"Summary", @"Pseudo field name visible in menu/article list");
+	[self fieldByName:MA_Field_Headlines].displayName = NSLocalizedString(@"Headlines", @"Pseudo field name visible in article list");
+	[self fieldByName:MA_Field_Link].displayName = NSLocalizedString(@"Link", @"Data field name visible in menu/article list");
 }
 
 /* relocateLockedDatabase
@@ -427,7 +442,6 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	if (field != nil)
 	{
 		field.name = name;
-		[field setDisplayName:NSLocalizedString(name, nil)];
 		field.type = type;
 		field.tag = tag;
 		field.visible = visible;
