@@ -93,7 +93,7 @@
 +(SearchMethod *)searchAllArticlesMethod
 {
 	SearchMethod * method = [[SearchMethod alloc] init];
-	method.friendlyName = @"Search all articles";
+	method.friendlyName = NSLocalizedString(@"Search all articles", @"Placeholder title of a search field");
 	method.handler = @selector(performAllArticlesSearch);
 	
 	return method; 
@@ -106,7 +106,7 @@
 +(SearchMethod *)searchCurrentWebPageMethod
 {
 	SearchMethod * method = [[SearchMethod alloc] init];
-	method.friendlyName = @"Search current web page";
+	method.friendlyName = NSLocalizedString(@"Search current web page", @"Placeholder title of a search field");
 	method.handler = @selector(performWebPageSearch);
 	
 	return method; 

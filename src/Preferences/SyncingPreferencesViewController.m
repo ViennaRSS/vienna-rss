@@ -97,11 +97,11 @@ static BOOL _credentialsChanged;
                 BOOL match = NO;
                 for (NSString * key in sourcesDict)
                 {
-                    [openReaderSource addItemWithTitle:NSLocalizedString(key, nil)];
+                    [openReaderSource addItemWithTitle:key];
                     NSDictionary * itemDict = [sourcesDict valueForKey:key];
                     if ([theHost isEqualToString:[itemDict valueForKey:@"Address"]])
                     {
-                        [openReaderSource selectItemWithTitle:NSLocalizedString(key, nil)];
+                        [openReaderSource selectItemWithTitle:key];
                         [self changeSource:nil];
                         match = YES;
                     }

@@ -423,7 +423,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	
 	// Set the placeholder string for the global search field
 	SearchMethod * currentSearchMethod = [Preferences standardPreferences].searchMethod;
-	[self.toolbarSearchField.cell setPlaceholderString:NSLocalizedString([currentSearchMethod friendlyName], nil)];
+	[self.toolbarSearchField.cell setPlaceholderString:currentSearchMethod.friendlyName];
 	
 	// Add Scripts menu if we have any scripts
 	if (!hasOSScriptsMenu())
@@ -701,7 +701,9 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	for (searchMethod in [SearchMethod builtInSearchMethods])
 	{
 		friendlyName = searchMethod.friendlyName;
-		item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(friendlyName, nil) action:@selector(setSearchMethod:) keyEquivalent:@""];
+		item = [[NSMenuItem alloc] initWithTitle:friendlyName
+                                          action:@selector(setSearchMethod:)
+                                   keyEquivalent:@""];
 		item.representedObject = searchMethod;
 		
 		// Is this the currently set search method? If yes, mark it as such.
@@ -3068,7 +3070,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			{
 				if ([[menuItem.representedObject friendlyName] isEqualToString:[SearchMethod searchCurrentWebPageMethod].friendlyName])
 				{
-					[self.toolbarSearchField.cell setPlaceholderString:NSLocalizedString([[SearchMethod searchCurrentWebPageMethod] friendlyName], nil)];
+					[self.toolbarSearchField.cell setPlaceholderString:[SearchMethod searchCurrentWebPageMethod].friendlyName];
 					[Preferences standardPreferences].searchMethod = menuItem.representedObject;
 				}
 			}
@@ -3083,14 +3085,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			{
 				if ([[menuItem.representedObject friendlyName] isEqualToString:[SearchMethod searchAllArticlesMethod].friendlyName])
 				{
-					[self.toolbarSearchField.cell setPlaceholderString:NSLocalizedString([[SearchMethod searchAllArticlesMethod] friendlyName], nil)];
+					[self.toolbarSearchField.cell setPlaceholderString:[SearchMethod searchAllArticlesMethod].friendlyName];
 					[Preferences standardPreferences].searchMethod = menuItem.representedObject;
 				}
 			}
 		}
 		else
 		{
-			[self.toolbarSearchField.cell setPlaceholderString:NSLocalizedString([[prefs searchMethod] friendlyName], nil)];
+			[self.toolbarSearchField.cell setPlaceholderString:[prefs searchMethod].friendlyName];
 		}
 	// END of switching between "Search all articles" and "Search current web page".
 	}
