@@ -119,7 +119,7 @@
     [expireDuration selectItemAtIndex:[expireDuration indexOfItemWithTag:prefs.autoExpireDuration]];
     
     // Set download folder
-    [self updateDownloadsPopUp:prefs.downloadFolder];
+    [self updateDownloadsPopUp:prefs.downloadFolder.stringByStandardizingPath];
     
     // Set whether the application is shown in the menu bar
     showAppInMenuBar.state = prefs.showAppInStatusBar ? NSOnState : NSOffState;
