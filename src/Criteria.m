@@ -70,24 +70,6 @@
 	return operatorString;
 }
 
-/* operatorFromLocalizedString
- * Given a string representing an operator, returns the CriteriaOperator value
- * that represents that string.
- */
-+(CriteriaOperator)operatorFromLocalizedString:(NSString *)string
-{
-	NSArray * operatorArray = [Criteria arrayOfOperators];
-	NSUInteger  index;
-	
-	for (index = 0; index < operatorArray.count; ++index)
-	{
-		CriteriaOperator op = [operatorArray[index] integerValue];
-		if ([string isEqualToString:[Criteria localizedStringFromOperator:op]])
-			return op;
-	}
-	return 0;
-}
-
 /* arrayOfOperators
  * Returns an array of NSNumbers that represent all supported operators.
  */
