@@ -11,7 +11,9 @@ jobs:
       script: swiftlint --lenient --reporter emoji
 
 notifications:
-  webhooks:
-    urls:
-    on_failure: always
-    on_start: never
+  slack:
+    rooms:
+      - secure: G/L2fP8z8+jNFicgMkOPrc3e7HqdQ2HkyazUMHwWLOsKmjM0ERqQ6FZXLlSr2P/kukqfUGHCGBGRdoMUb7jebNY0fNQyLYoUD7L91MLaz/zSBpDu4Yl+cVQJER1F6WFWNf697Uevvun1Mmz3N6zHe82KjQtE1yk/qFCbPyG5uJ8=
+    template: "%{commit_subject}\n<%{compare_url}|%{commit}> in <%{pull_request_url}|#%{pull_request_number}> by %{author} <%{build_url}|%{result}> in %{duration}"
+    on_success: change
+    on_failure: change
