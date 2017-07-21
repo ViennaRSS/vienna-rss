@@ -13,9 +13,6 @@
 /* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "O2q-8o-CSb"; */
 "O2q-8o-CSb.title" = "Nom utilisateur :";
 
-/* Class = "NSButtonCell"; title = "🌍"; ObjectID = "e0z-IA-uBQ"; */
-"e0z-IA-uBQ.title" = "🌍";
-
 /* Class = "NSTextField"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "kM0-7a-obO"; */
 "kM0-7a-obO.ibShadowedToolTip" = "Sélection d'un serveur supportant l'API Open Reader";
 
@@ -30,3 +27,4 @@
 
 /* Class = "NSPopUpButton"; ibExternalAccessibilityDescription = "Select a server supporting the Open Reader API"; ObjectID = "zAy-oc-zmb"; */
 "zAy-oc-zmb.ibExternalAccessibilityDescription" = "Sélection d'un serveur supportant l'API Open Reader";
+
