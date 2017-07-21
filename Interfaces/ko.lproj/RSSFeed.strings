@@ -8,13 +8,10 @@
 "104.title" = "추가";
 
 /* Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106"; */
-"106.title" = "Create a new subscription";
+"106.title" = "새로운 구독 추가";
 
 /* Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107"; */
 "107.title" = "새 구독 추가";
-
-/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
-"110.title" = "URL:";
 
 /* Class = "NSButtonCell"; title = "Save"; ObjectID = "111"; */
 "111.title" = "URL:";
@@ -22,8 +19,3 @@
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "112"; */
 "112.title" = "저장";
 
-/* Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114"; */
-"114.title" = "Edit subscription";
-
-/* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
-"116.title" = "Subscribe in Open Reader";
