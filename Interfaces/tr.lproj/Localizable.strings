@@ -1,458 +1,600 @@
-"Mark Read" = "Okundu Olarak İşaretle";
-"Mark Unread" = "Okunmadı Olarak İşaretle";
-"Mark Unflagged" = "Önemsiz Olarak İşaretle";
-"Articles" = "Makaleler";
-"Folders" = "Klasörler";
-"Loading %@…" = "Yükleniyor %@…";
-"Completed" = "Tamamlandı";
-"Refresh RSS feeds" = "RSS Beslemelerini yenile";
-"Refresh All Subscriptions" = "Tüm Abonelikleri Yenile";
-"Already subscribed title" = "Hata";
-"Already subscribed body" = "Bu beslemeye zaten abonesiniz";
-"RSS Subscription Import Title" = "İçeri alma tamamlandı";
-"%d subscriptions successfully imported" = "%d abonelikleri başarılı bir şekilde dahil edildi";
-"RSS Subscription Export Title" = "Dışa çıkarma tamamlandı";
-"%d subscriptions successfully exported" = "%d abonelikleri başarılı bir şekilde çıkarıldı";
-"New unread articles retrieved" = "%d yeni okunmayan makale alındı";
-"Growl refresh completed" = "Growl yenilenmesi tamamlandı";
-"New articles retrieved" = "Yeni makaleler alındı";
-"(Untitled Feed)" = "(İsimsiz Besleme)";
-"Open Link in Browser" = "Bağlantıyı Tarayıcıda Aç";
-"Copy Link to Clipboard" = "Linki Panoya Kopyala";
-"Refresh completed" = "Yenileme tamamlandı";
-"Retrieving articles" = "Makaleler alınıyor";
-"ClearButton" = "Temizle";
-"Read" = "Oku";
-"Flagged" = "Önemli";
-"Comments" = "Yorumlar";
-"Parent" = "Üst";
-"Number" = "Dahil";
-"Subject" = "Konu";
-"Folder" = "Klasör";
-"Date" = "Tarih";
-"Author" = "Yazar";
-"Text" = "Metin";
-"Headlines" = "Başlıklar";
-"Link" = "Bağlantı";
-"Deleted" = "Silindi";
-"GUID" = "GUID";
-"No" = "Hayır";
-"Yes" = "Evet";
-"Version %@" = "Sürüm %@";
-"Refresh All" = "Tümünü Yenile";
-"Subscribe" = "Abone Ol";
-"Smart Folder" = "Akıllı Klasör";
-"Flag" = "Bayrak";
-"Next Unread" = "Sonraki Okunmayan";
-"Noon" = "Öğlen";
-"Midnight" = "Geceyarısı";
-"Today" = "Bugün";
-"Yesterday" = "Dün";
-"Tomorrow" = "Yarın";
-"%@ at %@" = "%@ %@ zamanında";
-"Quit" = "Çık";
-"Refresh cancelled" = "Yenileme iptal edildi";
-"Additional actions for the selected folder" = "Seçilli klasör için farklı uygulamalar";
-"Create a new subscription" = "Yeni abonelik oluştur";
-"Refresh all your subscriptions" = "Tüm aboneliklerinizi yenileyin";
-"New style title" = "Vienna yeni bir stil yükledi";
-"New style body" = "\"%@\" stili Stiller klasörünüze yüklendi ve Stil menüsüne eklendi.";
-"More Styles…" = "Daha Fazla Stil…";
-"Delete selected message" = "Seçili makaleleri kalıcı olarak silmek istediğinizden emin misiniz?";
-"Delete selected message text" = "Bu özellik geri alınamaz.";
-"Cancel" = "İptal";
-"OK" = "Tamam";
-"From" = "Kimden";
-"To" = "Kime";
-"(No title)" = "(Başlık Yok)";
-"Refreshing folder images…" = "Klasör imajları yenileniyor…";
-"Refreshing subscriptions…" = "Abonelikler yenileniyor…";
-"Authenticating with user name '%@'" = "\"%@\" kullanıcı adı yetkilendiriliyor";
-"No new articles available" = "Yeni makale yok";
-"%d new articles retrieved" = "%d yeni makale alındı";
-"HTTP code %d reported from server" = "%d HTTP kodu sunucudan alındı";
-"Headers:\n" = "Başlıklar:\n";
-"Connection error (%d, %@):\n" = "Bağlantı hatası (%d, %@):\n";
-"\tDescription: %@\n" = "\tAçıklama: %@\n";
-"\tSuggestion: %@\n" = "\tÖneri: %@\n";
-"\tCause: %@\n" = "\tSebep: %@\n";
-"Article feed will be compressed" = "Makale beslemesi sıkıştırılacak";
-"Redirecting to %@" = "Şuna yönlendiriliyor: %@";
-"Error: %@" = "Hata: %@";
-"Error" = "Hata";
-"Credentials Prompt" = "\"%@\" için abonelik kullanıcı adı ve şifre gerektiriyor.";
-"%ld bytes received" = "%ld byte alındı";
-"Authentication failed for user '%@'" = "\"%@\" kullanıcısı için yetkilendirme başarısız";
-"Error parsing XML data in feed" = "Beslemedeki XML verisi aktarımında hata";
-"Retrieving folder image" = "Klasör imajı alınıyor";
-"Folder image retrieved from %@" = "Klasör imajı şuradan alındı: %@";
-"Contacting…" = "Bağlanıyor…";
-"Connect Running" = "Bağlantı yürürlükte";
-"Connect Running text" = "Bağlantıyı kesip Vienna'yı kapatmak istediğinize emin misiniz?";
-"Delete group folder" = "Grup klasörünü sil";
-"Delete group folder text" = "\"%@\" grup klasörünü ve tüm alt klasörlerini silmek istediğinize emin misiniz? Bu işlem geri alınamaz.";
-"Delete smart folder" = "Akıllı klasörü sil";
-"Delete smart folder text" = "\"%@\" akıllı klasörünü ve tüm alt klasörlerini silmek istediğinize emin misiniz? Bu işlem arama ile ulaşılan asıl makaleleri silmeyecektir.";
-"Delete RSS feed text" = "\"%@\" üzerindeki aboneliğinizi iptal etmek istediğinize emin misiniz? Bu işlem abonelik dahilindeki tüm makaleleri silecektir.";
-"Delete RSS feed" = "Aboneliği sil";
-"Delete multiple folders text" = "%d seçili klasörlerini silmek istediğinize emin misiniz? Bu işlem geri alınamaz.";
-"Delete multiple folders" = "Çok sayıda klasörü sil";
-"Delete folder status" = "\"%@\" klasörü siliniyor…";
-"An error has occurred" = "Bir hata oluştu.";
-"Your software is up to date" = "Vienna'nız güncel.";
-"Please try again later" = "Lütfen daha sonra tekrar deneyiniz.";
-"An update is now available" = "Bir güncelleme bulundu";
-"Update available text" = "Vienna %@ numaralı son sürümü şurada:\n\n%@\n\nİndirmek ister misiniz? Eğer şimdi indirmezseniz, daha sonra Güncellemeleri Yeniden Kontrol Et'i seçerek indirebilirsiniz.";
-"any" = "herhangi";
-"all" = "tümü";
-"Open Scripts Folder" = "Scriptler klasörünü aç";
-"Cannot create database folder title" = "Üzgünüm, ama Vienna veritabanı klasörünü oluşturamadı";
-"Cannot create database folder text" = "Vienna \"%@\" klasörünü oluşturmaya çalışırken bir hata oluştu. Klasör izinlerinizi kontrol edin.";
-"Unrecognised database format title" = "Veritabanı dosya biçimi değişmiş";
-"Unrecognised database format text" = "Veritabanı (%@) dosya biçimi Vienna'nın bu sürümü tarafından desteklenmiyor. Dosyayı silip ya da yeniden adlandırıp Vienna'yı yeniden başlatmak ister misiniz?.";
-"Upgrade Title" = "Veritabanı Güncellemesi";
-"Upgrade Text" = "Geçerli veritabanınızın Vienna'nın bu sürümüyle çalışması için güncellenmesi gerek. Alternatif olarak yeni bir veritabanı ile de çalışmaya başlayabilirsiniz.. Her iki durumda da, geçerli veritabanınız %@ konumuna yedeklenecektir. Yeni ya da güncellenmiş veritabanınız, Vienna'nın eski versiyonları ile çalışmayacaktır.\n\nNot: bu sürm için, basitliği açısından yeni bir veritabanı ile başlamanız önerilir.\n";
-"New Database" = "Yeni veritabanı";
-"Upgrade" = "Güncelle";
-"Exit" = "Çık";
-"Search in %@" = "%@ içerisinde filtrele";
-"Marked Articles" = "İşaretli Makaleler";
-"Unread Articles" = "Okunmamış Makaleler";
-"Today's Articles" = "Bugünün Makaleleri";
-"Trash" = "Çöp";
-"Select…" = "Seç…";
-" (%d unread)" = " (%d okunmamış)";
-"is" = "dir";
-"is not" = "değildir";
-"is after" = "sonrasında";
-"is before" = "öncesinde";
-"is on or after" = "şimdi ya da sonrasında";
-"is on or before" = "şimdi ya da öncesinde";
-"contains" = "içerir";
-"does not contain" = "içermez";
-"is less than" = "daha az";
-"is greater than" = "daha çok";
-"is less than or equal to" = "eşit veya daha az";
-"is greater than or equal to" = "eşit veya daha çok";
-"Cannot open export file message" = "Harici dosya oluşturulamıyor";
-"Cannot open export file message text" = "İstenen harici dosya oluşturulamadı. Kilitli olmadığından ve başka bir yazılım tarafından kullanılmadığından emin olun.";
-"Source" = "Kaynak";
-"Status" = "Durum";
-"Enter LiveJournal User name" = "LiveJournal Kullanıcı adınızı girin";
-"Enter MSN Spaces User name" = "MSN Spaces Kullanıcı adınızı girin";
-"Enter Blogspot User name" = "BlogSpot Kullanıcı adınızı girin";
-"Enter Xanga User name" = "Xanga Kullanıcı adınızı girin";
-"Enter URL of RSS feed" = "Haber beslemesi için URL adresini girin";
-"Cannot rename folder" = "Dosya yeniden adlandırılamıyor";
-"A folder with that name already exists" = "Bu isimde başka bir klasör var";
-"Recent Searches" = "Son aramalar";
-"Recents" = "Son";
-"Clear" = "Son aramaları temizle";
-"Search web page" = "Web sayfası ara";
-"Loading…" = "Yükleniyor…";
-"Open Image in New Tab" = "İmajı Yeni Sekmede Aç";
-"Open Link in New Tab" = "Bağlantıyı Yeni Sekmede Aç";
-"Open Link in %@" = "Bağlantıyı Şurada Aç %@";
-"Open Page in %@" = "Sayfayı Şurada Aç %@";
-"Copy Page Link to Clipboard" = "Sayfa Adresini Panoya Kopyala";
-"%d unread articles" = "%d okunmamış makale";
-"More Scripts…" = "Daha Fazla Script…";
-"Install Update" = "Güncellemeyi Yükle";
-"Do Not Install" = "Yükleme";
-"Replace smart folder title" = "%@ adında bir akıllı klasör zaten var.";
-"Replace smart folder text" = "Geçerli akıllı klasörü yeni tanımladığınız kriterlerle güncellemek ister misiniz?";
-"Replace" = "Değiştir";
-"Never" = "Asla";
-"After a Day" = "Bir Gün Sonra";
-"After 2 Days" = "2 Gün Sonra";
-"After a Week" = "Bir Hafta Sonra";
-"After 2 Weeks" = "2 Hafta Sonra";
-"After a Month" = "Bir Ay Sonra";
-"Last Week" = "Geçen Hafta";
-"2 Weeks Ago" = "2 Hafta Önce";
-"A month" = "Bir Ay";
-"Activity Window" = "Aktivite Penceresi";
-"Error importing subscriptions body" = "Seçili dosya dahil edilemiyor. Dosya içeriği OPML XML biçimine uygun değil.";
-"Error importing subscriptions title" = "Dahil etme hatası";
-"Rename" = "Yeniden adlandır";
-"Mark All Read" = "Okunmuşları İşaretle";
-"Move Folders" = "Klasörleri Taşı";
-"Downloads" = "İndirilenler";
-"Invalid style title" = "%@ stilinde ya bir sorun var ya da stil bulunamadı";
-"Invalid style body" = "Geçerli stil onun yerine kullanılacak.";
-"Downloads Running" = "Bir ya da daha fazla dosya indiriliyor";
-"Downloads Running text" = "Eğer şimdi Vienna'dan çıkarsanız, tüm indirmeler durdurulacak.";
-"Mark All Subscriptions as Read" = "Tüm Abonelikleri Okundu Olarak İşaretle";
-"Preferences" = "Seçenekler";
-"General" = "Genel";
-"Appearance" = "Görünüm";
-"Locate Title" = "Vienna veritabanı oluşturulamıyor";
-"Locate Text" = "Yeni bir Vienna veritabanı \"%@\" konumunda oluşturulamıyor çünkü muhtemelen o klasör ya uzaktaki bir ağa dahil, zira Vienna'nın bu versiyonu ağ üzerindeki klasörler ile çalışacak şekilde tasarlanmamıştır. Bilgisayarınız üzerinde bulunan bir klasörü seçmeyi deneyin.";
-"Empty Trash message" = "Çöp kutusundaki bu mesajları kalıcı olarak silmek istediğinizden emin misiniz?";
-"Empty Trash message text" = "Bu işlemi geri alamazsınız";
-"Cannot open database title" = "Üzgünüm ama Vienna veritabanını açamadı";
-"Cannot open database text" = "(%@) veritabanı bir sebepten ötürü açılamadı. Dosya zarar görmüş ya da ulaşılamıyor olabilir. Lütfen veritabanı dosyasını silin ya da yeniden adlandırın ve ardından Vienna'yı yeniden başlatın.";
-"Vienna cannot open the file title" = "Vienna dosyayı açamıyor.";
-"Vienna cannot open the file body" = "Vienna \"%@\" dosyasını açamıyor çünkü siz onu indirdikten sonra dosyanın yeri değişmiş.";
-"Vienna cannot show the file title" = "Vienna dosyayı gösteremiyor.";
-"Vienna cannot show the file body" = "Vienna \"%@\" dosyasını gösteremiyor çünkü siz onu indirdikten sonra dosyanın yeri değişmiş.";
-"Empty" = "Boş";
-"Open" = "Aç";
-"Show in Finder" = "Finder'da Görüntüle";
-"Remove From List" = "Listeden Kaldır";
-"%.1f MB" = "%.1f MB";
-"%.1f KB" = "%.1f KB";
-"%.1f bytes" = "%.1f byte";
-"%.1f of %.1f MB" = "%.1f MB'nin %.1f MB'si";
-"%.1f of %.1f KB" = "%.1f KB'nin %.1f KB'si";
-"%.1f of %.1f bytes" = "%.1f byte'ın %.1f byte'ı";
-"An error occurred when this feed was last refreshed" = "Bu besleme en son yenilendiğinde bir hata oluştu";
-"Connecting to %@" = "Bağlanılıyor: %@";
-"About Vienna" = "Vienna Hakkında";
-"Acknowledgements" = "Teşekkürler";
-"Article" = "Makale";
-"Back" = "Geri";
-"Bring All to Front" = "Hepsini Öne Getir";
-"Check Spelling" = "Dilbilgisi Kontrolü";
-"Check Spelling as You Type" = "Dilbilgisini Yazarken Kontrol Et";
-"Check for Updates" = "Güncellemeleri Kontrol Et";
-"Close All Tabs" = "Tüm Sekmeleri Kapat";
-"Close Tab" = "Sekmeyi Kapat";
-"Close Window" = "Pencereyi Kapat";
-"Columns" = "Sütunlar";
-"Copy" = "Kopyala";
-"Cut" = "Kes";
-"Delete" = "Sil";
-"Delete Article" = "Makaleyi Sil";
-"Delete…" = "Delete…";
-"Edit" = "Düzenle";
-"Edit…" = "Düzenle…";
-"Empty Trash" = "Çöpü Boşalt";
-"Export Subscriptions…" = "Abonelikleri Çıkar…";
-"File" = "Dosya";
-"Find" = "Bul";
-"Find Next" = "Sonrakini Bul";
-"Find Previous" = "Öncekini Bul";
-"Find…" = "Bul…";
-"Forward" = "İleri";
-"Help" = "Yardım";
-"Hide Others" = "Diğerlerini Gizle";
-"Hide Vienna" = "Vienna'yı Gizle";
-"Import Subscriptions…" = "Abonelikleri Dahil Et…";
-"Jump to Selection" = "Seçime Atla";
-"Main Window" = "Ana Pencere";
-"MainMenu" = "AnaMenü";
-"Mark All Articles as Read" = "Tüm Makaleleri Okundu Olarak İşaretle";
-"Mark Flagged" = "Önemli Olarak İşaretle";
-"Minimize" = "Minimize Et";
-"New Group Folder…" = "Yeni Grup Klasörü…";
-"New Smart Folder…" = "Yeni Akıllı Klasör…";
-"New Subscription…" = "Yeni Abonelik…";
-"Next Tab" = "Sonraki Sekme";
-"Open Article Page" = "Makale Sayfasını Aç";
-"Open Article Page in External Browser" = "Makale Sayfasını Harici Tarayıcıda Aç";
-"Open Subscription Home Page" = "Aboneliğin Giriş Sayfasını Aç";
-"Open Subscription Home Page in External Browser" = "Aboneliğin Giriş Sayfasını Harici Tarayıcıda Aç";
-"Page Setup…" = "Sayfa Kurulumu…";
-"Paste" = "Yapıştır";
-"Preferences…" = "Seçenekler…";
-"Previous Tab" = "Önceki Sekme";
-"Print…" = "Yazdır…";
-"Quit Vienna" = "Vienna'dan Çık";
-"Redo" = "İleri Al";
-"Refresh Selected Subscriptions" = "Seçili Abonelikleri Yenile";
-"Reload Page" = "Sayfayı Yeniden Yükle";
-"Rename…" = "Yeniden adlandır…";
-"Restore Article" = "Makaleyi Sıfırla";
-"Select All" = "Tümünü Seç";
-"Services" = "Hizmetler";
-"Show All" = "Tümünü Göster";
-"Skip Folder" = "Klasörü Geç";
-"Sort By" = "Şuna Göre Diz";
-"Spelling" = "Yazım";
-"Spelling…" = "Yazım…";
-"Stop Refreshing" = "Yenilemeyi Durdur";
-"Stop Reloading Page" = "Sayfayı Yeniden Yüklemeyi Durdur";
-"Style" = "Stil";
-"Undo" = "Geri Al";
-"Use Selection for Find" = "Seçimi kullanarak bul";
-"Validate Feed" = "Beslemeyi Doğrula";
-"Vienna Help" = "Vienna Yardımı";
-"Vienna Web Site" = "Vienna Web Sitesi";
-"View" = "Görünüm";
-"Window" = "Pencere";
-"Zoom" = "Yakınlaştır";
-"Export all subscriptions" = "Tüm abonelikleri bir dosyaya aktar";
-"Export selected subscriptions" = "Seçili abonelikleri bir dosyaya aktar";
-"Preserve group folders in exported file" = "Aktarılan dosyada grup klasörlerini koru";
-"Open Frame" = "Çerçeveyi Aç";
-"Open Image in %@" = "İmajı Şunda Aç: %@";
-"Open Subscription Home Page in %@" = "Aboneliğin Ana Sayfasını Şunda Aç: %@";
-"Open Article Page in %@" = "Makale Sayfasını Şunda Aç: %@";
-"New Tab" = "Yeni Sekme";
-"External Browser" = "Harici Tarayıcı";
-
-/* Added in 2.1.0 */
-"Send Link" = "Bağlantıyı Gönder";
-"Send Links" = "Bağlantıları Gönder";
-"Increase Font Size" = "Yazı Boyutunu Yükselt";
-"Decrease Font Size" = "Yazı Boyutunu Düşür";
-"Enter the URL here" = "URL'yi buraya giriniz";
-"Refresh the current page" = "Geçerli sayfayı yenile";
-"Return to the previous page" = "Önceki sayfaya geri dön";
-"Go forward to the next page" = "Sonraki sayfaya geç";
-"Layout" = "Arabirim";
-"Reading Pane on Right" = "Okuma Paneli Sağda";
-"Reading Pane at Bottom" = "Okuma Paneli Altta";
-"Filter By" = "Şuna Göre Filtrele";
-"Filter by:" = "Filter by:";
-"All" = "Tümü";
-"All Articles" = "Tüm Makaleler";
-"Unread" = "Okunmamış";
-"Last Refresh" = "Son Yenileme";
-"Feed URL updated to %@" = "Besleme URL'si şuna güncellendi: %@";
-"Filter articles" = "Makaleleri filtrele";
-"Feed has been removed by the server" = "Besleme sunucu tarafından kaldırılmış";
-"Mark all articles read" = "Tüm makaleleri okunmuş olarak işaretle";
+/* No comment provided by engineer. */
 "%@ Info" = "%@ Bilgi";
-"%u articles" = "%u makale";
-"%u unread" = "%u okunmayan";
-"Keyboard Shortcuts" = "Klavye Kısayolları";
-"%@ (Filtered: %@)" = "%@ (Filtre: %@)";
-"Get Info…" = "Bilgi al…";
-"Open Web Location…" = "Web Bölgesini Aç…";
-"Refresh Folder Images" = "Klasör İmajlarını Yenile";
-"Report" = "Rapor Et";
-"Condensed" = "Yoğunlaştırılmış";
-"Unified" = "Birleştirilmiş";
-"Summary" = "Özet";
-"Blog With…" = "Şununla blogla…";
-"Blog with %@" = "Şununla blogla: %@";
-"Bigger Text" = "Daha Büyük Metin";
-"Smaller Text" = "Daha Küçük Metin";
 
-/* Added in 2.1.1 */
+/* No comment provided by engineer. */
+"%d new articles retrieved" = "%d yeni makale alındı";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully exported" = "%d abonelikleri başarılı bir şekilde çıkarıldı";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully imported" = "%d abonelikleri başarılı bir şekilde dahil edildi";
+
+/* No comment provided by engineer. */
+"%d unread articles" = "%d okunmamış makale";
+
+/* No comment provided by engineer. */
+"%u articles" = "%u makale";
+
+/* No comment provided by engineer. */
+"%u unread" = "%u okunmayan";
+
+/* No comment provided by engineer. */
+"(No title)" = "(Başlık Yok)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(İsimsiz Besleme)";
+
+/* No comment provided by engineer. */
+"A folder with that name already exists" = "Bu isimde başka bir klasör var";
+
+/* Toolbar item name for the Advanced preference pane */
 "Advanced" = "Gelişmiş";
 
-/* Added in 2.2.0 */
-"Import subscriptions from OPML file?" = "Abonelikleri OPML dosyasından yükle?";
-"Do you really want to import the subscriptions from the specified OPML file?" = "Abonelikleri seçili OPML dosyasından yüklemek istediğinize emin misiniz?";
-"Import" = "İçeri al";
-"HasEnclosure" = "Ek";
-"Enclosure" = "Ek URL";
-"Open New Tab" = "Yeni Sekmede Aç";
-"Subscribe to the feed for this page" = "Bu sayfa için beslemeye abone ol";
-"Open Vienna" = "Vienna'yı Aç";
-"Download Enclosure" = "Eki İndir";
-"Download Enclosures" = "Ekleri İndir";
-"Local File" = "Yerel Dosya";
-"Hide Status Bar" = "Durum Çubuğunu Gizle";
-"Show Status Bar" = "Durum Çubuğunu Göster";
-"Customize Toolbar…" = "Araç Çubuğunu Düzenle…";
-"Search Articles" = "Makalelerde Ara";
-"Progress" = "İşlem";
-"Delete all articles in the trash" = "Çöpteki tüm makaleleri sil";
-"Unsubscribe" = "Besleme Aboneliğini İptal Et";
-"Resubscribe" = "Beslemeye Yeniden Abone Ol";
-"Download" = "İndir";
-"This article contains an enclosed file." = "Bu makale bir ek dosya içeriyor.";
-"Growl download completed" = "Dosya indirmesi tamamlandı";
-"Growl download failed" = "Dosya indirmesi başarısız";
-"Download completed" = "Dosya indirildi";
-"File %@ downloaded" = "%@ dosyası indirildi";
-"Download failed" = "İndirme başarısız";
-"File %@ failed to download" = "%@ dosyası indirilemedi";
-"Play" = "Yürüt";
-"Click the Play button to play this enclosure in iTunes." = "Bu eki iTunes'ta çalmak için Yürüt düğmesine basın.";
-"Click the Open button to open this file." = "Bu dosyayı açmak için Aç düğmesine basın.";
-"Filter displayed articles by matching text" = "Görünen makaleleri uyumlu metinle filtrele";
-"Close the filter bar" = "Filtre çubuğunu kapat";
-"Search all articles" = "Tüm makalelerde ara";
-"Search Results" = "Arama Sonuçları";
-"Hide Filter Bar" = "Filtre Çubuğunu Gizle";
-"Show Filter Bar" = "Filtre Çubuğunu Göster";
-"Email a link to the current article or website" = "Geçerli makaleye ya da websitesine bağlantı gönder";
-"Refresh" = "Yenile";
-"Action" = "Uygulama";
-"Get Info" = "Bilgi Al";
-"See information about the selected subscription" = "Seçili abonelik bilgisini göster";
-"Display the list of available styles" = "Geçerli stillerin bir listesini göster";
+/* No comment provided by engineer. */
+"After 2 Days" = "2 Gün Sonra";
 
-/* Added in 2.3.0 */
-"Order By" = "Order By";
-"Manual" = "Manual";
-"Name" = "Name";
+/* No comment provided by engineer. */
+"After 2 Weeks" = "2 Hafta Sonra";
 
-/*Added in 2.4*/
-"Show XML Source" = "Show XML Source";
-"Source of folder" = "Source of folder";
-"No feed source to display." = "No feed source to display.";
-"Search current web page" = "Search current web page";
-"Search all articles or the current web page" = "Search all articles or the current web page";
-"Database Upgrade" = "Database Upgrade";
-"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.";
-"Upgrade Database" = "Upgrade Database";
+/* No comment provided by engineer. */
+"After a Day" = "Bir Gün Sonra";
 
-/* Added in 2.5.0 */
-"Cannot create folder title" = "Cannot create folder";
+/* No comment provided by engineer. */
+"After a Month" = "Bir Ay Sonra";
+
+/* No comment provided by engineer. */
+"After a Week" = "Bir Hafta Sonra";
+
+/* Already subscribed body */
+"Already subscribed body" = "Bu beslemeye zaten abonesiniz";
+
+/* Already subscribed title */
+"Already subscribed title" = "Hata";
+
+/* No comment provided by engineer. */
+"An error occurred when this feed was last refreshed" = "Bu besleme en son yenilendiğinde bir hata oluştu";
+
+/* Toolbar item name for the Appearance preference pane */
+"Appearance" = "Görünüm";
+
+/* No comment provided by engineer. */
+"Articles" = "Makaleler";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Yazar";
+
+/* Title of a button on an alert
+   Title of a popup menu item */
+"Cancel" = "İptal";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna \"%@\" klasörünü oluşturmaya çalışırken bir hata oluştu. Klasör izinlerinizi kontrol edin.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Üzgünüm, ama Vienna veritabanı klasörünü oluşturamadı";
+
+/* No comment provided by engineer. */
 "Cannot create folder body" = "The \"%@\" folder cannot be created.";
 
-/* Added in 2.6.0 */
-"Article load completed" = "Article load completed";
-"Loading HTML article…" = "Loading HTML article…";
-"Ascending" = "Ascending";
-"Descending" = "Descending";
-"Use Current Style for Articles" = "Use Current Style for Articles";
-"Use Web Page for Articles" = "Use Web Page for Articles";
+/* No comment provided by engineer. */
+"Cannot create folder title" = "Cannot create folder";
 
-/* Added for Open Reader support */
-"Force Refresh Selected Subscriptions From Open Reader" = "Force Refresh Selected Subscriptions From Open Reader";
-"Update Subscriptions From Open Reader" = "Update Subscriptions From Open Reader";
+/* No comment provided by engineer. */
+"Cannot open database text" = "(%@) veritabanı bir sebepten ötürü açılamadı. Dosya zarar görmüş ya da ulaşılamıyor olabilir. Lütfen veritabanı dosyasını silin ya da yeniden adlandırın ve ardından Vienna'yı yeniden başlatın.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Üzgünüm ama Vienna veritabanını açamadı";
+
+/* No comment provided by engineer. */
+"Cannot open export file message" = "Harici dosya oluşturulamıyor";
+
+/* No comment provided by engineer. */
+"Cannot open export file message text" = "İstenen harici dosya oluşturulamadı. Kilitli olmadığından ve başka bir yazılım tarafından kullanılmadığından emin olun.";
+
+/* No comment provided by engineer. */
+"Cannot rename folder" = "Dosya yeniden adlandırılamıyor";
+
+/* No comment provided by engineer. */
+"Clear" = "Son aramaları temizle";
+
+/* No comment provided by engineer. */
+"Click the Open button to open this file." = "Bu dosyayı açmak için Aç düğmesine basın.";
+
+/* No comment provided by engineer. */
+"Click the Play button to play this enclosure in iTunes." = "Bu eki iTunes'ta çalmak için Yürüt düğmesine basın.";
+
+/* No comment provided by engineer. */
+"Connecting to %@" = "Bağlanılıyor: %@";
+
+/* No comment provided by engineer. */
+"Copy Link to Clipboard" = "Linki Panoya Kopyala";
+
+/* No comment provided by engineer. */
+"Copy Page Link to Clipboard" = "Sayfa Adresini Panoya Kopyala";
+
+/* No comment provided by engineer. */
+"Credentials Prompt" = "\"%@\" için abonelik kullanıcı adı ve şifre gerektiriyor.";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Veritabanı Güncellemesi";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Tarih";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Delete" = "Sil";
+
+/* Title of a menu item */
+"Delete Article" = "Makaleyi Sil";
+
+/* No comment provided by engineer. */
 "Delete Open Reader RSS feed text" = "Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.";
-"Delete Open Reader RSS feed" = "Delete Open Reader RSS feed";
 
-/* Added in 3.0.0 */
-"Last 48 hours" = "Last 48 hours";
-"Unread or flagged" = "Unread or flagged";
-"Syncing" = "Syncing";
-"Reindex Database" = "Reindex Database";
-"Other" = "Diğer";
-"Authenticating on Open Reader" = "Authenticating on Open Reader";
-"Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
-"Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
-"Fetching Open Reader Subscriptions…" = "Fetching Open Reader Subscriptions…";
-"Open Reader Authentication Failed" = "Open Reader Authentication Failed";
+/* No comment provided by engineer. */
+"Delete RSS feed" = "Aboneliği sil";
+
+/* No comment provided by engineer. */
+"Delete RSS feed text" = "\"%@\" üzerindeki aboneliğinizi iptal etmek istediğinize emin misiniz? Bu işlem abonelik dahilindeki tüm makaleleri silecektir.";
+
+/* No comment provided by engineer. */
+"Delete folder status" = "\"%@\" klasörü siliniyor…";
+
+/* No comment provided by engineer. */
+"Delete group folder" = "Grup klasörünü sil";
+
+/* No comment provided by engineer. */
+"Delete group folder text" = "\"%@\" grup klasörünü ve tüm alt klasörlerini silmek istediğinize emin misiniz? Bu işlem geri alınamaz.";
+
+/* No comment provided by engineer. */
+"Delete multiple folders" = "Çok sayıda klasörü sil";
+
+/* No comment provided by engineer. */
+"Delete multiple folders text" = "%d seçili klasörlerini silmek istediğinize emin misiniz? Bu işlem geri alınamaz.";
+
+/* No comment provided by engineer. */
+"Delete selected message" = "Seçili makaleleri kalıcı olarak silmek istediğinizden emin misiniz?";
+
+/* No comment provided by engineer. */
+"Delete selected message text" = "Bu özellik geri alınamaz.";
+
+/* No comment provided by engineer. */
+"Delete smart folder" = "Akıllı klasörü sil";
+
+/* No comment provided by engineer. */
+"Delete smart folder text" = "\"%@\" akıllı klasörünü ve tüm alt klasörlerini silmek istediğinize emin misiniz? Bu işlem arama ile ulaşılan asıl makaleleri silmeyecektir.";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Silindi";
+
+/* No comment provided by engineer. */
+"Do you really want to import the subscriptions from the specified OPML file?" = "Abonelikleri seçili OPML dosyasından yüklemek istediğinize emin misiniz?";
+
+/* No comment provided by engineer. */
+"Download" = "İndir";
+
+/* Title of a menu item */
+"Download Enclosure" = "Eki İndir";
+
+/* Title of a menu item */
+"Download Enclosures" = "Ekleri İndir";
+
+/* Notification title */
+"Download completed" = "Dosya indirildi";
+
+/* Notification title */
+"Download failed" = "İndirme başarısız";
+
+/* No comment provided by engineer. */
+"Downloads Running" = "Bir ya da daha fazla dosya indiriliyor";
+
+/* No comment provided by engineer. */
+"Downloads Running text" = "Eğer şimdi Vienna'dan çıkarsanız, tüm indirmeler durdurulacak.";
+
+/* Title of a menu item */
+"Edit…" = "Düzenle…";
+
+/* Title of a button on an alert */
+"Empty" = "Boş";
+
+/* No comment provided by engineer. */
+"Empty Trash message" = "Çöp kutusundaki bu mesajları kalıcı olarak silmek istediğinizden emin misiniz?";
+
+/* No comment provided by engineer. */
+"Empty Trash message text" = "Bu işlemi geri alamazsınız";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "Ek URL";
+
+/* No comment provided by engineer. */
+"Enter the URL here" = "URL'yi buraya giriniz";
+
+/* No comment provided by engineer. */
+"Error" = "Hata";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions body" = "Seçili dosya dahil edilemiyor. Dosya içeriği OPML XML biçimine uygun değil.";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions title" = "Dahil etme hatası";
+
+/* No comment provided by engineer. */
+"Error parsing XML data in feed" = "Beslemedeki XML verisi aktarımında hata";
+
+/* No comment provided by engineer. */
+"External Browser" = "Harici Tarayıcı";
+
+/* No comment provided by engineer. */
+"Feed URL updated to %@" = "Besleme URL'si şuna güncellendi: %@";
+
+/* Notification body */
+"File %@ downloaded" = "%@ dosyası indirildi";
+
+/* Notification body */
+"File %@ failed to download" = "%@ dosyası indirilemedi";
+
+/* No comment provided by engineer. */
+"Flag" = "Bayrak";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Önemli";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Klasör";
+
+/* No comment provided by engineer. */
+"Folder image retrieved from %@" = "Klasör imajı şuradan alındı: %@";
+
+/* No comment provided by engineer. */
+"Folders" = "Klasörler";
+
+/* Toolbar item name for the General preference pane */
+"General" = "Genel";
+
+/* Title of a menu item */
+"Get Info" = "Bilgi Al";
+
+/* No comment provided by engineer. */
+"Go forward to the next page" = "Sonraki sayfaya geç";
+
+/* No comment provided by engineer. */
+"HTTP code %d reported from server" = "%d HTTP kodu sunucudan alındı";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Ek";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Başlıklar";
+
+/* No comment provided by engineer. */
+"Hide Filter Bar" = "Filtre Çubuğunu Gizle";
+
+/* Title of a menu item */
+"Hide Status Bar" = "Durum Çubuğunu Gizle";
+
+/* Title of a button on an alert */
+"Import" = "İçeri al";
+
+/* No comment provided by engineer. */
+"Import subscriptions from OPML file?" = "Abonelikleri OPML dosyasından yükle?";
+
+/* No comment provided by engineer. */
+"Invalid style body" = "Geçerli stil onun yerine kullanılacak.";
+
+/* No comment provided by engineer. */
+"Invalid style title" = "%@ stilinde ya bir sorun var ya da stil bulunamadı";
+
+/* No comment provided by engineer. */
+"Last Week" = "Geçen Hafta";
+
+/* Data field name visible in menu/article list */
+"Link" = "Bağlantı";
+
+/* No comment provided by engineer. */
+"Loading…" = "Yükleniyor…";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Yeni bir Vienna veritabanı \"%@\" konumunda oluşturulamıyor çünkü muhtemelen o klasör ya uzaktaki bir ağa dahil, zira Vienna'nın bu versiyonu ağ üzerindeki klasörler ile çalışacak şekilde tasarlanmamıştır. Bilgisayarınız üzerinde bulunan bir klasörü seçmeyi deneyin.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Vienna veritabanı oluşturulamıyor";
+
+/* Title of a menu item */
+"Mark All Articles as Read" = "Tüm Makaleleri Okundu Olarak İşaretle";
+
+/* No comment provided by engineer. */
+"Mark All Read" = "Okunmuşları İşaretle";
+
+/* Title of a menu item */
+"Mark All Subscriptions as Read" = "Tüm Abonelikleri Okundu Olarak İşaretle";
+
+/* Title of a menu item */
+"Mark Flagged" = "Önemli Olarak İşaretle";
+
+/* Title of a menu item */
+"Mark Read" = "Okundu Olarak İşaretle";
+
+/* No comment provided by engineer. */
+"Mark Unflagged" = "Önemsiz Olarak İşaretle";
+
+/* Title of a menu item */
+"Mark Unread" = "Okunmadı Olarak İşaretle";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "İşaretli Makaleler";
+
+/* No comment provided by engineer. */
+"More Scripts…" = "Daha Fazla Script…";
+
+/* No comment provided by engineer. */
+"Move Folders" = "Klasörleri Taşı";
+
+/* No comment provided by engineer. */
+"Never" = "Asla";
+
+/* No comment provided by engineer. */
+"New Tab" = "Yeni Sekme";
+
+/* Notification title */
+"New articles retrieved" = "Yeni makaleler alındı";
+
+/* No comment provided by engineer. */
+"New style body" = "\"%@\" stili Stiller klasörünüze yüklendi ve Stil menüsüne eklendi.";
+
+/* No comment provided by engineer. */
+"New style title" = "Vienna yeni bir stil yükledi";
+
+/* Notification body */
+"New unread articles retrieved" = "%d yeni okunmayan makale alındı";
+
+/* No comment provided by engineer. */
+"No" = "Hayır";
+
+/* No comment provided by engineer. */
+"No new articles available" = "Yeni makale yok";
+
+/* Title of a button on an alert */
+"OK" = "Tamam";
+
+/* Title of a popup menu item */
+"Open" = "Aç";
+
+/* Title of a menu item */
+"Open Article Page" = "Makale Sayfasını Aç";
+
+/* No comment provided by engineer. */
+"Open Article Page in %@" = "Makale Sayfasını Şunda Aç: %@";
+
+/* Title of a menu item */
+"Open Article Page in External Browser" = "Makale Sayfasını Harici Tarayıcıda Aç";
+
+/* No comment provided by engineer. */
+"Open Frame" = "Çerçeveyi Aç";
+
+/* No comment provided by engineer. */
+"Open Image in %@" = "İmajı Şunda Aç: %@";
+
+/* No comment provided by engineer. */
+"Open Image in New Tab" = "İmajı Yeni Sekmede Aç";
+
+/* No comment provided by engineer. */
+"Open Link in %@" = "Bağlantıyı Şurada Aç %@";
+
+/* No comment provided by engineer. */
+"Open Link in New Tab" = "Bağlantıyı Yeni Sekmede Aç";
+
+/* No comment provided by engineer. */
+"Open Page in %@" = "Sayfayı Şurada Aç %@";
+
+/* No comment provided by engineer. */
 "Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
 
-/* Added in 3.0.1 */
-"Plugin installed" = "Plugin installed";
-"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.";
-"Error loading script '%@'" = "Error loading script '%@'";
-"AppleScript Error in '%@' script" = "AppleScript Error in '%@' script";
-"No thanks" = "No thanks";
-"Include anonymous system profile when checking for updates?" = "Include anonymous system profile when checking for updates?";
-"Include anonymous system profile when checking for updates text" = "This helps Vienna development by letting us know what versions of macOS are most popular amongst our users.";
-"Error: Feed not found!" = "Error: Feed not found!";
-"Loading" = "Loading";
-"Plugin could not be installed" = "Plugin could not be installed";
-"Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
-"Queue" = "Queue";
-"Forcing Refresh subscriptions…" = "Forcing Refresh subscriptions…";
-"Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
+/* No comment provided by engineer. */
+"Open Scripts Folder" = "Scriptler klasörünü aç";
 
-/* Added in 3.0.2 */
-"Close" = "Close";
-"Locate…" = "Locate…";
-"Error retrieving RSS feed:"="Error retrieving RSS feed:";
-"Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
-"Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";
-"RSS Icon not found!" = "RSS Icon not found!";
+/* Title of a menu item */
+"Open Subscription Home Page" = "Aboneliğin Giriş Sayfasını Aç";
 
-/*Added in 3.0.5 */
-"Redirection attempt treated as temporary for safety concern" = "Redirection attempt treated as temporary for safety concern";
+/* No comment provided by engineer. */
+"Open Subscription Home Page in %@" = "Aboneliğin Ana Sayfasını Şunda Aç: %@";
 
-/*Added in 3.0.7 */
-"No articles in feed" = "No articles in feed";
+/* Title of a menu item */
+"Open Subscription Home Page in External Browser" = "Aboneliğin Giriş Sayfasını Harici Tarayıcıda Aç";
 
-/*Added in 3.1.2 */
-"Filter folders" = "Search for folders";
+/* No comment provided by engineer. */
+"Other" = "Diğer";
+
+/* No comment provided by engineer. */
+"Play" = "Yürüt";
+
+/* Title of the Preferences window */
+"Preferences" = "Seçenekler";
+
+/* Title of a button on an alert */
+"Quit" = "Çık";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Quit Vienna" = "Vienna'dan Çık";
+
+/* No comment provided by engineer. */
+"RSS Subscription Export Title" = "Dışa çıkarma tamamlandı";
+
+/* No comment provided by engineer. */
+"RSS Subscription Import Title" = "İçeri alma tamamlandı";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Oku";
+
+/* No comment provided by engineer. */
+"Recent Searches" = "Son aramalar";
+
+/* No comment provided by engineer. */
+"Recents" = "Son";
+
+/* Title of a menu item */
+"Refresh All Subscriptions" = "Tüm Abonelikleri Yenile";
+
+/* Title of a menu item */
+"Refresh Selected Subscriptions" = "Seçili Abonelikleri Yenile";
+
+/* No comment provided by engineer. */
+"Refresh completed" = "Yenileme tamamlandı";
+
+/* No comment provided by engineer. */
+"Refresh the current page" = "Geçerli sayfayı yenile";
+
+/* No comment provided by engineer. */
+"Refreshing folder images…" = "Klasör imajları yenileniyor…";
+
+/* No comment provided by engineer. */
+"Refreshing subscriptions…" = "Abonelikler yenileniyor…";
+
+/* Title of a popup menu item */
+"Remove From List" = "Listeden Kaldır";
+
+/* Title of a menu item */
+"Rename…" = "Yeniden adlandır…";
+
+/* Title of a menu item */
+"Restore Article" = "Makaleyi Sıfırla";
+
+/* No comment provided by engineer. */
+"Resubscribe" = "Beslemeye Yeniden Abone Ol";
+
+/* No comment provided by engineer. */
+"Retrieving articles" = "Makaleler alınıyor";
+
+/* No comment provided by engineer. */
+"Retrieving folder image" = "Klasör imajı alınıyor";
+
+/* No comment provided by engineer. */
+"Return to the previous page" = "Önceki sayfaya geri dön";
+
+/* No comment provided by engineer. */
+"Search Results" = "Arama Sonuçları";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Tüm makalelerde ara";
+
+/* No comment provided by engineer. */
+"Search in %@" = "%@ içerisinde filtrele";
+
+/* No comment provided by engineer. */
+"Select…" = "Seç…";
+
+/* No comment provided by engineer. */
+"Send Link" = "Bağlantıyı Gönder";
+
+/* No comment provided by engineer. */
+"Send Links" = "Bağlantıları Gönder";
+
+/* No comment provided by engineer. */
+"Show Filter Bar" = "Filtre Çubuğunu Göster";
+
+/* Title of a menu item */
+"Show Status Bar" = "Durum Çubuğunu Göster";
+
+/* Title of a popup menu item */
+"Show in Finder" = "Finder'da Görüntüle";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Konu";
+
+/* No comment provided by engineer. */
+"Subscribe to the feed for this page" = "Bu sayfa için beslemeye abone ol";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Özet";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Metin";
+
+/* No comment provided by engineer. */
+"This article contains an enclosed file." = "Bu makale bir ek dosya içeriyor.";
+
+/* No comment provided by engineer. */
+"Today" = "Bugün";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Bugünün Makaleleri";
+
+/* No comment provided by engineer. */
+"Trash" = "Çöp";
+
+/* No comment provided by engineer. */
+"Unread" = "Okunmamış";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Okunmamış Makaleler";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "Veritabanı (%@) dosya biçimi Vienna'nın bu sürümü tarafından desteklenmiyor. Dosyayı silip ya da yeniden adlandırıp Vienna'yı yeniden başlatmak ister misiniz?.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "Veritabanı dosya biçimi değişmiş";
+
+/* No comment provided by engineer. */
+"Unsubscribe" = "Besleme Aboneliğini İptal Et";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file body" = "Vienna \"%@\" dosyasını açamıyor çünkü siz onu indirdikten sonra dosyanın yeri değişmiş.";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file title" = "Vienna dosyayı açamıyor.";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file body" = "Vienna \"%@\" dosyasını gösteremiyor çünkü siz onu indirdikten sonra dosyanın yeri değişmiş.";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file title" = "Vienna dosyayı gösteremiyor.";
+
+/* No comment provided by engineer. */
+"Yes" = "Evet";
+
+/* No comment provided by engineer. */
+"Yesterday" = "Dün";
+
+/* rule for association of multiple criteria */
+"all" = "tümü";
+
+/* rule for association of multiple criteria */
+"any" = "herhangi";
+
+/* test for a string */
+"contains" = "içerir";
+
+/* test for a string */
+"does not contain" = "içermez";
+
+/* test for a value */
+"is" = "dir";
+
+/* test for a date */
+"is after" = "sonrasında";
+
+/* test for a date */
+"is before" = "öncesinde";
+
+/* test for a numeric value */
+"is greater than" = "daha çok";
+
+/* test for a numeric value */
+"is greater than or equal to" = "eşit veya daha çok";
+
+/* test for a numeric value */
+"is less than" = "daha az";
+
+/* test for a numeric value */
+"is less than or equal to" = "eşit veya daha az";
+
+/* test for a value */
+"is not" = "değildir";
+
+/* test for a date */
+"is on or after" = "şimdi ya da sonrasında";
+
+/* test for a date */
+"is on or before" = "şimdi ya da öncesinde";
+
