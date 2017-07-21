@@ -1,0 +1,126 @@
+/* No comment provided by engineer. */
+"(No title)" = "(No subject)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(無名フィード)";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "著者";
+
+/* Title of a button on an alert */
+"Cancel" = "キャンセル";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna は \"%@\" と言うフォルダを作成しようとしましたが、エラーが発生しました。フォルダのパーミッションを確認してください。";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Vienna はデータベースフォルダを作成することができません。";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "データベースファイル (%@) を開くことができません。データベースファイルを削除または名称を変更して Vienna を再起動してください。";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Vienna はデータベースを開くことができません。";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "データベースアップグレード";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "日付";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "削除済み";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "フラグ";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "フォルダ";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "ヘッドライン";
+
+/* Data field name visible in menu/article list */
+"Link" = "リンク";
+
+/* No comment provided by engineer. */
+"Locate Text" = "フォルダがリモートネットワーク上にあるようなので、新規データベースを \"%@\" に作成できません。このバージョンの Vienna はリモートデータベースに対応していません。ローカルディスク上の他のフォルダを選択してください。";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Vienna データベースを作成できません。";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "フラグのついた記事";
+
+/* Title of a button on an alert */
+"Quit Vienna" = "Vienna を終了";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "既読";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "タイトル";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "要約";
+
+/* Data field name visible in smart folder definition */
+"Text" = "テキスト";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "今日の記事";
+
+/* No comment provided by engineer. */
+"Trash" = "ゴミ箱";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "未読の記事";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "データベース (%@) のファイルフォーマットはご利用のバージョンの Vienna でサポートされていません。ファイルを削除するか名前を変更した後、Vienna を再起動してください。";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "データベースのファイルフォーマットが変更されました。";
+
+/* rule for association of multiple criteria */
+"all" = "すべて";
+
+/* rule for association of multiple criteria */
+"any" = "いずれか";
+
+/* test for a string */
+"contains" = "が次を含む：";
+
+/* test for a string */
+"does not contain" = "が次を含まない：";
+
+/* test for a value */
+"is" = "が";
+
+/* test for a date */
+"is after" = "が次以降である：";
+
+/* test for a date */
+"is before" = "が次以前である：";
+
+/* test for a numeric value */
+"is greater than" = "が次より多い：";
+
+/* test for a numeric value */
+"is greater than or equal to" = "が次と同じか多い：";
+
+/* test for a numeric value */
+"is less than" = "が次より少ない：";
+
+/* test for a numeric value */
+"is less than or equal to" = "が次と同じか少ない：";
+
+/* test for a value */
+"is not" = "が次でない：";
+
+/* test for a date */
+"is on or after" = "次またはそれ以降である：";
+
+/* test for a date */
+"is on or before" = "次またはそれ以前である";
+

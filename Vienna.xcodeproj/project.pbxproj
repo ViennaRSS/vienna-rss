@@ -920,6 +920,10 @@
 		F69AE7C01F2218C800342640 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = "it.lproj/Vienna-InfoPlist.strings"; sourceTree = "<group>"; };
 		F69AE7C11F2218C900342640 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F69AE7C21F2218C900342640 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F69AE7C31F22190200342640 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = "ja.lproj/Vienna-InfoPlist.strings"; sourceTree = "<group>"; };
+		F69AE7C41F22190300342640 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/EmptyTrashWarning.strings; sourceTree = "<group>"; };
+		F69AE7C51F22190400342640 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F69AE7C61F22190500342640 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F6A4E8471F040D58001C9191 /* PluginToolbarItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PluginToolbarItemButton.swift; path = src/PluginToolbarItemButton.swift; sourceTree = "<group>"; };
 		F6A7DDCA1E470E980017BE5E /* Vienna.help */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Vienna.help; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6A7DDCC1E470E980017BE5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2864,6 +2868,7 @@
 				F69AE7B41F22183100342640 /* fr */,
 				F69AE7BD1F22187900342640 /* gl */,
 				F69AE7C21F2218C900342640 /* it */,
+				F69AE7C61F22190500342640 /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2879,6 +2884,7 @@
 				F69AE7B21F22182F00342640 /* fr */,
 				F69AE7B71F22187300342640 /* gl */,
 				F69AE7C01F2218C800342640 /* it */,
+				F69AE7C31F22190200342640 /* ja */,
 			);
 			name = "Vienna-InfoPlist.strings";
 			path = Resources;
@@ -2894,6 +2900,7 @@
 				F69AE7B31F22183100342640 /* fr */,
 				F69AE7BC1F22187800342640 /* gl */,
 				F69AE7C11F2218C900342640 /* it */,
+				F69AE7C51F22190400342640 /* ja */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -3080,6 +3087,7 @@
 				F6352BDE1E2720BF005CD307 /* zh-Hant */,
 				F6352BDF1E2720C1005CD307 /* zh-Hans */,
 				F62580471E285A6E0035E43C /* gl */,
+				F69AE7C41F22190300342640 /* ja */,
 			);
 			name = EmptyTrashWarning.xib;
 			path = Interfaces;
