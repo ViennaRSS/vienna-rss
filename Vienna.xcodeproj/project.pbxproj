@@ -899,6 +899,9 @@
 		F69AE7A61F22172900342640 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/Vienna-InfoPlist.strings"; sourceTree = "<group>"; };
 		F69AE7A71F22172B00342640 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F69AE7A81F22172C00342640 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F69AE7AC1F2217B900342640 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = "es.lproj/Vienna-InfoPlist.strings"; sourceTree = "<group>"; };
+		F69AE7AD1F2217BB00342640 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F69AE7AE1F2217BB00342640 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F6A4E8471F040D58001C9191 /* PluginToolbarItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PluginToolbarItemButton.swift; path = src/PluginToolbarItemButton.swift; sourceTree = "<group>"; };
 		F6A7DDCA1E470E980017BE5E /* Vienna.help */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Vienna.help; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6A7DDCC1E470E980017BE5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2834,6 +2837,7 @@
 				F69AE7961F2215D100342640 /* cs */,
 				F69AE7A41F2216A500342640 /* da */,
 				F69AE7A81F22172C00342640 /* de */,
+				F69AE7AE1F2217BB00342640 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2844,6 +2848,7 @@
 				F69AE79B1F2215D600342640 /* cs */,
 				F69AE79E1F2216A100342640 /* da */,
 				F69AE7A61F22172900342640 /* de */,
+				F69AE7AC1F2217B900342640 /* es */,
 			);
 			name = "Vienna-InfoPlist.strings";
 			path = Resources;
@@ -2854,6 +2859,7 @@
 			children = (
 				F69AE7A21F2216A400342640 /* da */,
 				F69AE7A71F22172B00342640 /* de */,
+				F69AE7AD1F2217BB00342640 /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

@@ -31,8 +31,6 @@
 /* Class = "NSTextFieldCell"; title = "Authentication"; ObjectID = "U0N-RF-bUt"; */
 "U0N-RF-bUt.title" = "Autenticación";
 
-/* Class = "NSTextFieldCell"; title = "General"; ObjectID = "i9j-KH-c3D"; */
-"i9j-KH-c3D.title" = "General";
-
 /* Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG"; */
 "xPF-M9-oZG.title" = "URL de la fuente";
+
