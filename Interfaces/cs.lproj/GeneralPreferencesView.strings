@@ -34,9 +34,6 @@
 /* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1"; */
 "JN6-lj-bQ1.title" = "Zobrazit v řádku nabídek";
 
-/* Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0"; */
-"OID-qF-Pp0.title" = "Search for latest Beta versions";
-
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "YoM-Gv-hXn"; */
 "YoM-Gv-hXn.title" = "Otvírat odkazy v externím prohlížeči";
 
@@ -73,11 +70,9 @@
 /* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
 "qeb-at-hYb.title" = "Aktualizace:";
 
-/* Class = "NSButtonCell"; title = "Include anonymous system profile"; ObjectID = "qno-Cg-EkC"; */
-"qno-Cg-EkC.title" = "Zahrnout anonymní systémový profil";
-
 /* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "sCl-hz-PFF"; */
 "sCl-hz-PFF.title" = "Označit stávající příspěvky jako čtené:";
 
 /* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "sSj-zI-6RY"; */
 "sSj-zI-6RY.title" = "Každou hodinu";
+

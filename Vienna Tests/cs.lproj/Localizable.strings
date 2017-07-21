@@ -1,0 +1,141 @@
+/* No comment provided by engineer. */
+"(No title)" = "(není titul)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(zdroj beze jména)";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Autor";
+
+/* Title of a button on an alert */
+"Cancel" = "Zrušit";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Program Vienna se pokusil vytvořit složku „%@“, ale vyskytla se chyba. Ověřte, zda máte oprávnění k vytvoření složky v tomto umístění.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Program Vienna nemůže vytvořit databázovou složku";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "Soubor databáze (%@) nelze z nějakých důvodů otevřít. Může být poškozený nebo nepřístupný. Smažte nebo přejmenujte tento soubor databáze, ukončete a znovu spusťte program Vienna.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Program Vienna nemůže otevřít databázi";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Aktualizovat databázi";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Datum";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Smazáno";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "URL přílohy";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Praporek";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Složka";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Příloha";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Záhlaví";
+
+/* Data field name visible in menu/article list */
+"Link" = "Odkaz";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Nelze vytvořit novou databázi programu Vienna v položce „%@“, protože složka je pravděpodobně umístěna v síti. Tato verze programu Vienna nemůže spravovat vzdálené databáze. Vyberte prosím jinou složku, která je umístěna v tomto počítači.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Nelze vytvořit databázi Vienna";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Označené příspěvky";
+
+/* Title of a button on an alert */
+"Quit Vienna" = "Ukončit Viennu";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Čtené";
+
+/* No comment provided by engineer. */
+"Search Results" = "Výsledky hledání";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Hledat ve všech příspěvcích";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Předmět";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Souhrn";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Text";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Dnešní příspěvky";
+
+/* No comment provided by engineer. */
+"Trash" = "Koš";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Nečtené příspěvky";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "Souborový formát databáze (%@) není touto verzí programu Vienna podporovaný. Smažte nebo přejmenujte tento soubor, ukončete a znovu spusťte program Vienna.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "Formát databázového soubor byl změněn";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.";
+
+/* rule for association of multiple criteria */
+"all" = "všem";
+
+/* rule for association of multiple criteria */
+"any" = "libovolným";
+
+/* test for a string */
+"contains" = "obsahuje";
+
+/* test for a string */
+"does not contain" = "neobsahuje";
+
+/* test for a value */
+"is" = "je";
+
+/* test for a date */
+"is after" = "je po";
+
+/* test for a date */
+"is before" = "je před";
+
+/* test for a numeric value */
+"is greater than" = "je větší než";
+
+/* test for a numeric value */
+"is greater than or equal to" = "je větší nebo stejný než";
+
+/* test for a numeric value */
+"is less than" = "je menší než";
+
+/* test for a numeric value */
+"is less than or equal to" = "je menší nebo stejný než";
+
+/* test for a value */
+"is not" = "není";
+
+/* test for a date */
+"is on or after" = "je nebo po";
+
+/* test for a date */
+"is on or before" = "je nebo před";
+

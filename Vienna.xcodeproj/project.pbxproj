@@ -264,6 +264,8 @@
 		F6832F681F10F5DA007920D4 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F661F10F5DA007920D4 /* MainWindowController.xib */; };
 		F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = F69140E31E71B94200D51BFF /* AppController+Notifications.m */; };
 		F69964F71F13029600FC8493 /* OverlayStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69964F61F13029500FC8493 /* OverlayStatusBar.swift */; };
+		F69AE7951F2215D100342640 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F69AE7971F2215D100342640 /* Localizable.strings */; };
+		F69AE79A1F2215D600342640 /* Vienna-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F69AE79C1F2215D600342640 /* Vienna-InfoPlist.strings */; };
 		F6A4E8481F040D58001C9191 /* PluginToolbarItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4E8471F040D58001C9191 /* PluginToolbarItemButton.swift */; };
 		F6A7DE341E47138B0017BE5E /* advanced.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2A1E47138B0017BE5E /* advanced.html */; };
 		F6A7DE351E47138B0017BE5E /* faq.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2C1E47138B0017BE5E /* faq.html */; };
@@ -886,6 +888,8 @@
 		F69140FD1E71D74600D51BFF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		F69140FE1E71D74800D51BFF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		F69964F61F13029500FC8493 /* OverlayStatusBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OverlayStatusBar.swift; path = src/OverlayStatusBar.swift; sourceTree = "<group>"; };
+		F69AE7961F2215D100342640 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F69AE79B1F2215D600342640 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = "cs.lproj/Vienna-InfoPlist.strings"; sourceTree = "<group>"; };
 		F6A4E8471F040D58001C9191 /* PluginToolbarItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PluginToolbarItemButton.swift; path = src/PluginToolbarItemButton.swift; sourceTree = "<group>"; };
 		F6A7DDCA1E470E980017BE5E /* Vienna.help */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Vienna.help; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6A7DDCC1E470E980017BE5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1207,6 +1211,7 @@
 		035B703719E0E4AE00197334 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F69AE7971F2215D100342640 /* Localizable.strings */,
 				035B703819E0E4AE00197334 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -1242,6 +1247,7 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F69AE79C1F2215D600342640 /* Vienna-InfoPlist.strings */,
 				43EE7548165E81AB000997FB /* Interfaces */,
 				F6B172881EF37F51003F0AB5 /* Images */,
 				43EE7547165E8109000997FB /* AppleScript */,
@@ -1988,6 +1994,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F69AE7951F2215D100342640 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2047,6 +2054,7 @@
 				AA1A25180C077F49005968DC /* columnIconPressed.tiff in Resources */,
 				F65D6D711E74619E00A30974 /* Credits.rtf in Resources */,
 				AAFDB7AF0C0B1516000D1643 /* smartFolder.tiff in Resources */,
+				F69AE79A1F2215D600342640 /* Vienna-InfoPlist.strings in Resources */,
 				F6A7DE4F1E471A7F0017BE5E /* Vienna.help in Resources */,
 				AA16C5450C2DD4EB006BBAC1 /* refreshProgress.tiff in Resources */,
 				F6D572AB1E26AA8200CDA909 /* EmptyTrashWarning.xib in Resources */,
@@ -2805,6 +2813,23 @@
 				F60642871F1A316100A12272 /* zh-Hans */,
 			);
 			name = MainWindowController.xib;
+			sourceTree = "<group>";
+		};
+		F69AE7971F2215D100342640 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F69AE7961F2215D100342640 /* cs */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		F69AE79C1F2215D600342640 /* Vienna-InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F69AE79B1F2215D600342640 /* cs */,
+			);
+			name = "Vienna-InfoPlist.strings";
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		F6A7DE2A1E47138B0017BE5E /* advanced.html */ = {
