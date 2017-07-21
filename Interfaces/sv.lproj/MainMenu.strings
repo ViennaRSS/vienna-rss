@@ -1,11 +1,20 @@
+/* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg"; */
+"2S3-dG-ZPg.title" = "Fler stilar…";
+
+/* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "4ih-vj-fsk"; */
+"4ih-vj-fsk.title" = "Kontrollera grammatik tillsammans med stavning";
+
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
 "5.title" = "Lägg alla överst";
 
+/* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1"; */
+"6yn-y8-lF1.title" = "Uppdatera alla prenumerationer";
+
+/* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8Z3-Bg-ry2"; */
+"8Z3-Bg-ry2.title" = "Flaggad";
+
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
 "19.title" = "Fönster";
-
-/* Class = "NSWindow"; title = "Vienna"; ObjectID = "21"; */
-"21.title" = "Vienna";
 
 /* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
 "23.title" = "Minimera";
@@ -13,11 +22,8 @@
 /* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
 "24.title" = "Fönster";
 
-/* Class = "NSMenuItem"; title = "Vienna"; ObjectID = "56"; */
-"56.title" = "Vienna";
-
-/* Class = "NSMenu"; title = "Vienna"; ObjectID = "57"; */
-"57.title" = "Vienna";
+/* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "27s-E3-FHd"; */
+"27s-E3-FHd.title" = "Korrigera stavning automatiskt";
 
 /* Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58"; */
 "58.title" = "Om Vienna";
@@ -187,12 +193,6 @@
 /* Class = "NSMenuItem"; title = "Stop Refreshing"; ObjectID = "858"; */
 "858.title" = "Avbryt omladdning";
 
-/* Class = "NSButtonCell"; title = "Export all subscriptions"; ObjectID = "862"; */
-"862.title" = "Exportera alla prenumerationer";
-
-/* Class = "NSButtonCell"; title = "Export selected subscriptions"; ObjectID = "863"; */
-"863.title" = "Exportera markerade prenumerationer";
-
 /* Class = "NSMenuItem"; title = "Vienna Web Site"; ObjectID = "929"; */
 "929.title" = "Vienna webbsida";
 
@@ -236,7 +236,7 @@
 "1067.title" = "Öppna artikelsida i extern webbläsare";
 
 /* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
-"1073.title" = "Send Link by Email";
+"1073.title" = "Skicka länk via e-post";
 
 /* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
 "1084.title" = "Större text";
@@ -320,7 +320,7 @@
 "1257.title" = "Anpassa verktygsrad…";
 
 /* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
-"1258.title" = "Hide Toolbar";
+"1258.title" = "Dölj verktygsfält";
 
 /* Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259"; */
 "1259.title" = "Göm statusfältet";
@@ -332,31 +332,16 @@
 "1327.title" = "Sök i artiklar";
 
 /* Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336"; */
-"1336.title" = "Order By";
+"1336.title" = "Sortera efter";
 
 /* Class = "NSMenu"; title = "Order By"; ObjectID = "1337"; */
-"1337.title" = "Order By";
+"1337.title" = "Sortera efter";
 
 /* Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338"; */
-"1338.title" = "Manual";
+"1338.title" = "Manuell";
 
 /* Class = "NSMenuItem"; title = "Name"; ObjectID = "1339"; */
-"1339.title" = "Name";
-
-/* Class = "NSButtonCell"; title = "Preserve group folders in exported file"; ObjectID = "1368"; */
-"1368.title" = "Bevara gruppmappar";
-
-/* Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377"; */
-"1377.title" = "Filter by:";
-
-/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "1380"; */
-"1380.title" = "Radio";
-
-/* Class = "NSMenuItem"; title = "Show XML Source"; ObjectID = "1394"; */
-"1394.title" = "Show XML Source";
-
-/* Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404"; */
-"1404.title" = "Current Filter";
+"1339.title" = "Namn";
 
 /* Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408"; */
 "1408.title" = "Sluta prenumerera på artiklar från sida";
@@ -365,22 +350,46 @@
 "1409.title" = "Visa info…";
 
 /* Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413"; */
-"1413.title" = "Use Current Style for Articles";
+"1413.title" = "Använd nuvarande stil för artiklar";
 
 /* Class = "NSMenuItem"; title = "Use Web Page for Articles"; ObjectID = "1415"; */
-"1415.title" = "Use Web Page for Articles";
-
-/* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "1425"; */
-"1425.title" = "Force Refresh Selected Subscriptions From Open Reader";
-
-/* Class = "NSMenuItem"; title = "Update Subscriptions From Open Reader"; ObjectID = "1428"; */
-"1428.title" = "Update Subscriptions From Open Reader";
+"1415.title" = "Använd webbsida för artiklar";
 
 /* Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458"; */
-"1458.title" = "Reindex Database";
+"1458.title" = "Omindexera databas";
 
-/* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1"; */
-"6yn-y8-lF1.title" = "Uppdatera alla prenumerationer";
+/* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI"; */
+"CGp-H4-UaI.title" = "Senaste 48 timmarna";
+
+/* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "CLG-Dq-a59"; */
+"CLG-Dq-a59.title" = "Visa stavning och grammatik";
+
+/* Class = "NSMenu"; title = "Speech"; ObjectID = "G6k-0L-moc"; */
+"G6k-0L-moc.title" = "Tal";
+
+/* Class = "NSMenuItem"; title = "Speech"; ObjectID = "JXn-SB-3t2"; */
+"JXn-SB-3t2.title" = "Tal";
+
+/* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN"; */
+"MHF-D4-pRN.title" = "Gör till versaler";
+
+/* Class = "NSMenu"; title = "Substitutions"; ObjectID = "QEb-Bm-CPN"; */
+"QEb-Bm-CPN.title" = "Ersättningar";
+
+/* Class = "NSMenu"; title = "Transformations"; ObjectID = "UFF-Fn-8ti"; */
+"UFF-Fn-8ti.title" = "Transformeringar";
+
+/* Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "ZCa-7v-54l"; */
+"ZCa-7v-54l.title" = "Växla till helskärm";
+
+/* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "bd7-qY-ofB"; */
+"bd7-qY-ofB.title" = "Textersättning";
+
+/* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "cK9-Df-xA3"; */
+"cK9-Df-xA3.title" = "Börja tala";
+
+/* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "eVb-Qt-XJb"; */
+"eVb-Qt-XJb.title" = "Ersättningar";
 
 /* Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi"; */
 "ecl-HO-Kpi.title" = "Markera alla prenumerationer som lästa";
@@ -388,5 +397,51 @@
 /* Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI"; */
 "fad-Nj-OFI.title" = "Stavning";
 
+/* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "fbd-ZI-tZW"; */
+"fbd-ZI-tZW.title" = "Kontrollera dokument nu";
+
+/* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "gbo-AM-wcF"; */
+"gbo-AM-wcF.title" = "Sluta tala";
+
+/* Class = "NSMenuItem"; title = "Data Detectors"; ObjectID = "idm-wm-h8z"; */
+"idm-wm-h8z.title" = "Datasensorer";
+
+/* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "joR-kW-sIU"; */
+"joR-kW-sIU.title" = "Transformeringar";
+
+/* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "l8F-tb-7E0"; */
+"l8F-tb-7E0.title" = "Stavning och grammatik";
+
 /* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
 "pKl-6f-Hlc.title" = "Markera som läst";
+
+/* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "qzH-De-act"; */
+"qzH-De-act.title" = "Smart kopiera/klistra in";
+
+/* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7"; */
+"rNG-xr-3x7.title" = "Olästa artiklar";
+
+/* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "t1E-6n-jtA"; */
+"t1E-6n-jtA.title" = "Alla artiklar";
+
+/* Class = "NSMenuItem"; title = "Today"; ObjectID = "t34-de-pMs"; */
+"t34-de-pMs.title" = "Idag";
+
+/* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "tfv-fu-HFM"; */
+"tfv-fu-HFM.title" = "Kontrollera stavning medan jag skriver";
+
+/* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "v3R-CV-0b9"; */
+"v3R-CV-0b9.title" = "Gör till stora bokstäver";
+
+/* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "w4Q-ne-FPI"; */
+"w4Q-ne-FPI.title" = "Smarta länkar";
+
+/* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "wnc-vZ-fO4"; */
+"wnc-vZ-fO4.title" = "Visa ersättningar";
+
+/* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm"; */
+"wqh-Jc-gBm.title" = "Sista omladdning";
+
+/* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "xpF-dh-E2m"; */
+"xpF-dh-E2m.title" = "Gör till gemener";
+

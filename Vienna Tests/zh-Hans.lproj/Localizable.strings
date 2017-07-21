@@ -1,0 +1,141 @@
+/* No comment provided by engineer. */
+"(No title)" = "(无标题)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(无标题的频道)";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "作者";
+
+/* Title of a button on an alert */
+"Cancel" = "取消";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna 在创建文件夹 \"%@\" 时发生错误。请检查指定路径上文件夹的权限";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "抱歉，Vianna 无法创建数据库文件夹";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "由于一些原因，数据库文件 (%@) 无法被读取。它可能已损坏或者权限不足。请尝试删除或者重命名数据库文件然后重新启动 Vienna";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "抱歉，Vienna 无法开启这个数据库";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "数据库升级";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "日期";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "已删除";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "附带文件的 URL";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "标记精华";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "文件夹";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "附带文件";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "标题";
+
+/* Data field name visible in menu/article list */
+"Link" = "连接";
+
+/* No comment provided by engineer. */
+"Locate Text" = "无法在 \"%@\" 创建新的 Vienna 数据库。可能是因为此文件夹处于远端共享网络上，当前版本的 Vienna 不支持远端共享网络上的数据库。请选择一个在您本地机器上的文件夹。";
+
+/* No comment provided by engineer. */
+"Locate Title" = "无法创建 Vienna 数据库";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "精华文章";
+
+/* Title of a button on an alert */
+"Quit Vienna" = "退出 Vienna";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "已读";
+
+/* No comment provided by engineer. */
+"Search Results" = "搜索结果";
+
+/* Placeholder title of a search field */
+"Search all articles" = "搜索所有文章";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "主题";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "总结";
+
+/* Data field name visible in smart folder definition */
+"Text" = "内容";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "今天的文章";
+
+/* No comment provided by engineer. */
+"Trash" = "废纸篓";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "未读文章";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "当前版本的 Vienna 不支持数据库 (%@) 的文件格式。请删除或者重新命名这个文件然后重新 Vianna。";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "数据库文件格式已改变";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.";
+
+/* rule for association of multiple criteria */
+"all" = "所有";
+
+/* rule for association of multiple criteria */
+"any" = "任何";
+
+/* test for a string */
+"contains" = "包含";
+
+/* test for a string */
+"does not contain" = "不包含";
+
+/* test for a value */
+"is" = "为";
+
+/* test for a date */
+"is after" = "迟于";
+
+/* test for a date */
+"is before" = "早于";
+
+/* test for a numeric value */
+"is greater than" = "大于";
+
+/* test for a numeric value */
+"is greater than or equal to" = "大于或等于";
+
+/* test for a numeric value */
+"is less than" = "小于";
+
+/* test for a numeric value */
+"is less than or equal to" = "小于或等于";
+
+/* test for a value */
+"is not" = "非";
+
+/* test for a date */
+"is on or after" = "迟于（含）";
+
+/* test for a date */
+"is on or before" = "早于（含）";
+

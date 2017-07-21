@@ -21,21 +21,21 @@
 		<key>Address</key>
 		<string>www.inoreader.com</string>
 		<key>Hint</key>
-		<string>Entrez le nom d'utilisateur et le mot de passe de votre compte InoReader</string>
+		<string>Entrez le nom d&apos;utilisateur et le mot de passe de votre compte InoReader</string>
 	</dict>
 	<key>TheOldReader</key>
 	<dict>
 		<key>Address</key>
 		<string>theoldreader.com</string>
 		<key>Hint</key>
-		<string>Entrez le nom d'utilisateur et le mot de passe définis dans la section Réglage/Général du site theoldreader.com</string>
+		<string>Entrez le nom d&apos;utilisateur et le mot de passe définis dans la section Réglage/Général du site theoldreader.com</string>
 	</dict>
 	<key>Autre</key>
 	<dict>
 		<key>Address</key>
 		<string></string>
 		<key>Hint</key>
-		<string>Entrez l'adresse du serveur, votre nom utilisateur et le mot de passe associé</string>
+		<string>Entrez l&apos;adresse du serveur, votre identifiant et votre mot de passe</string>
 	</dict>
 </dict>
 </plist>

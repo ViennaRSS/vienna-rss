@@ -1,11 +1,5 @@
-/* Class = "NSButton"; ibExternalAccessibilityDescription = "Visit the website"; ObjectID = "Ar5-Qc-YTe"; */
-"Ar5-Qc-YTe.ibExternalAccessibilityDescription" = "Visit the website";
-
 /* Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe"; */
 "Ar5-Qc-YTe.ibShadowedToolTip" = "Visit the website";
-
-/* Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Lkv-md-rEW"; */
-"Lkv-md-rEW.title" = "Sync with an Open Reader server";
 
 /* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "NKI-36-zCY"; */
 "NKI-36-zCY.title" = "密碼：";
@@ -13,20 +7,6 @@
 /* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "O2q-8o-CSb"; */
 "O2q-8o-CSb.title" = "帳號：";
 
-/* Class = "NSButtonCell"; title = "🌍"; ObjectID = "e0z-IA-uBQ"; */
-"e0z-IA-uBQ.title" = "🌍";
-
-/* Class = "NSTextField"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "kM0-7a-obO"; */
-"kM0-7a-obO.ibShadowedToolTip" = "Select a server supporting the Open Reader API";
-
-/* Class = "NSTextFieldCell"; title = "URL: https://"; ObjectID = "tec-2d-Xej"; */
-"tec-2d-Xej.title" = "URL: https://";
-
-/* Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "uTl-XE-0ym"; */
-"uTl-XE-0ym.title" = "Server:";
-
-/* Class = "NSTextField"; ibShadowedToolTip = "Address of a server supporting the Open Reader API"; ObjectID = "vZE-Pl-S9H"; */
-"vZE-Pl-S9H.ibShadowedToolTip" = "Address of a server supporting the Open Reader API";
-
 /* Class = "NSPopUpButton"; ibExternalAccessibilityDescription = "Select a server supporting the Open Reader API"; ObjectID = "zAy-oc-zmb"; */
 "zAy-oc-zmb.ibExternalAccessibilityDescription" = "Select a server supporting the Open Reader API";
+

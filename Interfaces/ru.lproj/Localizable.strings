@@ -1,458 +1,696 @@
-"Mark Read" = "Отметить как прочитанное";
-"Mark Unread" = "Снять отметку о прочтении";
-"Mark Unflagged" = "Снять флаг";
-"Articles" = "Статьи";
-"Folders" = "Папки";
-"Loading %@…" = "Загрузка %@…";
-"Completed" = "Завершено";
-"Refresh RSS feeds" = "Обновить подписки";
-"Refresh All Subscriptions" = "Обновить все подписки";
-"Already subscribed title" = "Ошибка";
-"Already subscribed body" = "Вы уже подписаны на данный канал";
-"RSS Subscription Import Title" = "Импортирование завершено";
-"%d subscriptions successfully imported" = "Успешно импортировано %d каналов";
-"RSS Subscription Export Title" = "Экспортирование завершено";
-"%d subscriptions successfully exported" = "Успешно экспортировано %d каналов";
-"New unread articles retrieved" = "Получено %d новых статей";
-"Growl refresh completed" = "Новые статьи";
-"New articles retrieved" = "Новые статьи";
-"(Untitled Feed)" = "без имени";
-"Open Link in Browser" = "Открыть ссылку в браузере";
-"Copy Link to Clipboard" = "Копировать ссылку в буфер обмена";
-"Refresh completed" = "Обновление завершено";
-"Retrieving articles" = "Загружаю статьи";
-"ClearButton" = "Очистить";
-"Read" = "Прочитанные";
-"Flagged" = "Отмеченные";
-"Comments" = "Коментарии";
-"Parent" = "Родитель";
-"Number" = "Число";
-"Subject" = "Тема";
-"Folder" = "Папка";
-"Date" = "Дата";
-"Author" = "Автор";
-"Text" = "Текст";
-"Headlines" = "Заголовки";
-"Link" = "Ссылка";
-"Deleted" = "Удаленный";
-"GUID" = "GUID";
-"No" = "Нет";
-"Yes" = "Да";
-"Version %@" = "Версия %@";
-"Refresh All" = "Обновить все";
-"Subscribe" = "Подписаться";
-"Smart Folder" = "Смарт-папка";
-"Flag" = "Метка";
-"Next Unread" = "Следующая непрочитанная";
-"Noon" = "Полдень";
-"Midnight" = "Полночь";
-"Today" = "Сегодня";
-"Yesterday" = "Вчера";
-"Tomorrow" = "Завтра";
-"%@ at %@" = "%@ в %@";
-"Quit" = "Завершить";
-"Refresh cancelled" = "Обновление отменено";
-"Additional actions for the selected folder" = "Дополнительные действия для выбранной папки";
-"Create a new subscription" = "Создать новую подписку";
-"Refresh all your subscriptions" = "Обновить все подписки";
-"New style title" = "Vienna установила новый стиль";
-"New style body" = "Стиль \"%@\" был установлен в папку стилей и добавлен в меню Стиль.";
-"More Styles…" = "Больше стилей…";
-"Delete selected message" = "Вы уверены, что хотите безвозвратно удалить выбранные статьи?";
-"Delete selected message text" = "Это действие не может быть отменено.";
-"Cancel" = "Отмена";
-"OK" = "OK";
-"From" = "От";
-"To" = "Кому";
-"(No title)" = "без имени";
-"Refreshing folder images…" = "Обновляю изображения папки…";
-"Refreshing subscriptions…" = "Обновляю подписки…";
-"Authenticating with user name '%@'" = "Аутентифицируюсь с именем пользователя \"%@\"";
-"No new articles available" = "Нет новых статей";
-"%d new articles retrieved" = "Получено %d новых статей";
-"HTTP code %d reported from server" = "Сервер передал HTTP код %d";
-"Headers:\n" = "Заголовки:\n";
-"Connection error (%d, %@):\n" = "Ошибка соединения (%d, %@):\n";
-"\tDescription: %@\n" = "\tОписание: %@\n";
-"\tSuggestion: %@\n" = "\tПредложение: %@\n";
-"\tCause: %@\n" = "\tПричина: %@\n";
-"Article feed will be compressed" = "Новостной канал будет сжат";
-"Redirecting to %@" = "Перенаправляю к %@";
-"Error: %@" = "Ошибка: %@";
-"Error" = "Ошибка";
-"Credentials Prompt" = "Для доступа к подписке  \"%@\" требуется имя пользователя и пароль.";
-"%ld bytes received" = " получено %ld байт";
-"Authentication failed for user '%@'" = "Аутентификация пользователя \"%@\" не прошла";
-"Error parsing XML data in feed" = "Ошибка парсинга XML данных канала";
-"Retrieving folder image" = "Получаю изображение папки";
-"Folder image retrieved from %@" = "Изображение папки взято из %@";
-"Contacting…" = "Связываюсь…";
-"Connect Running" = "Процесс соединения";
-"Connect Running text" = "Остановить соединение и закрыть Vienna?";
-"Delete group folder" = "Удалить группу";
-"Delete group folder text" = "Вы уверены, что хотите удалить группу \"%@\" и все ее папки? Данное действие невозможно отменить.";
-"Delete smart folder" = "Удалить Смарт-папку";
-"Delete smart folder text" = "Вы уверены, что хотите удалить Смарт-папку  \"%@\"? Это не приведет к удалению соответствующих статей.";
-"Delete RSS feed text" = "Вы уверены, что хотите отписаться от \"%@\"? Это удалит сохраненные статьи канала.";
-"Delete RSS feed" = "Удалить подписку";
-"Delete multiple folders text" = "Вы уверены, что хотите удалить все  %d выбранные папки? Это действие не может быть отменено.";
-"Delete multiple folders" = "Удалить несколько папок";
-"Delete folder status" = "Удаляю папку \"%@\"…";
-"An error has occurred" = "Произошла ошибка.";
-"Your software is up to date" = "У вас установлена последняя версия Vienna.";
-"Please try again later" = "Пожалуйста, попробуйте позднее.";
-"An update is now available" = "Доступно обновление";
-"Update available text" = "Версия %@ программы Vienna доступна для загрузки с:\n\n%@\n\nЗагрузить ее сейчас? Ее так же можно будет загрузить позже, выбрав Проверить Обновления.";
-"any" = "любое";
-"all" = "все";
-"Open Scripts Folder" = "Открыть папку скриптов";
-"Cannot create database folder title" = "Извините, но Vienna не смогла создать папку базы данных";
-"Cannot create database folder text" = "Vienna попыталась создать папку  \"%@\", но произошла ошибка. Проверьте разрешения для папок в указанном пути.";
-"Unrecognised database format title" = "Формат базы данных изменился";
-"Unrecognised database format text" = "Формат базы данных (%@) не поддерживается текущей версией Vienna. Удалите или переименуйте этот файл и перезапустите программу.";
-"Upgrade Title" = "Обновление базы";
-"Upgrade Text" = "Существующая база данных должна быть обновлена для работы с данной версией Vienna. Или же вы можете создать новую, пустую базу данных. В любом случае ваша текущая база данных будет заархивирована в %@. Новые или обновленные базы НЕ БУДУТ работать с предыдущими версиями Vienna.\n\nЗаметка: для этого билда рекомендуется создать новую базу.\n";
-"New Database" = "Новая база данных";
-"Upgrade" = "Обновление";
-"Exit" = "Выход";
-"Search in %@" = "Поиск в %@";
-"Marked Articles" = "Отмеченные статьи";
-"Unread Articles" = "Непрочитанные статьи";
-"Today's Articles" = "Сегодняшние статьи";
-"Trash" = "Корзина";
-"Select…" = "Выбрать…";
-" (%d unread)" = " (%d непрочитанных)";
-"is" = "содержится";
-"is not" = "не содержится";
-"is after" = "после";
-"is before" = "до";
-"is on or after" = "сейчас и позднее";
-"is on or before" = "сейчас и ранее";
-"contains" = "содержит";
-"does not contain" = "не содержит";
-"is less than" = "менее чем";
-"is greater than" = "более чем";
-"is less than or equal to" = "меньше или равно";
-"is greater than or equal to" = "больше или равно";
-"Cannot open export file message" = "Невозможно создать экспортируемый файл.";
-"Cannot open export file message text" = "Указанный экспортируемый файл не может быть создан. Убедитесь, что он не заблокирован и не используется другим приложением.";
-"Source" = "Источник";
-"Status" = "Состояние";
-"Enter LiveJournal User name" = "Введите имя пользователя LiveJournal";
-"Enter MSN Spaces User name" = "Введите имя пользователя MSN Spaces";
-"Enter Blogspot User name" = "Введите имя пользователя Blogspot";
-"Enter Xanga User name" = "Введите имя пользователя Xanga";
-"Enter URL of RSS feed" = "Введите URL новостного канала";
-"Cannot rename folder" = "Невозможно переименовать папку";
-"A folder with that name already exists" = "Папка с данным именем уже существует";
-"Recent Searches" = "История поиска";
-"Recents" = "Журнал";
-"Clear" = "Очистить историю поиска";
-"Search web page" = "Поиск в сети";
-"Loading…" = "Загрузка…";
-"Open Image in New Tab" = "Открыть изображение в новой вкладке";
-"Open Link in New Tab" = "Открыть ссылку в новой вкладке";
-"Open Link in %@" = "Открыть ссылку в %@";
-"Open Page in %@" = "Открыть страницу в %@";
-"Copy Page Link to Clipboard" = "Копировать ссылку в буфер обмена";
-"%d unread articles" = "%d непрочитанных статей";
-"More Scripts…" = "Больше скриптов…";
-"Install Update" = "Установить обновление";
-"Do Not Install" = "Не устанавливать";
-"Replace smart folder title" = "Смарт-папка %@ уже существует";
-"Replace smart folder text" = "Заменить существующую Смарт-папку новой?";
-"Replace" = "Заменить";
-"Never" = "Никогда";
-"After a Day" = "Через день";
-"After 2 Days" = "Через 2 дня";
-"After a Week" = "Через неделю";
-"After 2 Weeks" = "Через 2 недели";
-"After a Month" = "Через месяц";
-"Last Week" = "На прошлой неделе";
-"2 Weeks Ago" = "2 недели назад";
-"A month" = "Месяц";
-"Activity Window" = "Окно действий";
-"Error importing subscriptions body" = "Невозможно импортировать указанный файл. Содержимое файла не является корректными данными формата OPML XML.";
-"Error importing subscriptions title" = "Ошибка импортирования";
-"Rename" = "Переименовать";
-"Mark All Read" = "Отметить все как прочитанные";
-"Move Folders" = "Переместить папки";
-"Downloads" = "Загрузки";
-"Invalid style title" = "Стиль %@ отсутствует или поврежден";
-"Invalid style body" = "Будет использован стиль по умолчанию.";
-"Downloads Running" = "Одна или более загрузок еще не завершена";
-"Downloads Running text" = "Если вы сейчас выйдете из Vienna, все загрузки будут остановлены.";
-"Mark All Subscriptions as Read" = "Отметить все подписки как прочитанные";
-"Preferences" = "Настройки";
-"General" = "Общие";
-"Appearance" = "Внешний вид";
-"Locate Title" = "Невозможно создать базу данных Vienna";
-"Locate Text" = "Новая база данных Vienna не может быть создана в \"%@\" из-за того, что папка, возможно, находится на удаленном сервере, а текущая версия Vienna не может работать с удаленными базами данных. Пожалуйста, выберите папку на своем компьютере.";
-"Empty Trash message" = "Удалить все сообщения в Корзине?";
-"Empty Trash message text" = "Данное действие невозможно отменить";
-"Cannot open database title" = "Извините, но Vienna не смогла открыть базу данных";
-"Cannot open database text" = "Файл базы данных (%@) не может быть открыт. Он может быть поврежден или недоступен. Пожалуйста, удалите или переименуйте файл базы данных и перезапустите Vienna.";
-"Vienna cannot open the file title" = "Vienna не может открыть этот файл.";
-"Vienna cannot open the file body" = "Vienna не может открыть файл \"%@\" потому что он был перемещен после загрузки.";
-"Vienna cannot show the file title" = "Vienna не может отобразить файл.";
-"Vienna cannot show the file body" = "Vienna не может отобразить файл \"%@\" потому что он был перемещен после загрузки.";
-"Empty" = "Очистить";
-"Open" = "Открыть";
-"Show in Finder" = "Показать в Finder";
-"Remove From List" = "Удалить из списка";
-"%.1f MB" = "%.1f МБ";
-"%.1f KB" = "%.1f КБ";
-"%.1f bytes" = "%.1f байт";
-"%.1f of %.1f MB" = "%.1f из %.1f МБ";
-"%.1f of %.1f KB" = "%.1f из %.1f КБ";
-"%.1f of %.1f bytes" = "%.1f из %.1f байт";
-"An error occurred when this feed was last refreshed" = "При последнем обновлении канала произошла ошибка";
-"Connecting to %@" = "Соединяюсь с %@";
-"About Vienna" = "О программе Vienna";
-"Acknowledgements" = "Благодарности";
-"Article" = "Статья";
-"Back" = "Назад";
-"Bring All to Front" = "Все окна – на передний план";
-"Check Spelling" = "Проверить правописание";
-"Check Spelling as You Type" = "Проверять правописание при наборе текста";
-"Check for Updates" = "Проверить наличие обновлений";
-"Close All Tabs" = "Закрыть все вкладки";
-"Close Tab" = "Закрыть вкладку";
-"Close Window" = "Закрыть окно";
-"Columns" = "Колонки";
-"Copy" = "Копировать";
-"Cut" = "Вырезать";
-"Delete" = "Удалить";
-"Delete Article" = "Удалить статью";
-"Delete…" = "Удалить…";
-"Edit" = "Правка";
-"Edit…" = "Правка…";
-"Empty Trash" = "Очистить Корзину";
-"Export Subscriptions…" = "Экспортировать подписки…";
-"File" = "Файл";
-"Find" = "Найти";
-"Find Next" = "Следующее совпадение";
-"Find Previous" = "Предыдущее совпадение";
-"Find…" = "Найти…";
-"Forward" = "Далее";
-"Help" = "Справка";
-"Hide Others" = "Скрыть другие";
-"Hide Vienna" = "Скрыть Vienna";
-"Import Subscriptions…" = "Импортировать подписки…";
-"Jump to Selection" = "Перейти к выбранному";
-"Main Window" = "Главное окно";
-"MainMenu" = "Главное меню";
-"Mark All Articles as Read" = "Отметить все статьи как прочитанные";
-"Mark Flagged" = "Отметить";
-"Minimize" = "Свернуть";
-"New Group Folder…" = "Новая группа…";
-"New Smart Folder…" = "Новая Смарт-папка…";
-"New Subscription…" = "Новая подписка…";
-"Next Tab" = "Следующая вкладка";
-"Open Article Page" = "Открыть статью";
-"Open Article Page in External Browser" = "Открыть статью во внешнем браузере";
-"Open Subscription Home Page" = "Открыть страницу подписки";
-"Open Subscription Home Page in External Browser" = "Открыть страницу подписки во внешнем браузере";
-"Page Setup…" = "Параметры страницы…";
-"Paste" = "Вставить";
-"Preferences…" = "Настройки…";
-"Previous Tab" = "Предыдущая вкладка";
-"Print…" = "Напечатать…";
-"Quit Vienna" = "Завершить работу Vienna";
-"Redo" = "Повторить";
-"Refresh Selected Subscriptions" = "Обновить выбранные подписки";
-"Reload Page" = "Перезагрузить страницу";
-"Rename…" = "Переименовать…";
-"Restore Article" = "Восстановить статью";
-"Select All" = "Выбрать все";
-"Services" = "Службы";
-"Show All" = "Отобразить все";
-"Skip Folder" = "Пропустить папку";
-"Sort By" = "Сортировать по";
-"Spelling" = "Правописание";
-"Spelling…" = "Правописание…";
-"Stop Refreshing" = "Остановить обновление";
-"Stop Reloading Page" = "Остановить загрузку страницы";
-"Style" = "Стиль";
-"Undo" = "Отменить";
-"Use Selection for Find" = "Искать выделенное";
-"Validate Feed" = "Проверить канал";
-"Vienna Help" = "Справка Vienna";
-"Vienna Web Site" = "Сайт программы Vienna";
-"View" = "Вид";
-"Window" = "Окно";
-"Zoom" = "Изменить масштаб";
-"Export all subscriptions" = "Экспортировать все подписки";
-"Export selected subscriptions" = "Экспортировать выбранные подписки";
-"Preserve group folders in exported file" = "Сохранить группы в экспортируемом файле";
-"Open Frame" = "Открыть фрейм";
-"Open Image in %@" = "Открыть изображение в %@";
-"Open Subscription Home Page in %@" = "Открыть страницу подписки в %@";
-"Open Article Page in %@" = "Открыть статью в %@";
-"New Tab" = "Новая вкладка";
-"External Browser" = "Внешний браузер";
-
-/* Added in 2.1.0 */
-"Send Link" = "Отправить ссылку";
-"Send Links" = "Отправить ссылки";
-"Increase Font Size" = "Увеличить размер шрифта";
-"Decrease Font Size" = "Уменьшить размер шрифта";
-"Enter the URL here" = "Введите URL";
-"Refresh the current page" = "Обновить страницу";
-"Return to the previous page" = "На предыдущую страницу";
-"Go forward to the next page" = "На следующую страницу";
-"Layout" = "Раскладка";
-"Reading Pane on Right" = "Панель чтения справа";
-"Reading Pane at Bottom" = "Панель чтения снизу";
-"Filter By" = "Показывать";
-"Filter by:" = "Показывать:";
-"All" = "Все";
-"All Articles" = "Все статьи";
-"Unread" = "Непрочитанное";
-"Last Refresh" = "С последнего обновления";
-"Feed URL updated to %@" = "URL канала обновился до %@";
-"Filter articles" = "Фильтровать статьи";
-"Feed has been removed by the server" = "Канал был удален с сервера";
-"Mark all articles read" = "Отметить все статьи как прочитанные";
+/* No comment provided by engineer. */
 "%@ Info" = "%@ Сведения";
-"%u articles" = "%u статей";
-"%u unread" = "%u непрочитано";
-"Keyboard Shortcuts" = "Горячие клавиши";
-"%@ (Filtered: %@)" = "%@ (Фильтр: %@)";
-"Get Info…" = "Сведения…";
-"Open Web Location…" = "Открыть адрес веб…";
-"Refresh Folder Images" = "Обновить изображения папки";
-"Report" = "Отчет";
-"Condensed" = "Сжатая";
-"Unified" = "Общая";
-"Summary" = "Выводы";
-"Blog With…" = "Запись в блог…";
-"Blog with %@" = "Запись в блог %@";
-"Bigger Text" = "Увеличить шрифт";
-"Smaller Text" = "Уменьшить шрифт";
 
-/* Added in 2.1.1 */
+/* No comment provided by engineer. */
+"%d new articles retrieved" = "Получено %d новых статей";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully exported" = "Успешно экспортировано %d каналов";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully imported" = "Успешно импортировано %d каналов";
+
+/* No comment provided by engineer. */
+"%d unread articles" = "%d непрочитанных статей";
+
+/* No comment provided by engineer. */
+"%u articles" = "%u статей";
+
+/* No comment provided by engineer. */
+"%u unread" = "%u непрочитано";
+
+/* No comment provided by engineer. */
+"(No title)" = "без имени";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "без имени";
+
+/* No comment provided by engineer. */
+"A folder with that name already exists" = "Папка с данным именем уже существует";
+
+/* No comment provided by engineer. */
+"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Новый плагин успешно установлен. Теперь он доступен из меню, а также можно добавить его на панель инструментов.";
+
+/* Toolbar item name for the Advanced preference pane */
 "Advanced" = "Расширенные";
 
-/* Added in 2.2.0 */
-"Import subscriptions from OPML file?" = "Импортировать подписки из файла OPML?";
-"Do you really want to import the subscriptions from the specified OPML file?" = "Действительно импортировать подписки из указанного файла OPML?";
-"Import" = "Импорт";
-"HasEnclosure" = "Вложения";
-"Enclosure" = "URL вложения";
-"Open New Tab" = "Открыть новую вкладку";
-"Subscribe to the feed for this page" = "Подписаться к каналу на данной странице";
-"Open Vienna" = "Открыть Vienna";
-"Download Enclosure" = "Загрузить вложение";
-"Download Enclosures" = "Загрузить вложения";
-"Local File" = "Локальный файл";
-"Hide Status Bar" = "Спрятать строку статуса";
-"Show Status Bar" = "Показать строку статуса";
-"Customize Toolbar…" = "Настроить панель инструментов";
-"Search Articles" = "Искать статьи";
-"Progress" = "Прогресс";
-"Delete all articles in the trash" = "Удалить все статьи в Корзине";
-"Unsubscribe" = "Отписаться от ленты";
-"Resubscribe" = "Возобновить подписку";
-"Download" = "Загрузка";
-"This article contains an enclosed file." = "Эта статья содержит вложенный файл.";
-"Growl download completed" = "Загрузка файла успешно завершена";
-"Growl download failed" = "Ошибка загрузки файла";
-"Download completed" = "Загрузка завершена";
-"File %@ downloaded" = "Файл %@ загружен";
-"Download failed" = "Ошибка ";
-"File %@ failed to download" = "Ошибка при загрузке файла %@";
-"Play" = "Воспроизведение";
-"Click the Play button to play this enclosure in iTunes." = "Нажмите кнопку Воспроизведение , для проигрывания в iTunes.";
-"Click the Open button to open this file." = "Нажмите кнопку Открыть для открытия файла.";
-"Filter displayed articles by matching text" = "Фильтр статей, совпадающих по тексту";
-"Close the filter bar" = "Закрыть панель фильтра";
-"Search all articles" = "Поиск в статьях";
-"Search Results" = "Результаты поиска";
-"Hide Filter Bar" = "Скрыть панель фильтра";
-"Show Filter Bar" = "Показать панель фильтра";
-"Email a link to the current article or website" = "Отправить ссылку на текущую статью или сайт";
-"Refresh" = "Обновить";
-"Action" = "Действие";
-"Get Info" = "Сведения";
-"See information about the selected subscription" = "Просмотреть информацию о выбранной подписке";
-"Display the list of available styles" = "Показать список доступных стилей";
+/* No comment provided by engineer. */
+"After 2 Days" = "Через 2 дня";
 
-/* Added in 2.3.0 */
-"Order By" = "Упорядочить подписки";
-"Manual" = "Вручную";
-"Name" = "По названию";
+/* No comment provided by engineer. */
+"After 2 Weeks" = "Через 2 недели";
 
-/*Added in 2.4*/
-"Show XML Source" = "Показать XML-код ленты";
-"Source of folder" = "Исходный код ленты";
-"No feed source to display." = "Исходный код для отображения не найден.";
-"Search current web page" = "Поиск по текущей веб-странице";
-"Search all articles or the current web page" = "Поиск в статьях или по текущей веб-странице";
-"Database Upgrade" = "Обновление базы данных";
-"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna необходимо обновить свою базу данных до последней версии. Это может занять минуту или около того. Приносим свои извинения за доставленные неудобства.";
-"Upgrade Database" = "Обновить базу данных";
+/* No comment provided by engineer. */
+"After a Day" = "Через день";
 
-/* Added in 2.5.0 */
-"Cannot create folder title" = "Ошибка";
+/* No comment provided by engineer. */
+"After a Month" = "Через месяц";
+
+/* No comment provided by engineer. */
+"After a Week" = "Через неделю";
+
+/* Already subscribed body */
+"Already subscribed body" = "Вы уже подписаны на данный канал";
+
+/* Already subscribed title */
+"Already subscribed title" = "Ошибка";
+
+/* No comment provided by engineer. */
+"An error occurred when this feed was last refreshed" = "При последнем обновлении канала произошла ошибка";
+
+/* Toolbar item name for the Appearance preference pane */
+"Appearance" = "Внешний вид";
+
+/* No comment provided by engineer. */
+"AppleScript Error in '%@' script" = "Ошибка AppleScript в скрипте '%@'";
+
+/* No comment provided by engineer. */
+"Articles" = "Статьи";
+
+/* No comment provided by engineer. */
+"Ascending" = "По возрастанию";
+
+/* No comment provided by engineer. */
+"Authenticating on Open Reader" = "Авторизация в Open Reader";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Автор";
+
+/* Title of a button on an alert
+   Title of a popup menu item */
+"Cancel" = "Отмена";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna попыталась создать папку  \"%@\", но произошла ошибка. Проверьте разрешения для папок в указанном пути.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Извините, но Vienna не смогла создать папку базы данных";
+
+/* No comment provided by engineer. */
 "Cannot create folder body" = "Ошибка создания папки \"%@\".";
 
-/* Added in 2.6.0 */
-"Article load completed" = "Загрузка статьи завершена";
-"Loading HTML article…" = "Загрузка HTML статьи…";
-"Ascending" = "По возрастанию";
-"Descending" = "По убыванию";
-"Use Current Style for Articles" = "Использовать текущий стиль для статьи";
-"Use Web Page for Articles" = "Использовать веб-страницу статьи";
+/* No comment provided by engineer. */
+"Cannot create folder title" = "Ошибка";
 
-/* Added for Open Reader support */
-"Force Refresh Selected Subscriptions From Open Reader" = "Принудительно обновить выбранные подписки из Open Reader";
-"Update Subscriptions From Open Reader" = "Обновить подписки из Open Reader";
-"Delete Open Reader RSS feed text" = "Отписывание от RSS-ленты из Open Reader, приведет к удалению статей, сохраненных локально.";
+/* No comment provided by engineer. */
+"Cannot open database text" = "Файл базы данных (%@) не может быть открыт. Он может быть поврежден или недоступен. Пожалуйста, удалите или переименуйте файл базы данных и перезапустите Vienna.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Извините, но Vienna не смогла открыть базу данных";
+
+/* No comment provided by engineer. */
+"Cannot open export file message" = "Невозможно создать экспортируемый файл.";
+
+/* No comment provided by engineer. */
+"Cannot open export file message text" = "Указанный экспортируемый файл не может быть создан. Убедитесь, что он не заблокирован и не используется другим приложением.";
+
+/* No comment provided by engineer. */
+"Cannot rename folder" = "Невозможно переименовать папку";
+
+/* No comment provided by engineer. */
+"Clear" = "Очистить историю поиска";
+
+/* No comment provided by engineer. */
+"Click the Open button to open this file." = "Нажмите кнопку Открыть для открытия файла.";
+
+/* No comment provided by engineer. */
+"Click the Play button to play this enclosure in iTunes." = "Нажмите кнопку Воспроизведение , для проигрывания в iTunes.";
+
+/* No comment provided by engineer. */
+"Connecting to %@" = "Соединяюсь с %@";
+
+/* No comment provided by engineer. */
+"Connecting to Open Reader server to retrieve %@" = "Соединение с сервером Open Reader для получения %@";
+
+/* No comment provided by engineer. */
+"Copy Link to Clipboard" = "Копировать ссылку в буфер обмена";
+
+/* No comment provided by engineer. */
+"Copy Page Link to Clipboard" = "Копировать ссылку в буфер обмена";
+
+/* No comment provided by engineer. */
+"Credentials Prompt" = "Для доступа к подписке  \"%@\" требуется имя пользователя и пароль.";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Обновление базы данных";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Дата";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Delete" = "Удалить";
+
+/* Title of a menu item */
+"Delete Article" = "Удалить статью";
+
+/* No comment provided by engineer. */
 "Delete Open Reader RSS feed" = "Удалить RSS-ленту из Open Reader";
 
-/* Added in 3.0.0 */
-"Last 48 hours" = "Последние 48 часов";
-"Unread or flagged" = "Непрочитанные или отмеченные";
-"Syncing" = "Синхронизации";
-"Reindex Database" = "Проиндексировать базу данных";
-"Other" = "Иное";
-"Authenticating on Open Reader" = "Авторизация в Open Reader";
-"Connecting to Open Reader server to retrieve %@" = "Соединение с сервером Open Reader для получения %@";
-"Retrieving folder image for Open Reader Feed" = "Получение иконки для Open Reader подписки";
-"Fetching Open Reader Subscriptions…" = "Открытие Open Reader подписки…";
-"Open Reader Authentication Failed" = "В авторизации в Open Reader отказано";
-"Open Reader Authentication Failed text" = "Убедитесь, что в настройках Vienna указаны правильные имя пользователя и пароль для доступа к серверу Open Reader.\nТакже проверьте сетевое соединение.";
+/* No comment provided by engineer. */
+"Delete Open Reader RSS feed text" = "Отписывание от RSS-ленты из Open Reader, приведет к удалению статей, сохраненных локально.";
 
-/* Added in 3.0.1 */
-"Plugin installed" = "Плагин установлен";
-"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Новый плагин успешно установлен. Теперь он доступен из меню, а также можно добавить его на панель инструментов.";
+/* No comment provided by engineer. */
+"Delete RSS feed" = "Удалить подписку";
+
+/* No comment provided by engineer. */
+"Delete RSS feed text" = "Вы уверены, что хотите отписаться от \"%@\"? Это удалит сохраненные статьи канала.";
+
+/* No comment provided by engineer. */
+"Delete folder status" = "Удаляю папку \"%@\"…";
+
+/* No comment provided by engineer. */
+"Delete group folder" = "Удалить группу";
+
+/* No comment provided by engineer. */
+"Delete group folder text" = "Вы уверены, что хотите удалить группу \"%@\" и все ее папки? Данное действие невозможно отменить.";
+
+/* No comment provided by engineer. */
+"Delete multiple folders" = "Удалить несколько папок";
+
+/* No comment provided by engineer. */
+"Delete multiple folders text" = "Вы уверены, что хотите удалить все  %d выбранные папки? Это действие не может быть отменено.";
+
+/* No comment provided by engineer. */
+"Delete selected message" = "Вы уверены, что хотите безвозвратно удалить выбранные статьи?";
+
+/* No comment provided by engineer. */
+"Delete selected message text" = "Это действие не может быть отменено.";
+
+/* No comment provided by engineer. */
+"Delete smart folder" = "Удалить Смарт-папку";
+
+/* No comment provided by engineer. */
+"Delete smart folder text" = "Вы уверены, что хотите удалить Смарт-папку  \"%@\"? Это не приведет к удалению соответствующих статей.";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Удаленный";
+
+/* Title of a menu item */
+"Delete…" = "Удалить…";
+
+/* No comment provided by engineer. */
+"Descending" = "По убыванию";
+
+/* No comment provided by engineer. */
+"Do you really want to import the subscriptions from the specified OPML file?" = "Действительно импортировать подписки из указанного файла OPML?";
+
+/* No comment provided by engineer. */
+"Download" = "Загрузка";
+
+/* Title of a menu item */
+"Download Enclosure" = "Загрузить вложение";
+
+/* Title of a menu item */
+"Download Enclosures" = "Загрузить вложения";
+
+/* Notification title */
+"Download completed" = "Загрузка завершена";
+
+/* Notification title */
+"Download failed" = "Ошибка";
+
+/* No comment provided by engineer. */
+"Downloads Running" = "Одна или более загрузок еще не завершена";
+
+/* No comment provided by engineer. */
+"Downloads Running text" = "Если вы сейчас выйдете из Vienna, все загрузки будут остановлены.";
+
+/* Title of a menu item */
+"Edit…" = "Правка…";
+
+/* Title of a button on an alert */
+"Empty" = "Очистить";
+
+/* No comment provided by engineer. */
+"Empty Trash message" = "Удалить все сообщения в Корзине?";
+
+/* No comment provided by engineer. */
+"Empty Trash message text" = "Данное действие невозможно отменить";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "URL вложения";
+
+/* No comment provided by engineer. */
+"Enter the URL here" = "Введите URL";
+
+/* No comment provided by engineer. */
+"Error" = "Ошибка";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions body" = "Невозможно импортировать указанный файл. Содержимое файла не является корректными данными формата OPML XML.";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions title" = "Ошибка импортирования";
+
+/* No comment provided by engineer. */
 "Error loading script '%@'" = "Ошибка загрузки скрипта '%@'";
-"AppleScript Error in '%@' script" = "Ошибка AppleScript в скрипте '%@'";
-"No thanks" = "Нет, спасибо";
-"Include anonymous system profile when checking for updates?" = "Добавить анонимную информацию о системе при проверке обновлений?";
-"Include anonymous system profile when checking for updates text" = "Знание наиболее популярных версий macOS среди наших пользователей, помогает дальнейшей разработке и развитию Vienna.";
+
+/* No comment provided by engineer. */
+"Error parsing XML data in feed" = "Ошибка парсинга XML данных канала";
+
+/* No comment provided by engineer. */
+"Error retrieving RSS Icon:" = "Ошибка получения иконки RSS:";
+
+/* No comment provided by engineer. */
+"Error retrieving RSS feed:" = "Ошибка запроса RSS-ленты:";
+
+/* No comment provided by engineer. */
 "Error: Feed not found!" = "Ошибка: Лента не найдена!";
-"Loading" = "Загрузка";
-"Plugin could not be installed" = "Плагин не может быть установлен";
-"Vienna failed to install the plugin." = "Vienna не удалось установить плагин.";
-"Queue" = "Очередь";
+
+/* No comment provided by engineer. */
+"External Browser" = "Внешний браузер";
+
+/* No comment provided by engineer. */
+"Feed URL updated to %@" = "URL канала обновился до %@";
+
+/* No comment provided by engineer. */
+"Fetching Open Reader Subscriptions…" = "Открытие Open Reader подписки…";
+
+/* Notification body */
+"File %@ downloaded" = "Файл %@ загружен";
+
+/* Notification body */
+"File %@ failed to download" = "Ошибка при загрузке файла %@";
+
+/* No comment provided by engineer. */
+"Flag" = "Метка";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Отмеченные";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Папка";
+
+/* No comment provided by engineer. */
+"Folder image retrieved from %@" = "Изображение папки взято из %@";
+
+/* No comment provided by engineer. */
+"Folders" = "Папки";
+
+/* Title of a menu item */
+"Force Refresh Selected Subscriptions From Open Reader" = "Принудительно обновить выбранные подписки из Open Reader";
+
+/* No comment provided by engineer. */
 "Forcing Refresh subscriptions…" = "Принудительное обновление подписок…";
+
+/* Toolbar item name for the General preference pane */
+"General" = "Общие";
+
+/* Title of a menu item */
+"Get Info" = "Сведения";
+
+/* No comment provided by engineer. */
+"Go forward to the next page" = "На следующую страницу";
+
+/* No comment provided by engineer. */
+"Got HTTP status 304 - No news from last check" = "Получен HTTP-код 304 - Нет новостей с момента последней проверки";
+
+/* No comment provided by engineer. */
+"HTTP code %d reported from server" = "Сервер передал HTTP код %d";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Вложения";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Заголовки";
+
+/* No comment provided by engineer. */
+"Hide Filter Bar" = "Скрыть панель фильтра";
+
+/* Title of a menu item */
+"Hide Status Bar" = "Спрятать строку статуса";
+
+/* Title of a button on an alert */
+"Import" = "Импорт";
+
+/* No comment provided by engineer. */
+"Import subscriptions from OPML file?" = "Импортировать подписки из файла OPML?";
+
+/* No comment provided by engineer. */
 "Improper infinitely looping URL redirect to %@" = "Бесконечное перенаправление URL по адресу %@";
 
-/* Added in 3.0.2 */
-"Close" = "Закрыть";
+/* No comment provided by engineer. */
+"Invalid style body" = "Будет использован стиль по умолчанию.";
+
+/* No comment provided by engineer. */
+"Invalid style title" = "Стиль %@ отсутствует или поврежден";
+
+/* No comment provided by engineer. */
+"Last Week" = "На прошлой неделе";
+
+/* Data field name visible in menu/article list */
+"Link" = "Ссылка";
+
+/* No comment provided by engineer. */
+"Loading" = "Загрузка";
+
+/* No comment provided by engineer. */
+"Loading…" = "Загрузка…";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Новая база данных Vienna не может быть создана в \"%@\" из-за того, что папка, возможно, находится на удаленном сервере, а текущая версия Vienna не может работать с удаленными базами данных. Пожалуйста, выберите папку на своем компьютере.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Невозможно создать базу данных Vienna";
+
+/* Title of a button on an alert */
 "Locate…" = "Найти…";
-"Error retrieving RSS feed:"="Ошибка запроса RSS-ленты:";
-"Got HTTP status 304 - No news from last check" = "Получен HTTP-код 304 - Нет новостей с момента последней проверки";
-"Error retrieving RSS Icon:" = "Ошибка получения иконки RSS:";
-"RSS Icon not found!" = "Иконка RSS не найдена!";
 
-/*Added in 3.0.5 */
-"Redirection attempt treated as temporary for safety concern" = "Зафиксирована попытка перенаправления";
+/* Title of a menu item */
+"Mark All Articles as Read" = "Отметить все статьи как прочитанные";
 
-/*Added in 3.0.7 */
+/* No comment provided by engineer. */
+"Mark All Read" = "Отметить все как прочитанные";
+
+/* Title of a menu item */
+"Mark All Subscriptions as Read" = "Отметить все подписки как прочитанные";
+
+/* Title of a menu item */
+"Mark Flagged" = "Отметить";
+
+/* Title of a menu item */
+"Mark Read" = "Отметить как прочитанное";
+
+/* No comment provided by engineer. */
+"Mark Unflagged" = "Снять флаг";
+
+/* Title of a menu item */
+"Mark Unread" = "Снять отметку о прочтении";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Отмеченные статьи";
+
+/* No comment provided by engineer. */
+"More Scripts…" = "Больше скриптов…";
+
+/* No comment provided by engineer. */
+"Move Folders" = "Переместить папки";
+
+/* No comment provided by engineer. */
+"Never" = "Никогда";
+
+/* No comment provided by engineer. */
+"New Tab" = "Новая вкладка";
+
+/* Notification title */
+"New articles retrieved" = "Новые статьи";
+
+/* No comment provided by engineer. */
+"New style body" = "Стиль \"%@\" был установлен в папку стилей и добавлен в меню Стиль.";
+
+/* No comment provided by engineer. */
+"New style title" = "Vienna установила новый стиль";
+
+/* Notification body */
+"New unread articles retrieved" = "Получено %d новых статей";
+
+/* No comment provided by engineer. */
+"No" = "Нет";
+
+/* No comment provided by engineer. */
 "No articles in feed" = "В ленте нет статей";
 
-/*Added in 3.1.2 */
-"Filter folders" = "Поиск по подпискам";
+/* No comment provided by engineer. */
+"No new articles available" = "Нет новых статей";
+
+/* Title of a button on an alert */
+"OK" = "OK";
+
+/* Title of a popup menu item */
+"Open" = "Открыть";
+
+/* Title of a menu item */
+"Open Article Page" = "Открыть статью";
+
+/* No comment provided by engineer. */
+"Open Article Page in %@" = "Открыть статью в %@";
+
+/* Title of a menu item */
+"Open Article Page in External Browser" = "Открыть статью во внешнем браузере";
+
+/* No comment provided by engineer. */
+"Open Frame" = "Открыть фрейм";
+
+/* No comment provided by engineer. */
+"Open Image in %@" = "Открыть изображение в %@";
+
+/* No comment provided by engineer. */
+"Open Image in New Tab" = "Открыть изображение в новой вкладке";
+
+/* No comment provided by engineer. */
+"Open Link in %@" = "Открыть ссылку в %@";
+
+/* No comment provided by engineer. */
+"Open Link in New Tab" = "Открыть ссылку в новой вкладке";
+
+/* No comment provided by engineer. */
+"Open Page in %@" = "Открыть страницу в %@";
+
+/* No comment provided by engineer. */
+"Open Reader Authentication Failed" = "В авторизации в Open Reader отказано";
+
+/* No comment provided by engineer. */
+"Open Reader Authentication Failed text" = "Убедитесь, что в настройках Vienna указаны правильные имя пользователя и пароль для доступа к серверу Open Reader.\nТакже проверьте сетевое соединение.";
+
+/* No comment provided by engineer. */
+"Open Scripts Folder" = "Открыть папку скриптов";
+
+/* Title of a menu item */
+"Open Subscription Home Page" = "Открыть страницу подписки";
+
+/* No comment provided by engineer. */
+"Open Subscription Home Page in %@" = "Открыть страницу подписки в %@";
+
+/* Title of a menu item */
+"Open Subscription Home Page in External Browser" = "Открыть страницу подписки во внешнем браузере";
+
+/* No comment provided by engineer. */
+"Other" = "Иное";
+
+/* No comment provided by engineer. */
+"Play" = "Воспроизведение";
+
+/* No comment provided by engineer. */
+"Plugin installed" = "Плагин установлен";
+
+/* Title of the Preferences window */
+"Preferences" = "Настройки";
+
+/* No comment provided by engineer. */
+"Queue" = "Очередь";
+
+/* Title of a button on an alert */
+"Quit" = "Завершить";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Quit Vienna" = "Завершить работу Vienna";
+
+/* No comment provided by engineer. */
+"RSS Icon not found!" = "Иконка RSS не найдена!";
+
+/* No comment provided by engineer. */
+"RSS Subscription Export Title" = "Экспортирование завершено";
+
+/* No comment provided by engineer. */
+"RSS Subscription Import Title" = "Импортирование завершено";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Прочитанные";
+
+/* No comment provided by engineer. */
+"Recent Searches" = "История поиска";
+
+/* No comment provided by engineer. */
+"Recents" = "Журнал";
+
+/* No comment provided by engineer. */
+"Redirection attempt treated as temporary for safety concern" = "Зафиксирована попытка перенаправления";
+
+/* Title of a menu item */
+"Refresh All Subscriptions" = "Обновить все подписки";
+
+/* Title of a menu item */
+"Refresh Selected Subscriptions" = "Обновить выбранные подписки";
+
+/* No comment provided by engineer. */
+"Refresh completed" = "Обновление завершено";
+
+/* No comment provided by engineer. */
+"Refresh the current page" = "Обновить страницу";
+
+/* No comment provided by engineer. */
+"Refreshing folder images…" = "Обновляю изображения папки…";
+
+/* No comment provided by engineer. */
+"Refreshing subscriptions…" = "Обновляю подписки…";
+
+/* Title of a popup menu item */
+"Remove From List" = "Удалить из списка";
+
+/* Title of a menu item */
+"Rename…" = "Переименовать…";
+
+/* Title of a menu item */
+"Restore Article" = "Восстановить статью";
+
+/* No comment provided by engineer. */
+"Resubscribe" = "Возобновить подписку";
+
+/* No comment provided by engineer. */
+"Retrieving articles" = "Загружаю статьи";
+
+/* No comment provided by engineer. */
+"Retrieving folder image" = "Получаю изображение папки";
+
+/* No comment provided by engineer. */
+"Retrieving folder image for Open Reader Feed" = "Получение иконки для Open Reader подписки";
+
+/* No comment provided by engineer. */
+"Return to the previous page" = "На предыдущую страницу";
+
+/* No comment provided by engineer. */
+"Search Results" = "Результаты поиска";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Поиск в статьях";
+
+/* No comment provided by engineer. */
+"Search all articles or the current web page" = "Поиск в статьях или по текущей веб-странице";
+
+/* Placeholder title of a search field */
+"Search current web page" = "Поиск по текущей веб-странице";
+
+/* No comment provided by engineer. */
+"Search in %@" = "Поиск в %@";
+
+/* No comment provided by engineer. */
+"Select…" = "Выбрать…";
+
+/* No comment provided by engineer. */
+"Send Link" = "Отправить ссылку";
+
+/* No comment provided by engineer. */
+"Send Links" = "Отправить ссылки";
+
+/* No comment provided by engineer. */
+"Show Filter Bar" = "Показать панель фильтра";
+
+/* Title of a menu item */
+"Show Status Bar" = "Показать строку статуса";
+
+/* Title of a menu item */
+"Show Toolbar" = "Показать панель инструментов";
+
+/* Title of a popup menu item */
+"Show in Finder" = "Показать в Finder";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Тема";
+
+/* No comment provided by engineer. */
+"Subscribe to the feed for this page" = "Подписаться к каналу на данной странице";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Выводы";
+
+/* Toolbar item name for the Syncing preference pane */
+"Syncing" = "Синхронизации";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Текст";
+
+/* No comment provided by engineer. */
+"This article contains an enclosed file." = "Эта статья содержит вложенный файл.";
+
+/* No comment provided by engineer. */
+"Today" = "Сегодня";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Сегодняшние статьи";
+
+/* No comment provided by engineer. */
+"Trash" = "Корзина";
+
+/* No comment provided by engineer. */
+"Unread" = "Непрочитанное";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Непрочитанные статьи";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "Формат базы данных (%@) не поддерживается текущей версией Vienna. Удалите или переименуйте этот файл и перезапустите программу.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "Формат базы данных изменился";
+
+/* No comment provided by engineer. */
+"Unsubscribe" = "Отписаться от ленты";
+
+/* Title of a button on an alert */
+"Upgrade Database" = "Обновить базу данных";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file body" = "Vienna не может открыть файл \"%@\" потому что он был перемещен после загрузки.";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file title" = "Vienna не может открыть этот файл.";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file body" = "Vienna не может отобразить файл \"%@\" потому что он был перемещен после загрузки.";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file title" = "Vienna не может отобразить файл.";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna необходимо обновить свою базу данных до последней версии. Это может занять минуту или около того. Приносим свои извинения за доставленные неудобства.";
+
+/* No comment provided by engineer. */
+"Yes" = "Да";
+
+/* No comment provided by engineer. */
+"Yesterday" = "Вчера";
+
+/* rule for association of multiple criteria */
+"all" = "все";
+
+/* rule for association of multiple criteria */
+"any" = "любое";
+
+/* test for a string */
+"contains" = "содержит";
+
+/* test for a string */
+"does not contain" = "не содержит";
+
+/* test for a value */
+"is" = "содержится";
+
+/* test for a date */
+"is after" = "после";
+
+/* test for a date */
+"is before" = "до";
+
+/* test for a numeric value */
+"is greater than" = "более чем";
+
+/* test for a numeric value */
+"is greater than or equal to" = "больше или равно";
+
+/* test for a numeric value */
+"is less than" = "менее чем";
+
+/* test for a numeric value */
+"is less than or equal to" = "меньше или равно";
+
+/* test for a value */
+"is not" = "не содержится";
+
+/* test for a date */
+"is on or after" = "сейчас и позднее";
+
+/* test for a date */
+"is on or before" = "сейчас и ранее";
+

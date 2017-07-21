@@ -1,0 +1,159 @@
+/* {existing authors},{new author name} */
+"%@, %@" = "%1$@, %2$@";
+
+/* No comment provided by engineer. */
+"(No title)" = "(pas de sujet)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(flux sans nom)";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Auteur";
+
+/* Title of a button on an alert */
+"Cancel" = "Annuler";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna a essyé de créer le dossier '%@' mais une erreur est apparue. Vérifier les autorisations des dossiers sur le chemin indiqué.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Désolé, mais Vienna ne peut créer la base de données";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "La base de données (%@) ne peut être ouverte. Elle pourrait être corrompue ou inaccessible. S'il vous plait, effacez ou renommez la base de données et relancez Vienna.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Désolé, mais Vienna ne peut pas ouvrir la base de données";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Mise à jour de la base de données";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Date";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Effacé";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "URL du fichier incorporé";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Signalé";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Dossier";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Fichier incorporé";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Titres";
+
+/* Data field name visible in menu/article list */
+"Link" = "Lien";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Une nouvelle base de données Vienna ne peut être créée dans '%@' car ce dossier est probablement situé sur un réseau partagé, et cette version de Vienna ne gère pas les bases de données distantes. S'il vous plait, choisissez un dossier présent localement sur votre machine.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Création de la base de données Vienna impossible";
+
+/* Title of a button on an alert */
+"Locate…" = "Rechercher…";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Articles signalés";
+
+/* Title of a button on an alert */
+"Quit Vienna" = "Quitter Vienna";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Lu";
+
+/* No comment provided by engineer. */
+"Search Results" = "Chercher dans les résultats";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Chercher dans les articles";
+
+/* Placeholder title of a search field */
+"Search current web page" = "Chercher dans la page actuelle";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Sujet";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Résumé";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Texte";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Articles d'aujourd'hui";
+
+/* No comment provided by engineer. */
+"Trash" = "Corbeille";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Articles non lus";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "Votre fichier %@ n'est pas reconnu par cette version de Vienna. Supprimez ou renommez ce fichier et relancez Vienna.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "Le format de la base de données a changé";
+
+/* Title of a button on an alert */
+"Upgrade Database" = "Mettre à jour la base de données";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna doit effectuer une mise à jour de sa base de données. Cela peut prendre une minute ou plus. Merci de votre compréhension.";
+
+/* rule for association of multiple criteria */
+"all" = "chacune";
+
+/* rule for association of multiple criteria */
+"any" = "une";
+
+/* test for a string */
+"contains" = "contient";
+
+/* test for a string */
+"does not contain" = "ne contient pas";
+
+/* test for a value */
+"is" = "est";
+
+/* test for a date */
+"is after" = "est avant";
+
+/* test for a date */
+"is before" = "est après";
+
+/* test for a numeric value */
+"is greater than" = "est supérieur à";
+
+/* test for a numeric value */
+"is greater than or equal to" = "est supérieur ou égal à";
+
+/* test for a numeric value */
+"is less than" = "est inférieur à";
+
+/* test for a numeric value */
+"is less than or equal to" = "est inférieur ou égal à";
+
+/* test for a value */
+"is not" = "n'est pas";
+
+/* test for a date */
+"is on or after" = "est le ou après";
+
+/* test for a date */
+"is on or before" = "est le ou avant";
+
+/* test for a folder (not operational as of Vienna 3.2) */
+"not under" = "n'est pas inclus dans";
+
+/* test for a folder (not operational as of Vienna 3.2) */
+"under" = "est inclus dans";
+

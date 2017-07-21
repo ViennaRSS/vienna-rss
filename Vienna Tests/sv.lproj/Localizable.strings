@@ -1,0 +1,147 @@
+/* {existing authors},{new author name} */
+"%@, %@" = "%1$@, %2$@";
+
+/* No comment provided by engineer. */
+"(No title)" = "(Inget ämne)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(Icke namngiven ström)";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Författare";
+
+/* Title of a button on an alert */
+"Cancel" = "Avbryt";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna försöker skapa mappen '%@' men ett fel uppstod. Kontrollera skrivrättigheter på specificerad sökväg.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Ledsen, men Vienna kunde inte skapa databasmappen";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "Databasefilen (%@) kan inte öppnas av någon anledning. Den kanske är korrupt eller oåtkomlig. Var god radera eller döp om databasefilen och starta om Vienna.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Ursäkta, men Vienna kan inte öppna databasen";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Uppdatera databas";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Datum";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Raderade";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "Bilagans URL";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Flaggad";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Mapp";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Bilaga";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Rubriker";
+
+/* Data field name visible in menu/article list */
+"Link" = "Länk";
+
+/* No comment provided by engineer. */
+"Locate Text" = "En ny Vienna-databas kan ej skapas i '%@' för att mappen förmodligen finns på en nätverksdelning och den här versionen av Vienna stöder inte detta. Var vänlig och välj en mapp som finns på din lokala hårddisk.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Kan ej skapa Viennas databas";
+
+/* Title of a button on an alert */
+"Locate…" = "Leta upp…";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Markerade artiklar";
+
+/* Title of a button on an alert */
+"Quit Vienna" = "Avsluta Vienna";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Läst";
+
+/* No comment provided by engineer. */
+"Search Results" = "Sökresultat";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Sök genom alla artiklar";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Ämne";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Sammanfattning";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Text";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Dagens artiklar";
+
+/* No comment provided by engineer. */
+"Trash" = "Raderade objekt";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Olästa artiklar";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "Din nuvarande %@ stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "Databasens filformat har ändrats";
+
+/* Title of a button on an alert */
+"Upgrade Database" = "Uppgradera databas";
+
+/* rule for association of multiple criteria */
+"all" = "alla";
+
+/* rule for association of multiple criteria */
+"any" = "något";
+
+/* test for a string */
+"contains" = "innehåller";
+
+/* test for a string */
+"does not contain" = "innehåller inte";
+
+/* test for a value */
+"is" = "är";
+
+/* test for a date */
+"is after" = "är efter";
+
+/* test for a date */
+"is before" = "är före";
+
+/* test for a numeric value */
+"is greater than" = "är större än";
+
+/* test for a numeric value */
+"is greater than or equal to" = "är större eller lika med";
+
+/* test for a numeric value */
+"is less than" = "är mindre än";
+
+/* test for a numeric value */
+"is less than or equal to" = "är mindre eller lika med";
+
+/* test for a value */
+"is not" = "är inte";
+
+/* test for a date */
+"is on or after" = "är på eller efter";
+
+/* test for a date */
+"is on or before" = "är på ellef före";
+

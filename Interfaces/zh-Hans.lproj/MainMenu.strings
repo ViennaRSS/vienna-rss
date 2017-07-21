@@ -1,23 +1,23 @@
+/* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg"; */
+"2S3-dG-ZPg.title" = "更多风格…";
+
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
 "5.title" = "全部调到前面";
 
+/* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1"; */
+"6yn-y8-lF1.title" = "更新所有的频道";
+
+/* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8Z3-Bg-ry2"; */
+"8Z3-Bg-ry2.title" = "标记精华";
+
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
 "19.title" = "窗口";
-
-/* Class = "NSWindow"; title = "Vienna"; ObjectID = "21"; */
-"21.title" = "Vienna";
 
 /* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
 "23.title" = "最小化";
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
 "24.title" = "窗口";
-
-/* Class = "NSMenuItem"; title = "Vienna"; ObjectID = "56"; */
-"56.title" = "Vienna";
-
-/* Class = "NSMenu"; title = "Vienna"; ObjectID = "57"; */
-"57.title" = "Vienna";
 
 /* Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58"; */
 "58.title" = "关于 Vienna";
@@ -187,12 +187,6 @@
 /* Class = "NSMenuItem"; title = "Stop Refreshing"; ObjectID = "858"; */
 "858.title" = "停止更新";
 
-/* Class = "NSButtonCell"; title = "Export all subscriptions"; ObjectID = "862"; */
-"862.title" = "输出所有频道";
-
-/* Class = "NSButtonCell"; title = "Export selected subscriptions"; ObjectID = "863"; */
-"863.title" = "输出所选的频道";
-
 /* Class = "NSMenuItem"; title = "Vienna Web Site"; ObjectID = "929"; */
 "929.title" = "Vienna 主页";
 
@@ -234,9 +228,6 @@
 
 /* Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067"; */
 "1067.title" = "在浏览器中打开文章页面";
-
-/* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
-"1073.title" = "Send Link by Email";
 
 /* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
 "1084.title" = "发大文章字体";
@@ -319,9 +310,6 @@
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
 "1257.title" = "自定义工具栏…";
 
-/* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
-"1258.title" = "Hide Toolbar";
-
 /* Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259"; */
 "1259.title" = "隐藏状态栏";
 
@@ -331,56 +319,14 @@
 /* Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327"; */
 "1327.title" = "搜索文章";
 
-/* Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336"; */
-"1336.title" = "Order By";
-
-/* Class = "NSMenu"; title = "Order By"; ObjectID = "1337"; */
-"1337.title" = "Order By";
-
-/* Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338"; */
-"1338.title" = "Manual";
-
-/* Class = "NSMenuItem"; title = "Name"; ObjectID = "1339"; */
-"1339.title" = "Name";
-
-/* Class = "NSButtonCell"; title = "Preserve group folders in exported file"; ObjectID = "1368"; */
-"1368.title" = "在输出的文件中保留群组文件夹";
-
-/* Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377"; */
-"1377.title" = "Filter by:";
-
-/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "1380"; */
-"1380.title" = "Radio";
-
-/* Class = "NSMenuItem"; title = "Show XML Source"; ObjectID = "1394"; */
-"1394.title" = "Show XML Source";
-
-/* Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404"; */
-"1404.title" = "Current Filter";
-
 /* Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408"; */
 "1408.title" = "取消频道订阅";
 
 /* Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409"; */
 "1409.title" = "获取信息…";
 
-/* Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413"; */
-"1413.title" = "Use Current Style for Articles";
-
-/* Class = "NSMenuItem"; title = "Use Web Page for Articles"; ObjectID = "1415"; */
-"1415.title" = "Use Web Page for Articles";
-
-/* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "1425"; */
-"1425.title" = "Force Refresh Selected Subscriptions From Open Reader";
-
-/* Class = "NSMenuItem"; title = "Update Subscriptions From Open Reader"; ObjectID = "1428"; */
-"1428.title" = "Update Subscriptions From Open Reader";
-
-/* Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458"; */
-"1458.title" = "Reindex Database";
-
-/* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1"; */
-"6yn-y8-lF1.title" = "更新所有的频道";
+/* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI"; */
+"CGp-H4-UaI.title" = "最近 48 小时";
 
 /* Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi"; */
 "ecl-HO-Kpi.title" = "标记所有频道为已读";
@@ -390,3 +336,16 @@
 
 /* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
 "pKl-6f-Hlc.title" = "标记已读";
+
+/* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7"; */
+"rNG-xr-3x7.title" = "未读文章";
+
+/* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "t1E-6n-jtA"; */
+"t1E-6n-jtA.title" = "所有文章";
+
+/* Class = "NSMenuItem"; title = "Today"; ObjectID = "t34-de-pMs"; */
+"t34-de-pMs.title" = "今天";
+
+/* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm"; */
+"wqh-Jc-gBm.title" = "上一次更新";
+

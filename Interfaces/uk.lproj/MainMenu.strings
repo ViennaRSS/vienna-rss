@@ -1,23 +1,23 @@
+/* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg"; */
+"2S3-dG-ZPg.title" = "Більше стилів…";
+
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
 "5.title" = "Витягнути все на передній план";
 
+/* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1"; */
+"6yn-y8-lF1.title" = "Оновити всі підписки";
+
+/* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8Z3-Bg-ry2"; */
+"8Z3-Bg-ry2.title" = "З прапорцем";
+
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
 "19.title" = "Вікно";
-
-/* Class = "NSWindow"; title = "Vienna"; ObjectID = "21"; */
-"21.title" = "Vienna";
 
 /* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
 "23.title" = "Згорнути";
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
 "24.title" = "Вікно";
-
-/* Class = "NSMenuItem"; title = "Vienna"; ObjectID = "56"; */
-"56.title" = "Vienna";
-
-/* Class = "NSMenu"; title = "Vienna"; ObjectID = "57"; */
-"57.title" = "Vienna";
 
 /* Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58"; */
 "58.title" = "Про Vienna";
@@ -187,12 +187,6 @@
 /* Class = "NSMenuItem"; title = "Stop Refreshing"; ObjectID = "858"; */
 "858.title" = "Зупинити оновлення";
 
-/* Class = "NSButtonCell"; title = "Export all subscriptions"; ObjectID = "862"; */
-"862.title" = "Експортувати всі підписки";
-
-/* Class = "NSButtonCell"; title = "Export selected subscriptions"; ObjectID = "863"; */
-"863.title" = "Експортувати виділені підписки";
-
 /* Class = "NSMenuItem"; title = "Vienna Web Site"; ObjectID = "929"; */
 "929.title" = "Веб-сайт Vienna";
 
@@ -234,9 +228,6 @@
 
 /* Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067"; */
 "1067.title" = "Відкрити сторінку статті у зовнішньому браузері";
-
-/* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
-"1073.title" = "Send Link by Email";
 
 /* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
 "1084.title" = "Більший текст";
@@ -316,12 +307,6 @@
 /* Class = "NSMenuItem"; title = "Download Enclosure"; ObjectID = "1216"; */
 "1216.title" = "Завантажити додаток";
 
-/* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
-"1257.title" = "Customize Toolbar…";
-
-/* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
-"1258.title" = "Hide Toolbar";
-
 /* Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259"; */
 "1259.title" = "Заховати стрічку статусу";
 
@@ -331,56 +316,14 @@
 /* Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327"; */
 "1327.title" = "Шукати статті";
 
-/* Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336"; */
-"1336.title" = "Order By";
-
-/* Class = "NSMenu"; title = "Order By"; ObjectID = "1337"; */
-"1337.title" = "Order By";
-
-/* Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338"; */
-"1338.title" = "Manual";
-
-/* Class = "NSMenuItem"; title = "Name"; ObjectID = "1339"; */
-"1339.title" = "Name";
-
-/* Class = "NSButtonCell"; title = "Preserve group folders in exported file"; ObjectID = "1368"; */
-"1368.title" = "Зберігати папки у експортованих файлах";
-
-/* Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377"; */
-"1377.title" = "Filter by:";
-
-/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "1380"; */
-"1380.title" = "Radio";
-
-/* Class = "NSMenuItem"; title = "Show XML Source"; ObjectID = "1394"; */
-"1394.title" = "Show XML Source";
-
-/* Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404"; */
-"1404.title" = "Current Filter";
-
 /* Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408"; */
 "1408.title" = "Відписатися від стрічки новин";
 
 /* Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409"; */
 "1409.title" = "Інформація…";
 
-/* Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413"; */
-"1413.title" = "Use Current Style for Articles";
-
-/* Class = "NSMenuItem"; title = "Use Web Page for Articles"; ObjectID = "1415"; */
-"1415.title" = "Use Web Page for Articles";
-
-/* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "1425"; */
-"1425.title" = "Force Refresh Selected Subscriptions From Open Reader";
-
-/* Class = "NSMenuItem"; title = "Update Subscriptions From Open Reader"; ObjectID = "1428"; */
-"1428.title" = "Update Subscriptions From Open Reader";
-
-/* Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458"; */
-"1458.title" = "Reindex Database";
-
-/* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1"; */
-"6yn-y8-lF1.title" = "Оновити всі підписки";
+/* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI"; */
+"CGp-H4-UaI.title" = "Останні 48 годин";
 
 /* Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi"; */
 "ecl-HO-Kpi.title" = "Помітити всі підписки як прочинаті";
@@ -390,3 +333,16 @@
 
 /* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
 "pKl-6f-Hlc.title" = "Помітити як прочитане";
+
+/* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7"; */
+"rNG-xr-3x7.title" = "Непрочитані статті";
+
+/* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "t1E-6n-jtA"; */
+"t1E-6n-jtA.title" = "Всі статті";
+
+/* Class = "NSMenuItem"; title = "Today"; ObjectID = "t34-de-pMs"; */
+"t34-de-pMs.title" = "Сьогодні";
+
+/* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm"; */
+"wqh-Jc-gBm.title" = "Останнє оновлення";
+

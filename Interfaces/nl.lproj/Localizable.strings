@@ -1,458 +1,648 @@
-"Mark Read" = "Markeer als gelezen";
-"Mark Unread" = "Markeer als ongelezen";
-"Mark Unflagged" = "Hef markering op";
-"Articles" = "Artikelen";
-"Folders" = "Mappen";
-"Loading %@…" = "%@ wordt geladen…";
-"Completed" = "Voltooid";
-"Refresh RSS feeds" = "Werk abonnementen bij";
-"Refresh All Subscriptions" = "Werk alle abonnementen bij";
-"Already subscribed title" = "Fout";
-"Already subscribed body" = "U heeft al een abonnement op deze feed";
-"RSS Subscription Import Title" = "Importeren voltooid";
-"%d subscriptions successfully imported" = "%d abonnementen geïmporteerd";
-"RSS Subscription Export Title" = "Exporteren voltooid";
-"%d subscriptions successfully exported" = "%d abonnementen geëxporteerd";
-"New unread articles retrieved" = "%d nieuwe ongelezen artikelen opgehaald";
-"Growl refresh completed" = "Nieuwe artikelen";
-"New articles retrieved" = "Nieuwe artikelen";
-"(Untitled Feed)" = "(Naamloze feed)";
-"Open Link in Browser" = "Open koppeling in browser";
-"Copy Link to Clipboard" = "Kopieer koppeling naar klembord";
-"Refresh completed" = "Bijwerken voltooid";
-"Retrieving articles" = "Artikelen aan het bijwerken";
-"ClearButton" = "Wis";
-"Read" = "Gelezen";
-"Flagged" = "Gemarkeerd";
-"Comments" = "Commentaar";
-"Parent" = "Hogere";
-"Number" = "Getal";
-"Subject" = "Onderwerp";
-"Folder" = "Map";
-"Date" = "Datum";
-"Author" = "Auteur";
-"Text" = "Tekst";
-"Headlines" = "Koppen";
-"Link" = "Koppeling";
-"Deleted" = "Verwijderd";
-"GUID" = "GUID";
-"No" = "Nee";
-"Yes" = "Ja";
-"Version %@" = "Versie %@";
-"Refresh All" = "Werk alles bij";
-"Subscribe" = "Abonneer";
-"Smart Folder" = "Slimme map";
-"Flag" = "Markeer";
-"Next Unread" = "Volgende ongelezen";
-"Noon" = "12 uur";
-"Midnight" = "Middernacht";
-"Today" = "Vandaag";
-"Yesterday" = "Gisteren";
-"Tomorrow" = "Morgen";
-"%@ at %@" = "%@ om %@";
-"Quit" = "Stop";
-"Refresh cancelled" = "Bijwerken geannuleerd";
-"Additional actions for the selected folder" = "Meer acties voor de geselecteerde map";
-"Create a new subscription" = "Neem een nieuw abonnement";
-"Refresh all your subscriptions" = "Werk alle abonnementen bij";
-"New style title" = "Vienna heeft een nieuwe stijl geïnstalleerd";
-"New style body" = "De stijl \"%@\" is in uw stijlenmap geïnstalleerd en toegevoegd aan het menu Stijlen.";
-"More Styles…" = "Meer stijlen…";
-"Delete selected message" = "Weet u zeker dat u de geselecteerde berichten wilt verwijderen?";
-"Delete selected message text" = "Deze actie kan niet ongedaan worden gemaakt.";
-"Cancel" = "Annuleer";
-"OK" = "OK";
-"From" = "Van";
-"To" = "Aan";
-"(No title)" = "(Geen onderwerp)";
-"Refreshing folder images…" = "Map-iconen bijwerken…";
-"Refreshing subscriptions…" = "Abonnementen bijwerken…";
-"Authenticating with user name '%@'" = "Aanmelden met gebruikersnaam \"%@\"";
-"No new articles available" = "Geen nieuwe artikelen beschikbaar";
-"%d new articles retrieved" = "%d nieuwe artikelen opgehaald";
-"HTTP code %d reported from server" = "HTTP-code %d gemeld door de server";
-"Headers:\n" = "Koppen:\n";
-"Connection error (%d, %@):\n" = "Verbindingsfout (%d, %@):\n";
-"\tDescription: %@\n" = "\tOmschrijving: %@\n";
-"\tSuggestion: %@\n" = "\tSuggestie: %@\n";
-"\tCause: %@\n" = "\tOorzaak: %@\n";
-"Article feed will be compressed" = "Artikelenstroom wordt gecomprimeerd";
-"Redirecting to %@" = "Doorverwijzen naar %@";
-"Error: %@" = "Fout: %@";
-"Error" = "Fout";
-"Credentials Prompt" = "Voor toegang tot het abonnement op \"%@\" heeft u een gebruikersnaam en wachtwoord nodig.";
-"%ld bytes received" = "%ld bytes ontvangen";
-"Authentication failed for user '%@'" = "Aanmelden van gebruiker \"%@\" niet geslaagd";
-"Error parsing XML data in feed" = "Fout tijdens het verwerken van de XML van deze feed";
-"Retrieving folder image" = "Map-icoon ophalen";
-"Folder image retrieved from %@" = "Map-icoon opgehaald van %@";
-"Contacting…" = "Verbinden…";
-"Connect Running" = "Er is een verbinding gaande";
-"Connect Running text" = "Wilt u de verbinding verbreken en Vienna nu afsluiten?";
-"Delete group folder" = "Wis groep";
-"Delete group folder text" = "Weet u zeker dat u de groep \"%@\" en alle subgroepen wilt verwijderen? U kunt dit niet ongedaan maken.";
-"Delete smart folder" = "Verwijder slimme map";
-"Delete smart folder text" = "Weet u zeker dat u de slimme map \"%@\" wilt verwijderen? De originele artikelen worden niet verwijderd.";
-"Delete RSS feed text" = "Weet u zeker dat u het abonnement \"%@\" wilt opzeggen? Alle opgeslagen artikelen worden verwijderd.";
-"Delete RSS feed" = "Zeg abonnement op";
-"Delete multiple folders text" = "Weet u zeker dat u deze %d groepen wilt verwijderen? U kunt dit niet ongedaan maken.";
-"Delete multiple folders" = "Verwijder meerdere groepen";
-"Delete folder status" = "Groep \"%@\" verwijderen…";
-"An error has occurred" = "Er is iets fout gegaan.";
-"Your software is up to date" = "U gebruikt de actuele versie van Vienna.";
-"Please try again later" = "Probeer het later nogmaals.";
-"An update is now available" = "Er is een update beschikbaar";
-"Update available text" = "Versie %@ van Vienna is beschikbaar op:\n\n%@\n\nWilt u deze nieuwe versie nu downloaden? Als u dit nu niet doet, kunt u de nieuwe versie later alsnog downloaden door opnieuw Zoek naar updates te kiezen.";
-"any" = "een of meer";
-"all" = "alle";
-"Open Scripts Folder" = "Open scripts-map";
-"Cannot create database folder title" = "Vienna kan de databasemap niet aanmaken";
-"Cannot create database folder text" = "Vienna probeerde de map \"%@\" te maken, maar er ging iets fout. Controleer de bevoegdheden van de bovenliggende mappen.";
-"Unrecognised database format title" = "Het bestandsformaat van de database is veranderd";
-"Unrecognised database format text" = "Het bestandsformaat van de database (%@) wordt door deze versie van Vienna niet ondersteund. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.";
-"Upgrade Title" = "Database-upgrade";
-"Upgrade Text" = "Uw bestaande database moet worden aangepast om door deze versie van Vienna te kunnen worden gelezen. U kunt ook kiezen om te starten met een nieuwe, lege database. Uw bestaande database wordt hoe dan ook opgeslagen als %@. De nieuwe of bijgewerkte database zal NIET meer werken met oudere versies van Vienna.\n\nOpmerking: voor deze build is het aan te raden om met een nieuwe, lege database te starten.\n";
-"New Database" = "Nieuwe database";
-"Upgrade" = "Upgrade";
-"Exit" = "Stop";
-"Search in %@" = "Zoek in %@";
-"Marked Articles" = "Gemarkeerde artikelen";
-"Unread Articles" = "Ongelezen artikelen";
-"Today's Articles" = "Artikelen van vandaag";
-"Trash" = "Prullenmand";
-"Select…" = "Selecteer…";
-" (%d unread)" = " (%d ongelezen)";
-"is" = "is";
-"is not" = "is niet";
-"is after" = "ligt na";
-"is before" = "ligt voor";
-"is on or after" = "ligt op of na";
-"is on or before" = "ligt op of voor";
-"contains" = "bevat";
-"does not contain" = "bevat niet";
-"is less than" = "is kleiner dan";
-"is greater than" = "is groter dan";
-"is less than or equal to" = "is kleiner dan of gelijk aan";
-"is greater than or equal to" = "is groter dan of gelijk aan";
-"Cannot open export file message" = "Kan het exportbestand niet aanmaken";
-"Cannot open export file message text" = "Het opgegeven exportbestand kon niet worden aangemaakt. Controleer of het bestand niet is beveiligd of geopend in een ander programma.";
-"Source" = "Bron";
-"Status" = "Status";
-"Enter LiveJournal User name" = "LiveJournal-gebruikersnaam";
-"Enter MSN Spaces User name" = "MSN Spaces-gebruikersnaam";
-"Enter Blogspot User name" = "Blogspot-gebruikersnaam";
-"Enter Xanga User name" = "Xanga-gebruikersnaam";
-"Enter URL of RSS feed" = "URL van de nieuws-feed";
-"Cannot rename folder" = "Kan de mapnaam niet wijzigen";
-"A folder with that name already exists" = "Er bestaat al een map met deze naam";
-"Recent Searches" = "Recente zoekacties";
-"Recents" = "Recente onderdelen";
-"Clear" = "Wis zoekgeschiedenis";
-"Search web page" = "Doorzoek webpagina";
-"Loading…" = "Laadt…";
-"Open Image in New Tab" = "Open afbeelding in nieuwe tab";
-"Open Link in New Tab" = "Open koppeling in nieuwe tab";
-"Open Link in %@" = "Open koppeling in %@";
-"Open Page in %@" = "Open pagina in %@";
-"Copy Page Link to Clipboard" ="Kopieer locatie naar klembord";
-"%d unread articles" = "%d ongelezen artikelen";
-"More Scripts…" = "Meer scripts…";
-"Install Update" = "Installeer update";
-"Do Not Install" = "Niet nu";
-"Replace smart folder title" = "Er bestaat al een slimme map %@";
-"Replace smart folder text" = "Wilt u de bestaande slimme map vervangen door een slimme map met de opgegeven criteria?";
-"Replace" = "Vervang";
-"Never" = "Nooit";
-"After a Day" = "Na een dag";
-"After 2 Days" = "Na 2 dagen";
-"After a Week" = "Na een week";
-"After 2 Weeks" = "Na 2 weken";
-"After a Month" = "Na een maand";
-"Last Week" = "Vorige week";
-"2 Weeks Ago" = "2 weken geleden";
-"A month" = "Een maand";
-"Activity Window" = "Activiteitenoverzicht";
-"Error importing subscriptions body" = "Kan het opgegeven bestand niet importeren. Het is geen geldig OPML-bestand.";
-"Error importing subscriptions title" = "Fout bij importeren";
-"Rename" = "Wijzig naam";
-"Mark All Read" = "Markeer alle berichten als gelezen";
-"Move Folders" = "Verplaats mappen";
-"Downloads" = "Downloads";
-"Invalid style title" = "De stijl %@ lijkt te zijn beschadigd";
-"Invalid style body" = "De standaardstijl zal worden gebruikt.";
-"Downloads Running" = "Eén of meer downloads zijn nog bezig";
-"Downloads Running text" = "Wilt u alle downloads annuleren en Vienna nu afsluiten?";
-"Mark All Subscriptions as Read" = "Markeer alle abonnementen als gelezen";
-"Preferences" = "Voorkeuren";
-"General" = "Algemeen";
-"Appearance" = "Weergave";
-"Locate Title" = "Kan de Vienna-database niet aanmaken";
-"Locate Text" = "Een nieuwe Vienna-database kan niet worden aagemaakt in \"%@\". De database staat waarschijnlijk op een andere computer in het netwerk, hetgeen door deze versie van Vienna niet wordt ondersteund. Kiest u een andere locatie op deze computer.";
-"Empty Trash message" = "Weet u zeker dat u de artikelen in de prullenmand definitief wilt verwijderen?";
-"Empty Trash message text" = "Dit kan niet ongedaan worden gemaakt";
-"Cannot open database title" = "Vienna kon de database niet openen";
-"Cannot open database text" = "Het database-bestand (%@) kon niet worden geopend. Het zou beschadigd of ontoegankelijk kunnen zijn. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.";
-"Vienna cannot open the file title" = "Vienna kan het bestand niet openen.";
-"Vienna cannot open the file body" = "Vienna kan het bestand \"%@\" niet openen, omdat het is verplaatst sinds u het heeft gedownload.";
-"Vienna cannot show the file title" = "Vienna kan het bestand niet tonen.";
-"Vienna cannot show the file body" = "Vienna kan het bestand \"%@\" niet tonen, omdat het is verplaatst sinds u het heeft gedownload.";
-"Empty" = "Leeg";
-"Open" = "Open";
-"Show in Finder" = "Toon in Finder";
-"Remove From List" = "Verwijder uit de lijst";
-"%.1f MB" = "%.1f MB";
-"%.1f KB" = "%.1f KB";
-"%.1f bytes" = "%.1f bytes";
-"%.1f of %.1f MB" = "%.1f van %.1f MB";
-"%.1f of %.1f KB" = "%.1f van %.1f KB";
-"%.1f of %.1f bytes" = "%.1f van %.1f bytes";
-"An error occurred when this feed was last refreshed" = "De laatste keer dat deze feed is bijgewerkt, is er een fout opgetreden";
-"Connecting to %@" = "Verbinden met %@";
-"About Vienna" = "Over Vienna";
-"Acknowledgements" = "Dankwoord";
-"Article" = "Artikel";
-"Back" = "Vorige";
-"Bring All to Front" = "Alles op voorgrond";
-"Check Spelling" = "Controleer spelling";
-"Check Spelling as You Type" = "Controleer spelling tijdens typen";
-"Check for Updates" = "Zoek naar updates";
-"Close All Tabs" = "Sluit alle tabs";
-"Close Tab" = "Sluit tab";
-"Close Window" = "Sluit venster";
-"Columns" = "Kolommen";
-"Copy" = "Kopieer";
-"Cut" = "Knip";
-"Delete" = "Wis";
-"Delete Article" = "Wis artikel";
-"Delete…" = "Wis…";
-"Edit" = "Wijzig";
-"Edit…" = "Bewerk…";
-"Empty Trash" = "Leeg prullenmand";
-"Export Subscriptions…" = "Exporteer abonnementen…";
-"File" = "Archief";
-"Find" = "Zoek";
-"Find Next" = "Zoek volgende";
-"Find Previous" = "Zoek vorige";
-"Find…" = "Zoek…";
-"Forward" = "Volgende";
-"Help" = "Help";
-"Hide Others" = "Verberg andere";
-"Hide Vienna" = "Verberg Vienna";
-"Import Subscriptions…" = "Importeer abonnementen…";
-"Jump to Selection" = "Spring naar selectie";
-"Main Window" = "Vienna";
-"MainMenu" = "MainMenu";
-"Mark All Articles as Read" = "Markeer alles als gelezen";
-"Mark Flagged" = "Markeer";
-"Minimize" = "Minimaliseer";
-"New Group Folder…" = "Nieuwe groep…";
-"New Smart Folder…" = "Nieuwe slimme map…";
-"New Subscription…" = "Nieuw abonnement…";
-"Next Tab" = "Volgende tab";
-"Open Article Page" = "Ga naar artikelpagina";
-"Open Article Page in External Browser" = "Open artikelpagina in externe browser";
-"Open Subscription Home Page" = "Ga naar startpagina van abonnement";
-"Open Subscription Home Page in External Browser" = "Open abonnement-pagina in externe browser";
-"Page Setup…" = "Pagina-instelling…";
-"Paste" = "Plak";
-"Preferences…" = "Voorkeuren…";
-"Previous Tab" = "Vorige tab";
-"Print…" = "Druk af…";
-"Quit Vienna" = "Stop Vienna";
-"Redo" = "Opnieuw";
-"Refresh Selected Subscriptions" = "Werk geselecteerde abonnementen bij";
-"Reload Page" = "Laad pagina opnieuw";
-"Rename…" = "Wijzig naam…";
-"Restore Article" = "Herstel artikel";
-"Select All" = "Selecteer alles";
-"Services" = "Voorzieningen";
-"Show All" = "Toon alles";
-"Skip Folder" = "Sla map over";
-"Sort By" = "Sorteer op";
-"Spelling" = "Spelling";
-"Spelling…" = "Spelling…";
-"Stop Refreshing" = "Stop bijwerken";
-"Stop Reloading Page" = "Stop";
-"Style" = "Stijl";
-"Undo" = "Herstel";
-"Use Selection for Find" = "Gebruik selectie voor zoekactie";
-"Validate Feed" = "Valideer feed";
-"Vienna Help" = "Vienna Help";
-"Vienna Web Site" = "Vienna-website";
-"View" = "Weergave";
-"Window" = "Venster";
-"Zoom" = "Vergroot/verklein";
-"Export all subscriptions" = "Exporteer alle abonnementen";
-"Export selected subscriptions" = "Exporteer geselecteerde abonnementen";
-"Preserve group folders in exported file" = "Behoud groeperingen in exportbestand";
-"Open Frame" = "Open frame";
-"Open Image in %@" = "Open afbeelding in %@";
-"Open Subscription Home Page in %@" = "Open homepage van abonnement in %@";
-"Open Article Page in %@" = "Open artikelpagina in %@";
-"New Tab" = "Nieuwe tab";
-"External Browser" = "Externe browser";
-
-/* Added in 2.1.0 */
-"Send Link" = "Verzend koppeling";
-"Send Links" = "Verzend koppelingen";
-"Increase Font Size" = "Grotere letter";
-"Decrease Font Size" = "Kleinere letter";
-"Enter the URL here" = "Typ de URL hier";
-"Refresh the current page" = "Laad de huidige pagina opnieuw";
-"Return to the previous page" = "Ga terug naar de vorige pagina";
-"Go forward to the next page" = "Ga verder naar de volgende pagina";
-"Layout" = "Lay-out";
-"Reading Pane on Right" = "Leespaneel rechts";
-"Reading Pane at Bottom" = "Leespaneel beneden";
-"Filter By" = "Filter Op";
-"Filter by:" = "Filter op:";
-"All" = "Alles";
-"All Articles" = "Alle artikelen";
-"Unread" = "Ongelezen";
-"Last Refresh" = "Laatste vernieuwing";
-"Feed URL updated to %@" = "De URL van deze feed is veranderd in %@";
-"Filter articles" = "Filter artikelen";
-"Feed has been removed by the server" = "Deze feed is van de server verwijderd";
-"Mark all articles read" = "Markeer alle artikelen als gelezen";
+/* No comment provided by engineer. */
 "%@ Info" = "%@ Info";
-"%u articles" = "%u artikelen";
-"%u unread" = "%u ongelezen";
-"Keyboard Shortcuts" = "Toetscombinaties";
-"%@ (Filtered: %@)" = "%@ (Filter: %@)";
-"Get Info…" = "Toon info…";
-"Open Web Location…" = "Open weblocatie…";
-"Refresh Folder Images" = "Werk map-iconen bij";
-"Report" = "Rapport";
-"Condensed" = "Verkort";
-"Unified" = "Verenigd";
-"Summary" = "Samevatting";
-"Blog With…" = "Blog met…";
-"Blog with %@" = "Blog met %@";
-"Bigger Text" = "Grotere tekst";
-"Smaller Text" = "Kleinere tekst";
 
-/* Added in 2.1.1 */
+/* Progress in bytes, e.g. 1 KB of 1 MB */
+"%@ of %@" = "%1$@ van %2$@";
+
+/* Number of bytes received, e.g. 1 MB received */
+"%@ received" = "%@ ontvangen";
+
+/* No comment provided by engineer. */
+"%d new articles retrieved" = "%d nieuwe artikelen opgehaald";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully exported" = "%d abonnementen geëxporteerd";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully imported" = "%d abonnementen geïmporteerd";
+
+/* No comment provided by engineer. */
+"%d unread articles" = "%d ongelezen artikelen";
+
+/* No comment provided by engineer. */
+"%u articles" = "%u artikelen";
+
+/* No comment provided by engineer. */
+"%u unread" = "%u ongelezen";
+
+/* No comment provided by engineer. */
+"(No title)" = "(Geen onderwerp)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(Naamloze feed)";
+
+/* No comment provided by engineer. */
+"A folder with that name already exists" = "Er bestaat al een map met deze naam";
+
+/* Toolbar item name for the Advanced preference pane */
 "Advanced" = "Geavanceerd";
 
-/* Added in 2.2.0 */
-"Import subscriptions from OPML file?" = "Importeer abonnementen uit OPML bestand?";
-"Do you really want to import the subscriptions from the specified OPML file?" = "Wilt u echt abonnementen uit dit OPML bestand importeren?";
-"Import" = "Importeer";
-"HasEnclosure" = "Bijlage";
-"Enclosure" = "Bijlage URL";
-"Open New Tab" = "Open nieuwe tab";
-"Subscribe to the feed for this page" = "Abonneer op de feed van deze pagina";
-"Open Vienna" = "Open Vienna";
-"Download Enclosure" = "Download bijlage";
-"Download Enclosures" = "Download bijlages";
-"Local File" = "Lokaal bestand";
-"Hide Status Bar" = "Verberg statusbalk";
-"Show Status Bar" = "Toon statusbalk";
-"Customize Toolbar…" = "Pas knoppenbalk aan…";
-"Search Articles" = "Zoek artikelen";
-"Progress" = "Voortgang";
-"Delete all articles in the trash" = "Wis alle artikelen in de prullenmand";
-"Unsubscribe" = "Zeg abonnement op";
-"Resubscribe" = "Abonneer";
-"Download" = "Download";
-"This article contains an enclosed file." = "Dit artikel bevat een bijlage.";
-"Growl download completed" = "File download successful";
-"Growl download failed" = "File download failed";
-"Download completed" = "Download compleet";
-"File %@ downloaded" = "Bestand %@ gedownload";
-"Download failed" = "Download niet gelukt";
-"File %@ failed to download" = "Niet gelukt bestand %@ te downloaden";
-"Play" = "Afspelen";
-"Click the Play button to play this enclosure in iTunes." = "Klik de Afspelen knop om deze bijlage in ITunes af te spelen.";
-"Click the Open button to open this file." = "Klik de Open knop om dit bestand te openen.";
-"Filter displayed articles by matching text" = "Filter getoonde artikelen op deze tekst";
-"Close the filter bar" = "Sluit de filterbalk";
-"Search all articles" = "Search all articles";
-"Search Results" = "Zoek resultaten";
-"Hide Filter Bar" = "Verberg filterbalk";
-"Show Filter Bar" = "Toon filterbalk";
-"Email a link to the current article or website" = "Email een koppeling naar huidige artikel of website";
-"Refresh" = "Ververs";
-"Action" = "Actie";
-"Get Info" = "Toon info";
-"See information about the selected subscription" = "Toon informatie over geselecteerde abonnement";
-"Display the list of available styles" = "Toon lijst van beschikbare stijlen";
+/* No comment provided by engineer. */
+"After 2 Days" = "Na 2 dagen";
 
-/* Added in 2.3.0 */
-"Order By" = "Rangschikking";
-"Manual" = "Handmatig";
-"Name" = "Op naam";
+/* No comment provided by engineer. */
+"After 2 Weeks" = "Na 2 weken";
 
-/*Added in 2.4*/
-"Show XML Source" = "Toon XML broncode";
-"Source of folder" = "Bron van map";
-"No feed source to display." = "Geen feed bron te tonen.";
-"Search current web page" = "Doorzoek huidige webpagina";
-"Search all articles or the current web page" = "Doorzoek alle artikelen of de huidige webpagina";
-"Database Upgrade" = "Database bijwerken";
-"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna moet de database bijwerken naar de laatste versie. Dit kan enige tijd duren. Sorry voor het ongemak.";
-"Upgrade Database" = "Bijwerken database";
+/* No comment provided by engineer. */
+"After a Day" = "Na een dag";
 
-/* Added in 2.5.0 */
-"Cannot create folder title" = "Kan map niet creëren";
+/* No comment provided by engineer. */
+"After a Month" = "Na een maand";
+
+/* No comment provided by engineer. */
+"After a Week" = "Na een week";
+
+/* Already subscribed body */
+"Already subscribed body" = "U heeft al een abonnement op deze feed";
+
+/* Already subscribed title */
+"Already subscribed title" = "Fout";
+
+/* No comment provided by engineer. */
+"An error occurred when this feed was last refreshed" = "De laatste keer dat deze feed is bijgewerkt, is er een fout opgetreden";
+
+/* Toolbar item name for the Appearance preference pane */
+"Appearance" = "Weergave";
+
+/* No comment provided by engineer. */
+"Articles" = "Artikelen";
+
+/* No comment provided by engineer. */
+"Ascending" = "Oplopend";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Auteur";
+
+/* Title of a button on an alert
+   Title of a popup menu item */
+"Cancel" = "Annuleer";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna probeerde de map \"%@\" te maken, maar er ging iets fout. Controleer de bevoegdheden van de bovenliggende mappen.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Vienna kan de databasemap niet aanmaken";
+
+/* No comment provided by engineer. */
 "Cannot create folder body" = "De map \"%@\" kan niet worden gecreëerd.";
 
-/* Added in 2.6.0 */
-"Article load completed" = "Artikel laden compleet";
-"Loading HTML article…" = "Laadt HTML artikel…";
-"Ascending" = "Oplopend";
-"Descending" = "Aflopend";
-"Use Current Style for Articles" = "Gebruik huidige stijl voor artikelen";
-"Use Web Page for Articles" = "Gebruik webpagina's voor artikelen";
+/* No comment provided by engineer. */
+"Cannot create folder title" = "Kan map niet creëren";
 
-/* Added for Open Reader support */
-"Force Refresh Selected Subscriptions From Open Reader" = "Forceer bijwerken abonnementen van Open Reader";
-"Update Subscriptions From Open Reader" = "Bijwerken abonnementen van Open Reader";
-"Delete Open Reader RSS feed text" = "Wis Open Reader RSS feed";
+/* No comment provided by engineer. */
+"Cannot open database text" = "Het database-bestand (%@) kon niet worden geopend. Het zou beschadigd of ontoegankelijk kunnen zijn. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Vienna kon de database niet openen";
+
+/* No comment provided by engineer. */
+"Cannot open export file message" = "Kan het exportbestand niet aanmaken";
+
+/* No comment provided by engineer. */
+"Cannot open export file message text" = "Het opgegeven exportbestand kon niet worden aangemaakt. Controleer of het bestand niet is beveiligd of geopend in een ander programma.";
+
+/* No comment provided by engineer. */
+"Cannot rename folder" = "Kan de mapnaam niet wijzigen";
+
+/* No comment provided by engineer. */
+"Clear" = "Wis zoekgeschiedenis";
+
+/* No comment provided by engineer. */
+"Click the Open button to open this file." = "Klik de Open knop om dit bestand te openen.";
+
+/* No comment provided by engineer. */
+"Click the Play button to play this enclosure in iTunes." = "Klik de Afspelen knop om deze bijlage in ITunes af te spelen.";
+
+/* No comment provided by engineer. */
+"Connecting to %@" = "Verbinden met %@";
+
+/* No comment provided by engineer. */
+"Copy Link to Clipboard" = "Kopieer koppeling naar klembord";
+
+/* No comment provided by engineer. */
+"Copy Page Link to Clipboard" = "Kopieer locatie naar klembord";
+
+/* Copy URL */
+"Copy URL" = "Kopieer URL";
+
+/* No comment provided by engineer. */
+"Credentials Prompt" = "Voor toegang tot het abonnement op \"%@\" heeft u een gebruikersnaam en wachtwoord nodig.";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Database bijwerken";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Datum";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Delete" = "Wis";
+
+/* Title of a menu item */
+"Delete Article" = "Wis artikel";
+
+/* No comment provided by engineer. */
 "Delete Open Reader RSS feed" = "Wis Open Reader RSS feed";
 
-/* Added in 3.0.0 */
-"Last 48 hours" = "Laatste 48 uur";
-"Unread or flagged" = "Ongelezen or gemarkeerd";
-"Syncing" = "Synchroniseren";
-"Reindex Database" = "Reindex Database";
-"Other" = "Andere";
-"Authenticating on Open Reader" = "Authenticating on Open Reader";
-"Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
-"Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
-"Fetching Open Reader Subscriptions…" = "Fetching Open Reader Subscriptions…";
-"Open Reader Authentication Failed" = "Open Reader Authentication Failed";
+/* No comment provided by engineer. */
+"Delete Open Reader RSS feed text" = "Wis Open Reader RSS feed";
+
+/* No comment provided by engineer. */
+"Delete RSS feed" = "Zeg abonnement op";
+
+/* No comment provided by engineer. */
+"Delete RSS feed text" = "Weet u zeker dat u het abonnement \"%@\" wilt opzeggen? Alle opgeslagen artikelen worden verwijderd.";
+
+/* No comment provided by engineer. */
+"Delete folder status" = "Groep \"%@\" verwijderen…";
+
+/* No comment provided by engineer. */
+"Delete group folder" = "Wis groep";
+
+/* No comment provided by engineer. */
+"Delete group folder text" = "Weet u zeker dat u de groep \"%@\" en alle subgroepen wilt verwijderen? U kunt dit niet ongedaan maken.";
+
+/* No comment provided by engineer. */
+"Delete multiple folders" = "Verwijder meerdere groepen";
+
+/* No comment provided by engineer. */
+"Delete multiple folders text" = "Weet u zeker dat u deze %d groepen wilt verwijderen? U kunt dit niet ongedaan maken.";
+
+/* No comment provided by engineer. */
+"Delete selected message" = "Weet u zeker dat u de geselecteerde berichten wilt verwijderen?";
+
+/* No comment provided by engineer. */
+"Delete selected message text" = "Deze actie kan niet ongedaan worden gemaakt.";
+
+/* No comment provided by engineer. */
+"Delete smart folder" = "Verwijder slimme map";
+
+/* No comment provided by engineer. */
+"Delete smart folder text" = "Weet u zeker dat u de slimme map \"%@\" wilt verwijderen? De originele artikelen worden niet verwijderd.";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Verwijderd";
+
+/* Title of a menu item */
+"Delete…" = "Wis…";
+
+/* No comment provided by engineer. */
+"Descending" = "Aflopend";
+
+/* No comment provided by engineer. */
+"Do you really want to import the subscriptions from the specified OPML file?" = "Wilt u echt abonnementen uit dit OPML bestand importeren?";
+
+/* No comment provided by engineer. */
+"Download" = "Download";
+
+/* Title of a menu item */
+"Download Enclosure" = "Download bijlage";
+
+/* Title of a menu item */
+"Download Enclosures" = "Download bijlages";
+
+/* Notification title */
+"Download completed" = "Download compleet";
+
+/* Notification title */
+"Download failed" = "Download niet gelukt";
+
+/* No comment provided by engineer. */
+"Downloads Running" = "Eén of meer downloads zijn nog bezig";
+
+/* No comment provided by engineer. */
+"Downloads Running text" = "Wilt u alle downloads annuleren en Vienna nu afsluiten?";
+
+/* Title of a menu item */
+"Edit…" = "Bewerk…";
+
+/* Title of a button on an alert */
+"Empty" = "Leeg";
+
+/* No comment provided by engineer. */
+"Empty Trash message" = "Weet u zeker dat u de artikelen in de prullenmand definitief wilt verwijderen?";
+
+/* No comment provided by engineer. */
+"Empty Trash message text" = "Dit kan niet ongedaan worden gemaakt";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "Bijlage URL";
+
+/* No comment provided by engineer. */
+"Enter the URL here" = "Typ de URL hier";
+
+/* No comment provided by engineer. */
+"Error" = "Fout";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions body" = "Kan het opgegeven bestand niet importeren. Het is geen geldig OPML-bestand.";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions title" = "Fout bij importeren";
+
+/* No comment provided by engineer. */
+"Error parsing XML data in feed" = "Fout tijdens het verwerken van de XML van deze feed";
+
+/* No comment provided by engineer. */
+"External Browser" = "Externe browser";
+
+/* No comment provided by engineer. */
+"Feed URL updated to %@" = "De URL van deze feed is veranderd in %@";
+
+/* Notification body */
+"File %@ downloaded" = "Bestand %@ gedownload";
+
+/* Notification body */
+"File %@ failed to download" = "Niet gelukt bestand %@ te downloaden";
+
+/* No comment provided by engineer. */
+"Flag" = "Markeer";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Gemarkeerd";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Map";
+
+/* No comment provided by engineer. */
+"Folder image retrieved from %@" = "Map-icoon opgehaald van %@";
+
+/* No comment provided by engineer. */
+"Folders" = "Mappen";
+
+/* Title of a menu item */
+"Force Refresh Selected Subscriptions From Open Reader" = "Forceer bijwerken abonnementen van Open Reader";
+
+/* Toolbar item name for the General preference pane */
+"General" = "Algemeen";
+
+/* Title of a menu item */
+"Get Info" = "Toon info";
+
+/* No comment provided by engineer. */
+"Go forward to the next page" = "Ga verder naar de volgende pagina";
+
+/* No comment provided by engineer. */
+"HTTP code %d reported from server" = "HTTP-code %d gemeld door de server";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Bijlage";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Koppen";
+
+/* No comment provided by engineer. */
+"Hide Filter Bar" = "Verberg filterbalk";
+
+/* Title of a menu item */
+"Hide Status Bar" = "Verberg statusbalk";
+
+/* Title of a menu item */
+"Hide Toolbar" = "Verberg knoppenbalk";
+
+/* Title of a button on an alert */
+"Import" = "Importeer";
+
+/* No comment provided by engineer. */
+"Import subscriptions from OPML file?" = "Importeer abonnementen uit OPML bestand?";
+
+/* No comment provided by engineer. */
+"Invalid style body" = "De standaardstijl zal worden gebruikt.";
+
+/* No comment provided by engineer. */
+"Invalid style title" = "De stijl %@ lijkt te zijn beschadigd";
+
+/* No comment provided by engineer. */
+"JavaScript" = "JavaScript";
+
+/* No comment provided by engineer. */
+"Last Week" = "Vorige week";
+
+/* Data field name visible in menu/article list */
+"Link" = "Koppeling";
+
+/* No comment provided by engineer. */
+"Loading…" = "Laadt…";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Een nieuwe Vienna-database kan niet worden aagemaakt in \"%@\". De database staat waarschijnlijk op een andere computer in het netwerk, hetgeen door deze versie van Vienna niet wordt ondersteund. Kiest u een andere locatie op deze computer.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Kan de Vienna-database niet aanmaken";
+
+/* Title of a menu item */
+"Mark All Articles as Read" = "Markeer alles als gelezen";
+
+/* No comment provided by engineer. */
+"Mark All Read" = "Markeer alle berichten als gelezen";
+
+/* Title of a menu item */
+"Mark All Subscriptions as Read" = "Markeer alle abonnementen als gelezen";
+
+/* Title of a menu item */
+"Mark Flagged" = "Markeer";
+
+/* Title of a menu item */
+"Mark Read" = "Markeer als gelezen";
+
+/* No comment provided by engineer. */
+"Mark Unflagged" = "Hef markering op";
+
+/* Title of a menu item */
+"Mark Unread" = "Markeer als ongelezen";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Gemarkeerde artikelen";
+
+/* No comment provided by engineer. */
+"More Scripts…" = "Meer scripts…";
+
+/* No comment provided by engineer. */
+"Move Folders" = "Verplaats mappen";
+
+/* No comment provided by engineer. */
+"Never" = "Nooit";
+
+/* No comment provided by engineer. */
+"New Tab" = "Nieuwe tab";
+
+/* Notification title */
+"New articles retrieved" = "Nieuwe artikelen";
+
+/* No comment provided by engineer. */
+"New style body" = "De stijl \"%@\" is in uw stijlenmap geïnstalleerd en toegevoegd aan het menu Stijlen.";
+
+/* No comment provided by engineer. */
+"New style title" = "Vienna heeft een nieuwe stijl geïnstalleerd";
+
+/* Notification body */
+"New unread articles retrieved" = "%d nieuwe ongelezen artikelen opgehaald";
+
+/* No comment provided by engineer. */
+"No" = "Nee";
+
+/* No comment provided by engineer. */
+"No new articles available" = "Geen nieuwe artikelen beschikbaar";
+
+/* Title of a button on an alert */
+"OK" = "OK";
+
+/* Title of a popup menu item */
+"Open" = "Open";
+
+/* Title of a menu item */
+"Open Article Page" = "Ga naar artikelpagina";
+
+/* No comment provided by engineer. */
+"Open Article Page in %@" = "Open artikelpagina in %@";
+
+/* Title of a menu item */
+"Open Article Page in External Browser" = "Open artikelpagina in externe browser";
+
+/* No comment provided by engineer. */
+"Open Frame" = "Open frame";
+
+/* No comment provided by engineer. */
+"Open Image in %@" = "Open afbeelding in %@";
+
+/* No comment provided by engineer. */
+"Open Image in New Tab" = "Open afbeelding in nieuwe tab";
+
+/* No comment provided by engineer. */
+"Open Link in %@" = "Open koppeling in %@";
+
+/* No comment provided by engineer. */
+"Open Link in New Tab" = "Open koppeling in nieuwe tab";
+
+/* No comment provided by engineer. */
+"Open Page in %@" = "Open pagina in %@";
+
+/* No comment provided by engineer. */
 "Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
 
-/* Added in 3.0.1 */
-"Plugin installed" = "Plugin installed";
-"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.";
-"Error loading script '%@'" = "Error loading script '%@'";
-"AppleScript Error in '%@' script" = "AppleScript Error in '%@' script";
-"No thanks" = "No thanks";
-"Include anonymous system profile when checking for updates?" = "Include anonymous system profile when checking for updates?";
-"Include anonymous system profile when checking for updates text" = "This helps Vienna development by letting us know what versions of macOS are most popular amongst our users.";
-"Error: Feed not found!" = "Error: Feed not found!";
-"Loading" = "Loading";
-"Plugin could not be installed" = "Plugin could not be installed";
-"Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
-"Queue" = "Queue";
-"Forcing Refresh subscriptions…" = "Forcing Refresh subscriptions…";
-"Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
+/* No comment provided by engineer. */
+"Open Scripts Folder" = "Open scripts-map";
 
-/* Added in 3.0.2 */
-"Close" = "Close";
-"Locate…" = "Locate…";
-"Error retrieving RSS feed:"="Error retrieving RSS feed:";
-"Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
-"Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";
-"RSS Icon not found!" = "RSS Icon not found!";
+/* Title of a menu item */
+"Open Subscription Home Page" = "Ga naar startpagina van abonnement";
 
-/*Added in 3.0.5 */
-"Redirection attempt treated as temporary for safety concern" = "Redirection attempt treated as temporary for safety concern";
+/* No comment provided by engineer. */
+"Open Subscription Home Page in %@" = "Open homepage van abonnement in %@";
 
-/*Added in 3.0.7 */
-"No articles in feed" = "No articles in feed";
+/* Title of a menu item */
+"Open Subscription Home Page in External Browser" = "Open abonnement-pagina in externe browser";
 
-/*Added in 3.1.2 */
-"Filter folders" = "Search for folders";
+/* No comment provided by engineer. */
+"Other" = "Andere";
+
+/* No comment provided by engineer. */
+"Play" = "Afspelen";
+
+/* Title of the Preferences window */
+"Preferences" = "Voorkeuren";
+
+/* Title of a button on an alert */
+"Quit" = "Stop";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Quit Vienna" = "Stop Vienna";
+
+/* No comment provided by engineer. */
+"RSS Subscription Export Title" = "Exporteren voltooid";
+
+/* No comment provided by engineer. */
+"RSS Subscription Import Title" = "Importeren voltooid";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Gelezen";
+
+/* No comment provided by engineer. */
+"Recent Searches" = "Recente zoekacties";
+
+/* No comment provided by engineer. */
+"Recents" = "Recente onderdelen";
+
+/* Title of a menu item */
+"Refresh All Subscriptions" = "Werk alle abonnementen bij";
+
+/* Title of a menu item */
+"Refresh Selected Subscriptions" = "Werk geselecteerde abonnementen bij";
+
+/* No comment provided by engineer. */
+"Refresh completed" = "Bijwerken voltooid";
+
+/* No comment provided by engineer. */
+"Refresh the current page" = "Laad de huidige pagina opnieuw";
+
+/* No comment provided by engineer. */
+"Refreshing folder images…" = "Map-iconen bijwerken…";
+
+/* No comment provided by engineer. */
+"Refreshing subscriptions…" = "Abonnementen bijwerken…";
+
+/* Title of a popup menu item */
+"Remove From List" = "Verwijder uit de lijst";
+
+/* Title of a menu item */
+"Rename…" = "Wijzig naam…";
+
+/* Title of a menu item */
+"Restore Article" = "Herstel artikel";
+
+/* No comment provided by engineer. */
+"Resubscribe" = "Abonneer";
+
+/* No comment provided by engineer. */
+"Retrieving articles" = "Artikelen aan het bijwerken";
+
+/* No comment provided by engineer. */
+"Retrieving folder image" = "Map-icoon ophalen";
+
+/* No comment provided by engineer. */
+"Return to the previous page" = "Ga terug naar de vorige pagina";
+
+/* No comment provided by engineer. */
+"Search Results" = "Zoek resultaten";
+
+/* No comment provided by engineer. */
+"Search all articles or the current web page" = "Doorzoek alle artikelen of de huidige webpagina";
+
+/* Placeholder title of a search field */
+"Search current web page" = "Doorzoek huidige webpagina";
+
+/* No comment provided by engineer. */
+"Search in %@" = "Zoek in %@";
+
+/* No comment provided by engineer. */
+"Select…" = "Selecteer…";
+
+/* No comment provided by engineer. */
+"Send Link" = "Verzend koppeling";
+
+/* No comment provided by engineer. */
+"Send Links" = "Verzend koppelingen";
+
+/* No comment provided by engineer. */
+"Show Filter Bar" = "Toon filterbalk";
+
+/* Title of a menu item */
+"Show Main Window…" = "Toon hoofdvenster…";
+
+/* Title of a menu item */
+"Show Status Bar" = "Toon statusbalk";
+
+/* Title of a menu item */
+"Show Toolbar" = "Toon knoppenbalk";
+
+/* Title of a popup menu item */
+"Show in Finder" = "Toon in Finder";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Onderwerp";
+
+/* No comment provided by engineer. */
+"Subscribe to the feed for this page" = "Abonneer op de feed van deze pagina";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Samevatting";
+
+/* Toolbar item name for the Syncing preference pane */
+"Syncing" = "Synchroniseren";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Tekst";
+
+/* No comment provided by engineer. */
+"This article contains an enclosed file." = "Dit artikel bevat een bijlage.";
+
+/* No comment provided by engineer. */
+"Today" = "Vandaag";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Artikelen van vandaag";
+
+/* No comment provided by engineer. */
+"Trash" = "Prullenmand";
+
+/* No comment provided by engineer. */
+"Unread" = "Ongelezen";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Ongelezen artikelen";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "Het bestandsformaat van de database (%@) wordt door deze versie van Vienna niet ondersteund. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "Het bestandsformaat van de database is veranderd";
+
+/* No comment provided by engineer. */
+"Unsubscribe" = "Zeg abonnement op";
+
+/* Title of a button on an alert */
+"Upgrade Database" = "Bijwerken database";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file body" = "Vienna kan het bestand \"%@\" niet openen, omdat het is verplaatst sinds u het heeft gedownload.";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file title" = "Vienna kan het bestand niet openen.";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file body" = "Vienna kan het bestand \"%@\" niet tonen, omdat het is verplaatst sinds u het heeft gedownload.";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file title" = "Vienna kan het bestand niet tonen.";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna moet de database bijwerken naar de laatste versie. Dit kan enige tijd duren. Sorry voor het ongemak.";
+
+/* No comment provided by engineer. */
+"Yes" = "Ja";
+
+/* No comment provided by engineer. */
+"Yesterday" = "Gisteren";
+
+/* rule for association of multiple criteria */
+"all" = "alle";
+
+/* rule for association of multiple criteria */
+"any" = "een of meer";
+
+/* test for a string */
+"contains" = "bevat";
+
+/* test for a string */
+"does not contain" = "bevat niet";
+
+/* test for a value */
+"is" = "is";
+
+/* test for a date */
+"is after" = "ligt na";
+
+/* test for a date */
+"is before" = "ligt voor";
+
+/* test for a numeric value */
+"is greater than" = "is groter dan";
+
+/* test for a numeric value */
+"is greater than or equal to" = "is groter dan of gelijk aan";
+
+/* test for a numeric value */
+"is less than" = "is kleiner dan";
+
+/* test for a numeric value */
+"is less than or equal to" = "is kleiner dan of gelijk aan";
+
+/* test for a value */
+"is not" = "is niet";
+
+/* test for a date */
+"is on or after" = "ligt op of na";
+
+/* test for a date */
+"is on or before" = "ligt op of voor";
+

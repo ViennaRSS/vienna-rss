@@ -1,38 +1,6 @@
-/* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "2GQ-cu-fbh"; */
-"2GQ-cu-fbh.title" = "The higher the number, the quicker your subscriptions will be downloaded.";
-
 /* Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "GaX-8c-QaN"; */
 "GaX-8c-QaN.title" = "Hurrengo aukerak ez dira zertan aldatu behar Vienna-k egoki ibiltzeko. Laguntzan begiratu bakoitzaren informazioa jakiteko.";
-
-/* Class = "NSMenuItem"; title = "30"; ObjectID = "Mlu-22-guR"; Note = "Do not localize"; */
-"Mlu-22-guR.title" = "30";
-
-/* Class = "NSTextFieldCell"; title = "Concurrent downloads:"; ObjectID = "Ngw-hP-yW4"; */
-"Ngw-hP-yW4.title" = "Concurrent downloads:";
-
-/* Class = "NSTextFieldCell"; title = "However, high numbers also render your computer less responsive while refreshing feeds."; ObjectID = "S3T-cW-hys"; */
-"S3T-cW-hys.title" = "However, high numbers also render your computer less responsive while refreshing feeds.";
-
-/* Class = "NSMenuItem"; title = "2"; ObjectID = "bKP-m5-YPx"; Note = "Do not localize"; */
-"bKP-m5-YPx.title" = "2";
-
-/* Class = "NSMenuItem"; title = "15"; ObjectID = "dXW-1P-Mja"; Note = "Do not localize"; */
-"dXW-1P-Mja.title" = "15";
-
-/* Class = "NSButtonCell"; title = "Enable Plugins in the internal browser"; ObjectID = "fIz-4t-Ogg"; */
-"fIz-4t-Ogg.title" = "Enable Plugins in the internal browser";
 
 /* Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "guK-dE-f6n"; */
 "guK-dE-f6n.title" = "Aktibatu JavaScript barne nabegatzailean";
 
-/* Class = "NSMenuItem"; title = "1"; ObjectID = "koF-ku-VbZ"; Note = "Do not localize"; */
-"koF-ku-VbZ.title" = "1";
-
-/* Class = "NSMenuItem"; title = "10"; ObjectID = "p15-eO-dBa"; Note = "Do not localize"; */
-"p15-eO-dBa.title" = "10";
-
-/* Class = "NSMenuItem"; title = "50"; ObjectID = "q0t-6p-Xd6"; Note = "Do not localize"; */
-"q0t-6p-Xd6.title" = "50";
-
-/* Class = "NSMenuItem"; title = "5"; ObjectID = "yD7-hF-SbK"; Note = "Do not localize"; */
-"yD7-hF-SbK.title" = "5";

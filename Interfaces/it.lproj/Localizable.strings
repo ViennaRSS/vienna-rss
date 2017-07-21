@@ -1,458 +1,588 @@
-"Mark Read" = "Segnala Come Letto";
-"Mark Unread" = "Segnala Come Non Letto";
-"Mark Unflagged" = "Segnala Senza Contrassegno";
-"Articles" = "Articoli";
-"Folders" = "Cartelle";
-"Loading %@…" = "Carico %@…";
-"Completed" = "Completato";
-"Refresh RSS feeds" = "Aggiorna iscrizioni";
-"Refresh All Subscriptions" = "Aggiorna Tutte Le Iscrizioni";
-"Already subscribed title" = "Errore";
-"Already subscribed body" = "Sei già iscritto a questo feed";
-"RSS Subscription Import Title" = "Importazione Completata";
-"%d subscriptions successfully imported" = "%d iscrizioni importate correttamente";
-"RSS Subscription Export Title" = "Esportazione Completata";
-"%d subscriptions successfully exported" = "%d iscrizioni esportate correttamente";
-"New unread articles retrieved" = "%d nuovi articoli non letti ricevuti";
-"Growl refresh completed" = "Nuovi Articoli";
-"New articles retrieved" = "Nuovi Articoli";
-"(Untitled Feed)" = "(Feed Senza Titolo)";
-"Open Link in Browser" = "Apri Collegamento nel Browser";
-"Copy Link to Clipboard" = "Copia Collegamento sugli Appunti";
-"Refresh completed" = "Aggiornamento completato";
-"Retrieving articles" = "Ricevo articoli";
-"ClearButton" = "Cancella";
-"Read" = "Letto";
-"Flagged" = "Con Contrassegno";
-"Comments" = "Commenti";
-"Parent" = "Superiore";
-"Number" = "Numero";
-"Subject" = "Oggetto";
-"Folder" = "Cartella";
-"Date" = "Data";
-"Author" = "Autore";
-"Text" = "Testo";
-"Headlines" = "Intestazioni";
-"Link" = "Collegamento";
-"Deleted" = "Eliminato";
-"GUID" = "GUID";
-"No" = "No";
-"Yes" = "Si";
-"Version %@" = "Versione %@";
-"Refresh All" = "Aggiorna Tutto";
-"Subscribe" = "Iscriviti";
-"Smart Folder" = "Cartella Smart";
-"Flag" = "Contrassegno";
-"Next Unread" = "Prossimo Non Letto";
-"Noon" = "Mezzogiorno";
-"Midnight" = "Mezzanotte";
-"Today" = "Oggi";
-"Yesterday" = "Ieri";
-"Tomorrow" = "Domani";
-"%@ at %@" = "%@ %@";
-"Quit" = "Esci";
-"Refresh cancelled" = "Aggiornamento annullato";
-"Additional actions for the selected folder" = "Operazioni aggiuntive per la cartella selezionata";
-"Create a new subscription" = "Crea una nuova iscrizione";
-"Refresh all your subscriptions" = "Aggiorna tutte le tue iscrizioni";
-"New style title" = "Vienna ha installato un nuovo stile";
-"New style body" = "Lo stile '%@' è stato installato nella cartella Styles ed aggiunto al menu Stile.";
-"More Styles…" = "Altri Stili…";
-"Delete selected message" = "Sei sicuro di voler eliminare definitivamente gli articoli selezionati?";
-"Delete selected message text" = "Questa operazione non può essere annullata.";
-"Cancel" = "Annulla";
-"OK" = "OK";
-"From" = "Da";
-"To" = "A";
-"(No title)" = "(Nessun oggetto)";
-"Refreshing folder images…" = "Refreshing folder images…";
-"Refreshing subscriptions…" = "Aggiorno iscrizioni…";
-"Authenticating with user name '%@'" = "Autentico con il nome utente '%@'";
-"No new articles available" = "Nessun nuovo articolo disponibile";
-"%d new articles retrieved" = "%d nuovi articoli ricevuti";
-"HTTP code %d reported from server" = "codice HTTP %d riportato dal server";
-"Headers:\n" = "Intestazioni:\n";
-"Connection error (%d, %@):\n" = "Errore di collegamento (%d, %@):\n";
-"\tDescription: %@\n" = "\tDescrizione: %@\n";
-"\tSuggestion: %@\n" = "\tSuggerimento: %@\n";
-"\tCause: %@\n" = "\tCausa: %@\n";
-"Article feed will be compressed" = "Il feed articoli sarà compresso";
-"Redirecting to %@" = "Redirigo a %@";
-"Error: %@" = "Errore: %@";
-"Error" = "Errore";
-"Credentials Prompt" = "L'iscrizione a '%@' richiede un nome utente ed una password per l'accesso.";
-"%ld bytes received" = "%ld byte ricevuti";
-"Authentication failed for user '%@'" = "Autenticazione fallita per l'utente '%@'";
-"Error parsing XML data in feed" = "Errore di interpretazione dati XML nel feed";
-"Retrieving folder image" = "Ricevo immagine cartella";
-"Folder image retrieved from %@" = "Immagine cartella ricevuta per %@";
-"Contacting…" = "Contatto…";
-"Connect Running" = "C'è una collegamento in corso";
-"Connect Running text" = "Vuoi interrompere il collegamento ed uscire da Vienna ora?";
-"Delete group folder" = "Elimina gruppo di cartelle";
-"Delete group folder text" = "Sei sicuro di voler eliminare il gruppo di cartelle '%@' e tutte le sue sottocartelle? Questa operazione non può essere annullata.";
-"Delete smart folder" = "Elimina cartella smart";
-"Delete smart folder text" = "Sei sicuro di voler eliminare la cartella smart '%@'? Ciò non eliminerà gli articoli originali restituiti dalla ricerca.";
-"Delete RSS feed text" = "Sei sicuro di voler eliminare la tua iscrizione da '%@'? Questa operazione eliminerà tutti gli articoli in cache.";
-"Delete RSS feed" = "Elimina iscrizione";
-"Delete multiple folders text" = "Sei sicuro di voler eliminare tutte le %d cartelle selezionate? Questa operazione non può essere annullata.";
-"Delete multiple folders" = "Elimina cartelle multiple";
-"Delete folder status" = "Elimino cartella '%@'…";
-"An error has occurred" = "Si è verificato un errore.";
-"Your software is up to date" = "La tua versione di Vienna è aggiornata.";
-"Please try again later" = "Prego riprova più tardi.";
-"An update is now available" = "C'è un aggiornamento disponibile";
-"Update available text" = "La versione %@ di Vienna è disponibile da:\n\n%@\n\nVuoi scaricarla ora? Se scegli di non scaricarla ora, puoi scaricarla più tardi scegliendo di nuovo Controlla Aggiornamenti.";
-"any" = "qualsiasi delle condizioni";
-"all" = "tutte le condizioni";
-"Open Scripts Folder" = "Apri Cartella Script";
-"Cannot create database folder title" = "Spiacente, ma Vienna non è stata in grado di creare la cartella database";
-"Cannot create database folder text" = "Vienna stava cercando di creare la cartella '%@' ma si è verificato un errore. Controlla i permessi delle cartelle sul percorso indicato.";
-"Unrecognised database format title" = "Il formato del file del database è cambiato";
-"Unrecognised database format text" = "Il file esistente %@ non è supportato da questa versione di Vienna. Elimina o rinomina il file e riavvia  Vienna.";
-"Upgrade Title" = "Aggiornamento Database";
-"Upgrade Text" = "Il database esistente deve essere aggiornato in modo da poter funzionare con questa build di Vienna. In alternativa puoi decidere di iniziare con un nuovo database vuoto. In entrambi i casi, verrà creata una copia di backup del tuo database esistente in %@. Il database nuovo o aggiornato NON funzionerà con versioni precedenti di Vienna.\n\nNota: per questa build, si suggerisce di iniziare con un database nuovo per semplicità.\n";
-"New Database" = "Nuovo Database";
-"Upgrade" = "Aggiorna";
-"Exit" = "Esci";
-"Search in %@" = "Cerca in %@";
-"Marked Articles" = "Articoli Con Contrassegno";
-"Unread Articles" = "Articoli Non Letti";
-"Today's Articles" = "Articoli di Oggi";
-"Trash" = "Cestino";
-"Select…" = "Seleziona…";
-" (%d unread)" = " (%d non letti)";
-"is" = "è uguale a";
-"is not" = "non è uguale a";
-"is after" = "è precedente a";
-"is before" = "è successiva a";
-"is on or after" = "è uguale o precedente a";
-"is on or before" = "è uguale o successiva a";
-"contains" = "contiene";
-"does not contain" = "non contiene";
-"is less than" = "è minore di";
-"is greater than" = "è maggiore di";
-"is less than or equal to" = "è minore o uguale a";
-"is greater than or equal to" = "è maggiore o uguale a";
-"Cannot open export file message" = "Impossibile creare il file di output per l'esportazione";
-"Cannot open export file message text" = "Non è stato possibile creare il file di output per l'esportazione indicato. Controlla che non sia bloccato e che nessun altra applicazione lo stia utilizzando.";
-"Source" = "Sorgente";
-"Status" = "Stato";
-"Enter LiveJournal User name" = "Inserisci nome Utente LiveJournal";
-"Enter MSN Spaces User name" = "Inserisci nome Utente MSN Spaces";
-"Enter Blogspot User name" = "Inserisci nome Utente Blogspot";
-"Enter Xanga User name" = "Inserisci nome Utente Xanga";
-"Enter URL of RSS feed" = "Inserisci URL del feed RSS";
-"Cannot rename folder" = "Impossibile rinominare la cartella";
-"A folder with that name already exists" = "Una cartella con lo stesso nome esiste di già";
-"Recent Searches" = "Ricerche Recenti";
-"Recents" = "Recenti";
-"Clear" = "Cancella Ricerche Recenti";
-"Search web page" = "Cerca pagina web";
-"Loading…" = "Carico…";
-"Open Image in New Tab" = "Apri Immagine in Nuovo Pannello";
-"Open Link in New Tab" = "Apri Collegamento in Nuovo Pannello";
-"Open Link in %@" = "Apri Collegamento in %@";
-"Open Page in %@" = "Apri Pagina in %@";
-"Copy Page Link to Clipboard" = "Copia Collegamento Pagina negli Appunti";
-"%d unread articles" = "%d articoli non letti";
-"More Scripts…" = "Altri Script…";
-"Install Update" = "Installa Aggiornamento";
-"Do Not Install" = "Non Installare";
-"Replace smart folder title" = "Una cartella smart con nome %@ già esiste";
-"Replace smart folder text" = "Vuoi sostituire la cartella smart esistente con il criterio che hai qui definito?";
-"Replace" = "Sostituisci";
-"Never" = "Mai";
-"After a Day" = "After a Day";
-"After 2 Days" = "After 2 Days";
-"After a Week" = "After a Week";
-"After 2 Weeks" = "After 2 Weeks";
-"After a Month" = "After a Month";
-"Last Week" = "Settimana Scorsa";
-"2 Weeks Ago" = "2 Settimane Fa";
-"A month" = "Un mese";
-"Activity Window" = "Finestra Attività";
-"Error importing subscriptions body" = "Impossibile importare il file indicato. Il contenuto del file non è in formato XML OPML valido.";
-"Error importing subscriptions title" = "Errore di importazione";
-"Rename" = "Rinomina";
-"Mark All Read" = "Segnala tutti come Letti";
-"Move Folders" = "Sposta Cartelle";
-"Downloads" = "Download";
-"Invalid style title" = "Lo stile %@ sembra essere corrotto";
-"Invalid style body" = "Al suo posto verrà utilizzato lo stile Default.";
-"Downloads Running" = "Ci sono uno o più downloads in corso";
-"Downloads Running text" = "Vuoi interrompere tutti i download e chiudere Vienna ora?";
-"Mark All Subscriptions as Read" = "Segnala Tutte le Iscrizioni come Lette";
-"Preferences" = "Preferenze";
-"General" = "Generale";
-"Appearance" = "Aspetto";
-"Locate Title" = "Impossibile creare il database per Vienna";
-"Locate Text" = "Non è stato possibile creare un nuovo database per Vienna in '%@' poiché probabilmente la cartella si trova su una condivisione di rete remota e questa versione di Vienna non può gestire database remoti. Prego scegli una cartella alternativa che si trovi in locale sulla tua macchina.";
-"Empty Trash message" = "Sei sicuro di voler eliminare i messaggi nel Cestino in modo permanente?";
-"Empty Trash message text" = "Non puoi annullare questa operazione";
-"Cannot open database title" = "Spiacente ma Vienna non è stata in grado di aprire il database";
-"Cannot open database text" = "Non è stato possibile aprire il file del database (%@) per qualche ragione. Può essere corrotto o inaccessibile. Prego elimina o rinomina il file del database e riavvia Vienna.";
-"Vienna cannot open the file title" = "Vienna non è riuscita ad aprire il file.";
-"Vienna cannot open the file body" = "Vienna non è riuscita ad aprire il file \"%@\" perché è stato spostato dopo lo scaricamento.";
-"Vienna cannot show the file title" = "Vienna non è riuscita ad aprire il file.";
-"Vienna cannot show the file body" = "Vienna non è riuscita ad aprire il file \"%@\" perché è stato spostato dopo lo scaricamento.";
-"Empty" = "Vuota";
-"Open" = "Apri";
-"Show in Finder" = "Mostra nel Finder";
-"Remove From List" = "Elimina dall'elenco";
-"%.1f MB" = "%.1f MB";
-"%.1f KB" = "%.1f KB";
-"%.1f bytes" = "%.1f byte";
-"%.1f of %.1f MB" = "%.1f di %.1f MB";
-"%.1f of %.1f KB" = "%.1f di %.1f KB";
-"%.1f of %.1f bytes" = "%.1f di %.1f byte";
-"An error occurred when this feed was last refreshed" = "Si è verificato un errore nell'ultimo aggiornamento di questo feed";
-"Connecting to %@" = "Collegamento in corso a %@";
-"About Vienna" = "Informazioni su Vienna";
-"Acknowledgements" = "Riconoscimenti";
-"Article" = "Articolo";
-"Back" = "Indietro";
-"Bring All to Front" = "Porta tutto in primo piano";
-"Check Spelling" = "Controlla ortografia";
-"Check Spelling as You Type" = "Controlla ortografia mentre scrivo";
-"Check for Updates" = "Controlla Aggiornamenti";
-"Close All Tabs" = "Chiudi Tutti i Pannelli";
-"Close Tab" = "Chiudi Pannello";
-"Close Window" = "Chiudi Finestra";
-"Columns" = "Colonne";
-"Copy" = "Copia";
-"Cut" = "Taglia";
-"Delete" = "Elimina";
-"Delete Article" = "Elimina Articolo";
-"Delete…" = "Elimina…";
-"Edit" = "Composizione";
-"Edit…" = "Modifica…";
-"Empty Trash" = "Vuota Cestino";
-"Export Subscriptions…" = "Esporta Iscrizioni…";
-"File" = "Archivio";
-"Find" = "Cerca";
-"Find Next" = "Cerca successivo";
-"Find Previous" = "Cerca precedente";
-"Find…" = "Cerca…";
-"Forward" = "Avanti";
-"Help" = "Aiuto";
-"Hide Others" = "Nascondi Altre";
-"Hide Vienna" = "Nascondi Vienna";
-"Import Subscriptions…" = "Importa Iscrizioni…";
-"Jump to Selection" = "Vai fino alla selezione";
-"Main Window" = "Finestra Principale";
-"MainMenu" = "MainMenu";
-"Mark All Articles as Read" = "Segnala tutti gli articoli come letti";
-"Mark Flagged" = "Segnala con contrassegno";
-"Minimize" = "Contrai";
-"New Group Folder…" = "Nuovo Gruppo di Cartelle…";
-"New Smart Folder…" = "Nuova Cartella Smart…";
-"New Subscription…" = "Nuova Iscrizione…";
-"Next Tab" = "Pannello Successivo";
-"Open Article Page" = "Vai alla Pagina dell'Articolo";
-"Open Article Page in External Browser" = "Apri la Pagina dell'Articolo nel Browser Esterno";
-"Open Subscription Home Page" = "Vai alla Pagina Iniziale dell'Iscrizione";
-"Open Subscription Home Page in External Browser" = "Apri la Pagina Iniziale dell'Iscrizione nel Browser Esterno";
-"Page Setup…" = "Formato di stampa…";
-"Paste" = "Incolla";
-"Preferences…" = "Preferenze…";
-"Previous Tab" = "Pannello Precedente";
-"Print…" = "Stampa…";
-"Quit Vienna" = "Esci da Vienna";
-"Redo" = "Ripristina";
-"Refresh Selected Subscriptions" = "Aggiorna Iscrizioni Selezionate";
-"Reload Page" = "Ricarica Pagina";
-"Rename…" = "Rinomina…";
-"Restore Article" = "Ripristina Articolo";
-"Select All" = "Seleziona Tutto";
-"Services" = "Servizi";
-"Show All" = "Mostra Tutte";
-"Skip Folder" = "Ignora Cartella";
-"Sort By" = "Ordina per";
-"Spelling" = "Ortografia";
-"Spelling…" = "Ortografia…";
-"Stop Refreshing" = "Interrompi Aggiornamento";
-"Stop Reloading Page" = "Interrompi Caricamento Pagina";
-"Style" = "Stile";
-"Undo" = "Annulla";
-"Use Selection for Find" = "Usa selezione per cercare";
-"Validate Feed" = "Convalida Feed";
-"Vienna Help" = "Aiuto Vienna";
-"Vienna Web Site" = "Sito Web Vienna";
-"View" = "Vista";
-"Window" = "Finestra";
-"Zoom" = "Ridimensiona";
-"Export all subscriptions" = "Esporta tutte le iscrizioni";
-"Export selected subscriptions" = "Esporta le iscrizioni selezionate";
-"Preserve group folders in exported file" = "Mantieni i gruppi di cartelle nel file esportato";
-"Open Frame" = "Apri Riquadro";
-"Open Image in %@" = "Apri Immagine in %@";
-"Open Subscription Home Page in %@" = "Apri la Pagina Iniziale dell'Iscrizione in %@";
-"Open Article Page in %@" = "Apri la Pagina dell'Articolo in %@";
-"New Tab" = "Nuovo Pannello";
-"External Browser" = "Browser Esterno";
-
-/* Added in 2.1.0 */
-"Send Link" = "Invia Collegamento";
-"Send Links" = "Invia Collegamenti";
-"Increase Font Size" = "Ingrandisci testo";
-"Decrease Font Size" = "Rimpicciolisci testo";
-"Enter the URL here" = "Inserisci l'URL qui";
-"Refresh the current page" = "Ricarica la pagina attuale";
-"Return to the previous page" = "Torna alla pagina precedente";
-"Go forward to the next page" = "Vai alla prossima pagina";
-"Layout" = "Layout";
-"Reading Pane on Right" = "Pannello Lettura sulla Destra";
-"Reading Pane at Bottom" = "Pannello Lettura in Basso";
-"Filter By" = "Filtra Per";
-"Filter by:" = "Filtra per:";
-"All" = "Tutto";
-"All Articles" = "Tutti gli Articoli";
-"Unread" = "Non Letti";
-"Last Refresh" = "Ultimo Aggiornamento";
-"Feed URL updated to %@" = "URL del Feed aggiornata a %@";
-"Filter articles" = "Filtra articoli";
-"Feed has been removed by the server" = "Il feed è stato eliminato dal server";
-"Mark all articles read" = "Segnala tutti gli articoli come letti";
+/* No comment provided by engineer. */
 "%@ Info" = "%@ Info";
-"%u articles" = "%u articoli";
-"%u unread" = "%u non letti";
-"Keyboard Shortcuts" = "Abbreviazioni da Tastiera";
-"%@ (Filtered: %@)" = "%@ (Filtro: %@)";
-"Get Info…" = "Ottieni Info…";
-"Open Web Location…" = "Apri Posizione sul Web…";
-"Refresh Folder Images" = "Ricarica tutte le Icone dei Feed";
-"Report" = "Rapporto";
-"Condensed" = "Condensato";
-"Unified" = "Unificato";
-"Summary" = "Riassunto";
-"Blog With…" = "Blog Con…";
-"Blog with %@" = "Blog con %@";
-"Bigger Text" = "Testo Più Grande";
-"Smaller Text" = "Testo Più Piccolo";
 
-/* Added in 2.1.1 */
+/* No comment provided by engineer. */
+"%d new articles retrieved" = "%d nuovi articoli ricevuti";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully exported" = "%d iscrizioni esportate correttamente";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully imported" = "%d iscrizioni importate correttamente";
+
+/* No comment provided by engineer. */
+"%d unread articles" = "%d articoli non letti";
+
+/* No comment provided by engineer. */
+"%u articles" = "%u articoli";
+
+/* No comment provided by engineer. */
+"%u unread" = "%u non letti";
+
+/* No comment provided by engineer. */
+"(No title)" = "(Nessun oggetto)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(Feed Senza Titolo)";
+
+/* No comment provided by engineer. */
+"A folder with that name already exists" = "Una cartella con lo stesso nome esiste di già";
+
+/* Toolbar item name for the Advanced preference pane */
 "Advanced" = "Avanzate";
 
-/* Added in 2.2.0 */
-"Import subscriptions from OPML file?" = "Importa iscrizioni da file OPML?";
-"Do you really want to import the subscriptions from the specified OPML file?" = "Vuoi davvero importare le iscrizioni dal file OPML specificato?";
-"Import" = "Importa";
-"HasEnclosure" = "Enclosure";
-"Enclosure" = "URL enclosure";
-"Open New Tab" = "Apri Nuovo Pannello";
-"Subscribe to the feed for this page" = "Iscriviti al feed di questa pagina";
-"Open Vienna" = "Apri Vienna";
-"Download Enclosure" = "Scarica Enclosure";
-"Download Enclosures" = "Scarica Enclosure";
-"Local File" = "File Locale";
-"Hide Status Bar" = "Nascondi Barra di Stato";
-"Show Status Bar" = "Mostra Barra di Stato";
-"Customize Toolbar…" = "Personalizza Barra Strumenti…";
-"Search Articles" = "Cerca negli Articoli";
-"Progress" = "Progresso";
-"Delete all articles in the trash" = "Elimina tutti gli articoli nel cestino";
-"Unsubscribe" = "Disiscriviti dal Feed";
-"Resubscribe" = "Reiscriviti al Feed";
-"Download" = "Scarica";
-"This article contains an enclosed file." = "Questo articolo contiene un file allegato.";
-"Growl download completed" = "Scaricamento del File completato";
-"Growl download failed" = "Scaricamento del File fallito";
-"Download completed" = "Scaricamento completato";
-"File %@ downloaded" = "File %@ scaricato";
-"Download failed" = "Scaricamento fallito";
-"File %@ failed to download" = "Scaricamento File %@ fallito";
-"Play" = "Riproduci";
-"Click the Play button to play this enclosure in iTunes." = "Fai clic sul pulsante Play per riprodurre l'enclosure in iTunes.";
-"Click the Open button to open this file." = "Fai clic sul pulsante Apri per aprire il file.";
-"Filter displayed articles by matching text" = "Filtra gli articoli visualizzati per corrispondenza nel testo";
-"Close the filter bar" = "Chiudi la barra del filtro";
-"Search all articles" = "Cerca in tutti gli articoli";
-"Search Results" = "Cerca nei Risultati";
-"Hide Filter Bar" = "Nascondi Barra Filtro";
-"Show Filter Bar" = "Mostra Barra Filtro";
-"Email a link to the current article or website" = "Invia via e-mail un collegamento all'articolo o sito web selezionato";
-"Refresh" = "Aggiorna";
-"Action" = "Action";
-"Get Info" = "Ottieni Info";
-"See information about the selected subscription" = "Vedi informazioni sulle iscrizioni selezionate";
-"Display the list of available styles" = "Visualizza l'elenco degli stili disponibili";
+/* Already subscribed body */
+"Already subscribed body" = "Sei già iscritto a questo feed";
 
-/* Added in 2.3.0 */
-"Order By" = "Order By";
-"Manual" = "Manual";
-"Name" = "Name";
+/* Already subscribed title */
+"Already subscribed title" = "Errore";
 
-/*Added in 2.4*/
-"Show XML Source" = "Show XML Source";
-"Source of folder" = "Source of folder";
-"No feed source to display." = "No feed source to display.";
-"Search current web page" = "Search current web page";
-"Search all articles or the current web page" = "Search all articles or the current web page";
-"Database Upgrade" = "Database Upgrade";
-"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.";
-"Upgrade Database" = "Upgrade Database";
+/* No comment provided by engineer. */
+"An error occurred when this feed was last refreshed" = "Si è verificato un errore nell'ultimo aggiornamento di questo feed";
 
-/* Added in 2.5.0 */
-"Cannot create folder title" = "Cannot create folder";
+/* Toolbar item name for the Appearance preference pane */
+"Appearance" = "Aspetto";
+
+/* No comment provided by engineer. */
+"Articles" = "Articoli";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Autore";
+
+/* Title of a button on an alert
+   Title of a popup menu item */
+"Cancel" = "Annulla";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna stava cercando di creare la cartella '%@' ma si è verificato un errore. Controlla i permessi delle cartelle sul percorso indicato.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Spiacente, ma Vienna non è stata in grado di creare la cartella database";
+
+/* No comment provided by engineer. */
 "Cannot create folder body" = "The \"%@\" folder cannot be created.";
 
-/* Added in 2.6.0 */
-"Article load completed" = "Article load completed";
-"Loading HTML article…" = "Loading HTML article…";
-"Ascending" = "Ascending";
-"Descending" = "Descending";
-"Use Current Style for Articles" = "Use Current Style for Articles";
-"Use Web Page for Articles" = "Use Web Page for Articles";
+/* No comment provided by engineer. */
+"Cannot create folder title" = "Cannot create folder";
 
-/* Added for Open Reader support */
-"Force Refresh Selected Subscriptions From Open Reader" = "Force Refresh Selected Subscriptions From Open Reader";
-"Update Subscriptions From Open Reader" = "Update Subscriptions From Open Reader";
+/* No comment provided by engineer. */
+"Cannot open database text" = "Non è stato possibile aprire il file del database (%@) per qualche ragione. Può essere corrotto o inaccessibile. Prego elimina o rinomina il file del database e riavvia Vienna.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Spiacente ma Vienna non è stata in grado di aprire il database";
+
+/* No comment provided by engineer. */
+"Cannot open export file message" = "Impossibile creare il file di output per l'esportazione";
+
+/* No comment provided by engineer. */
+"Cannot open export file message text" = "Non è stato possibile creare il file di output per l'esportazione indicato. Controlla che non sia bloccato e che nessun altra applicazione lo stia utilizzando.";
+
+/* No comment provided by engineer. */
+"Cannot rename folder" = "Impossibile rinominare la cartella";
+
+/* No comment provided by engineer. */
+"Clear" = "Cancella Ricerche Recenti";
+
+/* No comment provided by engineer. */
+"Click the Open button to open this file." = "Fai clic sul pulsante Apri per aprire il file.";
+
+/* No comment provided by engineer. */
+"Click the Play button to play this enclosure in iTunes." = "Fai clic sul pulsante Play per riprodurre l'enclosure in iTunes.";
+
+/* No comment provided by engineer. */
+"Connecting to %@" = "Collegamento in corso a %@";
+
+/* No comment provided by engineer. */
+"Copy Link to Clipboard" = "Copia Collegamento sugli Appunti";
+
+/* No comment provided by engineer. */
+"Copy Page Link to Clipboard" = "Copia Collegamento Pagina negli Appunti";
+
+/* No comment provided by engineer. */
+"Credentials Prompt" = "L'iscrizione a '%@' richiede un nome utente ed una password per l'accesso.";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Aggiornamento Database";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Data";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Delete" = "Elimina";
+
+/* Title of a menu item */
+"Delete Article" = "Elimina Articolo";
+
+/* No comment provided by engineer. */
 "Delete Open Reader RSS feed text" = "Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.";
-"Delete Open Reader RSS feed" = "Delete Open Reader RSS feed";
 
-/* Added in 3.0.0 */
-"Last 48 hours" = "Last 48 hours";
-"Unread or flagged" = "Unread or flagged";
-"Syncing" = "Syncing";
-"Reindex Database" = "Reindex Database";
-"Other" = "Altro";
-"Authenticating on Open Reader" = "Authenticating on Open Reader";
-"Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
-"Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
-"Fetching Open Reader Subscriptions…" = "Fetching Open Reader Subscriptions…";
-"Open Reader Authentication Failed" = "Open Reader Authentication Failed";
+/* No comment provided by engineer. */
+"Delete RSS feed" = "Elimina iscrizione";
+
+/* No comment provided by engineer. */
+"Delete RSS feed text" = "Sei sicuro di voler eliminare la tua iscrizione da '%@'? Questa operazione eliminerà tutti gli articoli in cache.";
+
+/* No comment provided by engineer. */
+"Delete folder status" = "Elimino cartella '%@'…";
+
+/* No comment provided by engineer. */
+"Delete group folder" = "Elimina gruppo di cartelle";
+
+/* No comment provided by engineer. */
+"Delete group folder text" = "Sei sicuro di voler eliminare il gruppo di cartelle '%@' e tutte le sue sottocartelle? Questa operazione non può essere annullata.";
+
+/* No comment provided by engineer. */
+"Delete multiple folders" = "Elimina cartelle multiple";
+
+/* No comment provided by engineer. */
+"Delete multiple folders text" = "Sei sicuro di voler eliminare tutte le %d cartelle selezionate? Questa operazione non può essere annullata.";
+
+/* No comment provided by engineer. */
+"Delete selected message" = "Sei sicuro di voler eliminare definitivamente gli articoli selezionati?";
+
+/* No comment provided by engineer. */
+"Delete selected message text" = "Questa operazione non può essere annullata.";
+
+/* No comment provided by engineer. */
+"Delete smart folder" = "Elimina cartella smart";
+
+/* No comment provided by engineer. */
+"Delete smart folder text" = "Sei sicuro di voler eliminare la cartella smart '%@'? Ciò non eliminerà gli articoli originali restituiti dalla ricerca.";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Eliminato";
+
+/* Title of a menu item */
+"Delete…" = "Elimina…";
+
+/* No comment provided by engineer. */
+"Do you really want to import the subscriptions from the specified OPML file?" = "Vuoi davvero importare le iscrizioni dal file OPML specificato?";
+
+/* No comment provided by engineer. */
+"Download" = "Scarica";
+
+/* Title of a menu item */
+"Download Enclosure" = "Scarica Enclosure";
+
+/* Title of a menu item */
+"Download Enclosures" = "Scarica Enclosure";
+
+/* Notification title */
+"Download completed" = "Scaricamento completato";
+
+/* Notification title */
+"Download failed" = "Scaricamento fallito";
+
+/* No comment provided by engineer. */
+"Downloads Running" = "Ci sono uno o più downloads in corso";
+
+/* No comment provided by engineer. */
+"Downloads Running text" = "Vuoi interrompere tutti i download e chiudere Vienna ora?";
+
+/* Title of a menu item */
+"Edit…" = "Modifica…";
+
+/* Title of a button on an alert */
+"Empty" = "Vuota";
+
+/* No comment provided by engineer. */
+"Empty Trash message" = "Sei sicuro di voler eliminare i messaggi nel Cestino in modo permanente?";
+
+/* No comment provided by engineer. */
+"Empty Trash message text" = "Non puoi annullare questa operazione";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "URL enclosure";
+
+/* No comment provided by engineer. */
+"Enter the URL here" = "Inserisci l'URL qui";
+
+/* No comment provided by engineer. */
+"Error" = "Errore";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions body" = "Impossibile importare il file indicato. Il contenuto del file non è in formato XML OPML valido.";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions title" = "Errore di importazione";
+
+/* No comment provided by engineer. */
+"Error parsing XML data in feed" = "Errore di interpretazione dati XML nel feed";
+
+/* No comment provided by engineer. */
+"External Browser" = "Browser Esterno";
+
+/* No comment provided by engineer. */
+"Feed URL updated to %@" = "URL del Feed aggiornata a %@";
+
+/* Notification body */
+"File %@ downloaded" = "File %@ scaricato";
+
+/* Notification body */
+"File %@ failed to download" = "Scaricamento File %@ fallito";
+
+/* No comment provided by engineer. */
+"Flag" = "Contrassegno";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Con Contrassegno";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Cartella";
+
+/* No comment provided by engineer. */
+"Folder image retrieved from %@" = "Immagine cartella ricevuta per %@";
+
+/* No comment provided by engineer. */
+"Folders" = "Cartelle";
+
+/* Toolbar item name for the General preference pane */
+"General" = "Generale";
+
+/* Title of a menu item */
+"Get Info" = "Ottieni Info";
+
+/* No comment provided by engineer. */
+"Go forward to the next page" = "Vai alla prossima pagina";
+
+/* No comment provided by engineer. */
+"HTTP code %d reported from server" = "codice HTTP %d riportato dal server";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Enclosure";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Intestazioni";
+
+/* No comment provided by engineer. */
+"Hide Filter Bar" = "Nascondi Barra Filtro";
+
+/* Title of a menu item */
+"Hide Status Bar" = "Nascondi Barra di Stato";
+
+/* Title of a button on an alert */
+"Import" = "Importa";
+
+/* No comment provided by engineer. */
+"Import subscriptions from OPML file?" = "Importa iscrizioni da file OPML?";
+
+/* No comment provided by engineer. */
+"Invalid style body" = "Al suo posto verrà utilizzato lo stile Default.";
+
+/* No comment provided by engineer. */
+"Invalid style title" = "Lo stile %@ sembra essere corrotto";
+
+/* No comment provided by engineer. */
+"Last Week" = "Settimana Scorsa";
+
+/* Data field name visible in menu/article list */
+"Link" = "Collegamento";
+
+/* No comment provided by engineer. */
+"Loading…" = "Carico…";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Non è stato possibile creare un nuovo database per Vienna in '%@' poiché probabilmente la cartella si trova su una condivisione di rete remota e questa versione di Vienna non può gestire database remoti. Prego scegli una cartella alternativa che si trovi in locale sulla tua macchina.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Impossibile creare il database per Vienna";
+
+/* Title of a menu item */
+"Mark All Articles as Read" = "Segnala tutti gli articoli come letti";
+
+/* No comment provided by engineer. */
+"Mark All Read" = "Segnala tutti come Letti";
+
+/* Title of a menu item */
+"Mark All Subscriptions as Read" = "Segnala Tutte le Iscrizioni come Lette";
+
+/* Title of a menu item */
+"Mark Flagged" = "Segnala con contrassegno";
+
+/* Title of a menu item */
+"Mark Read" = "Segnala Come Letto";
+
+/* No comment provided by engineer. */
+"Mark Unflagged" = "Segnala Senza Contrassegno";
+
+/* Title of a menu item */
+"Mark Unread" = "Segnala Come Non Letto";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Articoli Con Contrassegno";
+
+/* No comment provided by engineer. */
+"More Scripts…" = "Altri Script…";
+
+/* No comment provided by engineer. */
+"Move Folders" = "Sposta Cartelle";
+
+/* No comment provided by engineer. */
+"Never" = "Mai";
+
+/* No comment provided by engineer. */
+"New Tab" = "Nuovo Pannello";
+
+/* Notification title */
+"New articles retrieved" = "Nuovi Articoli";
+
+/* No comment provided by engineer. */
+"New style body" = "Lo stile '%@' è stato installato nella cartella Styles ed aggiunto al menu Stile.";
+
+/* No comment provided by engineer. */
+"New style title" = "Vienna ha installato un nuovo stile";
+
+/* Notification body */
+"New unread articles retrieved" = "%d nuovi articoli non letti ricevuti";
+
+/* No comment provided by engineer. */
+"No" = "No";
+
+/* No comment provided by engineer. */
+"No new articles available" = "Nessun nuovo articolo disponibile";
+
+/* Title of a button on an alert */
+"OK" = "OK";
+
+/* Title of a popup menu item */
+"Open" = "Apri";
+
+/* Title of a menu item */
+"Open Article Page" = "Vai alla Pagina dell'Articolo";
+
+/* No comment provided by engineer. */
+"Open Article Page in %@" = "Apri la Pagina dell'Articolo in %@";
+
+/* Title of a menu item */
+"Open Article Page in External Browser" = "Apri la Pagina dell'Articolo nel Browser Esterno";
+
+/* No comment provided by engineer. */
+"Open Frame" = "Apri Riquadro";
+
+/* No comment provided by engineer. */
+"Open Image in %@" = "Apri Immagine in %@";
+
+/* No comment provided by engineer. */
+"Open Image in New Tab" = "Apri Immagine in Nuovo Pannello";
+
+/* No comment provided by engineer. */
+"Open Link in %@" = "Apri Collegamento in %@";
+
+/* No comment provided by engineer. */
+"Open Link in New Tab" = "Apri Collegamento in Nuovo Pannello";
+
+/* No comment provided by engineer. */
+"Open Page in %@" = "Apri Pagina in %@";
+
+/* No comment provided by engineer. */
 "Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
 
-/* Added in 3.0.1 */
-"Plugin installed" = "Plugin installed";
-"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.";
-"Error loading script '%@'" = "Error loading script '%@'";
-"AppleScript Error in '%@' script" = "AppleScript Error in '%@' script";
-"No thanks" = "No thanks";
-"Include anonymous system profile when checking for updates?" = "Include anonymous system profile when checking for updates?";
-"Include anonymous system profile when checking for updates text" = "This helps Vienna development by letting us know what versions of macOS are most popular amongst our users.";
-"Error: Feed not found!" = "Error: Feed not found!";
-"Loading" = "Loading";
-"Plugin could not be installed" = "Plugin could not be installed";
-"Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
-"Queue" = "Queue";
-"Forcing Refresh subscriptions…" = "Forcing Refresh subscriptions…";
-"Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
+/* No comment provided by engineer. */
+"Open Scripts Folder" = "Apri Cartella Script";
 
-/* Added in 3.0.2 */
-"Close" = "Close";
-"Locate…" = "Locate…";
-"Error retrieving RSS feed:"="Error retrieving RSS feed:";
-"Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
-"Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";
-"RSS Icon not found!" = "RSS Icon not found!";
+/* Title of a menu item */
+"Open Subscription Home Page" = "Vai alla Pagina Iniziale dell'Iscrizione";
 
-/*Added in 3.0.5 */
-"Redirection attempt treated as temporary for safety concern" = "Redirection attempt treated as temporary for safety concern";
+/* No comment provided by engineer. */
+"Open Subscription Home Page in %@" = "Apri la Pagina Iniziale dell'Iscrizione in %@";
 
-/*Added in 3.0.7 */
-"No articles in feed" = "No articles in feed";
+/* Title of a menu item */
+"Open Subscription Home Page in External Browser" = "Apri la Pagina Iniziale dell'Iscrizione nel Browser Esterno";
 
-/*Added in 3.1.2 */
-"Filter folders" = "Search for folders";
+/* No comment provided by engineer. */
+"Other" = "Altro";
+
+/* No comment provided by engineer. */
+"Play" = "Riproduci";
+
+/* Title of the Preferences window */
+"Preferences" = "Preferenze";
+
+/* Title of a button on an alert */
+"Quit" = "Esci";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Quit Vienna" = "Esci da Vienna";
+
+/* No comment provided by engineer. */
+"RSS Subscription Export Title" = "Esportazione Completata";
+
+/* No comment provided by engineer. */
+"RSS Subscription Import Title" = "Importazione Completata";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Letto";
+
+/* No comment provided by engineer. */
+"Recent Searches" = "Ricerche Recenti";
+
+/* No comment provided by engineer. */
+"Recents" = "Recenti";
+
+/* Title of a menu item */
+"Refresh All Subscriptions" = "Aggiorna Tutte Le Iscrizioni";
+
+/* Title of a menu item */
+"Refresh Selected Subscriptions" = "Aggiorna Iscrizioni Selezionate";
+
+/* No comment provided by engineer. */
+"Refresh completed" = "Aggiornamento completato";
+
+/* No comment provided by engineer. */
+"Refresh the current page" = "Ricarica la pagina attuale";
+
+/* No comment provided by engineer. */
+"Refreshing subscriptions…" = "Aggiorno iscrizioni…";
+
+/* Title of a popup menu item */
+"Remove From List" = "Elimina dall'elenco";
+
+/* Title of a menu item */
+"Rename…" = "Rinomina…";
+
+/* Title of a menu item */
+"Restore Article" = "Ripristina Articolo";
+
+/* No comment provided by engineer. */
+"Resubscribe" = "Reiscriviti al Feed";
+
+/* No comment provided by engineer. */
+"Retrieving articles" = "Ricevo articoli";
+
+/* No comment provided by engineer. */
+"Retrieving folder image" = "Ricevo immagine cartella";
+
+/* No comment provided by engineer. */
+"Return to the previous page" = "Torna alla pagina precedente";
+
+/* No comment provided by engineer. */
+"Search Results" = "Cerca nei Risultati";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Cerca in tutti gli articoli";
+
+/* No comment provided by engineer. */
+"Search in %@" = "Cerca in %@";
+
+/* No comment provided by engineer. */
+"Select…" = "Seleziona…";
+
+/* No comment provided by engineer. */
+"Send Link" = "Invia Collegamento";
+
+/* No comment provided by engineer. */
+"Send Links" = "Invia Collegamenti";
+
+/* No comment provided by engineer. */
+"Show Filter Bar" = "Mostra Barra Filtro";
+
+/* Title of a menu item */
+"Show Status Bar" = "Mostra Barra di Stato";
+
+/* Title of a menu item */
+"Show Toolbar" = "Mostra la barra strumenti";
+
+/* Title of a popup menu item */
+"Show in Finder" = "Mostra nel Finder";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Oggetto";
+
+/* No comment provided by engineer. */
+"Subscribe to the feed for this page" = "Iscriviti al feed di questa pagina";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Riassunto";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Testo";
+
+/* No comment provided by engineer. */
+"This article contains an enclosed file." = "Questo articolo contiene un file allegato.";
+
+/* No comment provided by engineer. */
+"Today" = "Oggi";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Articoli di Oggi";
+
+/* No comment provided by engineer. */
+"Trash" = "Cestino";
+
+/* No comment provided by engineer. */
+"Unread" = "Non Letti";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Articoli Non Letti";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "Il file esistente %@ non è supportato da questa versione di Vienna. Elimina o rinomina il file e riavvia  Vienna.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "Il formato del file del database è cambiato";
+
+/* No comment provided by engineer. */
+"Unsubscribe" = "Disiscriviti dal Feed";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file body" = "Vienna non è riuscita ad aprire il file \"%@\" perché è stato spostato dopo lo scaricamento.";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file title" = "Vienna non è riuscita ad aprire il file.";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file body" = "Vienna non è riuscita ad aprire il file \"%@\" perché è stato spostato dopo lo scaricamento.";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file title" = "Vienna non è riuscita ad aprire il file.";
+
+/* No comment provided by engineer. */
+"Yes" = "Si";
+
+/* No comment provided by engineer. */
+"Yesterday" = "Ieri";
+
+/* rule for association of multiple criteria */
+"all" = "tutte le condizioni";
+
+/* rule for association of multiple criteria */
+"any" = "qualsiasi delle condizioni";
+
+/* test for a string */
+"contains" = "contiene";
+
+/* test for a string */
+"does not contain" = "non contiene";
+
+/* test for a value */
+"is" = "è uguale a";
+
+/* test for a date */
+"is after" = "è precedente a";
+
+/* test for a date */
+"is before" = "è successiva a";
+
+/* test for a numeric value */
+"is greater than" = "è maggiore di";
+
+/* test for a numeric value */
+"is greater than or equal to" = "è maggiore o uguale a";
+
+/* test for a numeric value */
+"is less than" = "è minore di";
+
+/* test for a numeric value */
+"is less than or equal to" = "è minore o uguale a";
+
+/* test for a value */
+"is not" = "non è uguale a";
+
+/* test for a date */
+"is on or after" = "è uguale o precedente a";
+
+/* test for a date */
+"is on or before" = "è uguale o successiva a";
+

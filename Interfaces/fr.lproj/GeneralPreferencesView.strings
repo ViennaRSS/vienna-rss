@@ -73,11 +73,9 @@
 /* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
 "qeb-at-hYb.title" = "Mises à jour logicielles :";
 
-/* Class = "NSButtonCell"; title = "Include anonymous system profile"; ObjectID = "qno-Cg-EkC"; */
-"qno-Cg-EkC.title" = "Inclure un profil anonyme du système";
-
 /* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "sCl-hz-PFF"; */
 "sCl-hz-PFF.title" = "Marquer l'article courant comme lu :";
 
 /* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "sSj-zI-6RY"; */
 "sSj-zI-6RY.title" = "Toutes les heures";
+

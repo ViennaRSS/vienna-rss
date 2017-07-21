@@ -19,9 +19,6 @@
 /* Class = "NSMenuItem"; title = "Other…"; ObjectID = "FiK-E7-RnG"; */
 "FiK-E7-RnG.title" = "Besteak…";
 
-/* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "GnT-xT-rAZ"; */
-"GnT-xT-rAZ.title" = "Check for newer versions of Vienna on start up";
-
 /* Class = "NSMenuItem"; title = "Manually"; ObjectID = "H9Q-du-oax"; */
 "H9Q-du-oax.title" = "Eskuz";
 
@@ -33,9 +30,6 @@
 
 /* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1"; */
 "JN6-lj-bQ1.title" = "Erakutsi menuan";
-
-/* Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0"; */
-"OID-qF-Pp0.title" = "Search for latest Beta versions";
 
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "YoM-Gv-hXn"; */
 "YoM-Gv-hXn.title" = "Ireki estekak kanpo nabegatzailean";
@@ -52,14 +46,8 @@
 /* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "gnX-dW-XUD"; */
 "gnX-dW-XUD.title" = "3 orduro";
 
-/* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "k6Y-ib-PGb"; */
-"k6Y-ib-PGb.title" = "Move articles to Trash:";
-
 /* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG"; */
 "kGA-Sa-RLG.title" = "Ireki estekak kanpo nabegatzailean";
-
-/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl"; */
-"meo-78-YOl.title" = "Mark updated articles as new";
 
 /* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "oVW-ee-uJT"; */
 "oVW-ee-uJT.title" = "5 minuturo Begiratu artikulu berririk daude:";
@@ -70,14 +58,6 @@
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "pjg-Ze-H3l"; */
 "pjg-Ze-H3l.title" = "Ireki esteka berriak atzekaldean";
 
-/* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
-"qeb-at-hYb.title" = "Updates:";
-
-/* Class = "NSButtonCell"; title = "Include anonymous system profile"; ObjectID = "qno-Cg-EkC"; */
-"qno-Cg-EkC.title" = "Include anonymous system profile";
-
-/* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "sCl-hz-PFF"; */
-"sCl-hz-PFF.title" = "Mark current article read:";
-
 /* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "sSj-zI-6RY"; */
 "sSj-zI-6RY.title" = "Orduro";
+

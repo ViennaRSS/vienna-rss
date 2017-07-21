@@ -35,4 +35,8 @@
 "i9j-KH-c3D.title" = "Generellt";
 
 /* Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG"; */
-"xPF-M9-oZG.title" = "Feed URL";
+"xPF-M9-oZG.title" = "Flöde-URL";
+
+/* Class = "NSButtonCell"; title = "Open Cached File…"; ObjectID = "xTj-hY-aTU"; */
+"xTj-hY-aTU.title" = "Öppna cachefilen…";
+

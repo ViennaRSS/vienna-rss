@@ -71,13 +71,11 @@
 "pjg-Ze-H3l.title" = "Öffne Links im Hintergrund";
 
 /* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
-"qeb-at-hYb.title" = "Updates:";
-
-/* Class = "NSButtonCell"; title = "Include anonymous system profile"; ObjectID = "qno-Cg-EkC"; */
-"qno-Cg-EkC.title" = "Anonymisierten Systembericht senden";
+"qeb-at-hYb.title" = "Aktualisierungen:";
 
 /* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "sCl-hz-PFF"; */
 "sCl-hz-PFF.title" = "Markiere aktuellen Artikel als gelesen:";
 
 /* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "sSj-zI-6RY"; */
 "sSj-zI-6RY.title" = "jede Stunde";
+

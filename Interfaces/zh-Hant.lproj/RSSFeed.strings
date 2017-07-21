@@ -25,5 +25,3 @@
 /* Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114"; */
 "114.title" = "編輯訂閱頻道";
 
-/* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
-"116.title" = "Subscribe in Open Reader";

@@ -1,0 +1,126 @@
+/* No comment provided by engineer. */
+"(No title)" = "(제목 없음)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(이름 없는 피드)";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "작성자";
+
+/* Title of a button on an alert */
+"Cancel" = "저장";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna 가 \"%@\" 폴더를 생성 중에 오류가 발생했습니다. 지정한 경로에 있는 폴더의 권한을 확인하십시오.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Vienna 가 데이터베이스 폴더를 생성할 수 없습니다.";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "해당 데이터베이스 파일 (%@) 항목은 손상되었거나 접근할 수 없습니다. 해당 파일을 삭제 또는 이름을 변경한 후 Vienna 를 재실행하십시오.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Vienna 가 데이터베이스 파일을 열 수 없습니다.";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "데이터베이스 업그레이드";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "날짜";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "삭제";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "깃발 표시";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "구독";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "헤드라인";
+
+/* Data field name visible in menu/article list */
+"Link" = "링크";
+
+/* No comment provided by engineer. */
+"Locate Text" = "새로운 Vienna 데이터베이스를 \"%@\" 위치에 생성할 수 없습니다. 아마도 해당 폴더가 원격 네트워크 공유에 위치해 있을 것이며, 현재 버전의 Vienna 로는 원격 데이트베이스를 관리할 수 없습니다. 로컬 머신에 위치한 다른 폴더를 선택해 재시도하시기 바랍니다.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Vienna 데이터베이스를 생성할 수 없습니다.";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "표시한 기사";
+
+/* Title of a button on an alert */
+"Quit Vienna" = "종료";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "읽음";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "헤드라인";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "요약";
+
+/* Data field name visible in smart folder definition */
+"Text" = "텍스트";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "오늘의 기사";
+
+/* No comment provided by engineer. */
+"Trash" = "휴지통";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "읽지 않은 기사";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "해당 데이터베이스 (%@) 파일 형식은 현재 버전의 Vienna 에서 지원하는 형식이 아닙니다. 해당 파일을 삭제 또는 이름을 변경한 후 Vienna 를 재실행하십시오.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "데이터베이스 파일 형식이 변경되었습니다.";
+
+/* rule for association of multiple criteria */
+"all" = "모든";
+
+/* rule for association of multiple criteria */
+"any" = "일부";
+
+/* test for a string */
+"contains" = "다음을 포함";
+
+/* test for a string */
+"does not contain" = "다음을 포함하지 않음";
+
+/* test for a value */
+"is" = "다음과 같음";
+
+/* test for a date */
+"is after" = "다음 이후에";
+
+/* test for a date */
+"is before" = "다음 이전에";
+
+/* test for a numeric value */
+"is greater than" = "다음보다 크게";
+
+/* test for a numeric value */
+"is greater than or equal to" = "다음과 같거나 크게";
+
+/* test for a numeric value */
+"is less than" = "다음보다 적게";
+
+/* test for a numeric value */
+"is less than or equal to" = "다음과 같거나 적게";
+
+/* test for a value */
+"is not" = "다음과 같지 않음";
+
+/* test for a date */
+"is on or after" = "다음과 같거나 이후에";
+
+/* test for a date */
+"is on or before" = "다음과 같거나 이전에";
+

@@ -30,12 +30,12 @@
 		<key>Hint</key>
 		<string>Indtast emailadressen og kodeord defineret i Settings/General sektionen af theoldreader.com</string>
 	</dict>
-	<key>Andet</key>
+	<key>Other</key>
 	<dict>
 		<key>Address</key>
 		<string></string>
 		<key>Hint</key>
-		<string>Indtast serverens adresse og dine oplysninger for den pågældende server</string>
+		<string>Indtast serverens adresse og dine loginoplysninger for denne server</string>
 	</dict>
 </dict>
 </plist>
