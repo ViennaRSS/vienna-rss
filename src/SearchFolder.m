@@ -211,14 +211,6 @@
 		[dateValueField addItemWithRepresentedObject:NSLocalizedString(@"Yesterday", nil) object:@"yesterday"];
 		[dateValueField addItemWithRepresentedObject:NSLocalizedString(@"Last Week", nil) object:@"last week"];
 
-		// Initialise the condition popup
-		NSString * anyString = NSLocalizedString([CriteriaTree conditionToString:MA_CritCondition_Any], nil);
-		NSString * allString = NSLocalizedString([CriteriaTree conditionToString:MA_CritCondition_All], nil);
-
-		[criteriaConditionPopup removeAllItems];
-		[criteriaConditionPopup addItemWithTag:anyString tag:MA_CritCondition_Any];
-		[criteriaConditionPopup addItemWithTag:allString tag:MA_CritCondition_All];
-
 		// Set the tags on the controls
 		[fieldNamePopup setTag:MA_SFEdit_FieldTag];
 		[operatorPopup setTag:MA_SFEdit_OperatorTag];
