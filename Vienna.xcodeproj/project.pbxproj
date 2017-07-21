@@ -266,6 +266,7 @@
 		F69964F71F13029600FC8493 /* OverlayStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69964F61F13029500FC8493 /* OverlayStatusBar.swift */; };
 		F69AE7951F2215D100342640 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F69AE7971F2215D100342640 /* Localizable.strings */; };
 		F69AE79A1F2215D600342640 /* Vienna-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F69AE79C1F2215D600342640 /* Vienna-InfoPlist.strings */; };
+		F69AE7A11F2216A400342640 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F69AE7A31F2216A400342640 /* InfoPlist.strings */; };
 		F6A4E8481F040D58001C9191 /* PluginToolbarItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4E8471F040D58001C9191 /* PluginToolbarItemButton.swift */; };
 		F6A7DE341E47138B0017BE5E /* advanced.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2A1E47138B0017BE5E /* advanced.html */; };
 		F6A7DE351E47138B0017BE5E /* faq.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2C1E47138B0017BE5E /* faq.html */; };
@@ -890,6 +891,11 @@
 		F69964F61F13029500FC8493 /* OverlayStatusBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OverlayStatusBar.swift; path = src/OverlayStatusBar.swift; sourceTree = "<group>"; };
 		F69AE7961F2215D100342640 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F69AE79B1F2215D600342640 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = "cs.lproj/Vienna-InfoPlist.strings"; sourceTree = "<group>"; };
+		F69AE79D1F2216A000342640 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/AdvancedPreferencesView.strings; sourceTree = "<group>"; };
+		F69AE79E1F2216A100342640 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = "da.lproj/Vienna-InfoPlist.strings"; sourceTree = "<group>"; };
+		F69AE7A21F2216A400342640 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F69AE7A41F2216A500342640 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F69AE7E91F2224F500342640 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = da; path = Interfaces/da.lproj/RSSSources.plist; sourceTree = "<group>"; };
 		F6A4E8471F040D58001C9191 /* PluginToolbarItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PluginToolbarItemButton.swift; path = src/PluginToolbarItemButton.swift; sourceTree = "<group>"; };
 		F6A7DDCA1E470E980017BE5E /* Vienna.help */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Vienna.help; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6A7DDCC1E470E980017BE5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1211,6 +1217,7 @@
 		035B703719E0E4AE00197334 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F69AE7A31F2216A400342640 /* InfoPlist.strings */,
 				F69AE7971F2215D100342640 /* Localizable.strings */,
 				035B703819E0E4AE00197334 /* Info.plist */,
 			);
@@ -1995,6 +2002,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F69AE7951F2215D100342640 /* Localizable.strings in Resources */,
+				F69AE7A11F2216A400342640 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2526,6 +2534,7 @@
 				F6B9937B1E283608005F9FAD /* uk */,
 				F6B9937C1E28360B005F9FAD /* zh-Hant */,
 				F6B9937D1E28360D005F9FAD /* zh-Hans */,
+				F69AE79D1F2216A000342640 /* da */,
 			);
 			name = AdvancedPreferencesView.xib;
 			path = Interfaces;
@@ -2713,6 +2722,7 @@
 			children = (
 				F62580E61E286CEC0035E43C /* Base */,
 				F62580FB1E286D490035E43C /* cs */,
+				F69AE7E91F2224F500342640 /* da */,
 				F62580FD1E286D670035E43C /* de */,
 				F62580FE1E286D690035E43C /* es */,
 				F62580FF1E286D6A0035E43C /* eu */,
@@ -2819,6 +2829,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F69AE7961F2215D100342640 /* cs */,
+				F69AE7A41F2216A500342640 /* da */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2827,9 +2838,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				F69AE79B1F2215D600342640 /* cs */,
+				F69AE79E1F2216A100342640 /* da */,
 			);
 			name = "Vienna-InfoPlist.strings";
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		F69AE7A31F2216A400342640 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F69AE7A21F2216A400342640 /* da */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		F6A7DE2A1E47138B0017BE5E /* advanced.html */ = {

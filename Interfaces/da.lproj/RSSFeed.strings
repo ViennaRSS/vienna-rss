@@ -14,7 +14,7 @@
 "107.title" = "Indtast henvisningen for nyhedsfeedet forneden. Eller vælg fra kildelisten for at indtaste et genvejsnavn for nyhedsfeedet udgivet af kilden.";
 
 /* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
-"110.title" = "URL:";
+"110.title" = "Henvisning:";
 
 /* Class = "NSButtonCell"; title = "Save"; ObjectID = "111"; */
 "111.title" = "Gem";
@@ -27,3 +27,4 @@
 
 /* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
 "116.title" = "Abonner i Open Reader";
+
