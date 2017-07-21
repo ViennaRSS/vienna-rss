@@ -1,458 +1,597 @@
-"Mark Read" = "標示為已閱讀";
-"Mark Unread" = "標示為未閱讀";
-"Mark Unflagged" = "標示為未加上旗標";
-"Articles" = "文章";
-"Folders" = "檔案夾";
-"Loading %@…" = "正在載入“%@”⋯";
-"Completed" = "完成";
-"Refresh RSS feeds" = "重新整理 RSS 訂閱頻道";
-"Refresh All Subscriptions" = "重新整理所有訂閱頻道";
-"Already subscribed title" = "錯誤";
-"Already subscribed body" = "您已經訂閱了該頻道";
-"RSS Subscription Import Title" = "匯入已完成";
-"%d subscriptions successfully imported" = "已順利匯入 %d 個訂閱頻道";
-"RSS Subscription Export Title" = "匯出已完成";
-"%d subscriptions successfully exported" = "已順利匯出 %d 個訂閱頻道";
-"New unread articles retrieved" = "已順利取得 %d 則未閱讀的新文章";
-"Growl refresh completed" = "已取得新文章";
-"New articles retrieved" = "已取得新文章";
-"(Untitled Feed)" = "(未命名訂閱頻道)";
-"Open Link in Browser" = "在瀏覽器中打開連結";
-"Copy Link to Clipboard" = "將連結拷貝到剪貼板";
-"Refresh completed" = "重新整理已完成";
-"Retrieving articles" = "正在取得文章";
-"ClearButton" = "清除";
-"Read" = "已閱讀";
-"Flagged" = "已加上旗標";
-"Comments" = "附註";
-"Parent" = "上層";
-"Number" = "數目";
-"Subject" = "標題";
-"Folder" = "檔案夾";
-"Date" = "日期";
-"Author" = "作者";
-"Text" = "內文";
-"Headlines" = "標題";
-"Link" = "連結";
-"Deleted" = "已刪除";
-"GUID" = "GUID";
-"No" = "否";
-"Yes" = "是";
-"Version %@" = "版本 %@";
-"Refresh All" = "全部重新整理";
-"Subscribe" = "訂閱";
-"Smart Folder" = "智慧型檔案夾";
-"Flag" = "旗標";
-"Next Unread" = "下一個未閱讀項目";
-"Noon" = "中午";
-"Midnight" = "午夜";
-"Today" = "今天";
-"Yesterday" = "昨天";
-"Tomorrow" = "明天";
-"%@ at %@" = "%@ 於 %@";
-"Quit" = "結束";
-"Refresh cancelled" = "已取消重新整理";
-"Additional actions for the selected folder" = "所選檔案夾的額外動作";
-"Create a new subscription" = "建立新的訂閱頻道";
-"Refresh all your subscriptions" = "重新整理所有的訂閱頻道";
-"New style title" = "Vienna 已安裝了新的樣式";
-"New style body" = "“%@”樣式已順利安裝到您的“樣式”檔案夾，並已加入“樣式”選單。";
-"More Styles…" = "更多樣式⋯";
-"Delete selected message" = "您是否確定要永久刪除所選文章？";
-"Delete selected message text" = "此項操作無法還原。";
-"Cancel" = "取消";
-"OK" = "好";
-"From" = "自";
-"To" = "至";
-"(No title)" = "(無主旨)";
-"Refreshing folder images…" = "重新整理檔案夾影像⋯";
-"Refreshing subscriptions…" = "正在更新訂閱頻道⋯";
-"Authenticating with user name '%@'" = "正在使用使用者名稱“%@”進行認證";
-"No new articles available" = "沒有新文章";
-"%d new articles retrieved" = "已取得 %d 則新文章";
-"HTTP code %d reported from server" = "伺服器回報 HTTP 碼 %d";
-"Headers:\n" = "標頭：\n";
-"Connection error (%d, %@):\n" = "連線錯誤 (%d, %@)：\n";
-"\tDescription: %@\n" = "\t描述：%@\n";
-"\tSuggestion: %@\n" = "\t建議：%@\n";
-"\tCause: %@\n" = "\t原因：%@\n";
-"Article feed will be compressed" = "將會壓縮文章 feed";
-"Redirecting to %@" = "重新導向至 %@";
-"Error: %@" = "錯誤：%@";
-"Error" = "錯誤";
-"Credentials Prompt" = "“%@”這個訂閱頻道需要您提供使用者名稱與密碼進行認證，才可加以存取。";
-"%ld bytes received" = "已收到 %ld bytes";
-"Authentication failed for user '%@'" = "使用者“%@”的認證失敗";
-"Error parsing XML data in feed" = "在剖析訂閱頻道的 XML 資料時發生錯誤";
-"Retrieving folder image" = "正在取得檔案夾影像";
-"Folder image retrieved from %@" = "已從 %@ 取得檔案夾影像";
-"Contacting…" = "連線中⋯";
-"Connect Running" = "正在進行連線";
-"Connect Running text" = "您是否確定要終止連線，並且立即結束 Vienna？";
-"Delete group folder" = "刪除群組檔案夾";
-"Delete group folder text" = "您是否確定要刪除“%@”這個群組檔案夾以及所屬檔案夾？這項操作無法還原。";
-"Delete smart folder" = "刪除智慧型檔案夾";
-"Delete smart folder text" = "您是否確定要刪除“%@”這個智慧型檔案夾？刪除智慧型檔案夾，並不會一併刪除符合搜尋條件的文章。";
-"Delete RSS feed text" = "您是否確定要取消訂閱“%@”？這項操作會刪除該訂閱頻道中所有已下載的文章。";
-"Delete RSS feed" = "刪除訂閱頻道";
-"Delete multiple folders text" = "您是否確定要刪除所選的 %d 個檔案夾？這項操作無法還原。";
-"Delete multiple folders" = "刪除多個檔案夾";
-"Delete folder status" = "正在刪除“%@”檔案夾⋯";
-"An error has occurred" = "發生錯誤。";
-"Your software is up to date" = "您的 Vienna 已是最新版本。";
-"Please try again later" = "請稍後再試一次。";
-"An update is now available" = "已有新版的 Vienna 可供下載";
-"Update available text" = "您可以從下列位置下載 Vienna (版本 %@)：\n\n%@\n\n您是否要立即更新？如果您選擇不要立即更新，可稍後再使用“檢查更新項目”的功能，來下載新版的 Vienna。";
-"any" = "任何";
-"all" = "全部";
-"Open Scripts Folder" = "打開工序指令檔案夾";
-"Cannot create database folder title" = "很抱歉，Vienna 無法建立資料庫檔案夾";
-"Cannot create database folder text" = "Vienna 嘗試建立“%@”檔案夾時發生錯誤。請檢查您所指定之路徑的檔案夾權限。";
-"Unrecognised database format title" = "資料庫檔案格式已變更";
-"Unrecognised database format text" = "此版本的 Vienna 並不支援資料庫 (%@) 的檔案格式。請刪除此檔案，或是將檔案重新命名後，再重新啟動 Vienna。";
-"Upgrade Title" = "資料庫升級";
-"Upgrade Text" = "您使用此版本的 Vienna 時，必須將您現有的資料庫進行升級。此外，您也可以選擇建立一個空白的新資料庫，以重新開始。無論如何，您現在的資料庫都會備份到 %@。而新的資料庫或是更新後的資料庫，都無法在舊版的 Vienna 上使用。\n\n附註：建議您在此版的 Vienna 中建立新的資料庫，較不會造成困擾。\n";
-"New Database" = "新資料庫";
-"Upgrade" = "升級";
-"Exit" = "退出";
-"Search in %@" = "在 %@ 中過濾";
-"Marked Articles" = "標記的文章";
-"Unread Articles" = "Unread Articles";
-"Today's Articles" = "今天的文章";
-"Trash" = "垃圾桶";
-"Select…" = "選取⋯";
-" (%d unread)" = " (%d 則未閱讀)";
-"is" = "等於";
-"is not" = "不等於";
-"is after" = "晚於";
-"is before" = "早於";
-"is on or after" = "等於或晚於";
-"is on or before" = "等於或早於";
-"contains" = "包含";
-"does not contain" = "不包含";
-"is less than" = "小於";
-"is greater than" = "大於";
-"is less than or equal to" = "小於或等於";
-"is greater than or equal to" = "大於或等於";
-"Cannot open export file message" = "無法建立匯出輸出檔";
-"Cannot open export file message text" = "無法建立您所指定的匯出輸出檔。請檢查此檔案是否已被鎖定，或是其他應用程式正在使用這個檔案。";
-"Source" = "來源";
-"Status" = "狀態";
-"Enter LiveJournal User name" = "請輸入 LiveJournal 使用者名稱";
-"Enter MSN Spaces User name" = "請輸入 MSN Spaces 使用者名稱";
-"Enter Blogspot User name" = "請輸入 Blogspot 使用者名稱";
-"Enter Xanga User name" = "請輸入 Xanga 使用者名稱";
-"Enter URL of RSS feed" = "請輸入新聞 feed 的 URL";
-"Cannot rename folder" = "無法將檔案夾重新命名";
-"A folder with that name already exists" = "系統中已有相同名稱的檔案夾";
-"Recent Searches" = "最近的搜尋記錄";
-"Recents" = "最近記錄";
-"Clear" = "清除最近的搜尋記錄";
-"Search web page" = "搜尋網頁";
-"Loading…" = "載入中⋯";
-"Open Image in New Tab" = "在新標籤頁中打開影像";
-"Open Link in New Tab" = "在新標籤頁中打開連結";
-"Open Link in %@" = "在 %@ 中打開連結";
-"Open Page in %@" = "在 %@ 中打開頁面";
-"Copy Page Link to Clipboard" = "將頁面連結拷貝到剪貼板";
-"%d unread articles" = "%d 則未閱讀的文章";
-"More Scripts…" = "更多工序指令⋯";
-"Install Update" = "安裝更新項目";
-"Do Not Install" = "不要安裝";
-"Replace smart folder title" = "系統中已有名稱為 %@ 的智慧型檔案夾";
-"Replace smart folder text" = "您是否確定要使用在此設定的搜尋條件，取代現有的智慧型檔案夾？";
-"Replace" = "取代";
-"Never" = "永不";
-"After a Day" = "1 天後";
-"After 2 Days" = "2 天後";
-"After a Week" = "1 週後";
-"After 2 Weeks" = "2 週後";
-"After a Month" = "1 個月後";
-"Last Week" = "上週";
-"2 Weeks Ago" = "2 週前";
-"A month" = "1 個月";
-"Activity Window" = "活動視窗";
-"Error importing subscriptions body" = "無法匯入您指定的檔案。這個檔案的內容並非為正確的 OPML XML 格式。";
-"Error importing subscriptions title" = "匯入發生錯誤";
-"Rename" = "重新命名";
-"Mark All Read" = "所有標示為已閱讀";
-"Move Folders" = "移動檔案夾";
-"Downloads" = "下載項目";
-"Invalid style title" = "%@ 樣式的檔案遺失或已損壞";
-"Invalid style body" = "將會改用預設的顯示樣式。";
-"Downloads Running" = "Vienna 目前正在下載一或多個項目";
-"Downloads Running text" = "您是否要停止下載所有項目，並立即結束 Vienna？";
-"Mark All Subscriptions as Read" = "將所有的訂閱頻道標示為已閱讀";
-"Preferences" = "偏好設定";
-"General" = "一般";
-"Appearance" = "外觀";
-"Locate Title" = "無法建立 Vienna 資料庫";
-"Locate Text" = "無法在“%@”建立新的 Vienna 資料庫，原因可能是這個檔案夾位在遠端網路分享空間中，而 Vienna 無法管理遠端的資料庫。請在您的本機電腦上，選擇其他的檔案夾。";
-"Empty Trash message" = "您是否確定要從垃圾桶檔案夾中，永久刪除這些訊息？";
-"Empty Trash message text" = "這個動作無法還原";
-"Cannot open database title" = "很抱歉，Vienna 無法打開此資料庫";
-"Cannot open database text" = "因為某些原因，無法打開資料庫檔案 (%@)。原因可能是載入中斷或無法使用檔案。請刪除資料庫檔案，或將資料庫檔案重新命名，然後重新啟動 Vienna 。";
-"Vienna cannot open the file title" = "Vienna 無法打開這個檔案。";
-"Vienna cannot open the file body" = "Vienna 無法打開“%@”這個檔案，原因是您完成下載後，已經把這個檔案搬移到其他地方。";
-"Vienna cannot show the file title" = "Vienna 無法顯示這個檔案。";
-"Vienna cannot show the file body" = "Vienna 無法顯示“%@”這個檔案，原因是在您完成下載後，已經把這個檔案搬移到了其他地方。";
-"Empty" = "清除";
-"Open" = "打開";
-"Show in Finder" = "顯示於 Finder";
-"Remove From List" = "從列表中移除";
-"%.1f MB" = "%.1f MB";
-"%.1f KB" = "%.1f KB";
-"%.1f bytes" = "%.1f bytes";
-"%.1f of %.1f MB" = "%.1f / %.1f MB";
-"%.1f of %.1f KB" = "%.1f / %.1f KB";
-"%.1f of %.1f bytes" = "%.1f / %.1f bytes";
-"An error occurred when this feed was last refreshed" = "最後一次更新此訂閱頻道時，發生錯誤";
-"Connecting to %@" = "連線到 %@";
-"About Vienna" = "關於 Vienna";
-"Acknowledgements" = "致謝聲明";
-"Article" = "文章";
-"Back" = "返回";
-"Bring All to Front" = "將此程式所有視窗移至最前";
-"Check Spelling" = "檢查拼字";
-"Check Spelling as You Type" = "在輸入時同步檢查拼字";
-"Check for Updates" = "檢查更新項目";
-"Close All Tabs" = "關閉所有標籤頁";
-"Close Tab" = "關閉標籤頁";
-"Close Window" = "關閉視窗";
-"Columns" = "直欄";
-"Copy" = "拷貝";
-"Cut" = "剪下";
-"Delete" = "刪除";
-"Delete Article" = "刪除文章";
-"Delete…" = "Delete…";
-"Edit" = "編輯";
-"Edit…" = "編輯⋯";
-"Empty Trash" = "清空垃圾桶";
-"Export Subscriptions…" = "輸出訂閱頻道⋯";
-"File" = "檔案";
-"Find" = "尋找";
-"Find Next" = "尋找下一個";
-"Find Previous" = "尋找前一個";
-"Find…" = "尋找⋯";
-"Forward" = "往前";
-"Help" = "輔助說明";
-"Hide Others" = "隱藏其他";
-"Hide Vienna" = "隱藏 Vienna";
-"Import Subscriptions…" = "輸入訂閱頻道⋯";
-"Jump to Selection" = "跳至所選範圍";
-"Main Window" = "主視窗";
-"MainMenu" = "MainMenu";
-"Mark All Articles as Read" = "將所有文章標示為已閱讀";
-"Mark Flagged" = "標示為已加上旗標";
-"Minimize" = "縮到最小";
-"New Group Folder…" = "新增群組檔案夾⋯";
-"New Smart Folder…" = "新增智慧型檔案夾⋯";
-"New Subscription…" = "新增訂閱頻道⋯";
-"Next Tab" = "下一個標籤頁";
-"Open Article Page" = "打開文章頁面";
-"Open Article Page in External Browser" = "在外部瀏覽器中打開文章頁面";
-"Open Subscription Home Page" = "打開訂閱頻道首頁";
-"Open Subscription Home Page in External Browser" = "在外部瀏覽器中打開訂閱頻道首頁";
-"Page Setup…" = "設定頁面⋯";
-"Paste" = "貼上";
-"Preferences…" = "偏好設定⋯";
-"Previous Tab" = "前一個標籤頁";
-"Print…" = "列印⋯";
-"Quit Vienna" = "結束 Vienna";
-"Redo" = "重作";
-"Refresh Selected Subscriptions" = "重新整理所選訂閱頻道";
-"Reload Page" = "重新載入頁面";
-"Rename…" = "重新命名⋯";
-"Restore Article" = "回復文章";
-"Select All" = "全選";
-"Services" = "服務";
-"Show All" = "顯示全部";
-"Skip Folder" = "略過檔案夾";
-"Sort By" = "排序方式";
-"Spelling" = "拼字檢查";
-"Spelling…" = "拼字檢查⋯";
-"Stop Refreshing" = "停止重新整理";
-"Stop Reloading Page" = "停止重新載入頁面";
-"Style" = "樣式";
-"Undo" = "還原";
-"Use Selection for Find" = "使用所選範圍尋找";
-"Validate Feed" = "驗證 Feed";
-"Vienna Help" = "Vienna 輔助說明";
-"Vienna Web Site" = "Vienna 官方網站";
-"View" = "顯示方式";
-"Window" = "視窗";
-"Zoom" = "縮放";
-"Export all subscriptions" = "輸出所有訂閱頻道";
-"Export selected subscriptions" = "輸出所選訂閱頻道";
-"Preserve group folders in exported file" = "在輸出檔案中保留群組檔案夾";
-"Open Frame" = "打開框架頁";
-"Open Image in %@" = "在 %@ 中打開影像";
-"Open Subscription Home Page in %@" = "在 %@ 中打開訂閱頻道首頁";
-"Open Article Page in %@" = "在 %@ 中打開文章頁面";
-"New Tab" = "New Tab";
-"External Browser" = "外部瀏覽器";
-
-/* Added in 2.1.0 */
-"Send Link" = "寄送連結";
-"Send Links" = "寄送連結";
-"Increase Font Size" = "放大字級";
-"Decrease Font Size" = "縮小字級";
-"Enter the URL here" = "在此輸入 URL";
-"Refresh the current page" = "重新整理目前頁面";
-"Return to the previous page" = "返回上一頁";
-"Go forward to the next page" = "前往下一頁";
-"Layout" = "版面配置";
-"Reading Pane on Right" = "讀取窗格位於右側";
-"Reading Pane at Bottom" = "讀取窗格位於底部";
-"Filter By" = "過濾依據";
-"Filter by:" = "過濾依據：";
-"All" = "全部";
-"All Articles" = "所有文章";
-"Unread" = "未閱讀";
-"Last Refresh" = "最近重新整理";
-"Feed URL updated to %@" = "Feed URL 已更新為 %@";
-"Filter articles" = "過濾文章";
-"Feed has been removed by the server" = "Feed 已被伺服器移除";
-"Mark all articles read" = "將所有文章標示為已閱讀";
+/* No comment provided by engineer. */
 "%@ Info" = "%@ 簡介";
-"%u articles" = "%u 則文章";
-"%u unread" = "%u 則未閱讀";
-"Keyboard Shortcuts" = "鍵盤快速鍵";
-"%@ (Filtered: %@)" = "%@ (過濾：%@)";
-"Get Info…" = "簡介⋯";
-"Open Web Location…" = "打開網頁網址⋯";
-"Refresh Folder Images" = "重新整理檔案夾影像";
-"Report" = "報告";
-"Condensed" = "精簡";
-"Unified" = "Unified";
-"Summary" = "摘要";
-"Blog With…" = "網誌工具⋯";
-"Blog with %@" = "以 %@ 張貼網誌";
-"Bigger Text" = "放大字級";
-"Smaller Text" = "縮小字級";
 
-/* Added in 2.1.1 */
+/* No comment provided by engineer. */
+"%d new articles retrieved" = "已取得 %d 則新文章";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully exported" = "已順利匯出 %d 個訂閱頻道";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully imported" = "已順利匯入 %d 個訂閱頻道";
+
+/* No comment provided by engineer. */
+"%d unread articles" = "%d 則未閱讀的文章";
+
+/* No comment provided by engineer. */
+"%u articles" = "%u 則文章";
+
+/* No comment provided by engineer. */
+"%u unread" = "%u 則未閱讀";
+
+/* No comment provided by engineer. */
+"(No title)" = "(無主旨)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(未命名訂閱頻道)";
+
+/* No comment provided by engineer. */
+"A folder with that name already exists" = "系統中已有相同名稱的檔案夾";
+
+/* Toolbar item name for the Advanced preference pane */
 "Advanced" = "進階";
 
-/* Added in 2.2.0 */
-"Import subscriptions from OPML file?" = "從 OPML 檔案輸入訂閱頻道？";
-"Do you really want to import the subscriptions from the specified OPML file?" = "您是否確定要從指定的 OPML 檔案輸入訂閱頻道？";
-"Import" = "輸入";
-"HasEnclosure" = "隨附項目";
-"Enclosure" = "隨附項目 URL";
-"Open New Tab" = "打開新標籤頁";
-"Subscribe to the feed for this page" = "訂閱此頁面的 feed";
-"Open Vienna" = "打開 Vienna";
-"Download Enclosure" = "下載隨附項目";
-"Download Enclosures" = "下載隨附項目";
-"Local File" = "本機檔案";
-"Hide Status Bar" = "隱藏狀態列";
-"Show Status Bar" = "顯示狀態列";
-"Customize Toolbar…" = "自定工具列⋯";
-"Search Articles" = "搜尋文章";
-"Progress" = "進度";
-"Delete all articles in the trash" = "刪除垃圾桶的所有文章";
-"Unsubscribe" = "取消訂閱 Feed";
-"Resubscribe" = "重新訂閱 Feed";
-"Download" = "下載";
-"This article contains an enclosed file." = "此文章隨附一個檔案。";
-"Growl download completed" = "順利下載檔案";
-"Growl download failed" = "下載檔案失敗";
-"Download completed" = "下載已完成";
-"File %@ downloaded" = "已下載檔案 %@ ";
-"Download failed" = "下載失敗";
-"File %@ failed to download" = "無法下載檔案 %@";
-"Play" = "播放";
-"Click the Play button to play this enclosure in iTunes." = "按一下“播放”按鈕可在 iTunes 中播放此隨附項目。";
-"Click the Open button to open this file." = "按一下“打開”按鈕可打開此檔案。";
-"Filter displayed articles by matching text" = "依符合的文字過濾顯示的文章";
-"Close the filter bar" = "關閉過濾列";
-"Search all articles" = "搜尋所有文章";
-"Search Results" = "搜尋結果";
-"Hide Filter Bar" = "隱藏過濾列";
-"Show Filter Bar" = "顯示過濾列";
-"Email a link to the current article or website" = "寄送目前文章或網站的連結";
-"Refresh" = "重新整理";
-"Action" = "動作";
-"Get Info" = "簡介";
-"See information about the selected subscription" = "查看所選訂閱頻道的相關資訊";
-"Display the list of available styles" = "顯示可用樣式的列表";
+/* No comment provided by engineer. */
+"After 2 Days" = "2 天後";
 
-/* Added in 2.3.0 */
-"Order By" = "Order By";
-"Manual" = "Manual";
-"Name" = "Name";
+/* No comment provided by engineer. */
+"After 2 Weeks" = "2 週後";
 
-/*Added in 2.4*/
-"Show XML Source" = "Show XML Source";
-"Source of folder" = "Source of folder";
-"No feed source to display." = "No feed source to display.";
-"Search current web page" = "Search current web page";
-"Search all articles or the current web page" = "Search all articles or the current web page";
-"Database Upgrade" = "Database Upgrade";
-"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.";
-"Upgrade Database" = "Upgrade Database";
+/* No comment provided by engineer. */
+"After a Day" = "1 天後";
 
-/* Added in 2.5.0 */
-"Cannot create folder title" = "Cannot create folder";
+/* No comment provided by engineer. */
+"After a Month" = "1 個月後";
+
+/* No comment provided by engineer. */
+"After a Week" = "1 週後";
+
+/* Already subscribed body */
+"Already subscribed body" = "您已經訂閱了該頻道";
+
+/* Already subscribed title */
+"Already subscribed title" = "錯誤";
+
+/* No comment provided by engineer. */
+"An error occurred when this feed was last refreshed" = "最後一次更新此訂閱頻道時，發生錯誤";
+
+/* Toolbar item name for the Appearance preference pane */
+"Appearance" = "外觀";
+
+/* No comment provided by engineer. */
+"Articles" = "文章";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "作者";
+
+/* Title of a button on an alert
+   Title of a popup menu item */
+"Cancel" = "取消";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna 嘗試建立“%@”檔案夾時發生錯誤。請檢查您所指定之路徑的檔案夾權限。";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "很抱歉，Vienna 無法建立資料庫檔案夾";
+
+/* No comment provided by engineer. */
 "Cannot create folder body" = "The \"%@\" folder cannot be created.";
 
-/* Added in 2.6.0 */
-"Article load completed" = "Article load completed";
-"Loading HTML article…" = "Loading HTML article…";
-"Ascending" = "Ascending";
-"Descending" = "Descending";
-"Use Current Style for Articles" = "Use Current Style for Articles";
-"Use Web Page for Articles" = "Use Web Page for Articles";
+/* No comment provided by engineer. */
+"Cannot create folder title" = "Cannot create folder";
 
-/* Added for Open Reader support */
-"Force Refresh Selected Subscriptions From Open Reader" = "Force Refresh Selected Subscriptions From Open Reader";
-"Update Subscriptions From Open Reader" = "Update Subscriptions From Open Reader";
+/* No comment provided by engineer. */
+"Cannot open database text" = "因為某些原因，無法打開資料庫檔案 (%@)。原因可能是載入中斷或無法使用檔案。請刪除資料庫檔案，或將資料庫檔案重新命名，然後重新啟動 Vienna 。";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "很抱歉，Vienna 無法打開此資料庫";
+
+/* No comment provided by engineer. */
+"Cannot open export file message" = "無法建立匯出輸出檔";
+
+/* No comment provided by engineer. */
+"Cannot open export file message text" = "無法建立您所指定的匯出輸出檔。請檢查此檔案是否已被鎖定，或是其他應用程式正在使用這個檔案。";
+
+/* No comment provided by engineer. */
+"Cannot rename folder" = "無法將檔案夾重新命名";
+
+/* No comment provided by engineer. */
+"Clear" = "清除最近的搜尋記錄";
+
+/* No comment provided by engineer. */
+"Click the Open button to open this file." = "按一下“打開”按鈕可打開此檔案。";
+
+/* No comment provided by engineer. */
+"Click the Play button to play this enclosure in iTunes." = "按一下“播放”按鈕可在 iTunes 中播放此隨附項目。";
+
+/* No comment provided by engineer. */
+"Connecting to %@" = "連線到 %@";
+
+/* No comment provided by engineer. */
+"Copy Link to Clipboard" = "將連結拷貝到剪貼板";
+
+/* No comment provided by engineer. */
+"Copy Page Link to Clipboard" = "將頁面連結拷貝到剪貼板";
+
+/* No comment provided by engineer. */
+"Credentials Prompt" = "“%@”這個訂閱頻道需要您提供使用者名稱與密碼進行認證，才可加以存取。";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "資料庫升級";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "日期";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Delete" = "刪除";
+
+/* Title of a menu item */
+"Delete Article" = "刪除文章";
+
+/* No comment provided by engineer. */
 "Delete Open Reader RSS feed text" = "Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.";
-"Delete Open Reader RSS feed" = "Delete Open Reader RSS feed";
 
-/* Added in 3.0.0 */
-"Last 48 hours" = "Last 48 hours";
-"Unread or flagged" = "Unread or flagged";
-"Syncing" = "Syncing";
-"Reindex Database" = "Reindex Database";
-"Other" = "其他";
-"Authenticating on Open Reader" = "Authenticating on Open Reader";
-"Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
-"Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
-"Fetching Open Reader Subscriptions…" = "Fetching Open Reader Subscriptions…";
-"Open Reader Authentication Failed" = "Open Reader Authentication Failed";
+/* No comment provided by engineer. */
+"Delete RSS feed" = "刪除訂閱頻道";
+
+/* No comment provided by engineer. */
+"Delete RSS feed text" = "您是否確定要取消訂閱“%@”？這項操作會刪除該訂閱頻道中所有已下載的文章。";
+
+/* No comment provided by engineer. */
+"Delete folder status" = "正在刪除“%@”檔案夾⋯";
+
+/* No comment provided by engineer. */
+"Delete group folder" = "刪除群組檔案夾";
+
+/* No comment provided by engineer. */
+"Delete group folder text" = "您是否確定要刪除“%@”這個群組檔案夾以及所屬檔案夾？這項操作無法還原。";
+
+/* No comment provided by engineer. */
+"Delete multiple folders" = "刪除多個檔案夾";
+
+/* No comment provided by engineer. */
+"Delete multiple folders text" = "您是否確定要刪除所選的 %d 個檔案夾？這項操作無法還原。";
+
+/* No comment provided by engineer. */
+"Delete selected message" = "您是否確定要永久刪除所選文章？";
+
+/* No comment provided by engineer. */
+"Delete selected message text" = "此項操作無法還原。";
+
+/* No comment provided by engineer. */
+"Delete smart folder" = "刪除智慧型檔案夾";
+
+/* No comment provided by engineer. */
+"Delete smart folder text" = "您是否確定要刪除“%@”這個智慧型檔案夾？刪除智慧型檔案夾，並不會一併刪除符合搜尋條件的文章。";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "已刪除";
+
+/* No comment provided by engineer. */
+"Do you really want to import the subscriptions from the specified OPML file?" = "您是否確定要從指定的 OPML 檔案輸入訂閱頻道？";
+
+/* No comment provided by engineer. */
+"Download" = "下載";
+
+/* Title of a menu item */
+"Download Enclosure" = "下載隨附項目";
+
+/* Title of a menu item */
+"Download Enclosures" = "下載隨附項目";
+
+/* Notification title */
+"Download completed" = "下載已完成";
+
+/* Notification title */
+"Download failed" = "下載失敗";
+
+/* No comment provided by engineer. */
+"Downloads Running" = "Vienna 目前正在下載一或多個項目";
+
+/* No comment provided by engineer. */
+"Downloads Running text" = "您是否要停止下載所有項目，並立即結束 Vienna？";
+
+/* Title of a menu item */
+"Edit…" = "編輯⋯";
+
+/* Title of a button on an alert */
+"Empty" = "清除";
+
+/* No comment provided by engineer. */
+"Empty Trash message" = "您是否確定要從垃圾桶檔案夾中，永久刪除這些訊息？";
+
+/* No comment provided by engineer. */
+"Empty Trash message text" = "這個動作無法還原";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "隨附項目 URL";
+
+/* No comment provided by engineer. */
+"Enter the URL here" = "在此輸入 URL";
+
+/* No comment provided by engineer. */
+"Error" = "錯誤";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions body" = "無法匯入您指定的檔案。這個檔案的內容並非為正確的 OPML XML 格式。";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions title" = "匯入發生錯誤";
+
+/* No comment provided by engineer. */
+"Error parsing XML data in feed" = "在剖析訂閱頻道的 XML 資料時發生錯誤";
+
+/* No comment provided by engineer. */
+"External Browser" = "外部瀏覽器";
+
+/* No comment provided by engineer. */
+"Feed URL updated to %@" = "Feed URL 已更新為 %@";
+
+/* Notification body */
+"File %@ downloaded" = "已下載檔案 %@";
+
+/* Notification body */
+"File %@ failed to download" = "無法下載檔案 %@";
+
+/* No comment provided by engineer. */
+"Flag" = "旗標";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "已加上旗標";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "檔案夾";
+
+/* No comment provided by engineer. */
+"Folder image retrieved from %@" = "已從 %@ 取得檔案夾影像";
+
+/* No comment provided by engineer. */
+"Folders" = "檔案夾";
+
+/* Toolbar item name for the General preference pane */
+"General" = "一般";
+
+/* Title of a menu item */
+"Get Info" = "簡介";
+
+/* No comment provided by engineer. */
+"Go forward to the next page" = "前往下一頁";
+
+/* No comment provided by engineer. */
+"HTTP code %d reported from server" = "伺服器回報 HTTP 碼 %d";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "隨附項目";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "標題";
+
+/* No comment provided by engineer. */
+"Hide Filter Bar" = "隱藏過濾列";
+
+/* Title of a menu item */
+"Hide Status Bar" = "隱藏狀態列";
+
+/* Title of a button on an alert */
+"Import" = "輸入";
+
+/* No comment provided by engineer. */
+"Import subscriptions from OPML file?" = "從 OPML 檔案輸入訂閱頻道？";
+
+/* No comment provided by engineer. */
+"Invalid style body" = "將會改用預設的顯示樣式。";
+
+/* No comment provided by engineer. */
+"Invalid style title" = "%@ 樣式的檔案遺失或已損壞";
+
+/* No comment provided by engineer. */
+"Last Week" = "上週";
+
+/* Data field name visible in menu/article list */
+"Link" = "連結";
+
+/* No comment provided by engineer. */
+"Loading…" = "載入中⋯";
+
+/* No comment provided by engineer. */
+"Locate Text" = "無法在“%@”建立新的 Vienna 資料庫，原因可能是這個檔案夾位在遠端網路分享空間中，而 Vienna 無法管理遠端的資料庫。請在您的本機電腦上，選擇其他的檔案夾。";
+
+/* No comment provided by engineer. */
+"Locate Title" = "無法建立 Vienna 資料庫";
+
+/* Title of a menu item */
+"Mark All Articles as Read" = "將所有文章標示為已閱讀";
+
+/* No comment provided by engineer. */
+"Mark All Read" = "所有標示為已閱讀";
+
+/* Title of a menu item */
+"Mark All Subscriptions as Read" = "將所有的訂閱頻道標示為已閱讀";
+
+/* Title of a menu item */
+"Mark Flagged" = "標示為已加上旗標";
+
+/* Title of a menu item */
+"Mark Read" = "標示為已閱讀";
+
+/* No comment provided by engineer. */
+"Mark Unflagged" = "標示為未加上旗標";
+
+/* Title of a menu item */
+"Mark Unread" = "標示為未閱讀";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "標記的文章";
+
+/* No comment provided by engineer. */
+"More Scripts…" = "更多工序指令⋯";
+
+/* No comment provided by engineer. */
+"Move Folders" = "移動檔案夾";
+
+/* No comment provided by engineer. */
+"Never" = "永不";
+
+/* No comment provided by engineer. */
+"New Tab" = "New Tab";
+
+/* Notification title */
+"New articles retrieved" = "已取得新文章";
+
+/* No comment provided by engineer. */
+"New style body" = "“%@”樣式已順利安裝到您的“樣式”檔案夾，並已加入“樣式”選單。";
+
+/* No comment provided by engineer. */
+"New style title" = "Vienna 已安裝了新的樣式";
+
+/* Notification body */
+"New unread articles retrieved" = "已順利取得 %d 則未閱讀的新文章";
+
+/* No comment provided by engineer. */
+"No" = "否";
+
+/* No comment provided by engineer. */
+"No new articles available" = "沒有新文章";
+
+/* Title of a button on an alert */
+"OK" = "好";
+
+/* Title of a popup menu item */
+"Open" = "打開";
+
+/* Title of a menu item */
+"Open Article Page" = "打開文章頁面";
+
+/* No comment provided by engineer. */
+"Open Article Page in %@" = "在 %@ 中打開文章頁面";
+
+/* Title of a menu item */
+"Open Article Page in External Browser" = "在外部瀏覽器中打開文章頁面";
+
+/* No comment provided by engineer. */
+"Open Frame" = "打開框架頁";
+
+/* No comment provided by engineer. */
+"Open Image in %@" = "在 %@ 中打開影像";
+
+/* No comment provided by engineer. */
+"Open Image in New Tab" = "在新標籤頁中打開影像";
+
+/* No comment provided by engineer. */
+"Open Link in %@" = "在 %@ 中打開連結";
+
+/* No comment provided by engineer. */
+"Open Link in New Tab" = "在新標籤頁中打開連結";
+
+/* No comment provided by engineer. */
+"Open Page in %@" = "在 %@ 中打開頁面";
+
+/* No comment provided by engineer. */
 "Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
 
-/* Added in 3.0.1 */
-"Plugin installed" = "Plugin installed";
-"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.";
-"Error loading script '%@'" = "Error loading script '%@'";
-"AppleScript Error in '%@' script" = "AppleScript Error in '%@' script";
-"No thanks" = "No thanks";
-"Include anonymous system profile when checking for updates?" = "Include anonymous system profile when checking for updates?";
-"Include anonymous system profile when checking for updates text" = "This helps Vienna development by letting us know what versions of macOS are most popular amongst our users.";
-"Error: Feed not found!" = "Error: Feed not found!";
-"Loading" = "Loading";
-"Plugin could not be installed" = "Plugin could not be installed";
-"Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
-"Queue" = "Queue";
-"Forcing Refresh subscriptions…" = "Forcing Refresh subscriptions…";
-"Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
+/* No comment provided by engineer. */
+"Open Scripts Folder" = "打開工序指令檔案夾";
 
-/* Added in 3.0.2 */
-"Close" = "Close";
-"Locate…" = "Locate…";
-"Error retrieving RSS feed:"="Error retrieving RSS feed:";
-"Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
-"Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";
-"RSS Icon not found!" = "RSS Icon not found!";
+/* Title of a menu item */
+"Open Subscription Home Page" = "打開訂閱頻道首頁";
 
-/*Added in 3.0.5 */
-"Redirection attempt treated as temporary for safety concern" = "Redirection attempt treated as temporary for safety concern";
+/* No comment provided by engineer. */
+"Open Subscription Home Page in %@" = "在 %@ 中打開訂閱頻道首頁";
 
-/*Added in 3.0.7 */
-"No articles in feed" = "No articles in feed";
+/* Title of a menu item */
+"Open Subscription Home Page in External Browser" = "在外部瀏覽器中打開訂閱頻道首頁";
 
-/*Added in 3.1.2 */
-"Filter folders" = "Search for folders";
+/* No comment provided by engineer. */
+"Other" = "其他";
+
+/* No comment provided by engineer. */
+"Play" = "播放";
+
+/* Title of the Preferences window */
+"Preferences" = "偏好設定";
+
+/* Title of a button on an alert */
+"Quit" = "結束";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Quit Vienna" = "結束 Vienna";
+
+/* No comment provided by engineer. */
+"RSS Subscription Export Title" = "匯出已完成";
+
+/* No comment provided by engineer. */
+"RSS Subscription Import Title" = "匯入已完成";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "已閱讀";
+
+/* No comment provided by engineer. */
+"Recent Searches" = "最近的搜尋記錄";
+
+/* No comment provided by engineer. */
+"Recents" = "最近記錄";
+
+/* Title of a menu item */
+"Refresh All Subscriptions" = "重新整理所有訂閱頻道";
+
+/* Title of a menu item */
+"Refresh Selected Subscriptions" = "重新整理所選訂閱頻道";
+
+/* No comment provided by engineer. */
+"Refresh completed" = "重新整理已完成";
+
+/* No comment provided by engineer. */
+"Refresh the current page" = "重新整理目前頁面";
+
+/* No comment provided by engineer. */
+"Refreshing folder images…" = "重新整理檔案夾影像⋯";
+
+/* No comment provided by engineer. */
+"Refreshing subscriptions…" = "正在更新訂閱頻道⋯";
+
+/* Title of a popup menu item */
+"Remove From List" = "從列表中移除";
+
+/* Title of a menu item */
+"Rename…" = "重新命名⋯";
+
+/* Title of a menu item */
+"Restore Article" = "回復文章";
+
+/* No comment provided by engineer. */
+"Resubscribe" = "重新訂閱 Feed";
+
+/* No comment provided by engineer. */
+"Retrieving articles" = "正在取得文章";
+
+/* No comment provided by engineer. */
+"Retrieving folder image" = "正在取得檔案夾影像";
+
+/* No comment provided by engineer. */
+"Return to the previous page" = "返回上一頁";
+
+/* No comment provided by engineer. */
+"Search Results" = "搜尋結果";
+
+/* Placeholder title of a search field */
+"Search all articles" = "搜尋所有文章";
+
+/* No comment provided by engineer. */
+"Search in %@" = "在 %@ 中過濾";
+
+/* No comment provided by engineer. */
+"Select…" = "選取⋯";
+
+/* No comment provided by engineer. */
+"Send Link" = "寄送連結";
+
+/* No comment provided by engineer. */
+"Send Links" = "寄送連結";
+
+/* No comment provided by engineer. */
+"Show Filter Bar" = "顯示過濾列";
+
+/* Title of a menu item */
+"Show Status Bar" = "顯示狀態列";
+
+/* Title of a popup menu item */
+"Show in Finder" = "顯示於 Finder";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "標題";
+
+/* No comment provided by engineer. */
+"Subscribe to the feed for this page" = "訂閱此頁面的 feed";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "摘要";
+
+/* Data field name visible in smart folder definition */
+"Text" = "內文";
+
+/* No comment provided by engineer. */
+"This article contains an enclosed file." = "此文章隨附一個檔案。";
+
+/* No comment provided by engineer. */
+"Today" = "今天";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "今天的文章";
+
+/* No comment provided by engineer. */
+"Trash" = "垃圾桶";
+
+/* No comment provided by engineer. */
+"Unread" = "未閱讀";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "此版本的 Vienna 並不支援資料庫 (%@) 的檔案格式。請刪除此檔案，或是將檔案重新命名後，再重新啟動 Vienna。";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "資料庫檔案格式已變更";
+
+/* No comment provided by engineer. */
+"Unsubscribe" = "取消訂閱 Feed";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file body" = "Vienna 無法打開“%@”這個檔案，原因是您完成下載後，已經把這個檔案搬移到其他地方。";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file title" = "Vienna 無法打開這個檔案。";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file body" = "Vienna 無法顯示“%@”這個檔案，原因是在您完成下載後，已經把這個檔案搬移到了其他地方。";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file title" = "Vienna 無法顯示這個檔案。";
+
+/* No comment provided by engineer. */
+"Yes" = "是";
+
+/* No comment provided by engineer. */
+"Yesterday" = "昨天";
+
+/* rule for association of multiple criteria */
+"all" = "全部";
+
+/* rule for association of multiple criteria */
+"any" = "任何";
+
+/* test for a string */
+"contains" = "包含";
+
+/* test for a string */
+"does not contain" = "不包含";
+
+/* test for a value */
+"is" = "等於";
+
+/* test for a date */
+"is after" = "晚於";
+
+/* test for a date */
+"is before" = "早於";
+
+/* test for a numeric value */
+"is greater than" = "大於";
+
+/* test for a numeric value */
+"is greater than or equal to" = "大於或等於";
+
+/* test for a numeric value */
+"is less than" = "小於";
+
+/* test for a numeric value */
+"is less than or equal to" = "小於或等於";
+
+/* test for a value */
+"is not" = "不等於";
+
+/* test for a date */
+"is on or after" = "等於或晚於";
+
+/* test for a date */
+"is on or before" = "等於或早於";
+
