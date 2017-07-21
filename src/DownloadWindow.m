@@ -70,10 +70,10 @@
 
 	// Create the popup menu
 	NSMenu * downloadMenu = [[NSMenu alloc] init];
-	[downloadMenu addItemWithTitle:NSLocalizedString(@"Open", nil) action:@selector(handleDoubleClick:) keyEquivalent:@""];
-	[downloadMenu addItemWithTitle:NSLocalizedString(@"Show in Finder", nil) action:@selector(showInFinder:) keyEquivalent:@""];
-	[downloadMenu addItemWithTitle:NSLocalizedString(@"Remove From List", nil) action:@selector(removeFromList:) keyEquivalent:@""];
-	[downloadMenu addItemWithTitle:NSLocalizedString(@"Cancel", nil) action:@selector(cancelDownload:) keyEquivalent:@""];
+	[downloadMenu addItemWithTitle:NSLocalizedString(@"Open", @"Title of a popup menu item") action:@selector(handleDoubleClick:) keyEquivalent:@""];
+	[downloadMenu addItemWithTitle:NSLocalizedString(@"Show in Finder", @"Title of a popup menu item") action:@selector(showInFinder:) keyEquivalent:@""];
+	[downloadMenu addItemWithTitle:NSLocalizedString(@"Remove From List", @"Title of a popup menu item") action:@selector(removeFromList:) keyEquivalent:@""];
+	[downloadMenu addItemWithTitle:NSLocalizedString(@"Cancel", @"Title of a popup menu item") action:@selector(cancelDownload:) keyEquivalent:@""];
 	table.menu = downloadMenu;
 }
 

@@ -486,8 +486,8 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
         NSAlert *alert = [NSAlert new];
         alert.messageText = NSLocalizedString(@"Downloads Running", nil);
         alert.informativeText = NSLocalizedString(@"Downloads Running text", nil);
-        [alert addButtonWithTitle:NSLocalizedString(@"Quit", "Title of a button on an alert")];
-        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Quit", @"Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
         NSModalResponse alertResponse = [alert runModal];
 
 		if (alertResponse == NSAlertSecondButtonReturn)
@@ -620,8 +620,8 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
         NSAlert *alert = [NSAlert new];
         alert.messageText = NSLocalizedString(@"Import subscriptions from OPML file?", nil);
         alert.informativeText = NSLocalizedString(@"Do you really want to import the subscriptions from the specified OPML file?", nil);
-        [alert addButtonWithTitle:NSLocalizedString(@"Import", "Title of a button on an alert")];
-        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Import", @"Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
         NSModalResponse alertResponse = [alert runModal];
 
         if (alertResponse == NSAlertFirstButtonReturn) {
@@ -1644,8 +1644,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     NSAlert *alert = [NSAlert new];
     alert.messageText = NSLocalizedString(@"Empty Trash message", nil);
     alert.informativeText = NSLocalizedString(@"Empty Trash message text", nil);
-    [alert addButtonWithTitle:NSLocalizedString(@"Empty", "Title of a button on an alert")];
-    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Empty", @"Title of a button on an alert")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
     [alert beginSheetModalForWindow:self.mainWindow completionHandler:^(NSModalResponse returnCode) {
         if (returnCode == NSAlertFirstButtonReturn) {
             [self clearUndoStack];
@@ -2557,8 +2557,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             NSAlert *alert = [NSAlert new];
             alert.messageText = NSLocalizedString(@"Delete selected message", nil);
             alert.informativeText = NSLocalizedString(@"Delete selected message text", nil);
-            [alert addButtonWithTitle:NSLocalizedString(@"Delete", "Title of a button on an alert")];
-            [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+            [alert addButtonWithTitle:NSLocalizedString(@"Delete", @"Title of a button on an alert")];
+            [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
             [alert beginSheetModalForWindow:self.mainWindow completionHandler:^(NSModalResponse returnCode) {
                 if (returnCode == NSAlertFirstButtonReturn) {
                     NSArray *articleArray = self.articleController.markedArticleRange;
@@ -2781,8 +2781,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         NSAlert *alert = [NSAlert new];
         alert.messageText = alertTitle;
         alert.informativeText = alertBody;
-        [alert addButtonWithTitle:NSLocalizedString(@"Delete", "Title of a button on an alert")];
-        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Delete", @"Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
         NSModalResponse alertResponse = [alert runModal];
 
 		if (alertResponse == NSAlertSecondButtonReturn)
@@ -3673,9 +3673,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
 		if (folder.type == VNAFolderTypeSearch)
-			[menuItem setTitle:NSLocalizedString(@"Delete", nil)];
+			[menuItem setTitle:NSLocalizedString(@"Delete", @"Title of a menu item")];
 		else
-			[menuItem setTitle:NSLocalizedString(@"Delete…", nil)];
+			[menuItem setTitle:NSLocalizedString(@"Delete…", @"Title of a menu item")];
 		return folder && folder.type != VNAFolderTypeTrash && !db.readOnly && isMainWindowVisible;
 	}
 	else if (theAction == @selector(refreshSelectedSubscriptions:))
@@ -3828,9 +3828,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	else if (theAction == @selector(downloadEnclosure:))
 	{
         if (self.articleController.markedArticleRange.count > 1) {
-			[menuItem setTitle:NSLocalizedString(@"Download Enclosures", nil)];
+			[menuItem setTitle:NSLocalizedString(@"Download Enclosures", @"Title of a menu item")];
         } else {
-			[menuItem setTitle:NSLocalizedString(@"Download Enclosure", nil)];
+			[menuItem setTitle:NSLocalizedString(@"Download Enclosure", @"Title of a menu item")];
         }
 		return (self.selectedArticle.hasEnclosure && isMainWindowVisible);
 	}

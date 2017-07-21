@@ -198,8 +198,8 @@
     alert.alertStyle = NSAlertStyleInformational;
     alert.messageText = NSLocalizedString(@"JavaScript", @"");
     alert.informativeText = message;
-    [alert addButtonWithTitle:NSLocalizedString(@"OK", "Title of a button on an alert")];
-    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", "Title of a button on an alert")];
+    [alert addButtonWithTitle:NSLocalizedString(@"OK", @"Title of a button on an alert")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
     NSModalResponse alertResponse = [alert runModal];
 
 	return alertResponse == NSAlertFirstButtonReturn;
