@@ -13,9 +13,6 @@
 /* Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107"; */
 "107.title" = "Introduza o link para a nova fonte em baixo. Ou escolha na lista de Origens e intriduza um atalho para a fontes disponibilizadas pela origem.";
 
-/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
-"110.title" = "URL:";
-
 /* Class = "NSButtonCell"; title = "Save"; ObjectID = "111"; */
 "111.title" = "Guardar";
 
@@ -25,5 +22,3 @@
 /* Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114"; */
 "114.title" = "Editar subscrição";
 
-/* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
-"116.title" = "Subscribe in Open Reader";
