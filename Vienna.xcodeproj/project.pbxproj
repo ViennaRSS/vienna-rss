@@ -937,6 +937,11 @@
 		F69AE7D21F221AA900342640 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Vienna-InfoPlist.strings"; sourceTree = "<group>"; };
 		F69AE7D31F221AAB00342640 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		F69AE7D41F221AAC00342640 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		F69AE7D51F221B2500342640 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = "ru.lproj/Vienna-InfoPlist.strings"; sourceTree = "<group>"; };
+		F69AE7D61F221B2500342640 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/SyncingPreferencesView.strings; sourceTree = "<group>"; };
+		F69AE7D71F221B2800342640 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoWindow.strings; sourceTree = "<group>"; };
+		F69AE7D81F221B2900342640 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F69AE7D91F221B2900342640 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F6A4E8471F040D58001C9191 /* PluginToolbarItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PluginToolbarItemButton.swift; path = src/PluginToolbarItemButton.swift; sourceTree = "<group>"; };
 		F6A7DDCA1E470E980017BE5E /* Vienna.help */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Vienna.help; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6A7DDCC1E470E980017BE5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2550,6 +2555,7 @@
 				F6257FF31E283F530035E43C /* zh-Hant */,
 				F6257FF41E283F550035E43C /* zh-Hans */,
 				F69AE7B81F22187400342640 /* gl */,
+				F69AE7D61F221B2500342640 /* ru */,
 			);
 			name = SyncingPreferencesView.xib;
 			path = Interfaces;
@@ -2886,6 +2892,7 @@
 				F69AE7CD1F2219FE00342640 /* nl */,
 				F69AE7D01F221A5800342640 /* pt */,
 				F69AE7D41F221AAC00342640 /* pt-BR */,
+				F69AE7D91F221B2900342640 /* ru */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2906,6 +2913,7 @@
 				F69AE7CB1F2219FC00342640 /* nl */,
 				F69AE7CE1F221A5600342640 /* pt */,
 				F69AE7D21F221AA900342640 /* pt-BR */,
+				F69AE7D51F221B2500342640 /* ru */,
 			);
 			name = "Vienna-InfoPlist.strings";
 			path = Resources;
@@ -2926,6 +2934,7 @@
 				F69AE7CC1F2219FD00342640 /* nl */,
 				F69AE7CF1F221A5700342640 /* pt */,
 				F69AE7D31F221AAB00342640 /* pt-BR */,
+				F69AE7D81F221B2900342640 /* ru */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -3197,6 +3206,7 @@
 				F6352BD91E271FDF005CD307 /* zh-Hant */,
 				F6352BDA1E271FE4005CD307 /* zh-Hans */,
 				F625804D1E285BBF0035E43C /* gl */,
+				F69AE7D71F221B2800342640 /* ru */,
 			);
 			name = InfoWindow.xib;
 			path = Interfaces;
