@@ -1,458 +1,657 @@
-"Mark Read" = "Markera som läst";
-"Mark Unread" = "Markera som oläst";
-"Mark Unflagged" = "Ta bort flagga";
-"Articles" = "Artiklar";
-"Folders" = "Mappar";
-"Loading %@…" = "Laddar %@…";
-"Completed" = "Klart";
-"Refresh RSS feeds" = "Uppdatera prenumerationerna";
-"Refresh All Subscriptions" = "Uppdatera alla prenumerationer";
-"Already subscribed title" = "Fel";
-"Already subscribed body" = "Du prenumererar redan på den strömmen";
-"RSS Subscription Import Title" = "Import klar";
-"%d subscriptions successfully imported" = "%d prenumerationer importerades felfritt";
-"RSS Subscription Export Title" = "Export klar";
-"%d subscriptions successfully exported" = "%d prenumerationer exporterades felfritt";
-"New unread articles retrieved" = "%d nya olästa artiklar mottagna";
-"Growl refresh completed" = "Nya artiklar";
-"New articles retrieved" = "Nya artiklar";
-"(Untitled Feed)" = "(Icke namngiven ström)";
-"Open Link in Browser" = "Öppna länk i webbläsare";
-"Copy Link to Clipboard" = "Kopiera länk";
-"Refresh completed" = "Uppdatering klar";
-"Retrieving articles" = "Tar emot artiklar";
-"ClearButton" = "Rensa";
-"Read" = "Läst";
-"Flagged" = "Flaggad";
-"Comments" = "Kommentarer";
-"Parent" = "Huvudmapp";
-"Number" = "Nummer";
-"Subject" = "Ämne";
-"Folder" = "Mapp";
-"Date" = "Datum";
-"Author" = "Författare";
-"Text" = "Text";
-"Headlines" = "Rubriker";
-"Link" = "Länk";
-"Deleted" = "Raderade";
-"GUID" = "GUID";
-"No" = "Nej";
-"Yes" = "Ja";
-"Version %@" = "Version %@";
-"Refresh All" = "Uppdatera alla";
-"Subscribe" = "Prenumerera";
-"Smart Folder" = "Smart mapp";
-"Flag" = "Flagga";
-"Next Unread" = "Nästa olästa";
-"Noon" = "Lunch";
-"Midnight" = "Midnatt";
-"Today" = "Idag";
-"Yesterday" = "Igår";
-"Tomorrow" = "Imorgon";
-"%@ at %@" = "%@ vid %@";
-"Quit" = "Avsluta";
-"Refresh cancelled" = "Uppdatering avbruten";
-"Additional actions for the selected folder" = "Ytterligare funktioner för markerad mapp";
-"Create a new subscription" = "Skapa en ny prenumeration";
-"Refresh all your subscriptions" = "Uppdatera alla prenumerationer";
-"New style title" = "Vienna har installerat en ny stil";
-"New style body" = "Stilen '%@' har installerats i din stilmapp och har lagts till i stilmenyn.";
-"More Styles…" = "Fler stilar…";
-"Delete selected message" = "Är du säker på att du vill radera de markerade artiklarna permanent?";
-"Delete selected message text" = "Det här valet går ej att ångra.";
-"Cancel" = "Avbryt";
-"OK" = "OK";
-"From" = "Från";
-"To" = "Till";
-"(No title)" = "(Inget ämne)";
-"Refreshing folder images…" = "Refreshing folder images…";
-"Refreshing subscriptions…" = "Uppdaterar prenumerationer…";
-"Authenticating with user name '%@'" = "Autentiserar med användarnamn '%@'";
-"No new articles available" = "Inga nya artiklar tillgängliga";
-"%d new articles retrieved" = "%d nya artiklar mottagna";
-"HTTP code %d reported from server" = "HTTP-kod %d rapporterad från server";
-"Headers:\n" = "Rubriker:\n";
-"Connection error (%d, %@):\n" = "Anslutningsfel (%d, %@):\n";
-"\tDescription: %@\n" = "\tBeskrivning: %@\n";
-"\tSuggestion: %@\n" = "\tFörslag: %@\n";
-"\tCause: %@\n" = "\tOrsak: %@\n";
-"Article feed will be compressed" = "Artikelström kommer att bli komprimerad";
-"Redirecting to %@" = "Dirigerar om till %@";
-"Error: %@" = "Fel: %@";
-"Error" = "Fel";
-"Credentials Prompt" = "Prenumeration av '%@' kräven ett användarnamn och lösenord för åtkomst.";
-"%ld bytes received" = "%ld bytes mottagna";
-"Authentication failed for user '%@'" = "Autentisering misslyckades för användare '%@'";
-"Error parsing XML data in feed" = "Fel vid avläsning av XML-data i strömmen";
-"Retrieving folder image" = "Mottager mappbild";
-"Folder image retrieved from %@" = "Mappbild mottagen från %@";
-"Contacting…" = "Ansluter…";
-"Connect Running" = "Anslutningen pågår";
-"Connect Running text" = "Vill du avbryta anslutningen och avsluta Vienna nu?";
-"Delete group folder" = "Radera gruppmapp";
-"Delete group folder text" = "Är du säker på att du vill radera gruppmapp '%@' och alla undermappar? Det här valet går ej att ångra.";
-"Delete smart folder" = "Radera smart mapp";
-"Delete smart folder text" = "Är du säker på att du vill radera smart mapp '%@'? Det här kommer inte att radera artiklarna.";
-"Delete RSS feed text" = "Är du säker på att du vill avbryta din prenumeration av '%@'? Det här valet kommer att radera alla sparade artiklar.";
-"Delete RSS feed" = "Radera prenumeration";
-"Delete multiple folders text" = "Är du säker på att du vill radera alla %d markerade mappar? Det här valet går ej att ångra.";
-"Delete multiple folders" = "Radera flera mappar";
-"Delete folder status" = "Raderar mapp '%@'…";
-"An error has occurred" = "Ett fel har uppstått.";
-"Your software is up to date" = "Du har redan senaste versionen av Vienna.";
-"Please try again later" = "Försök igen senare.";
-"An update is now available" = "En nyare version finns nu tillgänglig";
-"Update available text" = "Version %@ av Vienna är tillgänglig från:\n\n%@\n\nVill du ladda ner den nu? Om du väljer att inte ladda ner den nu, så kan du få upp det här valet igen om du väljer Leta efter uppdateringar.";
-"any" = "något";
-"all" = "alla";
-"Open Scripts Folder" = "Öppna skriptmappen";
-"Cannot create database folder title" = "Ledsen, men Vienna kunde inte skapa databasmappen";
-"Cannot create database folder text" = "Vienna försöker skapa mappen '%@' men ett fel uppstod. Kontrollera skrivrättigheter på specificerad sökväg.";
-"Unrecognised database format title" = "Databasens filformat har ändrats";
-"Unrecognised database format text" = "Din nuvarande %@ stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.";
-"Upgrade Title" = "Uppdatera databas";
-"Upgrade Text" = "Din nuvarande databas måste uppgraderas för att fungera med den här versionen av Vienna. Alternativt kan du välja att starta med en ny, tom databas. Vad du än väljer kommer din nuvarande databas att sparas i %@. Den nya och uppgraderade databasen kommer INTE att fungera med tidigare versioner av Vienna.\n\n\Notera: Just för denna version så rekommenderas att du startar med en ny databas för enkelhetens skull.";
-"New Database" = "Ny databas";
-"Upgrade" = "Uppgradera";
-"Exit" = "Avsluta";
-"Search in %@" = "Sök i %@";
-"Marked Articles" = "Markerade artiklar";
-"Unread Articles" = "Olästa artiklar";
-"Today's Articles" = "Dagens artiklar";
-"Trash" = "Raderade objekt";
-"Select…" = "Markera…";
-" (%d unread)" = " (%d oläst)";
-"is" = "är";
-"is not" = "är inte";
-"is after" = "är efter";
-"is before" = "är före";
-"is on or after" = "är på eller efter";
-"is on or before" = "är på ellef före";
-"contains" = "innehåller";
-"does not contain" = "innehåller inte";
-"is less than" = "är mindre än";
-"is greater than" = "är större än";
-"is less than or equal to" = "är mindre eller lika med";
-"is greater than or equal to" = "är större eller lika med";
-"Cannot open export file message" = "Kan inte skapa exportfil";
-"Cannot open export file message text" = "Specificerad exportfil kunde inte skapas. Kontrollera att den inte är låst eller att något annat program använder den.";
-"Source" = "Källa";
-"Status" = "Status";
-"Enter LiveJournal User name" = "Användarnamn LiveJournal";
-"Enter MSN Spaces User name" = "Användarnamn MSN Spaces";
-"Enter Blogspot User name" = "Användarnamn Blogspot";
-"Enter Xanga User name" = "Användarnamn Xanga";
-"Enter URL of RSS feed" = "URL till RSS-ström";
-"Cannot rename folder" = "Kan ej byta namn på mapp";
-"A folder with that name already exists" = "En mapp med det namnet finns redan";
-"Recent Searches" = "Senaste sökningar";
-"Recents" = "Senaste";
-"Clear" = "Rensa senaste sökningar";
-"Search web page" = "Sök på webbsida";
-"Loading…" = "Laddar…";
-"Open Image in New Tab" = "Öppna bild i ny tabb";
-"Open Link in New Tab" = "Öppna länk i ny tabb";
-"Open Link in %@" = "Öppna länk i %@";
-"Open Page in %@" = "Öppna sida i %@";
-"Copy Page Link to Clipboard" = "Kopiera sidlänk till urklipp";
-"%d unread articles" = "%d olästa artiklar";
-"More Scripts…" = "Fler skript…";
-"Install Update" = "Installera uppdatering";
-"Do Not Install" = "Installera ej";
-"Replace smart folder title" = "En smart mapp med namnet %@ finns redan";
-"Replace smart folder text" = "Vill du ersätta nuvarande smart mapp med de kriterier du definierat här?";
-"Replace" = "Ersätta";
-"Never" = "Aldrig";
-"After a Day" = "After a Day";
-"After 2 Days" = "After 2 Days";
-"After a Week" = "After a Week";
-"After 2 Weeks" = "After 2 Weeks";
-"After a Month" = "After a Month";
-"Last Week" = "Förra veckan";
-"2 Weeks Ago" = "2 veckor tillbaka";
-"A month" = "En månad";
-"Activity Window" = "Aktivitetsvisare";
-"Error importing subscriptions body" = "Kan inte importera specificerad fil. Filens innehåll är inte i validerat OPML/XML-format.";
-"Error importing subscriptions title" = "Fel vid import";
-"Rename" = "Döp om";
-"Mark All Read" = "Markera alla som lästa";
-"Move Folders" = "Flytta mappar";
-"Downloads" = "Hämtade filer";
-"Invalid style title" = "Stilen %@ verkar vara korrupt";
-"Invalid style body" = "Standardstilen används istället.";
-"Downloads Running" = "En eller flera nedladdningar pågår";
-"Downloads Running text" = "Vill du avbryta alla nedladdningar och avsluta Vienna nu?";
-"Mark All Subscriptions as Read" = "Markera alla prenumerationer som lästa";
-"Preferences" = "Inställningar";
-"General" = "Allmänt";
-"Appearance" = "Utseende";
-"Locate Title" = "Kan ej skapa Viennas databas";
-"Locate Text" = "En ny Vienna-databas kan ej skapas i '%@' för att mappen förmodligen finns på en nätverksdelning och den här versionen av Vienna stöder inte detta. Var vänlig och välj en mapp som finns på din lokala hårddisk.";
-"Empty Trash message" = "Är du säker på att du vill radera artiklarna i papperskorgen permanent?";
-"Empty Trash message text" = "Du kan inte ångra denna åtgärd";
-"Cannot open database title" = "Ursäkta, men Vienna kan inte öppna databasen";
-"Cannot open database text" = "Databasefilen (%@) kan inte öppnas av någon anledning. Den kanske är korrupt eller oåtkomlig. Var god radera eller döp om databasefilen och starta om Vienna.";
-"Vienna cannot open the file title" = "Vienna kan inte öppna filen.";
-"Vienna cannot open the file body" = "Vienna kan inte öppna filen \"%@\" eftersom den har flyttats sedan du laddade ner den.";
-"Vienna cannot show the file title" = "Vienna kan inte öppna filen.";
-"Vienna cannot show the file body" = "Vienna kan inte öppna filen \"%@\" eftersom den har flyttats sedan du laddade ner den.";
-"Empty" = "Töm";
-"Open" = "Öppna";
-"Show in Finder" = "Visa i Finder";
-"Remove From List" = "Ta bort från listan";
-"%.1f MB" = "%.1f MB";
-"%.1f KB" = "%.1f K";
-"%.1f bytes" = "%.1f byte";
-"%.1f of %.1f MB" = "%.1f av %.1f MB";
-"%.1f of %.1f KB" = "%.1f av %.1f K";
-"%.1f of %.1f bytes" = "%.1f av %.1f byte";
-"An error occurred when this feed was last refreshed" = "Ett fel uppstod när denna prenumeration uppdaterades senast";
-"Connecting to %@" = "Ansluter till %@";
-"About Vienna" = "Om Vienna";
-"Acknowledgements" = "Tillkännagivanden";
-"Article" = "Artikel";
-"Back" = "Tillbaka";
-"Bring All to Front" = "Lägg alla överst";
-"Check Spelling" = "Kontrollera stavning";
-"Check Spelling as You Type" = "Kontrollera stavning medan jag skriver";
-"Check for Updates" = "Sök efter uppdateringar";
-"Close All Tabs" = "Stäng alla flik";
-"Close Tab" = "Stäng flik";
-"Close Window" = "Stäng fönster";
-"Columns" = "Kolumner";
-"Copy" = "Kopiera";
-"Cut" = "Klipp ut";
-"Delete" = "Radera";
-"Delete Article" = "Radera artikel";
-"Delete…" = "Radera…";
-"Edit" = "Redigera";
-"Edit…" = "Redigera…";
-"Empty Trash" = "Töm papperskorgen";
-"Export Subscriptions…" = "Exportera prenumerationer…";
-"File" = "Arkiv";
-"Find" = "Sök";
-"Find Next" = "Sök nästa";
-"Find Previous" = "Sök föregående";
-"Find…" = "Sök…";
-"Forward" = "Framåt";
-"Help" = "Hjälp";
-"Hide Others" = "Göm övriga";
-"Hide Vienna" = "Göm Vienna";
-"Import Subscriptions…" = "Importera prenumerationer…";
-"Jump to Selection" = "Gå till markering";
-"Main Window" = "Huvudfönster";
-"MainMenu" = "MainMenu";
-"Mark All Articles as Read" = "Markera alla artiklar som lästa";
-"Mark Flagged" = "Flagga artikel";
-"Minimize" = "Minimera";
-"New Group Folder…" = "Ny gruppmapp…";
-"New Smart Folder…" = "Ny smart mapp…";
-"New Subscription…" = "Ny prenumeration…";
-"Next Tab" = "Nästa flik";
-"Open Article Page" = "Artikelsida";
-"Open Article Page in External Browser" = "Öppna artikelsida i extern webbläsare";
-"Open Subscription Home Page" = "Källsida i webbläsare";
-"Open Subscription Home Page in External Browser" = "Öppna prenumerationhemsida i extern webbläsare";
-"Page Setup…" = "Utskriftsformat…";
-"Paste" = "Klista in";
-"Preferences…" = "Inställningar…";
-"Previous Tab" = "Föregående flik";
-"Print…" = "Skriv ut…";
-"Quit Vienna" = "Avsluta Vienna";
-"Redo" = "Gör om";
-"Refresh Selected Subscriptions" = "Uppdatera markerade prenumerationer";
-"Reload Page" = "Ladda om sida";
-"Rename…" = "Döp om…";
-"Restore Article" = "Återskapa artikel";
-"Select All" = "Markera allt";
-"Services" = "Tjänster";
-"Show All" = "Visa alla";
-"Skip Folder" = "Hoppa till nästa mapp";
-"Sort By" = "Sortera";
-"Spelling" = "Stavning";
-"Spelling…" = "Stavning…";
-"Stop Refreshing" = "Avbryt omladdning";
-"Stop Reloading Page" = "Avbryt omladdning av sida";
-"Style" = "Stil";
-"Undo" = "Ångra";
-"Use Selection for Find" = "Använd markering för sökning";
-"Validate Feed" = "Validera RSS-ström";
-"Vienna Help" = "Vienna hjälp";
-"Vienna Web Site" = "Vienna webbsida";
-"View" = "Innehåll";
-"Window" = "Fönster";
-"Zoom" = "Zooma";
-"Export all subscriptions" = "Exportera alla prenumerationer";
-"Export selected subscriptions" = "Exportera markerade prenumerationer";
-"Preserve group folders in exported file" = "Bevara gruppmappar";
-"Open Frame" = "Öppna ram";
-"Open Image in %@" = "Öppna bild i %@";
-"Open Subscription Home Page in %@" = "Öppna prenumerationhemsida i %@";
-"Open Article Page in %@" = "Öppna artikelsida i %@";
-"New Tab" = "Ny flik";
-"External Browser" = "Extern webbläsare";
-
-/* Added in 2.1.0 */
-"Send Link" = "Skicka länk";
-"Send Links" = "Skicka länkar";
-"Increase Font Size" = "Öka typsnittstorlek";
-"Decrease Font Size" = "Minska typsnittsstorlek";
-"Enter the URL here" = "Ange URLen här";
-"Refresh the current page" = "Ladda om nuvarande sida";
-"Return to the previous page" = "Återgå till föregående sida";
-"Go forward to the next page" = "Gå till nästa sida";
-"Layout" = "Layout";
-"Reading Pane on Right" = "Artikelfönster till höger";
-"Reading Pane at Bottom" = "Artikelfönster nederst";
-"Filter By" = "Filtrera På";
-"Filter by:" = "Filtrera på:";
-"All" = "Alla";
-"All Articles" = "Alla artiklar";
-"Unread" = "Olästa";
-"Last Refresh" = "Sista omladdning";
-"Feed URL updated to %@" = "Ström-URL uppdaterad till %@";
-"Filter articles" = "Filtera artiklar";
-"Feed has been removed by the server" = "Strömmen är borta från servern";
-"Mark all articles read" = "Markera alla artiklar som lästa";
+/* No comment provided by engineer. */
 "%@ Info" = "%@ info";
-"%u articles" = "%u artiklar";
-"%u unread" = "%u olästa";
-"Keyboard Shortcuts" = "Kortkommandon";
-"%@ (Filtered: %@)" = "%@ (Filter: %@)";
-"Get Info…" = "Visa info…";
-"Open Web Location…" = "Öppna plats…";
-"Refresh Folder Images" = "Ladda om mappbilder";
-"Report" = "Rapport";
-"Condensed" = "Kompakt";
-"Unified" = "Enad";
-"Summary" = "Sammanfattning";
-"Blog With…" = "Blog med…";
-"Blog with %@" = "Blog med %@";
-"Bigger Text" = "Större text";
-"Smaller Text" = "Mindre text";
 
-/* Added in 2.1.1 */
+/* Progress in bytes, e.g. 1 KB of 1 MB */
+"%@ of %@" = "%1$@ av %2$@";
+
+/* {existing authors},{new author name} */
+"%@, %@" = "%1$@, %2$@";
+
+/* No comment provided by engineer. */
+"%d new articles retrieved" = "%d nya artiklar mottagna";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully exported" = "%d prenumerationer exporterades felfritt";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully imported" = "%d prenumerationer importerades felfritt";
+
+/* No comment provided by engineer. */
+"%d unread articles" = "%d olästa artiklar";
+
+/* No comment provided by engineer. */
+"%u articles" = "%u artiklar";
+
+/* No comment provided by engineer. */
+"%u unread" = "%u olästa";
+
+/* No comment provided by engineer. */
+"(No title)" = "(Inget ämne)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(Icke namngiven ström)";
+
+/* No comment provided by engineer. */
+"A folder with that name already exists" = "En mapp med det namnet finns redan";
+
+/* Toolbar item name for the Advanced preference pane */
 "Advanced" = "Avancerat";
 
-/* Added in 2.2.0 */
-"Import subscriptions from OPML file?" = "Importera prenumerataioner från OPML fil?";
-"Do you really want to import the subscriptions from the specified OPML file?" = "Vill du verkligen importera premnumerationerna från valda OPML fil?";
-"Import" = "Importera";
-"HasEnclosure" = "Bilaga";
-"Enclosure" = "Bilagans URL";
-"Open New Tab" = "Öpnna ny flik";
-"Subscribe to the feed for this page" = "Prenumerera på artiklar från denna sida";
-"Open Vienna" = "Öppna Vienna";
-"Download Enclosure" = "Ladda ner bilaga";
-"Download Enclosures" = "Ladda ner bilagor";
-"Local File" = "Fil på din dator";
-"Hide Status Bar" = "Göm statusfältet";
-"Show Status Bar" = "Visa statusfältet";
-"Customize Toolbar…" = "Anpassa verktygsrad…";
-"Search Articles" = "Sök i artiklar";
-"Progress" = "Progress";
-"Delete all articles in the trash" = "Radera samtliga artiklar i papperskorgen";
-"Unsubscribe" = "Sluta prenumerera på artiklar från sida";
-"Resubscribe" = "Återuppta prenumeration på artiklar från sida";
-"Download" = "Ladda ner";
-"This article contains an enclosed file." = "Den här artikeln innehåller en bilaga.";
-"Growl download completed" = "Nedladdning lyckades";
-"Growl download failed" = "Nedladdning misslyckades";
-"Download completed" = "Nedladdning klar";
-"File %@ downloaded" = "Fil med namn %@ nedladdad";
-"Download failed" = "Nedladdning misslyckades";
-"File %@ failed to download" = "Filen med namn %@ misslyckades att laddas ner";
-"Play" = "Spela";
-"Click the Play button to play this enclosure in iTunes." = "Tryck på Spela för att spela denna bilaga i iTunes";
-"Click the Open button to open this file." = "Tryck på Öppna för att öppna denna bilaga.";
-"Filter displayed articles by matching text" = "Filtrera visade artiklar med följande text";
-"Close the filter bar" = "Stäng filtrera-fältet";
-"Search all articles" = "Sök genom alla artiklar";
-"Search Results" = "Sökresultat";
-"Hide Filter Bar" = "Göm filtera-fältet";
-"Show Filter Bar" = "Visa filtrera-fältet";
-"Email a link to the current article or website" = "Maila länken till nuvarande artikel eller hemsida";
-"Refresh" = "Uppdatera";
-"Action" = "Åtgärd";
-"Get Info" = "Visa info";
-"See information about the selected subscription" = "Visa information om vald prenumeration";
-"Display the list of available styles" = "Visa tillgängliga utseenden";
+/* No comment provided by engineer. */
+"After 2 Days" = "Efter 2 dagar";
 
-/* Added in 2.3.0 */
-"Order By" = "Order By";
-"Manual" = "Manual";
-"Name" = "Name";
+/* No comment provided by engineer. */
+"After 2 Weeks" = "Efter 2 veckor";
 
-/*Added in 2.4*/
-"Show XML Source" = "Show XML Source";
-"Source of folder" = "Source of folder";
-"No feed source to display." = "No feed source to display.";
-"Search current web page" = "Search current web page";
-"Search all articles or the current web page" = "Search all articles or the current web page";
-"Database Upgrade" = "Database Upgrade";
-"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.";
-"Upgrade Database" = "Upgrade Database";
+/* No comment provided by engineer. */
+"After a Day" = "Efter en dag";
 
-/* Added in 2.5.0 */
-"Cannot create folder title" = "Cannot create folder";
+/* No comment provided by engineer. */
+"After a Month" = "Efter en månad";
+
+/* No comment provided by engineer. */
+"After a Week" = "Efter en vecka";
+
+/* Already subscribed body */
+"Already subscribed body" = "Du prenumererar redan på den strömmen";
+
+/* Already subscribed title */
+"Already subscribed title" = "Fel";
+
+/* No comment provided by engineer. */
+"An error occurred when this feed was last refreshed" = "Ett fel uppstod när denna prenumeration uppdaterades senast";
+
+/* Toolbar item name for the Appearance preference pane */
+"Appearance" = "Utseende";
+
+/* No comment provided by engineer. */
+"Articles" = "Artiklar";
+
+/* No comment provided by engineer. */
+"Ascending" = "Stigande";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Författare";
+
+/* Title of a button on an alert
+   Title of a popup menu item */
+"Cancel" = "Avbryt";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna försöker skapa mappen '%@' men ett fel uppstod. Kontrollera skrivrättigheter på specificerad sökväg.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Ledsen, men Vienna kunde inte skapa databasmappen";
+
+/* No comment provided by engineer. */
 "Cannot create folder body" = "The \"%@\" folder cannot be created.";
 
-/* Added in 2.6.0 */
-"Article load completed" = "Article load completed";
-"Loading HTML article…" = "Loading HTML article…";
-"Ascending" = "Ascending";
-"Descending" = "Descending";
-"Use Current Style for Articles" = "Use Current Style for Articles";
-"Use Web Page for Articles" = "Use Web Page for Articles";
+/* No comment provided by engineer. */
+"Cannot create folder title" = "Cannot create folder";
 
-/* Added for Open Reader support */
-"Force Refresh Selected Subscriptions From Open Reader" = "Force Refresh Selected Subscriptions From Open Reader";
-"Update Subscriptions From Open Reader" = "Update Subscriptions From Open Reader";
+/* No comment provided by engineer. */
+"Cannot open database text" = "Databasefilen (%@) kan inte öppnas av någon anledning. Den kanske är korrupt eller oåtkomlig. Var god radera eller döp om databasefilen och starta om Vienna.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Ursäkta, men Vienna kan inte öppna databasen";
+
+/* No comment provided by engineer. */
+"Cannot open export file message" = "Kan inte skapa exportfil";
+
+/* No comment provided by engineer. */
+"Cannot open export file message text" = "Specificerad exportfil kunde inte skapas. Kontrollera att den inte är låst eller att något annat program använder den.";
+
+/* No comment provided by engineer. */
+"Cannot rename folder" = "Kan ej byta namn på mapp";
+
+/* No comment provided by engineer. */
+"Clear" = "Rensa senaste sökningar";
+
+/* No comment provided by engineer. */
+"Click the Open button to open this file." = "Tryck på Öppna för att öppna denna bilaga.";
+
+/* No comment provided by engineer. */
+"Click the Play button to play this enclosure in iTunes." = "Tryck på Spela för att spela denna bilaga i iTunes";
+
+/* No comment provided by engineer. */
+"Connecting to %@" = "Ansluter till %@";
+
+/* No comment provided by engineer. */
+"Copy Link to Clipboard" = "Kopiera länk";
+
+/* No comment provided by engineer. */
+"Copy Page Link to Clipboard" = "Kopiera sidlänk till urklipp";
+
+/* Copy URL */
+"Copy URL" = "Kopiera URL";
+
+/* No comment provided by engineer. */
+"Credentials Prompt" = "Prenumeration av '%@' kräven ett användarnamn och lösenord för åtkomst.";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Uppdatera databas";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Datum";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Delete" = "Radera";
+
+/* Title of a menu item */
+"Delete Article" = "Radera artikel";
+
+/* No comment provided by engineer. */
 "Delete Open Reader RSS feed text" = "Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.";
-"Delete Open Reader RSS feed" = "Delete Open Reader RSS feed";
 
-/* Added in 3.0.0 */
-"Last 48 hours" = "Last 48 hours";
-"Unread or flagged" = "Unread or flagged";
-"Syncing" = "Syncing";
-"Reindex Database" = "Reindex Database";
-"Other" = "Annan";
-"Authenticating on Open Reader" = "Authenticating on Open Reader";
-"Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
-"Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
-"Fetching Open Reader Subscriptions…" = "Fetching Open Reader Subscriptions…";
-"Open Reader Authentication Failed" = "Open Reader Authentication Failed";
+/* No comment provided by engineer. */
+"Delete RSS feed" = "Radera prenumeration";
+
+/* No comment provided by engineer. */
+"Delete RSS feed text" = "Är du säker på att du vill avbryta din prenumeration av '%@'? Det här valet kommer att radera alla sparade artiklar.";
+
+/* No comment provided by engineer. */
+"Delete folder status" = "Raderar mapp '%@'…";
+
+/* No comment provided by engineer. */
+"Delete group folder" = "Radera gruppmapp";
+
+/* No comment provided by engineer. */
+"Delete group folder text" = "Är du säker på att du vill radera gruppmapp '%@' och alla undermappar? Det här valet går ej att ångra.";
+
+/* No comment provided by engineer. */
+"Delete multiple folders" = "Radera flera mappar";
+
+/* No comment provided by engineer. */
+"Delete multiple folders text" = "Är du säker på att du vill radera alla %d markerade mappar? Det här valet går ej att ångra.";
+
+/* No comment provided by engineer. */
+"Delete selected message" = "Är du säker på att du vill radera de markerade artiklarna permanent?";
+
+/* No comment provided by engineer. */
+"Delete selected message text" = "Det här valet går ej att ångra.";
+
+/* No comment provided by engineer. */
+"Delete smart folder" = "Radera smart mapp";
+
+/* No comment provided by engineer. */
+"Delete smart folder text" = "Är du säker på att du vill radera smart mapp '%@'? Det här kommer inte att radera artiklarna.";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Raderade";
+
+/* Title of a menu item */
+"Delete…" = "Radera…";
+
+/* No comment provided by engineer. */
+"Descending" = "Fallande";
+
+/* No comment provided by engineer. */
+"Do you really want to import the subscriptions from the specified OPML file?" = "Vill du verkligen importera premnumerationerna från valda OPML fil?";
+
+/* No comment provided by engineer. */
+"Download" = "Ladda ner";
+
+/* Title of a menu item */
+"Download Enclosure" = "Ladda ner bilaga";
+
+/* Title of a menu item */
+"Download Enclosures" = "Ladda ner bilagor";
+
+/* Notification title */
+"Download completed" = "Nedladdning klar";
+
+/* Notification title */
+"Download failed" = "Nedladdning misslyckades";
+
+/* No comment provided by engineer. */
+"Downloads Running" = "En eller flera nedladdningar pågår";
+
+/* No comment provided by engineer. */
+"Downloads Running text" = "Vill du avbryta alla nedladdningar och avsluta Vienna nu?";
+
+/* Title of a menu item */
+"Edit…" = "Redigera…";
+
+/* Title of a button on an alert */
+"Empty" = "Töm";
+
+/* No comment provided by engineer. */
+"Empty Trash message" = "Är du säker på att du vill radera artiklarna i papperskorgen permanent?";
+
+/* No comment provided by engineer. */
+"Empty Trash message text" = "Du kan inte ångra denna åtgärd";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "Bilagans URL";
+
+/* No comment provided by engineer. */
+"Enter the URL here" = "Ange URLen här";
+
+/* No comment provided by engineer. */
+"Error" = "Fel";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions body" = "Kan inte importera specificerad fil. Filens innehåll är inte i validerat OPML/XML-format.";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions title" = "Fel vid import";
+
+/* No comment provided by engineer. */
+"Error parsing XML data in feed" = "Fel vid avläsning av XML-data i strömmen";
+
+/* No comment provided by engineer. */
+"Error: Feed not found!" = "Fel: Flöde hittades inte!";
+
+/* No comment provided by engineer. */
+"External Browser" = "Extern webbläsare";
+
+/* No comment provided by engineer. */
+"Feed URL updated to %@" = "Ström-URL uppdaterad till %@";
+
+/* No comment provided by engineer. */
+"Fetching Open Reader Subscriptions…" = "Hämtar Open Reader-prenumerationer…";
+
+/* Notification body */
+"File %@ downloaded" = "Fil med namn %@ nedladdad";
+
+/* Notification body */
+"File %@ failed to download" = "Filen med namn %@ misslyckades att laddas ner";
+
+/* No comment provided by engineer. */
+"Flag" = "Flagga";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Flaggad";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Mapp";
+
+/* No comment provided by engineer. */
+"Folder image retrieved from %@" = "Mappbild mottagen från %@";
+
+/* No comment provided by engineer. */
+"Folders" = "Mappar";
+
+/* Toolbar item name for the General preference pane */
+"General" = "Allmänt";
+
+/* Title of a menu item */
+"Get Info" = "Visa info";
+
+/* No comment provided by engineer. */
+"Go forward to the next page" = "Gå till nästa sida";
+
+/* No comment provided by engineer. */
+"HTTP code %d reported from server" = "HTTP-kod %d rapporterad från server";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Bilaga";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Rubriker";
+
+/* No comment provided by engineer. */
+"Hide Filter Bar" = "Göm filtera-fältet";
+
+/* Title of a menu item */
+"Hide Status Bar" = "Göm statusfältet";
+
+/* Title of a menu item */
+"Hide Toolbar" = "Dölj verktygsfält";
+
+/* Title of a button on an alert */
+"Import" = "Importera";
+
+/* No comment provided by engineer. */
+"Import subscriptions from OPML file?" = "Importera prenumerataioner från OPML fil?";
+
+/* No comment provided by engineer. */
+"Invalid style body" = "Standardstilen används istället.";
+
+/* No comment provided by engineer. */
+"Invalid style title" = "Stilen %@ verkar vara korrupt";
+
+/* No comment provided by engineer. */
+"JavaScript" = "JavaScript";
+
+/* No comment provided by engineer. */
+"Last Week" = "Förra veckan";
+
+/* Data field name visible in menu/article list */
+"Link" = "Länk";
+
+/* No comment provided by engineer. */
+"Loading" = "Laddar";
+
+/* No comment provided by engineer. */
+"Loading…" = "Laddar…";
+
+/* No comment provided by engineer. */
+"Locate Text" = "En ny Vienna-databas kan ej skapas i '%@' för att mappen förmodligen finns på en nätverksdelning och den här versionen av Vienna stöder inte detta. Var vänlig och välj en mapp som finns på din lokala hårddisk.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Kan ej skapa Viennas databas";
+
+/* Title of a button on an alert */
+"Locate…" = "Leta upp…";
+
+/* Title of a menu item */
+"Mark All Articles as Read" = "Markera alla artiklar som lästa";
+
+/* No comment provided by engineer. */
+"Mark All Read" = "Markera alla som lästa";
+
+/* Title of a menu item */
+"Mark All Subscriptions as Read" = "Markera alla prenumerationer som lästa";
+
+/* Title of a menu item */
+"Mark Flagged" = "Flagga artikel";
+
+/* Title of a menu item */
+"Mark Read" = "Markera som läst";
+
+/* No comment provided by engineer. */
+"Mark Unflagged" = "Ta bort flagga";
+
+/* Title of a menu item */
+"Mark Unread" = "Markera som oläst";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Markerade artiklar";
+
+/* No comment provided by engineer. */
+"More Scripts…" = "Fler skript…";
+
+/* No comment provided by engineer. */
+"Move Folders" = "Flytta mappar";
+
+/* No comment provided by engineer. */
+"Never" = "Aldrig";
+
+/* No comment provided by engineer. */
+"New Tab" = "Ny flik";
+
+/* Notification title */
+"New articles retrieved" = "Nya artiklar";
+
+/* No comment provided by engineer. */
+"New style body" = "Stilen '%@' har installerats i din stilmapp och har lagts till i stilmenyn.";
+
+/* No comment provided by engineer. */
+"New style title" = "Vienna har installerat en ny stil";
+
+/* Notification body */
+"New unread articles retrieved" = "%d nya olästa artiklar mottagna";
+
+/* No comment provided by engineer. */
+"No" = "Nej";
+
+/* No comment provided by engineer. */
+"No articles in feed" = "Inga artiklar i flöde";
+
+/* No comment provided by engineer. */
+"No new articles available" = "Inga nya artiklar tillgängliga";
+
+/* Title of a button on an alert */
+"OK" = "OK";
+
+/* Title of a popup menu item */
+"Open" = "Öppna";
+
+/* Title of a menu item */
+"Open Article Page" = "Artikelsida";
+
+/* No comment provided by engineer. */
+"Open Article Page in %@" = "Öppna artikelsida i %@";
+
+/* Title of a menu item */
+"Open Article Page in External Browser" = "Öppna artikelsida i extern webbläsare";
+
+/* No comment provided by engineer. */
+"Open Frame" = "Öppna ram";
+
+/* No comment provided by engineer. */
+"Open Image in %@" = "Öppna bild i %@";
+
+/* No comment provided by engineer. */
+"Open Image in New Tab" = "Öppna bild i ny tabb";
+
+/* No comment provided by engineer. */
+"Open Link in %@" = "Öppna länk i %@";
+
+/* No comment provided by engineer. */
+"Open Link in New Tab" = "Öppna länk i ny tabb";
+
+/* No comment provided by engineer. */
+"Open Page in %@" = "Öppna sida i %@";
+
+/* No comment provided by engineer. */
 "Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
 
-/* Added in 3.0.1 */
-"Plugin installed" = "Plugin installed";
-"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.";
-"Error loading script '%@'" = "Error loading script '%@'";
-"AppleScript Error in '%@' script" = "AppleScript Error in '%@' script";
-"No thanks" = "No thanks";
-"Include anonymous system profile when checking for updates?" = "Include anonymous system profile when checking for updates?";
-"Include anonymous system profile when checking for updates text" = "This helps Vienna development by letting us know what versions of macOS are most popular amongst our users.";
-"Error: Feed not found!" = "Error: Feed not found!";
-"Loading" = "Loading";
-"Plugin could not be installed" = "Plugin could not be installed";
-"Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
-"Queue" = "Queue";
-"Forcing Refresh subscriptions…" = "Forcing Refresh subscriptions…";
-"Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
+/* No comment provided by engineer. */
+"Open Scripts Folder" = "Öppna skriptmappen";
 
-/* Added in 3.0.2 */
-"Close" = "Close";
-"Locate…" = "Locate…";
-"Error retrieving RSS feed:"="Error retrieving RSS feed:";
-"Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
-"Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";
-"RSS Icon not found!" = "RSS Icon not found!";
+/* Title of a menu item */
+"Open Subscription Home Page" = "Källsida i webbläsare";
 
-/*Added in 3.0.5 */
-"Redirection attempt treated as temporary for safety concern" = "Redirection attempt treated as temporary for safety concern";
+/* No comment provided by engineer. */
+"Open Subscription Home Page in %@" = "Öppna prenumerationhemsida i %@";
 
-/*Added in 3.0.7 */
-"No articles in feed" = "No articles in feed";
+/* Title of a menu item */
+"Open Subscription Home Page in External Browser" = "Öppna prenumerationhemsida i extern webbläsare";
 
-/*Added in 3.1.2 */
-"Filter folders" = "Search for folders";
+/* No comment provided by engineer. */
+"Other" = "Annan";
+
+/* No comment provided by engineer. */
+"Play" = "Spela";
+
+/* No comment provided by engineer. */
+"Plugin installed" = "Plugin installerat";
+
+/* Title of the Preferences window */
+"Preferences" = "Inställningar";
+
+/* No comment provided by engineer. */
+"Queue" = "Kö";
+
+/* Title of a button on an alert */
+"Quit" = "Avsluta";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Quit Vienna" = "Avsluta Vienna";
+
+/* No comment provided by engineer. */
+"RSS Subscription Export Title" = "Export klar";
+
+/* No comment provided by engineer. */
+"RSS Subscription Import Title" = "Import klar";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Läst";
+
+/* No comment provided by engineer. */
+"Recent Searches" = "Senaste sökningar";
+
+/* No comment provided by engineer. */
+"Recents" = "Senaste";
+
+/* Title of a menu item */
+"Refresh All Subscriptions" = "Uppdatera alla prenumerationer";
+
+/* Title of a menu item */
+"Refresh Selected Subscriptions" = "Uppdatera markerade prenumerationer";
+
+/* No comment provided by engineer. */
+"Refresh completed" = "Uppdatering klar";
+
+/* No comment provided by engineer. */
+"Refresh the current page" = "Ladda om nuvarande sida";
+
+/* No comment provided by engineer. */
+"Refreshing subscriptions…" = "Uppdaterar prenumerationer…";
+
+/* Title of a popup menu item */
+"Remove From List" = "Ta bort från listan";
+
+/* Title of a menu item */
+"Rename…" = "Döp om…";
+
+/* Title of a menu item */
+"Restore Article" = "Återskapa artikel";
+
+/* No comment provided by engineer. */
+"Resubscribe" = "Återuppta prenumeration på artiklar från sida";
+
+/* No comment provided by engineer. */
+"Retrieving articles" = "Tar emot artiklar";
+
+/* No comment provided by engineer. */
+"Retrieving folder image" = "Mottager mappbild";
+
+/* No comment provided by engineer. */
+"Return to the previous page" = "Återgå till föregående sida";
+
+/* No comment provided by engineer. */
+"Search Results" = "Sökresultat";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Sök genom alla artiklar";
+
+/* No comment provided by engineer. */
+"Search in %@" = "Sök i %@";
+
+/* No comment provided by engineer. */
+"Select…" = "Markera…";
+
+/* No comment provided by engineer. */
+"Send Link" = "Skicka länk";
+
+/* No comment provided by engineer. */
+"Send Links" = "Skicka länkar";
+
+/* No comment provided by engineer. */
+"Show Filter Bar" = "Visa filtrera-fältet";
+
+/* Title of a menu item */
+"Show Main Window…" = "Visa huvudfönster…";
+
+/* Title of a menu item */
+"Show Status Bar" = "Visa statusfältet";
+
+/* Title of a menu item */
+"Show Toolbar" = "Visa verktygsfält";
+
+/* Title of a popup menu item */
+"Show in Finder" = "Visa i Finder";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Ämne";
+
+/* No comment provided by engineer. */
+"Subscribe to the feed for this page" = "Prenumerera på artiklar från denna sida";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Sammanfattning";
+
+/* Toolbar item name for the Syncing preference pane */
+"Syncing" = "Synkar";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Text";
+
+/* No comment provided by engineer. */
+"This article contains an enclosed file." = "Den här artikeln innehåller en bilaga.";
+
+/* No comment provided by engineer. */
+"Today" = "Idag";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Dagens artiklar";
+
+/* No comment provided by engineer. */
+"Trash" = "Raderade objekt";
+
+/* URL */
+"URL" = "URL";
+
+/* No comment provided by engineer. */
+"Unread" = "Olästa";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Olästa artiklar";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "Din nuvarande %@ stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "Databasens filformat har ändrats";
+
+/* No comment provided by engineer. */
+"Unsubscribe" = "Sluta prenumerera på artiklar från sida";
+
+/* Title of a button on an alert */
+"Upgrade Database" = "Uppgradera databas";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file body" = "Vienna kan inte öppna filen \"%@\" eftersom den har flyttats sedan du laddade ner den.";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file title" = "Vienna kan inte öppna filen.";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file body" = "Vienna kan inte öppna filen \"%@\" eftersom den har flyttats sedan du laddade ner den.";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file title" = "Vienna kan inte öppna filen.";
+
+/* No comment provided by engineer. */
+"Yes" = "Ja";
+
+/* No comment provided by engineer. */
+"Yesterday" = "Igår";
+
+/* rule for association of multiple criteria */
+"all" = "alla";
+
+/* rule for association of multiple criteria */
+"any" = "något";
+
+/* test for a string */
+"contains" = "innehåller";
+
+/* test for a string */
+"does not contain" = "innehåller inte";
+
+/* test for a value */
+"is" = "är";
+
+/* test for a date */
+"is after" = "är efter";
+
+/* test for a date */
+"is before" = "är före";
+
+/* test for a numeric value */
+"is greater than" = "är större än";
+
+/* test for a numeric value */
+"is greater than or equal to" = "är större eller lika med";
+
+/* test for a numeric value */
+"is less than" = "är mindre än";
+
+/* test for a numeric value */
+"is less than or equal to" = "är mindre eller lika med";
+
+/* test for a value */
+"is not" = "är inte";
+
+/* test for a date */
+"is on or after" = "är på eller efter";
+
+/* test for a date */
+"is on or before" = "är på ellef före";
+
