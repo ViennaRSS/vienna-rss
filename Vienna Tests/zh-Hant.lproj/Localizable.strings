@@ -103,12 +103,6 @@
 /* No comment provided by engineer. */
 "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.";
 
-/* rule for association of multiple criteria */
-"all" = "全部";
-
-/* rule for association of multiple criteria */
-"any" = "任何";
-
 /* test for a string */
 "contains" = "包含";
 

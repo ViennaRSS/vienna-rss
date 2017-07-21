@@ -82,12 +82,6 @@
 /* No comment provided by engineer. */
 "Unrecognised database format title" = "データベースのファイルフォーマットが変更されました。";
 
-/* rule for association of multiple criteria */
-"all" = "すべて";
-
-/* rule for association of multiple criteria */
-"any" = "いずれか";
-
 /* test for a string */
 "contains" = "が次を含む：";
 

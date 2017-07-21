@@ -511,9 +511,6 @@
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Souhrn";
 
-/* Data field name visible in smart folder definition */
-"Text" = "Text";
-
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Tento příspěvek obsahuje v příloze soubor.";
 
@@ -558,12 +555,6 @@
 
 /* No comment provided by engineer. */
 "Yesterday" = "Včera";
-
-/* rule for association of multiple criteria */
-"all" = "všem";
-
-/* rule for association of multiple criteria */
-"any" = "libovolným";
 
 /* test for a string */
 "contains" = "obsahuje";

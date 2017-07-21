@@ -418,9 +418,6 @@
 "Open Page in %@" = "Open pagina in %@";
 
 /* No comment provided by engineer. */
-"Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
-
-/* No comment provided by engineer. */
 "Open Scripts Folder" = "Open scripts-map";
 
 /* Title of a menu item */
@@ -545,7 +542,7 @@
 "Subscribe to the feed for this page" = "Abonneer op de feed van deze pagina";
 
 /* Pseudo field name visible in menu/article list */
-"Summary" = "Samevatting";
+"Summary" = "Samenvatting";
 
 /* Toolbar item name for the Syncing preference pane */
 "Syncing" = "Synchroniseren";
@@ -603,12 +600,6 @@
 
 /* No comment provided by engineer. */
 "Yesterday" = "Gisteren";
-
-/* rule for association of multiple criteria */
-"all" = "alle";
-
-/* rule for association of multiple criteria */
-"any" = "een of meer";
 
 /* test for a string */
 "contains" = "bevat";

@@ -171,9 +171,6 @@
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Deseja realmente importar as subscrições do ficheiro OPML especificado?";
 
-/* No comment provided by engineer. */
-"Download" = "Download";
-
 /* Title of a menu item */
 "Download Enclosure" = "Descarregar Anexo";
 
@@ -285,9 +282,6 @@
 /* No comment provided by engineer. */
 "Last Week" = "Última Semana";
 
-/* Data field name visible in menu/article list */
-"Link" = "Link";
-
 /* No comment provided by engineer. */
 "Loading…" = "A Carregar…";
 
@@ -350,9 +344,6 @@
 
 /* No comment provided by engineer. */
 "No new articles available" = "Nenhum artigo novo disponível";
-
-/* Title of a button on an alert */
-"OK" = "OK";
 
 /* Title of a popup menu item */
 "Open" = "Abrir";
@@ -555,12 +546,6 @@
 
 /* No comment provided by engineer. */
 "Yesterday" = "Ontem";
-
-/* rule for association of multiple criteria */
-"all" = "todos";
-
-/* rule for association of multiple criteria */
-"any" = "qualquer";
 
 /* test for a string */
 "contains" = "contém";

@@ -103,12 +103,6 @@
 /* Title of a button on an alert */
 "Upgrade Database" = "Uppgradera databas";
 
-/* rule for association of multiple criteria */
-"all" = "alla";
-
-/* rule for association of multiple criteria */
-"any" = "något";
-
 /* test for a string */
 "contains" = "innehåller";
 

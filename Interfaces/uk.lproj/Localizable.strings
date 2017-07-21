@@ -556,12 +556,6 @@
 /* No comment provided by engineer. */
 "Yesterday" = "Вчора";
 
-/* rule for association of multiple criteria */
-"all" = "всі";
-
-/* rule for association of multiple criteria */
-"any" = "будь-які";
-
 /* test for a string */
 "contains" = "містить";
 

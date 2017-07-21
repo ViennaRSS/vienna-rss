@@ -466,12 +466,6 @@
 /* No comment provided by engineer. */
 "Yesterday" = "昨日";
 
-/* rule for association of multiple criteria */
-"all" = "すべて";
-
-/* rule for association of multiple criteria */
-"any" = "いずれか";
-
 /* test for a string */
 "contains" = "が次を含む：";
 

@@ -556,12 +556,6 @@
 /* No comment provided by engineer. */
 "Yesterday" = "Dün";
 
-/* rule for association of multiple criteria */
-"all" = "tümü";
-
-/* rule for association of multiple criteria */
-"any" = "herhangi";
-
 /* test for a string */
 "contains" = "içerir";
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Interfaces/Base.lproj/ActivityViewer.xib" source-language="en" datatype="plaintext" target-language="cs">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
@@ -7,18 +7,18 @@
     <body>
       <trans-unit id="8.title">
         <source>Activity</source>
+        <target>Monitor aktivity</target>
         <note>Class = "NSWindow"; title = "Activity"; ObjectID = "8";</note>
-        <target xml:lang="cs" state="translated">Monitor aktivity</target>
       </trans-unit>
       <trans-unit id="18.headerCell.title">
         <source>Source</source>
+        <target>Zdroj</target>
         <note>Class = "NSTableColumn"; headerCell.title = "Source"; ObjectID = "18";</note>
-        <target xml:lang="cs" state="translated">Zdroj</target>
       </trans-unit>
       <trans-unit id="19.headerCell.title">
         <source>Status</source>
+        <target>Stav</target>
         <note>Class = "NSTableColumn"; headerCell.title = "Status"; ObjectID = "19";</note>
-        <target xml:lang="cs" state="translated">Stav</target>
       </trans-unit>
     </body>
   </file>
