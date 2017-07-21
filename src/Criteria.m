@@ -220,18 +220,6 @@
 	return MA_CritCondition_Invalid;
 }
 
-/*
- the following  code NEVER runs
- it is only there to ease localization export through Xcode
-*/
--(void)CriteriaConditionLocalization
-{
-    NSString * dummy;
-#pragma unused(dummy)
-    dummy = NSLocalizedString(@"any", @"rule for association of multiple criteria");
-    dummy = NSLocalizedString(@"all", @"rule for association of multiple criteria");
-}
-
 /* conditionToString
  * Returns the string representation of the specified condition.
  * Note: Do NOT localise these strings. They're written to the XML file.

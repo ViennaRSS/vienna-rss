@@ -71,6 +71,5 @@ typedef NS_ENUM(NSUInteger, CriteriaCondition) {
 -(void)addCriteria:(Criteria *)newCriteria;
 @property (nonatomic, readonly, copy) NSString *string;
 @property (nonatomic) CriteriaCondition condition;
-+(CriteriaCondition)conditionFromString:(NSString *)string;
-+(NSString *)conditionToString:(CriteriaCondition)condition;
+
 @end

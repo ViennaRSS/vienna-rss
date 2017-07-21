@@ -116,27 +116,32 @@ Gw
                         </view>
                     </box>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="58">
-                        <rect key="frame" x="18" y="113" width="172" height="17"/>
+                        <rect key="frame" x="18" y="112" width="172" height="17"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Show all articles that match" id="98">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <popUpButton verticalHuggingPriority="750" placeholderIntrinsicWidth="85" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="79">
-                        <rect key="frame" x="194" y="106" width="90" height="26"/>
-                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="82" id="99">
+                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="79">
+                        <rect key="frame" x="194" y="106" width="59" height="26"/>
+                        <popUpButtonCell key="cell" type="push" title="all" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="82" id="99">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
                             <menu key="menu" id="80">
                                 <items>
-                                    <menuItem state="on" id="82" propertyAccessControl="localizable"/>
+                                    <menuItem title="any" tag="1" id="j0v-xF-tpl">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                    <menuItem title="all" state="on" id="82">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
                                 </items>
                             </menu>
                         </popUpButtonCell>
                     </popUpButton>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="84">
-                        <rect key="frame" x="287" y="113" width="168" height="17"/>
+                        <rect key="frame" x="256" y="112" width="168" height="17"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="of the following conditions:" id="100">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
