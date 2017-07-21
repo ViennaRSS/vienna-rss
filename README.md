@@ -71,7 +71,7 @@ We need help keeping Vienna translations up to date into different languages. Ap
 * Turkish (tr)
 * Ukrainian (uk)
 
-You can contribute localizations at [Crowdin](https://crowdin.com/project/vienna-rss). Registration is required, but the account is free. Although Crowdin is preferred, you can also submit localizations via pull request, by editing the relevant files (e.g. \*.strings) directly.
+You can contribute localizations at [Crowdin](https://crowdin.com/project/vienna-rss). Registration is required, but the account is free. If you want to contribute for a language that is not yet listed, then contact us. Do not localize the project's \*.strings files directly. Localizable \*.plist files have to be localized directly.
 
 ### Writing custom styles
 
