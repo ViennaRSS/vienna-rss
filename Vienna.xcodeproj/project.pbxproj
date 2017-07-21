@@ -908,6 +908,15 @@
 		F69AE7B21F22182F00342640 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "fr.lproj/Vienna-InfoPlist.strings"; sourceTree = "<group>"; };
 		F69AE7B31F22183100342640 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F69AE7B41F22183100342640 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F69AE7B51F22187200342640 /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = gl.lproj/AdvancedPreferencesView.strings; sourceTree = "<group>"; };
+		F69AE7B61F22187200342640 /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = gl.lproj/SearchFolder.strings; sourceTree = "<group>"; };
+		F69AE7B71F22187300342640 /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = "gl.lproj/Vienna-InfoPlist.strings"; sourceTree = "<group>"; };
+		F69AE7B81F22187400342640 /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = gl.lproj/SyncingPreferencesView.strings; sourceTree = "<group>"; };
+		F69AE7B91F22187700342640 /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = gl.lproj/AppearancePreferencesView.strings; sourceTree = "<group>"; };
+		F69AE7BA1F22187800342640 /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = gl.lproj/GeneralPreferencesView.strings; sourceTree = "<group>"; };
+		F69AE7BB1F22187800342640 /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = gl.lproj/RSSFeed.strings; sourceTree = "<group>"; };
+		F69AE7BC1F22187800342640 /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = gl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F69AE7BD1F22187900342640 /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = gl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F6A4E8471F040D58001C9191 /* PluginToolbarItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PluginToolbarItemButton.swift; path = src/PluginToolbarItemButton.swift; sourceTree = "<group>"; };
 		F6A7DDCA1E470E980017BE5E /* Vienna.help */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Vienna.help; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6A7DDCC1E470E980017BE5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2520,6 +2529,7 @@
 				F6257FF21E283F500035E43C /* uk */,
 				F6257FF31E283F530035E43C /* zh-Hant */,
 				F6257FF41E283F550035E43C /* zh-Hans */,
+				F69AE7B81F22187400342640 /* gl */,
 			);
 			name = SyncingPreferencesView.xib;
 			path = Interfaces;
@@ -2547,6 +2557,7 @@
 				F6B9937C1E28360B005F9FAD /* zh-Hant */,
 				F6B9937D1E28360D005F9FAD /* zh-Hans */,
 				F69AE79D1F2216A000342640 /* da */,
+				F69AE7B51F22187200342640 /* gl */,
 			);
 			name = AdvancedPreferencesView.xib;
 			path = Interfaces;
@@ -2574,6 +2585,7 @@
 				F6352BF51E2722A0005CD307 /* uk */,
 				F6352BF61E2722A4005CD307 /* zh-Hant */,
 				F6352BF71E2722A9005CD307 /* zh-Hans */,
+				F69AE7BA1F22187800342640 /* gl */,
 			);
 			name = GeneralPreferencesView.xib;
 			path = Interfaces;
@@ -2601,6 +2613,7 @@
 				F6352C071E27285C005CD307 /* uk */,
 				F6352C081E272864005CD307 /* zh-Hant */,
 				F6352C091E272868005CD307 /* zh-Hans */,
+				F69AE7B91F22187700342640 /* gl */,
 			);
 			name = AppearancePreferencesView.xib;
 			path = Interfaces;
@@ -2846,6 +2859,7 @@
 				F69AE7AE1F2217BB00342640 /* es */,
 				F69AE7B11F2217FB00342640 /* eu */,
 				F69AE7B41F22183100342640 /* fr */,
+				F69AE7BD1F22187900342640 /* gl */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2859,6 +2873,7 @@
 				F69AE7AC1F2217B900342640 /* es */,
 				F69AE7AF1F2217F900342640 /* eu */,
 				F69AE7B21F22182F00342640 /* fr */,
+				F69AE7B71F22187300342640 /* gl */,
 			);
 			name = "Vienna-InfoPlist.strings";
 			path = Resources;
@@ -2872,6 +2887,7 @@
 				F69AE7AD1F2217BB00342640 /* es */,
 				F69AE7B01F2217FB00342640 /* eu */,
 				F69AE7B31F22183100342640 /* fr */,
+				F69AE7BC1F22187800342640 /* gl */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -3168,6 +3184,7 @@
 				F6D5738A1E26D3E000CDA909 /* tr */,
 				F6352BE41E2720DE005CD307 /* zh-Hant */,
 				F6352BE51E2720E0005CD307 /* zh-Hans */,
+				F69AE7BB1F22187800342640 /* gl */,
 			);
 			name = RSSFeed.xib;
 			path = Interfaces;
@@ -3195,6 +3212,7 @@
 				F6D5739C1E2703E100CDA909 /* tr */,
 				F6352BDB1E272078005CD307 /* zh-Hant */,
 				F6352BDC1E272087005CD307 /* zh-Hans */,
+				F69AE7B61F22187200342640 /* gl */,
 			);
 			name = SearchFolder.xib;
 			path = Interfaces;

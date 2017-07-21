@@ -1,0 +1,15 @@
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "102"; */
+"102.title" = "Cancelar";
+
+/* Class = "NSButtonCell"; title = "Subscribe"; ObjectID = "103"; */
+"103.title" = "Subscribirse";
+
+/* Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106"; */
+"106.title" = "Crear nova subscrición";
+
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "111"; */
+"111.title" = "Gardar";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "112"; */
+"112.title" = "Cancelar";
+
