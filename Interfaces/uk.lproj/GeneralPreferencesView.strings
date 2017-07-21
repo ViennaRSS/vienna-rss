@@ -34,9 +34,6 @@
 /* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1"; */
 "JN6-lj-bQ1.title" = "Показувати у меню";
 
-/* Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0"; */
-"OID-qF-Pp0.title" = "Search for latest Beta versions";
-
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "YoM-Gv-hXn"; */
 "YoM-Gv-hXn.title" = "Відкривати посилання у зовнішньому браузері";
 
@@ -58,9 +55,6 @@
 /* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG"; */
 "kGA-Sa-RLG.title" = "RSS-переглядач за замовчуванням:";
 
-/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl"; */
-"meo-78-YOl.title" = "Mark updated articles as new";
-
 /* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "oVW-ee-uJT"; */
 "oVW-ee-uJT.title" = "Кожні 5 хвилин";
 
@@ -70,14 +64,9 @@
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "pjg-Ze-H3l"; */
 "pjg-Ze-H3l.title" = "Відкривати посилання на задньому плані";
 
-/* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
-"qeb-at-hYb.title" = "Updates:";
-
-/* Class = "NSButtonCell"; title = "Include anonymous system profile"; ObjectID = "qno-Cg-EkC"; */
-"qno-Cg-EkC.title" = "Include anonymous system profile";
-
 /* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "sCl-hz-PFF"; */
 "sCl-hz-PFF.title" = "Помітити поточну статтю як прочитану:";
 
 /* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "sSj-zI-6RY"; */
 "sSj-zI-6RY.title" = "Кожної години";
+

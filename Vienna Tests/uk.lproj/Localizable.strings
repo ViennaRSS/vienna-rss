@@ -1,0 +1,138 @@
+/* No comment provided by engineer. */
+"(No title)" = "(Без заголовку)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(Безіменна стрічка)";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Автор";
+
+/* Title of a button on an alert */
+"Cancel" = "Скасувати";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Через помилку, Vienna не змогла створити папку \"%@\". Перевірте права доступу за вказаним шляхом.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Вибачте, але Vienna не може створити папку баз даних";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "Не можу відкрити файл бази даних (%@). Він мабуть пошкоджений або недоступний. Будь-ласка видаліть або переіменуйте цей файл і паразапустіть Vienna.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Вибачте, але Vienna не взмозі відкрити базу даних";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Оновлення бази даних";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Дата";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Видалено";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "URL додатку";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "З прапорцем";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Папка";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Додаток";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Заголовки";
+
+/* Data field name visible in menu/article list */
+"Link" = "Посилання";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Не можу створити нову базу даних Vienna  \"%@\" тому, що папка імовірно розміщення на віддаленому диску. Будь-ласка виберіть інше місце збереження бази даних на вашому локальному диску.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Не можу створити базу даних Vienna";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Помічені статті";
+
+/* Title of a button on an alert */
+"Quit Vienna" = "Завершити Vienna";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Прочитане";
+
+/* No comment provided by engineer. */
+"Search Results" = "Результати пошуку";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Пошук по всіх статтях";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Тема";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Підсумок";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Текст";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Сьогоднішні статті";
+
+/* No comment provided by engineer. */
+"Trash" = "Смітник";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Непрочитані статті";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "Формат баз даних файлу (%@) не підтримується цією версією Vienna. Переіменуйте або видаліть цей файл і перезапустіть Vienna.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "Формат баз даних змінився";
+
+/* rule for association of multiple criteria */
+"all" = "всі";
+
+/* rule for association of multiple criteria */
+"any" = "будь-які";
+
+/* test for a string */
+"contains" = "містить";
+
+/* test for a string */
+"does not contain" = "не містить";
+
+/* test for a value */
+"is" = "є";
+
+/* test for a date */
+"is after" = "після";
+
+/* test for a date */
+"is before" = "перед";
+
+/* test for a numeric value */
+"is greater than" = "більше ніж";
+
+/* test for a numeric value */
+"is greater than or equal to" = "більше ніж, або рівне";
+
+/* test for a numeric value */
+"is less than" = "менше ніж";
+
+/* test for a numeric value */
+"is less than or equal to" = "менше ніж, або рівне";
+
+/* test for a value */
+"is not" = "не є";
+
+/* test for a date */
+"is on or after" = "є на або після";
+
+/* test for a date */
+"is on or before" = "є на або перед";
+

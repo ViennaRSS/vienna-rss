@@ -22,9 +22,6 @@
 /* Class = "NSButtonCell"; title = "Subscribed"; ObjectID = "121"; */
 "121.title" = "Підписаний";
 
-/* Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126"; */
-"126.title" = "Load Full HTML Articles";
-
 /* Class = "NSTextFieldCell"; title = "Description"; ObjectID = "E84-Uo-ybg"; */
 "E84-Uo-ybg.title" = "Опис";
 
@@ -36,3 +33,4 @@
 
 /* Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG"; */
 "xPF-M9-oZG.title" = "URL";
+
