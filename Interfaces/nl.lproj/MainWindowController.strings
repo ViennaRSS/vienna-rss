@@ -1,392 +1,177 @@
-/* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
-"5.title" = "Alles op voorgrond";
+/* Class = "NSMenuItem"; title = "Today"; ObjectID = "3tM-J3-kmf"; */
+"3tM-J3-kmf.title" = "Vandaag";
 
-/* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
-"19.title" = "Venster";
+/* Class = "NSToolbarItem"; label = "Empty Trash"; ObjectID = "4c1-NR-ofo"; */
+"4c1-NR-ofo.label" = "Leeg prullenmand";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Empty Trash"; ObjectID = "4c1-NR-ofo"; */
+"4c1-NR-ofo.paletteLabel" = "Leeg prullenmand";
+
+/* Class = "NSToolbarItem"; toolTip = "Delete all articles in the trash"; ObjectID = "4c1-NR-ofo"; */
+"4c1-NR-ofo.toolTip" = "Wis alle artikelen in de prullenmand";
+
+/* Class = "NSToolbarItem"; label = "Get Info"; ObjectID = "7iy-IN-8oG"; */
+"7iy-IN-8oG.label" = "Toon info";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Get Info"; ObjectID = "7iy-IN-8oG"; */
+"7iy-IN-8oG.paletteLabel" = "Toon info";
+
+/* Class = "NSToolbarItem"; toolTip = "See information about the selected subscription"; ObjectID = "7iy-IN-8oG"; */
+"7iy-IN-8oG.toolTip" = "Toon informatie over geselecteerde abonnement";
+
+/* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8LJ-RZ-pfu"; */
+"8LJ-RZ-pfu.title" = "Gemarkeerd";
+
+/* Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T"; */
+"10h-xf-C6T.label" = "Verzend koppeling";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T"; */
+"10h-xf-C6T.paletteLabel" = "Verzend koppeling";
+
+/* Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T"; */
+"10h-xf-C6T.toolTip" = "Email een koppeling naar huidige artikel of website";
 
 /* Class = "NSWindow"; title = "Vienna"; ObjectID = "21"; */
 "21.title" = "Vienna";
 
-/* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
-"23.title" = "Minimaliseer";
+/* Class = "NSSearchField"; ibShadowedToolTip = "Filter displayed articles by matching text"; ObjectID = "1304"; */
+"1304.ibShadowedToolTip" = "Filter getoonde artikelen op deze tekst";
 
-/* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
-"24.title" = "Venster";
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "Filter articles"; ObjectID = "1306"; */
+"1306.ibShadowedToolTip" = "Filter artikelen";
 
-/* Class = "NSMenuItem"; title = "Vienna"; ObjectID = "56"; */
-"56.title" = "Vienna";
+/* Class = "NSButton"; ibExternalAccessibilityDescription = "Close the filter bar"; ObjectID = "1313"; */
+"1313.ibExternalAccessibilityDescription" = "Sluit de filterbalk";
 
-/* Class = "NSMenu"; title = "Vienna"; ObjectID = "57"; */
-"57.title" = "Vienna";
+/* Class = "NSButton"; ibShadowedToolTip = "Close the filter bar"; ObjectID = "1313"; */
+"1313.ibShadowedToolTip" = "Sluit de filterbalk";
 
-/* Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58"; */
-"58.title" = "Over Vienna";
+/* Class = "NSToolbarItem"; label = "Add"; ObjectID = "CPA-Ha-aj1"; */
+"CPA-Ha-aj1.label" = "Voeg toe";
 
-/* Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "77"; */
-"77.title" = "Pagina-instelling…";
+/* Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1"; */
+"CPA-Ha-aj1.paletteLabel" = "Voeg toe";
 
-/* Class = "NSMenuItem"; title = "Print…"; ObjectID = "78"; */
-"78.title" = "Druk af…";
+/* Class = "NSToolbarItem"; label = "All Read"; ObjectID = "Gyz-dq-ewv"; */
+"Gyz-dq-ewv.label" = "Alle gelezen";
 
-/* Class = "NSMenu"; title = "File"; ObjectID = "81"; */
-"81.title" = "Archief";
+/* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g"; */
+"Hs0-hu-A2g.title" = "Werk geselecteerde abonnementen bij";
 
-/* Class = "NSMenuItem"; title = "File"; ObjectID = "83"; */
-"83.title" = "Archief";
+/* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "JT2-Q7-gRj"; */
+"JT2-Q7-gRj.title" = "Alle artikelen";
 
-/* Class = "NSMenuItem"; title = "Help"; ObjectID = "103"; */
-"103.title" = "Help";
+/* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm"; */
+"MaO-r1-tcm.title" = "Meer stijlen…";
 
-/* Class = "NSMenu"; title = "Help"; ObjectID = "106"; */
-"106.title" = "Help";
+/* Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys"; */
+"Nmd-zx-Dys.label" = "Ververs";
 
-/* Class = "NSMenuItem"; title = "Vienna Help"; ObjectID = "111"; */
-"111.title" = "Vienna Help";
+/* Class = "NSToolbarItem"; paletteLabel = "Refresh"; ObjectID = "Nmd-zx-Dys"; */
+"Nmd-zx-Dys.paletteLabel" = "Ververs";
 
-/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
-"129.title" = "Voorkeuren…";
+/* Class = "NSToolbarItem"; toolTip = "Refresh all your subscriptions"; ObjectID = "Nmd-zx-Dys"; */
+"Nmd-zx-Dys.toolTip" = "Werk alle abonnementen bij";
 
-/* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
-"130.title" = "Voorzieningen";
+/* Class = "NSToolbarItem"; label = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
+"OIA-vb-5jR.label" = "Zoek artikelen";
 
-/* Class = "NSMenuItem"; title = "Services"; ObjectID = "131"; */
-"131.title" = "Voorzieningen";
+/* Class = "NSToolbarItem"; paletteLabel = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
+"OIA-vb-5jR.paletteLabel" = "Zoek artikelen";
 
-/* Class = "NSMenuItem"; title = "Hide Vienna"; ObjectID = "134"; */
-"134.title" = "Verberg Vienna";
+/* Class = "NSToolbarItem"; toolTip = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
+"OIA-vb-5jR.toolTip" = "Zoek artikelen";
 
-/* Class = "NSMenuItem"; title = "Quit Vienna"; ObjectID = "136"; */
-"136.title" = "Stop Vienna";
+/* Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "Pqr-dM-SQQ"; */
+"Pqr-dM-SQQ.title" = "Nieuwe slimme map…";
 
-/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
-"145.title" = "Verberg andere";
+/* Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija"; */
+"RaH-Yu-Ija.title" = "Nieuwe map…";
 
-/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
-"150.title" = "Toon alles";
+/* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Rdq-QU-3hM"; */
+"Rdq-QU-3hM.title" = "Wis…";
 
-/* Class = "NSMenuItem"; title = "Find…"; ObjectID = "154"; */
-"154.title" = "Zoek…";
+/* Class = "NSToolbarItem"; label = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
+"SoG-b2-O1S.label" = "Sla map over";
 
-/* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "155"; */
-"155.title" = "Spring naar selectie";
+/* Class = "NSToolbarItem"; paletteLabel = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
+"SoG-b2-O1S.paletteLabel" = "Sla map over";
 
-/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "157"; */
-"157.title" = "Kopieer";
+/* Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
+"SoG-b2-O1S.toolTip" = "Sla map over";
 
-/* Class = "NSMenuItem"; title = "Undo"; ObjectID = "158"; */
-"158.title" = "Herstel";
+/* Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU"; */
+"TSQ-UW-4gU.label" = "Actie";
 
-/* Class = "NSMenu"; title = "Find"; ObjectID = "159"; */
-"159.title" = "Zoek";
+/* Class = "NSToolbarItem"; paletteLabel = "Action"; ObjectID = "TSQ-UW-4gU"; */
+"TSQ-UW-4gU.paletteLabel" = "Actie";
 
-/* Class = "NSMenuItem"; title = "Cut"; ObjectID = "160"; */
-"160.title" = "Knip";
+/* Class = "NSToolbarItem"; toolTip = "Additional actions for the selected folder"; ObjectID = "TSQ-UW-4gU"; */
+"TSQ-UW-4gU.toolTip" = "Meer acties voor de geselecteerde map";
 
-/* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "161"; */
-"161.title" = "Gebruik selectie voor zoekactie";
+/* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "Xw6-KX-rhd"; */
+"Xw6-KX-rhd.title" = "Afgelopen 48 uur";
 
-/* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "162"; */
-"162.title" = "Zoek vorige";
+/* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f"; */
+"Y0d-K7-46f.title" = "Toon info";
 
-/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "163"; */
-"163.title" = "Wijzig";
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "ZVp-Nv-0jh"; */
+"ZVp-Nv-0jh.title" = "Open abonnement-pagina in externe browser";
 
-/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "164"; */
-"164.title" = "Wis";
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2"; */
+"Zu1-zW-uo2.title" = "Ga naar startpagina van abonnement";
 
-/* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "167"; */
-"167.title" = "Zoek volgende";
+/* Class = "NSToolbarItem"; label = "Style"; ObjectID = "azL-oz-mJL"; */
+"azL-oz-mJL.label" = "Stijl";
 
-/* Class = "NSMenuItem"; title = "Find"; ObjectID = "168"; */
-"168.title" = "Zoek";
+/* Class = "NSToolbarItem"; paletteLabel = "Style"; ObjectID = "azL-oz-mJL"; */
+"azL-oz-mJL.paletteLabel" = "Stijl";
 
-/* Class = "NSMenu"; title = "Edit"; ObjectID = "169"; */
-"169.title" = "Wijzig";
+/* Class = "NSToolbarItem"; toolTip = "Display the list of available styles"; ObjectID = "azL-oz-mJL"; */
+"azL-oz-mJL.toolTip" = "Toon lijst van beschikbare stijlen";
 
-/* Class = "NSMenuItem"; title = "Paste"; ObjectID = "171"; */
-"171.title" = "Plak";
+/* Class = "NSToolbarItem"; label = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
+"fpY-CJ-hKU.label" = "Volgende ongelezen";
 
-/* Class = "NSMenuItem"; title = "Select All"; ObjectID = "172"; */
-"172.title" = "Selecteer alles";
+/* Class = "NSToolbarItem"; paletteLabel = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
+"fpY-CJ-hKU.paletteLabel" = "Volgende ongelezen";
 
-/* Class = "NSMenuItem"; title = "Redo"; ObjectID = "173"; */
-"173.title" = "Opnieuw";
+/* Class = "NSToolbarItem"; toolTip = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
+"fpY-CJ-hKU.toolTip" = "Volgende ongelezen";
 
-/* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "197"; */
-"197.title" = "Vergroot/verklein";
+/* Class = "NSToolbarItem"; label = "Back"; ObjectID = "gOG-UJ-Pin"; */
+"gOG-UJ-Pin.label" = "Vorige";
 
-/* Class = "NSMenuItem"; title = "View"; ObjectID = "235"; */
-"235.title" = "Weergave";
+/* Class = "NSToolbarItem"; paletteLabel = "Back"; ObjectID = "gOG-UJ-Pin"; */
+"gOG-UJ-Pin.paletteLabel" = "Vorige";
 
-/* Class = "NSMenu"; title = "View"; ObjectID = "237"; */
-"237.title" = "Weergave";
+/* Class = "NSToolbarItem"; toolTip = "Back"; ObjectID = "gOG-UJ-Pin"; */
+"gOG-UJ-Pin.toolTip" = "Vorige";
 
-/* Class = "NSMenu"; title = "Article"; ObjectID = "300"; */
-"300.title" = "Artikel";
+/* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "iqm-sr-F8U"; */
+"iqm-sr-F8U.title" = "Forceer bijwerken abonnementen van Open Reader";
 
-/* Class = "NSMenuItem"; title = "Article"; ObjectID = "301"; */
-"301.title" = "Artikel";
+/* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "l14-tu-w7l"; */
+"l14-tu-w7l.title" = "Wijzig naam…";
 
-/* Class = "NSMenuItem"; title = "Next Unread"; ObjectID = "344"; */
-"344.title" = "Volgende ongelezen";
+/* Class = "NSSearchFieldCell"; placeholderString = "Search for folders"; ObjectID = "lhy-4c-asJ"; */
+"lhy-4c-asJ.placeholderString" = "Zoek naar mappen";
 
-/* Class = "NSMenuItem"; title = "Sort By"; ObjectID = "387"; */
-"387.title" = "Sorteer op";
+/* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "psA-wp-PcZ"; */
+"psA-wp-PcZ.title" = "Nieuw abonnement…";
 
-/* Class = "NSMenu"; title = "Sort By"; ObjectID = "388"; */
-"388.title" = "Sorteer op";
+/* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "sDP-Ni-g3a"; */
+"sDP-Ni-g3a.title" = "Ongelezen artikelen";
 
-/* Class = "NSMenuItem"; title = "Activity Window"; ObjectID = "402"; */
-"402.title" = "Activiteitenoverzicht";
+/* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "ty7-ph-peE"; */
+"ty7-ph-peE.title" = "Ongelezen of gemarkeerd";
 
-/* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "406"; */
-"406.title" = "Werk alle abonnementen bij";
+/* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "vOQ-xo-w8E"; */
+"vOQ-xo-w8E.title" = "Bewerk…";
 
-/* Class = "NSMenuItem"; title = "Back"; ObjectID = "422"; */
-"422.title" = "Vorige";
+/* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "xNW-zC-IMZ"; */
+"xNW-zC-IMZ.title" = "Markeer alles als gelezen";
 
-/* Class = "NSMenuItem"; title = "Forward"; ObjectID = "423"; */
-"423.title" = "Volgende";
+/* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "xVH-W7-Br4"; */
+"xVH-W7-Br4.title" = "Laatste vernieuwing";
 
-/* Class = "NSMenuItem"; title = "Columns"; ObjectID = "442"; */
-"442.title" = "Kolommen";
-
-/* Class = "NSMenu"; title = "Columns"; ObjectID = "443"; */
-"443.title" = "Kolommen";
-
-/* Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "574"; */
-"574.title" = "Nieuwe slimme map…";
-
-/* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "604"; */
-"604.title" = "Werk geselecteerde abonnementen bij";
-
-/* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "690"; */
-"690.title" = "Nieuw abonnement…";
-
-/* Class = "NSMenuItem"; title = "Import Subscriptions…"; ObjectID = "780"; */
-"780.title" = "Importeer abonnementen…";
-
-/* Class = "NSMenuItem"; title = "Export Subscriptions…"; ObjectID = "781"; */
-"781.title" = "Exporteer abonnementen…";
-
-/* Class = "NSMenuItem"; title = "Mark Unread"; ObjectID = "789"; */
-"789.title" = "Markeer als ongelezen";
-
-/* Class = "NSMenuItem"; title = "Mark Flagged"; ObjectID = "790"; */
-"790.title" = "Markeer";
-
-/* Class = "NSMenuItem"; title = "New Group Folder…"; ObjectID = "806"; */
-"806.title" = "Nieuwe groep…";
-
-/* Class = "NSMenuItem"; title = "Style"; ObjectID = "826"; */
-"826.title" = "Stijl";
-
-/* Class = "NSMenu"; title = "Style"; ObjectID = "827"; */
-"827.title" = "Stijl";
-
-/* Class = "NSMenuItem"; title = "Stop Refreshing"; ObjectID = "858"; */
-"858.title" = "Stop bijwerken";
-
-/* Class = "NSButtonCell"; title = "Export all subscriptions"; ObjectID = "862"; */
-"862.title" = "Exporteer alle abonnementen";
-
-/* Class = "NSButtonCell"; title = "Export selected subscriptions"; ObjectID = "863"; */
-"863.title" = "Exporteer geselecteerde abonnementen";
-
-/* Class = "NSMenuItem"; title = "Vienna Web Site"; ObjectID = "929"; */
-"929.title" = "Vienna-website";
-
-/* Class = "NSMenuItem"; title = "Close Window"; ObjectID = "935"; */
-"935.title" = "Sluit venster";
-
-/* Class = "NSMenuItem"; title = "Main Window"; ObjectID = "940"; */
-"940.title" = "Vienna";
-
-/* Class = "NSMenuItem"; title = "Empty Trash"; ObjectID = "961"; */
-"961.title" = "Leeg prullenmand";
-
-/* Class = "NSMenuItem"; title = "Previous Tab"; ObjectID = "1008"; */
-"1008.title" = "Vorige tab";
-
-/* Class = "NSMenuItem"; title = "Next Tab"; ObjectID = "1009"; */
-"1009.title" = "Volgende tab";
-
-/* Class = "NSMenuItem"; title = "Close Tab"; ObjectID = "1023"; */
-"1023.title" = "Sluit tab";
-
-/* Class = "NSMenuItem"; title = "Reload Page"; ObjectID = "1025"; */
-"1025.title" = "Laad pagina opnieuw";
-
-/* Class = "NSMenuItem"; title = "Stop Reloading Page"; ObjectID = "1027"; */
-"1027.title" = "Stop";
-
-/* Class = "NSMenuItem"; title = "Close All Tabs"; ObjectID = "1036"; */
-"1036.title" = "Sluit alle tabs";
-
-/* Class = "NSMenuItem"; title = "Open Article Page"; ObjectID = "1040"; */
-"1040.title" = "Ga naar artikelpagina";
-
-/* Class = "NSMenuItem"; title = "Restore Article"; ObjectID = "1044"; */
-"1044.title" = "Herstel artikel";
-
-/* Class = "NSMenuItem"; title = "Downloads"; ObjectID = "1061"; */
-"1061.title" = "Downloads";
-
-/* Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067"; */
-"1067.title" = "Open artikelpagina in externe browser";
-
-/* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
-"1073.title" = "Send Link by Email";
-
-/* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
-"1084.title" = "Grotere tekst";
-
-/* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
-"1085.title" = "Kleinere tekst";
-
-/* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
-"1101.title" = "Open weblocatie…";
-
-/* Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "1104"; */
-"1104.title" = "Zoek naar updates";
-
-/* Class = "NSMenuItem"; title = "Refresh Folder Images"; ObjectID = "1106"; */
-"1106.title" = "Werk map-iconen bij";
-
-/* Class = "NSMenuItem"; title = "Layout"; ObjectID = "1108"; */
-"1108.title" = "Lay-out";
-
-/* Class = "NSMenu"; title = "Layout"; ObjectID = "1109"; */
-"1109.title" = "Lay-out";
-
-/* Class = "NSMenuItem"; title = "Horizontal"; ObjectID = "1110"; */
-"1110.title" = "Rapport";
-
-/* Class = "NSMenuItem"; title = "Vertical"; ObjectID = "1116"; */
-"1116.title" = "Verkort";
-
-/* Class = "NSMenuItem"; title = "Filter By"; ObjectID = "1117"; */
-"1117.title" = "Filter Op";
-
-/* Class = "NSMenu"; title = "Filter By"; ObjectID = "1118"; */
-"1118.title" = "Filter Op";
-
-/* Class = "NSMenuItem"; title = "Keyboard Shortcuts"; ObjectID = "1146"; */
-"1146.title" = "Toetscombinaties";
-
-/* Class = "NSMenuItem"; title = "Unified"; ObjectID = "1160"; */
-"1160.title" = "Verenigd";
-
-/* Class = "NSMenuItem"; title = "Folder"; ObjectID = "1177"; */
-"1177.title" = "Map";
-
-/* Class = "NSMenu"; title = "Folder"; ObjectID = "1178"; */
-"1178.title" = "Map";
-
-/* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "1180"; */
-"1180.title" = "Bewerk…";
-
-/* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "1181"; */
-"1181.title" = "Wijzig naam…";
-
-/* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "1184"; */
-"1184.title" = "Wis…";
-
-/* Class = "NSMenuItem"; title = "Skip Folder"; ObjectID = "1186"; */
-"1186.title" = "Sla map over";
-
-/* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "1187"; */
-"1187.title" = "Markeer alles als gelezen";
-
-/* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "1191"; */
-"1191.title" = "Ga naar startpagina van abonnement";
-
-/* Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "1192"; */
-"1192.title" = "Open abonnement-pagina in externe browser";
-
-/* Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "1195"; */
-"1195.title" = "Markeer alle abonnementen als gelezen";
-
-/* Class = "NSMenuItem"; title = "Delete Article"; ObjectID = "1198"; */
-"1198.title" = "Wis artikel";
-
-/* Class = "NSMenuItem"; title = "Open New Tab"; ObjectID = "1214"; */
-"1214.title" = "Open nieuwe tab";
-
-/* Class = "NSMenuItem"; title = "Download Enclosure"; ObjectID = "1216"; */
-"1216.title" = "Download bijlage";
-
-/* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
-"1257.title" = "Pas knoppenbalk aan…";
-
-/* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
-"1258.title" = "Hide Toolbar";
-
-/* Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259"; */
-"1259.title" = "Verberg statusbalk";
-
-/* Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "1325"; */
-"1325.title" = "Toon filterbalk";
-
-/* Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327"; */
-"1327.title" = "Zoek artikelen";
-
-/* Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336"; */
-"1336.title" = "Rangschikking";
-
-/* Class = "NSMenu"; title = "Order By"; ObjectID = "1337"; */
-"1337.title" = "Rangschikking";
-
-/* Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338"; */
-"1338.title" = "Handmatig";
-
-/* Class = "NSMenuItem"; title = "Name"; ObjectID = "1339"; */
-"1339.title" = "Op naam";
-
-/* Class = "NSButtonCell"; title = "Preserve group folders in exported file"; ObjectID = "1368"; */
-"1368.title" = "Behoud groeperingen in exportbestand";
-
-/* Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377"; */
-"1377.title" = "Filter by:";
-
-/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "1380"; */
-"1380.title" = "Radio";
-
-/* Class = "NSMenuItem"; title = "Show XML Source"; ObjectID = "1394"; */
-"1394.title" = "Toon XML broncode";
-
-/* Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404"; */
-"1404.title" = "Current Filter";
-
-/* Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408"; */
-"1408.title" = "Zeg abonnement op";
-
-/* Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409"; */
-"1409.title" = "Toon info…";
-
-/* Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413"; */
-"1413.title" = "Gebruik huidige stijl voor artikelen";
-
-/* Class = "NSMenuItem"; title = "Use Web Page for Articles"; ObjectID = "1415"; */
-"1415.title" = "Gebruik webpagina's voor artikelen";
-
-/* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "1425"; */
-"1425.title" = "Forceer bijwerken abonnementen van Open Reader";
-
-/* Class = "NSMenuItem"; title = "Update Subscriptions From Open Reader"; ObjectID = "1428"; */
-"1428.title" = "Bijwerken abonnementen van Open Reader";
-
-/* Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458"; */
-"1458.title" = "Reindex Database";
-
-/* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1"; */
-"6yn-y8-lF1.title" = "Werk alle abonnementen bij";
-
-/* Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi"; */
-"ecl-HO-Kpi.title" = "Markeer alle abonnementen als gelezen";
-
-/* Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI"; */
-"fad-Nj-OFI.title" = "Spelling";
-
-/* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
-"pKl-6f-Hlc.title" = "Markeer als gelezen";
