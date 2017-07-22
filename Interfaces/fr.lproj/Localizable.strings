@@ -668,7 +668,7 @@
 "Vienna cannot show the file title" = "Vienna ne peut afficher le fichier.";
 
 /* No comment provided by engineer. */
-"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna doit effectuer une mise à jour de sa base de données. Cela peut prendre une minute ou plus. Merci de votre compréhension.";
+"Database upgrade explanation text" = "Vienna doit effectuer une mise à jour de sa base de données. Cela peut prendre une minute ou plus. Merci de votre compréhension.";
 
 /* No comment provided by engineer. */
 "Yes" = "Oui";

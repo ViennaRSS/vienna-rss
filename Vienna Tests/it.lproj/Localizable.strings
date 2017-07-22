@@ -94,9 +94,6 @@
 /* No comment provided by engineer. */
 "Unrecognised database format title" = "Il formato del file del database è cambiato";
 
-/* No comment provided by engineer. */
-"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.";
-
 /* test for a string */
 "contains" = "contiene";
 
