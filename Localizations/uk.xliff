@@ -1324,6 +1324,11 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
+      <trans-unit id="82.title">
+        <source>all</source>
+        <note>Class = "NSMenuItem"; title = "all"; ObjectID = "82";</note>
+        <target xml:lang="uk" state="translated">всі</target>
+      </trans-unit>
       <trans-unit id="94.title">
         <source>Smart folder name:</source>
         <note>Class = "NSTextFieldCell"; title = "Smart folder name:"; ObjectID = "94";</note>
@@ -1348,6 +1353,11 @@
         <source>of the following conditions:</source>
         <note>Class = "NSTextFieldCell"; title = "of the following conditions:"; ObjectID = "100";</note>
         <target xml:lang="uk" state="translated">з наступних умов:</target>
+      </trans-unit>
+      <trans-unit id="j0v-xF-tpl.title">
+        <source>any</source>
+        <note>Class = "NSMenuItem"; title = "any"; ObjectID = "j0v-xF-tpl";</note>
+        <target xml:lang="uk" state="translated">будь-які</target>
       </trans-unit>
     </body>
   </file>
