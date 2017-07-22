@@ -1,0 +1,3 @@
+files:
+  - source: /Interfaces/Base.lproj/*.strings
+    translation: /Interfaces/%osx_code%/%original_file_name%
