@@ -272,6 +272,11 @@
         <note>Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1";</note>
         <target xml:lang="nl" state="translated">Toon in menubalk</target>
       </trans-unit>
+      <trans-unit id="OID-qF-Pp0.title">
+        <source>Search for latest Beta versions</source>
+        <note>Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0";</note>
+        <target xml:lang="nl" state="translated">Zoek naar bèta-updates</target>
+      </trans-unit>
       <trans-unit id="YoM-Gv-hXn.title">
         <source>Open links in external browser</source>
         <note>Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "YoM-Gv-hXn";</note>
@@ -1054,6 +1059,11 @@
         <note>Class = "NSMenuItem"; title = "Update Subscriptions From Open Reader"; ObjectID = "1428";</note>
         <target xml:lang="nl" state="translated">Bijwerken abonnementen van Open Reader</target>
       </trans-unit>
+      <trans-unit id="1458.title">
+        <source>Reindex Database</source>
+        <note>Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458";</note>
+        <target xml:lang="nl" state="translated">Herindexeer databank</target>
+      </trans-unit>
       <trans-unit id="BUc-Ki-OOg.title">
         <source>Unread or Flagged</source>
         <note>Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "BUc-Ki-OOg";</note>
@@ -1306,6 +1316,11 @@
         <note>Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377";</note>
         <target xml:lang="nl" state="translated">Filter op:</target>
       </trans-unit>
+      <trans-unit id="1404.title">
+        <source>Current Filter</source>
+        <note>Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404";</note>
+        <target xml:lang="nl" state="translated">Huidige filter</target>
+      </trans-unit>
       <trans-unit id="CPA-Ha-aj1.label">
         <source>Add</source>
         <note>Class = "NSToolbarItem"; label = "Add"; ObjectID = "CPA-Ha-aj1";</note>
@@ -1320,6 +1335,16 @@
         <source>All Read</source>
         <note>Class = "NSToolbarItem"; label = "All Read"; ObjectID = "Gyz-dq-ewv";</note>
         <target xml:lang="nl" state="translated">Alle gelezen</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.paletteLabel">
+        <source>Mark All Items as Read</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Mark All Items as Read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="nl" state="translated">Markeer alle artikels als gelezen</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.toolTip">
+        <source>Mark all items as read</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Mark all items as read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="nl" state="translated">Markeer alle artikels als gelezen</target>
       </trans-unit>
       <trans-unit id="Hs0-hu-A2g.title">
         <source>Refresh Selected Subscriptions</source>
@@ -1585,6 +1610,11 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
+      <trans-unit id="82.title">
+        <source>all</source>
+        <note>Class = "NSMenuItem"; title = "all"; ObjectID = "82";</note>
+        <target xml:lang="nl" state="translated">alle</target>
+      </trans-unit>
       <trans-unit id="94.title">
         <source>Smart folder name:</source>
         <note>Class = "NSTextFieldCell"; title = "Smart folder name:"; ObjectID = "94";</note>
@@ -1610,6 +1640,11 @@
         <note>Class = "NSTextFieldCell"; title = "of the following conditions:"; ObjectID = "100";</note>
         <target xml:lang="nl" state="translated">van de volgende voorwaarden:</target>
       </trans-unit>
+      <trans-unit id="j0v-xF-tpl.title">
+        <source>any</source>
+        <note>Class = "NSMenuItem"; title = "any"; ObjectID = "j0v-xF-tpl";</note>
+        <target xml:lang="nl" state="translated">een of meer</target>
+      </trans-unit>
     </body>
   </file>
   <file original="Interfaces/Base.lproj/SyncingPreferencesView.xib" source-language="en" datatype="plaintext" target-language="nl">
@@ -1617,6 +1652,16 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
+      <trans-unit id="Ar5-Qc-YTe.ibExternalAccessibilityDescription">
+        <source>Visit the website</source>
+        <note>Class = "NSButton"; ibExternalAccessibilityDescription = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
+        <target xml:lang="nl" state="translated">Bezoek website</target>
+      </trans-unit>
+      <trans-unit id="Ar5-Qc-YTe.ibShadowedToolTip">
+        <source>Visit the website</source>
+        <note>Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
+        <target xml:lang="nl" state="translated">Bezoek website</target>
+      </trans-unit>
       <trans-unit id="Lkv-md-rEW.title">
         <source>Sync with an Open Reader server</source>
         <note>Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Lkv-md-rEW";</note>
@@ -2384,6 +2429,11 @@
         <note>Title of the Preferences window</note>
         <target xml:lang="nl">Voorkeuren</target>
       </trans-unit>
+      <trans-unit id="Queue">
+        <source>Queue</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="nl" state="translated">Wachtrij</target>
+      </trans-unit>
       <trans-unit id="Quit" approved="yes">
         <source>Quit</source>
         <note>Title of a button on an alert</note>
@@ -2490,6 +2540,11 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="nl" state="translated">Zoek resultaten</target>
       </trans-unit>
+      <trans-unit id="Search all articles">
+        <source>Search all articles</source>
+        <note>Placeholder title of a search field</note>
+        <target xml:lang="nl" state="translated">Zoek naar artikels</target>
+      </trans-unit>
       <trans-unit id="Search all articles or the current web page">
         <source>Search all articles or the current web page</source>
         <note>No comment provided by engineer.</note>
@@ -2589,6 +2644,11 @@
         <source>Trash</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="nl" state="translated">Prullenmand</target>
+      </trans-unit>
+      <trans-unit id="URL">
+        <source>URL</source>
+        <note>URL</note>
+        <target xml:lang="nl" state="translated">URL</target>
       </trans-unit>
       <trans-unit id="Unread">
         <source>Unread</source>
@@ -2853,6 +2913,11 @@
         <source>Search Results</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="nl" state="translated">Zoekresultaten</target>
+      </trans-unit>
+      <trans-unit id="Search all articles">
+        <source>Search all articles</source>
+        <note>Placeholder title of a search field</note>
+        <target xml:lang="nl" state="translated">Zoek naar artikels</target>
       </trans-unit>
       <trans-unit id="Search current web page">
         <source>Search current web page</source>
