@@ -463,6 +463,11 @@
         <note>Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg";</note>
         <target xml:lang="de" state="translated">Mehr Stile…</target>
       </trans-unit>
+      <trans-unit id="4ih-vj-fsk.title">
+        <source>Check Grammar With Spelling</source>
+        <note>Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "4ih-vj-fsk";</note>
+        <target xml:lang="de" state="translated">Rechtschreib- und Grammatikprüfung</target>
+      </trans-unit>
       <trans-unit id="5.title">
         <source>Bring All to Front</source>
         <note>Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5";</note>
@@ -492,6 +497,11 @@
         <source>Window</source>
         <note>Class = "NSMenu"; title = "Window"; ObjectID = "24";</note>
         <target xml:lang="de">Fenster</target>
+      </trans-unit>
+      <trans-unit id="27s-E3-FHd.title">
+        <source>Correct Spelling Automatically</source>
+        <note>Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "27s-E3-FHd";</note>
+        <target xml:lang="de" state="translated">Rechtschreibung automatisch korrigieren</target>
       </trans-unit>
       <trans-unit id="58.title">
         <source>About Vienna</source>
@@ -1069,6 +1079,41 @@
         <note>Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI";</note>
         <target xml:lang="de" state="translated">Letzte 48 Stunden</target>
       </trans-unit>
+      <trans-unit id="CLG-Dq-a59.title">
+        <source>Show Spelling and Grammar</source>
+        <note>Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "CLG-Dq-a59";</note>
+        <target xml:lang="de" state="translated">Rechtschreibung und Grammatik einblenden</target>
+      </trans-unit>
+      <trans-unit id="G6k-0L-moc.title">
+        <source>Speech</source>
+        <note>Class = "NSMenu"; title = "Speech"; ObjectID = "G6k-0L-moc";</note>
+        <target xml:lang="de" state="translated">Sprachausgabe</target>
+      </trans-unit>
+      <trans-unit id="JXn-SB-3t2.title">
+        <source>Speech</source>
+        <note>Class = "NSMenuItem"; title = "Speech"; ObjectID = "JXn-SB-3t2";</note>
+        <target xml:lang="de" state="translated">Sprachausgabe</target>
+      </trans-unit>
+      <trans-unit id="MHF-D4-pRN.title">
+        <source>Make Upper Case</source>
+        <note>Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN";</note>
+        <target xml:lang="de" state="translated">Großbuchstaben</target>
+      </trans-unit>
+      <trans-unit id="QEb-Bm-CPN.title">
+        <source>Substitutions</source>
+        <note>Class = "NSMenu"; title = "Substitutions"; ObjectID = "QEb-Bm-CPN";</note>
+        <target xml:lang="de" state="translated">Ersetzungen</target>
+      </trans-unit>
+      <trans-unit id="RtQ-eP-bfk.title">
+        <source>Smart Dashes</source>
+        <note>Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk";</note>
+        <target xml:lang="de" state="translated">Intelligente Bindestriche</target>
+      </trans-unit>
+      <trans-unit id="UFF-Fn-8ti.title">
+        <source>Transformations</source>
+        <note>Class = "NSMenu"; title = "Transformations"; ObjectID = "UFF-Fn-8ti";</note>
+        <target xml:lang="de" state="translated">Transformationen</target>
+      </trans-unit>
       <trans-unit id="ZCa-7v-54l.title" approved="yes">
         <source>Enter Full Screen</source>
         <note>Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "ZCa-7v-54l";</note>
@@ -1076,6 +1121,11 @@
         <alt-trans>
           <target xml:lang="de">Wechsel zum Vollbild</target>
         </alt-trans>
+      </trans-unit>
+      <trans-unit id="eVb-Qt-XJb.title">
+        <source>Substitutions</source>
+        <note>Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "eVb-Qt-XJb";</note>
+        <target xml:lang="de" state="translated">Ersetzungen</target>
       </trans-unit>
       <trans-unit id="ecl-HO-Kpi.title">
         <source>Mark All Subscriptions as Read</source>
@@ -1086,6 +1136,11 @@
         <source>Spelling</source>
         <note>Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI";</note>
         <target xml:lang="de" state="translated">Rechtschreibung</target>
+      </trans-unit>
+      <trans-unit id="joR-kW-sIU.title">
+        <source>Transformations</source>
+        <note>Class = "NSMenuItem"; title = "Transformations"; ObjectID = "joR-kW-sIU";</note>
+        <target xml:lang="de" state="translated">Transformationen</target>
       </trans-unit>
       <trans-unit id="pKl-6f-Hlc.title">
         <source>Mark Read</source>
@@ -1218,6 +1273,11 @@
         <source>Add</source>
         <note>Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1";</note>
         <target xml:lang="de" state="translated">Hinzufügen</target>
+      </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.toolTip">
+        <source>Subscribe to a feed or add a folder or smart folder.</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Subscribe to a feed or add a folder or smart folder."; ObjectID = "CPA-Ha-aj1";</note>
+        <target xml:lang="de" state="translated">Einen Feed, Ordner oder intelligenten Feed hinzufügen.</target>
       </trans-unit>
       <trans-unit id="Gyz-dq-ewv.label">
         <source>All Read</source>
@@ -1997,10 +2057,30 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Fehler beim Importieren</target>
       </trans-unit>
+      <trans-unit id="Error loading script '%@'">
+        <source>Error loading script '%@'</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="translated">Fehler beim Laden des Scripts: %@</target>
+      </trans-unit>
       <trans-unit id="Error parsing XML data in feed">
         <source>Error parsing XML data in feed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Fehler beim Parsen der XML-Daten des Feeds</target>
+      </trans-unit>
+      <trans-unit id="Error retrieving RSS Icon:">
+        <source>Error retrieving RSS Icon:</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="translated">Fehler beim Laden des RSS-Symbols:</target>
+      </trans-unit>
+      <trans-unit id="Error retrieving RSS feed:">
+        <source>Error retrieving RSS feed:</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="translated">Fehler beim Laden des RSS-Feeds:</target>
+      </trans-unit>
+      <trans-unit id="Error: Feed not found!">
+        <source>Error: Feed not found!</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="translated">Fehler: Feed nicht gefunden!</target>
       </trans-unit>
       <trans-unit id="External Browser">
         <source>External Browser</source>
@@ -2056,6 +2136,11 @@
         <source>Force Refresh Selected Subscriptions From Open Reader</source>
         <note>Title of a menu item</note>
         <target xml:lang="de" state="translated">Erzwinge das Aktualisieren der ausgewählten Abonnements von Open Reader</target>
+      </trans-unit>
+      <trans-unit id="Forcing Refresh subscriptions…">
+        <source>Forcing Refresh subscriptions…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="translated">Feedaktualisierung erzwingen…</target>
       </trans-unit>
       <trans-unit id="General">
         <source>General</source>
@@ -2242,6 +2327,11 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Nein</target>
       </trans-unit>
+      <trans-unit id="No articles in feed">
+        <source>No articles in feed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="translated">Keine Einträge in diesem Feed</target>
+      </trans-unit>
       <trans-unit id="No new articles available">
         <source>No new articles available</source>
         <note>No comment provided by engineer.</note>
@@ -2347,6 +2437,11 @@
         <source>Preferences</source>
         <note>Title of the Preferences window</note>
         <target xml:lang="de">Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="Queue">
+        <source>Queue</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="translated">Warteschlange</target>
       </trans-unit>
       <trans-unit id="Quit">
         <source>Quit</source>
