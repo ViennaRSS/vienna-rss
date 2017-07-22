@@ -55,6 +55,9 @@
 /* No comment provided by engineer. */
 "Locate Title" = "Kan de Vienna-database niet aanmaken";
 
+/* Title of a button on an alert */
+"Locate…" = "Zoek op…";
+
 /* No comment provided by engineer. */
 "Marked Articles" = "Gemarkeerde artikelen";
 
@@ -66,6 +69,9 @@
 
 /* No comment provided by engineer. */
 "Search Results" = "Zoekresultaten";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Zoek naar artikels";
 
 /* Placeholder title of a search field */
 "Search current web page" = "Doorzoek huidige webpagina";

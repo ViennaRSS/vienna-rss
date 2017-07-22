@@ -364,10 +364,10 @@
         <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "34";</note>
         <target xml:lang="de" state="translated">Erstellen</target>
       </trans-unit>
-      <trans-unit id="35.title">
+      <trans-unit id="35.title" approved="yes">
         <source>Cancel</source>
         <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "35";</note>
-        <target xml:lang="de" state="translated">Abbrechen</target>
+        <target xml:lang="de">Abbrechen</target>
       </trans-unit>
       <trans-unit id="36.title">
         <source>Enter the group folder name:</source>
@@ -463,10 +463,15 @@
         <note>Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg";</note>
         <target xml:lang="de" state="translated">Mehr Stile…</target>
       </trans-unit>
-      <trans-unit id="5.title">
+      <trans-unit id="4ih-vj-fsk.title" approved="yes">
+        <source>Check Grammar With Spelling</source>
+        <note>Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "4ih-vj-fsk";</note>
+        <target xml:lang="de">Rechtschreib- und Grammatikprüfung</target>
+      </trans-unit>
+      <trans-unit id="5.title" approved="yes">
         <source>Bring All to Front</source>
         <note>Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5";</note>
-        <target xml:lang="de" state="translated">Alle nach vorne bringen</target>
+        <target xml:lang="de">Alle nach vorne bringen</target>
       </trans-unit>
       <trans-unit id="6yn-y8-lF1.title">
         <source>Refresh All Subscriptions</source>
@@ -492,6 +497,11 @@
         <source>Window</source>
         <note>Class = "NSMenu"; title = "Window"; ObjectID = "24";</note>
         <target xml:lang="de">Fenster</target>
+      </trans-unit>
+      <trans-unit id="27s-E3-FHd.title" approved="yes">
+        <source>Correct Spelling Automatically</source>
+        <note>Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "27s-E3-FHd";</note>
+        <target xml:lang="de">Rechtschreibung automatisch korrigieren</target>
       </trans-unit>
       <trans-unit id="58.title">
         <source>About Vienna</source>
@@ -671,7 +681,7 @@
       <trans-unit id="301.title">
         <source>Article</source>
         <note>Class = "NSMenuItem"; title = "Article"; ObjectID = "301";</note>
-        <target xml:lang="de" state="translated">Artikel</target>
+        <target xml:lang="de" state="translated">Eintrag</target>
       </trans-unit>
       <trans-unit id="344.title">
         <source>Next Unread</source>
@@ -1069,6 +1079,41 @@
         <note>Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI";</note>
         <target xml:lang="de" state="translated">Letzte 48 Stunden</target>
       </trans-unit>
+      <trans-unit id="CLG-Dq-a59.title" approved="yes">
+        <source>Show Spelling and Grammar</source>
+        <note>Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "CLG-Dq-a59";</note>
+        <target xml:lang="de">Rechtschreibung und Grammatik einblenden</target>
+      </trans-unit>
+      <trans-unit id="G6k-0L-moc.title" approved="yes">
+        <source>Speech</source>
+        <note>Class = "NSMenu"; title = "Speech"; ObjectID = "G6k-0L-moc";</note>
+        <target xml:lang="de">Sprachausgabe</target>
+      </trans-unit>
+      <trans-unit id="JXn-SB-3t2.title" approved="yes">
+        <source>Speech</source>
+        <note>Class = "NSMenuItem"; title = "Speech"; ObjectID = "JXn-SB-3t2";</note>
+        <target xml:lang="de">Sprachausgabe</target>
+      </trans-unit>
+      <trans-unit id="MHF-D4-pRN.title" approved="yes">
+        <source>Make Upper Case</source>
+        <note>Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN";</note>
+        <target xml:lang="de">Großbuchstaben</target>
+      </trans-unit>
+      <trans-unit id="QEb-Bm-CPN.title" approved="yes">
+        <source>Substitutions</source>
+        <note>Class = "NSMenu"; title = "Substitutions"; ObjectID = "QEb-Bm-CPN";</note>
+        <target xml:lang="de">Ersetzungen</target>
+      </trans-unit>
+      <trans-unit id="RtQ-eP-bfk.title" approved="yes">
+        <source>Smart Dashes</source>
+        <note>Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk";</note>
+        <target xml:lang="de">Intelligente Bindestriche</target>
+      </trans-unit>
+      <trans-unit id="UFF-Fn-8ti.title" approved="yes">
+        <source>Transformations</source>
+        <note>Class = "NSMenu"; title = "Transformations"; ObjectID = "UFF-Fn-8ti";</note>
+        <target xml:lang="de">Transformationen</target>
+      </trans-unit>
       <trans-unit id="ZCa-7v-54l.title" approved="yes">
         <source>Enter Full Screen</source>
         <note>Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "ZCa-7v-54l";</note>
@@ -1076,6 +1121,21 @@
         <alt-trans>
           <target xml:lang="de">Wechsel zum Vollbild</target>
         </alt-trans>
+      </trans-unit>
+      <trans-unit id="bd7-qY-ofB.title" approved="yes">
+        <source>Text Replacement</source>
+        <note>Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "bd7-qY-ofB";</note>
+        <target xml:lang="de">Textersetzung</target>
+      </trans-unit>
+      <trans-unit id="cK9-Df-xA3.title" approved="yes">
+        <source>Start Speaking</source>
+        <note>Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "cK9-Df-xA3";</note>
+        <target xml:lang="de">Sprachausgabe starten</target>
+      </trans-unit>
+      <trans-unit id="eVb-Qt-XJb.title" approved="yes">
+        <source>Substitutions</source>
+        <note>Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "eVb-Qt-XJb";</note>
+        <target xml:lang="de">Ersetzungen</target>
       </trans-unit>
       <trans-unit id="ecl-HO-Kpi.title">
         <source>Mark All Subscriptions as Read</source>
@@ -1087,10 +1147,45 @@
         <note>Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI";</note>
         <target xml:lang="de" state="translated">Rechtschreibung</target>
       </trans-unit>
+      <trans-unit id="fbd-ZI-tZW.title" approved="yes">
+        <source>Check Document Now</source>
+        <note>Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "fbd-ZI-tZW";</note>
+        <target xml:lang="de">Dokument jetzt prüfen</target>
+      </trans-unit>
+      <trans-unit id="gbo-AM-wcF.title" approved="yes">
+        <source>Stop Speaking</source>
+        <note>Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "gbo-AM-wcF";</note>
+        <target xml:lang="de">Sprachausgabe stoppen</target>
+      </trans-unit>
+      <trans-unit id="idm-wm-h8z.title" approved="yes">
+        <source>Data Detectors</source>
+        <note>Class = "NSMenuItem"; title = "Data Detectors"; ObjectID = "idm-wm-h8z";</note>
+        <target xml:lang="de">Datenerkennung</target>
+      </trans-unit>
+      <trans-unit id="joR-kW-sIU.title" approved="yes">
+        <source>Transformations</source>
+        <note>Class = "NSMenuItem"; title = "Transformations"; ObjectID = "joR-kW-sIU";</note>
+        <target xml:lang="de">Transformationen</target>
+      </trans-unit>
+      <trans-unit id="kCi-pf-mkc.title" approved="yes">
+        <source>Smart Quotes</source>
+        <note>Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "kCi-pf-mkc";</note>
+        <target xml:lang="de">Intelligente Anführungszeichen</target>
+      </trans-unit>
+      <trans-unit id="l8F-tb-7E0.title" approved="yes">
+        <source>Spelling and Grammar</source>
+        <note>Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "l8F-tb-7E0";</note>
+        <target xml:lang="de">Rechtschreibung und Grammatik</target>
+      </trans-unit>
       <trans-unit id="pKl-6f-Hlc.title">
         <source>Mark Read</source>
         <note>Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc";</note>
         <target xml:lang="de" state="translated">Als gelesen markieren</target>
+      </trans-unit>
+      <trans-unit id="qzH-De-act.title" approved="yes">
+        <source>Smart Copy/Paste</source>
+        <note>Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "qzH-De-act";</note>
+        <target xml:lang="de">Intelligentes Kopieren/Einsetzen</target>
       </trans-unit>
       <trans-unit id="rNG-xr-3x7.title">
         <source>Unread Articles</source>
@@ -1107,10 +1202,35 @@
         <note>Class = "NSMenuItem"; title = "Today"; ObjectID = "t34-de-pMs";</note>
         <target xml:lang="de" state="translated">Heute</target>
       </trans-unit>
+      <trans-unit id="tfv-fu-HFM.title" approved="yes">
+        <source>Check Spelling While Typing</source>
+        <note>Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "tfv-fu-HFM";</note>
+        <target xml:lang="de">Während der Texteingabe prüfen</target>
+      </trans-unit>
+      <trans-unit id="v3R-CV-0b9.title" approved="yes">
+        <source>Capitalize</source>
+        <note>Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "v3R-CV-0b9";</note>
+        <target xml:lang="de">Großschreiben</target>
+      </trans-unit>
+      <trans-unit id="w4Q-ne-FPI.title" approved="yes">
+        <source>Smart Links</source>
+        <note>Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "w4Q-ne-FPI";</note>
+        <target xml:lang="de">Intelligente Links</target>
+      </trans-unit>
+      <trans-unit id="wnc-vZ-fO4.title" approved="yes">
+        <source>Show Substitutions</source>
+        <note>Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "wnc-vZ-fO4";</note>
+        <target xml:lang="de">Ersetzungen einblenden</target>
+      </trans-unit>
       <trans-unit id="wqh-Jc-gBm.title">
         <source>Last Refresh</source>
         <note>Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm";</note>
         <target xml:lang="de" state="translated">Letzte Aktualisierung</target>
+      </trans-unit>
+      <trans-unit id="xpF-dh-E2m.title" approved="yes">
+        <source>Make Lower Case</source>
+        <note>Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "xpF-dh-E2m";</note>
+        <target xml:lang="de">Kleinbuchstaben</target>
       </trans-unit>
     </body>
   </file>
@@ -1204,6 +1324,11 @@
         <note>Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377";</note>
         <target xml:lang="de" state="translated">Filter nach:</target>
       </trans-unit>
+      <trans-unit id="1404.title">
+        <source>Current Filter</source>
+        <note>Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404";</note>
+        <target xml:lang="de" state="translated">Aktueller Filter</target>
+      </trans-unit>
       <trans-unit id="CPA-Ha-aj1.label">
         <source>Add</source>
         <note>Class = "NSToolbarItem"; label = "Add"; ObjectID = "CPA-Ha-aj1";</note>
@@ -1214,6 +1339,26 @@
         <note>Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1";</note>
         <target xml:lang="de" state="translated">Hinzufügen</target>
       </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.toolTip">
+        <source>Subscribe to a feed or add a folder or smart folder.</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Subscribe to a feed or add a folder or smart folder."; ObjectID = "CPA-Ha-aj1";</note>
+        <target xml:lang="de" state="translated">Einen Feed, Ordner oder intelligenten Feed hinzufügen.</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.label">
+        <source>All Read</source>
+        <note>Class = "NSToolbarItem"; label = "All Read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="de" state="translated">Alle gelesen</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.paletteLabel">
+        <source>Mark All Items as Read</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Mark All Items as Read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="de" state="translated">Alle Einträge als gelesen markieren</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.toolTip">
+        <source>Mark all items as read</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Mark all items as read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="de" state="translated">Alle Einträge als gelesen markieren</target>
+      </trans-unit>
       <trans-unit id="Hs0-hu-A2g.title">
         <source>Refresh Selected Subscriptions</source>
         <note>Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g";</note>
@@ -1222,7 +1367,7 @@
       <trans-unit id="JT2-Q7-gRj.title">
         <source>All Articles</source>
         <note>Class = "NSMenuItem"; title = "All Articles"; ObjectID = "JT2-Q7-gRj";</note>
-        <target xml:lang="de" state="translated">Alle Artikel</target>
+        <target xml:lang="de" state="translated">Alle Einträge</target>
       </trans-unit>
       <trans-unit id="MaO-r1-tcm.title">
         <source>More Styles…</source>
@@ -1407,7 +1552,7 @@
       <trans-unit id="xNW-zC-IMZ.title">
         <source>Mark All Articles as Read</source>
         <note>Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "xNW-zC-IMZ";</note>
-        <target xml:lang="de" state="translated">Alle Artikel als gelesen markieren</target>
+        <target xml:lang="de" state="translated">Alle Einträge als gelesen markieren</target>
       </trans-unit>
       <trans-unit id="xVH-W7-Br4.title">
         <source>Last Refresh</source>
@@ -1431,10 +1576,10 @@
         <note>Class = "NSButtonCell"; title = "Subscribe"; ObjectID = "103";</note>
         <target xml:lang="de" state="translated">Abonnieren</target>
       </trans-unit>
-      <trans-unit id="104.title">
+      <trans-unit id="104.title" approved="yes">
         <source>Source:</source>
         <note>Class = "NSTextFieldCell"; title = "Source:"; ObjectID = "104";</note>
-        <target xml:lang="de" state="translated">Quelle:</target>
+        <target xml:lang="de">Quelle:</target>
       </trans-unit>
       <trans-unit id="106.title">
         <source>Create a new subscription</source>
@@ -1493,10 +1638,10 @@
         <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "96";</note>
         <target xml:lang="de" state="translated">OK</target>
       </trans-unit>
-      <trans-unit id="97.title">
+      <trans-unit id="97.title" approved="yes">
         <source>Cancel</source>
         <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97";</note>
-        <target xml:lang="de" state="translated">Abbrechen</target>
+        <target xml:lang="de">Abbrechen</target>
       </trans-unit>
       <trans-unit id="98.title">
         <source>Show all articles that match</source>
@@ -1520,6 +1665,16 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
+      <trans-unit id="Ar5-Qc-YTe.ibExternalAccessibilityDescription">
+        <source>Visit the website</source>
+        <note>Class = "NSButton"; ibExternalAccessibilityDescription = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
+        <target xml:lang="de" state="translated">Website besuchen</target>
+      </trans-unit>
+      <trans-unit id="Ar5-Qc-YTe.ibShadowedToolTip">
+        <source>Visit the website</source>
+        <note>Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
+        <target xml:lang="de" state="translated">Website besuchen</target>
+      </trans-unit>
       <trans-unit id="Lkv-md-rEW.title">
         <source>Sync with an Open Reader server</source>
         <note>Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Lkv-md-rEW";</note>
@@ -1561,6 +1716,11 @@
         <source>%1$@ of %2$@</source>
         <note>Progress in bytes, e.g. 1 KB of 1 MB</note>
         <target xml:lang="de" state="translated">%1$@ von %2$@</target>
+      </trans-unit>
+      <trans-unit id="%@ received">
+        <source>%@ received</source>
+        <note>Number of bytes received, e.g. 1 MB received</note>
+        <target xml:lang="de" state="translated">%@ empfangen</target>
       </trans-unit>
       <trans-unit id="%d new articles retrieved">
         <source>%d new articles retrieved</source>
@@ -1962,10 +2122,30 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Fehler beim Importieren</target>
       </trans-unit>
+      <trans-unit id="Error loading script '%@'">
+        <source>Error loading script '%@'</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="translated">Fehler beim Laden des Scripts: %@</target>
+      </trans-unit>
       <trans-unit id="Error parsing XML data in feed">
         <source>Error parsing XML data in feed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Fehler beim Parsen der XML-Daten des Feeds</target>
+      </trans-unit>
+      <trans-unit id="Error retrieving RSS Icon:">
+        <source>Error retrieving RSS Icon:</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="translated">Fehler beim Laden des RSS-Symbols:</target>
+      </trans-unit>
+      <trans-unit id="Error retrieving RSS feed:">
+        <source>Error retrieving RSS feed:</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="translated">Fehler beim Laden des RSS-Feeds:</target>
+      </trans-unit>
+      <trans-unit id="Error: Feed not found!">
+        <source>Error: Feed not found!</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="translated">Fehler: Feed nicht gefunden!</target>
       </trans-unit>
       <trans-unit id="External Browser">
         <source>External Browser</source>
@@ -2021,6 +2201,11 @@
         <source>Force Refresh Selected Subscriptions From Open Reader</source>
         <note>Title of a menu item</note>
         <target xml:lang="de" state="translated">Erzwinge das Aktualisieren der ausgewählten Abonnements von Open Reader</target>
+      </trans-unit>
+      <trans-unit id="Forcing Refresh subscriptions…">
+        <source>Forcing Refresh subscriptions…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="translated">Feedaktualisierung erzwingen…</target>
       </trans-unit>
       <trans-unit id="General">
         <source>General</source>
@@ -2087,6 +2272,11 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Der Stil %@ scheint defekt zu sein.</target>
       </trans-unit>
+      <trans-unit id="JavaScript" approved="yes">
+        <source>JavaScript</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de">JavaScript</target>
+      </trans-unit>
       <trans-unit id="Last Week">
         <source>Last Week</source>
         <note>No comment provided by engineer.</note>
@@ -2112,10 +2302,15 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Vienna konnte die Datenbank nicht erstellen</target>
       </trans-unit>
+      <trans-unit id="Locate…">
+        <source>Locate…</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="de" state="translated">Auswählen …</target>
+      </trans-unit>
       <trans-unit id="Mark All Articles as Read">
         <source>Mark All Articles as Read</source>
         <note>Title of a menu item</note>
-        <target xml:lang="de" state="translated">Alle Artikel als gelesen markieren</target>
+        <target xml:lang="de" state="translated">Alle Einträge als gelesen markieren</target>
       </trans-unit>
       <trans-unit id="Mark All Read">
         <source>Mark All Read</source>
@@ -2196,6 +2391,11 @@
         <source>No</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Nein</target>
+      </trans-unit>
+      <trans-unit id="No articles in feed">
+        <source>No articles in feed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="translated">Keine Einträge in diesem Feed</target>
       </trans-unit>
       <trans-unit id="No new articles available">
         <source>No new articles available</source>
@@ -2303,6 +2503,11 @@
         <note>Title of the Preferences window</note>
         <target xml:lang="de">Einstellungen</target>
       </trans-unit>
+      <trans-unit id="Queue">
+        <source>Queue</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="translated">Warteschlange</target>
+      </trans-unit>
       <trans-unit id="Quit">
         <source>Quit</source>
         <note>Title of a button on an alert</note>
@@ -2313,6 +2518,11 @@
         <note>Title of a button on an alert
    Title of a menu item</note>
         <target xml:lang="de" state="translated">Vienna beenden</target>
+      </trans-unit>
+      <trans-unit id="RSS Icon not found!">
+        <source>RSS Icon not found!</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="translated">RSS-Symbol nicht gefunden!</target>
       </trans-unit>
       <trans-unit id="RSS Subscription Export Title">
         <source>RSS Subscription Export Title</source>
@@ -2527,7 +2737,7 @@
       <trans-unit id="Unread Articles">
         <source>Unread Articles</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Ungelesene Artikel</target>
+        <target xml:lang="de" state="translated">Ungelesene Einträge</target>
       </trans-unit>
       <trans-unit id="Unrecognised database format text">
         <source>Unrecognised database format text</source>
@@ -2683,10 +2893,10 @@
         <note>Data field name visible in menu/article list/smart folder definition</note>
         <target xml:lang="de" state="translated">Autor</target>
       </trans-unit>
-      <trans-unit id="Cancel">
+      <trans-unit id="Cancel" approved="yes">
         <source>Cancel</source>
         <note>Title of a button on an alert</note>
-        <target xml:lang="de" state="translated">Abbrechen</target>
+        <target xml:lang="de">Abbrechen</target>
       </trans-unit>
       <trans-unit id="Cannot create database folder text">
         <source>Cannot create database folder text</source>
@@ -2763,10 +2973,15 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Vienna konnte die Datenbank nicht erstellen</target>
       </trans-unit>
+      <trans-unit id="Locate…">
+        <source>Locate…</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="de" state="translated">Auswählen …</target>
+      </trans-unit>
       <trans-unit id="Marked Articles">
         <source>Marked Articles</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Markierte Artikel</target>
+        <target xml:lang="de" state="translated">Markierte Einträge</target>
       </trans-unit>
       <trans-unit id="Quit Vienna">
         <source>Quit Vienna</source>
@@ -2811,7 +3026,7 @@
       <trans-unit id="Today's Articles">
         <source>Today's Articles</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Artikel von heute</target>
+        <target xml:lang="de" state="translated">Einträge von heute</target>
       </trans-unit>
       <trans-unit id="Trash">
         <source>Trash</source>

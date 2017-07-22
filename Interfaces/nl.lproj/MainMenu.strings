@@ -358,6 +358,9 @@
 /* Class = "NSMenuItem"; title = "Update Subscriptions From Open Reader"; ObjectID = "1428"; */
 "1428.title" = "Bijwerken abonnementen van Open Reader";
 
+/* Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458"; */
+"1458.title" = "Herindexeer databank";
+
 /* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "BUc-Ki-OOg"; */
 "BUc-Ki-OOg.title" = "Ongelezen of gemarkeerd";
 
