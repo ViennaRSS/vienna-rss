@@ -38,8 +38,9 @@ end
 
 xcode_project = ENV['PROJECT_FILE_PATH']
 
-xliff_files = Dir.entries(xliff_dir).select { |f| File.extname(f) == '.xliff' }
+xliff_files = Dir.entries(xliff_dir).select { |f| File.extname(f) == '.xliff' unless f == 'en.xliff' }
 xliff_files.collect! { |f| File.join(xliff_dir, f) }
+puts xliff_files
 
 # Import files
 xliff_files.each do |f|
