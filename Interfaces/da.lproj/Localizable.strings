@@ -146,6 +146,9 @@
 /* No comment provided by engineer. */
 "Database Upgrade" = "Databaseopgradering";
 
+/* Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience. */
+"Database upgrade explanation text" = "Vienna er nød til at opgradere dens database til den nyeste version. Dette tager omkring et minut. Vi underskylder for ulejligheden.";
+
 /* Data field name visible in menu/article list/smart folder definition */
 "Date" = "Dato";
 
@@ -469,7 +472,8 @@
 "Open Reader Authentication Failed" = "Open Reader godkendelse fejlede";
 
 /* No comment provided by engineer. */
-"Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
+"Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.
+Also check your network access.";
 
 /* No comment provided by engineer. */
 "Open Scripts Folder" = "Åben Skripter-mappen";
@@ -666,9 +670,6 @@
 
 /* No comment provided by engineer. */
 "Vienna cannot show the file title" = "Vienna kan ikke vise arkivtitlen";
-
-/* No comment provided by engineer. */
-"Database upgrade explanation text" = "Vienna er nød til at opgradere dens database til den nyeste version. Dette tager omkring et minut. Vi underskylder for ulejligheden.";
 
 /* No comment provided by engineer. */
 "Yes" = "Ja";

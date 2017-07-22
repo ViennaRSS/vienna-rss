@@ -25,6 +25,9 @@
 /* No comment provided by engineer. */
 "Database Upgrade" = "Atualização de Banco de Dados";
 
+/* Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience. */
+"Database upgrade explanation text" = "O Vienna precisa atualizar seu banco de dados para a última versão.  Isto pode demorar um minuto ou dois.  Pedimos desculpas pelo inconveniente.";
+
 /* Data field name visible in menu/article list/smart folder definition */
 "Date" = "Data";
 
@@ -99,9 +102,6 @@
 
 /* Title of a button on an alert */
 "Upgrade Database" = "Atualizar Banco de Dados";
-
-/* No comment provided by engineer. */
-"Database upgrade explanation text" = "O Vienna precisa atualizar seu banco de dados para a última versão.  Isto pode demorar um minuto ou dois.  Pedimos desculpas pelo inconveniente.";
 
 /* test for a string */
 "contains" = "contém";

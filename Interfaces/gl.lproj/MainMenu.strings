@@ -68,7 +68,7 @@
 "154.title" = "Procurar…";
 
 /* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "155"; */
-"155.title" = "Ir \tá selección";
+"155.title" = "Ir 	á selección";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "157"; */
 "157.title" = "Copiar";

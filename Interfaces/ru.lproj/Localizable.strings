@@ -134,6 +134,9 @@
 /* No comment provided by engineer. */
 "Database Upgrade" = "Обновление базы данных";
 
+/* Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience. */
+"Database upgrade explanation text" = "Vienna необходимо обновить свою базу данных до последней версии. Это может занять минуту или около того. Приносим свои извинения за доставленные неудобства.";
+
 /* Data field name visible in menu/article list/smart folder definition */
 "Date" = "Дата";
 
@@ -448,7 +451,8 @@
 "Open Reader Authentication Failed" = "В авторизации в Open Reader отказано";
 
 /* No comment provided by engineer. */
-"Open Reader Authentication Failed text" = "Убедитесь, что в настройках Vienna указаны правильные имя пользователя и пароль для доступа к серверу Open Reader.\nТакже проверьте сетевое соединение.";
+"Open Reader Authentication Failed text" = "Убедитесь, что в настройках Vienna указаны правильные имя пользователя и пароль для доступа к серверу Open Reader.
+Также проверьте сетевое соединение.";
 
 /* No comment provided by engineer. */
 "Open Scripts Folder" = "Открыть папку скриптов";
@@ -639,9 +643,6 @@
 
 /* No comment provided by engineer. */
 "Vienna cannot show the file title" = "Vienna не может отобразить файл.";
-
-/* No comment provided by engineer. */
-"Database upgrade explanation text" = "Vienna необходимо обновить свою базу данных до последней версии. Это может занять минуту или около того. Приносим свои извинения за доставленные неудобства.";
 
 /* No comment provided by engineer. */
 "Yes" = "Да";

@@ -134,6 +134,9 @@
 /* No comment provided by engineer. */
 "Database Upgrade" = "Actualización de la base de datos";
 
+/* Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience. */
+"Database upgrade explanation text" = "Vienna debe actualizar su base de datos a la última versión. Esto puede tardar un minuto más o menos. Lamentamos el inconveniente.";
+
 /* Data field name visible in menu/article list/smart folder definition */
 "Date" = "Fecha";
 
@@ -148,7 +151,8 @@
 "Delete Open Reader RSS feed" = "Eliminar suscripción de Open Reader";
 
 /* No comment provided by engineer. */
-"Delete Open Reader RSS feed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
+"Delete Open Reader RSS feed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.
+Also check your network access.";
 
 /* No comment provided by engineer. */
 "Delete RSS feed" = "Eliminar suscripción";
@@ -454,7 +458,8 @@
 "Open Reader Authentication Failed" = "Error al autenticar en Open Reader";
 
 /* No comment provided by engineer. */
-"Open Reader Authentication Failed text" = "Asegúrese que el nombre de usuario y contraseña necesarios para acceder al servidor Open Reader están configurados correctamente en las preferencias de Vienna.\nCompruebe también su acceso a la red.";
+"Open Reader Authentication Failed text" = "Asegúrese que el nombre de usuario y contraseña necesarios para acceder al servidor Open Reader están configurados correctamente en las preferencias de Vienna.
+Compruebe también su acceso a la red.";
 
 /* No comment provided by engineer. */
 "Open Scripts Folder" = "Abrir carpeta de scripts";
@@ -645,9 +650,6 @@
 
 /* No comment provided by engineer. */
 "Vienna cannot show the file title" = "Vienna no puede mostrar el archivo.";
-
-/* No comment provided by engineer. */
-"Database upgrade explanation text" = "Vienna debe actualizar su base de datos a la última versión. Esto puede tardar un minuto más o menos. Lamentamos el inconveniente.";
 
 /* No comment provided by engineer. */
 "Yes" = "Sí";

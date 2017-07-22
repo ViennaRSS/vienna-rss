@@ -134,6 +134,9 @@
 /* No comment provided by engineer. */
 "Database Upgrade" = "Datenbank-Aktualisierung";
 
+/* Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience. */
+"Database upgrade explanation text" = "Vienna muss seine Datenbank auf den neuesten Stand bringen. Dieser Vorgang kann eine Weile dauern. Wir entschuldigen uns für die Wartezeit.";
+
 /* Data field name visible in menu/article list/smart folder definition */
 "Date" = "Datum";
 
@@ -424,7 +427,8 @@
 "Open Reader Authentication Failed" = "Open Reader Authentifizierungsfehler";
 
 /* No comment provided by engineer. */
-"Open Reader Authentication Failed text" = "Überprüfe ob Benutzername und Passwort für den Zugang zum Open Reader Server in den Einstellungen von Vienna richtig gespeichert sind.\nÜberprüfe auch ob Zugang zum Internet besteht.";
+"Open Reader Authentication Failed text" = "Überprüfe ob Benutzername und Passwort für den Zugang zum Open Reader Server in den Einstellungen von Vienna richtig gespeichert sind.
+Überprüfe auch ob Zugang zum Internet besteht.";
 
 /* No comment provided by engineer. */
 "Open Scripts Folder" = "Öffne Skriptordner";
@@ -606,9 +610,6 @@
 
 /* No comment provided by engineer. */
 "Vienna cannot show the file title" = "Vienna konnte die Datei nicht im Finder anzeigen.";
-
-/* No comment provided by engineer. */
-"Database upgrade explanation text" = "Vienna muss seine Datenbank auf den neuesten Stand bringen. Dieser Vorgang kann eine Weile dauern. Wir entschuldigen uns für die Wartezeit.";
 
 /* No comment provided by engineer. */
 "Yes" = "Ja";

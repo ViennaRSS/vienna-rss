@@ -2,7 +2,7 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Interfaces/Base.lproj/ActivityViewer.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="8.title">
@@ -21,7 +21,7 @@
   </file>
   <file original="Interfaces/Base.lproj/AdvancedPreferencesView.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="2GQ-cu-fbh.title">
@@ -80,7 +80,7 @@
   </file>
   <file original="Interfaces/Base.lproj/AppearancePreferencesView.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="71S-pg-AjX.title">
@@ -115,7 +115,7 @@
   </file>
   <file original="Interfaces/Base.lproj/Downloads.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="5.title">
@@ -130,7 +130,7 @@
   </file>
   <file original="Interfaces/Base.lproj/EmptyTrashWarning.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="17.title">
@@ -153,7 +153,7 @@
   </file>
   <file original="Interfaces/Base.lproj/ExportAccessoryViewController.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="6rj-zb-zOa.title">
@@ -172,7 +172,7 @@
   </file>
   <file original="Interfaces/Base.lproj/FeedCredentials.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="32.title">
@@ -203,7 +203,7 @@
   </file>
   <file original="Interfaces/Base.lproj/GeneralPreferencesView.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="1Ll-uG-QWh.title">
@@ -318,7 +318,7 @@
   </file>
   <file original="Interfaces/Base.lproj/GroupFolder.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="32.title">
@@ -341,7 +341,7 @@
   </file>
   <file original="Interfaces/Base.lproj/InfoWindow.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="105.title">
@@ -404,7 +404,7 @@
   </file>
   <file original="Interfaces/Base.lproj/MainMenu.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="2S3-dG-ZPg.title">
@@ -1035,7 +1035,7 @@
   </file>
   <file original="Interfaces/Base.lproj/MainWindowController.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="3tM-J3-kmf.title">
@@ -1298,7 +1298,7 @@
   </file>
   <file original="Interfaces/Base.lproj/RSSFeed.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="102.title">
@@ -1345,13 +1345,9 @@
   </file>
   <file original="Interfaces/Base.lproj/SearchFolder.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
-      <trans-unit id="82.title">
-        <source>all</source>
-        <note>Class = "NSMenuItem"; title = "all"; ObjectID = "82";</note>
-      </trans-unit>
       <trans-unit id="94.title">
         <source>Smart folder name:</source>
         <note>Class = "NSTextFieldCell"; title = "Smart folder name:"; ObjectID = "94";</note>
@@ -1372,15 +1368,11 @@
         <source>of the following conditions:</source>
         <note>Class = "NSTextFieldCell"; title = "of the following conditions:"; ObjectID = "100";</note>
       </trans-unit>
-      <trans-unit id="j0v-xF-tpl.title">
-        <source>any</source>
-        <note>Class = "NSMenuItem"; title = "any"; ObjectID = "j0v-xF-tpl";</note>
-      </trans-unit>
     </body>
   </file>
   <file original="Interfaces/Base.lproj/SyncingPreferencesView.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="Ar5-Qc-YTe.ibExternalAccessibilityDescription">
@@ -1431,7 +1423,7 @@
   </file>
   <file original="Resources/Localizable.strings" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="%@ Info">
@@ -2337,6 +2329,14 @@
         <source>Yesterday</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="all">
+        <source>all</source>
+        <note>rule for association of multiple criteria</note>
+      </trans-unit>
+      <trans-unit id="any">
+        <source>any</source>
+        <note>rule for association of multiple criteria</note>
+      </trans-unit>
       <trans-unit id="contains">
         <source>contains</source>
         <note>test for a string</note>
@@ -2397,11 +2397,14 @@
   </file>
   <file original="Resources/Vienna-Info.plist" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="CFBundleName">
         <source>Vienna</source>
+      </trans-unit>
+      <trans-unit id="CFBundleShortVersionString">
+        <source>VCS_TAG :VCS_SHORT_HASH:</source>
       </trans-unit>
       <trans-unit id="NSHumanReadableCopyright">
         <source>© 2004–2017</source>
@@ -2410,17 +2413,20 @@
   </file>
   <file original="Vienna Tests/Info.plist" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="CFBundleName">
         <source>$(PRODUCT_NAME)</source>
       </trans-unit>
+      <trans-unit id="CFBundleShortVersionString">
+        <source>1.0</source>
+      </trans-unit>
     </body>
   </file>
   <file original="Vienna Tests/Localizable.strings" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="%@, %@">
@@ -2571,6 +2577,14 @@
         <source>Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="all">
+        <source>all</source>
+        <note>rule for association of multiple criteria</note>
+      </trans-unit>
+      <trans-unit id="any">
+        <source>any</source>
+        <note>rule for association of multiple criteria</note>
+      </trans-unit>
       <trans-unit id="contains">
         <source>contains</source>
         <note>test for a string</note>
@@ -2631,11 +2645,14 @@
   </file>
   <file original="Vienna/Vienna Help/Info.plist" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.3" build-num="8E3004b"/>
     </header>
     <body>
       <trans-unit id="CFBundleName">
         <source>$(PRODUCT_BUNDLE_NAME)</source>
+      </trans-unit>
+      <trans-unit id="CFBundleShortVersionString">
+        <source>1.0</source>
       </trans-unit>
     </body>
   </file>
