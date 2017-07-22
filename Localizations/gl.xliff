@@ -1256,11 +1256,6 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
-      <trans-unit id="82.title">
-        <source>all</source>
-        <note>Class = "NSMenuItem"; title = "all"; ObjectID = "82";</note>
-        <target xml:lang="gl" state="translated">todas</target>
-      </trans-unit>
       <trans-unit id="96.title">
         <source>Save</source>
         <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "96";</note>
@@ -1270,11 +1265,6 @@
         <source>Cancel</source>
         <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97";</note>
         <target xml:lang="gl" state="translated">Cancelar</target>
-      </trans-unit>
-      <trans-unit id="j0v-xF-tpl.title">
-        <source>any</source>
-        <note>Class = "NSMenuItem"; title = "any"; ObjectID = "j0v-xF-tpl";</note>
-        <target xml:lang="gl" state="translated">algunha</target>
       </trans-unit>
     </body>
   </file>
