@@ -330,6 +330,9 @@
 /* No comment provided by engineer. */
 "Locate Title" = "Kan de Vienna-database niet aanmaken";
 
+/* Title of a button on an alert */
+"Locate…" = "Zoek op…";
+
 /* Title of a menu item */
 "Mark All Articles as Read" = "Markeer alles als gelezen";
 
@@ -438,6 +441,9 @@
 /* Title of the Preferences window */
 "Preferences" = "Voorkeuren";
 
+/* No comment provided by engineer. */
+"Queue" = "Wachtrij";
+
 /* Title of a button on an alert */
 "Quit" = "Stop";
 
@@ -502,6 +508,9 @@
 /* No comment provided by engineer. */
 "Search Results" = "Zoek resultaten";
 
+/* Placeholder title of a search field */
+"Search all articles" = "Zoek naar artikels";
+
 /* No comment provided by engineer. */
 "Search all articles or the current web page" = "Doorzoek alle artikelen of de huidige webpagina";
 
@@ -561,6 +570,9 @@
 
 /* No comment provided by engineer. */
 "Trash" = "Prullenmand";
+
+/* URL */
+"URL" = "URL";
 
 /* No comment provided by engineer. */
 "Unread" = "Ongelezen";

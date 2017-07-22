@@ -1,6 +1,9 @@
 /* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg"; */
 "2S3-dG-ZPg.title" = "Mehr Stile…";
 
+/* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "4ih-vj-fsk"; */
+"4ih-vj-fsk.title" = "Rechtschreib- und Grammatikprüfung";
+
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
 "5.title" = "Alle nach vorne bringen";
 
@@ -18,6 +21,9 @@
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
 "24.title" = "Fenster";
+
+/* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "27s-E3-FHd"; */
+"27s-E3-FHd.title" = "Rechtschreibung automatisch korrigieren";
 
 /* Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58"; */
 "58.title" = "Über Vienna";
@@ -125,7 +131,7 @@
 "300.title" = "Artikel";
 
 /* Class = "NSMenuItem"; title = "Article"; ObjectID = "301"; */
-"301.title" = "Artikel";
+"301.title" = "Eintrag";
 
 /* Class = "NSMenuItem"; title = "Next Unread"; ObjectID = "344"; */
 "344.title" = "Nächster ungelesener Artikel";
@@ -361,8 +367,38 @@
 /* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI"; */
 "CGp-H4-UaI.title" = "Letzte 48 Stunden";
 
+/* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "CLG-Dq-a59"; */
+"CLG-Dq-a59.title" = "Rechtschreibung und Grammatik einblenden";
+
+/* Class = "NSMenu"; title = "Speech"; ObjectID = "G6k-0L-moc"; */
+"G6k-0L-moc.title" = "Sprachausgabe";
+
+/* Class = "NSMenuItem"; title = "Speech"; ObjectID = "JXn-SB-3t2"; */
+"JXn-SB-3t2.title" = "Sprachausgabe";
+
+/* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN"; */
+"MHF-D4-pRN.title" = "Großbuchstaben";
+
+/* Class = "NSMenu"; title = "Substitutions"; ObjectID = "QEb-Bm-CPN"; */
+"QEb-Bm-CPN.title" = "Ersetzungen";
+
+/* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk"; */
+"RtQ-eP-bfk.title" = "Intelligente Bindestriche";
+
+/* Class = "NSMenu"; title = "Transformations"; ObjectID = "UFF-Fn-8ti"; */
+"UFF-Fn-8ti.title" = "Transformationen";
+
 /* Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "ZCa-7v-54l"; */
 "ZCa-7v-54l.title" = "Vollbildmodus";
+
+/* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "bd7-qY-ofB"; */
+"bd7-qY-ofB.title" = "Textersetzung";
+
+/* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "cK9-Df-xA3"; */
+"cK9-Df-xA3.title" = "Sprachausgabe starten";
+
+/* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "eVb-Qt-XJb"; */
+"eVb-Qt-XJb.title" = "Ersetzungen";
 
 /* Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi"; */
 "ecl-HO-Kpi.title" = "Alle Abonnements als gelesen markieren";
@@ -370,8 +406,29 @@
 /* Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI"; */
 "fad-Nj-OFI.title" = "Rechtschreibung";
 
+/* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "fbd-ZI-tZW"; */
+"fbd-ZI-tZW.title" = "Dokument jetzt prüfen";
+
+/* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "gbo-AM-wcF"; */
+"gbo-AM-wcF.title" = "Sprachausgabe stoppen";
+
+/* Class = "NSMenuItem"; title = "Data Detectors"; ObjectID = "idm-wm-h8z"; */
+"idm-wm-h8z.title" = "Datenerkennung";
+
+/* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "joR-kW-sIU"; */
+"joR-kW-sIU.title" = "Transformationen";
+
+/* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "kCi-pf-mkc"; */
+"kCi-pf-mkc.title" = "Intelligente Anführungszeichen";
+
+/* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "l8F-tb-7E0"; */
+"l8F-tb-7E0.title" = "Rechtschreibung und Grammatik";
+
 /* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
 "pKl-6f-Hlc.title" = "Als gelesen markieren";
+
+/* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "qzH-De-act"; */
+"qzH-De-act.title" = "Intelligentes Kopieren/Einsetzen";
 
 /* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7"; */
 "rNG-xr-3x7.title" = "Ungelesene Artikel";
@@ -382,6 +439,21 @@
 /* Class = "NSMenuItem"; title = "Today"; ObjectID = "t34-de-pMs"; */
 "t34-de-pMs.title" = "Heute";
 
+/* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "tfv-fu-HFM"; */
+"tfv-fu-HFM.title" = "Während der Texteingabe prüfen";
+
+/* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "v3R-CV-0b9"; */
+"v3R-CV-0b9.title" = "Großschreiben";
+
+/* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "w4Q-ne-FPI"; */
+"w4Q-ne-FPI.title" = "Intelligente Links";
+
+/* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "wnc-vZ-fO4"; */
+"wnc-vZ-fO4.title" = "Ersetzungen einblenden";
+
 /* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm"; */
 "wqh-Jc-gBm.title" = "Letzte Aktualisierung";
+
+/* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "xpF-dh-E2m"; */
+"xpF-dh-E2m.title" = "Kleinbuchstaben";
 

@@ -4,6 +4,9 @@
 /* Progress in bytes, e.g. 1 KB of 1 MB */
 "%@ of %@" = "%1$@ von %2$@";
 
+/* Number of bytes received, e.g. 1 MB received */
+"%@ received" = "%@ empfangen";
+
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "%d neue Artikel empfangen";
 
@@ -244,7 +247,19 @@
 "Error importing subscriptions title" = "Fehler beim Importieren";
 
 /* No comment provided by engineer. */
+"Error loading script '%@'" = "Fehler beim Laden des Scripts: %@";
+
+/* No comment provided by engineer. */
 "Error parsing XML data in feed" = "Fehler beim Parsen der XML-Daten des Feeds";
+
+/* No comment provided by engineer. */
+"Error retrieving RSS Icon:" = "Fehler beim Laden des RSS-Symbols:";
+
+/* No comment provided by engineer. */
+"Error retrieving RSS feed:" = "Fehler beim Laden des RSS-Feeds:";
+
+/* No comment provided by engineer. */
+"Error: Feed not found!" = "Fehler: Feed nicht gefunden!";
 
 /* No comment provided by engineer. */
 "External Browser" = "Externer Browser";
@@ -278,6 +293,9 @@
 
 /* Title of a menu item */
 "Force Refresh Selected Subscriptions From Open Reader" = "Erzwinge das Aktualisieren der ausgewählten Abonnements von Open Reader";
+
+/* No comment provided by engineer. */
+"Forcing Refresh subscriptions…" = "Feedaktualisierung erzwingen…";
 
 /* Toolbar item name for the General preference pane */
 "General" = "Allgemein";
@@ -319,6 +337,9 @@
 "Invalid style title" = "Der Stil %@ scheint defekt zu sein.";
 
 /* No comment provided by engineer. */
+"JavaScript" = "JavaScript";
+
+/* No comment provided by engineer. */
 "Last Week" = "letzte Woche";
 
 /* Data field name visible in menu/article list */
@@ -333,8 +354,11 @@
 /* No comment provided by engineer. */
 "Locate Title" = "Vienna konnte die Datenbank nicht erstellen";
 
+/* Title of a button on an alert */
+"Locate…" = "Auswählen …";
+
 /* Title of a menu item */
-"Mark All Articles as Read" = "Alle Artikel als gelesen markieren";
+"Mark All Articles as Read" = "Alle Einträge als gelesen markieren";
 
 /* No comment provided by engineer. */
 "Mark All Read" = "Alle als gelesen markieren";
@@ -383,6 +407,9 @@
 
 /* No comment provided by engineer. */
 "No" = "Nein";
+
+/* No comment provided by engineer. */
+"No articles in feed" = "Keine Einträge in diesem Feed";
 
 /* No comment provided by engineer. */
 "No new articles available" = "Keine neuen Artikel verfügbar";
@@ -447,12 +474,18 @@
 /* Title of the Preferences window */
 "Preferences" = "Einstellungen";
 
+/* No comment provided by engineer. */
+"Queue" = "Warteschlange";
+
 /* Title of a button on an alert */
 "Quit" = "Beenden";
 
 /* Title of a button on an alert
    Title of a menu item */
 "Quit Vienna" = "Vienna beenden";
+
+/* No comment provided by engineer. */
+"RSS Icon not found!" = "RSS-Symbol nicht gefunden!";
 
 /* No comment provided by engineer. */
 "RSS Subscription Export Title" = "Export fertig";
@@ -581,7 +614,7 @@
 "Unread" = "Ungelesen";
 
 /* No comment provided by engineer. */
-"Unread Articles" = "Ungelesene Artikel";
+"Unread Articles" = "Ungelesene Einträge";
 
 /* No comment provided by engineer. */
 "Unrecognised database format text" = "Ihre existierende %@ Datei wird von dieser Vienna-Version nicht unterstützt. Löschen oder benennen Sie diese Datei um und starten Sie Vienna erneut.";

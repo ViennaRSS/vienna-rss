@@ -55,8 +55,11 @@
 /* No comment provided by engineer. */
 "Locate Title" = "Vienna konnte die Datenbank nicht erstellen";
 
+/* Title of a button on an alert */
+"Locate…" = "Auswählen …";
+
 /* No comment provided by engineer. */
-"Marked Articles" = "Markierte Artikel";
+"Marked Articles" = "Markierte Einträge";
 
 /* Title of a button on an alert */
 "Quit Vienna" = "Vienna beenden";
@@ -83,7 +86,7 @@
 "Text" = "Text";
 
 /* No comment provided by engineer. */
-"Today's Articles" = "Artikel von heute";
+"Today's Articles" = "Einträge von heute";
 
 /* No comment provided by engineer. */
 "Trash" = "Papierkorb";

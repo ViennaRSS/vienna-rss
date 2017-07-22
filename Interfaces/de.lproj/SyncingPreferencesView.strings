@@ -1,3 +1,9 @@
+/* Class = "NSButton"; ibExternalAccessibilityDescription = "Visit the website"; ObjectID = "Ar5-Qc-YTe"; */
+"Ar5-Qc-YTe.ibExternalAccessibilityDescription" = "Website besuchen";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe"; */
+"Ar5-Qc-YTe.ibShadowedToolTip" = "Website besuchen";
+
 /* Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Lkv-md-rEW"; */
 "Lkv-md-rEW.title" = "Synchronisiere mit einem Open Reader Server";
 
