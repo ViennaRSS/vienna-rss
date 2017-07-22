@@ -1726,853 +1726,822 @@
       <trans-unit id="Download">
         <source>Download</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Загрузка</target>
       </trans-unit>
       <trans-unit id="Download Enclosure">
         <source>Download Enclosure</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Загрузить вложение</target>
       </trans-unit>
       <trans-unit id="Download Enclosures">
         <source>Download Enclosures</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Загрузить вложения</target>
       </trans-unit>
       <trans-unit id="Download completed">
         <source>Download completed</source>
         <note>Notification title</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Загрузка завершена</target>
       </trans-unit>
       <trans-unit id="Download failed">
         <source>Download failed</source>
         <note>Notification title</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Ошибка</target>
       </trans-unit>
       <trans-unit id="Downloads Running">
         <source>Downloads Running</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Одна или более загрузок еще не завершена</target>
       </trans-unit>
       <trans-unit id="Downloads Running text">
         <source>Downloads Running text</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Если вы сейчас выйдете из Vienna, все загрузки будут остановлены.</target>
       </trans-unit>
       <trans-unit id="Edit…">
         <source>Edit…</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Правка…</target>
       </trans-unit>
       <trans-unit id="Empty">
         <source>Empty</source>
         <note>Title of a button on an alert</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Очистить</target>
       </trans-unit>
       <trans-unit id="Empty Trash message">
         <source>Empty Trash message</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Удалить все сообщения в Корзине?</target>
       </trans-unit>
       <trans-unit id="Empty Trash message text">
         <source>Empty Trash message text</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Данное действие невозможно отменить</target>
       </trans-unit>
       <trans-unit id="Enclosure">
         <source>Enclosure</source>
         <note>Data field name (URL) visible in menu/article list</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">URL вложения</target>
+        <alt-trans>
+          <target xml:lang="ru">Вложения</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Enter the URL here">
         <source>Enter the URL here</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Введите URL</target>
       </trans-unit>
       <trans-unit id="Error">
         <source>Error</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Ошибка</target>
       </trans-unit>
       <trans-unit id="Error importing subscriptions body">
         <source>Error importing subscriptions body</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Невозможно импортировать указанный файл. Содержимое файла не является корректными данными формата OPML XML.</target>
       </trans-unit>
       <trans-unit id="Error importing subscriptions title">
         <source>Error importing subscriptions title</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Ошибка импортирования</target>
       </trans-unit>
       <trans-unit id="Error loading script '%@'">
         <source>Error loading script '%@'</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Ошибка загрузки скрипта '%@'</target>
       </trans-unit>
       <trans-unit id="Error parsing XML data in feed">
         <source>Error parsing XML data in feed</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Ошибка парсинга XML данных канала</target>
       </trans-unit>
       <trans-unit id="Error retrieving RSS Icon:">
         <source>Error retrieving RSS Icon:</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Ошибка получения иконки RSS:</target>
       </trans-unit>
       <trans-unit id="Error retrieving RSS feed:">
         <source>Error retrieving RSS feed:</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Ошибка запроса RSS-ленты:</target>
       </trans-unit>
       <trans-unit id="Error: Feed not found!">
         <source>Error: Feed not found!</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Ошибка: Лента не найдена!</target>
       </trans-unit>
       <trans-unit id="External Browser">
         <source>External Browser</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Внешний браузер</target>
       </trans-unit>
       <trans-unit id="Feed URL updated to %@">
         <source>Feed URL updated to %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">URL канала обновился до %@</target>
       </trans-unit>
       <trans-unit id="Fetching Open Reader Subscriptions…">
         <source>Fetching Open Reader Subscriptions…</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Открытие Open Reader подписки…</target>
       </trans-unit>
       <trans-unit id="File %@ downloaded">
         <source>File %@ downloaded</source>
         <note>Notification body</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Файл %@ загружен</target>
       </trans-unit>
       <trans-unit id="File %@ failed to download">
         <source>File %@ failed to download</source>
         <note>Notification body</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Ошибка при загрузке файла %@</target>
       </trans-unit>
       <trans-unit id="Flag">
         <source>Flag</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Метка</target>
       </trans-unit>
       <trans-unit id="Flagged">
         <source>Flagged</source>
         <note>Data field name visible in menu/smart folder definition</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Отмеченные</target>
       </trans-unit>
       <trans-unit id="Folder">
         <source>Folder</source>
         <note>Data field name visible in menu/article list/smart folder definition</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Папка</target>
       </trans-unit>
       <trans-unit id="Folder image retrieved from %@">
         <source>Folder image retrieved from %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Изображение папки взято из %@</target>
       </trans-unit>
       <trans-unit id="Folders">
         <source>Folders</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Папки</target>
       </trans-unit>
       <trans-unit id="Force Refresh Selected Subscriptions From Open Reader">
         <source>Force Refresh Selected Subscriptions From Open Reader</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Принудительно обновить выбранные подписки из Open Reader</target>
       </trans-unit>
       <trans-unit id="Forcing Refresh subscriptions…">
         <source>Forcing Refresh subscriptions…</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Принудительное обновление подписок…</target>
       </trans-unit>
       <trans-unit id="General">
         <source>General</source>
         <note>Toolbar item name for the General preference pane</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Общие</target>
       </trans-unit>
       <trans-unit id="Get Info">
         <source>Get Info</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Сведения</target>
       </trans-unit>
       <trans-unit id="Go forward to the next page">
         <source>Go forward to the next page</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">На следующую страницу</target>
       </trans-unit>
       <trans-unit id="Got HTTP status 304 - No news from last check">
         <source>Got HTTP status 304 - No news from last check</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Получен HTTP-код 304 - Нет новостей с момента последней проверки</target>
       </trans-unit>
       <trans-unit id="HTTP code %d reported from server">
         <source>HTTP code %d reported from server</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Сервер передал HTTP код %d</target>
       </trans-unit>
       <trans-unit id="HasEnclosure">
         <source>HasEnclosure</source>
         <note>Data field name (Y/N) visible in menu/smart folder definition</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Вложения</target>
       </trans-unit>
       <trans-unit id="Headlines">
         <source>Headlines</source>
         <note>Pseudo field name visible in article list</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Заголовки</target>
       </trans-unit>
       <trans-unit id="Hide Filter Bar">
         <source>Hide Filter Bar</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Скрыть панель фильтра</target>
       </trans-unit>
       <trans-unit id="Hide Status Bar">
         <source>Hide Status Bar</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
-      </trans-unit>
-      <trans-unit id="Hide Toolbar">
-        <source>Hide Toolbar</source>
-        <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Спрятать строку статуса</target>
       </trans-unit>
       <trans-unit id="Import">
         <source>Import</source>
         <note>Title of a button on an alert</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Импорт</target>
       </trans-unit>
       <trans-unit id="Import subscriptions from OPML file?">
         <source>Import subscriptions from OPML file?</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Импортировать подписки из файла OPML?</target>
       </trans-unit>
       <trans-unit id="Improper infinitely looping URL redirect to %@">
         <source>Improper infinitely looping URL redirect to %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Бесконечное перенаправление URL по адресу %@</target>
       </trans-unit>
       <trans-unit id="Invalid style body">
         <source>Invalid style body</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Будет использован стиль по умолчанию.</target>
       </trans-unit>
       <trans-unit id="Invalid style title">
         <source>Invalid style title</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
-      </trans-unit>
-      <trans-unit id="JavaScript">
-        <source>JavaScript</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Стиль %@ отсутствует или поврежден</target>
       </trans-unit>
       <trans-unit id="Last Week">
         <source>Last Week</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">На прошлой неделе</target>
       </trans-unit>
       <trans-unit id="Link">
         <source>Link</source>
         <note>Data field name visible in menu/article list</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Ссылка</target>
       </trans-unit>
       <trans-unit id="Loading">
         <source>Loading</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Загрузка</target>
       </trans-unit>
       <trans-unit id="Loading…">
         <source>Loading…</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Загрузка…</target>
       </trans-unit>
       <trans-unit id="Locate Text">
         <source>Locate Text</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Новая база данных Vienna не может быть создана в "%@" из-за того, что папка, возможно, находится на удаленном сервере, а текущая версия Vienna не может работать с удаленными базами данных. Пожалуйста, выберите папку на своем компьютере.</target>
       </trans-unit>
       <trans-unit id="Locate Title">
         <source>Locate Title</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Невозможно создать базу данных Vienna</target>
       </trans-unit>
       <trans-unit id="Locate…">
         <source>Locate…</source>
         <note>Title of a button on an alert</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Найти…</target>
       </trans-unit>
       <trans-unit id="Mark All Articles as Read">
         <source>Mark All Articles as Read</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Отметить все статьи как прочитанные</target>
       </trans-unit>
       <trans-unit id="Mark All Read">
         <source>Mark All Read</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Отметить все как прочитанные</target>
       </trans-unit>
       <trans-unit id="Mark All Subscriptions as Read">
         <source>Mark All Subscriptions as Read</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Отметить все подписки как прочитанные</target>
       </trans-unit>
       <trans-unit id="Mark Flagged">
         <source>Mark Flagged</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Отметить</target>
       </trans-unit>
       <trans-unit id="Mark Read">
         <source>Mark Read</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Отметить как прочитанное</target>
       </trans-unit>
       <trans-unit id="Mark Unflagged">
         <source>Mark Unflagged</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Снять флаг</target>
       </trans-unit>
       <trans-unit id="Mark Unread">
         <source>Mark Unread</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Снять отметку о прочтении</target>
       </trans-unit>
       <trans-unit id="Marked Articles">
         <source>Marked Articles</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Отмеченные статьи</target>
       </trans-unit>
       <trans-unit id="More Scripts…">
         <source>More Scripts…</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Больше скриптов…</target>
       </trans-unit>
       <trans-unit id="Move Folders">
         <source>Move Folders</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Переместить папки</target>
       </trans-unit>
       <trans-unit id="Never">
         <source>Never</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Никогда</target>
       </trans-unit>
       <trans-unit id="New Tab">
         <source>New Tab</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Новая вкладка</target>
       </trans-unit>
       <trans-unit id="New articles retrieved">
         <source>New articles retrieved</source>
         <note>Notification title</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Новые статьи</target>
       </trans-unit>
       <trans-unit id="New style body">
         <source>New style body</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Стиль "%@" был установлен в папку стилей и добавлен в меню Стиль.</target>
       </trans-unit>
       <trans-unit id="New style title">
         <source>New style title</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Vienna установила новый стиль</target>
       </trans-unit>
       <trans-unit id="New unread articles retrieved">
         <source>New unread articles retrieved</source>
         <note>Notification body</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Получено %d новых статей</target>
       </trans-unit>
       <trans-unit id="No">
         <source>No</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Нет</target>
       </trans-unit>
       <trans-unit id="No articles in feed">
         <source>No articles in feed</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">В ленте нет статей</target>
       </trans-unit>
       <trans-unit id="No new articles available">
         <source>No new articles available</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
-      </trans-unit>
-      <trans-unit id="OK">
-        <source>OK</source>
-        <note>Title of a button on an alert</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Нет новых статей</target>
       </trans-unit>
       <trans-unit id="Open">
         <source>Open</source>
         <note>Title of a popup menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Открыть</target>
       </trans-unit>
       <trans-unit id="Open Article Page">
         <source>Open Article Page</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Открыть статью</target>
       </trans-unit>
       <trans-unit id="Open Article Page in %@">
         <source>Open Article Page in %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Открыть статью в %@</target>
       </trans-unit>
       <trans-unit id="Open Article Page in External Browser">
         <source>Open Article Page in External Browser</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Открыть статью во внешнем браузере</target>
       </trans-unit>
       <trans-unit id="Open Frame">
         <source>Open Frame</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Открыть фрейм</target>
       </trans-unit>
       <trans-unit id="Open Image in %@">
         <source>Open Image in %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Открыть изображение в %@</target>
       </trans-unit>
       <trans-unit id="Open Image in New Tab">
         <source>Open Image in New Tab</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Открыть изображение в новой вкладке</target>
       </trans-unit>
       <trans-unit id="Open Link in %@">
         <source>Open Link in %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Открыть ссылку в %@</target>
       </trans-unit>
       <trans-unit id="Open Link in New Tab">
         <source>Open Link in New Tab</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Открыть ссылку в новой вкладке</target>
       </trans-unit>
       <trans-unit id="Open Page in %@">
         <source>Open Page in %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Открыть страницу в %@</target>
       </trans-unit>
       <trans-unit id="Open Reader Authentication Failed">
         <source>Open Reader Authentication Failed</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">В авторизации в Open Reader отказано</target>
       </trans-unit>
       <trans-unit id="Open Reader Authentication Failed text">
         <source>Open Reader Authentication Failed text</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Убедитесь, что в настройках Vienna указаны правильные имя пользователя и пароль для доступа к серверу Open Reader.
+Также проверьте сетевое соединение.</target>
       </trans-unit>
       <trans-unit id="Open Scripts Folder">
         <source>Open Scripts Folder</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Открыть папку скриптов</target>
       </trans-unit>
       <trans-unit id="Open Subscription Home Page">
         <source>Open Subscription Home Page</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Открыть страницу подписки</target>
       </trans-unit>
       <trans-unit id="Open Subscription Home Page in %@">
         <source>Open Subscription Home Page in %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Открыть страницу подписки в %@</target>
       </trans-unit>
       <trans-unit id="Open Subscription Home Page in External Browser">
         <source>Open Subscription Home Page in External Browser</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Открыть страницу подписки во внешнем браузере</target>
       </trans-unit>
       <trans-unit id="Other">
         <source>Other</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Иное</target>
       </trans-unit>
       <trans-unit id="Play">
         <source>Play</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Воспроизведение</target>
       </trans-unit>
       <trans-unit id="Plugin installed">
         <source>Plugin installed</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Плагин установлен</target>
       </trans-unit>
       <trans-unit id="Preferences">
         <source>Preferences</source>
         <note>Title of the Preferences window</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Настройки</target>
       </trans-unit>
       <trans-unit id="Queue">
         <source>Queue</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Очередь</target>
       </trans-unit>
       <trans-unit id="Quit">
         <source>Quit</source>
         <note>Title of a button on an alert</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Завершить</target>
       </trans-unit>
       <trans-unit id="Quit Vienna">
         <source>Quit Vienna</source>
         <note>Title of a button on an alert
    Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Завершить работу Vienna</target>
       </trans-unit>
       <trans-unit id="RSS Icon not found!">
         <source>RSS Icon not found!</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Иконка RSS не найдена!</target>
       </trans-unit>
       <trans-unit id="RSS Subscription Export Title">
         <source>RSS Subscription Export Title</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Экспортирование завершено</target>
       </trans-unit>
       <trans-unit id="RSS Subscription Import Title">
         <source>RSS Subscription Import Title</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Импортирование завершено</target>
       </trans-unit>
       <trans-unit id="Read">
         <source>Read</source>
         <note>Data field name visible in menu/smart folder definition</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Прочитанные</target>
       </trans-unit>
       <trans-unit id="Recent Searches">
         <source>Recent Searches</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">История поиска</target>
       </trans-unit>
       <trans-unit id="Recents">
         <source>Recents</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Журнал</target>
       </trans-unit>
       <trans-unit id="Redirection attempt treated as temporary for safety concern">
         <source>Redirection attempt treated as temporary for safety concern</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Зафиксирована попытка перенаправления</target>
       </trans-unit>
       <trans-unit id="Refresh All Subscriptions">
         <source>Refresh All Subscriptions</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Обновить все подписки</target>
       </trans-unit>
       <trans-unit id="Refresh Selected Subscriptions">
         <source>Refresh Selected Subscriptions</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Обновить выбранные подписки</target>
       </trans-unit>
       <trans-unit id="Refresh completed">
         <source>Refresh completed</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Обновление завершено</target>
       </trans-unit>
       <trans-unit id="Refresh the current page">
         <source>Refresh the current page</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Обновить страницу</target>
       </trans-unit>
       <trans-unit id="Refreshing folder images…">
         <source>Refreshing folder images…</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Обновляю изображения папки…</target>
       </trans-unit>
       <trans-unit id="Refreshing subscriptions…">
         <source>Refreshing subscriptions…</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Обновляю подписки…</target>
       </trans-unit>
       <trans-unit id="Remove From List">
         <source>Remove From List</source>
         <note>Title of a popup menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Удалить из списка</target>
       </trans-unit>
       <trans-unit id="Rename…">
         <source>Rename…</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Переименовать…</target>
       </trans-unit>
       <trans-unit id="Restore Article">
         <source>Restore Article</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Восстановить статью</target>
       </trans-unit>
       <trans-unit id="Resubscribe">
         <source>Resubscribe</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Возобновить подписку</target>
       </trans-unit>
       <trans-unit id="Retrieving articles">
         <source>Retrieving articles</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Загружаю статьи</target>
       </trans-unit>
       <trans-unit id="Retrieving folder image">
         <source>Retrieving folder image</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Получаю изображение папки</target>
       </trans-unit>
       <trans-unit id="Retrieving folder image for Open Reader Feed">
         <source>Retrieving folder image for Open Reader Feed</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Получение иконки для Open Reader подписки</target>
       </trans-unit>
       <trans-unit id="Return to the previous page">
         <source>Return to the previous page</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">На предыдущую страницу</target>
       </trans-unit>
       <trans-unit id="Search Results">
         <source>Search Results</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Результаты поиска</target>
       </trans-unit>
       <trans-unit id="Search all articles">
         <source>Search all articles</source>
         <note>Placeholder title of a search field</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Поиск в статьях</target>
       </trans-unit>
       <trans-unit id="Search all articles or the current web page">
         <source>Search all articles or the current web page</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Поиск в статьях или по текущей веб-странице</target>
       </trans-unit>
       <trans-unit id="Search current web page">
         <source>Search current web page</source>
         <note>Placeholder title of a search field</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Поиск по текущей веб-странице</target>
       </trans-unit>
       <trans-unit id="Search in %@">
         <source>Search in %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Поиск в %@</target>
       </trans-unit>
       <trans-unit id="Select…">
         <source>Select…</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Выбрать…</target>
       </trans-unit>
       <trans-unit id="Send Link">
         <source>Send Link</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Отправить ссылку</target>
       </trans-unit>
       <trans-unit id="Send Links">
         <source>Send Links</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Отправить ссылки</target>
       </trans-unit>
       <trans-unit id="Show Filter Bar">
         <source>Show Filter Bar</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
-      </trans-unit>
-      <trans-unit id="Show Main Window…">
-        <source>Show Main Window…</source>
-        <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Показать панель фильтра</target>
       </trans-unit>
       <trans-unit id="Show Status Bar">
         <source>Show Status Bar</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Показать строку статуса</target>
       </trans-unit>
       <trans-unit id="Show Toolbar">
         <source>Show Toolbar</source>
         <note>Title of a menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Показать панель инструментов</target>
       </trans-unit>
       <trans-unit id="Show in Finder">
         <source>Show in Finder</source>
         <note>Title of a popup menu item</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Показать в Finder</target>
       </trans-unit>
       <trans-unit id="Subject">
         <source>Subject</source>
         <note>Data field name visible in menu/article list/smart folder definition</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Тема</target>
       </trans-unit>
       <trans-unit id="Subscribe to the feed for this page">
         <source>Subscribe to the feed for this page</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Подписаться к каналу на данной странице</target>
       </trans-unit>
       <trans-unit id="Summary">
         <source>Summary</source>
         <note>Pseudo field name visible in menu/article list</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Выводы</target>
       </trans-unit>
       <trans-unit id="Syncing">
         <source>Syncing</source>
         <note>Toolbar item name for the Syncing preference pane</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Синхронизации</target>
       </trans-unit>
       <trans-unit id="Text">
         <source>Text</source>
         <note>Data field name visible in smart folder definition</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Текст</target>
       </trans-unit>
       <trans-unit id="This article contains an enclosed file.">
         <source>This article contains an enclosed file.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Эта статья содержит вложенный файл.</target>
       </trans-unit>
       <trans-unit id="Today">
         <source>Today</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Сегодня</target>
       </trans-unit>
       <trans-unit id="Today's Articles">
         <source>Today's Articles</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Сегодняшние статьи</target>
       </trans-unit>
       <trans-unit id="Trash">
         <source>Trash</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
-      </trans-unit>
-      <trans-unit id="URL">
-        <source>URL</source>
-        <note>URL</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Корзина</target>
       </trans-unit>
       <trans-unit id="Unread">
         <source>Unread</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Непрочитанное</target>
       </trans-unit>
       <trans-unit id="Unread Articles">
         <source>Unread Articles</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Непрочитанные статьи</target>
       </trans-unit>
       <trans-unit id="Unrecognised database format text">
         <source>Unrecognised database format text</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Формат базы данных (%@) не поддерживается текущей версией Vienna. Удалите или переименуйте этот файл и перезапустите программу.</target>
       </trans-unit>
       <trans-unit id="Unrecognised database format title">
         <source>Unrecognised database format title</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Формат базы данных изменился</target>
       </trans-unit>
       <trans-unit id="Unsubscribe">
         <source>Unsubscribe</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Отписаться от ленты</target>
       </trans-unit>
       <trans-unit id="Upgrade Database">
         <source>Upgrade Database</source>
         <note>Title of a button on an alert</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Обновить базу данных</target>
       </trans-unit>
       <trans-unit id="Vienna cannot open the file body">
         <source>Vienna cannot open the file body</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Vienna не может открыть файл "%@" потому что он был перемещен после загрузки.</target>
       </trans-unit>
       <trans-unit id="Vienna cannot open the file title">
         <source>Vienna cannot open the file title</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Vienna не может открыть этот файл.</target>
       </trans-unit>
       <trans-unit id="Vienna cannot show the file body">
         <source>Vienna cannot show the file body</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Vienna не может отобразить файл "%@" потому что он был перемещен после загрузки.</target>
       </trans-unit>
       <trans-unit id="Vienna cannot show the file title">
         <source>Vienna cannot show the file title</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Vienna не может отобразить файл.</target>
       </trans-unit>
       <trans-unit id="Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.">
         <source>Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Vienna необходимо обновить свою базу данных до последней версии. Это может занять минуту или около того. Приносим свои извинения за доставленные неудобства.</target>
       </trans-unit>
       <trans-unit id="Yes">
         <source>Yes</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Да</target>
       </trans-unit>
       <trans-unit id="Yesterday">
         <source>Yesterday</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Вчера</target>
       </trans-unit>
       <trans-unit id="contains">
         <source>contains</source>
         <note>test for a string</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">содержит</target>
       </trans-unit>
       <trans-unit id="does not contain">
         <source>does not contain</source>
         <note>test for a string</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">не содержит</target>
       </trans-unit>
       <trans-unit id="is">
         <source>is</source>
         <note>test for a value</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">содержится</target>
       </trans-unit>
       <trans-unit id="is after">
         <source>is after</source>
         <note>test for a date</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">после</target>
       </trans-unit>
       <trans-unit id="is before">
         <source>is before</source>
         <note>test for a date</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">до</target>
       </trans-unit>
       <trans-unit id="is greater than">
         <source>is greater than</source>
         <note>test for a numeric value</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">более чем</target>
       </trans-unit>
       <trans-unit id="is greater than or equal to">
         <source>is greater than or equal to</source>
         <note>test for a numeric value</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">больше или равно</target>
       </trans-unit>
       <trans-unit id="is less than">
         <source>is less than</source>
         <note>test for a numeric value</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">менее чем</target>
       </trans-unit>
       <trans-unit id="is less than or equal to">
         <source>is less than or equal to</source>
         <note>test for a numeric value</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">меньше или равно</target>
       </trans-unit>
       <trans-unit id="is not">
         <source>is not</source>
         <note>test for a value</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">не содержится</target>
       </trans-unit>
       <trans-unit id="is on or after">
         <source>is on or after</source>
         <note>test for a date</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">сейчас и позднее</target>
       </trans-unit>
       <trans-unit id="is on or before">
         <source>is on or before</source>
         <note>test for a date</note>
-        <target xml:lang="ru"/>
-      </trans-unit>
-      <trans-unit id="not under">
-        <source>not under</source>
-        <note>test for a folder (not operational as of Vienna 3.2)</note>
-        <target xml:lang="ru"/>
-      </trans-unit>
-      <trans-unit id="under">
-        <source>under</source>
-        <note>test for a folder (not operational as of Vienna 3.2)</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">сейчас и ранее</target>
       </trans-unit>
     </body>
   </file>
@@ -2581,14 +2550,8 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
-      <trans-unit id="CFBundleName">
-        <source>Vienna</source>
-        <target xml:lang="ru"/>
-      </trans-unit>
-      <trans-unit id="NSHumanReadableCopyright">
-        <source>© 2004–2017</source>
-        <target xml:lang="ru"/>
-      </trans-unit>
+      
+      
     </body>
   </file>
   <file original="Vienna Tests/Info.plist" source-language="en" datatype="plaintext" target-language="ru">
@@ -2596,10 +2559,7 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
-      <trans-unit id="CFBundleName">
-        <source>$(PRODUCT_NAME)</source>
-        <target xml:lang="ru"/>
-      </trans-unit>
+      
     </body>
   </file>
   <file original="Vienna Tests/Localizable.strings" source-language="en" datatype="plaintext" target-language="ru">
@@ -2607,260 +2567,245 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
-      <trans-unit id="%@, %@">
-        <source>%1$@, %2$@</source>
-        <note>{existing authors},{new author name}</note>
-        <target xml:lang="ru"/>
-      </trans-unit>
       <trans-unit id="(No title)">
         <source>(No title)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">без имени</target>
       </trans-unit>
       <trans-unit id="(Untitled Feed)">
         <source>(Untitled Feed)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">без имени</target>
       </trans-unit>
       <trans-unit id="Author">
         <source>Author</source>
         <note>Data field name visible in menu/article list/smart folder definition</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Автор</target>
       </trans-unit>
       <trans-unit id="Cancel">
         <source>Cancel</source>
         <note>Title of a button on an alert</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Отмена</target>
       </trans-unit>
       <trans-unit id="Cannot create database folder text">
         <source>Cannot create database folder text</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Vienna попыталась создать папку  "%@", но произошла ошибка. Проверьте разрешения для папок в указанном пути.</target>
       </trans-unit>
       <trans-unit id="Cannot create database folder title">
         <source>Cannot create database folder title</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Извините, но Vienna не смогла создать папку базы данных</target>
       </trans-unit>
       <trans-unit id="Cannot open database text">
         <source>Cannot open database text</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Файл базы данных (%@) не может быть открыт. Он может быть поврежден или недоступен. Пожалуйста, удалите или переименуйте файл базы данных и перезапустите Vienna.</target>
       </trans-unit>
       <trans-unit id="Cannot open database title">
         <source>Cannot open database title</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Извините, но Vienna не смогла открыть базу данных</target>
       </trans-unit>
       <trans-unit id="Database Upgrade">
         <source>Database Upgrade</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Обновление базы данных</target>
       </trans-unit>
       <trans-unit id="Date">
         <source>Date</source>
         <note>Data field name visible in menu/article list/smart folder definition</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Дата</target>
       </trans-unit>
       <trans-unit id="Deleted">
         <source>Deleted</source>
         <note>Data field name visible in smart folder definition</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Удаленный</target>
       </trans-unit>
       <trans-unit id="Enclosure">
         <source>Enclosure</source>
         <note>Data field name (URL) visible in menu/article list</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">URL вложения</target>
       </trans-unit>
       <trans-unit id="Flagged">
         <source>Flagged</source>
         <note>Data field name visible in menu/smart folder definition</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Отмеченные</target>
       </trans-unit>
       <trans-unit id="Folder">
         <source>Folder</source>
         <note>Data field name visible in menu/article list/smart folder definition</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Папка</target>
       </trans-unit>
       <trans-unit id="HasEnclosure">
         <source>HasEnclosure</source>
         <note>Data field name (Y/N) visible in menu/smart folder definition</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Вложения</target>
       </trans-unit>
       <trans-unit id="Headlines">
         <source>Headlines</source>
         <note>Pseudo field name visible in article list</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Заголовки</target>
       </trans-unit>
       <trans-unit id="Link">
         <source>Link</source>
         <note>Data field name visible in menu/article list</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Ссылка</target>
       </trans-unit>
       <trans-unit id="Locate Text">
         <source>Locate Text</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Новая база данных Vienna не может быть создана в "%@" из-за того, что папка, возможно, находится на удаленном сервере, а текущая версия Vienna не может работать с удаленными базами данных. Пожалуйста, выберите папку на своем компьютере.</target>
       </trans-unit>
       <trans-unit id="Locate Title">
         <source>Locate Title</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Невозможно создать базу данных Vienna</target>
       </trans-unit>
       <trans-unit id="Locate…">
         <source>Locate…</source>
         <note>Title of a button on an alert</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Найти…</target>
       </trans-unit>
       <trans-unit id="Marked Articles">
         <source>Marked Articles</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Отмеченные статьи</target>
       </trans-unit>
       <trans-unit id="Quit Vienna">
         <source>Quit Vienna</source>
         <note>Title of a button on an alert</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Завершить работу Vienna</target>
       </trans-unit>
       <trans-unit id="Read">
         <source>Read</source>
         <note>Data field name visible in menu/smart folder definition</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Прочитанные</target>
       </trans-unit>
       <trans-unit id="Search Results">
         <source>Search Results</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Результаты поиска</target>
       </trans-unit>
       <trans-unit id="Search all articles">
         <source>Search all articles</source>
         <note>Placeholder title of a search field</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Поиск в статьях</target>
       </trans-unit>
       <trans-unit id="Search current web page">
         <source>Search current web page</source>
         <note>Placeholder title of a search field</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Поиск по текущей веб-странице</target>
       </trans-unit>
       <trans-unit id="Subject">
         <source>Subject</source>
         <note>Data field name visible in menu/article list/smart folder definition</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Тема</target>
       </trans-unit>
       <trans-unit id="Summary">
         <source>Summary</source>
         <note>Pseudo field name visible in menu/article list</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Выводы</target>
       </trans-unit>
       <trans-unit id="Text">
         <source>Text</source>
         <note>Data field name visible in smart folder definition</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Текст</target>
       </trans-unit>
       <trans-unit id="Today's Articles">
         <source>Today's Articles</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Сегодняшние статьи</target>
       </trans-unit>
       <trans-unit id="Trash">
         <source>Trash</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Корзина</target>
       </trans-unit>
       <trans-unit id="Unread Articles">
         <source>Unread Articles</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Непрочитанные статьи</target>
       </trans-unit>
       <trans-unit id="Unrecognised database format text">
         <source>Unrecognised database format text</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Формат базы данных (%@) не поддерживается текущей версией Vienna. Удалите или переименуйте этот файл и перезапустите программу.</target>
       </trans-unit>
       <trans-unit id="Unrecognised database format title">
         <source>Unrecognised database format title</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Формат базы данных изменился</target>
       </trans-unit>
       <trans-unit id="Upgrade Database">
         <source>Upgrade Database</source>
         <note>Title of a button on an alert</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Обновить базу данных</target>
       </trans-unit>
       <trans-unit id="Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.">
         <source>Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">Vienna необходимо обновить свою базу данных до последней версии. Это может занять минуту или около того. Приносим свои извинения за доставленные неудобства.</target>
       </trans-unit>
       <trans-unit id="contains">
         <source>contains</source>
         <note>test for a string</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">содержит</target>
       </trans-unit>
       <trans-unit id="does not contain">
         <source>does not contain</source>
         <note>test for a string</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">не содержит</target>
       </trans-unit>
       <trans-unit id="is">
         <source>is</source>
         <note>test for a value</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">содержится</target>
       </trans-unit>
       <trans-unit id="is after">
         <source>is after</source>
         <note>test for a date</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">после</target>
       </trans-unit>
       <trans-unit id="is before">
         <source>is before</source>
         <note>test for a date</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">до</target>
       </trans-unit>
       <trans-unit id="is greater than">
         <source>is greater than</source>
         <note>test for a numeric value</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">более чем</target>
       </trans-unit>
       <trans-unit id="is greater than or equal to">
         <source>is greater than or equal to</source>
         <note>test for a numeric value</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">больше или равно</target>
       </trans-unit>
       <trans-unit id="is less than">
         <source>is less than</source>
         <note>test for a numeric value</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">менее чем</target>
       </trans-unit>
       <trans-unit id="is less than or equal to">
         <source>is less than or equal to</source>
         <note>test for a numeric value</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">меньше или равно</target>
       </trans-unit>
       <trans-unit id="is not">
         <source>is not</source>
         <note>test for a value</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">не содержится</target>
       </trans-unit>
       <trans-unit id="is on or after">
         <source>is on or after</source>
         <note>test for a date</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">сейчас и позднее</target>
       </trans-unit>
       <trans-unit id="is on or before">
         <source>is on or before</source>
         <note>test for a date</note>
-        <target xml:lang="ru"/>
-      </trans-unit>
-      <trans-unit id="not under">
-        <source>not under</source>
-        <note>test for a folder (not operational as of Vienna 3.2)</note>
-        <target xml:lang="ru"/>
-      </trans-unit>
-      <trans-unit id="under">
-        <source>under</source>
-        <note>test for a folder (not operational as of Vienna 3.2)</note>
-        <target xml:lang="ru"/>
+        <target xml:lang="ru" state="translated">сейчас и ранее</target>
       </trans-unit>
     </body>
   </file>
@@ -2869,10 +2814,7 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
-      <trans-unit id="CFBundleName">
-        <source>$(PRODUCT_BUNDLE_NAME)</source>
-        <target xml:lang="ru"/>
-      </trans-unit>
+      
     </body>
   </file>
 </xliff>
