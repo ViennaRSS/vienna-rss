@@ -1204,6 +1204,11 @@
         <note>Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377";</note>
         <target xml:lang="de" state="translated">Filter nach:</target>
       </trans-unit>
+      <trans-unit id="1404.title">
+        <source>Current Filter</source>
+        <note>Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404";</note>
+        <target xml:lang="de" state="translated">Aktueller Filter</target>
+      </trans-unit>
       <trans-unit id="CPA-Ha-aj1.label">
         <source>Add</source>
         <note>Class = "NSToolbarItem"; label = "Add"; ObjectID = "CPA-Ha-aj1";</note>
@@ -1213,6 +1218,21 @@
         <source>Add</source>
         <note>Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1";</note>
         <target xml:lang="de" state="translated">Hinzufügen</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.label">
+        <source>All Read</source>
+        <note>Class = "NSToolbarItem"; label = "All Read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="de" state="translated">Alle gelesen</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.paletteLabel">
+        <source>Mark All Items as Read</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Mark All Items as Read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="de" state="translated">Alle Einträge als gelesen markieren</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.toolTip">
+        <source>Mark all items as read</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Mark all items as read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="de" state="translated">Alle Einträge als gelesen markieren</target>
       </trans-unit>
       <trans-unit id="Hs0-hu-A2g.title">
         <source>Refresh Selected Subscriptions</source>
@@ -1520,6 +1540,16 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
+      <trans-unit id="Ar5-Qc-YTe.ibExternalAccessibilityDescription">
+        <source>Visit the website</source>
+        <note>Class = "NSButton"; ibExternalAccessibilityDescription = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
+        <target xml:lang="de" state="translated">Website besuchen</target>
+      </trans-unit>
+      <trans-unit id="Ar5-Qc-YTe.ibShadowedToolTip">
+        <source>Visit the website</source>
+        <note>Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
+        <target xml:lang="de" state="translated">Website besuchen</target>
+      </trans-unit>
       <trans-unit id="Lkv-md-rEW.title">
         <source>Sync with an Open Reader server</source>
         <note>Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Lkv-md-rEW";</note>
@@ -1561,6 +1591,11 @@
         <source>%1$@ of %2$@</source>
         <note>Progress in bytes, e.g. 1 KB of 1 MB</note>
         <target xml:lang="de" state="translated">%1$@ von %2$@</target>
+      </trans-unit>
+      <trans-unit id="%@ received">
+        <source>%@ received</source>
+        <note>Number of bytes received, e.g. 1 MB received</note>
+        <target xml:lang="de" state="translated">%@ empfangen</target>
       </trans-unit>
       <trans-unit id="%d new articles retrieved">
         <source>%d new articles retrieved</source>
@@ -2087,6 +2122,11 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Der Stil %@ scheint defekt zu sein.</target>
       </trans-unit>
+      <trans-unit id="JavaScript" approved="yes">
+        <source>JavaScript</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de">JavaScript</target>
+      </trans-unit>
       <trans-unit id="Last Week">
         <source>Last Week</source>
         <note>No comment provided by engineer.</note>
@@ -2111,6 +2151,11 @@
         <source>Locate Title</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Vienna konnte die Datenbank nicht erstellen</target>
+      </trans-unit>
+      <trans-unit id="Locate…">
+        <source>Locate…</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="de" state="translated">Auswählen …</target>
       </trans-unit>
       <trans-unit id="Mark All Articles as Read">
         <source>Mark All Articles as Read</source>
@@ -2313,6 +2358,11 @@
         <note>Title of a button on an alert
    Title of a menu item</note>
         <target xml:lang="de" state="translated">Vienna beenden</target>
+      </trans-unit>
+      <trans-unit id="RSS Icon not found!">
+        <source>RSS Icon not found!</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="translated">RSS-Symbol nicht gefunden!</target>
       </trans-unit>
       <trans-unit id="RSS Subscription Export Title">
         <source>RSS Subscription Export Title</source>
@@ -2762,6 +2812,11 @@
         <source>Locate Title</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Vienna konnte die Datenbank nicht erstellen</target>
+      </trans-unit>
+      <trans-unit id="Locate…">
+        <source>Locate…</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="de" state="translated">Auswählen …</target>
       </trans-unit>
       <trans-unit id="Marked Articles">
         <source>Marked Articles</source>
