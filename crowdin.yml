@@ -1,3 +1,8 @@
 files:
-  - source: /Interfaces/Base.lproj/*.strings
-    translation: /Interfaces/%osx_code%/%original_file_name%
+  - source: /Localizations/en.xliff
+    translation: /Localizations/%two_letters_code%.xliff
+    languages_mapping:
+      two_letters_code:
+        pt-BR: pt-BR
+        zh-CN: zh-Hans
+        zh-TW: zh-Hant
