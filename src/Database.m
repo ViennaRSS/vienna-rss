@@ -134,7 +134,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     } else if (databaseVersion >= MA_Min_Supported_DB_Version) {
         NSAlert * alert = [[NSAlert alloc] init];
         [alert setMessageText:NSLocalizedString(@"Database Upgrade", nil)];
-        [alert setInformativeText:NSLocalizedString(@"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.", nil)];
+        [alert setInformativeText:NSLocalizedString(@"Database upgrade explanation text", @"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience.")];
         [alert addButtonWithTitle:NSLocalizedString(@"Upgrade Database", @"Title of a button on an alert")];
         [alert addButtonWithTitle:NSLocalizedString(@"Quit Vienna", @"Title of a button on an alert")];
         NSInteger modalReturn = [alert runModal];
