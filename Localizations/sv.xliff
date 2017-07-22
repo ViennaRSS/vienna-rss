@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+<xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Interfaces/Base.lproj/ActivityViewer.xib" source-language="en" datatype="plaintext" target-language="sv">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
@@ -7,18 +7,18 @@
     <body>
       <trans-unit id="8.title">
         <source>Activity</source>
-        <target>Aktivitetsvisare</target>
         <note>Class = "NSWindow"; title = "Activity"; ObjectID = "8";</note>
+        <target xml:lang="sv" state="translated">Aktivitetsvisare</target>
       </trans-unit>
       <trans-unit id="18.headerCell.title">
         <source>Source</source>
-        <target>Källa</target>
         <note>Class = "NSTableColumn"; headerCell.title = "Source"; ObjectID = "18";</note>
+        <target xml:lang="sv" state="translated">Källa</target>
       </trans-unit>
       <trans-unit id="19.headerCell.title">
         <source>Status</source>
-        <target>Status</target>
         <note>Class = "NSTableColumn"; headerCell.title = "Status"; ObjectID = "19";</note>
+        <target xml:lang="sv" state="translated">Status</target>
       </trans-unit>
     </body>
   </file>
@@ -27,60 +27,20 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
-      <trans-unit id="2GQ-cu-fbh.title">
-        <source>The higher the number, the quicker your subscriptions will be downloaded.</source>
-        <note>Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "2GQ-cu-fbh";</note>
-      </trans-unit>
       <trans-unit id="GaX-8c-QaN.title">
         <source>The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.</source>
-        <target>Dessa inställningar borde inte behöva ändras för normal användning av Vienna. Se Hjälp för detaljer kring varje inställning.</target>
         <note>Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "GaX-8c-QaN";</note>
-      </trans-unit>
-      <trans-unit id="Mlu-22-guR.title">
-        <source>30</source>
-        <note>Class = "NSMenuItem"; title = "30"; ObjectID = "Mlu-22-guR"; Note = "Do not localize";</note>
+        <target xml:lang="sv" state="translated">Dessa inställningar borde inte behöva ändras för normal användning av Vienna. Se Hjälp för detaljer kring varje inställning.</target>
       </trans-unit>
       <trans-unit id="Ngw-hP-yW4.title">
         <source>Concurrent downloads:</source>
-        <target>Samtidiga nerladdningar:</target>
         <note>Class = "NSTextFieldCell"; title = "Concurrent downloads:"; ObjectID = "Ngw-hP-yW4";</note>
-      </trans-unit>
-      <trans-unit id="S3T-cW-hys.title">
-        <source>However, high numbers also render your computer less responsive while refreshing feeds.</source>
-        <note>Class = "NSTextFieldCell"; title = "However, high numbers also render your computer less responsive while refreshing feeds."; ObjectID = "S3T-cW-hys";</note>
-      </trans-unit>
-      <trans-unit id="bKP-m5-YPx.title">
-        <source>2</source>
-        <note>Class = "NSMenuItem"; title = "2"; ObjectID = "bKP-m5-YPx"; Note = "Do not localize";</note>
-      </trans-unit>
-      <trans-unit id="dXW-1P-Mja.title">
-        <source>15</source>
-        <note>Class = "NSMenuItem"; title = "15"; ObjectID = "dXW-1P-Mja"; Note = "Do not localize";</note>
-      </trans-unit>
-      <trans-unit id="fIz-4t-Ogg.title">
-        <source>Enable Plugins in the internal browser</source>
-        <note>Class = "NSButtonCell"; title = "Enable Plugins in the internal browser"; ObjectID = "fIz-4t-Ogg";</note>
+        <target xml:lang="sv" state="translated">Samtidiga nerladdningar:</target>
       </trans-unit>
       <trans-unit id="guK-dE-f6n.title">
         <source>Enable JavaScript in the internal browser</source>
-        <target>Aktivera JavaScript i inbyggda webbläsaren</target>
         <note>Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "guK-dE-f6n";</note>
-      </trans-unit>
-      <trans-unit id="koF-ku-VbZ.title">
-        <source>1</source>
-        <note>Class = "NSMenuItem"; title = "1"; ObjectID = "koF-ku-VbZ"; Note = "Do not localize";</note>
-      </trans-unit>
-      <trans-unit id="p15-eO-dBa.title">
-        <source>10</source>
-        <note>Class = "NSMenuItem"; title = "10"; ObjectID = "p15-eO-dBa"; Note = "Do not localize";</note>
-      </trans-unit>
-      <trans-unit id="q0t-6p-Xd6.title">
-        <source>50</source>
-        <note>Class = "NSMenuItem"; title = "50"; ObjectID = "q0t-6p-Xd6"; Note = "Do not localize";</note>
-      </trans-unit>
-      <trans-unit id="yD7-hF-SbK.title">
-        <source>5</source>
-        <note>Class = "NSMenuItem"; title = "5"; ObjectID = "yD7-hF-SbK"; Note = "Do not localize";</note>
+        <target xml:lang="sv" state="translated">Aktivera JavaScript i inbyggda webbläsaren</target>
       </trans-unit>
     </body>
   </file>
@@ -91,38 +51,38 @@
     <body>
       <trans-unit id="71S-pg-AjX.title">
         <source>When viewing articles or web pages:</source>
-        <target>Vid visning av artiklar eller webbsidor:</target>
         <note>Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "71S-pg-AjX";</note>
+        <target xml:lang="sv" state="translated">Vid visning av artiklar eller webbsidor:</target>
       </trans-unit>
       <trans-unit id="B5v-p5-vrf.title">
         <source>Folder list font:</source>
-        <target>Mapplista:</target>
         <note>Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "B5v-p5-vrf";</note>
+        <target xml:lang="sv" state="translated">Mapplista:</target>
       </trans-unit>
       <trans-unit id="BDw-v3-mpF.title">
         <source>Select…</source>
-        <target>Välj…</target>
         <note>Class = "NSButtonCell"; title = "Select…"; ObjectID = "BDw-v3-mpF";</note>
+        <target xml:lang="sv" state="translated">Välj…</target>
       </trans-unit>
       <trans-unit id="MEV-HA-bdL.title">
         <source>Show feeds icons in folder list</source>
-        <target>Visa ikoner i mapplistan</target>
         <note>Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "MEV-HA-bdL";</note>
+        <target xml:lang="sv" state="translated">Visa ikoner i mapplistan</target>
       </trans-unit>
       <trans-unit id="auD-UC-Pij.title">
         <source>Article list font:</source>
-        <target>Artikellista:</target>
         <note>Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "auD-UC-Pij";</note>
+        <target xml:lang="sv" state="translated">Artikellista:</target>
       </trans-unit>
       <trans-unit id="gGT-YP-aum.title">
         <source>Select…</source>
-        <target>Välj…</target>
         <note>Class = "NSButtonCell"; title = "Select…"; ObjectID = "gGT-YP-aum";</note>
+        <target xml:lang="sv" state="translated">Välj…</target>
       </trans-unit>
       <trans-unit id="zfJ-Ge-Cxe.title">
         <source>Never use font sizes smaller than</source>
-        <target>Använd aldrig typsnitt mindre än</target>
         <note>Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "zfJ-Ge-Cxe";</note>
+        <target xml:lang="sv" state="translated">Använd aldrig typsnitt mindre än</target>
       </trans-unit>
     </body>
   </file>
@@ -133,13 +93,13 @@
     <body>
       <trans-unit id="5.title">
         <source>Downloads</source>
-        <target>Hämtade filer</target>
         <note>Class = "NSWindow"; title = "Downloads"; ObjectID = "5";</note>
+        <target xml:lang="sv" state="translated">Hämtade filer</target>
       </trans-unit>
       <trans-unit id="23.title">
         <source>Clear</source>
-        <target>Rensa</target>
         <note>Class = "NSButtonCell"; title = "Clear"; ObjectID = "23";</note>
+        <target xml:lang="sv" state="translated">Rensa</target>
       </trans-unit>
     </body>
   </file>
@@ -150,23 +110,23 @@
     <body>
       <trans-unit id="17.title">
         <source>Empty Trash</source>
-        <target>Töm papperskorgen</target>
         <note>Class = "NSButtonCell"; title = "Empty Trash"; ObjectID = "17";</note>
+        <target xml:lang="sv" state="translated">Töm papperskorgen</target>
       </trans-unit>
       <trans-unit id="18.title">
         <source>Don't Empty Trash</source>
-        <target>Töm inte papperskorgen</target>
         <note>Class = "NSButtonCell"; title = "Don't Empty Trash"; ObjectID = "18";</note>
+        <target xml:lang="sv" state="translated">Töm inte papperskorgen</target>
       </trans-unit>
       <trans-unit id="19.title">
         <source>There are deleted articles in the trash. Would you like to empty the trash before quitting?</source>
-        <target>Det finns raderade artiklar i papperskorgen. Vill du tömma papperskorgen innan du avslutar Vienna?</target>
         <note>Class = "NSTextFieldCell"; title = "There are deleted articles in the trash. Would you like to empty the trash before quitting?"; ObjectID = "19";</note>
+        <target xml:lang="sv" state="translated">Det finns raderade artiklar i papperskorgen. Vill du tömma papperskorgen innan du avslutar Vienna?</target>
       </trans-unit>
       <trans-unit id="20.title">
         <source>Do not show this warning again</source>
-        <target>Visa inte denna varning igen</target>
         <note>Class = "NSButtonCell"; title = "Do not show this warning again"; ObjectID = "20";</note>
+        <target xml:lang="sv" state="translated">Visa inte denna varning igen</target>
       </trans-unit>
     </body>
   </file>
@@ -177,18 +137,18 @@
     <body>
       <trans-unit id="6rj-zb-zOa.title">
         <source>Export all subscriptions</source>
-        <target>Exportera alla prenumerationer</target>
         <note>Class = "NSButtonCell"; title = "Export all subscriptions"; ObjectID = "6rj-zb-zOa";</note>
+        <target xml:lang="sv" state="translated">Exportera alla prenumerationer</target>
       </trans-unit>
       <trans-unit id="IYg-Pm-bcI.title">
         <source>Preserve group folders in exported file</source>
-        <target>Bevara gruppmappar</target>
         <note>Class = "NSButtonCell"; title = "Preserve group folders in exported file"; ObjectID = "IYg-Pm-bcI";</note>
+        <target xml:lang="sv" state="translated">Bevara gruppmappar</target>
       </trans-unit>
       <trans-unit id="KgE-bb-aJn.title">
         <source>Export selected subscriptions</source>
-        <target>Exportera markerade prenumerationer</target>
         <note>Class = "NSButtonCell"; title = "Export selected subscriptions"; ObjectID = "KgE-bb-aJn";</note>
+        <target xml:lang="sv" state="translated">Exportera markerade prenumerationer</target>
       </trans-unit>
     </body>
   </file>
@@ -199,33 +159,33 @@
     <body>
       <trans-unit id="32.title">
         <source>Cancel</source>
-        <target>Avbryt</target>
         <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "32";</note>
+        <target xml:lang="sv" state="translated">Avbryt</target>
       </trans-unit>
       <trans-unit id="33.title">
         <source>Name:</source>
-        <target>Namn:</target>
         <note>Class = "NSTextFieldCell"; title = "Name:"; ObjectID = "33";</note>
+        <target xml:lang="sv" state="translated">Namn:</target>
       </trans-unit>
       <trans-unit id="34.title">
         <source>Access to %@ requires you to provide log in credentials</source>
-        <target>Anslutning till %@ kräver att du anger inloggningsuppgifter</target>
         <note>Class = "NSTextFieldCell"; title = "Access to %@ requires you to provide log in credentials"; ObjectID = "34";</note>
+        <target xml:lang="sv" state="translated">Anslutning till %@ kräver att du anger inloggningsuppgifter</target>
       </trans-unit>
       <trans-unit id="37.title">
         <source>Password:</source>
-        <target>Lösenord:</target>
         <note>Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "37";</note>
+        <target xml:lang="sv" state="translated">Lösenord:</target>
       </trans-unit>
       <trans-unit id="38.title">
         <source>Log In</source>
-        <target>Logga in</target>
         <note>Class = "NSButtonCell"; title = "Log In"; ObjectID = "38";</note>
+        <target xml:lang="sv" state="translated">Logga in</target>
       </trans-unit>
       <trans-unit id="39.title">
         <source>The user name and password you provide will be remembered for the next time you refresh this subscription.</source>
-        <target>Användarnamnet och lösenordet du anger kommer att kommas ihåg till nästa gång du uppdaterar den här prenumerationen.</target>
         <note>Class = "NSTextFieldCell"; title = "The user name and password you provide will be remembered for the next time you refresh this subscription."; ObjectID = "39";</note>
+        <target xml:lang="sv" state="translated">Användarnamnet och lösenordet du anger kommer att kommas ihåg till nästa gång du uppdaterar den här prenumerationen.</target>
       </trans-unit>
     </body>
   </file>
@@ -236,137 +196,136 @@
     <body>
       <trans-unit id="1Ll-uG-QWh.title">
         <source>Every 15 minutes</source>
-        <target>Var 15:e minut</target>
         <note>Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "1Ll-uG-QWh";</note>
+        <target xml:lang="sv" state="translated">Var 15:e minut</target>
       </trans-unit>
       <trans-unit id="2oy-1i-QQP.title">
         <source>After "Next Unread" command</source>
-        <target>Efter att ha valt "Nästa olästa"</target>
         <note>Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "2oy-1i-QQP";</note>
+        <target xml:lang="sv" state="translated">Efter att ha valt "Nästa olästa"</target>
       </trans-unit>
       <trans-unit id="5VQ-jP-2rL.title">
         <source>Every 30 minutes</source>
-        <target>Var 30:e minut</target>
         <note>Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "5VQ-jP-2rL";</note>
+        <target xml:lang="sv" state="translated">Var 30:e minut</target>
       </trans-unit>
       <trans-unit id="6wU-yO-cnV.title">
         <source>Every 2 hours</source>
-        <target>Varannan timme</target>
         <note>Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "6wU-yO-cnV";</note>
+        <target xml:lang="sv" state="translated">Varannan timme</target>
       </trans-unit>
       <trans-unit id="7e3-Hu-RB5.title">
         <source>Show the unread count on the application icon</source>
-        <target>Visa antalet olästa artiklar på programikonen</target>
         <note>Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "7e3-Hu-RB5";</note>
+        <target xml:lang="sv" state="translated">Visa antalet olästa artiklar på programikonen</target>
       </trans-unit>
       <trans-unit id="BbI-0A-zEG.title">
         <source>When new unread articles are retrieved:</source>
-        <target>När nya olästa artiklar är mottagna:</target>
         <note>Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "BbI-0A-zEG";</note>
+        <target xml:lang="sv" state="translated">När nya olästa artiklar är mottagna:</target>
       </trans-unit>
       <trans-unit id="FiK-E7-RnG.title">
         <source>Other…</source>
-        <target>Annan…</target>
         <note>Class = "NSMenuItem"; title = "Other…"; ObjectID = "FiK-E7-RnG";</note>
+        <target xml:lang="sv" state="translated">Annan…</target>
+        <alt-trans>
+          <target xml:lang="sv">Annan...</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="GnT-xT-rAZ.title">
         <source>Check for newer versions of Vienna on start up</source>
-        <target>Leta efter uppdateringar av Vienna vid uppstart</target>
         <note>Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "GnT-xT-rAZ";</note>
+        <target xml:lang="sv" state="translated">Leta efter uppdateringar av Vienna vid uppstart</target>
       </trans-unit>
       <trans-unit id="H9Q-du-oax.title">
         <source>Manually</source>
-        <target>Manuellt</target>
         <note>Class = "NSMenuItem"; title = "Manually"; ObjectID = "H9Q-du-oax";</note>
+        <target xml:lang="sv" state="translated">Manuellt</target>
       </trans-unit>
       <trans-unit id="IMa-1h-lIO.title">
         <source>Every 6 hours</source>
-        <target>Var 6:e timme</target>
         <note>Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "IMa-1h-lIO";</note>
+        <target xml:lang="sv" state="translated">Var 6:e timme</target>
       </trans-unit>
       <trans-unit id="JDV-ek-xja.title">
         <source>After a short delay</source>
-        <target>Efter en kort stund</target>
         <note>Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "JDV-ek-xja";</note>
+        <target xml:lang="sv" state="translated">Efter en kort stund</target>
       </trans-unit>
       <trans-unit id="JN6-lj-bQ1.title">
         <source>Show in menu bar</source>
-        <target>Visa i menyraden</target>
         <note>Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1";</note>
+        <target xml:lang="sv" state="translated">Visa i menyraden</target>
       </trans-unit>
       <trans-unit id="OID-qF-Pp0.title">
         <source>Search for latest Beta versions</source>
-        <target>Sök efter senaste betaversioner</target>
         <note>Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0";</note>
+        <target xml:lang="sv" state="translated">Sök efter senaste betaversioner</target>
       </trans-unit>
       <trans-unit id="YoM-Gv-hXn.title">
         <source>Open links in external browser</source>
-        <target>Öppna länkar i extern webbläsare</target>
         <note>Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "YoM-Gv-hXn";</note>
+        <target xml:lang="sv" state="translated">Öppna länkar i extern webbläsare</target>
       </trans-unit>
       <trans-unit id="ewU-JH-fMC.title">
         <source>Check for new articles:</source>
-        <target>Uppdatera artiklar:</target>
         <note>Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "ewU-JH-fMC";</note>
+        <target xml:lang="sv" state="translated">Uppdatera artiklar:</target>
       </trans-unit>
       <trans-unit id="geD-Ws-mQm.title">
         <source>Save downloaded files to:</source>
-        <target>Spara nedladdade filer i:</target>
         <note>Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "geD-Ws-mQm";</note>
+        <target xml:lang="sv" state="translated">Spara nedladdade filer i:</target>
       </trans-unit>
       <trans-unit id="gi4-ao-0yS.title">
         <source>Bounce the application icon</source>
-        <target>Stutsa programikonen</target>
         <note>Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "gi4-ao-0yS";</note>
+        <target xml:lang="sv" state="translated">Stutsa programikonen</target>
       </trans-unit>
       <trans-unit id="gnX-dW-XUD.title">
         <source>Every 3 hours</source>
-        <target>Var 3:e timme</target>
         <note>Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "gnX-dW-XUD";</note>
+        <target xml:lang="sv" state="translated">Var 3:e timme</target>
       </trans-unit>
       <trans-unit id="k6Y-ib-PGb.title">
         <source>Move articles to Trash:</source>
-        <target>Flytta artiklar till Papperskorgen:</target>
         <note>Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "k6Y-ib-PGb";</note>
+        <target xml:lang="sv" state="translated">Flytta artiklar till Papperskorgen:</target>
       </trans-unit>
       <trans-unit id="kGA-Sa-RLG.title">
         <source>Default RSS Reader:</source>
-        <target>Förvald RSS-läsare:</target>
         <note>Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG";</note>
-      </trans-unit>
-      <trans-unit id="meo-78-YOl.title">
-        <source>Mark updated articles as new</source>
-        <note>Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl";</note>
+        <target xml:lang="sv" state="translated">Förvald RSS-läsare:</target>
       </trans-unit>
       <trans-unit id="oVW-ee-uJT.title">
         <source>Every 5 minutes</source>
-        <target>Var 5:e minut</target>
         <note>Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "oVW-ee-uJT";</note>
+        <target xml:lang="sv" state="translated">Var 5:e minut</target>
       </trans-unit>
       <trans-unit id="pXX-MI-tJX.title">
         <source>Check for new articles on start up</source>
-        <target>Uppdatera artiklar vid uppstart</target>
         <note>Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "pXX-MI-tJX";</note>
+        <target xml:lang="sv" state="translated">Uppdatera artiklar vid uppstart</target>
       </trans-unit>
       <trans-unit id="pjg-Ze-H3l.title">
         <source>Open new links in the background</source>
-        <target>Öppna nya länkar i bakgrunden</target>
         <note>Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "pjg-Ze-H3l";</note>
+        <target xml:lang="sv" state="translated">Öppna nya länkar i bakgrunden</target>
       </trans-unit>
       <trans-unit id="qeb-at-hYb.title">
         <source>Updates:</source>
-        <target>Uppdateringar:</target>
         <note>Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb";</note>
+        <target xml:lang="sv" state="translated">Uppdateringar:</target>
       </trans-unit>
       <trans-unit id="sCl-hz-PFF.title">
         <source>Mark current article read:</source>
-        <target>Markera nuvarande artikel som läst:</target>
         <note>Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "sCl-hz-PFF";</note>
+        <target xml:lang="sv" state="translated">Markera nuvarande artikel som läst:</target>
       </trans-unit>
       <trans-unit id="sSj-zI-6RY.title">
         <source>Every hour</source>
-        <target>Varje timme</target>
         <note>Class = "NSMenuItem"; title = "Every hour"; ObjectID = "sSj-zI-6RY";</note>
+        <target xml:lang="sv" state="translated">Varje timme</target>
       </trans-unit>
     </body>
   </file>
@@ -377,23 +336,23 @@
     <body>
       <trans-unit id="32.title">
         <source>New Group Folder</source>
-        <target>Ny gruppmapp</target>
         <note>Class = "NSTextFieldCell"; title = "New Group Folder"; ObjectID = "32";</note>
+        <target xml:lang="sv" state="translated">Ny gruppmapp</target>
       </trans-unit>
       <trans-unit id="34.title">
         <source>Save</source>
-        <target>Spara</target>
         <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "34";</note>
+        <target xml:lang="sv" state="translated">Spara</target>
       </trans-unit>
       <trans-unit id="35.title">
         <source>Cancel</source>
-        <target>Avbryt</target>
         <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "35";</note>
+        <target xml:lang="sv" state="translated">Avbryt</target>
       </trans-unit>
       <trans-unit id="36.title">
         <source>Enter the group folder name:</source>
-        <target>Ange namn på gruppmappen:</target>
         <note>Class = "NSTextFieldCell"; title = "Enter the group folder name:"; ObjectID = "36";</note>
+        <target xml:lang="sv" state="translated">Ange namn på gruppmappen:</target>
       </trans-unit>
     </body>
   </file>
@@ -404,73 +363,73 @@
     <body>
       <trans-unit id="105.title">
         <source>Last Refreshed:</source>
-        <target>Senaste uppdaterad:</target>
         <note>Class = "NSTextFieldCell"; title = "Last Refreshed:"; ObjectID = "105";</note>
+        <target xml:lang="sv" state="translated">Senaste uppdaterad:</target>
       </trans-unit>
       <trans-unit id="109.title">
         <source>Validate</source>
-        <target>Validera</target>
         <note>Class = "NSButtonCell"; title = "Validate"; ObjectID = "109";</note>
+        <target xml:lang="sv" state="translated">Validera</target>
       </trans-unit>
       <trans-unit id="111.title">
         <source>User name:</source>
-        <target>Användarnamn:</target>
         <note>Class = "NSTextFieldCell"; title = "User name:"; ObjectID = "111";</note>
+        <target xml:lang="sv" state="translated">Användarnamn:</target>
       </trans-unit>
       <trans-unit id="112.title">
         <source>Password:</source>
-        <target>Lösenord:</target>
         <note>Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "112";</note>
+        <target xml:lang="sv" state="translated">Lösenord:</target>
       </trans-unit>
       <trans-unit id="115.title">
         <source>Update Authentication</source>
-        <target>Uppdatera authentisering</target>
         <note>Class = "NSButtonCell"; title = "Update Authentication"; ObjectID = "115";</note>
+        <target xml:lang="sv" state="translated">Uppdatera authentisering</target>
       </trans-unit>
       <trans-unit id="117.title">
         <source>Size:</source>
-        <target>Storlek:</target>
         <note>Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "117";</note>
+        <target xml:lang="sv" state="translated">Storlek:</target>
       </trans-unit>
       <trans-unit id="118.title">
         <source>Unread:</source>
-        <target>Olästa:</target>
         <note>Class = "NSTextFieldCell"; title = "Unread:"; ObjectID = "118";</note>
+        <target xml:lang="sv" state="translated">Olästa:</target>
       </trans-unit>
       <trans-unit id="121.title">
         <source>Subscribed</source>
-        <target>Prenumererad</target>
         <note>Class = "NSButtonCell"; title = "Subscribed"; ObjectID = "121";</note>
+        <target xml:lang="sv" state="translated">Prenumererad</target>
       </trans-unit>
       <trans-unit id="126.title">
         <source>Load Full HTML Articles</source>
-        <target>Use Web Page for Articles</target>
         <note>Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126";</note>
+        <target xml:lang="sv" state="translated">Use Web Page for Articles</target>
       </trans-unit>
       <trans-unit id="E84-Uo-ybg.title">
         <source>Description</source>
-        <target>Beskrivning</target>
         <note>Class = "NSTextFieldCell"; title = "Description"; ObjectID = "E84-Uo-ybg";</note>
+        <target xml:lang="sv" state="translated">Beskrivning</target>
       </trans-unit>
       <trans-unit id="U0N-RF-bUt.title">
         <source>Authentication</source>
-        <target>Authentisering</target>
         <note>Class = "NSTextFieldCell"; title = "Authentication"; ObjectID = "U0N-RF-bUt";</note>
+        <target xml:lang="sv" state="translated">Authentisering</target>
       </trans-unit>
       <trans-unit id="i9j-KH-c3D.title">
         <source>General</source>
-        <target>Generellt</target>
         <note>Class = "NSTextFieldCell"; title = "General"; ObjectID = "i9j-KH-c3D";</note>
+        <target xml:lang="sv" state="translated">Generellt</target>
       </trans-unit>
       <trans-unit id="xPF-M9-oZG.title">
         <source>Feed URL</source>
-        <target>Flöde-URL</target>
         <note>Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG";</note>
+        <target xml:lang="sv" state="translated">Flöde-URL</target>
       </trans-unit>
       <trans-unit id="xTj-hY-aTU.title">
         <source>Open Cached File…</source>
-        <target>Öppna cachefilen…</target>
         <note>Class = "NSButtonCell"; title = "Open Cached File…"; ObjectID = "xTj-hY-aTU";</note>
+        <target xml:lang="sv" state="translated">Öppna cachefilen…</target>
       </trans-unit>
     </body>
   </file>
@@ -481,776 +440,748 @@
     <body>
       <trans-unit id="2S3-dG-ZPg.title">
         <source>More Styles…</source>
-        <target>Fler stilar…</target>
         <note>Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg";</note>
+        <target xml:lang="sv" state="translated">Fler stilar…</target>
       </trans-unit>
       <trans-unit id="4ih-vj-fsk.title">
         <source>Check Grammar With Spelling</source>
-        <target>Kontrollera grammatik tillsammans med stavning</target>
         <note>Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "4ih-vj-fsk";</note>
+        <target xml:lang="sv" state="translated">Kontrollera grammatik tillsammans med stavning</target>
       </trans-unit>
       <trans-unit id="5.title">
         <source>Bring All to Front</source>
-        <target>Lägg alla överst</target>
         <note>Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5";</note>
+        <target xml:lang="sv" state="translated">Lägg alla överst</target>
       </trans-unit>
       <trans-unit id="6yn-y8-lF1.title">
         <source>Refresh All Subscriptions</source>
-        <target>Uppdatera alla prenumerationer</target>
         <note>Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1";</note>
+        <target xml:lang="sv" state="translated">Uppdatera alla prenumerationer</target>
       </trans-unit>
       <trans-unit id="8Z3-Bg-ry2.title">
         <source>Flagged</source>
-        <target>Flaggad</target>
         <note>Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8Z3-Bg-ry2";</note>
+        <target xml:lang="sv" state="translated">Flaggad</target>
       </trans-unit>
       <trans-unit id="19.title">
         <source>Window</source>
-        <target>Fönster</target>
         <note>Class = "NSMenuItem"; title = "Window"; ObjectID = "19";</note>
+        <target xml:lang="sv" state="translated">Fönster</target>
       </trans-unit>
       <trans-unit id="23.title">
         <source>Minimize</source>
-        <target>Minimera</target>
         <note>Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23";</note>
+        <target xml:lang="sv" state="translated">Minimera</target>
       </trans-unit>
       <trans-unit id="24.title">
         <source>Window</source>
-        <target>Fönster</target>
         <note>Class = "NSMenu"; title = "Window"; ObjectID = "24";</note>
+        <target xml:lang="sv" state="translated">Fönster</target>
       </trans-unit>
       <trans-unit id="27s-E3-FHd.title">
         <source>Correct Spelling Automatically</source>
-        <target>Korrigera stavning automatiskt</target>
         <note>Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "27s-E3-FHd";</note>
-      </trans-unit>
-      <trans-unit id="56.title">
-        <source>Vienna</source>
-        <note>Class = "NSMenuItem"; title = "Vienna"; ObjectID = "56";</note>
-      </trans-unit>
-      <trans-unit id="57.title">
-        <source>Vienna</source>
-        <note>Class = "NSMenu"; title = "Vienna"; ObjectID = "57";</note>
+        <target xml:lang="sv" state="translated">Korrigera stavning automatiskt</target>
       </trans-unit>
       <trans-unit id="58.title">
         <source>About Vienna</source>
-        <target>Om Vienna</target>
         <note>Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58";</note>
+        <target xml:lang="sv" state="translated">Om Vienna</target>
       </trans-unit>
       <trans-unit id="77.title">
         <source>Page Setup…</source>
-        <target>Utskriftsformat…</target>
         <note>Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "77";</note>
+        <target xml:lang="sv" state="translated">Utskriftsformat…</target>
       </trans-unit>
       <trans-unit id="78.title">
         <source>Print…</source>
-        <target>Skriv ut…</target>
         <note>Class = "NSMenuItem"; title = "Print…"; ObjectID = "78";</note>
+        <target xml:lang="sv" state="translated">Skriv ut…</target>
       </trans-unit>
       <trans-unit id="81.title">
         <source>File</source>
-        <target>Arkiv</target>
         <note>Class = "NSMenu"; title = "File"; ObjectID = "81";</note>
+        <target xml:lang="sv" state="translated">Arkiv</target>
       </trans-unit>
       <trans-unit id="83.title">
         <source>File</source>
-        <target>Arkiv</target>
         <note>Class = "NSMenuItem"; title = "File"; ObjectID = "83";</note>
+        <target xml:lang="sv" state="translated">Arkiv</target>
       </trans-unit>
       <trans-unit id="103.title">
         <source>Help</source>
-        <target>Hjälp</target>
         <note>Class = "NSMenuItem"; title = "Help"; ObjectID = "103";</note>
+        <target xml:lang="sv" state="translated">Hjälp</target>
       </trans-unit>
       <trans-unit id="106.title">
         <source>Help</source>
-        <target>Hjälp</target>
         <note>Class = "NSMenu"; title = "Help"; ObjectID = "106";</note>
+        <target xml:lang="sv" state="translated">Hjälp</target>
       </trans-unit>
       <trans-unit id="111.title">
         <source>Vienna Help</source>
-        <target>Vienna hjälp</target>
         <note>Class = "NSMenuItem"; title = "Vienna Help"; ObjectID = "111";</note>
+        <target xml:lang="sv" state="translated">Vienna hjälp</target>
       </trans-unit>
       <trans-unit id="129.title">
         <source>Preferences…</source>
-        <target>Inställningar…</target>
         <note>Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129";</note>
+        <target xml:lang="sv" state="translated">Inställningar…</target>
       </trans-unit>
       <trans-unit id="130.title">
         <source>Services</source>
-        <target>Tjänster</target>
         <note>Class = "NSMenu"; title = "Services"; ObjectID = "130";</note>
+        <target xml:lang="sv" state="translated">Tjänster</target>
       </trans-unit>
       <trans-unit id="131.title">
         <source>Services</source>
-        <target>Tjänster</target>
         <note>Class = "NSMenuItem"; title = "Services"; ObjectID = "131";</note>
+        <target xml:lang="sv" state="translated">Tjänster</target>
       </trans-unit>
       <trans-unit id="134.title">
         <source>Hide Vienna</source>
-        <target>Göm Vienna</target>
         <note>Class = "NSMenuItem"; title = "Hide Vienna"; ObjectID = "134";</note>
+        <target xml:lang="sv" state="translated">Göm Vienna</target>
       </trans-unit>
       <trans-unit id="136.title">
         <source>Quit Vienna</source>
-        <target>Avsluta Vienna</target>
         <note>Class = "NSMenuItem"; title = "Quit Vienna"; ObjectID = "136";</note>
+        <target xml:lang="sv" state="translated">Avsluta Vienna</target>
       </trans-unit>
       <trans-unit id="145.title">
         <source>Hide Others</source>
-        <target>Göm övriga</target>
         <note>Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145";</note>
+        <target xml:lang="sv" state="translated">Göm övriga</target>
       </trans-unit>
       <trans-unit id="150.title">
         <source>Show All</source>
-        <target>Visa alla</target>
         <note>Class = "NSMenuItem"; title = "Show All"; ObjectID = "150";</note>
+        <target xml:lang="sv" state="translated">Visa alla</target>
       </trans-unit>
       <trans-unit id="154.title">
         <source>Find…</source>
-        <target>Sök…</target>
         <note>Class = "NSMenuItem"; title = "Find…"; ObjectID = "154";</note>
+        <target xml:lang="sv" state="translated">Sök…</target>
       </trans-unit>
       <trans-unit id="155.title">
         <source>Jump to Selection</source>
-        <target>Gå till markering</target>
         <note>Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "155";</note>
+        <target xml:lang="sv" state="translated">Gå till markering</target>
       </trans-unit>
       <trans-unit id="157.title">
         <source>Copy</source>
-        <target>Kopiera</target>
         <note>Class = "NSMenuItem"; title = "Copy"; ObjectID = "157";</note>
+        <target xml:lang="sv" state="translated">Kopiera</target>
       </trans-unit>
       <trans-unit id="158.title">
         <source>Undo</source>
-        <target>Ångra</target>
         <note>Class = "NSMenuItem"; title = "Undo"; ObjectID = "158";</note>
+        <target xml:lang="sv" state="translated">Ångra</target>
       </trans-unit>
       <trans-unit id="159.title">
         <source>Find</source>
-        <target>Sök</target>
         <note>Class = "NSMenu"; title = "Find"; ObjectID = "159";</note>
+        <target xml:lang="sv" state="translated">Sök</target>
       </trans-unit>
       <trans-unit id="160.title">
         <source>Cut</source>
-        <target>Klipp ut</target>
         <note>Class = "NSMenuItem"; title = "Cut"; ObjectID = "160";</note>
+        <target xml:lang="sv" state="translated">Klipp ut</target>
       </trans-unit>
       <trans-unit id="161.title">
         <source>Use Selection for Find</source>
-        <target>Använd markering för sökning</target>
         <note>Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "161";</note>
+        <target xml:lang="sv" state="translated">Använd markering för sökning</target>
       </trans-unit>
       <trans-unit id="162.title">
         <source>Find Previous</source>
-        <target>Sök föregående</target>
         <note>Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "162";</note>
+        <target xml:lang="sv" state="translated">Sök föregående</target>
       </trans-unit>
       <trans-unit id="163.title">
         <source>Edit</source>
-        <target>Redigera</target>
         <note>Class = "NSMenuItem"; title = "Edit"; ObjectID = "163";</note>
+        <target xml:lang="sv" state="translated">Redigera</target>
       </trans-unit>
       <trans-unit id="164.title">
         <source>Delete</source>
-        <target>Radera</target>
         <note>Class = "NSMenuItem"; title = "Delete"; ObjectID = "164";</note>
+        <target xml:lang="sv" state="translated">Radera</target>
       </trans-unit>
       <trans-unit id="167.title">
         <source>Find Next</source>
-        <target>Sök nästa</target>
         <note>Class = "NSMenuItem"; title = "Find Next"; ObjectID = "167";</note>
+        <target xml:lang="sv" state="translated">Sök nästa</target>
       </trans-unit>
       <trans-unit id="168.title">
         <source>Find</source>
-        <target>Sök</target>
         <note>Class = "NSMenuItem"; title = "Find"; ObjectID = "168";</note>
+        <target xml:lang="sv" state="translated">Sök</target>
       </trans-unit>
       <trans-unit id="169.title">
         <source>Edit</source>
-        <target>Redigera</target>
         <note>Class = "NSMenu"; title = "Edit"; ObjectID = "169";</note>
+        <target xml:lang="sv" state="translated">Redigera</target>
       </trans-unit>
       <trans-unit id="171.title">
         <source>Paste</source>
-        <target>Klista in</target>
         <note>Class = "NSMenuItem"; title = "Paste"; ObjectID = "171";</note>
+        <target xml:lang="sv" state="translated">Klista in</target>
       </trans-unit>
       <trans-unit id="172.title">
         <source>Select All</source>
-        <target>Markera allt</target>
         <note>Class = "NSMenuItem"; title = "Select All"; ObjectID = "172";</note>
+        <target xml:lang="sv" state="translated">Markera allt</target>
       </trans-unit>
       <trans-unit id="173.title">
         <source>Redo</source>
-        <target>Gör om</target>
         <note>Class = "NSMenuItem"; title = "Redo"; ObjectID = "173";</note>
+        <target xml:lang="sv" state="translated">Gör om</target>
       </trans-unit>
       <trans-unit id="197.title">
         <source>Zoom</source>
-        <target>Zooma</target>
         <note>Class = "NSMenuItem"; title = "Zoom"; ObjectID = "197";</note>
+        <target xml:lang="sv" state="translated">Zooma</target>
       </trans-unit>
       <trans-unit id="235.title">
         <source>View</source>
-        <target>Innehåll</target>
         <note>Class = "NSMenuItem"; title = "View"; ObjectID = "235";</note>
+        <target xml:lang="sv" state="translated">Innehåll</target>
       </trans-unit>
       <trans-unit id="237.title">
         <source>View</source>
-        <target>Innehåll</target>
         <note>Class = "NSMenu"; title = "View"; ObjectID = "237";</note>
+        <target xml:lang="sv" state="translated">Innehåll</target>
       </trans-unit>
       <trans-unit id="300.title">
         <source>Article</source>
-        <target>Artikel</target>
         <note>Class = "NSMenu"; title = "Article"; ObjectID = "300";</note>
+        <target xml:lang="sv" state="translated">Artikel</target>
       </trans-unit>
       <trans-unit id="301.title">
         <source>Article</source>
-        <target>Artikel</target>
         <note>Class = "NSMenuItem"; title = "Article"; ObjectID = "301";</note>
+        <target xml:lang="sv" state="translated">Artikel</target>
       </trans-unit>
       <trans-unit id="344.title">
         <source>Next Unread</source>
-        <target>Nästa olästa</target>
         <note>Class = "NSMenuItem"; title = "Next Unread"; ObjectID = "344";</note>
+        <target xml:lang="sv" state="translated">Nästa olästa</target>
       </trans-unit>
       <trans-unit id="387.title">
         <source>Sort By</source>
-        <target>Sortera</target>
         <note>Class = "NSMenuItem"; title = "Sort By"; ObjectID = "387";</note>
+        <target xml:lang="sv" state="translated">Sortera</target>
       </trans-unit>
       <trans-unit id="388.title">
         <source>Sort By</source>
-        <target>Sortera</target>
         <note>Class = "NSMenu"; title = "Sort By"; ObjectID = "388";</note>
+        <target xml:lang="sv" state="translated">Sortera</target>
       </trans-unit>
       <trans-unit id="402.title">
         <source>Activity Window</source>
-        <target>Aktivitetsvisare</target>
         <note>Class = "NSMenuItem"; title = "Activity Window"; ObjectID = "402";</note>
+        <target xml:lang="sv" state="translated">Aktivitetsvisare</target>
       </trans-unit>
       <trans-unit id="406.title">
         <source>Refresh All Subscriptions</source>
-        <target>Uppdatera alla prenumerationer</target>
         <note>Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "406";</note>
+        <target xml:lang="sv" state="translated">Uppdatera alla prenumerationer</target>
       </trans-unit>
       <trans-unit id="422.title">
         <source>Back</source>
-        <target>Tillbaka</target>
         <note>Class = "NSMenuItem"; title = "Back"; ObjectID = "422";</note>
+        <target xml:lang="sv" state="translated">Tillbaka</target>
       </trans-unit>
       <trans-unit id="423.title">
         <source>Forward</source>
-        <target>Framåt</target>
         <note>Class = "NSMenuItem"; title = "Forward"; ObjectID = "423";</note>
+        <target xml:lang="sv" state="translated">Framåt</target>
       </trans-unit>
       <trans-unit id="442.title">
         <source>Columns</source>
-        <target>Kolumner</target>
         <note>Class = "NSMenuItem"; title = "Columns"; ObjectID = "442";</note>
+        <target xml:lang="sv" state="translated">Kolumner</target>
       </trans-unit>
       <trans-unit id="443.title">
         <source>Columns</source>
-        <target>Kolumner</target>
         <note>Class = "NSMenu"; title = "Columns"; ObjectID = "443";</note>
+        <target xml:lang="sv" state="translated">Kolumner</target>
       </trans-unit>
       <trans-unit id="574.title">
         <source>New Smart Folder…</source>
-        <target>Ny smart mapp…</target>
         <note>Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "574";</note>
+        <target xml:lang="sv" state="translated">Ny smart mapp…</target>
       </trans-unit>
       <trans-unit id="604.title">
         <source>Refresh Selected Subscriptions</source>
-        <target>Uppdatera markerade prenumerationer</target>
         <note>Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "604";</note>
+        <target xml:lang="sv" state="translated">Uppdatera markerade prenumerationer</target>
       </trans-unit>
       <trans-unit id="690.title">
         <source>New Subscription…</source>
-        <target>Ny prenumeration…</target>
         <note>Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "690";</note>
+        <target xml:lang="sv" state="translated">Ny prenumeration…</target>
       </trans-unit>
       <trans-unit id="780.title">
         <source>Import Subscriptions…</source>
-        <target>Importera prenumerationer…</target>
         <note>Class = "NSMenuItem"; title = "Import Subscriptions…"; ObjectID = "780";</note>
+        <target xml:lang="sv" state="translated">Importera prenumerationer…</target>
       </trans-unit>
       <trans-unit id="781.title">
         <source>Export Subscriptions…</source>
-        <target>Exportera prenumerationer…</target>
         <note>Class = "NSMenuItem"; title = "Export Subscriptions…"; ObjectID = "781";</note>
+        <target xml:lang="sv" state="translated">Exportera prenumerationer…</target>
       </trans-unit>
       <trans-unit id="789.title">
         <source>Mark Unread</source>
-        <target>Markera som oläst</target>
         <note>Class = "NSMenuItem"; title = "Mark Unread"; ObjectID = "789";</note>
+        <target xml:lang="sv" state="translated">Markera som oläst</target>
       </trans-unit>
       <trans-unit id="790.title">
         <source>Mark Flagged</source>
-        <target>Flagga artikel</target>
         <note>Class = "NSMenuItem"; title = "Mark Flagged"; ObjectID = "790";</note>
+        <target xml:lang="sv" state="translated">Flagga artikel</target>
       </trans-unit>
       <trans-unit id="806.title">
         <source>New Group Folder…</source>
-        <target>Ny gruppmapp…</target>
         <note>Class = "NSMenuItem"; title = "New Group Folder…"; ObjectID = "806";</note>
+        <target xml:lang="sv" state="translated">Ny gruppmapp…</target>
       </trans-unit>
       <trans-unit id="826.title">
         <source>Style</source>
-        <target>Stil</target>
         <note>Class = "NSMenuItem"; title = "Style"; ObjectID = "826";</note>
+        <target xml:lang="sv" state="translated">Stil</target>
       </trans-unit>
       <trans-unit id="827.title">
         <source>Style</source>
-        <target>Stil</target>
         <note>Class = "NSMenu"; title = "Style"; ObjectID = "827";</note>
+        <target xml:lang="sv" state="translated">Stil</target>
       </trans-unit>
       <trans-unit id="858.title">
         <source>Stop Refreshing</source>
-        <target>Avbryt omladdning</target>
         <note>Class = "NSMenuItem"; title = "Stop Refreshing"; ObjectID = "858";</note>
+        <target xml:lang="sv" state="translated">Avbryt omladdning</target>
       </trans-unit>
       <trans-unit id="929.title">
         <source>Vienna Web Site</source>
-        <target>Vienna webbsida</target>
         <note>Class = "NSMenuItem"; title = "Vienna Web Site"; ObjectID = "929";</note>
+        <target xml:lang="sv" state="translated">Vienna webbsida</target>
       </trans-unit>
       <trans-unit id="935.title">
         <source>Close Window</source>
-        <target>Stäng fönster</target>
         <note>Class = "NSMenuItem"; title = "Close Window"; ObjectID = "935";</note>
+        <target xml:lang="sv" state="translated">Stäng fönster</target>
       </trans-unit>
       <trans-unit id="940.title">
         <source>Main Window</source>
-        <target>Huvudfönster</target>
         <note>Class = "NSMenuItem"; title = "Main Window"; ObjectID = "940";</note>
+        <target xml:lang="sv" state="translated">Huvudfönster</target>
       </trans-unit>
       <trans-unit id="961.title">
         <source>Empty Trash</source>
-        <target>Töm papperskorgen</target>
         <note>Class = "NSMenuItem"; title = "Empty Trash"; ObjectID = "961";</note>
+        <target xml:lang="sv" state="translated">Töm papperskorgen</target>
       </trans-unit>
       <trans-unit id="1008.title">
         <source>Previous Tab</source>
-        <target>Föregående flik</target>
         <note>Class = "NSMenuItem"; title = "Previous Tab"; ObjectID = "1008";</note>
+        <target xml:lang="sv" state="translated">Föregående flik</target>
       </trans-unit>
       <trans-unit id="1009.title">
         <source>Next Tab</source>
-        <target>Nästa flik</target>
         <note>Class = "NSMenuItem"; title = "Next Tab"; ObjectID = "1009";</note>
+        <target xml:lang="sv" state="translated">Nästa flik</target>
       </trans-unit>
       <trans-unit id="1023.title">
         <source>Close Tab</source>
-        <target>Stäng flik</target>
         <note>Class = "NSMenuItem"; title = "Close Tab"; ObjectID = "1023";</note>
+        <target xml:lang="sv" state="translated">Stäng flik</target>
       </trans-unit>
       <trans-unit id="1025.title">
         <source>Reload Page</source>
-        <target>Ladda om sida</target>
         <note>Class = "NSMenuItem"; title = "Reload Page"; ObjectID = "1025";</note>
+        <target xml:lang="sv" state="translated">Ladda om sida</target>
       </trans-unit>
       <trans-unit id="1027.title">
         <source>Stop Reloading Page</source>
-        <target>Avbryt omladdning av sida</target>
         <note>Class = "NSMenuItem"; title = "Stop Reloading Page"; ObjectID = "1027";</note>
+        <target xml:lang="sv" state="translated">Avbryt omladdning av sida</target>
       </trans-unit>
       <trans-unit id="1036.title">
         <source>Close All Tabs</source>
-        <target>Stäng alla flik</target>
         <note>Class = "NSMenuItem"; title = "Close All Tabs"; ObjectID = "1036";</note>
+        <target xml:lang="sv" state="translated">Stäng alla flik</target>
       </trans-unit>
       <trans-unit id="1040.title">
         <source>Open Article Page</source>
-        <target>Artikelsida</target>
         <note>Class = "NSMenuItem"; title = "Open Article Page"; ObjectID = "1040";</note>
+        <target xml:lang="sv" state="translated">Artikelsida</target>
       </trans-unit>
       <trans-unit id="1044.title">
         <source>Restore Article</source>
-        <target>Återskapa artikel</target>
         <note>Class = "NSMenuItem"; title = "Restore Article"; ObjectID = "1044";</note>
+        <target xml:lang="sv" state="translated">Återskapa artikel</target>
       </trans-unit>
       <trans-unit id="1061.title">
         <source>Downloads</source>
-        <target>Hämtade filer</target>
         <note>Class = "NSMenuItem"; title = "Downloads"; ObjectID = "1061";</note>
+        <target xml:lang="sv" state="translated">Hämtade filer</target>
       </trans-unit>
       <trans-unit id="1067.title">
         <source>Open Article Page in External Browser</source>
-        <target>Öppna artikelsida i extern webbläsare</target>
         <note>Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067";</note>
+        <target xml:lang="sv" state="translated">Öppna artikelsida i extern webbläsare</target>
       </trans-unit>
       <trans-unit id="1073.title">
         <source>Send Link by Email</source>
-        <target>Skicka länk via e-post</target>
         <note>Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073";</note>
+        <target xml:lang="sv" state="translated">Skicka länk via e-post</target>
       </trans-unit>
       <trans-unit id="1084.title">
         <source>Bigger Text</source>
-        <target>Större text</target>
         <note>Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084";</note>
+        <target xml:lang="sv" state="translated">Större text</target>
       </trans-unit>
       <trans-unit id="1085.title">
         <source>Smaller Text</source>
-        <target>Mindre text</target>
         <note>Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085";</note>
+        <target xml:lang="sv" state="translated">Mindre text</target>
       </trans-unit>
       <trans-unit id="1101.title">
         <source>Open Web Location…</source>
-        <target>Öppna plats…</target>
         <note>Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101";</note>
+        <target xml:lang="sv" state="translated">Öppna plats…</target>
       </trans-unit>
       <trans-unit id="1104.title">
         <source>Check for Updates</source>
-        <target>Sök efter uppdateringar</target>
         <note>Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "1104";</note>
+        <target xml:lang="sv" state="translated">Sök efter uppdateringar</target>
       </trans-unit>
       <trans-unit id="1106.title">
         <source>Refresh Folder Images</source>
-        <target>Ladda om mappbilder</target>
         <note>Class = "NSMenuItem"; title = "Refresh Folder Images"; ObjectID = "1106";</note>
+        <target xml:lang="sv" state="translated">Ladda om mappbilder</target>
       </trans-unit>
       <trans-unit id="1108.title">
         <source>Layout</source>
-        <target>Layout</target>
         <note>Class = "NSMenuItem"; title = "Layout"; ObjectID = "1108";</note>
+        <target xml:lang="sv" state="translated">Layout</target>
       </trans-unit>
       <trans-unit id="1109.title">
         <source>Layout</source>
-        <target>Layout</target>
         <note>Class = "NSMenu"; title = "Layout"; ObjectID = "1109";</note>
+        <target xml:lang="sv" state="translated">Layout</target>
       </trans-unit>
       <trans-unit id="1110.title">
         <source>Horizontal</source>
-        <target>Rapport</target>
         <note>Class = "NSMenuItem"; title = "Horizontal"; ObjectID = "1110";</note>
+        <target xml:lang="sv" state="translated">Rapport</target>
       </trans-unit>
       <trans-unit id="1116.title">
         <source>Vertical</source>
-        <target>Kompakt</target>
         <note>Class = "NSMenuItem"; title = "Vertical"; ObjectID = "1116";</note>
+        <target xml:lang="sv" state="translated">Kompakt</target>
       </trans-unit>
       <trans-unit id="1117.title">
         <source>Filter By</source>
-        <target>Filtrera På</target>
         <note>Class = "NSMenuItem"; title = "Filter By"; ObjectID = "1117";</note>
+        <target xml:lang="sv" state="translated">Filtrera På</target>
       </trans-unit>
       <trans-unit id="1118.title">
         <source>Filter By</source>
-        <target>Filtrera På</target>
         <note>Class = "NSMenu"; title = "Filter By"; ObjectID = "1118";</note>
+        <target xml:lang="sv" state="translated">Filtrera På</target>
       </trans-unit>
       <trans-unit id="1146.title">
         <source>Keyboard Shortcuts</source>
-        <target>Kortkommandon</target>
         <note>Class = "NSMenuItem"; title = "Keyboard Shortcuts"; ObjectID = "1146";</note>
+        <target xml:lang="sv" state="translated">Kortkommandon</target>
       </trans-unit>
       <trans-unit id="1160.title">
         <source>Unified</source>
-        <target>Enad</target>
         <note>Class = "NSMenuItem"; title = "Unified"; ObjectID = "1160";</note>
+        <target xml:lang="sv" state="translated">Enad</target>
       </trans-unit>
       <trans-unit id="1177.title">
         <source>Folder</source>
-        <target>Mapp</target>
         <note>Class = "NSMenuItem"; title = "Folder"; ObjectID = "1177";</note>
+        <target xml:lang="sv" state="translated">Mapp</target>
       </trans-unit>
       <trans-unit id="1178.title">
         <source>Folder</source>
-        <target>Mapp</target>
         <note>Class = "NSMenu"; title = "Folder"; ObjectID = "1178";</note>
+        <target xml:lang="sv" state="translated">Mapp</target>
       </trans-unit>
       <trans-unit id="1180.title">
         <source>Edit…</source>
-        <target>Redigera…</target>
         <note>Class = "NSMenuItem"; title = "Edit…"; ObjectID = "1180";</note>
+        <target xml:lang="sv" state="translated">Redigera…</target>
       </trans-unit>
       <trans-unit id="1181.title">
         <source>Rename…</source>
-        <target>Döp om…</target>
         <note>Class = "NSMenuItem"; title = "Rename…"; ObjectID = "1181";</note>
+        <target xml:lang="sv" state="translated">Döp om…</target>
       </trans-unit>
       <trans-unit id="1184.title">
         <source>Delete…</source>
-        <target>Radera…</target>
         <note>Class = "NSMenuItem"; title = "Delete…"; ObjectID = "1184";</note>
+        <target xml:lang="sv" state="translated">Radera…</target>
       </trans-unit>
       <trans-unit id="1186.title">
         <source>Skip Folder</source>
-        <target>Hoppa till nästa mapp</target>
         <note>Class = "NSMenuItem"; title = "Skip Folder"; ObjectID = "1186";</note>
+        <target xml:lang="sv" state="translated">Hoppa till nästa mapp</target>
       </trans-unit>
       <trans-unit id="1187.title">
         <source>Mark All Articles as Read</source>
-        <target>Markera alla artiklar som lästa</target>
         <note>Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "1187";</note>
+        <target xml:lang="sv" state="translated">Markera alla artiklar som lästa</target>
       </trans-unit>
       <trans-unit id="1191.title">
         <source>Open Subscription Home Page</source>
-        <target>Källsida i webbläsare</target>
         <note>Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "1191";</note>
+        <target xml:lang="sv" state="translated">Källsida i webbläsare</target>
       </trans-unit>
       <trans-unit id="1192.title">
         <source>Open Subscription Home Page in External Browser</source>
-        <target>Öppna prenumerationhemsida i extern webbläsare</target>
         <note>Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "1192";</note>
+        <target xml:lang="sv" state="translated">Öppna prenumerationhemsida i extern webbläsare</target>
       </trans-unit>
       <trans-unit id="1195.title">
         <source>Mark All Subscriptions as Read</source>
-        <target>Markera alla prenumerationer som lästa</target>
         <note>Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "1195";</note>
+        <target xml:lang="sv" state="translated">Markera alla prenumerationer som lästa</target>
       </trans-unit>
       <trans-unit id="1198.title">
         <source>Delete Article</source>
-        <target>Radera artikel</target>
         <note>Class = "NSMenuItem"; title = "Delete Article"; ObjectID = "1198";</note>
+        <target xml:lang="sv" state="translated">Radera artikel</target>
       </trans-unit>
       <trans-unit id="1214.title">
         <source>Open New Tab</source>
-        <target>Öpnna ny flik</target>
         <note>Class = "NSMenuItem"; title = "Open New Tab"; ObjectID = "1214";</note>
+        <target xml:lang="sv" state="translated">Öpnna ny flik</target>
       </trans-unit>
       <trans-unit id="1216.title">
         <source>Download Enclosure</source>
-        <target>Ladda ner bilaga</target>
         <note>Class = "NSMenuItem"; title = "Download Enclosure"; ObjectID = "1216";</note>
+        <target xml:lang="sv" state="translated">Ladda ner bilaga</target>
       </trans-unit>
       <trans-unit id="1257.title">
         <source>Customize Toolbar…</source>
-        <target>Anpassa verktygsrad…</target>
         <note>Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257";</note>
+        <target xml:lang="sv" state="translated">Anpassa verktygsrad…</target>
       </trans-unit>
       <trans-unit id="1258.title">
         <source>Hide Toolbar</source>
-        <target>Dölj verktygsfält</target>
         <note>Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258";</note>
+        <target xml:lang="sv" state="translated">Dölj verktygsfält</target>
       </trans-unit>
       <trans-unit id="1259.title">
         <source>Hide Status Bar</source>
-        <target>Göm statusfältet</target>
         <note>Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259";</note>
+        <target xml:lang="sv" state="translated">Göm statusfältet</target>
       </trans-unit>
       <trans-unit id="1325.title">
         <source>Show Filter Bar</source>
-        <target>Visa filtrera-fältet</target>
         <note>Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "1325";</note>
+        <target xml:lang="sv" state="translated">Visa filtrera-fältet</target>
       </trans-unit>
       <trans-unit id="1327.title">
         <source>Search Articles</source>
-        <target>Sök i artiklar</target>
         <note>Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327";</note>
+        <target xml:lang="sv" state="translated">Sök i artiklar</target>
       </trans-unit>
       <trans-unit id="1336.title">
         <source>Order By</source>
-        <target>Sortera efter</target>
         <note>Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336";</note>
+        <target xml:lang="sv" state="translated">Sortera efter</target>
       </trans-unit>
       <trans-unit id="1337.title">
         <source>Order By</source>
-        <target>Sortera efter</target>
         <note>Class = "NSMenu"; title = "Order By"; ObjectID = "1337";</note>
+        <target xml:lang="sv" state="translated">Sortera efter</target>
       </trans-unit>
       <trans-unit id="1338.title">
         <source>Manual</source>
-        <target>Manuell</target>
         <note>Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338";</note>
+        <target xml:lang="sv" state="translated">Manuell</target>
       </trans-unit>
       <trans-unit id="1339.title">
         <source>Name</source>
-        <target>Namn</target>
         <note>Class = "NSMenuItem"; title = "Name"; ObjectID = "1339";</note>
+        <target xml:lang="sv" state="translated">Namn</target>
       </trans-unit>
       <trans-unit id="1408.title">
         <source>Unsubscribe</source>
-        <target>Sluta prenumerera på artiklar från sida</target>
         <note>Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408";</note>
+        <target xml:lang="sv" state="translated">Sluta prenumerera på artiklar från sida</target>
       </trans-unit>
       <trans-unit id="1409.title">
         <source>Get Info…</source>
-        <target>Visa info…</target>
         <note>Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409";</note>
+        <target xml:lang="sv" state="translated">Visa info…</target>
       </trans-unit>
       <trans-unit id="1413.title">
         <source>Use Current Style for Articles</source>
-        <target>Använd nuvarande stil för artiklar</target>
         <note>Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413";</note>
+        <target xml:lang="sv" state="translated">Använd nuvarande stil för artiklar</target>
       </trans-unit>
       <trans-unit id="1415.title">
         <source>Use Web Page for Articles</source>
-        <target>Använd webbsida för artiklar</target>
         <note>Class = "NSMenuItem"; title = "Use Web Page for Articles"; ObjectID = "1415";</note>
-      </trans-unit>
-      <trans-unit id="1425.title">
-        <source>Force Refresh Selected Subscriptions From Open Reader</source>
-        <note>Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "1425";</note>
-      </trans-unit>
-      <trans-unit id="1428.title">
-        <source>Update Subscriptions From Open Reader</source>
-        <note>Class = "NSMenuItem"; title = "Update Subscriptions From Open Reader"; ObjectID = "1428";</note>
+        <target xml:lang="sv" state="translated">Använd webbsida för artiklar</target>
       </trans-unit>
       <trans-unit id="1458.title">
         <source>Reindex Database</source>
-        <target>Omindexera databas</target>
         <note>Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458";</note>
-      </trans-unit>
-      <trans-unit id="BUc-Ki-OOg.title">
-        <source>Unread or Flagged</source>
-        <note>Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "BUc-Ki-OOg";</note>
+        <target xml:lang="sv" state="translated">Omindexera databas</target>
       </trans-unit>
       <trans-unit id="CGp-H4-UaI.title">
         <source>Last 48 Hours</source>
-        <target>Senaste 48 timmarna</target>
         <note>Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI";</note>
+        <target xml:lang="sv" state="translated">Senaste 48 timmarna</target>
       </trans-unit>
       <trans-unit id="CLG-Dq-a59.title">
         <source>Show Spelling and Grammar</source>
-        <target>Visa stavning och grammatik</target>
         <note>Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "CLG-Dq-a59";</note>
+        <target xml:lang="sv" state="translated">Visa stavning och grammatik</target>
       </trans-unit>
       <trans-unit id="G6k-0L-moc.title">
         <source>Speech</source>
-        <target>Tal</target>
         <note>Class = "NSMenu"; title = "Speech"; ObjectID = "G6k-0L-moc";</note>
+        <target xml:lang="sv" state="translated">Tal</target>
       </trans-unit>
       <trans-unit id="JXn-SB-3t2.title">
         <source>Speech</source>
-        <target>Tal</target>
         <note>Class = "NSMenuItem"; title = "Speech"; ObjectID = "JXn-SB-3t2";</note>
+        <target xml:lang="sv" state="translated">Tal</target>
       </trans-unit>
       <trans-unit id="MHF-D4-pRN.title">
         <source>Make Upper Case</source>
-        <target>Gör till versaler</target>
         <note>Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN";</note>
+        <target xml:lang="sv" state="translated">Gör till versaler</target>
       </trans-unit>
       <trans-unit id="QEb-Bm-CPN.title">
         <source>Substitutions</source>
-        <target>Ersättningar</target>
         <note>Class = "NSMenu"; title = "Substitutions"; ObjectID = "QEb-Bm-CPN";</note>
-      </trans-unit>
-      <trans-unit id="RtQ-eP-bfk.title">
-        <source>Smart Dashes</source>
-        <note>Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk";</note>
+        <target xml:lang="sv" state="translated">Ersättningar</target>
       </trans-unit>
       <trans-unit id="UFF-Fn-8ti.title">
         <source>Transformations</source>
-        <target>Transformeringar</target>
         <note>Class = "NSMenu"; title = "Transformations"; ObjectID = "UFF-Fn-8ti";</note>
+        <target xml:lang="sv" state="translated">Transformeringar</target>
       </trans-unit>
       <trans-unit id="ZCa-7v-54l.title">
         <source>Enter Full Screen</source>
-        <target>Växla till helskärm</target>
         <note>Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "ZCa-7v-54l";</note>
+        <target xml:lang="sv" state="translated">Växla till helskärm</target>
       </trans-unit>
       <trans-unit id="bd7-qY-ofB.title">
         <source>Text Replacement</source>
-        <target>Textersättning</target>
         <note>Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "bd7-qY-ofB";</note>
+        <target xml:lang="sv" state="translated">Textersättning</target>
       </trans-unit>
       <trans-unit id="cK9-Df-xA3.title">
         <source>Start Speaking</source>
-        <target>Börja tala</target>
         <note>Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "cK9-Df-xA3";</note>
+        <target xml:lang="sv" state="translated">Börja tala</target>
       </trans-unit>
       <trans-unit id="eVb-Qt-XJb.title">
         <source>Substitutions</source>
-        <target>Ersättningar</target>
         <note>Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "eVb-Qt-XJb";</note>
+        <target xml:lang="sv" state="translated">Ersättningar</target>
       </trans-unit>
       <trans-unit id="ecl-HO-Kpi.title">
         <source>Mark All Subscriptions as Read</source>
-        <target>Markera alla prenumerationer som lästa</target>
         <note>Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi";</note>
+        <target xml:lang="sv" state="translated">Markera alla prenumerationer som lästa</target>
       </trans-unit>
       <trans-unit id="fad-Nj-OFI.title">
         <source>Spelling</source>
-        <target>Stavning</target>
         <note>Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI";</note>
+        <target xml:lang="sv" state="translated">Stavning</target>
       </trans-unit>
       <trans-unit id="fbd-ZI-tZW.title">
         <source>Check Document Now</source>
-        <target>Kontrollera dokument nu</target>
         <note>Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "fbd-ZI-tZW";</note>
+        <target xml:lang="sv" state="translated">Kontrollera dokument nu</target>
       </trans-unit>
       <trans-unit id="gbo-AM-wcF.title">
         <source>Stop Speaking</source>
-        <target>Sluta tala</target>
         <note>Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "gbo-AM-wcF";</note>
+        <target xml:lang="sv" state="translated">Sluta tala</target>
       </trans-unit>
       <trans-unit id="idm-wm-h8z.title">
         <source>Data Detectors</source>
-        <target>Datasensorer</target>
         <note>Class = "NSMenuItem"; title = "Data Detectors"; ObjectID = "idm-wm-h8z";</note>
+        <target xml:lang="sv" state="translated">Datasensorer</target>
       </trans-unit>
       <trans-unit id="joR-kW-sIU.title">
         <source>Transformations</source>
-        <target>Transformeringar</target>
         <note>Class = "NSMenuItem"; title = "Transformations"; ObjectID = "joR-kW-sIU";</note>
-      </trans-unit>
-      <trans-unit id="kCi-pf-mkc.title">
-        <source>Smart Quotes</source>
-        <note>Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "kCi-pf-mkc";</note>
+        <target xml:lang="sv" state="translated">Transformeringar</target>
       </trans-unit>
       <trans-unit id="l8F-tb-7E0.title">
         <source>Spelling and Grammar</source>
-        <target>Stavning och grammatik</target>
         <note>Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "l8F-tb-7E0";</note>
+        <target xml:lang="sv" state="translated">Stavning och grammatik</target>
       </trans-unit>
       <trans-unit id="pKl-6f-Hlc.title">
         <source>Mark Read</source>
-        <target>Markera som läst</target>
         <note>Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc";</note>
+        <target xml:lang="sv" state="translated">Markera som läst</target>
       </trans-unit>
       <trans-unit id="qzH-De-act.title">
         <source>Smart Copy/Paste</source>
-        <target>Smart kopiera/klistra in</target>
         <note>Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "qzH-De-act";</note>
+        <target xml:lang="sv" state="translated">Smart kopiera/klistra in</target>
       </trans-unit>
       <trans-unit id="rNG-xr-3x7.title">
         <source>Unread Articles</source>
-        <target>Olästa artiklar</target>
         <note>Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7";</note>
+        <target xml:lang="sv" state="translated">Olästa artiklar</target>
       </trans-unit>
       <trans-unit id="t1E-6n-jtA.title">
         <source>All Articles</source>
-        <target>Alla artiklar</target>
         <note>Class = "NSMenuItem"; title = "All Articles"; ObjectID = "t1E-6n-jtA";</note>
+        <target xml:lang="sv" state="translated">Alla artiklar</target>
       </trans-unit>
       <trans-unit id="t34-de-pMs.title">
         <source>Today</source>
-        <target>Idag</target>
         <note>Class = "NSMenuItem"; title = "Today"; ObjectID = "t34-de-pMs";</note>
+        <target xml:lang="sv" state="translated">Idag</target>
       </trans-unit>
       <trans-unit id="tfv-fu-HFM.title">
         <source>Check Spelling While Typing</source>
-        <target>Kontrollera stavning medan jag skriver</target>
         <note>Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "tfv-fu-HFM";</note>
+        <target xml:lang="sv" state="translated">Kontrollera stavning medan jag skriver</target>
       </trans-unit>
       <trans-unit id="v3R-CV-0b9.title">
         <source>Capitalize</source>
-        <target>Gör till stora bokstäver</target>
         <note>Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "v3R-CV-0b9";</note>
+        <target xml:lang="sv" state="translated">Gör till stora bokstäver</target>
       </trans-unit>
       <trans-unit id="w4Q-ne-FPI.title">
         <source>Smart Links</source>
-        <target>Smarta länkar</target>
         <note>Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "w4Q-ne-FPI";</note>
+        <target xml:lang="sv" state="translated">Smarta länkar</target>
       </trans-unit>
       <trans-unit id="wnc-vZ-fO4.title">
         <source>Show Substitutions</source>
-        <target>Visa ersättningar</target>
         <note>Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "wnc-vZ-fO4";</note>
+        <target xml:lang="sv" state="translated">Visa ersättningar</target>
       </trans-unit>
       <trans-unit id="wqh-Jc-gBm.title">
         <source>Last Refresh</source>
-        <target>Sista omladdning</target>
         <note>Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm";</note>
+        <target xml:lang="sv" state="translated">Sista omladdning</target>
       </trans-unit>
       <trans-unit id="xpF-dh-E2m.title">
         <source>Make Lower Case</source>
-        <target>Gör till gemener</target>
         <note>Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "xpF-dh-E2m";</note>
+        <target xml:lang="sv" state="translated">Gör till gemener</target>
       </trans-unit>
     </body>
   </file>
@@ -1261,315 +1192,283 @@
     <body>
       <trans-unit id="3tM-J3-kmf.title">
         <source>Today</source>
-        <target>Idag</target>
         <note>Class = "NSMenuItem"; title = "Today"; ObjectID = "3tM-J3-kmf";</note>
+        <target xml:lang="sv" state="translated">Idag</target>
       </trans-unit>
       <trans-unit id="4c1-NR-ofo.label">
         <source>Empty Trash</source>
-        <target>Töm papperskorgen</target>
         <note>Class = "NSToolbarItem"; label = "Empty Trash"; ObjectID = "4c1-NR-ofo";</note>
+        <target xml:lang="sv" state="translated">Töm papperskorgen</target>
       </trans-unit>
       <trans-unit id="4c1-NR-ofo.paletteLabel">
         <source>Empty Trash</source>
-        <target>Töm papperskorgen</target>
         <note>Class = "NSToolbarItem"; paletteLabel = "Empty Trash"; ObjectID = "4c1-NR-ofo";</note>
+        <target xml:lang="sv" state="translated">Töm papperskorgen</target>
       </trans-unit>
       <trans-unit id="4c1-NR-ofo.toolTip">
         <source>Delete all articles in the trash</source>
-        <target>Radera samtliga artiklar i papperskorgen</target>
         <note>Class = "NSToolbarItem"; toolTip = "Delete all articles in the trash"; ObjectID = "4c1-NR-ofo";</note>
+        <target xml:lang="sv" state="translated">Radera samtliga artiklar i papperskorgen</target>
       </trans-unit>
       <trans-unit id="7iy-IN-8oG.label">
         <source>Get Info</source>
-        <target>Visa info</target>
         <note>Class = "NSToolbarItem"; label = "Get Info"; ObjectID = "7iy-IN-8oG";</note>
+        <target xml:lang="sv" state="translated">Visa info</target>
       </trans-unit>
       <trans-unit id="7iy-IN-8oG.paletteLabel">
         <source>Get Info</source>
-        <target>Visa info</target>
         <note>Class = "NSToolbarItem"; paletteLabel = "Get Info"; ObjectID = "7iy-IN-8oG";</note>
+        <target xml:lang="sv" state="translated">Visa info</target>
       </trans-unit>
       <trans-unit id="7iy-IN-8oG.toolTip">
         <source>See information about the selected subscription</source>
-        <target>Visa information om vald prenumeration</target>
         <note>Class = "NSToolbarItem"; toolTip = "See information about the selected subscription"; ObjectID = "7iy-IN-8oG";</note>
+        <target xml:lang="sv" state="translated">Visa information om vald prenumeration</target>
       </trans-unit>
       <trans-unit id="8LJ-RZ-pfu.title">
         <source>Flagged</source>
-        <target>Flaggad</target>
         <note>Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8LJ-RZ-pfu";</note>
+        <target xml:lang="sv" state="translated">Flaggad</target>
       </trans-unit>
       <trans-unit id="10h-xf-C6T.label">
         <source>Send Link</source>
-        <target>Skicka länk</target>
         <note>Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T";</note>
+        <target xml:lang="sv" state="translated">Skicka länk</target>
       </trans-unit>
       <trans-unit id="10h-xf-C6T.paletteLabel">
         <source>Send Link</source>
-        <target>Skicka länk</target>
         <note>Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T";</note>
+        <target xml:lang="sv" state="translated">Skicka länk</target>
       </trans-unit>
       <trans-unit id="10h-xf-C6T.toolTip">
         <source>Email a link to the current article or website</source>
-        <target>Maila länken till nuvarande artikel eller hemsida</target>
         <note>Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T";</note>
+        <target xml:lang="sv" state="translated">Maila länken till nuvarande artikel eller hemsida</target>
       </trans-unit>
       <trans-unit id="21.title">
         <source>Vienna</source>
-        <target>Vienna</target>
         <note>Class = "NSWindow"; title = "Vienna"; ObjectID = "21";</note>
+        <target xml:lang="sv" state="translated">Vienna</target>
       </trans-unit>
       <trans-unit id="1304.ibShadowedToolTip">
         <source>Filter displayed articles by matching text</source>
-        <target>Filtrera visade artiklar med följande text</target>
         <note>Class = "NSSearchField"; ibShadowedToolTip = "Filter displayed articles by matching text"; ObjectID = "1304";</note>
+        <target xml:lang="sv" state="translated">Filtrera visade artiklar med följande text</target>
       </trans-unit>
       <trans-unit id="1306.ibShadowedToolTip">
         <source>Filter articles</source>
-        <target>Filtera artiklar</target>
         <note>Class = "NSPopUpButton"; ibShadowedToolTip = "Filter articles"; ObjectID = "1306";</note>
+        <target xml:lang="sv" state="translated">Filtera artiklar</target>
       </trans-unit>
       <trans-unit id="1313.ibExternalAccessibilityDescription">
         <source>Close the filter bar</source>
-        <target>Stäng filtrera-fältet</target>
         <note>Class = "NSButton"; ibExternalAccessibilityDescription = "Close the filter bar"; ObjectID = "1313";</note>
+        <target xml:lang="sv" state="translated">Stäng filtrera-fältet</target>
       </trans-unit>
       <trans-unit id="1313.ibShadowedToolTip">
         <source>Close the filter bar</source>
-        <target>Stäng filtrera-fältet</target>
         <note>Class = "NSButton"; ibShadowedToolTip = "Close the filter bar"; ObjectID = "1313";</note>
+        <target xml:lang="sv" state="translated">Stäng filtrera-fältet</target>
       </trans-unit>
       <trans-unit id="1377.title">
         <source>Filter by:</source>
-        <target>Filtrera på:</target>
         <note>Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377";</note>
+        <target xml:lang="sv" state="translated">Filtrera på:</target>
       </trans-unit>
       <trans-unit id="1404.title">
         <source>Current Filter</source>
-        <target>Nuvarande filter</target>
         <note>Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404";</note>
-      </trans-unit>
-      <trans-unit id="CPA-Ha-aj1.label">
-        <source>Add</source>
-        <note>Class = "NSToolbarItem"; label = "Add"; ObjectID = "CPA-Ha-aj1";</note>
-      </trans-unit>
-      <trans-unit id="CPA-Ha-aj1.paletteLabel">
-        <source>Add</source>
-        <note>Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1";</note>
-      </trans-unit>
-      <trans-unit id="CPA-Ha-aj1.toolTip">
-        <source>Subscribe to a feed or add a folder or smart folder.</source>
-        <note>Class = "NSToolbarItem"; toolTip = "Subscribe to a feed or add a folder or smart folder."; ObjectID = "CPA-Ha-aj1";</note>
-      </trans-unit>
-      <trans-unit id="Gyz-dq-ewv.label">
-        <source>All Read</source>
-        <note>Class = "NSToolbarItem"; label = "All Read"; ObjectID = "Gyz-dq-ewv";</note>
-      </trans-unit>
-      <trans-unit id="Gyz-dq-ewv.paletteLabel">
-        <source>Mark All Items as Read</source>
-        <note>Class = "NSToolbarItem"; paletteLabel = "Mark All Items as Read"; ObjectID = "Gyz-dq-ewv";</note>
-      </trans-unit>
-      <trans-unit id="Gyz-dq-ewv.toolTip">
-        <source>Mark all items as read</source>
-        <note>Class = "NSToolbarItem"; toolTip = "Mark all items as read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="sv" state="translated">Nuvarande filter</target>
       </trans-unit>
       <trans-unit id="Hs0-hu-A2g.title">
         <source>Refresh Selected Subscriptions</source>
-        <target>Uppdatera markerade prenumerationer</target>
         <note>Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g";</note>
+        <target xml:lang="sv" state="translated">Uppdatera markerade prenumerationer</target>
       </trans-unit>
       <trans-unit id="JT2-Q7-gRj.title">
         <source>All Articles</source>
-        <target>Alla artiklar</target>
         <note>Class = "NSMenuItem"; title = "All Articles"; ObjectID = "JT2-Q7-gRj";</note>
+        <target xml:lang="sv" state="translated">Alla artiklar</target>
       </trans-unit>
       <trans-unit id="MaO-r1-tcm.title">
         <source>More Styles…</source>
-        <target>Fler stilar…</target>
         <note>Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm";</note>
+        <target xml:lang="sv" state="translated">Fler stilar…</target>
       </trans-unit>
       <trans-unit id="Nmd-zx-Dys.label">
         <source>Refresh</source>
-        <target>Uppdatera</target>
         <note>Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys";</note>
+        <target xml:lang="sv" state="translated">Uppdatera</target>
       </trans-unit>
       <trans-unit id="Nmd-zx-Dys.paletteLabel">
         <source>Refresh</source>
-        <target>Uppdatera</target>
         <note>Class = "NSToolbarItem"; paletteLabel = "Refresh"; ObjectID = "Nmd-zx-Dys";</note>
+        <target xml:lang="sv" state="translated">Uppdatera</target>
       </trans-unit>
       <trans-unit id="Nmd-zx-Dys.toolTip">
         <source>Refresh all your subscriptions</source>
-        <target>Uppdatera alla prenumerationer</target>
         <note>Class = "NSToolbarItem"; toolTip = "Refresh all your subscriptions"; ObjectID = "Nmd-zx-Dys";</note>
+        <target xml:lang="sv" state="translated">Uppdatera alla prenumerationer</target>
       </trans-unit>
       <trans-unit id="OIA-vb-5jR.label">
         <source>Search Articles</source>
-        <target>Sök i artiklar</target>
         <note>Class = "NSToolbarItem"; label = "Search Articles"; ObjectID = "OIA-vb-5jR";</note>
+        <target xml:lang="sv" state="translated">Sök i artiklar</target>
       </trans-unit>
       <trans-unit id="OIA-vb-5jR.paletteLabel">
         <source>Search Articles</source>
-        <target>Sök i artiklar</target>
         <note>Class = "NSToolbarItem"; paletteLabel = "Search Articles"; ObjectID = "OIA-vb-5jR";</note>
+        <target xml:lang="sv" state="translated">Sök i artiklar</target>
       </trans-unit>
       <trans-unit id="OIA-vb-5jR.toolTip">
         <source>Search Articles</source>
-        <target>Sök i artiklar</target>
         <note>Class = "NSToolbarItem"; toolTip = "Search Articles"; ObjectID = "OIA-vb-5jR";</note>
+        <target xml:lang="sv" state="translated">Sök i artiklar</target>
       </trans-unit>
       <trans-unit id="Pqr-dM-SQQ.title">
         <source>New Smart Folder…</source>
-        <target>Ny smart mapp…</target>
         <note>Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "Pqr-dM-SQQ";</note>
+        <target xml:lang="sv" state="translated">Ny smart mapp…</target>
       </trans-unit>
       <trans-unit id="RaH-Yu-Ija.title">
         <source>New Folder…</source>
-        <target>Ny mapp…</target>
         <note>Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija";</note>
+        <target xml:lang="sv" state="translated">Ny mapp…</target>
       </trans-unit>
       <trans-unit id="Rdq-QU-3hM.title">
         <source>Delete…</source>
-        <target>Radera…</target>
         <note>Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Rdq-QU-3hM";</note>
+        <target xml:lang="sv" state="translated">Radera…</target>
       </trans-unit>
       <trans-unit id="SoG-b2-O1S.label">
         <source>Skip Folder</source>
-        <target>Hoppa till nästa mapp</target>
         <note>Class = "NSToolbarItem"; label = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
+        <target xml:lang="sv" state="translated">Hoppa till nästa mapp</target>
       </trans-unit>
       <trans-unit id="SoG-b2-O1S.paletteLabel">
         <source>Skip Folder</source>
-        <target>Hoppa till nästa mapp</target>
         <note>Class = "NSToolbarItem"; paletteLabel = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
+        <target xml:lang="sv" state="translated">Hoppa till nästa mapp</target>
       </trans-unit>
       <trans-unit id="SoG-b2-O1S.toolTip">
         <source>Skip Folder</source>
-        <target>Hoppa till nästa mapp</target>
         <note>Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
+        <target xml:lang="sv" state="translated">Hoppa till nästa mapp</target>
       </trans-unit>
       <trans-unit id="TSQ-UW-4gU.label">
         <source>Action</source>
-        <target>Åtgärd</target>
         <note>Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU";</note>
+        <target xml:lang="sv" state="translated">Åtgärd</target>
       </trans-unit>
       <trans-unit id="TSQ-UW-4gU.paletteLabel">
         <source>Action</source>
-        <target>Åtgärd</target>
         <note>Class = "NSToolbarItem"; paletteLabel = "Action"; ObjectID = "TSQ-UW-4gU";</note>
+        <target xml:lang="sv" state="translated">Åtgärd</target>
       </trans-unit>
       <trans-unit id="TSQ-UW-4gU.toolTip">
         <source>Additional actions for the selected folder</source>
-        <target>Ytterligare funktioner för markerad mapp</target>
         <note>Class = "NSToolbarItem"; toolTip = "Additional actions for the selected folder"; ObjectID = "TSQ-UW-4gU";</note>
+        <target xml:lang="sv" state="translated">Ytterligare funktioner för markerad mapp</target>
       </trans-unit>
       <trans-unit id="Xw6-KX-rhd.title">
         <source>Last 48 Hours</source>
-        <target>Senaste 48 timmarna</target>
         <note>Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "Xw6-KX-rhd";</note>
+        <target xml:lang="sv" state="translated">Senaste 48 timmarna</target>
       </trans-unit>
       <trans-unit id="Y0d-K7-46f.title">
         <source>Get Info</source>
-        <target>Visa info</target>
         <note>Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f";</note>
+        <target xml:lang="sv" state="translated">Visa info</target>
       </trans-unit>
       <trans-unit id="ZVp-Nv-0jh.title">
         <source>Open Subscription Home Page in External Browser</source>
-        <target>Öppna prenumerationhemsida i extern webbläsare</target>
         <note>Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "ZVp-Nv-0jh";</note>
+        <target xml:lang="sv" state="translated">Öppna prenumerationhemsida i extern webbläsare</target>
       </trans-unit>
       <trans-unit id="Zu1-zW-uo2.title">
         <source>Open Subscription Home Page</source>
-        <target>Källsida i webbläsare</target>
         <note>Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2";</note>
+        <target xml:lang="sv" state="translated">Källsida i webbläsare</target>
       </trans-unit>
       <trans-unit id="azL-oz-mJL.label">
         <source>Style</source>
-        <target>Stil</target>
         <note>Class = "NSToolbarItem"; label = "Style"; ObjectID = "azL-oz-mJL";</note>
+        <target xml:lang="sv" state="translated">Stil</target>
       </trans-unit>
       <trans-unit id="azL-oz-mJL.paletteLabel">
         <source>Style</source>
-        <target>Stil</target>
         <note>Class = "NSToolbarItem"; paletteLabel = "Style"; ObjectID = "azL-oz-mJL";</note>
+        <target xml:lang="sv" state="translated">Stil</target>
       </trans-unit>
       <trans-unit id="azL-oz-mJL.toolTip">
         <source>Display the list of available styles</source>
-        <target>Visa tillgängliga utseenden</target>
         <note>Class = "NSToolbarItem"; toolTip = "Display the list of available styles"; ObjectID = "azL-oz-mJL";</note>
+        <target xml:lang="sv" state="translated">Visa tillgängliga utseenden</target>
       </trans-unit>
       <trans-unit id="fpY-CJ-hKU.label">
         <source>Next Unread</source>
-        <target>Nästa olästa</target>
         <note>Class = "NSToolbarItem"; label = "Next Unread"; ObjectID = "fpY-CJ-hKU";</note>
+        <target xml:lang="sv" state="translated">Nästa olästa</target>
       </trans-unit>
       <trans-unit id="fpY-CJ-hKU.paletteLabel">
         <source>Next Unread</source>
-        <target>Nästa olästa</target>
         <note>Class = "NSToolbarItem"; paletteLabel = "Next Unread"; ObjectID = "fpY-CJ-hKU";</note>
+        <target xml:lang="sv" state="translated">Nästa olästa</target>
       </trans-unit>
       <trans-unit id="fpY-CJ-hKU.toolTip">
         <source>Next Unread</source>
-        <target>Nästa olästa</target>
         <note>Class = "NSToolbarItem"; toolTip = "Next Unread"; ObjectID = "fpY-CJ-hKU";</note>
+        <target xml:lang="sv" state="translated">Nästa olästa</target>
       </trans-unit>
       <trans-unit id="gOG-UJ-Pin.label">
         <source>Back</source>
-        <target>Tillbaka</target>
         <note>Class = "NSToolbarItem"; label = "Back"; ObjectID = "gOG-UJ-Pin";</note>
+        <target xml:lang="sv" state="translated">Tillbaka</target>
       </trans-unit>
       <trans-unit id="gOG-UJ-Pin.paletteLabel">
         <source>Back</source>
-        <target>Tillbaka</target>
         <note>Class = "NSToolbarItem"; paletteLabel = "Back"; ObjectID = "gOG-UJ-Pin";</note>
+        <target xml:lang="sv" state="translated">Tillbaka</target>
       </trans-unit>
       <trans-unit id="gOG-UJ-Pin.toolTip">
         <source>Back</source>
-        <target>Tillbaka</target>
         <note>Class = "NSToolbarItem"; toolTip = "Back"; ObjectID = "gOG-UJ-Pin";</note>
-      </trans-unit>
-      <trans-unit id="iqm-sr-F8U.title">
-        <source>Force Refresh Selected Subscriptions From Open Reader</source>
-        <note>Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "iqm-sr-F8U";</note>
+        <target xml:lang="sv" state="translated">Tillbaka</target>
       </trans-unit>
       <trans-unit id="l14-tu-w7l.title">
         <source>Rename…</source>
-        <target>Döp om…</target>
         <note>Class = "NSMenuItem"; title = "Rename…"; ObjectID = "l14-tu-w7l";</note>
+        <target xml:lang="sv" state="translated">Döp om…</target>
       </trans-unit>
       <trans-unit id="lhy-4c-asJ.placeholderString">
         <source>Search for folders</source>
-        <target>Sök efter mappar</target>
         <note>Class = "NSSearchFieldCell"; placeholderString = "Search for folders"; ObjectID = "lhy-4c-asJ";</note>
+        <target xml:lang="sv" state="translated">Sök efter mappar</target>
       </trans-unit>
       <trans-unit id="psA-wp-PcZ.title">
         <source>New Subscription…</source>
-        <target>Ny prenumeration…</target>
         <note>Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "psA-wp-PcZ";</note>
+        <target xml:lang="sv" state="translated">Ny prenumeration…</target>
       </trans-unit>
       <trans-unit id="sDP-Ni-g3a.title">
         <source>Unread Articles</source>
-        <target>Olästa artiklar</target>
         <note>Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "sDP-Ni-g3a";</note>
-      </trans-unit>
-      <trans-unit id="ty7-ph-peE.title">
-        <source>Unread or Flagged</source>
-        <note>Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "ty7-ph-peE";</note>
+        <target xml:lang="sv" state="translated">Olästa artiklar</target>
       </trans-unit>
       <trans-unit id="vOQ-xo-w8E.title">
         <source>Edit…</source>
-        <target>Redigera…</target>
         <note>Class = "NSMenuItem"; title = "Edit…"; ObjectID = "vOQ-xo-w8E";</note>
+        <target xml:lang="sv" state="translated">Redigera…</target>
       </trans-unit>
       <trans-unit id="xNW-zC-IMZ.title">
         <source>Mark All Articles as Read</source>
-        <target>Markera alla artiklar som lästa</target>
         <note>Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "xNW-zC-IMZ";</note>
+        <target xml:lang="sv" state="translated">Markera alla artiklar som lästa</target>
       </trans-unit>
       <trans-unit id="xVH-W7-Br4.title">
         <source>Last Refresh</source>
-        <target>Sista omladdning</target>
         <note>Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "xVH-W7-Br4";</note>
+        <target xml:lang="sv" state="translated">Sista omladdning</target>
       </trans-unit>
     </body>
   </file>
@@ -1580,53 +1479,53 @@
     <body>
       <trans-unit id="102.title">
         <source>Cancel</source>
-        <target>Avbryt</target>
         <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "102";</note>
+        <target xml:lang="sv" state="translated">Avbryt</target>
       </trans-unit>
       <trans-unit id="103.title">
         <source>Subscribe</source>
-        <target>Prenumerera</target>
         <note>Class = "NSButtonCell"; title = "Subscribe"; ObjectID = "103";</note>
+        <target xml:lang="sv" state="translated">Prenumerera</target>
       </trans-unit>
       <trans-unit id="104.title">
         <source>Source:</source>
-        <target>Källa:</target>
         <note>Class = "NSTextFieldCell"; title = "Source:"; ObjectID = "104";</note>
+        <target xml:lang="sv" state="translated">Källa:</target>
       </trans-unit>
       <trans-unit id="106.title">
         <source>Create a new subscription</source>
-        <target>Skapa ny RSS-prenumeration</target>
         <note>Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106";</note>
+        <target xml:lang="sv" state="translated">Skapa ny RSS-prenumeration</target>
       </trans-unit>
       <trans-unit id="107.title">
         <source>Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.</source>
-        <target>Ange länk till RSS-ström nedan. Eller välj från listan och ange ett kortnamn på RSS-ström som tillhandahålls av specificerad källa.</target>
         <note>Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107";</note>
+        <target xml:lang="sv" state="translated">Ange länk till RSS-ström nedan. Eller välj från listan och ange ett kortnamn på RSS-ström som tillhandahålls av specificerad källa.</target>
       </trans-unit>
       <trans-unit id="110.title">
         <source>URL:</source>
-        <target>URL:</target>
         <note>Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110";</note>
+        <target xml:lang="sv" state="translated">URL:</target>
       </trans-unit>
       <trans-unit id="111.title">
         <source>Save</source>
-        <target>Spara</target>
         <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "111";</note>
+        <target xml:lang="sv" state="translated">Spara</target>
       </trans-unit>
       <trans-unit id="112.title">
         <source>Cancel</source>
-        <target>Avbryt</target>
         <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "112";</note>
+        <target xml:lang="sv" state="translated">Avbryt</target>
       </trans-unit>
       <trans-unit id="114.title">
         <source>Edit subscription</source>
-        <target>Redigera prenumeration</target>
         <note>Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114";</note>
+        <target xml:lang="sv" state="translated">Redigera prenumeration</target>
       </trans-unit>
       <trans-unit id="116.title">
         <source>Subscribe in Open Reader</source>
-        <target>Prenumerera i Open Reader</target>
         <note>Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116";</note>
+        <target xml:lang="sv" state="translated">Prenumerera i Open Reader</target>
       </trans-unit>
     </body>
   </file>
@@ -1637,38 +1536,38 @@
     <body>
       <trans-unit id="82.title">
         <source>all</source>
-        <target>alla</target>
         <note>Class = "NSMenuItem"; title = "all"; ObjectID = "82";</note>
+        <target xml:lang="sv" state="translated">alla</target>
       </trans-unit>
       <trans-unit id="94.title">
         <source>Smart folder name:</source>
-        <target>Namn på smart mapp:</target>
         <note>Class = "NSTextFieldCell"; title = "Smart folder name:"; ObjectID = "94";</note>
+        <target xml:lang="sv" state="translated">Namn på smart mapp:</target>
       </trans-unit>
       <trans-unit id="96.title">
         <source>Save</source>
-        <target>Spara</target>
         <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "96";</note>
+        <target xml:lang="sv" state="translated">Spara</target>
       </trans-unit>
       <trans-unit id="97.title">
         <source>Cancel</source>
-        <target>Avbryt</target>
         <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97";</note>
+        <target xml:lang="sv" state="translated">Avbryt</target>
       </trans-unit>
       <trans-unit id="98.title">
         <source>Show all articles that match</source>
-        <target>Visa alla artiklar som matchar</target>
         <note>Class = "NSTextFieldCell"; title = "Show all articles that match"; ObjectID = "98";</note>
+        <target xml:lang="sv" state="translated">Visa alla artiklar som matchar</target>
       </trans-unit>
       <trans-unit id="100.title">
         <source>of the following conditions:</source>
-        <target>av följande villkor:</target>
         <note>Class = "NSTextFieldCell"; title = "of the following conditions:"; ObjectID = "100";</note>
+        <target xml:lang="sv" state="translated">av följande villkor:</target>
       </trans-unit>
       <trans-unit id="j0v-xF-tpl.title">
         <source>any</source>
-        <target>något</target>
         <note>Class = "NSMenuItem"; title = "any"; ObjectID = "j0v-xF-tpl";</note>
+        <target xml:lang="sv" state="translated">något</target>
       </trans-unit>
     </body>
   </file>
@@ -1679,53 +1578,33 @@
     <body>
       <trans-unit id="Ar5-Qc-YTe.ibExternalAccessibilityDescription">
         <source>Visit the website</source>
-        <target>Besök webbplatsen</target>
         <note>Class = "NSButton"; ibExternalAccessibilityDescription = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
+        <target xml:lang="sv" state="translated">Besök webbplatsen</target>
       </trans-unit>
       <trans-unit id="Ar5-Qc-YTe.ibShadowedToolTip">
         <source>Visit the website</source>
-        <target>Besök webbplatsen</target>
         <note>Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
-      </trans-unit>
-      <trans-unit id="Lkv-md-rEW.title">
-        <source>Sync with an Open Reader server</source>
-        <note>Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Lkv-md-rEW";</note>
+        <target xml:lang="sv" state="translated">Besök webbplatsen</target>
       </trans-unit>
       <trans-unit id="NKI-36-zCY.title">
         <source>Password:</source>
-        <target>Lösenord:</target>
         <note>Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "NKI-36-zCY";</note>
+        <target xml:lang="sv" state="translated">Lösenord:</target>
       </trans-unit>
       <trans-unit id="O2q-8o-CSb.title">
         <source>Login:</source>
-        <target>Namn:</target>
         <note>Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "O2q-8o-CSb";</note>
-      </trans-unit>
-      <trans-unit id="e0z-IA-uBQ.title">
-        <source>🌍</source>
-        <note>Class = "NSButtonCell"; title = "🌍"; ObjectID = "e0z-IA-uBQ";</note>
-      </trans-unit>
-      <trans-unit id="kM0-7a-obO.ibShadowedToolTip">
-        <source>Select a server supporting the Open Reader API</source>
-        <note>Class = "NSTextField"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "kM0-7a-obO";</note>
+        <target xml:lang="sv" state="translated">Namn:</target>
       </trans-unit>
       <trans-unit id="tec-2d-Xej.title">
         <source>URL: https://</source>
-        <target>URL: https://</target>
         <note>Class = "NSTextFieldCell"; title = "URL: https://"; ObjectID = "tec-2d-Xej";</note>
+        <target xml:lang="sv" state="translated">URL: https://</target>
       </trans-unit>
       <trans-unit id="uTl-XE-0ym.title">
         <source>Server:</source>
-        <target>Server:</target>
         <note>Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "uTl-XE-0ym";</note>
-      </trans-unit>
-      <trans-unit id="vZE-Pl-S9H.ibShadowedToolTip">
-        <source>Address of a server supporting the Open Reader API</source>
-        <note>Class = "NSTextField"; ibShadowedToolTip = "Address of a server supporting the Open Reader API"; ObjectID = "vZE-Pl-S9H";</note>
-      </trans-unit>
-      <trans-unit id="zAy-oc-zmb.ibExternalAccessibilityDescription">
-        <source>Select a server supporting the Open Reader API</source>
-        <note>Class = "NSPopUpButton"; ibExternalAccessibilityDescription = "Select a server supporting the Open Reader API"; ObjectID = "zAy-oc-zmb";</note>
+        <target xml:lang="sv" state="translated">Server:</target>
       </trans-unit>
     </body>
   </file>
@@ -1736,1178 +1615,1085 @@
     <body>
       <trans-unit id="%@ Info">
         <source>%@ Info</source>
-        <target>%@ info</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">%@ info</target>
       </trans-unit>
       <trans-unit id="%@ of %@">
         <source>%1$@ of %2$@</source>
-        <target>%1$@ av %2$@</target>
         <note>Progress in bytes, e.g. 1 KB of 1 MB</note>
-      </trans-unit>
-      <trans-unit id="%@ received">
-        <source>%@ received</source>
-        <note>Number of bytes received, e.g. 1 MB received</note>
+        <target xml:lang="sv" state="translated">%1$@ av %2$@</target>
       </trans-unit>
       <trans-unit id="%@, %@">
         <source>%1$@, %2$@</source>
-        <target>%1$@, %2$@</target>
         <note>{existing authors},{new author name}</note>
+        <target xml:lang="sv" state="translated">%1$@, %2$@</target>
       </trans-unit>
       <trans-unit id="%d new articles retrieved">
         <source>%d new articles retrieved</source>
-        <target>%d nya artiklar mottagna</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">%d nya artiklar mottagna</target>
       </trans-unit>
       <trans-unit id="%d subscriptions successfully exported">
         <source>%d subscriptions successfully exported</source>
-        <target>%d prenumerationer exporterades felfritt</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">%d prenumerationer exporterades felfritt</target>
       </trans-unit>
       <trans-unit id="%d subscriptions successfully imported">
         <source>%d subscriptions successfully imported</source>
-        <target>%d prenumerationer importerades felfritt</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">%d prenumerationer importerades felfritt</target>
       </trans-unit>
       <trans-unit id="%d unread articles">
         <source>%d unread articles</source>
-        <target>%d olästa artiklar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">%d olästa artiklar</target>
       </trans-unit>
       <trans-unit id="%u articles">
         <source>%u articles</source>
-        <target>%u artiklar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">%u artiklar</target>
       </trans-unit>
       <trans-unit id="%u unread">
         <source>%u unread</source>
-        <target>%u olästa</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">%u olästa</target>
       </trans-unit>
       <trans-unit id="(No title)">
         <source>(No title)</source>
-        <target>(Inget ämne)</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">(Inget ämne)</target>
       </trans-unit>
       <trans-unit id="(Untitled Feed)">
         <source>(Untitled Feed)</source>
-        <target>(Icke namngiven ström)</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">(Icke namngiven ström)</target>
       </trans-unit>
       <trans-unit id="A folder with that name already exists">
         <source>A folder with that name already exists</source>
-        <target>En mapp med det namnet finns redan</target>
         <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.">
-        <source>A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.</source>
-        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">En mapp med det namnet finns redan</target>
       </trans-unit>
       <trans-unit id="Advanced">
         <source>Advanced</source>
-        <target>Avancerat</target>
         <note>Toolbar item name for the Advanced preference pane</note>
+        <target xml:lang="sv" state="translated">Avancerat</target>
       </trans-unit>
       <trans-unit id="After 2 Days">
         <source>After 2 Days</source>
-        <target>Efter 2 dagar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Efter 2 dagar</target>
       </trans-unit>
       <trans-unit id="After 2 Weeks">
         <source>After 2 Weeks</source>
-        <target>Efter 2 veckor</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Efter 2 veckor</target>
       </trans-unit>
       <trans-unit id="After a Day">
         <source>After a Day</source>
-        <target>Efter en dag</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Efter en dag</target>
       </trans-unit>
       <trans-unit id="After a Month">
         <source>After a Month</source>
-        <target>Efter en månad</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Efter en månad</target>
       </trans-unit>
       <trans-unit id="After a Week">
         <source>After a Week</source>
-        <target>Efter en vecka</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Efter en vecka</target>
       </trans-unit>
       <trans-unit id="Already subscribed body">
         <source>Already subscribed body</source>
-        <target>Du prenumererar redan på den strömmen</target>
         <note>Already subscribed body</note>
+        <target xml:lang="sv" state="translated">Du prenumererar redan på den strömmen</target>
       </trans-unit>
       <trans-unit id="Already subscribed title">
         <source>Already subscribed title</source>
-        <target>Fel</target>
         <note>Already subscribed title</note>
+        <target xml:lang="sv" state="translated">Fel</target>
       </trans-unit>
       <trans-unit id="An error occurred when this feed was last refreshed">
         <source>An error occurred when this feed was last refreshed</source>
-        <target>Ett fel uppstod när denna prenumeration uppdaterades senast</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Ett fel uppstod när denna prenumeration uppdaterades senast</target>
       </trans-unit>
       <trans-unit id="Appearance">
         <source>Appearance</source>
-        <target>Utseende</target>
         <note>Toolbar item name for the Appearance preference pane</note>
-      </trans-unit>
-      <trans-unit id="AppleScript Error in '%@' script">
-        <source>AppleScript Error in '%@' script</source>
-        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Utseende</target>
       </trans-unit>
       <trans-unit id="Articles">
         <source>Articles</source>
-        <target>Artiklar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Artiklar</target>
       </trans-unit>
       <trans-unit id="Ascending">
         <source>Ascending</source>
-        <target>Stigande</target>
         <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Authenticating on Open Reader">
-        <source>Authenticating on Open Reader</source>
-        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Stigande</target>
       </trans-unit>
       <trans-unit id="Author">
         <source>Author</source>
-        <target>Författare</target>
         <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="sv" state="translated">Författare</target>
       </trans-unit>
       <trans-unit id="Cancel">
         <source>Cancel</source>
-        <target>Avbryt</target>
         <note>Title of a button on an alert
    Title of a popup menu item</note>
+        <target xml:lang="sv" state="translated">Avbryt</target>
       </trans-unit>
       <trans-unit id="Cannot create database folder text">
         <source>Cannot create database folder text</source>
-        <target>Vienna försöker skapa mappen '%@' men ett fel uppstod. Kontrollera skrivrättigheter på specificerad sökväg.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Vienna försöker skapa mappen '%@' men ett fel uppstod. Kontrollera skrivrättigheter på specificerad sökväg.</target>
       </trans-unit>
       <trans-unit id="Cannot create database folder title">
         <source>Cannot create database folder title</source>
-        <target>Ledsen, men Vienna kunde inte skapa databasmappen</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Ledsen, men Vienna kunde inte skapa databasmappen</target>
       </trans-unit>
       <trans-unit id="Cannot create folder body">
         <source>Cannot create folder body</source>
-        <target>The "%@" folder cannot be created.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">The "%@" folder cannot be created.</target>
       </trans-unit>
       <trans-unit id="Cannot create folder title">
         <source>Cannot create folder title</source>
-        <target>Cannot create folder</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Cannot create folder</target>
       </trans-unit>
       <trans-unit id="Cannot open database text">
         <source>Cannot open database text</source>
-        <target>Databasefilen (%@) kan inte öppnas av någon anledning. Den kanske är korrupt eller oåtkomlig. Var god radera eller döp om databasefilen och starta om Vienna.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Databasefilen (%@) kan inte öppnas av någon anledning. Den kanske är korrupt eller oåtkomlig. Var god radera eller döp om databasefilen och starta om Vienna.</target>
       </trans-unit>
       <trans-unit id="Cannot open database title">
         <source>Cannot open database title</source>
-        <target>Ursäkta, men Vienna kan inte öppna databasen</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Ursäkta, men Vienna kan inte öppna databasen</target>
       </trans-unit>
       <trans-unit id="Cannot open export file message">
         <source>Cannot open export file message</source>
-        <target>Kan inte skapa exportfil</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Kan inte skapa exportfil</target>
       </trans-unit>
       <trans-unit id="Cannot open export file message text">
         <source>Cannot open export file message text</source>
-        <target>Specificerad exportfil kunde inte skapas. Kontrollera att den inte är låst eller att något annat program använder den.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Specificerad exportfil kunde inte skapas. Kontrollera att den inte är låst eller att något annat program använder den.</target>
       </trans-unit>
       <trans-unit id="Cannot rename folder">
         <source>Cannot rename folder</source>
-        <target>Kan ej byta namn på mapp</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Kan ej byta namn på mapp</target>
       </trans-unit>
       <trans-unit id="Clear">
         <source>Clear</source>
-        <target>Rensa senaste sökningar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Rensa senaste sökningar</target>
       </trans-unit>
       <trans-unit id="Click the Open button to open this file.">
         <source>Click the Open button to open this file.</source>
-        <target>Tryck på Öppna för att öppna denna bilaga.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Tryck på Öppna för att öppna denna bilaga.</target>
       </trans-unit>
       <trans-unit id="Click the Play button to play this enclosure in iTunes.">
         <source>Click the Play button to play this enclosure in iTunes.</source>
-        <target>Tryck på Spela för att spela denna bilaga i iTunes</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Tryck på Spela för att spela denna bilaga i iTunes</target>
       </trans-unit>
       <trans-unit id="Connecting to %@">
         <source>Connecting to %@</source>
-        <target>Ansluter till %@</target>
         <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Connecting to Open Reader server to retrieve %@">
-        <source>Connecting to Open Reader server to retrieve %@</source>
-        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Ansluter till %@</target>
       </trans-unit>
       <trans-unit id="Copy Link to Clipboard">
         <source>Copy Link to Clipboard</source>
-        <target>Kopiera länk</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Kopiera länk</target>
       </trans-unit>
       <trans-unit id="Copy Page Link to Clipboard">
         <source>Copy Page Link to Clipboard</source>
-        <target>Kopiera sidlänk till urklipp</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Kopiera sidlänk till urklipp</target>
       </trans-unit>
       <trans-unit id="Copy URL">
         <source>Copy URL</source>
-        <target>Kopiera URL</target>
         <note>Copy URL</note>
+        <target xml:lang="sv" state="translated">Kopiera URL</target>
       </trans-unit>
       <trans-unit id="Credentials Prompt">
         <source>Credentials Prompt</source>
-        <target>Prenumeration av '%@' kräven ett användarnamn och lösenord för åtkomst.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Prenumeration av '%@' kräven ett användarnamn och lösenord för åtkomst.</target>
       </trans-unit>
       <trans-unit id="Database Upgrade">
         <source>Database Upgrade</source>
-        <target>Uppdatera databas</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Uppdatera databas</target>
       </trans-unit>
       <trans-unit id="Date">
         <source>Date</source>
-        <target>Datum</target>
         <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="sv" state="translated">Datum</target>
       </trans-unit>
       <trans-unit id="Delete">
         <source>Delete</source>
-        <target>Radera</target>
         <note>Title of a button on an alert
    Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Radera</target>
       </trans-unit>
       <trans-unit id="Delete Article">
         <source>Delete Article</source>
-        <target>Radera artikel</target>
         <note>Title of a menu item</note>
-      </trans-unit>
-      <trans-unit id="Delete Open Reader RSS feed">
-        <source>Delete Open Reader RSS feed</source>
-        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Radera artikel</target>
       </trans-unit>
       <trans-unit id="Delete Open Reader RSS feed text">
         <source>Delete Open Reader RSS feed text</source>
-        <target>Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.</target>
       </trans-unit>
       <trans-unit id="Delete RSS feed">
         <source>Delete RSS feed</source>
-        <target>Radera prenumeration</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Radera prenumeration</target>
       </trans-unit>
       <trans-unit id="Delete RSS feed text">
         <source>Delete RSS feed text</source>
-        <target>Är du säker på att du vill avbryta din prenumeration av '%@'? Det här valet kommer att radera alla sparade artiklar.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Är du säker på att du vill avbryta din prenumeration av '%@'? Det här valet kommer att radera alla sparade artiklar.</target>
       </trans-unit>
       <trans-unit id="Delete folder status">
         <source>Delete folder status</source>
-        <target>Raderar mapp '%@'…</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Raderar mapp '%@'…</target>
+        <alt-trans>
+          <target xml:lang="sv">Raderar mapp '%@'...</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Delete group folder">
         <source>Delete group folder</source>
-        <target>Radera gruppmapp</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Radera gruppmapp</target>
       </trans-unit>
       <trans-unit id="Delete group folder text">
         <source>Delete group folder text</source>
-        <target>Är du säker på att du vill radera gruppmapp '%@' och alla undermappar? Det här valet går ej att ångra.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Är du säker på att du vill radera gruppmapp '%@' och alla undermappar? Det här valet går ej att ångra.</target>
       </trans-unit>
       <trans-unit id="Delete multiple folders">
         <source>Delete multiple folders</source>
-        <target>Radera flera mappar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Radera flera mappar</target>
       </trans-unit>
       <trans-unit id="Delete multiple folders text">
         <source>Delete multiple folders text</source>
-        <target>Är du säker på att du vill radera alla %d markerade mappar? Det här valet går ej att ångra.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Är du säker på att du vill radera alla %d markerade mappar? Det här valet går ej att ångra.</target>
       </trans-unit>
       <trans-unit id="Delete selected message">
         <source>Delete selected message</source>
-        <target>Är du säker på att du vill radera de markerade artiklarna permanent?</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Är du säker på att du vill radera de markerade artiklarna permanent?</target>
       </trans-unit>
       <trans-unit id="Delete selected message text">
         <source>Delete selected message text</source>
-        <target>Det här valet går ej att ångra.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Det här valet går ej att ångra.</target>
       </trans-unit>
       <trans-unit id="Delete smart folder">
         <source>Delete smart folder</source>
-        <target>Radera smart mapp</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Radera smart mapp</target>
       </trans-unit>
       <trans-unit id="Delete smart folder text">
         <source>Delete smart folder text</source>
-        <target>Är du säker på att du vill radera smart mapp '%@'? Det här kommer inte att radera artiklarna.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Är du säker på att du vill radera smart mapp '%@'? Det här kommer inte att radera artiklarna.</target>
       </trans-unit>
       <trans-unit id="Deleted">
         <source>Deleted</source>
-        <target>Raderade</target>
         <note>Data field name visible in smart folder definition</note>
+        <target xml:lang="sv" state="translated">Raderade</target>
       </trans-unit>
       <trans-unit id="Delete…">
         <source>Delete…</source>
-        <target>Radera…</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Radera…</target>
       </trans-unit>
       <trans-unit id="Descending">
         <source>Descending</source>
-        <target>Fallande</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Fallande</target>
       </trans-unit>
       <trans-unit id="Do you really want to import the subscriptions from the specified OPML file?">
         <source>Do you really want to import the subscriptions from the specified OPML file?</source>
-        <target>Vill du verkligen importera premnumerationerna från valda OPML fil?</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Vill du verkligen importera premnumerationerna från valda OPML fil?</target>
       </trans-unit>
       <trans-unit id="Download">
         <source>Download</source>
-        <target>Ladda ner</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Ladda ner</target>
       </trans-unit>
       <trans-unit id="Download Enclosure">
         <source>Download Enclosure</source>
-        <target>Ladda ner bilaga</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Ladda ner bilaga</target>
       </trans-unit>
       <trans-unit id="Download Enclosures">
         <source>Download Enclosures</source>
-        <target>Ladda ner bilagor</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Ladda ner bilagor</target>
       </trans-unit>
       <trans-unit id="Download completed">
         <source>Download completed</source>
-        <target>Nedladdning klar</target>
         <note>Notification title</note>
+        <target xml:lang="sv" state="translated">Nedladdning klar</target>
       </trans-unit>
       <trans-unit id="Download failed">
         <source>Download failed</source>
-        <target>Nedladdning misslyckades</target>
         <note>Notification title</note>
+        <target xml:lang="sv" state="translated">Nedladdning misslyckades</target>
       </trans-unit>
       <trans-unit id="Downloads Running">
         <source>Downloads Running</source>
-        <target>En eller flera nedladdningar pågår</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">En eller flera nedladdningar pågår</target>
       </trans-unit>
       <trans-unit id="Downloads Running text">
         <source>Downloads Running text</source>
-        <target>Vill du avbryta alla nedladdningar och avsluta Vienna nu?</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Vill du avbryta alla nedladdningar och avsluta Vienna nu?</target>
       </trans-unit>
       <trans-unit id="Edit…">
         <source>Edit…</source>
-        <target>Redigera…</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Redigera…</target>
       </trans-unit>
       <trans-unit id="Empty">
         <source>Empty</source>
-        <target>Töm</target>
         <note>Title of a button on an alert</note>
+        <target xml:lang="sv" state="translated">Töm</target>
       </trans-unit>
       <trans-unit id="Empty Trash message">
         <source>Empty Trash message</source>
-        <target>Är du säker på att du vill radera artiklarna i papperskorgen permanent?</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Är du säker på att du vill radera artiklarna i papperskorgen permanent?</target>
       </trans-unit>
       <trans-unit id="Empty Trash message text">
         <source>Empty Trash message text</source>
-        <target>Du kan inte ångra denna åtgärd</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Du kan inte ångra denna åtgärd</target>
       </trans-unit>
       <trans-unit id="Enclosure">
         <source>Enclosure</source>
-        <target>Bilagans URL</target>
         <note>Data field name (URL) visible in menu/article list</note>
+        <target xml:lang="sv" state="translated">Bilagans URL</target>
       </trans-unit>
       <trans-unit id="Enter the URL here">
         <source>Enter the URL here</source>
-        <target>Ange URLen här</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Ange URLen här</target>
       </trans-unit>
       <trans-unit id="Error">
         <source>Error</source>
-        <target>Fel</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Fel</target>
       </trans-unit>
       <trans-unit id="Error importing subscriptions body">
         <source>Error importing subscriptions body</source>
-        <target>Kan inte importera specificerad fil. Filens innehåll är inte i validerat OPML/XML-format.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Kan inte importera specificerad fil. Filens innehåll är inte i validerat OPML/XML-format.</target>
       </trans-unit>
       <trans-unit id="Error importing subscriptions title">
         <source>Error importing subscriptions title</source>
-        <target>Fel vid import</target>
         <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Error loading script '%@'">
-        <source>Error loading script '%@'</source>
-        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Fel vid import</target>
       </trans-unit>
       <trans-unit id="Error parsing XML data in feed">
         <source>Error parsing XML data in feed</source>
-        <target>Fel vid avläsning av XML-data i strömmen</target>
         <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Error retrieving RSS Icon:">
-        <source>Error retrieving RSS Icon:</source>
-        <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Error retrieving RSS feed:">
-        <source>Error retrieving RSS feed:</source>
-        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Fel vid avläsning av XML-data i strömmen</target>
       </trans-unit>
       <trans-unit id="Error: Feed not found!">
         <source>Error: Feed not found!</source>
-        <target>Fel: Flöde hittades inte!</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Fel: Flöde hittades inte!</target>
       </trans-unit>
       <trans-unit id="External Browser">
         <source>External Browser</source>
-        <target>Extern webbläsare</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Extern webbläsare</target>
       </trans-unit>
       <trans-unit id="Feed URL updated to %@">
         <source>Feed URL updated to %@</source>
-        <target>Ström-URL uppdaterad till %@</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Ström-URL uppdaterad till %@</target>
       </trans-unit>
       <trans-unit id="Fetching Open Reader Subscriptions…">
         <source>Fetching Open Reader Subscriptions…</source>
-        <target>Hämtar Open Reader-prenumerationer…</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Hämtar Open Reader-prenumerationer…</target>
       </trans-unit>
       <trans-unit id="File %@ downloaded">
         <source>File %@ downloaded</source>
-        <target>Fil med namn %@ nedladdad</target>
         <note>Notification body</note>
+        <target xml:lang="sv" state="translated">Fil med namn %@ nedladdad</target>
       </trans-unit>
       <trans-unit id="File %@ failed to download">
         <source>File %@ failed to download</source>
-        <target>Filen med namn %@ misslyckades att laddas ner</target>
         <note>Notification body</note>
+        <target xml:lang="sv" state="translated">Filen med namn %@ misslyckades att laddas ner</target>
       </trans-unit>
       <trans-unit id="Flag">
         <source>Flag</source>
-        <target>Flagga</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Flagga</target>
       </trans-unit>
       <trans-unit id="Flagged">
         <source>Flagged</source>
-        <target>Flaggad</target>
         <note>Data field name visible in menu/smart folder definition</note>
+        <target xml:lang="sv" state="translated">Flaggad</target>
       </trans-unit>
       <trans-unit id="Folder">
         <source>Folder</source>
-        <target>Mapp</target>
         <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="sv" state="translated">Mapp</target>
       </trans-unit>
       <trans-unit id="Folder image retrieved from %@">
         <source>Folder image retrieved from %@</source>
-        <target>Mappbild mottagen från %@</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Mappbild mottagen från %@</target>
       </trans-unit>
       <trans-unit id="Folders">
         <source>Folders</source>
-        <target>Mappar</target>
         <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Force Refresh Selected Subscriptions From Open Reader">
-        <source>Force Refresh Selected Subscriptions From Open Reader</source>
-        <note>Title of a menu item</note>
-      </trans-unit>
-      <trans-unit id="Forcing Refresh subscriptions…">
-        <source>Forcing Refresh subscriptions…</source>
-        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Mappar</target>
       </trans-unit>
       <trans-unit id="General">
         <source>General</source>
-        <target>Allmänt</target>
         <note>Toolbar item name for the General preference pane</note>
+        <target xml:lang="sv" state="translated">Allmänt</target>
       </trans-unit>
       <trans-unit id="Get Info">
         <source>Get Info</source>
-        <target>Visa info</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Visa info</target>
       </trans-unit>
       <trans-unit id="Go forward to the next page">
         <source>Go forward to the next page</source>
-        <target>Gå till nästa sida</target>
         <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Got HTTP status 304 - No news from last check">
-        <source>Got HTTP status 304 - No news from last check</source>
-        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Gå till nästa sida</target>
       </trans-unit>
       <trans-unit id="HTTP code %d reported from server">
         <source>HTTP code %d reported from server</source>
-        <target>HTTP-kod %d rapporterad från server</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">HTTP-kod %d rapporterad från server</target>
       </trans-unit>
       <trans-unit id="HasEnclosure">
         <source>HasEnclosure</source>
-        <target>Bilaga</target>
         <note>Data field name (Y/N) visible in menu/smart folder definition</note>
+        <target xml:lang="sv" state="translated">Bilaga</target>
       </trans-unit>
       <trans-unit id="Headlines">
         <source>Headlines</source>
-        <target>Rubriker</target>
         <note>Pseudo field name visible in article list</note>
+        <target xml:lang="sv" state="translated">Rubriker</target>
       </trans-unit>
       <trans-unit id="Hide Filter Bar">
         <source>Hide Filter Bar</source>
-        <target>Göm filtera-fältet</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Göm filtera-fältet</target>
       </trans-unit>
       <trans-unit id="Hide Status Bar">
         <source>Hide Status Bar</source>
-        <target>Göm statusfältet</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Göm statusfältet</target>
       </trans-unit>
       <trans-unit id="Hide Toolbar">
         <source>Hide Toolbar</source>
-        <target>Dölj verktygsfält</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Dölj verktygsfält</target>
       </trans-unit>
       <trans-unit id="Import">
         <source>Import</source>
-        <target>Importera</target>
         <note>Title of a button on an alert</note>
+        <target xml:lang="sv" state="translated">Importera</target>
       </trans-unit>
       <trans-unit id="Import subscriptions from OPML file?">
         <source>Import subscriptions from OPML file?</source>
-        <target>Importera prenumerataioner från OPML fil?</target>
         <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Improper infinitely looping URL redirect to %@">
-        <source>Improper infinitely looping URL redirect to %@</source>
-        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Importera prenumerataioner från OPML fil?</target>
       </trans-unit>
       <trans-unit id="Invalid style body">
         <source>Invalid style body</source>
-        <target>Standardstilen används istället.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Standardstilen används istället.</target>
       </trans-unit>
       <trans-unit id="Invalid style title">
         <source>Invalid style title</source>
-        <target>Stilen %@ verkar vara korrupt</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Stilen %@ verkar vara korrupt</target>
       </trans-unit>
       <trans-unit id="JavaScript">
         <source>JavaScript</source>
-        <target>JavaScript</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">JavaScript</target>
       </trans-unit>
       <trans-unit id="Last Week">
         <source>Last Week</source>
-        <target>Förra veckan</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Förra veckan</target>
       </trans-unit>
       <trans-unit id="Link">
         <source>Link</source>
-        <target>Länk</target>
         <note>Data field name visible in menu/article list</note>
+        <target xml:lang="sv" state="translated">Länk</target>
       </trans-unit>
       <trans-unit id="Loading">
         <source>Loading</source>
-        <target>Laddar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Laddar</target>
       </trans-unit>
       <trans-unit id="Loading…">
         <source>Loading…</source>
-        <target>Laddar…</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Laddar…</target>
       </trans-unit>
       <trans-unit id="Locate Text">
         <source>Locate Text</source>
-        <target>En ny Vienna-databas kan ej skapas i '%@' för att mappen förmodligen finns på en nätverksdelning och den här versionen av Vienna stöder inte detta. Var vänlig och välj en mapp som finns på din lokala hårddisk.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">En ny Vienna-databas kan ej skapas i '%@' för att mappen förmodligen finns på en nätverksdelning och den här versionen av Vienna stöder inte detta. Var vänlig och välj en mapp som finns på din lokala hårddisk.</target>
       </trans-unit>
       <trans-unit id="Locate Title">
         <source>Locate Title</source>
-        <target>Kan ej skapa Viennas databas</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Kan ej skapa Viennas databas</target>
       </trans-unit>
       <trans-unit id="Locate…">
         <source>Locate…</source>
-        <target>Leta upp…</target>
         <note>Title of a button on an alert</note>
+        <target xml:lang="sv" state="translated">Leta upp…</target>
       </trans-unit>
       <trans-unit id="Mark All Articles as Read">
         <source>Mark All Articles as Read</source>
-        <target>Markera alla artiklar som lästa</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Markera alla artiklar som lästa</target>
       </trans-unit>
       <trans-unit id="Mark All Read">
         <source>Mark All Read</source>
-        <target>Markera alla som lästa</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Markera alla som lästa</target>
       </trans-unit>
       <trans-unit id="Mark All Subscriptions as Read">
         <source>Mark All Subscriptions as Read</source>
-        <target>Markera alla prenumerationer som lästa</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Markera alla prenumerationer som lästa</target>
       </trans-unit>
       <trans-unit id="Mark Flagged">
         <source>Mark Flagged</source>
-        <target>Flagga artikel</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Flagga artikel</target>
       </trans-unit>
       <trans-unit id="Mark Read">
         <source>Mark Read</source>
-        <target>Markera som läst</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Markera som läst</target>
       </trans-unit>
       <trans-unit id="Mark Unflagged">
         <source>Mark Unflagged</source>
-        <target>Ta bort flagga</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Ta bort flagga</target>
       </trans-unit>
       <trans-unit id="Mark Unread">
         <source>Mark Unread</source>
-        <target>Markera som oläst</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Markera som oläst</target>
       </trans-unit>
       <trans-unit id="Marked Articles">
         <source>Marked Articles</source>
-        <target>Markerade artiklar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Markerade artiklar</target>
       </trans-unit>
       <trans-unit id="More Scripts…">
         <source>More Scripts…</source>
-        <target>Fler skript…</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Fler skript…</target>
       </trans-unit>
       <trans-unit id="Move Folders">
         <source>Move Folders</source>
-        <target>Flytta mappar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Flytta mappar</target>
       </trans-unit>
       <trans-unit id="Never">
         <source>Never</source>
-        <target>Aldrig</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Aldrig</target>
       </trans-unit>
       <trans-unit id="New Tab">
         <source>New Tab</source>
-        <target>Ny flik</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Ny flik</target>
       </trans-unit>
       <trans-unit id="New articles retrieved">
         <source>New articles retrieved</source>
-        <target>Nya artiklar</target>
         <note>Notification title</note>
+        <target xml:lang="sv" state="translated">Nya artiklar</target>
       </trans-unit>
       <trans-unit id="New style body">
         <source>New style body</source>
-        <target>Stilen '%@' har installerats i din stilmapp och har lagts till i stilmenyn.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Stilen '%@' har installerats i din stilmapp och har lagts till i stilmenyn.</target>
       </trans-unit>
       <trans-unit id="New style title">
         <source>New style title</source>
-        <target>Vienna har installerat en ny stil</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Vienna har installerat en ny stil</target>
       </trans-unit>
       <trans-unit id="New unread articles retrieved">
         <source>New unread articles retrieved</source>
-        <target>%d nya olästa artiklar mottagna</target>
         <note>Notification body</note>
+        <target xml:lang="sv" state="translated">%d nya olästa artiklar mottagna</target>
       </trans-unit>
       <trans-unit id="No">
         <source>No</source>
-        <target>Nej</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Nej</target>
       </trans-unit>
       <trans-unit id="No articles in feed">
         <source>No articles in feed</source>
-        <target>Inga artiklar i flöde</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Inga artiklar i flöde</target>
       </trans-unit>
       <trans-unit id="No new articles available">
         <source>No new articles available</source>
-        <target>Inga nya artiklar tillgängliga</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Inga nya artiklar tillgängliga</target>
       </trans-unit>
       <trans-unit id="OK">
         <source>OK</source>
-        <target>OK</target>
         <note>Title of a button on an alert</note>
+        <target xml:lang="sv" state="translated">OK</target>
       </trans-unit>
       <trans-unit id="Open">
         <source>Open</source>
-        <target>Öppna</target>
         <note>Title of a popup menu item</note>
+        <target xml:lang="sv" state="translated">Öppna</target>
       </trans-unit>
       <trans-unit id="Open Article Page">
         <source>Open Article Page</source>
-        <target>Artikelsida</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Artikelsida</target>
       </trans-unit>
       <trans-unit id="Open Article Page in %@">
         <source>Open Article Page in %@</source>
-        <target>Öppna artikelsida i %@</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Öppna artikelsida i %@</target>
       </trans-unit>
       <trans-unit id="Open Article Page in External Browser">
         <source>Open Article Page in External Browser</source>
-        <target>Öppna artikelsida i extern webbläsare</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Öppna artikelsida i extern webbläsare</target>
       </trans-unit>
       <trans-unit id="Open Frame">
         <source>Open Frame</source>
-        <target>Öppna ram</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Öppna ram</target>
       </trans-unit>
       <trans-unit id="Open Image in %@">
         <source>Open Image in %@</source>
-        <target>Öppna bild i %@</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Öppna bild i %@</target>
       </trans-unit>
       <trans-unit id="Open Image in New Tab">
         <source>Open Image in New Tab</source>
-        <target>Öppna bild i ny tabb</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Öppna bild i ny tabb</target>
       </trans-unit>
       <trans-unit id="Open Link in %@">
         <source>Open Link in %@</source>
-        <target>Öppna länk i %@</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Öppna länk i %@</target>
       </trans-unit>
       <trans-unit id="Open Link in New Tab">
         <source>Open Link in New Tab</source>
-        <target>Öppna länk i ny tabb</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Öppna länk i ny tabb</target>
       </trans-unit>
       <trans-unit id="Open Page in %@">
         <source>Open Page in %@</source>
-        <target>Öppna sida i %@</target>
         <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Open Reader Authentication Failed">
-        <source>Open Reader Authentication Failed</source>
-        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Öppna sida i %@</target>
       </trans-unit>
       <trans-unit id="Open Reader Authentication Failed text">
         <source>Open Reader Authentication Failed text</source>
-        <target>Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.
-Also check your network access.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.
+Also check your network access.</target>
       </trans-unit>
       <trans-unit id="Open Scripts Folder">
         <source>Open Scripts Folder</source>
-        <target>Öppna skriptmappen</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Öppna skriptmappen</target>
       </trans-unit>
       <trans-unit id="Open Subscription Home Page">
         <source>Open Subscription Home Page</source>
-        <target>Källsida i webbläsare</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Källsida i webbläsare</target>
       </trans-unit>
       <trans-unit id="Open Subscription Home Page in %@">
         <source>Open Subscription Home Page in %@</source>
-        <target>Öppna prenumerationhemsida i %@</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Öppna prenumerationhemsida i %@</target>
       </trans-unit>
       <trans-unit id="Open Subscription Home Page in External Browser">
         <source>Open Subscription Home Page in External Browser</source>
-        <target>Öppna prenumerationhemsida i extern webbläsare</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Öppna prenumerationhemsida i extern webbläsare</target>
       </trans-unit>
       <trans-unit id="Other">
         <source>Other</source>
-        <target>Annan</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Annan</target>
       </trans-unit>
       <trans-unit id="Play">
         <source>Play</source>
-        <target>Spela</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Spela</target>
       </trans-unit>
       <trans-unit id="Plugin installed">
         <source>Plugin installed</source>
-        <target>Plugin installerat</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Plugin installerat</target>
       </trans-unit>
       <trans-unit id="Preferences">
         <source>Preferences</source>
-        <target>Inställningar</target>
         <note>Title of the Preferences window</note>
+        <target xml:lang="sv" state="translated">Inställningar</target>
       </trans-unit>
       <trans-unit id="Queue">
         <source>Queue</source>
-        <target>Kö</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Kö</target>
       </trans-unit>
       <trans-unit id="Quit">
         <source>Quit</source>
-        <target>Avsluta</target>
         <note>Title of a button on an alert</note>
+        <target xml:lang="sv" state="translated">Avsluta</target>
       </trans-unit>
       <trans-unit id="Quit Vienna">
         <source>Quit Vienna</source>
-        <target>Avsluta Vienna</target>
         <note>Title of a button on an alert
    Title of a menu item</note>
-      </trans-unit>
-      <trans-unit id="RSS Icon not found!">
-        <source>RSS Icon not found!</source>
-        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Avsluta Vienna</target>
       </trans-unit>
       <trans-unit id="RSS Subscription Export Title">
         <source>RSS Subscription Export Title</source>
-        <target>Export klar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Export klar</target>
       </trans-unit>
       <trans-unit id="RSS Subscription Import Title">
         <source>RSS Subscription Import Title</source>
-        <target>Import klar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Import klar</target>
       </trans-unit>
       <trans-unit id="Read">
         <source>Read</source>
-        <target>Läst</target>
         <note>Data field name visible in menu/smart folder definition</note>
+        <target xml:lang="sv" state="translated">Läst</target>
       </trans-unit>
       <trans-unit id="Recent Searches">
         <source>Recent Searches</source>
-        <target>Senaste sökningar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Senaste sökningar</target>
       </trans-unit>
       <trans-unit id="Recents">
         <source>Recents</source>
-        <target>Senaste</target>
         <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Redirection attempt treated as temporary for safety concern">
-        <source>Redirection attempt treated as temporary for safety concern</source>
-        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Senaste</target>
       </trans-unit>
       <trans-unit id="Refresh All Subscriptions">
         <source>Refresh All Subscriptions</source>
-        <target>Uppdatera alla prenumerationer</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Uppdatera alla prenumerationer</target>
       </trans-unit>
       <trans-unit id="Refresh Selected Subscriptions">
         <source>Refresh Selected Subscriptions</source>
-        <target>Uppdatera markerade prenumerationer</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Uppdatera markerade prenumerationer</target>
       </trans-unit>
       <trans-unit id="Refresh completed">
         <source>Refresh completed</source>
-        <target>Uppdatering klar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Uppdatering klar</target>
       </trans-unit>
       <trans-unit id="Refresh the current page">
         <source>Refresh the current page</source>
-        <target>Ladda om nuvarande sida</target>
         <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Refreshing folder images…">
-        <source>Refreshing folder images…</source>
-        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Ladda om nuvarande sida</target>
       </trans-unit>
       <trans-unit id="Refreshing subscriptions…">
         <source>Refreshing subscriptions…</source>
-        <target>Uppdaterar prenumerationer…</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Uppdaterar prenumerationer…</target>
       </trans-unit>
       <trans-unit id="Remove From List">
         <source>Remove From List</source>
-        <target>Ta bort från listan</target>
         <note>Title of a popup menu item</note>
+        <target xml:lang="sv" state="translated">Ta bort från listan</target>
       </trans-unit>
       <trans-unit id="Rename…">
         <source>Rename…</source>
-        <target>Döp om…</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Döp om…</target>
       </trans-unit>
       <trans-unit id="Restore Article">
         <source>Restore Article</source>
-        <target>Återskapa artikel</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Återskapa artikel</target>
       </trans-unit>
       <trans-unit id="Resubscribe">
         <source>Resubscribe</source>
-        <target>Återuppta prenumeration på artiklar från sida</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Återuppta prenumeration på artiklar från sida</target>
       </trans-unit>
       <trans-unit id="Retrieving articles">
         <source>Retrieving articles</source>
-        <target>Tar emot artiklar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Tar emot artiklar</target>
       </trans-unit>
       <trans-unit id="Retrieving folder image">
         <source>Retrieving folder image</source>
-        <target>Mottager mappbild</target>
         <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Retrieving folder image for Open Reader Feed">
-        <source>Retrieving folder image for Open Reader Feed</source>
-        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Mottager mappbild</target>
       </trans-unit>
       <trans-unit id="Return to the previous page">
         <source>Return to the previous page</source>
-        <target>Återgå till föregående sida</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Återgå till föregående sida</target>
       </trans-unit>
       <trans-unit id="Search Results">
         <source>Search Results</source>
-        <target>Sökresultat</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Sökresultat</target>
       </trans-unit>
       <trans-unit id="Search all articles">
         <source>Search all articles</source>
-        <target>Sök genom alla artiklar</target>
         <note>Placeholder title of a search field</note>
-      </trans-unit>
-      <trans-unit id="Search all articles or the current web page">
-        <source>Search all articles or the current web page</source>
-        <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Search current web page">
-        <source>Search current web page</source>
-        <note>Placeholder title of a search field</note>
+        <target xml:lang="sv" state="translated">Sök genom alla artiklar</target>
       </trans-unit>
       <trans-unit id="Search in %@">
         <source>Search in %@</source>
-        <target>Sök i %@</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Sök i %@</target>
       </trans-unit>
       <trans-unit id="Select…">
         <source>Select…</source>
-        <target>Markera…</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Markera…</target>
       </trans-unit>
       <trans-unit id="Send Link">
         <source>Send Link</source>
-        <target>Skicka länk</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Skicka länk</target>
       </trans-unit>
       <trans-unit id="Send Links">
         <source>Send Links</source>
-        <target>Skicka länkar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Skicka länkar</target>
       </trans-unit>
       <trans-unit id="Show Filter Bar">
         <source>Show Filter Bar</source>
-        <target>Visa filtrera-fältet</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Visa filtrera-fältet</target>
       </trans-unit>
       <trans-unit id="Show Main Window…">
         <source>Show Main Window…</source>
-        <target>Visa huvudfönster…</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Visa huvudfönster…</target>
       </trans-unit>
       <trans-unit id="Show Status Bar">
         <source>Show Status Bar</source>
-        <target>Visa statusfältet</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Visa statusfältet</target>
       </trans-unit>
       <trans-unit id="Show Toolbar">
         <source>Show Toolbar</source>
-        <target>Visa verktygsfält</target>
         <note>Title of a menu item</note>
+        <target xml:lang="sv" state="translated">Visa verktygsfält</target>
       </trans-unit>
       <trans-unit id="Show in Finder">
         <source>Show in Finder</source>
-        <target>Visa i Finder</target>
         <note>Title of a popup menu item</note>
+        <target xml:lang="sv" state="translated">Visa i Finder</target>
       </trans-unit>
       <trans-unit id="Subject">
         <source>Subject</source>
-        <target>Ämne</target>
         <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="sv" state="translated">Ämne</target>
       </trans-unit>
       <trans-unit id="Subscribe to the feed for this page">
         <source>Subscribe to the feed for this page</source>
-        <target>Prenumerera på artiklar från denna sida</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Prenumerera på artiklar från denna sida</target>
       </trans-unit>
       <trans-unit id="Summary">
         <source>Summary</source>
-        <target>Sammanfattning</target>
         <note>Pseudo field name visible in menu/article list</note>
+        <target xml:lang="sv" state="translated">Sammanfattning</target>
       </trans-unit>
       <trans-unit id="Syncing">
         <source>Syncing</source>
-        <target>Synkar</target>
         <note>Toolbar item name for the Syncing preference pane</note>
-      </trans-unit>
-      <trans-unit id="Text">
-        <source>Text</source>
-        <note>Data field name visible in smart folder definition</note>
+        <target xml:lang="sv" state="translated">Synkar</target>
       </trans-unit>
       <trans-unit id="This article contains an enclosed file.">
         <source>This article contains an enclosed file.</source>
-        <target>Den här artikeln innehåller en bilaga.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Den här artikeln innehåller en bilaga.</target>
       </trans-unit>
       <trans-unit id="Today">
         <source>Today</source>
-        <target>Idag</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Idag</target>
       </trans-unit>
       <trans-unit id="Today's Articles">
         <source>Today's Articles</source>
-        <target>Dagens artiklar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Dagens artiklar</target>
       </trans-unit>
       <trans-unit id="Trash">
         <source>Trash</source>
-        <target>Raderade objekt</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Raderade objekt</target>
       </trans-unit>
       <trans-unit id="URL">
         <source>URL</source>
-        <target>URL</target>
         <note>URL</note>
+        <target xml:lang="sv" state="translated">URL</target>
       </trans-unit>
       <trans-unit id="Unread">
         <source>Unread</source>
-        <target>Olästa</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Olästa</target>
       </trans-unit>
       <trans-unit id="Unread Articles">
         <source>Unread Articles</source>
-        <target>Olästa artiklar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Olästa artiklar</target>
       </trans-unit>
       <trans-unit id="Unrecognised database format text">
         <source>Unrecognised database format text</source>
-        <target>Din nuvarande %@ stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Din nuvarande %@ stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.</target>
       </trans-unit>
       <trans-unit id="Unrecognised database format title">
         <source>Unrecognised database format title</source>
-        <target>Databasens filformat har ändrats</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Databasens filformat har ändrats</target>
       </trans-unit>
       <trans-unit id="Unsubscribe">
         <source>Unsubscribe</source>
-        <target>Sluta prenumerera på artiklar från sida</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Sluta prenumerera på artiklar från sida</target>
       </trans-unit>
       <trans-unit id="Upgrade Database">
         <source>Upgrade Database</source>
-        <target>Uppgradera databas</target>
         <note>Title of a button on an alert</note>
+        <target xml:lang="sv" state="translated">Uppgradera databas</target>
       </trans-unit>
       <trans-unit id="Vienna cannot open the file body">
         <source>Vienna cannot open the file body</source>
-        <target>Vienna kan inte öppna filen "%@" eftersom den har flyttats sedan du laddade ner den.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Vienna kan inte öppna filen "%@" eftersom den har flyttats sedan du laddade ner den.</target>
       </trans-unit>
       <trans-unit id="Vienna cannot open the file title">
         <source>Vienna cannot open the file title</source>
-        <target>Vienna kan inte öppna filen.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Vienna kan inte öppna filen.</target>
       </trans-unit>
       <trans-unit id="Vienna cannot show the file body">
         <source>Vienna cannot show the file body</source>
-        <target>Vienna kan inte öppna filen "%@" eftersom den har flyttats sedan du laddade ner den.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Vienna kan inte öppna filen "%@" eftersom den har flyttats sedan du laddade ner den.</target>
       </trans-unit>
       <trans-unit id="Vienna cannot show the file title">
         <source>Vienna cannot show the file title</source>
-        <target>Vienna kan inte öppna filen.</target>
         <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.">
-        <source>Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.</source>
-        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Vienna kan inte öppna filen.</target>
       </trans-unit>
       <trans-unit id="Yes">
         <source>Yes</source>
-        <target>Ja</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Ja</target>
       </trans-unit>
       <trans-unit id="Yesterday">
         <source>Yesterday</source>
-        <target>Igår</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Igår</target>
       </trans-unit>
       <trans-unit id="contains">
         <source>contains</source>
-        <target>innehåller</target>
         <note>test for a string</note>
+        <target xml:lang="sv" state="translated">innehåller</target>
       </trans-unit>
       <trans-unit id="does not contain">
         <source>does not contain</source>
-        <target>innehåller inte</target>
         <note>test for a string</note>
+        <target xml:lang="sv" state="translated">innehåller inte</target>
       </trans-unit>
       <trans-unit id="is">
         <source>is</source>
-        <target>är</target>
         <note>test for a value</note>
+        <target xml:lang="sv" state="translated">är</target>
       </trans-unit>
       <trans-unit id="is after">
         <source>is after</source>
-        <target>är efter</target>
         <note>test for a date</note>
+        <target xml:lang="sv" state="translated">är efter</target>
       </trans-unit>
       <trans-unit id="is before">
         <source>is before</source>
-        <target>är före</target>
         <note>test for a date</note>
+        <target xml:lang="sv" state="translated">är före</target>
       </trans-unit>
       <trans-unit id="is greater than">
         <source>is greater than</source>
-        <target>är större än</target>
         <note>test for a numeric value</note>
+        <target xml:lang="sv" state="translated">är större än</target>
       </trans-unit>
       <trans-unit id="is greater than or equal to">
         <source>is greater than or equal to</source>
-        <target>är större eller lika med</target>
         <note>test for a numeric value</note>
+        <target xml:lang="sv" state="translated">är större eller lika med</target>
       </trans-unit>
       <trans-unit id="is less than">
         <source>is less than</source>
-        <target>är mindre än</target>
         <note>test for a numeric value</note>
+        <target xml:lang="sv" state="translated">är mindre än</target>
       </trans-unit>
       <trans-unit id="is less than or equal to">
         <source>is less than or equal to</source>
-        <target>är mindre eller lika med</target>
         <note>test for a numeric value</note>
+        <target xml:lang="sv" state="translated">är mindre eller lika med</target>
       </trans-unit>
       <trans-unit id="is not">
         <source>is not</source>
-        <target>är inte</target>
         <note>test for a value</note>
+        <target xml:lang="sv" state="translated">är inte</target>
       </trans-unit>
       <trans-unit id="is on or after">
         <source>is on or after</source>
-        <target>är på eller efter</target>
         <note>test for a date</note>
+        <target xml:lang="sv" state="translated">är på eller efter</target>
       </trans-unit>
       <trans-unit id="is on or before">
         <source>is on or before</source>
-        <target>är på ellef före</target>
         <note>test for a date</note>
-      </trans-unit>
-      <trans-unit id="not under">
-        <source>not under</source>
-        <note>test for a folder (not operational as of Vienna 3.2)</note>
-      </trans-unit>
-      <trans-unit id="under">
-        <source>under</source>
-        <note>test for a folder (not operational as of Vienna 3.2)</note>
+        <target xml:lang="sv" state="translated">är på ellef före</target>
       </trans-unit>
     </body>
   </file>
@@ -2916,12 +2702,8 @@ Also check your network access.</target>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
-      <trans-unit id="CFBundleName">
-        <source>Vienna</source>
-      </trans-unit>
-      <trans-unit id="NSHumanReadableCopyright">
-        <source>© 2004–2017</source>
-      </trans-unit>
+      
+      
     </body>
   </file>
   <file original="Vienna Tests/Info.plist" source-language="en" datatype="plaintext" target-language="sv">
@@ -2929,9 +2711,7 @@ Also check your network access.</target>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
-      <trans-unit id="CFBundleName">
-        <source>$(PRODUCT_NAME)</source>
-      </trans-unit>
+      
     </body>
   </file>
   <file original="Vienna Tests/Localizable.strings" source-language="en" datatype="plaintext" target-language="sv">
@@ -2941,254 +2721,238 @@ Also check your network access.</target>
     <body>
       <trans-unit id="%@, %@">
         <source>%1$@, %2$@</source>
-        <target>%1$@, %2$@</target>
         <note>{existing authors},{new author name}</note>
+        <target xml:lang="sv" state="translated">%1$@, %2$@</target>
       </trans-unit>
       <trans-unit id="(No title)">
         <source>(No title)</source>
-        <target>(Inget ämne)</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">(Inget ämne)</target>
       </trans-unit>
       <trans-unit id="(Untitled Feed)">
         <source>(Untitled Feed)</source>
-        <target>(Icke namngiven ström)</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">(Icke namngiven ström)</target>
       </trans-unit>
       <trans-unit id="Author">
         <source>Author</source>
-        <target>Författare</target>
         <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="sv" state="translated">Författare</target>
       </trans-unit>
       <trans-unit id="Cancel">
         <source>Cancel</source>
-        <target>Avbryt</target>
         <note>Title of a button on an alert</note>
+        <target xml:lang="sv" state="translated">Avbryt</target>
       </trans-unit>
       <trans-unit id="Cannot create database folder text">
         <source>Cannot create database folder text</source>
-        <target>Vienna försöker skapa mappen '%@' men ett fel uppstod. Kontrollera skrivrättigheter på specificerad sökväg.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Vienna försöker skapa mappen '%@' men ett fel uppstod. Kontrollera skrivrättigheter på specificerad sökväg.</target>
       </trans-unit>
       <trans-unit id="Cannot create database folder title">
         <source>Cannot create database folder title</source>
-        <target>Ledsen, men Vienna kunde inte skapa databasmappen</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Ledsen, men Vienna kunde inte skapa databasmappen</target>
       </trans-unit>
       <trans-unit id="Cannot open database text">
         <source>Cannot open database text</source>
-        <target>Databasefilen (%@) kan inte öppnas av någon anledning. Den kanske är korrupt eller oåtkomlig. Var god radera eller döp om databasefilen och starta om Vienna.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Databasefilen (%@) kan inte öppnas av någon anledning. Den kanske är korrupt eller oåtkomlig. Var god radera eller döp om databasefilen och starta om Vienna.</target>
       </trans-unit>
       <trans-unit id="Cannot open database title">
         <source>Cannot open database title</source>
-        <target>Ursäkta, men Vienna kan inte öppna databasen</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Ursäkta, men Vienna kan inte öppna databasen</target>
       </trans-unit>
       <trans-unit id="Database Upgrade">
         <source>Database Upgrade</source>
-        <target>Uppdatera databas</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Uppdatera databas</target>
       </trans-unit>
       <trans-unit id="Date">
         <source>Date</source>
-        <target>Datum</target>
         <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="sv" state="translated">Datum</target>
       </trans-unit>
       <trans-unit id="Deleted">
         <source>Deleted</source>
-        <target>Raderade</target>
         <note>Data field name visible in smart folder definition</note>
+        <target xml:lang="sv" state="translated">Raderade</target>
       </trans-unit>
       <trans-unit id="Enclosure">
         <source>Enclosure</source>
-        <target>Bilagans URL</target>
         <note>Data field name (URL) visible in menu/article list</note>
+        <target xml:lang="sv" state="translated">Bilagans URL</target>
       </trans-unit>
       <trans-unit id="Flagged">
         <source>Flagged</source>
-        <target>Flaggad</target>
         <note>Data field name visible in menu/smart folder definition</note>
+        <target xml:lang="sv" state="translated">Flaggad</target>
       </trans-unit>
       <trans-unit id="Folder">
         <source>Folder</source>
-        <target>Mapp</target>
         <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="sv" state="translated">Mapp</target>
       </trans-unit>
       <trans-unit id="HasEnclosure">
         <source>HasEnclosure</source>
-        <target>Bilaga</target>
         <note>Data field name (Y/N) visible in menu/smart folder definition</note>
+        <target xml:lang="sv" state="translated">Bilaga</target>
       </trans-unit>
       <trans-unit id="Headlines">
         <source>Headlines</source>
-        <target>Rubriker</target>
         <note>Pseudo field name visible in article list</note>
+        <target xml:lang="sv" state="translated">Rubriker</target>
       </trans-unit>
       <trans-unit id="Link">
         <source>Link</source>
-        <target>Länk</target>
         <note>Data field name visible in menu/article list</note>
+        <target xml:lang="sv" state="translated">Länk</target>
       </trans-unit>
       <trans-unit id="Locate Text">
         <source>Locate Text</source>
-        <target>En ny Vienna-databas kan ej skapas i '%@' för att mappen förmodligen finns på en nätverksdelning och den här versionen av Vienna stöder inte detta. Var vänlig och välj en mapp som finns på din lokala hårddisk.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">En ny Vienna-databas kan ej skapas i '%@' för att mappen förmodligen finns på en nätverksdelning och den här versionen av Vienna stöder inte detta. Var vänlig och välj en mapp som finns på din lokala hårddisk.</target>
       </trans-unit>
       <trans-unit id="Locate Title">
         <source>Locate Title</source>
-        <target>Kan ej skapa Viennas databas</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Kan ej skapa Viennas databas</target>
       </trans-unit>
       <trans-unit id="Locate…">
         <source>Locate…</source>
-        <target>Leta upp…</target>
         <note>Title of a button on an alert</note>
+        <target xml:lang="sv" state="translated">Leta upp…</target>
       </trans-unit>
       <trans-unit id="Marked Articles">
         <source>Marked Articles</source>
-        <target>Markerade artiklar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Markerade artiklar</target>
       </trans-unit>
       <trans-unit id="Quit Vienna">
         <source>Quit Vienna</source>
-        <target>Avsluta Vienna</target>
         <note>Title of a button on an alert</note>
+        <target xml:lang="sv" state="translated">Avsluta Vienna</target>
       </trans-unit>
       <trans-unit id="Read">
         <source>Read</source>
-        <target>Läst</target>
         <note>Data field name visible in menu/smart folder definition</note>
+        <target xml:lang="sv" state="translated">Läst</target>
       </trans-unit>
       <trans-unit id="Search Results">
         <source>Search Results</source>
-        <target>Sökresultat</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Sökresultat</target>
       </trans-unit>
       <trans-unit id="Search all articles">
         <source>Search all articles</source>
-        <target>Sök genom alla artiklar</target>
         <note>Placeholder title of a search field</note>
-      </trans-unit>
-      <trans-unit id="Search current web page">
-        <source>Search current web page</source>
-        <note>Placeholder title of a search field</note>
+        <target xml:lang="sv" state="translated">Sök genom alla artiklar</target>
       </trans-unit>
       <trans-unit id="Subject">
         <source>Subject</source>
-        <target>Ämne</target>
         <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="sv" state="translated">Ämne</target>
       </trans-unit>
       <trans-unit id="Summary">
         <source>Summary</source>
-        <target>Sammanfattning</target>
         <note>Pseudo field name visible in menu/article list</note>
+        <target xml:lang="sv" state="translated">Sammanfattning</target>
       </trans-unit>
       <trans-unit id="Text">
         <source>Text</source>
-        <target>Text</target>
         <note>Data field name visible in smart folder definition</note>
+        <target xml:lang="sv" state="translated">Text</target>
       </trans-unit>
       <trans-unit id="Today's Articles">
         <source>Today's Articles</source>
-        <target>Dagens artiklar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Dagens artiklar</target>
       </trans-unit>
       <trans-unit id="Trash">
         <source>Trash</source>
-        <target>Raderade objekt</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Raderade objekt</target>
       </trans-unit>
       <trans-unit id="Unread Articles">
         <source>Unread Articles</source>
-        <target>Olästa artiklar</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Olästa artiklar</target>
       </trans-unit>
       <trans-unit id="Unrecognised database format text">
         <source>Unrecognised database format text</source>
-        <target>Din nuvarande %@ stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Din nuvarande %@ stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.</target>
       </trans-unit>
       <trans-unit id="Unrecognised database format title">
         <source>Unrecognised database format title</source>
-        <target>Databasens filformat har ändrats</target>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Databasens filformat har ändrats</target>
       </trans-unit>
       <trans-unit id="Upgrade Database">
         <source>Upgrade Database</source>
-        <target>Uppgradera databas</target>
         <note>Title of a button on an alert</note>
-      </trans-unit>
-      <trans-unit id="Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.">
-        <source>Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.</source>
-        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Uppgradera databas</target>
       </trans-unit>
       <trans-unit id="contains">
         <source>contains</source>
-        <target>innehåller</target>
         <note>test for a string</note>
+        <target xml:lang="sv" state="translated">innehåller</target>
       </trans-unit>
       <trans-unit id="does not contain">
         <source>does not contain</source>
-        <target>innehåller inte</target>
         <note>test for a string</note>
+        <target xml:lang="sv" state="translated">innehåller inte</target>
       </trans-unit>
       <trans-unit id="is">
         <source>is</source>
-        <target>är</target>
         <note>test for a value</note>
+        <target xml:lang="sv" state="translated">är</target>
       </trans-unit>
       <trans-unit id="is after">
         <source>is after</source>
-        <target>är efter</target>
         <note>test for a date</note>
+        <target xml:lang="sv" state="translated">är efter</target>
       </trans-unit>
       <trans-unit id="is before">
         <source>is before</source>
-        <target>är före</target>
         <note>test for a date</note>
+        <target xml:lang="sv" state="translated">är före</target>
       </trans-unit>
       <trans-unit id="is greater than">
         <source>is greater than</source>
-        <target>är större än</target>
         <note>test for a numeric value</note>
+        <target xml:lang="sv" state="translated">är större än</target>
       </trans-unit>
       <trans-unit id="is greater than or equal to">
         <source>is greater than or equal to</source>
-        <target>är större eller lika med</target>
         <note>test for a numeric value</note>
+        <target xml:lang="sv" state="translated">är större eller lika med</target>
       </trans-unit>
       <trans-unit id="is less than">
         <source>is less than</source>
-        <target>är mindre än</target>
         <note>test for a numeric value</note>
+        <target xml:lang="sv" state="translated">är mindre än</target>
       </trans-unit>
       <trans-unit id="is less than or equal to">
         <source>is less than or equal to</source>
-        <target>är mindre eller lika med</target>
         <note>test for a numeric value</note>
+        <target xml:lang="sv" state="translated">är mindre eller lika med</target>
       </trans-unit>
       <trans-unit id="is not">
         <source>is not</source>
-        <target>är inte</target>
         <note>test for a value</note>
+        <target xml:lang="sv" state="translated">är inte</target>
       </trans-unit>
       <trans-unit id="is on or after">
         <source>is on or after</source>
-        <target>är på eller efter</target>
         <note>test for a date</note>
+        <target xml:lang="sv" state="translated">är på eller efter</target>
       </trans-unit>
       <trans-unit id="is on or before">
         <source>is on or before</source>
-        <target>är på ellef före</target>
         <note>test for a date</note>
-      </trans-unit>
-      <trans-unit id="not under">
-        <source>not under</source>
-        <note>test for a folder (not operational as of Vienna 3.2)</note>
-      </trans-unit>
-      <trans-unit id="under">
-        <source>under</source>
-        <note>test for a folder (not operational as of Vienna 3.2)</note>
+        <target xml:lang="sv" state="translated">är på ellef före</target>
       </trans-unit>
     </body>
   </file>
@@ -3197,9 +2961,7 @@ Also check your network access.</target>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
-      <trans-unit id="CFBundleName">
-        <source>$(PRODUCT_BUNDLE_NAME)</source>
-      </trans-unit>
+      
     </body>
   </file>
 </xliff>
