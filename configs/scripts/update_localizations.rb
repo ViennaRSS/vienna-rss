@@ -40,21 +40,12 @@ xcode_project = ENV['PROJECT_FILE_PATH']
 
 xliff_files = Dir.entries(xliff_dir).select { |f| File.extname(f) == '.xliff' unless f == 'en.xliff' }
 xliff_files.collect! { |f| File.join(xliff_dir, f) }
-puts xliff_files
 
-# Import files
 xliff_files.each do |f|
-    puts "Import #{File.basename(f)}"
+    filename = File.basename(f)
+    next if filename == 'en.xliff'
 
+    puts "Import #{filename}"
     `xcodebuild -importLocalizations -project #{xcode_project} -localizationPath #{f} 2>/dev/null`
-    warn "xcodebuild reported a problem while importing #{File.basename(f)}" unless $?.success?
+    warn "xcodebuild reported a problem while importing #{filename}" unless $?.success?
 end
-
-# Export files
-puts 'Export localizations'
-
-languages = xliff_files.collect { |f| File.basename(f, '.*') }
-arguments = languages.collect { |f| "-exportLanguage #{f}" }.join(' ')
-
-`xcodebuild -exportLocalizations -project #{xcode_project} -localizationPath #{xliff_dir} #{arguments} 2>/dev/null`
-warn 'xcodebuild encountered a problem while exporting' unless $?.success?
