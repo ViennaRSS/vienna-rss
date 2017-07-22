@@ -1677,6 +1677,11 @@
         <note>Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "O2q-8o-CSb";</note>
         <target xml:lang="nl" state="translated">Gebruikersnaam:</target>
       </trans-unit>
+      <trans-unit id="kM0-7a-obO.ibShadowedToolTip">
+        <source>Select a server supporting the Open Reader API</source>
+        <note>Class = "NSTextField"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "kM0-7a-obO";</note>
+        <target xml:lang="nl" state="translated">Kies een server met Open Reader-ondersteuning</target>
+      </trans-unit>
       <trans-unit id="tec-2d-Xej.title">
         <source>URL: https://</source>
         <note>Class = "NSTextFieldCell"; title = "URL: https://"; ObjectID = "tec-2d-Xej";</note>
@@ -1686,6 +1691,16 @@
         <source>Server:</source>
         <note>Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "uTl-XE-0ym";</note>
         <target xml:lang="nl" state="translated">Server:</target>
+      </trans-unit>
+      <trans-unit id="vZE-Pl-S9H.ibShadowedToolTip">
+        <source>Address of a server supporting the Open Reader API</source>
+        <note>Class = "NSTextField"; ibShadowedToolTip = "Address of a server supporting the Open Reader API"; ObjectID = "vZE-Pl-S9H";</note>
+        <target xml:lang="nl" state="translated">Adres van een server met Open Reader-ondersteuning</target>
+      </trans-unit>
+      <trans-unit id="zAy-oc-zmb.ibExternalAccessibilityDescription">
+        <source>Select a server supporting the Open Reader API</source>
+        <note>Class = "NSPopUpButton"; ibExternalAccessibilityDescription = "Select a server supporting the Open Reader API"; ObjectID = "zAy-oc-zmb";</note>
+        <target xml:lang="nl" state="translated">Kies een server met Open Reader-ondersteuning</target>
       </trans-unit>
     </body>
   </file>
@@ -2248,6 +2263,11 @@
         <source>Locate Title</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="nl" state="translated">Kan de Vienna-database niet aanmaken</target>
+      </trans-unit>
+      <trans-unit id="Locate…">
+        <source>Locate…</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="nl" state="translated">Zoek op…</target>
       </trans-unit>
       <trans-unit id="Mark All Articles as Read">
         <source>Mark All Articles as Read</source>
@@ -2893,6 +2913,11 @@
         <source>Locate Title</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="nl" state="translated">Kan de Vienna-database niet aanmaken</target>
+      </trans-unit>
+      <trans-unit id="Locate…">
+        <source>Locate…</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="nl" state="translated">Zoek op…</target>
       </trans-unit>
       <trans-unit id="Marked Articles">
         <source>Marked Articles</source>
