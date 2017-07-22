@@ -364,10 +364,10 @@
         <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "34";</note>
         <target xml:lang="de" state="translated">Erstellen</target>
       </trans-unit>
-      <trans-unit id="35.title">
+      <trans-unit id="35.title" approved="yes">
         <source>Cancel</source>
         <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "35";</note>
-        <target xml:lang="de" state="translated">Abbrechen</target>
+        <target xml:lang="de">Abbrechen</target>
       </trans-unit>
       <trans-unit id="36.title">
         <source>Enter the group folder name:</source>
@@ -468,10 +468,10 @@
         <note>Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "4ih-vj-fsk";</note>
         <target xml:lang="de">Rechtschreib- und Grammatikprüfung</target>
       </trans-unit>
-      <trans-unit id="5.title">
+      <trans-unit id="5.title" approved="yes">
         <source>Bring All to Front</source>
         <note>Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5";</note>
-        <target xml:lang="de" state="translated">Alle nach vorne bringen</target>
+        <target xml:lang="de">Alle nach vorne bringen</target>
       </trans-unit>
       <trans-unit id="6yn-y8-lF1.title">
         <source>Refresh All Subscriptions</source>
@@ -1576,10 +1576,10 @@
         <note>Class = "NSButtonCell"; title = "Subscribe"; ObjectID = "103";</note>
         <target xml:lang="de" state="translated">Abonnieren</target>
       </trans-unit>
-      <trans-unit id="104.title">
+      <trans-unit id="104.title" approved="yes">
         <source>Source:</source>
         <note>Class = "NSTextFieldCell"; title = "Source:"; ObjectID = "104";</note>
-        <target xml:lang="de" state="translated">Quelle:</target>
+        <target xml:lang="de">Quelle:</target>
       </trans-unit>
       <trans-unit id="106.title">
         <source>Create a new subscription</source>
@@ -1638,10 +1638,10 @@
         <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "96";</note>
         <target xml:lang="de" state="translated">OK</target>
       </trans-unit>
-      <trans-unit id="97.title">
+      <trans-unit id="97.title" approved="yes">
         <source>Cancel</source>
         <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97";</note>
-        <target xml:lang="de" state="translated">Abbrechen</target>
+        <target xml:lang="de">Abbrechen</target>
       </trans-unit>
       <trans-unit id="98.title">
         <source>Show all articles that match</source>
@@ -2893,10 +2893,10 @@
         <note>Data field name visible in menu/article list/smart folder definition</note>
         <target xml:lang="de" state="translated">Autor</target>
       </trans-unit>
-      <trans-unit id="Cancel">
+      <trans-unit id="Cancel" approved="yes">
         <source>Cancel</source>
         <note>Title of a button on an alert</note>
-        <target xml:lang="de" state="translated">Abbrechen</target>
+        <target xml:lang="de">Abbrechen</target>
       </trans-unit>
       <trans-unit id="Cannot create database folder text">
         <source>Cannot create database folder text</source>
