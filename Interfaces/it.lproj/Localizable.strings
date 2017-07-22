@@ -1,7 +1,4 @@
 /* No comment provided by engineer. */
-"%@ Info" = "%@ Info";
-
-/* No comment provided by engineer. */
 "%d new articles retrieved" = "%d nuovi articoli ricevuti";
 
 /* No comment provided by engineer. */
@@ -342,9 +339,6 @@
 /* No comment provided by engineer. */
 "No new articles available" = "Nessun nuovo articolo disponibile";
 
-/* Title of a button on an alert */
-"OK" = "OK";
-
 /* Title of a popup menu item */
 "Open" = "Apri";
 
@@ -543,12 +537,6 @@
 
 /* No comment provided by engineer. */
 "Yesterday" = "Ieri";
-
-/* rule for association of multiple criteria */
-"all" = "tutte le condizioni";
-
-/* rule for association of multiple criteria */
-"any" = "qualsiasi delle condizioni";
 
 /* test for a string */
 "contains" = "contiene";

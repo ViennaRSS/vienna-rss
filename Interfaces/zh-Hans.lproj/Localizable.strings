@@ -544,12 +544,6 @@
 /* No comment provided by engineer. */
 "Yesterday" = "昨天";
 
-/* rule for association of multiple criteria */
-"all" = "所有";
-
-/* rule for association of multiple criteria */
-"any" = "任何";
-
 /* test for a string */
 "contains" = "包含";
 

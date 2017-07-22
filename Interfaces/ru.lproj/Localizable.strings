@@ -414,9 +414,6 @@
 /* No comment provided by engineer. */
 "No new articles available" = "Нет новых статей";
 
-/* Title of a button on an alert */
-"OK" = "OK";
-
 /* Title of a popup menu item */
 "Open" = "Открыть";
 
@@ -651,12 +648,6 @@
 
 /* No comment provided by engineer. */
 "Yesterday" = "Вчера";
-
-/* rule for association of multiple criteria */
-"all" = "все";
-
-/* rule for association of multiple criteria */
-"any" = "любое";
 
 /* test for a string */
 "contains" = "содержит";

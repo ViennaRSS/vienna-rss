@@ -676,12 +676,6 @@
 /* No comment provided by engineer. */
 "Yesterday" = "Hier";
 
-/* rule for association of multiple criteria */
-"all" = "chacune";
-
-/* rule for association of multiple criteria */
-"any" = "une";
-
 /* test for a string */
 "contains" = "contient";
 

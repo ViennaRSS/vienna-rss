@@ -1,6 +1,12 @@
+/* Class = "NSMenuItem"; title = "all"; ObjectID = "82"; */
+"82.title" = "todas";
+
 /* Class = "NSButtonCell"; title = "Save"; ObjectID = "96"; */
 "96.title" = "Gardar";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97"; */
 "97.title" = "Cancelar";
+
+/* Class = "NSMenuItem"; title = "any"; ObjectID = "j0v-xF-tpl"; */
+"j0v-xF-tpl.title" = "algunha";
 

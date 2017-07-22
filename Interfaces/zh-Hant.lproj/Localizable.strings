@@ -333,9 +333,6 @@
 /* No comment provided by engineer. */
 "Never" = "永不";
 
-/* No comment provided by engineer. */
-"New Tab" = "New Tab";
-
 /* Notification title */
 "New articles retrieved" = "已取得新文章";
 
@@ -552,12 +549,6 @@
 
 /* No comment provided by engineer. */
 "Yesterday" = "昨天";
-
-/* rule for association of multiple criteria */
-"all" = "全部";
-
-/* rule for association of multiple criteria */
-"any" = "任何";
 
 /* test for a string */
 "contains" = "包含";

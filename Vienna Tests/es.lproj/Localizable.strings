@@ -32,7 +32,7 @@
 "Deleted" = "Eliminado";
 
 /* Data field name (URL) visible in menu/article list */
-"Enclosure" = "URL del adjunto";
+"Enclosure" = "Archivo adjunto";
 
 /* Data field name visible in menu/smart folder definition */
 "Flagged" = "Destacado";
@@ -105,12 +105,6 @@
 
 /* No comment provided by engineer. */
 "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna debe actualizar su base de datos a la última versión. Esto puede tardar un minuto más o menos. Lamentamos el inconveniente.";
-
-/* rule for association of multiple criteria */
-"all" = "todas";
-
-/* rule for association of multiple criteria */
-"any" = "una";
 
 /* test for a string */
 "contains" = "contiene";

@@ -655,12 +655,6 @@
 /* No comment provided by engineer. */
 "Yesterday" = "Ayer";
 
-/* rule for association of multiple criteria */
-"all" = "todas";
-
-/* rule for association of multiple criteria */
-"any" = "una";
-
 /* test for a string */
 "contains" = "contiene";
 
