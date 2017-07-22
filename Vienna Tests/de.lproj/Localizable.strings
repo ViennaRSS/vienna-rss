@@ -101,7 +101,7 @@
 "Upgrade Database" = "Datenbank aktualisieren";
 
 /* No comment provided by engineer. */
-"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna muss seine Datenbank auf den neuesten Stand bringen. Dieser Vorgang kann eine Weile dauern. Wir entschuldigen uns für die Wartezeit.";
+"Database upgrade explanation text" = "Vienna muss seine Datenbank auf den neuesten Stand bringen. Dieser Vorgang kann eine Weile dauern. Wir entschuldigen uns für die Wartezeit.";
 
 /* test for a string */
 "contains" = "beinhaltet";
