@@ -106,12 +106,6 @@
 /* No comment provided by engineer. */
 "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna необходимо обновить свою базу данных до последней версии. Это может занять минуту или около того. Приносим свои извинения за доставленные неудобства.";
 
-/* rule for association of multiple criteria */
-"all" = "все";
-
-/* rule for association of multiple criteria */
-"any" = "любое";
-
 /* test for a string */
 "contains" = "содержит";
 

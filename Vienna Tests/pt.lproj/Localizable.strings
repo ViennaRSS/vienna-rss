@@ -32,7 +32,7 @@
 "Deleted" = "Apagado";
 
 /* Data field name (URL) visible in menu/article list */
-"Enclosure" = "URL do Anexo";
+"Enclosure" = "Anexo";
 
 /* Data field name visible in menu/smart folder definition */
 "Flagged" = "Marcados";
@@ -90,12 +90,6 @@
 
 /* No comment provided by engineer. */
 "Unrecognised database format title" = "O formato de ficheiro da base de dados foi alterado";
-
-/* rule for association of multiple criteria */
-"all" = "todos";
-
-/* rule for association of multiple criteria */
-"any" = "qualquer";
 
 /* test for a string */
 "contains" = "contém";

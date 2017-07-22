@@ -1,3 +1,6 @@
+/* Class = "NSMenuItem"; title = "all"; ObjectID = "82"; */
+"82.title" = "alla";
+
 /* Class = "NSTextFieldCell"; title = "Smart folder name:"; ObjectID = "94"; */
 "94.title" = "Namn på smart mapp:";
 
@@ -12,4 +15,7 @@
 
 /* Class = "NSTextFieldCell"; title = "of the following conditions:"; ObjectID = "100"; */
 "100.title" = "av följande villkor:";
+
+/* Class = "NSMenuItem"; title = "any"; ObjectID = "j0v-xF-tpl"; */
+"j0v-xF-tpl.title" = "något";
 

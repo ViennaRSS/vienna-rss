@@ -94,12 +94,6 @@
 /* No comment provided by engineer. */
 "Unrecognised database format title" = "Veritabanı dosya biçimi değişmiş";
 
-/* rule for association of multiple criteria */
-"all" = "tümü";
-
-/* rule for association of multiple criteria */
-"any" = "herhangi";
-
 /* test for a string */
 "contains" = "içerir";
 

@@ -94,12 +94,6 @@
 /* No comment provided by engineer. */
 "Unrecognised database format title" = "Формат баз даних змінився";
 
-/* rule for association of multiple criteria */
-"all" = "всі";
-
-/* rule for association of multiple criteria */
-"any" = "будь-які";
-
 /* test for a string */
 "contains" = "містить";
 

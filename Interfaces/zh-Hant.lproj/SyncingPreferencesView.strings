@@ -7,6 +7,3 @@
 /* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "O2q-8o-CSb"; */
 "O2q-8o-CSb.title" = "帳號：";
 
-/* Class = "NSPopUpButton"; ibExternalAccessibilityDescription = "Select a server supporting the Open Reader API"; ObjectID = "zAy-oc-zmb"; */
-"zAy-oc-zmb.ibExternalAccessibilityDescription" = "Select a server supporting the Open Reader API";
-

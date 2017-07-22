@@ -559,9 +559,6 @@
 /* Toolbar item name for the Syncing preference pane */
 "Syncing" = "Synkar";
 
-/* Data field name visible in smart folder definition */
-"Text" = "Text";
-
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Den här artikeln innehåller en bilaga.";
 
@@ -612,12 +609,6 @@
 
 /* No comment provided by engineer. */
 "Yesterday" = "Igår";
-
-/* rule for association of multiple criteria */
-"all" = "alla";
-
-/* rule for association of multiple criteria */
-"any" = "något";
 
 /* test for a string */
 "contains" = "innehåller";

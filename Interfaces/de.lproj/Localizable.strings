@@ -616,12 +616,6 @@
 /* No comment provided by engineer. */
 "Yesterday" = "Gestern";
 
-/* rule for association of multiple criteria */
-"all" = "allen";
-
-/* rule for association of multiple criteria */
-"any" = "einer";
-
 /* test for a string */
 "contains" = "beinhaltet";
 
@@ -638,7 +632,7 @@
 "is before" = "ist vor";
 
 /* test for a numeric value */
-"is greater than" = "is größer als";
+"is greater than" = "ist größer als";
 
 /* test for a numeric value */
 "is greater than or equal to" = "ist größer als oder gleich";

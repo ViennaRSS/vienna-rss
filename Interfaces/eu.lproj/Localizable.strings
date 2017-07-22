@@ -511,12 +511,6 @@
 /* No comment provided by engineer. */
 "Yesterday" = "Atzo";
 
-/* rule for association of multiple criteria */
-"all" = "denak";
-
-/* rule for association of multiple criteria */
-"any" = "edozein";
-
 /* test for a string */
 "contains" = "dauka";
 

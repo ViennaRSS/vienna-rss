@@ -31,6 +31,9 @@
 /* Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T"; */
 "10h-xf-C6T.toolTip" = "Email a link to the current article or website";
 
+/* Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377"; */
+"1377.title" = "필터:";
+
 /* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g"; */
 "Hs0-hu-A2g.title" = "선택된 구독 갱신";
 

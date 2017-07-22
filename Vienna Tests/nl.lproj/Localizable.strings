@@ -74,7 +74,7 @@
 "Subject" = "Onderwerp";
 
 /* Pseudo field name visible in menu/article list */
-"Summary" = "Samevatting";
+"Summary" = "Samenvatting";
 
 /* Data field name visible in smart folder definition */
 "Text" = "Tekst";
@@ -99,12 +99,6 @@
 
 /* No comment provided by engineer. */
 "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna moet de database bijwerken naar de laatste versie. Dit kan enige tijd duren. Sorry voor het ongemak.";
-
-/* rule for association of multiple criteria */
-"all" = "alle";
-
-/* rule for association of multiple criteria */
-"any" = "een of meer";
 
 /* test for a string */
 "contains" = "bevat";

@@ -676,12 +676,6 @@
 /* No comment provided by engineer. */
 "Yesterday" = "Igår";
 
-/* rule for association of multiple criteria */
-"all" = "alle";
-
-/* rule for association of multiple criteria */
-"any" = "hvilken som helst";
-
 /* test for a string */
 "contains" = "indeholdet";
 

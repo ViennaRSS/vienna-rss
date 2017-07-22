@@ -82,12 +82,6 @@
 /* No comment provided by engineer. */
 "Unrecognised database format title" = "데이터베이스 파일 형식이 변경되었습니다.";
 
-/* rule for association of multiple criteria */
-"all" = "모든";
-
-/* rule for association of multiple criteria */
-"any" = "일부";
-
 /* test for a string */
 "contains" = "다음을 포함";
 
