@@ -712,3 +712,9 @@
 /* test for a date */
 "is on or before" = "er på eller før";
 
+/* test for a folder (not operational as of Vienna 3.2) */
+"not under" = "ikke under";
+
+/* test for a folder (not operational as of Vienna 3.2) */
+"under" = "under";
+
