@@ -1372,6 +1372,26 @@
         <note>Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1";</note>
         <target xml:lang="da" state="translated">Tilføj</target>
       </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.toolTip">
+        <source>Subscribe to a feed or add a folder or smart folder.</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Subscribe to a feed or add a folder or smart folder."; ObjectID = "CPA-Ha-aj1";</note>
+        <target xml:lang="da" state="translated">Abonner på et feed eller tilføj en mappe eller smartmappe.</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.label">
+        <source>All Read</source>
+        <note>Class = "NSToolbarItem"; label = "All Read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="da" state="translated">Alle læst</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.paletteLabel">
+        <source>Mark All Items as Read</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Mark All Items as Read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="da" state="translated">Marker alle emner som læst</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.toolTip">
+        <source>Mark all items as read</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Mark all items as read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="da" state="translated">Marker alle emner som læst</target>
+      </trans-unit>
       <trans-unit id="Hs0-hu-A2g.title">
         <source>Refresh Selected Subscriptions</source>
         <note>Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g";</note>
@@ -2966,6 +2986,16 @@ Also check your network access.</target>
         <note>test for a date</note>
         <target xml:lang="da" state="translated">er på eller før</target>
       </trans-unit>
+      <trans-unit id="not under">
+        <source>not under</source>
+        <note>test for a folder (not operational as of Vienna 3.2)</note>
+        <target xml:lang="da" state="translated">ikke under</target>
+      </trans-unit>
+      <trans-unit id="under">
+        <source>under</source>
+        <note>test for a folder (not operational as of Vienna 3.2)</note>
+        <target xml:lang="da" state="translated">under</target>
+      </trans-unit>
     </body>
   </file>
   <file original="Resources/Vienna-Info.plist" source-language="en" datatype="plaintext" target-language="da">
@@ -3237,6 +3267,16 @@ Also check your network access.</target>
         <source>is on or before</source>
         <note>test for a date</note>
         <target xml:lang="da" state="translated">er på eller før</target>
+      </trans-unit>
+      <trans-unit id="not under">
+        <source>not under</source>
+        <note>test for a folder (not operational as of Vienna 3.2)</note>
+        <target xml:lang="da" state="translated">ikke under</target>
+      </trans-unit>
+      <trans-unit id="under">
+        <source>under</source>
+        <note>test for a folder (not operational as of Vienna 3.2)</note>
+        <target xml:lang="da" state="translated">under</target>
       </trans-unit>
     </body>
   </file>
