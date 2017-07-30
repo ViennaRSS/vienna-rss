@@ -178,7 +178,6 @@
 -(void)setController:(AppController *)theController
 {
 	controller = theController;
-	[self.webPane setController:controller];
 }
 
 /* viewLink

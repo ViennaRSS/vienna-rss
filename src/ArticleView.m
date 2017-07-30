@@ -320,9 +320,9 @@ static NSMutableDictionary * stylePathMappings = nil;
 		if (deltaX != 0)
 		{
 			if (deltaX > 0)
-				[controller goBack:self];
+				[APPCONTROLLER goBack:self];
 			else 
-				[controller viewNextUnread:self];
+				[APPCONTROLLER viewNextUnread:self];
 		}
 	}		
 }

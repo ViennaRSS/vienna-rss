@@ -105,8 +105,7 @@
 	articleText.UIDelegate = self;
 	articleText.frameLoadDelegate = self;
 	[articleText setOpenLinksInNewBrowser:YES];
-	[articleText setController:self.controller];
-	
+
 	// Make web preferences 16pt Arial to match Safari
 	articleText.preferences.standardFontFamily = @"Arial";
 	articleText.preferences.defaultFontSize = 16;
