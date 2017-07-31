@@ -24,7 +24,6 @@
 @class AppController;
 
 @interface TabbedWebView : WebView <WebPolicyDelegate> {
-	AppController * controller;
 	WebPreferences * defaultWebPrefs;
 	BOOL openLinksInNewBrowser;
 	BOOL isFeedRedirect;
@@ -34,7 +33,6 @@
 // Public functions
 +(NSString *)userAgent;
 -(void)initTabbedWebView;
--(void)setController:(AppController *)theController;
 -(void)setOpenLinksInNewBrowser:(BOOL)flag;
 -(void)keyDown:(NSEvent *)theEvent;
 -(void)printDocument:(id)sender;

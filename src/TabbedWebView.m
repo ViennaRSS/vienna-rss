@@ -93,7 +93,6 @@ static NSString * _userAgent ;
 -(void)initTabbedWebView
 {
 	// Init our vars
-	controller = nil;
 	openLinksInNewBrowser = NO;
 	isFeedRedirect = NO;
 	isDownload = NO;
@@ -126,15 +125,6 @@ static NSString * _userAgent ;
 	[self loadMinimumFontSize];
 	[self loadUseJavaScript];
     [self loadUseWebPlugins];
-}
-
-/* setController
- * Set the associated controller for this view
- */
--(void)setController:(AppController *)theController
-{
-	controller = theController;
-	self.policyDelegate = self;
 }
 
 /* setOpenLinksInNewBrowser
@@ -209,7 +199,7 @@ static NSString * _userAgent ;
 		// Indicate a redirect for a feed
 		[self setIsFeedRedirect:YES];
 
-		[controller openURLInDefaultBrowser:[NSURL URLWithString:[NSString stringWithFormat:@"feed://%@", linkPath]]];
+        [APPCONTROLLER openURLInDefaultBrowser:[NSURL URLWithString:[NSString stringWithFormat:@"feed://%@", linkPath]]];
 		[listener ignore];
 		return;
 	}
@@ -254,7 +244,7 @@ static NSString * _userAgent ;
 		NSUInteger  modifierFlag = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntegerValue];
 		BOOL useAlternateBrowser = (modifierFlag & NSAlternateKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
 		[listener ignore];
-		[controller openURL:request.URL inPreferredBrowser:!useAlternateBrowser];
+		[APPCONTROLLER openURL:request.URL inPreferredBrowser:!useAlternateBrowser];
 		return;
 	}
 	[listener use];
@@ -282,7 +272,7 @@ static NSString * _userAgent ;
 		if (openLinksInNewBrowser || (modifierFlags & NSCommandKeyMask))
 		{
 			[listener ignore];
-			[controller openURL:request.URL inPreferredBrowser:!useAlternateBrowser];
+			[APPCONTROLLER openURL:request.URL inPreferredBrowser:!useAlternateBrowser];
 			return;
 		}
 		else
@@ -291,7 +281,7 @@ static NSString * _userAgent ;
 			if (prefs.openLinksInVienna == useAlternateBrowser)
 			{
 				[listener ignore];
-				[controller openURLInDefaultBrowser:request.URL];
+				[APPCONTROLLER openURLInDefaultBrowser:request.URL];
 				return;
 			}
 		}
