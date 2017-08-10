@@ -171,7 +171,7 @@ enum DirectoryMonitorError: LocalizedError {
 private extension FSEventStreamRef {
 
     init(allocator: CFAllocator? = kCFAllocatorDefault, callback: @escaping FSEventStreamCallback, context: UnsafeMutablePointer<FSEventStreamContext>? = nil, directories: [URL], startAt: FSEventStreamEventId = .now, latency: TimeInterval = 0, configuration: FileSystemEventStreamConfiguration = .none) throws {
-        let directories = directories.map({ $0.path as CFString }) as CFArray
+        let directories = directories.map { $0.path as CFString } as CFArray
 
         if let stream = FSEventStreamCreate(allocator, callback, context, directories, startAt, latency, configuration.rawValue) {
             self = stream
