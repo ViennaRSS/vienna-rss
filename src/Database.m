@@ -97,7 +97,10 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         	if (dbPath != nil)
         		_databaseQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
         }
-        [self initialiseDatabase];
+        if (![self initialiseDatabase])
+		{
+			self = nil;
+		}
     }
     return self;
 }
