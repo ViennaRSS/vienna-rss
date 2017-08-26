@@ -132,7 +132,8 @@
 	
 	// Create report and condensed view attribute dictionaries
 	NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-	style.lineBreakMode = NSLineBreakByClipping;
+	style.lineBreakMode = NSLineBreakByTruncatingTail;
+	style.tighteningFactorForTruncation = 0.0;
 	
 	reportCellDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, nil];
 	unreadReportCellDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, nil];
