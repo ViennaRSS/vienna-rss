@@ -79,17 +79,16 @@
 	enclosureURLString = [cleanedUpAndEscapedUrlFromString(newFilename) absoluteString];
 
 	NSString * basename = [NSURL URLWithString:enclosureURLString].lastPathComponent;
-    NSString * decodedname = [basename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString * ext = decodedname.pathExtension;
-
 	if (basename==nil)
 	{
 		return;
 	}
+	
+	NSString * ext = basename.pathExtension;
 
 	// Find the file's likely location in Finder and see if it is already there.
 	// We'll set the options in the pane based on whether the file is there or not.
-	NSString * destPath = [DownloadManager fullDownloadPath:decodedname];
+	NSString * destPath = [DownloadManager fullDownloadPath:basename];
 	if (![DownloadManager isFileDownloaded:destPath])
 	{
 		[downloadButton setTitle:NSLocalizedString(@"Download", nil)];
@@ -135,7 +134,7 @@
 									 NSForegroundColorAttributeName: [NSColor colorWithCalibratedHue:240.0f/360.0f saturation:1.0f brightness:0.75f alpha:1.0f],
 									 NSUnderlineStyleAttributeName: @YES,
 									 };
-	NSAttributedString * link = [[NSAttributedString alloc] initWithString:decodedname attributes:linkAttributes];
+	NSAttributedString * link = [[NSAttributedString alloc] initWithString:basename attributes:linkAttributes];
 	filenameField.attributedStringValue = link;
 }
 
@@ -153,8 +152,7 @@
 -(IBAction)openFile:(id)sender
 {
 	NSString * basename = [NSURL URLWithString:enclosureURLString].lastPathComponent;
-    NSString * decodedname = [basename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-	NSString * destPath = [DownloadManager fullDownloadPath:decodedname];
+	NSString * destPath = [DownloadManager fullDownloadPath:basename];
 
 	[[NSWorkspace sharedWorkspace] openFile:destPath];
 }
