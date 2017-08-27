@@ -355,14 +355,13 @@
 +(NSString *)fullDownloadPath:(NSString *)filename
 {
 	NSString * downloadPath = [Preferences standardPreferences].downloadFolder;
-    NSString * decodedFilename = [filename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	NSFileManager * fileManager = [NSFileManager defaultManager];
 	BOOL isDir = YES;
 
 	if (![fileManager fileExistsAtPath:downloadPath isDirectory:&isDir] || !isDir)
 		downloadPath = @"~/Desktop";
 	
-	return [downloadPath.stringByExpandingTildeInPath stringByAppendingPathComponent:decodedFilename];
+	return [downloadPath.stringByExpandingTildeInPath stringByAppendingPathComponent:filename];
 }
 
 /* isFileDownloaded
@@ -371,17 +370,16 @@
  */
 +(BOOL)isFileDownloaded:(NSString *)filename
 {
-    NSString * decodedFilename = [filename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	DownloadManager * downloadManager = [DownloadManager sharedInstance];
 	NSInteger count = downloadManager.downloadsList.count;
 	NSInteger index;
 
-	NSString * firstFile = decodedFilename.stringByStandardizingPath;
+	NSString * firstFile = filename.stringByStandardizingPath;
 
 	for (index = 0; index < count; ++index)
 	{
 		DownloadItem * item = downloadManager.downloadsList[index];
-		NSString * secondFile = decodedFilename.stringByStandardizingPath;
+		NSString * secondFile = filename.stringByStandardizingPath;
 		
 		if ([firstFile compare:secondFile options:NSCaseInsensitiveSearch] == NSOrderedSame)
 		{
