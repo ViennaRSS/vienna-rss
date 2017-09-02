@@ -706,9 +706,9 @@
 	NSInteger rowIndex = 0;
 	BOOL found = NO;
 
-	[articleList deselectAll:self];
 	if (guid == nil)
 	{
+	    [articleList deselectAll:self];
 	    [articleList scrollRowToVisible:0];
 	    return NO;
 	}
@@ -723,6 +723,9 @@
 		}
 		++rowIndex;
 	}
+    if (!found) {
+        [articleList deselectAll:self];
+    }
 	return found;
 }
 
