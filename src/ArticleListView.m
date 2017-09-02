@@ -773,9 +773,9 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	NSInteger rowIndex = 0;
 	BOOL found = NO;
 
-	[articleList deselectAll:self];
 	if (guid == nil)
 	{
+	    [articleList deselectAll:self];
 	    [articleList scrollRowToVisible:0];
 	    return NO;
 	}
@@ -790,6 +790,9 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		}
 		++rowIndex;
 	}
+    if (!found) {
+        [articleList deselectAll:self];
+    }
 	return found;
 }
 
