@@ -336,11 +336,13 @@
  */
 -(void)sortArticles
 {
+	Article * currentSelectedArticle = mainArticleView.selectedArticle;
 	NSArray * sortedArrayOfArticles;
 
 	sortedArrayOfArticles = [currentArrayOfArticles sortedArrayUsingDescriptors:[Preferences standardPreferences].articleSortDescriptors];
 	NSAssert([sortedArrayOfArticles count] == [currentArrayOfArticles count], @"Lost articles from currentArrayOfArticles during sort");
 	self.currentArrayOfArticles = sortedArrayOfArticles;
+	[mainArticleView scrollToArticle:currentSelectedArticle.guid];
 }
 
 /* displayFirstUnread
