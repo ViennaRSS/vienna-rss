@@ -88,7 +88,10 @@ const NSInteger MA_Current_DB_Version = 19;
         	if (dbPath != nil)
         		databaseQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
         }
-        [self initialiseDatabase];
+        if (![self initialiseDatabase])
+		{
+			self = nil;
+		}
     }
     return self;
 }
