@@ -53,6 +53,8 @@
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>Vienna</string>
+	<key>LSFileQuarantineEnabled</key>
+	<true/>
 	<key>CFBundleHelpBookFolder</key>
 	<string>Vienna.help</string>
 	<key>CFBundleHelpBookName</key>
