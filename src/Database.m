@@ -1754,6 +1754,8 @@ const NSInteger MA_Current_DB_Version = 19;
                 NSInteger newItemId = [results stringForColumnIndex:0].integerValue;
                 NSInteger newParentId = [results stringForColumnIndex:1].integerValue;
                 NSString * name = [results stringForColumnIndex:2];
+				if (name == nil) // Paranoid check because of https://github.com/ViennaRSS/vienna-rss/issues/877
+					name = [Database untitledFeedFolderName];
                 NSInteger unreadCount = [results stringForColumnIndex:3].integerValue;
                 NSDate * lastUpdate = [NSDate dateWithTimeIntervalSince1970:[results stringForColumnIndex:4].doubleValue];
                 NSInteger type = [results stringForColumnIndex:5].integerValue;

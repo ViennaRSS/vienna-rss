@@ -971,7 +971,7 @@
 			
             
 			// A notify is only needed if we added any new articles.
-			if ([folder.name hasPrefix:[Database untitledFeedFolderName]] && !feedTitle.blank)
+			if (feedTitle != nil  && !feedTitle.blank && [folder.name hasPrefix:[Database untitledFeedFolderName]])
 			{
 				// If there's an existing feed with this title, make ours unique
 				// BUGBUG: This duplicates logic in database.m so consider moving it there.
