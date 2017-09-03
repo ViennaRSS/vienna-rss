@@ -1123,6 +1123,8 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = YES;		
 
+    Article * currentSelectedArticle = self.selectedArticle;
+
     switch (refreshFlag)
     {
         case MA_Refresh_RedrawList:
@@ -1137,6 +1139,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
     }
 
 	[articleList reloadData];
+    [self scrollToArticle:currentSelectedArticle.guid];
 
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = NO;		
