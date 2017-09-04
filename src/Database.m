@@ -1702,14 +1702,6 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(NSInteger)addSmartFolder:(NSString *)folderName underParent:(NSInteger)parentId withQuery:(CriteriaTree *)criteriaTree
 {
-	Folder * folder = [self folderFromName:folderName];
-
-	if (folder)
-	{
-		[self updateSearchFolder:folder.itemId withFolder:folderName withQuery:criteriaTree];
-		return folder.itemId;
-	}
-
 	NSInteger folderId = [self addFolder:parentId afterChild:0 folderName:folderName type:VNAFolderTypeSmart canAppendIndex:NO];
 	if (folderId != -1)
 	{
