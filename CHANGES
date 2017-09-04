@@ -8,6 +8,15 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.12
+------
+- Fix crashes induced by some URLs
+- Fix crash on macOS 10.13 High Sierra related to Activity window
+- Fix unwanted reload of the article currently being read during sync
+- Fix selection of current article on change of sort criterion/order
+- Fix bug where Vienna doesn't quit when you press ‘Quit Vienna’ in the Database Upgrade window
+- Truncate long text items with an ellipsis
+
 3.1.11
 ------
 - Fix deleting article from smart folder or filtered folder
