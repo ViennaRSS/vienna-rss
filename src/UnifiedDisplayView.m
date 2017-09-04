@@ -657,6 +657,8 @@
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = YES;
 
+    Article * currentSelectedArticle = self.selectedArticle;
+
     switch (refreshFlag)
     {
         case MA_Refresh_RedrawList:
@@ -671,6 +673,7 @@
     }
 
 	[articleList reloadData];
+    [self scrollToArticle:currentSelectedArticle.guid];
 
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = NO;
