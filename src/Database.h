@@ -92,7 +92,7 @@ extern NSNotificationName const databaseDidDeleteFolderNotification;
 // Smart folder functions
 -(void)initSmartfoldersDict;
 -(NSInteger)addSmartFolder:(NSString *)folderName underParent:(NSInteger)parentId withQuery:(CriteriaTree *)criteriaTree;
--(BOOL)updateSearchFolder:(NSInteger)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree;
+-(void)updateSearchFolder:(NSInteger)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree;
 -(CriteriaTree *)searchStringForSmartFolder:(NSInteger)folderId;
 -(NSString *)criteriaToSQL:(CriteriaTree *)criteriaTree;
 
