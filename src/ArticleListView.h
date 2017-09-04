@@ -36,13 +36,11 @@
 	IBOutlet NSSplitView * splitView2;
 	IBOutlet EnclosureView * enclosureView;
 
-	NSInteger currentSelectedRow;
 	NSInteger tableLayout;
 	BOOL isAppInitialising;
 	BOOL isChangingOrientation;
 	BOOL isInTableInit;
 	BOOL blockSelectionHandler;
-	BOOL blockMarkRead;
 
 	NSTimer * markReadTimer;
 	NSFont * articleListFont;

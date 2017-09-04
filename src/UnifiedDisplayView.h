@@ -30,9 +30,6 @@
 {
     IBOutlet ExtendedTableView *articleList;
 
-	NSInteger currentSelectedRow;
-	BOOL blockSelectionHandler;
-
 	NSTimer * markReadTimer;
 
 	NSMutableArray * rowHeightArray;
