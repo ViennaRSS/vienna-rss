@@ -41,7 +41,7 @@
 	-(void)initSearchSheet:(NSString *)folderName;
 	-(void)displaySearchSheet:(NSWindow *)window;
 	-(void)initForField:(NSString *)fieldName inRow:(NSView *)row;
-	-(void)setOperatorsPopup:(NSPopUpButton *)popUpButton, ...;
+	-(void)setOperatorsPopup:(NSPopUpButton *)popUpButton operators:(NSArray *)operators;
 	-(void)addCriteria:(NSUInteger)index;
 	-(void)addDefaultCriteria:(NSInteger)index;
 	-(void)removeCriteria:(NSInteger)index;
@@ -335,46 +335,46 @@
 	switch (field.type)
 	{
 		case MA_FieldType_Flag:
-			[self setOperatorsPopup:theOperatorPopup,
-									MA_CritOper_Is,
-									0];
+			[self setOperatorsPopup:theOperatorPopup operators:@[
+									@(MA_CritOper_Is)]
+									];
 			break;
 
 		case MA_FieldType_Folder:
-			[self setOperatorsPopup:theOperatorPopup,
-									MA_CritOper_Is,
-									MA_CritOper_IsNot,
-									0];
+			[self setOperatorsPopup:theOperatorPopup operators:@[
+									@(MA_CritOper_Is),
+									@(MA_CritOper_IsNot)]
+									];
 			break;
 
 		case MA_FieldType_String:
-			[self setOperatorsPopup:theOperatorPopup,
-									MA_CritOper_Is,
-									MA_CritOper_IsNot,
-									MA_CritOper_Contains,
-									MA_CritOper_NotContains,
-									0];
+			[self setOperatorsPopup:theOperatorPopup operators:@[
+									@(MA_CritOper_Is),
+									@(MA_CritOper_IsNot),
+									@(MA_CritOper_Contains),
+									@(MA_CritOper_NotContains)]
+									];
 			break;
 
 		case MA_FieldType_Integer:
-			[self setOperatorsPopup:theOperatorPopup,
-									MA_CritOper_Is,
-									MA_CritOper_IsNot,
-									MA_CritOper_IsGreaterThan,
-									MA_CritOper_IsGreaterThanOrEqual,
-									MA_CritOper_IsLessThan,
-									MA_CritOper_IsLessThanOrEqual,
-									0];
+			[self setOperatorsPopup:theOperatorPopup operators:@[
+									@(MA_CritOper_Is),
+									@(MA_CritOper_IsNot),
+									@(MA_CritOper_IsGreaterThan),
+									@(MA_CritOper_IsGreaterThanOrEqual),
+									@(MA_CritOper_IsLessThan),
+									@(MA_CritOper_IsLessThanOrEqual)]
+									];
 			break;
 
 		case MA_FieldType_Date:
-			[self setOperatorsPopup:theOperatorPopup,
-									MA_CritOper_Is,
-									MA_CritOper_IsAfter,
-									MA_CritOper_IsBefore,
-									MA_CritOper_IsOnOrAfter,
-									MA_CritOper_IsOnOrBefore,
-									0];
+			[self setOperatorsPopup:theOperatorPopup operators:@[
+									@(MA_CritOper_Is),
+									@(MA_CritOper_IsAfter),
+									@(MA_CritOper_IsBefore),
+									@(MA_CritOper_IsOnOrAfter),
+									@(MA_CritOper_IsOnOrBefore)]
+									];
 			break;
 	}
 
@@ -395,14 +395,11 @@
 /* setOperatorsPopup
  * Fills the specified pop up button field with a list of valid operators.
  */
--(void)setOperatorsPopup:(NSPopUpButton *)popUpButton, ...
+-(void)setOperatorsPopup:(NSPopUpButton *)popUpButton operators:(NSArray *)operators
 {
-	va_list arguments;
-	va_start(arguments, popUpButton);
-	CriteriaOperator operator;
-
-	while ((operator = va_arg(arguments, NSInteger)) != 0)
+	for ( NSNumber * number in operators )
 	{
+		CriteriaOperator operator = [number integerValue];
 		NSString * operatorString = NSLocalizedString([Criteria stringFromOperator:operator], nil);
 		[popUpButton addItemWithTag:operatorString tag:operator];
 	}
