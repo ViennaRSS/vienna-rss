@@ -1677,14 +1677,6 @@ const NSInteger MA_Current_DB_Version = 19;
  */
 -(NSInteger)addSmartFolder:(NSString *)folderName underParent:(NSInteger)parentId withQuery:(CriteriaTree *)criteriaTree
 {
-	Folder * folder = [self folderFromName:folderName];
-
-	if (folder)
-	{
-		[self updateSearchFolder:folder.itemId withFolder:folderName withQuery:criteriaTree];
-		return folder.itemId;
-	}
-
 	NSInteger folderId = [self addFolder:parentId afterChild:0 folderName:folderName type:MA_Smart_Folder canAppendIndex:NO];
 	if (folderId != -1)
 	{
