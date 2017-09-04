@@ -1703,7 +1703,7 @@ const NSInteger MA_Current_DB_Version = 19;
 /* updateSearchFolder
  * Updates the search string for the specified folder.
  */
--(BOOL)updateSearchFolder:(NSInteger)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree
+-(void)updateSearchFolder:(NSInteger)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree
 {
 	Folder * folder = [self folderFromID:folderId];
     if (![folder.name isEqualToString:folderName]) {
@@ -1721,9 +1721,8 @@ const NSInteger MA_Current_DB_Version = 19;
 	smartfoldersDict[@(folderId)] = criteriaTree;
 	
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
+	[nc postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange"
                                       object:@(folderId)];
-	return YES;
 }
 
 /* initFolderArray
