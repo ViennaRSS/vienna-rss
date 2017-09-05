@@ -2602,8 +2602,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	[self.browserView setActiveTabToPrimaryTab];
 	if (db.countOfUnread > 0)
+	{
+		[self.mainWindow makeFirstResponder:[self.browserView primaryTabItemView].mainView];
 		[self.articleController displayFirstUnread];
-	[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [self.browserView primaryTabItemView].mainView : self.foldersTree.mainView];
+	}
+	else
+	{
+		[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [self.browserView primaryTabItemView].mainView : self.foldersTree.mainView];
+	}
 }
 
 /* viewNextUnread
@@ -2613,8 +2619,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	[self.browserView setActiveTabToPrimaryTab];
 	if (db.countOfUnread > 0)
+	{
+		[self.mainWindow makeFirstResponder:[self.browserView primaryTabItemView].mainView];
 		[self.articleController displayNextUnread];
-	[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [self.browserView primaryTabItemView].mainView : self.foldersTree.mainView];
+	}
+	else
+	{
+		[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [self.browserView primaryTabItemView].mainView : self.foldersTree.mainView];
+	}
 }
 
 /* clearUndoStack
