@@ -2766,7 +2766,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders
 {
 	if (!db.readOnly)
-		[articleController markAllReadByArray:arrayOfFolders withUndo:YES withRefresh:YES];
+		[articleController markAllFoldersReadByArray:arrayOfFolders];
 }
 
 /* createNewGoogleReaderSubscription
@@ -3054,7 +3054,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	if (!db.readOnly)
 	{
-		[articleController markAllReadByArray:foldersTree.selectedFolders withUndo:YES withRefresh:YES];
+		[articleController markAllFoldersReadByArray:foldersTree.selectedFolders];
 		NSInteger nextFolderInTree = [foldersTree nextFolderWithUnread:articleController.currentFolderId];
 		[foldersTree selectFolder:nextFolderInTree];
         [articleController ensureSelectedArticle:NO];
@@ -3069,7 +3069,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)markAllRead:(id)sender
 {
 	if (!db.readOnly)
-		[articleController markAllReadByArray:foldersTree.selectedFolders withUndo:YES withRefresh:YES];
+		[articleController markAllFoldersReadByArray:foldersTree.selectedFolders];
 }
 
 /* markAllSubscriptionsRead
@@ -3079,7 +3079,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	if (!db.readOnly)
 	{
-		[articleController markAllReadByArray:[foldersTree folders:0] withUndo:YES withRefresh:YES];
+		[articleController markAllFoldersReadByArray:[foldersTree folders:0]];
 	}
 }
 
