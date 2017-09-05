@@ -2409,7 +2409,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders
 {
     if (!db.readOnly) {
-		[self.articleController markAllReadByArray:arrayOfFolders withUndo:YES withRefresh:YES];
+        [self.articleController markAllFoldersReadByArray:arrayOfFolders];
     }
 }
 
@@ -2646,7 +2646,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	if (!db.readOnly)
 	{
-		[self.articleController markAllReadByArray:self.foldersTree.selectedFolders withUndo:YES withRefresh:YES];
+		[self.articleController markAllFoldersReadByArray:self.foldersTree.selectedFolders];
 		NSInteger nextFolderInTree = [self.foldersTree nextFolderWithUnread:self.articleController.currentFolderId];
 		[self.foldersTree selectFolder:nextFolderInTree];
         [self.articleController ensureSelectedArticle:NO];
@@ -2661,7 +2661,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)markAllRead:(id)sender
 {
     if (!db.readOnly) {
-		[self.articleController markAllReadByArray:self.foldersTree.selectedFolders withUndo:YES withRefresh:YES];
+        [self.articleController markAllFoldersReadByArray:self.foldersTree.selectedFolders];
     }
 }
 
@@ -2672,7 +2672,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	if (!db.readOnly)
 	{
-		[self.articleController markAllReadByArray:[self.foldersTree folders:0] withUndo:YES withRefresh:YES];
+		[self.articleController markAllFoldersReadByArray:[self.foldersTree folders:0]];
 	}
 }
 

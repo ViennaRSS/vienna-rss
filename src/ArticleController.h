@@ -90,7 +90,7 @@
 -(void)deleteArticlesByArray:(NSArray *)articleArray;
 -(void)markReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
 -(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag;
--(void)markAllReadByArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag withRefresh:(BOOL)refreshFlag;
+-(void)markAllFoldersReadByArray:(NSArray *)folderArray;
 -(void)markDeletedByArray:(NSArray *)articleArray deleteFlag:(BOOL)deleteFlag;
 -(void)markFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged;
 -(void)selectFolderAndArticle:(NSInteger)folderId guid:(NSString *)guid;

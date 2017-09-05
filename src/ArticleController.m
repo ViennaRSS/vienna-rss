@@ -37,7 +37,6 @@
 
 -(NSArray *)applyFilter:(NSArray *)unfilteredArray;
 -(void)setSortColumnIdentifier:(NSString *)str;
--(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag;
 -(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
 -(void)innerMarkFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged;
 
@@ -862,45 +861,49 @@
 	[self markAllReadByReferencesArray:(NSArray *)anObject readFlag:YES];
 }
 
-/* markAllReadByArray
- * Given an array of folders, mark all the articles in those folders as read and
- * return a reference array listing all the articles that were actually marked.
+/* markAllFoldersReadByArray
+ * Given an array of folders, mark all the articles in those folders as read.
  */
--(void)markAllReadByArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag withRefresh:(BOOL)refreshFlag
+-(void)markAllFoldersReadByArray:(NSArray *)folderArray
 {
-	NSArray * refArray = [self wrappedMarkAllReadInArray:folderArray withUndo:undoFlag];
+	NSArray * refArray = [self wrappedMarkAllFoldersReadInArray:folderArray];
 	if (refArray != nil && refArray.count > 0)
 	{
 		NSUndoManager * undoManager = NSApp.mainWindow.undoManager;
 		[undoManager registerUndoWithTarget:self selector:@selector(markAllReadUndo:) object:refArray];
 		[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
 	}
-
-    if (refreshFlag) {
-		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
-    }
+	
+	// Smart and Search folders are not included in folderArray when you mark all subscriptions read,
+	// so we need to mark articles read if they're the current folder.
+	Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
+	if (currentFolder != nil && ![folderArray containsObject:currentFolder])
+	{
+		for (Article * theArticle in folderArrayOfArticles)
+			[theArticle markRead:YES];
+	}
+	
+	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 }
 
-/* wrappedMarkAllReadInArray
+/* wrappedMarkAllFoldersReadInArray
  * Given an array of folders, mark all the articles in those folders as read and
  * return a reference array listing all the articles that were actually marked.
  */
--(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag
+-(NSArray *)wrappedMarkAllFoldersReadInArray:(NSArray *)folderArray
 {
 	NSMutableArray * refArray = [NSMutableArray array];
 	
 	for (Folder * folder in folderArray)
 	{
 		NSInteger folderId = folder.itemId;
-		if (folder.type == VNAFolderTypeGroup && undoFlag)
+		if (folder.type == VNAFolderTypeGroup)
 		{
-			[refArray addObjectsFromArray:[self wrappedMarkAllReadInArray:[[Database sharedManager] arrayOfFolders:folderId] withUndo:undoFlag]];
+			[refArray addObjectsFromArray:[self wrappedMarkAllFoldersReadInArray:[[Database sharedManager] arrayOfFolders:folderId]]];
 		}
 		else if (folder.type == VNAFolderTypeRSS)
 		{
-            if (undoFlag) {
-				[refArray addObjectsFromArray:[folder arrayOfUnreadArticlesRefs]];
-            }
+			[refArray addObjectsFromArray:[folder arrayOfUnreadArticlesRefs]];
 			if ([[Database sharedManager] markFolderRead:folderId]) {
 				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
 																	object:@(folderId)];
@@ -909,16 +912,14 @@
 		else if (folder.type == VNAFolderTypeOpenReader)
 		{
 			NSArray * articleArray = [folder arrayOfUnreadArticlesRefs];
-            if (undoFlag) {
-				[refArray addObjectsFromArray:articleArray];
-            }
+			[refArray addObjectsFromArray:articleArray];
 			[self innerMarkReadByRefsArray:articleArray readFlag:YES];
 		}
 		else
 		{
 			// For smart folders, we only mark all read the current folder to
 			// simplify things.
-			if (undoFlag && folderId == currentFolderId)
+			if (folderId == currentFolderId)
 			{
 				[refArray addObjectsFromArray:currentArrayOfArticles];
 				[self innerMarkReadByArray:currentArrayOfArticles readFlag:YES];
