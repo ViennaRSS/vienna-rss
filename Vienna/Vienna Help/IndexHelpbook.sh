@@ -2,7 +2,7 @@
 
 # Config
 lprojDir="${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
-lprojList=$(\ls -1 ${lprojDir} | sed -n 's:\.lproj$:&:p' | sed -e 's:\.lproj::')
+lprojList=$(\ls -1 "${lprojDir}" | sed -n 's:\.lproj$:&:p' | sed -e 's:\.lproj::')
 
 
 # Copy and index the help files.
