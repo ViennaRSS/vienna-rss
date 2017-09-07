@@ -832,7 +832,7 @@
 	[self markAllReadByReferencesArray:(NSArray *)anObject readFlag:YES];
 }
 
-/* markAllReadByArray
+/* markAllFoldersReadByArray
  * Given an array of folders, mark all the articles in those folders as read.
  */
 -(void)markAllFoldersReadByArray:(NSArray *)folderArray
@@ -857,7 +857,7 @@
 	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 }
 
-/* wrappedMarkAllReadInArray
+/* wrappedMarkAllFoldersReadInArray
  * Given an array of folders, mark all the articles in those folders as read and
  * return a reference array listing all the articles that were actually marked.
  */
