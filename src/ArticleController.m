@@ -431,9 +431,13 @@
  */
 -(void)displayFolder:(NSInteger)newFolderId
 {
-	articleToPreserve = nil;
 	if (currentFolderId != newFolderId && newFolderId != 0)
 	{
+		// Deselect all in current folder.
+		// Otherwise, the new folder might attempt to preserve selection.
+		// This can happen with smart folders, which have the same articles as other folders.
+		[mainArticleView scrollToArticle:nil];
+		
 		currentFolderId = newFolderId;
 		[self reloadArrayOfArticles];
 	}
@@ -468,8 +472,6 @@
  */
 -(void)reloadArrayOfArticles
 {
-    Article * article = mainArticleView.selectedArticle;
-
 	reloadArrayOfArticlesSemaphor++;
 	[mainArticleView startLoadIndicator];
 
@@ -480,41 +482,46 @@
 	    {
             [mainArticleView stopLoadIndicator];
             self.folderArrayOfArticles = resultArray;
-            // preserve mainArticleView's selection
-            if (guidOfArticleToSelect == nil && article == articleToPreserve) {
-                guidOfArticleToSelect = articleToPreserve.guid;
-            }
-            [self refilterArrayOfArticles];
-            [self sortArticles];
-            [mainArticleView refreshFolder:MA_Refresh_RedrawList];
-            if (firstUnreadArticleRequired)
+			Article * article = self.selectedArticle;
+			
+			if (shouldPreserveSelectedArticle)
+			{
+				if (article != nil && article.read && !article.deleted)
+				{
+					articleToPreserve = article;
+				}
+				shouldPreserveSelectedArticle = NO;
+			}
+			
+            [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
+			
+			if (guidOfArticleToSelect != nil )
+			{
+				[mainArticleView scrollToArticle:guidOfArticleToSelect];
+				guidOfArticleToSelect = nil;
+			}
+            else if (firstUnreadArticleRequired)
             {
                 [mainArticleView selectFirstUnreadInFolder];
+				firstUnreadArticleRequired = NO;
             }
-            else
-            {
-                [mainArticleView scrollToArticle:guidOfArticleToSelect];
-            }
+			
             if (requireSelectArticleAfterReload)
             {
                 [self ensureSelectedArticle:NO];
+				requireSelectArticleAfterReload = NO;
             }
 
             // To avoid upsetting the current displayed article after a refresh,
             // we check to see if the selected article is the same
             // and if it has been updated
-            Article * currentArticle = mainArticleView.selectedArticle;
-            if ( guidOfArticleToSelect == nil ||
-                 ( currentArticle == article &&
-                   [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]
-                   && currentArticle.revised && !currentArticle.read ) )
+            Article * currentArticle = self.selectedArticle;
+			if ( currentArticle == article &&
+				[[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]
+				&& currentArticle.revised && !currentArticle.read )
 			{
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
             }
-
-			guidOfArticleToSelect = nil;
-			firstUnreadArticleRequired = NO;
-			requireSelectArticleAfterReload = NO;
 		}
 	}];
 }
@@ -552,24 +559,28 @@
 {
 	NSMutableArray * filteredArray = [NSMutableArray arrayWithArray:unfilteredArray];
 	
-	NSString * guidOfArticleToPreserve = (articleToPreserve != nil) ? articleToPreserve.guid : @"";
-	NSInteger folderIdOfArticleToPreserve = articleToPreserve.folderId;
+	NSString * guidOfArticleToPreserve = articleToPreserve.guid;
 	
 	ArticleFilter * filter = [ArticleFilter filterByTag:[Preferences standardPreferences].filterMode];
 	SEL comparator = filter.comparator;
-	NSInteger count = filteredArray.count;
-	NSInteger index;
-	
-	for (index = count - 1; index >= 0; --index)
+	for (NSInteger index = filteredArray.count - 1; index >= 0; --index)
 	{
 		Article * article = filteredArray[index];
-		if ((article.folderId == folderIdOfArticleToPreserve) && [article.guid isEqualToString:guidOfArticleToPreserve])
-			guidOfArticleToPreserve = @"";
+		if (guidOfArticleToPreserve != nil 
+			&& article.folderId == articleToPreserve.folderId 
+			&& [article.guid isEqualToString:guidOfArticleToPreserve])
+		{
+			guidOfArticleToPreserve = nil;
+		}
 		else if ((comparator != nil) && !((BOOL)(NSInteger)[ArticleFilter performSelector:comparator withObject:article]))
 			[filteredArray removeObjectAtIndex:index];
 	}
 	
-	articleToPreserve=nil;
+	if (guidOfArticleToPreserve != nil)
+	{
+		[filteredArray addObject:articleToPreserve];
+	}
+	articleToPreserve = nil;
 	
 	return [filteredArray copy];
 }
@@ -1048,11 +1059,16 @@
  */
 -(void)handleArticleListContentChange:(NSNotification *)note
 {
-    if (self.selectedArticle.deleted) {
-        articleToPreserve = nil;
-    } else {
-        articleToPreserve = self.selectedArticle;
-    }
+	// With automatic refresh and automatic mark read,
+	// the article you're current reading can disappear.
+	// For example, if you're reading in the Unread Articles smart folder.
+	// So make sure the keep this article around.
+	if ([[Preferences standardPreferences] refreshFrequency] > 0
+		&& [[Preferences standardPreferences] markReadInterval] > 0.0)
+	{
+		shouldPreserveSelectedArticle = YES;
+	}
+	
     [self reloadArrayOfArticles];
 }
 

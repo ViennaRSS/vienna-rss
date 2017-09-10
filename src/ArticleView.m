@@ -48,7 +48,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 		htmlTemplate = nil;
 		cssStylesheet = nil;
 		jsScript = nil;
-		currentHTML = nil;
+		currentHTML = @"";
 
 		// Set up to be notified when style changes
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -245,13 +245,7 @@ static NSMutableDictionary * stylePathMappings = nil;
  */
 -(void)clearHTML
 {
-	// Reset current html string.
-	currentHTML = @"";
-	
-	// Load a blank HTML page.
-	NSString * htmlText = @"";
-	[self.mainFrame loadHTMLString:htmlText
-					   baseURL:[NSURL URLWithString:@""]];
+	[self setHTML:@""];
 }
 
 /* setHTML
@@ -266,9 +260,9 @@ static NSMutableDictionary * stylePathMappings = nil;
 		return;
 	
 	// Remember the current html string.
-	currentHTML = [[NSString alloc] initWithString: htmlText];
+	currentHTML = [htmlText copy];
 	
-	[self.mainFrame loadHTMLString:htmlText
+	[self.mainFrame loadHTMLString:currentHTML
 							  baseURL:[NSURL URLWithString:@"/"]];
 }
 

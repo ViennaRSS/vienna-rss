@@ -24,7 +24,7 @@
 @protocol ArticleBaseView
 	-(BOOL)selectFirstUnreadInFolder;
 	-(BOOL)viewNextUnreadInFolder;
-	-(BOOL)scrollToArticle:(NSString *)guid;
+	-(void)scrollToArticle:(NSString *)guid;
 	-(void)refreshFolder:(NSInteger)refreshFlag;
 	@property (nonatomic, readonly, strong) Article *selectedArticle;
 	@property (nonatomic, readonly, copy) NSArray *markedArticleRange;
