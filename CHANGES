@@ -8,6 +8,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.13
+------
+- Fixes related to searching and smart folders
+- Fix for selection of first article when jumping on next feed
+- Better fix for unwanted reload of the article currently being read during sync
+
 3.1.12
 ------
 - Fix crashes induced by some URLs
