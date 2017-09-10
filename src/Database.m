@@ -1677,14 +1677,6 @@ const NSInteger MA_Current_DB_Version = 19;
  */
 -(NSInteger)addSmartFolder:(NSString *)folderName underParent:(NSInteger)parentId withQuery:(CriteriaTree *)criteriaTree
 {
-	Folder * folder = [self folderFromName:folderName];
-
-	if (folder)
-	{
-		[self updateSearchFolder:folder.itemId withFolder:folderName withQuery:criteriaTree];
-		return folder.itemId;
-	}
-
 	NSInteger folderId = [self addFolder:parentId afterChild:0 folderName:folderName type:MA_Smart_Folder canAppendIndex:NO];
 	if (folderId != -1)
 	{
@@ -1703,7 +1695,7 @@ const NSInteger MA_Current_DB_Version = 19;
 /* updateSearchFolder
  * Updates the search string for the specified folder.
  */
--(BOOL)updateSearchFolder:(NSInteger)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree
+-(void)updateSearchFolder:(NSInteger)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree
 {
 	Folder * folder = [self folderFromID:folderId];
     if (![folder.name isEqualToString:folderName]) {
@@ -1721,9 +1713,8 @@ const NSInteger MA_Current_DB_Version = 19;
 	smartfoldersDict[@(folderId)] = criteriaTree;
 	
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
+	[nc postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange"
                                       object:@(folderId)];
-	return YES;
 }
 
 /* initFolderArray
@@ -2112,7 +2103,18 @@ const NSInteger MA_Current_DB_Version = 19;
 				break;
 				}
 
-			case MA_FieldType_String:
+			case MA_FieldType_String: {
+				NSString * escapedText = [self escapeSpecialCharactersInSQLString:criteria.value];
+				CriteriaOperator operator = criteria.operator;
+				if (operator == MA_CritOper_Is)
+				{
+					operatorString = @"='%@'";
+				}
+				else if (operator == MA_CritOper_IsNot)
+				{
+					operatorString = @"!='%@'";
+				}
+				
 				if (field.tag == MA_FieldID_Text)
 				{
 					// Special case for searching the text field. We always include the title field in the
@@ -2123,9 +2125,15 @@ const NSInteger MA_Current_DB_Version = 19;
 					// where op is the appropriate operator.
 					//
 					Field * titleField = [self fieldByName:MA_Field_Subject];
-					NSString * value = [NSString stringWithFormat:operatorString, criteria.value];
-					[sqlString appendFormat:@"(%@%@ or %@%@)", field.sqlField, value, titleField.sqlField, value];
-					break;
+					NSString * logicalOperator = (operator == MA_CritOper_IsNot) ? @"and" : @"or";
+					NSString * value = [NSString stringWithFormat:operatorString, escapedText];
+					[sqlString appendFormat:@"(%@%@ %@ %@%@)", field.sqlField, value, logicalOperator, titleField.sqlField, value];
+				}
+				else
+				{
+					valueString = [NSString stringWithFormat:@"%@", escapedText];
+				}
+				break;
 				}
 					
 			case MA_FieldType_Integer:
@@ -2201,6 +2209,14 @@ const NSInteger MA_Current_DB_Version = 19;
 	    return nil;
 }
 
+/* escapeSpecialCharactersInSearchString:
+ * Escapes single quote characters for SQLite.
+ */
+-(NSString *)escapeSpecialCharactersInSQLString:(NSString *)string
+{
+	return [string stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
+}
+
 /* arrayOfArticles
  * Retrieves an array containing all articles (including text) for the
  * specified folder. If folderId is zero, all folders are searched. The
@@ -2209,6 +2225,8 @@ const NSInteger MA_Current_DB_Version = 19;
  */
 -(NSArray *)arrayOfArticles:(NSInteger)folderId filterString:(NSString *)filterString
 {
+	filterString = [self escapeSpecialCharactersInSQLString:filterString];
+	
 	NSMutableArray * newArray = [NSMutableArray array];
 	NSString * filterClause = @"";
 	__weak NSString * queryString;
