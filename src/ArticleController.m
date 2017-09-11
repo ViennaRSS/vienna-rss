@@ -492,17 +492,13 @@
             self.folderArrayOfArticles = resultArray;
             Article * article = self.selectedArticle;
 
-			// Make sure selectedArticle hasn't changed since reload started.
-			if (articleToPreserve != nil && articleToPreserve != article)
+			if (shouldPreserveSelectedArticle)
 			{
 				if (article != nil && article.read && !article.deleted)
 				{
 					articleToPreserve = article;
 				}
-				else
-				{
-					articleToPreserve = nil;
-				}
+				shouldPreserveSelectedArticle = NO;
 			}
 
             [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
@@ -1066,12 +1062,10 @@
 	// the article you're current reading can disappear.
 	// For example, if you're reading in the Unread Articles smart folder.
 	// So make sure we keep this article around.
-	Article * article = self.selectedArticle;
-	if (article != nil && article.read && !article.deleted
-		&& [[Preferences standardPreferences] refreshFrequency] > 0
+	if ([[Preferences standardPreferences] refreshFrequency] > 0
 		&& [[Preferences standardPreferences] markReadInterval] > 0.0)
 	{
-		articleToPreserve = article;
+		shouldPreserveSelectedArticle = YES;
 	}
     [self reloadArrayOfArticles];
 }

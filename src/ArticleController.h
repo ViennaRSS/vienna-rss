@@ -47,6 +47,7 @@
 	NSString * sortColumnIdentifier;
 	BackTrackArray * backtrackArray;
 	BOOL isBacktracking;
+	BOOL shouldPreserveSelectedArticle;
 	Article * articleToPreserve;
 	NSString * guidOfArticleToSelect;
 	BOOL firstUnreadArticleRequired;
