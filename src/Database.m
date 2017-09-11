@@ -1652,7 +1652,13 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
             {
                 [self setFolderUnreadCount:folder adjustment:-1];
             }
-            [folder removeArticleFromCache:guid];
+			if ([folder countOfCachedArticles] > 0)
+			{
+				// If we're in a smart folder, the cached article may be different.
+				Article * cachedArticle = [folder articleFromGuid:guid];
+				[cachedArticle markDeleted:YES];
+				[folder removeArticleFromCache:guid];
+			}
             return YES;
         }
 	}
@@ -2521,7 +2527,13 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         }];
         if (isDeleted && !article.deleted) {
             [article markDeleted:YES];
-            [folder removeArticleFromCache:guid];
+			if ([folder countOfCachedArticles] > 0)
+			{
+				// If we're in a smart folder, the cached article may be different.
+				Article * cachedArticle = [folder articleFromGuid:guid];
+				[cachedArticle markDeleted:YES];
+				[folder removeArticleFromCache:guid];
+			}
         }
         else if (!isDeleted) {
             // if we undelete, allow the RSS or OpenReader folder
