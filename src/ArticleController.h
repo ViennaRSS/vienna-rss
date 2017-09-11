@@ -84,7 +84,7 @@
 -(void)refilterArrayOfArticles;
 @property (nonatomic, readonly, copy) NSString *sortColumnIdentifier;
 @property (nonatomic, readonly) BOOL sortIsAscending;
--(void)ensureSelectedArticle:(BOOL)singleSelection;
+-(void)ensureSelectedArticle;
 -(void)sortByIdentifier:(NSString *)columnName;
 -(void)sortAscending:(BOOL)newAscending;
 -(void)deleteArticlesByArray:(NSArray *)articleArray;
