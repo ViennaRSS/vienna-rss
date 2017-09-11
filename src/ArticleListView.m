@@ -444,27 +444,29 @@
 	}
 }
 
+/* selectPreviousArticle
+ * Select the previous article in the list if possible.
+ */
+-(void)selectPreviousArticle
+{
+    NSUInteger nextRow = articleList.selectedRowIndexes.firstIndex;
+    if (nextRow != NSNotFound && nextRow > 0) {
+        [self makeRowSelectedAndVisible:--nextRow];
+    } else {
+        [articleList deselectAll:self];
+    }
+}
+
 /* ensureSelectedArticle
  * Ensure that there is a selected article and that it is visible.
  */
--(void)ensureSelectedArticle:(BOOL)singleSelection
+-(void)ensureSelectedArticle
 {
-	if (singleSelection)
-	{
-		NSUInteger nextRow = articleList.selectedRowIndexes.firstIndex;
-		NSUInteger articlesCount = self.controller.articleController.allArticles.count;
-
-		if (nextRow >= articlesCount)
-			nextRow = articlesCount - 1;
-		[self makeRowSelectedAndVisible:nextRow];
-	}
-	else
-	{
-		if (articleList.selectedRow == -1)
-			[self makeRowSelectedAndVisible:0];
-		else
-			[articleList scrollRowToVisible:articleList.selectedRow];
-	}
+    if (articleList.selectedRow == -1) {
+        [self makeRowSelectedAndVisible:0];
+    } else {
+        [articleList scrollRowToVisible:articleList.selectedRow];
+    }
 }
 
 /* updateVisibleColumns

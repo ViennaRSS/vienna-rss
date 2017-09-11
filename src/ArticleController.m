@@ -163,8 +163,8 @@
 	[Preferences standardPreferences].layout = newLayout;
 	if (currentSelectedArticle != nil)
 	{
-	    [self selectFolderAndArticle:currentFolderId guid:currentSelectedArticle.guid];
-	    [self ensureSelectedArticle:NO];
+		[self selectFolderAndArticle:currentFolderId guid:currentSelectedArticle.guid];
+		[self ensureSelectedArticle];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
 	}
 
@@ -240,10 +240,10 @@
  * Ensures that an article is selected in the list and that any selected
  * article is scrolled into view.
  */
--(void)ensureSelectedArticle:(BOOL)singleSelection
+-(void)ensureSelectedArticle
 {
 	if (reloadArrayOfArticlesSemaphor <= 0) {
-	    [mainArticleView ensureSelectedArticle:singleSelection];
+	    [mainArticleView ensureSelectedArticle];
 	} else {
 	    requireSelectArticleAfterReload = YES;
 	}
@@ -515,7 +515,7 @@
 
             if (requireSelectArticleAfterReload)
             {
-                [self ensureSelectedArticle:NO];
+                [self ensureSelectedArticle];
                 requireSelectArticleAfterReload = NO;
             }
 
@@ -631,6 +631,7 @@
 	if (deleteFlag) {
 	    [self innerMarkReadByRefsArray:articleArray readFlag:YES];
         [self innerMarkFlaggedByArray:articleArray flagged:NO];
+		[mainArticleView selectPreviousArticle];
 	}
 
 	// Iterate over every selected article in the table and set the deleted
@@ -662,7 +663,7 @@
 	{
 		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 		if (currentArrayOfArticles.count > 0u)
-			[mainArticleView ensureSelectedArticle:YES];
+			[mainArticleView ensureSelectedArticle];
 		else
 			[NSApp.mainWindow makeFirstResponder:self.foldersTree.mainView];
 	}
@@ -678,6 +679,7 @@
 	NSMutableArray * folderArrayCopy = [NSMutableArray arrayWithArray:folderArrayOfArticles];
 	
 	[self innerMarkReadByRefsArray:articleArray readFlag:YES];
+	[mainArticleView selectPreviousArticle];
 
 	// Iterate over every selected article in the table and remove it from
 	// the database.
@@ -695,7 +697,7 @@
 
 	// Ensure there's a valid selection
     if (currentArrayOfArticles.count > 0u) {
-		[mainArticleView ensureSelectedArticle:YES];
+		[mainArticleView ensureSelectedArticle];
     } else {
 		[NSApp.mainWindow makeFirstResponder:self.foldersTree.mainView];
     }

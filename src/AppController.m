@@ -2246,7 +2246,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 				{
 					[self.browserView setActiveTabToPrimaryTab];
 					if (self.selectedArticle == nil)
-						[self.articleController ensureSelectedArticle:NO];
+					{
+						[self.articleController ensureSelectedArticle];
+					}
 					[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [self.browserView primaryTabItemView].mainView : self.foldersTree.mainView];
 					return YES;
 				}
@@ -2649,7 +2651,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[self.articleController markAllFoldersReadByArray:self.foldersTree.selectedFolders];
 		NSInteger nextFolderInTree = [self.foldersTree nextFolderWithUnread:self.articleController.currentFolderId];
 		[self.foldersTree selectFolder:nextFolderInTree];
-        [self.articleController ensureSelectedArticle:NO];
+        [self.articleController ensureSelectedArticle];
 	}
 }
 

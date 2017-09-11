@@ -31,7 +31,8 @@
 	@property (nonatomic, readonly, strong) Article *selectedArticle;
 	@property (nonatomic, readonly, copy) NSArray *markedArticleRange;
 	-(void)saveTableSettings;
-	-(void)ensureSelectedArticle:(BOOL)singleSelection;
+	-(void)selectPreviousArticle;
+	-(void)ensureSelectedArticle;
 	-(void)startLoadIndicator;
 	-(void)stopLoadIndicator;
 @end
