@@ -8,6 +8,10 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.14
+------
+- Fix article pane not updating on article deletion from the 'Unread Articles' folder
+
 3.1.13
 ------
 - Fixes related to searching and smart folders
