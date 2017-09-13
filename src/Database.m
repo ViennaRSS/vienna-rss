@@ -2257,35 +2257,37 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	queryString=@"select message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender,"
 		@" link, createddate, date, text, revised_flag, hasenclosure_flag, enclosure from messages";
 
-	// If folderId is zero then we're searching the entire
-	// database with or without a filter string.
-	if (folderId == 0)
-	{
-        if ([filterString isNotEqualTo:@""]) {
-			filterClause = [NSString stringWithFormat:@" where text like '%%%@%%'", filterString];
-        }
-		queryString = [NSString stringWithFormat:@"%@%@", queryString, filterClause];
-	}
-	else
+	// If folderId is zero then we're searching the entire database
+	// otherwise we need to construct a criteria tree for this folder
+	if (folderId != 0)
 	{
 		folder = [self folderFromID:folderId];
         if (folder == nil) {
 			return nil;
         }
-
-		// Construct a criteria tree for this query
 		CriteriaTree * tree = [self criteriaForFolder:folderId];
-
-        if ([filterString isNotEqualTo:@""]) {
-			filterClause = [NSString stringWithFormat:@" and (title like '%%%@%%' or text like '%%%@%%')", filterString, filterString];
-        }
-		queryString = [NSString stringWithFormat:@"%@ where (%@)%@", queryString, [self criteriaToSQL:tree], filterClause];
+		queryString = [NSString stringWithFormat:@"%@ where (%@)", queryString, [self criteriaToSQL:tree]];
 	}
+
+	// prepare filter if needed
+	if ([filterString isNotEqualTo:@""]) {
+		if (folderId == 0) {
+			filterClause = @"where (title like '%' || ? || '%' or text like '%' || ? || '%')";
+		} else {
+			filterClause = @"and (title like '%' || ? || '%' or text like '%' || ? || '%')";
+		}
+		queryString = [NSString stringWithFormat:@"%@ %@", queryString, filterClause];
+	};
 
 	// Time to run the query
     FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
-		FMResultSet * results = [db executeQuery:queryString];
+		FMResultSet * results;
+		if ([filterString isEqualTo:@""]) {
+			results = [db executeQuery:queryString];
+		} else {
+			results = [db executeQuery:queryString, filterString, filterString];
+		}
 		while ([results next])
 		{
 			Article * article = [[Article alloc] initWithGuid:[results stringForColumnIndex:0]];
