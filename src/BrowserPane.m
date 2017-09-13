@@ -791,7 +791,7 @@
                       ofObject:(id)object
                         change:(NSDictionary<NSKeyValueChangeKey,id> *)change
                        context:(void *)context {
-    if (keyPath == MAPref_ShowStatusBar) {
+    if ([keyPath isEqualToString:MAPref_ShowStatusBar]) {
         BOOL isStatusBarShown = [Preferences standardPreferences].showStatusBar;
         if (isStatusBarShown && !self.statusBar) {
             self.statusBar = [OverlayStatusBar new];
