@@ -1122,6 +1122,11 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
         case MA_Refresh_ReapplyFilter:
             [articleController refilterArrayOfArticles];
             [articleController sortArticles];
+			if (articleController.allArticles.count > 0)
+			{
+				// Don't preserve the previous scroll position after refiltering
+				[articleList scrollRowToVisible:0];
+			}
             break;
         case MA_Refresh_SortAndRedraw:
             [articleController sortArticles];
