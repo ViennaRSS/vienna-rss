@@ -1096,7 +1096,7 @@
                       ofObject:(id)object
                         change:(NSDictionary<NSKeyValueChangeKey,id> *)change
                        context:(void *)context {
-    if (keyPath == MAPref_FilterMode) {
+    if ([keyPath isEqualToString:MAPref_FilterMode]) {
         // Update the list of articles when the user changes the filter.
         @synchronized(mainArticleView) {
             [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
