@@ -786,6 +786,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	}
 	
 	[articleList deselectAll:self];
+	[articleList scrollRowToVisible:0];
 	[self refreshArticleAtCurrentRow];
 }
 
