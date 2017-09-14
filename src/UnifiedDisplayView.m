@@ -426,6 +426,7 @@
 	}
 	
 	[articleList deselectAll:self];
+	[articleList scrollRowToVisible:0];
 }
 
 #pragma mark -
