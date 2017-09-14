@@ -78,6 +78,7 @@
 @property (nonatomic, readonly, copy) NSArray *allArticles;
 -(void)displayFirstUnread;
 -(void)displayNextUnread;
+-(void)displayNextFolderWithUnread;
 @property (nonatomic, readonly, copy) NSString *searchPlaceholderString;
 -(void)reloadArrayOfArticles;
 -(void)displayFolder:(NSInteger)newFolderId;

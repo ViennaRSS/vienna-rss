@@ -2649,9 +2649,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	if (!db.readOnly)
 	{
 		[self.articleController markAllFoldersReadByArray:self.foldersTree.selectedFolders];
-		NSInteger nextFolderInTree = [self.foldersTree nextFolderWithUnread:self.articleController.currentFolderId];
-		[self.foldersTree selectFolder:nextFolderInTree];
-        [self.articleController ensureSelectedArticle];
+		if (db.countOfUnread > 0)
+		{
+			[self.articleController displayNextFolderWithUnread];
+		}
 	}
 }
 
