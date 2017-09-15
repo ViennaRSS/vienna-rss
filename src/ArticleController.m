@@ -440,10 +440,13 @@
 {
 	if (currentFolderId != newFolderId && newFolderId != 0)
 	{
-		// Deselect all in current folder.
+		// Clear all of the articles in the current folder.
+		// This will reset the scroller position and deselect all.
 		// Otherwise, the new folder might attempt to preserve selection.
 		// This can happen with smart folders, which have the same articles as other folders.
-		[mainArticleView scrollToArticle:nil];
+		self.currentArrayOfArticles = @[];
+		self.folderArrayOfArticles = @[];
+		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 
 		currentFolderId = newFolderId;
 		[self reloadArrayOfArticles];
