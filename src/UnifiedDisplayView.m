@@ -67,7 +67,6 @@
     self= [super initWithFrame:frame];
     if (self)
 	{
-		blockSelectionHandler = NO;
 		markReadTimer = nil;
 		rowHeightArray = [[NSMutableArray alloc] init];
     }
@@ -92,8 +91,6 @@
 -(void)initTableView
 {
 	// Variable initialization here
-	currentSelectedRow = -1;
-
 	articleList.backgroundColor = [NSColor whiteColor];
 	[articleList setAllowsMultipleSelection:YES];
 
@@ -408,60 +405,51 @@
 	}
 }
 
+/* selectPreviousArticle
+ * Select the previous article in the list if possible.
+ */
+-(void)selectPreviousArticle
+{
+    NSUInteger nextRow = articleList.selectedRowIndexes.firstIndex;
+    if (nextRow != NSNotFound && nextRow > 0) {
+        [self makeRowSelectedAndVisible:--nextRow];
+    } else {
+        [articleList deselectAll:self];
+    }
+}
+
 /* ensureSelectedArticle
  * Ensure that there is a selected article and that it is visible.
  */
--(void)ensureSelectedArticle:(BOOL)singleSelection
+-(void)ensureSelectedArticle
 {
-	if (singleSelection)
-	{
-		NSUInteger nextRow =articleList.selectedRowIndexes.firstIndex;
-		NSUInteger articlesCount = self.controller.articleController.allArticles.count;
-
-		currentSelectedRow = -1;
-		if (nextRow >= articlesCount)
-			nextRow = articlesCount - 1;
-		[self makeRowSelectedAndVisible:nextRow];
-	}
-	else
-	{
-		if (articleList.selectedRow == -1)
-			[self makeRowSelectedAndVisible:0];
-		else
-			[articleList scrollRowToVisible:articleList.selectedRow];
-	}
+    if (articleList.selectedRow == -1) {
+        [self makeRowSelectedAndVisible:0];
+    } else {
+        [articleList scrollRowToVisible:articleList.selectedRow];
+    }
 }
 
 /* scrollToArticle
- * Moves the selection to the specified article. Returns YES if we found the
- * article, NO otherwise.
+ * Moves the selection to the specified article.
  */
--(BOOL)scrollToArticle:(NSString *)guid
+-(void)scrollToArticle:(NSString *)guid
 {
-	NSInteger rowIndex = 0;
-	BOOL found = NO;
-
-	if (guid == nil)
+	if (guid != nil)
 	{
-	    [articleList deselectAll:self];
-	    [articleList scrollRowToVisible:0];
-	    return NO;
-	}
-
-	for (Article * thisArticle in self.controller.articleController.allArticles)
-	{
-		if ([thisArticle.guid isEqualToString:guid])
+		NSInteger rowIndex = 0;
+		for (Article * thisArticle in self.controller.articleController.allArticles)
 		{
-			[self makeRowSelectedAndVisible:rowIndex];
-			found = YES;
-			break;
+			if ([thisArticle.guid isEqualToString:guid])
+			{
+				[self makeRowSelectedAndVisible:rowIndex];
+				return;
+			}
+			++rowIndex;
 		}
-		++rowIndex;
 	}
-    if (!found) {
-        [articleList deselectAll:self];
-    }
-	return found;
+
+	[articleList deselectAll:self];
 }
 
 #pragma mark -
@@ -492,7 +480,7 @@
 	[self.controller.articleController reloadArrayOfArticles];
 
 	// This action is send continuously by the filter field, so make sure not the mark read while searching
-	if (currentSelectedRow < 0 && self.controller.articleController.allArticles.count > 0 )
+	if ([articleList selectedRow] < 0 && self.controller.articleController.allArticles.count > 0 )
 	{
 		BOOL shouldSelectArticle = YES;
 		if ([Preferences standardPreferences].markReadInterval > 0.0f)
@@ -544,9 +532,9 @@
 	Preferences * prefs = [Preferences standardPreferences];
 
 	// Remember the current folder and article
-	NSString * guid = (currentSelectedRow >= 0 && currentSelectedRow < self.controller.articleController.allArticles.count) ? [self.controller.articleController.allArticles[currentSelectedRow] guid] : @"";
+	NSString * guid = [self.selectedArticle guid];
 	[prefs setInteger:self.controller.articleController.currentFolderId forKey:MAPref_CachedFolderID];
-	[prefs setString:guid forKey:MAPref_CachedArticleGUID];
+	[prefs setString:(guid != nil ? guid : @"") forKey:MAPref_CachedArticleGUID];
 }
 
 /* handleKeyDown [delegate]
@@ -571,6 +559,7 @@
  */
 -(Article *)selectedArticle
 {
+	NSInteger currentSelectedRow = articleList.selectedRow;
 	return (currentSelectedRow >= 0 && currentSelectedRow < self.controller.articleController.allArticles.count) ? self.controller.articleController.allArticles[currentSelectedRow] : nil;
 }
 
@@ -601,15 +590,11 @@
 {
 	if (self.controller.articleController.allArticles.count == 0u)
 	{
-		currentSelectedRow = -1;
+		[articleList deselectAll:self];
 	}
 	else
 	{
 		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:rowIndex] byExtendingSelection:NO];
-		if (currentSelectedRow == -1 || blockSelectionHandler)
-		{
-			currentSelectedRow = rowIndex;
-		}
 		[articleList scrollRowToVisible:rowIndex];
 	}
 }
@@ -621,7 +606,7 @@
  */
 -(BOOL)viewNextUnreadInFolder
 {
-	return [self viewNextUnreadInCurrentFolder:(currentSelectedRow +1)];
+	return [self viewNextUnreadInCurrentFolder:([articleList selectedRow] + 1)];
 }
 
 /* viewNextUnreadInCurrentFolder
@@ -680,9 +665,6 @@
  */
 -(void)refreshFolder:(NSInteger)refreshFlag
 {
-	if (refreshFlag == MA_Refresh_SortAndRedraw)
-		blockSelectionHandler = YES;
-
     Article * currentSelectedArticle = self.selectedArticle;
 
     switch (refreshFlag)
@@ -700,9 +682,6 @@
 
 	[articleList reloadData];
     [self scrollToArticle:currentSelectedArticle.guid];
-
-	if (refreshFlag == MA_Refresh_SortAndRedraw)
-		blockSelectionHandler = NO;
 }
 
 /* startLoadIndicator
@@ -735,12 +714,10 @@
  */
 -(void)markCurrentRead:(NSTimer *)aTimer
 {
-	NSArray * allArticles = self.controller.articleController.allArticles;
-	if (currentSelectedRow >=0 && currentSelectedRow < (NSInteger)allArticles.count && ![Database sharedManager].readOnly)
+	Article * theArticle = self.selectedArticle;
+	if (theArticle != nil && !theArticle.read && ![Database sharedManager].readOnly)
 	{
-		Article * theArticle = allArticles[currentSelectedRow];
-		if (!theArticle.read)
-			[self.controller.articleController markReadByArray:@[theArticle] readFlag:YES];
+		[self.controller.articleController markReadByArray:@[theArticle] readFlag:YES];
 	}
 }
 
@@ -810,14 +787,10 @@
 }
 
 /* tableViewSelectionDidChange [delegate]
- * Handle the selection changing in the table view unless blockSelectionHandler is set.
+ * Handle the selection changing in the table view.
  */
 -(void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
-	if (!blockSelectionHandler)
-	{
-		currentSelectedRow = articleList.selectedRow;
-	}
 }
 
 /* copyTableSelection
@@ -933,7 +906,7 @@
 	}
 	if (menuItem.action == @selector(delete:))
 	{
-		return [self canDeleteMessageAtRow:currentSelectedRow];
+		return [self canDeleteMessageAtRow:[articleList selectedRow]];
 	}
 	if (menuItem.action == @selector(selectAll:))
 	{
@@ -973,14 +946,14 @@
 
 -(BOOL)becomeFirstResponder
 {
-    if (currentSelectedRow >= 0 && currentSelectedRow < self.controller.articleController.allArticles.count)
+	NSInteger currentSelectedRow = [articleList selectedRow];
+	if (currentSelectedRow >= 0 && currentSelectedRow < self.controller.articleController.allArticles.count)
     {
 		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:currentSelectedRow] byExtendingSelection:NO];
     }
     else if (self.controller.articleController.allArticles.count != 0u)
     {
 		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
-		currentSelectedRow = 0;
     }
 	[NSApp.mainWindow makeFirstResponder:articleList];
     return YES;
@@ -1013,10 +986,7 @@
 		// Select the row under the cursor if it isn't already selected
 		if (articleList.numberOfSelectedRows <= 1)
 		{
-			blockSelectionHandler = YES;
 			[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
-			currentSelectedRow = row;
-			blockSelectionHandler = NO;
 		}
 	}
 	[articleList scrollRowToVisible:row];

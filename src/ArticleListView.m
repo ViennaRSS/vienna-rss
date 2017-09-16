@@ -79,7 +79,6 @@
         isChangingOrientation = NO;
 		isInTableInit = NO;
 		blockSelectionHandler = NO;
-		blockMarkRead = NO;
 		markReadTimer = nil;
 		lastError = nil;
 		isCurrentPageFullHTML = NO;
@@ -273,7 +272,6 @@
 	Preferences * prefs = [Preferences standardPreferences];
 	
 	// Variable initialization here
-	currentSelectedRow = -1;
 	articleListFont = nil;
 	articleListUnreadFont = nil;
 
@@ -404,9 +402,10 @@
  */
 -(IBAction)doubleClickRow:(id)sender
 {
-	if (currentSelectedRow != -1 && articleList.clickedRow != -1)
+	NSInteger clickedRow = articleList.clickedRow;
+	if (clickedRow != -1)
 	{
-		Article * theArticle = self.controller.articleController.allArticles[currentSelectedRow];
+		Article * theArticle = self.controller.articleController.allArticles[clickedRow];
 		[self.controller openURLFromString:theArticle.link inPreferredBrowser:YES];
 	}
 }
@@ -445,28 +444,29 @@
 	}
 }
 
+/* selectPreviousArticle
+ * Select the previous article in the list if possible.
+ */
+-(void)selectPreviousArticle
+{
+    NSUInteger nextRow = articleList.selectedRowIndexes.firstIndex;
+    if (nextRow != NSNotFound && nextRow > 0) {
+        [self makeRowSelectedAndVisible:--nextRow];
+    } else {
+        [articleList deselectAll:self];
+    }
+}
+
 /* ensureSelectedArticle
  * Ensure that there is a selected article and that it is visible.
  */
--(void)ensureSelectedArticle:(BOOL)singleSelection
+-(void)ensureSelectedArticle
 {
-	if (singleSelection)
-	{
-		NSUInteger nextRow = articleList.selectedRowIndexes.firstIndex;
-		NSUInteger articlesCount = self.controller.articleController.allArticles.count;
-
-		currentSelectedRow = -1;
-		if (nextRow >= articlesCount)
-			nextRow = articlesCount - 1;
-		[self makeRowSelectedAndVisible:nextRow];
-	}
-	else
-	{
-		if (articleList.selectedRow == -1)
-			[self makeRowSelectedAndVisible:0];
-		else
-			[articleList scrollRowToVisible:articleList.selectedRow];
-	}
+    if (articleList.selectedRow == -1) {
+        [self makeRowSelectedAndVisible:0];
+    } else {
+        [articleList scrollRowToVisible:articleList.selectedRow];
+    }
 }
 
 /* updateVisibleColumns
@@ -597,9 +597,9 @@
 	Preferences * prefs = [Preferences standardPreferences];
 	
 	// Remember the current folder and article
-	NSString * guid = (currentSelectedRow >= 0 && currentSelectedRow < self.controller.articleController.allArticles.count) ? [self.controller.articleController.allArticles[currentSelectedRow] guid] : @"";
+	NSString * guid = [self.selectedArticle guid];
 	[prefs setInteger:self.controller.articleController.currentFolderId forKey:MAPref_CachedFolderID];
-	[prefs setString:guid forKey:MAPref_CachedArticleGUID];
+	[prefs setString:(guid != nil ? guid : @"") forKey:MAPref_CachedArticleGUID];
 
 	// An array we need for the settings
 	NSMutableArray * dataArray = [[NSMutableArray alloc] init];
@@ -698,35 +698,26 @@
 }
 
 /* scrollToArticle
- * Moves the selection to the specified article. Returns YES if we found the
- * article, NO otherwise.
+ * Moves the selection to the specified article.
  */
--(BOOL)scrollToArticle:(NSString *)guid
+-(void)scrollToArticle:(NSString *)guid
 {
-	NSInteger rowIndex = 0;
-	BOOL found = NO;
-
-	if (guid == nil)
+	if (guid != nil)
 	{
-	    [articleList deselectAll:self];
-	    [articleList scrollRowToVisible:0];
-	    return NO;
-	}
-
-	for (Article * thisArticle in self.controller.articleController.allArticles)
-	{
-		if ([thisArticle.guid isEqualToString:guid])
+		NSInteger rowIndex = 0;
+		for (Article * thisArticle in self.controller.articleController.allArticles)
 		{
-			[self makeRowSelectedAndVisible:rowIndex];
-			found = YES;
-			break;
+			if ([thisArticle.guid isEqualToString:guid])
+			{
+				[self makeRowSelectedAndVisible:rowIndex];
+				return;
+			}
+			++rowIndex;
 		}
-		++rowIndex;
 	}
-    if (!found) {
-        [articleList deselectAll:self];
-    }
-	return found;
+
+	[articleList deselectAll:self];
+	[self refreshArticleAtCurrentRow];
 }
 
 /* mainView
@@ -804,6 +795,7 @@
  */
 -(Article *)selectedArticle
 {
+	NSInteger currentSelectedRow = articleList.selectedRow;
 	return (currentSelectedRow >= 0 && currentSelectedRow < self.controller.articleController.allArticles.count) ? self.controller.articleController.allArticles[currentSelectedRow] : nil;
 }
 
@@ -879,24 +871,18 @@
 {
 	if (self.controller.articleController.allArticles.count == 0u)
 	{
-		currentSelectedRow = -1;
 		[articleList deselectAll:self];
 	}
-	else if (rowIndex != currentSelectedRow)
+	else if (rowIndex != [articleList selectedRow])
 	{
 		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:rowIndex] byExtendingSelection:NO];
-		if (currentSelectedRow == -1 || blockSelectionHandler)
-		{
-			currentSelectedRow = rowIndex;
-			[self refreshImmediatelyArticleAtCurrentRow];
-		}
 
 		// make sure our current selection is visible
-		[articleList scrollRowToVisible:currentSelectedRow];
+		[articleList scrollRowToVisible:rowIndex];
 		// then try to center it in the list
 		NSInteger pageSize = [articleList rowsInRect:articleList.visibleRect].length;
 		NSInteger lastRow = articleList.numberOfRows - 1;
-		NSInteger visibleRow = currentSelectedRow + (pageSize / 2);
+		NSInteger visibleRow = rowIndex + (pageSize / 2);
 
 		if (visibleRow > lastRow)
 			visibleRow = lastRow;
@@ -911,7 +897,7 @@
  */
 -(BOOL)viewNextUnreadInFolder
 {
-	return [self viewNextUnreadInCurrentFolder:(currentSelectedRow +1)];
+	return [self viewNextUnreadInCurrentFolder:([articleList selectedRow] + 1)];
 }
 
 /* viewNextUnreadInCurrentFolder
@@ -986,7 +972,7 @@
 	[self.controller.articleController reloadArrayOfArticles];
 	
 	// This action is send continuously by the filter field, so make sure not the mark read while searching
-	if (currentSelectedRow < 0 && self.controller.articleController.allArticles.count > 0 )
+	if ([articleList selectedRow] < 0 && self.controller.articleController.allArticles.count > 0 )
 	{
 		BOOL shouldSelectArticle = YES;
 		if ([Preferences standardPreferences].markReadInterval > 0.0f)
@@ -1009,8 +995,7 @@
  */
 -(void)refreshFolder:(NSInteger)refreshFlag
 {
-	if (refreshFlag == MA_Refresh_SortAndRedraw)
-		blockSelectionHandler = blockMarkRead = YES;		
+	blockSelectionHandler = YES;
 
     Article * currentSelectedArticle = self.selectedArticle;
 
@@ -1030,8 +1015,7 @@
 	[articleList reloadData];
     [self scrollToArticle:currentSelectedArticle.guid];
 
-	if (refreshFlag == MA_Refresh_SortAndRedraw)
-		blockSelectionHandler = blockMarkRead = NO;		
+	blockSelectionHandler = NO;
 }
 
 /* startLoadIndicator
@@ -1071,10 +1055,7 @@
 		// Select the row under the cursor if it isn't already selected
 		if (articleList.numberOfSelectedRows <= 1)
 		{
-			blockSelectionHandler = YES;
 			[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
-			currentSelectedRow = row;
-			blockSelectionHandler = NO;
 		}
 	}
 }
@@ -1086,23 +1067,16 @@
 {
 	[self refreshArticlePane];
 	
-	// If we mark read after an interval, start the timer here.
-	if (currentSelectedRow >= 0 && currentSelectedRow < self.controller.articleController.allArticles.count)
+	Article * theArticle = self.selectedArticle;
+	if (theArticle != nil && !theArticle.read)
 	{
-		Article * theArticle = self.controller.articleController.allArticles[currentSelectedRow];
-		if (!theArticle.read && !blockMarkRead)
-		{
-			[markReadTimer invalidate];
-			markReadTimer = nil;
-
-			CGFloat interval = [Preferences standardPreferences].markReadInterval;
-			if (interval > 0 && !isAppInitialising)
-				markReadTimer = [NSTimer scheduledTimerWithTimeInterval:(double)interval
-																  target:self
-																selector:@selector(markCurrentRead:)
-																userInfo:nil
-																 repeats:NO];
-		}
+		CGFloat interval = [Preferences standardPreferences].markReadInterval;
+		if (interval > 0 && !isAppInitialising)
+			markReadTimer = [NSTimer scheduledTimerWithTimeInterval:(double)interval
+															 target:self
+														   selector:@selector(markCurrentRead:)
+														   userInfo:nil
+															repeats:NO];
 	}
 }
 
@@ -1111,20 +1085,18 @@
  */
 -(void)refreshArticleAtCurrentRow
 {
-	if (currentSelectedRow < 0)
+	Article * article = self.selectedArticle;
+	if (article == nil)
 	{
 		[articleText clearHTML];
 		[self hideEnclosureView];
 	}
 	else
 	{
-		NSArray * allArticles = self.controller.articleController.allArticles;
-		NSAssert(currentSelectedRow < (NSInteger)[allArticles count], @"Out of range row index received");
-		
 		[self refreshImmediatelyArticleAtCurrentRow];
 		
 		// Add this to the backtrack list
-		NSString * guid = [allArticles[currentSelectedRow] guid];
+		NSString * guid = [article guid];
 		[self.controller.articleController addBacktrack:guid];
 	}
 }
@@ -1266,12 +1238,10 @@
  */
 -(void)markCurrentRead:(NSTimer *)aTimer
 {
-	NSArray * allArticles = self.controller.articleController.allArticles;
-	if (currentSelectedRow >=0 && currentSelectedRow < (NSInteger)allArticles.count && ![Database sharedManager].readOnly)
+	Article * theArticle = self.selectedArticle;
+	if (theArticle != nil && !theArticle.read && ![Database sharedManager].readOnly)
 	{
-		Article * theArticle = allArticles[currentSelectedRow];
-		if (!theArticle.read)
-			[self.controller.articleController markReadByArray:@[theArticle] readFlag:YES];
+		[self.controller.articleController markReadByArray:@[theArticle] readFlag:YES];
 	}
 }
 
@@ -1452,9 +1422,11 @@
  */
 -(void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
+	[markReadTimer invalidate];
+	markReadTimer = nil;
+
 	if (!blockSelectionHandler)
 	{
-		currentSelectedRow = articleList.selectedRow;
 		[self refreshArticleAtCurrentRow];
 	}
 }
@@ -1521,7 +1493,7 @@
 		// displayed and removed as needed.
 		if ([realCell respondsToSelector:@selector(setInProgress:forRow:)])
 		{
-			if (rowIndex == currentSelectedRow && isLoadingHTMLArticle)
+			if (rowIndex == [tv selectedRow] && isLoadingHTMLArticle)
 				[realCell setInProgress:YES forRow:rowIndex];
 			else
 				[realCell setInProgress:NO forRow:rowIndex];

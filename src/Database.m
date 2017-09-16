@@ -1652,7 +1652,13 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
             {
                 [self setFolderUnreadCount:folder adjustment:-1];
             }
-            [folder removeArticleFromCache:guid];
+			if ([folder countOfCachedArticles] > 0)
+			{
+				// If we're in a smart folder, the cached article may be different.
+				Article * cachedArticle = [folder articleFromGuid:guid];
+				[cachedArticle markDeleted:YES];
+				[folder removeArticleFromCache:guid];
+			}
             return YES;
         }
 	}
@@ -1702,14 +1708,6 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 -(NSInteger)addSmartFolder:(NSString *)folderName underParent:(NSInteger)parentId withQuery:(CriteriaTree *)criteriaTree
 {
-	Folder * folder = [self folderFromName:folderName];
-
-	if (folder)
-	{
-		[self updateSearchFolder:folder.itemId withFolder:folderName withQuery:criteriaTree];
-		return folder.itemId;
-	}
-
 	NSInteger folderId = [self addFolder:parentId afterChild:0 folderName:folderName type:VNAFolderTypeSmart canAppendIndex:NO];
 	if (folderId != -1)
 	{
@@ -1728,7 +1726,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 /* updateSearchFolder
  * Updates the search string for the specified folder.
  */
--(BOOL)updateSearchFolder:(NSInteger)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree
+-(void)updateSearchFolder:(NSInteger)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree
 {
 	Folder * folder = [self folderFromID:folderId];
     if (![folder.name isEqualToString:folderName]) {
@@ -1746,9 +1744,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	self.smartfoldersDict[@(folderId)] = criteriaTree;
 	
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
+	[nc postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange"
                                       object:@(folderId)];
-	return YES;
 }
 
 /* initFolderArray
@@ -2257,35 +2254,37 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	queryString=@"select message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender,"
 		@" link, createddate, date, text, revised_flag, hasenclosure_flag, enclosure from messages";
 
-	// If folderId is zero then we're searching the entire
-	// database with or without a filter string.
-	if (folderId == 0)
-	{
-        if ([filterString isNotEqualTo:@""]) {
-			filterClause = [NSString stringWithFormat:@" where text like '%%%@%%'", filterString];
-        }
-		queryString = [NSString stringWithFormat:@"%@%@", queryString, filterClause];
-	}
-	else
+	// If folderId is zero then we're searching the entire database
+	// otherwise we need to construct a criteria tree for this folder
+	if (folderId != 0)
 	{
 		folder = [self folderFromID:folderId];
         if (folder == nil) {
 			return nil;
         }
-
-		// Construct a criteria tree for this query
 		CriteriaTree * tree = [self criteriaForFolder:folderId];
-
-        if ([filterString isNotEqualTo:@""]) {
-			filterClause = [NSString stringWithFormat:@" and (title like '%%%@%%' or text like '%%%@%%')", filterString, filterString];
-        }
-		queryString = [NSString stringWithFormat:@"%@ where (%@)%@", queryString, [self criteriaToSQL:tree], filterClause];
+		queryString = [NSString stringWithFormat:@"%@ where (%@)", queryString, [self criteriaToSQL:tree]];
 	}
+
+	// prepare filter if needed
+	if ([filterString isNotEqualTo:@""]) {
+		if (folderId == 0) {
+			filterClause = @"where (title like '%' || ? || '%' or text like '%' || ? || '%')";
+		} else {
+			filterClause = @"and (title like '%' || ? || '%' or text like '%' || ? || '%')";
+		}
+		queryString = [NSString stringWithFormat:@"%@ %@", queryString, filterClause];
+	};
 
 	// Time to run the query
     FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
-		FMResultSet * results = [db executeQuery:queryString];
+		FMResultSet * results;
+		if ([filterString isEqualTo:@""]) {
+			results = [db executeQuery:queryString];
+		} else {
+			results = [db executeQuery:queryString, filterString, filterString];
+		}
 		while ([results next])
 		{
 			Article * article = [[Article alloc] initWithGuid:[results stringForColumnIndex:0]];
@@ -2528,7 +2527,13 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         }];
         if (isDeleted && !article.deleted) {
             [article markDeleted:YES];
-            [folder removeArticleFromCache:guid];
+			if ([folder countOfCachedArticles] > 0)
+			{
+				// If we're in a smart folder, the cached article may be different.
+				Article * cachedArticle = [folder articleFromGuid:guid];
+				[cachedArticle markDeleted:YES];
+				[folder removeArticleFromCache:guid];
+			}
         }
         else if (!isDeleted) {
             // if we undelete, allow the RSS or OpenReader folder

@@ -47,6 +47,7 @@
 	NSString * sortColumnIdentifier;
 	BackTrackArray * backtrackArray;
 	BOOL isBacktracking;
+	BOOL shouldPreserveSelectedArticle;
 	Article * articleToPreserve;
 	NSString * guidOfArticleToSelect;
 	BOOL firstUnreadArticleRequired;
@@ -83,13 +84,13 @@
 -(void)refilterArrayOfArticles;
 @property (nonatomic, readonly, copy) NSString *sortColumnIdentifier;
 @property (nonatomic, readonly) BOOL sortIsAscending;
--(void)ensureSelectedArticle:(BOOL)singleSelection;
+-(void)ensureSelectedArticle;
 -(void)sortByIdentifier:(NSString *)columnName;
 -(void)sortAscending:(BOOL)newAscending;
 -(void)deleteArticlesByArray:(NSArray *)articleArray;
 -(void)markReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
 -(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag;
--(void)markAllReadByArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag withRefresh:(BOOL)refreshFlag;
+-(void)markAllFoldersReadByArray:(NSArray *)folderArray;
 -(void)markDeletedByArray:(NSArray *)articleArray deleteFlag:(BOOL)deleteFlag;
 -(void)markFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged;
 -(void)selectFolderAndArticle:(NSInteger)folderId guid:(NSString *)guid;

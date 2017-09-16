@@ -2246,7 +2246,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 				{
 					[self.browserView setActiveTabToPrimaryTab];
 					if (self.selectedArticle == nil)
-						[self.articleController ensureSelectedArticle:NO];
+					{
+						[self.articleController ensureSelectedArticle];
+					}
 					[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [self.browserView primaryTabItemView].mainView : self.foldersTree.mainView];
 					return YES;
 				}
@@ -2409,7 +2411,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders
 {
     if (!db.readOnly) {
-		[self.articleController markAllReadByArray:arrayOfFolders withUndo:YES withRefresh:YES];
+        [self.articleController markAllFoldersReadByArray:arrayOfFolders];
     }
 }
 
@@ -2602,8 +2604,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	[self.browserView setActiveTabToPrimaryTab];
 	if (db.countOfUnread > 0)
+	{
+		[self.mainWindow makeFirstResponder:[self.browserView primaryTabItemView].mainView];
 		[self.articleController displayFirstUnread];
-	[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [self.browserView primaryTabItemView].mainView : self.foldersTree.mainView];
+	}
+	else
+	{
+		[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [self.browserView primaryTabItemView].mainView : self.foldersTree.mainView];
+	}
 }
 
 /* viewNextUnread
@@ -2613,8 +2621,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	[self.browserView setActiveTabToPrimaryTab];
 	if (db.countOfUnread > 0)
+	{
+		[self.mainWindow makeFirstResponder:[self.browserView primaryTabItemView].mainView];
 		[self.articleController displayNextUnread];
-	[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [self.browserView primaryTabItemView].mainView : self.foldersTree.mainView];
+	}
+	else
+	{
+		[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [self.browserView primaryTabItemView].mainView : self.foldersTree.mainView];
+	}
 }
 
 /* clearUndoStack
@@ -2634,10 +2648,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	if (!db.readOnly)
 	{
-		[self.articleController markAllReadByArray:self.foldersTree.selectedFolders withUndo:YES withRefresh:YES];
+		[self.articleController markAllFoldersReadByArray:self.foldersTree.selectedFolders];
 		NSInteger nextFolderInTree = [self.foldersTree nextFolderWithUnread:self.articleController.currentFolderId];
 		[self.foldersTree selectFolder:nextFolderInTree];
-        [self.articleController ensureSelectedArticle:NO];
+        [self.articleController ensureSelectedArticle];
 	}
 }
 
@@ -2649,7 +2663,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)markAllRead:(id)sender
 {
     if (!db.readOnly) {
-		[self.articleController markAllReadByArray:self.foldersTree.selectedFolders withUndo:YES withRefresh:YES];
+        [self.articleController markAllFoldersReadByArray:self.foldersTree.selectedFolders];
     }
 }
 
@@ -2660,7 +2674,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	if (!db.readOnly)
 	{
-		[self.articleController markAllReadByArray:[self.foldersTree folders:0] withUndo:YES withRefresh:YES];
+		[self.articleController markAllFoldersReadByArray:[self.foldersTree folders:0]];
 	}
 }
 
