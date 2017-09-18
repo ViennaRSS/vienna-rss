@@ -497,7 +497,7 @@
 		BOOL showField;
 		
 		// Handle which fields can be visible in the condensed (vertical) layout
-		// versus the table (horizontal) layout
+		// versus the report (horizontal) layout
 		if (tableLayout == MA_Layout_Report)
 			showField = field.visible && tag != ArticleFieldIDHeadlines && tag != ArticleFieldIDComments;
 		else
@@ -520,7 +520,8 @@
               	col.hidden = !showField;
         	}
     	}
-		// Add to the end only those columns that are visible
+		// Add to the end only those columns which should be visible
+		// and aren't created yet
 		if (showField && [articleList columnWithIdentifier:identifier]==-1)
 		{
 			NSTableColumn * column = [[NSTableColumn alloc] initWithIdentifier:identifier];
@@ -562,9 +563,14 @@
 			// Set the other column atributes.
 			[column setEditable:NO];
 			column.minWidth = 10;
-			column.maxWidth = 2000;
-			column.width = field.width;
 			[articleList addTableColumn:column];
+		}
+
+		// Set column size for visible columns
+		if (showField)
+		{
+			NSTableColumn *column = [articleList tableColumnWithIdentifier:identifier];
+			column.width = field.width;
 		}
 	}
 	
