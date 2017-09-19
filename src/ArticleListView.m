@@ -508,22 +508,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	}
 }
 
-/* selectPreviousArticle
- * Select the previous article in the list if possible.
- */
--(void)selectPreviousArticle
-{
-	NSUInteger nextRow = articleList.selectedRowIndexes.firstIndex;
-	if (nextRow != NSNotFound && nextRow > 0)
-	{
-		[self makeRowSelectedAndVisible:--nextRow];
-	}
-	else
-	{
-		[articleList deselectAll:self];
-	}
-}
-
 /* ensureSelectedArticle
  * Ensure that there is a selected article and that it is visible.
  */
