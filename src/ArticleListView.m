@@ -509,17 +509,10 @@
 				showField = YES;
 		}
 
-		// hide old columns which shouldn't be visible anymore
-		if ([articleList columnWithIdentifier:identifier]!=-1)
-		{
-			NSArray *columns = articleList.tableColumns;
+		// Set column hidden or shown
+		NSTableColumn *col = [articleList tableColumnWithIdentifier:identifier];
+		col.hidden = !showField;
 
-    		if(columns && columns.count > 0)
-    		{
-        		NSTableColumn *col = columns[[articleList columnWithIdentifier:identifier]];
-              	col.hidden = !showField;
-        	}
-    	}
 		// Add to the end only those columns which should be visible
 		// and aren't created yet
 		if (showField && [articleList columnWithIdentifier:identifier]==-1)
