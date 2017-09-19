@@ -863,8 +863,10 @@
 {
 	isChangingOrientation = YES;
 	tableLayout = newLayout;
+	splitView2.autosaveName = nil;
 	splitView2.vertical = (newLayout == MA_Layout_Condensed);
 	splitView2.dividerStyle = (splitView2.vertical ? NSSplitViewDividerStyleThin : NSSplitViewDividerStylePaneSplitter);
+	splitView2.autosaveName = (newLayout == MA_Layout_Condensed ? @"Vienna3SplitView2CondensedLayout" : @"Vienna3SplitView2ReportLayout");
 	[splitView2 display];
 	isChangingOrientation = NO;
 }
