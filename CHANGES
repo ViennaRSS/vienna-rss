@@ -11,7 +11,7 @@ Thanks!
 3.1.15
 ------
 - Fix article list not scrolling to top when selecting a folder
-- Fix 'Skip folder' to not select the first article of the following folder if in the current folder, no article is selected
+- Fix 'Skip Folder' not selecting the first unread article in the next folder with unread articles
 
 3.1.14
 ------
