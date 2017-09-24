@@ -85,15 +85,15 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 @property (nonatomic) NSInteger parentId;
 @property (nonatomic) NSInteger nextSiblingId;
 @property (nonatomic) NSInteger firstChildId;
-@property (nonatomic, readonly) NSInteger countOfCachedArticles;
-@property (nonatomic) NSInteger unreadCount;
+@property (atomic, readonly) NSInteger countOfCachedArticles;
+@property (atomic) NSInteger unreadCount;
 @property (nonatomic) VNAFolderType type;
 @property (nonatomic, readonly) VNAFolderFlag nonPersistedFlags;
 @property (nonatomic, readonly) VNAFolderFlag flags;
 @property (nonatomic, copy) NSImage *image;
 @property (nonatomic, readonly) BOOL hasCachedImage;
 -(NSImage *)standardImage;
-@property (nonatomic) NSInteger childUnreadCount;
+@property (atomic) NSInteger childUnreadCount;
 -(void)clearCache;
 @property (nonatomic, getter=isGroupFolder, readonly) BOOL groupFolder;
 @property (nonatomic, getter=isSmartFolder, readonly) BOOL smartFolder;
