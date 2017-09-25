@@ -2594,11 +2594,7 @@ const NSInteger MA_Current_DB_Version = 19;
         NSError *error;
         if (![fileManager createDirectoryAtPath:databaseFolder withIntermediateDirectories:YES attributes:NULL error:&error])
         {
-            NSRunAlertPanel(NSLocalizedString(@"Cannot create database folder", nil),
-                            [NSString stringWithFormat:NSLocalizedString(@"Cannot create database folder text: %@", nil), error],
-                            NSLocalizedString(@"Close", nil), @"", @"",
-                            databaseFolder);
-            return NO;
+			NSLog(@"Cannot create database folder: %@", error);
         }
     }
     
