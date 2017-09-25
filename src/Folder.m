@@ -128,7 +128,10 @@ static NSArray * iconArray = nil;
  */
 -(NSInteger)unreadCount
 {
-	return unreadCount;
+	@synchronized(self)
+	{
+	    return unreadCount;
+	}
 }
 
 /* type
@@ -156,7 +159,10 @@ static NSArray * iconArray = nil;
  */
 -(NSInteger)childUnreadCount
 {
-	return childUnreadCount;
+	@synchronized(self)
+	{
+	    return childUnreadCount;
+	}
 }
 
 /* feedDescription
@@ -658,7 +664,10 @@ static NSArray * iconArray = nil;
  */
 -(NSInteger)countOfCachedArticles
 {
-	return isCached ? (NSInteger)self.cachedGuids.count : -1;
+	@synchronized(self)
+	{
+	    return isCached ? (NSInteger)self.cachedGuids.count : -1;
+	}
 }
 
 /* ensureCache
