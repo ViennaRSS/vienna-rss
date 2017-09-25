@@ -8,6 +8,13 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.16
+------
+- Fix article selection after an article is deleted from within the 'Unread Articles' folder
+- Fix bugs related to multithreading
+- Fix handling of impossibility of creating the database
+- Corrected changelog text at version 3.1.15
+
 3.1.15
 ------
 - Fix article list not scrolling to top when selecting a folder
