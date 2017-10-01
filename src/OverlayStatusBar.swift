@@ -65,7 +65,7 @@ final class OverlayStatusBar: NSView {
         }
 
         if #available(OSX 10.11, *) {
-            addressField.font = .systemFont(ofSize: 12, weight: NSFontWeightMedium)
+            addressField.font = .systemFont(ofSize: 12, weight: .medium)
         } else if #available(OSX 10.10, *) {
             addressField.font = NSFont(name: "Helvetica Neue Medium", size: 12)
         } else {
@@ -97,7 +97,7 @@ final class OverlayStatusBar: NSView {
         addressField.translatesAutoresizingMaskIntoConstraints = false
 
         // The text field should always be among the first views to shrink.
-        addressField.setContentCompressionResistancePriority(NSLayoutPriorityFittingSizeCompression, for: .horizontal)
+        addressField.setContentCompressionResistancePriority(.fittingSizeCompression, for: .horizontal)
 
         addSubview(backgroundView)
         backgroundView.addSubview(addressField)
@@ -246,7 +246,7 @@ final class OverlayStatusBar: NSView {
 
     /// The label to show. Setting this property will show or hide the status
     /// bar. It will remain visible until the label is set to `nil`.
-    var label: String? {
+    @objc var label: String? {
         didSet {
             // This closure is meant to be called very often. It should not
             // cause any expensive computations.

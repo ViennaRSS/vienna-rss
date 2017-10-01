@@ -23,28 +23,28 @@ final class ExportAccessoryViewController: NSViewController {
 
     // MARK: Bindings
 
-    @objc private dynamic var exportAllFeedsRadioButtonState = NSOnState
-    @objc private dynamic var preserveFoldersCheckboxButtonState = NSOnState
+    @objc private dynamic var exportAllFeedsRadioButtonState: NSControl.StateValue = .on
+    @objc private dynamic var preserveFoldersCheckboxButtonState: NSControl.StateValue = .on
 
     // MARK: Export options
 
     /// The export mode to use.
-    var mode: ExportMode {
+    @objc var mode: ExportMode {
         get {
-            return exportAllFeedsRadioButtonState == NSOnState ? .allFeeds : .selectedFeeds
+            return exportAllFeedsRadioButtonState == .on ? .allFeeds : .selectedFeeds
         }
         set {
-            exportAllFeedsRadioButtonState = newValue == .allFeeds ? NSOnState : NSOffState
+            exportAllFeedsRadioButtonState = newValue == .allFeeds ? .on : .off
         }
     }
 
     /// Whether folders should be preserved.
-    var preserveFolders: Bool {
+    @objc var preserveFolders: Bool {
         get {
-            return preserveFoldersCheckboxButtonState == NSOnState
+            return preserveFoldersCheckboxButtonState == .on
         }
         set {
-            preserveFoldersCheckboxButtonState = newValue ? NSOnState : NSOffState
+            preserveFoldersCheckboxButtonState = newValue ? .on : .off
         }
     }
 
