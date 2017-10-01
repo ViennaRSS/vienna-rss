@@ -47,7 +47,7 @@
 "geD-Ws-mQm.title" = "Spara nedladdade filer i:";
 
 /* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "gi4-ao-0yS"; */
-"gi4-ao-0yS.title" = "Stutsa programikonen";
+"gi4-ao-0yS.title" = "Studsa programikonen";
 
 /* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "gnX-dW-XUD"; */
 "gnX-dW-XUD.title" = "Var 3:e timme";
@@ -57,6 +57,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG"; */
 "kGA-Sa-RLG.title" = "Förvald RSS-läsare:";
+
+/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl"; */
+"meo-78-YOl.title" = "Märk uppdaterade artiklar som nya";
 
 /* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "oVW-ee-uJT"; */
 "oVW-ee-uJT.title" = "Var 5:e minut";
