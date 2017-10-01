@@ -123,7 +123,7 @@ static BOOL _credentialsChanged;
 
 #pragma mark - MASPreferencesViewController
 
-- (NSString *)identifier {
+- (NSString *)viewIdentifier {
     return @"SyncingPreferences";
 }
 
