@@ -280,7 +280,10 @@
       <trans-unit id="gi4-ao-0yS.title">
         <source>Bounce the application icon</source>
         <note>Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "gi4-ao-0yS";</note>
-        <target xml:lang="sv" state="translated">Stutsa programikonen</target>
+        <target xml:lang="sv" state="translated">Studsa programikonen</target>
+        <alt-trans>
+          <target xml:lang="sv">Stutsa programikonen</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="gnX-dW-XUD.title">
         <source>Every 3 hours</source>
@@ -296,6 +299,11 @@
         <source>Default RSS Reader:</source>
         <note>Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG";</note>
         <target xml:lang="sv" state="translated">Förvald RSS-läsare:</target>
+      </trans-unit>
+      <trans-unit id="meo-78-YOl.title">
+        <source>Mark updated articles as new</source>
+        <note>Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl";</note>
+        <target xml:lang="sv" state="translated">Märk uppdaterade artiklar som nya</target>
       </trans-unit>
       <trans-unit id="oVW-ee-uJT.title">
         <source>Every 5 minutes</source>
@@ -1280,6 +1288,21 @@
         <note>Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404";</note>
         <target xml:lang="sv" state="translated">Nuvarande filter</target>
       </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.label">
+        <source>Add</source>
+        <note>Class = "NSToolbarItem"; label = "Add"; ObjectID = "CPA-Ha-aj1";</note>
+        <target xml:lang="sv" state="translated">Lägg till</target>
+      </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.paletteLabel">
+        <source>Add</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1";</note>
+        <target xml:lang="sv" state="translated">Lägg till</target>
+      </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.toolTip">
+        <source>Subscribe to a feed or add a folder or smart folder.</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Subscribe to a feed or add a folder or smart folder."; ObjectID = "CPA-Ha-aj1";</note>
+        <target xml:lang="sv" state="translated">Prenumerera på ett flöde eller lägg till en mapp eller smart mapp.</target>
+      </trans-unit>
       <trans-unit id="Hs0-hu-A2g.title">
         <source>Refresh Selected Subscriptions</source>
         <note>Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g";</note>
@@ -1586,6 +1609,11 @@
         <note>Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
         <target xml:lang="sv" state="translated">Besök webbplatsen</target>
       </trans-unit>
+      <trans-unit id="Lkv-md-rEW.title">
+        <source>Sync with an Open Reader server</source>
+        <note>Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Lkv-md-rEW";</note>
+        <target xml:lang="sv" state="translated">Synkronisera med en Open Reader-server</target>
+      </trans-unit>
       <trans-unit id="NKI-36-zCY.title">
         <source>Password:</source>
         <note>Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "NKI-36-zCY";</note>
@@ -1622,6 +1650,11 @@
         <source>%1$@ of %2$@</source>
         <note>Progress in bytes, e.g. 1 KB of 1 MB</note>
         <target xml:lang="sv" state="translated">%1$@ av %2$@</target>
+      </trans-unit>
+      <trans-unit id="%@ received">
+        <source>%@ received</source>
+        <note>Number of bytes received, e.g. 1 MB received</note>
+        <target xml:lang="sv" state="translated">%@ mottaget</target>
       </trans-unit>
       <trans-unit id="%@, %@">
         <source>%1$@, %2$@</source>
@@ -1850,6 +1883,11 @@
         <note>Title of a menu item</note>
         <target xml:lang="sv" state="translated">Radera artikel</target>
       </trans-unit>
+      <trans-unit id="Delete Open Reader RSS feed">
+        <source>Delete Open Reader RSS feed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Radera Open Reader-flöde</target>
+      </trans-unit>
       <trans-unit id="Delete Open Reader RSS feed text">
         <source>Delete Open Reader RSS feed text</source>
         <note>No comment provided by engineer.</note>
@@ -2017,6 +2055,11 @@
         <source>Error parsing XML data in feed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="sv" state="translated">Fel vid avläsning av XML-data i strömmen</target>
+      </trans-unit>
+      <trans-unit id="Error retrieving RSS feed:">
+        <source>Error retrieving RSS feed:</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="sv" state="translated">Fel vid mottagning av RSS-flöde:</target>
       </trans-unit>
       <trans-unit id="Error: Feed not found!">
         <source>Error: Feed not found!</source>

@@ -52,6 +52,15 @@
 /* Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404"; */
 "1404.title" = "Nuvarande filter";
 
+/* Class = "NSToolbarItem"; label = "Add"; ObjectID = "CPA-Ha-aj1"; */
+"CPA-Ha-aj1.label" = "Lägg till";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1"; */
+"CPA-Ha-aj1.paletteLabel" = "Lägg till";
+
+/* Class = "NSToolbarItem"; toolTip = "Subscribe to a feed or add a folder or smart folder."; ObjectID = "CPA-Ha-aj1"; */
+"CPA-Ha-aj1.toolTip" = "Prenumerera på ett flöde eller lägg till en mapp eller smart mapp.";
+
 /* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g"; */
 "Hs0-hu-A2g.title" = "Uppdatera markerade prenumerationer";
 

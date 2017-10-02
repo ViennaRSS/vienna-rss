@@ -4,6 +4,9 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe"; */
 "Ar5-Qc-YTe.ibShadowedToolTip" = "Besök webbplatsen";
 
+/* Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Lkv-md-rEW"; */
+"Lkv-md-rEW.title" = "Synkronisera med en Open Reader-server";
+
 /* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "NKI-36-zCY"; */
 "NKI-36-zCY.title" = "Lösenord:";
 
