@@ -67,7 +67,7 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 
 #pragma mark - MASPreferencesViewController
 
-- (NSString *)identifier {
+- (NSString *)viewIdentifier {
     return @"AppearancePreferences";
 }
 
