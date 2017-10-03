@@ -7,7 +7,9 @@ jobs:
     - script: xcodebuild -workspace Vienna.xcworkspace -scheme Vienna test | xcpretty
 
     # linting
-    - before_script: swiftlint version
+    - before_script:
+        - brew outdated swiftlint || brew upgrade swiftlint
+        - swiftlint version
       script: swiftlint --lenient --reporter emoji
 
 notifications:
