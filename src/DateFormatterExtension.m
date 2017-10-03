@@ -31,10 +31,9 @@
         _relativeDateFormatter.dateStyle = NSDateFormatterShortStyle;
         _relativeDateFormatter.timeStyle = NSDateFormatterShortStyle;
 
-        if ([_relativeDateFormatter respondsToSelector:@selector(formattingContext)]) {
+        if (@available(macOS 10.10, *)) {
             _relativeDateFormatter.formattingContext = NSFormattingContextDynamic;
         }
-
     });
 
     return _relativeDateFormatter;
