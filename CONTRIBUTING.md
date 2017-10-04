@@ -1,5 +1,9 @@
 # Contributing to Vienna
 
+## Debugging
+
+dSYM files containing the debug symbols can be fount at [bintray](https://bintray.com/viennarss/vienna-rss/vienna-rss/).
+
 ## Writing code
 
 The current version of Vienna requires Xcode 9 and the macOS 10.13 SDK. Most of Vienna is made with Objective-C, but some newer code is being created in Swift 4. We welcome both Objective-C and Swift contributions.
@@ -14,6 +18,8 @@ Please let us know what you are working on by posting an issue on Vienna's githu
 
 ## Code style guidelines
 
-For Objective-C code, please try to follow the [Spotify Objective-C Coding Style](https://github.com/spotify/ios-style).
+Try to respect the code style of the code you modify. 
+
+For new Objective-C code or significant refactoring, it is advised to adopt the [Spotify Objective-C Coding Style](https://github.com/spotify/ios-style).
 
 For Swift code, please try to follow the [GitHub Swift Style Guide](https://github.com/github/swift-style-guide).
