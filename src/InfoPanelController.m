@@ -78,8 +78,7 @@
 
     // Check if the source file exists. If not, disable the button.
     NSFileManager *fileManager = NSFileManager.defaultManager;
-    self.openCachedFileButton.enabled = [fileManager fileExistsAtPath:self.cachedFile
-                                                          isDirectory:NO];
+    self.openCachedFileButton.enabled = [fileManager fileExistsAtPath:self.cachedFile];
 }
 
 /* updateFolder
