@@ -390,44 +390,48 @@
  */
 -(void)displayNextUnread
 {
-	// remember current article
+	// mark current article read
 	Article * currentArticle = self.selectedArticle;
-	Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
-
-	BOOL currentFolderExhausted = NO;
-	// Search other articles in the same folder, starting from current position
-	if (![mainArticleView viewNextUnreadInFolder])
-	{
-		// If nothing found and smart folder, search if we have other fresh articles from same folder
-		if (currentFolder.type == VNAFolderTypeSmart || currentFolder.type == VNAFolderTypeTrash || currentFolder.type == VNAFolderTypeSearch) {
-			if (![mainArticleView selectFirstUnreadInFolder] || self.selectedArticle == currentArticle)
-			{
-				currentFolderExhausted = YES;
-			}
-		}
-		else
-		{
-			currentFolderExhausted = YES;
-		}
-	}
-
-	if (currentFolderExhausted  && ([[Database sharedManager] countOfUnread] > 1 || currentArticle == nil || currentArticle.read) )
-	{
-		// try other folders
-		NSInteger nextFolderWithUnread = [self.foldersTree nextFolderWithUnread:currentFolderId];
-		if (nextFolderWithUnread != -1)
-		{
-			// Seed in order to select the first unread article.
-			firstUnreadArticleRequired = YES;
-			// Select the folder
-			[self.foldersTree selectFolder:nextFolderWithUnread];
-		}
-	}
-
-	// mark read previously selected article
 	if (currentArticle != nil && !currentArticle.read)
 	{
 		[self markReadByArray:@[currentArticle] readFlag:YES];
+	}
+
+	// If there are any unread articles then select the nexst one
+	if ([Database sharedManager].countOfUnread > 0)
+	{
+		// Search other articles in the same folder, starting from current position
+		if (![mainArticleView viewNextUnreadInFolder])
+		{
+			// If nothing found and smart folder, search if we have other fresh articles from same folder
+			Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
+			if (currentFolder.type == VNAFolderTypeSmart || currentFolder.type == VNAFolderTypeTrash || currentFolder.type == VNAFolderTypeSearch)
+			{
+				if (![mainArticleView selectFirstUnreadInFolder])
+				{
+					[self displayNextFolderWithUnread];
+				}
+			}
+			else
+			{
+				[self displayNextFolderWithUnread];
+			}
+		}
+	}
+}
+
+/* displayNextFolderWithUnread
+ * Instructs the current article view to display the next folder with unread articles
+ * in the database.
+ */
+-(void)displayNextFolderWithUnread
+{
+	NSInteger nextFolderWithUnread = [self.foldersTree nextFolderWithUnread:currentFolderId];
+	if (nextFolderWithUnread != -1)
+	{
+		// Seed in order to select the first unread article.
+		firstUnreadArticleRequired = YES;
+		[self.foldersTree selectFolder:nextFolderWithUnread];
 	}
 }
 
@@ -440,10 +444,13 @@
 {
 	if (currentFolderId != newFolderId && newFolderId != 0)
 	{
-		// Deselect all in current folder.
+		// Clear all of the articles in the current folder.
+		// This will reset the scroller position and deselect all.
 		// Otherwise, the new folder might attempt to preserve selection.
 		// This can happen with smart folders, which have the same articles as other folders.
-		[mainArticleView scrollToArticle:nil];
+		self.currentArrayOfArticles = @[];
+		self.folderArrayOfArticles = @[];
+		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 
 		currentFolderId = newFolderId;
 		[self reloadArrayOfArticles];
@@ -627,11 +634,42 @@
 	NSMutableArray * folderArrayCopy = [NSMutableArray arrayWithArray:folderArrayOfArticles];
 	__block BOOL needReload = NO;
 	
+	NSString * guidToSelect = nil;
+
     // if we mark deleted, mark also read and unflagged
 	if (deleteFlag) {
 	    [self innerMarkReadByRefsArray:articleArray readFlag:YES];
         [self innerMarkFlaggedByArray:articleArray flagged:NO];
-		[mainArticleView selectPreviousArticle];
+		
+		Article * firstArticle = articleArray.firstObject;
+		if (firstArticle != nil) // Should always be true
+		{
+			// We want to select the next non-deleted article
+			NSUInteger articleIndex = [currentArrayOfArticles indexOfObject:firstArticle];
+			if (articleIndex != NSNotFound)
+			{
+				NSUInteger count = currentArrayOfArticles.count;
+				for (NSUInteger i = articleIndex + 1; i < count; ++i)
+				{
+					Article * nextArticle = [currentArrayOfArticles objectAtIndex:i];
+					if (![articleArray containsObject:nextArticle])
+					{
+						guidToSelect = nextArticle.guid;
+						break;
+					}
+				}
+				
+				// Otherwise, we want to select the previous article.
+				if (guidToSelect == nil && articleIndex > 0)
+				{
+					Article * nextArticle = [currentArrayOfArticles objectAtIndex:articleIndex - 1];
+					guidToSelect = nextArticle.guid;
+				}
+				
+				// Deselect all now, we will select article after refresh
+				[mainArticleView scrollToArticle:nil];
+			}
+		}
 	}
 
 	// Iterate over every selected article in the table and set the deleted
@@ -663,9 +701,17 @@
 	{
 		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 		if (currentArrayOfArticles.count > 0u)
+		{
+			if (guidToSelect != nil)
+			{
+				[mainArticleView scrollToArticle:guidToSelect];
+			}
 			[mainArticleView ensureSelectedArticle];
+		}
 		else
+		{
 			[NSApp.mainWindow makeFirstResponder:self.foldersTree.mainView];
+		}
 	}
 }
 
@@ -679,7 +725,37 @@
 	NSMutableArray * folderArrayCopy = [NSMutableArray arrayWithArray:folderArrayOfArticles];
 	
 	[self innerMarkReadByRefsArray:articleArray readFlag:YES];
-	[mainArticleView selectPreviousArticle];
+	
+	NSString * guidToSelect = nil;
+	Article * firstArticle = articleArray.firstObject;
+	if (firstArticle != nil) // Should always be true
+	{
+		// We want to select the next non-deleted article
+		NSUInteger articleIndex = [currentArrayOfArticles indexOfObject:firstArticle];
+		if (articleIndex != NSNotFound)
+		{
+			NSUInteger count = currentArrayOfArticles.count;
+			for (NSUInteger i = articleIndex + 1; i < count; ++i)
+			{
+				Article * nextArticle = [currentArrayOfArticles objectAtIndex:i];
+				if (![articleArray containsObject:nextArticle])
+				{
+					guidToSelect = nextArticle.guid;
+					break;
+				}
+			}
+			
+			// Otherwise, we want to select the previous article.
+			if (guidToSelect == nil && articleIndex > 0)
+			{
+				Article * nextArticle = [currentArrayOfArticles objectAtIndex:articleIndex - 1];
+				guidToSelect = nextArticle.guid;
+			}
+			
+			// Deselect all now, we will select article after refresh
+			[mainArticleView scrollToArticle:nil];
+		}
+	}
 
 	// Iterate over every selected article in the table and remove it from
 	// the database.
@@ -697,6 +773,10 @@
 
 	// Ensure there's a valid selection
     if (currentArrayOfArticles.count > 0u) {
+		if (guidToSelect != nil)
+		{
+			[mainArticleView scrollToArticle:guidToSelect];
+		}
 		[mainArticleView ensureSelectedArticle];
     } else {
 		[NSApp.mainWindow makeFirstResponder:self.foldersTree.mainView];
