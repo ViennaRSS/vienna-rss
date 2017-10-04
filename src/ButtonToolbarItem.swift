@@ -61,7 +61,7 @@ class ButtonToolbarItem: NSToolbarItem {
 
         guard let responder = NSApp.target(forAction: action, to: target, from: self) else {
             if #available(macOS 10.12, *) {
-                os_log("Toolbar item with identifier '%@' has no responder", type: .debug, itemIdentifier)
+                os_log("Toolbar item with identifier '%@' has no responder", type: .debug, itemIdentifier as CVarArg)
             }
 
             return

@@ -58,7 +58,7 @@ class GradientView: NSView {
         // Clear the background and return if the starting color is not set.
         guard let startingColor = startingColor else {
             NSColor.clear.setFill()
-            NSRectFill(dirtyRect)
+            dirtyRect.fill()
             return
         }
 
@@ -69,7 +69,7 @@ class GradientView: NSView {
             gradient?.draw(in: dirtyRect, angle: angle)
         } else {
             startingColor.setFill()
-            NSRectFill(dirtyRect)
+            dirtyRect.fill()
         }
     }
 

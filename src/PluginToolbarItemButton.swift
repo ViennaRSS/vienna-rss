@@ -23,6 +23,6 @@ import Cocoa
 final class PluginToolbarItemButton: NSButton {
 
     /// The toolbar item to which the button belongs.
-    weak var toolbarItem: NSToolbarItem?
+    @objc weak var toolbarItem: NSToolbarItem?
 
 }

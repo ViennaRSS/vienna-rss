@@ -953,13 +953,13 @@
 	Folder * folder = node.folder;
     NSMutableDictionary * myInfo = [NSMutableDictionary dictionaryWithDictionary:info];
     if (folder.isUnsubscribed) {
-		if ([NSColor respondsToSelector:@selector(secondaryLabelColor)]) {
-			myInfo[NSForegroundColorAttributeName] = NSColor.secondaryLabelColor;
-		} else {
-			myInfo[NSForegroundColorAttributeName] = NSColor.disabledControlTextColor;
-		}
+        if (@available(macOS 10.10, *)) {
+            myInfo[NSForegroundColorAttributeName] = NSColor.secondaryLabelColor;
+        } else {
+            myInfo[NSForegroundColorAttributeName] = NSColor.disabledControlTextColor;
+        }
     } else {
-		if ([NSColor respondsToSelector:@selector(labelColor)]) {
+		if (@available(macOS 10.10, *)) {
 			myInfo[NSForegroundColorAttributeName] = NSColor.labelColor;
 		} else {
 			myInfo[NSForegroundColorAttributeName] = NSColor.controlTextColor;

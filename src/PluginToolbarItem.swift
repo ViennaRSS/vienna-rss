@@ -24,7 +24,7 @@ import Cocoa
 /// - Note: This item should only be initialized programmatically.
 final class PluginToolbarItem: ButtonToolbarItem {
 
-    override init(itemIdentifier: String) {
+    override init(itemIdentifier: NSToolbarItem.Identifier) {
         super.init(itemIdentifier: itemIdentifier)
 
         let button = PluginToolbarItemButton(frame: NSRect(x: 0, y: 0, width: 41, height: 25))

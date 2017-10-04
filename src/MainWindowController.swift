@@ -57,13 +57,11 @@ final class MainWindowController: NSWindowController {
     // MARK: Status bar
 
     @IBOutlet private var statusBar: DisclosureView!
+    @IBOutlet private var statusLabel: NSTextField!
+    @IBOutlet private var filterLabel: NSTextField!
+    @IBOutlet private var filterButton: NSButton!
 
-    // TODO: Make this private in Swift 4
-    @IBOutlet fileprivate var statusLabel: NSTextField!
-    @IBOutlet fileprivate var filterLabel: NSTextField!
-    @IBOutlet fileprivate var filterButton: NSButton!
-
-    var statusText: String? {
+    @objc var statusText: String? {
         get {
             return statusLabel.stringValue
         }
@@ -72,14 +70,14 @@ final class MainWindowController: NSWindowController {
         }
     }
 
-    var filterAreaIsHidden = false {
+    @objc var filterAreaIsHidden = false {
         didSet {
             filterLabel.isHidden = filterAreaIsHidden
             filterButton.isHidden = filterAreaIsHidden
         }
     }
 
-    fileprivate func statusBarState(disclosed: Bool, animate: Bool = true) {
+    private func statusBarState(disclosed: Bool, animate: Bool = true) {
         if statusBar.isDisclosed && !disclosed {
             statusBar.collapse(animate)
             Preferences.standard().showStatusBar = false
@@ -111,7 +109,7 @@ final class MainWindowController: NSWindowController {
 
     override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(changeFiltering(_:)) {
-            menuItem.state = menuItem.tag == Preferences.standard().filterMode ? NSOnState : NSOffState
+            menuItem.state = menuItem.tag == Preferences.standard().filterMode ? .on     : .off
         } else if menuItem.action == #selector(toggleStatusBar(_:)) {
             if statusBar.isDisclosed {
                 menuItem.title = NSLocalizedString("Hide Status Bar", comment: "Title of a menu item")
@@ -128,12 +126,12 @@ final class MainWindowController: NSWindowController {
 
     // MARK: Observation
 
-    fileprivate func addObservers() { // Make this private in Swift 4
+    private func addObservers() {
         OpenReader.sharedManager().addObserver(self, forKeyPath: #keyPath(OpenReader.statusMessage), options: .new, context: nil)
         RefreshManager.shared().addObserver(self, forKeyPath: #keyPath(RefreshManager.statusMessage), options: .new, context: nil)
     }
 
-    fileprivate func removeObservers() { // Make this private in Swift 4
+    private func removeObservers() {
         OpenReader.sharedManager().removeObserver(self, forKeyPath: #keyPath(OpenReader.statusMessage))
         RefreshManager.shared().removeObserver(self, forKeyPath: #keyPath(RefreshManager.statusMessage))
     }
@@ -182,26 +180,56 @@ extension MainWindowController: NSToolbarDelegate {
         return (NSApp.delegate as? AppController)?.pluginManager
     }
 
-    func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: String, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
-        return pluginManager?.toolbarItem(forIdentifier: itemIdentifier)
+    func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+        return pluginManager?.toolbarItem(forIdentifier: itemIdentifier.rawValue)
     }
 
-    func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [String] {
-        let firstIdentifiers = ["Subscribe", "PreviousButton", "NextButton",
-            "SkipFolder", "MarkAllItemsAsRead", "Refresh", "MailLink", "EmptyTrash",
-            "GetInfo", "Action", "Styles", "SearchItem"]
+    func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+        typealias Identifier = NSToolbarItem.Identifier
+
+        var identifiers = [
+            Identifier("Subscribe"),
+            Identifier("PreviousButton"),
+            Identifier("NextButton"),
+            Identifier("SkipFolder"),
+            Identifier("MarkAllItemsAsRead"),
+            Identifier("Refresh"),
+            Identifier("MailLink"),
+            Identifier("EmptyTrash"),
+            Identifier("GetInfo"),
+            Identifier("Action"),
+            Identifier("Styles"),
+            Identifier("SearchItem")
+        ]
+
         let pluginIdentifiers = pluginManager?.toolbarItems ?? []
-        let lastIdentifiers = [NSToolbarSpaceItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier]
+        pluginIdentifiers.forEach { pluginIdentifier in
+            identifiers.append(Identifier(pluginIdentifier))
+        }
 
-        return firstIdentifiers + pluginIdentifiers + lastIdentifiers
+        identifiers += [.space, .flexibleSpace]
+
+        return identifiers
     }
 
-    func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [String] {
-        let firstIdentifiers = ["Subscribe", "SkipFolder", "Action", "Refresh"]
-        let pluginIdentifiers = pluginManager?.defaultToolbarItems() as? [String] ?? []
-        let lastIdentifiers = [NSToolbarFlexibleSpaceItemIdentifier, "SearchItem"]
+    func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+        typealias Identifier = NSToolbarItem.Identifier
 
-        return firstIdentifiers + pluginIdentifiers + lastIdentifiers
+        var identifiers = [
+            Identifier("Subscribe"),
+            Identifier("SkipFolder"),
+            Identifier("Action"),
+            Identifier("Refresh")
+        ]
+
+        let pluginIdentifiers = pluginManager?.defaultToolbarItems() as? [String] ?? []
+        pluginIdentifiers.forEach { identifier in
+            identifiers.append(Identifier(identifier))
+        }
+
+        identifiers += [.flexibleSpace, Identifier("SearchItem")]
+
+        return identifiers
     }
 
 }

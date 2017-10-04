@@ -31,6 +31,7 @@ final class DirectoryMonitor: NSObject {
     /// Creates a directory monitor for the directories.
     ///
     /// - Parameter directories: The directories to monitor.
+    @objc
     init(directories: [URL]) {
         self.directories = directories
     }
@@ -57,6 +58,7 @@ final class DirectoryMonitor: NSObject {
     ///
     /// - Parameter eventHandler: The handler to call when an event occurs.
     /// - Throws: An error of type `DirectoryMonitorError`.
+    @objc
     func start(eventHandler: @escaping EventHandler) throws {
         // If the stream exists, then stop it and start over. This will be the
         // case when start(eventHandler:) is called multiple times. Rather than
