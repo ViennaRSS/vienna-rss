@@ -21,7 +21,7 @@ Installing
 ----------
 
 Admins upload release and test versions at [bintray](https://bintray.com/viennarss/vienna-rss/vienna-rss/) and [Sourceforge](https://sourceforge.net/projects/vienna-rss/files/).  
-Alternatively, you can download releases from the [GitHub Releases page](https://github.com/ViennaRSS/vienna-rss/releases)
+Alternatively, you can download releases from the [GitHub Releases page](https://github.com/ViennaRSS/vienna-rss/releases).
 
 **Homebrew**
 
@@ -87,18 +87,9 @@ You can write plugins by referring to [this document](http://www.vienna-rss.com/
 
 ### Writing code
 
-The current version of Vienna requires Xcode 8.x and macOS 10.12 SDK. Most of Vienna is made with Objective-C but some newer code is being created in Swift 3.x and we welcome both Objective-C and Swift contributions.
+Please check [CONTRIBUTING.md](CONTRIBUTING.md).
 
 Vienna uses [CocoaPods](https://cocoapods.org) for managing dependencies. When building, make sure to always open the Xcode workspace `Viennna.xcworkspace` instead of a project file.
-
-You should have a basic knowledge of Git and read this [suggested workflow](https://github.com/ViennaRSS/vienna-rss/wiki/Good-manners-with-Git).
-
-As a starting point, search for any [issues with the *help-wanted* label](https://github.com/ViennaRSS/vienna-rss/issues?q=is%3Aopen+is%3Aissue+label%3Ahelp-wanted).
-
-Please let us know what you are working on by posting an issue on Vienna's github and assigning it to yourself.
-
-For more information please check [CONTRIBUTING.md](CONTRIBUTING.md).
-
 
 Licensing
 ---------
