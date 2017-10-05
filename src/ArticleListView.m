@@ -47,7 +47,7 @@
 @property (weak, nonatomic) IBOutlet NSStackView *contentStackView;
 
 -(void)initTableView;
--(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
+-(BOOL)copyTableSelection:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard;
 -(void)setTableViewFont;
 -(void)showSortDirection;
 -(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
@@ -1449,13 +1449,13 @@
 	}
 }
 
-/* writeRows
+/* writeRowsWithIndexes
  * Called to initiate a drag from MessageListView. Use the common copy selection code to copy to
  * the pasteboard.
  */
--(BOOL)tableView:(NSTableView *)tv writeRows:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard
+-(BOOL)tableView:(NSTableView *)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(nonnull NSPasteboard *)pboard
 {
-	return [self copyTableSelection:rows toPasteboard:pboard];
+	return [self copyTableSelection:rowIndexes toPasteboard:pboard];
 }
 
 /* willDisplayCell
@@ -1494,7 +1494,7 @@
  * which include details of each selected article in the standard RSS item format defined by
  * Ranchero NetNewsWire. See http://ranchero.com/netnewswire/rssclipboard.php for more details.
  */
--(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard
+-(BOOL)copyTableSelection:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard
 {
 	NSMutableArray * arrayOfArticles = [[NSMutableArray alloc] init];
 	NSMutableArray * arrayOfURLs = [[NSMutableArray alloc] init];
@@ -1502,8 +1502,7 @@
 	NSMutableString * fullHTMLText = [[NSMutableString alloc] init];
 	NSMutableString * fullPlainText = [[NSMutableString alloc] init];
 	Database * db = [Database sharedManager];
-	NSInteger count = rows.count;
-	NSInteger index;
+	NSInteger count = rowIndexes.count;
 	
 	// Set up the pasteboard
 	[pboard declareTypes:@[MA_PBoardType_RSSItem, @"WebURLsWithTitlesPboardType", NSStringPboardType, NSHTMLPboardType] owner:self];
@@ -1514,9 +1513,9 @@
 	[fullHTMLText appendString:@"<html><body>"];
 	
 	// Get all the articles that are being dragged
-	for (index = 0; index < count; ++index)
+	NSUInteger msgIndex = rowIndexes.firstIndex;
+	while (msgIndex != NSNotFound)
 	{
-		NSInteger msgIndex = [rows[index] integerValue];
 		Article * thisArticle = self.controller.articleController.allArticles[msgIndex];
 		Folder * folder = [db folderFromID:thisArticle.folderId];
 		NSString * msgText = thisArticle.body;
@@ -1549,6 +1548,8 @@
 			// Write the link to the pastboard.
 			[[NSURL URLWithString:msgLink] writeToPasteboard:pboard];
 		}
+
+		msgIndex = [rowIndexes indexGreaterThanIndex:msgIndex];
 	}
 	
 	// Close the HTML string

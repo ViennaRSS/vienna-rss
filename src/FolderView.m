@@ -69,14 +69,18 @@
 	return [super becomeFirstResponder];
 }
 
-/* draggingSourceOperationMaskForLocal
+/* draggingSession:sourceOperationMaskForDraggingContext
  * Let the control know the expected behaviour for local and external drags.
  */
--(NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)isLocal
+-(NSDragOperation)draggingSession:(NSDraggingSession *)session sourceOperationMaskForDraggingContext:(NSDraggingContext)context
 {
-	if (isLocal)
-		return NSDragOperationMove|NSDragOperationGeneric;
-	return NSDragOperationCopy;
+    switch(context) {
+        case NSDraggingContextWithinApplication:
+            return NSDragOperationMove|NSDragOperationGeneric;
+            break;
+        default:
+            return NSDragOperationCopy;
+    }
 }
 
 /* setEnableTooltips
