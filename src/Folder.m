@@ -522,10 +522,8 @@ static NSArray * iconArray = nil;
  */
 -(void)setUnreadCount:(NSInteger)count
 {
-	@synchronized(self) {
-		NSAssert1(count >= 0, @"Attempting to set a negative unread count on folder %@", [self name]);
-		unreadCount = count;
-	}
+    NSAssert1(count >= 0, @"Attempting to set a negative unread count on folder %@", [self name]);
+    unreadCount = count;
 }
 
 /* setChildUnreadCount
@@ -534,10 +532,8 @@ static NSArray * iconArray = nil;
  */
 -(void)setChildUnreadCount:(NSInteger)count
 {
-	@synchronized(self) {
-		NSAssert1(count >= 0, @"Attempting to set a negative unread count on folder %@", [self name]);
-		childUnreadCount = count;
-	}
+    NSAssert1(count >= 0, @"Attempting to set a negative unread count on folder %@", [self name]);
+    childUnreadCount = count;
 }
 
 /* clearCache
