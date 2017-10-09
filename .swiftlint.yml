@@ -1,25 +1,19 @@
-# SwiftLint 0.22
+# SwiftLint 0.23
 
 included:
   - src
 
 disabled_rules:
   - block_based_kvo # Swift 4
-  - explicit_enum_raw_value
-  - explicit_top_level_acl
-  - explicit_type_interface
-  - file_header
   - line_length
-  - no_extension_access_modifier
-  - no_grouping_extension
   - todo
-  - trailing_closure # Bug: realm/SwiftLint#1754
 
 opt_in_rules:
   - attributes
   - closure_end_indentation
   - closure_spacing
   - conditional_returns_on_newline
+  - contains_over_first_not_nil
   - empty_count
   - explicit_init
   - extension_access_modifier
@@ -30,6 +24,7 @@ opt_in_rules:
   - implicitly_unwrapped_optional
   - joined_default_parameter
   - let_var_whitespace
+  - literal_expression_end_indentation
   - multiline_parameters
   - nimble_operator
   - number_separator
@@ -45,5 +40,6 @@ opt_in_rules:
   - single_test_class
   - strict_fileprivate
   - switch_case_on_newline
+#  - trailing_closure # Bug: realm/SwiftLint#1754
   - unneeded_parentheses_in_closure_argument
   - vertical_parameter_alignment_on_call
