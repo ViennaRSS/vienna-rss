@@ -126,27 +126,7 @@ final class MainWindowController: NSWindowController {
 
     // MARK: Observation
 
-    private func addObservers() {
-        OpenReader.sharedManager().addObserver(self, forKeyPath: #keyPath(OpenReader.statusMessage), options: .new, context: nil)
-        RefreshManager.shared().addObserver(self, forKeyPath: #keyPath(RefreshManager.statusMessage), options: .new, context: nil)
-    }
-
-    private func removeObservers() {
-        OpenReader.sharedManager().removeObserver(self, forKeyPath: #keyPath(OpenReader.statusMessage))
-        RefreshManager.shared().removeObserver(self, forKeyPath: #keyPath(RefreshManager.statusMessage))
-    }
-
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-        guard let keyPath = keyPath else {
-            return
-        }
-
-        if keyPath == #keyPath(RefreshManager.statusMessage) || keyPath == #keyPath(OpenReader.statusMessage) {
-            if let status = change?[.newKey] as? String {
-                statusLabel.stringValue = status
-            }
-        }
-    }
+    private var observationTokens: [NSKeyValueObservation]?
 
 }
 
@@ -159,7 +139,18 @@ extension MainWindowController: NSWindowDelegate {
         filterLabel.textColor = .windowFrameTextColor
         filterButton.isEnabled = true
 
-        addObservers()
+        observationTokens = [
+            OpenReader.sharedManager().observe(\.statusMessage, options: .new) { [weak self] manager, change in
+                if change.newValue is String {
+                    self?.statusLabel.stringValue = manager.statusMessage
+                }
+            },
+            RefreshManager.shared().observe(\.statusMessage, options: .new) { [weak self] manager, change in
+                if change.newValue is String {
+                    self?.statusLabel.stringValue = manager.statusMessage
+                }
+            }
+        ]
     }
 
     func windowDidResignMain(_ notification: Notification) {
@@ -167,7 +158,7 @@ extension MainWindowController: NSWindowDelegate {
         filterLabel.textColor = .disabledControlTextColor
         filterButton.isEnabled = false
 
-        removeObservers()
+        observationTokens = nil
     }
 
 }
