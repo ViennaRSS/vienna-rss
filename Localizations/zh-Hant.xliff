@@ -955,6 +955,11 @@
         <note>Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409";</note>
         <target xml:lang="zh-Hant" state="translated">簡介⋯</target>
       </trans-unit>
+      <trans-unit id="CLG-Dq-a59.title">
+        <source>Show Spelling and Grammar</source>
+        <note>Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "CLG-Dq-a59";</note>
+        <target xml:lang="zh-Hant" state="translated">顯示拼字與文法</target>
+      </trans-unit>
       <trans-unit id="ecl-HO-Kpi.title">
         <source>Mark All Subscriptions as Read</source>
         <note>Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi";</note>
@@ -1498,7 +1503,7 @@
       <trans-unit id="Ascending">
         <source>Ascending</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hant" state="translated">升冪</target>
+        <target xml:lang="zh-Hant" state="translated">正排</target>
       </trans-unit>
       <trans-unit id="Author">
         <source>Author</source>
@@ -1690,7 +1695,7 @@
       <trans-unit id="Descending">
         <source>Descending</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hant" state="translated">降冪</target>
+        <target xml:lang="zh-Hant" state="translated">倒排</target>
       </trans-unit>
       <trans-unit id="Do you really want to import the subscriptions from the specified OPML file?">
         <source>Do you really want to import the subscriptions from the specified OPML file?</source>
@@ -2229,10 +2234,20 @@ Also check your network access.</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">顯示過濾列</target>
       </trans-unit>
+      <trans-unit id="Show Main Window…">
+        <source>Show Main Window…</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="zh-Hant" state="translated">顯示主視窗</target>
+      </trans-unit>
       <trans-unit id="Show Status Bar">
         <source>Show Status Bar</source>
         <note>Title of a menu item</note>
         <target xml:lang="zh-Hant" state="translated">顯示狀態列</target>
+      </trans-unit>
+      <trans-unit id="Show Toolbar">
+        <source>Show Toolbar</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="zh-Hant" state="translated">顯示工具列</target>
       </trans-unit>
       <trans-unit id="Show in Finder">
         <source>Show in Finder</source>
