@@ -197,7 +197,10 @@
       <trans-unit id="2oy-1i-QQP.title">
         <source>After "Next Unread" command</source>
         <note>Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "2oy-1i-QQP";</note>
-        <target xml:lang="zh-Hant" state="translated">在“下一個未閱讀項目”指令後</target>
+        <target xml:lang="zh-Hant" state="translated">在 "下一個未閱讀文章" 操作後</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">在“下一個未閱讀項目”指令後</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="5VQ-jP-2rL.title">
         <source>Every 30 minutes</source>
@@ -249,6 +252,11 @@
         <note>Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1";</note>
         <target xml:lang="zh-Hant" state="translated">顯示於選單列</target>
       </trans-unit>
+      <trans-unit id="OID-qF-Pp0.title">
+        <source>Search for latest Beta versions</source>
+        <note>Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0";</note>
+        <target xml:lang="zh-Hant" state="translated">檢查最新的 Bete 版本</target>
+      </trans-unit>
       <trans-unit id="YoM-Gv-hXn.title">
         <source>Open links in external browser</source>
         <note>Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "YoM-Gv-hXn";</note>
@@ -284,6 +292,11 @@
         <note>Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG";</note>
         <target xml:lang="zh-Hant" state="translated">預設的 RSS 閱讀程式：</target>
       </trans-unit>
+      <trans-unit id="meo-78-YOl.title">
+        <source>Mark updated articles as new</source>
+        <note>Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl";</note>
+        <target xml:lang="zh-Hant" state="translated">將更新內容的文章標示為新文章</target>
+      </trans-unit>
       <trans-unit id="oVW-ee-uJT.title">
         <source>Every 5 minutes</source>
         <note>Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "oVW-ee-uJT";</note>
@@ -298,6 +311,11 @@
         <source>Open new links in the background</source>
         <note>Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "pjg-Ze-H3l";</note>
         <target xml:lang="zh-Hant" state="translated">在背景中打開新連結</target>
+      </trans-unit>
+      <trans-unit id="qeb-at-hYb.title">
+        <source>Updates:</source>
+        <note>Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb";</note>
+        <target xml:lang="zh-Hant" state="translated">更新：</target>
       </trans-unit>
       <trans-unit id="sCl-hz-PFF.title">
         <source>Mark current article read:</source>
@@ -528,7 +546,10 @@
       <trans-unit id="154.title">
         <source>Find…</source>
         <note>Class = "NSMenuItem"; title = "Find…"; ObjectID = "154";</note>
-        <target xml:lang="zh-Hant" state="translated">尋找⋯</target>
+        <target xml:lang="zh-Hant" state="translated">尋找...</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">尋找⋯</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="155.title">
         <source>Jump to Selection</source>
@@ -981,10 +1002,30 @@
         <note>Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409";</note>
         <target xml:lang="zh-Hant" state="translated">簡介⋯</target>
       </trans-unit>
+      <trans-unit id="1428.title">
+        <source>Update Subscriptions From Open Reader</source>
+        <note>Class = "NSMenuItem"; title = "Update Subscriptions From Open Reader"; ObjectID = "1428";</note>
+        <target xml:lang="zh-Hant" state="translated">從 Open Reader 更新訂閱項目</target>
+      </trans-unit>
+      <trans-unit id="1458.title">
+        <source>Reindex Database</source>
+        <note>Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458";</note>
+        <target xml:lang="zh-Hant" state="translated">重建資料庫索引</target>
+      </trans-unit>
+      <trans-unit id="BUc-Ki-OOg.title">
+        <source>Unread or Flagged</source>
+        <note>Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "BUc-Ki-OOg";</note>
+        <target xml:lang="zh-Hant" state="translated">未讀或已加旗標</target>
+      </trans-unit>
       <trans-unit id="CLG-Dq-a59.title">
         <source>Show Spelling and Grammar</source>
         <note>Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "CLG-Dq-a59";</note>
         <target xml:lang="zh-Hant" state="translated">顯示拼字與文法</target>
+      </trans-unit>
+      <trans-unit id="ZCa-7v-54l.title">
+        <source>Enter Full Screen</source>
+        <note>Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "ZCa-7v-54l";</note>
+        <target xml:lang="zh-Hant" state="translated">進入全螢幕</target>
       </trans-unit>
       <trans-unit id="ecl-HO-Kpi.title">
         <source>Mark All Subscriptions as Read</source>
@@ -1110,6 +1151,16 @@
         <source>Filter by:</source>
         <note>Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377";</note>
         <target xml:lang="zh-Hant" state="translated">過濾依據：</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.paletteLabel">
+        <source>Mark All Items as Read</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Mark All Items as Read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="zh-Hant" state="translated">將全部文章設為已讀</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.toolTip">
+        <source>Mark all items as read</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Mark all items as read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="zh-Hant" state="translated">將全部文章設為已讀</target>
       </trans-unit>
       <trans-unit id="Hs0-hu-A2g.title">
         <source>Refresh Selected Subscriptions</source>
@@ -1284,6 +1335,11 @@
           <target xml:lang="zh-Hant">Unread Articles</target>
         </alt-trans>
       </trans-unit>
+      <trans-unit id="ty7-ph-peE.title">
+        <source>Unread or Flagged</source>
+        <note>Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "ty7-ph-peE";</note>
+        <target xml:lang="zh-Hant" state="translated">未讀或已加旗標</target>
+      </trans-unit>
       <trans-unit id="vOQ-xo-w8E.title">
         <source>Edit…</source>
         <note>Class = "NSMenuItem"; title = "Edit…"; ObjectID = "vOQ-xo-w8E";</note>
@@ -1410,6 +1466,11 @@
         <note>Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
         <target xml:lang="zh-Hant" state="translated">Visit the website</target>
       </trans-unit>
+      <trans-unit id="Lkv-md-rEW.title">
+        <source>Sync with an Open Reader server</source>
+        <note>Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Lkv-md-rEW";</note>
+        <target xml:lang="zh-Hant" state="translated">與 Open Reader 伺服器進行同步</target>
+      </trans-unit>
       <trans-unit id="NKI-36-zCY.title">
         <source>Password:</source>
         <note>Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "NKI-36-zCY";</note>
@@ -1419,6 +1480,16 @@
         <source>Login:</source>
         <note>Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "O2q-8o-CSb";</note>
         <target xml:lang="zh-Hant" state="translated">帳號：</target>
+      </trans-unit>
+      <trans-unit id="tec-2d-Xej.title">
+        <source>URL: https://</source>
+        <note>Class = "NSTextFieldCell"; title = "URL: https://"; ObjectID = "tec-2d-Xej";</note>
+        <target xml:lang="zh-Hant" state="translated">網址：https://</target>
+      </trans-unit>
+      <trans-unit id="uTl-XE-0ym.title">
+        <source>Server:</source>
+        <note>Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "uTl-XE-0ym";</note>
+        <target xml:lang="zh-Hant" state="translated">伺服器：</target>
       </trans-unit>
     </body>
   </file>
@@ -2325,6 +2396,11 @@ Also check your network access.</target>
         <source>Trash</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">垃圾桶</target>
+      </trans-unit>
+      <trans-unit id="URL">
+        <source>URL</source>
+        <note>URL</note>
+        <target xml:lang="zh-Hant" state="translated">網址</target>
       </trans-unit>
       <trans-unit id="Unread">
         <source>Unread</source>
