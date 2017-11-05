@@ -668,12 +668,18 @@
       <trans-unit id="442.title">
         <source>Columns</source>
         <note>Class = "NSMenuItem"; title = "Columns"; ObjectID = "442";</note>
-        <target xml:lang="zh-Hant" state="translated">直欄</target>
+        <target xml:lang="zh-Hant" state="translated">顯示欄位</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">直欄</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="443.title">
         <source>Columns</source>
         <note>Class = "NSMenu"; title = "Columns"; ObjectID = "443";</note>
-        <target xml:lang="zh-Hant" state="translated">直欄</target>
+        <target xml:lang="zh-Hant" state="translated">顯示欄位</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">直欄</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="574.title">
         <source>New Smart Folder…</source>
@@ -945,6 +951,26 @@
         <note>Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327";</note>
         <target xml:lang="zh-Hant" state="translated">搜尋文章</target>
       </trans-unit>
+      <trans-unit id="1336.title">
+        <source>Order By</source>
+        <note>Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336";</note>
+        <target xml:lang="zh-Hant" state="translated">項目顯示排序</target>
+      </trans-unit>
+      <trans-unit id="1337.title">
+        <source>Order By</source>
+        <note>Class = "NSMenu"; title = "Order By"; ObjectID = "1337";</note>
+        <target xml:lang="zh-Hant" state="translated">訂閱排序方式</target>
+      </trans-unit>
+      <trans-unit id="1338.title">
+        <source>Manual</source>
+        <note>Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338";</note>
+        <target xml:lang="zh-Hant" state="translated">手動排序</target>
+      </trans-unit>
+      <trans-unit id="1339.title">
+        <source>Name</source>
+        <note>Class = "NSMenuItem"; title = "Name"; ObjectID = "1339";</note>
+        <target xml:lang="zh-Hant" state="translated">依名稱</target>
+      </trans-unit>
       <trans-unit id="1408.title">
         <source>Unsubscribe</source>
         <note>Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408";</note>
@@ -978,7 +1004,10 @@
       <trans-unit id="rNG-xr-3x7.title">
         <source>Unread Articles</source>
         <note>Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7";</note>
-        <target xml:lang="zh-Hant" state="translated">Unread Articles</target>
+        <target xml:lang="zh-Hant" state="translated">未讀文章</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">Unread Articles</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="t1E-6n-jtA.title">
         <source>All Articles</source>
@@ -1250,7 +1279,10 @@
       <trans-unit id="sDP-Ni-g3a.title">
         <source>Unread Articles</source>
         <note>Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "sDP-Ni-g3a";</note>
-        <target xml:lang="zh-Hant" state="translated">Unread Articles</target>
+        <target xml:lang="zh-Hant" state="translated">未讀文章</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">Unread Articles</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="vOQ-xo-w8E.title">
         <source>Edit…</source>
@@ -2299,6 +2331,11 @@ Also check your network access.</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">未閱讀</target>
       </trans-unit>
+      <trans-unit id="Unread Articles">
+        <source>Unread Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">未讀文章</target>
+      </trans-unit>
       <trans-unit id="Unrecognised database format text">
         <source>Unrecognised database format text</source>
         <note>No comment provided by engineer.</note>
@@ -2586,7 +2623,10 @@ Also check your network access.</target>
       <trans-unit id="Unread Articles">
         <source>Unread Articles</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hant" state="translated">Unread Articles</target>
+        <target xml:lang="zh-Hant" state="translated">未讀文章</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">Unread Articles</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Unrecognised database format text">
         <source>Unrecognised database format text</source>
