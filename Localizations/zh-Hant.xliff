@@ -800,6 +800,11 @@
         <note>Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067";</note>
         <target xml:lang="zh-Hant" state="translated">在外部瀏覽器中打開文章頁面</target>
       </trans-unit>
+      <trans-unit id="1073.title">
+        <source>Send Link by Email</source>
+        <note>Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073";</note>
+        <target xml:lang="zh-Hant" state="translated">以電子郵件傳送</target>
+      </trans-unit>
       <trans-unit id="1084.title">
         <source>Bigger Text</source>
         <note>Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084";</note>
@@ -1122,6 +1127,16 @@
         <note>Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "Pqr-dM-SQQ";</note>
         <target xml:lang="zh-Hant" state="translated">新增智慧型檔案夾⋯</target>
       </trans-unit>
+      <trans-unit id="RaH-Yu-Ija.title">
+        <source>New Folder…</source>
+        <note>Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija";</note>
+        <target xml:lang="zh-Hant" state="translated">新資料夾…</target>
+      </trans-unit>
+      <trans-unit id="Rdq-QU-3hM.title">
+        <source>Delete…</source>
+        <note>Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Rdq-QU-3hM";</note>
+        <target xml:lang="zh-Hant" state="translated">删除…</target>
+      </trans-unit>
       <trans-unit id="SoG-b2-O1S.label">
         <source>Skip Folder</source>
         <note>Class = "NSToolbarItem"; label = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
@@ -1151,6 +1166,11 @@
         <source>Additional actions for the selected folder</source>
         <note>Class = "NSToolbarItem"; toolTip = "Additional actions for the selected folder"; ObjectID = "TSQ-UW-4gU";</note>
         <target xml:lang="zh-Hant" state="translated">所選檔案夾的額外動作</target>
+      </trans-unit>
+      <trans-unit id="Xw6-KX-rhd.title">
+        <source>Last 48 Hours</source>
+        <note>Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "Xw6-KX-rhd";</note>
+        <target xml:lang="zh-Hant" state="translated">過去 48 小時</target>
       </trans-unit>
       <trans-unit id="Y0d-K7-46f.title">
         <source>Get Info</source>
@@ -1343,6 +1363,11 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
+      <trans-unit id="Ar5-Qc-YTe.ibExternalAccessibilityDescription">
+        <source>Visit the website</source>
+        <note>Class = "NSButton"; ibExternalAccessibilityDescription = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
+        <target xml:lang="zh-Hant" state="translated">瀏覽網站</target>
+      </trans-unit>
       <trans-unit id="Ar5-Qc-YTe.ibShadowedToolTip">
         <source>Visit the website</source>
         <note>Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
@@ -1470,6 +1495,11 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">文章</target>
       </trans-unit>
+      <trans-unit id="Ascending">
+        <source>Ascending</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">升冪</target>
+      </trans-unit>
       <trans-unit id="Author">
         <source>Author</source>
         <note>Data field name visible in menu/article list/smart folder definition</note>
@@ -1555,6 +1585,11 @@
         <source>Copy Page Link to Clipboard</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">將頁面連結拷貝到剪貼板</target>
+      </trans-unit>
+      <trans-unit id="Copy URL">
+        <source>Copy URL</source>
+        <note>Copy URL</note>
+        <target xml:lang="zh-Hant" state="translated">複製網址</target>
       </trans-unit>
       <trans-unit id="Credentials Prompt">
         <source>Credentials Prompt</source>
@@ -1646,6 +1681,16 @@
         <source>Deleted</source>
         <note>Data field name visible in smart folder definition</note>
         <target xml:lang="zh-Hant" state="translated">已刪除</target>
+      </trans-unit>
+      <trans-unit id="Delete…">
+        <source>Delete…</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="zh-Hant" state="translated">删除…</target>
+      </trans-unit>
+      <trans-unit id="Descending">
+        <source>Descending</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">降冪</target>
       </trans-unit>
       <trans-unit id="Do you really want to import the subscriptions from the specified OPML file?">
         <source>Do you really want to import the subscriptions from the specified OPML file?</source>
@@ -2492,6 +2537,11 @@ Also check your network access.</target>
         <source>Search all articles</source>
         <note>Placeholder title of a search field</note>
         <target xml:lang="zh-Hant" state="translated">搜尋所有文章</target>
+      </trans-unit>
+      <trans-unit id="Search current web page">
+        <source>Search current web page</source>
+        <note>Placeholder title of a search field</note>
+        <target xml:lang="zh-Hant" state="translated">查詢當前網頁</target>
       </trans-unit>
       <trans-unit id="Subject">
         <source>Subject</source>
