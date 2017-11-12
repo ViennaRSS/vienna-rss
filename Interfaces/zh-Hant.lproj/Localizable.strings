@@ -1,6 +1,15 @@
 /* No comment provided by engineer. */
 "%@ Info" = "%@ 簡介";
 
+/* Progress in bytes, e.g. 1 KB of 1 MB */
+"%@ of %@" = "%1$@ 共 %2$@";
+
+/* Number of bytes received, e.g. 1 MB received */
+"%@ received" = "已接收 %@";
+
+/* {existing authors},{new author name} */
+"%@, %@" = "%1$@，%2$@";
+
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "已取得 %d 則新文章";
 
@@ -27,6 +36,9 @@
 
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "系統中已有相同名稱的檔案夾";
+
+/* No comment provided by engineer. */
+"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "新的外掛項目已安裝。您可以從選單列中新增此外掛項目至工具列上。";
 
 /* Toolbar item name for the Advanced preference pane */
 "Advanced" = "進階";
@@ -59,7 +71,16 @@
 "Appearance" = "外觀";
 
 /* No comment provided by engineer. */
+"AppleScript Error in '%@' script" = "在 %@ 腳本中發生 AppleScript 錯誤";
+
+/* No comment provided by engineer. */
 "Articles" = "文章";
+
+/* No comment provided by engineer. */
+"Ascending" = "正排";
+
+/* No comment provided by engineer. */
+"Authenticating on Open Reader" = "Open Reader 驗證身份中";
 
 /* Data field name visible in menu/article list/smart folder definition */
 "Author" = "作者";
@@ -108,16 +129,22 @@
 "Connecting to %@" = "連線到 %@";
 
 /* No comment provided by engineer. */
+"Connecting to Open Reader server to retrieve %@" = "正在連線至 Open Reader 伺服器以取得 %@";
+
+/* No comment provided by engineer. */
 "Copy Link to Clipboard" = "將連結拷貝到剪貼板";
 
 /* No comment provided by engineer. */
 "Copy Page Link to Clipboard" = "將頁面連結拷貝到剪貼板";
 
+/* Copy URL */
+"Copy URL" = "複製網址";
+
 /* No comment provided by engineer. */
 "Credentials Prompt" = "“%@”這個訂閱頻道需要您提供使用者名稱與密碼進行認證，才可加以存取。";
 
 /* No comment provided by engineer. */
-"Database Upgrade" = "資料庫升級";
+"Database Upgrade" = "資料庫更新";
 
 /* Data field name visible in menu/article list/smart folder definition */
 "Date" = "日期";
@@ -128,6 +155,9 @@
 
 /* Title of a menu item */
 "Delete Article" = "刪除文章";
+
+/* No comment provided by engineer. */
+"Delete Open Reader RSS feed" = "刪除 Open Reader 的 RSS 項目";
 
 /* No comment provided by engineer. */
 "Delete Open Reader RSS feed text" = "Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.";
@@ -167,6 +197,12 @@
 
 /* Data field name visible in smart folder definition */
 "Deleted" = "已刪除";
+
+/* Title of a menu item */
+"Delete…" = "删除…";
+
+/* No comment provided by engineer. */
+"Descending" = "倒排";
 
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "您是否確定要從指定的 OPML 檔案輸入訂閱頻道？";
@@ -220,13 +256,28 @@
 "Error importing subscriptions title" = "匯入發生錯誤";
 
 /* No comment provided by engineer. */
+"Error loading script '%@'" = "載入 script 時發生錯誤 %@";
+
+/* No comment provided by engineer. */
 "Error parsing XML data in feed" = "在剖析訂閱頻道的 XML 資料時發生錯誤";
+
+/* No comment provided by engineer. */
+"Error retrieving RSS Icon:" = "取得 RSS 圖示發生錯誤：";
+
+/* No comment provided by engineer. */
+"Error retrieving RSS feed:" = "取得 RSS 內容發生錯誤：";
+
+/* No comment provided by engineer. */
+"Error: Feed not found!" = "錯誤：未找到內容";
 
 /* No comment provided by engineer. */
 "External Browser" = "外部瀏覽器";
 
 /* No comment provided by engineer. */
 "Feed URL updated to %@" = "Feed URL 已更新為 %@";
+
+/* No comment provided by engineer. */
+"Fetching Open Reader Subscriptions…" = "取得 Open Reader 訂閱項目中…";
 
 /* Notification body */
 "File %@ downloaded" = "已下載檔案 %@";
@@ -249,6 +300,12 @@
 /* No comment provided by engineer. */
 "Folders" = "檔案夾";
 
+/* Title of a menu item */
+"Force Refresh Selected Subscriptions From Open Reader" = "從 Open Reader 中強制重新整理選擇的訂閱項目";
+
+/* No comment provided by engineer. */
+"Forcing Refresh subscriptions…" = "強制重新整理訂閱項目…";
+
 /* Toolbar item name for the General preference pane */
 "General" = "一般";
 
@@ -257,6 +314,9 @@
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "前往下一頁";
+
+/* No comment provided by engineer. */
+"Got HTTP status 304 - No news from last check" = "回應 HTTP 403 狀態 - 上次檢查並無新的內容";
 
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "伺服器回報 HTTP 碼 %d";
@@ -273,11 +333,17 @@
 /* Title of a menu item */
 "Hide Status Bar" = "隱藏狀態列";
 
+/* Title of a menu item */
+"Hide Toolbar" = "隱藏工具列";
+
 /* Title of a button on an alert */
 "Import" = "輸入";
 
 /* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "從 OPML 檔案輸入訂閱頻道？";
+
+/* No comment provided by engineer. */
+"Improper infinitely looping URL redirect to %@" = "不正確的網址導向至 %@";
 
 /* No comment provided by engineer. */
 "Invalid style body" = "將會改用預設的顯示樣式。";
@@ -286,10 +352,16 @@
 "Invalid style title" = "%@ 樣式的檔案遺失或已損壞";
 
 /* No comment provided by engineer. */
+"JavaScript" = "JavaScript";
+
+/* No comment provided by engineer. */
 "Last Week" = "上週";
 
 /* Data field name visible in menu/article list */
 "Link" = "連結";
+
+/* No comment provided by engineer. */
+"Loading" = "載入中";
 
 /* No comment provided by engineer. */
 "Loading…" = "載入中⋯";
@@ -333,6 +405,9 @@
 /* No comment provided by engineer. */
 "Never" = "永不";
 
+/* No comment provided by engineer. */
+"New Tab" = "新分頁";
+
 /* Notification title */
 "New articles retrieved" = "已取得新文章";
 
@@ -347,6 +422,9 @@
 
 /* No comment provided by engineer. */
 "No" = "否";
+
+/* No comment provided by engineer. */
+"No articles in feed" = "訂閱項目並無文章";
 
 /* No comment provided by engineer. */
 "No new articles available" = "沒有新文章";
@@ -385,6 +463,9 @@
 "Open Page in %@" = "在 %@ 中打開頁面";
 
 /* No comment provided by engineer. */
+"Open Reader Authentication Failed" = "Open Reader 認證失敗";
+
+/* No comment provided by engineer. */
 "Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
 
 /* No comment provided by engineer. */
@@ -405,8 +486,14 @@
 /* No comment provided by engineer. */
 "Play" = "播放";
 
+/* No comment provided by engineer. */
+"Plugin installed" = "已安裝的外掛項目";
+
 /* Title of the Preferences window */
 "Preferences" = "偏好設定";
+
+/* No comment provided by engineer. */
+"Queue" = "佇列";
 
 /* Title of a button on an alert */
 "Quit" = "結束";
@@ -414,6 +501,9 @@
 /* Title of a button on an alert
    Title of a menu item */
 "Quit Vienna" = "結束 Vienna";
+
+/* No comment provided by engineer. */
+"RSS Icon not found!" = "找不到圖示。";
 
 /* No comment provided by engineer. */
 "RSS Subscription Export Title" = "匯出已完成";
@@ -467,6 +557,9 @@
 "Retrieving folder image" = "正在取得檔案夾影像";
 
 /* No comment provided by engineer. */
+"Retrieving folder image for Open Reader Feed" = "正在接收 Open Reader 的資料夾圖檔";
+
+/* No comment provided by engineer. */
 "Return to the previous page" = "返回上一頁";
 
 /* No comment provided by engineer. */
@@ -474,6 +567,12 @@
 
 /* Placeholder title of a search field */
 "Search all articles" = "搜尋所有文章";
+
+/* No comment provided by engineer. */
+"Search all articles or the current web page" = "查詢當前網頁的所有文章";
+
+/* Placeholder title of a search field */
+"Search current web page" = "查詢當前網頁";
 
 /* No comment provided by engineer. */
 "Search in %@" = "在 %@ 中過濾";
@@ -491,7 +590,13 @@
 "Show Filter Bar" = "顯示過濾列";
 
 /* Title of a menu item */
+"Show Main Window…" = "顯示主視窗";
+
+/* Title of a menu item */
 "Show Status Bar" = "顯示狀態列";
+
+/* Title of a menu item */
+"Show Toolbar" = "顯示工具列";
 
 /* Title of a popup menu item */
 "Show in Finder" = "顯示於 Finder";
@@ -504,6 +609,9 @@
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "摘要";
+
+/* Toolbar item name for the Syncing preference pane */
+"Syncing" = "同步中";
 
 /* Data field name visible in smart folder definition */
 "Text" = "內文";
@@ -520,8 +628,14 @@
 /* No comment provided by engineer. */
 "Trash" = "垃圾桶";
 
+/* URL */
+"URL" = "網址";
+
 /* No comment provided by engineer. */
 "Unread" = "未閱讀";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "未讀文章";
 
 /* No comment provided by engineer. */
 "Unrecognised database format text" = "此版本的 Vienna 並不支援資料庫 (%@) 的檔案格式。請刪除此檔案，或是將檔案重新命名後，再重新啟動 Vienna。";
@@ -531,6 +645,9 @@
 
 /* No comment provided by engineer. */
 "Unsubscribe" = "取消訂閱 Feed";
+
+/* Title of a button on an alert */
+"Upgrade Database" = "更新資料庫";
 
 /* No comment provided by engineer. */
 "Vienna cannot open the file body" = "Vienna 無法打開“%@”這個檔案，原因是您完成下載後，已經把這個檔案搬移到其他地方。";
@@ -543,6 +660,9 @@
 
 /* No comment provided by engineer. */
 "Vienna cannot show the file title" = "Vienna 無法顯示這個檔案。";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "新版的 Vienna 必須更新資料庫，這可能會需要幾分鐘的時間，造成不便請見諒。";
 
 /* No comment provided by engineer. */
 "Yes" = "是";

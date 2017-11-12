@@ -2,7 +2,7 @@
 "1Ll-uG-QWh.title" = "每 15 分鐘";
 
 /* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "2oy-1i-QQP"; */
-"2oy-1i-QQP.title" = "在“下一個未閱讀項目”指令後";
+"2oy-1i-QQP.title" = "在 \"下一個未閱讀文章\" 操作後";
 
 /* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "5VQ-jP-2rL"; */
 "5VQ-jP-2rL.title" = "每 30 分鐘";
@@ -34,6 +34,9 @@
 /* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1"; */
 "JN6-lj-bQ1.title" = "顯示於選單列";
 
+/* Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0"; */
+"OID-qF-Pp0.title" = "檢查最新的 Bete 版本";
+
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "YoM-Gv-hXn"; */
 "YoM-Gv-hXn.title" = "在外部瀏覽器中打開連結";
 
@@ -55,6 +58,9 @@
 /* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG"; */
 "kGA-Sa-RLG.title" = "預設的 RSS 閱讀程式：";
 
+/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl"; */
+"meo-78-YOl.title" = "將更新內容的文章標示為新文章";
+
 /* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "oVW-ee-uJT"; */
 "oVW-ee-uJT.title" = "每 5 分鐘";
 
@@ -63,6 +69,9 @@
 
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "pjg-Ze-H3l"; */
 "pjg-Ze-H3l.title" = "在背景中打開新連結";
+
+/* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
+"qeb-at-hYb.title" = "更新：";
 
 /* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "sCl-hz-PFF"; */
 "sCl-hz-PFF.title" = "將目前的文章標記為已閱讀：";

@@ -27,10 +27,30 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
+      <trans-unit id="2GQ-cu-fbh.title">
+        <source>The higher the number, the quicker your subscriptions will be downloaded.</source>
+        <note>Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "2GQ-cu-fbh";</note>
+        <target xml:lang="zh-Hant" state="translated">數字越大代表訂閱項目越快被下載更新。</target>
+      </trans-unit>
       <trans-unit id="GaX-8c-QaN.title">
         <source>The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.</source>
         <note>Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "GaX-8c-QaN";</note>
         <target xml:lang="zh-Hant" state="translated">一般使用 Vienna 時，此處的設定應無須加以更改。請參閱輔助說明檔案以取得各個設定的詳細資訊。</target>
+      </trans-unit>
+      <trans-unit id="Ngw-hP-yW4.title">
+        <source>Concurrent downloads:</source>
+        <note>Class = "NSTextFieldCell"; title = "Concurrent downloads:"; ObjectID = "Ngw-hP-yW4";</note>
+        <target xml:lang="zh-Hant" state="translated">同時間下載的數量：</target>
+      </trans-unit>
+      <trans-unit id="S3T-cW-hys.title">
+        <source>However, high numbers also render your computer less responsive while refreshing feeds.</source>
+        <note>Class = "NSTextFieldCell"; title = "However, high numbers also render your computer less responsive while refreshing feeds."; ObjectID = "S3T-cW-hys";</note>
+        <target xml:lang="zh-Hant" state="translated">但數字越大時在更新訂閱項目的過程中可能造成系統的回應速度變慢或無回應，</target>
+      </trans-unit>
+      <trans-unit id="fIz-4t-Ogg.title">
+        <source>Enable Plugins in the internal browser</source>
+        <note>Class = "NSButtonCell"; title = "Enable Plugins in the internal browser"; ObjectID = "fIz-4t-Ogg";</note>
+        <target xml:lang="zh-Hant" state="translated">在內建瀏覽器中啟用外掛</target>
       </trans-unit>
       <trans-unit id="guK-dE-f6n.title">
         <source>Enable JavaScript in the internal browser</source>
@@ -197,7 +217,10 @@
       <trans-unit id="2oy-1i-QQP.title">
         <source>After "Next Unread" command</source>
         <note>Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "2oy-1i-QQP";</note>
-        <target xml:lang="zh-Hant" state="translated">在“下一個未閱讀項目”指令後</target>
+        <target xml:lang="zh-Hant" state="translated">在 "下一個未閱讀文章" 操作後</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">在“下一個未閱讀項目”指令後</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="5VQ-jP-2rL.title">
         <source>Every 30 minutes</source>
@@ -249,6 +272,11 @@
         <note>Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1";</note>
         <target xml:lang="zh-Hant" state="translated">顯示於選單列</target>
       </trans-unit>
+      <trans-unit id="OID-qF-Pp0.title">
+        <source>Search for latest Beta versions</source>
+        <note>Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0";</note>
+        <target xml:lang="zh-Hant" state="translated">檢查最新的 Bete 版本</target>
+      </trans-unit>
       <trans-unit id="YoM-Gv-hXn.title">
         <source>Open links in external browser</source>
         <note>Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "YoM-Gv-hXn";</note>
@@ -284,6 +312,11 @@
         <note>Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG";</note>
         <target xml:lang="zh-Hant" state="translated">預設的 RSS 閱讀程式：</target>
       </trans-unit>
+      <trans-unit id="meo-78-YOl.title">
+        <source>Mark updated articles as new</source>
+        <note>Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl";</note>
+        <target xml:lang="zh-Hant" state="translated">將更新內容的文章標示為新文章</target>
+      </trans-unit>
       <trans-unit id="oVW-ee-uJT.title">
         <source>Every 5 minutes</source>
         <note>Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "oVW-ee-uJT";</note>
@@ -298,6 +331,11 @@
         <source>Open new links in the background</source>
         <note>Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "pjg-Ze-H3l";</note>
         <target xml:lang="zh-Hant" state="translated">在背景中打開新連結</target>
+      </trans-unit>
+      <trans-unit id="qeb-at-hYb.title">
+        <source>Updates:</source>
+        <note>Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb";</note>
+        <target xml:lang="zh-Hant" state="translated">更新：</target>
       </trans-unit>
       <trans-unit id="sCl-hz-PFF.title">
         <source>Mark current article read:</source>
@@ -408,6 +446,11 @@
         <note>Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG";</note>
         <target xml:lang="zh-Hant" state="translated">訂閱頻道 URL</target>
       </trans-unit>
+      <trans-unit id="xTj-hY-aTU.title">
+        <source>Open Cached File…</source>
+        <note>Class = "NSButtonCell"; title = "Open Cached File…"; ObjectID = "xTj-hY-aTU";</note>
+        <target xml:lang="zh-Hant" state="translated">開啟快取檔案…</target>
+      </trans-unit>
     </body>
   </file>
   <file original="Interfaces/Base.lproj/MainMenu.xib" source-language="en" datatype="plaintext" target-language="zh-Hant">
@@ -419,6 +462,11 @@
         <source>More Styles…</source>
         <note>Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg";</note>
         <target xml:lang="zh-Hant" state="translated">更多樣式⋯</target>
+      </trans-unit>
+      <trans-unit id="4ih-vj-fsk.title">
+        <source>Check Grammar With Spelling</source>
+        <note>Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "4ih-vj-fsk";</note>
+        <target xml:lang="zh-Hant" state="translated">檢查文法與拼字</target>
       </trans-unit>
       <trans-unit id="5.title">
         <source>Bring All to Front</source>
@@ -449,6 +497,11 @@
         <source>Window</source>
         <note>Class = "NSMenu"; title = "Window"; ObjectID = "24";</note>
         <target xml:lang="zh-Hant" state="translated">視窗</target>
+      </trans-unit>
+      <trans-unit id="27s-E3-FHd.title">
+        <source>Correct Spelling Automatically</source>
+        <note>Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "27s-E3-FHd";</note>
+        <target xml:lang="zh-Hant" state="translated">自動校正拼字</target>
       </trans-unit>
       <trans-unit id="58.title">
         <source>About Vienna</source>
@@ -528,7 +581,10 @@
       <trans-unit id="154.title">
         <source>Find…</source>
         <note>Class = "NSMenuItem"; title = "Find…"; ObjectID = "154";</note>
-        <target xml:lang="zh-Hant" state="translated">尋找⋯</target>
+        <target xml:lang="zh-Hant" state="translated">尋找...</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">尋找⋯</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="155.title">
         <source>Jump to Selection</source>
@@ -668,12 +724,18 @@
       <trans-unit id="442.title">
         <source>Columns</source>
         <note>Class = "NSMenuItem"; title = "Columns"; ObjectID = "442";</note>
-        <target xml:lang="zh-Hant" state="translated">直欄</target>
+        <target xml:lang="zh-Hant" state="translated">顯示欄位</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">直欄</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="443.title">
         <source>Columns</source>
         <note>Class = "NSMenu"; title = "Columns"; ObjectID = "443";</note>
-        <target xml:lang="zh-Hant" state="translated">直欄</target>
+        <target xml:lang="zh-Hant" state="translated">顯示欄位</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">直欄</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="574.title">
         <source>New Smart Folder…</source>
@@ -753,17 +815,26 @@
       <trans-unit id="1008.title">
         <source>Previous Tab</source>
         <note>Class = "NSMenuItem"; title = "Previous Tab"; ObjectID = "1008";</note>
-        <target xml:lang="zh-Hant" state="translated">前一個標籤頁</target>
+        <target xml:lang="zh-Hant" state="translated">上個分頁</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">前一個標籤頁</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="1009.title">
         <source>Next Tab</source>
         <note>Class = "NSMenuItem"; title = "Next Tab"; ObjectID = "1009";</note>
-        <target xml:lang="zh-Hant" state="translated">下一個標籤頁</target>
+        <target xml:lang="zh-Hant" state="translated">下個分頁</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">下一個標籤頁</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="1023.title">
         <source>Close Tab</source>
         <note>Class = "NSMenuItem"; title = "Close Tab"; ObjectID = "1023";</note>
-        <target xml:lang="zh-Hant" state="translated">關閉標籤頁</target>
+        <target xml:lang="zh-Hant" state="translated">關閉分頁</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">關閉標籤頁</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="1025.title">
         <source>Reload Page</source>
@@ -778,7 +849,10 @@
       <trans-unit id="1036.title">
         <source>Close All Tabs</source>
         <note>Class = "NSMenuItem"; title = "Close All Tabs"; ObjectID = "1036";</note>
-        <target xml:lang="zh-Hant" state="translated">關閉所有標籤頁</target>
+        <target xml:lang="zh-Hant" state="translated">關閉所有分頁</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">關閉所有標籤頁</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="1040.title">
         <source>Open Article Page</source>
@@ -799,6 +873,11 @@
         <source>Open Article Page in External Browser</source>
         <note>Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067";</note>
         <target xml:lang="zh-Hant" state="translated">在外部瀏覽器中打開文章頁面</target>
+      </trans-unit>
+      <trans-unit id="1073.title">
+        <source>Send Link by Email</source>
+        <note>Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073";</note>
+        <target xml:lang="zh-Hant" state="translated">以電子郵件傳送</target>
       </trans-unit>
       <trans-unit id="1084.title">
         <source>Bigger Text</source>
@@ -880,6 +959,11 @@
         <note>Class = "NSMenuItem"; title = "Rename…"; ObjectID = "1181";</note>
         <target xml:lang="zh-Hant" state="translated">重新命名⋯</target>
       </trans-unit>
+      <trans-unit id="1184.title">
+        <source>Delete…</source>
+        <note>Class = "NSMenuItem"; title = "Delete…"; ObjectID = "1184";</note>
+        <target xml:lang="zh-Hant" state="translated">删除…</target>
+      </trans-unit>
       <trans-unit id="1186.title">
         <source>Skip Folder</source>
         <note>Class = "NSMenuItem"; title = "Skip Folder"; ObjectID = "1186";</note>
@@ -913,7 +997,10 @@
       <trans-unit id="1214.title">
         <source>Open New Tab</source>
         <note>Class = "NSMenuItem"; title = "Open New Tab"; ObjectID = "1214";</note>
-        <target xml:lang="zh-Hant" state="translated">打開新標籤頁</target>
+        <target xml:lang="zh-Hant" state="translated">開新分頁</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">打開新標籤頁</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="1216.title">
         <source>Download Enclosure</source>
@@ -924,6 +1011,11 @@
         <source>Customize Toolbar…</source>
         <note>Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257";</note>
         <target xml:lang="zh-Hant" state="translated">自定工具列⋯</target>
+      </trans-unit>
+      <trans-unit id="1258.title">
+        <source>Hide Toolbar</source>
+        <note>Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258";</note>
+        <target xml:lang="zh-Hant" state="translated">隱藏工具列</target>
       </trans-unit>
       <trans-unit id="1259.title">
         <source>Hide Status Bar</source>
@@ -940,6 +1032,26 @@
         <note>Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327";</note>
         <target xml:lang="zh-Hant" state="translated">搜尋文章</target>
       </trans-unit>
+      <trans-unit id="1336.title">
+        <source>Order By</source>
+        <note>Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336";</note>
+        <target xml:lang="zh-Hant" state="translated">項目顯示排序</target>
+      </trans-unit>
+      <trans-unit id="1337.title">
+        <source>Order By</source>
+        <note>Class = "NSMenu"; title = "Order By"; ObjectID = "1337";</note>
+        <target xml:lang="zh-Hant" state="translated">訂閱排序方式</target>
+      </trans-unit>
+      <trans-unit id="1338.title">
+        <source>Manual</source>
+        <note>Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338";</note>
+        <target xml:lang="zh-Hant" state="translated">手動排序</target>
+      </trans-unit>
+      <trans-unit id="1339.title">
+        <source>Name</source>
+        <note>Class = "NSMenuItem"; title = "Name"; ObjectID = "1339";</note>
+        <target xml:lang="zh-Hant" state="translated">依名稱</target>
+      </trans-unit>
       <trans-unit id="1408.title">
         <source>Unsubscribe</source>
         <note>Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408";</note>
@@ -949,6 +1061,86 @@
         <source>Get Info…</source>
         <note>Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409";</note>
         <target xml:lang="zh-Hant" state="translated">簡介⋯</target>
+      </trans-unit>
+      <trans-unit id="1425.title">
+        <source>Force Refresh Selected Subscriptions From Open Reader</source>
+        <note>Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "1425";</note>
+        <target xml:lang="zh-Hant" state="translated">從 Open Reader 中強制重新整理選擇的訂閱項目</target>
+      </trans-unit>
+      <trans-unit id="1428.title">
+        <source>Update Subscriptions From Open Reader</source>
+        <note>Class = "NSMenuItem"; title = "Update Subscriptions From Open Reader"; ObjectID = "1428";</note>
+        <target xml:lang="zh-Hant" state="translated">從 Open Reader 更新訂閱項目</target>
+      </trans-unit>
+      <trans-unit id="1458.title">
+        <source>Reindex Database</source>
+        <note>Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458";</note>
+        <target xml:lang="zh-Hant" state="translated">重建資料庫索引</target>
+      </trans-unit>
+      <trans-unit id="BUc-Ki-OOg.title">
+        <source>Unread or Flagged</source>
+        <note>Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "BUc-Ki-OOg";</note>
+        <target xml:lang="zh-Hant" state="translated">未讀或已加旗標</target>
+      </trans-unit>
+      <trans-unit id="CGp-H4-UaI.title">
+        <source>Last 48 Hours</source>
+        <note>Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI";</note>
+        <target xml:lang="zh-Hant" state="translated">過去 48 小時</target>
+      </trans-unit>
+      <trans-unit id="CLG-Dq-a59.title">
+        <source>Show Spelling and Grammar</source>
+        <note>Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "CLG-Dq-a59";</note>
+        <target xml:lang="zh-Hant" state="translated">顯示拼字與文法</target>
+      </trans-unit>
+      <trans-unit id="G6k-0L-moc.title">
+        <source>Speech</source>
+        <note>Class = "NSMenu"; title = "Speech"; ObjectID = "G6k-0L-moc";</note>
+        <target xml:lang="zh-Hant" state="translated">語音</target>
+      </trans-unit>
+      <trans-unit id="JXn-SB-3t2.title">
+        <source>Speech</source>
+        <note>Class = "NSMenuItem"; title = "Speech"; ObjectID = "JXn-SB-3t2";</note>
+        <target xml:lang="zh-Hant" state="translated">語音</target>
+      </trans-unit>
+      <trans-unit id="MHF-D4-pRN.title">
+        <source>Make Upper Case</source>
+        <note>Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN";</note>
+        <target xml:lang="zh-Hant" state="translated">轉成大寫</target>
+      </trans-unit>
+      <trans-unit id="QEb-Bm-CPN.title">
+        <source>Substitutions</source>
+        <note>Class = "NSMenu"; title = "Substitutions"; ObjectID = "QEb-Bm-CPN";</note>
+        <target xml:lang="zh-Hant" state="translated">替換</target>
+      </trans-unit>
+      <trans-unit id="RtQ-eP-bfk.title">
+        <source>Smart Dashes</source>
+        <note>Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk";</note>
+        <target xml:lang="zh-Hant" state="translated">智慧型劃線</target>
+      </trans-unit>
+      <trans-unit id="UFF-Fn-8ti.title">
+        <source>Transformations</source>
+        <note>Class = "NSMenu"; title = "Transformations"; ObjectID = "UFF-Fn-8ti";</note>
+        <target xml:lang="zh-Hant" state="translated">轉換</target>
+      </trans-unit>
+      <trans-unit id="ZCa-7v-54l.title">
+        <source>Enter Full Screen</source>
+        <note>Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "ZCa-7v-54l";</note>
+        <target xml:lang="zh-Hant" state="translated">進入全螢幕</target>
+      </trans-unit>
+      <trans-unit id="bd7-qY-ofB.title">
+        <source>Text Replacement</source>
+        <note>Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "bd7-qY-ofB";</note>
+        <target xml:lang="zh-Hant" state="translated">文字取代</target>
+      </trans-unit>
+      <trans-unit id="cK9-Df-xA3.title">
+        <source>Start Speaking</source>
+        <note>Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "cK9-Df-xA3";</note>
+        <target xml:lang="zh-Hant" state="translated">開始朗讀</target>
+      </trans-unit>
+      <trans-unit id="eVb-Qt-XJb.title">
+        <source>Substitutions</source>
+        <note>Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "eVb-Qt-XJb";</note>
+        <target xml:lang="zh-Hant" state="translated">替換</target>
       </trans-unit>
       <trans-unit id="ecl-HO-Kpi.title">
         <source>Mark All Subscriptions as Read</source>
@@ -960,15 +1152,53 @@
         <note>Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI";</note>
         <target xml:lang="zh-Hant" state="translated">拼字檢查</target>
       </trans-unit>
+      <trans-unit id="fbd-ZI-tZW.title">
+        <source>Check Document Now</source>
+        <note>Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "fbd-ZI-tZW";</note>
+        <target xml:lang="zh-Hant" state="translated">立刻檢查文件</target>
+      </trans-unit>
+      <trans-unit id="gbo-AM-wcF.title">
+        <source>Stop Speaking</source>
+        <note>Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "gbo-AM-wcF";</note>
+        <target xml:lang="zh-Hant" state="translated">停止朗讀</target>
+      </trans-unit>
+      <trans-unit id="idm-wm-h8z.title">
+        <source>Data Detectors</source>
+        <note>Class = "NSMenuItem"; title = "Data Detectors"; ObjectID = "idm-wm-h8z";</note>
+        <target xml:lang="zh-Hant" state="translated">資料檢測</target>
+      </trans-unit>
+      <trans-unit id="joR-kW-sIU.title">
+        <source>Transformations</source>
+        <note>Class = "NSMenuItem"; title = "Transformations"; ObjectID = "joR-kW-sIU";</note>
+        <target xml:lang="zh-Hant" state="translated">轉換</target>
+      </trans-unit>
+      <trans-unit id="kCi-pf-mkc.title">
+        <source>Smart Quotes</source>
+        <note>Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "kCi-pf-mkc";</note>
+        <target xml:lang="zh-Hant" state="translated">智慧引號</target>
+      </trans-unit>
+      <trans-unit id="l8F-tb-7E0.title">
+        <source>Spelling and Grammar</source>
+        <note>Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "l8F-tb-7E0";</note>
+        <target xml:lang="zh-Hant" state="translated">拼字與文法</target>
+      </trans-unit>
       <trans-unit id="pKl-6f-Hlc.title">
         <source>Mark Read</source>
         <note>Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc";</note>
         <target xml:lang="zh-Hant" state="translated">標示為已閱讀</target>
       </trans-unit>
+      <trans-unit id="qzH-De-act.title">
+        <source>Smart Copy/Paste</source>
+        <note>Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "qzH-De-act";</note>
+        <target xml:lang="zh-Hant" state="translated">智慧型複製/貼上</target>
+      </trans-unit>
       <trans-unit id="rNG-xr-3x7.title">
         <source>Unread Articles</source>
         <note>Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7";</note>
-        <target xml:lang="zh-Hant" state="translated">Unread Articles</target>
+        <target xml:lang="zh-Hant" state="translated">未讀文章</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">Unread Articles</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="t1E-6n-jtA.title">
         <source>All Articles</source>
@@ -980,10 +1210,35 @@
         <note>Class = "NSMenuItem"; title = "Today"; ObjectID = "t34-de-pMs";</note>
         <target xml:lang="zh-Hant" state="translated">今天</target>
       </trans-unit>
+      <trans-unit id="tfv-fu-HFM.title">
+        <source>Check Spelling While Typing</source>
+        <note>Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "tfv-fu-HFM";</note>
+        <target xml:lang="zh-Hant" state="translated">輸入時自動檢查拼字</target>
+      </trans-unit>
+      <trans-unit id="v3R-CV-0b9.title">
+        <source>Capitalize</source>
+        <note>Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "v3R-CV-0b9";</note>
+        <target xml:lang="zh-Hant" state="translated">保持大寫</target>
+      </trans-unit>
+      <trans-unit id="w4Q-ne-FPI.title">
+        <source>Smart Links</source>
+        <note>Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "w4Q-ne-FPI";</note>
+        <target xml:lang="zh-Hant" state="translated">智慧型連結</target>
+      </trans-unit>
+      <trans-unit id="wnc-vZ-fO4.title">
+        <source>Show Substitutions</source>
+        <note>Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "wnc-vZ-fO4";</note>
+        <target xml:lang="zh-Hant" state="translated">顯示替換項目</target>
+      </trans-unit>
       <trans-unit id="wqh-Jc-gBm.title">
         <source>Last Refresh</source>
         <note>Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm";</note>
         <target xml:lang="zh-Hant" state="translated">最近重新整理</target>
+      </trans-unit>
+      <trans-unit id="xpF-dh-E2m.title">
+        <source>Make Lower Case</source>
+        <note>Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "xpF-dh-E2m";</note>
+        <target xml:lang="zh-Hant" state="translated">轉成小寫</target>
       </trans-unit>
     </body>
   </file>
@@ -1072,6 +1327,39 @@
         <note>Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377";</note>
         <target xml:lang="zh-Hant" state="translated">過濾依據：</target>
       </trans-unit>
+      <trans-unit id="1404.title">
+        <source>Current Filter</source>
+        <note>Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404";</note>
+        <target xml:lang="zh-Hant" state="translated">目前過濾條件</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">目前的過濾器</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.label">
+        <source>Add</source>
+        <note>Class = "NSToolbarItem"; label = "Add"; ObjectID = "CPA-Ha-aj1";</note>
+        <target xml:lang="zh-Hant" state="translated">新增</target>
+      </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.paletteLabel">
+        <source>Add</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1";</note>
+        <target xml:lang="zh-Hant" state="translated">新增</target>
+      </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.toolTip">
+        <source>Subscribe to a feed or add a folder or smart folder.</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Subscribe to a feed or add a folder or smart folder."; ObjectID = "CPA-Ha-aj1";</note>
+        <target xml:lang="zh-Hant" state="translated">訂閱項目至資料夾或智慧型檔案夾。</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.paletteLabel">
+        <source>Mark All Items as Read</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Mark All Items as Read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="zh-Hant" state="translated">將全部文章設為已讀</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.toolTip">
+        <source>Mark all items as read</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Mark all items as read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="zh-Hant" state="translated">將全部文章設為已讀</target>
+      </trans-unit>
       <trans-unit id="Hs0-hu-A2g.title">
         <source>Refresh Selected Subscriptions</source>
         <note>Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g";</note>
@@ -1122,6 +1410,16 @@
         <note>Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "Pqr-dM-SQQ";</note>
         <target xml:lang="zh-Hant" state="translated">新增智慧型檔案夾⋯</target>
       </trans-unit>
+      <trans-unit id="RaH-Yu-Ija.title">
+        <source>New Folder…</source>
+        <note>Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija";</note>
+        <target xml:lang="zh-Hant" state="translated">新資料夾…</target>
+      </trans-unit>
+      <trans-unit id="Rdq-QU-3hM.title">
+        <source>Delete…</source>
+        <note>Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Rdq-QU-3hM";</note>
+        <target xml:lang="zh-Hant" state="translated">删除…</target>
+      </trans-unit>
       <trans-unit id="SoG-b2-O1S.label">
         <source>Skip Folder</source>
         <note>Class = "NSToolbarItem"; label = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
@@ -1151,6 +1449,11 @@
         <source>Additional actions for the selected folder</source>
         <note>Class = "NSToolbarItem"; toolTip = "Additional actions for the selected folder"; ObjectID = "TSQ-UW-4gU";</note>
         <target xml:lang="zh-Hant" state="translated">所選檔案夾的額外動作</target>
+      </trans-unit>
+      <trans-unit id="Xw6-KX-rhd.title">
+        <source>Last 48 Hours</source>
+        <note>Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "Xw6-KX-rhd";</note>
+        <target xml:lang="zh-Hant" state="translated">過去 48 小時</target>
       </trans-unit>
       <trans-unit id="Y0d-K7-46f.title">
         <source>Get Info</source>
@@ -1212,10 +1515,20 @@
         <note>Class = "NSToolbarItem"; toolTip = "Back"; ObjectID = "gOG-UJ-Pin";</note>
         <target xml:lang="zh-Hant" state="translated">返回</target>
       </trans-unit>
+      <trans-unit id="iqm-sr-F8U.title">
+        <source>Force Refresh Selected Subscriptions From Open Reader</source>
+        <note>Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "iqm-sr-F8U";</note>
+        <target xml:lang="zh-Hant" state="translated">從 Open Reader 中強制重新整理選擇的訂閱項目</target>
+      </trans-unit>
       <trans-unit id="l14-tu-w7l.title">
         <source>Rename…</source>
         <note>Class = "NSMenuItem"; title = "Rename…"; ObjectID = "l14-tu-w7l";</note>
         <target xml:lang="zh-Hant" state="translated">重新命名⋯</target>
+      </trans-unit>
+      <trans-unit id="lhy-4c-asJ.placeholderString">
+        <source>Search for folders</source>
+        <note>Class = "NSSearchFieldCell"; placeholderString = "Search for folders"; ObjectID = "lhy-4c-asJ";</note>
+        <target xml:lang="zh-Hant" state="translated">查詢所有資料夾</target>
       </trans-unit>
       <trans-unit id="psA-wp-PcZ.title">
         <source>New Subscription…</source>
@@ -1225,7 +1538,15 @@
       <trans-unit id="sDP-Ni-g3a.title">
         <source>Unread Articles</source>
         <note>Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "sDP-Ni-g3a";</note>
-        <target xml:lang="zh-Hant" state="translated">Unread Articles</target>
+        <target xml:lang="zh-Hant" state="translated">未讀文章</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">Unread Articles</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="ty7-ph-peE.title">
+        <source>Unread or Flagged</source>
+        <note>Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "ty7-ph-peE";</note>
+        <target xml:lang="zh-Hant" state="translated">未讀或已加旗標</target>
       </trans-unit>
       <trans-unit id="vOQ-xo-w8E.title">
         <source>Edit…</source>
@@ -1294,6 +1615,11 @@
         <note>Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114";</note>
         <target xml:lang="zh-Hant" state="translated">編輯訂閱頻道</target>
       </trans-unit>
+      <trans-unit id="116.title">
+        <source>Subscribe in Open Reader</source>
+        <note>Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116";</note>
+        <target xml:lang="zh-Hant" state="translated">在 Open Reader 中訂閱</target>
+      </trans-unit>
     </body>
   </file>
   <file original="Interfaces/Base.lproj/SearchFolder.xib" source-language="en" datatype="plaintext" target-language="zh-Hant">
@@ -1343,10 +1669,20 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
+      <trans-unit id="Ar5-Qc-YTe.ibExternalAccessibilityDescription">
+        <source>Visit the website</source>
+        <note>Class = "NSButton"; ibExternalAccessibilityDescription = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
+        <target xml:lang="zh-Hant" state="translated">瀏覽網站</target>
+      </trans-unit>
       <trans-unit id="Ar5-Qc-YTe.ibShadowedToolTip">
         <source>Visit the website</source>
         <note>Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
         <target xml:lang="zh-Hant" state="translated">Visit the website</target>
+      </trans-unit>
+      <trans-unit id="Lkv-md-rEW.title">
+        <source>Sync with an Open Reader server</source>
+        <note>Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Lkv-md-rEW";</note>
+        <target xml:lang="zh-Hant" state="translated">與 Open Reader 伺服器進行同步</target>
       </trans-unit>
       <trans-unit id="NKI-36-zCY.title">
         <source>Password:</source>
@@ -1357,6 +1693,31 @@
         <source>Login:</source>
         <note>Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "O2q-8o-CSb";</note>
         <target xml:lang="zh-Hant" state="translated">帳號：</target>
+      </trans-unit>
+      <trans-unit id="kM0-7a-obO.ibShadowedToolTip">
+        <source>Select a server supporting the Open Reader API</source>
+        <note>Class = "NSTextField"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "kM0-7a-obO";</note>
+        <target xml:lang="zh-Hant" state="translated">選擇支援 Open Reader API 的伺服器</target>
+      </trans-unit>
+      <trans-unit id="tec-2d-Xej.title">
+        <source>URL: https://</source>
+        <note>Class = "NSTextFieldCell"; title = "URL: https://"; ObjectID = "tec-2d-Xej";</note>
+        <target xml:lang="zh-Hant" state="translated">網址：https://</target>
+      </trans-unit>
+      <trans-unit id="uTl-XE-0ym.title">
+        <source>Server:</source>
+        <note>Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "uTl-XE-0ym";</note>
+        <target xml:lang="zh-Hant" state="translated">伺服器：</target>
+      </trans-unit>
+      <trans-unit id="vZE-Pl-S9H.ibShadowedToolTip">
+        <source>Address of a server supporting the Open Reader API</source>
+        <note>Class = "NSTextField"; ibShadowedToolTip = "Address of a server supporting the Open Reader API"; ObjectID = "vZE-Pl-S9H";</note>
+        <target xml:lang="zh-Hant" state="translated">支援 Open Reader API 的伺服器位址</target>
+      </trans-unit>
+      <trans-unit id="zAy-oc-zmb.ibExternalAccessibilityDescription">
+        <source>Select a server supporting the Open Reader API</source>
+        <note>Class = "NSPopUpButton"; ibExternalAccessibilityDescription = "Select a server supporting the Open Reader API"; ObjectID = "zAy-oc-zmb";</note>
+        <target xml:lang="zh-Hant" state="translated">選擇支援 Open Reader API 的伺服器</target>
       </trans-unit>
     </body>
   </file>
@@ -1369,6 +1730,21 @@
         <source>%@ Info</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">%@ 簡介</target>
+      </trans-unit>
+      <trans-unit id="%@ of %@">
+        <source>%1$@ of %2$@</source>
+        <note>Progress in bytes, e.g. 1 KB of 1 MB</note>
+        <target xml:lang="zh-Hant" state="translated">%1$@ 共 %2$@</target>
+      </trans-unit>
+      <trans-unit id="%@ received">
+        <source>%@ received</source>
+        <note>Number of bytes received, e.g. 1 MB received</note>
+        <target xml:lang="zh-Hant" state="translated">已接收 %@</target>
+      </trans-unit>
+      <trans-unit id="%@, %@">
+        <source>%1$@, %2$@</source>
+        <note>{existing authors},{new author name}</note>
+        <target xml:lang="zh-Hant" state="translated">%1$@，%2$@</target>
       </trans-unit>
       <trans-unit id="%d new articles retrieved">
         <source>%d new articles retrieved</source>
@@ -1414,6 +1790,11 @@
         <source>A folder with that name already exists</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">系統中已有相同名稱的檔案夾</target>
+      </trans-unit>
+      <trans-unit id="A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.">
+        <source>A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">新的外掛項目已安裝。您可以從選單列中新增此外掛項目至工具列上。</target>
       </trans-unit>
       <trans-unit id="Advanced">
         <source>Advanced</source>
@@ -1465,10 +1846,25 @@
         <note>Toolbar item name for the Appearance preference pane</note>
         <target xml:lang="zh-Hant" state="translated">外觀</target>
       </trans-unit>
+      <trans-unit id="AppleScript Error in '%@' script">
+        <source>AppleScript Error in '%@' script</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">在 %@ 腳本中發生 AppleScript 錯誤</target>
+      </trans-unit>
       <trans-unit id="Articles">
         <source>Articles</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">文章</target>
+      </trans-unit>
+      <trans-unit id="Ascending">
+        <source>Ascending</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">正排</target>
+      </trans-unit>
+      <trans-unit id="Authenticating on Open Reader">
+        <source>Authenticating on Open Reader</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">Open Reader 驗證身份中</target>
       </trans-unit>
       <trans-unit id="Author">
         <source>Author</source>
@@ -1546,6 +1942,11 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">連線到 %@</target>
       </trans-unit>
+      <trans-unit id="Connecting to Open Reader server to retrieve %@">
+        <source>Connecting to Open Reader server to retrieve %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">正在連線至 Open Reader 伺服器以取得 %@</target>
+      </trans-unit>
       <trans-unit id="Copy Link to Clipboard">
         <source>Copy Link to Clipboard</source>
         <note>No comment provided by engineer.</note>
@@ -1556,6 +1957,11 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">將頁面連結拷貝到剪貼板</target>
       </trans-unit>
+      <trans-unit id="Copy URL">
+        <source>Copy URL</source>
+        <note>Copy URL</note>
+        <target xml:lang="zh-Hant" state="translated">複製網址</target>
+      </trans-unit>
       <trans-unit id="Credentials Prompt">
         <source>Credentials Prompt</source>
         <note>No comment provided by engineer.</note>
@@ -1564,7 +1970,10 @@
       <trans-unit id="Database Upgrade">
         <source>Database Upgrade</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hant" state="translated">資料庫升級</target>
+        <target xml:lang="zh-Hant" state="translated">資料庫更新</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">資料庫升級</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Date">
         <source>Date</source>
@@ -1581,6 +1990,11 @@
         <source>Delete Article</source>
         <note>Title of a menu item</note>
         <target xml:lang="zh-Hant" state="translated">刪除文章</target>
+      </trans-unit>
+      <trans-unit id="Delete Open Reader RSS feed">
+        <source>Delete Open Reader RSS feed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">刪除 Open Reader 的 RSS 項目</target>
       </trans-unit>
       <trans-unit id="Delete Open Reader RSS feed text">
         <source>Delete Open Reader RSS feed text</source>
@@ -1646,6 +2060,16 @@
         <source>Deleted</source>
         <note>Data field name visible in smart folder definition</note>
         <target xml:lang="zh-Hant" state="translated">已刪除</target>
+      </trans-unit>
+      <trans-unit id="Delete…">
+        <source>Delete…</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="zh-Hant" state="translated">删除…</target>
+      </trans-unit>
+      <trans-unit id="Descending">
+        <source>Descending</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">倒排</target>
       </trans-unit>
       <trans-unit id="Do you really want to import the subscriptions from the specified OPML file?">
         <source>Do you really want to import the subscriptions from the specified OPML file?</source>
@@ -1732,10 +2156,30 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">匯入發生錯誤</target>
       </trans-unit>
+      <trans-unit id="Error loading script '%@'">
+        <source>Error loading script '%@'</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">載入 script 時發生錯誤 %@</target>
+      </trans-unit>
       <trans-unit id="Error parsing XML data in feed">
         <source>Error parsing XML data in feed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">在剖析訂閱頻道的 XML 資料時發生錯誤</target>
+      </trans-unit>
+      <trans-unit id="Error retrieving RSS Icon:">
+        <source>Error retrieving RSS Icon:</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">取得 RSS 圖示發生錯誤：</target>
+      </trans-unit>
+      <trans-unit id="Error retrieving RSS feed:">
+        <source>Error retrieving RSS feed:</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">取得 RSS 內容發生錯誤：</target>
+      </trans-unit>
+      <trans-unit id="Error: Feed not found!">
+        <source>Error: Feed not found!</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">錯誤：未找到內容</target>
       </trans-unit>
       <trans-unit id="External Browser">
         <source>External Browser</source>
@@ -1746,6 +2190,11 @@
         <source>Feed URL updated to %@</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">Feed URL 已更新為 %@</target>
+      </trans-unit>
+      <trans-unit id="Fetching Open Reader Subscriptions…">
+        <source>Fetching Open Reader Subscriptions…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">取得 Open Reader 訂閱項目中…</target>
       </trans-unit>
       <trans-unit id="File %@ downloaded">
         <source>File %@ downloaded</source>
@@ -1782,6 +2231,16 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">檔案夾</target>
       </trans-unit>
+      <trans-unit id="Force Refresh Selected Subscriptions From Open Reader">
+        <source>Force Refresh Selected Subscriptions From Open Reader</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="zh-Hant" state="translated">從 Open Reader 中強制重新整理選擇的訂閱項目</target>
+      </trans-unit>
+      <trans-unit id="Forcing Refresh subscriptions…">
+        <source>Forcing Refresh subscriptions…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">強制重新整理訂閱項目…</target>
+      </trans-unit>
       <trans-unit id="General">
         <source>General</source>
         <note>Toolbar item name for the General preference pane</note>
@@ -1796,6 +2255,11 @@
         <source>Go forward to the next page</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">前往下一頁</target>
+      </trans-unit>
+      <trans-unit id="Got HTTP status 304 - No news from last check">
+        <source>Got HTTP status 304 - No news from last check</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">回應 HTTP 403 狀態 - 上次檢查並無新的內容</target>
       </trans-unit>
       <trans-unit id="HTTP code %d reported from server">
         <source>HTTP code %d reported from server</source>
@@ -1822,6 +2286,11 @@
         <note>Title of a menu item</note>
         <target xml:lang="zh-Hant" state="translated">隱藏狀態列</target>
       </trans-unit>
+      <trans-unit id="Hide Toolbar">
+        <source>Hide Toolbar</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="zh-Hant" state="translated">隱藏工具列</target>
+      </trans-unit>
       <trans-unit id="Import">
         <source>Import</source>
         <note>Title of a button on an alert</note>
@@ -1831,6 +2300,11 @@
         <source>Import subscriptions from OPML file?</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">從 OPML 檔案輸入訂閱頻道？</target>
+      </trans-unit>
+      <trans-unit id="Improper infinitely looping URL redirect to %@">
+        <source>Improper infinitely looping URL redirect to %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">不正確的網址導向至 %@</target>
       </trans-unit>
       <trans-unit id="Invalid style body">
         <source>Invalid style body</source>
@@ -1842,6 +2316,11 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">%@ 樣式的檔案遺失或已損壞</target>
       </trans-unit>
+      <trans-unit id="JavaScript">
+        <source>JavaScript</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">JavaScript</target>
+      </trans-unit>
       <trans-unit id="Last Week">
         <source>Last Week</source>
         <note>No comment provided by engineer.</note>
@@ -1851,6 +2330,11 @@
         <source>Link</source>
         <note>Data field name visible in menu/article list</note>
         <target xml:lang="zh-Hant" state="translated">連結</target>
+      </trans-unit>
+      <trans-unit id="Loading">
+        <source>Loading</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">載入中</target>
       </trans-unit>
       <trans-unit id="Loading…">
         <source>Loading…</source>
@@ -1922,6 +2406,11 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">永不</target>
       </trans-unit>
+      <trans-unit id="New Tab">
+        <source>New Tab</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">新分頁</target>
+      </trans-unit>
       <trans-unit id="New articles retrieved">
         <source>New articles retrieved</source>
         <note>Notification title</note>
@@ -1946,6 +2435,11 @@
         <source>No</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">否</target>
+      </trans-unit>
+      <trans-unit id="No articles in feed">
+        <source>No articles in feed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">訂閱項目並無文章</target>
       </trans-unit>
       <trans-unit id="No new articles available">
         <source>No new articles available</source>
@@ -2007,6 +2501,11 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">在 %@ 中打開頁面</target>
       </trans-unit>
+      <trans-unit id="Open Reader Authentication Failed">
+        <source>Open Reader Authentication Failed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">Open Reader 認證失敗</target>
+      </trans-unit>
       <trans-unit id="Open Reader Authentication Failed text">
         <source>Open Reader Authentication Failed text</source>
         <note>No comment provided by engineer.</note>
@@ -2043,10 +2542,20 @@ Also check your network access.</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">播放</target>
       </trans-unit>
+      <trans-unit id="Plugin installed">
+        <source>Plugin installed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">已安裝的外掛項目</target>
+      </trans-unit>
       <trans-unit id="Preferences">
         <source>Preferences</source>
         <note>Title of the Preferences window</note>
         <target xml:lang="zh-Hant" state="translated">偏好設定</target>
+      </trans-unit>
+      <trans-unit id="Queue">
+        <source>Queue</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">佇列</target>
       </trans-unit>
       <trans-unit id="Quit">
         <source>Quit</source>
@@ -2058,6 +2567,11 @@ Also check your network access.</target>
         <note>Title of a button on an alert
    Title of a menu item</note>
         <target xml:lang="zh-Hant" state="translated">結束 Vienna</target>
+      </trans-unit>
+      <trans-unit id="RSS Icon not found!">
+        <source>RSS Icon not found!</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">找不到圖示。</target>
       </trans-unit>
       <trans-unit id="RSS Subscription Export Title">
         <source>RSS Subscription Export Title</source>
@@ -2144,6 +2658,11 @@ Also check your network access.</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">正在取得檔案夾影像</target>
       </trans-unit>
+      <trans-unit id="Retrieving folder image for Open Reader Feed">
+        <source>Retrieving folder image for Open Reader Feed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">正在接收 Open Reader 的資料夾圖檔</target>
+      </trans-unit>
       <trans-unit id="Return to the previous page">
         <source>Return to the previous page</source>
         <note>No comment provided by engineer.</note>
@@ -2158,6 +2677,16 @@ Also check your network access.</target>
         <source>Search all articles</source>
         <note>Placeholder title of a search field</note>
         <target xml:lang="zh-Hant" state="translated">搜尋所有文章</target>
+      </trans-unit>
+      <trans-unit id="Search all articles or the current web page">
+        <source>Search all articles or the current web page</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">查詢當前網頁的所有文章</target>
+      </trans-unit>
+      <trans-unit id="Search current web page">
+        <source>Search current web page</source>
+        <note>Placeholder title of a search field</note>
+        <target xml:lang="zh-Hant" state="translated">查詢當前網頁</target>
       </trans-unit>
       <trans-unit id="Search in %@">
         <source>Search in %@</source>
@@ -2184,10 +2713,20 @@ Also check your network access.</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">顯示過濾列</target>
       </trans-unit>
+      <trans-unit id="Show Main Window…">
+        <source>Show Main Window…</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="zh-Hant" state="translated">顯示主視窗</target>
+      </trans-unit>
       <trans-unit id="Show Status Bar">
         <source>Show Status Bar</source>
         <note>Title of a menu item</note>
         <target xml:lang="zh-Hant" state="translated">顯示狀態列</target>
+      </trans-unit>
+      <trans-unit id="Show Toolbar">
+        <source>Show Toolbar</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="zh-Hant" state="translated">顯示工具列</target>
       </trans-unit>
       <trans-unit id="Show in Finder">
         <source>Show in Finder</source>
@@ -2208,6 +2747,11 @@ Also check your network access.</target>
         <source>Summary</source>
         <note>Pseudo field name visible in menu/article list</note>
         <target xml:lang="zh-Hant" state="translated">摘要</target>
+      </trans-unit>
+      <trans-unit id="Syncing">
+        <source>Syncing</source>
+        <note>Toolbar item name for the Syncing preference pane</note>
+        <target xml:lang="zh-Hant" state="translated">同步中</target>
       </trans-unit>
       <trans-unit id="Text">
         <source>Text</source>
@@ -2234,10 +2778,20 @@ Also check your network access.</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">垃圾桶</target>
       </trans-unit>
+      <trans-unit id="URL">
+        <source>URL</source>
+        <note>URL</note>
+        <target xml:lang="zh-Hant" state="translated">網址</target>
+      </trans-unit>
       <trans-unit id="Unread">
         <source>Unread</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">未閱讀</target>
+      </trans-unit>
+      <trans-unit id="Unread Articles">
+        <source>Unread Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">未讀文章</target>
       </trans-unit>
       <trans-unit id="Unrecognised database format text">
         <source>Unrecognised database format text</source>
@@ -2253,6 +2807,14 @@ Also check your network access.</target>
         <source>Unsubscribe</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">取消訂閱 Feed</target>
+      </trans-unit>
+      <trans-unit id="Upgrade Database">
+        <source>Upgrade Database</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="zh-Hant" state="translated">更新資料庫</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">升級資料庫</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Vienna cannot open the file body">
         <source>Vienna cannot open the file body</source>
@@ -2273,6 +2835,11 @@ Also check your network access.</target>
         <source>Vienna cannot show the file title</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hant" state="translated">Vienna 無法顯示這個檔案。</target>
+      </trans-unit>
+      <trans-unit id="Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.">
+        <source>Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hant" state="translated">新版的 Vienna 必須更新資料庫，這可能會需要幾分鐘的時間，造成不便請見諒。</target>
       </trans-unit>
       <trans-unit id="Yes">
         <source>Yes</source>
@@ -2368,6 +2935,11 @@ Also check your network access.</target>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
+      <trans-unit id="%@, %@">
+        <source>%1$@, %2$@</source>
+        <note>{existing authors},{new author name}</note>
+        <target xml:lang="zh-Hant" state="translated">%1$@，%2$@</target>
+      </trans-unit>
       <trans-unit id="(No title)">
         <source>(No title)</source>
         <note>No comment provided by engineer.</note>
@@ -2411,7 +2983,10 @@ Also check your network access.</target>
       <trans-unit id="Database Upgrade">
         <source>Database Upgrade</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hant" state="translated">Database Upgrade</target>
+        <target xml:lang="zh-Hant" state="translated">資料庫更新</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">Database Upgrade</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Date">
         <source>Date</source>
@@ -2493,6 +3068,11 @@ Also check your network access.</target>
         <note>Placeholder title of a search field</note>
         <target xml:lang="zh-Hant" state="translated">搜尋所有文章</target>
       </trans-unit>
+      <trans-unit id="Search current web page">
+        <source>Search current web page</source>
+        <note>Placeholder title of a search field</note>
+        <target xml:lang="zh-Hant" state="translated">查詢當前網頁</target>
+      </trans-unit>
       <trans-unit id="Subject">
         <source>Subject</source>
         <note>Data field name visible in menu/article list/smart folder definition</note>
@@ -2521,7 +3101,10 @@ Also check your network access.</target>
       <trans-unit id="Unread Articles">
         <source>Unread Articles</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hant" state="translated">Unread Articles</target>
+        <target xml:lang="zh-Hant" state="translated">未讀文章</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">Unread Articles</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Unrecognised database format text">
         <source>Unrecognised database format text</source>
@@ -2536,12 +3119,18 @@ Also check your network access.</target>
       <trans-unit id="Upgrade Database">
         <source>Upgrade Database</source>
         <note>Title of a button on an alert</note>
-        <target xml:lang="zh-Hant" state="translated">Upgrade Database</target>
+        <target xml:lang="zh-Hant" state="translated">更新資料庫</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">Upgrade Database</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.">
         <source>Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hant" state="translated">Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.</target>
+        <target xml:lang="zh-Hant" state="translated">新版的 Vienna 必須更新資料庫，這可能會需要幾分鐘的時間，造成不便請見諒。</target>
+        <alt-trans>
+          <target xml:lang="zh-Hant">Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="contains">
         <source>contains</source>
