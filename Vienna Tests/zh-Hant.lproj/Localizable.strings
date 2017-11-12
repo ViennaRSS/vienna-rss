@@ -1,3 +1,6 @@
+/* {existing authors},{new author name} */
+"%@, %@" = "%1$@，%2$@";
+
 /* No comment provided by engineer. */
 "(No title)" = "(無主旨)";
 
@@ -23,7 +26,7 @@
 "Cannot open database title" = "很抱歉，Vienna 無法打開此資料庫";
 
 /* No comment provided by engineer. */
-"Database Upgrade" = "Database Upgrade";
+"Database Upgrade" = "資料庫更新";
 
 /* Data field name visible in menu/article list/smart folder definition */
 "Date" = "日期";
@@ -73,6 +76,9 @@
 /* Placeholder title of a search field */
 "Search all articles" = "搜尋所有文章";
 
+/* Placeholder title of a search field */
+"Search current web page" = "查詢當前網頁";
+
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "標題";
 
@@ -89,7 +95,7 @@
 "Trash" = "垃圾桶";
 
 /* No comment provided by engineer. */
-"Unread Articles" = "Unread Articles";
+"Unread Articles" = "未讀文章";
 
 /* No comment provided by engineer. */
 "Unrecognised database format text" = "此版本的 Vienna 並不支援資料庫 (%@) 的檔案格式。請刪除此檔案，或是將檔案重新命名後，再重新啟動 Vienna。";
@@ -98,10 +104,10 @@
 "Unrecognised database format title" = "資料庫檔案格式已變更";
 
 /* Title of a button on an alert */
-"Upgrade Database" = "Upgrade Database";
+"Upgrade Database" = "更新資料庫";
 
 /* No comment provided by engineer. */
-"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.";
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "新版的 Vienna 必須更新資料庫，這可能會需要幾分鐘的時間，造成不便請見諒。";
 
 /* test for a string */
 "contains" = "包含";

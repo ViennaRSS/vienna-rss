@@ -37,3 +37,6 @@
 /* Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG"; */
 "xPF-M9-oZG.title" = "訂閱頻道 URL";
 
+/* Class = "NSButtonCell"; title = "Open Cached File…"; ObjectID = "xTj-hY-aTU"; */
+"xTj-hY-aTU.title" = "開啟快取檔案…";
+
