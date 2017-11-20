@@ -48,15 +48,15 @@ static NSString * _userAgent ;
 {
 	if(!_userAgent)
 	{
+	    NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
+        NSString * osVersion = [NSString stringWithFormat:@"%ld_%ld_%ld", version.majorVersion, version.minorVersion, version.patchVersion];
         NSString * webkitVersion = [NSBundle bundleWithIdentifier:@"com.apple.WebKit"].infoDictionary[@"CFBundleVersion"];
-        if (webkitVersion)
-            webkitVersion = [webkitVersion substringFromIndex:2];
-        else
+        if (!webkitVersion)
             webkitVersion = @"536.30";
         NSString * shortSafariVersion = [NSBundle bundleWithPath:@"/Applications/Safari.app"].infoDictionary[@"CFBundleShortVersionString"];
         if (!shortSafariVersion)
             shortSafariVersion = @"6.0";
-        _userAgent = [NSString stringWithFormat:MA_BrowserUserAgentString, ((ViennaApp *)NSApp).applicationVersion.firstWord, shortSafariVersion, webkitVersion];
+        _userAgent = [NSString stringWithFormat:MA_BrowserUserAgentString, osVersion, webkitVersion, shortSafariVersion, ((ViennaApp *)NSApp).applicationVersion.firstWord];
 	}
 	return _userAgent;
 }
@@ -121,7 +121,7 @@ static NSString * _userAgent ;
 	[defaultWebPrefs setJavaScriptEnabled:NO];
     [defaultWebPrefs setPlugInsEnabled:NO];
     // handle UserAgent
-    self.applicationNameForUserAgent = [TabbedWebView userAgent];
+    self.customUserAgent = [TabbedWebView userAgent];
 	[self loadMinimumFontSize];
 	[self loadUseJavaScript];
     [self loadUseWebPlugins];
