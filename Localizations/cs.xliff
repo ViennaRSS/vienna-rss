@@ -965,6 +965,16 @@
         <note>Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327";</note>
         <target xml:lang="cs" state="translated">Hledat v příspěvcích</target>
       </trans-unit>
+      <trans-unit id="1336.title">
+        <source>Order By</source>
+        <note>Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336";</note>
+        <target xml:lang="cs" state="translated">Seřadit podle</target>
+      </trans-unit>
+      <trans-unit id="1337.title">
+        <source>Order By</source>
+        <note>Class = "NSMenu"; title = "Order By"; ObjectID = "1337";</note>
+        <target xml:lang="cs" state="translated">Seřadit podle</target>
+      </trans-unit>
       <trans-unit id="1408.title">
         <source>Unsubscribe</source>
         <note>Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408";</note>
@@ -1111,6 +1121,11 @@
         <source>Add</source>
         <note>Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1";</note>
         <target xml:lang="cs" state="translated">Přidat</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.label">
+        <source>All Read</source>
+        <note>Class = "NSToolbarItem"; label = "All Read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="cs" state="translated">Všechny přečtené</target>
       </trans-unit>
       <trans-unit id="Hs0-hu-A2g.title">
         <source>Refresh Selected Subscriptions</source>
@@ -1540,6 +1555,11 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="cs" state="translated">Příspěvky</target>
       </trans-unit>
+      <trans-unit id="Ascending">
+        <source>Ascending</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Vzestupně</target>
+      </trans-unit>
       <trans-unit id="Author">
         <source>Author</source>
         <note>Data field name visible in menu/article list/smart folder definition</note>
@@ -1922,6 +1942,11 @@
         <note>Data field name visible in menu/article list</note>
         <target xml:lang="cs" state="translated">Odkaz</target>
       </trans-unit>
+      <trans-unit id="Loading">
+        <source>Loading</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Načítám</target>
+      </trans-unit>
       <trans-unit id="Loading…">
         <source>Loading…</source>
         <note>No comment provided by engineer.</note>
@@ -2289,6 +2314,11 @@ Also check your network access.</target>
         <note>Pseudo field name visible in menu/article list</note>
         <target xml:lang="cs" state="translated">Souhrn</target>
       </trans-unit>
+      <trans-unit id="Syncing">
+        <source>Syncing</source>
+        <note>Toolbar item name for the Syncing preference pane</note>
+        <target xml:lang="cs" state="translated">Synchronizace</target>
+      </trans-unit>
       <trans-unit id="This article contains an enclosed file.">
         <source>This article contains an enclosed file.</source>
         <note>No comment provided by engineer.</note>
@@ -2448,6 +2478,11 @@ Also check your network access.</target>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
+      <trans-unit id="%@, %@">
+        <source>%1$@, %2$@</source>
+        <note>{existing authors},{new author name}</note>
+        <target xml:lang="cs" state="translated">%1$@, %2$@</target>
+      </trans-unit>
       <trans-unit id="(No title)">
         <source>(No title)</source>
         <note>No comment provided by engineer.</note>
@@ -2672,6 +2707,11 @@ Also check your network access.</target>
         <source>is on or before</source>
         <note>test for a date</note>
         <target xml:lang="cs" state="translated">je nebo před</target>
+      </trans-unit>
+      <trans-unit id="under">
+        <source>under</source>
+        <note>test for a folder (not operational as of Vienna 3.2)</note>
+        <target xml:lang="cs" state="translated">pod</target>
       </trans-unit>
     </body>
   </file>
