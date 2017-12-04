@@ -316,6 +316,12 @@
 /* Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327"; */
 "1327.title" = "Hledat v příspěvcích";
 
+/* Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336"; */
+"1336.title" = "Seřadit podle";
+
+/* Class = "NSMenu"; title = "Order By"; ObjectID = "1337"; */
+"1337.title" = "Seřadit podle";
+
 /* Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408"; */
 "1408.title" = "Ukončit odebírání kanálu";
 
