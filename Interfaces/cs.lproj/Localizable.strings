@@ -61,6 +61,9 @@
 /* No comment provided by engineer. */
 "Articles" = "Příspěvky";
 
+/* No comment provided by engineer. */
+"Ascending" = "Vzestupně";
+
 /* Data field name visible in menu/article list/smart folder definition */
 "Author" = "Autor";
 
@@ -292,6 +295,9 @@
 "Link" = "Odkaz";
 
 /* No comment provided by engineer. */
+"Loading" = "Načítám";
+
+/* No comment provided by engineer. */
 "Loading…" = "Načítá se…";
 
 /* No comment provided by engineer. */
@@ -510,6 +516,9 @@
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Souhrn";
+
+/* Toolbar item name for the Syncing preference pane */
+"Syncing" = "Synchronizace";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Tento příspěvek obsahuje v příloze soubor.";
