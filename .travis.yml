@@ -1,13 +1,14 @@
 language: objective-c
-osx_image: xcode9
+osx_image: xcode9.2
 
 jobs:
   include:
     # testing
-    - script: xcodebuild -workspace Vienna.xcworkspace -scheme Vienna test | xcpretty
-
+    - stage: test
+      script: xcodebuild -workspace Vienna.xcworkspace -scheme Vienna test | xcpretty
     # linting
-    - before_script:
+    - stage: lint
+      before_script:
         - brew outdated swiftlint || brew upgrade swiftlint
         - swiftlint version
       script: swiftlint --lenient --reporter emoji
