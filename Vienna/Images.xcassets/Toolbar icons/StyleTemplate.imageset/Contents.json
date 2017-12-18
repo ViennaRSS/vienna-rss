@@ -2,8 +2,7 @@
   "images" : [
     {
       "idiom" : "mac",
-      "filename" : "StyleTemplate.pdf",
-      "language-direction" : "left-to-right"
+      "filename" : "StyleTemplate.pdf"
     }
   ],
   "info" : {
