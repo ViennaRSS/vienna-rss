@@ -98,7 +98,7 @@ NS_ASSUME_NONNULL_END
 }
 
 + (NSString*)FMDBUserVersion {
-    return @"2.7.2";
+    return @"2.7.4";
 }
 
 // returns 0x0240 for version 2.4.  This makes it super easy to do things like:
@@ -1312,6 +1312,16 @@ int FMDBExecuteBulkSQLCallback(void *theBlockAsVoid, int columns, char **values,
     return b;
 }
 
+- (BOOL)beginTransaction {
+    
+    BOOL b = [self executeUpdate:@"begin exclusive transaction"];
+    if (b) {
+        _isInTransaction = YES;
+    }
+    
+    return b;
+}
+
 - (BOOL)beginDeferredTransaction {
     
     BOOL b = [self executeUpdate:@"begin deferred transaction"];
@@ -1322,7 +1332,17 @@ int FMDBExecuteBulkSQLCallback(void *theBlockAsVoid, int columns, char **values,
     return b;
 }
 
-- (BOOL)beginTransaction {
+- (BOOL)beginImmediateTransaction {
+    
+    BOOL b = [self executeUpdate:@"begin immediate transaction"];
+    if (b) {
+        _isInTransaction = YES;
+    }
+    
+    return b;
+}
+
+- (BOOL)beginExclusiveTransaction {
     
     BOOL b = [self executeUpdate:@"begin exclusive transaction"];
     if (b) {
@@ -1423,6 +1443,37 @@ static NSString *FMDBEscapeSavePointName(NSString *savepointName) {
 #endif
 }
 
+- (BOOL)checkpoint:(FMDBCheckpointMode)checkpointMode error:(NSError * __autoreleasing *)error {
+    return [self checkpoint:checkpointMode name:nil logFrameCount:NULL checkpointCount:NULL error:error];
+}
+
+- (BOOL)checkpoint:(FMDBCheckpointMode)checkpointMode name:(NSString *)name error:(NSError * __autoreleasing *)error {
+    return [self checkpoint:checkpointMode name:name logFrameCount:NULL checkpointCount:NULL error:error];
+}
+
+- (BOOL)checkpoint:(FMDBCheckpointMode)checkpointMode name:(NSString *)name logFrameCount:(int *)logFrameCount checkpointCount:(int *)checkpointCount error:(NSError * __autoreleasing *)error
+{
+    const char* dbName = [name UTF8String];
+#if SQLITE_VERSION_NUMBER >= 3007006
+    int err = sqlite3_wal_checkpoint_v2(_db, dbName, checkpointMode, logFrameCount, checkpointCount);
+#else
+    NSLog(@"sqlite3_wal_checkpoint_v2 unavailable before sqlite 3.7.6. Ignoring checkpoint mode: %d", mode);
+    int err = sqlite3_wal_checkpoint(_db, dbName);
+#endif
+    if(err != SQLITE_OK) {
+        if (error) {
+            *error = [self lastError];
+        }
+        if (self.logsErrors) NSLog(@"%@", [self lastErrorMessage]);
+        if (self.crashOnErrors) {
+            NSAssert(false, @"%@", [self lastErrorMessage]);
+            abort();
+        }
+        return NO;
+    } else {
+        return YES;
+    }
+}
 
 #pragma mark Cache statements
 
@@ -1502,7 +1553,7 @@ void FMDBBlockSQLiteCallBackFunction(sqlite3_context *context, int argc, sqlite3
 - (NSData *)valueData:(void *)value {
     const void *bytes = sqlite3_value_blob(value);
     int length = sqlite3_value_bytes(value);
-    return bytes ? [NSData dataWithBytes:bytes length:length] : nil;
+    return bytes ? [NSData dataWithBytes:bytes length:(NSUInteger)length] : nil;
 }
 
 - (NSString *)valueString:(void *)value {
