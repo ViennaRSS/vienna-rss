@@ -58,7 +58,7 @@
 	//Metal is the default
 	[tabBarControl setStyleNamed:@"Unified"];
 	
-	[tabBarControl setHideForSingleTab:NO];
+	[tabBarControl setHideForSingleTab:YES];
 	[tabBarControl setUseOverflowMenu:YES];
 	[tabBarControl setAllowsBackgroundTabClosing:YES];
 	[tabBarControl setAutomaticallyAnimates:YES];
@@ -264,12 +264,6 @@
 - (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView *)tabView
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabCountChanged" object:nil];
-
-    if (tabView.numberOfTabViewItems == 1) {
-        [self.tabBarDisclosureView collapse:YES];
-    } else {
-        [self.tabBarDisclosureView disclose:YES];
-    }
 }
 
 /* disableTabCloseForTabViewItem
@@ -310,6 +304,14 @@
 - (BOOL)tabView:(NSTabView *)aTabView shouldAllowTabViewItem:(NSTabViewItem *)tabViewItem toLeaveTabBar:(PSMTabBarControl *)tabBarControl;
 {
 	return NO;
+}
+
+- (void)tabView:(NSTabView *)aTabView tabBarDidHide:(PSMTabBarControl *)tabBarControl {
+    [self.tabBarDisclosureView collapse:YES];
+}
+
+- (void)tabView:(NSTabView *)aTabView tabBarDidUnhide:(PSMTabBarControl *)tabBarControl {
+    [self.tabBarDisclosureView disclose:YES];
 }
 
 #pragma mark -
