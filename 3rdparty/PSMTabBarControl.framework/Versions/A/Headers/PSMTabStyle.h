@@ -59,6 +59,7 @@
 - (NSSize)objectCounterSizeOfTabCell:(PSMTabBarCell *)cell;
 - (NSRect)objectCounterRectForBounds:(NSRect)theRect ofTabCell:(PSMTabBarCell *)cell;
 - (NSRect)closeButtonRectForBounds:(NSRect)theRect ofTabCell:(PSMTabBarCell *)cell;
+- (NSSize)objectCounterSizeForTabCell:(PSMTabBarCell *)cell;
 
 // Drawing
 - (void)drawTabBarControl:(PSMTabBarControl *)tabBarControl inRect:(NSRect)rect;
