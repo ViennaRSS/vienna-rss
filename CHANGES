@@ -8,6 +8,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.2.0 Beta 3
+------------
+- Fix persistent tab bar at launch
+- Update FMDB to 2.7.4
+
 3.2.0 Beta 2
 ------------
 - Fix crashes on systems prior to Sierra
