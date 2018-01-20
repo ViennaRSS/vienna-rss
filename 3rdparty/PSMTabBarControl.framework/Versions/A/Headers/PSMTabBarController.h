@@ -17,6 +17,7 @@
 	NSMenu				*_overflowMenu;
 }
 
+- (instancetype)init __attribute((unavailable("You can not create a PSMTabBarController through -init / Please use -initWithTabBarControl:")));
 - (instancetype)initWithTabBarControl:(PSMTabBarControl *)control __attribute((objc_designated_initializer));
 
 @property (NS_NONATOMIC_IOSONLY, readonly, copy) NSMenu *overflowMenu;

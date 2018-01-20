@@ -98,27 +98,27 @@
 		</data>
 		<key>Resources/AquaTabClose_Front.tiff</key>
 		<data>
-		BornexboGdaD9jCSGkdIYa759qk=
+		rBhTB3IzFjkVIB20kpV2Nmjgthw=
 		</data>
 		<key>Resources/AquaTabClose_Front_Pressed.tiff</key>
 		<data>
-		QTJ9/tl6HveMf1bEvrXT+Szcqw8=
+		ML4pb4aWB0Gjp2k6zGLg41rLJrA=
 		</data>
 		<key>Resources/AquaTabClose_Front_Rollover.tiff</key>
 		<data>
-		XoIs4Y/RGclvp2PuJ4BTBgox5+Q=
+		9bFCcekaOFwl5jaBUi1DN9dAiWU=
 		</data>
 		<key>Resources/AquaTabNew.tiff</key>
 		<data>
-		+ZvIjbEkXBBdXpY+Ynn9FNuJMl4=
+		Zl/VsOWNbubGv6+BHUEbS62Optw=
 		</data>
 		<key>Resources/AquaTabNewPressed.tiff</key>
 		<data>
-		af5TzUVpx94q5TAHXWPA0FGpENA=
+		o573HD3VO9o6J7egY4nccUviyQ0=
 		</data>
 		<key>Resources/AquaTabNewRollover.tiff</key>
 		<data>
-		hZryPfBz6UFsn2PAg82nNBItPOc=
+		93zwlYwEGu0YF5jwA8iJpcQDxnI=
 		</data>
 		<key>Resources/AquaTabsBackground.png</key>
 		<data>
@@ -198,55 +198,55 @@
 		</data>
 		<key>Resources/Info.plist</key>
 		<data>
-		YFepEAp5R8lR21IRKGRiSAGklaM=
+		lGwEptvGrbKtY5RebIxWiHrtpHc=
 		</data>
 		<key>Resources/TabClose_Dirty.tiff</key>
 		<data>
-		nYzOZiK+8rGoSlJIZBUsCfZcEvI=
+		Iq1t5eIJFQOvT/8jcxCy/59j0OI=
 		</data>
 		<key>Resources/TabClose_Dirty_Pressed.tiff</key>
 		<data>
-		EMQkaDP2nhftv/7JrZoKYRuaIHc=
+		Bpn/heahkMDl5HiMtltc8RSTewc=
 		</data>
 		<key>Resources/TabClose_Dirty_Pressed_Textured.tiff</key>
 		<data>
-		IgIxz2LdWThhnVUOx1SiLOrEdWo=
+		v6+Od8K+o2TbWrZj2jXjG8wXVqE=
 		</data>
 		<key>Resources/TabClose_Dirty_Rollover.tiff</key>
 		<data>
-		GmetDVxgoHbeSd3StJxq7+gQz6A=
+		MnzLJEHuMIINanaKS1Yqw6ErsuU=
 		</data>
 		<key>Resources/TabClose_Dirty_Rollover_Textured.tiff</key>
 		<data>
-		kLVo9VO2WuBmjFiI/0ZgfsQDHEc=
+		/I3AC3Xe7JGvWCxeIBitH3/7Dqo=
 		</data>
 		<key>Resources/TabClose_Dirty_Textured.tiff</key>
 		<data>
-		4Gp3k9UrA74gr2JU+fu1IOoEkwc=
+		VpIEK0oLoAXq/lKIMyPR8OYnKI4=
 		</data>
 		<key>Resources/TabClose_Front.tiff</key>
 		<data>
-		dXgSElA/n9mPDoaeid0ES/Sz0MQ=
+		Axb/4dAohyB5Fs/UdVDhzV5Gl7c=
 		</data>
 		<key>Resources/TabClose_Front_Pressed.tiff</key>
 		<data>
-		zY7vJhRXaLhwk0jotkdwjepZQ10=
+		RMsmUJ9Ws9KpTVyneOQ1YqE9S+4=
 		</data>
 		<key>Resources/TabClose_Front_Pressed_Textured.tiff</key>
 		<data>
-		IGBCPBpVkjQKfASCIKnfaCsfQts=
+		6LYKFcGrekYrFMtpYAAuQFHmHnk=
 		</data>
 		<key>Resources/TabClose_Front_Rollover.tiff</key>
 		<data>
-		OhyfYu/bgjiRdP4KAVc64NU3ENY=
+		W+PdXt5z7ZL/eWefnSaO+Wt6xdY=
 		</data>
 		<key>Resources/TabClose_Front_Rollover_Textured.tiff</key>
 		<data>
-		ylcJs3/myBKfwfE8+ENNKFqvNxo=
+		yi+ctO80w13casJPYggoT5WXX64=
 		</data>
 		<key>Resources/TabClose_Front_Textured.tiff</key>
 		<data>
-		r2aVlM2MVXUc/hgFRtaefoVYZnw=
+		lpY39rQku6+4ro+Br7lzq40DfJE=
 		</data>
 		<key>Resources/TabNewMetal.png</key>
 		<data>
@@ -274,11 +274,11 @@
 		</data>
 		<key>Resources/overflowImage.tiff</key>
 		<data>
-		74y4QUxnoQ6oxCAsdvrr3qkzGqc=
+		LoMF5niOsMdDIWc6CZjGaKsnDv4=
 		</data>
 		<key>Resources/overflowImagePressed.tiff</key>
 		<data>
-		zNN2u+tNZcL+SGl7UsLZWp1Ligk=
+		Szg0DwLtRp/SVaew9z0flRlownk=
 		</data>
 		<key>Resources/pi.png</key>
 		<data>
@@ -288,361 +288,984 @@
 	<key>files2</key>
 	<dict>
 		<key>Headers/NSString_AITruncation.h</key>
-		<data>
-		UKXhM4HXF/2DFJgTJj6Xg2OzNcU=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			UKXhM4HXF/2DFJgTJj6Xg2OzNcU=
+			</data>
+			<key>hash2</key>
+			<data>
+			Cj0ga/UA3nbPjXxftv/6mGrG4cgnJtHD+uBgcqLCnmE=
+			</data>
+		</dict>
 		<key>Headers/PSMAdiumTabStyle.h</key>
-		<data>
-		YvJEb/dOS1CsUhM0MbEO7fMfjaY=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			YvJEb/dOS1CsUhM0MbEO7fMfjaY=
+			</data>
+			<key>hash2</key>
+			<data>
+			aVYkVFfF7T3ahAI0jrRmgjij2unqVwqacJLSjEEPNEY=
+			</data>
+		</dict>
 		<key>Headers/PSMAquaTabStyle.h</key>
-		<data>
-		7EQKZpSDJRu/l2a6yhZ8TNjuVYU=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			7EQKZpSDJRu/l2a6yhZ8TNjuVYU=
+			</data>
+			<key>hash2</key>
+			<data>
+			8l42WTeLGGWR3jTT9OMX6Uv4HcOV0LA8z1oPTqdX2ik=
+			</data>
+		</dict>
 		<key>Headers/PSMCardTabStyle.h</key>
-		<data>
-		sDfg3+vYVbKdn3juRwt6ZC958R0=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			sDfg3+vYVbKdn3juRwt6ZC958R0=
+			</data>
+			<key>hash2</key>
+			<data>
+			kh3LMnc0romFpehp5K5ylpAfvqWSgySkFTVNGQKST9s=
+			</data>
+		</dict>
 		<key>Headers/PSMLiveChatTabStyle.h</key>
-		<data>
-		RGkLFySkBd1XA2f3+TOlm2YgR6o=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			RGkLFySkBd1XA2f3+TOlm2YgR6o=
+			</data>
+			<key>hash2</key>
+			<data>
+			U6ZUuaB7WMGuyt7PYEKdPycuuIU+fuHKJswOG0qSZNQ=
+			</data>
+		</dict>
 		<key>Headers/PSMMetalTabStyle.h</key>
-		<data>
-		JrQiaq6tsKpkAFLS2HjlECCqrfA=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			JrQiaq6tsKpkAFLS2HjlECCqrfA=
+			</data>
+			<key>hash2</key>
+			<data>
+			VKkN2XRo4+rPTlALqTJGPwozB0den7TwC1smx+m19b4=
+			</data>
+		</dict>
 		<key>Headers/PSMOverflowPopUpButton.h</key>
-		<data>
-		tA8na9zJIb4QOighAoF4OoaY8g4=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			tA8na9zJIb4QOighAoF4OoaY8g4=
+			</data>
+			<key>hash2</key>
+			<data>
+			x2Rk/sFttNGrueY3LY2MGwPUO5NVRoEP1qvxHJbyRqM=
+			</data>
+		</dict>
 		<key>Headers/PSMProgressIndicator.h</key>
-		<data>
-		NRgACMu5VUeXE11dYTZEDVz4djI=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			NRgACMu5VUeXE11dYTZEDVz4djI=
+			</data>
+			<key>hash2</key>
+			<data>
+			juBZfI9MQVwEkTbcIdceY8pRSQbeiw8OcTtQSgHUA3I=
+			</data>
+		</dict>
 		<key>Headers/PSMRolloverButton.h</key>
-		<data>
-		jofC4m3aHY/tBSzvrI8hMzyyZsE=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			jofC4m3aHY/tBSzvrI8hMzyyZsE=
+			</data>
+			<key>hash2</key>
+			<data>
+			TiwsWXIofjSqTEzj35SIZ+ZS3sf/95lwXHOMcRF0YMw=
+			</data>
+		</dict>
 		<key>Headers/PSMTabBarCell.h</key>
-		<data>
-		hOc5ndOGLbE2xVeKKnIAOv8pnnw=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			hOc5ndOGLbE2xVeKKnIAOv8pnnw=
+			</data>
+			<key>hash2</key>
+			<data>
+			HfyIxHTM6s7+lzcGJz/X16pVG4o5eV7EHTLY1EemOZ0=
+			</data>
+		</dict>
 		<key>Headers/PSMTabBarControl.h</key>
-		<data>
-		yVDbIVvn/8m5ne3bwv9RiH6lsXc=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			qbNIpS0kdDavd+X9kBle7nLC+P0=
+			</data>
+			<key>hash2</key>
+			<data>
+			nXe0lB6d+QmLNEm+bwbm5xobPMiqSRhoi8Jp9Fi2KuA=
+			</data>
+		</dict>
 		<key>Headers/PSMTabBarController.h</key>
-		<data>
-		fG7cq3jCW7NnPlXzaQ8q85l8h7I=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Wzx9lDNYw3h2NbmE9foO0U/+G3w=
+			</data>
+			<key>hash2</key>
+			<data>
+			mFuOOhK1cvPkupfkJhzUABwEicxFcpgTcLf/7OrnILg=
+			</data>
+		</dict>
 		<key>Headers/PSMTabDragAssistant.h</key>
-		<data>
-		iWDdv78UW7n9zGE+ZuK4lJwEj5s=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			iWDdv78UW7n9zGE+ZuK4lJwEj5s=
+			</data>
+			<key>hash2</key>
+			<data>
+			+jz39EMeGZSRMwCnUmSs3ZnCQKnuMfO4DDJi7Mikvng=
+			</data>
+		</dict>
 		<key>Headers/PSMTabDragView.h</key>
-		<data>
-		fqEjab3FgSH/Q8Z0nGPhR0YMnys=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			fqEjab3FgSH/Q8Z0nGPhR0YMnys=
+			</data>
+			<key>hash2</key>
+			<data>
+			JtVRURnmVFb9sjUFEj35oMWPLiRqbAueAJWV36Ze9uM=
+			</data>
+		</dict>
 		<key>Headers/PSMTabDragWindow.h</key>
-		<data>
-		wy16zCF90U7v7we4UDJUUlT6+Ho=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			qXbaQaVEt27yEB2OjNb0eJ4xYb0=
+			</data>
+			<key>hash2</key>
+			<data>
+			kl0amqrJt5mf+Qwd4HgBR06gn0U9k0gMgTrcd9SET1Q=
+			</data>
+		</dict>
 		<key>Headers/PSMTabDragWindowController.h</key>
-		<data>
-		CxlaOgMOM+5jh6gusJjxwswV0Bs=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			CxlaOgMOM+5jh6gusJjxwswV0Bs=
+			</data>
+			<key>hash2</key>
+			<data>
+			QLP+Ndl5eglGZdtquJVJSoj1dWl9HXl9Gv1OJF4lqBU=
+			</data>
+		</dict>
 		<key>Headers/PSMTabStyle.h</key>
-		<data>
-		qrJkXTWK04cYk7n6OQc9ercym9E=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			AtqZqmzI7LyhPyxAneFvxbLYDE8=
+			</data>
+			<key>hash2</key>
+			<data>
+			8W4v8d4uEhON5SSQ14JrcXCS+ZBabZWlUx5AocDEYuE=
+			</data>
+		</dict>
 		<key>Headers/PSMTexturedMetalTabStyle.h</key>
-		<data>
-		toBapp02SWnb0m9II8HBJcpk2Ig=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			toBapp02SWnb0m9II8HBJcpk2Ig=
+			</data>
+			<key>hash2</key>
+			<data>
+			i9DQad8YrZpR01PgXm0jQhdEw8K9Q6TicwrfTPR8qNs=
+			</data>
+		</dict>
 		<key>Headers/PSMUnifiedTabStyle.h</key>
-		<data>
-		t96fB1PXbcNe3bkFmvJhAsQZPvM=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			t96fB1PXbcNe3bkFmvJhAsQZPvM=
+			</data>
+			<key>hash2</key>
+			<data>
+			ENw88PXff0lwDLBbmbMa22djsRn5Cs68g6sEbXL2Os8=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_ActiveTabClose.tiff</key>
-		<data>
-		mgLbsbnw38C4LQ8RDPs6aiubJ1s=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			mgLbsbnw38C4LQ8RDPs6aiubJ1s=
+			</data>
+			<key>hash2</key>
+			<data>
+			H2+pN/G+5P1QzfGl2cs+MxQ1cfFpcsG9y+F7h8gZoUg=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_ActiveTabClosePressed.tiff</key>
-		<data>
-		HWlFIi1vA611a/WWXGLuiK8TrVo=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			HWlFIi1vA611a/WWXGLuiK8TrVo=
+			</data>
+			<key>hash2</key>
+			<data>
+			C9xi7ILeYEKCvgQksEmpykTzm9BZ4PlqeGdHwXJB1WE=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_ActiveTabCloseRollover.tiff</key>
-		<data>
-		XhH6lPBfQzAVkaz0RguDF51jK9I=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			XhH6lPBfQzAVkaz0RguDF51jK9I=
+			</data>
+			<key>hash2</key>
+			<data>
+			p8K1hyV2rI20wK5wsZVS77WY364HsOvt1QZf8cv5gKc=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_ActiveTabFill.tiff</key>
-		<data>
-		Xg10zlVSO5Q7etGQZ/51nGb1Kgw=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Xg10zlVSO5Q7etGQZ/51nGb1Kgw=
+			</data>
+			<key>hash2</key>
+			<data>
+			izCuT2fzq1uFDndtKym1+h8jp//2WkOTk7soNTRRuSA=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_ActiveTabLeftCap.tiff</key>
-		<data>
-		VVRFgl1oJFk7R447PIjdsycvBPQ=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			VVRFgl1oJFk7R447PIjdsycvBPQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			pO7HK9b2VUsdVc5pICAMtVvMQ6PIBU8jy1lMzzptDO4=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_ActiveTabRightCap.tiff</key>
-		<data>
-		qSOASuVAMGx2BDch0sHpjZPFOKQ=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			qSOASuVAMGx2BDch0sHpjZPFOKQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			TCuKO/g0dSvbqhw+A4+j2aiKdrd+nqO4hg/62/OjQ1o=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_AddTabButton.tiff</key>
-		<data>
-		Q/BADN0ZSVuSJv/JH8h5vGBjhPI=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Q/BADN0ZSVuSJv/JH8h5vGBjhPI=
+			</data>
+			<key>hash2</key>
+			<data>
+			ushF0SwGgW8nNnn/Dyy46lRPyaLYpN4xNC6bUhS6Rho=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_AddTabButtonPushed.tiff</key>
-		<data>
-		1ujk25sVmWEU1Q6Cit/KfReSa6g=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			1ujk25sVmWEU1Q6Cit/KfReSa6g=
+			</data>
+			<key>hash2</key>
+			<data>
+			zxUa5KbkhIBErygmd/9U5BlFhX+YV4gSMXuljb21Ufc=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_AddTabButtonRollover.tiff</key>
-		<data>
-		xnPILYljSq0L2QjkvzbSk05KSAs=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			xnPILYljSq0L2QjkvzbSk05KSAs=
+			</data>
+			<key>hash2</key>
+			<data>
+			ohnSz12H8ZtXvkRBrV4ky8NBqjz68GKJY94HMEWeX0Q=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_AddTabButtonRollover_Pressed.tiff</key>
-		<data>
-		DJlzcMpEltHFGLLY9DFEif4V4CY=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			DJlzcMpEltHFGLLY9DFEif4V4CY=
+			</data>
+			<key>hash2</key>
+			<data>
+			L2dR6oEbr/sHmbaH3xCnBSGzFsPsLjey2Uubv/uoROA=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_InactiveTabBG.tiff</key>
-		<data>
-		iRhRXx5j+2EQ7RM3GX3xOH2qqwc=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			iRhRXx5j+2EQ7RM3GX3xOH2qqwc=
+			</data>
+			<key>hash2</key>
+			<data>
+			1Jd47HNMYogLF0ZnyhkAFg0eO69lKu5hZSCMVJCZvRg=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_InactiveTabClose.tiff</key>
-		<data>
-		zwpkGzin3vwVYz8mGfb98i+g65w=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			zwpkGzin3vwVYz8mGfb98i+g65w=
+			</data>
+			<key>hash2</key>
+			<data>
+			K8PPKh+F3lGKWe7CBchWEJd1y7RUoYBdXChq6IscMKc=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_InactiveTabClosePressed.tiff</key>
-		<data>
-		L/wy106Z6JY1M9K8Uv4R2Xi4FN8=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			L/wy106Z6JY1M9K8Uv4R2Xi4FN8=
+			</data>
+			<key>hash2</key>
+			<data>
+			krElNOdwTEyR9E9w0w707QO53csbtb216bWGAPUXCWI=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_InactiveTabCloseRollover.tiff</key>
-		<data>
-		b0qfTeK6237YoSV1Jay3JhgDN8s=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			b0qfTeK6237YoSV1Jay3JhgDN8s=
+			</data>
+			<key>hash2</key>
+			<data>
+			D6ylMHvL/Y1e4XqppcztdtSAy6NW0agRfgZ6tzwz4u0=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_InactiveTabLeftCap.tiff</key>
-		<data>
-		QNJHEhD4RdrUuo2krqHREeLm7j8=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			QNJHEhD4RdrUuo2krqHREeLm7j8=
+			</data>
+			<key>hash2</key>
+			<data>
+			8NOT87HpZbEXoxKu+L23dP4uKzk2sgR5oGzo7Pep8tQ=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_InactiveTabRightCap.tiff</key>
-		<data>
-		fsdm5by/FrDQraKG8O2egYIneFQ=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			fsdm5by/FrDQraKG8O2egYIneFQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			UdJGsoyAmRF9nLvAYIEoCD3QmUOmMvhZezO/lbhUonQ=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_Pulled_ActiveTabCenterFill.tiff</key>
-		<data>
-		qhtPEn42oKZ2qLKpQ/Ym2+M+1BE=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			qhtPEn42oKZ2qLKpQ/Ym2+M+1BE=
+			</data>
+			<key>hash2</key>
+			<data>
+			eICSJ1g0JYsU0EnY0UqWax25fVvIrNXA4JNjeOXeapo=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_Pulled_ActiveTabLeftCap.tiff</key>
-		<data>
-		Iky6hYeE8ManZgJAm+JFePoPVBc=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Iky6hYeE8ManZgJAm+JFePoPVBc=
+			</data>
+			<key>hash2</key>
+			<data>
+			6s2o4cmvv4rb30GNvrQXmg89ezvVUN3hR+U3TjyQR/A=
+			</data>
+		</dict>
 		<key>Resources/ActiveWindow_Pulled_ActiveTabRightCap.tiff</key>
-		<data>
-		Wng5DYlXe4mT0BTk97vKejBHYxg=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Wng5DYlXe4mT0BTk97vKejBHYxg=
+			</data>
+			<key>hash2</key>
+			<data>
+			aUQwrUjU19ywDNN2oVFwihcGRk/1Ru/qAmZilHfZ6Uw=
+			</data>
+		</dict>
 		<key>Resources/AdiumGradient.png</key>
-		<data>
-		pUGdMseoiA31TVjrgOM/5bZRUXY=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			pUGdMseoiA31TVjrgOM/5bZRUXY=
+			</data>
+			<key>hash2</key>
+			<data>
+			dCv+IiH6WRXOgImO95kZCsMbAfIS0+rX03VPWXGEVw8=
+			</data>
+		</dict>
 		<key>Resources/AquaTabCloseDirty_Front.png</key>
-		<data>
-		/BtMAkYR3QRYHC6kkho+eUpTnlE=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			/BtMAkYR3QRYHC6kkho+eUpTnlE=
+			</data>
+			<key>hash2</key>
+			<data>
+			qqLQ1z+i+JnOpvMeCgCz4sT0hbhN7YLQseONzGFL4Mc=
+			</data>
+		</dict>
 		<key>Resources/AquaTabCloseDirty_Front_Pressed.png</key>
-		<data>
-		5TKuyFKOC8wwXQlMHEacZT9HIaM=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			5TKuyFKOC8wwXQlMHEacZT9HIaM=
+			</data>
+			<key>hash2</key>
+			<data>
+			9urLtzusjbskGaunYu9mViPVQEgafNsnwBTcN33usQs=
+			</data>
+		</dict>
 		<key>Resources/AquaTabCloseDirty_Front_Rollover.png</key>
-		<data>
-		/GrMPvHfgXKXwYyrNH4v86KTXpc=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			/GrMPvHfgXKXwYyrNH4v86KTXpc=
+			</data>
+			<key>hash2</key>
+			<data>
+			AEjs9A5wYFEq5MZ9ESnOzvm381dp2lzzjRepKTt5fbw=
+			</data>
+		</dict>
 		<key>Resources/AquaTabClose_Front.tiff</key>
-		<data>
-		BornexboGdaD9jCSGkdIYa759qk=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			rBhTB3IzFjkVIB20kpV2Nmjgthw=
+			</data>
+			<key>hash2</key>
+			<data>
+			SLP2uti3ZpaBnCBwzI3Xba35Ffp26ZXBcEiZ64kPOH8=
+			</data>
+		</dict>
 		<key>Resources/AquaTabClose_Front_Pressed.tiff</key>
-		<data>
-		QTJ9/tl6HveMf1bEvrXT+Szcqw8=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			ML4pb4aWB0Gjp2k6zGLg41rLJrA=
+			</data>
+			<key>hash2</key>
+			<data>
+			ZqED0qaqhvKFtziG3NhiAlLQoB396Y8xSxajc5MBZ/g=
+			</data>
+		</dict>
 		<key>Resources/AquaTabClose_Front_Rollover.tiff</key>
-		<data>
-		XoIs4Y/RGclvp2PuJ4BTBgox5+Q=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			9bFCcekaOFwl5jaBUi1DN9dAiWU=
+			</data>
+			<key>hash2</key>
+			<data>
+			09DMX3dXsqpSndSOqZX9b5ogdqZUPPLvBlhUmlBuPdo=
+			</data>
+		</dict>
 		<key>Resources/AquaTabNew.tiff</key>
-		<data>
-		+ZvIjbEkXBBdXpY+Ynn9FNuJMl4=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Zl/VsOWNbubGv6+BHUEbS62Optw=
+			</data>
+			<key>hash2</key>
+			<data>
+			ihvO4AEhHoGO4bB0PXo9xUNImIUe5xCkfEEWdMzkf2g=
+			</data>
+		</dict>
 		<key>Resources/AquaTabNewPressed.tiff</key>
-		<data>
-		af5TzUVpx94q5TAHXWPA0FGpENA=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			o573HD3VO9o6J7egY4nccUviyQ0=
+			</data>
+			<key>hash2</key>
+			<data>
+			+n8qdqtTdV+DDA3/9GHBsojYlMwXfNe87OIWWScyia0=
+			</data>
+		</dict>
 		<key>Resources/AquaTabNewRollover.tiff</key>
-		<data>
-		hZryPfBz6UFsn2PAg82nNBItPOc=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			93zwlYwEGu0YF5jwA8iJpcQDxnI=
+			</data>
+			<key>hash2</key>
+			<data>
+			Wun7Vylyw8MU7pgZ6mOrAprFxeizRwbY6JTgyIknSfM=
+			</data>
+		</dict>
 		<key>Resources/AquaTabsBackground.png</key>
-		<data>
-		nv0Jf++hdYwOnLyhVBjmqZLp9V8=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			nv0Jf++hdYwOnLyhVBjmqZLp9V8=
+			</data>
+			<key>hash2</key>
+			<data>
+			XE6BvpSeQmqCnUa6gSP9ltn7hKZdiocLIDoKBy/FLmE=
+			</data>
+		</dict>
 		<key>Resources/AquaTabsDown.png</key>
-		<data>
-		XatX/olepOlmGqRZ99s27a1a3a0=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			XatX/olepOlmGqRZ99s27a1a3a0=
+			</data>
+			<key>hash2</key>
+			<data>
+			5MGyp3uoUSfr4vytTwOw9AO1FoKfmysEOjGhIt5uQmA=
+			</data>
+		</dict>
 		<key>Resources/AquaTabsDownGraphite.png</key>
-		<data>
-		kOk7yksRK8efDlPKxAH0EoJvVYw=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			kOk7yksRK8efDlPKxAH0EoJvVYw=
+			</data>
+			<key>hash2</key>
+			<data>
+			y8kCc0F4Q3tOxc4D9wczk5tT6plcaIQbsXyUYh/Cj2I=
+			</data>
+		</dict>
 		<key>Resources/AquaTabsDownNonKey.png</key>
-		<data>
-		ftFemEBTF74Wdq/S0u98PjqlaIk=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			ftFemEBTF74Wdq/S0u98PjqlaIk=
+			</data>
+			<key>hash2</key>
+			<data>
+			2fvOaGMfPouiNFZTT+r1mo5P+AJZtbAXsJa01ZefIRE=
+			</data>
+		</dict>
 		<key>Resources/AquaTabsSeparator.png</key>
-		<data>
-		OrCHbt7DGaUJNYdd7+mLFpDJYFY=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			OrCHbt7DGaUJNYdd7+mLFpDJYFY=
+			</data>
+			<key>hash2</key>
+			<data>
+			YEfdJ+xx7L5TmVBlFG9fjFtgih7ThlhKYJNPizIHuV4=
+			</data>
+		</dict>
 		<key>Resources/AquaTabsSeparatorDown.png</key>
-		<data>
-		XNRM9R8anBn3LUQMVaf4GdwJzQM=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			XNRM9R8anBn3LUQMVaf4GdwJzQM=
+			</data>
+			<key>hash2</key>
+			<data>
+			SnR6MOdjHsWMDlXv2j24I4i0IE9Q4ijCgdhneJPzfpk=
+			</data>
+		</dict>
 		<key>Resources/InactiveWindow_ActiveTabClose.tiff</key>
-		<data>
-		xfNBHYq4dfB48P2JXeiaATf2lx8=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			xfNBHYq4dfB48P2JXeiaATf2lx8=
+			</data>
+			<key>hash2</key>
+			<data>
+			iqmx8Nh2YtKpBKZJ7jq+JYsQfXYlOws46JNDxJMPgLw=
+			</data>
+		</dict>
 		<key>Resources/InactiveWindow_ActiveTabClosePressed.tiff</key>
-		<data>
-		nWT0TkRVXX0uGOz/uwcjDPXiyhU=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			nWT0TkRVXX0uGOz/uwcjDPXiyhU=
+			</data>
+			<key>hash2</key>
+			<data>
+			HeGi+VnoGkLEXnEMZvrgNssYp9DeIkoaUGOJyDBKPIo=
+			</data>
+		</dict>
 		<key>Resources/InactiveWindow_ActiveTabCloseRollover.tiff</key>
-		<data>
-		YQ4q6yqrrND5iGGHoqLBk4HGPig=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			YQ4q6yqrrND5iGGHoqLBk4HGPig=
+			</data>
+			<key>hash2</key>
+			<data>
+			eO5Ef62xxN6fhn8WYZohTeb96w6RwYcGSQ8/UZk6R+8=
+			</data>
+		</dict>
 		<key>Resources/InactiveWindow_ActiveTabFill.tiff</key>
-		<data>
-		/GWFN1J5jVMMmIv6zbGiI7pg+fs=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			/GWFN1J5jVMMmIv6zbGiI7pg+fs=
+			</data>
+			<key>hash2</key>
+			<data>
+			1VshMuD/p7OxK9tSfP8Ith4Jhfc935EJI359XQGKdUs=
+			</data>
+		</dict>
 		<key>Resources/InactiveWindow_ActiveTabLeftCap.tiff</key>
-		<data>
-		nLZ2/PzZna9V0PN0DwOIYKSn+/M=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			nLZ2/PzZna9V0PN0DwOIYKSn+/M=
+			</data>
+			<key>hash2</key>
+			<data>
+			39UaWnvEHodMmQ+2jAPXjdDrrSZCoFSUdsE9TiWZShk=
+			</data>
+		</dict>
 		<key>Resources/InactiveWindow_ActiveTabRightCap.tiff</key>
-		<data>
-		DmJ7v8gD4zAbboO1Vx/Y/FOzUPM=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			DmJ7v8gD4zAbboO1Vx/Y/FOzUPM=
+			</data>
+			<key>hash2</key>
+			<data>
+			gsGLHt6lmr9a3vIk/zVAk4pixpyn6FfMGfJhOC4S8h8=
+			</data>
+		</dict>
 		<key>Resources/InactiveWindow_AddTabButton.tiff</key>
-		<data>
-		Gzpp/m0DqvsVGWaU0EVQR94gHj8=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Gzpp/m0DqvsVGWaU0EVQR94gHj8=
+			</data>
+			<key>hash2</key>
+			<data>
+			k4dNHl/o+4saF+EvsBfWkjQN/nuBEGcpApOeO+SYP0s=
+			</data>
+		</dict>
 		<key>Resources/InactiveWindow_InactiveTabBG.tiff</key>
-		<data>
-		uwk/xmr+K2jwDAc9KI2eOyGnJ6c=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			uwk/xmr+K2jwDAc9KI2eOyGnJ6c=
+			</data>
+			<key>hash2</key>
+			<data>
+			rDnqY4V2FGpgjL2YCNWpyXg7JAYPn8V+L7JV9EG39t0=
+			</data>
+		</dict>
 		<key>Resources/InactiveWindow_InactiveTabClose.tiff</key>
-		<data>
-		/63gZNRLlHitBzTCUa14XA42JT0=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			/63gZNRLlHitBzTCUa14XA42JT0=
+			</data>
+			<key>hash2</key>
+			<data>
+			JxQm+2QZcPRSMfUgPiJoeG0ArYWijYcwzICEskDROG4=
+			</data>
+		</dict>
 		<key>Resources/InactiveWindow_InactiveTabClosePressed.tiff</key>
-		<data>
-		fg1xAdub+8vMmKvq/6AlhujEQx0=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			fg1xAdub+8vMmKvq/6AlhujEQx0=
+			</data>
+			<key>hash2</key>
+			<data>
+			1W4BOZfhFqaiG2ogHJHHEtNeloH6T4DSXVkx9xrfISA=
+			</data>
+		</dict>
 		<key>Resources/InactiveWindow_InactiveTabCloseRollover.tiff</key>
-		<data>
-		8hLTflXXVvo6LFfBr1O/ujYV8pM=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			8hLTflXXVvo6LFfBr1O/ujYV8pM=
+			</data>
+			<key>hash2</key>
+			<data>
+			vffMMjL5USh9XcvK9gbIvewoOYtUzXGKL+5+qCX/VRg=
+			</data>
+		</dict>
 		<key>Resources/InactiveWindow_InactiveTabLeftCap.tiff</key>
-		<data>
-		GpAaKypVK3VWNmNhMHmYeffuPrk=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			GpAaKypVK3VWNmNhMHmYeffuPrk=
+			</data>
+			<key>hash2</key>
+			<data>
+			tSDLUOyH3Ant8jitSo4L2JSbSOBVcjxsfCvpMW73/tQ=
+			</data>
+		</dict>
 		<key>Resources/InactiveWindow_InactiveTabRightCap.tiff</key>
-		<data>
-		qHpGIDEMr6k267LEzaCYHAvocOQ=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			qHpGIDEMr6k267LEzaCYHAvocOQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			UVmyzFz9n0poGCBilxia37fI6NSQMbNeS71Z7kOU9+g=
+			</data>
+		</dict>
 		<key>Resources/Info.plist</key>
-		<data>
-		YFepEAp5R8lR21IRKGRiSAGklaM=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			lGwEptvGrbKtY5RebIxWiHrtpHc=
+			</data>
+			<key>hash2</key>
+			<data>
+			G6ELsT6exBG0/9VnZEb64iywflOcX7F6uPeRujQbcs4=
+			</data>
+		</dict>
 		<key>Resources/TabClose_Dirty.tiff</key>
-		<data>
-		nYzOZiK+8rGoSlJIZBUsCfZcEvI=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Iq1t5eIJFQOvT/8jcxCy/59j0OI=
+			</data>
+			<key>hash2</key>
+			<data>
+			H9oS5UVaSJEM8XyzkE/CdXdQHMV+JUWnQXibvMFf2FE=
+			</data>
+		</dict>
 		<key>Resources/TabClose_Dirty_Pressed.tiff</key>
-		<data>
-		EMQkaDP2nhftv/7JrZoKYRuaIHc=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Bpn/heahkMDl5HiMtltc8RSTewc=
+			</data>
+			<key>hash2</key>
+			<data>
+			W3qtIC12UcOu+4fXt/x+F6Vhv79s1G/iNw9C0WWvE9Y=
+			</data>
+		</dict>
 		<key>Resources/TabClose_Dirty_Pressed_Textured.tiff</key>
-		<data>
-		IgIxz2LdWThhnVUOx1SiLOrEdWo=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			v6+Od8K+o2TbWrZj2jXjG8wXVqE=
+			</data>
+			<key>hash2</key>
+			<data>
+			YvZcTcsP9V6KcySEHSrYglZIML5NUVzTPn4TJxU8FTM=
+			</data>
+		</dict>
 		<key>Resources/TabClose_Dirty_Rollover.tiff</key>
-		<data>
-		GmetDVxgoHbeSd3StJxq7+gQz6A=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			MnzLJEHuMIINanaKS1Yqw6ErsuU=
+			</data>
+			<key>hash2</key>
+			<data>
+			J6jTJTN4fI8SqtTCwDSMZ8vYFZYVJ8K8cq191QvWwN4=
+			</data>
+		</dict>
 		<key>Resources/TabClose_Dirty_Rollover_Textured.tiff</key>
-		<data>
-		kLVo9VO2WuBmjFiI/0ZgfsQDHEc=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			/I3AC3Xe7JGvWCxeIBitH3/7Dqo=
+			</data>
+			<key>hash2</key>
+			<data>
+			ywfTWRlP1eweO/ND0o9qb/eC8Qv73RZaweahDklU62s=
+			</data>
+		</dict>
 		<key>Resources/TabClose_Dirty_Textured.tiff</key>
-		<data>
-		4Gp3k9UrA74gr2JU+fu1IOoEkwc=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			VpIEK0oLoAXq/lKIMyPR8OYnKI4=
+			</data>
+			<key>hash2</key>
+			<data>
+			SxcGmZquQJOLkcYAGTSgf1B/AODfxiBvYkw4mEsLVEY=
+			</data>
+		</dict>
 		<key>Resources/TabClose_Front.tiff</key>
-		<data>
-		dXgSElA/n9mPDoaeid0ES/Sz0MQ=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Axb/4dAohyB5Fs/UdVDhzV5Gl7c=
+			</data>
+			<key>hash2</key>
+			<data>
+			hxiVqaczG2bMPSvW2gQ/M6LPADvreevACWY6U8fX4W4=
+			</data>
+		</dict>
 		<key>Resources/TabClose_Front_Pressed.tiff</key>
-		<data>
-		zY7vJhRXaLhwk0jotkdwjepZQ10=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			RMsmUJ9Ws9KpTVyneOQ1YqE9S+4=
+			</data>
+			<key>hash2</key>
+			<data>
+			tFEVhnvig0EDUUtfp7d7xNY3sphKXRgL+i0xCvPAJsw=
+			</data>
+		</dict>
 		<key>Resources/TabClose_Front_Pressed_Textured.tiff</key>
-		<data>
-		IGBCPBpVkjQKfASCIKnfaCsfQts=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			6LYKFcGrekYrFMtpYAAuQFHmHnk=
+			</data>
+			<key>hash2</key>
+			<data>
+			FjSZdE8dw6ezuTCbfjfur/3EcbPf0S6VlOwtzyF3hzM=
+			</data>
+		</dict>
 		<key>Resources/TabClose_Front_Rollover.tiff</key>
-		<data>
-		OhyfYu/bgjiRdP4KAVc64NU3ENY=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			W+PdXt5z7ZL/eWefnSaO+Wt6xdY=
+			</data>
+			<key>hash2</key>
+			<data>
+			oYh/F3brgHRRB/+Ut4xmlRwLeXlMX1wNtOQxodZRctM=
+			</data>
+		</dict>
 		<key>Resources/TabClose_Front_Rollover_Textured.tiff</key>
-		<data>
-		ylcJs3/myBKfwfE8+ENNKFqvNxo=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			yi+ctO80w13casJPYggoT5WXX64=
+			</data>
+			<key>hash2</key>
+			<data>
+			UteZtVrr0NdNnvKX/vrAklCC8LE+oEW8ZwR16JCxBs8=
+			</data>
+		</dict>
 		<key>Resources/TabClose_Front_Textured.tiff</key>
-		<data>
-		r2aVlM2MVXUc/hgFRtaefoVYZnw=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			lpY39rQku6+4ro+Br7lzq40DfJE=
+			</data>
+			<key>hash2</key>
+			<data>
+			SuopId2tILHq2IQID9uQAbX7tTesKdb55lMkZjeAxHU=
+			</data>
+		</dict>
 		<key>Resources/TabNewMetal.png</key>
-		<data>
-		Wvi4d3JJ+/hsAP7FKZnyHlEVWqQ=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Wvi4d3JJ+/hsAP7FKZnyHlEVWqQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			G4cPJ340y3ntwruNdhc4UH3mrbSbOxdVjSJY7QiaWCk=
+			</data>
+		</dict>
 		<key>Resources/TabNewMetalPressed.png</key>
-		<data>
-		Dws9oYWvi8Rvj0EtIWWm9iTlqdM=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Dws9oYWvi8Rvj0EtIWWm9iTlqdM=
+			</data>
+			<key>hash2</key>
+			<data>
+			u9a2ScqNufRRMpN8A3nn/iwlNDW50cFaUDGgAED3ecY=
+			</data>
+		</dict>
 		<key>Resources/TabNewMetalPressed_Textured.png</key>
-		<data>
-		Dws9oYWvi8Rvj0EtIWWm9iTlqdM=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Dws9oYWvi8Rvj0EtIWWm9iTlqdM=
+			</data>
+			<key>hash2</key>
+			<data>
+			u9a2ScqNufRRMpN8A3nn/iwlNDW50cFaUDGgAED3ecY=
+			</data>
+		</dict>
 		<key>Resources/TabNewMetalRollover.png</key>
-		<data>
-		A52pLQscBe2Z0igvKBBlWtc4AGs=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			A52pLQscBe2Z0igvKBBlWtc4AGs=
+			</data>
+			<key>hash2</key>
+			<data>
+			2dMayo8xO4w4r+gRghfxtpsib2th6S6XyM9fKXEGnLs=
+			</data>
+		</dict>
 		<key>Resources/TabNewMetalRollover_Textured.png</key>
-		<data>
-		ydveK2t2Z/eh3WfZpdkW85U4dj8=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			ydveK2t2Z/eh3WfZpdkW85U4dj8=
+			</data>
+			<key>hash2</key>
+			<data>
+			Qe7XK/J5PNlL/tY5zAhvI1VacJWQThdYw8XMTfIObnU=
+			</data>
+		</dict>
 		<key>Resources/TabNewMetal_Textured.png</key>
-		<data>
-		Wvi4d3JJ+/hsAP7FKZnyHlEVWqQ=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Wvi4d3JJ+/hsAP7FKZnyHlEVWqQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			G4cPJ340y3ntwruNdhc4UH3mrbSbOxdVjSJY7QiaWCk=
+			</data>
+		</dict>
 		<key>Resources/overflowImage.tiff</key>
-		<data>
-		74y4QUxnoQ6oxCAsdvrr3qkzGqc=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			LoMF5niOsMdDIWc6CZjGaKsnDv4=
+			</data>
+			<key>hash2</key>
+			<data>
+			mka3XORafmkSnrCEFLE2RQEVJAmBh43I3TBOZW+/PjA=
+			</data>
+		</dict>
 		<key>Resources/overflowImagePressed.tiff</key>
-		<data>
-		zNN2u+tNZcL+SGl7UsLZWp1Ligk=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Szg0DwLtRp/SVaew9z0flRlownk=
+			</data>
+			<key>hash2</key>
+			<data>
+			2lMi0dx1A1cp6XBkSpSlDJP5X76eQmeJJVrXUihTJ5E=
+			</data>
+		</dict>
 		<key>Resources/pi.png</key>
-		<data>
-		RPbzwdWtE7wg+tJ4XdESiBUqAMQ=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			RPbzwdWtE7wg+tJ4XdESiBUqAMQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			X8REqKZwmo5K4OtqQ0shtl5M3eMSuuJ4QUx4QIVGuuM=
+			</data>
+		</dict>
 	</dict>
 	<key>rules</key>
 	<dict>
@@ -661,6 +1284,11 @@
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
+		</dict>
+		<key>^Resources/Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
 		</dict>
 		<key>^version.plist$</key>
 		<true/>
@@ -720,6 +1348,11 @@
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
+		</dict>
+		<key>^Resources/Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
 		</dict>
 		<key>^[^/]+$</key>
 		<dict>
