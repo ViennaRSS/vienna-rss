@@ -197,7 +197,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             __strong typeof(weakRequest)strongRequest = weakRequest;
             LOG_EXPR([strongRequest responseHeaders]);
             LOG_EXPR([[NSString alloc] initWithData:[strongRequest responseData] encoding:NSUTF8StringEncoding]);
-            [strongRequest clearDelegatesAndCancel];
             for (id obj in [self.clientAuthWaitQueue reverseObjectEnumerator]) {
                 [(ASIHTTPRequest *)obj cancel];
                 [self.clientAuthWaitQueue removeObject:obj];
@@ -211,7 +210,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 LOG_EXPR([strongRequest responseStatusCode]);
                 LOG_EXPR([strongRequest responseHeaders]);
                 [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
-                [strongRequest clearDelegatesAndCancel];
                 self.openReaderStatus = notAuthenticated;
                 for (id obj in [self.clientAuthWaitQueue reverseObjectEnumerator]) {
                     [(ASIHTTPRequest *)obj cancel];
@@ -348,7 +346,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             LOG_EXPR([strongRequest responseHeaders]);
             LOG_EXPR([[NSString alloc] initWithData:[strongRequest responseData] encoding:NSUTF8StringEncoding]);
             self.tToken = nil;
-            [strongRequest clearDelegatesAndCancel];
             self.openReaderStatus = missingTToken;
             for (id obj in [self.tTokenWaitQueue reverseObjectEnumerator]) {
                 [(ASIFormDataRequest *)obj cancel];
@@ -934,7 +931,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     // Needs to be synchronous so UI doesn't refresh too soon.
     request.delegate = nil;
     [request startSynchronous];
-    [request clearDelegatesAndCancel];
 }
 
 -(void)unsubscribeFromFeed:(NSString *)feedURL
@@ -960,7 +956,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", folderName] forKey:flag ? @"a" : @"r"];
     request.delegate = nil;
     [request startSynchronous];
-    [request clearDelegatesAndCancel];
 }
 
 -(void)markRead:(Article *)article readFlag:(BOOL)flag
