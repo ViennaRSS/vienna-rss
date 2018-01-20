@@ -197,6 +197,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             __strong typeof(weakRequest)strongRequest = weakRequest;
             LOG_EXPR([strongRequest responseHeaders]);
             LOG_EXPR([[NSString alloc] initWithData:[strongRequest responseData] encoding:NSUTF8StringEncoding]);
+            [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
             for (id obj in [self.clientAuthWaitQueue reverseObjectEnumerator]) {
                 [(ASIHTTPRequest *)obj cancel];
                 [self.clientAuthWaitQueue removeObject:obj];
