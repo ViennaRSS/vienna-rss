@@ -61,7 +61,7 @@
 	[tabBarControl setHideForSingleTab:YES];
 	[tabBarControl setUseOverflowMenu:YES];
 	[tabBarControl setAllowsBackgroundTabClosing:YES];
-	[tabBarControl setAutomaticallyAnimates:YES];
+	[tabBarControl setAutomaticallyAnimates:NO];
 	tabBarControl.cellMinWidth = 60.0;
 	tabBarControl.cellMaxWidth = 350.0;
 
