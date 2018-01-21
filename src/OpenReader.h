@@ -3,7 +3,7 @@
 //  Vienna
 //
 //  Created by Adam Hartford on 7/7/11.
-//  Copyright 2011-2014 Vienna contributors (see Help/Acknowledgements for list of contributors). All rights reserved.
+//  Copyright 2011-2018 Vienna contributors (see menu item 'About Vienna' for list of contributors). All rights reserved.
 //
 
 @import Foundation;
