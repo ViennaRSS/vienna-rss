@@ -8,6 +8,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.2.0 rc 1
+------------
+- Fix some OpenReader error handling
+- Remove a tab bar animation introduced in 3.2.0 Beta 1
+- Update copyright information
+
 3.2.0 Beta 3
 ------------
 - Fix persistent tab bar at launch
