@@ -2,6 +2,8 @@
 // Copyright (c) 2008-2010, Vincent Gable.
 // vincent.gable@gmail.com
 
+@import Foundation;
+
 //based off of http://www.dribin.org/dave/blog/archives/2008/09/22/convert_to_nsstring/
 NSString * VTPG_DDToStringFromTypeAndValue(const char * typeCode, void * value);
 
@@ -34,6 +36,6 @@ NSString * VTPG_DDToStringFromTypeAndValue(const char * typeCode, void * value);
 // http://www.wilshipley.com/blog/2005/10/pimp-my-code-interlude-free-code.html
 static inline BOOL IsEmpty(id thing) {
 	return thing == nil ||
-			([thing respondsToSelector:@selector(length)] && [(NSData *)thing length] == 0) ||
-			([thing respondsToSelector:@selector(count)]  && [(NSArray *)thing count] == 0);
+			([thing respondsToSelector:@selector(length)] && ((NSData *)thing).length == 0) ||
+			([thing respondsToSelector:@selector(count)]  && ((NSArray *)thing).count == 0);
 }

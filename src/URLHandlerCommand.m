@@ -34,7 +34,7 @@
  */
 -(id)performDefaultImplementation
 {
-	NSScanner * scanner = [NSScanner scannerWithString:[self directParameter]];
+	NSScanner * scanner = [NSScanner scannerWithString:self.directParameter];
 	NSString * urlPrefix = nil;
 
 	[scanner scanUpToString:@":" intoString:&urlPrefix];

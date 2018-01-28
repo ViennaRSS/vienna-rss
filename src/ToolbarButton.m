@@ -25,7 +25,7 @@
  * Initialise a ToolbarButton item. This is a subclass of a toolbar button
  * that responds properly to sizing requests from the toolbar.
  */
--(id)initWithFrame:(NSRect)frameRect withItem:(NSToolbarItem *)tbItem
+-(instancetype)initWithFrame:(NSRect)frameRect withItem:(NSToolbarItem *)tbItem
 {
 	if ((self = [super initWithFrame:frameRect]) != nil)
 	{
@@ -41,8 +41,8 @@
 		// behave like toolbar buttons.
 		[self setButtonType:NSMomentaryChangeButton];
 		[self setBordered:NO];
-		[self setBezelStyle:NSSmallSquareBezelStyle];
-		[self setImagePosition:NSImageOnly];
+		self.bezelStyle = NSSmallSquareBezelStyle;
+		self.imagePosition = NSImageOnly;
 	}
 	return self;
 }
@@ -52,7 +52,7 @@
  */
 -(NSString *)itemIdentifier
 {
-	return [item itemIdentifier];
+	return item.itemIdentifier;
 }
 
 /* setSmallImage
@@ -60,11 +60,9 @@
  */
 -(void)setSmallImage:(NSImage *)newImage
 {
-	[newImage retain];
-	[smallImage release];
 	smallImage = newImage;
 	if (smallImage != nil)
-		smallImageSize = [smallImage size];
+		smallImageSize = smallImage.size;
 }
 
 /* setSmallAlternateImage
@@ -72,8 +70,6 @@
  */
 -(void)setSmallAlternateImage:(NSImage *)newImage
 {
-	[newImage retain];
-	[smallAlternateImage release];
 	smallAlternateImage = newImage;
 }
 
@@ -84,14 +80,12 @@
  */
 -(void)setImage:(NSImage *)newImage
 {
-	[newImage retain];
-	[image release];
 	image = newImage;
 
-	[super setImage:image];
+	super.image = image;
 	if (image != nil)
 	{
-		imageSize = [image size];
+		imageSize = image.size;
 	}
 }
 
@@ -102,11 +96,9 @@
  */
 -(void)setAlternateImage:(NSImage *)newImage
 {
-	[newImage retain];
-	[alternateImage release];
 	alternateImage = newImage;
 	
-	[super setAlternateImage:alternateImage];
+	super.alternateImage = alternateImage;
 }
 
 /* controlSize
@@ -114,7 +106,7 @@
  */
 -(NSControlSize)controlSize
 {
-	return [[self cell] controlSize];
+	return self.cell.controlSize;
 }
 
 /* setControlSize
@@ -131,9 +123,9 @@
 		// can assume that we're switching from those small versions. So we
 		// need to replace the button image.
 		if (image)
-			[super setImage:image];
+			super.image = image;
 		if (alternateImage)
-			[super setAlternateImage:alternateImage];
+			super.alternateImage = alternateImage;
 		s = imageSize;
 	}
 	else
@@ -145,41 +137,24 @@
 			NSImage * scaledDownImage = [image copy];
 			// Small size is about 3/4 the size of the regular image or
 			// generally 24x24.
-			[scaledDownImage setSize:NSMakeSize(imageSize.width * 0.80, imageSize.height * 0.80)];
+			scaledDownImage.size = NSMakeSize(imageSize.width * 0.80, imageSize.height * 0.80);
 			[self setSmallImage:scaledDownImage];
-			[scaledDownImage release];
 		}
 		if (smallAlternateImage == nil)
 		{
 			NSImage * scaledDownAlternateImage = [alternateImage copy];
 			// Small size is about 3/4 the size of the regular image or
 			// generally 24x24.
-			[scaledDownAlternateImage setSize:NSMakeSize(imageSize.width * 0.80, imageSize.height * 0.80)];
+			scaledDownAlternateImage.size = NSMakeSize(imageSize.width * 0.80, imageSize.height * 0.80);
 			[self setSmallAlternateImage:scaledDownAlternateImage];
-			[scaledDownAlternateImage release];
 		}
-		[super setImage:smallImage];
-		[super setAlternateImage:smallAlternateImage];
+		super.image = smallImage;
+		super.alternateImage = smallAlternateImage;
 		s = smallImageSize;
 	}
 
-	[item setMinSize:s];
-	[item setMaxSize:s];
+	item.minSize = s;
+	item.maxSize = s;
 }
 
-/* dealloc
- * Clean up afterwards.
- */
--(void)dealloc
-{
-	[image release];
-	image=nil;
-	[alternateImage release];
-	alternateImage=nil;
-	[smallImage release];
-	smallImage=nil;
-	[smallAlternateImage release];
-	smallAlternateImage=nil;
-	[super dealloc];
-}
 @end

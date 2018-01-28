@@ -19,10 +19,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Database.h"
-#import "AppController.h"
+@class FoldersTree;
 
-@interface AppController (Export)
-	-(IBAction)exportSubscriptions:(id)sender;
-	-(int)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray withGroups:(BOOL)groupFlag;
+@interface Export : NSObject
+	
++(NSInteger)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray
+        inFoldersTree:(FoldersTree *)foldersTree withGroups:(BOOL)groupFlag;
++(NSInteger)exportToFile:(NSString *)exportFileName fromFoldersTree:(FoldersTree *)foldersTree
+        selection:(BOOL)selectionFlag withGroups:(BOOL)groupFlag;
+
 @end

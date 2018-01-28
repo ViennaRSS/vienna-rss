@@ -8,22 +8,229 @@ most recent build should be at the top of this file.
 
 Thanks!
 
-3.0.9
+3.1.16
+------
+- Fix article selection after an article is deleted from within the 'Unread Articles' folder
+- Fix bugs related to multithreading
+- Fix handling of impossibility of creating the database
+- Corrected changelog text at version 3.1.15
+
+3.1.15
+------
+- Fix article list not scrolling to top when selecting a folder
+- Fix 'Skip Folder' not selecting the first unread article in the next folder with unread articles
+
+3.1.14
+------
+- Fix article pane not updating on article deletion from the 'Unread Articles' folder
+
+3.1.13
+------
+- Fixes related to searching and smart folders
+- Fix for selection of first article when jumping on next feed
+- Better fix for unwanted reload of the article currently being read during sync
+
+3.1.12
+------
+- Fix crashes induced by some URLs
+- Fix crash on macOS 10.13 High Sierra related to Activity window
+- Fix unwanted reload of the article currently being read during sync
+- Fix selection of current article on change of sort criterion/order
+- Fix bug where Vienna doesn't quit when you press ‘Quit Vienna’ in the Database Upgrade window
+- Truncate long text items with an ellipsis
+
+3.1.11
+------
+- Fix deleting article from smart folder or filtered folder
+- Fix selection of last unread article with Next Unread command
+- Update FMDB to 2.7.2
+
+3.1.10
+------
+- Fix access to Get Info window
+- Fix CoreAnimation related problems
+
+3.1.9
 -----
+- Change the website to vienna-rss.com as the old domain name (vienna-rss.org) could not be renewed. Perform a minor database evolution to update this.
+- Add a plug-in supporting wallabag.it
+- Show acknowledgements in "About" dialog box
+- Fix del.icio.us URL
+- Fix an issue with icon
+- Change status bar icons to scalable pdfs
+- Remove textures in some windows, change some .nib to .xib
+- Refactor things (window preferences code, delegates, organization of help files …)
+- Modernize build architecture (Xcode 8.2, update pods)
+
+3.1.8
+-----
+- Fixed an External XML Entity (XXE) vulnerability which allowed servers to steal the content of files on the machine running Vienna
+- Fix incorrect escaping of OPML export
+- Fix font preferences not working
+- Fix error on unread articles count with OpenReader feeds
+- Fix articles' list during feed refreshes when the current selection is a smart or group folder 
+
+3.1.7
+-----
+- Fix incorrect escaping of some feeds
+
+3.1.6
+-----
+- Add support for delta feeds (RFC3229+feed)
+- Database performance improvements
+- Fix 'N' key to not scan fresher articles from same folder, except for smart folders
+- Fix 'B' key to always go to first unread article
+- Fix retrieving article text of some feeds
+- Fix some macOS Sierra glitches
+- Fix status message after tasks like marking OpenReader articles read
+- Fixes to Danish and Russian translations, thanks to David Munch and Rinat Shaikhutdinov
+
+3.1.6 Release Candidate 2
+-------------------------
+- New set of default feeds, thanks to Jesse Claven and Ricky Morse
+- Fix infinite loop on ‘Skip Folder’ command when no unread articles were left
+- Fix relative URLs, like in images's `srcset` attributes
+- New developer tests, thanks to György Tóth
+- Code refactoring / cleanup
+
+3.1.6 Release Candidate 1
+-------------------------
+- When the user selects a folder, loading articles from database occurs on a separate thread
+- Fix again the 'N' key not selecting last unread article or not wrapping to the first unread article
+- Keep currently selected article on refresh of a group or smart folder
+- Fix article selection in Unified layout
+- Fix "Last Refresh filter"
+- Fix an exception on opening the General preferences window
+- Fix an assertion failure
+- Code refactoring
+- Reorganized tests
+
+3.1.5
+-----
+- Fix syncing with FeedHQ
+- Avoid unwanted eviction from cache
+- Fix enclosure “Open” button when the enclosure URL has a query part
+- Ensures the article pane displays selected article when switching from Unified to Horizontal or Vertical layout
+
+3.1.5 Release Candidate 2
+-------------------------
+- Fix 'N' key breakage when a single unread article remained below current folder selection
+- Fix 'N' key not wrapping to the first unread article under certain circumstances
+- Force images to scale correctly
+- Try to fix an assertion failure on balancing start/stop animations
+
+3.1.5 Release Candidate 1
+-------------------------
+- Fix visual issue on marking read all articles in a group folder
+- Fix deleting articles from a group folder
+- Fix restoring Open Reader article from Trash
+- Fix back and forward in Horizontal and Vertical layouts (invoked by < and > keys)
+- Fix sort indicator in Horizontal and Vertical layouts
+- Scrolls to top of list when selecting a folder
+- Fix a rare occurence of crash in Preferences folder
+
+3.1.4
+-----
+- Fix extreme slowness on marking a series of articles deleted
+- Improve selection of next unread article and article list update
+- Fix selection of default RSS reader application in preferences window
+- In General preferences, use localized names for download folder and RSS readers' app names
+- Fixed a problem preventing window from appearing at launch in certain settings
+
+3.1.4 Release Candidate 2
+-------------------------
+- Improved detection of feeds URL
+- Align selection behavior on selecting or skipping folders with 3.0.9's
+- Fix handling of some addresses in internal browser's address field
+- Improved German translation
+
+3.1.4 Release Candidate 1
+-------------------------
+- Refactored code
+- Make sure that unread / starred statuses are in sync between Vienna and the Open Reader server[^314-1]
+- When opening current article in browser, respect what is set in user's preferences on marking it read
+- Fix validation button of “New Group Folder…” dialog
+- Fix features in Downloads and Activity windows
+- Handle images directly embedded in HTML code
+- Make sure we have a keyboard responder after switching layout
+- Default folder sorting is manual
+- Fix various crashes
+- Other bugfixes
+
+[^314-1]: If you have deleted articles, you might have to reset the unread / starred statuses of these older articles from the web interface of your Open Reader server.
+
+3.1.3
+-----
+- Fix some crashes
+- Fix empty article list displayed by some feeds
+- Prevent unwanted updates of user interface while refreshing Open Reader feeds
+- E-mailing a link now occurs in foreground
+
+3.1.2
+-----
+- More crash fixes
+- Fix Vienna forgetting current folder/feed after termination and relaunch
+- Restore mechanism required by some plugins, especially "Add to Safari reading list" 
+- Conversion to modern Ojective-C
+
+3.1.1
+-----
+- Fix some crashes
+- Fix deadlocks on OS X 10.8
+- Fix the sort functionality in Activity Window
+
+3.1.0
+-----
+- Add search field in subscriptions tree
+- In Atom feeds, prefer the ‘content’ item over the ’summary’ one
+- Fix articles reappearing in a feed after being marked for deletion
+- Improved memory management
+- Fix broken Download window features
+- Security : update Sparkle autoupdate framework with latest version and use a secure URL
+- Fix some crashes
+
+
+3.1.0 Beta 5
+------------
 - Fix problem w/ subscribing to some feeds
-- Improve handling of feeds having duplicate GUIDs
-- Fix some styles to limit maximum image size
-- Improve the ad blocking feature of the Feedlight styles
-- Display articles of any newly added folder
-- If adding existing feed, focus it
 - Better handling of legal/illegal characters in URL strings
 - Fix enclosure download when the URL string contains a query
+- If adding existing feed, focus it
+- Keep order of folders and groups on OPML export
+- Fix some styles to limit maximum image size
+- Improve the ad blocking feature of the Feedlight styles
 - Recognize a few more file extensions to be directly downloaded
 - Fix some crashes
 
-3.0.8
------
+3.1.0 Beta 4
+------------
+- Fix a crash
+- Ensure current article remains visible when changing layout
+- Display articles of any newly added folder
+- Some code refactoring
+
+3.1.0 Beta 3
+------------
+- Improved handling of feeds having duplicate GUIDs
+- Fixed rendering of feeds having XHTML bodies
+- Handle feeds having illegal characters
+- Allow concurrent drawings in unified layout
+- Converted code to use Automatic Reference Count
+- Improved cache mechanism for articles (using NSCache)
+- Compiled with XCode 7 GM under OS X El Capitan GM
+
+3.1.0 Beta 2
+------------
 - Fix unwanted scrolls in Unified layout
+
+3.1.0 Beta 1
+------------
+### ! OS X 10.8 or better only !
+- Replace our "in house" database queue with FMDatabaseQueue and reorganize access
+- Use view based NSTableView for unified layout (instead of PXListView)
+- Replace JSONKit with NSJSONSerialization
+- Replace XMLParser with NSXMLDocument/NSXMLNode
+- Replace other deprecated functions / Miscellaneous refactoring
 
 3.0.7
 -----

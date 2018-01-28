@@ -24,5 +24,7 @@
 	IBOutlet BrowserPane * browserPane;
 }
 
--(BrowserPane *)mainView;
+@property(strong) NSArray * topObjects;
+
+@property (nonatomic, readonly, strong) BrowserPane *mainView;
 @end

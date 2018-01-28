@@ -6,10 +6,21 @@
 //  Copyright 2011 Flying Meat Inc. All rights reserved.
 //
 
+#if FMDB_SQLITE_STANDALONE
+#import <sqlite3/sqlite3.h>
+#else
+#import <sqlite3.h>
+#endif
+
 #import "FMDatabasePool.h"
 #import "FMDatabase.h"
 
-@interface FMDatabasePool()
+@interface FMDatabasePool () {
+    dispatch_queue_t    _lockQueue;
+    
+    NSMutableArray      *_databaseInPool;
+    NSMutableArray      *_databaseOutPool;
+}
 
 - (void)pushDatabaseBackInPool:(FMDatabase*)db;
 - (FMDatabase*)db;
@@ -24,15 +35,27 @@
 @synthesize openFlags=_openFlags;
 
 
-+ (instancetype)databasePoolWithPath:(NSString*)aPath {
++ (instancetype)databasePoolWithPath:(NSString *)aPath {
     return FMDBReturnAutoreleased([[self alloc] initWithPath:aPath]);
 }
 
-+ (instancetype)databasePoolWithPath:(NSString*)aPath flags:(int)openFlags {
++ (instancetype)databasePoolWithURL:(NSURL *)url {
+    return FMDBReturnAutoreleased([[self alloc] initWithPath:url.path]);
+}
+
++ (instancetype)databasePoolWithPath:(NSString *)aPath flags:(int)openFlags {
     return FMDBReturnAutoreleased([[self alloc] initWithPath:aPath flags:openFlags]);
 }
 
-- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags {
++ (instancetype)databasePoolWithURL:(NSURL *)url flags:(int)openFlags {
+    return FMDBReturnAutoreleased([[self alloc] initWithPath:url.path flags:openFlags]);
+}
+
+- (instancetype)initWithURL:(NSURL *)url flags:(int)openFlags vfs:(NSString *)vfsName {
+    return [self initWithPath:url.path flags:openFlags vfs:vfsName];
+}
+
+- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags vfs:(NSString *)vfsName {
     
     self = [super init];
     
@@ -42,21 +65,36 @@
         _databaseInPool     = FMDBReturnRetained([NSMutableArray array]);
         _databaseOutPool    = FMDBReturnRetained([NSMutableArray array]);
         _openFlags          = openFlags;
+        _vfsName            = [vfsName copy];
     }
     
     return self;
 }
 
-- (instancetype)initWithPath:(NSString*)aPath
-{
+- (instancetype)initWithPath:(NSString *)aPath flags:(int)openFlags {
+    return [self initWithPath:aPath flags:openFlags vfs:nil];
+}
+
+- (instancetype)initWithURL:(NSURL *)url flags:(int)openFlags {
+    return [self initWithPath:url.path flags:openFlags vfs:nil];
+}
+
+- (instancetype)initWithPath:(NSString*)aPath {
     // default flags for sqlite3_open
     return [self initWithPath:aPath flags:SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE];
+}
+
+- (instancetype)initWithURL:(NSURL *)url {
+    return [self initWithPath:url.path];
 }
 
 - (instancetype)init {
     return [self initWithPath:nil];
 }
 
++ (Class)databaseClass {
+    return [FMDatabase class];
+}
 
 - (void)dealloc {
     
@@ -64,6 +102,7 @@
     FMDBRelease(_path);
     FMDBRelease(_databaseInPool);
     FMDBRelease(_databaseOutPool);
+    FMDBRelease(_vfsName);
     
     if (_lockQueue) {
         FMDBDispatchQueueRelease(_lockQueue);
@@ -122,13 +161,13 @@
                 }
             }
             
-            db = [FMDatabase databaseWithPath:self->_path];
+            db = [[[self class] databaseClass] databaseWithPath:self->_path];
             shouldNotifyDelegate = YES;
         }
         
         //This ensures that the db is opened before returning
 #if SQLITE_VERSION_NUMBER >= 3005000
-        BOOL success = [db openWithFlags:self->_openFlags];
+        BOOL success = [db openWithFlags:self->_openFlags vfs:self->_vfsName];
 #else
         BOOL success = [db open];
 #endif
@@ -238,9 +277,9 @@
 - (void)inTransaction:(void (^)(FMDatabase *db, BOOL *rollback))block {
     [self beginTransaction:NO withBlock:block];
 }
-#if SQLITE_VERSION_NUMBER >= 3007000
+
 - (NSError*)inSavePoint:(void (^)(FMDatabase *db, BOOL *rollback))block {
-    
+#if SQLITE_VERSION_NUMBER >= 3007000
     static unsigned long savePointIdx = 0;
     
     NSString *name = [NSString stringWithFormat:@"savePoint%ld", savePointIdx++];
@@ -267,7 +306,11 @@
     [self pushDatabaseBackInPool:db];
     
     return err;
-}
+#else
+    NSString *errorMessage = NSLocalizedString(@"Save point functions require SQLite 3.7", nil);
+    if (self.logsErrors) NSLog(@"%@", errorMessage);
+    return [NSError errorWithDomain:@"FMDatabase" code:0 userInfo:@{NSLocalizedDescriptionKey : errorMessage}];
 #endif
+}
 
 @end

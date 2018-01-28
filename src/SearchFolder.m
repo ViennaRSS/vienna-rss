@@ -37,14 +37,14 @@
 #define MA_SFEdit_FolderValueTag	1008
 
 @interface SmartFolder (Private)
-	-(void)initFolderValueField:(int)parentId atIndent:(int)indentation;
+	-(void)initFolderValueField:(NSInteger)parentId atIndent:(NSInteger)indentation;
 	-(void)initSearchSheet:(NSString *)folderName;
 	-(void)displaySearchSheet:(NSWindow *)window;
 	-(void)initForField:(NSString *)fieldName inRow:(NSView *)row;
-	-(void)setOperatorsPopup:(NSPopUpButton *)popUpButton, ...;
-	-(void)addCriteria:(NSUInteger )index;
-	-(void)addDefaultCriteria:(int)index;
-	-(void)removeCriteria:(int)index;
+	-(void)setOperatorsPopup:(NSPopUpButton *)popUpButton operators:(NSArray *)operators;
+	-(void)addCriteria:(NSUInteger)index;
+	-(void)addDefaultCriteria:(NSInteger)index;
+	-(void)removeCriteria:(NSInteger)index;
 	-(void)removeAllCriteria;
 	-(void)resizeSearchWindow;
 @end
@@ -54,7 +54,7 @@
 /* initWithDatabase
  * Just init the search criteria class.
  */
--(id)initWithDatabase:(Database *)newDb
+-(instancetype)initWithDatabase:(Database *)newDb
 {
 	if ((self = [super init]) != nil)
 	{
@@ -72,7 +72,7 @@
  * Initialises the smart folder panel with a single empty criteria to get
  * started.
  */
--(void)newCriteria:(NSWindow *)window underParent:(int)itemId
+-(void)newCriteria:(NSWindow *)window underParent:(NSInteger)itemId
 {
 	[self initSearchSheet:@""];
 	smartFolderId = -1;
@@ -87,14 +87,14 @@
 /* loadCriteria
  * Loads the criteria for the specified folder.
  */
--(void)loadCriteria:(NSWindow *)window folderId:(int)folderId
+-(void)loadCriteria:(NSWindow *)window folderId:(NSInteger)folderId
 {
 	Folder * folder = [db folderFromID:folderId];
 	if (folder != nil)
 	{
-		int index = 0;
+		NSInteger index = 0;
 
-		[self initSearchSheet:[folder name]];
+		[self initSearchSheet:folder.name];
 		smartFolderId = folderId;
 		[smartFolderName setEnabled:YES];
 
@@ -102,17 +102,17 @@
 		CriteriaTree * criteriaTree = [db searchStringForSmartFolder:folderId];
 
 		// Set the criteria condition
-		[criteriaConditionPopup selectItemWithTag:[criteriaTree condition]];
+		[criteriaConditionPopup selectItemWithTag:criteriaTree.condition];
 
-		for (Criteria * criteria in [criteriaTree criteriaEnumerator])
+		for (Criteria * criteria in criteriaTree.criteriaEnumerator)
 		{
-			[self initForField:[criteria field] inRow:searchCriteriaView];
+			[self initForField:criteria.field inRow:searchCriteriaView];
 
 			[fieldNamePopup selectItemWithTitle:NSLocalizedString([criteria field], nil)];
 			[operatorPopup selectItemWithTitle:NSLocalizedString([Criteria stringFromOperator:[criteria operator]], nil)];
 
-			Field * field = [nameToFieldMap valueForKey:[criteria field]];
-			switch ([field type])
+			Field * field = [nameToFieldMap valueForKey:criteria.field];
+			switch (field.type)
 			{
 				case MA_FieldType_Flag: {
 					[flagValueField selectItemWithTitle:NSLocalizedString([criteria value], nil)];
@@ -120,24 +120,24 @@
 				}
 
 				case MA_FieldType_Folder: {
-					Folder * folder = [db folderFromName:[criteria value]];
+					Folder * folder = [db folderFromName:criteria.value];
 					if (folder != nil)
-						[folderValueField selectItemWithTitle:[folder name]];
+						[folderValueField selectItemWithTitle:folder.name];
 					break;
 				}
 
 				case MA_FieldType_String: {
-					[valueField setStringValue:[criteria value]];
+					valueField.stringValue = criteria.value;
 					break;
 				}
 
 				case MA_FieldType_Integer: {
-					[numberValueField setStringValue:[criteria value]];
+					numberValueField.stringValue = criteria.value;
 					break;
 				}
 
 				case MA_FieldType_Date: {
-					[dateValueField selectItemAtIndex:[dateValueField indexOfItemWithRepresentedObject:[criteria value]]];
+					[dateValueField selectItemAtIndex:[dateValueField indexOfItemWithRepresentedObject:criteria.value]];
 					break;
 				}
 			}
@@ -163,7 +163,9 @@
 	// Initialize UI
 	if (!searchWindow)
 	{
-		[NSBundle loadNibNamed:@"SearchFolder" owner:self];
+		NSArray * objects;
+		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"SearchFolder" owner:self topLevelObjects:&objects];
+		self.topObjects = objects;
 
 		// Register our notifications
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextDidChange:) name:NSControlTextDidChangeNotification object:smartFolderName];
@@ -177,17 +179,17 @@
 		[fieldNamePopup removeAllItems];
 		for (Field * field in [db arrayOfFields])
 		{
-			if ([field tag] != MA_FieldID_Headlines &&
-				[field tag] != MA_FieldID_GUID &&
-				[field tag] != MA_FieldID_Link &&
-				[field tag] != MA_FieldID_Comments &&
-				[field tag] != MA_FieldID_Summary &&
-				[field tag] != MA_FieldID_Parent &&
-				[field tag] != MA_FieldID_Enclosure &&
-				[field tag] != MA_FieldID_EnclosureDownloaded)
+			if (field.tag != MA_FieldID_Headlines &&
+				field.tag != MA_FieldID_GUID &&
+				field.tag != MA_FieldID_Link &&
+				field.tag != MA_FieldID_Comments &&
+				field.tag != MA_FieldID_Summary &&
+				field.tag != MA_FieldID_Parent &&
+				field.tag != MA_FieldID_Enclosure &&
+				field.tag != MA_FieldID_EnclosureDownloaded)
 			{
-				[fieldNamePopup addItemWithRepresentedObject:[field displayName] object:field];
-				[nameToFieldMap setValue:field forKey:[field name]];
+				[fieldNamePopup addItemWithRepresentedObject:field.displayName object:field];
+				[nameToFieldMap setValue:field forKey:field.name];
 			}
 		}
 		
@@ -228,8 +230,8 @@
 	[self initFolderValueField:MA_Root_Folder atIndent:0];
 	
 	// Init the folder name field and disable the Save button if it is blank
-	[smartFolderName setStringValue:folderName];
-	[saveButton setEnabled:![folderName isBlank]];
+	smartFolderName.stringValue = folderName;
+	saveButton.enabled = !folderName.blank;
 }
 
 /* initFolderValueField
@@ -238,18 +240,18 @@
  * is used to indent the items in the menu when they are part of a group. I've used
  * an increment of 2 which looks clearer than 1 in the UI.
  */
--(void)initFolderValueField:(int)fromId atIndent:(int)indentation
+-(void)initFolderValueField:(NSInteger)fromId atIndent:(NSInteger)indentation
 {
-	for (Folder * folder in [db arrayOfFolders:fromId])
+	for (Folder * folder in [[db arrayOfFolders:fromId] sortedArrayUsingSelector:@selector(folderNameCompare:)])
 	{
 		if (IsRSSFolder(folder)||IsGoogleReaderFolder(folder)||IsGroupFolder(folder))
 		{
-			[folderValueField addItemWithTitle:[folder name]];
-			NSMenuItem * menuItem = [folderValueField itemWithTitle:[folder name]];
-			[menuItem setImage:[folder image]];
-			[menuItem setIndentationLevel:indentation];
+			[folderValueField addItemWithTitle:folder.name];
+			NSMenuItem * menuItem = [folderValueField itemWithTitle:folder.name];
+			menuItem.image = folder.image;
+			menuItem.indentationLevel = indentation;
 			if (IsGroupFolder(folder))
-				[self initFolderValueField:[folder itemId] atIndent:indentation + 2];
+				[self initFolderValueField:folder.itemId atIndent:indentation + 2];
 		}
 	}
 }
@@ -268,7 +270,7 @@
 	// it back to it's default size.
 	if (firstRun)
 	{
-		searchWindowFrame = [NSWindow contentRectForFrameRect:[searchWindow frame] styleMask:[searchWindow styleMask]]; 
+		searchWindowFrame = [NSWindow contentRectForFrameRect:searchWindow.frame styleMask:searchWindow.styleMask]; 
 		firstRun = NO;
 	}
 }
@@ -278,7 +280,7 @@
  */
 -(IBAction)removeCurrentCriteria:(id)sender
 {
-	int index = [arrayOfViews indexOfObject:[sender superview]];
+	NSInteger index = [arrayOfViews indexOfObject:[sender superview]];
 	NSAssert(index >= 0 && index < totalCriteria, @"Got an out of bounds index of view in superview");
 	[self removeCriteria:index];
 	[self resizeSearchWindow];
@@ -289,7 +291,7 @@
  */
 -(IBAction)addNewCriteria:(id)sender
 {
-	int index = [arrayOfViews indexOfObject:[sender superview]];
+	NSInteger index = [arrayOfViews indexOfObject:[sender superview]];
 	NSAssert(index >= 0 && index < totalCriteria, @"Got an out of bounds index of view in superview");
 	[self addDefaultCriteria:index + 1];
 	[self resizeSearchWindow];
@@ -299,13 +301,13 @@
  * Add a new default criteria row. For this we use the static defaultField declared at
  * the start of this source and the default operator for that field, and an empty value.
  */
--(void)addDefaultCriteria:(int)index
+-(void)addDefaultCriteria:(NSInteger)index
 {
 	Field * defaultField = [db fieldByName:MA_Field_Read];
 
-	[self initForField:[defaultField name] inRow:searchCriteriaView];
-	[fieldNamePopup selectItemWithTitle:[defaultField displayName]];
-	[valueField setStringValue:@""];
+	[self initForField:defaultField.name inRow:searchCriteriaView];
+	[fieldNamePopup selectItemWithTitle:defaultField.displayName];
+	valueField.stringValue = @"";
 	[self addCriteria:index];
 }
 
@@ -316,7 +318,7 @@
 -(IBAction)fieldChanged:(id)sender
 {
 	Field * field = [sender representedObjectForSelection];
-	[self initForField:[field name] inRow:[sender superview]];
+	[self initForField:field.name inRow:[sender superview]];
 }
 
 /* initForField
@@ -330,49 +332,49 @@
 	// Need to flip on the operator popup for the field that changed
 	NSPopUpButton * theOperatorPopup = [row viewWithTag:MA_SFEdit_OperatorTag];
 	[theOperatorPopup removeAllItems];	
-	switch ([field type])
+	switch (field.type)
 	{
 		case MA_FieldType_Flag:
-			[self setOperatorsPopup:theOperatorPopup,
-									MA_CritOper_Is,
-									0];
+			[self setOperatorsPopup:theOperatorPopup operators:@[
+									@(MA_CritOper_Is)]
+									];
 			break;
 
 		case MA_FieldType_Folder:
-			[self setOperatorsPopup:theOperatorPopup,
-									MA_CritOper_Is,
-									MA_CritOper_IsNot,
-									0];
+			[self setOperatorsPopup:theOperatorPopup operators:@[
+									@(MA_CritOper_Is),
+									@(MA_CritOper_IsNot)]
+									];
 			break;
 
 		case MA_FieldType_String:
-			[self setOperatorsPopup:theOperatorPopup,
-									MA_CritOper_Is,
-									MA_CritOper_IsNot,
-									MA_CritOper_Contains,
-									MA_CritOper_NotContains,
-									0];
+			[self setOperatorsPopup:theOperatorPopup operators:@[
+									@(MA_CritOper_Is),
+									@(MA_CritOper_IsNot),
+									@(MA_CritOper_Contains),
+									@(MA_CritOper_NotContains)]
+									];
 			break;
 
 		case MA_FieldType_Integer:
-			[self setOperatorsPopup:theOperatorPopup,
-									MA_CritOper_Is,
-									MA_CritOper_IsNot,
-									MA_CritOper_IsGreaterThan,
-									MA_CritOper_IsGreaterThanOrEqual,
-									MA_CritOper_IsLessThan,
-									MA_CritOper_IsLessThanOrEqual,
-									0];
+			[self setOperatorsPopup:theOperatorPopup operators:@[
+									@(MA_CritOper_Is),
+									@(MA_CritOper_IsNot),
+									@(MA_CritOper_IsGreaterThan),
+									@(MA_CritOper_IsGreaterThanOrEqual),
+									@(MA_CritOper_IsLessThan),
+									@(MA_CritOper_IsLessThanOrEqual)]
+									];
 			break;
 
 		case MA_FieldType_Date:
-			[self setOperatorsPopup:theOperatorPopup,
-									MA_CritOper_Is,
-									MA_CritOper_IsAfter,
-									MA_CritOper_IsBefore,
-									MA_CritOper_IsOnOrAfter,
-									MA_CritOper_IsOnOrBefore,
-									0];
+			[self setOperatorsPopup:theOperatorPopup operators:@[
+									@(MA_CritOper_Is),
+									@(MA_CritOper_IsAfter),
+									@(MA_CritOper_IsBefore),
+									@(MA_CritOper_IsOnOrAfter),
+									@(MA_CritOper_IsOnOrBefore)]
+									];
 			break;
 	}
 
@@ -383,24 +385,21 @@
 	NSView * theDateValueField = [row viewWithTag:MA_SFEdit_DateValueTag];
 	NSView * theFolderValueField = [row viewWithTag:MA_SFEdit_FolderValueTag];
 
-	[theFlagValueField setHidden:[field type] != MA_FieldType_Flag];
-	[theValueField setHidden:[field type] != MA_FieldType_String];
-	[theDateValueField setHidden:[field type] != MA_FieldType_Date];
-	[theNumberValueField setHidden:[field type] != MA_FieldType_Integer];
-	[theFolderValueField setHidden:[field type] != MA_FieldType_Folder];
+	theFlagValueField.hidden = field.type != MA_FieldType_Flag;
+	theValueField.hidden = field.type != MA_FieldType_String;
+	theDateValueField.hidden = field.type != MA_FieldType_Date;
+	theNumberValueField.hidden = field.type != MA_FieldType_Integer;
+	theFolderValueField.hidden = field.type != MA_FieldType_Folder;
 }
 
 /* setOperatorsPopup
  * Fills the specified pop up button field with a list of valid operators.
  */
--(void)setOperatorsPopup:(NSPopUpButton *)popUpButton, ...
+-(void)setOperatorsPopup:(NSPopUpButton *)popUpButton operators:(NSArray *)operators
 {
-	va_list arguments;
-	va_start(arguments, popUpButton);
-	CriteriaOperator operator;
-
-	while ((operator = va_arg(arguments, int)) != 0)
+	for ( NSNumber * number in operators )
 	{
+		CriteriaOperator operator = [number integerValue];
 		NSString * operatorString = NSLocalizedString([Criteria stringFromOperator:operator], nil);
 		[popUpButton addItemWithTag:operatorString tag:operator];
 	}
@@ -412,13 +411,13 @@
  */
 -(IBAction)doSave:(id)sender
 {
-	NSString * folderName = [[smartFolderName stringValue] trim];
+	NSString * folderName = (smartFolderName.stringValue).trim;
 	NSAssert(![folderName isBlank], @"doSave called with empty folder name");
 	NSUInteger  c;
 
 	// Check whether there is another folder with the same name.
 	Folder * folder = [db folderFromName:folderName];
-	if (folder != nil && [folder itemId] != smartFolderId)
+	if (folder != nil && folder.itemId != smartFolderId)
 	{
 		runOKAlertPanel(NSLocalizedString(@"Cannot rename folder", nil), NSLocalizedString(@"A folder with that name already exists", nil));
 		return;
@@ -426,64 +425,60 @@
 
 	// Build the criteria string
 	CriteriaTree * criteriaTree = [[CriteriaTree alloc] init];
-	for (c = 0; c < [arrayOfViews count]; ++c)
+	for (c = 0; c < arrayOfViews.count; ++c)
 	{
-		NSView * row = [arrayOfViews objectAtIndex:c];
+		NSView * row = arrayOfViews[c];
 		NSPopUpButton * theField = [row viewWithTag:MA_SFEdit_FieldTag];
 		NSPopUpButton * theOperator = [row viewWithTag:MA_SFEdit_OperatorTag];
 
-		Field * field = [theField representedObjectForSelection];
-		CriteriaOperator operator = [theOperator tagForSelection];
+		Field * field = theField.representedObjectForSelection;
+		CriteriaOperator operator = theOperator.tagForSelection;
 		NSString * valueString;
 
-		if ([field type] == MA_FieldType_Flag)
+		if (field.type == MA_FieldType_Flag)
 		{
 			NSPopUpButton * theValue = [row viewWithTag:MA_SFEdit_FlagValueTag];
-			valueString = [theValue representedObjectForSelection];
+			valueString = theValue.representedObjectForSelection;
 		}
-		else if ([field type] == MA_FieldType_Date)
+		else if (field.type == MA_FieldType_Date)
 		{
 			NSPopUpButton * theValue = [row viewWithTag:MA_SFEdit_DateValueTag];
-			valueString = [theValue representedObjectForSelection];
+			valueString = theValue.representedObjectForSelection;
 		}
-		else if ([field type] == MA_FieldType_Folder)
+		else if (field.type == MA_FieldType_Folder)
 		{
 			NSPopUpButton * theValue = [row viewWithTag:MA_SFEdit_FolderValueTag];
-			valueString = [theValue titleOfSelectedItem];
+			valueString = theValue.titleOfSelectedItem;
 		}
-		else if ([field type] == MA_FieldType_Integer)
+		else if (field.type == MA_FieldType_Integer)
 		{
 			NSTextField * theValue = [row viewWithTag:MA_SFEdit_NumberValueTag];
-			valueString = [theValue stringValue];
+			valueString = theValue.stringValue;
 		}
 		else
 		{
 			NSTextField * theValue = [row viewWithTag:MA_SFEdit_ValueTag];
-			valueString = [theValue stringValue];
+			valueString = theValue.stringValue;
 		}
 
-		Criteria * newCriteria = [[Criteria alloc] initWithField:[field name] withOperator:operator withValue:valueString];
+		Criteria * newCriteria = [[Criteria alloc] initWithField:field.name withOperator:operator withValue:valueString];
 		[criteriaTree addCriteria:newCriteria];
-		[newCriteria release];
 	}
 
 	// Set the criteria condition
-	[criteriaTree setCondition:[criteriaConditionPopup selectedTag]];
+	criteriaTree.condition = criteriaConditionPopup.selectedTag;
 	
-	[db doTransactionWithBlock:^(BOOL *rollback) {
 	if (smartFolderId == -1)
 	{
 		AppController * controller = APPCONTROLLER;
-		smartFolderId = [db addSmartFolder:folderName underParent:parentId withQuery:criteriaTree];
+		smartFolderId = [[Database sharedManager] addSmartFolder:folderName underParent:parentId withQuery:criteriaTree];
 		[controller selectFolder:smartFolderId];
 	}
 	else
     {
-		[db updateSearchFolder:smartFolderId withFolder:folderName withQuery:criteriaTree];
+		[[Database sharedManager] updateSearchFolder:smartFolderId withFolder:folderName withQuery:criteriaTree];
     }
-    }]; //end transaction block
 
-	[criteriaTree release];
 	
 	[NSApp endSheet:searchWindow];
 	[searchWindow orderOut:self];
@@ -503,8 +498,8 @@
  */
 -(void)handleTextDidChange:(NSNotification *)aNotification
 {
-	NSString * folderName = [smartFolderName stringValue];
-	[saveButton setEnabled:![folderName isBlank]];
+	NSString * folderName = smartFolderName.stringValue;
+	saveButton.enabled = !folderName.blank;
 }
 
 /* removeAllCriteria
@@ -512,12 +507,12 @@
  */
 -(void)removeAllCriteria
 {
-	int c;
+	NSInteger c;
 
-	NSArray * subviews = [searchCriteriaSuperview subviews];
-	for (c = [subviews count] - 1; c >= 0; --c)
+	NSArray * subviews = searchCriteriaSuperview.subviews;
+	for (c = subviews.count - 1; c >= 0; --c)
 	{
-		NSView * row = [subviews objectAtIndex:c];
+		NSView * row = subviews[c];
 		[row removeFromSuperview];
 	}
 	[arrayOfViews removeAllObjects];
@@ -527,17 +522,17 @@
 /* removeCriteria
  * Remove the criteria at the specified index.
  */
--(void)removeCriteria:(int)index
+-(void)removeCriteria:(NSInteger)index
 {
-	int rowHeight = [searchCriteriaView frame].size.height;
-	int c;
+	NSInteger rowHeight = searchCriteriaView.frame.size.height;
+	NSInteger c;
 
 	// Do nothing if there's just one criteria
 	if (totalCriteria <= 1)
 		return;
 	
 	// Remove the view from the parent view
-	NSView * row = [arrayOfViews objectAtIndex:index];
+	NSView * row = arrayOfViews[index];
 	[row removeFromSuperview];
 	[arrayOfViews removeObject:row];
 	--totalCriteria;
@@ -545,8 +540,8 @@
 	// Shift the subviews
 	for (c = 0; c < index; ++c)
 	{
-		NSView * row = [arrayOfViews objectAtIndex:c];
-		NSPoint origin = [row frame].origin;
+		NSView * row = arrayOfViews[c];
+		NSPoint origin = row.frame.origin;
 		[row setFrameOrigin:NSMakePoint(origin.x, origin.y - rowHeight)];
 	}
 }
@@ -555,11 +550,11 @@
  * Add a new criteria clause. Before calling this function, initialise the
  * searchView with the settings to be added.
  */
--(void)addCriteria:(NSUInteger )index
+-(void)addCriteria:(NSUInteger)index
 {
 	NSData * archRow;
 	NSView * previousRow = nil;
-	int rowHeight = [searchCriteriaView frame].size.height;
+	NSInteger rowHeight = searchCriteriaView.frame.size.height;
 	NSUInteger  c;
 
 	// Bump up the criteria count
@@ -568,22 +563,22 @@
 		[self resizeSearchWindow];
 
 	// Shift the existing subviews up by rowHeight
-	if (index > [arrayOfViews count])
-		index = [arrayOfViews count];
+	if (index > arrayOfViews.count)
+		index = arrayOfViews.count;
 	for (c = 0; c < index; ++c)
 	{
-		NSView * row = [arrayOfViews objectAtIndex:c];
-		NSPoint origin = [row frame].origin;
+		NSView * row = arrayOfViews[c];
+		NSPoint origin = row.frame.origin;
 		[row setFrameOrigin:NSMakePoint(origin.x, origin.y + rowHeight)];
 		previousRow = row;
 	}
 
 	// Now add the new subview
 	archRow = [NSArchiver archivedDataWithRootObject:searchCriteriaView];
-	NSRect bounds = [searchCriteriaSuperview bounds];
+	NSRect bounds = searchCriteriaSuperview.bounds;
 	NSView * row = (NSView *)[NSUnarchiver unarchiveObjectWithData:archRow];
 	[row setFrameOrigin:NSMakePoint(bounds.origin.x, bounds.origin.y + (((totalCriteria - 1) - index) * rowHeight))];
-	[searchCriteriaSuperview addSubview:[row retain]];
+	[searchCriteriaSuperview addSubview:row];
 	[arrayOfViews insertObject:row atIndex:index];
 
 	// Link the previous row to the next one so that the Tab key behaves
@@ -591,12 +586,11 @@
 	// BUGBUG: This doesn't work and I can't figure out why not yet. This needs to be fixed.
 	if (previousRow)
 	{
-		NSView * lastKeyView = [previousRow nextKeyView];
-		[previousRow setNextKeyView:row];
-		[row setNextKeyView:lastKeyView];
+		NSView * lastKeyView = previousRow.nextKeyView;
+		previousRow.nextKeyView = row;
+		row.nextKeyView = lastKeyView;
 	}
 	[searchCriteriaSuperview display];
-	[row release];
 }
 
 /* resizeSearchWindow
@@ -609,12 +603,12 @@
 	newFrame = searchWindowFrame;
 	if (totalCriteria > 0)
 	{
-		int rowHeight = [searchCriteriaView frame].size.height;
-		int newHeight = newFrame.size.height + rowHeight * (totalCriteria - 1);
+		NSInteger rowHeight = searchCriteriaView.frame.size.height;
+		NSInteger newHeight = newFrame.size.height + rowHeight * (totalCriteria - 1);
 		newFrame.origin.y += newFrame.size.height;
 		newFrame.origin.y -= newHeight;
 		newFrame.size.height = newHeight;
-		newFrame = [NSWindow frameRectForContentRect:newFrame styleMask:[searchWindow styleMask]];
+		newFrame = [NSWindow frameRectForContentRect:newFrame styleMask:searchWindow.styleMask];
 	}
 	[searchWindow setFrame:newFrame display:YES animate:YES];
 }
@@ -625,12 +619,5 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[arrayOfViews release];
-	arrayOfViews=nil;
-	[nameToFieldMap release];
-	nameToFieldMap=nil;
-	[db release];
-	db=nil;
-	[super dealloc];
 }
 @end

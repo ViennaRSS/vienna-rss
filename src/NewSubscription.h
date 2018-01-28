@@ -38,13 +38,14 @@
 	BOOL googleOptionButton;
 	NSDictionary * sourcesDict;
 	Database * db;
-	int parentId;
-	int editFolderId;
+	NSInteger parentId;
+	NSInteger editFolderId;
     SubscriptionModel *subscriptionModel;
     
 }
 
 @property BOOL googleOptionButton;
+@property(strong) NSArray * topObjects;
 
 // Action handlers
 -(IBAction)doSubscribe:(id)sender;
@@ -56,8 +57,8 @@
 -(IBAction)doGoogleOption:(id)sender;
 
 // General functions
--(id)initWithDatabase:(Database *)newDb;
--(void)newSubscription:(NSWindow *)window underParent:(int)itemId initialURL:(NSString *)initialURL;
--(void)editSubscription:(NSWindow *)window folderId:(int)folderId;
+-(instancetype)initWithDatabase:(Database *)newDb /*NS_DESIGNATED_INITIALIZER*/;
+-(void)newSubscription:(NSWindow *)window underParent:(NSInteger)itemId initialURL:(NSString *)initialURL;
+-(void)editSubscription:(NSWindow *)window folderId:(NSInteger)folderId;
 
 @end

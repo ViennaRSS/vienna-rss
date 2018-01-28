@@ -27,20 +27,20 @@
 /* init
  * Initialises a treenode.
  */
--(id)init:(TreeNode *)parent atIndex:(NSInteger)insertIndex folder:(Folder *)theFolder canHaveChildren:(BOOL)childflag
+-(instancetype)init:(TreeNode *)parent atIndex:(NSInteger)insertIndex folder:(Folder *)theFolder canHaveChildren:(BOOL)childflag
 {
 	if ((self = [super init]) != nil)
  	{
-		int folderId = (theFolder ? [theFolder itemId] : MA_Root_Folder);
-		[self setFolder:theFolder];
-		[self setParentNode:parent];
-		[self setCanHaveChildren:childflag];
-		[self setNodeId:folderId];
+		NSInteger folderId = (theFolder ? theFolder.itemId : MA_Root_Folder);
+		folder = theFolder;
+		parentNode = parent;
+		canHaveChildren = childflag;
+		nodeId = folderId;
 		if (parent != nil)
 		{
 			[parent addChild:self atIndex:insertIndex];
 		}
-		children = [[NSMutableArray array] retain];
+		children = [NSMutableArray array];
 		progressIndicator = nil;
 	}
 	return self;
@@ -60,8 +60,8 @@
 -(void)addChild:(TreeNode *)child atIndex:(NSInteger)insertIndex
 {
 	NSAssert(canHaveChildren, @"Trying to add children to a node that cannot have children (canHaveChildren==NO)");
-	NSUInteger count = [children count];
-	NSInteger sortMethod = [[Preferences standardPreferences] foldersTreeSortMethod];
+	NSUInteger count = children.count;
+	NSInteger sortMethod = [Preferences standardPreferences].foldersTreeSortMethod;
 
 	if (sortMethod != MA_FolderSort_Manual)
 	{
@@ -69,7 +69,7 @@
 
 		while (insertIndex < count)
 		{
-			TreeNode * theChild = [children objectAtIndex:insertIndex];
+			TreeNode * theChild = children[insertIndex];
 			if (sortMethod == MA_FolderSort_ByName)
 			{
 				if ([child folderNameCompare:theChild] == NSOrderedAscending)
@@ -77,7 +77,7 @@
 			}
 			else
 			{
-				NSAssert1(TRUE, @"Unsupported folder sort method in addChild: %ld", sortMethod);
+				NSAssert1(TRUE, @"Unsupported folder sort method in addChild: %ld", (long)sortMethod);
 			}
 			++insertIndex;
 		}
@@ -85,7 +85,7 @@
 	else if ((insertIndex < 0) || (insertIndex > count))
 		insertIndex = count;
 	
-	[child setParentNode:self];
+	child.parentNode = self;
 	[children insertObject:child atIndex:insertIndex];
 }
 
@@ -116,7 +116,7 @@
 		break;
 		
 	default:
-		NSAssert1(TRUE, @"Unsupported folder sort method in sortChildren: %ld", sortMethod);
+		NSAssert1(TRUE, @"Unsupported folder sort method in sortChildren: %ld", (long)sortMethod);
 		break;
 	}
 }
@@ -126,14 +126,14 @@
  */
 -(NSComparisonResult)folderNameCompare:(TreeNode *)otherObject
 {
-	Folder * thisFolder = [self folder];
-	Folder * otherFolder = [otherObject folder];
+	Folder * thisFolder = self.folder;
+	Folder * otherFolder = otherObject.folder;
 
 	if (FolderType(thisFolder) < FolderType(otherFolder))
 		return NSOrderedAscending;
 	if (FolderType(thisFolder) > FolderType(otherFolder))
 		return NSOrderedDescending;
-	return [[thisFolder name] caseInsensitiveCompare:[otherFolder name]];
+	return [thisFolder.name caseInsensitiveCompare:otherFolder.name];
 }
 
 /* removeChildren
@@ -150,7 +150,7 @@
  */
 -(TreeNode *)nodeFromID:(NSInteger)n
 {
-	if ([self nodeId] == n)
+	if (self.nodeId == n)
 		return self;
 	
 	TreeNode * theNode;
@@ -170,7 +170,7 @@
 {
 	for (TreeNode * node in children)
 	{
-		if ([childName isEqual:[node nodeName]])
+		if ([childName isEqual:node.nodeName])
 			return node;
 	}
 	return nil;
@@ -182,7 +182,7 @@
  */
 -(TreeNode *)childByIndex:(NSInteger)index
 {
-	return [children objectAtIndex:index];
+	return children[index];
 }
 
 /* indexOfChild
@@ -215,7 +215,7 @@
 -(TreeNode *)nextSibling
 {
 	NSInteger childIndex = [parentNode indexOfChild:self];
-	if (childIndex == NSNotFound || ++childIndex >= [parentNode countOfChildren])
+	if (childIndex == NSNotFound || ++childIndex >= parentNode.countOfChildren)
 		return nil;
 	return [parentNode childByIndex:childIndex];
 }
@@ -225,9 +225,9 @@
  */
 -(TreeNode *)firstChild
 {
-	if ([children count] == 0)
+	if (children.count == 0)
 		return nil;
-	return [children objectAtIndex:0];
+	return children[0];
 }
 
 /* setNodeId
@@ -251,8 +251,6 @@
  */
 -(void)setFolder:(Folder *)newFolder
 {
-	[newFolder retain];
-	[folder release];
 	folder = newFolder;
 }
 
@@ -273,9 +271,9 @@
 {
 	if (folder != nil) {
 		if (IsGoogleReaderFolder(folder)) {
-			return [NSString stringWithFormat:@"☁️ %@",[folder name]];
+			return [NSString stringWithFormat:@"☁️ %@",folder.name];
 		} else {
-			return [folder name];
+			return folder.name;
 		}
 	} 
 	return @"";
@@ -286,7 +284,7 @@
  */
 -(NSUInteger)countOfChildren
 {
-	return [children count];
+	return children.count;
 }
 
 /* setCanHaveChildren
@@ -313,7 +311,8 @@
  */
 -(NSString *)description
 {
-	return [NSString stringWithFormat:@"%@ (Parent=%p, # of children=%ld)", [folder name], parentNode, [children count]];
+	return [NSString stringWithFormat:@"%@ (Parent=%p, # of children=%ld)",
+            folder.name, parentNode, (unsigned long)children.count];
 }
 
 /* allocAndStartProgressIndicator:
@@ -324,8 +323,8 @@
 	// Allocate and initialize the spinning progress indicator.
 	NSRect progressRect = NSMakeRect(0, 0, PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION);
 	progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressRect];
-	[progressIndicator setControlSize:NSSmallControlSize];
-	[progressIndicator setStyle:NSProgressIndicatorSpinningStyle];
+	progressIndicator.controlSize = NSSmallControlSize;
+	progressIndicator.style = NSProgressIndicatorSpinningStyle;
 	[progressIndicator setUsesThreadedAnimation:YES];
 	
 	// Start the animation.
@@ -347,7 +346,6 @@
 		[progressIndicator removeFromSuperviewWithoutNeedingDisplay];
 		
 		// Release the progress indicator.
-		[progressIndicator release];
 		progressIndicator = nil;
 	}
 
@@ -371,22 +369,8 @@
 {
 	if (progressIndicator != inProgressIndicator)
 	{
-		[progressIndicator release];
-		progressIndicator = [inProgressIndicator retain];
+		progressIndicator = inProgressIndicator;
 	}
 }
 
-/* dealloc
- * Clean up and release resources.
- */
--(void)dealloc
-{
-	[children release];
-	children=nil;
-	[folder release];
-	folder=nil;
-	[progressIndicator release];
-	progressIndicator=nil;
-	[super dealloc];
-}
 @end

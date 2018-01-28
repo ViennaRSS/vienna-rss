@@ -21,5 +21,5 @@
 #import <Cocoa/Cocoa.h>
 
 @interface NSBezierPath (BezierPathExtensions)
-	+(NSBezierPath *)bezierPathWithRoundRectInRect:(NSRect)aRect radius:(float)radius;
+	+(NSBezierPath *)bezierPathWithRoundRectInRect:(NSRect)aRect radius:(CGFloat)radius;
 @end

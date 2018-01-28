@@ -26,7 +26,7 @@
  * Initialises a simple subclass of NSButton that pops up a menu
  * if one is associated with it.
  */
--(id)initWithFrame:(NSRect)frameRect withItem:(NSToolbarItem *)theItem
+-(instancetype)initWithFrame:(NSRect)frameRect withItem:(NSToolbarItem *)theItem
 {
 	if ((self = [super initWithFrame:frameRect withItem:theItem]) != nil)
 	{
@@ -59,8 +59,6 @@
  */
 -(void)setTheMenu:(NSMenu *)menu
 {
-	[menu retain];
-	[theMenu release];
 	theMenu = menu;
 }
 
@@ -69,7 +67,7 @@
  */
 -(NSMenu *)theMenu
 {
-	return [[theMenu retain] autorelease];
+	return theMenu;
 }
 
 /* mouseDown
@@ -78,21 +76,21 @@
  */
 -(void)mouseDown:(NSEvent *)theEvent
 {
-	if ([self isEnabled] && theMenu != nil)
+	if (self.enabled && theMenu != nil)
 	{
 		[self highlight:YES];
-		NSPoint popPoint = NSMakePoint([self bounds].origin.x, [self bounds].origin.y);
+		NSPoint popPoint = NSMakePoint(self.bounds.origin.x, self.bounds.origin.y);
 		if (popBelow)
-			popPoint.y += [self bounds].size.height + 5;
-        NSEvent * evt = [NSEvent mouseEventWithType:[theEvent type]
-								 location:[self convertPoint:popPoint toView:nil]
-							modifierFlags:[theEvent modifierFlags]
-								timestamp:[theEvent timestamp]
-							 windowNumber:[theEvent windowNumber]
-								  context:[theEvent context]
-							  eventNumber:[theEvent eventNumber]
-							   clickCount:[theEvent clickCount]
-								 pressure:[theEvent pressure]];
+			popPoint.y += self.bounds.size.height + 5;
+		NSEvent * evt = [NSEvent mouseEventWithType:theEvent.type
+										   location:[self convertPoint:popPoint toView:nil]
+									  modifierFlags:theEvent.modifierFlags
+										  timestamp:theEvent.timestamp
+									   windowNumber:theEvent.windowNumber
+											context:theEvent.context
+										eventNumber:theEvent.eventNumber
+										 clickCount:theEvent.clickCount
+										   pressure:theEvent.pressure];
 		[NSMenu popUpContextMenu:theMenu withEvent:evt forView:self withFont:popupFont];
 		[self highlight:NO];
 	}
@@ -103,17 +101,8 @@
  */
 -(void)mouseUp:(NSEvent *)theEvent
 {
-	if ([self isEnabled])
+	if (self.enabled)
 		[self highlight:NO];
 }
 
-/* dealloc
- * Clean up behind ourself.
- */
--(void)dealloc
-{
-	[theMenu release];
-	theMenu=nil;
-	[super dealloc];
-}
 @end

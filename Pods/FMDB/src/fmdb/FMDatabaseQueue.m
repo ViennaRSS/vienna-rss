@@ -9,6 +9,12 @@
 #import "FMDatabaseQueue.h"
 #import "FMDatabase.h"
 
+#if FMDB_SQLITE_STANDALONE
+#import <sqlite3/sqlite3.h>
+#else
+#import <sqlite3.h>
+#endif
+
 /*
  
  Note: we call [self retain]; before using dispatch_sync, just incase 
@@ -23,14 +29,16 @@
  * the queue's dispatch queue, which should not happen and causes a deadlock.
  */
 static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey;
- 
+
+@interface FMDatabaseQueue () {
+    dispatch_queue_t    _queue;
+    FMDatabase          *_db;
+}
+@end
+
 @implementation FMDatabaseQueue
 
-@synthesize path = _path;
-@synthesize openFlags = _openFlags;
-
-+ (instancetype)databaseQueueWithPath:(NSString*)aPath {
-    
++ (instancetype)databaseQueueWithPath:(NSString *)aPath {
     FMDatabaseQueue *q = [[self alloc] initWithPath:aPath];
     
     FMDBAutorelease(q);
@@ -38,8 +46,11 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
     return q;
 }
 
-+ (instancetype)databaseQueueWithPath:(NSString*)aPath flags:(int)openFlags {
-    
++ (instancetype)databaseQueueWithURL:(NSURL *)url {
+    return [self databaseQueueWithPath:url.path];
+}
+
++ (instancetype)databaseQueueWithPath:(NSString *)aPath flags:(int)openFlags {
     FMDatabaseQueue *q = [[self alloc] initWithPath:aPath flags:openFlags];
     
     FMDBAutorelease(q);
@@ -47,12 +58,19 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
     return q;
 }
 
++ (instancetype)databaseQueueWithURL:(NSURL *)url flags:(int)openFlags {
+    return [self databaseQueueWithPath:url.path flags:openFlags];
+}
+
 + (Class)databaseClass {
     return [FMDatabase class];
 }
 
-- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags {
-    
+- (instancetype)initWithURL:(NSURL *)url flags:(int)openFlags vfs:(NSString *)vfsName {
+    return [self initWithPath:url.path flags:openFlags vfs:vfsName];
+}
+
+- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags vfs:(NSString *)vfsName {
     self = [super init];
     
     if (self != nil) {
@@ -61,7 +79,7 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
         FMDBRetain(_db);
         
 #if SQLITE_VERSION_NUMBER >= 3005000
-        BOOL success = [_db openWithFlags:openFlags];
+        BOOL success = [_db openWithFlags:openFlags vfs:vfsName];
 #else
         BOOL success = [_db open];
 #endif
@@ -76,15 +94,27 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
         _queue = dispatch_queue_create([[NSString stringWithFormat:@"fmdb.%@", self] UTF8String], NULL);
         dispatch_queue_set_specific(_queue, kDispatchQueueSpecificKey, (__bridge void *)self, NULL);
         _openFlags = openFlags;
+        _vfsName = [vfsName copy];
     }
     
     return self;
 }
 
-- (instancetype)initWithPath:(NSString*)aPath {
-    
+- (instancetype)initWithPath:(NSString *)aPath flags:(int)openFlags {
+    return [self initWithPath:aPath flags:openFlags vfs:nil];
+}
+
+- (instancetype)initWithURL:(NSURL *)url flags:(int)openFlags {
+    return [self initWithPath:url.path flags:openFlags vfs:nil];
+}
+
+- (instancetype)initWithURL:(NSURL *)url {
+    return [self initWithPath:url.path];
+}
+
+- (instancetype)initWithPath:(NSString *)aPath {
     // default flags for sqlite3_open
-    return [self initWithPath:aPath flags:SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE];
+    return [self initWithPath:aPath flags:SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE vfs:nil];
 }
 
 - (instancetype)init {
@@ -93,9 +123,9 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
 
     
 - (void)dealloc {
-    
     FMDBRelease(_db);
     FMDBRelease(_path);
+    FMDBRelease(_vfsName);
     
     if (_queue) {
         FMDBDispatchQueueRelease(_queue);
@@ -116,12 +146,16 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
     FMDBRelease(self);
 }
 
+- (void)interrupt {
+    [[self database] interrupt];
+}
+
 - (FMDatabase*)database {
     if (!_db) {
-        _db = FMDBReturnRetained([FMDatabase databaseWithPath:_path]);
+       _db = FMDBReturnRetained([[[self class] databaseClass] databaseWithPath:_path]);
         
 #if SQLITE_VERSION_NUMBER >= 3005000
-        BOOL success = [_db openWithFlags:_openFlags];
+        BOOL success = [_db openWithFlags:_openFlags vfs:_vfsName];
 #else
         BOOL success = [_db open];
 #endif
@@ -137,10 +171,12 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
 }
 
 - (void)inDatabase:(void (^)(FMDatabase *db))block {
+#ifndef NDEBUG
     /* Get the currently executing queue (which should probably be nil, but in theory could be another DB queue
      * and then check it against self to make sure we're not about to deadlock. */
     FMDatabaseQueue *currentSyncQueue = (__bridge id)dispatch_get_specific(kDispatchQueueSpecificKey);
     assert(currentSyncQueue != self && "inDatabase: was called reentrantly on the same queue, which would lead to a deadlock");
+#endif
     
     FMDBRetain(self);
     
@@ -164,7 +200,6 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
     
     FMDBRelease(self);
 }
-
 
 - (void)beginTransaction:(BOOL)useDeferred withBlock:(void (^)(FMDatabase *db, BOOL *rollback))block {
     FMDBRetain(self);
@@ -200,9 +235,8 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
     [self beginTransaction:NO withBlock:block];
 }
 
-#if SQLITE_VERSION_NUMBER >= 3007000
 - (NSError*)inSavePoint:(void (^)(FMDatabase *db, BOOL *rollback))block {
-    
+#if SQLITE_VERSION_NUMBER >= 3007000
     static unsigned long savePointIdx = 0;
     __block NSError *err = 0x00;
     FMDBRetain(self);
@@ -226,7 +260,11 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
     });
     FMDBRelease(self);
     return err;
-}
+#else
+    NSString *errorMessage = NSLocalizedString(@"Save point functions require SQLite 3.7", nil);
+    if (self.logsErrors) NSLog(@"%@", errorMessage);
+    return [NSError errorWithDomain:@"FMDatabase" code:0 userInfo:@{NSLocalizedDescriptionKey : errorMessage}];
 #endif
+}
 
 @end

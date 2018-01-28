@@ -25,7 +25,7 @@
 
 // Pull in the private functions we need from the delegate
 @interface AppController (Private)
--(NSMenu *)searchFieldMenu;
+@property (nonatomic, readonly, copy) NSMenu *searchFieldMenu;
 -(void)searchArticlesWithString:(NSString *)searchString;
 @end
 
@@ -38,8 +38,10 @@
 {
 	if (!searchPanelWindow)
 	{
-		[NSBundle loadNibNamed:@"SearchPanel" owner:self];
-		[[searchField cell] setSearchMenuTemplate:[APPCONTROLLER searchFieldMenu]];
+		NSArray * objects;
+		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"SearchPanel" owner:self topLevelObjects:&objects];
+		self.topObjects = objects;
+		((NSSearchFieldCell *)searchField.cell).searchMenuTemplate = APPCONTROLLER.searchFieldMenu;
 	}
 	[searchLabel setStringValue:NSLocalizedString(@"Search all articles or the current web page", nil)];
 	[NSApp beginSheet:searchPanelWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
@@ -50,7 +52,7 @@
  */
 -(void)setSearchString:(NSString *)newSearchString
 {
-	[searchField setStringValue:newSearchString];
+	searchField.stringValue = newSearchString;
 }
 
 /* searchStringChanged
@@ -60,16 +62,16 @@
  */
 -(IBAction)searchStringChanged:(id)sender;
 {
-	[APPCONTROLLER setSearchString:[searchField stringValue]];
+	APPCONTROLLER.searchString = searchField.stringValue;
 	
-	NSView<BaseView> * theView = [[APPCONTROLLER browserView] activeTabItemView];
+	NSView<BaseView> * theView = APPCONTROLLER.browserView.activeTabItemView;
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
 		[theView performFindPanelAction:NSFindPanelActionSetFindString];
 		[APPCONTROLLER setFocusToSearchField:self];
 	}
 	else
-		[APPCONTROLLER searchArticlesWithString:[searchField stringValue]];
+		[APPCONTROLLER searchArticlesWithString:searchField.stringValue];
 	
 	[NSApp endSheet:searchPanelWindow];
 	[searchPanelWindow orderOut:self];

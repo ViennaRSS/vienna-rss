@@ -21,23 +21,20 @@
 
 @implementation BrowserPaneTemplate
 
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
-		[NSBundle loadNibNamed:@"BrowserPane" owner:self];
+	{
+		NSArray * objects;
+		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"BrowserPane" owner:self topLevelObjects:&objects];
+		self.topObjects = objects;
+	}
 	return self;
 }
 
 -(BrowserPane *)mainView
 {
 	return browserPane;
-}
-
--(void)dealloc
-{
-	[browserPane release];
-	browserPane=nil;
-	[super dealloc];
 }
 
 @end

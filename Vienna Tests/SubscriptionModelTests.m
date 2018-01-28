@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <XCTest/XCTest.h>
 #import "SubscriptionModel.h"
+#import "NSURL+URIEquivalence.h"
 
 @interface SubscriptionModelTests : XCTestCase {
     SubscriptionModel *subscriptionModel;
@@ -27,7 +28,6 @@
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
-    [subscriptionModel release];
     subscriptionModel = nil;
 }
 
@@ -52,8 +52,10 @@
     // that the returned URL is correct
     NSURL *unverifiedURL = [NSURL URLWithString:@"abc.net.au/news"];
     NSURL *expectedURL = [NSURL URLWithString:@"http://abc.net.au/news/feed/51120/rss.xml"];
-    
-    XCTAssertEqualObjects(expectedURL, [subscriptionModel verifiedFeedURLFromURL:unverifiedURL]);
+
+    NSURL *verifiedURL = [subscriptionModel verifiedFeedURLFromURL:unverifiedURL];
+
+    XCTAssertTrue([expectedURL isEquivalent:verifiedURL]);
 }
 
 - (void)testVerificationOfHostRelativeWebURLs {
@@ -61,24 +63,26 @@
     // that the returned URL is correct
     NSURL *unverifiedURL = [NSURL URLWithString:@"https://news.ycombinator.com/news"];
     NSURL *expectedURL = [NSURL URLWithString:@"https://news.ycombinator.com/rss"];
-    
-    XCTAssertEqualObjects(expectedURL, [subscriptionModel verifiedFeedURLFromURL:unverifiedURL]);
+
+    NSURL *verifiedURL = [subscriptionModel verifiedFeedURLFromURL:unverifiedURL];
+
+    XCTAssertTrue([expectedURL isEquivalent:verifiedURL]);
     
     // Reported by @cdevroe from https://twitter.com/cdevroe/status/517764086478958593
     unverifiedURL = [NSURL URLWithString:@"https://adactio.com/journal/"];
     expectedURL = [NSURL URLWithString:@"https://adactio.com/journal/rss"];
-    
-    XCTAssertEqualObjects(expectedURL, [subscriptionModel verifiedFeedURLFromURL:unverifiedURL]);
+
+    verifiedURL = [subscriptionModel verifiedFeedURLFromURL:unverifiedURL];
+
+    XCTAssertTrue([expectedURL isEquivalent:verifiedURL]);
     
     // Reported by @cdevroe from from https://twitter.com/cdevroe/status/517764395183915009
     unverifiedURL = [NSURL URLWithString:@"shawnblanc.net"];
     expectedURL = [NSURL URLWithString:@"http://shawnblanc.net/feed/"];
-    
-    XCTAssertEqualObjects(expectedURL, [subscriptionModel verifiedFeedURLFromURL:unverifiedURL]);
+
+    verifiedURL = [subscriptionModel verifiedFeedURLFromURL:unverifiedURL];
+
+    XCTAssertTrue([expectedURL isEquivalent:verifiedURL]);
 }
-
-
-
-
 
 @end

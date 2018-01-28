@@ -21,5 +21,5 @@
 #import <Cocoa/Cocoa.h>
 
 @interface ThinSplitView : NSSplitView {}
--(CGFloat)dividerThickness;
+@property (readonly) CGFloat dividerThickness;
 @end

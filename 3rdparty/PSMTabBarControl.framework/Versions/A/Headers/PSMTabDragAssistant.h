@@ -44,20 +44,13 @@
 + (PSMTabDragAssistant *)sharedDragAssistant;
 
 // Accessors
-- (PSMTabBarControl *)sourceTabBar;
-- (void)setSourceTabBar:(PSMTabBarControl *)tabBar;
-- (PSMTabBarControl *)destinationTabBar;
-- (void)setDestinationTabBar:(PSMTabBarControl *)tabBar;
-- (PSMTabBarCell *)draggedCell;
-- (void)setDraggedCell:(PSMTabBarCell *)cell;
-- (NSInteger)draggedCellIndex;
-- (void)setDraggedCellIndex:(NSInteger)value;
-- (BOOL)isDragging;
-- (void)setIsDragging:(BOOL)value;
-- (NSPoint)currentMouseLoc;
-- (void)setCurrentMouseLoc:(NSPoint)point;
-- (PSMTabBarCell *)targetCell;
-- (void)setTargetCell:(PSMTabBarCell *)cell;
+@property (NS_NONATOMIC_IOSONLY, strong) PSMTabBarControl *sourceTabBar;
+@property (NS_NONATOMIC_IOSONLY, strong) PSMTabBarControl *destinationTabBar;
+@property (NS_NONATOMIC_IOSONLY, copy) PSMTabBarCell *draggedCell;
+@property (NS_NONATOMIC_IOSONLY) NSInteger draggedCellIndex;
+@property (NS_NONATOMIC_IOSONLY) BOOL isDragging;
+@property (NS_NONATOMIC_IOSONLY) NSPoint currentMouseLoc;
+@property (NS_NONATOMIC_IOSONLY, copy) PSMTabBarCell *targetCell;
 
 // Functionality
 - (void)startDraggingCell:(PSMTabBarCell *)cell fromTabBarControl:(PSMTabBarControl *)tabBarControl withMouseDownEvent:(NSEvent *)event;
@@ -86,5 +79,5 @@ void CGContextCopyWindowCaptureContentsToRect(void *grafport, CGRect rect, NSInt
 OSStatus CGSSetWindowTransform(NSInteger cid, NSInteger wid, CGAffineTransform transform);
 
 @interface NSApplication (CoreGraphicsUndocumented)
-- (NSInteger)contextID;
+@property (NS_NONATOMIC_IOSONLY, readonly) NSInteger contextID;
 @end

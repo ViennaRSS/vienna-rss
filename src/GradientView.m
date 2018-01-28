@@ -36,16 +36,8 @@
  */
 -(void)drawRect:(NSRect)rect 
 {
-	NSRect iRect = NSMakeRect(0, 0, 1, [backgroundBrush size].height - 1);					
+	NSRect iRect = NSMakeRect(0, 0, 1, backgroundBrush.size.height - 1);					
 	[backgroundBrush drawInRect:rect fromRect:iRect operation:NSCompositeSourceOver fraction:1];
 }
 
-/* dealloc
- * Release resources at the end.
- */
--(void)dealloc
-{
-	[backgroundBrush release];
-	backgroundBrush=nil;
-	[super dealloc];
-}@end
+@end

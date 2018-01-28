@@ -32,7 +32,7 @@
 /* renameFolder
  * Display the sheet to rename the specified folder.
  */
--(void)renameFolder:(NSWindow *)window folderId:(int)itemId
+-(void)renameFolder:(NSWindow *)window folderId:(NSInteger)itemId
 {
 	if (!renameFolderWindow)
 	{
@@ -42,7 +42,7 @@
 
 	// Reset from the last time we used this sheet.
 	folderId = itemId;
-	Folder * folder = [[Database sharedDatabase] folderFromID:folderId];
+	Folder * folder = [[Database sharedManager] folderFromID:folderId];
 	[folderName setStringValue:[folder name]];
 
 	[self enableSaveButton];
@@ -55,12 +55,13 @@
 -(IBAction)doRename:(id)sender
 {
 	NSString * newName = [[folderName stringValue] trim];
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	Folder * folder = [db folderFromID:folderId];
 	
 	if ([[folder name] isEqualToString:newName])
 	{
 		[renameFolderWindow orderOut:sender];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
 		[NSApp endSheet:renameFolderWindow returnCode:0];
 	}
 	else
@@ -71,6 +72,7 @@
 		{
 			[db setFolderName:folderId newName:newName];
 			[renameFolderWindow orderOut:sender];
+            [[NSNotificationCenter defaultCenter] removeObserver:self];
 			[NSApp endSheet:renameFolderWindow returnCode:1];
 		}
 	}
@@ -81,6 +83,7 @@
  */
 -(IBAction)doCancel:(id)sender
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 	[NSApp endSheet:renameFolderWindow];
 	[renameFolderWindow orderOut:self];
 }
@@ -110,6 +113,5 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[super dealloc];
 }
 @end

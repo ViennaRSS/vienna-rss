@@ -25,7 +25,7 @@
 /* bezierPathWithRoundRectInRect
  * Create a rectangluar bezier path with rounded corners. Radius is the radius of the corners.
  */
-+(NSBezierPath *)bezierPathWithRoundRectInRect:(NSRect)aRect radius:(float)radius
++(NSBezierPath *)bezierPathWithRoundRectInRect:(NSRect)aRect radius:(CGFloat)radius
 {
 	NSBezierPath * path = [NSBezierPath bezierPath];
 	radius = MIN(radius, 0.5f * MIN(NSWidth(aRect), NSHeight(aRect)));

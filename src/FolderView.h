@@ -32,6 +32,9 @@
 -(void)keyDown:(NSEvent *)theEvent;
 -(void)buildTooltips;
 -(void)prvtResizeTheFieldEditor;
+
+@property (nonatomic) NSPredicate* filterPredicate;
+
 @end
 
 @interface NSObject (FolderViewDataSource)

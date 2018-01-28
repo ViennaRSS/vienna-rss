@@ -21,19 +21,17 @@
 #import "ActivityLog.h"
 #import "Database.h"
 
-static ActivityLog * defaultActivityLog = nil;		// Singleton object
-
 @implementation ActivityItem
 
 /* init
  * Initialise a new ActivityItem object
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
-		[self setName:@""];
-		[self setStatus:@""];
+		self.name = @"";
+		self.status = @"";
 		details = nil;
 	}
 	return self;
@@ -60,8 +58,6 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
  */
 -(void)setName:(NSString *)aName
 {
-	[aName retain];
-	[name release];
 	name = aName;
 }
 
@@ -70,10 +66,10 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
  */
 -(void)setStatus:(NSString *)aStatus
 {
-	[aStatus retain];
-	[status release];
-	status = aStatus;
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityLogChange" object:self];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		status = aStatus;
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityLogChange" object:self];
+	});
 }
 
 /* clearDetails
@@ -89,10 +85,13 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
  */
 -(void)appendDetail:(NSString *)aString
 {
-	if (details == nil)
-		details = [[NSMutableArray alloc] init];
-	[details addObject:aString];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityDetailChange" object:self];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		if (details == nil) {
+			details = [[NSMutableArray alloc] init];
+		}
+		[details addObject:aString];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityDetailChange" object:self];
+	});
 }
 
 /* details
@@ -106,8 +105,7 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
 	{
 		for (NSString * aString in details)
 		{
-			[detailString appendString:aString];
-			[detailString appendString:@"\n"];
+			[detailString appendFormat:@"%@\n", aString];
 		}
 	}
 	return detailString;
@@ -121,20 +119,8 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
 	return [NSString stringWithFormat:@"{'%@', '%@'}", name, status];
 }
 
-/* dealloc
- * Clean up before we expire.
- */
--(void)dealloc
-{
-	[details release];
-	details=nil;
-	[status release];
-	status=nil;
-	[name release];
-	name=nil;
-	[super dealloc];
-}
 @end
+
 
 @implementation ActivityLog
 
@@ -143,15 +129,19 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
  */
 +(ActivityLog *)defaultLog
 {
-	if (defaultActivityLog == nil)
+	// Singleton
+	static ActivityLog * defaultActivityLog = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
 		defaultActivityLog = [[ActivityLog alloc] init];
+	});
 	return defaultActivityLog;
 }
 
 /* init
  * Initialise a new log instance.
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
@@ -166,8 +156,8 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
  */
 -(void)handleWillDeleteFolder:(NSNotification *)nc
 {
-	Folder * folder = [[Database sharedDatabase] folderFromID:[[nc object] intValue]];
-	ActivityItem * item = [self itemByName:[folder name]];
+	Folder * folder = [[Database sharedManager] folderFromID:[nc.object integerValue]];
+	ActivityItem * item = [self itemByName:folder.name];
 	[log removeObject:item];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityLogChange" object:nil];
 }
@@ -177,14 +167,14 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
  * return, indexPointer is the index of the item or the index of the item just
  * where the status item should be if it was found.
  */
--(ActivityItem *)getStatus:(NSString *)name index:(int *)indexPointer
+-(ActivityItem *)getStatus:(NSString *)name index:(NSInteger *)indexPointer
 {
-	int indexOfItem = 0;
+	NSInteger indexOfItem = 0;
 	ActivityItem * item;
 
 	for (item in log)
 	{
-		if ([[item name] caseInsensitiveCompare:name] == NSOrderedSame)
+		if ([item.name caseInsensitiveCompare:name] == NSOrderedSame)
 			break;
 		++indexOfItem;
 	}
@@ -199,16 +189,15 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
 -(ActivityItem *)itemByName:(NSString *)theName
 {
 	ActivityItem * item;
-	int insertionIndex;
+	NSInteger insertionIndex;
 
 	if ((item = [self getStatus:theName index:&insertionIndex]) == nil)
 	{
 		item = [[ActivityItem alloc] init];
-		[item setName:theName];
+		item.name = theName;
 		[log insertObject:item atIndex:insertionIndex];
-		[item release];
 		
-		item = [log objectAtIndex:insertionIndex];
+		item = log[insertionIndex];
 	}
 	return item;
 }
@@ -235,8 +224,5 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[log release];
-	log=nil;
-	[super dealloc];
 }
 @end

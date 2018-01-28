@@ -32,17 +32,19 @@
 /* newGroupFolder
  * Display the sheet to create a new group folder.
  */
--(void)newGroupFolder:(NSWindow *)window underParent:(int)itemId
+-(void)newGroupFolder:(NSWindow *)window underParent:(NSInteger)itemId
 {
 	if (!newGroupFolderWindow)
 	{
-		[NSBundle loadNibNamed:@"GroupFolder" owner:self];
+		NSArray * objects;
+		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"GroupFolder" owner:self topLevelObjects:&objects];
+		self.topObjects = objects;
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextDidChange:) name:NSControlTextDidChangeNotification object:folderName];
 	}
 
 	// Reset from the last time we used this sheet.
 	parentId = itemId;
-	[folderName setStringValue:@""];
+	folderName.stringValue = @"";
 	[self enableSaveButton];
 	[NSApp beginSheet:newGroupFolderWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
 }
@@ -52,14 +54,14 @@
  */
 -(IBAction)doSave:(id)sender
 {
-	NSString * folderNameString = [[folderName stringValue] trim];
+	NSString * folderNameString = folderName.stringValue.trim;
 	
 	// Create the new folder in the database
-	Database * db = [Database sharedDatabase];
-	__block int newFolderId;
-	[db doTransactionWithBlock:^(BOOL *rollback) {
-		newFolderId = [db addFolder:parentId afterChild:-1 folderName:folderNameString type:MA_Group_Folder canAppendIndex:NO];
-	}]; //end transaction block
+	NSInteger newFolderId = [[Database sharedManager] addFolder:parentId
+													 afterChild:-1
+													 folderName:folderNameString
+														   type:MA_Group_Folder
+												 canAppendIndex:NO];
 
 	// Close the window
 	[NSApp endSheet:newGroupFolderWindow];
@@ -93,8 +95,8 @@
  */
 -(void)enableSaveButton
 {
-	NSString * folderNameString = [folderName stringValue];
-	[saveButton setEnabled:![folderNameString isBlank]];
+	NSString * folderNameString = folderName.stringValue;
+	saveButton.enabled = !folderNameString.blank;
 }
 
 /* dealloc
@@ -103,6 +105,5 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[super dealloc];
 }
 @end

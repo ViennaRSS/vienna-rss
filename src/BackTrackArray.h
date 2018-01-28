@@ -23,14 +23,14 @@
 @interface BackTrackArray : NSObject {
 	NSMutableArray * array;
 	NSUInteger  maxItems;
-	int queueIndex;
+	NSInteger queueIndex;
 }
 
 // Accessor functions
--(id)initWithMaximum:(NSUInteger )theMax;
--(BOOL)isAtStartOfQueue;
--(BOOL)isAtEndOfQueue;
--(void)addToQueue:(int)folderId guid:(NSString *)guid;
--(BOOL)nextItemAtQueue:(int *)folderId guidPointer:(NSString **)guidPtr;
--(BOOL)previousItemAtQueue:(int *)folderId guidPointer:(NSString **)guidPtr;
+-(instancetype)initWithMaximum:(NSUInteger)theMax /*NS_DESIGNATED_INITIALIZER*/;
+@property (nonatomic, getter=isAtStartOfQueue, readonly) BOOL atStartOfQueue;
+@property (nonatomic, getter=isAtEndOfQueue, readonly) BOOL atEndOfQueue;
+-(void)addToQueue:(NSInteger)folderId guid:(NSString *)guid;
+-(BOOL)nextItemAtQueue:(NSInteger *)folderId guidPointer:(NSString **)guidPtr;
+-(BOOL)previousItemAtQueue:(NSInteger *)folderId guidPointer:(NSString **)guidPtr;
 @end

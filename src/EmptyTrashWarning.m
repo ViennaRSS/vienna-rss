@@ -30,21 +30,21 @@ enum
 
 @implementation EmptyTrashWarning
 
--(id)init
+-(instancetype)init
 {
 	return [super initWithWindowNibName:@"EmptyTrashWarning"];
 }
 
 -(void)windowWillLoad
 {
-	[doNotShowWarningAgain setState:NSOffState];
+	doNotShowWarningAgain.state = NSOffState;
 }
 
 -(BOOL)shouldEmptyTrash
 {
-	BOOL shouldEmptyTrash = ([NSApp runModalForWindow:[self window]] == MA_EmptyTrashReturnCode_Yes);
+	BOOL shouldEmptyTrash = ([NSApp runModalForWindow:self.window] == MA_EmptyTrashReturnCode_Yes);
 	
-	if ([doNotShowWarningAgain state] == NSOnState)
+	if (doNotShowWarningAgain.state == NSOnState)
 	{
 		[[Preferences standardPreferences] setInteger:(shouldEmptyTrash ? MA_EmptyTrash_WithoutWarning : MA_EmptyTrash_None) forKey:MAPref_EmptyTrashNotification];
 	}

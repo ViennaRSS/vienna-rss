@@ -24,11 +24,9 @@
     NSSize sizeBeforeHidden;
 }
 
-- (BOOL)isShown;
-- (void)setShown:(BOOL)value;
+@property (nonatomic, getter=isShown) BOOL shown;
 
-- (float)hiddenHeight;
-- (void)setHiddenHeight:(float)value;
+@property (nonatomic) float hiddenHeight;
 
 // Actions
 - (IBAction)toggleDisclosure:(id)sender;

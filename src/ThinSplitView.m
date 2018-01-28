@@ -27,7 +27,7 @@
  */
 -(CGFloat)dividerThickness
 {
-	return [self isVertical] ? 1.0 : 8.0;
+	return self.vertical ? 1.0 : 8.0;
 }
 
 /* drawDividerInRect
@@ -35,7 +35,7 @@
  */
 -(void)drawDividerInRect:(NSRect)aRect
 {
-	if ([self isVertical])
+	if (self.vertical)
 	{
 		[[NSColor colorWithCalibratedWhite:0.4 alpha:1] set];
 		NSRectFill(aRect);
@@ -44,10 +44,10 @@
 	{
 		NSImage * grip = [NSImage imageNamed:@"DBListSplitViewDimple"];
 		NSImage * bar = [NSImage imageNamed:@"DBListSplitViewBar"];
-		NSRect gripRect = NSMakeRect(NSMinX(aRect) + (NSWidth(aRect) - [grip size].width) / 2,
-                                     NSMinY(aRect) + (NSHeight(aRect) - [grip size].height) / 2,
-                                     [grip size].width,
-                                     [grip size].height);
+		NSRect gripRect = NSMakeRect(NSMinX(aRect) + (NSWidth(aRect) - grip.size.width) / 2,
+                                     NSMinY(aRect) + (NSHeight(aRect) - grip.size.height) / 2,
+                                     grip.size.width,
+                                     grip.size.height);
         
 		[bar drawInRect: aRect fromRect: NSZeroRect operation: NSCompositeSourceOver fraction: 1.0];
 		[grip drawInRect: gripRect fromRect: NSZeroRect operation: NSCompositeSourceOver fraction: 1.0];

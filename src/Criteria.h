@@ -22,7 +22,7 @@
 
 /* Enum of valid criteria operators
  */
-typedef enum {
+typedef NS_ENUM(NSUInteger, CriteriaOperator) {
 	MA_CritOper_Is = 1,
 	MA_CritOper_IsNot,
 	MA_CritOper_IsLessThan,
@@ -37,13 +37,13 @@ typedef enum {
 	MA_CritOper_IsOnOrAfter,
 	MA_CritOper_Under,
 	MA_CritOper_NotUnder
-} CriteriaOperator;
+} ;
 
-typedef enum {
+typedef NS_ENUM(NSUInteger, CriteriaCondition) {
 	MA_CritCondition_All = 0,
 	MA_CritCondition_Any,
 	MA_CritCondition_Invalid
-} CriteriaCondition;
+};
 
 @interface Criteria : NSObject {
 	NSString * field;
@@ -52,16 +52,13 @@ typedef enum {
 }
 
 // Public functions
--(id)initWithField:(NSString *)newField withOperator:(CriteriaOperator)newOperator withValue:(NSString *)newValue;
+-(instancetype)initWithField:(NSString *)newField withOperator:(CriteriaOperator)newOperator withValue:(NSString *)newValue NS_DESIGNATED_INITIALIZER;
 +(NSString *)stringFromOperator:(CriteriaOperator)operator;
 +(CriteriaOperator)operatorFromString:(NSString *)string;
 +(NSArray *)arrayOfOperators;
--(void)setField:(NSString *)newField;
--(void)setOperator:(CriteriaOperator)newOperator;
--(void)setValue:(NSString *)newValue;
--(NSString *)field;
--(NSString *)value;
--(CriteriaOperator)operator;
+@property (nonatomic, copy) NSString *field;
+@property (nonatomic, copy) NSString *value;
+@property (nonatomic) CriteriaOperator operator;
 @end
 
 @interface CriteriaTree : NSObject {
@@ -70,12 +67,11 @@ typedef enum {
 }
 
 // Public functions
--(id)initWithString:(NSString *)string;
--(NSEnumerator *)criteriaEnumerator;
+-(instancetype)initWithString:(NSString *)string NS_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, strong) NSEnumerator *criteriaEnumerator;
 -(void)addCriteria:(Criteria *)newCriteria;
--(NSString *)string;
--(CriteriaCondition)condition;
--(void)setCondition:(CriteriaCondition)newCondition;
+@property (nonatomic, readonly, copy) NSString *string;
+@property (nonatomic) CriteriaCondition condition;
 +(CriteriaCondition)conditionFromString:(NSString *)string;
 +(NSString *)conditionToString:(CriteriaCondition)condition;
 @end

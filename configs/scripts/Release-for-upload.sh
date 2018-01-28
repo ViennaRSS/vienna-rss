@@ -14,7 +14,7 @@ V_VCS_TAG="$(echo "${N_VCS_TAG}" | sed -e 's:_beta: Beta :' -e 's:_rc: RC :')"
 VIENNA_UPLOADS_DIR="${BUILT_PRODUCTS_DIR}/Uploads"
 DOWNLOAD_BASE_URL="${BASE_URL_TYP}://${BASE_URL_LOC}"
 
-TGZ_FILENAME="Vienna${N_VCS_TAG}.tgz"
+TGZ_FILENAME="Vienna${N_VCS_TAG}.tar.gz"
 dSYM_FILENAME="Vienna${N_VCS_TAG}.${VCS_SHORT_HASH}-dSYM"
 
 case "${N_VCS_TAG}" in
@@ -113,7 +113,7 @@ cd "${BUILT_PRODUCTS_DIR}"
 mkdir -p "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"
 cp -a ./*.dSYM "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"
 cd "${VIENNA_UPLOADS_DIR}"
-tar -czf "${dSYM_FILENAME}.tgz" --exclude '.DS_Store' "${dSYM_FILENAME}"
+tar -czf "${dSYM_FILENAME}.tar.gz" --exclude '.DS_Store' "${dSYM_FILENAME}"
 rm -rf "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"
 
 
@@ -129,7 +129,7 @@ rm -rf Vienna.app
 # Output the sparkle change log
 cd "${VIENNA_UPLOADS_DIR}"
 
-pubDate="$(LC_TIME=en_US date -jf '%FT%T%z' "${VCS_DATE}" '+%a, %d %b %G %T %z')"
+pubDate="$(LC_TIME=en_US TZ=GMT date -jf '%FT%TZ' "${VCS_DATE}" '+%a, %d %b %G %T %z')"
 TGZSIZE="$(stat -f %z "${TGZ_FILENAME}")"
 SIGNATURE=$("${PROJECT_DIR}/signing/sign_update.rb" "${TGZ_FILENAME}" "${PRIVATE_KEY_PATH}")
 
@@ -142,7 +142,7 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
 	<channel>
 		<title>Vienna Changelog</title>
-		<link>http://www.vienna-rss.org/</link>
+		<link>http://www.vienna-rss.com/</link>
 		<description>Vienna Changelog</description>
 		<language>en-us</language>
 		<copyright>Copyright 2010-2015, Steve Palmer and contributors</copyright>
@@ -152,7 +152,7 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 			<link>${DOWNLOAD_BASE_URL}/${TGZ_FILENAME}</link>
 			<sparkle:minimumSystemVersion>${MACOSX_DEPLOYMENT_TARGET}.0</sparkle:minimumSystemVersion>
 			<enclosure url="${DOWNLOAD_BASE_URL}/${TGZ_FILENAME}" sparkle:version="${N_VCS_NUM}" sparkle:shortVersionString="${V_VCS_TAG} :${VCS_SHORT_HASH}:" length="${TGZSIZE}" sparkle:dsaSignature="${SIGNATURE}" type="application/octet-stream"/>
-			<sparkle:releaseNotesLink>http://vienna-rss.org/noteson${N_VCS_TAG}.html</sparkle:releaseNotesLink>
+			<sparkle:releaseNotesLink>https://viennarss.github.io/sparkle-files/noteson${N_VCS_TAG}.html</sparkle:releaseNotesLink>
 		</item>
 	</channel>
 </rss>

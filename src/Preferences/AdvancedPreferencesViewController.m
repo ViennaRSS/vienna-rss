@@ -65,7 +65,8 @@
  */
 -(IBAction)showAdvancedHelp:(id)sender
 {
-    GotoHelpPage((CFStringRef)@"advanced.html", NULL);
+    NSString *helpBook = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleHelpBookName"];
+    [[NSHelpManager sharedHelpManager] openHelpAnchor:@"AdvancedSettingsSection" inBook:helpBook];
 }
 
 
@@ -77,9 +78,9 @@
     Preferences * prefs = [Preferences standardPreferences];
     
     // Show use JavaScript option
-    [useJavaScriptButton setState:[prefs useJavaScript] ? NSOnState : NSOffState];
-    [useWebPluginsButton setState:[prefs useWebPlugins] ? NSOnState : NSOffState];
-    [concurrentDownloads selectItemWithTitle:[NSString stringWithFormat:@"%ld",[prefs concurrentDownloads]]];
+    useJavaScriptButton.state = prefs.useJavaScript ? NSOnState : NSOffState;
+    useWebPluginsButton.state = prefs.useWebPlugins ? NSOnState : NSOffState;
+    [concurrentDownloads selectItemWithTitle:[NSString stringWithFormat:@"%lu",(unsigned long)prefs.concurrentDownloads]];
 }
 
 /* changeUseJavaScript
@@ -88,7 +89,7 @@
 -(IBAction)changeUseJavaScript:(id)sender
 {
     BOOL useJavaScript = [sender state] == NSOnState;
-    [[Preferences standardPreferences] setUseJavaScript:useJavaScript];
+    [Preferences standardPreferences].useJavaScript = useJavaScript;
 }
 
 /* changeUseWebPlugins
@@ -96,12 +97,12 @@
  * e.g. Flash
  */
 - (IBAction)changeUseWebPlugins:(NSButton *)sender {
-    BOOL useWebPlugins = [sender state] == NSOnState;
-    [[Preferences standardPreferences] setUseWebPlugins:useWebPlugins];
+    BOOL useWebPlugins = sender.state == NSOnState;
+    [Preferences standardPreferences].useWebPlugins = useWebPlugins;
 }
 
 
 -(IBAction)changeConcurrentDownloads:(id)sender {
-    [[Preferences standardPreferences] setConcurrentDownloads:[[concurrentDownloads titleOfSelectedItem] integerValue]];
+    [Preferences standardPreferences].concurrentDownloads = concurrentDownloads.titleOfSelectedItem.integerValue;
 }
 @end

@@ -21,34 +21,27 @@
 #import <Cocoa/Cocoa.h>
 #import "BrowserView.h"
 #import "ArticleBaseView.h"
-#import "PXListView.h"
+#import "TableViewExtensions.h"
 
 @class AppController;
 @class ArticleController;
 @class ArticleView;
-@class FoldersTree;
 
-@interface UnifiedDisplayView : NSView<BaseView, ArticleBaseView, PXListViewDelegate>
+@interface UnifiedDisplayView : NSView<BaseView, ArticleBaseView, NSTableViewDelegate, NSTableViewDataSource>
 {
 	IBOutlet AppController * controller;
 	IBOutlet ArticleController * articleController;
-    IBOutlet PXListView *articleList;
-	IBOutlet FoldersTree * foldersTree;
-
-	int currentSelectedRow;
-	BOOL blockSelectionHandler;
-	BOOL blockMarkRead;
+    IBOutlet ExtendedTableView *articleList;
 
 	NSTimer * markReadTimer;
-	NSString * guidOfArticleToSelect;
 
 	NSMutableArray * rowHeightArray;
+	NSProgressIndicator * progressIndicator;
 }
 
 // Public functions
--(void)initTableView;
 -(void)updateAlternateMenuTitle;
--(NSArray *)markedArticleRange;
--(BOOL)canDeleteMessageAtRow:(int)row;
+-(void)saveTableSettings;
+-(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 - (void)webViewLoadFinished:(NSNotification *)notification;
 @end

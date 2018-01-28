@@ -64,7 +64,7 @@ typedef enum PSMTabStateMask : NSInteger {
 
 @protocol PSMTabBarControlDelegate;
 
-@interface PSMTabBarControl : NSControl <NSTabViewDelegate> {
+@interface PSMTabBarControl : NSControl {
 												
 	// control basics
 	NSMutableArray							*_cells;								// the cells that draw the tabs
@@ -126,10 +126,10 @@ typedef enum PSMTabStateMask : NSInteger {
 #pragma mark Control Characteristics
 
 + (NSBundle *)bundle;
-- (CGFloat)availableCellWidth;
-- (CGFloat)availableCellHeight;
-- (NSRect)genericCellRect;
-- (BOOL)isWindowActive;
+@property (NS_NONATOMIC_IOSONLY, readonly) CGFloat availableCellWidth;
+@property (NS_NONATOMIC_IOSONLY, readonly) CGFloat availableCellHeight;
+@property (NS_NONATOMIC_IOSONLY, readonly) NSRect genericCellRect;
+@property (NS_NONATOMIC_IOSONLY, getter=isWindowActive, readonly) BOOL windowActive;
 
 #pragma mark Style Class Registry
 
@@ -141,7 +141,7 @@ typedef enum PSMTabStateMask : NSInteger {
 
 #pragma mark Cell Management (KVC Compliant)
 
-- (NSArray *)cells;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSArray *cells;
 - (void)addCell:(PSMTabBarCell *)aCell;
 - (void)insertCell:(PSMTabBarCell *)aCell atIndex:(NSUInteger)index;
 - (void)removeCellAtIndex:(NSUInteger)index;
@@ -149,87 +149,66 @@ typedef enum PSMTabStateMask : NSInteger {
 
 #pragma mark Control Configuration
 
-- (PSMTabBarOrientation)orientation;
-- (void)setOrientation:(PSMTabBarOrientation)value;
-- (BOOL)canCloseOnlyTab;
-- (void)setCanCloseOnlyTab:(BOOL)value;
-- (BOOL)disableTabClose;
-- (void)setDisableTabClose:(BOOL)value;
-- (id<PSMTabStyle>)style;
-- (void)setStyle:(id <PSMTabStyle>)newStyle;
-- (NSString *)styleName;
+@property (NS_NONATOMIC_IOSONLY) PSMTabBarOrientation orientation;
+@property (NS_NONATOMIC_IOSONLY) BOOL canCloseOnlyTab;
+@property (NS_NONATOMIC_IOSONLY) BOOL disableTabClose;
+@property (NS_NONATOMIC_IOSONLY, strong) id<PSMTabStyle> style;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *styleName;
 - (void)setStyleNamed:(NSString *)name;
-- (BOOL)hideForSingleTab;
-- (void)setHideForSingleTab:(BOOL)value;
-- (BOOL)showAddTabButton;
-- (void)setShowAddTabButton:(BOOL)value;
-- (NSInteger)cellMinWidth;
-- (void)setCellMinWidth:(NSInteger)value;
-- (NSInteger)cellMaxWidth;
-- (void)setCellMaxWidth:(NSInteger)value;
-- (NSInteger)cellOptimumWidth;
-- (void)setCellOptimumWidth:(NSInteger)value;
-- (BOOL)sizeCellsToFit;
-- (void)setSizeCellsToFit:(BOOL)value;
-- (BOOL)useOverflowMenu;
-- (void)setUseOverflowMenu:(BOOL)value;
-- (BOOL)allowsBackgroundTabClosing;
-- (void)setAllowsBackgroundTabClosing:(BOOL)value;
-- (BOOL)allowsResizing;
-- (void)setAllowsResizing:(BOOL)value;
-- (BOOL)selectsTabsOnMouseDown;
-- (void)setSelectsTabsOnMouseDown:(BOOL)value;
-- (BOOL)automaticallyAnimates;
-- (void)setAutomaticallyAnimates:(BOOL)value;
-- (BOOL)alwaysShowActiveTab;
-- (void)setAlwaysShowActiveTab:(BOOL)value;
-- (BOOL)allowsScrubbing;
-- (void)setAllowsScrubbing:(BOOL)value;
-- (PSMTabBarTearOffStyle)tearOffStyle;
-- (void)setTearOffStyle:(PSMTabBarTearOffStyle)tearOffStyle;
-- (CGFloat)heightOfTabCells;
+@property (NS_NONATOMIC_IOSONLY) BOOL hideForSingleTab;
+@property (NS_NONATOMIC_IOSONLY) BOOL showAddTabButton;
+@property (NS_NONATOMIC_IOSONLY) NSInteger cellMinWidth;
+@property (NS_NONATOMIC_IOSONLY) NSInteger cellMaxWidth;
+@property (NS_NONATOMIC_IOSONLY) NSInteger cellOptimumWidth;
+@property (NS_NONATOMIC_IOSONLY) BOOL sizeCellsToFit;
+@property (NS_NONATOMIC_IOSONLY) BOOL useOverflowMenu;
+@property (NS_NONATOMIC_IOSONLY) BOOL allowsBackgroundTabClosing;
+@property (NS_NONATOMIC_IOSONLY) BOOL allowsResizing;
+@property (NS_NONATOMIC_IOSONLY) BOOL selectsTabsOnMouseDown;
+@property (NS_NONATOMIC_IOSONLY) BOOL automaticallyAnimates;
+@property (NS_NONATOMIC_IOSONLY) BOOL alwaysShowActiveTab;
+@property (NS_NONATOMIC_IOSONLY) BOOL allowsScrubbing;
+@property (NS_NONATOMIC_IOSONLY) PSMTabBarTearOffStyle tearOffStyle;
+@property (NS_NONATOMIC_IOSONLY, readonly) CGFloat heightOfTabCells;
 
 #pragma mark Accessors 
 
-- (NSTabView *)tabView;
-- (void)setTabView:(NSTabView *)view;
-- (id<PSMTabBarControlDelegate>)delegate;
-- (void)setDelegate:(id<PSMTabBarControlDelegate>)object;
-- (id)partnerView;
-- (void)setPartnerView:(id)view;
+@property (NS_NONATOMIC_IOSONLY, strong) NSTabView *tabView;
+@property (NS_NONATOMIC_IOSONLY, assign) id<PSMTabBarControlDelegate> delegate;
+@property (NS_NONATOMIC_IOSONLY, strong) id partnerView;
 
 #pragma mark -
 #pragma mark Determining Sizes
 
-- (NSSize)addTabButtonSize;
-- (NSRect)addTabButtonRect;
-- (NSSize)overflowButtonSize;
-- (NSRect)overflowButtonRect;
+@property (NS_NONATOMIC_IOSONLY, readonly) NSSize addTabButtonSize;
+@property (NS_NONATOMIC_IOSONLY, readonly) NSRect addTabButtonRect;
+@property (NS_NONATOMIC_IOSONLY, readonly) NSSize overflowButtonSize;
+@property (NS_NONATOMIC_IOSONLY, readonly) NSRect overflowButtonRect;
 
 #pragma mark -
 #pragma mark Determining Margins
 
-- (CGFloat)rightMargin;
-- (CGFloat)leftMargin;
-- (CGFloat)topMargin;
-- (CGFloat)bottomMargin;
+@property (NS_NONATOMIC_IOSONLY, readonly) CGFloat rightMargin;
+@property (NS_NONATOMIC_IOSONLY, readonly) CGFloat leftMargin;
+@property (NS_NONATOMIC_IOSONLY, readonly) CGFloat topMargin;
+@property (NS_NONATOMIC_IOSONLY, readonly) CGFloat bottomMargin;
 
 #pragma mark The Buttons
 
-- (PSMRolloverButton *)addTabButton;
-- (PSMOverflowPopUpButton *)overflowPopUpButton;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) PSMRolloverButton *addTabButton;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) PSMOverflowPopUpButton *overflowPopUpButton;
 
 #pragma mark Tab Information
 
-- (NSMutableArray *)representedTabViewItems;
-- (NSUInteger)numberOfVisibleTabs;
-- (PSMTabBarCell *)lastVisibleTab;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSMutableArray *representedTabViewItems;
+@property (NS_NONATOMIC_IOSONLY, readonly) NSUInteger numberOfVisibleTabs;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) PSMTabBarCell *lastVisibleTab;
 
 #pragma mark Special Effects
 
 - (void)hideTabBar:(BOOL) hide animate:(BOOL)animate;
-- (BOOL)isTabBarHidden;
-- (BOOL)isAnimating;
+@property (NS_NONATOMIC_IOSONLY, getter=isTabBarHidden, readonly) BOOL tabBarHidden;
+@property (NS_NONATOMIC_IOSONLY, getter=isAnimating, readonly) BOOL animating;
 
 // internal bindings methods also used by the tab drag assistant
 - (void)bindPropertiesForCell:(PSMTabBarCell *)cell andTabViewItem:(NSTabViewItem *)item;

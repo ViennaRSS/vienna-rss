@@ -20,10 +20,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "FoldersTree.h"
-#import "BacktrackArray.h"
+#import "BackTrackArray.h"
 #import "BaseView.h"
 #import "ArticleBaseView.h"
 #import "ArticleView.h"
+#import "ArticleListView.h"
+#import "UnifiedDisplayView.h"
 
 /* ArticleController
  * The ArticleController contains the controlling logic for the article view that is
@@ -37,56 +39,65 @@
 {
 	FoldersTree * foldersTree;
 
+	IBOutlet ArticleListView * articleListView;
+	IBOutlet UnifiedDisplayView * unifiedListView;
 	NSView<ArticleBaseView, BaseView> * mainArticleView;
 	NSArray * currentArrayOfArticles;
 	NSArray * folderArrayOfArticles;
-	int currentFolderId;
+	NSInteger currentFolderId;
 	NSDictionary * articleSortSpecifiers;
 	NSString * sortColumnIdentifier;
 	BackTrackArray * backtrackArray;
 	BOOL isBacktracking;
+	BOOL shouldPreserveSelectedArticle;
 	Article * articleToPreserve;
+	NSString * guidOfArticleToSelect;
+	BOOL firstUnreadArticleRequired;
+	dispatch_queue_t queue;
+	NSInteger reloadArrayOfArticlesSemaphor;
+	BOOL requireSelectArticleAfterReload;
 }
 
-@property (nonatomic, retain) IBOutlet FoldersTree * foldersTree;
-@property (nonatomic, retain) NSView<ArticleBaseView, BaseView> * mainArticleView;
+@property (nonatomic, strong) IBOutlet FoldersTree * foldersTree;
+@property (nonatomic, strong) NSView<ArticleBaseView, BaseView> * mainArticleView;
 @property (nonatomic, copy) NSArray * currentArrayOfArticles;
 @property (nonatomic, copy) NSArray * folderArrayOfArticles;
-@property (nonatomic, assign) NSDictionary * articleSortSpecifiers;
-@property (nonatomic, assign) BackTrackArray * backtrackArray;
+@property (nonatomic) NSDictionary * articleSortSpecifiers;
+@property (nonatomic) BackTrackArray * backtrackArray;
 
 // Public functions
 -(NSView<ArticleBaseView, BaseView> *)mainArticleView;
--(void)setMainArticleView:(NSView<ArticleBaseView, BaseView> *)newView;
--(int)currentFolderId;
--(Article *)selectedArticle;
--(NSArray *)markedArticleRange;
+-(void)setLayout:(NSInteger)newLayout;
+@property (nonatomic, readonly) NSInteger currentFolderId;
+@property (nonatomic, readonly, strong) Article *selectedArticle;
+@property (nonatomic, readonly, copy) NSArray *markedArticleRange;
+-(void)updateAlternateMenuTitle;
+-(void)updateVisibleColumns;
 -(void)saveTableSettings;
 -(void)sortArticles;
--(NSArray *)allArticles;
+@property (nonatomic, readonly, copy) NSArray *allArticles;
 -(void)displayFirstUnread;
 -(void)displayNextUnread;
--(NSString *)searchPlaceholderString;
+-(void)displayNextFolderWithUnread;
+@property (nonatomic, readonly, copy) NSString *searchPlaceholderString;
 -(void)reloadArrayOfArticles;
--(void)refreshCurrentFolder;
--(void)displayFolder:(int)newFolderId;
+-(void)displayFolder:(NSInteger)newFolderId;
 -(void)refilterArrayOfArticles;
--(NSString *)sortColumnIdentifier;
--(BOOL)sortIsAscending;
--(void)ensureSelectedArticle:(BOOL)singleSelection;
+@property (nonatomic, readonly, copy) NSString *sortColumnIdentifier;
+@property (nonatomic, readonly) BOOL sortIsAscending;
+-(void)ensureSelectedArticle;
 -(void)sortByIdentifier:(NSString *)columnName;
 -(void)sortAscending:(BOOL)newAscending;
--(BOOL)currentCacheContainsFolder:(int)folderId;
 -(void)deleteArticlesByArray:(NSArray *)articleArray;
 -(void)markReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
 -(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag;
--(void)markAllReadByArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag withRefresh:(BOOL)refreshFlag;
+-(void)markAllFoldersReadByArray:(NSArray *)folderArray;
 -(void)markDeletedByArray:(NSArray *)articleArray deleteFlag:(BOOL)deleteFlag;
 -(void)markFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged;
+-(void)selectFolderAndArticle:(NSInteger)folderId guid:(NSString *)guid;
 -(void)addBacktrack:(NSString *)guid;
 -(void)goForward;
 -(void)goBack;
--(BOOL)canGoForward;
--(BOOL)canGoBack;
--(void)setArticleToPreserve:(Article *)article;
+@property (nonatomic, readonly) BOOL canGoForward;
+@property (nonatomic, readonly) BOOL canGoBack;
 @end

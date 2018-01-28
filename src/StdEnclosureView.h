@@ -28,7 +28,7 @@
 	IBOutlet NSTextField * filenameLabel;
 	IBOutlet DSClickableURLTextField * filenameField;
 	IBOutlet NSButton * downloadButton;
-	NSString * enclosureFilename;
+	NSString * enclosureURLString;
 	BOOL isITunes;
 }
 

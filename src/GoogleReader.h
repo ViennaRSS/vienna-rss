@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
 #import "Folder.h"
+#import "Article.h"
 #import "ASINetworkQueue.h"
 #import "ActivityLog.h"
 #import "Debug.h"
@@ -26,20 +27,19 @@
 +(GoogleReader *)sharedManager;
 
 // Check if an accessToken is available
--(BOOL)isReady;
+@property (nonatomic, getter=isReady, readonly) BOOL ready;
 
 -(void)loadSubscriptions:(NSNotification*)nc;
--(void)authenticate;
 -(void)getToken;
 -(void)clearAuthentication;
 -(void)resetAuthentication;
 
 -(void)subscribeToFeed:(NSString *)feedURL;
 -(void)unsubscribeFromFeed:(NSString *)feedURL;
--(void)markRead:(NSString *)itemGuid readFlag:(BOOL)flag;
--(void)markStarred:(NSString *)itemGuid starredFlag:(BOOL)flag;
+-(void)markRead:(Article *)article readFlag:(BOOL)flag;
+-(void)markStarred:(Article *)article starredFlag:(BOOL)flag;
 -(void)setFolderName:(NSString *)folderName forFeed:(NSString *)feedURL set:(BOOL)flag;
 -(ASIHTTPRequest*)refreshFeed:(Folder*)thisFolder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:(BOOL)ignoreLimit;
--(NSUInteger)countOfNewArticles;
+@property (nonatomic, readonly) NSUInteger countOfNewArticles;
 
 @end

@@ -1,3 +1,5 @@
+@import Foundation;
+
 @interface NSNotificationCenter (NSNotificationCenterAdditions)
 - (void) postNotificationOnMainThread:(NSNotification *) notification;
 - (void) postNotificationOnMainThreadWithName:(NSString *) name object:(id) object;

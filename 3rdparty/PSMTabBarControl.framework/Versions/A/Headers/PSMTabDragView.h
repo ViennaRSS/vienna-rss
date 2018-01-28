@@ -14,8 +14,6 @@
 	CGFloat					_alpha;
 }
 - (void)setFadeValue:(CGFloat)value;
-- (NSImage *)image;
-- (void)setImage:(NSImage *)image;
-- (NSImage *)alternateImage;
-- (void)setAlternateImage:(NSImage *)image;
+@property (NS_NONATOMIC_IOSONLY, copy) NSImage *image;
+@property (NS_NONATOMIC_IOSONLY, copy) NSImage *alternateImage;
 @end

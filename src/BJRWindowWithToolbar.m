@@ -30,7 +30,7 @@
     id itemObject = (id)anItem;
 	if ( [itemObject action] == @selector(toggleToolbarShown:) && [itemObject respondsToSelector:@selector(setTitle:)] )
 	{
-		if ([[self toolbar] isVisible])
+		if (self.toolbar.visible)
 			[itemObject setTitle:[[NSBundle bundleWithIdentifier:@"com.apple.AppKit"] localizedStringForKey:@"Hide Toolbar" value:@"" table:@"Toolbar"]];
 		else
 			[itemObject setTitle:[[NSBundle bundleWithIdentifier:@"com.apple.AppKit"] localizedStringForKey:@"Show Toolbar" value:@"" table:@"Toolbar"]];

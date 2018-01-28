@@ -58,8 +58,7 @@
 	BOOL			canCopyURLs;
 }
 
-- (void)setCanCopyURLs:(BOOL)aFlag;
-- (BOOL)canCopyURLs;
+@property (nonatomic) BOOL canCopyURLs;
 
 @end
 

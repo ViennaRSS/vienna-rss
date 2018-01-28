@@ -20,7 +20,12 @@
 - (void)mouseDown:(NSEvent *)inEvent
 {
 	if (target && action)
-		[target performSelector:action withObject:self];
+	{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+	[target performSelector:action withObject:self];
+#pragma clang diagnostic pop
+	}
 	else
 		[super mouseDown:inEvent];
 }

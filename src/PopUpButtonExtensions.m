@@ -30,10 +30,9 @@
 -(void)addItemWithTitle:(NSString *)title image:(NSImage *)image
 {
 	NSMenuItem * newItem = [[NSMenuItem alloc] initWithTitle:title action:nil keyEquivalent:@""];
-	[image setSize:NSMakeSize(16, 16)];
-	[newItem setImage:image];
-	[[self menu] addItem:newItem];
-	[newItem release];
+	image.size = NSMakeSize(16, 16);
+	newItem.image = image;
+	[self.menu addItem:newItem];
 }
 
 /* addItemWithTarget
@@ -42,19 +41,17 @@
 -(void)addItemWithTarget:(NSString *)title target:(SEL)target
 {
 	NSMenuItem * newItem = [[NSMenuItem alloc] initWithTitle:title action:target keyEquivalent:@""];
-	[[self menu] addItem:newItem];
-	[newItem release];
+	[self.menu addItem:newItem];
 }
 
 /* addItemWithTag
  * Add an item to the popup button menu with the specified tag.
  */
--(void)addItemWithTag:(NSString *)title tag:(int)tag
+-(void)addItemWithTag:(NSString *)title tag:(NSInteger)tag
 {
 	NSMenuItem * newItem = [[NSMenuItem alloc] initWithTitle:title action:nil keyEquivalent:@""];
-	[newItem setTag:tag];
-	[[self menu] addItem:newItem];
-	[newItem release];
+	newItem.tag = tag;
+	[self.menu addItem:newItem];
 }
 
 /* addItemWithRepresentedObject
@@ -63,21 +60,19 @@
 -(void)addItemWithRepresentedObject:(NSString *)title object:(id)object
 {
 	NSMenuItem * newItem = [[NSMenuItem alloc] initWithTitle:title action:nil keyEquivalent:@""];
-	[newItem setRepresentedObject:object];
-	[[self menu] addItem:newItem];
-	[newItem release];
+	newItem.representedObject = object;
+	[self.menu addItem:newItem];
 }
 
 /* insertItemWithTag
  * Inserts the specified menu item into the popup menu at the given index and assigns it
  * an initial tag value.
  */
--(void)insertItemWithTag:(NSString *)title tag:(int)tag atIndex:(int)index
+-(void)insertItemWithTag:(NSString *)title tag:(NSInteger)tag atIndex:(NSInteger)index
 {
 	NSMenuItem * newItem = [[NSMenuItem alloc] initWithTitle:title action:nil keyEquivalent:@""];
-	[newItem setTag:tag];
-	[[self menu] insertItem:newItem atIndex:index];
-	[newItem release];
+	newItem.tag = tag;
+	[self.menu insertItem:newItem atIndex:index];
 }
 
 /* representedObjectForSelection
@@ -85,17 +80,17 @@
  */
 -(id)representedObjectForSelection
 {
-	NSMenuItem * theItem = [self selectedItem];
-	return [theItem representedObject];
+	NSMenuItem * theItem = self.selectedItem;
+	return theItem.representedObject;
 }
 
 /* tagForSelection
  * Returns the tag associated with the selected item.
  */
--(int)tagForSelection
+-(NSInteger)tagForSelection
 {
-	NSMenuItem * theItem = [self selectedItem];
-	return [theItem tag];
+	NSMenuItem * theItem = self.selectedItem;
+	return theItem.tag;
 }
 
 /* addSeparator
@@ -103,6 +98,6 @@
  */
 -(void)addSeparator
 {
-	[[self menu] addItem:[NSMenuItem separatorItem]];
+	[self.menu addItem:[NSMenuItem separatorItem]];
 }
 @end

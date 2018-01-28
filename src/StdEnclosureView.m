@@ -22,6 +22,7 @@
 #import "Preferences.h"
 #import "DownloadManager.h"
 #import "DSClickableURLTextField.h"
+#import "HelperFunctions.h"
 
 // Private functions
 @interface StdEnclosureView (Private)
@@ -33,11 +34,11 @@
 /* initWithFrame
  * Initialise the standard enclosure view.
  */
--(id)initWithFrame:(NSRect)frameRect
+-(instancetype)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect]) != nil)
 	{
-		enclosureFilename = nil;
+		enclosureURLString = nil;
 		isITunes = NO;
 
 		// Register to be notified when a download completes.
@@ -61,8 +62,8 @@
  */
 -(void)handleDownloadCompleted:(NSNotification *)notification
 {
-	if (enclosureFilename != nil)
-		[self setEnclosureFile:enclosureFilename];
+	if (enclosureURLString != nil)
+		[self setEnclosureFile:enclosureURLString];
 }
 
 /* setEnclosureFile
@@ -75,28 +76,30 @@
 	FSRef appRef;
 
 	// Keep this for the download/open
-	[newFilename retain];
-	[enclosureFilename release];
-	enclosureFilename = newFilename;
+	enclosureURLString = [cleanedUpAndEscapedUrlFromString(newFilename) absoluteString];
 
-	NSString * basename = [[NSURL URLWithString:enclosureFilename] lastPathComponent];
-    NSString * encodedname = [basename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString * ext = [encodedname pathExtension];
+	NSString * basename = [NSURL URLWithString:enclosureURLString].lastPathComponent;
+	if (basename==nil)
+	{
+		return;
+	}
+	
+	NSString * ext = basename.pathExtension;
 
 	// Find the file's likely location in Finder and see if it is already there.
 	// We'll set the options in the pane based on whether the file is there or not.
-	NSString * destPath = [DownloadManager fullDownloadPath:encodedname];
+	NSString * destPath = [DownloadManager fullDownloadPath:basename];
 	if (![DownloadManager isFileDownloaded:destPath])
 	{
 		[downloadButton setTitle:NSLocalizedString(@"Download", nil)];
 		[downloadButton sizeToFit];
-		[downloadButton setAction:@selector(downloadFile:)];
+		downloadButton.action = @selector(downloadFile:);
 		[filenameLabel setStringValue:NSLocalizedString(@"This article contains an enclosed file.", nil)];
 	}
 	else
 	{
 		isITunes = NO;
-		if (LSGetApplicationForInfo(kLSUnknownType, kLSUnknownCreator, (CFStringRef)ext, kLSRolesAll, &appRef, &appURL) != kLSApplicationNotFoundErr)
+		if (LSGetApplicationForInfo(kLSUnknownType, kLSUnknownCreator, (__bridge CFStringRef)ext, kLSRolesAll, &appRef, &appURL) != kLSApplicationNotFoundErr)
 		{
 			LSItemInfoRecord outItemInfo;
 			
@@ -112,27 +115,27 @@
 		{
 			[downloadButton setTitle:NSLocalizedString(@"Play", nil)];
 			[downloadButton sizeToFit];
-			[downloadButton setAction:@selector(openFile:)];
+			downloadButton.action = @selector(openFile:);
 			[filenameLabel setStringValue:NSLocalizedString(@"Click the Play button to play this enclosure in iTunes.", nil)];
 		}
 		else
 		{
 			[downloadButton setTitle:NSLocalizedString(@"Open", nil)];
 			[downloadButton sizeToFit];
-			[downloadButton setAction:@selector(openFile:)];
+			downloadButton.action = @selector(openFile:);
 			[filenameLabel setStringValue:NSLocalizedString(@"Click the Open button to open this file.", nil)];
 		}
 	}
 	
 	NSImage * iconImage = [[NSWorkspace sharedWorkspace] iconForFileType:ext];
-	[fileImage setImage:iconImage];
-	NSDictionary *linkAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-															enclosureFilename, NSLinkAttributeName,
-															[NSColor colorWithCalibratedHue:240.0f/360.0f saturation:1.0f brightness:0.75f alpha:1.0f], NSForegroundColorAttributeName,
-															[NSNumber numberWithBool:YES], NSUnderlineStyleAttributeName,
-															nil];
-	NSAttributedString * link = [[[NSAttributedString alloc] initWithString:encodedname attributes:linkAttributes] autorelease];
-	[filenameField setAttributedStringValue:link];
+	fileImage.image = iconImage;
+	NSDictionary *linkAttributes = @{
+									 NSLinkAttributeName: enclosureURLString,
+									 NSForegroundColorAttributeName: [NSColor colorWithCalibratedHue:240.0f/360.0f saturation:1.0f brightness:0.75f alpha:1.0f],
+									 NSUnderlineStyleAttributeName: @YES,
+									 };
+	NSAttributedString * link = [[NSAttributedString alloc] initWithString:basename attributes:linkAttributes];
+	filenameField.attributedStringValue = link;
 }
 
 /* downloadFile
@@ -140,7 +143,7 @@
  */
 -(IBAction)downloadFile:(id)sender
 {
-	[[DownloadManager sharedInstance] downloadFileFromURL:enclosureFilename];
+	[[DownloadManager sharedInstance] downloadFileFromURL:enclosureURLString];
 }
 
 /* openFile
@@ -148,8 +151,8 @@
  */
 -(IBAction)openFile:(id)sender
 {
-	NSString * theFilename = [enclosureFilename lastPathComponent];
-	NSString * destPath = [DownloadManager fullDownloadPath:theFilename];
+	NSString * basename = [NSURL URLWithString:enclosureURLString].lastPathComponent;
+	NSString * destPath = [DownloadManager fullDownloadPath:basename];
 
 	[[NSWorkspace sharedWorkspace] openFile:destPath];
 }
@@ -168,8 +171,7 @@
  */
 -(void)dealloc
 {
-	[enclosureFilename release];
-	enclosureFilename=nil;
-	[super dealloc];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	enclosureURLString=nil;
 }
 @end

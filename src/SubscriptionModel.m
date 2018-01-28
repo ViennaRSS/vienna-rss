@@ -21,9 +21,9 @@
 * then OK. Otherwise if it looks like an HTML page, we scan for links in the
 * page text.
 *
-*  @param feedURLString A pointer to the NSString containing the URL to verify
+*  @param feedURLString A pointer to the URL to verify
 *
-*  @return A pointer to an NSString containing a verified URL
+*  @return A pointer to a verified URL
 */
 -(NSURL *)verifiedFeedURLFromURL:(NSURL *)rssFeedURL
 {
@@ -60,15 +60,20 @@
     if ([RichXMLParser extractFeeds:urlContent toArray:linkArray])
     {
         NSString * feedPart = linkArray.firstObject;
-        if (![feedPart hasPrefix:@"http:"] && ![feedPart hasPrefix:@"https:"])
-        {
-			rssFeedURL = [NSURL URLWithString:feedPart relativeToURL:rssFeedURL];
-        }
-        else {
-            rssFeedURL = [NSURL URLWithString:feedPart];
-        }
+		NSURL * myURL = [NSURL URLWithString:feedPart relativeToURL:rssFeedURL];
+		if (myURL ==nil)
+		{
+			// try cleaning up the string : unescape then re-add escapes
+			NSString * urlString = [[feedPart stringByUnescapingExtendedCharacters] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+			myURL = [NSURL URLWithString:urlString relativeToURL:rssFeedURL];
+		}
+		return myURL;
     }
-    return rssFeedURL.absoluteURL;
+    else
+    {
+        // no link found, return the original URL
+        return rssFeedURL;
+    }
 }
 
 

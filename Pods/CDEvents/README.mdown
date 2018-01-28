@@ -1,0 +1,92 @@
+# CDEvents
+***Note:*** The `develop` branch **requires Mac OS X 10.6 or newer** as the framework relies on [ARC](http://clang.llvm.org/docs/AutomaticReferenceCounting.html "Automatic Reference Counting Technical Specification") and [blocks](http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/Blocks/Articles/00_Introduction.html "Blocks Programming Topics").
+
+Website: http://rastersize.github.com/CDEvents
+
+## What is this?
+It's an Objective-C wrapper for Mac OS X's [FSEvents C API](http://developer.apple.com/mac/library/documentation/Darwin/Reference/FSEvents_Ref/FSEvents_h/index.html) with support for blocks. Furthermore, all the classes are immutable and it should be thread-safe.
+
+
+## Requirements
+Requires Mac OS X 10.6 (Snow Leopard) and an Intel 64-bit CPU. The requirements stems from that automatic reference counting (ARC) is supported from 10.6 and up as long as the modern (i.e. 64-bit) Objective-C runtime is used since ARC requires the non-fragile ABI. Although the built product works on 10.6 and up it must be built on a machine running 10.7 (Lion) using Xcode 4.2 and the 10.7 SDK as the 10.6 SDK does not include ARC. The built product support both manual memory management and automatic reference counting.
+
+If you need to support older versions of OS X or garbage collection please see the branch `support/1.1`. All _1.1.x_ version will support garbage collection and OS X 10.5.
+
+
+## Usage
+You can use either the block based version (recommended) or the delegate based. Using both systems at the same time is not supported.
+
+### Block based (recommended)
+1. Add CDEvents to your project,
+ * either by compiling the project and dragging the `CDEvents.framework` into your project or
+ * by dragging the entire CDEvents project into your project as a sub-project.
+2. Import the `CDEvents.h` header where you need it.
+3. Set up your `CDEvents` instance and give it a block to execute when a event occurs.
+
+Easy example code:
+
+    self.events = [[CDEvents alloc] initWithURLs:<NSArray of URLs to watch>
+                                           block:^(CDEvents *watcher, CDEvent *event) {
+                                               <Your code here>
+                                           }];
+
+Or use all the all-options initiator:
+
+    self.events = [[CDEvents alloc] initWithURLs:<NSArray of URLs to watch>
+                                           block:^(CDEvents *watcher, CDEvent *event) {
+                                               <Your code here>
+                                           }
+                                       onRunLoop:[NSRunLoop currentRunLoop]
+                            sinceEventIdentifier:kCDEventsSinceEventNow
+                            notificationLantency:CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY
+                         ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
+                                     excludeURLs:<NSArray of URLs to exlude>
+                             streamCreationFlags:kCDEventsDefaultEventStreamFlags];
+
+See the test app (`TestApp`) for an example on how to use the framework.
+
+### Delegate based
+***This is the same behavior as pre ARC and blocks.***
+
+1. Add CDEvents to your project,
+ * either by compiling the project and dragging the `CDEvents.framework` into your project or
+ * by dragging the entire CDEvents project into your project as a sub-project.
+2. Import the `CDEvents.h` header where you need it.
+3. Import the `CDEventsDelegate.h` header where you need it (i.e. in the file which declares your delegate).
+4. Implement the delegate (`-URLWatcher:eventOccurred:`) and create your `CDEvents` instance.
+5. Zero out the delegate when you no longer need it.
+
+Example code:
+
+    self.events = [[CDEvents alloc] initWithURLs:<NSArray of URLs to watch>
+                                        delegate:<Your delegate>
+                                       onRunLoop:[NSRunLoop currentRunLoop]
+                            sinceEventIdentifier:kCDEventsSinceEventNow
+                            notificationLantency:CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY
+                         ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
+                                     excludeURLs:<NSArray of URLs to exlude>
+                             streamCreationFlags:kCDEventsDefaultEventStreamFlags];
+
+See the test app (`TestApp`) for an example on how to use the framework.
+
+**Important:** Since Mac OS X 10.6 is set as the deployment target automatic zeroing of weak references is not available. Thus you must set the `delegate` of `CDEvents` to `nil` when you no longer want to receive events. That is, at least in your `-dealloc` method. This is also required when using 10.7 and up! (`delegate` is an `unsafe_unretained` property.)
+
+For more details please refer to the documentation in the header files and the section "API documentation" below.
+
+
+## API documentation
+Read the latest [API documentation](http://rastersize.github.com/CDEvents/docs/api/head) or [browse for each version](http://rastersize.github.com/CDEvents/docs/api) of CDEvents. Alternatively you can generate it yourself, please see below.
+
+### appledoc
+Run the script `api.appledoc.sh` from the root of the project. The script takes one optional argument, the version of the project as a string. If the version string is empty "HEAD" will be used instead.
+
+### Doxygen
+You can generate API documentation with the help of [Doxygen](http://www.stack.nl/~dimitri/doxygen/). In Doxygen open the file `api.doxygen`, click the `Run` tab and then the `Run doxygen` button. When it's done you should have a directory (ignored by git) in the root of the project named `api` with a sub-directory `html` in which you will find `index.html` double-click and enjoy.
+
+## Contributors
+See GitHubs [contributors to rastersize/CDEvents](https://github.com/rastersize/CDEvents/contributors) statistics page.
+
+## License
+The code is released under the [MIT-license](http://www.opensource.org/licenses/mit-license.php).
+
+If you want, even though you really don't have to, I would love to hear what you use CDEvents for! Send me an email (first name (i.e. aron) @ last name (i.e. cedercrantz) dot se).

@@ -52,11 +52,11 @@
 	BOOL isLocalFile;
 	BOOL isLoading;
 	BOOL openURLInBackground;
-	NSString * rssPageURL;
+	BOOL hasRSSlink;
 	NSString * viewTitle;
 }
 
-@property (nonatomic, retain) IBOutlet TabbedWebView * webPane;
+@property (nonatomic, strong) IBOutlet TabbedWebView * webPane;
 
 // Action functions
 -(IBAction)handleGoForward:(id)sender;
@@ -68,12 +68,11 @@
 // Accessor functions
 -(void)setController:(AppController *)theController;
 -(void)loadURL:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
--(NSURL *)url;
--(void)setViewTitle:(NSString *)newTitle;
--(NSString *)viewTitle;
--(BOOL)isLoading;
--(BOOL)canGoBack;
--(BOOL)canGoForward;
+@property (nonatomic, readonly, copy) NSURL *url;
+@property (nonatomic, copy) NSString *viewTitle;
+@property (nonatomic, getter=isLoading, readonly) BOOL loading;
+@property (nonatomic, readonly) BOOL canGoBack;
+@property (nonatomic, readonly) BOOL canGoForward;
 -(void)handleStopLoading:(id)sender;
 -(void)activateAddressBar;
 @end

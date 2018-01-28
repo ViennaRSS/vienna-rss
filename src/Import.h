@@ -19,10 +19,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Database.h"
-#import "AppController.h"
 
-@interface AppController (Import)
-	-(IBAction)importSubscriptions:(id)sender;
-	-(void)importFromFile:(NSString *)importFileName;
+@interface Import : NSObject
+
++ (void)importFromFile:(NSString *)importFileName;
+
 @end

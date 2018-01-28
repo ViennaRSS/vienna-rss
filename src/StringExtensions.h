@@ -20,7 +20,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-#define SafeString(s)   ((s) ? (s) : @"")
+#define SafeString(s)   ((s) ?: @"")
 
 @interface NSMutableString (MutableStringExtensions)
 	-(void)replaceString:(NSString *)source withString:(NSString *)dest;
@@ -32,24 +32,24 @@
 @interface NSString (StringExtensions)
 	+(NSString *)stringByRemovingHTML:(NSString *)theString;
 	+(NSString *)mapEntityToString:(NSString *)entityString;
-    +(NSString * )stringByCleaningURLString:(NSString *) urlString;
-	-(NSString *)firstNonBlankLine;
-	-(NSString *)summaryTextFromHTML;
-	-(NSString *)titleTextFromHTML;
+    +(NSString *)stringByConvertingHTMLEntities:(NSString *)stringToProcess;
+	@property (nonatomic, readonly, copy) NSString *firstNonBlankLine;
+	@property (nonatomic, readonly, copy) NSString *summaryTextFromHTML;
+	@property (nonatomic, readonly, copy) NSString *titleTextFromHTML;
 	-(NSUInteger)indexOfCharacterInString:(char)ch afterIndex:(NSUInteger)startIndex;
-	-(NSString *)stringByEscapingExtendedCharacters;
-	-(NSString *)stringByUnescapingExtendedCharacters;
-	-(NSString *)stringByDeletingLastURLComponent;
-	-(NSString *)lastURLComponent;
+	@property (nonatomic, readonly, copy) NSString *stringByEscapingExtendedCharacters;
+	@property (nonatomic, readonly, copy) NSString *stringByUnescapingExtendedCharacters;
+	@property (nonatomic, readonly, copy) NSString *stringByDeletingLastURLComponent;
+	@property (nonatomic, readonly, copy) NSString *lastURLComponent;
 	-(NSString *)stringByAppendingURLComponent:(NSString *)newComponent;
 	-(BOOL)hasCharacter:(char)ch;
-	-(NSString *)firstWord;
-	-(NSString *)convertStringToValidPath;
+	@property (nonatomic, readonly, copy) NSString *firstWord;
+	@property (nonatomic, readonly, copy) NSString *convertStringToValidPath;
 	-(NSComparisonResult)numericCompare:(NSString *)aString;
-	-(NSString *)normalised;
-	-(NSString *)baseURL;
-	-(NSString *)host;
-	-(NSString *)trim;
-	-(int)hexValue;
-	-(BOOL)isBlank;
+	@property (nonatomic, readonly, copy) NSString *normalised;
+	@property (nonatomic, readonly, copy) NSString *baseURL;
+	@property (nonatomic, readonly, copy) NSString *host;
+	@property (nonatomic, readonly, copy) NSString *trim;
+	@property (nonatomic, readonly) NSInteger hexValue;
+	@property (nonatomic, getter=isBlank, readonly) BOOL blank;
 @end

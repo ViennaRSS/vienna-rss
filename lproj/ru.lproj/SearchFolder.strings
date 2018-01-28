@@ -8,10 +8,10 @@
 "-" = "-";
 
 /* NSButton (Cancel) : <title:Cancel> (oid:10) */
-"Cancel" = "Cancel";
+"Cancel" = "Отмена";
 
 /* NSMenuItem : <title:Field names go here> (oid:33) */
-"Field names go here" = "Field names go here";
+"Field names go here" = "Название полей";
 
 /* NSMenuItem : <title:Item1> (oid:88) */
 "Item1" = "Item1";
@@ -23,24 +23,24 @@
 "Item3" = "Item3";
 
 /* NSMenuItem : <title:Nothing> (oid:82) */
-"Nothing" = "Nothing";
+"Nothing" = "Ни одному";
 
 /* NSMenuItem : <title:Operators go here> (oid:56) */
-"Operators go here" = "Operators go here";
+"Operators go here" = "Операторы";
 
 /* NSMenu : <title:OtherViews> (oid:87) */
 "OtherViews" = "OtherViews";
 
 /* NSButton (Save) : <title:Save> (oid:9) */
-"Save" = "Save";
+"Save" = "Сохранить";
 
 /* NSTextField (Show all articles that match) : <title:Show all articles that match> (oid:58) */
-"Show all articles that match" = "Show all articles that match";
+"Show all articles that match" = "Показыывать статьи, соответствующие";
 
 /* NSTextField (Smart folder name: ) : <title:Smart folder name:
 > (oid:7) */
 
-"Smart folder name:\n" = "Smart folder name:\n";
+"Smart folder name:\n" = "Имя новой смарт-папки:\n";
 
 /* NSTextField (of the following conditions:) : <title:of the following conditions:> (oid:84) */
-"of the following conditions:" = "of the following conditions:";
+"of the following conditions:" = "из следующих условий:";

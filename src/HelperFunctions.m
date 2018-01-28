@@ -19,25 +19,21 @@
 
 #import "HelperFunctions.h"
 #import <SystemConfiguration/SCNetworkReachability.h>
-#import <Carbon/Carbon.h>
 #import <WebKit/WebKit.h>
-
-// Private functions
-static OSStatus RegisterMyHelpBook(void);
 
 /* hasOSScriptsMenu
  * Determines whether the OS script menu is present or not.
  */
 BOOL hasOSScriptsMenu(void)
 {
-	NSString * pathToUIServerPlist = [@"~/Library/Preferences/com.apple.systemuiserver.plist" stringByExpandingTildeInPath];
+	NSString * pathToUIServerPlist = (@"~/Library/Preferences/com.apple.systemuiserver.plist").stringByExpandingTildeInPath;
 	NSDictionary * properties = [NSDictionary dictionaryWithContentsOfFile:pathToUIServerPlist];
-	NSArray * menuExtras = [properties objectForKey:@"menuExtras"];
-	int index;
+	NSArray * menuExtras = properties[@"menuExtras"];
+	NSInteger index;
 
-	for (index = 0; index < [menuExtras count]; ++index)
+	for (index = 0; index < menuExtras.count; ++index)
 	{
-		if ([[menuExtras objectAtIndex:index] hasSuffix:@"Script Menu.menu"])
+		if ([menuExtras[index] hasSuffix:@"Script Menu.menu"])
 			return YES;
 	}
 	return NO;
@@ -48,15 +44,10 @@ BOOL hasOSScriptsMenu(void)
  */
 NSString * getDefaultBrowser(void)
 {
-	NSURL * testURL = [NSURL URLWithString:@"http://example.net"];
-	NSString * registeredAppURL = nil;
-	CFURLRef appURL = nil;
+    NSURL *testURL = [NSURL URLWithString:@"http://example.net"];
+    NSURL *defaultBrowserURL = [[NSWorkspace sharedWorkspace] URLForApplicationToOpenURL:testURL];
 
-	if (LSGetApplicationForURL((CFURLRef)testURL, kLSRolesAll, NULL, &appURL) != kLSApplicationNotFoundErr)
-		registeredAppURL = [(NSURL *)appURL path];
-	if (appURL != nil)
-		CFRelease(appURL);
-	return [[registeredAppURL lastPathComponent] stringByDeletingPathExtension];
+    return defaultBrowserURL.lastPathComponent.stringByDeletingPathExtension;
 }
 
 /* menuWithAction
@@ -65,14 +56,14 @@ NSString * getDefaultBrowser(void)
  */
 NSMenuItem * menuItemWithAction(SEL theSelector)
 {
-	NSArray * arrayOfMenus = [[NSApp mainMenu] itemArray];
-	int count = [arrayOfMenus count];
-	int index;
+	NSArray * arrayOfMenus = NSApp.mainMenu.itemArray;
+	NSInteger count = arrayOfMenus.count;
+	NSInteger index;
 
 	for (index = 0; index < count; ++index)
 	{
-		NSMenu * subMenu = [[arrayOfMenus objectAtIndex:index] submenu];
-		int itemIndex = [subMenu indexOfItemWithTarget:[NSApp delegate] andAction:theSelector];
+		NSMenu * subMenu = [arrayOfMenus[index] submenu];
+		NSInteger itemIndex = [subMenu indexOfItemWithTarget:NSApp.delegate andAction:theSelector];
 		if (itemIndex >= 0)
 			return [subMenu itemAtIndex:itemIndex];
 	}
@@ -85,14 +76,14 @@ NSMenuItem * menuItemWithAction(SEL theSelector)
  */
 NSMenuItem * menuItemOfMenuWithAction(NSMenu * menu, SEL theSelector)
 {
-	NSArray * arrayOfMenus = [menu itemArray];
-	int count = [arrayOfMenus count];
-	int index;
+	NSArray * arrayOfMenus = menu.itemArray;
+	NSInteger count = arrayOfMenus.count;
+	NSInteger index;
 	
 	for (index = 0; index < count; ++index)
 	{
-		NSMenu * subMenu = [[arrayOfMenus objectAtIndex:index] submenu];
-		int itemIndex = [subMenu indexOfItemWithTarget:[NSApp delegate] andAction:theSelector];
+		NSMenu * subMenu = [arrayOfMenus[index] submenu];
+		NSInteger itemIndex = [subMenu indexOfItemWithTarget:NSApp.delegate andAction:theSelector];
 		if (itemIndex >= 0)
 			return [subMenu itemAtIndex:itemIndex];
 	}
@@ -122,7 +113,7 @@ NSURL * cleanedUpAndEscapedUrlFromString(NSString * theUrl)
 {
 	NSURL *urlToLoad = nil;
 	NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
-	[pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
+	[pasteboard declareTypes:@[NSStringPboardType] owner:nil];
 	@try
 	{
 		if ([pasteboard setString:theUrl forType:NSStringPboardType])
@@ -148,7 +139,7 @@ NSURL * cleanedUpAndEscapedUrlFromString(NSString * theUrl)
 NSMenuItem * copyOfMenuItemWithAction(SEL theSelector)
 {
 	NSMenuItem * item = menuItemWithAction(theSelector);
-	return (item) ? [[[NSMenuItem alloc] initWithTitle:[item title] action:theSelector keyEquivalent:@""] autorelease] : nil;
+	return (item) ? [[NSMenuItem alloc] initWithTitle:item.title action:theSelector keyEquivalent:@""] : nil;
 }
 
 /* menuWithTitleAndAction
@@ -156,7 +147,7 @@ NSMenuItem * copyOfMenuItemWithAction(SEL theSelector)
  */
 NSMenuItem * menuItemWithTitleAndAction(NSString * theTitle, SEL theSelector)
 {
-	return [[[NSMenuItem alloc] initWithTitle:theTitle action:theSelector keyEquivalent:@""] autorelease];
+	return [[NSMenuItem alloc] initWithTitle:theTitle action:theSelector keyEquivalent:@""];
 }
 
 /* loadMapFromPath
@@ -183,7 +174,7 @@ void loadMapFromPath(NSString * path, NSMutableDictionary * pathMappings, BOOL f
 				if ([fileName isEqualToString:@".DS_Store"])
 					continue;
 
-				[pathMappings setValue:fullPath forKey:[fileName stringByDeletingPathExtension]];
+				[pathMappings setValue:fullPath forKey:fileName.stringByDeletingPathExtension];
 			}
 		}
 	}
@@ -200,7 +191,7 @@ BOOL isAccessible(NSString * urlString)
 	
 	NSURL * url = [NSURL URLWithString:urlString];
 
-	target = SCNetworkReachabilityCreateWithName(NULL, [[url host] UTF8String]);
+	target = SCNetworkReachabilityCreateWithName(NULL, url.host.UTF8String);
     if (target!= nil)
     {
         ok = SCNetworkReachabilityGetFlags(target, &flags);
@@ -225,8 +216,11 @@ void runOKAlertPanel(NSString * titleString, NSString * bodyText, ...)
 	va_start(arguments, bodyText);
 	fullBodyText = [[NSString alloc] initWithFormat:bodyText arguments:arguments];
 	// Security: arguments may contain formatting characters, so don't use fullBodyText as format string.
-	NSRunAlertPanel(titleString, @"%@", NSLocalizedString(@"OK", nil), nil, nil, fullBodyText);
-	[fullBodyText release];
+    NSAlert *alert = [[NSAlert alloc] init];
+    alert.alertStyle = NSAlertStyleInformational;
+    alert.messageText = titleString;
+    alert.informativeText = fullBodyText;
+    [alert runModal];
 	va_end(arguments);
 }
 
@@ -241,75 +235,13 @@ void runOKAlertSheet(NSString * titleString, NSString * bodyText, ...)
 	va_start(arguments, bodyText);
 	fullBodyText = [[NSString alloc] initWithFormat:bodyText arguments:arguments];
 	// Security: arguments may contain formatting characters, so don't use fullBodyText as format string.
-	NSBeginAlertSheet(titleString,
-					  NSLocalizedString(@"OK", nil),
-					  nil,
-					  nil,
-					  [NSApp mainWindow],
-					  nil,
-					  nil,
-					  nil, nil,
-					  @"%@",
-					  fullBodyText);
-	[fullBodyText release];
+    NSAlert *alert = [[NSAlert alloc] init];
+    alert.alertStyle = NSAlertStyleInformational;
+    alert.messageText = titleString;
+    alert.informativeText = fullBodyText;
+    [alert beginSheetModalForWindow:NSApp.mainWindow completionHandler:^(NSModalResponse returnCode) {
+        // No action to take
+    }];
+    
 	va_end(arguments);
-}
-
-/* RegisterMyHelpBook
- * Ensure that the help book is registered before GotoHelpPage can be used.
- */
-static OSStatus RegisterMyHelpBook(void)
-{
-    OSStatus err = noErr;
-
-    CFBundleRef myApplicationBundle = CFBundleGetMainBundle();
-	if (myApplicationBundle == NULL)
-		err = fnfErr;
-	else
-	{
-		CFURLRef myBundleURL = CFBundleCopyBundleURL(myApplicationBundle);
-		if (myBundleURL == NULL)
-			err = fnfErr;
-		else
-		{
-			FSRef myBundleRef;
-			if (!CFURLGetFSRef(myBundleURL, &myBundleRef))
-				err = fnfErr;
-			if (err == noErr)
-				err = AHRegisterHelpBook(&myBundleRef);
-			CFRelease(myBundleURL);
-		}
-	}
-	return err;
-}
-
-/* GotoHelpPage
- * Displays a specified page of the help file.
- */
-OSStatus GotoHelpPage (CFStringRef pagePath, CFStringRef anchorName)
-{
-    CFBundleRef myApplicationBundle = NULL;
-    CFStringRef myBookName = NULL;
-    OSStatus err;
-
-	err = RegisterMyHelpBook();
-	if (err != noErr)
-		return err;
-    myApplicationBundle = CFBundleGetMainBundle();
-	if (myApplicationBundle == NULL)
-		err = fnfErr;
-	else
-	{
-		myBookName = CFBundleGetValueForInfoDictionaryKey(myApplicationBundle, CFSTR("CFBundleHelpBookName"));
-		if (myBookName == NULL)
-			err = fnfErr;
-		else
-		{
-			if (CFGetTypeID(myBookName) != CFStringGetTypeID())
-				err = paramErr;
-		}
-	}
-	if (err == noErr)
-		err = AHGotoPage(myBookName, pagePath, anchorName);
-	return err;
 }

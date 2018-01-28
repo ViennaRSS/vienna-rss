@@ -1,17 +1,24 @@
-# Uncomment this line to define a global platform for your project
-# platform :ios, '6.0'
-platform :osx, '10.6'
+platform :osx, '10.8'
 source 'https://github.com/CocoaPods/Specs.git'
 
 target 'Vienna' do
-	pod 'PXListView', :podspec => './PXListView.podspec'
-	pod 'MASPreferences', :git => "https://github.com/shpakovski/MASPreferences.git", :commit => '11b0166a55e4d8e109b259eb0b4673333d8903f5'
-	pod 'ASIHTTPRequest', '~> 1.8'
-	pod 'JSONKit-NoWarning'
-	pod 'FMDB', '2.5'
+	pod 'MASPreferences', '~> 1.1.4'
+	pod 'ASIHTTPRequest', '~> 1.8', :inhibit_warnings => true
+	pod 'FMDB', '~> 2.7.2'
+	pod 'CDEvents'
+	pod 'Sparkle', '~> 1.17.0'
 end
 
 target 'Vienna Tests' do
-
+	pod 'FMDB', '~> 2.7.2'
+	pod 'Sparkle', '~> 1.17.0'
+	pod 'OCMock'
 end
 
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['SWIFT_VERSION'] = '3.0'
+        end
+    end
+end

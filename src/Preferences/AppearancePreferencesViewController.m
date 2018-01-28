@@ -25,18 +25,18 @@
 
 // List of available font sizes. I picked the ones that matched
 // Mail but you easily could add or remove from the list as needed.
-int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64 };
+NSInteger availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64 };
 #define countOfAvailableFontSizes  (sizeof(availableFontSizes)/sizeof(availableFontSizes[0]))
 
 // List of minimum font sizes. I picked the ones that matched the same option in
 // Safari but you easily could add or remove from the list as needed.
-int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
+NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 #define countOfAvailableMinimumFontSizes  (sizeof(availableMinimumFontSizes)/sizeof(availableMinimumFontSizes[0]))
 
 
 @interface AppearancePreferencesViewController ()
 -(void)initializePreferences;
--(void)selectUserDefaultFont:(NSString *)name size:(int)size control:(NSTextField *)control;
+-(void)selectUserDefaultFont:(NSString *)name size:(NSInteger)size control:(NSTextField *)control;
 
 @end
 
@@ -44,7 +44,16 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 
 
 - (instancetype)init {
-    return [super initWithNibName:@"AppearancePreferencesView" bundle:nil];
+	if ((self = [super initWithNibName:@"AppearancePreferencesView" bundle:nil]) != nil)
+	{
+        // Set up to be notified if preferences change outside this window
+        NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_FolderFontChange" object:nil];
+        [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_ArticleListFontChange" object:nil];
+        [nc addObserver:self selector:@selector(handleReloadPreferences:) name:kMA_Notify_MinimumFontSizeChange object:nil];
+        [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
+	}
+	return self;
 }
 
 
@@ -55,12 +64,6 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
     // Do view setup here.
     [self initializePreferences];
     
-    // Set up to be notified if preferences change outside this window
-    NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_FolderFontChange" object:nil];
-    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_ArticleListFontChange" object:nil];
-    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:kMA_Notify_MinimumFontSizeChange object:nil];
-    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
     
 }
 
@@ -99,21 +102,21 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
     Preferences * prefs = [Preferences standardPreferences];
     
     // Populate the drop downs with the font names and sizes
-    [self selectUserDefaultFont:[prefs articleListFont] size:[prefs articleListFontSize] control:articleFontSample];
-    [self selectUserDefaultFont:[prefs folderListFont] size:[prefs folderListFontSize] control:folderFontSample];
+    [self selectUserDefaultFont:prefs.articleListFont size:prefs.articleListFontSize control:articleFontSample];
+    [self selectUserDefaultFont:prefs.folderListFont size:prefs.folderListFontSize control:folderFontSample];
     
     // Show folder images option
-    [showFolderImagesButton setState:[prefs showFolderImages] ? NSOnState : NSOffState];
+    showFolderImagesButton.state = prefs.showFolderImages ? NSOnState : NSOffState;
     
     // Set minimum font size option
-    [enableMinimumFontSize setState:[prefs enableMinimumFontSize] ? NSOnState : NSOffState];
-    [minimumFontSizes setEnabled:[prefs enableMinimumFontSize]];
+    enableMinimumFontSize.state = prefs.enableMinimumFontSize ? NSOnState : NSOffState;
+    minimumFontSizes.enabled = prefs.enableMinimumFontSize;
     
     NSUInteger i;
     [minimumFontSizes removeAllItems];
     for (i = 0; i < countOfAvailableMinimumFontSizes; ++i)
-        [minimumFontSizes addItemWithObjectValue:[NSNumber numberWithInt:availableMinimumFontSizes[i]]];
-    [minimumFontSizes setFloatValue:[prefs minimumFontSize]];
+        [minimumFontSizes addItemWithObjectValue:@(availableMinimumFontSizes[i])];
+    minimumFontSizes.doubleValue = prefs.minimumFontSize;
 }
 
 /* changeShowFolderImages
@@ -122,7 +125,7 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 -(IBAction)changeShowFolderImages:(id)sender
 {
     BOOL showFolderImages = [sender state] == NSOnState;
-    [[Preferences standardPreferences] setShowFolderImages:showFolderImages];
+    [Preferences standardPreferences].showFolderImages = showFolderImages;
 }
 
 /* changeMinimumFontSize
@@ -131,8 +134,8 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 -(IBAction)changeMinimumFontSize:(id)sender
 {
     BOOL useMinimumFontSize = [sender state] == NSOnState;
-    [[Preferences standardPreferences] setEnableMinimumFontSize:useMinimumFontSize];
-    [minimumFontSizes setEnabled:useMinimumFontSize];
+    [Preferences standardPreferences].enableMinimumFontSize = useMinimumFontSize;
+    minimumFontSizes.enabled = useMinimumFontSize;
 }
 
 /* selectMinimumFontSize
@@ -140,17 +143,17 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
  */
 -(IBAction)selectMinimumFontSize:(id)sender
 {
-    float newMinimumFontSize = [minimumFontSizes floatValue];
-    [[Preferences standardPreferences] setMinimumFontSize:newMinimumFontSize];
+    CGFloat newMinimumFontSize = minimumFontSizes.doubleValue;
+    [Preferences standardPreferences].minimumFontSize = newMinimumFontSize;
 }
 
 /* selectUserDefaultFont
  * Display sample text in the specified font and size.
  */
--(void)selectUserDefaultFont:(NSString *)name size:(int)size control:(NSTextField *)control
+-(void)selectUserDefaultFont:(NSString *)name size:(NSInteger)size control:(NSTextField *)control
 {
-    [control setFont:[NSFont fontWithName:name size:size]];
-    [control setStringValue:[NSString stringWithFormat:@"%@ %i", name, size]];
+    control.font = [NSFont fontWithName:name size:size];
+    control.stringValue = [NSString stringWithFormat:@"%@ %li", name, (long)size];
 }
 
 /* selectArticleFont
@@ -159,11 +162,14 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 -(IBAction)selectArticleFont:(id)sender
 {
     Preferences * prefs = [Preferences standardPreferences];
-    NSFontManager * manager = [NSFontManager sharedFontManager];
-    [manager setSelectedFont:[NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]] isMultiple:NO];
-    [manager setAction:@selector(changeArticleFont:)];
-    [manager setDelegate:self];
-    [manager orderFrontFontPanel:self];
+    NSFontManager * fontManager = NSFontManager.sharedFontManager;
+    fontManager.target = self;
+    fontManager.action = @selector(changeArticleFont:);
+
+    NSFontPanel *fontPanel = [fontManager fontPanel:YES];
+    [fontPanel setPanelFont:[NSFont fontWithName:prefs.articleListFont size:prefs.articleListFontSize] isMultiple:NO];
+    [fontPanel orderFront:self];
+    fontPanel.enabled = YES;
 }
 
 /* selectFolderFont
@@ -172,11 +178,14 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 -(IBAction)selectFolderFont:(id)sender
 {
     Preferences * prefs = [Preferences standardPreferences];
-    NSFontManager * manager = [NSFontManager sharedFontManager];
-    [manager setSelectedFont:[NSFont fontWithName:[prefs folderListFont] size:[prefs folderListFontSize]] isMultiple:NO];
-    [manager setAction:@selector(changeFolderFont:)];
-    [manager setDelegate:self];
-    [manager orderFrontFontPanel:self];
+    NSFontManager * fontManager = NSFontManager.sharedFontManager;
+    fontManager.target = self;
+    fontManager.action = @selector(changeFolderFont:);
+    
+    NSFontPanel *fontPanel = [fontManager fontPanel:YES];
+    [fontPanel setPanelFont:[NSFont fontWithName:prefs.folderListFont size:prefs.folderListFontSize] isMultiple:NO];
+    [fontPanel orderFront:self];
+    fontPanel.enabled = YES;
 }
 
 /* changeArticleFont
@@ -185,11 +194,11 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 -(IBAction)changeArticleFont:(id)sender
 {
     Preferences * prefs = [Preferences standardPreferences];
-    NSFont * font = [NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]];
+    NSFont * font = [NSFont fontWithName:prefs.articleListFont size:prefs.articleListFontSize];
     font = [sender convertFont:font];
-    [prefs setArticleListFont:[font fontName]];
-    [prefs setArticleListFontSize:[font pointSize]];
-    [self selectUserDefaultFont:[prefs articleListFont] size:[prefs articleListFontSize] control:articleFontSample];
+    prefs.articleListFont = font.fontName;
+    prefs.articleListFontSize = font.pointSize;
+    [self selectUserDefaultFont:prefs.articleListFont size:prefs.articleListFontSize control:articleFontSample];
 }
 
 /* changeFolderFont
@@ -198,11 +207,11 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 -(IBAction)changeFolderFont:(id)sender
 {
     Preferences * prefs = [Preferences standardPreferences];
-    NSFont * font = [NSFont fontWithName:[prefs folderListFont] size:[prefs folderListFontSize]];
+    NSFont * font = [NSFont fontWithName:prefs.folderListFont size:prefs.folderListFontSize];
     font = [sender convertFont:font];
-    [prefs setFolderListFont:[font fontName]];
-    [prefs setFolderListFontSize:[font pointSize]];
-    [self selectUserDefaultFont:[prefs folderListFont] size:[prefs folderListFontSize] control:folderFontSample];
+    prefs.folderListFont = font.fontName;
+    prefs.folderListFontSize = font.pointSize;
+    [self selectUserDefaultFont:prefs.folderListFont size:prefs.folderListFontSize control:folderFontSample];
 }
 
 /* dealloc
@@ -211,6 +220,5 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [super dealloc];
 }
 @end

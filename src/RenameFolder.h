@@ -26,7 +26,7 @@
 	IBOutlet NSTextField * folderName;
 	IBOutlet NSButton * renameButton;
 	IBOutlet NSButton * cancelButton;
-	int folderId;
+	NSInteger folderId;
 }
 
 // Action handlers
@@ -34,5 +34,5 @@
 -(IBAction)doCancel:(id)sender;
 
 // General functions
--(void)renameFolder:(NSWindow *)window folderId:(int)itemId;
+-(void)renameFolder:(NSWindow *)window folderId:(NSInteger)itemId;
 @end

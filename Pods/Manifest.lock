@@ -12,41 +12,30 @@ PODS:
     - Reachability
   - ASIHTTPRequest/S3 (1.8.2):
     - ASIHTTPRequest/Core
-  - FMDB (2.5):
-    - FMDB/standard (= 2.5)
-  - FMDB/common (2.5)
-  - FMDB/standard (2.5):
-    - FMDB/common
-  - JSONKit-NoWarning (1.2)
-  - MASPreferences (1.1.2)
-  - PXListView (0.0.1)
+  - CDEvents (1.2.2)
+  - FMDB (2.7.2):
+    - FMDB/standard (= 2.7.2)
+  - FMDB/standard (2.7.2)
+  - MASPreferences (1.1.4)
+  - OCMock (3.4)
+  - Sparkle (1.17.0)
 
 DEPENDENCIES:
   - ASIHTTPRequest (~> 1.8)
-  - FMDB (= 2.5)
-  - JSONKit-NoWarning
-  - MASPreferences (from `https://github.com/shpakovski/MASPreferences.git`, commit `11b0166a55e4d8e109b259eb0b4673333d8903f5`)
-  - PXListView (from `./PXListView.podspec`)
-
-EXTERNAL SOURCES:
-  MASPreferences:
-    :commit: 11b0166a55e4d8e109b259eb0b4673333d8903f5
-    :git: https://github.com/shpakovski/MASPreferences.git
-  PXListView:
-    :podspec: "./PXListView.podspec"
-
-CHECKOUT OPTIONS:
-  MASPreferences:
-    :commit: 11b0166a55e4d8e109b259eb0b4673333d8903f5
-    :git: https://github.com/shpakovski/MASPreferences.git
+  - CDEvents
+  - FMDB (~> 2.7.2)
+  - MASPreferences (~> 1.1.4)
+  - OCMock
+  - Sparkle (~> 1.17.0)
 
 SPEC CHECKSUMS:
   ASIHTTPRequest: ec013992946676b7978dcbde6396d57312d21db4
-  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
-  JSONKit-NoWarning: 3d27e6f9e6846ecf741e8c64dcadd7d5aa7193cb
-  MASPreferences: 32d8a2c5ef1d60b63240f5676b011ff72e194cb1
-  PXListView: 4e6d5ca4dc93f3d9d7cd9370201b9729e8a4307d
+  CDEvents: f311f23de13414f4b3625f1a663b2e1d9a85d982
+  FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
+  MASPreferences: 7bdcfe891d7840453cf48f95fa866c3e152ace7a
+  OCMock: 35ae71d6a8fcc1b59434d561d1520b9dd4f15765
+  Sparkle: ccfb47699feea7b40b51cf3176f69404e5b1da6c
 
-PODFILE CHECKSUM: 2a52123430828cd338f66448f0029e523f71e62f
+PODFILE CHECKSUM: 8ffb5d34a9ebb919b94f8071199b9fba834f54f5
 
-COCOAPODS: 1.0.0.beta.3
+COCOAPODS: 1.2.1

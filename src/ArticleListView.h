@@ -30,7 +30,6 @@
 @class ArticleController;
 @class MessageListView;
 @class ArticleView;
-@class FoldersTree;
 
 @interface ArticleListView : NSView<BaseView, ArticleBaseView, NSSplitViewDelegate, NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate>
 {
@@ -39,19 +38,15 @@
 	IBOutlet MessageListView * articleList;
 	IBOutlet ArticleView * articleText;
 	IBOutlet NSSplitView * splitView2;
-	IBOutlet FoldersTree * foldersTree;
 	IBOutlet StdEnclosureView * stdEnclosureView;
 
-	int currentSelectedRow;
-	int tableLayout;
+	NSInteger tableLayout;
 	BOOL isAppInitialising;
 	BOOL isChangingOrientation;
 	BOOL isInTableInit;
 	BOOL blockSelectionHandler;
-	BOOL blockMarkRead;
 
 	NSTimer * markReadTimer;
-	NSString * guidOfArticleToSelect;
 	NSFont * articleListFont;
 	NSFont * articleListUnreadFont;
 	NSMutableDictionary * reportCellDict;
@@ -68,17 +63,15 @@
 	BOOL isCurrentPageFullHTML;
 	BOOL isLoadingHTMLArticle;
 	NSError * lastError;
+	NSProgressIndicator * progressIndicator;
 }
 
 // Public functions
--(void)initialiseArticleView;
 -(void)updateAlternateMenuTitle;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
--(int)tableLayout;
--(NSArray *)markedArticleRange;
--(BOOL)canDeleteMessageAtRow:(int)row;
+-(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 -(void)loadArticleLink:(NSString *) articleLink;
--(NSURL *)url;
+@property (nonatomic, readonly, copy) NSURL *url;
 -(void)webViewLoadFinished:(NSNotification *)notification;
 @end

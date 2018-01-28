@@ -19,7 +19,6 @@
 //
 
 #import "BitlyAPIHelper.h"
-#import "XMLParser.h"
 #import "HelperFunctions.h"
 
 // bit.ly defaults to delivering results via JSON, but we want to use XML here, that's why whe use &format=xml
@@ -45,34 +44,41 @@ static NSString * BitlyApiBaseUrl = @"http://api.bit.ly/%@?version=2.0.1&login=%
 {
 	// The next few lines incrementally build the request...
 	NSString * requestURLString = [NSString stringWithFormat:BitlyApiBaseUrl, @"shorten", login, apiKey];
-	longURL = [cleanedUpAndEscapedUrlFromString(longURL) absoluteString];
+	longURL = cleanedUpAndEscapedUrlFromString(longURL).absoluteString;
 	NSString * parameters = [NSString stringWithFormat:@"longUrl=%@", longURL];
 	requestURLString = [requestURLString stringByAppendingString:parameters];	
 	NSURL *finishedRequestURL = [NSURL URLWithString:requestURLString];
-	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:finishedRequestURL];
+	NSURLRequest *request = [[NSURLRequest alloc] initWithURL:finishedRequestURL];
 	
 	// ... which is then finally sent to bit.ly's servers.
 	NSHTTPURLResponse* urlResponse = nil;  	
-	NSError *error = [[[NSError alloc] init] autorelease];  
+	NSError *error = nil;
 	NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];	
 	
 	// If the response is OK, use Vienna's XML parser stuff to get the data we need.
-	if ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300)
+	if (urlResponse.statusCode >= 200 && urlResponse.statusCode < 300)
 	{
 		//TODO: Robust error-handling.
-		XMLParser * responseParser = [[XMLParser alloc] init];
-		[responseParser setData:data];
-		
-		XMLParser * subtree;
-		if ((subtree = [responseParser treeByPath:@"bitly/results/nodeKeyVal/shortUrl"]) != nil)
-		{
-			[responseParser release];
-            [request release];
-			return [subtree valueOfElement];
-		}
-		[responseParser release];
+        NSError *error = nil;
+        NSXMLDocument *bitlyResponse = [[NSXMLDocument alloc] initWithData:data options:NSXMLNodeOptionsNone error:&error];
+        if (error) {
+            // TODO: Present error-message to the user?
+            NSLog(@"URL shortening with bit.ly failed: %@", error);
+            return nil;
+        }
+        
+        error = nil;
+        NSXMLNode *shortUrlNode = [bitlyResponse nodesForXPath:@".//bitly/results/nodeKeyVal/shortUrl" error:&error].firstObject;
+        
+        if (error) {
+            // TODO: Present error-message to the user?
+            NSLog(@"Processing xml xpath from bit.ly failed: %@", error);
+            return nil;
+        } else {
+            return shortUrlNode.stringValue;
+        }
+        
 	}
-    [request release];
 	// TODO: Present error-message to the user?
 	NSLog(@"URL shortening with bit.ly failed!");
 	NSBeep();

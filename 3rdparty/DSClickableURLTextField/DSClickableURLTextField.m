@@ -55,7 +55,7 @@
 
 /* Set the text field to be non-editable and
 	non-selectable. */
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype)initWithCoder:(NSCoder *)coder
 {
 	if ( (self = [super initWithCoder:coder]) ) {
 		[self setEditable:NO];
@@ -68,7 +68,7 @@
 
 /* Set the text field to be non-editable and
 	non-selectable. */
-- (id)initWithFrame:(NSRect)frameRect
+- (instancetype)initWithFrame:(NSRect)frameRect
 {
 	if ( (self = [super initWithFrame:frameRect]) ) {
 		[self setEditable:NO];
@@ -79,13 +79,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[clickedURL release];
-	[URLStorage release];
-	
-	[super dealloc];
-}
 
 /* Enforces that the text field be non-editable and
 	non-selectable. Probably not needed, but I always
@@ -100,14 +93,14 @@
 - (void)setAttributedStringValue:(NSAttributedString *)aStr
 {
 	[URLStorage setAttributedString:aStr];
-	[[self window] invalidateCursorRectsForView:self];
-	[super setAttributedStringValue:aStr];
+	[self.window invalidateCursorRectsForView:self];
+	super.attributedStringValue = aStr;
 }
 
 - (void)setStringValue:(NSString *)aStr
 {
-	NSAttributedString *attrString = [[[NSAttributedString alloc] initWithString:aStr attributes:nil] autorelease];
-	[self setAttributedStringValue:attrString];
+	NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:aStr attributes:nil];
+	self.attributedStringValue = attrString;
 }
 
 - (void)setCanCopyURLs:(BOOL)aFlag
@@ -122,28 +115,28 @@
 
 - (void)resetCursorRects
 {
-	if ( [[self attributedStringValue] length] == 0 ) {
+	if ( self.attributedStringValue.length == 0 ) {
 		[super resetCursorRects];
 		return;
 	}
 	
-	NSRect cellBounds = [[self cell] drawingRectForBounds:[self bounds]];
+	NSRect cellBounds = [self.cell drawingRectForBounds:self.bounds];
 
 	if ( URLStorage == nil ) {
-		BOOL cellWraps = ![[self cell] isScrollable];
+		BOOL cellWraps = !self.cell.scrollable;
 		NSSize containerSize = NSMakeSize( cellWraps ? cellBounds.size.width : MAXFLOAT, cellWraps ? MAXFLOAT : cellBounds.size.height );
-		URLContainer = [[[NSTextContainer alloc] initWithContainerSize:containerSize] autorelease];
-		URLManager = [[[NSLayoutManager alloc] init] autorelease];
+		URLContainer = [[NSTextContainer alloc] initWithContainerSize:containerSize];
+		URLManager = [[NSLayoutManager alloc] init];
 		URLStorage = [[NSTextStorage alloc] init];
 		
 		[URLStorage addLayoutManager:URLManager];
 		[URLManager addTextContainer:URLContainer];
-		[URLContainer setLineFragmentPadding:2.f];
+		URLContainer.lineFragmentPadding = 2.f;
 		
-		[URLStorage setAttributedString:[self attributedStringValue]];
+		[URLStorage setAttributedString:self.attributedStringValue];
 	}
 	
-	NSUInteger myLength = [URLStorage length];
+	NSUInteger myLength = URLStorage.length;
 	NSRange returnRange = { NSNotFound, 0 }, stringRange = { 0, myLength }, glyphRange = { NSNotFound, 0 };
 	NSCursor *pointingCursor = nil;
 	
@@ -157,7 +150,7 @@
 	
 	/* Moved out of the while and for loops as there's no need to recalculate
 	   it every time through */
-	NSRect superVisRect = [self convertRect:[[self superview] visibleRect] fromView:[self superview]];
+	NSRect superVisRect = [self convertRect:self.superview.visibleRect fromView:self.superview];
 
 	while ( stringRange.location < myLength ) {
 		id aVal = [URLStorage attribute:NSLinkAttributeName atIndex:stringRange.location longestEffectiveRange:&returnRange inRange:stringRange];
@@ -186,10 +179,10 @@
 - (NSURL*)urlAtMouse:(NSEvent *)mouseEvent
 {
 	NSURL*	urlAtMouse = nil;
-	NSPoint mousePoint = [self convertPoint:[mouseEvent locationInWindow] fromView:nil];
-	NSRect cellBounds = [[self cell] drawingRectForBounds:[self bounds]];
+	NSPoint mousePoint = [self convertPoint:mouseEvent.locationInWindow fromView:nil];
+	NSRect cellBounds = [self.cell drawingRectForBounds:self.bounds];
 	
-	if ( ([URLStorage length] > 0 ) && [self mouse:mousePoint inRect:cellBounds] ) {
+	if ( (URLStorage.length > 0 ) && [self mouse:mousePoint inRect:cellBounds] ) {
 		id aVal = nil;
 		NSRange returnRange = { NSNotFound, 0 }, glyphRange = { NSNotFound, 0 };
 		NSRectArray linkRect = NULL;
@@ -197,7 +190,7 @@
 		NSUInteger charIndex = [URLManager characterIndexForGlyphAtIndex:glyphIndex];
 		NSUInteger numRects = 0, j = 0;
 		
-		aVal = [URLStorage attribute:NSLinkAttributeName atIndex:charIndex longestEffectiveRange:&returnRange inRange:NSMakeRange(charIndex, [URLStorage length] - charIndex)];
+		aVal = [URLStorage attribute:NSLinkAttributeName atIndex:charIndex longestEffectiveRange:&returnRange inRange:NSMakeRange(charIndex, URLStorage.length - charIndex)];
 		if ( (aVal != nil) ) {
 			glyphRange = [URLManager glyphRangeForCharacterRange:returnRange actualCharacterRange:nil];
 			linkRect = [URLManager rectArrayForGlyphRange:glyphRange withinSelectedGlyphRange:glyphRange inTextContainer:URLContainer rectCount:&numRects];
@@ -226,10 +219,10 @@
 	NSURL *anURL = [self urlAtMouse:aEvent];
 	
 	if ( anURL != nil ) {
-		NSMenu *aMenu = [[[NSMenu alloc] initWithTitle:@"Copy URL"] autorelease];
-		NSMenuItem *anItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy URL", @"Copy URL") action:@selector(copyURL:) keyEquivalent:@""] autorelease];
-		[anItem setTarget:self];
-		[anItem setRepresentedObject:anURL];
+		NSMenu *aMenu = [[NSMenu alloc] initWithTitle:@"Copy URL"];
+		NSMenuItem *anItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy URL", @"Copy URL") action:@selector(copyURL:) keyEquivalent:@""];
+		anItem.target = self;
+		anItem.representedObject = anURL;
 		[aMenu addItem:anItem];
 		
 		return aMenu;
@@ -243,9 +236,9 @@
 	NSPasteboard *copyBoard = [NSPasteboard pasteboardWithName:NSGeneralPboard];
 	NSURL *copyURL = [sender representedObject];
 	
-	[copyBoard declareTypes:[NSArray arrayWithObjects:NSURLPboardType, NSStringPboardType, nil] owner:nil];
+	[copyBoard declareTypes:@[NSURLPboardType, NSStringPboardType] owner:nil];
 	[copyURL writeToPasteboard:copyBoard];
-	[copyBoard setString:[copyURL absoluteString] forType:NSStringPboardType];
+	[copyBoard setString:copyURL.absoluteString forType:NSStringPboardType];
 }
 
 - (void)mouseDown:(NSEvent *)mouseEvent
@@ -256,8 +249,7 @@
 	/* Remember which URL was clicked originally, so we don't end up opening
 		the wrong URL accidentally.
 	*/
-	[clickedURL release];
-	clickedURL = [[self urlAtMouse:mouseEvent] retain];
+	clickedURL = [self urlAtMouse:mouseEvent];
 }
 
 - (void)mouseUp:(NSEvent *)mouseEvent
@@ -265,10 +257,9 @@
 	NSURL* urlAtMouse = [self urlAtMouse:mouseEvent];
 	if ( (urlAtMouse != nil)  &&  [urlAtMouse isEqualTo:clickedURL] ) {
 		// check if delegate wants to open the URL itself, if not, let the workspace open the URL
-		if ( ([self delegate] == nil)  || ![[self delegate] respondsToSelector:@selector(textField:openURL:)] || ![(id)[self delegate] textField:self openURL:urlAtMouse] )
+		if ( (self.delegate == nil)  || ![self.delegate respondsToSelector:@selector(textField:openURL:)] || ![(id)self.delegate textField:self openURL:urlAtMouse] )
 			[[NSWorkspace sharedWorkspace] openURL:urlAtMouse];
 	}
-	[clickedURL release];
 	clickedURL = nil;
 	[super mouseUp:mouseEvent];
 }

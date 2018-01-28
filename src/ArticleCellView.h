@@ -1,6 +1,5 @@
 //
 //  ArticleCellView.h
-//  PXListView
 //
 //  Adapted from PXListView by Alex Rozanski
 //  Modified by Barijaona Ramaholimihaso
@@ -8,25 +7,23 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "PXListViewCell.h"
 #import "ArticleView.h"
 
 
-@interface ArticleCellView : PXListViewCell
+@interface ArticleCellView : NSTableCellView
 {
 	AppController * controller;
-	ArticleView *articleView;
-	NSProgressIndicator * progressIndicator;
 	BOOL inProgress;
-	int folderId;
+	NSInteger folderId;
 	NSUInteger articleRow;
+	NSTableView *__weak _listView;
 }
 
-@property (assign,readonly)ArticleView *articleView;
+@property (readonly, strong)ArticleView *articleView;
+@property (readonly, strong)NSProgressIndicator * progressIndicator;
 @property BOOL inProgress;
-@property int folderId;
+@property NSInteger folderId;
 @property NSUInteger articleRow;
+@property (nonatomic, weak) NSTableView *listView;
 
-// Public functions
--(id)initWithReusableIdentifier: (NSString*)identifier inFrame:(NSRect)frameRect;
 @end

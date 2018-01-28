@@ -26,13 +26,15 @@
 	IBOutlet NSTextField * folderName;
 	IBOutlet NSButton * saveButton;
 	IBOutlet NSButton * cancelButton;
-	int parentId;
+	NSInteger parentId;
 }
+
+@property(strong) NSArray * topObjects;
 
 // Action handlers
 -(IBAction)doSave:(id)sender;
 -(IBAction)doCancel:(id)sender;
 
 // General functions
--(void)newGroupFolder:(NSWindow *)window underParent:(int)itemId;
+-(void)newGroupFolder:(NSWindow *)window underParent:(NSInteger)itemId;
 @end

@@ -19,14 +19,13 @@
 //
 
 #import "Criteria.h"
-#import "XMLParser.h"
 
 @implementation Criteria
 
 /* init
  * Initialise an empty Criteria.
  */
--(id)init
+-(instancetype)init
 {
 	return [self initWithField:@"" withOperator:0 withValue:@""];
 }
@@ -34,13 +33,13 @@
 /* initWithField
  * Initalises a new Criteria with the specified values.
  */
--(id)initWithField:(NSString *)newField withOperator:(CriteriaOperator)newOperator withValue:(NSString *)newValue
+-(instancetype)initWithField:(NSString *)newField withOperator:(CriteriaOperator)newOperator withValue:(NSString *)newValue
 {
 	if ((self = [super init]) != nil)
 	{
-		[self setField:newField];
-		[self setOperator:newOperator];
-		[self setValue:newValue];
+		self.field = newField;
+		self.operator = newOperator;
+		self.value = newValue;
 	}
 	return self;
 }
@@ -82,9 +81,9 @@
 	NSArray * operatorArray = [Criteria arrayOfOperators];
 	NSUInteger  index;
 	
-	for (index = 0; index < [operatorArray count]; ++index)
+	for (index = 0; index < operatorArray.count; ++index)
 	{
-		CriteriaOperator op = [[operatorArray objectAtIndex:index] intValue];
+		CriteriaOperator op = [operatorArray[index] integerValue];
 		if ([string isEqualToString:[Criteria stringFromOperator:op]])
 			return op;
 	}
@@ -96,22 +95,22 @@
  */
 +(NSArray *)arrayOfOperators
 {
-	return [NSArray arrayWithObjects:
-		[NSNumber numberWithInt:MA_CritOper_Is],
-		[NSNumber numberWithInt:MA_CritOper_IsNot],
-		[NSNumber numberWithInt:MA_CritOper_IsAfter],
-		[NSNumber numberWithInt:MA_CritOper_IsBefore],
-		[NSNumber numberWithInt:MA_CritOper_IsOnOrAfter],
-		[NSNumber numberWithInt:MA_CritOper_IsOnOrBefore],
-		[NSNumber numberWithInt:MA_CritOper_Contains],
-		[NSNumber numberWithInt:MA_CritOper_NotContains],
-		[NSNumber numberWithInt:MA_CritOper_IsLessThan],
-		[NSNumber numberWithInt:MA_CritOper_IsLessThanOrEqual],
-		[NSNumber numberWithInt:MA_CritOper_IsGreaterThan],
-		[NSNumber numberWithInt:MA_CritOper_IsGreaterThanOrEqual],
-		[NSNumber numberWithInt:MA_CritOper_Under],
-		[NSNumber numberWithInt:MA_CritOper_NotUnder],
-		nil];
+	return @[
+			 @(MA_CritOper_Is),
+			 @(MA_CritOper_IsNot),
+			 @(MA_CritOper_IsAfter),
+			 @(MA_CritOper_IsBefore),
+			 @(MA_CritOper_IsOnOrAfter),
+			 @(MA_CritOper_IsOnOrBefore),
+			 @(MA_CritOper_Contains),
+			 @(MA_CritOper_NotContains),
+			 @(MA_CritOper_IsLessThan),
+			 @(MA_CritOper_IsLessThanOrEqual),
+			 @(MA_CritOper_IsGreaterThan),
+			 @(MA_CritOper_IsGreaterThanOrEqual),
+			 @(MA_CritOper_Under),
+			 @(MA_CritOper_NotUnder)
+			 ];
 }
 
 /* setField
@@ -119,8 +118,6 @@
  */
 -(void)setField:(NSString *)newField
 {
-	[newField retain];
-	[field release];
 	field = newField;
 }
 
@@ -143,8 +140,6 @@
  */
 -(void)setValue:(NSString *)newValue
 {
-	[newValue retain];
-	[value release];
 	value = newValue;
 }
 
@@ -172,25 +167,15 @@
 	return value;
 }
 
-/* dealloc
- * Clean up and release resources.
- */
--(void)dealloc
-{
-	[value release];
-	value=nil;
-	[field release];
-	field=nil;
-	[super dealloc];
-}
 @end
+
 
 @implementation CriteriaTree
 
 /* init
  * Initialise an empty CriteriaTree
  */
--(id)init
+-(instancetype)init
 {
 	return [self initWithString:@""];
 }
@@ -199,44 +184,41 @@
  * Initialises an criteria tree object with the specified string. The caller is responsible for
  * releasing the tree.
  */
--(id)initWithString:(NSString *)string
+-(instancetype)initWithString:(NSString *)string
 {
 	if ((self = [super init]) != nil)
 	{
 		criteriaTree = [[NSMutableArray alloc] init];
 		condition = MA_CritCondition_All;
-		const char * utf8String = [string UTF8String];
-		NSData * data = [NSData dataWithBytes:utf8String length:strlen(utf8String)];
-		XMLParser * xmlTree = [[XMLParser alloc] init];
-		if ([data length] > 0 && [xmlTree setData:data])
+        NSError *error = nil;
+        NSXMLDocument *criteriaTreeDoc = [[NSXMLDocument alloc]
+                                          initWithXMLString:string
+                                          options:NSXMLNodeOptionsNone
+                                          error:&error];
+        
+		if (!error)
 		{
-			XMLParser * criteriaGroup = [xmlTree treeByName:@"criteriagroup"];
-			int index = 0;
-
-			// For backward compatibility, the absence of the condition attribute
-			// assumes that we're matching ALL conditions.
-			condition = [CriteriaTree conditionFromString:[criteriaGroup valueOfAttribute:@"condition"]];
-			if (condition == MA_CritCondition_Invalid)
-				condition = MA_CritCondition_All;
-
-			if (criteriaGroup != nil)
-				while (index < [criteriaGroup countOfChildren])
-				{
-					XMLParser * subTree = [criteriaGroup treeByIndex:index];
-					NSString * fieldName = [subTree valueOfAttribute:@"field"];
-					NSString * operator = [[subTree treeByName:@"operator"] valueOfElement];
-					NSString * value = [[subTree treeByName:@"value"] valueOfElement];
-
-					Criteria * newCriteria = [[Criteria alloc] init];
-					[newCriteria setField:fieldName];
-					[newCriteria setOperator:[operator intValue]];
-					[newCriteria setValue:value];
-					[self addCriteria:newCriteria];
-					[newCriteria release];
-					++index;
-				}
-		}
-		[xmlTree release];
+            NSArray *criteriaArray = [criteriaTreeDoc.rootElement elementsForName:@"criteria"];
+            condition = [CriteriaTree conditionFromString:[criteriaTreeDoc.rootElement attributeForName:@"condition"].stringValue];
+            if (condition == MA_CritCondition_Invalid) {
+                // For backward compatibility, the absence of the condition attribute
+                // assumes that we're matching ALL conditions.
+                condition = MA_CritCondition_All;
+            }
+            
+            for (NSXMLElement *criteriaElement in criteriaArray) {
+                NSString *fieldname = [criteriaElement attributeForName:@"field"].stringValue;
+                NSString *operator = [criteriaElement elementsForName:@"operator"].firstObject.stringValue;
+                NSString *value = [criteriaElement elementsForName:@"value"].firstObject.stringValue;
+                
+                Criteria *newCriteria = [[Criteria alloc]
+                                         initWithField:fieldname
+                                         withOperator:operator.integerValue
+                                         withValue:value];
+                [self addCriteria:newCriteria];
+                
+            }
+        }
 	}
 	return self;
 }
@@ -250,9 +232,9 @@
 {
 	if (string != nil)
 	{
-		if ([[string lowercaseString] isEqualToString:@"any"])
+		if ([string.lowercaseString isEqualToString:@"any"])
 			return MA_CritCondition_Any;
-		if ([[string lowercaseString] isEqualToString:@"all"])
+		if ([string.lowercaseString isEqualToString:@"all"])
 			return MA_CritCondition_All;
 	}
 	return MA_CritCondition_Invalid;
@@ -311,33 +293,35 @@
  */
 -(NSString *)string
 {
-	XMLParser * newTree = [[XMLParser alloc] initWithEmptyTree];
-	NSDictionary * conditionDict = [NSDictionary dictionaryWithObject:[CriteriaTree conditionToString:condition] forKey:@"condition"];
-	XMLParser * groupTree = [newTree addTree:@"criteriagroup" withAttributes:conditionDict];
-	NSUInteger  index;
-	
-	for (index = 0; index < [criteriaTree count]; ++index)
-	{
-		Criteria * criteria = [criteriaTree objectAtIndex:index];
-		NSDictionary * criteriaDict = [NSDictionary dictionaryWithObject:[criteria field] forKey:@"field"];
-		XMLParser * oneCriteriaTree = [groupTree addTree:@"criteria" withAttributes:criteriaDict];
-
-		[oneCriteriaTree addTree:@"operator" withElement:[NSString stringWithFormat:@"%d", [criteria operator]]];
-		[oneCriteriaTree addTree:@"value" withElement:[criteria value]];
-	}
-	
-	NSString * criteriaString = [newTree xmlForTree];
-	[newTree release];
-	return criteriaString;
+    NSXMLDocument *criteriaDoc = [NSXMLDocument document];
+    [criteriaDoc setStandalone:YES];
+    criteriaDoc.characterEncoding = @"UTF-8";
+    criteriaDoc.version = @"1.0";
+    
+    NSDictionary * conditionDict = @{@"condition": [CriteriaTree conditionToString:condition]};
+    NSXMLElement *criteriaGroup = [[NSXMLElement alloc] initWithName:@"criteriagroup"];
+    [criteriaGroup setAttributesWithDictionary:conditionDict];
+    
+    for (Criteria *criteria in criteriaTree) {
+        NSDictionary * criteriaDict = @{@"field": criteria.field};
+        NSXMLElement *criteriaElement = [[NSXMLElement alloc] initWithName:@"criteria"];
+        [criteriaElement setAttributesWithDictionary:criteriaDict];
+        NSXMLElement *operatorElement = [[NSXMLElement alloc]
+                                        initWithName:@"operator"
+                                        stringValue:[NSString stringWithFormat:
+                                                     @"%lu", (unsigned long)criteria.operator]];
+        NSXMLElement *valueElement = [[NSXMLElement alloc]
+                                        initWithName:@"value"
+                                        stringValue:criteria.value];
+        
+        [criteriaGroup addChild:criteriaElement];
+        [criteriaElement addChild:operatorElement];
+        [criteriaElement addChild:valueElement];
+        
+    }
+    [criteriaDoc addChild:criteriaGroup];
+    
+	return criteriaDoc.XMLString;
 }
 
-/* dealloc
- * Clean up and release resources.
- */
--(void)dealloc
-{
-	[criteriaTree release];
-	criteriaTree=nil;
-	[super dealloc];
-}
 @end

@@ -31,7 +31,7 @@
 /* init
  * Initialise an instance of ourselves with the specified database
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
@@ -48,27 +48,27 @@
 	if (credentialsWindow == nil)
 	{
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextDidChange:) name:NSControlTextDidChangeNotification object:userName];
-		[NSBundle loadNibNamed:@"FeedCredentials" owner:self];
+		NSArray * objects;
+		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"FeedCredentials" owner:self topLevelObjects:&objects];
+		self.topObjects = objects;
 	}
 
 	// Retain the folder as we need it to update the
 	// username and/or password.
-	[aFolder retain];
-	[folder release];
 	folder = aFolder;
 
 	// Show the feed URL in the prompt so the user knows which site credentials are being
 	// requested. (We don't use [folder name] here as that is likely to be "Untitled Folder" mostly).
-	NSURL * secureURL = [NSURL URLWithString:[folder feedURL]];
-	NSString * prompt = [NSString stringWithFormat:NSLocalizedString(@"Credentials Prompt", nil), [secureURL host]];
-	[promptString setStringValue:prompt];
+	NSURL * secureURL = [NSURL URLWithString:folder.feedURL];
+	NSString * prompt = [NSString stringWithFormat:NSLocalizedString(@"Credentials Prompt", nil), secureURL.host];
+	promptString.stringValue = prompt;
 
 	// Fill out any existing values.
-	[userName setStringValue:[folder username]];
-	[password setStringValue:[folder password]];
+	userName.stringValue = folder.username;
+	password.stringValue = folder.password;
 	
 	// Set the focus
-	[credentialsWindow makeFirstResponder:([[folder username] isBlank]) ? userName : password];
+	[credentialsWindow makeFirstResponder:(folder.username.blank) ? userName : password];
 
 	[self enableOKButton];
 	[NSApp beginSheet:credentialsWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
@@ -90,12 +90,12 @@
  */
 -(IBAction)doOKButton:(id)sender
 {
-	NSString * usernameString = [[userName stringValue] trim];
-	NSString * passwordString = [password stringValue];
+	NSString * usernameString = (userName.stringValue).trim;
+	NSString * passwordString = password.stringValue;
 
-	Database * db = [Database sharedDatabase];
-	[db setFolderUsername:[folder itemId] newUsername:usernameString];
-	[folder setPassword:passwordString];
+	Database * db = [Database sharedManager];
+	[db setFolderUsername:folder.itemId newUsername:usernameString];
+	folder.password = passwordString;
 	
 	[NSApp endSheet:credentialsWindow];
 	[credentialsWindow orderOut:self];
@@ -118,7 +118,7 @@
  */
 -(void)enableOKButton
 {
-	[okButton setEnabled:![[userName stringValue] isBlank]];
+	okButton.enabled = !(userName.stringValue).blank;
 }
 
 /* dealloc
@@ -127,8 +127,5 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[folder release];
-	folder=nil;
-	[super dealloc];
 }
 @end

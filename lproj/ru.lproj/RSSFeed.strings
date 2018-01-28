@@ -1,33 +1,33 @@
 /* NSButton (Cancel) : <title:Cancel> (oid:54) */
-"Cancel" = "Cancel";
+"Cancel" = "Отмена";
 
 /* NSTextField (Create a new subscription ) : <title:Create a new subscription
 > (oid:64) */
 
-"Create a new subscription\n" = "Create a new subscription\n";
+"Create a new subscription\n" = "Создание новой подписки\n";
 
 /* NSTextField (Edit subscription) : <title:Edit subscription> (oid:67) */
-"Edit subscription" = "Edit subscription";
+"Edit subscription" = "Изменение подписки";
 
 /* NSTextField (Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.) : <title:Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.> (oid:65) */
-"Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source." = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.";
+"Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source." = "Введите ссылку на канал новостей или выберите канал из списка Источник для добавления ссылки с заданного источника.";
 
 /* NSMenu : <title:OtherViews> (oid:44) */
 "OtherViews" = "OtherViews";
 
 /* NSPanel (RSS Feed) : <title:RSS Feed> (oid:49) */
-"RSS Feed" = "RSS Feed";
+"RSS Feed" = "RSS лента";
 
 /* NSButton (Save) : <title:Save> (oid:53) */
-"Save" = "Save";
+"Save" = "Сохранить";
 
 /* NSTextField (Source: ) : <title:Source:
 > (oid:40) */
 
-"Source:\n" = "Source:\n";
+"Source:\n" = "Источник:\n";
 
 /* NSButton (Subscribe) : <title:Subscribe> (oid:10) */
-"Subscribe" = "Subscribe";
+"Subscribe" = "Подписаться";
 
 /* NSMenuItem : <title:URL> (oid:45) */
 "URL" = "URL";

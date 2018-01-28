@@ -28,7 +28,7 @@
 /* init
  * Create an "empty" search method that will not do anything on its own.
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
@@ -44,7 +44,7 @@
  * of doing different things with searches according to the plugin definition. 
  * At the moment, however, we only ever do a normal web-search.*/
 
--(id)initWithDictionary:(NSDictionary *)dict 
+-(instancetype)initWithDictionary:(NSDictionary *)dict 
 {
 	if ((self = [super init]) != nil)
 	{
@@ -64,12 +64,12 @@
 	[coder encodeValueOfObjCType:@encode(SEL) at:&handler];
 }
 
-- (id)initWithCoder:(NSCoder *)coder;
+- (instancetype)initWithCoder:(NSCoder *)coder;
 {
 	if ((self = [super init]) != nil)
     {
-		[self setFriendlyName:[coder decodeObjectForKey:@"friendlyName"]];
-		[self setSearchQueryString:[coder decodeObjectForKey:@"searchQueryString"]];
+		self.friendlyName = [coder decodeObjectForKey:@"friendlyName"];
+		self.searchQueryString = [coder decodeObjectForKey:@"searchQueryString"];
 		[coder decodeValueOfObjCType:@encode(SEL) at:&handler];
     }   
     return self;
@@ -84,7 +84,7 @@
  */
 +(NSArray *)builtInSearchMethods
 {
-	return [NSArray arrayWithObjects: [SearchMethod searchAllArticlesMethod], [SearchMethod searchCurrentWebPageMethod], nil];
+	return @[[SearchMethod searchAllArticlesMethod], [SearchMethod searchCurrentWebPageMethod]];
 }
 
 /* searchAllArticlesMethod
@@ -93,10 +93,10 @@
 +(SearchMethod *)searchAllArticlesMethod
 {
 	SearchMethod * method = [[SearchMethod alloc] init];
-	[method setFriendlyName:@"Search all articles"];
-	[method setHandler:@selector(performAllArticlesSearch)];
+	method.friendlyName = @"Search all articles";
+	method.handler = @selector(performAllArticlesSearch);
 	
-	return [method autorelease]; 
+	return method; 
 }
 
 /* searchCurrentWebPageMethod
@@ -106,10 +106,10 @@
 +(SearchMethod *)searchCurrentWebPageMethod
 {
 	SearchMethod * method = [[SearchMethod alloc] init];
-	[method setFriendlyName:@"Search current web page"];
-	[method setHandler:@selector(performWebPageSearch)];
+	method.friendlyName = @"Search current web page";
+	method.handler = @selector(performWebPageSearch);
 	
-	return [method autorelease]; 
+	return method; 
 }	
 
 # pragma mark Instance Methods
@@ -120,7 +120,7 @@
 - (NSURL *)queryURLforSearchString:(NSString *)searchString;
 {
 	NSURL * queryURL;
-	NSString * temp = [[self searchQueryString] stringByReplacingOccurrencesOfString:@"$SearchTerm$" withString:searchString];
+	NSString * temp = [self.searchQueryString stringByReplacingOccurrencesOfString:@"$SearchTerm$" withString:searchString];
 	queryURL = cleanedUpAndEscapedUrlFromString(temp);
     return queryURL;
 }
@@ -132,8 +132,7 @@
  */
 -(void)setFriendlyName:(NSString *) newName 
 { 
-	[friendlyName release]; 
-	friendlyName = [newName retain]; 
+	friendlyName = newName; 
 }
 
 /* friendlyName
@@ -149,8 +148,7 @@
  */
 -(void)setSearchQueryString:(NSString *) newQueryString 
 { 
-	[searchQueryString release]; 
-	searchQueryString = [newQueryString retain]; 
+	searchQueryString = newQueryString; 
 }
 
 /* searchQueryString
@@ -177,15 +175,6 @@
 -(SEL)handler 
 { 
 	return handler; 
-}
-
--(void)dealloc 
-{ 
-	[friendlyName release]; 
-	friendlyName=nil;
-	[searchQueryString release]; 
-	searchQueryString=nil;
-	[super dealloc]; 
 }
 
 @end

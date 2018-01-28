@@ -25,6 +25,5 @@
 }
 
 // Accessor functions
--(void)setHasSecureImage:(BOOL)flag;
--(BOOL)hasSecureImage;
+@property (nonatomic) BOOL hasSecureImage;
 @end

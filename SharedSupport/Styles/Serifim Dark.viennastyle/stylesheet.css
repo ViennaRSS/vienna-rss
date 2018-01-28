@@ -132,6 +132,7 @@ ul {
   max-width: 100%;
   clear: both;
   margin-bottom: 1em;
+  height: auto !important;
 }
 
 .articleBody img {
