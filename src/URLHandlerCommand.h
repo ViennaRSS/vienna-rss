@@ -18,9 +18,8 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Foundation;
 
-@interface ViennaScriptCommand : NSScriptCommand {
-}
+@interface ViennaScriptCommand : NSScriptCommand
 
 @end

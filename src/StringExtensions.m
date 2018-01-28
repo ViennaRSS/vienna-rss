@@ -19,8 +19,6 @@
 //
 
 #import "StringExtensions.h"
-#import "ArrayExtensions.h"
-#import <WebKit/WebKit.h>
 
 @implementation NSMutableString (MutableStringExtensions)
 
@@ -50,26 +48,26 @@
 	
 	srchRange.location = 0;
 	srchRange.length = textLength;
-	while ((srchRange = [self rangeOfString:@"<img" options:NSLiteralSearch range:srchRange]), srchRange.location != NSNotFound)
-	{
-		srchRange.length = textLength - srchRange.location;
-		NSRange srcRange = [self rangeOfString:@"src=\"" options:NSLiteralSearch range:srchRange];
-		if (srcRange.location != NSNotFound)
-		{
-			// Find the src parameter range.
-			NSUInteger index = srcRange.location + srcRange.length;
-			srcRange.location += srcRange.length;
-			srcRange.length = 0;
-			while (index < textLength && [self characterAtIndex:index] != '"')
-			{
-				++index;
-				++srcRange.length;
-			}
-			
-			// Now extract the source parameter
-			NSString * srcPath = [self substringWithRange:srcRange];
-			if (![srcPath hasPrefix:@"http:"] && ![srcPath hasPrefix:@"https:"] && ![srcPath hasPrefix:@"data:"])
-			{
+    while ((void)((srchRange = [self rangeOfString:@"<img" options:NSLiteralSearch range:srchRange])), srchRange.location != NSNotFound)
+    {
+        srchRange.length = textLength - srchRange.location;
+        NSRange srcRange = [self rangeOfString:@"src=\"" options:NSLiteralSearch range:srchRange];
+        if (srcRange.location != NSNotFound)
+        {
+            // Find the src parameter range.
+            NSUInteger index = srcRange.location + srcRange.length;
+            srcRange.location += srcRange.length;
+            srcRange.length = 0;
+            while (index < textLength && [self characterAtIndex:index] != '"')
+            {
+                ++index;
+                ++srcRange.length;
+            }
+            
+            // Now extract the source parameter
+            NSString * srcPath = [self substringWithRange:srcRange];
+            if (![srcPath hasPrefix:@"http:"] && ![srcPath hasPrefix:@"https:"] && ![srcPath hasPrefix:@"data:"])
+            {
                 NSURL * imgURL = [NSURL URLWithString:srcPath relativeToURL:imgBaseURL];
                 if (imgURL != nil)
                 {
@@ -77,15 +75,15 @@
                     [self replaceCharactersInRange:srcRange withString:srcPath];
                     textLength = self.length;
                 }
-			}
-			
-			// Start searching again from beyond the URL
-			srchRange.location = srcRange.location + srcPath.length;
-		}
-		else
-			++srchRange.location;
-		srchRange.length = textLength - srchRange.location;
-	}
+            }
+            
+            // Start searching again from beyond the URL
+            srchRange.location = srcRange.location + srcPath.length;
+        }
+        else
+            ++srchRange.location;
+        srchRange.length = textLength - srchRange.location;
+    }
 }
 
 /* fixupRelativeAnchorTags
@@ -104,7 +102,7 @@
 
 	srchRange.location = 0;
 	srchRange.length = textLength;
-	while ((srchRange = [self rangeOfString:@"<a " options:NSLiteralSearch range:srchRange]), srchRange.location != NSNotFound)
+    while ((void)((srchRange = [self rangeOfString:@"<a " options:NSLiteralSearch range:srchRange])), srchRange.location != NSNotFound)
 	{
 		srchRange.length = textLength - srchRange.location;
 		NSRange srcRange = [self rangeOfString:@"href=\"" options:NSLiteralSearch range:srchRange];
@@ -158,7 +156,7 @@
 
 	srchRange.location = 0;
 	srchRange.length = textLength;
-	while ((srchRange = [self rangeOfString:@"<iframe" options:NSLiteralSearch range:srchRange]), srchRange.location != NSNotFound)
+    while ((void)((srchRange = [self rangeOfString:@"<iframe" options:NSLiteralSearch range:srchRange])), srchRange.location != NSNotFound)
 	{
 		srchRange.length = textLength - srchRange.location;
 		NSRange srcRange = [self rangeOfString:@"src=\"" options:NSLiteralSearch range:srchRange];
@@ -400,42 +398,6 @@ static NSMutableDictionary * entityMap = nil;
 		++indexOfChr;
 	}
 	return hasNonEmptyChars ? [self substringWithRange:NSMakeRange(indexOfFirstChr, 1u + (indexOfLastChr - indexOfFirstChr))] : @"";
-}
-
-/* stringByDeletingLastURLComponent
- * Returns a string with the last URL component removed. It is similar to stringByDeletingLastPathComponent
- * but it doesn't attempt to interpret the current string as a file path and 'fixup' slashes.
- */
--(NSString *)stringByDeletingLastURLComponent
-{
-	NSInteger index = self.length - 1;
-	NSInteger beginning = 0;
-
-	if ([self hasPrefix:@"http://"])
-		beginning = 6;
-	if ([self hasPrefix:@"https://"])
-		beginning = 7;
-	if (index > beginning && [self characterAtIndex:index] == '/')
-		--index;
-	while (index >= beginning && [self characterAtIndex:index] != '/')
-		--index;
-	if (index <= beginning)
-		return self;
-	return [self substringWithRange:NSMakeRange(0, index)];
-}
-
-/* lastURLComponent
- * Returns a string with the last URL component.
- */
--(NSString *)lastURLComponent
-{
-	NSInteger index = self.length - 1;
-
-	while (index >= 0 && [self characterAtIndex:index] != '/')
-		--index;
-	if (index <= 0)
-		return self;
-	return [self substringWithRange:NSMakeRange(index+1, self.length -1-index)];
 }
 
 /* stringByAppendingURLComponent

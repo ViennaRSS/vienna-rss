@@ -1,0 +1,24 @@
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "102"; */
+"102.title" = "Annulla";
+
+/* Class = "NSButtonCell"; title = "Subscribe"; ObjectID = "103"; */
+"103.title" = "Iscriviti";
+
+/* Class = "NSTextFieldCell"; title = "Source:"; ObjectID = "104"; */
+"104.title" = "Sorgente:";
+
+/* Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106"; */
+"106.title" = "Crea una nuova iscrizione RSS";
+
+/* Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107"; */
+"107.title" = "Inserisci il collegamento al feed RSS in basso. Oppure scegli dalla lista Sorgente ed inserisci il nome breve per il feed RSS fornito da tale sorgente.";
+
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "111"; */
+"111.title" = "Registra";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "112"; */
+"112.title" = "Annulla";
+
+/* Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114"; */
+"114.title" = "Modifica iscrizione";
+

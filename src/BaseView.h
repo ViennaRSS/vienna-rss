@@ -18,7 +18,9 @@
 //  limitations under the License.
 //
 
-@class WebView;
+@import Cocoa;
+@import WebKit;
+
 @protocol BaseView
 @required
 	-(void)performFindPanelAction:(NSInteger)tag;

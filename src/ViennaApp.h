@@ -18,10 +18,16 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "Folder.h"
+@import Cocoa;
+
+@class Folder;
+@class Article;
 
 @interface ViennaApp : NSApplication
+
+@property (nonatomic) IBOutlet NSMenu *articleMenu;
+@property (nonatomic) IBOutlet NSMenu *filterMenu;
+@property (nonatomic) IBOutlet NSMenu *styleMenu;
 
 // Refresh commands
 -(id)handleRefreshAllSubscriptions:(NSScriptCommand *)cmd;

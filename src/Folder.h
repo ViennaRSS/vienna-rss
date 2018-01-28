@@ -18,71 +18,59 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "Article.h"
+@import Cocoa;
 
-// Folder types
-//   MA_Root_Folder = the abstract root folder
-//   MA_Smart_Folder = the articles are dynamically collected by a custom query
-//   MA_Group_Folder = a folder used to group other folders
-//   MA_RSS_Folder = folder contains RSS articles
-//   MA_Trash_Folder - a folder that contains deleted articles
-//   MA_Search_Folder - a folder that contains a search result
-//
-#define MA_Root_Folder			-1
-#define MA_Smart_Folder			2
-#define MA_Group_Folder			3
-#define MA_RSS_Folder			4
-#define MA_Trash_Folder			5
-#define MA_Search_Folder		6
-#define MA_GoogleReader_Folder	7
+@class Article;
 
-// Macros to simplify getting folder types
-#define FolderType(f)			([(f) type])
-#define IsSmartFolder(f)		(([(f) type]) == MA_Smart_Folder)
-#define IsRSSFolder(f)			(([(f) type]) == MA_RSS_Folder)
-#define IsGroupFolder(f)		(([(f) type]) == MA_Group_Folder)
-#define IsTrashFolder(f)		(([(f) type]) == MA_Trash_Folder)
-#define IsSearchFolder(f)		(([(f) type]) == MA_Search_Folder)
-#define IsGoogleReaderFolder(f)	(([(f) type]) == MA_GoogleReader_Folder)
-#define IsSameFolderType(f,g)	(([(f) type]) == ([(g) type]))
+/**
+ Folder types
+ 
+ - VNAFolderTypeRoot: the abstract root folder
+ - VNAFolderTypeSmart: the articles are dynamically collected by a custom query
+ - VNAFolderTypeGroup: a folder used to group other folders
+ - VNAFolderTypeRSS: a folder that contains RSS articles
+ - VNAFolderTypeTrash: a folder that contains deleted articles
+ - VNAFolderTypeSearch: a folder that contains a search result
+ - VNAFolderTypeOpenReader: a folder that is on an OpenReader server
+ */
+typedef NS_ENUM(NSInteger, VNAFolderType) {
+    VNAFolderTypeRoot       = -1,
+    VNAFolderTypeSmart      = 2,
+    VNAFolderTypeGroup      = 3,
+    VNAFolderTypeRSS        = 4,
+    VNAFolderTypeTrash      = 5,
+    VNAFolderTypeSearch     = 6,
+    VNAFolderTypeOpenReader = 7
+};
 
-// Folder flags
-// (These must be bitmask values!)
-//   MA_FFlag_CheckForImage = asks the refresh code to update the folder image
-//
-#define MA_FFlag_CheckForImage		1
-#define MA_FFlag_NeedCredentials	2
-#define MA_FFlag_Error				4
-#define MA_FFlag_Unsubscribed		8
-#define MA_FFlag_Updating			16
-#define MA_FFlag_LoadFullHTML		32
-
-// Macros for testing folder flags
-#define IsUnsubscribed(f)		([(f) flags] & MA_FFlag_Unsubscribed)
-#define LoadsFullHTML(f)		([(f) flags] & MA_FFlag_LoadFullHTML)
-#define IsUpdating(f)			([(f) nonPersistedFlags] & MA_FFlag_Updating)
-#define IsError(f)				([(f) nonPersistedFlags] & MA_FFlag_Error)
+/**
+ Folder flags
+ 
+ - VNAFolderFlagCheckForImage: asks the refresh code to update the folder image
+ - VNAFolderFlagNeedCredentials: VNAFolderFlagNeedCredentials description
+ - VNAFolderFlagError: VNAFolderFlagError description
+ - VNAFolderFlagUnsubscribed: VNAFolderFlagUnsubscribed description
+ - VNAFolderFlagUpdating: VNAFolderFlagUpdating description
+ - VNAFolderFlagLoadFullHTML: VNAFolderFlagLoadFullHTML description
+ */
+typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
+    VNAFolderFlagCheckForImage   = 1 << 0,
+    VNAFolderFlagNeedCredentials = 1 << 1,
+    VNAFolderFlagError           = 1 << 2,
+    VNAFolderFlagUnsubscribed    = 1 << 3,
+    VNAFolderFlagUpdating        = 1 << 4,
+    VNAFolderFlagLoadFullHTML    = 1 << 5
+};
 
 @interface Folder : NSObject <NSCacheDelegate> {
-	NSInteger itemId;
-	NSInteger parentId;
-	NSInteger nextSiblingId;
-	NSInteger firstChildId;
 	NSInteger unreadCount;
-	NSInteger type;
 	NSInteger childUnreadCount;
-	NSUInteger flags;
-	NSUInteger nonPersistedFlags;
-	BOOL isCached;
-	BOOL hasPassword;
-	BOOL containsBodies;
-	NSDate * lastUpdate;
-	NSMutableDictionary * attributes;
+    VNAFolderFlag nonPersistedFlags;
+    VNAFolderFlag flags;
 }
 
 // Initialisation functions
--(instancetype)initWithId:(NSInteger)itemId parentId:(NSInteger)parentId name:(NSString *)name type:(NSInteger)type /*NS_DESIGNATED_INITIALIZER*/;
+-(instancetype)initWithId:(NSInteger)itemId parentId:(NSInteger)parentId name:(NSString *)name type:(VNAFolderType)type /*NS_DESIGNATED_INITIALIZER*/;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *feedDescription;
 @property (nonatomic, copy) NSString *homePage;
@@ -91,31 +79,33 @@
 @property (nonatomic, copy) NSString *lastUpdateString;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *password;
--(NSArray *)articles;
--(NSArray *)articlesWithFilter:(NSString *)fstring;
-@property (nonatomic, readonly) NSInteger parentId;
+-(NSArray<Article *> *)articles;
+-(NSArray<Article *> *)articlesWithFilter:(NSString *)filterString;
 @property (nonatomic, readonly) NSInteger itemId;
+@property (nonatomic) NSInteger parentId;
 @property (nonatomic) NSInteger nextSiblingId;
 @property (nonatomic) NSInteger firstChildId;
-@property (nonatomic, readonly) NSInteger countOfCachedArticles;
-@property (nonatomic) NSInteger unreadCount;
-@property (nonatomic) NSInteger type;
-@property (nonatomic, readonly) NSUInteger nonPersistedFlags;
-@property (nonatomic, readonly) NSUInteger flags;
+@property (atomic, readonly) NSInteger countOfCachedArticles;
+@property (atomic) NSInteger unreadCount;
+@property (nonatomic) VNAFolderType type;
+@property (nonatomic, readonly) VNAFolderFlag nonPersistedFlags;
+@property (nonatomic, readonly) VNAFolderFlag flags;
 @property (nonatomic, copy) NSImage *image;
 @property (nonatomic, readonly) BOOL hasCachedImage;
 -(NSImage *)standardImage;
-@property (nonatomic) NSInteger childUnreadCount;
+@property (atomic) NSInteger childUnreadCount;
 -(void)clearCache;
 @property (nonatomic, getter=isGroupFolder, readonly) BOOL groupFolder;
 @property (nonatomic, getter=isSmartFolder, readonly) BOOL smartFolder;
 @property (nonatomic, getter=isRSSFolder, readonly) BOOL RSSFolder;
 @property (nonatomic, readonly) BOOL loadsFullHTML;
--(void)setParent:(NSInteger)newParent;
--(void)setFlag:(NSUInteger)flagToSet;
--(void)clearFlag:(NSUInteger)flagToClear;
--(void)setNonPersistedFlag:(NSUInteger)flagToSet;
--(void)clearNonPersistedFlag:(NSUInteger)flagToClear;
+@property (nonatomic, getter=isUnsubscribed, readonly) BOOL unsubscribed;
+@property (nonatomic, getter=isUpdating, readonly) BOOL updating;
+@property (nonatomic, getter=isError, readonly) BOOL error;
+-(void)setFlag:(VNAFolderFlag)flagToSet;
+-(void)clearFlag:(VNAFolderFlag)flagToClear;
+-(void)setNonPersistedFlag:(VNAFolderFlag)flagToSet;
+-(void)clearNonPersistedFlag:(VNAFolderFlag)flagToClear;
 -(NSUInteger)indexOfArticle:(Article *)article;
 -(Article *)articleFromGuid:(NSString *)guid;
 -(BOOL)createArticle:(Article *)article guidHistory:(NSArray *)guidHistory;
@@ -126,5 +116,4 @@
 -(NSComparisonResult)folderNameCompare:(Folder *)otherObject;
 -(NSComparisonResult)folderIDCompare:(Folder *)otherObject;
 @property (nonatomic, readonly, copy) NSString *feedSourceFilePath;
-@property (nonatomic, readonly) BOOL hasFeedSource;
 @end

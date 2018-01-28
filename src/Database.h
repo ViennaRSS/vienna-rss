@@ -3,7 +3,7 @@
 //  Vienna
 //
 //  Created by Steve on Tue Feb 03 2004.
-//  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
+//  Copyright (c) 2004-2017 Steve Palmer and Vienna contributors. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -18,31 +18,23 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "FMDB.h"
-#import "Folder.h"
-#import "Field.h"
-#import "Criteria.h"
+@import Foundation;
 
-@interface Database : NSObject {
-	BOOL initializedfoldersDict;
-	BOOL initializedSmartfoldersDict;
-	BOOL readOnly;
-	NSInteger countOfUnread;
-	NSString * searchString;
-	NSMutableArray * fieldsOrdered;
-	NSMutableDictionary * fieldsByName;
-	NSMutableDictionary * fieldsByTitle;
-	NSMutableDictionary * foldersDict;
-	NSMutableDictionary * smartfoldersDict;
-	Folder * trashFolder;
-	Folder * searchFolder;
-    FMDatabaseQueue *databaseQueue;
-}
+@class FMDatabaseQueue;
+@class Folder;
+@class Field;
+@class CriteriaTree;
+@class Article;
+
+@interface Database : NSObject
+
+extern NSNotificationName const databaseWillDeleteFolderNotification;
+extern NSNotificationName const databaseDidDeleteFolderNotification;
 
 @property(nonatomic, strong) Folder * trashFolder;
 @property(nonatomic, strong) Folder * searchFolder;
 @property(nonatomic, strong) FMDatabaseQueue * databaseQueue;
+@property (copy, nonatomic) NSString *searchString;
 
 // General database functions
 - (instancetype)initWithDatabaseAtPath:(NSString *)dbPath /*NS_DESIGNATED_INITIALIZER*/;
@@ -61,7 +53,6 @@
 -(Field *)fieldByName:(NSString *)name;
 
 // Folder functions
--(void)initFolderArray;
 @property (nonatomic, readonly) NSInteger firstFolderId;
 @property (nonatomic, readonly) NSInteger trashFolderId;
 @property (nonatomic, readonly) NSInteger searchFolderId;
@@ -97,9 +88,6 @@
 
 // Open Reader folder functions
 -(NSInteger)addGoogleReaderFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)url;
-
-// Search folder functions
--(void)setSearchString:(NSString *)newSearchString;
 
 // Smart folder functions
 -(void)initSmartfoldersDict;

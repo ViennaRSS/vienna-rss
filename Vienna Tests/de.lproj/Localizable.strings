@@ -1,0 +1,144 @@
+/* No comment provided by engineer. */
+"(No title)" = "(Kein Betreff)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(Unbenannter Feed)";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Autor";
+
+/* Title of a button on an alert */
+"Cancel" = "Abbrechen";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Beim Versuch den Ordner '%@' zu erstellen ist ein Fehler aufgetreten. Bitte überprüfen Sie die Dateizugriffsrechte des angegebenen Pfades.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Beim Versuch den Datenbankordner zu erstellen ist ein Fehler aufgetreten.";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "Die Datenbankdatei (%@) konnte nicht geöffnet werden. Sie ist möglicherweise beschädigt oder unerreichbar. Bitte löschen oder benennen Sie die Datenbankdatei um und starten Vienna erneut.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Vienna war es nicht möglich die Datenbank zu öffnen";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Datenbank-Aktualisierung";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Datum";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Gelöscht";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "Anhang URL";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Markiert";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Ordner";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Anhang";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Überschrift";
+
+/* Data field name visible in menu/article list */
+"Link" = "Link";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Eine neue Vienna Datenbank konnte in '%@' nicht erstellt werden weil der Ordner möglicherweise auf einem Netzwerklaufwerk liegt. Diese Version von Vienna kann nicht mit entfernten Datenbanken genutzt werden. Bitte wählen Sie einen anderen Ordner der auf ihrem lokalem Rechner liegt.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Vienna konnte die Datenbank nicht erstellen";
+
+/* Title of a button on an alert */
+"Locate…" = "Auswählen …";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Markierte Einträge";
+
+/* Title of a button on an alert */
+"Quit Vienna" = "Vienna beenden";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Gelesen";
+
+/* No comment provided by engineer. */
+"Search Results" = "Suchergebnisse";
+
+/* Placeholder title of a search field */
+"Search all articles" = "In allen Artikeln suchen";
+
+/* Placeholder title of a search field */
+"Search current web page" = "Webseite durchsuchen";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Betreff";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Zusammenfassung";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Text";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Einträge von heute";
+
+/* No comment provided by engineer. */
+"Trash" = "Papierkorb";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Ungelesene Artikel";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "Ihre existierende %@ Datei wird von dieser Vienna-Version nicht unterstützt. Löschen oder benennen Sie diese Datei um und starten Sie Vienna erneut.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "Das Datenbankdateiformat hat sich geändert";
+
+/* Title of a button on an alert */
+"Upgrade Database" = "Datenbank aktualisieren";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna muss seine Datenbank auf den neuesten Stand bringen. Dieser Vorgang kann eine Weile dauern. Wir entschuldigen uns für die Wartezeit.";
+
+/* test for a string */
+"contains" = "beinhaltet";
+
+/* test for a string */
+"does not contain" = "beinhaltet nicht";
+
+/* test for a value */
+"is" = "ist";
+
+/* test for a date */
+"is after" = "ist nach";
+
+/* test for a date */
+"is before" = "ist vor";
+
+/* test for a numeric value */
+"is greater than" = "is größer als";
+
+/* test for a numeric value */
+"is greater than or equal to" = "ist größer als oder gleich";
+
+/* test for a numeric value */
+"is less than" = "ist kleiner als";
+
+/* test for a numeric value */
+"is less than or equal to" = "ist kleiner als oder gleich";
+
+/* test for a value */
+"is not" = "ist nicht";
+
+/* test for a date */
+"is on or after" = "ist an oder nach";
+
+/* test for a date */
+"is on or before" = "ist an oder vor";
+

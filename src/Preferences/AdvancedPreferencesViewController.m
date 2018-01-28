@@ -19,7 +19,6 @@
 //
 
 #import "AdvancedPreferencesViewController.h"
-#import "HelperFunctions.h"
 #import "Preferences.h"
 
 @interface AdvancedPreferencesViewController ()
@@ -44,7 +43,7 @@
 
 #pragma mark - MASPreferencesViewController
 
-- (NSString *)identifier {
+- (NSString *)viewIdentifier {
     return @"AdvancedPreferences";
 }
 

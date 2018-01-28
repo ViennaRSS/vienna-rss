@@ -20,9 +20,8 @@
 
 #import "Import.h"
 #import "StringExtensions.h"
-#import "BJRWindowWithToolbar.h"
 #import "Database.h"
-
+#import "Folder.h"
 
 @implementation Import
 
@@ -43,23 +42,28 @@
                                                                     error:&error];
         if (error)
         {
-            NSRunAlertPanel(NSLocalizedString(@"Error importing subscriptions title", nil),
-                            NSLocalizedString(@"Error importing subscriptions body", nil),
-                            NSLocalizedString(@"OK", nil), nil, nil);
+            NSAlert *alert = [NSAlert new];
+            alert.messageText = NSLocalizedString(@"Error importing subscriptions title", nil);
+            alert.informativeText = NSLocalizedString(@"Error importing subscriptions body", nil);
+            [alert runModal];
             hasError = YES;
         }
         else
         {
             NSArray *outlines = [opmlDocument nodesForXPath:@"opml/body/outline" error:nil];
             
-            countImported = [self importSubscriptionGroup:outlines underParent:MA_Root_Folder];
+            countImported = [self importSubscriptionGroup:outlines underParent:VNAFolderTypeRoot];
         }
     }
     
     // Announce how many we successfully imported
     if (!hasError)
     {
-        NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Import Title", nil), NSLocalizedString(@"%d subscriptions successfully imported", nil), NSLocalizedString(@"OK", nil), nil, nil, countImported);
+        NSAlert *alert = [NSAlert new];
+        alert.alertStyle = NSAlertStyleInformational;
+        alert.messageText = NSLocalizedString(@"RSS Subscription Import Title", nil);
+        alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully imported", nil), countImported];
+        [alert runModal];
     }
 }
 
@@ -100,10 +104,10 @@
 			if (feedText != nil)
 			{
 				NSInteger folderId = [dbManager addFolder:parentId afterChild:-1
-                                         folderName:feedText type:MA_Group_Folder
+                                         folderName:feedText type:VNAFolderTypeGroup
                                      canAppendIndex:NO];
                 if (folderId == -1) {
-					folderId = MA_Root_Folder;
+					folderId = VNAFolderTypeRoot;
                 }
 				countImported += [self importSubscriptionGroup:outlineElement.children underParent:folderId];
 			}

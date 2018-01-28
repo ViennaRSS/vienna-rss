@@ -1,0 +1,132 @@
+/* No comment provided by engineer. */
+"(No title)" = "(Başlık Yok)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(İsimsiz Besleme)";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Yazar";
+
+/* Title of a button on an alert */
+"Cancel" = "İptal";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna \"%@\" klasörünü oluşturmaya çalışırken bir hata oluştu. Klasör izinlerinizi kontrol edin.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Üzgünüm, ama Vienna veritabanı klasörünü oluşturamadı";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "(%@) veritabanı bir sebepten ötürü açılamadı. Dosya zarar görmüş ya da ulaşılamıyor olabilir. Lütfen veritabanı dosyasını silin ya da yeniden adlandırın ve ardından Vienna'yı yeniden başlatın.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Üzgünüm ama Vienna veritabanını açamadı";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Veritabanı Güncellemesi";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Tarih";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Silindi";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "Ek URL";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Önemli";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Klasör";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Ek";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Başlıklar";
+
+/* Data field name visible in menu/article list */
+"Link" = "Bağlantı";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Yeni bir Vienna veritabanı \"%@\" konumunda oluşturulamıyor çünkü muhtemelen o klasör ya uzaktaki bir ağa dahil, zira Vienna'nın bu versiyonu ağ üzerindeki klasörler ile çalışacak şekilde tasarlanmamıştır. Bilgisayarınız üzerinde bulunan bir klasörü seçmeyi deneyin.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Vienna veritabanı oluşturulamıyor";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "İşaretli Makaleler";
+
+/* Title of a button on an alert */
+"Quit Vienna" = "Vienna'dan Çık";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Oku";
+
+/* No comment provided by engineer. */
+"Search Results" = "Arama Sonuçları";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Tüm makalelerde ara";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Konu";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Özet";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Metin";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Bugünün Makaleleri";
+
+/* No comment provided by engineer. */
+"Trash" = "Çöp";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Okunmamış Makaleler";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "Veritabanı (%@) dosya biçimi Vienna'nın bu sürümü tarafından desteklenmiyor. Dosyayı silip ya da yeniden adlandırıp Vienna'yı yeniden başlatmak ister misiniz?.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "Veritabanı dosya biçimi değişmiş";
+
+/* test for a string */
+"contains" = "içerir";
+
+/* test for a string */
+"does not contain" = "içermez";
+
+/* test for a value */
+"is" = "dir";
+
+/* test for a date */
+"is after" = "sonrasında";
+
+/* test for a date */
+"is before" = "öncesinde";
+
+/* test for a numeric value */
+"is greater than" = "daha çok";
+
+/* test for a numeric value */
+"is greater than or equal to" = "eşit veya daha çok";
+
+/* test for a numeric value */
+"is less than" = "daha az";
+
+/* test for a numeric value */
+"is less than or equal to" = "eşit veya daha az";
+
+/* test for a value */
+"is not" = "değildir";
+
+/* test for a date */
+"is on or after" = "şimdi ya da sonrasında";
+
+/* test for a date */
+"is on or before" = "şimdi ya da öncesinde";
+

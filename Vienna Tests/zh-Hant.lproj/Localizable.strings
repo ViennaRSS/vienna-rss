@@ -1,0 +1,147 @@
+/* {existing authors},{new author name} */
+"%@, %@" = "%1$@，%2$@";
+
+/* No comment provided by engineer. */
+"(No title)" = "(無主旨)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(未命名訂閱頻道)";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "作者";
+
+/* Title of a button on an alert */
+"Cancel" = "取消";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna 嘗試建立“%@”檔案夾時發生錯誤。請檢查您所指定之路徑的檔案夾權限。";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "很抱歉，Vienna 無法建立資料庫檔案夾";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "因為某些原因，無法打開資料庫檔案 (%@)。原因可能是載入中斷或無法使用檔案。請刪除資料庫檔案，或將資料庫檔案重新命名，然後重新啟動 Vienna 。";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "很抱歉，Vienna 無法打開此資料庫";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "資料庫更新";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "日期";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "已刪除";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "隨附項目 URL";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "已加上旗標";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "檔案夾";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "隨附項目";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "標題";
+
+/* Data field name visible in menu/article list */
+"Link" = "連結";
+
+/* No comment provided by engineer. */
+"Locate Text" = "無法在“%@”建立新的 Vienna 資料庫，原因可能是這個檔案夾位在遠端網路分享空間中，而 Vienna 無法管理遠端的資料庫。請在您的本機電腦上，選擇其他的檔案夾。";
+
+/* No comment provided by engineer. */
+"Locate Title" = "無法建立 Vienna 資料庫";
+
+/* Title of a button on an alert */
+"Locate…" = "Locate…";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "標記的文章";
+
+/* Title of a button on an alert */
+"Quit Vienna" = "結束 Vienna";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "已閱讀";
+
+/* No comment provided by engineer. */
+"Search Results" = "搜尋結果";
+
+/* Placeholder title of a search field */
+"Search all articles" = "搜尋所有文章";
+
+/* Placeholder title of a search field */
+"Search current web page" = "查詢當前網頁";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "標題";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "摘要";
+
+/* Data field name visible in smart folder definition */
+"Text" = "內文";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "今天的文章";
+
+/* No comment provided by engineer. */
+"Trash" = "垃圾桶";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "未讀文章";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "此版本的 Vienna 並不支援資料庫 (%@) 的檔案格式。請刪除此檔案，或是將檔案重新命名後，再重新啟動 Vienna。";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "資料庫檔案格式已變更";
+
+/* Title of a button on an alert */
+"Upgrade Database" = "更新資料庫";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "新版的 Vienna 必須更新資料庫，這可能會需要幾分鐘的時間，造成不便請見諒。";
+
+/* test for a string */
+"contains" = "包含";
+
+/* test for a string */
+"does not contain" = "不包含";
+
+/* test for a value */
+"is" = "等於";
+
+/* test for a date */
+"is after" = "晚於";
+
+/* test for a date */
+"is before" = "早於";
+
+/* test for a numeric value */
+"is greater than" = "大於";
+
+/* test for a numeric value */
+"is greater than or equal to" = "大於或等於";
+
+/* test for a numeric value */
+"is less than" = "小於";
+
+/* test for a numeric value */
+"is less than or equal to" = "小於或等於";
+
+/* test for a value */
+"is not" = "不等於";
+
+/* test for a date */
+"is on or after" = "等於或晚於";
+
+/* test for a date */
+"is on or before" = "等於或早於";
+

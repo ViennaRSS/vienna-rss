@@ -6,7 +6,9 @@
 //
 
 #import "ArticleCellView.h"
+
 #import "AppController.h"
+#import "ArticleView.h"
 #import "BrowserView.h"
 
 #define PROGRESS_INDICATOR_LEFT_MARGIN	8
@@ -38,7 +40,6 @@
 		SEL loadFinishedSelector = NSSelectorFromString(@"webViewLoadFinished:");
 		[[NSNotificationCenter defaultCenter] addObserver:[controller.browserView primaryTabItemView] selector:loadFinishedSelector name:WebViewProgressFinishedNotification object:articleView];
 		[articleView setOpenLinksInNewBrowser:YES];
-		[articleView setController:controller];
 		[articleView.mainFrame.frameView setAllowsScrolling:NO];
 
 		// Make web preferences 16pt Arial to match Safari

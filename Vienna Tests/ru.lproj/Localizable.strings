@@ -1,0 +1,144 @@
+/* No comment provided by engineer. */
+"(No title)" = "без имени";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "без имени";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Автор";
+
+/* Title of a button on an alert */
+"Cancel" = "Отмена";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna попыталась создать папку  \"%@\", но произошла ошибка. Проверьте разрешения для папок в указанном пути.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Извините, но Vienna не смогла создать папку базы данных";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "Файл базы данных (%@) не может быть открыт. Он может быть поврежден или недоступен. Пожалуйста, удалите или переименуйте файл базы данных и перезапустите Vienna.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Извините, но Vienna не смогла открыть базу данных";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Обновление базы данных";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Дата";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Удаленный";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "URL вложения";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Отмеченные";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Папка";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Вложения";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Заголовки";
+
+/* Data field name visible in menu/article list */
+"Link" = "Ссылка";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Новая база данных Vienna не может быть создана в \"%@\" из-за того, что папка, возможно, находится на удаленном сервере, а текущая версия Vienna не может работать с удаленными базами данных. Пожалуйста, выберите папку на своем компьютере.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Невозможно создать базу данных Vienna";
+
+/* Title of a button on an alert */
+"Locate…" = "Найти…";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Отмеченные статьи";
+
+/* Title of a button on an alert */
+"Quit Vienna" = "Завершить работу Vienna";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Прочитанные";
+
+/* No comment provided by engineer. */
+"Search Results" = "Результаты поиска";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Поиск в статьях";
+
+/* Placeholder title of a search field */
+"Search current web page" = "Поиск по текущей веб-странице";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Тема";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Выводы";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Текст";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Сегодняшние статьи";
+
+/* No comment provided by engineer. */
+"Trash" = "Корзина";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Непрочитанные статьи";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "Формат базы данных (%@) не поддерживается текущей версией Vienna. Удалите или переименуйте этот файл и перезапустите программу.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "Формат базы данных изменился";
+
+/* Title of a button on an alert */
+"Upgrade Database" = "Обновить базу данных";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna необходимо обновить свою базу данных до последней версии. Это может занять минуту или около того. Приносим свои извинения за доставленные неудобства.";
+
+/* test for a string */
+"contains" = "содержит";
+
+/* test for a string */
+"does not contain" = "не содержит";
+
+/* test for a value */
+"is" = "содержится";
+
+/* test for a date */
+"is after" = "после";
+
+/* test for a date */
+"is before" = "до";
+
+/* test for a numeric value */
+"is greater than" = "более чем";
+
+/* test for a numeric value */
+"is greater than or equal to" = "больше или равно";
+
+/* test for a numeric value */
+"is less than" = "менее чем";
+
+/* test for a numeric value */
+"is less than or equal to" = "меньше или равно";
+
+/* test for a value */
+"is not" = "не содержится";
+
+/* test for a date */
+"is on or after" = "сейчас и позднее";
+
+/* test for a date */
+"is on or before" = "сейчас и ранее";
+

@@ -54,14 +54,6 @@
  */
 -(void)awakeFromNib
 {
-	NSString * blueGradientURL = [[NSBundle mainBundle] pathForResource:@"selBlue" ofType:@"tiff"];
-	blueGradient = [[NSImage alloc] initWithContentsOfFile: blueGradientURL ];
-	
-	NSString * grayGradientURL = [[NSBundle mainBundle] pathForResource:@"selGray" ofType:@"tiff"];
-	grayGradient = [[NSImage alloc] initWithContentsOfFile: grayGradientURL ];
-
-	iRect = NSMakeRect(0,0,1,blueGradient.size.height-1);					
-	
 	// Add the notifications for collapse and expand.
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(outlineViewItemDidExpand:) name:NSOutlineViewItemDidExpandNotification object:(id)self];
@@ -77,14 +69,18 @@
 	return [super becomeFirstResponder];
 }
 
-/* draggingSourceOperationMaskForLocal
+/* draggingSession:sourceOperationMaskForDraggingContext
  * Let the control know the expected behaviour for local and external drags.
  */
--(NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)isLocal
+-(NSDragOperation)draggingSession:(NSDraggingSession *)session sourceOperationMaskForDraggingContext:(NSDraggingContext)context
 {
-	if (isLocal)
-		return NSDragOperationMove|NSDragOperationGeneric;
-	return NSDragOperationCopy;
+    switch(context) {
+        case NSDraggingContextWithinApplication:
+            return NSDragOperationMove|NSDragOperationGeneric;
+            break;
+        default:
+            return NSDragOperationCopy;
+    }
 }
 
 /* setEnableTooltips
@@ -335,13 +331,6 @@
 		NSRect selectedRect = [self rectOfRow:rowIndex];
 		if (NSIntersectsRect(selectedRect, rect))
 		{
-			[blueGradient drawInRect:selectedRect fromRect:iRect operation:NSCompositeSourceOver fraction:1 respectFlipped:YES hints:nil];
-
-			if (self.editedRow == -1)
-			{
-				if (self.window.firstResponder != self || !self.window.keyWindow)
-					[grayGradient drawInRect:selectedRect fromRect:iRect operation:NSCompositeSourceOver fraction:1 respectFlipped:YES hints:nil];
-			}
 			if (self.editedRow != -1)
 				[self performSelector:@selector(prvtResizeTheFieldEditor) withObject:nil afterDelay:0.001];
 		}
@@ -382,7 +371,6 @@
 		// Get rid of the white border, leftover from resizing the fieldEditor..
 		editRect.origin.x -= 6;
 		editRect.size.width += 6;
-		[blueGradient drawInRect:editRect fromRect:iRect operation:NSCompositeSourceOver fraction:1 respectFlipped:YES hints:nil];
 		
 		// Put back any cell image
 		NSInteger editColumnIndex = self.editedColumn;

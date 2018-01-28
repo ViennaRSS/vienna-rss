@@ -3,7 +3,7 @@
 //  Vienna
 //
 //  Created by Steve on 8/27/05.
-//  Copyright (c) 2004-2014 Steve Palmer and Vienna contributors. All rights reserved.
+//  Copyright (c) 2004-2017 Steve Palmer and Vienna contributors. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -18,27 +18,23 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "Database.h"
+@import Cocoa;
+@import WebKit;
+
+#import "BaseView.h"
 #import "ArticleBaseView.h"
-#import "BrowserView.h"
-#import "PopupButton.h"
-#import "StdEnclosureView.h"
-#import <WebKit/WebKit.h>
 
 @class AppController;
-@class ArticleController;
-@class MessageListView;
 @class ArticleView;
+@class MessageListView;
+@class EnclosureView;
 
-@interface ArticleListView : NSView<BaseView, ArticleBaseView, NSSplitViewDelegate, NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate>
+@interface ArticleListView : NSView<BaseView, ArticleBaseView, NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate>
 {
-	IBOutlet AppController * controller;
-	IBOutlet ArticleController * articleController;
 	IBOutlet MessageListView * articleList;
 	IBOutlet ArticleView * articleText;
 	IBOutlet NSSplitView * splitView2;
-	IBOutlet StdEnclosureView * stdEnclosureView;
+	IBOutlet EnclosureView * enclosureView;
 
 	NSInteger tableLayout;
 	BOOL isAppInitialising;
@@ -65,6 +61,8 @@
 	NSError * lastError;
 	NSProgressIndicator * progressIndicator;
 }
+
+@property (weak, nonatomic) AppController *controller;
 
 // Public functions
 -(void)updateAlternateMenuTitle;

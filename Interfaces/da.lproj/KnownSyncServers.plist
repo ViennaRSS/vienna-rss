@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BazQux</key>
+	<dict>
+		<key>Address</key>
+		<string>www.bazqux.com</string>
+		<key>Hint</key>
+		<string>Indtast informationerne du har i BazQux&apos;s &apos;Mobile login&apos;-indstillinger</string>
+	</dict>
+	<key>FeedHQ</key>
+	<dict>
+		<key>Address</key>
+		<string>feedhq.org</string>
+		<key>Hint</key>
+		<string>Indtast emailadresse og kodeord associeret med din FeedHQ konto</string>
+	</dict>
+	<key>InoReader</key>
+	<dict>
+		<key>Address</key>
+		<string>www.inoreader.com</string>
+		<key>Hint</key>
+		<string>Indtast emailadresse og kodeord associeret med din InoReader konto</string>
+	</dict>
+	<key>TheOldReader</key>
+	<dict>
+		<key>Address</key>
+		<string>theoldreader.com</string>
+		<key>Hint</key>
+		<string>Indtast emailadressen og kodeord defineret i Settings/General sektionen af theoldreader.com</string>
+	</dict>
+	<key>Other</key>
+	<dict>
+		<key>Address</key>
+		<string></string>
+		<key>Hint</key>
+		<string>Indtast serverens adresse og dine loginoplysninger for denne server</string>
+	</dict>
+</dict>
+</plist>

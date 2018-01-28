@@ -18,7 +18,8 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
+
 #import "BJRVerticallyCenteredTextFieldCell.h"
 
 @class TreeNode;
@@ -28,6 +29,8 @@
 	NSImage	* image;
 	NSImage * auxiliaryImage;
 	NSColor * countBackgroundColour;
+    NSColor * countBackgroundColourGradientEnd;
+    NSShadow * countLabelShadow;
 	NSInteger offset;
 	NSInteger count;
 	BOOL hasCount;

@@ -3,7 +3,7 @@
 //  Vienna
 //
 //  Created by Steve on 5/6/06.
-//  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
+//  Copyright (c) 2004-2017 Steve Palmer and Vienna contributors. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -19,19 +19,31 @@
 //
 
 #import "ArticleController.h"
+
 #import "AppController.h"
 #import "Preferences.h"
 #import "Constants.h"
 #import "Database.h"
-#import "ArticleFilter.h"
 #import "ArticleRef.h"
-#import "StringExtensions.h"
-#import "GoogleReader.h"
+#import "OpenReader.h"
 #import "ArticleListView.h"
 #import "UnifiedDisplayView.h"
+#import "FoldersTree.h"
+#import "Article.h"
+#import "Folder.h"
+#import "BackTrackArray.h"
+
+@interface ArticleController ()
+
+-(NSArray *)applyFilter:(NSArray *)unfilteredArray;
+-(void)setSortColumnIdentifier:(NSString *)str;
+-(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
+-(void)innerMarkFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged;
+
+@end
 
 @implementation ArticleController
-@synthesize foldersTree, mainArticleView, currentArrayOfArticles, folderArrayOfArticles, articleSortSpecifiers, backtrackArray;
+@synthesize mainArticleView, currentArrayOfArticles, folderArrayOfArticles, articleSortSpecifiers, backtrackArray;
 
 /* init
  * Initialise.
@@ -114,9 +126,13 @@
 		
 		// Register for notifications
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self selector:@selector(handleFilterChange:) name:@"MA_Notify_FilteringChange" object:nil];
 		[nc addObserver:self selector:@selector(handleArticleListContentChange:) name:@"MA_Notify_ArticleListContentChange" object:nil];
         [nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
+
+        [NSUserDefaults.standardUserDefaults addObserver:self
+                                              forKeyPath:MAPref_FilterMode
+                                                 options:0
+                                                 context:nil];
 
         queue = dispatch_queue_create("uk.co.opencommunity.vienna2.displayRefresh", DISPATCH_QUEUE_SERIAL);
         reloadArrayOfArticlesSemaphor = 0;
@@ -136,19 +152,19 @@
 	{
 		case MA_Layout_Report:
 		case MA_Layout_Condensed:
-			self.mainArticleView = articleListView;
+			self.mainArticleView = self.articleListView;
 			break;
 
 		case MA_Layout_Unified:
-			self.mainArticleView = unifiedListView;
+			self.mainArticleView = self.unifiedListView;
 			break;
 	}
 
 	[Preferences standardPreferences].layout = newLayout;
 	if (currentSelectedArticle != nil)
 	{
-	    [self selectFolderAndArticle:currentFolderId guid:currentSelectedArticle.guid];
-	    [self ensureSelectedArticle];
+		[self selectFolderAndArticle:currentFolderId guid:currentSelectedArticle.guid];
+		[self ensureSelectedArticle];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
 	}
 
@@ -184,13 +200,13 @@
  */
  -(void)updateAlternateMenuTitle
 {
-	if (mainArticleView ==  articleListView)
+	if (mainArticleView ==  self.articleListView)
 	{
-		[articleListView updateAlternateMenuTitle];
+		[self.articleListView updateAlternateMenuTitle];
 	}
 	else
 	{
-		[unifiedListView updateAlternateMenuTitle];
+		[self.unifiedListView updateAlternateMenuTitle];
 	}
 }
 
@@ -199,8 +215,9 @@
  */
 -(void)updateVisibleColumns
 {
-    if (mainArticleView ==  articleListView)
-        [articleListView updateVisibleColumns];
+    if (mainArticleView ==  self.articleListView) {
+        [self.articleListView updateVisibleColumns];
+    }
 }
 
 /* selectedArticle
@@ -352,7 +369,7 @@
 	if ([Database sharedManager].countOfUnread > 0)
 	{
 		// Get the first folder with unread articles.
-		NSInteger firstFolderWithUnread = foldersTree.firstFolderWithUnread;
+		NSInteger firstFolderWithUnread = self.foldersTree.firstFolderWithUnread;
 		if (firstFolderWithUnread == currentFolderId)
 		{
 			[mainArticleView selectFirstUnreadInFolder];
@@ -362,7 +379,7 @@
 			// Seed in order to select the first unread article.
 			firstUnreadArticleRequired = YES;
 			// Select the folder in the tree view.
-			[foldersTree selectFolder:firstFolderWithUnread];
+			[self.foldersTree selectFolder:firstFolderWithUnread];
 		}
 	}
 }
@@ -379,7 +396,7 @@
 	{
 		[self markReadByArray:@[currentArticle] readFlag:YES];
 	}
-	
+
 	// If there are any unread articles then select the nexst one
 	if ([Database sharedManager].countOfUnread > 0)
 	{
@@ -388,7 +405,7 @@
 		{
 			// If nothing found and smart folder, search if we have other fresh articles from same folder
 			Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
-			if (IsSmartFolder(currentFolder) || IsTrashFolder(currentFolder) || IsSearchFolder(currentFolder))
+			if (currentFolder.type == VNAFolderTypeSmart || currentFolder.type == VNAFolderTypeTrash || currentFolder.type == VNAFolderTypeSearch)
 			{
 				if (![mainArticleView selectFirstUnreadInFolder])
 				{
@@ -409,12 +426,12 @@
  */
 -(void)displayNextFolderWithUnread
 {
-	NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
+	NSInteger nextFolderWithUnread = [self.foldersTree nextFolderWithUnread:currentFolderId];
 	if (nextFolderWithUnread != -1)
 	{
 		// Seed in order to select the first unread article.
 		firstUnreadArticleRequired = YES;
-		[foldersTree selectFolder:nextFolderWithUnread];
+		[self.foldersTree selectFolder:nextFolderWithUnread];
 	}
 }
 
@@ -431,10 +448,10 @@
 		// This will reset the scroller position and deselect all.
 		// Otherwise, the new folder might attempt to preserve selection.
 		// This can happen with smart folders, which have the same articles as other folders.
-		currentArrayOfArticles = @[];
-		folderArrayOfArticles = @[];
+		self.currentArrayOfArticles = @[];
+		self.folderArrayOfArticles = @[];
 		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
-		
+
 		currentFolderId = newFolderId;
 		[self reloadArrayOfArticles];
 	}
@@ -459,7 +476,7 @@
 		// after notification of folder selection change has been processed,
 		// it will select the requisite article on our behalf.
 		guidOfArticleToSelect = guid;
-		[foldersTree selectFolder:folderId];
+		[self.foldersTree selectFolder:folderId];
 	}
 }
 
@@ -479,8 +496,8 @@
 	    {
             [mainArticleView stopLoadIndicator];
             self.folderArrayOfArticles = resultArray;
-			Article * article = self.selectedArticle;
-			
+            Article * article = self.selectedArticle;
+
 			if (shouldPreserveSelectedArticle)
 			{
 				if (article != nil && article.read && !article.deleted)
@@ -489,9 +506,9 @@
 				}
 				shouldPreserveSelectedArticle = NO;
 			}
-			
+
             [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
-			
+
 			if (guidOfArticleToSelect != nil )
 			{
 				[mainArticleView scrollToArticle:guidOfArticleToSelect];
@@ -500,13 +517,13 @@
             else if (firstUnreadArticleRequired)
             {
                 [mainArticleView selectFirstUnreadInFolder];
-				firstUnreadArticleRequired = NO;
+                firstUnreadArticleRequired = NO;
             }
-			
+
             if (requireSelectArticleAfterReload)
             {
                 [self ensureSelectedArticle];
-				requireSelectArticleAfterReload = NO;
+                requireSelectArticleAfterReload = NO;
             }
 
             // To avoid upsetting the current displayed article after a refresh,
@@ -559,8 +576,7 @@
 	
 	NSString * guidOfArticleToPreserve = articleToPreserve.guid;
 	
-	ArticleFilter * filter = [ArticleFilter filterByTag:[Preferences standardPreferences].filterMode];
-	SEL comparator = filter.comparator;
+	NSInteger filterMode = [Preferences standardPreferences].filterMode;
 	for (NSInteger index = filteredArray.count - 1; index >= 0; --index)
 	{
 		Article * article = filteredArray[index];
@@ -570,8 +586,10 @@
 		{
 			guidOfArticleToPreserve = nil;
 		}
-		else if ((comparator != nil) && !((BOOL)(NSInteger)[ArticleFilter performSelector:comparator withObject:article]))
+        else if ([self filterArticle:article usingMode:filterMode] == false)
+		{
 			[filteredArray removeObjectAtIndex:index];
+        }
 	}
 	
 	if (guidOfArticleToPreserve != nil)
@@ -617,7 +635,7 @@
 	__block BOOL needReload = NO;
 	
 	NSString * guidToSelect = nil;
-	
+
     // if we mark deleted, mark also read and unflagged
 	if (deleteFlag) {
 	    [self innerMarkReadByRefsArray:articleArray readFlag:YES];
@@ -648,7 +666,7 @@
 					guidToSelect = nextArticle.guid;
 				}
 				
-				// Deselect all now, select article after refresh
+				// Deselect all now, we will select article after refresh
 				[mainArticleView scrollToArticle:nil];
 			}
 		}
@@ -692,7 +710,7 @@
 		}
 		else
 		{
-			[NSApp.mainWindow makeFirstResponder:foldersTree.mainView];
+			[NSApp.mainWindow makeFirstResponder:self.foldersTree.mainView];
 		}
 	}
 }
@@ -734,7 +752,7 @@
 				guidToSelect = nextArticle.guid;
 			}
 			
-			// Deselect all now, select article after refresh
+			// Deselect all now, we will select article after refresh
 			[mainArticleView scrollToArticle:nil];
 		}
 	}
@@ -761,7 +779,7 @@
 		}
 		[mainArticleView ensureSelectedArticle];
     } else {
-		[NSApp.mainWindow makeFirstResponder:foldersTree.mainView];
+		[NSApp.mainWindow makeFirstResponder:self.foldersTree.mainView];
     }
 }
 
@@ -804,8 +822,8 @@
 	for (Article * theArticle in articleArray)
 	{
 		Folder *myFolder = [[Database sharedManager] folderFromID:theArticle.folderId];
-		if (IsGoogleReaderFolder(myFolder)) {
-			[[GoogleReader sharedManager] markStarred:theArticle starredFlag:flagged];
+		if (myFolder.type == VNAFolderTypeOpenReader) {
+			[[OpenReader sharedManager] markStarred:theArticle starredFlag:flagged];
 		}
 		[[Database sharedManager] markArticleFlagged:theArticle.folderId
                                                 guid:theArticle.guid
@@ -858,8 +876,8 @@
 		NSInteger folderId = theArticle.folderId;
 		if (theArticle.read != readFlag)
 		{
-			if (IsGoogleReaderFolder([[Database sharedManager] folderFromID:folderId])) {
-				[[GoogleReader sharedManager] markRead:theArticle readFlag:readFlag];
+			if ([[Database sharedManager] folderFromID:folderId].type == VNAFolderTypeOpenReader) {
+				[[OpenReader sharedManager] markRead:theArticle readFlag:readFlag];
 			} else {
 				[[Database sharedManager] markArticleRead:folderId guid:theArticle.guid isRead:readFlag];
 				[theArticle markRead:readFlag];
@@ -889,10 +907,10 @@
 	{
 		NSInteger folderId = articleRef.folderId;
 		Folder * folder = [db folderFromID:folderId];
-		if (IsGoogleReaderFolder(folder)){
+		if (folder.type == VNAFolderTypeOpenReader){
 			Article * article = [folder articleFromGuid:articleRef.guid];
 			if (article != nil) {
-                [[GoogleReader sharedManager] markRead:article readFlag:readFlag];
+                [[OpenReader sharedManager] markRead:article readFlag:readFlag];
 			}
 		} else {
 			[db markArticleRead:folderId guid:articleRef.guid isRead:readFlag];
@@ -961,11 +979,11 @@
 	for (Folder * folder in folderArray)
 	{
 		NSInteger folderId = folder.itemId;
-		if (IsGroupFolder(folder))
+		if (folder.type == VNAFolderTypeGroup)
 		{
 			[refArray addObjectsFromArray:[self wrappedMarkAllFoldersReadInArray:[[Database sharedManager] arrayOfFolders:folderId]]];
 		}
-		else if (IsRSSFolder(folder))
+		else if (folder.type == VNAFolderTypeRSS)
 		{
 			[refArray addObjectsFromArray:[folder arrayOfUnreadArticlesRefs]];
 			if ([[Database sharedManager] markFolderRead:folderId]) {
@@ -973,7 +991,7 @@
 																	object:@(folderId)];
 			}
 		}
-		else if (IsGoogleReaderFolder(folder))
+		else if (folder.type == VNAFolderTypeOpenReader)
 		{
 			NSArray * articleArray = [folder arrayOfUnreadArticlesRefs];
 			[refArray addObjectsFromArray:articleArray];
@@ -1013,10 +1031,10 @@
 		NSInteger folderId = ref.folderId;
 		NSString * theGuid = ref.guid;
 		Folder * folder = [dbManager folderFromID:folderId];
-        if (IsGoogleReaderFolder(folder)) {
+        if (folder.type == VNAFolderTypeOpenReader) {
         	Article * article = [folder articleFromGuid:theGuid];
         	if (article != nil) {
-			    [[GoogleReader sharedManager] markRead:article readFlag:readFlag];
+			    [[OpenReader sharedManager] markRead:article readFlag:readFlag];
 			}
         } else {
 			[dbManager markArticleRead:folderId guid:theGuid isRead:readFlag];
@@ -1036,8 +1054,8 @@
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
 															object:@(lastFolderId)];
 	}
-	if (lastFolderId != -1 && !IsRSSFolder([dbManager folderFromID:currentFolderId])
-		&& !IsGoogleReaderFolder([dbManager folderFromID:currentFolderId])) {
+	if (lastFolderId != -1 && [dbManager folderFromID:currentFolderId].type != VNAFolderTypeRSS
+		&& [dbManager folderFromID:currentFolderId].type != VNAFolderTypeOpenReader) {
 		[self reloadArrayOfArticles];
 	}
 	else if (needRefilter) {
@@ -1103,17 +1121,6 @@
 	return !backtrackArray.atStartOfQueue;
 }
 
-/* handleFilterChange
-* Update the list of articles when the user changes the filter.
-*/
--(void)handleFilterChange:(NSNotification *)nc
-{
-    @synchronized(mainArticleView)
-    {
-	    [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
-	}
-}
-
 /* handleArticleListStateChange
 * Called if a folder content has changed
 * but we don't need to add new articles
@@ -1122,7 +1129,7 @@
 {
     NSInteger folderId = ((NSNumber *)nc.object).integerValue;
     Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
-    if ( (folderId == currentFolderId) || (!IsRSSFolder(currentFolder) && !IsGoogleReaderFolder(currentFolder)) ) {
+    if ((folderId == currentFolderId) || (currentFolder.type != VNAFolderTypeRSS && currentFolder.type != VNAFolderTypeOpenReader)) {
         [mainArticleView refreshFolder:MA_Refresh_RedrawList];
     }
 }
@@ -1137,21 +1144,69 @@
 	// With automatic refresh and automatic mark read,
 	// the article you're current reading can disappear.
 	// For example, if you're reading in the Unread Articles smart folder.
-	// So make sure the keep this article around.
+	// So make sure we keep this article around.
 	if ([[Preferences standardPreferences] refreshFrequency] > 0
 		&& [[Preferences standardPreferences] markReadInterval] > 0.0)
 	{
 		shouldPreserveSelectedArticle = YES;
 	}
-	
     [self reloadArrayOfArticles];
 }
 
-/* dealloc
- * Clean up behind us.
- */
--(void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+// MARK: Filter article
+
+- (BOOL)filterArticle:(Article *)article usingMode:(NSInteger)filterMode {
+    switch (filterMode) {
+        case MA_Filter_Unread:
+            return !article.read;
+            break;
+        case MA_Filter_LastRefresh: {
+            NSDate *date = article.createdDate;
+            Preferences *prefs = [Preferences standardPreferences];
+            NSComparisonResult result = [date compare:[prefs objectForKey:MAPref_LastRefreshDate]];
+            return result != NSOrderedAscending;
+            break;
+        }
+        case MA_Filter_Today:
+            return [NSCalendar.currentCalendar isDateInToday:article.date];
+            break;
+        case MA_Filter_48h: {
+            NSDate *twoDaysAgo = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay
+                                                                        value:-2
+                                                                       toDate:[NSDate date]
+                                                                      options:0];
+            return [article.date compare:twoDaysAgo] != NSOrderedAscending;
+            break;
+        }
+        case MA_Filter_Flagged:
+            return article.flagged;
+            break;
+        case MA_Filter_Unread_Or_Flagged:
+            return (!article.read || article.flagged);
+            break;
+        default:
+            return true;
+    }
 }
+
+// MARK: Key-value observation
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+                       context:(void *)context {
+    if ([keyPath isEqualToString:MAPref_FilterMode]) {
+        // Update the list of articles when the user changes the filter.
+        @synchronized(mainArticleView) {
+            [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
+        }
+    }
+}
+
+- (void)dealloc {
+    [NSNotificationCenter.defaultCenter removeObserver:self];
+    [NSUserDefaults.standardUserDefaults removeObserver:self
+                                             forKeyPath:MAPref_FilterMode];
+}
+
 @end

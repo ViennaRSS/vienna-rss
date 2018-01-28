@@ -20,9 +20,11 @@
 
 #import "XMLTag.h"
 
-@interface XMLTag (Private)
-	-(void)setName:(NSString *)newName;
-	-(void)setAttributes:(NSDictionary *)newAttributes;
+@interface XMLTag ()
+
+-(void)setName:(NSString *)newName;
+-(void)setAttributes:(NSDictionary *)newAttributes;
+
 @end
 
 @implementation XMLTag

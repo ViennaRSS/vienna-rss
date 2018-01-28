@@ -1,0 +1,24 @@
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "102"; */
+"102.title" = "取消";
+
+/* Class = "NSButtonCell"; title = "Subscribe"; ObjectID = "103"; */
+"103.title" = "订阅";
+
+/* Class = "NSTextFieldCell"; title = "Source:"; ObjectID = "104"; */
+"104.title" = "来源:";
+
+/* Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106"; */
+"106.title" = "订阅一个新的频道";
+
+/* Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107"; */
+"107.title" = "请在下面输入频道的连接。或者从来源列表中选择然后按照提示输入对应信息";
+
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "111"; */
+"111.title" = "保存";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "112"; */
+"112.title" = "取消";
+
+/* Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114"; */
+"114.title" = "编辑频道信息";
+

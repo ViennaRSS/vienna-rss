@@ -6,11 +6,10 @@
 //  Copyright (c) 2014 uk.co.opencommunity. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @interface SubscriptionModel : NSObject
 
-
--(NSURL *)verifiedFeedURLFromURL:(NSURL *)rssFeedURL;
+- (NSURL *)verifiedFeedURLFromURL:(NSURL *)rssFeedURL;
 
 @end

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="11762"/>
-        <capability name="box content view" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="12120"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,126 +16,159 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="5" userLabel="BrowserPaneView" customClass="BrowserPane">
             <rect key="frame" x="0.0" y="0.0" width="833" height="575"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <box boxType="oldStyle" borderType="line" title="Title" titlePosition="noTitle" id="17">
+                <view translatesAutoresizingMaskIntoConstraints="NO" id="Bbc-ej-ccq">
                     <rect key="frame" x="0.0" y="0.0" width="833" height="575"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <view key="contentView" id="Llc-wK-sR9">
-                        <rect key="frame" x="1" y="1" width="831" height="573"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <customView id="48" customClass="GradientView">
-                                <rect key="frame" x="0.0" y="544" width="833" height="29"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" id="8" customClass="SSTextField">
-                                        <rect key="frame" x="99" y="3" width="689" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" focusRingType="none" drawsBackground="YES" id="55">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <action selector="handleAddress:" target="5" id="22"/>
-                                            <outlet property="nextKeyView" destination="9" id="21"/>
-                                        </connections>
-                                    </textField>
-                                    <button id="40">
-                                        <rect key="frame" x="103" y="7" width="14" height="14"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="webpage.tiff" imagePosition="overlaps" alignment="center" inset="2" id="60">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="label"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="selectText:" target="8" id="41"/>
-                                        </connections>
-                                    </button>
-                                    <button id="50" customClass="BrowserPaneButton">
-                                        <rect key="frame" x="794" y="4" width="31" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="browserRSSButton" imagePosition="only" alignment="center" inset="2" id="61">
-                                            <behavior key="behavior" lightByContents="YES"/>
-                                            <font key="font" metaFont="system" size="10"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="handleRSSPage:" target="5" id="53"/>
-                                        </connections>
-                                    </button>
-                                    <button id="24" customClass="BrowserPaneButton">
-                                        <rect key="frame" x="7" y="4" width="29" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="browserPreviousButton" imagePosition="only" alignment="left" id="57">
-                                            <behavior key="behavior" lightByContents="YES"/>
-                                            <font key="font" metaFont="label"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="handleGoBack:" target="5" id="27"/>
-                                            <binding destination="9" name="enabled" keyPath="canGoBack" id="36"/>
-                                        </connections>
-                                    </button>
-                                    <button id="23" customClass="BrowserPaneButton">
-                                        <rect key="frame" x="63" y="4" width="29" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="browserRefreshButton" imagePosition="only" alignment="center" inset="2" id="56">
-                                            <behavior key="behavior" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="handleReload:" target="5" id="26"/>
-                                        </connections>
-                                    </button>
-                                    <button id="25" customClass="BrowserPaneButton">
-                                        <rect key="frame" x="36" y="4" width="27" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="browserNextButton" imagePosition="only" alignment="center" id="58">
-                                            <behavior key="behavior" lightByContents="YES"/>
-                                            <font key="font" metaFont="label"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="handleGoForward:" target="5" id="28"/>
-                                            <binding destination="9" name="enabled" keyPath="canGoForward" id="37"/>
-                                        </connections>
-                                    </button>
-                                    <box wantsLayer="YES" verticalHuggingPriority="750" alphaValue="0.82394367456436157" boxType="separator" id="62">
-                                        <rect key="frame" x="0.0" y="-4" width="833" height="5"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                    </box>
-                                    <imageView hidden="YES" id="34">
-                                        <rect key="frame" x="771" y="6" width="16" height="16"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="lockedPage" id="59"/>
-                                    </imageView>
-                                    <box wantsLayer="YES" verticalHuggingPriority="750" boxType="separator" id="63">
-                                        <rect key="frame" x="0.0" y="-2" width="833" height="5"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                    </box>
-                                </subviews>
-                            </customView>
-                            <webView id="9" customClass="TabbedWebView">
-                                <rect key="frame" x="0.0" y="0.0" width="831" height="544"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
-                                    <nil key="identifier"/>
-                                </webPreferences>
-                            </webView>
-                        </subviews>
-                    </view>
-                </box>
+                    <subviews>
+                        <customView verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jfz-EV-1Re" customClass="GradientView" customModule="Vienna" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="546" width="833" height="29"/>
+                            <subviews>
+                                <button translatesAutoresizingMaskIntoConstraints="NO" id="RJc-eu-7Rd" customClass="BrowserPaneButton">
+                                    <rect key="frame" x="4" y="4" width="29" height="21"/>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="browserPreviousButton" imagePosition="only" alignment="center" id="aJQ-1o-J5W">
+                                        <behavior key="behavior" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="handleGoBack:" target="5" id="YCO-Rv-KeV"/>
+                                        <binding destination="5Jt-eD-fKX" name="enabled" keyPath="canGoBack" id="MF8-ao-UHF"/>
+                                    </connections>
+                                </button>
+                                <button translatesAutoresizingMaskIntoConstraints="NO" id="4dH-y6-1w2" customClass="BrowserPaneButton">
+                                    <rect key="frame" x="33" y="4" width="27" height="21"/>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="browserNextButton" imagePosition="only" alignment="center" id="xQg-op-Rav">
+                                        <behavior key="behavior" lightByContents="YES"/>
+                                        <font key="font" metaFont="label"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="handleGoForward:" target="5" id="dLx-vE-jNC"/>
+                                        <binding destination="5Jt-eD-fKX" name="enabled" keyPath="canGoForward" id="vh4-sh-bgo"/>
+                                    </connections>
+                                </button>
+                                <button translatesAutoresizingMaskIntoConstraints="NO" id="jRF-hs-3NE" customClass="BrowserPaneButton">
+                                    <rect key="frame" x="60" y="4" width="29" height="21"/>
+                                    <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="browserRefreshButton" imagePosition="only" alignment="center" inset="2" id="qYP-Zq-vM8">
+                                        <behavior key="behavior" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="handleReload:" target="5" id="DSD-me-maG"/>
+                                    </connections>
+                                </button>
+                                <textField focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="689" translatesAutoresizingMaskIntoConstraints="NO" id="jbw-0o-tHL" customClass="SSTextField">
+                                    <rect key="frame" x="93" y="3" width="701" height="22"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="eVn-xM-i6p"/>
+                                    </constraints>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" focusRingType="none" alignment="left" drawsBackground="YES" id="bYf-6J-bv8">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <action selector="handleAddress:" target="5" id="Cd7-E9-zBQ"/>
+                                        <outlet property="nextKeyView" destination="5Jt-eD-fKX" id="liJ-xL-eax"/>
+                                    </connections>
+                                </textField>
+                                <button translatesAutoresizingMaskIntoConstraints="NO" id="s5s-Fb-aNJ">
+                                    <rect key="frame" x="97" y="6" width="16" height="16"/>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="webpage" imagePosition="only" alignment="center" inset="2" id="esD-Qx-wwF">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="label"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="selectText:" target="jbw-0o-tHL" id="oyp-QQ-L9F"/>
+                                    </connections>
+                                </button>
+                                <button translatesAutoresizingMaskIntoConstraints="NO" id="R2O-O2-NtU" customClass="BrowserPaneButton">
+                                    <rect key="frame" x="798" y="4" width="31" height="21"/>
+                                    <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="browserRSSButton" imagePosition="only" alignment="center" inset="2" id="bCD-ry-DIA">
+                                        <behavior key="behavior" lightByContents="YES"/>
+                                        <font key="font" metaFont="system" size="10"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="handleRSSPage:" target="5" id="Jny-4j-rLd"/>
+                                    </connections>
+                                </button>
+                                <imageView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nGm-jr-a3Q">
+                                    <rect key="frame" x="774" y="6" width="16" height="16"/>
+                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="lockedPage" id="ubS-gE-v6E"/>
+                                </imageView>
+                                <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Uij-h1-YdD">
+                                    <rect key="frame" x="0.0" y="-2" width="833" height="5"/>
+                                </box>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="nGm-jr-a3Q" firstAttribute="centerY" secondItem="jbw-0o-tHL" secondAttribute="centerY" id="40a-xe-MCZ"/>
+                                <constraint firstAttribute="bottom" secondItem="jbw-0o-tHL" secondAttribute="bottom" constant="3" id="5bq-mh-A75"/>
+                                <constraint firstItem="4dH-y6-1w2" firstAttribute="centerY" secondItem="jbw-0o-tHL" secondAttribute="centerY" id="FrN-uD-MUl"/>
+                                <constraint firstItem="jRF-hs-3NE" firstAttribute="centerY" secondItem="jbw-0o-tHL" secondAttribute="centerY" id="IzP-bg-bnM"/>
+                                <constraint firstItem="nGm-jr-a3Q" firstAttribute="trailing" secondItem="jbw-0o-tHL" secondAttribute="trailing" constant="-4" id="LHB-4w-T2c"/>
+                                <constraint firstItem="jbw-0o-tHL" firstAttribute="leading" secondItem="jRF-hs-3NE" secondAttribute="trailing" constant="4" id="PmN-f6-Ts0"/>
+                                <constraint firstItem="s5s-Fb-aNJ" firstAttribute="centerY" secondItem="jbw-0o-tHL" secondAttribute="centerY" id="QqI-3y-Vbb"/>
+                                <constraint firstItem="R2O-O2-NtU" firstAttribute="leading" secondItem="jbw-0o-tHL" secondAttribute="trailing" constant="4" id="RcG-cm-oXG"/>
+                                <constraint firstItem="RJc-eu-7Rd" firstAttribute="centerY" secondItem="jbw-0o-tHL" secondAttribute="centerY" id="So4-SG-BwA"/>
+                                <constraint firstItem="R2O-O2-NtU" firstAttribute="centerY" secondItem="jbw-0o-tHL" secondAttribute="centerY" id="TeD-Rt-cHh"/>
+                                <constraint firstItem="Uij-h1-YdD" firstAttribute="leading" secondItem="jfz-EV-1Re" secondAttribute="leading" id="Waf-EZ-OSG"/>
+                                <constraint firstItem="jRF-hs-3NE" firstAttribute="leading" secondItem="4dH-y6-1w2" secondAttribute="trailing" id="WuS-AW-mPZ"/>
+                                <constraint firstItem="jRF-hs-3NE" firstAttribute="leading" secondItem="4dH-y6-1w2" secondAttribute="trailing" id="ZJR-fs-Hbg"/>
+                                <constraint firstItem="jbw-0o-tHL" firstAttribute="top" secondItem="jfz-EV-1Re" secondAttribute="top" constant="4" id="by4-Qt-2dM"/>
+                                <constraint firstItem="RJc-eu-7Rd" firstAttribute="leading" secondItem="jfz-EV-1Re" secondAttribute="leading" constant="4" id="cZi-Tg-GNU"/>
+                                <constraint firstAttribute="bottom" secondItem="Uij-h1-YdD" secondAttribute="bottom" id="fk2-ad-GVD"/>
+                                <constraint firstItem="jbw-0o-tHL" firstAttribute="leading" secondItem="s5s-Fb-aNJ" secondAttribute="leading" constant="-4" id="hqM-on-yut"/>
+                                <constraint firstAttribute="trailing" secondItem="R2O-O2-NtU" secondAttribute="trailing" constant="4" id="noy-cM-JNp"/>
+                                <constraint firstItem="4dH-y6-1w2" firstAttribute="leading" secondItem="RJc-eu-7Rd" secondAttribute="trailing" id="q5U-io-pux"/>
+                                <constraint firstAttribute="trailing" secondItem="Uij-h1-YdD" secondAttribute="trailing" id="vRx-RB-zuw"/>
+                                <constraint firstItem="4dH-y6-1w2" firstAttribute="leading" secondItem="RJc-eu-7Rd" secondAttribute="trailing" id="yHt-7h-1Pv"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="startingColor">
+                                    <color key="value" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="endingColor">
+                                    <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="angle">
+                                    <real key="value" value="270"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </customView>
+                        <webView translatesAutoresizingMaskIntoConstraints="NO" id="5Jt-eD-fKX" customClass="TabbedWebView">
+                            <rect key="frame" x="0.0" y="0.0" width="833" height="546"/>
+                            <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
+                                <nil key="identifier"/>
+                            </webPreferences>
+                        </webView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="5Jt-eD-fKX" secondAttribute="trailing" id="JWl-Gy-0AI"/>
+                        <constraint firstAttribute="bottom" secondItem="5Jt-eD-fKX" secondAttribute="bottom" id="Oey-6Q-2nk"/>
+                        <constraint firstAttribute="trailing" secondItem="jfz-EV-1Re" secondAttribute="trailing" id="X41-c4-CDx"/>
+                        <constraint firstItem="5Jt-eD-fKX" firstAttribute="top" secondItem="jfz-EV-1Re" secondAttribute="bottom" id="YUZ-gT-hwV"/>
+                        <constraint firstItem="5Jt-eD-fKX" firstAttribute="leading" secondItem="Bbc-ej-ccq" secondAttribute="leading" id="mKV-Vc-NOg"/>
+                        <constraint firstItem="jfz-EV-1Re" firstAttribute="top" secondItem="Bbc-ej-ccq" secondAttribute="top" id="sGn-z5-lhn"/>
+                        <constraint firstItem="jfz-EV-1Re" firstAttribute="leading" secondItem="Bbc-ej-ccq" secondAttribute="leading" id="whW-qX-dMc"/>
+                    </constraints>
+                </view>
             </subviews>
+            <constraints>
+                <constraint firstItem="Bbc-ej-ccq" firstAttribute="top" secondItem="5" secondAttribute="top" id="0vC-94-E00"/>
+                <constraint firstAttribute="bottom" secondItem="Bbc-ej-ccq" secondAttribute="bottom" id="7sB-be-npC"/>
+                <constraint firstItem="Bbc-ej-ccq" firstAttribute="leading" secondItem="5" secondAttribute="leading" id="I6Z-iS-obj"/>
+                <constraint firstAttribute="trailing" secondItem="Bbc-ej-ccq" secondAttribute="trailing" id="t9g-79-52A"/>
+            </constraints>
             <connections>
-                <outlet property="addressField" destination="8" id="13"/>
-                <outlet property="backButton" destination="24" id="32"/>
-                <outlet property="boxFrame" destination="17" id="19"/>
-                <outlet property="forwardButton" destination="25" id="33"/>
-                <outlet property="iconImage" destination="40" id="42"/>
-                <outlet property="lockIconImage" destination="34" id="35"/>
-                <outlet property="refreshButton" destination="23" id="31"/>
-                <outlet property="rssPageButton" destination="50" id="52"/>
-                <outlet property="webPane" destination="9" id="10"/>
+                <outlet property="addressField" destination="jbw-0o-tHL" id="CL7-N1-B2n"/>
+                <outlet property="backButton" destination="RJc-eu-7Rd" id="O8P-eq-nzB"/>
+                <outlet property="forwardButton" destination="4dH-y6-1w2" id="Bre-fE-lbk"/>
+                <outlet property="iconImage" destination="s5s-Fb-aNJ" id="mqM-ET-rpf"/>
+                <outlet property="lockIconImage" destination="nGm-jr-a3Q" id="d0l-zp-Yo4"/>
+                <outlet property="refreshButton" destination="jRF-hs-3NE" id="ZQ3-yC-e92"/>
+                <outlet property="rssPageButton" destination="R2O-O2-NtU" id="RgR-1P-T8L"/>
+                <outlet property="webPane" destination="5Jt-eD-fKX" id="c2c-xF-zr8"/>
             </connections>
+            <point key="canvasLocation" x="138.5" y="168.5"/>
         </customView>
     </objects>
     <resources>
@@ -145,6 +177,6 @@
         <image name="browserRSSButton" width="31" height="21"/>
         <image name="browserRefreshButton" width="29" height="21"/>
         <image name="lockedPage" width="16" height="16"/>
-        <image name="webpage.tiff" width="128" height="128"/>
+        <image name="webpage" width="16" height="16"/>
     </resources>
 </document>

@@ -18,12 +18,9 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
 @interface FolderView : NSOutlineView {
-	NSImage * blueGradient;
-	NSImage * grayGradient;
-	NSRect iRect;
 	BOOL useTooltips;
 	NSString * backupString;
 }

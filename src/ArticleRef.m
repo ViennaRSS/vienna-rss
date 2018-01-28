@@ -20,6 +20,8 @@
 
 #import "ArticleRef.h"
 
+#import "Article.h"
+
 @implementation ArticleReference
 
 /* initWithReference

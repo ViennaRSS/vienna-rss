@@ -23,6 +23,11 @@
 #import "AppController.h"
 #import "HelperFunctions.h"
 #import "PopUpButtonExtensions.h"
+#import "Article.h"
+#import "Folder.h"
+#import "Criteria.h"
+#import "Field.h"
+#import "Database.h"
 
 // Tags for the three fields that define a criteria. We set these here
 // rather than in IB to be consistent.
@@ -36,17 +41,19 @@
 #define MA_SFEdit_RemoveTag			1007
 #define MA_SFEdit_FolderValueTag	1008
 
-@interface SmartFolder (Private)
-	-(void)initFolderValueField:(NSInteger)parentId atIndent:(NSInteger)indentation;
-	-(void)initSearchSheet:(NSString *)folderName;
-	-(void)displaySearchSheet:(NSWindow *)window;
-	-(void)initForField:(NSString *)fieldName inRow:(NSView *)row;
-	-(void)setOperatorsPopup:(NSPopUpButton *)popUpButton operators:(NSArray *)operators;
-	-(void)addCriteria:(NSUInteger)index;
-	-(void)addDefaultCriteria:(NSInteger)index;
-	-(void)removeCriteria:(NSInteger)index;
-	-(void)removeAllCriteria;
-	-(void)resizeSearchWindow;
+@interface SmartFolder ()
+
+-(void)initFolderValueField:(NSInteger)parentId atIndent:(NSInteger)indentation;
+-(void)initSearchSheet:(NSString *)folderName;
+-(void)displaySearchSheet:(NSWindow *)window;
+-(void)initForField:(NSString *)fieldName inRow:(NSView *)row;
+-(void)setOperatorsPopup:(NSPopUpButton *)popUpButton operators:(NSArray *)operators;
+-(void)addCriteria:(NSUInteger)index;
+-(void)addDefaultCriteria:(NSInteger)index;
+-(void)removeCriteria:(NSInteger)index;
+-(void)removeAllCriteria;
+-(void)resizeSearchWindow;
+
 @end
 
 @implementation SmartFolder
@@ -62,7 +69,7 @@
 		smartFolderId = -1;
 		db = newDb;
 		firstRun = YES;
-		parentId = MA_Root_Folder;
+		parentId = VNAFolderTypeRoot;
 		arrayOfViews = [[NSMutableArray alloc] init];
 	}
 	return self;
@@ -109,7 +116,7 @@
 			[self initForField:criteria.field inRow:searchCriteriaView];
 
 			[fieldNamePopup selectItemWithTitle:NSLocalizedString([criteria field], nil)];
-			[operatorPopup selectItemWithTitle:NSLocalizedString([Criteria stringFromOperator:[criteria operator]], nil)];
+			[operatorPopup selectItemWithTitle:[Criteria localizedStringFromOperator:[criteria operator]]];
 
 			Field * field = [nameToFieldMap valueForKey:criteria.field];
 			switch (field.type)
@@ -179,14 +186,14 @@
 		[fieldNamePopup removeAllItems];
 		for (Field * field in [db arrayOfFields])
 		{
-			if (field.tag != MA_FieldID_Headlines &&
-				field.tag != MA_FieldID_GUID &&
-				field.tag != MA_FieldID_Link &&
-				field.tag != MA_FieldID_Comments &&
-				field.tag != MA_FieldID_Summary &&
-				field.tag != MA_FieldID_Parent &&
-				field.tag != MA_FieldID_Enclosure &&
-				field.tag != MA_FieldID_EnclosureDownloaded)
+			if (field.tag != ArticleFieldIDHeadlines &&
+				field.tag != ArticleFieldIDGUID &&
+				field.tag != ArticleFieldIDLink &&
+				field.tag != ArticleFieldIDComments &&
+				field.tag != ArticleFieldIDSummary &&
+				field.tag != ArticleFieldIDParent &&
+				field.tag != ArticleFieldIDEnclosure &&
+				field.tag != ArticleFieldIDEnclosureDownloaded)
 			{
 				[fieldNamePopup addItemWithRepresentedObject:field.displayName object:field];
 				[nameToFieldMap setValue:field forKey:field.name];
@@ -204,14 +211,6 @@
 		[dateValueField addItemWithRepresentedObject:NSLocalizedString(@"Yesterday", nil) object:@"yesterday"];
 		[dateValueField addItemWithRepresentedObject:NSLocalizedString(@"Last Week", nil) object:@"last week"];
 
-		// Initialise the condition popup
-		NSString * anyString = NSLocalizedString([CriteriaTree conditionToString:MA_CritCondition_Any], nil);
-		NSString * allString = NSLocalizedString([CriteriaTree conditionToString:MA_CritCondition_All], nil);
-
-		[criteriaConditionPopup removeAllItems];
-		[criteriaConditionPopup addItemWithTag:anyString tag:MA_CritCondition_Any];
-		[criteriaConditionPopup addItemWithTag:allString tag:MA_CritCondition_All];
-
 		// Set the tags on the controls
 		[fieldNamePopup setTag:MA_SFEdit_FieldTag];
 		[operatorPopup setTag:MA_SFEdit_OperatorTag];
@@ -227,7 +226,7 @@
 	// Initialise the folder control with a list of all folders
 	// in the database.
 	[folderValueField removeAllItems];
-	[self initFolderValueField:MA_Root_Folder atIndent:0];
+	[self initFolderValueField:VNAFolderTypeRoot atIndent:0];
 	
 	// Init the folder name field and disable the Save button if it is blank
 	smartFolderName.stringValue = folderName;
@@ -244,13 +243,13 @@
 {
 	for (Folder * folder in [[db arrayOfFolders:fromId] sortedArrayUsingSelector:@selector(folderNameCompare:)])
 	{
-		if (IsRSSFolder(folder)||IsGoogleReaderFolder(folder)||IsGroupFolder(folder))
+		if (folder.type == VNAFolderTypeRSS||folder.type == VNAFolderTypeOpenReader||folder.type == VNAFolderTypeGroup)
 		{
 			[folderValueField addItemWithTitle:folder.name];
 			NSMenuItem * menuItem = [folderValueField itemWithTitle:folder.name];
 			menuItem.image = folder.image;
 			menuItem.indentationLevel = indentation;
-			if (IsGroupFolder(folder))
+			if (folder.type == VNAFolderTypeGroup)
 				[self initFolderValueField:folder.itemId atIndent:indentation + 2];
 		}
 	}
@@ -400,7 +399,7 @@
 	for ( NSNumber * number in operators )
 	{
 		CriteriaOperator operator = [number integerValue];
-		NSString * operatorString = NSLocalizedString([Criteria stringFromOperator:operator], nil);
+		NSString * operatorString = [Criteria localizedStringFromOperator:operator];
 		[popUpButton addItemWithTag:operatorString tag:operator];
 	}
 }

@@ -3,7 +3,7 @@
 //  Vienna
 //
 //  Created by Steve on 7/19/05.
-//  Copyright (c) 2004-2014 Steve Palmer and Vienna contributors (see Help/Acknowledgements for list of contributors). All rights reserved.
+//  Copyright (c) 2004-2017 Steve Palmer and Vienna contributors (see menu item 'About Vienna' for list of contributors). All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -20,23 +20,31 @@
 
 #import "RefreshManager.h"
 #import "FeedCredentials.h"
+#import "ActivityItem.h"
 #import "ActivityLog.h"
 #import "RichXMLParser.h"
 #import "StringExtensions.h"
 #import "Preferences.h"
 #import "Constants.h"
-#import "ViennaApp.h"
-#import "GoogleReader.h"
-#import "Constants.h"
+#import "OpenReader.h"
 #import "AppController.h"
 #import "ASIHTTPRequest.h"
 #import "NSNotificationAdditions.h"
 #import "VTPG_Common.h"
 #import "FeedItem.h"
-#import <QuartzCore/QuartzCore.h>
+#import "Debug.h"
+#import "Article.h"
+#import "Folder.h"
+#import "Database.h"
+#import "ASINetworkQueue.h"
 
-// Private functions
-@interface RefreshManager (Private)
+@interface RefreshManager ()
+
+@property (readwrite, copy) NSString *statusMessage;
+@property (nonatomic, retain) NSTimer * unsafe301RedirectionTimer;
+@property (atomic, copy) NSString *riskyIPAddress;
+@property (nonatomic) SyncTypes syncType;
+
 -(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type;
 -(void)getCredentialsForFolder;
 -(void)setFolderErrorFlag:(Folder *)folder flag:(BOOL)theFlag;
@@ -44,14 +52,10 @@
 -(void)pumpSubscriptionRefresh:(Folder *)folder shouldForceRefresh:(BOOL)force;
 -(void)pumpFolderIconRefresh:(Folder *)folder;
 -(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem shouldForceRefresh:(BOOL)force;
--(void)beginRefreshTimer;
--(void)refreshPumper:(NSTimer *)aTimer;
 -(void)removeConnection:(ASIHTTPRequest *)conn;
--(void)folderIconRefreshCompleted:(ASIHTTPRequest *)connector;
 -(NSString *)getRedirectURL:(NSData *)data;
-- (void)syncFinishedForFolder:(Folder *)folder; 
-@property (nonatomic, retain) NSTimer * unsafe301RedirectionTimer;
-@property (atomic, copy) NSString *riskyIPAddress;
+- (void)syncFinishedForFolder:(Folder *)folder;
+
 @end
 
 @implementation RefreshManager
@@ -83,7 +87,7 @@
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
 		[nc addObserver:self selector:@selector(handleCancelAuthenticationForFolder:) name:@"MA_Notify_CancelAuthenticationForFolder" object:nil];
-		[nc addObserver:self selector:@selector(handleWillDeleteFolder:) name:@"MA_Notify_WillDeleteFolder" object:nil];
+		[nc addObserver:self selector:@selector(handleWillDeleteFolder:) name:databaseWillDeleteFolderNotification object:nil];
 		[nc addObserver:self selector:@selector(handleChangeConcurrentDownloads:) name:@"MA_Notify_CowncurrentDownloadsChange" object:nil];
 		// be notified on system wake up after sleep
 		[[NSWorkspace sharedWorkspace].notificationCenter addObserver:self selector:@selector(handleDidWake:) name:@"NSWorkspaceDidWakeNotification" object:nil];
@@ -93,32 +97,29 @@
 	return self;
 }
 
--(dispatch_queue_t)asyncQueue {
-	return _queue;
-}
-
 - (void)nqQueueDidFinishSelector:(ASIHTTPRequest *)request {
 	if (hasStarted)
 	{
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:nil];
 		hasStarted = NO;
+        self.statusMessage = NSLocalizedString(@"Refresh completed", nil);
 	}
 	else
 	{
-	    [APPCONTROLLER setStatusMessage:nil persist:YES];
+        self.statusMessage = nil;
 	}
 	LLog(@"Queue empty!!!");
 }
 
 - (void)nqRequestFinished:(ASIHTTPRequest *)request {
-	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),networkQueue.requestsCount,NSLocalizedString(@"Refreshing subscriptions...", nil)];
-	[APPCONTROLLER setStatusMessage:self.statusMessageDuringRefresh persist:YES];
+	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),networkQueue.requestsCount,NSLocalizedString(@"Refreshing subscriptions…", nil)];
+    self.statusMessage = self.statusMessageDuringRefresh;
 }
 
 - (void)nqRequestStarted:(ASIHTTPRequest *)request {
-	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),networkQueue.requestsCount,NSLocalizedString(@"Refreshing subscriptions...", nil)];
-	[APPCONTROLLER setStatusMessage:self.statusMessageDuringRefresh persist:YES];
+	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),networkQueue.requestsCount,NSLocalizedString(@"Refreshing subscriptions…", nil)];
+    self.statusMessage = self.statusMessageDuringRefresh;
 }
 
 
@@ -167,25 +168,25 @@
 -(void)handleDidWake:(NSNotification *)nc
 {
 	NSString * currentAddress = [NSHost currentHost].address ;
-	if (![currentAddress isEqualToString:riskyIPAddress])
+	if (![currentAddress isEqualToString:self.riskyIPAddress])
 	{
 		// we might have moved to a new network
 		// so, at the next occurence we should test if we can safely handle
 		// 301 redirects
-		[unsafe301RedirectionTimer invalidate];
-		unsafe301RedirectionTimer=nil;
+		[self.unsafe301RedirectionTimer invalidate];
+		self.unsafe301RedirectionTimer=nil;
 	}
 }
 
 -(void)forceRefreshSubscriptionForFolders:(NSArray*)foldersArray
 {
-	statusMessageDuringRefresh = NSLocalizedString(@"Forcing Refresh subscriptions...", nil);
+	statusMessageDuringRefresh = NSLocalizedString(@"Forcing Refresh subscriptions…", nil);
     
 	for (Folder * folder in foldersArray)
 	{
-		if (IsGroupFolder(folder))
+		if (folder.type == VNAFolderTypeGroup)
 			[self forceRefreshSubscriptionForFolders:[[Database sharedManager] arrayOfFolders:folder.itemId]];
-		else if (IsGoogleReaderFolder(folder))
+		else if (folder.type == VNAFolderTypeOpenReader)
 		{
 			if (![self isRefreshingFolder:folder ofType:MA_Refresh_GoogleFeed] && ![self isRefreshingFolder:folder ofType:MA_ForceRefresh_Google_Feed])
 				[self pumpSubscriptionRefresh:folder shouldForceRefresh:YES];
@@ -198,15 +199,15 @@
  */
 -(void)refreshSubscriptions:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus
 {        
-	statusMessageDuringRefresh = NSLocalizedString(@"Refreshing subscriptions...", nil);
+	statusMessageDuringRefresh = NSLocalizedString(@"Refreshing subscriptions…", nil);
     
 	for (Folder * folder in foldersArray)
 	{
-		if (IsGroupFolder(folder))
+		if (folder.type == VNAFolderTypeGroup)
 			[self refreshSubscriptions:[[Database sharedManager] arrayOfFolders:folder.itemId] ignoringSubscriptionStatus:NO];
-		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
+		else if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
 		{
-			if (!IsUnsubscribed(folder) || ignoreSubStatus)
+			if (!folder.isUnsubscribed || ignoreSubStatus)
 			{
 				if (![self isRefreshingFolder:folder ofType:MA_Refresh_Feed] && ![self isRefreshingFolder:folder ofType:MA_Refresh_GoogleFeed])
 				{
@@ -218,36 +219,36 @@
 }
 
 -(void)refreshSubscriptionsAfterDelete:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
-    syncType = MA_Sync_Unsubscribe;
+    self.syncType = MA_Sync_Unsubscribe;
     [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
     
 -(void)refreshSubscriptionsAfterSubscribe:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
-    syncType = MA_Sync_Subscribe;
+    self.syncType = MA_Sync_Subscribe;
 	//   [GRSOperation setFetchFlag:YES];
     [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
 
 -(void)refreshSubscriptionsAfterUnsubscribe:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
-    syncType = MA_Sync_Unsubscribe;
+    self.syncType = MA_Sync_Unsubscribe;
     [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
 
 -(void)refreshSubscriptionsAfterMerge:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
-    syncType = MA_Sync_Merge;
+    self.syncType = MA_Sync_Merge;
     [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
 
 -(void)refreshSubscriptionsAfterRefresh:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
-    syncType = MA_Sync_Refresh;
+    self.syncType = MA_Sync_Refresh;
     [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
 
 -(void)refreshSubscriptionsAfterRefreshAll:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus 
 {   
-    syncType = MA_Sync_Refresh_All;
+    self.syncType = MA_Sync_Refresh_All;
 	
-	if ([Preferences standardPreferences].syncGoogleReader) [[GoogleReader sharedManager] loadSubscriptions:nil];
+	if ([Preferences standardPreferences].syncGoogleReader) [[OpenReader sharedManager] loadSubscriptions];
 	
     [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
@@ -257,13 +258,13 @@
  */
 -(void)refreshFolderIconCacheForSubscriptions:(NSArray *)foldersArray
 {
-	statusMessageDuringRefresh = NSLocalizedString(@"Refreshing folder images...", nil);
+	statusMessageDuringRefresh = NSLocalizedString(@"Refreshing folder images…", nil);
 	
 	for (Folder * folder in foldersArray)
 	{
-		if (IsGroupFolder(folder))
+		if (folder.type == VNAFolderTypeGroup)
 			[self refreshFolderIconCacheForSubscriptions:[[Database sharedManager] arrayOfFolders:folder.itemId]];
-		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
+		else if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
 		{
 			[self refreshFavIconForFolder:folder];
 		}
@@ -283,10 +284,10 @@
 	
 	// Do nothing if there's no homepage associated with the feed
 	// or if the feed already has a favicon.
-	if ((IsRSSFolder(folder)||IsGoogleReaderFolder(folder)) &&
+	if ((folder.type == VNAFolderTypeRSS||folder.type == VNAFolderTypeOpenReader) &&
         (folder.homePage == nil || folder.homePage.blank || folder.hasCachedImage))
 	{
-        [[Database sharedManager] clearFlag:MA_FFlag_CheckForImage forFolder:folder.itemId];
+        [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
 		return;
 	}
 	
@@ -386,7 +387,7 @@
 -(void)handleGotAuthenticationForFolder:(NSNotification *)nc
 {
 	Folder * folder = (Folder *)nc.object;
-    [[Database sharedManager] clearFlag:MA_FFlag_NeedCredentials forFolder:folder.itemId];
+    [[Database sharedManager] clearFlag:VNAFolderFlagNeedCredentials forFolder:folder.itemId];
 	[authQueue removeObject:folder];
 	[self refreshSubscriptions:@[folder] ignoringSubscriptionStatus:YES];
 	
@@ -401,9 +402,9 @@
 -(void)setFolderErrorFlag:(Folder *)folder flag:(BOOL)theFlag
 {
 	if (theFlag)
-		[folder setNonPersistedFlag:MA_FFlag_Error];
+		[folder setNonPersistedFlag:VNAFolderFlagError];
 	else
-		[folder clearNonPersistedFlag:MA_FFlag_Error];
+		[folder clearNonPersistedFlag:VNAFolderFlagError];
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
 }
 
@@ -414,9 +415,9 @@
 -(void)setFolderUpdatingFlag:(Folder *)folder flag:(BOOL)theFlag
 {
 	if (theFlag)
-		[folder setNonPersistedFlag:MA_FFlag_Updating];
+		[folder setNonPersistedFlag:VNAFolderFlagUpdating];
 	else
-		[folder clearNonPersistedFlag:MA_FFlag_Updating];
+		[folder clearNonPersistedFlag:VNAFolderFlagUpdating];
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
 }
 
@@ -428,7 +429,7 @@
 {
 	// If this folder needs credentials, add the folder to the list requiring authentication
 	// and since we can't progress without it, skip this folder on the connection
-	if (folder.flags & MA_FFlag_NeedCredentials)
+	if (folder.flags & VNAFolderFlagNeedCredentials)
 	{
 		[authQueue addObject:folder];
 		[self getCredentialsForFolder];
@@ -461,7 +462,7 @@
 	[self setFolderUpdatingFlag:folder flag:YES];
 	
 	// Additional detail for the log
-	if (IsGoogleReaderFolder(folder)) {
+	if (folder.type == VNAFolderTypeOpenReader) {
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to Open Reader server to retrieve %@", nil), urlString]];
 	} else {
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", nil), urlString]];
@@ -480,7 +481,7 @@
 {	
 	ASIHTTPRequest *myRequest;
 	
-	if (IsRSSFolder(folder)) {
+	if (folder.type == VNAFolderTypeRSS) {
 		myRequest = [ASIHTTPRequest requestWithURL:url];
 		NSString * theLastUpdateString = folder.lastUpdateString;
         if (![theLastUpdateString isEqualToString:@""])
@@ -501,7 +502,7 @@
 		myRequest.willRedirectSelector = @selector(folderRefreshRedirect:);
 		[myRequest addRequestHeader:@"Accept" value:@"application/rss+xml,application/rdf+xml,application/atom+xml,text/xml,application/xml,application/xhtml+xml;q=0.9,text/html;q=0.8,*/*;q=0.5"];
 	} else { // Open Reader feed
-		myRequest = [[GoogleReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
+		myRequest = [[OpenReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
 	}
 	myRequest.timeOutSeconds = 180;
 	// hack for handling file:// URLs
@@ -547,7 +548,7 @@
 	
 	NSString * favIconPath;
 	
-	if (IsRSSFolder(folder)) {
+	if (folder.type == VNAFolderTypeRSS) {
 		[aItem appendDetail:NSLocalizedString(@"Retrieving folder image", nil)];
 		favIconPath = [NSString stringWithFormat:@"%@/favicon.ico", folder.homePage.trim.baseURL];
 	} else { // Open Reader feed
@@ -585,13 +586,16 @@
 			
 			// Log additional details about this.
 			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), request.url]];
-			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [request responseData].length]];
+
+            NSString *byteCount = [NSByteCountFormatter stringFromByteCount:[request responseData].length
+                                                                 countStyle:NSByteCountFormatterCountStyleFile];
+            [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%@ received", @"Number of bytes received, e.g. 1 MB received"), byteCount]];
 		}
 	} else {
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), request.responseStatusCode]];
 	}
 
-    [[Database sharedManager] clearFlag:MA_FFlag_CheckForImage forFolder:folder.itemId];
+    [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
 
 }
 
@@ -601,15 +605,14 @@
 	Folder * folder = (Folder *)request.userInfo[@"folder"];
 	ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:folder.name];
 	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS Icon:", nil),request.error.localizedDescription ]];
-    [[Database sharedManager] clearFlag:MA_FFlag_CheckForImage forFolder:folder.itemId];
+    [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
 }
 
 - (void)syncFinishedForFolder:(Folder *)folder 
 {
     [self setFolderUpdatingFlag:folder flag:NO];
 	// Unread count may have changed
-	AppController *controller = APPCONTROLLER;
-	[controller setStatusMessage:nil persist:NO];
+    self.statusMessage = nil;
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
 																		object:@(folder.itemId)];
 }
@@ -645,7 +648,7 @@
 
 -(BOOL)canTrust301Redirects:(ASIHTTPRequest *)connector
 {
-    if (unsafe301RedirectionTimer == nil || !unsafe301RedirectionTimer.valid)
+    if (self.unsafe301RedirectionTimer == nil || !self.unsafe301RedirectionTimer.valid)
     {
     	NSURL * testURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://www.example.com", connector.originalURL.scheme]];
     	ASIHTTPRequest * testRequest = [ASIHTTPRequest requestWithURL:testURL];
@@ -659,8 +662,12 @@
     		// (cf RFC 6761 http://www.iana.org/go/rfc6761)
     		// so we probably have a misconfigured router / proxy
     		// and we will not consider 301 redirections as permanent for 24 hours
-    		unsafe301RedirectionTimer = [NSTimer scheduledTimerWithTimeInterval:24*3600 target:self selector:@selector(resetUnsafe301Timer:) userInfo:nil repeats:NO];
-    		riskyIPAddress = [NSHost currentHost].address;
+    		self.unsafe301RedirectionTimer = [NSTimer scheduledTimerWithTimeInterval:24*3600
+                                                                              target:self
+                                                                            selector:@selector(resetUnsafe301Timer:)
+                                                                            userInfo:nil
+                                                                             repeats:NO];
+    		self.riskyIPAddress = [NSHost currentHost].address;
     		return NO;
     	}
     	else
@@ -686,8 +693,7 @@
 -(void)folderRefreshCompleted:(ASIHTTPRequest *)connector
 {
 	dispatch_async(_queue, ^() {
-	[CATransaction begin];
-	[CATransaction setDisableActions:YES];
+	// TODO : refactor code to separate feed refresh code and UI
 		
 	Folder * folder = (Folder *)connector.userInfo[@"folder"];
 	ActivityItem *connectorItem = connector.userInfo[@"log"];
@@ -723,9 +729,10 @@
 
 		[self setFolderErrorFlag:folder flag:NO];
 		[connectorItem appendDetail:NSLocalizedString(@"Got HTTP status 304 - No news from last check", nil)];
-		[connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
-		[self syncFinishedForFolder:folder];
-		[CATransaction commit];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
+            [self syncFinishedForFolder:folder];
+        });
 		return;
 	}
 	else if (isCancelled) 
@@ -738,12 +745,12 @@
 		// [dbManager setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
 		
 		// If this folder also requires an image refresh, add that
-        if ((folder.flags & MA_FFlag_CheckForImage)) [self refreshFavIconForFolder:folder];
+        if ((folder.flags & VNAFolderFlagCheckForImage)) [self refreshFavIconForFolder:folder];
 	}
 	else if (responseStatusCode == 410)
 	{
 		// We got HTTP 410 which means the feed has been intentionally removed so unsubscribe the feed.
-        [dbManager setFlag:MA_FFlag_Unsubscribed forFolder:folderId];
+        [dbManager setFlag:VNAFolderFlagUnsubscribed forFolder:folderId];
 
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
                                                                             object:@(folderId)];
@@ -768,13 +775,16 @@
 	else	//other HTTP response codes like 404, 403...
 	{
 		[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), responseStatusCode]];
-		[connectorItem setStatus:NSLocalizedString(@"Error", nil)];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [connectorItem setStatus:NSLocalizedString(@"Error", nil)];
+        });
 		[self setFolderErrorFlag:folder flag:YES];
 	}
 
-	[self syncFinishedForFolder:folder];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self syncFinishedForFolder:folder];
+    });
 
-	[CATransaction commit];
 	}); //block for dispatch_async on _queue
 };
 
@@ -844,18 +854,24 @@
 			{
 				// Mark the feed as failed
 				[self setFolderErrorFlag:folder flag:YES];
-				[connectorItem setStatus:NSLocalizedString(@"Error parsing XML data in feed", nil)];
+                dispatch_async(dispatch_get_main_queue(), ^{
+				    [connectorItem setStatus:NSLocalizedString(@"Error parsing XML data in feed", nil)];
+                });
 				return;
 			}
             
 			// Log number of bytes we received
-			[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), receivedData.length]];
+            NSString *byteCount = [NSByteCountFormatter stringFromByteCount:receivedData.length
+                                                                 countStyle:NSByteCountFormatterCountStyleFile];
+			[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%@ received", @"Number of bytes received, e.g. 1 MB received"), byteCount]];
 			
 			if(newFeed.items.count == 0)
 			{
 				// Mark the feed as empty
 				[self setFolderErrorFlag:folder flag:YES];
-				[connectorItem setStatus:NSLocalizedString(@"No articles in feed", nil)];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [connectorItem setStatus:NSLocalizedString(@"No articles in feed", nil)];
+                });
 				return;
 			}
 
@@ -935,7 +951,7 @@
 				Article * article = [[Article alloc] initWithGuid:articleGuid];
 				article.folderId = folderId;
 				article.author = newsItem.author;
-				article.body = newsItem.description;
+				article.body = newsItem.feedItemDescription;
 				article.title = newsItem.title;
 				NSString * articleLink = newsItem.link;
 				if (![articleLink hasPrefix:@"http:"] && ![articleLink hasPrefix:@"https:"])
@@ -1007,12 +1023,16 @@
 				  
 		// Send status to the activity log
         if (newArticlesFromFeed == 0) {
+            dispatch_async(dispatch_get_main_queue(), ^{
                 [connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
+            });
         }
 		else
 		{
 			NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
-			connectorItem.status = logText;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [connectorItem setStatus:logText];
+            });
 			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:@(folder.itemId)];
 		}
 		
@@ -1022,7 +1042,7 @@
 		countOfNewArticles += newArticlesFromFeed;
 	
 		// If this folder also requires an image refresh, do that
-        if ((folder.flags & MA_FFlag_CheckForImage)) {
+        if ((folder.flags & VNAFolderFlagCheckForImage)) {
                 [self refreshFavIconForFolder:folder];
         }
 
@@ -1144,6 +1164,24 @@
 		[conn clearDelegatesAndCancel];
 	}
 	
+}
+
+/* suspendConnectionsQueue
+ * suspend the connections queue that we manage.
+ * Useful for managing dependencies inside the queue
+ */
+-(void)suspendConnectionsQueue
+{
+	[networkQueue setSuspended:YES];
+}
+
+/* resumeConnectionsQueue
+ * release the connections queue that we manage,
+ * after we suspended it.
+ */
+-(void)resumeConnectionsQueue
+{
+	[networkQueue setSuspended:NO];
 }
 
 -(BOOL)isConnecting

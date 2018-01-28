@@ -3,7 +3,7 @@
 //  Vienna
 //
 //  Created by Steve on Sat Jan 24 2004.
-//  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
+//  Copyright (c) 2004-2017 Steve Palmer and Vienna contributors. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -18,17 +18,9 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "Database.h"
-#import "ArticleController.h"
-#import "ActivityViewer.h"
-#import <Growl/Growl.h>
-#import "DownloadWindow.h"
-#import "FilterView.h"
-#import "PopupButton.h"
-#import "PluginManager.h"
-#import <AppKit/AppKit.h>
-#import "CDEvents.h"
+@import Cocoa;
+@import IOKit.pwr_mgt;
+@import WebKit;
 
 #define APPCONTROLLER ((AppController *)[NSApp delegate])
 #define APP ((ViennaApp *)NSApp)
@@ -40,77 +32,54 @@
 @class WebPreferences;
 @class BrowserView;
 @class EmptyTrashWarning;
-@class ClickableProgressIndicator;
 @class SearchPanel;
-@class BJRWindowWithToolbar;
-@class TreeFilterView;
-@class ViennaSparkleDelegate;
+@class DisclosureView;
+@class PluginManager;
+@class SearchMethod;
+@class Database;
+@class ArticleController;
+@class DownloadWindow;
+@class Article;
+@class UnifiedDisplayView;
+@class ArticleListView;
 
-@interface AppController : NSObject <NSApplicationDelegate, GrowlApplicationBridgeDelegate,NSWindowDelegate,NSToolbarDelegate,NSSplitViewDelegate,NSMenuDelegate>
+@interface AppController : NSObject <NSApplicationDelegate>
 {
-	IBOutlet BJRWindowWithToolbar * mainWindow;
-	IBOutlet ArticleController * articleController;
-	IBOutlet NSSplitView * splitView1;
-	IBOutlet NSView * exportSaveAccessory;
-	IBOutlet NSView * searchView;
-	IBOutlet NSSearchField * filterSearchField;
-	IBOutlet NSPopUpButton * filterViewPopUp;
-	IBOutlet NSView * articleFrame;
-	IBOutlet BrowserView * browserView;
-	IBOutlet NSButtonCell * exportAll;
-	IBOutlet NSButtonCell * exportSelected;
-	IBOutlet NSButton * exportWithGroups;
-	IBOutlet NSSearchField * searchField;
-	IBOutlet NSTextField * statusText;
-	IBOutlet ClickableProgressIndicator * spinner;
 	IBOutlet NSMenuItem * closeTabItem;
 	IBOutlet NSMenuItem * closeAllTabsItem;
 	IBOutlet NSMenuItem * closeWindowItem;
 	IBOutlet NSMenuItem * sortByMenu;
 	IBOutlet NSMenuItem * columnsMenu;
-	IBOutlet NSMenuItem * stylesMenu;
-	IBOutlet NSMenuItem * filtersMenu;
-	IBOutlet FilterView * filterView;
-	IBOutlet TreeFilterView *treeFilterView;
-	IBOutlet TreeFilterView *treeFilterSearchField;
-	IBOutlet NSView * cosmeticStatusBarHighlightLine;
-	IBOutlet NSTextField * currentFilterTextField;
-	IBOutlet NSButton * filterIconInStatusBarButton;
 
-	ActivityViewer * activityViewer;
 	DownloadWindow * downloadWindow;
 	SmartFolder * smartFolder;
 	NewGroupFolder * groupFolder;
 	EmptyTrashWarning * emptyTrashWarning;
 	SearchPanel * searchPanel;
-	NSMutableArray * sourceWindows;
 	
 	Database * db;
-	PluginManager * pluginManager;
 	NSMutableDictionary * scriptPathMappings;
-	NSMenu * appDockMenu;
 	NSStatusItem * appStatusItem;
-	NSInteger progressCount;
 	NSDictionary * standardURLs;
 	NSTimer * checkTimer;
 	NSInteger lastCountOfUnread;
-	BOOL isStatusBarVisible;
-	NSString * persistedStatusText;
 	NSMenuItem * scriptsMenuItem;
 	BOOL didCompleteInitialisation;
 	NSString * searchString;
     
     NewSubscription * _rssFeed;
-    CDEvents * _events;
-    ViennaSparkleDelegate * _sparkleDelegate;
 }
 
-@property(nonatomic, strong) NewSubscription *rssFeed;
-@property(nonatomic, strong) IBOutlet FoldersTree * foldersTree;
+@property (nonatomic) PluginManager *pluginManager;
+@property (nonatomic, weak) BrowserView *browserView;
+@property (nonatomic) ArticleController *articleController;
+@property (nonatomic, weak) UnifiedDisplayView *unifiedListView;
+@property (nonatomic, weak) ArticleListView *articleListView;
+@property (nonatomic, strong) NewSubscription *rssFeed;
+@property (nonatomic) FoldersTree *foldersTree;
+@property (readonly, copy, nonatomic) NSMenu *searchFieldMenu;
 
 // Menu action items
--(IBAction)handleAbout:(id)sender;
--(IBAction)exitVienna:(id)sender;
 -(IBAction)reindexDatabase:(id)sender;
 -(IBAction)deleteMessage:(id)sender;
 -(IBAction)deleteFolder:(id)sender;
@@ -125,20 +94,19 @@
 -(IBAction)viewFirstUnread:(id)sender;
 -(IBAction)viewNextUnread:(id)sender;
 -(IBAction)printDocument:(id)sender;
--(IBAction)toggleActivityViewer:(id)sender;
 -(IBAction)goBack:(id)sender;
 -(IBAction)goForward:(id)sender;
 -(IBAction)newSmartFolder:(id)sender;
 -(IBAction)newSubscription:(id)sender;
 -(IBAction)newGroupFolder:(id)sender;
 -(IBAction)editFolder:(id)sender;
--(IBAction)showXMLSource:(id)sender;
 -(IBAction)showViennaHomePage:(id)sender;
 -(IBAction)viewArticlePages:(id)sender;
 -(IBAction)viewArticlePagesInAlternateBrowser:(id)sender;
 -(IBAction)openWebElementInNewTab:(id)sender;
 -(IBAction)openWebElementInDefaultBrowser:(id)sender;
 -(IBAction)doSelectScript:(id)sender;
+-(IBAction)doSelectStyle:(id)sender;
 -(IBAction)doOpenScriptsFolder:(id)sender;
 -(IBAction)viewSourceHomePage:(id)sender;
 -(IBAction)viewSourceHomePageInAlternateBrowser:(id)sender;
@@ -163,7 +131,6 @@
 -(IBAction)conditionalShowDownloadsWindow:(id)sender;
 -(IBAction)mailLinkToArticlePage:(id)sender;
 -(IBAction)openWebLocation:(id)sender;
--(IBAction)changeFiltering:(id)sender;
 -(IBAction)getInfo:(id)sender;
 -(IBAction)unsubscribeFeed:(id)sender;
 -(IBAction)useCurrentStyleForArticles:(id)sender;
@@ -176,7 +143,6 @@
 -(IBAction)makeTextSmaller:(id)sender;
 -(IBAction)newTab:(id)sender;
 -(IBAction)downloadEnclosure:(id)sender;
--(IBAction)showHideStatusBar:(id)sender;
 -(IBAction)showHideFilterBar:(id)sender;
 -(IBAction)hideFilterBar:(id)sender;
 -(IBAction)setFocusToSearchField:(id)sender;
@@ -187,7 +153,6 @@
 
 
 // Public functions
--(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;
 -(NSArray *)contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems;
 -(void)showUnreadCountOnApplicationIconAndWindowTitle;
 -(void)openURLFromString:(NSString *)urlString inPreferredBrowser:(BOOL)openInPreferredBrowserFlag;
@@ -209,16 +174,13 @@
 @property (nonatomic, getter=isConnecting, readonly) BOOL connecting;
 -(void)runAppleScript:(NSString *)scriptName;
 -(NSDictionary *)standardURLs;
-@property (nonatomic, readonly, strong) BrowserView *browserView;
 @property (nonatomic, readonly, copy) NSArray *folders;
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
--(void)toggleOptionKeyButtonStates;
-@property (nonatomic, readonly, copy) NSMenu *folderMenu;
 -(void)updateStatusBarFilterButtonVisibility;
 @property (nonatomic, readonly, strong) NSLayoutManager *layoutManager;
--(void)viewAnimationCompleted:(NSView *)theView withTag:(NSInteger)viewTag;
--(void)growlNotify:(id)notifyContext title:(NSString *)title description:(NSString *)description notificationName:(NSString *)notificationName;
 -(void)performWebSearch:(SearchMethod *)searchMethod;
 -(void)performAllArticlesSearch;
 -(void)performWebPageSearch;
+-(void)searchArticlesWithString:(NSString *)searchString;
+
 @end

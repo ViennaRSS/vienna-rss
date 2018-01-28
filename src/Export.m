@@ -19,12 +19,15 @@
 //
 
 #import "Export.h"
+
+#import "Folder.h"
 #import "FoldersTree.h"
 #import "StringExtensions.h"
-#import "BJRWindowWithToolbar.h"
 
-@interface Export()
+@interface Export ()
+
 + (NSXMLDocument *)opmlDocumentFromFolders:(NSArray *)folders inFoldersTree:(FoldersTree *)foldersTree withGroups:(BOOL)groupFlag exportCount:(NSInteger *)countExported;
+
 @end
 
 @implementation Export
@@ -40,7 +43,7 @@
 	{
 		NSMutableDictionary * itemDict = [[NSMutableDictionary alloc] init];
 		NSString * name = folder.name;
-		if (IsGroupFolder(folder))
+		if (folder.type == VNAFolderTypeGroup)
 		{
 			NSArray * subFolders = [foldersTree children:folder.itemId];
 			
@@ -56,7 +59,7 @@
 				countExported += [Export exportSubscriptionGroup:outlineElement fromArray:subFolders inFoldersTree:foldersTree withGroups:groupFlag];
 			}
 		}
-		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
+		else if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
 		{
 			NSString * link = folder.homePage;
 			NSString * description = folder.feedDescription;
@@ -150,7 +153,7 @@
     NSXMLElement *headElement = [NSXMLElement elementWithName:@"head"];
     NSXMLElement *title = [NSXMLElement elementWithName:@"title" stringValue:@"Vienna Subscriptions"];
     NSXMLElement *dateCreated = [NSXMLElement elementWithName:@"dateCreated"
-                                                  stringValue:[NSCalendarDate date].description];
+                                                  stringValue:[NSDate new].description];
     [headElement addChild:title];
     [headElement addChild:dateCreated];
     [opmlElement addChild:headElement];

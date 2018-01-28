@@ -19,7 +19,7 @@
 //
 
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 extern NSString * MA_Field_GUID;
 extern NSString * MA_Field_Subject;
@@ -40,28 +40,35 @@ extern NSString * MA_Field_Enclosure;
 extern NSString * MA_Field_EnclosureDownloaded;
 extern NSString * MA_Field_HasEnclosure;
 
-
-// Article field IDs. Convert to enum
-#define MA_FieldID_GUID					400
-#define MA_FieldID_Subject				401
-#define MA_FieldID_Author				402
-#define MA_FieldID_Date					403
-#define MA_FieldID_Parent				404
-#define MA_FieldID_Read					405
-#define MA_FieldID_Flagged				406
-#define MA_FieldID_Text					407
-#define MA_FieldID_Folder				408
-#define MA_FieldID_Link					409
-#define MA_FieldID_Comments				410
-#define MA_FieldID_Headlines			411
-#define MA_FieldID_Deleted				412
-#define MA_FieldID_Summary				413
-#define MA_FieldID_CreatedDate			414
-#define MA_FieldID_Enclosure			415
-#define MA_FieldID_EnclosureDownloaded	416
-#define MA_FieldID_HasEnclosure			417
-
 @class Folder;
+
+// Article field IDs
+typedef NS_ENUM(NSInteger, ArticleFieldID) {
+    ArticleFieldIDGUID = 400,
+    ArticleFieldIDSubject,
+    ArticleFieldIDAuthor,
+    ArticleFieldIDDate,
+    ArticleFieldIDParent,
+    ArticleFieldIDRead,
+    ArticleFieldIDFlagged,
+    ArticleFieldIDText,
+    ArticleFieldIDFolder,
+    ArticleFieldIDLink,
+    ArticleFieldIDComments,
+    ArticleFieldIDHeadlines,
+    ArticleFieldIDDeleted,
+    ArticleFieldIDSummary,
+    ArticleFieldIDCreatedDate, // Not in use?
+    ArticleFieldIDEnclosure,
+    ArticleFieldIDEnclosureDownloaded,
+    ArticleFieldIDHasEnclosure
+};
+
+typedef NS_ENUM(NSInteger, ArticleStatus) {
+    ArticleStatusEmpty = 0,
+    ArticleStatusNew,
+    ArticleStatusUpdated
+};
 
 @interface Article : NSObject {
     NSMutableDictionary * articleData;
@@ -74,12 +81,6 @@ extern NSString * MA_Field_HasEnclosure;
     BOOL hasEnclosureFlag;
     NSInteger status;
 }
-
-typedef NS_ENUM(NSInteger, ArticleStatus) {
-    ArticleStatusEmpty = 0,
-    ArticleStatusNew,
-    ArticleStatusUpdated
-};
 
 // Accessor functions
 -(instancetype)initWithGuid:(NSString *)theGuid /*NS_DESIGNATED_INITIALIZER*/;

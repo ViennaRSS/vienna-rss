@@ -19,187 +19,68 @@
 //
 
 #import "ActivityLog.h"
+
+#import "ActivityItem.h"
 #import "Database.h"
+#import "Folder.h"
 
-@implementation ActivityItem
+@interface ActivityLog ()
 
-/* init
- * Initialise a new ActivityItem object
- */
--(instancetype)init
-{
-	if ((self = [super init]) != nil)
-	{
-		self.name = @"";
-		self.status = @"";
-		details = nil;
-	}
-	return self;
-}
-
-/* name
- * Returns the object source name.
- */
--(NSString *)name
-{
-	return name;
-}
-
-/* status
- * Returns the object source status
- */
--(NSString *)status
-{
-	return status;
-}
-
-/* setName
- * Sets the source name
- */
--(void)setName:(NSString *)aName
-{
-	name = aName;
-}
-
-/* setStatus
- * Sets the item status.
- */
--(void)setStatus:(NSString *)aStatus
-{
-	dispatch_async(dispatch_get_main_queue(), ^{
-		status = aStatus;
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityLogChange" object:self];
-	});
-}
-
-/* clearDetails
- * Empties the details log for this item.
- */
--(void)clearDetails
-{
-	[details removeAllObjects];
-}
-
-/* appendDetail
- * Appends the specified text string to the details for this item.
- */
--(void)appendDetail:(NSString *)aString
-{
-	dispatch_async(dispatch_get_main_queue(), ^{
-		if (details == nil) {
-			details = [[NSMutableArray alloc] init];
-		}
-		[details addObject:aString];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityDetailChange" object:self];
-	});
-}
-
-/* details
- * Returns all details for this item. Caution: the return value
- * may be nil if the item has no initialised details.
- */
--(NSString *)details
-{
-	NSMutableString * detailString = [NSMutableString stringWithString:@""];
-	if (details != nil)
-	{
-		for (NSString * aString in details)
-		{
-			[detailString appendFormat:@"%@\n", aString];
-		}
-	}
-	return detailString;
-}
-
-/* description
- * Return item description for debugging.
- */
--(NSString *)description
-{
-	return [NSString stringWithFormat:@"{'%@', '%@'}", name, status];
-}
+@property (nonatomic) NSMutableArray<ActivityItem *> *log;
 
 @end
 
-
 @implementation ActivityLog
 
-/* defaultLog
- * Return the default log singleton.
- */
-+(ActivityLog *)defaultLog
-{
-	// Singleton
-	static ActivityLog * defaultActivityLog = nil;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		defaultActivityLog = [[ActivityLog alloc] init];
-	});
-	return defaultActivityLog;
+#pragma mark Initialization
+
++ (ActivityLog *)defaultLog {
+    static ActivityLog *_defaultLog = nil;
+    static dispatch_once_t onceToken;
+
+    dispatch_once(&onceToken, ^{
+        _defaultLog = [self new];
+    });
+
+    return _defaultLog;
 }
 
-/* init
- * Initialise a new log instance.
- */
--(instancetype)init
-{
-	if ((self = [super init]) != nil)
-	{
-		log = [[NSMutableArray alloc] init];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWillDeleteFolder:) name:@"MA_Notify_WillDeleteFolder" object:nil];
-	}
-	return self;
+- (instancetype)init {
+    if (self = [super init]) {
+        self.log = [NSMutableArray new];
+
+        [NSNotificationCenter.defaultCenter addObserver:self
+                                               selector:@selector(handleWillDeleteFolder:)
+                                                   name:databaseWillDeleteFolderNotification
+                                                 object:nil];
+    }
+
+    return self;
 }
 
-/* handleWillDeleteFolder
- * Trap the notification that the specified folder is about to be deleted.
- */
--(void)handleWillDeleteFolder:(NSNotification *)nc
-{
-	Folder * folder = [[Database sharedManager] folderFromID:[nc.object integerValue]];
-	ActivityItem * item = [self itemByName:folder.name];
-	[log removeObject:item];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityLogChange" object:nil];
+- (void)dealloc {
+    [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
-/* getStatus
- * Retrieves the status item in the array corresponding to the source name. On
- * return, indexPointer is the index of the item or the index of the item just
- * where the status item should be if it was found.
- */
--(ActivityItem *)getStatus:(NSString *)name index:(NSInteger *)indexPointer
-{
-	NSInteger indexOfItem = 0;
-	ActivityItem * item;
+#pragma mark Accessors
 
-	for (item in log)
-	{
-		if ([item.name caseInsensitiveCompare:name] == NSOrderedSame)
-			break;
-		++indexOfItem;
-	}
-	*indexPointer = indexOfItem;
-	return item;
+- (NSArray *)allItems {
+    return self.log;
 }
 
-/* itemByName
- * Returns the ActivityItem that corresponds to the specified name. If one doesn't
- * exist then it is created.
- */
--(ActivityItem *)itemByName:(NSString *)theName
-{
-	ActivityItem * item;
-	NSInteger insertionIndex;
+- (ActivityItem *)itemByName:(NSString *)name {
+    NSInteger insertionIndex;
+    ActivityItem *item = [self getStatus:name index:&insertionIndex];
 
-	if ((item = [self getStatus:theName index:&insertionIndex]) == nil)
-	{
-		item = [[ActivityItem alloc] init];
-		item.name = theName;
-		[log insertObject:item atIndex:insertionIndex];
-		
-		item = log[insertionIndex];
-	}
-	return item;
+    // If no item is found, create a new item.
+    if (!item) {
+        item = [ActivityItem new];
+        item.name = name;
+        [self.log insertObject:item atIndex:insertionIndex];
+        item = self.log[insertionIndex];
+    }
+
+    return item;
 }
 
 /* sortUsingDescriptors
@@ -207,22 +88,42 @@
  */
 -(void)sortUsingDescriptors:(NSArray *)sortDescriptors
 {
-	[log sortUsingDescriptors:sortDescriptors];
+	[self.log sortUsingDescriptors:sortDescriptors];
 }
 
-/* allItems
- * Return a copy of all items in the log.
+#pragma mark Helper methods
+
+/**
+ Retrieves the status item in the array corresponding to the source name. On
+ return, indexPointer is the index of the item or the index of the item just
+ where the status item should be if it was found.
  */
--(NSArray *)allItems
-{
-	return log;
+- (ActivityItem *)getStatus:(NSString *)name index:(NSInteger *)indexPointer {
+    NSInteger index = 0;
+    ActivityItem *item;
+
+    for (item in self.log) {
+        if ([item.name caseInsensitiveCompare:name] == NSOrderedSame) {
+            break;
+        }
+        ++index;
+    }
+    *indexPointer = index;
+
+    return item;
 }
 
-/* dealloc
- * Clean up after ourself.
+#pragma mark Notification handling
+
+/**
+ Removes the folder from the log and posts a notification.
  */
--(void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+- (void)handleWillDeleteFolder:(NSNotification *)nc {
+    Folder *folder = [[Database sharedManager] folderFromID:[nc.object integerValue]];
+    [self.log removeObject:[self itemByName:folder.name]];
+
+    [NSNotificationCenter.defaultCenter postNotificationName:activityItemStatusUpdatedNotification
+                                                      object:nil];
 }
+
 @end

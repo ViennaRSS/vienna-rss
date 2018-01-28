@@ -1,0 +1,141 @@
+/* No comment provided by engineer. */
+"(No title)" = "(Sem título)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(Notícias Sem Título)";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Autor";
+
+/* Title of a button on an alert */
+"Cancel" = "Cancelar";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna tentou criar a pasta \"%@\" mas um erro ocorreu. Verifique as permissões nas pastas do caminho especificado.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Desculpe, mas o Vienna não pode criar a pasta de dados";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "O arquivo de dados (%@) não pode ser aberto por alguma razão. Ele deve estar corrompido ou inacessível. Por favor apague ou renomeie o arquivo de dados e reinicie o Vienna.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Desculpe, mas o Vienna foi incapaz de abrir o arquivo de dados";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Atualização de Banco de Dados";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Data";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Apagado";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "URL do Anexo";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Marcados";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Pasta";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Anexo";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Manchetes";
+
+/* Data field name visible in menu/article list */
+"Link" = "Link";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Um novo arquivo de dados do Vienna não pode ser criado em \"%@\" pois a pasta está provavelmente localizada em um disco de rede e esta versão do Vienna não gerencia dados remotos. Por favor escolha uma pasta alternativa que esteja localizada em seu computador.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Impossível criar arquivo de dados do Vienna";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Artigos Marcados";
+
+/* Title of a button on an alert */
+"Quit Vienna" = "Encerrar Vienna";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Lidos";
+
+/* No comment provided by engineer. */
+"Search Results" = "Pesquisar Resultados";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Pesquisar todos os artigos";
+
+/* Placeholder title of a search field */
+"Search current web page" = "Pesquisar na página web atual";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Assunto";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Resumo";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Texto";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Artigos de Hoje";
+
+/* No comment provided by engineer. */
+"Trash" = "Lixo";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Artigos Não Lidos";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "O formato do arquivo de dados(%@) não possui suporte nessa versão do Vienna. Apague ou renomeie o arquivo e reinicie o Vienna.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "O formato do arquivo de dados foi alterado";
+
+/* Title of a button on an alert */
+"Upgrade Database" = "Atualizar Banco de Dados";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "O Vienna precisa atualizar seu banco de dados para a última versão.  Isto pode demorar um minuto ou dois.  Pedimos desculpas pelo inconveniente.";
+
+/* test for a string */
+"contains" = "contém";
+
+/* test for a string */
+"does not contain" = "não contém";
+
+/* test for a value */
+"is" = "é";
+
+/* test for a date */
+"is after" = "depois de";
+
+/* test for a date */
+"is before" = "antes de";
+
+/* test for a numeric value */
+"is greater than" = "é maior que";
+
+/* test for a numeric value */
+"is greater than or equal to" = "é maior ou igual a";
+
+/* test for a numeric value */
+"is less than" = "é menor que";
+
+/* test for a numeric value */
+"is less than or equal to" = "é menoor ou igual a";
+
+/* test for a value */
+"is not" = "não é";
+
+/* test for a date */
+"is on or after" = "é em ou depois";
+
+/* test for a date */
+"is on or before" = "é em ou antes";
+

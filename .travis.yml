@@ -1,16 +1,22 @@
 language: objective-c
-osx_image: xcode8.3
-xcode_workspace: Vienna.xcworkspace
-xcode_scheme: Vienna
+osx_image: xcode9.2
 
-script: xcodebuild -workspace "$TRAVIS_XCODE_WORKSPACE" -scheme "$TRAVIS_XCODE_SCHEME" test | xcpretty
+jobs:
+  include:
+    # testing
+    - stage: test
+      script: xcodebuild -workspace Vienna.xcworkspace -scheme Vienna test | xcpretty
+    # linting
+    - stage: lint
+      before_script:
+        - brew outdated swiftlint || brew upgrade swiftlint
+        - swiftlint version
+      script: swiftlint --lenient --reporter emoji
 
 notifications:
-  webhooks:
-      urls:
-      on_failure: always
-      on_start: never
-
-# for container-based infrastructure
-sudo: false
-cache: cocoapods
+  slack:
+    rooms:
+      - secure: G/L2fP8z8+jNFicgMkOPrc3e7HqdQ2HkyazUMHwWLOsKmjM0ERqQ6FZXLlSr2P/kukqfUGHCGBGRdoMUb7jebNY0fNQyLYoUD7L91MLaz/zSBpDu4Yl+cVQJER1F6WFWNf697Uevvun1Mmz3N6zHe82KjQtE1yk/qFCbPyG5uJ8=
+    template: "%{commit_subject}\n<%{compare_url}|%{commit}> in <%{pull_request_url}|#%{pull_request_number}> by %{author} <%{build_url}|%{result}> in %{duration}"
+    on_success: change
+    on_failure: change

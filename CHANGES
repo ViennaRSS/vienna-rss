@@ -8,12 +8,50 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.2.0
+-----
+- Use .tgz file extension for downloadable archives of Vienna.app and .dSYM files
+
+3.2.0 rc 1
+------------
+- Fix some OpenReader error handling
+- Remove a tab bar animation introduced in 3.2.0 Beta 1
+- Update copyright information
+
+3.2.0 Beta 3
+------------
+- Fix persistent tab bar at launch
+- Update FMDB to 2.7.4
+
+3.2.0 Beta 2
+------------
+- Fix crashes on systems prior to Sierra
+
+3.2.0 Beta 1
+------------
+### ! For OS X 10.9 or later only !
+- New toolbar icons
+- Use default external application to view content of cached XML files
+- Show acknowledgements in "About" panel
+- Technical updates :
+	- Converted NIBs to XIBs and to Auto Layout
+	- Moved translation system to Base localization and Crowdin
+	- Refactored some UI elements to separate XIB files
+	- Refactorings (to KVO or delegate patterns, and conversion of various elements to properties)
+	- Change OpenReader to use asynchronous requests
+	- Update to Xcode 9
+	- Conversion of code for some UI elements to Swift4
+	- Replace CDEvents with Swift-based FSEvents implementation
+	- Update autorevision to 1.20
+	- Update Sparkle to 1.18.1
+	- Update MASPreferences to 1.3.0
+	- plus various housekeeping changes…
+
 3.1.16
 ------
 - Fix article selection after an article is deleted from within the 'Unread Articles' folder
 - Fix bugs related to multithreading
 - Fix handling of impossibility of creating the database
-- Corrected changelog text at version 3.1.15
 
 3.1.15
 ------

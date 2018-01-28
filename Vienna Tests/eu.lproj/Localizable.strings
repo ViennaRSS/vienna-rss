@@ -1,0 +1,129 @@
+/* No comment provided by engineer. */
+"(No title)" = "(Titulurik ez)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(Jario izengabea)";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Egilea";
+
+/* Title of a button on an alert */
+"Cancel" = "Ezeztatu";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna-k \"%@\" direktorioa sortzen saiatu da baina errore bat gertatu da. Begiratu direktorioa sortu nahi duzun tokiaren baimenak.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Barkatu baina Vienna-k ezin izan du datu baseko direktorioa sortu";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "Datu base fitxategia (%@) ezin izan da ireki hainbat arrazoiengatik. Agian apurtuta edota ezin izan da fitxategira sartu. Mesedez ezabatu edo berrizendu fitxategia eta Vienna berrabiarazi.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Barkatu baina Vienna-k ezin izan du datu basea ireki";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Datu basea eguneratuta";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Data";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Ezabatuta";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "URL esparrua";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Adierazlea";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Direktorioa";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Esparrua";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Tituluak";
+
+/* Data field name visible in menu/article list */
+"Link" = "Esteka";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Ezin da Vienna datu base berri bat sortu \"%@\" -(e)n direktorioa urruneko direktorio batean kokatua dagoelako eta Vienna-k ezin ditu urruneko datu baseak kudeatu. Mesedez aukeratu zeure disko gogorrean dagoen direktorioren bat.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Ezin da Vienna-ko datu basea sortu";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Adierazlea Duten Artikuluak";
+
+/* Title of a button on an alert */
+"Quit Vienna" = "Irten Vienna-tik";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Irakurrita";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Gaia";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Laburpena";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Testua";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Gaurko Artikuluak";
+
+/* No comment provided by engineer. */
+"Trash" = "Zakarrontzia";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Irakurri Gabeko Artikuluak";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "Vienna-ko bertsio honek ez du (%@) datu base fitxategiaren formatua ulertzen. Ezabatu edota berrizendu eta berrabiarazi Vienna.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "Datu basearen fitxategiaren formatua aldatu egin da";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.";
+
+/* test for a string */
+"contains" = "dauka";
+
+/* test for a string */
+"does not contain" = "ez dauka";
+
+/* test for a value */
+"is" = "da";
+
+/* test for a date */
+"is after" = "geroago da";
+
+/* test for a date */
+"is before" = "lehenago da";
+
+/* test for a numeric value */
+"is greater than" = "haundiago da";
+
+/* test for a numeric value */
+"is greater than or equal to" = "haundiago edo berdina da";
+
+/* test for a numeric value */
+"is less than" = "gutxiago da";
+
+/* test for a numeric value */
+"is less than or equal to" = "gutxiago edo berdina da";
+
+/* test for a value */
+"is not" = "ez da";
+
+/* test for a date */
+"is on or after" = "dago edo ondoren";
+
+/* test for a date */
+"is on or before" = "dago edo lehenago";
+

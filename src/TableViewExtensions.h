@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
 @interface ExtendedTableView : NSTableView {
 	BOOL delegateImplementsShouldDisplayToolTips;
@@ -26,7 +26,7 @@
 }
 
 -(void)setHeaderImage:(NSString *)identifier imageName:(NSString *)name;
--(void)localiseHeaderStrings;
+
 @end
 
 @interface NSObject(TaskWindowTableViewDelegate)

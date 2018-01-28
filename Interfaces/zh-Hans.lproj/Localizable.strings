@@ -1,0 +1,582 @@
+/* No comment provided by engineer. */
+"%@ Info" = "%@ 信息";
+
+/* No comment provided by engineer. */
+"%d new articles retrieved" = "有 %d 篇新文章";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully exported" = "已经成功输出了 %d 个频道";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully imported" = "已经成功导入了 %d 个频道";
+
+/* No comment provided by engineer. */
+"%d unread articles" = "%d 篇未读文章";
+
+/* No comment provided by engineer. */
+"%u articles" = "%u 文章";
+
+/* No comment provided by engineer. */
+"%u unread" = "%u 未读";
+
+/* No comment provided by engineer. */
+"(No title)" = "(无标题)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(无标题的频道)";
+
+/* No comment provided by engineer. */
+"A folder with that name already exists" = "已经有文件夹使用了这个名称";
+
+/* Toolbar item name for the Advanced preference pane */
+"Advanced" = "高级";
+
+/* Already subscribed body */
+"Already subscribed body" = "您已经订阅了这个频道";
+
+/* Already subscribed title */
+"Already subscribed title" = "错误";
+
+/* No comment provided by engineer. */
+"An error occurred when this feed was last refreshed" = "上次更新这个频道时发生了一个错误";
+
+/* Toolbar item name for the Appearance preference pane */
+"Appearance" = "外观";
+
+/* No comment provided by engineer. */
+"Articles" = "文章";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "作者";
+
+/* Title of a button on an alert
+   Title of a popup menu item */
+"Cancel" = "取消";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna 在创建文件夹 \"%@\" 时发生错误。请检查指定路径上文件夹的权限";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "抱歉，Vianna 无法创建数据库文件夹";
+
+/* No comment provided by engineer. */
+"Cannot create folder body" = "The \"%@\" folder cannot be created.";
+
+/* No comment provided by engineer. */
+"Cannot create folder title" = "Cannot create folder";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "由于一些原因，数据库文件 (%@) 无法被读取。它可能已损坏或者权限不足。请尝试删除或者重命名数据库文件然后重新启动 Vienna";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "抱歉，Vienna 无法开启这个数据库";
+
+/* No comment provided by engineer. */
+"Cannot open export file message" = "无法创建输出文件";
+
+/* No comment provided by engineer. */
+"Cannot open export file message text" = "无法创建指定的输出文件。请检查这个文件是否被锁定，以及是否有其他程序正在使用";
+
+/* No comment provided by engineer. */
+"Cannot rename folder" = "无法重命名文件夹";
+
+/* No comment provided by engineer. */
+"Clear" = "清楚最近的搜索";
+
+/* No comment provided by engineer. */
+"Click the Open button to open this file." = "点击开启按钮来开启文件";
+
+/* No comment provided by engineer. */
+"Click the Play button to play this enclosure in iTunes." = "点击播放按钮来通过 iTunes 来播放这个附带文件。";
+
+/* No comment provided by engineer. */
+"Connecting to %@" = "正在连接到 %@";
+
+/* No comment provided by engineer. */
+"Copy Link to Clipboard" = "将连接复制到剪贴板";
+
+/* No comment provided by engineer. */
+"Copy Page Link to Clipboard" = "复制页面连接到粘贴板";
+
+/* No comment provided by engineer. */
+"Credentials Prompt" = "\"%@\" 这个订阅需要提供账号和密码";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "数据库升级";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "日期";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Delete" = "删除";
+
+/* Title of a menu item */
+"Delete Article" = "删除文章";
+
+/* No comment provided by engineer. */
+"Delete Open Reader RSS feed text" = "Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.";
+
+/* No comment provided by engineer. */
+"Delete RSS feed" = "删除频道";
+
+/* No comment provided by engineer. */
+"Delete RSS feed text" = "您确定要取消 \"%@\" 的订阅么？这个操作将会删除这个频道下的全部条目";
+
+/* No comment provided by engineer. */
+"Delete folder status" = "正在删除文件夹 \"%@\"…";
+
+/* No comment provided by engineer. */
+"Delete group folder" = "删除群组文件夹";
+
+/* No comment provided by engineer. */
+"Delete group folder text" = "您确定要删除群组文件夹 \"%@\" 以及它的子目录么？这个操作不可还原";
+
+/* No comment provided by engineer. */
+"Delete multiple folders" = "删除多个文件夹";
+
+/* No comment provided by engineer. */
+"Delete multiple folders text" = "您确定要删除所有%d个被选中的文件夹么？这个操作不可还原";
+
+/* No comment provided by engineer. */
+"Delete selected message" = "您确定要永久删除所选的文章么？";
+
+/* No comment provided by engineer. */
+"Delete selected message text" = "这个操作无法还原";
+
+/* No comment provided by engineer. */
+"Delete smart folder" = "删除智能文件夹";
+
+/* No comment provided by engineer. */
+"Delete smart folder text" = "您确定要删除智能文件夹 \"%@\" 么？这将不会影响符合搜索条件的条目";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "已删除";
+
+/* Title of a menu item */
+"Delete…" = "删除…";
+
+/* No comment provided by engineer. */
+"Do you really want to import the subscriptions from the specified OPML file?" = "您确定要通过 OPML 文件来导入频道么？";
+
+/* No comment provided by engineer. */
+"Download" = "下载";
+
+/* Title of a menu item */
+"Download Enclosure" = "下载附带文件";
+
+/* Title of a menu item */
+"Download Enclosures" = "下载附带文件";
+
+/* Notification title */
+"Download completed" = "下载完成";
+
+/* Notification title */
+"Download failed" = "下载失败";
+
+/* No comment provided by engineer. */
+"Downloads Running" = "下载进行中";
+
+/* No comment provided by engineer. */
+"Downloads Running text" = "您确定要取消所有下载并且退出 Vienna 么？";
+
+/* Title of a menu item */
+"Edit…" = "编辑…";
+
+/* Title of a button on an alert */
+"Empty" = "清空";
+
+/* No comment provided by engineer. */
+"Empty Trash message" = "您确定要永久删除废纸篓中的文章么？";
+
+/* No comment provided by engineer. */
+"Empty Trash message text" = "这个操作无法还原";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "附带文件的 URL";
+
+/* No comment provided by engineer. */
+"Enter the URL here" = "请在这里输入 URL 地址";
+
+/* No comment provided by engineer. */
+"Error" = "错误";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions body" = "无法导入指定文件。文件内容不是有效的 OPML XML 格式";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions title" = "导入错误";
+
+/* No comment provided by engineer. */
+"Error parsing XML data in feed" = "解析条目中 XML 数据时出现错误";
+
+/* No comment provided by engineer. */
+"External Browser" = "外部浏览器";
+
+/* No comment provided by engineer. */
+"Feed URL updated to %@" = "频道 URL 已经更新为 %@";
+
+/* Notification body */
+"File %@ downloaded" = "文件 %@ 已下载";
+
+/* Notification body */
+"File %@ failed to download" = "文件 %@ 下载失败";
+
+/* No comment provided by engineer. */
+"Flag" = "精华";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "标记精华";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "文件夹";
+
+/* No comment provided by engineer. */
+"Folder image retrieved from %@" = "从 %@ 成功接收了文件夹图片";
+
+/* No comment provided by engineer. */
+"Folders" = "文件夹";
+
+/* Toolbar item name for the General preference pane */
+"General" = "通用";
+
+/* Title of a menu item */
+"Get Info" = "获取信息";
+
+/* No comment provided by engineer. */
+"Go forward to the next page" = "去到下一个页面";
+
+/* No comment provided by engineer. */
+"HTTP code %d reported from server" = "服务器回报 HTTP 代码 %d";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "附带文件";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "标题";
+
+/* No comment provided by engineer. */
+"Hide Filter Bar" = "隐藏过滤栏";
+
+/* Title of a menu item */
+"Hide Status Bar" = "隐藏状态栏";
+
+/* Title of a button on an alert */
+"Import" = "导入";
+
+/* No comment provided by engineer. */
+"Import subscriptions from OPML file?" = "通过 OPML 文件来导入频道么？";
+
+/* No comment provided by engineer. */
+"Invalid style body" = "将会替换为默认的风格";
+
+/* No comment provided by engineer. */
+"Invalid style title" = "%@ 这个风格貌似有问题";
+
+/* No comment provided by engineer. */
+"Last Week" = "上个星期";
+
+/* Data field name visible in menu/article list */
+"Link" = "连接";
+
+/* No comment provided by engineer. */
+"Loading…" = "读取中…";
+
+/* No comment provided by engineer. */
+"Locate Text" = "无法在 \"%@\" 创建新的 Vienna 数据库。可能是因为此文件夹处于远端共享网络上，当前版本的 Vienna 不支持远端共享网络上的数据库。请选择一个在您本地机器上的文件夹。";
+
+/* No comment provided by engineer. */
+"Locate Title" = "无法创建 Vienna 数据库";
+
+/* Title of a menu item */
+"Mark All Articles as Read" = "标记所有文章为已读";
+
+/* No comment provided by engineer. */
+"Mark All Read" = "标记所有文章为已读";
+
+/* Title of a menu item */
+"Mark All Subscriptions as Read" = "标记所有频道为已读";
+
+/* Title of a menu item */
+"Mark Flagged" = "标记精华";
+
+/* Title of a menu item */
+"Mark Read" = "标记已读";
+
+/* No comment provided by engineer. */
+"Mark Unflagged" = "取消精华";
+
+/* Title of a menu item */
+"Mark Unread" = "标记未读";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "精华文章";
+
+/* No comment provided by engineer. */
+"More Scripts…" = "更多脚本…";
+
+/* No comment provided by engineer. */
+"Move Folders" = "移动文件夹";
+
+/* No comment provided by engineer. */
+"Never" = "从不";
+
+/* No comment provided by engineer. */
+"New Tab" = "新标签";
+
+/* Notification title */
+"New articles retrieved" = "新文章";
+
+/* No comment provided by engineer. */
+"New style body" = "\"%@\" 这个风格已经成功安装到了风格文件夹中，您现在可以从风格菜单中选择它了。";
+
+/* No comment provided by engineer. */
+"New style title" = "Vienna 安装了一个新的风格";
+
+/* Notification body */
+"New unread articles retrieved" = "收到了 %d 篇新文章";
+
+/* No comment provided by engineer. */
+"No" = "否";
+
+/* No comment provided by engineer. */
+"No new articles available" = "没有新文章";
+
+/* Title of a button on an alert */
+"OK" = "是的";
+
+/* Title of a popup menu item */
+"Open" = "打开";
+
+/* Title of a menu item */
+"Open Article Page" = "打开文章页面";
+
+/* No comment provided by engineer. */
+"Open Article Page in %@" = "在 %@ 中打开文章页面";
+
+/* Title of a menu item */
+"Open Article Page in External Browser" = "在浏览器中打开文章页面";
+
+/* No comment provided by engineer. */
+"Open Frame" = "打开框架";
+
+/* No comment provided by engineer. */
+"Open Image in %@" = "在 %@ 中显示图像";
+
+/* No comment provided by engineer. */
+"Open Image in New Tab" = "在新标签中显示图片";
+
+/* No comment provided by engineer. */
+"Open Link in %@" = "在 %@ 中打开连接";
+
+/* No comment provided by engineer. */
+"Open Link in New Tab" = "在新标签中打开连接";
+
+/* No comment provided by engineer. */
+"Open Page in %@" = "在 %@ 中打开页面";
+
+/* No comment provided by engineer. */
+"Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
+
+/* No comment provided by engineer. */
+"Open Scripts Folder" = "打开脚本文件夹";
+
+/* Title of a menu item */
+"Open Subscription Home Page" = "打开频道主页";
+
+/* No comment provided by engineer. */
+"Open Subscription Home Page in %@" = "在 %@ 中打开频道主页";
+
+/* Title of a menu item */
+"Open Subscription Home Page in External Browser" = "在浏览器中打开频道主页";
+
+/* No comment provided by engineer. */
+"Other" = "其他";
+
+/* No comment provided by engineer. */
+"Play" = "播放";
+
+/* Title of the Preferences window */
+"Preferences" = "预置";
+
+/* Title of a button on an alert */
+"Quit" = "退出";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Quit Vienna" = "退出 Vienna";
+
+/* No comment provided by engineer. */
+"RSS Subscription Export Title" = "输出完成";
+
+/* No comment provided by engineer. */
+"RSS Subscription Import Title" = "导入完成";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "已读";
+
+/* No comment provided by engineer. */
+"Recent Searches" = "最近的搜索";
+
+/* No comment provided by engineer. */
+"Recents" = "最近";
+
+/* Title of a menu item */
+"Refresh All Subscriptions" = "更新所有的频道";
+
+/* Title of a menu item */
+"Refresh Selected Subscriptions" = "更新所选的频道";
+
+/* No comment provided by engineer. */
+"Refresh completed" = "更新完成";
+
+/* No comment provided by engineer. */
+"Refresh the current page" = "刷新当前页面";
+
+/* No comment provided by engineer. */
+"Refreshing subscriptions…" = "正在更新订阅…";
+
+/* Title of a popup menu item */
+"Remove From List" = "从列表中移除";
+
+/* Title of a menu item */
+"Rename…" = "重命名…";
+
+/* Title of a menu item */
+"Restore Article" = "复原文章";
+
+/* No comment provided by engineer. */
+"Resubscribe" = "重新订阅频道";
+
+/* No comment provided by engineer. */
+"Retrieving articles" = "正在接收文章";
+
+/* No comment provided by engineer. */
+"Retrieving folder image" = "正在接收文件夹图片";
+
+/* No comment provided by engineer. */
+"Return to the previous page" = "回到前一个页面";
+
+/* No comment provided by engineer. */
+"Search Results" = "搜索结果";
+
+/* Placeholder title of a search field */
+"Search all articles" = "搜索所有文章";
+
+/* No comment provided by engineer. */
+"Search in %@" = "在 %@ 中搜索";
+
+/* No comment provided by engineer. */
+"Select…" = "选择…";
+
+/* No comment provided by engineer. */
+"Send Link" = "发送连接";
+
+/* No comment provided by engineer. */
+"Send Links" = "发送多个连接";
+
+/* No comment provided by engineer. */
+"Show Filter Bar" = "显示过滤栏";
+
+/* Title of a menu item */
+"Show Status Bar" = "显示状态栏";
+
+/* Title of a menu item */
+"Show Toolbar" = "显示工具栏";
+
+/* Title of a popup menu item */
+"Show in Finder" = "在 Finder 中显示";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "主题";
+
+/* No comment provided by engineer. */
+"Subscribe to the feed for this page" = "订阅这个页面上的频道";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "总结";
+
+/* Data field name visible in smart folder definition */
+"Text" = "内容";
+
+/* No comment provided by engineer. */
+"This article contains an enclosed file." = "这篇文章包含附带文件。";
+
+/* No comment provided by engineer. */
+"Today" = "今天";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "今天的文章";
+
+/* No comment provided by engineer. */
+"Trash" = "废纸篓";
+
+/* No comment provided by engineer. */
+"Unread" = "未读";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "未读文章";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "当前版本的 Vienna 不支持数据库 (%@) 的文件格式。请删除或者重新命名这个文件然后重新 Vianna。";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "数据库文件格式已改变";
+
+/* No comment provided by engineer. */
+"Unsubscribe" = "取消频道订阅";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file body" = "Vienna 无法打开 \"%@\" 这个文件，可能是因为您在下载后移动了这个文件";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file title" = "Vienna 无法打开这个文件";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file body" = "Vienna 无法显示 \"%@\" 这个文件，可能是因为您在下载后移动了这个文件";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file title" = "Vienna 无法显示这个文件";
+
+/* No comment provided by engineer. */
+"Yes" = "是";
+
+/* No comment provided by engineer. */
+"Yesterday" = "昨天";
+
+/* test for a string */
+"contains" = "包含";
+
+/* test for a string */
+"does not contain" = "不包含";
+
+/* test for a value */
+"is" = "为";
+
+/* test for a date */
+"is after" = "迟于";
+
+/* test for a date */
+"is before" = "早于";
+
+/* test for a numeric value */
+"is greater than" = "大于";
+
+/* test for a numeric value */
+"is greater than or equal to" = "大于或等于";
+
+/* test for a numeric value */
+"is less than" = "小于";
+
+/* test for a numeric value */
+"is less than or equal to" = "小于或等于";
+
+/* test for a value */
+"is not" = "非";
+
+/* test for a date */
+"is on or after" = "迟于（含）";
+
+/* test for a date */
+"is on or before" = "早于（含）";
+

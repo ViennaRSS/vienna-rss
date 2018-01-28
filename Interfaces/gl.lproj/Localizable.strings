@@ -1,0 +1,690 @@
+/* No comment provided by engineer. */
+"%@ Info" = "Información de %@";
+
+/* No comment provided by engineer. */
+"%d new articles retrieved" = "Recuperados %d novos artigos";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully exported" = "%d subscricións correctamente exportadas";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully imported" = "%d subscricións importadas correctamente";
+
+/* No comment provided by engineer. */
+"%d unread articles" = "%d artigos sen ler";
+
+/* No comment provided by engineer. */
+"%u articles" = "%u artigos";
+
+/* No comment provided by engineer. */
+"%u unread" = "%u sen ler";
+
+/* No comment provided by engineer. */
+"(No title)" = "(Sen título)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(Fonte sen título)";
+
+/* No comment provided by engineer. */
+"A folder with that name already exists" = "Xa existe un cartafol con ese nome";
+
+/* No comment provided by engineer. */
+"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Un novo plugin foi instalado. Agora está dispoñible no menú e pode engadilo á barra de ferramentas.";
+
+/* Toolbar item name for the Advanced preference pane */
+"Advanced" = "Avanzado";
+
+/* No comment provided by engineer. */
+"After 2 Days" = "Despois de 2 días";
+
+/* No comment provided by engineer. */
+"After 2 Weeks" = "Despois de 2 semanas";
+
+/* No comment provided by engineer. */
+"After a Day" = "Despois dun día";
+
+/* No comment provided by engineer. */
+"After a Month" = "Despois dun mes";
+
+/* No comment provided by engineer. */
+"After a Week" = "Despois dunha semana";
+
+/* Already subscribed body */
+"Already subscribed body" = "Xa está subscrito a esta fonte";
+
+/* Already subscribed title */
+"Already subscribed title" = "Erro";
+
+/* No comment provided by engineer. */
+"An error occurred when this feed was last refreshed" = "Produciuse un erro ao actualizar esta fonte";
+
+/* Toolbar item name for the Appearance preference pane */
+"Appearance" = "Apariencia";
+
+/* No comment provided by engineer. */
+"AppleScript Error in '%@' script" = "Erro de appleScript en script '%@'";
+
+/* No comment provided by engineer. */
+"Articles" = "Artigos";
+
+/* No comment provided by engineer. */
+"Ascending" = "Ascendente";
+
+/* No comment provided by engineer. */
+"Authenticating on Open Reader" = "Autenticando en Open Reader";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Autor";
+
+/* Title of a button on an alert
+   Title of a popup menu item */
+"Cancel" = "Cancelar";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna ha intentado crear la carpeta \"%@\" pero ha ocurrido un error. Compruebe los permisos de las carpetas de la ruta especificada.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Sentímolo, mais Vienna non puido crear o cartafol da base de datos";
+
+/* No comment provided by engineer. */
+"Cannot create folder body" = "O cartafol \"%@\" non puido ser creado.";
+
+/* No comment provided by engineer. */
+"Cannot create folder title" = "Non se pode crear o cartafol";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "Por algún motivo, o artigo da base de datos (%@) non se puido abrir. Pode estar danado ou inaccesible. Por favor, elimine ou cambie o nome do arquivo da base de datos e reinicie Vienna.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Vienna non puido abrir a base de datos";
+
+/* No comment provided by engineer. */
+"Cannot open export file message" = "Non se pode crear o arquivo de exportación";
+
+/* No comment provided by engineer. */
+"Cannot open export file message text" = "Non se pode crear o arquivo de exportación especificado. Comprobe que non está bloqueado e que ningunha outra aplicación o está a empregar.";
+
+/* No comment provided by engineer. */
+"Cannot rename folder" = "Non se puido renomear o cartafol";
+
+/* No comment provided by engineer. */
+"Clear" = "Baleirar as buscas recentes";
+
+/* No comment provided by engineer. */
+"Click the Open button to open this file." = "Faga clic no botón Abrir para abrir este arquivo.";
+
+/* No comment provided by engineer. */
+"Click the Play button to play this enclosure in iTunes." = "Faga clic no botón Reproducir para reproducir este arquivo adxunto en iTunes.";
+
+/* No comment provided by engineer. */
+"Connecting to %@" = "Conectando con %@";
+
+/* No comment provided by engineer. */
+"Connecting to Open Reader server to retrieve %@" = "Conectando có servidor Open Reader para recuperar %@";
+
+/* No comment provided by engineer. */
+"Copy Link to Clipboard" = "Copiar ligazón ao portapapeis";
+
+/* No comment provided by engineer. */
+"Copy Page Link to Clipboard" = "Copiar ligazón da páxina ao portapapeis";
+
+/* No comment provided by engineer. */
+"Credentials Prompt" = "A subscrición a \"%@\" precisa dun nome de usuario e dun contrasinal.";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Actualización da base de datos";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Data";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Delete" = "Eliminar";
+
+/* Title of a menu item */
+"Delete Article" = "Eliminar artigo";
+
+/* No comment provided by engineer. */
+"Delete Open Reader RSS feed" = "Eliminar subscrición de Open Reader";
+
+/* No comment provided by engineer. */
+"Delete Open Reader RSS feed text" = "Asegúrate de que o nome de usuario e o contrasinal precisos para acceder ao servidor de Open Reader foron inseridos correctamente nas preferencias de Vienna .\nComproba tamén o teu acceso a internet.";
+
+/* No comment provided by engineer. */
+"Delete RSS feed" = "Eliminar subscrición";
+
+/* No comment provided by engineer. */
+"Delete RSS feed text" = "¿Está seguro que desea cancelar la suscripción a \"%@\"? Esta operación eliminará todos los artículos almacenados.";
+
+/* No comment provided by engineer. */
+"Delete folder status" = "Eliminando cartafol \"%@\"…";
+
+/* No comment provided by engineer. */
+"Delete group folder" = "Eliminar cartafol de grupo";
+
+/* No comment provided by engineer. */
+"Delete group folder text" = "Realmente queres eliminar o cartafol de grupo \"%@\" e todo o seu contido? Esta operación non se pode desfacer.";
+
+/* No comment provided by engineer. */
+"Delete multiple folders" = "Eliminar varios cartafoles";
+
+/* No comment provided by engineer. */
+"Delete multiple folders text" = "Realmente queres eliminar todos os cartafoles seleccionados? Esta operación non se pode desfacer.";
+
+/* No comment provided by engineer. */
+"Delete selected message" = "Estás seguro de eliminar permanentemente os artigos seleccionados?";
+
+/* No comment provided by engineer. */
+"Delete selected message text" = "Esta operación non pode ser desfeita.";
+
+/* No comment provided by engineer. */
+"Delete smart folder" = "Eliminar cartafol intelixente";
+
+/* No comment provided by engineer. */
+"Delete smart folder text" = "Realmente queres eliminar o cartafol intelixente \"%@\"? Esta operación non eliminará os artigos atopados actualmente pola busca.";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Eliminado";
+
+/* Title of a menu item */
+"Delete…" = "Eliminar…";
+
+/* No comment provided by engineer. */
+"Descending" = "Descendente";
+
+/* No comment provided by engineer. */
+"Do you really want to import the subscriptions from the specified OPML file?" = "Realmente desexa importar as subscricións do arquivo OPML especificado?";
+
+/* No comment provided by engineer. */
+"Download" = "Descargar";
+
+/* Title of a menu item */
+"Download Enclosure" = "Descargar arquivo adxunto";
+
+/* Title of a menu item */
+"Download Enclosures" = "Descargar arquivos adxuntos";
+
+/* Notification title */
+"Download completed" = "Descarga completada";
+
+/* Notification title */
+"Download failed" = "Erro ao descargar";
+
+/* No comment provided by engineer. */
+"Downloads Running" = "Unha ou máis descargas en curso";
+
+/* No comment provided by engineer. */
+"Downloads Running text" = "Se saes de Vienna agora, deteranse as descargas.";
+
+/* Title of a menu item */
+"Edit…" = "Editar…";
+
+/* Title of a button on an alert */
+"Empty" = "Baleirar";
+
+/* No comment provided by engineer. */
+"Empty Trash message" = "Realmente queres eliminar permanentemente as mensaxes do lixo?";
+
+/* No comment provided by engineer. */
+"Empty Trash message text" = "Esta acción non pode ser desfeita.";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "URL do adxunto";
+
+/* No comment provided by engineer. */
+"Enter the URL here" = "Introduza a URL aquí";
+
+/* No comment provided by engineer. */
+"Error" = "Erro";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions body" = "Erro ao importar o arquivo especificado. O contido deste non está nun formato OPML XML válido.";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions title" = "Error ao importar";
+
+/* No comment provided by engineer. */
+"Error loading script '%@'" = "Erro ao cargar o script '%@'";
+
+/* No comment provided by engineer. */
+"Error parsing XML data in feed" = "Erro ao analizar os datos XML da fonte";
+
+/* No comment provided by engineer. */
+"Error retrieving RSS Icon:" = "Erro recuperando a icona da subscrición:";
+
+/* No comment provided by engineer. */
+"Error retrieving RSS feed:" = "Erro recuperando subscrición";
+
+/* No comment provided by engineer. */
+"Error: Feed not found!" = "Erro: Fonta non atopada!";
+
+/* No comment provided by engineer. */
+"External Browser" = "navegador externo";
+
+/* No comment provided by engineer. */
+"Feed URL updated to %@" = "URL da fonte actualizada a %@";
+
+/* No comment provided by engineer. */
+"Fetching Open Reader Subscriptions…" = "Procurando subscricións de Open Reader…";
+
+/* Notification body */
+"File %@ downloaded" = "Arquivo %@ descargado";
+
+/* Notification body */
+"File %@ failed to download" = "Erro ao descargar o arquivo %@";
+
+/* No comment provided by engineer. */
+"Flag" = "Destacar";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Destacado";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Cartafol";
+
+/* No comment provided by engineer. */
+"Folder image retrieved from %@" = "Icona do cartafol recuperada de %@";
+
+/* No comment provided by engineer. */
+"Folders" = "Cartafpñes";
+
+/* Title of a menu item */
+"Force Refresh Selected Subscriptions From Open Reader" = "Forzar a actualización das subscricións seleccionadas dende Open Reader";
+
+/* No comment provided by engineer. */
+"Forcing Refresh subscriptions…" = "A forzar a actualización de subscricións…";
+
+/* Toolbar item name for the General preference pane */
+"General" = "Xeral";
+
+/* Title of a menu item */
+"Get Info" = "Obter información";
+
+/* No comment provided by engineer. */
+"Go forward to the next page" = "Avanzar á páxina seguinte";
+
+/* No comment provided by engineer. */
+"Got HTTP status 304 - No news from last check" = "Recibido estado HTTP 304 - Non hai novas dende a última procura";
+
+/* No comment provided by engineer. */
+"HTTP code %d reported from server" = "Código HTTP %d notificado dende o servidor";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Arquivo adxunto";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Titulares";
+
+/* No comment provided by engineer. */
+"Hide Filter Bar" = "Ocultar barra de filtros";
+
+/* Title of a menu item */
+"Hide Status Bar" = "Ocultar barra de estado";
+
+/* Title of a menu item */
+"Hide Toolbar" = "Ocultar a barra de ferramentas";
+
+/* Title of a button on an alert */
+"Import" = "Importar";
+
+/* No comment provided by engineer. */
+"Import subscriptions from OPML file?" = "Importar subscricións dende o arquivo OPML?";
+
+/* No comment provided by engineer. */
+"Improper infinitely looping URL redirect to %@" = "Redirixir URL infinitamente cíclica a %@";
+
+/* No comment provided by engineer. */
+"Invalid style body" = "O estilo por defecto (Default) será empregado no seu lugar.";
+
+/* No comment provided by engineer. */
+"Invalid style title" = "O estilo %@ semella danado ou perdido.";
+
+/* No comment provided by engineer. */
+"Last Week" = "Última semana";
+
+/* Data field name visible in menu/article list */
+"Link" = "Ligazón";
+
+/* No comment provided by engineer. */
+"Loading" = "A cargar…";
+
+/* No comment provided by engineer. */
+"Loading…" = "Cargando…";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Non se pode crear a nova base de datos de Vienna en \"%@\" debido a que probablemente o cartafol está ubicado nun recurso compartido dunha rede remota e esta versión de Vienna non pode xestionar bases de datos remotas. Por favor, escolle un cartafol alternativo ubicado no seu equipo local.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Non se pode crear a base de datos de Vienna";
+
+/* Title of a button on an alert */
+"Locate…" = "Ubicar…";
+
+/* Title of a menu item */
+"Mark All Articles as Read" = "Marcar todos os artigos como lidos";
+
+/* No comment provided by engineer. */
+"Mark All Read" = "Marcar todos como lidos";
+
+/* Title of a menu item */
+"Mark All Subscriptions as Read" = "Marcar todas as subscricións como lidas";
+
+/* Title of a menu item */
+"Mark Flagged" = "Marcar como destacado";
+
+/* Title of a menu item */
+"Mark Read" = "Marcar como lido";
+
+/* No comment provided by engineer. */
+"Mark Unflagged" = "Quitar marcas";
+
+/* Title of a menu item */
+"Mark Unread" = "Marcar como non lido";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Artigos marcados";
+
+/* No comment provided by engineer. */
+"More Scripts…" = "Máis scripts…";
+
+/* No comment provided by engineer. */
+"Move Folders" = "Mover cartafoles";
+
+/* No comment provided by engineer. */
+"Never" = "Nunca";
+
+/* No comment provided by engineer. */
+"New Tab" = "Nova lapela";
+
+/* Notification title */
+"New articles retrieved" = "Novos artigos recuperados";
+
+/* No comment provided by engineer. */
+"New style body" = "O estilo \"%@\" foi instalado no cartafol correspondente e engadido ao menú Estilos.";
+
+/* No comment provided by engineer. */
+"New style title" = "Vienna instalou un novo estilo";
+
+/* Notification body */
+"New unread articles retrieved" = "Recuperados novos artigos sen ler";
+
+/* No comment provided by engineer. */
+"No" = "Non";
+
+/* No comment provided by engineer. */
+"No new articles available" = "Non hai novos artigos dispoñibles";
+
+/* Title of a button on an alert */
+"OK" = "Aceptar";
+
+/* Title of a popup menu item */
+"Open" = "Abrir";
+
+/* Title of a menu item */
+"Open Article Page" = "Abrir páxina do artigo";
+
+/* No comment provided by engineer. */
+"Open Article Page in %@" = "Abrir páxina do artigo en %@";
+
+/* Title of a menu item */
+"Open Article Page in External Browser" = "Abrir páxina do artigo nun navegador externo";
+
+/* No comment provided by engineer. */
+"Open Frame" = "Abrir marco";
+
+/* No comment provided by engineer. */
+"Open Image in %@" = "Abrir imaxe en %@";
+
+/* No comment provided by engineer. */
+"Open Image in New Tab" = "Abrir imaxe nunha nova lapela";
+
+/* No comment provided by engineer. */
+"Open Link in %@" = "Abrir ligazón en %@";
+
+/* No comment provided by engineer. */
+"Open Link in New Tab" = "Abrir ligazón nunha nova lapela";
+
+/* No comment provided by engineer. */
+"Open Page in %@" = "Abrir páxina en %@";
+
+/* No comment provided by engineer. */
+"Open Reader Authentication Failed" = "Erro ao autenticar en Open Reader";
+
+/* No comment provided by engineer. */
+"Open Reader Authentication Failed text" = "Asegúrate de que o nome de usuario e o contrasinal precisos para acceder ao servidor de Open Reader foron inseridos correctamente nas preferencias de Vienna.\nComproba tamén o teu acceso a internet.";
+
+/* No comment provided by engineer. */
+"Open Scripts Folder" = "Abrir o cartafol de scripts";
+
+/* Title of a menu item */
+"Open Subscription Home Page" = "Abrir páxina da subscrición";
+
+/* No comment provided by engineer. */
+"Open Subscription Home Page in %@" = "Abrir páxina da subscrición en %@";
+
+/* Title of a menu item */
+"Open Subscription Home Page in External Browser" = "Abrir páxina da subscrición nun navegador externo";
+
+/* No comment provided by engineer. */
+"Other" = "Outro";
+
+/* No comment provided by engineer. */
+"Play" = "Reproducir";
+
+/* No comment provided by engineer. */
+"Plugin installed" = "Plugin instalado";
+
+/* Title of the Preferences window */
+"Preferences" = "Preferencias";
+
+/* No comment provided by engineer. */
+"Queue" = "Cola";
+
+/* Title of a button on an alert */
+"Quit" = "Saír";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Quit Vienna" = "Saír de Vienna";
+
+/* No comment provided by engineer. */
+"RSS Icon not found!" = "Icona da subscrición non atopada!";
+
+/* No comment provided by engineer. */
+"RSS Subscription Export Title" = "Exportación completada";
+
+/* No comment provided by engineer. */
+"RSS Subscription Import Title" = "Importación completada";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Lido";
+
+/* No comment provided by engineer. */
+"Recent Searches" = "Buscas recentes";
+
+/* No comment provided by engineer. */
+"Recents" = "Recentes";
+
+/* No comment provided by engineer. */
+"Redirection attempt treated as temporary for safety concern" = "A tentiva de redirección foi tratada como temporal por seguridade";
+
+/* Title of a menu item */
+"Refresh All Subscriptions" = "Actualizar todas as subscricións";
+
+/* Title of a menu item */
+"Refresh Selected Subscriptions" = "Actualizar subscricións seleccionadas";
+
+/* No comment provided by engineer. */
+"Refresh completed" = "Actualización completada";
+
+/* No comment provided by engineer. */
+"Refresh the current page" = "Actualizar a páxina actual";
+
+/* No comment provided by engineer. */
+"Refreshing folder images…" = "Actualizando as iconas dos cartafoles…";
+
+/* No comment provided by engineer. */
+"Refreshing subscriptions…" = "Actualizando as subscricións…";
+
+/* Title of a popup menu item */
+"Remove From List" = "Borrar da listaxe";
+
+/* Title of a menu item */
+"Rename…" = "Renomear…";
+
+/* Title of a menu item */
+"Restore Article" = "Restaurar artigo";
+
+/* No comment provided by engineer. */
+"Resubscribe" = "Volver a subscribirse á fonte";
+
+/* No comment provided by engineer. */
+"Retrieving articles" = "Recuperando artigos";
+
+/* No comment provided by engineer. */
+"Retrieving folder image" = "Recuperando a icona do cartafol";
+
+/* No comment provided by engineer. */
+"Retrieving folder image for Open Reader Feed" = "Recuperando a icona do cartafol para a fonte de Open Reader";
+
+/* No comment provided by engineer. */
+"Return to the previous page" = "Volver á páxina anterior";
+
+/* No comment provided by engineer. */
+"Search Results" = "Resultados da procura";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Procurar todos os artigos";
+
+/* No comment provided by engineer. */
+"Search all articles or the current web page" = "Procurar en todos os artigos ou na páxina web actual";
+
+/* Placeholder title of a search field */
+"Search current web page" = "Procurar na páxina web actual";
+
+/* No comment provided by engineer. */
+"Search in %@" = "Procurar en %@";
+
+/* No comment provided by engineer. */
+"Select…" = "Seleccionar…";
+
+/* No comment provided by engineer. */
+"Send Link" = "Enviar ligazón";
+
+/* No comment provided by engineer. */
+"Send Links" = "Enviar ligazóns";
+
+/* No comment provided by engineer. */
+"Show Filter Bar" = "Amosar barra de filtros";
+
+/* Title of a menu item */
+"Show Status Bar" = "Amosar barra de estado";
+
+/* Title of a menu item */
+"Show Toolbar" = "Mostrar barra de ferramentas";
+
+/* Title of a popup menu item */
+"Show in Finder" = "Amosar no Finder";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Asunto";
+
+/* No comment provided by engineer. */
+"Subscribe to the feed for this page" = "Subscribirse á fonte desta páxina";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Resumo";
+
+/* Toolbar item name for the Syncing preference pane */
+"Syncing" = "Sincronización";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Texto";
+
+/* No comment provided by engineer. */
+"This article contains an enclosed file." = "Este artigo contén un arquivo adxunto.";
+
+/* No comment provided by engineer. */
+"Today" = "Hoxe";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Artigos de hoxe";
+
+/* No comment provided by engineer. */
+"Trash" = "Lixo";
+
+/* No comment provided by engineer. */
+"Unread" = "Sen ler";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Artigos non lidos";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "O formato do archivo da base de datos (%@) non é compatible con esta versión de Vienna. Elimine o arquivo ou cambie o seu nome e reinicie Vienna.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "O formato do arquivo da base de datos cambiou";
+
+/* No comment provided by engineer. */
+"Unsubscribe" = "Cancelar subscricións";
+
+/* Title of a button on an alert */
+"Upgrade Database" = "Actualizar a base de datos";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file body" = "Vienna non pode abrir o arquivo \"%@\" xa que foi movido desde que foi descargado.";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file title" = "Vienna non pode abrir o arquivo.";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file body" = "Vienna non pode amosar o arquivo \"%@\" xa que foi movido desde que foi descargado.";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file title" = "Vienna non pode amosar o arquivo.";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna debe actualizar a súa base de datos á última versión. Isto pode tardar un minuto máis ou menos. Perdoa polo inconveniente.";
+
+/* No comment provided by engineer. */
+"Yes" = "Si";
+
+/* No comment provided by engineer. */
+"Yesterday" = "Onte";
+
+/* test for a string */
+"contains" = "contén";
+
+/* test for a string */
+"does not contain" = "non contén";
+
+/* test for a value */
+"is" = "é";
+
+/* test for a date */
+"is after" = "é posterior a";
+
+/* test for a date */
+"is before" = "é anterior a";
+
+/* test for a numeric value */
+"is greater than" = "é maior que";
+
+/* test for a numeric value */
+"is greater than or equal to" = "é maior ou igual que";
+
+/* test for a numeric value */
+"is less than" = "é menor que";
+
+/* test for a numeric value */
+"is less than or equal to" = "é menor ou igual que";
+
+/* test for a value */
+"is not" = "non é";
+
+/* test for a date */
+"is on or after" = "é a partir de";
+
+/* test for a date */
+"is on or before" = "é anterior a ou de";
+

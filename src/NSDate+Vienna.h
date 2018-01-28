@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 uk.co.opencommunity. All rights reserved.
 //
 
-@import Cocoa;
+@import Foundation;
 
 @interface NSDate (Vienna)
 

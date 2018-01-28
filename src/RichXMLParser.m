@@ -19,27 +19,26 @@
 
 #import "RichXMLParser.h"
 #import "StringExtensions.h"
-#import "ArrayExtensions.h"
 #import "XMLTag.h"
 #import "FeedItem.h"
 #import "NSDate+Vienna.h"
 
-@interface RichXMLParser (Private)
-    -(BOOL)initRSSFeed:(NSXMLElement *)rssElement isRDF:(BOOL)isRDF;
-    -(NSXMLElement *)channelElementFromRSSElement:(NSXMLElement *)rssElement;
-    -(BOOL)initRSSFeedHeaderWithElement:(NSXMLElement *)channelElement;
-    -(BOOL)initRSSFeedItems:(NSXMLElement *)startElement;
-    -(BOOL)initAtomFeed:(NSXMLElement *)atomElement;
-    -(void)parseSequence:(NSXMLElement *)seqElement;
-    -(void)setTitle:(NSString *)newTitle;
-    -(void)setLink:(NSString *)newLink;
-    -(void)setDescription:(NSString *)newDescription;
-    -(void)setLastModified:(NSDate *)newDate;
-    -(void)ensureTitle:(FeedItem *)item;
-    -(void)identifyNamespacesPrefixes:(NSXMLElement *)element;
+@interface RichXMLParser ()
+
+-(BOOL)initRSSFeed:(NSXMLElement *)rssElement isRDF:(BOOL)isRDF;
+-(NSXMLElement *)channelElementFromRSSElement:(NSXMLElement *)rssElement;
+-(BOOL)initRSSFeedHeaderWithElement:(NSXMLElement *)channelElement;
+-(BOOL)initRSSFeedItems:(NSXMLElement *)startElement;
+-(BOOL)initAtomFeed:(NSXMLElement *)atomElement;
+-(void)parseSequence:(NSXMLElement *)seqElement;
+-(void)setTitle:(NSString *)newTitle;
+-(void)setLink:(NSString *)newLink;
+-(void)setDescription:(NSString *)newDescription;
+-(void)setLastModified:(NSDate *)newDate;
+-(void)ensureTitle:(FeedItem *)item;
+-(void)identifyNamespacesPrefixes:(NSXMLElement *)element;
+
 @end
-
-
 
 @implementation RichXMLParser
 
@@ -452,17 +451,17 @@
             [articleBody fixupRelativeImgTags:self.link];
             [articleBody fixupRelativeIframeTags:self.link];
             [articleBody fixupRelativeAnchorTags:self.link];
-            [newFeedItem setDescription:SafeString(articleBody)];
+            newFeedItem.feedItemDescription = SafeString(articleBody);
 
             // Derive any missing title
             [self ensureTitle:newFeedItem];
 
             // Add this item in the proper location in the array
-            NSUInteger indexOfItem = (orderArray && itemIdentifier) ? [orderArray indexOfStringInArray:itemIdentifier] : NSNotFound;
-            if (indexOfItem == NSNotFound || indexOfItem >= items.count) {
+            NSUInteger index = orderArray && itemIdentifier ? [orderArray indexOfObject:itemIdentifier] : NSNotFound;
+            if (index == NSNotFound || index >= items.count) {
                 [items addObject:newFeedItem];
             } else {
-                [items insertObject:newFeedItem atIndex:indexOfItem];
+                [items insertObject:newFeedItem atIndex:index];
             }
         }
     }
@@ -739,7 +738,7 @@
             [articleBody fixupRelativeImgTags:entryBase];
             [articleBody fixupRelativeIframeTags:entryBase];
             [articleBody fixupRelativeAnchorTags:entryBase];
-            [newFeedItem setDescription:SafeString(articleBody)];
+            newFeedItem.feedItemDescription = SafeString(articleBody);
 
             // Derive any missing title
             [self ensureTitle:newFeedItem];
@@ -829,7 +828,7 @@
 -(void)ensureTitle:(FeedItem *)item
 {
     if (!item.title || item.title.blank) {
-        NSString * newTitle = item.description.titleTextFromHTML.stringByUnescapingExtendedCharacters;
+        NSString * newTitle = item.feedItemDescription.titleTextFromHTML.stringByUnescapingExtendedCharacters;
         if (newTitle.blank) {
             newTitle = NSLocalizedString(@"(No title)", nil);
         }

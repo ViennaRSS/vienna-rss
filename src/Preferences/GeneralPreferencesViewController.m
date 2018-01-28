@@ -63,7 +63,7 @@
 
 #pragma mark - MASPreferencesViewController
 
-- (NSString *)identifier {
+- (NSString *)viewIdentifier {
     return @"GeneralPreferences";
 }
 
@@ -99,9 +99,6 @@
     
     // Set check for updates when starting
     checkForUpdates.state = prefs.checkForNewOnStartup ? NSOnState : NSOffState;
-    
-    // Set sending system specs when checking for updates
-    sendSystemSpecs.state = prefs.sendSystemSpecs ? NSOnState : NSOffState;
     
     // Set search for latest Beta versions when checking for updates
     alwaysAcceptBetas.state = prefs.alwaysAcceptBetas ? NSOnState : NSOffState;
@@ -224,7 +221,7 @@
     // Add a Select command so the user can manually pick a registered
     // application.
     [linksHandler addSeparator];
-    [linksHandler addItemWithTag:NSLocalizedString(@"Select...", nil) tag:-1];
+    [linksHandler addItemWithTag:NSLocalizedString(@"Select…", nil) tag:-1];
     
     // Select the registered item
     [linksHandler selectItemAtIndex:0];
@@ -292,14 +289,14 @@
         [openPanel orderOut:self];
         [prefPaneWindow makeKeyAndOrderFront:prefPaneWindow];
         
-        if (returnCode == NSOKButton)
+        if (returnCode == NSFileHandlingPanelOKButton)
         {
             NSString * downloadFolderPath = openPanel.directoryURL.path;
             [Preferences standardPreferences].downloadFolder = downloadFolderPath;
             [self updateDownloadsPopUp:downloadFolderPath];
         }
         
-        if (returnCode == NSCancelButton)
+        if (returnCode == NSFileHandlingPanelCancelButton)
             [downloadFolder selectItemAtIndex:0];
     }];
 }
@@ -372,7 +369,7 @@
         NSWindow * prefPaneWindow = linksHandler.window;
         [prefPaneWindow makeKeyAndOrderFront:self];
         
-        if (returnCode == NSOKButton)
+        if (returnCode == NSFileHandlingPanelOKButton)
             [self setDefaultLinksHandler:panel.URL];
         [self refreshLinkHandler];
     }];
@@ -441,15 +438,6 @@
 {
     float newReadInterval = ([sender selectedCell] == markReadAfterNext) ? 0 : MA_Default_Read_Interval;
     [Preferences standardPreferences].markReadInterval = newReadInterval;
-}
-
-
-/* changeSendSystemSpecs
- * Set whether Vienna send system specifications when checking for updates.
- */
--(IBAction)changeSendSystemSpecs:(id)sender
-{
-    [Preferences standardPreferences].sendSystemSpecs = [sender state] == NSOnState;
 }
 
 /* changeAlwaysAcceptBetas

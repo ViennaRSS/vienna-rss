@@ -18,19 +18,16 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "BrowserView.h"
+@import Cocoa;
+
 #import "ArticleBaseView.h"
-#import "TableViewExtensions.h"
+#import "BaseView.h"
 
 @class AppController;
-@class ArticleController;
-@class ArticleView;
+@class ExtendedTableView;
 
 @interface UnifiedDisplayView : NSView<BaseView, ArticleBaseView, NSTableViewDelegate, NSTableViewDataSource>
 {
-	IBOutlet AppController * controller;
-	IBOutlet ArticleController * articleController;
     IBOutlet ExtendedTableView *articleList;
 
 	NSTimer * markReadTimer;
@@ -38,6 +35,8 @@
 	NSMutableArray * rowHeightArray;
 	NSProgressIndicator * progressIndicator;
 }
+
+@property (weak, nonatomic) AppController *controller;
 
 // Public functions
 -(void)updateAlternateMenuTitle;

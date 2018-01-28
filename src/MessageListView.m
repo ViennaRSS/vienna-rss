@@ -94,10 +94,14 @@
 }
 
 // Might as well allow text drags into other apps...
--(NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)isLocal
+-(NSDragOperation)draggingSession:(NSDraggingSession *)session sourceOperationMaskForDraggingContext:(NSDraggingContext)context
 {
-	if (isLocal)
-		return NSDragOperationCopy|NSDragOperationGeneric;
-	return NSDragOperationCopy;
+    switch(context) {
+        case NSDraggingContextWithinApplication:
+            return NSDragOperationCopy|NSDragOperationGeneric;
+            break;
+        default:
+            return NSDragOperationCopy;
+    }
 }
 @end

@@ -1,0 +1,603 @@
+/* No comment provided by engineer. */
+"%@ Info" = "%@ - informace";
+
+/* No comment provided by engineer. */
+"%d new articles retrieved" = "Nově přijato příspěvků: %d";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully exported" = "Bylo úspěšně exportováno celkem odebírání: %d";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully imported" = "Bylo úspěšně importováno celkem odebírání: %d";
+
+/* No comment provided by engineer. */
+"%d unread articles" = "Nečtených příspěvků: %d";
+
+/* No comment provided by engineer. */
+"%u articles" = "%u příspěvků";
+
+/* No comment provided by engineer. */
+"%u unread" = "%u nečtených";
+
+/* No comment provided by engineer. */
+"(No title)" = "(není titul)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(zdroj beze jména)";
+
+/* No comment provided by engineer. */
+"A folder with that name already exists" = "Složka s tímto jménem již existuje.";
+
+/* Toolbar item name for the Advanced preference pane */
+"Advanced" = "Ostatní";
+
+/* No comment provided by engineer. */
+"After 2 Days" = "Po dvou dnech";
+
+/* No comment provided by engineer. */
+"After 2 Weeks" = "Po dvou týdnech";
+
+/* No comment provided by engineer. */
+"After a Day" = "Po dni";
+
+/* No comment provided by engineer. */
+"After a Month" = "Po měsíci";
+
+/* No comment provided by engineer. */
+"After a Week" = "Po týdnu";
+
+/* Already subscribed body */
+"Already subscribed body" = "Tento zdroj již odebíráte.";
+
+/* Already subscribed title */
+"Already subscribed title" = "Chyba";
+
+/* No comment provided by engineer. */
+"An error occurred when this feed was last refreshed" = "Při poslední obnově tohoto zdroje se vyskytla chyba.";
+
+/* Toolbar item name for the Appearance preference pane */
+"Appearance" = "Vzhled";
+
+/* No comment provided by engineer. */
+"Articles" = "Příspěvky";
+
+/* No comment provided by engineer. */
+"Ascending" = "Vzestupně";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Autor";
+
+/* Title of a button on an alert
+   Title of a popup menu item */
+"Cancel" = "Zrušit";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Program Vienna se pokusil vytvořit složku „%@“, ale vyskytla se chyba. Ověřte, zda máte oprávnění k vytvoření složky v tomto umístění.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Program Vienna nemůže vytvořit databázovou složku";
+
+/* No comment provided by engineer. */
+"Cannot create folder body" = "The \"%@\" folder cannot be created.";
+
+/* No comment provided by engineer. */
+"Cannot create folder title" = "Cannot create folder";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "Soubor databáze (%@) nelze z nějakých důvodů otevřít. Může být poškozený nebo nepřístupný. Smažte nebo přejmenujte tento soubor databáze, ukončete a znovu spusťte program Vienna.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Program Vienna nemůže otevřít databázi";
+
+/* No comment provided by engineer. */
+"Cannot open export file message" = "Nelze vytvořit soubor pro export";
+
+/* No comment provided by engineer. */
+"Cannot open export file message text" = "Nelze vytvořit určený soubor pro export. Ověřte zda není uzamčený nebo zda jej nepoužívá jiná aplikace.";
+
+/* No comment provided by engineer. */
+"Cannot rename folder" = "Nelze přejmenovat složku";
+
+/* No comment provided by engineer. */
+"Clear" = "Odstranit poslední hledání";
+
+/* No comment provided by engineer. */
+"Click the Open button to open this file." = "Soubor otevřete klepnutím na tlačítko Otevřít.";
+
+/* No comment provided by engineer. */
+"Click the Play button to play this enclosure in iTunes." = "Přílohu přehrajete v iTunes klepnutím na tlačítko Pustit.";
+
+/* No comment provided by engineer. */
+"Connecting to %@" = "Připojuje se k %@";
+
+/* No comment provided by engineer. */
+"Copy Link to Clipboard" = "Zkopírovat odkaz do schránky";
+
+/* No comment provided by engineer. */
+"Copy Page Link to Clipboard" = "Zkopírovat odkaz na stránku do schránky";
+
+/* No comment provided by engineer. */
+"Credentials Prompt" = "Odebírání položky „%@“ vyžaduje uživatelské jméno a heslo.";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Aktualizovat databázi";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Datum";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Delete" = "Smazat";
+
+/* Title of a menu item */
+"Delete Article" = "Smazat příspěvek";
+
+/* No comment provided by engineer. */
+"Delete Open Reader RSS feed text" = "Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.";
+
+/* No comment provided by engineer. */
+"Delete RSS feed" = "Smazat odebírání";
+
+/* No comment provided by engineer. */
+"Delete RSS feed text" = "Určitě chcete ukončit odebírání položky „%@“? Tato operace smaže všechny načtené příspěvky.";
+
+/* No comment provided by engineer. */
+"Delete folder status" = "Maže se složka „%@“…";
+
+/* No comment provided by engineer. */
+"Delete group folder" = "Smazat skupinovou složku";
+
+/* No comment provided by engineer. */
+"Delete group folder text" = "Určitě chcete smazat skupinovou složku „%@“ a všechny vnořené složky? Tuto operaci nelze odvolat.";
+
+/* No comment provided by engineer. */
+"Delete multiple folders" = "Smazat více složek";
+
+/* No comment provided by engineer. */
+"Delete multiple folders text" = "Určitě chcete smazat všechny vybrané složky (celkem: %d)? Tuto operaci nelze odvolat.";
+
+/* No comment provided by engineer. */
+"Delete selected message" = "Určitě chcete trvale odstranit vybrané příspěvky?";
+
+/* No comment provided by engineer. */
+"Delete selected message text" = "Tuto operaci nelze odvolat.";
+
+/* No comment provided by engineer. */
+"Delete smart folder" = "Smazat dynamickou složku";
+
+/* No comment provided by engineer. */
+"Delete smart folder text" = "Určitě chcete smazat dynamickou složku „%@“? Tato operace neodstraní stávající příspěvky zobrazované v této složce.";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Smazáno";
+
+/* No comment provided by engineer. */
+"Do you really want to import the subscriptions from the specified OPML file?" = "Určitě chcete importovat odebírání z vybraného souboru OPML?";
+
+/* No comment provided by engineer. */
+"Download" = "Zkopírovat";
+
+/* Title of a menu item */
+"Download Enclosure" = "Zkopírovat přílohu";
+
+/* Title of a menu item */
+"Download Enclosures" = "Zkopírovat přílohy";
+
+/* Notification title */
+"Download completed" = "Kopírování dokončeno";
+
+/* Notification title */
+"Download failed" = "Kopírování selhalo";
+
+/* No comment provided by engineer. */
+"Downloads Running" = "Probíhá jedno nebo více kopírování";
+
+/* No comment provided by engineer. */
+"Downloads Running text" = "Ukončíte-li program Vienna nyní, všechna kopírování budou zastavena.";
+
+/* Title of a menu item */
+"Edit…" = "Upravit…";
+
+/* Title of a button on an alert */
+"Empty" = "Smazat";
+
+/* No comment provided by engineer. */
+"Empty Trash message" = "Určitě chcete trvale odstranit příspěvky, které jsou v koši?";
+
+/* No comment provided by engineer. */
+"Empty Trash message text" = "Tuto akci nelze odvolat.";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "URL přílohy";
+
+/* No comment provided by engineer. */
+"Enter the URL here" = "Sem zadejte URL";
+
+/* No comment provided by engineer. */
+"Error" = "Chyba";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions body" = "Nelze importovat určený soubor. Tento soubor nemá platný formát OPML XML.";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions title" = "Chyba importu";
+
+/* No comment provided by engineer. */
+"Error parsing XML data in feed" = "Chyba při zpracování dat XML ze zdroje";
+
+/* No comment provided by engineer. */
+"External Browser" = "Externí prohlížeč";
+
+/* No comment provided by engineer. */
+"Feed URL updated to %@" = "URL zdroje aktualizováno na %@";
+
+/* Notification body */
+"File %@ downloaded" = "Soubor %@ zkopírován";
+
+/* Notification body */
+"File %@ failed to download" = "Kopírování souboru %@ selhalo";
+
+/* No comment provided by engineer. */
+"Flag" = "Praporek";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Praporek";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Složka";
+
+/* No comment provided by engineer. */
+"Folder image retrieved from %@" = "Obrázek složky přijat z %@";
+
+/* No comment provided by engineer. */
+"Folders" = "Složky";
+
+/* Toolbar item name for the General preference pane */
+"General" = "Obecné";
+
+/* Title of a menu item */
+"Get Info" = "Informace";
+
+/* No comment provided by engineer. */
+"Go forward to the next page" = "Otevřít následující stránku";
+
+/* No comment provided by engineer. */
+"HTTP code %d reported from server" = "Ze serveru byl obdržen kód HTTP: %d";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Příloha";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Záhlaví";
+
+/* No comment provided by engineer. */
+"Hide Filter Bar" = "Skrýt řádek filtru";
+
+/* Title of a menu item */
+"Hide Status Bar" = "Skrýt stavový řádek";
+
+/* Title of a button on an alert */
+"Import" = "Importovat";
+
+/* No comment provided by engineer. */
+"Import subscriptions from OPML file?" = "Importovat odebírání ze souboru OPML?";
+
+/* No comment provided by engineer. */
+"Invalid style body" = "Bude použit výchozí styl (Default).";
+
+/* No comment provided by engineer. */
+"Invalid style title" = "Styl %@ pravděpodobně chybí nebo je poškozený.";
+
+/* No comment provided by engineer. */
+"Last Week" = "Poslední týden";
+
+/* Data field name visible in menu/article list */
+"Link" = "Odkaz";
+
+/* No comment provided by engineer. */
+"Loading" = "Načítám";
+
+/* No comment provided by engineer. */
+"Loading…" = "Načítá se…";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Nelze vytvořit novou databázi programu Vienna v položce „%@“, protože složka je pravděpodobně umístěna v síti. Tato verze programu Vienna nemůže spravovat vzdálené databáze. Vyberte prosím jinou složku, která je umístěna v tomto počítači.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Nelze vytvořit databázi Vienna";
+
+/* Title of a menu item */
+"Mark All Articles as Read" = "Označit všechny příspěvky jako čtené";
+
+/* No comment provided by engineer. */
+"Mark All Read" = "Označit vše jako čtené";
+
+/* Title of a menu item */
+"Mark All Subscriptions as Read" = "Označit všechna odebírání jako čtená";
+
+/* Title of a menu item */
+"Mark Flagged" = "Označit praporkem";
+
+/* Title of a menu item */
+"Mark Read" = "Označit jako čtené";
+
+/* No comment provided by engineer. */
+"Mark Unflagged" = "Odebrat praporek";
+
+/* Title of a menu item */
+"Mark Unread" = "Označit jako nečtené";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Označené příspěvky";
+
+/* No comment provided by engineer. */
+"More Scripts…" = "Více skriptů…";
+
+/* No comment provided by engineer. */
+"Move Folders" = "Přesunout složky";
+
+/* No comment provided by engineer. */
+"Never" = "Nikdy";
+
+/* No comment provided by engineer. */
+"New Tab" = "nový panel";
+
+/* Notification title */
+"New articles retrieved" = "Přijaty nové příspěvky";
+
+/* No comment provided by engineer. */
+"New style body" = "Styl „%@“ byl instalován do složky se styly a přidán do nabídky Styly.";
+
+/* No comment provided by engineer. */
+"New style title" = "V programu Vienna byl instalován nový styl";
+
+/* Notification body */
+"New unread articles retrieved" = "Přijato nových nepřečtených příspěvků: %d";
+
+/* No comment provided by engineer. */
+"No" = "Ne";
+
+/* No comment provided by engineer. */
+"No new articles available" = "Žádné nové příspěvky";
+
+/* Title of a button on an alert */
+"OK" = "Budiž";
+
+/* Title of a popup menu item */
+"Open" = "Otevřít";
+
+/* Title of a menu item */
+"Open Article Page" = "Otevřít stránku příspěvku";
+
+/* No comment provided by engineer. */
+"Open Article Page in %@" = "Otevřít stránku příspěvku v programu %@";
+
+/* Title of a menu item */
+"Open Article Page in External Browser" = "Otevřít stránku příspěvku v externím prohlížeči";
+
+/* No comment provided by engineer. */
+"Open Frame" = "Otevřít rámeček";
+
+/* No comment provided by engineer. */
+"Open Image in %@" = "Otevřít obrázek v programu %@";
+
+/* No comment provided by engineer. */
+"Open Image in New Tab" = "Otevřít obrázek v novém panelu";
+
+/* No comment provided by engineer. */
+"Open Link in %@" = "Otevřít odkaz v programu %@";
+
+/* No comment provided by engineer. */
+"Open Link in New Tab" = "Otevřít odkaz v novém panelu";
+
+/* No comment provided by engineer. */
+"Open Page in %@" = "Otevřít stránku v programu %@";
+
+/* No comment provided by engineer. */
+"Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
+
+/* No comment provided by engineer. */
+"Open Scripts Folder" = "Otevřít složku skriptů";
+
+/* Title of a menu item */
+"Open Subscription Home Page" = "Otevřít domovskou stránku odebírání";
+
+/* No comment provided by engineer. */
+"Open Subscription Home Page in %@" = "Otevřít domovskou stránku odebírání v programu %@";
+
+/* Title of a menu item */
+"Open Subscription Home Page in External Browser" = "Otevřít domovskou stránku odebírání v externím prohlížeči";
+
+/* No comment provided by engineer. */
+"Other" = "Jiná";
+
+/* No comment provided by engineer. */
+"Play" = "Pustit";
+
+/* Title of the Preferences window */
+"Preferences" = "Předvolby";
+
+/* Title of a button on an alert */
+"Quit" = "Konec";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Quit Vienna" = "Ukončit Viennu";
+
+/* No comment provided by engineer. */
+"RSS Subscription Export Title" = "Export dokončen";
+
+/* No comment provided by engineer. */
+"RSS Subscription Import Title" = "Import dokončen";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Čtené";
+
+/* No comment provided by engineer. */
+"Recent Searches" = "Poslední hledání";
+
+/* No comment provided by engineer. */
+"Recents" = "Poslední položky";
+
+/* Title of a menu item */
+"Refresh All Subscriptions" = "Obnovit všechna odebírání";
+
+/* Title of a menu item */
+"Refresh Selected Subscriptions" = "Obnovit vybraná odebírání";
+
+/* No comment provided by engineer. */
+"Refresh completed" = "Obnovení dokončeno";
+
+/* No comment provided by engineer. */
+"Refresh the current page" = "Obnovit stávající stránku";
+
+/* No comment provided by engineer. */
+"Refreshing folder images…" = "Obnovují se ikony složek…";
+
+/* No comment provided by engineer. */
+"Refreshing subscriptions…" = "Obnovují se odebírání…";
+
+/* Title of a popup menu item */
+"Remove From List" = "Odstranit ze seznamu";
+
+/* Title of a menu item */
+"Rename…" = "Přejmenovat…";
+
+/* Title of a menu item */
+"Restore Article" = "Opětovně zařadit příspěvek";
+
+/* No comment provided by engineer. */
+"Resubscribe" = "Obnovit odebírání kanálu";
+
+/* No comment provided by engineer. */
+"Retrieving articles" = "Přijímají se příspěvky";
+
+/* No comment provided by engineer. */
+"Retrieving folder image" = "Přijímají se obrázky složek";
+
+/* No comment provided by engineer. */
+"Return to the previous page" = "Zpět na předchozí stránku";
+
+/* No comment provided by engineer. */
+"Search Results" = "Výsledky hledání";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Hledat ve všech příspěvcích";
+
+/* No comment provided by engineer. */
+"Search in %@" = "Hledat v „%@“";
+
+/* No comment provided by engineer. */
+"Select…" = "Vybrat…";
+
+/* No comment provided by engineer. */
+"Send Link" = "Odeslat odkaz";
+
+/* No comment provided by engineer. */
+"Send Links" = "Odeslat odkazy";
+
+/* No comment provided by engineer. */
+"Show Filter Bar" = "Zobrazit řádek filtru";
+
+/* Title of a menu item */
+"Show Status Bar" = "Zobrazit stavový řádek";
+
+/* Title of a menu item */
+"Show Toolbar" = "Zobrazit panel nástrojů";
+
+/* Title of a popup menu item */
+"Show in Finder" = "Zobrazit v programu Finder";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Předmět";
+
+/* No comment provided by engineer. */
+"Subscribe to the feed for this page" = "Odebírat kanál novinek z této stránky";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Souhrn";
+
+/* Toolbar item name for the Syncing preference pane */
+"Syncing" = "Synchronizace";
+
+/* No comment provided by engineer. */
+"This article contains an enclosed file." = "Tento příspěvek obsahuje v příloze soubor.";
+
+/* No comment provided by engineer. */
+"Today" = "Dnes";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Dnešní příspěvky";
+
+/* No comment provided by engineer. */
+"Trash" = "Koš";
+
+/* No comment provided by engineer. */
+"Unread" = "Nečtené";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Nečtené příspěvky";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "Souborový formát databáze (%@) není touto verzí programu Vienna podporovaný. Smažte nebo přejmenujte tento soubor, ukončete a znovu spusťte program Vienna.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "Formát databázového soubor byl změněn";
+
+/* No comment provided by engineer. */
+"Unsubscribe" = "Ukončit odebírání kanálu";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file body" = "Program Vienna nemůže otevřít soubor „%@“, protože byl po zkopírování přemístěn.";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file title" = "Program Vienna nemůže otevřít soubor";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file body" = "Program Vienna nemůže zobrazit soubor „%@“, protože byl po zkopírování přemístěn.";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file title" = "Program Vienna nemůže zobrazit soubor";
+
+/* No comment provided by engineer. */
+"Yes" = "Ano";
+
+/* No comment provided by engineer. */
+"Yesterday" = "Včera";
+
+/* test for a string */
+"contains" = "obsahuje";
+
+/* test for a string */
+"does not contain" = "neobsahuje";
+
+/* test for a value */
+"is" = "je";
+
+/* test for a date */
+"is after" = "je po";
+
+/* test for a date */
+"is before" = "je před";
+
+/* test for a numeric value */
+"is greater than" = "je větší než";
+
+/* test for a numeric value */
+"is greater than or equal to" = "je větší nebo stejný než";
+
+/* test for a numeric value */
+"is less than" = "je menší než";
+
+/* test for a numeric value */
+"is less than or equal to" = "je menší nebo stejný než";
+
+/* test for a value */
+"is not" = "není";
+
+/* test for a date */
+"is on or after" = "je nebo po";
+
+/* test for a date */
+"is on or before" = "je nebo před";
+

@@ -1,0 +1,651 @@
+/* No comment provided by engineer. */
+"%@ Info" = "%@ Info";
+
+/* Progress in bytes, e.g. 1 KB of 1 MB */
+"%@ of %@" = "%1$@ van %2$@";
+
+/* Number of bytes received, e.g. 1 MB received */
+"%@ received" = "%@ ontvangen";
+
+/* No comment provided by engineer. */
+"%d new articles retrieved" = "%d nieuwe artikelen opgehaald";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully exported" = "%d abonnementen geëxporteerd";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully imported" = "%d abonnementen geïmporteerd";
+
+/* No comment provided by engineer. */
+"%d unread articles" = "%d ongelezen artikelen";
+
+/* No comment provided by engineer. */
+"%u articles" = "%u artikelen";
+
+/* No comment provided by engineer. */
+"%u unread" = "%u ongelezen";
+
+/* No comment provided by engineer. */
+"(No title)" = "(Geen onderwerp)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(Naamloze feed)";
+
+/* No comment provided by engineer. */
+"A folder with that name already exists" = "Er bestaat al een map met deze naam";
+
+/* Toolbar item name for the Advanced preference pane */
+"Advanced" = "Geavanceerd";
+
+/* No comment provided by engineer. */
+"After 2 Days" = "Na 2 dagen";
+
+/* No comment provided by engineer. */
+"After 2 Weeks" = "Na 2 weken";
+
+/* No comment provided by engineer. */
+"After a Day" = "Na een dag";
+
+/* No comment provided by engineer. */
+"After a Month" = "Na een maand";
+
+/* No comment provided by engineer. */
+"After a Week" = "Na een week";
+
+/* Already subscribed body */
+"Already subscribed body" = "U heeft al een abonnement op deze feed";
+
+/* Already subscribed title */
+"Already subscribed title" = "Fout";
+
+/* No comment provided by engineer. */
+"An error occurred when this feed was last refreshed" = "De laatste keer dat deze feed is bijgewerkt, is er een fout opgetreden";
+
+/* Toolbar item name for the Appearance preference pane */
+"Appearance" = "Weergave";
+
+/* No comment provided by engineer. */
+"Articles" = "Artikelen";
+
+/* No comment provided by engineer. */
+"Ascending" = "Oplopend";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Auteur";
+
+/* Title of a button on an alert
+   Title of a popup menu item */
+"Cancel" = "Annuleer";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna probeerde de map \"%@\" te maken, maar er ging iets fout. Controleer de bevoegdheden van de bovenliggende mappen.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Vienna kan de databasemap niet aanmaken";
+
+/* No comment provided by engineer. */
+"Cannot create folder body" = "De map \"%@\" kan niet worden gecreëerd.";
+
+/* No comment provided by engineer. */
+"Cannot create folder title" = "Kan map niet creëren";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "Het database-bestand (%@) kon niet worden geopend. Het zou beschadigd of ontoegankelijk kunnen zijn. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Vienna kon de database niet openen";
+
+/* No comment provided by engineer. */
+"Cannot open export file message" = "Kan het exportbestand niet aanmaken";
+
+/* No comment provided by engineer. */
+"Cannot open export file message text" = "Het opgegeven exportbestand kon niet worden aangemaakt. Controleer of het bestand niet is beveiligd of geopend in een ander programma.";
+
+/* No comment provided by engineer. */
+"Cannot rename folder" = "Kan de mapnaam niet wijzigen";
+
+/* No comment provided by engineer. */
+"Clear" = "Wis zoekgeschiedenis";
+
+/* No comment provided by engineer. */
+"Click the Open button to open this file." = "Klik de Open knop om dit bestand te openen.";
+
+/* No comment provided by engineer. */
+"Click the Play button to play this enclosure in iTunes." = "Klik de Afspelen knop om deze bijlage in ITunes af te spelen.";
+
+/* No comment provided by engineer. */
+"Connecting to %@" = "Verbinden met %@";
+
+/* No comment provided by engineer. */
+"Copy Link to Clipboard" = "Kopieer koppeling naar klembord";
+
+/* No comment provided by engineer. */
+"Copy Page Link to Clipboard" = "Kopieer locatie naar klembord";
+
+/* Copy URL */
+"Copy URL" = "Kopieer URL";
+
+/* No comment provided by engineer. */
+"Credentials Prompt" = "Voor toegang tot het abonnement op \"%@\" heeft u een gebruikersnaam en wachtwoord nodig.";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Database bijwerken";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Datum";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Delete" = "Wis";
+
+/* Title of a menu item */
+"Delete Article" = "Wis artikel";
+
+/* No comment provided by engineer. */
+"Delete Open Reader RSS feed" = "Wis Open Reader RSS feed";
+
+/* No comment provided by engineer. */
+"Delete Open Reader RSS feed text" = "Wis Open Reader RSS feed";
+
+/* No comment provided by engineer. */
+"Delete RSS feed" = "Zeg abonnement op";
+
+/* No comment provided by engineer. */
+"Delete RSS feed text" = "Weet u zeker dat u het abonnement \"%@\" wilt opzeggen? Alle opgeslagen artikelen worden verwijderd.";
+
+/* No comment provided by engineer. */
+"Delete folder status" = "Groep \"%@\" verwijderen…";
+
+/* No comment provided by engineer. */
+"Delete group folder" = "Wis groep";
+
+/* No comment provided by engineer. */
+"Delete group folder text" = "Weet u zeker dat u de groep \"%@\" en alle subgroepen wilt verwijderen? U kunt dit niet ongedaan maken.";
+
+/* No comment provided by engineer. */
+"Delete multiple folders" = "Verwijder meerdere groepen";
+
+/* No comment provided by engineer. */
+"Delete multiple folders text" = "Weet u zeker dat u deze %d groepen wilt verwijderen? U kunt dit niet ongedaan maken.";
+
+/* No comment provided by engineer. */
+"Delete selected message" = "Weet u zeker dat u de geselecteerde berichten wilt verwijderen?";
+
+/* No comment provided by engineer. */
+"Delete selected message text" = "Deze actie kan niet ongedaan worden gemaakt.";
+
+/* No comment provided by engineer. */
+"Delete smart folder" = "Verwijder slimme map";
+
+/* No comment provided by engineer. */
+"Delete smart folder text" = "Weet u zeker dat u de slimme map \"%@\" wilt verwijderen? De originele artikelen worden niet verwijderd.";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Verwijderd";
+
+/* Title of a menu item */
+"Delete…" = "Wis…";
+
+/* No comment provided by engineer. */
+"Descending" = "Aflopend";
+
+/* No comment provided by engineer. */
+"Do you really want to import the subscriptions from the specified OPML file?" = "Wilt u echt abonnementen uit dit OPML bestand importeren?";
+
+/* No comment provided by engineer. */
+"Download" = "Download";
+
+/* Title of a menu item */
+"Download Enclosure" = "Download bijlage";
+
+/* Title of a menu item */
+"Download Enclosures" = "Download bijlages";
+
+/* Notification title */
+"Download completed" = "Download compleet";
+
+/* Notification title */
+"Download failed" = "Download niet gelukt";
+
+/* No comment provided by engineer. */
+"Downloads Running" = "Eén of meer downloads zijn nog bezig";
+
+/* No comment provided by engineer. */
+"Downloads Running text" = "Wilt u alle downloads annuleren en Vienna nu afsluiten?";
+
+/* Title of a menu item */
+"Edit…" = "Bewerk…";
+
+/* Title of a button on an alert */
+"Empty" = "Leeg";
+
+/* No comment provided by engineer. */
+"Empty Trash message" = "Weet u zeker dat u de artikelen in de prullenmand definitief wilt verwijderen?";
+
+/* No comment provided by engineer. */
+"Empty Trash message text" = "Dit kan niet ongedaan worden gemaakt";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "Bijlage URL";
+
+/* No comment provided by engineer. */
+"Enter the URL here" = "Typ de URL hier";
+
+/* No comment provided by engineer. */
+"Error" = "Fout";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions body" = "Kan het opgegeven bestand niet importeren. Het is geen geldig OPML-bestand.";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions title" = "Fout bij importeren";
+
+/* No comment provided by engineer. */
+"Error parsing XML data in feed" = "Fout tijdens het verwerken van de XML van deze feed";
+
+/* No comment provided by engineer. */
+"External Browser" = "Externe browser";
+
+/* No comment provided by engineer. */
+"Feed URL updated to %@" = "De URL van deze feed is veranderd in %@";
+
+/* Notification body */
+"File %@ downloaded" = "Bestand %@ gedownload";
+
+/* Notification body */
+"File %@ failed to download" = "Niet gelukt bestand %@ te downloaden";
+
+/* No comment provided by engineer. */
+"Flag" = "Markeer";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Gemarkeerd";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Map";
+
+/* No comment provided by engineer. */
+"Folder image retrieved from %@" = "Map-icoon opgehaald van %@";
+
+/* No comment provided by engineer. */
+"Folders" = "Mappen";
+
+/* Title of a menu item */
+"Force Refresh Selected Subscriptions From Open Reader" = "Forceer bijwerken abonnementen van Open Reader";
+
+/* Toolbar item name for the General preference pane */
+"General" = "Algemeen";
+
+/* Title of a menu item */
+"Get Info" = "Toon info";
+
+/* No comment provided by engineer. */
+"Go forward to the next page" = "Ga verder naar de volgende pagina";
+
+/* No comment provided by engineer. */
+"HTTP code %d reported from server" = "HTTP-code %d gemeld door de server";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Bijlage";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Koppen";
+
+/* No comment provided by engineer. */
+"Hide Filter Bar" = "Verberg filterbalk";
+
+/* Title of a menu item */
+"Hide Status Bar" = "Verberg statusbalk";
+
+/* Title of a menu item */
+"Hide Toolbar" = "Verberg knoppenbalk";
+
+/* Title of a button on an alert */
+"Import" = "Importeer";
+
+/* No comment provided by engineer. */
+"Import subscriptions from OPML file?" = "Importeer abonnementen uit OPML bestand?";
+
+/* No comment provided by engineer. */
+"Invalid style body" = "De standaardstijl zal worden gebruikt.";
+
+/* No comment provided by engineer. */
+"Invalid style title" = "De stijl %@ lijkt te zijn beschadigd";
+
+/* No comment provided by engineer. */
+"JavaScript" = "JavaScript";
+
+/* No comment provided by engineer. */
+"Last Week" = "Vorige week";
+
+/* Data field name visible in menu/article list */
+"Link" = "Koppeling";
+
+/* No comment provided by engineer. */
+"Loading…" = "Laadt…";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Een nieuwe Vienna-database kan niet worden aagemaakt in \"%@\". De database staat waarschijnlijk op een andere computer in het netwerk, hetgeen door deze versie van Vienna niet wordt ondersteund. Kiest u een andere locatie op deze computer.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Kan de Vienna-database niet aanmaken";
+
+/* Title of a button on an alert */
+"Locate…" = "Zoek op…";
+
+/* Title of a menu item */
+"Mark All Articles as Read" = "Markeer alles als gelezen";
+
+/* No comment provided by engineer. */
+"Mark All Read" = "Markeer alle berichten als gelezen";
+
+/* Title of a menu item */
+"Mark All Subscriptions as Read" = "Markeer alle abonnementen als gelezen";
+
+/* Title of a menu item */
+"Mark Flagged" = "Markeer";
+
+/* Title of a menu item */
+"Mark Read" = "Markeer als gelezen";
+
+/* No comment provided by engineer. */
+"Mark Unflagged" = "Hef markering op";
+
+/* Title of a menu item */
+"Mark Unread" = "Markeer als ongelezen";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Gemarkeerde artikelen";
+
+/* No comment provided by engineer. */
+"More Scripts…" = "Meer scripts…";
+
+/* No comment provided by engineer. */
+"Move Folders" = "Verplaats mappen";
+
+/* No comment provided by engineer. */
+"Never" = "Nooit";
+
+/* No comment provided by engineer. */
+"New Tab" = "Nieuwe tab";
+
+/* Notification title */
+"New articles retrieved" = "Nieuwe artikelen";
+
+/* No comment provided by engineer. */
+"New style body" = "De stijl \"%@\" is in uw stijlenmap geïnstalleerd en toegevoegd aan het menu Stijlen.";
+
+/* No comment provided by engineer. */
+"New style title" = "Vienna heeft een nieuwe stijl geïnstalleerd";
+
+/* Notification body */
+"New unread articles retrieved" = "%d nieuwe ongelezen artikelen opgehaald";
+
+/* No comment provided by engineer. */
+"No" = "Nee";
+
+/* No comment provided by engineer. */
+"No new articles available" = "Geen nieuwe artikelen beschikbaar";
+
+/* Title of a button on an alert */
+"OK" = "OK";
+
+/* Title of a popup menu item */
+"Open" = "Open";
+
+/* Title of a menu item */
+"Open Article Page" = "Ga naar artikelpagina";
+
+/* No comment provided by engineer. */
+"Open Article Page in %@" = "Open artikelpagina in %@";
+
+/* Title of a menu item */
+"Open Article Page in External Browser" = "Open artikelpagina in externe browser";
+
+/* No comment provided by engineer. */
+"Open Frame" = "Open frame";
+
+/* No comment provided by engineer. */
+"Open Image in %@" = "Open afbeelding in %@";
+
+/* No comment provided by engineer. */
+"Open Image in New Tab" = "Open afbeelding in nieuwe tab";
+
+/* No comment provided by engineer. */
+"Open Link in %@" = "Open koppeling in %@";
+
+/* No comment provided by engineer. */
+"Open Link in New Tab" = "Open koppeling in nieuwe tab";
+
+/* No comment provided by engineer. */
+"Open Page in %@" = "Open pagina in %@";
+
+/* No comment provided by engineer. */
+"Open Scripts Folder" = "Open scripts-map";
+
+/* Title of a menu item */
+"Open Subscription Home Page" = "Ga naar startpagina van abonnement";
+
+/* No comment provided by engineer. */
+"Open Subscription Home Page in %@" = "Open homepage van abonnement in %@";
+
+/* Title of a menu item */
+"Open Subscription Home Page in External Browser" = "Open abonnement-pagina in externe browser";
+
+/* No comment provided by engineer. */
+"Other" = "Andere";
+
+/* No comment provided by engineer. */
+"Play" = "Afspelen";
+
+/* Title of the Preferences window */
+"Preferences" = "Voorkeuren";
+
+/* No comment provided by engineer. */
+"Queue" = "Wachtrij";
+
+/* Title of a button on an alert */
+"Quit" = "Stop";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Quit Vienna" = "Stop Vienna";
+
+/* No comment provided by engineer. */
+"RSS Subscription Export Title" = "Exporteren voltooid";
+
+/* No comment provided by engineer. */
+"RSS Subscription Import Title" = "Importeren voltooid";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Gelezen";
+
+/* No comment provided by engineer. */
+"Recent Searches" = "Recente zoekacties";
+
+/* No comment provided by engineer. */
+"Recents" = "Recente onderdelen";
+
+/* Title of a menu item */
+"Refresh All Subscriptions" = "Werk alle abonnementen bij";
+
+/* Title of a menu item */
+"Refresh Selected Subscriptions" = "Werk geselecteerde abonnementen bij";
+
+/* No comment provided by engineer. */
+"Refresh completed" = "Bijwerken voltooid";
+
+/* No comment provided by engineer. */
+"Refresh the current page" = "Laad de huidige pagina opnieuw";
+
+/* No comment provided by engineer. */
+"Refreshing folder images…" = "Map-iconen bijwerken…";
+
+/* No comment provided by engineer. */
+"Refreshing subscriptions…" = "Abonnementen bijwerken…";
+
+/* Title of a popup menu item */
+"Remove From List" = "Verwijder uit de lijst";
+
+/* Title of a menu item */
+"Rename…" = "Wijzig naam…";
+
+/* Title of a menu item */
+"Restore Article" = "Herstel artikel";
+
+/* No comment provided by engineer. */
+"Resubscribe" = "Abonneer";
+
+/* No comment provided by engineer. */
+"Retrieving articles" = "Artikelen aan het bijwerken";
+
+/* No comment provided by engineer. */
+"Retrieving folder image" = "Map-icoon ophalen";
+
+/* No comment provided by engineer. */
+"Return to the previous page" = "Ga terug naar de vorige pagina";
+
+/* No comment provided by engineer. */
+"Search Results" = "Zoek resultaten";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Zoek naar artikels";
+
+/* No comment provided by engineer. */
+"Search all articles or the current web page" = "Doorzoek alle artikelen of de huidige webpagina";
+
+/* Placeholder title of a search field */
+"Search current web page" = "Doorzoek huidige webpagina";
+
+/* No comment provided by engineer. */
+"Search in %@" = "Zoek in %@";
+
+/* No comment provided by engineer. */
+"Select…" = "Selecteer…";
+
+/* No comment provided by engineer. */
+"Send Link" = "Verzend koppeling";
+
+/* No comment provided by engineer. */
+"Send Links" = "Verzend koppelingen";
+
+/* No comment provided by engineer. */
+"Show Filter Bar" = "Toon filterbalk";
+
+/* Title of a menu item */
+"Show Main Window…" = "Toon hoofdvenster…";
+
+/* Title of a menu item */
+"Show Status Bar" = "Toon statusbalk";
+
+/* Title of a menu item */
+"Show Toolbar" = "Toon knoppenbalk";
+
+/* Title of a popup menu item */
+"Show in Finder" = "Toon in Finder";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Onderwerp";
+
+/* No comment provided by engineer. */
+"Subscribe to the feed for this page" = "Abonneer op de feed van deze pagina";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Samenvatting";
+
+/* Toolbar item name for the Syncing preference pane */
+"Syncing" = "Synchroniseren";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Tekst";
+
+/* No comment provided by engineer. */
+"This article contains an enclosed file." = "Dit artikel bevat een bijlage.";
+
+/* No comment provided by engineer. */
+"Today" = "Vandaag";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Artikelen van vandaag";
+
+/* No comment provided by engineer. */
+"Trash" = "Prullenmand";
+
+/* URL */
+"URL" = "URL";
+
+/* No comment provided by engineer. */
+"Unread" = "Ongelezen";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Ongelezen artikelen";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "Het bestandsformaat van de database (%@) wordt door deze versie van Vienna niet ondersteund. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "Het bestandsformaat van de database is veranderd";
+
+/* No comment provided by engineer. */
+"Unsubscribe" = "Zeg abonnement op";
+
+/* Title of a button on an alert */
+"Upgrade Database" = "Bijwerken database";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file body" = "Vienna kan het bestand \"%@\" niet openen, omdat het is verplaatst sinds u het heeft gedownload.";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file title" = "Vienna kan het bestand niet openen.";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file body" = "Vienna kan het bestand \"%@\" niet tonen, omdat het is verplaatst sinds u het heeft gedownload.";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file title" = "Vienna kan het bestand niet tonen.";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna moet de database bijwerken naar de laatste versie. Dit kan enige tijd duren. Sorry voor het ongemak.";
+
+/* No comment provided by engineer. */
+"Yes" = "Ja";
+
+/* No comment provided by engineer. */
+"Yesterday" = "Gisteren";
+
+/* test for a string */
+"contains" = "bevat";
+
+/* test for a string */
+"does not contain" = "bevat niet";
+
+/* test for a value */
+"is" = "is";
+
+/* test for a date */
+"is after" = "ligt na";
+
+/* test for a date */
+"is before" = "ligt voor";
+
+/* test for a numeric value */
+"is greater than" = "is groter dan";
+
+/* test for a numeric value */
+"is greater than or equal to" = "is groter dan of gelijk aan";
+
+/* test for a numeric value */
+"is less than" = "is kleiner dan";
+
+/* test for a numeric value */
+"is less than or equal to" = "is kleiner dan of gelijk aan";
+
+/* test for a value */
+"is not" = "is niet";
+
+/* test for a date */
+"is on or after" = "ligt op of na";
+
+/* test for a date */
+"is on or before" = "ligt op of voor";
+

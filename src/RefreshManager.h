@@ -3,7 +3,7 @@
 //  Vienna
 //
 //  Created by Steve on 7/19/05.
-//  Copyright (c) 2004-2014 Steve Palmer and Vienna contributors (see Help/Acknowledgements for list of contributors). All rights reserved.
+//  Copyright (c) 2004-2017 Steve Palmer and Vienna contributors (see menu item 'About Vienna' for list of contributors). All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -18,11 +18,13 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "Database.h"
-#import "FeedCredentials.h"
-#import "Constants.h"
-#import "ASINetworkQueue.h"
+@import Foundation;
+
+@class ASIHTTPRequest;
+@class ASINetworkQueue;
+@class Database;
+@class FeedCredentials;
+@class Folder;
 
 @interface RefreshManager : NSObject {
 	NSUInteger maximumConnections;
@@ -32,14 +34,17 @@
 	FeedCredentials * credentialsController;
 	BOOL hasStarted;
 	NSString * statusMessageDuringRefresh;
-    SyncTypes syncType;
 	ASINetworkQueue *networkQueue;
 	dispatch_queue_t _queue;
-	NSTimer * unsafe301RedirectionTimer;
-	NSString * riskyIPAddress;
 }
 
 +(RefreshManager *)sharedManager;
+
+@property (readonly, copy) NSString *statusMessage;
+@property (nonatomic, getter=isConnecting, readonly) BOOL connecting;
+@property (nonatomic, readonly) NSUInteger countOfNewArticles;
+@property (nonatomic, readonly, copy) NSString *statusMessageDuringRefresh;
+
 -(void)refreshFolderIconCacheForSubscriptions:(NSArray *)foldersArray;
 //-(void)refreshSubscriptions:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
 -(void)refreshSubscriptionsAfterRefresh:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
@@ -50,12 +55,10 @@
 -(void)refreshSubscriptionsAfterMerge:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
 -(void)forceRefreshSubscriptionForFolders:(NSArray*)foldersArray;
 -(void)cancelAll;
-@property (nonatomic, getter=isConnecting, readonly) BOOL connecting;
-@property (nonatomic, readonly) NSUInteger countOfNewArticles;
-@property (nonatomic, readonly, copy) NSString *statusMessageDuringRefresh;
 -(void)refreshFavIconForFolder:(Folder *)folder;
 -(void)addConnection:(ASIHTTPRequest *)conn;
-@property (nonatomic, readonly, strong) dispatch_queue_t asyncQueue;
+-(void)suspendConnectionsQueue;
+-(void)resumeConnectionsQueue;
 @end
 
 // Refresh types

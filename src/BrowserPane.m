@@ -22,13 +22,17 @@
 #import "BrowserPane.h"
 #import "TabbedWebView.h"
 #import "AppController.h"
-#import "Preferences.h"
 #import "HelperFunctions.h"
 #import "StringExtensions.h"
 #import "AddressBarCell.h"
-#import <WebKit/WebKit.h>
 #import "RichXMLParser.h"
 #import "SubscriptionModel.h"
+#import "Folder.h"
+#import "BrowserView.h"
+#import "SSTextField.h"
+#import "Constants.h"
+#import "Preferences.h"
+#import "Vienna-Swift.h"
 
 @implementation BrowserPaneButtonCell
 
@@ -61,10 +65,14 @@
 } 
 @end
 
-@interface BrowserPane (Private)
-	-(void)endFrameLoad;
-	-(void)showRssPageButton:(BOOL)showButton;
-	-(void)setError:(NSError *)newError;
+@interface BrowserPane ()
+
+@property (nonatomic) OverlayStatusBar *statusBar;
+
+-(void)endFrameLoad;
+-(void)showRssPageButton:(BOOL)showButton;
+-(void)setError:(NSError *)newError;
+
 @end
 
 @implementation BrowserPane
@@ -120,7 +128,7 @@
 {
 	// Create our webview
 	[webPane initTabbedWebView];
-	webPane.UIDelegate = self;
+    webPane.UIDelegate = self;
 	webPane.frameLoadDelegate = self;
 	
 	// Make web preferences 16pt Arial to match Safari
@@ -157,6 +165,11 @@
 	[forwardButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Go forward to the next page", nil) forAttribute:NSAccessibilityTitleAttribute];
 	[rssPageButton setToolTip:NSLocalizedString(@"Subscribe to the feed for this page", nil)];
 	[rssPageButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Subscribe to the feed for this page", nil) forAttribute:NSAccessibilityTitleAttribute];
+
+    [NSUserDefaults.standardUserDefaults addObserver:self
+                                          forKeyPath:MAPref_ShowStatusBar
+                                             options:NSKeyValueObservingOptionInitial
+                                             context:nil];
 }
 
 /* setController
@@ -165,7 +178,6 @@
 -(void)setController:(AppController *)theController
 {
 	controller = theController;
-	[self.webPane setController:controller];
 }
 
 /* viewLink
@@ -253,24 +265,16 @@
 	[(self.webPane).mainFrame loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
-/* setStatusText
- * Called from the webview when some JavaScript writes status text. Echo this to
- * our status bar.
- */
--(void)webView:(WebView *)sender setStatusText:(NSString *)text
-{
-	if (controller.browserView.activeTabItemView == self)
-		[controller setStatusMessage:text persist:NO];
-}
-
 /* mouseDidMoveOverElement
  * Called from the webview when the user positions the mouse over an element. If it's a link
  * then echo the URL to the status bar like Safari does.
  */
--(void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation modifierFlags:(NSUInteger)modifierFlags
-{
-	NSURL * url = [elementInformation valueForKey:@"WebElementLinkURL"];
-	[controller setStatusMessage:(url ? url.absoluteString : @"") persist:NO];
+- (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation
+  modifierFlags:(NSUInteger)modifierFlags {
+    if (self.statusBar) {
+        NSURL *url = [elementInformation valueForKey:@"WebElementLinkURL"];
+        self.statusBar.label = url.absoluteString;
+    }
 }
 
 /* didStartProvisionalLoadForFrame
@@ -280,7 +284,7 @@
 {
 	if (frame == (self.webPane).mainFrame)
 	{
-		[controller.browserView setTabItemViewTitle:self title:NSLocalizedString(@"Loading...", nil)];
+		[controller.browserView setTabItemViewTitle:self title:NSLocalizedString(@"Loading…", nil)];
 		[self showRssPageButton:NO];
 		[self setError:nil];
 		self.viewTitle = @"";
@@ -488,25 +492,26 @@
  * Called when the browser wants to display a JavaScript alert panel containing the specified message.
  */
 - (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
-	NSRunInformationalAlertPanel(NSLocalizedString(@"JavaScript", @""),	// title
-		@"%@",	// message placeholder
-		NSLocalizedString(@"OK", @""),	// default button
-		nil,	// alt button
-		nil,	// other button
-		message);
+    NSAlert *alert = [NSAlert new];
+    alert.alertStyle = NSAlertStyleInformational;
+    alert.messageText = NSLocalizedString(@"JavaScript", @"");
+    alert.informativeText = message;
+    [alert runModal];
 }
 
 /* runJavaScriptConfirmPanelWithMessage
  * Called when the browser wants to display a JavaScript confirmation panel with the specified message.
  */
 - (BOOL)webView:(WebView *)sender runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
-	NSInteger result = NSRunInformationalAlertPanel(NSLocalizedString(@"JavaScript", @""),	// title
-		@"%@",	// message placeholder
-		NSLocalizedString(@"OK", @""),	// default button
-		NSLocalizedString(@"Cancel", @""),	// alt button
-		nil,
-		message);
-	return NSAlertDefaultReturn == result;
+    NSAlert *alert = [NSAlert new];
+    alert.alertStyle = NSAlertStyleInformational;
+    alert.messageText = NSLocalizedString(@"JavaScript", @"");
+    alert.informativeText = message;
+    [alert addButtonWithTitle:NSLocalizedString(@"OK", @"Title of a button on an alert")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
+    NSModalResponse alertResponse = [alert runModal];
+
+    return alertResponse == NSAlertFirstButtonReturn;
 }
 
 - (void)webView:(WebView *)sender runOpenPanelForFileButtonWithResultListener:(id < WebOpenPanelResultListener >)resultListener
@@ -520,7 +525,7 @@
 	// Enable the selection of directories in the dialog.
 	[openDlg setCanChooseDirectories:NO];
 
-	if ( [openDlg runModal] == NSOKButton )
+	if ( [openDlg runModal] == NSFileHandlingPanelOKButton )
 	{
 		NSArray* files = [openDlg.URLs valueForKey:@"relativePath"];
 		[resultListener chooseFilenames:files];
@@ -771,9 +776,31 @@
  */
 -(void)dealloc
 {
+    [NSUserDefaults.standardUserDefaults removeObserver:self
+                                             forKeyPath:MAPref_ShowStatusBar];
+
 	[self handleStopLoading:nil];
 	[webPane setFrameLoadDelegate:nil];
 	[webPane setUIDelegate:nil];
 	[webPane close];
 }
+
+// MARK: Key-value observation
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+                       context:(void *)context {
+    if ([keyPath isEqualToString:MAPref_ShowStatusBar]) {
+        BOOL isStatusBarShown = [Preferences standardPreferences].showStatusBar;
+        if (isStatusBarShown && !self.statusBar) {
+            self.statusBar = [OverlayStatusBar new];
+            [self addSubview:self.statusBar];
+        } else if (!isStatusBarShown && self.statusBar) {
+            [self.statusBar removeFromSuperview];
+            self.statusBar = nil;
+        }
+    }
+}
+
 @end

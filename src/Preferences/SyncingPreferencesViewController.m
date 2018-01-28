@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import "GoogleReader.h"
+#import "OpenReader.h"
 #import "KeyChain.h"
 #import "Preferences.h"
 #import "StringExtensions.h"
@@ -97,11 +97,11 @@ static BOOL _credentialsChanged;
                 BOOL match = NO;
                 for (NSString * key in sourcesDict)
                 {
-                    [openReaderSource addItemWithTitle:NSLocalizedString(key, nil)];
+                    [openReaderSource addItemWithTitle:key];
                     NSDictionary * itemDict = [sourcesDict valueForKey:key];
                     if ([theHost isEqualToString:[itemDict valueForKey:@"Address"]])
                     {
-                        [openReaderSource selectItemWithTitle:NSLocalizedString(key, nil)];
+                        [openReaderSource selectItemWithTitle:key];
                         [self changeSource:nil];
                         match = YES;
                     }
@@ -123,7 +123,7 @@ static BOOL _credentialsChanged;
 
 #pragma mark - MASPreferencesViewController
 
-- (NSString *)identifier {
+- (NSString *)viewIdentifier {
     return @"SyncingPreferences";
 }
 
@@ -145,8 +145,8 @@ static BOOL _credentialsChanged;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     if(syncButton.state == NSOnState && _credentialsChanged)
     {
-        [[GoogleReader sharedManager] resetAuthentication];
-        [[GoogleReader sharedManager] loadSubscriptions:nil];
+        [[OpenReader sharedManager] resetAuthentication];
+        [[OpenReader sharedManager] loadSubscriptions];
     }
 }
 
@@ -170,7 +170,7 @@ static BOOL _credentialsChanged;
         [openReaderHost setEnabled:NO];
         [username setEnabled:NO];
         [password setEnabled:NO];
-        [[GoogleReader sharedManager] clearAuthentication];
+        [[OpenReader sharedManager] clearAuthentication];
     };
 }
 
@@ -259,13 +259,12 @@ static BOOL _credentialsChanged;
 {    
     if ((self.view.window).visible)
     {
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert addButtonWithTitle:@"OK"];
-        [alert setMessageText:NSLocalizedString(@"Open Reader Authentication Failed",nil)];
-        [alert setInformativeText:NSLocalizedString(@"Open Reader Authentication Failed text",nil)];
-        alert.alertStyle = NSWarningAlertStyle;
-        [alert beginSheetModalForWindow:self.view.window modalDelegate:self didEndSelector:nil contextInfo:nil];
-        [[GoogleReader sharedManager] clearAuthentication];
+        NSAlert *alert = [NSAlert new];
+        alert.messageText = NSLocalizedString(@"Open Reader Authentication Failed",nil);
+        alert.informativeText = NSLocalizedString(@"Open Reader Authentication Failed text",nil);
+        [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
+            [[OpenReader sharedManager] clearAuthentication];
+        }];
     }
 }
 

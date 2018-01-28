@@ -1,0 +1,144 @@
+/* No comment provided by engineer. */
+"(No title)" = "(Geen onderwerp)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(Naamloze feed)";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Auteur";
+
+/* Title of a button on an alert */
+"Cancel" = "Annuleer";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna probeerde de map \"%@\" te maken, maar er ging iets fout. Controleer de bevoegdheden van de bovenliggende mappen.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Vienna kan de databasemap niet aanmaken";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "Het database-bestand (%@) kon niet worden geopend. Het zou beschadigd of ontoegankelijk kunnen zijn. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Vienna kon de database niet openen";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Database bijwerken";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Datum";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Verwijderd";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "Bijlage URL";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Gemarkeerd";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Map";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Bijlage";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Koppen";
+
+/* Data field name visible in menu/article list */
+"Link" = "Koppeling";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Een nieuwe Vienna-database kan niet worden aagemaakt in \"%@\". De database staat waarschijnlijk op een andere computer in het netwerk, hetgeen door deze versie van Vienna niet wordt ondersteund. Kiest u een andere locatie op deze computer.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Kan de Vienna-database niet aanmaken";
+
+/* Title of a button on an alert */
+"Locate…" = "Zoek op…";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Gemarkeerde artikelen";
+
+/* Title of a button on an alert */
+"Quit Vienna" = "Stop Vienna";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Gelezen";
+
+/* No comment provided by engineer. */
+"Search Results" = "Zoekresultaten";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Zoek naar artikels";
+
+/* Placeholder title of a search field */
+"Search current web page" = "Doorzoek huidige webpagina";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Onderwerp";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Samenvatting";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Tekst";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Artikelen van vandaag";
+
+/* No comment provided by engineer. */
+"Trash" = "Prullenmand";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Ongelezen artikelen";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "Het bestandsformaat van de database (%@) wordt door deze versie van Vienna niet ondersteund. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "Het bestandsformaat van de database is veranderd";
+
+/* Title of a button on an alert */
+"Upgrade Database" = "Bijwerken database";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna moet de database bijwerken naar de laatste versie. Dit kan enige tijd duren. Sorry voor het ongemak.";
+
+/* test for a string */
+"contains" = "bevat";
+
+/* test for a string */
+"does not contain" = "bevat niet";
+
+/* test for a value */
+"is" = "is";
+
+/* test for a date */
+"is after" = "ligt na";
+
+/* test for a date */
+"is before" = "ligt voor";
+
+/* test for a numeric value */
+"is greater than" = "is groter dan";
+
+/* test for a numeric value */
+"is greater than or equal to" = "is groter dan of gelijk aan";
+
+/* test for a numeric value */
+"is less than" = "is kleiner dan";
+
+/* test for a numeric value */
+"is less than or equal to" = "is kleiner dan of gelijk aan";
+
+/* test for a value */
+"is not" = "is niet";
+
+/* test for a date */
+"is on or after" = "ligt op of na";
+
+/* test for a date */
+"is on or before" = "ligt op of voor";
+

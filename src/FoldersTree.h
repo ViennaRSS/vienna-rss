@@ -18,32 +18,16 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "ThinSplitView.h"
-#import "TreeNode.h"
+@import Cocoa;
 
-@class FolderView;
-@class PopupButton;
 @class AppController;
-@class Database;
+@class FolderView;
 
-@interface FoldersTree : NSView <NSOutlineViewDataSource>
-{
-	IBOutlet AppController * controller;
-	IBOutlet FolderView * outlineView;
-	IBOutlet ThinSplitView * folderSplitView;
+@interface FoldersTree : NSObject <NSOutlineViewDelegate, NSOutlineViewDataSource>
 
-	TreeNode * rootNode;
-	NSFont * cellFont;
-	NSFont * boldCellFont;
-	NSImage * folderErrorImage;
-	NSImage * refreshProgressImage;
-	BOOL blockSelectionHandler;
-	BOOL canRenameFolders;
-    
-}
+@property (weak, nonatomic) AppController *controller;
+@property (weak, nonatomic) FolderView *outlineView;
 
-// Public functions
 -(void)initialiseFoldersTree;
 -(void)saveFolderSettings;
 -(void)updateAlternateMenuTitle;
@@ -52,7 +36,6 @@
 -(BOOL)selectFolder:(NSInteger)folderId;
 -(void)renameFolder:(NSInteger)folderId;
 @property (nonatomic, readonly) NSInteger actualSelection;
--(void)setOutlineViewBackgroundColor: (NSColor *)color;
 @property (nonatomic, readonly) NSInteger groupParentSelection;
 @property (nonatomic, readonly) NSInteger countOfSelectedFolders;
 @property (nonatomic, readonly, copy) NSArray *selectedFolders;
@@ -63,4 +46,5 @@
 @property (nonatomic, readonly, strong) NSView *mainView;
 -(void)outlineViewWillBecomeFirstResponder;
 -(void)setSearch:(NSString *)string;
+
 @end

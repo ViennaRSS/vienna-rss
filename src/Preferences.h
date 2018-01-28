@@ -18,9 +18,9 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
-@ class SearchMethod;
+@class SearchMethod;
 
 @interface Preferences : NSObject {
 	id userPrefs;
@@ -51,7 +51,6 @@
     BOOL syncGoogleReader;
     BOOL prefersGoogleNewSubscription;
     BOOL markUpdatedAsNew;
-    BOOL sendSystemSpecs;
 	NSString * downloadFolder;
 	NSString * displayStyle;
 	CGFloat textSizeMultiplier;
@@ -202,9 +201,6 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 
 // Do we show updated articles as new ?
 @property (nonatomic) BOOL markUpdatedAsNew;
-
-// Do we send system specs when checking for updates?
-@property (nonatomic) BOOL sendSystemSpecs;
 
 #pragma mark -
 #pragma mark Open Reader syncing

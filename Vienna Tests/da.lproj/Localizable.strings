@@ -1,0 +1,153 @@
+/* {existing authors},{new author name} */
+"%@, %@" = "%1$@, %2$@";
+
+/* No comment provided by engineer. */
+"(No title)" = "(Ingen titel)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(Unavngivet feed)";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Forfatter";
+
+/* Title of a button on an alert */
+"Cancel" = "Afbryd";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna prøvede at lave mappen \"%@\" men en fejl opstod. Tjek rettighederne på mapperne i den specificerede sti.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Desværre, men Vienna kunne ikke lave databasemappen";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "Databasefilen (%@) kunne ikke åbnes af samme grund. Den kan være beskadiget eller utilgængelig. Slet venligst eller omdøb databasefilen og genstart Vienna.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Desværre, men Vienna kunne ikke åbne databasen.";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Databaseopgradering";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Dato";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Slettet";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "Indpakningshenvisning";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Mærket";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Mappe";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Indpakning";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Overskrifter";
+
+/* Data field name visible in menu/article list */
+"Link" = "Henvisning";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Find tekst";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Find titel";
+
+/* Title of a button on an alert */
+"Locate…" = "Find…";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Markerede artikler";
+
+/* Title of a button on an alert */
+"Quit Vienna" = "Quit Vienna";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Læs";
+
+/* No comment provided by engineer. */
+"Search Results" = "Søg i resultater";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Søg alle artikler";
+
+/* Placeholder title of a search field */
+"Search current web page" = "Søg nuværende hjemmeside";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Emne";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Resumé";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Tekst";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Dagens artikler";
+
+/* No comment provided by engineer. */
+"Trash" = "Papirkurv";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Ulæste artikler";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "Database (%@) filformatet er ikke understøttet af denne udgave af Vienna. Slet eller omdøb filen og genstart Vienna.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "Database filformatet er blevet ændret";
+
+/* Title of a button on an alert */
+"Upgrade Database" = "Opgrader databasen";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna er nød til at opgradere dens database til den nyeste version. Dette tager omkring et minut. Vi underskylder for ulejligheden.";
+
+/* test for a string */
+"contains" = "indeholdet";
+
+/* test for a string */
+"does not contain" = "inderholder ikke";
+
+/* test for a value */
+"is" = "er";
+
+/* test for a date */
+"is after" = "er efter";
+
+/* test for a date */
+"is before" = "er før";
+
+/* test for a numeric value */
+"is greater than" = "er større end";
+
+/* test for a numeric value */
+"is greater than or equal to" = "er større eller lig";
+
+/* test for a numeric value */
+"is less than" = "er mindre end";
+
+/* test for a numeric value */
+"is less than or equal to" = "er mindre eller lig";
+
+/* test for a value */
+"is not" = "er ikke";
+
+/* test for a date */
+"is on or after" = "er på eller efer";
+
+/* test for a date */
+"is on or before" = "er på eller før";
+
+/* test for a folder (not operational as of Vienna 3.2) */
+"not under" = "ikke under";
+
+/* test for a folder (not operational as of Vienna 3.2) */
+"under" = "under";
+

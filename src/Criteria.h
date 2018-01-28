@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Foundation;
 
 /* Enum of valid criteria operators
  */
@@ -53,8 +53,7 @@ typedef NS_ENUM(NSUInteger, CriteriaCondition) {
 
 // Public functions
 -(instancetype)initWithField:(NSString *)newField withOperator:(CriteriaOperator)newOperator withValue:(NSString *)newValue NS_DESIGNATED_INITIALIZER;
-+(NSString *)stringFromOperator:(CriteriaOperator)operator;
-+(CriteriaOperator)operatorFromString:(NSString *)string;
++(NSString *)localizedStringFromOperator:(CriteriaOperator)operator;
 +(NSArray *)arrayOfOperators;
 @property (nonatomic, copy) NSString *field;
 @property (nonatomic, copy) NSString *value;
@@ -72,6 +71,5 @@ typedef NS_ENUM(NSUInteger, CriteriaCondition) {
 -(void)addCriteria:(Criteria *)newCriteria;
 @property (nonatomic, readonly, copy) NSString *string;
 @property (nonatomic) CriteriaCondition condition;
-+(CriteriaCondition)conditionFromString:(NSString *)string;
-+(NSString *)conditionToString:(CriteriaCondition)condition;
+
 @end

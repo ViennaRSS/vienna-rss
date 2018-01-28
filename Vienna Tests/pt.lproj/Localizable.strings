@@ -1,0 +1,129 @@
+/* No comment provided by engineer. */
+"(No title)" = "(Sem título)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(Fonte Sem Título)";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Autor";
+
+/* Title of a button on an alert */
+"Cancel" = "Cancelar";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "o Vienna estava a tentar criar a pasta \"%@\" mas ocurreu um erro. Verifique as permissões das pastas na localização especificada.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Desculpe, mas o Vienna não conseguiu criar a pasta da base de dados";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "O ficheiro da base de dados (%@) não pode ser aberto por alguma razão. Pode estar corrompido ou inacessível. Por favor apague ou mude o nome do ficheiro da base de dados e reinicie o Vienna.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Desculpe mas o Vienna não consegue abrir a base de dados";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Database Upgrade";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Data";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Apagado";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "Anexo";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Marcados";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Pasta";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Anexo";
+
+/* Data field name visible in menu/article list */
+"Link" = "Link";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Uma nova base de dados do Vienna não pode ser criada em \"%@\" porque provavelmente a pasta está localizada num disco de rede e esta versão do Vienna não consegue manipular bases de dados remotas. Por favor escolha uma máquina que esteja localizada no seu computador.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Não é possível criar a base de dados do Vienna";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Artigos Marcados";
+
+/* Title of a button on an alert */
+"Quit Vienna" = "Encerrar Vienna";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Lidos";
+
+/* No comment provided by engineer. */
+"Search Results" = "Procurar resultados";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Procurar todos os artigos";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Assunto";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Sumário";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Texto";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Artigos de Hoje";
+
+/* No comment provided by engineer. */
+"Trash" = "Lixo";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Artigos Não Lidos";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "O formato de ficheiro da base de dados (%@) não é suportado por esta versão do Vienna. Apague ou altere o nome do ficheiro e reinicie o Vienna.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "O formato de ficheiro da base de dados foi alterado";
+
+/* test for a string */
+"contains" = "contém";
+
+/* test for a string */
+"does not contain" = "não contém";
+
+/* test for a value */
+"is" = "é";
+
+/* test for a date */
+"is after" = "depois de";
+
+/* test for a date */
+"is before" = "antes de";
+
+/* test for a numeric value */
+"is greater than" = "maior do que";
+
+/* test for a numeric value */
+"is greater than or equal to" = "maior ou igual a";
+
+/* test for a numeric value */
+"is less than" = "menor do que";
+
+/* test for a numeric value */
+"is less than or equal to" = "menor ou igual a";
+
+/* test for a value */
+"is not" = "não é";
+
+/* test for a date */
+"is on or after" = "em ou depois de";
+
+/* test for a date */
+"is on or before" = "em ou antes de";
+

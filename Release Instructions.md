@@ -32,36 +32,36 @@ Tags should be in one of the following formats:
  5.	Make a new tag using `git tag -s` _tagname_, respecting the above mentioned convention (if you do not have a gpg key, you can use `git tag -a` instead).
  6.	Run `make clean`.
  7.	Run `make release`. Check the last displayed messages to ensure yourself that the application is correctly signed.
- 8.	Push the tag to ViennaRSS' master at Github (`git push --tags ViennaRSS master`).
+ 8.	Push the tag to ViennaRSS' repository at Github (`git push --tags ViennaRSS master` or `git push --tags ViennaRSS stable`, accordingly).
  9.	Upload the contents of `Deployment/Uploads` (found in the build directory) using the following steps.
-  (Note: I'm using Vienna 3.2.0_beta4, 3.2.0_rc1 and 3.2.0 as examples here.)
+  (Note: I'm using Vienna 3.3.0_beta4, 3.3.0_rc1 and 3.3.0 as examples here.)
 
 ### On Github:
 
    1. Go to Vienna's releases page on Github : <https://github.com/ViennaRSS/vienna-rss/releases>
-   2. Choose "Draft a new release", type the tag name (`v/3.2.0_beta4`), a description ("Vienna 3.2.0 Beta 4"). Upload the `Vienna3.2.0_beta4.tar.gz` file.
+   2. Choose "Draft a new release", type the tag name (`v/3.3.0_beta4`), a description ("Vienna 3.3.0 Beta 4"). Upload the `Vienna3.3.0_beta4.tgz` file.
    3. For beta and release candidates, check the "This is a prerelease" box.
    4. Click the "Publish" button.
+   5. Verify the uploaded file: download it, uncompress it and check that it runs OK.
 
 ### On Bintray.com:
 	
-   5. Log in and go to <https://bintray.com/viennarss/vienna-rss/vienna-rss/view>
-   6. Choose "New version".
-   7. Fill the name ("3.2.0Beta4"), the description from the version notes, then click "Create version". Add the VCS tag (`v/3.2.0_beta4`) and update.
-   8. Check the version (at <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.2.0Beta4/view>), click "Upload Files" to go to <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.2.0Beta4/upload> and upload the two .tar.gz files (whose name should be like `Vienna3.2.0_beta4.tar.gz` and `Vienna3.2.0_beta4.5b272a6-dSYM.tar.gz`).
-   9. Click "Save the changes", then click "Publish".
-   10. Go back to the files list (<https://bintray.com/viennarss/vienna-rss/vienna-rss/3.2.0Beta4/#files>), select the binary ("Vienna3.2.0_beta4.tar.gz") and choose "Show in download list" in the contextual menu.
+   6. Log in and go to <https://bintray.com/viennarss/vienna-rss/vienna-rss/view>
+   7. Choose "New version".
+   8. Fill the name ("3.3.0Beta4"), the description from the version notes, then click "Create version". Add the VCS tag (`v/3.3.0_beta4`) and update.
+   9. Check the version (at <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4>), click "Upload this version’s files (...) via the UI" to go to <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4/upload> and upload the two .tgz files (whose name should be like `Vienna3.3.0_beta4.tgz` and `Vienna3.3.0_beta4.5b272a6-dSYM.tgz`).
+   10. Click "Save the changes", then click "Publish".
+   11. Go back to the files list (<https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4/#files>), select the binary ("Vienna3.3.0_beta4.tgz") and choose "Show in download list" in the contextual menu.
 
 ### On Sourceforge.net:
 
-   11. Check your email and verify that you have a message from Sourceforge stating "GitHub Downloads Import Complete".
-   12. Verify the downloads. Load the SourceForge Downloads page for Vienna at <https://sourceforge.net/projects/vienna-rss/files/>, download new zip files, uncompress them, and run the apps.
-   13. For stable releases only : from the Sourceforge site, edit the "Properties" of "Vienna3.2.0.tar.gz" and set it as default download for Mac OS X. Don't do this for beta releases!
+   12. Check that the SourceForge Downloads page for Vienna at <https://sourceforge.net/projects/vienna-rss/files/> got the new files.
+   13. For stable releases only : from the Sourceforge site, edit the "Properties" of "Vienna3.3.0.tgz" (be careful to select the binary and not the code source file !) and set it as default download for Mac OS X. Don't do this for beta releases!
 
 ### On viennarss.github.io
 
-   14. Upload `changelog_beta.xml` (or `changelog_rc.xml` or `changelog.xml` accordingly) and the `noteson3.2.0_beta4.html` file in the sparkle_files directory
-   15. If you upload a release candidate, change changelog_beta.xml to be a copy of the new changelog_rc.xml ; and if you upload a release, change changelog_rc.xml to be a copy of the new changelog.xml
+   14. Upload `changelog_beta.xml` (or `changelog_rc.xml` or `changelog.xml` accordingly) and the `noteson3.3.0_beta4.html` file in the sparkle_files directory
+   15. If you upload a release candidate, change `changelog_beta.xml` to be a copy of the new `changelog_rc.xml` ; and if you upload a release, change `changelog_rc.xml` to be a copy of the new `changelog.xml`
    16. Run the previous version of Vienna, and make sure that the Sparkle update mechanism works correctly to display and download the latest version. After updating, check again to make sure Sparkle is showing that you have the latest version.
 
 ### On Brew Cask
@@ -88,4 +88,3 @@ cask-repair --pull origin --push $github_user $outdated_cask
 ```
 
 Finally, consider posting an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18> and/or <http://vienna-rss.com>.
-

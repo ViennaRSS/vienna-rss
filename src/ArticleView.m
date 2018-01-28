@@ -24,12 +24,14 @@
 #import "Preferences.h"
 #import "HelperFunctions.h"
 #import "StringExtensions.h"
-#import <WebKit/WebKit.h>
 #import "BrowserView.h"
+#import "Article.h"
 
-@interface ArticleView (Private)
-	-(BOOL)initForStyle:(NSString *)styleName;
-	-(void)handleStyleChange:(NSNotificationCenter *)nc;
+@interface ArticleView ()
+
+-(BOOL)initForStyle:(NSString *)styleName;
+-(void)handleStyleChange:(NSNotificationCenter *)nc;
+
 @end
 
 // Styles path mappings is global across all instances
@@ -312,9 +314,9 @@ static NSMutableDictionary * stylePathMappings = nil;
 		if (deltaX != 0)
 		{
 			if (deltaX > 0)
-				[controller goBack:self];
+				[APPCONTROLLER goBack:self];
 			else 
-				[controller viewNextUnread:self];
+				[APPCONTROLLER viewNextUnread:self];
 		}
 	}		
 }

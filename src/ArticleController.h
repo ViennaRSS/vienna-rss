@@ -3,7 +3,7 @@
 //  Vienna
 //
 //  Created by Steve on 5/6/06.
-//  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
+//  Copyright (c) 2004-2017 Steve Palmer and Vienna contributors. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -18,14 +18,16 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "FoldersTree.h"
-#import "BackTrackArray.h"
+@import Cocoa;
+
 #import "BaseView.h"
 #import "ArticleBaseView.h"
-#import "ArticleView.h"
-#import "ArticleListView.h"
-#import "UnifiedDisplayView.h"
+
+@class Article;
+@class ArticleListView;
+@class BackTrackArray;
+@class FoldersTree;
+@class UnifiedDisplayView;
 
 /* ArticleController
  * The ArticleController contains the controlling logic for the article view that is
@@ -37,10 +39,6 @@
  */
 @interface ArticleController : NSObject
 {
-	FoldersTree * foldersTree;
-
-	IBOutlet ArticleListView * articleListView;
-	IBOutlet UnifiedDisplayView * unifiedListView;
 	NSView<ArticleBaseView, BaseView> * mainArticleView;
 	NSArray * currentArrayOfArticles;
 	NSArray * folderArrayOfArticles;
@@ -58,7 +56,9 @@
 	BOOL requireSelectArticleAfterReload;
 }
 
-@property (nonatomic, strong) IBOutlet FoldersTree * foldersTree;
+@property (nonatomic, strong) FoldersTree * foldersTree;
+@property (nonatomic, strong) ArticleListView *articleListView;
+@property (nonatomic, strong) UnifiedDisplayView *unifiedListView;
 @property (nonatomic, strong) NSView<ArticleBaseView, BaseView> * mainArticleView;
 @property (nonatomic, copy) NSArray * currentArrayOfArticles;
 @property (nonatomic, copy) NSArray * folderArrayOfArticles;

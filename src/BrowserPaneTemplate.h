@@ -17,7 +17,8 @@
 //  See the License for the specific language governing permissions and
 // 
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
+
 #import "BrowserPane.h"
 
 @interface BrowserPaneTemplate : NSWindowController {

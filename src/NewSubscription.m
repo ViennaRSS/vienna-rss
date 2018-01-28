@@ -22,15 +22,17 @@
 #import "AppController.h"
 #import "StringExtensions.h"
 #import "Preferences.h"
-#import "GoogleReader.h"
 #import "SubscriptionModel.h"
+#import "Folder.h"
+#import "Database.h"
 
-// Private functions
-@interface NewSubscription (Private)
-	-(void)loadRSSFeedBundle;
-	-(void)setLinkTitle;
-	-(void)enableSaveButton;
-	-(void)enableSubscribeButton;
+@interface NewSubscription ()
+
+-(void)loadRSSFeedBundle;
+-(void)setLinkTitle;
+-(void)enableSaveButton;
+-(void)enableSubscribeButton;
+
 @end
 
 @implementation NewSubscription
@@ -45,7 +47,7 @@
 		db = newDb;
 		sourcesDict = nil;
 		editFolderId = -1;
-		parentId = MA_Root_Folder;
+		parentId = VNAFolderTypeRoot;
         subscriptionModel = [[SubscriptionModel alloc] init];
 	}
 	return self;
@@ -73,8 +75,9 @@
 			if (sourcesDict.count > 0)
 			{
                 for (NSString *feedSourceType in sourcesDict.allKeys) {
-					//[feedSource addItemWithTitle:NSLocalizedString(feedSourceType, nil)];
-                    NSMenuItem *feedMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(feedSourceType, nil) action:NULL keyEquivalent:@""];
+                    NSMenuItem *feedMenuItem = [[NSMenuItem alloc] initWithTitle:feedSourceType
+                                                                          action:NULL
+                                                                   keyEquivalent:@""];
                     feedMenuItem.representedObject = feedSourceType;
                     [feedSource.menu addItem:feedMenuItem];
                 }
@@ -207,9 +210,10 @@
  	// Check if we have already subscribed to this feed by seeing if a folder exists in the db
 	if ([db folderFromFeedURL:rssFeedURL.absoluteString] != nil)
 	{
-		NSRunAlertPanel(NSLocalizedString(@"Already subscribed title", @"Already subscribed title"),
-						NSLocalizedString(@"Already subscribed body", @"Already subscribed body"),
-						NSLocalizedString(@"OK", nil), nil, nil);
+        NSAlert *alert = [NSAlert new];
+        alert.messageText = NSLocalizedString(@"Already subscribed title", @"Already subscribed title");
+        alert.informativeText = NSLocalizedString(@"Already subscribed body", @"Already subscribed body");
+        [alert runModal];
 	}
 
     // call the controller to create the new subscription
@@ -312,7 +316,7 @@
 	}
 	if (linkTitleString == nil)
 		linkTitleString = @"Link";
-	linkTitle.stringValue = [NSString stringWithFormat:@"%@:", NSLocalizedString(linkTitleString, nil)];
+	linkTitle.stringValue = [NSString stringWithFormat:@"%@:", linkTitleString];
 	siteHomePageButton.hidden = !showButton;
 }
 

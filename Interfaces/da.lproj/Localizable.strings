@@ -1,0 +1,720 @@
+/* No comment provided by engineer. */
+"%@ Info" = "%@ info";
+
+/* Progress in bytes, e.g. 1 KB of 1 MB */
+"%@ of %@" = "%1$@ af %2$@";
+
+/* Number of bytes received, e.g. 1 MB received */
+"%@ received" = "%@ modtaget";
+
+/* {existing authors},{new author name} */
+"%@, %@" = "%1$@, %2$@";
+
+/* No comment provided by engineer. */
+"%d new articles retrieved" = "%d nye artikler hentet";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully exported" = "%d abonnementer successfuldt eksportert";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully imported" = "%d abonnementer successfuldt importeret";
+
+/* No comment provided by engineer. */
+"%d unread articles" = "%d ulæste artikler";
+
+/* No comment provided by engineer. */
+"%u articles" = "%u artikler";
+
+/* No comment provided by engineer. */
+"%u unread" = "%u ulæste";
+
+/* No comment provided by engineer. */
+"(No title)" = "(Ingen titel)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(Unavngivet feed)";
+
+/* No comment provided by engineer. */
+"A folder with that name already exists" = "En mappe med det navn eksisterer allerede";
+
+/* No comment provided by engineer. */
+"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "En ny udvidelse er blevet installeret. Den er nu tilgængelig fra menuen og du kan tilføje den til værktøjslinien.";
+
+/* Toolbar item name for the Advanced preference pane */
+"Advanced" = "Avanceret";
+
+/* No comment provided by engineer. */
+"After 2 Days" = "Efter 2 dage";
+
+/* No comment provided by engineer. */
+"After 2 Weeks" = "Efter 2 uger";
+
+/* No comment provided by engineer. */
+"After a Day" = "Efter 1 dag";
+
+/* No comment provided by engineer. */
+"After a Month" = "Efter 1 måned";
+
+/* No comment provided by engineer. */
+"After a Week" = "Efter 1 uge";
+
+/* Already subscribed body */
+"Already subscribed body" = "Du har allerede abonneret på det feed";
+
+/* Already subscribed title */
+"Already subscribed title" = "Fejl";
+
+/* No comment provided by engineer. */
+"An error occurred when this feed was last refreshed" = "En fejl opstod da dette feed sidst blev refreshet";
+
+/* Toolbar item name for the Appearance preference pane */
+"Appearance" = "Udseende";
+
+/* No comment provided by engineer. */
+"AppleScript Error in '%@' script" = "AppleScript-fejl i '%@' skriptet";
+
+/* No comment provided by engineer. */
+"Articles" = "Artikler";
+
+/* No comment provided by engineer. */
+"Ascending" = "Opadgående";
+
+/* No comment provided by engineer. */
+"Authenticating on Open Reader" = "Godkender på Open Reader";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Forfatter";
+
+/* Title of a button on an alert
+   Title of a popup menu item */
+"Cancel" = "Afbryd";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna prøvede at lave mappen \"%@\" men en fejl opstod. Tjek rettighederne på mapperne i den specificerede sti.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Desværre, men Vienna kunne ikke lave databasemappen";
+
+/* No comment provided by engineer. */
+"Cannot create folder body" = "Mappen \"%@\" kan ikke laves.";
+
+/* No comment provided by engineer. */
+"Cannot create folder title" = "Kan ikke lave mappe";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "Databasefilen (%@) kunne ikke åbnes af samme grund. Den kan være beskadiget eller utilgængelig. Slet venligst eller omdøb databasefilen og genstart Vienna.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Desværre, men Vienna kunne ikke åbne databasen.";
+
+/* No comment provided by engineer. */
+"Cannot open export file message" = "Kan ikke lave eksport output-arkiv";
+
+/* No comment provided by engineer. */
+"Cannot open export file message text" = "Det specificerede eksport output-arkiv kan ikke laves. Tjek at den ikke er låst og at ingen andre programmer bruger den";
+
+/* No comment provided by engineer. */
+"Cannot rename folder" = "Kan ikke omdøbe mappe";
+
+/* No comment provided by engineer. */
+"Clear" = "Slet foregående søgninger";
+
+/* No comment provided by engineer. */
+"Click the Open button to open this file." = "Klik Åben-knappen for at åbne dette arkiv.";
+
+/* No comment provided by engineer. */
+"Click the Play button to play this enclosure in iTunes." = "Klik Afspil-knappen for at afspille denne indpakning i iTunes.";
+
+/* No comment provided by engineer. */
+"Connecting to %@" = "Forbinder til %@";
+
+/* No comment provided by engineer. */
+"Connecting to Open Reader server to retrieve %@" = "Forbinder til Open Reader serveren for at hente %@";
+
+/* No comment provided by engineer. */
+"Copy Link to Clipboard" = "Kopier henvisning til skuffe";
+
+/* No comment provided by engineer. */
+"Copy Page Link to Clipboard" = "Kopier sidehenvisning til skuffe";
+
+/* Copy URL */
+"Copy URL" = "Kopier henvisning";
+
+/* No comment provided by engineer. */
+"Credentials Prompt" = "Informationsanmodning";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Databaseopgradering";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Dato";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Delete" = "Slet";
+
+/* Title of a menu item */
+"Delete Article" = "Slet artikel";
+
+/* No comment provided by engineer. */
+"Delete Open Reader RSS feed" = "Slet Open Reader RSS feed";
+
+/* No comment provided by engineer. */
+"Delete Open Reader RSS feed text" = "Slet Open Reader RSS feed";
+
+/* No comment provided by engineer. */
+"Delete RSS feed" = "Slet abonnement";
+
+/* No comment provided by engineer. */
+"Delete RSS feed text" = "Er du sikker på at du vil af-abonnere fra \"%@\"? Denne handling vil slette alle gemte artikler.";
+
+/* No comment provided by engineer. */
+"Delete folder status" = "Sletter mappen \"%@\"…";
+
+/* No comment provided by engineer. */
+"Delete group folder" = "Slet gruppemappe";
+
+/* No comment provided by engineer. */
+"Delete group folder text" = "Er du sikker på at du vil slette gruppemappen \"%@\" og alle undermapper? Denne handling kan ikke fortrydes.";
+
+/* No comment provided by engineer. */
+"Delete multiple folders" = "Slet flere mapper";
+
+/* No comment provided by engineer. */
+"Delete multiple folders text" = "Er du sikker på at du vil slette alle %d valgte mapper? Denne handling kan ikke fortrydes.";
+
+/* No comment provided by engineer. */
+"Delete selected message" = "Er du sikker på at du permanent vil slette den valgte artikel?";
+
+/* No comment provided by engineer. */
+"Delete selected message text" = "Denne handling kan ikke fortrydes.";
+
+/* No comment provided by engineer. */
+"Delete smart folder" = "Slet smartmappe";
+
+/* No comment provided by engineer. */
+"Delete smart folder text" = "Er du sikker på at du vil slette smartmappen \"%@\"? Dette vil ikke slette de egentlige artikler som matches af søgningen.";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Slettet";
+
+/* Title of a menu item */
+"Delete…" = "Slet…";
+
+/* No comment provided by engineer. */
+"Descending" = "Nedadgående";
+
+/* No comment provided by engineer. */
+"Do you really want to import the subscriptions from the specified OPML file?" = "Vil du virkelig importere abonnementerne fra det specificerede OPML-arkiv?";
+
+/* No comment provided by engineer. */
+"Download" = "Hent";
+
+/* Title of a menu item */
+"Download Enclosure" = "Hent indpakning";
+
+/* Title of a menu item */
+"Download Enclosures" = "Hent indpakninger";
+
+/* Notification title */
+"Download completed" = "Hentning fuldført";
+
+/* Notification title */
+"Download failed" = "Hentning fejlede";
+
+/* No comment provided by engineer. */
+"Downloads Running" = "En eller flere overførsler er igang";
+
+/* No comment provided by engineer. */
+"Downloads Running text" = "Hvis du slutter Vienna nu, vil alle overførsler stoppe.";
+
+/* Title of a menu item */
+"Edit…" = "Rediger…";
+
+/* Title of a button on an alert */
+"Empty" = "Tom";
+
+/* No comment provided by engineer. */
+"Empty Trash message" = "Er du sikker på at du vil slette beskederne i Papirkurven permanent?";
+
+/* No comment provided by engineer. */
+"Empty Trash message text" = "Du kan ikke fortryde denne handling";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "Indpakningshenvisning";
+
+/* No comment provided by engineer. */
+"Enter the URL here" = "Indtast URL her";
+
+/* No comment provided by engineer. */
+"Error" = "Fejl";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions body" = "Kan ikke importere den specificerede fil. Filndholdet er ikke et gyldigt OPML XML format.";
+
+/* No comment provided by engineer. */
+"Error importing subscriptions title" = "Importfejl";
+
+/* No comment provided by engineer. */
+"Error loading script '%@'" = "Fejl under indlæsning af skriptet '%@'";
+
+/* No comment provided by engineer. */
+"Error parsing XML data in feed" = "Fejl i håndteringen af XML data i feed";
+
+/* No comment provided by engineer. */
+"Error retrieving RSS Icon:" = "Fejl under indlæsning af RSS ikon:";
+
+/* No comment provided by engineer. */
+"Error retrieving RSS feed:" = "Fejl under indlæsning af RSS feed:";
+
+/* No comment provided by engineer. */
+"Error: Feed not found!" = "Fejl: Feed ikke fundet!";
+
+/* No comment provided by engineer. */
+"External Browser" = "Ekstern browser";
+
+/* No comment provided by engineer. */
+"Feed URL updated to %@" = "Feed-URL opdateret til %@";
+
+/* No comment provided by engineer. */
+"Fetching Open Reader Subscriptions…" = "Henter Open Reader abonnementer…";
+
+/* Notification body */
+"File %@ downloaded" = "Arkiv %@ hentet";
+
+/* Notification body */
+"File %@ failed to download" = "Arkivet %@ kunne ikke hentes";
+
+/* No comment provided by engineer. */
+"Flag" = "Mærk";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Mærket";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Mappe";
+
+/* No comment provided by engineer. */
+"Folder image retrieved from %@" = "Mappeikon modtaget fra %@";
+
+/* No comment provided by engineer. */
+"Folders" = "Mapper";
+
+/* Title of a menu item */
+"Force Refresh Selected Subscriptions From Open Reader" = "Gennemtving opdatering af valgte abonnementer fra Open Reader";
+
+/* No comment provided by engineer. */
+"Forcing Refresh subscriptions…" = "Gennemtvinger Opdater abonnementer…";
+
+/* Toolbar item name for the General preference pane */
+"General" = "Generelt";
+
+/* Title of a menu item */
+"Get Info" = "Vis info";
+
+/* No comment provided by engineer. */
+"Go forward to the next page" = "Gå frem til den næste side";
+
+/* No comment provided by engineer. */
+"Got HTTP status 304 - No news from last check" = "Fik HTTP status 304 - Ingen nyheder siden sidste tjek";
+
+/* No comment provided by engineer. */
+"HTTP code %d reported from server" = "HTTP-kode %d angivet af server";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Indpakning";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Overskrifter";
+
+/* No comment provided by engineer. */
+"Hide Filter Bar" = "Gem filterbaren";
+
+/* Title of a menu item */
+"Hide Status Bar" = "Gem statusbaren";
+
+/* Title of a menu item */
+"Hide Toolbar" = "Skjul værktøjslinie";
+
+/* Title of a button on an alert */
+"Import" = "Importer";
+
+/* No comment provided by engineer. */
+"Import subscriptions from OPML file?" = "Importer abonnementer fra OPML-arkiv?";
+
+/* No comment provided by engineer. */
+"Improper infinitely looping URL redirect to %@" = "Ugyldig uendeligt loopende henvisning som omdirigerer til %@";
+
+/* No comment provided by engineer. */
+"Invalid style body" = "Standard stilen vil blive brugt istedet.";
+
+/* No comment provided by engineer. */
+"Invalid style title" = "Stilen %@ mangler eller er beskadiget";
+
+/* No comment provided by engineer. */
+"JavaScript" = "JavaScript";
+
+/* No comment provided by engineer. */
+"Last Week" = "Sidste uge";
+
+/* Data field name visible in menu/article list */
+"Link" = "Henvisning";
+
+/* No comment provided by engineer. */
+"Loading" = "Indlæser";
+
+/* No comment provided by engineer. */
+"Loading…" = "Indlæser…";
+
+/* No comment provided by engineer. */
+"Locate Text" = "Find tekst";
+
+/* No comment provided by engineer. */
+"Locate Title" = "Find titel";
+
+/* Title of a button on an alert */
+"Locate…" = "Find…";
+
+/* Title of a menu item */
+"Mark All Articles as Read" = "Marker alle artikler som læst";
+
+/* No comment provided by engineer. */
+"Mark All Read" = "Marker alle læst";
+
+/* Title of a menu item */
+"Mark All Subscriptions as Read" = "Marker alle abonnementer som læst";
+
+/* Title of a menu item */
+"Mark Flagged" = "Marker med mærke";
+
+/* Title of a menu item */
+"Mark Read" = "Marker som læst";
+
+/* No comment provided by engineer. */
+"Mark Unflagged" = "Marker som umærket";
+
+/* Title of a menu item */
+"Mark Unread" = "Marker som ulæst";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Markerede artikler";
+
+/* No comment provided by engineer. */
+"More Scripts…" = "Flere skripter…";
+
+/* No comment provided by engineer. */
+"Move Folders" = "Flyt mapper";
+
+/* No comment provided by engineer. */
+"Never" = "Aldrig";
+
+/* No comment provided by engineer. */
+"New Tab" = "Ny fane";
+
+/* Notification title */
+"New articles retrieved" = "Nye artikler";
+
+/* No comment provided by engineer. */
+"New style body" = "Stilen \"%@\" er blevet installeret i din Stil-mappe og er blevet tilføjet til Stil-menuen.";
+
+/* No comment provided by engineer. */
+"New style title" = "Vienna har installeret en ny stil";
+
+/* Notification body */
+"New unread articles retrieved" = "%d nye ulæste artikler hentet";
+
+/* No comment provided by engineer. */
+"No" = "Nej";
+
+/* No comment provided by engineer. */
+"No articles in feed" = "Ingen artikler i feedet";
+
+/* No comment provided by engineer. */
+"No new articles available" = "Ingen nye artikler tilgængelige";
+
+/* Title of a button on an alert */
+"OK" = "OK";
+
+/* Title of a popup menu item */
+"Open" = "Åben";
+
+/* Title of a menu item */
+"Open Article Page" = "Åben artikelside";
+
+/* No comment provided by engineer. */
+"Open Article Page in %@" = "Åben artikelside i %@";
+
+/* Title of a menu item */
+"Open Article Page in External Browser" = "Åben artikelside i ekstern browser";
+
+/* No comment provided by engineer. */
+"Open Frame" = "Åben ramme";
+
+/* No comment provided by engineer. */
+"Open Image in %@" = "Åben billede i %@";
+
+/* No comment provided by engineer. */
+"Open Image in New Tab" = "Åben billede i ny fane";
+
+/* No comment provided by engineer. */
+"Open Link in %@" = "Åben henvisning i %@";
+
+/* No comment provided by engineer. */
+"Open Link in New Tab" = "Åben henvisning i ny fane";
+
+/* No comment provided by engineer. */
+"Open Page in %@" = "Åben side i %@";
+
+/* No comment provided by engineer. */
+"Open Reader Authentication Failed" = "Open Reader godkendelse fejlede";
+
+/* No comment provided by engineer. */
+"Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
+
+/* No comment provided by engineer. */
+"Open Scripts Folder" = "Åben Skripter-mappen";
+
+/* Title of a menu item */
+"Open Subscription Home Page" = "Åben abonnement-hjemmeside";
+
+/* No comment provided by engineer. */
+"Open Subscription Home Page in %@" = "Åben abonnement-hjemmeside i %@";
+
+/* Title of a menu item */
+"Open Subscription Home Page in External Browser" = "Åben abonnement hjemmeside i ekstern browser";
+
+/* No comment provided by engineer. */
+"Other" = "Andet";
+
+/* No comment provided by engineer. */
+"Play" = "Afspil";
+
+/* No comment provided by engineer. */
+"Plugin installed" = "Udvidelse installeret";
+
+/* Title of the Preferences window */
+"Preferences" = "Indstillinger";
+
+/* No comment provided by engineer. */
+"Queue" = "Kø";
+
+/* Title of a button on an alert */
+"Quit" = "Quit";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Quit Vienna" = "Quit Vienna";
+
+/* No comment provided by engineer. */
+"RSS Icon not found!" = "RSS ikon ikke fundet!";
+
+/* No comment provided by engineer. */
+"RSS Subscription Export Title" = "Eksport færdig";
+
+/* No comment provided by engineer. */
+"RSS Subscription Import Title" = "Import færdig";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Læs";
+
+/* No comment provided by engineer. */
+"Recent Searches" = "Foregående søgninger";
+
+/* No comment provided by engineer. */
+"Recents" = "Foregående";
+
+/* No comment provided by engineer. */
+"Redirection attempt treated as temporary for safety concern" = "Omdirigeringsforsøg blev anset som midlertidigt af sikkerhedshensyn";
+
+/* Title of a menu item */
+"Refresh All Subscriptions" = "Opdater alle abonnementer";
+
+/* Title of a menu item */
+"Refresh Selected Subscriptions" = "Opdater valgte abonnementer";
+
+/* No comment provided by engineer. */
+"Refresh completed" = "Opdatering færdig";
+
+/* No comment provided by engineer. */
+"Refresh the current page" = "Opdater den nuværende side";
+
+/* No comment provided by engineer. */
+"Refreshing folder images…" = "Opdaterer mappeikoner…";
+
+/* No comment provided by engineer. */
+"Refreshing subscriptions…" = "Opdaterer abonnementer…";
+
+/* Title of a popup menu item */
+"Remove From List" = "Fjern fra liste";
+
+/* Title of a menu item */
+"Rename…" = "Omdøb…";
+
+/* Title of a menu item */
+"Restore Article" = "Gendan artikel";
+
+/* No comment provided by engineer. */
+"Resubscribe" = "Gen-abonner på feedet";
+
+/* No comment provided by engineer. */
+"Retrieving articles" = "Henter artikler";
+
+/* No comment provided by engineer. */
+"Retrieving folder image" = "Modtager mappeikon";
+
+/* No comment provided by engineer. */
+"Retrieving folder image for Open Reader Feed" = "Henter mappeikon til Open Reader feed";
+
+/* No comment provided by engineer. */
+"Return to the previous page" = "Gå tilbage til den tidligere side";
+
+/* No comment provided by engineer. */
+"Search Results" = "Søg i resultater";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Søg alle artikler";
+
+/* No comment provided by engineer. */
+"Search all articles or the current web page" = "Søg i alle artikler eller den nuværende hjemmeside";
+
+/* Placeholder title of a search field */
+"Search current web page" = "Søg nuværende hjemmeside";
+
+/* No comment provided by engineer. */
+"Search in %@" = "Søg i %@";
+
+/* No comment provided by engineer. */
+"Select…" = "Vælg…";
+
+/* No comment provided by engineer. */
+"Send Link" = "Send henvisning";
+
+/* No comment provided by engineer. */
+"Send Links" = "Send henvisninger";
+
+/* No comment provided by engineer. */
+"Show Filter Bar" = "Vis filterbaren";
+
+/* Title of a menu item */
+"Show Main Window…" = "Vis hovedvindue…";
+
+/* Title of a menu item */
+"Show Status Bar" = "Vis statusbaren";
+
+/* Title of a menu item */
+"Show Toolbar" = "Vis værktøjslinje";
+
+/* Title of a popup menu item */
+"Show in Finder" = "Vis i Finder";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Emne";
+
+/* No comment provided by engineer. */
+"Subscribe to the feed for this page" = "Abonner på feedet for denne side";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Resumé";
+
+/* Toolbar item name for the Syncing preference pane */
+"Syncing" = "Synkroniserer";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Tekst";
+
+/* No comment provided by engineer. */
+"This article contains an enclosed file." = "Denne artikel har en vedlagt fil.";
+
+/* No comment provided by engineer. */
+"Today" = "I dag";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Dagens artikler";
+
+/* No comment provided by engineer. */
+"Trash" = "Papirkurv";
+
+/* URL */
+"URL" = "Henvisning";
+
+/* No comment provided by engineer. */
+"Unread" = "Ulæst";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Ulæste artikler";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "Database (%@) filformatet er ikke understøttet af denne udgave af Vienna. Slet eller omdøb filen og genstart Vienna.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "Database filformatet er blevet ændret";
+
+/* No comment provided by engineer. */
+"Unsubscribe" = "Af-abonner feedet";
+
+/* Title of a button on an alert */
+"Upgrade Database" = "Opgrader databasen";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file body" = "Vienna kan ikke åbne arkivet \"%@\" fordi det er flyttet siden du hentede det";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file title" = "Vienna kan ikke åbne arkivtitlen";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file body" = "Vienna kan ikke vise arkivet \"%@\" fordi det er flyttet siden du hentede det";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file title" = "Vienna kan ikke vise arkivtitlen";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna er nød til at opgradere dens database til den nyeste version. Dette tager omkring et minut. Vi underskylder for ulejligheden.";
+
+/* No comment provided by engineer. */
+"Yes" = "Ja";
+
+/* No comment provided by engineer. */
+"Yesterday" = "Igår";
+
+/* test for a string */
+"contains" = "indeholdet";
+
+/* test for a string */
+"does not contain" = "inderholder ikke";
+
+/* test for a value */
+"is" = "er";
+
+/* test for a date */
+"is after" = "er efter";
+
+/* test for a date */
+"is before" = "er før";
+
+/* test for a numeric value */
+"is greater than" = "er større end";
+
+/* test for a numeric value */
+"is greater than or equal to" = "er større eller lig";
+
+/* test for a numeric value */
+"is less than" = "er mindre end";
+
+/* test for a numeric value */
+"is less than or equal to" = "er mindre eller lig";
+
+/* test for a value */
+"is not" = "er ikke";
+
+/* test for a date */
+"is on or after" = "er på eller efer";
+
+/* test for a date */
+"is on or before" = "er på eller før";
+
+/* test for a folder (not operational as of Vienna 3.2) */
+"not under" = "ikke under";
+
+/* test for a folder (not operational as of Vienna 3.2) */
+"under" = "under";
+

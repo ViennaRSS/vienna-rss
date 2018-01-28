@@ -116,11 +116,6 @@ extern NSString * MA_PBoardType_urln;
 #define MA_Refresh_ReapplyFilter		1
 #define MA_Refresh_SortAndRedraw		3
 
-// Growl contexts
-#define MA_GrowlContext_RefreshCompleted	1
-#define MA_GrowlContext_DownloadCompleted	2
-#define MA_GrowlContext_DownloadFailed		3
-
 // View animation tags
 #define MA_ViewTag_Filterbar			1
 #define MA_ViewTag_Statusbar			2

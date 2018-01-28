@@ -18,8 +18,9 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "Article.h"
+@import Foundation;
+
+@class Article;
 
 @interface ArticleReference : NSObject
 {

@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
 @interface AddressBarCell : NSTextFieldCell {
 	BOOL hasSecureImage;

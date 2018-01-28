@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 The Vienna Project. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Cocoa;
 
 @interface FolderImageCache : NSObject {
     NSString * imagesCacheFolder;
@@ -15,7 +15,7 @@
 }
 
 // Indexes into folder image array
-enum {
+typedef NS_ENUM(NSInteger, VNAFolderIconIndex) {
     MA_FolderIcon = 0,
     MA_SmartFolderIcon,
     MA_RSSFolderIcon,

@@ -1,0 +1,144 @@
+/* No comment provided by engineer. */
+"(No title)" = "(Sin título)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(Fuente sin título)";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "Autor";
+
+/* Title of a button on an alert */
+"Cancel" = "Cancelar";
+
+/* No comment provided by engineer. */
+"Cannot create database folder text" = "Vienna ha intentado crear la carpeta \"%@\" pero ha ocurrido un error. Compruebe los permisos de las carpetas de la ruta especificada.";
+
+/* No comment provided by engineer. */
+"Cannot create database folder title" = "Lo sentimos, pero Vienna no ha podido crear la carpeta de la base de datos";
+
+/* No comment provided by engineer. */
+"Cannot open database text" = "Por algún motivo, el archivo de la base de datos (%@) no se ha podido abrir. Puede estar dañado o inaccesible. Por favor, elimine o renombre el archivo de la base de datos y reinicie Vienna.";
+
+/* No comment provided by engineer. */
+"Cannot open database title" = "Vienna no ha podido abrir la base de datos";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "Actualización de la base de datos";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "Fecha";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "Eliminado";
+
+/* Data field name (URL) visible in menu/article list */
+"Enclosure" = "Archivo adjunto";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "Destacado";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "Carpeta";
+
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"HasEnclosure" = "Archivo adjunto";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "Titulares";
+
+/* Data field name visible in menu/article list */
+"Link" = "Enlace";
+
+/* No comment provided by engineer. */
+"Locate Text" = "No se puede crear la nueva base de datos de Vienna en \"%@\" ya que la carpeta probablemente está ubicada en un recurso compartido de una red remota y esta versión de Vienna no puede gestionar bases de datos remotas. Por favor, elija una carpeta alternativa ubicada en su equipo local.";
+
+/* No comment provided by engineer. */
+"Locate Title" = "No puede crear la base de datos de Vienna";
+
+/* Title of a button on an alert */
+"Locate…" = "Ubicar…";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "Artículos marcados";
+
+/* Title of a button on an alert */
+"Quit Vienna" = "Salir de Vienna";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "Leído";
+
+/* No comment provided by engineer. */
+"Search Results" = "Resultados de la búsqueda";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Buscar todos los artículos";
+
+/* Placeholder title of a search field */
+"Search current web page" = "Buscar en página web actual";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "Asunto";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "Resumen";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Texto";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "Artículos de hoy";
+
+/* No comment provided by engineer. */
+"Trash" = "Papelera";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "Artículos no leídos";
+
+/* No comment provided by engineer. */
+"Unrecognised database format text" = "El formato de archivo de la base de datos (%@) no es compatible con esta versión de Vienna. Elimine o renombre el archivo y reinicie Vienna.";
+
+/* No comment provided by engineer. */
+"Unrecognised database format title" = "El formato de archivo de la base de datos ha cambiado";
+
+/* Title of a button on an alert */
+"Upgrade Database" = "Actualizar base de datos";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna debe actualizar su base de datos a la última versión. Esto puede tardar un minuto más o menos. Lamentamos el inconveniente.";
+
+/* test for a string */
+"contains" = "contiene";
+
+/* test for a string */
+"does not contain" = "no contiene";
+
+/* test for a value */
+"is" = "es";
+
+/* test for a date */
+"is after" = "es posterior a";
+
+/* test for a date */
+"is before" = "es anterior a";
+
+/* test for a numeric value */
+"is greater than" = "es mayor que";
+
+/* test for a numeric value */
+"is greater than or equal to" = "es mayor o igual que";
+
+/* test for a numeric value */
+"is less than" = "es menor que";
+
+/* test for a numeric value */
+"is less than or equal to" = "es menor o igual que";
+
+/* test for a value */
+"is not" = "no es";
+
+/* test for a date */
+"is on or after" = "es a partir de";
+
+/* test for a date */
+"is on or before" = "es anterior a o de";
+

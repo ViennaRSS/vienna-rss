@@ -21,10 +21,13 @@
 #import "NewGroupFolder.h"
 #import "StringExtensions.h"
 #import "AppController.h"
+#import "Folder.h"
+#import "Database.h"
 
-// Private functions
-@interface NewGroupFolder (Private)
-	-(void)enableSaveButton;
+@interface NewGroupFolder ()
+
+-(void)enableSaveButton;
+
 @end
 
 @implementation NewGroupFolder
@@ -60,7 +63,7 @@
 	NSInteger newFolderId = [[Database sharedManager] addFolder:parentId
 													 afterChild:-1
 													 folderName:folderNameString
-														   type:MA_Group_Folder
+														   type:VNAFolderTypeGroup
 												 canAppendIndex:NO];
 
 	// Close the window

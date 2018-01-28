@@ -1,0 +1,2386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="Interfaces/Base.lproj/ActivityViewer.xib" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="8.title">
+        <source>Activity</source>
+        <note>Class = "NSWindow"; title = "Activity"; ObjectID = "8";</note>
+        <target xml:lang="ko" state="translated">활성 윈도우</target>
+      </trans-unit>
+      <trans-unit id="18.headerCell.title">
+        <source>Source</source>
+        <note>Class = "NSTableColumn"; headerCell.title = "Source"; ObjectID = "18";</note>
+        <target xml:lang="ko" state="translated">소스</target>
+      </trans-unit>
+      <trans-unit id="19.headerCell.title">
+        <source>Status</source>
+        <note>Class = "NSTableColumn"; headerCell.title = "Status"; ObjectID = "19";</note>
+        <target xml:lang="ko" state="translated">상태</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/AdvancedPreferencesView.xib" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="GaX-8c-QaN.title">
+        <source>The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.</source>
+        <note>Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "GaX-8c-QaN";</note>
+        <target xml:lang="ko" state="translated">Vienna 를 일반적인 사용시에는 이 설정들을 변경할 필요가 없습니다. 각 설정에 대한 상세정보는 도움말을 참고하십시오.</target>
+      </trans-unit>
+      <trans-unit id="guK-dE-f6n.title">
+        <source>Enable JavaScript in the internal browser</source>
+        <note>Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "guK-dE-f6n";</note>
+        <target xml:lang="ko" state="translated">내부 브라우져에서 자바스크립트 사용</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/AppearancePreferencesView.xib" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="71S-pg-AjX.title">
+        <source>When viewing articles or web pages:</source>
+        <note>Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "71S-pg-AjX";</note>
+        <target xml:lang="ko" state="translated">기사 및 웹페이지 보기:</target>
+      </trans-unit>
+      <trans-unit id="B5v-p5-vrf.title">
+        <source>Folder list font:</source>
+        <note>Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "B5v-p5-vrf";</note>
+        <target xml:lang="ko" state="translated">폴더 및 구독 목록  서체:</target>
+      </trans-unit>
+      <trans-unit id="BDw-v3-mpF.title">
+        <source>Select…</source>
+        <note>Class = "NSButtonCell"; title = "Select…"; ObjectID = "BDw-v3-mpF";</note>
+        <target xml:lang="ko" state="translated">선택…</target>
+      </trans-unit>
+      <trans-unit id="MEV-HA-bdL.title">
+        <source>Show feeds icons in folder list</source>
+        <note>Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "MEV-HA-bdL";</note>
+        <target xml:lang="ko" state="translated">구독 목록에 아이콘 이미지 사용</target>
+      </trans-unit>
+      <trans-unit id="auD-UC-Pij.title">
+        <source>Article list font:</source>
+        <note>Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "auD-UC-Pij";</note>
+        <target xml:lang="ko" state="translated">기사 목록  서체:</target>
+      </trans-unit>
+      <trans-unit id="gGT-YP-aum.title">
+        <source>Select…</source>
+        <note>Class = "NSButtonCell"; title = "Select…"; ObjectID = "gGT-YP-aum";</note>
+        <target xml:lang="ko" state="translated">선택…</target>
+      </trans-unit>
+      <trans-unit id="zfJ-Ge-Cxe.title">
+        <source>Never use font sizes smaller than</source>
+        <note>Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "zfJ-Ge-Cxe";</note>
+        <target xml:lang="ko" state="translated">다음보다 작은 서체 크기 사용 안함:</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/Downloads.xib" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="5.title">
+        <source>Downloads</source>
+        <note>Class = "NSWindow"; title = "Downloads"; ObjectID = "5";</note>
+        <target xml:lang="ko" state="translated">다운로드</target>
+      </trans-unit>
+      <trans-unit id="23.title">
+        <source>Clear</source>
+        <note>Class = "NSButtonCell"; title = "Clear"; ObjectID = "23";</note>
+        <target xml:lang="ko" state="translated">지우기</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/EmptyTrashWarning.xib" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="17.title">
+        <source>Empty Trash</source>
+        <note>Class = "NSButtonCell"; title = "Empty Trash"; ObjectID = "17";</note>
+        <target xml:lang="ko" state="translated">휴지통 비우기</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/ExportAccessoryViewController.xib" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="6rj-zb-zOa.title">
+        <source>Export all subscriptions</source>
+        <note>Class = "NSButtonCell"; title = "Export all subscriptions"; ObjectID = "6rj-zb-zOa";</note>
+        <target xml:lang="ko" state="translated">모든 항목</target>
+      </trans-unit>
+      <trans-unit id="IYg-Pm-bcI.title">
+        <source>Preserve group folders in exported file</source>
+        <note>Class = "NSButtonCell"; title = "Preserve group folders in exported file"; ObjectID = "IYg-Pm-bcI";</note>
+        <target xml:lang="ko" state="translated">그룹 폴더의 구조 유지</target>
+      </trans-unit>
+      <trans-unit id="KgE-bb-aJn.title">
+        <source>Export selected subscriptions</source>
+        <note>Class = "NSButtonCell"; title = "Export selected subscriptions"; ObjectID = "KgE-bb-aJn";</note>
+        <target xml:lang="ko" state="translated">선택된 항목만</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/FeedCredentials.xib" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="32.title">
+        <source>Cancel</source>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "32";</note>
+        <target xml:lang="ko" state="translated">취소</target>
+      </trans-unit>
+      <trans-unit id="33.title">
+        <source>Name:</source>
+        <note>Class = "NSTextFieldCell"; title = "Name:"; ObjectID = "33";</note>
+        <target xml:lang="ko" state="translated">이름:</target>
+      </trans-unit>
+      <trans-unit id="34.title">
+        <source>Access to %@ requires you to provide log in credentials</source>
+        <note>Class = "NSTextFieldCell"; title = "Access to %@ requires you to provide log in credentials"; ObjectID = "34";</note>
+        <target xml:lang="ko" state="translated">%@ 구독은 로그인을 요구합니다.</target>
+      </trans-unit>
+      <trans-unit id="37.title">
+        <source>Password:</source>
+        <note>Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "37";</note>
+        <target xml:lang="ko" state="translated">암호:</target>
+      </trans-unit>
+      <trans-unit id="38.title">
+        <source>Log In</source>
+        <note>Class = "NSButtonCell"; title = "Log In"; ObjectID = "38";</note>
+        <target xml:lang="ko" state="translated">로그인</target>
+      </trans-unit>
+      <trans-unit id="39.title">
+        <source>The user name and password you provide will be remembered for the next time you refresh this subscription.</source>
+        <note>Class = "NSTextFieldCell"; title = "The user name and password you provide will be remembered for the next time you refresh this subscription."; ObjectID = "39";</note>
+        <target xml:lang="ko" state="translated">입력한 사용자 이름과 암호는 다음에 이 구독을 갱신시 사용하기 위해 기억됩니다.</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/GeneralPreferencesView.xib" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="1Ll-uG-QWh.title">
+        <source>Every 15 minutes</source>
+        <note>Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "1Ll-uG-QWh";</note>
+        <target xml:lang="ko" state="translated">15분마다</target>
+      </trans-unit>
+      <trans-unit id="2oy-1i-QQP.title">
+        <source>After "Next Unread" command</source>
+        <note>Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "2oy-1i-QQP";</note>
+        <target xml:lang="ko" state="translated">"읽지 않은 다음 항목" 명령을 실행한 후에</target>
+      </trans-unit>
+      <trans-unit id="5VQ-jP-2rL.title">
+        <source>Every 30 minutes</source>
+        <note>Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "5VQ-jP-2rL";</note>
+        <target xml:lang="ko" state="translated">30분마다</target>
+      </trans-unit>
+      <trans-unit id="6wU-yO-cnV.title">
+        <source>Every 2 hours</source>
+        <note>Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "6wU-yO-cnV";</note>
+        <target xml:lang="ko" state="translated">2시간마다</target>
+      </trans-unit>
+      <trans-unit id="7e3-Hu-RB5.title">
+        <source>Show the unread count on the application icon</source>
+        <note>Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "7e3-Hu-RB5";</note>
+        <target xml:lang="ko" state="translated">응용 프로그램 아이콘에 읽지 않은 항목 수 표시</target>
+      </trans-unit>
+      <trans-unit id="BbI-0A-zEG.title">
+        <source>When new unread articles are retrieved:</source>
+        <note>Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "BbI-0A-zEG";</note>
+        <target xml:lang="ko" state="translated">읽지 않은 새 기사 추가시:</target>
+      </trans-unit>
+      <trans-unit id="FiK-E7-RnG.title">
+        <source>Other…</source>
+        <note>Class = "NSMenuItem"; title = "Other…"; ObjectID = "FiK-E7-RnG";</note>
+        <target xml:lang="ko" state="translated">선택…</target>
+        <alt-trans>
+          <target xml:lang="ko">선택...</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="GnT-xT-rAZ.title">
+        <source>Check for newer versions of Vienna on start up</source>
+        <note>Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "GnT-xT-rAZ";</note>
+        <target xml:lang="ko" state="translated">시작시 새 버전의 Vienna 확인   링크를 항상 백그라운드 상태로 열기</target>
+      </trans-unit>
+      <trans-unit id="H9Q-du-oax.title">
+        <source>Manually</source>
+        <note>Class = "NSMenuItem"; title = "Manually"; ObjectID = "H9Q-du-oax";</note>
+        <target xml:lang="ko" state="translated">수동으로</target>
+      </trans-unit>
+      <trans-unit id="IMa-1h-lIO.title">
+        <source>Every 6 hours</source>
+        <note>Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "IMa-1h-lIO";</note>
+        <target xml:lang="ko" state="translated">6시간마다</target>
+      </trans-unit>
+      <trans-unit id="JDV-ek-xja.title">
+        <source>After a short delay</source>
+        <note>Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "JDV-ek-xja";</note>
+        <target xml:lang="ko" state="translated">일정 시간 지연 후에</target>
+      </trans-unit>
+      <trans-unit id="YoM-Gv-hXn.title">
+        <source>Open links in external browser</source>
+        <note>Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "YoM-Gv-hXn";</note>
+        <target xml:lang="ko" state="translated">링크를 외부(기본) 브라우저로 열기</target>
+      </trans-unit>
+      <trans-unit id="ewU-JH-fMC.title">
+        <source>Check for new articles:</source>
+        <note>Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "ewU-JH-fMC";</note>
+        <target xml:lang="ko" state="translated">새 기사 확인:</target>
+      </trans-unit>
+      <trans-unit id="geD-Ws-mQm.title">
+        <source>Save downloaded files to:</source>
+        <note>Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "geD-Ws-mQm";</note>
+        <target xml:lang="ko" state="translated">링크를 항상 백그라운드 상태로 열기다운로드한 파일 저장:</target>
+      </trans-unit>
+      <trans-unit id="gi4-ao-0yS.title">
+        <source>Bounce the application icon</source>
+        <note>Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "gi4-ao-0yS";</note>
+        <target xml:lang="ko" state="translated">응용 프로그램 아이콘 움직이기</target>
+      </trans-unit>
+      <trans-unit id="gnX-dW-XUD.title">
+        <source>Every 3 hours</source>
+        <note>Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "gnX-dW-XUD";</note>
+        <target xml:lang="ko" state="translated">3시간마다</target>
+      </trans-unit>
+      <trans-unit id="kGA-Sa-RLG.title">
+        <source>Default RSS Reader:</source>
+        <note>Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG";</note>
+        <target xml:lang="ko" state="translated">링크를 외부(기본) 브라우져로 열기</target>
+      </trans-unit>
+      <trans-unit id="oVW-ee-uJT.title">
+        <source>Every 5 minutes</source>
+        <note>Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "oVW-ee-uJT";</note>
+        <target xml:lang="ko" state="translated">5분마다</target>
+      </trans-unit>
+      <trans-unit id="pjg-Ze-H3l.title">
+        <source>Open new links in the background</source>
+        <note>Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "pjg-Ze-H3l";</note>
+        <target xml:lang="ko" state="translated">링크를 항상 백그라운드 상태로 열기</target>
+      </trans-unit>
+      <trans-unit id="sSj-zI-6RY.title">
+        <source>Every hour</source>
+        <note>Class = "NSMenuItem"; title = "Every hour"; ObjectID = "sSj-zI-6RY";</note>
+        <target xml:lang="ko" state="translated">1시간마다</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/GroupFolder.xib" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="32.title">
+        <source>New Group Folder</source>
+        <note>Class = "NSTextFieldCell"; title = "New Group Folder"; ObjectID = "32";</note>
+        <target xml:lang="ko" state="translated">새 그룹 폴더 추가</target>
+      </trans-unit>
+      <trans-unit id="34.title">
+        <source>Save</source>
+        <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "34";</note>
+        <target xml:lang="ko" state="translated">추가</target>
+      </trans-unit>
+      <trans-unit id="35.title">
+        <source>Cancel</source>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "35";</note>
+        <target xml:lang="ko" state="translated">취소</target>
+      </trans-unit>
+      <trans-unit id="36.title">
+        <source>Enter the group folder name:</source>
+        <note>Class = "NSTextFieldCell"; title = "Enter the group folder name:"; ObjectID = "36";</note>
+        <target xml:lang="ko" state="translated">새 그룹 폴더의 이름을 입력하십시오:</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/InfoWindow.xib" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="105.title">
+        <source>Last Refreshed:</source>
+        <note>Class = "NSTextFieldCell"; title = "Last Refreshed:"; ObjectID = "105";</note>
+        <target xml:lang="ko" state="translated">최종 갱신일:</target>
+      </trans-unit>
+      <trans-unit id="109.title">
+        <source>Validate</source>
+        <note>Class = "NSButtonCell"; title = "Validate"; ObjectID = "109";</note>
+        <target xml:lang="ko" state="translated">피드 확인</target>
+      </trans-unit>
+      <trans-unit id="111.title">
+        <source>User name:</source>
+        <note>Class = "NSTextFieldCell"; title = "User name:"; ObjectID = "111";</note>
+        <target xml:lang="ko" state="translated">이름:</target>
+      </trans-unit>
+      <trans-unit id="112.title">
+        <source>Password:</source>
+        <note>Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "112";</note>
+        <target xml:lang="ko" state="translated">암호:</target>
+      </trans-unit>
+      <trans-unit id="115.title">
+        <source>Update Authentication</source>
+        <note>Class = "NSButtonCell"; title = "Update Authentication"; ObjectID = "115";</note>
+        <target xml:lang="ko" state="translated">인증 갱신</target>
+      </trans-unit>
+      <trans-unit id="117.title">
+        <source>Size:</source>
+        <note>Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "117";</note>
+        <target xml:lang="ko" state="translated">전체:</target>
+      </trans-unit>
+      <trans-unit id="118.title">
+        <source>Unread:</source>
+        <note>Class = "NSTextFieldCell"; title = "Unread:"; ObjectID = "118";</note>
+        <target xml:lang="ko" state="translated">현재:</target>
+      </trans-unit>
+      <trans-unit id="121.title">
+        <source>Subscribed</source>
+        <note>Class = "NSButtonCell"; title = "Subscribed"; ObjectID = "121";</note>
+        <target xml:lang="ko" state="translated">구독하기</target>
+      </trans-unit>
+      <trans-unit id="126.title">
+        <source>Load Full HTML Articles</source>
+        <note>Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126";</note>
+        <target xml:lang="ko" state="translated">Use Web Page for Articles</target>
+      </trans-unit>
+      <trans-unit id="E84-Uo-ybg.title">
+        <source>Description</source>
+        <note>Class = "NSTextFieldCell"; title = "Description"; ObjectID = "E84-Uo-ybg";</note>
+        <target xml:lang="ko" state="translated">설명</target>
+      </trans-unit>
+      <trans-unit id="U0N-RF-bUt.title">
+        <source>Authentication</source>
+        <note>Class = "NSTextFieldCell"; title = "Authentication"; ObjectID = "U0N-RF-bUt";</note>
+        <target xml:lang="ko" state="translated">인증</target>
+      </trans-unit>
+      <trans-unit id="i9j-KH-c3D.title">
+        <source>General</source>
+        <note>Class = "NSTextFieldCell"; title = "General"; ObjectID = "i9j-KH-c3D";</note>
+        <target xml:lang="ko" state="translated">일반</target>
+      </trans-unit>
+      <trans-unit id="xPF-M9-oZG.title">
+        <source>Feed URL</source>
+        <note>Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG";</note>
+        <target xml:lang="ko" state="translated">피드 URL</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/MainMenu.xib" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="2S3-dG-ZPg.title">
+        <source>More Styles…</source>
+        <note>Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg";</note>
+        <target xml:lang="ko" state="translated">스타일 추가…</target>
+      </trans-unit>
+      <trans-unit id="5.title">
+        <source>Bring All to Front</source>
+        <note>Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5";</note>
+        <target xml:lang="ko" state="translated">모두 앞으로 가져오기</target>
+      </trans-unit>
+      <trans-unit id="6yn-y8-lF1.title">
+        <source>Refresh All Subscriptions</source>
+        <note>Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1";</note>
+        <target xml:lang="ko" state="translated">모든 구독 갱신</target>
+      </trans-unit>
+      <trans-unit id="8Z3-Bg-ry2.title">
+        <source>Flagged</source>
+        <note>Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8Z3-Bg-ry2";</note>
+        <target xml:lang="ko" state="translated">깃발 표시</target>
+      </trans-unit>
+      <trans-unit id="19.title">
+        <source>Window</source>
+        <note>Class = "NSMenuItem"; title = "Window"; ObjectID = "19";</note>
+        <target xml:lang="ko" state="translated">윈도우</target>
+      </trans-unit>
+      <trans-unit id="23.title">
+        <source>Minimize</source>
+        <note>Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23";</note>
+        <target xml:lang="ko" state="translated">최소화</target>
+      </trans-unit>
+      <trans-unit id="24.title">
+        <source>Window</source>
+        <note>Class = "NSMenu"; title = "Window"; ObjectID = "24";</note>
+        <target xml:lang="ko" state="translated">윈도우</target>
+      </trans-unit>
+      <trans-unit id="58.title">
+        <source>About Vienna</source>
+        <note>Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58";</note>
+        <target xml:lang="ko" state="translated">Vienna 에 관하여</target>
+      </trans-unit>
+      <trans-unit id="77.title">
+        <source>Page Setup…</source>
+        <note>Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "77";</note>
+        <target xml:lang="ko" state="translated">페이지 설정…</target>
+      </trans-unit>
+      <trans-unit id="78.title">
+        <source>Print…</source>
+        <note>Class = "NSMenuItem"; title = "Print…"; ObjectID = "78";</note>
+        <target xml:lang="ko" state="translated">프린트…</target>
+      </trans-unit>
+      <trans-unit id="81.title">
+        <source>File</source>
+        <note>Class = "NSMenu"; title = "File"; ObjectID = "81";</note>
+        <target xml:lang="ko" state="translated">파일</target>
+      </trans-unit>
+      <trans-unit id="83.title">
+        <source>File</source>
+        <note>Class = "NSMenuItem"; title = "File"; ObjectID = "83";</note>
+        <target xml:lang="ko" state="translated">파일</target>
+      </trans-unit>
+      <trans-unit id="103.title">
+        <source>Help</source>
+        <note>Class = "NSMenuItem"; title = "Help"; ObjectID = "103";</note>
+        <target xml:lang="ko" state="translated">도움말</target>
+      </trans-unit>
+      <trans-unit id="106.title">
+        <source>Help</source>
+        <note>Class = "NSMenu"; title = "Help"; ObjectID = "106";</note>
+        <target xml:lang="ko" state="translated">도움말</target>
+      </trans-unit>
+      <trans-unit id="111.title">
+        <source>Vienna Help</source>
+        <note>Class = "NSMenuItem"; title = "Vienna Help"; ObjectID = "111";</note>
+        <target xml:lang="ko" state="translated">Vienna 도움말</target>
+      </trans-unit>
+      <trans-unit id="129.title">
+        <source>Preferences…</source>
+        <note>Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129";</note>
+        <target xml:lang="ko" state="translated">환경설정…</target>
+      </trans-unit>
+      <trans-unit id="130.title">
+        <source>Services</source>
+        <note>Class = "NSMenu"; title = "Services"; ObjectID = "130";</note>
+        <target xml:lang="ko" state="translated">서비스</target>
+      </trans-unit>
+      <trans-unit id="131.title">
+        <source>Services</source>
+        <note>Class = "NSMenuItem"; title = "Services"; ObjectID = "131";</note>
+        <target xml:lang="ko" state="translated">서비스</target>
+      </trans-unit>
+      <trans-unit id="134.title">
+        <source>Hide Vienna</source>
+        <note>Class = "NSMenuItem"; title = "Hide Vienna"; ObjectID = "134";</note>
+        <target xml:lang="ko" state="translated">가리기</target>
+      </trans-unit>
+      <trans-unit id="136.title">
+        <source>Quit Vienna</source>
+        <note>Class = "NSMenuItem"; title = "Quit Vienna"; ObjectID = "136";</note>
+        <target xml:lang="ko" state="translated">종료</target>
+      </trans-unit>
+      <trans-unit id="145.title">
+        <source>Hide Others</source>
+        <note>Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145";</note>
+        <target xml:lang="ko" state="translated">기타 가리기</target>
+      </trans-unit>
+      <trans-unit id="150.title">
+        <source>Show All</source>
+        <note>Class = "NSMenuItem"; title = "Show All"; ObjectID = "150";</note>
+        <target xml:lang="ko" state="translated">모두 보이기</target>
+      </trans-unit>
+      <trans-unit id="154.title">
+        <source>Find…</source>
+        <note>Class = "NSMenuItem"; title = "Find…"; ObjectID = "154";</note>
+        <target xml:lang="ko" state="translated">찾기…</target>
+      </trans-unit>
+      <trans-unit id="155.title">
+        <source>Jump to Selection</source>
+        <note>Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "155";</note>
+        <target xml:lang="ko" state="translated">선택 부분으로 이동</target>
+      </trans-unit>
+      <trans-unit id="157.title">
+        <source>Copy</source>
+        <note>Class = "NSMenuItem"; title = "Copy"; ObjectID = "157";</note>
+        <target xml:lang="ko" state="translated">베껴두기</target>
+      </trans-unit>
+      <trans-unit id="158.title">
+        <source>Undo</source>
+        <note>Class = "NSMenuItem"; title = "Undo"; ObjectID = "158";</note>
+        <target xml:lang="ko" state="translated">취소</target>
+      </trans-unit>
+      <trans-unit id="159.title">
+        <source>Find</source>
+        <note>Class = "NSMenu"; title = "Find"; ObjectID = "159";</note>
+        <target xml:lang="ko" state="translated">찾기</target>
+      </trans-unit>
+      <trans-unit id="160.title">
+        <source>Cut</source>
+        <note>Class = "NSMenuItem"; title = "Cut"; ObjectID = "160";</note>
+        <target xml:lang="ko" state="translated">오려두기</target>
+      </trans-unit>
+      <trans-unit id="161.title">
+        <source>Use Selection for Find</source>
+        <note>Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "161";</note>
+        <target xml:lang="ko" state="translated">선택 부분으로 찾기</target>
+      </trans-unit>
+      <trans-unit id="162.title">
+        <source>Find Previous</source>
+        <note>Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "162";</note>
+        <target xml:lang="ko" state="translated">이전 찾기</target>
+      </trans-unit>
+      <trans-unit id="163.title">
+        <source>Edit</source>
+        <note>Class = "NSMenuItem"; title = "Edit"; ObjectID = "163";</note>
+        <target xml:lang="ko" state="translated">편집</target>
+      </trans-unit>
+      <trans-unit id="164.title">
+        <source>Delete</source>
+        <note>Class = "NSMenuItem"; title = "Delete"; ObjectID = "164";</note>
+        <target xml:lang="ko" state="translated">삭제</target>
+      </trans-unit>
+      <trans-unit id="167.title">
+        <source>Find Next</source>
+        <note>Class = "NSMenuItem"; title = "Find Next"; ObjectID = "167";</note>
+        <target xml:lang="ko" state="translated">다음 찾기</target>
+      </trans-unit>
+      <trans-unit id="168.title">
+        <source>Find</source>
+        <note>Class = "NSMenuItem"; title = "Find"; ObjectID = "168";</note>
+        <target xml:lang="ko" state="translated">찾기</target>
+      </trans-unit>
+      <trans-unit id="169.title">
+        <source>Edit</source>
+        <note>Class = "NSMenu"; title = "Edit"; ObjectID = "169";</note>
+        <target xml:lang="ko" state="translated">편집</target>
+      </trans-unit>
+      <trans-unit id="171.title">
+        <source>Paste</source>
+        <note>Class = "NSMenuItem"; title = "Paste"; ObjectID = "171";</note>
+        <target xml:lang="ko" state="translated">붙이기</target>
+      </trans-unit>
+      <trans-unit id="172.title">
+        <source>Select All</source>
+        <note>Class = "NSMenuItem"; title = "Select All"; ObjectID = "172";</note>
+        <target xml:lang="ko" state="translated">모두 선택</target>
+      </trans-unit>
+      <trans-unit id="173.title">
+        <source>Redo</source>
+        <note>Class = "NSMenuItem"; title = "Redo"; ObjectID = "173";</note>
+        <target xml:lang="ko" state="translated">복귀</target>
+      </trans-unit>
+      <trans-unit id="197.title">
+        <source>Zoom</source>
+        <note>Class = "NSMenuItem"; title = "Zoom"; ObjectID = "197";</note>
+        <target xml:lang="ko" state="translated">확대 및 축소</target>
+      </trans-unit>
+      <trans-unit id="235.title">
+        <source>View</source>
+        <note>Class = "NSMenuItem"; title = "View"; ObjectID = "235";</note>
+        <target xml:lang="ko" state="translated">보기</target>
+      </trans-unit>
+      <trans-unit id="237.title">
+        <source>View</source>
+        <note>Class = "NSMenu"; title = "View"; ObjectID = "237";</note>
+        <target xml:lang="ko" state="translated">보기</target>
+      </trans-unit>
+      <trans-unit id="300.title">
+        <source>Article</source>
+        <note>Class = "NSMenu"; title = "Article"; ObjectID = "300";</note>
+        <target xml:lang="ko" state="translated">기사</target>
+      </trans-unit>
+      <trans-unit id="301.title">
+        <source>Article</source>
+        <note>Class = "NSMenuItem"; title = "Article"; ObjectID = "301";</note>
+        <target xml:lang="ko" state="translated">기사</target>
+      </trans-unit>
+      <trans-unit id="344.title">
+        <source>Next Unread</source>
+        <note>Class = "NSMenuItem"; title = "Next Unread"; ObjectID = "344";</note>
+        <target xml:lang="ko" state="translated">읽지 않은 다음 항목</target>
+      </trans-unit>
+      <trans-unit id="387.title">
+        <source>Sort By</source>
+        <note>Class = "NSMenuItem"; title = "Sort By"; ObjectID = "387";</note>
+        <target xml:lang="ko" state="translated">정렬</target>
+      </trans-unit>
+      <trans-unit id="388.title">
+        <source>Sort By</source>
+        <note>Class = "NSMenu"; title = "Sort By"; ObjectID = "388";</note>
+        <target xml:lang="ko" state="translated">정렬</target>
+      </trans-unit>
+      <trans-unit id="402.title">
+        <source>Activity Window</source>
+        <note>Class = "NSMenuItem"; title = "Activity Window"; ObjectID = "402";</note>
+        <target xml:lang="ko" state="translated">활성 윈도우</target>
+      </trans-unit>
+      <trans-unit id="406.title">
+        <source>Refresh All Subscriptions</source>
+        <note>Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "406";</note>
+        <target xml:lang="ko" state="translated">모든 구독 갱신</target>
+      </trans-unit>
+      <trans-unit id="422.title">
+        <source>Back</source>
+        <note>Class = "NSMenuItem"; title = "Back"; ObjectID = "422";</note>
+        <target xml:lang="ko" state="translated">뒤로</target>
+      </trans-unit>
+      <trans-unit id="423.title">
+        <source>Forward</source>
+        <note>Class = "NSMenuItem"; title = "Forward"; ObjectID = "423";</note>
+        <target xml:lang="ko" state="translated">앞으로</target>
+      </trans-unit>
+      <trans-unit id="442.title">
+        <source>Columns</source>
+        <note>Class = "NSMenuItem"; title = "Columns"; ObjectID = "442";</note>
+        <target xml:lang="ko" state="translated">열</target>
+      </trans-unit>
+      <trans-unit id="443.title">
+        <source>Columns</source>
+        <note>Class = "NSMenu"; title = "Columns"; ObjectID = "443";</note>
+        <target xml:lang="ko" state="translated">열</target>
+      </trans-unit>
+      <trans-unit id="574.title">
+        <source>New Smart Folder…</source>
+        <note>Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "574";</note>
+        <target xml:lang="ko" state="translated">새 스마트 폴더…</target>
+      </trans-unit>
+      <trans-unit id="604.title">
+        <source>Refresh Selected Subscriptions</source>
+        <note>Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "604";</note>
+        <target xml:lang="ko" state="translated">선택된 구독 갱신</target>
+      </trans-unit>
+      <trans-unit id="690.title">
+        <source>New Subscription…</source>
+        <note>Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "690";</note>
+        <target xml:lang="ko" state="translated">새 구독…</target>
+      </trans-unit>
+      <trans-unit id="780.title">
+        <source>Import Subscriptions…</source>
+        <note>Class = "NSMenuItem"; title = "Import Subscriptions…"; ObjectID = "780";</note>
+        <target xml:lang="ko" state="translated">구독 가져오기…</target>
+      </trans-unit>
+      <trans-unit id="781.title">
+        <source>Export Subscriptions…</source>
+        <note>Class = "NSMenuItem"; title = "Export Subscriptions…"; ObjectID = "781";</note>
+        <target xml:lang="ko" state="translated">구독 내보내기…</target>
+      </trans-unit>
+      <trans-unit id="789.title">
+        <source>Mark Unread</source>
+        <note>Class = "NSMenuItem"; title = "Mark Unread"; ObjectID = "789";</note>
+        <target xml:lang="ko" state="translated">읽지 않음으로 표시</target>
+      </trans-unit>
+      <trans-unit id="790.title">
+        <source>Mark Flagged</source>
+        <note>Class = "NSMenuItem"; title = "Mark Flagged"; ObjectID = "790";</note>
+        <target xml:lang="ko" state="translated">깃발 표시</target>
+      </trans-unit>
+      <trans-unit id="806.title">
+        <source>New Group Folder…</source>
+        <note>Class = "NSMenuItem"; title = "New Group Folder…"; ObjectID = "806";</note>
+        <target xml:lang="ko" state="translated">새 그룹 폴더…</target>
+      </trans-unit>
+      <trans-unit id="826.title">
+        <source>Style</source>
+        <note>Class = "NSMenuItem"; title = "Style"; ObjectID = "826";</note>
+        <target xml:lang="ko" state="translated">스타일</target>
+      </trans-unit>
+      <trans-unit id="827.title">
+        <source>Style</source>
+        <note>Class = "NSMenu"; title = "Style"; ObjectID = "827";</note>
+        <target xml:lang="ko" state="translated">스타일</target>
+      </trans-unit>
+      <trans-unit id="858.title">
+        <source>Stop Refreshing</source>
+        <note>Class = "NSMenuItem"; title = "Stop Refreshing"; ObjectID = "858";</note>
+        <target xml:lang="ko" state="translated">갱신 중지</target>
+      </trans-unit>
+      <trans-unit id="929.title">
+        <source>Vienna Web Site</source>
+        <note>Class = "NSMenuItem"; title = "Vienna Web Site"; ObjectID = "929";</note>
+        <target xml:lang="ko" state="translated">Vienna 웹사이트</target>
+      </trans-unit>
+      <trans-unit id="935.title">
+        <source>Close Window</source>
+        <note>Class = "NSMenuItem"; title = "Close Window"; ObjectID = "935";</note>
+        <target xml:lang="ko" state="translated">윈도우 닫기</target>
+      </trans-unit>
+      <trans-unit id="940.title">
+        <source>Main Window</source>
+        <note>Class = "NSMenuItem"; title = "Main Window"; ObjectID = "940";</note>
+        <target xml:lang="ko" state="translated">메인 윈도우</target>
+      </trans-unit>
+      <trans-unit id="961.title">
+        <source>Empty Trash</source>
+        <note>Class = "NSMenuItem"; title = "Empty Trash"; ObjectID = "961";</note>
+        <target xml:lang="ko" state="translated">휴지통 비우기</target>
+      </trans-unit>
+      <trans-unit id="1008.title">
+        <source>Previous Tab</source>
+        <note>Class = "NSMenuItem"; title = "Previous Tab"; ObjectID = "1008";</note>
+        <target xml:lang="ko" state="translated">이전 탭</target>
+      </trans-unit>
+      <trans-unit id="1009.title">
+        <source>Next Tab</source>
+        <note>Class = "NSMenuItem"; title = "Next Tab"; ObjectID = "1009";</note>
+        <target xml:lang="ko" state="translated">다음 탭</target>
+      </trans-unit>
+      <trans-unit id="1023.title">
+        <source>Close Tab</source>
+        <note>Class = "NSMenuItem"; title = "Close Tab"; ObjectID = "1023";</note>
+        <target xml:lang="ko" state="translated">탭 닫기</target>
+      </trans-unit>
+      <trans-unit id="1025.title">
+        <source>Reload Page</source>
+        <note>Class = "NSMenuItem"; title = "Reload Page"; ObjectID = "1025";</note>
+        <target xml:lang="ko" state="translated">페이지 갱신</target>
+      </trans-unit>
+      <trans-unit id="1027.title">
+        <source>Stop Reloading Page</source>
+        <note>Class = "NSMenuItem"; title = "Stop Reloading Page"; ObjectID = "1027";</note>
+        <target xml:lang="ko" state="translated">페이지 갱신 중지</target>
+      </trans-unit>
+      <trans-unit id="1036.title">
+        <source>Close All Tabs</source>
+        <note>Class = "NSMenuItem"; title = "Close All Tabs"; ObjectID = "1036";</note>
+        <target xml:lang="ko" state="translated">모든 탭 닫기</target>
+      </trans-unit>
+      <trans-unit id="1040.title">
+        <source>Open Article Page</source>
+        <note>Class = "NSMenuItem"; title = "Open Article Page"; ObjectID = "1040";</note>
+        <target xml:lang="ko" state="translated">기사 페이지 열기</target>
+      </trans-unit>
+      <trans-unit id="1044.title">
+        <source>Restore Article</source>
+        <note>Class = "NSMenuItem"; title = "Restore Article"; ObjectID = "1044";</note>
+        <target xml:lang="ko" state="translated">기사 복원</target>
+      </trans-unit>
+      <trans-unit id="1061.title">
+        <source>Downloads</source>
+        <note>Class = "NSMenuItem"; title = "Downloads"; ObjectID = "1061";</note>
+        <target xml:lang="ko" state="translated">다운로드</target>
+      </trans-unit>
+      <trans-unit id="1067.title">
+        <source>Open Article Page in External Browser</source>
+        <note>Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067";</note>
+        <target xml:lang="ko" state="translated">외부 브라우져에서 기사 페이지 열기</target>
+      </trans-unit>
+      <trans-unit id="1084.title">
+        <source>Bigger Text</source>
+        <note>Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084";</note>
+        <target xml:lang="ko" state="translated">텍스트 크게</target>
+      </trans-unit>
+      <trans-unit id="1085.title">
+        <source>Smaller Text</source>
+        <note>Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085";</note>
+        <target xml:lang="ko" state="translated">텍스트 작게</target>
+      </trans-unit>
+      <trans-unit id="1101.title">
+        <source>Open Web Location…</source>
+        <note>Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101";</note>
+        <target xml:lang="ko" state="translated">웹 주소 열기…</target>
+      </trans-unit>
+      <trans-unit id="1104.title">
+        <source>Check for Updates</source>
+        <note>Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "1104";</note>
+        <target xml:lang="ko" state="translated">업데이트 확인…</target>
+      </trans-unit>
+      <trans-unit id="1106.title">
+        <source>Refresh Folder Images</source>
+        <note>Class = "NSMenuItem"; title = "Refresh Folder Images"; ObjectID = "1106";</note>
+        <target xml:lang="ko" state="translated">구독 이미지 갱신</target>
+      </trans-unit>
+      <trans-unit id="1108.title">
+        <source>Layout</source>
+        <note>Class = "NSMenuItem"; title = "Layout"; ObjectID = "1108";</note>
+        <target xml:lang="ko" state="translated">레이아웃</target>
+      </trans-unit>
+      <trans-unit id="1109.title">
+        <source>Layout</source>
+        <note>Class = "NSMenu"; title = "Layout"; ObjectID = "1109";</note>
+        <target xml:lang="ko" state="translated">레이아웃</target>
+      </trans-unit>
+      <trans-unit id="1110.title">
+        <source>Horizontal</source>
+        <note>Class = "NSMenuItem"; title = "Horizontal"; ObjectID = "1110";</note>
+        <target xml:lang="ko" state="translated">일반</target>
+      </trans-unit>
+      <trans-unit id="1116.title">
+        <source>Vertical</source>
+        <note>Class = "NSMenuItem"; title = "Vertical"; ObjectID = "1116";</note>
+        <target xml:lang="ko" state="translated">수직 배열</target>
+      </trans-unit>
+      <trans-unit id="1117.title">
+        <source>Filter By</source>
+        <note>Class = "NSMenuItem"; title = "Filter By"; ObjectID = "1117";</note>
+        <target xml:lang="ko" state="translated">필터</target>
+      </trans-unit>
+      <trans-unit id="1118.title">
+        <source>Filter By</source>
+        <note>Class = "NSMenu"; title = "Filter By"; ObjectID = "1118";</note>
+        <target xml:lang="ko" state="translated">필터</target>
+      </trans-unit>
+      <trans-unit id="1146.title">
+        <source>Keyboard Shortcuts</source>
+        <note>Class = "NSMenuItem"; title = "Keyboard Shortcuts"; ObjectID = "1146";</note>
+        <target xml:lang="ko" state="translated">키보드 단축키</target>
+      </trans-unit>
+      <trans-unit id="1160.title">
+        <source>Unified</source>
+        <note>Class = "NSMenuItem"; title = "Unified"; ObjectID = "1160";</note>
+        <target xml:lang="ko" state="translated">통합</target>
+      </trans-unit>
+      <trans-unit id="1177.title">
+        <source>Folder</source>
+        <note>Class = "NSMenuItem"; title = "Folder"; ObjectID = "1177";</note>
+        <target xml:lang="ko" state="translated">구독</target>
+      </trans-unit>
+      <trans-unit id="1178.title">
+        <source>Folder</source>
+        <note>Class = "NSMenu"; title = "Folder"; ObjectID = "1178";</note>
+        <target xml:lang="ko" state="translated">구독</target>
+      </trans-unit>
+      <trans-unit id="1180.title">
+        <source>Edit…</source>
+        <note>Class = "NSMenuItem"; title = "Edit…"; ObjectID = "1180";</note>
+        <target xml:lang="ko" state="translated">편집…</target>
+      </trans-unit>
+      <trans-unit id="1181.title">
+        <source>Rename…</source>
+        <note>Class = "NSMenuItem"; title = "Rename…"; ObjectID = "1181";</note>
+        <target xml:lang="ko" state="translated">이름 변경…</target>
+      </trans-unit>
+      <trans-unit id="1184.title">
+        <source>Delete…</source>
+        <note>Class = "NSMenuItem"; title = "Delete…"; ObjectID = "1184";</note>
+        <target xml:lang="ko" state="translated">삭제…</target>
+      </trans-unit>
+      <trans-unit id="1186.title">
+        <source>Skip Folder</source>
+        <note>Class = "NSMenuItem"; title = "Skip Folder"; ObjectID = "1186";</note>
+        <target xml:lang="ko" state="translated">구독 생략</target>
+      </trans-unit>
+      <trans-unit id="1187.title">
+        <source>Mark All Articles as Read</source>
+        <note>Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "1187";</note>
+        <target xml:lang="ko" state="translated">모든 기사를 읽음으로 표시</target>
+      </trans-unit>
+      <trans-unit id="1191.title">
+        <source>Open Subscription Home Page</source>
+        <note>Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "1191";</note>
+        <target xml:lang="ko" state="translated">구독 홈페이지 열기</target>
+      </trans-unit>
+      <trans-unit id="1192.title">
+        <source>Open Subscription Home Page in External Browser</source>
+        <note>Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "1192";</note>
+        <target xml:lang="ko" state="translated">외부 브라우져에서 구독 홈페이지 열기</target>
+      </trans-unit>
+      <trans-unit id="1195.title">
+        <source>Mark All Subscriptions as Read</source>
+        <note>Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "1195";</note>
+        <target xml:lang="ko" state="translated">모든 구독을 읽음으로 표시</target>
+      </trans-unit>
+      <trans-unit id="1198.title">
+        <source>Delete Article</source>
+        <note>Class = "NSMenuItem"; title = "Delete Article"; ObjectID = "1198";</note>
+        <target xml:lang="ko" state="translated">기사 삭제</target>
+      </trans-unit>
+      <trans-unit id="1408.title">
+        <source>Unsubscribe</source>
+        <note>Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408";</note>
+        <target xml:lang="ko" state="translated">Unsubscribe from Feed</target>
+      </trans-unit>
+      <trans-unit id="1409.title">
+        <source>Get Info…</source>
+        <note>Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409";</note>
+        <target xml:lang="ko" state="translated">정보 입수…</target>
+      </trans-unit>
+      <trans-unit id="ecl-HO-Kpi.title">
+        <source>Mark All Subscriptions as Read</source>
+        <note>Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi";</note>
+        <target xml:lang="ko" state="translated">모든 구독을 읽음으로 표시</target>
+      </trans-unit>
+      <trans-unit id="fad-Nj-OFI.title">
+        <source>Spelling</source>
+        <note>Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI";</note>
+        <target xml:lang="ko" state="translated">철자 검사</target>
+      </trans-unit>
+      <trans-unit id="pKl-6f-Hlc.title">
+        <source>Mark Read</source>
+        <note>Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc";</note>
+        <target xml:lang="ko" state="translated">읽음으로 표시</target>
+      </trans-unit>
+      <trans-unit id="rNG-xr-3x7.title">
+        <source>Unread Articles</source>
+        <note>Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7";</note>
+        <target xml:lang="ko" state="translated">읽지 않은 기사</target>
+      </trans-unit>
+      <trans-unit id="t1E-6n-jtA.title">
+        <source>All Articles</source>
+        <note>Class = "NSMenuItem"; title = "All Articles"; ObjectID = "t1E-6n-jtA";</note>
+        <target xml:lang="ko" state="translated">모든 기사</target>
+      </trans-unit>
+      <trans-unit id="t34-de-pMs.title">
+        <source>Today</source>
+        <note>Class = "NSMenuItem"; title = "Today"; ObjectID = "t34-de-pMs";</note>
+        <target xml:lang="ko" state="translated">오늘</target>
+      </trans-unit>
+      <trans-unit id="wqh-Jc-gBm.title">
+        <source>Last Refresh</source>
+        <note>Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm";</note>
+        <target xml:lang="ko" state="translated">최종 갱신</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/MainWindowController.xib" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="3tM-J3-kmf.title">
+        <source>Today</source>
+        <note>Class = "NSMenuItem"; title = "Today"; ObjectID = "3tM-J3-kmf";</note>
+        <target xml:lang="ko" state="translated">오늘</target>
+      </trans-unit>
+      <trans-unit id="4c1-NR-ofo.label">
+        <source>Empty Trash</source>
+        <note>Class = "NSToolbarItem"; label = "Empty Trash"; ObjectID = "4c1-NR-ofo";</note>
+        <target xml:lang="ko" state="translated">휴지통 비우기</target>
+      </trans-unit>
+      <trans-unit id="4c1-NR-ofo.paletteLabel">
+        <source>Empty Trash</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Empty Trash"; ObjectID = "4c1-NR-ofo";</note>
+        <target xml:lang="ko" state="translated">휴지통 비우기</target>
+      </trans-unit>
+      <trans-unit id="4c1-NR-ofo.toolTip">
+        <source>Delete all articles in the trash</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Delete all articles in the trash"; ObjectID = "4c1-NR-ofo";</note>
+        <target xml:lang="ko" state="translated">Delete all articles in the trash</target>
+      </trans-unit>
+      <trans-unit id="7iy-IN-8oG.label">
+        <source>Get Info</source>
+        <note>Class = "NSToolbarItem"; label = "Get Info"; ObjectID = "7iy-IN-8oG";</note>
+        <target xml:lang="ko" state="translated">정보 입수</target>
+      </trans-unit>
+      <trans-unit id="7iy-IN-8oG.paletteLabel">
+        <source>Get Info</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Get Info"; ObjectID = "7iy-IN-8oG";</note>
+        <target xml:lang="ko" state="translated">정보 입수</target>
+      </trans-unit>
+      <trans-unit id="7iy-IN-8oG.toolTip">
+        <source>See information about the selected subscription</source>
+        <note>Class = "NSToolbarItem"; toolTip = "See information about the selected subscription"; ObjectID = "7iy-IN-8oG";</note>
+        <target xml:lang="ko" state="translated">See information about the selected subscription</target>
+      </trans-unit>
+      <trans-unit id="8LJ-RZ-pfu.title">
+        <source>Flagged</source>
+        <note>Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8LJ-RZ-pfu";</note>
+        <target xml:lang="ko" state="translated">깃발 표시</target>
+      </trans-unit>
+      <trans-unit id="10h-xf-C6T.label">
+        <source>Send Link</source>
+        <note>Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T";</note>
+        <target xml:lang="ko" state="translated">링크 보내기</target>
+      </trans-unit>
+      <trans-unit id="10h-xf-C6T.paletteLabel">
+        <source>Send Link</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T";</note>
+        <target xml:lang="ko" state="translated">링크 보내기</target>
+      </trans-unit>
+      <trans-unit id="10h-xf-C6T.toolTip">
+        <source>Email a link to the current article or website</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T";</note>
+        <target xml:lang="ko" state="translated">Email a link to the current article or website</target>
+      </trans-unit>
+      <trans-unit id="1377.title">
+        <source>Filter by:</source>
+        <note>Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377";</note>
+        <target xml:lang="ko" state="translated">필터:</target>
+      </trans-unit>
+      <trans-unit id="Hs0-hu-A2g.title">
+        <source>Refresh Selected Subscriptions</source>
+        <note>Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g";</note>
+        <target xml:lang="ko" state="translated">선택된 구독 갱신</target>
+      </trans-unit>
+      <trans-unit id="JT2-Q7-gRj.title">
+        <source>All Articles</source>
+        <note>Class = "NSMenuItem"; title = "All Articles"; ObjectID = "JT2-Q7-gRj";</note>
+        <target xml:lang="ko" state="translated">모든 기사</target>
+      </trans-unit>
+      <trans-unit id="MaO-r1-tcm.title">
+        <source>More Styles…</source>
+        <note>Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm";</note>
+        <target xml:lang="ko" state="translated">스타일 추가…</target>
+      </trans-unit>
+      <trans-unit id="Nmd-zx-Dys.label">
+        <source>Refresh</source>
+        <note>Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys";</note>
+        <target xml:lang="ko" state="translated">Refresh</target>
+      </trans-unit>
+      <trans-unit id="Nmd-zx-Dys.paletteLabel">
+        <source>Refresh</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Refresh"; ObjectID = "Nmd-zx-Dys";</note>
+        <target xml:lang="ko" state="translated">Refresh</target>
+      </trans-unit>
+      <trans-unit id="Nmd-zx-Dys.toolTip">
+        <source>Refresh all your subscriptions</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Refresh all your subscriptions"; ObjectID = "Nmd-zx-Dys";</note>
+        <target xml:lang="ko" state="translated">모든 구독 갱신</target>
+      </trans-unit>
+      <trans-unit id="Pqr-dM-SQQ.title">
+        <source>New Smart Folder…</source>
+        <note>Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "Pqr-dM-SQQ";</note>
+        <target xml:lang="ko" state="translated">새 스마트 폴더…</target>
+      </trans-unit>
+      <trans-unit id="Rdq-QU-3hM.title">
+        <source>Delete…</source>
+        <note>Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Rdq-QU-3hM";</note>
+        <target xml:lang="ko" state="translated">삭제…</target>
+      </trans-unit>
+      <trans-unit id="SoG-b2-O1S.label">
+        <source>Skip Folder</source>
+        <note>Class = "NSToolbarItem"; label = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
+        <target xml:lang="ko" state="translated">구독 생략</target>
+      </trans-unit>
+      <trans-unit id="SoG-b2-O1S.paletteLabel">
+        <source>Skip Folder</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
+        <target xml:lang="ko" state="translated">구독 생략</target>
+      </trans-unit>
+      <trans-unit id="SoG-b2-O1S.toolTip">
+        <source>Skip Folder</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
+        <target xml:lang="ko" state="translated">구독 생략</target>
+      </trans-unit>
+      <trans-unit id="TSQ-UW-4gU.label">
+        <source>Action</source>
+        <note>Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU";</note>
+        <target xml:lang="ko" state="translated">Action</target>
+      </trans-unit>
+      <trans-unit id="TSQ-UW-4gU.paletteLabel">
+        <source>Action</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Action"; ObjectID = "TSQ-UW-4gU";</note>
+        <target xml:lang="ko" state="translated">Action</target>
+      </trans-unit>
+      <trans-unit id="TSQ-UW-4gU.toolTip">
+        <source>Additional actions for the selected folder</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Additional actions for the selected folder"; ObjectID = "TSQ-UW-4gU";</note>
+        <target xml:lang="ko" state="translated">선택된 항목에 대한 추가 액션</target>
+      </trans-unit>
+      <trans-unit id="Y0d-K7-46f.title">
+        <source>Get Info</source>
+        <note>Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f";</note>
+        <target xml:lang="ko" state="translated">정보 입수</target>
+      </trans-unit>
+      <trans-unit id="ZVp-Nv-0jh.title">
+        <source>Open Subscription Home Page in External Browser</source>
+        <note>Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "ZVp-Nv-0jh";</note>
+        <target xml:lang="ko" state="translated">외부 브라우져에서 구독 홈페이지 열기</target>
+      </trans-unit>
+      <trans-unit id="Zu1-zW-uo2.title">
+        <source>Open Subscription Home Page</source>
+        <note>Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2";</note>
+        <target xml:lang="ko" state="translated">구독 홈페이지 열기</target>
+      </trans-unit>
+      <trans-unit id="azL-oz-mJL.label">
+        <source>Style</source>
+        <note>Class = "NSToolbarItem"; label = "Style"; ObjectID = "azL-oz-mJL";</note>
+        <target xml:lang="ko" state="translated">스타일</target>
+      </trans-unit>
+      <trans-unit id="azL-oz-mJL.paletteLabel">
+        <source>Style</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Style"; ObjectID = "azL-oz-mJL";</note>
+        <target xml:lang="ko" state="translated">스타일</target>
+      </trans-unit>
+      <trans-unit id="azL-oz-mJL.toolTip">
+        <source>Display the list of available styles</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Display the list of available styles"; ObjectID = "azL-oz-mJL";</note>
+        <target xml:lang="ko" state="translated">Display the list of available styles</target>
+      </trans-unit>
+      <trans-unit id="fpY-CJ-hKU.label">
+        <source>Next Unread</source>
+        <note>Class = "NSToolbarItem"; label = "Next Unread"; ObjectID = "fpY-CJ-hKU";</note>
+        <target xml:lang="ko" state="translated">읽지 않은 다음 항목</target>
+      </trans-unit>
+      <trans-unit id="fpY-CJ-hKU.paletteLabel">
+        <source>Next Unread</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Next Unread"; ObjectID = "fpY-CJ-hKU";</note>
+        <target xml:lang="ko" state="translated">읽지 않은 다음 항목</target>
+      </trans-unit>
+      <trans-unit id="fpY-CJ-hKU.toolTip">
+        <source>Next Unread</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Next Unread"; ObjectID = "fpY-CJ-hKU";</note>
+        <target xml:lang="ko" state="translated">읽지 않은 다음 항목</target>
+      </trans-unit>
+      <trans-unit id="gOG-UJ-Pin.label">
+        <source>Back</source>
+        <note>Class = "NSToolbarItem"; label = "Back"; ObjectID = "gOG-UJ-Pin";</note>
+        <target xml:lang="ko" state="translated">뒤로</target>
+      </trans-unit>
+      <trans-unit id="gOG-UJ-Pin.paletteLabel">
+        <source>Back</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Back"; ObjectID = "gOG-UJ-Pin";</note>
+        <target xml:lang="ko" state="translated">뒤로</target>
+      </trans-unit>
+      <trans-unit id="gOG-UJ-Pin.toolTip">
+        <source>Back</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Back"; ObjectID = "gOG-UJ-Pin";</note>
+        <target xml:lang="ko" state="translated">뒤로</target>
+      </trans-unit>
+      <trans-unit id="l14-tu-w7l.title">
+        <source>Rename…</source>
+        <note>Class = "NSMenuItem"; title = "Rename…"; ObjectID = "l14-tu-w7l";</note>
+        <target xml:lang="ko" state="translated">이름 변경…</target>
+      </trans-unit>
+      <trans-unit id="psA-wp-PcZ.title">
+        <source>New Subscription…</source>
+        <note>Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "psA-wp-PcZ";</note>
+        <target xml:lang="ko" state="translated">새 구독…</target>
+      </trans-unit>
+      <trans-unit id="sDP-Ni-g3a.title">
+        <source>Unread Articles</source>
+        <note>Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "sDP-Ni-g3a";</note>
+        <target xml:lang="ko" state="translated">읽지 않은 기사</target>
+      </trans-unit>
+      <trans-unit id="vOQ-xo-w8E.title">
+        <source>Edit…</source>
+        <note>Class = "NSMenuItem"; title = "Edit…"; ObjectID = "vOQ-xo-w8E";</note>
+        <target xml:lang="ko" state="translated">편집…</target>
+      </trans-unit>
+      <trans-unit id="xNW-zC-IMZ.title">
+        <source>Mark All Articles as Read</source>
+        <note>Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "xNW-zC-IMZ";</note>
+        <target xml:lang="ko" state="translated">모든 기사를 읽음으로 표시</target>
+      </trans-unit>
+      <trans-unit id="xVH-W7-Br4.title">
+        <source>Last Refresh</source>
+        <note>Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "xVH-W7-Br4";</note>
+        <target xml:lang="ko" state="translated">최종 갱신</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/RSSFeed.xib" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="102.title">
+        <source>Cancel</source>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "102";</note>
+        <target xml:lang="ko" state="translated">취소</target>
+      </trans-unit>
+      <trans-unit id="103.title">
+        <source>Subscribe</source>
+        <note>Class = "NSButtonCell"; title = "Subscribe"; ObjectID = "103";</note>
+        <target xml:lang="ko" state="translated">구독하기</target>
+      </trans-unit>
+      <trans-unit id="104.title">
+        <source>Source:</source>
+        <note>Class = "NSTextFieldCell"; title = "Source:"; ObjectID = "104";</note>
+        <target xml:lang="ko" state="translated">추가</target>
+      </trans-unit>
+      <trans-unit id="106.title">
+        <source>Create a new subscription</source>
+        <note>Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106";</note>
+        <target xml:lang="ko" state="translated">새로운 구독 추가</target>
+      </trans-unit>
+      <trans-unit id="107.title">
+        <source>Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.</source>
+        <note>Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107";</note>
+        <target xml:lang="ko" state="translated">새 구독 추가</target>
+      </trans-unit>
+      <trans-unit id="111.title">
+        <source>Save</source>
+        <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "111";</note>
+        <target xml:lang="ko" state="translated">URL:</target>
+      </trans-unit>
+      <trans-unit id="112.title">
+        <source>Cancel</source>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "112";</note>
+        <target xml:lang="ko" state="translated">저장</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/SearchFolder.xib" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="82.title">
+        <source>all</source>
+        <note>Class = "NSMenuItem"; title = "all"; ObjectID = "82";</note>
+        <target xml:lang="ko" state="translated">모든</target>
+      </trans-unit>
+      <trans-unit id="94.title">
+        <source>Smart folder name:</source>
+        <note>Class = "NSTextFieldCell"; title = "Smart folder name:"; ObjectID = "94";</note>
+        <target xml:lang="ko" state="translated">스마트 폴더 이름:</target>
+      </trans-unit>
+      <trans-unit id="96.title">
+        <source>Save</source>
+        <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "96";</note>
+        <target xml:lang="ko" state="translated">저장</target>
+      </trans-unit>
+      <trans-unit id="97.title">
+        <source>Cancel</source>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97";</note>
+        <target xml:lang="ko" state="translated">취소</target>
+      </trans-unit>
+      <trans-unit id="98.title">
+        <source>Show all articles that match</source>
+        <note>Class = "NSTextFieldCell"; title = "Show all articles that match"; ObjectID = "98";</note>
+        <target xml:lang="ko" state="translated">다음의</target>
+      </trans-unit>
+      <trans-unit id="100.title">
+        <source>of the following conditions:</source>
+        <note>Class = "NSTextFieldCell"; title = "of the following conditions:"; ObjectID = "100";</note>
+        <target xml:lang="ko" state="translated">조건에 일치하는 모든 기사 항목:</target>
+      </trans-unit>
+      <trans-unit id="j0v-xF-tpl.title">
+        <source>any</source>
+        <note>Class = "NSMenuItem"; title = "any"; ObjectID = "j0v-xF-tpl";</note>
+        <target xml:lang="ko" state="translated">일부</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/SyncingPreferencesView.xib" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="NKI-36-zCY.title">
+        <source>Password:</source>
+        <note>Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "NKI-36-zCY";</note>
+        <target xml:lang="ko" state="translated">암호:</target>
+      </trans-unit>
+      <trans-unit id="O2q-8o-CSb.title">
+        <source>Login:</source>
+        <note>Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "O2q-8o-CSb";</note>
+        <target xml:lang="ko" state="translated">이름:</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Resources/Localizable.strings" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="%@ Info">
+        <source>%@ Info</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">%@ 정보</target>
+      </trans-unit>
+      <trans-unit id="%d new articles retrieved">
+        <source>%d new articles retrieved</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">%d 항목의 새 기사를 등록</target>
+      </trans-unit>
+      <trans-unit id="%d subscriptions successfully exported">
+        <source>%d subscriptions successfully exported</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">%d 항목의 구독을 성공적으로 저장했습니다.</target>
+      </trans-unit>
+      <trans-unit id="%d subscriptions successfully imported">
+        <source>%d subscriptions successfully imported</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">%d 항목의 구독을 성공적으로 가져왔습니다.</target>
+      </trans-unit>
+      <trans-unit id="%d unread articles">
+        <source>%d unread articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">%d 항목의 읽지 않은 기사</target>
+      </trans-unit>
+      <trans-unit id="%u articles">
+        <source>%u articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">%u 기사</target>
+      </trans-unit>
+      <trans-unit id="%u unread">
+        <source>%u unread</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">%u 읽지 않음</target>
+      </trans-unit>
+      <trans-unit id="(No title)">
+        <source>(No title)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">(제목 없음)</target>
+      </trans-unit>
+      <trans-unit id="(Untitled Feed)">
+        <source>(Untitled Feed)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">(이름 없는 피드)</target>
+      </trans-unit>
+      <trans-unit id="A folder with that name already exists">
+        <source>A folder with that name already exists</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">지정한 이름의 항목이 이미 존재합니다.</target>
+      </trans-unit>
+      <trans-unit id="Advanced">
+        <source>Advanced</source>
+        <note>Toolbar item name for the Advanced preference pane</note>
+        <target xml:lang="ko" state="translated">고급</target>
+      </trans-unit>
+      <trans-unit id="After 2 Days">
+        <source>After 2 Days</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">2일 후</target>
+      </trans-unit>
+      <trans-unit id="After 2 Weeks">
+        <source>After 2 Weeks</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">2주일 후</target>
+      </trans-unit>
+      <trans-unit id="After a Day">
+        <source>After a Day</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">1일 후</target>
+      </trans-unit>
+      <trans-unit id="After a Month">
+        <source>After a Month</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">1개월 후</target>
+      </trans-unit>
+      <trans-unit id="After a Week">
+        <source>After a Week</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">1주일 후</target>
+      </trans-unit>
+      <trans-unit id="Already subscribed body">
+        <source>Already subscribed body</source>
+        <note>Already subscribed body</note>
+        <target xml:lang="ko" state="translated">이미 구독 중인 피드입니다.</target>
+      </trans-unit>
+      <trans-unit id="Already subscribed title">
+        <source>Already subscribed title</source>
+        <note>Already subscribed title</note>
+        <target xml:lang="ko" state="translated">오류</target>
+      </trans-unit>
+      <trans-unit id="An error occurred when this feed was last refreshed">
+        <source>An error occurred when this feed was last refreshed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">이전 갱신시 이 피드에서 오류가 발생했습니다.</target>
+      </trans-unit>
+      <trans-unit id="Appearance">
+        <source>Appearance</source>
+        <note>Toolbar item name for the Appearance preference pane</note>
+        <target xml:lang="ko" state="translated">모양새</target>
+      </trans-unit>
+      <trans-unit id="Articles">
+        <source>Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">기사</target>
+      </trans-unit>
+      <trans-unit id="Author">
+        <source>Author</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="ko" state="translated">작성자</target>
+      </trans-unit>
+      <trans-unit id="Cancel">
+        <source>Cancel</source>
+        <note>Title of a button on an alert
+   Title of a popup menu item</note>
+        <target xml:lang="ko" state="translated">취소</target>
+      </trans-unit>
+      <trans-unit id="Cannot create database folder text">
+        <source>Cannot create database folder text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">Vienna 가 "%@" 폴더를 생성 중에 오류가 발생했습니다. 지정한 경로에 있는 폴더의 권한을 확인하십시오.</target>
+      </trans-unit>
+      <trans-unit id="Cannot create database folder title">
+        <source>Cannot create database folder title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">Vienna 가 데이터베이스 폴더를 생성할 수 없습니다.</target>
+      </trans-unit>
+      <trans-unit id="Cannot create folder body">
+        <source>Cannot create folder body</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">The "%@" folder cannot be created.</target>
+      </trans-unit>
+      <trans-unit id="Cannot create folder title">
+        <source>Cannot create folder title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">Cannot create folder</target>
+      </trans-unit>
+      <trans-unit id="Cannot open database text">
+        <source>Cannot open database text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">해당 데이터베이스 파일 (%@) 항목은 손상되었거나 접근할 수 없습니다. 해당 파일을 삭제 또는 이름을 변경한 후 Vienna 를 재실행하십시오.</target>
+      </trans-unit>
+      <trans-unit id="Cannot open database title">
+        <source>Cannot open database title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">Vienna 가 데이터베이스 파일을 열 수 없습니다.</target>
+      </trans-unit>
+      <trans-unit id="Cannot open export file message">
+        <source>Cannot open export file message</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">내보내기 출력 파일을 생성할 수 없습니다.</target>
+      </trans-unit>
+      <trans-unit id="Cannot open export file message text">
+        <source>Cannot open export file message text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">지정한 내보내기 출력 파일을 생성할 수 없습니다. 잠금 해제 상태인지 또는 다른 응용 프로그램에서 사용되고 있는지 확인하십시오.</target>
+      </trans-unit>
+      <trans-unit id="Cannot rename folder">
+        <source>Cannot rename folder</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">항목의 이름을 변경할 수 없습니다.</target>
+      </trans-unit>
+      <trans-unit id="Clear">
+        <source>Clear</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">최근 검색 지우기</target>
+      </trans-unit>
+      <trans-unit id="Connecting to %@">
+        <source>Connecting to %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">%@ 주소에 연결</target>
+      </trans-unit>
+      <trans-unit id="Copy Link to Clipboard">
+        <source>Copy Link to Clipboard</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">링크 복사</target>
+      </trans-unit>
+      <trans-unit id="Copy Page Link to Clipboard">
+        <source>Copy Page Link to Clipboard</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">페이지 링크 복사</target>
+      </trans-unit>
+      <trans-unit id="Credentials Prompt">
+        <source>Credentials Prompt</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">"%@" 구독은 사용자 이름과 암호를 요구합니다.</target>
+      </trans-unit>
+      <trans-unit id="Database Upgrade">
+        <source>Database Upgrade</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">데이터베이스 업그레이드</target>
+      </trans-unit>
+      <trans-unit id="Date">
+        <source>Date</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="ko" state="translated">날짜</target>
+      </trans-unit>
+      <trans-unit id="Delete">
+        <source>Delete</source>
+        <note>Title of a button on an alert
+   Title of a menu item</note>
+        <target xml:lang="ko" state="translated">삭제</target>
+      </trans-unit>
+      <trans-unit id="Delete Article">
+        <source>Delete Article</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="ko" state="translated">기사 삭제</target>
+      </trans-unit>
+      <trans-unit id="Delete Open Reader RSS feed text">
+        <source>Delete Open Reader RSS feed text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.</target>
+      </trans-unit>
+      <trans-unit id="Delete RSS feed">
+        <source>Delete RSS feed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">구독 삭제</target>
+      </trans-unit>
+      <trans-unit id="Delete RSS feed text">
+        <source>Delete RSS feed text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">정말로 "%@" 구독을 취소하시겠습니까? 이는 저장된 모든 관련 기사들을 삭제할 것입니다.</target>
+      </trans-unit>
+      <trans-unit id="Delete folder status">
+        <source>Delete folder status</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">"%@" 삭제 중…</target>
+        <alt-trans>
+          <target xml:lang="ko">"%@" 삭제 중...</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="Delete group folder">
+        <source>Delete group folder</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">그룹 폴더 삭제</target>
+      </trans-unit>
+      <trans-unit id="Delete group folder text">
+        <source>Delete group folder text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">정말로 그룹 폴더 "%@" 및 모든 하위 항목을 삭제하시겠습니까? 이 명령은 취소할 수 없습니다.</target>
+      </trans-unit>
+      <trans-unit id="Delete multiple folders">
+        <source>Delete multiple folders</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">다중 항목 삭제</target>
+      </trans-unit>
+      <trans-unit id="Delete multiple folders text">
+        <source>Delete multiple folders text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">정말로 선택된 %d 항목을 모두 삭제하시겠습니까?
+이 명령은 취소할 수 없습니다.</target>
+      </trans-unit>
+      <trans-unit id="Delete selected message">
+        <source>Delete selected message</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">정말로 선택된 기사를 영구히 삭제하시겠습니까?</target>
+      </trans-unit>
+      <trans-unit id="Delete selected message text">
+        <source>Delete selected message text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">이 명령은 취소할 수 없습니다.</target>
+      </trans-unit>
+      <trans-unit id="Delete smart folder">
+        <source>Delete smart folder</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">스마트 폴더 삭제</target>
+      </trans-unit>
+      <trans-unit id="Delete smart folder text">
+        <source>Delete smart folder text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">정말로 스마트 폴더 "%@" 항목을 삭제하시겠습니까? 이는 검색에 부합된 실제 기사는 삭제하지 않습니다.</target>
+      </trans-unit>
+      <trans-unit id="Deleted">
+        <source>Deleted</source>
+        <note>Data field name visible in smart folder definition</note>
+        <target xml:lang="ko" state="translated">삭제</target>
+      </trans-unit>
+      <trans-unit id="Delete…">
+        <source>Delete…</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="ko" state="translated">삭제…</target>
+        <alt-trans>
+          <target xml:lang="ko">삭제...</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="Downloads Running">
+        <source>Downloads Running</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">하나 이상의 다운로드가 진행 중입니다.</target>
+      </trans-unit>
+      <trans-unit id="Downloads Running text">
+        <source>Downloads Running text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">모든 다운로드를 취소하고 Vienna 를 지금 종료하시겠습니까?</target>
+      </trans-unit>
+      <trans-unit id="Edit…">
+        <source>Edit…</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="ko" state="translated">편집…</target>
+      </trans-unit>
+      <trans-unit id="Empty">
+        <source>Empty</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="ko" state="translated">비우기</target>
+      </trans-unit>
+      <trans-unit id="Empty Trash message">
+        <source>Empty Trash message</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">정말로 휴지통의 항목들을 삭제하시겠습니까?</target>
+      </trans-unit>
+      <trans-unit id="Empty Trash message text">
+        <source>Empty Trash message text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">이 명령은 취소할 수 없습니다.</target>
+      </trans-unit>
+      <trans-unit id="Enter the URL here">
+        <source>Enter the URL here</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">여기에 URL 입력</target>
+      </trans-unit>
+      <trans-unit id="Error">
+        <source>Error</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">오류</target>
+      </trans-unit>
+      <trans-unit id="Error importing subscriptions body">
+        <source>Error importing subscriptions body</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">지정한 파일을 가져올 수 없습니다. 해당 파일은 유효한 OPML XML 형식이 아닙니다.</target>
+      </trans-unit>
+      <trans-unit id="Error importing subscriptions title">
+        <source>Error importing subscriptions title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">가져오기 오류</target>
+      </trans-unit>
+      <trans-unit id="Error parsing XML data in feed">
+        <source>Error parsing XML data in feed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">해당 피드의 XML 데이터 읽는 중 오류 발생</target>
+      </trans-unit>
+      <trans-unit id="External Browser">
+        <source>External Browser</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">외부 브라우져</target>
+      </trans-unit>
+      <trans-unit id="Feed URL updated to %@">
+        <source>Feed URL updated to %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">피드 URL 정보가 %@ 으로 갱신됨</target>
+      </trans-unit>
+      <trans-unit id="Flag">
+        <source>Flag</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">깃발</target>
+      </trans-unit>
+      <trans-unit id="Flagged">
+        <source>Flagged</source>
+        <note>Data field name visible in menu/smart folder definition</note>
+        <target xml:lang="ko" state="translated">깃발 표시</target>
+      </trans-unit>
+      <trans-unit id="Folder">
+        <source>Folder</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="ko" state="translated">구독</target>
+      </trans-unit>
+      <trans-unit id="Folder image retrieved from %@">
+        <source>Folder image retrieved from %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">%@ 로부터 구독 이미지 갱신</target>
+      </trans-unit>
+      <trans-unit id="Folders">
+        <source>Folders</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">구독</target>
+      </trans-unit>
+      <trans-unit id="General">
+        <source>General</source>
+        <note>Toolbar item name for the General preference pane</note>
+        <target xml:lang="ko" state="translated">일반</target>
+      </trans-unit>
+      <trans-unit id="Get Info">
+        <source>Get Info</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="ko" state="translated">정보 입수</target>
+      </trans-unit>
+      <trans-unit id="Go forward to the next page">
+        <source>Go forward to the next page</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">다음 페이지로 이동</target>
+      </trans-unit>
+      <trans-unit id="HTTP code %d reported from server">
+        <source>HTTP code %d reported from server</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">서버로부터 HTTP 코드 보고: %d</target>
+      </trans-unit>
+      <trans-unit id="Headlines">
+        <source>Headlines</source>
+        <note>Pseudo field name visible in article list</note>
+        <target xml:lang="ko" state="translated">헤드라인</target>
+      </trans-unit>
+      <trans-unit id="Invalid style body">
+        <source>Invalid style body</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">기본 스타일로 대체될 것입니다.</target>
+      </trans-unit>
+      <trans-unit id="Invalid style title">
+        <source>Invalid style title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">스타일 %@ 항목은 손상되었거나 유효하지 않은 형식입니다.</target>
+      </trans-unit>
+      <trans-unit id="Last Week">
+        <source>Last Week</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">지난주</target>
+      </trans-unit>
+      <trans-unit id="Link">
+        <source>Link</source>
+        <note>Data field name visible in menu/article list</note>
+        <target xml:lang="ko" state="translated">링크</target>
+      </trans-unit>
+      <trans-unit id="Loading…">
+        <source>Loading…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">로딩 중…</target>
+      </trans-unit>
+      <trans-unit id="Locate Text">
+        <source>Locate Text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">새로운 Vienna 데이터베이스를 "%@" 위치에 생성할 수 없습니다. 아마도 해당 폴더가 원격 네트워크 공유에 위치해 있을 것이며, 현재 버전의 Vienna 로는 원격 데이트베이스를 관리할 수 없습니다. 로컬 머신에 위치한 다른 폴더를 선택해 재시도하시기 바랍니다.</target>
+      </trans-unit>
+      <trans-unit id="Locate Title">
+        <source>Locate Title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">Vienna 데이터베이스를 생성할 수 없습니다.</target>
+      </trans-unit>
+      <trans-unit id="Mark All Articles as Read">
+        <source>Mark All Articles as Read</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="ko" state="translated">모든 기사를 읽음으로 표시</target>
+      </trans-unit>
+      <trans-unit id="Mark All Read">
+        <source>Mark All Read</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">모두 읽음으로 표시</target>
+      </trans-unit>
+      <trans-unit id="Mark All Subscriptions as Read">
+        <source>Mark All Subscriptions as Read</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="ko" state="translated">모든 구독을 읽음으로 표시</target>
+      </trans-unit>
+      <trans-unit id="Mark Flagged">
+        <source>Mark Flagged</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="ko" state="translated">깃발 표시</target>
+      </trans-unit>
+      <trans-unit id="Mark Read">
+        <source>Mark Read</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="ko" state="translated">읽음으로 표시</target>
+      </trans-unit>
+      <trans-unit id="Mark Unflagged">
+        <source>Mark Unflagged</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">깃발 표시 제거</target>
+      </trans-unit>
+      <trans-unit id="Mark Unread">
+        <source>Mark Unread</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="ko" state="translated">읽지 않음으로 표시</target>
+      </trans-unit>
+      <trans-unit id="Marked Articles">
+        <source>Marked Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">표시한 기사</target>
+      </trans-unit>
+      <trans-unit id="More Scripts…">
+        <source>More Scripts…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">스크립트 추가…</target>
+      </trans-unit>
+      <trans-unit id="Move Folders">
+        <source>Move Folders</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">폴더 이동</target>
+      </trans-unit>
+      <trans-unit id="Never">
+        <source>Never</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">안함</target>
+      </trans-unit>
+      <trans-unit id="New articles retrieved">
+        <source>New articles retrieved</source>
+        <note>Notification title</note>
+        <target xml:lang="ko" state="translated">새로운 기사</target>
+      </trans-unit>
+      <trans-unit id="New style body">
+        <source>New style body</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">"%@" 스타일이 사용자의 스타일 폴더에 설치되었으며, 스타일 메뉴에 등록되었습니다.</target>
+      </trans-unit>
+      <trans-unit id="New style title">
+        <source>New style title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">Vienna 가 새 스타일을 설치했습니다.</target>
+      </trans-unit>
+      <trans-unit id="New unread articles retrieved">
+        <source>New unread articles retrieved</source>
+        <note>Notification body</note>
+        <target xml:lang="ko" state="translated">%d 항목의 읽지 않은 새 기사가 추가되었습니다.</target>
+      </trans-unit>
+      <trans-unit id="No">
+        <source>No</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">아니오</target>
+      </trans-unit>
+      <trans-unit id="No new articles available">
+        <source>No new articles available</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">가능한 새 기사를 찾을 수 없음</target>
+      </trans-unit>
+      <trans-unit id="OK">
+        <source>OK</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="ko" state="translated">확인</target>
+      </trans-unit>
+      <trans-unit id="Open">
+        <source>Open</source>
+        <note>Title of a popup menu item</note>
+        <target xml:lang="ko" state="translated">열기</target>
+      </trans-unit>
+      <trans-unit id="Open Article Page">
+        <source>Open Article Page</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="ko" state="translated">기사 페이지 열기</target>
+      </trans-unit>
+      <trans-unit id="Open Article Page in %@">
+        <source>Open Article Page in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">기본 브라우져에서 기사 페이지 열기</target>
+      </trans-unit>
+      <trans-unit id="Open Article Page in External Browser">
+        <source>Open Article Page in External Browser</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="ko" state="translated">외부 브라우져에서 기사 페이지 열기</target>
+      </trans-unit>
+      <trans-unit id="Open Frame">
+        <source>Open Frame</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">프레임 열기</target>
+      </trans-unit>
+      <trans-unit id="Open Image in %@">
+        <source>Open Image in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">기본 브라우져에서 이미지 열기</target>
+      </trans-unit>
+      <trans-unit id="Open Image in New Tab">
+        <source>Open Image in New Tab</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">새로운 탭에서 이미지 열기</target>
+      </trans-unit>
+      <trans-unit id="Open Link in %@">
+        <source>Open Link in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">기본 브라우져에서 링크 열기</target>
+      </trans-unit>
+      <trans-unit id="Open Link in New Tab">
+        <source>Open Link in New Tab</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">새로운 탭에서 링크 열기</target>
+      </trans-unit>
+      <trans-unit id="Open Page in %@">
+        <source>Open Page in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">기본 브라우져에서 페이지 열기</target>
+      </trans-unit>
+      <trans-unit id="Open Reader Authentication Failed text">
+        <source>Open Reader Authentication Failed text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.
+Also check your network access.</target>
+      </trans-unit>
+      <trans-unit id="Open Scripts Folder">
+        <source>Open Scripts Folder</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">스크립트 폴더 열기</target>
+      </trans-unit>
+      <trans-unit id="Open Subscription Home Page">
+        <source>Open Subscription Home Page</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="ko" state="translated">구독 홈페이지 열기</target>
+      </trans-unit>
+      <trans-unit id="Open Subscription Home Page in %@">
+        <source>Open Subscription Home Page in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">기본 브라우져에서 구독 홈페이지 열기</target>
+      </trans-unit>
+      <trans-unit id="Open Subscription Home Page in External Browser">
+        <source>Open Subscription Home Page in External Browser</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="ko" state="translated">외부 브라우져에서 구독 홈페이지 열기</target>
+      </trans-unit>
+      <trans-unit id="Other">
+        <source>Other</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">선택</target>
+      </trans-unit>
+      <trans-unit id="Preferences">
+        <source>Preferences</source>
+        <note>Title of the Preferences window</note>
+        <target xml:lang="ko" state="translated">환경설정</target>
+      </trans-unit>
+      <trans-unit id="Quit">
+        <source>Quit</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="ko" state="translated">종료</target>
+      </trans-unit>
+      <trans-unit id="Quit Vienna">
+        <source>Quit Vienna</source>
+        <note>Title of a button on an alert
+   Title of a menu item</note>
+        <target xml:lang="ko" state="translated">종료</target>
+      </trans-unit>
+      <trans-unit id="RSS Subscription Export Title">
+        <source>RSS Subscription Export Title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">내보내기 완료</target>
+      </trans-unit>
+      <trans-unit id="RSS Subscription Import Title">
+        <source>RSS Subscription Import Title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">가져오기 완료</target>
+      </trans-unit>
+      <trans-unit id="Read">
+        <source>Read</source>
+        <note>Data field name visible in menu/smart folder definition</note>
+        <target xml:lang="ko" state="translated">읽음</target>
+      </trans-unit>
+      <trans-unit id="Recent Searches">
+        <source>Recent Searches</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">최근 검색 목록</target>
+      </trans-unit>
+      <trans-unit id="Recents">
+        <source>Recents</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">최근</target>
+      </trans-unit>
+      <trans-unit id="Refresh All Subscriptions">
+        <source>Refresh All Subscriptions</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="ko" state="translated">모든 구독 갱신</target>
+      </trans-unit>
+      <trans-unit id="Refresh Selected Subscriptions">
+        <source>Refresh Selected Subscriptions</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="ko" state="translated">선택된 구독 갱신</target>
+      </trans-unit>
+      <trans-unit id="Refresh completed">
+        <source>Refresh completed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">갱신 완료</target>
+      </trans-unit>
+      <trans-unit id="Refresh the current page">
+        <source>Refresh the current page</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">현재 페이지 갱신</target>
+      </trans-unit>
+      <trans-unit id="Refreshing folder images…">
+        <source>Refreshing folder images…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">구독 이미지 갱신 중…</target>
+      </trans-unit>
+      <trans-unit id="Refreshing subscriptions…">
+        <source>Refreshing subscriptions…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">구독 갱신 중…</target>
+      </trans-unit>
+      <trans-unit id="Remove From List">
+        <source>Remove From List</source>
+        <note>Title of a popup menu item</note>
+        <target xml:lang="ko" state="translated">목록에서 제거</target>
+      </trans-unit>
+      <trans-unit id="Rename…">
+        <source>Rename…</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="ko" state="translated">이름 변경…</target>
+      </trans-unit>
+      <trans-unit id="Restore Article">
+        <source>Restore Article</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="ko" state="translated">기사 복원</target>
+      </trans-unit>
+      <trans-unit id="Resubscribe">
+        <source>Resubscribe</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">Resubscribe to Feed</target>
+      </trans-unit>
+      <trans-unit id="Retrieving articles">
+        <source>Retrieving articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">기사 추가 중</target>
+      </trans-unit>
+      <trans-unit id="Retrieving folder image">
+        <source>Retrieving folder image</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">구독 이미지 추가 중</target>
+      </trans-unit>
+      <trans-unit id="Return to the previous page">
+        <source>Return to the previous page</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">이전 페이지로 이동</target>
+      </trans-unit>
+      <trans-unit id="Search in %@">
+        <source>Search in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">%@ 검색</target>
+      </trans-unit>
+      <trans-unit id="Select…">
+        <source>Select…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">선택…</target>
+      </trans-unit>
+      <trans-unit id="Send Link">
+        <source>Send Link</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">링크 보내기</target>
+      </trans-unit>
+      <trans-unit id="Send Links">
+        <source>Send Links</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">링크 보내기</target>
+      </trans-unit>
+      <trans-unit id="Show in Finder">
+        <source>Show in Finder</source>
+        <note>Title of a popup menu item</note>
+        <target xml:lang="ko" state="translated">파인더에서 보기</target>
+      </trans-unit>
+      <trans-unit id="Subject">
+        <source>Subject</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="ko" state="translated">헤드라인</target>
+      </trans-unit>
+      <trans-unit id="Summary">
+        <source>Summary</source>
+        <note>Pseudo field name visible in menu/article list</note>
+        <target xml:lang="ko" state="translated">요약</target>
+      </trans-unit>
+      <trans-unit id="Text">
+        <source>Text</source>
+        <note>Data field name visible in smart folder definition</note>
+        <target xml:lang="ko" state="translated">텍스트</target>
+      </trans-unit>
+      <trans-unit id="Today">
+        <source>Today</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">오늘</target>
+      </trans-unit>
+      <trans-unit id="Today's Articles">
+        <source>Today's Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">오늘의 기사</target>
+      </trans-unit>
+      <trans-unit id="Trash">
+        <source>Trash</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">휴지통</target>
+      </trans-unit>
+      <trans-unit id="Unread">
+        <source>Unread</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">읽지 않음</target>
+      </trans-unit>
+      <trans-unit id="Unread Articles">
+        <source>Unread Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">읽지 않은 기사</target>
+      </trans-unit>
+      <trans-unit id="Unrecognised database format text">
+        <source>Unrecognised database format text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">해당 데이터베이스 (%@) 파일 형식은 현재 버전의 Vienna 에서 지원하는 형식이 아닙니다. 해당 파일을 삭제 또는 이름을 변경한 후 Vienna 를 재실행하십시오.</target>
+      </trans-unit>
+      <trans-unit id="Unrecognised database format title">
+        <source>Unrecognised database format title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">데이터베이스 파일 형식이 변경되었습니다.</target>
+      </trans-unit>
+      <trans-unit id="Unsubscribe">
+        <source>Unsubscribe</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">Unsubscribe from Feed</target>
+      </trans-unit>
+      <trans-unit id="Vienna cannot open the file body">
+        <source>Vienna cannot open the file body</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">Vienna 는 "%@" 파일을 열 수 없습니다. 다운로드 후 항목이 옮겨졌습니다.</target>
+      </trans-unit>
+      <trans-unit id="Vienna cannot open the file title">
+        <source>Vienna cannot open the file title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">Vienna 는 해당 파일을 열 수 없습니다.</target>
+      </trans-unit>
+      <trans-unit id="Vienna cannot show the file body">
+        <source>Vienna cannot show the file body</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">Vienna 는 "%@" 파일을 표시할 수 없습니다. 다운로드 후 항목이 옮겨졌습니다.</target>
+      </trans-unit>
+      <trans-unit id="Vienna cannot show the file title">
+        <source>Vienna cannot show the file title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">Vienna 는 해당 파일을 표시할 수 없습니다.</target>
+      </trans-unit>
+      <trans-unit id="Yes">
+        <source>Yes</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">예</target>
+      </trans-unit>
+      <trans-unit id="Yesterday">
+        <source>Yesterday</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">어제</target>
+      </trans-unit>
+      <trans-unit id="contains">
+        <source>contains</source>
+        <note>test for a string</note>
+        <target xml:lang="ko" state="translated">다음을 포함</target>
+      </trans-unit>
+      <trans-unit id="does not contain">
+        <source>does not contain</source>
+        <note>test for a string</note>
+        <target xml:lang="ko" state="translated">다음을 포함하지 않음</target>
+      </trans-unit>
+      <trans-unit id="is">
+        <source>is</source>
+        <note>test for a value</note>
+        <target xml:lang="ko" state="translated">다음과 같음</target>
+      </trans-unit>
+      <trans-unit id="is after">
+        <source>is after</source>
+        <note>test for a date</note>
+        <target xml:lang="ko" state="translated">다음 이후에</target>
+      </trans-unit>
+      <trans-unit id="is before">
+        <source>is before</source>
+        <note>test for a date</note>
+        <target xml:lang="ko" state="translated">다음 이전에</target>
+      </trans-unit>
+      <trans-unit id="is greater than">
+        <source>is greater than</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="ko" state="translated">다음보다 크게</target>
+      </trans-unit>
+      <trans-unit id="is greater than or equal to">
+        <source>is greater than or equal to</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="ko" state="translated">다음과 같거나 크게</target>
+      </trans-unit>
+      <trans-unit id="is less than">
+        <source>is less than</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="ko" state="translated">다음보다 적게</target>
+      </trans-unit>
+      <trans-unit id="is less than or equal to">
+        <source>is less than or equal to</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="ko" state="translated">다음과 같거나 적게</target>
+      </trans-unit>
+      <trans-unit id="is not">
+        <source>is not</source>
+        <note>test for a value</note>
+        <target xml:lang="ko" state="translated">다음과 같지 않음</target>
+      </trans-unit>
+      <trans-unit id="is on or after">
+        <source>is on or after</source>
+        <note>test for a date</note>
+        <target xml:lang="ko" state="translated">다음과 같거나 이후에</target>
+      </trans-unit>
+      <trans-unit id="is on or before">
+        <source>is on or before</source>
+        <note>test for a date</note>
+        <target xml:lang="ko" state="translated">다음과 같거나 이전에</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Resources/Vienna-Info.plist" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      
+      
+    </body>
+  </file>
+  <file original="Vienna Tests/Info.plist" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      
+    </body>
+  </file>
+  <file original="Vienna Tests/Localizable.strings" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="(No title)">
+        <source>(No title)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">(제목 없음)</target>
+      </trans-unit>
+      <trans-unit id="(Untitled Feed)">
+        <source>(Untitled Feed)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">(이름 없는 피드)</target>
+      </trans-unit>
+      <trans-unit id="Author">
+        <source>Author</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="ko" state="translated">작성자</target>
+      </trans-unit>
+      <trans-unit id="Cancel">
+        <source>Cancel</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="ko" state="translated">저장</target>
+      </trans-unit>
+      <trans-unit id="Cannot create database folder text">
+        <source>Cannot create database folder text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">Vienna 가 "%@" 폴더를 생성 중에 오류가 발생했습니다. 지정한 경로에 있는 폴더의 권한을 확인하십시오.</target>
+      </trans-unit>
+      <trans-unit id="Cannot create database folder title">
+        <source>Cannot create database folder title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">Vienna 가 데이터베이스 폴더를 생성할 수 없습니다.</target>
+      </trans-unit>
+      <trans-unit id="Cannot open database text">
+        <source>Cannot open database text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">해당 데이터베이스 파일 (%@) 항목은 손상되었거나 접근할 수 없습니다. 해당 파일을 삭제 또는 이름을 변경한 후 Vienna 를 재실행하십시오.</target>
+      </trans-unit>
+      <trans-unit id="Cannot open database title">
+        <source>Cannot open database title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">Vienna 가 데이터베이스 파일을 열 수 없습니다.</target>
+      </trans-unit>
+      <trans-unit id="Database Upgrade">
+        <source>Database Upgrade</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">데이터베이스 업그레이드</target>
+      </trans-unit>
+      <trans-unit id="Date">
+        <source>Date</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="ko" state="translated">날짜</target>
+      </trans-unit>
+      <trans-unit id="Deleted">
+        <source>Deleted</source>
+        <note>Data field name visible in smart folder definition</note>
+        <target xml:lang="ko" state="translated">삭제</target>
+      </trans-unit>
+      <trans-unit id="Flagged">
+        <source>Flagged</source>
+        <note>Data field name visible in menu/smart folder definition</note>
+        <target xml:lang="ko" state="translated">깃발 표시</target>
+      </trans-unit>
+      <trans-unit id="Folder">
+        <source>Folder</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="ko" state="translated">구독</target>
+      </trans-unit>
+      <trans-unit id="Headlines">
+        <source>Headlines</source>
+        <note>Pseudo field name visible in article list</note>
+        <target xml:lang="ko" state="translated">헤드라인</target>
+      </trans-unit>
+      <trans-unit id="Link">
+        <source>Link</source>
+        <note>Data field name visible in menu/article list</note>
+        <target xml:lang="ko" state="translated">링크</target>
+      </trans-unit>
+      <trans-unit id="Locate Text">
+        <source>Locate Text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">새로운 Vienna 데이터베이스를 "%@" 위치에 생성할 수 없습니다. 아마도 해당 폴더가 원격 네트워크 공유에 위치해 있을 것이며, 현재 버전의 Vienna 로는 원격 데이트베이스를 관리할 수 없습니다. 로컬 머신에 위치한 다른 폴더를 선택해 재시도하시기 바랍니다.</target>
+      </trans-unit>
+      <trans-unit id="Locate Title">
+        <source>Locate Title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">Vienna 데이터베이스를 생성할 수 없습니다.</target>
+      </trans-unit>
+      <trans-unit id="Marked Articles">
+        <source>Marked Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">표시한 기사</target>
+      </trans-unit>
+      <trans-unit id="Quit Vienna">
+        <source>Quit Vienna</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="ko" state="translated">종료</target>
+      </trans-unit>
+      <trans-unit id="Read">
+        <source>Read</source>
+        <note>Data field name visible in menu/smart folder definition</note>
+        <target xml:lang="ko" state="translated">읽음</target>
+      </trans-unit>
+      <trans-unit id="Subject">
+        <source>Subject</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="ko" state="translated">헤드라인</target>
+      </trans-unit>
+      <trans-unit id="Summary">
+        <source>Summary</source>
+        <note>Pseudo field name visible in menu/article list</note>
+        <target xml:lang="ko" state="translated">요약</target>
+      </trans-unit>
+      <trans-unit id="Text">
+        <source>Text</source>
+        <note>Data field name visible in smart folder definition</note>
+        <target xml:lang="ko" state="translated">텍스트</target>
+      </trans-unit>
+      <trans-unit id="Today's Articles">
+        <source>Today's Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">오늘의 기사</target>
+      </trans-unit>
+      <trans-unit id="Trash">
+        <source>Trash</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">휴지통</target>
+      </trans-unit>
+      <trans-unit id="Unread Articles">
+        <source>Unread Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">읽지 않은 기사</target>
+      </trans-unit>
+      <trans-unit id="Unrecognised database format text">
+        <source>Unrecognised database format text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">해당 데이터베이스 (%@) 파일 형식은 현재 버전의 Vienna 에서 지원하는 형식이 아닙니다. 해당 파일을 삭제 또는 이름을 변경한 후 Vienna 를 재실행하십시오.</target>
+      </trans-unit>
+      <trans-unit id="Unrecognised database format title">
+        <source>Unrecognised database format title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ko" state="translated">데이터베이스 파일 형식이 변경되었습니다.</target>
+      </trans-unit>
+      <trans-unit id="contains">
+        <source>contains</source>
+        <note>test for a string</note>
+        <target xml:lang="ko" state="translated">다음을 포함</target>
+      </trans-unit>
+      <trans-unit id="does not contain">
+        <source>does not contain</source>
+        <note>test for a string</note>
+        <target xml:lang="ko" state="translated">다음을 포함하지 않음</target>
+      </trans-unit>
+      <trans-unit id="is">
+        <source>is</source>
+        <note>test for a value</note>
+        <target xml:lang="ko" state="translated">다음과 같음</target>
+      </trans-unit>
+      <trans-unit id="is after">
+        <source>is after</source>
+        <note>test for a date</note>
+        <target xml:lang="ko" state="translated">다음 이후에</target>
+      </trans-unit>
+      <trans-unit id="is before">
+        <source>is before</source>
+        <note>test for a date</note>
+        <target xml:lang="ko" state="translated">다음 이전에</target>
+      </trans-unit>
+      <trans-unit id="is greater than">
+        <source>is greater than</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="ko" state="translated">다음보다 크게</target>
+      </trans-unit>
+      <trans-unit id="is greater than or equal to">
+        <source>is greater than or equal to</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="ko" state="translated">다음과 같거나 크게</target>
+      </trans-unit>
+      <trans-unit id="is less than">
+        <source>is less than</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="ko" state="translated">다음보다 적게</target>
+      </trans-unit>
+      <trans-unit id="is less than or equal to">
+        <source>is less than or equal to</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="ko" state="translated">다음과 같거나 적게</target>
+      </trans-unit>
+      <trans-unit id="is not">
+        <source>is not</source>
+        <note>test for a value</note>
+        <target xml:lang="ko" state="translated">다음과 같지 않음</target>
+      </trans-unit>
+      <trans-unit id="is on or after">
+        <source>is on or after</source>
+        <note>test for a date</note>
+        <target xml:lang="ko" state="translated">다음과 같거나 이후에</target>
+      </trans-unit>
+      <trans-unit id="is on or before">
+        <source>is on or before</source>
+        <note>test for a date</note>
+        <target xml:lang="ko" state="translated">다음과 같거나 이전에</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Vienna Help/Info.plist" source-language="en" datatype="plaintext" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      
+    </body>
+  </file>
+</xliff>

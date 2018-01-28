@@ -21,9 +21,10 @@
 
 #import "Article.h"
 #import "Database.h"
+#import "DateFormatterExtension.h"
 #import "StringExtensions.h"
-#import "CalendarExtensions.h"
 #import "HelperFunctions.h"
+#import "Folder.h"
 
 // The names here are internal field names, not for localisation.
 NSString * MA_Field_GUID = @"GUID";
@@ -353,7 +354,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagArticleDate
 {
-    return [self.date dateWithCalendarFormat:nil timeZone:nil].friendlyDescription;
+    return [NSDateFormatter relativeDateStringFromDate:self.date];
 }
 
 /* tagArticleEnclosureLink

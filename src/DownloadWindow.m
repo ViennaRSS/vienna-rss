@@ -19,9 +19,12 @@
 //
 
 #import "DownloadWindow.h"
+
+#import "AppController+Notifications.h"
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
 #import "ImageAndTextCell.h"
+#import "TableViewExtensions.h"
 
 @implementation DownloadWindow
 
@@ -67,17 +70,24 @@
 
 	// Create the popup menu
 	NSMenu * downloadMenu = [[NSMenu alloc] init];
-	[downloadMenu addItemWithTitle:NSLocalizedString(@"Open", nil) action:@selector(handleDoubleClick:) keyEquivalent:@""];
-	[downloadMenu addItemWithTitle:NSLocalizedString(@"Show in Finder", nil) action:@selector(showInFinder:) keyEquivalent:@""];
-	[downloadMenu addItemWithTitle:NSLocalizedString(@"Remove From List", nil) action:@selector(removeFromList:) keyEquivalent:@""];
-	[downloadMenu addItemWithTitle:NSLocalizedString(@"Cancel", nil) action:@selector(cancelDownload:) keyEquivalent:@""];
+	[downloadMenu addItemWithTitle:NSLocalizedString(@"Open", @"Title of a popup menu item") action:@selector(handleDoubleClick:) keyEquivalent:@""];
+	[downloadMenu addItemWithTitle:NSLocalizedString(@"Show in Finder", @"Title of a popup menu item") action:@selector(showInFinder:) keyEquivalent:@""];
+	[downloadMenu addItemWithTitle:NSLocalizedString(@"Remove From List", @"Title of a popup menu item") action:@selector(removeFromList:) keyEquivalent:@""];
+	[downloadMenu addItemWithTitle:NSLocalizedString(@"Cancel", @"Title of a popup menu item") action:@selector(cancelDownload:) keyEquivalent:@""];
 	table.menu = downloadMenu;
-	
-	// Set Clear button caption
-	[clearButton setTitle:NSLocalizedString(@"ClearButton", nil)];
+}
 
-	// Set the window title
-	[downloadWindow setTitle:NSLocalizedString(@"Downloads", nil)];
+- (void)windowDidBecomeKey:(NSNotification *)notification {
+    // Clear relevant notifications when the user views this window.
+    NSUserNotificationCenter *center = NSUserNotificationCenter.defaultUserNotificationCenter;
+    [center.deliveredNotifications enumerateObjectsUsingBlock:^(NSUserNotification *notification, NSUInteger idx, BOOL *stop) {
+        BOOL completed = [notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFileDownloadCompleted];
+        BOOL failed = [notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFileDownloadFailed];
+
+        if (completed || failed) {
+            [center removeDeliveredNotification: notification];
+        }
+    }];
 }
 
 /* clearList
@@ -114,7 +124,7 @@
 	if (index != -1)
 	{
 		DownloadItem * item = list[index];
-		if (item && item.state == DOWNLOAD_COMPLETED)
+		if (item && item.state == DownloadStateCompleted)
 		{
 			if ([[NSWorkspace sharedWorkspace] openFile:item.filename] == NO)
 				runOKAlertSheet(NSLocalizedString(@"Vienna cannot open the file title", nil), NSLocalizedString(@"Vienna cannot open the file body", nil), item.filename.lastPathComponent);
@@ -132,7 +142,7 @@
 	if (index != -1)
 	{
 		DownloadItem * item = list[index];
-		if (item && item.state == DOWNLOAD_COMPLETED)
+		if (item && item.state == DownloadStateCompleted)
 		{
 			if ([[NSWorkspace sharedWorkspace] selectFile:item.filename inFileViewerRootedAtPath:@""] == NO)
 				runOKAlertSheet(NSLocalizedString(@"Vienna cannot show the file title", nil), NSLocalizedString(@"Vienna cannot show the file body", nil), item.filename.lastPathComponent);
@@ -215,53 +225,37 @@
 
 	// Different layout depending on the state
 	NSString * objectString = filename;
-	switch (item.state)
-	{
-		case DOWNLOAD_INIT:
+	switch (item.state) {
+        case DownloadStateInit:
+        case DownloadStateFailed:
+        case DownloadStateCancelled:
 			break;
 
-		case DOWNLOAD_COMPLETED: {
-			// Filename on top
-			// Final size of file at bottom.
-			double size = item.size;
-			NSString * sizeString = @"";
-
-			if (size > 1024 * 1024)
-				sizeString = [NSString stringWithFormat:NSLocalizedString(@"%.1f MB", nil), size / (1024 * 1024)];
-			else if (size > 1024)
-				sizeString = [NSString stringWithFormat:NSLocalizedString(@"%.1f KB", nil), size / 1024];
-			else
-				sizeString = [NSString stringWithFormat:NSLocalizedString(@"%.1f bytes", nil), size];
-			objectString = [NSString stringWithFormat:@"%@\n%@", filename, sizeString];
+		case DownloadStateCompleted: {
+            NSString *byteCount = [NSByteCountFormatter stringFromByteCount:item.size
+                                                                 countStyle:NSByteCountFormatterCountStyleFile];
+            objectString = [NSString stringWithFormat:@"%@\n%@", filename, byteCount];
 			break;
 		}
 
-		case DOWNLOAD_STARTED: {
+		case DownloadStateStarted: {
 			// Filename on top
 			// Progress gauge in middle
 			// Size gathered so far at bottom
 			NSString * progressString = @"";
-			double expectedSize = item.expectedSize;
-			double sizeSoFar = item.size;
 
-			if (expectedSize == -1)
+			if (item.expectedSize == -1)
 			{
-				// Expected size unknown - indeterminate progress gauge
-				if (sizeSoFar > 1024 * 1024)
-					progressString = [NSString stringWithFormat:NSLocalizedString(@"%.1f MB", nil), sizeSoFar / (1024 * 1024)];
-				else if (sizeSoFar > 1024)
-					progressString = [NSString stringWithFormat:NSLocalizedString(@"%.1f KB", nil), sizeSoFar / 1024];
-				else
-					progressString = [NSString stringWithFormat:NSLocalizedString(@"%.1f bytes", nil), sizeSoFar];
+                progressString = [NSByteCountFormatter stringFromByteCount:item.size
+                                                                countStyle:NSByteCountFormatterCountStyleFile];
 			}
 			else
 			{
-				if (expectedSize > 1024 * 1024)
-					progressString = [NSString stringWithFormat:NSLocalizedString(@"%.1f of %.1f MB", nil), sizeSoFar / (1024 * 1024), expectedSize / (1024 * 1024)];
-				else if (expectedSize > 1024)
-					progressString = [NSString stringWithFormat:NSLocalizedString(@"%.1f of %.1f KB", nil), sizeSoFar / 1024, expectedSize / 1024];
-				else
-					progressString = [NSString stringWithFormat:NSLocalizedString(@"%.1f of %.1f bytes", nil), sizeSoFar, expectedSize];
+                NSString *bytesSoFar = [NSByteCountFormatter stringFromByteCount:item.size
+                                                                      countStyle:NSByteCountFormatterCountStyleFile];
+                NSString *expectedBytes = [NSByteCountFormatter stringFromByteCount:item.expectedSize
+                                                                         countStyle:NSByteCountFormatterCountStyleFile];
+                progressString = [NSString stringWithFormat:NSLocalizedString(@"%@ of %@", @"Progress in bytes, e.g. 1 KB of 1 MB"), bytesSoFar, expectedBytes];
 			}
 			objectString = [NSString stringWithFormat:@"%@\n%@", filename, progressString];
 			break;

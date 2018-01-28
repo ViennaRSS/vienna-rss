@@ -20,10 +20,14 @@
 
 #import "FeedCredentials.h"
 #import "StringExtensions.h"
+#import "Folder.h"
+#import "Database.h"
 
-// Private functions
-@interface FeedCredentials (Private)
-	-(void)enableOKButton;
+
+@interface FeedCredentials ()
+
+-(void)enableOKButton;
+
 @end
 
 @implementation FeedCredentials

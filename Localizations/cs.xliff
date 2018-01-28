@@ -1,0 +1,2726 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="Interfaces/Base.lproj/ActivityViewer.xib" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="8.title">
+        <source>Activity</source>
+        <note>Class = "NSWindow"; title = "Activity"; ObjectID = "8";</note>
+        <target xml:lang="cs" state="translated">Monitor aktivity</target>
+      </trans-unit>
+      <trans-unit id="18.headerCell.title">
+        <source>Source</source>
+        <note>Class = "NSTableColumn"; headerCell.title = "Source"; ObjectID = "18";</note>
+        <target xml:lang="cs" state="translated">Zdroj</target>
+      </trans-unit>
+      <trans-unit id="19.headerCell.title">
+        <source>Status</source>
+        <note>Class = "NSTableColumn"; headerCell.title = "Status"; ObjectID = "19";</note>
+        <target xml:lang="cs" state="translated">Stav</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/AdvancedPreferencesView.xib" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="2GQ-cu-fbh.title">
+        <source>The higher the number, the quicker your subscriptions will be downloaded.</source>
+        <note>Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "2GQ-cu-fbh";</note>
+        <target xml:lang="cs" state="translated">Čím vyšší číslo, tím rychleji se Vám budou načítat Vaše odebírání.</target>
+      </trans-unit>
+      <trans-unit id="GaX-8c-QaN.title">
+        <source>The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.</source>
+        <note>Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "GaX-8c-QaN";</note>
+        <target xml:lang="cs" state="translated">Tato nastavení není třeba při běžném používání programu Vienna měnit. Podrobnosti k jednotlivým volbám naleznete v nápovědě.</target>
+      </trans-unit>
+      <trans-unit id="Ngw-hP-yW4.title">
+        <source>Concurrent downloads:</source>
+        <note>Class = "NSTextFieldCell"; title = "Concurrent downloads:"; ObjectID = "Ngw-hP-yW4";</note>
+        <target xml:lang="cs" state="translated">Souběžná stahování:</target>
+      </trans-unit>
+      <trans-unit id="S3T-cW-hys.title">
+        <source>However, high numbers also render your computer less responsive while refreshing feeds.</source>
+        <note>Class = "NSTextFieldCell"; title = "However, high numbers also render your computer less responsive while refreshing feeds."; ObjectID = "S3T-cW-hys";</note>
+        <target xml:lang="cs" state="translated">Nicméně vyšší čísla zároveň způsobí horší odezvu počítače během aktualizování odebírání.</target>
+      </trans-unit>
+      <trans-unit id="guK-dE-f6n.title">
+        <source>Enable JavaScript in the internal browser</source>
+        <note>Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "guK-dE-f6n";</note>
+        <target xml:lang="cs" state="translated">Aktivovat JavaScript v interním prohlížeči</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/AppearancePreferencesView.xib" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="71S-pg-AjX.title">
+        <source>When viewing articles or web pages:</source>
+        <note>Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "71S-pg-AjX";</note>
+        <target xml:lang="cs" state="translated">Při zobrazování příspěvků nebo webových stránek:</target>
+      </trans-unit>
+      <trans-unit id="B5v-p5-vrf.title">
+        <source>Folder list font:</source>
+        <note>Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "B5v-p5-vrf";</note>
+        <target xml:lang="cs" state="translated">Písmo seznamu složek:</target>
+      </trans-unit>
+      <trans-unit id="BDw-v3-mpF.title">
+        <source>Select…</source>
+        <note>Class = "NSButtonCell"; title = "Select…"; ObjectID = "BDw-v3-mpF";</note>
+        <target xml:lang="cs" state="translated">Vybrat…</target>
+      </trans-unit>
+      <trans-unit id="MEV-HA-bdL.title">
+        <source>Show feeds icons in folder list</source>
+        <note>Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "MEV-HA-bdL";</note>
+        <target xml:lang="cs" state="translated">Zobrazovat v seznamu složek přizpůsobené ikonky</target>
+      </trans-unit>
+      <trans-unit id="auD-UC-Pij.title">
+        <source>Article list font:</source>
+        <note>Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "auD-UC-Pij";</note>
+        <target xml:lang="cs" state="translated">Písmo seznamu příspěvků:</target>
+      </trans-unit>
+      <trans-unit id="gGT-YP-aum.title">
+        <source>Select…</source>
+        <note>Class = "NSButtonCell"; title = "Select…"; ObjectID = "gGT-YP-aum";</note>
+        <target xml:lang="cs" state="translated">Vybrat…</target>
+      </trans-unit>
+      <trans-unit id="zfJ-Ge-Cxe.title">
+        <source>Never use font sizes smaller than</source>
+        <note>Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "zfJ-Ge-Cxe";</note>
+        <target xml:lang="cs" state="translated">Nepoužívat menší velikost písem než:</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/Downloads.xib" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="5.title">
+        <source>Downloads</source>
+        <note>Class = "NSWindow"; title = "Downloads"; ObjectID = "5";</note>
+        <target xml:lang="cs" state="translated">Záznamy kopírování</target>
+      </trans-unit>
+      <trans-unit id="23.title">
+        <source>Clear</source>
+        <note>Class = "NSButtonCell"; title = "Clear"; ObjectID = "23";</note>
+        <target xml:lang="cs" state="translated">Odstranit</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/EmptyTrashWarning.xib" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="17.title">
+        <source>Empty Trash</source>
+        <note>Class = "NSButtonCell"; title = "Empty Trash"; ObjectID = "17";</note>
+        <target xml:lang="cs" state="translated">Vysypat koš</target>
+      </trans-unit>
+      <trans-unit id="18.title">
+        <source>Don't Empty Trash</source>
+        <note>Class = "NSButtonCell"; title = "Don't Empty Trash"; ObjectID = "18";</note>
+        <target xml:lang="cs" state="translated">Nevysypávat</target>
+      </trans-unit>
+      <trans-unit id="19.title">
+        <source>There are deleted articles in the trash. Would you like to empty the trash before quitting?</source>
+        <note>Class = "NSTextFieldCell"; title = "There are deleted articles in the trash. Would you like to empty the trash before quitting?"; ObjectID = "19";</note>
+        <target xml:lang="cs" state="translated">V koši jsou smazané příspěvky. Chcete před ukončením programu vysypat koš?</target>
+      </trans-unit>
+      <trans-unit id="20.title">
+        <source>Do not show this warning again</source>
+        <note>Class = "NSButtonCell"; title = "Do not show this warning again"; ObjectID = "20";</note>
+        <target xml:lang="cs" state="translated">Příště nezobrazovat</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/ExportAccessoryViewController.xib" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="6rj-zb-zOa.title">
+        <source>Export all subscriptions</source>
+        <note>Class = "NSButtonCell"; title = "Export all subscriptions"; ObjectID = "6rj-zb-zOa";</note>
+        <target xml:lang="cs" state="translated">Exportovat všechna odebírání</target>
+      </trans-unit>
+      <trans-unit id="IYg-Pm-bcI.title">
+        <source>Preserve group folders in exported file</source>
+        <note>Class = "NSButtonCell"; title = "Preserve group folders in exported file"; ObjectID = "IYg-Pm-bcI";</note>
+        <target xml:lang="cs" state="translated">Zachovat v exportovaném souboru skupiny složek</target>
+      </trans-unit>
+      <trans-unit id="KgE-bb-aJn.title">
+        <source>Export selected subscriptions</source>
+        <note>Class = "NSButtonCell"; title = "Export selected subscriptions"; ObjectID = "KgE-bb-aJn";</note>
+        <target xml:lang="cs" state="translated">Exportovat vybraná odebírání</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/FeedCredentials.xib" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="32.title">
+        <source>Cancel</source>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "32";</note>
+        <target xml:lang="cs" state="translated">Zrušit</target>
+      </trans-unit>
+      <trans-unit id="33.title">
+        <source>Name:</source>
+        <note>Class = "NSTextFieldCell"; title = "Name:"; ObjectID = "33";</note>
+        <target xml:lang="cs" state="translated">Jméno:</target>
+      </trans-unit>
+      <trans-unit id="34.title">
+        <source>Access to %@ requires you to provide log in credentials</source>
+        <note>Class = "NSTextFieldCell"; title = "Access to %@ requires you to provide log in credentials"; ObjectID = "34";</note>
+        <target xml:lang="cs" state="translated">Přístup k položce %@ vyžaduje poskytnutí přihlašovacích údajů</target>
+      </trans-unit>
+      <trans-unit id="37.title">
+        <source>Password:</source>
+        <note>Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "37";</note>
+        <target xml:lang="cs" state="translated">Heslo:</target>
+      </trans-unit>
+      <trans-unit id="38.title">
+        <source>Log In</source>
+        <note>Class = "NSButtonCell"; title = "Log In"; ObjectID = "38";</note>
+        <target xml:lang="cs" state="translated">Přihlásit se</target>
+      </trans-unit>
+      <trans-unit id="39.title">
+        <source>The user name and password you provide will be remembered for the next time you refresh this subscription.</source>
+        <note>Class = "NSTextFieldCell"; title = "The user name and password you provide will be remembered for the next time you refresh this subscription."; ObjectID = "39";</note>
+        <target xml:lang="cs" state="translated">Zadané uživatelské jméno a heslo bude uchováno pro příští obnovení tohoto odebírání.</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/GeneralPreferencesView.xib" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="1Ll-uG-QWh.title">
+        <source>Every 15 minutes</source>
+        <note>Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "1Ll-uG-QWh";</note>
+        <target xml:lang="cs" state="translated">Každých 15 minut</target>
+      </trans-unit>
+      <trans-unit id="2oy-1i-QQP.title">
+        <source>After "Next Unread" command</source>
+        <note>Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "2oy-1i-QQP";</note>
+        <target xml:lang="cs" state="translated">Po příkazu „Další nečtený“</target>
+      </trans-unit>
+      <trans-unit id="5VQ-jP-2rL.title">
+        <source>Every 30 minutes</source>
+        <note>Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "5VQ-jP-2rL";</note>
+        <target xml:lang="cs" state="translated">Každých 30 minut</target>
+      </trans-unit>
+      <trans-unit id="6wU-yO-cnV.title">
+        <source>Every 2 hours</source>
+        <note>Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "6wU-yO-cnV";</note>
+        <target xml:lang="cs" state="translated">Každé dvě hodiny</target>
+      </trans-unit>
+      <trans-unit id="7e3-Hu-RB5.title">
+        <source>Show the unread count on the application icon</source>
+        <note>Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "7e3-Hu-RB5";</note>
+        <target xml:lang="cs" state="translated">Zobrazit počet nepřečtených položek na ikoně aplikace</target>
+      </trans-unit>
+      <trans-unit id="BbI-0A-zEG.title">
+        <source>When new unread articles are retrieved:</source>
+        <note>Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "BbI-0A-zEG";</note>
+        <target xml:lang="cs" state="translated">Po přijmutí nových nepřečtených příspěvků:</target>
+      </trans-unit>
+      <trans-unit id="FiK-E7-RnG.title">
+        <source>Other…</source>
+        <note>Class = "NSMenuItem"; title = "Other…"; ObjectID = "FiK-E7-RnG";</note>
+        <target xml:lang="cs" state="translated">Jiná…</target>
+      </trans-unit>
+      <trans-unit id="GnT-xT-rAZ.title">
+        <source>Check for newer versions of Vienna on start up</source>
+        <note>Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "GnT-xT-rAZ";</note>
+        <target xml:lang="cs" state="translated">Ověřovat nové aktualizace programu Vienna při spouštění</target>
+      </trans-unit>
+      <trans-unit id="H9Q-du-oax.title">
+        <source>Manually</source>
+        <note>Class = "NSMenuItem"; title = "Manually"; ObjectID = "H9Q-du-oax";</note>
+        <target xml:lang="cs" state="translated">Manuálně</target>
+      </trans-unit>
+      <trans-unit id="IMa-1h-lIO.title">
+        <source>Every 6 hours</source>
+        <note>Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "IMa-1h-lIO";</note>
+        <target xml:lang="cs" state="translated">Každých šest hodin</target>
+      </trans-unit>
+      <trans-unit id="JDV-ek-xja.title">
+        <source>After a short delay</source>
+        <note>Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "JDV-ek-xja";</note>
+        <target xml:lang="cs" state="translated">Po krátké prodlevě</target>
+      </trans-unit>
+      <trans-unit id="JN6-lj-bQ1.title">
+        <source>Show in menu bar</source>
+        <note>Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1";</note>
+        <target xml:lang="cs" state="translated">Zobrazit v řádku nabídek</target>
+      </trans-unit>
+      <trans-unit id="YoM-Gv-hXn.title">
+        <source>Open links in external browser</source>
+        <note>Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "YoM-Gv-hXn";</note>
+        <target xml:lang="cs" state="translated">Otvírat odkazy v externím prohlížeči</target>
+      </trans-unit>
+      <trans-unit id="ewU-JH-fMC.title">
+        <source>Check for new articles:</source>
+        <note>Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "ewU-JH-fMC";</note>
+        <target xml:lang="cs" state="translated">Ověřovat nové položky:</target>
+      </trans-unit>
+      <trans-unit id="geD-Ws-mQm.title">
+        <source>Save downloaded files to:</source>
+        <note>Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "geD-Ws-mQm";</note>
+        <target xml:lang="cs" state="translated">Složka pro zkopírované soubory:</target>
+      </trans-unit>
+      <trans-unit id="gi4-ao-0yS.title">
+        <source>Bounce the application icon</source>
+        <note>Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "gi4-ao-0yS";</note>
+        <target xml:lang="cs" state="translated">Upozornit poskakováním ikony aplikace</target>
+      </trans-unit>
+      <trans-unit id="gnX-dW-XUD.title">
+        <source>Every 3 hours</source>
+        <note>Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "gnX-dW-XUD";</note>
+        <target xml:lang="cs" state="translated">Každé tři hodiny</target>
+      </trans-unit>
+      <trans-unit id="k6Y-ib-PGb.title">
+        <source>Move articles to Trash:</source>
+        <note>Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "k6Y-ib-PGb";</note>
+        <target xml:lang="cs" state="translated">Přesunout příspěvky do koše:</target>
+      </trans-unit>
+      <trans-unit id="kGA-Sa-RLG.title">
+        <source>Default RSS Reader:</source>
+        <note>Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG";</note>
+        <target xml:lang="cs" state="translated">Výchozí aplikace pro RSS:</target>
+      </trans-unit>
+      <trans-unit id="meo-78-YOl.title">
+        <source>Mark updated articles as new</source>
+        <note>Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl";</note>
+        <target xml:lang="cs" state="translated">Označit aktualizované příspěvky jako nové</target>
+      </trans-unit>
+      <trans-unit id="oVW-ee-uJT.title">
+        <source>Every 5 minutes</source>
+        <note>Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "oVW-ee-uJT";</note>
+        <target xml:lang="cs" state="translated">Každých 5 minut</target>
+      </trans-unit>
+      <trans-unit id="pXX-MI-tJX.title">
+        <source>Check for new articles on start up</source>
+        <note>Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "pXX-MI-tJX";</note>
+        <target xml:lang="cs" state="translated">Ověřovat nové příspěvky po spuštění</target>
+      </trans-unit>
+      <trans-unit id="pjg-Ze-H3l.title">
+        <source>Open new links in the background</source>
+        <note>Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "pjg-Ze-H3l";</note>
+        <target xml:lang="cs" state="translated">Otvírat nové odkazy v pozadí</target>
+      </trans-unit>
+      <trans-unit id="qeb-at-hYb.title">
+        <source>Updates:</source>
+        <note>Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb";</note>
+        <target xml:lang="cs" state="translated">Aktualizace:</target>
+      </trans-unit>
+      <trans-unit id="sCl-hz-PFF.title">
+        <source>Mark current article read:</source>
+        <note>Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "sCl-hz-PFF";</note>
+        <target xml:lang="cs" state="translated">Označit stávající příspěvky jako čtené:</target>
+      </trans-unit>
+      <trans-unit id="sSj-zI-6RY.title">
+        <source>Every hour</source>
+        <note>Class = "NSMenuItem"; title = "Every hour"; ObjectID = "sSj-zI-6RY";</note>
+        <target xml:lang="cs" state="translated">Každou hodinu</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/GroupFolder.xib" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="32.title">
+        <source>New Group Folder</source>
+        <note>Class = "NSTextFieldCell"; title = "New Group Folder"; ObjectID = "32";</note>
+        <target xml:lang="cs" state="translated">Nová skupinová složka</target>
+      </trans-unit>
+      <trans-unit id="34.title">
+        <source>Save</source>
+        <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "34";</note>
+        <target xml:lang="cs" state="translated">Vytvořit</target>
+      </trans-unit>
+      <trans-unit id="35.title">
+        <source>Cancel</source>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "35";</note>
+        <target xml:lang="cs" state="translated">Zrušit</target>
+      </trans-unit>
+      <trans-unit id="36.title">
+        <source>Enter the group folder name:</source>
+        <note>Class = "NSTextFieldCell"; title = "Enter the group folder name:"; ObjectID = "36";</note>
+        <target xml:lang="cs" state="translated">Zadejte jméno skupinové složky:</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/InfoWindow.xib" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="105.title">
+        <source>Last Refreshed:</source>
+        <note>Class = "NSTextFieldCell"; title = "Last Refreshed:"; ObjectID = "105";</note>
+        <target xml:lang="cs" state="translated">Obnoveno:</target>
+      </trans-unit>
+      <trans-unit id="109.title">
+        <source>Validate</source>
+        <note>Class = "NSButtonCell"; title = "Validate"; ObjectID = "109";</note>
+        <target xml:lang="cs" state="translated">Zkontrolovat</target>
+      </trans-unit>
+      <trans-unit id="111.title">
+        <source>User name:</source>
+        <note>Class = "NSTextFieldCell"; title = "User name:"; ObjectID = "111";</note>
+        <target xml:lang="cs" state="translated">Jméno:</target>
+      </trans-unit>
+      <trans-unit id="112.title">
+        <source>Password:</source>
+        <note>Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "112";</note>
+        <target xml:lang="cs" state="translated">Heslo:</target>
+      </trans-unit>
+      <trans-unit id="115.title">
+        <source>Update Authentication</source>
+        <note>Class = "NSButtonCell"; title = "Update Authentication"; ObjectID = "115";</note>
+        <target xml:lang="cs" state="translated">Automaticky aktualizovat</target>
+      </trans-unit>
+      <trans-unit id="117.title">
+        <source>Size:</source>
+        <note>Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "117";</note>
+        <target xml:lang="cs" state="translated">Velikost:</target>
+      </trans-unit>
+      <trans-unit id="118.title">
+        <source>Unread:</source>
+        <note>Class = "NSTextFieldCell"; title = "Unread:"; ObjectID = "118";</note>
+        <target xml:lang="cs" state="translated">Nečteno:</target>
+      </trans-unit>
+      <trans-unit id="121.title">
+        <source>Subscribed</source>
+        <note>Class = "NSButtonCell"; title = "Subscribed"; ObjectID = "121";</note>
+        <target xml:lang="cs" state="translated">Odebíráno</target>
+      </trans-unit>
+      <trans-unit id="E84-Uo-ybg.title">
+        <source>Description</source>
+        <note>Class = "NSTextFieldCell"; title = "Description"; ObjectID = "E84-Uo-ybg";</note>
+        <target xml:lang="cs" state="translated">Popis</target>
+      </trans-unit>
+      <trans-unit id="U0N-RF-bUt.title">
+        <source>Authentication</source>
+        <note>Class = "NSTextFieldCell"; title = "Authentication"; ObjectID = "U0N-RF-bUt";</note>
+        <target xml:lang="cs" state="translated">Ověření totožnosti</target>
+      </trans-unit>
+      <trans-unit id="i9j-KH-c3D.title">
+        <source>General</source>
+        <note>Class = "NSTextFieldCell"; title = "General"; ObjectID = "i9j-KH-c3D";</note>
+        <target xml:lang="cs" state="translated">Obecné</target>
+      </trans-unit>
+      <trans-unit id="xPF-M9-oZG.title">
+        <source>Feed URL</source>
+        <note>Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG";</note>
+        <target xml:lang="cs" state="translated">URL zdroje</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/MainMenu.xib" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="2S3-dG-ZPg.title">
+        <source>More Styles…</source>
+        <note>Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg";</note>
+        <target xml:lang="cs" state="translated">Více stylů…</target>
+      </trans-unit>
+      <trans-unit id="5.title">
+        <source>Bring All to Front</source>
+        <note>Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5";</note>
+        <target xml:lang="cs" state="translated">Převést vše do popředí</target>
+      </trans-unit>
+      <trans-unit id="6yn-y8-lF1.title">
+        <source>Refresh All Subscriptions</source>
+        <note>Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1";</note>
+        <target xml:lang="cs" state="translated">Obnovit všechna odebírání</target>
+      </trans-unit>
+      <trans-unit id="8Z3-Bg-ry2.title">
+        <source>Flagged</source>
+        <note>Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8Z3-Bg-ry2";</note>
+        <target xml:lang="cs" state="translated">Praporek</target>
+      </trans-unit>
+      <trans-unit id="19.title">
+        <source>Window</source>
+        <note>Class = "NSMenuItem"; title = "Window"; ObjectID = "19";</note>
+        <target xml:lang="cs" state="translated">Okno</target>
+      </trans-unit>
+      <trans-unit id="23.title">
+        <source>Minimize</source>
+        <note>Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23";</note>
+        <target xml:lang="cs" state="translated">Minimalizovat</target>
+      </trans-unit>
+      <trans-unit id="24.title">
+        <source>Window</source>
+        <note>Class = "NSMenu"; title = "Window"; ObjectID = "24";</note>
+        <target xml:lang="cs" state="translated">Okno</target>
+      </trans-unit>
+      <trans-unit id="58.title">
+        <source>About Vienna</source>
+        <note>Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58";</note>
+        <target xml:lang="cs" state="translated">Co je Vienna</target>
+      </trans-unit>
+      <trans-unit id="77.title">
+        <source>Page Setup…</source>
+        <note>Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "77";</note>
+        <target xml:lang="cs" state="translated">Vzhled stránky…</target>
+      </trans-unit>
+      <trans-unit id="78.title">
+        <source>Print…</source>
+        <note>Class = "NSMenuItem"; title = "Print…"; ObjectID = "78";</note>
+        <target xml:lang="cs" state="translated">Tisknout…</target>
+      </trans-unit>
+      <trans-unit id="81.title">
+        <source>File</source>
+        <note>Class = "NSMenu"; title = "File"; ObjectID = "81";</note>
+        <target xml:lang="cs" state="translated">Soubor</target>
+      </trans-unit>
+      <trans-unit id="83.title">
+        <source>File</source>
+        <note>Class = "NSMenuItem"; title = "File"; ObjectID = "83";</note>
+        <target xml:lang="cs" state="translated">Soubor</target>
+      </trans-unit>
+      <trans-unit id="103.title">
+        <source>Help</source>
+        <note>Class = "NSMenuItem"; title = "Help"; ObjectID = "103";</note>
+        <target xml:lang="cs" state="translated">Nápověda</target>
+      </trans-unit>
+      <trans-unit id="106.title">
+        <source>Help</source>
+        <note>Class = "NSMenu"; title = "Help"; ObjectID = "106";</note>
+        <target xml:lang="cs" state="translated">Nápověda</target>
+      </trans-unit>
+      <trans-unit id="111.title">
+        <source>Vienna Help</source>
+        <note>Class = "NSMenuItem"; title = "Vienna Help"; ObjectID = "111";</note>
+        <target xml:lang="cs" state="translated">Nápověda pro Viennu</target>
+      </trans-unit>
+      <trans-unit id="129.title">
+        <source>Preferences…</source>
+        <note>Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129";</note>
+        <target xml:lang="cs" state="translated">Předvolby…</target>
+      </trans-unit>
+      <trans-unit id="130.title">
+        <source>Services</source>
+        <note>Class = "NSMenu"; title = "Services"; ObjectID = "130";</note>
+        <target xml:lang="cs" state="translated">Služby</target>
+      </trans-unit>
+      <trans-unit id="131.title">
+        <source>Services</source>
+        <note>Class = "NSMenuItem"; title = "Services"; ObjectID = "131";</note>
+        <target xml:lang="cs" state="translated">Služby</target>
+      </trans-unit>
+      <trans-unit id="134.title">
+        <source>Hide Vienna</source>
+        <note>Class = "NSMenuItem"; title = "Hide Vienna"; ObjectID = "134";</note>
+        <target xml:lang="cs" state="translated">Skrýt Viennu</target>
+      </trans-unit>
+      <trans-unit id="136.title">
+        <source>Quit Vienna</source>
+        <note>Class = "NSMenuItem"; title = "Quit Vienna"; ObjectID = "136";</note>
+        <target xml:lang="cs" state="translated">Ukončit Viennu</target>
+      </trans-unit>
+      <trans-unit id="145.title">
+        <source>Hide Others</source>
+        <note>Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145";</note>
+        <target xml:lang="cs" state="translated">Skrýt ostatní</target>
+      </trans-unit>
+      <trans-unit id="150.title">
+        <source>Show All</source>
+        <note>Class = "NSMenuItem"; title = "Show All"; ObjectID = "150";</note>
+        <target xml:lang="cs" state="translated">Zobrazit vše</target>
+      </trans-unit>
+      <trans-unit id="154.title">
+        <source>Find…</source>
+        <note>Class = "NSMenuItem"; title = "Find…"; ObjectID = "154";</note>
+        <target xml:lang="cs" state="translated">Hledat…</target>
+      </trans-unit>
+      <trans-unit id="155.title">
+        <source>Jump to Selection</source>
+        <note>Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "155";</note>
+        <target xml:lang="cs" state="translated">Zobrazit výběr</target>
+      </trans-unit>
+      <trans-unit id="157.title">
+        <source>Copy</source>
+        <note>Class = "NSMenuItem"; title = "Copy"; ObjectID = "157";</note>
+        <target xml:lang="cs" state="translated">Kopírovat</target>
+      </trans-unit>
+      <trans-unit id="158.title">
+        <source>Undo</source>
+        <note>Class = "NSMenuItem"; title = "Undo"; ObjectID = "158";</note>
+        <target xml:lang="cs" state="translated">Odvolat akci</target>
+      </trans-unit>
+      <trans-unit id="159.title">
+        <source>Find</source>
+        <note>Class = "NSMenu"; title = "Find"; ObjectID = "159";</note>
+        <target xml:lang="cs" state="translated">Hledat</target>
+      </trans-unit>
+      <trans-unit id="160.title">
+        <source>Cut</source>
+        <note>Class = "NSMenuItem"; title = "Cut"; ObjectID = "160";</note>
+        <target xml:lang="cs" state="translated">Vyjmout</target>
+      </trans-unit>
+      <trans-unit id="161.title">
+        <source>Use Selection for Find</source>
+        <note>Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "161";</note>
+        <target xml:lang="cs" state="translated">Hledat výběr</target>
+      </trans-unit>
+      <trans-unit id="162.title">
+        <source>Find Previous</source>
+        <note>Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "162";</note>
+        <target xml:lang="cs" state="translated">Hledat předchozí</target>
+      </trans-unit>
+      <trans-unit id="163.title">
+        <source>Edit</source>
+        <note>Class = "NSMenuItem"; title = "Edit"; ObjectID = "163";</note>
+        <target xml:lang="cs" state="translated">Úpravy</target>
+      </trans-unit>
+      <trans-unit id="164.title">
+        <source>Delete</source>
+        <note>Class = "NSMenuItem"; title = "Delete"; ObjectID = "164";</note>
+        <target xml:lang="cs" state="translated">Smazat</target>
+      </trans-unit>
+      <trans-unit id="167.title">
+        <source>Find Next</source>
+        <note>Class = "NSMenuItem"; title = "Find Next"; ObjectID = "167";</note>
+        <target xml:lang="cs" state="translated">Hledat další</target>
+      </trans-unit>
+      <trans-unit id="168.title">
+        <source>Find</source>
+        <note>Class = "NSMenuItem"; title = "Find"; ObjectID = "168";</note>
+        <target xml:lang="cs" state="translated">Hledat</target>
+      </trans-unit>
+      <trans-unit id="169.title">
+        <source>Edit</source>
+        <note>Class = "NSMenu"; title = "Edit"; ObjectID = "169";</note>
+        <target xml:lang="cs" state="translated">Úpravy</target>
+      </trans-unit>
+      <trans-unit id="171.title">
+        <source>Paste</source>
+        <note>Class = "NSMenuItem"; title = "Paste"; ObjectID = "171";</note>
+        <target xml:lang="cs" state="translated">Vložit</target>
+      </trans-unit>
+      <trans-unit id="172.title">
+        <source>Select All</source>
+        <note>Class = "NSMenuItem"; title = "Select All"; ObjectID = "172";</note>
+        <target xml:lang="cs" state="translated">Vybrat vše</target>
+      </trans-unit>
+      <trans-unit id="173.title">
+        <source>Redo</source>
+        <note>Class = "NSMenuItem"; title = "Redo"; ObjectID = "173";</note>
+        <target xml:lang="cs" state="translated">Opakovat akci</target>
+      </trans-unit>
+      <trans-unit id="197.title">
+        <source>Zoom</source>
+        <note>Class = "NSMenuItem"; title = "Zoom"; ObjectID = "197";</note>
+        <target xml:lang="cs" state="translated">Přepnout velikost</target>
+      </trans-unit>
+      <trans-unit id="235.title">
+        <source>View</source>
+        <note>Class = "NSMenuItem"; title = "View"; ObjectID = "235";</note>
+        <target xml:lang="cs" state="translated">Zobrazení</target>
+      </trans-unit>
+      <trans-unit id="237.title">
+        <source>View</source>
+        <note>Class = "NSMenu"; title = "View"; ObjectID = "237";</note>
+        <target xml:lang="cs" state="translated">Zobrazení</target>
+      </trans-unit>
+      <trans-unit id="300.title">
+        <source>Article</source>
+        <note>Class = "NSMenu"; title = "Article"; ObjectID = "300";</note>
+        <target xml:lang="cs" state="translated">Příspěvek</target>
+      </trans-unit>
+      <trans-unit id="301.title">
+        <source>Article</source>
+        <note>Class = "NSMenuItem"; title = "Article"; ObjectID = "301";</note>
+        <target xml:lang="cs" state="translated">Příspěvek</target>
+      </trans-unit>
+      <trans-unit id="344.title">
+        <source>Next Unread</source>
+        <note>Class = "NSMenuItem"; title = "Next Unread"; ObjectID = "344";</note>
+        <target xml:lang="cs" state="translated">Další nečtený</target>
+      </trans-unit>
+      <trans-unit id="387.title">
+        <source>Sort By</source>
+        <note>Class = "NSMenuItem"; title = "Sort By"; ObjectID = "387";</note>
+        <target xml:lang="cs" state="translated">Třídit</target>
+      </trans-unit>
+      <trans-unit id="388.title">
+        <source>Sort By</source>
+        <note>Class = "NSMenu"; title = "Sort By"; ObjectID = "388";</note>
+        <target xml:lang="cs" state="translated">Třídit</target>
+      </trans-unit>
+      <trans-unit id="402.title">
+        <source>Activity Window</source>
+        <note>Class = "NSMenuItem"; title = "Activity Window"; ObjectID = "402";</note>
+        <target xml:lang="cs" state="translated">Monitor aktivity</target>
+      </trans-unit>
+      <trans-unit id="406.title">
+        <source>Refresh All Subscriptions</source>
+        <note>Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "406";</note>
+        <target xml:lang="cs" state="translated">Obnovit všechna odebírání</target>
+      </trans-unit>
+      <trans-unit id="422.title">
+        <source>Back</source>
+        <note>Class = "NSMenuItem"; title = "Back"; ObjectID = "422";</note>
+        <target xml:lang="cs" state="translated">Zpět</target>
+      </trans-unit>
+      <trans-unit id="423.title">
+        <source>Forward</source>
+        <note>Class = "NSMenuItem"; title = "Forward"; ObjectID = "423";</note>
+        <target xml:lang="cs" state="translated">Vpřed</target>
+      </trans-unit>
+      <trans-unit id="442.title">
+        <source>Columns</source>
+        <note>Class = "NSMenuItem"; title = "Columns"; ObjectID = "442";</note>
+        <target xml:lang="cs" state="translated">Sloupce</target>
+      </trans-unit>
+      <trans-unit id="443.title">
+        <source>Columns</source>
+        <note>Class = "NSMenu"; title = "Columns"; ObjectID = "443";</note>
+        <target xml:lang="cs" state="translated">Sloupce</target>
+      </trans-unit>
+      <trans-unit id="574.title">
+        <source>New Smart Folder…</source>
+        <note>Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "574";</note>
+        <target xml:lang="cs" state="translated">Nová dynamická složka…</target>
+      </trans-unit>
+      <trans-unit id="604.title">
+        <source>Refresh Selected Subscriptions</source>
+        <note>Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "604";</note>
+        <target xml:lang="cs" state="translated">Obnovit vybraná odebírání</target>
+      </trans-unit>
+      <trans-unit id="690.title">
+        <source>New Subscription…</source>
+        <note>Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "690";</note>
+        <target xml:lang="cs" state="translated">Nové odebírání…</target>
+      </trans-unit>
+      <trans-unit id="780.title">
+        <source>Import Subscriptions…</source>
+        <note>Class = "NSMenuItem"; title = "Import Subscriptions…"; ObjectID = "780";</note>
+        <target xml:lang="cs" state="translated">Importovat odebírání…</target>
+      </trans-unit>
+      <trans-unit id="781.title">
+        <source>Export Subscriptions…</source>
+        <note>Class = "NSMenuItem"; title = "Export Subscriptions…"; ObjectID = "781";</note>
+        <target xml:lang="cs" state="translated">Exportovat odebírání…</target>
+      </trans-unit>
+      <trans-unit id="789.title">
+        <source>Mark Unread</source>
+        <note>Class = "NSMenuItem"; title = "Mark Unread"; ObjectID = "789";</note>
+        <target xml:lang="cs" state="translated">Označit jako nečtené</target>
+      </trans-unit>
+      <trans-unit id="790.title">
+        <source>Mark Flagged</source>
+        <note>Class = "NSMenuItem"; title = "Mark Flagged"; ObjectID = "790";</note>
+        <target xml:lang="cs" state="translated">Označit praporkem</target>
+      </trans-unit>
+      <trans-unit id="806.title">
+        <source>New Group Folder…</source>
+        <note>Class = "NSMenuItem"; title = "New Group Folder…"; ObjectID = "806";</note>
+        <target xml:lang="cs" state="translated">Nová skupinová složka…</target>
+      </trans-unit>
+      <trans-unit id="826.title">
+        <source>Style</source>
+        <note>Class = "NSMenuItem"; title = "Style"; ObjectID = "826";</note>
+        <target xml:lang="cs" state="translated">Styl</target>
+      </trans-unit>
+      <trans-unit id="827.title">
+        <source>Style</source>
+        <note>Class = "NSMenu"; title = "Style"; ObjectID = "827";</note>
+        <target xml:lang="cs" state="translated">Styl</target>
+      </trans-unit>
+      <trans-unit id="858.title">
+        <source>Stop Refreshing</source>
+        <note>Class = "NSMenuItem"; title = "Stop Refreshing"; ObjectID = "858";</note>
+        <target xml:lang="cs" state="translated">Zastavit obnovu</target>
+      </trans-unit>
+      <trans-unit id="929.title">
+        <source>Vienna Web Site</source>
+        <note>Class = "NSMenuItem"; title = "Vienna Web Site"; ObjectID = "929";</note>
+        <target xml:lang="cs" state="translated">Vienna - webové sídlo</target>
+      </trans-unit>
+      <trans-unit id="935.title">
+        <source>Close Window</source>
+        <note>Class = "NSMenuItem"; title = "Close Window"; ObjectID = "935";</note>
+        <target xml:lang="cs" state="translated">Zavřít</target>
+      </trans-unit>
+      <trans-unit id="940.title">
+        <source>Main Window</source>
+        <note>Class = "NSMenuItem"; title = "Main Window"; ObjectID = "940";</note>
+        <target xml:lang="cs" state="translated">Hlavní okno</target>
+      </trans-unit>
+      <trans-unit id="961.title">
+        <source>Empty Trash</source>
+        <note>Class = "NSMenuItem"; title = "Empty Trash"; ObjectID = "961";</note>
+        <target xml:lang="cs" state="translated">Vysypat koš</target>
+      </trans-unit>
+      <trans-unit id="1008.title">
+        <source>Previous Tab</source>
+        <note>Class = "NSMenuItem"; title = "Previous Tab"; ObjectID = "1008";</note>
+        <target xml:lang="cs" state="translated">Předchozí panel</target>
+      </trans-unit>
+      <trans-unit id="1009.title">
+        <source>Next Tab</source>
+        <note>Class = "NSMenuItem"; title = "Next Tab"; ObjectID = "1009";</note>
+        <target xml:lang="cs" state="translated">Následující panel</target>
+      </trans-unit>
+      <trans-unit id="1023.title">
+        <source>Close Tab</source>
+        <note>Class = "NSMenuItem"; title = "Close Tab"; ObjectID = "1023";</note>
+        <target xml:lang="cs" state="translated">Zavřít panel</target>
+      </trans-unit>
+      <trans-unit id="1025.title">
+        <source>Reload Page</source>
+        <note>Class = "NSMenuItem"; title = "Reload Page"; ObjectID = "1025";</note>
+        <target xml:lang="cs" state="translated">Obnovit stránku</target>
+      </trans-unit>
+      <trans-unit id="1027.title">
+        <source>Stop Reloading Page</source>
+        <note>Class = "NSMenuItem"; title = "Stop Reloading Page"; ObjectID = "1027";</note>
+        <target xml:lang="cs" state="translated">Zastavit opětovné načítání stránky</target>
+      </trans-unit>
+      <trans-unit id="1036.title">
+        <source>Close All Tabs</source>
+        <note>Class = "NSMenuItem"; title = "Close All Tabs"; ObjectID = "1036";</note>
+        <target xml:lang="cs" state="translated">Zavřít všechny panely</target>
+      </trans-unit>
+      <trans-unit id="1040.title">
+        <source>Open Article Page</source>
+        <note>Class = "NSMenuItem"; title = "Open Article Page"; ObjectID = "1040";</note>
+        <target xml:lang="cs" state="translated">Otevřít stránku příspěvku</target>
+      </trans-unit>
+      <trans-unit id="1044.title">
+        <source>Restore Article</source>
+        <note>Class = "NSMenuItem"; title = "Restore Article"; ObjectID = "1044";</note>
+        <target xml:lang="cs" state="translated">Opětovně zařadit příspěvek</target>
+      </trans-unit>
+      <trans-unit id="1061.title">
+        <source>Downloads</source>
+        <note>Class = "NSMenuItem"; title = "Downloads"; ObjectID = "1061";</note>
+        <target xml:lang="cs" state="translated">Záznamy kopírování</target>
+      </trans-unit>
+      <trans-unit id="1067.title">
+        <source>Open Article Page in External Browser</source>
+        <note>Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067";</note>
+        <target xml:lang="cs" state="translated">Otevřít stránku příspěvku v externím prohlížeči</target>
+      </trans-unit>
+      <trans-unit id="1084.title">
+        <source>Bigger Text</source>
+        <note>Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084";</note>
+        <target xml:lang="cs" state="translated">Zvětšit text</target>
+      </trans-unit>
+      <trans-unit id="1085.title">
+        <source>Smaller Text</source>
+        <note>Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085";</note>
+        <target xml:lang="cs" state="translated">Zmenšit text</target>
+      </trans-unit>
+      <trans-unit id="1101.title">
+        <source>Open Web Location…</source>
+        <note>Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101";</note>
+        <target xml:lang="cs" state="translated">Otevřít webovou adresu…</target>
+      </trans-unit>
+      <trans-unit id="1104.title">
+        <source>Check for Updates</source>
+        <note>Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "1104";</note>
+        <target xml:lang="cs" state="translated">Ověřit aktualizace…</target>
+      </trans-unit>
+      <trans-unit id="1106.title">
+        <source>Refresh Folder Images</source>
+        <note>Class = "NSMenuItem"; title = "Refresh Folder Images"; ObjectID = "1106";</note>
+        <target xml:lang="cs" state="translated">Obnovit ikony složek</target>
+      </trans-unit>
+      <trans-unit id="1108.title">
+        <source>Layout</source>
+        <note>Class = "NSMenuItem"; title = "Layout"; ObjectID = "1108";</note>
+        <target xml:lang="cs" state="translated">Rozvržení</target>
+      </trans-unit>
+      <trans-unit id="1109.title">
+        <source>Layout</source>
+        <note>Class = "NSMenu"; title = "Layout"; ObjectID = "1109";</note>
+        <target xml:lang="cs" state="translated">Rozvržení</target>
+      </trans-unit>
+      <trans-unit id="1110.title">
+        <source>Horizontal</source>
+        <note>Class = "NSMenuItem"; title = "Horizontal"; ObjectID = "1110";</note>
+        <target xml:lang="cs" state="translated">Standardní</target>
+      </trans-unit>
+      <trans-unit id="1116.title">
+        <source>Vertical</source>
+        <note>Class = "NSMenuItem"; title = "Vertical"; ObjectID = "1116";</note>
+        <target xml:lang="cs" state="translated">Kompaktní</target>
+      </trans-unit>
+      <trans-unit id="1117.title">
+        <source>Filter By</source>
+        <note>Class = "NSMenuItem"; title = "Filter By"; ObjectID = "1117";</note>
+        <target xml:lang="cs" state="translated">Filtrovat</target>
+      </trans-unit>
+      <trans-unit id="1118.title">
+        <source>Filter By</source>
+        <note>Class = "NSMenu"; title = "Filter By"; ObjectID = "1118";</note>
+        <target xml:lang="cs" state="translated">Filtrovat</target>
+      </trans-unit>
+      <trans-unit id="1146.title">
+        <source>Keyboard Shortcuts</source>
+        <note>Class = "NSMenuItem"; title = "Keyboard Shortcuts"; ObjectID = "1146";</note>
+        <target xml:lang="cs" state="translated">Klávesové zkratky</target>
+      </trans-unit>
+      <trans-unit id="1160.title">
+        <source>Unified</source>
+        <note>Class = "NSMenuItem"; title = "Unified"; ObjectID = "1160";</note>
+        <target xml:lang="cs" state="translated">Sloučené</target>
+      </trans-unit>
+      <trans-unit id="1177.title">
+        <source>Folder</source>
+        <note>Class = "NSMenuItem"; title = "Folder"; ObjectID = "1177";</note>
+        <target xml:lang="cs" state="translated">Složka</target>
+      </trans-unit>
+      <trans-unit id="1178.title">
+        <source>Folder</source>
+        <note>Class = "NSMenu"; title = "Folder"; ObjectID = "1178";</note>
+        <target xml:lang="cs" state="translated">Složka</target>
+      </trans-unit>
+      <trans-unit id="1180.title">
+        <source>Edit…</source>
+        <note>Class = "NSMenuItem"; title = "Edit…"; ObjectID = "1180";</note>
+        <target xml:lang="cs" state="translated">Upravit…</target>
+      </trans-unit>
+      <trans-unit id="1181.title">
+        <source>Rename…</source>
+        <note>Class = "NSMenuItem"; title = "Rename…"; ObjectID = "1181";</note>
+        <target xml:lang="cs" state="translated">Přejmenovat…</target>
+      </trans-unit>
+      <trans-unit id="1186.title">
+        <source>Skip Folder</source>
+        <note>Class = "NSMenuItem"; title = "Skip Folder"; ObjectID = "1186";</note>
+        <target xml:lang="cs" state="translated">Vynechat složku</target>
+      </trans-unit>
+      <trans-unit id="1187.title">
+        <source>Mark All Articles as Read</source>
+        <note>Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "1187";</note>
+        <target xml:lang="cs" state="translated">Označit všechny příspěvky jako čtené</target>
+      </trans-unit>
+      <trans-unit id="1191.title">
+        <source>Open Subscription Home Page</source>
+        <note>Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "1191";</note>
+        <target xml:lang="cs" state="translated">Otevřít domovskou stránku odebírání</target>
+      </trans-unit>
+      <trans-unit id="1192.title">
+        <source>Open Subscription Home Page in External Browser</source>
+        <note>Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "1192";</note>
+        <target xml:lang="cs" state="translated">Otevřít domovskou stránku odebírání v externím prohlížeči</target>
+      </trans-unit>
+      <trans-unit id="1195.title">
+        <source>Mark All Subscriptions as Read</source>
+        <note>Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "1195";</note>
+        <target xml:lang="cs" state="translated">Označit všechna odebírání jako čtená</target>
+      </trans-unit>
+      <trans-unit id="1198.title">
+        <source>Delete Article</source>
+        <note>Class = "NSMenuItem"; title = "Delete Article"; ObjectID = "1198";</note>
+        <target xml:lang="cs" state="translated">Smazat příspěvek</target>
+      </trans-unit>
+      <trans-unit id="1214.title">
+        <source>Open New Tab</source>
+        <note>Class = "NSMenuItem"; title = "Open New Tab"; ObjectID = "1214";</note>
+        <target xml:lang="cs" state="translated">Otevřít nový panel</target>
+      </trans-unit>
+      <trans-unit id="1216.title">
+        <source>Download Enclosure</source>
+        <note>Class = "NSMenuItem"; title = "Download Enclosure"; ObjectID = "1216";</note>
+        <target xml:lang="cs" state="translated">Zkopírovat přílohu</target>
+      </trans-unit>
+      <trans-unit id="1257.title">
+        <source>Customize Toolbar…</source>
+        <note>Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257";</note>
+        <target xml:lang="cs" state="translated">Přizpůsobit řádek nástrojů…</target>
+      </trans-unit>
+      <trans-unit id="1259.title">
+        <source>Hide Status Bar</source>
+        <note>Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259";</note>
+        <target xml:lang="cs" state="translated">Skrýt stavový řádek</target>
+      </trans-unit>
+      <trans-unit id="1325.title">
+        <source>Show Filter Bar</source>
+        <note>Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "1325";</note>
+        <target xml:lang="cs" state="translated">Zobrazit řádek filtru</target>
+      </trans-unit>
+      <trans-unit id="1327.title">
+        <source>Search Articles</source>
+        <note>Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327";</note>
+        <target xml:lang="cs" state="translated">Hledat v příspěvcích</target>
+      </trans-unit>
+      <trans-unit id="1336.title">
+        <source>Order By</source>
+        <note>Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336";</note>
+        <target xml:lang="cs" state="translated">Seřadit podle</target>
+      </trans-unit>
+      <trans-unit id="1337.title">
+        <source>Order By</source>
+        <note>Class = "NSMenu"; title = "Order By"; ObjectID = "1337";</note>
+        <target xml:lang="cs" state="translated">Seřadit podle</target>
+      </trans-unit>
+      <trans-unit id="1408.title">
+        <source>Unsubscribe</source>
+        <note>Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408";</note>
+        <target xml:lang="cs" state="translated">Ukončit odebírání kanálu</target>
+      </trans-unit>
+      <trans-unit id="1409.title">
+        <source>Get Info…</source>
+        <note>Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409";</note>
+        <target xml:lang="cs" state="translated">Informace…</target>
+      </trans-unit>
+      <trans-unit id="CGp-H4-UaI.title">
+        <source>Last 48 Hours</source>
+        <note>Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI";</note>
+        <target xml:lang="cs" state="translated">Posledních 48 hodin</target>
+      </trans-unit>
+      <trans-unit id="ecl-HO-Kpi.title">
+        <source>Mark All Subscriptions as Read</source>
+        <note>Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi";</note>
+        <target xml:lang="cs" state="translated">Označit všechna odebírání jako čtená</target>
+      </trans-unit>
+      <trans-unit id="fad-Nj-OFI.title">
+        <source>Spelling</source>
+        <note>Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI";</note>
+        <target xml:lang="cs" state="translated">Pravopis</target>
+      </trans-unit>
+      <trans-unit id="pKl-6f-Hlc.title">
+        <source>Mark Read</source>
+        <note>Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc";</note>
+        <target xml:lang="cs" state="translated">Označit jako čtené</target>
+      </trans-unit>
+      <trans-unit id="rNG-xr-3x7.title">
+        <source>Unread Articles</source>
+        <note>Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7";</note>
+        <target xml:lang="cs" state="translated">Nečtené příspěvky</target>
+      </trans-unit>
+      <trans-unit id="t1E-6n-jtA.title">
+        <source>All Articles</source>
+        <note>Class = "NSMenuItem"; title = "All Articles"; ObjectID = "t1E-6n-jtA";</note>
+        <target xml:lang="cs" state="translated">Všechny příspěvky</target>
+      </trans-unit>
+      <trans-unit id="t34-de-pMs.title">
+        <source>Today</source>
+        <note>Class = "NSMenuItem"; title = "Today"; ObjectID = "t34-de-pMs";</note>
+        <target xml:lang="cs" state="translated">Dnes</target>
+      </trans-unit>
+      <trans-unit id="wqh-Jc-gBm.title">
+        <source>Last Refresh</source>
+        <note>Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm";</note>
+        <target xml:lang="cs" state="translated">Naposledy obnovené</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/MainWindowController.xib" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="3tM-J3-kmf.title">
+        <source>Today</source>
+        <note>Class = "NSMenuItem"; title = "Today"; ObjectID = "3tM-J3-kmf";</note>
+        <target xml:lang="cs" state="translated">Dnes</target>
+      </trans-unit>
+      <trans-unit id="4c1-NR-ofo.label">
+        <source>Empty Trash</source>
+        <note>Class = "NSToolbarItem"; label = "Empty Trash"; ObjectID = "4c1-NR-ofo";</note>
+        <target xml:lang="cs" state="translated">Vysypat koš</target>
+      </trans-unit>
+      <trans-unit id="4c1-NR-ofo.paletteLabel">
+        <source>Empty Trash</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Empty Trash"; ObjectID = "4c1-NR-ofo";</note>
+        <target xml:lang="cs" state="translated">Vysypat koš</target>
+      </trans-unit>
+      <trans-unit id="4c1-NR-ofo.toolTip">
+        <source>Delete all articles in the trash</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Delete all articles in the trash"; ObjectID = "4c1-NR-ofo";</note>
+        <target xml:lang="cs" state="translated">Smaže všechny příspěvky v koši</target>
+      </trans-unit>
+      <trans-unit id="7iy-IN-8oG.label">
+        <source>Get Info</source>
+        <note>Class = "NSToolbarItem"; label = "Get Info"; ObjectID = "7iy-IN-8oG";</note>
+        <target xml:lang="cs" state="translated">Informace</target>
+      </trans-unit>
+      <trans-unit id="7iy-IN-8oG.paletteLabel">
+        <source>Get Info</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Get Info"; ObjectID = "7iy-IN-8oG";</note>
+        <target xml:lang="cs" state="translated">Informace</target>
+      </trans-unit>
+      <trans-unit id="7iy-IN-8oG.toolTip">
+        <source>See information about the selected subscription</source>
+        <note>Class = "NSToolbarItem"; toolTip = "See information about the selected subscription"; ObjectID = "7iy-IN-8oG";</note>
+        <target xml:lang="cs" state="translated">Zobrazí informace o vybraném odebírání</target>
+      </trans-unit>
+      <trans-unit id="8LJ-RZ-pfu.title">
+        <source>Flagged</source>
+        <note>Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8LJ-RZ-pfu";</note>
+        <target xml:lang="cs" state="translated">Praporek</target>
+      </trans-unit>
+      <trans-unit id="10h-xf-C6T.label">
+        <source>Send Link</source>
+        <note>Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T";</note>
+        <target xml:lang="cs" state="translated">Odeslat odkaz</target>
+      </trans-unit>
+      <trans-unit id="10h-xf-C6T.paletteLabel">
+        <source>Send Link</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T";</note>
+        <target xml:lang="cs" state="translated">Odeslat odkaz</target>
+      </trans-unit>
+      <trans-unit id="10h-xf-C6T.toolTip">
+        <source>Email a link to the current article or website</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T";</note>
+        <target xml:lang="cs" state="translated">Odešle e-mail s odkazem na stávající příspěvek nebo webové sídlo</target>
+      </trans-unit>
+      <trans-unit id="1304.ibShadowedToolTip">
+        <source>Filter displayed articles by matching text</source>
+        <note>Class = "NSSearchField"; ibShadowedToolTip = "Filter displayed articles by matching text"; ObjectID = "1304";</note>
+        <target xml:lang="cs" state="translated">Zobrazí pouze příspěvky odpovídající hledanému textu</target>
+      </trans-unit>
+      <trans-unit id="1306.ibShadowedToolTip">
+        <source>Filter articles</source>
+        <note>Class = "NSPopUpButton"; ibShadowedToolTip = "Filter articles"; ObjectID = "1306";</note>
+        <target xml:lang="cs" state="translated">Filtruje příspěvky</target>
+      </trans-unit>
+      <trans-unit id="1313.ibExternalAccessibilityDescription">
+        <source>Close the filter bar</source>
+        <note>Class = "NSButton"; ibExternalAccessibilityDescription = "Close the filter bar"; ObjectID = "1313";</note>
+        <target xml:lang="cs" state="translated">Zavře řádek filtru</target>
+      </trans-unit>
+      <trans-unit id="1313.ibShadowedToolTip">
+        <source>Close the filter bar</source>
+        <note>Class = "NSButton"; ibShadowedToolTip = "Close the filter bar"; ObjectID = "1313";</note>
+        <target xml:lang="cs" state="translated">Zavře řádek filtru</target>
+      </trans-unit>
+      <trans-unit id="1377.title">
+        <source>Filter by:</source>
+        <note>Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377";</note>
+        <target xml:lang="cs" state="translated">Filtrovat:</target>
+      </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.label">
+        <source>Add</source>
+        <note>Class = "NSToolbarItem"; label = "Add"; ObjectID = "CPA-Ha-aj1";</note>
+        <target xml:lang="cs" state="translated">Přidat</target>
+      </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.paletteLabel">
+        <source>Add</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1";</note>
+        <target xml:lang="cs" state="translated">Přidat</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.label">
+        <source>All Read</source>
+        <note>Class = "NSToolbarItem"; label = "All Read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="cs" state="translated">Všechny přečtené</target>
+      </trans-unit>
+      <trans-unit id="Hs0-hu-A2g.title">
+        <source>Refresh Selected Subscriptions</source>
+        <note>Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g";</note>
+        <target xml:lang="cs" state="translated">Obnovit vybraná odebírání</target>
+      </trans-unit>
+      <trans-unit id="JT2-Q7-gRj.title">
+        <source>All Articles</source>
+        <note>Class = "NSMenuItem"; title = "All Articles"; ObjectID = "JT2-Q7-gRj";</note>
+        <target xml:lang="cs" state="translated">Všechny příspěvky</target>
+      </trans-unit>
+      <trans-unit id="MaO-r1-tcm.title">
+        <source>More Styles…</source>
+        <note>Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm";</note>
+        <target xml:lang="cs" state="translated">Více stylů…</target>
+      </trans-unit>
+      <trans-unit id="Nmd-zx-Dys.label">
+        <source>Refresh</source>
+        <note>Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys";</note>
+        <target xml:lang="cs" state="translated">Obnovit</target>
+      </trans-unit>
+      <trans-unit id="Nmd-zx-Dys.paletteLabel">
+        <source>Refresh</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Refresh"; ObjectID = "Nmd-zx-Dys";</note>
+        <target xml:lang="cs" state="translated">Obnovit</target>
+      </trans-unit>
+      <trans-unit id="Nmd-zx-Dys.toolTip">
+        <source>Refresh all your subscriptions</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Refresh all your subscriptions"; ObjectID = "Nmd-zx-Dys";</note>
+        <target xml:lang="cs" state="translated">Obnoví všechna odebírání</target>
+      </trans-unit>
+      <trans-unit id="OIA-vb-5jR.label">
+        <source>Search Articles</source>
+        <note>Class = "NSToolbarItem"; label = "Search Articles"; ObjectID = "OIA-vb-5jR";</note>
+        <target xml:lang="cs" state="translated">Hledat v příspěvcích</target>
+      </trans-unit>
+      <trans-unit id="OIA-vb-5jR.paletteLabel">
+        <source>Search Articles</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Search Articles"; ObjectID = "OIA-vb-5jR";</note>
+        <target xml:lang="cs" state="translated">Hledat v příspěvcích</target>
+      </trans-unit>
+      <trans-unit id="OIA-vb-5jR.toolTip">
+        <source>Search Articles</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Search Articles"; ObjectID = "OIA-vb-5jR";</note>
+        <target xml:lang="cs" state="translated">Hledat v příspěvcích</target>
+      </trans-unit>
+      <trans-unit id="Pqr-dM-SQQ.title">
+        <source>New Smart Folder…</source>
+        <note>Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "Pqr-dM-SQQ";</note>
+        <target xml:lang="cs" state="translated">Nová dynamická složka…</target>
+      </trans-unit>
+      <trans-unit id="RaH-Yu-Ija.title">
+        <source>New Folder…</source>
+        <note>Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija";</note>
+        <target xml:lang="cs" state="translated">Nová složka…</target>
+      </trans-unit>
+      <trans-unit id="SoG-b2-O1S.label">
+        <source>Skip Folder</source>
+        <note>Class = "NSToolbarItem"; label = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
+        <target xml:lang="cs" state="translated">Vynechat složku</target>
+      </trans-unit>
+      <trans-unit id="SoG-b2-O1S.paletteLabel">
+        <source>Skip Folder</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
+        <target xml:lang="cs" state="translated">Vynechat složku</target>
+      </trans-unit>
+      <trans-unit id="SoG-b2-O1S.toolTip">
+        <source>Skip Folder</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
+        <target xml:lang="cs" state="translated">Vynechat složku</target>
+      </trans-unit>
+      <trans-unit id="TSQ-UW-4gU.label">
+        <source>Action</source>
+        <note>Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU";</note>
+        <target xml:lang="cs" state="translated">Action</target>
+      </trans-unit>
+      <trans-unit id="TSQ-UW-4gU.paletteLabel">
+        <source>Action</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Action"; ObjectID = "TSQ-UW-4gU";</note>
+        <target xml:lang="cs" state="translated">Action</target>
+      </trans-unit>
+      <trans-unit id="TSQ-UW-4gU.toolTip">
+        <source>Additional actions for the selected folder</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Additional actions for the selected folder"; ObjectID = "TSQ-UW-4gU";</note>
+        <target xml:lang="cs" state="translated">Dodatečné akce pro vybranou složku</target>
+      </trans-unit>
+      <trans-unit id="Xw6-KX-rhd.title">
+        <source>Last 48 Hours</source>
+        <note>Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "Xw6-KX-rhd";</note>
+        <target xml:lang="cs" state="translated">Posledních 48 hodin</target>
+      </trans-unit>
+      <trans-unit id="Y0d-K7-46f.title">
+        <source>Get Info</source>
+        <note>Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f";</note>
+        <target xml:lang="cs" state="translated">Informace</target>
+      </trans-unit>
+      <trans-unit id="ZVp-Nv-0jh.title">
+        <source>Open Subscription Home Page in External Browser</source>
+        <note>Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "ZVp-Nv-0jh";</note>
+        <target xml:lang="cs" state="translated">Otevřít domovskou stránku odebírání v externím prohlížeči</target>
+      </trans-unit>
+      <trans-unit id="Zu1-zW-uo2.title">
+        <source>Open Subscription Home Page</source>
+        <note>Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2";</note>
+        <target xml:lang="cs" state="translated">Otevřít domovskou stránku odebírání</target>
+      </trans-unit>
+      <trans-unit id="azL-oz-mJL.label">
+        <source>Style</source>
+        <note>Class = "NSToolbarItem"; label = "Style"; ObjectID = "azL-oz-mJL";</note>
+        <target xml:lang="cs" state="translated">Styl</target>
+      </trans-unit>
+      <trans-unit id="azL-oz-mJL.paletteLabel">
+        <source>Style</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Style"; ObjectID = "azL-oz-mJL";</note>
+        <target xml:lang="cs" state="translated">Styl</target>
+      </trans-unit>
+      <trans-unit id="azL-oz-mJL.toolTip">
+        <source>Display the list of available styles</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Display the list of available styles"; ObjectID = "azL-oz-mJL";</note>
+        <target xml:lang="cs" state="translated">Zobrazí seznam instalovaných stylů</target>
+      </trans-unit>
+      <trans-unit id="fpY-CJ-hKU.label">
+        <source>Next Unread</source>
+        <note>Class = "NSToolbarItem"; label = "Next Unread"; ObjectID = "fpY-CJ-hKU";</note>
+        <target xml:lang="cs" state="translated">Další nečtený</target>
+      </trans-unit>
+      <trans-unit id="fpY-CJ-hKU.paletteLabel">
+        <source>Next Unread</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Next Unread"; ObjectID = "fpY-CJ-hKU";</note>
+        <target xml:lang="cs" state="translated">Další nečtený</target>
+      </trans-unit>
+      <trans-unit id="fpY-CJ-hKU.toolTip">
+        <source>Next Unread</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Next Unread"; ObjectID = "fpY-CJ-hKU";</note>
+        <target xml:lang="cs" state="translated">Další nečtený</target>
+      </trans-unit>
+      <trans-unit id="gOG-UJ-Pin.label">
+        <source>Back</source>
+        <note>Class = "NSToolbarItem"; label = "Back"; ObjectID = "gOG-UJ-Pin";</note>
+        <target xml:lang="cs" state="translated">Zpět</target>
+      </trans-unit>
+      <trans-unit id="gOG-UJ-Pin.paletteLabel">
+        <source>Back</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Back"; ObjectID = "gOG-UJ-Pin";</note>
+        <target xml:lang="cs" state="translated">Zpět</target>
+      </trans-unit>
+      <trans-unit id="gOG-UJ-Pin.toolTip">
+        <source>Back</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Back"; ObjectID = "gOG-UJ-Pin";</note>
+        <target xml:lang="cs" state="translated">Zpět</target>
+      </trans-unit>
+      <trans-unit id="l14-tu-w7l.title">
+        <source>Rename…</source>
+        <note>Class = "NSMenuItem"; title = "Rename…"; ObjectID = "l14-tu-w7l";</note>
+        <target xml:lang="cs" state="translated">Přejmenovat…</target>
+      </trans-unit>
+      <trans-unit id="psA-wp-PcZ.title">
+        <source>New Subscription…</source>
+        <note>Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "psA-wp-PcZ";</note>
+        <target xml:lang="cs" state="translated">Nové odebírání…</target>
+      </trans-unit>
+      <trans-unit id="sDP-Ni-g3a.title">
+        <source>Unread Articles</source>
+        <note>Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "sDP-Ni-g3a";</note>
+        <target xml:lang="cs" state="translated">Nečtené příspěvky</target>
+      </trans-unit>
+      <trans-unit id="vOQ-xo-w8E.title">
+        <source>Edit…</source>
+        <note>Class = "NSMenuItem"; title = "Edit…"; ObjectID = "vOQ-xo-w8E";</note>
+        <target xml:lang="cs" state="translated">Upravit…</target>
+      </trans-unit>
+      <trans-unit id="xNW-zC-IMZ.title">
+        <source>Mark All Articles as Read</source>
+        <note>Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "xNW-zC-IMZ";</note>
+        <target xml:lang="cs" state="translated">Označit všechny příspěvky jako čtené</target>
+      </trans-unit>
+      <trans-unit id="xVH-W7-Br4.title">
+        <source>Last Refresh</source>
+        <note>Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "xVH-W7-Br4";</note>
+        <target xml:lang="cs" state="translated">Naposledy obnovené</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/RSSFeed.xib" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="102.title">
+        <source>Cancel</source>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "102";</note>
+        <target xml:lang="cs" state="translated">Zrušit</target>
+      </trans-unit>
+      <trans-unit id="103.title">
+        <source>Subscribe</source>
+        <note>Class = "NSButtonCell"; title = "Subscribe"; ObjectID = "103";</note>
+        <target xml:lang="cs" state="translated">Odebírat</target>
+      </trans-unit>
+      <trans-unit id="104.title">
+        <source>Source:</source>
+        <note>Class = "NSTextFieldCell"; title = "Source:"; ObjectID = "104";</note>
+        <target xml:lang="cs" state="translated">Zdroj:</target>
+      </trans-unit>
+      <trans-unit id="106.title">
+        <source>Create a new subscription</source>
+        <note>Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106";</note>
+        <target xml:lang="cs" state="translated">Vytvořit nové odebírání</target>
+      </trans-unit>
+      <trans-unit id="107.title">
+        <source>Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.</source>
+        <note>Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107";</note>
+        <target xml:lang="cs" state="translated">Níže zadejte adresu novinek, které chcete odebírat, nebo vyberte ze seznamu zdroj novinek a zadejte jméno uživatele dané služby.</target>
+      </trans-unit>
+      <trans-unit id="111.title">
+        <source>Save</source>
+        <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "111";</note>
+        <target xml:lang="cs" state="translated">Uložit</target>
+      </trans-unit>
+      <trans-unit id="112.title">
+        <source>Cancel</source>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "112";</note>
+        <target xml:lang="cs" state="translated">Zrušit</target>
+      </trans-unit>
+      <trans-unit id="114.title">
+        <source>Edit subscription</source>
+        <note>Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114";</note>
+        <target xml:lang="cs" state="translated">Upravit odebírání</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/SearchFolder.xib" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="82.title">
+        <source>all</source>
+        <note>Class = "NSMenuItem"; title = "all"; ObjectID = "82";</note>
+        <target xml:lang="cs" state="translated">všem</target>
+      </trans-unit>
+      <trans-unit id="94.title">
+        <source>Smart folder name:</source>
+        <note>Class = "NSTextFieldCell"; title = "Smart folder name:"; ObjectID = "94";</note>
+        <target xml:lang="cs" state="translated">Jméno dynamické složky:</target>
+      </trans-unit>
+      <trans-unit id="96.title">
+        <source>Save</source>
+        <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "96";</note>
+        <target xml:lang="cs" state="translated">Uložit</target>
+      </trans-unit>
+      <trans-unit id="97.title">
+        <source>Cancel</source>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97";</note>
+        <target xml:lang="cs" state="translated">Zrušit</target>
+      </trans-unit>
+      <trans-unit id="98.title">
+        <source>Show all articles that match</source>
+        <note>Class = "NSTextFieldCell"; title = "Show all articles that match"; ObjectID = "98";</note>
+        <target xml:lang="cs" state="translated">Zobrazit příspěvky odpovídající</target>
+      </trans-unit>
+      <trans-unit id="100.title">
+        <source>of the following conditions:</source>
+        <note>Class = "NSTextFieldCell"; title = "of the following conditions:"; ObjectID = "100";</note>
+        <target xml:lang="cs" state="translated">následujícím shodám:</target>
+      </trans-unit>
+      <trans-unit id="j0v-xF-tpl.title">
+        <source>any</source>
+        <note>Class = "NSMenuItem"; title = "any"; ObjectID = "j0v-xF-tpl";</note>
+        <target xml:lang="cs" state="translated">libovolným</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Interfaces/Base.lproj/SyncingPreferencesView.xib" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="Ar5-Qc-YTe.ibExternalAccessibilityDescription">
+        <source>Visit the website</source>
+        <note>Class = "NSButton"; ibExternalAccessibilityDescription = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
+        <target xml:lang="cs" state="translated">Navštívit webovou stránku</target>
+      </trans-unit>
+      <trans-unit id="Ar5-Qc-YTe.ibShadowedToolTip">
+        <source>Visit the website</source>
+        <note>Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
+        <target xml:lang="cs" state="translated">Navštívit webovou stránku</target>
+      </trans-unit>
+      <trans-unit id="Lkv-md-rEW.title">
+        <source>Sync with an Open Reader server</source>
+        <note>Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Lkv-md-rEW";</note>
+        <target xml:lang="cs" state="translated">Synchronizovat s Open Reader serverem</target>
+      </trans-unit>
+      <trans-unit id="NKI-36-zCY.title">
+        <source>Password:</source>
+        <note>Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "NKI-36-zCY";</note>
+        <target xml:lang="cs" state="translated">Heslo:</target>
+      </trans-unit>
+      <trans-unit id="O2q-8o-CSb.title">
+        <source>Login:</source>
+        <note>Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "O2q-8o-CSb";</note>
+        <target xml:lang="cs" state="translated">Jméno:</target>
+      </trans-unit>
+      <trans-unit id="kM0-7a-obO.ibShadowedToolTip">
+        <source>Select a server supporting the Open Reader API</source>
+        <note>Class = "NSTextField"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "kM0-7a-obO";</note>
+        <target xml:lang="cs" state="translated">Vyberte server podporující Open Reader API</target>
+      </trans-unit>
+      <trans-unit id="vZE-Pl-S9H.ibShadowedToolTip">
+        <source>Address of a server supporting the Open Reader API</source>
+        <note>Class = "NSTextField"; ibShadowedToolTip = "Address of a server supporting the Open Reader API"; ObjectID = "vZE-Pl-S9H";</note>
+        <target xml:lang="cs" state="translated">Adresa serveru podporujícího Open Reader API</target>
+      </trans-unit>
+      <trans-unit id="zAy-oc-zmb.ibExternalAccessibilityDescription">
+        <source>Select a server supporting the Open Reader API</source>
+        <note>Class = "NSPopUpButton"; ibExternalAccessibilityDescription = "Select a server supporting the Open Reader API"; ObjectID = "zAy-oc-zmb";</note>
+        <target xml:lang="cs" state="translated">Vyberte server podporující Open Reader API</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Resources/Localizable.strings" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="%@ Info">
+        <source>%@ Info</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">%@ - informace</target>
+      </trans-unit>
+      <trans-unit id="%d new articles retrieved">
+        <source>%d new articles retrieved</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Nově přijato příspěvků: %d</target>
+      </trans-unit>
+      <trans-unit id="%d subscriptions successfully exported">
+        <source>%d subscriptions successfully exported</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Bylo úspěšně exportováno celkem odebírání: %d</target>
+      </trans-unit>
+      <trans-unit id="%d subscriptions successfully imported">
+        <source>%d subscriptions successfully imported</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Bylo úspěšně importováno celkem odebírání: %d</target>
+      </trans-unit>
+      <trans-unit id="%d unread articles">
+        <source>%d unread articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Nečtených příspěvků: %d</target>
+      </trans-unit>
+      <trans-unit id="%u articles">
+        <source>%u articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">%u příspěvků</target>
+      </trans-unit>
+      <trans-unit id="%u unread">
+        <source>%u unread</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">%u nečtených</target>
+      </trans-unit>
+      <trans-unit id="(No title)">
+        <source>(No title)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">(není titul)</target>
+      </trans-unit>
+      <trans-unit id="(Untitled Feed)">
+        <source>(Untitled Feed)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">(zdroj beze jména)</target>
+      </trans-unit>
+      <trans-unit id="A folder with that name already exists">
+        <source>A folder with that name already exists</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Složka s tímto jménem již existuje.</target>
+      </trans-unit>
+      <trans-unit id="Advanced">
+        <source>Advanced</source>
+        <note>Toolbar item name for the Advanced preference pane</note>
+        <target xml:lang="cs" state="translated">Ostatní</target>
+      </trans-unit>
+      <trans-unit id="After 2 Days">
+        <source>After 2 Days</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Po dvou dnech</target>
+      </trans-unit>
+      <trans-unit id="After 2 Weeks">
+        <source>After 2 Weeks</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Po dvou týdnech</target>
+      </trans-unit>
+      <trans-unit id="After a Day">
+        <source>After a Day</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Po dni</target>
+      </trans-unit>
+      <trans-unit id="After a Month">
+        <source>After a Month</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Po měsíci</target>
+      </trans-unit>
+      <trans-unit id="After a Week">
+        <source>After a Week</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Po týdnu</target>
+      </trans-unit>
+      <trans-unit id="Already subscribed body">
+        <source>Already subscribed body</source>
+        <note>Already subscribed body</note>
+        <target xml:lang="cs" state="translated">Tento zdroj již odebíráte.</target>
+      </trans-unit>
+      <trans-unit id="Already subscribed title">
+        <source>Already subscribed title</source>
+        <note>Already subscribed title</note>
+        <target xml:lang="cs" state="translated">Chyba</target>
+      </trans-unit>
+      <trans-unit id="An error occurred when this feed was last refreshed">
+        <source>An error occurred when this feed was last refreshed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Při poslední obnově tohoto zdroje se vyskytla chyba.</target>
+      </trans-unit>
+      <trans-unit id="Appearance">
+        <source>Appearance</source>
+        <note>Toolbar item name for the Appearance preference pane</note>
+        <target xml:lang="cs" state="translated">Vzhled</target>
+      </trans-unit>
+      <trans-unit id="Articles">
+        <source>Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Příspěvky</target>
+      </trans-unit>
+      <trans-unit id="Ascending">
+        <source>Ascending</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Vzestupně</target>
+      </trans-unit>
+      <trans-unit id="Author">
+        <source>Author</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="cs" state="translated">Autor</target>
+      </trans-unit>
+      <trans-unit id="Cancel">
+        <source>Cancel</source>
+        <note>Title of a button on an alert
+   Title of a popup menu item</note>
+        <target xml:lang="cs" state="translated">Zrušit</target>
+      </trans-unit>
+      <trans-unit id="Cannot create database folder text">
+        <source>Cannot create database folder text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Program Vienna se pokusil vytvořit složku „%@“, ale vyskytla se chyba. Ověřte, zda máte oprávnění k vytvoření složky v tomto umístění.</target>
+      </trans-unit>
+      <trans-unit id="Cannot create database folder title">
+        <source>Cannot create database folder title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Program Vienna nemůže vytvořit databázovou složku</target>
+      </trans-unit>
+      <trans-unit id="Cannot create folder body">
+        <source>Cannot create folder body</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">The "%@" folder cannot be created.</target>
+      </trans-unit>
+      <trans-unit id="Cannot create folder title">
+        <source>Cannot create folder title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Cannot create folder</target>
+      </trans-unit>
+      <trans-unit id="Cannot open database text">
+        <source>Cannot open database text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Soubor databáze (%@) nelze z nějakých důvodů otevřít. Může být poškozený nebo nepřístupný. Smažte nebo přejmenujte tento soubor databáze, ukončete a znovu spusťte program Vienna.</target>
+      </trans-unit>
+      <trans-unit id="Cannot open database title">
+        <source>Cannot open database title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Program Vienna nemůže otevřít databázi</target>
+      </trans-unit>
+      <trans-unit id="Cannot open export file message">
+        <source>Cannot open export file message</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Nelze vytvořit soubor pro export</target>
+      </trans-unit>
+      <trans-unit id="Cannot open export file message text">
+        <source>Cannot open export file message text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Nelze vytvořit určený soubor pro export. Ověřte zda není uzamčený nebo zda jej nepoužívá jiná aplikace.</target>
+      </trans-unit>
+      <trans-unit id="Cannot rename folder">
+        <source>Cannot rename folder</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Nelze přejmenovat složku</target>
+      </trans-unit>
+      <trans-unit id="Clear">
+        <source>Clear</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Odstranit poslední hledání</target>
+      </trans-unit>
+      <trans-unit id="Click the Open button to open this file.">
+        <source>Click the Open button to open this file.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Soubor otevřete klepnutím na tlačítko Otevřít.</target>
+      </trans-unit>
+      <trans-unit id="Click the Play button to play this enclosure in iTunes.">
+        <source>Click the Play button to play this enclosure in iTunes.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Přílohu přehrajete v iTunes klepnutím na tlačítko Pustit.</target>
+      </trans-unit>
+      <trans-unit id="Connecting to %@">
+        <source>Connecting to %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Připojuje se k %@</target>
+      </trans-unit>
+      <trans-unit id="Copy Link to Clipboard">
+        <source>Copy Link to Clipboard</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Zkopírovat odkaz do schránky</target>
+      </trans-unit>
+      <trans-unit id="Copy Page Link to Clipboard">
+        <source>Copy Page Link to Clipboard</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Zkopírovat odkaz na stránku do schránky</target>
+      </trans-unit>
+      <trans-unit id="Credentials Prompt">
+        <source>Credentials Prompt</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Odebírání položky „%@“ vyžaduje uživatelské jméno a heslo.</target>
+      </trans-unit>
+      <trans-unit id="Database Upgrade">
+        <source>Database Upgrade</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Aktualizovat databázi</target>
+      </trans-unit>
+      <trans-unit id="Date">
+        <source>Date</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="cs" state="translated">Datum</target>
+      </trans-unit>
+      <trans-unit id="Delete">
+        <source>Delete</source>
+        <note>Title of a button on an alert
+   Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Smazat</target>
+      </trans-unit>
+      <trans-unit id="Delete Article">
+        <source>Delete Article</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Smazat příspěvek</target>
+      </trans-unit>
+      <trans-unit id="Delete Open Reader RSS feed text">
+        <source>Delete Open Reader RSS feed text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.</target>
+      </trans-unit>
+      <trans-unit id="Delete RSS feed">
+        <source>Delete RSS feed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Smazat odebírání</target>
+      </trans-unit>
+      <trans-unit id="Delete RSS feed text">
+        <source>Delete RSS feed text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Určitě chcete ukončit odebírání položky „%@“? Tato operace smaže všechny načtené příspěvky.</target>
+      </trans-unit>
+      <trans-unit id="Delete folder status">
+        <source>Delete folder status</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Maže se složka „%@“…</target>
+      </trans-unit>
+      <trans-unit id="Delete group folder">
+        <source>Delete group folder</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Smazat skupinovou složku</target>
+      </trans-unit>
+      <trans-unit id="Delete group folder text">
+        <source>Delete group folder text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Určitě chcete smazat skupinovou složku „%@“ a všechny vnořené složky? Tuto operaci nelze odvolat.</target>
+      </trans-unit>
+      <trans-unit id="Delete multiple folders">
+        <source>Delete multiple folders</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Smazat více složek</target>
+      </trans-unit>
+      <trans-unit id="Delete multiple folders text">
+        <source>Delete multiple folders text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Určitě chcete smazat všechny vybrané složky (celkem: %d)? Tuto operaci nelze odvolat.</target>
+      </trans-unit>
+      <trans-unit id="Delete selected message">
+        <source>Delete selected message</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Určitě chcete trvale odstranit vybrané příspěvky?</target>
+      </trans-unit>
+      <trans-unit id="Delete selected message text">
+        <source>Delete selected message text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Tuto operaci nelze odvolat.</target>
+      </trans-unit>
+      <trans-unit id="Delete smart folder">
+        <source>Delete smart folder</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Smazat dynamickou složku</target>
+      </trans-unit>
+      <trans-unit id="Delete smart folder text">
+        <source>Delete smart folder text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Určitě chcete smazat dynamickou složku „%@“? Tato operace neodstraní stávající příspěvky zobrazované v této složce.</target>
+      </trans-unit>
+      <trans-unit id="Deleted">
+        <source>Deleted</source>
+        <note>Data field name visible in smart folder definition</note>
+        <target xml:lang="cs" state="translated">Smazáno</target>
+      </trans-unit>
+      <trans-unit id="Do you really want to import the subscriptions from the specified OPML file?">
+        <source>Do you really want to import the subscriptions from the specified OPML file?</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Určitě chcete importovat odebírání z vybraného souboru OPML?</target>
+      </trans-unit>
+      <trans-unit id="Download">
+        <source>Download</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Zkopírovat</target>
+      </trans-unit>
+      <trans-unit id="Download Enclosure">
+        <source>Download Enclosure</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Zkopírovat přílohu</target>
+      </trans-unit>
+      <trans-unit id="Download Enclosures">
+        <source>Download Enclosures</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Zkopírovat přílohy</target>
+      </trans-unit>
+      <trans-unit id="Download completed">
+        <source>Download completed</source>
+        <note>Notification title</note>
+        <target xml:lang="cs" state="translated">Kopírování dokončeno</target>
+      </trans-unit>
+      <trans-unit id="Download failed">
+        <source>Download failed</source>
+        <note>Notification title</note>
+        <target xml:lang="cs" state="translated">Kopírování selhalo</target>
+      </trans-unit>
+      <trans-unit id="Downloads Running">
+        <source>Downloads Running</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Probíhá jedno nebo více kopírování</target>
+      </trans-unit>
+      <trans-unit id="Downloads Running text">
+        <source>Downloads Running text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Ukončíte-li program Vienna nyní, všechna kopírování budou zastavena.</target>
+      </trans-unit>
+      <trans-unit id="Edit…">
+        <source>Edit…</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Upravit…</target>
+      </trans-unit>
+      <trans-unit id="Empty">
+        <source>Empty</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="cs" state="translated">Smazat</target>
+      </trans-unit>
+      <trans-unit id="Empty Trash message">
+        <source>Empty Trash message</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Určitě chcete trvale odstranit příspěvky, které jsou v koši?</target>
+      </trans-unit>
+      <trans-unit id="Empty Trash message text">
+        <source>Empty Trash message text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Tuto akci nelze odvolat.</target>
+      </trans-unit>
+      <trans-unit id="Enclosure">
+        <source>Enclosure</source>
+        <note>Data field name (URL) visible in menu/article list</note>
+        <target xml:lang="cs" state="translated">URL přílohy</target>
+      </trans-unit>
+      <trans-unit id="Enter the URL here">
+        <source>Enter the URL here</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Sem zadejte URL</target>
+      </trans-unit>
+      <trans-unit id="Error">
+        <source>Error</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Chyba</target>
+      </trans-unit>
+      <trans-unit id="Error importing subscriptions body">
+        <source>Error importing subscriptions body</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Nelze importovat určený soubor. Tento soubor nemá platný formát OPML XML.</target>
+      </trans-unit>
+      <trans-unit id="Error importing subscriptions title">
+        <source>Error importing subscriptions title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Chyba importu</target>
+      </trans-unit>
+      <trans-unit id="Error parsing XML data in feed">
+        <source>Error parsing XML data in feed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Chyba při zpracování dat XML ze zdroje</target>
+      </trans-unit>
+      <trans-unit id="External Browser">
+        <source>External Browser</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Externí prohlížeč</target>
+      </trans-unit>
+      <trans-unit id="Feed URL updated to %@">
+        <source>Feed URL updated to %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">URL zdroje aktualizováno na %@</target>
+      </trans-unit>
+      <trans-unit id="File %@ downloaded">
+        <source>File %@ downloaded</source>
+        <note>Notification body</note>
+        <target xml:lang="cs" state="translated">Soubor %@ zkopírován</target>
+      </trans-unit>
+      <trans-unit id="File %@ failed to download">
+        <source>File %@ failed to download</source>
+        <note>Notification body</note>
+        <target xml:lang="cs" state="translated">Kopírování souboru %@ selhalo</target>
+      </trans-unit>
+      <trans-unit id="Flag">
+        <source>Flag</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Praporek</target>
+      </trans-unit>
+      <trans-unit id="Flagged">
+        <source>Flagged</source>
+        <note>Data field name visible in menu/smart folder definition</note>
+        <target xml:lang="cs" state="translated">Praporek</target>
+      </trans-unit>
+      <trans-unit id="Folder">
+        <source>Folder</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="cs" state="translated">Složka</target>
+      </trans-unit>
+      <trans-unit id="Folder image retrieved from %@">
+        <source>Folder image retrieved from %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Obrázek složky přijat z %@</target>
+      </trans-unit>
+      <trans-unit id="Folders">
+        <source>Folders</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Složky</target>
+      </trans-unit>
+      <trans-unit id="General">
+        <source>General</source>
+        <note>Toolbar item name for the General preference pane</note>
+        <target xml:lang="cs" state="translated">Obecné</target>
+      </trans-unit>
+      <trans-unit id="Get Info">
+        <source>Get Info</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Informace</target>
+      </trans-unit>
+      <trans-unit id="Go forward to the next page">
+        <source>Go forward to the next page</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Otevřít následující stránku</target>
+      </trans-unit>
+      <trans-unit id="HTTP code %d reported from server">
+        <source>HTTP code %d reported from server</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Ze serveru byl obdržen kód HTTP: %d</target>
+      </trans-unit>
+      <trans-unit id="HasEnclosure">
+        <source>HasEnclosure</source>
+        <note>Data field name (Y/N) visible in menu/smart folder definition</note>
+        <target xml:lang="cs" state="translated">Příloha</target>
+      </trans-unit>
+      <trans-unit id="Headlines">
+        <source>Headlines</source>
+        <note>Pseudo field name visible in article list</note>
+        <target xml:lang="cs" state="translated">Záhlaví</target>
+      </trans-unit>
+      <trans-unit id="Hide Filter Bar">
+        <source>Hide Filter Bar</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Skrýt řádek filtru</target>
+      </trans-unit>
+      <trans-unit id="Hide Status Bar">
+        <source>Hide Status Bar</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Skrýt stavový řádek</target>
+      </trans-unit>
+      <trans-unit id="Import">
+        <source>Import</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="cs" state="translated">Importovat</target>
+      </trans-unit>
+      <trans-unit id="Import subscriptions from OPML file?">
+        <source>Import subscriptions from OPML file?</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Importovat odebírání ze souboru OPML?</target>
+      </trans-unit>
+      <trans-unit id="Invalid style body">
+        <source>Invalid style body</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Bude použit výchozí styl (Default).</target>
+      </trans-unit>
+      <trans-unit id="Invalid style title">
+        <source>Invalid style title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Styl %@ pravděpodobně chybí nebo je poškozený.</target>
+      </trans-unit>
+      <trans-unit id="Last Week">
+        <source>Last Week</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Poslední týden</target>
+      </trans-unit>
+      <trans-unit id="Link">
+        <source>Link</source>
+        <note>Data field name visible in menu/article list</note>
+        <target xml:lang="cs" state="translated">Odkaz</target>
+      </trans-unit>
+      <trans-unit id="Loading">
+        <source>Loading</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Načítám</target>
+      </trans-unit>
+      <trans-unit id="Loading…">
+        <source>Loading…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Načítá se…</target>
+      </trans-unit>
+      <trans-unit id="Locate Text">
+        <source>Locate Text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Nelze vytvořit novou databázi programu Vienna v položce „%@“, protože složka je pravděpodobně umístěna v síti. Tato verze programu Vienna nemůže spravovat vzdálené databáze. Vyberte prosím jinou složku, která je umístěna v tomto počítači.</target>
+      </trans-unit>
+      <trans-unit id="Locate Title">
+        <source>Locate Title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Nelze vytvořit databázi Vienna</target>
+      </trans-unit>
+      <trans-unit id="Mark All Articles as Read">
+        <source>Mark All Articles as Read</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Označit všechny příspěvky jako čtené</target>
+      </trans-unit>
+      <trans-unit id="Mark All Read">
+        <source>Mark All Read</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Označit vše jako čtené</target>
+      </trans-unit>
+      <trans-unit id="Mark All Subscriptions as Read">
+        <source>Mark All Subscriptions as Read</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Označit všechna odebírání jako čtená</target>
+      </trans-unit>
+      <trans-unit id="Mark Flagged">
+        <source>Mark Flagged</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Označit praporkem</target>
+      </trans-unit>
+      <trans-unit id="Mark Read">
+        <source>Mark Read</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Označit jako čtené</target>
+      </trans-unit>
+      <trans-unit id="Mark Unflagged">
+        <source>Mark Unflagged</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Odebrat praporek</target>
+      </trans-unit>
+      <trans-unit id="Mark Unread">
+        <source>Mark Unread</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Označit jako nečtené</target>
+      </trans-unit>
+      <trans-unit id="Marked Articles">
+        <source>Marked Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Označené příspěvky</target>
+      </trans-unit>
+      <trans-unit id="More Scripts…">
+        <source>More Scripts…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Více skriptů…</target>
+      </trans-unit>
+      <trans-unit id="Move Folders">
+        <source>Move Folders</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Přesunout složky</target>
+      </trans-unit>
+      <trans-unit id="Never">
+        <source>Never</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Nikdy</target>
+      </trans-unit>
+      <trans-unit id="New Tab">
+        <source>New Tab</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">nový panel</target>
+      </trans-unit>
+      <trans-unit id="New articles retrieved">
+        <source>New articles retrieved</source>
+        <note>Notification title</note>
+        <target xml:lang="cs" state="translated">Přijaty nové příspěvky</target>
+      </trans-unit>
+      <trans-unit id="New style body">
+        <source>New style body</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Styl „%@“ byl instalován do složky se styly a přidán do nabídky Styly.</target>
+      </trans-unit>
+      <trans-unit id="New style title">
+        <source>New style title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">V programu Vienna byl instalován nový styl</target>
+      </trans-unit>
+      <trans-unit id="New unread articles retrieved">
+        <source>New unread articles retrieved</source>
+        <note>Notification body</note>
+        <target xml:lang="cs" state="translated">Přijato nových nepřečtených příspěvků: %d</target>
+      </trans-unit>
+      <trans-unit id="No">
+        <source>No</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Ne</target>
+      </trans-unit>
+      <trans-unit id="No new articles available">
+        <source>No new articles available</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Žádné nové příspěvky</target>
+      </trans-unit>
+      <trans-unit id="OK">
+        <source>OK</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="cs" state="translated">Budiž</target>
+      </trans-unit>
+      <trans-unit id="Open">
+        <source>Open</source>
+        <note>Title of a popup menu item</note>
+        <target xml:lang="cs" state="translated">Otevřít</target>
+      </trans-unit>
+      <trans-unit id="Open Article Page">
+        <source>Open Article Page</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Otevřít stránku příspěvku</target>
+      </trans-unit>
+      <trans-unit id="Open Article Page in %@">
+        <source>Open Article Page in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Otevřít stránku příspěvku v programu %@</target>
+      </trans-unit>
+      <trans-unit id="Open Article Page in External Browser">
+        <source>Open Article Page in External Browser</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Otevřít stránku příspěvku v externím prohlížeči</target>
+      </trans-unit>
+      <trans-unit id="Open Frame">
+        <source>Open Frame</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Otevřít rámeček</target>
+      </trans-unit>
+      <trans-unit id="Open Image in %@">
+        <source>Open Image in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Otevřít obrázek v programu %@</target>
+      </trans-unit>
+      <trans-unit id="Open Image in New Tab">
+        <source>Open Image in New Tab</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Otevřít obrázek v novém panelu</target>
+      </trans-unit>
+      <trans-unit id="Open Link in %@">
+        <source>Open Link in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Otevřít odkaz v programu %@</target>
+      </trans-unit>
+      <trans-unit id="Open Link in New Tab">
+        <source>Open Link in New Tab</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Otevřít odkaz v novém panelu</target>
+      </trans-unit>
+      <trans-unit id="Open Page in %@">
+        <source>Open Page in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Otevřít stránku v programu %@</target>
+      </trans-unit>
+      <trans-unit id="Open Reader Authentication Failed text">
+        <source>Open Reader Authentication Failed text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.
+Also check your network access.</target>
+      </trans-unit>
+      <trans-unit id="Open Scripts Folder">
+        <source>Open Scripts Folder</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Otevřít složku skriptů</target>
+      </trans-unit>
+      <trans-unit id="Open Subscription Home Page">
+        <source>Open Subscription Home Page</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Otevřít domovskou stránku odebírání</target>
+      </trans-unit>
+      <trans-unit id="Open Subscription Home Page in %@">
+        <source>Open Subscription Home Page in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Otevřít domovskou stránku odebírání v programu %@</target>
+      </trans-unit>
+      <trans-unit id="Open Subscription Home Page in External Browser">
+        <source>Open Subscription Home Page in External Browser</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Otevřít domovskou stránku odebírání v externím prohlížeči</target>
+      </trans-unit>
+      <trans-unit id="Other">
+        <source>Other</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Jiná</target>
+      </trans-unit>
+      <trans-unit id="Play">
+        <source>Play</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Pustit</target>
+      </trans-unit>
+      <trans-unit id="Preferences">
+        <source>Preferences</source>
+        <note>Title of the Preferences window</note>
+        <target xml:lang="cs" state="translated">Předvolby</target>
+      </trans-unit>
+      <trans-unit id="Quit">
+        <source>Quit</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="cs" state="translated">Konec</target>
+      </trans-unit>
+      <trans-unit id="Quit Vienna">
+        <source>Quit Vienna</source>
+        <note>Title of a button on an alert
+   Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Ukončit Viennu</target>
+      </trans-unit>
+      <trans-unit id="RSS Subscription Export Title">
+        <source>RSS Subscription Export Title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Export dokončen</target>
+      </trans-unit>
+      <trans-unit id="RSS Subscription Import Title">
+        <source>RSS Subscription Import Title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Import dokončen</target>
+      </trans-unit>
+      <trans-unit id="Read">
+        <source>Read</source>
+        <note>Data field name visible in menu/smart folder definition</note>
+        <target xml:lang="cs" state="translated">Čtené</target>
+      </trans-unit>
+      <trans-unit id="Recent Searches">
+        <source>Recent Searches</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Poslední hledání</target>
+      </trans-unit>
+      <trans-unit id="Recents">
+        <source>Recents</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Poslední položky</target>
+      </trans-unit>
+      <trans-unit id="Refresh All Subscriptions">
+        <source>Refresh All Subscriptions</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Obnovit všechna odebírání</target>
+      </trans-unit>
+      <trans-unit id="Refresh Selected Subscriptions">
+        <source>Refresh Selected Subscriptions</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Obnovit vybraná odebírání</target>
+      </trans-unit>
+      <trans-unit id="Refresh completed">
+        <source>Refresh completed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Obnovení dokončeno</target>
+      </trans-unit>
+      <trans-unit id="Refresh the current page">
+        <source>Refresh the current page</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Obnovit stávající stránku</target>
+      </trans-unit>
+      <trans-unit id="Refreshing folder images…">
+        <source>Refreshing folder images…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Obnovují se ikony složek…</target>
+      </trans-unit>
+      <trans-unit id="Refreshing subscriptions…">
+        <source>Refreshing subscriptions…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Obnovují se odebírání…</target>
+      </trans-unit>
+      <trans-unit id="Remove From List">
+        <source>Remove From List</source>
+        <note>Title of a popup menu item</note>
+        <target xml:lang="cs" state="translated">Odstranit ze seznamu</target>
+      </trans-unit>
+      <trans-unit id="Rename…">
+        <source>Rename…</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Přejmenovat…</target>
+      </trans-unit>
+      <trans-unit id="Restore Article">
+        <source>Restore Article</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Opětovně zařadit příspěvek</target>
+      </trans-unit>
+      <trans-unit id="Resubscribe">
+        <source>Resubscribe</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Obnovit odebírání kanálu</target>
+      </trans-unit>
+      <trans-unit id="Retrieving articles">
+        <source>Retrieving articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Přijímají se příspěvky</target>
+      </trans-unit>
+      <trans-unit id="Retrieving folder image">
+        <source>Retrieving folder image</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Přijímají se obrázky složek</target>
+      </trans-unit>
+      <trans-unit id="Return to the previous page">
+        <source>Return to the previous page</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Zpět na předchozí stránku</target>
+      </trans-unit>
+      <trans-unit id="Search Results">
+        <source>Search Results</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Výsledky hledání</target>
+      </trans-unit>
+      <trans-unit id="Search all articles">
+        <source>Search all articles</source>
+        <note>Placeholder title of a search field</note>
+        <target xml:lang="cs" state="translated">Hledat ve všech příspěvcích</target>
+      </trans-unit>
+      <trans-unit id="Search in %@">
+        <source>Search in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Hledat v „%@“</target>
+      </trans-unit>
+      <trans-unit id="Select…">
+        <source>Select…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Vybrat…</target>
+      </trans-unit>
+      <trans-unit id="Send Link">
+        <source>Send Link</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Odeslat odkaz</target>
+      </trans-unit>
+      <trans-unit id="Send Links">
+        <source>Send Links</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Odeslat odkazy</target>
+      </trans-unit>
+      <trans-unit id="Show Filter Bar">
+        <source>Show Filter Bar</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Zobrazit řádek filtru</target>
+      </trans-unit>
+      <trans-unit id="Show Status Bar">
+        <source>Show Status Bar</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Zobrazit stavový řádek</target>
+      </trans-unit>
+      <trans-unit id="Show Toolbar">
+        <source>Show Toolbar</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Zobrazit panel nástrojů</target>
+      </trans-unit>
+      <trans-unit id="Show in Finder">
+        <source>Show in Finder</source>
+        <note>Title of a popup menu item</note>
+        <target xml:lang="cs" state="translated">Zobrazit v programu Finder</target>
+      </trans-unit>
+      <trans-unit id="Subject">
+        <source>Subject</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="cs" state="translated">Předmět</target>
+      </trans-unit>
+      <trans-unit id="Subscribe to the feed for this page">
+        <source>Subscribe to the feed for this page</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Odebírat kanál novinek z této stránky</target>
+      </trans-unit>
+      <trans-unit id="Summary">
+        <source>Summary</source>
+        <note>Pseudo field name visible in menu/article list</note>
+        <target xml:lang="cs" state="translated">Souhrn</target>
+      </trans-unit>
+      <trans-unit id="Syncing">
+        <source>Syncing</source>
+        <note>Toolbar item name for the Syncing preference pane</note>
+        <target xml:lang="cs" state="translated">Synchronizace</target>
+      </trans-unit>
+      <trans-unit id="This article contains an enclosed file.">
+        <source>This article contains an enclosed file.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Tento příspěvek obsahuje v příloze soubor.</target>
+      </trans-unit>
+      <trans-unit id="Today">
+        <source>Today</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Dnes</target>
+      </trans-unit>
+      <trans-unit id="Today's Articles">
+        <source>Today's Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Dnešní příspěvky</target>
+      </trans-unit>
+      <trans-unit id="Trash">
+        <source>Trash</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Koš</target>
+      </trans-unit>
+      <trans-unit id="Unread">
+        <source>Unread</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Nečtené</target>
+      </trans-unit>
+      <trans-unit id="Unread Articles">
+        <source>Unread Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Nečtené příspěvky</target>
+      </trans-unit>
+      <trans-unit id="Unrecognised database format text">
+        <source>Unrecognised database format text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Souborový formát databáze (%@) není touto verzí programu Vienna podporovaný. Smažte nebo přejmenujte tento soubor, ukončete a znovu spusťte program Vienna.</target>
+      </trans-unit>
+      <trans-unit id="Unrecognised database format title">
+        <source>Unrecognised database format title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Formát databázového soubor byl změněn</target>
+      </trans-unit>
+      <trans-unit id="Unsubscribe">
+        <source>Unsubscribe</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Ukončit odebírání kanálu</target>
+      </trans-unit>
+      <trans-unit id="Vienna cannot open the file body">
+        <source>Vienna cannot open the file body</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Program Vienna nemůže otevřít soubor „%@“, protože byl po zkopírování přemístěn.</target>
+      </trans-unit>
+      <trans-unit id="Vienna cannot open the file title">
+        <source>Vienna cannot open the file title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Program Vienna nemůže otevřít soubor</target>
+      </trans-unit>
+      <trans-unit id="Vienna cannot show the file body">
+        <source>Vienna cannot show the file body</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Program Vienna nemůže zobrazit soubor „%@“, protože byl po zkopírování přemístěn.</target>
+      </trans-unit>
+      <trans-unit id="Vienna cannot show the file title">
+        <source>Vienna cannot show the file title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Program Vienna nemůže zobrazit soubor</target>
+      </trans-unit>
+      <trans-unit id="Yes">
+        <source>Yes</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Ano</target>
+      </trans-unit>
+      <trans-unit id="Yesterday">
+        <source>Yesterday</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Včera</target>
+      </trans-unit>
+      <trans-unit id="contains">
+        <source>contains</source>
+        <note>test for a string</note>
+        <target xml:lang="cs" state="translated">obsahuje</target>
+      </trans-unit>
+      <trans-unit id="does not contain">
+        <source>does not contain</source>
+        <note>test for a string</note>
+        <target xml:lang="cs" state="translated">neobsahuje</target>
+      </trans-unit>
+      <trans-unit id="is">
+        <source>is</source>
+        <note>test for a value</note>
+        <target xml:lang="cs" state="translated">je</target>
+      </trans-unit>
+      <trans-unit id="is after">
+        <source>is after</source>
+        <note>test for a date</note>
+        <target xml:lang="cs" state="translated">je po</target>
+      </trans-unit>
+      <trans-unit id="is before">
+        <source>is before</source>
+        <note>test for a date</note>
+        <target xml:lang="cs" state="translated">je před</target>
+      </trans-unit>
+      <trans-unit id="is greater than">
+        <source>is greater than</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="cs" state="translated">je větší než</target>
+      </trans-unit>
+      <trans-unit id="is greater than or equal to">
+        <source>is greater than or equal to</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="cs" state="translated">je větší nebo stejný než</target>
+      </trans-unit>
+      <trans-unit id="is less than">
+        <source>is less than</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="cs" state="translated">je menší než</target>
+      </trans-unit>
+      <trans-unit id="is less than or equal to">
+        <source>is less than or equal to</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="cs" state="translated">je menší nebo stejný než</target>
+      </trans-unit>
+      <trans-unit id="is not">
+        <source>is not</source>
+        <note>test for a value</note>
+        <target xml:lang="cs" state="translated">není</target>
+      </trans-unit>
+      <trans-unit id="is on or after">
+        <source>is on or after</source>
+        <note>test for a date</note>
+        <target xml:lang="cs" state="translated">je nebo po</target>
+      </trans-unit>
+      <trans-unit id="is on or before">
+        <source>is on or before</source>
+        <note>test for a date</note>
+        <target xml:lang="cs" state="translated">je nebo před</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Resources/Vienna-Info.plist" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      
+      
+    </body>
+  </file>
+  <file original="Vienna Tests/Info.plist" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      
+    </body>
+  </file>
+  <file original="Vienna Tests/Localizable.strings" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      <trans-unit id="%@, %@">
+        <source>%1$@, %2$@</source>
+        <note>{existing authors},{new author name}</note>
+        <target xml:lang="cs" state="translated">%1$@, %2$@</target>
+      </trans-unit>
+      <trans-unit id="(No title)">
+        <source>(No title)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">(není titul)</target>
+      </trans-unit>
+      <trans-unit id="(Untitled Feed)">
+        <source>(Untitled Feed)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">(zdroj beze jména)</target>
+      </trans-unit>
+      <trans-unit id="Author">
+        <source>Author</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="cs" state="translated">Autor</target>
+      </trans-unit>
+      <trans-unit id="Cancel">
+        <source>Cancel</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="cs" state="translated">Zrušit</target>
+      </trans-unit>
+      <trans-unit id="Cannot create database folder text">
+        <source>Cannot create database folder text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Program Vienna se pokusil vytvořit složku „%@“, ale vyskytla se chyba. Ověřte, zda máte oprávnění k vytvoření složky v tomto umístění.</target>
+      </trans-unit>
+      <trans-unit id="Cannot create database folder title">
+        <source>Cannot create database folder title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Program Vienna nemůže vytvořit databázovou složku</target>
+      </trans-unit>
+      <trans-unit id="Cannot open database text">
+        <source>Cannot open database text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Soubor databáze (%@) nelze z nějakých důvodů otevřít. Může být poškozený nebo nepřístupný. Smažte nebo přejmenujte tento soubor databáze, ukončete a znovu spusťte program Vienna.</target>
+      </trans-unit>
+      <trans-unit id="Cannot open database title">
+        <source>Cannot open database title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Program Vienna nemůže otevřít databázi</target>
+      </trans-unit>
+      <trans-unit id="Database Upgrade">
+        <source>Database Upgrade</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Aktualizovat databázi</target>
+      </trans-unit>
+      <trans-unit id="Date">
+        <source>Date</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="cs" state="translated">Datum</target>
+      </trans-unit>
+      <trans-unit id="Deleted">
+        <source>Deleted</source>
+        <note>Data field name visible in smart folder definition</note>
+        <target xml:lang="cs" state="translated">Smazáno</target>
+      </trans-unit>
+      <trans-unit id="Enclosure">
+        <source>Enclosure</source>
+        <note>Data field name (URL) visible in menu/article list</note>
+        <target xml:lang="cs" state="translated">URL přílohy</target>
+      </trans-unit>
+      <trans-unit id="Flagged">
+        <source>Flagged</source>
+        <note>Data field name visible in menu/smart folder definition</note>
+        <target xml:lang="cs" state="translated">Praporek</target>
+      </trans-unit>
+      <trans-unit id="Folder">
+        <source>Folder</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="cs" state="translated">Složka</target>
+      </trans-unit>
+      <trans-unit id="HasEnclosure">
+        <source>HasEnclosure</source>
+        <note>Data field name (Y/N) visible in menu/smart folder definition</note>
+        <target xml:lang="cs" state="translated">Příloha</target>
+      </trans-unit>
+      <trans-unit id="Headlines">
+        <source>Headlines</source>
+        <note>Pseudo field name visible in article list</note>
+        <target xml:lang="cs" state="translated">Záhlaví</target>
+      </trans-unit>
+      <trans-unit id="Link">
+        <source>Link</source>
+        <note>Data field name visible in menu/article list</note>
+        <target xml:lang="cs" state="translated">Odkaz</target>
+      </trans-unit>
+      <trans-unit id="Locate Text">
+        <source>Locate Text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Nelze vytvořit novou databázi programu Vienna v položce „%@“, protože složka je pravděpodobně umístěna v síti. Tato verze programu Vienna nemůže spravovat vzdálené databáze. Vyberte prosím jinou složku, která je umístěna v tomto počítači.</target>
+      </trans-unit>
+      <trans-unit id="Locate Title">
+        <source>Locate Title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Nelze vytvořit databázi Vienna</target>
+      </trans-unit>
+      <trans-unit id="Marked Articles">
+        <source>Marked Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Označené příspěvky</target>
+      </trans-unit>
+      <trans-unit id="Quit Vienna">
+        <source>Quit Vienna</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="cs" state="translated">Ukončit Viennu</target>
+      </trans-unit>
+      <trans-unit id="Read">
+        <source>Read</source>
+        <note>Data field name visible in menu/smart folder definition</note>
+        <target xml:lang="cs" state="translated">Čtené</target>
+      </trans-unit>
+      <trans-unit id="Search Results">
+        <source>Search Results</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Výsledky hledání</target>
+      </trans-unit>
+      <trans-unit id="Search all articles">
+        <source>Search all articles</source>
+        <note>Placeholder title of a search field</note>
+        <target xml:lang="cs" state="translated">Hledat ve všech příspěvcích</target>
+      </trans-unit>
+      <trans-unit id="Subject">
+        <source>Subject</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="cs" state="translated">Předmět</target>
+      </trans-unit>
+      <trans-unit id="Summary">
+        <source>Summary</source>
+        <note>Pseudo field name visible in menu/article list</note>
+        <target xml:lang="cs" state="translated">Souhrn</target>
+      </trans-unit>
+      <trans-unit id="Text">
+        <source>Text</source>
+        <note>Data field name visible in smart folder definition</note>
+        <target xml:lang="cs" state="translated">Text</target>
+      </trans-unit>
+      <trans-unit id="Today's Articles">
+        <source>Today's Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Dnešní příspěvky</target>
+      </trans-unit>
+      <trans-unit id="Trash">
+        <source>Trash</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Koš</target>
+      </trans-unit>
+      <trans-unit id="Unread Articles">
+        <source>Unread Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Nečtené příspěvky</target>
+      </trans-unit>
+      <trans-unit id="Unrecognised database format text">
+        <source>Unrecognised database format text</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Souborový formát databáze (%@) není touto verzí programu Vienna podporovaný. Smažte nebo přejmenujte tento soubor, ukončete a znovu spusťte program Vienna.</target>
+      </trans-unit>
+      <trans-unit id="Unrecognised database format title">
+        <source>Unrecognised database format title</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Formát databázového soubor byl změněn</target>
+      </trans-unit>
+      <trans-unit id="Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.">
+        <source>Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.</target>
+      </trans-unit>
+      <trans-unit id="contains">
+        <source>contains</source>
+        <note>test for a string</note>
+        <target xml:lang="cs" state="translated">obsahuje</target>
+      </trans-unit>
+      <trans-unit id="does not contain">
+        <source>does not contain</source>
+        <note>test for a string</note>
+        <target xml:lang="cs" state="translated">neobsahuje</target>
+      </trans-unit>
+      <trans-unit id="is">
+        <source>is</source>
+        <note>test for a value</note>
+        <target xml:lang="cs" state="translated">je</target>
+      </trans-unit>
+      <trans-unit id="is after">
+        <source>is after</source>
+        <note>test for a date</note>
+        <target xml:lang="cs" state="translated">je po</target>
+      </trans-unit>
+      <trans-unit id="is before">
+        <source>is before</source>
+        <note>test for a date</note>
+        <target xml:lang="cs" state="translated">je před</target>
+      </trans-unit>
+      <trans-unit id="is greater than">
+        <source>is greater than</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="cs" state="translated">je větší než</target>
+      </trans-unit>
+      <trans-unit id="is greater than or equal to">
+        <source>is greater than or equal to</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="cs" state="translated">je větší nebo stejný než</target>
+      </trans-unit>
+      <trans-unit id="is less than">
+        <source>is less than</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="cs" state="translated">je menší než</target>
+      </trans-unit>
+      <trans-unit id="is less than or equal to">
+        <source>is less than or equal to</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="cs" state="translated">je menší nebo stejný než</target>
+      </trans-unit>
+      <trans-unit id="is not">
+        <source>is not</source>
+        <note>test for a value</note>
+        <target xml:lang="cs" state="translated">není</target>
+      </trans-unit>
+      <trans-unit id="is on or after">
+        <source>is on or after</source>
+        <note>test for a date</note>
+        <target xml:lang="cs" state="translated">je nebo po</target>
+      </trans-unit>
+      <trans-unit id="is on or before">
+        <source>is on or before</source>
+        <note>test for a date</note>
+        <target xml:lang="cs" state="translated">je nebo před</target>
+      </trans-unit>
+      <trans-unit id="under">
+        <source>under</source>
+        <note>test for a folder (not operational as of Vienna 3.2)</note>
+        <target xml:lang="cs" state="translated">pod</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Vienna Help/Info.plist" source-language="en" datatype="plaintext" target-language="cs">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+    </header>
+    <body>
+      
+    </body>
+  </file>
+</xliff>

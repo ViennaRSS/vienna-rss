@@ -19,6 +19,7 @@
 //
 
 #import "ViennaApp.h"
+
 #import "AppController.h"
 #import "Preferences.h"
 #import "Import.h"
@@ -26,22 +27,14 @@
 #import "RefreshManager.h"
 #import "Constants.h"
 #import "BrowserPane.h"
+#import "ArticleListView.h"
+#import "UnifiedDisplayView.h"
+#import "Folder.h"
+#import "Article.h"
+#import "Database.h"
+#import "BrowserView.h"
 
 @implementation ViennaApp
-
-/* sendEvent
- * We override sendEvent in order to catch the status of the option key. 
- */
--(void)sendEvent:(NSEvent *)anEvent
-{
-	if((anEvent.type == NSFlagsChanged) && ( (anEvent.keyCode == 61) || (anEvent.keyCode == 58)))
-	{
-		[(AppController*)self.delegate toggleOptionKeyButtonStates];
-	}
-    else
-    // Only handle the events we actually need.
-        [super sendEvent:anEvent];
-}
 
 /* handleRefreshAllSubscriptions
  * Refreshes all folders.
@@ -181,7 +174,7 @@
 {
 	NSDictionary * args = cmd.evaluatedArguments;
 	id argObject = args[@"Folder"];
-	NSArray * argArray = argObject ? [self evaluatedArrayOfFolders:argObject withCommand:cmd] : [[Database sharedManager] arrayOfFolders:MA_Root_Folder];
+	NSArray * argArray = argObject ? [self evaluatedArrayOfFolders:argObject withCommand:cmd] : [[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot];
 
 	NSInteger countExported = 0;
 	if (argArray != nil)
@@ -198,7 +191,7 @@
 	NSDictionary * args = cmd.evaluatedArguments;
 	Folder * folder = args[@"UnderFolder"];
 
-	NSInteger parentId = folder ? ((IsGroupFolder(folder)) ? folder.itemId : folder.parentId) : MA_Root_Folder;
+	NSInteger parentId = folder ? ((folder.type == VNAFolderTypeGroup) ? folder.itemId : folder.parentId) : VNAFolderTypeRoot;
 
 	[(AppController*)self.delegate createNewSubscription:args[@"URL"] underFolder:parentId afterChild:-1];
 	return nil;

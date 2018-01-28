@@ -1,0 +1,12 @@
+/* Class = "NSTextFieldCell"; title = "New Group Folder"; ObjectID = "32"; */
+"32.title" = "새 그룹 폴더 추가";
+
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "34"; */
+"34.title" = "추가";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "35"; */
+"35.title" = "취소";
+
+/* Class = "NSTextFieldCell"; title = "Enter the group folder name:"; ObjectID = "36"; */
+"36.title" = "새 그룹 폴더의 이름을 입력하십시오:";
+
