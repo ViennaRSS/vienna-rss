@@ -8,6 +8,10 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.2.0
+-----
+- Use .tgz file extension for downloadable archives of Vienna.app and .dSYM files
+
 3.2.0 rc 1
 ------------
 - Fix some OpenReader error handling
