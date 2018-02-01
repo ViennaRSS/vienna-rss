@@ -142,10 +142,14 @@
 	if (index != -1)
 	{
 		DownloadItem * item = list[index];
-		if (item && item.state == DownloadStateCompleted)
+		if (item && [[NSFileManager defaultManager] fileExistsAtPath:item.filename])
 		{
 			if ([[NSWorkspace sharedWorkspace] selectFile:item.filename inFileViewerRootedAtPath:@""] == NO)
 				runOKAlertSheet(NSLocalizedString(@"Vienna cannot show the file title", nil), NSLocalizedString(@"Vienna cannot show the file body", nil), item.filename.lastPathComponent);
+		}
+		else
+		{
+			NSBeep();
 		}
 	}
 }
