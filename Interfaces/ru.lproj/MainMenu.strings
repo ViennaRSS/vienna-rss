@@ -1,6 +1,9 @@
 /* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg"; */
 "2S3-dG-ZPg.title" = "Больше стилей…";
 
+/* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "4ih-vj-fsk"; */
+"4ih-vj-fsk.title" = "Проверять грамматику вместе с правописанием";
+
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
 "5.title" = "Все окна – на передний план";
 
@@ -18,6 +21,9 @@
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
 "24.title" = "Окно";
+
+/* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "27s-E3-FHd"; */
+"27s-E3-FHd.title" = "Исправлять ошибки автоматически";
 
 /* Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58"; */
 "58.title" = "О программе Vienna";
@@ -229,6 +235,9 @@
 /* Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067"; */
 "1067.title" = "Открыть статью во внешнем браузере";
 
+/* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
+"1073.title" = "Отправить ссылку электронной почтой";
+
 /* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
 "1084.title" = "Увеличить шрифт";
 
@@ -310,6 +319,9 @@
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
 "1257.title" = "Настроить панель инструментов";
 
+/* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
+"1258.title" = "Скрыть панель инструментов";
+
 /* Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259"; */
 "1259.title" = "Спрятать строку статуса";
 
@@ -358,14 +370,68 @@
 /* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI"; */
 "CGp-H4-UaI.title" = "Последние 48 часов";
 
+/* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "CLG-Dq-a59"; */
+"CLG-Dq-a59.title" = "Показать проверку правописания";
+
+/* Class = "NSMenu"; title = "Speech"; ObjectID = "G6k-0L-moc"; */
+"G6k-0L-moc.title" = "Озвучивание";
+
+/* Class = "NSMenuItem"; title = "Speech"; ObjectID = "JXn-SB-3t2"; */
+"JXn-SB-3t2.title" = "Озвучивание";
+
+/* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN"; */
+"MHF-D4-pRN.title" = "ПРОПИСНЫМИ";
+
+/* Class = "NSMenu"; title = "Substitutions"; ObjectID = "QEb-Bm-CPN"; */
+"QEb-Bm-CPN.title" = "Замены";
+
+/* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk"; */
+"RtQ-eP-bfk.title" = "Смарт-тире";
+
+/* Class = "NSMenu"; title = "Transformations"; ObjectID = "UFF-Fn-8ti"; */
+"UFF-Fn-8ti.title" = "Преобразования";
+
+/* Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "ZCa-7v-54l"; */
+"ZCa-7v-54l.title" = "Перейти в полноэкранный режим";
+
+/* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "bd7-qY-ofB"; */
+"bd7-qY-ofB.title" = "Замена текста";
+
+/* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "cK9-Df-xA3"; */
+"cK9-Df-xA3.title" = "Начать озвучивание";
+
+/* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "eVb-Qt-XJb"; */
+"eVb-Qt-XJb.title" = "Замены";
+
 /* Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi"; */
 "ecl-HO-Kpi.title" = "Отметить все подписки как прочитанные";
 
 /* Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI"; */
 "fad-Nj-OFI.title" = "Правописание";
 
+/* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "fbd-ZI-tZW"; */
+"fbd-ZI-tZW.title" = "Проверить документ";
+
+/* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "gbo-AM-wcF"; */
+"gbo-AM-wcF.title" = "Остановить озвучивание";
+
+/* Class = "NSMenuItem"; title = "Data Detectors"; ObjectID = "idm-wm-h8z"; */
+"idm-wm-h8z.title" = "Детекторы данных";
+
+/* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "joR-kW-sIU"; */
+"joR-kW-sIU.title" = "Преобразования";
+
+/* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "kCi-pf-mkc"; */
+"kCi-pf-mkc.title" = "Умные кавычки";
+
+/* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "l8F-tb-7E0"; */
+"l8F-tb-7E0.title" = "Правописание и грамматика";
+
 /* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
 "pKl-6f-Hlc.title" = "Отметить как прочитанное";
+
+/* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "qzH-De-act"; */
+"qzH-De-act.title" = "Умное копирование и вставка";
 
 /* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7"; */
 "rNG-xr-3x7.title" = "Непрочитанные статьи";
@@ -376,6 +442,21 @@
 /* Class = "NSMenuItem"; title = "Today"; ObjectID = "t34-de-pMs"; */
 "t34-de-pMs.title" = "Сегодня";
 
+/* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "tfv-fu-HFM"; */
+"tfv-fu-HFM.title" = "Проверка орфографии при вводе";
+
+/* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "v3R-CV-0b9"; */
+"v3R-CV-0b9.title" = "С Заглавной Буквы";
+
+/* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "w4Q-ne-FPI"; */
+"w4Q-ne-FPI.title" = "Умные ссылки";
+
+/* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "wnc-vZ-fO4"; */
+"wnc-vZ-fO4.title" = "Показывать варианты замены";
+
 /* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm"; */
 "wqh-Jc-gBm.title" = "С последнего обновления";
+
+/* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "xpF-dh-E2m"; */
+"xpF-dh-E2m.title" = "Строчными";
 

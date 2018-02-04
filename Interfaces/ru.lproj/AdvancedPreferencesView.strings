@@ -1,5 +1,17 @@
+/* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "2GQ-cu-fbh"; */
+"2GQ-cu-fbh.title" = "Чем выше номер, тем быстрее ваши подписки будут скачаны.";
+
 /* Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "GaX-8c-QaN"; */
 "GaX-8c-QaN.title" = "Эти настройки не должны изменяться при повседневном использовании программы. Обратитесь к Справке для детальной информации о каждом параметре.";
+
+/* Class = "NSTextFieldCell"; title = "Concurrent downloads:"; ObjectID = "Ngw-hP-yW4"; */
+"Ngw-hP-yW4.title" = "Одновременные скачивания:";
+
+/* Class = "NSTextFieldCell"; title = "However, high numbers also render your computer less responsive while refreshing feeds."; ObjectID = "S3T-cW-hys"; */
+"S3T-cW-hys.title" = "Однако, высокие числа так же приводят к большей нагрузке компьютера и меньшей отзывчивости в процессе обновления каналов.";
+
+/* Class = "NSButtonCell"; title = "Enable Plugins in the internal browser"; ObjectID = "fIz-4t-Ogg"; */
+"fIz-4t-Ogg.title" = "Разрешить плагины во внешнем браузере";
 
 /* Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "guK-dE-f6n"; */
 "guK-dE-f6n.title" = "Разрешить JavaScript во внешнем браузере";

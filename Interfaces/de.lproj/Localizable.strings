@@ -7,6 +7,9 @@
 /* Number of bytes received, e.g. 1 MB received */
 "%@ received" = "%@ empfangen";
 
+/* {existing authors},{new author name} */
+"%@, %@" = "%1$@, %2$@";
+
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "%d neue Artikel empfangen";
 
@@ -33,6 +36,9 @@
 
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "Ein Ordner mit dem Namen existiert bereits";
+
+/* No comment provided by engineer. */
+"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Ein neues Plugin wurde installiert. Du kannst es im Menü aufrufen und zur Werkzeugleiste hinzugfügen.";
 
 /* Toolbar item name for the Advanced preference pane */
 "Advanced" = "Erweitert";
@@ -63,6 +69,9 @@
 
 /* Toolbar item name for the Appearance preference pane */
 "Appearance" = "Erscheinungsbild";
+
+/* No comment provided by engineer. */
+"AppleScript Error in '%@' script" = "AppleScript Fehler in Script '%@'";
 
 /* No comment provided by engineer. */
 "Articles" = "Artikel";
@@ -307,6 +316,9 @@
 "Go forward to the next page" = "Die nächste Seite anzeigen";
 
 /* No comment provided by engineer. */
+"Got HTTP status 304 - No news from last check" = "HTTP-Statusmeldung 304 - keine neuen Nachrichten";
+
+/* No comment provided by engineer. */
 "HTTP code %d reported from server" = "Der Server lieferte den HTTP-Code %d";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
@@ -331,6 +343,9 @@
 "Import subscriptions from OPML file?" = "Abonnements aus OPML-Datei importieren?";
 
 /* No comment provided by engineer. */
+"Improper infinitely looping URL redirect to %@" = "Ungültige unendliche Schleifen-URL-Umleitung nach %@";
+
+/* No comment provided by engineer. */
 "Invalid style body" = "Stattdessen wird der Standard-Stil benutzt.";
 
 /* No comment provided by engineer. */
@@ -344,6 +359,9 @@
 
 /* Data field name visible in menu/article list */
 "Link" = "Link";
+
+/* No comment provided by engineer. */
+"Loading" = "Lade ...";
 
 /* No comment provided by engineer. */
 "Loading…" = "Lade…";
@@ -471,6 +489,9 @@
 /* No comment provided by engineer. */
 "Play" = "Abspielen";
 
+/* No comment provided by engineer. */
+"Plugin installed" = "Plugin installiert";
+
 /* Title of the Preferences window */
 "Preferences" = "Einstellungen";
 
@@ -501,6 +522,9 @@
 
 /* No comment provided by engineer. */
 "Recents" = "Letzte";
+
+/* No comment provided by engineer. */
+"Redirection attempt treated as temporary for safety concern" = "Weiterleitung wurde aus Sicherheitsgründen als temporär behandelt";
 
 /* Title of a menu item */
 "Refresh All Subscriptions" = "Alle Abonnements aktualisieren";
@@ -610,6 +634,9 @@
 /* No comment provided by engineer. */
 "Trash" = "Papierkorb";
 
+/* URL */
+"URL" = "URL";
+
 /* No comment provided by engineer. */
 "Unread" = "Ungelesen";
 
@@ -684,4 +711,10 @@
 
 /* test for a date */
 "is on or before" = "ist an oder vor";
+
+/* test for a folder (not operational as of Vienna 3.2) */
+"not under" = "nicht unter";
+
+/* test for a folder (not operational as of Vienna 3.2) */
+"under" = "unter";
 

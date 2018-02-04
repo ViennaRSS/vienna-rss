@@ -56,7 +56,7 @@
 "k6Y-ib-PGb.title" = "Flyt artikler til Papirkurven:";
 
 /* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG"; */
-"kGA-Sa-RLG.title" = "Standard RSS Reader";
+"kGA-Sa-RLG.title" = "Standard RSS Reader:";
 
 /* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl"; */
 "meo-78-YOl.title" = "Marker opdaterede artikler som nye";

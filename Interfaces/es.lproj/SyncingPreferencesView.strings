@@ -16,6 +16,9 @@
 /* Class = "NSTextField"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "kM0-7a-obO"; */
 "kM0-7a-obO.ibShadowedToolTip" = "Seleccione un servidor compatible con la API Open Reader";
 
+/* Class = "NSTextFieldCell"; title = "URL: https://"; ObjectID = "tec-2d-Xej"; */
+"tec-2d-Xej.title" = "URL: https://";
+
 /* Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "uTl-XE-0ym"; */
 "uTl-XE-0ym.title" = "Servidor:";
 

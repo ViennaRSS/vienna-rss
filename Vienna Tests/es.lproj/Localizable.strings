@@ -1,3 +1,6 @@
+/* {existing authors},{new author name} */
+"%@, %@" = "%1$@, %2$@";
+
 /* No comment provided by engineer. */
 "(No title)" = "(Sin título)";
 
