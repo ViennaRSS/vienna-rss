@@ -436,10 +436,20 @@
         <note>Class = "NSTextFieldCell"; title = "Authentication"; ObjectID = "U0N-RF-bUt";</note>
         <target xml:lang="es" state="translated">Autenticación</target>
       </trans-unit>
+      <trans-unit id="i9j-KH-c3D.title">
+        <source>General</source>
+        <note>Class = "NSTextFieldCell"; title = "General"; ObjectID = "i9j-KH-c3D";</note>
+        <target xml:lang="es" state="translated">General</target>
+      </trans-unit>
       <trans-unit id="xPF-M9-oZG.title">
         <source>Feed URL</source>
         <note>Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG";</note>
         <target xml:lang="es" state="translated">URL de la fuente</target>
+      </trans-unit>
+      <trans-unit id="xTj-hY-aTU.title">
+        <source>Open Cached File…</source>
+        <note>Class = "NSButtonCell"; title = "Open Cached File…"; ObjectID = "xTj-hY-aTU";</note>
+        <target xml:lang="es" state="translated">Abrir archivo en caché…</target>
       </trans-unit>
     </body>
   </file>
@@ -452,6 +462,11 @@
         <source>More Styles…</source>
         <note>Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg";</note>
         <target xml:lang="es" state="translated">Más estilos…</target>
+      </trans-unit>
+      <trans-unit id="4ih-vj-fsk.title">
+        <source>Check Grammar With Spelling</source>
+        <note>Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "4ih-vj-fsk";</note>
+        <target xml:lang="es" state="translated">Comprobar gramática con la ortografía</target>
       </trans-unit>
       <trans-unit id="5.title">
         <source>Bring All to Front</source>
@@ -482,6 +497,11 @@
         <source>Window</source>
         <note>Class = "NSMenu"; title = "Window"; ObjectID = "24";</note>
         <target xml:lang="es" state="translated">Ventana</target>
+      </trans-unit>
+      <trans-unit id="27s-E3-FHd.title">
+        <source>Correct Spelling Automatically</source>
+        <note>Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "27s-E3-FHd";</note>
+        <target xml:lang="es" state="translated">Corregir ortografía automáticamente</target>
       </trans-unit>
       <trans-unit id="58.title">
         <source>About Vienna</source>
@@ -637,6 +657,11 @@
         <source>Redo</source>
         <note>Class = "NSMenuItem"; title = "Redo"; ObjectID = "173";</note>
         <target xml:lang="es" state="translated">Rehacer</target>
+      </trans-unit>
+      <trans-unit id="197.title">
+        <source>Zoom</source>
+        <note>Class = "NSMenuItem"; title = "Zoom"; ObjectID = "197";</note>
+        <target xml:lang="es" state="translated">Zoom</target>
       </trans-unit>
       <trans-unit id="235.title">
         <source>View</source>
@@ -828,6 +853,11 @@
         <note>Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067";</note>
         <target xml:lang="es" state="translated">Abrir página del artículo en un navegador externo</target>
       </trans-unit>
+      <trans-unit id="1073.title">
+        <source>Send Link by Email</source>
+        <note>Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073";</note>
+        <target xml:lang="es" state="translated">Enviar enlace por email</target>
+      </trans-unit>
       <trans-unit id="1084.title">
         <source>Bigger Text</source>
         <note>Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084";</note>
@@ -862,6 +892,16 @@
         <source>Layout</source>
         <note>Class = "NSMenu"; title = "Layout"; ObjectID = "1109";</note>
         <target xml:lang="es" state="translated">Formato</target>
+      </trans-unit>
+      <trans-unit id="1110.title">
+        <source>Horizontal</source>
+        <note>Class = "NSMenuItem"; title = "Horizontal"; ObjectID = "1110";</note>
+        <target xml:lang="es" state="translated">Horizontal</target>
+      </trans-unit>
+      <trans-unit id="1116.title">
+        <source>Vertical</source>
+        <note>Class = "NSMenuItem"; title = "Vertical"; ObjectID = "1116";</note>
+        <target xml:lang="es" state="translated">Vertical</target>
       </trans-unit>
       <trans-unit id="1117.title">
         <source>Filter By</source>
@@ -983,6 +1023,11 @@
         <note>Class = "NSMenu"; title = "Order By"; ObjectID = "1337";</note>
         <target xml:lang="es" state="translated">Ordenar por</target>
       </trans-unit>
+      <trans-unit id="1338.title">
+        <source>Manual</source>
+        <note>Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338";</note>
+        <target xml:lang="es" state="translated">Manual</target>
+      </trans-unit>
       <trans-unit id="1339.title">
         <source>Name</source>
         <note>Class = "NSMenuItem"; title = "Name"; ObjectID = "1339";</note>
@@ -1033,6 +1078,61 @@
         <note>Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI";</note>
         <target xml:lang="es" state="translated">Últimas 48 horas</target>
       </trans-unit>
+      <trans-unit id="CLG-Dq-a59.title">
+        <source>Show Spelling and Grammar</source>
+        <note>Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "CLG-Dq-a59";</note>
+        <target xml:lang="es" state="translated">Mostrar ortografía y gramática</target>
+      </trans-unit>
+      <trans-unit id="G6k-0L-moc.title">
+        <source>Speech</source>
+        <note>Class = "NSMenu"; title = "Speech"; ObjectID = "G6k-0L-moc";</note>
+        <target xml:lang="es" state="translated">Speech</target>
+      </trans-unit>
+      <trans-unit id="JXn-SB-3t2.title">
+        <source>Speech</source>
+        <note>Class = "NSMenuItem"; title = "Speech"; ObjectID = "JXn-SB-3t2";</note>
+        <target xml:lang="es" state="translated">Habla</target>
+      </trans-unit>
+      <trans-unit id="MHF-D4-pRN.title">
+        <source>Make Upper Case</source>
+        <note>Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN";</note>
+        <target xml:lang="es" state="translated">Todo en mayúsculas</target>
+      </trans-unit>
+      <trans-unit id="QEb-Bm-CPN.title">
+        <source>Substitutions</source>
+        <note>Class = "NSMenu"; title = "Substitutions"; ObjectID = "QEb-Bm-CPN";</note>
+        <target xml:lang="es" state="translated">Substitutions</target>
+      </trans-unit>
+      <trans-unit id="RtQ-eP-bfk.title">
+        <source>Smart Dashes</source>
+        <note>Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk";</note>
+        <target xml:lang="es" state="translated">Guiones inteligentes</target>
+      </trans-unit>
+      <trans-unit id="UFF-Fn-8ti.title">
+        <source>Transformations</source>
+        <note>Class = "NSMenu"; title = "Transformations"; ObjectID = "UFF-Fn-8ti";</note>
+        <target xml:lang="es" state="translated">Transformations</target>
+      </trans-unit>
+      <trans-unit id="ZCa-7v-54l.title">
+        <source>Enter Full Screen</source>
+        <note>Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "ZCa-7v-54l";</note>
+        <target xml:lang="es" state="translated">Usar pantalla completa</target>
+      </trans-unit>
+      <trans-unit id="bd7-qY-ofB.title">
+        <source>Text Replacement</source>
+        <note>Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "bd7-qY-ofB";</note>
+        <target xml:lang="es" state="translated">Reemplazar texto</target>
+      </trans-unit>
+      <trans-unit id="cK9-Df-xA3.title">
+        <source>Start Speaking</source>
+        <note>Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "cK9-Df-xA3";</note>
+        <target xml:lang="es" state="translated">Iniciar locución</target>
+      </trans-unit>
+      <trans-unit id="eVb-Qt-XJb.title">
+        <source>Substitutions</source>
+        <note>Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "eVb-Qt-XJb";</note>
+        <target xml:lang="es" state="translated">Sustituciones</target>
+      </trans-unit>
       <trans-unit id="ecl-HO-Kpi.title">
         <source>Mark All Subscriptions as Read</source>
         <note>Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi";</note>
@@ -1043,10 +1143,45 @@
         <note>Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI";</note>
         <target xml:lang="es" state="translated">Ortografía</target>
       </trans-unit>
+      <trans-unit id="fbd-ZI-tZW.title">
+        <source>Check Document Now</source>
+        <note>Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "fbd-ZI-tZW";</note>
+        <target xml:lang="es" state="translated">Comprobar documento ahora</target>
+      </trans-unit>
+      <trans-unit id="gbo-AM-wcF.title">
+        <source>Stop Speaking</source>
+        <note>Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "gbo-AM-wcF";</note>
+        <target xml:lang="es" state="translated">Detener locución</target>
+      </trans-unit>
+      <trans-unit id="idm-wm-h8z.title">
+        <source>Data Detectors</source>
+        <note>Class = "NSMenuItem"; title = "Data Detectors"; ObjectID = "idm-wm-h8z";</note>
+        <target xml:lang="es" state="translated">Detectores de datos</target>
+      </trans-unit>
+      <trans-unit id="joR-kW-sIU.title">
+        <source>Transformations</source>
+        <note>Class = "NSMenuItem"; title = "Transformations"; ObjectID = "joR-kW-sIU";</note>
+        <target xml:lang="es" state="translated">Transformaciones</target>
+      </trans-unit>
+      <trans-unit id="kCi-pf-mkc.title">
+        <source>Smart Quotes</source>
+        <note>Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "kCi-pf-mkc";</note>
+        <target xml:lang="es" state="translated">Comillas tipográficas</target>
+      </trans-unit>
+      <trans-unit id="l8F-tb-7E0.title">
+        <source>Spelling and Grammar</source>
+        <note>Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "l8F-tb-7E0";</note>
+        <target xml:lang="es" state="translated">Ortografía y gramática</target>
+      </trans-unit>
       <trans-unit id="pKl-6f-Hlc.title">
         <source>Mark Read</source>
         <note>Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc";</note>
         <target xml:lang="es" state="translated">Marcar como leído</target>
+      </trans-unit>
+      <trans-unit id="qzH-De-act.title">
+        <source>Smart Copy/Paste</source>
+        <note>Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "qzH-De-act";</note>
+        <target xml:lang="es" state="translated">Copiado/Pegado inteligente</target>
       </trans-unit>
       <trans-unit id="rNG-xr-3x7.title">
         <source>Unread Articles</source>
@@ -1063,10 +1198,35 @@
         <note>Class = "NSMenuItem"; title = "Today"; ObjectID = "t34-de-pMs";</note>
         <target xml:lang="es" state="translated">Hoy</target>
       </trans-unit>
+      <trans-unit id="tfv-fu-HFM.title">
+        <source>Check Spelling While Typing</source>
+        <note>Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "tfv-fu-HFM";</note>
+        <target xml:lang="es" state="translated">Comprobar ortografía mientras se escribe</target>
+      </trans-unit>
+      <trans-unit id="v3R-CV-0b9.title">
+        <source>Capitalize</source>
+        <note>Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "v3R-CV-0b9";</note>
+        <target xml:lang="es" state="translated">Mayúsculas iniciales</target>
+      </trans-unit>
+      <trans-unit id="w4Q-ne-FPI.title">
+        <source>Smart Links</source>
+        <note>Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "w4Q-ne-FPI";</note>
+        <target xml:lang="es" state="translated">Enlaces inteligentes</target>
+      </trans-unit>
+      <trans-unit id="wnc-vZ-fO4.title">
+        <source>Show Substitutions</source>
+        <note>Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "wnc-vZ-fO4";</note>
+        <target xml:lang="es" state="translated">Mostrar sustituciones</target>
+      </trans-unit>
       <trans-unit id="wqh-Jc-gBm.title">
         <source>Last Refresh</source>
         <note>Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm";</note>
         <target xml:lang="es" state="translated">Última actualización</target>
+      </trans-unit>
+      <trans-unit id="xpF-dh-E2m.title">
+        <source>Make Lower Case</source>
+        <note>Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "xpF-dh-E2m";</note>
+        <target xml:lang="es" state="translated">Todo en minúsculas</target>
       </trans-unit>
     </body>
   </file>
@@ -1160,6 +1320,41 @@
         <note>Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377";</note>
         <target xml:lang="es" state="translated">Filtrar por:</target>
       </trans-unit>
+      <trans-unit id="1404.title">
+        <source>Current Filter</source>
+        <note>Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404";</note>
+        <target xml:lang="es" state="translated">Current Filter</target>
+      </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.label">
+        <source>Add</source>
+        <note>Class = "NSToolbarItem"; label = "Add"; ObjectID = "CPA-Ha-aj1";</note>
+        <target xml:lang="es" state="translated">Añadir</target>
+      </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.paletteLabel">
+        <source>Add</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1";</note>
+        <target xml:lang="es" state="translated">Añadir</target>
+      </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.toolTip">
+        <source>Subscribe to a feed or add a folder or smart folder.</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Subscribe to a feed or add a folder or smart folder."; ObjectID = "CPA-Ha-aj1";</note>
+        <target xml:lang="es" state="translated">Suscribirse a fuente o añadir carpeta o carpeta inteligente.</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.label">
+        <source>All Read</source>
+        <note>Class = "NSToolbarItem"; label = "All Read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="es" state="translated">Todo leído</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.paletteLabel">
+        <source>Mark All Items as Read</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Mark All Items as Read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="es" state="translated">Marcar todos los ítems como leídos</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.toolTip">
+        <source>Mark all items as read</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Mark all items as read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="es" state="translated">Marcar todos los ítems como leídos</target>
+      </trans-unit>
       <trans-unit id="Hs0-hu-A2g.title">
         <source>Refresh Selected Subscriptions</source>
         <note>Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g";</note>
@@ -1234,6 +1429,16 @@
         <source>Skip Folder</source>
         <note>Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
         <target xml:lang="es" state="translated">Omitir carpeta</target>
+      </trans-unit>
+      <trans-unit id="TSQ-UW-4gU.label">
+        <source>Action</source>
+        <note>Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU";</note>
+        <target xml:lang="es" state="translated">Acción</target>
+      </trans-unit>
+      <trans-unit id="TSQ-UW-4gU.paletteLabel">
+        <source>Action</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Action"; ObjectID = "TSQ-UW-4gU";</note>
+        <target xml:lang="es" state="translated">Acción</target>
       </trans-unit>
       <trans-unit id="TSQ-UW-4gU.toolTip">
         <source>Additional actions for the selected folder</source>
@@ -1382,6 +1587,11 @@
         <note>Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107";</note>
         <target xml:lang="es" state="translated">Introduzca el enlace de la fuente de noticias a continuación, o elija de la lista de fuentes para introducir el acceso directo proporcionado por la fuente de noticias.</target>
       </trans-unit>
+      <trans-unit id="110.title">
+        <source>URL:</source>
+        <note>Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110";</note>
+        <target xml:lang="es" state="translated">URL:</target>
+      </trans-unit>
       <trans-unit id="111.title">
         <source>Save</source>
         <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "111";</note>
@@ -1481,6 +1691,11 @@
         <note>Class = "NSTextField"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "kM0-7a-obO";</note>
         <target xml:lang="es" state="translated">Seleccione un servidor compatible con la API Open Reader</target>
       </trans-unit>
+      <trans-unit id="tec-2d-Xej.title">
+        <source>URL: https://</source>
+        <note>Class = "NSTextFieldCell"; title = "URL: https://"; ObjectID = "tec-2d-Xej";</note>
+        <target xml:lang="es" state="translated">URL: https://</target>
+      </trans-unit>
       <trans-unit id="uTl-XE-0ym.title">
         <source>Server:</source>
         <note>Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "uTl-XE-0ym";</note>
@@ -1507,6 +1722,21 @@
         <source>%@ Info</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es" state="translated">Información de %@</target>
+      </trans-unit>
+      <trans-unit id="%@ of %@">
+        <source>%1$@ of %2$@</source>
+        <note>Progress in bytes, e.g. 1 KB of 1 MB</note>
+        <target xml:lang="es" state="translated">%1$@ de %2$@</target>
+      </trans-unit>
+      <trans-unit id="%@ received">
+        <source>%@ received</source>
+        <note>Number of bytes received, e.g. 1 MB received</note>
+        <target xml:lang="es" state="translated">%@ recibidos</target>
+      </trans-unit>
+      <trans-unit id="%@, %@">
+        <source>%1$@, %2$@</source>
+        <note>{existing authors},{new author name}</note>
+        <target xml:lang="es" state="translated">%1$@, %2$@</target>
       </trans-unit>
       <trans-unit id="%d new articles retrieved">
         <source>%d new articles retrieved</source>
@@ -2077,6 +2307,11 @@ Also check your network access.</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es" state="translated">El estilo %@ parece estar dañado o perdido</target>
       </trans-unit>
+      <trans-unit id="JavaScript">
+        <source>JavaScript</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es" state="translated">JavaScript</target>
+      </trans-unit>
       <trans-unit id="Last Week">
         <source>Last Week</source>
         <note>No comment provided by engineer.</note>
@@ -2479,6 +2714,11 @@ Compruebe también su acceso a la red.</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es" state="translated">Mostrar barra de filtro</target>
       </trans-unit>
+      <trans-unit id="Show Main Window…">
+        <source>Show Main Window…</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="es" state="translated">Mostrar ventana principal…</target>
+      </trans-unit>
       <trans-unit id="Show Status Bar">
         <source>Show Status Bar</source>
         <note>Title of a menu item</note>
@@ -2538,6 +2778,11 @@ Compruebe también su acceso a la red.</target>
         <source>Trash</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es" state="translated">Papelera</target>
+      </trans-unit>
+      <trans-unit id="URL">
+        <source>URL</source>
+        <note>URL</note>
+        <target xml:lang="es" state="translated">URL</target>
       </trans-unit>
       <trans-unit id="Unread">
         <source>Unread</source>
@@ -2688,6 +2933,11 @@ Compruebe también su acceso a la red.</target>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
     </header>
     <body>
+      <trans-unit id="%@, %@">
+        <source>%1$@, %2$@</source>
+        <note>{existing authors},{new author name}</note>
+        <target xml:lang="es" state="translated">%1$@, %2$@</target>
+      </trans-unit>
       <trans-unit id="(No title)">
         <source>(No title)</source>
         <note>No comment provided by engineer.</note>

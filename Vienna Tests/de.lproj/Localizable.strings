@@ -1,3 +1,6 @@
+/* {existing authors},{new author name} */
+"%@, %@" = "%1$@, %2$@";
+
 /* No comment provided by engineer. */
 "(No title)" = "(Kein Betreff)";
 
@@ -141,4 +144,10 @@
 
 /* test for a date */
 "is on or before" = "ist an oder vor";
+
+/* test for a folder (not operational as of Vienna 3.2) */
+"not under" = "nicht unter";
+
+/* test for a folder (not operational as of Vienna 3.2) */
+"under" = "unter";
 
