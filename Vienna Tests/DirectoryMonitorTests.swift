@@ -18,6 +18,7 @@
 //
 
 import XCTest
+@testable import Vienna
 
 class DirectoryMonitorTests: XCTestCase {
 
