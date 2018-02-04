@@ -65,8 +65,11 @@
                 switch (error.code) {
                     case NSXMLParserGTRequiredError:
                         return NO;
+                    case NSXMLParserTagNameMismatchError:
+                        return NO;
                 }
             }
+
             // recover some cases like text encoding errors, non standard tags...
             xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
                                                       options:NSXMLDocumentTidyXML|NSXMLNodeLoadExternalEntitiesNever
