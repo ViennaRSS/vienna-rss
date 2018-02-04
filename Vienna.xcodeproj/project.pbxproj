@@ -2347,7 +2347,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ruby \"$PROJECT_DIR/configs/scripts/update_localizations.rb\"";
+			shellScript = "/usr/bin/ruby \"$PROJECT_DIR/configs/scripts/update_localizations.rb\"";
 		};
 		F6B123401E474EC500973699 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

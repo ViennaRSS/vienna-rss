@@ -8,6 +8,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.2.1
+-----
+- Fix a crash on parsing some XML files
+- Fix current feed URL not being displayed on edition of a feed
+- Updated translations (Danish, Spanish, German, Russian)
+
 3.2.0
 -----
 - Use .tgz file extension for downloadable archives of Vienna.app and .dSYM files

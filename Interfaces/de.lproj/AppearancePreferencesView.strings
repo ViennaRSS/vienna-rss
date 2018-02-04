@@ -2,7 +2,7 @@
 "71S-pg-AjX.title" = "Beim Betrachten von Artikeln oder Webseiten:";
 
 /* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "B5v-p5-vrf"; */
-"B5v-p5-vrf.title" = "Ordnerliste:";
+"B5v-p5-vrf.title" = "Font für Ordnerliste:";
 
 /* Class = "NSButtonCell"; title = "Select…"; ObjectID = "BDw-v3-mpF"; */
 "BDw-v3-mpF.title" = "Auswählen…";

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner">
             <connections>
                 <outlet property="editCancelButton" destination="54" id="74"/>
+                <outlet property="editFeedURL" destination="HZM-hu-qMb" id="69"/>
                 <outlet property="editRSSFeedWindow" destination="49" id="61"/>
                 <outlet property="feedSource" destination="43" id="46"/>
                 <outlet property="feedURL" destination="90" id="91"/>
@@ -27,12 +28,12 @@
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" tabbingMode="disallowed" id="6" userLabel="NewRSSFeed" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="165" y="318" width="420" height="282"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="5">
                 <rect key="frame" x="0.0" y="0.0" width="420" height="282"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="380" translatesAutoresizingMaskIntoConstraints="NO" id="64">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="380" translatesAutoresizingMaskIntoConstraints="NO" id="64">
                         <rect key="frame" x="18" y="245" width="384" height="17"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Create a new subscription" id="106">
                             <font key="font" metaFont="systemBold"/>
@@ -40,7 +41,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="380" translatesAutoresizingMaskIntoConstraints="NO" id="65">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="380" translatesAutoresizingMaskIntoConstraints="NO" id="65">
                         <rect key="frame" x="18" y="211" width="384" height="26"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="107">
                             <font key="font" metaFont="label"/>
@@ -49,7 +50,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="180" translatesAutoresizingMaskIntoConstraints="NO" id="40">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="180" translatesAutoresizingMaskIntoConstraints="NO" id="40">
                         <rect key="frame" x="18" y="186" width="51" height="17"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Source:" id="104">
                             <font key="font" metaFont="system"/>
@@ -82,7 +83,7 @@
                             <action selector="doShowSiteHomePage:" target="-2" id="93"/>
                         </connections>
                     </button>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" preferredMaxLayoutWidth="380" translatesAutoresizingMaskIntoConstraints="NO" id="97">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="380" translatesAutoresizingMaskIntoConstraints="NO" id="97">
                         <rect key="frame" x="18" y="157" width="384" height="17"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="URL:" id="110">
                             <font key="font" metaFont="system"/>
@@ -90,7 +91,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" preferredMaxLayoutWidth="380" translatesAutoresizingMaskIntoConstraints="NO" id="90">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="380" translatesAutoresizingMaskIntoConstraints="NO" id="90">
                         <rect key="frame" x="20" y="83" width="380" height="66"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="198" id="LTa-Fi-WXR"/>
@@ -178,12 +179,12 @@ DQ
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" tabbingMode="disallowed" id="49" userLabel="EditRSSFeed" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="305" y="336" width="420" height="172"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="50">
                 <rect key="frame" x="0.0" y="0.0" width="420" height="172"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" preferredMaxLayoutWidth="380" translatesAutoresizingMaskIntoConstraints="NO" id="67">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="380" translatesAutoresizingMaskIntoConstraints="NO" id="67">
                         <rect key="frame" x="18" y="135" width="384" height="17"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Edit subscription" id="114">
                             <font key="font" metaFont="systemBold"/>
@@ -191,7 +192,7 @@ DQ
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" preferredMaxLayoutWidth="380" translatesAutoresizingMaskIntoConstraints="NO" id="HZM-hu-qMb">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="380" translatesAutoresizingMaskIntoConstraints="NO" id="HZM-hu-qMb">
                         <rect key="frame" x="20" y="61" width="380" height="66"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="66" id="3SF-AH-Mv7"/>

@@ -105,7 +105,7 @@
 "Cannot open database text" = "Databasefilen (%@) kunne ikke åbnes af samme grund. Den kan være beskadiget eller utilgængelig. Slet venligst eller omdøb databasefilen og genstart Vienna.";
 
 /* No comment provided by engineer. */
-"Cannot open database title" = "Desværre, men Vienna kunne ikke åbne databasen.";
+"Cannot open database title" = "Desværre, men Vienna kunne ikke åbne databasen";
 
 /* No comment provided by engineer. */
 "Cannot open export file message" = "Kan ikke lave eksport output-arkiv";

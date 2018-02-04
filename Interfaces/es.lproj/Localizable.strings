@@ -1,6 +1,15 @@
 /* No comment provided by engineer. */
 "%@ Info" = "Información de %@";
 
+/* Progress in bytes, e.g. 1 KB of 1 MB */
+"%@ of %@" = "%1$@ de %2$@";
+
+/* Number of bytes received, e.g. 1 MB received */
+"%@ received" = "%@ recibidos";
+
+/* {existing authors},{new author name} */
+"%@, %@" = "%1$@, %2$@";
+
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "%d nuevos artículos recuperados";
 
@@ -340,6 +349,9 @@
 "Invalid style title" = "El estilo %@ parece estar dañado o perdido";
 
 /* No comment provided by engineer. */
+"JavaScript" = "JavaScript";
+
+/* No comment provided by engineer. */
 "Last Week" = "Última semana";
 
 /* Data field name visible in menu/article list */
@@ -581,6 +593,9 @@
 "Show Filter Bar" = "Mostrar barra de filtro";
 
 /* Title of a menu item */
+"Show Main Window…" = "Mostrar ventana principal…";
+
+/* Title of a menu item */
 "Show Status Bar" = "Mostrar barra de estado";
 
 /* Title of a menu item */
@@ -615,6 +630,9 @@
 
 /* No comment provided by engineer. */
 "Trash" = "Papelera";
+
+/* URL */
+"URL" = "URL";
 
 /* No comment provided by engineer. */
 "Unread" = "no leídos";
