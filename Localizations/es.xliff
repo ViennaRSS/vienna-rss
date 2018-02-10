@@ -2,7 +2,7 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Interfaces/Base.lproj/ActivityViewer.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       <trans-unit id="8.title">
@@ -24,7 +24,7 @@
   </file>
   <file original="Interfaces/Base.lproj/AdvancedPreferencesView.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       <trans-unit id="2GQ-cu-fbh.title">
@@ -61,7 +61,7 @@
   </file>
   <file original="Interfaces/Base.lproj/AppearancePreferencesView.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       <trans-unit id="71S-pg-AjX.title">
@@ -103,7 +103,7 @@
   </file>
   <file original="Interfaces/Base.lproj/Downloads.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       <trans-unit id="5.title">
@@ -120,7 +120,7 @@
   </file>
   <file original="Interfaces/Base.lproj/EmptyTrashWarning.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       <trans-unit id="17.title">
@@ -147,7 +147,7 @@
   </file>
   <file original="Interfaces/Base.lproj/ExportAccessoryViewController.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       <trans-unit id="6rj-zb-zOa.title">
@@ -169,7 +169,7 @@
   </file>
   <file original="Interfaces/Base.lproj/FeedCredentials.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       <trans-unit id="32.title">
@@ -206,7 +206,7 @@
   </file>
   <file original="Interfaces/Base.lproj/GeneralPreferencesView.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       <trans-unit id="1Ll-uG-QWh.title">
@@ -351,7 +351,7 @@
   </file>
   <file original="Interfaces/Base.lproj/GroupFolder.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       <trans-unit id="32.title">
@@ -378,7 +378,7 @@
   </file>
   <file original="Interfaces/Base.lproj/InfoWindow.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       <trans-unit id="105.title">
@@ -455,7 +455,7 @@
   </file>
   <file original="Interfaces/Base.lproj/MainMenu.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       <trans-unit id="2S3-dG-ZPg.title">
@@ -1232,7 +1232,7 @@
   </file>
   <file original="Interfaces/Base.lproj/MainWindowController.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       <trans-unit id="3tM-J3-kmf.title">
@@ -1559,7 +1559,7 @@
   </file>
   <file original="Interfaces/Base.lproj/RSSFeed.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       <trans-unit id="102.title">
@@ -1616,7 +1616,7 @@
   </file>
   <file original="Interfaces/Base.lproj/SearchFolder.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       <trans-unit id="82.title">
@@ -1658,7 +1658,7 @@
   </file>
   <file original="Interfaces/Base.lproj/SyncingPreferencesView.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       <trans-unit id="Ar5-Qc-YTe.ibExternalAccessibilityDescription">
@@ -1715,7 +1715,7 @@
   </file>
   <file original="Resources/Localizable.strings" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       <trans-unit id="%@ Info">
@@ -2913,7 +2913,7 @@ Compruebe también su acceso a la red.</target>
   </file>
   <file original="Resources/Vienna-Info.plist" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       
@@ -2922,267 +2922,15 @@ Compruebe también su acceso a la red.</target>
   </file>
   <file original="Vienna Tests/Info.plist" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       
     </body>
   </file>
-  <file original="Vienna Tests/Localizable.strings" source-language="en" datatype="plaintext" target-language="es">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
-    </header>
-    <body>
-      <trans-unit id="%@, %@">
-        <source>%1$@, %2$@</source>
-        <note>{existing authors},{new author name}</note>
-        <target xml:lang="es" state="translated">%1$@, %2$@</target>
-      </trans-unit>
-      <trans-unit id="(No title)">
-        <source>(No title)</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="translated">(Sin título)</target>
-      </trans-unit>
-      <trans-unit id="(Untitled Feed)">
-        <source>(Untitled Feed)</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="translated">(Fuente sin título)</target>
-      </trans-unit>
-      <trans-unit id="Author">
-        <source>Author</source>
-        <note>Data field name visible in menu/article list/smart folder definition</note>
-        <target xml:lang="es" state="translated">Autor</target>
-      </trans-unit>
-      <trans-unit id="Cancel">
-        <source>Cancel</source>
-        <note>Title of a button on an alert</note>
-        <target xml:lang="es" state="translated">Cancelar</target>
-      </trans-unit>
-      <trans-unit id="Cannot create database folder text">
-        <source>Cannot create database folder text</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="translated">Vienna ha intentado crear la carpeta "%@" pero ha ocurrido un error. Compruebe los permisos de las carpetas de la ruta especificada.</target>
-      </trans-unit>
-      <trans-unit id="Cannot create database folder title">
-        <source>Cannot create database folder title</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="translated">Lo sentimos, pero Vienna no ha podido crear la carpeta de la base de datos</target>
-      </trans-unit>
-      <trans-unit id="Cannot open database text">
-        <source>Cannot open database text</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="translated">Por algún motivo, el archivo de la base de datos (%@) no se ha podido abrir. Puede estar dañado o inaccesible. Por favor, elimine o renombre el archivo de la base de datos y reinicie Vienna.</target>
-      </trans-unit>
-      <trans-unit id="Cannot open database title">
-        <source>Cannot open database title</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="translated">Vienna no ha podido abrir la base de datos</target>
-      </trans-unit>
-      <trans-unit id="Database Upgrade">
-        <source>Database Upgrade</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="translated">Actualización de la base de datos</target>
-      </trans-unit>
-      <trans-unit id="Date">
-        <source>Date</source>
-        <note>Data field name visible in menu/article list/smart folder definition</note>
-        <target xml:lang="es" state="translated">Fecha</target>
-      </trans-unit>
-      <trans-unit id="Deleted">
-        <source>Deleted</source>
-        <note>Data field name visible in smart folder definition</note>
-        <target xml:lang="es" state="translated">Eliminado</target>
-      </trans-unit>
-      <trans-unit id="Enclosure">
-        <source>Enclosure</source>
-        <note>Data field name (URL) visible in menu/article list</note>
-        <target xml:lang="es" state="translated">Archivo adjunto</target>
-      </trans-unit>
-      <trans-unit id="Flagged">
-        <source>Flagged</source>
-        <note>Data field name visible in menu/smart folder definition</note>
-        <target xml:lang="es" state="translated">Destacado</target>
-      </trans-unit>
-      <trans-unit id="Folder">
-        <source>Folder</source>
-        <note>Data field name visible in menu/article list/smart folder definition</note>
-        <target xml:lang="es" state="translated">Carpeta</target>
-      </trans-unit>
-      <trans-unit id="HasEnclosure">
-        <source>HasEnclosure</source>
-        <note>Data field name (Y/N) visible in menu/smart folder definition</note>
-        <target xml:lang="es" state="translated">Archivo adjunto</target>
-      </trans-unit>
-      <trans-unit id="Headlines">
-        <source>Headlines</source>
-        <note>Pseudo field name visible in article list</note>
-        <target xml:lang="es" state="translated">Titulares</target>
-      </trans-unit>
-      <trans-unit id="Link">
-        <source>Link</source>
-        <note>Data field name visible in menu/article list</note>
-        <target xml:lang="es" state="translated">Enlace</target>
-      </trans-unit>
-      <trans-unit id="Locate Text">
-        <source>Locate Text</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="translated">No se puede crear la nueva base de datos de Vienna en "%@" ya que la carpeta probablemente está ubicada en un recurso compartido de una red remota y esta versión de Vienna no puede gestionar bases de datos remotas. Por favor, elija una carpeta alternativa ubicada en su equipo local.</target>
-      </trans-unit>
-      <trans-unit id="Locate Title">
-        <source>Locate Title</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="translated">No puede crear la base de datos de Vienna</target>
-      </trans-unit>
-      <trans-unit id="Locate…">
-        <source>Locate…</source>
-        <note>Title of a button on an alert</note>
-        <target xml:lang="es" state="translated">Ubicar…</target>
-      </trans-unit>
-      <trans-unit id="Marked Articles">
-        <source>Marked Articles</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="translated">Artículos marcados</target>
-      </trans-unit>
-      <trans-unit id="Quit Vienna">
-        <source>Quit Vienna</source>
-        <note>Title of a button on an alert</note>
-        <target xml:lang="es" state="translated">Salir de Vienna</target>
-      </trans-unit>
-      <trans-unit id="Read">
-        <source>Read</source>
-        <note>Data field name visible in menu/smart folder definition</note>
-        <target xml:lang="es" state="translated">Leído</target>
-      </trans-unit>
-      <trans-unit id="Search Results">
-        <source>Search Results</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="translated">Resultados de la búsqueda</target>
-      </trans-unit>
-      <trans-unit id="Search all articles">
-        <source>Search all articles</source>
-        <note>Placeholder title of a search field</note>
-        <target xml:lang="es" state="translated">Buscar todos los artículos</target>
-      </trans-unit>
-      <trans-unit id="Search current web page">
-        <source>Search current web page</source>
-        <note>Placeholder title of a search field</note>
-        <target xml:lang="es" state="translated">Buscar en página web actual</target>
-      </trans-unit>
-      <trans-unit id="Subject">
-        <source>Subject</source>
-        <note>Data field name visible in menu/article list/smart folder definition</note>
-        <target xml:lang="es" state="translated">Asunto</target>
-      </trans-unit>
-      <trans-unit id="Summary">
-        <source>Summary</source>
-        <note>Pseudo field name visible in menu/article list</note>
-        <target xml:lang="es" state="translated">Resumen</target>
-      </trans-unit>
-      <trans-unit id="Text">
-        <source>Text</source>
-        <note>Data field name visible in smart folder definition</note>
-        <target xml:lang="es" state="translated">Texto</target>
-      </trans-unit>
-      <trans-unit id="Today's Articles">
-        <source>Today's Articles</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="translated">Artículos de hoy</target>
-      </trans-unit>
-      <trans-unit id="Trash">
-        <source>Trash</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="translated">Papelera</target>
-      </trans-unit>
-      <trans-unit id="Unread Articles">
-        <source>Unread Articles</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="translated">Artículos no leídos</target>
-      </trans-unit>
-      <trans-unit id="Unrecognised database format text">
-        <source>Unrecognised database format text</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="translated">El formato de archivo de la base de datos (%@) no es compatible con esta versión de Vienna. Elimine o renombre el archivo y reinicie Vienna.</target>
-      </trans-unit>
-      <trans-unit id="Unrecognised database format title">
-        <source>Unrecognised database format title</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="translated">El formato de archivo de la base de datos ha cambiado</target>
-      </trans-unit>
-      <trans-unit id="Upgrade Database">
-        <source>Upgrade Database</source>
-        <note>Title of a button on an alert</note>
-        <target xml:lang="es" state="translated">Actualizar base de datos</target>
-      </trans-unit>
-      <trans-unit id="Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.">
-        <source>Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="translated">Vienna debe actualizar su base de datos a la última versión. Esto puede tardar un minuto más o menos. Lamentamos el inconveniente.</target>
-      </trans-unit>
-      <trans-unit id="contains">
-        <source>contains</source>
-        <note>test for a string</note>
-        <target xml:lang="es" state="translated">contiene</target>
-      </trans-unit>
-      <trans-unit id="does not contain">
-        <source>does not contain</source>
-        <note>test for a string</note>
-        <target xml:lang="es" state="translated">no contiene</target>
-      </trans-unit>
-      <trans-unit id="is">
-        <source>is</source>
-        <note>test for a value</note>
-        <target xml:lang="es" state="translated">es</target>
-      </trans-unit>
-      <trans-unit id="is after">
-        <source>is after</source>
-        <note>test for a date</note>
-        <target xml:lang="es" state="translated">es posterior a</target>
-      </trans-unit>
-      <trans-unit id="is before">
-        <source>is before</source>
-        <note>test for a date</note>
-        <target xml:lang="es" state="translated">es anterior a</target>
-      </trans-unit>
-      <trans-unit id="is greater than">
-        <source>is greater than</source>
-        <note>test for a numeric value</note>
-        <target xml:lang="es" state="translated">es mayor que</target>
-      </trans-unit>
-      <trans-unit id="is greater than or equal to">
-        <source>is greater than or equal to</source>
-        <note>test for a numeric value</note>
-        <target xml:lang="es" state="translated">es mayor o igual que</target>
-      </trans-unit>
-      <trans-unit id="is less than">
-        <source>is less than</source>
-        <note>test for a numeric value</note>
-        <target xml:lang="es" state="translated">es menor que</target>
-      </trans-unit>
-      <trans-unit id="is less than or equal to">
-        <source>is less than or equal to</source>
-        <note>test for a numeric value</note>
-        <target xml:lang="es" state="translated">es menor o igual que</target>
-      </trans-unit>
-      <trans-unit id="is not">
-        <source>is not</source>
-        <note>test for a value</note>
-        <target xml:lang="es" state="translated">no es</target>
-      </trans-unit>
-      <trans-unit id="is on or after">
-        <source>is on or after</source>
-        <note>test for a date</note>
-        <target xml:lang="es" state="translated">es a partir de</target>
-      </trans-unit>
-      <trans-unit id="is on or before">
-        <source>is on or before</source>
-        <note>test for a date</note>
-        <target xml:lang="es" state="translated">es anterior a o de</target>
-      </trans-unit>
-    </body>
-  </file>
   <file original="Vienna/Vienna Help/Info.plist" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M174d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
       
