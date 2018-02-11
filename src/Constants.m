@@ -59,6 +59,7 @@ NSString * MAPref_ArticleSortDescriptors = @"ArticleSortDescriptors";
 NSString * MAPref_FilterMode = @"FilterMode";
 NSString * MAPref_LastRefreshDate = @"LastRefreshDate";
 NSString * MAPref_TabList = @"TabList";
+NSString * MAPref_TabTitleList = @"TabTitleList";
 NSString * MAPref_Layout = @"Layout";
 NSString * MAPref_NewArticlesNotification = @"NewArticlesNotification";
 NSString * MAPref_Profile_Path = @"ProfilePath";

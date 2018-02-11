@@ -322,16 +322,24 @@
 -(void)saveOpenTabs
 {
 	NSMutableArray *tabLinks = [NSMutableArray arrayWithCapacity:self.countOfTabs];
+	NSMutableArray *tabTitles = [NSMutableArray arrayWithCapacity:self.countOfTabs];
 	
 	for (NSTabViewItem * tabViewItem in self.tabView.tabViewItems)
 	{
 		NSView<BaseView> * theView = tabViewItem.identifier;
 		NSString * tabLink = theView.viewLink;
+		NSString * tabTitle = @"";
+		if ([theView respondsToSelector:@selector(viewTitle)])
+			tabTitle = theView.viewTitle;
 		if (tabLink != nil)
-			[tabLinks addObject:tabLink];			
+		{
+			[tabLinks addObject:tabLink];
+			[tabTitles addObject:tabTitle ? tabTitle : tabLink];
+		}
 	}
 
 	[[Preferences standardPreferences] setObject:tabLinks forKey:MAPref_TabList];
+	[[Preferences standardPreferences] setObject:tabTitles forKey:MAPref_TabTitleList];
 
 	[[Preferences standardPreferences] savePreferences];
 }
