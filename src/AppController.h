@@ -157,7 +157,7 @@
 -(void)showUnreadCountOnApplicationIconAndWindowTitle;
 -(void)openURLFromString:(NSString *)urlString inPreferredBrowser:(BOOL)openInPreferredBrowserFlag;
 -(void)openURL:(NSURL *)url inPreferredBrowser:(BOOL)openInPreferredBrowserFlag;
--(void)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
+-(void)createAndLoadNewTab:(NSURL *)url withTitle:(NSString *)title inBackground:(BOOL)openInBackgroundFlag;
 -(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
 -(void)openURLInDefaultBrowser:(NSURL *)url;
 -(void)handleRSSLink:(NSString *)linkPath;

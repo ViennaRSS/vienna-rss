@@ -194,10 +194,17 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 			[self refreshAllSubscriptions:self];
 
 		// Start opening the old tabs once everything else has finished initializing and setting up
-		NSArray * tabLinks = [prefs arrayForKey:MAPref_TabList];
-		for (NSString * tabLink in tabLinks)
+		NSArray<NSString *> * tabLinks = [prefs arrayForKey:MAPref_TabList];
+		NSArray<NSString *> * tabTitles = [prefs arrayForKey:MAPref_TabTitleList];
+
+		if (tabTitles == nil || tabTitles.count < tabLinks.count) {
+			tabTitles = tabLinks;
+		}
+
+		for (int i = 0; i < tabLinks.count; i++)
 		{
-			[self createNewTab:(tabLink.length ? [NSURL URLWithString:tabLink] : nil) inBackground:YES];
+			[self createNewTab:(tabLinks[i].length ? [NSURL URLWithString:tabLinks[i]] : nil)
+					 withTitle:tabTitles[i] inBackground:YES];
 		}
 
 		doneSafeInit = YES;
@@ -1020,7 +1027,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			openInBackground = !openInBackground;
         }
 		
-		[self createNewTab:item.representedObject inBackground:openInBackground];
+		[self createAndLoadNewTab:item.representedObject withTitle:nil inBackground:openInBackground];
 	}
 }
 
@@ -1046,7 +1053,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[self showMainWindow:self];
 	if (![theView isKindOfClass:[BrowserPane class]])
 	{
-		[self createNewTab:nil inBackground:NO];
+		[self createAndLoadNewTab:nil withTitle:nil inBackground:NO];
 		theView = self.browserView.activeTabItemView;
 	}
 	if ([theView isKindOfClass:[BrowserPane class]])
@@ -1088,7 +1095,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         }
 
 		for (NSURL * url in urls)
-			[self createNewTab:url inBackground:openInBackground];
+			[self createAndLoadNewTab:url withTitle:nil inBackground:openInBackground];
 	}
 	else
 		[self openURLsInDefaultBrowser:urls];
@@ -1114,7 +1121,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)newTab:(id)sender
 {
 	// Create a new empty tab in the foreground.
-	[self createNewTab:nil inBackground:NO];
+	[self createAndLoadNewTab:nil withTitle:nil inBackground:NO];
 	
 	// Make the address bar first responder.
 	NSView<BaseView> * theView = self.browserView.activeTabItemView;
@@ -1137,25 +1144,41 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 }
 
 /* createNewTab
- * Open the specified URL in a new tab.
+ * but do not open specified URL yet
  */
--(void)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
+-(BrowserPane *)createNewTab:(NSURL *)url withTitle:(NSString *)title inBackground:(BOOL)openInBackgroundFlag
 {
 	BrowserPaneTemplate * newBrowserTemplate = [[BrowserPaneTemplate alloc] init];
+	BrowserPane * newBrowserPane;
 	if (newBrowserTemplate)
 	{
-		BrowserPane * newBrowserPane = newBrowserTemplate.mainView;
-		
+		newBrowserPane = newBrowserTemplate.mainView;
+
 		[self.browserView createNewTabWithView:newBrowserPane makeKey:!openInBackgroundFlag];
 		[newBrowserPane setController:self];
-		if (url != nil)
-			[newBrowserPane loadURL:url inBackground:openInBackgroundFlag];
-		else
+		if (url == nil)
+		{
+			//tab title parameter being ignored for new tabs
 			[self.browserView setTabItemViewTitle:newBrowserPane title:NSLocalizedString(@"New Tab", nil)];
-		
+		}
+		else {
+			//set url but only load once tab opened
+			[newBrowserPane setUrl:url];
+			[self.browserView setTabItemViewTitle:newBrowserPane title:title];
+		}
 	}
-	if (didCompleteInitialisation)
-			[self.browserView performSelector:@selector(saveOpenTabs) withObject:nil afterDelay:3];
+	return newBrowserPane;
+}
+
+/* createNewTab
+ * Open the specified URL in a new tab.
+ */
+-(void)createAndLoadNewTab:(NSURL *)url withTitle:(NSString *)title inBackground:(BOOL)openInBackgroundFlag
+{
+	BrowserPane * newBrowserPane = [self createNewTab:url withTitle:title inBackground:openInBackgroundFlag];
+	if (url != nil && newBrowserPane != nil) {
+		[newBrowserPane load];
+	}
 }
 
 /* openVienna
@@ -3221,7 +3244,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)performWebSearch:(SearchMethod *)searchMethod
 {
-	[self createNewTab:[searchMethod queryURLforSearchString:searchString] inBackground:NO];
+	[self createAndLoadNewTab:[searchMethod queryURLforSearchString:searchString] withTitle:nil inBackground:NO];
 }
 
 /* performWebPageSearch
