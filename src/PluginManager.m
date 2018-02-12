@@ -361,7 +361,7 @@
 			{
 				NSURL * urlToLoad = cleanedUpAndEscapedUrlFromString(urlString);				
 				if (urlToLoad != nil)
-					[APPCONTROLLER createAndLoadNewTab:urlToLoad withTitle:nil inBackground:NO];
+					[APPCONTROLLER createAndLoadNewTab:urlToLoad inBackground:NO];
 			}
 			else
 			{

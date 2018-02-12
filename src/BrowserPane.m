@@ -291,8 +291,9 @@
 
 -(void)setUrl:(NSURL *)url {
 	_url = url;
-	addressField.stringValue = url.absoluteString;
-	[controller.browserView setTabItemViewTitle:self title:url.host];
+	addressField.stringValue = url ? url.absoluteString : @"";
+	[controller.browserView setTabItemViewTitle:self
+										  title:url ? url.host : NSLocalizedString(@"New Tab", nil)];
 }
 
 /* didStartProvisionalLoadForFrame
@@ -393,7 +394,10 @@
 	if ([viewTitle isEqualToString:@""])
 	{
 		if (lastError == nil)
+		{
 			[controller.browserView setTabItemViewTitle:self title:pageFilename];
+			self.viewTitle = pageFilename;
+		}
 	}
 	
 	[self willChangeValueForKey:@"isLoading"];

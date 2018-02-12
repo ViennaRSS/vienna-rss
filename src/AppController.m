@@ -195,16 +195,13 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 
 		// Start opening the old tabs once everything else has finished initializing and setting up
 		NSArray<NSString *> * tabLinks = [prefs arrayForKey:MAPref_TabList];
-		NSArray<NSString *> * tabTitles = [prefs arrayForKey:MAPref_TabTitleList];
-
-		if (tabTitles == nil || tabTitles.count < tabLinks.count) {
-			tabTitles = tabLinks;
-		}
+		NSDictionary<NSString *, NSString *> * tabTitles = [prefs objectForKey:MAPref_TabTitleDictionary];
 
 		for (int i = 0; i < tabLinks.count; i++)
 		{
-			[self createNewTab:(tabLinks[i].length ? [NSURL URLWithString:tabLinks[i]] : nil)
-					 withTitle:tabTitles[i] inBackground:YES];
+			NSString *tabLink = tabLinks[i].length ? tabLinks[i] : nil;
+			[self createNewTab:([NSURL URLWithString:tabLink])
+					 withTitle:tabTitles[tabLink] inBackground:YES];
 		}
 
 		doneSafeInit = YES;
@@ -1027,7 +1024,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			openInBackground = !openInBackground;
         }
 		
-		[self createAndLoadNewTab:item.representedObject withTitle:nil inBackground:openInBackground];
+		[self createAndLoadNewTab:item.representedObject inBackground:openInBackground];
 	}
 }
 
@@ -1053,7 +1050,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[self showMainWindow:self];
 	if (![theView isKindOfClass:[BrowserPane class]])
 	{
-		[self createAndLoadNewTab:nil withTitle:nil inBackground:NO];
+		[self createNewTab:nil inBackground:NO];
 		theView = self.browserView.activeTabItemView;
 	}
 	if ([theView isKindOfClass:[BrowserPane class]])
@@ -1095,7 +1092,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         }
 
 		for (NSURL * url in urls)
-			[self createAndLoadNewTab:url withTitle:nil inBackground:openInBackground];
+			[self createAndLoadNewTab:url inBackground:openInBackground];
 	}
 	else
 		[self openURLsInDefaultBrowser:urls];
@@ -1121,7 +1118,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)newTab:(id)sender
 {
 	// Create a new empty tab in the foreground.
-	[self createAndLoadNewTab:nil withTitle:nil inBackground:NO];
+	[self createNewTab:nil inBackground:NO];
 	
 	// Make the address bar first responder.
 	NSView<BaseView> * theView = self.browserView.activeTabItemView;
@@ -1146,39 +1143,41 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 /* createNewTab
  * but do not open specified URL yet
  */
--(BrowserPane *)createNewTab:(NSURL *)url withTitle:(NSString *)title inBackground:(BOOL)openInBackgroundFlag
+-(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
 {
 	BrowserPaneTemplate * newBrowserTemplate = [[BrowserPaneTemplate alloc] init];
 	BrowserPane * newBrowserPane;
 	if (newBrowserTemplate)
 	{
 		newBrowserPane = newBrowserTemplate.mainView;
-
 		[self.browserView createNewTabWithView:newBrowserPane makeKey:!openInBackgroundFlag];
 		[newBrowserPane setController:self];
-		if (url == nil)
-		{
-			//tab title parameter being ignored for new tabs
-			[self.browserView setTabItemViewTitle:newBrowserPane title:NSLocalizedString(@"New Tab", nil)];
-		}
-		else {
-			//set url but only load once tab opened
-			[newBrowserPane setUrl:url];
-			[self.browserView setTabItemViewTitle:newBrowserPane title:title];
-		}
+		//set url but do not load yet
+		[newBrowserPane setUrl:url];
 	}
 	return newBrowserPane;
 }
 
-/* createNewTab
+/* createNewTab with specified title
+ * but do not open specified URL yet
+ */
+-(BrowserPane *)createNewTab:(NSURL *)url withTitle:(NSString *)title inBackground:(BOOL)openInBackgroundFlag
+{
+	BrowserPane * newBrowserPane = [self createNewTab:url inBackground:openInBackgroundFlag];
+	if (title != nil) {
+		[self.browserView setTabItemViewTitle:newBrowserPane title:title];
+		[newBrowserPane setViewTitle:title];
+	}
+	return newBrowserPane;
+}
+
+/* createNewTab with specified title
  * Open the specified URL in a new tab.
  */
--(void)createAndLoadNewTab:(NSURL *)url withTitle:(NSString *)title inBackground:(BOOL)openInBackgroundFlag
+-(void)createAndLoadNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
 {
-	BrowserPane * newBrowserPane = [self createNewTab:url withTitle:title inBackground:openInBackgroundFlag];
-	if (url != nil && newBrowserPane != nil) {
-		[newBrowserPane load];
-	}
+	BrowserPane * newBrowserPane = [self createNewTab:url inBackground:openInBackgroundFlag];
+	[newBrowserPane load];
 }
 
 /* openVienna
@@ -3244,7 +3243,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)performWebSearch:(SearchMethod *)searchMethod
 {
-	[self createAndLoadNewTab:[searchMethod queryURLforSearchString:searchString] withTitle:nil inBackground:NO];
+	[self createAndLoadNewTab:[searchMethod queryURLforSearchString:searchString] inBackground:NO];
 }
 
 /* performWebPageSearch
