@@ -192,22 +192,20 @@
 		
 		[self.tabView removeTabViewItem:tabViewItem];
 	}
+	[self closeTab:tabViewItem];
 }
 
 - (BOOL)tabView:(NSTabView *)inTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem
 {
-	if (tabViewItem.identifier == primaryTabItemView)
+	[self closeTab:tabViewItem];
+	return NO;
+}
+
+-(void)closeTab:(NSTabViewItem *)tabViewItem
+{
+	if (tabViewItem.identifier != primaryTabItemView)
 	{
-		return NO;
-	}
-	else
-	{
-		NSInteger oldIndex = [self.tabView indexOfTabViewItem:tabViewItem];
-		if (self.tabView.numberOfTabViewItems > (oldIndex + 1)) {
-			[self.tabView selectTabViewItemAtIndex:(oldIndex + 1)];
-		}
-		
-		return YES;
+		[self.tabView removeTabViewItem:tabViewItem];
 	}
 }
 
@@ -258,7 +256,7 @@
  */
 -(void)tabView:(NSTabView *)inTabView didSelectTabViewItem:(NSTabViewItem *)inTabViewItem
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabChanged" object:inTabViewItem.identifier];	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabChanged" object:inTabViewItem.identifier];
 }
 
 - (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView *)tabView
@@ -322,24 +320,24 @@
 -(void)saveOpenTabs
 {
 	NSMutableArray *tabLinks = [NSMutableArray arrayWithCapacity:self.countOfTabs];
-	NSMutableArray *tabTitles = [NSMutableArray arrayWithCapacity:self.countOfTabs];
+	NSMutableDictionary *tabTitles = [NSMutableDictionary dictionaryWithCapacity:self.countOfTabs];
 	
 	for (NSTabViewItem * tabViewItem in self.tabView.tabViewItems)
 	{
 		NSView<BaseView> * theView = tabViewItem.identifier;
 		NSString * tabLink = theView.viewLink;
-		NSString * tabTitle = @"";
-		if ([theView respondsToSelector:@selector(viewTitle)])
-			tabTitle = theView.viewTitle;
 		if (tabLink != nil)
 		{
 			[tabLinks addObject:tabLink];
-			[tabTitles addObject:tabTitle ? tabTitle : tabLink];
+			if ([theView respondsToSelector:@selector(viewTitle)] && theView.viewTitle != nil)
+			{
+				[tabTitles setObject:theView.viewTitle forKey:tabLink];
+			}
 		}
 	}
 
 	[[Preferences standardPreferences] setObject:tabLinks forKey:MAPref_TabList];
-	[[Preferences standardPreferences] setObject:tabTitles forKey:MAPref_TabTitleList];
+	[[Preferences standardPreferences] setObject:tabTitles forKey:MAPref_TabTitleDictionary];
 
 	[[Preferences standardPreferences] savePreferences];
 }
