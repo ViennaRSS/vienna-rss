@@ -46,7 +46,11 @@
 
 @property (weak, nonatomic) IBOutlet NSTabView *tabView;
 @property (weak, nonatomic) IBOutlet DisclosureView *tabBarDisclosureView;
-
+//queue for tab view items to select when current item is closed
+@property NSMutableArray<NSTabViewItem *> *tabViewOrder;
+//set to true to enable new tab selection behavior
+@property BOOL selectPreviousOnClose;
+@property BOOL selectNewItemFirst;
 @end
 
 @implementation BrowserView
@@ -54,7 +58,17 @@
 -(void)awakeFromNib
 {
 	[[self.tabView tabViewItemAtIndex:0] setLabel:NSLocalizedString(@"Articles", nil)];
-	
+
+	//TODO: make this a preference
+	self.selectPreviousOnClose = true;
+	self.selectNewItemFirst = true;
+
+	//do not initialize tabview order to restore default behavior
+	if (self.selectPreviousOnClose)
+	{
+		self.tabViewOrder = [NSMutableArray array];
+	}
+
 	//Metal is the default
 	[tabBarControl setStyleNamed:@"Unified"];
 	
@@ -139,7 +153,18 @@
 {
 	NSTabViewItem *tabViewItem = [[NSTabViewItem alloc] initWithIdentifier:newTabView];
 	tabViewItem.view = newTabView;
+
 	[self.tabView addTabViewItem:tabViewItem];
+
+	//newly created item will be selected first or last to be selected
+	if (self.selectNewItemFirst)
+	{
+		[self.tabViewOrder addObject:tabViewItem];
+	}
+	else
+	{
+		[self.tabViewOrder insertObject:tabViewItem atIndex:0];
+	}
 
 	if (keyIt) [self showTabItemView:newTabView];
 }
@@ -171,6 +196,8 @@
 		NSTabViewItem * item = [self.tabView tabViewItemAtIndex:i];
 		if (item.identifier != primaryTabItemView)
 		{
+			//most recently selected item moves to front of queue
+			[self.tabViewOrder removeObject:item];
 			[self.tabView removeTabViewItem:item];
 		}
 	}
@@ -182,16 +209,7 @@
  */
 -(void)closeTabItemView:(NSView *)tabItemView
 {
-	if (tabItemView != primaryTabItemView) {
-		NSTabViewItem *tabViewItem = [self.tabView tabViewItemWithIdentifier:tabItemView];
-		NSInteger oldIndex = [self.tabView indexOfTabViewItem:tabViewItem];
-
-		if (self.tabView.numberOfTabViewItems > (oldIndex + 1)) {
-			[self.tabView selectTabViewItemAtIndex:(oldIndex + 1)];
-		}
-		
-		[self.tabView removeTabViewItem:tabViewItem];
-	}
+	NSTabViewItem *tabViewItem = [self.tabView tabViewItemWithIdentifier:tabItemView];
 	[self closeTab:tabViewItem];
 }
 
@@ -205,6 +223,8 @@
 {
 	if (tabViewItem.identifier != primaryTabItemView)
 	{
+		[self.tabViewOrder removeObject:tabViewItem];
+		[self.tabView selectTabViewItem:self.tabViewOrder.lastObject];
 		[self.tabView removeTabViewItem:tabViewItem];
 	}
 }
@@ -257,6 +277,11 @@
 -(void)tabView:(NSTabView *)inTabView didSelectTabViewItem:(NSTabViewItem *)inTabViewItem
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabChanged" object:inTabViewItem.identifier];
+	if (inTabViewItem.identifier != primaryTabItemView)
+	{
+		[self.tabViewOrder removeObject:self.tabView.selectedTabViewItem];
+		[self.tabViewOrder addObject:self.tabView.selectedTabViewItem];
+	}
 }
 
 - (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView *)tabView
