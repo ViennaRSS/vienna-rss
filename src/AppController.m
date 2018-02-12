@@ -1140,8 +1140,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 }
 
-/* createNewTab
- * but do not open specified URL yet
+/* create tab with url
+ * but do not load the page
  */
 -(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
 {
@@ -1158,8 +1158,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	return newBrowserPane;
 }
 
-/* createNewTab with specified title
- * but do not open specified URL yet
+/* create tab with title and url
+ * but do not load the page
  */
 -(BrowserPane *)createNewTab:(NSURL *)url withTitle:(NSString *)title inBackground:(BOOL)openInBackgroundFlag
 {
@@ -1171,8 +1171,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	return newBrowserPane;
 }
 
-/* createNewTab with specified title
- * Open the specified URL in a new tab.
+/* create tab with url
+ * and load the page.
  */
 -(void)createAndLoadNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
 {
