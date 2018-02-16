@@ -2,7 +2,7 @@
 //  DirectoryMonitor.swift
 //  Vienna
 //
-//  Copyright 2017
+//  Copyright 2017-2018
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -67,7 +67,7 @@ final class DirectoryMonitor: NSObject {
             stop()
 
             if #available(macOS 10.12, *) {
-                os_log("Restarting directory monitor", log: .default, type: .debug)
+                os_log("Restarting directory monitor", type: .debug)
             } else {
                 NSLog("Restarting directory monitor")
             }
@@ -92,7 +92,7 @@ final class DirectoryMonitor: NSObject {
 
         // The callback will pass along the raw pointer to the direcory monitor
         // instance. Recasting this will make the event handler accessible.
-        let callback: FSEventStreamCallback = { (_, context, _, _, _, _) -> Void in
+        let callback: FSEventStreamCallback = { _, context, _, _, _, _ -> Void in
             if let context = context {
                 let monitor = Unmanaged<DirectoryMonitor>.fromOpaque(context).takeUnretainedValue()
 

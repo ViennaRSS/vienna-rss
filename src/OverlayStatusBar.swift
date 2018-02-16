@@ -2,7 +2,7 @@
 //  OverlayStatusBar.swift
 //  Vienna
 //
-//  Copyright 2017
+//  Copyright 2017-2018
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -268,6 +268,7 @@ final class OverlayStatusBar: NSView {
                 return
             }
 
+            // swiftlint:disable trailing_closure realm/SwiftLint#1754
             NSAnimationContext.runAnimationGroup({ context in
                 context.duration = 0.4
 
