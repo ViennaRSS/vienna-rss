@@ -48,26 +48,40 @@
 @property (weak, nonatomic) IBOutlet DisclosureView *tabBarDisclosureView;
 //queue for tab view items to select when current item is closed
 @property NSMutableArray<NSTabViewItem *> *tabViewOrder;
-//set to true to enable new tab selection behavior
+
+//when closing a tab, the previously open tab gets selected
 @property BOOL selectPreviousOnClose;
+//IF selectpreviousonclose
+	//true means the most recently created tab is the next in the order
 @property BOOL selectNewItemFirst;
+	//true means "previous" is interpreted as "from where it was opened"
+	//this preference is not functional yet since
+	//we cannot distinguish between browser and article list opened tabs
+@property BOOL applyOnlyToBrowserOpenedTabs;
+//if NOT selectpreviousonclose
+	//true means the next tab to be opened is the one on the right (if it exists)
+@property BOOL selectRightItemFirst;
+
+//whether the article tab is treated specially
+@property BOOL canJumpToArticles;
+
 @end
 
 @implementation BrowserView
 
 -(void)awakeFromNib
 {
+	self.selectPreviousOnClose = false;
+	//only works if selectpreviousonclose is true
+	self.selectNewItemFirst = false;
+	//only works if selectpreviousonclose is false
+	self.selectRightItemFirst = true;
+	//only relevant if (selectpreviousonclose is true) or (selectrightitemfirst is false)
+	self.canJumpToArticles = false;
+
 	[[self.tabView tabViewItemAtIndex:0] setLabel:NSLocalizedString(@"Articles", nil)];
 
-	//TODO: make this a preference
-	self.selectPreviousOnClose = true;
-	self.selectNewItemFirst = true;
-
-	//do not initialize tabview order to restore default behavior
-	if (self.selectPreviousOnClose)
-	{
-		self.tabViewOrder = [NSMutableArray array];
-	}
+	self.tabViewOrder = [NSMutableArray array];
 
 	//Metal is the default
 	[tabBarControl setStyleNamed:@"Unified"];
@@ -119,6 +133,9 @@
 	
 	[primaryTabItemView setNeedsDisplay:YES];
 	[self setActiveTabToPrimaryTab];
+	//this call seems to be necessary manually here, no delegate call
+	//maybe setPrimaryTabItemView is called earlier than the delegate IBOutlet setup.
+	[self tabView:self.tabView didSelectTabViewItem:item];
 }
 
 /* activeTabItemView
@@ -196,17 +213,12 @@
 		NSTabViewItem * item = [self.tabView tabViewItemAtIndex:i];
 		if (item.identifier != primaryTabItemView)
 		{
-			//most recently selected item moves to front of queue
 			[self.tabViewOrder removeObject:item];
 			[self.tabView removeTabViewItem:item];
 		}
 	}
 }
 
-/* closeTab
- * Close the specified tab unless it is the primary tab, in which case
- * we do nothing.
- */
 -(void)closeTabItemView:(NSView *)tabItemView
 {
 	NSTabViewItem *tabViewItem = [self.tabView tabViewItemWithIdentifier:tabItemView];
@@ -221,12 +233,32 @@
 
 -(void)closeTab:(NSTabViewItem *)tabViewItem
 {
-	if (tabViewItem.identifier != primaryTabItemView)
+	//remove closing tab from tab order
+	[self.tabViewOrder removeObject:tabViewItem];
+
+	if (self.tabView.selectedTabViewItem == tabViewItem)
 	{
-		[self.tabViewOrder removeObject:tabViewItem];
-		[self.tabView selectTabViewItem:self.tabViewOrder.lastObject];
-		[self.tabView removeTabViewItem:tabViewItem];
+		if (self.selectPreviousOnClose) {
+			//open most recently opened tab
+			[self.tabView selectTabViewItem:self.tabViewOrder.lastObject];
+		}
+		else if (self.selectRightItemFirst
+				 && [self.tabView indexOfTabViewItem:tabViewItem] < self.tabView.numberOfTabViewItems - 1)
+		{
+			//since tab is not the last, select the one right of it
+			[self.tabView selectTabViewItemAtIndex:[self.tabView indexOfTabViewItem:tabViewItem] + 1];
+		}
+		else if (self.canJumpToArticles == false
+				 && [self.tabView indexOfTabViewItem:tabViewItem] == 1
+				 && self.tabView.numberOfTabViewItems > 2)
+		{
+			//open tab to the right instead of article tab
+			[self.tabView selectTabViewItemAtIndex:2];
+		}
 	}
+
+	//close tab to be closed
+	[self.tabView removeTabViewItem:tabViewItem];
 }
 
 /* countOfTabs
@@ -277,7 +309,7 @@
 -(void)tabView:(NSTabView *)inTabView didSelectTabViewItem:(NSTabViewItem *)inTabViewItem
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabChanged" object:inTabViewItem.identifier];
-	if (inTabViewItem.identifier != primaryTabItemView)
+	if (self.canJumpToArticles || inTabViewItem.identifier != primaryTabItemView)
 	{
 		[self.tabViewOrder removeObject:self.tabView.selectedTabViewItem];
 		[self.tabViewOrder addObject:self.tabView.selectedTabViewItem];
