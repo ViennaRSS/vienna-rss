@@ -2,7 +2,7 @@
 //  GradientView.swift
 //  Vienna
 //
-//  Copyright 2017
+//  Copyright 2017-2018
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -26,9 +26,6 @@ class GradientView: NSView {
     /// The starting color of the gradient.
     @IBInspectable var startingColor: NSColor? {
         didSet {
-            // Make a copy to avoid sharing.
-            startingColor = startingColor?.copy() as? NSColor
-
             needsDisplay = true
         }
     }
@@ -36,9 +33,6 @@ class GradientView: NSView {
     /// The ending color of the gradient.
     @IBInspectable var endingColor: NSColor? {
         didSet {
-            // Make a copy to avoid sharing.
-            endingColor = endingColor?.copy() as? NSColor
-
             needsDisplay = true
         }
     }
@@ -58,7 +52,8 @@ class GradientView: NSView {
         // Clear the background and return if the starting color is not set.
         guard let startingColor = startingColor else {
             NSColor.clear.setFill()
-            dirtyRect.fill()
+            bounds.fill()
+
             return
         }
 
@@ -66,10 +61,10 @@ class GradientView: NSView {
         // the starting color. Otherwise, draw only the starting color.
         if let endingColor = endingColor, endingColor != startingColor {
             let gradient = NSGradient(starting: startingColor, ending: endingColor)
-            gradient?.draw(in: dirtyRect, angle: angle)
+            gradient?.draw(in: bounds, angle: angle)
         } else {
             startingColor.setFill()
-            dirtyRect.fill()
+            bounds.fill()
         }
     }
 
