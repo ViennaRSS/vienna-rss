@@ -113,10 +113,10 @@
 		[self didChangeValueForKey:@"isLoading"];
 		isLocalFile = NO;
 		viewTitle = nil;
-		openURLInBackground = NO;
 		pageFilename = nil;
 		lastError = nil;
 		hasRSSlink = NO;
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkAndLoad:) name:@"MA_Notify_TabChanged" object:self];
     }
     return self;
 }
@@ -147,9 +147,6 @@
 	cell.action = @selector(handleAddress:);
 	cell.font = [NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]];
 	addressField.cell = cell;
-
-	// Initialise address field
-	addressField.stringValue = @"";
 
 	// The RSS page button is hidden by default
 	[self showRssPageButton:NO];
@@ -226,7 +223,11 @@
 	// cleanUpUrl is a hack to handle Internationalized Domain Names. WebKit handles them automatically, so we tap into that.
 	NSURL *urlToLoad = cleanedUpAndEscapedUrlFromString(theURL);
 	if (urlToLoad != nil)
-		[self loadURL:urlToLoad inBackground:NO];
+	{
+		//set url and load immediately, because action was invoked by user
+		self.url = urlToLoad;
+		[self load];
+	}
 	else
 		[self activateAddressBar];
 }
@@ -244,25 +245,36 @@
 	[NSApp.mainWindow makeFirstResponder:addressField];
 }
 
+/* To perform initial loading when tab first opened
+ */
+-(void)checkAndLoad:(NSNotification *)notification {
+	if ((self.webPane).mainFrame.dataSource.request == nil)
+	{
+		[self load];
+	}
+}
+
 /* loadURL
  * Load the specified URL into the web frame.
  */
--(void)loadURL:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
+-(void)load
 {
-	self.viewTitle = @"";
-	openURLInBackground = openInBackgroundFlag;
-	isLocalFile = url.fileURL;
+	if (!self.url) {
+		return;
+	}
 
-	pageFilename = url.path.lastPathComponent.stringByDeletingPathExtension;
+	self.viewTitle = @"";
+	isLocalFile = self.url.fileURL;
+
+	pageFilename = self.url.path.lastPathComponent.stringByDeletingPathExtension;
 	
-	addressField.stringValue = url.absoluteString;
 	if ((self.webPane).loading)
 	{
 		[self willChangeValueForKey:@"isLoading"];
 		[self.webPane stopLoading:self];
 		[self didChangeValueForKey:@"isLoading"];
 	}
-	[(self.webPane).mainFrame loadRequest:[NSURLRequest requestWithURL:url]];
+	[(self.webPane).mainFrame loadRequest:[NSURLRequest requestWithURL:self.url]];
 }
 
 /* mouseDidMoveOverElement
@@ -275,6 +287,13 @@
         NSURL *url = [elementInformation valueForKey:@"WebElementLinkURL"];
         self.statusBar.label = url.absoluteString;
     }
+}
+
+-(void)setUrl:(NSURL *)url {
+	_url = url;
+	addressField.stringValue = url ? url.absoluteString : @"";
+	[controller.browserView setTabItemViewTitle:self
+										  title:url ? url.host : NSLocalizedString(@"New Tab", nil)];
 }
 
 /* didStartProvisionalLoadForFrame
@@ -305,9 +324,6 @@
 			isLoading = YES;
 			[self didChangeValueForKey:@"isLoading"];
 		}
-		
-		if (!openURLInBackground)
-			[sender.window makeFirstResponder:sender];
 
 		// Show or hide the lock icon depending on whether this is a secure
 		// web page. Also shade the address bar a nice light yellow colour as
@@ -327,9 +343,9 @@
 		}
 		
 		if (!frame.dataSource.unreachableURL)
-			addressField.stringValue = theURL.absoluteString;
+			self.url = theURL;
 		else 
-			addressField.stringValue = frame.dataSource.unreachableURL.absoluteString;
+			self.url = frame.dataSource.unreachableURL;
 
 	}
 }
@@ -361,7 +377,7 @@
 				}
 				NSString *unreachableURL = frame.provisionalDataSource.unreachableURL.absoluteString;
 				if (unreachableURL != nil)
-					addressField.stringValue = frame.provisionalDataSource.unreachableURL.absoluteString;
+					self.url = frame.provisionalDataSource.unreachableURL;
 			}	
 		}
 		[self endFrameLoad];
@@ -378,14 +394,15 @@
 	if ([viewTitle isEqualToString:@""])
 	{
 		if (lastError == nil)
+		{
 			[controller.browserView setTabItemViewTitle:self title:pageFilename];
+			self.viewTitle = pageFilename;
+		}
 	}
 	
 	[self willChangeValueForKey:@"isLoading"];
 	isLoading = NO;
 	[self didChangeValueForKey:@"isLoading"];
-	
-	openURLInBackground = NO;
 }
 
 /* didFailLoadWithError
@@ -612,26 +629,6 @@
 	}
 }
 
-/* url
- * Return the URL of the page being displayed.
- */
--(NSURL *)url
-{
-	NSURL * theURL = nil;
-	WebDataSource * dataSource = (self.webPane).mainFrame.dataSource;
-	if (dataSource != nil)
-	{
-		theURL = dataSource.request.URL;
-	}
-	else
-	{
-		NSString * urlString = addressField.stringValue;
-		if (urlString != nil)
-			theURL = [NSURL URLWithString:urlString];
-	}
-	return theURL;
-}
-
 -(NSString *)viewTitle
 {
 	return viewTitle;
@@ -778,7 +775,7 @@
 {
     [NSUserDefaults.standardUserDefaults removeObserver:self
                                              forKeyPath:MAPref_ShowStatusBar];
-
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[self handleStopLoading:nil];
 	[webPane setFrameLoadDelegate:nil];
 	[webPane setUIDelegate:nil];

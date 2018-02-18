@@ -52,7 +52,6 @@
 	NSError * lastError;
 	BOOL isLocalFile;
 	BOOL isLoading;
-	BOOL openURLInBackground;
 	BOOL hasRSSlink;
 	NSString * viewTitle;
 }
@@ -68,8 +67,8 @@
 
 // Accessor functions
 -(void)setController:(AppController *)theController;
--(void)loadURL:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
-@property (nonatomic, readonly, copy) NSURL *url;
+-(void)load;
+@property (nonatomic) NSURL *url;
 @property (nonatomic, copy) NSString *viewTitle;
 @property (nonatomic, getter=isLoading, readonly) BOOL loading;
 @property (nonatomic, readonly) BOOL canGoBack;

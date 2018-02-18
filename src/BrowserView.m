@@ -46,6 +46,24 @@
 
 @property (weak, nonatomic) IBOutlet NSTabView *tabView;
 @property (weak, nonatomic) IBOutlet DisclosureView *tabBarDisclosureView;
+//queue for tab view items to select when current item is closed
+@property NSMutableArray<NSTabViewItem *> *tabViewOrder;
+
+//when closing a tab, the previously open tab gets selected
+@property BOOL selectPreviousOnClose;
+//IF selectpreviousonclose
+	//true means the most recently created tab is the next in the order
+@property BOOL selectNewItemFirst;
+	//true means "previous" is interpreted as "from where it was opened"
+	//this preference is not functional yet since
+	//we cannot distinguish between browser and article list opened tabs
+@property BOOL applyOnlyToBrowserOpenedTabs;
+//if NOT selectpreviousonclose
+	//true means the next tab to be opened is the one on the right (if it exists)
+@property BOOL selectRightItemFirst;
+
+//whether the article tab is treated specially
+@property BOOL canJumpToArticles;
 
 @end
 
@@ -53,8 +71,18 @@
 
 -(void)awakeFromNib
 {
+	self.selectPreviousOnClose = false;
+	//only works if selectpreviousonclose is true
+	self.selectNewItemFirst = false;
+	//only works if selectpreviousonclose is false
+	self.selectRightItemFirst = true;
+	//only relevant if (selectpreviousonclose is true) or (selectrightitemfirst is false)
+	self.canJumpToArticles = false;
+
 	[[self.tabView tabViewItemAtIndex:0] setLabel:NSLocalizedString(@"Articles", nil)];
-	
+
+	self.tabViewOrder = [NSMutableArray array];
+
 	//Metal is the default
 	[tabBarControl setStyleNamed:@"Unified"];
 	
@@ -105,6 +133,9 @@
 	
 	[primaryTabItemView setNeedsDisplay:YES];
 	[self setActiveTabToPrimaryTab];
+	//this call seems to be necessary manually here, no delegate call
+	//maybe setPrimaryTabItemView is called earlier than the delegate IBOutlet setup.
+	[self tabView:self.tabView didSelectTabViewItem:item];
 }
 
 /* activeTabItemView
@@ -139,7 +170,18 @@
 {
 	NSTabViewItem *tabViewItem = [[NSTabViewItem alloc] initWithIdentifier:newTabView];
 	tabViewItem.view = newTabView;
+
 	[self.tabView addTabViewItem:tabViewItem];
+
+	//newly created item will be selected first or last to be selected
+	if (self.selectNewItemFirst)
+	{
+		[self.tabViewOrder addObject:tabViewItem];
+	}
+	else
+	{
+		[self.tabViewOrder insertObject:tabViewItem atIndex:0];
+	}
 
 	if (keyIt) [self showTabItemView:newTabView];
 }
@@ -171,44 +213,52 @@
 		NSTabViewItem * item = [self.tabView tabViewItemAtIndex:i];
 		if (item.identifier != primaryTabItemView)
 		{
+			[self.tabViewOrder removeObject:item];
 			[self.tabView removeTabViewItem:item];
 		}
 	}
 }
 
-/* closeTab
- * Close the specified tab unless it is the primary tab, in which case
- * we do nothing.
- */
 -(void)closeTabItemView:(NSView *)tabItemView
 {
-	if (tabItemView != primaryTabItemView) {
-		NSTabViewItem *tabViewItem = [self.tabView tabViewItemWithIdentifier:tabItemView];
-		NSInteger oldIndex = [self.tabView indexOfTabViewItem:tabViewItem];
-
-		if (self.tabView.numberOfTabViewItems > (oldIndex + 1)) {
-			[self.tabView selectTabViewItemAtIndex:(oldIndex + 1)];
-		}
-		
-		[self.tabView removeTabViewItem:tabViewItem];
-	}
+	NSTabViewItem *tabViewItem = [self.tabView tabViewItemWithIdentifier:tabItemView];
+	[self closeTab:tabViewItem];
 }
 
 - (BOOL)tabView:(NSTabView *)inTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem
 {
-	if (tabViewItem.identifier == primaryTabItemView)
+	[self closeTab:tabViewItem];
+	return NO;
+}
+
+-(void)closeTab:(NSTabViewItem *)tabViewItem
+{
+	//remove closing tab from tab order
+	[self.tabViewOrder removeObject:tabViewItem];
+
+	if (self.tabView.selectedTabViewItem == tabViewItem)
 	{
-		return NO;
-	}
-	else
-	{
-		NSInteger oldIndex = [self.tabView indexOfTabViewItem:tabViewItem];
-		if (self.tabView.numberOfTabViewItems > (oldIndex + 1)) {
-			[self.tabView selectTabViewItemAtIndex:(oldIndex + 1)];
+		if (self.selectPreviousOnClose) {
+			//open most recently opened tab
+			[self.tabView selectTabViewItem:self.tabViewOrder.lastObject];
 		}
-		
-		return YES;
+		else if (self.selectRightItemFirst
+				 && [self.tabView indexOfTabViewItem:tabViewItem] < self.tabView.numberOfTabViewItems - 1)
+		{
+			//since tab is not the last, select the one right of it
+			[self.tabView selectTabViewItemAtIndex:[self.tabView indexOfTabViewItem:tabViewItem] + 1];
+		}
+		else if (self.canJumpToArticles == false
+				 && [self.tabView indexOfTabViewItem:tabViewItem] == 1
+				 && self.tabView.numberOfTabViewItems > 2)
+		{
+			//open tab to the right instead of article tab
+			[self.tabView selectTabViewItemAtIndex:2];
+		}
 	}
+
+	//close tab to be closed
+	[self.tabView removeTabViewItem:tabViewItem];
 }
 
 /* countOfTabs
@@ -258,7 +308,12 @@
  */
 -(void)tabView:(NSTabView *)inTabView didSelectTabViewItem:(NSTabViewItem *)inTabViewItem
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabChanged" object:inTabViewItem.identifier];	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabChanged" object:inTabViewItem.identifier];
+	if (self.canJumpToArticles || inTabViewItem.identifier != primaryTabItemView)
+	{
+		[self.tabViewOrder removeObject:self.tabView.selectedTabViewItem];
+		[self.tabViewOrder addObject:self.tabView.selectedTabViewItem];
+	}
 }
 
 - (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView *)tabView
@@ -322,16 +377,24 @@
 -(void)saveOpenTabs
 {
 	NSMutableArray *tabLinks = [NSMutableArray arrayWithCapacity:self.countOfTabs];
+	NSMutableDictionary *tabTitles = [NSMutableDictionary dictionaryWithCapacity:self.countOfTabs];
 	
 	for (NSTabViewItem * tabViewItem in self.tabView.tabViewItems)
 	{
 		NSView<BaseView> * theView = tabViewItem.identifier;
 		NSString * tabLink = theView.viewLink;
 		if (tabLink != nil)
-			[tabLinks addObject:tabLink];			
+		{
+			[tabLinks addObject:tabLink];
+			if ([theView respondsToSelector:@selector(viewTitle)] && theView.viewTitle != nil)
+			{
+				[tabTitles setObject:theView.viewTitle forKey:tabLink];
+			}
+		}
 	}
 
 	[[Preferences standardPreferences] setObject:tabLinks forKey:MAPref_TabList];
+	[[Preferences standardPreferences] setObject:tabTitles forKey:MAPref_TabTitleDictionary];
 
 	[[Preferences standardPreferences] savePreferences];
 }
