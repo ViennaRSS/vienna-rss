@@ -27,8 +27,6 @@
 // Initial paths
 NSString * MA_ApplicationSupportFolder = @"~/Library/Application Support/Vienna";
 NSString * MA_ScriptsFolder = @"~/Library/Scripts/Applications/Vienna";
-NSString * MA_EnclosureDownloadFolder = @"~/Desktop";
-NSString * MA_DefaultDownloadsFolder = @"~/Desktop";
 NSString * MA_DefaultStyleName = @"Default";
 NSString * MA_Database_Name = @"messages.db";
 NSString * MA_ImagesFolder_Name = @"Images";
@@ -272,7 +270,8 @@ static Preferences * _standardPreferences = nil;
 	defaultValues[MAPref_FilterMode] = @MA_Filter_All;
 	defaultValues[MAPref_MinimumFontSize] = @(MA_Default_MinimumFontSize);
 	defaultValues[MAPref_AutoExpireDuration] = @(MA_Default_AutoExpireDuration);
-	defaultValues[MAPref_DownloadsFolder] = MA_DefaultDownloadsFolder;
+	defaultValues[MAPref_DownloadsFolder] = [NSFileManager.defaultManager URLsForDirectory:NSDownloadsDirectory
+                                                                                 inDomains:NSUserDomainMask].firstObject.path;
 	defaultValues[MAPref_ArticleSortDescriptors] = defaultArticleSortDescriptors;
 	defaultValues[MAPref_LastRefreshDate] = [NSDate distantPast];
 	defaultValues[MAPref_Layout] = @MA_Layout_Report;
