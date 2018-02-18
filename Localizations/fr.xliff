@@ -2979,14 +2979,6 @@ Vérifiez également votre accès réseau.</target>
       
     </body>
   </file>
-  <file original="Vienna Tests/Info.plist" source-language="en" datatype="plaintext" target-language="fr">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
-    </header>
-    <body>
-      
-    </body>
-  </file>
   <file original="Vienna/Vienna Help/Info.plist" source-language="en" datatype="plaintext" target-language="fr">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
