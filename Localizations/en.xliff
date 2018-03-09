@@ -2408,16 +2408,6 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Vienna Tests/Info.plist" source-language="en" datatype="plaintext">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
-    </header>
-    <body>
-      <trans-unit id="CFBundleName">
-        <source>$(PRODUCT_NAME)</source>
-      </trans-unit>
-    </body>
-  </file>
   <file original="Vienna/Vienna Help/Info.plist" source-language="en" datatype="plaintext">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>

@@ -1949,6 +1949,11 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="es" state="translated">Copiar enlace de la página al portapapeles</target>
       </trans-unit>
+      <trans-unit id="Copy URL">
+        <source>Copy URL</source>
+        <note>Copy URL</note>
+        <target xml:lang="es" state="translated">Copiar URL</target>
+      </trans-unit>
       <trans-unit id="Credentials Prompt">
         <source>Credentials Prompt</source>
         <note>No comment provided by engineer.</note>
@@ -2916,16 +2921,10 @@ Compruebe también su acceso a la red.</target>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
-      
-      
-    </body>
-  </file>
-  <file original="Vienna Tests/Info.plist" source-language="en" datatype="plaintext" target-language="es">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
-    </header>
-    <body>
-      
+      <trans-unit id="NSHumanReadableCopyright">
+        <source>© 2004–2018 The Vienna RSS Project</source>
+        <target xml:lang="es" state="translated">© 2004–2018 El proyecto Vienna RSS</target>
+      </trans-unit>
     </body>
   </file>
   <file original="Vienna/Vienna Help/Info.plist" source-language="en" datatype="plaintext" target-language="es">
