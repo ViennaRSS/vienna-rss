@@ -28,7 +28,7 @@ Tags should be in one of the following formats:
  1.	Review all recent code changes and make sure you should not change `MACOSX_DEPLOYMENT_TARGET` in "Configs/Project-All.xcconfig" in order to protect users whose machines do not match minimum OS X requirements from a counter-productive "upgrade".
  2.	Make sure that the "CHANGES" file is up to date.
  3.	Copy the most recent part of "CHANGES" in a new text document and process it with Markdown to get a new "notes.html".
- 4.	Commit anything unstaged
+ 4.	Commit anything unstaged (on `master` branch if you are releasing a beta or on `stable` branch if you are doing a normal release).
  5.	Make a new tag using `git tag -s` _tagname_, respecting the above mentioned convention (if you do not have a gpg key, you can use `git tag -a` instead).
  6.	Run `make clean`.
  7.	Run `make release`. Check the last displayed messages to ensure yourself that the application is correctly signed.
