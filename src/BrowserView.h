@@ -23,12 +23,12 @@
 
 #import "BaseView.h"
 
-@class PSMTabBarControl;
+@class MMTabBarView;
 
 @interface BrowserView : NSView
 {
 	NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate> * primaryTabItemView;
-	IBOutlet PSMTabBarControl * tabBarControl;
+	IBOutlet MMTabBarView * tabBarControl;
 }
 
 // Accessors

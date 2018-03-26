@@ -175,3 +175,5 @@ src/autorevision.h
 # someone seems to keep personal notes in this file
 .idea
 
+Pods
+Podfile.lock

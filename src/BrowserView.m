@@ -21,8 +21,7 @@
 #import "BrowserView.h"
 #import "Preferences.h"
 #import "Constants.h"
-#import <PSMTabBarControl/PSMTabBarControl.h>
-#import <PSMTabBarControl/PSMRolloverButton.h>
+#import <MMTabBarView/MMTabBarView.h>
 #import "AppController.h"
 #import "DisclosureView.h"
 
@@ -42,7 +41,7 @@
 }
 @end
 
-@interface BrowserView ()
+@interface BrowserView () <MMTabBarViewDelegate>
 
 @property (weak, nonatomic) IBOutlet NSTabView *tabView;
 @property (weak, nonatomic) IBOutlet DisclosureView *tabBarDisclosureView;
@@ -84,18 +83,16 @@
 	self.tabViewOrder = [NSMutableArray array];
 
 	//Metal is the default
-	[tabBarControl setStyleNamed:@"Unified"];
-	
+	[tabBarControl setStyleNamed:@"Sierra"];
+
 	[tabBarControl setHideForSingleTab:YES];
 	[tabBarControl setUseOverflowMenu:YES];
 	[tabBarControl setAllowsBackgroundTabClosing:YES];
 	[tabBarControl setAutomaticallyAnimates:NO];
-	tabBarControl.cellMinWidth = 60.0;
-	tabBarControl.cellMaxWidth = 350.0;
+	//tabBarControl.cellMinWidth = 60.0;
+	//tabBarControl.cellMaxWidth = 350.0;
 
 	[tabBarControl setShowAddTabButton:YES];
-	tabBarControl.addTabButton.target = NSApp.delegate;
-	tabBarControl.addTabButton.action = @selector(newTab:);
 }
 
 /* stringForToolTip
@@ -225,12 +222,6 @@
 	[self closeTab:tabViewItem];
 }
 
-- (BOOL)tabView:(NSTabView *)inTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem
-{
-	[self closeTab:tabViewItem];
-	return NO;
-}
-
 -(void)closeTab:(NSTabViewItem *)tabViewItem
 {
 	//remove closing tab from tab order
@@ -321,6 +312,18 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabCountChanged" object:nil];
 }
 
+#pragma mark - TabBarDelegate
+
+-(void)addNewTabToTabView:(NSTabView *)aTabView {
+	[NSApp.delegate performSelector:@selector(newTab:) withObject:aTabView];
+}
+
+- (BOOL)tabView:(NSTabView *)inTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem
+{
+	[self closeTab:tabViewItem];
+	return NO;
+}
+
 /* disableTabCloseForTabViewItem
  * Returns whether the tab close should be disabled for the specified item. We disable the close button
  * for the primary item.
@@ -333,7 +336,7 @@
 /* tabView:shouldDragTabViewItem:fromTabBar:
  * Should a tab view item be allowed to be dragged?
  */
-- (BOOL)tabView:(NSTabView *)aTabView shouldDragTabViewItem:(NSTabViewItem *)tabViewItem fromTabBar:(PSMTabBarControl *)tabBarControl
+- (BOOL)tabView:(NSTabView *)aTabView shouldDragTabViewItem:(NSTabViewItem *)tabViewItem fromTabBar:(MMTabBarView *)tabBarControl
 {
 	return YES;
 }
@@ -341,7 +344,7 @@
 /* tabView:shouldDropTabViewItem:inTabBar:
  * Should a tab view item drop be accepted?
  */
-- (BOOL)tabView:(NSTabView *)aTabView shouldDropTabViewItem:(NSTabViewItem *)tabViewItem inTabBar:(PSMTabBarControl *)tabBarControl
+- (BOOL)tabView:(NSTabView *)aTabView shouldDropTabViewItem:(NSTabViewItem *)tabViewItem inTabBar:(MMTabBarView *)tabBarControl
 {
 	return YES;
 }
@@ -349,23 +352,23 @@
 /* tabView:didDropTabViewItem:inTabBar:
  * A drag & drop operation of a tab view item was completed.
  */
-- (void)tabView:(NSTabView*)aTabView didDropTabViewItem:(NSTabViewItem *)tabViewItem inTabBar:(PSMTabBarControl *)tabBarControl
+- (void)tabView:(NSTabView*)aTabView didDropTabViewItem:(NSTabViewItem *)tabViewItem inTabBar:(MMTabBarView *)tabBarControl
 {
 }
 
 /* tabView:shouldAllowTabViewItem:toLeaveTabBar:
  * Should a tab view item be allowed to leave the tab bar?
  */
-- (BOOL)tabView:(NSTabView *)aTabView shouldAllowTabViewItem:(NSTabViewItem *)tabViewItem toLeaveTabBar:(PSMTabBarControl *)tabBarControl;
+- (BOOL)tabView:(NSTabView *)aTabView shouldAllowTabViewItem:(NSTabViewItem *)tabViewItem toLeaveTabBar:(MMTabBarView *)tabBarControl;
 {
 	return NO;
 }
 
-- (void)tabView:(NSTabView *)aTabView tabBarDidHide:(PSMTabBarControl *)tabBarControl {
+- (void)tabView:(NSTabView *)aTabView tabBarDidHide:(MMTabBarView *)tabBarControl {
     [self.tabBarDisclosureView collapse:YES];
 }
 
-- (void)tabView:(NSTabView *)aTabView tabBarDidUnhide:(PSMTabBarControl *)tabBarControl {
+- (void)tabView:(NSTabView *)aTabView tabBarDidUnhide:(MMTabBarView *)tabBarControl {
     [self.tabBarDisclosureView disclose:YES];
 }
 
