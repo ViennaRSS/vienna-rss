@@ -22,6 +22,7 @@
 @import WebKit;
 
 #import "BaseView.h"
+#import <MMTabBarView/MMTabBarItem.h>
 
 // This is defined somewhere but I can't find where.
 #define WebKitErrorPlugInWillHandleLoad	204
@@ -37,7 +38,7 @@
 @interface BrowserPaneButton : NSButton {}
 @end
 
-@interface BrowserPane : NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate> {
+@interface BrowserPane : NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate, MMTabBarItem> {
 	TabbedWebView * webPane;
 	IBOutlet NSButton * backButton;
 	IBOutlet NSButton * forwardButton;
@@ -75,4 +76,8 @@
 @property (nonatomic, readonly) BOOL canGoForward;
 -(void)handleStopLoading:(id)sender;
 -(void)activateAddressBar;
+
+//tabBarItem functions
+@property (assign) BOOL hasCloseButton;
+@property (assign) BOOL isProcessing;
 @end

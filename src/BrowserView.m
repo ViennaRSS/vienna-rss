@@ -70,6 +70,14 @@
 
 -(void)awakeFromNib
 {
+	[[self.tabView tabViewItemAtIndex:0] setLabel:NSLocalizedString(@"Articles", nil)];
+	[self configureTabBar];
+
+	self.tabViewOrder = [NSMutableArray array];
+}
+
+-(void)configureTabClosingBehavior
+{
 	self.selectPreviousOnClose = false;
 	//only works if selectpreviousonclose is true
 	self.selectNewItemFirst = false;
@@ -77,22 +85,28 @@
 	self.selectRightItemFirst = true;
 	//only relevant if (selectpreviousonclose is true) or (selectrightitemfirst is false)
 	self.canJumpToArticles = false;
+}
 
-	[[self.tabView tabViewItemAtIndex:0] setLabel:NSLocalizedString(@"Articles", nil)];
-
-	self.tabViewOrder = [NSMutableArray array];
-
-	//Metal is the default
-	[tabBarControl setStyleNamed:@"Sierra"];
-
-	[tabBarControl setHideForSingleTab:YES];
-	[tabBarControl setUseOverflowMenu:YES];
+-(void)configureTabBar
+{
+	[tabBarControl setStyleNamed:@"Unified"];
+	//TODO: set NO
+	[tabBarControl setOnlyShowCloseOnHover:YES];
+	[tabBarControl setCanCloseOnlyTab:NO];
+	[tabBarControl setDisableTabClose:NO];
 	[tabBarControl setAllowsBackgroundTabClosing:YES];
-	[tabBarControl setAutomaticallyAnimates:NO];
-	//tabBarControl.cellMinWidth = 60.0;
-	//tabBarControl.cellMaxWidth = 350.0;
-
+	//TODO: set yes. Currently, this causes bug and tabbar never shows
+	[tabBarControl setHideForSingleTab:NO];
 	[tabBarControl setShowAddTabButton:YES];
+	//TODO: adapt for new style. Default is actually good
+	//[tabBarControl setButtonMinWidth:60];
+	//[tabBarControl setButtonMaxWidth:350];
+	[tabBarControl setUseOverflowMenu:YES];
+	//TODO: evaluate whether animations are nice
+	//TODO: switching this off seems to cause a bug and the tabbar never shows
+	[tabBarControl setAutomaticallyAnimates:YES];
+	//TODO: figure out what this property means
+	[tabBarControl setAllowsScrubbing:YES];
 }
 
 /* stringForToolTip
@@ -260,7 +274,7 @@
 	return self.tabView.numberOfTabViewItems;
 }
 
-/* showTabVew
+/* showTabItemView
  * Makes the specified tab active if not already and post a notification.
  */
 -(void)showTabItemView:(NSView *)theTabView
@@ -294,6 +308,59 @@
 		[self.tabView selectNextTabViewItem:self];
 }
 
+#pragma mark - TabBarDelegate
+
+// Additional NSTabView delegate methods
+
+/* disableTabCloseForTabViewItem
+ * Returns whether the tab close should be disabled for the specified item. We disable the close button
+ * for the primary item.
+ */
+- (BOOL)tabView:(NSTabView *)aTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem
+{
+	[self closeTab:tabViewItem];
+	//TODO: let tab bar do the work. return tabViewItem.identifier != primaryTabItemView;
+	return NO;
+}
+
+// Closing behavior
+- (BOOL)tabView:(NSTabView *)aTabView disableTabCloseForTabViewItem:(NSTabViewItem *)tabViewItem
+{
+	//prevent closing the first tab (articles tab)
+	return tabViewItem.identifier == primaryTabItemView;
+}
+
+// Adding tabs
+- (void)addNewTabToTabView:(NSTabView *)aTabView
+{
+	//TODO: handle this locally in the browser view if possible, to disentangle appdelegate
+	[NSApp.delegate performSelector:@selector(newTab:) withObject:nil];
+}
+
+/*// Contextual menu support
+- (NSMenu *)tabView:(NSTabView *)aTabView menuForTabViewItem:(NSTabViewItem *)tabViewItem
+{
+ 	//TODO: we can return items like "reload", "close", "close all others" etc. here.
+	return nil;
+}*/
+
+/*- (void)tabView:(NSTabView *)aTabView closeWindowForLastTabViewItem:(NSTabViewItem *)tabViewItem
+{
+ 	//TODO: Close Vienna
+}*/
+
+/*// Tooltips
+- (NSString *)tabView:(NSTabView *)aTabView toolTipForTabViewItem:(NSTabViewItem *)tabViewItem
+{
+ 	//TODO: return string for tooltip here;
+}*/
+
+/*// Accessibility
+- (NSString *)accessibilityStringForTabView:(NSTabView *)aTabView objectCount:(NSInteger)objectCount
+{
+	//TODO: return string for accessibility here
+}*/
+
 /* didSelectTabViewItem
  * Called when the tab is changed.
  */
@@ -312,67 +379,42 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabCountChanged" object:nil];
 }
 
-#pragma mark - TabBarDelegate
 
--(void)addNewTabToTabView:(NSTabView *)aTabView {
-	[NSApp.delegate performSelector:@selector(newTab:) withObject:aTabView];
-}
+// Drag and drop related methods
 
-- (BOOL)tabView:(NSTabView *)inTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem
+- (BOOL)tabView:(NSTabView *)aTabView shouldDragTabViewItem:(NSTabViewItem *)tabViewItem inTabBarView:(MMTabBarView *)tabBarView
 {
-	[self closeTab:tabViewItem];
-	return NO;
+	//prevent dragging articles tab
+	return tabViewItem.identifier != primaryTabItemView;
 }
 
-/* disableTabCloseForTabViewItem
- * Returns whether the tab close should be disabled for the specified item. We disable the close button
- * for the primary item.
- */
--(BOOL)tabView:(NSTabView *)aTabView disableTabCloseForTabViewItem:(NSTabViewItem *)tabViewItem
+- (NSDragOperation)tabView:(NSTabView *)aTabView validateDrop:(id <NSDraggingInfo>)sender proposedItem:(NSTabViewItem *)tabViewItem proposedIndex:(NSUInteger)proposedIndex inTabBarView:(MMTabBarView *)tabBarView
 {
-	return (tabViewItem.identifier == primaryTabItemView);
+	return proposedIndex == 0 ? NSDragOperationNone : NSDragOperationAll;
 }
 
-/* tabView:shouldDragTabViewItem:fromTabBar:
- * Should a tab view item be allowed to be dragged?
- */
-- (BOOL)tabView:(NSTabView *)aTabView shouldDragTabViewItem:(NSTabViewItem *)tabViewItem fromTabBar:(MMTabBarView *)tabBarControl
+- (NSDragOperation)tabView:(NSTabView *)aTabView validateSlideOfProposedItem:(NSTabViewItem *)tabViewItem proposedIndex:(NSUInteger)proposedIndex inTabBarView:(MMTabBarView *)tabBarView
 {
-	return YES;
+	//Do not slide past Articles tab (primary tab at index 0)
+	return proposedIndex == 0 ? NSDragOperationNone : NSDragOperationAll;
 }
 
-/* tabView:shouldDropTabViewItem:inTabBar:
- * Should a tab view item drop be accepted?
- */
-- (BOOL)tabView:(NSTabView *)aTabView shouldDropTabViewItem:(NSTabViewItem *)tabViewItem inTabBar:(MMTabBarView *)tabBarControl
+
+// Informal tab bar visibility methods
+
+- (void)tabView:(NSTabView *)aTabView tabBarViewDidHide:(MMTabBarView *)tabBarView
 {
-	return YES;
+	[self.tabBarDisclosureView collapse:YES];
 }
 
-/* tabView:didDropTabViewItem:inTabBar:
- * A drag & drop operation of a tab view item was completed.
- */
-- (void)tabView:(NSTabView*)aTabView didDropTabViewItem:(NSTabViewItem *)tabViewItem inTabBar:(MMTabBarView *)tabBarControl
+- (void)tabView:(NSTabView *)aTabView tabBarViewDidUnhide:(MMTabBarView *)tabBarView
 {
+	[self.tabBarDisclosureView disclose:YES];
 }
 
-/* tabView:shouldAllowTabViewItem:toLeaveTabBar:
- * Should a tab view item be allowed to leave the tab bar?
- */
-- (BOOL)tabView:(NSTabView *)aTabView shouldAllowTabViewItem:(NSTabViewItem *)tabViewItem toLeaveTabBar:(MMTabBarView *)tabBarControl;
-{
-	return NO;
-}
 
-- (void)tabView:(NSTabView *)aTabView tabBarDidHide:(MMTabBarView *)tabBarControl {
-    [self.tabBarDisclosureView collapse:YES];
-}
+#pragma mark - save
 
-- (void)tabView:(NSTabView *)aTabView tabBarDidUnhide:(MMTabBarView *)tabBarControl {
-    [self.tabBarDisclosureView disclose:YES];
-}
-
-#pragma mark -
 /* saveOpenTabs
  * Persist the URLs of each open tab to the preferences so they can be
  * restored when we reload.

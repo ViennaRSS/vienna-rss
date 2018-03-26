@@ -800,4 +800,15 @@
     }
 }
 
+-(void)setHasCloseButton:(BOOL)hasCloseButton
+{
+	//TODO: INTENTIONALLY EMPTY, find more elegant way
+}
+
+-(BOOL)hasCloseButton
+{
+	//TODO: find out why MMTabBar needs this and fix
+	return YES;
+}
+
 @end
