@@ -24,33 +24,33 @@ FOUNDATION_EXPORT double MMTabBarViewVersionNumber;
 //! Project version string for GameworkSDK.
 FOUNDATION_EXPORT const unsigned char MMTabBarViewVersionString[];
 
-#import "MMTabBarView.Globals.h"
+#import <MMTabBarView/MMTabBarView.Globals.h>
 
-#import "MMTabBarItem.h"
+#import <MMTabBarView/MMTabBarItem.h>
 
-#import "MMTabBarButton.h"
-#import "MMTabBarButtonCell.h"
+#import <MMTabBarView/MMTabBarButton.h>
+#import <MMTabBarView/MMTabBarButtonCell.h>
 
-#import "MMAttachedTabBarButton.h"
-#import "MMAttachedTabBarButtonCell.h"
+#import <MMTabBarView/MMAttachedTabBarButton.h>
+#import <MMTabBarView/MMAttachedTabBarButtonCell.h>
 
-#import "MMOverflowPopUpButton.h"
-#import "MMOverflowPopUpButtonCell.h"
+#import <MMTabBarView/MMOverflowPopUpButton.h>
+#import <MMTabBarView/MMOverflowPopUpButtonCell.h>
 
-#import "MMAdiumTabStyle.h"
-#import "MMAquaTabStyle.h"
-#import "MMCardTabStyle.h"
-#import "MMLiveChatTabStyle.h"
-#import "MMMetalTabStyle.h"
-#import "MMSafariTabStyle.h"
-#import "MMUnifiedTabStyle.h"
-#import "MMYosemiteTabStyle.h"
-#import "MMSierraTabStyle.h"
-#import "MMSierraRolloverButton.h"
-#import "MMSierraRolloverButtonCell.h"
+#import <MMTabBarView/MMAdiumTabStyle.h>
+#import <MMTabBarView/MMAquaTabStyle.h>
+#import <MMTabBarView/MMCardTabStyle.h>
+#import <MMTabBarView/MMLiveChatTabStyle.h>
+#import <MMTabBarView/MMMetalTabStyle.h>
+#import <MMTabBarView/MMSafariTabStyle.h>
+#import <MMTabBarView/MMUnifiedTabStyle.h>
+#import <MMTabBarView/MMYosemiteTabStyle.h>
+#import <MMTabBarView/MMSierraTabStyle.h>
+#import <MMTabBarView/MMSierraRolloverButton.h>
+#import <MMTabBarView/MMSierraRolloverButtonCell.h>
 
-#import "NSBezierPath+MMTabBarViewExtensions.h"
-#import "NSTabViewItem+MMTabBarViewExtensions.h"
+#import <MMTabBarView/NSBezierPath+MMTabBarViewExtensions.h>
+#import <MMTabBarView/NSTabViewItem+MMTabBarViewExtensions.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
