@@ -107,7 +107,6 @@
     self = [super initWithFrame:frame];
     if (self)
 	{
-		controller = nil;
 		[self willChangeValueForKey:@"isLoading"];
 		isLoading = NO;
 		[self didChangeValueForKey:@"isLoading"];
@@ -167,14 +166,6 @@
                                           forKeyPath:MAPref_ShowStatusBar
                                              options:NSKeyValueObservingOptionInitial
                                              context:nil];
-}
-
-/* setController
- * Sets the controller used by this view.
- */
--(void)setController:(AppController *)theController
-{
-	controller = theController;
 }
 
 /* viewLink
@@ -292,7 +283,7 @@
 -(void)setUrl:(NSURL *)url {
 	_url = url;
 	addressField.stringValue = url ? url.absoluteString : @"";
-	[controller.browserView setTabItemViewTitle:self
+	[self.browser setTabItemViewTitle:self
 										  title:url ? url.host : NSLocalizedString(@"New Tab", nil)];
 }
 
@@ -303,7 +294,7 @@
 {
 	if (frame == (self.webPane).mainFrame)
 	{
-		[controller.browserView setTabItemViewTitle:self title:NSLocalizedString(@"Loading…", nil)];
+		[self.browser setTabItemViewTitle:self title:NSLocalizedString(@"Loading…", nil)];
 		[self showRssPageButton:NO];
 		[self setError:nil];
 		self.viewTitle = @"";
@@ -395,7 +386,7 @@
 	{
 		if (lastError == nil)
 		{
-			[controller.browserView setTabItemViewTitle:self title:pageFilename];
+			[self.browser setTabItemViewTitle:self title:pageFilename];
 			self.viewTitle = pageFilename;
 		}
 	}
@@ -464,7 +455,7 @@
 {
 	if (frame == (self.webPane).mainFrame)
 	{
-		[controller.browserView setTabItemViewTitle:self title:title];
+		[self.browser setTabItemViewTitle:self title:title];
 		self.viewTitle = title;
 	}
 }
@@ -491,15 +482,15 @@
 	// Change this to handle modifier key?
 	// Is this covered by the webView policy?
 	{
-		[controller openURL:request.URL inPreferredBrowser:YES];
+		[APPCONTROLLER openURL:request.URL inPreferredBrowser:YES];
 		return nil;
 	}
 	else
 	// a script or a plugin requests a new window
 	// open a new tab and return its main webview
 	{
-		[controller newTab:nil];
-		NSView<BaseView> * theView = controller.browserView.activeTabItemView;
+		[self.browser newTab];
+		NSView<BaseView> * theView = self.browser.activeTabItemView;
 		BrowserPane * browserPane = (BrowserPane *)theView;
 		return browserPane.webPane;
 	}
@@ -562,7 +553,7 @@
 -(void)webViewClose:(WebView *)sender
 {
 	[self handleStopLoading:self];
-	[controller.browserView closeTabItemView:self];
+	[self.browser closeTabItemView:self];
 }
 
 /* contextMenuItemsForElement
@@ -572,11 +563,11 @@
 {
 	NSURL * urlLink = [element valueForKey:WebElementLinkURLKey];
 	if (urlLink != nil) 
-		return [controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
+		return [APPCONTROLLER contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
 	
 	WebFrame * frameKey = [element valueForKey:WebElementFrameKey];
 	if (frameKey != nil && !isLocalFile)
-		return [controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
+		return [APPCONTROLLER contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
 	
 	return defaultMenuItems;
 }
@@ -615,16 +606,16 @@
 	{
 		case NSFindPanelActionSetFindString:
 		{			
-			[self.webPane searchFor:controller.searchString direction:YES caseSensitive:NO wrap:YES];
+			[self.webPane searchFor:APPCONTROLLER.searchString direction:YES caseSensitive:NO wrap:YES];
 			break;
 		}
 			
 		case NSFindPanelActionNext:
-			[self.webPane searchFor:controller.searchString direction:YES caseSensitive:NO wrap:YES];
+			[self.webPane searchFor:APPCONTROLLER.searchString direction:YES caseSensitive:NO wrap:YES];
 			break;
 			
 		case NSFindPanelActionPrevious:
-			[self.webPane searchFor:controller.searchString direction:NO caseSensitive:NO wrap:YES];
+			[self.webPane searchFor:APPCONTROLLER.searchString direction:NO caseSensitive:NO wrap:YES];
 			break;
 	}
 }
@@ -743,22 +734,6 @@
 	}
 }
 
-/* isLoading
- * Returns whether the current web page is in the process of being loaded.
- */
--(BOOL)isLoading
-{
-	return isLoading;
-}
-
-/* isProcessing
- * Synonymous function that enables the progress indicator on the active tab.
- */
--(BOOL)isProcessing
-{
-	return self.loading;
-}
-
 /* handleKeyDown [delegate]
  * Support special key codes. If we handle the key, return YES otherwise
  * return NO to allow the framework to pass it on for default processing.
@@ -798,6 +773,27 @@
             self.statusBar = nil;
         }
     }
+}
+
+/* isLoading
+ * Returns whether the current web page is in the process of being loaded.
+ */
+-(BOOL)isLoading
+{
+	return isLoading;
+}
+
+/* isProcessing
+ * Synonymous function that enables the progress indicator on the active tab.
+ */
+-(BOOL)isProcessing
+{
+	return self.loading;
+}
+
+-(void)setIsProcessing:(BOOL)isProcessing
+{
+	//TODO: intentionally does nothing. Find more elegant way
 }
 
 -(void)setHasCloseButton:(BOOL)hasCloseButton

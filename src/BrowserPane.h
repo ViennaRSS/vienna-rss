@@ -27,7 +27,6 @@
 // This is defined somewhere but I can't find where.
 #define WebKitErrorPlugInWillHandleLoad	204
 
-@class AppController;
 @class BrowserView;
 @class SSTextField;
 @class TabbedWebView;
@@ -48,7 +47,6 @@
 	IBOutlet NSButton * iconImage;
 	IBOutlet NSImageView * lockIconImage;
 	IBOutlet NSView * viewwwer;
-	AppController * controller;
 	NSString * pageFilename;
 	NSError * lastError;
 	BOOL isLocalFile;
@@ -67,8 +65,8 @@
 -(IBAction)handleRSSPage:(id)sender;
 
 // Accessor functions
--(void)setController:(AppController *)theController;
 -(void)load;
+@property (nonatomic) BrowserView *browser;
 @property (nonatomic) NSURL *url;
 @property (nonatomic, copy) NSString *viewTitle;
 @property (nonatomic, getter=isLoading, readonly) BOOL loading;

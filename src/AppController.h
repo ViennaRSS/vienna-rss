@@ -141,7 +141,6 @@
 -(IBAction)condensedLayout:(id)sender;
 -(IBAction)makeTextLarger:(id)sender;
 -(IBAction)makeTextSmaller:(id)sender;
--(IBAction)newTab:(id)sender;
 -(IBAction)downloadEnclosure:(id)sender;
 -(IBAction)showHideFilterBar:(id)sender;
 -(IBAction)hideFilterBar:(id)sender;
@@ -157,7 +156,6 @@
 -(void)showUnreadCountOnApplicationIconAndWindowTitle;
 -(void)openURLFromString:(NSString *)urlString inPreferredBrowser:(BOOL)openInPreferredBrowserFlag;
 -(void)openURL:(NSURL *)url inPreferredBrowser:(BOOL)openInPreferredBrowserFlag;
--(void)createAndLoadNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
 -(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
 -(void)openURLInDefaultBrowser:(NSURL *)url;
 -(void)handleRSSLink:(NSString *)linkPath;
