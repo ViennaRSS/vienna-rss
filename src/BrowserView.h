@@ -24,6 +24,7 @@
 #import "BaseView.h"
 
 @class MMTabBarView;
+@class BrowserPane;
 
 @interface BrowserView : NSView
 {
@@ -32,6 +33,10 @@
 }
 
 // Accessors
+-(void)newTab;
+-(void)createAndLoadNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
+-(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
+-(BrowserPane *)createNewTab:(NSURL *)url withTitle:(NSString *)title inBackground:(BOOL)openInBackgroundFlag;
 -(void)setPrimaryTabItemView:(NSView *)newPrimaryTabItemView;
 -(void)setTabItemViewTitle:(NSView *)tabView title:(NSString *)newTitle;
 -(NSString *)tabItemViewTitle:(NSView *)tabView;

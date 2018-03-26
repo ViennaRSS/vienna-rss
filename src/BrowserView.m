@@ -18,6 +18,8 @@
 //  limitations under the License.
 //
 
+#import "BrowserPane.h"
+#import "BrowserPaneTemplate.h"
 #import "BrowserView.h"
 #import "Preferences.h"
 #import "Constants.h"
@@ -173,30 +175,6 @@
 	return primaryTabItemView;
 }
 
-/* createNewTabWithView
- * Create a new tab with the specified view. If makeKey is YES then the new tab is
- * made active, otherwise the current tab stays active.
- */
--(void)createNewTabWithView:(NSView<BaseView> *)newTabView makeKey:(BOOL)keyIt
-{
-	NSTabViewItem *tabViewItem = [[NSTabViewItem alloc] initWithIdentifier:newTabView];
-	tabViewItem.view = newTabView;
-
-	[self.tabView addTabViewItem:tabViewItem];
-
-	//newly created item will be selected first or last to be selected
-	if (self.selectNewItemFirst)
-	{
-		[self.tabViewOrder addObject:tabViewItem];
-	}
-	else
-	{
-		[self.tabViewOrder insertObject:tabViewItem atIndex:0];
-	}
-
-	if (keyIt) [self showTabItemView:newTabView];
-}
-
 /* setTabTitle
  * Sets the title of the specified tab then redraws the tab bar.
  */
@@ -333,8 +311,7 @@
 // Adding tabs
 - (void)addNewTabToTabView:(NSTabView *)aTabView
 {
-	//TODO: handle this locally in the browser view if possible, to disentangle appdelegate
-	[NSApp.delegate performSelector:@selector(newTab:) withObject:nil];
+	[self newTab];
 }
 
 /*// Contextual menu support
@@ -442,6 +419,86 @@
 	[[Preferences standardPreferences] setObject:tabTitles forKey:MAPref_TabTitleDictionary];
 
 	[[Preferences standardPreferences] savePreferences];
+}
+
+#pragma mark - new tab creation
+
+/* newTab
+ * Create a new empty tab.
+ */
+-(void)newTab
+{
+	// Create a new empty tab in the foreground.
+	[self createNewTab:nil inBackground:NO];
+
+	// Make the address bar first responder.
+	NSView<BaseView> * theView = self.activeTabItemView;
+	BrowserPane * browserPane = (BrowserPane *)theView;
+	[browserPane activateAddressBar];
+}
+
+/* create tab with title and url
+ * but do not load the page
+ */
+-(BrowserPane *)createNewTab:(NSURL *)url withTitle:(NSString *)title inBackground:(BOOL)openInBackgroundFlag
+{
+	BrowserPane * newBrowserPane = [self createNewTab:url inBackground:openInBackgroundFlag];
+	if (title != nil) {
+		[self setTabItemViewTitle:newBrowserPane title:title];
+		[newBrowserPane setViewTitle:title];
+	}
+	return newBrowserPane;
+}
+
+/* create tab with url
+ * and load the page.
+ */
+-(void)createAndLoadNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
+{
+	BrowserPane * newBrowserPane = [self createNewTab:url inBackground:openInBackgroundFlag];
+	[newBrowserPane load];
+}
+
+/* create tab with url
+ * but do not load the page
+ */
+-(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
+{
+	BrowserPaneTemplate * newBrowserTemplate = [[BrowserPaneTemplate alloc] init];
+	BrowserPane * newBrowserPane;
+	if (newBrowserTemplate)
+	{
+		newBrowserPane = newBrowserTemplate.mainView;
+		[self createNewTabWithView:newBrowserPane makeKey:!openInBackgroundFlag];
+		[newBrowserPane setBrowser:self];
+		//set url but do not load yet
+		[newBrowserPane setUrl:url];
+	}
+	return newBrowserPane;
+}
+
+/* createNewTabWithView
+ * Create a new tab with the specified view. If makeKey is YES then the new tab is
+ * made active, otherwise the current tab stays active.
+ */
+-(void)createNewTabWithView:(NSView<BaseView> *)newTabView makeKey:(BOOL)keyIt
+{
+	NSTabViewItem *tabViewItem = [[NSTabViewItem alloc] initWithIdentifier:newTabView];
+	tabViewItem.view = newTabView;
+
+	[self.tabView addTabViewItem:tabViewItem];
+
+	//newly created item will be selected first or last to be selected
+	if (self.selectNewItemFirst)
+	{
+		[self.tabViewOrder addObject:tabViewItem];
+	}
+	else
+	{
+		[self.tabViewOrder insertObject:tabViewItem atIndex:0];
+	}
+
+	if (keyIt) [self showTabItemView:newTabView];
 }
 
 /* dealloc
