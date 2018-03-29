@@ -67,7 +67,10 @@
       <trans-unit id="MEV-HA-bdL.title">
         <source>Show feeds icons in folder list</source>
         <note>Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "MEV-HA-bdL";</note>
-        <target xml:lang="uk" state="translated">Показувати зображення тек у списку</target>
+        <target xml:lang="uk" state="translated">Показувати зображення стрічок у списку тек</target>
+        <alt-trans>
+          <target xml:lang="uk">Показувати зображення тек у списку</target>
+        </alt-trans>
         <alt-trans>
           <target xml:lang="uk">Показувати зображення папок у списку</target>
         </alt-trans>
@@ -173,7 +176,10 @@
       <trans-unit id="34.title">
         <source>Access to %@ requires you to provide log in credentials</source>
         <note>Class = "NSTextFieldCell"; title = "Access to %@ requires you to provide log in credentials"; ObjectID = "34";</note>
-        <target xml:lang="uk" state="translated">Правили доступу до %@ вимагають введення імені користувача та паролю</target>
+        <target xml:lang="uk" state="translated">Правила доступу до %@ вимагають введення імені користувача та паролю</target>
+        <alt-trans>
+          <target xml:lang="uk">Правили доступу до %@ вимагають введення імені користувача та паролю</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="37.title">
         <source>Password:</source>
@@ -422,7 +428,10 @@
       <trans-unit id="xPF-M9-oZG.title">
         <source>Feed URL</source>
         <note>Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG";</note>
-        <target xml:lang="uk" state="translated">URL</target>
+        <target xml:lang="uk" state="translated">Адреса стрічки</target>
+        <alt-trans>
+          <target xml:lang="uk">URL</target>
+        </alt-trans>
       </trans-unit>
     </body>
   </file>
@@ -975,6 +984,26 @@
         <source>Search Articles</source>
         <note>Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327";</note>
         <target xml:lang="uk" state="translated">Шукати статті</target>
+      </trans-unit>
+      <trans-unit id="1336.title">
+        <source>Order By</source>
+        <note>Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336";</note>
+        <target xml:lang="uk" state="translated">Впорядкувати за</target>
+      </trans-unit>
+      <trans-unit id="1337.title">
+        <source>Order By</source>
+        <note>Class = "NSMenu"; title = "Order By"; ObjectID = "1337";</note>
+        <target xml:lang="uk" state="translated">Впорядкувати за</target>
+      </trans-unit>
+      <trans-unit id="1338.title">
+        <source>Manual</source>
+        <note>Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338";</note>
+        <target xml:lang="uk" state="translated">Вручну</target>
+      </trans-unit>
+      <trans-unit id="1339.title">
+        <source>Name</source>
+        <note>Class = "NSMenuItem"; title = "Name"; ObjectID = "1339";</note>
+        <target xml:lang="uk" state="translated">Назвою</target>
       </trans-unit>
       <trans-unit id="1408.title">
         <source>Unsubscribe</source>
@@ -1910,6 +1939,11 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="uk" state="translated">Помилка при обробці XML-даних у стрічці</target>
       </trans-unit>
+      <trans-unit id="Error: Feed not found!">
+        <source>Error: Feed not found!</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Помилка: стрічку не знайдено!</target>
+      </trans-unit>
       <trans-unit id="External Browser">
         <source>External Browser</source>
         <note>No comment provided by engineer.</note>
@@ -2124,6 +2158,11 @@
         <source>No</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="uk" state="translated">Ні</target>
+      </trans-unit>
+      <trans-unit id="No articles in feed">
+        <source>No articles in feed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Стрічка не містить статей</target>
       </trans-unit>
       <trans-unit id="No new articles available">
         <source>No new articles available</source>
