@@ -1366,6 +1366,16 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
+      <trans-unit id="Ar5-Qc-YTe.ibExternalAccessibilityDescription">
+        <source>Visit the website</source>
+        <note>Class = "NSButton"; ibExternalAccessibilityDescription = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
+        <target xml:lang="uk" state="translated">Відвідати веб-сайт</target>
+      </trans-unit>
+      <trans-unit id="Ar5-Qc-YTe.ibShadowedToolTip">
+        <source>Visit the website</source>
+        <note>Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
+        <target xml:lang="uk" state="translated">Відвідати веб-сайт</target>
+      </trans-unit>
       <trans-unit id="NKI-36-zCY.title">
         <source>Password:</source>
         <note>Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "NKI-36-zCY";</note>
