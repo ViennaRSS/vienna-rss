@@ -32,6 +32,11 @@
         <note>Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "GaX-8c-QaN";</note>
         <target xml:lang="uk" state="translated">Параметри представлені тут не повинні змінюватися за умов звичайного використання Vienna. За інформацією про параметри звертайтеся у відповідний розділ Довідки.</target>
       </trans-unit>
+      <trans-unit id="Ngw-hP-yW4.title">
+        <source>Concurrent downloads:</source>
+        <note>Class = "NSTextFieldCell"; title = "Concurrent downloads:"; ObjectID = "Ngw-hP-yW4";</note>
+        <target xml:lang="uk" state="translated">Одночасне завантаження:</target>
+      </trans-unit>
       <trans-unit id="guK-dE-f6n.title">
         <source>Enable JavaScript in the internal browser</source>
         <note>Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "guK-dE-f6n";</note>
@@ -417,6 +422,11 @@
         <source>More Styles…</source>
         <note>Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg";</note>
         <target xml:lang="uk" state="translated">Більше стилів…</target>
+      </trans-unit>
+      <trans-unit id="4ih-vj-fsk.title">
+        <source>Check Grammar With Spelling</source>
+        <note>Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "4ih-vj-fsk";</note>
+        <target xml:lang="uk" state="translated">Перевіряти правопис з граматикою</target>
       </trans-unit>
       <trans-unit id="5.title">
         <source>Bring All to Front</source>
@@ -1085,6 +1095,21 @@
         <note>Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377";</note>
         <target xml:lang="uk" state="translated">Фільтр:</target>
       </trans-unit>
+      <trans-unit id="1404.title">
+        <source>Current Filter</source>
+        <note>Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404";</note>
+        <target xml:lang="uk" state="translated">Чинний фільтр</target>
+      </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.label">
+        <source>Add</source>
+        <note>Class = "NSToolbarItem"; label = "Add"; ObjectID = "CPA-Ha-aj1";</note>
+        <target xml:lang="uk" state="translated">Додати</target>
+      </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.paletteLabel">
+        <source>Add</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1";</note>
+        <target xml:lang="uk" state="translated">Додати</target>
+      </trans-unit>
       <trans-unit id="Hs0-hu-A2g.title">
         <source>Refresh Selected Subscriptions</source>
         <note>Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g";</note>
@@ -1397,6 +1422,21 @@
         <source>%@ Info</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="uk" state="translated">Інформація про %@</target>
+      </trans-unit>
+      <trans-unit id="%@ of %@">
+        <source>%1$@ of %2$@</source>
+        <note>Progress in bytes, e.g. 1 KB of 1 MB</note>
+        <target xml:lang="uk" state="translated">%1$@ з %2$@</target>
+      </trans-unit>
+      <trans-unit id="%@ received">
+        <source>%@ received</source>
+        <note>Number of bytes received, e.g. 1 MB received</note>
+        <target xml:lang="uk" state="translated">одержано %@</target>
+      </trans-unit>
+      <trans-unit id="%@, %@">
+        <source>%1$@, %2$@</source>
+        <note>{existing authors},{new author name}</note>
+        <target xml:lang="uk" state="translated">%1$@, %2$@</target>
       </trans-unit>
       <trans-unit id="%d new articles retrieved">
         <source>%d new articles retrieved</source>
@@ -2392,8 +2432,10 @@ Also check your network access.</target>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
     </header>
     <body>
-      
-      
+      <trans-unit id="NSHumanReadableCopyright">
+        <source>© 2004–2018 The Vienna RSS Project</source>
+        <target xml:lang="uk" state="translated">© 2004–2018 Проект Vienna RSS</target>
+      </trans-unit>
     </body>
   </file>
   <file original="Vienna/Vienna Help/Info.plist" source-language="en" datatype="plaintext" target-language="uk">
