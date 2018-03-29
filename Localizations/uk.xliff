@@ -468,6 +468,11 @@
         <note>Class = "NSMenu"; title = "Window"; ObjectID = "24";</note>
         <target xml:lang="uk" state="translated">Вікно</target>
       </trans-unit>
+      <trans-unit id="27s-E3-FHd.title">
+        <source>Correct Spelling Automatically</source>
+        <note>Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "27s-E3-FHd";</note>
+        <target xml:lang="uk" state="translated">Виправляти правопис автоматично</target>
+      </trans-unit>
       <trans-unit id="58.title">
         <source>About Vienna</source>
         <note>Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58";</note>
@@ -1424,12 +1429,18 @@
       <trans-unit id="Ar5-Qc-YTe.ibExternalAccessibilityDescription">
         <source>Visit the website</source>
         <note>Class = "NSButton"; ibExternalAccessibilityDescription = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
-        <target xml:lang="uk" state="translated">Відвідати веб-сайт</target>
+        <target xml:lang="uk" state="translated">Відвідати веб-сторінку</target>
+        <alt-trans>
+          <target xml:lang="uk">Відвідати веб-сайт</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Ar5-Qc-YTe.ibShadowedToolTip">
         <source>Visit the website</source>
         <note>Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
-        <target xml:lang="uk" state="translated">Відвідати веб-сайт</target>
+        <target xml:lang="uk" state="translated">Відвідати веб-сторінку</target>
+        <alt-trans>
+          <target xml:lang="uk">Відвідати веб-сайт</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="NKI-36-zCY.title">
         <source>Password:</source>
@@ -1980,6 +1991,11 @@
         <source>Link</source>
         <note>Data field name visible in menu/article list</note>
         <target xml:lang="uk" state="translated">Посилання</target>
+      </trans-unit>
+      <trans-unit id="Loading">
+        <source>Loading</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Завантаження</target>
       </trans-unit>
       <trans-unit id="Loading…">
         <source>Loading…</source>
