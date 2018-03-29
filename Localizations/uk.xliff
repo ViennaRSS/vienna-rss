@@ -67,7 +67,10 @@
       <trans-unit id="MEV-HA-bdL.title">
         <source>Show feeds icons in folder list</source>
         <note>Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "MEV-HA-bdL";</note>
-        <target xml:lang="uk" state="translated">Показувати зображення папок у списку</target>
+        <target xml:lang="uk" state="translated">Показувати зображення тек у списку</target>
+        <alt-trans>
+          <target xml:lang="uk">Показувати зображення папок у списку</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="auD-UC-Pij.title">
         <source>Article list font:</source>
@@ -1305,6 +1308,11 @@
         <note>Class = "NSMenuItem"; title = "Rename…"; ObjectID = "l14-tu-w7l";</note>
         <target xml:lang="uk" state="translated">Переіменувати…</target>
       </trans-unit>
+      <trans-unit id="lhy-4c-asJ.placeholderString">
+        <source>Search for folders</source>
+        <note>Class = "NSSearchFieldCell"; placeholderString = "Search for folders"; ObjectID = "lhy-4c-asJ";</note>
+        <target xml:lang="uk" state="translated">Знайти теки</target>
+      </trans-unit>
       <trans-unit id="psA-wp-PcZ.title">
         <source>New Subscription…</source>
         <note>Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "psA-wp-PcZ";</note>
@@ -1314,6 +1322,11 @@
         <source>Unread Articles</source>
         <note>Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "sDP-Ni-g3a";</note>
         <target xml:lang="uk" state="translated">Непрочитані статті</target>
+      </trans-unit>
+      <trans-unit id="ty7-ph-peE.title">
+        <source>Unread or Flagged</source>
+        <note>Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "ty7-ph-peE";</note>
+        <target xml:lang="uk" state="translated">Непрочитані або помічені</target>
       </trans-unit>
       <trans-unit id="vOQ-xo-w8E.title">
         <source>Edit…</source>
@@ -1361,6 +1374,11 @@
         <source>Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.</source>
         <note>Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107";</note>
         <target xml:lang="uk" state="translated">Введіть адресу стрічки новин, або виберіть стрічку зі списку Джерело для того, щоб додати стрічку з заданого джерела.</target>
+      </trans-unit>
+      <trans-unit id="110.title">
+        <source>URL:</source>
+        <note>Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110";</note>
+        <target xml:lang="uk" state="translated">Адреса:</target>
       </trans-unit>
       <trans-unit id="111.title">
         <source>Save</source>
@@ -1451,6 +1469,16 @@
         <source>Login:</source>
         <note>Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "O2q-8o-CSb";</note>
         <target xml:lang="uk" state="translated">Ім'я:</target>
+      </trans-unit>
+      <trans-unit id="tec-2d-Xej.title">
+        <source>URL: https://</source>
+        <note>Class = "NSTextFieldCell"; title = "URL: https://"; ObjectID = "tec-2d-Xej";</note>
+        <target xml:lang="uk" state="translated">URL: https://</target>
+      </trans-unit>
+      <trans-unit id="uTl-XE-0ym.title">
+        <source>Server:</source>
+        <note>Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "uTl-XE-0ym";</note>
+        <target xml:lang="uk" state="translated">Сервер:</target>
       </trans-unit>
     </body>
   </file>
@@ -1677,6 +1705,11 @@
         <source>Copy Page Link to Clipboard</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="uk" state="translated">Копіювати посилання на сторінку у буфер</target>
+      </trans-unit>
+      <trans-unit id="Copy URL">
+        <source>Copy URL</source>
+        <note>Copy URL</note>
+        <target xml:lang="uk" state="translated">Скопіювати адресу</target>
       </trans-unit>
       <trans-unit id="Credentials Prompt">
         <source>Credentials Prompt</source>
