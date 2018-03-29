@@ -292,6 +292,11 @@
         <note>Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG";</note>
         <target xml:lang="uk" state="translated">RSS-переглядач за замовчуванням:</target>
       </trans-unit>
+      <trans-unit id="meo-78-YOl.title">
+        <source>Mark updated articles as new</source>
+        <note>Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl";</note>
+        <target xml:lang="uk" state="translated">Помічати оновлені статті як нові</target>
+      </trans-unit>
       <trans-unit id="oVW-ee-uJT.title">
         <source>Every 5 minutes</source>
         <note>Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "oVW-ee-uJT";</note>
@@ -306,6 +311,11 @@
         <source>Open new links in the background</source>
         <note>Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "pjg-Ze-H3l";</note>
         <target xml:lang="uk" state="translated">Відкривати посилання на задньому плані</target>
+      </trans-unit>
+      <trans-unit id="qeb-at-hYb.title">
+        <source>Updates:</source>
+        <note>Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb";</note>
+        <target xml:lang="uk" state="translated">Оновлення:</target>
       </trans-unit>
       <trans-unit id="sCl-hz-PFF.title">
         <source>Mark current article read:</source>
@@ -808,6 +818,11 @@
         <note>Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067";</note>
         <target xml:lang="uk" state="translated">Відкрити сторінку статті у зовнішньому браузері</target>
       </trans-unit>
+      <trans-unit id="1073.title">
+        <source>Send Link by Email</source>
+        <note>Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073";</note>
+        <target xml:lang="uk" state="translated">Надіслати посилання на ел. пошту</target>
+      </trans-unit>
       <trans-unit id="1084.title">
         <source>Bigger Text</source>
         <note>Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084";</note>
@@ -1109,6 +1124,21 @@
         <source>Add</source>
         <note>Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1";</note>
         <target xml:lang="uk" state="translated">Додати</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.label">
+        <source>All Read</source>
+        <note>Class = "NSToolbarItem"; label = "All Read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="uk" state="translated">Усі прочитані</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.paletteLabel">
+        <source>Mark All Items as Read</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Mark All Items as Read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="uk" state="translated">Помітити всі як прочитані</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.toolTip">
+        <source>Mark all items as read</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Mark all items as read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="uk" state="translated">Помітити всі як прочитані</target>
       </trans-unit>
       <trans-unit id="Hs0-hu-A2g.title">
         <source>Refresh Selected Subscriptions</source>
@@ -1533,10 +1563,23 @@
         <note>Toolbar item name for the Appearance preference pane</note>
         <target xml:lang="uk" state="translated">Вигляд</target>
       </trans-unit>
+      <trans-unit id="AppleScript Error in '%@' script">
+        <source>AppleScript Error in '%@' script</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Помилка AppleScript у сценарії «%@»</target>
+      </trans-unit>
       <trans-unit id="Articles">
         <source>Articles</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="uk" state="translated">Статті</target>
+      </trans-unit>
+      <trans-unit id="Ascending">
+        <source>Ascending</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">У висхідному</target>
+        <alt-trans>
+          <target xml:lang="uk">Висхідно</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Author">
         <source>Author</source>
@@ -1723,6 +1766,11 @@
         <note>Title of a menu item</note>
         <target xml:lang="uk" state="translated">Видалити…</target>
       </trans-unit>
+      <trans-unit id="Descending">
+        <source>Descending</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">У спадному</target>
+      </trans-unit>
       <trans-unit id="Do you really want to import the subscriptions from the specified OPML file?">
         <source>Do you really want to import the subscriptions from the specified OPML file?</source>
         <note>No comment provided by engineer.</note>
@@ -1807,6 +1855,11 @@
         <source>Error importing subscriptions title</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="uk" state="translated">Помилка імпорту</target>
+      </trans-unit>
+      <trans-unit id="Error loading script '%@'">
+        <source>Error loading script '%@'</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Помилка завантаження сценарію «%@»</target>
       </trans-unit>
       <trans-unit id="Error parsing XML data in feed">
         <source>Error parsing XML data in feed</source>
