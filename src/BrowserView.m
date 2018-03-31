@@ -25,7 +25,6 @@
 #import "Constants.h"
 #import <MMTabBarView/MMTabBarView.h>
 #import "AppController.h"
-#import "DisclosureView.h"
 
 @interface NSTabView (BrowserViewAdditions)
 	-(NSTabViewItem *)tabViewItemWithIdentifier:(id)identifier;
@@ -46,7 +45,6 @@
 @interface BrowserView () <MMTabBarViewDelegate>
 
 @property (weak, nonatomic) IBOutlet NSTabView *tabView;
-@property (weak, nonatomic) IBOutlet DisclosureView *tabBarDisclosureView;
 //queue for tab view items to select when current item is closed
 @property NSMutableArray<NSTabViewItem *> *tabViewOrder;
 
@@ -91,21 +89,16 @@
 
 -(void)configureTabBar
 {
-	[tabBarControl setStyleNamed:@"Unified"];
+	[tabBarControl setStyleNamed:@"Sierra"];
 	//TODO: set NO
 	[tabBarControl setOnlyShowCloseOnHover:YES];
 	[tabBarControl setCanCloseOnlyTab:NO];
 	[tabBarControl setDisableTabClose:NO];
 	[tabBarControl setAllowsBackgroundTabClosing:YES];
-	//TODO: set yes. Currently, this causes bug and tabbar never shows
-	[tabBarControl setHideForSingleTab:NO];
+	[tabBarControl setHideForSingleTab:YES];
 	[tabBarControl setShowAddTabButton:YES];
-	//TODO: adapt for new style. Default is actually good
-	//[tabBarControl setButtonMinWidth:60];
-	//[tabBarControl setButtonMaxWidth:350];
+	[tabBarControl setButtonMinWidth:120];
 	[tabBarControl setUseOverflowMenu:YES];
-	//TODO: evaluate whether animations are nice
-	//TODO: switching this off seems to cause a bug and the tabbar never shows
 	[tabBarControl setAutomaticallyAnimates:YES];
 	//TODO: figure out what this property means
 	[tabBarControl setAllowsScrubbing:YES];
@@ -138,7 +131,8 @@
 	{
 		item = [self.tabView tabViewItemWithIdentifier:primaryTabItemView];
 	}
-	
+
+	[item setHasCloseButton:NO];
 	item.identifier = newPrimaryTabItemView;
 	item.view = newPrimaryTabItemView;
 	
@@ -378,17 +372,17 @@
 
 
 // Informal tab bar visibility methods
-
+/*
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidHide:(MMTabBarView *)tabBarView
 {
-	[self.tabBarDisclosureView collapse:YES];
+
 }
 
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidUnhide:(MMTabBarView *)tabBarView
 {
-	[self.tabBarDisclosureView disclose:YES];
-}
 
+}
+*/
 
 #pragma mark - save
 
