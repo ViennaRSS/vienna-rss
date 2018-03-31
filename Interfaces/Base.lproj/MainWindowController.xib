@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -135,34 +135,20 @@
                                 <rect key="frame" x="289" y="0.0" width="653" height="603"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="MRm-h9-mFg" customClass="DisclosureView">
-                                        <rect key="frame" x="0.0" y="582" width="653" height="21"/>
-                                        <subviews>
-                                            <customView placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1238" customClass="MMTabBarView">
-                                                <rect key="frame" x="0.0" y="-1" width="653" height="22"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="23" id="Jqx-LT-OPI"/>
-                                                </constraints>
-                                                <connections>
-                                                    <outlet property="delegate" destination="1227" id="1242"/>
-                                                    <outlet property="nextKeyView" destination="1218" id="1247"/>
-                                                    <outlet property="partnerView" destination="1218" id="1248"/>
-                                                    <outlet property="tabView" destination="1218" id="1241"/>
-                                                </connections>
-                                            </customView>
-                                        </subviews>
+                                    <customView placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1238" customClass="MMTabBarView">
+                                        <rect key="frame" x="0.0" y="581" width="653" height="22"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="1238" secondAttribute="trailing" id="RDe-eK-VcG"/>
-                                            <constraint firstAttribute="bottom" secondItem="1238" secondAttribute="bottom" priority="600" constant="-1" id="ebe-Ri-mFz"/>
-                                            <constraint firstItem="1238" firstAttribute="leading" secondItem="MRm-h9-mFg" secondAttribute="leading" id="wF2-4m-db3"/>
-                                            <constraint firstItem="1238" firstAttribute="top" secondItem="MRm-h9-mFg" secondAttribute="top" id="wxL-HK-aKe"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="23" id="Jqx-LT-OPI"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="disclosedView" destination="1238" id="1dg-Zo-wDL"/>
+                                            <outlet property="delegate" destination="1227" id="1242"/>
+                                            <outlet property="nextKeyView" destination="1218" id="1247"/>
+                                            <outlet property="partnerView" destination="1218" id="1248"/>
+                                            <outlet property="tabView" destination="1218" id="1241"/>
                                         </connections>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="cTN-D0-dY2" customClass="DisclosureView">
-                                        <rect key="frame" x="0.0" y="553" width="653" height="29"/>
+                                        <rect key="frame" x="0.0" y="552" width="653" height="29"/>
                                         <subviews>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="1300" customClass="FilterView" customModule="Vienna" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="653" height="29"/>
@@ -313,12 +299,12 @@
                                         </connections>
                                     </customView>
                                     <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="1218" userLabel="Tab View">
-                                        <rect key="frame" x="0.0" y="0.0" width="653" height="553"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="653" height="552"/>
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
                                             <tabViewItem identifier="1" id="1221">
                                                 <view key="view" id="1222" userLabel="Detail View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="653" height="553"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="653" height="552"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
                                             </tabViewItem>
@@ -331,13 +317,13 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="cTN-D0-dY2" secondAttribute="trailing" id="Dnd-04-47H"/>
                                     <constraint firstAttribute="bottom" secondItem="1218" secondAttribute="bottom" id="HBr-7K-RIq"/>
+                                    <constraint firstItem="1238" firstAttribute="leading" secondItem="982" secondAttribute="leading" id="IGG-PC-4dc"/>
                                     <constraint firstItem="1218" firstAttribute="leading" secondItem="982" secondAttribute="leading" id="JdE-Xr-3cU"/>
-                                    <constraint firstItem="MRm-h9-mFg" firstAttribute="top" secondItem="982" secondAttribute="top" id="Mcd-W6-dnU"/>
-                                    <constraint firstItem="MRm-h9-mFg" firstAttribute="leading" secondItem="982" secondAttribute="leading" id="NCy-k7-vYU"/>
+                                    <constraint firstItem="1238" firstAttribute="top" secondItem="982" secondAttribute="top" id="Nrb-97-akz"/>
                                     <constraint firstItem="cTN-D0-dY2" firstAttribute="leading" secondItem="982" secondAttribute="leading" id="Uro-ri-PsA"/>
-                                    <constraint firstAttribute="trailing" secondItem="MRm-h9-mFg" secondAttribute="trailing" id="d5Z-f4-GZ2"/>
+                                    <constraint firstAttribute="trailing" secondItem="1238" secondAttribute="trailing" id="e8J-xt-ahN"/>
+                                    <constraint firstItem="cTN-D0-dY2" firstAttribute="top" secondItem="1238" secondAttribute="bottom" id="gyK-gD-vd8"/>
                                     <constraint firstAttribute="trailing" secondItem="1218" secondAttribute="trailing" id="hZE-7g-Od6"/>
-                                    <constraint firstItem="cTN-D0-dY2" firstAttribute="top" secondItem="MRm-h9-mFg" secondAttribute="bottom" id="kP6-Re-Yxc"/>
                                     <constraint firstItem="1218" firstAttribute="top" secondItem="cTN-D0-dY2" secondAttribute="bottom" id="mYB-Ey-lSh"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="zUd-Gj-eaw"/>
                                 </constraints>
@@ -838,7 +824,6 @@
             <autoresizingMask key="autoresizingMask"/>
             <connections>
                 <outlet property="tabBarControl" destination="1238" id="1243"/>
-                <outlet property="tabBarDisclosureView" destination="MRm-h9-mFg" id="sHl-dz-CjV"/>
                 <outlet property="tabView" destination="1218" id="1230"/>
             </connections>
         </customView>

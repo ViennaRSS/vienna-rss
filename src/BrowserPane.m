@@ -294,7 +294,6 @@
 {
 	if (frame == (self.webPane).mainFrame)
 	{
-		[self.browser setTabItemViewTitle:self title:NSLocalizedString(@"Loading…", nil)];
 		[self showRssPageButton:NO];
 		[self setError:nil];
 		self.viewTitle = @"";
