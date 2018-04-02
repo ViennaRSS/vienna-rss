@@ -8,6 +8,10 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.3.0
+-----
+- Improve Ukrainian localization
+
 3.3.0 rc 1
 ----------
 - Fix a problem with Sparkle autoupdate
