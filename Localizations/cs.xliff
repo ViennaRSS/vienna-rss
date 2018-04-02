@@ -440,6 +440,11 @@
         <note>Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg";</note>
         <target xml:lang="cs" state="translated">Více stylů…</target>
       </trans-unit>
+      <trans-unit id="4ih-vj-fsk.title">
+        <source>Check Grammar With Spelling</source>
+        <note>Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "4ih-vj-fsk";</note>
+        <target xml:lang="cs" state="translated">Kontrolovat gramatiku a pravopis</target>
+      </trans-unit>
       <trans-unit id="5.title">
         <source>Bring All to Front</source>
         <note>Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5";</note>
@@ -905,6 +910,11 @@
         <note>Class = "NSMenuItem"; title = "Rename…"; ObjectID = "1181";</note>
         <target xml:lang="cs" state="translated">Přejmenovat…</target>
       </trans-unit>
+      <trans-unit id="1184.title">
+        <source>Delete…</source>
+        <note>Class = "NSMenuItem"; title = "Delete…"; ObjectID = "1184";</note>
+        <target xml:lang="cs" state="translated">Smazat…</target>
+      </trans-unit>
       <trans-unit id="1186.title">
         <source>Skip Folder</source>
         <note>Class = "NSMenuItem"; title = "Skip Folder"; ObjectID = "1186";</note>
@@ -950,6 +960,11 @@
         <note>Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257";</note>
         <target xml:lang="cs" state="translated">Přizpůsobit řádek nástrojů…</target>
       </trans-unit>
+      <trans-unit id="1258.title">
+        <source>Hide Toolbar</source>
+        <note>Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258";</note>
+        <target xml:lang="cs" state="translated">Schovat lištu</target>
+      </trans-unit>
       <trans-unit id="1259.title">
         <source>Hide Status Bar</source>
         <note>Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259";</note>
@@ -974,6 +989,11 @@
         <source>Order By</source>
         <note>Class = "NSMenu"; title = "Order By"; ObjectID = "1337";</note>
         <target xml:lang="cs" state="translated">Seřadit podle</target>
+      </trans-unit>
+      <trans-unit id="1339.title">
+        <source>Name</source>
+        <note>Class = "NSMenuItem"; title = "Name"; ObjectID = "1339";</note>
+        <target xml:lang="cs" state="translated">Název</target>
       </trans-unit>
       <trans-unit id="1408.title">
         <source>Unsubscribe</source>
@@ -1182,6 +1202,11 @@
         <note>Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija";</note>
         <target xml:lang="cs" state="translated">Nová složka…</target>
       </trans-unit>
+      <trans-unit id="Rdq-QU-3hM.title">
+        <source>Delete…</source>
+        <note>Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Rdq-QU-3hM";</note>
+        <target xml:lang="cs" state="translated">Smazat…</target>
+      </trans-unit>
       <trans-unit id="SoG-b2-O1S.label">
         <source>Skip Folder</source>
         <note>Class = "NSToolbarItem"; label = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
@@ -1339,6 +1364,11 @@
         <note>Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107";</note>
         <target xml:lang="cs" state="translated">Níže zadejte adresu novinek, které chcete odebírat, nebo vyberte ze seznamu zdroj novinek a zadejte jméno uživatele dané služby.</target>
       </trans-unit>
+      <trans-unit id="110.title">
+        <source>URL:</source>
+        <note>Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110";</note>
+        <target xml:lang="cs" state="translated">URL:</target>
+      </trans-unit>
       <trans-unit id="111.title">
         <source>Save</source>
         <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "111";</note>
@@ -1432,6 +1462,11 @@
         <source>Select a server supporting the Open Reader API</source>
         <note>Class = "NSTextField"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "kM0-7a-obO";</note>
         <target xml:lang="cs" state="translated">Vyberte server podporující Open Reader API</target>
+      </trans-unit>
+      <trans-unit id="uTl-XE-0ym.title">
+        <source>Server:</source>
+        <note>Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "uTl-XE-0ym";</note>
+        <target xml:lang="cs" state="translated">Server:</target>
       </trans-unit>
       <trans-unit id="vZE-Pl-S9H.ibShadowedToolTip">
         <source>Address of a server supporting the Open Reader API</source>
@@ -1737,6 +1772,11 @@
         <note>Data field name visible in smart folder definition</note>
         <target xml:lang="cs" state="translated">Smazáno</target>
       </trans-unit>
+      <trans-unit id="Delete…">
+        <source>Delete…</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Smazat…</target>
+      </trans-unit>
       <trans-unit id="Do you really want to import the subscriptions from the specified OPML file?">
         <source>Do you really want to import the subscriptions from the specified OPML file?</source>
         <note>No comment provided by engineer.</note>
@@ -1911,6 +1951,11 @@
         <source>Hide Status Bar</source>
         <note>Title of a menu item</note>
         <target xml:lang="cs" state="translated">Skrýt stavový řádek</target>
+      </trans-unit>
+      <trans-unit id="Hide Toolbar">
+        <source>Hide Toolbar</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="cs" state="translated">Schovat lištu</target>
       </trans-unit>
       <trans-unit id="Import">
         <source>Import</source>
