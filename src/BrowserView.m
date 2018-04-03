@@ -18,13 +18,13 @@
 //  limitations under the License.
 //
 
+#import "BrowserPane.h"
+#import "BrowserPaneTemplate.h"
 #import "BrowserView.h"
 #import "Preferences.h"
 #import "Constants.h"
-#import <PSMTabBarControl/PSMTabBarControl.h>
-#import <PSMTabBarControl/PSMRolloverButton.h>
+#import <MMTabBarView/MMTabBarView.h>
 #import "AppController.h"
-#import "DisclosureView.h"
 
 @interface NSTabView (BrowserViewAdditions)
 	-(NSTabViewItem *)tabViewItemWithIdentifier:(id)identifier;
@@ -42,10 +42,9 @@
 }
 @end
 
-@interface BrowserView ()
+@interface BrowserView () <MMTabBarViewDelegate>
 
 @property (weak, nonatomic) IBOutlet NSTabView *tabView;
-@property (weak, nonatomic) IBOutlet DisclosureView *tabBarDisclosureView;
 //queue for tab view items to select when current item is closed
 @property NSMutableArray<NSTabViewItem *> *tabViewOrder;
 
@@ -71,6 +70,14 @@
 
 -(void)awakeFromNib
 {
+	[[self.tabView tabViewItemAtIndex:0] setLabel:NSLocalizedString(@"Articles", nil)];
+	[self configureTabBar];
+
+	self.tabViewOrder = [NSMutableArray array];
+}
+
+-(void)configureTabClosingBehavior
+{
 	self.selectPreviousOnClose = false;
 	//only works if selectpreviousonclose is true
 	self.selectNewItemFirst = false;
@@ -78,24 +85,23 @@
 	self.selectRightItemFirst = true;
 	//only relevant if (selectpreviousonclose is true) or (selectrightitemfirst is false)
 	self.canJumpToArticles = false;
+}
 
-	[[self.tabView tabViewItemAtIndex:0] setLabel:NSLocalizedString(@"Articles", nil)];
-
-	self.tabViewOrder = [NSMutableArray array];
-
-	//Metal is the default
-	[tabBarControl setStyleNamed:@"Unified"];
-	
-	[tabBarControl setHideForSingleTab:YES];
-	[tabBarControl setUseOverflowMenu:YES];
+-(void)configureTabBar
+{
+	[tabBarControl setStyleNamed:@"Sierra"];
+	//TODO: set NO
+	[tabBarControl setOnlyShowCloseOnHover:YES];
+	[tabBarControl setCanCloseOnlyTab:NO];
+	[tabBarControl setDisableTabClose:NO];
 	[tabBarControl setAllowsBackgroundTabClosing:YES];
-	[tabBarControl setAutomaticallyAnimates:NO];
-	tabBarControl.cellMinWidth = 60.0;
-	tabBarControl.cellMaxWidth = 350.0;
-
+	[tabBarControl setHideForSingleTab:YES];
 	[tabBarControl setShowAddTabButton:YES];
-	tabBarControl.addTabButton.target = NSApp.delegate;
-	tabBarControl.addTabButton.action = @selector(newTab:);
+	[tabBarControl setButtonMinWidth:120];
+	[tabBarControl setUseOverflowMenu:YES];
+	[tabBarControl setAutomaticallyAnimates:YES];
+	//TODO: figure out what this property means
+	[tabBarControl setAllowsScrubbing:YES];
 }
 
 /* stringForToolTip
@@ -125,7 +131,8 @@
 	{
 		item = [self.tabView tabViewItemWithIdentifier:primaryTabItemView];
 	}
-	
+
+	[item setHasCloseButton:NO];
 	item.identifier = newPrimaryTabItemView;
 	item.view = newPrimaryTabItemView;
 	
@@ -160,30 +167,6 @@
 -(NSView<BaseView> *)primaryTabItemView
 {
 	return primaryTabItemView;
-}
-
-/* createNewTabWithView
- * Create a new tab with the specified view. If makeKey is YES then the new tab is
- * made active, otherwise the current tab stays active.
- */
--(void)createNewTabWithView:(NSView<BaseView> *)newTabView makeKey:(BOOL)keyIt
-{
-	NSTabViewItem *tabViewItem = [[NSTabViewItem alloc] initWithIdentifier:newTabView];
-	tabViewItem.view = newTabView;
-
-	[self.tabView addTabViewItem:tabViewItem];
-
-	//newly created item will be selected first or last to be selected
-	if (self.selectNewItemFirst)
-	{
-		[self.tabViewOrder addObject:tabViewItem];
-	}
-	else
-	{
-		[self.tabViewOrder insertObject:tabViewItem atIndex:0];
-	}
-
-	if (keyIt) [self showTabItemView:newTabView];
 }
 
 /* setTabTitle
@@ -225,12 +208,6 @@
 	[self closeTab:tabViewItem];
 }
 
-- (BOOL)tabView:(NSTabView *)inTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem
-{
-	[self closeTab:tabViewItem];
-	return NO;
-}
-
 -(void)closeTab:(NSTabViewItem *)tabViewItem
 {
 	//remove closing tab from tab order
@@ -269,7 +246,7 @@
 	return self.tabView.numberOfTabViewItems;
 }
 
-/* showTabVew
+/* showTabItemView
  * Makes the specified tab active if not already and post a notification.
  */
 -(void)showTabItemView:(NSView *)theTabView
@@ -303,6 +280,58 @@
 		[self.tabView selectNextTabViewItem:self];
 }
 
+#pragma mark - TabBarDelegate
+
+// Additional NSTabView delegate methods
+
+/* disableTabCloseForTabViewItem
+ * Returns whether the tab close should be disabled for the specified item. We disable the close button
+ * for the primary item.
+ */
+- (BOOL)tabView:(NSTabView *)aTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem
+{
+	[self closeTab:tabViewItem];
+	//TODO: let tab bar do the work. return tabViewItem.identifier != primaryTabItemView;
+	return NO;
+}
+
+// Closing behavior
+- (BOOL)tabView:(NSTabView *)aTabView disableTabCloseForTabViewItem:(NSTabViewItem *)tabViewItem
+{
+	//prevent closing the first tab (articles tab)
+	return tabViewItem.identifier == primaryTabItemView;
+}
+
+// Adding tabs
+- (void)addNewTabToTabView:(NSTabView *)aTabView
+{
+	[self newTab];
+}
+
+/*// Contextual menu support
+- (NSMenu *)tabView:(NSTabView *)aTabView menuForTabViewItem:(NSTabViewItem *)tabViewItem
+{
+ 	//TODO: we can return items like "reload", "close", "close all others" etc. here.
+	return nil;
+}*/
+
+/*- (void)tabView:(NSTabView *)aTabView closeWindowForLastTabViewItem:(NSTabViewItem *)tabViewItem
+{
+ 	//TODO: Close Vienna
+}*/
+
+/*// Tooltips
+- (NSString *)tabView:(NSTabView *)aTabView toolTipForTabViewItem:(NSTabViewItem *)tabViewItem
+{
+ 	//TODO: return string for tooltip here;
+}*/
+
+/*// Accessibility
+- (NSString *)accessibilityStringForTabView:(NSTabView *)aTabView objectCount:(NSInteger)objectCount
+{
+	//TODO: return string for accessibility here
+}*/
+
 /* didSelectTabViewItem
  * Called when the tab is changed.
  */
@@ -321,55 +350,42 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabCountChanged" object:nil];
 }
 
-/* disableTabCloseForTabViewItem
- * Returns whether the tab close should be disabled for the specified item. We disable the close button
- * for the primary item.
- */
--(BOOL)tabView:(NSTabView *)aTabView disableTabCloseForTabViewItem:(NSTabViewItem *)tabViewItem
+
+// Drag and drop related methods
+
+- (BOOL)tabView:(NSTabView *)aTabView shouldDragTabViewItem:(NSTabViewItem *)tabViewItem inTabBarView:(MMTabBarView *)tabBarView
 {
-	return (tabViewItem.identifier == primaryTabItemView);
+	//prevent dragging articles tab
+	return tabViewItem.identifier != primaryTabItemView;
 }
 
-/* tabView:shouldDragTabViewItem:fromTabBar:
- * Should a tab view item be allowed to be dragged?
- */
-- (BOOL)tabView:(NSTabView *)aTabView shouldDragTabViewItem:(NSTabViewItem *)tabViewItem fromTabBar:(PSMTabBarControl *)tabBarControl
+- (NSDragOperation)tabView:(NSTabView *)aTabView validateDrop:(id <NSDraggingInfo>)sender proposedItem:(NSTabViewItem *)tabViewItem proposedIndex:(NSUInteger)proposedIndex inTabBarView:(MMTabBarView *)tabBarView
 {
-	return YES;
+	return proposedIndex == 0 ? NSDragOperationNone : NSDragOperationAll;
 }
 
-/* tabView:shouldDropTabViewItem:inTabBar:
- * Should a tab view item drop be accepted?
- */
-- (BOOL)tabView:(NSTabView *)aTabView shouldDropTabViewItem:(NSTabViewItem *)tabViewItem inTabBar:(PSMTabBarControl *)tabBarControl
+- (NSDragOperation)tabView:(NSTabView *)aTabView validateSlideOfProposedItem:(NSTabViewItem *)tabViewItem proposedIndex:(NSUInteger)proposedIndex inTabBarView:(MMTabBarView *)tabBarView
 {
-	return YES;
+	//Do not slide past Articles tab (primary tab at index 0)
+	return proposedIndex == 0 ? NSDragOperationNone : NSDragOperationAll;
 }
 
-/* tabView:didDropTabViewItem:inTabBar:
- * A drag & drop operation of a tab view item was completed.
- */
-- (void)tabView:(NSTabView*)aTabView didDropTabViewItem:(NSTabViewItem *)tabViewItem inTabBar:(PSMTabBarControl *)tabBarControl
+
+// Informal tab bar visibility methods
+/*
+- (void)tabView:(NSTabView *)aTabView tabBarViewDidHide:(MMTabBarView *)tabBarView
 {
+
 }
 
-/* tabView:shouldAllowTabViewItem:toLeaveTabBar:
- * Should a tab view item be allowed to leave the tab bar?
- */
-- (BOOL)tabView:(NSTabView *)aTabView shouldAllowTabViewItem:(NSTabViewItem *)tabViewItem toLeaveTabBar:(PSMTabBarControl *)tabBarControl;
+- (void)tabView:(NSTabView *)aTabView tabBarViewDidUnhide:(MMTabBarView *)tabBarView
 {
-	return NO;
-}
 
-- (void)tabView:(NSTabView *)aTabView tabBarDidHide:(PSMTabBarControl *)tabBarControl {
-    [self.tabBarDisclosureView collapse:YES];
 }
+*/
 
-- (void)tabView:(NSTabView *)aTabView tabBarDidUnhide:(PSMTabBarControl *)tabBarControl {
-    [self.tabBarDisclosureView disclose:YES];
-}
+#pragma mark - save
 
-#pragma mark -
 /* saveOpenTabs
  * Persist the URLs of each open tab to the preferences so they can be
  * restored when we reload.
@@ -397,6 +413,86 @@
 	[[Preferences standardPreferences] setObject:tabTitles forKey:MAPref_TabTitleDictionary];
 
 	[[Preferences standardPreferences] savePreferences];
+}
+
+#pragma mark - new tab creation
+
+/* newTab
+ * Create a new empty tab.
+ */
+-(void)newTab
+{
+	// Create a new empty tab in the foreground.
+	[self createNewTab:nil inBackground:NO];
+
+	// Make the address bar first responder.
+	NSView<BaseView> * theView = self.activeTabItemView;
+	BrowserPane * browserPane = (BrowserPane *)theView;
+	[browserPane activateAddressBar];
+}
+
+/* create tab with title and url
+ * but do not load the page
+ */
+-(BrowserPane *)createNewTab:(NSURL *)url withTitle:(NSString *)title inBackground:(BOOL)openInBackgroundFlag
+{
+	BrowserPane * newBrowserPane = [self createNewTab:url inBackground:openInBackgroundFlag];
+	if (title != nil) {
+		[self setTabItemViewTitle:newBrowserPane title:title];
+		[newBrowserPane setViewTitle:title];
+	}
+	return newBrowserPane;
+}
+
+/* create tab with url
+ * and load the page.
+ */
+-(void)createAndLoadNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
+{
+	BrowserPane * newBrowserPane = [self createNewTab:url inBackground:openInBackgroundFlag];
+	[newBrowserPane load];
+}
+
+/* create tab with url
+ * but do not load the page
+ */
+-(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
+{
+	BrowserPaneTemplate * newBrowserTemplate = [[BrowserPaneTemplate alloc] init];
+	BrowserPane * newBrowserPane;
+	if (newBrowserTemplate)
+	{
+		newBrowserPane = newBrowserTemplate.mainView;
+		[self createNewTabWithView:newBrowserPane makeKey:!openInBackgroundFlag];
+		[newBrowserPane setBrowser:self];
+		//set url but do not load yet
+		[newBrowserPane setUrl:url];
+	}
+	return newBrowserPane;
+}
+
+/* createNewTabWithView
+ * Create a new tab with the specified view. If makeKey is YES then the new tab is
+ * made active, otherwise the current tab stays active.
+ */
+-(void)createNewTabWithView:(NSView<BaseView> *)newTabView makeKey:(BOOL)keyIt
+{
+	NSTabViewItem *tabViewItem = [[NSTabViewItem alloc] initWithIdentifier:newTabView];
+	tabViewItem.view = newTabView;
+
+	[self.tabView addTabViewItem:tabViewItem];
+
+	//newly created item will be selected first or last to be selected
+	if (self.selectNewItemFirst)
+	{
+		[self.tabViewOrder addObject:tabViewItem];
+	}
+	else
+	{
+		[self.tabViewOrder insertObject:tabViewItem atIndex:0];
+	}
+
+	if (keyIt) [self showTabItemView:newTabView];
 }
 
 /* dealloc
