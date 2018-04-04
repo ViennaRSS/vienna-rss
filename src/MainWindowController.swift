@@ -23,7 +23,6 @@ final class MainWindowController: NSWindowController {
 
     // MARK: Transitional outlets
 
-    // swiftlint:disable private_outlet
     @IBOutlet var outlineView: FolderView?
     @IBOutlet var browserView: BrowserView?
     @IBOutlet var articleListView: ArticleListView?
