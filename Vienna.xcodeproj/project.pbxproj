@@ -1904,7 +1904,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = uk.co.opencommunity;
 				TargetAttributes = {
 					035B703419E0E4AE00197334 = {
@@ -3370,6 +3370,7 @@
 		430C4AD0166172BE0079C9FC /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = Autorevision;
 			};
 			name = Development;
@@ -3377,6 +3378,7 @@
 		430C4AD1166172BE0079C9FC /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = Autorevision;
 			};
 			name = Deployment;
@@ -3384,6 +3386,7 @@
 		430C4AF81661F0860079C9FC /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = "Code Sign ID";
 			};
 			name = Development;
@@ -3391,6 +3394,7 @@
 		430C4AF91661F0860079C9FC /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = "Code Sign ID";
 			};
 			name = Deployment;
@@ -3402,8 +3406,10 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -3431,6 +3437,7 @@
 		43D4D6EE166FE08C00BA9675 /* StaticAnalyzer */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = Autorevision;
 			};
 			name = StaticAnalyzer;
@@ -3438,6 +3445,7 @@
 		43D4D6EF166FE08C00BA9675 /* StaticAnalyzer */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = "Code Sign ID";
 			};
 			name = StaticAnalyzer;
@@ -3445,6 +3453,7 @@
 		43D4D6F6166FE08C00BA9675 /* StaticAnalyzer */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = "Version Notes";
 			};
 			name = StaticAnalyzer;
@@ -3453,6 +3462,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 430C4B001661F3270079C9FC /* CS-ID.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = "Archive and Prep for Upload";
 			};
 			name = StaticAnalyzer;
@@ -3460,6 +3470,7 @@
 		52BA64020DE9E2FF0008B3E1 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = "Version Notes";
 			};
 			name = Development;
@@ -3467,6 +3478,7 @@
 		52BA64030DE9E2FF0008B3E1 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = "Version Notes";
 			};
 			name = Deployment;
@@ -3519,8 +3531,10 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -3540,8 +3554,10 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -3557,6 +3573,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 430C4B001661F3270079C9FC /* CS-ID.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = "Archive and Prep for Upload";
 			};
 			name = Development;
@@ -3565,6 +3582,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 430C4B001661F3270079C9FC /* CS-ID.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = "Archive and Prep for Upload";
 			};
 			name = Deployment;
@@ -3572,6 +3590,7 @@
 		F63B7D001F1BA147002F71BF /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Development;
@@ -3579,6 +3598,7 @@
 		F63B7D011F1BA147002F71BF /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Deployment;
@@ -3586,6 +3606,7 @@
 		F63B7D021F1BA147002F71BF /* StaticAnalyzer */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = StaticAnalyzer;
@@ -3593,6 +3614,7 @@
 		F64D8AC11F22BAAF0077D27C /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Development;
@@ -3600,6 +3622,7 @@
 		F64D8AC21F22BAAF0077D27C /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Deployment;
@@ -3607,6 +3630,7 @@
 		F64D8AC31F22BAAF0077D27C /* StaticAnalyzer */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = StaticAnalyzer;
