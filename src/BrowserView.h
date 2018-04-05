@@ -23,15 +23,20 @@
 
 #import "BaseView.h"
 
-@class PSMTabBarControl;
+@class MMTabBarView;
+@class BrowserPane;
 
 @interface BrowserView : NSView
 {
 	NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate> * primaryTabItemView;
-	IBOutlet PSMTabBarControl * tabBarControl;
+	IBOutlet MMTabBarView * tabBarControl;
 }
 
 // Accessors
+-(void)newTab;
+-(void)createAndLoadNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
+-(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
+-(BrowserPane *)createNewTab:(NSURL *)url withTitle:(NSString *)title inBackground:(BOOL)openInBackgroundFlag;
 -(void)setPrimaryTabItemView:(NSView *)newPrimaryTabItemView;
 -(void)setTabItemViewTitle:(NSView *)tabView title:(NSString *)newTitle;
 -(NSString *)tabItemViewTitle:(NSView *)tabView;
