@@ -29,8 +29,10 @@
 @interface BrowserView : NSView
 {
 	NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate> * primaryTabItemView;
-	IBOutlet MMTabBarView * tabBarControl;
 }
+
+@property (assign) IBOutlet NSLayoutConstraint *tabBarHeightConstraint;
+@property (assign) IBOutlet MMTabBarView *tabBarControl;
 
 // Accessors
 -(void)newTab;

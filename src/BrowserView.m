@@ -69,7 +69,7 @@
 
 -(void)awakeFromNib
 {
-	[[tabBarControl.tabView tabViewItemAtIndex:0] setLabel:NSLocalizedString(@"Articles", nil)];
+	[[self.tabBarControl.tabView tabViewItemAtIndex:0] setLabel:NSLocalizedString(@"Articles", nil)];
 	[self configureTabBar];
 	[self configureTabClosingBehavior];
 
@@ -89,19 +89,19 @@
 
 -(void)configureTabBar
 {
-	[tabBarControl setStyleNamed:@"Sierra"];
+	[self.tabBarControl setStyleNamed:@"Sierra"];
 	//TODO: set NO
-	[tabBarControl setOnlyShowCloseOnHover:YES];
-	[tabBarControl setCanCloseOnlyTab:NO];
-	[tabBarControl setDisableTabClose:NO];
-	[tabBarControl setAllowsBackgroundTabClosing:YES];
-	[tabBarControl setHideForSingleTab:YES];
-	[tabBarControl setShowAddTabButton:YES];
-	[tabBarControl setButtonMinWidth:120];
-	[tabBarControl setUseOverflowMenu:YES];
-	[tabBarControl setAutomaticallyAnimates:YES];
+	[self.tabBarControl setOnlyShowCloseOnHover:YES];
+	[self.tabBarControl setCanCloseOnlyTab:NO];
+	[self.tabBarControl setDisableTabClose:NO];
+	[self.tabBarControl setAllowsBackgroundTabClosing:YES];
+	[self.tabBarControl setHideForSingleTab:YES];
+	[self.tabBarControl setShowAddTabButton:YES];
+	[self.tabBarControl setButtonMinWidth:120];
+	[self.tabBarControl setUseOverflowMenu:YES];
+	[self.tabBarControl setAutomaticallyAnimates:YES];
 	//TODO: figure out what this property means
-	[tabBarControl setAllowsScrubbing:YES];
+	[self.tabBarControl setAllowsScrubbing:YES];
 }
 
 /* stringForToolTip
@@ -111,7 +111,7 @@
  */
 -(NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(void *)userData
 {
-	return [tabBarControl tabViewItemWithIdentifier:(__bridge NSView *)userData].label;
+	return [self.tabBarControl tabViewItemWithIdentifier:(__bridge NSView *)userData].label;
 }
 
 /* setPrimaryTabItemView
@@ -125,11 +125,11 @@
 	if (primaryTabItemView == nil)
 	{
 		// This should only be called on launch
-		item = [tabBarControl.tabView tabViewItemAtIndex:0];
+		item = [self.tabBarControl.tabView tabViewItemAtIndex:0];
 	}
 	else
 	{
-		item = [tabBarControl tabViewItemWithIdentifier:primaryTabItemView];
+		item = [self.tabBarControl tabViewItemWithIdentifier:primaryTabItemView];
 	}
 
 	[item setHasCloseButton:NO];
@@ -142,7 +142,7 @@
 	[self setActiveTabToPrimaryTab];
 	//this call seems to be necessary manually here, no delegate call
 	//maybe setPrimaryTabItemView is called earlier than the delegate IBOutlet setup.
-	[self tabView:tabBarControl.tabView didSelectTabViewItem:item];
+	[self tabView:self.tabBarControl.tabView didSelectTabViewItem:item];
 }
 
 /* activeTabItemView
@@ -150,7 +150,7 @@
  */
 -(NSView<BaseView> *)activeTabItemView
 {
-	return tabBarControl.tabView.selectedTabViewItem.identifier;
+	return self.tabBarControl.tabView.selectedTabViewItem.identifier;
 }
 
 /* setActiveTabToPrimaryTab
@@ -174,7 +174,7 @@
  */
 -(void)setTabItemViewTitle:(NSView *)inTabView title:(NSString *)newTitle
 {
-	[tabBarControl tabViewItemWithIdentifier:inTabView].label = newTitle;
+	[self.tabBarControl tabViewItemWithIdentifier:inTabView].label = newTitle;
 }
 
 /* tabTitle
@@ -182,7 +182,7 @@
  */
 -(NSString *)tabItemViewTitle:(NSView *)tabItemView
 {
-	return [tabBarControl tabViewItemWithIdentifier:tabItemView].label;
+	return [self.tabBarControl tabViewItemWithIdentifier:tabItemView].label;
 }
 
 /* closeAllTabs
@@ -190,14 +190,14 @@
  */
 -(void)closeAllTabs
 {
-	NSInteger count = tabBarControl.numberOfTabViewItems;
+	NSInteger count = self.tabBarControl.numberOfTabViewItems;
 	NSInteger i;
 	for ((i = (count - 1)); i >= 0; i--) {
-		NSTabViewItem * item = [tabBarControl.tabView tabViewItemAtIndex:i];
+		NSTabViewItem * item = [self.tabBarControl.tabView tabViewItemAtIndex:i];
 		if (item.identifier != primaryTabItemView)
 		{
 			[self.tabViewOrder removeObject:item];
-			[tabBarControl removeTabViewItem:item];
+			[self.tabBarControl removeTabViewItem:item];
 		}
 	}
 }
@@ -207,12 +207,12 @@
  */
 -(void)closeTabItemView:(NSView *)tabItemView
 {
-	NSTabViewItem *tabViewItem = [tabBarControl tabViewItemWithIdentifier:tabItemView];
+	NSTabViewItem *tabViewItem = [self.tabBarControl tabViewItemWithIdentifier:tabItemView];
 
-	[self tabView:tabBarControl.tabView willCloseTabViewItem:tabViewItem];
+	[self tabView:self.tabBarControl.tabView willCloseTabViewItem:tabViewItem];
 	//close tab to be closed
-	[tabBarControl removeTabViewItem:tabViewItem];
-	[self tabView:tabBarControl.tabView didCloseTabViewItem:tabViewItem];
+	[self.tabBarControl removeTabViewItem:tabViewItem];
+	[self tabView:self.tabBarControl.tabView didCloseTabViewItem:tabViewItem];
 }
 
 /* countOfTabs
@@ -220,7 +220,7 @@
  */
 -(NSInteger)countOfTabs
 {
-	return tabBarControl.numberOfTabViewItems;
+	return self.tabBarControl.numberOfTabViewItems;
 }
 
 /* showTabItemView
@@ -228,9 +228,9 @@
  */
 -(void)showTabItemView:(NSView *)theTabView
 {
-	NSTabViewItem *tabViewItem = [tabBarControl tabViewItemWithIdentifier:theTabView];
+	NSTabViewItem *tabViewItem = [self.tabBarControl tabViewItemWithIdentifier:theTabView];
 	if (tabViewItem) {
-		[tabBarControl selectTabViewItem:tabViewItem];
+		[self.tabBarControl selectTabViewItem:tabViewItem];
 	}
 }
 
@@ -240,10 +240,10 @@
  */
 -(void)showPreviousTab
 {
-	if ([tabBarControl indexOfTabViewItem:tabBarControl.selectedTabViewItem] == 0)
-		[tabBarControl.tabView selectLastTabViewItem:self];
+	if ([self.tabBarControl indexOfTabViewItem:self.tabBarControl.selectedTabViewItem] == 0)
+		[self.tabBarControl.tabView selectLastTabViewItem:self];
 	else
-		[tabBarControl.tabView selectPreviousTabViewItem:self];
+		[self.tabBarControl.tabView selectPreviousTabViewItem:self];
 }
 
 /* showNextTab
@@ -252,10 +252,10 @@
  */
 -(void)showNextTab
 {
-	if ([tabBarControl indexOfTabViewItem:tabBarControl.tabView.selectedTabViewItem] == (tabBarControl.tabView.numberOfTabViewItems - 1))
-		[tabBarControl.tabView selectFirstTabViewItem:self];
+	if ([self.tabBarControl indexOfTabViewItem:self.tabBarControl.tabView.selectedTabViewItem] == (self.tabBarControl.tabView.numberOfTabViewItems - 1))
+		[self.tabBarControl.tabView selectFirstTabViewItem:self];
 	else
-		[tabBarControl.tabView selectNextTabViewItem:self];
+		[self.tabBarControl.tabView selectNextTabViewItem:self];
 }
 
 #pragma mark - TabBarDelegate
@@ -276,24 +276,24 @@
 	//remove closing tab from tab order
 	[self.tabViewOrder removeObject:tabViewItem];
 
-	if (tabBarControl.selectedTabViewItem == tabViewItem)
+	if (self.tabBarControl.selectedTabViewItem == tabViewItem)
 	{
 		if (self.selectPreviousOnClose) {
 			//open most recently opened tab
-			[tabBarControl.tabView selectTabViewItem:self.tabViewOrder.lastObject];
+			[self.tabBarControl.tabView selectTabViewItem:self.tabViewOrder.lastObject];
 		}
 		else if (self.selectRightItemFirst
-				 && [tabBarControl.tabView indexOfTabViewItem:tabViewItem] < tabBarControl.numberOfTabViewItems - 1)
+				 && [self.tabBarControl.tabView indexOfTabViewItem:tabViewItem] < self.tabBarControl.numberOfTabViewItems - 1)
 		{
 			//since tab is not the last, select the one right of it
-			[tabBarControl.tabView selectTabViewItemAtIndex:[tabBarControl.tabView indexOfTabViewItem:tabViewItem] + 1];
+			[self.tabBarControl.tabView selectTabViewItemAtIndex:[self.tabBarControl.tabView indexOfTabViewItem:tabViewItem] + 1];
 		}
 		else if (self.canJumpToArticles == false
-				 && [tabBarControl.tabView indexOfTabViewItem:tabViewItem] == 1
-				 && tabBarControl.tabView.numberOfTabViewItems > 2)
+				 && [self.tabBarControl.tabView indexOfTabViewItem:tabViewItem] == 1
+				 && self.tabBarControl.tabView.numberOfTabViewItems > 2)
 		{
 			//open tab to the right instead of article tab
-			[tabBarControl.tabView selectTabViewItemAtIndex:2];
+			[self.tabBarControl.tabView selectTabViewItemAtIndex:2];
 		}
 	}
 }
@@ -343,8 +343,8 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabChanged" object:inTabViewItem.identifier];
 	if (self.canJumpToArticles || inTabViewItem.identifier != primaryTabItemView)
 	{
-		[self.tabViewOrder removeObject:tabBarControl.tabView.selectedTabViewItem];
-		[self.tabViewOrder addObject:tabBarControl.tabView.selectedTabViewItem];
+		[self.tabViewOrder removeObject:self.tabBarControl.tabView.selectedTabViewItem];
+		[self.tabViewOrder addObject:self.tabBarControl.tabView.selectedTabViewItem];
 	}
 }
 
@@ -375,17 +375,30 @@
 
 
 // Informal tab bar visibility methods
-/*
+
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidHide:(MMTabBarView *)tabBarView
 {
-
+	[self.tabBarHeightConstraint setConstant:0];
 }
 
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidUnhide:(MMTabBarView *)tabBarView
 {
-
+	[self.tabBarHeightConstraint setConstant:23];
 }
-*/
+
+// Animation companion
+
+- (void (^)(void))animateAlongsideTabBarShow {
+	return ^{
+		[self.tabBarHeightConstraint.animator setConstant:23];
+	};
+}
+
+- (void (^)(void))animateAlongsideTabBarHide {
+	return ^{
+		[self.tabBarHeightConstraint.animator setConstant:0];
+	};
+}
 
 #pragma mark - save
 
@@ -398,7 +411,7 @@
 	NSMutableArray *tabLinks = [NSMutableArray arrayWithCapacity:self.countOfTabs];
 	NSMutableDictionary *tabTitles = [NSMutableDictionary dictionaryWithCapacity:self.countOfTabs];
 	
-	for (NSTabViewItem * tabViewItem in tabBarControl.tabView.tabViewItems)
+	for (NSTabViewItem * tabViewItem in self.tabBarControl.tabView.tabViewItems)
 	{
 		NSView<BaseView> * theView = tabViewItem.identifier;
 		NSString * tabLink = theView.viewLink;
@@ -483,7 +496,7 @@
 	NSTabViewItem *tabViewItem = [[NSTabViewItem alloc] initWithIdentifier:newTabView];
 	tabViewItem.view = newTabView;
 
-	[tabBarControl.tabView addTabViewItem:tabViewItem];
+	[self.tabBarControl.tabView addTabViewItem:tabViewItem];
 
 	//newly created item will be selected first or last to be selected
 	if (self.selectNewItemFirst)

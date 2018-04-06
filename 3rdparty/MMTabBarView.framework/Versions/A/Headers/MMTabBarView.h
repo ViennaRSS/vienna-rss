@@ -622,6 +622,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidHide:(MMTabBarView *)tabBarView;
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidUnhide:(MMTabBarView *)tabBarView;
 
+	// Tab bar show/hide animation companions
+- (void (^)(void))animateAlongsideTabBarHide;
+- (void (^)(void))animateAlongsideTabBarShow;
+
     // Closing behavior
 - (BOOL)tabView:(NSTabView *)aTabView disableTabCloseForTabViewItem:(NSTabViewItem *)tabViewItem;
 
