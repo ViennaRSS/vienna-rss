@@ -60,6 +60,7 @@
 		2FA79F192170C55D00228482 /* Browser+WebUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA79F182170C55D00228482 /* Browser+WebUIDelegate.m */; };
 		2FAA36402072F50B00169C8A /* MMTabBarView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FAA363F2072F50B00169C8A /* MMTabBarView.framework */; };
 		2FAA36422072F57500169C8A /* MMTabBarView.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 2FAA363F2072F50B00169C8A /* MMTabBarView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2FBE629020796BAD00653ECA /* BrowserPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FBE628F20796BAD00653ECA /* BrowserPreferences.xib */; };
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		37C650801816EBAD3C0D9DBF /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */; };
 		3A171C00210B551B00B80FBB /* TRVSURLSessionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A171BF1210B551B00B80FBB /* TRVSURLSessionOperation.m */; };
@@ -342,6 +343,7 @@
 		2FA79F172170C55D00228482 /* Browser+WebUIDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Browser+WebUIDelegate.h"; sourceTree = "<group>"; };
 		2FA79F182170C55D00228482 /* Browser+WebUIDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Browser+WebUIDelegate.m"; sourceTree = "<group>"; };
 		2FAA363F2072F50B00169C8A /* MMTabBarView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MMTabBarView.framework; path = Carthage/Build/Mac/MMTabBarView.framework; sourceTree = "<group>"; };
+		2FBE628F20796BAD00653ECA /* BrowserPreferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrowserPreferences.xib; sourceTree = "<group>"; };
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ClickableProgressIndicator.h; sourceTree = "<group>"; };
 		34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClickableProgressIndicator.m; sourceTree = "<group>"; };
 		37C652B4C918F312BA9F1AB1 /* NSURL+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Utils.h"; sourceTree = "<group>"; };
@@ -1293,6 +1295,7 @@
 		F63739FB1F1CFEDC00ED3B09 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				2FBE628F20796BAD00653ECA /* BrowserPreferences.xib */,
 				F625815B1E29BEB90035E43C /* MainMenu.xib */,
 				F6832F661F10F5DA007920D4 /* MainWindowController.xib */,
 				0386A5BB1E1FA586000C10CE /* BrowserPane.xib */,
@@ -1979,6 +1982,7 @@
 				AADD8A0E081C253F007C6E88 /* rssFeed.tiff in Resources */,
 				AA20DC9E0882CCC300A226F5 /* unread.tiff in Resources */,
 				AA6321510885F0BB006382D3 /* comments.tiff in Resources */,
+				2FBE629020796BAD00653ECA /* BrowserPreferences.xib in Resources */,
 				F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */,
 				AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */,
 				AAF6C3A308B06BA00077BAB8 /* StandardURLs.plist in Resources */,
