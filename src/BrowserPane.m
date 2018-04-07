@@ -77,6 +77,7 @@
 
 @implementation BrowserPane
 @synthesize webPane;
+@synthesize viewTitle;
 
 + (void)load
 {
@@ -111,7 +112,7 @@
 		isLoading = NO;
 		[self didChangeValueForKey:@"isLoading"];
 		isLocalFile = NO;
-		viewTitle = nil;
+		viewTitle = @"";
 		pageFilename = nil;
 		lastError = nil;
 		hasRSSlink = NO;
@@ -223,11 +224,6 @@
 		[self activateAddressBar];
 }
 
--(void)setViewTitle:(NSString *) newTitle
-{
-	viewTitle = newTitle;
-}
-
 /* activateAddressBar
  * Put the focus on the address bar.
  */
@@ -254,7 +250,6 @@
 		return;
 	}
 
-	self.viewTitle = @"";
 	isLocalFile = self.url.fileURL;
 
 	pageFilename = self.url.path.lastPathComponent.stringByDeletingPathExtension;
@@ -296,7 +291,6 @@
 	{
 		[self showRssPageButton:NO];
 		[self setError:nil];
-		self.viewTitle = @"";
 	}
 
 }
@@ -381,7 +375,7 @@
  */
 -(void)endFrameLoad
 {
-	if ([viewTitle isEqualToString:@""])
+	if ([self.viewTitle isEqualToString:@""])
 	{
 		if (lastError == nil)
 		{
@@ -617,11 +611,6 @@
 			[self.webPane searchFor:APPCONTROLLER.searchString direction:NO caseSensitive:NO wrap:YES];
 			break;
 	}
-}
-
--(NSString *)viewTitle
-{
-	return viewTitle;
 }
 
 /* canGoForward
