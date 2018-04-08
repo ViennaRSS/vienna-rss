@@ -2284,6 +2284,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		case 'N':
 			[self viewNextUnread:self];
 			return YES;
+
+		case 'y':
+		case 'Y':
+			[self viewArticlesTab:self];
 			
 		case 'u':
 		case 'U':
@@ -2941,6 +2945,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 }
 
 #pragma mark Tabs
+
+/* articlesTab
+ * Go straight back to the articles tab
+ */
+-(void)viewArticlesTab:(id)sender
+{
+	[self.browserView showArticlesTab];
+}
 
 /* previousTab
  * Display the previous tab, if there is one.

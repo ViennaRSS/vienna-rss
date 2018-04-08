@@ -256,6 +256,14 @@
 	}
 }
 
+/* articlesTab
+ * Go straight back to the articles tab
+ */
+-(void)showArticlesTab
+{
+	[self showTabItemView:primaryTabItemView];
+}
+
 /* showPreviousTab
  * Switch to the previous tab in the view order. Wrap round to the end
  * if we're at the beginning.

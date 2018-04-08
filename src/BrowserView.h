@@ -48,6 +48,7 @@
 @property (nonatomic, readonly) NSInteger countOfTabs;
 -(void)createNewTabWithView:(NSView<BaseView> *)newTabView makeKey:(BOOL)keyIt;
 -(void)showTabItemView:(NSView *)theTabView;
+-(void)showArticlesTab;
 -(void)showPreviousTab;
 -(void)showNextTab;
 -(void)saveOpenTabs;
