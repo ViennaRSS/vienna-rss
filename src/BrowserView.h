@@ -35,6 +35,7 @@
 @property (assign) IBOutlet MMTabBarView *tabBarControl;
 
 // Accessors
+- (IBAction)newTab:(id)sender;
 -(void)newTab;
 -(void)createAndLoadNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
 -(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;

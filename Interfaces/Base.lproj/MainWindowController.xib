@@ -3,12 +3,14 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="Window Controller" customClass="MainWindowController" customModule="Vienna" customModuleProvider="target">
             <connections>
+                <outlet property="addTabToolbarButton" destination="FKS-Uq-78z" id="JAx-ZR-yEQ"/>
                 <outlet property="articleListView" destination="971" id="OE4-G3-4mz"/>
                 <outlet property="browserView" destination="1227" id="vlz-xz-lya"/>
                 <outlet property="filterButton" destination="1400" id="06C-9S-q2e"/>
@@ -914,6 +916,37 @@
             <point key="canvasLocation" x="-209.5" y="42.5"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="fAX-Jg-YQ6"/>
+        <customView id="3Zl-DQ-to5">
+            <rect key="frame" x="0.0" y="0.0" width="69" height="42"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P7K-yI-HwR">
+                    <rect key="frame" x="46" y="0.0" width="23" height="23"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="P7K-yI-HwR" secondAttribute="height" multiplier="1:1" id="UaY-g5-9bg"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8er-XL-yP3">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="newTab:" target="1227" id="gm6-ME-xBB"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="P7K-yI-HwR" secondAttribute="bottom" id="XeQ-EW-niW"/>
+                <constraint firstAttribute="trailing" secondItem="P7K-yI-HwR" secondAttribute="trailing" id="bMG-ts-Ht7"/>
+                <constraint firstItem="P7K-yI-HwR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3Zl-DQ-to5" secondAttribute="leading" id="nPE-yw-i21"/>
+                <constraint firstItem="P7K-yI-HwR" firstAttribute="top" relation="greaterThanOrEqual" secondItem="3Zl-DQ-to5" secondAttribute="top" id="xLZ-pp-TMy"/>
+            </constraints>
+            <point key="canvasLocation" x="1144.5" y="-1026"/>
+        </customView>
+        <viewController id="FKS-Uq-78z" customClass="NSTitlebarAccessoryViewController">
+            <connections>
+                <outlet property="view" destination="3Zl-DQ-to5" id="SBR-Rs-wai"/>
+            </connections>
+        </viewController>
     </objects>
     <resources>
         <image name="EmptyTrashTemplate" width="19" height="14"/>
@@ -921,6 +954,7 @@
         <image name="MailTemplate" width="17" height="12"/>
         <image name="MarkReadTemplate" width="19" height="14"/>
         <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NewFeedTemplate" width="19" height="12"/>
         <image name="NextFolderTemplate" width="19" height="12"/>
         <image name="NextItemTemplate" width="18" height="12"/>

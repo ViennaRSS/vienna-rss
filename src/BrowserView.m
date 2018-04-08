@@ -25,6 +25,7 @@
 #import "Constants.h"
 #import <MMTabBarView/MMTabBarView.h>
 #import "AppController.h"
+#import "Vienna-Swift.h"
 
 @interface MMTabBarView (BrowserViewAdditions)
 	-(NSTabViewItem *)tabViewItemWithIdentifier:(id)identifier;
@@ -74,6 +75,8 @@
 	[self configureTabClosingBehavior];
 
 	self.tabViewOrder = [NSMutableArray array];
+
+	//self.window addTitlebarAccessoryViewController:
 }
 
 -(void)configureTabClosingBehavior
@@ -385,13 +388,13 @@
 
 - (NSDragOperation)tabView:(NSTabView *)aTabView validateDrop:(id <NSDraggingInfo>)sender proposedItem:(NSTabViewItem *)tabViewItem proposedIndex:(NSUInteger)proposedIndex inTabBarView:(MMTabBarView *)tabBarView
 {
-	return proposedIndex == 0 ? NSDragOperationNone : NSDragOperationAll;
+	return proposedIndex == 0 ? NSDragOperationNone : NSDragOperationEvery;
 }
 
 - (NSDragOperation)tabView:(NSTabView *)aTabView validateSlideOfProposedItem:(NSTabViewItem *)tabViewItem proposedIndex:(NSUInteger)proposedIndex inTabBarView:(MMTabBarView *)tabBarView
 {
 	//Do not slide past Articles tab (primary tab at index 0)
-	return proposedIndex == 0 ? NSDragOperationNone : NSDragOperationAll;
+	return proposedIndex == 0 ? NSDragOperationNone : NSDragOperationEvery;
 }
 
 
@@ -400,11 +403,13 @@
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidHide:(MMTabBarView *)tabBarView
 {
 	[self.tabBarHeightConstraint setConstant:0];
+	[APPCONTROLLER.mainWindowController showAddTabButtonInToolbar];
 }
 
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidUnhide:(MMTabBarView *)tabBarView
 {
 	[self.tabBarHeightConstraint setConstant:23];
+	[APPCONTROLLER.mainWindowController removeAddTabButtonFromToolbar];
 }
 
 // Animation companion
@@ -412,14 +417,17 @@
 - (void (^)(void))animateAlongsideTabBarShow {
 	return ^{
 		[self.tabBarHeightConstraint.animator setConstant:23];
+		[APPCONTROLLER.mainWindowController removeAddTabButtonFromToolbar];
 	};
 }
 
 - (void (^)(void))animateAlongsideTabBarHide {
 	return ^{
 		[self.tabBarHeightConstraint.animator setConstant:0];
+		[APPCONTROLLER.mainWindowController showAddTabButtonInToolbar];
 	};
 }
+
 
 #pragma mark - save
 
@@ -453,6 +461,10 @@
 }
 
 #pragma mark - new tab creation
+
+- (IBAction)newTab:(id)sender {
+	[self newTab];
+}
 
 /* newTab
  * Create a new empty tab.

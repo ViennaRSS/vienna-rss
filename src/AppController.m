@@ -96,7 +96,6 @@
 @property (nonatomic, readonly, strong) NSTimer *checkTimer;
 -(IBAction)cancelAllRefreshesToolbar:(id)sender;
 
-@property (nonatomic) MainWindowController *mainWindowController;
 @property (weak, nonatomic) NSWindow *mainWindow;
 @property (nonatomic) ActivityPanelController *activityPanelController;
 @property (nonatomic) DirectoryMonitor *directoryMonitor;

@@ -42,6 +42,7 @@
 @class Article;
 @class UnifiedDisplayView;
 @class ArticleListView;
+@class MainWindowController;
 
 @interface AppController : NSObject <NSApplicationDelegate>
 {
@@ -70,6 +71,7 @@
     NewSubscription * _rssFeed;
 }
 
+@property (nonatomic) MainWindowController *mainWindowController;
 @property (nonatomic) PluginManager *pluginManager;
 @property (nonatomic, weak) BrowserView *browserView;
 @property (nonatomic) ArticleController *articleController;
