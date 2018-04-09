@@ -136,9 +136,9 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <customView placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1238" customClass="MMTabBarView">
-                                        <rect key="frame" x="0.0" y="581" width="653" height="22"/>
+                                        <rect key="frame" x="0.0" y="580" width="653" height="23"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="23" id="Jqx-LT-OPI"/>
+                                            <constraint firstAttribute="height" constant="23" id="dYp-Gl-QZR"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="delegate" destination="1227" id="1242"/>
@@ -148,7 +148,7 @@
                                         </connections>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="cTN-D0-dY2" customClass="DisclosureView">
-                                        <rect key="frame" x="0.0" y="552" width="653" height="29"/>
+                                        <rect key="frame" x="0.0" y="551" width="653" height="29"/>
                                         <subviews>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="1300" customClass="FilterView" customModule="Vienna" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="653" height="29"/>
@@ -299,12 +299,12 @@
                                         </connections>
                                     </customView>
                                     <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="1218" userLabel="Tab View">
-                                        <rect key="frame" x="0.0" y="0.0" width="653" height="552"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="653" height="551"/>
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
                                             <tabViewItem identifier="1" id="1221">
                                                 <view key="view" id="1222" userLabel="Detail View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="653" height="552"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="653" height="551"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
                                             </tabViewItem>
@@ -408,7 +408,7 @@
                         <popUpButton key="view" verticalHuggingPriority="750" id="DDQ-PY-F2c">
                             <rect key="frame" x="0.0" y="14" width="41" height="28"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="pdk-MS-QME" id="xAh-aB-Ek3">
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NewFeedTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="pdk-MS-QME" id="xAh-aB-Ek3">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" id="tQg-b5-Yiu">
@@ -633,7 +633,7 @@
                         <popUpButton key="view" verticalHuggingPriority="750" id="gOd-tT-XFQ">
                             <rect key="frame" x="0.0" y="14" width="41" height="28"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="lu2-BZ-Gxd" id="5CR-Qn-4pP">
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="StyleTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="lu2-BZ-Gxd" id="5CR-Qn-4pP">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" id="mit-Vi-iR1">
@@ -705,7 +705,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                             <clipView key="contentView" copiesOnScroll="NO" id="TOX-JT-adF">
                                 <rect key="frame" x="0.0" y="0.0" width="700" height="310"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowHeight="15" headerView="1386" id="977" customClass="MessageListView">
                                         <rect key="frame" x="0.0" y="0.0" width="700" height="287"/>
@@ -778,7 +778,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" ambiguous="YES" id="emU-La-Fur">
                         <rect key="frame" x="1" y="1" width="699" height="605"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="NgO-hM-mCz" customClass="ExtendedTableView">
                                 <rect key="frame" x="0.0" y="0.0" width="699" height="605"/>
@@ -824,7 +824,7 @@
             <autoresizingMask key="autoresizingMask"/>
             <connections>
                 <outlet property="tabBarControl" destination="1238" id="1243"/>
-                <outlet property="tabView" destination="1218" id="1230"/>
+                <outlet property="tabBarHeightConstraint" destination="dYp-Gl-QZR" id="BKL-Xz-lML"/>
             </connections>
         </customView>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="1288" customClass="EnclosureView">
