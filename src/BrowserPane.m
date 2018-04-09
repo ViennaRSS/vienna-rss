@@ -694,11 +694,11 @@
 -(void)handleStopLoading:(id)sender
 {
 	[self willChangeValueForKey:@"isLoading"];
+	[self.webPane.preferences setJavaScriptEnabled:NO];
 	[self.webPane setFrameLoadDelegate:nil];
 	[self.webPane setUIDelegate:nil];
 	[self.webPane stopLoading:self];
 	[self didChangeValueForKey:@"isLoading"];
-	[(self.webPane).mainFrame loadHTMLString:@"" baseURL:nil];
 }
 
 /* handleRSSPage
