@@ -131,10 +131,6 @@
     webPane.UIDelegate = self;
 	webPane.frameLoadDelegate = self;
 	
-	// Make web preferences 16pt Arial to match Safari
-	webPane.preferences.standardFontFamily = @"Arial";
-	webPane.preferences.defaultFontSize = 16;
-	
 	// Use an AddressBarCell for the address field which allows space for the
 	// web page image and an optional lock icon for secure pages.
 	AddressBarCell * cell = [[AddressBarCell alloc] init];
