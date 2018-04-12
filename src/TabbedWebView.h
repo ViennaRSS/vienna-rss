@@ -24,7 +24,6 @@
 @class AppController;
 
 @interface TabbedWebView : WebView <WebPolicyDelegate> {
-	WebPreferences * defaultWebPrefs;
 	BOOL openLinksInNewBrowser;
 	BOOL isFeedRedirect;
 	BOOL isDownload;
@@ -36,6 +35,9 @@
 -(void)setOpenLinksInNewBrowser:(BOOL)flag;
 -(void)keyDown:(NSEvent *)theEvent;
 -(void)printDocument:(id)sender;
+-(void)abortJavascriptAndPlugIns;
+-(void)useUserPrefsForJavascriptAndPlugIns;
+-(void)forceJavascript;
 @property (nonatomic, getter=isFeedRedirect, readonly) BOOL feedRedirect;
 @property (nonatomic, getter=isDownload, readonly) BOOL download;
 -(void)scrollToTop;

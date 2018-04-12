@@ -77,6 +77,7 @@
 
 @implementation BrowserPane
 @synthesize webPane;
+@synthesize viewTitle;
 
 + (void)load
 {
@@ -111,7 +112,7 @@
 		isLoading = NO;
 		[self didChangeValueForKey:@"isLoading"];
 		isLocalFile = NO;
-		viewTitle = nil;
+		viewTitle = @"";
 		pageFilename = nil;
 		lastError = nil;
 		hasRSSlink = NO;
@@ -129,10 +130,6 @@
 	[webPane initTabbedWebView];
     webPane.UIDelegate = self;
 	webPane.frameLoadDelegate = self;
-	
-	// Make web preferences 16pt Arial to match Safari
-	webPane.preferences.standardFontFamily = @"Arial";
-	webPane.preferences.defaultFontSize = 16;
 	
 	// Use an AddressBarCell for the address field which allows space for the
 	// web page image and an optional lock icon for secure pages.
@@ -223,11 +220,6 @@
 		[self activateAddressBar];
 }
 
--(void)setViewTitle:(NSString *) newTitle
-{
-	viewTitle = newTitle;
-}
-
 /* activateAddressBar
  * Put the focus on the address bar.
  */
@@ -254,7 +246,6 @@
 		return;
 	}
 
-	self.viewTitle = @"";
 	isLocalFile = self.url.fileURL;
 
 	pageFilename = self.url.path.lastPathComponent.stringByDeletingPathExtension;
@@ -296,7 +287,6 @@
 	{
 		[self showRssPageButton:NO];
 		[self setError:nil];
-		self.viewTitle = @"";
 	}
 
 }
@@ -381,7 +371,7 @@
  */
 -(void)endFrameLoad
 {
-	if ([viewTitle isEqualToString:@""])
+	if ([self.viewTitle isEqualToString:@""])
 	{
 		if (lastError == nil)
 		{
@@ -619,11 +609,6 @@
 	}
 }
 
--(NSString *)viewTitle
-{
-	return viewTitle;
-}
-
 /* canGoForward
  * Return TRUE if we can go forward to a web page.
  */
@@ -705,11 +690,12 @@
 -(void)handleStopLoading:(id)sender
 {
 	[self willChangeValueForKey:@"isLoading"];
+	// stop Javascript and plugings
+	[self.webPane abortJavascriptAndPlugIns];
 	[self.webPane setFrameLoadDelegate:nil];
 	[self.webPane setUIDelegate:nil];
 	[self.webPane stopLoading:self];
 	[self didChangeValueForKey:@"isLoading"];
-	[(self.webPane).mainFrame loadHTMLString:@"" baseURL:nil];
 }
 
 /* handleRSSPage

@@ -326,12 +326,12 @@
                     // way to get the height with WebKit
                     // Ref : http://james.padolsey.com/javascript/get-document-height-cross-browser/
                     //
-                    // this temporary enable Javascript if it is not enabled, then reset to preference
-                    [sender.preferences setJavaScriptEnabled:YES];
+                    // this temporary enables Javascript, then sets according to user preference
+                    [sender forceJavascript];
                     outputHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollHeight"];
                     bodyHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"];
                     clientHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.clientHeight"];
-                    sender.preferences.javaScriptEnabled = [Preferences standardPreferences].useJavaScript;
+                    [sender useUserPrefsForJavascriptAndPlugIns];
                     fittingHeight = outputHeight.doubleValue;
                     //get the rect of the current webview frame
                     NSRect webViewRect = sender.frame;
@@ -734,7 +734,11 @@
 	{
 		id object= rowHeightArray[row];
         CGFloat height = [object doubleValue];
-		return  (height) ;
+        if (height > 0) {
+		    return  (height) ;
+		} else {
+		    return (CGFloat)DEFAULT_CELL_HEIGHT;
+		}
 	}
 }
 

@@ -38,7 +38,6 @@
 @end
 
 @interface BrowserPane : NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate, MMTabBarItem> {
-	TabbedWebView * webPane;
 	IBOutlet NSButton * backButton;
 	IBOutlet NSButton * forwardButton;
 	IBOutlet NSButton * refreshButton;
@@ -46,13 +45,11 @@
 	IBOutlet SSTextField * addressField;
 	IBOutlet NSButton * iconImage;
 	IBOutlet NSImageView * lockIconImage;
-	IBOutlet NSView * viewwwer;
 	NSString * pageFilename;
 	NSError * lastError;
 	BOOL isLocalFile;
 	BOOL isLoading;
 	BOOL hasRSSlink;
-	NSString * viewTitle;
 }
 
 @property (nonatomic, strong) IBOutlet TabbedWebView * webPane;
