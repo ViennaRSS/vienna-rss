@@ -694,8 +694,8 @@
 -(void)handleStopLoading:(id)sender
 {
 	[self willChangeValueForKey:@"isLoading"];
-	[self.webPane.preferences setPlugInsEnabled:NO];
-	[self.webPane.preferences setJavaScriptEnabled:NO];
+	// stop Javascript and plugings
+	[self.webPane abortJavascriptAndPlugIns];
 	[self.webPane setFrameLoadDelegate:nil];
 	[self.webPane setUIDelegate:nil];
 	[self.webPane stopLoading:self];
