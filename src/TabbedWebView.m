@@ -99,6 +99,20 @@ static NSString * _userAgent ;
     return _webPrefs;
 }
 
++(WebPreferences *)withJavaScriptWebPrefs
+{
+    // Singleton
+    static WebPreferences * _webPrefs = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _webPrefs = [[WebPreferences alloc] initWithIdentifier:@"VNAForceJavaScriptWebPrefs"];
+        _webPrefs.standardFontFamily = @"Arial";
+        _webPrefs.defaultFontSize = 16;
+        _webPrefs.javaScriptEnabled = YES;
+    });
+    return _webPrefs;
+}
+
 +(WebPreferences *)passiveWebPrefs
 {
     // Singleton
@@ -113,7 +127,6 @@ static NSString * _userAgent ;
     });
     return _webPrefs;
 }
-
 
 /* initWithFrame
  * The designated instance initialiser.
@@ -361,11 +374,11 @@ static NSString * _userAgent ;
 {
 	Preferences * prefs = [Preferences standardPreferences];
 	if (!prefs.enableMinimumFontSize)
-		[TabbedWebView defaultWebPrefs].minimumFontSize = [TabbedWebView passiveWebPrefs].minimumFontSize = 1;
+		[TabbedWebView defaultWebPrefs].minimumFontSize = [TabbedWebView passiveWebPrefs].minimumFontSize = [TabbedWebView withJavaScriptWebPrefs].minimumFontSize= 1;
 	else
 	{
 		NSInteger size = prefs.minimumFontSize;
-		[TabbedWebView defaultWebPrefs].minimumFontSize = [TabbedWebView passiveWebPrefs].minimumFontSize = (int)size;
+		[TabbedWebView defaultWebPrefs].minimumFontSize = [TabbedWebView passiveWebPrefs].minimumFontSize = [TabbedWebView withJavaScriptWebPrefs].minimumFontSize = (int)size;
 	}
 }
 
@@ -423,6 +436,22 @@ static NSString * _userAgent ;
 -(void)abortJavascriptAndPlugIns
 {
     self.preferences = [TabbedWebView passiveWebPrefs];
+}
+
+/* useUserPrefsForJavascriptAndPlugIns
+ * Sets up the web preferences to use JavaScript and WebPlugins as defined by user preferences
+ */
+-(void)useUserPrefsForJavascriptAndPlugIns
+{
+    self.preferences = [TabbedWebView defaultWebPrefs];
+}
+
+/* forceJavascript
+ * Sets up the web preferences to use JavaScript (without WebPlugins)
+ */
+-(void)forceJavascript
+{
+    self.preferences = [TabbedWebView withJavaScriptWebPrefs];
 }
 
 /* keyDown

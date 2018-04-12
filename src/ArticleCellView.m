@@ -36,6 +36,8 @@
 		// Make the list view the frame load and UI delegate for the web view
 		articleView.UIDelegate = [controller.browserView primaryTabItemView];
 		articleView.frameLoadDelegate = [controller.browserView primaryTabItemView];
+		// we disable Javascript for now, until rendering has finished
+		[articleView abortJavascriptAndPlugIns];
 		// Notify the list view when the article view has finished loading
 		SEL loadFinishedSelector = NSSelectorFromString(@"webViewLoadFinished:");
 		[[NSNotificationCenter defaultCenter] addObserver:[controller.browserView primaryTabItemView] selector:loadFinishedSelector name:WebViewProgressFinishedNotification object:articleView];
