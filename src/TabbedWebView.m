@@ -92,8 +92,9 @@ static NSString * _userAgent ;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _webPrefs = [[WebPreferences alloc] initWithIdentifier:@"VNAStandardWebPrefs"];
+        // Make web preferences 16pt Arial to match Safari
         _webPrefs.standardFontFamily = @"Arial";
-        _webPrefs.defaultFontSize = 12;
+        _webPrefs.defaultFontSize = 16;
         _webPrefs.privateBrowsingEnabled = NO;
     });
     return _webPrefs;
@@ -107,7 +108,7 @@ static NSString * _userAgent ;
     dispatch_once(&onceToken, ^{
         _webPrefs = [[WebPreferences alloc] initWithIdentifier:@"VNAPassiveWebPrefs"];
         _webPrefs.standardFontFamily = @"Arial";
-        _webPrefs.defaultFontSize = 12;
+        _webPrefs.defaultFontSize = 16;
         _webPrefs.privateBrowsingEnabled = NO;
         _webPrefs.javaScriptEnabled = NO;
         _webPrefs.plugInsEnabled = NO;

@@ -105,12 +105,6 @@
 	articleText.frameLoadDelegate = self;
 	[articleText setOpenLinksInNewBrowser:YES];
 
-	// Make web preferences 16pt Arial to match Safari
-	articleText.preferences.standardFontFamily = @"Arial";
-	articleText.preferences.defaultFontSize = 16;
-	
-	// Disable caching
-	[articleText.preferences setUsesPageCache:NO];
 	[articleText setMaintainsBackForwardList:NO];
 	[articleText.backForwardList setPageCacheSize:0];
 
