@@ -85,6 +85,35 @@ static NSString * _userAgent ;
     return @[@"dmg",  @"zip", @"gz", @"tgz", @"7z", @"rar", @"tar", @"bin", @"bz2", @"exe", @"sit", @"sitx"];
 }
 
++(WebPreferences *)defaultWebPrefs
+{
+    // Singleton
+    static WebPreferences * _webPrefs = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _webPrefs = [[WebPreferences alloc] initWithIdentifier:@"VNAStandardWebPrefs"];
+        _webPrefs.standardFontFamily = @"Arial";
+        _webPrefs.defaultFontSize = 12;
+    });
+    return _webPrefs;
+}
+
++(WebPreferences *)passiveWebPrefs
+{
+    // Singleton
+    static WebPreferences * _webPrefs = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _webPrefs = [[WebPreferences alloc] initWithIdentifier:@"VNAPassiveWebPrefs"];
+        _webPrefs.standardFontFamily = @"Arial";
+        _webPrefs.defaultFontSize = 12;
+        _webPrefs.javaScriptEnabled = NO;
+        _webPrefs.plugInsEnabled = NO;
+    });
+    return _webPrefs;
+}
+
+
 /* initWithFrame
  * The designated instance initialiser.
  */
@@ -121,15 +150,10 @@ static NSString * _userAgent ;
     [nc addObserver:self selector:@selector(handleUseWebPluginsChange:)
                name:kMA_Notify_UseWebPluginsChange object:nil];
 	
-	// Handle minimum font size, use of JavaScript, and use of plugins
-	defaultWebPrefs = self.preferences;
-	defaultWebPrefs.standardFontFamily = @"Arial";
-	defaultWebPrefs.defaultFontSize = 12;
-	[defaultWebPrefs setPrivateBrowsingEnabled:NO];
-	[defaultWebPrefs setJavaScriptEnabled:NO];
-    [defaultWebPrefs setPlugInsEnabled:NO];
     // handle UserAgent
     self.customUserAgent = [TabbedWebView userAgent];
+	// Handle minimum font size, use of JavaScript, and use of plugins
+	self.preferences = [TabbedWebView defaultWebPrefs];
 	[self loadMinimumFontSize];
 	[self loadUseJavaScript];
     [self loadUseWebPlugins];
@@ -336,11 +360,11 @@ static NSString * _userAgent ;
 {
 	Preferences * prefs = [Preferences standardPreferences];
 	if (!prefs.enableMinimumFontSize)
-		defaultWebPrefs.minimumFontSize = 1;
+		[TabbedWebView defaultWebPrefs].minimumFontSize = [TabbedWebView passiveWebPrefs].minimumFontSize = 1;
 	else
 	{
 		NSInteger size = prefs.minimumFontSize;
-		defaultWebPrefs.minimumFontSize = (int)size;
+		[TabbedWebView defaultWebPrefs].minimumFontSize = [TabbedWebView passiveWebPrefs].minimumFontSize = (int)size;
 	}
 }
 
@@ -380,16 +404,24 @@ static NSString * _userAgent ;
 -(void)loadUseJavaScript
 {
 	Preferences * prefs = [Preferences standardPreferences];
-	defaultWebPrefs.javaScriptEnabled = prefs.useJavaScript;
+	[TabbedWebView defaultWebPrefs].javaScriptEnabled = prefs.useJavaScript;
 }
 
 /* loadUseWebPlugins
- * Sets up the web preferences for using JavaScript.
+ * Sets up the web preferences for using WebPlugins.
  */
 -(void)loadUseWebPlugins
 {
     Preferences * prefs = [Preferences standardPreferences];
-    defaultWebPrefs.plugInsEnabled = prefs.useWebPlugins;
+    [TabbedWebView defaultWebPrefs].plugInsEnabled = prefs.useWebPlugins;
+}
+
+/* abortJavascriptAndPlugIns
+ * Sets up the web preferences to stop JavaScript and WebPlugins
+ */
+-(void)abortJavascriptAndPlugIns
+{
+    self.preferences = [TabbedWebView passiveWebPrefs];
 }
 
 /* keyDown
