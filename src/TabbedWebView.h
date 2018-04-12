@@ -36,6 +36,8 @@
 -(void)keyDown:(NSEvent *)theEvent;
 -(void)printDocument:(id)sender;
 -(void)abortJavascriptAndPlugIns;
+-(void)useUserPrefsForJavascriptAndPlugIns;
+-(void)forceJavascript;
 @property (nonatomic, getter=isFeedRedirect, readonly) BOOL feedRedirect;
 @property (nonatomic, getter=isDownload, readonly) BOOL download;
 -(void)scrollToTop;
