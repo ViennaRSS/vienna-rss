@@ -757,6 +757,9 @@
 		cellView = [[ArticleCellView alloc] initWithFrame:NSMakeRect(
 		        XPOS_IN_CELL, YPOS_IN_CELL, tableView.bounds.size.width - XPOS_IN_CELL, DEFAULT_CELL_HEIGHT)];
 		cellView.identifier = LISTVIEW_CELL_IDENTIFIER;
+	} else {
+	    // recycled cell : minimum safety measures
+	    [cellView.articleView useUserPrefsForJavascriptAndPlugIns];
 	}
 
 	NSArray * allArticles = self.controller.articleController.allArticles;

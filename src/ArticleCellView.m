@@ -54,6 +54,7 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:[controller.browserView primaryTabItemView] name:WebViewProgressFinishedNotification object:articleView];
 	[articleView setUIDelegate:nil];
 	[articleView setFrameLoadDelegate:nil];
+	[articleView abortJavascriptAndPlugIns];
 	[articleView stopLoading:self];
 
 }
