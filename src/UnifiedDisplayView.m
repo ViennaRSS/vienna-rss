@@ -253,21 +253,6 @@
 #pragma mark -
 #pragma mark WebFrameLoadDelegate
 
-/* didStartProvisionalLoadForFrame:
- * Invoked when a frame load is in progress
- */
--(void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)webFrame
-{
-    if([webFrame isEqual:sender.mainFrame])
-    {
-		id obj = sender.superview;
-		if ([obj isKindOfClass:[ArticleCellView class]]) {
-			ArticleCellView * cell = (ArticleCellView *)obj;
-			[cell setInProgress:YES];
-		}
-	}
-}
-
 /* didFailLoadWithError
  * Invoked when a location request for frame has failed to load.
  */
@@ -774,6 +759,7 @@
 	cellView.listView = articleList;
 	ArticleView * view = cellView.articleView;
 	[view removeFromSuperviewWithoutNeedingDisplay];
+	[cellView setInProgress:YES];
 	NSString * htmlText = [view articleTextFromArray:@[theArticle]];
 	[view setHTML:htmlText];
 	[cellView addSubview:view];
