@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.19"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ViennaApp">
@@ -447,6 +447,11 @@ CA
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="390">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Article List" keyEquivalent="y" id="Rs9-r3-soc">
+                                <connections>
+                                    <action selector="viewArticlesTab:" target="-1" id="p4V-jV-gaL"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Next Unread" keyEquivalent="u" id="344">
                                 <connections>

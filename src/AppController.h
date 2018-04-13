@@ -92,6 +92,7 @@
 -(IBAction)markFlagged:(id)sender;
 -(IBAction)renameFolder:(id)sender;
 -(IBAction)viewFirstUnread:(id)sender;
+-(IBAction)viewArticlesTab:(id)sender;
 -(IBAction)viewNextUnread:(id)sender;
 -(IBAction)printDocument:(id)sender;
 -(IBAction)goBack:(id)sender;
