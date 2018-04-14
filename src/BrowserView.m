@@ -212,7 +212,7 @@
 	[self tabView:self.tabBarControl.tabView willCloseTabViewItem:tabViewItem];
 	//close tab to be closed
 	[self.tabBarControl removeTabViewItem:tabViewItem];
-	[self tabView:self.tabBarControl.tabView didCloseTabViewItem:tabViewItem];
+	//[self tabView:self.tabBarControl.tabView didCloseTabViewItem:tabViewItem];
 }
 
 /* countOfTabs
