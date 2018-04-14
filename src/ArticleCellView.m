@@ -42,12 +42,6 @@
 		[articleView setOpenLinksInNewBrowser:YES];
 		[articleView.mainFrame.frameView setAllowsScrolling:NO];
 
-		// Make web preferences 16pt Arial to match Safari
-		articleView.preferences.standardFontFamily = @"Arial";
-		articleView.preferences.defaultFontSize = 16;
-
-		// Enable caching
-		[articleView.preferences setUsesPageCache:YES];
 		[articleView setMaintainsBackForwardList:NO];
 		[self setInProgress:NO];
 		progressIndicator = nil;
@@ -60,6 +54,7 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:[controller.browserView primaryTabItemView] name:WebViewProgressFinishedNotification object:articleView];
 	[articleView setUIDelegate:nil];
 	[articleView setFrameLoadDelegate:nil];
+	[articleView abortJavascriptAndPlugIns];
 	[articleView stopLoading:self];
 
 }

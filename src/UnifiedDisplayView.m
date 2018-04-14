@@ -253,21 +253,6 @@
 #pragma mark -
 #pragma mark WebFrameLoadDelegate
 
-/* didStartProvisionalLoadForFrame:
- * Invoked when a frame load is in progress
- */
--(void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)webFrame
-{
-    if([webFrame isEqual:sender.mainFrame])
-    {
-		id obj = sender.superview;
-		if ([obj isKindOfClass:[ArticleCellView class]]) {
-			ArticleCellView * cell = (ArticleCellView *)obj;
-			[cell setInProgress:YES];
-		}
-	}
-}
-
 /* didFailLoadWithError
  * Invoked when a location request for frame has failed to load.
  */
@@ -326,12 +311,12 @@
                     // way to get the height with WebKit
                     // Ref : http://james.padolsey.com/javascript/get-document-height-cross-browser/
                     //
-                    // this temporary enable Javascript if it is not enabled, then reset to preference
-                    [sender.preferences setJavaScriptEnabled:YES];
+                    // this temporary enables Javascript, then reset according to user preference
+                    [sender forceJavascript];
                     outputHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollHeight"];
                     bodyHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"];
                     clientHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.clientHeight"];
-                    sender.preferences.javaScriptEnabled = [Preferences standardPreferences].useJavaScript;
+                    [sender useUserPrefsForJavascriptAndPlugIns];
                     fittingHeight = outputHeight.doubleValue;
                     //get the rect of the current webview frame
                     NSRect webViewRect = sender.frame;
@@ -734,7 +719,11 @@
 	{
 		id object= rowHeightArray[row];
         CGFloat height = [object doubleValue];
-		return  (height) ;
+        if (height > 0) {
+		    return  (height) ;
+		} else {
+		    return (CGFloat)DEFAULT_CELL_HEIGHT;
+		}
 	}
 }
 
@@ -753,6 +742,9 @@
 		cellView = [[ArticleCellView alloc] initWithFrame:NSMakeRect(
 		        XPOS_IN_CELL, YPOS_IN_CELL, tableView.bounds.size.width - XPOS_IN_CELL, DEFAULT_CELL_HEIGHT)];
 		cellView.identifier = LISTVIEW_CELL_IDENTIFIER;
+	} else {
+	    // recycled cell : minimum safety measures
+	    [cellView.articleView useUserPrefsForJavascriptAndPlugIns];
 	}
 
 	NSArray * allArticles = self.controller.articleController.allArticles;
@@ -767,6 +759,7 @@
 	cellView.listView = articleList;
 	ArticleView * view = cellView.articleView;
 	[view removeFromSuperviewWithoutNeedingDisplay];
+	[cellView setInProgress:YES];
 	NSString * htmlText = [view articleTextFromArray:@[theArticle]];
 	[view setHTML:htmlText];
 	[cellView addSubview:view];
