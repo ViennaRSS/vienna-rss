@@ -2983,7 +2983,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)closeTab:(id)sender
 {
-	[self.browserView closeTabItemView:self.browserView.activeTabItemView];
+	[self.browserView closeTab:self.browserView.activeTab];
 }
 
 /* reloadPage

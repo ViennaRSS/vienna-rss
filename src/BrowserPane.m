@@ -274,8 +274,7 @@
 -(void)setUrl:(NSURL *)url {
 	_url = url;
 	addressField.stringValue = url ? url.absoluteString : @"";
-	[self.browser setTabItemViewTitle:self
-										  title:url ? url.host : NSLocalizedString(@"New Tab", nil)];
+    self.tab.label = url ? url.host : NSLocalizedString(@"New Tab", nil);
 }
 
 /* didStartProvisionalLoadForFrame
@@ -375,7 +374,7 @@
 	{
 		if (lastError == nil)
 		{
-			[self.browser setTabItemViewTitle:self title:pageFilename];
+            self.tab.label = pageFilename;
 			self.viewTitle = pageFilename;
 		}
 	}
@@ -444,7 +443,7 @@
 {
 	if (frame == (self.webPane).mainFrame)
 	{
-		[self.browser setTabItemViewTitle:self title:title];
+        self.tab.label = title;
 		self.viewTitle = title;
 	}
 }
@@ -534,15 +533,6 @@
  */
 -(void)webView:(WebView *)sender setFrame:(NSRect)frame
 {
-}
-
-/* webViewClose
- * Handle scripting closing a window by just closing the tab.
- */
--(void)webViewClose:(WebView *)sender
-{
-	[self handleStopLoading:self];
-	[self.browser closeTabItemView:self];
 }
 
 /* contextMenuItemsForElement
