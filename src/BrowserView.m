@@ -207,12 +207,25 @@
  */
 -(void)closeTabItemView:(NSView *)tabItemView
 {
-	NSTabViewItem *tabViewItem = [self.tabBarControl tabViewItemWithIdentifier:tabItemView];
+	MMTabBarView *tabBar = self.tabBarControl;
+	NSTabView *tabView = tabBar.tabView;
+	NSTabViewItem *tabViewItem = [tabBar tabViewItemWithIdentifier:tabItemView];
 
-	[self tabView:self.tabBarControl.tabView willCloseTabViewItem:tabViewItem];
-	//close tab to be closed
-	[self.tabBarControl removeTabViewItem:tabViewItem];
-	[self tabView:self.tabBarControl.tabView didCloseTabViewItem:tabViewItem];
+    if (([tabBar delegate]) && ([[tabBar delegate] respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])) {
+        if (![[tabBar delegate] tabView:tabView shouldCloseTabViewItem:tabViewItem]) {
+            return;
+        }
+    }
+    
+    if (([tabBar delegate]) && ([[tabBar delegate] respondsToSelector:@selector(tabView:willCloseTabViewItem:)])) {
+        [[tabBar delegate] tabView:tabView willCloseTabViewItem:tabViewItem];
+    }
+    
+    [tabView removeTabViewItem:tabViewItem];
+    
+    if (([tabBar delegate]) && ([[tabBar delegate] respondsToSelector:@selector(tabView:didCloseTabViewItem:)])) {
+        [[tabBar delegate] tabView:tabView didCloseTabViewItem:tabViewItem];
+    }
 }
 
 /* countOfTabs
@@ -270,7 +283,7 @@
 
 // Additional NSTabView delegate methods
 
-/* disableTabCloseForTabViewItem
+/* shouldCloseTabViewItem:
  * Returns whether the tab close should be disabled for the specified item. We disable the close button
  * for the primary item.
  */
