@@ -21,4 +21,3 @@ clean:
 	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Deployment clean
 	rm -fr build
 	rm -fr Carthage/Build
-	rm -fr Pods/build
