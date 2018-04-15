@@ -373,7 +373,7 @@
 		0379E2391A20831600D58BFE /* SyncingPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncingPreferencesViewController.h; sourceTree = "<group>"; };
 		0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncingPreferencesViewController.m; sourceTree = "<group>"; };
 		0383DC541B71B44700A11950 /* CriteriaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CriteriaTests.m; sourceTree = "<group>"; };
-		0386A5BB1E1FA586000C10CE /* BrowserPane.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BrowserPane.xib; path = Interfaces/BrowserPane.xib; sourceTree = "<group>"; };
+		0386A5BB1E1FA586000C10CE /* BrowserPane.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrowserPane.xib; sourceTree = "<group>"; };
 		03A131B11AA54EAC0037471F /* VNADatabaseMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VNADatabaseMigration.h; sourceTree = "<group>"; };
 		03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VNADatabaseMigration.m; sourceTree = "<group>"; };
 		03B35B821B75E9E0001DB06D /* NSDate+Vienna.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Vienna.h"; sourceTree = "<group>"; };
@@ -583,25 +583,25 @@
 		EA43C70814A370DB00F2D843 /* VTPG_Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTPG_Common.m; sourceTree = "<group>"; };
 		EA6D3E5914D8048C004DCB80 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
 		F1ECA9ED54D2517E7BEDCBB7 /* Pods-Vienna Tests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna Tests.development.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna Tests/Pods-Vienna Tests.development.xcconfig"; sourceTree = "<group>"; };
-		F60642751F1A314700A12272 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = Interfaces/cs.lproj/MainWindowController.strings; sourceTree = "<group>"; };
-		F60642761F1A314900A12272 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = Interfaces/da.lproj/MainWindowController.strings; sourceTree = "<group>"; };
-		F60642771F1A314B00A12272 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Interfaces/de.lproj/MainWindowController.strings; sourceTree = "<group>"; };
-		F60642781F1A314D00A12272 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Interfaces/es.lproj/MainWindowController.strings; sourceTree = "<group>"; };
-		F60642791F1A314E00A12272 /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = Interfaces/eu.lproj/MainWindowController.strings; sourceTree = "<group>"; };
-		F606427A1F1A314F00A12272 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Interfaces/fr.lproj/MainWindowController.strings; sourceTree = "<group>"; };
-		F606427B1F1A315100A12272 /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = Interfaces/gl.lproj/MainWindowController.strings; sourceTree = "<group>"; };
-		F606427C1F1A315200A12272 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = Interfaces/it.lproj/MainWindowController.strings; sourceTree = "<group>"; };
-		F606427D1F1A315400A12272 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = Interfaces/ja.lproj/MainWindowController.strings; sourceTree = "<group>"; };
-		F606427E1F1A315500A12272 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = Interfaces/ko.lproj/MainWindowController.strings; sourceTree = "<group>"; };
-		F606427F1F1A315600A12272 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = Interfaces/nl.lproj/MainWindowController.strings; sourceTree = "<group>"; };
-		F60642801F1A315700A12272 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = Interfaces/pt.lproj/MainWindowController.strings; sourceTree = "<group>"; };
-		F60642811F1A315900A12272 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "Interfaces/pt-BR.lproj/MainWindowController.strings"; sourceTree = "<group>"; };
-		F60642821F1A315A00A12272 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Interfaces/ru.lproj/MainWindowController.strings; sourceTree = "<group>"; };
-		F60642831F1A315B00A12272 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = Interfaces/sv.lproj/MainWindowController.strings; sourceTree = "<group>"; };
-		F60642841F1A315C00A12272 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = Interfaces/tr.lproj/MainWindowController.strings; sourceTree = "<group>"; };
-		F60642851F1A315E00A12272 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = Interfaces/uk.lproj/MainWindowController.strings; sourceTree = "<group>"; };
-		F60642861F1A316000A12272 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "Interfaces/zh-Hant.lproj/MainWindowController.strings"; sourceTree = "<group>"; };
-		F60642871F1A316100A12272 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "Interfaces/zh-Hans.lproj/MainWindowController.strings"; sourceTree = "<group>"; };
+		F60642751F1A314700A12272 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		F60642761F1A314900A12272 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		F60642771F1A314B00A12272 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		F60642781F1A314D00A12272 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		F60642791F1A314E00A12272 /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		F606427A1F1A314F00A12272 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		F606427B1F1A315100A12272 /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = gl.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		F606427C1F1A315200A12272 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		F606427D1F1A315400A12272 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		F606427E1F1A315500A12272 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		F606427F1F1A315600A12272 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		F60642801F1A315700A12272 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		F60642811F1A315900A12272 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/MainWindowController.strings"; sourceTree = "<group>"; };
+		F60642821F1A315A00A12272 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		F60642831F1A315B00A12272 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		F60642841F1A315C00A12272 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		F60642851F1A315E00A12272 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		F60642861F1A316000A12272 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainWindowController.strings"; sourceTree = "<group>"; };
+		F60642871F1A316100A12272 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainWindowController.strings"; sourceTree = "<group>"; };
 		F60642881F1A338A00A12272 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/ExportAccessoryViewController.strings; sourceTree = "<group>"; };
 		F60642891F1A338C00A12272 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/ExportAccessoryViewController.strings; sourceTree = "<group>"; };
 		F606428A1F1A338D00A12272 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/ExportAccessoryViewController.strings; sourceTree = "<group>"; };
@@ -750,7 +750,7 @@
 		F62581121E286D990035E43C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/errorpage.html; sourceTree = "<group>"; };
 		F62581161E286DA60035E43C /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = nl; path = nl.lproj/errorpage.html; sourceTree = "<group>"; };
 		F625811F1E286E390035E43C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/errorpage.html; sourceTree = "<group>"; };
-		F62581441E29B90A0035E43C /* SearchPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchPanel.xib; path = Interfaces/SearchPanel.xib; sourceTree = "<group>"; };
+		F62581441E29B90A0035E43C /* SearchPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPanel.xib; sourceTree = "<group>"; };
 		F625815A1E29BEB90035E43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		F628DFE21ED2698A00FACFD3 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		F6352BB81E2706DD005CD307 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoWindow.strings; sourceTree = "<group>"; };
@@ -819,7 +819,7 @@
 		F64C2CCA1E83825D00ED4E04 /* DateFormatterExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatterExtension.h; sourceTree = "<group>"; };
 		F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatterExtension.m; sourceTree = "<group>"; };
 		F6832F641F10C4C9007920D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ExportAccessoryViewController.xib; sourceTree = "<group>"; };
-		F6832F671F10F5DA007920D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Interfaces/Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
+		F6832F671F10F5DA007920D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
 		F68F724A1E2A0937007FADA5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F69140E21E71B94200D51BFF /* AppController+Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppController+Notifications.h"; sourceTree = "<group>"; };
 		F69140E31E71B94200D51BFF /* AppController+Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppController+Notifications.m"; sourceTree = "<group>"; };
@@ -1137,17 +1137,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		034981351A206E3C00014F29 /* Preferences */ = {
-			isa = PBXGroup;
-			children = (
-				03721E5B1A218CFC009C020C /* GeneralPreferencesView.xib */,
-				03721E701A218D4B009C020C /* AppearancePreferencesView.xib */,
-				03493D1C1A303BF700AA3F36 /* SyncingPreferencesView.xib */,
-				03493D311A303C1000AA3F36 /* AdvancedPreferencesView.xib */,
-			);
-			name = Preferences;
-			sourceTree = "<group>";
-		};
 		035B703619E0E4AE00197334 /* Vienna Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1190,7 +1179,6 @@
 			children = (
 				439824161666B1ED00FFE219 /* Documentation */,
 				F6D7FED61F1CDD88004F095A /* Vienna */,
-				AAA568BB09EE773200C87343 /* Vienna2 */,
 				F6A7DDCB1E470E980017BE5E /* Vienna Help */,
 				035B703619E0E4AE00197334 /* Vienna Tests */,
 				F63B7D701F1CD001002F71BF /* External */,
@@ -1201,14 +1189,6 @@
 			);
 			name = Vienna;
 			sourceTree = "<group>";
-		};
-		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				43EE7548165E81AB000997FB /* Interfaces */,
-			);
-			name = Resources;
-			sourceTree = SOURCE_ROOT;
 		};
 		43501F8E165DBCCB0018EDB7 /* DSClickableURLTextField */ = {
 			isa = PBXGroup;
@@ -1243,27 +1223,6 @@
 			path = Scripts;
 			sourceTree = "<group>";
 		};
-		43EE7548165E81AB000997FB /* Interfaces */ = {
-			isa = PBXGroup;
-			children = (
-				F625815B1E29BEB90035E43C /* MainMenu.xib */,
-				F6832F661F10F5DA007920D4 /* MainWindowController.xib */,
-				0386A5BB1E1FA586000C10CE /* BrowserPane.xib */,
-				F62581441E29B90A0035E43C /* SearchPanel.xib */,
-				F6D572AD1E26AA8200CDA909 /* EmptyTrashWarning.xib */,
-				F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */,
-				F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */,
-				F6D572B31E26AA9000CDA909 /* GroupFolder.xib */,
-				F6D572B91E26AAA100CDA909 /* RSSFeed.xib */,
-				F6D572BC1E26AAA900CDA909 /* SearchFolder.xib */,
-				F6D572B61E26AA9900CDA909 /* InfoWindow.xib */,
-				F625801E1E2853B90035E43C /* ActivityViewer.xib */,
-				F6257FF71E28485F0035E43C /* Downloads.xib */,
-				034981351A206E3C00014F29 /* Preferences */,
-			);
-			name = Interfaces;
-			sourceTree = "<group>";
-		};
 		4D36B4491D37F902009736C1 /* models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1293,14 +1252,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		AAA568BB09EE773200C87343 /* Vienna2 */ = {
-			isa = PBXGroup;
-			children = (
-				2A37F4B8FDCFA73011CA2CEA /* Resources */,
-			);
-			name = Vienna2;
-			sourceTree = SOURCE_ROOT;
-		};
 		EA43C70614A370CB00F2D843 /* DebugHelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -1309,6 +1260,30 @@
 			);
 			name = DebugHelper;
 			path = VTPG;
+			sourceTree = "<group>";
+		};
+		F63739FB1F1CFEDC00ED3B09 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				F625815B1E29BEB90035E43C /* MainMenu.xib */,
+				F6832F661F10F5DA007920D4 /* MainWindowController.xib */,
+				0386A5BB1E1FA586000C10CE /* BrowserPane.xib */,
+				F62581441E29B90A0035E43C /* SearchPanel.xib */,
+				F6D572AD1E26AA8200CDA909 /* EmptyTrashWarning.xib */,
+				F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */,
+				F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */,
+				F6D572B31E26AA9000CDA909 /* GroupFolder.xib */,
+				F6D572B91E26AAA100CDA909 /* RSSFeed.xib */,
+				F6D572BC1E26AAA900CDA909 /* SearchFolder.xib */,
+				F6D572B61E26AA9900CDA909 /* InfoWindow.xib */,
+				F625801E1E2853B90035E43C /* ActivityViewer.xib */,
+				F6257FF71E28485F0035E43C /* Downloads.xib */,
+				03721E5B1A218CFC009C020C /* GeneralPreferencesView.xib */,
+				03721E701A218D4B009C020C /* AppearancePreferencesView.xib */,
+				03493D1C1A303BF700AA3F36 /* SyncingPreferencesView.xib */,
+				03493D311A303C1000AA3F36 /* AdvancedPreferencesView.xib */,
+			);
+			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		F63B7D701F1CD001002F71BF /* External */ = {
@@ -1555,6 +1530,7 @@
 			isa = PBXGroup;
 			children = (
 				F6D7FED71F1CDDA8004F095A /* Sources */,
+				F63739FB1F1CFEDC00ED3B09 /* Interfaces */,
 				F63DA16E1F1CEC69007CBED4 /* Resources */,
 				F63DA1751F1CF182007CBED4 /* SharedSupport */,
 				430C4AE0166175C20079C9FC /* Info.plist */,
@@ -2441,7 +2417,6 @@
 				F69AE7D61F221B2500342640 /* ru */,
 			);
 			name = SyncingPreferencesView.xib;
-			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		03493D311A303C1000AA3F36 /* AdvancedPreferencesView.xib */ = {
@@ -2469,7 +2444,6 @@
 				F69AE7B51F22187200342640 /* gl */,
 			);
 			name = AdvancedPreferencesView.xib;
-			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		03721E5B1A218CFC009C020C /* GeneralPreferencesView.xib */ = {
@@ -2497,7 +2471,6 @@
 				F69AE7BA1F22187800342640 /* gl */,
 			);
 			name = GeneralPreferencesView.xib;
-			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		03721E701A218D4B009C020C /* AppearancePreferencesView.xib */ = {
@@ -2525,7 +2498,6 @@
 				F69AE7B91F22187700342640 /* gl */,
 			);
 			name = AppearancePreferencesView.xib;
-			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		F6257FF71E28485F0035E43C /* Downloads.xib */ = {
@@ -2553,7 +2525,6 @@
 				F625804F1E285C710035E43C /* gl */,
 			);
 			name = Downloads.xib;
-			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		F625801E1E2853B90035E43C /* ActivityViewer.xib */ = {
@@ -2581,7 +2552,6 @@
 				F62580511E285C910035E43C /* gl */,
 			);
 			name = ActivityViewer.xib;
-			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		F62580A81E286A8B0035E43C /* Localizable.strings */ = {
@@ -2701,7 +2671,6 @@
 				F69140FE1E71D74800D51BFF /* zh-Hans */,
 			);
 			name = MainMenu.xib;
-			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */ = {
@@ -2729,7 +2698,6 @@
 				F606429A1F1A33A000A12272 /* zh-Hans */,
 			);
 			name = ExportAccessoryViewController.xib;
-			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		F6832F661F10F5DA007920D4 /* MainWindowController.xib */ = {
@@ -2971,7 +2939,6 @@
 				F69AE7C81F22195300342640 /* ko */,
 			);
 			name = EmptyTrashWarning.xib;
-			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */ = {
@@ -2999,7 +2966,6 @@
 				F62580491E285B030035E43C /* gl */,
 			);
 			name = FeedCredentials.xib;
-			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		F6D572B31E26AA9000CDA909 /* GroupFolder.xib */ = {
@@ -3027,7 +2993,6 @@
 				F625804B1E285B5F0035E43C /* gl */,
 			);
 			name = GroupFolder.xib;
-			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		F6D572B61E26AA9900CDA909 /* InfoWindow.xib */ = {
@@ -3055,7 +3020,6 @@
 				F69AE7D71F221B2800342640 /* ru */,
 			);
 			name = InfoWindow.xib;
-			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		F6D572B91E26AAA100CDA909 /* RSSFeed.xib */ = {
@@ -3083,7 +3047,6 @@
 				F69AE7BB1F22187800342640 /* gl */,
 			);
 			name = RSSFeed.xib;
-			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		F6D572BC1E26AAA900CDA909 /* SearchFolder.xib */ = {
@@ -3111,7 +3074,6 @@
 				F69AE7B61F22187200342640 /* gl */,
 			);
 			name = SearchFolder.xib;
-			path = Interfaces;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
