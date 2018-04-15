@@ -63,7 +63,8 @@
 
 // Accessor functions
 -(void)load;
-@property (nonatomic) BrowserView *browser;
+@property (weak) BrowserView *browser;
+@property (weak) NSTabViewItem *tab;
 @property (nonatomic) NSURL *url;
 @property (nonatomic, copy) NSString *viewTitle;
 @property (nonatomic, getter=isLoading, readonly) BOOL loading;
