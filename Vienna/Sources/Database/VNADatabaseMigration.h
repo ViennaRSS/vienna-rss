@@ -7,8 +7,7 @@
 //
 
 @import Foundation;
-
-#import <FMDB.h>
+@import FMDB;
 
 @interface VNADatabaseMigration : NSObject
 

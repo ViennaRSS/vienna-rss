@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import "MASPreferencesViewController.h"
+@import MASPreferences;
 
 @interface GeneralPreferencesViewController : NSViewController <MASPreferencesViewController> {
     IBOutlet NSPopUpButton * checkFrequency;

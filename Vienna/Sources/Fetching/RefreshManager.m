@@ -27,7 +27,6 @@
 #import "Preferences.h"
 #import "Constants.h"
 #import "OpenReader.h"
-#import "ASIHTTPRequest.h"
 #import "NSNotificationAdditions.h"
 #import "VTPG_Common.h"
 #import "FeedItem.h"
@@ -35,7 +34,6 @@
 #import "Article.h"
 #import "Folder.h"
 #import "Database.h"
-#import "ASINetworkQueue.h"
 
 @interface RefreshManager ()
 

@@ -14,10 +14,11 @@ release:
 		CONFIGURATION_BUILD_DIR=build LIBRARY_SEARCH_PATHS="build"
 
 development:
-	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Development 
+	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Development
 
 clean:
 	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Development clean
 	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Deployment clean
 	rm -fr build
+	rm -fr Carthage/Build
 	rm -fr Pods/build

@@ -52,7 +52,6 @@
 #import "Article.h"
 #import "DownloadWindow.h"
 #import "TreeNode.h"
-#import "ASIHTTPRequest.h"
 #import "Field.h"
 #import "Folder.h"
 #import "BrowserView.h"

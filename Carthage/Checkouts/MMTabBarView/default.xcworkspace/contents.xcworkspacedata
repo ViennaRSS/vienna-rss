@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "group:Configurations"
+      name = "Shared Configurations">
+      <FileRef
+         location = "group:Base.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:Debug.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:MMTabBarViewDemo-Base.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:MMTabBarViewDemo-Debug.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:MMTabBarViewDemo-Release.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:MMTabBarViewFramework-Base.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:MMTabBarViewFramework-Debug.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:MMTabBarViewFramework-Release.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:Release.xcconfig">
+      </FileRef>
+   </Group>
+   <Group
+      location = "group:OriginalGraphics"
+      name = "OriginalGraphics">
+      <FileRef
+         location = "group:AquaTabNew.psd">
+      </FileRef>
+      <FileRef
+         location = "group:AquaTabNewPressed.psd">
+      </FileRef>
+      <FileRef
+         location = "group:AquaTabNewRollover.psd">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:MMTabBarView Demo/MMTabBarView Demo.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:MMTabBarView/MMTabBarView.xcodeproj">
+   </FileRef>
+</Workspace>

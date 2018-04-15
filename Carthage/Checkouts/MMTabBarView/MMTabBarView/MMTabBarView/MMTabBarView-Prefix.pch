@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'MMTabBarView' target in the 'MMTabBarView' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif

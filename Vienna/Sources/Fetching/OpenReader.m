@@ -31,7 +31,6 @@
 #import "ActivityItem.h"
 #import "Article.h"
 #import "Debug.h"
-#import "ASIFormDataRequest.h"
 
 static NSString *LoginBaseURL = @"https://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader";
 static NSString *ClientName = @"ViennaRSS";
