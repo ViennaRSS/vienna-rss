@@ -171,7 +171,7 @@ xcuserdata
 # Specific to each developer : codesign identity and private key location
 configs/CS-ID.xcconfig
 # auto-updated by autorevision
-src/autorevision.h
+Vienna/Sources/autorevision.h
 # someone seems to keep personal notes in this file
 .idea
 

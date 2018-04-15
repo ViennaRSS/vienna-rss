@@ -1,7 +1,7 @@
 # SwiftLint 0.25
 
 included:
-  - src
+  - Vienna/Sources
 
 disabled_rules:
   - line_length

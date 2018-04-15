@@ -4,7 +4,7 @@
 export PATH=/sw/bin:/opt/local/bin:/usr/local/bin:/usr/local/git/bin:${PATH}
 BUILD_NUMBER="2821"
 intermediateHeaderOutput="${BUILT_PRODUCTS_DIR}/autorevision.h"
-finalHeaderOutput="${SRCROOT}/src/autorevision.h"
+finalHeaderOutput="${SRCROOT}/Vienna/Sources/autorevision.h"
 xcodeHeaderOutput="${OBJROOT}/autorevision.h"
 cacheOutput="${OBJROOT}/autorevision.cache"
 tempCacheOutput="${OBJROOT}/autorevision.tmp"
