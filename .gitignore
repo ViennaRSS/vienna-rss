@@ -169,7 +169,7 @@ xcuserdata
 # Vienna RSS specific files
 #
 # Specific to each developer : codesign identity and private key location
-configs/CS-ID.xcconfig
+Scripts/Resources/CS-ID.xcconfig
 # auto-updated by autorevision
 Vienna/Sources/autorevision.h
 # someone seems to keep personal notes in this file

@@ -393,12 +393,12 @@
 		3A23F13315276935008AF863 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = NSNotificationAdditions.h; sourceTree = "<group>"; };
 		3A4DBEC51733C206006DD2AB /* ArticleCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleCellView.h; sourceTree = "<group>"; };
 		3A4DBEC61733C206006DD2AB /* ArticleCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCellView.m; sourceTree = "<group>"; };
-		3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Sparkle-setup.sh"; path = "configs/scripts/Sparkle-setup.sh"; sourceTree = "<group>"; };
+		3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "Sparkle-setup.sh"; sourceTree = "<group>"; };
 		3A67600F1E65FA3F0078CB14 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A6760101E65FA4F0078CB14 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A7BD0DB1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJRVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
 		3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJRVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
-		3AEE7DE81695FC570018A17D /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = vienna_public_key.pem; path = signing/vienna_public_key.pem; sourceTree = SOURCE_ROOT; };
+		3AEE7DE81695FC570018A17D /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vienna_public_key.pem; sourceTree = "<group>"; };
 		3AF896C51CD8FDB800A9FA22 /* AppController+Sparkle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppController+Sparkle.h"; sourceTree = "<group>"; };
 		3AF896C61CD8FDB800A9FA22 /* AppController+Sparkle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppController+Sparkle.m"; sourceTree = "<group>"; };
 		430C4ADB1661753F0079C9FC /* autorevision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autorevision.h; sourceTree = "<group>"; };
@@ -474,10 +474,10 @@
 		43502890165DE9DF0018EDB7 /* URLHandlerCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLHandlerCommand.m; sourceTree = "<group>"; };
 		43502891165DE9DF0018EDB7 /* ViennaApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViennaApp.h; sourceTree = "<group>"; };
 		43502892165DE9DF0018EDB7 /* ViennaApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViennaApp.m; sourceTree = "<group>"; };
-		439824191666B37000FFE219 /* autorevision.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = autorevision.sh; path = configs/scripts/autorevision.sh; sourceTree = SOURCE_ROOT; };
-		4398241A1666B37000FFE219 /* Changes-and-Notes.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Changes-and-Notes.sh"; path = "configs/scripts/Changes-and-Notes.sh"; sourceTree = SOURCE_ROOT; };
-		4398241B1666B37000FFE219 /* Make-ID-Template.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Make-ID-Template.sh"; path = "configs/scripts/Make-ID-Template.sh"; sourceTree = SOURCE_ROOT; };
-		4398241C1666B37000FFE219 /* Release-for-upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Release-for-upload.sh"; path = "configs/scripts/Release-for-upload.sh"; sourceTree = SOURCE_ROOT; };
+		439824191666B37000FFE219 /* autorevision.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = autorevision.sh; path = Scripts/autorevision.sh; sourceTree = SOURCE_ROOT; };
+		4398241A1666B37000FFE219 /* Changes-and-Notes.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Changes-and-Notes.sh"; path = "Scripts/Changes-and-Notes.sh"; sourceTree = SOURCE_ROOT; };
+		4398241B1666B37000FFE219 /* Make-ID-Template.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Make-ID-Template.sh"; path = "Scripts/Make-ID-Template.sh"; sourceTree = SOURCE_ROOT; };
+		4398241C1666B37000FFE219 /* Release-for-upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Release-for-upload.sh"; path = "Scripts/Release-for-upload.sh"; sourceTree = SOURCE_ROOT; };
 		4398241E1666B3DB00FFE219 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = SOURCE_ROOT; };
 		439824201666B3DB00FFE219 /* CHANGES */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES; sourceTree = SOURCE_ROOT; };
 		439824221666B3DB00FFE219 /* notes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = notes.html; sourceTree = SOURCE_ROOT; };
@@ -1194,8 +1194,8 @@
 				F6A7DDCB1E470E980017BE5E /* Vienna Help */,
 				035B703619E0E4AE00197334 /* Vienna Tests */,
 				F63B7D701F1CD001002F71BF /* External */,
+				439824171666B31700FFE219 /* Scripts */,
 				7F60B6D7AEFB47009A82F8BA /* Frameworks */,
-				432E5191165D655C00A8640E /* Configs */,
 				946A341AA82976C365B67A76 /* Pods */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
 			);
@@ -1208,14 +1208,6 @@
 				43EE7548165E81AB000997FB /* Interfaces */,
 			);
 			name = Resources;
-			sourceTree = SOURCE_ROOT;
-		};
-		432E5191165D655C00A8640E /* Configs */ = {
-			isa = PBXGroup;
-			children = (
-				439824171666B31700FFE219 /* Scripts */,
-			);
-			name = Configs;
 			sourceTree = SOURCE_ROOT;
 		};
 		43501F8E165DBCCB0018EDB7 /* DSClickableURLTextField */ = {
@@ -1248,7 +1240,7 @@
 				4398241C1666B37000FFE219 /* Release-for-upload.sh */,
 				3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */,
 			);
-			name = Scripts;
+			path = Scripts;
 			sourceTree = "<group>";
 		};
 		43EE7548165E81AB000997FB /* Interfaces */ = {
@@ -2064,7 +2056,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/Sparkle-setup.sh";
+			shellScript = ". Scripts/Sparkle-setup.sh";
 		};
 		430C4ACE166172BD0079C9FC /* Run Autorevision */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2078,7 +2070,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/autorevision.sh";
+			shellScript = ". Scripts/autorevision.sh";
 		};
 		430C4AF61661F07C0079C9FC /* Make ID Template */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2093,7 +2085,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/Make-ID-Template.sh";
+			shellScript = ". Scripts/Make-ID-Template.sh";
 		};
 		52BA63FB0DE9E2E10008B3E1 /* Build Notes */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2108,7 +2100,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = ". ./configs/scripts/Changes-and-Notes.sh";
+			shellScript = ". ./Scripts/Changes-and-Notes.sh";
 		};
 		748E656D897F801A815D8AFA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2216,7 +2208,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = ". configs/scripts/Release-for-upload.sh";
+			shellScript = ". Scripts/Release-for-upload.sh";
 		};
 		F63B7D041F1BA154002F71BF /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2245,7 +2237,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/bin/ruby \"$PROJECT_DIR/configs/scripts/update_localizations.rb\"";
+			shellScript = "/usr/bin/ruby \"$PROJECT_DIR/Scripts/update_localizations.rb\"";
 		};
 		F6B123401E474EC500973699 /* Index Help Book */ = {
 			isa = PBXShellScriptBuildPhase;
