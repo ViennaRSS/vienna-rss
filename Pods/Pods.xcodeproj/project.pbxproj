@@ -1076,60 +1076,6 @@
 			};
 			name = Development;
 		};
-		40FE172F6C4AB63C1F2A240D1741F648 /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_STATIC_ANALYZER=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
-				STRIP_INSTALLED_PRODUCT = NO;
-			};
-			name = StaticAnalyzer;
-		};
 		41725CC8872EF563E2FD592C3165E646 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A7E43BD3790C901EB922D2168E0209DF /* FMDB.xcconfig */;
@@ -1273,27 +1219,6 @@
 			};
 			name = Debug;
 		};
-		981F431FBF6EE423699577D544065E03 /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6B6B30799D8BC0EB3249837620CC6501 /* ASIHTTPRequest.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "Target Support Files/ASIHTTPRequest/ASIHTTPRequest-prefix.pch";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = macosx;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-			};
-			name = StaticAnalyzer;
-		};
 		9DA6A24EE17B5169AF85913B07C08EE9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6B6B30799D8BC0EB3249837620CC6501 /* ASIHTTPRequest.xcconfig */;
@@ -1334,27 +1259,6 @@
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
-		};
-		B92D11673FBF1A636D2DB49E988B8578 /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A7E43BD3790C901EB922D2168E0209DF /* FMDB.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "Target Support Files/FMDB/FMDB-prefix.pch";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = macosx;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-			};
-			name = StaticAnalyzer;
 		};
 		BB1617892501D769BC4AB77686ECF7FF /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1492,27 +1396,7 @@
 			};
 			name = Deployment;
 		};
-		CC8E35EF034E794B2343615CDFB868D2 /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F1ED24FE5A75C8F4314CED5CB56D38A6 /* Pods-Vienna Tests.staticanalyzer.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = StaticAnalyzer;
-		};
-		E234DDD39938141B167E6651FE96BB03 /* StaticAnalyzer */ = {
+		E8E977C3F87540E47701A02155847D46 /* Development */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B5982287D53CC7EE840D1D1068182D6D /* Pods-Vienna.staticanalyzer.xcconfig */;
 			buildSettings = {
@@ -1572,27 +1456,6 @@
 				SKIP_INSTALL = YES;
 			};
 			name = Deployment;
-		};
-		F427767DDC3D8C3D8ED6287114436C91 /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 11ED2608EDA2DE8A523BF17FBAC91E25 /* MASPreferences.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "Target Support Files/MASPreferences/MASPreferences-prefix.pch";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = macosx;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-			};
-			name = StaticAnalyzer;
 		};
 		FC02EFD93E1F4AA4AC667927B4B5A83F /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1659,7 +1522,6 @@
 				BB5E3F106D55B7A6CFC1D436AA95F3F9 /* Deployment */,
 				1456A97EB61CC55C34FF28A13C780135 /* Development */,
 				FC02EFD93E1F4AA4AC667927B4B5A83F /* Release */,
-				40FE172F6C4AB63C1F2A240D1741F648 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1671,7 +1533,6 @@
 				41725CC8872EF563E2FD592C3165E646 /* Deployment */,
 				077DD3804E27ADF91FE65DD1850743FB /* Development */,
 				BB1617892501D769BC4AB77686ECF7FF /* Release */,
-				B92D11673FBF1A636D2DB49E988B8578 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1695,7 +1556,6 @@
 				330DBA90FE6CE676533ABED03A8774BB /* Deployment */,
 				162D9F5FF3910028BD5CA0D455253268 /* Development */,
 				1AEFA07613327BF83AE42DF138550495 /* Release */,
-				F427767DDC3D8C3D8ED6287114436C91 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1707,7 +1567,17 @@
 				F00400261029A02A72D31BB4013CE17C /* Deployment */,
 				3E6281A915A3E59799E4BDDF09599DB9 /* Development */,
 				A2B7DC0596DF43B2AECB12831396C8F5 /* Release */,
-				E234DDD39938141B167E6651FE96BB03 /* StaticAnalyzer */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DDE329B7EC284C76A7603D66D943A540 /* Build configuration list for PBXNativeTarget "Pods-Vienna Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4580144DB550F26A36015AD4CA1AACF5 /* Debug */,
+				BE7BDFC0AABE51097D66652926A90ACA /* Deployment */,
+				1933F542034317D6CA85A0BF8A8FCA1E /* Development */,
+				61B625F397893FFF631E2D5AD1F3C62A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1719,7 +1589,6 @@
 				CA82D9155FE84461BEE9B1AEECF8AB97 /* Deployment */,
 				40F88598F198162854F87AD3F8384BC7 /* Development */,
 				9151476C163BE9CFE404B5B3C31CD758 /* Release */,
-				981F431FBF6EE423699577D544065E03 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
