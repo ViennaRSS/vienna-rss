@@ -18,7 +18,7 @@ if [ ! -d "${OBJROOT}" ]; then
 fi
 
 
-if ! ./3rdparty/autorevision/autorevision -o "${cacheOutput}" -t sh; then
+if ! ./External/autorevision/autorevision -o "${cacheOutput}" -t sh; then
 	exit ${?}
 fi
 
@@ -47,7 +47,7 @@ fi
 # Output for src/autorevision.h.
 # This header is good for including in code, however it will not have
 # the right VCS_NUM set.
-./3rdparty/autorevision/autorevision -f -o "${cacheOutput}" -t h > "${intermediateHeaderOutput}"
+./External/autorevision/autorevision -f -o "${cacheOutput}" -t h > "${intermediateHeaderOutput}"
 if [ ! -f "${finalHeaderOutput}" ] || ! cmp -s "${intermediateHeaderOutput}" "${finalHeaderOutput}"; then
 	cp -a "${intermediateHeaderOutput}" "${finalHeaderOutput}"
 fi
@@ -55,6 +55,6 @@ fi
 # Output for info.plist prepossessing.
 # This is not suitable for including in code, only for info.plist
 # processing.
-./3rdparty/autorevision/autorevision -f -o "${tempCacheOutput}" -t xcode > "${xcodeHeaderOutput}"
+./External/autorevision/autorevision -f -o "${tempCacheOutput}" -t xcode > "${xcodeHeaderOutput}"
 
 exit ${?}

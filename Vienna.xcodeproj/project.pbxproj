@@ -385,7 +385,7 @@
 		03F33D951DF2A2F900B04FAF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Vienna/Images.xcassets; sourceTree = "<group>"; };
 		1CF081CD87E34BA6E9700986 /* Pods-Vienna.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna.development.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna/Pods-Vienna.development.xcconfig"; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = main.m; path = src/main.m; sourceTree = SOURCE_ROOT; };
-		2FAA363F2072F50B00169C8A /* MMTabBarView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MMTabBarView.framework; path = 3rdparty/MMTabBarView.framework; sourceTree = "<group>"; };
+		2FAA363F2072F50B00169C8A /* MMTabBarView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MMTabBarView.framework; path = External/MMTabBarView.framework; sourceTree = "<group>"; };
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ClickableProgressIndicator.h; path = src/ClickableProgressIndicator.h; sourceTree = SOURCE_ROOT; };
 		34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ClickableProgressIndicator.m; path = src/ClickableProgressIndicator.m; sourceTree = SOURCE_ROOT; };
 		37C652B4C918F312BA9F1AB1 /* NSURL+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSURL+Utils.h"; path = "src/NSURL+Utils.h"; sourceTree = "<group>"; };
@@ -396,8 +396,8 @@
 		3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Sparkle-setup.sh"; path = "configs/scripts/Sparkle-setup.sh"; sourceTree = "<group>"; };
 		3A67600F1E65FA3F0078CB14 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = Resources/da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A6760101E65FA4F0078CB14 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = Resources/cs.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3A7BD0DB1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BJRVerticallyCenteredTextFieldCell.h; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
-		3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BJRVerticallyCenteredTextFieldCell.m; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
+		3A7BD0DB1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJRVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
+		3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJRVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
 		3AEE7DE81695FC570018A17D /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = vienna_public_key.pem; path = signing/vienna_public_key.pem; sourceTree = "<group>"; };
 		3AF896C51CD8FDB800A9FA22 /* AppController+Sparkle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AppController+Sparkle.h"; path = "src/AppController+Sparkle.h"; sourceTree = "<group>"; };
 		3AF896C61CD8FDB800A9FA22 /* AppController+Sparkle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AppController+Sparkle.m"; path = "src/AppController+Sparkle.m"; sourceTree = "<group>"; };
@@ -574,13 +574,13 @@
 		B2B37ACD110A65DA0070EDA6 /* filter-icon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "filter-icon.tiff"; path = "Resources/filter-icon.tiff"; sourceTree = SOURCE_ROOT; };
 		B2BECB1514CEF22B00706F8F /* SSTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = SSTextField.h; path = src/SSTextField.h; sourceTree = SOURCE_ROOT; };
 		B2BECB1614CEF22B00706F8F /* SSTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SSTextField.m; path = src/SSTextField.m; sourceTree = SOURCE_ROOT; };
-		B2E09F2B111192B7003B530A /* DSClickableURLTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSClickableURLTextField.h; path = 3rdparty/DSClickableURLTextField/DSClickableURLTextField.h; sourceTree = SOURCE_ROOT; };
-		B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSClickableURLTextField.m; path = 3rdparty/DSClickableURLTextField/DSClickableURLTextField.m; sourceTree = SOURCE_ROOT; };
+		B2E09F2B111192B7003B530A /* DSClickableURLTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSClickableURLTextField.h; sourceTree = "<group>"; };
+		B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSClickableURLTextField.m; sourceTree = "<group>"; };
 		BA0CEAD1B45DBBF666A25250 /* libPods-Vienna Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vienna Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD11EE0EE1E72989D4E43515 /* Pods-Vienna Tests.deployment.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna Tests.deployment.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna Tests/Pods-Vienna Tests.deployment.xcconfig"; sourceTree = "<group>"; };
 		EA1A761F148FA32B004A6B8F /* googleFeed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = googleFeed.tiff; path = Resources/googleFeed.tiff; sourceTree = SOURCE_ROOT; };
-		EA43C70714A370DB00F2D843 /* VTPG_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VTPG_Common.h; path = 3rdparty/VTPG/VTPG_Common.h; sourceTree = SOURCE_ROOT; };
-		EA43C70814A370DB00F2D843 /* VTPG_Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VTPG_Common.m; path = 3rdparty/VTPG/VTPG_Common.m; sourceTree = SOURCE_ROOT; };
+		EA43C70714A370DB00F2D843 /* VTPG_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPG_Common.h; sourceTree = "<group>"; };
+		EA43C70814A370DB00F2D843 /* VTPG_Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTPG_Common.m; sourceTree = "<group>"; };
 		EA6D3E5914D8048C004DCB80 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Debug.h; path = src/Debug.h; sourceTree = SOURCE_ROOT; };
 		F1ECA9ED54D2517E7BEDCBB7 /* Pods-Vienna Tests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna Tests.development.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna Tests/Pods-Vienna Tests.development.xcconfig"; sourceTree = "<group>"; };
 		F60642751F1A314700A12272 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = Interfaces/cs.lproj/MainWindowController.strings; sourceTree = "<group>"; };
@@ -1211,14 +1211,13 @@
 			isa = PBXGroup;
 			children = (
 				439824161666B1ED00FFE219 /* Documentation */,
-				432E5191165D655C00A8640E /* Configs */,
 				AAA568BB09EE773200C87343 /* Vienna */,
-				2A37F4B8FDCFA73011CA2CEA /* Resources */,
-				43501F8D165DB9DD0018EDB7 /* Third Party */,
-				946A341AA82976C365B67A76 /* Pods */,
-				7F60B6D7AEFB47009A82F8BA /* Frameworks */,
 				F6A7DDCB1E470E980017BE5E /* Vienna Help */,
 				035B703619E0E4AE00197334 /* Vienna Tests */,
+				F63B7D701F1CD001002F71BF /* External */,
+				7F60B6D7AEFB47009A82F8BA /* Frameworks */,
+				432E5191165D655C00A8640E /* Configs */,
+				946A341AA82976C365B67A76 /* Pods */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
 			);
 			name = Vienna;
@@ -1251,23 +1250,13 @@
 			name = Configs;
 			sourceTree = SOURCE_ROOT;
 		};
-		43501F8D165DB9DD0018EDB7 /* Third Party */ = {
-			isa = PBXGroup;
-			children = (
-				F6D008A11EF979F9008F2D3B /* BJRVerticallyCenteredTextFieldCell */,
-				EA43C70614A370CB00F2D843 /* DebugHelper */,
-				43501F8E165DBCCB0018EDB7 /* DSClickableURLTextField */,
-			);
-			name = "Third Party";
-			sourceTree = SOURCE_ROOT;
-		};
 		43501F8E165DBCCB0018EDB7 /* DSClickableURLTextField */ = {
 			isa = PBXGroup;
 			children = (
 				B2E09F2B111192B7003B530A /* DSClickableURLTextField.h */,
 				B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */,
 			);
-			name = DSClickableURLTextField;
+			path = DSClickableURLTextField;
 			sourceTree = "<group>";
 		};
 		439824161666B1ED00FFE219 /* Documentation */ = {
@@ -1503,20 +1492,8 @@
 		AAA568BB09EE773200C87343 /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
-				F62EC6B81EF933CB005EE8E5 /* Application */,
-				F62EC6B91EF934D9005EE8E5 /* Main window */,
-				AA3113EC09020E1B00E80DF1 /* Preferences window */,
-				F6F44F0B1EF9280400E6F1B4 /* Info panel */,
-				F6CE47101E7E3D520045EAD7 /* Activity panel */,
-				F6D0089E1EF968E8008F2D3B /* Download window */,
-				F6F44F101EF92DC600E6F1B4 /* Alerts */,
-				660AA30914072BFD0082CCF0 /* Fetching */,
-				AAA5687609EE72BE00C87343 /* Parsing */,
-				AA8C76C006420CA800649BA2 /* Database */,
-				0322802E1A33BCC1007DE933 /* Models */,
-				F6F44F0D1EF92B0D00E6F1B4 /* Plug-ins */,
-				AAC5063D082A7AE00089FF70 /* Shared */,
-				AAC5063C082A7A530089FF70 /* Other */,
+				F63B7D671F1CCAB2002F71BF /* Sources */,
+				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 			);
 			name = Vienna;
 			sourceTree = SOURCE_ROOT;
@@ -1539,6 +1516,7 @@
 				4350285E165DE9DF0018EDB7 /* Constants.m */,
 				F64C2CCA1E83825D00ED4E04 /* DateFormatterExtension.h */,
 				F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */,
+				EA6D3E5914D8048C004DCB80 /* Debug.h */,
 				F6164C571E32A6660086261C /* DisclosureView.h */,
 				F6164C581E32A6660086261C /* DisclosureView.m */,
 				F63B71741ED252DD00CF9F32 /* GradientView.swift */,
@@ -1578,9 +1556,9 @@
 			children = (
 				EA43C70714A370DB00F2D843 /* VTPG_Common.h */,
 				EA43C70814A370DB00F2D843 /* VTPG_Common.m */,
-				EA6D3E5914D8048C004DCB80 /* Debug.h */,
 			);
 			name = DebugHelper;
+			path = VTPG;
 			sourceTree = "<group>";
 		};
 		F62EC6B81EF933CB005EE8E5 /* Application */ = {
@@ -1628,6 +1606,37 @@
 				4350288C165DE9DF0018EDB7 /* TreeNode.m */,
 			);
 			name = "Folder list";
+			sourceTree = "<group>";
+		};
+		F63B7D671F1CCAB2002F71BF /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				F62EC6B81EF933CB005EE8E5 /* Application */,
+				F62EC6B91EF934D9005EE8E5 /* Main window */,
+				AA3113EC09020E1B00E80DF1 /* Preferences window */,
+				F6F44F0B1EF9280400E6F1B4 /* Info panel */,
+				F6CE47101E7E3D520045EAD7 /* Activity panel */,
+				F6D0089E1EF968E8008F2D3B /* Download window */,
+				F6F44F101EF92DC600E6F1B4 /* Alerts */,
+				660AA30914072BFD0082CCF0 /* Fetching */,
+				AAA5687609EE72BE00C87343 /* Parsing */,
+				AA8C76C006420CA800649BA2 /* Database */,
+				0322802E1A33BCC1007DE933 /* Models */,
+				F6F44F0D1EF92B0D00E6F1B4 /* Plug-ins */,
+				AAC5063D082A7AE00089FF70 /* Shared */,
+				AAC5063C082A7A530089FF70 /* Other */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		F63B7D701F1CD001002F71BF /* External */ = {
+			isa = PBXGroup;
+			children = (
+				F6D008A11EF979F9008F2D3B /* BJRVerticallyCenteredTextFieldCell */,
+				EA43C70614A370CB00F2D843 /* DebugHelper */,
+				43501F8E165DBCCB0018EDB7 /* DSClickableURLTextField */,
+			);
+			path = External;
 			sourceTree = "<group>";
 		};
 		F6A7DDCB1E470E980017BE5E /* Vienna Help */ = {
@@ -1704,7 +1713,7 @@
 				3A7BD0DB1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.h */,
 				3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */,
 			);
-			name = BJRVerticallyCenteredTextFieldCell;
+			path = BJRVerticallyCenteredTextFieldCell;
 			sourceTree = "<group>";
 		};
 		F6F44F0B1EF9280400E6F1B4 /* Info panel */ = {
@@ -3153,8 +3162,8 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(PROJECT_DIR)/3rdparty\"",
-					"\"$(SRCROOT)/3rdparty\"",
+					"\"$(PROJECT_DIR)/External\"",
+					"\"$(SRCROOT)/External\"",
 					"\"$(BUILT_PRODUCTS_DIR)\"",
 					"\"${PODS_ROOT}/Sparkle\"",
 				);
@@ -3228,8 +3237,8 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(PROJECT_DIR)/3rdparty\"",
-					"\"$(SRCROOT)/3rdparty\"",
+					"\"$(PROJECT_DIR)/External\"",
+					"\"$(SRCROOT)/External\"",
 					"\"$(BUILT_PRODUCTS_DIR)\"",
 					"\"${PODS_ROOT}/Sparkle\"",
 				);
@@ -3317,10 +3326,9 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(PROJECT_DIR)/3rdparty\"",
-					"\"$(SRCROOT)/3rdparty\"",
-					"\"$(BUILT_PRODUCTS_DIR)\"",
-					"\"${PODS_ROOT}/Sparkle\"",
+					"$(PROJECT_DIR)/External",
+					"$(BUILT_PRODUCTS_DIR)",
+					"${PODS_ROOT}/Sparkle",
 				);
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3365,10 +3373,9 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(PROJECT_DIR)/3rdparty\"",
-					"\"$(SRCROOT)/3rdparty\"",
-					"\"$(BUILT_PRODUCTS_DIR)\"",
-					"\"${PODS_ROOT}/Sparkle\"",
+					"$(PROJECT_DIR)/External",
+					"$(BUILT_PRODUCTS_DIR)",
+					"${PODS_ROOT}/Sparkle",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
