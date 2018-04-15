@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NSViewController">
+            <connections>
+                <outlet property="view" destination="jam-Zg-hIA" id="Thm-ct-NGh"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="jam-Zg-hIA">
+            <rect key="frame" x="0.0" y="0.0" width="69" height="42"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tBx-8P-MUa">
+                    <rect key="frame" x="46" y="0.0" width="23" height="23"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="tBx-8P-MUa" secondAttribute="height" multiplier="1:1" id="nom-vN-yGU"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ay3-5O-pKs">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="tBx-8P-MUa" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jam-Zg-hIA" secondAttribute="top" id="EBs-Ps-ctb"/>
+                <constraint firstAttribute="bottom" secondItem="tBx-8P-MUa" secondAttribute="bottom" id="ic2-Ah-NMs"/>
+                <constraint firstAttribute="trailing" secondItem="tBx-8P-MUa" secondAttribute="trailing" id="maj-9K-Gab"/>
+                <constraint firstItem="tBx-8P-MUa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jam-Zg-hIA" secondAttribute="leading" id="yAO-lK-mft"/>
+            </constraints>
+            <point key="canvasLocation" x="1144.5" y="-1026"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="NSAddTemplate" width="11" height="11"/>
+    </resources>
+</document>

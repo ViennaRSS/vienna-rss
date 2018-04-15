@@ -403,13 +403,13 @@
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidHide:(MMTabBarView *)tabBarView
 {
 	[self.tabBarHeightConstraint setConstant:0];
-	[APPCONTROLLER.mainWindowController showAddTabButtonInToolbar];
+	[self showAddTabButtonInToolbar];
 }
 
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidUnhide:(MMTabBarView *)tabBarView
 {
 	[self.tabBarHeightConstraint setConstant:23];
-	[APPCONTROLLER.mainWindowController removeAddTabButtonFromToolbar];
+	[self removeAddTabButtonFromToolbar];
 }
 
 // Animation companion
@@ -417,14 +417,14 @@
 - (void (^)(void))animateAlongsideTabBarShow {
 	return ^{
 		[self.tabBarHeightConstraint.animator setConstant:23];
-		[APPCONTROLLER.mainWindowController removeAddTabButtonFromToolbar];
+		[self removeAddTabButtonFromToolbar];
 	};
 }
 
 - (void (^)(void))animateAlongsideTabBarHide {
 	return ^{
 		[self.tabBarHeightConstraint.animator setConstant:0];
-		[APPCONTROLLER.mainWindowController showAddTabButtonInToolbar];
+		[self showAddTabButtonInToolbar];
 	};
 }
 

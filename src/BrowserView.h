@@ -35,6 +35,8 @@
 @property (assign) IBOutlet MMTabBarView *tabBarControl;
 
 // Accessors
+@property (nonatomic) NSViewController *addTabToolbarButton;
+
 - (IBAction)newTab:(id)sender;
 -(void)newTab;
 -(void)createAndLoadNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;

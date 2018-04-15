@@ -30,7 +30,8 @@ final class MainWindowController: NSWindowController {
     @IBOutlet var filterDisclosureView: DisclosureView?
     @IBOutlet var filterSearchField: NSSearchField?
     @IBOutlet var toolbarSearchField: NSSearchField?
-	@IBOutlet weak var addTabToolbarButton: NSTitlebarAccessoryViewController!
+
+    var addTabToolbarButton: NSObject?
 
 	// MARK: Initialization
 
@@ -45,8 +46,6 @@ final class MainWindowController: NSWindowController {
         if let menuTitle = filterMenu?.item(withTag: filterMode)?.title {
             filterLabel.stringValue = menuTitle
         }
-
-		addTabToolbarButton.layoutAttribute = .right
     }
 
     // MARK: Status bar
@@ -99,27 +98,6 @@ final class MainWindowController: NSWindowController {
     @IBAction func toggleStatusBar(_ sender: AnyObject) {
         statusBarState(disclosed: !statusBar.isDisclosed)
     }
-
-	@objc func showAddTabButtonInToolbar() {
-		guard let window = window, let toolbar = window.toolbar
-			else {return}
-		if !window.titlebarAccessoryViewControllers.contains(addTabToolbarButton) {
-			window.addTitlebarAccessoryViewController(addTabToolbarButton)
-			let behindLastIndex = toolbar.items.count
-			window.toolbar?.insertItem(withItemIdentifier: NSToolbarItem.Identifier.space, at:behindLastIndex)
-		}
-	}
-
-	@objc func removeAddTabButtonFromToolbar() {
-		guard let window = window,
-			let toolbar = window.toolbar,
-			let buttonIndex = window.titlebarAccessoryViewControllers.index(of: addTabToolbarButton)
-			else {return}
-		window.removeTitlebarAccessoryViewController(at: buttonIndex)
-		if let lastIdentifier = toolbar.items.last?.itemIdentifier, lastIdentifier == NSToolbarItem.Identifier.space {
-			toolbar.removeItem(at: toolbar.items.count - 1)
-		}
-	}
 
     // MARK: Validation
 
@@ -262,5 +240,4 @@ extension MainWindowController: NSMenuDelegate {
             }
         }
     }
-
 }
