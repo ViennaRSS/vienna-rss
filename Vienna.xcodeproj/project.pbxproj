@@ -56,17 +56,6 @@
 			name = "Archive and Prep for Upload";
 			productName = Release;
 		};
-		F63B7CFF1F1BA146002F71BF /* SwiftLint */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = F63B7D031F1BA147002F71BF /* Build configuration list for PBXAggregateTarget "SwiftLint" */;
-			buildPhases = (
-				F63B7D041F1BA154002F71BF /* SwiftLint */,
-			);
-			dependencies = (
-			);
-			name = SwiftLint;
-			productName = Linting;
-		};
 		F64D8AC01F22BAAF0077D27C /* Localizations */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = F64D8AC41F22BAB00077D27C /* Build configuration list for PBXAggregateTarget "Localizations" */;
@@ -1811,6 +1800,7 @@
 				AA65D27F083CF46F00BC387C /* Copy Frameworks */,
 				BCC8E16C7A087E24AFE60B16 /* [CP] Embed Pods Frameworks */,
 				8966991ADA99E8C138F79C0D /* [CP] Copy Pods Resources */,
+				F68CBDA020323974003A6A9E /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -1859,9 +1849,6 @@
 					};
 					8D15AC270486D014006FF6A4 = {
 						LastSwiftMigration = 0900;
-					};
-					F63B7CFF1F1BA146002F71BF = {
-						CreatedOnToolsVersion = 9.0;
 					};
 					F64D8AC01F22BAAF0077D27C = {
 						CreatedOnToolsVersion = 9.0;
@@ -1912,7 +1899,6 @@
 				52BA63FC0DE9E2E10008B3E1 /* Version Notes */,
 				430C4AF71661F07C0079C9FC /* Code Sign ID */,
 				EAAF335414BDE402002A8837 /* Archive and Prep for Upload */,
-				F63B7CFF1F1BA146002F71BF /* SwiftLint */,
 				F64D8AC01F22BAAF0077D27C /* Localizations */,
 			);
 		};
@@ -2186,21 +2172,6 @@
 			shellPath = /bin/bash;
 			shellScript = ". Scripts/Release-for-upload.sh";
 		};
-		F63B7D041F1BA154002F71BF /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --quiet\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
-			showEnvVarsInLog = 0;
-		};
 		F64D8AC51F22BAB60077D27C /* Update localizations */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2214,6 +2185,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/bin/ruby \"$PROJECT_DIR/Scripts/update_localizations.rb\"";
+		};
+		F68CBDA020323974003A6A9E /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			showEnvVarsInLog = 0;
 		};
 		F6B123401E474EC500973699 /* Index Help Book */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3452,27 +3438,6 @@
 			};
 			name = Deployment;
 		};
-		F63B7D001F1BA147002F71BF /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Development;
-		};
-		F63B7D011F1BA147002F71BF /* Deployment */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Deployment;
-		};
-		F63B7D021F1BA147002F71BF /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = StaticAnalyzer;
-		};
 		F64D8AC11F22BAAF0077D27C /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3486,13 +3451,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Deployment;
-		};
-		F64D8AC31F22BAAF0077D27C /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = StaticAnalyzer;
 		};
 		F6A7DDCD1E470E980017BE5E /* Development */ = {
 			isa = XCBuildConfiguration;
@@ -3661,22 +3619,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
 		};
-		F63B7D031F1BA147002F71BF /* Build configuration list for PBXAggregateTarget "SwiftLint" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F63B7D001F1BA147002F71BF /* Development */,
-				F63B7D011F1BA147002F71BF /* Deployment */,
-				F63B7D021F1BA147002F71BF /* StaticAnalyzer */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
-		};
 		F64D8AC41F22BAB00077D27C /* Build configuration list for PBXAggregateTarget "Localizations" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F64D8AC11F22BAAF0077D27C /* Development */,
 				F64D8AC21F22BAAF0077D27C /* Deployment */,
-				F64D8AC31F22BAAF0077D27C /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
