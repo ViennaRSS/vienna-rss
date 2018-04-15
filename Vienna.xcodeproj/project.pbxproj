@@ -383,6 +383,7 @@
 		03B752411B74814B00FD3FDB /* RichXMLParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichXMLParserTests.m; sourceTree = "<group>"; };
 		03EFD56F1B720AB0007EF284 /* ExportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportTests.m; sourceTree = "<group>"; };
 		03F33D951DF2A2F900B04FAF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Vienna/Images.xcassets; sourceTree = "<group>"; };
+		1CF081CD87E34BA6E9700986 /* Pods-Vienna.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna.development.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna/Pods-Vienna.development.xcconfig"; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = main.m; path = src/main.m; sourceTree = SOURCE_ROOT; };
 		2FAA363F2072F50B00169C8A /* MMTabBarView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MMTabBarView.framework; path = 3rdparty/MMTabBarView.framework; sourceTree = "<group>"; };
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ClickableProgressIndicator.h; path = src/ClickableProgressIndicator.h; sourceTree = SOURCE_ROOT; };
@@ -402,11 +403,6 @@
 		3AF896C61CD8FDB800A9FA22 /* AppController+Sparkle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AppController+Sparkle.m"; path = "src/AppController+Sparkle.m"; sourceTree = "<group>"; };
 		430C4ADB1661753F0079C9FC /* autorevision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = autorevision.h; path = src/autorevision.h; sourceTree = SOURCE_ROOT; };
 		430C4AE0166175C20079C9FC /* Vienna-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Vienna-Info.plist"; path = "Resources/Vienna-Info.plist"; sourceTree = SOURCE_ROOT; };
-		430C4B001661F3270079C9FC /* CS-ID.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "CS-ID.xcconfig"; path = "configs/CS-ID.xcconfig"; sourceTree = SOURCE_ROOT; };
-		432E5192165D65AF00A8640E /* Project-All.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Project-All.xcconfig"; path = "configs/Project-All.xcconfig"; sourceTree = SOURCE_ROOT; };
-		43501CF9165D73C70018EDB7 /* Vienna-All.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-All.xcconfig"; path = "configs/Vienna-All.xcconfig"; sourceTree = SOURCE_ROOT; };
-		43501CFA165D73C70018EDB7 /* Vienna-Dep.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-Dep.xcconfig"; path = "configs/Vienna-Dep.xcconfig"; sourceTree = SOURCE_ROOT; };
-		43501CFB165D73C70018EDB7 /* Vienna-Dev.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-Dev.xcconfig"; path = "configs/Vienna-Dev.xcconfig"; sourceTree = SOURCE_ROOT; };
 		435026E5165DD8BE0018EDB7 /* ArticleRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ArticleRef.m; path = src/ArticleRef.m; sourceTree = SOURCE_ROOT; };
 		4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSNotificationAdditions.m; path = src/NSNotificationAdditions.m; sourceTree = SOURCE_ROOT; };
 		43502848165DE9DF0018EDB7 /* ActivityLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityLog.m; path = src/ActivityLog.m; sourceTree = SOURCE_ROOT; };
@@ -487,10 +483,6 @@
 		439824221666B3DB00FFE219 /* notes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = notes.html; sourceTree = SOURCE_ROOT; };
 		439824231666B3DB00FFE219 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		439824241666B3DB00FFE219 /* Release Instructions.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Release Instructions.md"; sourceTree = SOURCE_ROOT; };
-		43BA9790166449E000B95F35 /* Base-Framework.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Base-Framework.xcconfig"; path = "configs/Base-Framework.xcconfig"; sourceTree = SOURCE_ROOT; };
-		43BA9791166449E000B95F35 /* General-Dep.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "General-Dep.xcconfig"; path = "configs/General-Dep.xcconfig"; sourceTree = SOURCE_ROOT; };
-		43BA9792166449E000B95F35 /* General-Dev.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "General-Dev.xcconfig"; path = "configs/General-Dev.xcconfig"; sourceTree = SOURCE_ROOT; };
-		43D4D6F9166FE0DB00BA9675 /* Vienna-StaticAnalyzer.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-StaticAnalyzer.xcconfig"; path = "configs/Vienna-StaticAnalyzer.xcconfig"; sourceTree = "<group>"; };
 		4D36B44A1D37F91E009736C1 /* ArticleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleTests.m; sourceTree = "<group>"; };
 		4D36B44E1D38007D009736C1 /* NSURL+URIEquivalence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+URIEquivalence.h"; sourceTree = "<group>"; };
 		4D36B44F1D38007D009736C1 /* NSURL+URIEquivalence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+URIEquivalence.m"; sourceTree = "<group>"; };
@@ -503,10 +495,10 @@
 		57F7E2EF16F534FE00D4702E /* vienna3plugin.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = vienna3plugin.icns; path = Resources/vienna3plugin.icns; sourceTree = "<group>"; };
 		57F7E2F016F534FE00D4702E /* vienna3style.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = vienna3style.icns; path = Resources/vienna3style.icns; sourceTree = "<group>"; };
 		61A2CB600A8AC68C006348E8 /* revised.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = revised.tiff; path = Resources/revised.tiff; sourceTree = SOURCE_ROOT; };
-		63DEA27414A309B4CA351B20 /* Pods-Vienna.staticanalyzer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna.staticanalyzer.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna/Pods-Vienna.staticanalyzer.xcconfig"; sourceTree = "<group>"; };
 		6624683A13C5F81F00C85417 /* sync.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sync.tiff; path = Resources/sync.tiff; sourceTree = SOURCE_ROOT; };
 		664F87C513C62DFE00E266DE /* OpenReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenReader.h; path = src/OpenReader.h; sourceTree = SOURCE_ROOT; };
 		664F87C613C62DFE00E266DE /* OpenReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenReader.m; path = src/OpenReader.m; sourceTree = SOURCE_ROOT; };
+		6900D92276B0FA4BE9B1873E /* Pods-Vienna.deployment.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna.deployment.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna/Pods-Vienna.deployment.xcconfig"; sourceTree = "<group>"; };
 		793C95311C42A0DD00984D4E /* FoldersFilterable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FoldersFilterable.h; path = src/FoldersFilterable.h; sourceTree = "<group>"; };
 		793C95321C42A0DD00984D4E /* FoldersFilterable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FoldersFilterable.m; path = src/FoldersFilterable.m; sourceTree = "<group>"; };
 		7A3781B9326123EE56347D35 /* libPods-Vienna.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vienna.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -590,7 +582,6 @@
 		EA43C70714A370DB00F2D843 /* VTPG_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VTPG_Common.h; path = 3rdparty/VTPG/VTPG_Common.h; sourceTree = SOURCE_ROOT; };
 		EA43C70814A370DB00F2D843 /* VTPG_Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VTPG_Common.m; path = 3rdparty/VTPG/VTPG_Common.m; sourceTree = SOURCE_ROOT; };
 		EA6D3E5914D8048C004DCB80 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Debug.h; path = src/Debug.h; sourceTree = SOURCE_ROOT; };
-		ED69423919E1DC034EA80E25 /* Pods-Vienna Tests.staticanalyzer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna Tests.staticanalyzer.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna Tests/Pods-Vienna Tests.staticanalyzer.xcconfig"; sourceTree = "<group>"; };
 		F1ECA9ED54D2517E7BEDCBB7 /* Pods-Vienna Tests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna Tests.development.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna Tests/Pods-Vienna Tests.development.xcconfig"; sourceTree = "<group>"; };
 		F60642751F1A314700A12272 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = Interfaces/cs.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 		F60642761F1A314900A12272 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = Interfaces/da.lproj/MainWindowController.strings; sourceTree = "<group>"; };
@@ -1255,16 +1246,7 @@
 		432E5191165D655C00A8640E /* Configs */ = {
 			isa = PBXGroup;
 			children = (
-				43BA9790166449E000B95F35 /* Base-Framework.xcconfig */,
-				430C4B001661F3270079C9FC /* CS-ID.xcconfig */,
-				43BA9791166449E000B95F35 /* General-Dep.xcconfig */,
-				43BA9792166449E000B95F35 /* General-Dev.xcconfig */,
-				432E5192165D65AF00A8640E /* Project-All.xcconfig */,
 				439824171666B31700FFE219 /* Scripts */,
-				43501CF9165D73C70018EDB7 /* Vienna-All.xcconfig */,
-				43501CFA165D73C70018EDB7 /* Vienna-Dep.xcconfig */,
-				43501CFB165D73C70018EDB7 /* Vienna-Dev.xcconfig */,
-				43D4D6F9166FE0DB00BA9675 /* Vienna-StaticAnalyzer.xcconfig */,
 			);
 			name = Configs;
 			sourceTree = SOURCE_ROOT;
@@ -1443,10 +1425,10 @@
 		946A341AA82976C365B67A76 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				1CF081CD87E34BA6E9700986 /* Pods-Vienna.development.xcconfig */,
+				6900D92276B0FA4BE9B1873E /* Pods-Vienna.deployment.xcconfig */,
 				F1ECA9ED54D2517E7BEDCBB7 /* Pods-Vienna Tests.development.xcconfig */,
 				CD11EE0EE1E72989D4E43515 /* Pods-Vienna Tests.deployment.xcconfig */,
-				ED69423919E1DC034EA80E25 /* Pods-Vienna Tests.staticanalyzer.xcconfig */,
-				63DEA27414A309B4CA351B20 /* Pods-Vienna.staticanalyzer.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1836,7 +1818,6 @@
 				035B703219E0E4AE00197334 /* Frameworks */,
 				035B703319E0E4AE00197334 /* Resources */,
 				97341DB250FCDFB53A128410 /* [CP] Embed Pods Frameworks */,
-				B7FBAD3941ADA59D55606EC0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1899,7 +1880,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = uk.co.opencommunity;
 				TargetAttributes = {
 					035B703419E0E4AE00197334 = {
@@ -2201,21 +2182,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vienna Tests/Pods-Vienna Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B7FBAD3941ADA59D55606EC0 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vienna Tests/Pods-Vienna Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BCC8E16C7A087E24AFE60B16 /* [CP] Embed Pods Frameworks */ = {
@@ -3298,69 +3264,6 @@
 			};
 			name = Deployment;
 		};
-		035B703F19E0E4AE00197334 /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = ED69423919E1DC034EA80E25 /* Pods-Vienna Tests.staticanalyzer.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_ROOT}/Sparkle\"",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"\"$(SDKROOT)/usr/include/libxml2\"",
-					"$(inherited)",
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/ASIHTTPRequest\"",
-					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
-					"\"${PODS_ROOT}/Headers/Public/MASPreferences\"",
-					"\"${PODS_ROOT}/Headers/Public/Sparkle\"",
-				);
-				INFOPLIST_FILE = "Vienna Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.opencommunity.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "Vienna Tests/Vienna Tests-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vienna.app/Contents/MacOS/Vienna";
-			};
-			name = StaticAnalyzer;
-		};
 		430C4AD0166172BE0079C9FC /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3389,72 +3292,6 @@
 			};
 			name = Deployment;
 		};
-		43D4D6EC166FE08C00BA9675 /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 432E5192165D65AF00A8640E /* Project-All.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				SWIFT_VERSION = 4.0;
-				VALID_ARCHS = x86_64;
-			};
-			name = StaticAnalyzer;
-		};
-		43D4D6ED166FE08C00BA9675 /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 63DEA27414A309B4CA351B20 /* Pods-Vienna.staticanalyzer.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/3rdparty",
-				);
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				SWIFT_OBJC_BRIDGING_HEADER = "src/Vienna-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
-			};
-			name = StaticAnalyzer;
-		};
-		43D4D6EE166FE08C00BA9675 /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = Autorevision;
-			};
-			name = StaticAnalyzer;
-		};
-		43D4D6EF166FE08C00BA9675 /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "Code Sign ID";
-			};
-			name = StaticAnalyzer;
-		};
-		43D4D6F6166FE08C00BA9675 /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "Version Notes";
-			};
-			name = StaticAnalyzer;
-		};
-		43D4D6F7166FE08C00BA9675 /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 430C4B001661F3270079C9FC /* CS-ID.xcconfig */;
-			buildSettings = {
-				PRODUCT_NAME = "Archive and Prep for Upload";
-			};
-			name = StaticAnalyzer;
-		};
 		52BA64020DE9E2FF0008B3E1 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3471,16 +3308,31 @@
 		};
 		AA4F9AB30855422400C18279 /* Development */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43501CFB165D73C70018EDB7 /* Vienna-Dev.xcconfig */;
+			baseConfigurationReference = 1CF081CD87E34BA6E9700986 /* Pods-Vienna.development.xcconfig */;
 			buildSettings = {
+				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/3rdparty",
+					"\"$(PROJECT_DIR)/3rdparty\"",
+					"\"$(SRCROOT)/3rdparty\"",
+					"\"$(BUILT_PRODUCTS_DIR)\"",
+					"\"${PODS_ROOT}/Sparkle\"",
 				);
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"$(BUILD_PREPROCESSOR_DEFINITIONS)",
+					"HAVE_USLEEP=1",
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				INFOPLIST_FILE = "Resources/Vienna-Info.plist";
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
+				INFOPLIST_PREFIX_HEADER = "$(OBJROOT)/autorevision.h";
+				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3488,24 +3340,46 @@
 					"\"$PODS_CONFIGURATION_BUILD_DIR/FMDB\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/MASPreferences\"",
 				);
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DDEBUG=1",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.opencommunity.vienna2;
+				PRODUCT_NAME = Vienna;
 				SWIFT_OBJC_BRIDGING_HEADER = "src/Vienna-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				WARNING_CFLAGS = "-Wall";
 			};
 			name = Development;
 		};
 		AA4F9AB40855422400C18279 /* Deployment */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43501CFA165D73C70018EDB7 /* Vienna-Dep.xcconfig */;
+			baseConfigurationReference = 6900D92276B0FA4BE9B1873E /* Pods-Vienna.deployment.xcconfig */;
 			buildSettings = {
+				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEPLOYMENT_POSTPROCESSING = YES;
+				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/3rdparty",
+					"\"$(PROJECT_DIR)/3rdparty\"",
+					"\"$(SRCROOT)/3rdparty\"",
+					"\"$(BUILT_PRODUCTS_DIR)\"",
+					"\"${PODS_ROOT}/Sparkle\"",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"$(BUILD_PREPROCESSOR_DEFINITIONS)",
+					"HAVE_USLEEP=1",
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				INFOPLIST_FILE = "Resources/Vienna-Info.plist";
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
+				INFOPLIST_PREFIX_HEADER = "$(OBJROOT)/autorevision.h";
+				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3513,55 +3387,107 @@
 					"\"$PODS_CONFIGURATION_BUILD_DIR/FMDB\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/MASPreferences\"",
 				);
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DNO_LOG_MACROS",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.opencommunity.vienna2;
+				PRODUCT_NAME = Vienna;
+				SEPARATE_STRIP = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "src/Vienna-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				WARNING_CFLAGS = "-Wall";
 			};
 			name = Deployment;
 		};
 		AA4F9AB70855422400C18279 /* Development */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 432E5192165D65AF00A8640E /* Project-All.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BASE_URL_LOC = "dl.bintray.com/viennarss/vienna-rss";
+				BASE_URL_TYP = https;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
 				SWIFT_VERSION = 4.0;
-				VALID_ARCHS = x86_64;
 			};
 			name = Development;
 		};
 		AA4F9AB80855422400C18279 /* Deployment */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 432E5192165D65AF00A8640E /* Project-All.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BASE_URL_LOC = "dl.bintray.com/viennarss/vienna-rss";
+				BASE_URL_TYP = https;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
-				VALID_ARCHS = x86_64;
 			};
 			name = Deployment;
 		};
 		EAAF335A14BDE402002A8837 /* Development */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 430C4B001661F3270079C9FC /* CS-ID.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "Archive and Prep for Upload";
 			};
@@ -3569,7 +3495,6 @@
 		};
 		EAAF335B14BDE402002A8837 /* Deployment */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 430C4B001661F3270079C9FC /* CS-ID.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "Archive and Prep for Upload";
 			};
@@ -3718,53 +3643,6 @@
 			};
 			name = Deployment;
 		};
-		F6A7DDCF1E470E980017BE5E /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 3T4TM2W828;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Vienna/Vienna Help/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.vienna-rss.Vienna.help";
-				PRODUCT_NAME = Vienna;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = help;
-			};
-			name = StaticAnalyzer;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3773,7 +3651,6 @@
 			buildConfigurations = (
 				035B703D19E0E4AE00197334 /* Development */,
 				035B703E19E0E4AE00197334 /* Deployment */,
-				035B703F19E0E4AE00197334 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -3783,7 +3660,6 @@
 			buildConfigurations = (
 				430C4AD0166172BE0079C9FC /* Development */,
 				430C4AD1166172BE0079C9FC /* Deployment */,
-				43D4D6EE166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -3793,7 +3669,6 @@
 			buildConfigurations = (
 				430C4AF81661F0860079C9FC /* Development */,
 				430C4AF91661F0860079C9FC /* Deployment */,
-				43D4D6EF166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -3803,7 +3678,6 @@
 			buildConfigurations = (
 				52BA64020DE9E2FF0008B3E1 /* Development */,
 				52BA64030DE9E2FF0008B3E1 /* Deployment */,
-				43D4D6F6166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -3813,7 +3687,6 @@
 			buildConfigurations = (
 				AA4F9AB30855422400C18279 /* Development */,
 				AA4F9AB40855422400C18279 /* Deployment */,
-				43D4D6ED166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -3823,7 +3696,6 @@
 			buildConfigurations = (
 				AA4F9AB70855422400C18279 /* Development */,
 				AA4F9AB80855422400C18279 /* Deployment */,
-				43D4D6EC166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -3833,7 +3705,6 @@
 			buildConfigurations = (
 				EAAF335A14BDE402002A8837 /* Development */,
 				EAAF335B14BDE402002A8837 /* Deployment */,
-				43D4D6F7166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -3863,7 +3734,6 @@
 			buildConfigurations = (
 				F6A7DDCD1E470E980017BE5E /* Development */,
 				F6A7DDCE1E470E980017BE5E /* Deployment */,
-				F6A7DDCF1E470E980017BE5E /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
