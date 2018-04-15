@@ -1,13 +1,16 @@
 language: objective-c
 osx_image: xcode9.3
 
+cache: carthage
+
 jobs:
   include:
-    # testing
-    - stage: test
-      script: xcodebuild -workspace Vienna.xcworkspace -scheme Vienna test | xcpretty
-    # linting
-    - stage: lint
+    - stage: testing
+      before_script:
+        - brew outdated carthage || brew upgrade carthage
+        - carthage version
+      script: xcodebuild -project Vienna.xcodeproj -scheme Vienna test | xcpretty
+    - stage: linting
       before_script:
         - brew outdated swiftlint || brew upgrade swiftlint
         - swiftlint version
