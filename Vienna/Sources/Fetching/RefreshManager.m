@@ -27,7 +27,6 @@
 #import "Preferences.h"
 #import "Constants.h"
 #import "OpenReader.h"
-#import "AppController.h"
 #import "ASIHTTPRequest.h"
 #import "NSNotificationAdditions.h"
 #import "VTPG_Common.h"

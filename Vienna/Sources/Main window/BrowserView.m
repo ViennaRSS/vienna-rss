@@ -24,7 +24,6 @@
 #import "Preferences.h"
 #import "Constants.h"
 #import <MMTabBarView/MMTabBarView.h>
-#import "AppController.h"
 
 @interface MMTabBarView (BrowserViewAdditions)
 	-(NSTabViewItem *)tabViewItemWithIdentifier:(id)identifier;
