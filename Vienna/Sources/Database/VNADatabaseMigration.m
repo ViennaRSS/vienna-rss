@@ -29,7 +29,7 @@
             [db executeUpdate:@"alter table messages add column createddate"];
             [db executeUpdate:@"update messages set createddate=?", @([NSDate distantPast].timeIntervalSince1970)];
             [db executeUpdate:@"create index messages_message_idx on messages (message_id)"];
-            [db setUserVersion:(uint32_t)13];
+            db.userVersion = (uint32_t)13;
 
             NSLog(@"Updated database schema to version 13.");
         }
@@ -60,7 +60,7 @@
                  parentId, folderId];
             }
             [results close];
-            [db setUserVersion:(uint32_t)14];
+            db.userVersion = (uint32_t)14;
             
             NSLog(@"Updated database schema to version 14.");
         }
@@ -72,7 +72,7 @@
             [db executeUpdate:@"alter table info add column folder_sort"];
             NSInteger oldFoldersTreeSortMethod = [Preferences standardPreferences].foldersTreeSortMethod;
             [db executeUpdate:@"update info set folder_sort=?", @(oldFoldersTreeSortMethod)];
-            [db setUserVersion:(uint32_t)15];
+            db.userVersion = (uint32_t)15;
             
             NSLog(@"Updated database schema to version 15.");
         }
@@ -82,7 +82,7 @@
             
             [db executeUpdate:@"alter table messages add column revised_flag"];
             [db executeUpdate:@"update messages set revised_flag=0"];
-            [db setUserVersion:(uint32_t)16];
+            db.userVersion = (uint32_t)16;
 
             NSLog(@"Updated database schema to version 16.");
         }
@@ -96,7 +96,7 @@
             [db executeUpdate:@"update messages set enclosure=''"];
             [db executeUpdate:@"alter table messages add column enclosuredownloaded_flag"];
             [db executeUpdate:@"update messages set enclosuredownloaded_flag=0"];
-            [db setUserVersion:(uint32_t)17];
+            db.userVersion = (uint32_t)17;
 
             NSLog(@"Updated database schema to version 17.");
         }
@@ -106,7 +106,7 @@
 
             [db executeUpdate:@"create table rss_guids as select message_id, folder_id from messages"];
             [db executeUpdate:@"create index rss_guids_idx on rss_guids (folder_id)"];
-            [db setUserVersion:(uint32_t)18];
+            db.userVersion = (uint32_t)18;
 
             NSLog(@"Updated database schema to version 18.");
         }
@@ -124,7 +124,7 @@
                  @(viennaFolderId)];
             }
             [results close];
-            [db setUserVersion:(uint32_t)19];
+            db.userVersion = (uint32_t)19;
             NSLog(@"Updated database schema to version 19.");
         }
     }

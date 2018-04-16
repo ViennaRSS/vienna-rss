@@ -65,7 +65,7 @@
  */
 -(BOOL)becomeFirstResponder
 {
-	[(id)[self delegate] outlineViewWillBecomeFirstResponder];
+    [(id)self.delegate outlineViewWillBecomeFirstResponder];
 	return [super becomeFirstResponder];
 }
 
@@ -162,7 +162,7 @@
 {
     _directDataSource = aSource;
     _filterDataSource = [[FoldersFilterableDataSourceImpl alloc] initWithDataSource:aSource];
-   	[super setDataSource:aSource];
+       super.dataSource = aSource;
 	[self buildTooltips];
 }
 
@@ -193,10 +193,10 @@
     _filterPredicate = filterPredicate;
     if (_filterDataSource && _filterPredicate){
         [_filterDataSource setFilterPredicate:_filterPredicate outlineView:self];
-        [super setDataSource:_filterDataSource];
+        super.dataSource = _filterDataSource;
     }
     else{
-        [super setDataSource:_directDataSource];
+        super.dataSource = _directDataSource;
     }
 
     [super reloadData];
@@ -254,8 +254,8 @@
  */
 -(NSMenu *)menuForEvent:(NSEvent *)theEvent
 {
-	if ([self delegate] && [[self delegate] respondsToSelector:@selector(outlineView:menuWillAppear:)])
-		[(id)[self delegate] outlineView:self menuWillAppear:theEvent];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(outlineView:menuWillAppear:)])
+        [(id)self.delegate outlineView:self menuWillAppear:theEvent];
 	return self.menu;
 }
 
@@ -276,7 +276,7 @@
 			[array addObject:node];
 			item = [selectedRowIndexes indexGreaterThanIndex:item];
 		}
-		[(id)[self delegate] copyTableSelection:array toPasteboard:[NSPasteboard generalPasteboard]];
+        [(id)self.delegate copyTableSelection:array toPasteboard:[NSPasteboard generalPasteboard]];
 	}
 }
 
@@ -300,7 +300,7 @@
 	}
 	if (menuItem.action == @selector(delete:))
 	{
-		return [(id)[self delegate] canDeleteFolderAtRow:self.selectedRow];
+        return [(id)self.delegate canDeleteFolderAtRow:self.selectedRow];
 	}
 	if (menuItem.action == @selector(selectAll:))
 	{
@@ -381,7 +381,7 @@
 			if ([fieldCell respondsToSelector:@selector(drawCellImage:inView:)])
 			{
 				// The fieldCell needs to be primed with the image for the cell.
-				[[self delegate] outlineView:self willDisplayCell:fieldCell forTableColumn:editColumn item:[self itemAtRow:self.editedRow]];
+                [self.delegate outlineView:self willDisplayCell:fieldCell forTableColumn:editColumn item:[self itemAtRow:self.editedRow]];
 
 				NSRect cellRect = [self frameOfCellAtColumn:editColumnIndex row:self.editedRow];
 				[fieldCell drawCellImage:&cellRect inView:clipView];

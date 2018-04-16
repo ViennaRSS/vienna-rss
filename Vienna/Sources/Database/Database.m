@@ -213,7 +213,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		 NSLocalizedString(@"Trash", nil), @(VNAFolderTypeTrash)];
 	
 		// Set the initial version
-		[db setUserVersion:(uint32_t)MA_Current_DB_Version];
+        db.userVersion = (uint32_t)MA_Current_DB_Version;
 	
 		// Set the default sort order and write it to both the db and the prefs
 		[db executeUpdate:@"insert into info (first_folder, folder_sort) values (0, ?)",  @(MA_FolderSort_Manual)];
@@ -402,7 +402,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		
 		__weak NSString * preparedCriteriaString = criteriaTree.string;
         [self.databaseQueue inDatabase:^(FMDatabase *db) {
-            [db executeUpdate:@"insert into smart_folders (folder_id, search_string) values (?, ?)", @([db lastInsertRowId]), preparedCriteriaString];
+            [db executeUpdate:@"insert into smart_folders (folder_id, search_string) values (?, ?)", @(db.lastInsertRowId), preparedCriteriaString];
         }];
 	}
 }
@@ -495,8 +495,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         [results close];
         
         // compare the SQLite PRAGMA user_version to the legacy version number
-        if ([db userVersion] > dbVersion) {
-            dbVersion = [db userVersion];
+        if (db.userVersion > dbVersion) {
+            dbVersion = db.userVersion;
         }
     }];
 
@@ -872,7 +872,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	
         // Quick way of getting the last autoincrement primary key value (the folder_id).
         if (success) {
-            newItemId = [db lastInsertRowId];
+            newItemId = db.lastInsertRowId;
         }
     }];
 	return newItemId;
@@ -1652,7 +1652,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
             {
                 [self setFolderUnreadCount:folder adjustment:-1];
             }
-			if ([folder countOfCachedArticles] > 0)
+            if (folder.countOfCachedArticles > 0)
 			{
 				// If we're in a smart folder, the cached article may be different.
 				Article * cachedArticle = [folder articleFromGuid:guid];
@@ -2527,7 +2527,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         }];
         if (isDeleted && !article.deleted) {
             [article markDeleted:YES];
-			if ([folder countOfCachedArticles] > 0)
+            if (folder.countOfCachedArticles > 0)
 			{
 				// If we're in a smart folder, the cached article may be different.
 				Article * cachedArticle = [folder articleFromGuid:guid];

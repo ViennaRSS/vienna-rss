@@ -344,8 +344,8 @@
 	// Set the target for double-click actions
 	articleList.doubleAction = @selector(doubleClickRow:);
 	articleList.action = @selector(singleClickRow:);
-	[articleList setDelegate:self];
-	[articleList setDataSource:self];
+    articleList.delegate = self;
+    articleList.dataSource = self;
 	articleList.target = self;
     [articleList accessibilitySetOverrideValue:NSLocalizedString(@"Articles", nil) forAttribute:NSAccessibilityDescriptionAttribute];
 }
@@ -575,7 +575,7 @@
 	Preferences * prefs = [Preferences standardPreferences];
 	
 	// Remember the current folder and article
-	NSString * guid = [self.selectedArticle guid];
+    NSString * guid = (self.selectedArticle).guid;
 	[prefs setInteger:self.controller.articleController.currentFolderId forKey:MAPref_CachedFolderID];
 	[prefs setString:(guid != nil ? guid : @"") forKey:MAPref_CachedArticleGUID];
 
@@ -853,7 +853,7 @@
 	{
 		[articleList deselectAll:self];
 	}
-	else if (rowIndex != [articleList selectedRow])
+    else if (rowIndex != articleList.selectedRow)
 	{
 		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:rowIndex] byExtendingSelection:NO];
 
@@ -877,7 +877,7 @@
  */
 -(BOOL)viewNextUnreadInFolder
 {
-	return [self viewNextUnreadInCurrentFolder:([articleList selectedRow] + 1)];
+    return [self viewNextUnreadInCurrentFolder:(articleList.selectedRow + 1)];
 }
 
 /* viewNextUnreadInCurrentFolder
@@ -952,7 +952,7 @@
 	[self.controller.articleController reloadArrayOfArticles];
 	
 	// This action is send continuously by the filter field, so make sure not the mark read while searching
-	if ([articleList selectedRow] < 0 && self.controller.articleController.allArticles.count > 0 )
+    if (articleList.selectedRow < 0 && self.controller.articleController.allArticles.count > 0 )
 	{
 		BOOL shouldSelectArticle = YES;
 		if ([Preferences standardPreferences].markReadInterval > 0.0f)
@@ -1076,7 +1076,7 @@
 		[self refreshImmediatelyArticleAtCurrentRow];
 		
 		// Add this to the backtrack list
-		NSString * guid = [article guid];
+        NSString * guid = article.guid;
 		[self.controller.articleController addBacktrack:guid];
 	}
 }
@@ -1473,7 +1473,7 @@
 		// displayed and removed as needed.
 		if ([realCell respondsToSelector:@selector(setInProgress:forRow:)])
 		{
-			if (rowIndex == [tv selectedRow] && isLoadingHTMLArticle)
+            if (rowIndex == tv.selectedRow && isLoadingHTMLArticle)
 				[realCell setInProgress:YES forRow:rowIndex];
 			else
 				[realCell setInProgress:NO forRow:rowIndex];

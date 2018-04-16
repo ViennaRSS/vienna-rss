@@ -372,7 +372,7 @@
 		NSInteger firstFolderWithUnread = self.foldersTree.firstFolderWithUnread;
 		if (firstFolderWithUnread == currentFolderId)
 		{
-			[mainArticleView selectFirstUnreadInFolder];
+            mainArticleView.selectFirstUnreadInFolder;
 		}
 		else
 		{
@@ -401,13 +401,13 @@
 	if ([Database sharedManager].countOfUnread > 0)
 	{
 		// Search other articles in the same folder, starting from current position
-		if (![mainArticleView viewNextUnreadInFolder])
+        if (!mainArticleView.viewNextUnreadInFolder)
 		{
 			// If nothing found and smart folder, search if we have other fresh articles from same folder
 			Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
 			if (currentFolder.type == VNAFolderTypeSmart || currentFolder.type == VNAFolderTypeTrash || currentFolder.type == VNAFolderTypeSearch)
 			{
-				if (![mainArticleView selectFirstUnreadInFolder])
+                if (!mainArticleView.selectFirstUnreadInFolder)
 				{
 					[self displayNextFolderWithUnread];
 				}
@@ -516,7 +516,7 @@
 			}
             else if (firstUnreadArticleRequired)
             {
-                [mainArticleView selectFirstUnreadInFolder];
+                mainArticleView.selectFirstUnreadInFolder;
                 firstUnreadArticleRequired = NO;
             }
 
@@ -651,7 +651,7 @@
 				NSUInteger count = currentArrayOfArticles.count;
 				for (NSUInteger i = articleIndex + 1; i < count; ++i)
 				{
-					Article * nextArticle = [currentArrayOfArticles objectAtIndex:i];
+                    Article * nextArticle = currentArrayOfArticles[i];
 					if (![articleArray containsObject:nextArticle])
 					{
 						guidToSelect = nextArticle.guid;
@@ -662,7 +662,7 @@
 				// Otherwise, we want to select the previous article.
 				if (guidToSelect == nil && articleIndex > 0)
 				{
-					Article * nextArticle = [currentArrayOfArticles objectAtIndex:articleIndex - 1];
+                    Article * nextArticle = currentArrayOfArticles[articleIndex - 1];
 					guidToSelect = nextArticle.guid;
 				}
 				
@@ -737,7 +737,7 @@
 			NSUInteger count = currentArrayOfArticles.count;
 			for (NSUInteger i = articleIndex + 1; i < count; ++i)
 			{
-				Article * nextArticle = [currentArrayOfArticles objectAtIndex:i];
+                Article * nextArticle = currentArrayOfArticles[i];
 				if (![articleArray containsObject:nextArticle])
 				{
 					guidToSelect = nextArticle.guid;
@@ -748,7 +748,7 @@
 			// Otherwise, we want to select the previous article.
 			if (guidToSelect == nil && articleIndex > 0)
 			{
-				Article * nextArticle = [currentArrayOfArticles objectAtIndex:articleIndex - 1];
+                Article * nextArticle = currentArrayOfArticles[articleIndex - 1];
 				guidToSelect = nextArticle.guid;
 			}
 			
@@ -1145,8 +1145,8 @@
 	// the article you're current reading can disappear.
 	// For example, if you're reading in the Unread Articles smart folder.
 	// So make sure we keep this article around.
-	if ([[Preferences standardPreferences] refreshFrequency] > 0
-		&& [[Preferences standardPreferences] markReadInterval] > 0.0)
+    if ([Preferences standardPreferences].refreshFrequency > 0
+        && [Preferences standardPreferences].markReadInterval > 0.0)
 	{
 		shouldPreserveSelectedArticle = YES;
 	}

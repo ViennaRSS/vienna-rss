@@ -427,7 +427,11 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	
 	// Set the placeholder string for the global search field
 	SearchMethod * currentSearchMethod = [Preferences standardPreferences].searchMethod;
-	[self.toolbarSearchField.cell setPlaceholderString:currentSearchMethod.friendlyName];
+    if (@available(macOS 10.10, *)) {
+        self.toolbarSearchField.placeholderString = currentSearchMethod.friendlyName;
+    } else {
+        ((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = currentSearchMethod.friendlyName;
+    }
 	
 	// Add Scripts menu if we have any scripts
 	if (!hasOSScriptsMenu())
@@ -685,15 +689,15 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	NSMenu * cellMenu = [NSMenu new];
 	
 	NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recent Searches", nil) action:NULL keyEquivalent:@""];
-	[item setTag:NSSearchFieldRecentsTitleMenuItemTag];
+    item.tag = NSSearchFieldRecentsTitleMenuItemTag;
 	[cellMenu insertItem:item atIndex:0];
 	
 	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recents", nil) action:NULL keyEquivalent:@""];
-	[item setTag:NSSearchFieldRecentsMenuItemTag];
+    item.tag = NSSearchFieldRecentsMenuItemTag;
 	[cellMenu insertItem:item atIndex:1];
 	
 	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Clear", nil) action:NULL keyEquivalent:@""];
-	[item setTag:NSSearchFieldClearRecentsMenuItemTag];
+    item.tag = NSSearchFieldClearRecentsMenuItemTag;
 	[cellMenu insertItem:item atIndex:2];
 	
 	SearchMethod * searchMethod;
@@ -3068,9 +3072,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		{
 			for (NSMenuItem * menuItem in ((NSSearchFieldCell *)self.toolbarSearchField.cell).searchMenuTemplate.itemArray)
 			{
-				if ([[menuItem.representedObject friendlyName] isEqualToString:[SearchMethod searchCurrentWebPageMethod].friendlyName])
-				{
-					[self.toolbarSearchField.cell setPlaceholderString:[SearchMethod searchCurrentWebPageMethod].friendlyName];
+				if ([[menuItem.representedObject friendlyName] isEqualToString:[SearchMethod searchCurrentWebPageMethod].friendlyName]) {
+                    if (@available(macOS 10.10, *)) {
+                        self.toolbarSearchField.placeholderString = [SearchMethod searchCurrentWebPageMethod].friendlyName;
+                    } else {
+                        ((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = [SearchMethod searchCurrentWebPageMethod].friendlyName;
+                    }
 					[Preferences standardPreferences].searchMethod = menuItem.representedObject;
 				}
 			}
@@ -3083,16 +3090,21 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		{
 			for (NSMenuItem * menuItem in ((NSSearchFieldCell *)self.toolbarSearchField.cell).searchMenuTemplate.itemArray)
 			{
-				if ([[menuItem.representedObject friendlyName] isEqualToString:[SearchMethod searchAllArticlesMethod].friendlyName])
-				{
-					[self.toolbarSearchField.cell setPlaceholderString:[SearchMethod searchAllArticlesMethod].friendlyName];
+				if ([[menuItem.representedObject friendlyName] isEqualToString:[SearchMethod searchAllArticlesMethod].friendlyName]) {
+                    if (@available(macOS 10.10, *)) {
+                        self.toolbarSearchField.placeholderString = [SearchMethod searchAllArticlesMethod].friendlyName;
+                    } else {
+                        ((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = [SearchMethod searchAllArticlesMethod].friendlyName;
+                    }
 					[Preferences standardPreferences].searchMethod = menuItem.representedObject;
 				}
 			}
+		} else {
+            if (@available(macOS 10.10, *)) {
+                self.toolbarSearchField.placeholderString = prefs.searchMethod.friendlyName;
+            } else {
+                ((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = prefs.searchMethod.friendlyName;
 		}
-		else
-		{
-			[self.toolbarSearchField.cell setPlaceholderString:[prefs searchMethod].friendlyName];
 		}
 	// END of switching between "Search all articles" and "Search current web page".
 	}
@@ -3231,7 +3243,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	if (!theSearchString.blank)
 	{
-		[db setSearchString:theSearchString];
+        db.searchString = theSearchString;
         if (self.foldersTree.actualSelection != db.searchFolderId) {
 			[self.foldersTree selectFolder:db.searchFolderId];
         } else {

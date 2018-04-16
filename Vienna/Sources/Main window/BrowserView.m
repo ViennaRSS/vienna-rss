@@ -96,7 +96,7 @@
 	[self.tabBarControl setAllowsBackgroundTabClosing:YES];
 	[self.tabBarControl setHideForSingleTab:YES];
 	[self.tabBarControl setShowAddTabButton:YES];
-	[self.tabBarControl setButtonMinWidth:120];
+    (self.tabBarControl).buttonMinWidth = 120;
 	[self.tabBarControl setUseOverflowMenu:YES];
 	[self.tabBarControl setAutomaticallyAnimates:YES];
 	//TODO: figure out what this property means
@@ -210,20 +210,20 @@
 	NSTabView *tabView = tabBar.tabView;
 	NSTabViewItem *tabViewItem = [tabBar tabViewItemWithIdentifier:tabItemView];
 
-    if (([tabBar delegate]) && ([[tabBar delegate] respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])) {
-        if (![[tabBar delegate] tabView:tabView shouldCloseTabViewItem:tabViewItem]) {
+    if ((tabBar.delegate) && ([tabBar.delegate respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])) {
+        if (![tabBar.delegate tabView:tabView shouldCloseTabViewItem:tabViewItem]) {
             return;
         }
     }
     
-    if (([tabBar delegate]) && ([[tabBar delegate] respondsToSelector:@selector(tabView:willCloseTabViewItem:)])) {
-        [[tabBar delegate] tabView:tabView willCloseTabViewItem:tabViewItem];
+    if ((tabBar.delegate) && ([tabBar.delegate respondsToSelector:@selector(tabView:willCloseTabViewItem:)])) {
+        [tabBar.delegate tabView:tabView willCloseTabViewItem:tabViewItem];
     }
     
     [tabView removeTabViewItem:tabViewItem];
     
-    if (([tabBar delegate]) && ([[tabBar delegate] respondsToSelector:@selector(tabView:didCloseTabViewItem:)])) {
-        [[tabBar delegate] tabView:tabView didCloseTabViewItem:tabViewItem];
+    if ((tabBar.delegate) && ([tabBar.delegate respondsToSelector:@selector(tabView:didCloseTabViewItem:)])) {
+        [tabBar.delegate tabView:tabView didCloseTabViewItem:tabViewItem];
     }
 }
 
@@ -398,25 +398,25 @@
 
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidHide:(MMTabBarView *)tabBarView
 {
-	[self.tabBarHeightConstraint setConstant:0];
+    (self.tabBarHeightConstraint).constant = 0;
 }
 
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidUnhide:(MMTabBarView *)tabBarView
 {
-	[self.tabBarHeightConstraint setConstant:23];
+    (self.tabBarHeightConstraint).constant = 23;
 }
 
 // Animation companion
 
 - (void (^)(void))animateAlongsideTabBarShow {
 	return ^{
-		[self.tabBarHeightConstraint.animator setConstant:23];
+        (self.tabBarHeightConstraint.animator).constant = 23;
 	};
 }
 
 - (void (^)(void))animateAlongsideTabBarHide {
 	return ^{
-		[self.tabBarHeightConstraint.animator setConstant:0];
+        (self.tabBarHeightConstraint.animator).constant = 0;
 	};
 }
 
@@ -440,7 +440,7 @@
 			[tabLinks addObject:tabLink];
 			if ([theView respondsToSelector:@selector(viewTitle)] && theView.viewTitle != nil)
 			{
-				[tabTitles setObject:theView.viewTitle forKey:tabLink];
+                tabTitles[tabLink] = theView.viewTitle;
 			}
 		}
 	}
@@ -475,7 +475,7 @@
 	BrowserPane * newBrowserPane = [self createNewTab:url inBackground:openInBackgroundFlag];
 	if (title != nil) {
 		[self setTabItemViewTitle:newBrowserPane title:title];
-		[newBrowserPane setViewTitle:title];
+        newBrowserPane.viewTitle = title;
 	}
 	return newBrowserPane;
 }
@@ -500,9 +500,9 @@
 	{
 		newBrowserPane = newBrowserTemplate.mainView;
 		[self createNewTabWithView:newBrowserPane makeKey:!openInBackgroundFlag];
-		[newBrowserPane setBrowser:self];
+        newBrowserPane.browser = self;
 		//set url but do not load yet
-		[newBrowserPane setUrl:url];
+        newBrowserPane.url = url;
 	}
 	return newBrowserPane;
 }

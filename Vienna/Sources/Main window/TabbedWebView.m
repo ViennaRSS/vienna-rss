@@ -49,7 +49,7 @@ static NSString * _userAgent ;
     if (!_userAgent) {
         NSString *osVersion;
         if (@available(macOS 10.10, *)) {
-            NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
+            NSOperatingSystemVersion version = [NSProcessInfo processInfo].operatingSystemVersion;
             osVersion = [NSString stringWithFormat:@"%ld_%ld_%ld", version.majorVersion, version.minorVersion, version.patchVersion];
         } else {
             osVersion = @"10_9_x";
@@ -395,8 +395,8 @@ static NSString * _userAgent ;
 	
 	myScrollView = self.mainFrame.frameView.documentView.enclosingScrollView;
 	
-    if ([myScrollView.documentView isFlipped]) 
-		newScrollOrigin = NSMakePoint(0.0,NSMaxY([myScrollView.documentView frame])-NSHeight(myScrollView.contentView.bounds));
+    if ((myScrollView.documentView).flipped) 
+        newScrollOrigin = NSMakePoint(0.0,NSMaxY((myScrollView.documentView).frame)-NSHeight(myScrollView.contentView.bounds));
 	else 
 		newScrollOrigin = NSMakePoint(0.0,0.0);
 	

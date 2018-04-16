@@ -1030,7 +1030,7 @@
 		{
 			NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [connectorItem setStatus:logText];
+                connectorItem.status = logText;
             });
 			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:@(folder.itemId)];
 		}
