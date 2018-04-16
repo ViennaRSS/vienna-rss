@@ -23,13 +23,13 @@ final class MainWindowController: NSWindowController {
 
     // MARK: Transitional outlets
 
-    @IBOutlet var outlineView: FolderView?
-    @IBOutlet var browserView: BrowserView?
-    @IBOutlet var articleListView: ArticleListView?
-    @IBOutlet var unifiedDisplayView: UnifiedDisplayView?
-    @IBOutlet var filterDisclosureView: DisclosureView?
-    @IBOutlet var filterSearchField: NSSearchField?
-    @IBOutlet var toolbarSearchField: NSSearchField?
+    @IBOutlet private(set) var outlineView: FolderView?
+    @IBOutlet private(set) var browserView: BrowserView?
+    @IBOutlet private(set) var articleListView: ArticleListView?
+    @IBOutlet private(set) var unifiedDisplayView: UnifiedDisplayView?
+    @IBOutlet private(set) var filterDisclosureView: DisclosureView?
+    @IBOutlet private(set) var filterSearchField: NSSearchField?
+    @IBOutlet private(set) var toolbarSearchField: NSSearchField?
 
     // MARK: Initialization
 
@@ -175,26 +175,24 @@ extension MainWindowController: NSToolbarDelegate {
     }
 
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        typealias Identifier = NSToolbarItem.Identifier
-
         var identifiers = [
-            Identifier("Subscribe"),
-            Identifier("PreviousButton"),
-            Identifier("NextButton"),
-            Identifier("SkipFolder"),
-            Identifier("MarkAllItemsAsRead"),
-            Identifier("Refresh"),
-            Identifier("MailLink"),
-            Identifier("EmptyTrash"),
-            Identifier("GetInfo"),
-            Identifier("Action"),
-            Identifier("Styles"),
-            Identifier("SearchItem")
+            NSToolbarItem.Identifier("Subscribe"),
+            NSToolbarItem.Identifier("PreviousButton"),
+            NSToolbarItem.Identifier("NextButton"),
+            NSToolbarItem.Identifier("SkipFolder"),
+            NSToolbarItem.Identifier("MarkAllItemsAsRead"),
+            NSToolbarItem.Identifier("Refresh"),
+            NSToolbarItem.Identifier("MailLink"),
+            NSToolbarItem.Identifier("EmptyTrash"),
+            NSToolbarItem.Identifier("GetInfo"),
+            NSToolbarItem.Identifier("Action"),
+            NSToolbarItem.Identifier("Styles"),
+            NSToolbarItem.Identifier("SearchItem")
         ]
 
         let pluginIdentifiers = pluginManager?.toolbarItems ?? []
         pluginIdentifiers.forEach { pluginIdentifier in
-            identifiers.append(Identifier(pluginIdentifier))
+            identifiers.append(NSToolbarItem.Identifier(pluginIdentifier))
         }
 
         identifiers += [.space, .flexibleSpace]
@@ -203,21 +201,19 @@ extension MainWindowController: NSToolbarDelegate {
     }
 
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        typealias Identifier = NSToolbarItem.Identifier
-
         var identifiers = [
-            Identifier("Subscribe"),
-            Identifier("SkipFolder"),
-            Identifier("Action"),
-            Identifier("Refresh")
+            NSToolbarItem.Identifier("Subscribe"),
+            NSToolbarItem.Identifier("SkipFolder"),
+            NSToolbarItem.Identifier("Action"),
+            NSToolbarItem.Identifier("Refresh")
         ]
 
         let pluginIdentifiers = pluginManager?.defaultToolbarItems() as? [String] ?? []
         pluginIdentifiers.forEach { identifier in
-            identifiers.append(Identifier(identifier))
+            identifiers.append(NSToolbarItem.Identifier(identifier))
         }
 
-        identifiers += [.flexibleSpace, Identifier("SearchItem")]
+        identifiers += [.flexibleSpace, NSToolbarItem.Identifier("SearchItem")]
 
         return identifiers
     }

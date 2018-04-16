@@ -64,6 +64,9 @@ opt_in_rules:
 #  - no_grouping_extension
 #  - private_action
 
+private_outlet:
+  allow_private_set: true
+
 file_header:
   required_pattern: |
                     \/\/
