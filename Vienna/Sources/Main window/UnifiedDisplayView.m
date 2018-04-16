@@ -503,7 +503,7 @@
 	Preferences * prefs = [Preferences standardPreferences];
 
 	// Remember the current folder and article
-    NSString * guid = (self.selectedArticle).guid;
+    NSString * guid = self.selectedArticle.guid;
 	[prefs setInteger:self.controller.articleController.currentFolderId forKey:MAPref_CachedFolderID];
 	[prefs setString:(guid != nil ? guid : @"") forKey:MAPref_CachedArticleGUID];
 }
@@ -522,7 +522,7 @@
  */
 -(BOOL)canDeleteMessageAtRow:(NSInteger)row
 {
-	return articleList.window.visible && (self.selectedArticle != nil) && ![Database sharedManager].readOnly;
+	return articleList.window.visible && self.selectedArticle != nil && ![Database sharedManager].readOnly;
 }
 
 /* selectedArticle

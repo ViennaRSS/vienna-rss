@@ -96,7 +96,7 @@
 	[self.tabBarControl setAllowsBackgroundTabClosing:YES];
 	[self.tabBarControl setHideForSingleTab:YES];
 	[self.tabBarControl setShowAddTabButton:YES];
-    (self.tabBarControl).buttonMinWidth = 120;
+    self.tabBarControl.buttonMinWidth = 120;
 	[self.tabBarControl setUseOverflowMenu:YES];
 	[self.tabBarControl setAutomaticallyAnimates:YES];
 	//TODO: figure out what this property means
@@ -272,7 +272,7 @@
  */
 -(void)showNextTab
 {
-	if ([self.tabBarControl indexOfTabViewItem:self.tabBarControl.tabView.selectedTabViewItem] == (self.tabBarControl.tabView.numberOfTabViewItems - 1))
+	if ([self.tabBarControl indexOfTabViewItem:self.tabBarControl.tabView.selectedTabViewItem] == self.tabBarControl.tabView.numberOfTabViewItems - 1)
 		[self.tabBarControl.tabView selectFirstTabViewItem:self];
 	else
 		[self.tabBarControl.tabView selectNextTabViewItem:self];
@@ -398,25 +398,25 @@
 
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidHide:(MMTabBarView *)tabBarView
 {
-    (self.tabBarHeightConstraint).constant = 0;
+    self.tabBarHeightConstraint.constant = 0;
 }
 
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidUnhide:(MMTabBarView *)tabBarView
 {
-    (self.tabBarHeightConstraint).constant = 23;
+    self.tabBarHeightConstraint.constant = 23;
 }
 
 // Animation companion
 
 - (void (^)(void))animateAlongsideTabBarShow {
 	return ^{
-        (self.tabBarHeightConstraint.animator).constant = 23;
+        self.tabBarHeightConstraint.animator.constant = 23;
 	};
 }
 
 - (void (^)(void))animateAlongsideTabBarHide {
 	return ^{
-        (self.tabBarHeightConstraint.animator).constant = 0;
+        self.tabBarHeightConstraint.animator.constant = 0;
 	};
 }
 

@@ -1346,7 +1346,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		NSInteger folderId = [self addFolder:VNAFolderTypeRoot afterChild:0 folderName: NSLocalizedString(@"Search Results", nil) type:VNAFolderTypeSearch canAppendIndex:YES];
 		self.searchFolder = [self folderFromID:folderId];
 	}
-	return (self.searchFolder).itemId;
+	return self.searchFolder.itemId;
 }
 
 /* folderFromID

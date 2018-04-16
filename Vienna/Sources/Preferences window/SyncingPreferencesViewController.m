@@ -257,7 +257,7 @@ static BOOL _credentialsChanged;
 
 -(void)handleGoogleAuthFailed:(NSNotification *)nc
 {    
-    if ((self.view.window).visible)
+    if (self.view.window.visible)
     {
         NSAlert *alert = [NSAlert new];
         alert.messageText = NSLocalizedString(@"Open Reader Authentication Failed",nil);

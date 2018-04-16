@@ -80,7 +80,7 @@
 {
 	if (menuItem.action == @selector(copy:))
 	{
-		return (self.selectedRow >= 0);
+		return self.selectedRow >= 0;
 	}
 	if (menuItem.action == @selector(delete:))
 	{
