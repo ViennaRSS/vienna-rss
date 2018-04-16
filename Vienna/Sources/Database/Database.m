@@ -1796,7 +1796,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
                 folder.lastUpdate = lastUpdate;
                 [folder setFlag:flags];
                 if (unreadCount > 0) {
-                    _countOfUnread += unreadCount;
+                    self->_countOfUnread += unreadCount;
                 }
                 self.foldersDict[@(newItemId)] = folder;
                 

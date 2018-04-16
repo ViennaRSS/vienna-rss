@@ -297,7 +297,7 @@
         }
         
         if (returnCode == NSFileHandlingPanelCancelButton)
-            [downloadFolder selectItemAtIndex:0];
+            [self->downloadFolder selectItemAtIndex:0];
     }];
 }
 
@@ -366,7 +366,7 @@
     panel.allowedFileTypes = @[NSFileTypeForHFSTypeCode('APPL')];
     [panel beginSheetModalForWindow:prefPaneWindow completionHandler:^(NSInteger returnCode) {
         [panel orderOut:self];
-        NSWindow * prefPaneWindow = linksHandler.window;
+        NSWindow * prefPaneWindow = self->linksHandler.window;
         [prefPaneWindow makeKeyAndOrderFront:self];
         
         if (returnCode == NSFileHandlingPanelOKButton)

@@ -372,7 +372,7 @@
 		NSInteger firstFolderWithUnread = self.foldersTree.firstFolderWithUnread;
 		if (firstFolderWithUnread == currentFolderId)
 		{
-            mainArticleView.selectFirstUnreadInFolder;
+            [self->mainArticleView selectFirstUnreadInFolder];
 		}
 		else
 		{
@@ -491,39 +491,39 @@
 
 	[self getArticlesWithCompletionBlock:^(NSArray *resultArray) {
 	    // when multiple refreshes where queued, we update folderArrayOfArticles only once
-	    reloadArrayOfArticlesSemaphor--;
-	    if (reloadArrayOfArticlesSemaphor <=0)
+	    self->reloadArrayOfArticlesSemaphor--;
+	    if (self->reloadArrayOfArticlesSemaphor <=0)
 	    {
-            [mainArticleView stopLoadIndicator];
+            [self->mainArticleView stopLoadIndicator];
             self.folderArrayOfArticles = resultArray;
             Article * article = self.selectedArticle;
 
-			if (shouldPreserveSelectedArticle)
+			if (self->shouldPreserveSelectedArticle)
 			{
 				if (article != nil && article.read && !article.deleted)
 				{
-					articleToPreserve = article;
+					self->articleToPreserve = article;
 				}
-				shouldPreserveSelectedArticle = NO;
+				self->shouldPreserveSelectedArticle = NO;
 			}
 
-            [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
+            [self->mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
 
-			if (guidOfArticleToSelect != nil )
+			if (self->guidOfArticleToSelect != nil )
 			{
-				[mainArticleView scrollToArticle:guidOfArticleToSelect];
-				guidOfArticleToSelect = nil;
+				[self->mainArticleView scrollToArticle:self->guidOfArticleToSelect];
+				self->guidOfArticleToSelect = nil;
 			}
-            else if (firstUnreadArticleRequired)
+            else if (self->firstUnreadArticleRequired)
             {
-                mainArticleView.selectFirstUnreadInFolder;
-                firstUnreadArticleRequired = NO;
+                [self->mainArticleView selectFirstUnreadInFolder];
+                self->firstUnreadArticleRequired = NO;
             }
 
-            if (requireSelectArticleAfterReload)
+            if (self->requireSelectArticleAfterReload)
             {
                 [self ensureSelectedArticle];
-                requireSelectArticleAfterReload = NO;
+                self->requireSelectArticleAfterReload = NO;
             }
 
             // To avoid upsetting the current displayed article after a refresh,

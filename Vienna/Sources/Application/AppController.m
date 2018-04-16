@@ -1626,7 +1626,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [alert beginSheetModalForWindow:self.mainWindow completionHandler:^(NSModalResponse returnCode) {
         if (returnCode == NSAlertFirstButtonReturn) {
             [self clearUndoStack];
-            [db purgeDeletedArticles];
+            [self->db purgeDeletedArticles];
         }
     }];
 }
