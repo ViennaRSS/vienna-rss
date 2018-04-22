@@ -1,8 +1,6 @@
 files:
   - source: /Localizations/en.xliff
-    translation: /Localizations/%two_letters_code%.xliff
+    translation: /Localizations/%osx_locale%.xliff
     languages_mapping:
-      two_letters_code:
+      osx_locale:
         pt-BR: pt-BR
-        zh-CN: zh-Hans
-        zh-TW: zh-Hant
