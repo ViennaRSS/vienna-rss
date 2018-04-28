@@ -1015,6 +1015,31 @@
         <note>Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI";</note>
         <target xml:lang="cs" state="translated">Posledních 48 hodin</target>
       </trans-unit>
+      <trans-unit id="MHF-D4-pRN.title">
+        <source>Make Upper Case</source>
+        <note>Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN";</note>
+        <target xml:lang="cs" state="translated">Všechna písmena velká</target>
+      </trans-unit>
+      <trans-unit id="QEb-Bm-CPN.title">
+        <source>Substitutions</source>
+        <note>Class = "NSMenu"; title = "Substitutions"; ObjectID = "QEb-Bm-CPN";</note>
+        <target xml:lang="cs" state="translated">Náhrady</target>
+      </trans-unit>
+      <trans-unit id="RtQ-eP-bfk.title">
+        <source>Smart Dashes</source>
+        <note>Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk";</note>
+        <target xml:lang="cs" state="translated">Chytré pomlčky</target>
+      </trans-unit>
+      <trans-unit id="UFF-Fn-8ti.title">
+        <source>Transformations</source>
+        <note>Class = "NSMenu"; title = "Transformations"; ObjectID = "UFF-Fn-8ti";</note>
+        <target xml:lang="cs" state="translated">Transformace</target>
+      </trans-unit>
+      <trans-unit id="eVb-Qt-XJb.title">
+        <source>Substitutions</source>
+        <note>Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "eVb-Qt-XJb";</note>
+        <target xml:lang="cs" state="translated">Náhrady</target>
+      </trans-unit>
       <trans-unit id="ecl-HO-Kpi.title">
         <source>Mark All Subscriptions as Read</source>
         <note>Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi";</note>
@@ -1025,10 +1050,20 @@
         <note>Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI";</note>
         <target xml:lang="cs" state="translated">Pravopis</target>
       </trans-unit>
+      <trans-unit id="joR-kW-sIU.title">
+        <source>Transformations</source>
+        <note>Class = "NSMenuItem"; title = "Transformations"; ObjectID = "joR-kW-sIU";</note>
+        <target xml:lang="cs" state="translated">Transformace</target>
+      </trans-unit>
       <trans-unit id="pKl-6f-Hlc.title">
         <source>Mark Read</source>
         <note>Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc";</note>
         <target xml:lang="cs" state="translated">Označit jako čtené</target>
+      </trans-unit>
+      <trans-unit id="qzH-De-act.title">
+        <source>Smart Copy/Paste</source>
+        <note>Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "qzH-De-act";</note>
+        <target xml:lang="cs" state="translated">Chytré kopírování/vkládání</target>
       </trans-unit>
       <trans-unit id="rNG-xr-3x7.title">
         <source>Unread Articles</source>
@@ -1044,6 +1079,11 @@
         <source>Today</source>
         <note>Class = "NSMenuItem"; title = "Today"; ObjectID = "t34-de-pMs";</note>
         <target xml:lang="cs" state="translated">Dnes</target>
+      </trans-unit>
+      <trans-unit id="tfv-fu-HFM.title">
+        <source>Check Spelling While Typing</source>
+        <note>Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "tfv-fu-HFM";</note>
+        <target xml:lang="cs" state="translated">Kontrolovat pravopis při psaní</target>
       </trans-unit>
       <trans-unit id="wqh-Jc-gBm.title">
         <source>Last Refresh</source>
@@ -2212,6 +2252,11 @@ Also check your network access.</target>
         <source>Preferences</source>
         <note>Title of the Preferences window</note>
         <target xml:lang="cs" state="translated">Předvolby</target>
+      </trans-unit>
+      <trans-unit id="Queue">
+        <source>Queue</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="cs" state="translated">Fronta</target>
       </trans-unit>
       <trans-unit id="Quit">
         <source>Quit</source>
