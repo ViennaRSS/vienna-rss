@@ -282,11 +282,6 @@
         <note>Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "oVW-ee-uJT";</note>
         <target xml:lang="eu" state="translated">5 minuturo Begiratu artikulu berririk daude:</target>
       </trans-unit>
-      <trans-unit id="pXX-MI-tJX.title">
-        <source>Check for new articles on start up</source>
-        <note>Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "pXX-MI-tJX";</note>
-        <target xml:lang="eu" state="translated">Default RSS Reader:</target>
-      </trans-unit>
       <trans-unit id="pjg-Ze-H3l.title">
         <source>Open new links in the background</source>
         <note>Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "pjg-Ze-H3l";</note>
