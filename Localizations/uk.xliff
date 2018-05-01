@@ -1485,9 +1485,6 @@
         <source>Visit the website</source>
         <note>Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
         <target xml:lang="uk" state="translated">Відвідати веб-сторінку</target>
-        <alt-trans>
-          <target xml:lang="uk">Відвідати веб-сайт</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="NKI-36-zCY.title">
         <source>Password:</source>

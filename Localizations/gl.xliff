@@ -84,7 +84,10 @@
       <trans-unit id="17.title">
         <source>Empty Trash</source>
         <note>Class = "NSButtonCell"; title = "Empty Trash"; ObjectID = "17";</note>
-        <target xml:lang="gl" state="translated">Tirar o lixo</target>
+        <target xml:lang="gl" state="translated">Baleirar papeleira</target>
+        <alt-trans>
+          <target xml:lang="gl">Tirar o lixo</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="18.title">
         <source>Don't Empty Trash</source>
@@ -94,7 +97,10 @@
       <trans-unit id="19.title">
         <source>There are deleted articles in the trash. Would you like to empty the trash before quitting?</source>
         <note>Class = "NSTextFieldCell"; title = "There are deleted articles in the trash. Would you like to empty the trash before quitting?"; ObjectID = "19";</note>
-        <target xml:lang="gl" state="translated">Hai artigos eliminados na papeleira. Queres baleirala antes de saír??</target>
+        <target xml:lang="gl" state="translated">Hai artigos eliminados na papeleira. Queres baleirala antes de saír?</target>
+        <alt-trans>
+          <target xml:lang="gl">Hai artigos eliminados na papeleira. Queres baleirala antes de saír??</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="20.title">
         <source>Do not show this warning again</source>
@@ -143,7 +149,10 @@
       <trans-unit id="34.title">
         <source>Access to %@ requires you to provide log in credentials</source>
         <note>Class = "NSTextFieldCell"; title = "Access to %@ requires you to provide log in credentials"; ObjectID = "34";</note>
-        <target xml:lang="gl" state="translated">O acceso a %@ precisa que proporciones os datos credenciais credenciales de inicio de sesión</target>
+        <target xml:lang="gl" state="translated">O acceso a %@ precisa que proporciones as credencias de rexistro</target>
+        <alt-trans>
+          <target xml:lang="gl">O acceso a %@ precisa que proporciones os datos credenciais credenciales de inicio de sesión</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="37.title">
         <source>Password:</source>
@@ -308,7 +317,10 @@
       <trans-unit id="5.title">
         <source>Bring All to Front</source>
         <note>Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5";</note>
-        <target xml:lang="gl" state="translated">Traer todo ao fronte</target>
+        <target xml:lang="gl" state="translated">Traer todo á fronte</target>
+        <alt-trans>
+          <target xml:lang="gl">Traer todo ao fronte</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="6yn-y8-lF1.title">
         <source>Refresh All Subscriptions</source>
@@ -935,17 +947,26 @@
       <trans-unit id="4c1-NR-ofo.label">
         <source>Empty Trash</source>
         <note>Class = "NSToolbarItem"; label = "Empty Trash"; ObjectID = "4c1-NR-ofo";</note>
-        <target xml:lang="gl" state="translated">Tirar o lixo</target>
+        <target xml:lang="gl" state="translated">Baleirar papeleira</target>
+        <alt-trans>
+          <target xml:lang="gl">Tirar o lixo</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="4c1-NR-ofo.paletteLabel">
         <source>Empty Trash</source>
         <note>Class = "NSToolbarItem"; paletteLabel = "Empty Trash"; ObjectID = "4c1-NR-ofo";</note>
-        <target xml:lang="gl" state="translated">Tirar o lixo</target>
+        <target xml:lang="gl" state="translated">Baleirar papeleira</target>
+        <alt-trans>
+          <target xml:lang="gl">Tirar o lixo</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="4c1-NR-ofo.toolTip">
         <source>Delete all articles in the trash</source>
         <note>Class = "NSToolbarItem"; toolTip = "Delete all articles in the trash"; ObjectID = "4c1-NR-ofo";</note>
-        <target xml:lang="gl" state="translated">Eliminar todos os artigos do papeleiro</target>
+        <target xml:lang="gl" state="translated">Eliminar todos os artigos da papeleira</target>
+        <alt-trans>
+          <target xml:lang="gl">Eliminar todos os artigos do papeleiro</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="7iy-IN-8oG.label">
         <source>Get Info</source>
