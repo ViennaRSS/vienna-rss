@@ -2,7 +2,7 @@ Instructions for building and uploading Vienna binaries to Sourceforge
 
 ## One time setup step: ##
 
- -	To ensure that releases are properly codesigned make sure that you have properly edited `configs/CS-ID.xcconfig` for your setup.
+ -	To ensure that releases are properly codesigned make sure that you have properly edited `Scripts/Resources/CS-ID.xcconfig` for your setup.
     CODE_SIGN_IDENTITY should be the name of your certificate as it is stored in Keychain,
     PRIVATE_KEY_PATH should be the location of the private DSA key used by Sparkle,
     CODE_SIGN_REQUIREMENTS_PATH should generally remain at its default value.
@@ -25,7 +25,7 @@ Tags should be in one of the following formats:
 
 ## Steps to release Vienna: ##
 
- 1.	Review all recent code changes and make sure you should not change `MACOSX_DEPLOYMENT_TARGET` in "Configs/Project-All.xcconfig" in order to protect users whose machines do not match minimum OS X requirements from a counter-productive "upgrade".
+ 1.	Review all recent code changes and make sure you should not change `MACOSX_DEPLOYMENT_TARGET` in the project configuration in order to protect users whose machines do not match minimum OS X requirements from a counter-productive "upgrade".
  2.	Make sure that the "CHANGES" file is up to date.
  3.	Copy the most recent part of "CHANGES" in a new text document and process it with Markdown to get a new "notes.html".
  4.	Commit anything unstaged (on `master` branch if you are releasing a beta or on `stable` branch if you are doing a normal release).
