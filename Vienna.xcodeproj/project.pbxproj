@@ -254,6 +254,7 @@
 		F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */; };
 		F6EB261C1E5BA59300570B22 /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6EB261B1E5BA59300570B22 /* PreferencesWindowController.m */; };
 		F6FB2EDE209EF26800521B61 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F6FB2EDC209EF26800521B61 /* InfoPlist.strings */; };
+		F6FEE7AD209E500800BCAEC6 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = F6FEE7AF209E500800BCAEC6 /* Localizable.stringsdict */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1299,6 +1300,7 @@
 				F63DA1731F1CF025007CBED4 /* Error page */,
 				F69AE79C1F2215D600342640 /* InfoPlist.strings */,
 				F62580A81E286A8B0035E43C /* Localizable.strings */,
+				F6FEE7AF209E500800BCAEC6 /* Localizable.stringsdict */,
 				3AEE7DE81695FC570018A17D /* vienna_public_key.pem */,
 			);
 			path = Resources;
@@ -1935,6 +1937,7 @@
 				F625801C1E2853B90035E43C /* ActivityViewer.xib in Resources */,
 				03493D1A1A303BF700AA3F36 /* SyncingPreferencesView.xib in Resources */,
 				F62581591E29BEB90035E43C /* MainMenu.xib in Resources */,
+				F6FEE7AD209E500800BCAEC6 /* Localizable.stringsdict in Resources */,
 				F6D572AE1E26AA8A00CDA909 /* FeedCredentials.xib in Resources */,
 				03721E591A218CFC009C020C /* GeneralPreferencesView.xib in Resources */,
 				03F33D961DF2A2F900B04FAF /* Images.xcassets in Resources */,
@@ -3083,6 +3086,14 @@
 				F6FB2EDD209EF26800521B61 /* Base */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F6FEE7AF209E500800BCAEC6 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F6FEE7B0209E500B00BCAEC6 /* Base */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
