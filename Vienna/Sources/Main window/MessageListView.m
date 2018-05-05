@@ -60,7 +60,7 @@
 			[rows addObject:@(rowIndex)];
 			rowIndex = [selectedRowIndexes indexGreaterThanIndex:rowIndex];
 		}
-		[(id)[self delegate] copyTableSelection:rows toPasteboard:[NSPasteboard generalPasteboard]];
+        [(id)self.delegate copyTableSelection:rows toPasteboard:[NSPasteboard generalPasteboard]];
 	}
 }
 
@@ -80,11 +80,11 @@
 {
 	if (menuItem.action == @selector(copy:))
 	{
-		return (self.selectedRow >= 0);
+		return self.selectedRow >= 0;
 	}
 	if (menuItem.action == @selector(delete:))
 	{
-		return [(id)[self delegate] canDeleteMessageAtRow:self.selectedRow];
+        return [(id)self.delegate canDeleteMessageAtRow:self.selectedRow];
 	}
 	if (menuItem.action == @selector(selectAll:))
 	{

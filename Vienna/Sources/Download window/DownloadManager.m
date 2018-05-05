@@ -302,7 +302,7 @@
 -(void)cancelItem:(DownloadItem *)item
 {	
 	[item.download cancel];
-	[item setState:DownloadStateCancelled];
+    item.state = DownloadStateCancelled;
 	NSAssert(activeDownloads > 0, @"cancelItem called with zero activeDownloads count!");
 	--activeDownloads;
 	[self notifyDownloadItemChange:item];
@@ -322,7 +322,7 @@
 	if (theDownload)
 	{
 		DownloadItem * newItem = [DownloadItem new];
-		[newItem setState:DownloadStateInit];
+        newItem.state = DownloadStateInit;
 		newItem.download = theDownload;
 		newItem.filename = destPath;
 		[downloadsList addObject:newItem];
@@ -418,7 +418,7 @@
 		theItem.download = download;
 		[downloadsList addObject:theItem];
 	}
-	[theItem setState:DownloadStateStarted];
+    theItem.state = DownloadStateStarted;
 	if (theItem.filename == nil)
 		theItem.filename = download.request.URL.path;
 

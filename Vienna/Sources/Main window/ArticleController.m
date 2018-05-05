@@ -372,7 +372,7 @@
 		NSInteger firstFolderWithUnread = self.foldersTree.firstFolderWithUnread;
 		if (firstFolderWithUnread == currentFolderId)
 		{
-			[mainArticleView selectFirstUnreadInFolder];
+            [self->mainArticleView selectFirstUnreadInFolder];
 		}
 		else
 		{
@@ -401,13 +401,13 @@
 	if ([Database sharedManager].countOfUnread > 0)
 	{
 		// Search other articles in the same folder, starting from current position
-		if (![mainArticleView viewNextUnreadInFolder])
+        if (!mainArticleView.viewNextUnreadInFolder)
 		{
 			// If nothing found and smart folder, search if we have other fresh articles from same folder
 			Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
 			if (currentFolder.type == VNAFolderTypeSmart || currentFolder.type == VNAFolderTypeTrash || currentFolder.type == VNAFolderTypeSearch)
 			{
-				if (![mainArticleView selectFirstUnreadInFolder])
+                if (!mainArticleView.selectFirstUnreadInFolder)
 				{
 					[self displayNextFolderWithUnread];
 				}
@@ -491,39 +491,39 @@
 
 	[self getArticlesWithCompletionBlock:^(NSArray *resultArray) {
 	    // when multiple refreshes where queued, we update folderArrayOfArticles only once
-	    reloadArrayOfArticlesSemaphor--;
-	    if (reloadArrayOfArticlesSemaphor <=0)
+	    self->reloadArrayOfArticlesSemaphor--;
+	    if (self->reloadArrayOfArticlesSemaphor <=0)
 	    {
-            [mainArticleView stopLoadIndicator];
+            [self->mainArticleView stopLoadIndicator];
             self.folderArrayOfArticles = resultArray;
             Article * article = self.selectedArticle;
 
-			if (shouldPreserveSelectedArticle)
+			if (self->shouldPreserveSelectedArticle)
 			{
 				if (article != nil && article.read && !article.deleted)
 				{
-					articleToPreserve = article;
+					self->articleToPreserve = article;
 				}
-				shouldPreserveSelectedArticle = NO;
+				self->shouldPreserveSelectedArticle = NO;
 			}
 
-            [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
+            [self->mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
 
-			if (guidOfArticleToSelect != nil )
+			if (self->guidOfArticleToSelect != nil )
 			{
-				[mainArticleView scrollToArticle:guidOfArticleToSelect];
-				guidOfArticleToSelect = nil;
+				[self->mainArticleView scrollToArticle:self->guidOfArticleToSelect];
+				self->guidOfArticleToSelect = nil;
 			}
-            else if (firstUnreadArticleRequired)
+            else if (self->firstUnreadArticleRequired)
             {
-                [mainArticleView selectFirstUnreadInFolder];
-                firstUnreadArticleRequired = NO;
+                [self->mainArticleView selectFirstUnreadInFolder];
+                self->firstUnreadArticleRequired = NO;
             }
 
-            if (requireSelectArticleAfterReload)
+            if (self->requireSelectArticleAfterReload)
             {
                 [self ensureSelectedArticle];
-                requireSelectArticleAfterReload = NO;
+                self->requireSelectArticleAfterReload = NO;
             }
 
             // To avoid upsetting the current displayed article after a refresh,
@@ -651,7 +651,7 @@
 				NSUInteger count = currentArrayOfArticles.count;
 				for (NSUInteger i = articleIndex + 1; i < count; ++i)
 				{
-					Article * nextArticle = [currentArrayOfArticles objectAtIndex:i];
+                    Article * nextArticle = currentArrayOfArticles[i];
 					if (![articleArray containsObject:nextArticle])
 					{
 						guidToSelect = nextArticle.guid;
@@ -662,7 +662,7 @@
 				// Otherwise, we want to select the previous article.
 				if (guidToSelect == nil && articleIndex > 0)
 				{
-					Article * nextArticle = [currentArrayOfArticles objectAtIndex:articleIndex - 1];
+                    Article * nextArticle = currentArrayOfArticles[articleIndex - 1];
 					guidToSelect = nextArticle.guid;
 				}
 				
@@ -737,7 +737,7 @@
 			NSUInteger count = currentArrayOfArticles.count;
 			for (NSUInteger i = articleIndex + 1; i < count; ++i)
 			{
-				Article * nextArticle = [currentArrayOfArticles objectAtIndex:i];
+                Article * nextArticle = currentArrayOfArticles[i];
 				if (![articleArray containsObject:nextArticle])
 				{
 					guidToSelect = nextArticle.guid;
@@ -748,7 +748,7 @@
 			// Otherwise, we want to select the previous article.
 			if (guidToSelect == nil && articleIndex > 0)
 			{
-				Article * nextArticle = [currentArrayOfArticles objectAtIndex:articleIndex - 1];
+                Article * nextArticle = currentArrayOfArticles[articleIndex - 1];
 				guidToSelect = nextArticle.guid;
 			}
 			
@@ -1145,8 +1145,8 @@
 	// the article you're current reading can disappear.
 	// For example, if you're reading in the Unread Articles smart folder.
 	// So make sure we keep this article around.
-	if ([[Preferences standardPreferences] refreshFrequency] > 0
-		&& [[Preferences standardPreferences] markReadInterval] > 0.0)
+    if ([Preferences standardPreferences].refreshFrequency > 0
+        && [Preferences standardPreferences].markReadInterval > 0.0)
 	{
 		shouldPreserveSelectedArticle = YES;
 	}

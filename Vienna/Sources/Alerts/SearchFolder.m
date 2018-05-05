@@ -116,7 +116,7 @@
 			[self initForField:criteria.field inRow:searchCriteriaView];
 
 			[fieldNamePopup selectItemWithTitle:NSLocalizedString([criteria field], nil)];
-			[operatorPopup selectItemWithTitle:[Criteria localizedStringFromOperator:[criteria operator]]];
+            [operatorPopup selectItemWithTitle:[Criteria localizedStringFromOperator:criteria.operator]];
 
 			Field * field = [nameToFieldMap valueForKey:criteria.field];
 			switch (field.type)
@@ -398,7 +398,7 @@
 {
 	for ( NSNumber * number in operators )
 	{
-		CriteriaOperator operator = [number integerValue];
+        CriteriaOperator operator = number.integerValue;
 		NSString * operatorString = [Criteria localizedStringFromOperator:operator];
 		[popUpButton addItemWithTag:operatorString tag:operator];
 	}

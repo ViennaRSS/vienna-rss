@@ -30,7 +30,6 @@
 #import "BrowserPane.h"
 #import "Article.h"
 #import "Folder.h"
-#import "BrowserView.h"
 #import "TableViewExtensions.h"
 #import "Database.h"
 #import "Vienna-Swift.h"
@@ -137,8 +136,8 @@
 	articleList.menu = articleListMenu;
 
 	// Set the target for copy, drag...
-	[articleList setDelegate:self];
-	[articleList setDataSource:self];
+    articleList.delegate = self;
+    articleList.dataSource = self;
     [articleList accessibilitySetOverrideValue:NSLocalizedString(@"Articles", nil) forAttribute:NSAccessibilityDescriptionAttribute];
 
     [NSUserDefaults.standardUserDefaults addObserver:self
@@ -452,7 +451,7 @@
 	[self.controller.articleController reloadArrayOfArticles];
 
 	// This action is send continuously by the filter field, so make sure not the mark read while searching
-	if ([articleList selectedRow] < 0 && self.controller.articleController.allArticles.count > 0 )
+    if (articleList.selectedRow < 0 && self.controller.articleController.allArticles.count > 0 )
 	{
 		BOOL shouldSelectArticle = YES;
 		if ([Preferences standardPreferences].markReadInterval > 0.0f)
@@ -504,7 +503,7 @@
 	Preferences * prefs = [Preferences standardPreferences];
 
 	// Remember the current folder and article
-	NSString * guid = [self.selectedArticle guid];
+    NSString * guid = self.selectedArticle.guid;
 	[prefs setInteger:self.controller.articleController.currentFolderId forKey:MAPref_CachedFolderID];
 	[prefs setString:(guid != nil ? guid : @"") forKey:MAPref_CachedArticleGUID];
 }
@@ -523,7 +522,7 @@
  */
 -(BOOL)canDeleteMessageAtRow:(NSInteger)row
 {
-	return articleList.window.visible && (self.selectedArticle != nil) && ![Database sharedManager].readOnly;
+	return articleList.window.visible && self.selectedArticle != nil && ![Database sharedManager].readOnly;
 }
 
 /* selectedArticle
@@ -578,7 +577,7 @@
  */
 -(BOOL)viewNextUnreadInFolder
 {
-	return [self viewNextUnreadInCurrentFolder:([articleList selectedRow] + 1)];
+    return [self viewNextUnreadInCurrentFolder:(articleList.selectedRow + 1)];
 }
 
 /* viewNextUnreadInCurrentFolder
@@ -886,7 +885,7 @@
 	}
 	if (menuItem.action == @selector(delete:))
 	{
-		return [self canDeleteMessageAtRow:[articleList selectedRow]];
+        return [self canDeleteMessageAtRow:articleList.selectedRow];
 	}
 	if (menuItem.action == @selector(selectAll:))
 	{
@@ -926,7 +925,7 @@
 
 -(BOOL)becomeFirstResponder
 {
-	NSInteger currentSelectedRow = [articleList selectedRow];
+    NSInteger currentSelectedRow = articleList.selectedRow;
 	if (currentSelectedRow >= 0 && currentSelectedRow < self.controller.articleController.allArticles.count)
     {
 		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:currentSelectedRow] byExtendingSelection:NO];

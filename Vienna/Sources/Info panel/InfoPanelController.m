@@ -126,7 +126,7 @@
  */
 -(IBAction)urlFieldChanged:(id)sender
 {
-	NSString * newUrl = (self.urlField.stringValue).trim;
+	NSString * newUrl = self.urlField.stringValue.trim;
     [[Database sharedManager] setFeedURL:newUrl forFolder:self.infoFolderId];
 }
 
@@ -183,7 +183,7 @@
  */
 -(void)enableValidateButton
 {
-	self.validateButton.enabled = !(self.urlField.stringValue).blank;
+	self.validateButton.enabled = !self.urlField.stringValue.blank;
 }
 
 /* validateURL
@@ -218,7 +218,7 @@
  */
 -(IBAction)authenticationChanged:(id)sender
 {
-	NSString * usernameString = (self.username.stringValue).trim;
+	NSString * usernameString = self.username.stringValue.trim;
 	NSString * passwordString = self.password.stringValue;
 	
 	Database * db = [Database sharedManager];

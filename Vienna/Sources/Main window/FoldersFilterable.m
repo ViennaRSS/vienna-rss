@@ -163,15 +163,15 @@
             parentGroup:(dispatch_group_t)parentGroup {
     dispatch_group_enter(parentGroup);
     dispatch_async(_queue, ^{
-        if (generation != _generation) {
+        if (generation != self->_generation) {
             dispatch_group_leave(parentGroup);
             return;
         }
 
-        NSUInteger count = [_dataSource outlineView:outlineView numberOfChildrenOfItem:item];
+        NSUInteger count = [self->_dataSource outlineView:outlineView numberOfChildrenOfItem:item];
         if (count == 0) {
             if (![predicate evaluateWithObject:item]) {
-                dispatch_async(_queueMap, ^{
+                dispatch_async(self->_queueMap, ^{
                     [array removeObject:item];
                     dispatch_group_leave(parentGroup);
                 });
@@ -188,12 +188,12 @@
         BOOL             hasSpinned = NO;
 
         for (NSUInteger index = 0; index < count; ++index) {
-            id   child      = [_dataSource outlineView:outlineView child:index ofItem:item];
-            BOOL expandable = [_dataSource outlineView:outlineView isItemExpandable:child];
+            id   child      = [self->_dataSource outlineView:outlineView child:index ofItem:item];
+            BOOL expandable = [self->_dataSource outlineView:outlineView isItemExpandable:child];
 
             if (expandable) {
                 if (hasSpinned) {
-                    dispatch_async(_queueMap, ^{
+                    dispatch_async(self->_queueMap, ^{
                         [childArray addObject:child];
                     });
                 }
@@ -213,7 +213,7 @@
             else {
                 if ([predicate evaluateWithObject:child]) {
                     if (hasSpinned) {
-                        dispatch_async(_queueMap, ^{
+                        dispatch_async(self->_queueMap, ^{
                             [childArray addObject:child];
                         });
                     }
@@ -224,14 +224,14 @@
             }
         }
 
-        dispatch_group_notify(childGroup, _queueMap, ^{
+        dispatch_group_notify(childGroup, self->_queueMap, ^{
             if ((childArray.count == 0) && (item != nil)) {
                 if (![predicate evaluateWithObject:item]) {
                     [array removeObject:item];
                 }
             }
             else
-                [table setObject:childArray forKey:item? item: _root];
+                [table setObject:childArray forKey:item? item: self->_root];
 
             dispatch_group_leave(parentGroup);
         });
@@ -249,7 +249,7 @@
                                                          capacity:0];
 
     dispatch_async(_queueMap, ^{
-        _filtered = filtered;
+        self->_filtered = filtered;
     });
 
     [self loadDataForItem:outlineView

@@ -35,9 +35,9 @@
  */
 -(void)setDelegate:(id)delegate
 {
-	if (delegate != [self delegate])
+    if (delegate != self.delegate)
 	{
-		[super setDelegate:delegate];
+        super.delegate = delegate;
 		delegateImplementsShouldDisplayToolTips = ((delegate && [delegate respondsToSelector:@selector(tableViewShouldDisplayCellToolTips:)]) ? YES : NO);
 		delegateImplementsToolTip = ((delegate && [delegate respondsToSelector:@selector(tableView:toolTipForTableColumn:row:)]) ? YES : NO);
 	}
@@ -59,7 +59,7 @@
 -(void)resetCursorRects
 {
 	[self removeAllToolTips];
-	if (delegateImplementsShouldDisplayToolTips && [(id)[self delegate] tableViewShouldDisplayCellToolTips:self])
+    if (delegateImplementsShouldDisplayToolTips && [(id)self.delegate tableViewShouldDisplayCellToolTips:self])
 	{
 		NSRect visibleRect = self.visibleRect;
 		NSIndexSet *columnIndexes = [self columnIndexesInRect:visibleRect];
@@ -88,7 +88,7 @@
 	NSInteger rowIndex = [self rowAtPoint:point];
 	NSInteger columnIndex = [self columnAtPoint:point];
 	NSTableColumn *tableColumn = (columnIndex != -1) ? self.tableColumns[columnIndex] : nil;
-	return (columnIndex != -1) ? [(id)[self delegate] tableView:self toolTipForTableColumn:tableColumn row:rowIndex] : @"";
+    return (columnIndex != -1) ? [(id)self.delegate tableView:self toolTipForTableColumn:tableColumn row:rowIndex] : @"";
 }
 
 /* menuForEvent
@@ -96,8 +96,8 @@
  */
 -(NSMenu *)menuForEvent:(NSEvent *)theEvent
 {
-	if ([self delegate] && [[self delegate] respondsToSelector:@selector(tableView:menuWillAppear:)])
-		[(id)[self delegate] tableView:self menuWillAppear:theEvent];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(tableView:menuWillAppear:)])
+        [(id)self.delegate tableView:self menuWillAppear:theEvent];
 	return self.selectedRow >= 0 ? self.menu : nil;
 }
 

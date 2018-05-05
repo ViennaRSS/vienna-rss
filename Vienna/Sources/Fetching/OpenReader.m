@@ -247,7 +247,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         }];
 
         [clientRequest addDependency:myRequest];
-        [myRequest setQueuePriority:NSOperationQueuePriorityHigh];
+        myRequest.queuePriority = NSOperationQueuePriorityHigh;
         if (clientRequest != nil) {
             [self.clientAuthWaitQueue addObject:clientRequest];
         }
@@ -309,7 +309,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         if (clientRequest != nil) {
             [self.tTokenWaitQueue addObject:clientRequest];
         }
-        [clientRequest setQueuePriority:NSOperationQueuePriorityLow];
+        clientRequest.queuePriority = NSOperationQueuePriorityLow;
         return;
     } else {
         // openReaderStatus ==  missingTToken
@@ -449,11 +449,11 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         if (hostRequiresBackcrawling) {
             // For FeedHQ servers, we need to search articles which are older than last refresh
             @try {
-                double limit = [folderLastUpdateString doubleValue] - 2 * 24 * 3600;
+                double limit = folderLastUpdateString.doubleValue - 2 * 24 * 3600;
                 if (limit < 0.0f) {
                     limit = 0.0;
                 }
-                NSString *startEpoch = [NSNumber numberWithDouble:limit].stringValue;
+                NSString *startEpoch = @(limit).stringValue;
                 itemsLimitation = [NSString stringWithFormat:@"&ot=%@&n=500", startEpoch];
             } @catch (NSException *exception) {
                 itemsLimitation = @"&n=500";
@@ -693,7 +693,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 });
             } else {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [aItem setStatus:[NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed]];
+                    aItem.status = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
                 });
                 [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
                                                                                     object:@(refreshedFolder.itemId)];
@@ -747,7 +747,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
                 [[Database sharedManager] markUnreadArticlesFromFolder:refreshedFolder guidArray:guidArray];
                 // reset starred statuses in cache : we will receive in -StarredRequestDone: the updated list
-                for (Article *article in [refreshedFolder articles]) {
+                for (Article *article in refreshedFolder.articles) {
                     [article markFlagged:NO];
                 }
             } @catch (NSException *exception) {

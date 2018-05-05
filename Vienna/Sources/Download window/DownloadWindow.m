@@ -63,8 +63,8 @@
 	tableColumn.dataCell = imageAndTextCell;	
 
 	// We are the delegate and the datasource
-	[table setDelegate:self];
-	[table setDataSource:self];
+    table.delegate = self;
+    table.dataSource = self;
 	table.doubleAction = @selector(handleDoubleClick:);
 	table.target = self;
 

@@ -79,7 +79,7 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 @property (nonatomic, copy) NSString *lastUpdateString;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *password;
--(NSArray<Article *> *)articles;
+@property (nonatomic, readonly, copy) NSArray<Article *> *articles;
 -(NSArray<Article *> *)articlesWithFilter:(NSString *)filterString;
 @property (nonatomic, readonly) NSInteger itemId;
 @property (nonatomic) NSInteger parentId;

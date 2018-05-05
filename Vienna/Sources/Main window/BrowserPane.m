@@ -170,8 +170,8 @@
  */
 -(NSString *)viewLink
 {
-	if ((self.webPane).mainFrame.dataSource.unreachableURL)
-		return (self.webPane).mainFrame.dataSource.unreachableURL.absoluteString;
+	if (self.webPane.mainFrame.dataSource.unreachableURL)
+		return self.webPane.mainFrame.dataSource.unreachableURL.absoluteString;
 	return self.url.absoluteString;
 }
 
@@ -231,7 +231,7 @@
 /* To perform initial loading when tab first opened
  */
 -(void)checkAndLoad:(NSNotification *)notification {
-	if ((self.webPane).mainFrame.dataSource.request == nil)
+	if (self.webPane.mainFrame.dataSource.request == nil)
 	{
 		[self load];
 	}
@@ -250,13 +250,13 @@
 
 	pageFilename = self.url.path.lastPathComponent.stringByDeletingPathExtension;
 	
-	if ((self.webPane).loading)
+	if (self.webPane.loading)
 	{
 		[self willChangeValueForKey:@"isLoading"];
 		[self.webPane stopLoading:self];
 		[self didChangeValueForKey:@"isLoading"];
 	}
-	[(self.webPane).mainFrame loadRequest:[NSURLRequest requestWithURL:self.url]];
+	[self.webPane.mainFrame loadRequest:[NSURLRequest requestWithURL:self.url]];
 }
 
 /* mouseDidMoveOverElement
@@ -283,7 +283,7 @@
  */
 -(void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
 {
-	if (frame == (self.webPane).mainFrame)
+	if (frame == self.webPane.mainFrame)
 	{
 		[self showRssPageButton:NO];
 		[self setError:nil];
@@ -296,7 +296,7 @@
  */
 -(void)webView:(WebView *)sender didCommitLoadForFrame:(WebFrame *)frame
 {
-	if (frame == (self.webPane).mainFrame)
+	if (frame == self.webPane.mainFrame)
 	{
 		if (!isLoading)
 		{
@@ -335,10 +335,10 @@
  */
 -(void)webView:(WebView *)sender didFailProvisionalLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
 {
-	if (frame == (self.webPane).mainFrame)
+	if (frame == self.webPane.mainFrame)
 	{
 		// Was this a feed redirect? If so, this isn't an error:
-		if (!(self.webPane).feedRedirect && !(self.webPane).download)
+		if (!self.webPane.feedRedirect && !self.webPane.download)
 		{
 			[self setError:error];
 			
@@ -390,7 +390,7 @@
  */
 -(void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
 {
-	if (frame == (self.webPane).mainFrame)
+	if (frame == self.webPane.mainFrame)
 	{
 		// Not really errors. Load is cancelled or a plugin is grabbing the URL and will handle it by itself.
 		if (!([error.domain isEqualToString:WebKitErrorDomain] && (error.code == NSURLErrorCancelled || error.code == WebKitErrorPlugInWillHandleLoad)))
@@ -421,7 +421,7 @@
  */
 -(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
-	if (frame == (self.webPane).mainFrame)
+	if (frame == self.webPane.mainFrame)
 	{
 		// Once the frame is loaded, trawl the source for possible links to RSS
 		// pages.
@@ -442,7 +442,7 @@
  */
 -(void)webView:(WebView *)sender didReceiveTitle:(NSString *)title forFrame:(WebFrame *)frame
 {
-	if (frame == (self.webPane).mainFrame)
+	if (frame == self.webPane.mainFrame)
 	{
 		[self.browser setTabItemViewTitle:self title:title];
 		self.viewTitle = title;
@@ -454,7 +454,7 @@
  */
 -(void)webView:(WebView *)sender didReceiveIcon:(NSImage *)image forFrame:(WebFrame *)frame
 {
-	if (frame == (self.webPane).mainFrame)
+	if (frame == self.webPane.mainFrame)
 	{
 		image.size = NSMakeSize(14, 14);
 		iconImage.image = image;
@@ -614,7 +614,7 @@
  */
 -(BOOL)canGoForward
 {
-	return (self.webPane).canGoForward;
+	return self.webPane.canGoForward;
 }
 
 /* canGoBack
@@ -622,7 +622,7 @@
  */
 -(BOOL)canGoBack
 {
-	return (self.webPane).canGoBack;
+	return self.webPane.canGoBack;
 }
 
 /* handleGoForward
@@ -678,7 +678,7 @@
  */
 -(IBAction)handleReload:(id)sender
 {
-	if ((self.webPane).mainFrame.dataSource != nil)
+	if (self.webPane.mainFrame.dataSource != nil)
 		[self.webPane reload:self];
 	else
 		[self handleAddress:self];
@@ -696,7 +696,7 @@
 	[self.webPane setUIDelegate:nil];
 	[self.webPane stopLoading:self];
 	[self didChangeValueForKey:@"isLoading"];
-	[(self.webPane).mainFrame loadHTMLString:@"" baseURL:nil];
+	[self.webPane.mainFrame loadHTMLString:@"" baseURL:nil];
 }
 
 /* handleRSSPage
