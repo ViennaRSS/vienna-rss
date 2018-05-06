@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
-  <file original="Interfaces/Base.lproj/ActivityViewer.xib" source-language="en" datatype="plaintext" target-language="ru">
+  <file original="Vienna Tests/Resources/Base.lproj/InfoPlist.strings" datatype="plaintext" source-language="en" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+    </header>
+    <body>
+      
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/ActivityViewer.xib" datatype="plaintext" source-language="en" target-language="ru">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="8.title">
@@ -22,9 +30,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/AdvancedPreferencesView.xib" source-language="en" datatype="plaintext" target-language="ru">
+  <file original="Vienna/Interfaces/Base.lproj/AdvancedPreferencesView.xib" datatype="plaintext" source-language="en" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="2GQ-cu-fbh.title">
@@ -59,9 +67,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/AppearancePreferencesView.xib" source-language="en" datatype="plaintext" target-language="ru">
+  <file original="Vienna/Interfaces/Base.lproj/AppearancePreferencesView.xib" datatype="plaintext" source-language="en" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="71S-pg-AjX.title">
@@ -101,9 +109,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/Downloads.xib" source-language="en" datatype="plaintext" target-language="ru">
+  <file original="Vienna/Interfaces/Base.lproj/Downloads.xib" datatype="plaintext" source-language="en" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="5.title">
@@ -118,9 +126,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/EmptyTrashWarning.xib" source-language="en" datatype="plaintext" target-language="ru">
+  <file original="Vienna/Interfaces/Base.lproj/EmptyTrashWarning.xib" datatype="plaintext" source-language="en" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="17.title">
@@ -145,9 +153,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/ExportAccessoryViewController.xib" source-language="en" datatype="plaintext" target-language="ru">
+  <file original="Vienna/Interfaces/Base.lproj/ExportAccessoryViewController.xib" datatype="plaintext" source-language="en" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="6rj-zb-zOa.title">
@@ -167,9 +175,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/FeedCredentials.xib" source-language="en" datatype="plaintext" target-language="ru">
+  <file original="Vienna/Interfaces/Base.lproj/FeedCredentials.xib" datatype="plaintext" source-language="en" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="32.title">
@@ -204,9 +212,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/GeneralPreferencesView.xib" source-language="en" datatype="plaintext" target-language="ru">
+  <file original="Vienna/Interfaces/Base.lproj/GeneralPreferencesView.xib" datatype="plaintext" source-language="en" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="1Ll-uG-QWh.title">
@@ -243,9 +251,6 @@
         <source>Other…</source>
         <note>Class = "NSMenuItem"; title = "Other…"; ObjectID = "FiK-E7-RnG";</note>
         <target xml:lang="ru" state="translated">Иное…</target>
-        <alt-trans>
-          <target xml:lang="ru">Иное...</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="GnT-xT-rAZ.title">
         <source>Check for newer versions of Vienna on start up</source>
@@ -349,9 +354,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/GroupFolder.xib" source-language="en" datatype="plaintext" target-language="ru">
+  <file original="Vienna/Interfaces/Base.lproj/GroupFolder.xib" datatype="plaintext" source-language="en" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="32.title">
@@ -376,9 +381,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/InfoWindow.xib" source-language="en" datatype="plaintext" target-language="ru">
+  <file original="Vienna/Interfaces/Base.lproj/InfoWindow.xib" datatype="plaintext" source-language="en" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="105.title">
@@ -453,9 +458,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/MainMenu.xib" source-language="en" datatype="plaintext" target-language="ru">
+  <file original="Vienna/Interfaces/Base.lproj/MainMenu.xib" datatype="plaintext" source-language="en" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="2S3-dG-ZPg.title">
@@ -1087,17 +1092,11 @@
         <source>Speech</source>
         <note>Class = "NSMenu"; title = "Speech"; ObjectID = "G6k-0L-moc";</note>
         <target xml:lang="ru" state="translated">Озвучивание</target>
-        <alt-trans>
-          <target xml:lang="ru">Голосовой ввод</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="JXn-SB-3t2.title">
         <source>Speech</source>
         <note>Class = "NSMenuItem"; title = "Speech"; ObjectID = "JXn-SB-3t2";</note>
         <target xml:lang="ru" state="translated">Озвучивание</target>
-        <alt-trans>
-          <target xml:lang="ru">Голосовой ввод</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="MHF-D4-pRN.title">
         <source>Make Upper Case</source>
@@ -1108,6 +1107,11 @@
         <source>Substitutions</source>
         <note>Class = "NSMenu"; title = "Substitutions"; ObjectID = "QEb-Bm-CPN";</note>
         <target xml:lang="ru" state="translated">Замены</target>
+      </trans-unit>
+      <trans-unit id="Rs9-r3-soc.title">
+        <source>Article List</source>
+        <note>Class = "NSMenuItem"; title = "Article List"; ObjectID = "Rs9-r3-soc";</note>
+        <target xml:lang="ru" state="translated">Список статей</target>
       </trans-unit>
       <trans-unit id="RtQ-eP-bfk.title">
         <source>Smart Dashes</source>
@@ -1133,9 +1137,6 @@
         <source>Start Speaking</source>
         <note>Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "cK9-Df-xA3";</note>
         <target xml:lang="ru" state="translated">Начать озвучивание</target>
-        <alt-trans>
-          <target xml:lang="ru">Начать говорить</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="eVb-Qt-XJb.title">
         <source>Substitutions</source>
@@ -1239,9 +1240,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/MainWindowController.xib" source-language="en" datatype="plaintext" target-language="ru">
+  <file original="Vienna/Interfaces/Base.lproj/MainWindowController.xib" datatype="plaintext" source-language="en" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="3tM-J3-kmf.title">
@@ -1299,11 +1300,6 @@
         <note>Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T";</note>
         <target xml:lang="ru" state="translated">Отправить ссылку на текущую статью или сайт</target>
       </trans-unit>
-      <trans-unit id="21.title">
-        <source>Vienna</source>
-        <note>Class = "NSWindow"; title = "Vienna"; ObjectID = "21";</note>
-        <target xml:lang="ru" state="translated">Vienna</target>
-      </trans-unit>
       <trans-unit id="1304.ibShadowedToolTip">
         <source>Filter displayed articles by matching text</source>
         <note>Class = "NSSearchField"; ibShadowedToolTip = "Filter displayed articles by matching text"; ObjectID = "1304";</note>
@@ -1348,9 +1344,6 @@
         <source>Subscribe to a feed or add a folder or smart folder.</source>
         <note>Class = "NSToolbarItem"; toolTip = "Subscribe to a feed or add a folder or smart folder."; ObjectID = "CPA-Ha-aj1";</note>
         <target xml:lang="ru" state="translated">Подписаться на канал или добавить папку или смарт-папку.</target>
-        <alt-trans>
-          <target xml:lang="ru">Подписаться на канал или добавить папку или "умную" папку.</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Gyz-dq-ewv.label">
         <source>All Read</source>
@@ -1569,9 +1562,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/RSSFeed.xib" source-language="en" datatype="plaintext" target-language="ru">
+  <file original="Vienna/Interfaces/Base.lproj/RSSFeed.xib" datatype="plaintext" source-language="en" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="102.title">
@@ -1602,7 +1595,7 @@
       <trans-unit id="110.title">
         <source>URL:</source>
         <note>Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110";</note>
-        <target xml:lang="ru" state="translated">URL:</target>
+        <target xml:lang="ru" state="translated">URL-адрес:</target>
       </trans-unit>
       <trans-unit id="111.title">
         <source>Save</source>
@@ -1626,9 +1619,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/SearchFolder.xib" source-language="en" datatype="plaintext" target-language="ru">
+  <file original="Vienna/Interfaces/Base.lproj/SearchFolder.xib" datatype="plaintext" source-language="en" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="82.title">
@@ -1668,9 +1661,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/SyncingPreferencesView.xib" source-language="en" datatype="plaintext" target-language="ru">
+  <file original="Vienna/Interfaces/Base.lproj/SyncingPreferencesView.xib" datatype="plaintext" source-language="en" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="Ar5-Qc-YTe.ibExternalAccessibilityDescription">
@@ -1725,9 +1718,18 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Resources/Localizable.strings" source-language="en" datatype="plaintext" target-language="ru">
+  <file original="Vienna/Resources/Base.lproj/InfoPlist.strings" datatype="plaintext" source-language="en" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+    </header>
+    <body>
+      
+      
+    </body>
+  </file>
+  <file original="Vienna/Resources/Base.lproj/Localizable.strings" datatype="plaintext" source-language="en" target-language="ru">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="%@ Info">
@@ -1831,12 +1833,12 @@
         <target xml:lang="ru" state="translated">Через неделю</target>
       </trans-unit>
       <trans-unit id="Already subscribed body">
-        <source>Already subscribed body</source>
+        <source>You are already subscribed to that feed</source>
         <note>Already subscribed body</note>
         <target xml:lang="ru" state="translated">Вы уже подписаны на данный канал</target>
       </trans-unit>
       <trans-unit id="Already subscribed title">
-        <source>Already subscribed title</source>
+        <source>Error</source>
         <note>Already subscribed title</note>
         <target xml:lang="ru" state="translated">Ошибка</target>
       </trans-unit>
@@ -1882,42 +1884,42 @@
         <target xml:lang="ru" state="translated">Отмена</target>
       </trans-unit>
       <trans-unit id="Cannot create database folder text">
-        <source>Cannot create database folder text</source>
+        <source>Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Vienna попыталась создать папку  "%@", но произошла ошибка. Проверьте разрешения для папок в указанном пути.</target>
       </trans-unit>
       <trans-unit id="Cannot create database folder title">
-        <source>Cannot create database folder title</source>
+        <source>Sorry, but Vienna was unable to create the database folder</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Извините, но Vienna не смогла создать папку базы данных</target>
       </trans-unit>
       <trans-unit id="Cannot create folder body">
-        <source>Cannot create folder body</source>
+        <source>The \"%@\" folder cannot be created.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Ошибка создания папки "%@".</target>
       </trans-unit>
       <trans-unit id="Cannot create folder title">
-        <source>Cannot create folder title</source>
+        <source>Cannot create folder</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Ошибка</target>
       </trans-unit>
       <trans-unit id="Cannot open database text">
-        <source>Cannot open database text</source>
+        <source>The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Файл базы данных (%@) не может быть открыт. Он может быть поврежден или недоступен. Пожалуйста, удалите или переименуйте файл базы данных и перезапустите Vienna.</target>
       </trans-unit>
       <trans-unit id="Cannot open database title">
-        <source>Cannot open database title</source>
+        <source>Sorry but Vienna was unable to open the database</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Извините, но Vienna не смогла открыть базу данных</target>
       </trans-unit>
       <trans-unit id="Cannot open export file message">
-        <source>Cannot open export file message</source>
+        <source>Cannot create export output file</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Невозможно создать экспортируемый файл.</target>
       </trans-unit>
       <trans-unit id="Cannot open export file message text">
-        <source>Cannot open export file message text</source>
+        <source>The specified export output file could not be created. Check that it is not locked and no other application is using it.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Указанный экспортируемый файл не может быть создан. Убедитесь, что он не заблокирован и не используется другим приложением.</target>
       </trans-unit>
@@ -1927,7 +1929,7 @@
         <target xml:lang="ru" state="translated">Невозможно переименовать папку</target>
       </trans-unit>
       <trans-unit id="Clear">
-        <source>Clear</source>
+        <source>Clear Recent Searches</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Очистить историю поиска</target>
       </trans-unit>
@@ -1967,7 +1969,7 @@
         <target xml:lang="ru" state="translated">Копировать ссылку</target>
       </trans-unit>
       <trans-unit id="Credentials Prompt">
-        <source>Credentials Prompt</source>
+        <source>The subscription for \"%@\" requires a user name and password for access.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Для доступа к подписке  "%@" требуется имя пользователя и пароль.</target>
       </trans-unit>
@@ -1998,27 +2000,24 @@
         <target xml:lang="ru" state="translated">Удалить RSS-ленту из Open Reader</target>
       </trans-unit>
       <trans-unit id="Delete Open Reader RSS feed text">
-        <source>Delete Open Reader RSS feed text</source>
+        <source>Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Отписывание от RSS-ленты из Open Reader, приведет к удалению статей, сохраненных локально.</target>
       </trans-unit>
       <trans-unit id="Delete RSS feed">
-        <source>Delete RSS feed</source>
+        <source>Delete subscription</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Удалить подписку</target>
       </trans-unit>
       <trans-unit id="Delete RSS feed text">
-        <source>Delete RSS feed text</source>
+        <source>Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Вы уверены, что хотите отписаться от "%@"? Это удалит сохраненные статьи канала.</target>
       </trans-unit>
       <trans-unit id="Delete folder status">
-        <source>Delete folder status</source>
+        <source>Deleting folder \"%@\"…</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Удаляю папку "%@"…</target>
-        <alt-trans>
-          <target xml:lang="ru">Удаляю папку "%@"...</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Delete group folder">
         <source>Delete group folder</source>
@@ -2026,7 +2025,7 @@
         <target xml:lang="ru" state="translated">Удалить группу</target>
       </trans-unit>
       <trans-unit id="Delete group folder text">
-        <source>Delete group folder text</source>
+        <source>Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Вы уверены, что хотите удалить группу "%@" и все ее папки? Данное действие невозможно отменить.</target>
       </trans-unit>
@@ -2036,17 +2035,17 @@
         <target xml:lang="ru" state="translated">Удалить несколько папок</target>
       </trans-unit>
       <trans-unit id="Delete multiple folders text">
-        <source>Delete multiple folders text</source>
+        <source>Are you sure you want to delete all %d selected folders? This operation cannot be undone.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Вы уверены, что хотите удалить все  %d выбранные папки? Это действие не может быть отменено.</target>
       </trans-unit>
       <trans-unit id="Delete selected message">
-        <source>Delete selected message</source>
+        <source>Are you sure you want to permanently delete the selected articles?</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Вы уверены, что хотите безвозвратно удалить выбранные статьи?</target>
       </trans-unit>
       <trans-unit id="Delete selected message text">
-        <source>Delete selected message text</source>
+        <source>This operation cannot be undone.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Это действие не может быть отменено.</target>
       </trans-unit>
@@ -2056,7 +2055,7 @@
         <target xml:lang="ru" state="translated">Удалить Смарт-папку</target>
       </trans-unit>
       <trans-unit id="Delete smart folder text">
-        <source>Delete smart folder text</source>
+        <source>Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Вы уверены, что хотите удалить Смарт-папку  "%@"? Это не приведет к удалению соответствующих статей.</target>
       </trans-unit>
@@ -2106,12 +2105,12 @@
         <target xml:lang="ru" state="translated">Ошибка</target>
       </trans-unit>
       <trans-unit id="Downloads Running">
-        <source>Downloads Running</source>
+        <source>One or more downloads are in progress</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Одна или более загрузок еще не завершена</target>
       </trans-unit>
       <trans-unit id="Downloads Running text">
-        <source>Downloads Running text</source>
+        <source>If you quit Vienna now, all downloads will stop.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Если вы сейчас выйдете из Vienna, все загрузки будут остановлены.</target>
       </trans-unit>
@@ -2126,22 +2125,19 @@
         <target xml:lang="ru" state="translated">Очистить</target>
       </trans-unit>
       <trans-unit id="Empty Trash message">
-        <source>Empty Trash message</source>
+        <source>Are you sure you want to delete the messages in the Trash folder permanently?</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Удалить все сообщения в Корзине?</target>
       </trans-unit>
       <trans-unit id="Empty Trash message text">
-        <source>Empty Trash message text</source>
+        <source>You cannot undo this action</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Данное действие невозможно отменить</target>
       </trans-unit>
       <trans-unit id="Enclosure">
-        <source>Enclosure</source>
+        <source>Enclosure URL</source>
         <note>Data field name (URL) visible in menu/article list</note>
         <target xml:lang="ru" state="translated">URL вложения</target>
-        <alt-trans>
-          <target xml:lang="ru">Вложения</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Enter the URL here">
         <source>Enter the URL here</source>
@@ -2154,12 +2150,12 @@
         <target xml:lang="ru" state="translated">Ошибка</target>
       </trans-unit>
       <trans-unit id="Error importing subscriptions body">
-        <source>Error importing subscriptions body</source>
+        <source>Cannot import the specified file. The file contents are not valid OPML XML format.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Невозможно импортировать указанный файл. Содержимое файла не является корректными данными формата OPML XML.</target>
       </trans-unit>
       <trans-unit id="Error importing subscriptions title">
-        <source>Error importing subscriptions title</source>
+        <source>Import error</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Ошибка импортирования</target>
       </trans-unit>
@@ -2274,7 +2270,7 @@
         <target xml:lang="ru" state="translated">Сервер передал HTTP код %d</target>
       </trans-unit>
       <trans-unit id="HasEnclosure">
-        <source>HasEnclosure</source>
+        <source>Enclosure</source>
         <note>Data field name (Y/N) visible in menu/smart folder definition</note>
         <target xml:lang="ru" state="translated">Вложения</target>
       </trans-unit>
@@ -2314,12 +2310,12 @@
         <target xml:lang="ru" state="translated">Бесконечное перенаправление URL по адресу %@</target>
       </trans-unit>
       <trans-unit id="Invalid style body">
-        <source>Invalid style body</source>
+        <source>The Default style will be used instead.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Будет использован стиль по умолчанию.</target>
       </trans-unit>
       <trans-unit id="Invalid style title">
-        <source>Invalid style title</source>
+        <source>The style %@ appears to be missing or corrupted</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Стиль %@ отсутствует или поврежден</target>
       </trans-unit>
@@ -2343,18 +2339,13 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Загрузка</target>
       </trans-unit>
-      <trans-unit id="Loading…">
-        <source>Loading…</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="ru" state="translated">Загрузка…</target>
-      </trans-unit>
       <trans-unit id="Locate Text">
-        <source>Locate Text</source>
+        <source>A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Новая база данных Vienna не может быть создана в "%@" из-за того, что папка, возможно, находится на удаленном сервере, а текущая версия Vienna не может работать с удаленными базами данных. Пожалуйста, выберите папку на своем компьютере.</target>
       </trans-unit>
       <trans-unit id="Locate Title">
-        <source>Locate Title</source>
+        <source>Cannot create the Vienna database</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Невозможно создать базу данных Vienna</target>
       </trans-unit>
@@ -2429,17 +2420,17 @@
         <target xml:lang="ru" state="translated">Новые статьи</target>
       </trans-unit>
       <trans-unit id="New style body">
-        <source>New style body</source>
+        <source>The style \"%@\" has been installed to your Styles folder and added to the Style menu.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Стиль "%@" был установлен в папку стилей и добавлен в меню Стиль.</target>
       </trans-unit>
       <trans-unit id="New style title">
-        <source>New style title</source>
+        <source>Vienna has installed a new style</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Vienna установила новый стиль</target>
       </trans-unit>
       <trans-unit id="New unread articles retrieved">
-        <source>New unread articles retrieved</source>
+        <source>%d new unread articles retrieved</source>
         <note>Notification body</note>
         <target xml:lang="ru" state="translated">Получено %d новых статей</target>
       </trans-unit>
@@ -2519,7 +2510,7 @@
         <target xml:lang="ru" state="translated">В авторизации в Open Reader отказано</target>
       </trans-unit>
       <trans-unit id="Open Reader Authentication Failed text">
-        <source>Open Reader Authentication Failed text</source>
+        <source>Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Убедитесь, что в настройках Vienna указаны правильные имя пользователя и пароль для доступа к серверу Open Reader.
 Также проверьте сетевое соединение.</target>
@@ -2586,12 +2577,12 @@
         <target xml:lang="ru" state="translated">Иконка RSS не найдена!</target>
       </trans-unit>
       <trans-unit id="RSS Subscription Export Title">
-        <source>RSS Subscription Export Title</source>
+        <source>Export Completed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Экспортирование завершено</target>
       </trans-unit>
       <trans-unit id="RSS Subscription Import Title">
-        <source>RSS Subscription Import Title</source>
+        <source>Import Completed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Импортирование завершено</target>
       </trans-unit>
@@ -2661,7 +2652,7 @@
         <target xml:lang="ru" state="translated">Восстановить статью</target>
       </trans-unit>
       <trans-unit id="Resubscribe">
-        <source>Resubscribe</source>
+        <source>Resubscribe to Feed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Возобновить подписку</target>
       </trans-unit>
@@ -2706,7 +2697,7 @@
         <target xml:lang="ru" state="translated">Поиск по текущей веб-странице</target>
       </trans-unit>
       <trans-unit id="Search in %@">
-        <source>Search in %@</source>
+        <source>Filter in %@</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Поиск в %@</target>
       </trans-unit>
@@ -2786,7 +2777,7 @@
         <target xml:lang="ru" state="translated">Сегодня</target>
       </trans-unit>
       <trans-unit id="Today's Articles">
-        <source>Today's Articles</source>
+        <source>Today’s Articles</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Сегодняшние статьи</target>
       </trans-unit>
@@ -2811,17 +2802,17 @@
         <target xml:lang="ru" state="translated">Непрочитанные статьи</target>
       </trans-unit>
       <trans-unit id="Unrecognised database format text">
-        <source>Unrecognised database format text</source>
+        <source>The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Формат базы данных (%@) не поддерживается текущей версией Vienna. Удалите или переименуйте этот файл и перезапустите программу.</target>
       </trans-unit>
       <trans-unit id="Unrecognised database format title">
-        <source>Unrecognised database format title</source>
+        <source>The database file format has changed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Формат базы данных изменился</target>
       </trans-unit>
       <trans-unit id="Unsubscribe">
-        <source>Unsubscribe</source>
+        <source>Unsubscribe from Feed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Отписаться от ленты</target>
       </trans-unit>
@@ -2831,27 +2822,27 @@
         <target xml:lang="ru" state="translated">Обновить базу данных</target>
       </trans-unit>
       <trans-unit id="Vienna cannot open the file body">
-        <source>Vienna cannot open the file body</source>
+        <source>Vienna cannot open the file \"%@\" because it moved since you downloaded it.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Vienna не может открыть файл "%@" потому что он был перемещен после загрузки.</target>
       </trans-unit>
       <trans-unit id="Vienna cannot open the file title">
-        <source>Vienna cannot open the file title</source>
+        <source>Vienna cannot open the file.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Vienna не может открыть этот файл.</target>
       </trans-unit>
       <trans-unit id="Vienna cannot show the file body">
-        <source>Vienna cannot show the file body</source>
+        <source>Vienna cannot show the file \"%@\" because it moved since you downloaded it.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Vienna не может отобразить файл "%@" потому что он был перемещен после загрузки.</target>
       </trans-unit>
       <trans-unit id="Vienna cannot show the file title">
-        <source>Vienna cannot show the file title</source>
+        <source>Vienna cannot show the file.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Vienna не может отобразить файл.</target>
       </trans-unit>
       <trans-unit id="Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.">
-        <source>Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.</source>
+        <source>Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Vienna необходимо обновить свою базу данных до последней версии. Это может занять минуту или около того. Приносим свои извинения за доставленные неудобства.</target>
       </trans-unit>
@@ -2937,23 +2928,71 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Resources/Vienna-Info.plist" source-language="en" datatype="plaintext" target-language="ru">
+  <file original="Vienna/Resources/Base.lproj/Localizable.stringsdict" datatype="plaintext" source-language="en" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
-      <trans-unit id="NSHumanReadableCopyright">
-        <source>© 2004–2018 The Vienna RSS Project</source>
-        <target xml:lang="ru" state="translated">© 2004–2018 The Vienna RSS Project</target>
+      <trans-unit id="/%d new articles retrieved:dict/articles:dict/one:dict/:string">
+        <source>%d new article retrieved</source>
+        <note/>
+        <target xml:lang="ru" state="translated">Получено %d новых статей</target>
       </trans-unit>
-    </body>
-  </file>
-  <file original="Vienna/Vienna Help/Info.plist" source-language="en" datatype="plaintext" target-language="ru">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
-    </header>
-    <body>
-      
+      <trans-unit id="/%d new articles retrieved:dict/articles:dict/other:dict/:string">
+        <source>%d new articles retrieved</source>
+        <note/>
+        <target xml:lang="ru" state="translated">Получено %d новых статей</target>
+      </trans-unit>
+      <trans-unit id="/%d subscriptions successfully exported:dict/subscriptions:dict/one:dict/:string">
+        <source>%d subscription successfully exported</source>
+        <note/>
+        <target xml:lang="ru" state="translated">Успешно экспортировано %d каналов</target>
+      </trans-unit>
+      <trans-unit id="/%d subscriptions successfully exported:dict/subscriptions:dict/other:dict/:string">
+        <source>%d subscriptions successfully exported</source>
+        <note/>
+        <target xml:lang="ru" state="translated">Успешно экспортировано %d каналов</target>
+      </trans-unit>
+      <trans-unit id="/%d subscriptions successfully imported:dict/subscriptions:dict/one:dict/:string">
+        <source>%d subscription successfully imported</source>
+        <note/>
+        <target xml:lang="ru" state="translated">Успешно импортировано %d каналов</target>
+      </trans-unit>
+      <trans-unit id="/%d subscriptions successfully imported:dict/subscriptions:dict/other:dict/:string">
+        <source>%d subscriptions successfully imported</source>
+        <note/>
+        <target xml:lang="ru" state="translated">Успешно импортировано %d каналов</target>
+      </trans-unit>
+      <trans-unit id="/%d unread articles:dict/articles:dict/one:dict/:string">
+        <source>%d unread article</source>
+        <note/>
+        <target xml:lang="ru" state="translated">%d непрочитанных статей</target>
+      </trans-unit>
+      <trans-unit id="/%d unread articles:dict/articles:dict/other:dict/:string">
+        <source>%d unread articles</source>
+        <note/>
+        <target xml:lang="ru" state="translated">%d непрочитанных статей</target>
+      </trans-unit>
+      <trans-unit id="/%u articles:dict/articles:dict/one:dict/:string">
+        <source>%u article</source>
+        <note/>
+        <target xml:lang="ru" state="translated">%u статей</target>
+      </trans-unit>
+      <trans-unit id="/%u articles:dict/articles:dict/other:dict/:string">
+        <source>%u articles</source>
+        <note/>
+        <target xml:lang="ru" state="translated">%u статей</target>
+      </trans-unit>
+      <trans-unit id="/%u unread:dict/unread:dict/one:dict/:string">
+        <source>%u unread</source>
+        <note/>
+        <target xml:lang="ru" state="translated">%u непрочитано</target>
+      </trans-unit>
+      <trans-unit id="/%u unread:dict/unread:dict/other:dict/:string">
+        <source>%u unread</source>
+        <note/>
+        <target xml:lang="ru" state="translated">%u непрочитано</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

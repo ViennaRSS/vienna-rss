@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
-  <file original="Interfaces/Base.lproj/ActivityViewer.xib" source-language="en" datatype="plaintext" target-language="ko">
+  <file original="Vienna Tests/Resources/Base.lproj/InfoPlist.strings" datatype="plaintext" source-language="en" target-language="ko">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+    </header>
+    <body>
+      
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/ActivityViewer.xib" datatype="plaintext" source-language="en" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="8.title">
@@ -22,9 +30,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/AdvancedPreferencesView.xib" source-language="en" datatype="plaintext" target-language="ko">
+  <file original="Vienna/Interfaces/Base.lproj/AdvancedPreferencesView.xib" datatype="plaintext" source-language="en" target-language="ko">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="GaX-8c-QaN.title">
@@ -39,9 +47,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/AppearancePreferencesView.xib" source-language="en" datatype="plaintext" target-language="ko">
+  <file original="Vienna/Interfaces/Base.lproj/AppearancePreferencesView.xib" datatype="plaintext" source-language="en" target-language="ko">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="71S-pg-AjX.title">
@@ -81,9 +89,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/Downloads.xib" source-language="en" datatype="plaintext" target-language="ko">
+  <file original="Vienna/Interfaces/Base.lproj/Downloads.xib" datatype="plaintext" source-language="en" target-language="ko">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="5.title">
@@ -98,9 +106,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/EmptyTrashWarning.xib" source-language="en" datatype="plaintext" target-language="ko">
+  <file original="Vienna/Interfaces/Base.lproj/EmptyTrashWarning.xib" datatype="plaintext" source-language="en" target-language="ko">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="17.title">
@@ -110,9 +118,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/ExportAccessoryViewController.xib" source-language="en" datatype="plaintext" target-language="ko">
+  <file original="Vienna/Interfaces/Base.lproj/ExportAccessoryViewController.xib" datatype="plaintext" source-language="en" target-language="ko">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="6rj-zb-zOa.title">
@@ -132,9 +140,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/FeedCredentials.xib" source-language="en" datatype="plaintext" target-language="ko">
+  <file original="Vienna/Interfaces/Base.lproj/FeedCredentials.xib" datatype="plaintext" source-language="en" target-language="ko">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="32.title">
@@ -169,9 +177,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/GeneralPreferencesView.xib" source-language="en" datatype="plaintext" target-language="ko">
+  <file original="Vienna/Interfaces/Base.lproj/GeneralPreferencesView.xib" datatype="plaintext" source-language="en" target-language="ko">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="1Ll-uG-QWh.title">
@@ -208,9 +216,6 @@
         <source>Other…</source>
         <note>Class = "NSMenuItem"; title = "Other…"; ObjectID = "FiK-E7-RnG";</note>
         <target xml:lang="ko" state="translated">선택…</target>
-        <alt-trans>
-          <target xml:lang="ko">선택...</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="GnT-xT-rAZ.title">
         <source>Check for newer versions of Vienna on start up</source>
@@ -279,9 +284,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/GroupFolder.xib" source-language="en" datatype="plaintext" target-language="ko">
+  <file original="Vienna/Interfaces/Base.lproj/GroupFolder.xib" datatype="plaintext" source-language="en" target-language="ko">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="32.title">
@@ -306,9 +311,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/InfoWindow.xib" source-language="en" datatype="plaintext" target-language="ko">
+  <file original="Vienna/Interfaces/Base.lproj/InfoWindow.xib" datatype="plaintext" source-language="en" target-language="ko">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="105.title">
@@ -378,9 +383,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/MainMenu.xib" source-language="en" datatype="plaintext" target-language="ko">
+  <file original="Vienna/Interfaces/Base.lproj/MainMenu.xib" datatype="plaintext" source-language="en" target-language="ko">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="2S3-dG-ZPg.title">
@@ -935,9 +940,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/MainWindowController.xib" source-language="en" datatype="plaintext" target-language="ko">
+  <file original="Vienna/Interfaces/Base.lproj/MainWindowController.xib" datatype="plaintext" source-language="en" target-language="ko">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="3tM-J3-kmf.title">
@@ -955,11 +960,6 @@
         <note>Class = "NSToolbarItem"; paletteLabel = "Empty Trash"; ObjectID = "4c1-NR-ofo";</note>
         <target xml:lang="ko" state="translated">휴지통 비우기</target>
       </trans-unit>
-      <trans-unit id="4c1-NR-ofo.toolTip">
-        <source>Delete all articles in the trash</source>
-        <note>Class = "NSToolbarItem"; toolTip = "Delete all articles in the trash"; ObjectID = "4c1-NR-ofo";</note>
-        <target xml:lang="ko" state="translated">Delete all articles in the trash</target>
-      </trans-unit>
       <trans-unit id="7iy-IN-8oG.label">
         <source>Get Info</source>
         <note>Class = "NSToolbarItem"; label = "Get Info"; ObjectID = "7iy-IN-8oG";</note>
@@ -969,11 +969,6 @@
         <source>Get Info</source>
         <note>Class = "NSToolbarItem"; paletteLabel = "Get Info"; ObjectID = "7iy-IN-8oG";</note>
         <target xml:lang="ko" state="translated">정보 입수</target>
-      </trans-unit>
-      <trans-unit id="7iy-IN-8oG.toolTip">
-        <source>See information about the selected subscription</source>
-        <note>Class = "NSToolbarItem"; toolTip = "See information about the selected subscription"; ObjectID = "7iy-IN-8oG";</note>
-        <target xml:lang="ko" state="translated">See information about the selected subscription</target>
       </trans-unit>
       <trans-unit id="8LJ-RZ-pfu.title">
         <source>Flagged</source>
@@ -989,11 +984,6 @@
         <source>Send Link</source>
         <note>Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T";</note>
         <target xml:lang="ko" state="translated">링크 보내기</target>
-      </trans-unit>
-      <trans-unit id="10h-xf-C6T.toolTip">
-        <source>Email a link to the current article or website</source>
-        <note>Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T";</note>
-        <target xml:lang="ko" state="translated">Email a link to the current article or website</target>
       </trans-unit>
       <trans-unit id="1377.title">
         <source>Filter by:</source>
@@ -1014,16 +1004,6 @@
         <source>More Styles…</source>
         <note>Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm";</note>
         <target xml:lang="ko" state="translated">스타일 추가…</target>
-      </trans-unit>
-      <trans-unit id="Nmd-zx-Dys.label">
-        <source>Refresh</source>
-        <note>Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys";</note>
-        <target xml:lang="ko" state="translated">Refresh</target>
-      </trans-unit>
-      <trans-unit id="Nmd-zx-Dys.paletteLabel">
-        <source>Refresh</source>
-        <note>Class = "NSToolbarItem"; paletteLabel = "Refresh"; ObjectID = "Nmd-zx-Dys";</note>
-        <target xml:lang="ko" state="translated">Refresh</target>
       </trans-unit>
       <trans-unit id="Nmd-zx-Dys.toolTip">
         <source>Refresh all your subscriptions</source>
@@ -1055,16 +1035,6 @@
         <note>Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
         <target xml:lang="ko" state="translated">구독 생략</target>
       </trans-unit>
-      <trans-unit id="TSQ-UW-4gU.label">
-        <source>Action</source>
-        <note>Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU";</note>
-        <target xml:lang="ko" state="translated">Action</target>
-      </trans-unit>
-      <trans-unit id="TSQ-UW-4gU.paletteLabel">
-        <source>Action</source>
-        <note>Class = "NSToolbarItem"; paletteLabel = "Action"; ObjectID = "TSQ-UW-4gU";</note>
-        <target xml:lang="ko" state="translated">Action</target>
-      </trans-unit>
       <trans-unit id="TSQ-UW-4gU.toolTip">
         <source>Additional actions for the selected folder</source>
         <note>Class = "NSToolbarItem"; toolTip = "Additional actions for the selected folder"; ObjectID = "TSQ-UW-4gU";</note>
@@ -1094,11 +1064,6 @@
         <source>Style</source>
         <note>Class = "NSToolbarItem"; paletteLabel = "Style"; ObjectID = "azL-oz-mJL";</note>
         <target xml:lang="ko" state="translated">스타일</target>
-      </trans-unit>
-      <trans-unit id="azL-oz-mJL.toolTip">
-        <source>Display the list of available styles</source>
-        <note>Class = "NSToolbarItem"; toolTip = "Display the list of available styles"; ObjectID = "azL-oz-mJL";</note>
-        <target xml:lang="ko" state="translated">Display the list of available styles</target>
       </trans-unit>
       <trans-unit id="fpY-CJ-hKU.label">
         <source>Next Unread</source>
@@ -1162,9 +1127,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/RSSFeed.xib" source-language="en" datatype="plaintext" target-language="ko">
+  <file original="Vienna/Interfaces/Base.lproj/RSSFeed.xib" datatype="plaintext" source-language="en" target-language="ko">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="102.title">
@@ -1204,9 +1169,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/SearchFolder.xib" source-language="en" datatype="plaintext" target-language="ko">
+  <file original="Vienna/Interfaces/Base.lproj/SearchFolder.xib" datatype="plaintext" source-language="en" target-language="ko">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="82.title">
@@ -1246,9 +1211,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/SyncingPreferencesView.xib" source-language="en" datatype="plaintext" target-language="ko">
+  <file original="Vienna/Interfaces/Base.lproj/SyncingPreferencesView.xib" datatype="plaintext" source-language="en" target-language="ko">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="NKI-36-zCY.title">
@@ -1263,9 +1228,18 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Resources/Localizable.strings" source-language="en" datatype="plaintext" target-language="ko">
+  <file original="Vienna/Resources/Base.lproj/InfoPlist.strings" datatype="plaintext" source-language="en" target-language="ko">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+    </header>
+    <body>
+      
+      
+    </body>
+  </file>
+  <file original="Vienna/Resources/Base.lproj/Localizable.strings" datatype="plaintext" source-language="en" target-language="ko">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="%@ Info">
@@ -1349,12 +1323,12 @@
         <target xml:lang="ko" state="translated">1주일 후</target>
       </trans-unit>
       <trans-unit id="Already subscribed body">
-        <source>Already subscribed body</source>
+        <source>You are already subscribed to that feed</source>
         <note>Already subscribed body</note>
         <target xml:lang="ko" state="translated">이미 구독 중인 피드입니다.</target>
       </trans-unit>
       <trans-unit id="Already subscribed title">
-        <source>Already subscribed title</source>
+        <source>Error</source>
         <note>Already subscribed title</note>
         <target xml:lang="ko" state="translated">오류</target>
       </trans-unit>
@@ -1385,42 +1359,32 @@
         <target xml:lang="ko" state="translated">취소</target>
       </trans-unit>
       <trans-unit id="Cannot create database folder text">
-        <source>Cannot create database folder text</source>
+        <source>Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">Vienna 가 "%@" 폴더를 생성 중에 오류가 발생했습니다. 지정한 경로에 있는 폴더의 권한을 확인하십시오.</target>
       </trans-unit>
       <trans-unit id="Cannot create database folder title">
-        <source>Cannot create database folder title</source>
+        <source>Sorry, but Vienna was unable to create the database folder</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">Vienna 가 데이터베이스 폴더를 생성할 수 없습니다.</target>
       </trans-unit>
-      <trans-unit id="Cannot create folder body">
-        <source>Cannot create folder body</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="ko" state="translated">The "%@" folder cannot be created.</target>
-      </trans-unit>
-      <trans-unit id="Cannot create folder title">
-        <source>Cannot create folder title</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="ko" state="translated">Cannot create folder</target>
-      </trans-unit>
       <trans-unit id="Cannot open database text">
-        <source>Cannot open database text</source>
+        <source>The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">해당 데이터베이스 파일 (%@) 항목은 손상되었거나 접근할 수 없습니다. 해당 파일을 삭제 또는 이름을 변경한 후 Vienna 를 재실행하십시오.</target>
       </trans-unit>
       <trans-unit id="Cannot open database title">
-        <source>Cannot open database title</source>
+        <source>Sorry but Vienna was unable to open the database</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">Vienna 가 데이터베이스 파일을 열 수 없습니다.</target>
       </trans-unit>
       <trans-unit id="Cannot open export file message">
-        <source>Cannot open export file message</source>
+        <source>Cannot create export output file</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">내보내기 출력 파일을 생성할 수 없습니다.</target>
       </trans-unit>
       <trans-unit id="Cannot open export file message text">
-        <source>Cannot open export file message text</source>
+        <source>The specified export output file could not be created. Check that it is not locked and no other application is using it.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">지정한 내보내기 출력 파일을 생성할 수 없습니다. 잠금 해제 상태인지 또는 다른 응용 프로그램에서 사용되고 있는지 확인하십시오.</target>
       </trans-unit>
@@ -1430,7 +1394,7 @@
         <target xml:lang="ko" state="translated">항목의 이름을 변경할 수 없습니다.</target>
       </trans-unit>
       <trans-unit id="Clear">
-        <source>Clear</source>
+        <source>Clear Recent Searches</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">최근 검색 지우기</target>
       </trans-unit>
@@ -1450,7 +1414,7 @@
         <target xml:lang="ko" state="translated">페이지 링크 복사</target>
       </trans-unit>
       <trans-unit id="Credentials Prompt">
-        <source>Credentials Prompt</source>
+        <source>The subscription for \"%@\" requires a user name and password for access.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">"%@" 구독은 사용자 이름과 암호를 요구합니다.</target>
       </trans-unit>
@@ -1475,28 +1439,20 @@
         <note>Title of a menu item</note>
         <target xml:lang="ko" state="translated">기사 삭제</target>
       </trans-unit>
-      <trans-unit id="Delete Open Reader RSS feed text">
-        <source>Delete Open Reader RSS feed text</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="ko" state="translated">Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.</target>
-      </trans-unit>
       <trans-unit id="Delete RSS feed">
-        <source>Delete RSS feed</source>
+        <source>Delete subscription</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">구독 삭제</target>
       </trans-unit>
       <trans-unit id="Delete RSS feed text">
-        <source>Delete RSS feed text</source>
+        <source>Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">정말로 "%@" 구독을 취소하시겠습니까? 이는 저장된 모든 관련 기사들을 삭제할 것입니다.</target>
       </trans-unit>
       <trans-unit id="Delete folder status">
-        <source>Delete folder status</source>
+        <source>Deleting folder \"%@\"…</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">"%@" 삭제 중…</target>
-        <alt-trans>
-          <target xml:lang="ko">"%@" 삭제 중...</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Delete group folder">
         <source>Delete group folder</source>
@@ -1504,7 +1460,7 @@
         <target xml:lang="ko" state="translated">그룹 폴더 삭제</target>
       </trans-unit>
       <trans-unit id="Delete group folder text">
-        <source>Delete group folder text</source>
+        <source>Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">정말로 그룹 폴더 "%@" 및 모든 하위 항목을 삭제하시겠습니까? 이 명령은 취소할 수 없습니다.</target>
       </trans-unit>
@@ -1514,18 +1470,18 @@
         <target xml:lang="ko" state="translated">다중 항목 삭제</target>
       </trans-unit>
       <trans-unit id="Delete multiple folders text">
-        <source>Delete multiple folders text</source>
+        <source>Are you sure you want to delete all %d selected folders? This operation cannot be undone.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">정말로 선택된 %d 항목을 모두 삭제하시겠습니까?
 이 명령은 취소할 수 없습니다.</target>
       </trans-unit>
       <trans-unit id="Delete selected message">
-        <source>Delete selected message</source>
+        <source>Are you sure you want to permanently delete the selected articles?</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">정말로 선택된 기사를 영구히 삭제하시겠습니까?</target>
       </trans-unit>
       <trans-unit id="Delete selected message text">
-        <source>Delete selected message text</source>
+        <source>This operation cannot be undone.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">이 명령은 취소할 수 없습니다.</target>
       </trans-unit>
@@ -1535,7 +1491,7 @@
         <target xml:lang="ko" state="translated">스마트 폴더 삭제</target>
       </trans-unit>
       <trans-unit id="Delete smart folder text">
-        <source>Delete smart folder text</source>
+        <source>Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">정말로 스마트 폴더 "%@" 항목을 삭제하시겠습니까? 이는 검색에 부합된 실제 기사는 삭제하지 않습니다.</target>
       </trans-unit>
@@ -1548,17 +1504,14 @@
         <source>Delete…</source>
         <note>Title of a menu item</note>
         <target xml:lang="ko" state="translated">삭제…</target>
-        <alt-trans>
-          <target xml:lang="ko">삭제...</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Downloads Running">
-        <source>Downloads Running</source>
+        <source>One or more downloads are in progress</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">하나 이상의 다운로드가 진행 중입니다.</target>
       </trans-unit>
       <trans-unit id="Downloads Running text">
-        <source>Downloads Running text</source>
+        <source>If you quit Vienna now, all downloads will stop.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">모든 다운로드를 취소하고 Vienna 를 지금 종료하시겠습니까?</target>
       </trans-unit>
@@ -1573,12 +1526,12 @@
         <target xml:lang="ko" state="translated">비우기</target>
       </trans-unit>
       <trans-unit id="Empty Trash message">
-        <source>Empty Trash message</source>
+        <source>Are you sure you want to delete the messages in the Trash folder permanently?</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">정말로 휴지통의 항목들을 삭제하시겠습니까?</target>
       </trans-unit>
       <trans-unit id="Empty Trash message text">
-        <source>Empty Trash message text</source>
+        <source>You cannot undo this action</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">이 명령은 취소할 수 없습니다.</target>
       </trans-unit>
@@ -1593,12 +1546,12 @@
         <target xml:lang="ko" state="translated">오류</target>
       </trans-unit>
       <trans-unit id="Error importing subscriptions body">
-        <source>Error importing subscriptions body</source>
+        <source>Cannot import the specified file. The file contents are not valid OPML XML format.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">지정한 파일을 가져올 수 없습니다. 해당 파일은 유효한 OPML XML 형식이 아닙니다.</target>
       </trans-unit>
       <trans-unit id="Error importing subscriptions title">
-        <source>Error importing subscriptions title</source>
+        <source>Import error</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">가져오기 오류</target>
       </trans-unit>
@@ -1668,12 +1621,12 @@
         <target xml:lang="ko" state="translated">헤드라인</target>
       </trans-unit>
       <trans-unit id="Invalid style body">
-        <source>Invalid style body</source>
+        <source>The Default style will be used instead.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">기본 스타일로 대체될 것입니다.</target>
       </trans-unit>
       <trans-unit id="Invalid style title">
-        <source>Invalid style title</source>
+        <source>The style %@ appears to be missing or corrupted</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">스타일 %@ 항목은 손상되었거나 유효하지 않은 형식입니다.</target>
       </trans-unit>
@@ -1687,18 +1640,13 @@
         <note>Data field name visible in menu/article list</note>
         <target xml:lang="ko" state="translated">링크</target>
       </trans-unit>
-      <trans-unit id="Loading…">
-        <source>Loading…</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="ko" state="translated">로딩 중…</target>
-      </trans-unit>
       <trans-unit id="Locate Text">
-        <source>Locate Text</source>
+        <source>A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">새로운 Vienna 데이터베이스를 "%@" 위치에 생성할 수 없습니다. 아마도 해당 폴더가 원격 네트워크 공유에 위치해 있을 것이며, 현재 버전의 Vienna 로는 원격 데이트베이스를 관리할 수 없습니다. 로컬 머신에 위치한 다른 폴더를 선택해 재시도하시기 바랍니다.</target>
       </trans-unit>
       <trans-unit id="Locate Title">
-        <source>Locate Title</source>
+        <source>Cannot create the Vienna database</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">Vienna 데이터베이스를 생성할 수 없습니다.</target>
       </trans-unit>
@@ -1763,17 +1711,17 @@
         <target xml:lang="ko" state="translated">새로운 기사</target>
       </trans-unit>
       <trans-unit id="New style body">
-        <source>New style body</source>
+        <source>The style \"%@\" has been installed to your Styles folder and added to the Style menu.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">"%@" 스타일이 사용자의 스타일 폴더에 설치되었으며, 스타일 메뉴에 등록되었습니다.</target>
       </trans-unit>
       <trans-unit id="New style title">
-        <source>New style title</source>
+        <source>Vienna has installed a new style</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">Vienna 가 새 스타일을 설치했습니다.</target>
       </trans-unit>
       <trans-unit id="New unread articles retrieved">
-        <source>New unread articles retrieved</source>
+        <source>%d new unread articles retrieved</source>
         <note>Notification body</note>
         <target xml:lang="ko" state="translated">%d 항목의 읽지 않은 새 기사가 추가되었습니다.</target>
       </trans-unit>
@@ -1842,12 +1790,6 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">기본 브라우져에서 페이지 열기</target>
       </trans-unit>
-      <trans-unit id="Open Reader Authentication Failed text">
-        <source>Open Reader Authentication Failed text</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="ko" state="translated">Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.
-Also check your network access.</target>
-      </trans-unit>
       <trans-unit id="Open Scripts Folder">
         <source>Open Scripts Folder</source>
         <note>No comment provided by engineer.</note>
@@ -1890,12 +1832,12 @@ Also check your network access.</target>
         <target xml:lang="ko" state="translated">종료</target>
       </trans-unit>
       <trans-unit id="RSS Subscription Export Title">
-        <source>RSS Subscription Export Title</source>
+        <source>Export Completed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">내보내기 완료</target>
       </trans-unit>
       <trans-unit id="RSS Subscription Import Title">
-        <source>RSS Subscription Import Title</source>
+        <source>Import Completed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">가져오기 완료</target>
       </trans-unit>
@@ -1959,11 +1901,6 @@ Also check your network access.</target>
         <note>Title of a menu item</note>
         <target xml:lang="ko" state="translated">기사 복원</target>
       </trans-unit>
-      <trans-unit id="Resubscribe">
-        <source>Resubscribe</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="ko" state="translated">Resubscribe to Feed</target>
-      </trans-unit>
       <trans-unit id="Retrieving articles">
         <source>Retrieving articles</source>
         <note>No comment provided by engineer.</note>
@@ -1980,7 +1917,7 @@ Also check your network access.</target>
         <target xml:lang="ko" state="translated">이전 페이지로 이동</target>
       </trans-unit>
       <trans-unit id="Search in %@">
-        <source>Search in %@</source>
+        <source>Filter in %@</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">%@ 검색</target>
       </trans-unit>
@@ -2025,7 +1962,7 @@ Also check your network access.</target>
         <target xml:lang="ko" state="translated">오늘</target>
       </trans-unit>
       <trans-unit id="Today's Articles">
-        <source>Today's Articles</source>
+        <source>Today’s Articles</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">오늘의 기사</target>
       </trans-unit>
@@ -2045,37 +1982,32 @@ Also check your network access.</target>
         <target xml:lang="ko" state="translated">읽지 않은 기사</target>
       </trans-unit>
       <trans-unit id="Unrecognised database format text">
-        <source>Unrecognised database format text</source>
+        <source>The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">해당 데이터베이스 (%@) 파일 형식은 현재 버전의 Vienna 에서 지원하는 형식이 아닙니다. 해당 파일을 삭제 또는 이름을 변경한 후 Vienna 를 재실행하십시오.</target>
       </trans-unit>
       <trans-unit id="Unrecognised database format title">
-        <source>Unrecognised database format title</source>
+        <source>The database file format has changed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">데이터베이스 파일 형식이 변경되었습니다.</target>
       </trans-unit>
-      <trans-unit id="Unsubscribe">
-        <source>Unsubscribe</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="ko" state="translated">Unsubscribe from Feed</target>
-      </trans-unit>
       <trans-unit id="Vienna cannot open the file body">
-        <source>Vienna cannot open the file body</source>
+        <source>Vienna cannot open the file \"%@\" because it moved since you downloaded it.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">Vienna 는 "%@" 파일을 열 수 없습니다. 다운로드 후 항목이 옮겨졌습니다.</target>
       </trans-unit>
       <trans-unit id="Vienna cannot open the file title">
-        <source>Vienna cannot open the file title</source>
+        <source>Vienna cannot open the file.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">Vienna 는 해당 파일을 열 수 없습니다.</target>
       </trans-unit>
       <trans-unit id="Vienna cannot show the file body">
-        <source>Vienna cannot show the file body</source>
+        <source>Vienna cannot show the file \"%@\" because it moved since you downloaded it.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">Vienna 는 "%@" 파일을 표시할 수 없습니다. 다운로드 후 항목이 옮겨졌습니다.</target>
       </trans-unit>
       <trans-unit id="Vienna cannot show the file title">
-        <source>Vienna cannot show the file title</source>
+        <source>Vienna cannot show the file.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ko" state="translated">Vienna 는 해당 파일을 표시할 수 없습니다.</target>
       </trans-unit>
@@ -2151,21 +2083,46 @@ Also check your network access.</target>
       </trans-unit>
     </body>
   </file>
-  <file original="Resources/Vienna-Info.plist" source-language="en" datatype="plaintext" target-language="ko">
+  <file original="Vienna/Resources/Base.lproj/Localizable.stringsdict" datatype="plaintext" source-language="en" target-language="ko">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
-      
-      
-    </body>
-  </file>
-  <file original="Vienna/Vienna Help/Info.plist" source-language="en" datatype="plaintext" target-language="ko">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
-    </header>
-    <body>
-      
+      <trans-unit id="/%d new articles retrieved:dict/articles:dict/other:dict/:string">
+        <source>%d new articles retrieved</source>
+        <note/>
+        <target xml:lang="ko" state="translated">%d 항목의 새 기사를 등록</target>
+      </trans-unit>
+      <trans-unit id="/%d subscriptions successfully exported:dict/subscriptions:dict/other:dict/:string">
+        <source>%d subscriptions successfully exported</source>
+        <note/>
+        <target xml:lang="ko" state="translated">%d 항목의 구독을 성공적으로 저장했습니다.</target>
+      </trans-unit>
+      <trans-unit id="/%d subscriptions successfully imported:dict/subscriptions:dict/other:dict/:string">
+        <source>%d subscriptions successfully imported</source>
+        <note/>
+        <target xml:lang="ko" state="translated">%d 항목의 구독을 성공적으로 가져왔습니다.</target>
+      </trans-unit>
+      <trans-unit id="/%d unread articles:dict/articles:dict/other:dict/:string">
+        <source>%d unread articles</source>
+        <note/>
+        <target xml:lang="ko" state="translated">%d 항목의 읽지 않은 기사</target>
+      </trans-unit>
+      <trans-unit id="/%u articles:dict/articles:dict/other:dict/:string">
+        <source>%u articles</source>
+        <note/>
+        <target xml:lang="ko" state="translated">%u 기사</target>
+      </trans-unit>
+      <trans-unit id="/%u unread:dict/unread:dict/one:dict/:string">
+        <source>%u unread</source>
+        <note/>
+        <target xml:lang="ko" state="translated">%u 읽지 않음</target>
+      </trans-unit>
+      <trans-unit id="/%u unread:dict/unread:dict/other:dict/:string">
+        <source>%u unread</source>
+        <note/>
+        <target xml:lang="ko" state="translated">%u 읽지 않음</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
-  <file original="Interfaces/Base.lproj/ActivityViewer.xib" source-language="en" datatype="plaintext" target-language="da">
+  <file original="Vienna Tests/Resources/Base.lproj/InfoPlist.strings" datatype="plaintext" source-language="en" target-language="da">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+    </header>
+    <body>
+      
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/ActivityViewer.xib" datatype="plaintext" source-language="en" target-language="da">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="8.title" approved="yes">
@@ -15,25 +23,17 @@
         <note>Class = "NSTableColumn"; headerCell.title = "Source"; ObjectID = "18";</note>
         <target xml:lang="da">Kilde</target>
       </trans-unit>
-      <trans-unit id="19.headerCell.title" approved="yes">
-        <source>Status</source>
-        <note>Class = "NSTableColumn"; headerCell.title = "Status"; ObjectID = "19";</note>
-        <target xml:lang="da">Status</target>
-      </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/AdvancedPreferencesView.xib" source-language="en" datatype="plaintext" target-language="da">
+  <file original="Vienna/Interfaces/Base.lproj/AdvancedPreferencesView.xib" datatype="plaintext" source-language="en" target-language="da">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="2GQ-cu-fbh.title" approved="yes">
         <source>The higher the number, the quicker your subscriptions will be downloaded.</source>
         <note>Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "2GQ-cu-fbh";</note>
         <target xml:lang="da">Jo højere et antal, jo hurtigere vil dine abonnementer blive hentet.</target>
-        <alt-trans>
-          <target xml:lang="da">Jo højere et nummer, jo hurtigere vil dine abonnementer blive hentet.</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="GaX-8c-QaN.title" approved="yes">
         <source>The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.</source>
@@ -49,9 +49,6 @@
         <source>However, high numbers also render your computer less responsive while refreshing feeds.</source>
         <note>Class = "NSTextFieldCell"; title = "However, high numbers also render your computer less responsive while refreshing feeds."; ObjectID = "S3T-cW-hys";</note>
         <target xml:lang="da">Men, høje numre kan også gøre din computer mindre responsiv når der opdateres feeds.</target>
-        <alt-trans>
-          <target xml:lang="da">Men, høje numre kan også gøre din computer mindre responsiv når der opdateres abonnementer.</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="fIz-4t-Ogg.title" approved="yes">
         <source>Enable Plugins in the internal browser</source>
@@ -65,9 +62,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/AppearancePreferencesView.xib" source-language="en" datatype="plaintext" target-language="da">
+  <file original="Vienna/Interfaces/Base.lproj/AppearancePreferencesView.xib" datatype="plaintext" source-language="en" target-language="da">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="71S-pg-AjX.title" approved="yes">
@@ -107,9 +104,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/Downloads.xib" source-language="en" datatype="plaintext" target-language="da">
+  <file original="Vienna/Interfaces/Base.lproj/Downloads.xib" datatype="plaintext" source-language="en" target-language="da">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="5.title" approved="yes">
@@ -124,9 +121,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/EmptyTrashWarning.xib" source-language="en" datatype="plaintext" target-language="da">
+  <file original="Vienna/Interfaces/Base.lproj/EmptyTrashWarning.xib" datatype="plaintext" source-language="en" target-language="da">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="17.title" approved="yes">
@@ -151,9 +148,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/ExportAccessoryViewController.xib" source-language="en" datatype="plaintext" target-language="da">
+  <file original="Vienna/Interfaces/Base.lproj/ExportAccessoryViewController.xib" datatype="plaintext" source-language="en" target-language="da">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="6rj-zb-zOa.title" approved="yes">
@@ -173,9 +170,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/FeedCredentials.xib" source-language="en" datatype="plaintext" target-language="da">
+  <file original="Vienna/Interfaces/Base.lproj/FeedCredentials.xib" datatype="plaintext" source-language="en" target-language="da">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="32.title" approved="yes">
@@ -192,9 +189,6 @@
         <source>Access to %@ requires you to provide log in credentials</source>
         <note>Class = "NSTextFieldCell"; title = "Access to %@ requires you to provide log in credentials"; ObjectID = "34";</note>
         <target xml:lang="da">Adgang til %@ kræver at du giver dine log ind detaljer</target>
-        <alt-trans>
-          <target xml:lang="da">Adgang til &amp;@ kræver at du giver dine log ind detaljer</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="37.title" approved="yes">
         <source>Password:</source>
@@ -213,9 +207,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/GeneralPreferencesView.xib" source-language="en" datatype="plaintext" target-language="da">
+  <file original="Vienna/Interfaces/Base.lproj/GeneralPreferencesView.xib" datatype="plaintext" source-language="en" target-language="da">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="1Ll-uG-QWh.title" approved="yes">
@@ -252,9 +246,6 @@
         <source>Other…</source>
         <note>Class = "NSMenuItem"; title = "Other…"; ObjectID = "FiK-E7-RnG";</note>
         <target xml:lang="da">Andet…</target>
-        <alt-trans>
-          <target xml:lang="da">Andet...</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="GnT-xT-rAZ.title" approved="yes">
         <source>Check for newer versions of Vienna on start up</source>
@@ -300,9 +291,6 @@
         <source>Save downloaded files to:</source>
         <note>Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "geD-Ws-mQm";</note>
         <target xml:lang="da">Gem hentede arkiv i:</target>
-        <alt-trans>
-          <target xml:lang="da">Gem hentede filer i:</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="gi4-ao-0yS.title" approved="yes">
         <source>Bounce the application icon</source>
@@ -323,9 +311,6 @@
         <source>Default RSS Reader:</source>
         <note>Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG";</note>
         <target xml:lang="da">Standard RSS Reader:</target>
-        <alt-trans>
-          <target xml:lang="da">Standard RSS Reader</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="meo-78-YOl.title" approved="yes">
         <source>Mark updated articles as new</source>
@@ -364,9 +349,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/GroupFolder.xib" source-language="en" datatype="plaintext" target-language="da">
+  <file original="Vienna/Interfaces/Base.lproj/GroupFolder.xib" datatype="plaintext" source-language="en" target-language="da">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="32.title" approved="yes">
@@ -391,9 +376,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/InfoWindow.xib" source-language="en" datatype="plaintext" target-language="da">
+  <file original="Vienna/Interfaces/Base.lproj/InfoWindow.xib" datatype="plaintext" source-language="en" target-language="da">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="105.title" approved="yes">
@@ -460,23 +445,17 @@
         <source>Feed URL</source>
         <note>Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG";</note>
         <target xml:lang="da">Feed-henvisning</target>
-        <alt-trans>
-          <target xml:lang="da">Feedhenvisning</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="xTj-hY-aTU.title" approved="yes">
         <source>Open Cached File…</source>
         <note>Class = "NSButtonCell"; title = "Open Cached File…"; ObjectID = "xTj-hY-aTU";</note>
         <target xml:lang="da">Åben cachet arkiv…</target>
-        <alt-trans>
-          <target xml:lang="da">Åben cached fil…</target>
-        </alt-trans>
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/MainMenu.xib" source-language="en" datatype="plaintext" target-language="da">
+  <file original="Vienna/Interfaces/Base.lproj/MainMenu.xib" datatype="plaintext" source-language="en" target-language="da">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="2S3-dG-ZPg.title" approved="yes">
@@ -584,11 +563,6 @@
         <note>Class = "NSMenuItem"; title = "Hide Vienna"; ObjectID = "134";</note>
         <target xml:lang="da">Skjul Vienna</target>
       </trans-unit>
-      <trans-unit id="136.title" approved="yes">
-        <source>Quit Vienna</source>
-        <note>Class = "NSMenuItem"; title = "Quit Vienna"; ObjectID = "136";</note>
-        <target xml:lang="da">Quit Vienna</target>
-      </trans-unit>
       <trans-unit id="145.title" approved="yes">
         <source>Hide Others</source>
         <note>Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145";</note>
@@ -598,11 +572,6 @@
         <source>Show All</source>
         <note>Class = "NSMenuItem"; title = "Show All"; ObjectID = "150";</note>
         <target xml:lang="da">Vis alle</target>
-      </trans-unit>
-      <trans-unit id="154.title" approved="yes">
-        <source>Find…</source>
-        <note>Class = "NSMenuItem"; title = "Find…"; ObjectID = "154";</note>
-        <target xml:lang="da">Find…</target>
       </trans-unit>
       <trans-unit id="155.title" approved="yes">
         <source>Jump to Selection</source>
@@ -618,11 +587,6 @@
         <source>Undo</source>
         <note>Class = "NSMenuItem"; title = "Undo"; ObjectID = "158";</note>
         <target xml:lang="da">Fortryd</target>
-      </trans-unit>
-      <trans-unit id="159.title" approved="yes">
-        <source>Find</source>
-        <note>Class = "NSMenu"; title = "Find"; ObjectID = "159";</note>
-        <target xml:lang="da">Find</target>
       </trans-unit>
       <trans-unit id="160.title" approved="yes">
         <source>Cut</source>
@@ -654,11 +618,6 @@
         <note>Class = "NSMenuItem"; title = "Find Next"; ObjectID = "167";</note>
         <target xml:lang="da">Find næste</target>
       </trans-unit>
-      <trans-unit id="168.title" approved="yes">
-        <source>Find</source>
-        <note>Class = "NSMenuItem"; title = "Find"; ObjectID = "168";</note>
-        <target xml:lang="da">Find</target>
-      </trans-unit>
       <trans-unit id="169.title" approved="yes">
         <source>Edit</source>
         <note>Class = "NSMenu"; title = "Edit"; ObjectID = "169";</note>
@@ -678,11 +637,6 @@
         <source>Redo</source>
         <note>Class = "NSMenuItem"; title = "Redo"; ObjectID = "173";</note>
         <target xml:lang="da">Gentag</target>
-      </trans-unit>
-      <trans-unit id="197.title" approved="yes">
-        <source>Zoom</source>
-        <note>Class = "NSMenuItem"; title = "Zoom"; ObjectID = "197";</note>
-        <target xml:lang="da">Zoom</target>
       </trans-unit>
       <trans-unit id="235.title" approved="yes">
         <source>View</source>
@@ -783,9 +737,6 @@
         <source>Mark Flagged</source>
         <note>Class = "NSMenuItem"; title = "Mark Flagged"; ObjectID = "790";</note>
         <target xml:lang="da">Marker med mærke</target>
-        <alt-trans>
-          <target xml:lang="da">Marker mærket</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="806.title" approved="yes">
         <source>New Group Folder…</source>
@@ -896,9 +847,6 @@
         <source>Open Web Location…</source>
         <note>Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101";</note>
         <target xml:lang="da">Åben Internet-lokation…</target>
-        <alt-trans>
-          <target xml:lang="da">Åben Internet lokation…</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="1104.title" approved="yes">
         <source>Check for Updates</source>
@@ -909,16 +857,6 @@
         <source>Refresh Folder Images</source>
         <note>Class = "NSMenuItem"; title = "Refresh Folder Images"; ObjectID = "1106";</note>
         <target xml:lang="da">Opdater mappeikoner</target>
-      </trans-unit>
-      <trans-unit id="1108.title" approved="yes">
-        <source>Layout</source>
-        <note>Class = "NSMenuItem"; title = "Layout"; ObjectID = "1108";</note>
-        <target xml:lang="da">Layout</target>
-      </trans-unit>
-      <trans-unit id="1109.title" approved="yes">
-        <source>Layout</source>
-        <note>Class = "NSMenu"; title = "Layout"; ObjectID = "1109";</note>
-        <target xml:lang="da">Layout</target>
       </trans-unit>
       <trans-unit id="1110.title" approved="yes">
         <source>Horizontal</source>
@@ -934,25 +872,16 @@
         <source>Filter By</source>
         <note>Class = "NSMenuItem"; title = "Filter By"; ObjectID = "1117";</note>
         <target xml:lang="da">Filtrer ved</target>
-        <alt-trans>
-          <target xml:lang="da">Filtrer Ved</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="1118.title" approved="yes">
         <source>Filter By</source>
         <note>Class = "NSMenu"; title = "Filter By"; ObjectID = "1118";</note>
         <target xml:lang="da">Filtrer ved</target>
-        <alt-trans>
-          <target xml:lang="da">Filtrer Ved</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="1146.title" approved="yes">
         <source>Keyboard Shortcuts</source>
         <note>Class = "NSMenuItem"; title = "Keyboard Shortcuts"; ObjectID = "1146";</note>
         <target xml:lang="da">Tastaturgenveje</target>
-        <alt-trans>
-          <target xml:lang="da">Tastatur genveje</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="1160.title" approved="yes">
         <source>Unified</source>
@@ -1048,9 +977,6 @@
         <source>Search Articles</source>
         <note>Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327";</note>
         <target xml:lang="da">Søg i artikler</target>
-        <alt-trans>
-          <target xml:lang="da">Søg artikler</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="1336.title" approved="yes">
         <source>Order By</source>
@@ -1091,9 +1017,6 @@
         <source>Use Web Page for Articles</source>
         <note>Class = "NSMenuItem"; title = "Use Web Page for Articles"; ObjectID = "1415";</note>
         <target xml:lang="da">Brug hjemmesider for artikler</target>
-        <alt-trans>
-          <target xml:lang="da">Brug hjemmeside for artikler</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="1425.title" approved="yes">
         <source>Force Refresh Selected Subscriptions From Open Reader</source>
@@ -1149,9 +1072,6 @@
         <source>Smart Dashes</source>
         <note>Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk";</note>
         <target xml:lang="da">Smarte bindestreger</target>
-        <alt-trans>
-          <target xml:lang="da">Smarte tankestreger</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="UFF-Fn-8ti.title" approved="yes">
         <source>Transformations</source>
@@ -1172,9 +1092,6 @@
         <source>Start Speaking</source>
         <note>Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "cK9-Df-xA3";</note>
         <target xml:lang="da">Start oplæsning</target>
-        <alt-trans>
-          <target xml:lang="da">Start tale</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="eVb-Qt-XJb.title" approved="yes">
         <source>Substitutions</source>
@@ -1278,9 +1195,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/MainWindowController.xib" source-language="en" datatype="plaintext" target-language="da">
+  <file original="Vienna/Interfaces/Base.lproj/MainWindowController.xib" datatype="plaintext" source-language="en" target-language="da">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="3tM-J3-kmf.title" approved="yes">
@@ -1600,9 +1517,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/RSSFeed.xib" source-language="en" datatype="plaintext" target-language="da">
+  <file original="Vienna/Interfaces/Base.lproj/RSSFeed.xib" datatype="plaintext" source-language="en" target-language="da">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="102.title" approved="yes">
@@ -1657,9 +1574,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/SearchFolder.xib" source-language="en" datatype="plaintext" target-language="da">
+  <file original="Vienna/Interfaces/Base.lproj/SearchFolder.xib" datatype="plaintext" source-language="en" target-language="da">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="82.title" approved="yes">
@@ -1699,9 +1616,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Interfaces/Base.lproj/SyncingPreferencesView.xib" source-language="en" datatype="plaintext" target-language="da">
+  <file original="Vienna/Interfaces/Base.lproj/SyncingPreferencesView.xib" datatype="plaintext" source-language="en" target-language="da">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="Ar5-Qc-YTe.ibExternalAccessibilityDescription" approved="yes">
@@ -1739,11 +1656,6 @@
         <note>Class = "NSTextFieldCell"; title = "URL: https://"; ObjectID = "tec-2d-Xej";</note>
         <target xml:lang="da">Henvisning: https://</target>
       </trans-unit>
-      <trans-unit id="uTl-XE-0ym.title" approved="yes">
-        <source>Server:</source>
-        <note>Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "uTl-XE-0ym";</note>
-        <target xml:lang="da">Server:</target>
-      </trans-unit>
       <trans-unit id="vZE-Pl-S9H.ibShadowedToolTip" approved="yes">
         <source>Address of a server supporting the Open Reader API</source>
         <note>Class = "NSTextField"; ibShadowedToolTip = "Address of a server supporting the Open Reader API"; ObjectID = "vZE-Pl-S9H";</note>
@@ -1756,9 +1668,18 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Resources/Localizable.strings" source-language="en" datatype="plaintext" target-language="da">
+  <file original="Vienna/Resources/Base.lproj/InfoPlist.strings" datatype="plaintext" source-language="en" target-language="da">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+    </header>
+    <body>
+      
+      
+    </body>
+  </file>
+  <file original="Vienna/Resources/Base.lproj/Localizable.strings" datatype="plaintext" source-language="en" target-language="da">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
     </header>
     <body>
       <trans-unit id="%@ Info" approved="yes">
@@ -1775,11 +1696,6 @@
         <source>%@ received</source>
         <note>Number of bytes received, e.g. 1 MB received</note>
         <target xml:lang="da">%@ modtaget</target>
-      </trans-unit>
-      <trans-unit id="%@, %@" approved="yes">
-        <source>%1$@, %2$@</source>
-        <note>{existing authors},{new author name}</note>
-        <target xml:lang="da">%1$@, %2$@</target>
       </trans-unit>
       <trans-unit id="%d new articles retrieved" approved="yes">
         <source>%d new articles retrieved</source>
@@ -1862,12 +1778,12 @@
         <target xml:lang="da">Efter 1 uge</target>
       </trans-unit>
       <trans-unit id="Already subscribed body" approved="yes">
-        <source>Already subscribed body</source>
+        <source>You are already subscribed to that feed</source>
         <note>Already subscribed body</note>
         <target xml:lang="da">Du har allerede abonneret på det feed</target>
       </trans-unit>
       <trans-unit id="Already subscribed title" approved="yes">
-        <source>Already subscribed title</source>
+        <source>Error</source>
         <note>Already subscribed title</note>
         <target xml:lang="da">Fejl</target>
       </trans-unit>
@@ -1913,53 +1829,44 @@
         <target xml:lang="da">Afbryd</target>
       </trans-unit>
       <trans-unit id="Cannot create database folder text" approved="yes">
-        <source>Cannot create database folder text</source>
+        <source>Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Vienna prøvede at lave mappen "%@" men en fejl opstod. Tjek rettighederne på mapperne i den specificerede sti.</target>
       </trans-unit>
       <trans-unit id="Cannot create database folder title" approved="yes">
-        <source>Cannot create database folder title</source>
+        <source>Sorry, but Vienna was unable to create the database folder</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Desværre, men Vienna kunne ikke lave databasemappen</target>
       </trans-unit>
       <trans-unit id="Cannot create folder body" approved="yes">
-        <source>Cannot create folder body</source>
+        <source>The \"%@\" folder cannot be created.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Mappen "%@" kan ikke laves.</target>
       </trans-unit>
       <trans-unit id="Cannot create folder title" approved="yes">
-        <source>Cannot create folder title</source>
+        <source>Cannot create folder</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Kan ikke lave mappe</target>
       </trans-unit>
       <trans-unit id="Cannot open database text" approved="yes">
-        <source>Cannot open database text</source>
+        <source>The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Databasefilen (%@) kunne ikke åbnes af samme grund. Den kan være beskadiget eller utilgængelig. Slet venligst eller omdøb databasefilen og genstart Vienna.</target>
       </trans-unit>
       <trans-unit id="Cannot open database title" approved="yes">
-        <source>Cannot open database title</source>
+        <source>Sorry but Vienna was unable to open the database</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Desværre, men Vienna kunne ikke åbne databasen</target>
-        <alt-trans>
-          <target xml:lang="da">Desværre, men Vienna kunne ikke åbne databasen.</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Cannot open export file message" approved="yes">
-        <source>Cannot open export file message</source>
+        <source>Cannot create export output file</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Kan ikke lave eksport output-arkiv</target>
-        <alt-trans>
-          <target xml:lang="da">Kan ikke lave eksport output-fil</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Cannot open export file message text" approved="yes">
-        <source>Cannot open export file message text</source>
+        <source>The specified export output file could not be created. Check that it is not locked and no other application is using it.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Det specificerede eksport output-arkiv kan ikke laves. Tjek at den ikke er låst og at ingen andre programmer bruger den</target>
-        <alt-trans>
-          <target xml:lang="da">Den specificerede eksport output-fil kan ikke laves. Tjek at den ikke er låst og at ingen andre programmer bruger den..</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Cannot rename folder" approved="yes">
         <source>Cannot rename folder</source>
@@ -1967,7 +1874,7 @@
         <target xml:lang="da">Kan ikke omdøbe mappe</target>
       </trans-unit>
       <trans-unit id="Clear" approved="yes">
-        <source>Clear</source>
+        <source>Clear Recent Searches</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Slet foregående søgninger</target>
       </trans-unit>
@@ -2007,7 +1914,7 @@
         <target xml:lang="da">Kopier henvisning</target>
       </trans-unit>
       <trans-unit id="Credentials Prompt" approved="yes">
-        <source>Credentials Prompt</source>
+        <source>The subscription for \"%@\" requires a user name and password for access.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Informationsanmodning</target>
       </trans-unit>
@@ -2038,27 +1945,24 @@
         <target xml:lang="da">Slet Open Reader RSS feed</target>
       </trans-unit>
       <trans-unit id="Delete Open Reader RSS feed text" approved="yes">
-        <source>Delete Open Reader RSS feed text</source>
+        <source>Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Slet Open Reader RSS feed</target>
       </trans-unit>
       <trans-unit id="Delete RSS feed" approved="yes">
-        <source>Delete RSS feed</source>
+        <source>Delete subscription</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Slet abonnement</target>
       </trans-unit>
       <trans-unit id="Delete RSS feed text" approved="yes">
-        <source>Delete RSS feed text</source>
+        <source>Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Er du sikker på at du vil af-abonnere fra "%@"? Denne handling vil slette alle gemte artikler.</target>
       </trans-unit>
       <trans-unit id="Delete folder status" approved="yes">
-        <source>Delete folder status</source>
+        <source>Deleting folder \"%@\"…</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Sletter mappen "%@"…</target>
-        <alt-trans>
-          <target xml:lang="da">Sletter mappen "%@"...</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Delete group folder" approved="yes">
         <source>Delete group folder</source>
@@ -2066,7 +1970,7 @@
         <target xml:lang="da">Slet gruppemappe</target>
       </trans-unit>
       <trans-unit id="Delete group folder text" approved="yes">
-        <source>Delete group folder text</source>
+        <source>Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Er du sikker på at du vil slette gruppemappen "%@" og alle undermapper? Denne handling kan ikke fortrydes.</target>
       </trans-unit>
@@ -2076,17 +1980,17 @@
         <target xml:lang="da">Slet flere mapper</target>
       </trans-unit>
       <trans-unit id="Delete multiple folders text" approved="yes">
-        <source>Delete multiple folders text</source>
+        <source>Are you sure you want to delete all %d selected folders? This operation cannot be undone.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Er du sikker på at du vil slette alle %d valgte mapper? Denne handling kan ikke fortrydes.</target>
       </trans-unit>
       <trans-unit id="Delete selected message" approved="yes">
-        <source>Delete selected message</source>
+        <source>Are you sure you want to permanently delete the selected articles?</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Er du sikker på at du permanent vil slette den valgte artikel?</target>
       </trans-unit>
       <trans-unit id="Delete selected message text" approved="yes">
-        <source>Delete selected message text</source>
+        <source>This operation cannot be undone.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Denne handling kan ikke fortrydes.</target>
       </trans-unit>
@@ -2096,7 +2000,7 @@
         <target xml:lang="da">Slet smartmappe</target>
       </trans-unit>
       <trans-unit id="Delete smart folder text" approved="yes">
-        <source>Delete smart folder text</source>
+        <source>Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Er du sikker på at du vil slette smartmappen "%@"? Dette vil ikke slette de egentlige artikler som matches af søgningen.</target>
       </trans-unit>
@@ -2119,9 +2023,6 @@
         <source>Do you really want to import the subscriptions from the specified OPML file?</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Vil du virkelig importere abonnementerne fra det specificerede OPML-arkiv?</target>
-        <alt-trans>
-          <target xml:lang="da">Vil du virkelig importere abonnementerne fra den specificerede OPML-fil?</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Download" approved="yes">
         <source>Download</source>
@@ -2149,12 +2050,12 @@
         <target xml:lang="da">Hentning fejlede</target>
       </trans-unit>
       <trans-unit id="Downloads Running" approved="yes">
-        <source>Downloads Running</source>
+        <source>One or more downloads are in progress</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">En eller flere overførsler er igang</target>
       </trans-unit>
       <trans-unit id="Downloads Running text" approved="yes">
-        <source>Downloads Running text</source>
+        <source>If you quit Vienna now, all downloads will stop.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Hvis du slutter Vienna nu, vil alle overførsler stoppe.</target>
       </trans-unit>
@@ -2169,17 +2070,17 @@
         <target xml:lang="da">Tom</target>
       </trans-unit>
       <trans-unit id="Empty Trash message" approved="yes">
-        <source>Empty Trash message</source>
+        <source>Are you sure you want to delete the messages in the Trash folder permanently?</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Er du sikker på at du vil slette beskederne i Papirkurven permanent?</target>
       </trans-unit>
       <trans-unit id="Empty Trash message text" approved="yes">
-        <source>Empty Trash message text</source>
+        <source>You cannot undo this action</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Du kan ikke fortryde denne handling</target>
       </trans-unit>
       <trans-unit id="Enclosure" approved="yes">
-        <source>Enclosure</source>
+        <source>Enclosure URL</source>
         <note>Data field name (URL) visible in menu/article list</note>
         <target xml:lang="da">Indpakningshenvisning</target>
       </trans-unit>
@@ -2194,12 +2095,12 @@
         <target xml:lang="da">Fejl</target>
       </trans-unit>
       <trans-unit id="Error importing subscriptions body" approved="yes">
-        <source>Error importing subscriptions body</source>
+        <source>Cannot import the specified file. The file contents are not valid OPML XML format.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Kan ikke importere den specificerede fil. Filndholdet er ikke et gyldigt OPML XML format.</target>
       </trans-unit>
       <trans-unit id="Error importing subscriptions title" approved="yes">
-        <source>Error importing subscriptions title</source>
+        <source>Import error</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Importfejl</target>
       </trans-unit>
@@ -2314,7 +2215,7 @@
         <target xml:lang="da">HTTP-kode %d angivet af server</target>
       </trans-unit>
       <trans-unit id="HasEnclosure" approved="yes">
-        <source>HasEnclosure</source>
+        <source>Enclosure</source>
         <note>Data field name (Y/N) visible in menu/smart folder definition</note>
         <target xml:lang="da">Indpakning</target>
       </trans-unit>
@@ -2347,9 +2248,6 @@
         <source>Import subscriptions from OPML file?</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Importer abonnementer fra OPML-arkiv?</target>
-        <alt-trans>
-          <target xml:lang="da">Importer abonnementer fra OPML-fil?</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Improper infinitely looping URL redirect to %@" approved="yes">
         <source>Improper infinitely looping URL redirect to %@</source>
@@ -2357,19 +2255,14 @@
         <target xml:lang="da">Ugyldig uendeligt loopende henvisning som omdirigerer til %@</target>
       </trans-unit>
       <trans-unit id="Invalid style body" approved="yes">
-        <source>Invalid style body</source>
+        <source>The Default style will be used instead.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Standard stilen vil blive brugt istedet.</target>
       </trans-unit>
       <trans-unit id="Invalid style title" approved="yes">
-        <source>Invalid style title</source>
+        <source>The style %@ appears to be missing or corrupted</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Stilen %@ mangler eller er beskadiget</target>
-      </trans-unit>
-      <trans-unit id="JavaScript" approved="yes">
-        <source>JavaScript</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="da">JavaScript</target>
       </trans-unit>
       <trans-unit id="Last Week" approved="yes">
         <source>Last Week</source>
@@ -2386,18 +2279,13 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Indlæser</target>
       </trans-unit>
-      <trans-unit id="Loading…" approved="yes">
-        <source>Loading…</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="da">Indlæser…</target>
-      </trans-unit>
       <trans-unit id="Locate Text" approved="yes">
-        <source>Locate Text</source>
+        <source>A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Find tekst</target>
       </trans-unit>
       <trans-unit id="Locate Title" approved="yes">
-        <source>Locate Title</source>
+        <source>Cannot create the Vienna database</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Find titel</target>
       </trans-unit>
@@ -2425,9 +2313,6 @@
         <source>Mark Flagged</source>
         <note>Title of a menu item</note>
         <target xml:lang="da">Marker med mærke</target>
-        <alt-trans>
-          <target xml:lang="da">Marker mærket</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Mark Read" approved="yes">
         <source>Mark Read</source>
@@ -2438,9 +2323,6 @@
         <source>Mark Unflagged</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Marker som umærket</target>
-        <alt-trans>
-          <target xml:lang="da">Marker som mærket</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Mark Unread" approved="yes">
         <source>Mark Unread</source>
@@ -2478,17 +2360,17 @@
         <target xml:lang="da">Nye artikler</target>
       </trans-unit>
       <trans-unit id="New style body" approved="yes">
-        <source>New style body</source>
+        <source>The style \"%@\" has been installed to your Styles folder and added to the Style menu.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Stilen "%@" er blevet installeret i din Stil-mappe og er blevet tilføjet til Stil-menuen.</target>
       </trans-unit>
       <trans-unit id="New style title" approved="yes">
-        <source>New style title</source>
+        <source>Vienna has installed a new style</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Vienna har installeret en ny stil</target>
       </trans-unit>
       <trans-unit id="New unread articles retrieved" approved="yes">
-        <source>New unread articles retrieved</source>
+        <source>%d new unread articles retrieved</source>
         <note>Notification body</note>
         <target xml:lang="da">%d nye ulæste artikler hentet</target>
       </trans-unit>
@@ -2506,11 +2388,6 @@
         <source>No new articles available</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Ingen nye artikler tilgængelige</target>
-      </trans-unit>
-      <trans-unit id="OK" approved="yes">
-        <source>OK</source>
-        <note>Title of a button on an alert</note>
-        <target xml:lang="da">OK</target>
       </trans-unit>
       <trans-unit id="Open" approved="yes">
         <source>Open</source>
@@ -2567,12 +2444,6 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Open Reader godkendelse fejlede</target>
       </trans-unit>
-      <trans-unit id="Open Reader Authentication Failed text">
-        <source>Open Reader Authentication Failed text</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="da" state="translated">Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.
-Also check your network access.</target>
-      </trans-unit>
       <trans-unit id="Open Scripts Folder" approved="yes">
         <source>Open Scripts Folder</source>
         <note>No comment provided by engineer.</note>
@@ -2618,29 +2489,18 @@ Also check your network access.</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Kø</target>
       </trans-unit>
-      <trans-unit id="Quit" approved="yes">
-        <source>Quit</source>
-        <note>Title of a button on an alert</note>
-        <target xml:lang="da">Quit</target>
-      </trans-unit>
-      <trans-unit id="Quit Vienna" approved="yes">
-        <source>Quit Vienna</source>
-        <note>Title of a button on an alert
-   Title of a menu item</note>
-        <target xml:lang="da">Quit Vienna</target>
-      </trans-unit>
       <trans-unit id="RSS Icon not found!" approved="yes">
         <source>RSS Icon not found!</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">RSS ikon ikke fundet!</target>
       </trans-unit>
       <trans-unit id="RSS Subscription Export Title" approved="yes">
-        <source>RSS Subscription Export Title</source>
+        <source>Export Completed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Eksport færdig</target>
       </trans-unit>
       <trans-unit id="RSS Subscription Import Title" approved="yes">
-        <source>RSS Subscription Import Title</source>
+        <source>Import Completed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Import færdig</target>
       </trans-unit>
@@ -2710,7 +2570,7 @@ Also check your network access.</target>
         <target xml:lang="da">Gendan artikel</target>
       </trans-unit>
       <trans-unit id="Resubscribe" approved="yes">
-        <source>Resubscribe</source>
+        <source>Resubscribe to Feed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Gen-abonner på feedet</target>
       </trans-unit>
@@ -2738,9 +2598,6 @@ Also check your network access.</target>
         <source>Search Results</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Søg i resultater</target>
-        <alt-trans>
-          <target xml:lang="da">Søg resultater</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Search all articles" approved="yes">
         <source>Search all articles</source>
@@ -2751,9 +2608,6 @@ Also check your network access.</target>
         <source>Search all articles or the current web page</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Søg i alle artikler eller den nuværende hjemmeside</target>
-        <alt-trans>
-          <target xml:lang="da">Søg alle artikler eller den nuværende hjemmeside</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Search current web page" approved="yes">
         <source>Search current web page</source>
@@ -2761,7 +2615,7 @@ Also check your network access.</target>
         <target xml:lang="da">Søg nuværende hjemmeside</target>
       </trans-unit>
       <trans-unit id="Search in %@" approved="yes">
-        <source>Search in %@</source>
+        <source>Filter in %@</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Søg i %@</target>
       </trans-unit>
@@ -2839,12 +2693,9 @@ Also check your network access.</target>
         <source>Today</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">I dag</target>
-        <alt-trans>
-          <target xml:lang="da">Idag</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Today's Articles" approved="yes">
-        <source>Today's Articles</source>
+        <source>Today’s Articles</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Dagens artikler</target>
       </trans-unit>
@@ -2869,17 +2720,17 @@ Also check your network access.</target>
         <target xml:lang="da">Ulæste artikler</target>
       </trans-unit>
       <trans-unit id="Unrecognised database format text" approved="yes">
-        <source>Unrecognised database format text</source>
+        <source>The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Database (%@) filformatet er ikke understøttet af denne udgave af Vienna. Slet eller omdøb filen og genstart Vienna.</target>
       </trans-unit>
       <trans-unit id="Unrecognised database format title" approved="yes">
-        <source>Unrecognised database format title</source>
+        <source>The database file format has changed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Database filformatet er blevet ændret</target>
       </trans-unit>
       <trans-unit id="Unsubscribe" approved="yes">
-        <source>Unsubscribe</source>
+        <source>Unsubscribe from Feed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Af-abonner feedet</target>
       </trans-unit>
@@ -2889,39 +2740,27 @@ Also check your network access.</target>
         <target xml:lang="da">Opgrader databasen</target>
       </trans-unit>
       <trans-unit id="Vienna cannot open the file body" approved="yes">
-        <source>Vienna cannot open the file body</source>
+        <source>Vienna cannot open the file \"%@\" because it moved since you downloaded it.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Vienna kan ikke åbne arkivet "%@" fordi det er flyttet siden du hentede det</target>
-        <alt-trans>
-          <target xml:lang="da">Vienna kan ikke åbne filen "%@" fordi den er flyttet siden du hentede den.</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Vienna cannot open the file title" approved="yes">
-        <source>Vienna cannot open the file title</source>
+        <source>Vienna cannot open the file.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Vienna kan ikke åbne arkivtitlen</target>
-        <alt-trans>
-          <target xml:lang="da">Vienna kan ikke åbne filen.</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Vienna cannot show the file body" approved="yes">
-        <source>Vienna cannot show the file body</source>
+        <source>Vienna cannot show the file \"%@\" because it moved since you downloaded it.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Vienna kan ikke vise arkivet "%@" fordi det er flyttet siden du hentede det</target>
-        <alt-trans>
-          <target xml:lang="da">Vienna kan ikke vise filen "%@" fordi den er flyttet siden du hentede den.</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Vienna cannot show the file title" approved="yes">
-        <source>Vienna cannot show the file title</source>
+        <source>Vienna cannot show the file.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Vienna kan ikke vise arkivtitlen</target>
-        <alt-trans>
-          <target xml:lang="da">Vienna kan ikke vise filen.</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." approved="yes">
-        <source>Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.</source>
+        <source>Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="da">Vienna er nød til at opgradere dens database til den nyeste version. Dette tager omkring et minut. Vi underskylder for ulejligheden.</target>
       </trans-unit>
@@ -3000,28 +2839,48 @@ Also check your network access.</target>
         <note>test for a folder (not operational as of Vienna 3.2)</note>
         <target xml:lang="da">ikke under</target>
       </trans-unit>
-      <trans-unit id="under" approved="yes">
-        <source>under</source>
-        <note>test for a folder (not operational as of Vienna 3.2)</note>
-        <target xml:lang="da">under</target>
+    </body>
+  </file>
+  <file original="Vienna/Resources/Base.lproj/Localizable.stringsdict" datatype="plaintext" source-language="en" target-language="da">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+    </header>
+    <body>
+      <trans-unit id="/%d new articles retrieved:dict/articles:dict/other:dict/:string" approved="yes">
+        <source>%d new articles retrieved</source>
+        <note/>
+        <target xml:lang="da">%d nye artikler hentet</target>
       </trans-unit>
-    </body>
-  </file>
-  <file original="Resources/Vienna-Info.plist" source-language="en" datatype="plaintext" target-language="da">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
-    </header>
-    <body>
-      
-      
-    </body>
-  </file>
-  <file original="Vienna/Vienna Help/Info.plist" source-language="en" datatype="plaintext" target-language="da">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.2" build-num="9C40b"/>
-    </header>
-    <body>
-      
+      <trans-unit id="/%d subscriptions successfully exported:dict/subscriptions:dict/other:dict/:string" approved="yes">
+        <source>%d subscriptions successfully exported</source>
+        <note/>
+        <target xml:lang="da">%d abonnementer successfuldt eksportert</target>
+      </trans-unit>
+      <trans-unit id="/%d subscriptions successfully imported:dict/subscriptions:dict/other:dict/:string" approved="yes">
+        <source>%d subscriptions successfully imported</source>
+        <note/>
+        <target xml:lang="da">%d abonnementer successfuldt importeret</target>
+      </trans-unit>
+      <trans-unit id="/%d unread articles:dict/articles:dict/other:dict/:string" approved="yes">
+        <source>%d unread articles</source>
+        <note/>
+        <target xml:lang="da">%d ulæste artikler</target>
+      </trans-unit>
+      <trans-unit id="/%u articles:dict/articles:dict/other:dict/:string" approved="yes">
+        <source>%u articles</source>
+        <note/>
+        <target xml:lang="da">%u artikler</target>
+      </trans-unit>
+      <trans-unit id="/%u unread:dict/unread:dict/one:dict/:string" approved="yes">
+        <source>%u unread</source>
+        <note/>
+        <target xml:lang="da">%u ulæste</target>
+      </trans-unit>
+      <trans-unit id="/%u unread:dict/unread:dict/other:dict/:string" approved="yes">
+        <source>%u unread</source>
+        <note/>
+        <target xml:lang="da">%u ulæste</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
