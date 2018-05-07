@@ -373,14 +373,15 @@
 		03B752291B741AFD00FD3FDB /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedItem.m; sourceTree = "<group>"; };
 		03B752411B74814B00FD3FDB /* RichXMLParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichXMLParserTests.m; sourceTree = "<group>"; };
 		03EFD56F1B720AB0007EF284 /* ExportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportTests.m; sourceTree = "<group>"; };
-		1CF081CD87E34BA6E9700986 /* Pods-Vienna.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna.development.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna/Pods-Vienna.development.xcconfig"; sourceTree = "<group>"; };
 		03F33D951DF2A2F900B04FAF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		1CF081CD87E34BA6E9700986 /* Pods-Vienna.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna.development.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna/Pods-Vienna.development.xcconfig"; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; };
 		2FAA363F2072F50B00169C8A /* MMTabBarView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MMTabBarView.framework; path = External/MMTabBarView.framework; sourceTree = "<group>"; };
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ClickableProgressIndicator.h; sourceTree = "<group>"; };
 		34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClickableProgressIndicator.m; sourceTree = "<group>"; };
 		37C652B4C918F312BA9F1AB1 /* NSURL+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Utils.h"; sourceTree = "<group>"; };
 		37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Utils.m"; sourceTree = "<group>"; };
+		3A02B28E20A115190053227A /* CS-ID.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "CS-ID.xcconfig"; path = "Scripts/Resources/CS-ID.xcconfig"; sourceTree = "<group>"; };
 		3A23F13315276935008AF863 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = NSNotificationAdditions.h; sourceTree = "<group>"; };
 		3A4DBEC51733C206006DD2AB /* ArticleCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleCellView.h; sourceTree = "<group>"; };
 		3A4DBEC61733C206006DD2AB /* ArticleCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCellView.m; sourceTree = "<group>"; };
@@ -1229,6 +1230,7 @@
 		2A37F4AAFDCFA73011CA2CEA /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
+				3A02B28D20A114F70053227A /* Config for release */,
 				439824161666B1ED00FFE219 /* Documentation */,
 				F6D7FED61F1CDD88004F095A /* Vienna */,
 				F6A7DDCB1E470E980017BE5E /* Vienna Help */,
@@ -1240,6 +1242,14 @@
 				19C28FB0FE9D524F11CA2CBB /* Products */,
 			);
 			name = Vienna;
+			sourceTree = "<group>";
+		};
+		3A02B28D20A114F70053227A /* Config for release */ = {
+			isa = PBXGroup;
+			children = (
+				3A02B28E20A115190053227A /* CS-ID.xcconfig */,
+			);
+			name = "Config for release";
 			sourceTree = "<group>";
 		};
 		43501F8E165DBCCB0018EDB7 /* DSClickableURLTextField */ = {
@@ -3368,6 +3378,7 @@
 		};
 		430C4AF81661F0860079C9FC /* Development */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A02B28E20A115190053227A /* CS-ID.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "Code Sign ID";
 			};
@@ -3375,6 +3386,7 @@
 		};
 		430C4AF91661F0860079C9FC /* Deployment */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A02B28E20A115190053227A /* CS-ID.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "Code Sign ID";
 			};
@@ -3574,6 +3586,7 @@
 		};
 		EAAF335A14BDE402002A8837 /* Development */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A02B28E20A115190053227A /* CS-ID.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "Archive and Prep for Upload";
 			};
@@ -3581,6 +3594,7 @@
 		};
 		EAAF335B14BDE402002A8837 /* Deployment */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A02B28E20A115190053227A /* CS-ID.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "Archive and Prep for Upload";
 			};
