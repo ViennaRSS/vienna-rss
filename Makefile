@@ -1,23 +1,23 @@
-WORKSPACE=Vienna.xcworkspace
+PROJECT=Vienna.xcodeproj
 SCHEME=Vienna
 
 default:
-	xcodebuild -workspace $(WORKSPACE) -scheme "Pods-Vienna" -configuration Deployment\
-		CONFIGURATION_BUILD_DIR="../build" LIBRARY_SEARCH_PATHS="../build"
-	xcodebuild -workspace $(WORKSPACE) -scheme "Archive and Prep for Upload" -configuration Deployment\
+	xcodebuild -project $(PROJECT) -scheme "Vienna Help" -configuration Deployment\
 		CONFIGURATION_BUILD_DIR=build LIBRARY_SEARCH_PATHS="build"
+	xcodebuild -project $(PROJECT) -scheme "Archive and Prep for Upload" -configuration Deployment\
+		-xcconfig Scripts/Resources/CS-ID.xcconfig CONFIGURATION_BUILD_DIR=build LIBRARY_SEARCH_PATHS="build"
 
 release:
-	xcodebuild -workspace $(WORKSPACE) -scheme "Pods-Vienna" -configuration Deployment\
-		CONFIGURATION_BUILD_DIR="../build" LIBRARY_SEARCH_PATHS="../build"
-	xcodebuild -workspace $(WORKSPACE) -scheme "Archive and Prep for Upload" -configuration Deployment\
+	xcodebuild -project $(PROJECT) -scheme "Vienna Help" -configuration Deployment\
 		CONFIGURATION_BUILD_DIR=build LIBRARY_SEARCH_PATHS="build"
+	xcodebuild -project $(PROJECT) -scheme "Archive and Prep for Upload" -configuration Deployment\
+		-xcconfig Scripts/Resources/CS-ID.xcconfig CONFIGURATION_BUILD_DIR=build LIBRARY_SEARCH_PATHS="build"
 
 development:
-	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Development
+	xcodebuild -project $(PROJECT) -scheme $(SCHEME) -configuration Development
 
 clean:
-	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Development clean
-	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Deployment clean
+	xcodebuild -project $(PROJECT) -scheme $(SCHEME) -configuration Development clean
+	xcodebuild -project $(PROJECT) -scheme $(SCHEME) -configuration Deployment clean
 	rm -fr build
 	rm -fr Carthage/Build
