@@ -3506,6 +3506,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		*validateFlag = folder.type == VNAFolderTypeOpenReader;
 		return YES;
 	}
+	if (theAction == @selector(viewArticlesTab:))
+	{
+		*validateFlag = !isAnyArticleView;
+		return YES;
+	}
 	if (theAction == @selector(viewNextUnread:))
 	{
 		*validateFlag = db.countOfUnread > 0;
