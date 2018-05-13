@@ -89,7 +89,7 @@ You can write plugins by referring to [this document](http://www.vienna-rss.com/
 
 Please check [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Vienna uses [CocoaPods](https://cocoapods.org) for managing dependencies. When building, make sure to always open the Xcode workspace `Viennna.xcworkspace` instead of a project file.
+Vienna now uses [Carthage](https://github.com/Carthage/Carthage) for managing dependencies.
 
 Licensing
 ---------
