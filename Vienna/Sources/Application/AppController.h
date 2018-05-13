@@ -18,6 +18,7 @@
 //  limitations under the License.
 //
 
+@import ASIHTTPRequest;
 @import Cocoa;
 @import IOKit.pwr_mgt;
 @import WebKit;

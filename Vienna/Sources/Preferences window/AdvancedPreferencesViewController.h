@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import "MASPreferencesViewController.h"
+@import MASPreferences;
 
 @interface AdvancedPreferencesViewController : NSViewController <MASPreferencesViewController> {
     IBOutlet NSButton * useJavaScriptButton;

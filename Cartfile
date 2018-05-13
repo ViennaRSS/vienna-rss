@@ -1,0 +1,14 @@
+# ASIHTTPRequest
+github "ViennaRSS/ASIHTTPRequest" ~> 1.9
+
+# FMDB
+github "ccgus/fmdb" ~> 2.7
+
+# MASPreferences
+github "shpakovski/MASPreferences" ~> 1.3
+
+# MMTabBarView
+github "ViennaRSS/MMTabBarView" ~> 1.4
+
+# Sparkle
+github "sparkle-project/Sparkle" ~> 1.19

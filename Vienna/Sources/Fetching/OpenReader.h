@@ -6,11 +6,11 @@
 //  Copyright 2011-2018 Vienna contributors (see menu item 'About Vienna' for list of contributors). All rights reserved.
 //
 
+@import ASIHTTPRequest;
 @import Foundation;
 
 @class ActivityItem;
 @class Article;
-@class ASIHTTPRequest;
 @class Folder;
 
 @interface OpenReader : NSObject

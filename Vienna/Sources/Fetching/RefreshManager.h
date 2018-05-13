@@ -18,10 +18,9 @@
 //  limitations under the License.
 //
 
+@import ASIHTTPRequest;
 @import Foundation;
 
-@class ASIHTTPRequest;
-@class ASINetworkQueue;
 @class Database;
 @class FeedCredentials;
 @class Folder;

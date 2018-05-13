@@ -1,6 +1,0 @@
-framework module MMTabBarView {
-  umbrella header "MMTabBarView.h"
-
-  export *
-  module * { export * }
-}

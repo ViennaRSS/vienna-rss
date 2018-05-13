@@ -18,8 +18,7 @@
 //
 
 @import Cocoa;
-
-#import "MASPreferencesWindowController.h"
+@import MASPreferences;
 
 @interface PreferencesWindowController : MASPreferencesWindowController
 
