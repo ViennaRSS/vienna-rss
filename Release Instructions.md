@@ -1,11 +1,11 @@
-Instructions for building and uploading Vienna binaries to Sourceforge
+Instructions for building and uploading Vienna binaries to Sourceforge and Bintray
 
 ## One time setup step: ##
 
  -	To ensure that releases are properly codesigned make sure that you have properly edited `Scripts/Resources/CS-ID.xcconfig` for your setup.
-    CODE_SIGN_IDENTITY should be the name of your certificate as it is stored in Keychain,
-    PRIVATE_KEY_PATH should be the location of the private DSA key used by Sparkle,
-    CODE_SIGN_REQUIREMENTS_PATH should generally remain at its default value.
+    `CODE_SIGN_IDENTITY` should be the name of your certificate as it is stored in Keychain,
+    `PRIVATE_KEY_PATH` should be the location of the private DSA key used by Sparkle,
+    `CODE_SIGN_REQUIREMENTS_PATH` should generally remain at its default value.
 
 ## Tag Formatting ##
 
