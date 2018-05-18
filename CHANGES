@@ -8,6 +8,18 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.4.0 Beta 1
+------------
+- New article menu and keyboard shortcut (Command-Y) to get back to the main tab (articles list)
+- New "Share With Pinboard" plugin
+- Remove obsolete Cocoalicious plugin
+- New lithuanian translation, contributed by Andrius Družinis-Vitkus
+- Improved Czech, Simplified Chinese, Galician and Russian translations
+- Fix a bug that prevented adding a feed in Simplified Chinese
+- New framework for managing tabs (MMTabBarView instead of PSMTabBarControl)
+- Use Carthage instead of Cocoapods to manage dependencies
+- Project cleanup and reorganization
+
 3.3.0
 -----
 - Improve Ukrainian localization
