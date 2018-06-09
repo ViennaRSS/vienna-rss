@@ -268,12 +268,10 @@ final class OverlayStatusBar: NSView {
                 return
             }
 
-            // swiftlint:disable trailing_closure realm/SwiftLint#1754
             NSAnimationContext.runAnimationGroup({ context in
                 context.duration = 0.4
-
                 backgroundView.animator().alphaValue = isShown ? 1 : 0
-            })
+            }, completionHandler: nil)
         }
     }
 
