@@ -4,3 +4,8 @@ files:
     languages_mapping:
       osx_locale:
         pt-BR: pt-BR
+  - source: /Vienna/Resources/Base.lproj/Localizable.stringsdict
+    translation: /Vienna/Resources/%osx_locale%.lproj/Localizable.stringsdict
+    languages_mapping:
+      osx_locale:
+        pt-BR: pt-BR
