@@ -125,7 +125,7 @@ final class MainWindowController: NSWindowController {
 
     // MARK: Observation
 
-    private var observationTokens: [NSKeyValueObservation]?
+    private var observationTokens: [NSKeyValueObservation] = []
 
 }
 
@@ -157,7 +157,7 @@ extension MainWindowController: NSWindowDelegate {
         filterLabel.textColor = .disabledControlTextColor
         filterButton.isEnabled = false
 
-        observationTokens = nil
+        observationTokens.removeAll()
     }
 
 }
