@@ -187,8 +187,8 @@ final class OverlayStatusBar: NSView {
 
     private var position: Position?
 
-    private var leadingConstraints: [NSLayoutConstraint]?
-    private var trailingConstraints: [NSLayoutConstraint]?
+    private lazy var leadingConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[view]", options: [], metrics: nil, views: ["view": self])
+    private lazy var trailingConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[view]-0-|", options: [], metrics: nil, views: ["view": self])
 
     // The status bar is pinned simply by setting and unsetting constraints.
     private func pin(to position: Position, of positioningView: NSView) {
@@ -196,40 +196,22 @@ final class OverlayStatusBar: NSView {
             return
         }
 
-        let oldConstraints: [NSLayoutConstraint]?
+        let oldConstraints: [NSLayoutConstraint]
         let newConstraints: [NSLayoutConstraint]
         switch position {
         case .leadingEdge:
             oldConstraints = trailingConstraints
-
-            if let leadingConstraints = leadingConstraints {
-                newConstraints = leadingConstraints
-            } else {
-                let constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[view]",
-                                                                 options: [], metrics: nil, views: ["view": self])
-                newConstraints = constraints
-                leadingConstraints = constraints
-            }
+            newConstraints = leadingConstraints
         case .trailingEdge:
             oldConstraints = leadingConstraints
-
-            if let trailingConstraints = trailingConstraints {
-                newConstraints = trailingConstraints
-            } else {
-                let constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[view]-0-|",
-                                                                 options: [], metrics: nil, views: ["view": self])
-                newConstraints = constraints
-                trailingConstraints = constraints
-            }
+            newConstraints = trailingConstraints
         }
 
         // Remove existing constraints.
-        if let oldConstraints = oldConstraints {
-            if #available(OSX 10.10, *) {
-                NSLayoutConstraint.deactivate(oldConstraints)
-            } else {
-                positioningView.removeConstraints(oldConstraints)
-            }
+        if #available(OSX 10.10, *) {
+            NSLayoutConstraint.deactivate(oldConstraints)
+        } else {
+            positioningView.removeConstraints(oldConstraints)
         }
 
         // Add new constraints.
@@ -268,12 +250,10 @@ final class OverlayStatusBar: NSView {
                 return
             }
 
-            // swiftlint:disable trailing_closure realm/SwiftLint#1754
             NSAnimationContext.runAnimationGroup({ context in
                 context.duration = 0.4
-
                 backgroundView.animator().alphaValue = isShown ? 1 : 0
-            })
+            }, completionHandler: nil)
         }
     }
 
