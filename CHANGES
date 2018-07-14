@@ -8,6 +8,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.4.0
+-----
+- Initial update for Xcode 10
+- Update for SwiftLint 0.25.1
+- Update Crowdin configuration for Brazilian Portuguese
+
 3.4.0 Beta 1
 ------------
 - New article menu and keyboard shortcut (Command-Y) to get back to the main tab (articles list)
