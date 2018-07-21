@@ -35,11 +35,20 @@
 #import "Folder.h"
 #import "Database.h"
 
+typedef NS_ENUM (NSInteger, Redirect301Status) {
+    HTTP301Unknown = 0,
+    HTTP301Pending,
+    HTTP301Unsafe,
+    HTTP301Safe
+};
+
 @interface RefreshManager ()
 
 @property (readwrite, copy) NSString *statusMessage;
 @property (nonatomic, retain) NSTimer * unsafe301RedirectionTimer;
 @property (atomic, copy) NSString *riskyIPAddress;
+@property (nonatomic) Redirect301Status redirect301Status;
+@property (nonatomic) NSMutableArray *redirect301WaitQueue;
 @property (nonatomic) SyncTypes syncType;
 
 -(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type;
@@ -89,6 +98,7 @@
 		// be notified on system wake up after sleep
 		[[NSWorkspace sharedWorkspace].notificationCenter addObserver:self selector:@selector(handleDidWake:) name:@"NSWorkspaceDidWakeNotification" object:nil];
 		_queue = dispatch_queue_create("uk.co.opencommunity.vienna2.refresh", NULL);
+		_redirect301WaitQueue = [[NSMutableArray alloc] init];
 		hasStarted = NO;
 	}
 	return self;
@@ -170,6 +180,7 @@
 		// we might have moved to a new network
 		// so, at the next occurence we should test if we can safely handle
 		// 301 redirects
+		self.redirect301Status = HTTP301Unknown;
 		[self.unsafe301RedirectionTimer invalidate];
 		self.unsafe301RedirectionTimer=nil;
 	}
@@ -623,63 +634,120 @@
 	NSURL *newURL = [NSURL URLWithString:[connector.responseHeaders valueForKey:@"Location"] relativeToURL:connector.url];
 	NSInteger responseStatusCode = connector.responseStatusCode;
 
+	[connector redirectToURL:newURL];
 	if (responseStatusCode == 301)
 	{
-		// We got a permanent redirect from the feed so change the feed URL to the new location.
-		Folder * folder = (Folder *)connector.userInfo[@"folder"];
-		ActivityItem *connectorItem = connector.userInfo[@"log"];
-
-        if ([newURL.host isEqualToString:connector.originalURL.host] || [self canTrust301Redirects:connector])
-        {
-			[[Database sharedManager] setFeedURL:newURL.absoluteString
-									   forFolder:folder.itemId];
-		
-			[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@", nil), newURL.absoluteString]];
-		}
-		else
-			[connectorItem appendDetail:NSLocalizedString(@"Redirection attempt treated as temporary for safety concern", nil)];
+		// We got a permanent redirect from the feed so we probably need to change the feed URL to the new location.
+		[self verify301Status:connector];
 	}
-
-	[connector redirectToURL:newURL];
 }
 
--(BOOL)canTrust301Redirects:(ASIHTTPRequest *)connector
+// We got a permanent redirect from the feed
+// We check if we really need to change the feed URL to a new location
+// to avoid issue #380 : https://github.com/ViennaRSS/vienna-rss/issues/380
+-(void)verify301Status:(ASIHTTPRequest *)connector
 {
-    if (self.unsafe301RedirectionTimer == nil || !self.unsafe301RedirectionTimer.valid)
-    {
-    	NSURL * testURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://www.example.com", connector.originalURL.scheme]];
-    	ASIHTTPRequest * testRequest = [ASIHTTPRequest requestWithURL:testURL];
-		[testRequest setUseCookiePersistence:NO];
-		testRequest.timeOutSeconds = 180;
-		[testRequest startSynchronous];
-
-		if (testRequest.responseStatusCode == 301 || testRequest.error)
-		{
-    		// there is no valid reason for www.example.com to be permanently redirected
-    		// (cf RFC 6761 http://www.iana.org/go/rfc6761)
-    		// so we probably have a misconfigured router / proxy
-    		// and we will not consider 301 redirections as permanent for 24 hours
-    		self.unsafe301RedirectionTimer = [NSTimer scheduledTimerWithTimeInterval:24*3600
-                                                                              target:self
-                                                                            selector:@selector(resetUnsafe301Timer:)
-                                                                            userInfo:nil
-                                                                             repeats:NO];
-    		self.riskyIPAddress = [NSHost currentHost].address;
-    		return NO;
-    	}
-    	else
-    	{
-    		return YES;
-    	}
+    if (connector != nil) {
+        [self.redirect301WaitQueue addObject:connector];
     }
-    else
-    	// we detected a risky situation less than 24 hours ago
-    	// so play it safe
-    	return NO;
+
+    NSURL *newURL = [NSURL URLWithString:[connector.responseHeaders valueForKey:@"Location"] relativeToURL:connector.url];
+    if ([newURL.host isEqualToString:connector.originalURL.host]) {
+        [self validate301WaitQueue];
+    }
+
+
+    switch (self.redirect301Status) {
+        case HTTP301Unknown: {
+            self.redirect301Status = HTTP301Pending;
+            // build a test request, assuming that
+            // there is no valid reason for
+            // www.example.com to be permanently redirected
+            // (cf RFC 6761 http://www.iana.org/go/rfc6761)
+            NSURL *testURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://www.example.com", connector.originalURL.scheme]];
+            ASIHTTPRequest *testRequest = [ASIHTTPRequest requestWithURL:testURL];
+            testRequest.delegate = nil;
+            __weak typeof(testRequest) weakRequest = testRequest;
+            [testRequest setFailedBlock:^{
+                             __strong typeof(weakRequest) strongRequest = weakRequest;
+                             LOG_EXPR([strongRequest responseHeaders]);
+                             LOG_EXPR([[NSString alloc] initWithData:[strongRequest responseData] encoding:NSUTF8StringEncoding]);
+                             [self void301WaitQueue];
+                         }];
+            [testRequest setCompletionBlock:^{
+                             __strong typeof(weakRequest) strongRequest = weakRequest;
+                             if (strongRequest.responseStatusCode == 301) {
+                             // we probably have a misconfigured router / proxy
+                             // which redirects permanently every site, even www.example.com
+                             [self void301WaitQueue];
+                             } else {
+                             // we can now assume that 301 redirects we encounter are safe
+                             [self validate301WaitQueue];
+                             }
+                         }];
+            [self addConnection:testRequest];
+        }
+        break;
+
+        case HTTP301Pending:
+            break;
+
+        case HTTP301Unsafe:
+            [self purge301WaitQueue];
+            break;
+
+        case HTTP301Safe:
+            [self process301WaitQueue];
+            break;
+    } /* switch */
+} /* verify301Status */
+
+-(void)void301WaitQueue
+{
+    self.redirect301Status = HTTP301Unsafe;
+    // we will not consider 301 redirections as permanent for 24 hours
+    self.unsafe301RedirectionTimer = [NSTimer scheduledTimerWithTimeInterval:24 * 3600
+                                                                      target:self
+                                                                    selector:@selector(reset301Status:)
+                                                                    userInfo:nil
+                                                                     repeats:NO];
+    self.riskyIPAddress = [NSHost currentHost].address;
+    [self purge301WaitQueue];
 }
 
-- (void)resetUnsafe301Timer:(NSTimer *)timer
+-(void)purge301WaitQueue
 {
+    for (id obj in [self.redirect301WaitQueue reverseObjectEnumerator]) {
+        ASIHTTPRequest *theConnector = (ASIHTTPRequest *)obj;
+        [self.redirect301WaitQueue removeObject:obj];
+        ActivityItem *connectorItem = theConnector.userInfo[@"log"];
+        [connectorItem appendDetail:NSLocalizedString(@"Redirection attempt treated as temporary for safety concern", nil)];
+    }
+}
+
+-(void)validate301WaitQueue
+{
+    self.redirect301Status = HTTP301Safe;
+    [self process301WaitQueue];
+}
+
+-(void)process301WaitQueue
+{
+    for (id obj in [self.redirect301WaitQueue reverseObjectEnumerator]) {
+        ASIHTTPRequest *theConnector = (ASIHTTPRequest *)obj;
+        [self.redirect301WaitQueue removeObject:obj];
+        NSString *theNewURLString = theConnector.url.absoluteString;
+        Folder *theFolder = (Folder *)theConnector.userInfo[@"folder"];
+        [[Database sharedManager] setFeedURL:theNewURLString forFolder:theFolder.itemId];
+        ActivityItem *connectorItem = theConnector.userInfo[@"log"];
+        [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@",
+                                                                                 nil), theNewURLString]];
+    }
+}
+
+-(void)reset301Status:(NSTimer *)timer
+{
+	self.redirect301Status = HTTP301Unknown;
 	[timer invalidate];
 	timer=nil;
 }
