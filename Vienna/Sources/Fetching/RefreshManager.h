@@ -26,10 +26,8 @@
 @class Folder;
 
 @interface RefreshManager : NSObject {
-	NSUInteger maximumConnections;
 	NSUInteger countOfNewArticles;
 	NSMutableArray * authQueue;
-	NSTimer * pumpTimer;
 	FeedCredentials * credentialsController;
 	BOOL hasStarted;
 	NSString * statusMessageDuringRefresh;

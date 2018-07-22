@@ -78,7 +78,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 {
 	if ((self = [super init]) != nil)
 	{
-		maximumConnections = [[Preferences standardPreferences] integerForKey:MAPref_RefreshThreads];
 		countOfNewArticles = 0;
 		authQueue = [[NSMutableArray alloc] init];
 		statusMessageDuringRefresh = nil;

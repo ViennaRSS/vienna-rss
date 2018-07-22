@@ -37,7 +37,6 @@ extern NSString * MAPref_CheckFrequency;
 extern NSString * MAPref_ArticleListColumns;
 extern NSString * MAPref_CheckForNewArticlesOnStartup;
 extern NSString * MAPref_FolderImagesFolder;
-extern NSString * MAPref_RefreshThreads;
 extern NSString * MAPref_ActiveStyleName;
 extern NSString * MAPref_ActiveTextSizeMultiplier;
 extern NSString * MAPref_StylesFolder;
