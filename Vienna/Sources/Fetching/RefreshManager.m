@@ -82,12 +82,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 		countOfNewArticles = 0;
 		authQueue = [[NSMutableArray alloc] init];
 		statusMessageDuringRefresh = nil;
-		networkQueue = [[ASINetworkQueue alloc] init];
-		[networkQueue setShouldCancelAllRequestsOnFailure:NO];
-		networkQueue.delegate = self;
-		networkQueue.requestDidFinishSelector = @selector(nqRequestFinished:);
-		networkQueue.requestDidStartSelector = @selector(nqRequestStarted:);
-		networkQueue.queueDidFinishSelector = @selector(nqQueueDidFinishSelector:);
+		networkQueue = [[NSOperationQueue alloc] init];
+		networkQueue.name = @"VNAHTTPSession queue";
 		networkQueue.maxConcurrentOperationCount = [[Preferences standardPreferences] integerForKey:MAPref_ConcurrentDownloads];
 
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -103,32 +99,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 	}
 	return self;
 }
-
-- (void)nqQueueDidFinishSelector:(ASIHTTPRequest *)request {
-	if (hasStarted)
-	{
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:nil];
-		hasStarted = NO;
-        self.statusMessage = NSLocalizedString(@"Refresh completed", nil);
-	}
-	else
-	{
-        self.statusMessage = nil;
-	}
-	LLog(@"Queue empty!!!");
-}
-
-- (void)nqRequestFinished:(ASIHTTPRequest *)request {
-	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),networkQueue.requestsCount,NSLocalizedString(@"Refreshing subscriptions…", nil)];
-    self.statusMessage = self.statusMessageDuringRefresh;
-}
-
-- (void)nqRequestStarted:(ASIHTTPRequest *)request {
-	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),networkQueue.requestsCount,NSLocalizedString(@"Refreshing subscriptions…", nil)];
-    self.statusMessage = self.statusMessageDuringRefresh;
-}
-
 
 /* sharedManager
  * Returns the single instance of the refresh manager.
@@ -1200,20 +1170,30 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 	return nil;
 }
 
+#pragma mark Network queue management
+
 /* addConnection
  * Add the specified connection to the connections queue
  * that we manage.
  */
 -(void)addConnection:(ASIHTTPRequest *)conn
 {
-	if (![networkQueue.operations containsObject:conn]) {
-		[networkQueue addOperation:conn];
-		if (networkQueue.requestsCount == 1) // networkQueue is NOT YET started
-		{
-			countOfNewArticles = 0;
-			[networkQueue go];
-		}
-	}
+    if (![networkQueue.operations containsObject:conn]) {
+        NSOperation *completionOperation = [NSBlockOperation blockOperationWithBlock:^{
+                                                                 [self updateStatus];
+                                                                 if (self->networkQueue.operationCount == 0) {
+                                                                    [self finishConnectionQueue];
+                                                                 }
+                                                             }];
+        [completionOperation addDependency:conn];
+        [[NSOperationQueue mainQueue] addOperation:completionOperation];
+        [networkQueue addOperation:conn];
+        [self updateStatus];
+        if (networkQueue.operationCount == 1) {       // networkQueue is NOT YET started
+            countOfNewArticles = 0;
+            [networkQueue setSuspended:NO];
+        }
+    }
 }
 
 /* removeConnection
@@ -1222,7 +1202,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
  */
 -(void)removeConnection:(ASIHTTPRequest *)conn
 {
-	NSAssert([networkQueue requestsCount] > 0, @"Calling removeConnection with zero active connection count");
+	NSAssert([networkQueue operationCount] > 0, @"Calling removeConnection with zero active connection count");
 	if ([networkQueue.operations containsObject:conn])
 	{
 		// Close the connection before we release as otherwise it leaks
@@ -1251,9 +1231,29 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
 -(BOOL)isConnecting
 {
-	return networkQueue.requestsCount > 0;
+	return networkQueue.operationCount > 0;
 }
 
+-(void)updateStatus
+{
+    statusMessageDuringRefresh =
+        [NSString stringWithFormat:@"%@: (%lu) - %@", NSLocalizedString(@"Queue", nil), (unsigned long)networkQueue.operationCount,
+         NSLocalizedString(@"Refreshing subscriptions…", nil)];
+    self.statusMessage = self.statusMessageDuringRefresh;
+}
+
+-(void)finishConnectionQueue
+{
+    if (hasStarted) {
+        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:nil];
+        hasStarted = NO;
+        self.statusMessage = NSLocalizedString(@"Refresh completed", nil);
+    } else {
+        self.statusMessage = nil;
+    }
+    LLog(@"Queue empty!!!");
+}
 
 /* dealloc
  * Clean up after ourselves.

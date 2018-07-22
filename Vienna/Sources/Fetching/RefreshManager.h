@@ -33,7 +33,7 @@
 	FeedCredentials * credentialsController;
 	BOOL hasStarted;
 	NSString * statusMessageDuringRefresh;
-	ASINetworkQueue *networkQueue;
+	NSOperationQueue *networkQueue;
 	dispatch_queue_t _queue;
 }
 
