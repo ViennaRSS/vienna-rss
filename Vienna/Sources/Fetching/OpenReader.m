@@ -215,7 +215,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     [(ASIHTTPRequest *)obj cancel];
                     [self.clientAuthWaitQueue removeObject:obj];
                 }
-                self.statusMessage = nil;
+                self.statusMessage = @"";
             } else {
                 NSString *response = [strongRequest responseString];
                 NSArray *components = [response componentsSeparatedByString:@"\n"];
@@ -683,7 +683,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             // Add to count of new articles so far
             self.countOfNewArticles += newArticlesFromFeed;
 
-            self.statusMessage = nil;
             [refreshedFolder clearNonPersistedFlag:VNAFolderFlagError];
             // Send status to the activity log
             if (newArticlesFromFeed == 0) {
@@ -908,8 +907,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         }
     }
 
-    // Unread count may have changed
-    self.statusMessage = nil;
 } // subscriptionsRequestDone
 
 -(void)loadSubscriptions

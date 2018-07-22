@@ -290,14 +290,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 	return NO;
 }
 
-/* statusMessageDuringRefresh
- * Returns the string to be displayed during a refresh.
- */
--(NSString *)statusMessageDuringRefresh
-{
-	return statusMessageDuringRefresh;
-}
-
 /* cancelAll
  * Cancel all active refreshes.
  */
@@ -568,6 +560,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             NSString *byteCount = [NSByteCountFormatter stringFromByteCount:[request responseData].length
                                                                  countStyle:NSByteCountFormatterCountStyleFile];
             [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%@ received", @"Number of bytes received, e.g. 1 MB received"), byteCount]];
+		} else {
+		    [aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
 		}
 	} else {
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), request.responseStatusCode]];
@@ -590,7 +584,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 {
     [self setFolderUpdatingFlag:folder flag:NO];
 	// Unread count may have changed
-    self.statusMessage = nil;
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
 																		object:@(folder.itemId)];
 }
@@ -1180,16 +1173,16 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 {
     if (![networkQueue.operations containsObject:conn]) {
         NSOperation *completionOperation = [NSBlockOperation blockOperationWithBlock:^{
-                                                                 [self updateStatus];
                                                                  if (self->networkQueue.operationCount == 0) {
                                                                     [self finishConnectionQueue];
                                                                  }
+                                                                 [self updateStatus];
                                                              }];
         [completionOperation addDependency:conn];
         [[NSOperationQueue mainQueue] addOperation:completionOperation];
         [networkQueue addOperation:conn];
-        [self updateStatus];
         if (networkQueue.operationCount == 1) {       // networkQueue is NOT YET started
+            [self updateStatus];
             countOfNewArticles = 0;
             [networkQueue setSuspended:NO];
         }
@@ -1236,10 +1229,12 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
 -(void)updateStatus
 {
-    statusMessageDuringRefresh =
-        [NSString stringWithFormat:@"%@: (%lu) - %@", NSLocalizedString(@"Queue", nil), (unsigned long)networkQueue.operationCount,
-         NSLocalizedString(@"Refreshing subscriptions…", nil)];
-    self.statusMessage = self.statusMessageDuringRefresh;
+    if (hasStarted) {
+        statusMessageDuringRefresh =
+            [NSString stringWithFormat:@"%@: (%lu) - %@", NSLocalizedString(@"Queue", nil), (unsigned long)networkQueue.operationCount,
+             NSLocalizedString(@"Refreshing subscriptions…", nil)];
+    }
+    self.statusMessage = statusMessageDuringRefresh;
 }
 
 -(void)finishConnectionQueue
@@ -1248,9 +1243,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:nil];
         hasStarted = NO;
-        self.statusMessage = NSLocalizedString(@"Refresh completed", nil);
+        statusMessageDuringRefresh = NSLocalizedString(@"Refresh completed", nil);
     } else {
-        self.statusMessage = nil;
+        statusMessageDuringRefresh = @"";
     }
     LLog(@"Queue empty!!!");
 }

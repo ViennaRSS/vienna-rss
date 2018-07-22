@@ -42,7 +42,6 @@
 @property (readonly, copy) NSString *statusMessage;
 @property (nonatomic, getter=isConnecting, readonly) BOOL connecting;
 @property (nonatomic, readonly) NSUInteger countOfNewArticles;
-@property (nonatomic, readonly, copy) NSString *statusMessageDuringRefresh;
 
 -(void)refreshFolderIconCacheForSubscriptions:(NSArray *)foldersArray;
 //-(void)refreshSubscriptions:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
