@@ -930,7 +930,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     [request setPostValue:feedURL forKey:@"quickadd"];
     // Needs to be synchronous so UI doesn't refresh too soon.
     request.delegate = nil;
-    [request startSynchronous];
+    [request startAsynchronous];
 }
 
 -(void)unsubscribeFromFeed:(NSString *)feedURL
@@ -955,7 +955,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     [request setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
     [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", folderName] forKey:flag ? @"a" : @"r"];
     request.delegate = nil;
-    [request startSynchronous];
+    [request startAsynchronous];
 }
 
 -(void)markRead:(Article *)article readFlag:(BOOL)flag
