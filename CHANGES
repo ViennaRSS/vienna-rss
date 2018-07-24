@@ -8,9 +8,10 @@ most recent build should be at the top of this file.
 
 Thanks!
 
-3.4.1
+3.4.2
 -----
 - Fix crash on startup on Mac OS X 10.9 and 10.10
+- Changed file extension for binaries upload to tar.gz (instead of .tgz) as Github's user interface got picky again
 
 3.4.0
 -----

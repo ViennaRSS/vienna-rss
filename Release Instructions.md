@@ -39,7 +39,7 @@ Tags should be in one of the following formats:
 ### On Github:
 
    1. Go to Vienna's releases page on Github : <https://github.com/ViennaRSS/vienna-rss/releases>
-   2. Choose "Draft a new release", type the tag name (`v/3.3.0_beta4`), a description ("Vienna 3.3.0 Beta 4"). Upload the `Vienna3.3.0_beta4.tgz` file.
+   2. Choose "Draft a new release", type the tag name (`v/3.3.0_beta4`), a description ("Vienna 3.3.0 Beta 4"). Upload the `Vienna3.3.0_beta4.tar.gz` file.
    3. For beta and release candidates, check the "This is a prerelease" box.
    4. Click the "Publish" button.
    5. Verify the uploaded file: download it, uncompress it and check that it runs OK.
@@ -49,14 +49,14 @@ Tags should be in one of the following formats:
    6. Log in and go to <https://bintray.com/viennarss/vienna-rss/vienna-rss/view>
    7. Choose "New version".
    8. Fill the name ("3.3.0Beta4"), the description from the version notes, then click "Create version". Add the VCS tag (`v/3.3.0_beta4`) and update.
-   9. Check the version (at <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4>), click "Upload this version’s files (...) via the UI" to go to <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4/upload> and upload the two .tgz files (whose name should be like `Vienna3.3.0_beta4.tgz` and `Vienna3.3.0_beta4.5b272a6-dSYM.tgz`).
+   9. Check the version (at <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4>), click "Upload this version’s files (...) via the UI" to go to <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4/upload> and upload the two .tar.gz files (whose name should be like `Vienna3.3.0_beta4.tar.gz` and `Vienna3.3.0_beta4.5b272a6-dSYM.tar.gz`).
    10. Click "Save the changes", then click "Publish".
-   11. Go back to the files list (<https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4/#files>), select the binary ("Vienna3.3.0_beta4.tgz") and choose "Show in download list" in the contextual menu.
+   11. Go back to the files list (<https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4/#files>), select the binary ("Vienna3.3.0_beta4.tar.gz") and choose "Show in download list" in the contextual menu.
 
 ### On Sourceforge.net:
 
    12. Check that the SourceForge Downloads page for Vienna at <https://sourceforge.net/projects/vienna-rss/files/> got the new files.
-   13. For stable releases only : from the Sourceforge site, edit the "Properties" of "Vienna3.3.0.tgz" (be careful to select the binary and not the code source file !) and set it as default download for Mac OS X. Don't do this for beta releases!
+   13. For stable releases only : from the Sourceforge site, edit the "Properties" of "Vienna3.3.0.tar.gz" (be careful to select the binary and not the code source file !) and set it as default download for Mac OS X. Don't do this for beta releases!
 
 ### On viennarss.github.io
 
