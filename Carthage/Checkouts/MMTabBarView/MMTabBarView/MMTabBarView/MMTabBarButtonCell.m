@@ -228,7 +228,7 @@ NS_ASSUME_NONNULL_BEGIN
     MMTabBarView *tabBarView = [self tabBarView];
     id <MMTabStyle> tabStyle = [tabBarView style];
 
-    if ([tabStyle respondsToSelector:@selector(attributedStringValueForTabCell:)])
+    if ([tabStyle respondsToSelector:@selector(attributedObjectCountStringValueForTabCell:)])
         return [tabStyle attributedObjectCountStringValueForTabCell:self];
     else
         return [self _attributedObjectCountStringValue];

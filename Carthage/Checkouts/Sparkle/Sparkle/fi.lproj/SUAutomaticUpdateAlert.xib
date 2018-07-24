@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -61,7 +61,7 @@
                     <button verticalHuggingPriority="750" id="15">
                         <rect key="frame" x="435" y="12" width="167" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
-                        <buttonCell key="cell" type="push" title="Installer et relancer" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="41">
+                        <buttonCell key="cell" type="push" title="Asenna ja käynnistä ohjelma uudelleen" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="41">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                             <string key="keyEquivalent" base64-UTF8="YES">
@@ -72,24 +72,10 @@ DQ
                             <action selector="installNow:" target="-2" id="33"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="16">
-                        <rect key="frame" x="268" y="12" width="167" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
-                        <buttonCell key="cell" type="push" title="Installer en quittant" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="42">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                            <string key="keyEquivalent" base64-UTF8="YES">
-Gw
-</string>
-                        </buttonCell>
-                        <connections>
-                            <action selector="installLater:" target="-2" id="34"/>
-                        </connections>
-                    </button>
                     <button verticalHuggingPriority="750" id="30">
                         <rect key="frame" x="102" y="12" width="116" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <buttonCell key="cell" type="push" title="Ignorer" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="44">
+                        <buttonCell key="cell" type="push" title="Älä asenna" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="44">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -100,12 +86,26 @@ Gw
                     <button id="17">
                         <rect key="frame" x="105" y="58" width="619" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <buttonCell key="cell" type="check" title="Télécharger et installer automatiquement les mises à jour" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="43">
+                        <buttonCell key="cell" type="check" title="Hae ja asenna päivitykset jatkossa automaattisesti" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="43">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="smallSystem"/>
                         </buttonCell>
                         <connections>
                             <binding destination="18" name="value" keyPath="values.SUAutomaticallyUpdate" id="19"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" misplaced="YES" id="16">
+                        <rect key="frame" x="218" y="12" width="228" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
+                        <buttonCell key="cell" type="push" title="Asenna lopetuksen yhteydessä" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="42">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="installLater:" target="-2" id="34"/>
                         </connections>
                     </button>
                 </subviews>

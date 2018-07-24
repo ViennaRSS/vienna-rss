@@ -88,7 +88,7 @@ static NSString *const SUUpdaterDefaultsObservationContext = @"SUUpdaterDefaults
     if (bundle == nil) bundle = [NSBundle mainBundle];
     id updater = [sharedUpdaters objectForKey:[NSValue valueWithNonretainedObject:bundle]];
     if (updater == nil) {
-        updater = [[[self class] alloc] initForBundle:bundle];
+        updater = [(SUUpdater *)[[self class] alloc] initForBundle:bundle];
     }
     return updater;
 }
@@ -299,8 +299,23 @@ static NSString *const SUUpdaterDefaultsObservationContext = @"SUUpdaterDefaults
 
 - (void)checkForUpdatesInBackground
 {
+    BOOL automatic = [self automaticallyDownloadsUpdates];
+
+    if (!automatic) {
+        if (@available(macOS 10.9, *)) {
+            NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"com.apple.notificationcenterui"];
+            BOOL dnd = [defaults boolForKey:@"doNotDisturb"];
+            if (dnd) {
+                SULog(SULogLevelDefault, @"Delayed update, because Do Not Disturb is on");
+                [self updateLastUpdateCheckDate];
+                [self scheduleNextUpdateCheck];
+                return;
+            }
+        }
+    }
+
     // Do not use reachability for a preflight check. This can be deceptive and a bad idea. Apple does not recommend doing it.
-    SUUpdateDriver *theUpdateDriver = [[([self automaticallyDownloadsUpdates] ? [SUAutomaticUpdateDriver class] : [SUScheduledUpdateDriver class])alloc] initWithUpdater:self];
+    SUUpdateDriver *theUpdateDriver = [(SUBasicUpdateDriver *)[(automatic ? [SUAutomaticUpdateDriver class] : [SUScheduledUpdateDriver class])alloc] initWithUpdater:self];
     
     [self checkForUpdatesWithDriver:theUpdateDriver];
 }
@@ -522,7 +537,7 @@ static NSString *escapeURLComponent(NSString *str) {
     const NSTimeInterval oneWeek = 60 * 60 * 24 * 7;
     sendingSystemProfile &= (-[lastSubmitDate timeIntervalSinceNow] >= oneWeek);
 
-    NSArray *parameters = @[];
+    NSArray<NSDictionary<NSString *, NSString *> *> *parameters = @[];
     if ([self.delegate respondsToSelector:@selector(feedParametersForUpdater:sendingSystemProfile:)]) {
         parameters = [parameters arrayByAddingObjectsFromArray:[self.delegate feedParametersForUpdater:self sendingSystemProfile:sendingSystemProfile]];
     }
@@ -535,7 +550,7 @@ static NSString *escapeURLComponent(NSString *str) {
 
     // Build up the parameterized URL.
     NSMutableArray *parameterStrings = [NSMutableArray array];
-    for (NSDictionary *currentProfileInfo in parameters) {
+    for (NSDictionary<NSString *, NSString *> *currentProfileInfo in parameters) {
         [parameterStrings addObject:[NSString stringWithFormat:@"%@=%@", escapeURLComponent([[currentProfileInfo objectForKey:@"key"] description]), escapeURLComponent([[currentProfileInfo objectForKey:@"value"] description])]];
     }
 
