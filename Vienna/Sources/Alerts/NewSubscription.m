@@ -93,6 +93,16 @@
 	// URL field with it. A handy shortcut.
 	if (initialURL != nil)
 	{
+        NSString *lowercaseURL = [initialURL lowercaseString];
+        if ([lowercaseURL hasPrefix:@"feed:http://"])
+        {
+            initialURL = [initialURL substringFromIndex:[@"feed:" length]];
+        }
+        else if ([lowercaseURL hasPrefix:@"feed:https://"])
+        {
+            initialURL = [initialURL substringFromIndex:[@"feed:" length]];
+        }
+        
 		feedURL.stringValue = initialURL;
 		[feedSource selectItemWithTitle:NSLocalizedString(@"URL", @"URL")];
 	}
@@ -104,6 +114,7 @@
 		{
 			NSString * pasteString = [[NSString alloc] initWithData:pboardData encoding:NSASCIIStringEncoding];
 			NSString * lowerCasePasteString = pasteString.lowercaseString;
+            
 			if (lowerCasePasteString != nil && ([lowerCasePasteString hasPrefix:@"http://"] || [lowerCasePasteString hasPrefix:@"https://"] || [lowerCasePasteString hasPrefix:@"feed://"]))
 			{
 				feedURL.stringValue = pasteString;
