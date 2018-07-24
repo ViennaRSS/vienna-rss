@@ -8,6 +8,10 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.4.1
+-----
+- Fix crash on startup on Mac OS X 10.9 and 10.10
+
 3.4.0
 -----
 - Initial update for Xcode 10
