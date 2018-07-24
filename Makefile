@@ -8,7 +8,7 @@ default:
 		-xcconfig Scripts/Resources/CS-ID.xcconfig CONFIGURATION_BUILD_DIR=build LIBRARY_SEARCH_PATHS="build"
 
 release:
-	xcodebuild -project $(PROJECT) -scheme "Vienna Help" -configuration Deployment\
+	xcodebuild -project $(PROJECT) -scheme "Vienna" -configuration Deployment\
 		CONFIGURATION_BUILD_DIR=build LIBRARY_SEARCH_PATHS="build"
 	xcodebuild -project $(PROJECT) -scheme "Archive and Prep for Upload" -configuration Deployment\
 		-xcconfig Scripts/Resources/CS-ID.xcconfig CONFIGURATION_BUILD_DIR=build LIBRARY_SEARCH_PATHS="build"
