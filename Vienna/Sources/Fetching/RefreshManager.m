@@ -49,7 +49,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 @property (atomic, copy) NSString *riskyIPAddress;
 @property (nonatomic) Redirect301Status redirect301Status;
 @property (nonatomic) NSMutableArray *redirect301WaitQueue;
-@property (nonatomic) SyncTypes syncType;
 
 -(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type;
 -(void)getCredentialsForFolder;
@@ -193,41 +192,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 			}
 		}	
 	}
-}
-
--(void)refreshSubscriptionsAfterDelete:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
-    self.syncType = MA_Sync_Unsubscribe;
-    [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
-}
-    
--(void)refreshSubscriptionsAfterSubscribe:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
-    self.syncType = MA_Sync_Subscribe;
-	//   [GRSOperation setFetchFlag:YES];
-    [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
-}
-
--(void)refreshSubscriptionsAfterUnsubscribe:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
-    self.syncType = MA_Sync_Unsubscribe;
-    [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
-}
-
--(void)refreshSubscriptionsAfterMerge:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
-    self.syncType = MA_Sync_Merge;
-    [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
-}
-
--(void)refreshSubscriptionsAfterRefresh:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
-    self.syncType = MA_Sync_Refresh;
-    [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
-}
-
--(void)refreshSubscriptionsAfterRefreshAll:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus 
-{   
-    self.syncType = MA_Sync_Refresh_All;
-	
-	if ([Preferences standardPreferences].syncGoogleReader) [[OpenReader sharedManager] loadSubscriptions];
-	
-    [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
 
 /* refreshFolderIconCacheForSubscriptions
