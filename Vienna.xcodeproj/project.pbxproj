@@ -96,6 +96,7 @@
 		2FAA36422072F57500169C8A /* MMTabBarView.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 2FAA363F2072F50B00169C8A /* MMTabBarView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		37C650801816EBAD3C0D9DBF /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */; };
+		3A171C00210B551B00B80FBB /* TRVSURLSessionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A171BF1210B551B00B80FBB /* TRVSURLSessionOperation.m */; };
 		3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBEC61733C206006DD2AB /* ArticleCellView.m */; };
 		3A7BD0DD1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */; };
 		3AEE7DE91695FC570018A17D /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* vienna_public_key.pem */; };
@@ -410,6 +411,10 @@
 		34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClickableProgressIndicator.m; sourceTree = "<group>"; };
 		37C652B4C918F312BA9F1AB1 /* NSURL+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Utils.h"; sourceTree = "<group>"; };
 		37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Utils.m"; sourceTree = "<group>"; };
+		3A171BE0210B551A00B80FBB /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		3A171BEE210B551B00B80FBB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3A171BF0210B551B00B80FBB /* TRVSURLSessionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRVSURLSessionOperation.h; sourceTree = "<group>"; };
+		3A171BF1210B551B00B80FBB /* TRVSURLSessionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRVSURLSessionOperation.m; sourceTree = "<group>"; };
 		3A23F13315276935008AF863 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = NSNotificationAdditions.h; sourceTree = "<group>"; };
 		3A4DBEC51733C206006DD2AB /* ArticleCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleCellView.h; sourceTree = "<group>"; };
 		3A4DBEC61733C206006DD2AB /* ArticleCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCellView.m; sourceTree = "<group>"; };
@@ -1277,6 +1282,25 @@
 			name = Vienna;
 			sourceTree = "<group>";
 		};
+		3A171BDF210B551A00B80FBB /* TRVSURLSessionOperation */ = {
+			isa = PBXGroup;
+			children = (
+				3A171BE0210B551A00B80FBB /* LICENSE */,
+				3A171BEE210B551B00B80FBB /* README.md */,
+				3A171BEF210B551B00B80FBB /* TRVSURLSessionOperation */,
+			);
+			path = TRVSURLSessionOperation;
+			sourceTree = "<group>";
+		};
+		3A171BEF210B551B00B80FBB /* TRVSURLSessionOperation */ = {
+			isa = PBXGroup;
+			children = (
+				3A171BF0210B551B00B80FBB /* TRVSURLSessionOperation.h */,
+				3A171BF1210B551B00B80FBB /* TRVSURLSessionOperation.m */,
+			);
+			path = TRVSURLSessionOperation;
+			sourceTree = "<group>";
+		};
 		43501F8E165DBCCB0018EDB7 /* DSClickableURLTextField */ = {
 			isa = PBXGroup;
 			children = (
@@ -1371,6 +1395,7 @@
 				F6D008A11EF979F9008F2D3B /* BJRVerticallyCenteredTextFieldCell */,
 				EA43C70614A370CB00F2D843 /* DebugHelper */,
 				43501F8E165DBCCB0018EDB7 /* DSClickableURLTextField */,
+				3A171BDF210B551A00B80FBB /* TRVSURLSessionOperation */,
 			);
 			path = External;
 			sourceTree = "<group>";
@@ -2342,6 +2367,7 @@
 				F69964F71F13029600FC8493 /* OverlayStatusBar.swift in Sources */,
 				435028B7165DE9E00018EDB7 /* UnifiedDisplayView.m in Sources */,
 				435028B8165DE9E00018EDB7 /* URLHandlerCommand.m in Sources */,
+				3A171C00210B551B00B80FBB /* TRVSURLSessionOperation.m in Sources */,
 				F6373A231F1D53B500ED3B09 /* MainWindow.swift in Sources */,
 				435028B9165DE9E00018EDB7 /* ViennaApp.m in Sources */,
 				F61CEA681F03F277009C878E /* PluginToolbarItem.swift in Sources */,
