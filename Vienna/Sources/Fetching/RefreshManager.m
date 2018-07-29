@@ -34,6 +34,8 @@
 #import "Article.h"
 #import "Folder.h"
 #import "Database.h"
+#import "TRVSURLSessionOperation.h"
+#import "URLRequestExtensions.h"
 
 typedef NS_ENUM (NSInteger, Redirect301Status) {
     HTTP301Unknown = 0,
@@ -49,6 +51,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 @property (atomic, copy) NSString *riskyIPAddress;
 @property (nonatomic) Redirect301Status redirect301Status;
 @property (nonatomic) NSMutableArray *redirect301WaitQueue;
+@property (nonatomic, readonly) NSURLSession * urlSession;
 
 -(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type;
 -(void)getCredentialsForFolder;
@@ -57,7 +60,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 -(void)pumpSubscriptionRefresh:(Folder *)folder shouldForceRefresh:(BOOL)force;
 -(void)pumpFolderIconRefresh:(Folder *)folder;
 -(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem shouldForceRefresh:(BOOL)force;
--(void)removeConnection:(ASIHTTPRequest *)conn;
 -(NSString *)getRedirectURL:(NSData *)data;
 - (void)syncFinishedForFolder:(Folder *)folder;
 
@@ -83,6 +85,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 		networkQueue = [[NSOperationQueue alloc] init];
 		networkQueue.name = @"VNAHTTPSession queue";
 		networkQueue.maxConcurrentOperationCount = [[Preferences standardPreferences] integerForKey:MAPref_ConcurrentDownloads];
+		NSURLSessionConfiguration * config = [NSURLSessionConfiguration defaultSessionConfiguration];
+		config.timeoutIntervalForRequest = 180;
+		_urlSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];
 
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
@@ -127,16 +132,18 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
  */
 -(void)handleWillDeleteFolder:(NSNotification *)nc
 {
-	Folder * folder = [[Database sharedManager] folderFromID:[nc.object integerValue]];
-	if (folder != nil)
-	{
-        for (ASIHTTPRequest *theRequest in networkQueue.operations) {
-			if (theRequest.userInfo[@"folder"] == folder) {
-				[self removeConnection:theRequest];
-				break;
-			}
-		}
-	}
+    Folder *folder = [[Database sharedManager] folderFromID:[nc.object integerValue]];
+    if (folder != nil) {
+        for (TRVSURLSessionOperation *theRequest in networkQueue.operations)
+        {
+            NSMutableURLRequest *urlRequest = (NSMutableURLRequest *)(theRequest.task.originalRequest);
+            if (((NSDictionary *)[urlRequest userInfo])[@"folder"] == folder)
+            {
+                [theRequest.task cancel];
+                break;
+            }
+        }
+    }
 }
 
 
@@ -244,9 +251,10 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
  */
 -(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type
 {
-    for (ASIHTTPRequest *theRequest in networkQueue.operations)
+    for (TRVSURLSessionOperation *theRequest in networkQueue.operations)
     {
-		if ((theRequest.userInfo[@"folder"] == folder) && ([[theRequest.userInfo valueForKey:@"type"] integerValue] == @(type).integerValue))
+		NSMutableURLRequest *urlRequest = (NSMutableURLRequest *)(theRequest.task.originalRequest);
+		if ((((NSDictionary *)[urlRequest userInfo])[@"folder"] == folder) && ([[((NSDictionary *)[urlRequest userInfo]) valueForKey:@"type"] integerValue] == @(type).integerValue))
             return YES;
 
 	}
@@ -412,60 +420,64 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
  */
 -(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem shouldForceRefresh:(BOOL)force
 {	
-	ASIHTTPRequest *myRequest;
+	NSMutableURLRequest *myRequest;
 	
 	if (folder.type == VNAFolderTypeRSS) {
-		myRequest = [ASIHTTPRequest requestWithURL:url];
+		myRequest = [NSMutableURLRequest requestWithURL:url];
 		NSString * theLastUpdateString = folder.lastUpdateString;
         if (![theLastUpdateString isEqualToString:@""])
         {
-            [myRequest addRequestHeader:@"If-Modified-Since" value:theLastUpdateString];
-            [myRequest addRequestHeader:@"A-IM" value:@"feed"];
+            [myRequest setValue:theLastUpdateString forHTTPHeaderField:@"If-Modified-Since"];
+            [myRequest setValue:@"feed" forHTTPHeaderField:@"A-IM"];
         }
-		myRequest.userInfo = @{@"folder": folder, @"log": aItem, @"type": @(MA_Refresh_Feed)};
-		if (![folder.username isEqualToString:@""])
-		{
-			myRequest.username = folder.username;
-			myRequest.password = folder.password;
-			[myRequest setUseCookiePersistence:NO];
-		}
-		myRequest.delegate = self;
-		myRequest.didFinishSelector = @selector(folderRefreshCompleted:);
-		myRequest.didFailSelector = @selector(folderRefreshFailed:);
-		myRequest.willRedirectSelector = @selector(folderRefreshRedirect:);
-		[myRequest addRequestHeader:@"Accept" value:@"application/rss+xml,application/rdf+xml,application/atom+xml,text/xml,application/xml,application/xhtml+xml;q=0.9,text/html;q=0.8,*/*;q=0.5"];
+        [myRequest setUserInfo:@{@"folder": folder, @"log": aItem, @"type": @(MA_Refresh_Feed)}];
+        [myRequest addValue:@"application/rss+xml,application/rdf+xml,application/atom+xml,text/xml,application/xml,application/xhtml+xml;q=0.9,text/html;q=0.8,*/*;q=0.5" forHTTPHeaderField:@"Accept"];
 	} else { // Open Reader feed
 		myRequest = [[OpenReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
 	}
-	myRequest.timeOutSeconds = 180;
 	// hack for handling file:// URLs
-	if (url.fileURL) {
-		[self folderRefreshCompleted:myRequest];
-	} else {
-		[self addConnection:myRequest];
+	//if (url.fileURL) {
+		//[self folderRefreshCompleted:myRequest];
+	//} else {
+        __weak typeof(self) weakSelf = self;
+		[self addConnection:myRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { 
+		    if (error) {
+		        [weakSelf folderRefreshFailed:myRequest error:error];
+		    } else {
+		        [weakSelf folderRefreshCompleted:myRequest response:response data:data];
+		    }
+		}];
 		if (!hasStarted)
 		{
 			hasStarted = YES;
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
 		}
-	}
+	//}
 }
 
 
 // failure callback
-- (void)folderRefreshFailed:(ASIHTTPRequest *)request
+- (void)folderRefreshFailed:(NSMutableURLRequest *)request error:(NSError *)error
 
-{	LOG_EXPR([request error]);
-	Folder * folder = (Folder *)request.userInfo[@"folder"];
-	if (request.error.code == ASIAuthenticationErrorType) //Error caused by lack of authentication
+{	LOG_EXPR(error);
+    Folder * folder = ((NSDictionary *)[request userInfo])[@"folder"];
+	if (error.code == NSURLErrorCancelled)
+	{
+		// Stopping the connection isn't an error, so clear any existing error flag.
+		[self setFolderErrorFlag:folder flag:NO];
+		
+		// If this folder also requires an image refresh, add that
+        if ((folder.flags & VNAFolderFlagCheckForImage)) [self refreshFavIconForFolder:folder];
+	}
+	else if (error.code == NSURLErrorUserAuthenticationRequired) //Error caused by lack of authentication
 	{
 		if (![authQueue containsObject:folder])
 			[authQueue addObject:folder];
 		[self getCredentialsForFolder];
 	}
-    ActivityItem * aItem = (ActivityItem *)request.userInfo[@"log"];
+    ActivityItem * aItem = (ActivityItem *)((NSDictionary *)[request userInfo])[@"log"];
 	[self setFolderErrorFlag:folder flag:YES];
-	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS feed:", nil),request.error.localizedDescription ]];
+	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS feed:", nil),error.localizedDescription ]];
 	[aItem setStatus:NSLocalizedString(@"Error",nil)];
 	[self syncFinishedForFolder:folder];
 }
@@ -681,16 +693,15 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 /* folderRefreshCompleted
  * Called when a folder refresh completed.
  */
--(void)folderRefreshCompleted:(ASIHTTPRequest *)connector
+-(void)folderRefreshCompleted:(NSMutableURLRequest *)connector response:(NSURLResponse *)response data:(NSData *)receivedData
 {
 	dispatch_async(_queue, ^() {
 	// TODO : refactor code to separate feed refresh code and UI
 		
-	Folder * folder = (Folder *)connector.userInfo[@"folder"];
-	ActivityItem *connectorItem = connector.userInfo[@"log"];
-	NSInteger responseStatusCode = connector.responseStatusCode;
-	NSURL *url = connector.url;
-	BOOL isCancelled = connector.cancelled;
+	Folder * folder = (Folder *)((NSDictionary *)[connector userInfo])[@"folder"];
+	ActivityItem *connectorItem = ((NSDictionary *)[connector userInfo])[@"log"];
+	NSInteger responseStatusCode = ((NSHTTPURLResponse *)response).statusCode;
+	NSURL *url = connector.URL;
 	NSInteger folderId = folder.itemId;
 	Database * dbManager = [Database sharedManager];
 	
@@ -703,10 +714,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 		if ([fileManager fileExistsAtPath:filePath isDirectory:&isDirectory] && !isDirectory)
 		{
         	responseStatusCode = 200;
-			NSData * receivedData = [NSData dataWithContentsOfFile:filePath];
-			connector.rawResponseData = [NSMutableData dataWithContentsOfFile:filePath];
-			connector.contentLength = receivedData.length;
-			connector.totalBytesRead = receivedData.length;
 		} else {
 			responseStatusCode = 404;
 		}
@@ -726,18 +733,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         });
 		return;
 	}
-	else if (isCancelled) 
-	{
-		// Stopping the connection isn't an error, so clear any existing error flag.
-		[self setFolderErrorFlag:folder flag:NO];
-		
-		// FIX: if we don't check this folder we shouldn't update the lastupdate field
-		// Set the last update date for this folder.
-		// [dbManager setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
-		
-		// If this folder also requires an image refresh, add that
-        if ((folder.flags & VNAFolderFlagCheckForImage)) [self refreshFavIconForFolder:folder];
-	}
 	else if (responseStatusCode == 410)
 	{
 		// We got HTTP 410 which means the feed has been intentionally removed so unsubscribe the feed.
@@ -749,8 +744,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 	else if (responseStatusCode == 200 || responseStatusCode == 226)
 	{
 				
-		NSData * receivedData = [connector responseData];
-		NSString * lastModifiedString = SafeString([connector.responseHeaders valueForKey:@"Last-Modified"]);
+		NSString * lastModifiedString = SafeString([((NSHTTPURLResponse *)response).allHeaderFields valueForKey:@"Last-Modified"]);
 		
 		if (receivedData != nil)
 		{
@@ -1132,39 +1126,31 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
  * Add the specified connection to the connections queue
  * that we manage.
  */
--(void)addConnection:(ASIHTTPRequest *)conn
+-(void)addConnection:(NSMutableURLRequest *)urlRequest completionHandler:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completionHandler
 {
-    if (![networkQueue.operations containsObject:conn]) {
-        NSOperation *completionOperation = [NSBlockOperation blockOperationWithBlock:^{
-                                                                 if (self->networkQueue.operationCount == 0) {
-                                                                    [self finishConnectionQueue];
-                                                                 }
-                                                                 [self updateStatus];
-                                                             }];
-        [completionOperation addDependency:conn];
-        [[NSOperationQueue mainQueue] addOperation:completionOperation];
-        [networkQueue addOperation:conn];
-        if (networkQueue.operationCount == 1) {       // networkQueue is NOT YET started
-            [self updateStatus];
-            countOfNewArticles = 0;
-            [networkQueue setSuspended:NO];
-        }
-    }
-}
+    TRVSURLSessionOperation * op = [[TRVSURLSessionOperation alloc] initWithSession:self.urlSession request:urlRequest completionHandler:completionHandler];
+    NSOperation *completionOperation = [NSBlockOperation blockOperationWithBlock:^{
+                                                             if (self->networkQueue.operationCount == 0) {
+                                                                [self finishConnectionQueue];
+                                                             }
+                                                             [self updateStatus];
+                                                         }];
+    [completionOperation addDependency:op];
+    [[NSOperationQueue mainQueue] addOperation:completionOperation];
 
-/* removeConnection
- * Removes the specified connection from the connections queue
- * that we manage.
- */
--(void)removeConnection:(ASIHTTPRequest *)conn
-{
-	NSAssert([networkQueue operationCount] > 0, @"Calling removeConnection with zero active connection count");
-	if ([networkQueue.operations containsObject:conn])
-	{
-		// Close the connection before we release as otherwise it leaks
-		[conn clearDelegatesAndCancel];
-	}
-	
+    NSOperation *requiredOperation = ((NSDictionary *)[urlRequest userInfo])[@"dependency"];
+    if (requiredOperation != nil) {
+        op.queuePriority = NSOperationQueuePriorityLow;
+        [op addDependency:requiredOperation];
+        [urlRequest setInUserInfo:nil forKey:@"dependency"];
+    };
+
+    [networkQueue addOperation:op];
+    if (networkQueue.operationCount == 1) {       // networkQueue is NOT YET started
+        [self updateStatus];
+        countOfNewArticles = 0;
+        [networkQueue setSuspended:NO];
+    }
 }
 
 /* suspendConnectionsQueue
@@ -1211,6 +1197,46 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         statusMessageDuringRefresh = @"";
     }
     LLog(@"Queue empty!!!");
+}
+
+#pragma mark NSURLSession Authentication delegates
+
+- (void)URLSession:(NSURLSession *)session
+              task:(NSURLSessionTask *)task
+didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
+ completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler {
+
+  if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]){
+
+    NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+    completionHandler(NSURLSessionAuthChallengeUseCredential,credential);
+  }
+
+  if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodHTTPBasic] ||
+     [challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodHTTPDigest]){
+
+    if([challenge previousFailureCount] == 3) {
+      completionHandler(NSURLSessionAuthChallengeRejectProtectionSpace, nil);
+    } else {
+      Folder * folder = (Folder *)[NSURLProtocol propertyForKey:@"folder" inRequest:task.originalRequest];
+      if (![folder.username isEqualToString:@""]) {
+          NSURLCredential *credential = [NSURLCredential credentialWithUser:folder.username
+                                                                   password:folder.password
+                                                                persistence:NSURLCredentialPersistenceNone];
+          if(credential) {
+            completionHandler(NSURLSessionAuthChallengeUseCredential, credential);
+          } else {
+            completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, nil);
+          }
+      } else {
+            if (![authQueue containsObject:folder]) {
+                [authQueue addObject:folder];
+            }
+            completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, nil);
+            [self getCredentialsForFolder];
+      }
+    }
+  }
 }
 
 /* dealloc

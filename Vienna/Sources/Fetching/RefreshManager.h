@@ -25,7 +25,7 @@
 @class FeedCredentials;
 @class Folder;
 
-@interface RefreshManager : NSObject {
+@interface RefreshManager : NSObject <NSURLSessionDelegate> {
 	NSUInteger countOfNewArticles;
 	NSMutableArray * authQueue;
 	FeedCredentials * credentialsController;
@@ -33,6 +33,7 @@
 	NSString * statusMessageDuringRefresh;
 	NSOperationQueue *networkQueue;
 	dispatch_queue_t _queue;
+	NSURLSession * session;
 }
 
 +(RefreshManager *)sharedManager;
@@ -47,6 +48,7 @@
 -(void)cancelAll;
 -(void)refreshFavIconForFolder:(Folder *)folder;
 -(void)addConnection:(ASIHTTPRequest *)conn;
+-(void)addConnection:(NSURLRequest *)conn completionHandler:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completionHandler;
 -(void)suspendConnectionsQueue;
 -(void)resumeConnectionsQueue;
 @end
