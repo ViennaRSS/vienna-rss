@@ -45,12 +45,12 @@
 
 - (void)start {
     if (self.isCancelled) {
-        TRVSKVOBlock(@"isFinished", ^{ _finished = YES; });
+        TRVSKVOBlock(@"isFinished", ^{ self->_finished = YES; });
         return;
     }
     TRVSKVOBlock(@"isExecuting", ^{
         [self.task resume];
-        _executing = YES;
+        self->_executing = YES;
     });
 }
 
