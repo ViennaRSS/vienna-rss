@@ -98,6 +98,7 @@
 		37C650801816EBAD3C0D9DBF /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */; };
 		3A171C00210B551B00B80FBB /* TRVSURLSessionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A171BF1210B551B00B80FBB /* TRVSURLSessionOperation.m */; };
 		3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBEC61733C206006DD2AB /* ArticleCellView.m */; };
+		3A60E60B2114AD740004D81D /* URLRequestExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A60E60A2114AD740004D81D /* URLRequestExtensions.m */; };
 		3A7BD0DD1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */; };
 		3AEE7DE91695FC570018A17D /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* vienna_public_key.pem */; };
 		3AF896C71CD8FDB800A9FA22 /* AppController+Sparkle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF896C61CD8FDB800A9FA22 /* AppController+Sparkle.m */; };
@@ -419,6 +420,8 @@
 		3A4DBEC51733C206006DD2AB /* ArticleCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleCellView.h; sourceTree = "<group>"; };
 		3A4DBEC61733C206006DD2AB /* ArticleCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCellView.m; sourceTree = "<group>"; };
 		3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "Sparkle-setup.sh"; sourceTree = "<group>"; };
+		3A60E6092114AD740004D81D /* URLRequestExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URLRequestExtensions.h; sourceTree = "<group>"; };
+		3A60E60A2114AD740004D81D /* URLRequestExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = URLRequestExtensions.m; sourceTree = "<group>"; };
 		3A67600F1E65FA3F0078CB14 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A6760101E65FA4F0078CB14 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A7BD0DB1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJRVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
@@ -1888,6 +1891,8 @@
 				031E082F19DFA3A900194F9F /* SubscriptionModel.m */,
 				AAA305FC0682A25200E4A6DC /* TableViewExtensions.h */,
 				AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */,
+				3A60E6092114AD740004D81D /* URLRequestExtensions.h */,
+				3A60E60A2114AD740004D81D /* URLRequestExtensions.m */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -2290,6 +2295,7 @@
 				03A131B31AA54EAC0037471F /* VNADatabaseMigration.m in Sources */,
 				AA26F4E30604927300FE7994 /* Folder.m in Sources */,
 				AA26F4ED0604927300FE7994 /* Database.m in Sources */,
+				3A60E60B2114AD740004D81D /* URLRequestExtensions.m in Sources */,
 				AA26F4F00604927300FE7994 /* BackTrackArray.m in Sources */,
 				AAF3B14306095E7B0025CC7F /* StringExtensions.m in Sources */,
 				AA36CD7C06100692001E33A4 /* Field.m in Sources */,
