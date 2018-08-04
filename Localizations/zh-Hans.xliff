@@ -998,6 +998,11 @@
         <note>Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257";</note>
         <target xml:lang="zh-Hans" state="translated">自定义工具栏…</target>
       </trans-unit>
+      <trans-unit id="1258.title">
+        <source>Hide Toolbar</source>
+        <note>Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258";</note>
+        <target xml:lang="zh-Hans" state="translated">隐藏工具栏</target>
+      </trans-unit>
       <trans-unit id="1259.title">
         <source>Hide Status Bar</source>
         <note>Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259";</note>
@@ -1013,6 +1018,26 @@
         <note>Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327";</note>
         <target xml:lang="zh-Hans" state="translated">搜索文章</target>
       </trans-unit>
+      <trans-unit id="1336.title">
+        <source>Order By</source>
+        <note>Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336";</note>
+        <target xml:lang="zh-Hans" state="translated">排序</target>
+      </trans-unit>
+      <trans-unit id="1337.title">
+        <source>Order By</source>
+        <note>Class = "NSMenu"; title = "Order By"; ObjectID = "1337";</note>
+        <target xml:lang="zh-Hans" state="translated">排序</target>
+      </trans-unit>
+      <trans-unit id="1338.title">
+        <source>Manual</source>
+        <note>Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338";</note>
+        <target xml:lang="zh-Hans" state="translated">手册</target>
+      </trans-unit>
+      <trans-unit id="1339.title">
+        <source>Name</source>
+        <note>Class = "NSMenuItem"; title = "Name"; ObjectID = "1339";</note>
+        <target xml:lang="zh-Hans" state="translated">名称</target>
+      </trans-unit>
       <trans-unit id="1408.title">
         <source>Unsubscribe</source>
         <note>Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408";</note>
@@ -1022,6 +1047,16 @@
         <source>Get Info…</source>
         <note>Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409";</note>
         <target xml:lang="zh-Hans" state="translated">获取信息…</target>
+      </trans-unit>
+      <trans-unit id="1413.title">
+        <source>Use Current Style for Articles</source>
+        <note>Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413";</note>
+        <target xml:lang="zh-Hans" state="translated">为文章采用当前的风格</target>
+      </trans-unit>
+      <trans-unit id="1415.title">
+        <source>Use Web Page for Articles</source>
+        <note>Class = "NSMenuItem"; title = "Use Web Page for Articles"; ObjectID = "1415";</note>
+        <target xml:lang="zh-Hans" state="translated">用网页格式打开文章</target>
       </trans-unit>
       <trans-unit id="CGp-H4-UaI.title">
         <source>Last 48 Hours</source>
@@ -2023,6 +2058,11 @@
         <source>Hide Status Bar</source>
         <note>Title of a menu item</note>
         <target xml:lang="zh-Hans" state="translated">隐藏状态栏</target>
+      </trans-unit>
+      <trans-unit id="Hide Toolbar">
+        <source>Hide Toolbar</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="zh-Hans" state="translated">隐藏工具栏</target>
       </trans-unit>
       <trans-unit id="Import">
         <source>Import</source>
