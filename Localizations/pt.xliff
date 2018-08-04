@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
-  <file original="Vienna Tests/Resources/Base.lproj/InfoPlist.strings" datatype="plaintext" source-language="en" target-language="pt">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
-    </header>
-    <body>
-      
-    </body>
-  </file>
   <file original="Vienna/Interfaces/Base.lproj/ActivityViewer.xib" datatype="plaintext" source-language="en" target-language="pt">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="8.title">
@@ -32,7 +24,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/AdvancedPreferencesView.xib" datatype="plaintext" source-language="en" target-language="pt">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="GaX-8c-QaN.title">
@@ -49,7 +41,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/AppearancePreferencesView.xib" datatype="plaintext" source-language="en" target-language="pt">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="71S-pg-AjX.title">
@@ -91,7 +83,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/Downloads.xib" datatype="plaintext" source-language="en" target-language="pt">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="23.title">
@@ -103,7 +95,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/EmptyTrashWarning.xib" datatype="plaintext" source-language="en" target-language="pt">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="17.title">
@@ -130,7 +122,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/ExportAccessoryViewController.xib" datatype="plaintext" source-language="en" target-language="pt">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="6rj-zb-zOa.title">
@@ -152,7 +144,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/FeedCredentials.xib" datatype="plaintext" source-language="en" target-language="pt">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="32.title">
@@ -184,7 +176,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/GeneralPreferencesView.xib" datatype="plaintext" source-language="en" target-language="pt">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="1Ll-uG-QWh.title">
@@ -311,7 +303,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/GroupFolder.xib" datatype="plaintext" source-language="en" target-language="pt">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="32.title">
@@ -338,7 +330,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/InfoWindow.xib" datatype="plaintext" source-language="en" target-language="pt">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="105.title">
@@ -405,7 +397,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/MainMenu.xib" datatype="plaintext" source-language="en" target-language="pt">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="2S3-dG-ZPg.title">
@@ -972,7 +964,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/MainWindowController.xib" datatype="plaintext" source-language="en" target-language="pt">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="3tM-J3-kmf.title">
@@ -1249,7 +1241,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/RSSFeed.xib" datatype="plaintext" source-language="en" target-language="pt">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="102.title">
@@ -1296,7 +1288,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/SearchFolder.xib" datatype="plaintext" source-language="en" target-language="pt">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="82.title">
@@ -1338,7 +1330,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/SyncingPreferencesView.xib" datatype="plaintext" source-language="en" target-language="pt">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="NKI-36-zCY.title">
@@ -1355,7 +1347,7 @@
   </file>
   <file original="Vienna/Resources/Base.lproj/InfoPlist.strings" datatype="plaintext" source-language="en" target-language="pt">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       
@@ -1364,7 +1356,7 @@
   </file>
   <file original="Vienna/Resources/Base.lproj/Localizable.strings" datatype="plaintext" source-language="en" target-language="pt">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="%@ Info">
@@ -1375,6 +1367,11 @@
       <trans-unit id="%d new articles retrieved">
         <source>%d new articles retrieved</source>
         <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">%d novos artigos recebidos</target>
+      </trans-unit>
+      <trans-unit id="%d new unread articles retrieved">
+        <source>%d new unread articles retrieved</source>
+        <note>Notification body</note>
         <target xml:lang="pt" state="translated">%d novos artigos recebidos</target>
       </trans-unit>
       <trans-unit id="%d subscriptions successfully exported">
@@ -1417,6 +1414,11 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Já existe uma pasta com esse nome</target>
       </trans-unit>
+      <trans-unit id="A new Vienna database cannot be created at \&quot;%@\&quot; because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.">
+        <source>A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">Uma nova base de dados do Vienna não pode ser criada em \"%@\" porque provavelmente a pasta está localizada num disco de rede e esta versão do Vienna não consegue manipular bases de dados remotas. Por favor escolha uma máquina que esteja localizada no seu computador.</target>
+      </trans-unit>
       <trans-unit id="Advanced">
         <source>Advanced</source>
         <note>Toolbar item name for the Advanced preference pane</note>
@@ -1447,16 +1449,6 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Após uma Semana</target>
       </trans-unit>
-      <trans-unit id="Already subscribed body">
-        <source>You are already subscribed to that feed</source>
-        <note>Already subscribed body</note>
-        <target xml:lang="pt" state="translated">Fonte já subscrita</target>
-      </trans-unit>
-      <trans-unit id="Already subscribed title">
-        <source>Error</source>
-        <note>Already subscribed title</note>
-        <target xml:lang="pt" state="translated">Erro</target>
-      </trans-unit>
       <trans-unit id="An error occurred when this feed was last refreshed">
         <source>An error occurred when this feed was last refreshed</source>
         <note>No comment provided by engineer.</note>
@@ -1466,6 +1458,36 @@
         <source>Appearance</source>
         <note>Toolbar item name for the Appearance preference pane</note>
         <target xml:lang="pt" state="translated">Aparência</target>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to delete all %d selected folders? This operation cannot be undone.">
+        <source>Are you sure you want to delete all %d selected folders? This operation cannot be undone.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">Tem a certeza que deseja apagar todas as %d pastas seleccionadas? Esta operação não pode ser anulada.</target>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to delete group folder \&quot;%@\&quot; and all sub folders? This operation cannot be undone.">
+        <source>Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">Tem a certeza que deseja apagar a pasta de grupo \"%@\" e todas as sub-pastas? Esta operação não pode ser anulada.</target>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to delete smart folder \&quot;%@\&quot;? This will not delete the actual articles matched by the search.">
+        <source>Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">tem a certeza que deseja apagar a pasta inteligente \"%@\"? Isto não vai apagar os artigos actualmente associados à procura.</target>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to delete the messages in the Trash folder permanently?">
+        <source>Are you sure you want to delete the messages in the Trash folder permanently?</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">Tem a certeza que deseja apagar as pastas que estão no lixo permanentemente?</target>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to permanently delete the selected articles?">
+        <source>Are you sure you want to permanently delete the selected articles?</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">Tem a certeza que deseja apagar permanentemente os estilos seleccionados?</target>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to unsubscribe from \&quot;%@\&quot;? This operation will delete all cached articles.">
+        <source>Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">Tem a certeza que deseja anular a subcrição de \"%@\"? Esta operação vai apagar todos os artigos em cache.</target>
       </trans-unit>
       <trans-unit id="Articles">
         <source>Articles</source>
@@ -1483,42 +1505,27 @@
    Title of a popup menu item</note>
         <target xml:lang="pt" state="translated">Cancelar</target>
       </trans-unit>
-      <trans-unit id="Cannot create database folder text">
-        <source>Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">o Vienna estava a tentar criar a pasta "%@" mas ocurreu um erro. Verifique as permissões das pastas na localização especificada.</target>
-      </trans-unit>
-      <trans-unit id="Cannot create database folder title">
-        <source>Sorry, but Vienna was unable to create the database folder</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Desculpe, mas o Vienna não conseguiu criar a pasta da base de dados</target>
-      </trans-unit>
-      <trans-unit id="Cannot open database text">
-        <source>The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">O ficheiro da base de dados (%@) não pode ser aberto por alguma razão. Pode estar corrompido ou inacessível. Por favor apague ou mude o nome do ficheiro da base de dados e reinicie o Vienna.</target>
-      </trans-unit>
-      <trans-unit id="Cannot open database title">
-        <source>Sorry but Vienna was unable to open the database</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Desculpe mas o Vienna não consegue abrir a base de dados</target>
-      </trans-unit>
-      <trans-unit id="Cannot open export file message">
+      <trans-unit id="Cannot create export output file">
         <source>Cannot create export output file</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Não é possível criar o ficheiro de exportação</target>
       </trans-unit>
-      <trans-unit id="Cannot open export file message text">
-        <source>The specified export output file could not be created. Check that it is not locked and no other application is using it.</source>
+      <trans-unit id="Cannot create the Vienna database">
+        <source>Cannot create the Vienna database</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">O ficheiro de exprtação não pode ser criado. Verifique se não está bloqueado e não está outra aplicação a usá-lo.</target>
+        <target xml:lang="pt" state="translated">Não é possível criar a base de dados do Vienna</target>
+      </trans-unit>
+      <trans-unit id="Cannot import the specified file. The file contents are not valid OPML XML format.">
+        <source>Cannot import the specified file. The file contents are not valid OPML XML format.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">Não é possível importar o ficheiro especificado. O conteúdo do ficheiro não é um formato OPML XML válido.</target>
       </trans-unit>
       <trans-unit id="Cannot rename folder">
         <source>Cannot rename folder</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Não é possível renomear a pasta</target>
       </trans-unit>
-      <trans-unit id="Clear">
+      <trans-unit id="Clear Recent Searches">
         <source>Clear Recent Searches</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Limpar Pesquisas Recentes</target>
@@ -1548,11 +1555,6 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Copiar Link da Página para a Área de Transferência</target>
       </trans-unit>
-      <trans-unit id="Credentials Prompt">
-        <source>The subscription for \"%@\" requires a user name and password for access.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">A subscrição de "%@" de nome de utilizador e palavra-passe para acesso.</target>
-      </trans-unit>
       <trans-unit id="Database Upgrade">
         <source>Database Upgrade</source>
         <note>No comment provided by engineer.</note>
@@ -1574,65 +1576,35 @@
         <note>Title of a menu item</note>
         <target xml:lang="pt" state="translated">Apagar Artigo</target>
       </trans-unit>
-      <trans-unit id="Delete RSS feed">
-        <source>Delete subscription</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Apagar subscrição</target>
-      </trans-unit>
-      <trans-unit id="Delete RSS feed text">
-        <source>Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Tem a certeza que deseja anular a subcrição de "%@"? Esta operação vai apagar todos os artigos em cache.</target>
-      </trans-unit>
-      <trans-unit id="Delete folder status">
-        <source>Deleting folder \"%@\"…</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">A apagar pasta "%@"…</target>
-      </trans-unit>
       <trans-unit id="Delete group folder">
         <source>Delete group folder</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Apagar pasta de grupo</target>
-      </trans-unit>
-      <trans-unit id="Delete group folder text">
-        <source>Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Tem a certeza que deseja apagar a pasta de grupo "%@" e todas as sub-pastas? Esta operação não pode ser anulada.</target>
       </trans-unit>
       <trans-unit id="Delete multiple folders">
         <source>Delete multiple folders</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Apagar múltiplas pastas</target>
       </trans-unit>
-      <trans-unit id="Delete multiple folders text">
-        <source>Are you sure you want to delete all %d selected folders? This operation cannot be undone.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Tem a certeza que deseja apagar todas as %d pastas seleccionadas? Esta operação não pode ser anulada.</target>
-      </trans-unit>
-      <trans-unit id="Delete selected message">
-        <source>Are you sure you want to permanently delete the selected articles?</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Tem a certeza que deseja apagar permanentemente os estilos seleccionados?</target>
-      </trans-unit>
-      <trans-unit id="Delete selected message text">
-        <source>This operation cannot be undone.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Esta operação não pode ser anulada.</target>
-      </trans-unit>
       <trans-unit id="Delete smart folder">
         <source>Delete smart folder</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Apagar pasta inteligente</target>
       </trans-unit>
-      <trans-unit id="Delete smart folder text">
-        <source>Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search.</source>
+      <trans-unit id="Delete subscription">
+        <source>Delete subscription</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">tem a certeza que deseja apagar a pasta inteligente "%@"? Isto não vai apagar os artigos actualmente associados à procura.</target>
+        <target xml:lang="pt" state="translated">Apagar subscrição</target>
       </trans-unit>
       <trans-unit id="Deleted">
         <source>Deleted</source>
         <note>Data field name visible in smart folder definition</note>
         <target xml:lang="pt" state="translated">Apagado</target>
+      </trans-unit>
+      <trans-unit id="Deleting folder \&quot;%@\&quot;…">
+        <source>Deleting folder \"%@\"…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">A apagar pasta \"%@\"…</target>
       </trans-unit>
       <trans-unit id="Do you really want to import the subscriptions from the specified OPML file?">
         <source>Do you really want to import the subscriptions from the specified OPML file?</source>
@@ -1659,16 +1631,6 @@
         <note>Notification title</note>
         <target xml:lang="pt" state="translated">Download falhou</target>
       </trans-unit>
-      <trans-unit id="Downloads Running">
-        <source>One or more downloads are in progress</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Um ou mais downloads estão em progresso</target>
-      </trans-unit>
-      <trans-unit id="Downloads Running text">
-        <source>If you quit Vienna now, all downloads will stop.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Se encerrar o Vienna agora, todos os downloads serão parados.</target>
-      </trans-unit>
       <trans-unit id="Edit…">
         <source>Edit…</source>
         <note>Title of a menu item</note>
@@ -1679,17 +1641,12 @@
         <note>Title of a button on an alert</note>
         <target xml:lang="pt" state="translated">Vazio</target>
       </trans-unit>
-      <trans-unit id="Empty Trash message">
-        <source>Are you sure you want to delete the messages in the Trash folder permanently?</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Tem a certeza que deseja apagar as pastas que estão no lixo permanentemente?</target>
-      </trans-unit>
-      <trans-unit id="Empty Trash message text">
-        <source>You cannot undo this action</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Não pode anular esta acção</target>
-      </trans-unit>
       <trans-unit id="Enclosure">
+        <source>Enclosure</source>
+        <note>Data field name (Y/N) visible in menu/smart folder definition</note>
+        <target xml:lang="pt" state="translated">Anexo</target>
+      </trans-unit>
+      <trans-unit id="Enclosure URL">
         <source>Enclosure URL</source>
         <note>Data field name (URL) visible in menu/article list</note>
         <target xml:lang="pt" state="translated">URL do Anexo</target>
@@ -1701,23 +1658,18 @@
       </trans-unit>
       <trans-unit id="Error">
         <source>Error</source>
-        <note>No comment provided by engineer.</note>
+        <note>Already subscribed title</note>
         <target xml:lang="pt" state="translated">Erro</target>
-      </trans-unit>
-      <trans-unit id="Error importing subscriptions body">
-        <source>Cannot import the specified file. The file contents are not valid OPML XML format.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Não é possível importar o ficheiro especificado. O conteúdo do ficheiro não é um formato OPML XML válido.</target>
-      </trans-unit>
-      <trans-unit id="Error importing subscriptions title">
-        <source>Import error</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Erro ao Importar</target>
       </trans-unit>
       <trans-unit id="Error parsing XML data in feed">
         <source>Error parsing XML data in feed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Error no parsing de dados XML da fonte</target>
+      </trans-unit>
+      <trans-unit id="Export Completed">
+        <source>Export Completed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">Exportação Completada</target>
       </trans-unit>
       <trans-unit id="External Browser">
         <source>External Browser</source>
@@ -1738,6 +1690,11 @@
         <source>File %@ failed to download</source>
         <note>Notification body</note>
         <target xml:lang="pt" state="translated">Download do ficheiro %@ falhou</target>
+      </trans-unit>
+      <trans-unit id="Filter in %@">
+        <source>Filter in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">Pesquisar em %@</target>
       </trans-unit>
       <trans-unit id="Flag">
         <source>Flag</source>
@@ -1784,11 +1741,6 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Código HTTP %d devolvido pelo servidor</target>
       </trans-unit>
-      <trans-unit id="HasEnclosure">
-        <source>Enclosure</source>
-        <note>Data field name (Y/N) visible in menu/smart folder definition</note>
-        <target xml:lang="pt" state="translated">Anexo</target>
-      </trans-unit>
       <trans-unit id="Hide Filter Bar">
         <source>Hide Filter Bar</source>
         <note>No comment provided by engineer.</note>
@@ -1799,40 +1751,35 @@
         <note>Title of a menu item</note>
         <target xml:lang="pt" state="translated">Ocultar Barra de Estado</target>
       </trans-unit>
+      <trans-unit id="If you quit Vienna now, all downloads will stop.">
+        <source>If you quit Vienna now, all downloads will stop.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">Se encerrar o Vienna agora, todos os downloads serão parados.</target>
+      </trans-unit>
       <trans-unit id="Import">
         <source>Import</source>
         <note>Title of a button on an alert</note>
         <target xml:lang="pt" state="translated">Importar</target>
+      </trans-unit>
+      <trans-unit id="Import Completed">
+        <source>Import Completed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">Importação Completada</target>
+      </trans-unit>
+      <trans-unit id="Import error">
+        <source>Import error</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">Erro ao Importar</target>
       </trans-unit>
       <trans-unit id="Import subscriptions from OPML file?">
         <source>Import subscriptions from OPML file?</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Importar subscrições de um ficheiro OPML?</target>
       </trans-unit>
-      <trans-unit id="Invalid style body">
-        <source>The Default style will be used instead.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Será usado o estilo Padrão em alternativa.</target>
-      </trans-unit>
-      <trans-unit id="Invalid style title">
-        <source>The style %@ appears to be missing or corrupted</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">O estilo %@ parece estar em falta ou corrompido</target>
-      </trans-unit>
       <trans-unit id="Last Week">
         <source>Last Week</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Última Semana</target>
-      </trans-unit>
-      <trans-unit id="Locate Text">
-        <source>A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Uma nova base de dados do Vienna não pode ser criada em "%@" porque provavelmente a pasta está localizada num disco de rede e esta versão do Vienna não consegue manipular bases de dados remotas. Por favor escolha uma máquina que esteja localizada no seu computador.</target>
-      </trans-unit>
-      <trans-unit id="Locate Title">
-        <source>Cannot create the Vienna database</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Não é possível criar a base de dados do Vienna</target>
       </trans-unit>
       <trans-unit id="Mark All Articles as Read">
         <source>Mark All Articles as Read</source>
@@ -1899,21 +1846,6 @@
         <note>Notification title</note>
         <target xml:lang="pt" state="translated">Novos artigos recebidos</target>
       </trans-unit>
-      <trans-unit id="New style body">
-        <source>The style \"%@\" has been installed to your Styles folder and added to the Style menu.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">O estilo "%@" foi instalado na sua pasta de estilos e adicionado ao menu de estilos.</target>
-      </trans-unit>
-      <trans-unit id="New style title">
-        <source>Vienna has installed a new style</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">O Vienna instalou um novo estilo</target>
-      </trans-unit>
-      <trans-unit id="New unread articles retrieved">
-        <source>%d new unread articles retrieved</source>
-        <note>Notification body</note>
-        <target xml:lang="pt" state="translated">%d novos artigos recebidos</target>
-      </trans-unit>
       <trans-unit id="No">
         <source>No</source>
         <note>No comment provided by engineer.</note>
@@ -1923,6 +1855,11 @@
         <source>No new articles available</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Nenhum artigo novo disponível</target>
+      </trans-unit>
+      <trans-unit id="One or more downloads are in progress">
+        <source>One or more downloads are in progress</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">Um ou mais downloads estão em progresso</target>
       </trans-unit>
       <trans-unit id="Open">
         <source>Open</source>
@@ -2020,16 +1957,6 @@
    Title of a menu item</note>
         <target xml:lang="pt" state="translated">Encerrar Vienna</target>
       </trans-unit>
-      <trans-unit id="RSS Subscription Export Title">
-        <source>Export Completed</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Exportação Completada</target>
-      </trans-unit>
-      <trans-unit id="RSS Subscription Import Title">
-        <source>Import Completed</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Importação Completada</target>
-      </trans-unit>
       <trans-unit id="Read">
         <source>Read</source>
         <note>Data field name visible in menu/smart folder definition</note>
@@ -2090,7 +2017,7 @@
         <note>Title of a menu item</note>
         <target xml:lang="pt" state="translated">Restaurar Artigo</target>
       </trans-unit>
-      <trans-unit id="Resubscribe">
+      <trans-unit id="Resubscribe to Feed">
         <source>Resubscribe to Feed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Resubscrever</target>
@@ -2119,11 +2046,6 @@
         <source>Search all articles</source>
         <note>Placeholder title of a search field</note>
         <target xml:lang="pt" state="translated">Procurar todos os artigos</target>
-      </trans-unit>
-      <trans-unit id="Search in %@">
-        <source>Filter in %@</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Pesquisar em %@</target>
       </trans-unit>
       <trans-unit id="Select…">
         <source>Select…</source>
@@ -2160,6 +2082,16 @@
         <note>Title of a popup menu item</note>
         <target xml:lang="pt" state="translated">Mostrar no Finder</target>
       </trans-unit>
+      <trans-unit id="Sorry but Vienna was unable to open the database">
+        <source>Sorry but Vienna was unable to open the database</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">Desculpe mas o Vienna não consegue abrir a base de dados</target>
+      </trans-unit>
+      <trans-unit id="Sorry, but Vienna was unable to create the database folder">
+        <source>Sorry, but Vienna was unable to create the database folder</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">Desculpe, mas o Vienna não conseguiu criar a pasta da base de dados</target>
+      </trans-unit>
       <trans-unit id="Subject">
         <source>Subject</source>
         <note>Data field name visible in menu/article list/smart folder definition</note>
@@ -2180,10 +2112,55 @@
         <note>Data field name visible in smart folder definition</note>
         <target xml:lang="pt" state="translated">Texto</target>
       </trans-unit>
+      <trans-unit id="The Default style will be used instead.">
+        <source>The Default style will be used instead.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">Será usado o estilo Padrão em alternativa.</target>
+      </trans-unit>
+      <trans-unit id="The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.">
+        <source>The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">O formato de ficheiro da base de dados (%@) não é suportado por esta versão do Vienna. Apague ou altere o nome do ficheiro e reinicie o Vienna.</target>
+      </trans-unit>
+      <trans-unit id="The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna.">
+        <source>The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">O ficheiro da base de dados (%@) não pode ser aberto por alguma razão. Pode estar corrompido ou inacessível. Por favor apague ou mude o nome do ficheiro da base de dados e reinicie o Vienna.</target>
+      </trans-unit>
+      <trans-unit id="The database file format has changed">
+        <source>The database file format has changed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">O formato de ficheiro da base de dados foi alterado</target>
+      </trans-unit>
+      <trans-unit id="The specified export output file could not be created. Check that it is not locked and no other application is using it.">
+        <source>The specified export output file could not be created. Check that it is not locked and no other application is using it.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">O ficheiro de exprtação não pode ser criado. Verifique se não está bloqueado e não está outra aplicação a usá-lo.</target>
+      </trans-unit>
+      <trans-unit id="The style %@ appears to be missing or corrupted">
+        <source>The style %@ appears to be missing or corrupted</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">O estilo %@ parece estar em falta ou corrompido</target>
+      </trans-unit>
+      <trans-unit id="The style \&quot;%@\&quot; has been installed to your Styles folder and added to the Style menu.">
+        <source>The style \"%@\" has been installed to your Styles folder and added to the Style menu.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">O estilo \"%@\" foi instalado na sua pasta de estilos e adicionado ao menu de estilos.</target>
+      </trans-unit>
+      <trans-unit id="The subscription for \&quot;%@\&quot; requires a user name and password for access.">
+        <source>The subscription for \"%@\" requires a user name and password for access.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">A subscrição de \"%@\" de nome de utilizador e palavra-passe para acesso.</target>
+      </trans-unit>
       <trans-unit id="This article contains an enclosed file.">
         <source>This article contains an enclosed file.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Este artigo contém um ficheiro anexo.</target>
+      </trans-unit>
+      <trans-unit id="This operation cannot be undone.">
+        <source>This operation cannot be undone.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">Esta operação não pode ser anulada.</target>
       </trans-unit>
       <trans-unit id="Today">
         <source>Today</source>
@@ -2191,7 +2168,7 @@
         <target xml:lang="pt" state="translated">Hoje</target>
       </trans-unit>
       <trans-unit id="Today's Articles">
-        <source>Today’s Articles</source>
+        <source>Today's Articles</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Artigos de Hoje</target>
       </trans-unit>
@@ -2210,40 +2187,40 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Artigos Não Lidos</target>
       </trans-unit>
-      <trans-unit id="Unrecognised database format text">
-        <source>The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">O formato de ficheiro da base de dados (%@) não é suportado por esta versão do Vienna. Apague ou altere o nome do ficheiro e reinicie o Vienna.</target>
-      </trans-unit>
-      <trans-unit id="Unrecognised database format title">
-        <source>The database file format has changed</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">O formato de ficheiro da base de dados foi alterado</target>
-      </trans-unit>
-      <trans-unit id="Unsubscribe">
+      <trans-unit id="Unsubscribe from Feed">
         <source>Unsubscribe from Feed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Cancelar Subscrição</target>
       </trans-unit>
-      <trans-unit id="Vienna cannot open the file body">
+      <trans-unit id="Vienna cannot open the file \&quot;%@\&quot; because it moved since you downloaded it.">
         <source>Vienna cannot open the file \"%@\" because it moved since you downloaded it.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">O Vienna não consegue abrir o ficheiro "%@" porque ele foi movido depois de descarregado.</target>
+        <target xml:lang="pt" state="translated">O Vienna não consegue abrir o ficheiro \"%@\" porque ele foi movido depois de descarregado.</target>
       </trans-unit>
-      <trans-unit id="Vienna cannot open the file title">
+      <trans-unit id="Vienna cannot open the file.">
         <source>Vienna cannot open the file.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">O Vienna não consegue abrir o ficheiro.</target>
       </trans-unit>
-      <trans-unit id="Vienna cannot show the file body">
+      <trans-unit id="Vienna cannot show the file \&quot;%@\&quot; because it moved since you downloaded it.">
         <source>Vienna cannot show the file \"%@\" because it moved since you downloaded it.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">O Vienna não consegue mostrar o ficheiro "%@" porque ele foi movido depois de descarregado.</target>
+        <target xml:lang="pt" state="translated">O Vienna não consegue mostrar o ficheiro \"%@\" porque ele foi movido depois de descarregado.</target>
       </trans-unit>
-      <trans-unit id="Vienna cannot show the file title">
+      <trans-unit id="Vienna cannot show the file.">
         <source>Vienna cannot show the file.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">O Vienna não consegue mostrar o ficheiro.</target>
+      </trans-unit>
+      <trans-unit id="Vienna has installed a new style">
+        <source>Vienna has installed a new style</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">O Vienna instalou um novo estilo</target>
+      </trans-unit>
+      <trans-unit id="Vienna was trying to create the folder \&quot;%@\&quot; but an error occurred. Check the permissions on the folders on the path specified.">
+        <source>Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">o Vienna estava a tentar criar a pasta \"%@\" mas ocurreu um erro. Verifique as permissões das pastas na localização especificada.</target>
       </trans-unit>
       <trans-unit id="Yes">
         <source>Yes</source>
@@ -2254,6 +2231,16 @@
         <source>Yesterday</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Ontem</target>
+      </trans-unit>
+      <trans-unit id="You are already subscribed to that feed">
+        <source>You are already subscribed to that feed</source>
+        <note>You are already subscribed to that feed</note>
+        <target xml:lang="pt" state="translated">Fonte já subscrita</target>
+      </trans-unit>
+      <trans-unit id="You cannot undo this action">
+        <source>You cannot undo this action</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="translated">Não pode anular esta acção</target>
       </trans-unit>
       <trans-unit id="contains">
         <source>contains</source>
@@ -2319,7 +2306,7 @@
   </file>
   <file original="Vienna/Resources/Base.lproj/Localizable.stringsdict" datatype="plaintext" source-language="en" target-language="pt">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="/%d new articles retrieved:dict/articles:dict/other:dict/:string">
