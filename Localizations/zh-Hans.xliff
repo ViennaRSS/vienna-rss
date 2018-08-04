@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
-  <file original="Vienna Tests/Resources/Base.lproj/InfoPlist.strings" datatype="plaintext" source-language="en" target-language="zh-Hans">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
-    </header>
-    <body>
-      
-    </body>
-  </file>
   <file original="Vienna/Interfaces/Base.lproj/ActivityViewer.xib" datatype="plaintext" source-language="en" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="8.title">
@@ -32,7 +24,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/AdvancedPreferencesView.xib" datatype="plaintext" source-language="en" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="2GQ-cu-fbh.title">
@@ -69,7 +61,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/AppearancePreferencesView.xib" datatype="plaintext" source-language="en" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="71S-pg-AjX.title">
@@ -111,7 +103,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/Downloads.xib" datatype="plaintext" source-language="en" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="5.title">
@@ -128,7 +120,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/EmptyTrashWarning.xib" datatype="plaintext" source-language="en" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="17.title">
@@ -155,7 +147,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/ExportAccessoryViewController.xib" datatype="plaintext" source-language="en" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="6rj-zb-zOa.title">
@@ -177,7 +169,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/FeedCredentials.xib" datatype="plaintext" source-language="en" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="32.title">
@@ -214,7 +206,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/GeneralPreferencesView.xib" datatype="plaintext" source-language="en" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="1Ll-uG-QWh.title">
@@ -356,7 +348,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/GroupFolder.xib" datatype="plaintext" source-language="en" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="32.title">
@@ -383,7 +375,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/InfoWindow.xib" datatype="plaintext" source-language="en" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="105.title">
@@ -460,7 +452,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/MainMenu.xib" datatype="plaintext" source-language="en" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="2S3-dG-ZPg.title">
@@ -998,6 +990,11 @@
         <note>Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257";</note>
         <target xml:lang="zh-Hans" state="translated">自定义工具栏…</target>
       </trans-unit>
+      <trans-unit id="1258.title">
+        <source>Hide Toolbar</source>
+        <note>Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258";</note>
+        <target xml:lang="zh-Hans" state="translated">隐藏工具栏</target>
+      </trans-unit>
       <trans-unit id="1259.title">
         <source>Hide Status Bar</source>
         <note>Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259";</note>
@@ -1013,6 +1010,26 @@
         <note>Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327";</note>
         <target xml:lang="zh-Hans" state="translated">搜索文章</target>
       </trans-unit>
+      <trans-unit id="1336.title">
+        <source>Order By</source>
+        <note>Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336";</note>
+        <target xml:lang="zh-Hans" state="translated">排序</target>
+      </trans-unit>
+      <trans-unit id="1337.title">
+        <source>Order By</source>
+        <note>Class = "NSMenu"; title = "Order By"; ObjectID = "1337";</note>
+        <target xml:lang="zh-Hans" state="translated">排序</target>
+      </trans-unit>
+      <trans-unit id="1338.title">
+        <source>Manual</source>
+        <note>Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338";</note>
+        <target xml:lang="zh-Hans" state="translated">手册</target>
+      </trans-unit>
+      <trans-unit id="1339.title">
+        <source>Name</source>
+        <note>Class = "NSMenuItem"; title = "Name"; ObjectID = "1339";</note>
+        <target xml:lang="zh-Hans" state="translated">名称</target>
+      </trans-unit>
       <trans-unit id="1408.title">
         <source>Unsubscribe</source>
         <note>Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408";</note>
@@ -1022,6 +1039,16 @@
         <source>Get Info…</source>
         <note>Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409";</note>
         <target xml:lang="zh-Hans" state="translated">获取信息…</target>
+      </trans-unit>
+      <trans-unit id="1413.title">
+        <source>Use Current Style for Articles</source>
+        <note>Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413";</note>
+        <target xml:lang="zh-Hans" state="translated">为文章采用当前的风格</target>
+      </trans-unit>
+      <trans-unit id="1415.title">
+        <source>Use Web Page for Articles</source>
+        <note>Class = "NSMenuItem"; title = "Use Web Page for Articles"; ObjectID = "1415";</note>
+        <target xml:lang="zh-Hans" state="translated">用网页格式打开文章</target>
       </trans-unit>
       <trans-unit id="CGp-H4-UaI.title">
         <source>Last 48 Hours</source>
@@ -1067,7 +1094,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/MainWindowController.xib" datatype="plaintext" source-language="en" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="3tM-J3-kmf.title">
@@ -1374,7 +1401,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/RSSFeed.xib" datatype="plaintext" source-language="en" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="102.title">
@@ -1431,7 +1458,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/SearchFolder.xib" datatype="plaintext" source-language="en" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="82.title">
@@ -1473,7 +1500,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/SyncingPreferencesView.xib" datatype="plaintext" source-language="en" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="Ar5-Qc-YTe.ibExternalAccessibilityDescription">
@@ -1530,7 +1557,7 @@
   </file>
   <file original="Vienna/Resources/Base.lproj/InfoPlist.strings" datatype="plaintext" source-language="en" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       
@@ -1539,7 +1566,7 @@
   </file>
   <file original="Vienna/Resources/Base.lproj/Localizable.strings" datatype="plaintext" source-language="en" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="%@ Info">
@@ -1556,6 +1583,11 @@
         <source>%d new articles retrieved</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">有 %d 篇新文章</target>
+      </trans-unit>
+      <trans-unit id="%d new unread articles retrieved">
+        <source>%d new unread articles retrieved</source>
+        <note>Notification body</note>
+        <target xml:lang="zh-Hans" state="translated">收到了 %d 篇新文章</target>
       </trans-unit>
       <trans-unit id="%d subscriptions successfully exported">
         <source>%d subscriptions successfully exported</source>
@@ -1597,6 +1629,11 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">已经有文件夹使用了这个名称</target>
       </trans-unit>
+      <trans-unit id="A new Vienna database cannot be created at \&quot;%@\&quot; because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.">
+        <source>A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">无法在 \"%@\" 创建新的 Vienna 数据库。可能是因为此文件夹处于远端共享网络上，当前版本的 Vienna 不支持远端共享网络上的数据库。请选择一个在您本地机器上的文件夹。</target>
+      </trans-unit>
       <trans-unit id="A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.">
         <source>A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.</source>
         <note>No comment provided by engineer.</note>
@@ -1632,16 +1669,6 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">一周后</target>
       </trans-unit>
-      <trans-unit id="Already subscribed body">
-        <source>You are already subscribed to that feed</source>
-        <note>Already subscribed body</note>
-        <target xml:lang="zh-Hans" state="translated">您已经订阅了这个频道</target>
-      </trans-unit>
-      <trans-unit id="Already subscribed title">
-        <source>Error</source>
-        <note>Already subscribed title</note>
-        <target xml:lang="zh-Hans" state="translated">错误</target>
-      </trans-unit>
       <trans-unit id="An error occurred when this feed was last refreshed">
         <source>An error occurred when this feed was last refreshed</source>
         <note>No comment provided by engineer.</note>
@@ -1656,6 +1683,36 @@
         <source>AppleScript Error in '%@' script</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">苹果脚本在 '%@' 发生错误</target>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to delete all %d selected folders? This operation cannot be undone.">
+        <source>Are you sure you want to delete all %d selected folders? This operation cannot be undone.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">您确定要删除所有%d个被选中的文件夹么？这个操作不可还原</target>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to delete group folder \&quot;%@\&quot; and all sub folders? This operation cannot be undone.">
+        <source>Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">您确定要删除群组文件夹 \"%@\" 以及它的子目录么？这个操作不可还原</target>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to delete smart folder \&quot;%@\&quot;? This will not delete the actual articles matched by the search.">
+        <source>Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">您确定要删除智能文件夹 \"%@\" 么？这将不会影响符合搜索条件的条目</target>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to delete the messages in the Trash folder permanently?">
+        <source>Are you sure you want to delete the messages in the Trash folder permanently?</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">您确定要永久删除废纸篓中的文章么？</target>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to permanently delete the selected articles?">
+        <source>Are you sure you want to permanently delete the selected articles?</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">您确定要永久删除所选的文章么？</target>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to unsubscribe from \&quot;%@\&quot;? This operation will delete all cached articles.">
+        <source>Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">您确定要取消 \"%@\" 的订阅么？这个操作将会删除这个频道下的全部条目</target>
       </trans-unit>
       <trans-unit id="Articles">
         <source>Articles</source>
@@ -1683,42 +1740,27 @@
    Title of a popup menu item</note>
         <target xml:lang="zh-Hans" state="translated">取消</target>
       </trans-unit>
-      <trans-unit id="Cannot create database folder text">
-        <source>Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">Vienna 在创建文件夹 "%@" 时发生错误。请检查指定路径上文件夹的权限</target>
-      </trans-unit>
-      <trans-unit id="Cannot create database folder title">
-        <source>Sorry, but Vienna was unable to create the database folder</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">抱歉，Vianna 无法创建数据库文件夹</target>
-      </trans-unit>
-      <trans-unit id="Cannot open database text">
-        <source>The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">由于一些原因，数据库文件 (%@) 无法被读取。它可能已损坏或者权限不足。请尝试删除或者重命名数据库文件然后重新启动 Vienna</target>
-      </trans-unit>
-      <trans-unit id="Cannot open database title">
-        <source>Sorry but Vienna was unable to open the database</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">抱歉，Vienna 无法开启这个数据库</target>
-      </trans-unit>
-      <trans-unit id="Cannot open export file message">
+      <trans-unit id="Cannot create export output file">
         <source>Cannot create export output file</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">无法创建输出文件</target>
       </trans-unit>
-      <trans-unit id="Cannot open export file message text">
-        <source>The specified export output file could not be created. Check that it is not locked and no other application is using it.</source>
+      <trans-unit id="Cannot create the Vienna database">
+        <source>Cannot create the Vienna database</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">无法创建指定的输出文件。请检查这个文件是否被锁定，以及是否有其他程序正在使用</target>
+        <target xml:lang="zh-Hans" state="translated">无法创建 Vienna 数据库</target>
+      </trans-unit>
+      <trans-unit id="Cannot import the specified file. The file contents are not valid OPML XML format.">
+        <source>Cannot import the specified file. The file contents are not valid OPML XML format.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">无法导入指定文件。文件内容不是有效的 OPML XML 格式</target>
       </trans-unit>
       <trans-unit id="Cannot rename folder">
         <source>Cannot rename folder</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">无法重命名文件夹</target>
       </trans-unit>
-      <trans-unit id="Clear">
+      <trans-unit id="Clear Recent Searches">
         <source>Clear Recent Searches</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">清楚最近的搜索</target>
@@ -1748,11 +1790,6 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">复制页面连接到粘贴板</target>
       </trans-unit>
-      <trans-unit id="Credentials Prompt">
-        <source>The subscription for \"%@\" requires a user name and password for access.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">"%@" 这个订阅需要提供账号和密码</target>
-      </trans-unit>
       <trans-unit id="Database Upgrade">
         <source>Database Upgrade</source>
         <note>No comment provided by engineer.</note>
@@ -1774,60 +1811,25 @@
         <note>Title of a menu item</note>
         <target xml:lang="zh-Hans" state="translated">删除文章</target>
       </trans-unit>
-      <trans-unit id="Delete RSS feed">
-        <source>Delete subscription</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">删除频道</target>
-      </trans-unit>
-      <trans-unit id="Delete RSS feed text">
-        <source>Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">您确定要取消 "%@" 的订阅么？这个操作将会删除这个频道下的全部条目</target>
-      </trans-unit>
-      <trans-unit id="Delete folder status">
-        <source>Deleting folder \"%@\"…</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">正在删除文件夹 "%@"…</target>
-      </trans-unit>
       <trans-unit id="Delete group folder">
         <source>Delete group folder</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">删除群组文件夹</target>
-      </trans-unit>
-      <trans-unit id="Delete group folder text">
-        <source>Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">您确定要删除群组文件夹 "%@" 以及它的子目录么？这个操作不可还原</target>
       </trans-unit>
       <trans-unit id="Delete multiple folders">
         <source>Delete multiple folders</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">删除多个文件夹</target>
       </trans-unit>
-      <trans-unit id="Delete multiple folders text">
-        <source>Are you sure you want to delete all %d selected folders? This operation cannot be undone.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">您确定要删除所有%d个被选中的文件夹么？这个操作不可还原</target>
-      </trans-unit>
-      <trans-unit id="Delete selected message">
-        <source>Are you sure you want to permanently delete the selected articles?</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">您确定要永久删除所选的文章么？</target>
-      </trans-unit>
-      <trans-unit id="Delete selected message text">
-        <source>This operation cannot be undone.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">这个操作无法还原</target>
-      </trans-unit>
       <trans-unit id="Delete smart folder">
         <source>Delete smart folder</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">删除智能文件夹</target>
       </trans-unit>
-      <trans-unit id="Delete smart folder text">
-        <source>Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search.</source>
+      <trans-unit id="Delete subscription">
+        <source>Delete subscription</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">您确定要删除智能文件夹 "%@" 么？这将不会影响符合搜索条件的条目</target>
+        <target xml:lang="zh-Hans" state="translated">删除频道</target>
       </trans-unit>
       <trans-unit id="Deleted">
         <source>Deleted</source>
@@ -1838,6 +1840,11 @@
         <source>Delete…</source>
         <note>Title of a menu item</note>
         <target xml:lang="zh-Hans" state="translated">删除…</target>
+      </trans-unit>
+      <trans-unit id="Deleting folder \&quot;%@\&quot;…">
+        <source>Deleting folder \"%@\"…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">正在删除文件夹 \"%@\"…</target>
       </trans-unit>
       <trans-unit id="Descending">
         <source>Descending</source>
@@ -1874,16 +1881,6 @@
         <note>Notification title</note>
         <target xml:lang="zh-Hans" state="translated">下载失败</target>
       </trans-unit>
-      <trans-unit id="Downloads Running">
-        <source>One or more downloads are in progress</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">下载进行中</target>
-      </trans-unit>
-      <trans-unit id="Downloads Running text">
-        <source>If you quit Vienna now, all downloads will stop.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">您确定要取消所有下载并且退出 Vienna 么？</target>
-      </trans-unit>
       <trans-unit id="Edit…">
         <source>Edit…</source>
         <note>Title of a menu item</note>
@@ -1894,17 +1891,12 @@
         <note>Title of a button on an alert</note>
         <target xml:lang="zh-Hans" state="translated">清空</target>
       </trans-unit>
-      <trans-unit id="Empty Trash message">
-        <source>Are you sure you want to delete the messages in the Trash folder permanently?</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">您确定要永久删除废纸篓中的文章么？</target>
-      </trans-unit>
-      <trans-unit id="Empty Trash message text">
-        <source>You cannot undo this action</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">这个操作无法还原</target>
-      </trans-unit>
       <trans-unit id="Enclosure">
+        <source>Enclosure</source>
+        <note>Data field name (Y/N) visible in menu/smart folder definition</note>
+        <target xml:lang="zh-Hans" state="translated">附带文件</target>
+      </trans-unit>
+      <trans-unit id="Enclosure URL">
         <source>Enclosure URL</source>
         <note>Data field name (URL) visible in menu/article list</note>
         <target xml:lang="zh-Hans" state="translated">附带文件的 URL</target>
@@ -1916,18 +1908,8 @@
       </trans-unit>
       <trans-unit id="Error">
         <source>Error</source>
-        <note>No comment provided by engineer.</note>
+        <note>Already subscribed title</note>
         <target xml:lang="zh-Hans" state="translated">错误</target>
-      </trans-unit>
-      <trans-unit id="Error importing subscriptions body">
-        <source>Cannot import the specified file. The file contents are not valid OPML XML format.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">无法导入指定文件。文件内容不是有效的 OPML XML 格式</target>
-      </trans-unit>
-      <trans-unit id="Error importing subscriptions title">
-        <source>Import error</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">导入错误</target>
       </trans-unit>
       <trans-unit id="Error loading script '%@'">
         <source>Error loading script '%@'</source>
@@ -1938,6 +1920,11 @@
         <source>Error parsing XML data in feed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">解析条目中 XML 数据时出现错误</target>
+      </trans-unit>
+      <trans-unit id="Export Completed">
+        <source>Export Completed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">输出完成</target>
       </trans-unit>
       <trans-unit id="External Browser">
         <source>External Browser</source>
@@ -1958,6 +1945,11 @@
         <source>File %@ failed to download</source>
         <note>Notification body</note>
         <target xml:lang="zh-Hans" state="translated">文件 %@ 下载失败</target>
+      </trans-unit>
+      <trans-unit id="Filter in %@">
+        <source>Filter in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">在 %@ 中搜索</target>
       </trans-unit>
       <trans-unit id="Flag">
         <source>Flag</source>
@@ -2004,11 +1996,6 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">服务器回报 HTTP 代码 %d</target>
       </trans-unit>
-      <trans-unit id="HasEnclosure">
-        <source>Enclosure</source>
-        <note>Data field name (Y/N) visible in menu/smart folder definition</note>
-        <target xml:lang="zh-Hans" state="translated">附带文件</target>
-      </trans-unit>
       <trans-unit id="Headlines">
         <source>Headlines</source>
         <note>Pseudo field name visible in article list</note>
@@ -2024,25 +2011,35 @@
         <note>Title of a menu item</note>
         <target xml:lang="zh-Hans" state="translated">隐藏状态栏</target>
       </trans-unit>
+      <trans-unit id="Hide Toolbar">
+        <source>Hide Toolbar</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="zh-Hans" state="translated">隐藏工具栏</target>
+      </trans-unit>
+      <trans-unit id="If you quit Vienna now, all downloads will stop.">
+        <source>If you quit Vienna now, all downloads will stop.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">您确定要取消所有下载并且退出 Vienna 么？</target>
+      </trans-unit>
       <trans-unit id="Import">
         <source>Import</source>
         <note>Title of a button on an alert</note>
         <target xml:lang="zh-Hans" state="translated">导入</target>
       </trans-unit>
+      <trans-unit id="Import Completed">
+        <source>Import Completed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">导入完成</target>
+      </trans-unit>
+      <trans-unit id="Import error">
+        <source>Import error</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">导入错误</target>
+      </trans-unit>
       <trans-unit id="Import subscriptions from OPML file?">
         <source>Import subscriptions from OPML file?</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">通过 OPML 文件来导入频道么？</target>
-      </trans-unit>
-      <trans-unit id="Invalid style body">
-        <source>The Default style will be used instead.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">将会替换为默认的风格</target>
-      </trans-unit>
-      <trans-unit id="Invalid style title">
-        <source>The style %@ appears to be missing or corrupted</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">%@ 这个风格貌似有问题</target>
       </trans-unit>
       <trans-unit id="Last Week">
         <source>Last Week</source>
@@ -2053,16 +2050,6 @@
         <source>Link</source>
         <note>Data field name visible in menu/article list</note>
         <target xml:lang="zh-Hans" state="translated">连接</target>
-      </trans-unit>
-      <trans-unit id="Locate Text">
-        <source>A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">无法在 "%@" 创建新的 Vienna 数据库。可能是因为此文件夹处于远端共享网络上，当前版本的 Vienna 不支持远端共享网络上的数据库。请选择一个在您本地机器上的文件夹。</target>
-      </trans-unit>
-      <trans-unit id="Locate Title">
-        <source>Cannot create the Vienna database</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">无法创建 Vienna 数据库</target>
       </trans-unit>
       <trans-unit id="Mark All Articles as Read">
         <source>Mark All Articles as Read</source>
@@ -2129,21 +2116,6 @@
         <note>Notification title</note>
         <target xml:lang="zh-Hans" state="translated">新文章</target>
       </trans-unit>
-      <trans-unit id="New style body">
-        <source>The style \"%@\" has been installed to your Styles folder and added to the Style menu.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">"%@" 这个风格已经成功安装到了风格文件夹中，您现在可以从风格菜单中选择它了。</target>
-      </trans-unit>
-      <trans-unit id="New style title">
-        <source>Vienna has installed a new style</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">Vienna 安装了一个新的风格</target>
-      </trans-unit>
-      <trans-unit id="New unread articles retrieved">
-        <source>%d new unread articles retrieved</source>
-        <note>Notification body</note>
-        <target xml:lang="zh-Hans" state="translated">收到了 %d 篇新文章</target>
-      </trans-unit>
       <trans-unit id="No">
         <source>No</source>
         <note>No comment provided by engineer.</note>
@@ -2158,6 +2130,11 @@
         <source>OK</source>
         <note>Title of a button on an alert</note>
         <target xml:lang="zh-Hans" state="translated">是的</target>
+      </trans-unit>
+      <trans-unit id="One or more downloads are in progress">
+        <source>One or more downloads are in progress</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">下载进行中</target>
       </trans-unit>
       <trans-unit id="Open">
         <source>Open</source>
@@ -2255,16 +2232,6 @@
    Title of a menu item</note>
         <target xml:lang="zh-Hans" state="translated">退出 Vienna</target>
       </trans-unit>
-      <trans-unit id="RSS Subscription Export Title">
-        <source>Export Completed</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">输出完成</target>
-      </trans-unit>
-      <trans-unit id="RSS Subscription Import Title">
-        <source>Import Completed</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">导入完成</target>
-      </trans-unit>
       <trans-unit id="Read">
         <source>Read</source>
         <note>Data field name visible in menu/smart folder definition</note>
@@ -2320,7 +2287,7 @@
         <note>Title of a menu item</note>
         <target xml:lang="zh-Hans" state="translated">复原文章</target>
       </trans-unit>
-      <trans-unit id="Resubscribe">
+      <trans-unit id="Resubscribe to Feed">
         <source>Resubscribe to Feed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">重新订阅频道</target>
@@ -2349,11 +2316,6 @@
         <source>Search all articles</source>
         <note>Placeholder title of a search field</note>
         <target xml:lang="zh-Hans" state="translated">搜索所有文章</target>
-      </trans-unit>
-      <trans-unit id="Search in %@">
-        <source>Filter in %@</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">在 %@ 中搜索</target>
       </trans-unit>
       <trans-unit id="Select…">
         <source>Select…</source>
@@ -2390,6 +2352,16 @@
         <note>Title of a popup menu item</note>
         <target xml:lang="zh-Hans" state="translated">在 Finder 中显示</target>
       </trans-unit>
+      <trans-unit id="Sorry but Vienna was unable to open the database">
+        <source>Sorry but Vienna was unable to open the database</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">抱歉，Vienna 无法开启这个数据库</target>
+      </trans-unit>
+      <trans-unit id="Sorry, but Vienna was unable to create the database folder">
+        <source>Sorry, but Vienna was unable to create the database folder</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">抱歉，Vianna 无法创建数据库文件夹</target>
+      </trans-unit>
       <trans-unit id="Subject">
         <source>Subject</source>
         <note>Data field name visible in menu/article list/smart folder definition</note>
@@ -2410,10 +2382,55 @@
         <note>Data field name visible in smart folder definition</note>
         <target xml:lang="zh-Hans" state="translated">内容</target>
       </trans-unit>
+      <trans-unit id="The Default style will be used instead.">
+        <source>The Default style will be used instead.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">将会替换为默认的风格</target>
+      </trans-unit>
+      <trans-unit id="The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.">
+        <source>The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">当前版本的 Vienna 不支持数据库 (%@) 的文件格式。请删除或者重新命名这个文件然后重新 Vianna。</target>
+      </trans-unit>
+      <trans-unit id="The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna.">
+        <source>The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">由于一些原因，数据库文件 (%@) 无法被读取。它可能已损坏或者权限不足。请尝试删除或者重命名数据库文件然后重新启动 Vienna</target>
+      </trans-unit>
+      <trans-unit id="The database file format has changed">
+        <source>The database file format has changed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">数据库文件格式已改变</target>
+      </trans-unit>
+      <trans-unit id="The specified export output file could not be created. Check that it is not locked and no other application is using it.">
+        <source>The specified export output file could not be created. Check that it is not locked and no other application is using it.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">无法创建指定的输出文件。请检查这个文件是否被锁定，以及是否有其他程序正在使用</target>
+      </trans-unit>
+      <trans-unit id="The style %@ appears to be missing or corrupted">
+        <source>The style %@ appears to be missing or corrupted</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">%@ 这个风格貌似有问题</target>
+      </trans-unit>
+      <trans-unit id="The style \&quot;%@\&quot; has been installed to your Styles folder and added to the Style menu.">
+        <source>The style \"%@\" has been installed to your Styles folder and added to the Style menu.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">\"%@\" 这个风格已经成功安装到了风格文件夹中，您现在可以从风格菜单中选择它了。</target>
+      </trans-unit>
+      <trans-unit id="The subscription for \&quot;%@\&quot; requires a user name and password for access.">
+        <source>The subscription for \"%@\" requires a user name and password for access.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">\"%@\" 这个订阅需要提供账号和密码</target>
+      </trans-unit>
       <trans-unit id="This article contains an enclosed file.">
         <source>This article contains an enclosed file.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">这篇文章包含附带文件。</target>
+      </trans-unit>
+      <trans-unit id="This operation cannot be undone.">
+        <source>This operation cannot be undone.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">这个操作无法还原</target>
       </trans-unit>
       <trans-unit id="Today">
         <source>Today</source>
@@ -2421,7 +2438,7 @@
         <target xml:lang="zh-Hans" state="translated">今天</target>
       </trans-unit>
       <trans-unit id="Today's Articles">
-        <source>Today’s Articles</source>
+        <source>Today's Articles</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">今天的文章</target>
       </trans-unit>
@@ -2440,40 +2457,40 @@
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">未读文章</target>
       </trans-unit>
-      <trans-unit id="Unrecognised database format text">
-        <source>The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">当前版本的 Vienna 不支持数据库 (%@) 的文件格式。请删除或者重新命名这个文件然后重新 Vianna。</target>
-      </trans-unit>
-      <trans-unit id="Unrecognised database format title">
-        <source>The database file format has changed</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">数据库文件格式已改变</target>
-      </trans-unit>
-      <trans-unit id="Unsubscribe">
+      <trans-unit id="Unsubscribe from Feed">
         <source>Unsubscribe from Feed</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">取消频道订阅</target>
       </trans-unit>
-      <trans-unit id="Vienna cannot open the file body">
+      <trans-unit id="Vienna cannot open the file \&quot;%@\&quot; because it moved since you downloaded it.">
         <source>Vienna cannot open the file \"%@\" because it moved since you downloaded it.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">Vienna 无法打开 "%@" 这个文件，可能是因为您在下载后移动了这个文件</target>
+        <target xml:lang="zh-Hans" state="translated">Vienna 无法打开 \"%@\" 这个文件，可能是因为您在下载后移动了这个文件</target>
       </trans-unit>
-      <trans-unit id="Vienna cannot open the file title">
+      <trans-unit id="Vienna cannot open the file.">
         <source>Vienna cannot open the file.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">Vienna 无法打开这个文件</target>
       </trans-unit>
-      <trans-unit id="Vienna cannot show the file body">
+      <trans-unit id="Vienna cannot show the file \&quot;%@\&quot; because it moved since you downloaded it.">
         <source>Vienna cannot show the file \"%@\" because it moved since you downloaded it.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">Vienna 无法显示 "%@" 这个文件，可能是因为您在下载后移动了这个文件</target>
+        <target xml:lang="zh-Hans" state="translated">Vienna 无法显示 \"%@\" 这个文件，可能是因为您在下载后移动了这个文件</target>
       </trans-unit>
-      <trans-unit id="Vienna cannot show the file title">
+      <trans-unit id="Vienna cannot show the file.">
         <source>Vienna cannot show the file.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">Vienna 无法显示这个文件</target>
+      </trans-unit>
+      <trans-unit id="Vienna has installed a new style">
+        <source>Vienna has installed a new style</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">Vienna 安装了一个新的风格</target>
+      </trans-unit>
+      <trans-unit id="Vienna was trying to create the folder \&quot;%@\&quot; but an error occurred. Check the permissions on the folders on the path specified.">
+        <source>Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">Vienna 在创建文件夹 \"%@\" 时发生错误。请检查指定路径上文件夹的权限</target>
       </trans-unit>
       <trans-unit id="Yes">
         <source>Yes</source>
@@ -2484,6 +2501,16 @@
         <source>Yesterday</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">昨天</target>
+      </trans-unit>
+      <trans-unit id="You are already subscribed to that feed">
+        <source>You are already subscribed to that feed</source>
+        <note>You are already subscribed to that feed</note>
+        <target xml:lang="zh-Hans" state="translated">您已经订阅了这个频道</target>
+      </trans-unit>
+      <trans-unit id="You cannot undo this action">
+        <source>You cannot undo this action</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">这个操作无法还原</target>
       </trans-unit>
       <trans-unit id="contains">
         <source>contains</source>
@@ -2549,7 +2576,7 @@
   </file>
   <file original="Vienna/Resources/Base.lproj/Localizable.stringsdict" datatype="plaintext" source-language="en" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.3" build-num="9E145"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>
     <body>
       <trans-unit id="/%d new articles retrieved:dict/articles:dict/other:dict/:string">

@@ -127,7 +127,7 @@
 		if (item && item.state == DownloadStateCompleted)
 		{
 			if ([[NSWorkspace sharedWorkspace] openFile:item.filename] == NO)
-				runOKAlertSheet(NSLocalizedString(@"Vienna cannot open the file title", nil), NSLocalizedString(@"Vienna cannot open the file body", nil), item.filename.lastPathComponent);
+				runOKAlertSheet(NSLocalizedString(@"Vienna cannot open the file.", nil), NSLocalizedString(@"Vienna cannot open the file \"%@\" because it moved since you downloaded it.", nil), item.filename.lastPathComponent);
 		}
 	}
 }
@@ -145,7 +145,7 @@
 		if (item && [[NSFileManager defaultManager] fileExistsAtPath:item.filename])
 		{
 			if ([[NSWorkspace sharedWorkspace] selectFile:item.filename inFileViewerRootedAtPath:@""] == NO)
-				runOKAlertSheet(NSLocalizedString(@"Vienna cannot show the file title", nil), NSLocalizedString(@"Vienna cannot show the file body", nil), item.filename.lastPathComponent);
+				runOKAlertSheet(NSLocalizedString(@"Vienna cannot show the file.", nil), NSLocalizedString(@"Vienna cannot show the file \"%@\" because it moved since you downloaded it.", nil), item.filename.lastPathComponent);
 		}
 		else
 		{

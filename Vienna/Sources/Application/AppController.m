@@ -491,8 +491,8 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	if ([DownloadManager sharedInstance].activeDownloads > 0)
 	{
         NSAlert *alert = [NSAlert new];
-        alert.messageText = NSLocalizedString(@"Downloads Running", nil);
-        alert.informativeText = NSLocalizedString(@"Downloads Running text", nil);
+        alert.messageText = NSLocalizedString(@"One or more downloads are in progress", nil);
+        alert.informativeText = NSLocalizedString(@"If you quit Vienna now, all downloads will stop.", nil);
         [alert addButtonWithTitle:NSLocalizedString(@"Quit", @"Title of a button on an alert")];
         [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
         NSModalResponse alertResponse = [alert runModal];
@@ -598,7 +598,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 			Preferences * prefs = [Preferences standardPreferences];
             [self populateStyleMenu];
 			prefs.displayStyle = styleName;
-            runOKAlertPanel(NSLocalizedString(@"New style title", nil), NSLocalizedString(@"New style body", nil), styleName);
+            runOKAlertPanel(NSLocalizedString(@"Vienna has installed a new style", nil), NSLocalizedString(@"The style \"%@\" has been installed to your Styles folder and added to the Style menu.", nil), styleName);
 		}
 		return YES;
 	}
@@ -671,7 +671,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	{
 		if (![fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:NULL error:NULL])
 		{
-			runOKAlertPanel(NSLocalizedString(@"Cannot create folder title", nil), NSLocalizedString(@"Cannot create folder body", nil), path);
+			runOKAlertPanel(NSLocalizedString(@"Cannot create folder", nil), NSLocalizedString(@"The \"%@\" folder cannot be created.", nil), path);
 			return NO;
 		}
 	}
@@ -695,7 +695,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
     item.tag = NSSearchFieldRecentsMenuItemTag;
 	[cellMenu insertItem:item atIndex:1];
 	
-	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Clear", nil) action:NULL keyEquivalent:@""];
+	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Clear Recent Searches", nil) action:NULL keyEquivalent:@""];
     item.tag = NSSearchFieldClearRecentsMenuItemTag;
 	[cellMenu insertItem:item atIndex:2];
 	
@@ -1194,8 +1194,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             if (countExported < 0)
             {
                 NSAlert *alert = [NSAlert new];
-                alert.messageText = NSLocalizedString(@"Cannot open export file message", nil);
-                alert.informativeText = NSLocalizedString(@"Cannot open export file message text", nil);
+                alert.messageText = NSLocalizedString(@"Cannot create export output file", nil);
+                alert.informativeText = NSLocalizedString(@"The specified export output file could not be created. Check that it is not locked and no other application is using it.", nil);
                 [alert beginSheetModalForWindow:self.mainWindow completionHandler:nil];
             }
             else
@@ -1203,7 +1203,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
                 // Announce how many we successfully imported
                 NSAlert *alert = [NSAlert new];
                 alert.alertStyle = NSAlertStyleInformational;
-                alert.messageText = NSLocalizedString(@"RSS Subscription Export Title", nil);
+                alert.messageText = NSLocalizedString(@"Export Completed", nil);
                 alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully exported", nil), countExported];
                 [alert runModal];
             }
@@ -1274,7 +1274,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     if (self.mainWindow.keyWindow) {
         NSAlert *alert = [NSAlert new];
         alert.messageText = NSLocalizedString(@"Open Reader Authentication Failed",nil);
-        alert.informativeText = NSLocalizedString(@"Open Reader Authentication Failed text",nil);
+        alert.informativeText = NSLocalizedString(@"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.",nil);
         [alert beginSheetModalForWindow:self.mainWindow completionHandler:nil];
     }
 }
@@ -1618,8 +1618,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)emptyTrash:(id)sender
 {
     NSAlert *alert = [NSAlert new];
-    alert.messageText = NSLocalizedString(@"Empty Trash message", nil);
-    alert.informativeText = NSLocalizedString(@"Empty Trash message text", nil);
+    alert.messageText = NSLocalizedString(@"Are you sure you want to delete the messages in the Trash folder permanently?", nil);
+    alert.informativeText = NSLocalizedString(@"You cannot undo this action", nil);
     [alert addButtonWithTitle:NSLocalizedString(@"Empty", @"Title of a button on an alert")];
     [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
     [alert beginSheetModalForWindow:self.mainWindow completionHandler:^(NSModalResponse returnCode) {
@@ -2050,7 +2050,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         if (newUnread > 0) {
             NSUserNotification *notification = [NSUserNotification new];
             notification.title = NSLocalizedString(@"New articles retrieved", @"Notification title");
-            notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"New unread articles retrieved", @"Notification body"), newUnread];
+            notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d new unread articles retrieved", @"Notification body"), newUnread];
             notification.userInfo = @{UserNotificationContextKey: UserNotificationContextFetchCompleted};
             notification.soundName = NSUserNotificationDefaultSoundName;
 
@@ -2537,8 +2537,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			[self.articleController markDeletedByArray:articleArray deleteFlag:YES];
 		} else {
             NSAlert *alert = [NSAlert new];
-            alert.messageText = NSLocalizedString(@"Delete selected message", nil);
-            alert.informativeText = NSLocalizedString(@"Delete selected message text", nil);
+            alert.messageText = NSLocalizedString(@"Are you sure you want to permanently delete the selected articles?", nil);
+            alert.informativeText = NSLocalizedString(@"This operation cannot be undone.", nil);
             [alert addButtonWithTitle:NSLocalizedString(@"Delete", @"Title of a button on an alert")];
             [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
             [alert beginSheetModalForWindow:self.mainWindow completionHandler:^(NSModalResponse returnCode) {
@@ -2739,24 +2739,24 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		Folder * folder = selectedFolders[0];
 		if (folder.type == VNAFolderTypeSmart)
 		{
-			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete smart folder text", nil), folder.name];
+			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search.", nil), folder.name];
 			alertTitle = NSLocalizedString(@"Delete smart folder", nil);
 		}
 		else if (folder.type == VNAFolderTypeSearch)
 			needPrompt = NO;
 		else if (folder.type == VNAFolderTypeRSS)
 		{
-			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete RSS feed text", nil), folder.name];
-			alertTitle = NSLocalizedString(@"Delete RSS feed", nil);
+			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles.", nil), folder.name];
+			alertTitle = NSLocalizedString(@"Delete subscription", nil);
 		}
 		else if (folder.type == VNAFolderTypeOpenReader)
 		{
-			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete Open Reader RSS feed text", nil), folder.name];
+			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.", nil), folder.name];
 			alertTitle = NSLocalizedString(@"Delete Open Reader RSS feed", nil);
 		}
 		else if (folder.type == VNAFolderTypeGroup)
 		{
-			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete group folder text", nil), folder.name];
+			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone.", nil), folder.name];
 			alertTitle = NSLocalizedString(@"Delete group folder", nil);
 		}
 		else if (folder.type == VNAFolderTypeTrash)
@@ -2766,7 +2766,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else
 	{
-		alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete multiple folders text", nil), count];
+		alertBody = [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to delete all %d selected folders? This operation cannot be undone.", nil), count];
 		alertTitle = NSLocalizedString(@"Delete multiple folders", nil);
 	}
 	
@@ -2811,7 +2811,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 		if (folder.type != VNAFolderTypeTrash) {
 			// Create a status string
-            NSString * deleteStatusMsg = [NSString stringWithFormat:NSLocalizedString(@"Delete folder status", nil), folder.name];
+            NSString * deleteStatusMsg = [NSString stringWithFormat:NSLocalizedString(@"Deleting folder \"%@\"…", nil), folder.name];
             // TODO: Use KVO
             self.mainWindowController.statusText = deleteStatusMsg;
 
@@ -3661,9 +3661,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		if (folder)
 		{
 			if (folder.isUnsubscribed)
-				[menuItem setTitle:NSLocalizedString(@"Resubscribe", nil)];
+				[menuItem setTitle:NSLocalizedString(@"Resubscribe to Feed", nil)];
 			else
-				[menuItem setTitle:NSLocalizedString(@"Unsubscribe", nil)];
+				[menuItem setTitle:NSLocalizedString(@"Unsubscribe from Feed", nil)];
 		}
 		return folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && !db.readOnly && isMainWindowVisible;
 	}

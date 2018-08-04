@@ -222,8 +222,8 @@
 	if ([db folderFromFeedURL:rssFeedURL.absoluteString] != nil)
 	{
         NSAlert *alert = [NSAlert new];
-        alert.messageText = NSLocalizedString(@"Already subscribed title", @"Already subscribed title");
-        alert.informativeText = NSLocalizedString(@"Already subscribed body", @"Already subscribed body");
+        alert.messageText = NSLocalizedString(@"Error", @"Already subscribed title");
+        alert.informativeText = NSLocalizedString(@"You are already subscribed to that feed", @"You are already subscribed to that feed");
         [alert runModal];
 	}
 

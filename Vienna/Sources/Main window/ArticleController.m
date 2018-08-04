@@ -258,7 +258,7 @@
 		return @"";
 
 	Folder * folder = [[Database sharedManager] folderFromID:currentFolderId];
-	return [NSString stringWithFormat:NSLocalizedString(@"Search in %@", nil), folder.name];
+	return [NSString stringWithFormat:NSLocalizedString(@"Filter in %@", nil), folder.name];
 }
 
 /* sortColumnIdentifier

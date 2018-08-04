@@ -43,8 +43,8 @@
         if (error)
         {
             NSAlert *alert = [NSAlert new];
-            alert.messageText = NSLocalizedString(@"Error importing subscriptions title", nil);
-            alert.informativeText = NSLocalizedString(@"Error importing subscriptions body", nil);
+            alert.messageText = NSLocalizedString(@"Import error", nil);
+            alert.informativeText = NSLocalizedString(@"Cannot import the specified file. The file contents are not valid OPML XML format.", nil);
             [alert runModal];
             hasError = YES;
         }
@@ -61,7 +61,7 @@
     {
         NSAlert *alert = [NSAlert new];
         alert.alertStyle = NSAlertStyleInformational;
-        alert.messageText = NSLocalizedString(@"RSS Subscription Import Title", nil);
+        alert.messageText = NSLocalizedString(@"Import Completed", nil);
         alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully imported", nil), countImported];
         [alert runModal];
     }

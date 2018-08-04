@@ -137,7 +137,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     } else if (databaseVersion >= MA_Min_Supported_DB_Version) {
         NSAlert * alert = [[NSAlert alloc] init];
         [alert setMessageText:NSLocalizedString(@"Database Upgrade", nil)];
-        [alert setInformativeText:NSLocalizedString(@"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.", nil)];
+        [alert setInformativeText:NSLocalizedString(@"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience.", nil)];
         [alert addButtonWithTitle:NSLocalizedString(@"Upgrade Database", @"Title of a button on an alert")];
         [alert addButtonWithTitle:NSLocalizedString(@"Quit Vienna", @"Title of a button on an alert")];
         NSInteger modalReturn = [alert runModal];
@@ -167,8 +167,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         // TODO: help text for the user to fix the issue
         NSAlert *alert = [NSAlert new];
         alert.alertStyle = NSAlertStyleCritical;
-        alert.messageText = NSLocalizedString(@"Unrecognised database format title", nil);
-        alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"Unrecognised database format text", nil), self.databaseQueue.path];
+        alert.messageText = NSLocalizedString(@"The database file format has changed", nil);
+        alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.", nil), self.databaseQueue.path];
         [alert runModal];
         return NO;
     } else if (databaseVersion == 0) {
@@ -309,8 +309,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	//set user friendly and localizable names for some fields
 	[self fieldByName:MA_Field_Read].displayName = NSLocalizedString(@"Read", @"Data field name visible in menu/smart folder definition");
 	[self fieldByName:MA_Field_Flagged].displayName = NSLocalizedString(@"Flagged", @"Data field name visible in menu/smart folder definition");
-	[self fieldByName:MA_Field_HasEnclosure].displayName = NSLocalizedString(@"HasEnclosure", @"Data field name (Y/N) visible in menu/smart folder definition");
-	[self fieldByName:MA_Field_Enclosure].displayName = NSLocalizedString(@"Enclosure", @"Data field name (URL) visible in menu/article list");
+	[self fieldByName:MA_Field_HasEnclosure].displayName = NSLocalizedString(@"Enclosure", @"Data field name (Y/N) visible in menu/smart folder definition");
+	[self fieldByName:MA_Field_Enclosure].displayName = NSLocalizedString(@"Enclosure URL", @"Data field name (URL) visible in menu/article list");
 	[self fieldByName:MA_Field_Deleted].displayName = NSLocalizedString(@"Deleted", @"Data field name visible in smart folder definition");
 	[self fieldByName:MA_Field_Subject].displayName = NSLocalizedString(@"Subject", @"Data field name visible in menu/article list/smart folder definition");
 	[self fieldByName:MA_Field_Folder].displayName = NSLocalizedString(@"Folder", @"Data field name visible in menu/article list/smart folder definition");
@@ -332,8 +332,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 
     NSAlert *alert = [NSAlert new];
     alert.alertStyle = NSAlertStyleWarning;
-    alert.messageText = NSLocalizedString(@"Locate Title", nil);
-    alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"Locate Text", nil), path];
+    alert.messageText = NSLocalizedString(@"Cannot create the Vienna database", nil);
+    alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.", nil), path];
     [alert addButtonWithTitle:NSLocalizedString(@"Locate…", @"Title of a button on an alert")];
     [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
     NSModalResponse alertResponse = [alert runModal];
@@ -370,8 +370,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		{
             NSAlert *alert = [NSAlert new];
             alert.alertStyle = NSAlertStyleCritical;
-            alert.messageText = NSLocalizedString(@"Cannot open database title", nil);
-            alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"Cannot open database text", nil), newPath];
+            alert.messageText = NSLocalizedString(@"Sorry but Vienna was unable to open the database", nil);
+            alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna.", nil), newPath];
             [alert runModal];
 
             sqlDatabase = nil;
@@ -2610,8 +2610,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         {
             NSAlert *alert = [NSAlert alertWithError:error];
             alert.alertStyle = NSAlertStyleCritical;
-            alert.messageText = NSLocalizedString(@"Cannot create database folder title", nil);
-            alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"Cannot create database folder text", nil), databaseFolder];
+            alert.messageText = NSLocalizedString(@"Sorry, but Vienna was unable to create the database folder", nil);
+            alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified.", nil), databaseFolder];
             [alert runModal];
 
             return nil;
