@@ -64,7 +64,7 @@
 	// Show the feed URL in the prompt so the user knows which site credentials are being
 	// requested. (We don't use [folder name] here as that is likely to be "Untitled Folder" mostly).
 	NSURL * secureURL = [NSURL URLWithString:folder.feedURL];
-	NSString * prompt = [NSString stringWithFormat:NSLocalizedString(@"Credentials Prompt", nil), secureURL.host];
+	NSString * prompt = [NSString stringWithFormat:NSLocalizedString(@"The subscription for \"%@\" requires a user name and password for access.", nil), secureURL.host];
 	promptString.stringValue = prompt;
 
 	// Fill out any existing values.
