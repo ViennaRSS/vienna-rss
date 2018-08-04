@@ -19,6 +19,9 @@
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "已取得 %d 則新文章";
 
+/* Notification body */
+"%d new unread articles retrieved" = "已順利取得 %d 則未閱讀的新文章";
+
 /* No comment provided by engineer. */
 "%d subscriptions successfully exported" = "已順利匯出 %d 個訂閱頻道";
 
@@ -40,6 +43,9 @@
 /* No comment provided by engineer. */
 "A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "新的外掛項目已安裝。您可以從選單列中新增此外掛項目至工具列上。";
 
+/* No comment provided by engineer. */
+"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "無法在“%@”建立新的 Vienna 資料庫，原因可能是這個檔案夾位在遠端網路分享空間中，而 Vienna 無法管理遠端的資料庫。請在您的本機電腦上，選擇其他的檔案夾。";
+
 /* Toolbar item name for the Advanced preference pane */
 "Advanced" = "進階";
 
@@ -58,12 +64,6 @@
 /* No comment provided by engineer. */
 "After a Week" = "1 週後";
 
-/* Already subscribed body */
-"Already subscribed body" = "您已經訂閱了該頻道";
-
-/* Already subscribed title */
-"Already subscribed title" = "錯誤";
-
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "最後一次更新此訂閱頻道時，發生錯誤";
 
@@ -72,6 +72,24 @@
 
 /* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "在 %@ 腳本中發生 AppleScript 錯誤";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "您是否確定要刪除所選的 %d 個檔案夾？這項操作無法還原。";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "您是否確定要刪除“%@”這個群組檔案夾以及所屬檔案夾？這項操作無法還原。";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "您是否確定要刪除“%@”這個智慧型檔案夾？刪除智慧型檔案夾，並不會一併刪除符合搜尋條件的文章。";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete the messages in the Trash folder permanently?" = "您是否確定要從垃圾桶檔案夾中，永久刪除這些訊息？";
+
+/* No comment provided by engineer. */
+"Are you sure you want to permanently delete the selected articles?" = "您是否確定要永久刪除所選文章？";
+
+/* No comment provided by engineer. */
+"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "您是否確定要取消訂閱“%@”？這項操作會刪除該訂閱頻道中所有已下載的文章。";
 
 /* No comment provided by engineer. */
 "Articles" = "文章";
@@ -90,28 +108,19 @@
 "Cancel" = "取消";
 
 /* No comment provided by engineer. */
-"Cannot create database folder text" = "Vienna 嘗試建立“%@”檔案夾時發生錯誤。請檢查您所指定之路徑的檔案夾權限。";
+"Cannot create export output file" = "無法建立匯出輸出檔";
 
 /* No comment provided by engineer. */
-"Cannot create database folder title" = "很抱歉，Vienna 無法建立資料庫檔案夾";
+"Cannot create the Vienna database" = "無法建立 Vienna 資料庫";
 
 /* No comment provided by engineer. */
-"Cannot open database text" = "因為某些原因，無法打開資料庫檔案 (%@)。原因可能是載入中斷或無法使用檔案。請刪除資料庫檔案，或將資料庫檔案重新命名，然後重新啟動 Vienna 。";
-
-/* No comment provided by engineer. */
-"Cannot open database title" = "很抱歉，Vienna 無法打開此資料庫";
-
-/* No comment provided by engineer. */
-"Cannot open export file message" = "無法建立匯出輸出檔";
-
-/* No comment provided by engineer. */
-"Cannot open export file message text" = "無法建立您所指定的匯出輸出檔。請檢查此檔案是否已被鎖定，或是其他應用程式正在使用這個檔案。";
+"Cannot import the specified file. The file contents are not valid OPML XML format." = "無法匯入您指定的檔案。這個檔案的內容並非為正確的 OPML XML 格式。";
 
 /* No comment provided by engineer. */
 "Cannot rename folder" = "無法將檔案夾重新命名";
 
 /* No comment provided by engineer. */
-"Clear" = "清除最近的搜尋記錄";
+"Clear Recent Searches" = "清除最近的搜尋記錄";
 
 /* No comment provided by engineer. */
 "Click the Open button to open this file." = "按一下“打開”按鈕可打開此檔案。";
@@ -138,9 +147,6 @@
 "Copy URL" = "複製網址";
 
 /* No comment provided by engineer. */
-"Credentials Prompt" = "“%@”這個訂閱頻道需要您提供使用者名稱與密碼進行認證，才可加以存取。";
-
-/* No comment provided by engineer. */
 "Database Upgrade" = "資料庫更新";
 
 /* Data field name visible in menu/article list/smart folder definition */
@@ -154,46 +160,28 @@
 "Delete Article" = "刪除文章";
 
 /* No comment provided by engineer. */
-"Delete folder status" = "正在刪除“%@”檔案夾⋯";
-
-/* No comment provided by engineer. */
 "Delete group folder" = "刪除群組檔案夾";
-
-/* No comment provided by engineer. */
-"Delete group folder text" = "您是否確定要刪除“%@”這個群組檔案夾以及所屬檔案夾？這項操作無法還原。";
 
 /* No comment provided by engineer. */
 "Delete multiple folders" = "刪除多個檔案夾";
 
 /* No comment provided by engineer. */
-"Delete multiple folders text" = "您是否確定要刪除所選的 %d 個檔案夾？這項操作無法還原。";
-
-/* No comment provided by engineer. */
 "Delete Open Reader RSS feed" = "刪除 Open Reader 的 RSS 項目";
-
-/* No comment provided by engineer. */
-"Delete RSS feed" = "刪除訂閱頻道";
-
-/* No comment provided by engineer. */
-"Delete RSS feed text" = "您是否確定要取消訂閱“%@”？這項操作會刪除該訂閱頻道中所有已下載的文章。";
-
-/* No comment provided by engineer. */
-"Delete selected message" = "您是否確定要永久刪除所選文章？";
-
-/* No comment provided by engineer. */
-"Delete selected message text" = "此項操作無法還原。";
 
 /* No comment provided by engineer. */
 "Delete smart folder" = "刪除智慧型檔案夾";
 
 /* No comment provided by engineer. */
-"Delete smart folder text" = "您是否確定要刪除“%@”這個智慧型檔案夾？刪除智慧型檔案夾，並不會一併刪除符合搜尋條件的文章。";
+"Delete subscription" = "刪除訂閱頻道";
 
 /* Title of a menu item */
 "Delete…" = "删除…";
 
 /* Data field name visible in smart folder definition */
 "Deleted" = "已刪除";
+
+/* No comment provided by engineer. */
+"Deleting folder \"%@\"…" = "正在刪除“%@”檔案夾⋯";
 
 /* No comment provided by engineer. */
 "Descending" = "倒排";
@@ -219,38 +207,23 @@
 /* Notification title */
 "Download failed" = "下載失敗";
 
-/* No comment provided by engineer. */
-"Downloads Running" = "Vienna 目前正在下載一或多個項目";
-
-/* No comment provided by engineer. */
-"Downloads Running text" = "您是否要停止下載所有項目，並立即結束 Vienna？";
-
 /* Title of a menu item */
 "Edit…" = "編輯⋯";
 
 /* Title of a button on an alert */
 "Empty" = "清除";
 
-/* No comment provided by engineer. */
-"Empty Trash message" = "您是否確定要從垃圾桶檔案夾中，永久刪除這些訊息？";
-
-/* No comment provided by engineer. */
-"Empty Trash message text" = "這個動作無法還原";
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"Enclosure" = "隨附項目";
 
 /* Data field name (URL) visible in menu/article list */
-"Enclosure" = "隨附項目 URL";
+"Enclosure URL" = "隨附項目 URL";
 
 /* No comment provided by engineer. */
 "Enter the URL here" = "在此輸入 URL";
 
-/* No comment provided by engineer. */
+/* Already subscribed title */
 "Error" = "錯誤";
-
-/* No comment provided by engineer. */
-"Error importing subscriptions body" = "無法匯入您指定的檔案。這個檔案的內容並非為正確的 OPML XML 格式。";
-
-/* No comment provided by engineer. */
-"Error importing subscriptions title" = "匯入發生錯誤";
 
 /* No comment provided by engineer. */
 "Error loading script '%@'" = "載入 script 時發生錯誤 %@";
@@ -268,6 +241,9 @@
 "Error: Feed not found!" = "錯誤：未找到內容";
 
 /* No comment provided by engineer. */
+"Export Completed" = "匯出已完成";
+
+/* No comment provided by engineer. */
 "External Browser" = "外部瀏覽器";
 
 /* No comment provided by engineer. */
@@ -281,6 +257,9 @@
 
 /* Notification body */
 "File %@ failed to download" = "無法下載檔案 %@";
+
+/* No comment provided by engineer. */
+"Filter in %@" = "在 %@ 中過濾";
 
 /* No comment provided by engineer. */
 "Flag" = "旗標";
@@ -315,9 +294,6 @@
 /* No comment provided by engineer. */
 "Got HTTP status 304 - No news from last check" = "回應 HTTP 403 狀態 - 上次檢查並無新的內容";
 
-/* Data field name (Y/N) visible in menu/smart folder definition */
-"HasEnclosure" = "隨附項目";
-
 /* Pseudo field name visible in article list */
 "Headlines" = "標題";
 
@@ -333,20 +309,23 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "伺服器回報 HTTP 碼 %d";
 
+/* No comment provided by engineer. */
+"If you quit Vienna now, all downloads will stop." = "您是否要停止下載所有項目，並立即結束 Vienna？";
+
 /* Title of a button on an alert */
 "Import" = "輸入";
+
+/* No comment provided by engineer. */
+"Import Completed" = "匯入已完成";
+
+/* No comment provided by engineer. */
+"Import error" = "匯入發生錯誤";
 
 /* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "從 OPML 檔案輸入訂閱頻道？";
 
 /* No comment provided by engineer. */
 "Improper infinitely looping URL redirect to %@" = "不正確的網址導向至 %@";
-
-/* No comment provided by engineer. */
-"Invalid style body" = "將會改用預設的顯示樣式。";
-
-/* No comment provided by engineer. */
-"Invalid style title" = "%@ 樣式的檔案遺失或已損壞";
 
 /* test for a value */
 "is" = "等於";
@@ -387,12 +366,6 @@
 /* No comment provided by engineer. */
 "Loading" = "載入中";
 
-/* No comment provided by engineer. */
-"Locate Text" = "無法在“%@”建立新的 Vienna 資料庫，原因可能是這個檔案夾位在遠端網路分享空間中，而 Vienna 無法管理遠端的資料庫。請在您的本機電腦上，選擇其他的檔案夾。";
-
-/* No comment provided by engineer. */
-"Locate Title" = "無法建立 Vienna 資料庫";
-
 /* Title of a menu item */
 "Mark All Articles as Read" = "將所有文章標示為已閱讀";
 
@@ -430,16 +403,7 @@
 "New articles retrieved" = "已取得新文章";
 
 /* No comment provided by engineer. */
-"New style body" = "“%@”樣式已順利安裝到您的“樣式”檔案夾，並已加入“樣式”選單。";
-
-/* No comment provided by engineer. */
-"New style title" = "Vienna 已安裝了新的樣式";
-
-/* No comment provided by engineer. */
 "New Tab" = "新分頁";
-
-/* Notification body */
-"New unread articles retrieved" = "已順利取得 %d 則未閱讀的新文章";
 
 /* No comment provided by engineer. */
 "No" = "否";
@@ -452,6 +416,9 @@
 
 /* Title of a button on an alert */
 "OK" = "好";
+
+/* No comment provided by engineer. */
+"One or more downloads are in progress" = "Vienna 目前正在下載一或多個項目";
 
 /* Title of a popup menu item */
 "Open" = "打開";
@@ -557,7 +524,7 @@
 "Restore Article" = "回復文章";
 
 /* No comment provided by engineer. */
-"Resubscribe" = "重新訂閱 Feed";
+"Resubscribe to Feed" = "重新訂閱 Feed";
 
 /* No comment provided by engineer. */
 "Retrieving articles" = "正在取得文章";
@@ -574,12 +541,6 @@
 /* No comment provided by engineer. */
 "RSS Icon not found!" = "找不到圖示。";
 
-/* No comment provided by engineer. */
-"RSS Subscription Export Title" = "匯出已完成";
-
-/* No comment provided by engineer. */
-"RSS Subscription Import Title" = "匯入已完成";
-
 /* Placeholder title of a search field */
 "Search all articles" = "搜尋所有文章";
 
@@ -588,9 +549,6 @@
 
 /* Placeholder title of a search field */
 "Search current web page" = "查詢當前網頁";
-
-/* No comment provided by engineer. */
-"Search in %@" = "在 %@ 中過濾";
 
 /* No comment provided by engineer. */
 "Search Results" = "搜尋結果";
@@ -619,6 +577,12 @@
 /* Title of a menu item */
 "Show Toolbar" = "顯示工具列";
 
+/* No comment provided by engineer. */
+"Sorry but Vienna was unable to open the database" = "很抱歉，Vienna 無法打開此資料庫";
+
+/* No comment provided by engineer. */
+"Sorry, but Vienna was unable to create the database folder" = "很抱歉，Vienna 無法建立資料庫檔案夾";
+
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "標題";
 
@@ -635,7 +599,34 @@
 "Text" = "內文";
 
 /* No comment provided by engineer. */
+"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "此版本的 Vienna 並不支援資料庫 (%@) 的檔案格式。請刪除此檔案，或是將檔案重新命名後，再重新啟動 Vienna。";
+
+/* No comment provided by engineer. */
+"The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna." = "因為某些原因，無法打開資料庫檔案 (%@)。原因可能是載入中斷或無法使用檔案。請刪除資料庫檔案，或將資料庫檔案重新命名，然後重新啟動 Vienna 。";
+
+/* No comment provided by engineer. */
+"The database file format has changed" = "資料庫檔案格式已變更";
+
+/* No comment provided by engineer. */
+"The Default style will be used instead." = "將會改用預設的顯示樣式。";
+
+/* No comment provided by engineer. */
+"The specified export output file could not be created. Check that it is not locked and no other application is using it." = "無法建立您所指定的匯出輸出檔。請檢查此檔案是否已被鎖定，或是其他應用程式正在使用這個檔案。";
+
+/* No comment provided by engineer. */
+"The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "“%@”樣式已順利安裝到您的“樣式”檔案夾，並已加入“樣式”選單。";
+
+/* No comment provided by engineer. */
+"The style %@ appears to be missing or corrupted" = "%@ 樣式的檔案遺失或已損壞";
+
+/* No comment provided by engineer. */
+"The subscription for \"%@\" requires a user name and password for access." = "“%@”這個訂閱頻道需要您提供使用者名稱與密碼進行認證，才可加以存取。";
+
+/* No comment provided by engineer. */
 "This article contains an enclosed file." = "此文章隨附一個檔案。";
+
+/* No comment provided by engineer. */
+"This operation cannot be undone." = "此項操作無法還原。";
 
 /* No comment provided by engineer. */
 "Today" = "今天";
@@ -653,13 +644,7 @@
 "Unread Articles" = "未讀文章";
 
 /* No comment provided by engineer. */
-"Unrecognised database format text" = "此版本的 Vienna 並不支援資料庫 (%@) 的檔案格式。請刪除此檔案，或是將檔案重新命名後，再重新啟動 Vienna。";
-
-/* No comment provided by engineer. */
-"Unrecognised database format title" = "資料庫檔案格式已變更";
-
-/* No comment provided by engineer. */
-"Unsubscribe" = "取消訂閱 Feed";
+"Unsubscribe from Feed" = "取消訂閱 Feed";
 
 /* Title of a button on an alert */
 "Upgrade Database" = "更新資料庫";
@@ -668,23 +653,35 @@
 "URL" = "網址";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file body" = "Vienna 無法打開“%@”這個檔案，原因是您完成下載後，已經把這個檔案搬移到其他地方。";
+"Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna 無法打開“%@”這個檔案，原因是您完成下載後，已經把這個檔案搬移到其他地方。";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file title" = "Vienna 無法打開這個檔案。";
+"Vienna cannot open the file." = "Vienna 無法打開這個檔案。";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file body" = "Vienna 無法顯示“%@”這個檔案，原因是在您完成下載後，已經把這個檔案搬移到了其他地方。";
+"Vienna cannot show the file \"%@\" because it moved since you downloaded it." = "Vienna 無法顯示“%@”這個檔案，原因是在您完成下載後，已經把這個檔案搬移到了其他地方。";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file title" = "Vienna 無法顯示這個檔案。";
+"Vienna cannot show the file." = "Vienna 無法顯示這個檔案。";
 
 /* No comment provided by engineer. */
-"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "新版的 Vienna 必須更新資料庫，這可能會需要幾分鐘的時間，造成不便請見諒。";
+"Vienna has installed a new style" = "Vienna 已安裝了新的樣式";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." = "新版的 Vienna 必須更新資料庫，這可能會需要幾分鐘的時間，造成不便請見諒。";
+
+/* No comment provided by engineer. */
+"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna 嘗試建立“%@”檔案夾時發生錯誤。請檢查您所指定之路徑的檔案夾權限。";
 
 /* No comment provided by engineer. */
 "Yes" = "是";
 
 /* No comment provided by engineer. */
 "Yesterday" = "昨天";
+
+/* You are already subscribed to that feed */
+"You are already subscribed to that feed" = "您已經訂閱了該頻道";
+
+/* No comment provided by engineer. */
+"You cannot undo this action" = "這個動作無法還原";
 

@@ -13,6 +13,9 @@
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "Nově přijato příspěvků: %d";
 
+/* Notification body */
+"%d new unread articles retrieved" = "Přijato nových nepřečtených příspěvků: %d";
+
 /* No comment provided by engineer. */
 "%d subscriptions successfully exported" = "Bylo úspěšně exportováno celkem odebírání: %d";
 
@@ -30,6 +33,9 @@
 
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "Složka s tímto jménem již existuje.";
+
+/* No comment provided by engineer. */
+"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Nelze vytvořit novou databázi programu Vienna v položce „%@“, protože složka je pravděpodobně umístěna v síti. Tato verze programu Vienna nemůže spravovat vzdálené databáze. Vyberte prosím jinou složku, která je umístěna v tomto počítači.";
 
 /* Toolbar item name for the Advanced preference pane */
 "Advanced" = "Ostatní";
@@ -49,17 +55,29 @@
 /* No comment provided by engineer. */
 "After a Week" = "Po týdnu";
 
-/* Already subscribed body */
-"Already subscribed body" = "Tento zdroj již odebíráte.";
-
-/* Already subscribed title */
-"Already subscribed title" = "Chyba";
-
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Při poslední obnově tohoto zdroje se vyskytla chyba.";
 
 /* Toolbar item name for the Appearance preference pane */
 "Appearance" = "Vzhled";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Určitě chcete smazat všechny vybrané složky (celkem: %d)? Tuto operaci nelze odvolat.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Určitě chcete smazat skupinovou složku „%@“ a všechny vnořené složky? Tuto operaci nelze odvolat.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Určitě chcete smazat dynamickou složku „%@“? Tato operace neodstraní stávající příspěvky zobrazované v této složce.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete the messages in the Trash folder permanently?" = "Určitě chcete trvale odstranit příspěvky, které jsou v koši?";
+
+/* No comment provided by engineer. */
+"Are you sure you want to permanently delete the selected articles?" = "Určitě chcete trvale odstranit vybrané příspěvky?";
+
+/* No comment provided by engineer. */
+"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Určitě chcete ukončit odebírání položky „%@“? Tato operace smaže všechny načtené příspěvky.";
 
 /* No comment provided by engineer. */
 "Articles" = "Příspěvky";
@@ -75,28 +93,19 @@
 "Cancel" = "Zrušit";
 
 /* No comment provided by engineer. */
-"Cannot create database folder text" = "Program Vienna se pokusil vytvořit složku „%@“, ale vyskytla se chyba. Ověřte, zda máte oprávnění k vytvoření složky v tomto umístění.";
+"Cannot create export output file" = "Nelze vytvořit soubor pro export";
 
 /* No comment provided by engineer. */
-"Cannot create database folder title" = "Program Vienna nemůže vytvořit databázovou složku";
+"Cannot create the Vienna database" = "Nelze vytvořit databázi Vienna";
 
 /* No comment provided by engineer. */
-"Cannot open database text" = "Soubor databáze (%@) nelze z nějakých důvodů otevřít. Může být poškozený nebo nepřístupný. Smažte nebo přejmenujte tento soubor databáze, ukončete a znovu spusťte program Vienna.";
-
-/* No comment provided by engineer. */
-"Cannot open database title" = "Program Vienna nemůže otevřít databázi";
-
-/* No comment provided by engineer. */
-"Cannot open export file message" = "Nelze vytvořit soubor pro export";
-
-/* No comment provided by engineer. */
-"Cannot open export file message text" = "Nelze vytvořit určený soubor pro export. Ověřte zda není uzamčený nebo zda jej nepoužívá jiná aplikace.";
+"Cannot import the specified file. The file contents are not valid OPML XML format." = "Nelze importovat určený soubor. Tento soubor nemá platný formát OPML XML.";
 
 /* No comment provided by engineer. */
 "Cannot rename folder" = "Nelze přejmenovat složku";
 
 /* No comment provided by engineer. */
-"Clear" = "Odstranit poslední hledání";
+"Clear Recent Searches" = "Odstranit poslední hledání";
 
 /* No comment provided by engineer. */
 "Click the Open button to open this file." = "Soubor otevřete klepnutím na tlačítko Otevřít.";
@@ -117,9 +126,6 @@
 "Copy Page Link to Clipboard" = "Zkopírovat odkaz na stránku do schránky";
 
 /* No comment provided by engineer. */
-"Credentials Prompt" = "Odebírání položky „%@“ vyžaduje uživatelské jméno a heslo.";
-
-/* No comment provided by engineer. */
 "Database Upgrade" = "Aktualizovat databázi";
 
 /* Data field name visible in menu/article list/smart folder definition */
@@ -133,43 +139,25 @@
 "Delete Article" = "Smazat příspěvek";
 
 /* No comment provided by engineer. */
-"Delete folder status" = "Maže se složka „%@“…";
-
-/* No comment provided by engineer. */
 "Delete group folder" = "Smazat skupinovou složku";
-
-/* No comment provided by engineer. */
-"Delete group folder text" = "Určitě chcete smazat skupinovou složku „%@“ a všechny vnořené složky? Tuto operaci nelze odvolat.";
 
 /* No comment provided by engineer. */
 "Delete multiple folders" = "Smazat více složek";
 
 /* No comment provided by engineer. */
-"Delete multiple folders text" = "Určitě chcete smazat všechny vybrané složky (celkem: %d)? Tuto operaci nelze odvolat.";
-
-/* No comment provided by engineer. */
-"Delete RSS feed" = "Smazat odebírání";
-
-/* No comment provided by engineer. */
-"Delete RSS feed text" = "Určitě chcete ukončit odebírání položky „%@“? Tato operace smaže všechny načtené příspěvky.";
-
-/* No comment provided by engineer. */
-"Delete selected message" = "Určitě chcete trvale odstranit vybrané příspěvky?";
-
-/* No comment provided by engineer. */
-"Delete selected message text" = "Tuto operaci nelze odvolat.";
-
-/* No comment provided by engineer. */
 "Delete smart folder" = "Smazat dynamickou složku";
 
 /* No comment provided by engineer. */
-"Delete smart folder text" = "Určitě chcete smazat dynamickou složku „%@“? Tato operace neodstraní stávající příspěvky zobrazované v této složce.";
+"Delete subscription" = "Smazat odebírání";
 
 /* Title of a menu item */
 "Delete…" = "Smazat…";
 
 /* Data field name visible in smart folder definition */
 "Deleted" = "Smazáno";
+
+/* No comment provided by engineer. */
+"Deleting folder \"%@\"…" = "Maže se složka „%@“…";
 
 /* No comment provided by engineer. */
 "Descending" = "Sestupně";
@@ -195,41 +183,29 @@
 /* Notification title */
 "Download failed" = "Kopírování selhalo";
 
-/* No comment provided by engineer. */
-"Downloads Running" = "Probíhá jedno nebo více kopírování";
-
-/* No comment provided by engineer. */
-"Downloads Running text" = "Ukončíte-li program Vienna nyní, všechna kopírování budou zastavena.";
-
 /* Title of a menu item */
 "Edit…" = "Upravit…";
 
 /* Title of a button on an alert */
 "Empty" = "Smazat";
 
-/* No comment provided by engineer. */
-"Empty Trash message" = "Určitě chcete trvale odstranit příspěvky, které jsou v koši?";
-
-/* No comment provided by engineer. */
-"Empty Trash message text" = "Tuto akci nelze odvolat.";
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"Enclosure" = "Příloha";
 
 /* Data field name (URL) visible in menu/article list */
-"Enclosure" = "URL přílohy";
+"Enclosure URL" = "URL přílohy";
 
 /* No comment provided by engineer. */
 "Enter the URL here" = "Sem zadejte URL";
 
-/* No comment provided by engineer. */
+/* Already subscribed title */
 "Error" = "Chyba";
 
 /* No comment provided by engineer. */
-"Error importing subscriptions body" = "Nelze importovat určený soubor. Tento soubor nemá platný formát OPML XML.";
-
-/* No comment provided by engineer. */
-"Error importing subscriptions title" = "Chyba importu";
-
-/* No comment provided by engineer. */
 "Error parsing XML data in feed" = "Chyba při zpracování dat XML ze zdroje";
+
+/* No comment provided by engineer. */
+"Export Completed" = "Export dokončen";
 
 /* No comment provided by engineer. */
 "External Browser" = "Externí prohlížeč";
@@ -242,6 +218,9 @@
 
 /* Notification body */
 "File %@ failed to download" = "Kopírování souboru %@ selhalo";
+
+/* No comment provided by engineer. */
+"Filter in %@" = "Hledat v „%@“";
 
 /* No comment provided by engineer. */
 "Flag" = "Praporek";
@@ -267,9 +246,6 @@
 /* No comment provided by engineer. */
 "Go forward to the next page" = "Otevřít následující stránku";
 
-/* Data field name (Y/N) visible in menu/smart folder definition */
-"HasEnclosure" = "Příloha";
-
 /* Pseudo field name visible in article list */
 "Headlines" = "Záhlaví";
 
@@ -285,17 +261,20 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "Ze serveru byl obdržen kód HTTP: %d";
 
+/* No comment provided by engineer. */
+"If you quit Vienna now, all downloads will stop." = "Ukončíte-li program Vienna nyní, všechna kopírování budou zastavena.";
+
 /* Title of a button on an alert */
 "Import" = "Importovat";
 
 /* No comment provided by engineer. */
+"Import Completed" = "Import dokončen";
+
+/* No comment provided by engineer. */
+"Import error" = "Chyba importu";
+
+/* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "Importovat odebírání ze souboru OPML?";
-
-/* No comment provided by engineer. */
-"Invalid style body" = "Bude použit výchozí styl (Default).";
-
-/* No comment provided by engineer. */
-"Invalid style title" = "Styl %@ pravděpodobně chybí nebo je poškozený.";
 
 /* test for a value */
 "is" = "je";
@@ -336,12 +315,6 @@
 /* No comment provided by engineer. */
 "Loading" = "Načítám";
 
-/* No comment provided by engineer. */
-"Locate Text" = "Nelze vytvořit novou databázi programu Vienna v položce „%@“, protože složka je pravděpodobně umístěna v síti. Tato verze programu Vienna nemůže spravovat vzdálené databáze. Vyberte prosím jinou složku, která je umístěna v tomto počítači.";
-
-/* No comment provided by engineer. */
-"Locate Title" = "Nelze vytvořit databázi Vienna";
-
 /* Title of a menu item */
 "Mark All Articles as Read" = "Označit všechny příspěvky jako čtené";
 
@@ -379,16 +352,7 @@
 "New articles retrieved" = "Přijaty nové příspěvky";
 
 /* No comment provided by engineer. */
-"New style body" = "Styl „%@“ byl instalován do složky se styly a přidán do nabídky Styly.";
-
-/* No comment provided by engineer. */
-"New style title" = "V programu Vienna byl instalován nový styl";
-
-/* No comment provided by engineer. */
 "New Tab" = "nový panel";
-
-/* Notification body */
-"New unread articles retrieved" = "Přijato nových nepřečtených příspěvků: %d";
 
 /* No comment provided by engineer. */
 "No" = "Ne";
@@ -398,6 +362,9 @@
 
 /* Title of a button on an alert */
 "OK" = "Budiž";
+
+/* No comment provided by engineer. */
+"One or more downloads are in progress" = "Probíhá jedno nebo více kopírování";
 
 /* Title of a popup menu item */
 "Open" = "Otevřít";
@@ -497,7 +464,7 @@
 "Restore Article" = "Opětovně zařadit příspěvek";
 
 /* No comment provided by engineer. */
-"Resubscribe" = "Obnovit odebírání kanálu";
+"Resubscribe to Feed" = "Obnovit odebírání kanálu";
 
 /* No comment provided by engineer. */
 "Retrieving articles" = "Přijímají se příspěvky";
@@ -508,17 +475,8 @@
 /* No comment provided by engineer. */
 "Return to the previous page" = "Zpět na předchozí stránku";
 
-/* No comment provided by engineer. */
-"RSS Subscription Export Title" = "Export dokončen";
-
-/* No comment provided by engineer. */
-"RSS Subscription Import Title" = "Import dokončen";
-
 /* Placeholder title of a search field */
 "Search all articles" = "Hledat ve všech příspěvcích";
-
-/* No comment provided by engineer. */
-"Search in %@" = "Hledat v „%@“";
 
 /* No comment provided by engineer. */
 "Search Results" = "Výsledky hledání";
@@ -544,6 +502,12 @@
 /* Title of a menu item */
 "Show Toolbar" = "Zobrazit panel nástrojů";
 
+/* No comment provided by engineer. */
+"Sorry but Vienna was unable to open the database" = "Program Vienna nemůže otevřít databázi";
+
+/* No comment provided by engineer. */
+"Sorry, but Vienna was unable to create the database folder" = "Program Vienna nemůže vytvořit databázovou složku";
+
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "Předmět";
 
@@ -557,7 +521,34 @@
 "Syncing" = "Synchronizace";
 
 /* No comment provided by engineer. */
+"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "Souborový formát databáze (%@) není touto verzí programu Vienna podporovaný. Smažte nebo přejmenujte tento soubor, ukončete a znovu spusťte program Vienna.";
+
+/* No comment provided by engineer. */
+"The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna." = "Soubor databáze (%@) nelze z nějakých důvodů otevřít. Může být poškozený nebo nepřístupný. Smažte nebo přejmenujte tento soubor databáze, ukončete a znovu spusťte program Vienna.";
+
+/* No comment provided by engineer. */
+"The database file format has changed" = "Formát databázového soubor byl změněn";
+
+/* No comment provided by engineer. */
+"The Default style will be used instead." = "Bude použit výchozí styl (Default).";
+
+/* No comment provided by engineer. */
+"The specified export output file could not be created. Check that it is not locked and no other application is using it." = "Nelze vytvořit určený soubor pro export. Ověřte zda není uzamčený nebo zda jej nepoužívá jiná aplikace.";
+
+/* No comment provided by engineer. */
+"The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Styl „%@“ byl instalován do složky se styly a přidán do nabídky Styly.";
+
+/* No comment provided by engineer. */
+"The style %@ appears to be missing or corrupted" = "Styl %@ pravděpodobně chybí nebo je poškozený.";
+
+/* No comment provided by engineer. */
+"The subscription for \"%@\" requires a user name and password for access." = "Odebírání položky „%@“ vyžaduje uživatelské jméno a heslo.";
+
+/* No comment provided by engineer. */
 "This article contains an enclosed file." = "Tento příspěvek obsahuje v příloze soubor.";
+
+/* No comment provided by engineer. */
+"This operation cannot be undone." = "Tuto operaci nelze odvolat.";
 
 /* No comment provided by engineer. */
 "Today" = "Dnes";
@@ -575,29 +566,35 @@
 "Unread Articles" = "Nečtené příspěvky";
 
 /* No comment provided by engineer. */
-"Unrecognised database format text" = "Souborový formát databáze (%@) není touto verzí programu Vienna podporovaný. Smažte nebo přejmenujte tento soubor, ukončete a znovu spusťte program Vienna.";
+"Unsubscribe from Feed" = "Ukončit odebírání kanálu";
 
 /* No comment provided by engineer. */
-"Unrecognised database format title" = "Formát databázového soubor byl změněn";
+"Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Program Vienna nemůže otevřít soubor „%@“, protože byl po zkopírování přemístěn.";
 
 /* No comment provided by engineer. */
-"Unsubscribe" = "Ukončit odebírání kanálu";
+"Vienna cannot open the file." = "Program Vienna nemůže otevřít soubor";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file body" = "Program Vienna nemůže otevřít soubor „%@“, protože byl po zkopírování přemístěn.";
+"Vienna cannot show the file \"%@\" because it moved since you downloaded it." = "Program Vienna nemůže zobrazit soubor „%@“, protože byl po zkopírování přemístěn.";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file title" = "Program Vienna nemůže otevřít soubor";
+"Vienna cannot show the file." = "Program Vienna nemůže zobrazit soubor";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file body" = "Program Vienna nemůže zobrazit soubor „%@“, protože byl po zkopírování přemístěn.";
+"Vienna has installed a new style" = "V programu Vienna byl instalován nový styl";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file title" = "Program Vienna nemůže zobrazit soubor";
+"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Program Vienna se pokusil vytvořit složku „%@“, ale vyskytla se chyba. Ověřte, zda máte oprávnění k vytvoření složky v tomto umístění.";
 
 /* No comment provided by engineer. */
 "Yes" = "Ano";
 
 /* No comment provided by engineer. */
 "Yesterday" = "Včera";
+
+/* You are already subscribed to that feed */
+"You are already subscribed to that feed" = "Tento zdroj již odebíráte.";
+
+/* No comment provided by engineer. */
+"You cannot undo this action" = "Tuto akci nelze odvolat.";
 

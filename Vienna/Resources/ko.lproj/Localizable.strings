@@ -10,6 +10,9 @@
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "%d 항목의 새 기사를 등록";
 
+/* Notification body */
+"%d new unread articles retrieved" = "%d 항목의 읽지 않은 새 기사가 추가되었습니다.";
+
 /* No comment provided by engineer. */
 "%d subscriptions successfully exported" = "%d 항목의 구독을 성공적으로 저장했습니다.";
 
@@ -27,6 +30,9 @@
 
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "지정한 이름의 항목이 이미 존재합니다.";
+
+/* No comment provided by engineer. */
+"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "새로운 Vienna 데이터베이스를 \"%@\" 위치에 생성할 수 없습니다. 아마도 해당 폴더가 원격 네트워크 공유에 위치해 있을 것이며, 현재 버전의 Vienna 로는 원격 데이트베이스를 관리할 수 없습니다. 로컬 머신에 위치한 다른 폴더를 선택해 재시도하시기 바랍니다.";
 
 /* Toolbar item name for the Advanced preference pane */
 "Advanced" = "고급";
@@ -46,17 +52,29 @@
 /* No comment provided by engineer. */
 "After a Week" = "1주일 후";
 
-/* Already subscribed body */
-"Already subscribed body" = "이미 구독 중인 피드입니다.";
-
-/* Already subscribed title */
-"Already subscribed title" = "오류";
-
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "이전 갱신시 이 피드에서 오류가 발생했습니다.";
 
 /* Toolbar item name for the Appearance preference pane */
 "Appearance" = "모양새";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "정말로 선택된 %d 항목을 모두 삭제하시겠습니까? 이 명령은 취소할 수 없습니다.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "정말로 그룹 폴더 \"%@\" 및 모든 하위 항목을 삭제하시겠습니까? 이 명령은 취소할 수 없습니다.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "정말로 스마트 폴더 \"%@\" 항목을 삭제하시겠습니까? 이는 검색에 부합된 실제 기사는 삭제하지 않습니다.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete the messages in the Trash folder permanently?" = "정말로 휴지통의 항목들을 삭제하시겠습니까?";
+
+/* No comment provided by engineer. */
+"Are you sure you want to permanently delete the selected articles?" = "정말로 선택된 기사를 영구히 삭제하시겠습니까?";
+
+/* No comment provided by engineer. */
+"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "정말로 \"%@\" 구독을 취소하시겠습니까? 이는 저장된 모든 관련 기사들을 삭제할 것입니다.";
 
 /* No comment provided by engineer. */
 "Articles" = "기사";
@@ -69,28 +87,19 @@
 "Cancel" = "취소";
 
 /* No comment provided by engineer. */
-"Cannot create database folder text" = "Vienna 가 \"%@\" 폴더를 생성 중에 오류가 발생했습니다. 지정한 경로에 있는 폴더의 권한을 확인하십시오.";
+"Cannot create export output file" = "내보내기 출력 파일을 생성할 수 없습니다.";
 
 /* No comment provided by engineer. */
-"Cannot create database folder title" = "Vienna 가 데이터베이스 폴더를 생성할 수 없습니다.";
+"Cannot create the Vienna database" = "Vienna 데이터베이스를 생성할 수 없습니다.";
 
 /* No comment provided by engineer. */
-"Cannot open database text" = "해당 데이터베이스 파일 (%@) 항목은 손상되었거나 접근할 수 없습니다. 해당 파일을 삭제 또는 이름을 변경한 후 Vienna 를 재실행하십시오.";
-
-/* No comment provided by engineer. */
-"Cannot open database title" = "Vienna 가 데이터베이스 파일을 열 수 없습니다.";
-
-/* No comment provided by engineer. */
-"Cannot open export file message" = "내보내기 출력 파일을 생성할 수 없습니다.";
-
-/* No comment provided by engineer. */
-"Cannot open export file message text" = "지정한 내보내기 출력 파일을 생성할 수 없습니다. 잠금 해제 상태인지 또는 다른 응용 프로그램에서 사용되고 있는지 확인하십시오.";
+"Cannot import the specified file. The file contents are not valid OPML XML format." = "지정한 파일을 가져올 수 없습니다. 해당 파일은 유효한 OPML XML 형식이 아닙니다.";
 
 /* No comment provided by engineer. */
 "Cannot rename folder" = "항목의 이름을 변경할 수 없습니다.";
 
 /* No comment provided by engineer. */
-"Clear" = "최근 검색 지우기";
+"Clear Recent Searches" = "최근 검색 지우기";
 
 /* No comment provided by engineer. */
 "Connecting to %@" = "%@ 주소에 연결";
@@ -103,9 +112,6 @@
 
 /* No comment provided by engineer. */
 "Copy Page Link to Clipboard" = "페이지 링크 복사";
-
-/* No comment provided by engineer. */
-"Credentials Prompt" = "\"%@\" 구독은 사용자 이름과 암호를 요구합니다.";
 
 /* No comment provided by engineer. */
 "Database Upgrade" = "데이터베이스 업그레이드";
@@ -121,37 +127,16 @@
 "Delete Article" = "기사 삭제";
 
 /* No comment provided by engineer. */
-"Delete folder status" = "\"%@\" 삭제 중…";
-
-/* No comment provided by engineer. */
 "Delete group folder" = "그룹 폴더 삭제";
-
-/* No comment provided by engineer. */
-"Delete group folder text" = "정말로 그룹 폴더 \"%@\" 및 모든 하위 항목을 삭제하시겠습니까? 이 명령은 취소할 수 없습니다.";
 
 /* No comment provided by engineer. */
 "Delete multiple folders" = "다중 항목 삭제";
 
 /* No comment provided by engineer. */
-"Delete multiple folders text" = "정말로 선택된 %d 항목을 모두 삭제하시겠습니까? 이 명령은 취소할 수 없습니다.";
-
-/* No comment provided by engineer. */
-"Delete RSS feed" = "구독 삭제";
-
-/* No comment provided by engineer. */
-"Delete RSS feed text" = "정말로 \"%@\" 구독을 취소하시겠습니까? 이는 저장된 모든 관련 기사들을 삭제할 것입니다.";
-
-/* No comment provided by engineer. */
-"Delete selected message" = "정말로 선택된 기사를 영구히 삭제하시겠습니까?";
-
-/* No comment provided by engineer. */
-"Delete selected message text" = "이 명령은 취소할 수 없습니다.";
-
-/* No comment provided by engineer. */
 "Delete smart folder" = "스마트 폴더 삭제";
 
 /* No comment provided by engineer. */
-"Delete smart folder text" = "정말로 스마트 폴더 \"%@\" 항목을 삭제하시겠습니까? 이는 검색에 부합된 실제 기사는 삭제하지 않습니다.";
+"Delete subscription" = "구독 삭제";
 
 /* Title of a menu item */
 "Delete…" = "삭제…";
@@ -159,14 +144,11 @@
 /* Data field name visible in smart folder definition */
 "Deleted" = "삭제";
 
+/* No comment provided by engineer. */
+"Deleting folder \"%@\"…" = "\"%@\" 삭제 중…";
+
 /* test for a string */
 "does not contain" = "다음을 포함하지 않음";
-
-/* No comment provided by engineer. */
-"Downloads Running" = "하나 이상의 다운로드가 진행 중입니다.";
-
-/* No comment provided by engineer. */
-"Downloads Running text" = "모든 다운로드를 취소하고 Vienna 를 지금 종료하시겠습니까?";
 
 /* Title of a menu item */
 "Edit…" = "편집…";
@@ -175,31 +157,25 @@
 "Empty" = "비우기";
 
 /* No comment provided by engineer. */
-"Empty Trash message" = "정말로 휴지통의 항목들을 삭제하시겠습니까?";
-
-/* No comment provided by engineer. */
-"Empty Trash message text" = "이 명령은 취소할 수 없습니다.";
-
-/* No comment provided by engineer. */
 "Enter the URL here" = "여기에 URL 입력";
 
-/* No comment provided by engineer. */
+/* Already subscribed title */
 "Error" = "오류";
 
 /* No comment provided by engineer. */
-"Error importing subscriptions body" = "지정한 파일을 가져올 수 없습니다. 해당 파일은 유효한 OPML XML 형식이 아닙니다.";
-
-/* No comment provided by engineer. */
-"Error importing subscriptions title" = "가져오기 오류";
-
-/* No comment provided by engineer. */
 "Error parsing XML data in feed" = "해당 피드의 XML 데이터 읽는 중 오류 발생";
+
+/* No comment provided by engineer. */
+"Export Completed" = "내보내기 완료";
 
 /* No comment provided by engineer. */
 "External Browser" = "외부 브라우져";
 
 /* No comment provided by engineer. */
 "Feed URL updated to %@" = "피드 URL 정보가 %@ 으로 갱신됨";
+
+/* No comment provided by engineer. */
+"Filter in %@" = "%@ 검색";
 
 /* No comment provided by engineer. */
 "Flag" = "깃발";
@@ -232,10 +208,13 @@
 "HTTP code %d reported from server" = "서버로부터 HTTP 코드 보고: %d";
 
 /* No comment provided by engineer. */
-"Invalid style body" = "기본 스타일로 대체될 것입니다.";
+"If you quit Vienna now, all downloads will stop." = "모든 다운로드를 취소하고 Vienna 를 지금 종료하시겠습니까?";
 
 /* No comment provided by engineer. */
-"Invalid style title" = "스타일 %@ 항목은 손상되었거나 유효하지 않은 형식입니다.";
+"Import Completed" = "가져오기 완료";
+
+/* No comment provided by engineer. */
+"Import error" = "가져오기 오류";
 
 /* test for a value */
 "is" = "다음과 같음";
@@ -272,12 +251,6 @@
 
 /* Data field name visible in menu/article list */
 "Link" = "링크";
-
-/* No comment provided by engineer. */
-"Locate Text" = "새로운 Vienna 데이터베이스를 \"%@\" 위치에 생성할 수 없습니다. 아마도 해당 폴더가 원격 네트워크 공유에 위치해 있을 것이며, 현재 버전의 Vienna 로는 원격 데이트베이스를 관리할 수 없습니다. 로컬 머신에 위치한 다른 폴더를 선택해 재시도하시기 바랍니다.";
-
-/* No comment provided by engineer. */
-"Locate Title" = "Vienna 데이터베이스를 생성할 수 없습니다.";
 
 /* Title of a menu item */
 "Mark All Articles as Read" = "모든 기사를 읽음으로 표시";
@@ -316,15 +289,6 @@
 "New articles retrieved" = "새로운 기사";
 
 /* No comment provided by engineer. */
-"New style body" = "\"%@\" 스타일이 사용자의 스타일 폴더에 설치되었으며, 스타일 메뉴에 등록되었습니다.";
-
-/* No comment provided by engineer. */
-"New style title" = "Vienna 가 새 스타일을 설치했습니다.";
-
-/* Notification body */
-"New unread articles retrieved" = "%d 항목의 읽지 않은 새 기사가 추가되었습니다.";
-
-/* No comment provided by engineer. */
 "No" = "아니오";
 
 /* No comment provided by engineer. */
@@ -332,6 +296,9 @@
 
 /* Title of a button on an alert */
 "OK" = "확인";
+
+/* No comment provided by engineer. */
+"One or more downloads are in progress" = "하나 이상의 다운로드가 진행 중입니다.";
 
 /* Title of a popup menu item */
 "Open" = "열기";
@@ -434,15 +401,6 @@
 "Return to the previous page" = "이전 페이지로 이동";
 
 /* No comment provided by engineer. */
-"RSS Subscription Export Title" = "내보내기 완료";
-
-/* No comment provided by engineer. */
-"RSS Subscription Import Title" = "가져오기 완료";
-
-/* No comment provided by engineer. */
-"Search in %@" = "%@ 검색";
-
-/* No comment provided by engineer. */
 "Select…" = "선택…";
 
 /* No comment provided by engineer. */
@@ -454,6 +412,12 @@
 /* Title of a popup menu item */
 "Show in Finder" = "파인더에서 보기";
 
+/* No comment provided by engineer. */
+"Sorry but Vienna was unable to open the database" = "Vienna 가 데이터베이스 파일을 열 수 없습니다.";
+
+/* No comment provided by engineer. */
+"Sorry, but Vienna was unable to create the database folder" = "Vienna 가 데이터베이스 폴더를 생성할 수 없습니다.";
+
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "헤드라인";
 
@@ -462,6 +426,33 @@
 
 /* Data field name visible in smart folder definition */
 "Text" = "텍스트";
+
+/* No comment provided by engineer. */
+"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "해당 데이터베이스 (%@) 파일 형식은 현재 버전의 Vienna 에서 지원하는 형식이 아닙니다. 해당 파일을 삭제 또는 이름을 변경한 후 Vienna 를 재실행하십시오.";
+
+/* No comment provided by engineer. */
+"The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna." = "해당 데이터베이스 파일 (%@) 항목은 손상되었거나 접근할 수 없습니다. 해당 파일을 삭제 또는 이름을 변경한 후 Vienna 를 재실행하십시오.";
+
+/* No comment provided by engineer. */
+"The database file format has changed" = "데이터베이스 파일 형식이 변경되었습니다.";
+
+/* No comment provided by engineer. */
+"The Default style will be used instead." = "기본 스타일로 대체될 것입니다.";
+
+/* No comment provided by engineer. */
+"The specified export output file could not be created. Check that it is not locked and no other application is using it." = "지정한 내보내기 출력 파일을 생성할 수 없습니다. 잠금 해제 상태인지 또는 다른 응용 프로그램에서 사용되고 있는지 확인하십시오.";
+
+/* No comment provided by engineer. */
+"The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "\"%@\" 스타일이 사용자의 스타일 폴더에 설치되었으며, 스타일 메뉴에 등록되었습니다.";
+
+/* No comment provided by engineer. */
+"The style %@ appears to be missing or corrupted" = "스타일 %@ 항목은 손상되었거나 유효하지 않은 형식입니다.";
+
+/* No comment provided by engineer. */
+"The subscription for \"%@\" requires a user name and password for access." = "\"%@\" 구독은 사용자 이름과 암호를 요구합니다.";
+
+/* No comment provided by engineer. */
+"This operation cannot be undone." = "이 명령은 취소할 수 없습니다.";
 
 /* No comment provided by engineer. */
 "Today" = "오늘";
@@ -479,26 +470,32 @@
 "Unread Articles" = "읽지 않은 기사";
 
 /* No comment provided by engineer. */
-"Unrecognised database format text" = "해당 데이터베이스 (%@) 파일 형식은 현재 버전의 Vienna 에서 지원하는 형식이 아닙니다. 해당 파일을 삭제 또는 이름을 변경한 후 Vienna 를 재실행하십시오.";
+"Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna 는 \"%@\" 파일을 열 수 없습니다. 다운로드 후 항목이 옮겨졌습니다.";
 
 /* No comment provided by engineer. */
-"Unrecognised database format title" = "데이터베이스 파일 형식이 변경되었습니다.";
+"Vienna cannot open the file." = "Vienna 는 해당 파일을 열 수 없습니다.";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file body" = "Vienna 는 \"%@\" 파일을 열 수 없습니다. 다운로드 후 항목이 옮겨졌습니다.";
+"Vienna cannot show the file \"%@\" because it moved since you downloaded it." = "Vienna 는 \"%@\" 파일을 표시할 수 없습니다. 다운로드 후 항목이 옮겨졌습니다.";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file title" = "Vienna 는 해당 파일을 열 수 없습니다.";
+"Vienna cannot show the file." = "Vienna 는 해당 파일을 표시할 수 없습니다.";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file body" = "Vienna 는 \"%@\" 파일을 표시할 수 없습니다. 다운로드 후 항목이 옮겨졌습니다.";
+"Vienna has installed a new style" = "Vienna 가 새 스타일을 설치했습니다.";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file title" = "Vienna 는 해당 파일을 표시할 수 없습니다.";
+"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna 가 \"%@\" 폴더를 생성 중에 오류가 발생했습니다. 지정한 경로에 있는 폴더의 권한을 확인하십시오.";
 
 /* No comment provided by engineer. */
 "Yes" = "예";
 
 /* No comment provided by engineer. */
 "Yesterday" = "어제";
+
+/* You are already subscribed to that feed */
+"You are already subscribed to that feed" = "이미 구독 중인 피드입니다.";
+
+/* No comment provided by engineer. */
+"You cannot undo this action" = "이 명령은 취소할 수 없습니다.";
 

@@ -16,6 +16,9 @@
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "%d nye artikler hentet";
 
+/* Notification body */
+"%d new unread articles retrieved" = "%d nye ulæste artikler hentet";
+
 /* No comment provided by engineer. */
 "%d subscriptions successfully exported" = "%d abonnementer successfuldt eksportert";
 
@@ -55,12 +58,6 @@
 /* No comment provided by engineer. */
 "After a Week" = "Efter 1 uge";
 
-/* Already subscribed body */
-"Already subscribed body" = "Du har allerede abonneret på det feed";
-
-/* Already subscribed title */
-"Already subscribed title" = "Fejl";
-
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "En fejl opstod da dette feed sidst blev refreshet";
 
@@ -69,6 +66,24 @@
 
 /* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "AppleScript-fejl i '%@' skriptet";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Er du sikker på at du vil slette alle %d valgte mapper? Denne handling kan ikke fortrydes.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Er du sikker på at du vil slette gruppemappen \"%@\" og alle undermapper? Denne handling kan ikke fortrydes.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Er du sikker på at du vil slette smartmappen \"%@\"? Dette vil ikke slette de egentlige artikler som matches af søgningen.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete the messages in the Trash folder permanently?" = "Er du sikker på at du vil slette beskederne i Papirkurven permanent?";
+
+/* No comment provided by engineer. */
+"Are you sure you want to permanently delete the selected articles?" = "Er du sikker på at du permanent vil slette den valgte artikel?";
+
+/* No comment provided by engineer. */
+"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Er du sikker på at du vil af-abonnere fra \"%@\"? Denne handling vil slette alle gemte artikler.";
 
 /* No comment provided by engineer. */
 "Articles" = "Artikler";
@@ -87,34 +102,19 @@
 "Cancel" = "Afbryd";
 
 /* No comment provided by engineer. */
-"Cannot create database folder text" = "Vienna prøvede at lave mappen \"%@\" men en fejl opstod. Tjek rettighederne på mapperne i den specificerede sti.";
+"Cannot create export output file" = "Kan ikke lave eksport output-arkiv";
 
 /* No comment provided by engineer. */
-"Cannot create database folder title" = "Desværre, men Vienna kunne ikke lave databasemappen";
+"Cannot create folder" = "Kan ikke lave mappe";
 
 /* No comment provided by engineer. */
-"Cannot create folder body" = "Mappen \"%@\" kan ikke laves.";
-
-/* No comment provided by engineer. */
-"Cannot create folder title" = "Kan ikke lave mappe";
-
-/* No comment provided by engineer. */
-"Cannot open database text" = "Databasefilen (%@) kunne ikke åbnes af samme grund. Den kan være beskadiget eller utilgængelig. Slet venligst eller omdøb databasefilen og genstart Vienna.";
-
-/* No comment provided by engineer. */
-"Cannot open database title" = "Desværre, men Vienna kunne ikke åbne databasen";
-
-/* No comment provided by engineer. */
-"Cannot open export file message" = "Kan ikke lave eksport output-arkiv";
-
-/* No comment provided by engineer. */
-"Cannot open export file message text" = "Det specificerede eksport output-arkiv kan ikke laves. Tjek at den ikke er låst og at ingen andre programmer bruger den";
+"Cannot import the specified file. The file contents are not valid OPML XML format." = "Kan ikke importere den specificerede fil. Filndholdet er ikke et gyldigt OPML XML format.";
 
 /* No comment provided by engineer. */
 "Cannot rename folder" = "Kan ikke omdøbe mappe";
 
 /* No comment provided by engineer. */
-"Clear" = "Slet foregående søgninger";
+"Clear Recent Searches" = "Slet foregående søgninger";
 
 /* No comment provided by engineer. */
 "Click the Open button to open this file." = "Klik Åben-knappen for at åbne dette arkiv.";
@@ -141,9 +141,6 @@
 "Copy URL" = "Kopier henvisning";
 
 /* No comment provided by engineer. */
-"Credentials Prompt" = "Informationsanmodning";
-
-/* No comment provided by engineer. */
 "Database Upgrade" = "Databaseopgradering";
 
 /* Data field name visible in menu/article list/smart folder definition */
@@ -157,49 +154,28 @@
 "Delete Article" = "Slet artikel";
 
 /* No comment provided by engineer. */
-"Delete folder status" = "Sletter mappen \"%@\"…";
-
-/* No comment provided by engineer. */
 "Delete group folder" = "Slet gruppemappe";
-
-/* No comment provided by engineer. */
-"Delete group folder text" = "Er du sikker på at du vil slette gruppemappen \"%@\" og alle undermapper? Denne handling kan ikke fortrydes.";
 
 /* No comment provided by engineer. */
 "Delete multiple folders" = "Slet flere mapper";
 
 /* No comment provided by engineer. */
-"Delete multiple folders text" = "Er du sikker på at du vil slette alle %d valgte mapper? Denne handling kan ikke fortrydes.";
-
-/* No comment provided by engineer. */
 "Delete Open Reader RSS feed" = "Slet Open Reader RSS feed";
-
-/* No comment provided by engineer. */
-"Delete Open Reader RSS feed text" = "Slet Open Reader RSS feed";
-
-/* No comment provided by engineer. */
-"Delete RSS feed" = "Slet abonnement";
-
-/* No comment provided by engineer. */
-"Delete RSS feed text" = "Er du sikker på at du vil af-abonnere fra \"%@\"? Denne handling vil slette alle gemte artikler.";
-
-/* No comment provided by engineer. */
-"Delete selected message" = "Er du sikker på at du permanent vil slette den valgte artikel?";
-
-/* No comment provided by engineer. */
-"Delete selected message text" = "Denne handling kan ikke fortrydes.";
 
 /* No comment provided by engineer. */
 "Delete smart folder" = "Slet smartmappe";
 
 /* No comment provided by engineer. */
-"Delete smart folder text" = "Er du sikker på at du vil slette smartmappen \"%@\"? Dette vil ikke slette de egentlige artikler som matches af søgningen.";
+"Delete subscription" = "Slet abonnement";
 
 /* Title of a menu item */
 "Delete…" = "Slet…";
 
 /* Data field name visible in smart folder definition */
 "Deleted" = "Slettet";
+
+/* No comment provided by engineer. */
+"Deleting folder \"%@\"…" = "Sletter mappen \"%@\"…";
 
 /* No comment provided by engineer. */
 "Descending" = "Nedadgående";
@@ -225,38 +201,23 @@
 /* Notification title */
 "Download failed" = "Hentning fejlede";
 
-/* No comment provided by engineer. */
-"Downloads Running" = "En eller flere overførsler er igang";
-
-/* No comment provided by engineer. */
-"Downloads Running text" = "Hvis du slutter Vienna nu, vil alle overførsler stoppe.";
-
 /* Title of a menu item */
 "Edit…" = "Rediger…";
 
 /* Title of a button on an alert */
 "Empty" = "Tom";
 
-/* No comment provided by engineer. */
-"Empty Trash message" = "Er du sikker på at du vil slette beskederne i Papirkurven permanent?";
-
-/* No comment provided by engineer. */
-"Empty Trash message text" = "Du kan ikke fortryde denne handling";
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"Enclosure" = "Indpakning";
 
 /* Data field name (URL) visible in menu/article list */
-"Enclosure" = "Indpakningshenvisning";
+"Enclosure URL" = "Indpakningshenvisning";
 
 /* No comment provided by engineer. */
 "Enter the URL here" = "Indtast URL her";
 
-/* No comment provided by engineer. */
+/* Already subscribed title */
 "Error" = "Fejl";
-
-/* No comment provided by engineer. */
-"Error importing subscriptions body" = "Kan ikke importere den specificerede fil. Filndholdet er ikke et gyldigt OPML XML format.";
-
-/* No comment provided by engineer. */
-"Error importing subscriptions title" = "Importfejl";
 
 /* No comment provided by engineer. */
 "Error loading script '%@'" = "Fejl under indlæsning af skriptet '%@'";
@@ -274,6 +235,9 @@
 "Error: Feed not found!" = "Fejl: Feed ikke fundet!";
 
 /* No comment provided by engineer. */
+"Export Completed" = "Eksport færdig";
+
+/* No comment provided by engineer. */
 "External Browser" = "Ekstern browser";
 
 /* No comment provided by engineer. */
@@ -287,6 +251,9 @@
 
 /* Notification body */
 "File %@ failed to download" = "Arkivet %@ kunne ikke hentes";
+
+/* No comment provided by engineer. */
+"Filter in %@" = "Søg i %@";
 
 /* No comment provided by engineer. */
 "Flag" = "Mærk";
@@ -321,9 +288,6 @@
 /* No comment provided by engineer. */
 "Got HTTP status 304 - No news from last check" = "Fik HTTP status 304 - Ingen nyheder siden sidste tjek";
 
-/* Data field name (Y/N) visible in menu/smart folder definition */
-"HasEnclosure" = "Indpakning";
-
 /* Pseudo field name visible in article list */
 "Headlines" = "Overskrifter";
 
@@ -339,20 +303,23 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "HTTP-kode %d angivet af server";
 
+/* No comment provided by engineer. */
+"If you quit Vienna now, all downloads will stop." = "Hvis du slutter Vienna nu, vil alle overførsler stoppe.";
+
 /* Title of a button on an alert */
 "Import" = "Importer";
+
+/* No comment provided by engineer. */
+"Import Completed" = "Import færdig";
+
+/* No comment provided by engineer. */
+"Import error" = "Importfejl";
 
 /* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "Importer abonnementer fra OPML-arkiv?";
 
 /* No comment provided by engineer. */
 "Improper infinitely looping URL redirect to %@" = "Ugyldig uendeligt loopende henvisning som omdirigerer til %@";
-
-/* No comment provided by engineer. */
-"Invalid style body" = "Standard stilen vil blive brugt istedet.";
-
-/* No comment provided by engineer. */
-"Invalid style title" = "Stilen %@ mangler eller er beskadiget";
 
 /* test for a value */
 "is" = "er";
@@ -392,12 +359,6 @@
 
 /* No comment provided by engineer. */
 "Loading" = "Indlæser";
-
-/* No comment provided by engineer. */
-"Locate Text" = "Find tekst";
-
-/* No comment provided by engineer. */
-"Locate Title" = "Find titel";
 
 /* Title of a button on an alert */
 "Locate…" = "Find…";
@@ -439,16 +400,7 @@
 "New articles retrieved" = "Nye artikler";
 
 /* No comment provided by engineer. */
-"New style body" = "Stilen \"%@\" er blevet installeret i din Stil-mappe og er blevet tilføjet til Stil-menuen.";
-
-/* No comment provided by engineer. */
-"New style title" = "Vienna har installeret en ny stil";
-
-/* No comment provided by engineer. */
 "New Tab" = "Ny fane";
-
-/* Notification body */
-"New unread articles retrieved" = "%d nye ulæste artikler hentet";
 
 /* No comment provided by engineer. */
 "No" = "Nej";
@@ -461,6 +413,9 @@
 
 /* test for a folder (not operational as of Vienna 3.2) */
 "not under" = "ikke under";
+
+/* No comment provided by engineer. */
+"One or more downloads are in progress" = "En eller flere overførsler er igang";
 
 /* Title of a popup menu item */
 "Open" = "Åben";
@@ -562,7 +517,7 @@
 "Restore Article" = "Gendan artikel";
 
 /* No comment provided by engineer. */
-"Resubscribe" = "Gen-abonner på feedet";
+"Resubscribe to Feed" = "Gen-abonner på feedet";
 
 /* No comment provided by engineer. */
 "Retrieving articles" = "Henter artikler";
@@ -579,12 +534,6 @@
 /* No comment provided by engineer. */
 "RSS Icon not found!" = "RSS ikon ikke fundet!";
 
-/* No comment provided by engineer. */
-"RSS Subscription Export Title" = "Eksport færdig";
-
-/* No comment provided by engineer. */
-"RSS Subscription Import Title" = "Import færdig";
-
 /* Placeholder title of a search field */
 "Search all articles" = "Søg alle artikler";
 
@@ -593,9 +542,6 @@
 
 /* Placeholder title of a search field */
 "Search current web page" = "Søg nuværende hjemmeside";
-
-/* No comment provided by engineer. */
-"Search in %@" = "Søg i %@";
 
 /* No comment provided by engineer. */
 "Search Results" = "Søg i resultater";
@@ -624,6 +570,12 @@
 /* Title of a menu item */
 "Show Toolbar" = "Vis værktøjslinje";
 
+/* No comment provided by engineer. */
+"Sorry but Vienna was unable to open the database" = "Desværre, men Vienna kunne ikke åbne databasen";
+
+/* No comment provided by engineer. */
+"Sorry, but Vienna was unable to create the database folder" = "Desværre, men Vienna kunne ikke lave databasemappen";
+
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "Emne";
 
@@ -640,7 +592,37 @@
 "Text" = "Tekst";
 
 /* No comment provided by engineer. */
+"The \"%@\" folder cannot be created." = "Mappen \"%@\" kan ikke laves.";
+
+/* No comment provided by engineer. */
+"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "Database (%@) filformatet er ikke understøttet af denne udgave af Vienna. Slet eller omdøb filen og genstart Vienna.";
+
+/* No comment provided by engineer. */
+"The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna." = "Databasefilen (%@) kunne ikke åbnes af samme grund. Den kan være beskadiget eller utilgængelig. Slet venligst eller omdøb databasefilen og genstart Vienna.";
+
+/* No comment provided by engineer. */
+"The database file format has changed" = "Database filformatet er blevet ændret";
+
+/* No comment provided by engineer. */
+"The Default style will be used instead." = "Standard stilen vil blive brugt istedet.";
+
+/* No comment provided by engineer. */
+"The specified export output file could not be created. Check that it is not locked and no other application is using it." = "Det specificerede eksport output-arkiv kan ikke laves. Tjek at den ikke er låst og at ingen andre programmer bruger den";
+
+/* No comment provided by engineer. */
+"The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Stilen \"%@\" er blevet installeret i din Stil-mappe og er blevet tilføjet til Stil-menuen.";
+
+/* No comment provided by engineer. */
+"The style %@ appears to be missing or corrupted" = "Stilen %@ mangler eller er beskadiget";
+
+/* No comment provided by engineer. */
+"The subscription for \"%@\" requires a user name and password for access." = "Informationsanmodning";
+
+/* No comment provided by engineer. */
 "This article contains an enclosed file." = "Denne artikel har en vedlagt fil.";
+
+/* No comment provided by engineer. */
+"This operation cannot be undone." = "Denne handling kan ikke fortrydes.";
 
 /* No comment provided by engineer. */
 "Today" = "I dag";
@@ -658,13 +640,10 @@
 "Unread Articles" = "Ulæste artikler";
 
 /* No comment provided by engineer. */
-"Unrecognised database format text" = "Database (%@) filformatet er ikke understøttet af denne udgave af Vienna. Slet eller omdøb filen og genstart Vienna.";
+"Unsubscribe from Feed" = "Af-abonner feedet";
 
 /* No comment provided by engineer. */
-"Unrecognised database format title" = "Database filformatet er blevet ændret";
-
-/* No comment provided by engineer. */
-"Unsubscribe" = "Af-abonner feedet";
+"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles." = "Slet Open Reader RSS feed";
 
 /* Title of a button on an alert */
 "Upgrade Database" = "Opgrader databasen";
@@ -673,23 +652,35 @@
 "URL" = "Henvisning";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file body" = "Vienna kan ikke åbne arkivet \"%@\" fordi det er flyttet siden du hentede det";
+"Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna kan ikke åbne arkivet \"%@\" fordi det er flyttet siden du hentede det";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file title" = "Vienna kan ikke åbne arkivtitlen";
+"Vienna cannot open the file." = "Vienna kan ikke åbne arkivtitlen";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file body" = "Vienna kan ikke vise arkivet \"%@\" fordi det er flyttet siden du hentede det";
+"Vienna cannot show the file \"%@\" because it moved since you downloaded it." = "Vienna kan ikke vise arkivet \"%@\" fordi det er flyttet siden du hentede det";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file title" = "Vienna kan ikke vise arkivtitlen";
+"Vienna cannot show the file." = "Vienna kan ikke vise arkivtitlen";
 
 /* No comment provided by engineer. */
-"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna er nød til at opgradere dens database til den nyeste version. Dette tager omkring et minut. Vi underskylder for ulejligheden.";
+"Vienna has installed a new style" = "Vienna har installeret en ny stil";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." = "Vienna er nød til at opgradere dens database til den nyeste version. Dette tager omkring et minut. Vi underskylder for ulejligheden.";
+
+/* No comment provided by engineer. */
+"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna prøvede at lave mappen \"%@\" men en fejl opstod. Tjek rettighederne på mapperne i den specificerede sti.";
 
 /* No comment provided by engineer. */
 "Yes" = "Ja";
 
 /* No comment provided by engineer. */
 "Yesterday" = "Igår";
+
+/* You are already subscribed to that feed */
+"You are already subscribed to that feed" = "Du har allerede abonneret på det feed";
+
+/* No comment provided by engineer. */
+"You cannot undo this action" = "Du kan ikke fortryde denne handling";
 

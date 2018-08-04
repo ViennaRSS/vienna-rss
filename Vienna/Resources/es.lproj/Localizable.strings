@@ -16,6 +16,9 @@
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "%d nuevos artículos recuperados";
 
+/* Notification body */
+"%d new unread articles retrieved" = "%d nuevos artículos no leídos recuperados";
+
 /* No comment provided by engineer. */
 "%d subscriptions successfully exported" = "%d suscripciones exportadas correctamente";
 
@@ -37,6 +40,9 @@
 /* No comment provided by engineer. */
 "A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Un nuevo plugin ha sido instalado. Ahora está disponible en el menú y puede añadirlo a la barra de herramientas.";
 
+/* No comment provided by engineer. */
+"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "No se puede crear la nueva base de datos de Vienna en \"%@\" ya que la carpeta probablemente está ubicada en un recurso compartido de una red remota y esta versión de Vienna no puede gestionar bases de datos remotas. Por favor, elija una carpeta alternativa ubicada en su equipo local.";
+
 /* Toolbar item name for the Advanced preference pane */
 "Advanced" = "Avanzado";
 
@@ -55,9 +61,6 @@
 /* No comment provided by engineer. */
 "After a Week" = "Después de una semana";
 
-/* Already subscribed body */
-"Already subscribed body" = "Ya está suscrito a esta fuente";
-
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Ha ocurrido un error al actualizar esta fuente";
 
@@ -66,6 +69,24 @@
 
 /* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "Error de appleScript en script '%@'";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "¿Está seguro que desea eliminar todas las carpetas seleccionadas? Esta operación no se puede deshacer.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "¿Está seguro que desea eliminar la carpeta de grupo \"%@\" y todo su contenido? Esta operación no se puede deshacer.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "¿Está seguro que desea eliminar la carpeta inteligente \"%@\"? Esta operación no eliminará los artículos encontrados actualmente por la búsqueda.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete the messages in the Trash folder permanently?" = "¿Está seguro que desea eliminar permanentemente los mensajes de la papelera?";
+
+/* No comment provided by engineer. */
+"Are you sure you want to permanently delete the selected articles?" = "¿Está seguro que desea eliminar permanentemente los artículos seleccionados?";
+
+/* No comment provided by engineer. */
+"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "¿Está seguro que desea cancelar la suscripción a \"%@\"? Esta operación eliminará todos los artículos almacenados.";
 
 /* No comment provided by engineer. */
 "Articles" = "Artículos";
@@ -84,34 +105,22 @@
 "Cancel" = "Cancelar";
 
 /* No comment provided by engineer. */
-"Cannot create database folder text" = "Vienna ha intentado crear la carpeta \"%@\" pero ha ocurrido un error. Compruebe los permisos de las carpetas de la ruta especificada.";
+"Cannot create export output file" = "No puede crear el archivo de exportación";
 
 /* No comment provided by engineer. */
-"Cannot create database folder title" = "Lo sentimos, pero Vienna no ha podido crear la carpeta de la base de datos";
+"Cannot create folder" = "No puede crear la carpeta";
 
 /* No comment provided by engineer. */
-"Cannot create folder body" = "La carpeta \"%@\" no se puede crear.";
+"Cannot create the Vienna database" = "No puede crear la base de datos de Vienna";
 
 /* No comment provided by engineer. */
-"Cannot create folder title" = "No puede crear la carpeta";
-
-/* No comment provided by engineer. */
-"Cannot open database text" = "Por algún motivo, el archivo de la base de datos (%@) no se ha podido abrir. Puede estar dañado o inaccesible. Por favor, elimine o renombre el archivo de la base de datos y reinicie Vienna.";
-
-/* No comment provided by engineer. */
-"Cannot open database title" = "Vienna no ha podido abrir la base de datos";
-
-/* No comment provided by engineer. */
-"Cannot open export file message" = "No puede crear el archivo de exportación";
-
-/* No comment provided by engineer. */
-"Cannot open export file message text" = "No se ha podido crear el archivo de exportación especificado. Compruebe que no está bloqueado y ninguna otra aplicación lo está usando.";
+"Cannot import the specified file. The file contents are not valid OPML XML format." = "No puede importar el archivo especificado. El contenido del archivo no está en un formato OPML XML válido.";
 
 /* No comment provided by engineer. */
 "Cannot rename folder" = "No puede renombrar la carpeta";
 
 /* No comment provided by engineer. */
-"Clear" = "Vaciar búsquedas recientes";
+"Clear Recent Searches" = "Vaciar búsquedas recientes";
 
 /* No comment provided by engineer. */
 "Click the Open button to open this file." = "Haga clic en el botón Abrir para abrir este archivo.";
@@ -138,9 +147,6 @@
 "Copy URL" = "Copiar URL";
 
 /* No comment provided by engineer. */
-"Credentials Prompt" = "La suscripción a \"%@\" requiere un nombre de usuario y una contraseña.";
-
-/* No comment provided by engineer. */
 "Database Upgrade" = "Actualización de la base de datos";
 
 /* Data field name visible in menu/article list/smart folder definition */
@@ -154,50 +160,28 @@
 "Delete Article" = "Eliminar artículo";
 
 /* No comment provided by engineer. */
-"Delete folder status" = "Eliminando carpeta \"%@\"…";
-
-/* No comment provided by engineer. */
 "Delete group folder" = "Eliminar carpeta de grupo";
-
-/* No comment provided by engineer. */
-"Delete group folder text" = "¿Está seguro que desea eliminar la carpeta de grupo \"%@\" y todo su contenido? Esta operación no se puede deshacer.";
 
 /* No comment provided by engineer. */
 "Delete multiple folders" = "Eliminar varias carpetas";
 
 /* No comment provided by engineer. */
-"Delete multiple folders text" = "¿Está seguro que desea eliminar todas las carpetas seleccionadas? Esta operación no se puede deshacer.";
-
-/* No comment provided by engineer. */
 "Delete Open Reader RSS feed" = "Eliminar suscripción de Open Reader";
-
-/* No comment provided by engineer. */
-"Delete Open Reader RSS feed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.
-Also check your network access.";
-
-/* No comment provided by engineer. */
-"Delete RSS feed" = "Eliminar suscripción";
-
-/* No comment provided by engineer. */
-"Delete RSS feed text" = "¿Está seguro que desea cancelar la suscripción a \"%@\"? Esta operación eliminará todos los artículos almacenados.";
-
-/* No comment provided by engineer. */
-"Delete selected message" = "¿Está seguro que desea eliminar permanentemente los artículos seleccionados?";
-
-/* No comment provided by engineer. */
-"Delete selected message text" = "Esta operación no se puede deshacer.";
 
 /* No comment provided by engineer. */
 "Delete smart folder" = "Eliminar carpeta inteligente";
 
 /* No comment provided by engineer. */
-"Delete smart folder text" = "¿Está seguro que desea eliminar la carpeta inteligente \"%@\"? Esta operación no eliminará los artículos encontrados actualmente por la búsqueda.";
+"Delete subscription" = "Eliminar suscripción";
 
 /* Title of a menu item */
 "Delete…" = "Eliminar…";
 
 /* Data field name visible in smart folder definition */
 "Deleted" = "Eliminado";
+
+/* No comment provided by engineer. */
+"Deleting folder \"%@\"…" = "Eliminando carpeta \"%@\"…";
 
 /* No comment provided by engineer. */
 "Descending" = "Descendente";
@@ -223,35 +207,20 @@ Also check your network access.";
 /* Notification title */
 "Download failed" = "Error al descargar";
 
-/* No comment provided by engineer. */
-"Downloads Running" = "Una o más descargas están en curso";
-
-/* No comment provided by engineer. */
-"Downloads Running text" = "Si sale de Vienna ahora, todas las descargas se detendrán.";
-
 /* Title of a menu item */
 "Edit…" = "Editar…";
 
 /* Title of a button on an alert */
 "Empty" = "Vaciar";
 
-/* No comment provided by engineer. */
-"Empty Trash message" = "¿Está seguro que desea eliminar permanentemente los mensajes de la papelera?";
-
-/* No comment provided by engineer. */
-"Empty Trash message text" = "Esta acción no se puede deshacer.";
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"Enclosure" = "Archivo adjunto";
 
 /* Data field name (URL) visible in menu/article list */
-"Enclosure" = "URL del adjunto";
+"Enclosure URL" = "URL del adjunto";
 
 /* No comment provided by engineer. */
 "Enter the URL here" = "Introduzca la URL aquí";
-
-/* No comment provided by engineer. */
-"Error importing subscriptions body" = "No puede importar el archivo especificado. El contenido del archivo no está en un formato OPML XML válido.";
-
-/* No comment provided by engineer. */
-"Error importing subscriptions title" = "Error al importar";
 
 /* No comment provided by engineer. */
 "Error loading script '%@'" = "Error cargando script '%@'";
@@ -269,6 +238,9 @@ Also check your network access.";
 "Error: Feed not found!" = "Error: ¡Fuente no encontrada!";
 
 /* No comment provided by engineer. */
+"Export Completed" = "Exportación completada";
+
+/* No comment provided by engineer. */
 "External Browser" = "navegador externo";
 
 /* No comment provided by engineer. */
@@ -282,6 +254,9 @@ Also check your network access.";
 
 /* Notification body */
 "File %@ failed to download" = "Error al descargar archivo %@";
+
+/* No comment provided by engineer. */
+"Filter in %@" = "Buscar en %@";
 
 /* No comment provided by engineer. */
 "Flag" = "Destacar";
@@ -313,9 +288,6 @@ Also check your network access.";
 /* No comment provided by engineer. */
 "Got HTTP status 304 - No news from last check" = "Recibido estado HTTP 304 - No hay noticias desde la última búsqueda";
 
-/* Data field name (Y/N) visible in menu/smart folder definition */
-"HasEnclosure" = "Archivo adjunto";
-
 /* Pseudo field name visible in article list */
 "Headlines" = "Titulares";
 
@@ -331,20 +303,23 @@ Also check your network access.";
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "Código HTTP %d notificado desde el servidor";
 
+/* No comment provided by engineer. */
+"If you quit Vienna now, all downloads will stop." = "Si sale de Vienna ahora, todas las descargas se detendrán.";
+
 /* Title of a button on an alert */
 "Import" = "Importar";
+
+/* No comment provided by engineer. */
+"Import Completed" = "Importación completada";
+
+/* No comment provided by engineer. */
+"Import error" = "Error al importar";
 
 /* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "¿Importar suscripciones desde el archivo OPML?";
 
 /* No comment provided by engineer. */
 "Improper infinitely looping URL redirect to %@" = "Redirigir URL infinitamente cíclica a %@";
-
-/* No comment provided by engineer. */
-"Invalid style body" = "El estilo Default se usará en su lugar.";
-
-/* No comment provided by engineer. */
-"Invalid style title" = "El estilo %@ parece estar dañado o perdido";
 
 /* test for a value */
 "is" = "es";
@@ -385,14 +360,12 @@ Also check your network access.";
 /* No comment provided by engineer. */
 "Loading" = "Cargando";
 
-/* No comment provided by engineer. */
-"Locate Text" = "No se puede crear la nueva base de datos de Vienna en \"%@\" ya que la carpeta probablemente está ubicada en un recurso compartido de una red remota y esta versión de Vienna no puede gestionar bases de datos remotas. Por favor, elija una carpeta alternativa ubicada en su equipo local.";
-
-/* No comment provided by engineer. */
-"Locate Title" = "No puede crear la base de datos de Vienna";
-
 /* Title of a button on an alert */
 "Locate…" = "Ubicar…";
+
+/* No comment provided by engineer. */
+"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access." = "Asegúrese que el nombre de usuario y contraseña necesarios para acceder al servidor Open Reader están configurados correctamente en las preferencias de Vienna.
+Compruebe también su acceso a la red.";
 
 /* Title of a menu item */
 "Mark All Articles as Read" = "Marcar todos los artículos como leídos";
@@ -431,16 +404,7 @@ Also check your network access.";
 "New articles retrieved" = "Nuevos artículos recuperados";
 
 /* No comment provided by engineer. */
-"New style body" = "El estilo \"%@\" ha sido instalado en la carpeta de estilos y ha sido añadido al menú Estilo.";
-
-/* No comment provided by engineer. */
-"New style title" = "Vienna ha instalado un nuevo estilo";
-
-/* No comment provided by engineer. */
 "New Tab" = "Nueva pestaña";
-
-/* Notification body */
-"New unread articles retrieved" = "%d nuevos artículos no leídos recuperados";
 
 /* No comment provided by engineer. */
 "No articles in feed" = "No hay artículos en la fuente";
@@ -450,6 +414,9 @@ Also check your network access.";
 
 /* Title of a button on an alert */
 "OK" = "Aceptar";
+
+/* No comment provided by engineer. */
+"One or more downloads are in progress" = "Una o más descargas están en curso";
 
 /* Title of a popup menu item */
 "Open" = "Abrir";
@@ -483,10 +450,6 @@ Also check your network access.";
 
 /* No comment provided by engineer. */
 "Open Reader Authentication Failed" = "Error al autenticar en Open Reader";
-
-/* No comment provided by engineer. */
-"Open Reader Authentication Failed text" = "Asegúrese que el nombre de usuario y contraseña necesarios para acceder al servidor Open Reader están configurados correctamente en las preferencias de Vienna.
-Compruebe también su acceso a la red.";
 
 /* No comment provided by engineer. */
 "Open Scripts Folder" = "Abrir carpeta de scripts";
@@ -562,7 +525,7 @@ Compruebe también su acceso a la red.";
 "Restore Article" = "Restaurar artículo";
 
 /* No comment provided by engineer. */
-"Resubscribe" = "Volver a suscribirse a la fuente";
+"Resubscribe to Feed" = "Volver a suscribirse a la fuente";
 
 /* No comment provided by engineer. */
 "Retrieving articles" = "Recuperando artículos";
@@ -579,12 +542,6 @@ Compruebe también su acceso a la red.";
 /* No comment provided by engineer. */
 "RSS Icon not found!" = "¡Icono de la suscripción no encontrado!";
 
-/* No comment provided by engineer. */
-"RSS Subscription Export Title" = "Exportación completada";
-
-/* No comment provided by engineer. */
-"RSS Subscription Import Title" = "Importación completada";
-
 /* Placeholder title of a search field */
 "Search all articles" = "Buscar todos los artículos";
 
@@ -593,9 +550,6 @@ Compruebe también su acceso a la red.";
 
 /* Placeholder title of a search field */
 "Search current web page" = "Buscar en página web actual";
-
-/* No comment provided by engineer. */
-"Search in %@" = "Buscar en %@";
 
 /* No comment provided by engineer. */
 "Search Results" = "Resultados de la búsqueda";
@@ -624,6 +578,12 @@ Compruebe también su acceso a la red.";
 /* Title of a menu item */
 "Show Toolbar" = "Mostrar barra de herramientas";
 
+/* No comment provided by engineer. */
+"Sorry but Vienna was unable to open the database" = "Vienna no ha podido abrir la base de datos";
+
+/* No comment provided by engineer. */
+"Sorry, but Vienna was unable to create the database folder" = "Lo sentimos, pero Vienna no ha podido crear la carpeta de la base de datos";
+
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "Asunto";
 
@@ -640,7 +600,37 @@ Compruebe también su acceso a la red.";
 "Text" = "Texto";
 
 /* No comment provided by engineer. */
+"The \"%@\" folder cannot be created." = "La carpeta \"%@\" no se puede crear.";
+
+/* No comment provided by engineer. */
+"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "El formato de archivo de la base de datos (%@) no es compatible con esta versión de Vienna. Elimine o renombre el archivo y reinicie Vienna.";
+
+/* No comment provided by engineer. */
+"The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna." = "Por algún motivo, el archivo de la base de datos (%@) no se ha podido abrir. Puede estar dañado o inaccesible. Por favor, elimine o renombre el archivo de la base de datos y reinicie Vienna.";
+
+/* No comment provided by engineer. */
+"The database file format has changed" = "El formato de archivo de la base de datos ha cambiado";
+
+/* No comment provided by engineer. */
+"The Default style will be used instead." = "El estilo Default se usará en su lugar.";
+
+/* No comment provided by engineer. */
+"The specified export output file could not be created. Check that it is not locked and no other application is using it." = "No se ha podido crear el archivo de exportación especificado. Compruebe que no está bloqueado y ninguna otra aplicación lo está usando.";
+
+/* No comment provided by engineer. */
+"The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "El estilo \"%@\" ha sido instalado en la carpeta de estilos y ha sido añadido al menú Estilo.";
+
+/* No comment provided by engineer. */
+"The style %@ appears to be missing or corrupted" = "El estilo %@ parece estar dañado o perdido";
+
+/* No comment provided by engineer. */
+"The subscription for \"%@\" requires a user name and password for access." = "La suscripción a \"%@\" requiere un nombre de usuario y una contraseña.";
+
+/* No comment provided by engineer. */
 "This article contains an enclosed file." = "Este artículo contiene un archivo adjunto.";
+
+/* No comment provided by engineer. */
+"This operation cannot be undone." = "Esta operación no se puede deshacer.";
 
 /* No comment provided by engineer. */
 "Today" = "Hoy";
@@ -658,35 +648,45 @@ Compruebe también su acceso a la red.";
 "Unread Articles" = "Artículos no leídos";
 
 /* No comment provided by engineer. */
-"Unrecognised database format text" = "El formato de archivo de la base de datos (%@) no es compatible con esta versión de Vienna. Elimine o renombre el archivo y reinicie Vienna.";
+"Unsubscribe from Feed" = "Cancelar suscripción";
 
 /* No comment provided by engineer. */
-"Unrecognised database format title" = "El formato de archivo de la base de datos ha cambiado";
-
-/* No comment provided by engineer. */
-"Unsubscribe" = "Cancelar suscripción";
+"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles." = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.
+Also check your network access.";
 
 /* Title of a button on an alert */
 "Upgrade Database" = "Actualizar base de datos";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file body" = "Vienna no puede abrir el archivo \"%@\" ya que fue movido desde que fue descargado.";
+"Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna no puede abrir el archivo \"%@\" ya que fue movido desde que fue descargado.";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file title" = "Vienna no puede abrir el archivo.";
+"Vienna cannot open the file." = "Vienna no puede abrir el archivo.";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file body" = "Vienna no puede mostrar el archivo \"%@\" ya que fue movido desde que fue descargado.";
+"Vienna cannot show the file \"%@\" because it moved since you downloaded it." = "Vienna no puede mostrar el archivo \"%@\" ya que fue movido desde que fue descargado.";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file title" = "Vienna no puede mostrar el archivo.";
+"Vienna cannot show the file." = "Vienna no puede mostrar el archivo.";
 
 /* No comment provided by engineer. */
-"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna debe actualizar su base de datos a la última versión. Esto puede tardar un minuto más o menos. Lamentamos el inconveniente.";
+"Vienna has installed a new style" = "Vienna ha instalado un nuevo estilo";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." = "Vienna debe actualizar su base de datos a la última versión. Esto puede tardar un minuto más o menos. Lamentamos el inconveniente.";
+
+/* No comment provided by engineer. */
+"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna ha intentado crear la carpeta \"%@\" pero ha ocurrido un error. Compruebe los permisos de las carpetas de la ruta especificada.";
 
 /* No comment provided by engineer. */
 "Yes" = "Sí";
 
 /* No comment provided by engineer. */
 "Yesterday" = "Ayer";
+
+/* You are already subscribed to that feed */
+"You are already subscribed to that feed" = "Ya está suscrito a esta fuente";
+
+/* No comment provided by engineer. */
+"You cannot undo this action" = "Esta acción no se puede deshacer.";
 

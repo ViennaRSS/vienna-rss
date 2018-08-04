@@ -2,7 +2,7 @@
 "1Ll-uG-QWh.title" = "每15分钟";
 
 /* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "2oy-1i-QQP"; */
-"2oy-1i-QQP.title" = "执行 "下一篇未读文章" 命令后";
+"2oy-1i-QQP.title" = "执行 \"下一篇未读文章\" 命令后";
 
 /* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "5VQ-jP-2rL"; */
 "5VQ-jP-2rL.title" = "每三十分钟";

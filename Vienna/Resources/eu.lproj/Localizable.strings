@@ -10,6 +10,9 @@
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "%d artikulu berri jasota";
 
+/* Notification body */
+"%d new unread articles retrieved" = "%d artikulu berri irakurri gabe jasota";
+
 /* No comment provided by engineer. */
 "%d subscriptions successfully exported" = "%d harpidetzak zuzen esportatu dira";
 
@@ -27,6 +30,9 @@
 
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "Izen berdineko direktorioa existitzen da";
+
+/* No comment provided by engineer. */
+"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Ezin da Vienna datu base berri bat sortu \"%@\" -(e)n direktorioa urruneko direktorio batean kokatua dagoelako eta Vienna-k ezin ditu urruneko datu baseak kudeatu. Mesedez aukeratu zeure disko gogorrean dagoen direktorioren bat.";
 
 /* Toolbar item name for the Advanced preference pane */
 "Advanced" = "Aurreratuta";
@@ -46,17 +52,29 @@
 /* No comment provided by engineer. */
 "After a Week" = "Aste Baten Ostean";
 
-/* Already subscribed body */
-"Already subscribed body" = "Jario horretara harpidetuta zaude iadanik";
-
-/* Already subscribed title */
-"Already subscribed title" = "Errorea";
-
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Errore bat gertatu zen jario hau azken aldiz eguneratu zenean";
 
 /* Toolbar item name for the Appearance preference pane */
 "Appearance" = "Itxura";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Ziur zaude aukeratutako %d direktorioak ezabatu nahi dituzula? Ekintza hau ezingo da desegin.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Ziur zaude \"%@\" talde direktorioa eta barneko beste direktorio guztiak ezabatu nahi dituzula? Ekintza hau ezin da desegin.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Ziur zaude \"%@\" direktorio adimendua ezabatu nahi duzula? Honek ez ditu bilaketak bidalitako emaitzen artikuluak ezabatuko.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete the messages in the Trash folder permanently?" = "Ziur zaude zakarrontzian dauden mezuak betiko ezabatu nahi dituzula?";
+
+/* No comment provided by engineer. */
+"Are you sure you want to permanently delete the selected articles?" = "Ziur al zaude aukeratutako artikuluak betirako ezabatzea?";
+
+/* No comment provided by engineer. */
+"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Ziur zaude \"%@\" harpidetza bertan behera utzi nahi duzula? Ekintza honek harpidetza honetako gordetako artikulu guztiak ezabatuko ditu.";
 
 /* No comment provided by engineer. */
 "Articles" = "Artikuluak";
@@ -69,28 +87,19 @@
 "Cancel" = "Ezeztatu";
 
 /* No comment provided by engineer. */
-"Cannot create database folder text" = "Vienna-k \"%@\" direktorioa sortzen saiatu da baina errore bat gertatu da. Begiratu direktorioa sortu nahi duzun tokiaren baimenak.";
+"Cannot create export output file" = "Ezin da kanpora esportatzeko fitxategia sortu";
 
 /* No comment provided by engineer. */
-"Cannot create database folder title" = "Barkatu baina Vienna-k ezin izan du datu baseko direktorioa sortu";
+"Cannot create the Vienna database" = "Ezin da Vienna-ko datu basea sortu";
 
 /* No comment provided by engineer. */
-"Cannot open database text" = "Datu base fitxategia (%@) ezin izan da ireki hainbat arrazoiengatik. Agian apurtuta edota ezin izan da fitxategira sartu. Mesedez ezabatu edo berrizendu fitxategia eta Vienna berrabiarazi.";
-
-/* No comment provided by engineer. */
-"Cannot open database title" = "Barkatu baina Vienna-k ezin izan du datu basea ireki";
-
-/* No comment provided by engineer. */
-"Cannot open export file message" = "Ezin da kanpora esportatzeko fitxategia sortu";
-
-/* No comment provided by engineer. */
-"Cannot open export file message text" = "Ezin izan da esportatzeko fitxategi konkretua sortu. Begiratu itxita ez dagoen edota beste programaren bat erabiltzen ari den.";
+"Cannot import the specified file. The file contents are not valid OPML XML format." = "Ezin da fitxategi konkretu hori inportatu. Fitxategiaren edukia ez da OPML XML formatu egokikoa.";
 
 /* No comment provided by engineer. */
 "Cannot rename folder" = "Ezin da direktorioaren izena berrizendu";
 
 /* No comment provided by engineer. */
-"Clear" = "Ezabatu egindako azken bilaketak";
+"Clear Recent Searches" = "Ezabatu egindako azken bilaketak";
 
 /* No comment provided by engineer. */
 "Connecting to %@" = "%@ -ra konektatzen";
@@ -103,9 +112,6 @@
 
 /* No comment provided by engineer. */
 "Copy Page Link to Clipboard" = "Orriaren esteka Paper-zorroan Kopiatu";
-
-/* No comment provided by engineer. */
-"Credentials Prompt" = "\"%@\"-entzako harpidetza erabiltzaile izena eta pasahitza behar ditu.";
 
 /* No comment provided by engineer. */
 "Database Upgrade" = "Datu basea eguneratuta";
@@ -121,37 +127,16 @@
 "Delete Article" = "Artikulua Ezabatu";
 
 /* No comment provided by engineer. */
-"Delete folder status" = "\"%@\" direktorioa ezabatzen…";
-
-/* No comment provided by engineer. */
 "Delete group folder" = "Ezabatu talde direktorioa";
-
-/* No comment provided by engineer. */
-"Delete group folder text" = "Ziur zaude \"%@\" talde direktorioa eta barneko beste direktorio guztiak ezabatu nahi dituzula? Ekintza hau ezin da desegin.";
 
 /* No comment provided by engineer. */
 "Delete multiple folders" = "Ezabatu hainbat direktorio";
 
 /* No comment provided by engineer. */
-"Delete multiple folders text" = "Ziur zaude aukeratutako %d direktorioak ezabatu nahi dituzula? Ekintza hau ezingo da desegin.";
-
-/* No comment provided by engineer. */
-"Delete RSS feed" = "Harpidetza ezabatu";
-
-/* No comment provided by engineer. */
-"Delete RSS feed text" = "Ziur zaude \"%@\" harpidetza bertan behera utzi nahi duzula? Ekintza honek harpidetza honetako gordetako artikulu guztiak ezabatuko ditu.";
-
-/* No comment provided by engineer. */
-"Delete selected message" = "Ziur al zaude aukeratutako artikuluak betirako ezabatzea?";
-
-/* No comment provided by engineer. */
-"Delete selected message text" = "Ekintza hau ezingo da desegin.";
-
-/* No comment provided by engineer. */
 "Delete smart folder" = "Ezabatu direktorio adimendua";
 
 /* No comment provided by engineer. */
-"Delete smart folder text" = "Ziur zaude \"%@\" direktorio adimendua ezabatu nahi duzula? Honek ez ditu bilaketak bidalitako emaitzen artikuluak ezabatuko.";
+"Delete subscription" = "Harpidetza ezabatu";
 
 /* Title of a menu item */
 "Delete…" = "Ezabatu…";
@@ -160,16 +145,13 @@
 "Deleted" = "Ezabatuta";
 
 /* No comment provided by engineer. */
+"Deleting folder \"%@\"…" = "\"%@\" direktorioa ezabatzen…";
+
+/* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "OPML fitxategitik harpidetzak inportatu nahi al dituzu?";
 
 /* test for a string */
 "does not contain" = "ez dauka";
-
-/* No comment provided by engineer. */
-"Downloads Running" = "Gauza bat edota gehiago deskargatzen ari dira";
-
-/* No comment provided by engineer. */
-"Downloads Running text" = "Vienna-tik irten eskero deskargatzen hari den guztia geratu egingo da.";
 
 /* Title of a menu item */
 "Edit…" = "Editatu…";
@@ -177,35 +159,32 @@
 /* Title of a button on an alert */
 "Empty" = "Hustu";
 
-/* No comment provided by engineer. */
-"Empty Trash message" = "Ziur zaude zakarrontzian dauden mezuak betiko ezabatu nahi dituzula?";
-
-/* No comment provided by engineer. */
-"Empty Trash message text" = "Hurrengo ekintza ezin da desegin";
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"Enclosure" = "Esparrua";
 
 /* Data field name (URL) visible in menu/article list */
-"Enclosure" = "URL esparrua";
+"Enclosure URL" = "URL esparrua";
 
 /* No comment provided by engineer. */
 "Enter the URL here" = "Sartu URL helbidea hemen";
 
-/* No comment provided by engineer. */
+/* Already subscribed title */
 "Error" = "Errorea";
 
 /* No comment provided by engineer. */
-"Error importing subscriptions body" = "Ezin da fitxategi konkretu hori inportatu. Fitxategiaren edukia ez da OPML XML formatu egokikoa.";
-
-/* No comment provided by engineer. */
-"Error importing subscriptions title" = "Errorea inportatzen";
-
-/* No comment provided by engineer. */
 "Error parsing XML data in feed" = "Jarioaren XML data aztertzen errorea agertu da";
+
+/* No comment provided by engineer. */
+"Export Completed" = "Esportazioa Bukatuta";
 
 /* No comment provided by engineer. */
 "External Browser" = "Kanpoko Nabegatzailea";
 
 /* No comment provided by engineer. */
 "Feed URL updated to %@" = "URL jarioa %@ -ra berritu da";
+
+/* No comment provided by engineer. */
+"Filter in %@" = "Bilatu %@-(e)n";
 
 /* No comment provided by engineer. */
 "Flag" = "Adierazlea";
@@ -231,26 +210,26 @@
 /* No comment provided by engineer. */
 "Go forward to the next page" = "Joan hurrengo orrira";
 
-/* Data field name (Y/N) visible in menu/smart folder definition */
-"HasEnclosure" = "Esparrua";
-
 /* Pseudo field name visible in article list */
 "Headlines" = "Tituluak";
 
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "Zerbitzariak %d HTTP kodea bueltatu du";
 
+/* No comment provided by engineer. */
+"If you quit Vienna now, all downloads will stop." = "Vienna-tik irten eskero deskargatzen hari den guztia geratu egingo da.";
+
 /* Title of a button on an alert */
 "Import" = "Inportatu";
 
 /* No comment provided by engineer. */
+"Import Completed" = "Inportazioa Bukatuta";
+
+/* No comment provided by engineer. */
+"Import error" = "Errorea inportatzen";
+
+/* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "OPML fitxategitik harpidetzak inportatu?";
-
-/* No comment provided by engineer. */
-"Invalid style body" = "Bestela estilo nagusia erabiliko da.";
-
-/* No comment provided by engineer. */
-"Invalid style title" = "%@ estiloa desagertu edota erroreak ditu";
 
 /* test for a value */
 "is" = "da";
@@ -287,12 +266,6 @@
 
 /* Data field name visible in menu/article list */
 "Link" = "Esteka";
-
-/* No comment provided by engineer. */
-"Locate Text" = "Ezin da Vienna datu base berri bat sortu \"%@\" -(e)n direktorioa urruneko direktorio batean kokatua dagoelako eta Vienna-k ezin ditu urruneko datu baseak kudeatu. Mesedez aukeratu zeure disko gogorrean dagoen direktorioren bat.";
-
-/* No comment provided by engineer. */
-"Locate Title" = "Ezin da Vienna-ko datu basea sortu";
 
 /* Title of a menu item */
 "Mark All Articles as Read" = "Artikulu Guztiak Irakurrita Moduan Jarri";
@@ -331,16 +304,7 @@
 "New articles retrieved" = "Artikulu berriak";
 
 /* No comment provided by engineer. */
-"New style body" = "\"%@\" estiloa istalatu egin da Styles direktorioan eta Style menura gehitu da.";
-
-/* No comment provided by engineer. */
-"New style title" = "Vienna-k estilo berria istalatu du";
-
-/* No comment provided by engineer. */
 "New Tab" = "Fitxa Berria";
-
-/* Notification body */
-"New unread articles retrieved" = "%d artikulu berri irakurri gabe jasota";
 
 /* No comment provided by engineer. */
 "No" = "Ez";
@@ -350,6 +314,9 @@
 
 /* Title of a button on an alert */
 "OK" = "ADOS";
+
+/* No comment provided by engineer. */
+"One or more downloads are in progress" = "Gauza bat edota gehiago deskargatzen ari dira";
 
 /* Title of a popup menu item */
 "Open" = "Ireki";
@@ -452,15 +419,6 @@
 "Return to the previous page" = "Bueltatu aurreneko orrira";
 
 /* No comment provided by engineer. */
-"RSS Subscription Export Title" = "Esportazioa Bukatuta";
-
-/* No comment provided by engineer. */
-"RSS Subscription Import Title" = "Inportazioa Bukatuta";
-
-/* No comment provided by engineer. */
-"Search in %@" = "Bilatu %@-(e)n";
-
-/* No comment provided by engineer. */
 "Select…" = "Aukeratu…";
 
 /* No comment provided by engineer. */
@@ -475,6 +433,12 @@
 /* Title of a menu item */
 "Show Toolbar" = "Erakutsi tresnabarra";
 
+/* No comment provided by engineer. */
+"Sorry but Vienna was unable to open the database" = "Barkatu baina Vienna-k ezin izan du datu basea ireki";
+
+/* No comment provided by engineer. */
+"Sorry, but Vienna was unable to create the database folder" = "Barkatu baina Vienna-k ezin izan du datu baseko direktorioa sortu";
+
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "Gaia";
 
@@ -486,6 +450,33 @@
 
 /* Data field name visible in smart folder definition */
 "Text" = "Testua";
+
+/* No comment provided by engineer. */
+"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "Vienna-ko bertsio honek ez du (%@) datu base fitxategiaren formatua ulertzen. Ezabatu edota berrizendu eta berrabiarazi Vienna.";
+
+/* No comment provided by engineer. */
+"The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna." = "Datu base fitxategia (%@) ezin izan da ireki hainbat arrazoiengatik. Agian apurtuta edota ezin izan da fitxategira sartu. Mesedez ezabatu edo berrizendu fitxategia eta Vienna berrabiarazi.";
+
+/* No comment provided by engineer. */
+"The database file format has changed" = "Datu basearen fitxategiaren formatua aldatu egin da";
+
+/* No comment provided by engineer. */
+"The Default style will be used instead." = "Bestela estilo nagusia erabiliko da.";
+
+/* No comment provided by engineer. */
+"The specified export output file could not be created. Check that it is not locked and no other application is using it." = "Ezin izan da esportatzeko fitxategi konkretua sortu. Begiratu itxita ez dagoen edota beste programaren bat erabiltzen ari den.";
+
+/* No comment provided by engineer. */
+"The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "\"%@\" estiloa istalatu egin da Styles direktorioan eta Style menura gehitu da.";
+
+/* No comment provided by engineer. */
+"The style %@ appears to be missing or corrupted" = "%@ estiloa desagertu edota erroreak ditu";
+
+/* No comment provided by engineer. */
+"The subscription for \"%@\" requires a user name and password for access." = "\"%@\"-entzako harpidetza erabiltzaile izena eta pasahitza behar ditu.";
+
+/* No comment provided by engineer. */
+"This operation cannot be undone." = "Ekintza hau ezingo da desegin.";
 
 /* No comment provided by engineer. */
 "Today" = "Gaur";
@@ -503,26 +494,32 @@
 "Unread Articles" = "Irakurri Gabeko Artikuluak";
 
 /* No comment provided by engineer. */
-"Unrecognised database format text" = "Vienna-ko bertsio honek ez du (%@) datu base fitxategiaren formatua ulertzen. Ezabatu edota berrizendu eta berrabiarazi Vienna.";
+"Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna-k ezin du \"%@\" fitxategia ireki deskargatu denetik mugitu egin delako.";
 
 /* No comment provided by engineer. */
-"Unrecognised database format title" = "Datu basearen fitxategiaren formatua aldatu egin da";
+"Vienna cannot open the file." = "Vienna-k ezin du fitxategia ireki.";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file body" = "Vienna-k ezin du \"%@\" fitxategia ireki deskargatu denetik mugitu egin delako.";
+"Vienna cannot show the file \"%@\" because it moved since you downloaded it." = "Vienna-k ezin du \"%@\" fitxategia erakutsi deskargatu denetik mugitu egin delako.";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file title" = "Vienna-k ezin du fitxategia ireki.";
+"Vienna cannot show the file." = "Vienna-k ezin du fitxategia erakutsi.";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file body" = "Vienna-k ezin du \"%@\" fitxategia erakutsi deskargatu denetik mugitu egin delako.";
+"Vienna has installed a new style" = "Vienna-k estilo berria istalatu du";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file title" = "Vienna-k ezin du fitxategia erakutsi.";
+"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna-k \"%@\" direktorioa sortzen saiatu da baina errore bat gertatu da. Begiratu direktorioa sortu nahi duzun tokiaren baimenak.";
 
 /* No comment provided by engineer. */
 "Yes" = "Bai";
 
 /* No comment provided by engineer. */
 "Yesterday" = "Atzo";
+
+/* You are already subscribed to that feed */
+"You are already subscribed to that feed" = "Jario horretara harpidetuta zaude iadanik";
+
+/* No comment provided by engineer. */
+"You cannot undo this action" = "Hurrengo ekintza ezin da desegin";
 

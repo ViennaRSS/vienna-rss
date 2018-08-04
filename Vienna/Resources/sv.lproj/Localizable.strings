@@ -16,6 +16,9 @@
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "%d nya artiklar mottagna";
 
+/* Notification body */
+"%d new unread articles retrieved" = "%d nya olästa artiklar mottagna";
+
 /* No comment provided by engineer. */
 "%d subscriptions successfully exported" = "%d prenumerationer exporterades felfritt";
 
@@ -33,6 +36,9 @@
 
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "En mapp med det namnet finns redan";
+
+/* No comment provided by engineer. */
+"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "En ny Vienna-databas kan ej skapas i '%@' för att mappen förmodligen finns på en nätverksdelning och den här versionen av Vienna stöder inte detta. Var vänlig och välj en mapp som finns på din lokala hårddisk.";
 
 /* Toolbar item name for the Advanced preference pane */
 "Advanced" = "Avancerat";
@@ -52,17 +58,29 @@
 /* No comment provided by engineer. */
 "After a Week" = "Efter en vecka";
 
-/* Already subscribed body */
-"Already subscribed body" = "Du prenumererar redan på den strömmen";
-
-/* Already subscribed title */
-"Already subscribed title" = "Fel";
-
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Ett fel uppstod när denna prenumeration uppdaterades senast";
 
 /* Toolbar item name for the Appearance preference pane */
 "Appearance" = "Utseende";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Är du säker på att du vill radera alla %d markerade mappar? Det här valet går ej att ångra.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Är du säker på att du vill radera gruppmapp '%@' och alla undermappar? Det här valet går ej att ångra.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Är du säker på att du vill radera smart mapp '%@'? Det här kommer inte att radera artiklarna.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete the messages in the Trash folder permanently?" = "Är du säker på att du vill radera artiklarna i papperskorgen permanent?";
+
+/* No comment provided by engineer. */
+"Are you sure you want to permanently delete the selected articles?" = "Är du säker på att du vill radera de markerade artiklarna permanent?";
+
+/* No comment provided by engineer. */
+"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Är du säker på att du vill avbryta din prenumeration av '%@'? Det här valet kommer att radera alla sparade artiklar.";
 
 /* No comment provided by engineer. */
 "Articles" = "Artiklar";
@@ -78,28 +96,19 @@
 "Cancel" = "Avbryt";
 
 /* No comment provided by engineer. */
-"Cannot create database folder text" = "Vienna försöker skapa mappen '%@' men ett fel uppstod. Kontrollera skrivrättigheter på specificerad sökväg.";
+"Cannot create export output file" = "Kan inte skapa exportfil";
 
 /* No comment provided by engineer. */
-"Cannot create database folder title" = "Ledsen, men Vienna kunde inte skapa databasmappen";
+"Cannot create the Vienna database" = "Kan ej skapa Viennas databas";
 
 /* No comment provided by engineer. */
-"Cannot open database text" = "Databasefilen (%@) kan inte öppnas av någon anledning. Den kanske är korrupt eller oåtkomlig. Var god radera eller döp om databasefilen och starta om Vienna.";
-
-/* No comment provided by engineer. */
-"Cannot open database title" = "Ursäkta, men Vienna kan inte öppna databasen";
-
-/* No comment provided by engineer. */
-"Cannot open export file message" = "Kan inte skapa exportfil";
-
-/* No comment provided by engineer. */
-"Cannot open export file message text" = "Specificerad exportfil kunde inte skapas. Kontrollera att den inte är låst eller att något annat program använder den.";
+"Cannot import the specified file. The file contents are not valid OPML XML format." = "Kan inte importera specificerad fil. Filens innehåll är inte i validerat OPML/XML-format.";
 
 /* No comment provided by engineer. */
 "Cannot rename folder" = "Kan ej byta namn på mapp";
 
 /* No comment provided by engineer. */
-"Clear" = "Rensa senaste sökningar";
+"Clear Recent Searches" = "Rensa senaste sökningar";
 
 /* No comment provided by engineer. */
 "Click the Open button to open this file." = "Tryck på Öppna för att öppna denna bilaga.";
@@ -123,9 +132,6 @@
 "Copy URL" = "Kopiera URL";
 
 /* No comment provided by engineer. */
-"Credentials Prompt" = "Prenumeration av '%@' kräven ett användarnamn och lösenord för åtkomst.";
-
-/* No comment provided by engineer. */
 "Database Upgrade" = "Uppdatera databas";
 
 /* Data field name visible in menu/article list/smart folder definition */
@@ -139,46 +145,28 @@
 "Delete Article" = "Radera artikel";
 
 /* No comment provided by engineer. */
-"Delete folder status" = "Raderar mapp '%@'…";
-
-/* No comment provided by engineer. */
 "Delete group folder" = "Radera gruppmapp";
-
-/* No comment provided by engineer. */
-"Delete group folder text" = "Är du säker på att du vill radera gruppmapp '%@' och alla undermappar? Det här valet går ej att ångra.";
 
 /* No comment provided by engineer. */
 "Delete multiple folders" = "Radera flera mappar";
 
 /* No comment provided by engineer. */
-"Delete multiple folders text" = "Är du säker på att du vill radera alla %d markerade mappar? Det här valet går ej att ångra.";
-
-/* No comment provided by engineer. */
 "Delete Open Reader RSS feed" = "Radera Open Reader-flöde";
-
-/* No comment provided by engineer. */
-"Delete RSS feed" = "Radera prenumeration";
-
-/* No comment provided by engineer. */
-"Delete RSS feed text" = "Är du säker på att du vill avbryta din prenumeration av '%@'? Det här valet kommer att radera alla sparade artiklar.";
-
-/* No comment provided by engineer. */
-"Delete selected message" = "Är du säker på att du vill radera de markerade artiklarna permanent?";
-
-/* No comment provided by engineer. */
-"Delete selected message text" = "Det här valet går ej att ångra.";
 
 /* No comment provided by engineer. */
 "Delete smart folder" = "Radera smart mapp";
 
 /* No comment provided by engineer. */
-"Delete smart folder text" = "Är du säker på att du vill radera smart mapp '%@'? Det här kommer inte att radera artiklarna.";
+"Delete subscription" = "Radera prenumeration";
 
 /* Title of a menu item */
 "Delete…" = "Radera…";
 
 /* Data field name visible in smart folder definition */
 "Deleted" = "Raderade";
+
+/* No comment provided by engineer. */
+"Deleting folder \"%@\"…" = "Raderar mapp '%@'…";
 
 /* No comment provided by engineer. */
 "Descending" = "Fallande";
@@ -204,38 +192,23 @@
 /* Notification title */
 "Download failed" = "Nedladdning misslyckades";
 
-/* No comment provided by engineer. */
-"Downloads Running" = "En eller flera nedladdningar pågår";
-
-/* No comment provided by engineer. */
-"Downloads Running text" = "Vill du avbryta alla nedladdningar och avsluta Vienna nu?";
-
 /* Title of a menu item */
 "Edit…" = "Redigera…";
 
 /* Title of a button on an alert */
 "Empty" = "Töm";
 
-/* No comment provided by engineer. */
-"Empty Trash message" = "Är du säker på att du vill radera artiklarna i papperskorgen permanent?";
-
-/* No comment provided by engineer. */
-"Empty Trash message text" = "Du kan inte ångra denna åtgärd";
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"Enclosure" = "Bilaga";
 
 /* Data field name (URL) visible in menu/article list */
-"Enclosure" = "Bilagans URL";
+"Enclosure URL" = "Bilagans URL";
 
 /* No comment provided by engineer. */
 "Enter the URL here" = "Ange URLen här";
 
-/* No comment provided by engineer. */
+/* Already subscribed title */
 "Error" = "Fel";
-
-/* No comment provided by engineer. */
-"Error importing subscriptions body" = "Kan inte importera specificerad fil. Filens innehåll är inte i validerat OPML/XML-format.";
-
-/* No comment provided by engineer. */
-"Error importing subscriptions title" = "Fel vid import";
 
 /* No comment provided by engineer. */
 "Error parsing XML data in feed" = "Fel vid avläsning av XML-data i strömmen";
@@ -245,6 +218,9 @@
 
 /* No comment provided by engineer. */
 "Error: Feed not found!" = "Fel: Flöde hittades inte!";
+
+/* No comment provided by engineer. */
+"Export Completed" = "Export klar";
 
 /* No comment provided by engineer. */
 "External Browser" = "Extern webbläsare";
@@ -260,6 +236,9 @@
 
 /* Notification body */
 "File %@ failed to download" = "Filen med namn %@ misslyckades att laddas ner";
+
+/* No comment provided by engineer. */
+"Filter in %@" = "Sök i %@";
 
 /* No comment provided by engineer. */
 "Flag" = "Flagga";
@@ -285,9 +264,6 @@
 /* No comment provided by engineer. */
 "Go forward to the next page" = "Gå till nästa sida";
 
-/* Data field name (Y/N) visible in menu/smart folder definition */
-"HasEnclosure" = "Bilaga";
-
 /* Pseudo field name visible in article list */
 "Headlines" = "Rubriker";
 
@@ -303,17 +279,20 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "HTTP-kod %d rapporterad från server";
 
+/* No comment provided by engineer. */
+"If you quit Vienna now, all downloads will stop." = "Vill du avbryta alla nedladdningar och avsluta Vienna nu?";
+
 /* Title of a button on an alert */
 "Import" = "Importera";
 
 /* No comment provided by engineer. */
+"Import Completed" = "Import klar";
+
+/* No comment provided by engineer. */
+"Import error" = "Fel vid import";
+
+/* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "Importera prenumerataioner från OPML fil?";
-
-/* No comment provided by engineer. */
-"Invalid style body" = "Standardstilen används istället.";
-
-/* No comment provided by engineer. */
-"Invalid style title" = "Stilen %@ verkar vara korrupt";
 
 /* test for a value */
 "is" = "är";
@@ -353,12 +332,6 @@
 
 /* No comment provided by engineer. */
 "Loading" = "Laddar";
-
-/* No comment provided by engineer. */
-"Locate Text" = "En ny Vienna-databas kan ej skapas i '%@' för att mappen förmodligen finns på en nätverksdelning och den här versionen av Vienna stöder inte detta. Var vänlig och välj en mapp som finns på din lokala hårddisk.";
-
-/* No comment provided by engineer. */
-"Locate Title" = "Kan ej skapa Viennas databas";
 
 /* Title of a button on an alert */
 "Locate…" = "Leta upp…";
@@ -400,16 +373,7 @@
 "New articles retrieved" = "Nya artiklar";
 
 /* No comment provided by engineer. */
-"New style body" = "Stilen '%@' har installerats i din stilmapp och har lagts till i stilmenyn.";
-
-/* No comment provided by engineer. */
-"New style title" = "Vienna har installerat en ny stil";
-
-/* No comment provided by engineer. */
 "New Tab" = "Ny flik";
-
-/* Notification body */
-"New unread articles retrieved" = "%d nya olästa artiklar mottagna";
 
 /* No comment provided by engineer. */
 "No" = "Nej";
@@ -419,6 +383,9 @@
 
 /* No comment provided by engineer. */
 "No new articles available" = "Inga nya artiklar tillgängliga";
+
+/* No comment provided by engineer. */
+"One or more downloads are in progress" = "En eller flera nedladdningar pågår";
 
 /* Title of a popup menu item */
 "Open" = "Öppna";
@@ -518,7 +485,7 @@
 "Restore Article" = "Återskapa artikel";
 
 /* No comment provided by engineer. */
-"Resubscribe" = "Återuppta prenumeration på artiklar från sida";
+"Resubscribe to Feed" = "Återuppta prenumeration på artiklar från sida";
 
 /* No comment provided by engineer. */
 "Retrieving articles" = "Tar emot artiklar";
@@ -529,17 +496,8 @@
 /* No comment provided by engineer. */
 "Return to the previous page" = "Återgå till föregående sida";
 
-/* No comment provided by engineer. */
-"RSS Subscription Export Title" = "Export klar";
-
-/* No comment provided by engineer. */
-"RSS Subscription Import Title" = "Import klar";
-
 /* Placeholder title of a search field */
 "Search all articles" = "Sök genom alla artiklar";
-
-/* No comment provided by engineer. */
-"Search in %@" = "Sök i %@";
 
 /* No comment provided by engineer. */
 "Search Results" = "Sökresultat";
@@ -568,6 +526,12 @@
 /* Title of a menu item */
 "Show Toolbar" = "Visa verktygsfält";
 
+/* No comment provided by engineer. */
+"Sorry but Vienna was unable to open the database" = "Ursäkta, men Vienna kan inte öppna databasen";
+
+/* No comment provided by engineer. */
+"Sorry, but Vienna was unable to create the database folder" = "Ledsen, men Vienna kunde inte skapa databasmappen";
+
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "Ämne";
 
@@ -581,7 +545,34 @@
 "Syncing" = "Synkar";
 
 /* No comment provided by engineer. */
+"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "Din nuvarande %@ stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.";
+
+/* No comment provided by engineer. */
+"The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna." = "Databasefilen (%@) kan inte öppnas av någon anledning. Den kanske är korrupt eller oåtkomlig. Var god radera eller döp om databasefilen och starta om Vienna.";
+
+/* No comment provided by engineer. */
+"The database file format has changed" = "Databasens filformat har ändrats";
+
+/* No comment provided by engineer. */
+"The Default style will be used instead." = "Standardstilen används istället.";
+
+/* No comment provided by engineer. */
+"The specified export output file could not be created. Check that it is not locked and no other application is using it." = "Specificerad exportfil kunde inte skapas. Kontrollera att den inte är låst eller att något annat program använder den.";
+
+/* No comment provided by engineer. */
+"The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Stilen '%@' har installerats i din stilmapp och har lagts till i stilmenyn.";
+
+/* No comment provided by engineer. */
+"The style %@ appears to be missing or corrupted" = "Stilen %@ verkar vara korrupt";
+
+/* No comment provided by engineer. */
+"The subscription for \"%@\" requires a user name and password for access." = "Prenumeration av '%@' kräven ett användarnamn och lösenord för åtkomst.";
+
+/* No comment provided by engineer. */
 "This article contains an enclosed file." = "Den här artikeln innehåller en bilaga.";
+
+/* No comment provided by engineer. */
+"This operation cannot be undone." = "Det här valet går ej att ångra.";
 
 /* No comment provided by engineer. */
 "Today" = "Idag";
@@ -599,32 +590,38 @@
 "Unread Articles" = "Olästa artiklar";
 
 /* No comment provided by engineer. */
-"Unrecognised database format text" = "Din nuvarande %@ stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.";
-
-/* No comment provided by engineer. */
-"Unrecognised database format title" = "Databasens filformat har ändrats";
-
-/* No comment provided by engineer. */
-"Unsubscribe" = "Sluta prenumerera på artiklar från sida";
+"Unsubscribe from Feed" = "Sluta prenumerera på artiklar från sida";
 
 /* Title of a button on an alert */
 "Upgrade Database" = "Uppgradera databas";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file body" = "Vienna kan inte öppna filen \"%@\" eftersom den har flyttats sedan du laddade ner den.";
+"Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna kan inte öppna filen \"%@\" eftersom den har flyttats sedan du laddade ner den.";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file title" = "Vienna kan inte öppna filen.";
+"Vienna cannot open the file." = "Vienna kan inte öppna filen.";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file body" = "Vienna kan inte öppna filen \"%@\" eftersom den har flyttats sedan du laddade ner den.";
+"Vienna cannot show the file \"%@\" because it moved since you downloaded it." = "Vienna kan inte öppna filen \"%@\" eftersom den har flyttats sedan du laddade ner den.";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file title" = "Vienna kan inte öppna filen.";
+"Vienna cannot show the file." = "Vienna kan inte öppna filen.";
+
+/* No comment provided by engineer. */
+"Vienna has installed a new style" = "Vienna har installerat en ny stil";
+
+/* No comment provided by engineer. */
+"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna försöker skapa mappen '%@' men ett fel uppstod. Kontrollera skrivrättigheter på specificerad sökväg.";
 
 /* No comment provided by engineer. */
 "Yes" = "Ja";
 
 /* No comment provided by engineer. */
 "Yesterday" = "Igår";
+
+/* You are already subscribed to that feed */
+"You are already subscribed to that feed" = "Du prenumererar redan på den strömmen";
+
+/* No comment provided by engineer. */
+"You cannot undo this action" = "Du kan inte ångra denna åtgärd";
 

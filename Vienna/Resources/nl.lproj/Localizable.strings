@@ -13,6 +13,9 @@
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "%d nieuwe artikelen opgehaald";
 
+/* Notification body */
+"%d new unread articles retrieved" = "%d nieuwe ongelezen artikelen opgehaald";
+
 /* No comment provided by engineer. */
 "%d subscriptions successfully exported" = "%d abonnementen geëxporteerd";
 
@@ -30,6 +33,9 @@
 
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "Er bestaat al een map met deze naam";
+
+/* No comment provided by engineer. */
+"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Een nieuwe Vienna-database kan niet worden aagemaakt in \"%@\". De database staat waarschijnlijk op een andere computer in het netwerk, hetgeen door deze versie van Vienna niet wordt ondersteund. Kiest u een andere locatie op deze computer.";
 
 /* Toolbar item name for the Advanced preference pane */
 "Advanced" = "Geavanceerd";
@@ -49,17 +55,29 @@
 /* No comment provided by engineer. */
 "After a Week" = "Na een week";
 
-/* Already subscribed body */
-"Already subscribed body" = "U heeft al een abonnement op deze feed";
-
-/* Already subscribed title */
-"Already subscribed title" = "Fout";
-
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "De laatste keer dat deze feed is bijgewerkt, is er een fout opgetreden";
 
 /* Toolbar item name for the Appearance preference pane */
 "Appearance" = "Weergave";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Weet u zeker dat u deze %d groepen wilt verwijderen? U kunt dit niet ongedaan maken.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Weet u zeker dat u de groep \"%@\" en alle subgroepen wilt verwijderen? U kunt dit niet ongedaan maken.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Weet u zeker dat u de slimme map \"%@\" wilt verwijderen? De originele artikelen worden niet verwijderd.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete the messages in the Trash folder permanently?" = "Weet u zeker dat u de artikelen in de prullenmand definitief wilt verwijderen?";
+
+/* No comment provided by engineer. */
+"Are you sure you want to permanently delete the selected articles?" = "Weet u zeker dat u de geselecteerde berichten wilt verwijderen?";
+
+/* No comment provided by engineer. */
+"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Weet u zeker dat u het abonnement \"%@\" wilt opzeggen? Alle opgeslagen artikelen worden verwijderd.";
 
 /* No comment provided by engineer. */
 "Articles" = "Artikelen";
@@ -75,34 +93,22 @@
 "Cancel" = "Annuleer";
 
 /* No comment provided by engineer. */
-"Cannot create database folder text" = "Vienna probeerde de map \"%@\" te maken, maar er ging iets fout. Controleer de bevoegdheden van de bovenliggende mappen.";
+"Cannot create export output file" = "Kan het exportbestand niet aanmaken";
 
 /* No comment provided by engineer. */
-"Cannot create database folder title" = "Vienna kan de databasemap niet aanmaken";
+"Cannot create folder" = "Kan map niet creëren";
 
 /* No comment provided by engineer. */
-"Cannot create folder body" = "De map \"%@\" kan niet worden gecreëerd.";
+"Cannot create the Vienna database" = "Kan de Vienna-database niet aanmaken";
 
 /* No comment provided by engineer. */
-"Cannot create folder title" = "Kan map niet creëren";
-
-/* No comment provided by engineer. */
-"Cannot open database text" = "Het database-bestand (%@) kon niet worden geopend. Het zou beschadigd of ontoegankelijk kunnen zijn. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.";
-
-/* No comment provided by engineer. */
-"Cannot open database title" = "Vienna kon de database niet openen";
-
-/* No comment provided by engineer. */
-"Cannot open export file message" = "Kan het exportbestand niet aanmaken";
-
-/* No comment provided by engineer. */
-"Cannot open export file message text" = "Het opgegeven exportbestand kon niet worden aangemaakt. Controleer of het bestand niet is beveiligd of geopend in een ander programma.";
+"Cannot import the specified file. The file contents are not valid OPML XML format." = "Kan het opgegeven bestand niet importeren. Het is geen geldig OPML-bestand.";
 
 /* No comment provided by engineer. */
 "Cannot rename folder" = "Kan de mapnaam niet wijzigen";
 
 /* No comment provided by engineer. */
-"Clear" = "Wis zoekgeschiedenis";
+"Clear Recent Searches" = "Wis zoekgeschiedenis";
 
 /* No comment provided by engineer. */
 "Click the Open button to open this file." = "Klik de Open knop om dit bestand te openen.";
@@ -126,9 +132,6 @@
 "Copy URL" = "Kopieer URL";
 
 /* No comment provided by engineer. */
-"Credentials Prompt" = "Voor toegang tot het abonnement op \"%@\" heeft u een gebruikersnaam en wachtwoord nodig.";
-
-/* No comment provided by engineer. */
 "Database Upgrade" = "Database bijwerken";
 
 /* Data field name visible in menu/article list/smart folder definition */
@@ -142,49 +145,28 @@
 "Delete Article" = "Wis artikel";
 
 /* No comment provided by engineer. */
-"Delete folder status" = "Groep \"%@\" verwijderen…";
-
-/* No comment provided by engineer. */
 "Delete group folder" = "Wis groep";
-
-/* No comment provided by engineer. */
-"Delete group folder text" = "Weet u zeker dat u de groep \"%@\" en alle subgroepen wilt verwijderen? U kunt dit niet ongedaan maken.";
 
 /* No comment provided by engineer. */
 "Delete multiple folders" = "Verwijder meerdere groepen";
 
 /* No comment provided by engineer. */
-"Delete multiple folders text" = "Weet u zeker dat u deze %d groepen wilt verwijderen? U kunt dit niet ongedaan maken.";
-
-/* No comment provided by engineer. */
 "Delete Open Reader RSS feed" = "Wis Open Reader RSS feed";
-
-/* No comment provided by engineer. */
-"Delete Open Reader RSS feed text" = "Wis Open Reader RSS feed";
-
-/* No comment provided by engineer. */
-"Delete RSS feed" = "Zeg abonnement op";
-
-/* No comment provided by engineer. */
-"Delete RSS feed text" = "Weet u zeker dat u het abonnement \"%@\" wilt opzeggen? Alle opgeslagen artikelen worden verwijderd.";
-
-/* No comment provided by engineer. */
-"Delete selected message" = "Weet u zeker dat u de geselecteerde berichten wilt verwijderen?";
-
-/* No comment provided by engineer. */
-"Delete selected message text" = "Deze actie kan niet ongedaan worden gemaakt.";
 
 /* No comment provided by engineer. */
 "Delete smart folder" = "Verwijder slimme map";
 
 /* No comment provided by engineer. */
-"Delete smart folder text" = "Weet u zeker dat u de slimme map \"%@\" wilt verwijderen? De originele artikelen worden niet verwijderd.";
+"Delete subscription" = "Zeg abonnement op";
 
 /* Title of a menu item */
 "Delete…" = "Wis…";
 
 /* Data field name visible in smart folder definition */
 "Deleted" = "Verwijderd";
+
+/* No comment provided by engineer. */
+"Deleting folder \"%@\"…" = "Groep \"%@\" verwijderen…";
 
 /* No comment provided by engineer. */
 "Descending" = "Aflopend";
@@ -207,41 +189,29 @@
 /* Notification title */
 "Download failed" = "Download niet gelukt";
 
-/* No comment provided by engineer. */
-"Downloads Running" = "Eén of meer downloads zijn nog bezig";
-
-/* No comment provided by engineer. */
-"Downloads Running text" = "Wilt u alle downloads annuleren en Vienna nu afsluiten?";
-
 /* Title of a menu item */
 "Edit…" = "Bewerk…";
 
 /* Title of a button on an alert */
 "Empty" = "Leeg";
 
-/* No comment provided by engineer. */
-"Empty Trash message" = "Weet u zeker dat u de artikelen in de prullenmand definitief wilt verwijderen?";
-
-/* No comment provided by engineer. */
-"Empty Trash message text" = "Dit kan niet ongedaan worden gemaakt";
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"Enclosure" = "Bijlage";
 
 /* Data field name (URL) visible in menu/article list */
-"Enclosure" = "Bijlage URL";
+"Enclosure URL" = "Bijlage URL";
 
 /* No comment provided by engineer. */
 "Enter the URL here" = "Typ de URL hier";
 
-/* No comment provided by engineer. */
+/* Already subscribed title */
 "Error" = "Fout";
 
 /* No comment provided by engineer. */
-"Error importing subscriptions body" = "Kan het opgegeven bestand niet importeren. Het is geen geldig OPML-bestand.";
-
-/* No comment provided by engineer. */
-"Error importing subscriptions title" = "Fout bij importeren";
-
-/* No comment provided by engineer. */
 "Error parsing XML data in feed" = "Fout tijdens het verwerken van de XML van deze feed";
+
+/* No comment provided by engineer. */
+"Export Completed" = "Exporteren voltooid";
 
 /* No comment provided by engineer. */
 "External Browser" = "Externe browser";
@@ -254,6 +224,9 @@
 
 /* Notification body */
 "File %@ failed to download" = "Niet gelukt bestand %@ te downloaden";
+
+/* No comment provided by engineer. */
+"Filter in %@" = "Zoek in %@";
 
 /* No comment provided by engineer. */
 "Flag" = "Markeer";
@@ -282,9 +255,6 @@
 /* No comment provided by engineer. */
 "Go forward to the next page" = "Ga verder naar de volgende pagina";
 
-/* Data field name (Y/N) visible in menu/smart folder definition */
-"HasEnclosure" = "Bijlage";
-
 /* Pseudo field name visible in article list */
 "Headlines" = "Koppen";
 
@@ -300,17 +270,20 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "HTTP-code %d gemeld door de server";
 
+/* No comment provided by engineer. */
+"If you quit Vienna now, all downloads will stop." = "Wilt u alle downloads annuleren en Vienna nu afsluiten?";
+
 /* Title of a button on an alert */
 "Import" = "Importeer";
 
 /* No comment provided by engineer. */
+"Import Completed" = "Importeren voltooid";
+
+/* No comment provided by engineer. */
+"Import error" = "Fout bij importeren";
+
+/* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "Importeer abonnementen uit OPML bestand?";
-
-/* No comment provided by engineer. */
-"Invalid style body" = "De standaardstijl zal worden gebruikt.";
-
-/* No comment provided by engineer. */
-"Invalid style title" = "De stijl %@ lijkt te zijn beschadigd";
 
 /* test for a date */
 "is after" = "ligt na";
@@ -344,12 +317,6 @@
 
 /* Data field name visible in menu/article list */
 "Link" = "Koppeling";
-
-/* No comment provided by engineer. */
-"Locate Text" = "Een nieuwe Vienna-database kan niet worden aagemaakt in \"%@\". De database staat waarschijnlijk op een andere computer in het netwerk, hetgeen door deze versie van Vienna niet wordt ondersteund. Kiest u een andere locatie op deze computer.";
-
-/* No comment provided by engineer. */
-"Locate Title" = "Kan de Vienna-database niet aanmaken";
 
 /* Title of a button on an alert */
 "Locate…" = "Zoek op…";
@@ -391,22 +358,16 @@
 "New articles retrieved" = "Nieuwe artikelen";
 
 /* No comment provided by engineer. */
-"New style body" = "De stijl \"%@\" is in uw stijlenmap geïnstalleerd en toegevoegd aan het menu Stijlen.";
-
-/* No comment provided by engineer. */
-"New style title" = "Vienna heeft een nieuwe stijl geïnstalleerd";
-
-/* No comment provided by engineer. */
 "New Tab" = "Nieuwe tab";
-
-/* Notification body */
-"New unread articles retrieved" = "%d nieuwe ongelezen artikelen opgehaald";
 
 /* No comment provided by engineer. */
 "No" = "Nee";
 
 /* No comment provided by engineer. */
 "No new articles available" = "Geen nieuwe artikelen beschikbaar";
+
+/* No comment provided by engineer. */
+"One or more downloads are in progress" = "Eén of meer downloads zijn nog bezig";
 
 /* Title of a menu item */
 "Open Article Page" = "Ga naar artikelpagina";
@@ -503,7 +464,7 @@
 "Restore Article" = "Herstel artikel";
 
 /* No comment provided by engineer. */
-"Resubscribe" = "Abonneer";
+"Resubscribe to Feed" = "Abonneer";
 
 /* No comment provided by engineer. */
 "Retrieving articles" = "Artikelen aan het bijwerken";
@@ -514,12 +475,6 @@
 /* No comment provided by engineer. */
 "Return to the previous page" = "Ga terug naar de vorige pagina";
 
-/* No comment provided by engineer. */
-"RSS Subscription Export Title" = "Exporteren voltooid";
-
-/* No comment provided by engineer. */
-"RSS Subscription Import Title" = "Importeren voltooid";
-
 /* Placeholder title of a search field */
 "Search all articles" = "Zoek naar artikels";
 
@@ -528,9 +483,6 @@
 
 /* Placeholder title of a search field */
 "Search current web page" = "Doorzoek huidige webpagina";
-
-/* No comment provided by engineer. */
-"Search in %@" = "Zoek in %@";
 
 /* No comment provided by engineer. */
 "Search Results" = "Zoek resultaten";
@@ -559,6 +511,12 @@
 /* Title of a menu item */
 "Show Toolbar" = "Toon knoppenbalk";
 
+/* No comment provided by engineer. */
+"Sorry but Vienna was unable to open the database" = "Vienna kon de database niet openen";
+
+/* No comment provided by engineer. */
+"Sorry, but Vienna was unable to create the database folder" = "Vienna kan de databasemap niet aanmaken";
+
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "Onderwerp";
 
@@ -575,7 +533,37 @@
 "Text" = "Tekst";
 
 /* No comment provided by engineer. */
+"The \"%@\" folder cannot be created." = "De map \"%@\" kan niet worden gecreëerd.";
+
+/* No comment provided by engineer. */
+"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "Het bestandsformaat van de database (%@) wordt door deze versie van Vienna niet ondersteund. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.";
+
+/* No comment provided by engineer. */
+"The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna." = "Het database-bestand (%@) kon niet worden geopend. Het zou beschadigd of ontoegankelijk kunnen zijn. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.";
+
+/* No comment provided by engineer. */
+"The database file format has changed" = "Het bestandsformaat van de database is veranderd";
+
+/* No comment provided by engineer. */
+"The Default style will be used instead." = "De standaardstijl zal worden gebruikt.";
+
+/* No comment provided by engineer. */
+"The specified export output file could not be created. Check that it is not locked and no other application is using it." = "Het opgegeven exportbestand kon niet worden aangemaakt. Controleer of het bestand niet is beveiligd of geopend in een ander programma.";
+
+/* No comment provided by engineer. */
+"The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "De stijl \"%@\" is in uw stijlenmap geïnstalleerd en toegevoegd aan het menu Stijlen.";
+
+/* No comment provided by engineer. */
+"The style %@ appears to be missing or corrupted" = "De stijl %@ lijkt te zijn beschadigd";
+
+/* No comment provided by engineer. */
+"The subscription for \"%@\" requires a user name and password for access." = "Voor toegang tot het abonnement op \"%@\" heeft u een gebruikersnaam en wachtwoord nodig.";
+
+/* No comment provided by engineer. */
 "This article contains an enclosed file." = "Dit artikel bevat een bijlage.";
+
+/* No comment provided by engineer. */
+"This operation cannot be undone." = "Deze actie kan niet ongedaan worden gemaakt.";
 
 /* No comment provided by engineer. */
 "Today" = "Vandaag";
@@ -593,35 +581,44 @@
 "Unread Articles" = "Ongelezen artikelen";
 
 /* No comment provided by engineer. */
-"Unrecognised database format text" = "Het bestandsformaat van de database (%@) wordt door deze versie van Vienna niet ondersteund. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.";
+"Unsubscribe from Feed" = "Zeg abonnement op";
 
 /* No comment provided by engineer. */
-"Unrecognised database format title" = "Het bestandsformaat van de database is veranderd";
-
-/* No comment provided by engineer. */
-"Unsubscribe" = "Zeg abonnement op";
+"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles." = "Wis Open Reader RSS feed";
 
 /* Title of a button on an alert */
 "Upgrade Database" = "Bijwerken database";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file body" = "Vienna kan het bestand \"%@\" niet openen, omdat het is verplaatst sinds u het heeft gedownload.";
+"Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna kan het bestand \"%@\" niet openen, omdat het is verplaatst sinds u het heeft gedownload.";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file title" = "Vienna kan het bestand niet openen.";
+"Vienna cannot open the file." = "Vienna kan het bestand niet openen.";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file body" = "Vienna kan het bestand \"%@\" niet tonen, omdat het is verplaatst sinds u het heeft gedownload.";
+"Vienna cannot show the file \"%@\" because it moved since you downloaded it." = "Vienna kan het bestand \"%@\" niet tonen, omdat het is verplaatst sinds u het heeft gedownload.";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file title" = "Vienna kan het bestand niet tonen.";
+"Vienna cannot show the file." = "Vienna kan het bestand niet tonen.";
 
 /* No comment provided by engineer. */
-"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna moet de database bijwerken naar de laatste versie. Dit kan enige tijd duren. Sorry voor het ongemak.";
+"Vienna has installed a new style" = "Vienna heeft een nieuwe stijl geïnstalleerd";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." = "Vienna moet de database bijwerken naar de laatste versie. Dit kan enige tijd duren. Sorry voor het ongemak.";
+
+/* No comment provided by engineer. */
+"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna probeerde de map \"%@\" te maken, maar er ging iets fout. Controleer de bevoegdheden van de bovenliggende mappen.";
 
 /* No comment provided by engineer. */
 "Yes" = "Ja";
 
 /* No comment provided by engineer. */
 "Yesterday" = "Gisteren";
+
+/* You are already subscribed to that feed */
+"You are already subscribed to that feed" = "U heeft al een abonnement op deze feed";
+
+/* No comment provided by engineer. */
+"You cannot undo this action" = "Dit kan niet ongedaan worden gemaakt";
 

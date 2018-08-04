@@ -19,6 +19,9 @@
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "Получено %d новых статей";
 
+/* Notification body */
+"%d new unread articles retrieved" = "Получено %d новых статей";
+
 /* No comment provided by engineer. */
 "%d subscriptions successfully exported" = "Успешно экспортировано %d каналов";
 
@@ -40,6 +43,9 @@
 /* No comment provided by engineer. */
 "A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Новый плагин успешно установлен. Теперь он доступен из меню, а также можно добавить его на панель инструментов.";
 
+/* No comment provided by engineer. */
+"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Новая база данных Vienna не может быть создана в \"%@\" из-за того, что папка, возможно, находится на удаленном сервере, а текущая версия Vienna не может работать с удаленными базами данных. Пожалуйста, выберите папку на своем компьютере.";
+
 /* Toolbar item name for the Advanced preference pane */
 "Advanced" = "Расширенные";
 
@@ -58,12 +64,6 @@
 /* No comment provided by engineer. */
 "After a Week" = "Через неделю";
 
-/* Already subscribed body */
-"Already subscribed body" = "Вы уже подписаны на данный канал";
-
-/* Already subscribed title */
-"Already subscribed title" = "Ошибка";
-
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "При последнем обновлении канала произошла ошибка";
 
@@ -72,6 +72,24 @@
 
 /* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "Ошибка AppleScript в скрипте '%@'";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Вы уверены, что хотите удалить все  %d выбранные папки? Это действие не может быть отменено.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Вы уверены, что хотите удалить группу \"%@\" и все ее папки? Данное действие невозможно отменить.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Вы уверены, что хотите удалить Смарт-папку  \"%@\"? Это не приведет к удалению соответствующих статей.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete the messages in the Trash folder permanently?" = "Удалить все сообщения в Корзине?";
+
+/* No comment provided by engineer. */
+"Are you sure you want to permanently delete the selected articles?" = "Вы уверены, что хотите безвозвратно удалить выбранные статьи?";
+
+/* No comment provided by engineer. */
+"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Вы уверены, что хотите отписаться от \"%@\"? Это удалит сохраненные статьи канала.";
 
 /* No comment provided by engineer. */
 "Articles" = "Статьи";
@@ -90,34 +108,22 @@
 "Cancel" = "Отмена";
 
 /* No comment provided by engineer. */
-"Cannot create database folder text" = "Vienna попыталась создать папку  \"%@\", но произошла ошибка. Проверьте разрешения для папок в указанном пути.";
+"Cannot create export output file" = "Невозможно создать экспортируемый файл.";
 
 /* No comment provided by engineer. */
-"Cannot create database folder title" = "Извините, но Vienna не смогла создать папку базы данных";
+"Cannot create folder" = "Ошибка";
 
 /* No comment provided by engineer. */
-"Cannot create folder body" = "Ошибка создания папки \"%@\".";
+"Cannot create the Vienna database" = "Невозможно создать базу данных Vienna";
 
 /* No comment provided by engineer. */
-"Cannot create folder title" = "Ошибка";
-
-/* No comment provided by engineer. */
-"Cannot open database text" = "Файл базы данных (%@) не может быть открыт. Он может быть поврежден или недоступен. Пожалуйста, удалите или переименуйте файл базы данных и перезапустите Vienna.";
-
-/* No comment provided by engineer. */
-"Cannot open database title" = "Извините, но Vienna не смогла открыть базу данных";
-
-/* No comment provided by engineer. */
-"Cannot open export file message" = "Невозможно создать экспортируемый файл.";
-
-/* No comment provided by engineer. */
-"Cannot open export file message text" = "Указанный экспортируемый файл не может быть создан. Убедитесь, что он не заблокирован и не используется другим приложением.";
+"Cannot import the specified file. The file contents are not valid OPML XML format." = "Невозможно импортировать указанный файл. Содержимое файла не является корректными данными формата OPML XML.";
 
 /* No comment provided by engineer. */
 "Cannot rename folder" = "Невозможно переименовать папку";
 
 /* No comment provided by engineer. */
-"Clear" = "Очистить историю поиска";
+"Clear Recent Searches" = "Очистить историю поиска";
 
 /* No comment provided by engineer. */
 "Click the Open button to open this file." = "Нажмите кнопку Открыть для открытия файла.";
@@ -144,9 +150,6 @@
 "Copy URL" = "Копировать ссылку";
 
 /* No comment provided by engineer. */
-"Credentials Prompt" = "Для доступа к подписке  \"%@\" требуется имя пользователя и пароль.";
-
-/* No comment provided by engineer. */
 "Database Upgrade" = "Обновление базы данных";
 
 /* Data field name visible in menu/article list/smart folder definition */
@@ -160,49 +163,28 @@
 "Delete Article" = "Удалить статью";
 
 /* No comment provided by engineer. */
-"Delete folder status" = "Удаляю папку \"%@\"…";
-
-/* No comment provided by engineer. */
 "Delete group folder" = "Удалить группу";
-
-/* No comment provided by engineer. */
-"Delete group folder text" = "Вы уверены, что хотите удалить группу \"%@\" и все ее папки? Данное действие невозможно отменить.";
 
 /* No comment provided by engineer. */
 "Delete multiple folders" = "Удалить несколько папок";
 
 /* No comment provided by engineer. */
-"Delete multiple folders text" = "Вы уверены, что хотите удалить все  %d выбранные папки? Это действие не может быть отменено.";
-
-/* No comment provided by engineer. */
 "Delete Open Reader RSS feed" = "Удалить RSS-ленту из Open Reader";
-
-/* No comment provided by engineer. */
-"Delete Open Reader RSS feed text" = "Отписывание от RSS-ленты из Open Reader, приведет к удалению статей, сохраненных локально.";
-
-/* No comment provided by engineer. */
-"Delete RSS feed" = "Удалить подписку";
-
-/* No comment provided by engineer. */
-"Delete RSS feed text" = "Вы уверены, что хотите отписаться от \"%@\"? Это удалит сохраненные статьи канала.";
-
-/* No comment provided by engineer. */
-"Delete selected message" = "Вы уверены, что хотите безвозвратно удалить выбранные статьи?";
-
-/* No comment provided by engineer. */
-"Delete selected message text" = "Это действие не может быть отменено.";
 
 /* No comment provided by engineer. */
 "Delete smart folder" = "Удалить Смарт-папку";
 
 /* No comment provided by engineer. */
-"Delete smart folder text" = "Вы уверены, что хотите удалить Смарт-папку  \"%@\"? Это не приведет к удалению соответствующих статей.";
+"Delete subscription" = "Удалить подписку";
 
 /* Title of a menu item */
 "Delete…" = "Удалить…";
 
 /* Data field name visible in smart folder definition */
 "Deleted" = "Удаленный";
+
+/* No comment provided by engineer. */
+"Deleting folder \"%@\"…" = "Удаляю папку \"%@\"…";
 
 /* No comment provided by engineer. */
 "Descending" = "По убыванию";
@@ -228,38 +210,23 @@
 /* Notification title */
 "Download failed" = "Ошибка";
 
-/* No comment provided by engineer. */
-"Downloads Running" = "Одна или более загрузок еще не завершена";
-
-/* No comment provided by engineer. */
-"Downloads Running text" = "Если вы сейчас выйдете из Vienna, все загрузки будут остановлены.";
-
 /* Title of a menu item */
 "Edit…" = "Правка…";
 
 /* Title of a button on an alert */
 "Empty" = "Очистить";
 
-/* No comment provided by engineer. */
-"Empty Trash message" = "Удалить все сообщения в Корзине?";
-
-/* No comment provided by engineer. */
-"Empty Trash message text" = "Данное действие невозможно отменить";
+/* Data field name (Y/N) visible in menu/smart folder definition */
+"Enclosure" = "Вложения";
 
 /* Data field name (URL) visible in menu/article list */
-"Enclosure" = "URL вложения";
+"Enclosure URL" = "URL вложения";
 
 /* No comment provided by engineer. */
 "Enter the URL here" = "Введите URL";
 
-/* No comment provided by engineer. */
+/* Already subscribed title */
 "Error" = "Ошибка";
-
-/* No comment provided by engineer. */
-"Error importing subscriptions body" = "Невозможно импортировать указанный файл. Содержимое файла не является корректными данными формата OPML XML.";
-
-/* No comment provided by engineer. */
-"Error importing subscriptions title" = "Ошибка импортирования";
 
 /* No comment provided by engineer. */
 "Error loading script '%@'" = "Ошибка загрузки скрипта '%@'";
@@ -277,6 +244,9 @@
 "Error: Feed not found!" = "Ошибка: Лента не найдена!";
 
 /* No comment provided by engineer. */
+"Export Completed" = "Экспортирование завершено";
+
+/* No comment provided by engineer. */
 "External Browser" = "Внешний браузер";
 
 /* No comment provided by engineer. */
@@ -290,6 +260,9 @@
 
 /* Notification body */
 "File %@ failed to download" = "Ошибка при загрузке файла %@";
+
+/* No comment provided by engineer. */
+"Filter in %@" = "Поиск в %@";
 
 /* No comment provided by engineer. */
 "Flag" = "Метка";
@@ -324,9 +297,6 @@
 /* No comment provided by engineer. */
 "Got HTTP status 304 - No news from last check" = "Получен HTTP-код 304 - Нет новостей с момента последней проверки";
 
-/* Data field name (Y/N) visible in menu/smart folder definition */
-"HasEnclosure" = "Вложения";
-
 /* Pseudo field name visible in article list */
 "Headlines" = "Заголовки";
 
@@ -342,20 +312,23 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "Сервер передал HTTP код %d";
 
+/* No comment provided by engineer. */
+"If you quit Vienna now, all downloads will stop." = "Если вы сейчас выйдете из Vienna, все загрузки будут остановлены.";
+
 /* Title of a button on an alert */
 "Import" = "Импорт";
+
+/* No comment provided by engineer. */
+"Import Completed" = "Импортирование завершено";
+
+/* No comment provided by engineer. */
+"Import error" = "Ошибка импортирования";
 
 /* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "Импортировать подписки из файла OPML?";
 
 /* No comment provided by engineer. */
 "Improper infinitely looping URL redirect to %@" = "Бесконечное перенаправление URL по адресу %@";
-
-/* No comment provided by engineer. */
-"Invalid style body" = "Будет использован стиль по умолчанию.";
-
-/* No comment provided by engineer. */
-"Invalid style title" = "Стиль %@ отсутствует или поврежден";
 
 /* test for a value */
 "is" = "содержится";
@@ -399,14 +372,12 @@
 /* No comment provided by engineer. */
 "Loading" = "Загрузка";
 
-/* No comment provided by engineer. */
-"Locate Text" = "Новая база данных Vienna не может быть создана в \"%@\" из-за того, что папка, возможно, находится на удаленном сервере, а текущая версия Vienna не может работать с удаленными базами данных. Пожалуйста, выберите папку на своем компьютере.";
-
-/* No comment provided by engineer. */
-"Locate Title" = "Невозможно создать базу данных Vienna";
-
 /* Title of a button on an alert */
 "Locate…" = "Найти…";
+
+/* No comment provided by engineer. */
+"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access." = "Убедитесь, что в настройках Vienna указаны правильные имя пользователя и пароль для доступа к серверу Open Reader.
+Также проверьте сетевое соединение.";
 
 /* Title of a menu item */
 "Mark All Articles as Read" = "Отметить все статьи как прочитанные";
@@ -445,16 +416,7 @@
 "New articles retrieved" = "Новые статьи";
 
 /* No comment provided by engineer. */
-"New style body" = "Стиль \"%@\" был установлен в папку стилей и добавлен в меню Стиль.";
-
-/* No comment provided by engineer. */
-"New style title" = "Vienna установила новый стиль";
-
-/* No comment provided by engineer. */
 "New Tab" = "Новая вкладка";
-
-/* Notification body */
-"New unread articles retrieved" = "Получено %d новых статей";
 
 /* No comment provided by engineer. */
 "No" = "Нет";
@@ -470,6 +432,9 @@
 
 /* Title of a button on an alert */
 "OK" = "ОК";
+
+/* No comment provided by engineer. */
+"One or more downloads are in progress" = "Одна или более загрузок еще не завершена";
 
 /* Title of a popup menu item */
 "Open" = "Открыть";
@@ -503,10 +468,6 @@
 
 /* No comment provided by engineer. */
 "Open Reader Authentication Failed" = "В авторизации в Open Reader отказано";
-
-/* No comment provided by engineer. */
-"Open Reader Authentication Failed text" = "Убедитесь, что в настройках Vienna указаны правильные имя пользователя и пароль для доступа к серверу Open Reader.
-Также проверьте сетевое соединение.";
 
 /* No comment provided by engineer. */
 "Open Scripts Folder" = "Открыть папку скриптов";
@@ -582,7 +543,7 @@
 "Restore Article" = "Восстановить статью";
 
 /* No comment provided by engineer. */
-"Resubscribe" = "Возобновить подписку";
+"Resubscribe to Feed" = "Возобновить подписку";
 
 /* No comment provided by engineer. */
 "Retrieving articles" = "Загружаю статьи";
@@ -599,12 +560,6 @@
 /* No comment provided by engineer. */
 "RSS Icon not found!" = "Иконка RSS не найдена!";
 
-/* No comment provided by engineer. */
-"RSS Subscription Export Title" = "Экспортирование завершено";
-
-/* No comment provided by engineer. */
-"RSS Subscription Import Title" = "Импортирование завершено";
-
 /* Placeholder title of a search field */
 "Search all articles" = "Поиск в статьях";
 
@@ -613,9 +568,6 @@
 
 /* Placeholder title of a search field */
 "Search current web page" = "Поиск по текущей веб-странице";
-
-/* No comment provided by engineer. */
-"Search in %@" = "Поиск в %@";
 
 /* No comment provided by engineer. */
 "Search Results" = "Результаты поиска";
@@ -644,6 +596,12 @@
 /* Title of a menu item */
 "Show Toolbar" = "Показать панель инструментов";
 
+/* No comment provided by engineer. */
+"Sorry but Vienna was unable to open the database" = "Извините, но Vienna не смогла открыть базу данных";
+
+/* No comment provided by engineer. */
+"Sorry, but Vienna was unable to create the database folder" = "Извините, но Vienna не смогла создать папку базы данных";
+
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "Тема";
 
@@ -660,7 +618,37 @@
 "Text" = "Текст";
 
 /* No comment provided by engineer. */
+"The \"%@\" folder cannot be created." = "Ошибка создания папки \"%@\".";
+
+/* No comment provided by engineer. */
+"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "Формат базы данных (%@) не поддерживается текущей версией Vienna. Удалите или переименуйте этот файл и перезапустите программу.";
+
+/* No comment provided by engineer. */
+"The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna." = "Файл базы данных (%@) не может быть открыт. Он может быть поврежден или недоступен. Пожалуйста, удалите или переименуйте файл базы данных и перезапустите Vienna.";
+
+/* No comment provided by engineer. */
+"The database file format has changed" = "Формат базы данных изменился";
+
+/* No comment provided by engineer. */
+"The Default style will be used instead." = "Будет использован стиль по умолчанию.";
+
+/* No comment provided by engineer. */
+"The specified export output file could not be created. Check that it is not locked and no other application is using it." = "Указанный экспортируемый файл не может быть создан. Убедитесь, что он не заблокирован и не используется другим приложением.";
+
+/* No comment provided by engineer. */
+"The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Стиль \"%@\" был установлен в папку стилей и добавлен в меню Стиль.";
+
+/* No comment provided by engineer. */
+"The style %@ appears to be missing or corrupted" = "Стиль %@ отсутствует или поврежден";
+
+/* No comment provided by engineer. */
+"The subscription for \"%@\" requires a user name and password for access." = "Для доступа к подписке  \"%@\" требуется имя пользователя и пароль.";
+
+/* No comment provided by engineer. */
 "This article contains an enclosed file." = "Эта статья содержит вложенный файл.";
+
+/* No comment provided by engineer. */
+"This operation cannot be undone." = "Это действие не может быть отменено.";
 
 /* No comment provided by engineer. */
 "Today" = "Сегодня";
@@ -681,13 +669,10 @@
 "Unread Articles" = "Непрочитанные статьи";
 
 /* No comment provided by engineer. */
-"Unrecognised database format text" = "Формат базы данных (%@) не поддерживается текущей версией Vienna. Удалите или переименуйте этот файл и перезапустите программу.";
+"Unsubscribe from Feed" = "Отписаться от ленты";
 
 /* No comment provided by engineer. */
-"Unrecognised database format title" = "Формат базы данных изменился";
-
-/* No comment provided by engineer. */
-"Unsubscribe" = "Отписаться от ленты";
+"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles." = "Отписывание от RSS-ленты из Open Reader, приведет к удалению статей, сохраненных локально.";
 
 /* Title of a button on an alert */
 "Upgrade Database" = "Обновить базу данных";
@@ -696,23 +681,35 @@
 "URL" = "URL-адрес";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file body" = "Vienna не может открыть файл \"%@\" потому что он был перемещен после загрузки.";
+"Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna не может открыть файл \"%@\" потому что он был перемещен после загрузки.";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file title" = "Vienna не может открыть этот файл.";
+"Vienna cannot open the file." = "Vienna не может открыть этот файл.";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file body" = "Vienna не может отобразить файл \"%@\" потому что он был перемещен после загрузки.";
+"Vienna cannot show the file \"%@\" because it moved since you downloaded it." = "Vienna не может отобразить файл \"%@\" потому что он был перемещен после загрузки.";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file title" = "Vienna не может отобразить файл.";
+"Vienna cannot show the file." = "Vienna не может отобразить файл.";
 
 /* No comment provided by engineer. */
-"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna необходимо обновить свою базу данных до последней версии. Это может занять минуту или около того. Приносим свои извинения за доставленные неудобства.";
+"Vienna has installed a new style" = "Vienna установила новый стиль";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." = "Vienna необходимо обновить свою базу данных до последней версии. Это может занять минуту или около того. Приносим свои извинения за доставленные неудобства.";
+
+/* No comment provided by engineer. */
+"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna попыталась создать папку  \"%@\", но произошла ошибка. Проверьте разрешения для папок в указанном пути.";
 
 /* No comment provided by engineer. */
 "Yes" = "Да";
 
 /* No comment provided by engineer. */
 "Yesterday" = "Вчера";
+
+/* You are already subscribed to that feed */
+"You are already subscribed to that feed" = "Вы уже подписаны на данный канал";
+
+/* No comment provided by engineer. */
+"You cannot undo this action" = "Данное действие невозможно отменить";
 
