@@ -151,8 +151,8 @@ static NSMutableDictionary * stylePathMappings = nil;
 	NSAssert(![styleName isEqualToString:@"Default"], @"Default style is corrupted!");
 	
 	// Warn the user.
-	NSString * titleText = [NSString stringWithFormat:NSLocalizedString(@"Invalid style title", nil), styleName];
-	runOKAlertPanel(titleText, NSLocalizedString(@"Invalid style body", nil));
+	NSString * titleText = [NSString stringWithFormat:NSLocalizedString(@"The style %@ appears to be missing or corrupted", nil), styleName];
+	runOKAlertPanel(titleText, NSLocalizedString(@"The Default style will be used instead.", nil));
 
 	// We need to reset the preferences without firing off a notification since we want the
 	// style change to happen immediately.

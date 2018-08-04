@@ -12,18 +12,10 @@
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
-			<key>few</key>
-			<string>%d new articles retrieved</string>
-			<key>many</key>
-			<string>%d new articles retrieved</string>
 			<key>one</key>
 			<string>%d new article retrieved</string>
 			<key>other</key>
 			<string>Recuperados %d novos artigos</string>
-			<key>two</key>
-			<string>%d new articles retrieved</string>
-			<key>zero</key>
-			<string>%d new articles retrieved</string>
 		</dict>
 	</dict>
 	<key>%d subscriptions successfully exported</key>
@@ -36,18 +28,10 @@
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
-			<key>few</key>
-			<string>%d subscriptions successfully exported</string>
-			<key>many</key>
-			<string>%d subscriptions successfully exported</string>
 			<key>one</key>
 			<string>%d subscription successfully exported</string>
 			<key>other</key>
 			<string>%d subscricións correctamente exportadas</string>
-			<key>two</key>
-			<string>%d subscriptions successfully exported</string>
-			<key>zero</key>
-			<string>%d subscriptions successfully exported</string>
 		</dict>
 	</dict>
 	<key>%d subscriptions successfully imported</key>
@@ -60,18 +44,10 @@
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
-			<key>few</key>
-			<string>%d subscriptions successfully imported</string>
-			<key>many</key>
-			<string>%d subscriptions successfully imported</string>
 			<key>one</key>
 			<string>%d subscription successfully imported</string>
 			<key>other</key>
 			<string>%d subscricións importadas correctamente</string>
-			<key>two</key>
-			<string>%d subscriptions successfully imported</string>
-			<key>zero</key>
-			<string>%d subscriptions successfully imported</string>
 		</dict>
 	</dict>
 	<key>%d unread articles</key>
@@ -84,18 +60,10 @@
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
-			<key>few</key>
-			<string>%d unread articles</string>
-			<key>many</key>
-			<string>%d unread articles</string>
 			<key>one</key>
 			<string>%d unread article</string>
 			<key>other</key>
 			<string>%d artigos sen ler</string>
-			<key>two</key>
-			<string>%d unread articles</string>
-			<key>zero</key>
-			<string>%d unread articles</string>
 		</dict>
 	</dict>
 	<key>%u articles</key>
@@ -108,18 +76,10 @@
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>u</string>
-			<key>few</key>
-			<string>%u articles</string>
-			<key>many</key>
-			<string>%u articles</string>
 			<key>one</key>
 			<string>%u article</string>
 			<key>other</key>
 			<string>%u artigos</string>
-			<key>two</key>
-			<string>%u articles</string>
-			<key>zero</key>
-			<string>%u articles</string>
 		</dict>
 	</dict>
 	<key>%u unread</key>
@@ -132,18 +92,10 @@
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>u</string>
-			<key>few</key>
-			<string>%u unread</string>
-			<key>many</key>
-			<string>%u unread</string>
 			<key>one</key>
 			<string>%u sen ler</string>
 			<key>other</key>
 			<string>%u sen ler</string>
-			<key>two</key>
-			<string>%u unread</string>
-			<key>zero</key>
-			<string>%u unread</string>
 		</dict>
 	</dict>
 </dict>
