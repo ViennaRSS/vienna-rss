@@ -19,6 +19,7 @@
 //
 
 #import "OpenReader.h"
+#import "URLRequestExtensions.h"
 #import "HelperFunctions.h"
 #import "Folder.h"
 #import "Database.h"
@@ -55,7 +56,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     fullyAuthenticated
 };
 
-@interface OpenReader () <ASIHTTPRequestDelegate>
+@interface OpenReader ()
 
 @property (readwrite, copy) NSString *statusMessage;
 @property (readwrite, nonatomic) NSUInteger countOfNewArticles;
@@ -64,7 +65,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 @property (atomic) NSString *clientAuthToken;
 @property (nonatomic) NSTimer *tTokenTimer;
 @property (nonatomic) NSTimer *clientAuthTimer;
-@property (nonatomic) NSMutableArray *clientAuthWaitQueue;
 @property (nonatomic) NSMutableArray *tTokenWaitQueue;
 @property (nonatomic) dispatch_queue_t asyncQueue;
 @property (nonatomic) OpenReaderStatus openReaderStatus;
@@ -82,7 +82,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     if (self) {
         // Initialization code here.
         _localFeeds = [[NSMutableArray alloc] init];
-        _clientAuthWaitQueue = [[NSMutableArray alloc] init];
         _tTokenWaitQueue = [[NSMutableArray alloc] init];
         _openReaderStatus = notAuthenticated;
         _countOfNewArticles = 0;
@@ -121,117 +120,97 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
 # pragma mark user authentication and requests preparation
 
-/* prepare an ASIHTTPRequest from an NSURL
+/* prepare a NSMutableURLRequest from an NSURL
  */
--(ASIHTTPRequest *)requestFromURL:(NSURL *)url
+-(NSMutableURLRequest *)requestFromURL:(NSURL *)url
 {
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [self commonRequestPrepare:request];
     return request;
 }
 
-/* prepare an ASIFormDataRequest from an NSURL and pass the T token
+/* prepare a FormData request from an NSURL and pass the T token
  */
--(ASIFormDataRequest *)authentifiedFormRequestFromURL:(NSURL *)url
+-(NSMutableURLRequest *)authentifiedFormRequestFromURL:(NSURL *)url
 {
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [self commonRequestPrepare:request];
+    NSMutableURLRequest *request = [self requestFromURL:url];
+    request.HTTPMethod = @"POST";
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [self getTokenForRequest:request];
     return request;
 }
 
--(void)commonRequestPrepare:(ASIHTTPRequest *)request
+-(void)commonRequestPrepare:(NSMutableURLRequest *)request
 {
     [self addClientTokenToRequest:request];
     if (hostRequiresInoreaderAdditionalHeaders) {
-        NSMutableDictionary *theHeaders = [request.requestHeaders mutableCopy] ? : [[NSMutableDictionary alloc] init];
+        NSMutableDictionary *theHeaders = [request.allHTTPHeaderFields mutableCopy] ? : [[NSMutableDictionary alloc] init];
         [theHeaders addEntriesFromDictionary:inoreaderAdditionalHeaders];
-        request.requestHeaders = theHeaders;
+        request.allHTTPHeaderFields = theHeaders;
     }
-    [request setUseCookiePersistence:NO];
-    request.timeOutSeconds = 180;
-    request.delegate = self;
 }
 
 /* pass the GoogleLogin client authentication token
  */
--(void)addClientTokenToRequest:(ASIHTTPRequest *)clientRequest
+-(void)addClientTokenToRequest:(NSMutableURLRequest *)clientRequest
 {
-    static ASIFormDataRequest *myRequest;
+    static NSOperation * clientAuthOperation;
+    dispatch_semaphore_t sema;
+
+    // Do nothing if syncing is disabled in preferences
+    if (![Preferences standardPreferences].syncGoogleReader) {
+        return;
+    }
 
     if (self.openReaderStatus == fullyAuthenticated || self.openReaderStatus == waitingTToken || self.openReaderStatus == missingTToken) {
-        [clientRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", self.clientAuthToken]];
+        [clientRequest addValue:[NSString stringWithFormat:@"GoogleLogin auth=%@", self.clientAuthToken] forHTTPHeaderField:@"Authorization"];
         return; //we are already connected
-    } else if ((self.openReaderStatus == waitingClientToken) && myRequest != nil) {
-        [clientRequest addDependency:myRequest];
-        if (clientRequest != nil) {
-            [self.clientAuthWaitQueue addObject:clientRequest];
-        }
+    } else if ((self.openReaderStatus == waitingClientToken) && clientAuthOperation != nil && !clientAuthOperation.isFinished) {
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        [clientRequest addValue:[NSString stringWithFormat:@"GoogleLogin auth=%@", self.clientAuthToken] forHTTPHeaderField:@"Authorization"];
         return;
     } else {
         // start first authentication
         self.openReaderStatus = waitingClientToken;
-        // Do nothing if syncing is disabled in preferences
-        if (![Preferences standardPreferences].syncGoogleReader) {
-            return;
-        }
 
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost]];
-        myRequest = [ASIFormDataRequest requestWithURL:url];
+        NSMutableURLRequest * myRequest = [NSMutableURLRequest requestWithURL:url];
+        myRequest.HTTPMethod = @"POST";
 
         [self configureForSpecificHost];
         if (hostRequiresInoreaderAdditionalHeaders) {
-            NSMutableDictionary *theHeaders = [myRequest.requestHeaders mutableCopy];
+            NSMutableDictionary *theHeaders = [myRequest.allHTTPHeaderFields mutableCopy];
             [theHeaders addEntriesFromDictionary:inoreaderAdditionalHeaders];
-            myRequest.requestHeaders = theHeaders;
+            myRequest.allHTTPHeaderFields = theHeaders;
         }
-        [myRequest setUseCookiePersistence:NO];
-        myRequest.timeOutSeconds = 180;
-        myRequest.delegate = nil;
         [myRequest setPostValue:username forKey:@"Email"];
         [myRequest setPostValue:password forKey:@"Passwd"];
 
-        __weak typeof(myRequest)weakRequest = myRequest;
-        [myRequest setFailedBlock:^{
-            __strong typeof(weakRequest)strongRequest = weakRequest;
-            LOG_EXPR([strongRequest responseHeaders]);
-            LOG_EXPR([[NSString alloc] initWithData:[strongRequest responseData] encoding:NSUTF8StringEncoding]);
+        // semaphore with count equal to zero for synchronizing completion of work
+        sema = dispatch_semaphore_create(0);
+        
+        clientAuthOperation = [NSBlockOperation blockOperationWithBlock:^(void) {
+        NSURLSessionDataTask * task = [[NSURLSession sharedSession] dataTaskWithRequest:myRequest
+        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error) {
+            LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
+            LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
             [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
-            for (id obj in [self.clientAuthWaitQueue reverseObjectEnumerator]) {
-                [(ASIHTTPRequest *)obj cancel];
-                [self.clientAuthWaitQueue removeObject:obj];
-            }
             self.openReaderStatus = notAuthenticated;
-            [[RefreshManager sharedManager] resumeConnectionsQueue];
-        }];
-        [myRequest setCompletionBlock:^{
-            __strong typeof(weakRequest)strongRequest = weakRequest;
-            if (strongRequest.responseStatusCode != 200) {
-                LOG_EXPR([strongRequest responseStatusCode]);
-                LOG_EXPR([strongRequest responseHeaders]);
+         } else {
+             if (((NSHTTPURLResponse *)response).statusCode != 200) {
+                LOG_EXPR(((NSHTTPURLResponse *)response).statusCode);
+                LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
                 [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
                 self.openReaderStatus = notAuthenticated;
-                for (id obj in [self.clientAuthWaitQueue reverseObjectEnumerator]) {
-                    [(ASIHTTPRequest *)obj cancel];
-                    [self.clientAuthWaitQueue removeObject:obj];
-                }
-                self.statusMessage = @"";
-            } else {
-                NSString *response = [strongRequest responseString];
+            } else { // statusCode 200
+                NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                 NSArray *components = [response componentsSeparatedByString:@"\n"];
 
                 //NSString * sid = [[components objectAtIndex:0] substringFromIndex:4];		//unused
                 //NSString * lsid = [[components objectAtIndex:1] substringFromIndex:5];	//unused
                 self.clientAuthToken = [NSString stringWithString:[components[2] substringFromIndex:5]];
                 self.openReaderStatus = missingTToken;
-
-                for (id obj in self.clientAuthWaitQueue) {
-                    [(ASIHTTPRequest *)obj addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@",
-                                                                                 self.clientAuthToken]];
-                }
-                for (id obj in [self.clientAuthWaitQueue reverseObjectEnumerator]) {
-                    [self.clientAuthWaitQueue removeObject:obj];
-                }
 
                 if (self.clientAuthTimer == nil || !self.clientAuthTimer.valid) {
                     //new request every 6 days
@@ -242,17 +221,22 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                                                                            repeats:YES];
                 }
             }
-            [[RefreshManager sharedManager] resumeConnectionsQueue];
+        } // if error
+
+        // Signal that we are done
+        dispatch_semaphore_signal(sema);
+
         }];
 
-        [clientRequest addDependency:myRequest];
-        myRequest.queuePriority = NSOperationQueuePriorityHigh;
-        if (clientRequest != nil) {
-            [self.clientAuthWaitQueue addObject:clientRequest];
-        }
-        [[RefreshManager sharedManager] addConnection:myRequest];
-        [[RefreshManager sharedManager] suspendConnectionsQueue];
+        [task resume];
+
+        }];
+
         self.statusMessage = NSLocalizedString(@"Authenticating on Open Reader", nil);
+        [clientAuthOperation start];
+        // Now we wait until the task response block will send a signal
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        [clientRequest addValue:[NSString stringWithFormat:@"GoogleLogin auth=%@", self.clientAuthToken] forHTTPHeaderField:@"Authorization"];
     }
 } // addClientTokenToRequest
 
@@ -291,39 +275,50 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
 /* pass the T token
  */
--(void)getTokenForRequest:(ASIFormDataRequest *)clientRequest;
+-(void)getTokenForRequest:(NSMutableURLRequest *)clientRequest;
 {
-    static ASIHTTPRequest *myRequest;
+    static NSOperation * tTokenOperation;
 
     if (self.openReaderStatus == fullyAuthenticated) {
         [clientRequest setPostValue:self.tToken forKey:@"T"];
         return;
-    } else if (self.openReaderStatus == waitingTToken && myRequest != nil) {
-        [clientRequest addDependency:myRequest];
+    } else if (self.openReaderStatus == waitingTToken && tTokenOperation != nil && !tTokenOperation.isFinished) {
         if (clientRequest != nil) {
+            [clientRequest setInUserInfo:tTokenOperation forKey:@"dependency"];
             [self.tTokenWaitQueue addObject:clientRequest];
         }
         return;
     } else if (self.openReaderStatus == notAuthenticated || self.openReaderStatus == waitingClientToken) {
+        // in principle, this should only happen with _openReaderStatus == notAuthenticated, after failure to get clientAuthToken
         if (clientRequest != nil) {
             [self.tTokenWaitQueue addObject:clientRequest];
         }
-        clientRequest.queuePriority = NSOperationQueuePriorityLow;
         return;
     } else {
         // openReaderStatus ==  missingTToken
-        myRequest = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
+        NSMutableURLRequest * myRequest = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
         self.openReaderStatus = waitingTToken;
-        [myRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
-        myRequest.delegate = nil;
-        __weak typeof(myRequest)weakRequest = myRequest;
-        [myRequest setCompletionBlock:^{
-            __strong typeof(weakRequest)strongRequest = weakRequest;
+        [[RefreshManager sharedManager] suspendConnectionsQueue];
+        tTokenOperation = [[RefreshManager sharedManager] addConnection:myRequest
+        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+        if (error) {
+            LOG_EXPR(myRequest.URL);
+            LOG_EXPR(myRequest.allHTTPHeaderFields);
+            LOG_EXPR([[NSString alloc] initWithData:myRequest.HTTPBody encoding:NSUTF8StringEncoding]);
+            LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
+            LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+            self.tToken = nil;
+            self.openReaderStatus = missingTToken;
+            for (id obj in [self.tTokenWaitQueue reverseObjectEnumerator]) {
+                //[(ASIFormDataRequest *)obj cancel];
+                [self.tTokenWaitQueue removeObject:obj];
+            }
+        } else {
             [[RefreshManager sharedManager] suspendConnectionsQueue];
-            self.tToken = [strongRequest responseString];
+            self.tToken = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             self.openReaderStatus = fullyAuthenticated;
             for (id obj in self.tTokenWaitQueue) {
-                [(ASIFormDataRequest *)obj setPostValue:self.tToken forKey:@"T"];
+                [(NSMutableURLRequest *)obj setPostValue:self.tToken forKey:@"T"];
             }
             for (id obj in [self.tTokenWaitQueue reverseObjectEnumerator]) {
                 [self.tTokenWaitQueue removeObject:obj];
@@ -337,26 +332,13 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                                                                    repeats:YES];
                 }
             [[RefreshManager sharedManager] resumeConnectionsQueue];
-        }];
-        [myRequest setFailedBlock:^{
-            __strong typeof(weakRequest)strongRequest = weakRequest;
-            LOG_EXPR([strongRequest originalURL]);
-            LOG_EXPR([strongRequest requestHeaders]);
-            LOG_EXPR([[NSString alloc] initWithData:[strongRequest postBody] encoding:NSUTF8StringEncoding]);
-            LOG_EXPR([strongRequest responseHeaders]);
-            LOG_EXPR([[NSString alloc] initWithData:[strongRequest responseData] encoding:NSUTF8StringEncoding]);
-            self.tToken = nil;
-            self.openReaderStatus = missingTToken;
-            for (id obj in [self.tTokenWaitQueue reverseObjectEnumerator]) {
-                [(ASIFormDataRequest *)obj cancel];
-                [self.tTokenWaitQueue removeObject:obj];
-            }
-        }];
-        [clientRequest addDependency:myRequest];
-        if (clientRequest != nil) {
-            [self.tTokenWaitQueue addObject:clientRequest];
         }
-        [[RefreshManager sharedManager] addConnection:myRequest];
+      }];
+      if (clientRequest != nil) {
+        [clientRequest setInUserInfo:tTokenOperation forKey:@"dependency"];
+        [self.tTokenWaitQueue addObject:clientRequest];
+      }
+      [[RefreshManager sharedManager] resumeConnectionsQueue];
     }
 }
 
@@ -383,27 +365,26 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 # pragma mark default handlers
 
 // default handler for didFailSelector
--(void)requestFailed:(ASIHTTPRequest *)request
+-(void)requestFailed:(NSMutableURLRequest *)request response:(NSURLResponse *)response error:(NSError *)error
 {
-    LLog(@"Failed on request %@", [request originalURL]);
-    LOG_EXPR([request error]);
-    LOG_EXPR([request requestHeaders]);
-    LOG_EXPR([request responseHeaders]);
-    if (request.error.code == ASIAuthenticationErrorType) {   //Error caused by lack of authentication
+    LLog(@"Failed on request %@", request.URL);
+    LOG_EXPR(error);
+    LOG_EXPR(request.allHTTPHeaderFields);
+    LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
+    if (error.code == NSURLErrorUserAuthenticationRequired) {   //Error caused by lack of authentication
         [self clearAuthentication];
     }
 }
 
 // default handler for didFinishSelector
--(void)requestFinished:(ASIHTTPRequest *)request
+-(void)requestFinished:(NSMutableURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data
 {
-    NSString *requestResponse = [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding];
+    NSString *requestResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     if (![requestResponse isEqualToString:@"OK"]) {
-        LLog(@"Error (response status code %d) on request %@", [request responseStatusCode], [request originalURL]);
-        LOG_EXPR([request error]);
-        LOG_EXPR([request requestHeaders]);
-        LOG_EXPR([[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding]);
-        LOG_EXPR([request responseHeaders]);
+        LLog(@"Error (response status code %ld) on request %@", (long)((NSHTTPURLResponse *)response).statusCode, request.URL);
+        LOG_EXPR(request.allHTTPHeaderFields);
+        LOG_EXPR([[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
+        LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
         LOG_EXPR(requestResponse);
     }
 }
@@ -426,7 +407,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
 # pragma mark operations
 
--(ASIHTTPRequest *)refreshFeed:(Folder *)thisFolder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:(BOOL)ignoreLimit
+-(void)refreshFeed:(Folder *)thisFolder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:(BOOL)ignoreLimit
 {
     //This is a workaround throw a BAD folderupdate value on DB
     NSString *folderLastUpdateString = ignoreLimit ? @"0" : thisFolder.lastUpdateString;
@@ -476,11 +457,9 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                               APIBaseURL,
                               percentEscape(feedIdentifier), ClientName, itemsLimitation, OpenReader.currentTimestamp]];
 
-    ASIHTTPRequest *request = [self requestFromURL:refreshFeedUrl];
-    request.didFinishSelector = @selector(feedRequestDone:);
-    request.didFailSelector = @selector(feedRequestFailed:);
-    request.userInfo =
-        @{ @"folder": thisFolder, @"log": aItem, @"lastupdatestring": folderLastUpdateString, @"type": @(MA_Refresh_GoogleFeed) };
+    NSMutableURLRequest *request = [self requestFromURL:refreshFeedUrl];
+    [request setUserInfo:
+        @{ @"folder": thisFolder, @"log": aItem, @"lastupdatestring": folderLastUpdateString, @"type": @(MA_Refresh_GoogleFeed) }];
 
     // Request id's of unread items
     NSString *args =
@@ -488,11 +467,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
          OpenReader.currentTimestamp, ClientName,
          percentEscape(feedIdentifier)];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
-    ASIHTTPRequest *request2 = [self requestFromURL:url];
-    request2.userInfo = @{ @"folder": thisFolder, @"log": aItem };
-    request2.didFinishSelector = @selector(readRequestDone:);
-    [request2 addDependency:request];
-    [[RefreshManager sharedManager] addConnection:request2];
+    NSMutableURLRequest *request2 = [self requestFromURL:url];
+    [request2 setUserInfo:@{ @"folder": thisFolder, @"log": aItem }];
 
     // Request id's of starred items
     // Note: Inoreader requires syntax "it=user/-/state/...", while TheOldReader ignores it and requires "s=user/-/state/..."
@@ -507,52 +483,82 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", OpenReader.currentTimestamp, ClientName,
          percentEscape(feedIdentifier), starredSelector];
     NSURL *url3 = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args3]];
-    ASIHTTPRequest *request3 = [self requestFromURL:url3];
-    request3.userInfo = @{ @"folder": thisFolder, @"log": aItem };
-    request3.didFinishSelector = @selector(starredRequestDone:);
-    [request3 addDependency:request2];
-    [[RefreshManager sharedManager] addConnection:request3];
+    NSMutableURLRequest *request3 = [self requestFromURL:url3];
+    [request3 setUserInfo:@{ @"folder": thisFolder, @"log": aItem }];
 
-    return request;
+    __weak typeof(self) weakSelf = self;
+    NSOperation * op = [[RefreshManager sharedManager] addConnection:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            [weakSelf feedRequestFailed:request response:response error:error];
+        } else {
+            [weakSelf feedRequestDone:request response:response data:data];
+        }
+    }];
+
+    [[RefreshManager sharedManager] suspendConnectionsQueue];
+
+    NSOperation * op2 = [[RefreshManager sharedManager] addConnection:request2
+       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+		    if (error) {
+		        [weakSelf requestFailed:request2 response:response error:error];
+		    } else {
+		        [weakSelf readRequestDone:request2 response:response data:data];
+		    }
+        }
+    ];
+    [op2 addDependency:op];
+
+    NSOperation * op3 = [[RefreshManager sharedManager] addConnection:request3
+       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+		    if (error) {
+                [weakSelf requestFailed:request3 response:response error:error];
+		    } else {
+		        [weakSelf starredRequestDone:request2 response:response data:data];
+		    }
+        }
+    ];
+    [op3 addDependency:op2];
+
+    [[RefreshManager sharedManager] resumeConnectionsQueue];
+
 } // refreshFeed
 
 // callback : handler for timed out feeds, etc...
--(void)feedRequestFailed:(ASIHTTPRequest *)request
+-(void)feedRequestFailed:(NSMutableURLRequest *)request response:(NSURLResponse *)response error:(NSError *)error
 {
-    LLog(@"Open Reader feed request Failed : %@", [request originalURL]);
-    LOG_EXPR([request error]);
-    LOG_EXPR([request requestHeaders]);
-    LOG_EXPR([[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding]);
-    LOG_EXPR([request responseHeaders]);
-    ActivityItem *aItem = request.userInfo[@"log"];
-    Folder *refreshedFolder = request.userInfo[@"folder"];
+    LLog(@"Open Reader feed request Failed : %@", request.URL);
+    LOG_EXPR(error);
+    LOG_EXPR(request.allHTTPHeaderFields);
+    LOG_EXPR([[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
+    LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
+    ActivityItem *aItem = ((NSDictionary *)[request userInfo])[@"log"];
+    Folder *refreshedFolder = ((NSDictionary *)[request userInfo])[@"folder"];
 
-    [aItem appendDetail:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Error", nil), request.error.localizedDescription ]];
+    [aItem appendDetail:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Error", nil), error.localizedDescription ]];
     [aItem setStatus:NSLocalizedString(@"Error", nil)];
     [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
     [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
 }
 
 // callback
--(void)feedRequestDone:(ASIHTTPRequest *)request
+-(void)feedRequestDone:(NSMutableURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data
 {
     dispatch_async(self.asyncQueue, ^() {
         // TODO : refactor code to separate feed refresh code and UI
 
-        ActivityItem *aItem = request.userInfo[@"log"];
-        Folder *refreshedFolder = request.userInfo[@"folder"];
+        ActivityItem *aItem = ((NSDictionary *)[request userInfo])[@"log"];
+        Folder *refreshedFolder = ((NSDictionary *)[request userInfo])[@"folder"];
 
-        if (request.responseStatusCode == 404) {
+        if (((NSHTTPURLResponse *)response).statusCode == 404) {
             [aItem appendDetail:NSLocalizedString(@"Error: Feed not found!", nil)];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [aItem setStatus:NSLocalizedString(@"Error", nil)];
             });
             [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
             [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
-        } else if (request.responseStatusCode == 200) {
+        } else if (((NSHTTPURLResponse *)response).statusCode == 200) {
             // reset unread statuses in cache : we will receive in -ReadRequestDone: the updated list of unreads
             [refreshedFolder markArticlesInCacheRead];
-            NSData *data = [request responseData];
             NSDictionary *subscriptionsDict;
             NSError *jsonError;
             subscriptionsDict = [NSJSONSerialization JSONObjectWithData:data
@@ -563,16 +569,16 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 || [folderLastUpdateString isEqualToString:@""]
                 || [folderLastUpdateString isEqualToString:@"(null)"])
             {
-                LOG_EXPR([request url]);
+                LOG_EXPR(request.URL);
                 NSLog(@"Feed name: %@", subscriptionsDict[@"title"]);
-                NSLog(@"Last Check: %@", request.userInfo[@"lastupdatestring"]);
+                NSLog(@"Last Check: %@",((NSDictionary *)[request userInfo])[@"lastupdatestring"]);
                 NSLog(@"Last update: %@", folderLastUpdateString);
                 NSLog(@"Found %lu items", (unsigned long)[subscriptionsDict[@"items"] count]);
                 LOG_EXPR(subscriptionsDict);
                 LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                 ALog(@"Error !!! Incoherent data !");
                 //keep the previously recorded one
-                folderLastUpdateString = request.userInfo[@"lastupdatestring"];
+                folderLastUpdateString = ((NSDictionary *)[request userInfo])[@"lastupdatestring"];
             }
 
             // Log number of bytes we received
@@ -698,12 +704,12 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             }
         } else { //other HTTP status response...
             [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil),
-                                 request.responseStatusCode]];
-            LOG_EXPR([request originalURL]);
-            LOG_EXPR([request requestHeaders]);
-            LOG_EXPR([[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding]);
-            LOG_EXPR([request responseHeaders]);
-            LOG_EXPR([[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding]);
+                                 ((NSHTTPURLResponse *)response).statusCode]];
+            LOG_EXPR(request.URL);
+            LOG_EXPR(request.allHTTPHeaderFields);
+            LOG_EXPR([[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
+            LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
+            LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [aItem setStatus:NSLocalizedString(@"Error", nil)];
             });
@@ -714,16 +720,16 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 } // feedRequestDone
 
 // callback
--(void)readRequestDone:(ASIHTTPRequest *)request
+-(void)readRequestDone:(NSMutableURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data
 {
     dispatch_async(self.asyncQueue, ^() {
-        Folder *refreshedFolder = request.userInfo[@"folder"];
-        ActivityItem *aItem = request.userInfo[@"log"];
-        if (request.responseStatusCode == 200) {
+        Folder *refreshedFolder = ((NSDictionary *)[request userInfo])[@"folder"];
+        ActivityItem *aItem = ((NSDictionary *)[request userInfo])[@"log"];
+        if (((NSHTTPURLResponse *)response).statusCode == 200) {
             @try {
                 NSArray *itemRefsArray;
                 NSError *jsonError;
-                itemRefsArray = [NSJSONSerialization JSONObjectWithData:request.responseData
+                itemRefsArray = [NSJSONSerialization JSONObjectWithData:data
                                                                 options:NSJSONReadingMutableContainers
                                                                   error:&jsonError][@"itemRefs"];
                 NSMutableArray *guidArray = [NSMutableArray arrayWithCapacity:itemRefsArray.count];
@@ -767,7 +773,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             }
         } else { //response status other than OK (200)
             [aItem appendDetail:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Error",
-                                                                                       nil), request.error.localizedDescription ]];
+                                                                                       nil), [NSHTTPURLResponse localizedStringForStatusCode:((NSHTTPURLResponse *)response).statusCode]]];
             [aItem setStatus:NSLocalizedString(@"Error", nil)];
             [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
             [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
@@ -776,16 +782,16 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 } // readRequestDone
 
 // callback
--(void)starredRequestDone:(ASIHTTPRequest *)request
+-(void)starredRequestDone:(NSMutableURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data
 {
     dispatch_async(self.asyncQueue, ^() {
-        Folder *refreshedFolder = request.userInfo[@"folder"];
-        ActivityItem *aItem = request.userInfo[@"log"];
-        if (request.responseStatusCode == 200) {
+        Folder *refreshedFolder = ((NSDictionary *)[request userInfo])[@"folder"];
+        ActivityItem *aItem = ((NSDictionary *)[request userInfo])[@"log"];
+        if (((NSHTTPURLResponse *)response).statusCode == 200) {
             @try {
                 NSArray *itemRefsArray;
                 NSError *jsonError;
-                itemRefsArray = [NSJSONSerialization JSONObjectWithData:request.responseData
+                itemRefsArray = [NSJSONSerialization JSONObjectWithData:data
                                                                 options:NSJSONReadingMutableContainers
                                                                   error:&jsonError][@"itemRefs"];
                 NSMutableArray *guidArray = [NSMutableArray arrayWithCapacity:itemRefsArray.count];
@@ -818,7 +824,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             } // try/catch
         } else { //response status other than OK (200)
             [aItem appendDetail:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Error",
-                                                                                       nil), request.error.localizedDescription ]];
+                                                                                       nil), [NSHTTPURLResponse localizedStringForStatusCode:((NSHTTPURLResponse *)response).statusCode]]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [aItem setStatus:NSLocalizedString(@"Error", nil)];
             });
@@ -831,11 +837,11 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     });     //block for dispatch_async
 } // starredRequestDone
 
--(void)subscriptionsRequestDone:(ASIHTTPRequest *)request
+-(void)subscriptionsRequestDone:(NSMutableURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data
 {
     NSDictionary *subscriptionsDict;
     NSError *jsonError;
-    subscriptionsDict = [NSJSONSerialization JSONObjectWithData:request.responseData
+    subscriptionsDict = [NSJSONSerialization JSONObjectWithData:data
                                                         options:NSJSONReadingMutableContainers
                                                           error:&jsonError];
     [self.localFeeds removeAllObjects];
@@ -900,10 +906,13 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         [googleFeeds addObject:feedURL];
     }
 
-    //check if we have a folder which is not registered as a Open Reader feed
-    for (Folder *f in APPCONTROLLER.folders) {
-        if (f.type == VNAFolderTypeOpenReader && ![googleFeeds containsObject:f.feedURL]) {
-            [[Database sharedManager] deleteFolder:f.itemId];
+    
+    if (subscriptionsDict[@"subscription"] != nil) { // detect probable authentication error
+        //check if we have a folder which is not registered as a Open Reader feed
+        for (Folder *f in APPCONTROLLER.folders) {
+            if (f.type == VNAFolderTypeOpenReader && ![googleFeeds containsObject:f.feedURL]) {
+                [[Database sharedManager] deleteFolder:f.itemId];
+            }
         }
     }
 
@@ -911,11 +920,20 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
 -(void)loadSubscriptions
 {
-    ASIHTTPRequest *subscriptionRequest =
+    NSMutableURLRequest *subscriptionRequest =
         [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json", APIBaseURL,
                                                    ClientName]]];
-    subscriptionRequest.didFinishSelector = @selector(subscriptionsRequestDone:);
-    [[RefreshManager sharedManager] addConnection:subscriptionRequest];
+     __weak typeof(self) weakSelf = self;
+    [[RefreshManager sharedManager] addConnection:subscriptionRequest
+       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+		    if (error) {
+                [weakSelf requestFailed:subscriptionRequest response:response error:error];
+		    } else {
+		        [weakSelf subscriptionsRequestDone:subscriptionRequest response:response data:data];
+		    }
+        }
+    ];
+
     self.statusMessage = NSLocalizedString(@"Fetching Open Reader Subscriptions…", nil);
 }
 
@@ -923,20 +941,36 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/quickadd?client=%@", APIBaseURL, ClientName]];
 
-    ASIFormDataRequest *request = [self authentifiedFormRequestFromURL:url];
+    NSMutableURLRequest *request = [self authentifiedFormRequestFromURL:url];
     [request setPostValue:feedURL forKey:@"quickadd"];
-    // Needs to be synchronous so UI doesn't refresh too soon.
-    request.delegate = nil;
-    [request startAsynchronous];
+    __weak typeof(self) weakSelf = self;
+    [[RefreshManager sharedManager] addConnection:request
+        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+		    if (error) {
+                [weakSelf requestFailed:request response:response error:error];
+		    } else {
+		        [weakSelf requestFinished:request response:response data:data];
+		    }
+        }
+     ];
 }
 
 -(void)unsubscribeFromFeed:(NSString *)feedURL
 {
     NSURL *unsubscribeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit", APIBaseURL]];
-    ASIFormDataRequest *myRequest = [self authentifiedFormRequestFromURL:unsubscribeURL];
+    NSMutableURLRequest *myRequest = [self authentifiedFormRequestFromURL:unsubscribeURL];
     [myRequest setPostValue:@"unsubscribe" forKey:@"ac"];
     [myRequest setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
-    [[RefreshManager sharedManager] addConnection:myRequest];
+    __weak typeof(self) weakSelf = self;
+    [[RefreshManager sharedManager] addConnection:myRequest
+       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+		    if (error) {
+                [weakSelf requestFailed:myRequest response:response error:error];
+		    } else {
+		        [weakSelf requestFinished:myRequest response:response data:data];
+		    }
+        }
+    ];
 }
 
 /* setFolderName
@@ -947,18 +981,27 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?client=%@", APIBaseURL, ClientName]];
 
-    ASIFormDataRequest *request = [self authentifiedFormRequestFromURL:url];
+    NSMutableURLRequest *request = [self authentifiedFormRequestFromURL:url];
     [request setPostValue:@"edit" forKey:@"ac"];
     [request setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
     [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", folderName] forKey:flag ? @"a" : @"r"];
-    request.delegate = nil;
-    [request startAsynchronous];
+    __weak typeof(self) weakSelf = self;
+    [[RefreshManager sharedManager] addConnection:request
+        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+		    if (error) {
+                [weakSelf requestFailed:request response:response error:error];
+		    } else {
+		        [weakSelf requestFinished:request response:response data:data];
+		    }
+        }
+     ];
+
 }
 
 -(void)markRead:(Article *)article readFlag:(BOOL)flag
 {
     NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag", APIBaseURL]];
-    ASIFormDataRequest *myRequest = [self authentifiedFormRequestFromURL:markReadURL];
+    NSMutableURLRequest *myRequest = [self authentifiedFormRequestFromURL:markReadURL];
     if (flag) {
         [myRequest setPostValue:@"user/-/state/com.google/read" forKey:@"a"];
     } else {
@@ -966,18 +1009,26 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     }
     [myRequest setPostValue:@"true" forKey:@"async"];
     [myRequest setPostValue:article.guid forKey:@"i"];
-    myRequest.userInfo = @{ @"article": article, @"readFlag": @(flag) };
-    myRequest.didFinishSelector = @selector(markReadDone:);
-    [[RefreshManager sharedManager] addConnection:myRequest];
+    [myRequest setUserInfo:@{ @"article": article, @"readFlag": @(flag) }];
+    __weak typeof(self) weakSelf = self;
+    [[RefreshManager sharedManager] addConnection:myRequest
+       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+		    if (error) {
+		        [weakSelf requestFailed:myRequest response:response error:error];
+		    } else {
+		        [weakSelf markReadDone:myRequest response:response data:data];
+		    }
+        }
+    ];
 }
 
 // callback : we check if the server did confirm the read status change
--(void)markReadDone:(ASIHTTPRequest *)request
+-(void)markReadDone:(NSMutableURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data
 {
-    NSString *requestResponse = [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding];
+    NSString *requestResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     if ([requestResponse isEqualToString:@"OK"]) {
-        Article *article = request.userInfo[@"article"];
-        BOOL readFlag = [[request.userInfo valueForKey:@"readFlag"] boolValue];
+        Article *article = ((NSDictionary *)[request userInfo])[@"article"];
+        BOOL readFlag = [[((NSDictionary *)[request userInfo]) valueForKey:@"readFlag"] boolValue];
         [[Database sharedManager] markArticleRead:article.folderId guid:article.guid isRead:readFlag];
         [article markRead:readFlag];
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -989,7 +1040,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 -(void)markStarred:(Article *)article starredFlag:(BOOL)flag
 {
     NSURL *markStarredURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag", APIBaseURL]];
-    ASIFormDataRequest *myRequest = [self authentifiedFormRequestFromURL:markStarredURL];
+    NSMutableURLRequest *myRequest = [self authentifiedFormRequestFromURL:markStarredURL];
     if (flag) {
         [myRequest setPostValue:@"user/-/state/com.google/starred" forKey:@"a"];
     } else {
@@ -997,7 +1048,16 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     }
     [myRequest setPostValue:@"true" forKey:@"async"];
     [myRequest setPostValue:article.guid forKey:@"i"];
-    [[RefreshManager sharedManager] addConnection:myRequest];
+    __weak typeof(self) weakSelf = self;
+    [[RefreshManager sharedManager] addConnection:myRequest
+       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+		    if (error) {
+                [weakSelf requestFailed:myRequest response:response error:error];
+		    } else {
+		        [weakSelf requestFinished:myRequest response:response data:data];
+		    }
+        }
+     ];
 }
 
 -(void)createNewSubscription:(NSArray *)params

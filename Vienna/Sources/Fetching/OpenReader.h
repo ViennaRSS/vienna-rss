@@ -6,7 +6,6 @@
 //  Copyright 2011-2018 Vienna contributors (see menu item 'About Vienna' for list of contributors). All rights reserved.
 //
 
-@import ASIHTTPRequest;
 @import Foundation;
 
 @class ActivityItem;
@@ -31,7 +30,7 @@
 -(void)markRead:(Article *)article readFlag:(BOOL)flag;
 -(void)markStarred:(Article *)article starredFlag:(BOOL)flag;
 -(void)setFolderName:(NSString *)folderName forFeed:(NSString *)feedURL set:(BOOL)flag;
--(ASIHTTPRequest*)refreshFeed:(Folder*)thisFolder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:(BOOL)ignoreLimit;
+-(void)refreshFeed:(Folder*)thisFolder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:(BOOL)ignoreLimit;
 @property (nonatomic, readonly) NSUInteger countOfNewArticles;
 
 @end

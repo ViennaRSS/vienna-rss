@@ -432,13 +432,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         }
         [myRequest setUserInfo:@{@"folder": folder, @"log": aItem, @"type": @(MA_Refresh_Feed)}];
         [myRequest addValue:@"application/rss+xml,application/rdf+xml,application/atom+xml,text/xml,application/xml,application/xhtml+xml;q=0.9,text/html;q=0.8,*/*;q=0.5" forHTTPHeaderField:@"Accept"];
-	} else { // Open Reader feed
-		myRequest = [[OpenReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
-	}
-	// hack for handling file:// URLs
-	//if (url.fileURL) {
-		//[self folderRefreshCompleted:myRequest];
-	//} else {
+
         __weak typeof(self) weakSelf = self;
 		[self addConnection:myRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { 
 		    if (error) {
@@ -447,6 +441,13 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 		        [weakSelf folderRefreshCompleted:myRequest response:response data:data];
 		    }
 		}];
+	} else { // Open Reader feed
+		[[OpenReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
+	}
+	// hack for handling file:// URLs
+	//if (url.fileURL) {
+		//[self folderRefreshCompleted:myRequest];
+	//} else {
 		if (!hasStarted)
 		{
 			hasStarted = YES;
@@ -1126,7 +1127,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
  * Add the specified connection to the connections queue
  * that we manage.
  */
--(void)addConnection:(NSMutableURLRequest *)urlRequest completionHandler:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completionHandler
+-(NSOperation *)addConnection:(NSMutableURLRequest *)urlRequest completionHandler:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completionHandler
 {
     TRVSURLSessionOperation * op = [[TRVSURLSessionOperation alloc] initWithSession:self.urlSession request:urlRequest completionHandler:completionHandler];
     NSOperation *completionOperation = [NSBlockOperation blockOperationWithBlock:^{
@@ -1151,6 +1152,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         countOfNewArticles = 0;
         [networkQueue setSuspended:NO];
     }
+    return op;
 }
 
 /* suspendConnectionsQueue
