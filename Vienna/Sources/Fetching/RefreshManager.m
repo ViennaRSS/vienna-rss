@@ -502,58 +502,44 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 		favIconPath = [NSString stringWithFormat:@"%@/favicon.ico", folder.homePage.trim.baseURL];
 	} 
 
-	ASIHTTPRequest *myRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:favIconPath]];
-	myRequest.delegate = self;
-	myRequest.didFinishSelector = @selector(iconRequestDone:);
-	myRequest.didFailSelector = @selector(iconRequestFailed:);
-	myRequest.userInfo = @{@"folder": folder, @"log": aItem, @"type": @(MA_Refresh_FavIcon)};
-	[self addConnection:myRequest];
+	NSMutableURLRequest *myRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:favIconPath]];
+	__weak typeof(self) weakSelf = self;
+	[self addConnection:myRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+	    if (error) {
+            [aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS Icon:", nil),error.localizedDescription ]];
+            [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
+	    } else{
+            [weakSelf setFolderUpdatingFlag:folder flag:NO];
+            if (((NSHTTPURLResponse *)response).statusCode == 404) {
+                [aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
+            } else if (((NSHTTPURLResponse *)response).statusCode == 200) {
+        
+                NSImage * iconImage = [[NSImage alloc] initWithData:data];
+                if (iconImage != nil && iconImage.valid)
+                {
+                    iconImage.size = NSMakeSize(16, 16);
+                    folder.image = iconImage;
+            
+                    // Broadcast a notification since the folder image has now changed
+                    [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
+            
+                    // Log additional details about this.
+                    [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), myRequest.URL]];
 
-}
+                    NSString *byteCount = [NSByteCountFormatter stringFromByteCount:data.length
+                                                                         countStyle:NSByteCountFormatterCountStyleFile];
+                    [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%@ received", @"Number of bytes received, e.g. 1 MB received"), byteCount]];
+                } else {
+                    [aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
+                }
+            } else {
+                [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), ((NSHTTPURLResponse *)response).statusCode]];
+            }
 
-// success callback
-- (void)iconRequestDone:(ASIHTTPRequest *)request
-{
-	Folder * folder = (Folder *)request.userInfo[@"folder"];	
-	ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:folder.name];
-	[self setFolderUpdatingFlag:folder flag:NO];
-	if (request.responseStatusCode == 404) {
-		[aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
-	} else if (request.responseStatusCode == 200) {
-		
-		NSImage * iconImage = [[NSImage alloc] initWithData:[request responseData]];
-		if (iconImage != nil && iconImage.valid)
-		{
-			iconImage.size = NSMakeSize(16, 16);
-			folder.image = iconImage;
-			
-			// Broadcast a notification since the folder image has now changed
-			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
-			
-			// Log additional details about this.
-			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), request.url]];
+            [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];	    
+	    }
+	}];
 
-            NSString *byteCount = [NSByteCountFormatter stringFromByteCount:[request responseData].length
-                                                                 countStyle:NSByteCountFormatterCountStyleFile];
-            [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%@ received", @"Number of bytes received, e.g. 1 MB received"), byteCount]];
-		} else {
-		    [aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
-		}
-	} else {
-		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), request.responseStatusCode]];
-	}
-
-    [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
-
-}
-
-// failure callback
-- (void)iconRequestFailed:(ASIHTTPRequest *)request
-{
-	Folder * folder = (Folder *)request.userInfo[@"folder"];
-	ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:folder.name];
-	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS Icon:", nil),request.error.localizedDescription ]];
-    [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
 }
 
 - (void)syncFinishedForFolder:(Folder *)folder 
