@@ -931,6 +931,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 		    } else {
 		        [weakSelf subscriptionsRequestDone:subscriptionRequest response:response data:data];
 		    }
+		    weakSelf.statusMessage = @"";
         }
     ];
 
