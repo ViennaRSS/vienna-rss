@@ -1,6 +1,3 @@
-# ASIHTTPRequest
-github "ViennaRSS/ASIHTTPRequest" ~> 1.9
-
 # FMDB
 github "ccgus/fmdb" ~> 2.7
 

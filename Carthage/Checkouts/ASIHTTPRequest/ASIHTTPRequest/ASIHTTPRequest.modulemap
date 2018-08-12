@@ -1,6 +1,0 @@
-framework module ASIHTTPRequest {
-  umbrella header "ASIHTTPRequest-Framework.h"
-
-  export *
-  module * { export * }
-}

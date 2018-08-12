@@ -225,7 +225,6 @@
 		F6373A231F1D53B500ED3B09 /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6373A221F1D53B500ED3B09 /* MainWindow.swift */; };
 		F63833D81EF842EA00E07213 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63833D71EF842EA00E07213 /* MainWindowController.swift */; };
 		F63B71751ED252DD00CF9F32 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B71741ED252DD00CF9F32 /* GradientView.swift */; };
-		F645F9742083D4D20037B241 /* ASIHTTPRequest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDD2030604A006C9D72 /* ASIHTTPRequest.framework */; };
 		F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */; };
 		F64C2CCC1E83825D00ED4E04 /* DateFormatterExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */; };
 		F65D6D711E74619E00A30974 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4398241E1666B3DB00FFE219 /* Credits.rtf */; };
@@ -233,11 +232,8 @@
 		F67F6DE02030604A006C9D72 /* FMDB.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDB20306049006C9D72 /* FMDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F67F6DE12030604A006C9D72 /* MASPreferences.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDC20306049006C9D72 /* MASPreferences.framework */; };
 		F67F6DE22030604A006C9D72 /* MASPreferences.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDC20306049006C9D72 /* MASPreferences.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F67F6DE32030604A006C9D72 /* ASIHTTPRequest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDD2030604A006C9D72 /* ASIHTTPRequest.framework */; };
-		F67F6DE42030604A006C9D72 /* ASIHTTPRequest.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDD2030604A006C9D72 /* ASIHTTPRequest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F67F6DE52030604A006C9D72 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDE2030604A006C9D72 /* Sparkle.framework */; };
 		F67F6DE62030604A006C9D72 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDE2030604A006C9D72 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F67F6DEC203060B1006C9D72 /* ASIHTTPRequest.framework.dSYM in Copy Framework Symbols */ = {isa = PBXBuildFile; fileRef = F67F6DE8203060B0006C9D72 /* ASIHTTPRequest.framework.dSYM */; };
 		F67F6DED203060B1006C9D72 /* FMDB.framework.dSYM in Copy Framework Symbols */ = {isa = PBXBuildFile; fileRef = F67F6DE9203060B0006C9D72 /* FMDB.framework.dSYM */; };
 		F67F6DEE203060B1006C9D72 /* MASPreferences.framework.dSYM in Copy Framework Symbols */ = {isa = PBXBuildFile; fileRef = F67F6DEA203060B1006C9D72 /* MASPreferences.framework.dSYM */; };
 		F67F6DEF203060B1006C9D72 /* Sparkle.framework.dSYM in Copy Framework Symbols */ = {isa = PBXBuildFile; fileRef = F67F6DEB203060B1006C9D72 /* Sparkle.framework.dSYM */; };
@@ -336,7 +332,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F67F6DE42030604A006C9D72 /* ASIHTTPRequest.framework in Copy Frameworks */,
 				F67F6DE02030604A006C9D72 /* FMDB.framework in Copy Frameworks */,
 				F67F6DE22030604A006C9D72 /* MASPreferences.framework in Copy Frameworks */,
 				2FAA36422072F57500169C8A /* MMTabBarView.framework in Copy Frameworks */,
@@ -363,7 +358,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				F67F6DEC203060B1006C9D72 /* ASIHTTPRequest.framework.dSYM in Copy Framework Symbols */,
 				F67F6DED203060B1006C9D72 /* FMDB.framework.dSYM in Copy Framework Symbols */,
 				F67F6DEE203060B1006C9D72 /* MASPreferences.framework.dSYM in Copy Framework Symbols */,
 				F62152632083475800FEE960 /* MMTabBarView.framework.dSYM in Copy Framework Symbols */,
@@ -879,7 +873,6 @@
 		F664A9A2209EFEBF003B0F7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		F67F6DDB20306049006C9D72 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = Carthage/Build/Mac/FMDB.framework; sourceTree = "<group>"; };
 		F67F6DDC20306049006C9D72 /* MASPreferences.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASPreferences.framework; path = Carthage/Build/Mac/MASPreferences.framework; sourceTree = "<group>"; };
-		F67F6DDD2030604A006C9D72 /* ASIHTTPRequest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ASIHTTPRequest.framework; path = Carthage/Build/Mac/ASIHTTPRequest.framework; sourceTree = "<group>"; };
 		F67F6DDE2030604A006C9D72 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
 		F67F6DE8203060B0006C9D72 /* ASIHTTPRequest.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ASIHTTPRequest.framework.dSYM; path = Carthage/Build/Mac/ASIHTTPRequest.framework.dSYM; sourceTree = "<group>"; };
 		F67F6DE9203060B0006C9D72 /* FMDB.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = FMDB.framework.dSYM; path = Carthage/Build/Mac/FMDB.framework.dSYM; sourceTree = "<group>"; };
@@ -1213,7 +1206,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F645F9742083D4D20037B241 /* ASIHTTPRequest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1221,7 +1213,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F67F6DE32030604A006C9D72 /* ASIHTTPRequest.framework in Frameworks */,
 				F67F6DDF2030604A006C9D72 /* FMDB.framework in Frameworks */,
 				F67F6DE12030604A006C9D72 /* MASPreferences.framework in Frameworks */,
 				2FAA36402072F50B00169C8A /* MMTabBarView.framework in Frameworks */,
@@ -1349,7 +1340,6 @@
 			isa = PBXGroup;
 			children = (
 				F67F6DF0203060D9006C9D72 /* Symbols */,
-				F67F6DDD2030604A006C9D72 /* ASIHTTPRequest.framework */,
 				F67F6DDB20306049006C9D72 /* FMDB.framework */,
 				F67F6DDC20306049006C9D72 /* MASPreferences.framework */,
 				2FAA363F2072F50B00169C8A /* MMTabBarView.framework */,
