@@ -172,8 +172,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	static BOOL doneSafeInit = NO;
 	if (!doneSafeInit)
 	{
-        [ASIHTTPRequest setDefaultUserAgentString:[NSString stringWithFormat:MA_DefaultUserAgentString, ((ViennaApp *)NSApp).applicationVersion.firstWord]];
-        
 		[self.foldersTree initialiseFoldersTree];
 
 		Preferences * prefs = [Preferences standardPreferences];

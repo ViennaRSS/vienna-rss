@@ -20,7 +20,6 @@
 
 @import Foundation;
 
-NSString * MA_DefaultUserAgentString = @"Mozilla/5.0 Vienna/%@";
 NSString * MA_BrowserUserAgentString = @"(Macintosh; Intel Mac OS X %@) AppleWebKit/%@ (KHTML, like Gecko) Version/%@ Safari/604.1.38 Vienna/%@";
 
 NSString * MAPref_ArticleListFont = @"MessageListFont";

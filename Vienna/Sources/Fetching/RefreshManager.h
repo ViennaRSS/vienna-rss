@@ -18,7 +18,6 @@
 //  limitations under the License.
 //
 
-@import ASIHTTPRequest;
 @import Foundation;
 
 @class Database;
