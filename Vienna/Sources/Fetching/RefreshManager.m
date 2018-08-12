@@ -1171,7 +1171,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             [NSString stringWithFormat:@"%@: (%lu) - %@", NSLocalizedString(@"Queue", nil), (unsigned long)networkQueue.operationCount,
              NSLocalizedString(@"Refreshing subscriptions…", nil)];
     }
-    self.statusMessage = statusMessageDuringRefresh;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.statusMessage = self->statusMessageDuringRefresh;
+    });
 }
 
 -(void)finishConnectionQueue
