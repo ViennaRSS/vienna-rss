@@ -550,34 +550,38 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 																		object:@(folder.itemId)];
 }
 
-/* folderRefreshRedirect
- * Called when a folder refresh is being redirected.
- */
--(void)folderRefreshRedirect:(ASIHTTPRequest *)connector
+#pragma mark NSURLSession redirection delegate
+-(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task willPerformHTTPRedirection:(NSHTTPURLResponse *)response newRequest:(
+        NSURLRequest *)newRequest completionHandler:(void (^)(NSURLRequest *))completionHandler
 {
-
-	NSURL *newURL = [NSURL URLWithString:[connector.responseHeaders valueForKey:@"Location"] relativeToURL:connector.url];
-	NSInteger responseStatusCode = connector.responseStatusCode;
-
-	[connector redirectToURL:newURL];
-	if (responseStatusCode == 301)
-	{
-		// We got a permanent redirect from the feed so we probably need to change the feed URL to the new location.
-		[self verify301Status:connector];
-	}
+    completionHandler(newRequest);
+    NSMutableURLRequest *originalRequest = (NSMutableURLRequest *)task.originalRequest;
+    if ([originalRequest userInfo] != nil) {
+        Folder *folder = (Folder *)[originalRequest userInfo][@"folder"];
+        NSInteger type = [[(NSDictionary *)[originalRequest userInfo] valueForKey:@"type"] integerValue];
+        if (((NSHTTPURLResponse *)response).statusCode == 301 && folder != nil && type == MA_Refresh_Feed) {
+            // We got a permanent redirect from the feed so we probably need to change the feed URL to the new location.
+            [self verify301Status:task];
+        }
+    }
 }
 
 // We got a permanent redirect from the feed
 // We check if we really need to change the feed URL to a new location
 // to avoid issue #380 : https://github.com/ViennaRSS/vienna-rss/issues/380
--(void)verify301Status:(ASIHTTPRequest *)connector
+-(void)verify301Status:(NSURLSessionTask *)task
 {
-    if (connector != nil) {
-        [self.redirect301WaitQueue addObject:connector];
+    NSMutableURLRequest *originalRequest = ((NSMutableURLRequest *)(task.originalRequest));
+    if (task != nil) {
+        // we might have successive redirections for one task
+        if ([self.redirect301WaitQueue containsObject:task]) {
+            [self.redirect301WaitQueue removeObject:task];
+        }
+        [self.redirect301WaitQueue addObject:task];
     }
 
-    NSURL *newURL = [NSURL URLWithString:[connector.responseHeaders valueForKey:@"Location"] relativeToURL:connector.url];
-    if ([newURL.host isEqualToString:connector.originalURL.host]) {
+    NSURL *newURL = task.currentRequest.URL;
+    if ([newURL.host isEqualToString:originalRequest.URL.host]) {
         [self validate301WaitQueue];
     }
 
@@ -589,28 +593,28 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             // there is no valid reason for
             // www.example.com to be permanently redirected
             // (cf RFC 6761 http://www.iana.org/go/rfc6761)
-            NSURL *testURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://www.example.com", connector.originalURL.scheme]];
-            ASIHTTPRequest *testRequest = [ASIHTTPRequest requestWithURL:testURL];
-            testRequest.delegate = nil;
-            __weak typeof(testRequest) weakRequest = testRequest;
-            [testRequest setFailedBlock:^{
-                             __strong typeof(weakRequest) strongRequest = weakRequest;
-                             LOG_EXPR([strongRequest responseHeaders]);
-                             LOG_EXPR([[NSString alloc] initWithData:[strongRequest responseData] encoding:NSUTF8StringEncoding]);
-                             [self void301WaitQueue];
-                         }];
-            [testRequest setCompletionBlock:^{
-                             __strong typeof(weakRequest) strongRequest = weakRequest;
-                             if (strongRequest.responseStatusCode == 301) {
+            NSURL *testURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://www.example.com", originalRequest.URL.scheme]];
+            NSMutableURLRequest *testRequest = [NSMutableURLRequest requestWithURL:testURL];
+            __weak typeof(self) weakSelf = self;
+            [self addConnection:testRequest 
+            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+            if (error) {
+                LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
+                LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                [weakSelf void301WaitQueue];
+            } else {
+                if (![((NSHTTPURLResponse *)response).URL.host isEqualToString:testRequest.URL.host]) {
                              // we probably have a misconfigured router / proxy
                              // which redirects permanently every site, even www.example.com
-                             [self void301WaitQueue];
+                             [weakSelf void301WaitQueue];
                              } else {
                              // we can now assume that 301 redirects we encounter are safe
-                             [self validate301WaitQueue];
+                             [weakSelf validate301WaitQueue];
                              }
-                         }];
-            [self addConnection:testRequest];
+                
+            }
+
+            }];
         }
         break;
 
@@ -643,9 +647,10 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 -(void)purge301WaitQueue
 {
     for (id obj in [self.redirect301WaitQueue reverseObjectEnumerator]) {
-        ASIHTTPRequest *theConnector = (ASIHTTPRequest *)obj;
+        NSURLSessionTask *theConnector = (NSURLSessionTask *)obj;
+        NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
         [self.redirect301WaitQueue removeObject:obj];
-        ActivityItem *connectorItem = theConnector.userInfo[@"log"];
+        ActivityItem *connectorItem =((NSDictionary *)[originalRequest userInfo])[@"log"];
         [connectorItem appendDetail:NSLocalizedString(@"Redirection attempt treated as temporary for safety concern", nil)];
     }
 }
@@ -659,12 +664,13 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 -(void)process301WaitQueue
 {
     for (id obj in [self.redirect301WaitQueue reverseObjectEnumerator]) {
-        ASIHTTPRequest *theConnector = (ASIHTTPRequest *)obj;
+        NSURLSessionTask *theConnector = (NSURLSessionTask *)obj;
+        NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
         [self.redirect301WaitQueue removeObject:obj];
-        NSString *theNewURLString = theConnector.url.absoluteString;
-        Folder *theFolder = (Folder *)theConnector.userInfo[@"folder"];
+        NSString *theNewURLString = theConnector.originalRequest.URL.absoluteString;
+        Folder *theFolder = (Folder *)((NSDictionary *)[originalRequest userInfo])[@"folder"];
         [[Database sharedManager] setFeedURL:theNewURLString forFolder:theFolder.itemId];
-        ActivityItem *connectorItem = theConnector.userInfo[@"log"];
+        ActivityItem *connectorItem = ((NSDictionary *)[originalRequest userInfo])[@"log"];
         [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@",
                                                                                  nil), theNewURLString]];
     }

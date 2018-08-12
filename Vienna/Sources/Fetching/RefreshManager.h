@@ -47,7 +47,6 @@
 -(void)forceRefreshSubscriptionForFolders:(NSArray*)foldersArray;
 -(void)cancelAll;
 -(void)refreshFavIconForFolder:(Folder *)folder;
--(void)addConnection:(ASIHTTPRequest *)conn;
 -(NSOperation *)addConnection:(NSURLRequest *)conn completionHandler:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completionHandler;
 -(void)suspendConnectionsQueue;
 -(void)resumeConnectionsQueue;
