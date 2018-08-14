@@ -87,6 +87,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 		networkQueue.maxConcurrentOperationCount = [[Preferences standardPreferences] integerForKey:MAPref_ConcurrentDownloads];
 		NSURLSessionConfiguration * config = [NSURLSessionConfiguration defaultSessionConfiguration];
 		config.timeoutIntervalForRequest = 180;
+		config.URLCache = nil;
 		_urlSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];
 
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
