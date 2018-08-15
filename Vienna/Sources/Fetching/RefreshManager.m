@@ -160,6 +160,35 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     }
 }
 
+/* handleGotAuthenticationForFolder [delegate]
+ * Called when somewhere just provided us the needed authentication for the specified
+ * folder. Note that we don't know if the authentication is valid yet - just that a
+ * user name and password has been provided.
+ */
+-(void)handleGotAuthenticationForFolder:(NSNotification *)nc
+{
+    Folder * folder = (Folder *)nc.object;
+    [[Database sharedManager] clearFlag:VNAFolderFlagNeedCredentials forFolder:folder.itemId];
+    [authQueue removeObject:folder];
+    [self refreshSubscriptions:@[folder] ignoringSubscriptionStatus:YES];
+
+    // Get the next one in the queue, if any
+    [self getCredentialsForFolder];
+}
+
+/* handleCancelAuthenticationForFolder
+ * Called when somewhere cancelled our request to authenticate the specified
+ * folder.
+ */
+-(void)handleCancelAuthenticationForFolder:(NSNotification *)nc
+{
+    Folder * folder = (Folder *)nc.object;
+    [authQueue removeObject:folder];
+
+    // Get the next one in the queue, if any
+    [self getCredentialsForFolder];
+}
+
 -(void)forceRefreshSubscriptionForFolders:(NSArray *)foldersArray
 {
     statusMessageDuringRefresh = NSLocalizedString(@"Forcing Refresh subscriptions…", nil);
@@ -290,35 +319,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     }
 }
 
-/* handleCancelAuthenticationForFolder
- * Called when somewhere cancelled our request to authenticate the specified
- * folder.
- */
--(void)handleCancelAuthenticationForFolder:(NSNotification *)nc
-{
-    Folder * folder = (Folder *)nc.object;
-    [authQueue removeObject:folder];
-
-    // Get the next one in the queue, if any
-    [self getCredentialsForFolder];
-}
-
-/* handleGotAuthenticationForFolder [delegate]
- * Called when somewhere just provided us the needed authentication for the specified
- * folder. Note that we don't know if the authentication is valid yet - just that a
- * user name and password has been provided.
- */
--(void)handleGotAuthenticationForFolder:(NSNotification *)nc
-{
-    Folder * folder = (Folder *)nc.object;
-    [[Database sharedManager] clearFlag:VNAFolderFlagNeedCredentials forFolder:folder.itemId];
-    [authQueue removeObject:folder];
-    [self refreshSubscriptions:@[folder] ignoringSubscriptionStatus:YES];
-
-    // Get the next one in the queue, if any
-    [self getCredentialsForFolder];
-}
-
 /* setFolderErrorFlag
  * Sets or clears the folder error flag then broadcasts an update indicating that the folder
  * has changed.
@@ -346,6 +346,71 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     }
     [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
 }
+
+/* pumpFolderIconRefresh
+ * Initiate a connect to refresh the icon for a folder.
+ */
+-(void)pumpFolderIconRefresh:(Folder *)folder
+{
+    // The activity log name we use depends on whether or not this folder has a real name.
+    NSString * name = [folder.name isEqualToString:[Database untitledFeedFolderName]] ? folder.feedURL : folder.name;
+    ActivityItem *aItem = [[ActivityLog defaultLog] itemByName:name];
+
+    NSString * favIconPath;
+
+    if (folder.type == VNAFolderTypeRSS) {
+        [aItem appendDetail:NSLocalizedString(@"Retrieving folder image", nil)];
+        favIconPath = [NSString stringWithFormat:@"%@/favicon.ico", folder.homePage.trim.baseURL];
+    } else {     // Open Reader feed
+        [aItem appendDetail:NSLocalizedString(@"Retrieving folder image for Open Reader Feed", nil)];
+        favIconPath = [NSString stringWithFormat:@"%@/favicon.ico", folder.homePage.trim.baseURL];
+    }
+
+    NSMutableURLRequest *myRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:favIconPath]];
+    __weak typeof(self)weakSelf = self;
+    [self addConnection:myRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error) {
+                [aItem appendDetail:[NSString stringWithFormat:@"%@ %@",
+                                     NSLocalizedString(@"Error retrieving RSS Icon:", nil), error.localizedDescription ]];
+                [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
+            } else {
+                [weakSelf setFolderUpdatingFlag:folder flag:NO];
+                if (((NSHTTPURLResponse *)response).statusCode == 404) {
+                    [aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
+                } else if (((NSHTTPURLResponse *)response).statusCode == 200) {
+                    NSImage *iconImage = [[NSImage alloc] initWithData:data];
+                    if (iconImage != nil && iconImage.valid) {
+                        iconImage.size = NSMakeSize(16, 16);
+                        folder.image = iconImage;
+
+                        // Broadcast a notification since the folder image has now changed
+                        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:
+                         @"MA_Notify_FoldersUpdated"
+                                                                                            object:@(folder.itemId)];
+
+                        // Log additional details about this.
+                        [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@",
+                                                                                         nil), myRequest.URL]];
+
+                        NSString * byteCount = [NSByteCountFormatter stringFromByteCount:data.length
+                                                                              countStyle:NSByteCountFormatterCountStyleFile];
+                        [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%@ received",
+                                                                                         @"Number of bytes received, e.g. 1 MB received"),
+                                             byteCount]];
+                    } else {
+                        [aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
+                    }
+                } else {
+                    [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server",
+                                                                                     nil), ((NSHTTPURLResponse *)response).statusCode]];
+                }
+
+                [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
+            }
+    }];
+} // pumpFolderIconRefresh
+
+#pragma mark Core of feed refresh
 
 /* pumpSubscriptionRefresh
  * Pick the folder at the head of the refresh queue and spawn a connection to
@@ -462,208 +527,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     [aItem setStatus:NSLocalizedString(@"Error", nil)];
     [self syncFinishedForFolder:folder];
 } // folderRefreshFailed
-
-/* pumpFolderIconRefresh
- * Initiate a connect to refresh the icon for a folder.
- */
--(void)pumpFolderIconRefresh:(Folder *)folder
-{
-    // The activity log name we use depends on whether or not this folder has a real name.
-    NSString * name = [folder.name isEqualToString:[Database untitledFeedFolderName]] ? folder.feedURL : folder.name;
-    ActivityItem *aItem = [[ActivityLog defaultLog] itemByName:name];
-
-    NSString * favIconPath;
-
-    if (folder.type == VNAFolderTypeRSS) {
-        [aItem appendDetail:NSLocalizedString(@"Retrieving folder image", nil)];
-        favIconPath = [NSString stringWithFormat:@"%@/favicon.ico", folder.homePage.trim.baseURL];
-    } else {     // Open Reader feed
-        [aItem appendDetail:NSLocalizedString(@"Retrieving folder image for Open Reader Feed", nil)];
-        favIconPath = [NSString stringWithFormat:@"%@/favicon.ico", folder.homePage.trim.baseURL];
-    }
-
-    NSMutableURLRequest *myRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:favIconPath]];
-    __weak typeof(self)weakSelf = self;
-    [self addConnection:myRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            if (error) {
-                [aItem appendDetail:[NSString stringWithFormat:@"%@ %@",
-                                     NSLocalizedString(@"Error retrieving RSS Icon:", nil), error.localizedDescription ]];
-                [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
-            } else {
-                [weakSelf setFolderUpdatingFlag:folder flag:NO];
-                if (((NSHTTPURLResponse *)response).statusCode == 404) {
-                    [aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
-                } else if (((NSHTTPURLResponse *)response).statusCode == 200) {
-                    NSImage *iconImage = [[NSImage alloc] initWithData:data];
-                    if (iconImage != nil && iconImage.valid) {
-                        iconImage.size = NSMakeSize(16, 16);
-                        folder.image = iconImage;
-
-                        // Broadcast a notification since the folder image has now changed
-                        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:
-                         @"MA_Notify_FoldersUpdated"
-                                                                                            object:@(folder.itemId)];
-
-                        // Log additional details about this.
-                        [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@",
-                                                                                         nil), myRequest.URL]];
-
-                        NSString * byteCount = [NSByteCountFormatter stringFromByteCount:data.length
-                                                                              countStyle:NSByteCountFormatterCountStyleFile];
-                        [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%@ received",
-                                                                                         @"Number of bytes received, e.g. 1 MB received"),
-                                             byteCount]];
-                    } else {
-                        [aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
-                    }
-                } else {
-                    [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server",
-                                                                                     nil), ((NSHTTPURLResponse *)response).statusCode]];
-                }
-
-                [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
-            }
-    }];
-} // pumpFolderIconRefresh
-
--(void)syncFinishedForFolder:(Folder *)folder
-{
-    [self setFolderUpdatingFlag:folder flag:NO];
-    // Unread count may have changed
-    [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
-                                                                        object:@(folder.itemId)];
-}
-
-#pragma mark NSURLSession redirection delegate
--(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task willPerformHTTPRedirection:(NSHTTPURLResponse *)response newRequest:(
-        NSURLRequest *)newRequest completionHandler:(void (^)(NSURLRequest *))completionHandler
-{
-    completionHandler(newRequest);
-    NSMutableURLRequest *originalRequest = (NSMutableURLRequest *)task.originalRequest;
-    if ([originalRequest userInfo] != nil) {
-        Folder * folder = (Folder *)[originalRequest userInfo][@"folder"];
-        NSInteger type = [[(NSDictionary *)[originalRequest userInfo] valueForKey:@"type"] integerValue];
-        if (((NSHTTPURLResponse *)response).statusCode == 301 && folder != nil && type == MA_Refresh_Feed) {
-            // We got a permanent redirect from the feed so we probably need to change the feed URL to the new location.
-            [self verify301Status:task];
-        }
-    }
-}
-
-// We got a permanent redirect from the feed
-// We check if we really need to change the feed URL to a new location
-// to avoid issue #380 : https://github.com/ViennaRSS/vienna-rss/issues/380
--(void)verify301Status:(NSURLSessionTask *)task
-{
-    NSMutableURLRequest *originalRequest = ((NSMutableURLRequest *)(task.originalRequest));
-    if (task != nil) {
-        // we might have successive redirections for one task
-        if ([self.redirect301WaitQueue containsObject:task]) {
-            [self.redirect301WaitQueue removeObject:task];
-        }
-        [self.redirect301WaitQueue addObject:task];
-    }
-
-    NSURL * newURL = task.currentRequest.URL;
-    if ([newURL.host isEqualToString:originalRequest.URL.host]) {
-        [self validate301WaitQueue];
-    }
-
-
-    switch (self.redirect301Status) {
-        case HTTP301Unknown: {
-            self.redirect301Status = HTTP301Pending;
-            // build a test request, assuming that
-            // there is no valid reason for
-            // www.example.com to be permanently redirected
-            // (cf RFC 6761 http://www.iana.org/go/rfc6761)
-            NSURL * testURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://www.example.com", originalRequest.URL.scheme]];
-            NSMutableURLRequest *testRequest = [NSMutableURLRequest requestWithURL:testURL];
-            __weak typeof(self)weakSelf = self;
-            [self   addConnection:testRequest
-                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                    if (error) {
-                    LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
-                    LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-                    [weakSelf void301WaitQueue];
-                    } else {
-                    if (![((NSHTTPURLResponse *)response).URL.host isEqualToString:testRequest.URL.host]) {
-                        // we probably have a misconfigured router / proxy
-                        // which redirects permanently every site, even www.example.com
-                        [weakSelf void301WaitQueue];
-                    } else {
-                        // we can now assume that 301 redirects we encounter are safe
-                        [weakSelf validate301WaitQueue];
-                    }
-                    }
-                }];
-        }
-        break;
-
-        case HTTP301Pending:
-            break;
-
-        case HTTP301Unsafe:
-            [self purge301WaitQueue];
-            break;
-
-        case HTTP301Safe:
-            [self process301WaitQueue];
-            break;
-    } /* switch */
-} /* verify301Status */
-
--(void)void301WaitQueue
-{
-    self.redirect301Status = HTTP301Unsafe;
-    // we will not consider 301 redirections as permanent for 24 hours
-    self.unsafe301RedirectionTimer = [NSTimer scheduledTimerWithTimeInterval:24 * 3600
-                                                                      target:self
-                                                                    selector:@selector(reset301Status:)
-                                                                    userInfo:nil
-                                                                     repeats:NO];
-    self.riskyIPAddress = [NSHost currentHost].address;
-    [self purge301WaitQueue];
-}
-
--(void)purge301WaitQueue
-{
-    for (id obj in [self.redirect301WaitQueue reverseObjectEnumerator]) {
-        NSURLSessionTask *theConnector = (NSURLSessionTask *)obj;
-        NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
-        [self.redirect301WaitQueue removeObject:obj];
-        ActivityItem *connectorItem = ((NSDictionary *)[originalRequest userInfo])[@"log"];
-        [connectorItem appendDetail:NSLocalizedString(@"Redirection attempt treated as temporary for safety concern", nil)];
-    }
-}
-
--(void)validate301WaitQueue
-{
-    self.redirect301Status = HTTP301Safe;
-    [self process301WaitQueue];
-}
-
--(void)process301WaitQueue
-{
-    for (id obj in [self.redirect301WaitQueue reverseObjectEnumerator]) {
-        NSURLSessionTask *theConnector = (NSURLSessionTask *)obj;
-        NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
-        [self.redirect301WaitQueue removeObject:obj];
-        NSString * theNewURLString = theConnector.originalRequest.URL.absoluteString;
-        Folder * theFolder = (Folder *)((NSDictionary *)[originalRequest userInfo])[@"folder"];
-        [[Database sharedManager] setFeedURL:theNewURLString forFolder:theFolder.itemId];
-        ActivityItem *connectorItem = ((NSDictionary *)[originalRequest userInfo])[@"log"];
-        [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@",
-                                                                                 nil), theNewURLString]];
-    }
-}
-
--(void)reset301Status:(NSTimer *)timer
-{
-    self.redirect301Status = HTTP301Unknown;
-    [timer invalidate];
-    timer = nil;
-}
 
 /* folderRefreshCompleted
  * Called when a folder refresh completed.
@@ -1080,6 +943,145 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     }
     return nil;
 } // getRedirectURL
+
+-(void)syncFinishedForFolder:(Folder *)folder
+{
+    [self setFolderUpdatingFlag:folder flag:NO];
+    // Unread count may have changed
+    [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
+                                                                        object:@(folder.itemId)];
+}
+
+#pragma mark NSURLSession redirection delegate
+-(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task willPerformHTTPRedirection:(NSHTTPURLResponse *)response newRequest:(
+        NSURLRequest *)newRequest completionHandler:(void (^)(NSURLRequest *))completionHandler
+{
+    completionHandler(newRequest);
+    NSMutableURLRequest *originalRequest = (NSMutableURLRequest *)task.originalRequest;
+    if ([originalRequest userInfo] != nil) {
+        Folder * folder = (Folder *)[originalRequest userInfo][@"folder"];
+        NSInteger type = [[(NSDictionary *)[originalRequest userInfo] valueForKey:@"type"] integerValue];
+        if (((NSHTTPURLResponse *)response).statusCode == 301 && folder != nil && type == MA_Refresh_Feed) {
+            // We got a permanent redirect from the feed so we probably need to change the feed URL to the new location.
+            [self verify301Status:task];
+        }
+    }
+}
+
+// We got a permanent redirect from the feed
+// We check if we really need to change the feed URL to a new location
+// to avoid issue #380 : https://github.com/ViennaRSS/vienna-rss/issues/380
+-(void)verify301Status:(NSURLSessionTask *)task
+{
+    NSMutableURLRequest *originalRequest = ((NSMutableURLRequest *)(task.originalRequest));
+    if (task != nil) {
+        // we might have successive redirections for one task
+        if ([self.redirect301WaitQueue containsObject:task]) {
+            [self.redirect301WaitQueue removeObject:task];
+        }
+        [self.redirect301WaitQueue addObject:task];
+    }
+
+    NSURL * newURL = task.currentRequest.URL;
+    if ([newURL.host isEqualToString:originalRequest.URL.host]) {
+        [self validate301WaitQueue];
+    }
+
+
+    switch (self.redirect301Status) {
+        case HTTP301Unknown: {
+            self.redirect301Status = HTTP301Pending;
+            // build a test request, assuming that
+            // there is no valid reason for
+            // www.example.com to be permanently redirected
+            // (cf RFC 6761 http://www.iana.org/go/rfc6761)
+            NSURL * testURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://www.example.com", originalRequest.URL.scheme]];
+            NSMutableURLRequest *testRequest = [NSMutableURLRequest requestWithURL:testURL];
+            __weak typeof(self)weakSelf = self;
+            [self   addConnection:testRequest
+                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                    if (error) {
+                    LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
+                    LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                    [weakSelf void301WaitQueue];
+                    } else {
+                    if (![((NSHTTPURLResponse *)response).URL.host isEqualToString:testRequest.URL.host]) {
+                        // we probably have a misconfigured router / proxy
+                        // which redirects permanently every site, even www.example.com
+                        [weakSelf void301WaitQueue];
+                    } else {
+                        // we can now assume that 301 redirects we encounter are safe
+                        [weakSelf validate301WaitQueue];
+                    }
+                    }
+                }];
+        }
+        break;
+
+        case HTTP301Pending:
+            break;
+
+        case HTTP301Unsafe:
+            [self purge301WaitQueue];
+            break;
+
+        case HTTP301Safe:
+            [self process301WaitQueue];
+            break;
+    } /* switch */
+} /* verify301Status */
+
+-(void)void301WaitQueue
+{
+    self.redirect301Status = HTTP301Unsafe;
+    // we will not consider 301 redirections as permanent for 24 hours
+    self.unsafe301RedirectionTimer = [NSTimer scheduledTimerWithTimeInterval:24 * 3600
+                                                                      target:self
+                                                                    selector:@selector(reset301Status:)
+                                                                    userInfo:nil
+                                                                     repeats:NO];
+    self.riskyIPAddress = [NSHost currentHost].address;
+    [self purge301WaitQueue];
+}
+
+-(void)purge301WaitQueue
+{
+    for (id obj in [self.redirect301WaitQueue reverseObjectEnumerator]) {
+        NSURLSessionTask *theConnector = (NSURLSessionTask *)obj;
+        NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
+        [self.redirect301WaitQueue removeObject:obj];
+        ActivityItem *connectorItem = ((NSDictionary *)[originalRequest userInfo])[@"log"];
+        [connectorItem appendDetail:NSLocalizedString(@"Redirection attempt treated as temporary for safety concern", nil)];
+    }
+}
+
+-(void)validate301WaitQueue
+{
+    self.redirect301Status = HTTP301Safe;
+    [self process301WaitQueue];
+}
+
+-(void)process301WaitQueue
+{
+    for (id obj in [self.redirect301WaitQueue reverseObjectEnumerator]) {
+        NSURLSessionTask *theConnector = (NSURLSessionTask *)obj;
+        NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
+        [self.redirect301WaitQueue removeObject:obj];
+        NSString * theNewURLString = theConnector.originalRequest.URL.absoluteString;
+        Folder * theFolder = (Folder *)((NSDictionary *)[originalRequest userInfo])[@"folder"];
+        [[Database sharedManager] setFeedURL:theNewURLString forFolder:theFolder.itemId];
+        ActivityItem *connectorItem = ((NSDictionary *)[originalRequest userInfo])[@"log"];
+        [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@",
+                                                                                 nil), theNewURLString]];
+    }
+}
+
+-(void)reset301Status:(NSTimer *)timer
+{
+    self.redirect301Status = HTTP301Unknown;
+    [timer invalidate];
+    timer = nil;
+}
 
 #pragma mark Network queue management
 
