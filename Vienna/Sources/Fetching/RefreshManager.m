@@ -752,6 +752,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 	else	//other HTTP response codes like 404, 403...
 	{
 		[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), responseStatusCode]];
+		[connectorItem appendDetail:[NSHTTPURLResponse localizedStringForStatusCode:responseStatusCode]];
         dispatch_async(dispatch_get_main_queue(), ^{
             [connectorItem setStatus:NSLocalizedString(@"Error", nil)];
         });
