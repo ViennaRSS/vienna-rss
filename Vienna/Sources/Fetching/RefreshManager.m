@@ -445,16 +445,11 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 	} else { // Open Reader feed
 		[[OpenReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
 	}
-	// hack for handling file:// URLs
-	//if (url.fileURL) {
-		//[self folderRefreshCompleted:myRequest];
-	//} else {
 		if (!hasStarted)
 		{
 			hasStarted = YES;
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
 		}
-	//}
 }
 
 
@@ -694,10 +689,11 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 		
 	Folder * folder = (Folder *)((NSDictionary *)[connector userInfo])[@"folder"];
 	ActivityItem *connectorItem = ((NSDictionary *)[connector userInfo])[@"log"];
-	NSInteger responseStatusCode = ((NSHTTPURLResponse *)response).statusCode;
 	NSURL *url = connector.URL;
 	NSInteger folderId = folder.itemId;
 	Database * dbManager = [Database sharedManager];
+	NSInteger responseStatusCode;
+	NSString * lastModifiedString;
 	
      // hack for handling file:// URLs
 	if (url.fileURL)
@@ -708,9 +704,13 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 		if ([fileManager fileExistsAtPath:filePath isDirectory:&isDirectory] && !isDirectory)
 		{
         	responseStatusCode = 200;
+        	lastModifiedString = [[fileManager attributesOfItemAtPath:filePath error:nil] fileModificationDate].description;
 		} else {
 			responseStatusCode = 404;
 		}
+	} else {
+	    responseStatusCode = ((NSHTTPURLResponse *)response).statusCode;
+	    lastModifiedString = SafeString([((NSHTTPURLResponse *)response).allHeaderFields valueForKey:@"Last-Modified"]);
 	}
 	
 	if (responseStatusCode == 304)
@@ -738,8 +738,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 	else if (responseStatusCode == 200 || responseStatusCode == 226)
 	{
 				
-		NSString * lastModifiedString = SafeString([((NSHTTPURLResponse *)response).allHeaderFields valueForKey:@"Last-Modified"]);
-		
 		if (receivedData != nil)
 		{
             [self finalizeFolderRefresh:@{
