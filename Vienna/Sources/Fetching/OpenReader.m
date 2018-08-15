@@ -163,18 +163,20 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     }
 
     if (self.openReaderStatus == fullyAuthenticated || self.openReaderStatus == waitingTToken || self.openReaderStatus == missingTToken) {
-        [clientRequest addValue:[NSString stringWithFormat:@"GoogleLogin auth=%@", self.clientAuthToken] forHTTPHeaderField:@"Authorization"];
-        return; //we are already connected
+        [clientRequest addValue:[NSString stringWithFormat:@"GoogleLogin auth=%@",
+                                 self.clientAuthToken] forHTTPHeaderField:@"Authorization"];
+        return;     //we are already connected
     } else if ((self.openReaderStatus == waitingClientToken) && clientAuthOperation != nil && !clientAuthOperation.isFinished) {
         dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        [clientRequest addValue:[NSString stringWithFormat:@"GoogleLogin auth=%@", self.clientAuthToken] forHTTPHeaderField:@"Authorization"];
+        [clientRequest addValue:[NSString stringWithFormat:@"GoogleLogin auth=%@",
+                                 self.clientAuthToken] forHTTPHeaderField:@"Authorization"];
         return;
     } else {
         // start first authentication
         self.openReaderStatus = waitingClientToken;
 
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost]];
-        NSMutableURLRequest * myRequest = [NSMutableURLRequest requestWithURL:url];
+        NSMutableURLRequest *myRequest = [NSMutableURLRequest requestWithURL:url];
         myRequest.HTTPMethod = @"POST";
 
         [self configureForSpecificHost];
@@ -188,47 +190,46 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
         // semaphore with count equal to zero for synchronizing completion of work
         sema = dispatch_semaphore_create(0);
-        
+
         clientAuthOperation = [NSBlockOperation blockOperationWithBlock:^(void) {
-        NSURLSessionDataTask * task = [[NSURLSession sharedSession] dataTaskWithRequest:myRequest
-        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            if (error) {
-            LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
-            LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-            [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
-            self.openReaderStatus = notAuthenticated;
-         } else {
-             if (((NSHTTPURLResponse *)response).statusCode != 200) {
-                LOG_EXPR(((NSHTTPURLResponse *)response).statusCode);
-                LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
-                [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
-                self.openReaderStatus = notAuthenticated;
-            } else { // statusCode 200
-                NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                NSArray *components = [response componentsSeparatedByString:@"\n"];
+            NSURLSessionDataTask * task = [[NSURLSession sharedSession] dataTaskWithRequest:myRequest
+                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                    if (error) {
+                        LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
+                        LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
+                        self.openReaderStatus = notAuthenticated;
+                    } else {
+                        if (((NSHTTPURLResponse *)response).statusCode != 200) {
+                            LOG_EXPR(((NSHTTPURLResponse *)response).statusCode);
+                            LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
+                            [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
+                            self.openReaderStatus = notAuthenticated;
+                        } else {         // statusCode 200
+                            NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                            NSArray *components = [response componentsSeparatedByString:@"\n"];
 
-                //NSString * sid = [[components objectAtIndex:0] substringFromIndex:4];		//unused
-                //NSString * lsid = [[components objectAtIndex:1] substringFromIndex:5];	//unused
-                self.clientAuthToken = [NSString stringWithString:[components[2] substringFromIndex:5]];
-                self.openReaderStatus = missingTToken;
+                            //NSString * sid = [[components objectAtIndex:0] substringFromIndex:4];		//unused
+                            //NSString * lsid = [[components objectAtIndex:1] substringFromIndex:5];	//unused
+                            self.clientAuthToken = [NSString stringWithString:[components[2] substringFromIndex:5]];
+                            self.openReaderStatus = missingTToken;
 
-                if (self.clientAuthTimer == nil || !self.clientAuthTimer.valid) {
-                    //new request every 6 days
-                    self.clientAuthTimer = [NSTimer scheduledTimerWithTimeInterval:6 * 24 * 3600
-                                                                            target:self
-                                                                          selector:@selector(resetAuthentication)
-                                                                          userInfo:nil
-                                                                           repeats:YES];
-                }
-            }
-        } // if error
+                            if (self.clientAuthTimer == nil || !self.clientAuthTimer.valid) {
+                                //new request every 6 days
+                                self.clientAuthTimer = [NSTimer scheduledTimerWithTimeInterval:6 * 24 * 3600
+                                                                                        target:self
+                                                                                      selector:@selector(resetAuthentication)
+                                                                                      userInfo:nil
+                                                                                       repeats:YES];
+                            }
+                        }
+                    }  // if error
 
-        // Signal that we are done
-        dispatch_semaphore_signal(sema);
+                    // Signal that we are done
+                    dispatch_semaphore_signal(sema);
 
-        }];
-
-        [task resume];
+            }];
+            [task resume];
 
         }];
 
@@ -300,47 +301,46 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         self.openReaderStatus = waitingTToken;
         [[RefreshManager sharedManager] suspendConnectionsQueue];
         tTokenOperation = [[RefreshManager sharedManager] addConnection:myRequest
-        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
-        if (error) {
-            LOG_EXPR(myRequest.URL);
-            LOG_EXPR(myRequest.allHTTPHeaderFields);
-            LOG_EXPR([[NSString alloc] initWithData:myRequest.HTTPBody encoding:NSUTF8StringEncoding]);
-            LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
-            LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-            self.tToken = nil;
-            self.openReaderStatus = missingTToken;
-            for (id obj in [self.tTokenWaitQueue reverseObjectEnumerator]) {
-                //[(ASIFormDataRequest *)obj cancel];
-                [self.tTokenWaitQueue removeObject:obj];
-            }
-        } else {
-            [[RefreshManager sharedManager] suspendConnectionsQueue];
-            self.tToken = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            self.openReaderStatus = fullyAuthenticated;
-            for (id obj in self.tTokenWaitQueue) {
-                [(NSMutableURLRequest *)obj setPostValue:self.tToken forKey:@"T"];
-            }
-            for (id obj in [self.tTokenWaitQueue reverseObjectEnumerator]) {
-                [self.tTokenWaitQueue removeObject:obj];
-            }
-            if (self.tTokenTimer == nil || !self.tTokenTimer.valid) {
-                //tokens expire after 30 minutes : renew them every 25 minutes
-                self.tTokenTimer = [NSTimer scheduledTimerWithTimeInterval:25 * 60
-                                                                    target:self
-                                                                  selector:@selector(renewTToken)
-                                                                  userInfo:nil
-                                                                   repeats:YES];
+            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                if (error) {
+                    LOG_EXPR(myRequest.URL);
+                    LOG_EXPR(myRequest.allHTTPHeaderFields);
+                    LOG_EXPR([[NSString alloc] initWithData:myRequest.HTTPBody encoding:NSUTF8StringEncoding]);
+                    LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
+                    LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                    self.tToken = nil;
+                    self.openReaderStatus = missingTToken;
+                    for (id obj in [self.tTokenWaitQueue reverseObjectEnumerator]) {
+                        [self.tTokenWaitQueue removeObject:obj];
+                    }
+                } else {
+                    [[RefreshManager sharedManager] suspendConnectionsQueue];
+                    self.tToken = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                    self.openReaderStatus = fullyAuthenticated;
+                    for (id obj in self.tTokenWaitQueue) {
+                        [(NSMutableURLRequest *)obj setPostValue:self.tToken forKey:@"T"];
+                    }
+                    for (id obj in [self.tTokenWaitQueue reverseObjectEnumerator]) {
+                        [self.tTokenWaitQueue removeObject:obj];
+                    }
+                    if (self.tTokenTimer == nil || !self.tTokenTimer.valid) {
+                        //tokens expire after 30 minutes : renew them every 25 minutes
+                        self.tTokenTimer = [NSTimer scheduledTimerWithTimeInterval:25 * 60
+                                                                            target:self
+                                                                          selector:@selector(renewTToken)
+                                                                          userInfo:nil
+                                                                           repeats:YES];
+                    }
+                    [[RefreshManager sharedManager] resumeConnectionsQueue];
                 }
-            [[RefreshManager sharedManager] resumeConnectionsQueue];
+        }];
+        if (clientRequest != nil) {
+            [clientRequest setInUserInfo:tTokenOperation forKey:@"dependency"];
+            [self.tTokenWaitQueue addObject:clientRequest];
         }
-      }];
-      if (clientRequest != nil) {
-        [clientRequest setInUserInfo:tTokenOperation forKey:@"dependency"];
-        [self.tTokenWaitQueue addObject:clientRequest];
-      }
-      [[RefreshManager sharedManager] resumeConnectionsQueue];
-    }
-}
+        [[RefreshManager sharedManager] resumeConnectionsQueue];
+    } // missingTToken
+} // getTokenForRequest
 
 -(void)renewTToken
 {
@@ -487,36 +487,35 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     [request3 setUserInfo:@{ @"folder": thisFolder, @"log": aItem }];
 
     __weak typeof(self) weakSelf = self;
-    NSOperation * op = [[RefreshManager sharedManager] addConnection:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (error) {
-            [weakSelf feedRequestFailed:request response:response error:error];
-        } else {
-            [weakSelf feedRequestDone:request response:response data:data];
-        }
+    NSOperation * op =
+        [[RefreshManager sharedManager] addConnection:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error) {
+                [weakSelf feedRequestFailed:request response:response error:error];
+            } else {
+                [weakSelf feedRequestDone:request response:response data:data];
+            }
     }];
 
     [[RefreshManager sharedManager] suspendConnectionsQueue];
 
-    NSOperation * op2 = [[RefreshManager sharedManager] addConnection:request2
-       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
-		    if (error) {
-		        [weakSelf requestFailed:request2 response:response error:error];
-		    } else {
-		        [weakSelf readRequestDone:request2 response:response data:data];
-		    }
-        }
-    ];
+    NSOperation * op2 =
+        [[RefreshManager sharedManager] addConnection:request2 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error) {
+                [weakSelf requestFailed:request2 response:response error:error];
+            } else {
+                [weakSelf readRequestDone:request2 response:response data:data];
+            }
+    }];
     [op2 addDependency:op];
 
-    NSOperation * op3 = [[RefreshManager sharedManager] addConnection:request3
-       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
-		    if (error) {
+    NSOperation * op3 =
+        [[RefreshManager sharedManager] addConnection:request3 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error) {
                 [weakSelf requestFailed:request3 response:response error:error];
-		    } else {
-		        [weakSelf starredRequestDone:request2 response:response data:data];
-		    }
-        }
-    ];
+            } else {
+                [weakSelf starredRequestDone:request2 response:response data:data];
+            }
+    }];
     [op3 addDependency:op2];
 
     [[RefreshManager sharedManager] resumeConnectionsQueue];
@@ -571,7 +570,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             {
                 LOG_EXPR(request.URL);
                 NSLog(@"Feed name: %@", subscriptionsDict[@"title"]);
-                NSLog(@"Last Check: %@",((NSDictionary *)[request userInfo])[@"lastupdatestring"]);
+                NSLog(@"Last Check: %@", ((NSDictionary *)[request userInfo])[@"lastupdatestring"]);
                 NSLog(@"Last update: %@", folderLastUpdateString);
                 NSLog(@"Found %lu items", (unsigned long)[subscriptionsDict[@"items"] count]);
                 LOG_EXPR(subscriptionsDict);
@@ -772,8 +771,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 [[RefreshManager sharedManager] refreshFavIconForFolder:refreshedFolder];
             }
         } else { //response status other than OK (200)
-            [aItem appendDetail:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Error",
-                                                                                       nil), [NSHTTPURLResponse localizedStringForStatusCode:((NSHTTPURLResponse *)response).statusCode]]];
+            [aItem appendDetail:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Error", nil),
+                                    [NSHTTPURLResponse localizedStringForStatusCode:((NSHTTPURLResponse *)response).statusCode]]];
             [aItem setStatus:NSLocalizedString(@"Error", nil)];
             [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
             [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
@@ -823,8 +822,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
             } // try/catch
         } else { //response status other than OK (200)
-            [aItem appendDetail:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Error",
-                                                                                       nil), [NSHTTPURLResponse localizedStringForStatusCode:((NSHTTPURLResponse *)response).statusCode]]];
+            [aItem appendDetail:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Error", nil),
+                                    [NSHTTPURLResponse localizedStringForStatusCode:((NSHTTPURLResponse *)response).statusCode]]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [aItem setStatus:NSLocalizedString(@"Error", nil)];
             });
@@ -906,7 +905,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         [googleFeeds addObject:feedURL];
     }
 
-    
+
     if (subscriptionsDict[@"subscription"] != nil) { // detect probable authentication error
         //check if we have a folder which is not registered as a Open Reader feed
         for (Folder *f in APPCONTROLLER.folders) {
@@ -915,7 +914,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             }
         }
     }
-
 } // subscriptionsRequestDone
 
 -(void)loadSubscriptions
@@ -923,15 +921,15 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     NSMutableURLRequest *subscriptionRequest =
         [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json", APIBaseURL,
                                                    ClientName]]];
-     __weak typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:subscriptionRequest
-       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
-		    if (error) {
+        completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error) {
                 [weakSelf requestFailed:subscriptionRequest response:response error:error];
-		    } else {
-		        [weakSelf subscriptionsRequestDone:subscriptionRequest response:response data:data];
-		    }
-		    weakSelf.statusMessage = @"";
+            } else {
+                [weakSelf subscriptionsRequestDone:subscriptionRequest response:response data:data];
+            }
+            weakSelf.statusMessage = @"";
         }
     ];
 
@@ -946,14 +944,14 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     [request setPostValue:feedURL forKey:@"quickadd"];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:request
-        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
-		    if (error) {
+        completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error) {
                 [weakSelf requestFailed:request response:response error:error];
-		    } else {
-		        [weakSelf requestFinished:request response:response data:data];
-		    }
+            } else {
+                [weakSelf requestFinished:request response:response data:data];
+            }
         }
-     ];
+    ];
 }
 
 -(void)unsubscribeFromFeed:(NSString *)feedURL
@@ -964,12 +962,12 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     [myRequest setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:myRequest
-       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
-		    if (error) {
+        completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error) {
                 [weakSelf requestFailed:myRequest response:response error:error];
-		    } else {
-		        [weakSelf requestFinished:myRequest response:response data:data];
-		    }
+            } else {
+                [weakSelf requestFinished:myRequest response:response data:data];
+            }
         }
     ];
 }
@@ -988,15 +986,14 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", folderName] forKey:flag ? @"a" : @"r"];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:request
-        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
-		    if (error) {
+        completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error) {
                 [weakSelf requestFailed:request response:response error:error];
-		    } else {
-		        [weakSelf requestFinished:request response:response data:data];
-		    }
+            } else {
+                [weakSelf requestFinished:request response:response data:data];
+            }
         }
-     ];
-
+    ];
 }
 
 -(void)markRead:(Article *)article readFlag:(BOOL)flag
@@ -1013,15 +1010,15 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     [myRequest setUserInfo:@{ @"article": article, @"readFlag": @(flag) }];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:myRequest
-       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
-		    if (error) {
-		        [weakSelf requestFailed:myRequest response:response error:error];
-		    } else {
-		        [weakSelf markReadDone:myRequest response:response data:data];
-		    }
+        completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error) {
+                [weakSelf requestFailed:myRequest response:response error:error];
+            } else {
+                [weakSelf markReadDone:myRequest response:response data:data];
+            }
         }
     ];
-}
+} // markRead
 
 // callback : we check if the server did confirm the read status change
 -(void)markReadDone:(NSMutableURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data
@@ -1051,15 +1048,15 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     [myRequest setPostValue:article.guid forKey:@"i"];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:myRequest
-       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
-		    if (error) {
+        completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error) {
                 [weakSelf requestFailed:myRequest response:response error:error];
-		    } else {
-		        [weakSelf requestFinished:myRequest response:response data:data];
-		    }
+            } else {
+                [weakSelf requestFinished:myRequest response:response data:data];
+            }
         }
-     ];
-}
+    ];
+} // markStarred
 
 -(void)createNewSubscription:(NSArray *)params
 {
