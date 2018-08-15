@@ -296,18 +296,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 	}
 }
 
-/* handleRequireAuthenticationForFolder [delegate]
- * Called when somewhere requires us to provide authentication for the specified
- * folder.
- */
--(void)handleRequireAuthenticationForFolder:(NSNotification *)nc
-{
-	Folder * folder = (Folder *)nc.object;
-	if (![authQueue containsObject:folder])
-		[authQueue addObject:folder];
-	[self getCredentialsForFolder];
-}
-
 /* handleCancelAuthenticationForFolder
  * Called when somewhere cancelled our request to authenticate the specified
  * folder.
