@@ -1007,7 +1007,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     }
     [myRequest setPostValue:@"true" forKey:@"async"];
     [myRequest setPostValue:article.guid forKey:@"i"];
-    [myRequest setUserInfo:@{ @"article": article, @"readFlag": @(flag) }];
+    [myRequest addInfoFromDictionary:@{ @"article": article, @"readFlag": @(flag) }];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:myRequest
         completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {

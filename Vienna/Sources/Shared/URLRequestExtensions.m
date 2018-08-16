@@ -35,6 +35,19 @@
                      inRequest:self];
 }
 
+-(void)addInfoFromDictionary:(NSDictionary *)additionalDictionary
+{
+    NSDictionary *currentDict = [NSURLProtocol propertyForKey:NSStringFromSelector(@selector(userInfo)) inRequest:self];
+    if (currentDict == nil) {
+        [NSURLProtocol setProperty:additionalDictionary forKey:NSStringFromSelector(@selector(userInfo)) inRequest:self];
+    } else {
+        NSMutableDictionary *workingDict = [NSMutableDictionary dictionaryWithDictionary:currentDict];
+        [workingDict addEntriesFromDictionary:additionalDictionary];
+        [NSURLProtocol setProperty:[NSDictionary dictionaryWithDictionary:workingDict] forKey:NSStringFromSelector(@selector(userInfo))
+                         inRequest:self];
+    }
+}
+
 @end
 
 // create or extend HTTP body (for "application/x-www-form-urlencoded" content type)
