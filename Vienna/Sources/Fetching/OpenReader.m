@@ -310,9 +310,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                     self.tToken = nil;
                     self.openReaderStatus = missingTToken;
-                    for (id obj in [self.tTokenWaitQueue reverseObjectEnumerator]) {
-                        [self.tTokenWaitQueue removeObject:obj];
-                    }
+                    [self.tTokenWaitQueue removeAllObjects];
                 } else {
                     [[RefreshManager sharedManager] suspendConnectionsQueue];
                     self.tToken = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -320,9 +318,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     for (id obj in self.tTokenWaitQueue) {
                         [(NSMutableURLRequest *)obj setPostValue:self.tToken forKey:@"T"];
                     }
-                    for (id obj in [self.tTokenWaitQueue reverseObjectEnumerator]) {
-                        [self.tTokenWaitQueue removeObject:obj];
-                    }
+                    [self.tTokenWaitQueue removeAllObjects];
                     if (self.tTokenTimer == nil || !self.tTokenTimer.valid) {
                         //tokens expire after 30 minutes : renew them every 25 minutes
                         self.tTokenTimer = [NSTimer scheduledTimerWithTimeInterval:25 * 60
