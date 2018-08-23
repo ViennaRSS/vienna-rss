@@ -1185,7 +1185,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         if ([challenge previousFailureCount] == 3) {
             completionHandler(NSURLSessionAuthChallengeRejectProtectionSpace, nil);
         } else {
-            Folder * folder = (Folder *)[NSURLProtocol propertyForKey:@"folder" inRequest:task.originalRequest];
+            NSMutableURLRequest *urlRequest = (NSMutableURLRequest *)(task.originalRequest);
+            Folder * folder = ((NSDictionary *)[urlRequest userInfo])[@"folder"];
             if (![folder.username isEqualToString:@""]) {
                 NSURLCredential *credential = [NSURLCredential credentialWithUser:folder.username
                                                                          password:folder.password
