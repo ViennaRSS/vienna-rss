@@ -20,7 +20,6 @@
 
 @import Foundation;
 
-NSString * MA_DefaultUserAgentString = @"Mozilla/5.0 Vienna/%@";
 NSString * MA_BrowserUserAgentString = @"(Macintosh; Intel Mac OS X %@) AppleWebKit/%@ (KHTML, like Gecko) Version/%@ Safari/604.1.38 Vienna/%@";
 
 NSString * MAPref_ArticleListFont = @"MessageListFont";
@@ -39,7 +38,6 @@ NSString * MAPref_FolderImagesFolder = @"FolderIconsCache";
 NSString * MAPref_StylesFolder = @"StylesFolder";
 NSString * MAPref_PluginsFolder = @"PluginsFolder";
 NSString * MAPref_ScriptsFolder = @"ScriptsFolder";
-NSString * MAPref_RefreshThreads = @"MaxRefreshThreads";
 NSString * MAPref_ActiveStyleName = @"ActiveStyle";
 NSString * MAPref_ActiveTextSizeMultiplier = @"TextSizeMultiplier";
 NSString * MAPref_FolderStates = @"FolderStates";
@@ -114,6 +112,3 @@ NSString * MA_PBoardType_RSSSource = @"CorePasteboardFlavorType 0x52535373";
 NSString * MA_PBoardType_RSSItem = @"CorePasteboardFlavorType 0x52535369";
 NSString * MA_PBoardType_url = @"CorePasteboardFlavorType 0x75726C20";
 NSString * MA_PBoardType_urln = @"CorePasteboardFlavorType 0x75726C6E";
-
-// Sync folder separator
-//NSString * MA_Sync_FolderSeparator = @" — ";

@@ -252,7 +252,6 @@ static Preferences * _standardPreferences = nil;
 	defaultValues[MAPref_SortColumn] = MA_Field_Date;
 	defaultValues[MAPref_CheckFrequency] = @(MA_Default_Check_Frequency);
 	defaultValues[MAPref_MarkReadInterval] = @((float)MA_Default_Read_Interval);
-	defaultValues[MAPref_RefreshThreads] = @(MA_Default_RefreshThreads);
 	defaultValues[MAPref_ActiveStyleName] = MA_DefaultStyleName;
 	defaultValues[MAPref_ActiveTextSizeMultiplier] = @1.0;
 	defaultValues[MAPref_BacktrackQueueSize] = @(MA_Default_BackTrackQueueSize);

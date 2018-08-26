@@ -172,8 +172,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	static BOOL doneSafeInit = NO;
 	if (!doneSafeInit)
 	{
-        [ASIHTTPRequest setDefaultUserAgentString:[NSString stringWithFormat:MA_DefaultUserAgentString, ((ViennaApp *)NSApp).applicationVersion.firstWord]];
-        
 		[self.foldersTree initialiseFoldersTree];
 
 		Preferences * prefs = [Preferences standardPreferences];
@@ -2427,7 +2425,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		//		if (isAccessible(url))
 		//{
 			Folder * folder = [db folderFromID:folderId];
-			[[RefreshManager sharedManager] refreshSubscriptionsAfterSubscribe:@[folder] ignoringSubscriptionStatus:NO];
+			[[RefreshManager sharedManager] refreshSubscriptions:@[folder] ignoringSubscriptionStatus:NO];
 		//}
 	}
 }
@@ -2475,7 +2473,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             if (isAccessible(urlString) || [urlString hasPrefix:@"file"])
             {
                 Folder * folder = [db folderFromID:folderId];
-                [[RefreshManager sharedManager] refreshSubscriptionsAfterSubscribe:@[folder] ignoringSubscriptionStatus:NO];
+                [[RefreshManager sharedManager] refreshSubscriptions:@[folder] ignoringSubscriptionStatus:NO];
             }
 		}
 	}
@@ -3269,13 +3267,18 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)refreshAllSubscriptions:(id)sender
 {
-	// Reset the refresh timer
-	[self handleCheckFrequencyChange:nil];
-	
-	// Kick off an initial refresh	
-	if (!self.connecting) 
-		[[RefreshManager sharedManager] refreshSubscriptionsAfterRefreshAll:[self.foldersTree folders:0] ignoringSubscriptionStatus:NO];
-	
+    // Reset the refresh timer
+    [self handleCheckFrequencyChange:nil];
+
+    // Kick off the refresh
+    if (!self.connecting) {
+        if ([Preferences standardPreferences].syncGoogleReader){
+            [[OpenReader sharedManager] loadSubscriptions];
+        }
+        [[RefreshManager sharedManager] refreshSubscriptions:[self.foldersTree folders:0]
+          ignoringSubscriptionStatus:NO];
+    }
+
 }
 
 -(IBAction)forceRefreshSelectedSubscriptions:(id)sender {
@@ -3294,7 +3297,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)refreshSelectedSubscriptions:(id)sender
 {
-	[[RefreshManager sharedManager] refreshSubscriptionsAfterRefresh:self.foldersTree.selectedFolders ignoringSubscriptionStatus:YES];
+	[[RefreshManager sharedManager] refreshSubscriptions:self.foldersTree.selectedFolders ignoringSubscriptionStatus:YES];
 }
 
 /* cancelAllRefreshesToolbar

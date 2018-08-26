@@ -3,7 +3,7 @@
 //  Vienna
 //
 //  Created by Steve on 7/19/05.
-//  Copyright (c) 2004-2017 Steve Palmer and Vienna contributors (see menu item 'About Vienna' for list of contributors). All rights reserved.
+//  Copyright (c) 2004-2018 Steve Palmer and Vienna contributors (see menu item 'About Vienna' for list of contributors). All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -18,23 +18,21 @@
 //  limitations under the License.
 //
 
-@import ASIHTTPRequest;
 @import Foundation;
 
 @class Database;
 @class FeedCredentials;
 @class Folder;
 
-@interface RefreshManager : NSObject {
-	NSUInteger maximumConnections;
+@interface RefreshManager : NSObject <NSURLSessionDelegate> {
 	NSUInteger countOfNewArticles;
 	NSMutableArray * authQueue;
-	NSTimer * pumpTimer;
 	FeedCredentials * credentialsController;
 	BOOL hasStarted;
 	NSString * statusMessageDuringRefresh;
-	ASINetworkQueue *networkQueue;
+	NSOperationQueue *networkQueue;
 	dispatch_queue_t _queue;
+	NSURLSession * session;
 }
 
 +(RefreshManager *)sharedManager;
@@ -42,20 +40,13 @@
 @property (readonly, copy) NSString *statusMessage;
 @property (nonatomic, getter=isConnecting, readonly) BOOL connecting;
 @property (nonatomic, readonly) NSUInteger countOfNewArticles;
-@property (nonatomic, readonly, copy) NSString *statusMessageDuringRefresh;
 
 -(void)refreshFolderIconCacheForSubscriptions:(NSArray *)foldersArray;
-//-(void)refreshSubscriptions:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
--(void)refreshSubscriptionsAfterRefresh:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
--(void)refreshSubscriptionsAfterRefreshAll:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
--(void)refreshSubscriptionsAfterSubscribe:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
--(void)refreshSubscriptionsAfterUnsubscribe:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
--(void)refreshSubscriptionsAfterDelete:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
--(void)refreshSubscriptionsAfterMerge:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
+-(void)refreshSubscriptions:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
 -(void)forceRefreshSubscriptionForFolders:(NSArray*)foldersArray;
 -(void)cancelAll;
 -(void)refreshFavIconForFolder:(Folder *)folder;
--(void)addConnection:(ASIHTTPRequest *)conn;
+-(NSOperation *)addConnection:(NSURLRequest *)conn completionHandler:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completionHandler;
 -(void)suspendConnectionsQueue;
 -(void)resumeConnectionsQueue;
 @end

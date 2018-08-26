@@ -110,7 +110,7 @@
 	NSDictionary * args = cmd.evaluatedArguments;
 	NSArray * argArray = [self evaluatedArrayOfFolders:args[@"Folder"] withCommand:cmd];
 	if (argArray != nil)
-		[[RefreshManager sharedManager] refreshSubscriptionsAfterRefresh:argArray ignoringSubscriptionStatus:YES];
+		[[RefreshManager sharedManager] refreshSubscriptions:argArray ignoringSubscriptionStatus:YES];
 
 	return nil;
 }
