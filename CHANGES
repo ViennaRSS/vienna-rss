@@ -8,6 +8,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.5.0 Beta 1
+------------
+- Modernize network access (replace ASIHTTPRequest with a wrapper above NSURLSession)
+- Fix an encoding issue in localizable strings
+
 3.4.2
 -----
 - Fix crash on startup on Mac OS X 10.9 and 10.10
