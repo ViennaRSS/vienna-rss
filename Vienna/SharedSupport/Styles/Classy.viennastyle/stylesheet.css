@@ -41,6 +41,11 @@ embed, video {
   max-width: 100%;
 }
 
+/* specific direction for code */
+code, pre {
+  direction: ltr;
+}
+
 /* keep images ratio and avoid box overflow due to border or padding */
 img {
   box-sizing: border-box;

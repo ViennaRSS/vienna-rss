@@ -134,3 +134,25 @@ ul {
   margin-bottom: 1em;
   height: auto !important;
 }
+
+/* fix a 100% max size to potentially problematic elements */
+img, table,
+td, blockquote,
+code, pre,
+textarea, input,
+iframe, object,
+embed, video {
+  max-width: 100%;
+}
+
+/* specific direction for code */
+code, pre {
+  direction: ltr;
+}
+
+/* keep images ratio and avoid box overflow due to border or padding */
+img {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  height: auto !important;
+}
