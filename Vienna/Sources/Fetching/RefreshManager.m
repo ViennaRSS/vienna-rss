@@ -854,7 +854,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
     // If this folder also requires an image refresh, do that
     if ((folder.flags & VNAFolderFlagCheckForImage)) {
-        [self refreshFavIconForFolder:folder];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self refreshFavIconForFolder:folder];
+        });
     }
 }
 
