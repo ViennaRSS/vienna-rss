@@ -2,13 +2,11 @@
 
 ## Debugging
 
-dSYM files containing the debug symbols can be fount at [bintray](https://bintray.com/viennarss/vienna-rss/vienna-rss/).
+dSYM files containing the debug symbols can be found at [bintray](https://bintray.com/viennarss/vienna-rss/vienna-rss/).
 
 ## Writing code
 
 The current version of Vienna requires Xcode 9 and the macOS 10.13 SDK. Most of Vienna is made with Objective-C, but some newer code is being created in Swift 4. We welcome both Objective-C and Swift contributions.
-
-Vienna uses [CocoaPods](https://cocoapods.org) for managing dependencies. When building, make sure to always open the Xcode workspace `Viennna.xcworkspace` instead of a project file.
 
 You should have a basic knowledge of Git and read this [suggested workflow](https://github.com/ViennaRSS/vienna-rss/wiki/Good-manners-with-Git).
 
