@@ -28,7 +28,6 @@
 #define WebKitErrorPlugInWillHandleLoad	204
 
 @class BrowserView;
-@class SSTextField;
 @class TabbedWebView;
 
 @interface BrowserPaneButtonCell : NSCell {}
@@ -42,7 +41,7 @@
 	IBOutlet NSButton * forwardButton;
 	IBOutlet NSButton * refreshButton;
 	IBOutlet NSButton * rssPageButton;
-	IBOutlet SSTextField * addressField;
+	IBOutlet NSTextField * addressField;
 	IBOutlet NSButton * iconImage;
 	IBOutlet NSImageView * lockIconImage;
 	NSString * pageFilename;
