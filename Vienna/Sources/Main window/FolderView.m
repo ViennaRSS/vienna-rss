@@ -336,6 +336,7 @@
 		}
 		rowIndex = [selectedRowIndexes indexGreaterThanIndex:rowIndex];
 	}
+	[super highlightSelectionInClipRect:rect];
 }
 
 /* prvtResizeTheFieldEditor
