@@ -29,7 +29,6 @@
 #import "SubscriptionModel.h"
 #import "Folder.h"
 #import "BrowserView.h"
-#import "SSTextField.h"
 #import "Constants.h"
 #import "Preferences.h"
 #import "Vienna-Swift.h"
@@ -306,19 +305,16 @@
 		}
 
 		// Show or hide the lock icon depending on whether this is a secure
-		// web page. Also shade the address bar a nice light yellow colour as
-		// Camino does.
+		// web page.
 		NSURL * theURL = frame.dataSource.request.URL;
 		if ([theURL.scheme isEqualToString:@"https"])
 		{
 			[addressField.cell setHasSecureImage:YES];
-			addressField.backgroundColor = [NSColor colorWithDeviceRed:1.0 green:1.0 blue:0.777 alpha:1.0];
 			[lockIconImage setHidden:NO];
 		}
 		else
 		{
 			[addressField.cell setHasSecureImage:NO];
-			addressField.backgroundColor = [NSColor whiteColor];
 			[lockIconImage setHidden:YES];
 		}
 		
