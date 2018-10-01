@@ -25,22 +25,6 @@
 #import "Constants.h"
 #import <MMTabBarView/MMTabBarView.h>
 
-@interface MMTabBarView (BrowserViewAdditions)
-	-(NSTabViewItem *)tabViewItemWithIdentifier:(id)identifier;
-@end
-
-@implementation MMTabBarView (BrowserViewAdditions)
-
-/* tabViewItemWithIdentifier
- * Returns the tab view item that matches the specified identifier.
- */
--(NSTabViewItem *)tabViewItemWithIdentifier:(id)identifier
-{
-	NSInteger i = [self.tabView indexOfTabViewItemWithIdentifier:identifier];
-	return (i != NSNotFound ? [self.tabView tabViewItemAtIndex:i] : nil);
-}
-@end
-
 @interface BrowserView () <MMTabBarViewDelegate>
 
 //queue for tab view items to select when current item is closed
@@ -89,7 +73,7 @@
 -(void)configureTabBar
 {
 	[self.tabBarControl setStyleNamed:@"Sierra"];
-	//TODO: set NO
+	//TODO: settings
 	[self.tabBarControl setOnlyShowCloseOnHover:YES];
 	[self.tabBarControl setCanCloseOnlyTab:NO];
 	[self.tabBarControl setDisableTabClose:NO];
@@ -110,7 +94,11 @@
  */
 -(NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(void *)userData
 {
-	return [self.tabBarControl tabViewItemWithIdentifier:(__bridge NSView *)userData].label;
+    NSInteger i = [self.tabBarControl.tabView indexOfTabViewItemWithIdentifier:(__bridge id _Nonnull)(userData)];
+    if (i != NSNotFound) {
+        return [self.tabBarControl.tabView tabViewItemAtIndex:i].label;
+    }
+    return nil;
 }
 
 /* setPrimaryTabItemView
@@ -120,36 +108,34 @@
 -(void)setPrimaryTabItemView:(NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate> *)newPrimaryTabItemView
 {
 	
-	NSTabViewItem * item;
-	if (primaryTabItemView == nil)
-	{
-		// This should only be called on launch
-		item = [self.tabBarControl.tabView tabViewItemAtIndex:0];
-	}
-	else
-	{
-		item = [self.tabBarControl tabViewItemWithIdentifier:primaryTabItemView];
-	}
+	NSTabViewItem * tab;
 
-	[item setHasCloseButton:NO];
-	item.identifier = newPrimaryTabItemView;
-	item.view = newPrimaryTabItemView;
+    // This should only be called on launch
+    tab = [self.tabBarControl.tabView tabViewItemAtIndex:0];
+
+	[tab setHasCloseButton:NO];
+	tab.identifier = newPrimaryTabItemView;
+	tab.view = newPrimaryTabItemView;
 	
 	primaryTabItemView = newPrimaryTabItemView;
 	
 	[primaryTabItemView setNeedsDisplay:YES];
-	[self setActiveTabToPrimaryTab];
+	[self showArticlesTab];
 	//this call seems to be necessary manually here, no delegate call
 	//maybe setPrimaryTabItemView is called earlier than the delegate IBOutlet setup.
-	[self tabView:self.tabBarControl.tabView didSelectTabViewItem:item];
+	[self tabView:self.tabBarControl.tabView didSelectTabViewItem:tab];
 }
 
-/* activeTabItemView
- * Returns the view associated with the active tab.
+/* activeTab
+ * Returns the active tab.
  */
--(NSView<BaseView> *)activeTabItemView
+-(NSTabViewItem *)activeTab
 {
-	return self.tabBarControl.tabView.selectedTabViewItem.identifier;
+	return self.tabBarControl.tabView.selectedTabViewItem;
+}
+
+-(NSView<BaseView> *)activeTabItemView {
+    return self.activeTab.identifier;
 }
 
 /* setActiveTabToPrimaryTab
@@ -157,7 +143,7 @@
  */
 -(void)setActiveTabToPrimaryTab
 {
-	[self showTabItemView:primaryTabItemView];
+	[self showArticlesTab];
 }
 
 /* primaryTabItemView
@@ -168,20 +154,16 @@
 	return primaryTabItemView;
 }
 
-/* setTabTitle
- * Sets the title of the specified tab then redraws the tab bar.
- */
--(void)setTabItemViewTitle:(NSView *)inTabView title:(NSString *)newTitle
-{
-	[self.tabBarControl tabViewItemWithIdentifier:inTabView].label = newTitle;
-}
-
 /* tabTitle
  * Returns the title of the specified tab. May be an empty string.
  */
 -(NSString *)tabItemViewTitle:(NSView *)tabItemView
 {
-	return [self.tabBarControl tabViewItemWithIdentifier:tabItemView].label;
+    if (tabItemView == primaryTabItemView) {
+        return NSLocalizedString(@"Articles", nil);
+    } else {
+        return ((BrowserPane *)tabItemView).tab.label;
+    }
 }
 
 /* closeAllTabs
@@ -204,11 +186,10 @@
 /*
  for manually closing tabs (not initiated from tabview)
  */
--(void)closeTabItemView:(NSView *)tabItemView
+-(void)closeTab:(NSTabViewItem *)tabViewItem
 {
 	MMTabBarView *tabBar = self.tabBarControl;
 	NSTabView *tabView = tabBar.tabView;
-	NSTabViewItem *tabViewItem = [tabBar tabViewItemWithIdentifier:tabItemView];
 
     if ((tabBar.delegate) && ([tabBar.delegate respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])) {
         if (![tabBar.delegate tabView:tabView shouldCloseTabViewItem:tabViewItem]) {
@@ -235,23 +216,12 @@
 	return self.tabBarControl.numberOfTabViewItems;
 }
 
-/* showTabItemView
- * Makes the specified tab active if not already and post a notification.
- */
--(void)showTabItemView:(NSView *)theTabView
-{
-	NSTabViewItem *tabViewItem = [self.tabBarControl tabViewItemWithIdentifier:theTabView];
-	if (tabViewItem) {
-		[self.tabBarControl selectTabViewItem:tabViewItem];
-	}
-}
-
 /* articlesTab
  * Go straight back to the articles tab
  */
 -(void)showArticlesTab
 {
-	[self showTabItemView:primaryTabItemView];
+    [self.tabBarControl selectTabViewItem:[self.tabBarControl.tabView tabViewItemAtIndex:0]];
 }
 
 /* showPreviousTab
@@ -474,8 +444,8 @@
 {
 	BrowserPane * newBrowserPane = [self createNewTab:url inBackground:openInBackgroundFlag];
 	if (title != nil) {
-		[self setTabItemViewTitle:newBrowserPane title:title];
-        newBrowserPane.viewTitle = title;
+        newBrowserPane.tab.label = title;
+		[newBrowserPane setViewTitle:title];
 	}
 	return newBrowserPane;
 }
@@ -491,44 +461,37 @@
 
 /* create tab with url
  * but do not load the page
+ * in case openInBackgroundFlag is false, open the tab
  */
 -(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
 {
-	BrowserPaneTemplate * newBrowserTemplate = [[BrowserPaneTemplate alloc] init];
-	BrowserPane * newBrowserPane;
-	if (newBrowserTemplate)
-	{
-		newBrowserPane = newBrowserTemplate.mainView;
-		[self createNewTabWithView:newBrowserPane makeKey:!openInBackgroundFlag];
-        newBrowserPane.browser = self;
-		//set url but do not load yet
+    BrowserPaneTemplate *newBrowserTemplate = [[BrowserPaneTemplate alloc] init];
+    BrowserPane *newBrowserPane;
+    if (newBrowserTemplate) {
+        newBrowserPane = newBrowserTemplate.mainView;
+
+        NSTabViewItem *tab = [[NSTabViewItem alloc] initWithIdentifier:newBrowserPane];
+        tab.view = newBrowserPane;
+
+        [self.tabBarControl.tabView addTabViewItem:tab];
+
+        //newly created item will be selected first or last to be selected
+        if (self.selectNewItemFirst) {
+            [self.tabViewOrder addObject:tab];
+        } else {
+            [self.tabViewOrder insertObject:tab atIndex:0];
+        }
+
+        if (!openInBackgroundFlag) {
+            [self.tabBarControl selectTabViewItem:tab];
+        }
+
+        [newBrowserPane setTab:tab];
+
+        //set url but do not load yet
         newBrowserPane.url = url;
-	}
-	return newBrowserPane;
-}
-
-/* createNewTabWithView
- * Create a new tab with the specified view. If makeKey is YES then the new tab is
- * made active, otherwise the current tab stays active.
- */
--(void)createNewTabWithView:(NSView<BaseView> *)newTabView makeKey:(BOOL)keyIt
-{
-	NSTabViewItem *tabViewItem = [[NSTabViewItem alloc] initWithIdentifier:newTabView];
-	tabViewItem.view = newTabView;
-
-	[self.tabBarControl.tabView addTabViewItem:tabViewItem];
-
-	//newly created item will be selected first or last to be selected
-	if (self.selectNewItemFirst)
-	{
-		[self.tabViewOrder addObject:tabViewItem];
-	}
-	else
-	{
-		[self.tabViewOrder insertObject:tabViewItem atIndex:0];
-	}
-
-	if (keyIt) [self showTabItemView:newTabView];
+    }
+    return newBrowserPane;
 }
 
 /* dealloc
