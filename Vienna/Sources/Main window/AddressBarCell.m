@@ -40,7 +40,7 @@
 -(void)setHasSecureImage:(BOOL)flag
 {
 	hasSecureImage = flag;
-	[(NSControl*)self.controlView calcSize];
+	[(NSControl*)self.controlView setNeedsDisplay:YES];
 }
 
 /* hasSecureImage
@@ -52,8 +52,8 @@
 }
 
 /* drawingRectForBounds
- * Reduce the drawing area for the text by the space needed for the image
- * on the left and, optionally, the secure web page image on the right.
+ * Reduce on the left the drawing area for the text by the space needed
+ * for the image and, optionally, the secure web page image.
  */
 -(NSRect)drawingRectForBounds:(NSRect)theRect
 {
@@ -61,8 +61,10 @@
 
 	theRect.origin.x += imageSpace;
 	theRect.size.width -= imageSpace;
-	if (hasSecureImage)
+	if (hasSecureImage) {
+		theRect.origin.x += imageSpace;
 		theRect.size.width -= imageSpace;
+	}
 	return [super drawingRectForBounds:theRect];
 }
 
