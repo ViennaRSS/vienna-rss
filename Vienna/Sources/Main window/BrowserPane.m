@@ -374,7 +374,7 @@
 	{
 		if (lastError == nil)
 		{
-            self.tab.label = pageFilename;
+			self.tab.label = pageFilename;
 			self.viewTitle = pageFilename;
 		}
 	}

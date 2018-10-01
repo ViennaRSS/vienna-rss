@@ -465,11 +465,10 @@
  */
 -(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
 {
-	BrowserPaneTemplate * newBrowserTemplate = [[BrowserPaneTemplate alloc] init];
-	BrowserPane * newBrowserPane;
-	if (newBrowserTemplate)
-	{
-		newBrowserPane = newBrowserTemplate.mainView;
+    BrowserPaneTemplate *newBrowserTemplate = [[BrowserPaneTemplate alloc] init];
+    BrowserPane *newBrowserPane;
+    if (newBrowserTemplate) {
+        newBrowserPane = newBrowserTemplate.mainView;
 
         NSTabViewItem *tab = [[NSTabViewItem alloc] initWithIdentifier:newBrowserPane];
         tab.view = newBrowserPane;
@@ -477,21 +476,22 @@
         [self.tabBarControl.tabView addTabViewItem:tab];
 
         //newly created item will be selected first or last to be selected
-        if (self.selectNewItemFirst)
+        if (self.selectNewItemFirst) {
             [self.tabViewOrder addObject:tab];
-        else
+        } else {
             [self.tabViewOrder insertObject:tab atIndex:0];
+        }
 
-        if (!openInBackgroundFlag)
+        if (!openInBackgroundFlag) {
             [self.tabBarControl selectTabViewItem:tab];
+        }
 
-		//[newBrowserPane setBrowser:self];
         [newBrowserPane setTab:tab];
 
-		//set url but do not load yet
+        //set url but do not load yet
         newBrowserPane.url = url;
-	}
-	return newBrowserPane;
+    }
+    return newBrowserPane;
 }
 
 /* dealloc
