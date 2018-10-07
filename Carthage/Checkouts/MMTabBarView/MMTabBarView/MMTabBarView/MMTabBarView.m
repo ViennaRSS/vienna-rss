@@ -1553,8 +1553,7 @@ static NSMutableDictionary *registeredStyleClasses = nil;
             [self hideTabBar:NO animate:animate];
         else if (![self _shouldDisplayTabBar]) {
             [self hideTabBar:YES animate:animate];
-            [self setNeedsUpdate:NO];
-            return;
+            animate = NO;
         }
     }
 
@@ -1562,7 +1561,7 @@ static NSMutableDictionary *registeredStyleClasses = nil;
         // go through buttons, remove any whose tab view items are not in [_tabView tabViewItems]
     NSSet *attachedButtons = [self attachedButtons];
     for (MMAttachedTabBarButton *aButton in attachedButtons) {
-            //remove the observer binding
+        //remove the observer binding
 		if ([aButton tabViewItem] && ![tabItems containsObject:[aButton tabViewItem]]) {
 			if ([[self delegate] respondsToSelector:@selector(tabView:didDetachTabViewItem:)]) {
 				[[self delegate] tabView:_tabView didDetachTabViewItem:[aButton tabViewItem]];
