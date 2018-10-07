@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'FMDB'
-  s.version = '2.7.4'
+  s.version = '2.7.5'
   s.summary = 'A Cocoa / Objective-C wrapper around SQLite.'
   s.homepage = 'https://github.com/ccgus/fmdb'
   s.license = 'MIT'
@@ -43,7 +43,7 @@ Pod::Spec.new do |s|
     ss.dependency 'SQLCipher'
     ss.source_files = 'src/fmdb/FM*.{h,m}'
     ss.exclude_files = 'src/fmdb.m'
-    ss.xcconfig = { 'OTHER_CFLAGS' => '$(inherited) -DSQLITE_HAS_CODEC -DHAVE_USLEEP=1' }
+    ss.xcconfig = { 'OTHER_CFLAGS' => '$(inherited) -DSQLITE_HAS_CODEC -DHAVE_USLEEP=1', 'HEADER_SEARCH_PATHS' => 'SQLCipher' }
   end
   
 end
