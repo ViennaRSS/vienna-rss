@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="12120"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -56,8 +56,8 @@
                                         <action selector="handleReload:" target="5" id="DSD-me-maG"/>
                                     </connections>
                                 </button>
-                                <textField focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="689" translatesAutoresizingMaskIntoConstraints="NO" id="jbw-0o-tHL" customClass="SSTextField">
-                                    <rect key="frame" x="93" y="3" width="701" height="22"/>
+                                <textField focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="689" translatesAutoresizingMaskIntoConstraints="NO" id="jbw-0o-tHL">
+                                    <rect key="frame" x="95" y="3" width="699" height="22"/>
                                     <constraints>
                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="eVn-xM-i6p"/>
                                     </constraints>
@@ -92,7 +92,7 @@
                                     </connections>
                                 </button>
                                 <imageView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nGm-jr-a3Q">
-                                    <rect key="frame" x="774" y="6" width="16" height="16"/>
+                                    <rect key="frame" x="117" y="6" width="16" height="16"/>
                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="lockedPage" id="ubS-gE-v6E"/>
                                 </imageView>
                                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Uij-h1-YdD">
@@ -104,8 +104,8 @@
                                 <constraint firstAttribute="bottom" secondItem="jbw-0o-tHL" secondAttribute="bottom" constant="3" id="5bq-mh-A75"/>
                                 <constraint firstItem="4dH-y6-1w2" firstAttribute="centerY" secondItem="jbw-0o-tHL" secondAttribute="centerY" id="FrN-uD-MUl"/>
                                 <constraint firstItem="jRF-hs-3NE" firstAttribute="centerY" secondItem="jbw-0o-tHL" secondAttribute="centerY" id="IzP-bg-bnM"/>
-                                <constraint firstItem="nGm-jr-a3Q" firstAttribute="trailing" secondItem="jbw-0o-tHL" secondAttribute="trailing" constant="-4" id="LHB-4w-T2c"/>
-                                <constraint firstItem="jbw-0o-tHL" firstAttribute="leading" secondItem="jRF-hs-3NE" secondAttribute="trailing" constant="4" id="PmN-f6-Ts0"/>
+                                <constraint firstItem="nGm-jr-a3Q" firstAttribute="leading" secondItem="s5s-Fb-aNJ" secondAttribute="trailing" constant="4" id="LHB-4w-T2c"/>
+                                <constraint firstItem="s5s-Fb-aNJ" firstAttribute="leading" secondItem="jRF-hs-3NE" secondAttribute="trailing" constant="8" id="PmN-f6-Ts0"/>
                                 <constraint firstItem="s5s-Fb-aNJ" firstAttribute="centerY" secondItem="jbw-0o-tHL" secondAttribute="centerY" id="QqI-3y-Vbb"/>
                                 <constraint firstItem="R2O-O2-NtU" firstAttribute="leading" secondItem="jbw-0o-tHL" secondAttribute="trailing" constant="4" id="RcG-cm-oXG"/>
                                 <constraint firstItem="RJc-eu-7Rd" firstAttribute="centerY" secondItem="jbw-0o-tHL" secondAttribute="centerY" id="So4-SG-BwA"/>
@@ -116,7 +116,7 @@
                                 <constraint firstItem="jbw-0o-tHL" firstAttribute="top" secondItem="jfz-EV-1Re" secondAttribute="top" constant="4" id="by4-Qt-2dM"/>
                                 <constraint firstItem="RJc-eu-7Rd" firstAttribute="leading" secondItem="jfz-EV-1Re" secondAttribute="leading" constant="4" id="cZi-Tg-GNU"/>
                                 <constraint firstAttribute="bottom" secondItem="Uij-h1-YdD" secondAttribute="bottom" id="fk2-ad-GVD"/>
-                                <constraint firstItem="jbw-0o-tHL" firstAttribute="leading" secondItem="s5s-Fb-aNJ" secondAttribute="leading" constant="-4" id="hqM-on-yut"/>
+                                <constraint firstItem="jbw-0o-tHL" firstAttribute="leading" secondItem="jRF-hs-3NE" secondAttribute="trailing" constant="6" id="hqM-on-yut"/>
                                 <constraint firstAttribute="trailing" secondItem="R2O-O2-NtU" secondAttribute="trailing" constant="4" id="noy-cM-JNp"/>
                                 <constraint firstItem="4dH-y6-1w2" firstAttribute="leading" secondItem="RJc-eu-7Rd" secondAttribute="trailing" id="q5U-io-pux"/>
                                 <constraint firstAttribute="trailing" secondItem="Uij-h1-YdD" secondAttribute="trailing" id="vRx-RB-zuw"/>
@@ -124,10 +124,7 @@
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="startingColor">
-                                    <color key="value" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="endingColor">
-                                    <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="value" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="angle">
                                     <real key="value" value="270"/>
