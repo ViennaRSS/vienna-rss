@@ -58,6 +58,8 @@
 		03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EFD56F1B720AB0007EF284 /* ExportTests.m */; };
 		03F33D961DF2A2F900B04FAF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03F33D951DF2A2F900B04FAF /* Images.xcassets */; };
 		2FA79F192170C55D00228482 /* Browser+WebUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA79F182170C55D00228482 /* Browser+WebUIDelegate.m */; };
+		2F3AD707216F2C37007708A2 /* TabOrderPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3AD705216F2C37007708A2 /* TabOrderPreferencesViewController.swift */; };
+		2F3AD70A216F2D51007708A2 /* TabOrderPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F3AD709216F2D51007708A2 /* TabOrderPreferencesViewController.xib */; };
 		2FAA36402072F50B00169C8A /* MMTabBarView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FAA363F2072F50B00169C8A /* MMTabBarView.framework */; };
 		2FAA36422072F57500169C8A /* MMTabBarView.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 2FAA363F2072F50B00169C8A /* MMTabBarView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2FBE629020796BAD00653ECA /* BrowserPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FBE628F20796BAD00653ECA /* BrowserPreferences.xib */; };
@@ -340,8 +342,6 @@
 		03EFD56F1B720AB0007EF284 /* ExportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportTests.m; sourceTree = "<group>"; };
 		03F33D951DF2A2F900B04FAF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; };
-		2FA79F172170C55D00228482 /* Browser+WebUIDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Browser+WebUIDelegate.h"; sourceTree = "<group>"; };
-		2FA79F182170C55D00228482 /* Browser+WebUIDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Browser+WebUIDelegate.m"; sourceTree = "<group>"; };
 		2FAA363F2072F50B00169C8A /* MMTabBarView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MMTabBarView.framework; path = Carthage/Build/Mac/MMTabBarView.framework; sourceTree = "<group>"; };
 		2FBE628F20796BAD00653ECA /* BrowserPreferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrowserPreferences.xib; sourceTree = "<group>"; };
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ClickableProgressIndicator.h; sourceTree = "<group>"; };
@@ -1295,6 +1295,7 @@
 		F63739FB1F1CFEDC00ED3B09 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				2F3AD709216F2D51007708A2 /* TabOrderPreferencesViewController.xib */,
 				2FBE628F20796BAD00653ECA /* BrowserPreferences.xib */,
 				F625815B1E29BEB90035E43C /* MainMenu.xib */,
 				F6832F661F10F5DA007920D4 /* MainWindowController.xib */,
@@ -1643,6 +1644,7 @@
 				0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */,
 				0349813F1A20701600014F29 /* AdvancedPreferencesViewController.h */,
 				034981401A20701600014F29 /* AdvancedPreferencesViewController.m */,
+				2F3AD705216F2C37007708A2 /* TabOrderPreferencesViewController.swift */,
 			);
 			path = "Preferences window";
 			sourceTree = "<group>";
@@ -1986,6 +1988,7 @@
 				F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */,
 				AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */,
 				AAF6C3A308B06BA00077BAB8 /* StandardURLs.plist in Resources */,
+				2F3AD70A216F2D51007708A2 /* TabOrderPreferencesViewController.xib in Resources */,
 				AA83A05008D6764D001E8404 /* smallCloseButton.tiff in Resources */,
 				AABCF9A508FF562E00984F78 /* pressedCloseButton.tiff in Resources */,
 				AA32E2A40940A9970034D9CC /* folderError.tiff in Resources */,
@@ -2272,6 +2275,7 @@
 				F6A4E8481F040D58001C9191 /* PluginToolbarItemButton.swift in Sources */,
 				435028AC165DE9E00018EDB7 /* NewSubscription.m in Sources */,
 				03B7522A1B741AFD00FD3FDB /* FeedItem.m in Sources */,
+				2F3AD707216F2C37007708A2 /* TabOrderPreferencesViewController.swift in Sources */,
 				F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */,
 				435028AD165DE9E00018EDB7 /* PluginManager.m in Sources */,
 				435028AE165DE9E00018EDB7 /* ProgressTextCell.m in Sources */,

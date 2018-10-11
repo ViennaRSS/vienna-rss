@@ -24,6 +24,8 @@
 #import "SyncingPreferencesViewController.h"
 #import "AdvancedPreferencesViewController.h"
 
+#import "Vienna-Swift.h"
+
 @implementation PreferencesWindowController
 
 /*
@@ -34,8 +36,9 @@
     NSViewController *appearance = [AppearancePreferencesViewController new];
     NSViewController *syncing = [SyncingPreferencesViewController new];
     NSViewController *advanced = [AdvancedPreferencesViewController new];
+    NSViewController *taborder = [TabOrderPreferencesViewController new];
 
-    NSArray *controllers = @[general, appearance, syncing, advanced];
+    NSArray *controllers = @[general, appearance, syncing, advanced, taborder];
     NSString *title = NSLocalizedString(@"Preferences", @"Title of the Preferences window");
 
     return [self initWithViewControllers:controllers title:title];

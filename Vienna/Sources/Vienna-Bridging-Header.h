@@ -10,3 +10,4 @@
 #import "RefreshManager.h"
 #import "UnifiedDisplayView.h"
 #import "ViennaApp.h"
+@import MASPreferences;
