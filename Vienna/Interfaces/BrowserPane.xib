@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <plugIn identifier="com.apple.WebKitIBPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -156,6 +155,7 @@
                 <constraint firstAttribute="trailing" secondItem="Bbc-ej-ccq" secondAttribute="trailing" id="t9g-79-52A"/>
             </constraints>
             <connections>
+                <outlet property="_webPane" destination="5Jt-eD-fKX" id="c2c-xF-zr8"/>
                 <outlet property="addressField" destination="jbw-0o-tHL" id="CL7-N1-B2n"/>
                 <outlet property="backButton" destination="RJc-eu-7Rd" id="O8P-eq-nzB"/>
                 <outlet property="forwardButton" destination="4dH-y6-1w2" id="Bre-fE-lbk"/>
@@ -163,7 +163,6 @@
                 <outlet property="lockIconImage" destination="nGm-jr-a3Q" id="d0l-zp-Yo4"/>
                 <outlet property="refreshButton" destination="jRF-hs-3NE" id="ZQ3-yC-e92"/>
                 <outlet property="rssPageButton" destination="R2O-O2-NtU" id="RgR-1P-T8L"/>
-                <outlet property="webPane" destination="5Jt-eD-fKX" id="c2c-xF-zr8"/>
             </connections>
             <point key="canvasLocation" x="138.5" y="168.5"/>
         </customView>

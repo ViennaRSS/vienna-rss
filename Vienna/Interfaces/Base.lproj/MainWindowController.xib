@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,7 +8,7 @@
         <customObject id="-2" userLabel="Window Controller" customClass="MainWindowController" customModule="Vienna" customModuleProvider="target">
             <connections>
                 <outlet property="articleListView" destination="971" id="OE4-G3-4mz"/>
-                <outlet property="browserView" destination="1227" id="vlz-xz-lya"/>
+                <outlet property="browser" destination="eqp-AV-PHe" id="MOu-GN-hkd"/>
                 <outlet property="filterButton" destination="1400" id="06C-9S-q2e"/>
                 <outlet property="filterDisclosureView" destination="cTN-D0-dY2" id="sKF-FL-hKC"/>
                 <outlet property="filterLabel" destination="1403" id="JQl-as-cDO"/>
@@ -79,7 +78,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="288" height="574"/>
                                         <clipView key="contentView" drawsBackground="NO" id="QAa-Gc-i1V">
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="574"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" columnResizing="NO" autosaveName="outViewer" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="14" outlineTableColumn="xXs-dn-GMc" id="Kk7-ax-B3r" customClass="FolderView">
                                                     <rect key="frame" x="0.0" y="0.0" width="288" height="574"/>
@@ -137,7 +136,7 @@
                                             <constraint firstAttribute="height" constant="23" id="dYp-Gl-QZR"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="delegate" destination="1227" id="1242"/>
+                                            <outlet property="delegate" destination="eqp-AV-PHe" id="b8a-0K-MPq"/>
                                             <outlet property="nextKeyView" destination="1218" id="1247"/>
                                             <outlet property="partnerView" destination="1218" id="1248"/>
                                             <outlet property="tabView" destination="1218" id="1241"/>
@@ -401,7 +400,7 @@
                         <popUpButton key="view" verticalHuggingPriority="750" id="DDQ-PY-F2c">
                             <rect key="frame" x="0.0" y="14" width="41" height="28"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NewFeedTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="pdk-MS-QME" id="xAh-aB-Ek3">
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="pdk-MS-QME" id="xAh-aB-Ek3">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" id="tQg-b5-Yiu">
@@ -626,7 +625,7 @@
                         <popUpButton key="view" verticalHuggingPriority="750" id="gOd-tT-XFQ">
                             <rect key="frame" x="0.0" y="14" width="41" height="28"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="StyleTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="lu2-BZ-Gxd" id="5CR-Qn-4pP">
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="lu2-BZ-Gxd" id="5CR-Qn-4pP">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" id="mit-Vi-iR1">
@@ -812,14 +811,12 @@
             </connections>
             <point key="canvasLocation" x="1066" y="109"/>
         </customView>
-        <customView id="1227" userLabel="BrowserView" customClass="BrowserView">
-            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-            <autoresizingMask key="autoresizingMask"/>
+        <customObject id="eqp-AV-PHe" customClass="Browser">
             <connections>
-                <outlet property="tabBarControl" destination="1238" id="1243"/>
-                <outlet property="tabBarHeightConstraint" destination="dYp-Gl-QZR" id="BKL-Xz-lML"/>
+                <outlet property="tabBarControl" destination="1238" id="2lB-oh-lMb"/>
+                <outlet property="tabBarHeightConstraint" destination="dYp-Gl-QZR" id="t6o-1h-aGO"/>
             </connections>
-        </customView>
+        </customObject>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="1288" customClass="EnclosureView">
             <rect key="frame" x="0.0" y="0.0" width="491" height="45"/>
             <subviews>

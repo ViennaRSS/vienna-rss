@@ -27,7 +27,7 @@
 #import "BrowserPane.h"
 #import "BitlyAPIHelper.h"
 #import "SearchMethod.h"
-#import "BrowserView.h"
+#import "Browser.h"
 #import "Vienna-Swift.h"
 
 @implementation PluginManager
@@ -262,7 +262,7 @@
  */
 -(BOOL)validateToolbarItem:(NSToolbarItem *)toolbarItem
 {
-    NSView<BaseView> * theView = APPCONTROLLER.browserView.activeTabItemView;
+    NSView<BaseView> * theView = APPCONTROLLER.browser.activeTabItemView;
     Article * thisArticle = APPCONTROLLER.selectedArticle;
 
     if ([theView isKindOfClass:[BrowserPane class]])
@@ -276,7 +276,7 @@
  */
 -(BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-    NSView<BaseView> * theView = APPCONTROLLER.browserView.activeTabItemView;
+    NSView<BaseView> * theView = APPCONTROLLER.browser.activeTabItemView;
     Article * thisArticle = APPCONTROLLER.selectedArticle;
 
     if ([theView isKindOfClass:[BrowserPane class]])
@@ -313,7 +313,7 @@
 				return;
 			
 			// Get the view that the user is currently looking at...
-			NSView<BaseView> * theView = APPCONTROLLER.browserView.activeTabItemView;
+			NSView<BaseView> * theView = APPCONTROLLER.browser.activeTabItemView;
 			
 			// ...and do the following in case the user is currently looking at a website.
 			if ([theView isKindOfClass:[BrowserPane class]])
@@ -361,7 +361,7 @@
 			{
 				NSURL * urlToLoad = cleanedUpAndEscapedUrlFromString(urlString);				
 				if (urlToLoad != nil)
-					[APPCONTROLLER.browserView createAndLoadNewTab:urlToLoad inBackground:NO];
+					[APPCONTROLLER.browser createAndLoadNewTab:urlToLoad inBackground:NO];
 			}
 			else
 			{

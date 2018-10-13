@@ -21,7 +21,7 @@
 #import "SearchPanel.h"
 #import "BrowserPane.h"
 #import "AppController.h"
-#import "BrowserView.h"
+#import "Browser.h"
 
 @implementation SearchPanel
 
@@ -58,7 +58,7 @@
 {
 	APPCONTROLLER.searchString = searchField.stringValue;
 	
-	NSView<BaseView> * theView = APPCONTROLLER.browserView.activeTabItemView;
+	NSView<BaseView> * theView = APPCONTROLLER.browser.activeTabItemView;
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
 		[theView performFindPanelAction:NSFindPanelActionSetFindString];

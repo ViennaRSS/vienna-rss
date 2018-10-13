@@ -1,5 +1,5 @@
 //
-//  BrowserView.h
+//  Browser.h
 //  Vienna
 //
 //  Created by Steve on 8/26/05.
@@ -26,7 +26,7 @@
 @class MMTabBarView;
 @class BrowserPane;
 
-@interface BrowserView : NSView
+@interface Browser : NSObject
 {
 	NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate> * primaryTabItemView;
 }
@@ -35,10 +35,11 @@
 @property (assign) IBOutlet MMTabBarView *tabBarControl;
 
 // Accessors
--(void)newTab;
--(void)createAndLoadNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
+-(BrowserPane *)newTab;
+-(BrowserPane *)createAndLoadNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
 -(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
 -(BrowserPane *)createNewTab:(NSURL *)url withTitle:(NSString *)title inBackground:(BOOL)openInBackgroundFlag;
+
 -(void)setPrimaryTabItemView:(NSView *)newPrimaryTabItemView;
 -(NSString *)tabItemViewTitle:(NSView *)tabView;
 @property (nonatomic, readonly) NSTabViewItem *activeTab;

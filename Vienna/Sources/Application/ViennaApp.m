@@ -32,7 +32,7 @@
 #import "Folder.h"
 #import "Article.h"
 #import "Database.h"
-#import "BrowserView.h"
+#import "Browser.h"
 
 @implementation ViennaApp
 
@@ -248,7 +248,7 @@
  */
 -(NSString *)currentTextSelection
 {
-	NSView<BaseView> * theView = ((AppController*)self.delegate).browserView.activeTabItemView;
+	NSView<BaseView> * theView = ((AppController*)self.delegate).browser.activeTabItemView;
 	WebView * webPane = nil;
 
 	if ([theView isKindOfClass:[BrowserPane class]])
@@ -272,7 +272,7 @@
 
 -(NSString *)documentHTMLSource
 {
-	NSView<BaseView> * theView = ((AppController*)self.delegate).browserView.activeTabItemView;
+	NSView<BaseView> * theView = ((AppController*)self.delegate).browser.activeTabItemView;
 	WebView * webPane = theView.webView;
 	
 	if (webPane != nil)
@@ -290,7 +290,7 @@
 
 -(NSString *)documentTabURL
 {
-	NSView<BaseView> * theView = ((AppController*)self.delegate).browserView.activeTabItemView;
+	NSView<BaseView> * theView = ((AppController*)self.delegate).browser.activeTabItemView;
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
 		return ((BrowserPane *)theView).url.absoluteString;

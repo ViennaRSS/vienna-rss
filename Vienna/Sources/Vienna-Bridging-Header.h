@@ -1,7 +1,7 @@
 #import "AppController.h"
 #import "ArticleListView.h"
 #import "ArticleView.h"
-#import "BrowserView.h"
+#import "Browser.h"
 #import "DisclosureView.h"
 #import "FolderView.h"
 #import "OpenReader.h"

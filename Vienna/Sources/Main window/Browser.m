@@ -1,5 +1,5 @@
 //
-//  BrowserView.m
+//  Browser.m
 //  Vienna
 //
 //  Created by Steve on 8/26/05.
@@ -20,12 +20,14 @@
 
 #import "BrowserPane.h"
 #import "BrowserPaneTemplate.h"
-#import "BrowserView.h"
+#import "Browser.h"
 #import "Preferences.h"
 #import "Constants.h"
+#import "Browser+WebUIDelegate.h"
+#import "TabbedWebView.h"
 #import <MMTabBarView/MMTabBarView.h>
 
-@interface BrowserView () <MMTabBarViewDelegate>
+@interface Browser () <MMTabBarViewDelegate>
 
 //queue for tab view items to select when current item is closed
 @property NSMutableArray<NSTabViewItem *> *tabViewOrder;
@@ -48,7 +50,7 @@
 
 @end
 
-@implementation BrowserView
+@implementation Browser
 
 -(void)awakeFromNib
 {
@@ -195,19 +197,21 @@
 	MMTabBarView *tabBar = self.tabBarControl;
 	NSTabView *tabView = tabBar.tabView;
 
-    if ((tabBar.delegate) && ([tabBar.delegate respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])) {
-        if (![tabBar.delegate tabView:tabView shouldCloseTabViewItem:tabViewItem]) {
+    if ((tabBar.delegate)
+        && ([tabBar.delegate respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])
+        && ![tabBar.delegate tabView:tabView shouldCloseTabViewItem:tabViewItem]) {
             return;
-        }
     }
     
-    if ((tabBar.delegate) && ([tabBar.delegate respondsToSelector:@selector(tabView:willCloseTabViewItem:)])) {
+    if ((tabBar.delegate)
+        && ([tabBar.delegate respondsToSelector:@selector(tabView:willCloseTabViewItem:)])) {
         [tabBar.delegate tabView:tabView willCloseTabViewItem:tabViewItem];
     }
     
     [tabView removeTabViewItem:tabViewItem];
     
-    if ((tabBar.delegate) && ([tabBar.delegate respondsToSelector:@selector(tabView:didCloseTabViewItem:)])) {
+    if ((tabBar.delegate)
+        && ([tabBar.delegate respondsToSelector:@selector(tabView:didCloseTabViewItem:)])) {
         [tabBar.delegate tabView:tabView didCloseTabViewItem:tabViewItem];
     }
 }
@@ -430,23 +434,22 @@
 /* newTab
  * Create a new empty tab.
  */
--(void)newTab
+-(BrowserPane *)newTab
 {
 	// Create a new empty tab in the foreground.
-	[self createNewTab:nil inBackground:NO];
-
+	BrowserPane *browserPane = [self createNewTab:nil inBackground:NO];
 	// Make the address bar first responder.
-	NSView<BaseView> * theView = self.activeTabItemView;
-	BrowserPane * browserPane = (BrowserPane *)theView;
 	[browserPane activateAddressBar];
+
+    return browserPane;
 }
 
 /* create tab with title and url
  * but do not load the page
  */
--(BrowserPane *)createNewTab:(NSURL *)url withTitle:(NSString *)title inBackground:(BOOL)openInBackgroundFlag
+-(BrowserPane *)createNewTab:(NSURL *)url withTitle:(NSString *)title inBackground:(BOOL)inBackground
 {
-	BrowserPane * newBrowserPane = [self createNewTab:url inBackground:openInBackgroundFlag];
+	BrowserPane * newBrowserPane = [self createNewTab:url inBackground:inBackground];
 	if (title != nil) {
         newBrowserPane.tab.label = title;
 		[newBrowserPane setViewTitle:title];
@@ -457,17 +460,18 @@
 /* create tab with url
  * and load the page.
  */
--(void)createAndLoadNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
+-(BrowserPane *)createAndLoadNewTab:(NSURL *)url inBackground:(BOOL)inBackground
 {
-	BrowserPane * newBrowserPane = [self createNewTab:url inBackground:openInBackgroundFlag];
+	BrowserPane * newBrowserPane = [self createNewTab:url inBackground:inBackground];
 	[newBrowserPane load];
+    return newBrowserPane;
 }
 
 /* create tab with url
  * but do not load the page
  * in case openInBackgroundFlag is false, open the tab
  */
--(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
+-(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)inBackground
 {
     BrowserPaneTemplate *newBrowserTemplate = [[BrowserPaneTemplate alloc] init];
     BrowserPane *newBrowserPane;
@@ -486,7 +490,7 @@
             [self.tabViewOrder insertObject:tab atIndex:0];
         }
 
-        if (!openInBackgroundFlag) {
+        if (!inBackground) {
             [self.tabBarControl selectTabViewItem:tab];
         }
 
@@ -494,6 +498,9 @@
 
         //set url but do not load yet
         newBrowserPane.url = url;
+
+        //set delegate of new tab to the browser
+        newBrowserPane.webPane.UIDelegate = self;
     }
     return newBrowserPane;
 }

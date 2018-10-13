@@ -27,7 +27,6 @@
 // This is defined somewhere but I can't find where.
 #define WebKitErrorPlugInWillHandleLoad	204
 
-@class BrowserView;
 @class TabbedWebView;
 
 @interface BrowserPaneButtonCell : NSCell {}
@@ -36,7 +35,7 @@
 @interface BrowserPaneButton : NSButton {}
 @end
 
-@interface BrowserPane : NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate, MMTabBarItem> {
+@interface BrowserPane : NSView<BaseView, WebFrameLoadDelegate, MMTabBarItem> {
 	IBOutlet NSButton * backButton;
 	IBOutlet NSButton * forwardButton;
 	IBOutlet NSButton * refreshButton;
@@ -62,7 +61,6 @@
 
 // Accessor functions
 -(void)load;
-@property (weak) BrowserView *browser;
 @property (weak) NSTabViewItem *tab;
 @property (nonatomic) NSURL *url;
 @property (nonatomic, copy) NSString *viewTitle;
@@ -75,4 +73,7 @@
 //tabBarItem functions
 @property (assign) BOOL hasCloseButton;
 @property (assign) BOOL isProcessing;
+
+-(void)hoveredOverURL:(NSURL *)url;
+
 @end
