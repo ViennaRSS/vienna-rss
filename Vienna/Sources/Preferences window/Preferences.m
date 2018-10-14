@@ -39,6 +39,7 @@ NSString * MA_FeedSourcesFolder_Name = @"Sources";
 NSString * const kMA_Notify_MinimumFontSizeChange = @"MA_Notify_MinimumFontSizeChange";
 NSString * const kMA_Notify_UseJavaScriptChange = @"MA_Notify_UseJavaScriptChange";
 NSString * const kMA_Notify_UseWebPluginsChange = @"MA_Notify_UseWebPluginsChange";
+NSString * const kMA_Notify_TabOrderPrefsChange = @"MA_Notify_TabOrderPrefsChange";
 
 
 // The default preferences object.

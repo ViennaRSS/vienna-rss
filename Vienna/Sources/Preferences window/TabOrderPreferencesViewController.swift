@@ -75,6 +75,11 @@ class TabOrderPreferencesViewController: NSViewController, MASPreferencesViewCon
         openLeftCanJumpToArticlesButton.state = canOpenArticles ? .on : .off
     }
 
+    func updatePreferences() {
+        initializePreferences()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kMA_Notify_TabOrderPrefsChange), object: self)
+    }
+
     @IBAction func firstOrder(_ sender: NSButton) {
         if sender == openLastReadTabButton {
             Preferences.standard().selectPreviousOnClose = (openLastReadTabButton.state == .on)
@@ -82,22 +87,22 @@ class TabOrderPreferencesViewController: NSViewController, MASPreferencesViewCon
             Preferences.standard().selectPreviousOnClose = (openLastReadTabButton.state == .on)
             Preferences.standard().selectRightItemFirst = (openRightTabButton.state == .on)
         }
-        initializePreferences()
+        updatePreferences()
     }
 
     @IBAction func openNewTabFirst(_ sender: NSButton) {
         Preferences.standard().selectNewItemFirst = (openNewTabFirstButton.state == .on)
-        initializePreferences()
+        updatePreferences()
     }
 
     @IBAction func canJumpToArticles(_ sender: NSButton) {
         Preferences.standard().canJumpToArticles = (sender.state == .on)
-        initializePreferences()
+        updatePreferences()
     }
 
     @IBAction func secondOrder(_ sender: NSButton) {
         Preferences.standard().selectRightItemFirst = noLastReadOpenRightButton.state == .on
-        initializePreferences()
+        updatePreferences()
     }
 
 }

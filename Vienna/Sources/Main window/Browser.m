@@ -54,23 +54,31 @@
 
 -(void)awakeFromNib
 {
-	[self configureTabBar];
-	[self configureTabClosingBehavior];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(updateTabOrderPreferences:) name:kMA_Notify_TabOrderPrefsChange object:nil];
 
-	self.tabViewOrder = [NSMutableArray array];
+    [self updateTabOrderPreferences:nil];
+
+    [self configureTabBar];
+
+    self.tabViewOrder = [NSMutableArray array];
 
     [self restoreTabs];
 }
 
--(void)configureTabClosingBehavior
-{
-	self.selectPreviousOnClose = false;
-	//only works if selectpreviousonclose is true
-	self.selectNewItemFirst = false;
-	//only works if selectpreviousonclose is false
-	self.selectRightItemFirst = true;
-	//only relevant if (selectpreviousonclose is true) or (selectrightitemfirst is false)
-	self.canJumpToArticles = false;
+-(void)updateTabOrderPreferences:(NSNotification *)n {
+
+    //reset tabvieworder when it does not reflect new settings
+    if (Preferences.standardPreferences.selectPreviousOnClose != self.selectPreviousOnClose) {
+        [self.tabViewOrder removeAllObjects];
+    }
+
+    self.selectPreviousOnClose = Preferences.standardPreferences.selectPreviousOnClose;
+    //only works if selectpreviousonclose is true
+    self.selectNewItemFirst = Preferences.standardPreferences.selectNewItemFirst;
+    //only works if selectpreviousonclose is false
+    self.selectRightItemFirst = Preferences.standardPreferences.selectRightItemFirst;
+    //only relevant if (selectpreviousonclose is true) or (selectrightitemfirst is false)
+    self.canJumpToArticles = Preferences.standardPreferences.canJumpToArticles;
 }
 
 -(void)configureTabBar
@@ -271,7 +279,8 @@
 
 	if (self.tabBarControl.selectedTabViewItem == tabViewItem)
 	{
-		if (self.selectPreviousOnClose) {
+		if (self.selectPreviousOnClose
+            && self.tabViewOrder.count > 0) {
 			//open most recently opened tab
 			[self.tabBarControl.tabView selectTabViewItem:self.tabViewOrder.lastObject];
 		}

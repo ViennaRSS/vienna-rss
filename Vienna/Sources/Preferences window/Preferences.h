@@ -78,6 +78,7 @@
 extern NSString * const kMA_Notify_MinimumFontSizeChange;
 extern NSString * const kMA_Notify_UseJavaScriptChange;
 extern NSString * const kMA_Notify_UseWebPluginsChange;
+extern NSString * const kMA_Notify_TabOrderPrefsChange;
 
 // Accessor functions
 +(nonnull Preferences *)standardPreferences;

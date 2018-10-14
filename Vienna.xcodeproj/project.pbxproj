@@ -57,11 +57,11 @@
 		03B752421B74814B00FD3FDB /* RichXMLParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B752411B74814B00FD3FDB /* RichXMLParserTests.m */; };
 		03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EFD56F1B720AB0007EF284 /* ExportTests.m */; };
 		03F33D961DF2A2F900B04FAF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03F33D951DF2A2F900B04FAF /* Images.xcassets */; };
-		2FA79F192170C55D00228482 /* Browser+WebUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA79F182170C55D00228482 /* Browser+WebUIDelegate.m */; };
-		2F3AD707216F2C37007708A2 /* TabOrderPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3AD705216F2C37007708A2 /* TabOrderPreferencesViewController.swift */; };
-		2F3AD70A216F2D51007708A2 /* TabOrderPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F3AD709216F2D51007708A2 /* TabOrderPreferencesViewController.xib */; };
 		2FAA36402072F50B00169C8A /* MMTabBarView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FAA363F2072F50B00169C8A /* MMTabBarView.framework */; };
 		2FAA36422072F57500169C8A /* MMTabBarView.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 2FAA363F2072F50B00169C8A /* MMTabBarView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2FC91DD92185079400D7F223 /* TabOrderPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FC91DD72185079400D7F223 /* TabOrderPreferencesViewController.xib */; };
+		2FC91DDA2185079400D7F223 /* TabOrderPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC91DD82185079400D7F223 /* TabOrderPreferencesViewController.swift */; };
+		2FC91DDD21850ADB00D7F223 /* Browser+WebUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */; };
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		37C650801816EBAD3C0D9DBF /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */; };
 		3A171C00210B551B00B80FBB /* TRVSURLSessionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A171BF1210B551B00B80FBB /* TRVSURLSessionOperation.m */; };
@@ -342,6 +342,10 @@
 		03F33D951DF2A2F900B04FAF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; };
 		2FAA363F2072F50B00169C8A /* MMTabBarView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MMTabBarView.framework; path = Carthage/Build/Mac/MMTabBarView.framework; sourceTree = "<group>"; };
+		2FC91DD72185079400D7F223 /* TabOrderPreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TabOrderPreferencesViewController.xib; path = Vienna/Interfaces/TabOrderPreferencesViewController.xib; sourceTree = SOURCE_ROOT; };
+		2FC91DD82185079400D7F223 /* TabOrderPreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabOrderPreferencesViewController.swift; sourceTree = "<group>"; };
+		2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Browser+WebUIDelegate.m"; sourceTree = "<group>"; };
+		2FC91DDC21850ADB00D7F223 /* Browser+WebUIDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Browser+WebUIDelegate.h"; sourceTree = "<group>"; };
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ClickableProgressIndicator.h; sourceTree = "<group>"; };
 		34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClickableProgressIndicator.m; sourceTree = "<group>"; };
 		37C652B4C918F312BA9F1AB1 /* NSURL+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Utils.h"; sourceTree = "<group>"; };
@@ -1293,7 +1297,7 @@
 		F63739FB1F1CFEDC00ED3B09 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				2F3AD709216F2D51007708A2 /* TabOrderPreferencesViewController.xib */,
+				2FC91DD72185079400D7F223 /* TabOrderPreferencesViewController.xib */,
 				F625815B1E29BEB90035E43C /* MainMenu.xib */,
 				F6832F661F10F5DA007920D4 /* MainWindowController.xib */,
 				0386A5BB1E1FA586000C10CE /* BrowserPane.xib */,
@@ -1536,10 +1540,10 @@
 		F6A7EA5B1F1CE63B00BD4450 /* Browser */ = {
 			isa = PBXGroup;
 			children = (
+				2FC91DDC21850ADB00D7F223 /* Browser+WebUIDelegate.h */,
+				2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */,
 				4350285B165DE9DF0018EDB7 /* Browser.h */,
 				4350285C165DE9DF0018EDB7 /* Browser.m */,
-				2FA79F172170C55D00228482 /* Browser+WebUIDelegate.h */,
-				2FA79F182170C55D00228482 /* Browser+WebUIDelegate.m */,
 				AAD7999D088B617900E2CE5E /* AddressBarCell.h */,
 				AA71168E09BEB17300E3EA8A /* AddressBarCell.m */,
 				43502857165DE9DF0018EDB7 /* BrowserPane.h */,
@@ -1629,6 +1633,7 @@
 		F6D7FEDA1F1CDEED004F095A /* Preferences window */ = {
 			isa = PBXGroup;
 			children = (
+				2FC91DD82185079400D7F223 /* TabOrderPreferencesViewController.swift */,
 				AA9FE2EB08BC133600A9E977 /* Preferences.h */,
 				AA9FE2EC08BC133600A9E977 /* Preferences.m */,
 				F6EB261A1E5BA59300570B22 /* PreferencesWindowController.h */,
@@ -1641,7 +1646,6 @@
 				0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */,
 				0349813F1A20701600014F29 /* AdvancedPreferencesViewController.h */,
 				034981401A20701600014F29 /* AdvancedPreferencesViewController.m */,
-				2F3AD705216F2C37007708A2 /* TabOrderPreferencesViewController.swift */,
 			);
 			path = "Preferences window";
 			sourceTree = "<group>";
@@ -1984,7 +1988,7 @@
 				F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */,
 				AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */,
 				AAF6C3A308B06BA00077BAB8 /* StandardURLs.plist in Resources */,
-				2F3AD70A216F2D51007708A2 /* TabOrderPreferencesViewController.xib in Resources */,
+				2FC91DD92185079400D7F223 /* TabOrderPreferencesViewController.xib in Resources */,
 				AA83A05008D6764D001E8404 /* smallCloseButton.tiff in Resources */,
 				AABCF9A508FF562E00984F78 /* pressedCloseButton.tiff in Resources */,
 				AA32E2A40940A9970034D9CC /* folderError.tiff in Resources */,
@@ -2242,6 +2246,7 @@
 				43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */,
 				43502896165DE9E00018EDB7 /* ActivityPanelController.m in Sources */,
 				F6CE47131E7E3DCB0045EAD7 /* ActivityItem.m in Sources */,
+				2FC91DDD21850ADB00D7F223 /* Browser+WebUIDelegate.m in Sources */,
 				43502897165DE9E00018EDB7 /* AppController.m in Sources */,
 				43502898165DE9E00018EDB7 /* ArticleController.m in Sources */,
 				4350289A165DE9E00018EDB7 /* ArticleListView.m in Sources */,
@@ -2256,6 +2261,7 @@
 				F64C2CCC1E83825D00ED4E04 /* DateFormatterExtension.m in Sources */,
 				4350289F165DE9E00018EDB7 /* Constants.m in Sources */,
 				034981411A20701600014F29 /* AdvancedPreferencesViewController.m in Sources */,
+				2FC91DDA2185079400D7F223 /* TabOrderPreferencesViewController.swift in Sources */,
 				435028A0165DE9E00018EDB7 /* DownloadManager.m in Sources */,
 				435028A1165DE9E00018EDB7 /* DownloadWindow.m in Sources */,
 				0379E23B1A20831600D58BFE /* SyncingPreferencesViewController.m in Sources */,
@@ -2271,13 +2277,11 @@
 				F6A4E8481F040D58001C9191 /* PluginToolbarItemButton.swift in Sources */,
 				435028AC165DE9E00018EDB7 /* NewSubscription.m in Sources */,
 				03B7522A1B741AFD00FD3FDB /* FeedItem.m in Sources */,
-				2F3AD707216F2C37007708A2 /* TabOrderPreferencesViewController.swift in Sources */,
 				F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */,
 				435028AD165DE9E00018EDB7 /* PluginManager.m in Sources */,
 				435028AE165DE9E00018EDB7 /* ProgressTextCell.m in Sources */,
 				793C95331C42A0DD00984D4E /* FoldersFilterable.m in Sources */,
 				435028AF165DE9E00018EDB7 /* RefreshManager.m in Sources */,
-				2FA79F192170C55D00228482 /* Browser+WebUIDelegate.m in Sources */,
 				435028B0165DE9E00018EDB7 /* SearchFolder.m in Sources */,
 				435028B1165DE9E00018EDB7 /* SearchMethod.m in Sources */,
 				435028B2165DE9E00018EDB7 /* SearchPanel.m in Sources */,
