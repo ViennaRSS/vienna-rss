@@ -9,12 +9,13 @@
         <customObject id="-2" userLabel="File's Owner" customClass="TabOrderPreferencesViewController" customModule="Vienna" customModuleProvider="target">
             <connections>
                 <outlet property="lastReadCanJumpToArticlesButton" destination="g6G-uM-Dk9" id="cns-kX-FBh"/>
-                <outlet property="noLastReadOpenLeftButton" destination="R1Q-za-GAD" id="c3f-SI-RKb"/>
-                <outlet property="noLastReadOpenRightButton" destination="d6P-AN-bMn" id="aIA-at-S33"/>
+                <outlet property="noLastReadLabel" destination="iYa-dI-UYI" id="k0h-RJ-HOj"/>
+                <outlet property="noLastReadOpenLeftButton" destination="K71-bE-tYc" id="7sf-ai-jDR"/>
+                <outlet property="noLastReadOpenRightButton" destination="d6P-AN-bMn" id="r7U-jC-sh2"/>
                 <outlet property="openLastReadTabButton" destination="AsB-hw-o2x" id="p7e-u8-NSB"/>
                 <outlet property="openLeftCanJumpToArticlesButton" destination="d57-VY-KUA" id="wBm-aC-fU1"/>
                 <outlet property="openLeftTabButton" destination="31h-AS-8PV" id="qiN-uS-Ocr"/>
-                <outlet property="openNewTabFirstButton" destination="hnW-76-2Cl" id="e3G-1l-har"/>
+                <outlet property="openNewTabFirstButton" destination="hnW-76-2Cl" id="SGW-y9-u1S"/>
                 <outlet property="openRightTabButton" destination="nJX-kO-G7T" id="Ri1-D8-WyD"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -22,15 +23,15 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="540" height="369"/>
+            <rect key="frame" x="0.0" y="0.0" width="540" height="319"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5LK-Aj-Eb2">
-                    <rect key="frame" x="0.0" y="335" width="540" height="26"/>
+                    <rect key="frame" x="0.0" y="280" width="540" height="31"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tabbar" id="4S1-ZQ-bkC"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GAp-HY-ULB">
-                    <rect key="frame" x="18" y="302" width="516" height="17"/>
+                    <rect key="frame" x="18" y="247" width="516" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="After closing the currently opened tab open..." id="SqB-Mh-mFy">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -38,100 +39,93 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AsB-hw-o2x">
-                    <rect key="frame" x="19" y="269" width="515" height="18"/>
+                    <rect key="frame" x="19" y="214" width="515" height="18"/>
                     <buttonCell key="cell" type="radio" title="... the last read tab (Current tab -&gt; Last read tab -&gt; Tab read before that -&gt; ...)" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="ThX-rU-eor">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="openLastReadTab:" target="-2" id="Nn8-kt-VUK"/>
+                        <action selector="firstOrder:" target="-2" id="7mv-OV-NfM"/>
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hnW-76-2Cl">
-                    <rect key="frame" x="38" y="246" width="496" height="18"/>
+                    <rect key="frame" x="38" y="191" width="496" height="18"/>
                     <buttonCell key="cell" type="check" title="If new tab has been opened, open that one first (Current tab -&gt; New tab -&gt; ...)" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="fxy-te-U0A">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="openNewTabFirst:" target="-2" id="emA-c2-g6O"/>
+                        <action selector="openNewTabFirst:" target="-2" id="o4S-3r-D3e"/>
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g6G-uM-Dk9">
-                    <rect key="frame" x="38" y="224" width="496" height="18"/>
+                    <rect key="frame" x="38" y="169" width="496" height="18"/>
                     <buttonCell key="cell" type="check" title="Can jump to articles tab (... -&gt; Articles tab)" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="6ER-6C-cYO">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="canJumpToArticles:" target="-2" id="St9-23-tHp"/>
-                    </connections>
-                </button>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="31h-AS-8PV">
-                    <rect key="frame" x="19" y="124" width="515" height="18"/>
-                    <buttonCell key="cell" type="radio" title="... tab to the left if possible (A &lt;- B &lt;- C)" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="XjF-xT-4Iz">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="openLeftTab:" target="-2" id="048-Sg-eXZ"/>
-                    </connections>
-                </button>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d57-VY-KUA">
-                    <rect key="frame" x="38" y="101" width="496" height="18"/>
-                    <buttonCell key="cell" type="check" title="Can jump to articles tab (Ariticles &lt;- ...)" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="LH7-E4-0Et">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="canJumpToArticles:" target="-2" id="6pK-O8-mmy"/>
-                    </connections>
-                </button>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nJX-kO-G7T">
-                    <rect key="frame" x="19" y="74" width="515" height="18"/>
-                    <buttonCell key="cell" type="radio" title="... tab to the right if possible (A -&gt; B -&gt; C)" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="hA1-8n-KNC">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="openRightTab:" target="-2" id="YqW-sa-RRP"/>
+                        <action selector="canJumpToArticles:" target="-2" id="RLx-hr-uKc"/>
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K71-bE-tYc">
-                    <rect key="frame" x="51" y="176" width="483" height="18"/>
+                    <rect key="frame" x="51" y="121" width="483" height="18"/>
                     <buttonCell key="cell" type="radio" title="... the left if possible (A &lt;- B &lt;- C)" bezelStyle="regularSquare" imagePosition="left" alignment="left" enabled="NO" inset="2" id="R1Q-za-GAD">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="openLeftTab:" target="-2" id="LCe-aQ-K4A"/>
+                        <action selector="secondOrder:" target="-2" id="ozt-Ue-YaI"/>
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d6P-AN-bMn">
-                    <rect key="frame" x="51" y="152" width="483" height="18"/>
+                    <rect key="frame" x="51" y="97" width="483" height="18"/>
                     <buttonCell key="cell" type="radio" title="... the right if possible (A -&gt; B -&gt; C)" bezelStyle="regularSquare" imagePosition="left" alignment="left" enabled="NO" state="on" inset="2" id="Au3-PQ-pxz">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="openRightTab:" target="-2" id="CRg-Vn-PwX"/>
+                        <action selector="secondOrder:" target="-2" id="3fc-Q2-ST0"/>
                     </connections>
                 </button>
-                <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P7F-bz-86p">
-                    <rect key="frame" x="497" y="17" width="25" height="25"/>
-                    <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="LHJ-Pz-6Ly">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iYa-dI-UYI">
-                    <rect key="frame" x="38" y="201" width="496" height="17"/>
+                    <rect key="frame" x="38" y="146" width="496" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" title="If there is no last read tab, open tab to..." id="XJO-Z1-7Qo">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="31h-AS-8PV">
+                    <rect key="frame" x="19" y="69" width="515" height="18"/>
+                    <buttonCell key="cell" type="radio" title="... tab to the left if possible (A &lt;- B &lt;- C)" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="XjF-xT-4Iz">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="firstOrder:" target="-2" id="6Z9-lU-wZX"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d57-VY-KUA">
+                    <rect key="frame" x="38" y="46" width="496" height="18"/>
+                    <buttonCell key="cell" type="check" title="Can jump to articles tab (Ariticles &lt;- ...)" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="LH7-E4-0Et">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="canJumpToArticles:" target="-2" id="gaZ-mc-dfd"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nJX-kO-G7T">
+                    <rect key="frame" x="19" y="19" width="515" height="18"/>
+                    <buttonCell key="cell" type="radio" title="... tab to the right if possible (A -&gt; B -&gt; C)" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="hA1-8n-KNC">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="firstOrder:" target="-2" id="HM6-xw-yfl"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="GAp-HY-ULB" secondAttribute="trailing" constant="8" id="44D-3h-agf"/>
@@ -147,24 +141,21 @@
                 <constraint firstItem="GAp-HY-ULB" firstAttribute="top" secondItem="5LK-Aj-Eb2" secondAttribute="bottom" constant="16" id="JzC-gg-E9l"/>
                 <constraint firstItem="g6G-uM-Dk9" firstAttribute="top" secondItem="hnW-76-2Cl" secondAttribute="bottom" constant="8" id="K7f-3P-yzP"/>
                 <constraint firstAttribute="trailing" secondItem="d57-VY-KUA" secondAttribute="trailing" constant="8" id="Lgd-Vz-NTU"/>
-                <constraint firstItem="P7F-bz-86p" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="NM9-qh-CD6"/>
                 <constraint firstItem="d57-VY-KUA" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="40" id="Pjm-vH-FCV"/>
                 <constraint firstItem="d57-VY-KUA" firstAttribute="top" secondItem="31h-AS-8PV" secondAttribute="bottom" constant="8" id="Ppx-7h-VNw"/>
                 <constraint firstAttribute="trailing" secondItem="nJX-kO-G7T" secondAttribute="trailing" constant="8" id="Qb3-ie-E7t"/>
                 <constraint firstAttribute="trailing" secondItem="g6G-uM-Dk9" secondAttribute="trailing" constant="8" id="RfB-pL-ywl"/>
+                <constraint firstAttribute="bottom" secondItem="nJX-kO-G7T" secondAttribute="bottom" constant="20" id="SnT-ic-Rua"/>
                 <constraint firstAttribute="trailing" secondItem="31h-AS-8PV" secondAttribute="trailing" constant="8" id="Wcq-Mm-gIO"/>
                 <constraint firstItem="GAp-HY-ULB" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="XV6-eD-FHx"/>
-                <constraint firstItem="P7F-bz-86p" firstAttribute="top" secondItem="nJX-kO-G7T" secondAttribute="bottom" constant="34" id="XrM-4w-an1"/>
                 <constraint firstItem="AsB-hw-o2x" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="c12-fC-RuC"/>
                 <constraint firstItem="AsB-hw-o2x" firstAttribute="top" secondItem="GAp-HY-ULB" secondAttribute="bottom" constant="16" id="dZI-SY-eSu"/>
                 <constraint firstItem="iYa-dI-UYI" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="40" id="daY-cg-FHY"/>
                 <constraint firstItem="hnW-76-2Cl" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="40" id="dtB-e7-CFK"/>
                 <constraint firstItem="5LK-Aj-Eb2" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="8" id="eBP-3I-MR1"/>
                 <constraint firstAttribute="trailing" secondItem="hnW-76-2Cl" secondAttribute="trailing" constant="8" id="eRA-Ae-iFq"/>
-                <constraint firstAttribute="trailing" secondItem="P7F-bz-86p" secondAttribute="trailing" constant="20" id="euW-DJ-3ZW"/>
                 <constraint firstAttribute="trailing" secondItem="5LK-Aj-Eb2" secondAttribute="trailing" id="fhm-Xr-MxN"/>
                 <constraint firstItem="d6P-AN-bMn" firstAttribute="top" secondItem="K71-bE-tYc" secondAttribute="bottom" constant="8" id="haG-62-hzN"/>
-                <constraint firstAttribute="bottom" secondItem="P7F-bz-86p" secondAttribute="bottom" constant="20" id="n2t-7G-Vop"/>
                 <constraint firstItem="nJX-kO-G7T" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="se7-up-aBu"/>
                 <constraint firstAttribute="trailing" secondItem="iYa-dI-UYI" secondAttribute="trailing" constant="8" id="tMf-eC-GTZ"/>
                 <constraint firstItem="iYa-dI-UYI" firstAttribute="top" secondItem="g6G-uM-Dk9" secondAttribute="bottom" constant="8" id="tct-4l-hWk"/>
@@ -172,6 +163,7 @@
                 <constraint firstAttribute="trailing" secondItem="K71-bE-tYc" secondAttribute="trailing" constant="8" id="xRW-Gb-wXk"/>
                 <constraint firstItem="nJX-kO-G7T" firstAttribute="top" secondItem="d57-VY-KUA" secondAttribute="bottom" constant="12" id="xrY-lW-biq"/>
             </constraints>
+            <point key="canvasLocation" x="91" y="179.5"/>
         </customView>
     </objects>
     <resources>

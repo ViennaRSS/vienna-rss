@@ -13,7 +13,8 @@ class TabOrderPreferencesViewController: NSViewController, MASPreferencesViewCon
     @IBOutlet weak var openLastReadTabButton: NSButton!
     @IBOutlet weak var openNewTabFirstButton: NSButton!
     @IBOutlet weak var lastReadCanJumpToArticlesButton: NSButton!
-    @IBOutlet weak var noLastReadOpenLeftButton: NSButtonCell!
+    @IBOutlet weak var noLastReadLabel: NSTextField!
+    @IBOutlet weak var noLastReadOpenLeftButton: NSButton!
     @IBOutlet weak var noLastReadOpenRightButton: NSButton!
     @IBOutlet weak var openLeftTabButton: NSButton!
     @IBOutlet weak var openLeftCanJumpToArticlesButton: NSButton!
@@ -57,6 +58,7 @@ class TabOrderPreferencesViewController: NSViewController, MASPreferencesViewCon
         openLastReadTabButton.state = openLastRead ? .on : .off
         openNewTabFirstButton.isEnabled = openLastRead
         lastReadCanJumpToArticlesButton.isEnabled = openLastRead
+        noLastReadLabel.textColor = openLastRead ? NSColor.controlTextColor : NSColor.disabledControlTextColor
         noLastReadOpenRightButton.isEnabled = openLastRead
         noLastReadOpenLeftButton.isEnabled = openLastRead
 
@@ -73,36 +75,28 @@ class TabOrderPreferencesViewController: NSViewController, MASPreferencesViewCon
         openLeftCanJumpToArticlesButton.state = canOpenArticles ? .on : .off
     }
 
-    @IBAction func openLastReadTab(_ sender: NSButton) {
-        Preferences.standard().selectPreviousOnClose = (sender.state == .on)
+    @IBAction func firstOrder(_ sender: NSButton) {
+        if sender == openLastReadTabButton {
+            Preferences.standard().selectPreviousOnClose = (openLastReadTabButton.state == .on)
+        } else {
+            Preferences.standard().selectPreviousOnClose = (openLastReadTabButton.state == .on)
+            Preferences.standard().selectRightItemFirst = (openRightTabButton.state == .on)
+        }
         initializePreferences()
     }
 
     @IBAction func openNewTabFirst(_ sender: NSButton) {
-        Preferences.standard().selectNewItemFirst = (sender.state == .on)
-        initializePreferences()
-    }
-
-    @IBAction func openLeftTab(_ sender: NSButton) {
-        Preferences.standard().selectRightItemFirst = (sender.state == .off)
-        //TODO: find out if cocoa has something like button group, to avoid this ugly pattern
-        if sender == openLeftTabButton && sender.state == .on {
-            Preferences.standard().selectPreviousOnClose = false
-        }
-        initializePreferences()
-    }
-
-    @IBAction func openRightTab(_ sender: NSButton) {
-        Preferences.standard().selectRightItemFirst = (sender.state == .on)
-        //TODO: find out if cocoa has something like button group, to avoid this ugly pattern
-        if sender == openRightTabButton && sender.state == .on {
-            Preferences.standard().selectPreviousOnClose = false
-        }
+        Preferences.standard().selectNewItemFirst = (openNewTabFirstButton.state == .on)
         initializePreferences()
     }
 
     @IBAction func canJumpToArticles(_ sender: NSButton) {
         Preferences.standard().canJumpToArticles = (sender.state == .on)
+        initializePreferences()
+    }
+
+    @IBAction func secondOrder(_ sender: NSButton) {
+        Preferences.standard().selectRightItemFirst = noLastReadOpenRightButton.state == .on
         initializePreferences()
     }
 
