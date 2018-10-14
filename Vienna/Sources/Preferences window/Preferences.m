@@ -197,6 +197,14 @@ static Preferences * _standardPreferences = nil;
 		checkForNewOnStartup = [SUUpdater sharedUpdater].automaticallyChecksForUpdates;
         alwaysAcceptBetas = [self boolForKey:MAPref_AlwaysAcceptBetas];
 
+        //reading order settings
+
+        selectPreviousOnClose = [userPrefs boolForKey:MAPref_SelectPreviousOnClose];
+        selectNewItemFirst = [userPrefs boolForKey:MAPref_SelectNewItemFirst];
+        applyOnlyToBrowserOpenedTabs = [userPrefs boolForKey:MAPref_ApplyOnlyToBrowserOpenedTabs];
+        selectRightItemFirst = [userPrefs boolForKey:MAPref_SelectRightItemFirst];
+        canJumpToArticles = [userPrefs boolForKey:MAPref_CanJumpToArticles];
+
 		if (shouldSaveFeedSource)
 		{
 			[self createFeedSourcesFolderIfNecessary];
@@ -285,7 +293,12 @@ static Preferences * _standardPreferences = nil;
     defaultValues[MAPref_SyncGoogleReader] = boolNo;
     defaultValues[MAPref_GoogleNewSubscription] = boolNo;
     defaultValues[MAPref_AlwaysAcceptBetas] = boolNo;
-	
+    defaultValues[MAPref_SelectPreviousOnClose] = boolNo;
+    defaultValues[MAPref_SelectNewItemFirst] = boolNo;
+    defaultValues[MAPref_ApplyOnlyToBrowserOpenedTabs] = boolNo;
+    defaultValues[MAPref_SelectRightItemFirst] = boolYes;
+    defaultValues[MAPref_CanJumpToArticles] = boolNo;
+
 	return [defaultValues copy];
 }
 
@@ -1226,6 +1239,37 @@ static Preferences * _standardPreferences = nil;
 		[self setString:syncingUser forKey:MAPref_SyncingUser];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
 	}
+}
+
+-(BOOL)selectPreviousOnClose {
+    return selectPreviousOnClose;
+}
+-(void)setSelectPreviousOnClose:(BOOL)selPreviousOnClose {
+    selectPreviousOnClose = selPreviousOnClose;
+}
+-(BOOL)selectNewItemFirst {
+    return selectNewItemFirst;
+}
+-(void)setSelectNewItemFirst:(BOOL)newItemFirst {
+    selectNewItemFirst = newItemFirst;
+}
+-(BOOL)applyOnlyToBrowserOpenedTabs {
+    return applyOnlyToBrowserOpenedTabs;
+}
+-(void)setApplyOnlyToBrowserOpenedTabs:(BOOL)onlyToBrowserOpenedTabs {
+    applyOnlyToBrowserOpenedTabs = onlyToBrowserOpenedTabs;
+}
+-(BOOL)selectRightItemFirst {
+    return selectRightItemFirst;
+}
+-(void)setSelectRightItemFirst:(BOOL)rightItemFirst {
+    selectRightItemFirst = rightItemFirst;
+}
+-(BOOL)canJumpToArticles {
+    return canJumpToArticles;
+}
+-(void)setCanJumpToArticles:(BOOL)jumpToArticles {
+    canJumpToArticles = jumpToArticles;
 }
 
 @end

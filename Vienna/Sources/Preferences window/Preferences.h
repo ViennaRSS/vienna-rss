@@ -67,6 +67,11 @@
 	NSUInteger concurrentDownloads;
 	NSString * syncServer;
 	NSString * syncingUser;
+    BOOL selectPreviousOnClose;
+    BOOL selectNewItemFirst;
+    BOOL applyOnlyToBrowserOpenedTabs;
+    BOOL selectRightItemFirst;
+    BOOL canJumpToArticles;
 }
 
 // String constants for NSNotificationCenter
@@ -75,7 +80,7 @@ extern NSString * const kMA_Notify_UseJavaScriptChange;
 extern NSString * const kMA_Notify_UseWebPluginsChange;
 
 // Accessor functions
-+(Preferences *)standardPreferences;
++(nonnull Preferences *)standardPreferences;
 -(void)savePreferences;
 
 // Accessor functions
@@ -214,4 +219,24 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 
 // username used for syncing
 @property (nonatomic, copy) NSString *syncingUser;
+
+
+#pragma mark - tab order preferences
+
+//when closing a tab, the previously open tab gets selected
+@property BOOL selectPreviousOnClose;
+//IF selectpreviousonclose
+//true means the most recently created tab is the next in the order
+@property BOOL selectNewItemFirst;
+//true means "previous" is interpreted as "from where it was opened"
+//this preference is not functional yet since
+//we cannot distinguish between browser and article list opened tabs
+@property BOOL applyOnlyToBrowserOpenedTabs;
+//if NOT selectpreviousonclose
+//true means the next tab to be opened is the one on the right (if it exists)
+@property BOOL selectRightItemFirst;
+
+//whether the article tab is treated specially
+@property BOOL canJumpToArticles;
+
 @end

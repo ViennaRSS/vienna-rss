@@ -80,6 +80,11 @@ extern NSString * MAPref_SyncServer;
 extern NSString * MAPref_SyncingUser;
 extern NSString * MAPref_SendSystemProfileInfo;
 extern NSString * MAPref_AlwaysAcceptBetas;
+extern NSString * MAPref_SelectPreviousOnClose;
+extern NSString * MAPref_SelectNewItemFirst;
+extern NSString * MAPref_ApplyOnlyToBrowserOpenedTabs;
+extern NSString * MAPref_SelectRightItemFirst;
+extern NSString * MAPref_CanJumpToArticles;
 
 extern NSInteger MA_Default_BackTrackQueueSize;
 extern NSInteger MA_Default_RefreshThreads;

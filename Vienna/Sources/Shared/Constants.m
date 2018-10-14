@@ -79,6 +79,11 @@ NSString * MAPref_SyncServer = @"SyncServer";
 NSString * MAPref_SyncingUser = @"SyncingUser";
 NSString * MAPref_SendSystemProfileInfo = @"SUSendProfileInfo";
 NSString * MAPref_AlwaysAcceptBetas = @"AlwayAcceptBetas";
+NSString * MAPref_SelectPreviousOnClose = @"SelectPreviousOnClose";
+NSString * MAPref_SelectNewItemFirst = @"SelectNewItemFirst";
+NSString * MAPref_ApplyOnlyToBrowserOpenedTabs = @"ApplyOnlyToBrowserOpenedTabs";
+NSString * MAPref_SelectRightItemFirst = @"SelectRightItemFirst";
+NSString * MAPref_CanJumpToArticles = @"CanJumpToArticles";
 
 const NSInteger MA_Default_BackTrackQueueSize = 20;
 const NSInteger MA_Default_RefreshThreads = 20;
