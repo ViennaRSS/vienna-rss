@@ -72,7 +72,11 @@
 
 -(void)configureTabBar
 {
-	[self.tabBarControl setStyleNamed:@"Sierra"];
+    if (@available(macOS 10.10,*)) {
+        [self.tabBarControl setStyleNamed:@"Mojave"];
+    } else {
+        [self.tabBarControl setStyleNamed:@"Sierra"];
+    }
 	//TODO: settings
 	[self.tabBarControl setOnlyShowCloseOnHover:YES];
 	[self.tabBarControl setCanCloseOnlyTab:NO];
