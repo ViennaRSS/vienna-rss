@@ -21,9 +21,31 @@
         self.attributedStringValue = whiteString;
     }
 
+    // Initialize a graphics context
+    CGContextRef context;
+    if (@available(macOS 10.10, *)) {
+        context = (CGContextRef)[[NSGraphicsContext currentContext] CGContext];
+    } else {
+        context = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
+    }
+    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
+    CGRect rect = NSRectToCGRect([self titleRectForBounds:cellFrame]);
+    // hack context to avoid flipped text
+    CGFloat shiftY = rect.origin.y + rect.origin.y + rect.size.height;
+    CGContextTranslateCTM(context, 0, shiftY);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)self.attributedStringValue);
+    CGPathRef path = CGPathCreateWithRect(rect,  NULL);
+    CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
     // Do the actual drawing
-    [self.attributedStringValue drawWithRect: [self titleRectForBounds:cellFrame]
-                     options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingDisableScreenFontSubstitution];
+    CTFrameDraw(frame, context);
+    // Reset context previously hacked
+    CGContextScaleCTM(context, 1.0, -1.0);
+    CGContextTranslateCTM(context, 0, -shiftY);
+    // Release the objects we used.
+    CFRelease(frame);
+    CFRelease(path);
+    CFRelease(framesetter);
 }
 
 - (NSRect)titleRectForBounds:(NSRect)theRect {
@@ -31,10 +53,11 @@
     NSRect titleFrame = [super titleRectForBounds:theRect];
 
     /* find out how big the rendered text will be */
-    NSRect textRect = [self.attributedStringValue boundingRectWithSize: titleFrame.size
-                                               options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingDisableScreenFontSubstitution];
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)self.attributedStringValue);
+    CGSize frameSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, [self.attributedStringValue length]), NULL, CGSizeMake(titleFrame.size.width, CGFLOAT_MAX), nil);
+    CFRelease(framesetter);
 
-    CGFloat tHeight = textRect.size.height;
+    CGFloat tHeight = frameSize.height;
     CGFloat fHeight = titleFrame.size.height;
     /* If the height of the rendered text is less then the available height,
      * we modify the titleFrame to center the text vertically */
