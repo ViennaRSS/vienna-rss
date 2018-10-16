@@ -31,10 +31,11 @@
     NSRect titleFrame = [super titleRectForBounds:theRect];
 
     /* find out how big the rendered text will be */
-    NSRect textRect = [self.attributedStringValue boundingRectWithSize: titleFrame.size
-                                               options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingDisableScreenFontSubstitution];
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)self.attributedStringValue);
+    CGSize frameSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, [self.attributedStringValue length]), NULL, CGSizeMake(titleFrame.size.width, CGFLOAT_MAX), nil);
+    CFRelease(framesetter);
 
-    CGFloat tHeight = textRect.size.height;
+    CGFloat tHeight = frameSize.height;
     CGFloat fHeight = titleFrame.size.height;
     /* If the height of the rendered text is less then the available height,
      * we modify the titleFrame to center the text vertically */
