@@ -21,9 +21,24 @@
         self.attributedStringValue = whiteString;
     }
 
+    // Initialize a graphics context
+    CGContextRef context;
+    if (@available(macOS 10.10, *)) {
+        context = (CGContextRef)[[NSGraphicsContext currentContext] CGContext];
+    } else {
+        context = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
+    }
+    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
+    CGRect rect = NSRectToCGRect([self titleRectForBounds:cellFrame]);
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)self.attributedStringValue);
+    CGPathRef path = CGPathCreateWithRect(rect,  NULL);
+    CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
     // Do the actual drawing
-    [self.attributedStringValue drawWithRect: [self titleRectForBounds:cellFrame]
-                     options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingDisableScreenFontSubstitution];
+    CTFrameDraw(frame, context);
+    // Release the objects we used.
+    CFRelease(frame);
+    CFRelease(path);
+    CFRelease(framesetter);
 }
 
 - (NSRect)titleRectForBounds:(NSRect)theRect {
