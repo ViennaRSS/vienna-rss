@@ -30,11 +30,18 @@
     }
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
     CGRect rect = NSRectToCGRect([self titleRectForBounds:cellFrame]);
+    // hack context to avoid flipped text
+    CGFloat shiftY = rect.origin.y + rect.origin.y + rect.size.height;
+    CGContextTranslateCTM(context, 0, shiftY);
+    CGContextScaleCTM(context, 1.0, -1.0);
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)self.attributedStringValue);
     CGPathRef path = CGPathCreateWithRect(rect,  NULL);
     CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
     // Do the actual drawing
     CTFrameDraw(frame, context);
+    // Reset context previously hacked
+    CGContextScaleCTM(context, 1.0, -1.0);
+    CGContextTranslateCTM(context, 0, -shiftY);
     // Release the objects we used.
     CFRelease(frame);
     CFRelease(path);
