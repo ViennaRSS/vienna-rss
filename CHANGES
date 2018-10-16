@@ -8,6 +8,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.5.0
+-----
+- Fix dark mode for horizontal layout
+- Improve support of Emoji characters (use CoreText to draw cells)
+
 3.5.0 rc 1
 ----------
 - Initial adaptations to macOS Mojave's dark mode (work in progress)
