@@ -947,6 +947,7 @@
 		NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 		style.lineBreakMode = NSLineBreakByTruncatingTail;
 		style.tighteningFactorForTruncation = 0.0;
+		style.alignment = NSTextAlignmentLeft;
 		info = @{NSParagraphStyleAttributeName: style};
 	}
 
