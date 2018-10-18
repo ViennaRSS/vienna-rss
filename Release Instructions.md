@@ -33,7 +33,7 @@ Tags should be in one of the following formats:
  6.	Run `make clean`.
  7.	Run `make release`. Check the last displayed messages to ensure yourself that the application is correctly signed.
  8.	Push the tag to ViennaRSS' repository at Github (`git push --tags ViennaRSS master` or `git push --tags ViennaRSS stable`, accordingly).
- 9.	Upload the contents of `Deployment/Uploads` (found in the build directory) using the following steps.
+ 9.	Upload the contents of `build/Uploads` using the following steps.
   (Note: I'm using Vienna 3.3.0_beta4, 3.3.0_rc1 and 3.3.0 as examples here.)
 
 ### On Github:
@@ -46,17 +46,17 @@ Tags should be in one of the following formats:
 
 ### On Bintray.com:
 	
-   6. Log in and go to <https://bintray.com/viennarss/vienna-rss/vienna-rss/view>
+   6. Sign in and go to <https://bintray.com/viennarss/vienna-rss/vienna-rss/view>
    7. Choose "New version".
    8. Fill the name ("3.3.0Beta4"), the description from the version notes, then click "Create version". Add the VCS tag (`v/3.3.0_beta4`) and update.
-   9. Check the version (at <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4>), click "Upload this version’s files (...) via the UI" to go to <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4/upload> and upload the two .tar.gz files (whose name should be like `Vienna3.3.0_beta4.tar.gz` and `Vienna3.3.0_beta4.5b272a6-dSYM.tar.gz`).
-   10. Click "Save the changes", then click "Publish".
+   9. Check the version (at <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4>), click "Upload files" to go to <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4/upload> and upload the two .tar.gz files (whose name should be like `Vienna3.3.0_beta4.tar.gz` and `Vienna3.3.0_beta4.5b272a6-dSYM.tar.gz`).
+   10. Click "Save Changes", then click "Publish".
    11. Go back to the files list (<https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4/#files>), select the binary ("Vienna3.3.0_beta4.tar.gz") and choose "Show in download list" in the contextual menu.
 
 ### On Sourceforge.net:
 
    12. Check that the SourceForge Downloads page for Vienna at <https://sourceforge.net/projects/vienna-rss/files/> got the new files.
-   13. For stable releases only : from the Sourceforge site, edit the "Properties" of "Vienna3.3.0.tar.gz" (be careful to select the binary and not the code source file !) and set it as default download for Mac OS X. Don't do this for beta releases!
+   13. For stable releases only : from the Sourceforge site, choose the ℹ️ button ("View details") of "Vienna3.3.0.tar.gz" (be careful to select the binary and not the code source file !) and set the file as default download for Mac OS X. Don't do this for beta releases!
 
 ### On viennarss.github.io
 
@@ -75,16 +75,11 @@ Tags should be in one of the following formats:
 brew install vitorgalvao/tiny-scripts/cask-repair
 cask-repair --help
 
-# fork homebrew-cask to your account - only needed once
-cd "$(brew --repository)/Library/Taps/caskroom/homebrew-cask/Casks"
-git config --local hub.protocol ssh
-hub fork
+# from time to time (especially on major macOS updates)
+brew upgrade cask-repair
 
 # use to update <outdated_cask>
-outdated_cask='vienna'
-github_user='your_github_username'
-cd "$(brew --repository)/Library/Taps/caskroom/homebrew-cask/Casks"
-cask-repair --pull origin --push $github_user $outdated_cask
+cask-repair vienna
 ```
 
 Finally, consider posting an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18> and/or <http://vienna-rss.com>.
