@@ -619,7 +619,7 @@
     if (frame == self.webPane.mainFrame)
     {
         image.size = NSMakeSize(14, 14);
-        [self setIcon:image];
+        iconImage.image = image;
         //TODO: show icon in tab (maybe based on user setting)
     }
 }
@@ -687,10 +687,6 @@
     if (self.statusBar) {
         self.statusBar.label = url.absoluteString;
     }
-}
-
-- (void)setIcon:(NSImage *)icon {
-    iconImage.image = icon;
 }
 
 @end
