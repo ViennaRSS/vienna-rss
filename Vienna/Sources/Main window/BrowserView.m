@@ -72,7 +72,7 @@
 
 -(void)configureTabBar
 {
-    if (@available(macOS 10.10,*)) {
+    if (@available(macOS 10.14, *)) {
         [self.tabBarControl setStyleNamed:@"Mojave"];
     } else {
         [self.tabBarControl setStyleNamed:@"Sierra"];
