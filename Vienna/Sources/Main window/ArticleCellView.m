@@ -34,11 +34,11 @@
 		controller = APPCONTROLLER;
 		articleView= [[ArticleView alloc] initWithFrame:frameRect];
 		// Make the list view the frame load and UI delegate for the web view
-		articleView.UIDelegate = [controller.browser primaryTabItemView];
-		articleView.frameLoadDelegate = [controller.browser primaryTabItemView];
+        articleView.UIDelegate = (NSView<WebUIDelegate> *)controller.browser.primaryTab.view;
+		articleView.frameLoadDelegate = (NSView<WebFrameLoadDelegate> *) controller.browser.primaryTab.view;
 		// Notify the list view when the article view has finished loading
 		SEL loadFinishedSelector = NSSelectorFromString(@"webViewLoadFinished:");
-		[[NSNotificationCenter defaultCenter] addObserver:[controller.browser primaryTabItemView] selector:loadFinishedSelector name:WebViewProgressFinishedNotification object:articleView];
+		[[NSNotificationCenter defaultCenter] addObserver:controller.browser.primaryTab.view selector:loadFinishedSelector name:WebViewProgressFinishedNotification object:articleView];
 		[articleView setOpenLinksInNewBrowser:YES];
 		[articleView.mainFrame.frameView setAllowsScrolling:NO];
 
@@ -51,7 +51,7 @@
 
 -(void)dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:[controller.browser primaryTabItemView] name:WebViewProgressFinishedNotification object:articleView];
+	[[NSNotificationCenter defaultCenter] removeObserver:controller.browser.primaryTab.view name:WebViewProgressFinishedNotification object:articleView];
 	[articleView setUIDelegate:nil];
 	[articleView setFrameLoadDelegate:nil];
 	[articleView abortJavascriptAndPlugIns];
