@@ -1106,7 +1106,7 @@
  */
 -(void)outlineViewWillBecomeFirstResponder
 {
-	[self.controller.browser setActiveTabToPrimaryTab];
+	[self.controller.browser switchToPrimaryTab];
 	[self enableFoldersRenamingAfterDelay];
 }
 
