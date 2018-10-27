@@ -58,7 +58,7 @@
 {
 	APPCONTROLLER.searchString = searchField.stringValue;
 	
-	NSView<BaseView> * theView = APPCONTROLLER.browser.activeTabItemView;
+	NSView<BaseView> * theView = ((NSView<BaseView> *)APPCONTROLLER.browser.activeTab.view);
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
 		[theView performFindPanelAction:NSFindPanelActionSetFindString];

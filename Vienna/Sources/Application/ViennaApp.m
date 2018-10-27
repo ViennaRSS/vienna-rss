@@ -248,7 +248,7 @@
  */
 -(NSString *)currentTextSelection
 {
-	NSView<BaseView> * theView = ((AppController*)self.delegate).browser.activeTabItemView;
+	NSView<BaseView> * theView = ((NSView<BaseView> *)((AppController*)self.delegate).browser.activeTab.view);
 	WebView * webPane = nil;
 
 	if ([theView isKindOfClass:[BrowserPane class]])
@@ -272,7 +272,7 @@
 
 -(NSString *)documentHTMLSource
 {
-	NSView<BaseView> * theView = ((AppController*)self.delegate).browser.activeTabItemView;
+	NSView<BaseView> * theView = ((NSView<BaseView> *) ((AppController*)self.delegate).browser.activeTab.view);
 	WebView * webPane = theView.webView;
 	
 	if (webPane != nil)
@@ -290,7 +290,7 @@
 
 -(NSString *)documentTabURL
 {
-	NSView<BaseView> * theView = ((AppController*)self.delegate).browser.activeTabItemView;
+	NSView<BaseView> * theView = ((NSView<BaseView> *) ((AppController*)self.delegate).browser.activeTab.view);
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
 		return ((BrowserPane *)theView).url.absoluteString;

@@ -294,14 +294,6 @@
                                     <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="1218" userLabel="Tab View">
                                         <rect key="frame" x="0.0" y="0.0" width="653" height="551"/>
                                         <font key="font" metaFont="system"/>
-                                        <tabViewItems>
-                                            <tabViewItem identifier="1" id="1221">
-                                                <view key="view" id="1222" userLabel="Detail View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="653" height="551"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                </view>
-                                            </tabViewItem>
-                                        </tabViewItems>
                                         <connections>
                                             <outlet property="delegate" destination="1238" id="1244"/>
                                         </connections>

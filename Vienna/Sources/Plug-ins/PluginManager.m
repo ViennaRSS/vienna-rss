@@ -262,7 +262,7 @@
  */
 -(BOOL)validateToolbarItem:(NSToolbarItem *)toolbarItem
 {
-    NSView<BaseView> * theView = APPCONTROLLER.browser.activeTabItemView;
+    NSView<BaseView> * theView = ((NSView<BaseView> *)APPCONTROLLER.browser.activeTab.view);
     Article * thisArticle = APPCONTROLLER.selectedArticle;
 
     if ([theView isKindOfClass:[BrowserPane class]])
@@ -276,7 +276,7 @@
  */
 -(BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-    NSView<BaseView> * theView = APPCONTROLLER.browser.activeTabItemView;
+    NSView<BaseView> * theView = ((NSView<BaseView> *)APPCONTROLLER.browser.activeTab.view);
     Article * thisArticle = APPCONTROLLER.selectedArticle;
 
     if ([theView isKindOfClass:[BrowserPane class]])
@@ -313,7 +313,7 @@
 				return;
 			
 			// Get the view that the user is currently looking at...
-			NSView<BaseView> * theView = APPCONTROLLER.browser.activeTabItemView;
+			NSView<BaseView> * theView = ((NSView<BaseView> *)APPCONTROLLER.browser.activeTab.view);
 			
 			// ...and do the following in case the user is currently looking at a website.
 			if ([theView isKindOfClass:[BrowserPane class]])
@@ -361,7 +361,7 @@
 			{
 				NSURL * urlToLoad = cleanedUpUrlFromString(urlString);				
 				if (urlToLoad != nil)
-					[APPCONTROLLER.browser createAndLoadNewTab:urlToLoad inBackground:NO];
+					[APPCONTROLLER.browser createNewTab:urlToLoad inBackground:NO load:true];
 			}
 			else
 			{

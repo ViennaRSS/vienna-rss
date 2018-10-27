@@ -54,11 +54,12 @@
 
 -(void)awakeFromNib
 {
-	[[self.tabBarControl.tabView tabViewItemAtIndex:0] setLabel:NSLocalizedString(@"Articles", nil)];
 	[self configureTabBar];
 	[self configureTabClosingBehavior];
 
 	self.tabViewOrder = [NSMutableArray array];
+
+    [self restoreTabs];
 }
 
 -(void)configureTabClosingBehavior
@@ -107,29 +108,29 @@
     return nil;
 }
 
-/* setPrimaryTabItemView
+/* setPrimaryTab
  * Sets the primary tab view. This is the view that is always displayed and
  * occupies the first tab position.
  */
--(void)setPrimaryTabItemView:(NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate> *)newPrimaryTabItemView
+-(void)setPrimaryTab:(NSTabViewItem *)newPrimaryTab
 {
-	
-	NSTabViewItem * tab;
+    // remove previous primary tab if there was one
+    if (_primaryTab) {
+        [self.tabBarControl.tabView removeTabViewItem:_primaryTab];
+    }
 
-    // This should only be called on launch
-    tab = [self.tabBarControl.tabView tabViewItemAtIndex:0];
+    [self.tabBarControl.tabView insertTabViewItem:newPrimaryTab atIndex:0];
 
-	[tab setHasCloseButton:NO];
-	tab.identifier = newPrimaryTabItemView;
-	tab.view = newPrimaryTabItemView;
+	[newPrimaryTab setHasCloseButton:NO];
+	newPrimaryTab.identifier = newPrimaryTab.view;
+
+	_primaryTab = newPrimaryTab;
 	
-	primaryTabItemView = newPrimaryTabItemView;
-	
-	[primaryTabItemView setNeedsDisplay:YES];
-	[self showArticlesTab];
+	[self.primaryTab.view setNeedsDisplay:YES];
+	[self switchToPrimaryTab];
 	//this call seems to be necessary manually here, no delegate call
-	//maybe setPrimaryTabItemView is called earlier than the delegate IBOutlet setup.
-	[self tabView:self.tabBarControl.tabView didSelectTabViewItem:tab];
+	//maybe setPrimaryTab is called earlier than the delegate IBOutlet setup.
+	[self tabView:self.tabBarControl.tabView didSelectTabViewItem:newPrimaryTab];
 }
 
 /* activeTab
@@ -147,17 +148,11 @@
 /* setActiveTabToPrimaryTab
  * Make the primary tab the active tab.
  */
--(void)setActiveTabToPrimaryTab
+-(void)switchToPrimaryTab
 {
-	[self showArticlesTab];
-}
-
-/* primaryTabItemView
- * Return the primary tab view.
- */
--(NSView<BaseView> *)primaryTabItemView
-{
-	return primaryTabItemView;
+    if (self.primaryTab) {
+        [self.tabBarControl selectTabViewItem:[self.tabBarControl.tabView tabViewItemAtIndex:0]];
+    }
 }
 
 /* tabTitle
@@ -165,7 +160,7 @@
  */
 -(NSString *)tabItemViewTitle:(NSView *)tabItemView
 {
-    if (tabItemView == primaryTabItemView) {
+    if (tabItemView == self.primaryTab.view) {
         return NSLocalizedString(@"Articles", nil);
     } else {
         return ((BrowserPane *)tabItemView).tab.label;
@@ -181,12 +176,16 @@
 	NSInteger i;
 	for ((i = (count - 1)); i >= 0; i--) {
 		NSTabViewItem * item = [self.tabBarControl.tabView tabViewItemAtIndex:i];
-		if (item.identifier != primaryTabItemView)
+		if (item != self.primaryTab)
 		{
 			[self.tabViewOrder removeObject:item];
 			[self.tabBarControl removeTabViewItem:item];
 		}
 	}
+}
+
+-(void)closeActiveTab {
+    [self closeTab:self.activeTab];
 }
 
 /*
@@ -219,17 +218,13 @@
 /* countOfTabs
  * Returns the total number of tabs.
  */
--(NSInteger)countOfTabs
+-(NSInteger)browserTabCount
 {
-	return self.tabBarControl.numberOfTabViewItems;
-}
-
-/* articlesTab
- * Go straight back to the articles tab
- */
--(void)showArticlesTab
-{
-    [self.tabBarControl selectTabViewItem:[self.tabBarControl.tabView tabViewItemAtIndex:0]];
+    if (self.primaryTab) {
+        return self.tabBarControl.numberOfTabViewItems - 1;
+    } else {
+        return self.tabBarControl.numberOfTabViewItems;
+    }
 }
 
 /* showPreviousTab
@@ -266,7 +261,7 @@
  */
 - (BOOL)tabView:(NSTabView *)aTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem
 {
-	return tabViewItem.identifier != primaryTabItemView;
+	return tabViewItem != self.primaryTab;
 }
 
 - (void)tabView:(NSTabView *)aTabView willCloseTabViewItem:(NSTabViewItem *)tabViewItem
@@ -300,13 +295,13 @@
 - (BOOL)tabView:(NSTabView *)aTabView disableTabCloseForTabViewItem:(NSTabViewItem *)tabViewItem
 {
 	//prevent closing the first tab (articles tab)
-	return tabViewItem.identifier == primaryTabItemView;
+	return tabViewItem == self.primaryTab;
 }
 
 // Adding tabs
 - (void)addNewTabToTabView:(NSTabView *)aTabView
 {
-	[self newTab];
+	[self createNewTab];
 }
 
 /*// Contextual menu support
@@ -339,7 +334,7 @@
 -(void)tabView:(NSTabView *)inTabView didSelectTabViewItem:(NSTabViewItem *)inTabViewItem
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabChanged" object:inTabViewItem.identifier];
-	if (self.canJumpToArticles || inTabViewItem.identifier != primaryTabItemView)
+	if (self.canJumpToArticles || inTabViewItem != self.primaryTab)
 	{
 		[self.tabViewOrder removeObject:self.tabBarControl.tabView.selectedTabViewItem];
 		[self.tabViewOrder addObject:self.tabBarControl.tabView.selectedTabViewItem];
@@ -357,7 +352,7 @@
 - (BOOL)tabView:(NSTabView *)aTabView shouldDragTabViewItem:(NSTabViewItem *)tabViewItem inTabBarView:(MMTabBarView *)tabBarView
 {
 	//prevent dragging articles tab
-	return tabViewItem.identifier != primaryTabItemView;
+	return tabViewItem != self.primaryTab;
 }
 
 - (NSDragOperation)tabView:(NSTabView *)aTabView validateDrop:(id <NSDraggingInfo>)sender proposedItem:(NSTabViewItem *)tabViewItem proposedIndex:(NSUInteger)proposedIndex inTabBarView:(MMTabBarView *)tabBarView
@@ -406,8 +401,8 @@
  */
 -(void)saveOpenTabs
 {
-	NSMutableArray *tabLinks = [NSMutableArray arrayWithCapacity:self.countOfTabs];
-	NSMutableDictionary *tabTitles = [NSMutableDictionary dictionaryWithCapacity:self.countOfTabs];
+	NSMutableArray *tabLinks = [NSMutableArray arrayWithCapacity:self.browserTabCount];
+	NSMutableDictionary *tabTitles = [NSMutableDictionary dictionaryWithCapacity:self.browserTabCount];
 	
 	for (NSTabViewItem * tabViewItem in self.tabBarControl.tabView.tabViewItems)
 	{
@@ -429,12 +424,25 @@
 	[[Preferences standardPreferences] savePreferences];
 }
 
+-(void)restoreTabs {
+    // Start opening the old tabs once everything else has finished initializing and setting up
+    NSArray<NSString *> * tabLinks = [Preferences.standardPreferences arrayForKey:MAPref_TabList];
+    NSDictionary<NSString *, NSString *> * tabTitles = [Preferences.standardPreferences objectForKey:MAPref_TabTitleDictionary];
+
+    for (int i = 0; i < tabLinks.count; i++)
+    {
+        NSString *tabLink = tabLinks[i].length ? tabLinks[i] : nil;
+        [self createNewTab:([NSURL URLWithString:tabLink])
+                             withTitle:tabTitles[tabLink] inBackground:YES];
+    }
+}
+
 #pragma mark - new tab creation
 
 /* newTab
  * Create a new empty tab.
  */
--(BrowserPane *)newTab
+-(BrowserPane *)createNewTab
 {
 	// Create a new empty tab in the foreground.
 	BrowserPane *browserPane = [self createNewTab:nil inBackground:NO];
@@ -460,7 +468,7 @@
 /* create tab with url
  * and load the page.
  */
--(BrowserPane *)createAndLoadNewTab:(NSURL *)url inBackground:(BOOL)inBackground
+-(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)inBackground load:(BOOL)load
 {
 	BrowserPane * newBrowserPane = [self createNewTab:url inBackground:inBackground];
 	[newBrowserPane load];

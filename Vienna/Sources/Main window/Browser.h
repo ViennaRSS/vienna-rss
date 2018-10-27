@@ -27,29 +27,22 @@
 @class BrowserPane;
 
 @interface Browser : NSObject
-{
-	NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate> * primaryTabItemView;
-}
 
 @property (assign) IBOutlet NSLayoutConstraint *tabBarHeightConstraint;
 @property (assign) IBOutlet MMTabBarView *tabBarControl;
+@property (nonatomic) NSTabViewItem *primaryTab;
 
 // Accessors
--(BrowserPane *)newTab;
--(BrowserPane *)createAndLoadNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
+-(BrowserPane *)createNewTab;
+-(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag load:(BOOL)load;
 -(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
 -(BrowserPane *)createNewTab:(NSURL *)url withTitle:(NSString *)title inBackground:(BOOL)openInBackgroundFlag;
-
--(void)setPrimaryTabItemView:(NSView *)newPrimaryTabItemView;
--(NSString *)tabItemViewTitle:(NSView *)tabView;
 @property (nonatomic, readonly) NSTabViewItem *activeTab;
-@property (nonatomic, readonly) NSView<BaseView> *activeTabItemView;
--(NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate> *)primaryTabItemView;
--(void)setActiveTabToPrimaryTab;
--(void)closeTab:(NSTabViewItem *)tabViewItem;
+-(void)closeActiveTab;
 -(void)closeAllTabs;
-@property (nonatomic, readonly) NSInteger countOfTabs;
--(void)showArticlesTab;
+@property (nonatomic, readonly) NSInteger browserTabCount;
+
+-(void)switchToPrimaryTab;
 -(void)showPreviousTab;
 -(void)showNextTab;
 -(void)saveOpenTabs;

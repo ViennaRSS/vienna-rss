@@ -51,7 +51,7 @@
         // a script or a plugin requests a new window
         // open a new tab and return its main webview
     {
-        return [self newTab].webPane;
+        return [self createNewTab].webPane;
     }
 }
 
@@ -138,10 +138,10 @@
  * closes the tab on a javascript request (only if it is in foreground though)
  */
 -(void)webViewClose:(WebView *)sender {
-	NSView *activeView = self.activeTab.view;
-	if ([activeView isKindOfClass:BrowserPane.class]
-		  && ((BrowserPane *)activeView).webView == sender) {
-		[self closeTab:self.activeTab];
+	NSView *activeView = (NSView *)self.activeTab;
+	if (([activeView isKindOfClass:BrowserPane.class]
+		  && ((BrowserPane *)activeView).webView == sender)) {
+		[self closeActiveTab];
 	}
 }
 
