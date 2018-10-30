@@ -194,27 +194,28 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         clientAuthOperation = [NSBlockOperation blockOperationWithBlock:^(void) {
             NSURLSessionDataTask * task = [[NSURLSession sharedSession] dataTaskWithRequest:myRequest
                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                    self.openReaderStatus = notAuthenticated;
                     if (error) {
                         LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
                         LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                         [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
-                        self.openReaderStatus = notAuthenticated;
                     } else {
                         if (((NSHTTPURLResponse *)response).statusCode != 200) {
                             LOG_EXPR(((NSHTTPURLResponse *)response).statusCode);
                             LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
                             [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
-                            self.openReaderStatus = notAuthenticated;
                         } else {         // statusCode 200
                             NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                             NSArray *components = [response componentsSeparatedByString:@"\n"];
+                            for (NSString * item in components) {
+                                if([item hasPrefix:@"Auth="]) {
+                                    self.clientAuthToken = [item substringFromIndex:5];
+                                    self.openReaderStatus = missingTToken;
+                                    break;
+                                }
+                            }
 
-                            //NSString * sid = [[components objectAtIndex:0] substringFromIndex:4];		//unused
-                            //NSString * lsid = [[components objectAtIndex:1] substringFromIndex:5];	//unused
-                            self.clientAuthToken = [NSString stringWithString:[components[2] substringFromIndex:5]];
-                            self.openReaderStatus = missingTToken;
-
-                            if (self.clientAuthTimer == nil || !self.clientAuthTimer.valid) {
+                            if (self.openReaderStatus == missingTToken && (self.clientAuthTimer == nil || !self.clientAuthTimer.valid)) {
                                 //new request every 6 days
                                 self.clientAuthTimer = [NSTimer scheduledTimerWithTimeInterval:6 * 24 * 3600
                                                                                         target:self
