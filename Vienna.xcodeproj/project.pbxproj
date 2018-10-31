@@ -60,6 +60,9 @@
 		03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EFD56F1B720AB0007EF284 /* ExportTests.m */; };
 		03F33D961DF2A2F900B04FAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03F33D951DF2A2F900B04FAF /* Assets.xcassets */; };
 		2FA79F192170C55D00228482 /* Browser+WebUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA79F182170C55D00228482 /* Browser+WebUIDelegate.m */; };
+		2FBF5D2C24D71A4200CB4781 /* BrowserTab.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FBF5D2924D71A4200CB4781 /* BrowserTab.xib */; };
+		2FBF5D2D24D71A4200CB4781 /* BrowserTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF5D2A24D71A4200CB4781 /* BrowserTab.swift */; };
+		2FBF5D2E24D71A4200CB4781 /* TabbedBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF5D2B24D71A4200CB4781 /* TabbedBrowserViewController.swift */; };
 		37C650801816EBAD3C0D9DBF /* NSURL+CaminoExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+CaminoExtensions.m */; };
 		3A171C00210B551B00B80FBB /* TRVSURLSessionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A171BF1210B551B00B80FBB /* TRVSURLSessionOperation.m */; };
 		3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBEC61733C206006DD2AB /* ArticleCellView.m */; };
@@ -259,6 +262,9 @@
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FA79F172170C55D00228482 /* Browser+WebUIDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Browser+WebUIDelegate.h"; sourceTree = "<group>"; };
 		2FA79F182170C55D00228482 /* Browser+WebUIDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Browser+WebUIDelegate.m"; sourceTree = "<group>"; };
+		2FBF5D2924D71A4200CB4781 /* BrowserTab.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrowserTab.xib; sourceTree = "<group>"; };
+		2FBF5D2A24D71A4200CB4781 /* BrowserTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserTab.swift; sourceTree = "<group>"; };
+		2FBF5D2B24D71A4200CB4781 /* TabbedBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedBrowserViewController.swift; sourceTree = "<group>"; };
 		37C652B4C918F312BA9F1AB1 /* NSURL+CaminoExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+CaminoExtensions.h"; sourceTree = "<group>"; };
 		37C65C3C01B0F8EE0C0E5A52 /* NSURL+CaminoExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+CaminoExtensions.m"; sourceTree = "<group>"; };
 		3A171BE0210B551A00B80FBB /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -1205,6 +1211,9 @@
 		F6A7EA5B1F1CE63B00BD4450 /* Browser */ = {
 			isa = PBXGroup;
 			children = (
+				2FBF5D2A24D71A4200CB4781 /* BrowserTab.swift */,
+				2FBF5D2924D71A4200CB4781 /* BrowserTab.xib */,
+				2FBF5D2B24D71A4200CB4781 /* TabbedBrowserViewController.swift */,
 				4350285B165DE9DF0018EDB7 /* Browser.h */,
 				4350285C165DE9DF0018EDB7 /* Browser.m */,
 				2FA79F172170C55D00228482 /* Browser+WebUIDelegate.h */,
@@ -1653,6 +1662,7 @@
 				F69AE79A1F2215D600342640 /* InfoPlist.strings in Resources */,
 				F6A7DE4F1E471A7F0017BE5E /* Vienna.help in Resources */,
 				F6D572AB1E26AA8200CDA909 /* EmptyTrashWarning.xib in Resources */,
+				2FBF5D2C24D71A4200CB4781 /* BrowserTab.xib in Resources */,
 				F62580E11E286CDE0035E43C /* errorpage.html in Resources */,
 				F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */,
 				F62580E41E286CE60035E43C /* KnownSyncServers.plist in Resources */,
@@ -1850,6 +1860,7 @@
 			files = (
 				B283D5A410986CE600A5CD72 /* RichXMLParser.m in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
+				2FBF5D2E24D71A4200CB4781 /* TabbedBrowserViewController.swift in Sources */,
 				03A131B31AA54EAC0037471F /* Database+Migration.m in Sources */,
 				AA26F4E30604927300FE7994 /* Folder.m in Sources */,
 				AA26F4ED0604927300FE7994 /* Database.m in Sources */,
@@ -1893,6 +1904,7 @@
 				F61CEA661F039E57009C878E /* ButtonToolbarItem.swift in Sources */,
 				4350289D165DE9E00018EDB7 /* BrowserPaneTemplate.m in Sources */,
 				F6094E331F10107800677D3B /* ExportAccessoryViewController.swift in Sources */,
+				2FBF5D2D24D71A4200CB4781 /* BrowserTab.swift in Sources */,
 				4350289E165DE9E00018EDB7 /* Browser.m in Sources */,
 				F628DFE31ED2698A00FACFD3 /* FilterView.swift in Sources */,
 				F64C2CCC1E83825D00ED4E04 /* DateFormatterExtension.m in Sources */,
