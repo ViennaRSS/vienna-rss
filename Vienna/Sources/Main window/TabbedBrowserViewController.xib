@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="TabbedBrowserViewController" customModule="Vienna" customModuleProvider="target">
+            <connections>
+                <outlet property="tabBar" destination="NQ9-WY-Cbm" id="5Xp-PN-vrk"/>
+                <outlet property="tabView" destination="tnb-vE-K05" id="2Rj-AU-rjY"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <customView verticalHuggingPriority="255" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NQ9-WY-Cbm" customClass="MMTabBarView">
+                    <rect key="frame" x="0.0" y="244" width="480" height="28"/>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="N7U-Ul-9ts"/>
+                        <outlet property="tabView" destination="tnb-vE-K05" id="vze-g7-tre"/>
+                    </connections>
+                </customView>
+                <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="tnb-vE-K05">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="244"/>
+                    <font key="font" metaFont="system"/>
+                    <tabViewItems>
+                        <tabViewItem label="Tab" identifier="" id="PXV-jG-LhD">
+                            <view key="view" id="8kH-4s-SBS">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="244"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="View" identifier="" id="Lwh-iR-ReR">
+                            <view key="view" id="1Sl-wy-1ZR">
+                                <rect key="frame" x="10" y="33" width="474" height="207"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                    </tabViewItems>
+                </tabView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="tnb-vE-K05" firstAttribute="top" secondItem="NQ9-WY-Cbm" secondAttribute="bottom" id="D9r-Eh-NO9"/>
+                <constraint firstItem="NQ9-WY-Cbm" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="N8S-uy-S4O"/>
+                <constraint firstItem="tnb-vE-K05" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="NiK-bN-uiv"/>
+                <constraint firstAttribute="trailing" secondItem="NQ9-WY-Cbm" secondAttribute="trailing" id="Qn4-O6-CN4"/>
+                <constraint firstItem="NQ9-WY-Cbm" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="im4-Wa-YbC"/>
+                <constraint firstAttribute="bottom" secondItem="tnb-vE-K05" secondAttribute="bottom" id="shx-LQ-GFs"/>
+                <constraint firstAttribute="trailing" secondItem="tnb-vE-K05" secondAttribute="trailing" id="tNZ-Qs-8Ep"/>
+            </constraints>
+        </customView>
+    </objects>
+</document>
