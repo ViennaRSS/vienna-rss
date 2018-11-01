@@ -879,11 +879,11 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             }
         }
 
+        NSString *rssTitle = @"";
+        if (feed[@"title"]) {
+            rssTitle = feed[@"title"];
+        }
         if (![localFeeds containsObject:feedURL]) {
-            NSString *rssTitle = @"";
-            if (feed[@"title"]) {
-                rssTitle = feed[@"title"];
-            }
             // folderName could be nil
             NSArray *params = folderName ? @[feedURL, rssTitle, folderName] : @[feedURL, rssTitle];
             [self createNewSubscription:params];
@@ -894,7 +894,11 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             if (homePageURL) {
                 for (Folder *localFolder in localFolders) {
                     if (localFolder.type == VNAFolderTypeOpenReader && [localFolder.feedURL isEqualToString:feedURL]) {
-                        [[Database sharedManager] setHomePage:homePageURL forFolder:localFolder.itemId];
+                        Database * db = [Database sharedManager];
+                        [db setHomePage:homePageURL forFolder:localFolder.itemId];
+                        if ([db folderFromName:rssTitle] == nil) { // no conflict
+                            [db setName:rssTitle forFolder:localFolder.itemId];
+                        };
                         break;
                     }
                 }
@@ -995,6 +999,35 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     }
     [request setPostValue:[NSString stringWithFormat:@"feed/%@", percentEscape(feedIdentifier)] forKey:@"s"];
     [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", folderName] forKey:flag ? @"a" : @"r"];
+    __weak typeof(self) weakSelf = self;
+    [[RefreshManager sharedManager] addConnection:request
+        completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error) {
+                [weakSelf requestFailed:request response:response error:error];
+            } else {
+                [weakSelf requestFinished:request response:response data:data];
+            }
+        }
+    ];
+}
+
+/* setFolderTitle:forFeed:
+ * set title of a newsfeed
+ */
+-(void)setFolderTitle:(NSString *)folderName forFeed:(NSString *)feedURL
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?client=%@", APIBaseURL, ClientName]];
+
+    NSMutableURLRequest *request = [self authentifiedFormRequestFromURL:url];
+    [request setPostValue:@"edit" forKey:@"ac"];
+    NSString *feedIdentifier;
+    if (hostRequiresHexaForFeedId) {
+        feedIdentifier = feedURL.lastPathComponent;
+    } else {
+        feedIdentifier = feedURL;
+    }
+    [request setPostValue:[NSString stringWithFormat:@"feed/%@", percentEscape(feedIdentifier)] forKey:@"s"];
+    [request setPostValue:folderName forKey:@"t"];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:request
         completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {

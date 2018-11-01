@@ -1140,6 +1140,9 @@
 		else
         {
             [dbManager setName:newName forFolder:folder.itemId];
+            if (folder.type == VNAFolderTypeOpenReader) {
+                [[OpenReader sharedManager] setFolderTitle:newName forFeed:folder.feedURL];
+            }
         }
 	}
 }
