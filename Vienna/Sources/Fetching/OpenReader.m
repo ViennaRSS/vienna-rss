@@ -843,7 +843,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     NSArray *localFolders = APPCONTROLLER.folders;
 
     for (Folder *f in localFolders) {
-        if (f.feedURL) {
+        if (f.feedURL && f.type == VNAFolderTypeOpenReader) {
             [localFeeds addObject:f.feedURL];
         }
     }
@@ -853,9 +853,14 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         if (feedID == nil) {
             break;
         }
-        NSString *feedURL = [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)];
-        if (![feedURL hasPrefix:@"http:"] && ![feedURL hasPrefix:@"https:"]) {
-            feedURL = [NSString stringWithFormat:@"https://%@/reader/public/atom/%@", openReaderHost, feedURL];
+        NSString *feedURL = feed[@"url"];
+        if (feedURL == nil || hostRequiresHexaForFeedId) { // TheOldReader requires BSON identifier in stream Ids instead of URL (ex: feed/0125ef...)
+            NSString * feedIdentifier = [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)];
+            if (hostRequiresHexaForFeedId) { // TheOldReader
+                feedURL = [NSString stringWithFormat:@"https://%@/reader/public/atom/%@", openReaderHost, feedIdentifier];
+            } else { // most services use feed URL as identifier (like GoogleReader did)
+                feedURL = feedIdentifier;
+            }
         }
 
         NSString *folderName = nil;
