@@ -60,7 +60,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
 @property (readwrite, copy) NSString *statusMessage;
 @property (readwrite, nonatomic) NSUInteger countOfNewArticles;
-@property (nonatomic) NSMutableArray *localFeeds;
 @property (atomic) NSString *tToken;
 @property (atomic) NSString *clientAuthToken;
 @property (nonatomic) NSTimer *tTokenTimer;
@@ -81,7 +80,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     self = [super init];
     if (self) {
         // Initialization code here.
-        _localFeeds = [[NSMutableArray alloc] init];
         _tTokenWaitQueue = [[NSMutableArray alloc] init];
         _openReaderStatus = notAuthenticated;
         _countOfNewArticles = 0;
@@ -840,16 +838,15 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     subscriptionsDict = [NSJSONSerialization JSONObjectWithData:data
                                                         options:NSJSONReadingMutableContainers
                                                           error:&jsonError];
-    [self.localFeeds removeAllObjects];
+    NSMutableArray *localFeeds = [NSMutableArray array];
+    NSMutableArray *remoteFeeds = [NSMutableArray array];
     NSArray *localFolders = APPCONTROLLER.folders;
 
     for (Folder *f in localFolders) {
         if (f.feedURL) {
-            [self.localFeeds addObject:f.feedURL];
+            [localFeeds addObject:f.feedURL];
         }
     }
-
-    NSMutableArray *googleFeeds = [[NSMutableArray alloc] init];
 
     for (NSDictionary *feed in subscriptionsDict[@"subscriptions"]) {
         NSString *feedID = feed[@"id"];
@@ -877,7 +874,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             }
         }
 
-        if (![self.localFeeds containsObject:feedURL]) {
+        if (![localFeeds containsObject:feedURL]) {
             NSString *rssTitle = @"";
             if (feed[@"title"]) {
                 rssTitle = feed[@"title"];
@@ -899,14 +896,14 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             }
         }
 
-        [googleFeeds addObject:feedURL];
+        [remoteFeeds addObject:feedURL];
     }
 
 
     if (subscriptionsDict[@"subscriptions"] != nil) { // detect probable authentication error
         //check if we have a folder which is not registered as a Open Reader feed
         for (Folder *f in APPCONTROLLER.folders) {
-            if (f.type == VNAFolderTypeOpenReader && ![googleFeeds containsObject:f.feedURL]) {
+            if (f.type == VNAFolderTypeOpenReader && ![remoteFeeds containsObject:f.feedURL]) {
                 [[Database sharedManager] deleteFolder:f.itemId];
             }
         }
