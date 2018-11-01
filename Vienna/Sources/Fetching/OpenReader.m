@@ -41,9 +41,9 @@ NSString *openReaderHost;
 NSString *username;
 NSString *password;
 NSString *APIBaseURL;
-BOOL hostSupportsLongId;
+BOOL hostSendsHexaItemId;
 BOOL hostRequiresSParameter;
-BOOL hostRequiresLastPathOnly;
+BOOL hostRequiresHexaForFeedId;
 BOOL hostRequiresInoreaderAdditionalHeaders;
 BOOL hostRequiresBackcrawling;
 NSDictionary *inoreaderAdditionalHeaders;
@@ -251,16 +251,16 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     username = prefs.syncingUser;
     openReaderHost = prefs.syncServer;
     // default settings
-    hostSupportsLongId = NO;
+    hostSendsHexaItemId = NO;
     hostRequiresSParameter = NO;
-    hostRequiresLastPathOnly = NO;
+    hostRequiresHexaForFeedId = NO;
     hostRequiresInoreaderAdditionalHeaders = NO;
     hostRequiresBackcrawling = YES;
     // settings for specific kind of servers
     if ([openReaderHost isEqualToString:@"theoldreader.com"]) {
-        hostSupportsLongId = YES;
+        hostSendsHexaItemId = YES;
         hostRequiresSParameter = YES;
-        hostRequiresLastPathOnly = YES;
+        hostRequiresHexaForFeedId = YES;
         hostRequiresBackcrawling = NO;
     }
     if ([openReaderHost rangeOfString:@"inoreader.com"].length != 0) {
@@ -442,7 +442,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     }
 
     NSString *feedIdentifier;
-    if (hostRequiresLastPathOnly) {
+    if (hostRequiresHexaForFeedId) {
         feedIdentifier = thisFolder.feedURL.lastPathComponent;
     } else {
         feedIdentifier =  thisFolder.feedURL;
@@ -731,7 +731,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 NSMutableArray *guidArray = [NSMutableArray arrayWithCapacity:itemRefsArray.count];
                 for (NSDictionary *itemRef in itemRefsArray) {
                     NSString *guid;
-                    if (hostSupportsLongId) {
+                    if (hostSendsHexaItemId) {
                         guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%@", itemRef[@"id"]];
                     } else {
                         // as described in http://code.google.com/p/google-reader-api/wiki/ItemId
@@ -793,7 +793,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 NSMutableArray *guidArray = [NSMutableArray arrayWithCapacity:itemRefsArray.count];
                 for (NSDictionary *itemRef in itemRefsArray) {
                     NSString *guid;
-                    if (hostSupportsLongId) {
+                    if (hostSendsHexaItemId) {
                         guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%@", itemRef[@"id"]];
                     } else {
                         // as described in http://code.google.com/p/google-reader-api/wiki/ItemId
