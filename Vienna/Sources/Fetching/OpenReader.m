@@ -903,7 +903,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     }
 
 
-    if (subscriptionsDict[@"subscription"] != nil) { // detect probable authentication error
+    if (subscriptionsDict[@"subscriptions"] != nil) { // detect probable authentication error
         //check if we have a folder which is not registered as a Open Reader feed
         for (Folder *f in APPCONTROLLER.folders) {
             if (f.type == VNAFolderTypeOpenReader && ![googleFeeds containsObject:f.feedURL]) {
