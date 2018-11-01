@@ -29,7 +29,7 @@
 -(void)unsubscribeFromFeed:(NSString *)feedURL;
 -(void)markRead:(Article *)article readFlag:(BOOL)flag;
 -(void)markStarred:(Article *)article starredFlag:(BOOL)flag;
--(void)setFolderName:(NSString *)folderName forFeed:(NSString *)feedURL set:(BOOL)flag;
+-(void)setFolderLabel:(NSString *)folderName forFeed:(NSString *)feedURL set:(BOOL)flag;
 -(void)refreshFeed:(Folder*)thisFolder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:(BOOL)ignoreLimit;
 @property (nonatomic, readonly) NSUInteger countOfNewArticles;
 

@@ -958,7 +958,13 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     NSURL *unsubscribeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit", APIBaseURL]];
     NSMutableURLRequest *myRequest = [self authentifiedFormRequestFromURL:unsubscribeURL];
     [myRequest setPostValue:@"unsubscribe" forKey:@"ac"];
-    [myRequest setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
+    NSString *feedIdentifier;
+    if (hostRequiresHexaForFeedId) {
+        feedIdentifier = feedURL.lastPathComponent;
+    } else {
+        feedIdentifier = feedURL;
+    }
+    [myRequest setPostValue:[NSString stringWithFormat:@"feed/%@", percentEscape(feedIdentifier)] forKey:@"s"];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:myRequest
         completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -971,17 +977,23 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     ];
 }
 
-/* setFolderName
- * set or remove a folder name to a newsfeed
+/* setFolderLabel:forFeed:set:
+ * add or remove a label (folder name) to a newsfeed
  * set parameter : TRUE => add ; FALSE => remove
  */
--(void)setFolderName:(NSString *)folderName forFeed:(NSString *)feedURL set:(BOOL)flag
+-(void)setFolderLabel:(NSString *)folderName forFeed:(NSString *)feedURL set:(BOOL)flag
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?client=%@", APIBaseURL, ClientName]];
 
     NSMutableURLRequest *request = [self authentifiedFormRequestFromURL:url];
     [request setPostValue:@"edit" forKey:@"ac"];
-    [request setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
+    NSString *feedIdentifier;
+    if (hostRequiresHexaForFeedId) {
+        feedIdentifier = feedURL.lastPathComponent;
+    } else {
+        feedIdentifier = feedURL;
+    }
+    [request setPostValue:[NSString stringWithFormat:@"feed/%@", percentEscape(feedIdentifier)] forKey:@"s"];
     [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", folderName] forKey:flag ? @"a" : @"r"];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:request

@@ -2457,7 +2457,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[myGoogle subscribeToFeed:urlString];
 		NSString * folderName = [db folderFromID:parentId].name;
 		if (folderName != nil)
-			[myGoogle setFolderName:folderName forFeed:urlString set:TRUE];
+			[myGoogle setFolderLabel:folderName forFeed:urlString set:TRUE];
 		[myGoogle loadSubscriptions];
 
 	}

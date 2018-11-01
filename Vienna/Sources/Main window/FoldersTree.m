@@ -1335,10 +1335,10 @@
 					OpenReader * myGoogle = [OpenReader sharedManager];
 					// remove old label
 					NSString * folderName = [dbManager folderFromID:oldParentId].name;
-					[myGoogle setFolderName:folderName forFeed:folder.feedURL set:FALSE];
+					[myGoogle setFolderLabel:folderName forFeed:folder.feedURL set:FALSE];
 					// add new label
 					folderName = [dbManager folderFromID:newParentId].name;
-					[myGoogle setFolderName:folderName forFeed:folder.feedURL set:TRUE];
+					[myGoogle setFolderLabel:folderName forFeed:folder.feedURL set:TRUE];
 				}
 			}
 			else
