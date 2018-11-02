@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11134" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11134"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="BrowserTab" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="BrowserTab" customModule="Vienna" customModuleProvider="target">
             <connections>
+                <outlet property="addressField" destination="hfe-el-NfG" id="Sfl-fz-aCb"/>
+                <outlet property="backButton" destination="0rn-z0-yA2" id="1VR-2q-DKI"/>
+                <outlet property="forwardButton" destination="aeH-Zd-eUj" id="gg6-8U-WAD"/>
+                <outlet property="reloadButton" destination="u6u-kW-eOW" id="Dtw-No-iAz"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+                <outlet property="webView" destination="hdc-RL-AZB" id="Wgu-ma-BLF"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -14,6 +22,63 @@
         <customView id="Hz6-mo-xeY">
             <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hfe-el-NfG">
+                    <rect key="frame" x="73" y="252" width="370" height="20"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="jDD-sF-hKH">
+                        <font key="font" usesAppearanceFont="YES"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0rn-z0-yA2">
+                    <rect key="frame" x="-6" y="245" width="49" height="31"/>
+                    <buttonCell key="cell" type="push" title="&lt;" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="j5n-Oc-Vrp">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aeH-Zd-eUj">
+                    <rect key="frame" x="30" y="245" width="49" height="31"/>
+                    <buttonCell key="cell" type="push" title="&gt;" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0sn-QN-I23">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="u6u-kW-eOW">
+                    <rect key="frame" x="437" y="245" width="49" height="31"/>
+                    <buttonCell key="cell" type="push" title="R" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RBR-fu-w5E">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <wkWebView wantsLayer="YES" allowsBackForwardNavigationGestures="YES" allowsMagnification="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hdc-RL-AZB">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="252"/>
+                    <wkWebViewConfiguration key="configuration">
+                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" audio="YES" video="YES"/>
+                        <wkPreferences key="preferences" javaScriptCanOpenWindowsAutomatically="NO"/>
+                    </wkWebViewConfiguration>
+                </wkWebView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="hdc-RL-AZB" firstAttribute="top" secondItem="0rn-z0-yA2" secondAttribute="bottom" id="0bg-n6-EFl"/>
+                <constraint firstItem="aeH-Zd-eUj" firstAttribute="leading" secondItem="0rn-z0-yA2" secondAttribute="trailing" constant="-1" id="0qK-Ht-JyJ"/>
+                <constraint firstItem="u6u-kW-eOW" firstAttribute="leading" secondItem="hfe-el-NfG" secondAttribute="trailing" id="7Yr-YT-a8y"/>
+                <constraint firstAttribute="trailing" secondItem="u6u-kW-eOW" secondAttribute="trailing" id="FLD-CE-kIh"/>
+                <constraint firstAttribute="trailing" secondItem="hdc-RL-AZB" secondAttribute="trailing" id="TaP-ZX-WUj"/>
+                <constraint firstItem="hdc-RL-AZB" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="YpN-zg-7IU"/>
+                <constraint firstItem="hdc-RL-AZB" firstAttribute="top" secondItem="u6u-kW-eOW" secondAttribute="bottom" id="YxR-PF-lS9"/>
+                <constraint firstItem="u6u-kW-eOW" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="cY7-CU-jKb"/>
+                <constraint firstItem="0rn-z0-yA2" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="f3r-lr-60i"/>
+                <constraint firstItem="hfe-el-NfG" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="fEU-Fo-fSn"/>
+                <constraint firstItem="hdc-RL-AZB" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="itQ-bR-bhw"/>
+                <constraint firstItem="hdc-RL-AZB" firstAttribute="top" secondItem="aeH-Zd-eUj" secondAttribute="bottom" id="lvV-1J-FdL"/>
+                <constraint firstItem="hfe-el-NfG" firstAttribute="leading" secondItem="aeH-Zd-eUj" secondAttribute="trailing" id="m7V-9l-k71"/>
+                <constraint firstItem="aeH-Zd-eUj" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="taw-8H-mm9"/>
+                <constraint firstItem="hdc-RL-AZB" firstAttribute="top" secondItem="hfe-el-NfG" secondAttribute="bottom" id="uSR-I6-oVD"/>
+                <constraint firstAttribute="bottom" secondItem="hdc-RL-AZB" secondAttribute="bottom" id="vrX-Xb-VzI"/>
+                <constraint firstItem="0rn-z0-yA2" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="xsB-fI-v91"/>
+            </constraints>
         </customView>
     </objects>
 </document>

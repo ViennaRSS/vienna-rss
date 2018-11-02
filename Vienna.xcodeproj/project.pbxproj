@@ -60,12 +60,14 @@
 		03B752421B74814B00FD3FDB /* RichXMLParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B752411B74814B00FD3FDB /* RichXMLParserTests.m */; };
 		03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EFD56F1B720AB0007EF284 /* ExportTests.m */; };
 		03F33D961DF2A2F900B04FAF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03F33D951DF2A2F900B04FAF /* Images.xcassets */; };
-		2FA79F192170C55D00228482 /* Browser+WebUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA79F182170C55D00228482 /* Browser+WebUIDelegate.m */; };
 		2FAA36402072F50B00169C8A /* MMTabBarView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FAA363F2072F50B00169C8A /* MMTabBarView.framework */; };
 		2FAA36422072F57500169C8A /* MMTabBarView.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 2FAA363F2072F50B00169C8A /* MMTabBarView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2FBF5D2C24D71A4200CB4781 /* BrowserTab.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FBF5D2924D71A4200CB4781 /* BrowserTab.xib */; };
-		2FBF5D2D24D71A4200CB4781 /* BrowserTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF5D2A24D71A4200CB4781 /* BrowserTab.swift */; };
-		2FBF5D2E24D71A4200CB4781 /* TabbedBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF5D2B24D71A4200CB4781 /* TabbedBrowserViewController.swift */; };
+		2FC91DDD21850ADB00D7F223 /* Browser+WebUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */; };
+		2FDF6FC0218A266A002F77E9 /* BrowserTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FBC218A266A002F77E9 /* BrowserTab.swift */; };
+		2FDF6FC1218A266A002F77E9 /* TabbedBrowserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDF6FBD218A266A002F77E9 /* TabbedBrowserViewController.xib */; };
+		2FDF6FC2218A266A002F77E9 /* BrowserTab.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDF6FBE218A266A002F77E9 /* BrowserTab.xib */; };
+		2FDF6FC3218A266A002F77E9 /* TabbedBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FBF218A266A002F77E9 /* TabbedBrowserViewController.swift */; };
+		2FDF6FC8218A289A002F77E9 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FC7218A289A002F77E9 /* Tab.swift */; };
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		37C650801816EBAD3C0D9DBF /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */; };
 		3A171C00210B551B00B80FBB /* TRVSURLSessionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A171BF1210B551B00B80FBB /* TRVSURLSessionOperation.m */; };
@@ -85,7 +87,7 @@
 		4350289B165DE9E00018EDB7 /* ArticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502855165DE9DF0018EDB7 /* ArticleView.m */; };
 		4350289C165DE9E00018EDB7 /* BrowserPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502858165DE9DF0018EDB7 /* BrowserPane.m */; };
 		4350289D165DE9E00018EDB7 /* BrowserPaneTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350285A165DE9DF0018EDB7 /* BrowserPaneTemplate.m */; };
-		4350289E165DE9E00018EDB7 /* Browser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350285C165DE9DF0018EDB7 /* Browser.m */; };
+		4350289E165DE9E00018EDB7 /* WebViewBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350285C165DE9DF0018EDB7 /* WebViewBrowser.m */; };
 		4350289F165DE9E00018EDB7 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350285E165DE9DF0018EDB7 /* Constants.m */; };
 		435028A0165DE9E00018EDB7 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502860165DE9DF0018EDB7 /* DownloadManager.m */; };
 		435028A1165DE9E00018EDB7 /* DownloadWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502862165DE9DF0018EDB7 /* DownloadWindow.m */; };
@@ -328,12 +330,15 @@
 		03EFD56F1B720AB0007EF284 /* ExportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportTests.m; sourceTree = "<group>"; };
 		03F33D951DF2A2F900B04FAF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; };
-		2FA79F172170C55D00228482 /* Browser+WebUIDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Browser+WebUIDelegate.h"; sourceTree = "<group>"; };
-		2FA79F182170C55D00228482 /* Browser+WebUIDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Browser+WebUIDelegate.m"; sourceTree = "<group>"; };
 		2FAA363F2072F50B00169C8A /* MMTabBarView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MMTabBarView.framework; path = Carthage/Build/Mac/MMTabBarView.framework; sourceTree = "<group>"; };
-		2FBF5D2924D71A4200CB4781 /* BrowserTab.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrowserTab.xib; sourceTree = "<group>"; };
-		2FBF5D2A24D71A4200CB4781 /* BrowserTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserTab.swift; sourceTree = "<group>"; };
-		2FBF5D2B24D71A4200CB4781 /* TabbedBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedBrowserViewController.swift; sourceTree = "<group>"; };
+		2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Browser+WebUIDelegate.m"; sourceTree = "<group>"; };
+		2FC91DDC21850ADB00D7F223 /* Browser+WebUIDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Browser+WebUIDelegate.h"; sourceTree = "<group>"; };
+		2FDF6FBC218A266A002F77E9 /* BrowserTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserTab.swift; sourceTree = "<group>"; };
+		2FDF6FBD218A266A002F77E9 /* TabbedBrowserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabbedBrowserViewController.xib; sourceTree = "<group>"; };
+		2FDF6FBE218A266A002F77E9 /* BrowserTab.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrowserTab.xib; sourceTree = "<group>"; };
+		2FDF6FBF218A266A002F77E9 /* TabbedBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedBrowserViewController.swift; sourceTree = "<group>"; };
+		2FDF6FC5218A26B0002F77E9 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
+		2FDF6FC7218A289A002F77E9 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ClickableProgressIndicator.h; sourceTree = "<group>"; };
 		34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClickableProgressIndicator.m; sourceTree = "<group>"; };
 		37C652B4C918F312BA9F1AB1 /* NSURL+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Utils.h"; sourceTree = "<group>"; };
@@ -378,8 +383,8 @@
 		43502858165DE9DF0018EDB7 /* BrowserPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserPane.m; sourceTree = "<group>"; };
 		43502859165DE9DF0018EDB7 /* BrowserPaneTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserPaneTemplate.h; sourceTree = "<group>"; };
 		4350285A165DE9DF0018EDB7 /* BrowserPaneTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserPaneTemplate.m; sourceTree = "<group>"; };
-		4350285B165DE9DF0018EDB7 /* Browser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Browser.h; sourceTree = "<group>"; };
-		4350285C165DE9DF0018EDB7 /* Browser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Browser.m; sourceTree = "<group>"; };
+		4350285B165DE9DF0018EDB7 /* WebViewBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewBrowser.h; sourceTree = "<group>"; };
+		4350285C165DE9DF0018EDB7 /* WebViewBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewBrowser.m; sourceTree = "<group>"; };
 		4350285D165DE9DF0018EDB7 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		4350285E165DE9DF0018EDB7 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		4350285F165DE9DF0018EDB7 /* DownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadManager.h; sourceTree = "<group>"; };
@@ -1094,6 +1099,28 @@
 			name = Vienna;
 			sourceTree = "<group>";
 		};
+		2FDF6FBB218A265A002F77E9 /* Webkit Browser */ = {
+			isa = PBXGroup;
+			children = (
+				2FDF6FBC218A266A002F77E9 /* BrowserTab.swift */,
+				2FDF6FBE218A266A002F77E9 /* BrowserTab.xib */,
+				2FDF6FBF218A266A002F77E9 /* TabbedBrowserViewController.swift */,
+				2FDF6FBD218A266A002F77E9 /* TabbedBrowserViewController.xib */,
+			);
+			name = "Webkit Browser";
+			sourceTree = "<group>";
+		};
+		2FDF6FC4218A267D002F77E9 /* Browser */ = {
+			isa = PBXGroup;
+			children = (
+				2FDF6FBB218A265A002F77E9 /* Webkit Browser */,
+				F6A7EA5B1F1CE63B00BD4450 /* WebView Browser */,
+				2FDF6FC5218A26B0002F77E9 /* Browser.swift */,
+				2FDF6FC7218A289A002F77E9 /* Tab.swift */,
+			);
+			name = Browser;
+			sourceTree = "<group>";
+		};
 		3A171BDF210B551A00B80FBB /* TRVSURLSessionOperation */ = {
 			isa = PBXGroup;
 			children = (
@@ -1410,16 +1437,13 @@
 			name = "Article list";
 			sourceTree = "<group>";
 		};
-		F6A7EA5B1F1CE63B00BD4450 /* Browser */ = {
+		F6A7EA5B1F1CE63B00BD4450 /* WebView Browser */ = {
 			isa = PBXGroup;
 			children = (
-				2FBF5D2A24D71A4200CB4781 /* BrowserTab.swift */,
-				2FBF5D2924D71A4200CB4781 /* BrowserTab.xib */,
-				2FBF5D2B24D71A4200CB4781 /* TabbedBrowserViewController.swift */,
-				4350285B165DE9DF0018EDB7 /* Browser.h */,
-				4350285C165DE9DF0018EDB7 /* Browser.m */,
-				2FA79F172170C55D00228482 /* Browser+WebUIDelegate.h */,
-				2FA79F182170C55D00228482 /* Browser+WebUIDelegate.m */,
+				2FC91DDC21850ADB00D7F223 /* Browser+WebUIDelegate.h */,
+				2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */,
+				4350285B165DE9DF0018EDB7 /* WebViewBrowser.h */,
+				4350285C165DE9DF0018EDB7 /* WebViewBrowser.m */,
 				AAD7999D088B617900E2CE5E /* AddressBarCell.h */,
 				AA71168E09BEB17300E3EA8A /* AddressBarCell.m */,
 				43502857165DE9DF0018EDB7 /* BrowserPane.h */,
@@ -1429,7 +1453,7 @@
 				43502887165DE9DF0018EDB7 /* TabbedWebView.h */,
 				43502888165DE9DF0018EDB7 /* TabbedWebView.m */,
 			);
-			name = Browser;
+			name = "WebView Browser";
 			sourceTree = "<group>";
 		};
 		F6D008A11EF979F9008F2D3B /* BJRVerticallyCenteredTextFieldCell */ = {
@@ -1499,12 +1523,12 @@
 		F6D7FED91F1CDE62004F095A /* Main window */ = {
 			isa = PBXGroup;
 			children = (
+				2FDF6FC4218A267D002F77E9 /* Browser */,
 				F63833D71EF842EA00E07213 /* MainWindowController.swift */,
 				F6373A221F1D53B500ED3B09 /* MainWindow.swift */,
 				F6A7EA571F1CE5DD00BD4450 /* Toolbar */,
 				F6A7EA581F1CE60100BD4450 /* Folder list */,
 				F6A7EA5A1F1CE63500BD4450 /* Article list */,
-				F6A7EA5B1F1CE63B00BD4450 /* Browser */,
 			);
 			path = "Main window";
 			sourceTree = "<group>";
@@ -1866,17 +1890,18 @@
 				AA04ED6B096226D30060E851 /* rssFeedNew.tiff in Resources */,
 				AAE3E41C09760B42009E60D6 /* appearancePrefImage.tiff in Resources */,
 				AA71173709BEB70E00E3EA8A /* webpage.tiff in Resources */,
+				2FDF6FC2218A266A002F77E9 /* BrowserTab.xib in Resources */,
 				AA71187C09BFE19E00E3EA8A /* lockedPage.tiff in Resources */,
 				61A2CB610A8AC68C006348E8 /* revised.tiff in Resources */,
 				B28DE7F70B754E590062F879 /* enclosure_header.tiff in Resources */,
 				B28DE7F80B754E590062F879 /* enclosure.tiff in Resources */,
 				F65D6D711E74619E00A30974 /* Credits.rtf in Resources */,
+				2FDF6FC1218A266A002F77E9 /* TabbedBrowserViewController.xib in Resources */,
 				AAFDB7AF0C0B1516000D1643 /* smartFolder.tiff in Resources */,
 				F69AE79A1F2215D600342640 /* InfoPlist.strings in Resources */,
 				F6A7DE4F1E471A7F0017BE5E /* Vienna.help in Resources */,
 				AA16C5450C2DD4EB006BBAC1 /* refreshProgress.tiff in Resources */,
 				F6D572AB1E26AA8200CDA909 /* EmptyTrashWarning.xib in Resources */,
-				2FBF5D2C24D71A4200CB4781 /* BrowserTab.xib in Resources */,
 				F600B19A2202536800684F5C /* Colors.xcassets in Resources */,
 				F62580E11E286CDE0035E43C /* errorpage.html in Resources */,
 				F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */,
@@ -2097,7 +2122,7 @@
 				B283D5A410986CE600A5CD72 /* RichXMLParser.m in Sources */,
 				B283D5A510986CE600A5CD72 /* XMLTag.m in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
-				2FBF5D2E24D71A4200CB4781 /* TabbedBrowserViewController.swift in Sources */,
+				2FDF6FC3218A266A002F77E9 /* TabbedBrowserViewController.swift in Sources */,
 				03A131B31AA54EAC0037471F /* VNADatabaseMigration.m in Sources */,
 				AA26F4E30604927300FE7994 /* Folder.m in Sources */,
 				AA26F4ED0604927300FE7994 /* Database.m in Sources */,
@@ -2134,6 +2159,7 @@
 				43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */,
 				43502896165DE9E00018EDB7 /* ActivityPanelController.m in Sources */,
 				F6CE47131E7E3DCB0045EAD7 /* ActivityItem.m in Sources */,
+				2FC91DDD21850ADB00D7F223 /* Browser+WebUIDelegate.m in Sources */,
 				43502897165DE9E00018EDB7 /* AppController.m in Sources */,
 				43502898165DE9E00018EDB7 /* ArticleController.m in Sources */,
 				4350289A165DE9E00018EDB7 /* ArticleListView.m in Sources */,
@@ -2142,8 +2168,8 @@
 				F61CEA661F039E57009C878E /* ButtonToolbarItem.swift in Sources */,
 				4350289D165DE9E00018EDB7 /* BrowserPaneTemplate.m in Sources */,
 				F6094E331F10107800677D3B /* ExportAccessoryViewController.swift in Sources */,
-				2FBF5D2D24D71A4200CB4781 /* BrowserTab.swift in Sources */,
-				4350289E165DE9E00018EDB7 /* Browser.m in Sources */,
+				2FDF6FC0218A266A002F77E9 /* BrowserTab.swift in Sources */,
+				4350289E165DE9E00018EDB7 /* WebViewBrowser.m in Sources */,
 				F628DFE31ED2698A00FACFD3 /* FilterView.swift in Sources */,
 				F64C2CCC1E83825D00ED4E04 /* DateFormatterExtension.m in Sources */,
 				4350289F165DE9E00018EDB7 /* Constants.m in Sources */,
@@ -2169,11 +2195,11 @@
 				435028AE165DE9E00018EDB7 /* ProgressTextCell.m in Sources */,
 				793C95331C42A0DD00984D4E /* FoldersFilterable.m in Sources */,
 				435028AF165DE9E00018EDB7 /* RefreshManager.m in Sources */,
-				2FA79F192170C55D00228482 /* Browser+WebUIDelegate.m in Sources */,
 				435028B0165DE9E00018EDB7 /* SearchFolder.m in Sources */,
 				435028B1165DE9E00018EDB7 /* SearchMethod.m in Sources */,
 				435028B2165DE9E00018EDB7 /* SearchPanel.m in Sources */,
 				435028B3165DE9E00018EDB7 /* EnclosureView.m in Sources */,
+				2FDF6FC8218A289A002F77E9 /* Tab.swift in Sources */,
 				435028B4165DE9E00018EDB7 /* TabbedWebView.m in Sources */,
 				435028B6165DE9E00018EDB7 /* TreeNode.m in Sources */,
 				F69964F71F13029600FC8493 /* OverlayStatusBar.swift in Sources */,

@@ -26,24 +26,28 @@
 @class MMTabBarView;
 @class BrowserPane;
 
-@interface Browser : NSObject
+@interface WebViewBrowser : NSObject
 
-@property (assign) IBOutlet NSLayoutConstraint *tabBarHeightConstraint;
-@property (assign) IBOutlet MMTabBarView *tabBarControl;
+#pragma mark - current state
+
 @property (nonatomic) NSTabViewItem *primaryTab;
+@property (nonatomic, readonly) NSTabViewItem *activeTab;
+@property (nonatomic, readonly) NSInteger browserTabCount;
 
-// Accessors
+#pragma mark - opening tabs
+
 -(BrowserPane *)createNewTab;
 -(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag load:(BOOL)load;
 -(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
 -(BrowserPane *)createNewTab:(NSURL *)url withTitle:(NSString *)title inBackground:(BOOL)openInBackgroundFlag;
-@property (nonatomic, readonly) NSTabViewItem *activeTab;
--(void)closeActiveTab;
--(void)closeAllTabs;
-@property (nonatomic, readonly) NSInteger browserTabCount;
+
+#pragma mark - tab controls
 
 -(void)switchToPrimaryTab;
 -(void)showPreviousTab;
 -(void)showNextTab;
 -(void)saveOpenTabs;
+-(void)closeActiveTab;
+-(void)closeAllTabs;
+
 @end

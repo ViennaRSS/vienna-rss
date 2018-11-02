@@ -9,7 +9,7 @@
 
 #import "AppController.h"
 #import "ArticleView.h"
-#import "Browser.h"
+#import "Vienna-Swift.h"
 
 #define PROGRESS_INDICATOR_LEFT_MARGIN	8
 #define PROGRESS_INDICATOR_DIMENSION_REGULAR 24
@@ -33,6 +33,7 @@
 	{
 		controller = APPCONTROLLER;
 		articleView= [[ArticleView alloc] initWithFrame:frameRect];
+        //TODO: do not get the primary tab from browser, but retrieve the articles tab directly
 		// Make the list view the frame load and UI delegate for the web view
         articleView.UIDelegate = (NSView<WebUIDelegate> *)controller.browser.primaryTab.view;
 		articleView.frameLoadDelegate = (NSView<WebFrameLoadDelegate> *) controller.browser.primaryTab.view;
@@ -51,6 +52,7 @@
 
 -(void)dealloc
 {
+    //TODO: do not get the primary tab from browser, but retrieve the articles tab directly
 	[[NSNotificationCenter defaultCenter] removeObserver:controller.browser.primaryTab.view name:WebViewProgressFinishedNotification object:articleView];
 	[articleView setUIDelegate:nil];
 	[articleView setFrameLoadDelegate:nil];

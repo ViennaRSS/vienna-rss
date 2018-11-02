@@ -11,7 +11,7 @@
 #import "TabbedWebView.h"
 #import "AppController.h"
 
-@implementation Browser (WebUIDelegate)
+@implementation WebViewBrowser (WebUIDelegate)
 
 #pragma mark - WebUIDelegate
 

@@ -10,14 +10,36 @@ import Cocoa
 import MMTabBarView
 
 @available(OSX 10.10, *)
-class TabbedBrowserViewController: NSViewController, MMTabBarViewDelegate {
+class TabbedBrowserViewController: NSViewController, Browser, MMTabBarViewDelegate {
 
     @IBOutlet weak var tabBar: MMTabBarView!
     @IBOutlet weak var tabView: NSTabView!
-    var primaryTab : NSTabViewItem?
-    var activeTab : NSTabViewItem? {
+
+    /// The browser can have a fixed first tab (e.g. bookmarks).
+    /// This method will set the primary tab the first time it is called
+    /// - Parameter tabViewItem: the tab view item configured with the view that shall be in the first fixed tab.
+    var primaryTab : NSTabViewItem? {
+        didSet {
+            //remove from tabView if there was a prevous primary tab
+            if let primaryTab = oldValue {
+                tabView.removeTabViewItem(primaryTab)
+            }
+            if let primaryTab = self.primaryTab {
+                tabView.insertTabViewItem(primaryTab, at: 0)
+                tabBar.select(primaryTab)
+            }
+        }
+    }
+
+    var activeTab : Tab? {
         get {
-            return tabView.selectedTabViewItem
+            return tabView.selectedTabViewItem?.view as? Tab
+        }
+    }
+
+    var browserTabCount: Int {
+        get {
+            return tabView.numberOfTabViewItems
         }
     }
 
@@ -44,20 +66,7 @@ class TabbedBrowserViewController: NSViewController, MMTabBarViewDelegate {
         // Do view setup here.
     }
 
-    /// The browser can have a fixed first tab (e.g. bookmarks).
-    /// This method will set the primary tab the first time it is called
-    /// - Parameter tabViewItem: the tab view item configured with the view that shall be in the first fixed tab.
-    public func setPrimaryTab(_ tabViewItem:NSTabViewItem) {
-        //remove if there already was a primary tab, for example due to decoding from coder
-        if let primaryTab = self.primaryTab {
-            tabView.removeTabViewItem(primaryTab)
-        }
-        tabView.insertTabViewItem(tabViewItem, at: 0)
-        tabBar.select(tabViewItem)
-        primaryTab = tabViewItem
-    }
-
-    public func createNewTab(_ url:NSURL? = nil, inBackground: Bool = false, load: Bool = false) -> BrowserTab {
+    public func createNewTab(_ url:NSURL? = nil, inBackground: Bool = false, load: Bool = false) -> Tab {
         let newTab = BrowserTab()
         let newTabViewItem = NSTabViewItem(viewController: newTab)
         tabView.addTabViewItem(newTabViewItem)
@@ -96,5 +105,28 @@ class TabbedBrowserViewController: NSViewController, MMTabBarViewDelegate {
 
     public func saveOpenTabs() {
         //TODO: implement saving mechanism
+    }
+
+    func closeAllTabs() {
+        //TODO: implement
+    }
+
+    func closeActiveTab() {
+        //TODO: implement
+    }
+
+    func getTextSelection() -> String {
+        //TODO: implement
+        return ""
+    }
+
+    func getActiveTabHTML() -> String {
+        //TODO: implement
+        return ""
+    }
+
+    func getActiveTabURL() -> URL? {
+        //TODO: implement
+        return URL(string: "")
     }
 }

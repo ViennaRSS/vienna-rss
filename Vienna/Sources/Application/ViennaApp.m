@@ -32,7 +32,7 @@
 #import "Folder.h"
 #import "Article.h"
 #import "Database.h"
-#import "Browser.h"
+#import "Vienna-Swift.h"
 
 @implementation ViennaApp
 
@@ -248,55 +248,55 @@
  */
 -(NSString *)currentTextSelection
 {
-	NSView<BaseView> * theView = ((NSView<BaseView> *)((AppController*)self.delegate).browser.activeTab.view);
-	WebView * webPane = nil;
+    id<Tab> activeBrowserTab = ((AppController*)self.delegate).browser.activeTab;
 
-	if ([theView isKindOfClass:[BrowserPane class]])
-		webPane = (WebView *)((BrowserPane *)theView).mainView;
+    if (activeBrowserTab) {
+        return activeBrowserTab.textSelection;
+    } else {
+        //TODO: find a way with less casts to get access to the selected string in ArticleListView and UnifiedDisplayView
+        NSView<BaseView> * theView = ((NSView<BaseView> *)((AppController*)self.delegate).browser.primaryTab.view);
+        WebView *webPane;
 
-	if ([theView isKindOfClass:[ArticleListView class]])
-		webPane = (WebView *)((ArticleListView *)theView).webView;
-	
-	if ([theView isKindOfClass:[UnifiedDisplayView class]])
-		webPane = (WebView *)((UnifiedDisplayView *)theView).webView;
-	
-	if (webPane != nil)
-	{
-		NSView * docView = webPane.mainFrame.frameView.documentView;
-		
-		if ([docView conformsToProtocol:@protocol(WebDocumentText)])
-			return [(id<WebDocumentText>)docView selectedString];
-	}
+        if ([theView isKindOfClass:[ArticleListView class]]) {
+            webPane = (WebView *)((ArticleListView *)theView).webView;
+        }
+
+        if ([theView isKindOfClass:[UnifiedDisplayView class]]) {
+            webPane = (WebView *)((UnifiedDisplayView *)theView).webView;
+        }
+
+        if (webPane != nil)
+        {
+            NSView * docView = webPane.mainFrame.frameView.documentView;
+
+            if ([docView conformsToProtocol:@protocol(WebDocumentText)])
+                return [(id<WebDocumentText>)docView selectedString];
+        }
+    }
+
 	return @"";
 }
 
 -(NSString *)documentHTMLSource
 {
-	NSView<BaseView> * theView = ((NSView<BaseView> *) ((AppController*)self.delegate).browser.activeTab.view);
-	WebView * webPane = theView.webView;
-	
-	if (webPane != nil)
+	id<Tab> activeBrowserTab = ((AppController*)self.delegate).browser.activeTab;
+
+	if (activeBrowserTab != nil)
 	{
-		WebDataSource * dataSource = webPane.mainFrame.dataSource;
-		if (dataSource != nil)
-		{
-			id representation = dataSource.representation;
-			if ((representation != nil) && ([representation conformsToProtocol:@protocol(WebDocumentRepresentation)]) && ([(id<WebDocumentRepresentation>)representation canProvideDocumentSource]))
-				return [(id<WebDocumentRepresentation>)representation documentSource];
-		}
+        return activeBrowserTab.html;
 	}
 	return @"";
 }
 
 -(NSString *)documentTabURL
 {
-	NSView<BaseView> * theView = ((NSView<BaseView> *) ((AppController*)self.delegate).browser.activeTab.view);
-	if ([theView isKindOfClass:[BrowserPane class]])
-	{
-		return ((BrowserPane *)theView).url.absoluteString;
+    id<Tab> activeBrowserTab = ((AppController*)self.delegate).browser.activeTab;
+	if (activeBrowserTab) {
+		return activeBrowserTab.url.absoluteString;
 	}
-	else
+    else {
 		return @"";
+    }
 }
 
 /* currentArticle
