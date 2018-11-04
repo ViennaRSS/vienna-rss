@@ -25,6 +25,7 @@
 #import "HelperFunctions.h"
 #import "ImageAndTextCell.h"
 #import "TableViewExtensions.h"
+#import "NSWorkspace+OpenWithMenu.h"
 
 @implementation DownloadWindow
 
@@ -63,31 +64,66 @@
 	tableColumn.dataCell = imageAndTextCell;	
 
 	// We are the delegate and the datasource
-    table.delegate = self;
-    table.dataSource = self;
+	table.delegate = self;
+	table.dataSource = self;
 	table.doubleAction = @selector(handleDoubleClick:);
 	table.target = self;
 
 	// Create the popup menu
 	NSMenu * downloadMenu = [[NSMenu alloc] init];
+    
+	// Open
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Open", @"Title of a popup menu item") action:@selector(handleDoubleClick:) keyEquivalent:@""];
+
+	// Open With
+	NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open With", @"") action:nil keyEquivalent:@""];
+	openWithMenu = [[NSMenu alloc] init];
+	openWithMenu.delegate = self;
+	[item setSubmenu:openWithMenu];
+	[downloadMenu addItem:item];
+
+	// Show in Finder
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Show in Finder", @"Title of a popup menu item") action:@selector(showInFinder:) keyEquivalent:@""];
+    
+	// Remove from List
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Remove From List", @"Title of a popup menu item") action:@selector(removeFromList:) keyEquivalent:@""];
+    
+	// Cancel
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Cancel", @"Title of a popup menu item") action:@selector(cancelDownload:) keyEquivalent:@""];
+
+	[downloadMenu setDelegate:self];
 	table.menu = downloadMenu;
 }
 
-- (void)windowDidBecomeKey:(NSNotification *)notification {
-    // Clear relevant notifications when the user views this window.
-    NSUserNotificationCenter *center = NSUserNotificationCenter.defaultUserNotificationCenter;
-    [center.deliveredNotifications enumerateObjectsUsingBlock:^(NSUserNotification *notification, NSUInteger idx, BOOL *stop) {
-        BOOL completed = [notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFileDownloadCompleted];
-        BOOL failed = [notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFileDownloadFailed];
+- (void)menuWillOpen:(NSMenu *)menu
+{
+	
+	// Dynamically generate Open With submenu for item
+	if (menu == openWithMenu)
+	{
+		NSArray * list = [DownloadManager sharedInstance].downloadsList;
+		NSInteger index = table.selectedRow;
+		if (index != -1)
+		{
+			DownloadItem * item = list[index];
+			[[NSWorkspace sharedWorkspace] openWithMenuForFile:item.filename target:nil action:nil menu:menu];
+		}
+	}
+}
 
-        if (completed || failed) {
-            [center removeDeliveredNotification: notification];
-        }
-    }];
+- (void)windowDidBecomeKey:(NSNotification *)notification
+{
+	// Clear relevant notifications when the user views this window.
+	NSUserNotificationCenter *center = NSUserNotificationCenter.defaultUserNotificationCenter;
+	[center.deliveredNotifications enumerateObjectsUsingBlock:^(NSUserNotification *notification, NSUInteger idx, BOOL *stop) {
+		BOOL completed = [notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFileDownloadCompleted];
+		BOOL failed = [notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFileDownloadFailed];
+
+		if (completed || failed)
+		{
+			[center removeDeliveredNotification: notification];
+		}
+	}];
 }
 
 /* clearList
@@ -124,7 +160,7 @@
 	if (index != -1)
 	{
 		DownloadItem * item = list[index];
-		if (item && item.state == DownloadStateCompleted)
+		if (item)
 		{
 			if ([[NSWorkspace sharedWorkspace] openFile:item.filename] == NO)
 				runOKAlertSheet(NSLocalizedString(@"Vienna cannot open the file.", nil), NSLocalizedString(@"Vienna cannot open the file \"%@\" because it moved since you downloaded it.", nil), item.filename.lastPathComponent);
@@ -220,8 +256,7 @@
 	NSAssert(rowIndex >= 0 && rowIndex < [list count], @"objectValueForTableColumn sent an out-of-range rowIndex");
 	DownloadItem * item = list[rowIndex];
 
-	// TODO: return item when we have a cell that can parse it. Until then, construct our
-	// own data.
+	// TODO: return item when we have a cell that can parse it. Until then, construct our own data.
 	NSString * rawfilename = item.filename.lastPathComponent;
     NSString * filename = [rawfilename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	if (filename == nil)
