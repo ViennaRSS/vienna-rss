@@ -22,11 +22,12 @@
 
 @class ExtendedTableView;
 
-@interface DownloadWindow : NSWindowController <NSWindowDelegate,NSTableViewDelegate,NSTableViewDataSource> {
+@interface DownloadWindow : NSWindowController <NSWindowDelegate,NSMenuDelegate,NSTableViewDelegate,NSTableViewDataSource> {
 	IBOutlet NSWindow * downloadWindow;
 	IBOutlet ExtendedTableView * table;
 	IBOutlet NSButton * clearButton;
 	NSInteger lastCount;
+	NSMenu * openWithMenu;
 }
 
 // Public functions
