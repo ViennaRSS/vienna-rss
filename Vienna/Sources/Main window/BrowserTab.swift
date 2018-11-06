@@ -12,7 +12,7 @@ import Cocoa
 class BrowserTab: NSViewController {
 
     @IBOutlet weak var addressField: NSTextField!
-    @IBOutlet weak var webView: WKWebView!
+    var webView: WKWebView! = WKWebView()
     @IBOutlet weak var backButton: NSButton!
     @IBOutlet weak var forwardButton: NSButton!
     @IBOutlet weak var reloadButton: NSButton!
@@ -21,7 +21,10 @@ class BrowserTab: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+        self.view.addSubview(webView)
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: [], metrics: nil, views: ["webView" : webView]))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[addressField][webView]|", options: [], metrics: nil, views: ["webView" : webView, "addressField" : addressField]))
+        //TODO: set webview options since this is not possible before macOS 12 more in IB
     }
 }
 
