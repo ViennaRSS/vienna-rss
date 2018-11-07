@@ -22,6 +22,8 @@
 
 @class SearchMethod;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface Preferences : NSObject {
 	id userPrefs;
 	NSString * profilePath;
@@ -220,3 +222,5 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 @property (nonatomic, copy) NSString *syncingAppKey;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -33,7 +33,7 @@ class TabbedBrowserViewController: NSViewController, Browser, MMTabBarViewDelega
 
     var activeTab : Tab? {
         get {
-            return tabView.selectedTabViewItem?.view as? Tab
+            return tabView.selectedTabViewItem?.viewController as? Tab
         }
     }
 

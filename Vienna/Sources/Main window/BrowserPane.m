@@ -78,7 +78,7 @@
 {
     if (self == [BrowserPane class]) {
         //These are synonyms
-        [self exposeBinding:@"isLoading"];
+        [self exposeBinding:@"loading"];
         [self exposeBinding:@"isProcessing"];
     }
 }
@@ -88,7 +88,7 @@
 	    NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	    
 	    if ([key isEqualToString:@"isProcessing"]) {
-	        NSSet *affectingKeys = [NSSet setWithObjects:@"isLoading", nil];
+	        NSSet *affectingKeys = [NSSet setWithObjects:@"loading", nil];
 	        keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKeys];
 	    }
 	    
@@ -103,10 +103,10 @@
     self = [super initWithFrame:frame];
     if (self)
 	{
-		[self willChangeValueForKey:@"isLoading"];
-		isLoading = NO;
-		[self didChangeValueForKey:@"isLoading"];
-		_viewTitle = @"";
+		[self willChangeValueForKey:@"loading"];
+		loading = NO;
+		[self didChangeValueForKey:@"loading"];
+		_title = @"";
 		pageFilename = nil;
 		lastError = nil;
 		hasRSSlink = NO;
@@ -249,7 +249,7 @@
 	{
 		[self willChangeValueForKey:@"isLoading"];
 		[self.webPane stopLoading:self];
-		[self didChangeValueForKey:@"isLoading"];
+		[self didChangeValueForKey:@"loading"];
 	}
 	[self.webPane.mainFrame loadRequest:[NSURLRequest requestWithURL:self.url]];
 }
@@ -267,18 +267,18 @@
  */
 -(void)endFrameLoad
 {
-	if ([self.viewTitle isEqualToString:@""])
+	if ([self.title isEqualToString:@""])
 	{
 		if (lastError == nil)
 		{
 			self.tab.label = pageFilename;
-			self.viewTitle = pageFilename;
+			self.title = pageFilename;
 		}
 	}
 	
-	[self willChangeValueForKey:@"isLoading"];
-	isLoading = NO;
-	[self didChangeValueForKey:@"isLoading"];
+	[self willChangeValueForKey:@"loading"];
+	loading = NO;
+	[self didChangeValueForKey:@"loading"];
 }
 
 /* printDocument
@@ -303,6 +303,32 @@
 -(WebView *)webView
 {
 	return self.webPane;
+}
+
+- (NSString *)textSelection {
+    if (self.webPane != nil)
+    {
+        NSView * docView = self.webPane.mainFrame.frameView.documentView;
+
+        if ([docView conformsToProtocol:@protocol(WebDocumentText)])
+            return [(id<WebDocumentText>)docView selectedString];
+    } else {
+        return @"";
+    }
+}
+
+- (NSString *)html {
+    if (self.webPane != nil)
+    {
+        WebDataSource * dataSource = self.webPane.mainFrame.dataSource;
+        if (dataSource != nil)
+        {
+            id representation = dataSource.representation;
+            if ((representation != nil) && ([representation conformsToProtocol:@protocol(WebDocumentRepresentation)]) && ([(id<WebDocumentRepresentation>)representation canProvideDocumentSource]))
+                return [(id<WebDocumentRepresentation>)representation documentSource];
+        }
+    }
+    return @"";
 }
 
 /* performFindPanelAction
@@ -409,14 +435,14 @@
  */
 -(void)handleStopLoading:(id)sender
 {
-	[self willChangeValueForKey:@"isLoading"];
+	[self willChangeValueForKey:@"loading"];
 	// stop Javascript and plugings
 	[self.webPane abortJavascriptAndPlugIns];
 	[self.webPane setFrameLoadDelegate:nil];
     //TODO: why do we remove the delegate here??
 	[self.webPane setUIDelegate:nil];
 	[self.webPane stopLoading:self];
-	[self didChangeValueForKey:@"isLoading"];
+	[self didChangeValueForKey:@"loading"];
 	[self.webPane.mainFrame loadHTMLString:@"" baseURL:nil];
 }
 
@@ -485,12 +511,12 @@
     }
 }
 
-/* isLoading
+/* loading
  * Returns whether the current web page is in the process of being loaded.
  */
--(BOOL)isLoading
+-(BOOL)loading
 {
-	return isLoading;
+	return loading;
 }
 
 /* isProcessing
@@ -606,7 +632,7 @@
     {
         //TODO: do not use reference from browswerpane to tab
         self.tab.label = title;
-        self.viewTitle = title;
+        self.title = title;
     }
 }
 
@@ -626,11 +652,11 @@
 #pragma mark - WebFrameLoad helper methods
 
 -(void)setLoadingURL:(NSURL *)url unreachable:(NSURL *)unreachableURL {
-    if (!isLoading)
+    if (!loading)
     {
-        [self willChangeValueForKey:@"isLoading"];
-        isLoading = YES;
-        [self didChangeValueForKey:@"isLoading"];
+        [self willChangeValueForKey:@"loading"];
+        loading = YES;
+        [self didChangeValueForKey:@"loading"];
     }
 
     // Show or hide the lock icon depending on whether this is a secure
