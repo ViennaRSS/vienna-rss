@@ -30,6 +30,7 @@
 
 @property (assign) IBOutlet NSLayoutConstraint *tabBarHeightConstraint;
 @property (assign) IBOutlet MMTabBarView *tabBarControl;
+@property (readonly) NSTabViewItem *activeTabViewItem;
 
 //queue for tab view items to select when current item is closed
 @property NSMutableArray<NSTabViewItem *> *tabViewOrder;
@@ -138,13 +139,13 @@
 /* activeTab
  * Returns the active tab.
  */
--(NSTabViewItem *)activeTab
+-(id<Tab>)activeTab
 {
-	return self.tabBarControl.tabView.selectedTabViewItem;
+	return (id<Tab>)self.activeTabViewItem.view;
 }
 
--(NSView<BaseView> *)activeTabItemView {
-    return self.activeTab.identifier;
+- (NSTabViewItem *)activeTabViewItem {
+    return self.tabBarControl.tabView.selectedTabViewItem;
 }
 
 /* setActiveTabToPrimaryTab
@@ -187,7 +188,7 @@
 }
 
 -(void)closeActiveTab {
-    [self closeTab:self.activeTab];
+    [self closeTab:self.activeTabViewItem];
 }
 
 /*
@@ -401,9 +402,9 @@
 		if (tabLink != nil)
 		{
 			[tabLinks addObject:tabLink];
-			if ([theView respondsToSelector:@selector(viewTitle)] && theView.viewTitle != nil)
+			if ([theView respondsToSelector:@selector(title)] && theView.title != nil)
 			{
-                tabTitles[tabLink] = theView.viewTitle;
+                tabTitles[tabLink] = theView.title;
 			}
 		}
 	}
@@ -450,7 +451,7 @@
 	BrowserPane * newBrowserPane = [self createNewTab:url inBackground:inBackground];
 	if (title != nil) {
         newBrowserPane.tab.label = title;
-		[newBrowserPane setViewTitle:title];
+		[newBrowserPane setTitle:title];
 	}
 	return newBrowserPane;
 }

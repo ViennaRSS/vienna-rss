@@ -34,6 +34,6 @@
 	@property (nonatomic, readonly, strong) WebView *webView;
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
 @optional
-	@property (nonatomic, readonly, copy) NSString *viewTitle;
+	@property (nonatomic, readonly, copy) NSString *title;
 @end
 

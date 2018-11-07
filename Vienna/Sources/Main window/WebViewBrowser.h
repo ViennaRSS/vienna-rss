@@ -23,16 +23,17 @@
 @import WebKit;
 
 #import "BaseView.h"
+#import "Vienna-Swift.h"
 
 @class MMTabBarView;
 @class BrowserPane;
 
-@interface WebViewBrowser : NSObject
+@interface WebViewBrowser : NSObject <Browser>
 
 #pragma mark - current state
 
 @property (nonatomic) NSTabViewItem *primaryTab;
-@property (nonatomic, readonly) NSTabViewItem *activeTab;
+@property (nonatomic, readonly) id<Tab> activeTab;
 @property (nonatomic, readonly) NSInteger browserTabCount;
 
 #pragma mark - opening tabs

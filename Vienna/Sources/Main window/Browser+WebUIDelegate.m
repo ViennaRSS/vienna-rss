@@ -22,12 +22,12 @@
 - (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation
   modifierFlags:(NSUInteger)modifierFlags {
 
-    NSView *activeView = self.activeTab.view;
+    NSView *activeView = (NSView *)self.activeTab;
     if (!([activeView isKindOfClass:BrowserPane.class]
           && ((BrowserPane *)activeView).webView == sender)) {
         return;
     }
-    BrowserPane *bp = (BrowserPane *)self.activeTab.view;
+    BrowserPane *bp = (BrowserPane *)self.activeTab;
 
     NSURL *url = [elementInformation valueForKey:@"WebElementLinkURL"];
     [bp hoveredOverURL:url];
@@ -115,12 +115,12 @@
 -(NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems
 {
 
-    NSView *activeView = self.activeTab.view;
+    NSView *activeView = (NSView *)self.activeTab;
     if (!([activeView isKindOfClass:BrowserPane.class]
           && ((BrowserPane *)activeView).webView == sender)) {
         return @[];
     }
-    BrowserPane *bp = (BrowserPane *)self.activeTab.view;
+    BrowserPane *bp = (BrowserPane *)self.activeTab;
 
     NSURL * urlLink = [element valueForKey:WebElementLinkURLKey];
     if (urlLink != nil)
