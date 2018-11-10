@@ -75,7 +75,10 @@
     
     // Add menu item for default app
     NSString *defaultApp = [self defaultHandlerApplicationForFile:path];
-    NSString *defaultAppName = [NSString stringWithFormat:@"%@ (default)", [[NSFileManager defaultManager] displayNameAtPath:defaultApp]];
+    NSString *displayName = [[NSFileManager defaultManager] displayNameAtPath:defaultApp];
+    NSString *defaultStr = NSLocalizedString(@"(default)", @"Appended to application name in Open With menu");
+    NSString *defaultAppName = [NSString stringWithFormat:@"%@ %@", displayName, defaultStr];
+    
     NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:defaultApp];
     [icon setSize:NSMakeSize(16,16)];
     
