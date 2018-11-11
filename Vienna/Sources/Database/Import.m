@@ -93,9 +93,10 @@
             }
 		}
 
-		// Do double-decoding of the title to get around a bug in some commercial newsreaders
+		// Do double-decoding of the title and description to get around a bug in some commercial newsreaders
 		// where they double-encode characters
 		feedText = feedText.stringByUnescapingExtendedCharacters;
+		feedDescription = feedDescription.stringByUnescapingExtendedCharacters;
 		
 		if (feedURL == nil)
 		{
