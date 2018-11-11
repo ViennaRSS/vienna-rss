@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="WebViewBrowser">
+            <connections>
+                <outlet property="view" destination="c22-O7-iKe" id="Wco-1l-CZn"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <customView placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="vnF-Ff-Ntd" customClass="MMTabBarView">
+                    <rect key="frame" x="0.0" y="250" width="480" height="22"/>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="Gew-Gw-ivh"/>
+                        <outlet property="partnerView" destination="CRL-fJ-APK" id="lXy-2A-m1H"/>
+                        <outlet property="tabView" destination="CRL-fJ-APK" id="VTp-1C-L6f"/>
+                    </connections>
+                </customView>
+                <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="CRL-fJ-APK" userLabel="Tab View">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="250"/>
+                    <font key="font" metaFont="system"/>
+                    <connections>
+                        <outlet property="delegate" destination="vnF-Ff-Ntd" id="Ret-fv-tJD"/>
+                    </connections>
+                </tabView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="vnF-Ff-Ntd" secondAttribute="trailing" id="4gZ-dP-q7a"/>
+                <constraint firstItem="vnF-Ff-Ntd" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="7I1-Xl-17L"/>
+                <constraint firstItem="CRL-fJ-APK" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="D7i-qi-zFL"/>
+                <constraint firstAttribute="trailing" secondItem="CRL-fJ-APK" secondAttribute="trailing" id="Rmr-2D-pc8"/>
+                <constraint firstItem="vnF-Ff-Ntd" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="W5F-l3-zT6"/>
+                <constraint firstItem="CRL-fJ-APK" firstAttribute="top" secondItem="vnF-Ff-Ntd" secondAttribute="bottom" id="adZ-Ld-GX2"/>
+                <constraint firstAttribute="bottom" secondItem="CRL-fJ-APK" secondAttribute="bottom" id="wCy-kZ-1Tz"/>
+            </constraints>
+        </customView>
+    </objects>
+</document>

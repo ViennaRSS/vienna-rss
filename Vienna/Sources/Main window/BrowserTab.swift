@@ -11,6 +11,7 @@ import Cocoa
 @available(OSX 10.10, *)
 class BrowserTab: NSViewController {
 
+    @IBOutlet weak var addressBarContainer: NSVisualEffectView!
     @IBOutlet weak var addressField: NSTextField!
     var webView: WKWebView! = WKWebView()
     @IBOutlet weak var backButton: NSButton!
@@ -21,10 +22,12 @@ class BrowserTab: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(webView)
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(webView, positioned: .below, relativeTo: nil)
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: [], metrics: nil, views: ["webView" : webView]))
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[addressField][webView]|", options: [], metrics: nil, views: ["webView" : webView, "addressField" : addressField]))
-        //TODO: set webview options since this is not possible before macOS 12 more in IB
+        //TODO: set top constraint to view top, insets to webview
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[addressBarContainer]-[webView]|", options: [], metrics: nil, views: ["webView" : webView, "addressBarContainer" : addressBarContainer]))
+        //TODO: set webview options since this is not possible before macOS 12 in IB
     }
 }
 
@@ -44,19 +47,19 @@ extension BrowserTab: Tab {
     }
 
     func back() {
-
+        self.webView.goBack()
     }
 
     func forward() {
-
+        self.webView.goForward()
     }
 
     func pageDown() {
-
+        self.webView.pageDown(nil)
     }
 
     func pageUp() {
-
+        self.webView.pageUp(nil)
     }
 
     func searchFor(_ searchString: String, action: NSFindPanelAction) {
@@ -64,15 +67,17 @@ extension BrowserTab: Tab {
     }
 
     func load() {
-
+        if let url = self.url {
+            self.webView.load(URLRequest(url: url))
+        }
     }
 
     func reload() {
-
+        self.webView.reload()
     }
 
     func stopLoading() {
-
+        self.webView.stopLoading()
     }
 
     func close() {

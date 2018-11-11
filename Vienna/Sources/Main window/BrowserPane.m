@@ -255,8 +255,8 @@
 }
 
 -(void)setUrl:(NSURL *)url {
-	_url = url;
-	addressField.stringValue = url ? url.absoluteString : @"";
+    _url = url;
+    addressField.stringValue = url ? url.absoluteString : @"";
     self.tab.label = url ? url.host : NSLocalizedString(@"New Tab", nil);
 }
 
@@ -267,18 +267,18 @@
  */
 -(void)endFrameLoad
 {
-	if ([self.title isEqualToString:@""])
-	{
-		if (lastError == nil)
-		{
-			self.tab.label = pageFilename;
-			self.title = pageFilename;
-		}
-	}
-	
-	[self willChangeValueForKey:@"loading"];
-	loading = NO;
-	[self didChangeValueForKey:@"loading"];
+    if ([self.title isEqualToString:@""])
+    {
+        if (lastError == nil)
+        {
+            self.tab.label = pageFilename;
+            self.title = pageFilename;
+        }
+    }
+
+    [self willChangeValueForKey:@"loading"];
+    loading = NO;
+    [self didChangeValueForKey:@"loading"];
 }
 
 /* printDocument
@@ -286,7 +286,7 @@
  */
 -(void)printDocument:(id)sender
 {
-	[self.webPane printDocument:sender];
+    [self.webPane printDocument:sender];
 }
 
 /* mainView
@@ -294,7 +294,7 @@
  */
 -(NSView *)mainView
 {
-	return self.webPane;
+    return self.webPane;
 }
 
 /* webView
@@ -302,7 +302,7 @@
  */
 -(WebView *)webView
 {
-	return self.webPane;
+    return self.webPane;
 }
 
 - (NSString *)textSelection {
@@ -337,22 +337,22 @@
  */
 -(void)performFindPanelAction:(NSInteger)actionTag
 {
-	switch (actionTag)
-	{
-		case NSFindPanelActionSetFindString:
-		{			
-			[self.webPane searchFor:APPCONTROLLER.searchString direction:YES caseSensitive:NO wrap:YES];
-			break;
-		}
-			
-		case NSFindPanelActionNext:
-			[self.webPane searchFor:APPCONTROLLER.searchString direction:YES caseSensitive:NO wrap:YES];
-			break;
-			
-		case NSFindPanelActionPrevious:
-			[self.webPane searchFor:APPCONTROLLER.searchString direction:NO caseSensitive:NO wrap:YES];
-			break;
-	}
+    switch (actionTag)
+    {
+        case NSFindPanelActionSetFindString:
+        {
+            [self.webPane searchFor:APPCONTROLLER.searchString direction:YES caseSensitive:NO wrap:YES];
+            break;
+        }
+
+        case NSFindPanelActionNext:
+            [self.webPane searchFor:APPCONTROLLER.searchString direction:YES caseSensitive:NO wrap:YES];
+            break;
+
+        case NSFindPanelActionPrevious:
+            [self.webPane searchFor:APPCONTROLLER.searchString direction:NO caseSensitive:NO wrap:YES];
+            break;
+    }
 }
 
 /* canGoForward
@@ -360,7 +360,7 @@
  */
 -(BOOL)canGoForward
 {
-	return self.webPane.canGoForward;
+    return self.webPane.canGoForward;
 }
 
 /* canGoBack
@@ -368,7 +368,7 @@
  */
 -(BOOL)canGoBack
 {
-	return self.webPane.canGoBack;
+    return self.webPane.canGoBack;
 }
 
 /* handleGoForward
@@ -376,7 +376,7 @@
  */
 -(IBAction)handleGoForward:(id)sender
 {
-	[self.webPane goForward];
+    [self.webPane goForward];
 }
 
 /* handleGoBack
@@ -384,39 +384,39 @@
  */
 -(IBAction)handleGoBack:(id)sender
 {
-	[self.webPane goBack];
+    [self.webPane goBack];
 }
 
-/* swipeWithEvent 
+/* swipeWithEvent
  * Enables "back"/"forward" and "scroll to top"/"scroll to bottom" via three-finger swipes as in Safari and other applications.
  */
--(void)swipeWithEvent:(NSEvent *)event 
-{	
-	CGFloat deltaX = event.deltaX;
-	CGFloat deltaY = event.deltaY;
+-(void)swipeWithEvent:(NSEvent *)event
+{
+    CGFloat deltaX = event.deltaX;
+    CGFloat deltaY = event.deltaY;
 
-	// If the horizontal component of the swipe is larger, the user wants to go back or forward...
-	if (fabs(deltaX) > fabs(deltaY))
-	{
-		if (deltaX != 0)
-		{
-			if (deltaX > 0)
-				[self handleGoBack:self];
-			else 
-				[self handleGoForward:self];
-		}
-	}
-	// Otherwise, she wants to go to the top/bottom of the page.
-	else 
-	{
-		if (deltaY != 0)
-		{
-			if (deltaY > 0)
-				[self.webPane scrollToTop];
-			else 
-				[self.webPane scrollToBottom];
-		}
-	}
+    // If the horizontal component of the swipe is larger, the user wants to go back or forward...
+    if (fabs(deltaX) > fabs(deltaY))
+    {
+        if (deltaX != 0)
+        {
+            if (deltaX > 0)
+                [self handleGoBack:self];
+            else
+                [self handleGoForward:self];
+        }
+    }
+    // Otherwise, she wants to go to the top/bottom of the page.
+    else
+    {
+        if (deltaY != 0)
+        {
+            if (deltaY > 0)
+                [self.webPane scrollToTop];
+            else
+                [self.webPane scrollToBottom];
+        }
+    }
 }
 
 /* handleReload
@@ -424,10 +424,10 @@
  */
 -(IBAction)handleReload:(id)sender
 {
-	if (self.webPane.mainFrame.dataSource != nil)
-		[self.webPane reload:self];
-	else
-		[self handleAddress:self];
+    if (self.webPane.mainFrame.dataSource != nil)
+        [self.webPane reload:self];
+    else
+        [self handleAddress:self];
 }
 
 /* handleStopLoading webview
@@ -435,15 +435,15 @@
  */
 -(void)handleStopLoading:(id)sender
 {
-	[self willChangeValueForKey:@"loading"];
-	// stop Javascript and plugings
-	[self.webPane abortJavascriptAndPlugIns];
-	[self.webPane setFrameLoadDelegate:nil];
+    [self willChangeValueForKey:@"loading"];
+    // stop Javascript and plugings
+    [self.webPane abortJavascriptAndPlugIns];
+    [self.webPane setFrameLoadDelegate:nil];
     //TODO: why do we remove the delegate here??
-	[self.webPane setUIDelegate:nil];
-	[self.webPane stopLoading:self];
-	[self didChangeValueForKey:@"loading"];
-	[self.webPane.mainFrame loadHTMLString:@"" baseURL:nil];
+    [self.webPane setUIDelegate:nil];
+    [self.webPane stopLoading:self];
+    [self didChangeValueForKey:@"loading"];
+    [self.webPane.mainFrame loadHTMLString:@"" baseURL:nil];
 }
 
 /* handleRSSPage
@@ -451,20 +451,20 @@
  */
 -(IBAction)handleRSSPage:(id)sender
 {
-	if (hasRSSlink)
-	{
-		Folder * currentFolder = APP.currentFolder;
-		NSInteger currentFolderId = currentFolder.itemId;
-		NSInteger parentFolderId = currentFolder.parentId;
-		if (currentFolder.firstChildId > 0)
-		{
-			parentFolderId = currentFolderId;
-			currentFolderId = 0;
-		}
-		SubscriptionModel *subscription = [[SubscriptionModel alloc] init];
-		NSString * verifiedURLString = [subscription verifiedFeedURLFromURL:self.url].absoluteString;
-		[APPCONTROLLER createNewSubscription:verifiedURLString underFolder:parentFolderId afterChild:currentFolderId];
-	}
+    if (hasRSSlink)
+    {
+        Folder * currentFolder = APP.currentFolder;
+        NSInteger currentFolderId = currentFolder.itemId;
+        NSInteger parentFolderId = currentFolder.parentId;
+        if (currentFolder.firstChildId > 0)
+        {
+            parentFolderId = currentFolderId;
+            currentFolderId = 0;
+        }
+        SubscriptionModel *subscription = [[SubscriptionModel alloc] init];
+        NSString * verifiedURLString = [subscription verifiedFeedURLFromURL:self.url].absoluteString;
+        [APPCONTROLLER createNewSubscription:verifiedURLString underFolder:parentFolderId afterChild:currentFolderId];
+    }
 }
 
 /* handleKeyDown [delegate]
@@ -473,7 +473,7 @@
  */
 -(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags
 {
-	return NO;
+    return NO;
 }
 
 /* dealloc
@@ -483,14 +483,14 @@
 {
     [NSUserDefaults.standardUserDefaults removeObserver:self
                                              forKeyPath:MAPref_ShowStatusBar];
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[self handleStopLoading:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self handleStopLoading:nil];
     //TODO: this should not be necessary, since webview would get deallocated once it stops being referenced
     //and webview close already does this!
-	//[_webPane setFrameLoadDelegate:nil];
+    //[_webPane setFrameLoadDelegate:nil];
     //and this is already done in handleStopLoading, and webview close also does this!
     //[_webPane setUIDelegate:nil];
-	[_webPane close];
+    [_webPane close];
 }
 
 // MARK: Key-value observation
@@ -516,7 +516,7 @@
  */
 -(BOOL)loading
 {
-	return loading;
+    return loading;
 }
 
 /* isProcessing
@@ -524,23 +524,23 @@
  */
 -(BOOL)isProcessing
 {
-	return self.loading;
+    return self.loading;
 }
 
 -(void)setIsProcessing:(BOOL)isProcessing
 {
-	//TODO: intentionally does nothing. Find more elegant way
+    //TODO: intentionally does nothing. Find more elegant way
 }
 
 -(void)setHasCloseButton:(BOOL)hasCloseButton
 {
-	//TODO: INTENTIONALLY EMPTY, find more elegant way
+    //TODO: INTENTIONALLY EMPTY, find more elegant way
 }
 
 -(BOOL)hasCloseButton
 {
-	//TODO: find out why MMTabBar needs this and fix
-	return YES;
+    //TODO: find out why MMTabBar needs this and fix
+    return YES;
 }
 
 #pragma mark - WebFrameLoadDelegate
@@ -713,5 +713,62 @@
         self.statusBar.label = url.absoluteString;
     }
 }
+
+#pragma mark - BrowserTab Protocol Requirements
+
+- (void)back {
+    [self handleGoBack:nil];
+}
+
+
+- (void)close {
+    //TODO
+}
+
+
+- (void)decreaseTextSize {
+    //TODO
+}
+
+
+- (void)forward {
+    [self handleGoForward:nil];
+}
+
+
+- (void)increaseTextSize {
+    //TODO
+}
+
+
+- (void)pageDown {
+    //TODO
+}
+
+
+- (void)pageUp {
+    //TODO
+}
+
+
+- (void)print {
+    //TODO
+}
+
+
+- (void)reload {
+    [self handleReload:nil];
+}
+
+
+- (void)searchFor:(NSString * _Nonnull)searchString action:(NSFindPanelAction)action {
+    //TODO
+}
+
+
+- (void)stopLoading {
+    [self handleStopLoading:nil];
+}
+
 
 @end

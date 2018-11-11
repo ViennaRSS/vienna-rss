@@ -60,6 +60,8 @@
 		03B752421B74814B00FD3FDB /* RichXMLParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B752411B74814B00FD3FDB /* RichXMLParserTests.m */; };
 		03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EFD56F1B720AB0007EF284 /* ExportTests.m */; };
 		03F33D961DF2A2F900B04FAF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03F33D951DF2A2F900B04FAF /* Images.xcassets */; };
+		2F5AC4202198E1AA00A7EDDE /* TitleChangingTabViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */; };
+		2F7B91EB2198351A00E56F00 /* WebViewBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */; };
 		2FAA36402072F50B00169C8A /* MMTabBarView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FAA363F2072F50B00169C8A /* MMTabBarView.framework */; };
 		2FAA36422072F57500169C8A /* MMTabBarView.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 2FAA363F2072F50B00169C8A /* MMTabBarView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2FC91DDD21850ADB00D7F223 /* Browser+WebUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */; };
@@ -330,6 +332,8 @@
 		03EFD56F1B720AB0007EF284 /* ExportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportTests.m; sourceTree = "<group>"; };
 		03F33D951DF2A2F900B04FAF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; };
+		2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleChangingTabViewItem.swift; sourceTree = "<group>"; };
+		2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewBrowser.xib; sourceTree = "<group>"; };
 		2FAA363F2072F50B00169C8A /* MMTabBarView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MMTabBarView.framework; path = Carthage/Build/Mac/MMTabBarView.framework; sourceTree = "<group>"; };
 		2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Browser+WebUIDelegate.m"; sourceTree = "<group>"; };
 		2FC91DDC21850ADB00D7F223 /* Browser+WebUIDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Browser+WebUIDelegate.h"; sourceTree = "<group>"; };
@@ -1106,6 +1110,7 @@
 				2FDF6FBE218A266A002F77E9 /* BrowserTab.xib */,
 				2FDF6FBF218A266A002F77E9 /* TabbedBrowserViewController.swift */,
 				2FDF6FBD218A266A002F77E9 /* TabbedBrowserViewController.xib */,
+				2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */,
 			);
 			name = "Webkit Browser";
 			sourceTree = "<group>";
@@ -1452,6 +1457,7 @@
 				4350285A165DE9DF0018EDB7 /* BrowserPaneTemplate.m */,
 				43502887165DE9DF0018EDB7 /* TabbedWebView.h */,
 				43502888165DE9DF0018EDB7 /* TabbedWebView.m */,
+				2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */,
 			);
 			name = "WebView Browser";
 			sourceTree = "<group>";
@@ -1883,6 +1889,7 @@
 				F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */,
 				AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */,
 				AAF6C3A308B06BA00077BAB8 /* StandardURLs.plist in Resources */,
+				2F7B91EB2198351A00E56F00 /* WebViewBrowser.xib in Resources */,
 				AA83A05008D6764D001E8404 /* smallCloseButton.tiff in Resources */,
 				AABCF9A508FF562E00984F78 /* pressedCloseButton.tiff in Resources */,
 				AA32E2A40940A9970034D9CC /* folderError.tiff in Resources */,
@@ -2133,6 +2140,7 @@
 				AA8C72F60641DE1F00649BA2 /* Criteria.m in Sources */,
 				0349813E1A206FD900014F29 /* GeneralPreferencesViewController.m in Sources */,
 				03B35B841B75E9E0001DB06D /* NSDate+Vienna.m in Sources */,
+				2F5AC4202198E1AA00A7EDDE /* TitleChangingTabViewItem.swift in Sources */,
 				3AF896C71CD8FDB800A9FA22 /* AppController+Sparkle.m in Sources */,
 				AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */,
 				AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */,
