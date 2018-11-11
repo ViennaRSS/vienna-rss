@@ -52,7 +52,7 @@
             }
 			else
 			{
-				itemDict[@"text"] = [NSString stringByConvertingHTMLEntities:(name ? name : @"")];
+				itemDict[@"text"] = SafeString(name);
                 NSXMLElement *outlineElement = [NSXMLElement elementWithName:@"outline"];
                 [outlineElement setAttributesWithDictionary:itemDict];
                 [parentElement addChild:outlineElement];
@@ -66,10 +66,10 @@
 			NSString * url = folder.feedURL;
 
 			itemDict[@"type"] = @"rss";
-			itemDict[@"text"] = [NSString stringByConvertingHTMLEntities:(name ? name : @"")];
+			itemDict[@"text"] = SafeString(name);
             itemDict[@"htmlUrl"] = SafeString(link);
 			itemDict[@"xmlUrl"] = SafeString(url);
-			itemDict[@"description"] = [NSString stringByConvertingHTMLEntities:description];
+			itemDict[@"description"] = SafeString(description);
             NSXMLElement *outlineElement = [NSXMLElement elementWithName:@"outline"];
             [outlineElement setAttributesWithDictionary:itemDict];
             [parentElement addChild:outlineElement];
