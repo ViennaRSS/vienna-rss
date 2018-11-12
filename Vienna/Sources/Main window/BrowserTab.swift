@@ -79,11 +79,7 @@ extension BrowserTab: Tab {
     func stopLoading() {
         self.webView.stopLoading()
     }
-
-    func close() {
-
-    }
-
+    
     func decreaseTextSize() {
 
     }

@@ -10,11 +10,22 @@ import Cocoa
 import MMTabBarView
 
 @available(OSX 10.10, *)
-class TabbedBrowserViewController: NSViewController, Browser, MMTabBarViewDelegate {
+class TabbedBrowserViewController: NSViewController, Browser {
 
     @IBOutlet weak var tabBar: MMTabBarView! {
         didSet {
             self.tabBar.setStyleNamed("Mojave");
+            self.tabBar.onlyShowCloseOnHover = true
+            self.tabBar.canCloseOnlyTab = false
+            self.tabBar.disableTabClose = false
+            self.tabBar.allowsBackgroundTabClosing = true
+            self.tabBar.hideForSingleTab = true
+            self.tabBar.showAddTabButton = true
+            self.tabBar.buttonMinWidth = 120
+            self.tabBar.useOverflowMenu = true
+            self.tabBar.automaticallyAnimates = true
+            //TODO: figure out what this property means
+            self.tabBar.allowsScrubbing = true
         }
     }
 
@@ -78,6 +89,7 @@ class TabbedBrowserViewController: NSViewController, Browser, MMTabBarViewDelega
     public func createNewTab(_ url:URL? = nil, inBackground: Bool = false, load: Bool = false) -> Tab {
         let newTab = BrowserTab()
         let newTabViewItem = TitleChangingTabViewItem(viewController: newTab)
+        newTabViewItem.hasCloseButton = true
         tabView.addTabViewItem(newTabViewItem)
 
         if (url != nil) {
@@ -116,12 +128,16 @@ class TabbedBrowserViewController: NSViewController, Browser, MMTabBarViewDelega
         //TODO: implement saving mechanism
     }
 
-    func closeAllTabs() {
-        //TODO: implement
+    func closeActiveTab() {
+        if let selectedTabViewItem = self.tabView.selectedTabViewItem {
+            self.tabView.removeTabViewItem(selectedTabViewItem)
+        }
     }
 
-    func closeActiveTab() {
-        //TODO: implement
+    func closeAllTabs() {
+        self.tabView.tabViewItems.filter({$0 != primaryTab}).forEach {
+            self.tabView.removeTabViewItem($0)
+        }
     }
 
     func getTextSelection() -> String {
@@ -138,4 +154,33 @@ class TabbedBrowserViewController: NSViewController, Browser, MMTabBarViewDelega
         //TODO: implement
         return URL(string: "")
     }
+}
+
+@available(OSX 10.10, *)
+extension TabbedBrowserViewController: MMTabBarViewDelegate {
+    func tabView(_ aTabView: NSTabView, shouldClose tabViewItem: NSTabViewItem) -> Bool {
+        return tabViewItem != primaryTab
+    }
+
+    func tabView(_ aTabView: NSTabView, willClose tabViewItem: NSTabViewItem) {
+        //TODO: stop loading of webview etc
+    }
+
+    func tabView(_ aTabView: NSTabView, menuFor tabViewItem: NSTabViewItem) -> NSMenu {
+        //TODO: return menu corresponding to browser or primary tab view item
+        return NSMenu.init()
+    }
+
+    func tabView(_ aTabView: NSTabView, shouldDrag tabViewItem: NSTabViewItem, in tabBarView: MMTabBarView) -> Bool {
+        return tabViewItem != primaryTab
+    }
+
+    func tabView(_ aTabView: NSTabView, validateDrop sender: NSDraggingInfo, proposedItem tabViewItem: NSTabViewItem, proposedIndex: UInt, in tabBarView: MMTabBarView) -> NSDragOperation {
+        return proposedIndex != 0 ? [.every] : []
+    }
+
+    func tabView(_ aTabView: NSTabView, validateSlideOfProposedItem tabViewItem: NSTabViewItem, proposedIndex: UInt, in tabBarView: MMTabBarView) -> NSDragOperation {
+        return (tabViewItem != primaryTab && proposedIndex != 0) ? [.every] : []
+    }
+
 }

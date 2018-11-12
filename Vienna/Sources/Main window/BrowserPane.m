@@ -312,9 +312,9 @@
 
         if ([docView conformsToProtocol:@protocol(WebDocumentText)])
             return [(id<WebDocumentText>)docView selectedString];
-    } else {
-        return @"";
     }
+
+    return @"";
 }
 
 - (NSString *)html {
@@ -721,11 +721,6 @@
 }
 
 
-- (void)close {
-    //TODO
-}
-
-
 - (void)decreaseTextSize {
     //TODO
 }
@@ -769,6 +764,5 @@
 - (void)stopLoading {
     [self handleStopLoading:nil];
 }
-
 
 @end
