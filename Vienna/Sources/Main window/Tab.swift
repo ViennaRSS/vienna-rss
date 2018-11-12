@@ -30,7 +30,6 @@ protocol Tab {
     func load()
     func reload()
     func stopLoading()
-    func close()
 
     //MARK: visual settings
 

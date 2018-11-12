@@ -39,6 +39,9 @@ protocol Browser {
     /// Next time when instanciating the browser, these tabs will be re-instanciated as well.
     func saveOpenTabs()
 
+    /// close active tab
+    func closeActiveTab()
+
     /// Closes all open tabs (despite of the primary tab).
     /// This will not erase the saved open tabs, so next time,
     /// the saved tabs will be opened again unless the tabs

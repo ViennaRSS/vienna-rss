@@ -2849,7 +2849,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)closeTab:(id)sender
 {
-	[self.browser.activeTab close];
+	[self.browser closeActiveTab];
 }
 
 /* reloadPage
