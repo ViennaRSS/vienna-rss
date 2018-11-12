@@ -139,7 +139,7 @@
  */
 -(id<Tab>)activeTab
 {
-	return (id<Tab>)self.activeTabViewItem.view;
+    return self.activeTabViewItem != self.primaryTab ? (id<Tab>)self.activeTabViewItem.view : nil;
 }
 
 - (NSTabViewItem *)activeTabViewItem {
