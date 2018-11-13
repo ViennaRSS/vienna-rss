@@ -41,9 +41,9 @@ NSString *openReaderHost;
 NSString *username;
 NSString *password;
 NSString *APIBaseURL;
-BOOL hostSupportsLongId;
+BOOL hostSendsHexaItemId;
 BOOL hostRequiresSParameter;
-BOOL hostRequiresLastPathOnly;
+BOOL hostRequiresHexaForFeedId;
 BOOL hostRequiresInoreaderAdditionalHeaders;
 BOOL hostRequiresBackcrawling;
 NSDictionary *inoreaderAdditionalHeaders;
@@ -60,7 +60,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
 @property (readwrite, copy) NSString *statusMessage;
 @property (readwrite, nonatomic) NSUInteger countOfNewArticles;
-@property (nonatomic) NSMutableArray *localFeeds;
 @property (atomic) NSString *tToken;
 @property (atomic) NSString *clientAuthToken;
 @property (nonatomic) NSTimer *tTokenTimer;
@@ -81,7 +80,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     self = [super init];
     if (self) {
         // Initialization code here.
-        _localFeeds = [[NSMutableArray alloc] init];
         _tTokenWaitQueue = [[NSMutableArray alloc] init];
         _openReaderStatus = notAuthenticated;
         _countOfNewArticles = 0;
@@ -194,27 +192,28 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         clientAuthOperation = [NSBlockOperation blockOperationWithBlock:^(void) {
             NSURLSessionDataTask * task = [[NSURLSession sharedSession] dataTaskWithRequest:myRequest
                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                    self.openReaderStatus = notAuthenticated;
                     if (error) {
                         LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
                         LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                         [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
-                        self.openReaderStatus = notAuthenticated;
                     } else {
                         if (((NSHTTPURLResponse *)response).statusCode != 200) {
                             LOG_EXPR(((NSHTTPURLResponse *)response).statusCode);
                             LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
                             [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
-                            self.openReaderStatus = notAuthenticated;
                         } else {         // statusCode 200
                             NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                             NSArray *components = [response componentsSeparatedByString:@"\n"];
+                            for (NSString * item in components) {
+                                if([item hasPrefix:@"Auth="]) {
+                                    self.clientAuthToken = [item substringFromIndex:5];
+                                    self.openReaderStatus = missingTToken;
+                                    break;
+                                }
+                            }
 
-                            //NSString * sid = [[components objectAtIndex:0] substringFromIndex:4];		//unused
-                            //NSString * lsid = [[components objectAtIndex:1] substringFromIndex:5];	//unused
-                            self.clientAuthToken = [NSString stringWithString:[components[2] substringFromIndex:5]];
-                            self.openReaderStatus = missingTToken;
-
-                            if (self.clientAuthTimer == nil || !self.clientAuthTimer.valid) {
+                            if (self.openReaderStatus == missingTToken && (self.clientAuthTimer == nil || !self.clientAuthTimer.valid)) {
                                 //new request every 6 days
                                 self.clientAuthTimer = [NSTimer scheduledTimerWithTimeInterval:6 * 24 * 3600
                                                                                         target:self
@@ -250,16 +249,16 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     username = prefs.syncingUser;
     openReaderHost = prefs.syncServer;
     // default settings
-    hostSupportsLongId = NO;
+    hostSendsHexaItemId = NO;
     hostRequiresSParameter = NO;
-    hostRequiresLastPathOnly = NO;
+    hostRequiresHexaForFeedId = NO;
     hostRequiresInoreaderAdditionalHeaders = NO;
     hostRequiresBackcrawling = YES;
     // settings for specific kind of servers
     if ([openReaderHost isEqualToString:@"theoldreader.com"]) {
-        hostSupportsLongId = YES;
+        hostSendsHexaItemId = YES;
         hostRequiresSParameter = YES;
-        hostRequiresLastPathOnly = YES;
+        hostRequiresHexaForFeedId = YES;
         hostRequiresBackcrawling = NO;
     }
     if ([openReaderHost rangeOfString:@"inoreader.com"].length != 0) {
@@ -441,7 +440,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     }
 
     NSString *feedIdentifier;
-    if (hostRequiresLastPathOnly) {
+    if (hostRequiresHexaForFeedId) {
         feedIdentifier = thisFolder.feedURL.lastPathComponent;
     } else {
         feedIdentifier =  thisFolder.feedURL;
@@ -730,7 +729,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 NSMutableArray *guidArray = [NSMutableArray arrayWithCapacity:itemRefsArray.count];
                 for (NSDictionary *itemRef in itemRefsArray) {
                     NSString *guid;
-                    if (hostSupportsLongId) {
+                    if (hostSendsHexaItemId) {
                         guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%@", itemRef[@"id"]];
                     } else {
                         // as described in http://code.google.com/p/google-reader-api/wiki/ItemId
@@ -792,7 +791,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 NSMutableArray *guidArray = [NSMutableArray arrayWithCapacity:itemRefsArray.count];
                 for (NSDictionary *itemRef in itemRefsArray) {
                     NSString *guid;
-                    if (hostSupportsLongId) {
+                    if (hostSendsHexaItemId) {
                         guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%@", itemRef[@"id"]];
                     } else {
                         // as described in http://code.google.com/p/google-reader-api/wiki/ItemId
@@ -839,25 +838,29 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     subscriptionsDict = [NSJSONSerialization JSONObjectWithData:data
                                                         options:NSJSONReadingMutableContainers
                                                           error:&jsonError];
-    [self.localFeeds removeAllObjects];
+    NSMutableArray *localFeeds = [NSMutableArray array];
+    NSMutableArray *remoteFeeds = [NSMutableArray array];
     NSArray *localFolders = APPCONTROLLER.folders;
 
     for (Folder *f in localFolders) {
-        if (f.feedURL) {
-            [self.localFeeds addObject:f.feedURL];
+        if (f.feedURL && f.type == VNAFolderTypeOpenReader) {
+            [localFeeds addObject:f.feedURL];
         }
     }
-
-    NSMutableArray *googleFeeds = [[NSMutableArray alloc] init];
 
     for (NSDictionary *feed in subscriptionsDict[@"subscriptions"]) {
         NSString *feedID = feed[@"id"];
         if (feedID == nil) {
             break;
         }
-        NSString *feedURL = [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)];
-        if (![feedURL hasPrefix:@"http:"] && ![feedURL hasPrefix:@"https:"]) {
-            feedURL = [NSString stringWithFormat:@"https://%@/reader/public/atom/%@", openReaderHost, feedURL];
+        NSString *feedURL = feed[@"url"];
+        if (feedURL == nil || hostRequiresHexaForFeedId) { // TheOldReader requires BSON identifier in stream Ids instead of URL (ex: feed/0125ef...)
+            NSString * feedIdentifier = [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)];
+            if (hostRequiresHexaForFeedId) { // TheOldReader
+                feedURL = [NSString stringWithFormat:@"https://%@/reader/public/atom/%@", openReaderHost, feedIdentifier];
+            } else { // most services use feed URL as identifier (like GoogleReader did)
+                feedURL = feedIdentifier;
+            }
         }
 
         NSString *folderName = nil;
@@ -876,11 +879,11 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             }
         }
 
-        if (![self.localFeeds containsObject:feedURL]) {
-            NSString *rssTitle = @"";
-            if (feed[@"title"]) {
-                rssTitle = feed[@"title"];
-            }
+        NSString *rssTitle = @"";
+        if (feed[@"title"]) {
+            rssTitle = feed[@"title"];
+        }
+        if (![localFeeds containsObject:feedURL]) {
             // folderName could be nil
             NSArray *params = folderName ? @[feedURL, rssTitle, folderName] : @[feedURL, rssTitle];
             [self createNewSubscription:params];
@@ -891,21 +894,25 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             if (homePageURL) {
                 for (Folder *localFolder in localFolders) {
                     if (localFolder.type == VNAFolderTypeOpenReader && [localFolder.feedURL isEqualToString:feedURL]) {
-                        [[Database sharedManager] setHomePage:homePageURL forFolder:localFolder.itemId];
+                        Database * db = [Database sharedManager];
+                        [db setHomePage:homePageURL forFolder:localFolder.itemId];
+                        if ([db folderFromName:rssTitle] == nil) { // no conflict
+                            [db setName:rssTitle forFolder:localFolder.itemId];
+                        };
                         break;
                     }
                 }
             }
         }
 
-        [googleFeeds addObject:feedURL];
+        [remoteFeeds addObject:feedURL];
     }
 
 
-    if (subscriptionsDict[@"subscription"] != nil) { // detect probable authentication error
+    if (subscriptionsDict[@"subscriptions"] != nil) { // detect probable authentication error
         //check if we have a folder which is not registered as a Open Reader feed
         for (Folder *f in APPCONTROLLER.folders) {
-            if (f.type == VNAFolderTypeOpenReader && ![googleFeeds containsObject:f.feedURL]) {
+            if (f.type == VNAFolderTypeOpenReader && ![remoteFeeds containsObject:f.feedURL]) {
                 [[Database sharedManager] deleteFolder:f.itemId];
             }
         }
@@ -955,7 +962,13 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     NSURL *unsubscribeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit", APIBaseURL]];
     NSMutableURLRequest *myRequest = [self authentifiedFormRequestFromURL:unsubscribeURL];
     [myRequest setPostValue:@"unsubscribe" forKey:@"ac"];
-    [myRequest setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
+    NSString *feedIdentifier;
+    if (hostRequiresHexaForFeedId) {
+        feedIdentifier = feedURL.lastPathComponent;
+    } else {
+        feedIdentifier = feedURL;
+    }
+    [myRequest setPostValue:[NSString stringWithFormat:@"feed/%@", percentEscape(feedIdentifier)] forKey:@"s"];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:myRequest
         completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -968,18 +981,53 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     ];
 }
 
-/* setFolderName
- * set or remove a folder name to a newsfeed
+/* setFolderLabel:forFeed:set:
+ * add or remove a label (folder name) to a newsfeed
  * set parameter : TRUE => add ; FALSE => remove
  */
--(void)setFolderName:(NSString *)folderName forFeed:(NSString *)feedURL set:(BOOL)flag
+-(void)setFolderLabel:(NSString *)folderName forFeed:(NSString *)feedURL set:(BOOL)flag
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?client=%@", APIBaseURL, ClientName]];
 
     NSMutableURLRequest *request = [self authentifiedFormRequestFromURL:url];
     [request setPostValue:@"edit" forKey:@"ac"];
-    [request setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
+    NSString *feedIdentifier;
+    if (hostRequiresHexaForFeedId) {
+        feedIdentifier = feedURL.lastPathComponent;
+    } else {
+        feedIdentifier = feedURL;
+    }
+    [request setPostValue:[NSString stringWithFormat:@"feed/%@", percentEscape(feedIdentifier)] forKey:@"s"];
     [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", folderName] forKey:flag ? @"a" : @"r"];
+    __weak typeof(self) weakSelf = self;
+    [[RefreshManager sharedManager] addConnection:request
+        completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error) {
+                [weakSelf requestFailed:request response:response error:error];
+            } else {
+                [weakSelf requestFinished:request response:response data:data];
+            }
+        }
+    ];
+}
+
+/* setFolderTitle:forFeed:
+ * set title of a newsfeed
+ */
+-(void)setFolderTitle:(NSString *)folderName forFeed:(NSString *)feedURL
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?client=%@", APIBaseURL, ClientName]];
+
+    NSMutableURLRequest *request = [self authentifiedFormRequestFromURL:url];
+    [request setPostValue:@"edit" forKey:@"ac"];
+    NSString *feedIdentifier;
+    if (hostRequiresHexaForFeedId) {
+        feedIdentifier = feedURL.lastPathComponent;
+    } else {
+        feedIdentifier = feedURL;
+    }
+    [request setPostValue:[NSString stringWithFormat:@"feed/%@", percentEscape(feedIdentifier)] forKey:@"s"];
+    [request setPostValue:folderName forKey:@"t"];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:request
         completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
