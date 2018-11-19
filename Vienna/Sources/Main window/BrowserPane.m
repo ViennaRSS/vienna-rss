@@ -720,34 +720,32 @@
     [self handleGoBack:nil];
 }
 
-
-- (void)decreaseTextSize {
-    //TODO
+- (void)forward {
+	[self handleGoForward:nil];
 }
 
-
-- (void)forward {
-    [self handleGoForward:nil];
+- (void)decreaseTextSize {
+	[self.webPane makeTextSmaller:nil];
 }
 
 
 - (void)increaseTextSize {
-    //TODO
+	[self.webPane makeTextLarger:nil];
 }
 
 
 - (void)pageDown {
-    //TODO
+	[self.webPane scrollPageDown:nil];
 }
 
 
 - (void)pageUp {
-    //TODO
+	[self.webPane scrollPageUp:nil];
 }
 
 
 - (void)print {
-    //TODO
+	[self.webPane printDocument:self];
 }
 
 
