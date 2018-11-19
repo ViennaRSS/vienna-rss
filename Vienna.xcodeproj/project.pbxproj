@@ -1084,7 +1084,6 @@
 			children = (
 				F625815B1E29BEB90035E43C /* MainMenu.xib */,
 				F6832F661F10F5DA007920D4 /* MainWindowController.xib */,
-				0386A5BB1E1FA586000C10CE /* BrowserPane.xib */,
 				F62581441E29B90A0035E43C /* SearchPanel.xib */,
 				F6D572AD1E26AA8200CDA909 /* EmptyTrashWarning.xib */,
 				F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */,
@@ -1248,15 +1247,16 @@
 				2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */,
 				4350285B165DE9DF0018EDB7 /* WebViewBrowser.h */,
 				4350285C165DE9DF0018EDB7 /* WebViewBrowser.m */,
+				2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */,
 				AAD7999D088B617900E2CE5E /* AddressBarCell.h */,
 				AA71168E09BEB17300E3EA8A /* AddressBarCell.m */,
 				43502857165DE9DF0018EDB7 /* BrowserPane.h */,
 				43502858165DE9DF0018EDB7 /* BrowserPane.m */,
+				0386A5BB1E1FA586000C10CE /* BrowserPane.xib */,
 				43502859165DE9DF0018EDB7 /* BrowserPaneTemplate.h */,
 				4350285A165DE9DF0018EDB7 /* BrowserPaneTemplate.m */,
 				43502887165DE9DF0018EDB7 /* TabbedWebView.h */,
 				43502888165DE9DF0018EDB7 /* TabbedWebView.m */,
-				2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */,
 			);
 			name = "WebView Browser";
 			sourceTree = "<group>";
