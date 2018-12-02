@@ -8,6 +8,18 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.5.1
+-----
+- Add ‘Open With’ submenu to contextual menu for items in Downloads window
+- Allow ‘Open’ in Downloads window even when file is not yet fully downloaded (handy for audio files)
+- Improve tabs' support of macOS Mojave's dark mode
+- Fix fetching of feeds from OpenReader server
+- Sync OpenReader feed names
+- Fix feed unsubscribes and moves for TheOldReader
+- Fix alignment of feed/folders names which are in Arabic
+- Fix double escaping on feed title / description in OPML files
+- Update development team in About box
+
 3.5.0
 -----
 - Fix dark mode for horizontal layout
