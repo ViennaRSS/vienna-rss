@@ -20,9 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MMOverflowPopUpButtonCell : NSPopUpButtonCell <NSAnimationDelegate>
 
-@property (copy) MMCellBezelDrawingBlock bezelDrawingBlock;
+@property (nullable, copy) MMCellBezelDrawingBlock bezelDrawingBlock;
 @property (strong) NSImage *image;
-@property (strong) NSImage *secondImage;
+@property (nullable, strong) NSImage *secondImage;
 @property (assign) CGFloat secondImageAlpha;
 @property (assign) BOOL centerImage;
 

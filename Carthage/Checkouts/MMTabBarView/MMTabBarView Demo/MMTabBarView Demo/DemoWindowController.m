@@ -40,8 +40,8 @@
 
 - (void)awakeFromNib {
 
-	[[NSUserDefaults standardUserDefaults] registerDefaults:
-	 [NSDictionary dictionaryWithObjectsAndKeys:
+	[NSUserDefaults.standardUserDefaults registerDefaults:
+	 [NSDictionary<NSString*, id> dictionaryWithObjectsAndKeys:
 		  @"Card", @"Style",
 		  @"Horizontal", @"Orientation",
 		  @"Miniwindow", @"Tear-Off",
@@ -59,12 +59,12 @@
 	[toolbar setAutosavesConfiguration:YES];
     [toolbar setShowsBaselineSeparator:NO];
     
-	[[self window] setToolbar:toolbar];
+	[self.window setToolbar:toolbar];
 
     [tabBar addObserver:self forKeyPath:@"orientation" options:NSKeyValueObservingOptionNew context:NULL];
 
 	// remove any tabs present in the nib
-    for (NSTabViewItem *item in [tabView tabViewItems]) {
+    for (NSTabViewItem *item in tabView.tabViewItems) {
 		[tabView removeTabViewItem:item];
 	}
 
@@ -96,81 +96,91 @@
 
 - (IBAction)closeTab:(id)sender {
 
-    NSTabViewItem *tabViewItem = [tabView selectedTabViewItem];
+    NSTabViewItem *tabViewItem = tabView.selectedTabViewItem;
 
-    if (([tabBar delegate]) && ([[tabBar delegate] respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])) {
-        if (![[tabBar delegate] tabView:tabView shouldCloseTabViewItem:tabViewItem]) {
+    if ((tabBar.delegate) && ([tabBar.delegate respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])) {
+        if (![tabBar.delegate tabView:tabView shouldCloseTabViewItem:tabViewItem]) {
             return;
         }
     }
     
-    if (([tabBar delegate]) && ([[tabBar delegate] respondsToSelector:@selector(tabView:willCloseTabViewItem:)])) {
-        [[tabBar delegate] tabView:tabView willCloseTabViewItem:tabViewItem];
+    if ((tabBar.delegate) && ([tabBar.delegate respondsToSelector:@selector(tabView:willCloseTabViewItem:)])) {
+        [tabBar.delegate tabView:tabView willCloseTabViewItem:tabViewItem];
     }
     
     [tabView removeTabViewItem:tabViewItem];
     
-    if (([tabBar delegate]) && ([[tabBar delegate] respondsToSelector:@selector(tabView:didCloseTabViewItem:)])) {
-        [[tabBar delegate] tabView:tabView didCloseTabViewItem:tabViewItem];
+    if ((tabBar.delegate) && ([tabBar.delegate respondsToSelector:@selector(tabView:didCloseTabViewItem:)])) {
+        [tabBar.delegate tabView:tabView didCloseTabViewItem:tabViewItem];
     }
 }
 
 - (void)setIconNamed:(id)sender {
-	NSString *iconName = [sender titleOfSelectedItem];
+	NSString *iconName = [(NSPopUpButton*) sender titleOfSelectedItem];
 	if ([iconName isEqualToString:@"None"]) {
-		[[[tabView selectedTabViewItem] identifier] setValue:nil forKeyPath:@"icon"];
-		[[[tabView selectedTabViewItem] identifier] setValue:@"None" forKeyPath:@"iconName"];
+		DemoFakeModel* const tabBarItem = tabView.selectedTabViewItem.identifier;
+		tabBarItem.icon = nil;
+		tabBarItem.iconName = @"None";
 	} else {
+		DemoFakeModel* const tabBarItem = tabView.selectedTabViewItem.identifier;
 		NSImage *newIcon = [NSImage imageNamed:iconName];
-		[[[tabView selectedTabViewItem] identifier] setValue:newIcon forKeyPath:@"icon"];
-		[[[tabView selectedTabViewItem] identifier] setValue:iconName forKeyPath:@"iconName"];
+		tabBarItem.icon = newIcon;
+		tabBarItem.iconName = iconName;
 	}
 }
 
 - (void)setObjectCount:(id)sender {
-	[[[tabView selectedTabViewItem] identifier] setValue:[NSNumber numberWithInteger:[sender integerValue]] forKeyPath:@"objectCount"];
+	DemoFakeModel* const tabBarItem = tabView.selectedTabViewItem.identifier;
+	[tabBarItem setValue:[NSNumber numberWithInteger:[(NSControl*) sender integerValue]] forKeyPath:@"objectCount"];
 }
 
 - (void)setObjectCountColor:(id)sender {
-	[[[tabView selectedTabViewItem] identifier] setValue:(id)[sender color] forKeyPath:@"objectCountColor"];
+	DemoFakeModel* const tabBarItem = tabView.selectedTabViewItem.identifier;
+	[tabBarItem setValue:(id)[(NSColorWell*) sender color] forKeyPath:@"objectCountColor"];
 }
 
 - (IBAction)showObjectCountAction:(id)sender {
-	[[[tabView selectedTabViewItem] identifier] setValue:[NSNumber numberWithBool:[sender state]] forKeyPath:@"showObjectCount"];
+	DemoFakeModel* const tabBarItem = tabView.selectedTabViewItem.identifier;
+	[tabBarItem setValue:[NSNumber numberWithBool:[(NSButton*) sender state]] forKeyPath:@"showObjectCount"];
 }
 
 - (IBAction)isProcessingAction:(id)sender {
-	[[[tabView selectedTabViewItem] identifier] setValue:[NSNumber numberWithBool:[sender state]] forKeyPath:@"isProcessing"];
+	DemoFakeModel* const tabBarItem = tabView.selectedTabViewItem.identifier;
+	[tabBarItem setValue:[NSNumber numberWithBool:[(NSButton*) sender state]] forKeyPath:@"isProcessing"];
 }
 
 - (IBAction)isEditedAction:(id)sender {
-	[[[tabView selectedTabViewItem] identifier] setValue:[NSNumber numberWithBool:[sender state]] forKeyPath:@"isEdited"];
+	DemoFakeModel* const tabBarItem = tabView.selectedTabViewItem.identifier;
+	[tabBarItem setValue:[NSNumber numberWithBool:[(NSButton*) sender state]] forKeyPath:@"isEdited"];
 }
 
 - (IBAction)hasLargeImageAction:(id)sender {
     
-    if ([sender state] == NSOnState) {
-         [[[tabView selectedTabViewItem] identifier] setValue:[NSImage imageNamed:@"largeImage"] forKeyPath:@"largeImage"];
+	DemoFakeModel* const tabBarItem = tabView.selectedTabViewItem.identifier;
+    if ([(NSButton*) sender state] == NSOnState) {
+         [tabBarItem setValue:[NSImage imageNamed:@"largeImage"] forKeyPath:@"largeImage"];
     } else {
-        [[[tabView selectedTabViewItem] identifier] setValue:nil forKeyPath:@"largeImage"];
+        [tabBarItem setValue:nil forKeyPath:@"largeImage"];
     }
 }
 
 - (IBAction)hasCloseButtonAction:(id)sender {
-	[[[tabView selectedTabViewItem] identifier] setValue:[NSNumber numberWithBool:[sender state]] forKeyPath:@"hasCloseButton"];
+	DemoFakeModel* const tabBarItem = tabView.selectedTabViewItem.identifier;
+	[tabBarItem setValue:[NSNumber numberWithBool:[(NSButton*) sender state]] forKeyPath:@"hasCloseButton"];
 }
 
 - (IBAction)setTabLabel:(id)sender {
 
-	[[[tabView selectedTabViewItem] identifier] setValue:[sender stringValue] forKeyPath:@"title"];
+	DemoFakeModel* const tabBarItem = tabView.selectedTabViewItem.identifier;
+	[tabBarItem setValue:[(NSControl*) sender stringValue] forKeyPath:@"title"];
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem {
 
-    SEL itemAction = [menuItem action];
+    SEL itemAction = menuItem.action;
     
 	if (itemAction == @selector(closeTab:)) {
-		if (![tabBar canCloseOnlyTab] && ([tabView numberOfTabViewItems] <= 1)) {
+		if (!tabBar.canCloseOnlyTab && (tabView.numberOfTabViewItems <= 1)) {
 			return NO;
 		}
     }
@@ -189,16 +199,16 @@
 
 - (void)menuNeedsUpdate:(NSMenu *)menu {
 
-    if (menu == [popUp_orientation menu]) {
+    if (menu == popUp_orientation.menu) {
     
-        for (NSMenuItem *anItem in [menu itemArray]) {
+        for (NSMenuItem *anItem in menu.itemArray) {
 
             [anItem setEnabled:YES];
             
-            if (![tabBar supportsOrientation:MMTabBarHorizontalOrientation] && [anItem tag] == 0)
+            if (![tabBar supportsOrientation:MMTabBarHorizontalOrientation] && anItem.tag == 0)
                 [anItem setEnabled:NO];
             
-            if (![tabBar supportsOrientation:MMTabBarVerticalOrientation] && [anItem tag] == 1)
+            if (![tabBar supportsOrientation:MMTabBarVerticalOrientation] && anItem.tag == 1)
                 [anItem setEnabled:NO];
         }
     }
@@ -207,15 +217,15 @@
 -(void)_updateForOrientation:(MMTabBarOrientation)newOrientation {
 
 	//change the frame of the tab bar according to the orientation
-	NSRect tabBarFrame = [tabBar frame], tabViewFrame = [tabView frame];
+	NSRect tabBarFrame = tabBar.frame, tabViewFrame = tabView.frame;
 	NSRect totalFrame = NSUnionRect(tabBarFrame, tabViewFrame);
 
-    NSSize intrinsicTabBarContentSize = [tabBar intrinsicContentSize];
+    NSSize intrinsicTabBarContentSize = tabBar.intrinsicContentSize;
 
 	if (newOrientation == MMTabBarHorizontalOrientation) {
         if (intrinsicTabBarContentSize.height == NSViewNoInstrinsicMetric)
             intrinsicTabBarContentSize.height = 22;
-		tabBarFrame.size.height = [tabBar isTabBarHidden] ? 1 : intrinsicTabBarContentSize.height;
+		tabBarFrame.size.height = tabBar.isTabBarHidden ? 1 : intrinsicTabBarContentSize.height;
 		tabBarFrame.size.width = totalFrame.size.width;
 		tabBarFrame.origin.y = totalFrame.origin.y + totalFrame.size.height - tabBarFrame.size.height;
 		tabViewFrame.origin.x = 13;
@@ -224,7 +234,7 @@
 		[tabBar setAutoresizingMask:NSViewMinYMargin | NSViewWidthSizable];
 	} else {
 		tabBarFrame.size.height = totalFrame.size.height;
-		tabBarFrame.size.width = [tabBar isTabBarHidden] ? 1 : 120;
+		tabBarFrame.size.width = tabBar.isTabBarHidden ? 1 : 120;
 		tabBarFrame.origin.y = totalFrame.origin.y;
 		tabViewFrame.origin.x = tabBarFrame.origin.x + tabBarFrame.size.width;
 		tabViewFrame.size.width = totalFrame.size.width - tabBarFrame.size.width;
@@ -239,23 +249,23 @@
 	[tabBar setFrame:tabBarFrame];
 
     [popUp_orientation selectItemWithTag:newOrientation];
-	[[self window] display];
+	[self.window display];
 
     if (newOrientation == MMTabBarHorizontalOrientation) {
-        [[NSUserDefaults standardUserDefaults] setObject:[[popUp_orientation itemAtIndex:0] title] forKey:@"Orientation"];
+        [NSUserDefaults.standardUserDefaults setObject:[[popUp_orientation itemAtIndex:0] title] forKey:@"Orientation"];
     } else {
-        [[NSUserDefaults standardUserDefaults] setObject:[[popUp_orientation itemAtIndex:1] title] forKey:@"Orientation"];
+        [NSUserDefaults.standardUserDefaults setObject:[[popUp_orientation itemAtIndex:1] title] forKey:@"Orientation"];
     }
 }
 
 #pragma mark -
 #pragma mark KVO 
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey, id> *)change context:(void *)context {
 
     if (object == tabBar) {
         if ([keyPath isEqualToString:@"orientation"]) {
-            [self _updateForOrientation:[[change objectForKey:NSKeyValueChangeNewKey] unsignedIntegerValue]];
+            [self _updateForOrientation:[(NSNumber*) [change objectForKey:NSKeyValueChangeNewKey] unsignedIntegerValue]];
         }
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
@@ -266,131 +276,159 @@
 #pragma mark ---- tab bar config ----
 
 - (void)configStyle:(id)sender {
+	NSString* const string = [(NSPopUpButton*) sender titleOfSelectedItem];
+	if (string == nil) {
+		return;
+	}
 
-	[tabBar setStyleNamed:[sender titleOfSelectedItem]];
+	[tabBar setStyleNamed:string];
     
-	[[NSUserDefaults standardUserDefaults] setObject:[sender titleOfSelectedItem]
+	[NSUserDefaults.standardUserDefaults setObject:string
 	 forKey:@"Style"];
     
-    [self _updateForOrientation:[tabBar orientation]];
+    [self _updateForOrientation:tabBar.orientation];
 }
 
 - (void)configOnlyShowCloseOnHover:(id)sender {
-	[tabBar setOnlyShowCloseOnHover:[sender state]];
+	NSControlStateValue const state = [(NSButton*) sender state];
 
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:[sender state]]
+	[tabBar setOnlyShowCloseOnHover:state];
+
+	[NSUserDefaults.standardUserDefaults setObject:[NSNumber numberWithBool:state]
 	 forKey:@"OnlyShowCloserOnHover"];
 }
 
 - (void)configCanCloseOnlyTab:(id)sender {
-	[tabBar setCanCloseOnlyTab:[sender state]];
+	NSControlStateValue const state = [(NSButton*) sender state];
 
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:[sender state]]
+	[tabBar setCanCloseOnlyTab:state];
+
+	[NSUserDefaults.standardUserDefaults setObject:[NSNumber numberWithBool:state]
 	 forKey:@"CanCloseOnlyTab"];
 }
 
 - (void)configDisableTabClose:(id)sender {
-	[tabBar setDisableTabClose:[sender state]];
+	NSControlStateValue const state = [(NSButton*) sender state];
 
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:[sender state]]
+	[tabBar setDisableTabClose:state];
+
+	[NSUserDefaults.standardUserDefaults setObject:[NSNumber numberWithBool:state]
 	 forKey:@"DisableTabClose"];
 }
 
 - (void)configAllowBackgroundClosing:(id)sender {
-	[tabBar setAllowsBackgroundTabClosing:[sender state]];
+	NSControlStateValue const state = [(NSButton*) sender state];
 
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:[sender state]]
+	[tabBar setAllowsBackgroundTabClosing:state];
+
+	[NSUserDefaults.standardUserDefaults setObject:[NSNumber numberWithBool:state]
 	 forKey:@"AllowBackgroundClosing"];
 }
 
 - (void)configHideForSingleTab:(id)sender {
-	[tabBar setHideForSingleTab:[sender state]];
+	NSControlStateValue const state = [(NSButton*) sender state];
 
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:[sender state]]
+	[tabBar setHideForSingleTab:state];
+
+	[NSUserDefaults.standardUserDefaults setObject:[NSNumber numberWithBool:state]
 	 forKey:@"HideForSingleTab"];
 }
 
 - (void)configAddTabButton:(id)sender {
-	[tabBar setShowAddTabButton:[sender state]];
+	NSControlStateValue const state = [(NSButton*) sender state];
 
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:[sender state]]
+	[tabBar setShowAddTabButton:state];
+
+	[NSUserDefaults.standardUserDefaults setObject:[NSNumber numberWithBool:state]
 	 forKey:@"ShowAddTabButton"];
 }
 
 - (void)configTabMinWidth:(id)sender {
-	if ([tabBar buttonOptimumWidth] < [sender integerValue]) {
-		[tabBar setButtonMinWidth:[tabBar buttonOptimumWidth]];
-		[sender setIntegerValue:[tabBar buttonOptimumWidth]];
+	NSInteger const value = [(NSControl*) sender integerValue];
+	if (tabBar.buttonOptimumWidth < value) {
+		[tabBar setButtonMinWidth:tabBar.buttonOptimumWidth];
+		[(NSControl*) sender setIntegerValue:tabBar.buttonOptimumWidth];
 		return;
 	}
 
-	[tabBar setButtonMinWidth:[sender integerValue]];
+	[tabBar setButtonMinWidth:value];
 
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:[sender integerValue]]
+	[NSUserDefaults.standardUserDefaults setObject:[NSNumber numberWithInteger:value]
 	 forKey:@"TabMinWidth"];
 }
 
 - (void)configTabMaxWidth:(id)sender {
-	if ([tabBar buttonOptimumWidth] > [sender integerValue]) {
-		[tabBar setButtonMaxWidth:[tabBar buttonOptimumWidth]];
-		[sender setIntegerValue:[tabBar buttonOptimumWidth]];
+	NSInteger const value = [(NSControl*) sender integerValue];
+	if (tabBar.buttonOptimumWidth > value) {
+		[tabBar setButtonMaxWidth:tabBar.buttonOptimumWidth];
+		[(NSControl*) sender setIntegerValue:tabBar.buttonOptimumWidth];
 		return;
 	}
 
-	[tabBar setButtonMaxWidth:[sender integerValue]];
+	[tabBar setButtonMaxWidth:value];
 
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:[sender integerValue]]
+	[NSUserDefaults.standardUserDefaults setObject:[NSNumber numberWithInteger:value]
 	 forKey:@"TabMaxWidth"];
 }
 
 - (void)configTabOptimumWidth:(id)sender {
-	if ([tabBar buttonMaxWidth] < [sender integerValue]) {
-		[tabBar setButtonOptimumWidth:[tabBar buttonMaxWidth]];
-		[sender setIntegerValue:[tabBar buttonMaxWidth]];
+	NSInteger const value = [(NSControl*) sender integerValue];
+	if (tabBar.buttonMaxWidth < value) {
+		[tabBar setButtonOptimumWidth:tabBar.buttonMaxWidth];
+		[(NSControl*) sender setIntegerValue:tabBar.buttonMaxWidth];
 		return;
 	}
 
-	if ([tabBar buttonMinWidth] > [sender integerValue]) {
-		[tabBar setButtonOptimumWidth:[tabBar buttonMinWidth]];
-		[sender setIntegerValue:[tabBar buttonMinWidth]];
+	if (tabBar.buttonMinWidth > value) {
+		[tabBar setButtonOptimumWidth:tabBar.buttonMinWidth];
+		[(NSControl*) sender setIntegerValue:tabBar.buttonMinWidth];
 		return;
 	}
 
-	[tabBar setButtonOptimumWidth:[sender integerValue]];
+	[tabBar setButtonOptimumWidth:value];
 }
 
 - (void)configTabSizeToFit:(id)sender {
-	[tabBar setSizeButtonsToFit:[sender state]];
+	NSControlStateValue const state = [(NSButton*) sender state];
 
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:[sender integerValue]]
+	[tabBar setSizeButtonsToFit:state];
+
+	[NSUserDefaults.standardUserDefaults setObject:[NSNumber numberWithBool:state]
 	 forKey:@"SizeToFit"];
 }
 
 - (void)configTearOffStyle:(id)sender {
-	[tabBar setTearOffStyle:([sender indexOfSelectedItem] == 0) ? MMTabBarTearOffAlphaWindow : MMTabBarTearOffMiniwindow];
+	NSPopUpButton* const popupButton = sender;
+	[tabBar setTearOffStyle:(popupButton.indexOfSelectedItem == 0) ? MMTabBarTearOffAlphaWindow : MMTabBarTearOffMiniwindow];
 
-	[[NSUserDefaults standardUserDefaults] setObject:[sender title]
+	[NSUserDefaults.standardUserDefaults setObject:popupButton.title
 	 forKey:@"Tear-Off"];
 }
 
 - (void)configUseOverflowMenu:(id)sender {
-	[tabBar setUseOverflowMenu:[sender state]];
+	NSControlStateValue const state = [(NSButton*) sender state];
 
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:[sender integerValue]]
+	[tabBar setUseOverflowMenu:state];
+
+	[NSUserDefaults.standardUserDefaults setObject:[NSNumber numberWithBool:state]
 	 forKey:@"UseOverflowMenu"];
 }
 
 - (void)configAutomaticallyAnimates:(id)sender {
-	[tabBar setAutomaticallyAnimates:[sender state]];
+	NSControlStateValue const state = [(NSButton*) sender state];
 
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:[sender integerValue]]
+	[tabBar setAutomaticallyAnimates:state];
+
+	[NSUserDefaults.standardUserDefaults setObject:[NSNumber numberWithBool:state]
 	 forKey:@"AutomaticallyAnimates"];
 }
 
 - (void)configAllowsScrubbing:(id)sender {
-	[tabBar setAllowsScrubbing:[sender state]];
+	NSControlStateValue const state = [(NSButton*) sender state];
 
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:[sender integerValue]]
+	[tabBar setAllowsScrubbing:state];
+
+	[NSUserDefaults.standardUserDefaults setObject:[NSNumber numberWithBool:state]
 	 forKey:@"AllowScrubbing"];
 }
 
@@ -399,84 +437,96 @@
 
 - (void)tabView:(NSTabView *)aTabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem {
 	// need to update bound values to match the selected tab
-	if ([[tabViewItem identifier] respondsToSelector:@selector(objectCount)]) {
-		[objectCounterField setIntegerValue:[[tabViewItem identifier] objectCount]];
+	DemoFakeModel* const tabBarItem = tabViewItem.identifier;
+	if ([tabBarItem respondsToSelector:@selector(objectCount)]) {
+		[objectCounterField setIntegerValue:tabBarItem.objectCount];
 	}
     
-	if ([[tabViewItem identifier] respondsToSelector:@selector(objectCountColor)]) {
-        if ([[tabViewItem identifier] objectCountColor] != nil)
-            [objectCounterColorWell setColor:[[tabViewItem identifier] objectCountColor]];
+	if ([tabBarItem respondsToSelector:@selector(objectCountColor)]) {
+        if (tabBarItem.objectCountColor != nil)
+            [objectCounterColorWell setColor:tabBarItem.objectCountColor];
         else
-            [objectCounterColorWell setColor:[MMTabBarButtonCell defaultObjectCountColor]];
+            [objectCounterColorWell setColor:MMTabBarButtonCell.defaultObjectCountColor];
 	}    
 
-	if ([[tabViewItem identifier] respondsToSelector:@selector(isProcessing)]) {
-		[isProcessingButton setState:[[tabViewItem identifier] isProcessing]];
+	if ([tabBarItem respondsToSelector:@selector(isProcessing)]) {
+		[isProcessingButton setState:tabBarItem.isProcessing];
 	}
 
-	if ([[tabViewItem identifier] respondsToSelector:@selector(isEdited)]) {
-		[isEditedButton setState:[[tabViewItem identifier] isEdited]];
+	if ([tabBarItem respondsToSelector:@selector(isEdited)]) {
+		[isEditedButton setState:tabBarItem.isEdited];
 	}
 
-	if ([[tabViewItem identifier] respondsToSelector:@selector(hasCloseButton)]) {
-		[hasCloserButton setState:[[tabViewItem identifier] hasCloseButton]];
+	if ([tabBarItem respondsToSelector:@selector(hasCloseButton)]) {
+		[hasCloserButton setState:tabBarItem.hasCloseButton];
 	}
 
-	if ([[tabViewItem identifier] respondsToSelector:@selector(showObjectCount)]) {
-		[showObjectCountButton setState:[[tabViewItem identifier] showObjectCount]];
+	if ([tabBarItem respondsToSelector:@selector(showObjectCount)]) {
+		[showObjectCountButton setState:tabBarItem.showObjectCount];
 	}
     
-	if ([[tabViewItem identifier] respondsToSelector:@selector(largeImage)]) {
-		[hasLargeImageButton setState:[[tabViewItem identifier] largeImage] != nil];
+	if ([tabBarItem respondsToSelector:@selector(largeImage)]) {
+		[hasLargeImageButton setState:tabBarItem.largeImage != nil];
 	}
 
-	if ([[tabViewItem identifier] respondsToSelector:@selector(iconName)]) {
-		NSString *newName = [[tabViewItem identifier] iconName];
+	if ([tabBarItem respondsToSelector:@selector(iconName)]) {
+		NSString *newName = tabBarItem.iconName;
 		if (newName) {
-			[iconButton selectItem:[[iconButton menu] itemWithTitle:newName]];
+			[iconButton selectItem:[iconButton.menu itemWithTitle:newName]];
 		} else {
-			[iconButton selectItem:[[iconButton menu] itemWithTitle:@"None"]];
+			[iconButton selectItem:[iconButton.menu itemWithTitle:@"None"]];
 		}
 	}
     
-    if ([[tabViewItem identifier] respondsToSelector:@selector(title)]) {
-        [tabField setStringValue:[[tabViewItem identifier] title]];
+    if ([tabBarItem respondsToSelector:@selector(title)]) {
+        [tabField setStringValue:tabBarItem.title];
     }
 }
 
 - (BOOL)tabView:(NSTabView *)aTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem {
-	if ([[tabViewItem label] isEqualToString:@"Drake"]) {
-		NSAlert *drakeAlert = [NSAlert alertWithMessageText:@"No Way!" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"I refuse to close a tab named \"Drake\""];
-		[drakeAlert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:nil didEndSelector:nil contextInfo:nil];
+	NSWindow* const window = NSApp.keyWindow;
+	if (window == nil) {
+		return NO;
+	}
+	if ([tabViewItem.label isEqualToString:@"Drake"]) {
+        NSAlert *drakeAlert = [[NSAlert alloc] init];
+        [drakeAlert setMessageText:@"No Way!"];
+        [drakeAlert setInformativeText:@"I refuse to close a tab named \"Drake\""];
+        [drakeAlert addButtonWithTitle:@"OK"];
+        [drakeAlert beginSheetModalForWindow:window completionHandler:nil];
 		return NO;
 	}
 	return YES;
 }
 
 - (void)tabView:(NSTabView *)aTabView didCloseTabViewItem:(NSTabViewItem *)tabViewItem {
-	NSLog(@"didCloseTabViewItem: %@", [tabViewItem label]);
+	NSLog(@"didCloseTabViewItem: %@", tabViewItem.label);
 }
 
 - (void)tabView:(NSTabView *)aTabView didMoveTabViewItem:(NSTabViewItem *)tabViewItem toIndex:(NSUInteger)index
 {
-    NSLog(@"tab view did move tab view item %@ to index:%ld",[tabViewItem label],index);
+    NSLog(@"tab view did move tab view item %@ to index:%ld",tabViewItem.label,index);
 }
 
 - (void)addNewTabToTabView:(NSTabView *)aTabView {
     [self addNewTab:aTabView];
 }
 
-- (NSArray *)allowedDraggedTypesForTabView:(NSTabView *)aTabView {
-	return [NSArray arrayWithObjects:NSFilenamesPboardType, NSStringPboardType, nil];
+- (NSArray<NSPasteboardType> *)allowedDraggedTypesForTabView:(NSTabView *)aTabView {
+	return @[NSFilenamesPboardType, NSStringPboardType];
 }
 
 - (BOOL)tabView:(NSTabView *)aTabView acceptedDraggingInfo:(id <NSDraggingInfo>)draggingInfo onTabViewItem:(NSTabViewItem *)tabViewItem {
-	NSLog(@"acceptedDraggingInfo: %@ onTabViewItem: %@", [[draggingInfo draggingPasteboard] stringForType:[[[draggingInfo draggingPasteboard] types] objectAtIndex:0]], [tabViewItem label]);
+	NSPasteboardType const pasteboardType = draggingInfo.draggingPasteboard.types[0];
+	if (pasteboardType == nil) {
+		return NO;
+	}
+	NSLog(@"acceptedDraggingInfo: %@ onTabViewItem: %@", [draggingInfo.draggingPasteboard stringForType:pasteboardType], tabViewItem.label);
     return YES;
 }
 
 - (NSMenu *)tabView:(NSTabView *)aTabView menuForTabViewItem:(NSTabViewItem *)tabViewItem {
-	NSLog(@"menuForTabViewItem: %@", [tabViewItem label]);
+	NSLog(@"menuForTabViewItem: %@", tabViewItem.label);
 	return nil;
 }
 
@@ -499,58 +549,58 @@
 }
 
 - (void)tabView:(NSTabView*)aTabView didDropTabViewItem:(NSTabViewItem *)tabViewItem inTabBarView:(MMTabBarView *)tabBarView {
-	NSLog(@"didDropTabViewItem: %@ inTabBarView: %@", [tabViewItem label], tabBarView);
+	NSLog(@"didDropTabViewItem: %@ inTabBarView: %@", tabViewItem.label, tabBarView);
 }
 
 - (NSImage *)tabView:(NSTabView *)aTabView imageForTabViewItem:(NSTabViewItem *)tabViewItem offset:(NSSize *)offset styleMask:(NSUInteger *)styleMask {
 	// grabs whole window image
 	NSImage *viewImage = [[NSImage alloc] init];
-	NSRect contentFrame = [[[self window] contentView] frame];
-	[[[self window] contentView] lockFocus];
+	NSRect contentFrame = self.window.contentView.frame;
+	[self.window.contentView lockFocus];
 	NSBitmapImageRep *viewRep = [[NSBitmapImageRep alloc] initWithFocusedViewRect:contentFrame];
 	[viewImage addRepresentation:viewRep];
-	[[[self window] contentView] unlockFocus];
+	[self.window.contentView unlockFocus];
 
 	// grabs snapshot of dragged tabViewItem's view (represents content being dragged)
-	NSView *viewForImage = [tabViewItem view];
-	NSRect viewRect = [viewForImage frame];
+	NSView *viewForImage = tabViewItem.view;
+	NSRect viewRect = viewForImage.frame;
 	NSImage *tabViewImage = [[NSImage alloc] initWithSize:viewRect.size];
 	[tabViewImage lockFocus];
-	[viewForImage drawRect:[viewForImage bounds]];
+	[viewForImage drawRect:viewForImage.bounds];
 	[tabViewImage unlockFocus];
 
 	[viewImage lockFocus];
-	NSPoint tabOrigin = [tabView frame].origin;
+	NSPoint tabOrigin = tabView.frame.origin;
 	tabOrigin.x += 10;
 	tabOrigin.y += 13;
     [tabViewImage drawAtPoint:tabOrigin fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 //	[tabViewImage compositeToPoint:tabOrigin operation:NSCompositeSourceOver];
 	[viewImage unlockFocus];
 
-    MMTabBarView *tabBarView = (MMTabBarView *)[aTabView delegate];
+    MMTabBarView *tabBarView = (MMTabBarView *)aTabView.delegate;
     
 	//draw over where the tab bar would usually be
-	NSRect tabFrame = [tabBar frame];
+	NSRect tabFrame = tabBar.frame;
 	[viewImage lockFocus];
-	[[NSColor windowBackgroundColor] set];
+	[NSColor.windowBackgroundColor set];
 	NSRectFill(tabFrame);
 	//draw the background flipped, which is actually the right way up
-	NSAffineTransform *transform = [NSAffineTransform transform];
+	NSAffineTransform *transform = NSAffineTransform.transform;
 	[transform scaleXBy:1.0 yBy:-1.0];
 	[transform concat];
 	tabFrame.origin.y = -tabFrame.origin.y - tabFrame.size.height;
-	[[tabBarView style] drawBezelOfTabBarView:tabBarView inRect:tabFrame];
+	[tabBarView.style drawBezelOfTabBarView:tabBarView inRect:tabFrame];
 	[transform invert];
 	[transform concat];
 
 	[viewImage unlockFocus];
 
-	if ([tabBarView orientation] == MMTabBarHorizontalOrientation) {
-		offset->width = [tabBarView leftMargin];
+	if (tabBarView.orientation == MMTabBarHorizontalOrientation) {
+		offset->width = tabBarView.leftMargin;
 		offset->height = 22;
 	} else {
 		offset->width = 0;
-		offset->height = 22 + [tabBarView topMargin];
+		offset->height = 22 + tabBarView.topMargin;
 	}
 
 	if (styleMask) {
@@ -561,28 +611,28 @@
 }
 
 - (MMTabBarView *)tabView:(NSTabView *)aTabView newTabBarViewForDraggedTabViewItem:(NSTabViewItem *)tabViewItem atPoint:(NSPoint)point {
-	NSLog(@"newTabBarViewForDraggedTabViewItem: %@ atPoint: %@", [tabViewItem label], NSStringFromPoint(point));
+	NSLog(@"newTabBarViewForDraggedTabViewItem: %@ atPoint: %@", tabViewItem.label, NSStringFromPoint(point));
 
 	//create a new window controller with no tab items
 	DemoWindowController *controller = [[DemoWindowController alloc] initWithWindowNibName:@"DemoWindow"];
     
-    MMTabBarView *tabBarView = (MMTabBarView *)[aTabView delegate];
+    MMTabBarView *tabBarView = (MMTabBarView *)aTabView.delegate;
     
-	id <MMTabStyle> style = [tabBarView style];
+	id <MMTabStyle> style = tabBarView.style;
 
-	NSRect windowFrame = [[controller window] frame];
-	point.y += windowFrame.size.height - [[[controller window] contentView] frame].size.height;
+	NSRect windowFrame = controller.window.frame;
+	point.y += windowFrame.size.height - controller.window.contentView.frame.size.height;
 	point.x -= [style leftMarginForTabBarView:tabBarView];
 
-	[[controller window] setFrameTopLeftPoint:point];
-	[[controller tabBar] setStyle:style];
+	[controller.window setFrameTopLeftPoint:point];
+	[controller.tabBar setStyle:style];
 
-	return [controller tabBar];
+	return controller.tabBar;
 }
 
 - (void)tabView:(NSTabView *)aTabView closeWindowForLastTabViewItem:(NSTabViewItem *)tabViewItem {
-	NSLog(@"closeWindowForLastTabViewItem: %@", [tabViewItem label]);
-	[[self window] close];
+	NSLog(@"closeWindowForLastTabViewItem: %@", tabViewItem.label);
+	[self.window close];
 }
 
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidHide:(MMTabBarView *)tabBarView {
@@ -594,7 +644,7 @@
 }
 
 - (NSString *)tabView:(NSTabView *)aTabView toolTipForTabViewItem:(NSTabViewItem *)tabViewItem {
-	return [tabViewItem label];
+	return tabViewItem.label;
 }
 
 - (NSString *)accessibilityStringForTabView:(NSTabView *)aTabView objectCount:(NSInteger)objectCount {
@@ -611,8 +661,8 @@
 		[item setPaletteLabel:@"Tab Label"];
 		[item setLabel:@"Tab Label"];
 		[item setView:tabField];
-		[item setMinSize:NSMakeSize(100, [tabField frame].size.height)];
-		[item setMaxSize:NSMakeSize(500, [tabField frame].size.height)];
+		[item setMinSize:NSMakeSize(100, tabField.frame.size.height)];
+		[item setMaxSize:NSMakeSize(500, tabField.frame.size.height)];
 	} else if ([itemIdentifier isEqualToString:@"DrawerItem"]) {
 		[item setPaletteLabel:@"Configuration"];
 		[item setLabel:@"Configuration"];
@@ -625,22 +675,16 @@
 	return item;
 }
 
-- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar {
-	return [NSArray arrayWithObjects:@"TabField",
-			NSToolbarFlexibleSpaceItemIdentifier,
-			@"DrawerItem",
-			nil];
+- (NSArray<NSToolbarItemIdentifier> *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar {
+	return @[@"TabField", NSToolbarFlexibleSpaceItemIdentifier, @"DrawerItem"];
 }
 
-- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar {
-	return [NSArray arrayWithObjects:@"TabField",
-			NSToolbarFlexibleSpaceItemIdentifier,
-			@"DrawerItem",
-			nil];
+- (NSArray<NSToolbarItemIdentifier> *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar {
+	return @[@"TabField", NSToolbarFlexibleSpaceItemIdentifier, @"DrawerItem"];
 }
 
 - (IBAction)toggleToolbar:(id)sender {
-	[[[self window] toolbar] setVisible:![[[self window] toolbar] isVisible]];
+	[self.window.toolbar setVisible:!self.window.toolbar.isVisible];
 }
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem {
@@ -648,10 +692,13 @@
 }
 
 - (void)configureTabBarInitially {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[popUp_style selectItemWithTitle:[defaults stringForKey:@"Style"]];
-	[popUp_orientation selectItemWithTitle:[defaults stringForKey:@"Orientation"]];
-	[popUp_tearOff selectItemWithTitle:[defaults stringForKey:@"Tear-Off"]];
+	NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
+	NSString* const style = [defaults stringForKey:@"Style"];
+	[popUp_style selectItemWithTitle:style != nil ? style : @"Metal"];
+	NSString* const orientation = [defaults stringForKey:@"Orientation"];
+	[popUp_orientation selectItemWithTitle:orientation != nil ? orientation : @"Horizontal"];
+	NSString* const tearOff = [defaults stringForKey:@"Tear-Off"];
+	[popUp_tearOff selectItemWithTitle:tearOff != nil ? tearOff : @"Miniwindow"];
 
 	[button_onlyShowCloseOnHover setState:[defaults boolForKey:@"OnlyShowCloseOnHover"]];
 	[button_canCloseOnlyTab setState:[defaults boolForKey:@"CanCloseOnlyTab"]];
@@ -665,7 +712,7 @@
 	[button_allowScrubbing setState:[defaults boolForKey:@"AllowScrubbing"]];
 
 	[self configStyle:popUp_style];
-    [tabBar setOrientation:[popUp_orientation selectedTag]];
+    [tabBar setOrientation:popUp_orientation.selectedTag];
 
     [self configOnlyShowCloseOnHover:button_onlyShowCloseOnHover];    
 	[self configCanCloseOnlyTab:button_canCloseOnlyTab];

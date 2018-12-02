@@ -6,7 +6,11 @@
 //
 //
 
+#if __has_feature(modules)
+@import Cocoa;
+#else
 #import <Cocoa/Cocoa.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 

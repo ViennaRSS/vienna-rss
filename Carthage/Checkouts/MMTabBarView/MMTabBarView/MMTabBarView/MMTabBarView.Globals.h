@@ -30,7 +30,7 @@ static NSImage* _static##name##Image() \
 { \
     static NSImage* image = nil; \
     if (!image) \
-        image = [[NSImage alloc] initByReferencingFile:[[MMTabBarView bundle] pathForImageResource:@#name]]; \
+        image = [MMTabBarView.bundle imageForResource:@#name]; \
     return image; \
 }
 
@@ -39,7 +39,7 @@ static NSImage* _static##name##Image() \
 { \
     static NSImage* image = nil; \
     if (!image) \
-        image = [[NSImage alloc] initByReferencingFile:[[MMTabBarView bundle] pathForImageResource:@#filename]]; \
+        image = [MMTabBarView.bundle imageForResource:@#filename]; \
     return image; \
 }
 

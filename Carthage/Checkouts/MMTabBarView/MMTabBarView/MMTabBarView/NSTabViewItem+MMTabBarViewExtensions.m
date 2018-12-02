@@ -6,7 +6,11 @@
 //  Copyright (c) 2016 Michael Monscheuer. All rights reserved.
 //
 
+#if __has_feature(modules)
+@import ObjectiveC.runtime;
+#else
 #import <objc/runtime.h>
+#endif
 
 #import "NSTabViewItem+MMTabBarViewExtensions.h"
 
@@ -23,23 +27,23 @@ static char objectCount_key;
 static char objectCountColor_key;
 static char showObjectCount_key;
 
-- (NSImage *)largeImage
+- (nullable NSImage *)largeImage
 {
     return objc_getAssociatedObject(self,&largeImage_key);
 }  
  
-- (void)setLargeImage:(NSImage *)newImage
+- (void)setLargeImage:(nullable NSImage *)newImage
 {
     objc_setAssociatedObject(self,&largeImage_key,newImage,
                              OBJC_ASSOCIATION_RETAIN);
 }  
 
-- (NSImage *)icon
+- (nullable NSImage *)icon
 {
     return objc_getAssociatedObject(self,&icon_key);
 } 
  
-- (void)setIcon:(NSImage *)newImage
+- (void)setIcon:(nullable NSImage *)newImage
 {
     objc_setAssociatedObject(self,&icon_key,newImage,
                              OBJC_ASSOCIATION_RETAIN);
@@ -47,7 +51,7 @@ static char showObjectCount_key;
 
 - (BOOL)isProcessing
 {
-    return [objc_getAssociatedObject(self,&isProcessing_key) boolValue];
+    return [(NSNumber*) objc_getAssociatedObject(self,&isProcessing_key) boolValue];
 }  
  
 - (void)setIsProcessing:(BOOL)flag
@@ -59,7 +63,7 @@ static char showObjectCount_key;
 
 - (NSInteger)objectCount
 {
-    return [objc_getAssociatedObject(self,&objectCount_key) integerValue];
+    return [(NSNumber*) objc_getAssociatedObject(self,&objectCount_key) integerValue];
 }
 
 - (void)setObjectCount:(NSInteger)value
@@ -69,12 +73,12 @@ static char showObjectCount_key;
                              OBJC_ASSOCIATION_RETAIN);    
 }
 
-- (NSColor *)objectCountColor
+- (nullable NSColor *)objectCountColor
 {
     return objc_getAssociatedObject(self,&objectCountColor_key);
 }
 
-- (void)setObjectCountColor:(NSColor *)aColor
+- (void)setObjectCountColor:(nullable NSColor *)aColor
 {
     objc_setAssociatedObject(self,&objectCountColor_key,aColor,
                              OBJC_ASSOCIATION_RETAIN);    
@@ -82,7 +86,7 @@ static char showObjectCount_key;
 
 - (BOOL)showObjectCount
 {
-    return [objc_getAssociatedObject(self,&showObjectCount_key) boolValue];
+    return [(NSNumber*) objc_getAssociatedObject(self,&showObjectCount_key) boolValue];
 }
 
 - (void)setShowObjectCount:(BOOL)flag
@@ -94,7 +98,7 @@ static char showObjectCount_key;
 
 - (BOOL)isEdited
 {
-    return [objc_getAssociatedObject(self,&isEdited_key) boolValue];
+    return [(NSNumber*) objc_getAssociatedObject(self,&isEdited_key) boolValue];
 }
 
 - (void)setIsEdited:(BOOL)flag
@@ -106,7 +110,7 @@ static char showObjectCount_key;
 
 - (BOOL)hasCloseButton
 {
-    return [objc_getAssociatedObject(self,&hasCloseButton_key) boolValue];
+    return [(NSNumber*) objc_getAssociatedObject(self,&hasCloseButton_key) boolValue];
 }
  
 - (void)setHasCloseButton:(BOOL)flag

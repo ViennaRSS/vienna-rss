@@ -14,7 +14,7 @@
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)pNotification {
-    [[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
+    [NSColorPanel.sharedColorPanel setShowsAlpha:YES];
 
 	[self newWindow:self];
 }

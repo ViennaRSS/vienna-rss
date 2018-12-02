@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
     at.tY = bounds.origin.y+bounds.size.height;
     [self setTransformStruct: at];
     
-    [self translateXBy:0.0f yBy:-bounds.origin.y];
+    [self translateXBy:0.0 yBy:-bounds.origin.y];
     return self;
 }
 

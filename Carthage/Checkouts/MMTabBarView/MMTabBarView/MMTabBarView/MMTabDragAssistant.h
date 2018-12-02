@@ -10,7 +10,11 @@
    This class is a sigleton that manages the details of a tab drag and drop.  The details were beginning to overwhelm me when keeping all of this in the control and buttons :-)
  */
 
+#if __has_feature(modules)
+@import Cocoa;
+#else
 #import <Cocoa/Cocoa.h>
+#endif
 #import "MMTabBarView.h"
 
 NS_ASSUME_NONNULL_BEGIN

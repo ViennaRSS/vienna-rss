@@ -16,7 +16,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // Pointer value that we use as the binding context
-NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.ObserverContext";
+static NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.ObserverContext";
 
 @interface MMTabBarButton (/*Private*/)
 
@@ -30,7 +30,7 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
 
 + (void)initialize
 {
-    if (self == [MMTabBarButton class]) {
+    if (self == MMTabBarButton.class) {
         [self exposeBinding:@"isProcessing"];
         [self exposeBinding:@"isEdited"];    
         [self exposeBinding:@"objectCount"];
@@ -42,7 +42,7 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
 }
 
 + (nullable Class)cellClass {
-    return [MMTabBarButtonCell class];
+    return MMTabBarButtonCell.class;
 }
 
 - (instancetype)initWithFrame:(NSRect)frame {
@@ -63,7 +63,7 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
 }
 
 - (MMTabBarView *)tabBarView {
-    return [self enclosingTabBarView];
+    return self.enclosingTabBarView;
 }
     
 - (void)resizeSubviewsWithOldSize:(NSSize)oldSize {
@@ -79,18 +79,21 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
 
         // Let cell update (invokes -calcDrawInfo:)
         // Cell will update control's sub buttons too.
-    [[self cell] calcDrawInfo:[self bounds]];
+    [self.cell calcDrawInfo:self.bounds];
 }
 
 - (nullable NSMenu *)menuForEvent:(NSEvent *)event {
 
-    MMTabBarView *tabBarView = [self tabBarView];
+    MMTabBarView *tabBarView = self.tabBarView;
     
     return [tabBarView menuForTabBarButton:self withEvent:event];
 }
 
-- (void)updateCell {    
-    [self updateCell:[self cell]];
+- (void)updateCell {
+	MMTabBarButtonCell* const cell = self.cell;
+	if (cell != nil) {
+		[self updateCell:cell];
+	}
 }
 
 #pragma mark -
@@ -99,7 +102,7 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
 - (nullable SEL)closeButtonAction {
 
     @synchronized(self) {
-        return [_closeButton action];
+        return _closeButton.action;
     }
 }
 
@@ -115,7 +118,7 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
 
 - (BOOL)shouldDisplayLeftDivider {
 
-    MMTabStateMask tabStateMask = [self tabState];
+    MMTabStateMask tabStateMask = self.tabState;
     
     BOOL retVal = NO;
     if (tabStateMask & MMTab_LeftIsSliding)
@@ -126,7 +129,7 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
 
 - (BOOL)shouldDisplayRightDivider {
 
-    MMTabStateMask tabStateMask = [self tabState];
+    MMTabStateMask tabStateMask = self.tabState;
     
     BOOL retVal = NO;
     if (tabStateMask & MMTab_RightIsSliding)
@@ -139,11 +142,11 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
 #pragma mark Determine Sizes
 
 - (CGFloat)minimumWidth {
-    return [[self cell] minimumWidthOfCell];
+    return self.cell.minimumWidthOfCell;
 }
 
 - (CGFloat)desiredWidth {
-    return [[self cell] desiredWidthOfCell];
+    return self.cell.desiredWidthOfCell;
 }
 
 #pragma mark -
@@ -159,145 +162,152 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
 {
     [super setTitle:aString];
 
-    if ([[self tabBarView] sizeButtonsToFit])
+    if (self.tabBarView.sizeButtonsToFit)
         {
-        [[NSOperationQueue mainQueue] addOperationWithBlock:
+        [NSOperationQueue.mainQueue addOperationWithBlock:
             ^{
-            [[self tabBarView] update];
+            [self.tabBarView update];
             }];
         }
     
 }  // -setTitle:
 
-- (id <MMTabStyle>)style {
-    return [[self cell] style];
+- (nullable id <MMTabStyle>)style {
+    return self.cell.style;
 }
 
-- (void)setStyle:(id <MMTabStyle>)newStyle {
-    [[self cell] setStyle:newStyle];
+- (void)setStyle:(nullable id <MMTabStyle>)newStyle {
+	id <MMTabStyle> const tabStyle = newStyle;
+	if (tabStyle == nil) {
+		return;
+	}
+    [self.cell setStyle:tabStyle];
     [self updateCell];
 
     if (_closeButton) {
         [_closeButton removeFromSuperview];
     }
-    _closeButton = [self _closeButtonForBounds:[self bounds]];
-    [self addSubview:_closeButton];
+    MMRolloverButton * button = [self _closeButtonForBounds:self.bounds];
+    if (button) {
+        _closeButton = button;
+        [self addSubview:_closeButton];
+    }
 
 }
 
 - (MMTabStateMask)tabState {
-    return [[self cell] tabState];
+    return self.cell.tabState;
 }
 
 - (void)setTabState:(MMTabStateMask)newState {
 
-    [[self cell] setTabState:newState];
+    [self.cell setTabState:newState];
     [self updateCell];
 }
 
 - (BOOL)shouldDisplayCloseButton {
-    return [[self cell] shouldDisplayCloseButton];
+    return self.cell.shouldDisplayCloseButton;
 }
 
 - (BOOL)hasCloseButton {
-    return [[self cell] hasCloseButton];
+    return self.cell.hasCloseButton;
 }
 
 - (void)setHasCloseButton:(BOOL)newState {
-    [[self cell] setHasCloseButton:newState];
+    [self.cell setHasCloseButton:newState];
     [self updateCell];
 }
 
 - (BOOL)suppressCloseButton {
-    return [[self cell] suppressCloseButton];
+    return self.cell.suppressCloseButton;
 }
 
 - (void)setSuppressCloseButton:(BOOL)newState {
-    [[self cell] setSuppressCloseButton:newState];
+    [self.cell setSuppressCloseButton:newState];
     [self updateCell];
 }
 
 - (nullable NSImage *)icon {
-    return [[self cell] icon];
+    return self.cell.icon;
 }
 
 - (void)setIcon:(nullable NSImage *)anIcon {
-    [[self cell] setIcon:anIcon];
+    [self.cell setIcon:anIcon];
     [self updateCell];
 }
 
 - (nullable NSImage *)largeImage {
-    return [[self cell] largeImage];
+    return self.cell.largeImage;
 }
 
 - (void)setLargeImage:(nullable NSImage *)anImage {
-    [[self cell] setLargeImage:anImage];
+    [self.cell setLargeImage:anImage];
     [self updateCell];
 }
 
 - (BOOL)showObjectCount {
-    return [[self cell] showObjectCount];
+    return self.cell.showObjectCount;
 }
 
 - (void)setShowObjectCount:(BOOL)newState {
-    [[self cell] setShowObjectCount:newState];
+    [self.cell setShowObjectCount:newState];
     [self updateCell];
 }
 
 - (NSInteger)objectCount {
-    return [[self cell] objectCount];
+    return self.cell.objectCount;
 }
 
 - (void)setObjectCount:(NSInteger)newCount {
-    [[self cell] setObjectCount:newCount];
+    [self.cell setObjectCount:newCount];
     [self updateCell];
 }
 
-- (NSColor *)objectCountColor {
-    return [[self cell] objectCountColor];
+- (nullable NSColor *)objectCountColor {
+    return self.cell.objectCountColor;
 }
 
-- (void)setObjectCountColor:(NSColor *)newColor {
-    [[self cell] setObjectCountColor:newColor];
+- (void)setObjectCountColor:(nullable NSColor *)newColor {
+    [self.cell setObjectCountColor:newColor];
     [self updateCell];
 }
 
 - (BOOL)isEdited {
-    return [[self cell] isEdited];
+    return self.cell.isEdited;
 }
 
 - (void)setIsEdited:(BOOL)newState {
-    [[self cell] setIsEdited:newState];
+    [self.cell setIsEdited:newState];
     [self updateCell];
 }
 
 - (BOOL)isProcessing {
-    return [[self cell] isProcessing];
+    return self.cell.isProcessing;
 }
 
 - (void)setIsProcessing:(BOOL)newState {
-    [[self cell] setIsProcessing:newState];
+    [self.cell setIsProcessing:newState];
     [self updateCell];
 }
 
 - (void)updateImages {
-    [[self cell] updateImages];
+    [self.cell updateImages];
 }
 
 #pragma mark -
 #pragma mark NSKeyValueObserving
 
-- (void)observeValueForKeyPath:(nullable NSString *)keyPath ofObject:(nullable id)object change:(nullable NSDictionary *)change context:(nullable void *)context 
+- (void)observeValueForKeyPath:(nullable NSString *)keyPath ofObject:(nullable id)object change:(nullable NSDictionary<NSKeyValueChangeKey, id> *)change context:(nullable void *)context 
 {
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     
     if (context == (__bridge void *)(kMMTabBarButtonOberserverContext))
         {
-        if ([[self tabBarView] sizeButtonsToFit])
+        if (self.tabBarView.sizeButtonsToFit)
             {
-            [[NSOperationQueue mainQueue] addOperationWithBlock:
+            [NSOperationQueue.mainQueue addOperationWithBlock:
                 ^{
-                [[self tabBarView] update];
+                [self.tabBarView update];
                 }];
             }
         }
@@ -308,67 +318,79 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
 #pragma mark Private Methods
 
 - (void)_commonInit {
-    _closeButton = [self _closeButtonForBounds:[self bounds]];
-    [self addSubview:_closeButton];
+    MMRolloverButton * button = [self _closeButtonForBounds:self.bounds];
+    if (button) {
+        _closeButton = button;
+        [self addSubview:_closeButton];
+    }
 
     _indicator = [[MMProgressIndicator alloc] initWithFrame:NSMakeRect(0.0, 0.0, kMMTabBarIndicatorWidth, kMMTabBarIndicatorWidth)];
     [_indicator setStyle:NSProgressIndicatorSpinningStyle];
     [_indicator setAutoresizingMask:NSViewMinYMargin];
     [_indicator setControlSize: NSSmallControlSize];
-    NSRect indicatorRect = [self _indicatorRectForBounds:[self bounds]];
+    NSRect indicatorRect = [self _indicatorRectForBounds:self.bounds];
     [_indicator setFrame:indicatorRect];
     [self addSubview:_indicator];
 }
 
-- (MMRolloverButton *)_closeButtonForBounds:(NSRect)bounds {
-    return [[self cell] closeButtonForBounds:bounds];
+- (nullable MMRolloverButton *)_closeButtonForBounds:(NSRect)bounds {
+    return [self.cell closeButtonForBounds:bounds];
 }
 
 - (NSRect)_closeButtonRectForBounds:(NSRect)bounds {
-    return [[self cell] closeButtonRectForBounds:bounds];
+    return [self.cell closeButtonRectForBounds:bounds];
 }
 
 - (NSRect)_indicatorRectForBounds:(NSRect)bounds {
-    return [[self cell] indicatorRectForBounds:bounds];
+    return [self.cell indicatorRectForBounds:bounds];
 }
 
--(void)_propagateValue:(id)value forBinding:(NSString*)binding {
+-(void)_propagateValue:(nullable id)value forBinding:(NSString*)binding {
 	NSParameterAssert(binding != nil);
 
         //WARNING: bindingInfo contains NSNull, so it must be accounted for
-	NSDictionary* bindingInfo = [self infoForBinding:binding];
+	NSDictionary<NSBindingInfoKey, id>* bindingInfo = [self infoForBinding:binding];
 	if(!bindingInfo)
 		return; //there is no binding
 
         //apply the value transformer, if one has been set
-	NSDictionary* bindingOptions = [bindingInfo objectForKey:NSOptionsKey];
+	NSDictionary<NSBindingOption, id>* bindingOptions = [bindingInfo objectForKey:NSOptionsKey];
 	if(bindingOptions){
-		NSValueTransformer* transformer = [bindingOptions valueForKey:NSValueTransformerBindingOption];
-		if(!transformer || (id)transformer == [NSNull null]){
-			NSString* transformerName = [bindingOptions valueForKey:NSValueTransformerNameBindingOption];
-			if(transformerName && (id)transformerName != [NSNull null]){
+		NSValueTransformer* transformer = bindingOptions[NSValueTransformerBindingOption];
+		if(!transformer || (id)transformer == NSNull.null){
+			NSString* transformerName = bindingOptions[NSValueTransformerNameBindingOption];
+			if(transformerName && (id)transformerName != NSNull.null){
 				transformer = [NSValueTransformer valueTransformerForName:transformerName];
 			}
 		}
 
-		if(transformer && (id)transformer != [NSNull null]){
-			if([[transformer class] allowsReverseTransformation]){
+		if(transformer && (id)transformer != NSNull.null){
+			if([transformer.class allowsReverseTransformation]){
 				value = [transformer reverseTransformedValue:value];
 			} else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wcstring-format-directive"
 				NSLog(@"WARNING: binding \"%@\" has value transformer, but it doesn't allow reverse transformations in %s", binding, __PRETTY_FUNCTION__);
+#pragma clang diagnostic pop
 			}
 		}
 	}
 
-	id boundObject = [bindingInfo objectForKey:NSObservedObjectKey];
-	if(!boundObject || boundObject == [NSNull null]){
+	NSObject* const boundObject = [bindingInfo objectForKey:NSObservedObjectKey];
+	if(!boundObject || boundObject == NSNull.null){
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wcstring-format-directive"
 		NSLog(@"ERROR: NSObservedObjectKey was nil for binding \"%@\" in %s", binding, __PRETTY_FUNCTION__);
+#pragma clang diagnostic pop
 		return;
 	}
 
 	NSString* boundKeyPath = [bindingInfo objectForKey:NSObservedKeyPathKey];
-	if(!boundKeyPath || (id)boundKeyPath == [NSNull null]){
+	if(!boundKeyPath || (id)boundKeyPath == NSNull.null){
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wcstring-format-directive"
 		NSLog(@"ERROR: NSObservedKeyPathKey was nil for binding \"%@\" in %s", binding, __PRETTY_FUNCTION__);
+#pragma clang diagnostic pop
 		return;
 	}
 

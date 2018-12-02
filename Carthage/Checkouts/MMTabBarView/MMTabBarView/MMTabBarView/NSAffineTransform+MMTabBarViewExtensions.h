@@ -6,7 +6,11 @@
 //  Copyright (c) 2016 Michael Monscheuer. All rights reserved.
 //
 
+#if __has_feature(modules)
+@import Foundation;
+#else
 #import <Foundation/Foundation.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 

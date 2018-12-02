@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (MMTabBarView *)tabBarView {
-    return [[self controlView] tabBarView];
+    return self.controlView.tabBarView;
 }
 
 - (void)calcDrawInfo:(NSRect)aRect {
@@ -184,19 +184,19 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark Progress Indicator Support
 
 - (MMProgressIndicator *)indicator {
-    return [[self controlView] indicator];
+    return self.controlView.indicator;
 }
 
 #pragma mark -
 #pragma mark Close Button Support
 
 - (MMRolloverButton *)closeButton {
-    return [[self controlView] closeButton];
+    return self.controlView.closeButton;
 }
 
 - (NSImage *)closeButtonImageOfType:(MMCloseButtonImageType)type {
 
-    id <MMTabStyle> tabStyle = [self style];
+    id <MMTabStyle> tabStyle = self.style;
     
     if ([tabStyle respondsToSelector:@selector(closeButtonImageOfType:forTabCell:)]) {
         return [tabStyle closeButtonImageOfType:type forTabCell:self];
@@ -208,37 +208,37 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (BOOL)shouldDisplayCloseButton {
-    return [self hasCloseButton] && ![self suppressCloseButton];
+    return self.hasCloseButton && !self.suppressCloseButton;
 }
 
 #pragma mark -
 #pragma mark Cell Values
 
 - (NSAttributedString *)attributedStringValue {
-    MMTabBarView *tabBarView = [self tabBarView];
-    id <MMTabStyle> tabStyle = [tabBarView style];
+    MMTabBarView *tabBarView = self.tabBarView;
+    id <MMTabStyle> tabStyle = tabBarView.style;
 
     if ([tabStyle respondsToSelector:@selector(attributedStringValueForTabCell:)])
         return [tabStyle attributedStringValueForTabCell:self];
     else
-        return [self _attributedStringValue];
+        return self._attributedStringValue;
 }
 
 - (NSAttributedString *)attributedObjectCountStringValue {
-    MMTabBarView *tabBarView = [self tabBarView];
-    id <MMTabStyle> tabStyle = [tabBarView style];
+    MMTabBarView *tabBarView = self.tabBarView;
+    id <MMTabStyle> tabStyle = tabBarView.style;
 
     if ([tabStyle respondsToSelector:@selector(attributedObjectCountStringValueForTabCell:)])
         return [tabStyle attributedObjectCountStringValueForTabCell:self];
     else
-        return [self _attributedObjectCountStringValue];
+        return self._attributedObjectCountStringValue;
 }
 
 #pragma mark -
 #pragma mark Determining Cell Size
 
 - (NSRect)drawingRectForBounds:(NSRect)theRect {
-    id <MMTabStyle> tabStyle = [self style];
+    id <MMTabStyle> tabStyle = self.style;
     if ([tabStyle respondsToSelector:@selector(drawingRectForBounds:ofTabCell:)])
         return [tabStyle drawingRectForBounds:theRect ofTabCell:self];
     else
@@ -247,7 +247,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSRect)titleRectForBounds:(NSRect)theRect {
 
-    id <MMTabStyle> tabStyle = [self style];
+    id <MMTabStyle> tabStyle = self.style;
     if ([tabStyle respondsToSelector:@selector(titleRectForBounds:ofTabCell:)])
         return [tabStyle titleRectForBounds:theRect ofTabCell:self];
     else {
@@ -257,7 +257,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSRect)iconRectForBounds:(NSRect)theRect {
 
-    id <MMTabStyle> tabStyle = [self style];
+    id <MMTabStyle> tabStyle = self.style;
     if ([tabStyle respondsToSelector:@selector(iconRectForBounds:ofTabCell:)]) {
         return [tabStyle iconRectForBounds:theRect ofTabCell:self];
     } else {
@@ -267,13 +267,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSRect)largeImageRectForBounds:(NSRect)theRect {
 
-    MMTabBarView *tabBarView = [self tabBarView];
+    MMTabBarView *tabBarView = self.tabBarView;
     
     // support for large images for horizontal orientation only
-    if ([tabBarView orientation] == MMTabBarHorizontalOrientation)
+    if (tabBarView.orientation == MMTabBarHorizontalOrientation)
         return NSZeroRect;
 
-    id <MMTabStyle> tabStyle = [self style];
+    id <MMTabStyle> tabStyle = self.style;
     if ([tabStyle respondsToSelector:@selector(largeImageRectForBounds:ofTabCell:)]) {
         return [tabStyle largeImageRectForBounds:theRect ofTabCell:self];
     } else {
@@ -283,7 +283,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSRect)indicatorRectForBounds:(NSRect)theRect {
 
-    id <MMTabStyle> tabStyle = [self style];
+    id <MMTabStyle> tabStyle = self.style;
     if ([tabStyle respondsToSelector:@selector(indicatorRectForBounds:ofTabCell:)])
         return [tabStyle indicatorRectForBounds:theRect ofTabCell:self];
     else {
@@ -293,20 +293,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSSize)objectCounterSize
 {
-    MMTabBarView *tabBarView = [self tabBarView];
-    id <MMTabStyle> tabStyle = [tabBarView style];
+    MMTabBarView *tabBarView = self.tabBarView;
+    id <MMTabStyle> tabStyle = tabBarView.style;
 
     if ([tabStyle respondsToSelector:@selector(objectCounterSizeOfTabCell:)]) {
         return [tabStyle objectCounterSizeOfTabCell:self];
     } else {
-        return [self _objectCounterSize];
+        return self._objectCounterSize;
     }
     
 }
 
 - (NSRect)objectCounterRectForBounds:(NSRect)theRect {
 
-    id <MMTabStyle> tabStyle = [self style];
+    id <MMTabStyle> tabStyle = self.style;
     if ([tabStyle respondsToSelector:@selector(objectCounterRectForBounds:ofTabCell:)]) {
         return [tabStyle objectCounterRectForBounds:theRect ofTabCell:self];
     } else {
@@ -316,7 +316,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSSize)closeButtonSizeForBounds:(NSRect)theRect {
 
-    id <MMTabStyle> tabStyle = [self style];
+    id <MMTabStyle> tabStyle = self.style;
     
     // ask style for rect if available
     if ([tabStyle respondsToSelector:@selector(closeButtonSizeForBounds:ofTabCell:)]) {
@@ -329,7 +329,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSRect)closeButtonRectForBounds:(NSRect)theRect {
     
-    id <MMTabStyle> tabStyle = [self style];
+    id <MMTabStyle> tabStyle = self.style;
     
     // ask style for rect if available
     if ([tabStyle respondsToSelector:@selector(closeButtonRectForBounds:ofTabCell:)]) {
@@ -355,21 +355,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (CGFloat)minimumWidthOfCell {
 
-    id <MMTabStyle> style = [self style];
+    id <MMTabStyle> style = self.style;
     if ([style respondsToSelector:@selector(minimumWidthOfTabCell:)]) {
         return [style minimumWidthOfTabCell:self];
     } else {
-        return [self _minimumWidthOfCell];
+        return self._minimumWidthOfCell;
     }
 }
 
 - (CGFloat)desiredWidthOfCell {
 
-    id <MMTabStyle> style = [self style];
+    id <MMTabStyle> style = self.style;
     if ([style respondsToSelector:@selector(desiredWidthOfTabCell:)]) {
         return [style desiredWidthOfTabCell:self];
     } else {    
-        return [self _desiredWidthOfCell];
+        return self._desiredWidthOfCell;
     }
 }
 
@@ -378,7 +378,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
 
-    id <MMTabStyle> style = [self style];
+    id <MMTabStyle> style = self.style;
     if ([style respondsToSelector:@selector(drawTabBarCell:withFrame:inView:)]) {
         [style drawTabBarCell:self withFrame:cellFrame inView:controlView];
     } else {
@@ -388,7 +388,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)drawBezelWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
 
-    id <MMTabStyle> style = [self style];
+    id <MMTabStyle> style = self.style;
         
     // draw bezel
     if ([style respondsToSelector:@selector(drawBezelOfTabCell:withFrame:inView:)]) {
@@ -399,7 +399,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
-    id <MMTabStyle> style = [self style];
+    id <MMTabStyle> style = self.style;
     
     if ([style respondsToSelector:@selector(drawInteriorOfTabCell:withFrame:inView:)]) {
         [style drawInteriorOfTabCell:self withFrame:cellFrame inView:controlView];
@@ -411,7 +411,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)drawLargeImageWithFrame:(NSRect)frame inView:(NSView *)controlView {
     
-    id <MMTabStyle> style = [self style];
+    id <MMTabStyle> style = self.style;
     if ([style respondsToSelector:@selector(drawLargeImageOfTabCell:withFrame:inView:)]) {
         [style drawLargeImageOfTabCell:self withFrame:frame inView:controlView];
     } else {
@@ -422,7 +422,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)drawIconWithFrame:(NSRect)frame inView:(NSView *)controlView {
 
-    id <MMTabStyle> style = [self style];
+    id <MMTabStyle> style = self.style;
     if ([style respondsToSelector:@selector(drawIconOfTabCell:withFrame:inView:)]) {
         [style drawIconOfTabCell:self withFrame:frame inView:controlView];
     } else {
@@ -433,7 +433,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)drawTitleWithFrame:(NSRect)frame inView:(NSView *)controlView {
 
-    id <MMTabStyle> style = [self style];
+    id <MMTabStyle> style = self.style;
     if ([style respondsToSelector:@selector(drawTitleOfTabCell:withFrame:inView:)]) {
         [style drawTitleOfTabCell:self withFrame:frame inView:controlView];
     } else {
@@ -443,7 +443,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)drawObjectCounterWithFrame:(NSRect)frame inView:(NSView *)controlView {
 
-    id <MMTabStyle> style = [self style];
+    id <MMTabStyle> style = self.style;
     if ([style respondsToSelector:@selector(drawObjectCounterOfTabCell:withFrame:inView:)]) {
         [style drawObjectCounterOfTabCell:self withFrame:frame inView:controlView];
     } else {
@@ -453,7 +453,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)drawIndicatorWithFrame:(NSRect)frame inView:(NSView *)controlView {
 
-    id <MMTabStyle> style = [self style];
+    id <MMTabStyle> style = self.style;
     if ([style respondsToSelector:@selector(drawIndicatorOfTabCell:withFrame:inView:)]) {
         [style drawIndicatorOfTabCell:self withFrame:frame inView:controlView];
     } else {
@@ -463,7 +463,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)drawCloseButtonWithFrame:(NSRect)frame inView:(NSView *)controlView {
 
-    id <MMTabStyle> style = [self style];
+    id <MMTabStyle> style = self.style;
     if ([style respondsToSelector:@selector(drawCloseButtonOfTabCell:withFrame:inView:)]) {
         [style drawCloseButtonOfTabCell:self withFrame:frame inView:controlView];
     } else {
@@ -504,7 +504,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)encodeWithCoder:(NSCoder *)aCoder {
 	[super encodeWithCoder:aCoder];
 
-	if ([aCoder allowsKeyedCoding]) {
+	if (aCoder.allowsKeyedCoding) {
         [aCoder encodeObject:_style forKey:@"MMTabBarButtonCellStyle"];
         [aCoder encodeObject:_icon forKey:@"MMTabBarButtonCellIcon"];
         [aCoder encodeObject:_largeImage forKey:@"MMTabBarButtonCellLargeImage"];
@@ -523,7 +523,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super initWithCoder:aDecoder])) {
-		if ([aDecoder allowsKeyedCoding]) {
+		if (aDecoder.allowsKeyedCoding) {
         
             _style = [aDecoder decodeObjectForKey:@"MMTabBarButtonCellStyle"];
             _icon = [aDecoder decodeObjectForKey:@"MMTabBarButtonCellIcon"];
@@ -551,17 +551,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSAttributedString *)_attributedStringValue {
 
 	NSMutableAttributedString *attrStr;
-	NSString *contents = [self title];
+	NSString *contents = self.title;
 	attrStr = [[NSMutableAttributedString alloc] initWithString:contents];
-	NSRange range = NSMakeRange(0, [contents length]);
+	NSRange range = NSMakeRange(0, contents.length);
 
 	[attrStr addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:11.0] range:range];
-	[attrStr addAttribute:NSForegroundColorAttributeName value:[NSColor controlTextColor] range:range];
+	[attrStr addAttribute:NSForegroundColorAttributeName value:NSColor.controlTextColor range:range];
     
 	// Paragraph Style for Truncating Long Text
 	static NSMutableParagraphStyle *truncatingTailParagraphStyle = nil;
 	if (!truncatingTailParagraphStyle) {
-		truncatingTailParagraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+		truncatingTailParagraphStyle = [NSParagraphStyle.defaultParagraphStyle mutableCopy];
 		[truncatingTailParagraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
 		[truncatingTailParagraphStyle setAlignment:NSCenterTextAlignment];
 	}
@@ -572,13 +572,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSAttributedString *)_attributedObjectCountStringValue {
 
-    static NSDictionary *objectCountStringAttributes = nil;
+    static NSDictionary<NSAttributedStringKey, id> *objectCountStringAttributes = nil;
     
     if (objectCountStringAttributes == nil) {
-        objectCountStringAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:[[NSFontManager sharedFontManager] convertFont:[NSFont fontWithName:@"Helvetica" size:11.0] toHaveTrait:NSBoldFontMask], NSFontAttributeName, [[NSColor whiteColor] colorWithAlphaComponent:0.85], NSForegroundColorAttributeName, nil, nil];
+		NSFont* const font = [NSFont fontWithName:@"Helvetica" size:11.0];
+		NSFont* const styledFont = [NSFontManager.sharedFontManager convertFont:font toHaveTrait:NSBoldFontMask];
+		objectCountStringAttributes = @{
+			NSFontAttributeName: styledFont != nil ? styledFont : font,
+			NSForegroundColorAttributeName: [NSColor.whiteColor colorWithAlphaComponent:0.85]
+		};
     }
 
-	NSString *contents = [NSString stringWithFormat:@"%lu", (unsigned long)[self objectCount]];
+	NSString *contents = [NSString stringWithFormat:@"%lu", (unsigned long)self.objectCount];
 	return [[NSMutableAttributedString alloc] initWithString:contents attributes:objectCountStringAttributes];
 }
 
@@ -591,7 +596,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)_updateCloseButtonImages {
 
-    MMRolloverButton *closeButton = [self closeButton];
+    MMRolloverButton *closeButton = self.closeButton;
     
     [closeButton setImage:_isEdited?[self closeButtonImageOfType:MMCloseButtonImageTypeDirty]:[self closeButtonImageOfType:MMCloseButtonImageTypeStandard]];
     [closeButton setAlternateImage:_isEdited?[self closeButtonImageOfType:MMCloseButtonImageTypeDirtyPressed]:[self closeButtonImageOfType:MMCloseButtonImageTypePressed]];
@@ -606,13 +611,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)_updateCloseButton {
 
-    MMTabBarView *tabBarView = [self tabBarView];
-    MMTabBarButton *button = [self controlView];
-    MMRolloverButton *closeButton = [button closeButton];
+    MMTabBarView *tabBarView = self.tabBarView;
+    MMTabBarButton *button = self.controlView;
+    MMRolloverButton *closeButton = button.closeButton;
 
     [self _updateCloseButtonImages];
 
-    BOOL shouldDisplayCloseButton = ([self shouldDisplayCloseButton] && ![tabBarView isTabBarHidden]);
+    BOOL shouldDisplayCloseButton = (self.shouldDisplayCloseButton && !tabBarView.isTabBarHidden);
 
     if (shouldDisplayCloseButton) {
 
@@ -624,7 +629,7 @@ NS_ASSUME_NONNULL_BEGIN
     
         // adjust visibility and position of close button
     if (shouldDisplayCloseButton) {
-        NSRect newFrame = [self closeButtonRectForBounds:[button bounds]];
+        NSRect newFrame = [self closeButtonRectForBounds:button.bounds];
 
         BOOL shouldHide = NSEqualRects(newFrame,NSZeroRect);
         [closeButton setHidden:shouldHide];
@@ -637,23 +642,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)_updateIndicator {
 
-    MMTabBarView *tabBarView = [self tabBarView];
-    MMTabBarButton *button = [self controlView];
-    MMProgressIndicator *indicator = [button indicator];
+    MMTabBarView *tabBarView = self.tabBarView;
+    MMTabBarButton *button = self.controlView;
+    MMProgressIndicator *indicator = button.indicator;
 
         // adjust visibility and position of process indicator
-    if ([self isProcessing] && ![tabBarView isTabBarHidden]) {
-        NSRect newFrame = [self indicatorRectForBounds:[button bounds]];
+    if (self.isProcessing && !tabBarView.isTabBarHidden) {
+        NSRect newFrame = [self indicatorRectForBounds:button.bounds];
         BOOL shouldHide = NSEqualRects(newFrame,NSZeroRect);
-        [[self indicator] setHidden:shouldHide];
+        [self.indicator setHidden:shouldHide];
         if (!shouldHide)
-            [[self indicator] setFrame:newFrame];
+            [self.indicator setFrame:newFrame];
     
     } else {
         [indicator setHidden:YES];
     }
     
-    if (_isProcessing && ![indicator isHidden])
+    if (_isProcessing && !indicator.isHidden)
         [indicator startAnimation:nil];
     else
         [indicator stopAnimation:nil];
@@ -670,9 +675,9 @@ NS_ASSUME_NONNULL_BEGIN
 
     // balancing right margin if cell displays close button on hover only
     // (simply improves look)
-    if ([self shouldDisplayCloseButton] && [[self tabBarView] onlyShowCloseOnHover]) {
+    if (self.shouldDisplayCloseButton && self.tabBarView.onlyShowCloseOnHover) {
         NSImage *image = [self closeButtonImageOfType:MMCloseButtonImageTypeStandard];
-        return MARGIN_X + [image size].width + kMMTabBarCellPadding;
+        return MARGIN_X + image.size.width + kMMTabBarCellPadding;
         }
 
     return MARGIN_X;
@@ -682,8 +687,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSRect)_drawingRectForBounds:(NSRect)theRect {
 
-    theRect.origin.x += [self _leftMargin];
-    theRect.size.width -= [self _leftMargin] + [self _rightMargin];
+    theRect.origin.x += self._leftMargin;
+    theRect.size.width -= self._leftMargin + self._rightMargin;
     
     theRect.origin.y += MARGIN_Y;
     theRect.size.height -= 2*MARGIN_Y;
@@ -724,11 +729,11 @@ NS_ASSUME_NONNULL_BEGIN
         constrainedDrawingRect.size.width -= NSWidth(counterBadgeRect) + kMMTabBarCellPadding;
     }
                             
-    NSAttributedString *attrString = [self attributedStringValue];
-    if ([attrString length] == 0)
+    NSAttributedString *attrString = self.attributedStringValue;
+    if (attrString.length == 0)
         return NSZeroRect;
         
-    NSSize stringSize = [attrString size];
+    NSSize stringSize = attrString.size;
     
     NSRect result = NSMakeRect(constrainedDrawingRect.origin.x, drawingRect.origin.y+ceil((drawingRect.size.height-stringSize.height)/2), constrainedDrawingRect.size.width, stringSize.height);
                     
@@ -738,7 +743,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSRect)_iconRectForBounds:(NSRect)theRect {
 
-    NSImage *icon = [self icon];
+    NSImage *icon = self.icon;
     if (!icon)
         return NSZeroRect;
 
@@ -753,14 +758,14 @@ NS_ASSUME_NONNULL_BEGIN
         constrainedDrawingRect.size.width -= NSWidth(closeButtonRect) + kMMTabBarCellPadding;
         }
                 
-    NSSize iconSize = [icon size];
+    NSSize iconSize = icon.size;
     
     NSSize scaledIconSize = [self mm_scaleImageWithSize:iconSize toFitInSize:NSMakeSize(iconSize.width, constrainedDrawingRect.size.height) scalingType:NSImageScaleProportionallyDown];
 
     NSRect result;
         
     // icon only
-    if ([[self title] length] == 0 && ![self showObjectCount] && ![self isProcessing]) {
+    if (self.title.length == 0 && !self.showObjectCount && !self.isProcessing) {
         result = NSMakeRect(constrainedDrawingRect.origin.x+(constrainedDrawingRect.size.width - scaledIconSize.width)/2,
             constrainedDrawingRect.origin.y + ((constrainedDrawingRect.size.height - scaledIconSize.height) / 2),
             scaledIconSize.width, scaledIconSize.height);
@@ -785,7 +790,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSRect)_largeImageRectForBounds:(NSRect)theRect {
 
-    NSImage *image = [self largeImage];
+    NSImage *image = self.largeImage;
     if (!image) {
         return NSZeroRect;
     }
@@ -800,7 +805,7 @@ NS_ASSUME_NONNULL_BEGIN
         constrainedDrawingRect.origin.x += NSWidth(closeButtonRect) + kMMTabBarCellPadding;
         }
                 
-    NSSize scaledImageSize = [self mm_scaleImageWithSize:[image size] toFitInSize:NSMakeSize(constrainedDrawingRect.size.width, constrainedDrawingRect.size.height) scalingType:NSImageScaleProportionallyUpOrDown];
+    NSSize scaledImageSize = [self mm_scaleImageWithSize:image.size toFitInSize:NSMakeSize(constrainedDrawingRect.size.width, constrainedDrawingRect.size.height) scalingType:NSImageScaleProportionallyUpOrDown];
     
     NSRect result = NSMakeRect(constrainedDrawingRect.origin.x,
                                          constrainedDrawingRect.origin.y - ((constrainedDrawingRect.size.height - scaledImageSize.height) / 2),
@@ -818,7 +823,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSRect)_indicatorRectForBounds:(NSRect)theRect {
 
-    if (![self isProcessing]) {
+    if (!self.isProcessing) {
         return NSZeroRect;
     }
 
@@ -834,12 +839,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSSize)_objectCounterSize {
     
-    if (![self showObjectCount]) {
+    if (!self.showObjectCount) {
         return NSZeroSize;
     }
     
     // get badge width
-    CGFloat countWidth = [[self attributedObjectCountStringValue] size].width;
+    CGFloat countWidth = self.attributedObjectCountStringValue.size.width;
         countWidth += (2 * kMMObjectCounterRadius - 6.0);
         if (countWidth < kMMObjectCounterMinWidth) {
             countWidth = kMMObjectCounterMinWidth;
@@ -850,7 +855,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSRect)_objectCounterRectForBounds:(NSRect)theRect {
 
-    if (![self showObjectCount]) {
+    if (!self.showObjectCount) {
         return NSZeroRect;
     }
 
@@ -863,7 +868,7 @@ NS_ASSUME_NONNULL_BEGIN
         constrainedDrawingRect.size.width -= NSWidth(indicatorRect) + kMMTabBarCellPadding;
         }
     
-    NSSize counterBadgeSize = [self objectCounterSize];
+    NSSize counterBadgeSize = self.objectCounterSize;
     
     // calculate rect
     NSRect result;
@@ -897,7 +902,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSRect)_closeButtonRectForBounds:(NSRect)theRect {
 
-    if ([self shouldDisplayCloseButton] == NO) {
+    if (self.shouldDisplayCloseButton == NO) {
         return NSZeroRect;
     }
     
@@ -913,16 +918,16 @@ NS_ASSUME_NONNULL_BEGIN
     CGFloat resultWidth = 0.0;
 
     // left margin
-    resultWidth = [self _leftMargin];
+    resultWidth = self._leftMargin;
 
     // close button?
-    if ([self shouldDisplayCloseButton]) {
+    if (self.shouldDisplayCloseButton) {
         NSImage *image = [self closeButtonImageOfType:MMCloseButtonImageTypeStandard];
-        resultWidth += [image size].width + kMMTabBarCellPadding;
+        resultWidth += image.size.width + kMMTabBarCellPadding;
     }
 
     // icon?
-    if ([self icon]) {
+    if (self.icon) {
         resultWidth += kMMTabBarIconWidth + kMMTabBarCellPadding;
     }
 
@@ -930,17 +935,17 @@ NS_ASSUME_NONNULL_BEGIN
     resultWidth += kMMMinimumTitleWidth;
 
     // object counter?
-    if ([self showObjectCount]) {
-        resultWidth += [self objectCounterSize].width + kMMTabBarCellPadding;
+    if (self.showObjectCount) {
+        resultWidth += self.objectCounterSize.width + kMMTabBarCellPadding;
     }
 
     // indicator?
-    if ([self isProcessing]) {
+    if (self.isProcessing) {
         resultWidth += kMMTabBarCellPadding + kMMTabBarIndicatorWidth;
     }
 
     // right margin
-    resultWidth += [self _rightMargin];
+    resultWidth += self._rightMargin;
 
     return ceil(resultWidth);
 }
@@ -950,34 +955,34 @@ NS_ASSUME_NONNULL_BEGIN
     CGFloat resultWidth = 0.0;
 
     // left margin
-    resultWidth = [self _leftMargin];
+    resultWidth = self._leftMargin;
 
     // close button?
-    if ([self shouldDisplayCloseButton]) {
+    if (self.shouldDisplayCloseButton) {
         NSImage *image = [self closeButtonImageOfType:MMCloseButtonImageTypeStandard];
-        resultWidth += [image size].width + kMMTabBarCellPadding;
+        resultWidth += image.size.width + kMMTabBarCellPadding;
     }
 
     // icon?
-    if ([self icon]) {
+    if (self.icon) {
         resultWidth += kMMTabBarIconWidth + kMMTabBarCellPadding;
     }
 
     // the label
-    resultWidth += [[self attributedStringValue] size].width;
+    resultWidth += self.attributedStringValue.size.width;
 
     // object counter?
-    if ([self showObjectCount]) {
-        resultWidth += [self objectCounterSize].width + kMMTabBarCellPadding;
+    if (self.showObjectCount) {
+        resultWidth += self.objectCounterSize.width + kMMTabBarCellPadding;
     }
 
     // indicator?
-    if ([self isProcessing]) {
+    if (self.isProcessing) {
         resultWidth += kMMTabBarCellPadding + kMMTabBarIndicatorWidth;
     }
 
     // right margin
-    resultWidth += [self _rightMargin];
+    resultWidth += self._rightMargin;
     
     return ceil(resultWidth);
 }
@@ -1023,11 +1028,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)_drawLargeImageWithFrame:(NSRect)frame inView:(NSView *)controlView {
 
-    MMTabBarView *tabBarView = [controlView enclosingTabBarView];
+    MMTabBarView *tabBarView = controlView.enclosingTabBarView;
 
-    MMTabBarOrientation orientation = [tabBarView orientation];
+    MMTabBarOrientation orientation = tabBarView.orientation;
 
-    NSImage *image = [self largeImage];
+    NSImage *image = self.largeImage;
 
     if ((orientation != MMTabBarVerticalOrientation) || !image)
         return;
@@ -1053,7 +1058,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)_drawIconWithFrame:(NSRect)frame inView:(NSView *)controlView {
     NSRect iconRect = [self iconRectForBounds:frame];
     
-    NSImage *icon = [self icon];
+    NSImage *icon = self.icon;
 
     [icon drawInRect:iconRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:YES hints:nil];
 }
@@ -1065,13 +1070,13 @@ NS_ASSUME_NONNULL_BEGIN
     [NSGraphicsContext saveGraphicsState];
     
     NSShadow *shadow = [[NSShadow alloc] init];
-    [shadow setShadowColor:[[NSColor whiteColor] colorWithAlphaComponent:0.4]];
+    [shadow setShadowColor:[NSColor.whiteColor colorWithAlphaComponent:0.4]];
     [shadow setShadowBlurRadius:1.0];
     [shadow setShadowOffset:NSMakeSize(0.0, -1.0)];
     [shadow set];
 
     // draw title
-    [[self attributedStringValue] drawInRect:rect];
+    [self.attributedStringValue drawInRect:rect];
 
     [NSGraphicsContext restoreGraphicsState];
         
@@ -1080,7 +1085,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)_drawObjectCounterWithFrame:(NSRect)frame inView:(NSView *)controlView {
 
     // set color
-    [[self objectCountColor] ?: [[self class] defaultObjectCountColor] set];
+    [self.objectCountColor ?: self.class.defaultObjectCountColor set];
     
     // get rect
     NSRect myRect = [self objectCounterRectForBounds:frame];
@@ -1093,8 +1098,8 @@ NS_ASSUME_NONNULL_BEGIN
 
     // draw attributed string centered in area
     NSRect counterStringRect;
-    NSAttributedString *counterString = [self attributedObjectCountStringValue];
-    counterStringRect.size = [counterString size];
+    NSAttributedString *counterString = self.attributedObjectCountStringValue;
+    counterStringRect.size = counterString.size;
     counterStringRect.origin.x = myRect.origin.x + ((myRect.size.width - counterStringRect.size.width) / 2.0) + 0.25;
     counterStringRect.origin.y = NSMidY(myRect)-counterStringRect.size.height/2;
     [counterString drawInRect:counterStringRect];
@@ -1109,11 +1114,11 @@ NS_ASSUME_NONNULL_BEGIN
     // we draw nothing by default
     
         // update hidden state of close button
-    if ([[self tabBarView] onlyShowCloseOnHover]) {
-        [[self closeButton] setHidden:![self mouseHovered]];
+    if (self.tabBarView.onlyShowCloseOnHover) {
+        [self.closeButton setHidden:!self.mouseHovered];
     } else {
-        if ([[self closeButton] isHidden] == YES)
-            [[self closeButton] setHidden:NO];
+        if (self.closeButton.isHidden == YES)
+            [self.closeButton setHidden:NO];
     }
 }
 

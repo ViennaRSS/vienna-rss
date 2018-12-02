@@ -6,9 +6,17 @@
 //  Copyright 2005 Positive Spin Media. All rights reserved.
 //
 
+#if __has_feature(modules)
+@import Cocoa;
+#else
 #import <Cocoa/Cocoa.h>
+#endif
 
-#import <MMTabBarView/MMTabBarItem.h>
+#if __has_feature(modules)
+@import MMTabBarView;
+#else
+#import <MMTabBarView/MMTabBarView.h>
+#endif
 
 @interface DemoFakeModel : NSObject <MMTabBarItem>
 

@@ -18,11 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSTabViewItem (MMTabBarViewExtensions) <MMTabBarItem>
 
-@property (retain) NSImage *largeImage;
-@property (retain) NSImage *icon;
+@property (nullable, retain) NSImage *largeImage;
+@property (nullable, retain) NSImage *icon;
 @property (assign) BOOL isProcessing;
 @property (assign) NSInteger objectCount;
-@property (retain) NSColor *objectCountColor;
+@property (nullable, retain) NSColor *objectCountColor;
 @property (assign) BOOL showObjectCount;
 @property (assign) BOOL isEdited;
 @property (assign) BOOL hasCloseButton;

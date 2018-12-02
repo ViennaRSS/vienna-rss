@@ -395,7 +395,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param tabBarView Tab bar view to draw
  *  @param rect       Drawing rect in tab bar view's coos
  */
-- (void)drawBezelOfButton:(MMAttachedTabBarButton *)button atIndex:(NSUInteger)index inButtons:(NSArray *)buttons indexOfSelectedButton:(NSUInteger)selIndex tabBarView:(MMTabBarView *)tabBarView inRect:(NSRect)rect;
+- (void)drawBezelOfButton:(MMAttachedTabBarButton *)button atIndex:(NSUInteger)index inButtons:(NSArray<MMAttachedTabBarButton *> *)buttons indexOfSelectedButton:(NSUInteger)selIndex tabBarView:(MMTabBarView *)tabBarView inRect:(NSRect)rect;
 
 /**
  *  Draw bezel of overflow button

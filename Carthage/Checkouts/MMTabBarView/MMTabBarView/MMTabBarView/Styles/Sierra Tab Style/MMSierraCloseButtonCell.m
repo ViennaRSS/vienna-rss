@@ -16,19 +16,19 @@
     static NSImage *editedImage = nil;
 
     if (!closeImage) {
-        closeImage = [[NSImage alloc] initByReferencingFile:[[NSBundle bundleForClass:[self class]] pathForImageResource:@"MMSierraTabClose"]];
+        closeImage = [[MMTabBarView bundle] imageForResource:@"MMSierraTabClose"];
     }
 
     if (!editedImage) {
-        editedImage = [[NSImage alloc] initByReferencingFile:[[NSBundle bundleForClass:[self class]] pathForImageResource:@"MMSierraTabEdited"]];
+        editedImage = [[MMTabBarView bundle] imageForResource:@"MMSierraTabEdited"];
     }
 
     NSView *tabButtonView = controlView.superview;
-    if (![tabButtonView isKindOfClass:[NSButton class]]) return;
+    if (![tabButtonView isKindOfClass:NSButton.class]) return;
     MMTabBarButton *tabButton = (MMTabBarButton *)tabButtonView;
 
     NSImage *customImage = nil;
-    NSRect customFrame = NSMakeRect(4.0f, 4.0f, 8.0f, 8.0f);
+    NSRect customFrame = NSMakeRect(4.0, 4.0, 8.0, 8.0);
     if (tabButton.isEdited) {
         customImage = editedImage;
     } else {
@@ -36,20 +36,20 @@
     }
 
 
-    CGFloat opacity = 1.0f;
+    CGFloat opacity = 1.0;
     if (controlView.window.isKeyWindow || controlView.window.isMainWindow) {
         if (self.isHighlighted) {
-            opacity = 0.470f;
+            opacity = 0.470;
         } else if (self.mouseHovered) {
-            opacity = 0.475f;
+            opacity = 0.475;
         } else {
-            opacity = 0.45f;
+            opacity = 0.45;
         }
     } else {
         if (self.mouseHovered) {
-            opacity = 0.400f;
+            opacity = 0.400;
         } else {
-            opacity = 0.350f;
+            opacity = 0.350;
         }
     }
 
@@ -57,22 +57,22 @@
 }
 
 - (NSRect)topBorderRectWithFrame:(NSRect)frame {
-    return NSMakeRect(frame.origin.x, 0, frame.size.width, 1.0f);
+    return NSMakeRect(frame.origin.x, 0, frame.size.width, 1.0);
 }
 
 - (NSRect)leftBorderRectWithFrame:(NSRect)frame {
-    return NSMakeRect(frame.origin.x, 0, 1.0f, frame.size.height - 1.0f);
+    return NSMakeRect(frame.origin.x, 0, 1.0, frame.size.height - 1.0);
 }
 
 - (NSRect)fillRectWithFrame:(NSRect)frame {
-    return NSMakeRect(frame.origin.x + 1, frame.origin.y + 1, frame.size.width - 1.0f, frame.size.height - 2.0f);
+    return NSMakeRect(frame.origin.x + 1, frame.origin.y + 1, frame.size.width - 1.0, frame.size.height - 2.0);
 }
 
 - (void)drawActiveBezelWithFrame:(NSRect)frame inView:(NSView *)controlView {
     NSGradient *fillGradient = nil;
 
     NSView *tabButtonView = controlView.superview;
-    if (![tabButtonView isKindOfClass:[NSButton class]]) return;
+    if (![tabButtonView isKindOfClass:NSButton.class]) return;
     NSButton *tabButton = (NSButton *)tabButtonView;
 
     if (tabButton.state == NSOnState) {
@@ -89,8 +89,8 @@
         }
     }
 
-    NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:frame radius:2.0f capMask:MMBezierShapeAllCaps];
-    [fillGradient drawInBezierPath:path angle:90.0f];
+    NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:frame radius:2.0 capMask:MMBezierShapeAllCaps];
+    [fillGradient drawInBezierPath:path angle:90.0];
 }
 
 - (void)drawInactiveBezelWithFrame:(NSRect)frame inView:(NSView *)controlView {
@@ -100,7 +100,7 @@
         [[MMSierraCloseButtonCell inactiveUnselectedFillColor] set];
     }
 
-    NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:frame radius:2.0f capMask:MMBezierShapeAllCaps];
+    NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:frame radius:2.0 capMask:MMBezierShapeAllCaps];
     [path fill];
 }
 

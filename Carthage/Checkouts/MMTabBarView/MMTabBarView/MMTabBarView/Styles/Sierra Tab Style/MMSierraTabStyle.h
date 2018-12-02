@@ -20,11 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (assign) CGFloat leftMarginForTabBarView;
 
-@property (assign) BOOL hasBaseline;
-
-@property (retain) NSColor *selectedTabColor;
-@property (retain) NSColor *unselectedTabColor;
-
 @property (assign) BOOL needsResizeTabsToFitTotalWidth;
 
 @end

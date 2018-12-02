@@ -66,12 +66,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Icon of receiver
  */
-@property (strong) NSImage *icon;
+@property (nullable, strong) NSImage *icon;
 
 /**
  *  Large image of receiver
  */
-@property (strong) NSImage *largeImage;
+@property (nullable, strong) NSImage *largeImage;
 
 /**
  *  Visibility of object count
@@ -86,7 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Color of object count
  */
-@property (strong) NSColor *objectCountColor;
+@property (nullable, strong) NSColor *objectCountColor;
 
 /**
  *  Edited state

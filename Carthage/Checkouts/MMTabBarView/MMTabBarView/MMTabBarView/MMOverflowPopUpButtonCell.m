@@ -64,13 +64,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)drawImageWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
 
-    if ([self isHighlighted])
-        [self drawImage:[self alternateImage] withFrame:cellFrame inView:controlView];
-    else {
-        [self drawImage:[self image] withFrame:cellFrame inView:controlView];
+	if (self.isHighlighted) {
+		NSImage* const image = self.alternateImage;
+		if (image != nil) {
+			[self drawImage:image withFrame:cellFrame inView:controlView];
+		}
+	} else {
+        [self drawImage:self.image withFrame:cellFrame inView:controlView];
         
-        if (_secondImage) {
-            [self drawImage:_secondImage withFrame:cellFrame inView:controlView alpha:_secondImageAlpha];
+		NSImage* const image = _secondImage;
+        if (image != nil) {
+            [self drawImage:image withFrame:cellFrame inView:controlView alpha:_secondImageAlpha];
         }
     }
 }
@@ -113,7 +117,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)encodeWithCoder:(NSCoder *)aCoder {
 	[super encodeWithCoder:aCoder];
 
-	if ([aCoder allowsKeyedCoding]) {
+	if (aCoder.allowsKeyedCoding) {
         [aCoder encodeObject:_image forKey:@"MMTabBarOverflowPopUpImage"];
         [aCoder encodeObject:_secondImage forKey:@"MMTabBarOverflowPopUpSecondImage"];
 	}
@@ -121,7 +125,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super initWithCoder:aDecoder])) {
-		if ([aDecoder allowsKeyedCoding]) {
+		if (aDecoder.allowsKeyedCoding) {
         
             _image = [aDecoder decodeObjectForKey:@"MMTabBarOverflowPopUpImage"];
             _secondImage = [aDecoder decodeObjectForKey:@"MMTabBarOverflowPopUpSecondImage"];
@@ -144,7 +148,7 @@ NS_ASSUME_NONNULL_BEGIN
     // for a button
 
     if (self.centerImage) {
-        NSRect centerRect = NSMakeRect(theRect.origin.x + (theRect.size.width - anImage.size.width) / 2.0f, theRect.origin.y + (theRect.size.height - anImage.size.height) / 2.0f, anImage.size.width, anImage.size.height);
+        NSRect centerRect = NSMakeRect(theRect.origin.x + (theRect.size.width - anImage.size.width) / 2, theRect.origin.y + (theRect.size.height - anImage.size.height) / 2, anImage.size.width, anImage.size.height);
         return NSIntegralRect(centerRect);
     }
 
@@ -152,7 +156,7 @@ NS_ASSUME_NONNULL_BEGIN
     // calculate rect
     NSRect drawingRect = [self drawingRectForBounds:theRect];
         
-    NSSize imageSize = [anImage size];
+    NSSize imageSize = anImage.size;
     
     NSSize scaledImageSize = [self mm_scaleImageWithSize:imageSize toFitInSize:NSMakeSize(imageSize.width, drawingRect.size.height) scalingType:NSImageScaleProportionallyDown];
 

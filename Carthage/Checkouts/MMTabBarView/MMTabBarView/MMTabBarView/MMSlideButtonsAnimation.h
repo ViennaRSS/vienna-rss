@@ -6,15 +6,21 @@
 //
 //
 
+#if __has_feature(modules)
+@import Cocoa;
+#else
 #import <Cocoa/Cocoa.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class MMTabBarButton;
+
 @interface MMSlideButtonsAnimation : NSViewAnimation
 
-- (instancetype)initWithTabBarButtons:(NSSet *)buttons NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithTabBarButtons:(NSSet<__kindof MMTabBarButton *> *)buttons NS_DESIGNATED_INITIALIZER;
 
-- (void)addAnimationDictionary:(NSDictionary *)aDict;
+- (void)addAnimationDictionary:(NSDictionary<NSViewAnimationKey, id> *)aDict;
 
 @end
 

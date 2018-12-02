@@ -23,12 +23,12 @@ typedef void (^MMCellBezelDrawingBlock)(NSCell *cell, NSRect frame, NSView *cont
 /**
  *  Second image
  */
-@property (strong) NSImage *secondImage;
+@property (nullable, strong) NSImage *secondImage;
 
 /**
  *  Block to be used for drawing the bezel
  */
-@property (copy) MMCellBezelDrawingBlock bezelDrawingBlock;
+@property (nullable, copy) MMCellBezelDrawingBlock bezelDrawingBlock;
 
 @end
 

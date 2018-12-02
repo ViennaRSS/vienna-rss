@@ -11,7 +11,7 @@
 @implementation DemoFakeModel
 
 - (instancetype)init {
-	if (self = [super init]) {
+	if ((self = [super init]) != nil) {
 		_isProcessing = NO;
 		_icon = nil;
 		_iconName = nil;

@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (instancetype)initWithImage:(NSImage *)image styleMask:(NSUInteger)styleMask {
-	NSSize size = [image size];
+	NSSize size = image.size;
 
 	if ((self = [super initWithContentRect:NSMakeRect(0, 0, size.width, size.height) styleMask:styleMask backing:NSBackingStoreBuffered defer:NO])) {
 		_dragView = [[MMTabDragView alloc] initWithFrame:NSMakeRect(0, 0, size.width, size.height)];
@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 		[_dragView setImage:image];
 
 		//Set the size of the window to be the exact size of the drag image
-		NSRect windowFrame = [self frame];
+		NSRect windowFrame = self.frame;
 		windowFrame.origin.y += windowFrame.size.height - size.height;
 		windowFrame.size = size;
 

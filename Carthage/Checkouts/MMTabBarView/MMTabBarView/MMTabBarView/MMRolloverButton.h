@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark Cell Interface
 
-@property (strong) NSImage *rolloverImage;
+@property (nullable, strong) NSImage *rolloverImage;
 @property (assign) MMRolloverButtonType rolloverButtonType;
 
 @property (readonly) BOOL mouseHovered;

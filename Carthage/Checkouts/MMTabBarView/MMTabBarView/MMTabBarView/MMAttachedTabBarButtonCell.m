@@ -51,14 +51,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)encodeWithCoder:(NSCoder *)aCoder {
 	[super encodeWithCoder:aCoder];
 
-	if ([aCoder allowsKeyedCoding]) {
+	if (aCoder.allowsKeyedCoding) {
         [aCoder encodeBool:_isOverflowButton forKey:@"MMAttachedTabBarButtonCellIsOverflowButton"];
 	}
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super initWithCoder:aDecoder])) {
-		if ([aDecoder allowsKeyedCoding]) {
+		if (aDecoder.allowsKeyedCoding) {
             
             _isOverflowButton = [aDecoder decodeBoolForKey:@"MMAttachedTabBarButtonCellIsOverflowButton"];
 		}

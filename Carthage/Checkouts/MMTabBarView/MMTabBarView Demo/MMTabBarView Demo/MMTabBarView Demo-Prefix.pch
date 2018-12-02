@@ -3,5 +3,9 @@
 //
 
 #ifdef __OBJC__
-    #import <Cocoa/Cocoa.h>
+	#if __has_feature(modules)
+		@import Cocoa;
+	#else
+		#import <Cocoa/Cocoa.h>
+	#endif
 #endif

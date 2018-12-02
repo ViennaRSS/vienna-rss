@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 + (nullable Class)cellClass {
-    return [MMAttachedTabBarButtonCell class];
+    return MMAttachedTabBarButtonCell.class;
 }
 
 - (instancetype)initWithFrame:(NSRect)frame tabViewItem:(NSTabViewItem *)anItem {
@@ -61,8 +61,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)viewWillDraw {
 
-    NSView *superview = [self superview];    
-    [superview setNeedsDisplayInRect:[superview bounds]];
+    NSView *superview = self.superview;
+    [superview setNeedsDisplayInRect:superview.bounds];
 
     [super viewWillDraw];
 }
@@ -72,13 +72,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSRect)slidingFrame {
     @synchronized(self) {
-        return [self frame];
+        return self.frame;
     }
 }
 
 - (void)setSlidingFrame:(NSRect)aRect {
     @synchronized(self) {
-        aRect.origin.y = [self frame].origin.y;
+        aRect.origin.y = self.frame.origin.y;
         [self setFrame:aRect];
     }
 }
@@ -92,7 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
     
         // additionally synchronize label of tab view item if appropriate
     if (_tabViewItem && [_tabViewItem respondsToSelector:@selector(label)]) {
-        if (![[_tabViewItem label] isEqualToString:aString]) {
+        if (![_tabViewItem.label isEqualToString:aString]) {
             [_tabViewItem setLabel:aString];
         }
     }
@@ -103,15 +103,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)shouldDisplayLeftDivider {
 
-    if ([self isSliding] || ([self tabState] & MMTab_PlaceholderOnLeft))
+    if (self.isSliding || (self.tabState & MMTab_PlaceholderOnLeft))
         return YES;
     
-    return [super shouldDisplayLeftDivider];
+    return super.shouldDisplayLeftDivider;
 }
 
 - (BOOL)shouldDisplayRightDivider {
     
-    if ([self isOverflowButton])
+    if (self.isOverflowButton)
         return NO;
     
     return YES;
@@ -121,11 +121,11 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark Interfacing Cell
 
 - (BOOL)isOverflowButton {
-    return [[self cell] isOverflowButton];
+    return self.cell.isOverflowButton;
 }
 
 - (void)setIsOverflowButton:(BOOL)value {
-    [[self cell] setIsOverflowButton:value];
+    [self.cell setIsOverflowButton:value];
 }
 
 #pragma mark -
@@ -133,16 +133,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)mouseDown:(NSEvent *)theEvent {
 
-    MMAttachedTabBarButton *previousSelectedButton = [self _selectedAttachedTabBarButton];
+    MMAttachedTabBarButton *previousSelectedButton = self._selectedAttachedTabBarButton;
 
-    MMTabBarView *tabBarView = [self tabBarView];
+    MMTabBarView *tabBarView = self.tabBarView;
 
         // select immediately
-    if ([tabBarView selectsTabsOnMouseDown]) {
+    if (tabBarView.selectsTabsOnMouseDown) {
         if (self != previousSelectedButton) {
             [previousSelectedButton setState:NSOffState];
             [self setState:NSOnState];
-            [self sendAction:[self action] to:[self target]];
+            [self sendAction:self.action to:self.target];
         }
     }
 
@@ -154,17 +154,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)mouseUp:(NSEvent *)theEvent {
 
-    MMTabBarView *tabBarView = [self tabBarView];
+    MMTabBarView *tabBarView = self.tabBarView;
     
-    NSPoint mouseUpPoint = [theEvent locationInWindow];
+    NSPoint mouseUpPoint = theEvent.locationInWindow;
     NSPoint mousePt = [self convertPoint:mouseUpPoint fromView:nil];
     
-    if (NSMouseInRect(mousePt, [self bounds], [self isFlipped])) {
-        if (![tabBarView selectsTabsOnMouseDown]) {
-            MMAttachedTabBarButton *previousSelectedButton = [self _selectedAttachedTabBarButton];
+    if (NSMouseInRect(mousePt, self.bounds, self.isFlipped)) {
+        if (!tabBarView.selectsTabsOnMouseDown) {
+            MMAttachedTabBarButton *previousSelectedButton = self._selectedAttachedTabBarButton;
             [previousSelectedButton setState:NSOffState];
             [self setState:NSOnState];
-            [self sendAction:[self action] to:[self target]];
+            [self sendAction:self.action to:self.target];
         }
     }
 }
@@ -174,43 +174,50 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSRect)draggingRect {
 
-    id <MMTabStyle> style = [self style];
-    MMTabBarView *tabBarView = [self tabBarView];
+    id <MMTabStyle> style = self.style;
+    MMTabBarView *tabBarView = self.tabBarView;
 
     NSRect draggingRect = NSZeroRect;
     
     if (style && [style respondsToSelector:@selector(draggingRectForTabButton:ofTabBarView:)]) {
         draggingRect = [style draggingRectForTabButton:self ofTabBarView:tabBarView];
     } else {
-        draggingRect = [self _draggingRect];
+        draggingRect = self._draggingRect;
     }
     
     return draggingRect;
 }
 
+inline static NSBitmapImageRep* imageForView(NSView* const inView, NSRect const inBounds) {
+	if (@available(macOS 10.14, *)) {
+		NSBitmapImageRep* const imageRep = [inView bitmapImageRepForCachingDisplayInRect:inView.visibleRect];
+		[inView cacheDisplayInRect:inBounds toBitmapImageRep:imageRep];
+		return imageRep;
+	} else {
+        [inView lockFocus];
+        [inView display];  // forces update to ensure that we get current state
+        NSBitmapImageRep* imageRep = [[NSBitmapImageRep alloc] initWithFocusedViewRect:inBounds];
+        [inView unlockFocus];
+        return imageRep;
+	}
+}
+
 - (NSImage *)dragImage {
 
         // assure that we will draw the tab bar contents correctly
-    [self setFrame:[self stackingFrame]];
+    [self setFrame:self.stackingFrame];
 
-    MMTabBarView *tabBarView = [self tabBarView];
-
-    NSRect draggingRect = [self draggingRect];
-        
-	[tabBarView lockFocus];
-    [tabBarView display];  // forces update to ensure that we get current state
-	NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithFocusedViewRect:draggingRect];
-	[tabBarView unlockFocus];
-	NSImage *image = [[NSImage alloc] initWithSize:[rep size]];
-	[image addRepresentation:rep];
-	NSImage *returnImage = [[NSImage alloc] initWithSize:[rep size]];
+	NSBitmapImageRep* const imageRep = imageForView(self.tabBarView, self.draggingRect);
+	NSImage* image = [[NSImage alloc] initWithSize:imageRep.size];
+	[image addRepresentation:imageRep];
+	NSImage* returnImage = [[NSImage alloc] initWithSize:imageRep.size];
 	[returnImage lockFocus];
     [image drawAtPoint:NSMakePoint(0.0, 0.0) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 	[returnImage unlockFocus];
-	if (![[self indicator] isHidden]) {
-		NSImage *pi = [[NSImage alloc] initByReferencingFile:[[MMTabBarView bundle] pathForImageResource:@"pi"]];
+	if (!self.indicator.isHidden) {
+		NSImage *pi = [MMTabBarView.bundle imageForResource:@"pi"];
 		[returnImage lockFocus];
-		NSPoint indicatorPoint = NSMakePoint([self frame].size.width - MARGIN_X - kMMTabBarIndicatorWidth, MARGIN_Y);
+		NSPoint indicatorPoint = NSMakePoint(self.frame.size.width - MARGIN_X - kMMTabBarIndicatorWidth, MARGIN_Y);
         [pi drawAtPoint:indicatorPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 		[returnImage unlockFocus];
 	}
@@ -253,12 +260,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (MMAttachedTabBarButton *)_selectedAttachedTabBarButton {
 
-    MMTabBarView *tabBarView = [self enclosingTabBarView];
-    return [tabBarView selectedAttachedButton];
+    MMTabBarView *tabBarView = self.enclosingTabBarView;
+    return tabBarView.selectedAttachedButton;
 }
 
 - (NSRect)_draggingRect {
-    return [self frame];
+    return self.frame;
 }
 
 @end

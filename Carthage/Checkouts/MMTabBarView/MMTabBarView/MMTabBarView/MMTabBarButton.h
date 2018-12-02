@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark Interfacing Cell
 
-@property (strong) id <MMTabStyle> style;
+@property (nullable, strong) id <MMTabStyle> style;
 @property (assign) MMTabStateMask tabState;
 
 @property (nullable, strong) NSImage *icon;
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign) BOOL showObjectCount;
 @property (assign) NSInteger objectCount;
 
-@property (strong) NSColor *objectCountColor;
+@property (nullable, strong) NSColor *objectCountColor;
 
 @property (assign) BOOL isEdited;
 @property (assign) BOOL isProcessing;

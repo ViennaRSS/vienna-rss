@@ -22,14 +22,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)drawRect:(NSRect)rect {
 	//1.0 fade means show the primary image
 	//0.0 fade means show the secondary image
-	CGFloat primaryAlpha = _alpha + 0.001f, alternateAlpha = 1.001f - _alpha;
+	CGFloat primaryAlpha = _alpha + 0.001, alternateAlpha = 1.001 - _alpha;
 	NSRect srcRect;
 	srcRect.origin = NSZeroPoint;
-	srcRect.size = [_image size];
+	srcRect.size = _image.size;
 
-	[_image drawInRect:[self bounds] fromRect:srcRect operation:NSCompositeSourceOver fraction:primaryAlpha respectFlipped:YES hints:nil];
-	srcRect.size = [_alternateImage size];
-	[_alternateImage drawInRect:[self bounds] fromRect:srcRect operation:NSCompositeSourceOver fraction:alternateAlpha respectFlipped:YES hints:nil];
+	[_image drawInRect:self.bounds fromRect:srcRect operation:NSCompositeSourceOver fraction:primaryAlpha respectFlipped:YES hints:nil];
+	srcRect.size = _alternateImage.size;
+	[_alternateImage drawInRect:self.bounds fromRect:srcRect operation:NSCompositeSourceOver fraction:alternateAlpha respectFlipped:YES hints:nil];
 }
 
 @end

@@ -12,24 +12,24 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation MMSierraRolloverButtonCell
 
 - (void)drawImage:(NSImage *)image withFrame:(NSRect)frame inView:(NSView *)controlView {
-    NSRect customFrame = NSMakeRect(7.0f, 7.0f, 11.0f, 11.0f);
+    NSRect customFrame = NSMakeRect(7.0, 7.0, 11.0, 11.0);
 //    NSImage *addImage = [[NSImage alloc] initByReferencingFile:[[NSBundle bundleForClass:[self class]] pathForImageResource:@"SierraTabNew"]];
     NSImage *addImage = [NSImage imageNamed:NSImageNameAddTemplate];
-    CGFloat opacity = 1.0f;
+    CGFloat opacity = 1.0;
 
     if (controlView.window.isKeyWindow || controlView.window.isMainWindow) {
         if (self.isHighlighted) {
-            opacity = 0.470f;
+            opacity = 0.470;
         } else if (self.mouseHovered) {
-            opacity = 0.475f;
+            opacity = 0.475;
         } else {
-            opacity = 0.45f;
+            opacity = 0.45;
         }
     } else {
         if (self.mouseHovered) {
-            opacity = 0.400f;
+            opacity = 0.400;
         } else {
-            opacity = 0.350f;
+            opacity = 0.350;
         }
     }
 
@@ -37,15 +37,15 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (NSRect)topBorderRectWithFrame:(NSRect)frame {
-    return NSMakeRect(frame.origin.x, 0, frame.size.width, 1.0f);
+    return NSMakeRect(frame.origin.x, 0, frame.size.width, 1.0);
 }
 
 - (NSRect)leftBorderRectWithFrame:(NSRect)frame {
-    return NSMakeRect(frame.origin.x, 0, 1.0f, frame.size.height - 1.0f);
+    return NSMakeRect(frame.origin.x, 0, 1.0, frame.size.height - 1.0);
 }
 
 - (NSRect)fillRectWithFrame:(NSRect)frame {
-    return NSMakeRect(frame.origin.x + 1, frame.origin.y + 1, frame.size.width - 1.0f, frame.size.height - 2.0f);
+    return NSMakeRect(frame.origin.x + 1, frame.origin.y + 1, frame.size.width - 1.0, frame.size.height - 2.0);
 }
 
 - (void)drawActiveBezelWithFrame:(NSRect)frame inView:(NSView *)controlView {
@@ -67,9 +67,9 @@ NS_ASSUME_NONNULL_BEGIN
         fillGradient = [MMSierraRolloverButtonCell idleFillGradient];
     }
 
-    [fillGradient drawInRect:[self fillRectWithFrame:frame] angle:90.0f];
-    [topBorderGradient drawInRect:[self topBorderRectWithFrame:frame] angle:90.0f];
-    [leftBorderGradient drawInRect:[self leftBorderRectWithFrame:frame] angle:90.0f];
+    [fillGradient drawInRect:[self fillRectWithFrame:frame] angle:90.0];
+    [topBorderGradient drawInRect:[self topBorderRectWithFrame:frame] angle:90.0];
+    [leftBorderGradient drawInRect:[self leftBorderRectWithFrame:frame] angle:90.0];
 }
 
 - (void)drawInactiveBezelWithFrame:(NSRect)frame inView:(NSView *)controlView {

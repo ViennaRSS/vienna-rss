@@ -6,7 +6,11 @@
 //  Copyright (c) 2016 Michael Monscheuer. All rights reserved.
 //
 
+#if __has_feature(modules)
+@import Cocoa;
+#else
 #import <Cocoa/Cocoa.h>
+#endif
 
 @interface MMAppDelegate : NSObject <NSApplicationDelegate>
 

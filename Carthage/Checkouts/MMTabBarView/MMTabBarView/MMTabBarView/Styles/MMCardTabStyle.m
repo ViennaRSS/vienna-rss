@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (NSString *)name {
-	return [[self class] name];
+	return self.class.name;
 }
 
 #pragma mark -
@@ -42,13 +42,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype) init {
     if ( (self = [super init]) ) {
-        cardCloseButton = [[NSImage alloc] initByReferencingFile:[[MMTabBarView bundle] pathForImageResource:@"AquaTabClose_Front"]];
-        cardCloseButtonDown = [[NSImage alloc] initByReferencingFile:[[MMTabBarView bundle] pathForImageResource:@"AquaTabClose_Front_Pressed"]];
-        cardCloseButtonOver = [[NSImage alloc] initByReferencingFile:[[MMTabBarView bundle] pathForImageResource:@"AquaTabClose_Front_Rollover"]];
+        cardCloseButton = [MMTabBarView.bundle imageForResource:@"AquaTabClose_Front"];
+        cardCloseButtonDown = [MMTabBarView.bundle imageForResource:@"AquaTabClose_Front_Pressed"];
+        cardCloseButtonOver = [MMTabBarView.bundle imageForResource:@"AquaTabClose_Front_Rollover"];
         
-        cardCloseDirtyButton = [[NSImage alloc] initByReferencingFile:[[MMTabBarView bundle] pathForImageResource:@"AquaTabCloseDirty_Front"]];
-        cardCloseDirtyButtonDown = [[NSImage alloc] initByReferencingFile:[[MMTabBarView bundle] pathForImageResource:@"AquaTabCloseDirty_Front_Pressed"]];
-        cardCloseDirtyButtonOver = [[NSImage alloc] initByReferencingFile:[[MMTabBarView bundle] pathForImageResource:@"AquaTabCloseDirty_Front_Rollover"]];
+        cardCloseDirtyButton = [MMTabBarView.bundle imageForResource:@"AquaTabCloseDirty_Front"];
+        cardCloseDirtyButtonDown = [MMTabBarView.bundle imageForResource:@"AquaTabCloseDirty_Front_Pressed"];
+        cardCloseDirtyButtonOver = [MMTabBarView.bundle imageForResource:@"AquaTabCloseDirty_Front_Rollover"];
                         
 		_horizontalInset = 3.0;
 	}
@@ -59,24 +59,24 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark Tab View Specific
 
 - (CGFloat)leftMarginForTabBarView:(MMTabBarView *)tabBarView {
-    if ([tabBarView orientation] == MMTabBarHorizontalOrientation)
+    if (tabBarView.orientation == MMTabBarHorizontalOrientation)
         return _horizontalInset;
     else
         return 0.0;
 }
 
 - (CGFloat)rightMarginForTabBarView:(MMTabBarView *)tabBarView {
-    if ([tabBarView orientation] == MMTabBarHorizontalOrientation)
+    if (tabBarView.orientation == MMTabBarHorizontalOrientation)
         return _horizontalInset;
     else
         return 0.0;
 }
 
 - (CGFloat)topMarginForTabBarView:(MMTabBarView *)tabBarView {
-    if ([tabBarView orientation] == MMTabBarHorizontalOrientation)
+    if (tabBarView.orientation == MMTabBarHorizontalOrientation)
         return 2.0;
 
-    return 0.0f;
+    return 0.0;
 }
 
 - (CGFloat)heightOfTabBarButtonsForTabBarView:(MMTabBarView *)tabBarView {
@@ -97,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSRect)draggingRectForTabButton:(MMAttachedTabBarButton *)aButton ofTabBarView:(MMTabBarView *)tabBarView {
 
-	NSRect dragRect = [aButton stackingFrame];
+	NSRect dragRect = aButton.stackingFrame;
 	dragRect.size.width++;
 	return dragRect;
 }
@@ -132,10 +132,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSRect)overflowButtonRectForTabBarView:(MMTabBarView *)tabBarView {
 
-    NSRect rect = [tabBarView _overflowButtonRect];
+    NSRect rect = tabBarView._overflowButtonRect;
     
-    rect.origin.y += [tabBarView topMargin];
-    rect.size.height -= [tabBarView topMargin];
+    rect.origin.y += tabBarView.topMargin;
+    rect.size.height -= tabBarView.topMargin;
     
     return rect;
 }
@@ -145,23 +145,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)drawBezelOfTabBarView:(MMTabBarView *)tabBarView inRect:(NSRect)rect {
 	//Draw for our whole bounds; it'll be automatically clipped to fit the appropriate drawing area
-	NSRect bounds = [tabBarView bounds];
+	NSRect bounds = tabBarView.bounds;
     
     bounds.size.height -= 1.0;    
 
     NSGradient *gradient = nil;
     
-    if ([tabBarView isWindowActive]) {
+    if (tabBarView.isWindowActive) {
         // gray bar gradient
         gradient = [[NSGradient alloc] initWithColorsAndLocations:
-                        [NSColor colorWithCalibratedWhite:0.678 alpha:1.000],0.0f,
-                        [NSColor colorWithCalibratedWhite:0.821 alpha:1.000],1.0f,
+                        [NSColor colorWithCalibratedWhite:0.678 alpha:1.000],0.0,
+                        [NSColor colorWithCalibratedWhite:0.821 alpha:1.000],1.0,
                         nil];
     } else {
         // light gray bar gradient
         gradient = [[NSGradient alloc] initWithColorsAndLocations:
-                [NSColor colorWithCalibratedWhite:0.821 alpha:1.000],0.0f,
-                [NSColor colorWithCalibratedWhite:0.956 alpha:1.000],1.0f,
+                [NSColor colorWithCalibratedWhite:0.821 alpha:1.000],0.0,
+                [NSColor colorWithCalibratedWhite:0.956 alpha:1.000],1.0,
                 nil];
     }
     
@@ -170,7 +170,7 @@ NS_ASSUME_NONNULL_BEGIN
     
         }
 
-    bounds = [tabBarView bounds];
+    bounds = tabBarView.bounds;
         
         // draw additional separator line
     [[NSColor colorWithCalibratedWhite:0.576 alpha:1.0] set];
@@ -181,18 +181,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)drawBezelOfTabCell:(MMTabBarButtonCell *)cell withFrame:(NSRect)frame inView:(NSView *)controlView {
 
-    MMTabBarView *tabBarView = [controlView enclosingTabBarView];
+    MMTabBarView *tabBarView = controlView.enclosingTabBarView;
     MMAttachedTabBarButton *button = (MMAttachedTabBarButton *)controlView;
 
-    BOOL overflowMode = [button isOverflowButton];
-    if ([button isSliding])
+    BOOL overflowMode = button.isOverflowButton;
+    if (button.isSliding)
         overflowMode = NO;
 
     NSRect aRect = NSMakeRect(frame.origin.x+.5, frame.origin.y+0.5, frame.size.width-1.0, frame.size.height-1.0);
     if (overflowMode)
         aRect.size.width += 0.5;
     
-    aRect.size.height += 1.0f;
+    aRect.size.height += 1.0;
  
     if (overflowMode) {
         [self _drawBezelInRect:aRect withCapMask:MMBezierShapeLeftCap usingStatesOfAttachedButton:button ofTabBarView:tabBarView];
@@ -203,12 +203,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)drawBezelOfOverflowButton:(MMOverflowPopUpButton *)overflowButton ofTabBarView:(MMTabBarView *)tabBarView inRect:(NSRect)rect {
 
-    MMAttachedTabBarButton *lastAttachedButton = [tabBarView lastAttachedButton];
+    MMAttachedTabBarButton *lastAttachedButton = tabBarView.lastAttachedButton;
 
-    if ([lastAttachedButton isSliding])
+    if (lastAttachedButton.isSliding)
         return;
 
-    NSRect frame = [overflowButton frame];
+    NSRect frame = overflowButton.frame;
     frame.size.width += 5.0;
 
     NSRect aRect = NSMakeRect(frame.origin.x, frame.origin.y+0.5, frame.size.width-0.5, frame.size.height);
@@ -233,17 +233,17 @@ NS_ASSUME_NONNULL_BEGIN
     
     NSColor *lineColor = [NSColor colorWithCalibratedWhite:0.576 alpha:1.0];
 
-    CGFloat radius = MIN(6.0, 0.5f * MIN(NSWidth(aRect), NSHeight(aRect)))-0.5;
+    CGFloat radius = MIN(6.0, 0.5 * MIN(NSWidth(aRect), NSHeight(aRect)))-0.5;
 
         // fill
     NSBezierPath *fillPath = [NSBezierPath bezierPathWithCardInRect:aRect radius:radius capMask:capMask|MMBezierShapeFillPath];
 
     NSGradient *gradient = nil;
 
-    if ([tabBarView isWindowActive]) {
-        if ([button state] == NSOnState) {
-              gradient = [[NSGradient alloc] initWithStartingColor:[NSColor whiteColor] endingColor:[NSColor colorWithDeviceWhite:0.929 alpha:1.000]];
-        } else if ([button mouseHovered]) {
+    if (tabBarView.isWindowActive) {
+        if (button.state == NSOnState) {
+              gradient = [[NSGradient alloc] initWithStartingColor:NSColor.whiteColor endingColor:[NSColor colorWithDeviceWhite:0.929 alpha:1.000]];
+        } else if (button.mouseHovered) {
         
             gradient = [[NSGradient alloc] 
                 initWithStartingColor: [NSColor colorWithCalibratedWhite:0.80 alpha:1.0]
@@ -256,11 +256,11 @@ NS_ASSUME_NONNULL_BEGIN
         }
 
         if (gradient != nil) {
-            [gradient drawInBezierPath:fillPath angle:90.0f];
+            [gradient drawInBezierPath:fillPath angle:90.0];
             gradient = nil;
             }
     } else {
-        [[NSColor windowBackgroundColor] set];
+        [NSColor.windowBackgroundColor set];
         NSRectFill(aRect);
     }
     
@@ -270,7 +270,7 @@ NS_ASSUME_NONNULL_BEGIN
     [lineColor set];
     [outlinePath stroke];
 
-    if ([button state] == NSOffState) {
+    if (button.state == NSOffState) {
     
             // draw additional separator line
         [[NSColor colorWithCalibratedWhite:0.576 alpha:1.0] set];

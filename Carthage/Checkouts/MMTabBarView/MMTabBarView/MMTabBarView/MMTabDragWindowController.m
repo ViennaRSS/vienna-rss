@@ -26,11 +26,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithImage:(NSImage *)image styleMask:(NSUInteger)styleMask tearOffStyle:(MMTabBarTearOffStyle)tearOffStyle {
 	MMTabDragWindow *window = [MMTabDragWindow dragWindowWithImage:image styleMask:styleMask];
 	if ((self = [super initWithWindow:window])) {
-		_view = [window dragView];
+		_view = window.dragView;
 		_tearOffStyle = tearOffStyle;
 
 		if (tearOffStyle == MMTabBarTearOffMiniwindow) {
-			[window setBackgroundColor:[NSColor clearColor]];
+			[window setBackgroundColor:NSColor.clearColor];
 			[window setHasShadow:YES];
 		}
 
@@ -46,11 +46,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (NSImage *)image {
-	return [_view image];
+	return _view.image;
 }
 
 - (NSImage *)alternateImage {
-	return [_view alternateImage];
+	return _view.alternateImage;
 }
 
 - (void)setAlternateImage:(NSImage *)image {
@@ -62,16 +62,16 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)switchImages {
-	if (_tearOffStyle != MMTabBarTearOffMiniwindow || ![_view alternateImage]) {
+	if (_tearOffStyle != MMTabBarTearOffMiniwindow || !_view.alternateImage) {
 		return;
 	}
 
-	CGFloat progress = 0;
+	NSAnimationProgress progress = 0;
 	_showingAlternate = !_showingAlternate;
 
 	if (_animation) {
 		//An animation already exists, get the current progress
-		progress = 1.0f - [_animation currentProgress];
+		progress = 1.0f - _animation.currentProgress;
 		[_animation stopAnimation];
 	}
 
@@ -81,30 +81,30 @@ NS_ASSUME_NONNULL_BEGIN
 	[_animation setCurrentProgress:progress];
 	[_animation startAnimation];
 
-	_originalWindowFrame = [[self window] frame];
+	_originalWindowFrame = self.window.frame;
 
 	if (_timer) {
 		[_timer invalidate];
 	}
-	_timer = [NSTimer scheduledTimerWithTimeInterval:1.0f / 30.0f target:self selector:@selector(animateTimer:) userInfo:nil repeats:YES];
+	_timer = [NSTimer scheduledTimerWithTimeInterval:1.0 / 30.0 target:self selector:@selector(animateTimer:) userInfo:nil repeats:YES];
 }
 
 - (void)animateTimer:(NSTimer *)timer {
 	NSRect frame = _originalWindowFrame;
-	NSImage *currentImage = _showingAlternate ?[_view alternateImage] :[_view image];
-	NSSize size = [currentImage size];
-	NSPoint mousePoint = [NSEvent mouseLocation];
-	CGFloat animationValue = [_animation currentValue];
+	NSImage *currentImage = _showingAlternate ? _view.alternateImage : _view.image;
+	NSSize size = currentImage.size;
+	NSPoint mousePoint = NSEvent.mouseLocation;
+	CGFloat animationValue = (CGFloat) _animation.currentValue;
 
 	frame.size.width = _originalWindowFrame.size.width + (size.width - _originalWindowFrame.size.width) * animationValue;
 	frame.size.height = _originalWindowFrame.size.height + (size.height - _originalWindowFrame.size.height) * animationValue;
 	frame.origin.x = mousePoint.x - (frame.size.width / 2);
 	frame.origin.y = mousePoint.y - (frame.size.height / 2);
 
-	[_view setAlpha:_showingAlternate ? 1.0f - animationValue : animationValue];
-	[[self window] setFrame:frame display:YES];
+	[_view setAlpha:_showingAlternate ? 1.0 - animationValue : animationValue];
+	[self.window setFrame:frame display:YES];
 
-	if (![_animation isAnimating]) {
+	if (!_animation.isAnimating) {
 		_animation = nil;
 		[timer invalidate];
 		_timer = nil;

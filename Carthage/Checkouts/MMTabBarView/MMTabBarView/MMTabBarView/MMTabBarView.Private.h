@@ -8,6 +8,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+CGFloat noIntrinsicMetric(void);
+
 @interface MMTabBarView (PrivateDrawing)
 
 - (void)_drawInteriorInRect:(NSRect)rect;
