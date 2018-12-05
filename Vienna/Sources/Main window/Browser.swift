@@ -2,8 +2,19 @@
 //  Browser.swift
 //  Vienna
 //
-//  Created by Tassilo Karge on 31.10.18.
-//  Copyright © 2018 uk.co.opencommunity. All rights reserved.
+//  Copyright 2018
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  https://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 //
 
 import Foundation
@@ -11,19 +22,19 @@ import Foundation
 @objc
 protocol Browser {
 
-    var browserTabCount : Int {get}
+    var browserTabCount: Int { get }
 
-    //MARK: tab management
+    // MARK: tab management
 
     /// The browser can have a fixed first tab (e.g. bookmarks).
     /// The tab has to be managed by the setter. It will not be saved, nor be returned by the activeTab property.
     /// - Parameter tabViewItem: the tab view item configured with the view that shall be in the first fixed tab.
-    var primaryTab : NSTabViewItem? {get set}
+    var primaryTab: NSTabViewItem? { get set }
 
     /// A tabbed browser always has one tab that is selected. It is called the active tab.
     /// In case the primary tab is selected, the return value is nil
     /// (because it does not necessarily implement the Tab protocol)
-    var activeTab : Tab? {get}
+	var activeTab: Tab? { get }
 
     /// Add a new tab to the open tabs of the browser
     ///
@@ -48,7 +59,7 @@ protocol Browser {
     /// are saved another time after closing!
     func closeAllTabs()
 
-    //MARK: tab navigation
+    // MARK: tab navigation
 
     /// if there is a primary tab set, the browser will select it and make it the active tab
     func switchToPrimaryTab()

@@ -2,8 +2,19 @@
 //  TabbedBrowserViewController.swift
 //  Vienna
 //
-//  Created by Tassilo Karge on 27.10.18.
-//  Copyright © 2018 uk.co.opencommunity. All rights reserved.
+//  Copyright 2018
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  https://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 //
 
 import Cocoa
@@ -12,9 +23,9 @@ import MMTabBarView
 @available(OSX 10.10, *)
 class TabbedBrowserViewController: NSViewController, Browser {
 
-    @IBOutlet weak var tabBar: MMTabBarView! {
+    @IBOutlet private(set) weak var tabBar: MMTabBarView! {
         didSet {
-            self.tabBar.setStyleNamed("Mojave");
+            self.tabBar.setStyleNamed("Mojave")
             self.tabBar.onlyShowCloseOnHover = true
             self.tabBar.canCloseOnlyTab = false
             self.tabBar.disableTabClose = false
@@ -29,12 +40,12 @@ class TabbedBrowserViewController: NSViewController, Browser {
         }
     }
 
-    @IBOutlet weak var tabView: NSTabView!
+    @IBOutlet private(set) weak var tabView: NSTabView!
 
     /// The browser can have a fixed first tab (e.g. bookmarks).
     /// This method will set the primary tab the first time it is called
     /// - Parameter tabViewItem: the tab view item configured with the view that shall be in the first fixed tab.
-    var primaryTab : NSTabViewItem? {
+    var primaryTab: NSTabViewItem? {
         didSet {
             //remove from tabView if there was a prevous primary tab
             if let primaryTab = oldValue {
@@ -47,16 +58,12 @@ class TabbedBrowserViewController: NSViewController, Browser {
         }
     }
 
-    var activeTab : Tab? {
-        get {
-            return tabView.selectedTabViewItem?.viewController as? Tab
-        }
+    var activeTab: Tab? {
+        return tabView.selectedTabViewItem?.viewController as? Tab
     }
 
     var browserTabCount: Int {
-        get {
-            return tabView.numberOfTabViewItems
-        }
+        return tabView.numberOfTabViewItems
     }
 
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
@@ -68,7 +75,7 @@ class TabbedBrowserViewController: NSViewController, Browser {
             let tabBar = coder.decodeObject(of: MMTabBarView.self, forKey: "tabBar"),
             let tabView = coder.decodeObject(of: NSTabView.self, forKey: "tabView"),
             let primaryTab = coder.decodeObject(of: NSTabViewItem.self, forKey: "primaryTab")
-            else {return nil}
+            else { return nil }
         self.tabBar = tabBar
         self.tabView = tabView
         self.primaryTab = primaryTab
@@ -86,13 +93,13 @@ class TabbedBrowserViewController: NSViewController, Browser {
         // Do view setup here.
     }
 
-    public func createNewTab(_ url:URL? = nil, inBackground: Bool = false, load: Bool = false) -> Tab {
+    public func createNewTab(_ url: URL? = nil, inBackground: Bool = false, load: Bool = false) -> Tab {
         let newTab = BrowserTab()
         let newTabViewItem = TitleChangingTabViewItem(viewController: newTab)
         newTabViewItem.hasCloseButton = true
         tabView.addTabViewItem(newTabViewItem)
 
-        if (url != nil) {
+        if url != nil {
             newTab.url = url
         }
 
@@ -135,7 +142,7 @@ class TabbedBrowserViewController: NSViewController, Browser {
     }
 
     func closeAllTabs() {
-        self.tabView.tabViewItems.filter({$0 != primaryTab}).forEach {
+        self.tabView.tabViewItems.filter { $0 != primaryTab }.forEach {
             self.tabView.removeTabViewItem($0)
         }
     }
@@ -168,7 +175,7 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
 
     func tabView(_ aTabView: NSTabView, menuFor tabViewItem: NSTabViewItem) -> NSMenu {
         //TODO: return menu corresponding to browser or primary tab view item
-        return NSMenu.init()
+        return NSMenu()
     }
 
     func tabView(_ aTabView: NSTabView, shouldDrag tabViewItem: NSTabViewItem, in tabBarView: MMTabBarView) -> Bool {
@@ -182,5 +189,14 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
     func tabView(_ aTabView: NSTabView, validateSlideOfProposedItem tabViewItem: NSTabViewItem, proposedIndex: UInt, in tabBarView: MMTabBarView) -> NSDragOperation {
         return (tabViewItem != primaryTab && proposedIndex != 0) ? [.every] : []
     }
+}
 
+@available(OSX 10.10, *)
+extension TabbedBrowserViewController: WKUIDelegate {
+	//TODO: implement functionality for opening new tabs and alerts, and maybe peek actions
+}
+
+@available(OSX 10.10, *)
+extension TabbedBrowserViewController: WKNavigationDelegate {
+	//TODO: implement UI response to webpage loading etc.
 }

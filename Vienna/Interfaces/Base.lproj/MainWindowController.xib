@@ -414,7 +414,7 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="3C962AB1-0C7E-4CBA-8477-2436ED2B6383" explicitItemIdentifier="Styles" label="Style" paletteLabel="Style" toolTip="Display the list of available styles" image="StyleTemplate" sizingBehavior="auto" id="azL-oz-mJL" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <popUpButton key="view" verticalHuggingPriority="750" id="gOd-tT-XFQ">
-                            <rect key="frame" x="0.0" y="14" width="54" height="25"/>
+                            <rect key="frame" x="0.0" y="14" width="41" height="28"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="StyleTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="lu2-BZ-Gxd" id="5CR-Qn-4pP">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -739,15 +739,15 @@
             </connections>
             <point key="canvasLocation" x="1066" y="109"/>
         </customView>
-        <customObject id="eqp-AV-PHe" customClass="WebViewBrowser"/>
+        <customObject id="eqp-AV-PHe" customClass="TabbedBrowserViewController" customModule="Vienna" customModuleProvider="target"/>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="1288" customClass="EnclosureView">
-            <rect key="frame" x="0.0" y="0.0" width="491" height="45"/>
+            <rect key="frame" x="0.0" y="0.0" width="444" height="45"/>
             <subviews>
                 <box verticalHuggingPriority="750" alphaValue="0.79577457904815674" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1392">
-                    <rect key="frame" x="0.0" y="42" width="491" height="5"/>
+                    <rect key="frame" x="0.0" y="42" width="444" height="5"/>
                 </box>
                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="PLo-xw-CXM">
-                    <rect key="frame" x="8" y="6" width="475" height="32"/>
+                    <rect key="frame" x="8" y="6" width="428" height="32"/>
                     <subviews>
                         <imageView id="1289">
                             <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -759,10 +759,10 @@
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="1372"/>
                         </imageView>
                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="3" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RFH-Us-xJO">
-                            <rect key="frame" x="40" y="1" width="347" height="31"/>
+                            <rect key="frame" x="40" y="1" width="300" height="31"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="9000" translatesAutoresizingMaskIntoConstraints="NO" id="1290">
-                                    <rect key="frame" x="-2" y="17" width="351" height="14"/>
+                                    <rect key="frame" x="-2" y="17" width="304" height="14"/>
                                     <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" id="1373">
                                         <font key="font" metaFont="smallSystemBold"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -770,7 +770,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="9000" translatesAutoresizingMaskIntoConstraints="NO" id="1292" customClass="DSClickableURLTextField">
-                                    <rect key="frame" x="-2" y="0.0" width="351" height="14"/>
+                                    <rect key="frame" x="-2" y="0.0" width="304" height="14"/>
                                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" id="1375">
                                         <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -788,7 +788,7 @@
                             </customSpacing>
                         </stackView>
                         <button horizontalHuggingPriority="251" verticalHuggingPriority="750" placeholderIntrinsicWidth="80" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="1291">
-                            <rect key="frame" x="388" y="-1" width="94" height="33"/>
+                            <rect key="frame" x="341" y="-1" width="94" height="33"/>
                             <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="1374">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -825,7 +825,7 @@
                 <outlet property="filenameField" destination="1292" id="1298"/>
                 <outlet property="filenameLabel" destination="1290" id="1299"/>
             </connections>
-            <point key="canvasLocation" x="-209.5" y="42.5"/>
+            <point key="canvasLocation" x="-186" y="42.5"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="fAX-Jg-YQ6"/>
     </objects>

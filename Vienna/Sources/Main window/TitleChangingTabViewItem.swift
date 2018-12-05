@@ -2,8 +2,19 @@
 //  TitleChangingTabViewItem.swift
 //  Vienna
 //
-//  Created by Tassilo Karge on 11.11.18.
-//  Copyright © 2018 uk.co.opencommunity. All rights reserved.
+//  Copyright 2018
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  https://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 //
 // Swift version of https://github.com/thomasguenzel/blog/blob/master/NSTabViewItem_Title/GNTabViewItem.m
 //
@@ -12,19 +23,16 @@ import Cocoa
 
 @available(OSX 10.10, *)
 class TitleChangingTabViewItem: NSTabViewItem {
+
+	var titleObservation: NSKeyValueObservation?
+
     override var viewController: NSViewController? {
         didSet {
             super.viewController = viewController
-            oldValue?.removeObserver(self, forKeyPath: "title")
-            self.viewController?.addObserver(self, forKeyPath: "title", options: .new, context: nil)
+            titleObservation?.invalidate()
+			titleObservation = self.viewController?.observe(\NSViewController.title, options: .new) { _, change in
+				self.label = (change.newValue ?? "") ?? ""
+			}
         }
-    }
-
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if let object = object as? NSViewController, let viewController = viewController,
-            keyPath == "title" && object == viewController {
-            self.label = viewController.title ?? ""
-        }
-        super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
     }
 }
