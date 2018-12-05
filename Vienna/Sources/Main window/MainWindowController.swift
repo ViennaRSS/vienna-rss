@@ -23,7 +23,7 @@ final class MainWindowController: NSWindowController {
 
     // MARK: Transitional outlets
 
-    @IBOutlet weak var splitView: NSSplitView!
+    @IBOutlet private(set) var splitView: NSSplitView!
     @IBOutlet private(set) var outlineView: FolderView?
     @IBOutlet private(set) var browser: Browser?
     @IBOutlet private(set) var articleListView: ArticleListView?
@@ -48,7 +48,9 @@ final class MainWindowController: NSWindowController {
             filterLabel.cell?.backgroundStyle = .raised
         }
 
-        splitView.addSubview((self.browser as! NSViewController).view)
+		if let browser = self.browser as? NSViewController {
+			splitView.addSubview(browser.view)
+		}
 
         let filterMenu = (NSApp as? ViennaApp)?.filterMenu
         let filterMode = Preferences.standard().filterMode

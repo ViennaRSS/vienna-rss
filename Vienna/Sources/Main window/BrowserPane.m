@@ -65,6 +65,7 @@
 @interface BrowserPane ()
 
 @property (nonatomic) OverlayStatusBar *statusBar;
+@property (nonatomic) NSString *searchString;
 
 -(void)endFrameLoad;
 -(void)showRssPageButton:(BOOL)showButton;
@@ -341,16 +342,17 @@
     {
         case NSFindPanelActionSetFindString:
         {
-            [self.webPane searchFor:APPCONTROLLER.searchString direction:YES caseSensitive:NO wrap:YES];
+			//TODO: unfortunately, webpane takes focus after every search action. Continuous searching would be nice if it worked though
+			//[self.webPane searchFor:self.searchString direction:YES caseSensitive:NO wrap:YES];
             break;
         }
 
         case NSFindPanelActionNext:
-            [self.webPane searchFor:APPCONTROLLER.searchString direction:YES caseSensitive:NO wrap:YES];
+            [self.webPane searchFor:self.searchString direction:YES caseSensitive:NO wrap:YES];
             break;
 
         case NSFindPanelActionPrevious:
-            [self.webPane searchFor:APPCONTROLLER.searchString direction:NO caseSensitive:NO wrap:YES];
+            [self.webPane searchFor:self.searchString direction:NO caseSensitive:NO wrap:YES];
             break;
     }
 }
@@ -755,7 +757,8 @@
 
 
 - (void)searchFor:(NSString * _Nonnull)searchString action:(NSFindPanelAction)action {
-    //TODO
+	self.searchString = searchString;
+	[self performFindPanelAction:action];
 }
 
 
