@@ -27,7 +27,7 @@
 #import "HelperFunctions.h"
 #import "StringExtensions.h"
 #import "FolderView.h"
-#import "BrowserView.h"
+#import "Browser.h"
 #import "OpenReader.h"
 #import "Database.h"
 #import "TreeNode.h"
@@ -1105,7 +1105,7 @@
  */
 -(void)outlineViewWillBecomeFirstResponder
 {
-	[self.controller.browserView setActiveTabToPrimaryTab];
+	[self.controller.browser setActiveTabToPrimaryTab];
 	[self enableFoldersRenamingAfterDelay];
 }
 

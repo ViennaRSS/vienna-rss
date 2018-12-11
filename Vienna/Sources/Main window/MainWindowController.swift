@@ -24,7 +24,7 @@ final class MainWindowController: NSWindowController {
     // MARK: Transitional outlets
 
     @IBOutlet private(set) var outlineView: FolderView?
-    @IBOutlet private(set) var browserView: BrowserView?
+    @IBOutlet private(set) var browser: Browser?
     @IBOutlet private(set) var articleListView: ArticleListView?
     @IBOutlet private(set) var unifiedDisplayView: UnifiedDisplayView?
     @IBOutlet private(set) var filterDisclosureView: DisclosureView?

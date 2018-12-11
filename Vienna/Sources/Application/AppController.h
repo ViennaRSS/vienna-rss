@@ -30,7 +30,7 @@
 @class NewSubscription;
 @class NewGroupFolder;
 @class WebPreferences;
-@class BrowserView;
+@class Browser;
 @class EmptyTrashWarning;
 @class SearchPanel;
 @class DisclosureView;
@@ -71,7 +71,7 @@
 }
 
 @property (nonatomic) PluginManager *pluginManager;
-@property (nonatomic, weak) BrowserView *browserView;
+@property (nonatomic, weak) Browser *browser;
 @property (nonatomic) ArticleController *articleController;
 @property (nonatomic, weak) UnifiedDisplayView *unifiedListView;
 @property (nonatomic, weak) ArticleListView *articleListView;

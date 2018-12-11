@@ -54,7 +54,7 @@
 #import "TreeNode.h"
 #import "Field.h"
 #import "Folder.h"
-#import "BrowserView.h"
+#import "Browser.h"
 #import "ArticleListView.h"
 #import "UnifiedDisplayView.h"
 #import "ArticleView.h"
@@ -185,7 +185,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 			previousArticleGuid = nil;
 		[self.articleController selectFolderAndArticle:previousFolderId guid:previousArticleGuid];
 
-		[self.mainWindow makeFirstResponder:(previousArticleGuid != nil) ? [self.browserView primaryTabItemView].mainView : self.foldersTree.mainView];
+		[self.mainWindow makeFirstResponder:(previousArticleGuid != nil) ? [self.browser primaryTabItemView].mainView : self.foldersTree.mainView];
 
 		if (prefs.refreshOnStartup)
 			[self refreshAllSubscriptions:self];
@@ -197,7 +197,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		for (int i = 0; i < tabLinks.count; i++)
 		{
 			NSString *tabLink = tabLinks[i].length ? tabLinks[i] : nil;
-			[self.browserView createNewTab:([NSURL URLWithString:tabLink])
+			[self.browser createNewTab:([NSURL URLWithString:tabLink])
 					 withTitle:tabTitles[tabLink] inBackground:YES];
 		}
 
@@ -324,7 +324,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	self.mainWindowController = [[MainWindowController alloc] initWithWindowNibName:@"MainWindowController"];
 	self.mainWindow = self.mainWindowController.window;
 
-	self.browserView = self.mainWindowController.browserView;
+	self.browser = self.mainWindowController.browser;
 	self.articleListView = self.mainWindowController.articleListView;
 	self.articleListView.controller = self;
 	self.unifiedListView = self.mainWindowController.unifiedDisplayView;
@@ -456,7 +456,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	[self showMainWindow:self];
 	
 	// Hook up the key sequence properly now that all NIBs are loaded.
-	self.foldersTree.mainView.nextKeyView = [self.browserView primaryTabItemView].mainView;
+	self.foldersTree.mainView.nextKeyView = [self.browser primaryTabItemView].mainView;
     
 	// Do safe initialisation.
 	[self performSelector:@selector(doSafeInitialisation)
@@ -565,7 +565,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 		[NSApp.dockTile setBadgeLabel:nil];
 		
 		// Save the open tabs
-		[self.browserView saveOpenTabs];
+		[self.browser saveOpenTabs];
 		
 		// Remember the article list column position, sizes, etc.
 		[self.articleController saveTableSettings];
@@ -795,12 +795,12 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
     if (refreshFlag) {
         [self.articleController.mainArticleView refreshFolder:MA_Refresh_RedrawList];
     }
-	[self.browserView setPrimaryTabItemView:self.articleController.mainArticleView];
-	self.foldersTree.mainView.nextKeyView = [self.browserView primaryTabItemView].mainView;
+	[self.browser setPrimaryTabItemView:self.articleController.mainArticleView];
+	self.foldersTree.mainView.nextKeyView = [self.browser primaryTabItemView].mainView;
     if (self.selectedArticle == nil)
         [self.mainWindow makeFirstResponder:self.foldersTree.mainView];
     else
-        [self.mainWindow makeFirstResponder:[self.browserView primaryTabItemView].mainView];
+        [self.mainWindow makeFirstResponder:[self.browser primaryTabItemView].mainView];
 	[self updateSearchPlaceholderAndSearchMethod];
 }
 
@@ -960,7 +960,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)openPageInBrowser:(id)sender
 {
-	NSView<BaseView> * theView = self.browserView.activeTabItemView;
+	NSView<BaseView> * theView = self.browser.activeTabItemView;
 	NSURL * url = nil;
 	
 	// Get the URL from the appropriate view.
@@ -985,7 +985,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)copyPageURLToClipboard:(id)sender
 {
-	NSView<BaseView> * theView = self.browserView.activeTabItemView;
+	NSView<BaseView> * theView = self.browser.activeTabItemView;
 	NSURL * url = nil;
 
 	// Get the URL from the appropriate view.
@@ -1025,13 +1025,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			openInBackground = !openInBackground;
         }
 		
-		[self.browserView createAndLoadNewTab:item.representedObject inBackground:openInBackground];
+		[self.browser createAndLoadNewTab:item.representedObject inBackground:openInBackground];
 	}
 }
 
 -(void)newTab:(id)sender
 {
-	[self.browserView newTab];
+	[self.browser newTab];
 }
 
 /* openWebElementInDefaultBrowser
@@ -1052,12 +1052,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)openWebLocation:(id)sender
 {
-	NSView<BaseView> * theView = self.browserView.activeTabItemView;
+	NSView<BaseView> * theView = self.browser.activeTabItemView;
 	[self showMainWindow:self];
 	if (![theView isKindOfClass:[BrowserPane class]])
 	{
-		[self.browserView createNewTab:nil inBackground:NO];
-		theView = self.browserView.activeTabItemView;
+		[self.browser createNewTab:nil inBackground:NO];
+		theView = self.browser.activeTabItemView;
 	}
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
@@ -1098,7 +1098,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         }
 
 		for (NSURL * url in urls)
-			[self.browserView createAndLoadNewTab:url inBackground:openInBackground];
+			[self.browser createAndLoadNewTab:url inBackground:openInBackground];
 	}
 	else
 		[self openURLsInDefaultBrowser:urls];
@@ -1282,7 +1282,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)handleShowFilterBar:(NSNotification *)nc
 {
-	if (self.browserView.activeTabItemView == [self.browserView primaryTabItemView])
+	if (self.browser.activeTabItemView == [self.browser primaryTabItemView])
 		[self setFilterBarState:[Preferences standardPreferences].showFilterBar withAnimation:YES];
 }
 
@@ -1325,7 +1325,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		// Hook up the Tab ordering so Tab from the search field goes to the
 		// article view.
 		self.foldersTree.mainView.nextKeyView = self.filterSearchField;
-		self.filterSearchField.nextKeyView = [self.browserView primaryTabItemView].mainView;
+		self.filterSearchField.nextKeyView = [self.browser primaryTabItemView].mainView;
 		
 		// Set focus only if this was user initiated
         if (doAnimate) {
@@ -1337,7 +1337,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         [self.filterDisclosureView collapse:doAnimate];
 
 		// Fix up the tab ordering
-		self.foldersTree.mainView.nextKeyView = [self.browserView primaryTabItemView].mainView;
+		self.foldersTree.mainView.nextKeyView = [self.browser primaryTabItemView].mainView;
 		
 		// Clear the filter, otherwise we end up with no way remove it!
 		self.filterString = @"";
@@ -1348,7 +1348,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			// If the focus was originally on the filter bar then we should
 			// move it to the message list
 			if (self.mainWindow.firstResponder == self.mainWindow)
-				[self.mainWindow makeFirstResponder:[self.browserView primaryTabItemView].mainView];
+				[self.mainWindow makeFirstResponder:[self.browser primaryTabItemView].mainView];
 		}
 	}
 }
@@ -1642,7 +1642,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)printDocument:(id)sender
 {
-	[self.browserView.activeTabItemView printDocument:sender];
+	[self.browser.activeTabItemView printDocument:sender];
 }
 
 /* folders
@@ -1692,7 +1692,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)updateCloseCommands
 {
-	if (self.browserView.countOfTabs < 2 || !self.mainWindow.keyWindow)
+	if (self.browser.countOfTabs < 2 || !self.mainWindow.keyWindow)
 	{
 		closeTabItem.keyEquivalent = @"";
 		closeAllTabsItem.keyEquivalent = @"";
@@ -1834,7 +1834,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[self updateSearchPlaceholderAndSearchMethod];
 	
 	// Make sure article viewer is active
-	[self.browserView setActiveTabToPrimaryTab];
+	[self.browser setActiveTabToPrimaryTab];
 
     // If the user selects the unread-articles smart folder, then clear the
     // relevant user notifications.
@@ -1976,12 +1976,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)handleTabChange:(NSNotification *)nc
 {
 	NSView<BaseView> * newView = nc.object;
-	if (newView == [self.browserView primaryTabItemView])
+	if (newView == [self.browser primaryTabItemView])
 	{
 		if (self.selectedArticle == nil)
 			[self.mainWindow makeFirstResponder:self.foldersTree.mainView];
 		else
-			[self.mainWindow makeFirstResponder:[self.browserView primaryTabItemView].mainView];
+			[self.mainWindow makeFirstResponder:[self.browser primaryTabItemView].mainView];
 	}
 	else
 	{
@@ -2144,7 +2144,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)goForward:(id)sender
 {
-	[self.browserView.activeTabItemView handleGoForward:sender];
+	[self.browser.activeTabItemView handleGoForward:sender];
 }
 
 /* goBack
@@ -2153,7 +2153,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)goBack:(id)sender
 {
-	[self.browserView.activeTabItemView handleGoBack:sender];
+	[self.browser.activeTabItemView handleGoBack:sender];
 }
 
 /* localPerformFindPanelAction
@@ -2177,7 +2177,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			break;
 			
 		default:
-			[self.browserView.activeTabItemView performFindPanelAction:[sender tag]];
+			[self.browser.activeTabItemView performFindPanelAction:[sender tag]];
 			break;
 	}
 }
@@ -2203,7 +2203,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 				return NO;
 			else
 			{
-				if (self.mainWindow.firstResponder == [self.browserView primaryTabItemView].mainView)
+				if (self.mainWindow.firstResponder == [self.browser primaryTabItemView].mainView)
 				{
 					[self.mainWindow makeFirstResponder:self.foldersTree.mainView];
 					return YES;
@@ -2218,12 +2218,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			{
 				if (self.mainWindow.firstResponder == self.foldersTree.mainView)
 				{
-					[self.browserView setActiveTabToPrimaryTab];
+					[self.browser setActiveTabToPrimaryTab];
 					if (self.selectedArticle == nil)
 					{
 						[self.articleController ensureSelectedArticle];
 					}
-					[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [self.browserView primaryTabItemView].mainView : self.foldersTree.mainView];
+					[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [self.browser primaryTabItemView].mainView : self.foldersTree.mainView];
 					return YES;
 				}
 			}
@@ -2324,7 +2324,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			
 		case ' ': //SPACE
 		{
-			WebView * view = self.browserView.activeTabItemView.webView;
+			WebView * view = self.browser.activeTabItemView.webView;
 			NSView * theView = view.mainFrame.frameView.documentView;
 			
 			if (theView == nil)
@@ -2408,7 +2408,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	Folder * folder = [db folderFromFeedURL:url];
 	if (folder != nil)
 	{
-		//[self.browserView setActiveTabToPrimaryTab];
+		//[self.browser setActiveTabToPrimaryTab];
 		//[self.foldersTree selectFolder:[folder itemId]];
 		return;
 	}
@@ -2445,7 +2445,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	Folder * folder = [db folderFromFeedURL:urlString];
 	if (folder != nil)
 	{
-		[self.browserView setActiveTabToPrimaryTab];
+		[self.browser setActiveTabToPrimaryTab];
 		[self.foldersTree selectFolder:folder.itemId];
 		return;
 	}
@@ -2580,15 +2580,15 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)viewFirstUnread:(id)sender
 {
-	[self.browserView setActiveTabToPrimaryTab];
+	[self.browser setActiveTabToPrimaryTab];
 	if (db.countOfUnread > 0)
 	{
-		[self.mainWindow makeFirstResponder:[self.browserView primaryTabItemView].mainView];
+		[self.mainWindow makeFirstResponder:[self.browser primaryTabItemView].mainView];
 		[self.articleController displayFirstUnread];
 	}
 	else
 	{
-		[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [self.browserView primaryTabItemView].mainView : self.foldersTree.mainView];
+		[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [self.browser primaryTabItemView].mainView : self.foldersTree.mainView];
 	}
 }
 
@@ -2597,15 +2597,15 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)viewNextUnread:(id)sender
 {
-	[self.browserView setActiveTabToPrimaryTab];
+	[self.browser setActiveTabToPrimaryTab];
 	if (db.countOfUnread > 0)
 	{
-		[self.mainWindow makeFirstResponder:[self.browserView primaryTabItemView].mainView];
+		[self.mainWindow makeFirstResponder:[self.browser primaryTabItemView].mainView];
 		[self.articleController displayNextUnread];
 	}
 	else
 	{
-		[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [self.browserView primaryTabItemView].mainView : self.foldersTree.mainView];
+		[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? [self.browser primaryTabItemView].mainView : self.foldersTree.mainView];
 	}
 }
 
@@ -2952,7 +2952,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)viewArticlesTab:(id)sender
 {
-	[self.browserView showArticlesTab];
+	[self.browser showArticlesTab];
 }
 
 /* previousTab
@@ -2960,7 +2960,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)previousTab:(id)sender
 {
-	[self.browserView showPreviousTab];
+	[self.browser showPreviousTab];
 }
 
 /* nextTab
@@ -2968,7 +2968,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)nextTab:(id)sender
 {
-	[self.browserView showNextTab];
+	[self.browser showNextTab];
 }
 
 /* closeAllTabs
@@ -2976,7 +2976,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)closeAllTabs:(id)sender
 {
-	[self.browserView closeAllTabs];
+	[self.browser closeAllTabs];
 }
 
 /* closeTab
@@ -2984,7 +2984,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)closeTab:(id)sender
 {
-	[self.browserView closeTab:self.browserView.activeTab];
+	[self.browser closeTab:self.browser.activeTab];
 }
 
 /* reloadPage
@@ -2992,7 +2992,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)reloadPage:(id)sender
 {
-	NSView<BaseView> * theView = self.browserView.activeTabItemView;
+	NSView<BaseView> * theView = self.browser.activeTabItemView;
 	if ([theView isKindOfClass:[BrowserPane class]])
 		[theView performSelector:@selector(handleReload:)];
 }
@@ -3002,7 +3002,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)stopReloadingPage:(id)sender
 {
-	NSView<BaseView> * theView = self.browserView.activeTabItemView;
+	NSView<BaseView> * theView = self.browser.activeTabItemView;
 	if ([theView isKindOfClass:[BrowserPane class]])
 		[theView performSelector:@selector(handleStopLoading:)];
 }
@@ -3040,7 +3040,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 -(void)updateStatusBarFilterButtonVisibility
 {
-	NSView<BaseView> * theView = self.browserView.activeTabItemView;
+	NSView<BaseView> * theView = self.browser.activeTabItemView;
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
         self.mainWindowController.filterAreaIsHidden = YES;
@@ -3058,7 +3058,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)updateSearchPlaceholderAndSearchMethod
 {
-	NSView<BaseView> * theView = self.browserView.activeTabItemView;
+	NSView<BaseView> * theView = self.browser.activeTabItemView;
 	Preferences * prefs = [Preferences standardPreferences];
 	
 	// START of rather verbose implementation of switching between "Search all articles" and "Search current web page".
@@ -3174,7 +3174,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)searchUsingFilterField:(id)sender
 {
-	[self.browserView.activeTabItemView performFindPanelAction:NSFindPanelActionNext];
+	[self.browser.activeTabItemView performFindPanelAction:NSFindPanelActionNext];
 }
 
 - (IBAction)searchUsingTreeFilter:(NSSearchField* )field
@@ -3215,7 +3215,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)performWebSearch:(SearchMethod *)searchMethod
 {
-	[self.browserView createAndLoadNewTab:[searchMethod queryURLforSearchString:searchString] inBackground:NO];
+	[self.browser createAndLoadNewTab:[searchMethod queryURLforSearchString:searchString] inBackground:NO];
 }
 
 /* performWebPageSearch
@@ -3223,7 +3223,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)performWebPageSearch
 {
-	NSView<BaseView> * theView = self.browserView.activeTabItemView;
+	NSView<BaseView> * theView = self.browser.activeTabItemView;
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
 		[self setFocusToSearchField:self];
@@ -3331,13 +3331,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	Article * currentArticle;
 	
 	// If the active tab is a web view, mail the URL ...
-	NSView<BaseView> * theView = self.browserView.activeTabItemView;
+	NSView<BaseView> * theView = self.browser.activeTabItemView;
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
 		NSString * viewLink = theView.viewLink;
 		if (viewLink != nil)
 		{
-			title = percentEscape([self.browserView tabItemViewTitle:theView]);
+			title = percentEscape([self.browser tabItemViewTitle:theView]);
 			link = percentEscape(viewLink);
 			mailtoLink = [NSMutableString stringWithFormat:@"mailto:?subject=%@&body=%@", title, link];
 		}
@@ -3378,7 +3378,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)makeTextSmaller:(id)sender
 {
-	NSView<BaseView> * activeView = self.browserView.activeTabItemView;
+	NSView<BaseView> * activeView = self.browser.activeTabItemView;
 	[activeView.webView makeTextSmaller:sender];
 }
 
@@ -3388,7 +3388,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)makeTextLarger:(id)sender
 {
-	NSView<BaseView> * activeView = self.browserView.activeTabItemView;
+	NSView<BaseView> * activeView = self.browser.activeTabItemView;
 	[activeView.webView makeTextLarger:sender];
 }
 
@@ -3410,9 +3410,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	
 	// If the active tab is a web view, blog the URL
-	NSView<BaseView> * theView = self.browserView.activeTabItemView;
+	NSView<BaseView> * theView = self.browser.activeTabItemView;
     if ([theView isKindOfClass:[BrowserPane class]]) {
-		[self sendBlogEvent:externalEditorBundleIdentifier title:[self.browserView tabItemViewTitle:self.browserView.activeTabItemView] url:theView.viewLink body:APP.currentTextSelection author:@"" guid:@""];
+		[self sendBlogEvent:externalEditorBundleIdentifier title:[self.browser tabItemViewTitle:self.browser.activeTabItemView] url:theView.viewLink body:APP.currentTextSelection author:@"" guid:@""];
     } else {
 		// Get the currently selected articles from the ArticleView and iterate over them.
         for (Article * currentArticle in self.articleController.markedArticleRange) {
@@ -3472,7 +3472,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(BOOL)validateCommonToolbarAndMenuItems:(SEL)theAction validateFlag:(BOOL *)validateFlag
 {
 	BOOL isMainWindowVisible = self.mainWindow.visible;
-	BOOL isAnyArticleView = self.browserView.activeTabItemView == [self.browserView primaryTabItemView];
+	BOOL isAnyArticleView = self.browser.activeTabItemView == [self.browser primaryTabItemView];
 	
 	*validateFlag = NO;
     
@@ -3531,8 +3531,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	if (theAction == @selector(goBack:))
 	{
         // TODO: Make this work without the protocol check.
-        if ([self.browserView.activeTabItemView conformsToProtocol:@protocol(BaseView)]) {
-            *validateFlag = self.browserView.activeTabItemView.canGoBack && isMainWindowVisible;
+        if ([self.browser.activeTabItemView conformsToProtocol:@protocol(BaseView)]) {
+            *validateFlag = self.browser.activeTabItemView.canGoBack && isMainWindowVisible;
         } else {
             *validateFlag = NO;
         }
@@ -3540,7 +3540,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	if (theAction == @selector(mailLinkToArticlePage:))
 	{
-		NSView<BaseView> * theView = self.browserView.activeTabItemView;
+		NSView<BaseView> * theView = self.browser.activeTabItemView;
 		Article * thisArticle = self.selectedArticle;
 		
 		if ([theView isKindOfClass:[BrowserPane class]])
@@ -3579,8 +3579,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	SEL	theAction = menuItem.action;
 	BOOL isMainWindowVisible = self.mainWindow.visible;
-	BOOL isAnyArticleView = self.browserView.activeTabItemView == [self.browserView primaryTabItemView];
-	BOOL isArticleView = self.browserView.activeTabItemView == self.articleController.mainArticleView;
+	BOOL isAnyArticleView = self.browser.activeTabItemView == [self.browser primaryTabItemView];
+	BOOL isArticleView = self.browser.activeTabItemView == self.articleController.mainArticleView;
 	BOOL flag;
 	
 	if ([self validateCommonToolbarAndMenuItems:theAction validateFlag:&flag])
@@ -3597,13 +3597,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 		else
 		{
-			NSView<BaseView> * theView = self.browserView.activeTabItemView;
+			NSView<BaseView> * theView = self.browser.activeTabItemView;
 			return theView != nil && [theView isKindOfClass:[BrowserPane class]] && !((BrowserPane *)theView).loading;
 		}
 	}
 	else if (theAction == @selector(goForward:))
 	{
-		return self.browserView.activeTabItemView.canGoForward && isMainWindowVisible;
+		return self.browser.activeTabItemView.canGoForward && isMainWindowVisible;
 	}
 	else if (theAction == @selector(newGroupFolder:))
 	{
@@ -3619,11 +3619,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else if (theAction == @selector(makeTextLarger:))
 	{
-		return self.browserView.activeTabItemView.webView.canMakeTextLarger && isMainWindowVisible;
+		return self.browser.activeTabItemView.webView.canMakeTextLarger && isMainWindowVisible;
 	}
 	else if (theAction == @selector(makeTextSmaller:))
 	{
-		return self.browserView.activeTabItemView.webView.canMakeTextSmaller && isMainWindowVisible;
+		return self.browser.activeTabItemView.webView.canMakeTextSmaller && isMainWindowVisible;
 	}
 	else if (theAction == @selector(doViewColumn:))
 	{
@@ -3761,11 +3761,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else if (theAction == @selector(previousTab:))
 	{
-		return isMainWindowVisible && self.browserView.countOfTabs > 1;
+		return isMainWindowVisible && self.browser.countOfTabs > 1;
 	}
 	else if (theAction == @selector(nextTab:))
 	{
-		return isMainWindowVisible && self.browserView.countOfTabs > 1;
+		return isMainWindowVisible && self.browser.countOfTabs > 1;
 	}
 	else if (theAction == @selector(closeTab:))
 	{
@@ -3773,16 +3773,16 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else if (theAction == @selector(closeAllTabs:))
 	{
-		return isMainWindowVisible && self.browserView.countOfTabs > 1;
+		return isMainWindowVisible && self.browser.countOfTabs > 1;
 	}
 	else if (theAction == @selector(reloadPage:))
 	{
-		NSView<BaseView> * theView = self.browserView.activeTabItemView;
+		NSView<BaseView> * theView = self.browser.activeTabItemView;
 		return ([theView isKindOfClass:[BrowserPane class]]) && !((BrowserPane *)theView).loading;
 	}
 	else if (theAction == @selector(stopReloadingPage:))
 	{
-		NSView<BaseView> * theView = self.browserView.activeTabItemView;
+		NSView<BaseView> * theView = self.browser.activeTabItemView;
 		return ([theView isKindOfClass:[BrowserPane class]]) && ((BrowserPane *)theView).loading;
 	}
 	else if (theAction == @selector(keepFoldersArranged:))

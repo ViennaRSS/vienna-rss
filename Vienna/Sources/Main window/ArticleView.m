@@ -24,7 +24,7 @@
 #import "Preferences.h"
 #import "HelperFunctions.h"
 #import "StringExtensions.h"
-#import "BrowserView.h"
+#import "Browser.h"
 #import "Article.h"
 
 @interface ArticleView ()
@@ -351,7 +351,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 {
 	NSInteger navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] integerValue];
 	if ((navType == WebNavigationTypeLinkClicked) && ([Preferences standardPreferences].openLinksInBackground || ![Preferences standardPreferences].openLinksInVienna))
-		[NSApp.mainWindow makeFirstResponder:[APPCONTROLLER.browserView primaryTabItemView].mainView];
+		[NSApp.mainWindow makeFirstResponder:[APPCONTROLLER.browser primaryTabItemView].mainView];
 	
 	[super webView:sender decidePolicyForNewWindowAction:actionInformation request:request newFrameName:frameName decisionListener:listener];
 }
@@ -375,7 +375,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 	
 	NSInteger navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] integerValue];
 	if ((navType == WebNavigationTypeLinkClicked) && ([Preferences standardPreferences].openLinksInBackground || ![Preferences standardPreferences].openLinksInVienna))
-		[NSApp.mainWindow makeFirstResponder:[APPCONTROLLER.browserView primaryTabItemView].mainView];
+		[NSApp.mainWindow makeFirstResponder:[APPCONTROLLER.browser primaryTabItemView].mainView];
 	
 	[super webView:sender decidePolicyForNavigationAction:actionInformation request:request frame:frame decisionListener:listener];
 }	
