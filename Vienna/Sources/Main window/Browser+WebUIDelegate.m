@@ -139,8 +139,8 @@
  */
 -(void)webViewClose:(WebView *)sender {
 	NSView *activeView = self.activeTab.view;
-	if (!([activeView isKindOfClass:BrowserPane.class]
-		  && ((BrowserPane *)activeView).webView == sender)) {
+	if ([activeView isKindOfClass:BrowserPane.class]
+		  && ((BrowserPane *)activeView).webView == sender) {
 		[self closeTab:self.activeTab];
 	}
 }
