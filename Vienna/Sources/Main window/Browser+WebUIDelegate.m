@@ -134,4 +134,15 @@
     return defaultMenuItems;
 }
 
+/* webViewClose
+ * closes the tab on a javascript request (only if it is in foreground though)
+ */
+-(void)webViewClose:(WebView *)sender {
+	NSView *activeView = self.activeTab.view;
+	if (!([activeView isKindOfClass:BrowserPane.class]
+		  && ((BrowserPane *)activeView).webView == sender)) {
+		[self closeTab:self.activeTab];
+	}
+}
+
 @end
