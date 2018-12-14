@@ -8,6 +8,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.5.2
+-----
+- Fix behavior when a Javascript attemps to close a tab
+- Refactor browser pane / browser dependency
+- Update Sparkle to 1.21.1
+
 3.5.1
 -----
 - Add ‘Open With’ submenu to contextual menu for items in Downloads window
