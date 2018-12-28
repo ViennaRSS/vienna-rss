@@ -74,23 +74,27 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>Web site URL</string>
+			<string>Feed URL</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>feed</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Website URL</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>http</string>
 				<string>https</string>
 			</array>
-		</dict>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>RSS Feed URL</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>feed</string>
-			</array>
-			<key>LSIsAppleDefaultForScheme</key>
-			<true/>
+			<key>LSHandlerRank</key>
+			<string>None</string>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
