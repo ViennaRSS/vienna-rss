@@ -370,7 +370,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagArticleEnclosureFilename
 {
-    return [self.enclosure.lastPathComponent stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    return [self.enclosure.lastPathComponent stringByRemovingPercentEncoding];
 }
 
 /* tagFeedTitle

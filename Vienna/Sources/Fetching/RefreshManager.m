@@ -553,7 +553,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         // hack for handling file:// URLs
         if (url.fileURL) {
             NSFileManager *fileManager = [NSFileManager defaultManager];
-            NSString * filePath = [url.path stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSString * filePath = [url.path stringByRemovingPercentEncoding];
             BOOL isDirectory = NO;
             if ([fileManager fileExistsAtPath:filePath isDirectory:&isDirectory] && !isDirectory) {
                 responseStatusCode = 200;
