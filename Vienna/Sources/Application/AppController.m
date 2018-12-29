@@ -1492,8 +1492,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	// Insert the Scripts menu to the left of the Help menu only if
 	// we actually have any scripts.
 	if (count > 0) {
-		NSMenu * scriptsMenu = [[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@""];
-		
+        NSMenu *scriptsMenu = [[NSMenu alloc] initWithTitle:@""];
+
 		NSInteger index;
 		for (index = 0; index < count; ++index)
 		{
@@ -1519,7 +1519,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			[NSApp.mainMenu removeItem:scriptsMenuItem];
 		}
 		
-		scriptsMenuItem = [[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:@"" action:NULL keyEquivalent:@""];
+        scriptsMenuItem = [[NSMenuItem alloc] initWithTitle:@"" action:NULL keyEquivalent:@""];
 		scriptsMenuItem.image = [NSImage imageNamed:@"ScriptsTemplate"];
 		
 		NSInteger helpMenuIndex = NSApp.mainMenu.numberOfItems - 1;
