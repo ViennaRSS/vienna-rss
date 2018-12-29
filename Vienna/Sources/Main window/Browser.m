@@ -362,13 +362,13 @@
 
 - (NSDragOperation)tabView:(NSTabView *)aTabView validateDrop:(id <NSDraggingInfo>)sender proposedItem:(NSTabViewItem *)tabViewItem proposedIndex:(NSUInteger)proposedIndex inTabBarView:(MMTabBarView *)tabBarView
 {
-	return proposedIndex == 0 ? NSDragOperationNone : NSDragOperationAll;
+	return proposedIndex == 0 ? NSDragOperationNone : NSDragOperationEvery;
 }
 
 - (NSDragOperation)tabView:(NSTabView *)aTabView validateSlideOfProposedItem:(NSTabViewItem *)tabViewItem proposedIndex:(NSUInteger)proposedIndex inTabBarView:(MMTabBarView *)tabBarView
 {
 	//Do not slide past Articles tab (primary tab at index 0)
-	return proposedIndex == 0 ? NSDragOperationNone : NSDragOperationAll;
+	return proposedIndex == 0 ? NSDragOperationNone : NSDragOperationEvery;
 }
 
 
