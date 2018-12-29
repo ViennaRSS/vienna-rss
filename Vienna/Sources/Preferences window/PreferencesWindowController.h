@@ -22,4 +22,6 @@
 
 @interface PreferencesWindowController : MASPreferencesWindowController
 
+- (instancetype)init;
+
 @end
