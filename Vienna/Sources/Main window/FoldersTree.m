@@ -915,10 +915,10 @@
 	return [node childByIndex:index];
 }
 
-/* tooltipForItem [dataSource]
+/* outlineView:tooltipForCell:rect:tableColumn:item:mouseLocation: [delegate]
  * For items that have counts, we show a tooltip that aggregates the counts.
  */
--(NSString *)outlineView:(FolderView *)outlineView tooltipForItem:(id)item
+- (NSString *)outlineView:(NSOutlineView *)outlineView toolTipForCell:(NSCell *)cell rect:(NSRectPointer)rect tableColumn:(NSTableColumn *)tableColumn item:(id)item mouseLocation:(NSPoint)mouseLocation
 {
 	TreeNode * node = (TreeNode *)item;
 	if (node != nil)

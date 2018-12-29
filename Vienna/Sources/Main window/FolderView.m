@@ -89,7 +89,6 @@
 -(void)setEnableTooltips:(BOOL)flag
 {
 	useTooltips = flag;
-	[self buildTooltips];
 }
 
 /* keyDown
@@ -107,75 +106,24 @@
 	[super keyDown:theEvent];
 }
 
-/* buildTooltips
- * Create the tooltip rectangles each time the control contents change.
- */
--(void)buildTooltips
-{
-	NSRange range;
-	NSUInteger  index;
-
-	[self removeAllToolTips];
-
-	// If not using tooltips or the data source doesn't implement tooltipForItem,
-	// then exit now.
-	if (!useTooltips || ![_dataSource respondsToSelector:@selector(outlineView:tooltipForItem:)])
-		return;
-
-	range = [self rowsInRect:self.visibleRect];
-	for (index = range.location; index < NSMaxRange(range); index++)
-	{
-		NSString *tooltip;
-		id item;
-
-		item = [self itemAtRow:index];
-		tooltip = [_dataSource outlineView:self tooltipForItem:item];
-		if (tooltip)
-			[self addToolTipRect:[self rectOfRow:index] owner:self userData:NULL];
-	}
-}
-
-/* stringForToolTip [delegate]
- * Callback function from the view to request the actual tooltip string.
- */
--(NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(void *)data
-{
-	NSInteger row;
-
-	row = [self rowAtPoint:point];
-	return [_dataSource outlineView:self tooltipForItem:[self itemAtRow:row]];
-}
-
-/* resetCursorRects
- * Called when the view scrolls. All the tooltip rectangles need to be recomputed.
- */
--(void)resetCursorRects
-{
-	[self buildTooltips];
-}
-
 /* setDataSource
- * Called when the data source changes. Since we rely on the data source to provide the
- * tooltip strings, we have to rebuild the tooltips using the new source.
+ * Called when the data source changes.
  */
 -(void)setDataSource:(id)aSource
 {
     _directDataSource = aSource;
     _filterDataSource = [[FoldersFilterableDataSourceImpl alloc] initWithDataSource:aSource];
        super.dataSource = aSource;
-	[self buildTooltips];
 }
 
 /* reloadData
- * Called when the user reloads the view data. Again, the tooltips need to be recomputed
- * using the new data.
+ * Called when the user reloads the view data.
  */
 -(void)reloadData
 {
     if (_filterDataSource && _filterPredicate)
         [_filterDataSource reloadData:self];
 	[super reloadData];
-	[self buildTooltips];
 }
 
 - (NSPredicate*)filterPredicate {
@@ -219,7 +167,6 @@
 -(void)noteNumberOfRowsChanged
 {
 	[super noteNumberOfRowsChanged];
-	[self buildTooltips];
 }
 
 /* outlineViewItemDidExpand
@@ -228,9 +175,6 @@
  */
 -(void)outlineViewItemDidExpand:(NSNotification *)notification
 {
-	// Rebuild the tooltips if required.
-	if (useTooltips  == YES)
-		[self buildTooltips];
 }
 
 /* outlineViewItemDidCollapse
@@ -239,10 +183,6 @@
  */
 -(void)outlineViewItemDidCollapse:(NSNotification *)notification
 {
-	// Rebuild the tooltips if required.
-	if (useTooltips  == YES)
-		[self buildTooltips];
-	
 	// Have the collapsed item remove any progress indicators.
 	TreeNode * collapsedItem = notification.userInfo[@"NSObject"];
 	[collapsedItem stopAndReleaseProgressIndicator];
