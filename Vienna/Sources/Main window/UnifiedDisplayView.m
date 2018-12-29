@@ -137,7 +137,7 @@
 	// Set the target for copy, drag...
     articleList.delegate = self;
     articleList.dataSource = self;
-    [articleList accessibilitySetOverrideValue:NSLocalizedString(@"Articles", nil) forAttribute:NSAccessibilityDescriptionAttribute];
+    articleList.accessibilityValueDescription = NSLocalizedString(@"Articles", nil);
 
     [NSUserDefaults.standardUserDefaults addObserver:self
                                           forKeyPath:MAPref_ShowStatusBar

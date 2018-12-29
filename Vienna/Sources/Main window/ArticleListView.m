@@ -359,7 +359,7 @@
     articleList.delegate = self;
     articleList.dataSource = self;
 	articleList.target = self;
-    [articleList accessibilitySetOverrideValue:NSLocalizedString(@"Articles", nil) forAttribute:NSAccessibilityDescriptionAttribute];
+    articleList.accessibilityValueDescription = NSLocalizedString(@"Articles", nil);
 }
 
 /* singleClickRow

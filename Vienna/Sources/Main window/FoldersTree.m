@@ -126,7 +126,7 @@
 	// Make sure selected row is visible
 	[self.outlineView scrollRowToVisible:self.outlineView.selectedRow];
 
-    [self.outlineView accessibilitySetOverrideValue:NSLocalizedString(@"Folders", nil) forAttribute:NSAccessibilityDescriptionAttribute];
+    self.outlineView.accessibilityValueDescription = NSLocalizedString(@"Folders", nil);
 
 	// Want tooltips
 	self.useToolTips = YES;
