@@ -925,8 +925,15 @@
 	{
 		if (node.folder.nonPersistedFlags & VNAFolderFlagError)
 			return NSLocalizedString(@"An error occurred when this feed was last refreshed", nil);
-		if (node.folder.childUnreadCount)
-			return [NSString stringWithFormat:NSLocalizedString(@"%d unread articles", nil), node.folder.childUnreadCount];
+		NSInteger unreadCount;
+		if (node.folder.childUnreadCount) {
+		    unreadCount = node.folder.childUnreadCount;
+		} else {
+		    unreadCount = node.folder.unreadCount;
+		}
+		if (unreadCount) {
+			return [NSString stringWithFormat:NSLocalizedString(@"%d unread articles", nil), unreadCount];
+		}
 	}
 	return nil;
 }
