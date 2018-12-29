@@ -8,4 +8,4 @@ github "shpakovski/MASPreferences" ~> 1.3
 github "ViennaRSS/MMTabBarView" ~> 1.4
 
 # Sparkle
-github "sparkle-project/Sparkle" ~> 1.19
+github "sparkle-project/Sparkle" ~> 1.21
