@@ -33,9 +33,11 @@ static NSString *const SUUpdateAlertTouchBarIndentifier = @"" SPARKLE_BUNDLE_IDE
 @end
 @protocol WebPolicyDelegate <NSObject>
 @end
+@protocol WebUIDelegate <NSObject>
+@end
 #endif
 
-@interface SUUpdateAlert () <WebFrameLoadDelegate, WebPolicyDelegate, NSTouchBarDelegate>
+@interface SUUpdateAlert () <WebFrameLoadDelegate, WebPolicyDelegate, WebUIDelegate, NSTouchBarDelegate>
 
 @property (strong) SUAppcastItem *updateItem;
 @property (strong) SUHost *host;
@@ -91,6 +93,21 @@ static NSString *const SUUpdateAlertTouchBarIndentifier = @"" SPARKLE_BUNDLE_IDE
     return self;
 }
 
+- (void)dealloc {
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
+    if (@available(macOS 10.14, *))
+    {
+        [self.window removeObserver:self forKeyPath:@"effectiveAppearance"];
+    }
+#endif
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(__attribute__((unused)) NSDictionary<NSKeyValueChangeKey,id> *)change context:(__attribute__((unused)) void *)context {
+    if (object == self.window && [keyPath isEqualToString:@"effectiveAppearance"]) {
+        [self adaptReleaseNotesAppearance];
+    }
+}
+
 - (NSString *)description { return [NSString stringWithFormat:@"%@ <%@>", [self class], [self.host bundlePath]]; }
 
 - (void)disableKeyboardShortcutForInstallButton {
@@ -100,8 +117,9 @@ static NSString *const SUUpdateAlertTouchBarIndentifier = @"" SPARKLE_BUNDLE_IDE
 - (void)endWithSelection:(SUUpdateAlertChoice)choice
 {
     [self.releaseNotesView stopLoading:self];
-    [self.releaseNotesView setFrameLoadDelegate:nil];
-    [self.releaseNotesView setPolicyDelegate:nil];
+    self.releaseNotesView.frameLoadDelegate = nil;
+    self.releaseNotesView.policyDelegate = nil;
+    self.releaseNotesView.UIDelegate = nil;
     [self.releaseNotesView removeFromSuperview]; // Otherwise it gets sent Esc presses (why?!) and gets very confused.
     [self close];
     self.completionBlock(choice);
@@ -137,12 +155,29 @@ static NSString *const SUUpdateAlertTouchBarIndentifier = @"" SPARKLE_BUNDLE_IDE
     prefs.javaScriptEnabled = [self.host boolForInfoDictionaryKey:SUEnableJavaScriptKey];
     self.releaseNotesView.frameLoadDelegate = self;
     self.releaseNotesView.policyDelegate = self;
+    self.releaseNotesView.UIDelegate = self;
     
     // Set the default font
     // "-apple-system-font" is a reference to the system UI font. "-apple-system" is the new recommended token, but for backward compatibility we can't use it.
     prefs.standardFontFamily = @"-apple-system-font";
     prefs.defaultFontSize = (int)[NSFont systemFontSize];
 
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
+    if (@available(macOS 10.14, *))
+    {
+        NSBox *darkBackgroundView = [[NSBox alloc] initWithFrame:self.releaseNotesView.frame];
+        darkBackgroundView.boxType = NSBoxCustom;
+        darkBackgroundView.fillColor = [NSColor textBackgroundColor];
+        darkBackgroundView.borderColor = [NSColor clearColor];
+        // Using auto-resizing mask instead of contraints works well enough
+        darkBackgroundView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+        [self.releaseNotesView.superview addSubview:darkBackgroundView positioned:NSWindowBelow relativeTo:self.releaseNotesView];
+        self.releaseNotesView.drawsBackground = NO;
+
+        prefs.userStyleSheetLocation = [[NSBundle bundleForClass:[self class]] URLForResource:@"DarkAqua" withExtension:@"css"];
+        [self.window addObserver:self forKeyPath:@"effectiveAppearance" options:NSKeyValueObservingOptionInitial context:nil];
+    }
+#endif
     // Stick a nice big spinner in the middle of the web view until the page is loaded.
     NSRect frame = [[self.releaseNotesView superview] frame];
     self.releaseNotesSpinner = [[NSProgressIndicator alloc] initWithFrame:NSMakeRect(NSMidX(frame) - 16, NSMidY(frame) - 16, 32, 32)];
@@ -261,6 +296,18 @@ static NSString *const SUUpdateAlertTouchBarIndentifier = @"" SPARKLE_BUNDLE_IDE
         finalString = [NSString stringWithFormat:SULocalizedString(@"%@ %@ is now available--you have %@. Would you like to download it now?", @"Description text for SUUpdateAlert when the update is downloadable."), self.host.name, updateItemVersion, hostVersion];
     }
     return finalString;
+}
+
+- (void)adaptReleaseNotesAppearance
+{
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
+    if (@available(macOS 10.14, *))
+    {
+        NSAppearanceName bestAppearance = [self.window.effectiveAppearance bestMatchFromAppearancesWithNames:@[NSAppearanceNameAqua, NSAppearanceNameDarkAqua]];
+        BOOL isDarkAqua = ([bestAppearance isEqualToString:NSAppearanceNameDarkAqua]);
+        self.releaseNotesView.preferences.userStyleSheetEnabled = isDarkAqua;
+    }
+#endif
 }
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
