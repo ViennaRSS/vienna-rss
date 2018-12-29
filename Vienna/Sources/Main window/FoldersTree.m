@@ -45,6 +45,7 @@
 @property (nonatomic) NSImage *refreshProgressImage;
 @property (nonatomic) BOOL blockSelectionHandler;
 @property (nonatomic) BOOL canRenameFolders;
+@property (nonatomic) BOOL useToolTips;
 
 -(void)setFolderListFont;
 -(void)unarchiveState:(NSArray *)stateArray;
@@ -78,6 +79,7 @@
 		_rootNode = [[TreeNode alloc] init:nil atIndex:0 folder:nil canHaveChildren:YES];
 		_blockSelectionHandler = NO;
 		_canRenameFolders = NO;
+		_useToolTips = NO;
 	}
 
 	return self;
@@ -127,7 +129,7 @@
     [self.outlineView accessibilitySetOverrideValue:NSLocalizedString(@"Folders", nil) forAttribute:NSAccessibilityDescriptionAttribute];
 
 	// Want tooltips
-	[self.outlineView setEnableTooltips:YES];
+	self.useToolTips = YES;
 	
 	// Set the menu for the popup button
 	self.outlineView.menu = self.folderMenu;
@@ -921,7 +923,7 @@
 - (NSString *)outlineView:(NSOutlineView *)outlineView toolTipForCell:(NSCell *)cell rect:(NSRectPointer)rect tableColumn:(NSTableColumn *)tableColumn item:(id)item mouseLocation:(NSPoint)mouseLocation
 {
 	TreeNode * node = (TreeNode *)item;
-	if (node != nil)
+	if (self.useToolTips && node != nil)
 	{
 		if (node.folder.nonPersistedFlags & VNAFolderFlagError)
 			return NSLocalizedString(@"An error occurred when this feed was last refreshed", nil);

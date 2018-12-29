@@ -39,16 +39,6 @@
     id _directDataSource;
 }
 
-/* init
- * Our initialisation.
- */
--(instancetype)init
-{
-	if ((self = [super init]) != nil)
-		useTooltips = NO;
-	return self;
-}
-
 /* awakeFromNib
  * Our init.
  */
@@ -81,14 +71,6 @@
         default:
             return NSDragOperationCopy;
     }
-}
-
-/* setEnableTooltips
- * Sets whether or not the outline view uses tooltips.
- */
--(void)setEnableTooltips:(BOOL)flag
-{
-	useTooltips = flag;
 }
 
 /* keyDown

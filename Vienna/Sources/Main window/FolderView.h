@@ -21,11 +21,9 @@
 @import Cocoa;
 
 @interface FolderView : NSOutlineView {
-	BOOL useTooltips;
 	NSString * backupString;
 }
 
--(void)setEnableTooltips:(BOOL)flag;
 -(void)keyDown:(NSEvent *)theEvent;
 -(void)prvtResizeTheFieldEditor;
 
