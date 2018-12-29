@@ -963,17 +963,9 @@
 	Folder * folder = node.folder;
     NSMutableDictionary * myInfo = [NSMutableDictionary dictionaryWithDictionary:info];
     if (folder.isUnsubscribed) {
-        if (@available(macOS 10.10, *)) {
-            myInfo[NSForegroundColorAttributeName] = NSColor.secondaryLabelColor;
-        } else {
-            myInfo[NSForegroundColorAttributeName] = NSColor.disabledControlTextColor;
-        }
+        myInfo[NSForegroundColorAttributeName] = NSColor.secondaryLabelColor;
     } else {
-		if (@available(macOS 10.10, *)) {
-			myInfo[NSForegroundColorAttributeName] = NSColor.labelColor;
-		} else {
-			myInfo[NSForegroundColorAttributeName] = NSColor.controlTextColor;
-		}
+		myInfo[NSForegroundColorAttributeName] = NSColor.labelColor;
     }
 	// Set the font
 	if (folder.unreadCount ||  (folder.childUnreadCount && ![olv isItemExpanded:item]))

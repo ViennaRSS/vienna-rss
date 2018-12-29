@@ -39,13 +39,6 @@ final class MainWindowController: NSWindowController {
         // TODO: Move this to windowDidLoad()
         statusBarState(disclosed: Preferences.standard().showStatusBar, animate: false)
 
-        if #available(OSX 10.10, *) {
-            // Leave the default
-        } else {
-            statusLabel.cell?.backgroundStyle = .raised
-            filterLabel.cell?.backgroundStyle = .raised
-        }
-
         let filterMenu = (NSApp as? ViennaApp)?.filterMenu
         let filterMode = Preferences.standard().filterMode
         if let menuTitle = filterMenu?.item(withTag: filterMode)?.title {

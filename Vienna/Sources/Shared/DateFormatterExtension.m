@@ -22,7 +22,7 @@
 @implementation NSDateFormatter (RelativeDateFormatter)
 
 + (NSDateFormatter *)relativeDateFormatter {
-    static NSDateFormatter *_relativeDateFormatter = nil;
+    static NSDateFormatter *_relativeDateFormatter;
     static dispatch_once_t onceToken;
 
     dispatch_once(&onceToken, ^{
@@ -30,10 +30,7 @@
         _relativeDateFormatter.doesRelativeDateFormatting = YES;
         _relativeDateFormatter.dateStyle = NSDateFormatterShortStyle;
         _relativeDateFormatter.timeStyle = NSDateFormatterShortStyle;
-
-        if (@available(macOS 10.10, *)) {
-            _relativeDateFormatter.formattingContext = NSFormattingContextDynamic;
-        }
+        _relativeDateFormatter.formattingContext = NSFormattingContextDynamic;
     });
 
     return _relativeDateFormatter;

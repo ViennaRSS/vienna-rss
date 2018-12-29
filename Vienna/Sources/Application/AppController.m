@@ -423,11 +423,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	
 	// Set the placeholder string for the global search field
 	SearchMethod * currentSearchMethod = [Preferences standardPreferences].searchMethod;
-    if (@available(macOS 10.10, *)) {
-        self.toolbarSearchField.placeholderString = currentSearchMethod.friendlyName;
-    } else {
-        ((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = currentSearchMethod.friendlyName;
-    }
+    self.toolbarSearchField.placeholderString = currentSearchMethod.friendlyName;
 	
 	// Add Scripts menu if we have any scripts
 	if (!hasOSScriptsMenu())
@@ -3070,11 +3066,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			for (NSMenuItem * menuItem in ((NSSearchFieldCell *)self.toolbarSearchField.cell).searchMenuTemplate.itemArray)
 			{
 				if ([[menuItem.representedObject friendlyName] isEqualToString:[SearchMethod searchCurrentWebPageMethod].friendlyName]) {
-                    if (@available(macOS 10.10, *)) {
-                        self.toolbarSearchField.placeholderString = [SearchMethod searchCurrentWebPageMethod].friendlyName;
-                    } else {
-                        ((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = [SearchMethod searchCurrentWebPageMethod].friendlyName;
-                    }
+                    self.toolbarSearchField.placeholderString = [SearchMethod searchCurrentWebPageMethod].friendlyName;
 					[Preferences standardPreferences].searchMethod = menuItem.representedObject;
 				}
 			}
@@ -3088,20 +3080,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			for (NSMenuItem * menuItem in ((NSSearchFieldCell *)self.toolbarSearchField.cell).searchMenuTemplate.itemArray)
 			{
 				if ([[menuItem.representedObject friendlyName] isEqualToString:[SearchMethod searchAllArticlesMethod].friendlyName]) {
-                    if (@available(macOS 10.10, *)) {
-                        self.toolbarSearchField.placeholderString = [SearchMethod searchAllArticlesMethod].friendlyName;
-                    } else {
-                        ((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = [SearchMethod searchAllArticlesMethod].friendlyName;
-                    }
+                    self.toolbarSearchField.placeholderString = [SearchMethod searchAllArticlesMethod].friendlyName;
 					[Preferences standardPreferences].searchMethod = menuItem.representedObject;
 				}
 			}
 		} else {
-            if (@available(macOS 10.10, *)) {
-                self.toolbarSearchField.placeholderString = prefs.searchMethod.friendlyName;
-            } else {
-                ((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = prefs.searchMethod.friendlyName;
-		}
+            self.toolbarSearchField.placeholderString = prefs.searchMethod.friendlyName;
 		}
 	// END of switching between "Search all articles" and "Search current web page".
 	}
