@@ -104,28 +104,33 @@ final class MainWindowController: NSWindowController {
         statusBarState(disclosed: !statusBar.isDisclosed)
     }
 
-    // MARK: Validation
+    // MARK: Observation
 
-    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
-        if menuItem.action == #selector(changeFiltering(_:)) {
-            menuItem.state = menuItem.tag == Preferences.standard().filterMode ? .on     : .off
-        } else if menuItem.action == #selector(toggleStatusBar(_:)) {
+    private var observationTokens: [NSKeyValueObservation] = []
+
+}
+
+// MARK: - Menu-item validation
+
+extension MainWindowController: NSMenuItemValidation {
+
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        switch menuItem.action {
+        case #selector(changeFiltering(_:)):
+            menuItem.state = menuItem.tag == Preferences.standard().filterMode ? .on : .off
+        case #selector(toggleStatusBar(_:)):
             if statusBar.isDisclosed {
                 menuItem.title = NSLocalizedString("Hide Status Bar", comment: "Title of a menu item")
             } else {
                 menuItem.title = NSLocalizedString("Show Status Bar", comment: "Title of a menu item")
             }
-        } else {
-            return super.validateMenuItem(menuItem)
+        default:
+            return responds(to: menuItem.action)
         }
 
         // At this point, assume that the menu item is enabled.
         return true
     }
-
-    // MARK: Observation
-
-    private var observationTokens: [NSKeyValueObservation] = []
 
 }
 
