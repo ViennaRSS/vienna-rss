@@ -7,7 +7,7 @@
 [Vienna](http://www.vienna-rss.com) is an RSS/Atom reader for macOS.
 
 Vienna can connect directly to the websites you want to track.
-Additionally or alternatively, you can also sync with a server supporting the [Open Reader API](http://rss-sync.github.io/Open-Reader-API/rssconsensus/) (an adaptation of the now deceased Google Reader API). Vienna has been successfully tested with BazQux.com, FeedHQ.org, InoReader.com and TheOldReader.com.
+Additionally or alternatively, you can also sync with a server supporting the [Open Reader API](http://rss-sync.github.io/Open-Reader-API/rssconsensus/) (an adaptation of the now deceased Google Reader API). Vienna has been successfully tested with BazQux.com, FreshRSS.org, FeedHQ.org, InoReader.com and TheOldReader.com.
 
 
 Compatibility
