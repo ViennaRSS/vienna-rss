@@ -21,13 +21,10 @@
 @import Cocoa;
 
 @interface FolderView : NSOutlineView {
-	BOOL useTooltips;
 	NSString * backupString;
 }
 
--(void)setEnableTooltips:(BOOL)flag;
 -(void)keyDown:(NSEvent *)theEvent;
--(void)buildTooltips;
 -(void)prvtResizeTheFieldEditor;
 
 @property (nonatomic) NSPredicate* filterPredicate;
