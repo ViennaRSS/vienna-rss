@@ -353,7 +353,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 -(void)pumpFolderIconRefresh:(Folder *)folder
 {
     // The activity log name we use depends on whether or not this folder has a real name.
-    NSString * name = [folder.name isEqualToString:[Database untitledFeedFolderName]] ? folder.feedURL : folder.name;
+    NSString * name = [folder.name hasPrefix:[Database untitledFeedFolderName]] ? folder.feedURL : folder.name;
     ActivityItem *aItem = [[ActivityLog defaultLog] itemByName:name];
 
     NSString * favIconPath;
@@ -428,7 +428,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
 
     // The activity log name we use depends on whether or not this folder has a real name.
-    NSString * name = [folder.name isEqualToString:[Database untitledFeedFolderName]] ? folder.feedURL : folder.name;
+    NSString * name = [folder.name hasPrefix:[Database untitledFeedFolderName]] ? folder.feedURL : folder.name;
     ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:name];
 
     // Compute the URL for this connection
