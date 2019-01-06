@@ -482,6 +482,12 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         [myRequest addValue:
          @"application/rss+xml,application/rdf+xml,application/atom+xml,text/xml,application/xml,application/xhtml+xml;q=0.9,text/html;q=0.8,*/*;q=0.5"
                       forHTTPHeaderField:@"Accept"];
+        // if authentication infos are present, try basic authentication first
+        if (![folder.username isEqualToString:@""]) {
+            NSString* usernameAndPassword = [NSString toBase64String:[NSString stringWithFormat:@"%@:%@", folder.username, folder.password]];
+			[myRequest setValue:[NSString stringWithFormat:@"Basic %@", usernameAndPassword] forHTTPHeaderField:@"Authorization"];
+		}
+
 
         __weak typeof(self)weakSelf = self;
         [self addConnection:myRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {

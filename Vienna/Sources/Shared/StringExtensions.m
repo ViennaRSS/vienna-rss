@@ -757,4 +757,16 @@ static NSMutableDictionary * entityMap = nil;
 	return newString;
 }
 
++ (NSString *)toBase64String:(NSString *)string {
+    NSData * data = [string dataUsingEncoding:NSUTF8StringEncoding];
+    NSString * ret = [data base64EncodedStringWithOptions:0];
+    return ret;
+}
+
++ (NSString *)fromBase64String:(NSString *)string {
+    NSData * base64Data = [[NSData alloc] initWithBase64EncodedString:string options:0];
+    NSString * decryptedStr = [[NSString alloc] initWithData:base64Data encoding:NSUTF8StringEncoding];
+    return decryptedStr;
+}
+
 @end
