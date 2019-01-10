@@ -7,7 +7,7 @@
 	<key>Type</key>
 	<string>SearchEngine</string>
 	<key>SearchQueryString</key>
-	<string>http://search.twitter.com/search?q=$SearchTerm$</string>
+	<string>https://twitter.com/search?q=$SearchTerm$&amp;src=typd</string>
 	<key>FriendlyName</key>
 	<string>Twitter</string>
 	<key>Tooltip</key>
