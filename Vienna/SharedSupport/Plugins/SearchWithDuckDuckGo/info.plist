@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Name</key>
+	<string>SearchWithDuckDuckGo</string>
+	<key>Type</key>
+	<string>SearchEngine</string>
+	<key>SearchQueryString</key>
+	<string>https://duckduckgo.com/?q=$SearchTerm$</string>
+	<key>FriendlyName</key>
+	<string>DuckDuckGo</string>
+	<key>Tooltip</key>
+	<string>Search with DuckDuckGo</string>
+</dict>
+</plist>

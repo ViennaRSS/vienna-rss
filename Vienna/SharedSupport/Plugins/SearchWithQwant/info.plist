@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Name</key>
+	<string>SearchWithQwant</string>
+	<key>Type</key>
+	<string>SearchEngine</string>
+	<key>SearchQueryString</key>
+	<string>https://www.qwant.com/?q=$SearchTerm$</string>
+	<key>FriendlyName</key>
+	<string>Qwant</string>
+	<key>Tooltip</key>
+	<string>Search with Qwant</string>
+</dict>
+</plist>
