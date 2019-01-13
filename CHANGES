@@ -8,6 +8,21 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.5.3
+-----
+- Fix crash with problematic feed
+- Fix parsing of feeds without titles
+- Use basic preemptive authentication to work around some servers which do not send 401 challenges
+- Fix update of tabs color when window gains/loses focus
+- Prevent Vienna from appearing among dedicated browser applications in System Preferences/General
+- Fix usability problem with search box
+- Add DuckDuckGo and Qwant among options for search box
+- Fix Twitter option for search box
+- Use https for searching
+- Add support for dark mode to Credits
+- Fix tooltips in folders tree
+- Update Sparkle to 1.21.2, autorevision to 1.21
+
 3.5.2
 -----
 - Fix behavior when a Javascript attemps to close a tab
