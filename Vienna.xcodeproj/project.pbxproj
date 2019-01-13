@@ -1578,15 +1578,6 @@
 			name = "Folder list";
 			sourceTree = "<group>";
 		};
-		F6A7EA591F1CE62D00BD4450 /* Tab bar */ = {
-			isa = PBXGroup;
-			children = (
-				4350285B165DE9DF0018EDB7 /* BrowserView.h */,
-				4350285C165DE9DF0018EDB7 /* BrowserView.m */,
-			);
-			name = "Tab bar";
-			sourceTree = "<group>";
-		};
 		F6A7EA5A1F1CE63500BD4450 /* Article list */ = {
 			isa = PBXGroup;
 			children = (
@@ -1700,7 +1691,6 @@
 				F6373A221F1D53B500ED3B09 /* MainWindow.swift */,
 				F6A7EA571F1CE5DD00BD4450 /* Toolbar */,
 				F6A7EA581F1CE60100BD4450 /* Folder list */,
-				F6A7EA591F1CE62D00BD4450 /* Tab bar */,
 				F6A7EA5A1F1CE63500BD4450 /* Article list */,
 				F6A7EA5B1F1CE63B00BD4450 /* Browser */,
 			);

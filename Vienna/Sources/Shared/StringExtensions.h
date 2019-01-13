@@ -34,6 +34,8 @@
 	+(NSString *)stringByRemovingHTML:(NSString *)theString;
 	+(NSString *)mapEntityToString:(NSString *)entityString;
     +(NSString *)stringByConvertingHTMLEntities:(NSString *)stringToProcess;
+    +(NSString *)toBase64String:(NSString *)stringToProcess;
+    +(NSString *)fromBase64String:(NSString *)stringToProcess;
 	@property (nonatomic, readonly, copy) NSString *firstNonBlankLine;
 	@property (nonatomic, readonly, copy) NSString *summaryTextFromHTML;
 	@property (nonatomic, readonly, copy) NSString *titleTextFromHTML;

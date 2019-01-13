@@ -273,12 +273,14 @@
         // Parse description
         if (isRSSElement && [channelItemTag isEqualToString:@"description"]) {
             [self setDescription:element.stringValue];
+            success = YES;
             continue;
         }
 
         // Parse link
         if (isRSSElement && [channelItemTag isEqualToString:@"link"]) {
             [self setLink:(element.stringValue).stringByUnescapingExtendedCharacters];
+            success = YES;
             continue;
         }
 
@@ -288,6 +290,7 @@
             ([element.prefix isEqualToString:dcPrefix] && [channelItemTag isEqualToString:@"date"]) ) {
             NSString * dateString = element.stringValue;
             [self setLastModified:[NSDate parseXMLDate:dateString]];
+            success = YES;
             continue;
         }
     }
@@ -537,6 +540,7 @@
                 linkBase = [self.link stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             }
 
+            success = YES;
             continue;
         }
 
@@ -547,6 +551,7 @@
             if (nameElement != nil) {
                 defaultAuthor = nameElement.stringValue;
             }
+            success = YES;
             continue;
         }
 
@@ -554,6 +559,7 @@
         if (isAtomElement && [elementTag isEqualToString:@"updated"]) {
             NSString * dateString = atomChildElement.stringValue;
             [self setLastModified:[NSDate parseXMLDate:dateString]];
+            success = YES;
             continue;
         }
 
@@ -561,6 +567,7 @@
         if (isAtomElement && [elementTag isEqualToString:@"modified"]) {
             NSString * dateString = atomChildElement.stringValue;
             [self setLastModified:[NSDate parseXMLDate:dateString]];
+            success = YES;
             continue;
         }
 

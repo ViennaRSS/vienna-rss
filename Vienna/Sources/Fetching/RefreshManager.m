@@ -353,7 +353,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 -(void)pumpFolderIconRefresh:(Folder *)folder
 {
     // The activity log name we use depends on whether or not this folder has a real name.
-    NSString * name = [folder.name isEqualToString:[Database untitledFeedFolderName]] ? folder.feedURL : folder.name;
+    NSString * name = [folder.name hasPrefix:[Database untitledFeedFolderName]] ? folder.feedURL : folder.name;
     ActivityItem *aItem = [[ActivityLog defaultLog] itemByName:name];
 
     NSString * favIconPath;
@@ -428,7 +428,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
 
     // The activity log name we use depends on whether or not this folder has a real name.
-    NSString * name = [folder.name isEqualToString:[Database untitledFeedFolderName]] ? folder.feedURL : folder.name;
+    NSString * name = [folder.name hasPrefix:[Database untitledFeedFolderName]] ? folder.feedURL : folder.name;
     ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:name];
 
     // Compute the URL for this connection
@@ -482,6 +482,12 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         [myRequest addValue:
          @"application/rss+xml,application/rdf+xml,application/atom+xml,text/xml,application/xml,application/xhtml+xml;q=0.9,text/html;q=0.8,*/*;q=0.5"
                       forHTTPHeaderField:@"Accept"];
+        // if authentication infos are present, try basic authentication first
+        if (![folder.username isEqualToString:@""]) {
+            NSString* usernameAndPassword = [NSString toBase64String:[NSString stringWithFormat:@"%@:%@", folder.username, folder.password]];
+			[myRequest setValue:[NSString stringWithFormat:@"Basic %@", usernameAndPassword] forHTTPHeaderField:@"Authorization"];
+		}
+
 
         __weak typeof(self)weakSelf = self;
         [self addConnection:myRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
