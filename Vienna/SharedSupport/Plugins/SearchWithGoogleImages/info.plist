@@ -7,7 +7,7 @@
 	<key>Type</key>
 	<string>SearchEngine</string>
 	<key>SearchQueryString</key>
-	<string>http://images.google.com/images?q=$SearchTerm$</string>
+	<string>https://images.google.com/images?q=$SearchTerm$</string>
 	<key>FriendlyName</key>
 	<string>Google Images</string>
 	<key>Tooltip</key>
