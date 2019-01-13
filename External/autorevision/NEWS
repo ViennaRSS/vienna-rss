@@ -1,5 +1,13 @@
 			autorevision history
 
+1.21 @ 2017-09-30:
+  Try to make tarballs more reproducible.
+  Add an option to silence warnings.
+  Add a sed script output.
+  Auto generate the logo with update commit info.
+  Note if the tag (in git) is not annotated.
+  Extract info about OpenPGP keys used to sign tags/commits.
+
 1.20 @ 2017-01-03:
   Better determinism in the order of the author file.
   Better tests for `local` support.

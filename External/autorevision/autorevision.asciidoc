@@ -4,9 +4,9 @@
 autorevision - extract current-revision metadata from version-control repositories
 
 == SYNOPSIS ==
-*autorevision* *-t* <output-type> [*-o* <cache-file> [*-f*]&#8201;] [*-e* <name>] [*-U*]
+*autorevision* *-t* <output-type> [*-o* <cache-file> [*-f*]&#8201;] [*-e* <name>] [*-U*] [*-q*]
 
-*autorevision* *-s* <symbol> [*-o* <cache-file> [*-f*]&#8201;] [*-e* <name>] [*-U*]
+*autorevision* *-s* <symbol> [*-o* <cache-file> [*-f*]&#8201;] [*-e* <name>] [*-U*] [*-q*]
 
 *autorevision* *-V*
 
@@ -110,6 +110,11 @@ A RPM spec file format setting spec file macros.
 *scheme*::
 A scheme source file setting scheme variables.
 
+*sed*::
+A sed script that replaces symbol names enclosed in @ symbols.
+It uses the | character as a separator in the sed commands.
+You can run it using `sed -f script.sed file-to-edit`.
+
 *sh*::
 A text file suitable for including from a bash script.  Will work with
 Ruby.
@@ -172,6 +177,11 @@ Under bzr, this is the nick of the branch you are on.
 The name of the most recent tag ancestral to the current commit. +
 Empty under Subversion.
 
+*VCS_TAG_OPENPGP*::
+The fingerprint OpenPGP of the key that that signed the current tag. +
+Blank if the current tag is not signed or if no tags exist. +
+Currently only implemented for git.
+
 *VCS_TICK*::
 A count of commits since most recent tag ancestral to the current
 commit or an alias of *VCS_NUM* if there are no prior tags. +
@@ -179,7 +189,8 @@ Empty under Subversion.
 
 *VCS_EXTRA*::
 A symbol set aside specifically to be set by the user through the
-environment or via scripts.
+environment or via scripts. +
+Additionally, the name of this symbol may be customized as well.  ('See *-e* for more info.')
 
 *VCS_ACTION_STAMP*::
 An "action stamp" consists of an RFC3339 timestamp in Zulu time,
@@ -190,6 +201,11 @@ Not currently implemented for bzr.
 
 *VCS_FULL_HASH*::
 A full unique identifier for the current revision.
+
+*VCS_COMMIT_OPENPGP*::
+The fingerprint OpenPGP of the key that that signed the current revision. +
+Blank if the current revision is not signed. +
+Currently only implemented for git.
 
 *VCS_SHORT_HASH*::
 A shortened version of *VCS_FULL_HASH*, but *VCS_FULL_HASH* if it
@@ -230,6 +246,9 @@ Causes untracked files to be checked when determining if the
 working copy is modified 'for Subversion only'.  While this is the
 default behavior for all other repository types, it is off by default
 for Subversion because of speed concerns.
+
+*-q*::
+Silence warnings.
 
 *-V*::
 Emits the autorevision version and exits.
