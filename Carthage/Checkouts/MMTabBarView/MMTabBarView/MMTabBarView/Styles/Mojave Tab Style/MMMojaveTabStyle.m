@@ -235,10 +235,6 @@ NS_ASSUME_NONNULL_BEGIN
     // anything substantial. Instead, let's get the private iVar using this means:
     MMAttachedTabBarButton *addTabButton = [tabBarView valueForKey:@"_addTabButton"];
 
-    // If we don't invalidate the whole rect, then only the button will fill
-    // with the new color.
-    [tabBarView setNeedsDisplayInRect:rect];
-
     // In Mojave, during a mouse press there's also another highlighting; however MMTabBarView
     // doesn't provide the architecture that we need to implement this, but with the hack
     // above we can at least perform the hover behavior of Mojave.
