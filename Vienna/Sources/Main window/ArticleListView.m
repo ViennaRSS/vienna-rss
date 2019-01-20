@@ -39,6 +39,8 @@
 #import "Database.h"
 #import "Vienna-Swift.h"
 
+#define PROGRESS_INDICATOR_DIMENSION 8
+
 @interface ArticleListView ()
 
 @property (nonatomic) OverlayStatusBar *statusBar;
@@ -1016,7 +1018,10 @@
 {
 	if (progressIndicator == nil)
 	{
-		progressIndicator = [[NSProgressIndicator alloc] initWithFrame:articleList.visibleRect];
+		NSRect progressIndicatorFrame;
+		progressIndicatorFrame.size = NSMakeSize(articleList.visibleRect.size.width, PROGRESS_INDICATOR_DIMENSION);
+		progressIndicatorFrame.origin = articleList.visibleRect.origin;
+		progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressIndicatorFrame];
 		progressIndicator.displayedWhenStopped = NO;
 		[articleList addSubview:progressIndicator];
 	}
