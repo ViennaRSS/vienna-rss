@@ -91,38 +91,39 @@
 
 	// Look on the pasteboard to see if there's an http:// url and, if so, prime the
 	// URL field with it. A handy shortcut.
-	if (initialURL != nil)
-	{
-        NSString *lowercaseURL = [initialURL lowercaseString];
-        if ([lowercaseURL hasPrefix:@"feed:http://"])
-        {
-            initialURL = [initialURL substringFromIndex:[@"feed:" length]];
-        }
-        else if ([lowercaseURL hasPrefix:@"feed:https://"])
-        {
-            initialURL = [initialURL substringFromIndex:[@"feed:" length]];
-        }
-        
-		feedURL.stringValue = initialURL;
-		[feedSource selectItemWithTitle:NSLocalizedString(@"URL", @"URL")];
-	}
-	else
+	NSString * candidateURL = initialURL.trim;
+	BOOL fromClipboard = NO;
+	if (candidateURL == nil)
 	{
 		NSData * pboardData = [[NSPasteboard generalPasteboard] dataForType:NSStringPboardType];
-		feedURL.stringValue = @"";
 		if (pboardData != nil)
 		{
-			NSString * pasteString = [[NSString alloc] initWithData:pboardData encoding:NSASCIIStringEncoding];
+			NSString * pasteString = [[NSString alloc] initWithData:pboardData encoding:NSASCIIStringEncoding].trim;
 			NSString * lowerCasePasteString = pasteString.lowercaseString;
             
 			if (lowerCasePasteString != nil && ([lowerCasePasteString hasPrefix:@"http://"] || [lowerCasePasteString hasPrefix:@"https://"] || [lowerCasePasteString hasPrefix:@"feed://"]))
 			{
-				feedURL.stringValue = pasteString;
-				[feedURL selectText:self];
-				[feedSource selectItemWithTitle:NSLocalizedString(@"URL", @"URL")];
+				candidateURL = pasteString;
+				fromClipboard = YES;
 			}
 		}
 	}
+	// Work around (wrong) duplicate schemes
+    NSString *lowercaseURL = [candidateURL lowercaseString];
+    if ([lowercaseURL hasPrefix:@"feed:http://"] || [lowercaseURL hasPrefix:@"feed:https://"])
+    {
+        candidateURL = [candidateURL substringFromIndex:[@"feed:" length]];
+    }
+    // populate the sheet's text field for URL
+    if (candidateURL != nil) {
+        feedURL.stringValue = candidateURL;
+    } else {
+        feedURL.stringValue = @"";
+    }
+    if (fromClipboard) {
+        [feedURL selectText:self];
+    }
+    [feedSource selectItemWithTitle:NSLocalizedString(@"URL", @"URL")];
 	
 	// Reset from the last time we used this sheet.
 	[self enableSubscribeButton];
