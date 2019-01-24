@@ -243,11 +243,11 @@ static NSMutableDictionary * stylePathMappings = nil;
 }
 
 /* clearHTML
- * Loads the web view with the HTML text for a blank page.
+ * Make the web view behave like a blank page.
  */
 -(void)clearHTML
 {
-	[self setHTML:@""];
+    self.hidden = YES;
 }
 
 /* setHTML
@@ -255,6 +255,7 @@ static NSMutableDictionary * stylePathMappings = nil;
  */
 -(void)setHTML:(NSString *)htmlText
 {
+	self.hidden = NO;
 	// If the current HTML is the same as the new HTML then we don't need to
 	// do anything here. This will stop the view from spurious redraws of the same
 	// article after a refresh.
