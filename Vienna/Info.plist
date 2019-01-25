@@ -120,10 +120,6 @@
 	<string>YES</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>vienna_public_key.pem</string>
-	<key>SmartCrashReports_CompanyName</key>
-	<string>OpenCommunity</string>
-	<key>SmartCrashReports_EmailTicket</key>
-	<string>SCR-15C768BF24</string>
 	<key>VCSLongHash</key>
 	<string>VCS_FULL_HASH</string>
 	<key>VCSShortHash</key>
