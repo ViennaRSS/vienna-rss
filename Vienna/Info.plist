@@ -53,8 +53,6 @@
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>Vienna</string>
-	<key>LSFileQuarantineEnabled</key>
-	<true/>
 	<key>CFBundleHelpBookFolder</key>
 	<string>Vienna.help</string>
 	<key>CFBundleHelpBookName</key>
@@ -101,6 +99,8 @@
 	<string>VCS_NUM</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
+	<key>LSFileQuarantineEnabled</key>
+	<true/>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET).0</string>
 	<key>NSAppTransportSecurity</key>
