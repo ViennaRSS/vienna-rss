@@ -53,8 +53,6 @@
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>Vienna</string>
-	<key>LSFileQuarantineEnabled</key>
-	<true/>
 	<key>CFBundleHelpBookFolder</key>
 	<string>Vienna.help</string>
 	<key>CFBundleHelpBookName</key>
@@ -101,6 +99,8 @@
 	<string>VCS_NUM</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
+	<key>LSFileQuarantineEnabled</key>
+	<true/>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET).0</string>
 	<key>NSAppTransportSecurity</key>
@@ -108,10 +108,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSAppleEventsUsageDescription</key>
+	<string></string>
 	<key>NSAppleScriptEnabled</key>
 	<string>YES</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2004–2018 The Vienna RSS Project</string>
+	<string>© 2004–2019 The Vienna RSS Project</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
@@ -120,10 +122,6 @@
 	<string>YES</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>vienna_public_key.pem</string>
-	<key>SmartCrashReports_CompanyName</key>
-	<string>OpenCommunity</string>
-	<key>SmartCrashReports_EmailTicket</key>
-	<string>SCR-15C768BF24</string>
 	<key>VCSLongHash</key>
 	<string>VCS_FULL_HASH</string>
 	<key>VCSShortHash</key>
