@@ -91,7 +91,6 @@
 -(void)initTableView
 {
 	// Variable initialization here
-	articleList.backgroundColor = [NSColor whiteColor];
 	[articleList setAllowsMultipleSelection:YES];
 
 	NSMenu * articleListMenu = [[NSMenu alloc] init];
