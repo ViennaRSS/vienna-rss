@@ -243,7 +243,7 @@
 
 		if (item.image != nil)
 			[aCell setImage:item.image];
-		[aCell setTextColor:(rowIndex == aTableView.selectedRow) ? [NSColor whiteColor] : [NSColor darkGrayColor]];
+		[aCell setTextColor:(rowIndex == aTableView.selectedRow) ? [NSColor whiteColor] : [NSColor controlTextColor]];
 	}
 }
 
