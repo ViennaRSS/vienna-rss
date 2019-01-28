@@ -1131,6 +1131,8 @@
 	
 	// Load the actual link.
 	articleText.mainFrameURL = articleLink;
+	// After any clearHTML call, ensure the page gets visible
+	articleText.hidden = NO;
 	
 	// Clear the current URL.
 	[self clearCurrentURL];
