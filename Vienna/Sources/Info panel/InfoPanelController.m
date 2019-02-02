@@ -190,7 +190,7 @@
  * Validate the URL in the text field.
  */
 - (IBAction)validateURL:(id)sender {
-    NSString *validatorURL = @"https://www.feedvalidator.org/check";
+    NSString *validatorURL = @"https://validator.w3.org/feed/check.cgi";
     NSURLComponents *urlComponents = [NSURLComponents componentsWithString:validatorURL];
 
     NSString *validatedURL = self.urlField.stringValue.trim;
