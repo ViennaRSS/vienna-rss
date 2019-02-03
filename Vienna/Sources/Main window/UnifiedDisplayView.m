@@ -663,7 +663,7 @@
 	if (progressIndicator == nil)
 	{
 		progressIndicator = [[NSProgressIndicator alloc] initWithFrame:articleList.visibleRect];
-		progressIndicator.style = NSProgressIndicatorSpinningStyle;
+		progressIndicator.style = NSProgressIndicatorStyleSpinning;
 		progressIndicator.displayedWhenStopped = NO;
 		[articleList addSubview:progressIndicator];
 	}
