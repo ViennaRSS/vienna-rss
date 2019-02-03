@@ -108,7 +108,7 @@
 	}
 	else
 	{
-		NSData * pboardData = [[NSPasteboard generalPasteboard] dataForType:NSStringPboardType];
+		NSData * pboardData = [[NSPasteboard generalPasteboard] dataForType:NSPasteboardTypeString];
 		feedURL.stringValue = @"";
 		if (pboardData != nil)
 		{

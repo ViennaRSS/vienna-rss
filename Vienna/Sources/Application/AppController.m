@@ -1004,9 +1004,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	if (url != nil)
 	{
 		NSPasteboard * pboard = [NSPasteboard generalPasteboard];
-		[pboard declareTypes:@[NSStringPboardType, NSURLPboardType] owner:self];
+        [pboard declareTypes:@[NSPasteboardTypeString, NSURLPboardType] owner:self];
 		[url writeToPasteboard:pboard];
-		[pboard setString:url.description forType:NSStringPboardType];
+		[pboard setString:url.description forType:NSPasteboardTypeString];
 	}
 }
 
