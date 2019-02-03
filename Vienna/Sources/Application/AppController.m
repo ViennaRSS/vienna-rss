@@ -1180,7 +1180,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     panel.accessoryView = accessoryController.view;
     panel.allowedFileTypes = @[@"opml"];
     [panel beginSheetModalForWindow:self.mainWindow completionHandler:^(NSInteger returnCode) {
-        if (returnCode == NSFileHandlingPanelOKButton)
+        if (returnCode == NSModalResponseOK)
         {
             [panel orderOut:self];
             
@@ -1219,7 +1219,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [panel beginSheetModalForWindow:self.mainWindow
                   completionHandler: ^(NSInteger returnCode) {
                       
-                      if (returnCode == NSFileHandlingPanelOKButton)
+                      if (returnCode == NSModalResponseOK)
                       {
                           [panel orderOut:self];
                           [Import importFromFile:panel.URL.path];
