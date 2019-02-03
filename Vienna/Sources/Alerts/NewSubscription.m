@@ -286,7 +286,7 @@
 */
 -(IBAction)doGoogleOption:(id)sender
 {
- 	[Preferences standardPreferences].prefersGoogleNewSubscription = ([sender state] == NSOnState);
+    [Preferences standardPreferences].prefersGoogleNewSubscription = ([sender state] == NSControlStateValueOn);
 }
 
 /* handleTextDidChange [delegate]

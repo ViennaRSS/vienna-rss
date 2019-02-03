@@ -713,7 +713,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 		
 		// Is this the currently set search method? If yes, mark it as such.
 		if ( [friendlyName isEqualToString:[Preferences standardPreferences].searchMethod.friendlyName] )
-			item.state = NSOnState;
+			item.state = NSControlStateValueOn;
 		
 		[cellMenu addItem:item];
 	}
@@ -732,7 +732,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 			item.representedObject = searchMethod;
 			// Is this the currently set search method? If yes, mark it as such.
 			if ( [searchMethod.friendlyName isEqualToString: [Preferences standardPreferences].searchMethod.friendlyName] )
-				item.state = NSOnState;
+				item.state = NSControlStateValueOn;
 			[cellMenu addItem:item];
 		}
 	} 
@@ -3628,22 +3628,22 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	else if (theAction == @selector(doViewColumn:))
 	{
 		Field * field = menuItem.representedObject;
-		menuItem.state = field.visible ? NSOnState : NSOffState;
+		menuItem.state = field.visible ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible && isArticleView;
 	}
 	else if (theAction == @selector(doSelectStyle:))
 	{
 		NSString * styleName = menuItem.title;
-		menuItem.state = [styleName isEqualToString:[Preferences standardPreferences].displayStyle] ? NSOnState : NSOffState;
+		menuItem.state = [styleName isEqualToString:[Preferences standardPreferences].displayStyle] ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible && isAnyArticleView;
 	}
 	else if (theAction == @selector(doSortColumn:))
 	{
 		Field * field = menuItem.representedObject;
         if ([field.name isEqualToString:self.articleController.sortColumnIdentifier]) {
-			menuItem.state = NSOnState;
+			menuItem.state = NSControlStateValueOn;
         } else {
-			menuItem.state = NSOffState;
+			menuItem.state = NSControlStateValueOff;
         }
 		return isMainWindowVisible && isAnyArticleView;
 	}
@@ -3652,9 +3652,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		NSNumber * ascendingNumber = menuItem.representedObject;
 		BOOL ascending = ascendingNumber.integerValue;
         if (ascending == self.articleController.sortIsAscending) {
-			menuItem.state = NSOnState;
+			menuItem.state = NSControlStateValueOn;
         } else {
-			menuItem.state = NSOffState;
+			menuItem.state = NSControlStateValueOff;
         }
 		return isMainWindowVisible && isAnyArticleView;
 	}
@@ -3674,18 +3674,18 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
 		if (folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && !folder.loadsFullHTML)
-			menuItem.state = NSOnState;
+			menuItem.state = NSControlStateValueOn;
 		else
-			menuItem.state = NSOffState;
+			menuItem.state = NSControlStateValueOff;
 		return folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && !db.readOnly && isMainWindowVisible;
 	}
 	else if (theAction == @selector(useWebPageForArticles:))
 	{
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
 		if (folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && folder.loadsFullHTML)
-			menuItem.state = NSOnState;
+			menuItem.state = NSControlStateValueOn;
 		else
-			menuItem.state = NSOffState;
+			menuItem.state = NSControlStateValueOff;
 		return folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && !db.readOnly && isMainWindowVisible;
 	}
 	else if (theAction == @selector(deleteFolder:))
@@ -3788,7 +3788,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	else if (theAction == @selector(keepFoldersArranged:))
 	{
 		Preferences * prefs = [Preferences standardPreferences];
-		menuItem.state = (prefs.self.foldersTreeSortMethod == menuItem.tag) ? NSOnState : NSOffState;
+		menuItem.state = (prefs.self.foldersTreeSortMethod == menuItem.tag) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(setFocusToSearchField:))
@@ -3798,19 +3798,19 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	else if (theAction == @selector(reportLayout:))
 	{
 		Preferences * prefs = [Preferences standardPreferences];
-		menuItem.state = (prefs.layout == MA_Layout_Report) ? NSOnState : NSOffState;
+		menuItem.state = (prefs.layout == MA_Layout_Report) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(condensedLayout:))
 	{
 		Preferences * prefs = [Preferences standardPreferences];
-		menuItem.state = (prefs.layout == MA_Layout_Condensed) ? NSOnState : NSOffState;
+		menuItem.state = (prefs.layout == MA_Layout_Condensed) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(unifiedLayout:))
 	{
 		Preferences * prefs = [Preferences standardPreferences];
-		menuItem.state = (prefs.layout == MA_Layout_Unified) ? NSOnState : NSOffState;
+		menuItem.state = (prefs.layout == MA_Layout_Unified) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(markFlagged:))
@@ -3861,9 +3861,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		Preferences * prefs = [Preferences standardPreferences];
 		if ([prefs.searchMethod.friendlyName isEqualToString:[menuItem.representedObject friendlyName]])
-			menuItem.state = NSOnState;
+			menuItem.state = NSControlStateValueOn;
 		else 
-			menuItem.state = NSOffState;
+			menuItem.state = NSControlStateValueOff;
 		return YES;
 	} else if (theAction == @selector(openVienna:)) {
         return self.mainWindow.isKeyWindow == false;

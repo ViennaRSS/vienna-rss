@@ -104,10 +104,10 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
     [self selectUserDefaultFont:prefs.folderListFont size:prefs.folderListFontSize control:folderFontSample];
     
     // Show folder images option
-    showFolderImagesButton.state = prefs.showFolderImages ? NSOnState : NSOffState;
+    showFolderImagesButton.state = prefs.showFolderImages ? NSControlStateValueOn : NSControlStateValueOff;
     
     // Set minimum font size option
-    enableMinimumFontSize.state = prefs.enableMinimumFontSize ? NSOnState : NSOffState;
+    enableMinimumFontSize.state = prefs.enableMinimumFontSize ? NSControlStateValueOn : NSControlStateValueOff;
     minimumFontSizes.enabled = prefs.enableMinimumFontSize;
     
     NSUInteger i;
@@ -122,7 +122,7 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
  */
 -(IBAction)changeShowFolderImages:(id)sender
 {
-    BOOL showFolderImages = [sender state] == NSOnState;
+    BOOL showFolderImages = [sender state] == NSControlStateValueOn;
     [Preferences standardPreferences].showFolderImages = showFolderImages;
 }
 
@@ -131,7 +131,7 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
  */
 -(IBAction)changeMinimumFontSize:(id)sender
 {
-    BOOL useMinimumFontSize = [sender state] == NSOnState;
+    BOOL useMinimumFontSize = [sender state] == NSControlStateValueOn;
     [Preferences standardPreferences].enableMinimumFontSize = useMinimumFontSize;
     minimumFontSizes.enabled = useMinimumFontSize;
 }

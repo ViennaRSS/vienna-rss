@@ -117,8 +117,8 @@
 	self.folderDescription.stringValue = folder.feedDescription;
 	self.folderSize.stringValue = [NSString stringWithFormat:NSLocalizedString(@"%u articles", nil), MAX(0, [folder countOfCachedArticles])];
 	self.folderUnread.stringValue = [NSString stringWithFormat:NSLocalizedString(@"%u unread", nil), folder.unreadCount];
-	self.isSubscribed.state = (folder.flags & VNAFolderFlagUnsubscribed) ? NSOffState : NSOnState;
-	self.loadFullHTML.state = (folder.flags & VNAFolderFlagLoadFullHTML) ? NSOnState : NSOffState;
+	self.isSubscribed.state = (folder.flags & VNAFolderFlagUnsubscribed) ? NSControlStateValueOff : NSControlStateValueOn;
+	self.loadFullHTML.state = (folder.flags & VNAFolderFlagLoadFullHTML) ? NSControlStateValueOn : NSControlStateValueOff;
 }
 
 /* urlFieldChanged
@@ -135,7 +135,7 @@
  */
 -(IBAction)subscribedChanged:(id)sender
 {
-    if (self.isSubscribed.state == NSOnState) {
+    if (self.isSubscribed.state == NSControlStateValueOn) {
         [[Database sharedManager] clearFlag:VNAFolderFlagUnsubscribed forFolder:self.infoFolderId];
     }
     else {
@@ -150,7 +150,7 @@
  */
 -(IBAction)loadFullHTMLChanged:(id)sender
 {
-    if (self.loadFullHTML.state == NSOnState) {
+    if (self.loadFullHTML.state == NSControlStateValueOn) {
         [[Database sharedManager] setFlag:VNAFolderFlagLoadFullHTML forFolder:self.infoFolderId];
     }
     else {
