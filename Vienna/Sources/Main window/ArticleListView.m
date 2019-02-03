@@ -337,7 +337,7 @@
 	NSMenuItem *openFeedInBrowser = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Subscription Home Page in External Browser", @"Title of a menu item")
 															   action:@selector(viewSourceHomePageInAlternateBrowser:)
 														keyEquivalent:@""];
-	openFeedInBrowser.keyEquivalentModifierMask = NSAlternateKeyMask;
+    openFeedInBrowser.keyEquivalentModifierMask = NSEventModifierFlagOption;
 	openFeedInBrowser.alternate = YES;
 	[articleListMenu addItem:openFeedInBrowser];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Open Article Page", @"Title of a menu item")
@@ -346,7 +346,7 @@
 	NSMenuItem *openItemInBrowser = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Article Page in External Browser", @"Title of a menu item")
 															   action:@selector(viewArticlePagesInAlternateBrowser:)
 														keyEquivalent:@""];
-	openItemInBrowser.keyEquivalentModifierMask = NSAlternateKeyMask;
+    openItemInBrowser.keyEquivalentModifierMask = NSEventModifierFlagOption;
 	openItemInBrowser.alternate = YES;
 	[articleListMenu addItem:openItemInBrowser];
 

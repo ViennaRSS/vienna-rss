@@ -178,7 +178,7 @@
     NSMenuItem *alternateItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Subscription Home Page in External Browser", @"Title of a menu item")
 														   action:@selector(viewSourceHomePageInAlternateBrowser:)
 													keyEquivalent:@""];
-    alternateItem.keyEquivalentModifierMask = NSAlternateKeyMask;
+    alternateItem.keyEquivalentModifierMask = NSEventModifierFlagOption;
 	alternateItem.alternate = YES;
     [folderMenu addItem:alternateItem];
 	[folderMenu addItemWithTitle:NSLocalizedString(@"Get Info", @"Title of a menu item")

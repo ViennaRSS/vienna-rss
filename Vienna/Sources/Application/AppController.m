@@ -405,13 +405,13 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	NSMenuItem * alternateItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
 	if (alternateItem != nil)
 	{
-		alternateItem.keyEquivalentModifierMask = NSAlternateKeyMask;
+        alternateItem.keyEquivalentModifierMask = NSEventModifierFlagOption;
 		[alternateItem setAlternate:YES];
 	}
 	alternateItem = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
 	if (alternateItem != nil)
 	{
-		alternateItem.keyEquivalentModifierMask = NSAlternateKeyMask;
+        alternateItem.keyEquivalentModifierMask = NSEventModifierFlagOption;
 		[alternateItem setAlternate:YES];
 	}
 	[self updateAlternateMenuTitle];
@@ -1697,16 +1697,16 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		closeTabItem.keyEquivalent = @"";
 		closeAllTabsItem.keyEquivalent = @"";
 		closeWindowItem.keyEquivalent = @"w";
-		closeWindowItem.keyEquivalentModifierMask = NSCommandKeyMask;
+        closeWindowItem.keyEquivalentModifierMask = NSEventModifierFlagCommand;
 	}
 	else
 	{
 		closeTabItem.keyEquivalent = @"w";
-		closeTabItem.keyEquivalentModifierMask = NSCommandKeyMask;
+        closeTabItem.keyEquivalentModifierMask = NSEventModifierFlagCommand;
 		closeAllTabsItem.keyEquivalent = @"w";
-		closeAllTabsItem.keyEquivalentModifierMask = NSCommandKeyMask|NSAlternateKeyMask;
+        closeAllTabsItem.keyEquivalentModifierMask = NSEventModifierFlagCommand|NSEventModifierFlagOption;
 		closeWindowItem.keyEquivalent = @"W";
-		closeWindowItem.keyEquivalentModifierMask = NSCommandKeyMask;
+        closeWindowItem.keyEquivalentModifierMask = NSEventModifierFlagCommand;
 	}
 }
 
@@ -2190,7 +2190,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags
 {
-	if (keyChar >= '0' && keyChar <= '9' && (flags & NSControlKeyMask))
+    if (keyChar >= '0' && keyChar <= '9' && (flags & NSEventModifierFlagControl))
 	{
 		NSInteger layoutStyle = MA_Layout_Report + (keyChar - '0');
 		[self setLayout:layoutStyle withRefresh:YES];
@@ -2199,7 +2199,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	switch (keyChar)
 	{
 		case NSLeftArrowFunctionKey:
-			if (flags & (NSCommandKeyMask | NSAlternateKeyMask))
+            if (flags & (NSEventModifierFlagCommand | NSEventModifierFlagOption))
 				return NO;
 			else
 			{
@@ -2212,7 +2212,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			return NO;
 			
 		case NSRightArrowFunctionKey:
-			if (flags & (NSCommandKeyMask | NSAlternateKeyMask))
+            if (flags & (NSEventModifierFlagCommand | NSEventModifierFlagOption))
 				return NO;
 			else
 			{
@@ -2306,7 +2306,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		case NSCarriageReturnCharacter:
 			if (self.mainWindow.firstResponder == self.foldersTree.mainView)
 			{
-				if (flags & NSAlternateKeyMask)
+                if (flags & NSEventModifierFlagOption)
 					[self viewSourceHomePageInAlternateBrowser:self];
 				else
 					[self viewSourceHomePage:self];
@@ -2314,7 +2314,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			}
 			else
 			{
-				if (flags & NSAlternateKeyMask)
+                if (flags & NSEventModifierFlagOption)
 					[self viewArticlePagesInAlternateBrowser:self];
 				else
 					[self viewArticlePages:self];
@@ -2332,7 +2332,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			else
 			{
 				NSRect visibleRect = theView.visibleRect;
-				if (flags & NSShiftKeyMask)
+                if (flags & NSEventModifierFlagShift)
 				{
 					if (visibleRect.origin.y < 2)
 						[self goBack:self];

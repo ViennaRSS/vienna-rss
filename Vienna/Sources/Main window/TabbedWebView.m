@@ -291,7 +291,7 @@ static NSString * _userAgent ;
 
 		// For anything else, we open in a new tab or in the external browser.
 		NSUInteger  modifierFlag = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntegerValue];
-		BOOL useAlternateBrowser = (modifierFlag & NSAlternateKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
+        BOOL useAlternateBrowser = (modifierFlag & NSEventModifierFlagOption) ? YES : NO; // This is to avoid problems in casting the value into BOOL
 		[listener ignore];
 		[APPCONTROLLER openURL:request.URL inPreferredBrowser:!useAlternateBrowser];
 		return;
@@ -317,8 +317,8 @@ static NSString * _userAgent ;
 			return;
 		}
 	    NSUInteger modifierFlags = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntegerValue];
-	    BOOL useAlternateBrowser = (modifierFlags & NSAlternateKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
-		if (openLinksInNewBrowser || (modifierFlags & NSCommandKeyMask))
+        BOOL useAlternateBrowser = (modifierFlags & NSEventModifierFlagOption) ? YES : NO; // This is to avoid problems in casting the value into BOOL
+        if (openLinksInNewBrowser || (modifierFlags & NSEventModifierFlagCommand))
 		{
 			[listener ignore];
 			[APPCONTROLLER openURL:request.URL inPreferredBrowser:!useAlternateBrowser];
@@ -466,12 +466,12 @@ static NSString * _userAgent ;
 	if (theEvent.characters.length == 1)
 	{
 		unichar keyChar = [theEvent.characters characterAtIndex:0];
-		if ((keyChar == NSLeftArrowFunctionKey) && (theEvent.modifierFlags & NSCommandKeyMask))
+        if ((keyChar == NSLeftArrowFunctionKey) && (theEvent.modifierFlags & NSEventModifierFlagCommand))
 		{
 			[self goBack:self];
 			return;
 		}
-		else if ((keyChar == NSRightArrowFunctionKey) && (theEvent.modifierFlags & NSCommandKeyMask))
+        else if ((keyChar == NSRightArrowFunctionKey) && (theEvent.modifierFlags & NSEventModifierFlagCommand))
 		{
 			[self goForward:self];
 			return;
