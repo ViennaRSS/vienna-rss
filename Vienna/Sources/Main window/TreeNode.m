@@ -326,7 +326,7 @@
 	// Allocate and initialize the spinning progress indicator.
 	NSRect progressRect = NSMakeRect(0, 0, PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION);
 	progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressRect];
-	progressIndicator.controlSize = NSSmallControlSize;
+    progressIndicator.controlSize = NSControlSizeSmall;
 	progressIndicator.style = NSProgressIndicatorSpinningStyle;
 	[progressIndicator setUsesThreadedAnimation:YES];
 	

@@ -135,7 +135,7 @@
 	[cell setScrollable:YES];
 	cell.target = self;
 	cell.action = @selector(handleAddress:);
-	cell.font = [NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]];
+    cell.font = [NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSControlSizeSmall]];
 	addressField.cell = cell;
 
 	// The RSS page button is hidden by default

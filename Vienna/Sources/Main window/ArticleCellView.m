@@ -86,7 +86,7 @@
 			NSRect progressRect = NSMakeRect(PROGRESS_INDICATOR_LEFT_MARGIN, NSHeight(self.bounds) - PROGRESS_INDICATOR_DIMENSION_REGULAR,
 												PROGRESS_INDICATOR_DIMENSION_REGULAR, PROGRESS_INDICATOR_DIMENSION_REGULAR);
 			progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressRect];
-			progressIndicator.controlSize = NSRegularControlSize;
+            progressIndicator.controlSize = NSControlSizeRegular;
 			progressIndicator.style = NSProgressIndicatorSpinningStyle;
 			[progressIndicator setDisplayedWhenStopped:NO];
 		}
