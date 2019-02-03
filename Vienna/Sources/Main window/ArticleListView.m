@@ -1134,7 +1134,7 @@
 	currentURL = [[NSURL alloc] initWithString:articleLink];
 
 	// We need to redraw the article list so the progress indicator is shown.
-	[articleList setNeedsDisplay];
+    articleList.needsDisplay = YES;
 }
 
 /* url
@@ -1658,7 +1658,7 @@
 	if (isLoadingHTMLArticle)
 	{
 		isLoadingHTMLArticle = NO;
-		[articleList setNeedsDisplay];
+        articleList.needsDisplay = YES;
 	}
 }
 
