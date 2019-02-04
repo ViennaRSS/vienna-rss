@@ -40,6 +40,7 @@
 #define DEFAULT_CELL_HEIGHT	300.0
 #define XPOS_IN_CELL	6.0
 #define YPOS_IN_CELL	2.0
+#define PROGRESS_INDICATOR_DIMENSION 16
 
 @interface UnifiedDisplayView ()
 
@@ -90,7 +91,6 @@
 -(void)initTableView
 {
 	// Variable initialization here
-	articleList.backgroundColor = [NSColor whiteColor];
 	[articleList setAllowsMultipleSelection:YES];
 
 	NSMenu * articleListMenu = [[NSMenu alloc] init];
@@ -662,8 +662,10 @@
 {
 	if (progressIndicator == nil)
 	{
-		progressIndicator = [[NSProgressIndicator alloc] initWithFrame:articleList.visibleRect];
-		progressIndicator.style = NSProgressIndicatorSpinningStyle;
+		NSRect progressIndicatorFrame;
+		progressIndicatorFrame.size = NSMakeSize(articleList.visibleRect.size.width, PROGRESS_INDICATOR_DIMENSION);
+		progressIndicatorFrame.origin = articleList.visibleRect.origin;
+		progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressIndicatorFrame];
 		progressIndicator.displayedWhenStopped = NO;
 		[articleList addSubview:progressIndicator];
 	}

@@ -68,7 +68,7 @@
 		totalCriteria = 0;
 		smartFolderId = -1;
 		db = newDb;
-		firstRun = YES;
+		onScreen = NO;
 		parentId = VNAFolderTypeRoot;
 		arrayOfViews = [[NSMutableArray alloc] init];
 	}
@@ -76,7 +76,7 @@
 }
 
 /* newCriteria
- * Initialises the smart folder panel with a single empty criteria to get
+ * Initialises the smart folder panel with a single default criteria to get
  * started.
  */
 -(void)newCriteria:(NSWindow *)window underParent:(NSInteger)itemId
@@ -92,7 +92,8 @@
 }
 
 /* loadCriteria
- * Loads the criteria for the specified folder.
+ * Loads the criteria for the specified folder,
+ * then display the search sheet.
  */
 -(void)loadCriteria:(NSWindow *)window folderId:(NSInteger)folderId
 {
@@ -153,7 +154,7 @@
 		}
 
 		// We defer sizing the window until all the criteria are
-		// added otherwise it looks crap.
+		// added and displayed, otherwise it looks crap.
 		[self displaySearchSheet:window];
 		[self resizeSearchWindow];
 	}
@@ -261,17 +262,13 @@
 -(void)displaySearchSheet:(NSWindow *)window
 {
 	// Begin the sheet
+	onScreen = YES;
 	[NSApp beginSheet:searchWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
-
-	// Remember the intial window size after it is first
-	// loaded and before any criteria are added that will
-	// cause it to be resized. We need to know this to shrink
-	// it back to it's default size.
-	if (firstRun)
-	{
-		searchWindowFrame = [NSWindow contentRectForFrameRect:searchWindow.frame styleMask:searchWindow.styleMask]; 
-		firstRun = NO;
-	}
+	// Remember the initial size of the dialog sheet
+	// before addition of any criteria that would
+	// cause it to be resized. We need to know this
+	// to shrink it back to its default size.
+	searchWindowFrame = [NSWindow contentRectForFrameRect:searchWindow.frame styleMask:searchWindow.styleMask];
 }
 
 /* removeCurrentCriteria
@@ -481,6 +478,7 @@
 	
 	[NSApp endSheet:searchWindow];
 	[searchWindow orderOut:self];
+	onScreen = NO;
 }
 
 /* doCancel
@@ -489,6 +487,7 @@
 {
 	[NSApp endSheet:searchWindow];
 	[searchWindow orderOut:self];
+	onScreen = NO;
 }
 
 /* handleTextDidChange [delegate]
@@ -516,6 +515,8 @@
 	}
 	[arrayOfViews removeAllObjects];
 	totalCriteria = 0;
+	// reset the dialog sheet size
+	[searchWindow setFrame:searchWindowFrame display:NO];
 }
 
 /* removeCriteria
@@ -536,12 +537,11 @@
 	[arrayOfViews removeObject:row];
 	--totalCriteria;
 	
-	// Shift the subviews
-	for (c = 0; c < index; ++c)
-	{
+	// Shift up the remaining subviews
+	for (c = index ; c < arrayOfViews.count; ++c) {
 		NSView * row = arrayOfViews[c];
 		NSPoint origin = row.frame.origin;
-		[row setFrameOrigin:NSMakePoint(origin.x, origin.y - rowHeight)];
+		[row setFrameOrigin:NSMakePoint(origin.x, origin.y + rowHeight)];
 	}
 }
 
@@ -552,44 +552,32 @@
 -(void)addCriteria:(NSUInteger)index
 {
 	NSData * archRow;
-	NSView * previousRow = nil;
 	NSInteger rowHeight = searchCriteriaView.frame.size.height;
 	NSUInteger  c;
 
-	// Bump up the criteria count
-	++totalCriteria;
-	if (!firstRun)
-		[self resizeSearchWindow];
-
-	// Shift the existing subviews up by rowHeight
 	if (index > arrayOfViews.count)
 		index = arrayOfViews.count;
-	for (c = 0; c < index; ++c)
-	{
-		NSView * row = arrayOfViews[c];
-		NSPoint origin = row.frame.origin;
-		[row setFrameOrigin:NSMakePoint(origin.x, origin.y + rowHeight)];
-		previousRow = row;
-	}
 
 	// Now add the new subview
 	archRow = [NSArchiver archivedDataWithRootObject:searchCriteriaView];
 	NSRect bounds = searchCriteriaSuperview.bounds;
 	NSView * row = (NSView *)[NSUnarchiver unarchiveObjectWithData:archRow];
-	[row setFrameOrigin:NSMakePoint(bounds.origin.x, bounds.origin.y + (((totalCriteria - 1) - index) * rowHeight))];
+	if (onScreen) {
+		[row setFrameOrigin:NSMakePoint(bounds.origin.x, bounds.origin.y + (NSInteger)(totalCriteria - 1 - index) * rowHeight)];
+	} else {  // computation is affected by resizeSearchWindow being called only once, after the search panel is displayed
+		[row setFrameOrigin:NSMakePoint(bounds.origin.x, bounds.origin.y  - index * rowHeight)];
+	}
 	[searchCriteriaSuperview addSubview:row];
 	[arrayOfViews insertObject:row atIndex:index];
 
-	// Link the previous row to the next one so that the Tab key behaves
-	// properly through the entire sheet.
-	// BUGBUG: This doesn't work and I can't figure out why not yet. This needs to be fixed.
-	if (previousRow)
-	{
-		NSView * lastKeyView = previousRow.nextKeyView;
-		previousRow.nextKeyView = row;
-		row.nextKeyView = lastKeyView;
+	// Shift down the existing subviews by rowHeight
+	for (c = index + 1; c < arrayOfViews.count; ++c) {
+		NSView * row = arrayOfViews[c];
+		NSPoint origin = row.frame.origin;
+		[row setFrameOrigin:NSMakePoint(origin.x, origin.y - rowHeight)];
 	}
-	[searchCriteriaSuperview display];
+	// Bump up the criteria count
+	++totalCriteria;
 }
 
 /* resizeSearchWindow
@@ -603,10 +591,9 @@
 	if (totalCriteria > 0)
 	{
 		NSInteger rowHeight = searchCriteriaView.frame.size.height;
-		NSInteger newHeight = newFrame.size.height + rowHeight * (totalCriteria - 1);
-		newFrame.origin.y += newFrame.size.height;
-		newFrame.origin.y -= newHeight;
-		newFrame.size.height = newHeight;
+		NSInteger additionalHeight = rowHeight * (totalCriteria - 1);
+		newFrame.origin.y -= additionalHeight;
+		newFrame.size.height += additionalHeight;
 		newFrame = [NSWindow frameRectForContentRect:newFrame styleMask:searchWindow.styleMask];
 	}
 	[searchWindow setFrame:newFrame display:YES animate:YES];

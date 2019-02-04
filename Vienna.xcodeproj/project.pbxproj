@@ -2211,7 +2211,7 @@
 		};
 		F68CBD98203231A8003A6A9E /* Bootstrap Dependencies */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -2219,9 +2219,9 @@
 			name = "Bootstrap Dependencies";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "if which carthage >/dev/null; then\n    carthage bootstrap --cache-builds --platform macos\nelse\n    echo \"error: Carthage not installed, download from https://github.com/Carthage/Carthage\"\n    exit 1\nfi";
+			shellScript = "if which carthage >/dev/null; then\n    carthage bootstrap --cache-builds --platform macos\nelse\n    echo \"error: Carthage not installed, download from https://github.com/Carthage/Carthage\"\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F68CBDA020323974003A6A9E /* SwiftLint */ = {
