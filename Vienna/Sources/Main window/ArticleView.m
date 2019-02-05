@@ -293,7 +293,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 			return;
 		
 		//Don't go back or forward in article view.
-		if ((theEvent.modifierFlags & NSCommandKeyMask) &&
+        if ((theEvent.modifierFlags & NSEventModifierFlagCommand) &&
 			((keyChar == NSLeftArrowFunctionKey) || (keyChar == NSRightArrowFunctionKey)))
 			return;
 	}

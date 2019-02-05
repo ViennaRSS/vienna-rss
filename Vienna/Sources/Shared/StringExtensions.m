@@ -735,8 +735,8 @@ static NSMutableDictionary * entityMap = nil;
 	@try
 	{
 		NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
-		[pasteboard declareTypes:@[NSStringPboardType] owner:nil];
-		if ([pasteboard setString:urlString forType:NSStringPboardType])
+		[pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
+		if ([pasteboard setString:urlString forType:NSPasteboardTypeString])
 			newString = [WebView URLFromPasteboard:pasteboard].absoluteString;
 		else
 		{

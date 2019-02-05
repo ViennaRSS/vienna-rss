@@ -120,7 +120,7 @@
 	[self.outlineView setAutoresizesOutlineColumn:NO];
 
 	// Register for dragging
-	[self.outlineView registerForDraggedTypes:@[MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSStringPboardType]]; 
+	[self.outlineView registerForDraggedTypes:@[MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSPasteboardTypeString]]; 
 	[self.outlineView setVerticalMotionCanBeginDrag:YES];
 	
 	// Make sure selected row is visible
@@ -178,7 +178,7 @@
     NSMenuItem *alternateItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Subscription Home Page in External Browser", @"Title of a menu item")
 														   action:@selector(viewSourceHomePageInAlternateBrowser:)
 													keyEquivalent:@""];
-    alternateItem.keyEquivalentModifierMask = NSAlternateKeyMask;
+    alternateItem.keyEquivalentModifierMask = NSEventModifierFlagOption;
 	alternateItem.alternate = YES;
     [folderMenu addItem:alternateItem];
 	[folderMenu addItemWithTitle:NSLocalizedString(@"Get Info", @"Title of a menu item")
@@ -1163,7 +1163,7 @@
 -(NSDragOperation)outlineView:(NSOutlineView*)olv validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(NSInteger)index
 {
 	NSPasteboard * pb = [info draggingPasteboard]; 
-	NSString * type = [pb availableTypeFromArray:@[MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSStringPboardType]]; 
+	NSString * type = [pb availableTypeFromArray:@[MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSPasteboardTypeString]]; 
 	NSDragOperation dragType = ([type isEqualToString:MA_PBoardType_FolderList]) ? NSDragOperationMove : NSDragOperationCopy;
 
 	TreeNode * node = (TreeNode *)item;
@@ -1220,7 +1220,7 @@
 	NSInteger index;
 
 	// We'll create the types of data on the clipboard.
-	[pboard declareTypes:@[MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSStringPboardType] owner:self]; 
+	[pboard declareTypes:@[MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSPasteboardTypeString] owner:self]; 
 
 	// Create an array of NSNumber objects containing the selected folder IDs.
 	NSInteger countOfItems = 0;
@@ -1267,7 +1267,7 @@
 
 	// Copy the data to the pasteboard 
 	[pboard setPropertyList:externalDragData forType:MA_PBoardType_RSSSource];
-	[pboard setString:stringDragData forType:NSStringPboardType];
+	[pboard setString:stringDragData forType:NSPasteboardTypeString];
 	[pboard setPropertyList:internalDragData forType:MA_PBoardType_FolderList]; 
 	[pboard setPropertyList:@[arrayOfURLs, arrayOfTitles] forType:@"WebURLsWithTitlesPboardType"]; 
 	return countOfItems > 0; 
@@ -1448,7 +1448,7 @@
 { 
 	__block NSInteger childIndex = child;
 	NSPasteboard * pb = [info draggingPasteboard];
-	NSString * type = [pb availableTypeFromArray:@[MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSStringPboardType]];
+	NSString * type = [pb availableTypeFromArray:@[MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSPasteboardTypeString]];
 	TreeNode * node = targetItem ? (TreeNode *)targetItem : self.rootNode;
 
 	NSInteger parentId = node.nodeId;
@@ -1456,7 +1456,7 @@
 		childIndex = 0;
 
 	// Check the type
-	if ([type isEqualToString:NSStringPboardType])
+	if ([type isEqualToString:NSPasteboardTypeString])
 	{
 		// This is possibly a URL that we'll handle as a potential feed subscription. It's
 		// not our call to make though.

@@ -77,8 +77,8 @@
     Preferences * prefs = [Preferences standardPreferences];
     
     // Show use JavaScript option
-    useJavaScriptButton.state = prefs.useJavaScript ? NSOnState : NSOffState;
-    useWebPluginsButton.state = prefs.useWebPlugins ? NSOnState : NSOffState;
+    useJavaScriptButton.state = prefs.useJavaScript ? NSControlStateValueOn : NSControlStateValueOff;
+    useWebPluginsButton.state = prefs.useWebPlugins ? NSControlStateValueOn : NSControlStateValueOff;
     [concurrentDownloads selectItemWithTitle:[NSString stringWithFormat:@"%lu",(unsigned long)prefs.concurrentDownloads]];
 }
 
@@ -87,7 +87,7 @@
  */
 -(IBAction)changeUseJavaScript:(id)sender
 {
-    BOOL useJavaScript = [sender state] == NSOnState;
+    BOOL useJavaScript = [sender state] == NSControlStateValueOn;
     [Preferences standardPreferences].useJavaScript = useJavaScript;
 }
 
@@ -96,7 +96,7 @@
  * e.g. Flash
  */
 - (IBAction)changeUseWebPlugins:(NSButton *)sender {
-    BOOL useWebPlugins = sender.state == NSOnState;
+    BOOL useWebPlugins = sender.state == NSControlStateValueOn;
     [Preferences standardPreferences].useWebPlugins = useWebPlugins;
 }
 

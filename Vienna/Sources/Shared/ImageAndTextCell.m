@@ -191,7 +191,7 @@
 		// vertically center
 		imageFrame.origin.y += (cellFrame->size.height - imageSize.height) / 2.0;
 		
-		[image drawInRect:imageFrame fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f respectFlipped:YES hints:NULL];
+        [image drawInRect:imageFrame fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1.0f respectFlipped:YES hints:NULL];
 
 	}
 }
@@ -252,7 +252,7 @@
 		// vertically center
 		imageFrame.origin.y += (cellFrame.size.height - imageSize.height) / 2.0;
 		
-		[auxiliaryImage drawInRect:imageFrame fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f respectFlipped:YES hints:NULL];
+        [auxiliaryImage drawInRect:imageFrame fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1.0f respectFlipped:YES hints:NULL];
 
 	}
 	

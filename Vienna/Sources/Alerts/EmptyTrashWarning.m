@@ -37,14 +37,14 @@ enum
 
 -(void)windowWillLoad
 {
-	doNotShowWarningAgain.state = NSOffState;
+	doNotShowWarningAgain.state = NSControlStateValueOff;
 }
 
 -(BOOL)shouldEmptyTrash
 {
 	BOOL shouldEmptyTrash = ([NSApp runModalForWindow:self.window] == MA_EmptyTrashReturnCode_Yes);
 	
-	if (doNotShowWarningAgain.state == NSOnState)
+	if (doNotShowWarningAgain.state == NSControlStateValueOn)
 	{
 		[[Preferences standardPreferences] setInteger:(shouldEmptyTrash ? MA_EmptyTrash_WithoutWarning : MA_EmptyTrash_None) forKey:MAPref_EmptyTrashNotification];
 	}

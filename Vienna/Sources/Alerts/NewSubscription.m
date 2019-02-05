@@ -92,7 +92,7 @@
     NSString *candidateURL = initialURL.trim;
     BOOL fromClipboard = NO;
     if (candidateURL == nil) {
-        NSData *pboardData = [[NSPasteboard generalPasteboard] dataForType:NSStringPboardType];
+        NSData *pboardData = [[NSPasteboard generalPasteboard] dataForType:NSPasteboardTypeString];
         if (pboardData != nil) {
             NSString *pasteString = [[NSString alloc] initWithData:pboardData encoding:NSASCIIStringEncoding].trim;
             NSString *lowerCasePasteString = pasteString.lowercaseString;
@@ -284,7 +284,7 @@
 */
 -(IBAction)doGoogleOption:(id)sender
 {
- 	[Preferences standardPreferences].prefersGoogleNewSubscription = ([sender state] == NSOnState);
+    [Preferences standardPreferences].prefersGoogleNewSubscription = ([sender state] == NSControlStateValueOn);
 }
 
 /* handleTextDidChange [delegate]

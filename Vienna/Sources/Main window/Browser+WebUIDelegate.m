@@ -96,7 +96,7 @@
     // Enable the selection of directories in the dialog.
     [openDlg setCanChooseDirectories:NO];
 
-    if ( [openDlg runModal] == NSFileHandlingPanelOKButton )
+    if ( [openDlg runModal] == NSModalResponseOK )
     {
         NSArray* files = [openDlg.URLs valueForKey:@"relativePath"];
         [resultListener chooseFilenames:files];

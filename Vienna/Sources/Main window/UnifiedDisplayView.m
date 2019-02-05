@@ -120,7 +120,7 @@
 	NSMenuItem *openFeedInBrowser = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Subscription Home Page in External Browser", @"Title of a menu item")
 															   action:@selector(viewSourceHomePageInAlternateBrowser:)
 														keyEquivalent:@""];
-	openFeedInBrowser.keyEquivalentModifierMask = NSAlternateKeyMask;
+    openFeedInBrowser.keyEquivalentModifierMask = NSEventModifierFlagOption;
 	openFeedInBrowser.alternate = YES;
 	[articleListMenu addItem:openFeedInBrowser];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Open Article Page", @"Title of a menu item")
@@ -129,7 +129,7 @@
 	NSMenuItem *openItemInBrowser = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Article Page in External Browser", @"Title of a menu item")
 															   action:@selector(viewArticlePagesInAlternateBrowser:)
 														keyEquivalent:@""];
-	openItemInBrowser.keyEquivalentModifierMask = NSAlternateKeyMask;
+    openItemInBrowser.keyEquivalentModifierMask = NSEventModifierFlagOption;
 	openItemInBrowser.alternate = YES;
 	[articleListMenu addItem:openItemInBrowser];
 
@@ -790,7 +790,7 @@
 	NSInteger count = rowIndexes.count;
 
 	// Set up the pasteboard
-	[pboard declareTypes:@[MA_PBoardType_RSSItem, @"WebURLsWithTitlesPboardType", NSStringPboardType, NSHTMLPboardType] owner:self];
+	[pboard declareTypes:@[MA_PBoardType_RSSItem, @"WebURLsWithTitlesPboardType", NSPasteboardTypeString, NSPasteboardTypeHTML] owner:self];
 	if (count == 1)
 		[pboard addTypes:@[MA_PBoardType_url, MA_PBoardType_urln, NSURLPboardType] owner:self];
 
@@ -844,8 +844,8 @@
 	// Put string on the pasteboard for external drops.
 	[pboard setPropertyList:arrayOfArticles forType:MA_PBoardType_RSSItem];
 	[pboard setPropertyList:@[arrayOfURLs, arrayOfTitles] forType:@"WebURLsWithTitlesPboardType"];
-	[pboard setString:fullPlainText forType:NSStringPboardType];
-	[pboard setString:fullHTMLText.stringByEscapingExtendedCharacters forType:NSHTMLPboardType];
+	[pboard setString:fullPlainText forType:NSPasteboardTypeString];
+	[pboard setString:fullHTMLText.stringByEscapingExtendedCharacters forType:NSPasteboardTypeHTML];
 
 	return YES;
 }
