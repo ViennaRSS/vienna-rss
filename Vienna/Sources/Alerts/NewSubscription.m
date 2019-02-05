@@ -58,22 +58,19 @@
  */
 -(void)newSubscription:(NSWindow *)window underParent:(NSInteger)itemId initialURL:(NSString *)initialURL
 {
-	[self loadRSSFeedBundle];
+    [self loadRSSFeedBundle];
 
-	// Load a list of sources from the RSSSources property list. The list of sources
-	// is a dictionary of templates which specify how to create the source URL and a
-	// display name which acts as the key. This allows us to support additional sources
-	// without having to write new code.
-	if (!sourcesDict)
-	{
-		NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
-		NSString * pathToPList = [thisBundle pathForResource:@"RSSSources" ofType:@"plist"];
-		if ([[NSFileManager defaultManager] fileExistsAtPath:pathToPList])
-		{
-			sourcesDict = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
-			[feedSource removeAllItems];
-			if (sourcesDict.count > 0)
-			{
+    // Load a list of sources from the RSSSources property list. The list of sources
+    // is a dictionary of templates which specify how to create the source URL and a
+    // display name which acts as the key. This allows us to support additional sources
+    // without having to write new code.
+    if (!sourcesDict) {
+        NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
+        NSString *pathToPList = [thisBundle pathForResource:@"RSSSources" ofType:@"plist"];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:pathToPList]) {
+            sourcesDict = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
+            [feedSource removeAllItems];
+            if (sourcesDict.count > 0) {
                 for (NSString *feedSourceType in sourcesDict.allKeys) {
                     NSMenuItem *feedMenuItem = [[NSMenuItem alloc] initWithTitle:feedSourceType
                                                                           action:NULL
@@ -81,60 +78,61 @@
                     feedMenuItem.representedObject = feedSourceType;
                     [feedSource.menu addItem:feedMenuItem];
                 }
-				[feedSource setEnabled:YES];
-				[feedSource selectItemWithTitle:NSLocalizedString(@"URL", @"URL")];
-			}
-		}
-	}
-	if (!sourcesDict)
-		[feedSource setEnabled:NO];
+                [feedSource setEnabled:YES];
+                [feedSource selectItemWithTitle:NSLocalizedString(@"URL", @"URL")];
+            }
+        }
+    }
+    if (!sourcesDict) {
+        [feedSource setEnabled:NO];
+    }
 
-	// Look on the pasteboard to see if there's an http:// url and, if so, prime the
-	// URL field with it. A handy shortcut.
-	if (initialURL != nil)
-	{
-        NSString *lowercaseURL = [initialURL lowercaseString];
-        if ([lowercaseURL hasPrefix:@"feed:http://"])
-        {
-            initialURL = [initialURL substringFromIndex:[@"feed:" length]];
+    // Look on the pasteboard to see if there's an http:// url and, if so, prime the
+    // URL field with it. A handy shortcut.
+    NSString *candidateURL = initialURL.trim;
+    BOOL fromClipboard = NO;
+    if (candidateURL == nil) {
+        NSData *pboardData = [[NSPasteboard generalPasteboard] dataForType:NSPasteboardTypeString];
+        if (pboardData != nil) {
+            NSString *pasteString = [[NSString alloc] initWithData:pboardData encoding:NSASCIIStringEncoding].trim;
+            NSString *lowerCasePasteString = pasteString.lowercaseString;
+
+            if (lowerCasePasteString != nil &&
+                ([lowerCasePasteString hasPrefix:@"http://"] || [lowerCasePasteString hasPrefix:@"https://"] ||
+                 [lowerCasePasteString hasPrefix:@"feed://"]))
+            {
+                candidateURL = pasteString;
+                fromClipboard = YES;
+            }
         }
-        else if ([lowercaseURL hasPrefix:@"feed:https://"])
-        {
-            initialURL = [initialURL substringFromIndex:[@"feed:" length]];
-        }
-        
-		feedURL.stringValue = initialURL;
-		[feedSource selectItemWithTitle:NSLocalizedString(@"URL", @"URL")];
-	}
-	else
-	{
-		NSData * pboardData = [[NSPasteboard generalPasteboard] dataForType:NSPasteboardTypeString];
-		feedURL.stringValue = @"";
-		if (pboardData != nil)
-		{
-			NSString * pasteString = [[NSString alloc] initWithData:pboardData encoding:NSASCIIStringEncoding];
-			NSString * lowerCasePasteString = pasteString.lowercaseString;
-            
-			if (lowerCasePasteString != nil && ([lowerCasePasteString hasPrefix:@"http://"] || [lowerCasePasteString hasPrefix:@"https://"] || [lowerCasePasteString hasPrefix:@"feed://"]))
-			{
-				feedURL.stringValue = pasteString;
-				[feedURL selectText:self];
-				[feedSource selectItemWithTitle:NSLocalizedString(@"URL", @"URL")];
-			}
-		}
-	}
-	
-	// Reset from the last time we used this sheet.
-	[self enableSubscribeButton];
-	[self setLinkTitle];
-	editFolderId = -1;
-	parentId = itemId;
-	[newRSSFeedWindow makeFirstResponder:feedURL];
-	//restore from preferences, if it can be done ; otherwise, uncheck this option
-	self.googleOptionButton=[Preferences standardPreferences].syncGoogleReader
-		&&[Preferences standardPreferences].prefersGoogleNewSubscription;
-	[NSApp beginSheet:newRSSFeedWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
-}
+    }
+    // Work around (wrong) duplicate schemes
+    NSString *lowercaseURL = [candidateURL lowercaseString];
+    if ([lowercaseURL hasPrefix:@"feed:http://"] || [lowercaseURL hasPrefix:@"feed:https://"]) {
+        candidateURL = [candidateURL substringFromIndex:[@"feed:" length]];
+    }
+    // populate the sheet's text field for URL
+    if (candidateURL != nil) {
+        feedURL.stringValue = candidateURL;
+    } else {
+        feedURL.stringValue = @"";
+    }
+    if (fromClipboard) {
+        [feedURL selectText:self];
+    }
+    [feedSource selectItemWithTitle:NSLocalizedString(@"URL", @"URL")];
+
+    // Reset from the last time we used this sheet.
+    [self enableSubscribeButton];
+    [self setLinkTitle];
+    editFolderId = -1;
+    parentId = itemId;
+    [newRSSFeedWindow makeFirstResponder:feedURL];
+    //restore from preferences, if it can be done ; otherwise, uncheck this option
+    self.googleOptionButton = [Preferences standardPreferences].syncGoogleReader
+                              && [Preferences standardPreferences].prefersGoogleNewSubscription;
+    [NSApp beginSheet:newRSSFeedWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
+} // newSubscription
 
 /* didEndSubscriptionEdit
  * Notification that the editing is done.

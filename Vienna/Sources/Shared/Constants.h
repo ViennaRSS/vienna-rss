@@ -21,6 +21,7 @@
 @import Foundation;
 
 extern NSString * MA_DefaultStyleName;
+extern NSString * MA_DefaultUserAgentString;
 extern NSString * MA_BrowserUserAgentString;
 
 extern NSString * MAPref_ArticleListFont;
