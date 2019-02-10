@@ -228,11 +228,15 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     dispatch_semaphore_signal(sema);
 
             }];
+            if (@available(macOS 10.10, *)) {
+                task.priority = NSURLSessionTaskPriorityHigh;
+            };
             [task resume];
 
         }];
 
         self.statusMessage = NSLocalizedString(@"Authenticating on Open Reader", nil);
+        clientAuthOperation.queuePriority = NSOperationQueuePriorityHigh;
         [clientAuthOperation start];
         // Now we wait until the task response block will send a signal
         dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
