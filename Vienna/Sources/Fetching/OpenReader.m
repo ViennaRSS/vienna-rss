@@ -194,13 +194,14 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                     self.openReaderStatus = notAuthenticated;
                     if (error) {
-                        LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
-                        LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                        NSLog(@"clientAuthOperation error for URL %@", ((NSHTTPURLResponse *)response).URL);
+                        NSLog(@"Headers %@", ((NSHTTPURLResponse *)response).allHeaderFields);
+                        NSLog(@"Response data %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                         [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
                     } else {
                         if (((NSHTTPURLResponse *)response).statusCode != 200) {
-                            LOG_EXPR(((NSHTTPURLResponse *)response).statusCode);
-                            LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
+                            NSLog(@"clientAuthOperation statusCode %ld for URL %@", ((NSHTTPURLResponse *)response).statusCode, ((NSHTTPURLResponse *)response).URL);
+                            NSLog(@"Headers %@", ((NSHTTPURLResponse *)response).allHeaderFields);
                             [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
                         } else {         // statusCode 200
                             NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -306,11 +307,11 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         tTokenOperation = [[RefreshManager sharedManager] addConnection:myRequest
             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                 if (error) {
-                    LOG_EXPR(myRequest.URL);
-                    LOG_EXPR(myRequest.allHTTPHeaderFields);
-                    LOG_EXPR([[NSString alloc] initWithData:myRequest.HTTPBody encoding:NSUTF8StringEncoding]);
-                    LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
-                    LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                    NSLog(@"tTokenOperation error for URL %@", myRequest.URL);
+                    NSLog(@"Request headers %@", myRequest.allHTTPHeaderFields);
+                    NSLog(@"Request body %@", [[NSString alloc] initWithData:myRequest.HTTPBody encoding:NSUTF8StringEncoding]);
+                    NSLog(@"Response headers %@", ((NSHTTPURLResponse *)response).allHeaderFields);
+                    NSLog(@"Response data %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                     self.tToken = nil;
                     self.openReaderStatus = missingTToken;
                     [self.tTokenWaitQueue removeAllObjects];
