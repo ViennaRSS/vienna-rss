@@ -32,7 +32,6 @@
 	NSString * statusMessageDuringRefresh;
 	NSOperationQueue *networkQueue;
 	dispatch_queue_t _queue;
-	NSURLSession * session;
 }
 
 +(RefreshManager *)sharedManager;
