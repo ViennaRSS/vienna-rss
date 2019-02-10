@@ -8,6 +8,23 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.5.4
+-----
+- Fix dialog sheet handling definition of smart folders with multiple criteria
+- Use w3.org feed validator instead of feedvalidator.org
+- Modify User-Agent header used for fetching feeds (fix problem with Oxford University Press)
+- On macOS Mojave, fix authorization for plugins using AppleScript
+- Fix 'Add to Safari Reading List' plugin regarding articles with empty body
+- Some improvements to macOS Mojave's dark mode
+- Make article list's progress indicators less prominent
+- Trim unneeded whitespaces in URLs of new subscriptions
+- Optimize builtin images (losslessly reduce size of PNG and JPEG)
+- Replace deprecated SDK calls
+- Make process and logs more verbose regarding OpenReader server login failures
+- Update Swift support to version 4.2
+- Optimize Info.plist
+- Optimize build
+
 3.5.3
 -----
 - Fix crash with problematic feed
