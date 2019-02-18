@@ -60,10 +60,14 @@
     NSString *stringData;
 
     data1 = [NSMutableData dataWithData:self.HTTPBody];
+    // reference for our character set : unreserved characters in section 2.3 of RFC3986
+    NSCharacterSet * charSet = [NSCharacterSet characterSetWithCharactersInString:
+	    @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"];
+    stringData = [NSString stringWithFormat:@"%@=%@",
+        [key stringByAddingPercentEncodingWithAllowedCharacters:charSet],
+        [value stringByAddingPercentEncodingWithAllowedCharacters:charSet]];
     if (data1.length > 0) {
-        stringData = [NSString stringWithFormat:@"&%@=%@", key, value];
-    } else {
-        stringData = [NSString stringWithFormat:@"%@=%@", key, value];
+        stringData = [NSString stringWithFormat:@"&%@", stringData];
     }
     data2 = [stringData dataUsingEncoding:NSUTF8StringEncoding];
     [data1 appendData:data2];

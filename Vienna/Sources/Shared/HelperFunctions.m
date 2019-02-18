@@ -71,16 +71,13 @@ NSMenuItem * menuItemWithAction(SEL theSelector)
 /* percentEscape
  * Escape invalid and reserved URL characters to make string suitable 
  * for embedding in mailto: URLs and custom app-specific schemes like papers://
+ * cf unreserved characters in section 2.3 of RFC3986
  */ 
 NSString * percentEscape(NSString *string)
 {
-	return CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)string, NULL,
-												   
-												   // RFC2368 says all URL reserved characters must be encoded
-												   // these are all the reserved characters from RFC3986
-												   CFSTR("/:?#[]@!$&'()*+,;="),	
-												   
-												   kCFStringEncodingUTF8));
+	return [string stringByAddingPercentEncodingWithAllowedCharacters:
+	    [NSCharacterSet characterSetWithCharactersInString:
+	    @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"]];
 }
 
 /* cleanedUpAndEscapedUrlFromString
