@@ -129,10 +129,13 @@ static NSMutableDictionary * stylePathMappings = nil;
 		{
 			
 			htmlTemplate = templateString;
-			cssStylesheet = [[@"file://localhost" stringByAppendingString:[path stringByAppendingPathComponent:@"stylesheet.css"]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+			cssStylesheet = [@"file://localhost" stringByAppendingString:
+			    [[path stringByAppendingPathComponent:@"stylesheet.css"]
+			    stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLPathAllowedCharacterSet]];
 			NSString * javaScriptPath = [path stringByAppendingPathComponent:@"script.js"];
 			if ([[NSFileManager defaultManager] fileExistsAtPath:javaScriptPath])
-				jsScript = [[@"file://localhost" stringByAppendingString:javaScriptPath] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+				jsScript = [@"file://localhost" stringByAppendingString:[javaScriptPath
+				stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLPathAllowedCharacterSet]];
 			else
 				jsScript = nil;
 			
