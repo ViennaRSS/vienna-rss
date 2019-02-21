@@ -175,7 +175,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 	NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<!DOCTYPE html><html><head><meta content=\"text/html; charset=UTF-8\">"];
 	// the link for the first article will be the base URL for resolving relative URLs
 	[htmlText appendString:@"<base href=\""];
-	[htmlText appendString:[SafeString(((Article *)msgArray[0]).link) stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+	[htmlText appendString:[NSString stringByCleaningURLString:((Article *)msgArray[0]).link]];
 	[htmlText appendString:@"\">"];
 	if (cssStylesheet != nil)
 	{

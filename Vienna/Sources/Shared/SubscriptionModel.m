@@ -63,8 +63,7 @@
 		NSURL * myURL = [NSURL URLWithString:feedPart relativeToURL:rssFeedURL];
 		if (myURL ==nil)
 		{
-			// try cleaning up the string : unescape then re-add escapes
-            NSString * urlString = [feedPart.stringByUnescapingExtendedCharacters stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSString * urlString = [NSString stringByCleaningURLString:feedPart];
 			myURL = [NSURL URLWithString:urlString relativeToURL:rssFeedURL];
 		}
 		return myURL;

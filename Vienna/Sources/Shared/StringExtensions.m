@@ -38,7 +38,7 @@
  */
 -(void)fixupRelativeImgTags:(NSString *)baseURL
 {
-	baseURL = [baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	baseURL = [NSString stringByCleaningURLString:baseURL];
 	if (baseURL == nil)
 		return;
 	NSURL * imgBaseURL = [NSURL URLWithString:baseURL];
@@ -92,7 +92,7 @@
  */
 -(void)fixupRelativeAnchorTags:(NSString *)baseURL
 {
-	baseURL = [baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	baseURL = [NSString stringByCleaningURLString:baseURL];
 	if (baseURL == nil)
 		return;
 	NSURL * anchorBaseURL = [NSURL URLWithString:baseURL];
@@ -146,7 +146,7 @@
  */
 -(void)fixupRelativeIframeTags:(NSString *)baseURL
 {
-	baseURL = [baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	baseURL = [NSString stringByCleaningURLString:baseURL];
 	if (baseURL == nil)
 		return;
 	NSURL * imgBaseURL = [NSURL URLWithString:baseURL];
