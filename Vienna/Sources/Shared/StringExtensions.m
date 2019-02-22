@@ -731,30 +731,26 @@ static NSMutableDictionary * entityMap = nil;
  */
 +(NSString * )stringByCleaningURLString:(NSString *) urlString
 {
-	NSString *newString;
-	@try
-	{
-		NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
-		[pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
-		if ([pasteboard setString:urlString forType:NSPasteboardTypeString])
-			newString = [WebView URLFromPasteboard:pasteboard].absoluteString;
-		else
-		{
-            newString = @"";
-            // TODO: present error message to user?
-            NSBeep();
-            NSLog(@"Can't create URL from string '%@'.", urlString);
+    NSString * newString;
+    if (urlString == nil) {
+        newString = @"";
+    } else {
+        @try
+        {
+            NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
+            [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
+            if ([pasteboard setString:urlString forType:NSPasteboardTypeString]) {
+                newString = [WebView URLFromPasteboard:pasteboard].absoluteString;
+            } else {
+                newString = @"";
+            }
         }
-	}
-	@catch (NSException * exception)
-	{
-		newString = @"";
-        // TODO: present error message to user?
-        NSBeep();
-        NSLog(@"Can't create URL from string '%@'.", urlString);
-	}
-
-	return newString;
+        @catch (NSException * exception)
+        {
+            newString = @"";
+        }
+    }
+    return newString;
 }
 
 + (NSString *)toBase64String:(NSString *)string {
