@@ -359,7 +359,7 @@
 						
 			if (urlString != nil)
 			{
-				NSURL * urlToLoad = cleanedUpAndEscapedUrlFromString(urlString);				
+				NSURL * urlToLoad = cleanedUpUrlFromString(urlString);				
 				if (urlToLoad != nil)
 					[APPCONTROLLER.browser createAndLoadNewTab:urlToLoad inBackground:NO];
 			}

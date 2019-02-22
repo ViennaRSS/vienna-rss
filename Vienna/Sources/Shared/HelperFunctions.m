@@ -80,11 +80,11 @@ NSString * percentEscape(NSString *string)
 	    @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"]];
 }
 
-/* cleanedUpAndEscapedUrlFromString
+/* cleanedUpUrlFromString
  * Uses WebKit to clean up user-entered URLs that might contain umlauts, diacritics and other
  * IDNA related stuff in the domain, or God knows what in filenames and arguments.
  */
-NSURL * cleanedUpAndEscapedUrlFromString(NSString * theUrl)
+NSURL * cleanedUpUrlFromString(NSString * theUrl)
 {
     NSURL *urlToLoad = nil;
     if (theUrl != nil) {
