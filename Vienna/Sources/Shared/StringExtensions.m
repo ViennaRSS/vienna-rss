@@ -726,35 +726,25 @@ static NSMutableDictionary * entityMap = nil;
  *   Better alternative to -stringByAddingPercentEscapesUsingEncoding:
  *   Will handle unescaped or partially escaped URL strings where sequences are unpredictable,
  *   for instance will preserve # announcing fragment from being escaped.
- *   Uses WebKit to clean up user-entered URLs that might contain umlauts, diacritics and other
- *   IDNA related stuff in the domain, or God knows what in filenames and arguments.
  */
 +(NSString * )stringByCleaningURLString:(NSString *) urlString
 {
-	NSString *newString;
-	@try
-	{
-		NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
-		[pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
-		if ([pasteboard setString:urlString forType:NSPasteboardTypeString])
-			newString = [WebView URLFromPasteboard:pasteboard].absoluteString;
-		else
-		{
+    NSString *newString;
+    if (urlString == nil) {
+        newString = @"";
+    } else {
+        @try {
+            NSURLComponents *components = [NSURLComponents componentsWithString:urlString];
+            if (components != nil) {
+                newString = components.URL.absoluteString;
+            } else {
+                newString = @"";
+            }
+        } @catch (NSException *exception) {
             newString = @"";
-            // TODO: present error message to user?
-            NSBeep();
-            NSLog(@"Can't create URL from string '%@'.", urlString);
         }
-	}
-	@catch (NSException * exception)
-	{
-		newString = @"";
-        // TODO: present error message to user?
-        NSBeep();
-        NSLog(@"Can't create URL from string '%@'.", urlString);
-	}
-
-	return newString;
+    }
+    return newString;
 }
 
 + (NSString *)toBase64String:(NSString *)string {

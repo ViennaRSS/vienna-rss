@@ -86,26 +86,23 @@ NSString * percentEscape(NSString *string)
  */
 NSURL * cleanedUpAndEscapedUrlFromString(NSString * theUrl)
 {
-	NSURL *urlToLoad = nil;
-	NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
-	[pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
-	@try
-	{
-		if ([pasteboard setString:theUrl forType:NSPasteboardTypeString])
-			urlToLoad = [WebView URLFromPasteboard:pasteboard];
-	}
-	@catch (NSException * exception)
-	{
-		urlToLoad = nil;
-		{
-			// TODO: present error message to user?
-			NSBeep();
-			NSLog(@"Can't create URL from string '%@'.", theUrl);
-		}		
-	}
-	
-	return urlToLoad;
-}	
+    NSURL *urlToLoad = nil;
+    if (theUrl == nil) {
+        urlToLoad = nil;
+    } else {
+        @try {
+            NSURLComponents *components = [NSURLComponents componentsWithString:theUrl];
+            if (components != nil) {
+                urlToLoad = components.URL;
+            } else {
+                urlToLoad = nil;
+            }
+        } @catch (NSException *exception) {
+            urlToLoad = nil;
+        }
+    }
+    return urlToLoad;
+}
 
 /* loadMapFromPath
  * Iterates all files and folders in the specified path and adds them to the given mappings
