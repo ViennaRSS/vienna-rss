@@ -70,5 +70,41 @@
 		<key>SiteHomePage</key>
 		<string>https://logdown.com/</string>
 	</dict>
+	<key>字媒體</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入字媒體使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>https://zi.media/rss/authors/%@</string>
+		<key>SiteHomePage</key>
+		<string>https://zi.media/</string>
+	</dict>
+	<key>隨意窩</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入隨意窩使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>https://blog.xuite.net/%@/blog/rss.xml</string>
+		<key>SiteHomePage</key>
+		<string>https://blog.xuite.net/</string>
+	</dict>
+	<key>HatenaBlog</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入 HatenaBlog 使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>https://%@.hatenablog.com/feed</string>
+		<key>SiteHomePage</key>
+		<string>https://hatenablog.com/</string>
+	</dict>
+	<key>PChome 個人新聞台</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入 PChome 個人新聞台使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>http://mypaper.pchome.com.tw/%@/rss</string>
+		<key>SiteHomePage</key>
+		<string>http://mypaper.pchome.com.tw/</string>
+	</dict>
 </dict>
 </plist>
