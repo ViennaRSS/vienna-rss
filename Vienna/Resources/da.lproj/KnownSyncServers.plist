@@ -14,7 +14,7 @@
 		<key>Address</key>
 		<string>feedhq.org</string>
 		<key>Hint</key>
-		<string>Indtast emailadresse og kodeord associeret med din FeedHQ konto</string>
+		<string>Indtast brugernavn (eller emailadressen) og kodeord associeret med din FeedHQ konto</string>
 	</dict>
 	<key>InoReader</key>
 	<dict>
