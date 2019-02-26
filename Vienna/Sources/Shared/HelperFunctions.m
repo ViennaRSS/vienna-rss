@@ -88,7 +88,7 @@ NSURL * cleanedUpUrlFromString(NSString * theUrl)
 {
     NSURL *urlToLoad = nil;
     if (theUrl != nil) {
-        NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
+        NSPasteboard * pasteboard = [NSPasteboard pasteboardWithUniqueName];
         [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
         @try
         {
@@ -100,6 +100,7 @@ NSURL * cleanedUpUrlFromString(NSString * theUrl)
         {
             urlToLoad = nil;
         }
+        [pasteboard releaseGlobally];
     }
     return urlToLoad;
 }

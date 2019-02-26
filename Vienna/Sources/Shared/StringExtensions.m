@@ -735,10 +735,10 @@ static NSMutableDictionary * entityMap = nil;
     if (urlString == nil) {
         newString = @"";
     } else {
+        NSPasteboard * pasteboard = [NSPasteboard pasteboardWithUniqueName];
+        [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
         @try
         {
-            NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
-            [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
             if ([pasteboard setString:urlString forType:NSPasteboardTypeString]) {
                 newString = [WebView URLFromPasteboard:pasteboard].absoluteString;
             } else {
@@ -749,6 +749,7 @@ static NSMutableDictionary * entityMap = nil;
         {
             newString = @"";
         }
+        [pasteboard releaseGlobally];
     }
     return newString;
 }
