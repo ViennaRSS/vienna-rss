@@ -173,11 +173,11 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         // start first authentication
         self.openReaderStatus = waitingClientToken;
 
+        [self configureForSpecificHost];
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost]];
         NSMutableURLRequest *myRequest = [NSMutableURLRequest requestWithURL:url];
         myRequest.HTTPMethod = @"POST";
 
-        [self configureForSpecificHost];
         if (hostRequiresInoreaderAdditionalHeaders) {
             NSMutableDictionary *theHeaders = [myRequest.allHTTPHeaderFields mutableCopy];
             [theHeaders addEntriesFromDictionary:inoreaderAdditionalHeaders];

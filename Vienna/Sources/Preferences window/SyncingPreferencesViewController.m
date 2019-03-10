@@ -140,7 +140,7 @@ static BOOL _credentialsChanged;
 #pragma mark - Vienna Prferences
 
 
--(void)windowWillClose:(NSNotification *)notification
+-(void)viewWillDisappear
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     if(syncButton.state == NSControlStateValueOn && _credentialsChanged)
@@ -148,6 +148,7 @@ static BOOL _credentialsChanged;
         [[OpenReader sharedManager] resetAuthentication];
         [[OpenReader sharedManager] loadSubscriptions];
     }
+    [super viewWillDisappear];
 }
 
 
