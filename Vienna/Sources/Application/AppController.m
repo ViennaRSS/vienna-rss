@@ -2341,7 +2341,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 				}
 				else
 				{
-					if (visibleRect.origin.y + visibleRect.size.height >= theView.frame.size.height - 2)
+					if (visibleRect.size.height == 0
+                        || visibleRect.origin.y + visibleRect.size.height >= theView.frame.size.height - 2)
 						[self viewNextUnread:self];
 					else
 						[view scrollPageDown:self];
