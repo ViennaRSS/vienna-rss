@@ -76,7 +76,7 @@
 	FSRef appRef;
 
 	// Keep this for the download/open
-    enclosureURLString = cleanedUpAndEscapedUrlFromString(newFilename).absoluteString;
+    enclosureURLString = cleanedUpUrlFromString(newFilename).absoluteString;
 
 	NSString * basename = [NSURL URLWithString:enclosureURLString].lastPathComponent;
 	if (basename==nil)

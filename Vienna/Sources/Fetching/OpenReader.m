@@ -973,7 +973,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     } else {
         feedIdentifier = feedURL;
     }
-    [myRequest setPostValue:[NSString stringWithFormat:@"feed/%@", percentEscape(feedIdentifier)] forKey:@"s"];
+    [myRequest setPostValue:[NSString stringWithFormat:@"feed/%@", feedIdentifier] forKey:@"s"];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:myRequest
         completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -1002,7 +1002,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     } else {
         feedIdentifier = feedURL;
     }
-    [request setPostValue:[NSString stringWithFormat:@"feed/%@", percentEscape(feedIdentifier)] forKey:@"s"];
+    [request setPostValue:[NSString stringWithFormat:@"feed/%@", feedIdentifier] forKey:@"s"];
     [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", folderName] forKey:flag ? @"a" : @"r"];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:request
@@ -1031,7 +1031,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     } else {
         feedIdentifier = feedURL;
     }
-    [request setPostValue:[NSString stringWithFormat:@"feed/%@", percentEscape(feedIdentifier)] forKey:@"s"];
+    [request setPostValue:[NSString stringWithFormat:@"feed/%@", feedIdentifier] forKey:@"s"];
     [request setPostValue:folderName forKey:@"t"];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:request

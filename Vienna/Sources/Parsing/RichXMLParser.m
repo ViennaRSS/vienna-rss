@@ -489,9 +489,9 @@
     items = [[NSMutableArray alloc] init];
 
     // Look for feed attributes we need to process
-    NSString * linkBase = [[atomElement attributeForName:@"xml:base"].stringValue stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString * linkBase = [NSString stringByCleaningURLString:[atomElement attributeForName:@"xml:base"].stringValue];
     if (linkBase == nil) {
-        linkBase = [self.link stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        linkBase = [NSString stringByCleaningURLString:self.link];
     }
     NSURL * linkBaseURL = (linkBase != nil) ? [NSURL URLWithString:linkBase] : nil;
 
@@ -525,7 +525,7 @@
         if (isAtomElement && [elementTag isEqualToString:@"link"]) {
             if ([atomChildElement attributeForName:@"rel"].stringValue == nil ||
                 [[atomChildElement attributeForName:@"rel"].stringValue isEqualToString:@"alternate"]) {
-                NSString * theLink = [[atomChildElement attributeForName:@"href"].stringValue stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                NSString * theLink = [NSString stringByCleaningURLString:[atomChildElement attributeForName:@"href"].stringValue];
                 if (theLink != nil) {
                     if ((linkBaseURL != nil) && ![theLink hasPrefix:@"http://"] && ![theLink hasPrefix:@"https://"]) {
                         NSURL * theLinkURL = [NSURL URLWithString:theLink relativeToURL:linkBaseURL];
@@ -537,7 +537,7 @@
             }
 
             if (linkBase == nil) {
-                linkBase = [self.link stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                linkBase = [NSString stringByCleaningURLString:self.link];
             }
 
             success = YES;
@@ -578,7 +578,7 @@
             NSMutableString * articleBody = nil;
 
             // Look for the xml:base attribute, and use absolute url or stack relative url
-            NSString * entryBase = [[atomChildElement attributeForName:@"xml:base"].stringValue stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSString * entryBase = [NSString stringByCleaningURLString:[atomChildElement attributeForName:@"xml:base"].stringValue];
             if (entryBase == nil) {
                 entryBase = linkBase;
             }

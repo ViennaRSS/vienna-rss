@@ -71,44 +71,39 @@ NSMenuItem * menuItemWithAction(SEL theSelector)
 /* percentEscape
  * Escape invalid and reserved URL characters to make string suitable 
  * for embedding in mailto: URLs and custom app-specific schemes like papers://
+ * cf unreserved characters in section 2.3 of RFC3986
  */ 
 NSString * percentEscape(NSString *string)
 {
-	return CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)string, NULL,
-												   
-												   // RFC2368 says all URL reserved characters must be encoded
-												   // these are all the reserved characters from RFC3986
-												   CFSTR("/:?#[]@!$&'()*+,;="),	
-												   
-												   kCFStringEncodingUTF8));
+	return [string stringByAddingPercentEncodingWithAllowedCharacters:
+	    [NSCharacterSet characterSetWithCharactersInString:
+	    @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"]];
 }
 
-/* cleanedUpAndEscapedUrlFromString
+/* cleanedUpUrlFromString
  * Uses WebKit to clean up user-entered URLs that might contain umlauts, diacritics and other
  * IDNA related stuff in the domain, or God knows what in filenames and arguments.
  */
-NSURL * cleanedUpAndEscapedUrlFromString(NSString * theUrl)
+NSURL * cleanedUpUrlFromString(NSString * theUrl)
 {
-	NSURL *urlToLoad = nil;
-	NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
-	[pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
-	@try
-	{
-		if ([pasteboard setString:theUrl forType:NSPasteboardTypeString])
-			urlToLoad = [WebView URLFromPasteboard:pasteboard];
-	}
-	@catch (NSException * exception)
-	{
-		urlToLoad = nil;
-		{
-			// TODO: present error message to user?
-			NSBeep();
-			NSLog(@"Can't create URL from string '%@'.", theUrl);
-		}		
-	}
-	
-	return urlToLoad;
-}	
+    NSURL *urlToLoad = nil;
+    if (theUrl != nil) {
+        NSPasteboard * pasteboard = [NSPasteboard pasteboardWithUniqueName];
+        [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
+        @try
+        {
+            if ([pasteboard setString:theUrl forType:NSPasteboardTypeString]) {
+                urlToLoad = [WebView URLFromPasteboard:pasteboard];
+            }
+        }
+        @catch (NSException * exception)
+        {
+            urlToLoad = nil;
+        }
+        [pasteboard releaseGlobally];
+    }
+    return urlToLoad;
+}
 
 /* loadMapFromPath
  * Iterates all files and folders in the specified path and adds them to the given mappings

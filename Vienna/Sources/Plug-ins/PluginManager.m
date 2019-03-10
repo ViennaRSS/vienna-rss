@@ -330,7 +330,7 @@
 				}
 				else 
 				{
-					[urlString replaceString:@"$ArticleLink$" withString:[theView.viewLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+					[urlString replaceString:@"$ArticleLink$" withString:[NSString stringByCleaningURLString:theView.viewLink]];
 				}
 
 			}
@@ -349,17 +349,17 @@
 					NSString * shortURL = [bitlyHelper shortenURL:currentMessage.link];
 					
 					// If URL shortening fails, we fall back to the long URL.
-					[urlString replaceString:@"$ArticleLink$" withString:(shortURL ? shortURL : [[currentMessage.link stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding])];
+					[urlString replaceString:@"$ArticleLink$" withString:[NSString stringByCleaningURLString:(shortURL ? shortURL : currentMessage.link)]];
 				}
 				else 
 				{
-					[urlString replaceString:@"$ArticleLink$" withString: [[currentMessage.link stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+					[urlString replaceString:@"$ArticleLink$" withString:[NSString stringByCleaningURLString:currentMessage.link]];
 				}
 			}
 						
 			if (urlString != nil)
 			{
-				NSURL * urlToLoad = cleanedUpAndEscapedUrlFromString(urlString);				
+				NSURL * urlToLoad = cleanedUpUrlFromString(urlString);				
 				if (urlToLoad != nil)
 					[APPCONTROLLER.browser createAndLoadNewTab:urlToLoad inBackground:NO];
 			}

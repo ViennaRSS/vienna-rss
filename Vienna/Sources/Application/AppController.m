@@ -1075,7 +1075,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	NSURL * theURL = [NSURL URLWithString:urlString];
 	if (theURL == nil)
 	{
-		theURL = cleanedUpAndEscapedUrlFromString(urlString);
+		theURL = cleanedUpUrlFromString(urlString);
 	}
 	[self openURL:theURL inPreferredBrowser:openInPreferredBrowserFlag];
 }
@@ -2108,7 +2108,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
                 NSURL * theURL = [NSURL URLWithString:currentArticle.link];
                 if (theURL == nil)
                 {
-					theURL = cleanedUpAndEscapedUrlFromString(currentArticle.link);
+					theURL = cleanedUpUrlFromString(currentArticle.link);
                 }
                 [urls addObject:theURL];
             }
@@ -2439,7 +2439,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	if ([urlString hasPrefix:@"feed://"])
 		urlString = [NSString stringWithFormat:@"http://%@", [urlString substringFromIndex:7]];
 
-	urlString = cleanedUpAndEscapedUrlFromString(urlString).absoluteString;
+	urlString = cleanedUpUrlFromString(urlString).absoluteString;
 	
 	// If the folder already exists, just select it.
 	Folder * folder = [db folderFromFeedURL:urlString];

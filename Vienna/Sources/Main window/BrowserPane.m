@@ -207,7 +207,7 @@
 	}
 
 	// cleanUpUrl is a hack to handle Internationalized Domain Names. WebKit handles them automatically, so we tap into that.
-	NSURL *urlToLoad = cleanedUpAndEscapedUrlFromString(theURL);
+	NSURL *urlToLoad = cleanedUpUrlFromString(theURL);
 	if (urlToLoad != nil)
 	{
 		//set url and load immediately, because action was invoked by user

@@ -129,10 +129,13 @@ static NSMutableDictionary * stylePathMappings = nil;
 		{
 			
 			htmlTemplate = templateString;
-			cssStylesheet = [[@"file://localhost" stringByAppendingString:[path stringByAppendingPathComponent:@"stylesheet.css"]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+			cssStylesheet = [@"file://localhost" stringByAppendingString:
+			    [[path stringByAppendingPathComponent:@"stylesheet.css"]
+			    stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLPathAllowedCharacterSet]];
 			NSString * javaScriptPath = [path stringByAppendingPathComponent:@"script.js"];
 			if ([[NSFileManager defaultManager] fileExistsAtPath:javaScriptPath])
-				jsScript = [[@"file://localhost" stringByAppendingString:javaScriptPath] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+				jsScript = [@"file://localhost" stringByAppendingString:[javaScriptPath
+				stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLPathAllowedCharacterSet]];
 			else
 				jsScript = nil;
 			
@@ -172,7 +175,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 	NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<!DOCTYPE html><html><head><meta content=\"text/html; charset=UTF-8\">"];
 	// the link for the first article will be the base URL for resolving relative URLs
 	[htmlText appendString:@"<base href=\""];
-	[htmlText appendString:[SafeString(((Article *)msgArray[0]).link) stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+	[htmlText appendString:[NSString stringByCleaningURLString:((Article *)msgArray[0]).link]];
 	[htmlText appendString:@"\">"];
 	if (cssStylesheet != nil)
 	{

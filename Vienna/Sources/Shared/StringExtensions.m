@@ -38,7 +38,7 @@
  */
 -(void)fixupRelativeImgTags:(NSString *)baseURL
 {
-	baseURL = [baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	baseURL = [NSString stringByCleaningURLString:baseURL];
 	if (baseURL == nil)
 		return;
 	NSURL * imgBaseURL = [NSURL URLWithString:baseURL];
@@ -92,7 +92,7 @@
  */
 -(void)fixupRelativeAnchorTags:(NSString *)baseURL
 {
-	baseURL = [baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	baseURL = [NSString stringByCleaningURLString:baseURL];
 	if (baseURL == nil)
 		return;
 	NSURL * anchorBaseURL = [NSURL URLWithString:baseURL];
@@ -146,7 +146,7 @@
  */
 -(void)fixupRelativeIframeTags:(NSString *)baseURL
 {
-	baseURL = [baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	baseURL = [NSString stringByCleaningURLString:baseURL];
 	if (baseURL == nil)
 		return;
 	NSURL * imgBaseURL = [NSURL URLWithString:baseURL];
@@ -731,30 +731,27 @@ static NSMutableDictionary * entityMap = nil;
  */
 +(NSString * )stringByCleaningURLString:(NSString *) urlString
 {
-	NSString *newString;
-	@try
-	{
-		NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
-		[pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
-		if ([pasteboard setString:urlString forType:NSPasteboardTypeString])
-			newString = [WebView URLFromPasteboard:pasteboard].absoluteString;
-		else
-		{
-            newString = @"";
-            // TODO: present error message to user?
-            NSBeep();
-            NSLog(@"Can't create URL from string '%@'.", urlString);
+    NSString * newString;
+    if (urlString == nil) {
+        newString = @"";
+    } else {
+        NSPasteboard * pasteboard = [NSPasteboard pasteboardWithUniqueName];
+        [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
+        @try
+        {
+            if ([pasteboard setString:urlString forType:NSPasteboardTypeString]) {
+                newString = [WebView URLFromPasteboard:pasteboard].absoluteString;
+            } else {
+                newString = @"";
+            }
         }
-	}
-	@catch (NSException * exception)
-	{
-		newString = @"";
-        // TODO: present error message to user?
-        NSBeep();
-        NSLog(@"Can't create URL from string '%@'.", urlString);
-	}
-
-	return newString;
+        @catch (NSException * exception)
+        {
+            newString = @"";
+        }
+        [pasteboard releaseGlobally];
+    }
+    return newString;
 }
 
 + (NSString *)toBase64String:(NSString *)string {
