@@ -95,6 +95,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         config.timeoutIntervalForRequest = 180;
         config.URLCache = nil;
         config.HTTPAdditionalHeaders = @{@"User-Agent": userAgent};
+        config.HTTPMaximumConnectionsPerHost = 6;
+        config.HTTPShouldUsePipelining = YES;
         _urlSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];
 
         NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
