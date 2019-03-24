@@ -2,19 +2,9 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Vienna/Interfaces/Base.lproj/ActivityViewer.xib" datatype="plaintext" source-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
-      <trans-unit id="/35:dict/attributedStringAsRTF:dict/:string">
-        <source>{\rtf1\ansi\ansicpg65001\cocoartf1561\cocoasubrtf600
-{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
-{\*\expandedcolortbl;;\csgray\c0;}
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-
-\f0\fs22 \cf2  }</source>
-        <note/>
-      </trans-unit>
       <trans-unit id="8.title">
         <source>Activity</source>
         <note>Class = "NSWindow"; title = "Activity"; ObjectID = "8";</note>
@@ -31,7 +21,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/AdvancedPreferencesView.xib" datatype="plaintext" source-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="2GQ-cu-fbh.title">
@@ -90,7 +80,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/AppearancePreferencesView.xib" datatype="plaintext" source-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="71S-pg-AjX.title">
@@ -125,7 +115,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/Downloads.xib" datatype="plaintext" source-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="5.title">
@@ -140,7 +130,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/EmptyTrashWarning.xib" datatype="plaintext" source-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="17.title">
@@ -163,7 +153,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/ExportAccessoryViewController.xib" datatype="plaintext" source-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="6rj-zb-zOa.title">
@@ -182,7 +172,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/FeedCredentials.xib" datatype="plaintext" source-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="32.title">
@@ -213,7 +203,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/GeneralPreferencesView.xib" datatype="plaintext" source-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="1Ll-uG-QWh.title">
@@ -328,7 +318,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/GroupFolder.xib" datatype="plaintext" source-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="32.title">
@@ -351,7 +341,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/InfoWindow.xib" datatype="plaintext" source-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="105.title">
@@ -414,7 +404,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/MainMenu.xib" datatype="plaintext" source-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="2S3-dG-ZPg.title">
@@ -1049,7 +1039,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/MainWindowController.xib" datatype="plaintext" source-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="3tM-J3-kmf.title">
@@ -1312,7 +1302,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/RSSFeed.xib" datatype="plaintext" source-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="102.title">
@@ -1359,7 +1349,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/SearchFolder.xib" datatype="plaintext" source-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="82.title">
@@ -1394,7 +1384,7 @@
   </file>
   <file original="Vienna/Interfaces/Base.lproj/SyncingPreferencesView.xib" datatype="plaintext" source-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="Ar5-Qc-YTe.ibExternalAccessibilityDescription">
@@ -1445,7 +1435,7 @@
   </file>
   <file original="Vienna/Resources/Base.lproj/InfoPlist.strings" datatype="plaintext" source-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="CFBundleName">
@@ -1453,16 +1443,20 @@
         <note>Bundle name</note>
       </trans-unit>
       <trans-unit id="NSHumanReadableCopyright">
-        <source>© 2004–2018 The Vienna RSS Project</source>
+        <source>© 2004–2019 The Vienna RSS Project</source>
         <note>Copyright (human-readable)</note>
       </trans-unit>
     </body>
   </file>
   <file original="Vienna/Resources/Base.lproj/Localizable.strings" datatype="plaintext" source-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
+      <trans-unit id="%@ (default)">
+        <source>%@ (default)</source>
+        <note>Appended to application name in Open With menu</note>
+      </trans-unit>
       <trans-unit id="%@ Info">
         <source>%@ Info</source>
         <note>No comment provided by engineer.</note>
@@ -1515,12 +1509,16 @@
         <source>(Untitled Feed)</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="&lt;None&gt;">
+        <source>&lt;None&gt;</source>
+        <note>Title in popup submenu</note>
+      </trans-unit>
       <trans-unit id="A folder with that name already exists">
         <source>A folder with that name already exists</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
-      <trans-unit id="A new Vienna database cannot be created at \&quot;%@\&quot; because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.">
-        <source>A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.</source>
+      <trans-unit id="A new Vienna database cannot be created at &quot;%@&quot; because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.">
+        <source>A new Vienna database cannot be created at "%@" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.">
@@ -1567,12 +1565,12 @@
         <source>Are you sure you want to delete all %d selected folders? This operation cannot be undone.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
-      <trans-unit id="Are you sure you want to delete group folder \&quot;%@\&quot; and all sub folders? This operation cannot be undone.">
-        <source>Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone.</source>
+      <trans-unit id="Are you sure you want to delete group folder &quot;%@&quot; and all sub folders? This operation cannot be undone.">
+        <source>Are you sure you want to delete group folder "%@" and all sub folders? This operation cannot be undone.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
-      <trans-unit id="Are you sure you want to delete smart folder \&quot;%@\&quot;? This will not delete the actual articles matched by the search.">
-        <source>Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search.</source>
+      <trans-unit id="Are you sure you want to delete smart folder &quot;%@&quot;? This will not delete the actual articles matched by the search.">
+        <source>Are you sure you want to delete smart folder "%@"? This will not delete the actual articles matched by the search.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Are you sure you want to delete the messages in the Trash folder permanently?">
@@ -1583,8 +1581,8 @@
         <source>Are you sure you want to permanently delete the selected articles?</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
-      <trans-unit id="Are you sure you want to unsubscribe from \&quot;%@\&quot;? This operation will delete all cached articles.">
-        <source>Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles.</source>
+      <trans-unit id="Are you sure you want to unsubscribe from &quot;%@&quot;? This operation will delete all cached articles.">
+        <source>Are you sure you want to unsubscribe from "%@"? This operation will delete all cached articles.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Articles">
@@ -1705,8 +1703,8 @@
         <source>Delete…</source>
         <note>Title of a menu item</note>
       </trans-unit>
-      <trans-unit id="Deleting folder \&quot;%@\&quot;…">
-        <source>Deleting folder \"%@\"…</source>
+      <trans-unit id="Deleting folder &quot;%@&quot;…">
+        <source>Deleting folder "%@"…</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Descending">
@@ -1917,8 +1915,8 @@
         <source>Locate…</source>
         <note>Title of a button on an alert</note>
       </trans-unit>
-      <trans-unit id="Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.">
-        <source>Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.</source>
+      <trans-unit id="Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access.">
+        <source>Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Mark All Articles as Read">
@@ -2053,6 +2051,10 @@
         <source>Open Subscription Home Page in External Browser</source>
         <note>Title of a menu item</note>
       </trans-unit>
+      <trans-unit id="Open With">
+        <source>Open With</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Other">
         <source>Other</source>
         <note>No comment provided by engineer.</note>
@@ -2176,7 +2178,7 @@
       </trans-unit>
       <trans-unit id="Select…">
         <source>Select…</source>
-        <note>No comment provided by engineer.</note>
+        <note>Title of a popup menu item</note>
       </trans-unit>
       <trans-unit id="Send Link">
         <source>Send Link</source>
@@ -2234,12 +2236,12 @@
         <source>Text</source>
         <note>Data field name visible in smart folder definition</note>
       </trans-unit>
-      <trans-unit id="The Default style will be used instead.">
-        <source>The Default style will be used instead.</source>
+      <trans-unit id="The &quot;%@&quot; folder cannot be created.">
+        <source>The "%@" folder cannot be created.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
-      <trans-unit id="The \&quot;%@\&quot; folder cannot be created.">
-        <source>The \"%@\" folder cannot be created.</source>
+      <trans-unit id="The Default style will be used instead.">
+        <source>The Default style will be used instead.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.">
@@ -2258,16 +2260,16 @@
         <source>The specified export output file could not be created. Check that it is not locked and no other application is using it.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="The style &quot;%@&quot; has been installed to your Styles folder and added to the Style menu.">
+        <source>The style "%@" has been installed to your Styles folder and added to the Style menu.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="The style %@ appears to be missing or corrupted">
         <source>The style %@ appears to be missing or corrupted</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
-      <trans-unit id="The style \&quot;%@\&quot; has been installed to your Styles folder and added to the Style menu.">
-        <source>The style \"%@\" has been installed to your Styles folder and added to the Style menu.</source>
-        <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="The subscription for \&quot;%@\&quot; requires a user name and password for access.">
-        <source>The subscription for \"%@\" requires a user name and password for access.</source>
+      <trans-unit id="The subscription for &quot;%@&quot; requires a user name and password for access.">
+        <source>The subscription for "%@" requires a user name and password for access.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="This article contains an enclosed file.">
@@ -2314,16 +2316,16 @@
         <source>Upgrade Database</source>
         <note>Title of a button on an alert</note>
       </trans-unit>
-      <trans-unit id="Vienna cannot open the file \&quot;%@\&quot; because it moved since you downloaded it.">
-        <source>Vienna cannot open the file \"%@\" because it moved since you downloaded it.</source>
+      <trans-unit id="Vienna cannot open the file &quot;%@&quot; because it moved since you downloaded it.">
+        <source>Vienna cannot open the file "%@" because it moved since you downloaded it.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Vienna cannot open the file.">
         <source>Vienna cannot open the file.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
-      <trans-unit id="Vienna cannot show the file \&quot;%@\&quot; because it moved since you downloaded it.">
-        <source>Vienna cannot show the file \"%@\" because it moved since you downloaded it.</source>
+      <trans-unit id="Vienna cannot show the file &quot;%@&quot; because it moved since you downloaded it.">
+        <source>Vienna cannot show the file "%@" because it moved since you downloaded it.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Vienna cannot show the file.">
@@ -2338,8 +2340,8 @@
         <source>Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
-      <trans-unit id="Vienna was trying to create the folder \&quot;%@\&quot; but an error occurred. Check the permissions on the folders on the path specified.">
-        <source>Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified.</source>
+      <trans-unit id="Vienna was trying to create the folder &quot;%@&quot; but an error occurred. Check the permissions on the folders on the path specified.">
+        <source>Vienna was trying to create the folder "%@" but an error occurred. Check the permissions on the folders on the path specified.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Yes">
@@ -2418,7 +2420,7 @@
   </file>
   <file original="Vienna/Resources/Base.lproj/Localizable.stringsdict" datatype="plaintext" source-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="/%d new articles retrieved:dict/NSStringLocalizedFormatKey:dict/:string">
