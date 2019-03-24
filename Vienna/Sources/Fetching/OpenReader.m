@@ -91,7 +91,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             @"AppID": @"1000001359",
             @"AppKey": @"rAlfs2ELSuFxZJ5adJAW54qsNbUa45Qn"
         };
-        _asyncQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.openReaderTasks", NULL);
+        _asyncQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.openReaderTasks", DISPATCH_QUEUE_SERIAL);
     }
 
     return self;
