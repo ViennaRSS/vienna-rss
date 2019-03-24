@@ -274,6 +274,9 @@
 /* Class = "NSMenuItem"; title = "Keyboard Shortcuts"; ObjectID = "1146"; */
 "1146.title" = "鍵盤快速鍵";
 
+/* Class = "NSMenuItem"; title = "Unified"; ObjectID = "1160"; */
+"1160.title" = "整合的";
+
 /* Class = "NSMenuItem"; title = "Folder"; ObjectID = "1177"; */
 "1177.title" = "檔案夾";
 
@@ -346,6 +349,12 @@
 /* Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409"; */
 "1409.title" = "簡介⋯";
 
+/* Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413"; */
+"1413.title" = "以目前樣式顯示文章";
+
+/* Class = "NSMenuItem"; title = "Use Web Page for Articles"; ObjectID = "1415"; */
+"1415.title" = "顯示文章網頁";
+
 /* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "1425"; */
 "1425.title" = "從 Open Reader 中強制重新整理選擇的訂閱項目";
 
@@ -417,6 +426,9 @@
 
 /* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7"; */
 "rNG-xr-3x7.title" = "未讀文章";
+
+/* Class = "NSMenuItem"; title = "Article List"; ObjectID = "Rs9-r3-soc"; */
+"Rs9-r3-soc.title" = "文章列表";
 
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk"; */
 "RtQ-eP-bfk.title" = "智慧型劃線";

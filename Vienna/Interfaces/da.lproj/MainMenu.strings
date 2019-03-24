@@ -67,6 +67,9 @@
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
 "150.title" = "Vis alle";
 
+/* Class = "NSMenuItem"; title = "Find…"; ObjectID = "154"; */
+"154.title" = "Find…";
+
 /* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "155"; */
 "155.title" = "Hop til valgte";
 
@@ -75,6 +78,9 @@
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "158"; */
 "158.title" = "Fortryd";
+
+/* Class = "NSMenu"; title = "Find"; ObjectID = "159"; */
+"159.title" = "Find";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "160"; */
 "160.title" = "Klip";
@@ -94,6 +100,9 @@
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "167"; */
 "167.title" = "Find næste";
 
+/* Class = "NSMenuItem"; title = "Find"; ObjectID = "168"; */
+"168.title" = "Find";
+
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "169"; */
 "169.title" = "Rediger";
 
@@ -105,6 +114,9 @@
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "173"; */
 "173.title" = "Gentag";
+
+/* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "197"; */
+"197.title" = "Zoom";
 
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "235"; */
 "235.title" = "Oversigt";
@@ -237,6 +249,12 @@
 
 /* Class = "NSMenuItem"; title = "Refresh Folder Images"; ObjectID = "1106"; */
 "1106.title" = "Opdater mappeikoner";
+
+/* Class = "NSMenuItem"; title = "Layout"; ObjectID = "1108"; */
+"1108.title" = "Layout";
+
+/* Class = "NSMenu"; title = "Layout"; ObjectID = "1109"; */
+"1109.title" = "Layout";
 
 /* Class = "NSMenuItem"; title = "Horizontal"; ObjectID = "1110"; */
 "1110.title" = "Rapporter";
@@ -405,6 +423,9 @@
 
 /* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7"; */
 "rNG-xr-3x7.title" = "Ulæste artikler";
+
+/* Class = "NSMenuItem"; title = "Article List"; ObjectID = "Rs9-r3-soc"; */
+"Rs9-r3-soc.title" = "Artikelliste";
 
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk"; */
 "RtQ-eP-bfk.title" = "Smarte bindestreger";

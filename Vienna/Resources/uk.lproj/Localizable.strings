@@ -35,7 +35,7 @@
 "A folder with that name already exists" = "Папка з таким іменем уже існує";
 
 /* No comment provided by engineer. */
-"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Не можу створити нову базу даних Vienna  \"%@\" тому, що папка імовірно розміщення на віддаленому диску. Будь-ласка виберіть інше місце збереження бази даних на вашому локальному диску.";
+"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Не можу створити нову базу даних Vienna \"%@\" тому, що папка імовірно розміщення на віддаленому диску. Будь-ласка виберіть інше місце збереження бази даних на вашому локальному диску.";
 
 /* Toolbar item name for the Advanced preference pane */
 "Advanced" = "Додатково";
@@ -487,7 +487,7 @@
 /* No comment provided by engineer. */
 "Search Results" = "Результати пошуку";
 
-/* No comment provided by engineer. */
+/* Title of a popup menu item */
 "Select…" = "Виділити…";
 
 /* No comment provided by engineer. */

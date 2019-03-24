@@ -472,7 +472,7 @@
 /* No comment provided by engineer. */
 "Search Results" = "Pesquisar Resultados";
 
-/* No comment provided by engineer. */
+/* Title of a popup menu item */
 "Select…" = "Selecionar…";
 
 /* No comment provided by engineer. */
@@ -588,9 +588,6 @@
 
 /* No comment provided by engineer. */
 "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." = "O Vienna precisa atualizar seu banco de dados para a última versão.  Isto pode demorar um minuto ou dois.  Pedimos desculpas pelo inconveniente.";
-
-/* No comment provided by engineer. */
-"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna tentou criar a pasta \"%@\" mas um erro ocorreu. Verifique as permissões nas pastas do caminho especificado.";
 
 /* No comment provided by engineer. */
 "Yes" = "Sim";

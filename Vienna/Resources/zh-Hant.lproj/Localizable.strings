@@ -13,9 +13,6 @@
 /* Number of bytes received, e.g. 1 MB received */
 "%@ received" = "已接收 %@";
 
-/* {existing authors},{new author name} */
-"%@, %@" = "%1$@，%2$@";
-
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "已取得 %d 則新文章";
 
@@ -36,6 +33,9 @@
 
 /* No comment provided by engineer. */
 "%u unread" = "%u 則未閱讀";
+
+/* Title in popup submenu */
+"<None>" = "<无>";
 
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "系統中已有相同名稱的檔案夾";
@@ -109,6 +109,9 @@
 
 /* No comment provided by engineer. */
 "Cannot create export output file" = "無法建立匯出輸出檔";
+
+/* No comment provided by engineer. */
+"Cannot create folder" = "無法建立資料夾";
 
 /* No comment provided by engineer. */
 "Cannot create the Vienna database" = "無法建立 Vienna 資料庫";
@@ -366,6 +369,9 @@
 /* No comment provided by engineer. */
 "Loading" = "載入中";
 
+/* No comment provided by engineer. */
+"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "請確認用以存取 Open Reqder 伺服器的帳號與密碼是否有正確地設在 Vienna 的偏好設定中。\\n亦請檢查您的網路可用性。";
+
 /* Title of a menu item */
 "Mark All Articles as Read" = "將所有文章標示為已閱讀";
 
@@ -553,7 +559,7 @@
 /* No comment provided by engineer. */
 "Search Results" = "搜尋結果";
 
-/* No comment provided by engineer. */
+/* Title of a popup menu item */
 "Select…" = "選取⋯";
 
 /* No comment provided by engineer. */
@@ -597,6 +603,9 @@
 
 /* Data field name visible in smart folder definition */
 "Text" = "內文";
+
+/* No comment provided by engineer. */
+"The \"%@\" folder cannot be created." = "資料夾「%@」無法被建立";
 
 /* No comment provided by engineer. */
 "The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "此版本的 Vienna 並不支援資料庫 (%@) 的檔案格式。請刪除此檔案，或是將檔案重新命名後，再重新啟動 Vienna。";
@@ -645,6 +654,9 @@
 
 /* No comment provided by engineer. */
 "Unsubscribe from Feed" = "取消訂閱 Feed";
+
+/* No comment provided by engineer. */
+"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles." = "將 OpenReader 端的 RSS 頻道停訂之後，快取於本地端的文章也同時會被刪除。";
 
 /* Title of a button on an alert */
 "Upgrade Database" = "更新資料庫";

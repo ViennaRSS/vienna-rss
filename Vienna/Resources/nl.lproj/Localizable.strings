@@ -4,6 +4,9 @@
 /* No comment provided by engineer. */
 "(Untitled Feed)" = "(Naamloze feed)";
 
+/* No comment provided by engineer. */
+"%@ Info" = "%@ Info";
+
 /* Progress in bytes, e.g. 1 KB of 1 MB */
 "%@ of %@" = "%1$@ van %2$@";
 
@@ -176,6 +179,9 @@
 
 /* test for a string */
 "does not contain" = "bevat niet";
+
+/* No comment provided by engineer. */
+"Download" = "Download";
 
 /* Notification title */
 "Download completed" = "Download compleet";
@@ -487,7 +493,7 @@
 /* No comment provided by engineer. */
 "Search Results" = "Zoek resultaten";
 
-/* No comment provided by engineer. */
+/* Title of a popup menu item */
 "Select…" = "Selecteer…";
 
 /* No comment provided by engineer. */

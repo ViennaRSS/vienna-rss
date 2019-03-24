@@ -19,6 +19,9 @@
 /* Class = "NSTextFieldCell"; title = "URL: https://"; ObjectID = "tec-2d-Xej"; */
 "tec-2d-Xej.title" = "Henvisning: https://";
 
+/* Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "uTl-XE-0ym"; */
+"uTl-XE-0ym.title" = "Server:";
+
 /* Class = "NSTextField"; ibShadowedToolTip = "Address of a server supporting the Open Reader API"; ObjectID = "vZE-Pl-S9H"; */
 "vZE-Pl-S9H.ibShadowedToolTip" = "Adresse på en server som understøtter Open Reader API'en";
 

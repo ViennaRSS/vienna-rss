@@ -31,6 +31,9 @@
 /* No comment provided by engineer. */
 "%u unread" = "%u 未读";
 
+/* Title in popup submenu */
+"<None>" = "<无>";
+
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "已经有文件夹使用了这个名称";
 
@@ -125,6 +128,9 @@
 /* No comment provided by engineer. */
 "Connecting to %@" = "正在连接到 %@";
 
+/* No comment provided by engineer. */
+"Connecting to Open Reader server to retrieve %@" = "正在连接至 Open Reader 服务器获取 %@";
+
 /* test for a string */
 "contains" = "包含";
 
@@ -152,6 +158,9 @@
 
 /* No comment provided by engineer. */
 "Delete multiple folders" = "删除多个文件夹";
+
+/* No comment provided by engineer. */
+"Delete Open Reader RSS feed" = "删除 Open Reader 上的 RSS 订阅";
 
 /* No comment provided by engineer. */
 "Delete smart folder" = "删除智能文件夹";
@@ -217,6 +226,12 @@
 "Error parsing XML data in feed" = "解析条目中 XML 数据时出现错误";
 
 /* No comment provided by engineer. */
+"Error retrieving RSS feed:" = "获取 RSS 图标错误：";
+
+/* No comment provided by engineer. */
+"Error retrieving RSS Icon:" = "获取 RSS 图标错误：";
+
+/* No comment provided by engineer. */
 "Export Completed" = "输出完成";
 
 /* No comment provided by engineer. */
@@ -224,6 +239,9 @@
 
 /* No comment provided by engineer. */
 "Feed URL updated to %@" = "频道 URL 已经更新为 %@";
+
+/* No comment provided by engineer. */
+"Fetching Open Reader Subscriptions…" = "获取 Open Reader 订阅项中...";
 
 /* Notification body */
 "File %@ downloaded" = "文件 %@ 已下载";
@@ -249,6 +267,12 @@
 /* No comment provided by engineer. */
 "Folders" = "文件夹";
 
+/* Title of a menu item */
+"Force Refresh Selected Subscriptions From Open Reader" = "从 Open Reader 中强制刷新选中的订阅项";
+
+/* No comment provided by engineer. */
+"Forcing Refresh subscriptions…" = "强制刷新订阅中...";
+
 /* Toolbar item name for the General preference pane */
 "General" = "通用";
 
@@ -257,6 +281,9 @@
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "去到下一个页面";
+
+/* No comment provided by engineer. */
+"Got HTTP status 304 - No news from last check" = "返回 HTTP 304 状态 - 上次检查并无新内容";
 
 /* Pseudo field name visible in article list */
 "Headlines" = "标题";
@@ -287,6 +314,9 @@
 
 /* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "通过 OPML 文件来导入频道么？";
+
+/* No comment provided by engineer. */
+"Improper infinitely looping URL redirect to %@" = "错误地无限重定向至 %@";
 
 /* test for a value */
 "is" = "为";
@@ -323,6 +353,15 @@
 
 /* Data field name visible in menu/article list */
 "Link" = "连接";
+
+/* No comment provided by engineer. */
+"Loading" = "载入中";
+
+/* Title of a button on an alert */
+"Locate…" = "定位中...";
+
+/* No comment provided by engineer. */
+"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "请确保登入 Open Reader 服务器的用户名和密码已在 Vienna 首选项中正确设置。\\n另请确保网络连通。";
 
 /* Title of a menu item */
 "Mark All Articles as Read" = "标记所有文章为已读";
@@ -484,7 +523,7 @@
 /* No comment provided by engineer. */
 "Search Results" = "搜索结果";
 
-/* No comment provided by engineer. */
+/* Title of a popup menu item */
 "Select…" = "选择…";
 
 /* No comment provided by engineer. */
