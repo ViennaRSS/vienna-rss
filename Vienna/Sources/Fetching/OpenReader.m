@@ -463,8 +463,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
     // Request id's of unread items
     NSString *args =
-        [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&xt=user/-/state/com.google/read&n=1000&output=json",
-         OpenReader.currentTimestamp, ClientName,
+        [NSString stringWithFormat:@"?client=%@&s=feed/%@&xt=user/-/state/com.google/read&n=1000&output=json", ClientName,
          percentEscape(feedIdentifier)];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
     NSMutableURLRequest *request2 = [self requestFromURL:url];
@@ -480,7 +479,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     }
 
     NSString *args3 =
-        [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", OpenReader.currentTimestamp, ClientName,
+        [NSString stringWithFormat:@"?client=%@&s=feed/%@&%@&n=1000&output=json", ClientName,
          percentEscape(feedIdentifier), starredSelector];
     NSURL *url3 = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args3]];
     NSMutableURLRequest *request3 = [self requestFromURL:url3];
