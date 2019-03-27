@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -1970,7 +1970,7 @@
 				};
 			};
 			buildConfigurationList = AA4F9AB60855422400C18279 /* Build configuration list for PBXProject "Vienna" */;
-			compatibilityVersion = "Xcode 8.0";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -3200,7 +3200,11 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Vienna Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -3259,7 +3263,11 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Vienna Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -3338,7 +3346,10 @@
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
 				INFOPLIST_PREFIX_HEADER = "$(OBJROOT)/autorevision.h";
 				INFOPLIST_PREPROCESS = YES;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				OTHER_CFLAGS = "-DDEBUG=1";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.opencommunity.vienna2;
 				PRODUCT_NAME = Vienna;
@@ -3373,7 +3384,10 @@
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
 				INFOPLIST_PREFIX_HEADER = "$(OBJROOT)/autorevision.h";
 				INFOPLIST_PREPROCESS = YES;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				OTHER_CFLAGS = "-DNO_LOG_MACROS";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.opencommunity.vienna2;
 				PRODUCT_NAME = Vienna;
@@ -3465,7 +3479,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Deployment;
 		};
