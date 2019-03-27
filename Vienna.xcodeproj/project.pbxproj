@@ -1951,17 +1951,17 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = uk.co.opencommunity;
 				TargetAttributes = {
 					035B703419E0E4AE00197334 = {
 						CreatedOnToolsVersion = 6.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 8D15AC270486D014006FF6A4;
 					};
 					8D15AC270486D014006FF6A4 = {
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 					};
 					F6A7DDC91E470E980017BE5E = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -3211,7 +3211,7 @@
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "Vienna Tests/Vienna Tests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vienna.app/Contents/MacOS/Vienna";
 			};
 			name = Development;
@@ -3268,7 +3268,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "Vienna Tests/Vienna Tests-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vienna.app/Contents/MacOS/Vienna";
 			};
 			name = Deployment;
@@ -3344,7 +3344,7 @@
 				PRODUCT_NAME = Vienna;
 				SWIFT_OBJC_BRIDGING_HEADER = "Vienna/Sources/Vienna-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Development;
@@ -3379,7 +3379,7 @@
 				PRODUCT_NAME = Vienna;
 				SEPARATE_STRIP = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Vienna/Sources/Vienna-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Deployment;
@@ -3424,7 +3424,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Development;
 		};
@@ -3467,7 +3466,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
 			};
 			name = Deployment;
 		};
