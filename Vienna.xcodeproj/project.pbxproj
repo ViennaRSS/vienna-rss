@@ -18,42 +18,18 @@
 			name = Autorevision;
 			productName = Autorevision;
 		};
-		430C4AF71661F07C0079C9FC /* Code Sign ID */ = {
+		EAAF335414BDE402002A8837 /* Deployment */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 430C4AFB1661F0B70079C9FC /* Build configuration list for PBXAggregateTarget "Code Sign ID" */;
+			buildConfigurationList = EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "Deployment" */;
 			buildPhases = (
-				430C4AF61661F07C0079C9FC /* Make ID Template */,
-			);
-			dependencies = (
-			);
-			name = "Code Sign ID";
-			productName = "Code Sign ID";
-		};
-		52BA63FC0DE9E2E10008B3E1 /* Version Notes */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 52BA64010DE9E2FF0008B3E1 /* Build configuration list for PBXAggregateTarget "Version Notes" */;
-			buildPhases = (
-				52BA63FB0DE9E2E10008B3E1 /* Build Notes */,
-			);
-			dependencies = (
-				430C4AEB16619B850079C9FC /* PBXTargetDependency */,
-			);
-			name = "Version Notes";
-			productName = Release;
-		};
-		EAAF335414BDE402002A8837 /* Archive and Prep for Upload */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "Archive and Prep for Upload" */;
-			buildPhases = (
-				EAAF336614BEF4DF002A8837 /* Release for upload */,
+				F6743B10224BB6980054FE1E /* Build Release Notes */,
+				F6743B11224BB6D50054FE1E /* Make Codesign ID */,
+				EAAF336614BEF4DF002A8837 /* Release For Upload */,
 			);
 			dependencies = (
 				43501CFF165D82ED0018EDB7 /* PBXTargetDependency */,
-				430C4AED16619C550079C9FC /* PBXTargetDependency */,
-				430C4AEF16619C550079C9FC /* PBXTargetDependency */,
-				430C4AFF1661F3090079C9FC /* PBXTargetDependency */,
 			);
-			name = "Archive and Prep for Upload";
+			name = Deployment;
 			productName = Release;
 		};
 /* End PBXAggregateTarget section */
@@ -270,34 +246,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 430C4ACF166172BD0079C9FC;
 			remoteInfo = Autorevision;
-		};
-		430C4AEA16619B850079C9FC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 430C4ACF166172BD0079C9FC;
-			remoteInfo = Autorevision;
-		};
-		430C4AEC16619C550079C9FC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 430C4ACF166172BD0079C9FC;
-			remoteInfo = Autorevision;
-		};
-		430C4AEE16619C550079C9FC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 52BA63FC0DE9E2E10008B3E1;
-			remoteInfo = "Version Notes";
-		};
-		430C4AFE1661F3090079C9FC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 430C4AF71661F07C0079C9FC;
-			remoteInfo = "Code Sign ID";
 		};
 		43501CFE165D82ED0018EDB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1193,13 +1141,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		035B703219E0E4AE00197334 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8D15AC330486D014006FF6A4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1887,7 +1828,6 @@
 			buildConfigurationList = 035B704019E0E4AE00197334 /* Build configuration list for PBXNativeTarget "Vienna Tests" */;
 			buildPhases = (
 				035B703119E0E4AE00197334 /* Sources */,
-				035B703219E0E4AE00197334 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1905,13 +1845,13 @@
 			buildPhases = (
 				F68CBD98203231A8003A6A9E /* Bootstrap Dependencies */,
 				8D15AC300486D014006FF6A4 /* Sources */,
+				F68CBDA020323974003A6A9E /* Run SwiftLint */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
-				3A5482F6168F5C1700887F91 /* Sparkle autoupdate setup */,
 				AAEF2001085D685900A0E675 /* Copy Shared Support Files */,
 				AA65D27F083CF46F00BC387C /* Copy Frameworks */,
 				F67F6DE72030609B006C9D72 /* Copy Framework Symbols */,
-				F68CBDA020323974003A6A9E /* SwiftLint */,
+				3A5482F6168F5C1700887F91 /* Configure Sparkle */,
 			);
 			buildRules = (
 			);
@@ -2004,9 +1944,7 @@
 				F6A7DDC91E470E980017BE5E /* Vienna Help */,
 				035B703419E0E4AE00197334 /* Vienna Tests */,
 				430C4ACF166172BD0079C9FC /* Autorevision */,
-				52BA63FC0DE9E2E10008B3E1 /* Version Notes */,
-				430C4AF71661F07C0079C9FC /* Code Sign ID */,
-				EAAF335414BDE402002A8837 /* Archive and Prep for Upload */,
+				EAAF335414BDE402002A8837 /* Deployment */,
 			);
 		};
 /* End PBXProject section */
@@ -2107,19 +2045,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3A5482F6168F5C1700887F91 /* Sparkle autoupdate setup */ = {
+		3A5482F6168F5C1700887F91 /* Configure Sparkle */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Sparkle autoupdate setup";
+			name = "Configure Sparkle";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = ". Scripts/Sparkle-setup.sh";
+			shellScript = "\"${SRCROOT}/Scripts/Sparkle-setup.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		430C4ACE166172BD0079C9FC /* Run Autorevision */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2133,51 +2072,63 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = ". Scripts/autorevision.sh";
+			shellScript = "\"${SRCROOT}/Scripts/autorevision.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
-		430C4AF61661F07C0079C9FC /* Make ID Template */ = {
+		EAAF336614BEF4DF002A8837 /* Release For Upload */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Make ID Template";
+			name = "Release For Upload";
 			outputPaths = (
-				"$(SRCROOT)/configs/CS-ID.xcconfig",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = ". Scripts/Make-ID-Template.sh";
+			shellScript = "\"${SRCROOT}/Scripts/Release-for-upload.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
-		52BA63FB0DE9E2E10008B3E1 /* Build Notes */ = {
+		F6743B10224BB6980054FE1E /* Build Release Notes */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"$(SRCROOT)/notes.html",
 			);
-			name = "Build Notes";
+			name = "Build Release Notes";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = ". Scripts/Changes-and-Notes.sh";
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/Changes-and-Notes.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
-		EAAF336614BEF4DF002A8837 /* Release for upload */ = {
+		F6743B11224BB6D50054FE1E /* Make Codesign ID */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 			);
-			name = "Release for upload";
+			name = "Make Codesign ID";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"$(SRCROOT)/Scripts/Resources/CS-ID.xcconfig",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = ". Scripts/Release-for-upload.sh";
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/Make-ID-Template.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		F68CBD98203231A8003A6A9E /* Bootstrap Dependencies */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2194,19 +2145,19 @@
 			shellScript = "if which carthage >/dev/null; then\n    carthage bootstrap --cache-builds --platform macos\nelse\n    echo \"error: Carthage not installed, download from https://github.com/Carthage/Carthage\"\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		F68CBDA020323974003A6A9E /* SwiftLint */ = {
+		F68CBDA020323974003A6A9E /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = SwiftLint;
+			name = "Run SwiftLint";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F6B123401E474EC500973699 /* Index Help Book */ = {
@@ -2221,7 +2172,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Vienna Help/IndexHelpbook.sh\"";
+			shellScript = "\"${SRCROOT}/Vienna Help/IndexHelpbook.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2355,26 +2307,6 @@
 			isa = PBXTargetDependency;
 			target = 430C4ACF166172BD0079C9FC /* Autorevision */;
 			targetProxy = 430C4AD71661730D0079C9FC /* PBXContainerItemProxy */;
-		};
-		430C4AEB16619B850079C9FC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 430C4ACF166172BD0079C9FC /* Autorevision */;
-			targetProxy = 430C4AEA16619B850079C9FC /* PBXContainerItemProxy */;
-		};
-		430C4AED16619C550079C9FC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 430C4ACF166172BD0079C9FC /* Autorevision */;
-			targetProxy = 430C4AEC16619C550079C9FC /* PBXContainerItemProxy */;
-		};
-		430C4AEF16619C550079C9FC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 52BA63FC0DE9E2E10008B3E1 /* Version Notes */;
-			targetProxy = 430C4AEE16619C550079C9FC /* PBXContainerItemProxy */;
-		};
-		430C4AFF1661F3090079C9FC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 430C4AF71661F07C0079C9FC /* Code Sign ID */;
-			targetProxy = 430C4AFE1661F3090079C9FC /* PBXContainerItemProxy */;
 		};
 		43501CFF165D82ED0018EDB7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3293,34 +3225,6 @@
 			};
 			name = Deployment;
 		};
-		430C4AF81661F0860079C9FC /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "Code Sign ID";
-			};
-			name = Development;
-		};
-		430C4AF91661F0860079C9FC /* Deployment */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "Code Sign ID";
-			};
-			name = Deployment;
-		};
-		52BA64020DE9E2FF0008B3E1 /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "Version Notes";
-			};
-			name = Development;
-		};
-		52BA64030DE9E2FF0008B3E1 /* Deployment */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "Version Notes";
-			};
-			name = Deployment;
-		};
 		AA4F9AB30855422400C18279 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3622,24 +3526,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
 		};
-		430C4AFB1661F0B70079C9FC /* Build configuration list for PBXAggregateTarget "Code Sign ID" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				430C4AF81661F0860079C9FC /* Development */,
-				430C4AF91661F0860079C9FC /* Deployment */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Deployment;
-		};
-		52BA64010DE9E2FF0008B3E1 /* Build configuration list for PBXAggregateTarget "Version Notes" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				52BA64020DE9E2FF0008B3E1 /* Development */,
-				52BA64030DE9E2FF0008B3E1 /* Deployment */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Deployment;
-		};
 		AA4F9AB20855422400C18279 /* Build configuration list for PBXNativeTarget "Vienna" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -3658,7 +3544,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
 		};
-		EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "Archive and Prep for Upload" */ = {
+		EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "Deployment" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EAAF335A14BDE402002A8837 /* Development */,
