@@ -866,7 +866,6 @@
 		F67F6DDB20306049006C9D72 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = Carthage/Build/Mac/FMDB.framework; sourceTree = "<group>"; };
 		F67F6DDC20306049006C9D72 /* MASPreferences.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASPreferences.framework; path = Carthage/Build/Mac/MASPreferences.framework; sourceTree = "<group>"; };
 		F67F6DDE2030604A006C9D72 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
-		F67F6DE8203060B0006C9D72 /* ASIHTTPRequest.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ASIHTTPRequest.framework.dSYM; path = Carthage/Build/Mac/ASIHTTPRequest.framework.dSYM; sourceTree = "<group>"; };
 		F67F6DE9203060B0006C9D72 /* FMDB.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = FMDB.framework.dSYM; path = Carthage/Build/Mac/FMDB.framework.dSYM; sourceTree = "<group>"; };
 		F67F6DEA203060B1006C9D72 /* MASPreferences.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = MASPreferences.framework.dSYM; path = Carthage/Build/Mac/MASPreferences.framework.dSYM; sourceTree = "<group>"; };
 		F67F6DEB203060B1006C9D72 /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Sparkle.framework.dSYM; path = Carthage/Build/Mac/Sparkle.framework.dSYM; sourceTree = "<group>"; };
@@ -1442,7 +1441,6 @@
 		F67F6DF0203060D9006C9D72 /* Symbols */ = {
 			isa = PBXGroup;
 			children = (
-				F67F6DE8203060B0006C9D72 /* ASIHTTPRequest.framework.dSYM */,
 				F67F6DE9203060B0006C9D72 /* FMDB.framework.dSYM */,
 				F67F6DEA203060B1006C9D72 /* MASPreferences.framework.dSYM */,
 				F62152622083475800FEE960 /* MMTabBarView.framework.dSYM */,
