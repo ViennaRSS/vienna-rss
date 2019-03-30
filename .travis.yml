@@ -1,25 +1,12 @@
 language: objective-c
-osx_image: xcode10
+osx_image: xcode10.2
+xcode_project: Vienna.xcodeproj
+xcode_scheme: Vienna
 
 cache: carthage
 
-jobs:
-  include:
-    - stage: testing
-      before_script:
-        - brew outdated carthage || brew upgrade carthage
-        - carthage version
-      script: xcodebuild -project Vienna.xcodeproj -scheme Vienna test | xcpretty
-    - stage: linting
-      before_script:
-        - brew outdated swiftlint || brew upgrade swiftlint
-        - swiftlint version
-      script: swiftlint --lenient --reporter emoji
-
-notifications:
-  slack:
-    rooms:
-      - secure: G/L2fP8z8+jNFicgMkOPrc3e7HqdQ2HkyazUMHwWLOsKmjM0ERqQ6FZXLlSr2P/kukqfUGHCGBGRdoMUb7jebNY0fNQyLYoUD7L91MLaz/zSBpDu4Yl+cVQJER1F6WFWNf697Uevvun1Mmz3N6zHe82KjQtE1yk/qFCbPyG5uJ8=
-    template: "%{commit_subject}\n<%{compare_url}|%{commit}> in <%{pull_request_url}|#%{pull_request_number}> by %{author} <%{build_url}|%{result}> in %{duration}"
-    on_success: change
-    on_failure: change
+before_script:
+  - brew outdated carthage || brew upgrade carthage
+  - carthage version
+  - brew outdated swiftlint || brew upgrade swiftlint
+  - swiftlint version
