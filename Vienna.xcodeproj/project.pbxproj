@@ -1843,7 +1843,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA4F9AB20855422400C18279 /* Build configuration list for PBXNativeTarget "Vienna" */;
 			buildPhases = (
-				F68CBD98203231A8003A6A9E /* Bootstrap Dependencies */,
+				F68CBD98203231A8003A6A9E /* Run Carthage */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				F68CBDA020323974003A6A9E /* Run SwiftLint */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
@@ -2130,19 +2130,19 @@
 			shellScript = "\"${SRCROOT}/Scripts/Make-ID-Template.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F68CBD98203231A8003A6A9E /* Bootstrap Dependencies */ = {
+		F68CBD98203231A8003A6A9E /* Run Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Bootstrap Dependencies";
+			name = "Run Carthage";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which carthage >/dev/null; then\n    carthage bootstrap --cache-builds --platform macos\nelse\n    echo \"error: Carthage not installed, download from https://github.com/Carthage/Carthage\"\n    exit 1\nfi\n";
+			shellScript = "if which carthage >/dev/null; then\n    carthage build --cache-builds --platform \"${PLATFORM_NAME}\"\nelse\n    echo \"error: Carthage not installed, download from https://github.com/Carthage/Carthage\"\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F68CBDA020323974003A6A9E /* Run SwiftLint */ = {
