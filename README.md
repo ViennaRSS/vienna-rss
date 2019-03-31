@@ -49,31 +49,15 @@ Contributing
 
 Want to contribute? Great! There are many ways you can, even if you aren't a developer.
 
+### Writing code
+
+Please check [CONTRIBUTING.md](CONTRIBUTING.md).
+
+Vienna now uses [Carthage](https://github.com/Carthage/Carthage) for managing dependencies.
+
 ### Localizing ###
 
-We need help keeping Vienna translations up to date into different languages. Apart from English, here are the languages for which a localization effort has started:
-
-* Basque (eu)
-* Simplified Chinese (zh-Hans)
-* Traditional Chinese (zh-Hant)
-* Czech (cs)
-* Danish (da)
-* Dutch (nl)
-* French (fr)
-* Galician (gl)
-* German (de)
-* Italian (it)
-* Japanese (ja)
-* Korean (ko)
-* Portuguese (pt)
-* Brazilian Portuguese (pt-BR)
-* Russian (ru)
-* Spanish (es)
-* Swedish (sv)
-* Turkish (tr)
-* Ukrainian (uk)
-
-You can contribute localizations at [Crowdin](https://crowdin.com/project/vienna-rss). Registration is required, but the account is free. If you want to contribute for a language that is not yet listed, then contact us. Do not localize the project's \*.strings files directly. Localizable \*.plist files have to be localized directly.
+We need help keeping Vienna translations up to date into different languages. You can contribute localizations at [Crowdin](https://crowdin.com/project/vienna-rss). Registration is required, but the account is free. If you want to contribute for a language that is not yet listed, then contact us. Do not localize the project's \*.strings files directly. Localizable \*.plist files have to be localized directly.
 
 ### Writing custom styles
 
@@ -86,12 +70,6 @@ You can write styles by referring to [this document](http://www.vienna-rss.com/?
 Vienna supports plugins which are installed in menus and/or on the toolbar and can run defined actions. These plugins are XML-based and can be created by editing a simple .plist-file without any knowledge of Cocoa programming, in as little as 15 minutes.
 
 You can write plugins by referring to [this document](http://www.vienna-rss.com/?page_id=120). Have a look at existing plugins in the __Plugins__ folder.
-
-### Writing code
-
-Please check [CONTRIBUTING.md](CONTRIBUTING.md).
-
-Vienna now uses [Carthage](https://github.com/Carthage/Carthage) for managing dependencies.
 
 Licensing
 ---------
