@@ -62,7 +62,7 @@ typedef NS_ENUM(NSInteger, VNAQueryScope) {
 
 // The current database version number
 const NSInteger MA_Min_Supported_DB_Version = 12;
-const NSInteger MA_Current_DB_Version = 19;
+const NSInteger MA_Current_DB_Version = 20;
 
 @implementation Database
 
