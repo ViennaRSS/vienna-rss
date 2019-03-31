@@ -16,6 +16,12 @@
 /* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "O2q-8o-CSb"; */
 "O2q-8o-CSb.title" = "Gebruikersnaam:";
 
+/* Class = "NSTextFieldCell"; title = "URL: https://"; ObjectID = "tec-2d-Xej"; */
+"tec-2d-Xej.title" = "URL: https://";
+
+/* Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "uTl-XE-0ym"; */
+"uTl-XE-0ym.title" = "Server:";
+
 /* Class = "NSTextField"; ibShadowedToolTip = "Address of a server supporting the Open Reader API"; ObjectID = "vZE-Pl-S9H"; */
 "vZE-Pl-S9H.ibShadowedToolTip" = "Adres van een server met Open Reader-ondersteuning";
 

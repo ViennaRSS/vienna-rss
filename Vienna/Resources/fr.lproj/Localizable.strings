@@ -13,14 +13,11 @@
 /* Number of bytes received, e.g. 1 MB received */
 "%@ received" = "%@ reçu";
 
-/* {existing authors},{new author name} */
-"%@, %@" = "%1$@, %2$@";
-
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "%d nouveaux articles récupérés";
 
 /* Notification body */
-"%d new unread articles retrieved" = "%d nouveaux articles non lus retrouvés";
+"%d new unread articles retrieved" = "%d nouveaux articles non lus récupérés";
 
 /* No comment provided by engineer. */
 "%d subscriptions successfully exported" = "%d abonnements exportés avec succès";
@@ -36,6 +33,9 @@
 
 /* No comment provided by engineer. */
 "%u unread" = "%u non lus";
+
+/* Title in popup submenu */
+"<None>" = "<Aucun>";
 
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "Un dossier du même nom existe déjà";
@@ -361,9 +361,6 @@
 "is on or before" = "est le ou avant";
 
 /* No comment provided by engineer. */
-"JavaScript" = "JavaScript";
-
-/* No comment provided by engineer. */
 "Last Week" = "1 semaine";
 
 /* Data field name visible in menu/article list */
@@ -376,7 +373,7 @@
 "Locate…" = "Rechercher…";
 
 /* No comment provided by engineer. */
-"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access." = "Vérifiez dans les préférences le nom d'utilisateur et le mot de passe pour accéder au serveur Open Reader.\nVérifiez également votre accès réseau.";
+"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "Vérifiez dans les préférences le nom d'utilisateur et le mot de passe pour accéder au serveur Open Reader. Vérifiez également votre accès réseau.";
 
 /* Title of a menu item */
 "Mark All Articles as Read" = "Marquer dossier comme lu";
@@ -571,7 +568,7 @@
 /* No comment provided by engineer. */
 "Search Results" = "Chercher dans les résultats";
 
-/* No comment provided by engineer. */
+/* Title of a popup menu item */
 "Select…" = "Sélectionner…";
 
 /* No comment provided by engineer. */

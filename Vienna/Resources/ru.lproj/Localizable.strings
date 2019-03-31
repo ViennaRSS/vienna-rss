@@ -13,9 +13,6 @@
 /* Number of bytes received, e.g. 1 MB received */
 "%@ received" = "%@ получено";
 
-/* {existing authors},{new author name} */
-"%@, %@" = "%1$@, %2$@";
-
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "Получено %d новых статей";
 
@@ -80,7 +77,7 @@
 "Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Вы уверены, что хотите удалить группу \"%@\" и все ее папки? Данное действие невозможно отменить.";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Вы уверены, что хотите удалить Смарт-папку  \"%@\"? Это не приведет к удалению соответствующих статей.";
+"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Вы уверены, что хотите удалить Смарт-папку \"%@\"? Это не приведет к удалению соответствующих статей.";
 
 /* No comment provided by engineer. */
 "Are you sure you want to delete the messages in the Trash folder permanently?" = "Удалить все сообщения в Корзине?";
@@ -361,9 +358,6 @@
 "is on or before" = "сейчас и ранее";
 
 /* No comment provided by engineer. */
-"JavaScript" = "JavaScript";
-
-/* No comment provided by engineer. */
 "Last Week" = "На прошлой неделе";
 
 /* Data field name visible in menu/article list */
@@ -376,8 +370,7 @@
 "Locate…" = "Найти…";
 
 /* No comment provided by engineer. */
-"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access." = "Убедитесь, что в настройках Vienna указаны правильные имя пользователя и пароль для доступа к серверу Open Reader.
-Также проверьте сетевое соединение.";
+"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "Убедитесь, что в настройках Vienna указаны правильные имя пользователя и пароль для доступа к серверу Open Reader. Также проверьте сетевое соединение.";
 
 /* Title of a menu item */
 "Mark All Articles as Read" = "Отметить все статьи как прочитанные";
@@ -572,7 +565,7 @@
 /* No comment provided by engineer. */
 "Search Results" = "Результаты поиска";
 
-/* No comment provided by engineer. */
+/* Title of a popup menu item */
 "Select…" = "Выбрать…";
 
 /* No comment provided by engineer. */
@@ -642,7 +635,7 @@
 "The style %@ appears to be missing or corrupted" = "Стиль %@ отсутствует или поврежден";
 
 /* No comment provided by engineer. */
-"The subscription for \"%@\" requires a user name and password for access." = "Для доступа к подписке  \"%@\" требуется имя пользователя и пароль.";
+"The subscription for \"%@\" requires a user name and password for access." = "Для доступа к подписке \"%@\" требуется имя пользователя и пароль.";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Эта статья содержит вложенный файл.";
@@ -699,7 +692,7 @@
 "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." = "Vienna необходимо обновить свою базу данных до последней версии. Это может занять минуту или около того. Приносим свои извинения за доставленные неудобства.";
 
 /* No comment provided by engineer. */
-"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna попыталась создать папку  \"%@\", но произошла ошибка. Проверьте разрешения для папок в указанном пути.";
+"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna попыталась создать папку \"%@\", но произошла ошибка. Проверьте разрешения для папок в указанном пути.";
 
 /* No comment provided by engineer. */
 "Yes" = "Да";

@@ -253,6 +253,15 @@
 /* Class = "NSMenuItem"; title = "Refresh Folder Images"; ObjectID = "1106"; */
 "1106.title" = "Ordner-Icons aktualisieren";
 
+/* Class = "NSMenuItem"; title = "Layout"; ObjectID = "1108"; */
+"1108.title" = "Layout";
+
+/* Class = "NSMenu"; title = "Layout"; ObjectID = "1109"; */
+"1109.title" = "Layout";
+
+/* Class = "NSMenuItem"; title = "Horizontal"; ObjectID = "1110"; */
+"1110.title" = "Horizontal";
+
 /* Class = "NSMenuItem"; title = "Vertical"; ObjectID = "1116"; */
 "1116.title" = "Vertikal";
 

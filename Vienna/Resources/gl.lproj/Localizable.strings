@@ -361,8 +361,7 @@
 "Locate…" = "Ubicar…";
 
 /* No comment provided by engineer. */
-"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access." = "Asegúrate de que o nome de usuario e o contrasinal precisos para acceder ao servidor de Open Reader foron inseridos correctamente nas preferencias de Vienna.
-Comproba tamén o teu acceso a internet.";
+"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "Asegúrate de que o nome de usuario e o contrasinal precisos para acceder ao servidor de Open Reader foron inseridos correctamente nas preferencias de Vienna. Comproba tamén o teu acceso a internet.";
 
 /* Title of a menu item */
 "Mark All Articles as Read" = "Marcar todos os artigos como lidos";
@@ -551,7 +550,7 @@ Comproba tamén o teu acceso a internet.";
 /* No comment provided by engineer. */
 "Search Results" = "Resultados da procura";
 
-/* No comment provided by engineer. */
+/* Title of a popup menu item */
 "Select…" = "Seleccionar…";
 
 /* No comment provided by engineer. */

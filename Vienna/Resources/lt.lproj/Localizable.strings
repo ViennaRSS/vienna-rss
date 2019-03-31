@@ -13,9 +13,6 @@
 /* Number of bytes received, e.g. 1 MB received */
 "%@ received" = "Gauta %@";
 
-/* {existing authors},{new author name} */
-"%@, %@" = "%1$@, %2$@";
-
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "Parsiųsta %d naujų straipsnių";
 
@@ -42,9 +39,6 @@
 
 /* No comment provided by engineer. */
 "A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Įdiegtas naujas įskiepis. Jį galima rasti meniu ir įsidėti į įrankių juostą.";
-
-/* No comment provided by engineer. */
-"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Rasti tekstą";
 
 /* Toolbar item name for the Advanced preference pane */
 "Advanced" = "Papildomi nustatymai";
@@ -77,19 +71,10 @@
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Ištrinti keletą aplankų";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Ištrinti grupės aplanką";
-
-/* No comment provided by engineer. */
-"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Ištrinti išmanųjį aplanką";
-
-/* No comment provided by engineer. */
 "Are you sure you want to delete the messages in the Trash folder permanently?" = "Ištrinti žinutę iš šiukšlių dėžės";
 
 /* No comment provided by engineer. */
 "Are you sure you want to permanently delete the selected articles?" = "Ištrinti pasirinktą žinutę";
-
-/* No comment provided by engineer. */
-"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Ištrinti RSS prenumeratą";
 
 /* No comment provided by engineer. */
 "Articles" = "Straipsniai";
@@ -182,9 +167,6 @@
 
 /* Data field name visible in smart folder definition */
 "Deleted" = "Ištrinta";
-
-/* No comment provided by engineer. */
-"Deleting folder \"%@\"…" = "Ištrinti aplanką";
 
 /* No comment provided by engineer. */
 "Descending" = "Mažėjimo tvarka";
@@ -361,9 +343,6 @@
 "is on or before" = "tada arba anksčiau";
 
 /* No comment provided by engineer. */
-"JavaScript" = "JavaScript";
-
-/* No comment provided by engineer. */
 "Last Week" = "Praeitą savaitę";
 
 /* Data field name visible in menu/article list */
@@ -374,9 +353,6 @@
 
 /* Title of a button on an alert */
 "Locate…" = "Rasti…";
-
-/* No comment provided by engineer. */
-"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access." = "Open Reader autentikacija nepavyko";
 
 /* Title of a menu item */
 "Mark All Articles as Read" = "Viską pažymėti kaip perskaityta";
@@ -481,6 +457,9 @@
 "Open Subscription Home Page in External Browser" = "Prenumeratos svetainę atidaryti išorinėje naršyklėje";
 
 /* No comment provided by engineer. */
+"Open With" = "Atverti naudojant";
+
+/* No comment provided by engineer. */
 "Other" = "Kita";
 
 /* No comment provided by engineer. */
@@ -571,7 +550,7 @@
 /* No comment provided by engineer. */
 "Search Results" = "Paieškos rezultatai";
 
-/* No comment provided by engineer. */
+/* Title of a popup menu item */
 "Select…" = "Pasirinkti…";
 
 /* No comment provided by engineer. */
@@ -617,9 +596,6 @@
 "Text" = "Tekstas";
 
 /* No comment provided by engineer. */
-"The \"%@\" folder cannot be created." = "Nepavyko sukurti aplanko turinio";
-
-/* No comment provided by engineer. */
 "The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "Neatpažintas duomenų bazės formatas";
 
 /* No comment provided by engineer. */
@@ -635,13 +611,7 @@
 "The specified export output file could not be created. Check that it is not locked and no other application is using it." = "Nepavyko atidaryti eksportuoto failo";
 
 /* No comment provided by engineer. */
-"The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Naujas stilius";
-
-/* No comment provided by engineer. */
 "The style %@ appears to be missing or corrupted" = "Neteisingas stilius";
-
-/* No comment provided by engineer. */
-"The subscription for \"%@\" requires a user name and password for access." = "Prisijungimo duomenų įvedimas";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Šiame straipsnyje yra failas.";
@@ -680,13 +650,7 @@
 "URL" = "Nuoroda";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna negali atidaryti failo";
-
-/* No comment provided by engineer. */
 "Vienna cannot open the file." = "Vienna negali atidaryti failo";
-
-/* No comment provided by engineer. */
-"Vienna cannot show the file \"%@\" because it moved since you downloaded it." = "Vienna negali atidaryti failo";
 
 /* No comment provided by engineer. */
 "Vienna cannot show the file." = "Vienna negali atidaryti failo";
@@ -696,9 +660,6 @@
 
 /* No comment provided by engineer. */
 "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." = "Vienna privalo atnaujinti duomenų bazes versiją į naujesnę. Tai gali užtrukti apie minutę. Atsiprašome dėl nepatogumų.";
-
-/* No comment provided by engineer. */
-"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Nepavyko sukurti duomenų bazių aplanko teksto";
 
 /* No comment provided by engineer. */
 "Yes" = "Taip";

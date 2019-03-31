@@ -116,14 +116,14 @@
 		{
 			[self initForField:criteria.field inRow:searchCriteriaView];
 
-			[fieldNamePopup selectItemWithTitle:NSLocalizedString([criteria field], nil)];
+			[fieldNamePopup selectItemWithTitle:[criteria field]];
             [operatorPopup selectItemWithTitle:[Criteria localizedStringFromOperator:criteria.operator]];
 
 			Field * field = [nameToFieldMap valueForKey:criteria.field];
 			switch (field.type)
 			{
 				case MA_FieldType_Flag: {
-					[flagValueField selectItemWithTitle:NSLocalizedString([criteria value], nil)];
+					[flagValueField selectItemWithTitle:[criteria value]];
 					break;
 				}
 

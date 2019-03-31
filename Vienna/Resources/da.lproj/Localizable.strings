@@ -34,11 +34,17 @@
 /* No comment provided by engineer. */
 "%u unread" = "%u ulæste";
 
+/* Title in popup submenu */
+"<None>" = "<Ingen>";
+
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "En mappe med det navn eksisterer allerede";
 
 /* No comment provided by engineer. */
 "A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "En ny udvidelse er blevet installeret. Den er nu tilgængelig fra menuen og du kan tilføje den til værktøjslinien.";
+
+/* No comment provided by engineer. */
+"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "En ny Vienna database kan ikke laves i \"%@\" fordi mappen sandsynligvis ligger på en netværksdelt enhed og denne version af Vienna kan ikke håndtere databaser som ikke ligger lokalt. Vælg venligst en alternativ mappe som ligger på din lokale maskine.";
 
 /* Toolbar item name for the Advanced preference pane */
 "Advanced" = "Avanceret";
@@ -106,6 +112,9 @@
 
 /* No comment provided by engineer. */
 "Cannot create folder" = "Kan ikke lave mappe";
+
+/* No comment provided by engineer. */
+"Cannot create the Vienna database" = "Kan ikke lave Vienna databasen";
 
 /* No comment provided by engineer. */
 "Cannot import the specified file. The file contents are not valid OPML XML format." = "Kan ikke importere den specificerede fil. Filndholdet er ikke et gyldigt OPML XML format.";
@@ -363,6 +372,9 @@
 /* Title of a button on an alert */
 "Locate…" = "Find…";
 
+/* No comment provided by engineer. */
+"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "Tjek venligst at brugernavn og kodeord som er krævet til at tilgå Open Reader serveren er skrevet korrekt i Viennas indstillinger. Tjek også din netværksadgang.";
+
 /* Title of a menu item */
 "Mark All Articles as Read" = "Marker alle artikler som læst";
 
@@ -413,6 +425,9 @@
 
 /* test for a folder (not operational as of Vienna 3.2) */
 "not under" = "ikke under";
+
+/* Title of a button on an alert */
+"OK" = "OK";
 
 /* No comment provided by engineer. */
 "One or more downloads are in progress" = "En eller flere overførsler er igang";
@@ -546,7 +561,7 @@
 /* No comment provided by engineer. */
 "Search Results" = "Søg i resultater";
 
-/* No comment provided by engineer. */
+/* Title of a popup menu item */
 "Select…" = "Vælg…";
 
 /* No comment provided by engineer. */
@@ -616,9 +631,6 @@
 "The style %@ appears to be missing or corrupted" = "Stilen %@ mangler eller er beskadiget";
 
 /* No comment provided by engineer. */
-"The subscription for \"%@\" requires a user name and password for access." = "Informationsanmodning";
-
-/* No comment provided by engineer. */
 "This article contains an enclosed file." = "Denne artikel har en vedlagt fil.";
 
 /* No comment provided by engineer. */
@@ -632,6 +644,9 @@
 
 /* No comment provided by engineer. */
 "Trash" = "Papirkurv";
+
+/* test for a folder (not operational as of Vienna 3.2) */
+"under" = "under";
 
 /* No comment provided by engineer. */
 "Unread" = "Ulæst";
@@ -652,13 +667,13 @@
 "URL" = "Henvisning";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna kan ikke åbne arkivet \"%@\" fordi det er flyttet siden du hentede det";
+"Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna kan ikke åbne arkivet \"%@\" fordi det er flyttet siden du hentede det.";
 
 /* No comment provided by engineer. */
 "Vienna cannot open the file." = "Vienna kan ikke åbne arkivtitlen";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file \"%@\" because it moved since you downloaded it." = "Vienna kan ikke vise arkivet \"%@\" fordi det er flyttet siden du hentede det";
+"Vienna cannot show the file \"%@\" because it moved since you downloaded it." = "Vienna kan ikke vise arkivet \"%@\" fordi det er flyttet siden du hentede det.";
 
 /* No comment provided by engineer. */
 "Vienna cannot show the file." = "Vienna kan ikke vise arkivtitlen";
