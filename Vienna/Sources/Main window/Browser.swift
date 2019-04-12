@@ -20,7 +20,7 @@
 import Foundation
 
 @objc
-protocol Browser {
+public protocol Browser {
 
     var browserTabCount: Int { get }
 

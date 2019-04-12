@@ -2321,24 +2321,19 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             if (activeBrowserTab == nil) {
                 //we are in the article view
 				[self viewNextUnread:self];
-			else
-			{
-				NSRect visibleRect = theView.visibleRect;
+			} else {
                 if (flags & NSEventModifierFlagShift)
 				{
-                    if (visibleRect.origin.y < 2)
+					if (![activeBrowserTab pageUp]) {
 						[self goBack:self];
-					else
-						[view scrollPageUp:self];
+					}
 				}
 				else
 				{
-					if (visibleRect.size.height == 0
-                        || visibleRect.origin.y + visibleRect.size.height >= theView.frame.size.height - 2)
+					if (![activeBrowserTab pageDown]) {
 						[self viewNextUnread:self];
-					else
-						[view scrollPageDown:self];
-				}*/
+					}
+				}
 			}
 			return YES;
 		}

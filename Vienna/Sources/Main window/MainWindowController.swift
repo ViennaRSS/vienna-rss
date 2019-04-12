@@ -25,7 +25,7 @@ final class MainWindowController: NSWindowController {
 
     @IBOutlet private(set) var splitView: NSSplitView!
     @IBOutlet private(set) var outlineView: FolderView?
-    @IBOutlet private(set) var browser: Browser?
+    @IBOutlet private(set) var browser: (Browser&NSViewController)?
     @IBOutlet private(set) var articleListView: ArticleListView?
     @IBOutlet private(set) var unifiedDisplayView: UnifiedDisplayView?
     @IBOutlet private(set) var filterDisclosureView: DisclosureView?
@@ -48,7 +48,7 @@ final class MainWindowController: NSWindowController {
             filterLabel.cell?.backgroundStyle = .raised
         }
 
-		if let browser = self.browser as? NSViewController {
+		if let browser = self.browser {
 			splitView.addSubview(browser.view)
 		}
 
