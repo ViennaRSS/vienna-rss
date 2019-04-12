@@ -62,6 +62,7 @@
 		2F5AC4202198E1AA00A7EDDE /* TitleChangingTabViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */; };
 		2F7B91EB2198351A00E56F00 /* WebViewBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */; };
 		2FC91DDD21850ADB00D7F223 /* Browser+WebUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */; };
+		2FCD69302260B3E7005BAA75 /* CustomWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCD692F2260B3E7005BAA75 /* CustomWKWebView.swift */; };
 		2FDF6FC0218A266A002F77E9 /* BrowserTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FBC218A266A002F77E9 /* BrowserTab.swift */; };
 		2FDF6FC3218A266A002F77E9 /* TabbedBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FBF218A266A002F77E9 /* TabbedBrowserViewController.swift */; };
 		2FDF6FC8218A289A002F77E9 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FC7218A289A002F77E9 /* Tab.swift */; };
@@ -269,6 +270,7 @@
 		2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewBrowser.xib; sourceTree = "<group>"; };
 		2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Browser+WebUIDelegate.m"; sourceTree = "<group>"; };
 		2FC91DDC21850ADB00D7F223 /* Browser+WebUIDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Browser+WebUIDelegate.h"; sourceTree = "<group>"; };
+		2FCD692F2260B3E7005BAA75 /* CustomWKWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWKWebView.swift; sourceTree = "<group>"; };
 		2FDF6FBC218A266A002F77E9 /* BrowserTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserTab.swift; sourceTree = "<group>"; };
 		2FDF6FBD218A266A002F77E9 /* TabbedBrowserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabbedBrowserViewController.xib; sourceTree = "<group>"; };
 		2FDF6FBE218A266A002F77E9 /* BrowserTab.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrowserTab.xib; sourceTree = "<group>"; };
@@ -1003,6 +1005,7 @@
 				2FDF6FBF218A266A002F77E9 /* TabbedBrowserViewController.swift */,
 				2FDF6FBD218A266A002F77E9 /* TabbedBrowserViewController.xib */,
 				2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */,
+				2FCD692F2260B3E7005BAA75 /* CustomWKWebView.swift */,
 			);
 			name = "Webkit Browser";
 			sourceTree = "<group>";
@@ -1939,6 +1942,7 @@
 				F61CEA661F039E57009C878E /* ButtonToolbarItem.swift in Sources */,
 				4350289D165DE9E00018EDB7 /* BrowserPaneTemplate.m in Sources */,
 				F6094E331F10107800677D3B /* ExportAccessoryViewController.swift in Sources */,
+				2FCD69302260B3E7005BAA75 /* CustomWKWebView.swift in Sources */,
 				2FDF6FC0218A266A002F77E9 /* BrowserTab.swift in Sources */,
 				4350289E165DE9E00018EDB7 /* WebViewBrowser.m in Sources */,
 				F628DFE31ED2698A00FACFD3 /* FilterView.swift in Sources */,

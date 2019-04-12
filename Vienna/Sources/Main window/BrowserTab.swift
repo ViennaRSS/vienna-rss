@@ -22,9 +22,31 @@ import Cocoa
 @available(OSX 10.10, *)
 class BrowserTab: NSViewController {
 
+	let webView: CustomWKWebView = {
+		let prefs = WKPreferences()
+		prefs.javaScriptEnabled = true
+		prefs.javaScriptCanOpenWindowsAutomatically = true
+		prefs.plugInsEnabled = true
+		let config = WKWebViewConfiguration()
+		config.preferences = prefs
+		if #available(OSX 10.11, *) {
+			config.applicationNameForUserAgent = "vienna-rss"
+			config.allowsAirPlayForMediaPlayback = true
+		}
+		if #available(OSX 10.12, *) {
+			config.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.all
+		}
+		let wv = CustomWKWebView(frame: .zero, configuration: config)
+		wv.allowsMagnification = true
+		wv.allowsBackForwardNavigationGestures = true
+		if #available(OSX 10.11, *) {
+			wv.allowsLinkPreview = true
+		}
+		return wv
+	}()
+
     @IBOutlet private(set) weak var addressBarContainer: NSView!
     @IBOutlet private(set) weak var addressField: NSTextField!
-    var webView: WKWebView = WKWebView()
     @IBOutlet private(set) weak var backButton: NSButton!
     @IBOutlet private(set) weak var forwardButton: NSButton!
     @IBOutlet private(set) weak var reloadButton: NSButton!
@@ -41,10 +63,9 @@ class BrowserTab: NSViewController {
         self.view.addSubview(webView, positioned: .below, relativeTo: nil)
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
         //TODO: set top constraint to view top, insets to webview
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[addressBarContainer]-[webView]|", options: [], metrics: nil, views: ["webView": webView, "addressBarContainer": addressBarContainer]))
-        //TODO: set webview options since this is not possible before macOS 12 in IB
+		self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[addressBarContainer]-[webView]|", options: [], metrics: nil, views: ["webView": webView, "addressBarContainer": addressBarContainer as Any]))
 
-		titleObservation = webView.observe(\WKWebView.title, options: NSKeyValueObservingOptions.new) { _, change in
+		titleObservation = webView.observe(\.title, options: [.new]) { _, change in
 			self.title = change.newValue ?? nil
 		}
 
@@ -71,11 +92,11 @@ extension BrowserTab: NSTextFieldDelegate {
 	}
 
 	@IBAction func forward(_ sender: Any) {
-		self.forward()
+		_ = self.forward()
 	}
 
 	@IBAction func back(_ sender: Any) {
-		self.back()
+		_ = self.back()
 	}
 }
 
@@ -94,24 +115,28 @@ extension BrowserTab: Tab {
 		return webView.isLoading
     }
 
-    func back() {
-        self.webView.goBack()
+    func back() -> Bool {
+		return self.webView.goBack() != nil
     }
 
-    func forward() {
-        self.webView.goForward()
+    func forward() -> Bool {
+		return self.webView.goForward() != nil
     }
 
-    func pageDown() {
+    func pageDown() -> Bool {
+		let canPageDown = self.webView.canScrollDown
         self.webView.pageDown(nil)
+		return canPageDown
     }
 
-    func pageUp() {
+    func pageUp() -> Bool {
+		let canPageUp = self.webView.canScrollUp
         self.webView.pageUp(nil)
+		return canPageUp
     }
 
-    func searchFor(_ searchString: String, action: NSFindPanelAction) {
-
+    func searchFor(_ searchString: String, action: NSFindPanelAction) -> Bool {
+		return false
     }
 
     func load() {

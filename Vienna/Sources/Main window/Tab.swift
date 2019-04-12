@@ -20,7 +20,7 @@
 import Foundation
 
 @objc
-protocol Tab {
+public protocol Tab {
 
     var url: URL? { get set }
     var title: String? { get }
@@ -30,11 +30,16 @@ protocol Tab {
 
     // MARK: navigating
 
-    func back()
-    func forward()
-    func pageDown()
-    func pageUp()
-    func searchFor(_ searchString: String, action: NSFindPanelAction)
+	//goes back and returns whether going back was possible
+    func back() -> Bool
+	//goes forward and returns whether going forward was possible
+    func forward() -> Bool
+	//returns whether it was possible to scroll down
+    func pageDown() -> Bool
+	//returns whether it was possible to scroll up
+    func pageUp() -> Bool
+	//returns whether search found something / found next occurrence
+    func searchFor(_ searchString: String, action: NSFindPanelAction) -> Bool
 
     // MARK: tab life cycle
 
