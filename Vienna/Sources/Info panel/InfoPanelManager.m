@@ -22,7 +22,6 @@
 
 #import "AppController.h"
 #import "Database.h"
-#import "Folder.h"
 #import "InfoPanelController.h"
 
 @implementation InfoPanelManager

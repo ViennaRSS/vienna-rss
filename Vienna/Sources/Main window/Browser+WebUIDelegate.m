@@ -9,7 +9,6 @@
 #import "Browser+WebUIDelegate.h"
 #import "BrowserPane.h"
 #import "TabbedWebView.h"
-#import "RichXMLParser.h"
 #import "AppController.h"
 
 @implementation Browser (WebUIDelegate)
