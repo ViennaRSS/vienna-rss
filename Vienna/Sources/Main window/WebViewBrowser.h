@@ -22,10 +22,11 @@
 @import WebKit;
 
 #import "BaseView.h"
-#import "Vienna-Swift.h"
 
 @class MMTabBarView;
 @class BrowserPane;
+@protocol Browser;
+@protocol Tab;
 
 @interface WebViewBrowser : NSViewController <Browser>
 

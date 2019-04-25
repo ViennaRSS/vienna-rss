@@ -25,12 +25,19 @@ final class MainWindowController: NSWindowController {
 
     @IBOutlet private(set) var splitView: NSSplitView!
     @IBOutlet private(set) var outlineView: FolderView?
-    @IBOutlet private(set) var browser: (Browser & NSViewController)?
     @IBOutlet private(set) var articleListView: ArticleListView?
     @IBOutlet private(set) var unifiedDisplayView: UnifiedDisplayView?
     @IBOutlet private(set) var filterDisclosureView: DisclosureView?
     @IBOutlet private(set) var filterSearchField: NSSearchField?
     @IBOutlet private(set) var toolbarSearchField: NSSearchField?
+
+	@objc private(set) lazy var browser: (Browser & NSViewController) = {
+		if #available(macOS 10.10, *) {
+			return TabbedBrowserViewController()
+		} else {
+			return WebViewBrowser()
+		}
+	}()
 
     // MARK: Initialization
 
@@ -48,9 +55,7 @@ final class MainWindowController: NSWindowController {
             filterLabel.cell?.backgroundStyle = .raised
         }
 
-		if let browser = self.browser {
-			splitView.addSubview(browser.view)
-		}
+		splitView.addSubview(browser.view)
 
         let filterMenu = (NSApp as? ViennaApp)?.filterMenu
         let filterMode = Preferences.standard().filterMode
