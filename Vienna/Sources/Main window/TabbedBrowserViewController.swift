@@ -93,18 +93,18 @@ class TabbedBrowserViewController: NSViewController, Browser {
         // Do view setup here.
     }
 
-    public func createNewTab(_ url: URL? = nil, inBackground: Bool = false, load: Bool = false) -> Tab {
+    func createNewTab(_ url: URL? = nil, inBackground: Bool = false, load: Bool = false) -> Tab {
         let newTab = BrowserTab()
         let newTabViewItem = TitleChangingTabViewItem(viewController: newTab)
         newTabViewItem.hasCloseButton = true
         tabView.addTabViewItem(newTabViewItem)
 
         if url != nil {
-            newTab.url = url
+            newTab.tabUrl = url
         }
 
         if load {
-            newTab.load()
+            newTab.loadTab()
         }
 
         if !inBackground {
@@ -117,21 +117,21 @@ class TabbedBrowserViewController: NSViewController, Browser {
         return newTab
     }
 
-    public func switchToPrimaryTab() {
+    func switchToPrimaryTab() {
         if self.primaryTab != nil {
             self.tabView.selectTabViewItem(at: 0)
         }
     }
 
-    public func showPreviousTab() {
+	func showPreviousTab() {
         self.tabView.selectPreviousTabViewItem(nil)
     }
 
-    public func showNextTab() {
+	func showNextTab() {
         self.tabView.selectNextTabViewItem(nil)
     }
 
-    public func saveOpenTabs() {
+	func saveOpenTabs() {
         //TODO: implement saving mechanism
     }
 

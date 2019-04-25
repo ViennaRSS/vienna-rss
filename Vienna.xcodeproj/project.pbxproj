@@ -62,6 +62,7 @@
 		2F22803322719CC8005D1023 /* ArticleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F22803222719CC8005D1023 /* ArticleController.swift */; };
 		2F2280352271B041005D1023 /* ArticleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280342271B041005D1023 /* ArticleContentView.swift */; };
 		2F2280382271B18A005D1023 /* ArticleStyleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */; };
+		2F22803A2271CCAB005D1023 /* WebKitArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280392271CCAB005D1023 /* WebKitArticleView.swift */; };
 		2F5AC4202198E1AA00A7EDDE /* TitleChangingTabViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */; };
 		2F7B91EB2198351A00E56F00 /* WebViewBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */; };
 		2FC91DDD21850ADB00D7F223 /* Browser+WebUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */; };
@@ -272,6 +273,7 @@
 		2F22803222719CC8005D1023 /* ArticleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleController.swift; sourceTree = "<group>"; };
 		2F2280342271B041005D1023 /* ArticleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleContentView.swift; sourceTree = "<group>"; };
 		2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleStyleLoader.swift; sourceTree = "<group>"; };
+		2F2280392271CCAB005D1023 /* WebKitArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKitArticleView.swift; sourceTree = "<group>"; };
 		2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleChangingTabViewItem.swift; sourceTree = "<group>"; };
 		2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewBrowser.xib; sourceTree = "<group>"; };
 		2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Browser+WebUIDelegate.m"; sourceTree = "<group>"; };
@@ -1010,6 +1012,7 @@
 				43502855165DE9DF0018EDB7 /* ArticleView.m */,
 				2F2280342271B041005D1023 /* ArticleContentView.swift */,
 				2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */,
+				2F2280392271CCAB005D1023 /* WebKitArticleView.swift */,
 			);
 			name = ArticleContent;
 			sourceTree = "<group>";
@@ -1930,6 +1933,7 @@
 				AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */,
 				032280311A33BCD8007DE933 /* Article.m in Sources */,
 				F6B3561525616313008CA1ED /* DownloadItem.m in Sources */,
+				2F22803A2271CCAB005D1023 /* WebKitArticleView.swift in Sources */,
 				030C38901AABF12D00AE1EB8 /* FolderImageCache.m in Sources */,
 				F63B71751ED252DD00CF9F32 /* GradientView.swift in Sources */,
 				AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */,

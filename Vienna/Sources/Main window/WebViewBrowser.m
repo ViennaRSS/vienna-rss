@@ -459,7 +459,7 @@
 -(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)inBackground load:(BOOL)load
 {
 	BrowserPane * newBrowserPane = [self createNewTab:url inBackground:inBackground];
-	[newBrowserPane load];
+	[newBrowserPane loadTab];
     return newBrowserPane;
 }
 
@@ -493,7 +493,7 @@
         [newBrowserPane setTab:tab];
 
         //set url but do not load yet
-        newBrowserPane.url = url;
+        newBrowserPane.tabUrl = url;
 
         //set delegate of new tab to the browser
         newBrowserPane.webPane.UIDelegate = self;

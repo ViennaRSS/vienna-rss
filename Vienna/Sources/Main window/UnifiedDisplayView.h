@@ -18,8 +18,6 @@
 //  limitations under the License.
 //
 
-@import Cocoa;
-
 #import "ArticleBaseView.h"
 #import "BaseView.h"
 

@@ -59,9 +59,9 @@
 -(IBAction)handleRSSPage:(id)sender;
 
 // Accessor functions
--(void)load;
+-(void)loadTab;
 @property (weak) NSTabViewItem *tab;
-@property (nonatomic, copy) NSURL *url;
+@property (nonatomic, copy) NSURL *tabUrl;
 @property (copy) NSString *title;
 @property (nonatomic, readonly) BOOL loading;
 @property (nonatomic, readonly) BOOL canGoBack;

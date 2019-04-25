@@ -8,7 +8,6 @@
 @import Cocoa;
 
 @class AppController;
-@class WebView;
 @protocol ArticleContentView;
 
 @interface ArticleCellView : NSTableCellView
@@ -20,7 +19,7 @@
 	NSTableView *__weak _listView;
 }
 
-@property (readonly, strong)WebView<ArticleContentView> *articleView;
+@property (readonly, strong)id<ArticleContentView> articleView;
 @property (readonly, strong)NSProgressIndicator * progressIndicator;
 @property BOOL inProgress;
 @property NSInteger folderId;

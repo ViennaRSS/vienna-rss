@@ -870,7 +870,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
     // Get the URL from the appropriate view.
     if (activeBrowserTab) {
-        url = activeBrowserTab.url;
+        url = activeBrowserTab.tabUrl;
     }
     else {
         ArticleListView * articleListView = (ArticleListView *)self.browser.primaryTab.view;
@@ -917,13 +917,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			openInBackground = !openInBackground;
         }
 		
-		[self.browser createNewTab:item.representedObject inBackground:openInBackground load:true];
+		(void)[self.browser createNewTab:item.representedObject inBackground:openInBackground load:true];
 	}
 }
 
 -(void)newTab:(id)sender
 {
-    [self.browser createNewTab:nil inBackground:NO load:NO];
+    (void)[self.browser createNewTab:nil inBackground:NO load:NO];
 }
 
 /* openWebElementInDefaultBrowser
@@ -950,7 +950,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [self showMainWindow:self];
 	if (!activeBrowserTab)
 	{
-		[self.browser createNewTab:nil inBackground:NO load:NO];
+		(void)[self.browser createNewTab:nil inBackground:NO load:NO];
     } else {
         //TODO: open web location should activate address bar of tab.
         //actually this is not really a crucial functionality.
@@ -2065,7 +2065,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)goForward:(id)sender
 {
-    [self.browser.activeTab forward];
+    (void)[self.browser.activeTab forward];
 }
 
 /* goBack
@@ -2074,7 +2074,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)goBack:(id)sender
 {
-    [self.browser.activeTab back];
+    (void)[self.browser.activeTab back];
 }
 
 /* localPerformFindPanelAction
@@ -2854,7 +2854,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)reloadPage:(id)sender
 {
-    [self.browser.activeTab reload];
+    [self.browser.activeTab reloadTab];
 }
 
 /* stopReloadingPage
@@ -2862,7 +2862,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)stopReloadingPage:(id)sender
 {
-    [self.browser.activeTab stopLoading];
+    [self.browser.activeTab stopLoadingTab];
 }
 
 /* updateAlternateMenuTitle
@@ -3021,7 +3021,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)searchUsingFilterField:(id)sender
 {
     //TODO: make this work for the article list
-	[self.browser.activeTab searchFor:self.searchString action:NSFindPanelActionNext];
+	(void)[self.browser.activeTab searchFor:self.searchString action:NSFindPanelActionNext];
 }
 
 - (IBAction)searchUsingTreeFilter:(NSSearchField* )field
@@ -3062,7 +3062,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)performWebSearch:(SearchMethod *)searchMethod
 {
-	[self.browser createNewTab:[searchMethod queryURLforSearchString:searchString] inBackground:NO load:true];
+	(void)[self.browser createNewTab:[searchMethod queryURLforSearchString:searchString] inBackground:NO load:true];
 }
 
 /* performWebPageSearch
@@ -3073,7 +3073,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	id<Tab> activeBrowserTab = self.browser.activeTab;
 	if (activeBrowserTab) {
 		[self setFocusToSearchField:self];
-        [activeBrowserTab searchFor:self.searchString action:NSFindPanelActionSetFindString];
+        (void)[activeBrowserTab searchFor:self.searchString action:NSFindPanelActionSetFindString];
 	}
 }	
 	
@@ -3176,7 +3176,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     // If the active tab is a web view, mail the URL
     id<Tab> activeBrowserTab = self.browser.activeTab;
     if (activeBrowserTab) {
-        NSURL *url = activeBrowserTab.url;
+        NSURL *url = activeBrowserTab.tabUrl;
         if (url != nil) {
 			title = percentEscape(activeBrowserTab.title);
 			link = percentEscape(url.absoluteString);
@@ -3261,7 +3261,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     id<Tab> activeBrowserTab = self.browser.activeTab;
     if (activeBrowserTab) {
         //is browser tab
-        [self sendBlogEvent:externalEditorBundleIdentifier title:activeBrowserTab.title url:activeBrowserTab.url.absoluteString body:APP.currentTextSelection author:@"" guid:@""];
+        [self sendBlogEvent:externalEditorBundleIdentifier title:activeBrowserTab.title url:activeBrowserTab.tabUrl.absoluteString body:APP.currentTextSelection author:@"" guid:@""];
     } else {
 		// Get the currently selected articles from the ArticleView and iterate over them.
         for (Article * currentArticle in self.articleController.markedArticleRange) {
@@ -3394,7 +3394,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		Article * thisArticle = self.selectedArticle;
         //TODO: if a browser tab is open, the URL can also be a non-article URL.
 		if (activeBrowserTab)
-			*validateFlag = (activeBrowserTab.url != nil);
+			*validateFlag = (activeBrowserTab.tabUrl != nil);
 		else
 			*validateFlag = (thisArticle != nil && isMainWindowVisible);
 		return NO; // Give the menu handler a chance too.
@@ -3453,7 +3453,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 		else
 		{
-			return self.browser.activeTab.loading;
+			return self.browser.activeTab.isLoading;
 		}
 	}
 	else if (theAction == @selector(goForward:))
@@ -3627,11 +3627,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else if (theAction == @selector(reloadPage:))
 	{
-		return self.browser.activeTab.loading;
+		return self.browser.activeTab.isLoading;
 	}
 	else if (theAction == @selector(stopReloadingPage:))
 	{
-		return self.browser.activeTab.loading;
+		return self.browser.activeTab.isLoading;
 	}
 	else if (theAction == @selector(keepFoldersArranged:))
 	{
