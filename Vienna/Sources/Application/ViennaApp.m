@@ -262,7 +262,8 @@
         }
 
         if ([theView isKindOfClass:[UnifiedDisplayView class]]) {
-            webPane = (WebView *)((UnifiedDisplayView *)theView).webView;
+			//TODO: we do not necessarily get a webview here. Rely on tab protocol instead
+            //webPane = (WebView *)((UnifiedDisplayView *)theView).webView;
         }
 
         if (webPane != nil)
@@ -292,7 +293,7 @@
 {
     id<Tab> activeBrowserTab = ((AppController*)self.delegate).browser.activeTab;
 	if (activeBrowserTab) {
-		return activeBrowserTab.url.absoluteString;
+		return activeBrowserTab.tabUrl.absoluteString;
 	}
     else {
 		return @"";

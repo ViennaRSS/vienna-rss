@@ -2,8 +2,7 @@
 //  CustomWKWebView.swift
 //  Vienna
 //
-//  Created by Tassilo Karge on 12.04.19.
-//  Copyright © 2019 uk.co.opencommunity. All rights reserved.
+//  Copyright 2019
 //
 
 import Cocoa
@@ -47,7 +46,7 @@ class CustomWKWebView: WKWebView {
 			self.scrollUpPossible = offsetY > 0.1 }
 
 		synchronizationGroup.enter()
-		self.evaluateJavaScript(javascriptString) { (info, error) in
+		self.evaluateJavaScript(javascriptString) { info, error in
 			evaluation(info, error)
 			self.synchronizationGroup.leave()
 		}

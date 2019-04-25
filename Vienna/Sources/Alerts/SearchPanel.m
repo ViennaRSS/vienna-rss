@@ -60,7 +60,7 @@
 
     id<Tab> activeBrowserTab = APPCONTROLLER.browser.activeTab;
     if (activeBrowserTab) {
-        [activeBrowserTab searchFor:APPCONTROLLER.searchString action:NSFindPanelActionSetFindString];
+        (void)[activeBrowserTab searchFor:APPCONTROLLER.searchString action:NSFindPanelActionSetFindString];
         [APPCONTROLLER setFocusToSearchField:self];
     } else {
         [APPCONTROLLER searchArticlesWithString:searchField.stringValue];

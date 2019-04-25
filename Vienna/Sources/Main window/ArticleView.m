@@ -37,6 +37,8 @@
 
 @implementation ArticleView
 
+@synthesize cssStylesheet, currentHTML, html, htmlTemplate, jsScript, tabUrl, textSelection, title;
+
 /* initWithFrame
  * The designated instance initialiser.
  */
@@ -354,8 +356,7 @@
 		[NSApp.mainWindow makeFirstResponder:((NSView<BaseView> *)APPCONTROLLER.browser.primaryTab.view).mainView];
 	
 	[super webView:sender decidePolicyForNavigationAction:actionInformation request:request frame:frame decisionListener:listener];
-}	
-
+}
 /* dealloc
  * Clean up behind ourself.
  */
@@ -363,4 +364,85 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+
+#pragma mark - Tab interface (forwarding to article view)
+
+- (BOOL)back {
+	//TODO
+	return false;
+}
+
+- (BOOL)forward {
+	return false;
+}
+
+- (void)decreaseTextSize {
+	[self makeTextSmaller:self];
+}
+
+- (void)increaseTextSize {
+	[self makeTextLarger:self];
+}
+
+- (void)loadTab {
+	//TODO
+}
+
+- (BOOL)pageDown {
+	//TODO
+	return NO;
+}
+
+- (BOOL)pageUp {
+	//TODO
+	return NO;
+}
+
+- (void)print {
+	//TODO
+}
+
+- (void)reloadTab {
+	//TODO
+}
+
+- (BOOL)searchFor:(NSString * _Nonnull)searchString action:(NSFindPanelAction)action {
+	//TODO
+	return NO;
+}
+
+- (void)stopLoadingTab {
+	//TODO
+}
+
+- (nullable id)animationForKey:(nonnull NSAnimatablePropertyKey)key {
+	//TODO
+	return nil;
+}
+
+- (nonnull instancetype)animator {
+	//TODO
+	return nil;
+}
+
++ (nullable id)defaultAnimationForKey:(nonnull NSAnimatablePropertyKey)key {
+	//TODO
+	return nil;
+}
+
+- (NSRect)accessibilityFrame {
+	//TODO
+	return CGRectZero;
+}
+
+- (nullable id)accessibilityParent {
+	//TODO
+	return nil;
+}
+
+- (void)encodeWithCoder:(nonnull NSCoder *)aCoder {
+	//TODO
+}
+
 @end

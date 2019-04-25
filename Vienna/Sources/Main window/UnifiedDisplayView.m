@@ -423,7 +423,7 @@
 /* webView
  * Returns the webview used to display the articles
  */
--(WebView *)webView
+-(id<ArticleContentView>)webView
 {
 	ArticleCellView * cellView = (ArticleCellView *)[articleList viewAtColumn:0 row:0 makeIfNecessary:YES];
 	return cellView.articleView;
@@ -744,12 +744,13 @@
 	cellView.folderId = articleFolderId;
 	cellView.articleRow = row;
 	cellView.listView = articleList;
-	ArticleView * view = cellView.articleView;
+	//TODO: ArticleContentView does not have all methods from WebView that are used here...
+	/*id<ArticleContentView> view = cellView.articleView;
 	[view removeFromSuperviewWithoutNeedingDisplay];
 	[cellView setInProgress:YES];
 	NSString * htmlText = [view articleTextFromArray:@[theArticle]];
 	[view setHTML:htmlText];
-	[cellView addSubview:view];
+	[cellView addSubview:view];*/
     return cellView;
 }
 

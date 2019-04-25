@@ -22,11 +22,11 @@ import Foundation
 @objc
 public protocol Tab {
 
-    var url: URL? { get set }
+    var tabUrl: URL? { get set }
     var title: String? { get }
     var textSelection: String { get }
     var html: String { get }
-    var loading: Bool { get }
+    var isLoading: Bool { get }
 
     // MARK: navigating
 
@@ -43,9 +43,9 @@ public protocol Tab {
 
     // MARK: tab life cycle
 
-    func load()
-    func reload()
-    func stopLoading()
+    func loadTab()
+    func reloadTab()
+    func stopLoadingTab()
 
     // MARK: visual settings
 

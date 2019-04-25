@@ -2,14 +2,14 @@
 //  ArticleController.swift
 //  Vienna
 //
-//  Created by Tassilo Karge on 25.04.19.
-//  Copyright © 2019 uk.co.opencommunity. All rights reserved.
+//  Copyright 2019
 //
 
 import Foundation
 
 extension ArticleController: Tab {
-	public var url: URL? {
+
+	public var tabUrl: URL? {
 		get {
 			return URL(string: self.selectedArticle.link) ?? cleanedUpUrlFromString(self.selectedArticle.link)
 		}
@@ -24,7 +24,7 @@ extension ArticleController: Tab {
 		return ""
 	}
 
-	public var loading: Bool {
+	public var isLoading: Bool {
 		return false
 	}
 
@@ -48,11 +48,11 @@ extension ArticleController: Tab {
 		return false
 	}
 
-	public func load() {}
+	public func loadTab() {}
 
-	public func reload() {}
+	public func reloadTab() {}
 
-	public func stopLoading() {}
+	public func stopLoadingTab() {}
 
 	public func decreaseTextSize() {
 

@@ -75,6 +75,8 @@
 
 @implementation BrowserPane
 
+@synthesize tabUrl, loading;
+
 + (void)load
 {
     if (self == [BrowserPane class]) {
@@ -166,7 +168,7 @@
 {
 	if (self.webPane.mainFrame.dataSource.unreachableURL)
 		return self.webPane.mainFrame.dataSource.unreachableURL.absoluteString;
-	return self.url.absoluteString;
+	return self.tabUrl.absoluteString;
 }
 
 /* showRssPageButton
@@ -211,8 +213,8 @@
 	if (urlToLoad != nil)
 	{
 		//set url and load immediately, because action was invoked by user
-		self.url = urlToLoad;
-		[self load];
+		self.tabUrl = urlToLoad;
+		[self loadTab];
 	}
 	else
 		[self activateAddressBar];
@@ -231,20 +233,20 @@
 -(void)checkAndLoad:(NSNotification *)notification {
 	if (self.webPane.mainFrame.dataSource.request == nil)
 	{
-		[self load];
+		[self loadTab];
 	}
 }
 
 /* loadURL
  * Load the specified URL into the web frame.
  */
--(void)load
+-(void)loadTab
 {
-	if (!self.url) {
+	if (!self.tabUrl) {
 		return;
 	}
 
-	pageFilename = self.url.path.lastPathComponent.stringByDeletingPathExtension;
+	pageFilename = self.tabUrl.path.lastPathComponent.stringByDeletingPathExtension;
 	
 	if (self.webPane.loading)
 	{
@@ -252,11 +254,11 @@
 		[self.webPane stopLoading:self];
 		[self didChangeValueForKey:@"loading"];
 	}
-	[self.webPane.mainFrame loadRequest:[NSURLRequest requestWithURL:self.url]];
+	[self.webPane.mainFrame loadRequest:[NSURLRequest requestWithURL:self.tabUrl]];
 }
 
--(void)setUrl:(NSURL *)url {
-    _url = url;
+-(void)setTabUrl:(NSURL *)url {
+    tabUrl = url;
     addressField.stringValue = url ? url.absoluteString : @"";
     self.tab.label = url ? url.host : NSLocalizedString(@"New Tab", nil);
 }
@@ -464,7 +466,7 @@
             currentFolderId = 0;
         }
         SubscriptionModel *subscription = [[SubscriptionModel alloc] init];
-        NSString * verifiedURLString = [subscription verifiedFeedURLFromURL:self.url].absoluteString;
+        NSString * verifiedURLString = [subscription verifiedFeedURLFromURL:self.tabUrl].absoluteString;
         [APPCONTROLLER createNewSubscription:verifiedURLString underFolder:parentFolderId afterChild:currentFolderId];
     }
 }
@@ -516,7 +518,7 @@
 /* loading
  * Returns whether the current web page is in the process of being loaded.
  */
--(BOOL)loading
+-(BOOL)isLoading
 {
     return loading;
 }
@@ -675,9 +677,9 @@
     }
 
     if (!unreachableURL) {
-        self.url = url;
+        self.tabUrl = url;
     } else {
-        self.url = unreachableURL;
+        self.tabUrl = unreachableURL;
     }
 }
 
@@ -699,7 +701,7 @@
         }
         NSString *unreachableURL = frame.provisionalDataSource.unreachableURL.absoluteString;
         if (unreachableURL != nil)
-            self.url = frame.provisionalDataSource.unreachableURL;
+            self.tabUrl = frame.provisionalDataSource.unreachableURL;
     }
 }
 
@@ -718,12 +720,16 @@
 
 #pragma mark - BrowserTab Protocol Requirements
 
-- (void)back {
+- (BOOL)back {
+	BOOL canGoBack = [self.webPane canGoBack];
     [self handleGoBack:nil];
+	return canGoBack;
 }
 
-- (void)forward {
+- (BOOL)forward {
+	BOOL canGoForward = [self.webPane canGoForward];
 	[self handleGoForward:nil];
+	return canGoForward;
 }
 
 - (void)decreaseTextSize {
@@ -738,11 +744,13 @@
 
 - (BOOL)pageDown {
 	[self.webPane scrollPageDown:nil];
+	return false; //TODO
 }
 
 
 - (BOOL)pageUp {
 	[self.webPane scrollPageUp:nil];
+	return false; //TODO
 }
 
 
@@ -751,16 +759,17 @@
 }
 
 
-- (void)reload {
+- (void)reloadTab {
     [self handleReload:nil];
 }
 
 - (BOOL)searchFor:(NSString * _Nonnull)searchString action:(NSFindPanelAction)action {
 	self.searchString = searchString;
 	[self performFindPanelAction:action];
+	return false; //TODO
 }
 
-- (void)stopLoading {
+- (void)stopLoadingTab {
     [self handleStopLoading:nil];
 }
 

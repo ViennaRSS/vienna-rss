@@ -32,33 +32,52 @@
 	if((self = [super initWithFrame:frameRect]))
 	{
 		controller = APPCONTROLLER;
-		articleView= [[ArticleView alloc] initWithFrame:frameRect];
-        //TODO: do not get the primary tab from browser, but retrieve the articles tab directly
-		// Make the list view the frame load and UI delegate for the web view
-        articleView.UIDelegate = (NSView<WebUIDelegate> *)controller.browser.primaryTab.view;
-		articleView.frameLoadDelegate = (NSView<WebFrameLoadDelegate> *) controller.browser.primaryTab.view;
-		// Notify the list view when the article view has finished loading
-		SEL loadFinishedSelector = NSSelectorFromString(@"webViewLoadFinished:");
-		[[NSNotificationCenter defaultCenter] addObserver:controller.browser.primaryTab.view selector:loadFinishedSelector name:WebViewProgressFinishedNotification object:articleView];
-		[articleView setOpenLinksInNewBrowser:YES];
-		[articleView.mainFrame.frameView setAllowsScrolling:NO];
 
-		[articleView setMaintainsBackForwardList:NO];
+		if (@available(macOS 10.10, *)) {
+			[self initializeWebKitArticleView];
+		} else {
+			[self initializeWebViewArticleView:frameRect];
+		}
+
+		[articleView setOpenLinksInNewBrowser:YES];
+
 		[self setInProgress:NO];
 		progressIndicator = nil;
 	}
 	return self;
 }
 
+-(void)initializeWebKitArticleView API_AVAILABLE(macosx(10.10)) {
+	articleView = [[WebKitArticleView alloc] init];
+}
+
+-(void)initializeWebViewArticleView:(NSRect)frameRect {
+	ArticleView *webViewArticleView = [[ArticleView alloc] initWithFrame:frameRect];
+	articleView = webViewArticleView;
+	//TODO: do not get the primary tab from browser, but retrieve the articles tab directly
+	// Make the list view the frame load and UI delegate for the web view
+	webViewArticleView.UIDelegate = (NSView<WebUIDelegate> *)controller.browser.primaryTab.view;
+	webViewArticleView.frameLoadDelegate = (NSView<WebFrameLoadDelegate> *) controller.browser.primaryTab.view;
+	// Notify the list view when the article view has finished loading
+	SEL loadFinishedSelector = NSSelectorFromString(@"webViewLoadFinished:");
+	[[NSNotificationCenter defaultCenter] addObserver:controller.browser.primaryTab.view selector:loadFinishedSelector name:WebViewProgressFinishedNotification object:articleView];
+	[webViewArticleView.mainFrame.frameView setAllowsScrolling:NO];
+
+	[webViewArticleView setMaintainsBackForwardList:NO];
+}
+
 -(void)dealloc
 {
     //TODO: do not get the primary tab from browser, but retrieve the articles tab directly
 	[[NSNotificationCenter defaultCenter] removeObserver:controller.browser.primaryTab.view name:WebViewProgressFinishedNotification object:articleView];
-	[articleView setUIDelegate:nil];
-	[articleView setFrameLoadDelegate:nil];
-	[articleView abortJavascriptAndPlugIns];
-	[articleView stopLoading:self];
+}
 
+-(void)tearDownWebViewArticleView API_AVAILABLE(macosx(10.10)) {
+	ArticleView *webViewArticleView = (ArticleView *)articleView;
+	[webViewArticleView setUIDelegate:nil];
+	[webViewArticleView setFrameLoadDelegate:nil];
+	[webViewArticleView abortJavascriptAndPlugIns];
+	[webViewArticleView stopLoading:self];
 }
 
 #pragma mark -
@@ -73,7 +92,8 @@
 	else {
 		[[NSColor controlColor] set];
     }
-    [self layoutSubviews];
+	//TODO: use autolayout
+    //[self layoutSubviews];
 
     //Draw the border and background
 	NSBezierPath *roundedRect = [NSBezierPath bezierPathWithRect:self.bounds];
@@ -114,7 +134,8 @@
 
 }
 
--(void)layoutSubviews
+//TODO: replace with autolayout
+/*-(void)layoutSubviews
 {
 	//calculate the new frame
 	NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
@@ -122,8 +143,9 @@
 							   NSWidth(self.frame) - XPOS_IN_CELL,
 							   NSHeight(self.frame) -YPOS_IN_CELL);
 	//set the new frame to the webview
+
 	articleView.frame = newWebViewRect;
-}
+}*/
 
 - (BOOL)acceptsFirstResponder
 {

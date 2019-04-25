@@ -51,7 +51,7 @@ class BrowserTab: NSViewController {
     @IBOutlet private(set) weak var forwardButton: NSButton!
     @IBOutlet private(set) weak var reloadButton: NSButton!
 
-    var url: URL?
+    var tabUrl: URL?
 
 	var titleObservation: NSKeyValueObservation?
 
@@ -84,12 +84,12 @@ extension BrowserTab: NSTextFieldDelegate {
 	//TODO: things like address suggestion etc
 
 	@IBAction func loadPageFromAddressBar(_ sender: Any) {
-		self.url = URL(string: addressField.stringValue)
-		self.load()
+		self.tabUrl = URL(string: addressField.stringValue)
+		self.loadTab()
 	}
 
 	@IBAction func reload(_ sender: Any) {
-		self.reload()
+		self.reloadTab()
 	}
 
 	@IBAction func forward(_ sender: Any) {
@@ -112,7 +112,7 @@ extension BrowserTab: Tab {
         return ""
     }
 
-    var loading: Bool {
+    var isLoading: Bool {
 		return webView.isLoading
     }
 
@@ -140,17 +140,17 @@ extension BrowserTab: Tab {
 		return false
     }
 
-    func load() {
-        if let url = self.url {
+    func loadTab() {
+        if let url = self.tabUrl {
             self.webView.load(URLRequest(url: url))
         }
     }
 
-	func reload() {
+	func reloadTab() {
         self.webView.reload()
     }
 
-    func stopLoading() {
+    func stopLoadingTab() {
         self.webView.stopLoading()
     }
 

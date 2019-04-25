@@ -127,7 +127,7 @@
         return [APPCONTROLLER contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
 
     WebFrame * frameKey = [element valueForKey:WebElementFrameKey];
-    if (frameKey != nil && !bp.url.fileURL)
+    if (frameKey != nil && !bp.tabUrl.fileURL)
         return [APPCONTROLLER contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
 
     return defaultMenuItems;

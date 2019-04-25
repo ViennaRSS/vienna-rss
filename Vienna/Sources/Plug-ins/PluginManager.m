@@ -264,7 +264,7 @@
     id<Tab> activeBrowserTab = APPCONTROLLER.browser.activeTab;
 
     if (activeBrowserTab)
-        return ((activeBrowserTab.url != nil) && NSApp.active);
+        return ((activeBrowserTab.tabUrl != nil) && NSApp.active);
     else {
         Article * thisArticle = APPCONTROLLER.selectedArticle;
         return (thisArticle != nil && NSApp.active);
@@ -279,7 +279,7 @@
     id<Tab> activeBrowserTab = APPCONTROLLER.browser.activeTab;
 
     if (activeBrowserTab)
-        return ((activeBrowserTab.url != nil) && NSApp.active);
+        return ((activeBrowserTab.tabUrl != nil) && NSApp.active);
     else {
         Article * thisArticle = APPCONTROLLER.selectedArticle;
         return (thisArticle != nil && NSApp.active);
@@ -319,7 +319,7 @@
 			if (activeBrowserTab)
 			{	
 				[urlString replaceString:@"$ArticleTitle$" withString:activeBrowserTab.title];
-				[urlString replaceString:@"$ArticleLink$" withString:[NSString stringByCleaningURLString:activeBrowserTab.url.absoluteString]];
+				[urlString replaceString:@"$ArticleLink$" withString:[NSString stringByCleaningURLString:activeBrowserTab.tabUrl.absoluteString]];
 			}
 			
 			// In case the user is currently looking at an article:
