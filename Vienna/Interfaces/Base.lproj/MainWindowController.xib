@@ -9,7 +9,6 @@
         <customObject id="-2" userLabel="Window Controller" customClass="MainWindowController" customModule="Vienna" customModuleProvider="target">
             <connections>
                 <outlet property="articleListView" destination="971" id="OE4-G3-4mz"/>
-                <outlet property="browser" destination="eqp-AV-PHe" id="MOu-GN-hkd"/>
                 <outlet property="filterButton" destination="1400" id="06C-9S-q2e"/>
                 <outlet property="filterDisclosureView" destination="cTN-D0-dY2" id="sKF-FL-hKC"/>
                 <outlet property="filterLabel" destination="1403" id="JQl-as-cDO"/>
@@ -795,7 +794,6 @@
             </connections>
             <point key="canvasLocation" x="1066" y="109"/>
         </customView>
-        <customObject id="eqp-AV-PHe" customClass="TabbedBrowserViewController" customModule="Vienna" customModuleProvider="target"/>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="1288" customClass="EnclosureView">
             <rect key="frame" x="0.0" y="0.0" width="444" height="45"/>
             <subviews>

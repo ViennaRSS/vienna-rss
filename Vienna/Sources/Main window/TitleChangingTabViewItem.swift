@@ -30,7 +30,7 @@ class TitleChangingTabViewItem: NSTabViewItem {
         didSet {
             super.viewController = viewController
             titleObservation?.invalidate()
-			titleObservation = self.viewController?.observe(\NSViewController.title, options: .new) { _, change in
+			titleObservation = self.viewController?.observe(\.title, options: .new) { _, change in
 				self.label = (change.newValue ?? "") ?? ""
 			}
         }
