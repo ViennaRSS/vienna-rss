@@ -32,11 +32,6 @@
 		<key>URL</key>
 		<string>http://www.nomadicmatt.com/feed/</string>
 	</dict>
-	<key>Unsplash</key>
-	<dict>
-		<key>URL</key>
-		<string>https://unsplash.com/rss</string>
-	</dict>
 	<key>Kottke</key>
 	<dict>
 		<key>URL</key>
