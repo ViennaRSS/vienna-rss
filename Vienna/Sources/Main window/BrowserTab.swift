@@ -51,9 +51,24 @@ class BrowserTab: NSViewController {
     @IBOutlet private(set) weak var forwardButton: NSButton!
     @IBOutlet private(set) weak var reloadButton: NSButton!
 
-    var tabUrl: URL?
+	var tabUrl: URL? {
+		didSet {
+			self.title = tabUrl?.host ?? NSLocalizedString("New Tab", comment: "")
+		}
+	}
 
-	var titleObservation: NSKeyValueObservation?
+	var titleObservation: NSKeyValueObservation!
+
+	init() {
+		super.init(nibName: nil, bundle: nil)
+		titleObservation = webView.observe(\.title, options: .new) { _, change in
+			self.title = (change.newValue ?? "") ?? ""
+		}
+	}
+	
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,17 +80,25 @@ class BrowserTab: NSViewController {
         //TODO: set top constraint to view top, insets to webview
 		self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[addressBarContainer]-[webView]|", options: [], metrics: nil, views: ["webView": webView, "addressBarContainer": addressBarContainer as Any]))
 
-		self.title = webView.title
-		titleObservation = webView.observe(\.title, options: [.new]) { _, change in
-			self.title = change.newValue ?? nil
+		if let title = webView.title {
+			self.title = title
+		} else if let host = self.tabUrl?.host {
+			self.title = host
+		}
+		if let url = webView.url {
+			self.addressField.stringValue = url.absoluteString
 		}
 
 		//set up address bar handling
 		addressField.delegate = self
     }
 
+	private func activateAddressBar() {
+		NSApp.mainWindow?.makeFirstResponder(addressField)
+	}
+
 	deinit {
-		titleObservation?.invalidate()
+		titleObservation.invalidate()
 	}
 }
 
@@ -84,6 +107,26 @@ extension BrowserTab: NSTextFieldDelegate {
 	//TODO: things like address suggestion etc
 
 	@IBAction func loadPageFromAddressBar(_ sender: Any) {
+		var theURL = addressField.stringValue
+		if URL(string: theURL)?.scheme == nil {
+			// If no '.' appears in the string, wrap it with 'www' and 'com'
+			if !theURL.contains(".") {
+				//TODO: search instead of assuming .com ending
+				theURL = "www." + theURL + ".com"
+			}
+			theURL = "http://" + theURL
+		}
+
+		// cleanUpUrl is a hack to handle Internationalized Domain Names. WebKit handles them automatically, so we tap into that.
+		let urlToLoad = cleanedUpUrlFromString(theURL)
+		if urlToLoad != nil {
+			//set url and load immediately, because action was invoked by user
+			self.tabUrl = urlToLoad
+			self.loadTab()
+		} else {
+			self.activateAddressBar()
+		}
+
 		self.tabUrl = URL(string: addressField.stringValue)
 		self.loadTab()
 	}
@@ -140,14 +183,17 @@ extension BrowserTab: Tab {
 		return false
     }
 
-    func loadTab() {
-        if let url = self.tabUrl {
-            self.webView.load(URLRequest(url: url))
-        }
-    }
+	func loadTab() {
+		if self.isViewLoaded {
+			self.addressField.stringValue = self.tabUrl?.absoluteString ?? ""
+		}
+		if let url = self.tabUrl {
+			self.webView.load(URLRequest(url: url))
+		}
+	}
 
 	func reloadTab() {
-        self.webView.reload()
+		self.webView.reload()
     }
 
     func stopLoadingTab() {

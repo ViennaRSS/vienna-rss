@@ -95,22 +95,21 @@ class TabbedBrowserViewController: NSViewController, Browser {
 
     func createNewTab(_ url: URL? = nil, inBackground: Bool = false, load: Bool = false) -> Tab {
         let newTab = BrowserTab()
-        let newTabViewItem = TitleChangingTabViewItem(viewController: newTab)
-        newTabViewItem.hasCloseButton = true
-        tabView.addTabViewItem(newTabViewItem)
 
-        if url != nil {
-            newTab.tabUrl = url
-        }
+		newTab.tabUrl = url
 
         if load {
             newTab.loadTab()
         }
 
-        if !inBackground {
-            tabBar.select(newTabViewItem)
-            //TODO: make first responder?
-        }
+		let newTabViewItem = TitleChangingTabViewItem(viewController: newTab)
+		newTabViewItem.hasCloseButton = true
+		tabView.addTabViewItem(newTabViewItem)
+
+		if !inBackground {
+			tabBar.select(newTabViewItem)
+			//TODO: make first responder?
+		}
 
         //TODO: tab view order
 
