@@ -49,8 +49,7 @@
 	return self;
 }
 
--copyWithZone:(NSZone *)zone\
-{
+- (id)copyWithZone:(NSZone *)zone {
 	ProgressTextCell *cell = (ProgressTextCell *)[super copyWithZone:zone];
 	cell->inProgress = inProgress;
 	cell->progressRow = progressRow;
@@ -67,7 +66,7 @@
  * indicator if we are redrawing the progress row. This method is generally
  * called in an implementation of NSTableView's willDisplayCell:.
  */
--(void)setInProgress:(BOOL)newInProgress forRow:(NSInteger)row;
+-(void)setInProgress:(BOOL)newInProgress forRow:(NSInteger)row
 {
 	inProgress = newInProgress;
 	if (inProgress)

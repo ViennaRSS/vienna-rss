@@ -618,7 +618,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     });     //block for dispatch_async on _queue
 } // folderRefreshCompleted
 
--(void)finalizeFolderRefresh:(NSDictionary *)parameters;
+-(void)finalizeFolderRefresh:(NSDictionary *)parameters
 {
     ZAssert(parameters != NULL, @"Null");
     Folder * folder = (Folder *)parameters[@"folder"];

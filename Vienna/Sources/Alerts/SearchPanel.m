@@ -54,7 +54,7 @@
  * field. (Cancel blanks the searchField string value so searchArticlesWithString ends
  * up doing nothing.)
  */
--(IBAction)searchStringChanged:(id)sender;
+-(IBAction)searchStringChanged:(id)sender
 {
 	APPCONTROLLER.searchString = searchField.stringValue;
 	

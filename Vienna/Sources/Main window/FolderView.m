@@ -349,7 +349,7 @@
  * Code from Omni that ensures that when the user hits the Enter key, we finish editing and do NOT move to the next
  * cell which is the default outlineview control cell editing behaviour.
  */
--(void)textDidEndEditing:(NSNotification *)notification;
+-(void)textDidEndEditing:(NSNotification *)notification
 {
 	backupString=nil;
 

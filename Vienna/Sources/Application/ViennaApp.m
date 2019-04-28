@@ -302,7 +302,7 @@
 /* currentArticle
  * Retrieves the current article.
  */
--(Article *)currentArticle;
+-(Article *)currentArticle
 {
 	return ((AppController*)self.delegate).selectedArticle;
 }

@@ -113,7 +113,7 @@
 
  @todo: Replace the block.
  */
--(void)showInfoWindowForFolder:(NSInteger)folderId block:(void (^)(InfoPanelController *infoPanelController))block;
+-(void)showInfoWindowForFolder:(NSInteger)folderId block:(void (^)(InfoPanelController *infoPanelController))block
 {
 	NSNumber * folderNumber = @(folderId);
 	InfoPanelController * infoWindow;

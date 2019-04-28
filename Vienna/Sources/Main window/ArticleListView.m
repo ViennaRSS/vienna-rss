@@ -769,7 +769,7 @@
 - (BOOL)acceptsFirstResponder
 {
 	return YES;
-};
+}
 
 /* handleKeyDown [delegate]
  * Support special key codes. If we handle the key, return YES otherwise

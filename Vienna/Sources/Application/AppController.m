@@ -1906,7 +1906,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 /* doViewColumn
  * Toggle whether or not a specified column is visible.
  */
--(IBAction)doViewColumn:(id)sender;
+-(IBAction)doViewColumn:(id)sender
 {
 	NSMenuItem * menuItem = (NSMenuItem *)sender;
 	Field * field = menuItem.representedObject;
@@ -3398,7 +3398,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  * Builds and sends an Apple Event with info from the currently selected articles to the application specified by the bundle identifier that is passed.
  * Iterates over all currently selected articles and consecutively sends Apple Events to the specified app.
  */
--(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
+-(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier
 {
 	// Is our target application running? If not, we'll launch it.
 	if ([NSRunningApplication runningApplicationsWithBundleIdentifier:externalEditorBundleIdentifier].count == 0)

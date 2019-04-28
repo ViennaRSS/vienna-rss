@@ -701,7 +701,7 @@ static NSMutableDictionary * entityMap = nil;
 /* numericCompare
  * Compares two strings using both case insensitivity and numeric comparisons.
  */
--(NSComparisonResult)numericCompare:(NSString *)aString;
+-(NSComparisonResult)numericCompare:(NSString *)aString
 {
 	return [self compare:aString options:NSCaseInsensitiveSearch|NSNumericSearch];
 }
