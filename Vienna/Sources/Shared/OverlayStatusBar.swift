@@ -93,10 +93,11 @@ final class OverlayStatusBar: NSView {
     }
 
     // Make this initialiser unavailable.
-    private convenience override init(frame frameRect: NSRect) {
+    override private convenience init(frame frameRect: NSRect) {
         self.init()
     }
 
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("\(#function) has not been implemented")
     }

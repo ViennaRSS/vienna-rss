@@ -1,81 +1,95 @@
-# SwiftLint 0.25.1
+# SwiftLint 0.41
+# https://realm.github.io/SwiftLint/rule-directory.html
 
 included:
   - Vienna/Sources
 
 disabled_rules:
-  - identifier_name # realm/SwiftLint #2231
+  - function_body_length
   - line_length
   - todo
 
 opt_in_rules:
-  - array_init
   - attributes
   - closure_end_indentation
   - closure_spacing
+  - collection_alignment
   - conditional_returns_on_newline
   - contains_over_first_not_nil
+  - convenience_type
   - discouraged_object_literal
   - discouraged_optional_boolean
   - discouraged_optional_collection
   - empty_count
   - empty_string
-  - explicit_init
   - extension_access_modifier
+  - fallthrough
   - fatal_error_message
   - file_header
+  - file_name
   - first_where
   - force_unwrapping
-  - implicit_return
+  - identical_operands
   - implicitly_unwrapped_optional
   - joined_default_parameter
+  - last_where
+  - legacy_multiple
+  - legacy_random
   - let_var_whitespace
   - literal_expression_end_indentation
   - lower_acl_than_parent
+  - modifier_order
   - multiline_parameters
   - nimble_operator
+  - nslocalizedstring_key
   - number_separator
-  - object_literal
   - operator_usage_whitespace
   - overridden_super_call
   - override_in_extension
   - pattern_matching_keywords
   - prefixed_toplevel_constant
+  - private_action
   - private_outlet
   - prohibited_super_call
   - quick_discouraged_call
   - quick_discouraged_focused_test
   - quick_discouraged_pending_test
+  - reduce_into
   - redundant_nil_coalescing
+  - redundant_type_annotation
   - required_enum_case
-  - sorted_imports
   - single_test_class
   - sorted_first_last
+  - sorted_imports
+  - static_operator
   - strict_fileprivate
+  - strong_iboutlet
   - switch_case_on_newline
+  - toggle_bool
   - trailing_closure
+  - unavailable_function
   - unneeded_parentheses_in_closure_argument
   - untyped_error_in_catch
+  - unused_import
+  - unused_declaration
   - vertical_parameter_alignment_on_call
   - yoda_condition
 
-#  - explicit_acl
-#  - explicit_enum_raw_value
-#  - explicit_top_level_acl
-#  - explicit_type_interface
-#  - multiline_arguments
-#  - no_extension_access_modifier
-#  - no_grouping_extension
-#  - private_action
+object_literal:
+  image_literal: false
 
 private_outlet:
   allow_private_set: true
 
+file_name:
+  excluded: Constants.swift
+  suffix_pattern: Extensions?
+
 file_header:
   required_pattern: |
-                    \/\/
-                    \/\/  .*?\.swift
-                    \/\/  Vienna
-                    \/\/
-                    \/\/  Copyright (\d{4}|\d{4}-\d{4})
-                    \/\/
+    \/\/
+    \/\/  SWIFTLINT_CURRENT_FILENAME
+    \/\/  Vienna
+    \/\/
+    \/\/  Copyright (\d{4}|\d{4}-\d{4})(\s?\w+)*
+    \/\/
