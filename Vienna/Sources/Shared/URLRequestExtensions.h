@@ -13,7 +13,7 @@
 @property (nullable, copy, setter=setUserInfo:) id userInfo;
 // add/set object into current userInfo
 -(void)setInUserInfo:(nullable id)object forKey:(nonnull NSString *)key;
--(void)addInfoFromDictionary:(NSDictionary *)additionalDictionary;
+-(void)addInfoFromDictionary:(NSDictionary *_Nonnull)additionalDictionary;
 @end
 
 // category of "POST" NSMutableURLRequest for setting POST values
