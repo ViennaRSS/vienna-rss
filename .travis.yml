@@ -3,10 +3,15 @@ osx_image: xcode11.1
 xcode_project: Vienna.xcodeproj
 xcode_scheme: Vienna
 
-cache: carthage
+cache:
+  carthage: true
+  directories:
+    - Carthage/Build
+
+install:
+  - brew outdated carthage || brew upgrade carthage
+  - brew outdated swiftlint || brew upgrade swiftlint
 
 before_script:
-  - brew outdated carthage || brew upgrade carthage
   - carthage version
-  - brew outdated swiftlint || brew upgrade swiftlint
   - swiftlint version
