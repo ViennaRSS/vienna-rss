@@ -50,6 +50,7 @@ extern NSString *const SUAllowsAutomaticUpdatesKey;
 extern NSString *const SUEnableAutomaticChecksKey;
 extern NSString *const SUEnableSystemProfilingKey;
 extern NSString *const SUSendProfileInfoKey;
+extern NSString *const SUUpdateGroupIdentifierKey;
 extern NSString *const SULastProfileSubmitDateKey;
 extern NSString *const SUPromptUserOnFirstLaunchKey;
 extern NSString *const SUDefaultsDomainKey;
@@ -70,8 +71,7 @@ extern NSString *const SUAppcastAttributeEDSignature;
 extern NSString *const SUAppcastAttributeShortVersionString;
 extern NSString *const SUAppcastAttributeVersion;
 extern NSString *const SUAppcastAttributeOsType;
-
-
+extern NSString *const SUAppcastAttributePhasedRolloutInterval;
 
 extern NSString *const SUAppcastElementCriticalUpdate;
 extern NSString *const SUAppcastElementDeltas;
