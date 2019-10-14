@@ -26,6 +26,7 @@
 #import "SUSystemProfiler.h"
 #import "SUSystemUpdateInfo.h"
 #import "SUSignatures.h"
+#import "SUOperatingSystem.h"
 
 NSString *const SUUpdaterDidFinishLoadingAppCastNotification = @"SUUpdaterDidFinishLoadingAppCastNotification";
 NSString *const SUUpdaterDidFindValidUpdateNotification = @"SUUpdaterDidFindValidUpdateNotification";
@@ -36,6 +37,7 @@ NSString *const SUUpdaterAppcastNotificationKey = @"SUUpdaterAppCastNotification
 
 @interface SUUpdater () <SUUpdaterPrivate>
 @property (strong) NSTimer *checkTimer;
+@property (assign) BOOL shouldRescheduleOnWake;
 @property (strong) NSBundle *sparkleBundle;
 
 - (instancetype)initForBundle:(NSBundle *)bundle;
@@ -58,6 +60,7 @@ NSString *const SUUpdaterAppcastNotificationKey = @"SUUpdaterAppCastNotification
 
 @synthesize delegate;
 @synthesize checkTimer;
+@synthesize shouldRescheduleOnWake;
 @synthesize userAgentString = customUserAgentString;
 @synthesize httpHeaders;
 @synthesize driver;
@@ -112,6 +115,9 @@ static NSString *const SUUpdaterDefaultsObservationContext = @"SUUpdaterDefaults
     if (self) {
         [self registerAsObserver];
     }
+    
+    [NSWorkspace.sharedWorkspace.notificationCenter addObserver:self selector:@selector(receiveSleepNote) name:NSWorkspaceWillSleepNotification object:NULL];
+    [NSWorkspace.sharedWorkspace.notificationCenter addObserver:self selector:@selector(receiveWakeNote) name:NSWorkspaceDidWakeNotification object:NULL];
 
     id updater = [sharedUpdaters objectForKey:[NSValue valueWithNonretainedObject:bundle]];
     if (updater)
@@ -145,18 +151,19 @@ static NSString *const SUUpdaterDefaultsObservationContext = @"SUUpdaterDefaults
     BOOL hostIsCodeSigned = [SUCodeSigningVerifier bundleAtURLIsCodeSigned:self.host.bundle.bundleURL];
     NSURL *feedURL = [self feedURL];
     BOOL servingOverHttps = [[[feedURL scheme] lowercaseString] isEqualToString:@"https"];
+    NSString *name = self.host.name;
 
     if (!hasPublicKey) {
         if (!isMainBundle) {
             [self showAlertText:SULocalizedString(@"Auto-update not configured", nil)
-                informativeText:SULocalizedString(@"For security reasons, you need to sign your updates with a EdDSA key. See Sparkle's documentation for more information.", nil)];
+                informativeText:[NSString stringWithFormat:SULocalizedString(@"For security reasons, updates to %@ need to be signed with an EdDSA key. See Sparkle's documentation for more information.", nil), name]];
         } else {
             if (!hostIsCodeSigned) {
                 [self showAlertText:SULocalizedString(@"Auto-update not configured", nil)
-                    informativeText:SULocalizedString(@"For security reasons, you need to code sign your application or sign your updates with a EdDSA key. See https://sparkle-project.org/documentation/ for more information.", nil)];
+                    informativeText:[NSString stringWithFormat:SULocalizedString(@"For security reasons, %@ needs to be code-signed or its updates need to be signed with an EdDSA key. See https://sparkle-project.org/documentation/ for more information.", nil), name]];
             } else if (!servingOverHttps) {
                 [self showAlertText:SULocalizedString(@"Auto-update not configured", nil)
-                    informativeText:SULocalizedString(@"For security reasons, you need to serve your updates over HTTPS and/or sign your updates with a EdDSA key. See https://sparkle-project.org/documentation/ for more information.", nil)];
+                    informativeText:[NSString stringWithFormat:SULocalizedString(@"For security reasons, updates to %@ need to be served over HTTPS and/or signed with an EdDSA key. See https://sparkle-project.org/documentation/ for more information.", nil), name]];
             }
         }
     }
@@ -292,13 +299,34 @@ static NSString *const SUUpdaterDefaultsObservationContext = @"SUUpdaterDefaults
     self.checkTimer = [NSTimer scheduledTimerWithTimeInterval:delayUntilCheck target:self selector:@selector(checkForUpdatesInBackground) userInfo:nil repeats:NO]; // Timer is non-repeating, may have invalidated itself, so we had to retain it.
 }
 
+- (void)receiveSleepNote
+{
+    if (self.checkTimer)
+    {
+        [self.checkTimer invalidate];
+        self.checkTimer = nil;
+        self.shouldRescheduleOnWake = YES;
+    }
+    else
+        self.shouldRescheduleOnWake = NO;
+}
+    
+- (void)receiveWakeNote
+{
+    if (self.shouldRescheduleOnWake) // the reason for rescheduling the update-check timer is that NSTimer does behave as if the time the Mac spends asleep did not exist at all, which can significantly prolong the time between update checks
+        [self scheduleNextUpdateCheck];
+}
+
 - (void)checkForUpdatesInBackground
 {
     BOOL automatic = [self automaticallyDownloadsUpdates];
 
     if (!automatic) {
-        if (@available(macOS 10.9, *)) {
+        if (SUAVAILABLE(10, 9)) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunguarded-availability"
             NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"com.apple.notificationcenterui"];
+#pragma clang diagnostic pop
             BOOL dnd = [defaults boolForKey:@"doNotDisturb"];
             if (dnd) {
                 SULog(SULogLevelDefault, @"Delayed update, because Do Not Disturb is on");
