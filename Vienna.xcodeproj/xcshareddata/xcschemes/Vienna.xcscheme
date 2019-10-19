@@ -93,7 +93,7 @@
       </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Deployment"
+      buildConfiguration = "Development"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
