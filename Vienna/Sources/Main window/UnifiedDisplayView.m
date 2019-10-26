@@ -298,35 +298,22 @@
 			if (row == cell.articleRow && row < self.controller.articleController.allArticles.count
 			  && cell.folderId == [self.controller.articleController.allArticles[row] folderId])
 			{	//relevant cell
-                NSString* outputHeight;
-                NSString* bodyHeight;
-                NSString* clientHeight;
+                NSString* offsetHeight;
                 CGFloat fittingHeight;
-                do // loop until dimensions are OK
-                {
-                    // get the height of the rendered frame.
-                    // I have tested many NSHeight([[ ... ] frame]) tricks, but they were unreliable
-                    // and using DOM to get documentElement scrollHeight and/or offsetHeight was the simplest
-                    // way to get the height with WebKit
-                    // Ref : http://james.padolsey.com/javascript/get-document-height-cross-browser/
-                    //
-                    // this temporary enables Javascript, then reset according to user preference
-                    [sender forceJavascript];
-                    outputHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollHeight"];
-                    bodyHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"];
-                    clientHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.clientHeight"];
-                    [sender useUserPrefsForJavascriptAndPlugIns];
-                    fittingHeight = outputHeight.doubleValue;
-                    //get the rect of the current webview frame
-                    NSRect webViewRect = sender.frame;
-                    //calculate the new frame
-                    NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
-                                               YPOS_IN_CELL,
-                                               NSWidth(webViewRect),
-                                               fittingHeight);
-                    //set the new frame to the webview
-                    sender.frame = newWebViewRect;
-				} while (![bodyHeight isEqualToString:outputHeight] || ![bodyHeight isEqualToString:clientHeight]);
+
+                [sender forceJavascript];
+                offsetHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.offsetHeight"];
+                [sender useUserPrefsForJavascriptAndPlugIns];
+                fittingHeight = offsetHeight.doubleValue;
+                //get the rect of the current webview frame
+                NSRect webViewRect = sender.frame;
+                //calculate the new frame
+                NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
+                                           YPOS_IN_CELL,
+                                           NSWidth(webViewRect),
+                                           fittingHeight);
+                //set the new frame to the webview
+                sender.frame = newWebViewRect;
 
                 if (row < rowHeightArray.count)
 					rowHeightArray[row] = @(fittingHeight);
