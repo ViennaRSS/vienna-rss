@@ -20,7 +20,6 @@
 #import "RichXMLParser.h"
 #import "StringExtensions.h"
 #import "XMLTag.h"
-#import "FeedItem.h"
 #import "NSDate+Vienna.h"
 
 @interface RichXMLParser ()
