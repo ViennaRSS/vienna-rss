@@ -19,26 +19,14 @@
 
 import Foundation
 
-public class FeedItem: NSObject {
+final class FeedItem: NSObject {
 
-    @objc var title: String
-    @objc var feedItemDescription: String
-    @objc var author: String
-    @objc var guid: String
+    @objc var title = ""
+    @objc var feedItemDescription = ""
+    @objc var author = ""
+    @objc var guid = ""
     @objc var date: Date?
-    @objc var link: String
-    @objc var enclosure: String
-
-    override init() {
-        self.title = ""
-        self.feedItemDescription = ""
-        self.author = ""
-        self.guid = ""
-        self.date = nil
-        self.link = ""
-        self.enclosure = ""
-
-        super.init()
-    }
+    @objc var link = ""
+    @objc var enclosure = ""
 
 }
