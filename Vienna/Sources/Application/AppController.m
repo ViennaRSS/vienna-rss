@@ -59,7 +59,6 @@
 #import "UnifiedDisplayView.h"
 #import "ArticleView.h"
 #import "FolderView.h"
-#import "Vienna-Swift.h"
 
 @interface AppController () <InfoPanelControllerDelegate, ActivityPanelControllerDelegate>
 

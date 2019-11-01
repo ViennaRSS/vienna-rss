@@ -29,7 +29,6 @@
 #import "OpenReader.h"
 #import "NSNotificationAdditions.h"
 #import "VTPG_Common.h"
-#import "FeedItem.h"
 #import "Debug.h"
 #import "Article.h"
 #import "Folder.h"

@@ -30,7 +30,6 @@
 #import "Folder.h"
 #import "Constants.h"
 #import "Preferences.h"
-#import "Vienna-Swift.h"
 
 @implementation BrowserPaneButtonCell
 

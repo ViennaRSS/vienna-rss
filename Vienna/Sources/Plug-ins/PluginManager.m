@@ -28,7 +28,6 @@
 #import "BitlyAPIHelper.h"
 #import "SearchMethod.h"
 #import "Browser.h"
-#import "Vienna-Swift.h"
 
 @implementation PluginManager
 

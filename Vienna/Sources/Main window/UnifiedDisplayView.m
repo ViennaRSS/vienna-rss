@@ -32,7 +32,6 @@
 #import "Folder.h"
 #import "TableViewExtensions.h"
 #import "Database.h"
-#import "Vienna-Swift.h"
 
 #define LISTVIEW_CELL_IDENTIFIER		@"ArticleCellView"
 // 300 seems a reasonable value to avoid calculating too many frames before being able to update display
