@@ -8,6 +8,22 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.5.5
+-----
+- Fix sizes of cells in Unified view
+- Fix our own RSS URL
+- Fix multiple problems with input and encoding of OpenReader credentials
+- fix selection of next unread article through spacebar when the article view is empty
+- Update link templates for zh-Hant language
+- Update Swift support to version 5
+- Udate to Xcode 11
+- Update Sparkle version to 1.22
+- Improve build system
+- Replace deprecated routines
+- Fix some problem with processing of localizable strings
+
+__Note__ : this version will upgrade the database ; but the newer version of the database remains fully compatible with all Vienna 3.x.x versions. So there is no reason to fear upgrading, or at least testing this 3.5.5 version.
+
 3.5.4
 -----
 - Fix dialog sheet handling definition of smart folders with multiple criteria
