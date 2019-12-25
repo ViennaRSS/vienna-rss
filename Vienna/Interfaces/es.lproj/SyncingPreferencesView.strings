@@ -16,6 +16,9 @@
 /* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "O2q-8o-CSb"; */
 "O2q-8o-CSb.title" = "Usuario:";
 
+/* Class = "NSTextFieldCell"; title = "URL: https://"; ObjectID = "tec-2d-Xej"; */
+"tec-2d-Xej.title" = "URL: https://";
+
 /* Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "uTl-XE-0ym"; */
 "uTl-XE-0ym.title" = "Servidor:";
 

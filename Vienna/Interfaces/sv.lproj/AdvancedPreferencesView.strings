@@ -1,3 +1,6 @@
+/* Class = "NSButtonCell"; title = "Enable Plugins in the internal browser"; ObjectID = "fIz-4t-Ogg"; */
+"fIz-4t-Ogg.title" = "Aktivera JavaScript i inbyggda webbläsaren";
+
 /* Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "GaX-8c-QaN"; */
 "GaX-8c-QaN.title" = "Dessa inställningar borde inte behöva ändras för normal användning av Vienna. Se Hjälp för detaljer kring varje inställning.";
 

@@ -46,6 +46,9 @@
 /* Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377"; */
 "1377.title" = "Filtrar por:";
 
+/* Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404"; */
+"1404.title" = "Filtro actual";
+
 /* Class = "NSToolbarItem"; label = "Style"; ObjectID = "azL-oz-mJL"; */
 "azL-oz-mJL.label" = "Estilo";
 

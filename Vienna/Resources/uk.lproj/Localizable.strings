@@ -267,6 +267,9 @@
 /* Title of a menu item */
 "Hide Status Bar" = "Заховати стрічку статусу";
 
+/* Title of a menu item */
+"Hide Toolbar" = "Приховати панель інструментів";
+
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "З серверу отримано HTTP код %d";
 

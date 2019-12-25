@@ -644,8 +644,7 @@
 "Unsubscribe from Feed" = "Cancelar subscricións";
 
 /* No comment provided by engineer. */
-"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles." = "Asegúrate de que o nome de usuario e o contrasinal precisos para acceder ao servidor de Open Reader foron inseridos correctamente nas preferencias de Vienna .
-Comproba tamén o teu acceso a internet.";
+"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles." = "Asegúrate de que o nome de usuario e o contrasinal precisos para acceder ao servidor de Open Reader foron inseridos correctamente nas preferencias de Vienna. Comproba tamén o teu acceso a internet.";
 
 /* Title of a button on an alert */
 "Upgrade Database" = "Actualizar a base de datos";

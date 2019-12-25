@@ -295,9 +295,6 @@
 /* Class = "NSMenuItem"; title = "Delete Article"; ObjectID = "1198"; */
 "1198.title" = "記事を削除";
 
-/* Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408"; */
-"1408.title" = "Unsubscribe from Feed";
-
 /* Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409"; */
 "1409.title" = "情報を見る…";
 

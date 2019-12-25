@@ -409,6 +409,9 @@
 /* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7"; */
 "rNG-xr-3x7.title" = "Artículos no leídos";
 
+/* Class = "NSMenuItem"; title = "Article List"; ObjectID = "Rs9-r3-soc"; */
+"Rs9-r3-soc.title" = "Lista de artículos";
+
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk"; */
 "RtQ-eP-bfk.title" = "Guiones inteligentes";
 

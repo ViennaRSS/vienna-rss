@@ -28,6 +28,9 @@
 /* Class = "NSTextFieldCell"; title = "Description"; ObjectID = "E84-Uo-ybg"; */
 "E84-Uo-ybg.title" = "Descripción";
 
+/* Class = "NSTextFieldCell"; title = "General"; ObjectID = "i9j-KH-c3D"; */
+"i9j-KH-c3D.title" = "General";
+
 /* Class = "NSTextFieldCell"; title = "Authentication"; ObjectID = "U0N-RF-bUt"; */
 "U0N-RF-bUt.title" = "Autenticación";
 

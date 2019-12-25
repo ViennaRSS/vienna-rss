@@ -370,7 +370,7 @@
 "Loading" = "載入中";
 
 /* No comment provided by engineer. */
-"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "請確認用以存取 Open Reqder 伺服器的帳號與密碼是否有正確地設在 Vienna 的偏好設定中。\\n亦請檢查您的網路可用性。";
+"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "請確認用以存取 Open Reqder 伺服器的帳號與密碼是否有正確地設在 Vienna 的偏好設定中。\n亦請檢查您的網路可用性。";
 
 /* Title of a menu item */
 "Mark All Articles as Read" = "將所有文章標示為已閱讀";
