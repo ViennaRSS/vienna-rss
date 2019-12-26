@@ -35,7 +35,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-#import "NSURL+Utils.h"
+#import "NSURL+CaminoExtensions.h"
 
 
 @implementation NSURL (CaminoExtensions)
