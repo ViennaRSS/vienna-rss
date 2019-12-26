@@ -67,7 +67,7 @@
 }
 
 - (void)completeOperationWithBlock:(void (^)(NSData *, NSURLResponse *, NSError *))block data:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error {
-    if (!self.isCancelled && block)
+    if (block)
         block(data, response, error);
     [self completeOperation];
 }
