@@ -478,6 +478,9 @@
 "Open Subscription Home Page in External Browser" = "Åben abonnement hjemmeside i ekstern browser";
 
 /* No comment provided by engineer. */
+"Open With" = "Åben med";
+
+/* No comment provided by engineer. */
 "Other" = "Andet";
 
 /* No comment provided by engineer. */
@@ -629,6 +632,9 @@
 
 /* No comment provided by engineer. */
 "The style %@ appears to be missing or corrupted" = "Stilen %@ mangler eller er beskadiget";
+
+/* No comment provided by engineer. */
+"The subscription for \"%@\" requires a user name and password for access." = "Abonnementet for \"%@\" kræver et brugernavn og kodeord for at få adgang.";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Denne artikel har en vedlagt fil.";

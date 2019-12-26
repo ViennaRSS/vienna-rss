@@ -22,6 +22,9 @@
 /* Class = "NSButtonCell"; title = "Subscribed"; ObjectID = "121"; */
 "121.title" = "Підписаний";
 
+/* Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126"; */
+"126.title" = "Завантажити повні HTML статті";
+
 /* Class = "NSTextFieldCell"; title = "Description"; ObjectID = "E84-Uo-ybg"; */
 "E84-Uo-ybg.title" = "Опис";
 
@@ -33,4 +36,7 @@
 
 /* Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG"; */
 "xPF-M9-oZG.title" = "Адреса стрічки";
+
+/* Class = "NSButtonCell"; title = "Open Cached File…"; ObjectID = "xTj-hY-aTU"; */
+"xTj-hY-aTU.title" = "Відкрити закешований файл…";
 

@@ -13,6 +13,9 @@
 /* Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107"; */
 "107.title" = "Introduzca el enlace de la fuente de noticias a continuación, o elija de la lista de fuentes para introducir el acceso directo proporcionado por la fuente de noticias.";
 
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "URL:";
+
 /* Class = "NSButtonCell"; title = "Save"; ObjectID = "111"; */
 "111.title" = "Guardar";
 

@@ -316,6 +316,12 @@
 /* Class = "NSMenuItem"; title = "Download Enclosure"; ObjectID = "1216"; */
 "1216.title" = "Завантажити додаток";
 
+/* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
+"1257.title" = "Налаштувати панель інструментів…";
+
+/* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
+"1258.title" = "Приховати панель інструментів";
+
 /* Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259"; */
 "1259.title" = "Заховати стрічку статусу";
 
