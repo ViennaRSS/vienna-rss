@@ -394,17 +394,17 @@
                 // Parse item author
                 if ( (isRSSElement && [articleItemTag isEqualToString:@"author"])
                      || ([itemChildElement.prefix isEqualToString:dcPrefix] && [articleItemTag isEqualToString:@"creator"]) ) {
-                    NSString * authorName = itemChildElement.stringValue;
+                    NSString *authorName = [itemChildElement.stringValue trim];
 
                     // the author is in the feed's entry
-                    if (authorName != nil) {
+                    if (authorName) {
                         // if we currently have a string set as the author then append the new author name
-                        if (newFeedItem.author.length > 0) {
-                            newFeedItem.author = [NSString stringWithFormat:
-                                                  NSLocalizedString(@"%@, %@", @"{existing authors},{new author name}"), newFeedItem.author, authorName];
-                        }
                         // else we currently don't have an author set, so set it to the first author
-                        else {
+                        if (newFeedItem.author.length > 0
+                            && [newFeedItem.author rangeOfString:authorName
+                                                         options:(NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch)].location != NSNotFound) {
+                            newFeedItem.author = [NSString stringWithFormat:NSLocalizedString(@"%@, %@", @"{existing authors}, {new author name}"), newFeedItem.author, authorName];
+                        } else {
                             newFeedItem.author = authorName;
                         }
                     }
@@ -548,7 +548,7 @@
         if (isAtomElement && [elementTag isEqualToString:@"author"]) {
             NSXMLElement * nameElement = [atomChildElement elementsForName:@"name"].firstObject;
             if (nameElement != nil) {
-                defaultAuthor = nameElement.stringValue;
+                defaultAuthor = [nameElement.stringValue trim];
             }
             success = YES;
             continue;
@@ -633,18 +633,20 @@
 
                 // Parse item author
                 if (isArticleElementAtomType && [articleItemTag isEqualToString:@"author"]) {
-                    NSString * authorName = ([itemChildElement elementsForName:@"name"].firstObject).stringValue;
-                    if (authorName == nil) {
+                    NSString *authorName = ([itemChildElement elementsForName:@"name"].firstObject).stringValue;
+                    authorName = [authorName trim];
+                    if (!authorName) {
                         authorName = ([itemChildElement elementsForName:@"email"].firstObject).stringValue;
                     }
                     // the author is in the feed's entry
-                    if (authorName != nil) {
+                    if (authorName) {
                         // if we currently have a string set as the author then append the new author name
-                        if (newFeedItem.author.length > 0) {
-                            newFeedItem.author = [NSString stringWithFormat:NSLocalizedString(@"%@, %@", @"{existing authors},{new author name}"), newFeedItem.author, authorName];
-                        }
                         // else we currently don't have an author set, so set it to the first author
-                        else {
+                        if (newFeedItem.author.length > 0
+                            && [newFeedItem.author rangeOfString:authorName
+                                                         options:(NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch)].location != NSNotFound) {
+                            newFeedItem.author = [NSString stringWithFormat:NSLocalizedString(@"%@, %@", @"{existing authors}, {new author name}"), newFeedItem.author, authorName];
+                        } else {
                             newFeedItem.author = authorName;
                         }
                     }

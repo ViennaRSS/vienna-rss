@@ -143,6 +143,48 @@
             db.userVersion = (uint32_t)20;
             NSLog(@"Updated database schema to version 20.");
         }
+        case 21: {
+            // Removes line-breaks and tabs from author strings.
+
+            FMResultSet *results = [db executeQuery:@"SELECT message_id, sender FROM messages WHERE TRIM(sender) > ''"];
+
+            // Create a character set that contains new-line characters and the
+            // tab character (Unicode U+0009).
+            NSString *tabCharacter = [NSString stringWithCharacters:(UniChar[]){0x0009}
+                                                             length:1];
+            NSMutableCharacterSet *characterSet = NSMutableCharacterSet.newlineCharacterSet;
+            [characterSet addCharactersInString:tabCharacter];
+
+            while ([results next]) {
+                NSString *oldSender = [results stringForColumn:@"sender"];
+
+                if (!oldSender || oldSender.length == 0 ) {
+                    continue;
+                }
+
+                // Search the whole  sender string for line-breaks and the tab
+                // character. Other whitespace characters are preserved.
+                NSScanner *scanner = [NSScanner scannerWithString:oldSender];
+                NSString *scanResult = [NSString string];
+                NSMutableString *newSender = [NSMutableString string];
+                while ([scanner scanUpToCharactersFromSet:characterSet
+                                               intoString:&scanResult]) {
+                    [newSender appendString:scanResult];
+                }
+
+                // If the strings match, do not update the database entry.
+                if ([newSender isEqualToString:oldSender]) {
+                    continue;
+                }
+
+                NSString *messageID = [results stringForColumn:@"message_id"];
+                [db executeUpdate:@"UPDATE messages SET sender=? WHERE message_id=?",
+                 newSender, messageID];
+            }
+
+            db.userVersion = (uint32_t)21;
+            NSLog(@"Updated database schema to version 21.");
+        }
     }
     
 }
