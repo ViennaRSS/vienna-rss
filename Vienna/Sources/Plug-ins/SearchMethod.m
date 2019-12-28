@@ -57,14 +57,14 @@
 
 # pragma mark NSCoder Conformity
 
-- (void)encodeWithCoder:(NSCoder *)coder; 
+- (void)encodeWithCoder:(NSCoder *)coder
 {
     [coder encodeObject:friendlyName forKey:@"friendlyName"];
 	[coder encodeObject:searchQueryString forKey:@"searchQueryString"];
 	[coder encodeValueOfObjCType:@encode(SEL) at:&handler];
 }
 
-- (instancetype)initWithCoder:(NSCoder *)coder;
+- (instancetype)initWithCoder:(NSCoder *)coder
 {
 	if ((self = [super init]) != nil)
     {
@@ -117,7 +117,7 @@
 /* searchCurrentWebPageMethod
  * Returns the URL that needs to be accessed to send the query.
  */
-- (NSURL *)queryURLforSearchString:(NSString *)searchString;
+- (NSURL *)queryURLforSearchString:(NSString *)searchString
 {
 	NSURL * queryURL;
 	NSString * temp = [self.searchQueryString stringByReplacingOccurrencesOfString:@"$SearchTerm$" withString:searchString];

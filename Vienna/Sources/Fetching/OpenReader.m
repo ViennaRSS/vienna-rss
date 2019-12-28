@@ -280,7 +280,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
 /* pass the T token
  */
--(void)getTokenForRequest:(NSMutableURLRequest *)clientRequest;
+-(void)getTokenForRequest:(NSMutableURLRequest *)clientRequest
 {
     static NSOperation * tTokenOperation;
 

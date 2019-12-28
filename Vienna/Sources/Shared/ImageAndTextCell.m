@@ -48,8 +48,7 @@
 	return self;
 }
 
--copyWithZone:(NSZone *)zone\
-{
+- (id)copyWithZone:(NSZone *)zone {
 	ImageAndTextCell *cell = (ImageAndTextCell *)[super copyWithZone:zone];
 	cell->image = image;
 	cell->auxiliaryImage = auxiliaryImage;

@@ -175,7 +175,7 @@ static BOOL _credentialsChanged;
     };
 }
 
--(IBAction)changeSource:(id)sender;
+-(IBAction)changeSource:(id)sender
 {
     NSMenuItem * readerItem = openReaderSource.selectedItem;
     NSString * key = readerItem.title;

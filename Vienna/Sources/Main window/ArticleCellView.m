@@ -126,7 +126,7 @@
 - (BOOL)acceptsFirstResponder
 {
 	return NO;
-};
+}
 
 /* makeTextSmaller
  * Make webview text size smaller

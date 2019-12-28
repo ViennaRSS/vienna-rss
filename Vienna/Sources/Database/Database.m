@@ -1123,7 +1123,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  *
  *  @return YES on success
  */
--(BOOL)setHomePage:(NSString *)homePageURL forFolder:(NSInteger)folderId;
+-(BOOL)setHomePage:(NSString *)homePageURL forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
     if (self.readOnly) {
@@ -1379,7 +1379,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  *
  *  @return An RSSFolder that is subscribed to the specified feed URL.
  */
--(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL;
+-(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL
 {
 	Folder * folder;
 	

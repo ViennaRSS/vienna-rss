@@ -22,7 +22,6 @@
 
 #import "AppController.h"
 #import "Database.h"
-#import "Folder.h"
 #import "InfoPanelController.h"
 
 @implementation InfoPanelManager
@@ -114,7 +113,7 @@
 
  @todo: Replace the block.
  */
--(void)showInfoWindowForFolder:(NSInteger)folderId block:(void (^)(InfoPanelController *infoPanelController))block;
+-(void)showInfoWindowForFolder:(NSInteger)folderId block:(void (^)(InfoPanelController *infoPanelController))block
 {
 	NSNumber * folderNumber = @(folderId);
 	InfoPanelController * infoWindow;

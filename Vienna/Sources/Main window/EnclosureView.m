@@ -160,9 +160,12 @@
 /* drawRect
  * Paint the enclosure background.
  */
--(void)drawRect:(NSRect)rect
-{
-	[[NSColor colorWithDeviceRed:(110.0f/255.0f) green:(142.0f/255.0f) blue:(185.0f/255.0f) alpha:1.0f] set];
+- (void)drawRect:(NSRect)rect {
+    if (@available(macOS 10.13, *)) {
+        [[NSColor colorNamed:@"AttachmentView"] setFill];
+    } else {
+        [[NSColor colorWithSRGBRed:237 green:249 blue:255 alpha:1] setFill];
+    }
 	NSRectFill(rect);
 }
 

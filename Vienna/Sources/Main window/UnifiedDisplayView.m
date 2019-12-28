@@ -840,7 +840,7 @@
  * Use the common copy selection code to copy to
  * the pasteboard.
  */
--(BOOL)tableView:(NSTableView*)aListView writeRowsWithIndexes:(NSIndexSet*)rowIndexes toPasteboard:(NSPasteboard *)pboard;
+-(BOOL)tableView:(NSTableView*)aListView writeRowsWithIndexes:(NSIndexSet*)rowIndexes toPasteboard:(NSPasteboard *)pboard
 {
 	return [self copyIndexesSelection:rowIndexes toPasteboard:pboard];
 }
@@ -909,7 +909,7 @@
 - (BOOL)acceptsFirstResponder
 {
 	return YES;
-};
+}
 
 -(BOOL)becomeFirstResponder
 {
