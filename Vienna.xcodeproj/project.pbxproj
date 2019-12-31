@@ -356,6 +356,8 @@
 		3A60E60A2114AD740004D81D /* URLRequestExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = URLRequestExtensions.m; sourceTree = "<group>"; };
 		3A7BD0DB1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJRVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
 		3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJRVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
+		3A932D8823BB999A009B8061 /* Vienna.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Vienna.entitlements; sourceTree = "<group>"; };
+		3A932D8923BB999A009B8061 /* ViennaDeployment.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = ViennaDeployment.entitlements; sourceTree = "<group>"; };
 		3AEE7DE81695FC570018A17D /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vienna_public_key.pem; sourceTree = "<group>"; };
 		3AF896C51CD8FDB800A9FA22 /* AppController+Sparkle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppController+Sparkle.h"; sourceTree = "<group>"; };
 		3AF896C61CD8FDB800A9FA22 /* AppController+Sparkle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppController+Sparkle.m"; sourceTree = "<group>"; };
@@ -1528,6 +1530,8 @@
 				F63DA16E1F1CEC69007CBED4 /* Resources */,
 				F63DA1751F1CF182007CBED4 /* SharedSupport */,
 				430C4AE0166175C20079C9FC /* Info.plist */,
+				3A932D8823BB999A009B8061 /* Vienna.entitlements */,
+				3A932D8923BB999A009B8061 /* ViennaDeployment.entitlements */,
 			);
 			path = Vienna;
 			sourceTree = "<group>";
@@ -3129,9 +3133,11 @@
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Vienna/Vienna.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -3171,10 +3177,12 @@
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Vienna/ViennaDeployment.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
