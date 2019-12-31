@@ -1807,6 +1807,7 @@
 				AA65D27F083CF46F00BC387C /* Copy Frameworks */,
 				F67F6DE72030609B006C9D72 /* Copy Framework Symbols */,
 				3A5482F6168F5C1700887F91 /* Configure Sparkle */,
+				3A6CC18823BBD1BF0084ABEE /* Archival Checks */,
 			);
 			buildRules = (
 			);
@@ -2013,6 +2014,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Scripts/Sparkle-setup.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3A6CC18823BBD1BF0084ABEE /* Archival Checks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Archival Checks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/ArchivalChecks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		430C4ACE166172BD0079C9FC /* Run Autorevision */ = {
