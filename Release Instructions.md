@@ -2,14 +2,20 @@ Instructions for building and uploading Vienna binaries to Sourceforge and Bintr
 
 ## One time setup step: ##
 
- -	To ensure that releases are properly codesigned, make sure that you have properly edited `Scripts/Resources/CS-ID.xcconfig` for your setup :
+To ensure that Deployment releases are properly codesigned, Xcode needs the `Scripts/Resources/CS-ID.xcconfig` file.
+
+This file has been deliberately set to be ignored in our git repository, because its content should be personal to each developer. So you will have to create it, in order to define two environment variables:
 
     `CODE_SIGN_IDENTITY` should be exactly the name of your certificate as it is stored in Keychain.  
-    For instance, mine reads : `CODE_SIGN_IDENTITY = Developer ID Application: Barijaona Ramaholimihaso`
 
     `PRIVATE_KEY_PATH` should be the location of the private DSA key used by Sparkle,
 
-    `CODE_SIGN_REQUIREMENTS_PATH` should generally remain at its default value.
+  
+For instance, the content of my `Scripts/Resources/CS-ID.xcconfig` file looks like this :
+
+
+    CODE_SIGN_IDENTITY = Developer ID Application: Barijaona Ramaholimihaso
+    PRIVATE_KEY_PATH = $(SRCROOT)/../secrets/vienna_private_key.pem
 
 ## Tag Formatting ##
 
