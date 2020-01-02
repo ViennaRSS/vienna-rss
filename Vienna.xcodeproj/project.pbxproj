@@ -23,7 +23,6 @@
 			buildConfigurationList = EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "Deployment" */;
 			buildPhases = (
 				F6743B10224BB6980054FE1E /* Build Release Notes */,
-				F6743B11224BB6D50054FE1E /* Make Codesign ID */,
 				EAAF336614BEF4DF002A8837 /* Release For Upload */,
 			);
 			dependencies = (
@@ -437,7 +436,6 @@
 		43502892165DE9DF0018EDB7 /* ViennaApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViennaApp.m; sourceTree = "<group>"; };
 		439824191666B37000FFE219 /* autorevision.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = autorevision.sh; path = Scripts/autorevision.sh; sourceTree = SOURCE_ROOT; };
 		4398241A1666B37000FFE219 /* Changes-and-Notes.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Changes-and-Notes.sh"; path = "Scripts/Changes-and-Notes.sh"; sourceTree = SOURCE_ROOT; };
-		4398241B1666B37000FFE219 /* Make-ID-Template.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Make-ID-Template.sh"; path = "Scripts/Make-ID-Template.sh"; sourceTree = SOURCE_ROOT; };
 		4398241C1666B37000FFE219 /* Release-for-upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Release-for-upload.sh"; path = "Scripts/Release-for-upload.sh"; sourceTree = SOURCE_ROOT; };
 		4398241E1666B3DB00FFE219 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = SOURCE_ROOT; };
 		439824201666B3DB00FFE219 /* CHANGES */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES; sourceTree = SOURCE_ROOT; };
@@ -1216,7 +1214,6 @@
 			children = (
 				439824191666B37000FFE219 /* autorevision.sh */,
 				4398241A1666B37000FFE219 /* Changes-and-Notes.sh */,
-				4398241B1666B37000FFE219 /* Make-ID-Template.sh */,
 				4398241C1666B37000FFE219 /* Release-for-upload.sh */,
 				3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */,
 			);
@@ -2066,26 +2063,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Scripts/Changes-and-Notes.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F6743B11224BB6D50054FE1E /* Make Codesign ID */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Make Codesign ID";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(SRCROOT)/Scripts/Resources/CS-ID.xcconfig",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/Make-ID-Template.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F68CBD98203231A8003A6A9E /* Run Carthage */ = {
