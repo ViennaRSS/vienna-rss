@@ -28,61 +28,6 @@ case "${N_VCS_TAG}" in
 	;;
 esac
 
-# codesign setup
-function signd {
-	if [[ ! -z "${CODE_SIGN_IDENTITY}" ]] && [[ ! -z ${CODE_SIGN_REQUIREMENTS_PATH} ]]; then
-		# Local Config
-		local appth="${1}"
-		local idetd="${CODE_SIGN_IDENTITY}"
-		local resrul="${CODE_SIGN_RESOURCE_RULES_PATH}"
-		local csreq="${CODE_SIGN_REQUIREMENTS_PATH}"
-		if [ ! -d "${DERIVED_FILES_DIR}" ]; then
-			mkdir -p "${DERIVED_FILES_DIR}"
-		fi
-
-		# Verify and sign the frameworks
-		local fsignd=''
-		unset CLICOLOR_FORCE
-		local framelst="$(\ls -1 "${appth}/Contents/Frameworks" | sed -n 's:.framework$:&:p')"
-		for fsignd in ${framelst}; do
-			local framepth="${appth}/Contents/Frameworks/${fsignd}/Versions/A"
-			local signvs="$(/usr/bin/codesign -dv "${framepth}" 2>&1 | grep "Sealed Resources" | sed 's:Sealed Resources version=::' | cut -d ' ' -f 1)"
-			if [[ -d "${framepth}" ]]; then
-				local frmcsreq="${DERIVED_FILES_DIR}/${fsignd}.rqset"
-				local frmid="$(defaults read "${framepth}/Resources/Info.plist" CFBundleIdentifier)"
-				if ! /usr/bin/codesign --verify -vvv "${framepth}" || [ ! "${signvs}" = "2" ]; then
-					# Sign if the verification fails or if the version is not 2
-					
-					sed -e "s:uk.co.opencommunity.vienna2:${frmid}:" "${csreq}" > "${frmcsreq}"
-					
-					/usr/bin/codesign -f --sign "${idetd}" --requirements "${frmcsreq}" --preserve-metadata=entitlements -vvv "${framepth}"
-					if ! /usr/bin/codesign --verify -vvv "${framepth}"; then
-						echo "warning: ${fsignd} is not properly signed." 1>&2
-					fi
-				fi
-			fi
-		done
-
-		# Sign and verify the app
-		if [ ! -z "${resrul}" ]; then
-			cp -a "${resrul}" "${appth}/ResourceRules.plist"
-			/usr/bin/codesign -f --sign "${idetd}" --resource-rules="${appth}/ResourceRules.plist" --requirements "${csreq}" -vvv "${appth}"
-			rm "${appth}/ResourceRules.plist"
-		else
-			/usr/bin/codesign -f --sign "${idetd}" --requirements "${csreq}" -vvv "${appth}"
-		fi
-		if ! codesign --verify -vvv "${appth}"; then
-			echo "warning: Code is improperly signed!" 1>&2
-		fi
-		if ! spctl --verbose=4 --assess --type execute "${appth}"; then
-			echo "error: Signature will not be accepted by Gatekeeper!" 1>&2
-		fi
-	else
-		echo "warning: No Code Signing Identity configured or no Code Signing Requirement configured; code will not be signed." 1>&2
-	fi
-}
-
-
 # Fail if not deployment
 if [ ! "${CONFIGURATION}" = "Deployment" ]; then
 	echo "error: This should only be run as Deployment" >&2
@@ -120,7 +65,6 @@ rm -rf "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"
 cd "${VIENNA_UPLOADS_DIR}"
 # Copy the app cleanly
 rsync -clprt --del --exclude=".DS_Store" "${BUILT_PRODUCTS_DIR}/Vienna.app" "${VIENNA_UPLOADS_DIR}"
-signd "${VIENNA_UPLOADS_DIR}/Vienna.app"
 tar -czf "${TGZ_FILENAME}" --exclude '.DS_Store' Vienna.app
 rm -rf Vienna.app
 
