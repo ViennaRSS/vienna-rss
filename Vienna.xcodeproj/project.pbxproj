@@ -26,7 +26,6 @@
 				EAAF336614BEF4DF002A8837 /* Release For Upload */,
 			);
 			dependencies = (
-				43501CFF165D82ED0018EDB7 /* PBXTargetDependency */,
 			);
 			name = Deployment;
 			productName = Release;
@@ -245,13 +244,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 430C4ACF166172BD0079C9FC;
 			remoteInfo = Autorevision;
-		};
-		43501CFE165D82ED0018EDB7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8D15AC270486D014006FF6A4;
-			remoteInfo = Vienna;
 		};
 		F6A7DE4C1E47186E0017BE5E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -2262,11 +2254,6 @@
 			isa = PBXTargetDependency;
 			target = 430C4ACF166172BD0079C9FC /* Autorevision */;
 			targetProxy = 430C4AD71661730D0079C9FC /* PBXContainerItemProxy */;
-		};
-		43501CFF165D82ED0018EDB7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8D15AC270486D014006FF6A4 /* Vienna */;
-			targetProxy = 43501CFE165D82ED0018EDB7 /* PBXContainerItemProxy */;
 		};
 		F6A7DE4D1E47186E0017BE5E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

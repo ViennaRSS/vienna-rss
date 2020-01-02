@@ -1,10 +1,9 @@
 #!/bin/sh
 
-. "${OBJROOT}/autorevision.cache"
-N_VCS_TAG="$(echo "${VCS_TAG}" | sed -e 's:^v/::')"
-VIENNA_UPLOADS_DIR="${BUILT_PRODUCTS_DIR}/Uploads"
-VIENNA_NOTES="${SRCROOT}/notes.html"
+. "${SOURCE_ROOT}/build/Post-archive-exports.txt"
 
+VIENNA_UPLOADS_DIR="${BUILD_DIR}/Uploads"
+VIENNA_NOTES="${SRCROOT}/notes.html"
 
 # Fail if not deployment
 if [ ! "${CONFIGURATION}" = "Deployment" ]; then
