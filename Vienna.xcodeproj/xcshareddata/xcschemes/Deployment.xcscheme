@@ -14,16 +14,16 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F6A7DDC91E470E980017BE5E"
-               BuildableName = "Vienna.help"
-               BlueprintName = "Vienna Help"
+               BlueprintIdentifier = "EAAF335414BDE402002A8837"
+               BuildableName = "Deployment"
+               BlueprintName = "Deployment"
                ReferencedContainer = "container:Vienna.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Development"
+      buildConfiguration = "Deployment"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
@@ -31,7 +31,7 @@
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Development"
+      buildConfiguration = "Deployment"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -40,15 +40,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F6A7DDC91E470E980017BE5E"
-            BuildableName = "Vienna.help"
-            BlueprintName = "Vienna Help"
-            ReferencedContainer = "container:Vienna.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Deployment"
@@ -59,15 +50,15 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F6A7DDC91E470E980017BE5E"
-            BuildableName = "Vienna.help"
-            BlueprintName = "Vienna Help"
+            BlueprintIdentifier = "EAAF335414BDE402002A8837"
+            BuildableName = "Deployment"
+            BlueprintName = "Deployment"
             ReferencedContainer = "container:Vienna.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Development">
+      buildConfiguration = "Deployment">
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Deployment"
