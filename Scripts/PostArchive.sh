@@ -24,4 +24,4 @@ echo export V_VCS_TAG="\"${V_VCS_TAG}\"" >> "${OUT_FILE}"
 echo export VCS_SHORT_HASH="\"${VCS_SHORT_HASH}\"" >> "${OUT_FILE}"
 echo export VCS_DATE="\"${VCS_DATE}\"" >> "${OUT_FILE}"
 
-
+cp "$OUT_FILE" "$ARCHIVE_PATH"
