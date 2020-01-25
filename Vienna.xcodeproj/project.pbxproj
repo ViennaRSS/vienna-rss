@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		3AE9F73423CB80C900DC6D8A /* Notarization */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 3AE9F73723CB80C900DC6D8A /* Build configuration list for PBXAggregateTarget "Notarization" */;
+			buildPhases = (
+				3AE9F73523CB80C900DC6D8A /* Submit notarization */,
+			);
+			dependencies = (
+			);
+			name = Notarization;
+			productName = Release;
+		};
 		430C4ACF166172BD0079C9FC /* Autorevision */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 430C4AD6166172C70079C9FC /* Build configuration list for PBXAggregateTarget "Autorevision" */;
@@ -18,16 +29,16 @@
 			name = Autorevision;
 			productName = Autorevision;
 		};
-		EAAF335414BDE402002A8837 /* Deployment */ = {
+		EAAF335414BDE402002A8837 /* Prepare Upload */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "Deployment" */;
+			buildConfigurationList = EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "Prepare Upload" */;
 			buildPhases = (
 				F6743B10224BB6980054FE1E /* Build Release Notes */,
 				EAAF336614BEF4DF002A8837 /* Release For Upload */,
 			);
 			dependencies = (
 			);
-			name = Deployment;
+			name = "Prepare Upload";
 			productName = Release;
 		};
 /* End PBXAggregateTarget section */
@@ -1892,7 +1903,8 @@
 				F6A7DDC91E470E980017BE5E /* Vienna Help */,
 				035B703419E0E4AE00197334 /* Vienna Tests */,
 				430C4ACF166172BD0079C9FC /* Autorevision */,
-				EAAF335414BDE402002A8837 /* Deployment */,
+				3AE9F73423CB80C900DC6D8A /* Notarization */,
+				EAAF335414BDE402002A8837 /* Prepare Upload */,
 			);
 		};
 /* End PBXProject section */
@@ -2025,6 +2037,25 @@
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Scripts/ArchivalChecks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3AE9F73523CB80C900DC6D8A /* Submit notarization */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Submit notarization";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/Notarize.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		430C4ACE166172BD0079C9FC /* Run Autorevision */ = {
@@ -3097,6 +3128,21 @@
 			};
 			name = Deployment;
 		};
+		3AE9F73823CB80C900DC6D8A /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Development;
+		};
+		3AE9F73923CB80C900DC6D8A /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A6CC18623BBA49D0084ABEE /* CS-ID.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Deployment;
+		};
 		430C4AD0166172BE0079C9FC /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3422,6 +3468,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
 		};
+		3AE9F73723CB80C900DC6D8A /* Build configuration list for PBXAggregateTarget "Notarization" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3AE9F73823CB80C900DC6D8A /* Development */,
+				3AE9F73923CB80C900DC6D8A /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
 		430C4AD6166172C70079C9FC /* Build configuration list for PBXAggregateTarget "Autorevision" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -3449,7 +3504,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
 		};
-		EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "Deployment" */ = {
+		EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "Prepare Upload" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EAAF335A14BDE402002A8837 /* Development */,

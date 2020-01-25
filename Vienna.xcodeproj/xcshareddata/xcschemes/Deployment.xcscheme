@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "EAAF335414BDE402002A8837"
-               BuildableName = "Deployment"
-               BlueprintName = "Deployment"
+               BuildableName = "Prepare Upload"
+               BlueprintName = "Prepare Upload"
                ReferencedContainer = "container:Vienna.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -51,8 +51,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EAAF335414BDE402002A8837"
-            BuildableName = "Deployment"
-            BlueprintName = "Deployment"
+            BuildableName = "Prepare Upload"
+            BlueprintName = "Prepare Upload"
             ReferencedContainer = "container:Vienna.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

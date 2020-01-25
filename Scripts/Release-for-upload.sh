@@ -2,6 +2,7 @@
 
 . "${SOURCE_ROOT}/build/Post-archive-exports.txt"
 
+# Directory created during the Changes-and-Notes.sh stage
 VIENNA_UPLOADS_DIR="${SOURCE_ROOT}/build/Uploads"
 DOWNLOAD_BASE_URL="${BASE_URL_TYP}://${BASE_URL_LOC}"
 
@@ -20,7 +21,6 @@ case "${N_VCS_TAG}" in
 	;;
 esac
 
-mkdir -p "${VIENNA_UPLOADS_DIR}"
 cd "${VIENNA_UPLOADS_DIR}"
 
 # Make the dSYM Bundle
@@ -65,4 +65,13 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 
 EOF
 
+# hierarchy between final releases, release candidates and betas
+if [ -f "${VIENNA_UPLOADS_DIR}/changelog.xml" ]; then
+	cp "${VIENNA_UPLOADS_DIR}/changelog.xml" "${VIENNA_UPLOADS_DIR}/changelog_rc.xml"
+fi
+if [ -f "${VIENNA_UPLOADS_DIR}/changelog_rc.xml" ]; then
+	cp "${VIENNA_UPLOADS_DIR}/changelog_rc.xml" "${VIENNA_UPLOADS_DIR}/changelog_beta.xml"
+fi
+
+open "${VIENNA_UPLOADS_DIR}"
 exit 0
