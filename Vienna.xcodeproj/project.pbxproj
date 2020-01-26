@@ -74,6 +74,7 @@
 		3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBEC61733C206006DD2AB /* ArticleCellView.m */; };
 		3A60E60B2114AD740004D81D /* URLRequestExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A60E60A2114AD740004D81D /* URLRequestExtensions.m */; };
 		3A7BD0DD1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */; };
+		3ADBA70D23DDAFCA00156722 /* Notarize.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3ADBA70C23DDAFCA00156722 /* Notarize.sh */; };
 		3AEE7DE91695FC570018A17D /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* vienna_public_key.pem */; };
 		3AF896C71CD8FDB800A9FA22 /* AppController+Sparkle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF896C61CD8FDB800A9FA22 /* AppController+Sparkle.m */; };
 		435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 435026E5165DD8BE0018EDB7 /* ArticleRef.m */; };
@@ -361,6 +362,7 @@
 		3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJRVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
 		3A932D8823BB999A009B8061 /* Vienna.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Vienna.entitlements; sourceTree = "<group>"; };
 		3A932D8923BB999A009B8061 /* ViennaDeployment.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = ViennaDeployment.entitlements; sourceTree = "<group>"; };
+		3ADBA70C23DDAFCA00156722 /* Notarize.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = Notarize.sh; sourceTree = "<group>"; };
 		3AEE7DE81695FC570018A17D /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vienna_public_key.pem; sourceTree = "<group>"; };
 		3AF896C51CD8FDB800A9FA22 /* AppController+Sparkle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppController+Sparkle.h"; sourceTree = "<group>"; };
 		3AF896C61CD8FDB800A9FA22 /* AppController+Sparkle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppController+Sparkle.m"; sourceTree = "<group>"; };
@@ -1216,9 +1218,10 @@
 			isa = PBXGroup;
 			children = (
 				439824191666B37000FFE219 /* autorevision.sh */,
-				4398241A1666B37000FFE219 /* Changes-and-Notes.sh */,
-				4398241C1666B37000FFE219 /* Release-for-upload.sh */,
 				3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */,
+				4398241A1666B37000FFE219 /* Changes-and-Notes.sh */,
+				3ADBA70C23DDAFCA00156722 /* Notarize.sh */,
+				4398241C1666B37000FFE219 /* Release-for-upload.sh */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
@@ -1918,6 +1921,7 @@
 				03493D2F1A303C1000AA3F36 /* AdvancedPreferencesView.xib in Resources */,
 				F625801C1E2853B90035E43C /* ActivityViewer.xib in Resources */,
 				03493D1A1A303BF700AA3F36 /* SyncingPreferencesView.xib in Resources */,
+				3ADBA70D23DDAFCA00156722 /* Notarize.sh in Resources */,
 				F62581591E29BEB90035E43C /* MainMenu.xib in Resources */,
 				F6FEE7AD209E500800BCAEC6 /* Localizable.stringsdict in Resources */,
 				F6D572AE1E26AA8A00CDA909 /* FeedCredentials.xib in Resources */,
