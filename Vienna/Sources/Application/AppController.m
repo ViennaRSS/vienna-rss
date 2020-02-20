@@ -1266,7 +1266,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     if (self.mainWindow.keyWindow) {
         NSAlert *alert = [NSAlert new];
         alert.messageText = NSLocalizedString(@"Open Reader Authentication Failed",nil);
-        alert.informativeText = NSLocalizedString(@"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access.",nil);
+        if (![nc.object isEqualToString:@""]) {
+            alert.informativeText = nc.object;
+        } else {
+            alert.informativeText = NSLocalizedString(@"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access.",nil);
+        }
         [alert beginSheetModalForWindow:self.mainWindow completionHandler:nil];
     }
 }
