@@ -44,9 +44,8 @@ NSString *APIBaseURL;
 BOOL hostSendsHexaItemId;
 BOOL hostRequiresSParameter;
 BOOL hostRequiresHexaForFeedId;
-BOOL hostRequiresInoreaderAdditionalHeaders;
+BOOL hostRequiresInoreaderHeaders;
 BOOL hostRequiresBackcrawling;
-NSDictionary *inoreaderAdditionalHeaders;
 
 typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     notAuthenticated = 0,
@@ -87,10 +86,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         username = nil;
         password = nil;
         APIBaseURL = nil;
-        inoreaderAdditionalHeaders = @{
-            @"AppID": @"1000001359",
-            @"AppKey": @"rAlfs2ELSuFxZJ5adJAW54qsNbUa45Qn"
-        };
         _asyncQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.openReaderTasks", DISPATCH_QUEUE_SERIAL);
     }
 
@@ -123,7 +118,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 -(NSMutableURLRequest *)requestFromURL:(NSURL *)url
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [self commonRequestPrepare:request];
+    [self addClientTokenToRequest:request];
+    [self specificHeadersPrepare:request];
     return request;
 }
 
@@ -138,13 +134,12 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     return request;
 }
 
--(void)commonRequestPrepare:(NSMutableURLRequest *)request
+-(void)specificHeadersPrepare:(NSMutableURLRequest *)request
 {
-    [self addClientTokenToRequest:request];
-    if (hostRequiresInoreaderAdditionalHeaders) {
-        NSMutableDictionary *theHeaders = [request.allHTTPHeaderFields mutableCopy] ? : [[NSMutableDictionary alloc] init];
-        [theHeaders addEntriesFromDictionary:inoreaderAdditionalHeaders];
-        request.allHTTPHeaderFields = theHeaders;
+    if (hostRequiresInoreaderHeaders) {
+        [request setValue:@"1000001359" forHTTPHeaderField:@"AppID"];
+        [request setValue:@"rAlfs2ELSuFxZJ5adJAW54qsNbUa45Qn" forHTTPHeaderField:@"AppKey"];
+        [request setValue:@"Mozilla/5.0 (compatible)" forHTTPHeaderField:@"User-Agent"];
     }
 }
 
@@ -177,12 +172,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost]];
         NSMutableURLRequest *myRequest = [NSMutableURLRequest requestWithURL:url];
         myRequest.HTTPMethod = @"POST";
-
-        if (hostRequiresInoreaderAdditionalHeaders) {
-            NSMutableDictionary *theHeaders = [myRequest.allHTTPHeaderFields mutableCopy];
-            [theHeaders addEntriesFromDictionary:inoreaderAdditionalHeaders];
-            myRequest.allHTTPHeaderFields = theHeaders;
-        }
+        [myRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [self specificHeadersPrepare:myRequest];
         [myRequest setPostValue:username forKey:@"Email"];
         [myRequest setPostValue:password forKey:@"Passwd"];
 
@@ -252,7 +243,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     hostSendsHexaItemId = NO;
     hostRequiresSParameter = NO;
     hostRequiresHexaForFeedId = NO;
-    hostRequiresInoreaderAdditionalHeaders = NO;
+    hostRequiresInoreaderHeaders = NO;
     hostRequiresBackcrawling = YES;
     // settings for specific kind of servers
     if ([openReaderHost isEqualToString:@"theoldreader.com"]) {
@@ -262,7 +253,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         hostRequiresBackcrawling = NO;
     }
     if ([openReaderHost rangeOfString:@"inoreader.com"].length != 0) {
-        hostRequiresInoreaderAdditionalHeaders = YES;
+        hostRequiresInoreaderHeaders = YES;
         hostRequiresBackcrawling = NO;
     }
     if ([openReaderHost rangeOfString:@"bazqux.com"].length != 0) {
