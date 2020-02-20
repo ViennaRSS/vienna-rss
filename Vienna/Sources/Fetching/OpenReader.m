@@ -193,37 +193,31 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             NSURLSessionDataTask * task = [[NSURLSession sharedSession] dataTaskWithRequest:myRequest
                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                     self.openReaderStatus = notAuthenticated;
-                    if (error) {
+                    if (error || ((NSHTTPURLResponse *)response).statusCode != 200) {
                         NSLog(@"clientAuthOperation error for URL %@", ((NSHTTPURLResponse *)response).URL);
                         NSLog(@"Headers %@", ((NSHTTPURLResponse *)response).allHeaderFields);
                         NSLog(@"Response data %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                         [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
-                    } else {
-                        if (((NSHTTPURLResponse *)response).statusCode != 200) {
-                            NSLog(@"clientAuthOperation statusCode %ld for URL %@", ((NSHTTPURLResponse *)response).statusCode, ((NSHTTPURLResponse *)response).URL);
-                            NSLog(@"Headers %@", ((NSHTTPURLResponse *)response).allHeaderFields);
-                            [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
-                        } else {         // statusCode 200
-                            NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                            NSArray *components = [response componentsSeparatedByString:@"\n"];
-                            for (NSString * item in components) {
-                                if([item hasPrefix:@"Auth="]) {
-                                    self.clientAuthToken = [item substringFromIndex:5];
-                                    self.openReaderStatus = missingTToken;
-                                    break;
-                                }
-                            }
+					} else {         // statusCode 200
+						NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+						NSArray *components = [response componentsSeparatedByString:@"\n"];
+						for (NSString * item in components) {
+							if([item hasPrefix:@"Auth="]) {
+								self.clientAuthToken = [item substringFromIndex:5];
+								self.openReaderStatus = missingTToken;
+								break;
+							}
+						}
 
-                            if (self.openReaderStatus == missingTToken && (self.clientAuthTimer == nil || !self.clientAuthTimer.valid)) {
-                                //new request every 6 days
-                                self.clientAuthTimer = [NSTimer scheduledTimerWithTimeInterval:6 * 24 * 3600
-                                                                                        target:self
-                                                                                      selector:@selector(resetAuthentication)
-                                                                                      userInfo:nil
-                                                                                       repeats:YES];
-                            }
-                        }
-                    }  // if error
+						if (self.openReaderStatus == missingTToken && (self.clientAuthTimer == nil || !self.clientAuthTimer.valid)) {
+							//new request every 6 days
+							self.clientAuthTimer = [NSTimer scheduledTimerWithTimeInterval:6 * 24 * 3600
+																					target:self
+																				  selector:@selector(resetAuthentication)
+																				  userInfo:nil
+																				   repeats:YES];
+						}
+                    }  // if statusCode 200
 
                     // Signal that we are done
                     dispatch_semaphore_signal(sema);
