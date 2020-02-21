@@ -1,15 +1,36 @@
-Instructions for building and uploading Vienna binaries to Sourceforge and Bintray
+Instructions for building and uploading Vienna binaries to Github, Sourceforge and Bintray.
 
 ## One time setup step: ##
 
- -	To ensure that releases are properly codesigned, make sure that you have properly edited `Scripts/Resources/CS-ID.xcconfig` for your setup :
+To ensure that Deployment releases are properly codesigned, Xcode needs the `Scripts/Resources/CS-ID.xcconfig` file.
 
-    `CODE_SIGN_IDENTITY` should be exactly the name of your certificate as it is stored in Keychain.  
-    For instance, mine reads : `CODE_SIGN_IDENTITY = Developer ID Application: Barijaona Ramaholimihaso`
+This file has been deliberately set to be ignored in our git repository, because its content should be personal to each developer. So you will have to create it, in order to define at least two environment variables:
 
-    `PRIVATE_KEY_PATH` should be the location of the private DSA key used by Sparkle,
+`CODE_SIGN_IDENTITY`  
+should be exactly the name of your certificate as it is stored in Keychain.
 
-    `CODE_SIGN_REQUIREMENTS_PATH` should generally remain at its default value.
+`PRIVATE_KEY_PATH`  
+should be the location of the private DSA key used by Sparkle, which for obvious security reasons should not be located in the source directory !
+
+If you want to go further in automation of package building, you will have to define three additional environment variables in the `CS-ID.xcconfig` file. These ones are used to automate the use of the `altool` command line tool as described in [this page of Apple's documentation](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow).
+
+`APP_STORE_ID`  
+is the Apple ID used to connect to App Store Connect
+
+`APP_STORE_PASSWORD`  
+is an app-specific password created for `altool`
+
+`TEAM_SHORTNAME`  
+is the provider short name for the appropriate developer team.
+
+For instance, the content of my `Scripts/Resources/CS-ID.xcconfig` file looks like this :
+
+
+    CODE_SIGN_IDENTITY = Developer ID Application: Barijaona Ramaholimihaso
+    PRIVATE_KEY_PATH = $(SRCROOT)/../secrets/vienna_private_key.pem
+    APP_STORE_ID = barijaona@mac.com
+    APP_STORE_PASSWORD = @keychain:altool-barijaona@mac.com
+    TEAM_SHORTNAME = BarijaonaRamaholimihaso38280830
 
 ## Tag Formatting ##
 
@@ -27,17 +48,42 @@ Tags should be in one of the following formats:
 
 		v/3.0.0_rc1
 
-## Steps to release Vienna: ##
+## Steps before releasing Vienna: ##
 
- 1.	Review all recent code changes and make sure you should not change `MACOSX_DEPLOYMENT_TARGET` in the project configuration in order to protect users whose machines do not match minimum OS X requirements from a counter-productive "upgrade".
+ 1.	Review all recent code changes and make sure you should not change `MACOSX_DEPLOYMENT_TARGET` in the project configuration in order to protect users whose machines do not match minimum macOS requirements from a counter-productive "upgrade".
  2.	Make sure that the "CHANGES" file is up to date.
  3.	Copy the most recent part of "CHANGES" in a new text document and process it with Markdown to get a new "notes.html".
  4.	Commit anything unstaged (on `master` branch if you are releasing a beta or on `stable` branch if you are doing a normal release).
  5.	Make a new tag using `git tag -s` _tagname_, respecting the above mentioned convention (if you do not have a gpg key, you can use `git tag -a` instead).
- 6.	Run `make clean`.
- 7.	Run `make release`. Check the last displayed messages to ensure yourself that the application is correctly signed.
- 8.	Push the tag to ViennaRSS' repository at Github (`git push --tags ViennaRSS master` or `git push --tags ViennaRSS stable`, accordingly).
- 9.	Upload the contents of `build/Uploads` using the following steps.
+
+## Steps for preparing the package to be uploaded: ##
+
+There are two distinct ways to get the different files needed to publish an update: a semi-automated way with Xcode, a fully automated way through the command line.
+
+### Building with Xcode
+
+- Make sure the "Vienna" scheme is selected at the top of Xcode's main window,
+- Select the "Product->Archive" menu item,
+- The Organizer window should open after a while,
+- Select the latest archive, click the "Distribute App" button,
+- Select "Developer ID" as method of distribution,
+- Accept the values proposed in the following prompts,
+- Wait for the upload to finish, then a mail notification from Apple informing you that the software was successfully notarized,
+- Close the organizer, select scheme "Deployment" at the top of Xcode's main window,
+- Run the Deployment scheme,
+- The Uploads window should open in the Finder after a while.
+
+### Building through the command line
+
+- At the command line, run `make release`
+- You will have enough time to take a tea, walk the dog or read your mails…
+- At the end of the process, the Uploads window should open in the Finder,
+- Check the last messages in the terminal. You should have something like `** EXPORT SUCCEEDED **` and `** BUILD SUCCEEDED **`.
+
+## Steps to upload the release to the web ##
+
+ 1.	Push the tag to ViennaRSS' repository at Github (`git push --tags ViennaRSS master` or `git push --tags ViennaRSS stable`, accordingly).
+ 2.	Upload the contents of `build/Uploads` using the following steps.
   (Note: I'm using Vienna 3.3.0_beta4, 3.3.0_rc1 and 3.3.0 as examples here.)
 
 ### On Github:
