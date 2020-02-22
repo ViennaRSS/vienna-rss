@@ -29,6 +29,7 @@
 -(void)unsubscribeFromFeed:(NSString *)feedURL;
 -(void)markRead:(Article *)article readFlag:(BOOL)flag;
 -(void)markStarred:(Article *)article starredFlag:(BOOL)flag;
+-(void)markAllRead:(Folder *)folder;
 -(void)setFolderLabel:(NSString *)folderName forFeed:(NSString *)feedURL set:(BOOL)flag;
 -(void)setFolderTitle:(NSString *)folderName forFeed:(NSString *)feedURL;
 -(void)refreshFeed:(Folder*)thisFolder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:(BOOL)ignoreLimit;
