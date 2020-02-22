@@ -1056,6 +1056,54 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     }
 }
 
+-(void)markAllRead:(Folder *)folder
+{
+    NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@mark-all-as-read", APIBaseURL]];
+    NSMutableURLRequest *request = [self authentifiedFormRequestFromURL:markReadURL];
+    [request setUserInfo: @{ @"folder": folder}];
+    NSString *feedIdentifier;
+    if (hostRequiresHexaForFeedId) {
+        feedIdentifier = folder.feedURL.lastPathComponent;
+    } else {
+        feedIdentifier = folder.feedURL;
+    }
+    [request setPostValue:[NSString stringWithFormat:@"feed/%@", feedIdentifier] forKey:@"s"];
+    NSString *folderLastUpdateString = folder.lastUpdateString;
+    //This is a workaround throw a BAD folderupdate value on DB
+    if (folderLastUpdateString == nil || [folderLastUpdateString isEqualToString:@""] ||
+        [folderLastUpdateString isEqualToString:@"(null)"])
+    {
+        folderLastUpdateString = @"0";
+    }
+    NSInteger localTimestamp = (folderLastUpdateString.longLongValue +1)* 1000000 ; // next second converted to microseconds
+    NSString * microsecondsUpdateString = @(localTimestamp).stringValue; // string value of NSNumber
+    [request setPostValue:microsecondsUpdateString forKey:@"ts"];
+    __weak typeof(self) weakSelf = self;
+    [[RefreshManager sharedManager] addConnection:request
+		completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+			if (error) {
+			[weakSelf requestFailed:request response:response error:error];
+			} else {
+			[weakSelf markAllReadDone:request response:response data:data];
+			}
+		}
+    ];
+} // markAllRead
+
+// callback : we check if the server did confirm the read status change
+-(void)markAllReadDone:(NSMutableURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data
+{
+    NSString *requestResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    if ([requestResponse isEqualToString:@"OK"]) {
+        Folder *folder = ((NSDictionary *)[request userInfo])[@"folder"];
+        [[Database sharedManager] markFolderRead:folder.itemId];
+        [folder markArticlesInCacheRead];
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
+        [nc postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:@(folder.itemId)];
+    }
+}
+
 -(void)markStarred:(Article *)article starredFlag:(BOOL)flag
 {
     NSURL *markStarredURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag", APIBaseURL]];
