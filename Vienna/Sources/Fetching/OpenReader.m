@@ -820,6 +820,26 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     });     //block for dispatch_async
 } // starredRequestDone
 
+-(void)loadSubscriptions
+{
+    NSMutableURLRequest *subscriptionRequest =
+        [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json", APIBaseURL,
+                                                   ClientName]]];
+    __weak typeof(self) weakSelf = self;
+    [[RefreshManager sharedManager] addConnection:subscriptionRequest
+        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error) {
+                [weakSelf requestFailed:subscriptionRequest response:response error:error];
+            } else {
+                [weakSelf subscriptionsRequestDone:subscriptionRequest response:response data:data];
+            }
+            weakSelf.statusMessage = @"";
+        }
+    ];
+
+    self.statusMessage = NSLocalizedString(@"Fetching Open Reader Subscriptions…", nil);
+}
+
 -(void)subscriptionsRequestDone:(NSMutableURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data
 {
     NSDictionary *subscriptionsDict;
@@ -844,7 +864,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         }
         NSString *feedURL = feed[@"url"];
         if (feedURL == nil || hostRequiresHexaForFeedId) { // TheOldReader requires BSON identifier in stream Ids instead of URL (ex: feed/0125ef...)
-            NSString * feedIdentifier = [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)];
+            NSString *feedIdentifier =
+                [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)];
             if (hostRequiresHexaForFeedId) { // TheOldReader
                 feedURL = [NSString stringWithFormat:@"https://%@/reader/public/atom/%@", openReaderHost, feedIdentifier];
             } else { // most services use feed URL as identifier (like GoogleReader did)
@@ -883,11 +904,11 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             if (homePageURL) {
                 for (Folder *localFolder in localFolders) {
                     if (localFolder.type == VNAFolderTypeOpenReader && [localFolder.feedURL isEqualToString:feedURL]) {
-                        Database * db = [Database sharedManager];
+                        Database *db = [Database sharedManager];
                         [db setHomePage:homePageURL forFolder:localFolder.itemId];
                         if ([db folderFromName:rssTitle] == nil) { // no conflict
                             [db setName:rssTitle forFolder:localFolder.itemId];
-                        };
+                        }
                         break;
                     }
                 }
@@ -907,26 +928,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         }
     }
 } // subscriptionsRequestDone
-
--(void)loadSubscriptions
-{
-    NSMutableURLRequest *subscriptionRequest =
-        [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json", APIBaseURL,
-                                                   ClientName]]];
-    __weak typeof(self) weakSelf = self;
-    [[RefreshManager sharedManager] addConnection:subscriptionRequest
-        completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
-            if (error) {
-                [weakSelf requestFailed:subscriptionRequest response:response error:error];
-            } else {
-                [weakSelf subscriptionsRequestDone:subscriptionRequest response:response data:data];
-            }
-            weakSelf.statusMessage = @"";
-        }
-    ];
-
-    self.statusMessage = NSLocalizedString(@"Fetching Open Reader Subscriptions…", nil);
-}
 
 -(void)subscribeToFeed:(NSString *)feedURL
 {
