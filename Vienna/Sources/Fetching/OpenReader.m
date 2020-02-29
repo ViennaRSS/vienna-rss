@@ -118,8 +118,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 -(NSMutableURLRequest *)requestFromURL:(NSURL *)url
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [self specificHeadersPrepare:request];
     [self addClientTokenToRequest:request];
+    [self specificHeadersPrepare:request];
     return request;
 }
 
