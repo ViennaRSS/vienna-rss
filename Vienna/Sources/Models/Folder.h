@@ -47,11 +47,13 @@ typedef NS_ENUM(NSInteger, VNAFolderType) {
  Folder flags
  
  - VNAFolderFlagCheckForImage: asks the refresh code to update the folder image
- - VNAFolderFlagNeedCredentials: VNAFolderFlagNeedCredentials description
- - VNAFolderFlagError: VNAFolderFlagError description
- - VNAFolderFlagUnsubscribed: VNAFolderFlagUnsubscribed description
- - VNAFolderFlagUpdating: VNAFolderFlagUpdating description
- - VNAFolderFlagLoadFullHTML: VNAFolderFlagLoadFullHTML description
+ - VNAFolderFlagNeedCredentials: feed requires credentials which is not yet obtained
+ - VNAFolderFlagError: inform the user that the feed has an error
+ - VNAFolderFlagUnsubscribed: currently unsubscribed from the feed
+ - VNAFolderFlagUpdating: inform the user that the folder is currently being refreshed
+ - VNAFolderFlagLoadFullHTML: load article's web page rather than display feed text
+ - VNAFolderFlagSyncedOK: according to available info, no fresher information is available
+                          on the OpenReader server
  */
 typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
     VNAFolderFlagCheckForImage   = 1 << 0,
@@ -59,7 +61,8 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
     VNAFolderFlagError           = 1 << 2,
     VNAFolderFlagUnsubscribed    = 1 << 3,
     VNAFolderFlagUpdating        = 1 << 4,
-    VNAFolderFlagLoadFullHTML    = 1 << 5
+    VNAFolderFlagLoadFullHTML    = 1 << 5,
+    VNAFolderFlagSyncedOK        = 1 << 6
 };
 
 @interface Folder : NSObject <NSCacheDelegate> {
@@ -102,6 +105,7 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 @property (nonatomic, getter=isUnsubscribed, readonly) BOOL unsubscribed;
 @property (nonatomic, getter=isUpdating, readonly) BOOL updating;
 @property (nonatomic, getter=isError, readonly) BOOL error;
+@property (nonatomic, getter=isSyncedOK, readonly) BOOL localSynced;
 -(void)setFlag:(VNAFolderFlag)flagToSet;
 -(void)clearFlag:(VNAFolderFlag)flagToClear;
 -(void)setNonPersistedFlag:(VNAFolderFlag)flagToSet;

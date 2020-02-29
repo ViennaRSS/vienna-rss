@@ -227,7 +227,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         if (folder.type == VNAFolderTypeGroup) {
             [self refreshSubscriptions:[[Database sharedManager] arrayOfFolders:folder.itemId] ignoringSubscriptionStatus:NO];
         } else if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) {
-            if (!folder.isUnsubscribed || ignoreSubStatus) {
+            if (!(folder.isSyncedOK || folder.isUnsubscribed) || ignoreSubStatus) {
                 if (![self isRefreshingFolder:folder ofType:MA_Refresh_Feed] &&
                     ![self isRefreshingFolder:folder ofType:MA_Refresh_GoogleFeed])
                 {

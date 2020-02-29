@@ -375,6 +375,10 @@ static NSArray * iconArray = nil;
     return (self.nonPersistedFlags & VNAFolderFlagError);
 }
 
+-(BOOL)isSyncedOK {
+    return (self.nonPersistedFlags & VNAFolderFlagSyncedOK);
+}
+
 /* setFlag
  * Set the specified flag on the folder.
  */
