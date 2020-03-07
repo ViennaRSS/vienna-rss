@@ -829,7 +829,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                                                    APIBaseURL,
                                                    ClientName]]];
     __weak typeof(self) weakSelf = self;
-    [[RefreshManager sharedManager] addConnection:unreadCountRequest
+    self.unreadCountOperation = [[RefreshManager sharedManager] addConnection:unreadCountRequest
         completionHandler:^(NSData *data1, NSURLResponse *response, NSError *error) {
             if (error) {
                 [weakSelf requestFailed:unreadCountRequest response:response error:error];
@@ -891,6 +891,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             }
         }
     }
+    self.unreadCountOperation = nil;
 } // unreadCountDone
 
 -(void)subscriptionsRequestDone:(NSMutableURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data
