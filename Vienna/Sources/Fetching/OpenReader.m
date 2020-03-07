@@ -824,11 +824,25 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
 -(void)loadSubscriptions
 {
+    [[RefreshManager sharedManager] suspendConnectionsQueue];
+    NSMutableURLRequest *subscriptionRequest =
+        [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json", APIBaseURL,
+                                                   ClientName]]];
+    __weak typeof(self) weakSelf = self;
+    NSOperation * subscriptionOperation = [[RefreshManager sharedManager] addConnection:subscriptionRequest
+        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error) {
+                [weakSelf requestFailed:subscriptionRequest response:response error:error];
+            } else {
+                [weakSelf subscriptionsRequestDone:subscriptionRequest response:response data:data];
+            }
+        }
+    ];
+
     NSMutableURLRequest *unreadCountRequest =
         [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@unread-count?client=%@&output=json&allcomments=false",
                                                    APIBaseURL,
                                                    ClientName]]];
-    __weak typeof(self) weakSelf = self;
     self.unreadCountOperation = [[RefreshManager sharedManager] addConnection:unreadCountRequest
         completionHandler:^(NSData *data1, NSURLResponse *response, NSError *error) {
             if (error) {
@@ -836,23 +850,11 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             } else {
                 [weakSelf unreadCountDone:unreadCountRequest response:response data:data1];
             }
-        }
-    ];
-
-    NSMutableURLRequest *subscriptionRequest =
-        [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json", APIBaseURL,
-                                                   ClientName]]];
-    [[RefreshManager sharedManager] addConnection:subscriptionRequest
-        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            if (error) {
-                [weakSelf requestFailed:subscriptionRequest response:response error:error];
-            } else {
-                [weakSelf subscriptionsRequestDone:subscriptionRequest response:response data:data];
-            }
             weakSelf.statusMessage = @"";
         }
     ];
-
+    [self.unreadCountOperation addDependency:subscriptionOperation];
+	[[RefreshManager sharedManager] resumeConnectionsQueue];
     self.statusMessage = NSLocalizedString(@"Fetching Open Reader Subscriptions…", nil);
 }
 
@@ -883,10 +885,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 folderLastUpdateString = @"0";
             }
             NSInteger localTimestamp = folderLastUpdateString.longLongValue;
-            if (remoteTimestamp < localTimestamp && remoteCount == localCount) {
-                // no change detected between local feed and remote OpenReader server
-                [folder setNonPersistedFlag:VNAFolderFlagSyncedOK];
-            } else {
+            if (remoteTimestamp >= localTimestamp || remoteCount != localCount) {
+                // discrepancy between local feed and remote OpenReader server
                 [folder clearNonPersistedFlag:VNAFolderFlagSyncedOK];
             }
         }
@@ -976,8 +976,12 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     if (subscriptionsDict[@"subscriptions"] != nil) { // detect probable authentication error
         //check if we have a folder which is not registered as a Open Reader feed
         for (Folder *f in APPCONTROLLER.folders) {
-            if (f.type == VNAFolderTypeOpenReader && ![remoteFeeds containsObject:f.feedURL]) {
-                [[Database sharedManager] deleteFolder:f.itemId];
+            if (f.type == VNAFolderTypeOpenReader) {
+             	if ([remoteFeeds containsObject:f.feedURL]) {
+             		[f setNonPersistedFlag:VNAFolderFlagSyncedOK];
+            	} else {
+                	[[Database sharedManager] deleteFolder:f.itemId];
+            	}
             }
         }
     }
