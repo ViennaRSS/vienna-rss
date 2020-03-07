@@ -3267,18 +3267,17 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)refreshAllSubscriptions:(id)sender
 {
-    // Reset the refresh timer
-    [self handleCheckFrequencyChange:nil];
-
-    // Kick off the refresh
     if (!self.connecting) {
         if ([Preferences standardPreferences].syncGoogleReader){
             [[OpenReader sharedManager] loadSubscriptions];
         }
+
+        // Reset the refresh timer
+        [self handleCheckFrequencyChange:nil];
+        // Kick off the refresh
         [[RefreshManager sharedManager] refreshSubscriptions:[self.foldersTree folders:0]
           ignoringSubscriptionStatus:NO];
     }
-
 }
 
 -(IBAction)forceRefreshSelectedSubscriptions:(id)sender {
