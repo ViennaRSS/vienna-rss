@@ -1146,7 +1146,9 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     {
         folderLastUpdateString = @"0";
     }
-    [request setPostValue:folderLastUpdateString forKey:@"ts"];
+    NSInteger localTimestamp = (folderLastUpdateString.longLongValue +1)* 1000000 ; // next second converted to microseconds
+    NSString * microsecondsUpdateString = @(localTimestamp).stringValue; // string value of NSNumber
+    [request setPostValue:microsecondsUpdateString forKey:@"ts"];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:request
 		completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
