@@ -63,7 +63,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 @property (atomic) NSString *clientAuthToken;
 @property (nonatomic) NSTimer *tTokenTimer;
 @property (nonatomic) NSTimer *clientAuthTimer;
-@property (nonatomic) NSMutableArray *tTokenWaitQueue;
 @property (nonatomic) dispatch_queue_t asyncQueue;
 @property (nonatomic) OpenReaderStatus openReaderStatus;
 @property (readonly, class, nonatomic) NSString *currentTimestamp;
@@ -79,7 +78,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     self = [super init];
     if (self) {
         // Initialization code here.
-        _tTokenWaitQueue = [[NSMutableArray alloc] init];
         _openReaderStatus = notAuthenticated;
         _countOfNewArticles = 0;
         openReaderHost = nil;
@@ -268,28 +266,19 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 -(void)getTokenForRequest:(NSMutableURLRequest *)clientRequest
 {
     static NSOperation * tTokenOperation;
+    dispatch_semaphore_t sema;
 
     if (self.openReaderStatus == fullyAuthenticated) {
         [clientRequest setPostValue:self.tToken forKey:@"T"];
         return;
-    } else if (self.openReaderStatus == waitingTToken && tTokenOperation != nil && !tTokenOperation.isFinished) {
-        if (clientRequest != nil) {
-            [clientRequest setInUserInfo:tTokenOperation forKey:@"dependency"];
-            [self.tTokenWaitQueue addObject:clientRequest];
-        }
-        return;
-    } else if (self.openReaderStatus == notAuthenticated || self.openReaderStatus == waitingClientToken) {
-        // in principle, this should only happen with _openReaderStatus == notAuthenticated, after failure to get clientAuthToken
-        if (clientRequest != nil) {
-            [self.tTokenWaitQueue addObject:clientRequest];
-        }
-        return;
     } else {
-        // openReaderStatus ==  missingTToken
+        // we might get here when status is missingTToken or waitingClientToken or notAuthenticated
         NSMutableURLRequest * myRequest = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
         self.openReaderStatus = waitingTToken;
-        [[RefreshManager sharedManager] suspendConnectionsQueue];
-        tTokenOperation = [[RefreshManager sharedManager] addConnection:myRequest
+        // semaphore with count equal to zero for synchronizing completion of work
+        sema = dispatch_semaphore_create(0);
+        tTokenOperation = [NSBlockOperation blockOperationWithBlock:^(void) {
+          NSURLSessionDataTask * task = [[NSURLSession sharedSession] dataTaskWithRequest:myRequest
             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                 if (error) {
                     NSLog(@"tTokenOperation error for URL %@", myRequest.URL);
@@ -299,15 +288,9 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     NSLog(@"Response data %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                     self.tToken = nil;
                     self.openReaderStatus = missingTToken;
-                    [self.tTokenWaitQueue removeAllObjects];
                 } else {
-                    [[RefreshManager sharedManager] suspendConnectionsQueue];
                     self.tToken = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                     self.openReaderStatus = fullyAuthenticated;
-                    for (id obj in self.tTokenWaitQueue) {
-                        [(NSMutableURLRequest *)obj setPostValue:self.tToken forKey:@"T"];
-                    }
-                    [self.tTokenWaitQueue removeAllObjects];
                     if (self.tTokenTimer == nil || !self.tTokenTimer.valid) {
                         //tokens expire after 30 minutes : renew them every 25 minutes
                         self.tTokenTimer = [NSTimer scheduledTimerWithTimeInterval:25 * 60
@@ -316,15 +299,20 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                                                                           userInfo:nil
                                                                            repeats:YES];
                     }
-                    [[RefreshManager sharedManager] resumeConnectionsQueue];
                 }
+				// Signal that we are done with the synchronous task
+				dispatch_semaphore_signal(sema);
+          }];
+          if (@available(macOS 10.10, *)) {
+              task.priority = NSURLSessionTaskPriorityHigh;
+          };
+          [task resume];
         }];
-        if (clientRequest != nil) {
-            [clientRequest setInUserInfo:tTokenOperation forKey:@"dependency"];
-            [self.tTokenWaitQueue addObject:clientRequest];
-        }
-        [[RefreshManager sharedManager] resumeConnectionsQueue];
-    } // missingTToken
+        [tTokenOperation start];
+        // we wait until the task response block above will send a signal
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        [clientRequest setPostValue:self.tToken forKey:@"T"];
+    } // missingTToken or waitingClientToken or notAuthenticated
 } // getTokenForRequest
 
 -(void)renewTToken

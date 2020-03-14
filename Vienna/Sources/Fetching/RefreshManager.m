@@ -1133,13 +1133,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     [completionOperation addDependency:op];
     [[NSOperationQueue mainQueue] addOperation:completionOperation];
 
-    NSOperation *requiredOperation = ((NSDictionary *)[urlRequest userInfo])[@"dependency"];
-    if (requiredOperation != nil) {
-        op.queuePriority = NSOperationQueuePriorityLow;
-        [op addDependency:requiredOperation];
-        [urlRequest setInUserInfo:nil forKey:@"dependency"];
-    }
-
     [networkQueue addOperation:op];
     if (networkQueue.operationCount == 1) {       // networkQueue is NOT YET started
         [self updateStatus];
