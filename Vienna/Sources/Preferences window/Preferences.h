@@ -214,4 +214,9 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 
 // username used for syncing
 @property (nonatomic, copy) NSString *syncingUser;
+
+// application ID and key needed by specific OpenReader services
+@property (nonatomic, copy) NSString *syncingAppId;
+@property (nonatomic, copy) NSString *syncingAppKey;
+
 @end
