@@ -137,8 +137,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 -(void)specificHeadersPrepare:(NSMutableURLRequest *)request
 {
     if (hostRequiresInoreaderHeaders) {
-        [request setValue:@"1000001359" forHTTPHeaderField:@"AppID"];
-        [request setValue:@"rAlfs2ELSuFxZJ5adJAW54qsNbUa45Qn" forHTTPHeaderField:@"AppKey"];
+        [request setValue:[Preferences standardPreferences].syncingAppId forHTTPHeaderField:@"AppID"];
+        [request setValue:[Preferences standardPreferences].syncingAppKey forHTTPHeaderField:@"AppKey"];
         [request setValue:@"Mozilla/5.0 (compatible)" forHTTPHeaderField:@"User-Agent"];
     }
 }
