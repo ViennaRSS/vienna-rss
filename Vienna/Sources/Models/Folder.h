@@ -98,6 +98,7 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 @property (nonatomic, getter=isGroupFolder, readonly) BOOL groupFolder;
 @property (nonatomic, getter=isSmartFolder, readonly) BOOL smartFolder;
 @property (nonatomic, getter=isRSSFolder, readonly) BOOL RSSFolder;
+@property (nonatomic, getter=isOpenReaderFolder, readonly) BOOL OpenReaderFolder;
 @property (nonatomic, readonly) BOOL loadsFullHTML;
 @property (nonatomic, getter=isUnsubscribed, readonly) BOOL unsubscribed;
 @property (nonatomic, getter=isUpdating, readonly) BOOL updating;
