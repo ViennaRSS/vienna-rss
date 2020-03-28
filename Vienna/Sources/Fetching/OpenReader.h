@@ -20,6 +20,7 @@
 
 // Check if an accessToken is available
 @property (nonatomic, getter=isReady, readonly) BOOL ready;
+@property (nonatomic) NSOperation * unreadCountOperation;
 
 -(void)loadSubscriptions;
 -(void)clearAuthentication;
