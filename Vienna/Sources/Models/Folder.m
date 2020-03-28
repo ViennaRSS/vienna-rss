@@ -354,6 +354,13 @@ static NSArray * iconArray = nil;
     return self.type == VNAFolderTypeRSS;
 }
 
+/* isOpenReaderFolder
+ * Returns YES if this folder is an OpenReader feed folder.
+ */
+-(BOOL)isOpenReaderFolder {
+    return self.type == VNAFolderTypeOpenReader;
+}
+
 // MARK: - VNAFolderFlag methods
 
 /* loadsFullHTML
