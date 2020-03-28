@@ -510,6 +510,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     [aItem setStatus:NSLocalizedString(@"Error", nil)];
     [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
     [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
+    [refreshedFolder clearNonPersistedFlag:VNAFolderFlagSyncedOK]; // get ready for next request
 }
 
 // callback
@@ -687,6 +688,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             });
             [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
             [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
+            [refreshedFolder clearNonPersistedFlag:VNAFolderFlagSyncedOK];
         }
     });     //block for dispatch_async
 } // feedRequestDone
@@ -811,21 +813,37 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
 -(void)loadSubscriptions
 {
+    [[RefreshManager sharedManager] suspendConnectionsQueue];
     NSMutableURLRequest *subscriptionRequest =
         [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json", APIBaseURL,
                                                    ClientName]]];
     __weak typeof(self) weakSelf = self;
-    [[RefreshManager sharedManager] addConnection:subscriptionRequest
-        completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
+    NSOperation * subscriptionOperation = [[RefreshManager sharedManager] addConnection:subscriptionRequest
+        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             if (error) {
                 [weakSelf requestFailed:subscriptionRequest response:response error:error];
             } else {
                 [weakSelf subscriptionsRequestDone:subscriptionRequest response:response data:data];
             }
-            weakSelf.statusMessage = @"";
         }
     ];
 
+    NSMutableURLRequest *unreadCountRequest =
+        [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@unread-count?client=%@&output=json&allcomments=false",
+                                                   APIBaseURL,
+                                                   ClientName]]];
+    self.unreadCountOperation = [[RefreshManager sharedManager] addConnection:unreadCountRequest
+        completionHandler:^(NSData *data1, NSURLResponse *response, NSError *error) {
+            if (error) {
+                [weakSelf requestFailed:unreadCountRequest response:response error:error];
+            } else {
+                [weakSelf unreadCountDone:unreadCountRequest response:response data:data1];
+            }
+            weakSelf.statusMessage = @"";
+        }
+    ];
+    [self.unreadCountOperation addDependency:subscriptionOperation];
+	[[RefreshManager sharedManager] resumeConnectionsQueue];
     self.statusMessage = NSLocalizedString(@"Fetching Open Reader Subscriptions…", nil);
 }
 
@@ -892,7 +910,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             NSString *homePageURL = feed[@"htmlUrl"];
             if (homePageURL) {
                 for (Folder *localFolder in localFolders) {
-                    if (localFolder.type == VNAFolderTypeOpenReader && [localFolder.feedURL isEqualToString:feedURL]) {
+                    if (localFolder.isOpenReaderFolder && [localFolder.feedURL isEqualToString:feedURL]) {
                         Database * db = [Database sharedManager];
                         [db setHomePage:homePageURL forFolder:localFolder.itemId];
                         if ([db folderFromName:rssTitle] == nil) { // no conflict
@@ -910,12 +928,52 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     if (subscriptionsDict[@"subscriptions"] != nil) { // detect probable authentication error
         //check if we have a folder which is not registered as a Open Reader feed
         for (Folder *f in APPCONTROLLER.folders) {
-            if (f.type == VNAFolderTypeOpenReader && ![remoteFeeds containsObject:f.feedURL]) {
-                [[Database sharedManager] deleteFolder:f.itemId];
+            if (f.isOpenReaderFolder) {
+             	if ([remoteFeeds containsObject:f.feedURL]) {
+             		[f setNonPersistedFlag:VNAFolderFlagSyncedOK];
+            	} else {
+                	[[Database sharedManager] deleteFolder:f.itemId];
+            	}
             }
         }
     }
 } // subscriptionsRequestDone
+
+// callback 2 to loadSubscriptions
+-(void)unreadCountDone:(NSMutableURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data
+{
+    NSDictionary *unreadDict;
+    NSError *jsonError;
+    unreadDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+    for (NSDictionary *feed in unreadDict[@"unreadcounts"]) {
+        NSString *feedID = feed[@"id"];
+        NSString *feedURL;
+        if ([feedID hasPrefix:@"feed/"]) {
+            NSString *feedIdentifier =
+                [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)];
+            if (hostRequiresHexaForFeedId) { // TheOldReader
+                feedURL = [NSString stringWithFormat:@"https://%@/reader/public/atom/%@", openReaderHost, feedIdentifier];
+            } else { // most services use feed URL as identifier (like GoogleReader did)
+                feedURL = feedIdentifier;
+            }
+            Folder *folder = [[Database sharedManager] folderFromFeedURL:feedURL];
+            NSInteger remoteCount = ((NSString *)feed[@"count"]).intValue;
+            NSInteger localCount = folder.unreadCount;
+            NSInteger remoteTimestamp = ((NSString *)feed[@"newestItemTimestampUsec"]).longLongValue / 1000000; // convert in truncated seconds
+            NSString *folderLastUpdateString = folder.lastUpdateString;
+            if (folderLastUpdateString == nil || [folderLastUpdateString isEqualToString:@""] ||
+                [folderLastUpdateString isEqualToString:@"(null)"])
+            {
+                folderLastUpdateString = @"0";
+            }
+            NSInteger localTimestamp = folderLastUpdateString.longLongValue;
+            if (remoteTimestamp > localTimestamp || remoteCount != localCount) {
+                // discrepancy between local feed and remote OpenReader server
+                [folder clearNonPersistedFlag:VNAFolderFlagSyncedOK];
+            }
+        }
+    }
+} // unreadCountDone
 
 -(void)subscribeToFeed:(NSString *)feedURL
 {
