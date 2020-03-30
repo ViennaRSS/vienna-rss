@@ -809,6 +809,27 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     });     //block for dispatch_async
 } // starredRequestDone
 
+-(void)loadSubscriptions
+{
+    NSMutableURLRequest *subscriptionRequest =
+        [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json", APIBaseURL,
+                                                   ClientName]]];
+    __weak typeof(self) weakSelf = self;
+    [[RefreshManager sharedManager] addConnection:subscriptionRequest
+        completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error) {
+                [weakSelf requestFailed:subscriptionRequest response:response error:error];
+            } else {
+                [weakSelf subscriptionsRequestDone:subscriptionRequest response:response data:data];
+            }
+            weakSelf.statusMessage = @"";
+        }
+    ];
+
+    self.statusMessage = NSLocalizedString(@"Fetching Open Reader Subscriptions…", nil);
+}
+
+// callback 1  to loadSubscriptions
 -(void)subscriptionsRequestDone:(NSMutableURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data
 {
     NSDictionary *subscriptionsDict;
@@ -886,7 +907,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         [remoteFeeds addObject:feedURL];
     }
 
-
     if (subscriptionsDict[@"subscriptions"] != nil) { // detect probable authentication error
         //check if we have a folder which is not registered as a Open Reader feed
         for (Folder *f in APPCONTROLLER.folders) {
@@ -896,26 +916,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         }
     }
 } // subscriptionsRequestDone
-
--(void)loadSubscriptions
-{
-    NSMutableURLRequest *subscriptionRequest =
-        [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json", APIBaseURL,
-                                                   ClientName]]];
-    __weak typeof(self) weakSelf = self;
-    [[RefreshManager sharedManager] addConnection:subscriptionRequest
-        completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
-            if (error) {
-                [weakSelf requestFailed:subscriptionRequest response:response error:error];
-            } else {
-                [weakSelf subscriptionsRequestDone:subscriptionRequest response:response data:data];
-            }
-            weakSelf.statusMessage = @"";
-        }
-    ];
-
-    self.statusMessage = NSLocalizedString(@"Fetching Open Reader Subscriptions…", nil);
-}
 
 -(void)subscribeToFeed:(NSString *)feedURL
 {
