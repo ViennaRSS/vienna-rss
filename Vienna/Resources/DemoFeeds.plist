@@ -65,7 +65,7 @@
 	<key>Ars Technica</key>
 	<dict>
 		<key>URL</key>
-		<string>https://feeds.feedburner.com/ArsTechnica</string>
+		<string>http://feeds.arstechnica.com/arstechnica/index/</string>
 	</dict>
 	<key>Vienna Developer Blog</key>
 	<dict>
