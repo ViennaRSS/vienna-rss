@@ -85,6 +85,7 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 @property (nonatomic, readonly, copy) NSArray<Article *> *articles;
 -(NSArray<Article *> *)articlesWithFilter:(NSString *)filterString;
 @property (nonatomic, readonly) NSInteger itemId;
+@property (nonatomic, copy) NSString *remoteId;
 @property (nonatomic) NSInteger parentId;
 @property (nonatomic) NSInteger nextSiblingId;
 @property (nonatomic) NSInteger firstChildId;

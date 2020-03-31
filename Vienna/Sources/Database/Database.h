@@ -60,6 +60,7 @@ extern NSNotificationName const databaseDidDeleteFolderNotification;
 -(NSArray *)arrayOfFolders:(NSInteger)parentId;
 -(Folder *)folderFromID:(NSInteger)wantedId;
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL;
+-(Folder *)folderFromRemoteId:(NSString *)wantedRemoteId;
 -(Folder *)folderFromName:(NSString *)wantedName;
 -(NSInteger)addFolder:(NSInteger)parentId afterChild:(NSInteger)predecessorId folderName:(NSString *)name type:(NSInteger)type canAppendIndex:(BOOL)canAppendIndex;
 -(BOOL)deleteFolder:(NSInteger)folderId;
@@ -67,6 +68,7 @@ extern NSNotificationName const databaseDidDeleteFolderNotification;
 -(BOOL)setDescription:(NSString *)newDescription forFolder:(NSInteger)folderId;
 -(BOOL)setHomePage:(NSString *)homePageURL forFolder:(NSInteger)folderId;
 -(BOOL)setFeedURL:(NSString *)feed_url forFolder:(NSInteger)folderId;
+-(BOOL)setRemoteId:(NSString *)remoteId forFolder:(NSInteger)folderId;
 -(BOOL)setFolderUsername:(NSInteger)folderId newUsername:(NSString *)name;
 -(void)purgeDeletedArticles;
 -(void)purgeArticlesOlderThanDays:(NSUInteger)daysToKeep;
@@ -87,7 +89,8 @@ extern NSNotificationName const databaseDidDeleteFolderNotification;
 -(NSInteger)addRSSFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)url;
 
 // Open Reader folder functions
--(NSInteger)addGoogleReaderFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)url;
+-(NSInteger)addOpenReaderFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId
+        subscriptionURL:(NSString *)url remoteId:(NSString *)remoteId;
 
 // Smart folder functions
 -(void)initSmartfoldersDict;

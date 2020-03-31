@@ -1150,7 +1150,7 @@
         {
             [dbManager setName:newName forFolder:folder.itemId];
             if (folder.type == VNAFolderTypeOpenReader) {
-                [[OpenReader sharedManager] setFolderTitle:newName forFeed:folder.feedURL];
+                [[OpenReader sharedManager] setFolderTitle:newName forFeed:folder.remoteId];
             }
         }
 	}
@@ -1344,13 +1344,13 @@
 			{
 				if (folder.type == VNAFolderTypeOpenReader)
 				{
-					OpenReader * myGoogle = [OpenReader sharedManager];
+					OpenReader * myReader = [OpenReader sharedManager];
 					// remove old label
 					NSString * folderName = [dbManager folderFromID:oldParentId].name;
-					[myGoogle setFolderLabel:folderName forFeed:folder.feedURL set:FALSE];
+					[myReader setFolderLabel:folderName forFeed:folder.remoteId set:FALSE];
 					// add new label
 					folderName = [dbManager folderFromID:newParentId].name;
-					[myGoogle setFolderLabel:folderName forFeed:folder.feedURL set:TRUE];
+					[myReader setFolderLabel:folderName forFeed:folder.remoteId set:TRUE];
 				}
 			}
 			else
