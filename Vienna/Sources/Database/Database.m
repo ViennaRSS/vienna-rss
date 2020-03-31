@@ -659,6 +659,33 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	return YES;
 }
 
+/**
+ *  Sets the identifier of the feed on the remote OpenReader server.
+ *
+ *  @param remoteId the identifier to set the folder's feed to
+ *  @param folderId the ID of the folder whose remote identifier we are setting
+ *
+ *  @return YES on success
+ */
+-(BOOL)setRemoteId:(NSString *)remoteId forFolder:(NSInteger)folderId
+{
+	// Exit now if we're read-only
+    if (self.readOnly) {
+		return NO;
+    }
+
+	Folder * folder = [self folderFromID:folderId];
+	if (folder != nil && ![folder.remoteId isEqualToString:remoteId])
+	{
+		folder.remoteId = remoteId;
+        FMDatabaseQueue *queue = self.databaseQueue;
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update rss_folders set bloglines_id=? where folder_id=?", remoteId, @(folderId)];
+        }];
+	}
+	return YES;
+}
+
 /*!
  *  Add a Google Reader RSS Feed folder and return the ID of the new folder.
  *
@@ -669,33 +696,38 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  *
  *  @return The ID of the new folder
  */
--(NSInteger)addGoogleReaderFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)feed_url {
-	NSInteger folderId = [self addFolder:parentId afterChild:predecessorId folderName:feedName type:VNAFolderTypeOpenReader canAppendIndex:YES];
-	//TODO: optimization using unique add function for addRSSFolder
-	if (folderId != -1)
-	{
+-(NSInteger)addOpenReaderFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId
+        subscriptionURL:(NSString *)feed_url remoteId:(NSString *)remoteId
+{
+    NSInteger folderId =
+        [self addFolder:parentId afterChild:predecessorId folderName:feedName type:VNAFolderTypeOpenReader canAppendIndex:YES];
+    if (folderId != -1) {
         FMDatabaseQueue *queue = self.databaseQueue;
         __block BOOL success;
         [queue inDatabase:^(FMDatabase *db) {
-            success = [db executeUpdate:@"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) values (?, ?, '', '', '', ?, 0)",
-             @(folderId),
-             feedName, // description
-             // username
-             // home_page
-             // last_update_string
-             feed_url];
-        }];
+                   success =
+                   [db executeUpdate:
+                   @"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) values (?, ?, '', '', '', ?, ?)",
+                   @(folderId),
+                   feedName, // description
+                   // username
+                   // home_page
+                   // last_update_string
+                   feed_url,
+                   remoteId];
+               }];
         if (!success) {
             return -1;
         }
-		
-		// Add this new folder to our internal cache
-		Folder * folder = [self folderFromID:folderId];
-		folder.feedURL = feed_url;
-	}
-	return folderId;
-}
 
+        // Add this new folder to our internal cache
+        Folder *folder = [self folderFromID:folderId];
+        folder.feedDescription = feedName;
+        folder.feedURL = feed_url;
+        folder.remoteId = remoteId;
+    }
+    return folderId;
+} /* addOpenReaderFolder */
 
 /*!
  *  Add a RSS Feed folder and return the ID of the new folder.
@@ -1391,6 +1423,26 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	return folder;
 }
 
+/*!
+ *  folderFromRemoteId
+ *
+ *  @param wantedRemoteId The remote identifier the folder is wanted for
+ *
+ *  @return An OpenReaderFolder that corresponds
+ */
+
+-(Folder *)folderFromRemoteId:(NSString *)wantedRemoteId
+{
+	Folder * folder;
+
+	for (folder in [self.foldersDict objectEnumerator])
+	{
+		if ([folder.remoteId isEqualToString:wantedRemoteId])
+			break;
+	}
+	return folder;
+}
+
 /* handleAutoSortFoldersTreeChange
  * Called when preference changes for sorting folders tree.
  * Store the new method in the database.
@@ -1813,7 +1865,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
             [results close];
 		
         	// Load all RSS folders and add them to the list.
-			results = [db executeQuery:@"select folder_id, feed_url, username, last_update_string, description, home_page from rss_folders"];
+			results = [db executeQuery:@"select folder_id, feed_url, username, last_update_string, description, home_page, bloglines_id from rss_folders"];
 			while ([results next])
 			{
 				NSInteger folderId = [results stringForColumnIndex:0].integerValue;
@@ -1822,6 +1874,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 				NSString * lastUpdateString = [results stringForColumnIndex:3];
 				NSString * descriptiontext = [results stringForColumnIndex:4];
 				NSString * linktext = [results stringForColumnIndex:5];
+				NSString * remoteId = [results stringForColumnIndex:6];
 				
 				Folder * folder = [self folderFromID:folderId];
 				folder.feedDescription = descriptiontext;
@@ -1829,6 +1882,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 				folder.feedURL = url;
 				folder.lastUpdateString = lastUpdateString;
 				folder.username = username;
+				folder.remoteId = remoteId;
 			}
 			[results close];
 		}];

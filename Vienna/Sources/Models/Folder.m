@@ -77,6 +77,7 @@ static NSArray * iconArray = nil;
 		self.lastUpdateString = @"";
 		self.username = @"";
 		_lastUpdate = [NSDate distantPast];
+		self.remoteId = @"0";
 	}
 	return self;
 }
@@ -315,6 +316,22 @@ static NSArray * iconArray = nil;
 -(void)setFeedURL:(NSString *)newURL
 {
 	[self.attributes setValue:newURL forKey:@"FeedURL"];
+}
+
+/* remoteId
+ * Returns the identifier used by the remote OpenReader server
+ */
+-(NSString *)remoteId
+{
+	return [self.attributes valueForKey:@"remoteId"];
+}
+
+/* setRemoteId
+ * Stores the identifier used by the remote OpenReader server for this feed.
+ */
+-(void)setRemoteId:(NSString *)newId
+{
+	[self.attributes setValue:newId forKey:@"remoteId"];
 }
 
 /* name
