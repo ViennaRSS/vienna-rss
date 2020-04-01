@@ -743,7 +743,9 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         } else { //response status other than OK (200)
             [aItem appendDetail:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Error", nil),
                                     [NSHTTPURLResponse localizedStringForStatusCode:((NSHTTPURLResponse *)response).statusCode]]];
-            [aItem setStatus:NSLocalizedString(@"Error", nil)];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [aItem setStatus:NSLocalizedString(@"Error", nil)];
+            });
             [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
             [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
         }
