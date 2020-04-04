@@ -916,18 +916,29 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             }
         } else {
             // the feed is already known
-            // set HomePage if the info is available
+            // set HomePage and other infos if they are available
             NSString *homePageURL = feed[@"htmlUrl"];
-            if (homePageURL) {
-                for (Folder *localFolder in localFolders) {
-                    if (localFolder.isOpenReaderFolder && [localFolder.remoteId isEqualToString:feedID]) {
-                        [db setHomePage:homePageURL forFolder:localFolder.itemId];
-                        [db setFeedURL:feedURL forFolder:localFolder.itemId];
-                        if ([db folderFromName:rssTitle] == nil) { // no conflict
-                            [db setName:rssTitle forFolder:localFolder.itemId];
-                        };
-                        break;
+            for (Folder *localFolder in localFolders) {
+                if (localFolder.isOpenReaderFolder && [localFolder.remoteId isEqualToString:feedID]) {
+                    NSInteger nativeId = localFolder.itemId;
+                    [db setFeedURL:feedURL forFolder:nativeId];
+                    if (homePageURL) {
+                        [db setHomePage:homePageURL forFolder:nativeId];
                     }
+                    if ([db folderFromName:rssTitle] == nil) { // no conflict
+                        [db setName:rssTitle forFolder:nativeId];
+                    }
+                    NSInteger neededParentId = [db folderFromName:folderName].itemId;
+                    if (neededParentId == 0) {
+                        neededParentId = VNAFolderTypeRoot;
+                    }
+                    if (localFolder.parentId != neededParentId) {
+                        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_OpenReaderFolderChange"
+                                                              object:@[ [NSNumber numberWithInteger:nativeId],
+                                                                        [NSNumber numberWithInteger:neededParentId],
+                                                                        [NSNumber numberWithInteger:0]]];
+                    }
+                    break;
                 }
             }
         }
