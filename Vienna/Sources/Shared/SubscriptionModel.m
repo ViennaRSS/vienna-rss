@@ -63,7 +63,7 @@
 		NSURL * myURL = [NSURL URLWithString:feedPart relativeToURL:rssFeedURL];
 		if (myURL ==nil)
 		{
-            NSString * urlString = [NSString stringByCleaningURLString:feedPart];
+            NSString * urlString = feedPart.stringByUnescapingExtendedCharacters;
 			myURL = [NSURL URLWithString:urlString relativeToURL:rssFeedURL];
 		}
 		return myURL;
