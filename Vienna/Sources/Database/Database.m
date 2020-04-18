@@ -939,10 +939,11 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	// Adjust unread counts on parents
 	folder = [self folderFromID:folderId];
 	NSInteger adjustment = -folder.unreadCount;
-	while (folder.parentId != VNAFolderTypeRoot)
+	folder = [self folderFromID:folder.parentId];
+	while (folder != nil)
 	{
-		folder = [self folderFromID:folder.parentId];
 		folder.childUnreadCount = folder.childUnreadCount + adjustment;
+		folder = [self folderFromID:folder.parentId];
 	}
 
 	// Delete all articles in this folder then delete ourselves.
@@ -2525,13 +2526,12 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         [db executeUpdate:@"UPDATE folders set unread_count=? where folder_id=?", @(newCount), @(folder.itemId)];
     }];
 
-	// Update childUnreadCount for our parent. Since we're just working
-	// on one article, we do this the faster way.
-	Folder * tmpFolder = folder;
-	while (tmpFolder.parentId != VNAFolderTypeRoot)
+	// Update childUnreadCount for parents.
+	Folder * tmpFolder = [self folderFromID:folder.parentId];
+	while (tmpFolder != nil)
 	{
-		tmpFolder = [self folderFromID:tmpFolder.parentId];
 		tmpFolder.childUnreadCount = tmpFolder.childUnreadCount + adjustment;
+		tmpFolder = [self folderFromID:tmpFolder.parentId];
 	}
 }
 
