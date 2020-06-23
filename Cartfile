@@ -1,6 +1,3 @@
-# FMDB
-github "ccgus/fmdb" ~> 2.7
-
 # MASPreferences
 github "shpakovski/MASPreferences" ~> 1.3
 
