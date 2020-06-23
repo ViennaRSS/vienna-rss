@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -205,13 +205,10 @@
 		F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */; };
 		F64C2CCC1E83825D00ED4E04 /* DateFormatterExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */; };
 		F65D6D711E74619E00A30974 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4398241E1666B3DB00FFE219 /* Credits.rtf */; };
-		F67F6DDF2030604A006C9D72 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDB20306049006C9D72 /* FMDB.framework */; };
-		F67F6DE02030604A006C9D72 /* FMDB.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDB20306049006C9D72 /* FMDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F67F6DE12030604A006C9D72 /* MASPreferences.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDC20306049006C9D72 /* MASPreferences.framework */; };
 		F67F6DE22030604A006C9D72 /* MASPreferences.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDC20306049006C9D72 /* MASPreferences.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F67F6DE52030604A006C9D72 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDE2030604A006C9D72 /* Sparkle.framework */; };
 		F67F6DE62030604A006C9D72 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDE2030604A006C9D72 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F67F6DED203060B1006C9D72 /* FMDB.framework.dSYM in Copy Framework Symbols */ = {isa = PBXBuildFile; fileRef = F67F6DE9203060B0006C9D72 /* FMDB.framework.dSYM */; };
 		F67F6DEE203060B1006C9D72 /* MASPreferences.framework.dSYM in Copy Framework Symbols */ = {isa = PBXBuildFile; fileRef = F67F6DEA203060B1006C9D72 /* MASPreferences.framework.dSYM */; };
 		F67F6DEF203060B1006C9D72 /* Sparkle.framework.dSYM in Copy Framework Symbols */ = {isa = PBXBuildFile; fileRef = F67F6DEB203060B1006C9D72 /* Sparkle.framework.dSYM */; };
 		F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */; };
@@ -227,6 +224,7 @@
 		F6A7DE381E47138B0017BE5E /* Vienna.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE321E47138B0017BE5E /* Vienna.html */; };
 		F6A7DE4A1E4717970017BE5E /* shared in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE491E4717970017BE5E /* shared */; };
 		F6A7DE4F1E471A7F0017BE5E /* Vienna.help in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DDCA1E470E980017BE5E /* Vienna.help */; };
+		F6B7BC3624A2A9A40051D76F /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = F6B7BC3524A2A9A40051D76F /* FMDB */; };
 		F6CE47131E7E3DCB0045EAD7 /* ActivityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CE47121E7E3DCB0045EAD7 /* ActivityItem.m */; };
 		F6D0089C1EF95C9D008F2D3B /* InfoPanelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6D0089B1EF95C9D008F2D3B /* InfoPanelManager.m */; };
 		F6D282621F1A87A900FF865E /* PopUpButtonToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D282611F1A87A900FF865E /* PopUpButtonToolbarItem.swift */; };
@@ -273,7 +271,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F67F6DE02030604A006C9D72 /* FMDB.framework in Copy Frameworks */,
 				F67F6DE22030604A006C9D72 /* MASPreferences.framework in Copy Frameworks */,
 				2FAA36422072F57500169C8A /* MMTabBarView.framework in Copy Frameworks */,
 				F67F6DE62030604A006C9D72 /* Sparkle.framework in Copy Frameworks */,
@@ -299,7 +296,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				F67F6DED203060B1006C9D72 /* FMDB.framework.dSYM in Copy Framework Symbols */,
 				F67F6DEE203060B1006C9D72 /* MASPreferences.framework.dSYM in Copy Framework Symbols */,
 				F62152632083475800FEE960 /* MMTabBarView.framework.dSYM in Copy Framework Symbols */,
 				F67F6DEF203060B1006C9D72 /* Sparkle.framework.dSYM in Copy Framework Symbols */,
@@ -807,10 +803,8 @@
 		F650AFD8209EFDE900D26D13 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F658FD8D209EFE5100896413 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F664A9A2209EFEBF003B0F7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
-		F67F6DDB20306049006C9D72 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = Carthage/Build/Mac/FMDB.framework; sourceTree = "<group>"; };
 		F67F6DDC20306049006C9D72 /* MASPreferences.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASPreferences.framework; path = Carthage/Build/Mac/MASPreferences.framework; sourceTree = "<group>"; };
 		F67F6DDE2030604A006C9D72 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
-		F67F6DE9203060B0006C9D72 /* FMDB.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = FMDB.framework.dSYM; path = Carthage/Build/Mac/FMDB.framework.dSYM; sourceTree = "<group>"; };
 		F67F6DEA203060B1006C9D72 /* MASPreferences.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = MASPreferences.framework.dSYM; path = Carthage/Build/Mac/MASPreferences.framework.dSYM; sourceTree = "<group>"; };
 		F67F6DEB203060B1006C9D72 /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Sparkle.framework.dSYM; path = Carthage/Build/Mac/Sparkle.framework.dSYM; sourceTree = "<group>"; };
 		F68176D4209EFD35004AA256 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = es; path = es.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
@@ -1112,8 +1106,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F67F6DDF2030604A006C9D72 /* FMDB.framework in Frameworks */,
 				F67F6DE12030604A006C9D72 /* MASPreferences.framework in Frameworks */,
+				F6B7BC3624A2A9A40051D76F /* FMDB in Frameworks */,
 				2FAA36402072F50B00169C8A /* MMTabBarView.framework in Frameworks */,
 				F67F6DE52030604A006C9D72 /* Sparkle.framework in Frameworks */,
 			);
@@ -1238,7 +1232,6 @@
 			isa = PBXGroup;
 			children = (
 				F67F6DF0203060D9006C9D72 /* Symbols */,
-				F67F6DDB20306049006C9D72 /* FMDB.framework */,
 				F67F6DDC20306049006C9D72 /* MASPreferences.framework */,
 				2FAA363F2072F50B00169C8A /* MMTabBarView.framework */,
 				F67F6DDE2030604A006C9D72 /* Sparkle.framework */,
@@ -1350,7 +1343,6 @@
 		F67F6DF0203060D9006C9D72 /* Symbols */ = {
 			isa = PBXGroup;
 			children = (
-				F67F6DE9203060B0006C9D72 /* FMDB.framework.dSYM */,
 				F67F6DEA203060B1006C9D72 /* MASPreferences.framework.dSYM */,
 				F62152622083475800FEE960 /* MMTabBarView.framework.dSYM */,
 				F67F6DEB203060B1006C9D72 /* Sparkle.framework.dSYM */,
@@ -1822,6 +1814,9 @@
 				430C4AD81661730D0079C9FC /* PBXTargetDependency */,
 			);
 			name = Vienna;
+			packageProductDependencies = (
+				F6B7BC3524A2A9A40051D76F /* FMDB */,
+			);
 			productInstallPath = "$(HOME)/Applications";
 			productName = Vienna;
 			productReference = 8D15AC370486D014006FF6A4 /* Vienna.app */;
@@ -1898,6 +1893,9 @@
 				"zh-Hans",
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Vienna */;
+			packageReferences = (
+				F6B7BC3424A2A9A40051D76F /* XCRemoteSwiftPackageReference "fmdb" */,
+			);
 			productRefGroup = 19C28FB0FE9D524F11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -3527,6 +3525,25 @@
 			defaultConfigurationName = Deployment;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F6B7BC3424A2A9A40051D76F /* XCRemoteSwiftPackageReference "fmdb" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ccgus/fmdb";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F6B7BC3524A2A9A40051D76F /* FMDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F6B7BC3424A2A9A40051D76F /* XCRemoteSwiftPackageReference "fmdb" */;
+			productName = FMDB;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
 }
