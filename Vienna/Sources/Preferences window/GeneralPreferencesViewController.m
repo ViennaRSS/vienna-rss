@@ -60,23 +60,6 @@
     
 }
 
-
-#pragma mark - MASPreferencesViewController
-
-- (NSString *)viewIdentifier {
-    return @"GeneralPreferences";
-}
-
-- (NSImage *)toolbarItemImage
-{
-    return [NSImage imageNamed:NSImageNamePreferencesGeneral];
-}
-
-- (NSString *)toolbarItemLabel
-{
-    return NSLocalizedString(@"General", @"Toolbar item name for the General preference pane");
-}
-
 #pragma mark - Vienna Preferences handling
 
 /* handleReloadPreferences
@@ -96,12 +79,6 @@
     
     // Set the check frequency
     [checkFrequency selectItemAtIndex:[checkFrequency indexOfItemWithTag:prefs.refreshFrequency]];
-    
-    // Set check for updates when starting
-    checkForUpdates.state = prefs.checkForNewOnStartup ? NSControlStateValueOn : NSControlStateValueOff;
-    
-    // Set search for latest Beta versions when checking for updates
-    alwaysAcceptBetas.state = prefs.alwaysAcceptBetas ? NSControlStateValueOn : NSControlStateValueOff;
 
     // Set check for new articles when starting
     checkOnStartUp.state = prefs.refreshOnStartup ? NSControlStateValueOn : NSControlStateValueOff;
@@ -318,14 +295,6 @@
     [downloadFolder selectItemAtIndex:0];
 }
 
-/* changeCheckForUpdates
- * Set whether Vienna checks for updates when it starts.
- */
--(IBAction)changeCheckForUpdates:(id)sender
-{
-    [Preferences standardPreferences].checkForNewOnStartup = [sender state] == NSControlStateValueOn;
-}
-
 /* changeCheckOnStartUp
  * Set whether Vienna checks for new articles when it starts.
  */
@@ -438,14 +407,6 @@
 {
     float newReadInterval = ([sender selectedCell] == markReadAfterNext) ? 0 : MA_Default_Read_Interval;
     [Preferences standardPreferences].markReadInterval = newReadInterval;
-}
-
-/* changeAlwaysAcceptBetas
- * Set whether Vienna will always check the cutting edge Beta when checking for updates.
- */
--(IBAction)changeAlwaysAcceptBetas:(id)sender
-{
-    [Preferences standardPreferences].alwaysAcceptBetas = [sender state] == NSControlStateValueOn;
 }
 
 /* dealloc

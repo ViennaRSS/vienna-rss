@@ -65,23 +65,6 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
     
 }
 
-#pragma mark - MASPreferencesViewController
-
-- (NSString *)viewIdentifier {
-    return @"AppearancePreferences";
-}
-
-- (NSImage *)toolbarItemImage
-{
-    return [NSImage imageNamed:@"appearancePrefImage"];
-}
-
-- (NSString *)toolbarItemLabel
-{
-    return NSLocalizedString(@"Appearance", @"Toolbar item name for the Appearance preference pane");
-}
-
-
 #pragma mark - Vienna Preferences
 
 /* handleReloadPreferences

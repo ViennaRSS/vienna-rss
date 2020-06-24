@@ -45,7 +45,6 @@
 #import "Debug.h"
 #import "Database.h"
 #import "NSURL+Utils.h"
-#import "PreferencesWindowController.h"
 #import "PluginManager.h"
 #import "ArticleController.h"
 #import "FoldersTree.h"
@@ -98,7 +97,7 @@
 @property (weak, nonatomic) NSWindow *mainWindow;
 @property (nonatomic) ActivityPanelController *activityPanelController;
 @property (nonatomic) DirectoryMonitor *directoryMonitor;
-@property (nonatomic) PreferencesWindowController *preferencesWindowController;
+@property (nonatomic) NSWindowController *preferencesWindowController;
 @property (weak, nonatomic) FolderView *outlineView;
 @property (weak, nonatomic) DisclosureView *filterDisclosureView;
 @property (weak, nonatomic) NSSearchField *filterSearchField;
@@ -3858,9 +3857,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 #pragma mark Preferences
 
-- (PreferencesWindowController *)preferencesWindowController {
+- (NSWindowController *)preferencesWindowController {
     if (!_preferencesWindowController) {
-        _preferencesWindowController = [PreferencesWindowController new];
+        NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Preferences"
+                                                             bundle:nil];
+        _preferencesWindowController = [storyboard instantiateInitialController];
     }
 
     return _preferencesWindowController;

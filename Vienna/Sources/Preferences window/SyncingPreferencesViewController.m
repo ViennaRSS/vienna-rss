@@ -119,24 +119,6 @@ static BOOL _credentialsChanged;
     
 }
 
-
-
-#pragma mark - MASPreferencesViewController
-
-- (NSString *)viewIdentifier {
-    return @"SyncingPreferences";
-}
-
-- (NSImage *)toolbarItemImage
-{
-    return [NSImage imageNamed:@"sync"];
-}
-
-- (NSString *)toolbarItemLabel
-{
-    return NSLocalizedString(@"Syncing", @"Toolbar item name for the Syncing preference pane");
-}
-
 #pragma mark - Vienna Prferences
 
 

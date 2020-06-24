@@ -40,23 +40,6 @@
     [self initializePreferences];
 }
 
-
-#pragma mark - MASPreferencesViewController
-
-- (NSString *)viewIdentifier {
-    return @"AdvancedPreferences";
-}
-
-- (NSImage *)toolbarItemImage
-{
-    return [NSImage imageNamed:NSImageNameAdvanced];
-}
-
-- (NSString *)toolbarItemLabel
-{
-    return NSLocalizedString(@"Advanced", @"Toolbar item name for the Advanced preference pane");
-}
-
 #pragma mark - Vienna Preferences
 
 /* showAdvancedHelp
