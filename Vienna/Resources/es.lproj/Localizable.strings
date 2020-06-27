@@ -49,9 +49,6 @@
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "No se puede crear la nueva base de datos de Vienna en \"%@\" ya que la carpeta probablemente está ubicada en un recurso compartido de una red remota y esta versión de Vienna no puede gestionar bases de datos remotas. Por favor, elija una carpeta alternativa ubicada en su equipo local.";
 
-/* Toolbar item name for the Advanced preference pane */
-"Advanced" = "Avanzado";
-
 /* No comment provided by engineer. */
 "After 2 Days" = "Después de 2 días";
 
@@ -69,9 +66,6 @@
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Ha ocurrido un error al actualizar esta fuente";
-
-/* Toolbar item name for the Appearance preference pane */
-"Appearance" = "Apariencia";
 
 /* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "Error de appleScript en script '%@'";
@@ -285,9 +279,6 @@
 /* No comment provided by engineer. */
 "Forcing Refresh subscriptions…" = "Forzando actualizar suscripciones…";
 
-/* Toolbar item name for the General preference pane */
-"General" = "General";
-
 /* Title of a menu item */
 "Get Info" = "Obtener información";
 
@@ -486,9 +477,6 @@
 /* No comment provided by engineer. */
 "Plugin installed" = "Plugin instalado";
 
-/* Title of the Preferences window */
-"Preferences" = "Preferencias";
-
 /* No comment provided by engineer. */
 "Queue" = "Cola";
 
@@ -606,9 +594,6 @@
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Resumen";
-
-/* Toolbar item name for the Syncing preference pane */
-"Syncing" = "Sincronización";
 
 /* Data field name visible in smart folder definition */
 "Text" = "Texto";

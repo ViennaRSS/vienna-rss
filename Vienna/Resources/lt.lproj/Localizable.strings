@@ -40,9 +40,6 @@
 /* No comment provided by engineer. */
 "A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Įdiegtas naujas įskiepis. Jį galima rasti meniu ir įsidėti į įrankių juostą.";
 
-/* Toolbar item name for the Advanced preference pane */
-"Advanced" = "Papildomi nustatymai";
-
 /* No comment provided by engineer. */
 "After 2 Days" = "Po 2 dienų";
 
@@ -60,9 +57,6 @@
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Paskutinįkart atnaujinant šią prenumeratą įvyko klaida";
-
-/* Toolbar item name for the Appearance preference pane */
-"Appearance" = "Išvaizda";
 
 /* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "AppleScript klaida skripte '%@'";
@@ -267,9 +261,6 @@
 /* No comment provided by engineer. */
 "Forcing Refresh subscriptions…" = "Priverstinai atnaujinamos prenumeratos…";
 
-/* Toolbar item name for the General preference pane */
-"General" = "Bendri";
-
 /* Title of a menu item */
 "Get Info" = "Gauti informaciją";
 
@@ -468,9 +459,6 @@
 /* No comment provided by engineer. */
 "Plugin installed" = "Įskiepis įdiegtas";
 
-/* Title of the Preferences window */
-"Preferences" = "Nustatymai";
-
 /* No comment provided by engineer. */
 "Queue" = "Eilė";
 
@@ -588,9 +576,6 @@
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Santrauka";
-
-/* Toolbar item name for the Syncing preference pane */
-"Syncing" = "Sinchronizuojama...";
 
 /* Data field name visible in smart folder definition */
 "Text" = "Tekstas";

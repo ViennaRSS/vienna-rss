@@ -1,198 +1,120 @@
-
 /* Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "2IW-It-hcT"; */
-"2IW-It-hcT.title" = "When viewing articles or web pages:";
+"2IW-It-hcT.title" = "Web sayfalarını veya makaleleri görüntülerken:";
 
 /* Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "4Qn-qF-kSp"; */
-"4Qn-qF-kSp.title" = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.";
-
-/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "4vm-80-j33"; */
-"4vm-80-j33.title" = "Mark updated articles as new";
-
-/* Class = "NSTextFieldCell"; title = "However, high numbers also render your computer less responsive while refreshing feeds."; ObjectID = "5EA-1i-TuA"; */
-"5EA-1i-TuA.title" = "However, high numbers also render your computer less responsive while refreshing feeds.";
-
-/* Class = "NSMenuItem"; title = "15"; ObjectID = "5Y4-ws-cQJ"; Note = "Do not localize"; */
-"5Y4-ws-cQJ.title" = "15";
+"4Qn-qF-kSp.title" = "Vienna'nın normal kullanımında bu ayarların değiştirilmesine gerek yoktur. Her bir ayar için Yardım dosyasına başvurun.";
 
 /* Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "6GF-Pk-gI9"; */
-"6GF-Pk-gI9.title" = "Every 6 hours";
-
-/* Class = "NSTextFieldCell"; title = "Concurrent downloads:"; ObjectID = "6oJ-Rh-rgA"; */
-"6oJ-Rh-rgA.title" = "Concurrent downloads:";
+"6GF-Pk-gI9.title" = "6 saatte bir";
 
 /* Class = "NSMenuItem"; title = "Manually"; ObjectID = "7Za-ay-jlt"; */
-"7Za-ay-jlt.title" = "Manually";
-
-/* Class = "NSButtonCell"; title = "Enable Internet plug-ins in the internal browser"; ObjectID = "9bX-Lt-AWz"; */
-"9bX-Lt-AWz.title" = "Enable Internet plug-ins in the internal browser";
-
-/* Class = "NSMenuItem"; title = "1"; ObjectID = "Byc-c2-qnN"; Note = "Do not localize"; */
-"Byc-c2-qnN.title" = "1";
-
-/* Class = "NSMenuItem"; title = "After two weeks"; ObjectID = "Dw9-en-4Zu"; */
-"Dw9-en-4Zu.title" = "After two weeks";
-
-/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "FFP-H1-weF"; */
-"FFP-H1-weF.title" = "Show in menu bar";
-
-/* Class = "NSTabViewItem"; label = "General"; ObjectID = "GJ3-1q-004"; */
-"GJ3-1q-004.label" = "General";
-
-/* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "GSh-ct-FMo"; */
-"GSh-ct-FMo.title" = "Every 3 hours";
-
-/* Class = "NSMenuItem"; title = "2"; ObjectID = "ILd-2a-Vjb"; Note = "Do not localize"; */
-"ILd-2a-Vjb.title" = "2";
-
-/* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "ITA-U9-lhX"; */
-"ITA-U9-lhX.title" = "Article list font:";
-
-/* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "Jk6-0r-7Gs"; */
-"Jk6-0r-7Gs.title" = "Never use font sizes smaller than";
-
-/* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "Ljf-Qd-6Ho"; */
-"Ljf-Qd-6Ho.title" = "Check for new articles on start up";
-
-/* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "M8s-xu-lWh"; */
-"M8s-xu-lWh.title" = "Folder list font:";
-
-/* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "McN-fD-0Cv"; */
-"McN-fD-0Cv.title" = "After a short delay";
-
-/* Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "MnV-8D-Qyq"; */
-"MnV-8D-Qyq.title" = "Enable JavaScript in the internal browser";
-
-/* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "OD4-de-Vkx"; */
-"OD4-de-Vkx.title" = "Password:";
-
-/* Class = "NSMenuItem"; title = "After a month"; ObjectID = "OIa-NQ-jQi"; */
-"OIa-NQ-jQi.title" = "After a month";
-
-/* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "Oqg-6W-NAL"; */
-"Oqg-6W-NAL.title" = "Check for new articles:";
-
-/* Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "OuH-3K-YPK"; */
-"OuH-3K-YPK.title" = "Server:";
-
-/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "PmX-nw-uOn"; */
-"PmX-nw-uOn.title" = "Select…";
-
-/* Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Uyd-GK-jtn"; */
-"Uyd-GK-jtn.title" = "Sync with an Open Reader server";
-
-/* Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "V12-Ua-skO"; */
-"V12-Ua-skO.ibShadowedToolTip" = "Visit the website";
-
-/* Class = "NSTabViewItem"; label = "Appearance"; ObjectID = "WK4-g4-vJd"; */
-"WK4-g4-vJd.label" = "Appearance";
-
-/* Class = "NSWindow"; title = "Preferences"; ObjectID = "X5g-th-bjd"; */
-"X5g-th-bjd.title" = "Preferences";
-
-/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "YG6-9k-gKH"; */
-"YG6-9k-gKH.title" = "URL:";
-
-/* Class = "NSTextFieldCell"; title = "Default RSS reader:"; ObjectID = "YHN-Up-rwa"; */
-"YHN-Up-rwa.title" = "Default RSS reader:";
-
-/* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "Ygu-Rj-E7a"; */
-"Ygu-Rj-E7a.title" = "Every 15 minutes";
-
-/* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "aWg-mD-YWn"; */
-"aWg-mD-YWn.title" = "Every 30 minutes";
-
-/* Class = "NSMenuItem"; title = "5"; ObjectID = "aYj-Ub-Isd"; Note = "Do not localize"; */
-"aYj-Ub-Isd.title" = "5";
+"7Za-ay-jlt.title" = "El ile";
 
 /* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "adB-qE-xKg"; */
-"adB-qE-xKg.title" = "Mark current article read:";
+"adB-qE-xKg.title" = "Seçili makaleyi okundu olarak işaretle:";
+
+/* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "aWg-mD-YWn"; */
+"aWg-mD-YWn.title" = "30 dakikada bir";
 
 /* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "bom-nB-4zx"; */
-"bom-nB-4zx.title" = "Move articles to Trash:";
+"bom-nB-4zx.title" = "Seçili makaleleri çöp kutusuna taşı:";
 
 /* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "bwY-9N-h4N"; */
-"bwY-9N-h4N.title" = "Login:";
-
-/* Class = "NSMenuItem"; title = "After a day"; ObjectID = "c4l-M5-qB1"; */
-"c4l-M5-qB1.title" = "After a day";
+"bwY-9N-h4N.title" = "Ad:";
 
 /* Class = "NSButtonCell"; title = "Select…"; ObjectID = "cbn-xq-UFr"; */
-"cbn-xq-UFr.title" = "Select…";
+"cbn-xq-UFr.title" = "Seç…";
 
 /* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "dkm-xW-4If"; */
-"dkm-xW-4If.title" = "Show feeds icons in folder list";
+"dkm-xW-4If.title" = "Klasör imajlarını klasör listesinde göster";
 
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "erE-oh-cbw"; */
-"erE-oh-cbw.title" = "Open new links in the background";
+"erE-oh-cbw.title" = "Yeni bağlantıları arkaplanda aç";
+
+/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "FFP-H1-weF"; */
+"FFP-H1-weF.title" = "Menü barında göster";
 
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "flH-2D-s6O"; */
-"flH-2D-s6O.title" = "Open links in external browser";
+"flH-2D-s6O.title" = "Bağlantıları harici tarayıcıda aç";
 
-/* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "g3K-qh-M6y"; */
-"g3K-qh-M6y.title" = "The higher the number, the quicker your subscriptions will be downloaded.";
+/* Class = "NSTabViewItem"; label = "General"; ObjectID = "GJ3-1q-004"; */
+"GJ3-1q-004.label" = "Genel";
 
-/* Class = "NSTextField"; ibShadowedToolTip = "Address of a server supporting the Open Reader API"; ObjectID = "gKc-l8-p9m"; */
-"gKc-l8-p9m.ibShadowedToolTip" = "Address of a server supporting the Open Reader API";
+/* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "GSh-ct-FMo"; */
+"GSh-ct-FMo.title" = "3 saatte bir";
 
 /* Class = "NSMenuItem"; title = "Never"; ObjectID = "h9d-GD-q32"; */
-"h9d-GD-q32.title" = "Never";
+"h9d-GD-q32.title" = "Asla";
 
 /* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "haP-20-AwJ"; */
-"haP-20-AwJ.title" = "Check for newer versions of Vienna on start up";
+"haP-20-AwJ.title" = "Başlangıçta Vienna'nın yeni sürümünü kontrol et";
 
 /* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iCs-T5-L1c"; */
-"iCs-T5-L1c.title" = "When new unread articles are retrieved:";
+"iCs-T5-L1c.title" = "Yeni okunmamış makale alındığında:";
 
 /* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "iEw-AM-tMF"; */
-"iEw-AM-tMF.label" = "Advanced";
+"iEw-AM-tMF.label" = "Gelişmiş";
 
-/* Class = "NSPopUpButton"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "iHl-tr-paa"; */
-"iHl-tr-paa.ibShadowedToolTip" = "Select a server supporting the Open Reader API";
-
-/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "jVU-m2-dsS"; */
-"jVU-m2-dsS.title" = "Show the unread count on the application icon";
-
-/* Class = "NSMenuItem"; title = "30"; ObjectID = "jbS-7v-rF4"; Note = "Do not localize"; */
-"jbS-7v-rF4.title" = "30";
+/* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "ITA-U9-lhX"; */
+"ITA-U9-lhX.title" = "Makale liste yazıtipi:";
 
 /* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "jfH-Hq-gRk"; */
-"jfH-Hq-gRk.title" = "Bounce the application icon";
+"jfH-Hq-gRk.title" = "Uygulama simgesini zıplat";
+
+/* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "Jk6-0r-7Gs"; */
+"Jk6-0r-7Gs.title" = "Bundan daha küçük yazıtipi kullanma";
 
 /* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "jkb-TT-wPC"; */
-"jkb-TT-wPC.title" = "After \"Next Unread\" command";
+"jkb-TT-wPC.title" = "\"Next Unread\" komutundan sonra";
 
 /* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "jvO-Ef-TTd"; */
-"jvO-Ef-TTd.title" = "Every hour";
+"jvO-Ef-TTd.title" = "Her saat";
+
+/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "jVU-m2-dsS"; */
+"jVU-m2-dsS.title" = "Okunmamış makale sayısını uygulama ikonunda göster";
+
+/* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "Ljf-Qd-6Ho"; */
+"Ljf-Qd-6Ho.title" = "Başlangıçta yeni makaleleri kontrol et";
+
+/* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "M8s-xu-lWh"; */
+"M8s-xu-lWh.title" = "Klasör liste yazıtipi:";
+
+/* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "McN-fD-0Cv"; */
+"McN-fD-0Cv.title" = "Kısa bir aradan sonra";
+
+/* Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "MnV-8D-Qyq"; */
+"MnV-8D-Qyq.title" = "İç tarayıcıda JavaScript'i Aktif Et";
 
 /* Class = "NSMenuItem"; title = "Other…"; ObjectID = "nSW-3T-Zoh"; */
-"nSW-3T-Zoh.title" = "Other…";
+"nSW-3T-Zoh.title" = "Diğer…";
+
+/* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "OD4-de-Vkx"; */
+"OD4-de-Vkx.title" = "Şifre:";
+
+/* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "Oqg-6W-NAL"; */
+"Oqg-6W-NAL.title" = "Yeni makaleleri kontrol et:";
 
 /* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "pLH-VU-z2d"; */
-"pLH-VU-z2d.title" = "Every 2 hours";
+"pLH-VU-z2d.title" = "2 saatte bir";
+
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "PmX-nw-uOn"; */
+"PmX-nw-uOn.title" = "Seç…";
 
 /* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "qYb-Sf-cEF"; */
-"qYb-Sf-cEF.title" = "Every 5 minutes";
+"qYb-Sf-cEF.title" = "5 dakikada bir";
 
-/* Class = "NSTabViewItem"; label = "Updates"; ObjectID = "qyx-3u-1Io"; */
-"qyx-3u-1Io.label" = "Updates";
+/* Class = "NSTabViewItem"; label = "Appearance"; ObjectID = "WK4-g4-vJd"; */
+"WK4-g4-vJd.label" = "Görünüm";
 
-/* Class = "NSMenuItem"; title = "After two days"; ObjectID = "sJE-bd-4mK"; */
-"sJE-bd-4mK.title" = "After two days";
+/* Class = "NSWindow"; title = "Preferences"; ObjectID = "X5g-th-bjd"; */
+"X5g-th-bjd.title" = "Seçenekler";
 
-/* Class = "NSButtonCell"; title = "Search for latest beta versions"; ObjectID = "u92-Bh-Wrz"; */
-"u92-Bh-Wrz.title" = "Search for latest beta versions";
+/* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "Ygu-Rj-E7a"; */
+"Ygu-Rj-E7a.title" = "15 dakikada bir";
 
-/* Class = "NSMenuItem"; title = "50"; ObjectID = "vyo-cC-5Xv"; Note = "Do not localize"; */
-"vyo-cC-5Xv.title" = "50";
-
-/* Class = "NSMenuItem"; title = "After a week"; ObjectID = "xfd-Vp-kJy"; */
-"xfd-Vp-kJy.title" = "After a week";
-
-/* Class = "NSMenuItem"; title = "10"; ObjectID = "xjZ-nG-iOH"; Note = "Do not localize"; */
-"xjZ-nG-iOH.title" = "10";
+/* Class = "NSTextFieldCell"; title = "Default RSS reader:"; ObjectID = "YHN-Up-rwa"; */
+"YHN-Up-rwa.title" = "Varsayılan RSS Tarayıcısı:";
 
 /* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "yLU-Xs-TGw"; */
-"yLU-Xs-TGw.title" = "Save downloaded files to:";
+"yLU-Xs-TGw.title" = "İndirilen dosyaları şuraya kaydet:";
 
-/* Class = "NSTabViewItem"; label = "Syncing"; ObjectID = "zkN-he-3BT"; */
-"zkN-he-3BT.label" = "Syncing";
