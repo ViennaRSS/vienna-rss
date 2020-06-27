@@ -194,6 +194,7 @@
 		F62580E71E286CEC0035E43C /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = F62580E51E286CEC0035E43C /* RSSSources.plist */; };
 		F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581441E29B90A0035E43C /* SearchPanel.xib */; };
 		F62581591E29BEB90035E43C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625815B1E29BEB90035E43C /* MainMenu.xib */; };
+		F626F5F424A76B9100D3AAD8 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F626F5F624A76B9100D3AAD8 /* Preferences.storyboard */; };
 		F628DFE31ED2698A00FACFD3 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F628DFE21ED2698A00FACFD3 /* FilterView.swift */; };
 		F6373A231F1D53B500ED3B09 /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6373A221F1D53B500ED3B09 /* MainWindow.swift */; };
 		F63833D81EF842EA00E07213 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63833D71EF842EA00E07213 /* MainWindowController.swift */; };
@@ -201,7 +202,6 @@
 		F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */; };
 		F64C2CCC1E83825D00ED4E04 /* DateFormatterExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */; };
 		F65D6D711E74619E00A30974 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4398241E1666B3DB00FFE219 /* Credits.rtf */; };
-		F672876524A2C9520043432F /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F672876424A2C9520043432F /* Preferences.storyboard */; };
 		F672876824A2D2170043432F /* UpdatePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F672876724A2D2170043432F /* UpdatePreferencesViewController.m */; };
 		F67F6DE12030604A006C9D72 /* MASPreferences.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDC20306049006C9D72 /* MASPreferences.framework */; };
 		F67F6DE22030604A006C9D72 /* MASPreferences.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDC20306049006C9D72 /* MASPreferences.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -695,6 +695,27 @@
 		F625811F1E286E390035E43C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/errorpage.html; sourceTree = "<group>"; };
 		F62581441E29B90A0035E43C /* SearchPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPanel.xib; sourceTree = "<group>"; };
 		F625815A1E29BEB90035E43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		F626F5F524A76B9100D3AAD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preferences.storyboard; sourceTree = "<group>"; };
+		F626F5F824A76BAC00D3AAD8 /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F626F5FA24A76BBE00D3AAD8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Preferences.strings"; sourceTree = "<group>"; };
+		F626F5FC24A76BC700D3AAD8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Preferences.strings"; sourceTree = "<group>"; };
+		F626F5FE24A76BCA00D3AAD8 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F626F60024A76BCB00D3AAD8 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F626F60224A76BCC00D3AAD8 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F626F60424A76BCD00D3AAD8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F626F60624A76BCF00D3AAD8 /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = gl.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F626F60824A76BD000D3AAD8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F626F60A24A76BD200D3AAD8 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F626F60C24A76BD300D3AAD8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F626F60E24A76BD400D3AAD8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F626F61024A76BD500D3AAD8 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F626F61224A76BD700D3AAD8 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F626F61424A76BD800D3AAD8 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Preferences.strings"; sourceTree = "<group>"; };
+		F626F61624A76BD900D3AAD8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F626F61824A76BDA00D3AAD8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F626F61A24A76BDB00D3AAD8 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F626F61C24A76BDD00D3AAD8 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F626F61E24A76BDE00D3AAD8 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Preferences.strings; sourceTree = "<group>"; };
 		F628DFE21ED2698A00FACFD3 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		F62CE1C0209EFD1B008F1D19 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = de; path = de.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F6352BB81E2706DD005CD307 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoWindow.strings; sourceTree = "<group>"; };
@@ -743,7 +764,6 @@
 		F650AFD8209EFDE900D26D13 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F658FD8D209EFE5100896413 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F664A9A2209EFEBF003B0F7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
-		F672876424A2C9520043432F /* Preferences.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
 		F672876624A2D20A0043432F /* UpdatePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePreferencesViewController.h; sourceTree = "<group>"; };
 		F672876724A2D2170043432F /* UpdatePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePreferencesViewController.m; sourceTree = "<group>"; };
 		F67F6DDC20306049006C9D72 /* MASPreferences.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASPreferences.framework; path = Carthage/Build/Mac/MASPreferences.framework; sourceTree = "<group>"; };
@@ -1179,7 +1199,7 @@
 				F6D572B61E26AA9900CDA909 /* InfoWindow.xib */,
 				F625801E1E2853B90035E43C /* ActivityViewer.xib */,
 				F6257FF71E28485F0035E43C /* Downloads.xib */,
-				F672876424A2C9520043432F /* Preferences.storyboard */,
+				F626F5F624A76B9100D3AAD8 /* Preferences.storyboard */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -1883,7 +1903,7 @@
 				B2B37ACE110A65DA0070EDA6 /* filter-icon.tiff in Resources */,
 				6624683B13C5F83000C85417 /* sync.tiff in Resources */,
 				F6D572BA1E26AAA900CDA909 /* SearchFolder.xib in Resources */,
-				F672876524A2C9520043432F /* Preferences.storyboard in Resources */,
+				F626F5F424A76B9100D3AAD8 /* Preferences.storyboard in Resources */,
 				EA1A7620148FA32B004A6B8F /* googleFeed.tiff in Resources */,
 				3AEE7DE91695FC570018A17D /* vienna_public_key.pem in Resources */,
 				5766690016DEB5A7001C8786 /* filter-icon@2x.tiff in Resources */,
@@ -2378,6 +2398,34 @@
 				F650AFD8209EFDE900D26D13 /* lt */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		F626F5F624A76B9100D3AAD8 /* Preferences.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F626F5F524A76B9100D3AAD8 /* Base */,
+				F626F5F824A76BAC00D3AAD8 /* eu */,
+				F626F5FA24A76BBE00D3AAD8 /* zh-Hans */,
+				F626F5FC24A76BC700D3AAD8 /* zh-Hant */,
+				F626F5FE24A76BCA00D3AAD8 /* cs */,
+				F626F60024A76BCB00D3AAD8 /* da */,
+				F626F60224A76BCC00D3AAD8 /* nl */,
+				F626F60424A76BCD00D3AAD8 /* fr */,
+				F626F60624A76BCF00D3AAD8 /* gl */,
+				F626F60824A76BD000D3AAD8 /* de */,
+				F626F60A24A76BD200D3AAD8 /* it */,
+				F626F60C24A76BD300D3AAD8 /* ja */,
+				F626F60E24A76BD400D3AAD8 /* ko */,
+				F626F61024A76BD500D3AAD8 /* lt */,
+				F626F61224A76BD700D3AAD8 /* pt */,
+				F626F61424A76BD800D3AAD8 /* pt-BR */,
+				F626F61624A76BD900D3AAD8 /* ru */,
+				F626F61824A76BDA00D3AAD8 /* es */,
+				F626F61A24A76BDB00D3AAD8 /* sv */,
+				F626F61C24A76BDD00D3AAD8 /* tr */,
+				F626F61E24A76BDE00D3AAD8 /* uk */,
+			);
+			name = Preferences.storyboard;
 			sourceTree = "<group>";
 		};
 		F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */ = {
