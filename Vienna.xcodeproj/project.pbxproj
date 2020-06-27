@@ -203,11 +203,8 @@
 		F64C2CCC1E83825D00ED4E04 /* DateFormatterExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */; };
 		F65D6D711E74619E00A30974 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4398241E1666B3DB00FFE219 /* Credits.rtf */; };
 		F672876824A2D2170043432F /* UpdatePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F672876724A2D2170043432F /* UpdatePreferencesViewController.m */; };
-		F67F6DE12030604A006C9D72 /* MASPreferences.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDC20306049006C9D72 /* MASPreferences.framework */; };
-		F67F6DE22030604A006C9D72 /* MASPreferences.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDC20306049006C9D72 /* MASPreferences.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F67F6DE52030604A006C9D72 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDE2030604A006C9D72 /* Sparkle.framework */; };
 		F67F6DE62030604A006C9D72 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDE2030604A006C9D72 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F67F6DEE203060B1006C9D72 /* MASPreferences.framework.dSYM in Copy Framework Symbols */ = {isa = PBXBuildFile; fileRef = F67F6DEA203060B1006C9D72 /* MASPreferences.framework.dSYM */; };
 		F67F6DEF203060B1006C9D72 /* Sparkle.framework.dSYM in Copy Framework Symbols */ = {isa = PBXBuildFile; fileRef = F67F6DEB203060B1006C9D72 /* Sparkle.framework.dSYM */; };
 		F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */; };
 		F6832F681F10F5DA007920D4 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F661F10F5DA007920D4 /* MainWindowController.xib */; };
@@ -268,7 +265,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F67F6DE22030604A006C9D72 /* MASPreferences.framework in Copy Frameworks */,
 				2FAA36422072F57500169C8A /* MMTabBarView.framework in Copy Frameworks */,
 				F67F6DE62030604A006C9D72 /* Sparkle.framework in Copy Frameworks */,
 			);
@@ -293,7 +289,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				F67F6DEE203060B1006C9D72 /* MASPreferences.framework.dSYM in Copy Framework Symbols */,
 				F62152632083475800FEE960 /* MMTabBarView.framework.dSYM in Copy Framework Symbols */,
 				F67F6DEF203060B1006C9D72 /* Sparkle.framework.dSYM in Copy Framework Symbols */,
 			);
@@ -766,9 +761,7 @@
 		F664A9A2209EFEBF003B0F7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		F672876624A2D20A0043432F /* UpdatePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePreferencesViewController.h; sourceTree = "<group>"; };
 		F672876724A2D2170043432F /* UpdatePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePreferencesViewController.m; sourceTree = "<group>"; };
-		F67F6DDC20306049006C9D72 /* MASPreferences.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASPreferences.framework; path = Carthage/Build/Mac/MASPreferences.framework; sourceTree = "<group>"; };
 		F67F6DDE2030604A006C9D72 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
-		F67F6DEA203060B1006C9D72 /* MASPreferences.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = MASPreferences.framework.dSYM; path = Carthage/Build/Mac/MASPreferences.framework.dSYM; sourceTree = "<group>"; };
 		F67F6DEB203060B1006C9D72 /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Sparkle.framework.dSYM; path = Carthage/Build/Mac/Sparkle.framework.dSYM; sourceTree = "<group>"; };
 		F68176D4209EFD35004AA256 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = es; path = es.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F6832F641F10C4C9007920D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ExportAccessoryViewController.xib; sourceTree = "<group>"; };
@@ -1040,7 +1033,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F67F6DE12030604A006C9D72 /* MASPreferences.framework in Frameworks */,
 				F6B7BC3624A2A9A40051D76F /* FMDB in Frameworks */,
 				2FAA36402072F50B00169C8A /* MMTabBarView.framework in Frameworks */,
 				F67F6DE52030604A006C9D72 /* Sparkle.framework in Frameworks */,
@@ -1166,7 +1158,6 @@
 			isa = PBXGroup;
 			children = (
 				F67F6DF0203060D9006C9D72 /* Symbols */,
-				F67F6DDC20306049006C9D72 /* MASPreferences.framework */,
 				2FAA363F2072F50B00169C8A /* MMTabBarView.framework */,
 				F67F6DDE2030604A006C9D72 /* Sparkle.framework */,
 			);
@@ -1274,7 +1265,6 @@
 		F67F6DF0203060D9006C9D72 /* Symbols */ = {
 			isa = PBXGroup;
 			children = (
-				F67F6DEA203060B1006C9D72 /* MASPreferences.framework.dSYM */,
 				F62152622083475800FEE960 /* MMTabBarView.framework.dSYM */,
 				F67F6DEB203060B1006C9D72 /* Sparkle.framework.dSYM */,
 			);
