@@ -13,7 +13,7 @@ Additionally or alternatively, you can also sync with a server supporting the [O
 Compatibility
 -------------
 
-Since version 3.2, Vienna requires a minimum of OS X 10.9 (Mavericks).
+Since version 3.2, Vienna requires a minimum of OS X 10.9 (Mavericks). Future versions of Vienna may require OS&nbsp;X 10.11 (El Capitan) or newer. 
 
 Vienna 3.1.x requires a minimum of OS X 10.8 (Mountain Lion).
 Vienna 3.0.x requires a minimum of OS X 10.6 (Snow Leopard).

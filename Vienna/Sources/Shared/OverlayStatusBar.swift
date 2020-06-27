@@ -30,19 +30,10 @@ final class OverlayStatusBar: NSView {
 
     // MARK: Subviews
 
-    private var backgroundView: NSView = {
-        let backgroundView: NSView
-        if #available(OSX 10.10, *) {
-            let view = NSVisualEffectView(frame: NSRect.zero)
-            view.wantsLayer = true
-            view.blendingMode = .withinWindow
-            backgroundView = view
-        } else {
-            backgroundView = NSView(frame: NSRect.zero)
-            backgroundView.wantsLayer = true
-            backgroundView.layer?.backgroundColor = CGColor(gray: 0, alpha: 0.65)
-        }
-
+    private var backgroundView: NSVisualEffectView = {
+        let backgroundView = NSVisualEffectView(frame: NSRect.zero)
+        backgroundView.wantsLayer = true
+        backgroundView.blendingMode = .withinWindow
         backgroundView.alphaValue = 0
         backgroundView.layer?.cornerRadius = 3
 
@@ -58,30 +49,12 @@ final class OverlayStatusBar: NSView {
             addressField.isBezeled = false
             addressField.isSelectable = false
             addressField.drawsBackground = false
-
-            if #available(OSX 10.10, *) {
-                addressField.textColor = .labelColor
-            }
+            addressField.textColor = .labelColor
         }
 
-        if #available(OSX 10.11, *) {
-            addressField.font = .systemFont(ofSize: 12, weight: .medium)
-        } else if #available(OSX 10.10, *) {
-            addressField.font = NSFont(name: "Helvetica Neue Medium", size: 12)
-        } else {
-            addressField.font = .systemFont(ofSize: 11)
-        }
-
-        if #available(OSX 10.10, *) {
-            addressField.lineBreakMode = .byTruncatingMiddle
-
-            if #available(OSX 10.11, *) {
-                addressField.allowsDefaultTighteningForTruncation = true
-            }
-        } else {
-            addressField.cell?.lineBreakMode = .byTruncatingMiddle
-            addressField.cell?.backgroundStyle = .dark
-        }
+        addressField.font = .systemFont(ofSize: 12, weight: .medium)
+        addressField.lineBreakMode = .byTruncatingMiddle
+        addressField.allowsDefaultTighteningForTruncation = true
 
         return addressField
     }()
@@ -115,13 +88,8 @@ final class OverlayStatusBar: NSView {
         addressFieldConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-6-[label]-6-|",
                                                                   metrics: nil, views: ["label": addressField])
 
-        if #available(OSX 10.10, *) {
-            NSLayoutConstraint.activate(backgroundViewConstraints)
-            NSLayoutConstraint.activate(addressFieldConstraints)
-        } else {
-            addConstraints(backgroundViewConstraints)
-            backgroundView.addConstraints(addressFieldConstraints)
-        }
+        NSLayoutConstraint.activate(backgroundViewConstraints)
+        NSLayoutConstraint.activate(addressFieldConstraints)
     }
 
     // Make this initialiser unavailable.
@@ -146,9 +114,7 @@ final class OverlayStatusBar: NSView {
         }
 
         // Layer-backing will make sure that the visual-effect view redraws.
-        if #available(OSX 10.10, *) {
-            superview.wantsLayer = true
-        }
+        superview.wantsLayer = true
 
         var baseContraints: [NSLayoutConstraint] = []
         baseContraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|->=0-[view]-0-|",
@@ -156,11 +122,7 @@ final class OverlayStatusBar: NSView {
         baseContraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|->=0-[view]->=0-|",
                                                          options: [], metrics: nil, views: ["view": self])
 
-        if #available(OSX 10.10, *) {
-            NSLayoutConstraint.activate(baseContraints)
-        } else {
-            superview.addConstraints(baseContraints)
-        }
+        NSLayoutConstraint.activate(baseContraints)
 
         // Pin the view to the left side.
         pin(to: .leadingEdge, of: superview)
@@ -208,18 +170,10 @@ final class OverlayStatusBar: NSView {
         }
 
         // Remove existing constraints.
-        if #available(OSX 10.10, *) {
-            NSLayoutConstraint.deactivate(oldConstraints)
-        } else {
-            positioningView.removeConstraints(oldConstraints)
-        }
+        NSLayoutConstraint.deactivate(oldConstraints)
 
         // Add new constraints.
-        if #available(OSX 10.10, *) {
-            NSLayoutConstraint.activate(newConstraints)
-        } else {
-            positioningView.addConstraints(newConstraints)
-        }
+        NSLayoutConstraint.activate(newConstraints)
 
         self.position = position
     }
@@ -321,12 +275,7 @@ final class OverlayStatusBar: NSView {
                                                      toItem: nil, attribute: .notAnAttribute, multiplier: 1,
                                                      constant: superview.bounds.midX - 8)
             self.widthConstraint = widthConstraint
-
-            if #available(OSX 10.10, *) {
-                widthConstraint.isActive = true
-            } else {
-                addConstraint(widthConstraint)
-            }
+            widthConstraint.isActive = true
         }
     }
 

@@ -126,7 +126,7 @@
 	// Make sure selected row is visible
 	[self.outlineView scrollRowToVisible:self.outlineView.selectedRow];
 
-    [self.outlineView accessibilitySetOverrideValue:NSLocalizedString(@"Folders", nil) forAttribute:NSAccessibilityDescriptionAttribute];
+    self.outlineView.accessibilityValueDescription = NSLocalizedString(@"Folders", nil);
 
 	// Want tooltips
 	self.useToolTips = YES;
@@ -963,17 +963,9 @@
 	Folder * folder = node.folder;
     NSMutableDictionary * myInfo = [NSMutableDictionary dictionaryWithDictionary:info];
     if (folder.isUnsubscribed) {
-        if (@available(macOS 10.10, *)) {
-            myInfo[NSForegroundColorAttributeName] = NSColor.secondaryLabelColor;
-        } else {
-            myInfo[NSForegroundColorAttributeName] = NSColor.disabledControlTextColor;
-        }
+        myInfo[NSForegroundColorAttributeName] = NSColor.secondaryLabelColor;
     } else {
-		if (@available(macOS 10.10, *)) {
-			myInfo[NSForegroundColorAttributeName] = NSColor.labelColor;
-		} else {
-			myInfo[NSForegroundColorAttributeName] = NSColor.controlTextColor;
-		}
+		myInfo[NSForegroundColorAttributeName] = NSColor.labelColor;
     }
 	// Set the font
 	if (folder.unreadCount ||  (folder.childUnreadCount && ![olv isItemExpanded:item]))

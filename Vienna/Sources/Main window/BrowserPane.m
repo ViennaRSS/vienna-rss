@@ -141,16 +141,16 @@
 	[self showRssPageButton:NO];
 
 	// Set tooltips
-	[addressField setToolTip:NSLocalizedString(@"Enter the URL here", nil)];
-	[addressField.cell accessibilitySetOverrideValue:NSLocalizedString(@"Enter the URL here", nil) forAttribute:NSAccessibilityTitleAttribute];
-	[refreshButton setToolTip:NSLocalizedString(@"Refresh the current page", nil)];
-	[refreshButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Refresh the current page", nil) forAttribute:NSAccessibilityTitleAttribute];
-	[backButton setToolTip:NSLocalizedString(@"Return to the previous page", nil)];
-	[backButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Return to the previous page", nil) forAttribute:NSAccessibilityTitleAttribute];
-	[forwardButton setToolTip:NSLocalizedString(@"Go forward to the next page", nil)];
-	[forwardButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Go forward to the next page", nil) forAttribute:NSAccessibilityTitleAttribute];
-	[rssPageButton setToolTip:NSLocalizedString(@"Subscribe to the feed for this page", nil)];
-	[rssPageButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Subscribe to the feed for this page", nil) forAttribute:NSAccessibilityTitleAttribute];
+    addressField.toolTip = NSLocalizedString(@"Enter the URL here", nil);
+    addressField.cell.accessibilityTitle = NSLocalizedString(@"Enter the URL here", nil);
+	refreshButton.toolTip = NSLocalizedString(@"Refresh the current page", nil);
+	refreshButton.cell.accessibilityTitle = NSLocalizedString(@"Refresh the current page", nil);
+	backButton.toolTip = NSLocalizedString(@"Return to the previous page", nil);
+	backButton.cell.accessibilityTitle = NSLocalizedString(@"Return to the previous page", nil);
+	forwardButton.toolTip = NSLocalizedString(@"Go forward to the next page", nil);
+    forwardButton.cell.accessibilityTitle = NSLocalizedString(@"Go forward to the next page", nil);
+	rssPageButton.toolTip = NSLocalizedString(@"Subscribe to the feed for this page", nil);
+	rssPageButton.cell.accessibilityTitle = NSLocalizedString(@"Subscribe to the feed for this page", nil);
 
     [NSUserDefaults.standardUserDefaults addObserver:self
                                           forKeyPath:MAPref_ShowStatusBar
