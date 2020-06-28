@@ -40,29 +40,16 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 
 @implementation AppearancePreferencesViewController
 
-
-- (instancetype)init {
-	if ((self = [super initWithNibName:@"AppearancePreferencesView" bundle:nil]) != nil)
-	{
-        // Set up to be notified if preferences change outside this window
-        NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-        [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_FolderFontChange" object:nil];
-        [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_ArticleListFontChange" object:nil];
-        [nc addObserver:self selector:@selector(handleReloadPreferences:) name:kMA_Notify_MinimumFontSizeChange object:nil];
-        [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
-	}
-	return self;
+- (void)viewDidLoad {
+    NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_FolderFontChange" object:nil];
+    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_ArticleListFontChange" object:nil];
+    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:kMA_Notify_MinimumFontSizeChange object:nil];
+    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
 }
 
-
 - (void)viewWillAppear {
-    if([NSViewController instancesRespondToSelector:@selector(viewWillAppear)]) {
-        [super viewWillAppear];
-    }
-    // Do view setup here.
     [self initializePreferences];
-    
-    
 }
 
 #pragma mark - Vienna Preferences
