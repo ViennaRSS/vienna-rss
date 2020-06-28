@@ -60,7 +60,6 @@
 
 @interface AppController () <InfoPanelControllerDelegate, ActivityPanelControllerDelegate>
 
--(void)installSleepHandler;
 -(void)installScriptsFolderWatcher;
 -(void)handleTabChange:(NSNotification *)nc;
 -(void)handleFolderSelection:(NSNotification *)nc;
@@ -77,7 +76,6 @@
 -(void)initColumnsMenu;
 -(void)initScriptsMenu;
 -(void)doEditFolder:(Folder *)folder;
--(void)refreshOnTimer:(NSTimer *)aTimer;
 -(BOOL)installFilename:(NSString *)srcFile toPath:(NSString *)path;
 -(void)setFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
 -(void)setPersistedFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
@@ -89,8 +87,9 @@
 -(void)updateSearchPlaceholderAndSearchMethod;
 -(void)updateCloseCommands;
 @property (nonatomic, getter=isFilterBarVisible, readonly) BOOL filterBarVisible;
-@property (nonatomic, readonly, strong) NSTimer *checkTimer;
 -(IBAction)cancelAllRefreshesToolbar:(id)sender;
+
+@property (nonatomic) NSBackgroundActivityScheduler *scheduler;
 
 @property (nonatomic) MainWindowController *mainWindowController;
 @property (weak, nonatomic) NSWindow *mainWindow;
@@ -103,12 +102,6 @@
 @property (weak, nonatomic) NSSearchField *toolbarSearchField;
 
 @end
-
-// Static constant strings that are typically never tweaked
-
-// Awake from sleep
-static io_connect_t root_port;
-static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageArgument);
 
 @implementation AppController
 
@@ -125,7 +118,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		lastCountOfUnread = 0;
 		appStatusItem = nil;
 		scriptsMenuItem = nil;
-		checkTimer = nil;
 		didCompleteInitialisation = NO;
 		emptyTrashWarning = nil;
 		searchString = nil;
@@ -210,75 +202,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
     if (!_rssFeed)
         _rssFeed = [[NewSubscription alloc] initWithDatabase:db];
     return _rssFeed;
-}
-
-#pragma mark IORegisterForSystemPower
-
-/* MySleepCallBack
- * Called in response to an I/O event that we established via IORegisterForSystemPower. The
- * messageType parameter allows us to distinguish between which event occurred.
- */
-static void MySleepCallBack(void * refCon, io_service_t service, natural_t messageType, void * messageArgument)
-{
-	if (messageType == kIOMessageSystemHasPoweredOn)
-	{
-		AppController * app = APPCONTROLLER;
-		if (app != nil)
-		{
-            Preferences * prefs = [Preferences standardPreferences];
-            NSInteger frequency = prefs.refreshFrequency;
-            if (frequency > 0)
-            {
-                NSDate * lastRefresh = [prefs objectForKey:MAPref_LastRefreshDate];
-                if ((lastRefresh == nil) || (app.checkTimer == nil))
-                    [app handleCheckFrequencyChange:nil];
-                else
-                {
-                    // Wait at least 15 seconds after waking to avoid refresh errors.
-                    NSTimeInterval interval = -lastRefresh.timeIntervalSinceNow;
-                    if (interval > frequency)
-                    {
-                        [NSTimer scheduledTimerWithTimeInterval:15.0
-                                                         target:app
-                                                       selector:@selector(refreshOnTimer:)
-                                                       userInfo:nil
-                                                        repeats:NO];
-                        [app handleCheckFrequencyChange:nil];
-                    }
-                    else
-                    {
-                        app.checkTimer.fireDate = [NSDate dateWithTimeIntervalSinceNow:15.0 + frequency - interval];
-                    }
-                }
-            }
-		}
-	}
-	else if (messageType == kIOMessageCanSystemSleep)
-	{
-		// Idle sleep is about to kick in. Allow it otherwise the system
-		// will wait 30 seconds then go to sleep.
-		IOAllowPowerChange(root_port, (long)messageArgument);
-	}
-	else if (messageType == kIOMessageSystemWillSleep)
-	{
-		// The system WILL go to sleep. Allow it otherwise the system will
-		// wait 30 seconds then go to sleep.
-		IOAllowPowerChange(root_port, (long)messageArgument);
-	}
-}
-
-/* installSleepHandler
- * Registers our handler to be notified when the system awakes from sleep. We use this to kick
- * off a refresh if necessary.
- */
--(void)installSleepHandler
-{
-	IONotificationPortRef notify;
-	io_object_t anIterator;
-	
-	root_port = IORegisterForSystemPower((__bridge void *)(self), &notify, MySleepCallBack, &anIterator);
-	if (root_port != 0)
-		CFRunLoopAddSource(CFRunLoopGetCurrent(), IONotificationPortGetRunLoopSource(notify), kCFRunLoopCommonModes);
 }
 
 /* installScriptsFolderWatcher
@@ -433,12 +356,13 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
     // Notification Center delegate
     NSUserNotificationCenter.defaultUserNotificationCenter.delegate = self;
 
-	// Start the check timer
-	[self handleCheckFrequencyChange:nil];
+    // Schedule the background refresh
+    self.scheduler = [[NSBackgroundActivityScheduler alloc] initWithIdentifier:@"com.vienna-rss.Vienna"];
+    self.scheduler.interval = prefs.refreshFrequency;
+    self.scheduler.repeats = YES;
+    self.scheduler.qualityOfService = NSQualityOfServiceUtility;
+    [self scheduleBackgroundRefresh];
 
-	// Register to be informed when the system awakes from sleep
-	[self installSleepHandler];
-	
 	// Register to be notified when the scripts folder changes.
 	if (!hasOSScriptsMenu())
 		[self installScriptsFolderWatcher];
@@ -1886,31 +1810,25 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[self showAppInStatusBar];
 }
 
-/* handleCheckFrequencyChange
- * Called when the refresh frequency is changed.
- */
--(void)handleCheckFrequencyChange:(NSNotification *)nc
-{
-	NSInteger newFrequency = [Preferences standardPreferences].refreshFrequency;
-	
-	[checkTimer invalidate];
-	checkTimer = nil;
-	if (newFrequency > 0)
-	{
-		checkTimer = [NSTimer scheduledTimerWithTimeInterval:newFrequency
-													   target:self
-													 selector:@selector(refreshOnTimer:)
-													 userInfo:nil
-													  repeats:NO];
-	}
+- (void)handleCheckFrequencyChange:(NSNotification *)nc {
+    [self.scheduler invalidate];
+    self.scheduler.interval = [Preferences standardPreferences].refreshFrequency;
+    [self scheduleBackgroundRefresh];
 }
 
-/* checkTimer
- * Return the refresh timer object.
- */
--(NSTimer *)checkTimer
-{
-	return checkTimer;
+- (void)scheduleBackgroundRefresh {
+    typeof(self) __weak weakSelf = self;
+    [self.scheduler scheduleWithBlock:^(NSBackgroundActivityCompletionHandler completionHandler) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([RefreshManager sharedManager].isConnecting) {
+                completionHandler(NSBackgroundActivityResultDeferred);
+                return;
+            }
+
+            [weakSelf refreshAllSubscriptions:weakSelf];
+            completionHandler(NSBackgroundActivityResultFinished);
+        });
+    }];
 }
 
 /* doViewColumn
@@ -2382,15 +2300,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(BOOL)isConnecting
 {
 	return [RefreshManager sharedManager].connecting;
-}
-
-/* refreshOnTimer
- * Each time the check timer fires, we see if a connect is not nswindow
- * running and then kick one off.
- */
--(void)refreshOnTimer:(NSTimer *)aTimer
-{
-	[self refreshAllSubscriptions:self];
 }
 
 /* markSelectedFoldersRead
@@ -3226,8 +3135,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             [[OpenReader sharedManager] loadSubscriptions];
         }
 
-        // Reset the refresh timer
-        [self handleCheckFrequencyChange:nil];
         // Kick off the refresh
         [[RefreshManager sharedManager] refreshSubscriptions:[self.foldersTree folders:0]
           ignoringSubscriptionStatus:NO];
