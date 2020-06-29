@@ -1,5 +1,5 @@
 //
-//  SyncingPreferencesViewController.h
+//  UpdatePreferencesViewController.h
 //  Vienna
 //
 //  Created by Joshua Pore on 22/11/2014.
@@ -20,20 +20,6 @@
 
 @import Cocoa;
 
-@interface SyncingPreferencesViewController : NSViewController <NSTextFieldDelegate> {
-    IBOutlet NSPopUpButton * openReaderSource; //List of known service providers
-    NSDictionary * sourcesDict;
-    IBOutlet NSTextField * credentialsInfoText;
-    IBOutlet NSTextField * openReaderHost;
-    IBOutlet NSTextField * username;
-    IBOutlet NSSecureTextField * password;
-    IBOutlet NSButton *__weak syncButton;
-}
-
-@property (weak) IBOutlet NSButton *syncButton;
-
--(IBAction)changeSyncOpenReader:(id)sender;
--(IBAction)changeSource:(id)sender;
--(IBAction)visitWebsite:(id)sender;
+@interface UpdatePreferencesViewController : NSViewController
 
 @end

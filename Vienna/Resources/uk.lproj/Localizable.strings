@@ -37,9 +37,6 @@
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Не можу створити нову базу даних Vienna \"%@\" тому, що папка імовірно розміщення на віддаленому диску. Будь-ласка виберіть інше місце збереження бази даних на вашому локальному диску.";
 
-/* Toolbar item name for the Advanced preference pane */
-"Advanced" = "Додатково";
-
 /* No comment provided by engineer. */
 "After 2 Days" = "Після двох днів";
 
@@ -57,9 +54,6 @@
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Трапилася помилка при оновленні цієї стрічки";
-
-/* Toolbar item name for the Appearance preference pane */
-"Appearance" = "Вигляд";
 
 /* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "Помилка AppleScript у сценарії «%@»";
@@ -249,9 +243,6 @@
 /* No comment provided by engineer. */
 "Folders" = "Папки";
 
-/* Toolbar item name for the General preference pane */
-"General" = "Загальні";
-
 /* Title of a menu item */
 "Get Info" = "Інформація";
 
@@ -266,9 +257,6 @@
 
 /* Title of a menu item */
 "Hide Status Bar" = "Заховати стрічку статусу";
-
-/* Title of a menu item */
-"Hide Toolbar" = "Приховати панель інструментів";
 
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "З серверу отримано HTTP код %d";
@@ -425,9 +413,6 @@
 
 /* No comment provided by engineer. */
 "Play" = "Програти";
-
-/* Title of the Preferences window */
-"Preferences" = "Параметри";
 
 /* Title of a button on an alert */
 "Quit" = "Завершити";

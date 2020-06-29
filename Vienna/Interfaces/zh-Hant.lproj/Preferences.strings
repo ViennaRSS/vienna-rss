@@ -1,0 +1,159 @@
+/* Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "2IW-It-hcT"; */
+"2IW-It-hcT.title" = "檢視文章或網頁時：";
+
+/* Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "4Qn-qF-kSp"; */
+"4Qn-qF-kSp.title" = "一般使用 Vienna 時，此處的設定應無須加以更改。請參閱輔助說明檔案以取得各個設定的詳細資訊。";
+
+/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "4vm-80-j33"; */
+"4vm-80-j33.title" = "將更新內容的文章標示為新文章";
+
+/* Class = "NSTextFieldCell"; title = "However, high numbers also render your computer less responsive while refreshing feeds."; ObjectID = "5EA-1i-TuA"; */
+"5EA-1i-TuA.title" = "但數字越大時在更新訂閱項目的過程中可能造成系統的回應速度變慢或無回應，";
+
+/* Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "6GF-Pk-gI9"; */
+"6GF-Pk-gI9.title" = "每 6 小時";
+
+/* Class = "NSTextFieldCell"; title = "Concurrent downloads:"; ObjectID = "6oJ-Rh-rgA"; */
+"6oJ-Rh-rgA.title" = "同時間下載的數量：";
+
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "7Za-ay-jlt"; */
+"7Za-ay-jlt.title" = "手動";
+
+/* Class = "NSButtonCell"; title = "Enable Internet plug-ins in the internal browser"; ObjectID = "9bX-Lt-AWz"; */
+"9bX-Lt-AWz.title" = "在內建瀏覽器中啟用外掛";
+
+/* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "adB-qE-xKg"; */
+"adB-qE-xKg.title" = "將目前的文章標記為已閱讀：";
+
+/* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "aWg-mD-YWn"; */
+"aWg-mD-YWn.title" = "每 30 分鐘";
+
+/* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "bom-nB-4zx"; */
+"bom-nB-4zx.title" = "將文章移至垃圾桶：";
+
+/* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "bwY-9N-h4N"; */
+"bwY-9N-h4N.title" = "帳號：";
+
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "cbn-xq-UFr"; */
+"cbn-xq-UFr.title" = "選取⋯";
+
+/* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "dkm-xW-4If"; */
+"dkm-xW-4If.title" = "在檔案夾列表中顯示檔案夾影像";
+
+/* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "erE-oh-cbw"; */
+"erE-oh-cbw.title" = "在背景中打開新連結";
+
+/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "FFP-H1-weF"; */
+"FFP-H1-weF.title" = "顯示於選單列";
+
+/* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "flH-2D-s6O"; */
+"flH-2D-s6O.title" = "在外部瀏覽器中打開連結";
+
+/* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "g3K-qh-M6y"; */
+"g3K-qh-M6y.title" = "數字越大代表訂閱項目越快被下載更新。";
+
+/* Class = "NSTabViewItem"; label = "General"; ObjectID = "GJ3-1q-004"; */
+"GJ3-1q-004.label" = "一般";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "Address of a server supporting the Open Reader API"; ObjectID = "gKc-l8-p9m"; */
+"gKc-l8-p9m.ibShadowedToolTip" = "支援 Open Reader API 的伺服器位址";
+
+/* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "GSh-ct-FMo"; */
+"GSh-ct-FMo.title" = "每 3 小時";
+
+/* Class = "NSMenuItem"; title = "Never"; ObjectID = "h9d-GD-q32"; */
+"h9d-GD-q32.title" = "永不";
+
+/* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "haP-20-AwJ"; */
+"haP-20-AwJ.title" = "啟動時檢查是否有新版的 Vienna";
+
+/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iCs-T5-L1c"; */
+"iCs-T5-L1c.title" = "取得未閱讀的新文章時：";
+
+/* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "iEw-AM-tMF"; */
+"iEw-AM-tMF.label" = "進階";
+
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "iHl-tr-paa"; */
+"iHl-tr-paa.ibShadowedToolTip" = "選擇支援 Open Reader API 的伺服器";
+
+/* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "ITA-U9-lhX"; */
+"ITA-U9-lhX.title" = "文章列表字體：";
+
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "jfH-Hq-gRk"; */
+"jfH-Hq-gRk.title" = "彈跳應用程式圖像";
+
+/* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "Jk6-0r-7Gs"; */
+"Jk6-0r-7Gs.title" = "不要使用小於以下大小的字體";
+
+/* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "jkb-TT-wPC"; */
+"jkb-TT-wPC.title" = "在 \"下一個未閱讀文章\" 操作後";
+
+/* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "jvO-Ef-TTd"; */
+"jvO-Ef-TTd.title" = "每小時";
+
+/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "jVU-m2-dsS"; */
+"jVU-m2-dsS.title" = "在應用程式圖像上顯示未閱讀數目";
+
+/* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "Ljf-Qd-6Ho"; */
+"Ljf-Qd-6Ho.title" = "啟動時檢查是否有新文章";
+
+/* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "M8s-xu-lWh"; */
+"M8s-xu-lWh.title" = "檔案夾列表字體：";
+
+/* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "McN-fD-0Cv"; */
+"McN-fD-0Cv.title" = "在短暫時間後";
+
+/* Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "MnV-8D-Qyq"; */
+"MnV-8D-Qyq.title" = "在內建瀏覽器中啟用 JavaScript";
+
+/* Class = "NSMenuItem"; title = "Other…"; ObjectID = "nSW-3T-Zoh"; */
+"nSW-3T-Zoh.title" = "其他⋯";
+
+/* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "OD4-de-Vkx"; */
+"OD4-de-Vkx.title" = "密碼：";
+
+/* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "Oqg-6W-NAL"; */
+"Oqg-6W-NAL.title" = "檢查新文章：";
+
+/* Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "OuH-3K-YPK"; */
+"OuH-3K-YPK.title" = "伺服器：";
+
+/* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "pLH-VU-z2d"; */
+"pLH-VU-z2d.title" = "每 2 小時";
+
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "PmX-nw-uOn"; */
+"PmX-nw-uOn.title" = "選取⋯";
+
+/* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "qYb-Sf-cEF"; */
+"qYb-Sf-cEF.title" = "每 5 分鐘";
+
+/* Class = "NSButtonCell"; title = "Search for latest beta versions"; ObjectID = "u92-Bh-Wrz"; */
+"u92-Bh-Wrz.title" = "檢查最新的 Bete 版本";
+
+/* Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Uyd-GK-jtn"; */
+"Uyd-GK-jtn.title" = "與 Open Reader 伺服器進行同步";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "V12-Ua-skO"; */
+"V12-Ua-skO.ibShadowedToolTip" = "瀏覽網站";
+
+/* Class = "NSTabViewItem"; label = "Appearance"; ObjectID = "WK4-g4-vJd"; */
+"WK4-g4-vJd.label" = "外觀";
+
+/* Class = "NSWindow"; title = "Preferences"; ObjectID = "X5g-th-bjd"; */
+"X5g-th-bjd.title" = "偏好設定";
+
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "YG6-9k-gKH"; */
+"YG6-9k-gKH.title" = "URL：";
+
+/* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "Ygu-Rj-E7a"; */
+"Ygu-Rj-E7a.title" = "每 15 分鐘";
+
+/* Class = "NSTextFieldCell"; title = "Default RSS reader:"; ObjectID = "YHN-Up-rwa"; */
+"YHN-Up-rwa.title" = "預設的 RSS 閱讀程式：";
+
+/* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "yLU-Xs-TGw"; */
+"yLU-Xs-TGw.title" = "將下載的文章儲存到：";
+
+/* Class = "NSTabViewItem"; label = "Syncing"; ObjectID = "zkN-he-3BT"; */
+"zkN-he-3BT.label" = "同步中";
+

@@ -34,9 +34,6 @@
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "새로운 Vienna 데이터베이스를 \"%@\" 위치에 생성할 수 없습니다. 아마도 해당 폴더가 원격 네트워크 공유에 위치해 있을 것이며, 현재 버전의 Vienna 로는 원격 데이트베이스를 관리할 수 없습니다. 로컬 머신에 위치한 다른 폴더를 선택해 재시도하시기 바랍니다.";
 
-/* Toolbar item name for the Advanced preference pane */
-"Advanced" = "고급";
-
 /* No comment provided by engineer. */
 "After 2 Days" = "2일 후";
 
@@ -54,9 +51,6 @@
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "이전 갱신시 이 피드에서 오류가 발생했습니다.";
-
-/* Toolbar item name for the Appearance preference pane */
-"Appearance" = "모양새";
 
 /* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "정말로 선택된 %d 항목을 모두 삭제하시겠습니까? 이 명령은 취소할 수 없습니다.";
@@ -191,9 +185,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "구독";
-
-/* Toolbar item name for the General preference pane */
-"General" = "일반";
 
 /* Title of a menu item */
 "Get Info" = "정보 입수";
@@ -344,9 +335,6 @@
 
 /* No comment provided by engineer. */
 "Other" = "선택";
-
-/* Title of the Preferences window */
-"Preferences" = "환경설정";
 
 /* Title of a button on an alert */
 "Quit" = "종료";

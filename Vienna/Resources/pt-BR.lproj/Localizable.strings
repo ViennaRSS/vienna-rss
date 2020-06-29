@@ -31,9 +31,6 @@
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Um novo arquivo de dados do Vienna não pode ser criado em \"%@\" pois a pasta está provavelmente localizada em um disco de rede e esta versão do Vienna não gerencia dados remotos. Por favor escolha uma pasta alternativa que esteja localizada em seu computador.";
 
-/* Toolbar item name for the Advanced preference pane */
-"Advanced" = "Avançado";
-
 /* No comment provided by engineer. */
 "After 2 Days" = "Após 2 Dias";
 
@@ -51,9 +48,6 @@
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Um erro ocorreu quando estas notícias foram atualizadas";
-
-/* Toolbar item name for the Appearance preference pane */
-"Appearance" = "Aparência";
 
 /* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Você tem certeza que deseja apagar todas as %d pastas selecionadas? Esta operação não pode ser desfeita.";
@@ -237,9 +231,6 @@
 /* Title of a menu item */
 "Force Refresh Selected Subscriptions From Open Reader" = "Forçar Atualização das Assinaturas Selecionadas do Open Reader";
 
-/* Toolbar item name for the General preference pane */
-"General" = "Geral";
-
 /* Title of a menu item */
 "Get Info" = "Obter Informações";
 
@@ -402,9 +393,6 @@
 /* No comment provided by engineer. */
 "Play" = "Tocar";
 
-/* Title of the Preferences window */
-"Preferences" = "Preferências";
-
 /* Title of a button on an alert */
 "Quit" = "Encerrar";
 
@@ -507,9 +495,6 @@
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Resumo";
-
-/* Toolbar item name for the Syncing preference pane */
-"Syncing" = "Sincronizando";
 
 /* Data field name visible in smart folder definition */
 "Text" = "Texto";

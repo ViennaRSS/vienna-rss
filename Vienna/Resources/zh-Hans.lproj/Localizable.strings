@@ -43,9 +43,6 @@
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "无法在 \"%@\" 创建新的 Vienna 数据库。可能是因为此文件夹处于远端共享网络上，当前版本的 Vienna 不支持远端共享网络上的数据库。请选择一个在您本地机器上的文件夹。";
 
-/* Toolbar item name for the Advanced preference pane */
-"Advanced" = "高级";
-
 /* No comment provided by engineer. */
 "After 2 Days" = "两天后";
 
@@ -63,9 +60,6 @@
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "上次更新这个频道时发生了一个错误";
-
-/* Toolbar item name for the Appearance preference pane */
-"Appearance" = "外观";
 
 /* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "苹果脚本在 '%@' 发生错误";
@@ -273,9 +267,6 @@
 /* No comment provided by engineer. */
 "Forcing Refresh subscriptions…" = "强制刷新订阅中...";
 
-/* Toolbar item name for the General preference pane */
-"General" = "通用";
-
 /* Title of a menu item */
 "Get Info" = "获取信息";
 
@@ -361,7 +352,7 @@
 "Locate…" = "定位中...";
 
 /* No comment provided by engineer. */
-"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "请确保登入 Open Reader 服务器的用户名和密码已在 Vienna 首选项中正确设置。\n另请确保网络连通。";
+"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "请确保登入 Open Reader 服务器的用户名和密码已在 Vienna 首选项中正确设置。\\n另请确保网络连通。";
 
 /* Title of a menu item */
 "Mark All Articles as Read" = "标记所有文章为已读";
@@ -461,9 +452,6 @@
 
 /* No comment provided by engineer. */
 "Play" = "播放";
-
-/* Title of the Preferences window */
-"Preferences" = "预置";
 
 /* Title of a button on an alert */
 "Quit" = "退出";

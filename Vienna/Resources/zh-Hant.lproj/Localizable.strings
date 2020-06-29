@@ -46,9 +46,6 @@
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "無法在“%@”建立新的 Vienna 資料庫，原因可能是這個檔案夾位在遠端網路分享空間中，而 Vienna 無法管理遠端的資料庫。請在您的本機電腦上，選擇其他的檔案夾。";
 
-/* Toolbar item name for the Advanced preference pane */
-"Advanced" = "進階";
-
 /* No comment provided by engineer. */
 "After 2 Days" = "2 天後";
 
@@ -66,9 +63,6 @@
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "最後一次更新此訂閱頻道時，發生錯誤";
-
-/* Toolbar item name for the Appearance preference pane */
-"Appearance" = "外觀";
 
 /* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "在 %@ 腳本中發生 AppleScript 錯誤";
@@ -285,9 +279,6 @@
 /* No comment provided by engineer. */
 "Forcing Refresh subscriptions…" = "強制重新整理訂閱項目…";
 
-/* Toolbar item name for the General preference pane */
-"General" = "一般";
-
 /* Title of a menu item */
 "Get Info" = "簡介";
 
@@ -370,7 +361,7 @@
 "Loading" = "載入中";
 
 /* No comment provided by engineer. */
-"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "請確認用以存取 Open Reqder 伺服器的帳號與密碼是否有正確地設在 Vienna 的偏好設定中。\n亦請檢查您的網路可用性。";
+"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "請確認用以存取 Open Reqder 伺服器的帳號與密碼是否有正確地設在 Vienna 的偏好設定中。\\n亦請檢查您的網路可用性。";
 
 /* Title of a menu item */
 "Mark All Articles as Read" = "將所有文章標示為已閱讀";
@@ -479,9 +470,6 @@
 
 /* No comment provided by engineer. */
 "Plugin installed" = "已安裝的外掛項目";
-
-/* Title of the Preferences window */
-"Preferences" = "偏好設定";
 
 /* No comment provided by engineer. */
 "Queue" = "佇列";
@@ -597,9 +585,6 @@
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "摘要";
-
-/* Toolbar item name for the Syncing preference pane */
-"Syncing" = "同步中";
 
 /* Data field name visible in smart folder definition */
 "Text" = "內文";

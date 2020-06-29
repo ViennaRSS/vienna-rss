@@ -1,0 +1,159 @@
+/* Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "2IW-It-hcT"; */
+"2IW-It-hcT.title" = "Når der læses artikler eller hjemmesider:";
+
+/* Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "4Qn-qF-kSp"; */
+"4Qn-qF-kSp.title" = "Indstillingerne her bør ikke ændres under normal brug af Vienna. Referer til Hjælp-filen for detaljer omkring hver enkelt indstilling.";
+
+/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "4vm-80-j33"; */
+"4vm-80-j33.title" = "Marker opdaterede artikler som nye";
+
+/* Class = "NSTextFieldCell"; title = "However, high numbers also render your computer less responsive while refreshing feeds."; ObjectID = "5EA-1i-TuA"; */
+"5EA-1i-TuA.title" = "Men, høje numre kan også gøre din computer mindre responsiv når der opdateres feeds.";
+
+/* Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "6GF-Pk-gI9"; */
+"6GF-Pk-gI9.title" = "Hver 6 timer";
+
+/* Class = "NSTextFieldCell"; title = "Concurrent downloads:"; ObjectID = "6oJ-Rh-rgA"; */
+"6oJ-Rh-rgA.title" = "Samtidige downloads:";
+
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "7Za-ay-jlt"; */
+"7Za-ay-jlt.title" = "Manuelt";
+
+/* Class = "NSButtonCell"; title = "Enable Internet plug-ins in the internal browser"; ObjectID = "9bX-Lt-AWz"; */
+"9bX-Lt-AWz.title" = "Aktiver udvidelser i den interne browser";
+
+/* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "adB-qE-xKg"; */
+"adB-qE-xKg.title" = "Marker nuværende artikel læst:";
+
+/* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "aWg-mD-YWn"; */
+"aWg-mD-YWn.title" = "Hver 30 minutter";
+
+/* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "bom-nB-4zx"; */
+"bom-nB-4zx.title" = "Flyt artikler til Papirkurven:";
+
+/* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "bwY-9N-h4N"; */
+"bwY-9N-h4N.title" = "Navn:";
+
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "cbn-xq-UFr"; */
+"cbn-xq-UFr.title" = "Vælg…";
+
+/* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "dkm-xW-4If"; */
+"dkm-xW-4If.title" = "Vis mappeikoner i mappeliste";
+
+/* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "erE-oh-cbw"; */
+"erE-oh-cbw.title" = "Åben nye henvisninger i baggrunden";
+
+/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "FFP-H1-weF"; */
+"FFP-H1-weF.title" = "Vis i menulinien";
+
+/* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "flH-2D-s6O"; */
+"flH-2D-s6O.title" = "Åben henvisninger i ekstern browser";
+
+/* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "g3K-qh-M6y"; */
+"g3K-qh-M6y.title" = "Jo højere et antal, jo hurtigere vil dine abonnementer blive hentet.";
+
+/* Class = "NSTabViewItem"; label = "General"; ObjectID = "GJ3-1q-004"; */
+"GJ3-1q-004.label" = "Generelt";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "Address of a server supporting the Open Reader API"; ObjectID = "gKc-l8-p9m"; */
+"gKc-l8-p9m.ibShadowedToolTip" = "Adresse på en server som understøtter Open Reader API'en";
+
+/* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "GSh-ct-FMo"; */
+"GSh-ct-FMo.title" = "Hver 3 timer";
+
+/* Class = "NSMenuItem"; title = "Never"; ObjectID = "h9d-GD-q32"; */
+"h9d-GD-q32.title" = "Aldrig";
+
+/* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "haP-20-AwJ"; */
+"haP-20-AwJ.title" = "Tjek for nyere versioner af Vienna ved opstart";
+
+/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iCs-T5-L1c"; */
+"iCs-T5-L1c.title" = "Når nye ulæste artikler er modtaget:";
+
+/* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "iEw-AM-tMF"; */
+"iEw-AM-tMF.label" = "Avanceret";
+
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "iHl-tr-paa"; */
+"iHl-tr-paa.ibShadowedToolTip" = "Vælg en server som understøtter Open Reader API'en";
+
+/* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "ITA-U9-lhX"; */
+"ITA-U9-lhX.title" = "Artikelliste skrifttype:";
+
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "jfH-Hq-gRk"; */
+"jfH-Hq-gRk.title" = "Hop programikonet";
+
+/* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "Jk6-0r-7Gs"; */
+"Jk6-0r-7Gs.title" = "Brug aldrig en skrifttype mindre end";
+
+/* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "jkb-TT-wPC"; */
+"jkb-TT-wPC.title" = "Efter \"Næste ulæste\" kommando";
+
+/* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "jvO-Ef-TTd"; */
+"jvO-Ef-TTd.title" = "Hver time";
+
+/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "jVU-m2-dsS"; */
+"jVU-m2-dsS.title" = "Vis antallet af ulæste artikler på programikonet";
+
+/* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "Ljf-Qd-6Ho"; */
+"Ljf-Qd-6Ho.title" = "Tjek for nye artikler ved opstart";
+
+/* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "M8s-xu-lWh"; */
+"M8s-xu-lWh.title" = "Mappeliste skrifttype:";
+
+/* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "McN-fD-0Cv"; */
+"McN-fD-0Cv.title" = "Efter et kort øjeblik";
+
+/* Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "MnV-8D-Qyq"; */
+"MnV-8D-Qyq.title" = "Aktiver JavaScript i den interne browser";
+
+/* Class = "NSMenuItem"; title = "Other…"; ObjectID = "nSW-3T-Zoh"; */
+"nSW-3T-Zoh.title" = "Andet…";
+
+/* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "OD4-de-Vkx"; */
+"OD4-de-Vkx.title" = "Kodeord:";
+
+/* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "Oqg-6W-NAL"; */
+"Oqg-6W-NAL.title" = "Tjek for nye artikler:";
+
+/* Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "OuH-3K-YPK"; */
+"OuH-3K-YPK.title" = "Server:";
+
+/* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "pLH-VU-z2d"; */
+"pLH-VU-z2d.title" = "Hver 2 timer";
+
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "PmX-nw-uOn"; */
+"PmX-nw-uOn.title" = "Vælg…";
+
+/* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "qYb-Sf-cEF"; */
+"qYb-Sf-cEF.title" = "Hver 5 minutter";
+
+/* Class = "NSButtonCell"; title = "Search for latest beta versions"; ObjectID = "u92-Bh-Wrz"; */
+"u92-Bh-Wrz.title" = "Søg efter seneste betaudgaver";
+
+/* Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Uyd-GK-jtn"; */
+"Uyd-GK-jtn.title" = "Synkroniser med en Open Reader server";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "V12-Ua-skO"; */
+"V12-Ua-skO.ibShadowedToolTip" = "Besøg hjemmesiden";
+
+/* Class = "NSTabViewItem"; label = "Appearance"; ObjectID = "WK4-g4-vJd"; */
+"WK4-g4-vJd.label" = "Udseende";
+
+/* Class = "NSWindow"; title = "Preferences"; ObjectID = "X5g-th-bjd"; */
+"X5g-th-bjd.title" = "Indstillinger";
+
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "YG6-9k-gKH"; */
+"YG6-9k-gKH.title" = "Henvisning:";
+
+/* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "Ygu-Rj-E7a"; */
+"Ygu-Rj-E7a.title" = "Hver 15 minutter";
+
+/* Class = "NSTextFieldCell"; title = "Default RSS reader:"; ObjectID = "YHN-Up-rwa"; */
+"YHN-Up-rwa.title" = "Standard RSS Reader:";
+
+/* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "yLU-Xs-TGw"; */
+"yLU-Xs-TGw.title" = "Gem hentede arkiv i:";
+
+/* Class = "NSTabViewItem"; label = "Syncing"; ObjectID = "zkN-he-3BT"; */
+"zkN-he-3BT.label" = "Synkroniserer";
+

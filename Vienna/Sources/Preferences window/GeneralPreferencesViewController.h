@@ -18,15 +18,13 @@
 //  limitations under the License.
 //
 
-@import MASPreferences;
+@import Cocoa;
 
-@interface GeneralPreferencesViewController : NSViewController <MASPreferencesViewController> {
+@interface GeneralPreferencesViewController : NSViewController {
     IBOutlet NSPopUpButton * checkFrequency;
     IBOutlet NSPopUpButton * linksHandler;
     IBOutlet NSPopUpButton * expireDuration;
-    IBOutlet NSButton * checkForUpdates;
     IBOutlet NSButton * checkOnStartUp;
-    IBOutlet NSButton * alwaysAcceptBetas;
     IBOutlet NSButton * openLinksInBackground;
     IBOutlet NSButton * openLinksInExternalBrowser;
     IBOutlet NSButton * showAppInMenuBar;
@@ -42,9 +40,7 @@
 // Action functions
 -(IBAction)changeCheckFrequency:(id)sender;
 -(IBAction)changeCheckOnStartUp:(id)sender;
--(IBAction)changeAlwaysAcceptBetas:(id)sender;
 -(IBAction)selectDefaultLinksHandler:(id)sender;
--(IBAction)changeCheckForUpdates:(id)sender;
 -(IBAction)changeOpenLinksInBackground:(id)sender;
 -(IBAction)changeOpenLinksInExternalBrowser:(id)sender;
 -(IBAction)changeExpireDuration:(id)sender;

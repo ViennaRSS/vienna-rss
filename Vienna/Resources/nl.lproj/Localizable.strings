@@ -40,9 +40,6 @@
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Een nieuwe Vienna-database kan niet worden aagemaakt in \"%@\". De database staat waarschijnlijk op een andere computer in het netwerk, hetgeen door deze versie van Vienna niet wordt ondersteund. Kiest u een andere locatie op deze computer.";
 
-/* Toolbar item name for the Advanced preference pane */
-"Advanced" = "Geavanceerd";
-
 /* No comment provided by engineer. */
 "After 2 Days" = "Na 2 dagen";
 
@@ -60,9 +57,6 @@
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "De laatste keer dat deze feed is bijgewerkt, is er een fout opgetreden";
-
-/* Toolbar item name for the Appearance preference pane */
-"Appearance" = "Weergave";
 
 /* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Weet u zeker dat u deze %d groepen wilt verwijderen? U kunt dit niet ongedaan maken.";
@@ -252,9 +246,6 @@
 /* Title of a menu item */
 "Force Refresh Selected Subscriptions From Open Reader" = "Forceer bijwerken abonnementen van Open Reader";
 
-/* Toolbar item name for the General preference pane */
-"General" = "Algemeen";
-
 /* Title of a menu item */
 "Get Info" = "Toon info";
 
@@ -420,9 +411,6 @@
 /* No comment provided by engineer. */
 "Play" = "Afspelen";
 
-/* Title of the Preferences window */
-"Preferences" = "Voorkeuren";
-
 /* No comment provided by engineer. */
 "Queue" = "Wachtrij";
 
@@ -531,9 +519,6 @@
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Samenvatting";
-
-/* Toolbar item name for the Syncing preference pane */
-"Syncing" = "Synchroniseren";
 
 /* Data field name visible in smart folder definition */
 "Text" = "Tekst";

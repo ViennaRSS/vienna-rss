@@ -34,9 +34,6 @@
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Ezin da Vienna datu base berri bat sortu \"%@\" -(e)n direktorioa urruneko direktorio batean kokatua dagoelako eta Vienna-k ezin ditu urruneko datu baseak kudeatu. Mesedez aukeratu zeure disko gogorrean dagoen direktorioren bat.";
 
-/* Toolbar item name for the Advanced preference pane */
-"Advanced" = "Aurreratuta";
-
 /* No comment provided by engineer. */
 "After 2 Days" = "2 Egunen Ostean";
 
@@ -54,9 +51,6 @@
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Errore bat gertatu zen jario hau azken aldiz eguneratu zenean";
-
-/* Toolbar item name for the Appearance preference pane */
-"Appearance" = "Itxura";
 
 /* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Ziur zaude aukeratutako %d direktorioak ezabatu nahi dituzula? Ekintza hau ezingo da desegin.";
@@ -200,9 +194,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "Direktorioak";
-
-/* Toolbar item name for the General preference pane */
-"General" = "Orokorrean";
 
 /* Title of a menu item */
 "Get Info" = "Informazioa Lortu";
@@ -362,9 +353,6 @@
 
 /* No comment provided by engineer. */
 "Other" = "Besteak";
-
-/* Title of the Preferences window */
-"Preferences" = "Ezaugarriak";
 
 /* Title of a button on an alert */
 "Quit" = "Irten";

@@ -1,0 +1,102 @@
+/* Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "2IW-It-hcT"; */
+"2IW-It-hcT.title" = "記事やウェブページを閲覧中：";
+
+/* Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "4Qn-qF-kSp"; */
+"4Qn-qF-kSp.title" = "通常 Vienna を使用するに当たってこの項目を設定する必要 はありません。各項目の詳細はヘルプを参照してください。";
+
+/* Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "6GF-Pk-gI9"; */
+"6GF-Pk-gI9.title" = "６時間ごと";
+
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "7Za-ay-jlt"; */
+"7Za-ay-jlt.title" = "手動";
+
+/* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "aWg-mD-YWn"; */
+"aWg-mD-YWn.title" = "３０分ごと";
+
+/* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "bwY-9N-h4N"; */
+"bwY-9N-h4N.title" = "名前：";
+
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "cbn-xq-UFr"; */
+"cbn-xq-UFr.title" = "選択…";
+
+/* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "dkm-xW-4If"; */
+"dkm-xW-4If.title" = "フォルダリストでフォルダイメージを使用する";
+
+/* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "erE-oh-cbw"; */
+"erE-oh-cbw.title" = "新しいリンクを背面で開く";
+
+/* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "flH-2D-s6O"; */
+"flH-2D-s6O.title" = "リンクをデフォルトブラウザで開く";
+
+/* Class = "NSTabViewItem"; label = "General"; ObjectID = "GJ3-1q-004"; */
+"GJ3-1q-004.label" = "一般";
+
+/* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "GSh-ct-FMo"; */
+"GSh-ct-FMo.title" = "3時間ごと";
+
+/* Class = "NSMenuItem"; title = "Never"; ObjectID = "h9d-GD-q32"; */
+"h9d-GD-q32.title" = "しない";
+
+/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iCs-T5-L1c"; */
+"iCs-T5-L1c.title" = "新規未読記事を取得したとき：";
+
+/* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "iEw-AM-tMF"; */
+"iEw-AM-tMF.label" = "詳細";
+
+/* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "ITA-U9-lhX"; */
+"ITA-U9-lhX.title" = "記事リストフォント：";
+
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "jfH-Hq-gRk"; */
+"jfH-Hq-gRk.title" = "アプリケーションアイコンを跳ねさせる";
+
+/* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "Jk6-0r-7Gs"; */
+"Jk6-0r-7Gs.title" = "これより小さいフォントサイズを使わない：";
+
+/* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "jkb-TT-wPC"; */
+"jkb-TT-wPC.title" = "\"次の未読\" コマンドの後";
+
+/* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "jvO-Ef-TTd"; */
+"jvO-Ef-TTd.title" = "１時間ごと";
+
+/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "jVU-m2-dsS"; */
+"jVU-m2-dsS.title" = "未読記事数をアプリケーションアイコンに表示";
+
+/* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "M8s-xu-lWh"; */
+"M8s-xu-lWh.title" = "フォルダリストフォント：";
+
+/* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "McN-fD-0Cv"; */
+"McN-fD-0Cv.title" = "少したった後";
+
+/* Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "MnV-8D-Qyq"; */
+"MnV-8D-Qyq.title" = "内蔵ブラウザの JavaScript を有効にする";
+
+/* Class = "NSMenuItem"; title = "Other…"; ObjectID = "nSW-3T-Zoh"; */
+"nSW-3T-Zoh.title" = "その他…";
+
+/* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "OD4-de-Vkx"; */
+"OD4-de-Vkx.title" = "パスワード：";
+
+/* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "Oqg-6W-NAL"; */
+"Oqg-6W-NAL.title" = "新しい記事をチェック：";
+
+/* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "pLH-VU-z2d"; */
+"pLH-VU-z2d.title" = "２時間ごと";
+
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "PmX-nw-uOn"; */
+"PmX-nw-uOn.title" = "選択…";
+
+/* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "qYb-Sf-cEF"; */
+"qYb-Sf-cEF.title" = "5分ごと";
+
+/* Class = "NSTabViewItem"; label = "Appearance"; ObjectID = "WK4-g4-vJd"; */
+"WK4-g4-vJd.label" = "表示";
+
+/* Class = "NSWindow"; title = "Preferences"; ObjectID = "X5g-th-bjd"; */
+"X5g-th-bjd.title" = "環境設定";
+
+/* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "Ygu-Rj-E7a"; */
+"Ygu-Rj-E7a.title" = "15分ごと";
+
+/* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "yLU-Xs-TGw"; */
+"yLU-Xs-TGw.title" = "ダウンロードしたファイルの保存先：";
+
