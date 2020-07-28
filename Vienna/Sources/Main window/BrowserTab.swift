@@ -148,7 +148,17 @@ extension BrowserTab: NSTextFieldDelegate {
 extension BrowserTab: Tab {
 
     var textSelection: String {
-        return ""
+        var text = ""
+        waitForAsyncExecution(until: DispatchTime.now() + DispatchTimeInterval.seconds(1)) { finishHandler in
+            self.webView.evaluateJavaScript("window.getSelection().getRangeAt(0).toString()") { res, _ in
+                guard let selectedText = res as? String else {
+                    return
+                }
+                text = selectedText
+                finishHandler()
+            }
+        }
+        return text
     }
 
     var html: String {
@@ -180,7 +190,9 @@ extension BrowserTab: Tab {
     }
 
     func searchFor(_ searchString: String, action: NSFindPanelAction) {
-		// TODO
+        //webView.evaluateJavaScript("document.execCommand('HiliteColor', false, 'yellow')", completionHandler: nil)
+        let searchUpward = action == .previous ? "true" : "false"
+        webView.evaluateJavaScript("window.find(textToFind='\(searchString)', matchCase=false, searchUpward=\(searchUpward), wrapAround=true)", completionHandler: nil)
     }
 
 	func loadTab() {
