@@ -26,7 +26,6 @@
 #import "Article.h"
 #import "BrowserPane.h"
 #import "SearchMethod.h"
-#import "Browser.h"
 #import "Vienna-Swift.h"
 
 @implementation PluginManager

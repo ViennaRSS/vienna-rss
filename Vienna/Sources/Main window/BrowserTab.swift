@@ -45,6 +45,7 @@ class BrowserTab: NSViewController {
 		return wv
 	}()
 
+    @IBOutlet private(set) weak var addressBarPaddingView: NSView!
     @IBOutlet private(set) weak var addressBarContainer: NSView!
     @IBOutlet private(set) weak var addressField: NSTextField!
     @IBOutlet private(set) weak var backButton: NSButton!
@@ -60,12 +61,16 @@ class BrowserTab: NSViewController {
 	var titleObservation: NSKeyValueObservation!
 
 	init() {
-		super.init(nibName: nil, bundle: nil)
+        if #available(macOS 10.12, *) {
+            super.init(nibName: nil, bundle: nil)
+        } else {
+            super.init(nibName: "BrowserTabBeforeMacOS12", bundle: nil)
+        }
 		titleObservation = webView.observe(\.title, options: .new) { _, change in
 			self.title = (change.newValue ?? "") ?? ""
 		}
 	}
-	
+
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
@@ -77,8 +82,7 @@ class BrowserTab: NSViewController {
         webView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(webView, positioned: .below, relativeTo: nil)
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
-        //TODO: set top constraint to view top, insets to webview
-		self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[addressBarContainer]-[webView]|", options: [], metrics: nil, views: ["webView": webView, "addressBarContainer": addressBarContainer as Any]))
+		self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[addressBarContainer][webView]|", options: [], metrics: nil, views: ["webView": webView, "addressBarContainer": addressBarPaddingView as Any]))
 
 		if let title = webView.title {
 			self.title = title
@@ -92,10 +96,6 @@ class BrowserTab: NSViewController {
 		//set up address bar handling
 		addressField.delegate = self
     }
-
-	private func activateAddressBar() {
-		NSApp.mainWindow?.makeFirstResponder(addressField)
-	}
 
 	deinit {
 		titleObservation.invalidate()
@@ -152,19 +152,19 @@ extension BrowserTab: Tab {
     }
 
     var html: String {
-        return ""
+        ""
     }
 
     var isLoading: Bool {
-		return webView.isLoading
+		webView.isLoading
     }
 
     func back() -> Bool {
-		return self.webView.goBack() != nil
+		self.webView.goBack() != nil
     }
 
     func forward() -> Bool {
-		return self.webView.goForward() != nil
+		self.webView.goForward() != nil
     }
 
     func pageDown() -> Bool {
@@ -201,14 +201,18 @@ extension BrowserTab: Tab {
     }
 
     func decreaseTextSize() {
-
+        //TODO
     }
 
     func increaseTextSize() {
-
+        //TODO
     }
 
     func print() {
+        //TODO
+    }
 
+    func activateAddressBar() {
+        NSApp.mainWindow?.makeFirstResponder(addressField)
     }
 }

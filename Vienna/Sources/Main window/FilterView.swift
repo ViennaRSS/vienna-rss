@@ -19,7 +19,7 @@
 
 import Cocoa
 
-final class FilterView: GradientView {
+final class FilterView: NSView {
 
     @IBOutlet private(set) var filterSearchField: NSSearchField!
     @IBOutlet private(set) var filterViewPopUp: NSPopUpButton!

@@ -59,11 +59,11 @@ class TabbedBrowserViewController: NSViewController, Browser {
     }
 
     var activeTab: Tab? {
-        return tabView.selectedTabViewItem?.viewController as? Tab
+        tabView.selectedTabViewItem?.viewController as? Tab
     }
 
     var browserTabCount: Int {
-        return tabView.numberOfTabViewItems
+        tabView.numberOfTabViewItems
     }
 
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
@@ -165,11 +165,12 @@ class TabbedBrowserViewController: NSViewController, Browser {
 @available(OSX 10.10, *)
 extension TabbedBrowserViewController: MMTabBarViewDelegate {
     func tabView(_ aTabView: NSTabView, shouldClose tabViewItem: NSTabViewItem) -> Bool {
-        return tabViewItem != primaryTab
+        tabViewItem != primaryTab
     }
 
     func tabView(_ aTabView: NSTabView, willClose tabViewItem: NSTabViewItem) {
-        //TODO: stop loading of webview etc
+        guard let tab = tabViewItem.tabView as? Tab else { return }
+        tab.stopLoadingTab()
     }
 
     func tabView(_ aTabView: NSTabView, menuFor tabViewItem: NSTabViewItem) -> NSMenu {
@@ -178,15 +179,19 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
     }
 
     func tabView(_ aTabView: NSTabView, shouldDrag tabViewItem: NSTabViewItem, in tabBarView: MMTabBarView) -> Bool {
-        return tabViewItem != primaryTab
+        tabViewItem != primaryTab
     }
 
     func tabView(_ aTabView: NSTabView, validateDrop sender: NSDraggingInfo, proposedItem tabViewItem: NSTabViewItem, proposedIndex: UInt, in tabBarView: MMTabBarView) -> NSDragOperation {
-        return proposedIndex != 0 ? [.every] : []
+        proposedIndex != 0 ? [.every] : []
     }
 
     func tabView(_ aTabView: NSTabView, validateSlideOfProposedItem tabViewItem: NSTabViewItem, proposedIndex: UInt, in tabBarView: MMTabBarView) -> NSDragOperation {
-        return (tabViewItem != primaryTab && proposedIndex != 0) ? [.every] : []
+        (tabViewItem != primaryTab && proposedIndex != 0) ? [.every] : []
+    }
+
+    func addNewTab(to aTabView: NSTabView) {
+        _ = self.createNewTab()
     }
 }
 

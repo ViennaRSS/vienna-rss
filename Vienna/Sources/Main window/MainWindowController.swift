@@ -30,6 +30,7 @@ final class MainWindowController: NSWindowController {
     @IBOutlet private(set) var filterDisclosureView: DisclosureView?
     @IBOutlet private(set) var filterSearchField: NSSearchField?
     @IBOutlet private(set) var toolbarSearchField: NSSearchField?
+    @IBOutlet weak var placeholderDetailView: NSView!
 
 	@objc private(set) lazy var browser: (Browser & NSViewController) = {
 		if #available(macOS 10.10, *) {
@@ -47,15 +48,8 @@ final class MainWindowController: NSWindowController {
         // TODO: Move this to windowDidLoad()
         statusBarState(disclosed: Preferences.standard().showStatusBar, animate: false)
 
-        //TODO: use this switch also to load different browser views
-        if #available(OSX 10.10, *) {
-            // Leave the default
-        } else {
-            statusLabel.cell?.backgroundStyle = .raised
-            filterLabel.cell?.backgroundStyle = .raised
-        }
-
 		splitView.addSubview(browser.view)
+        placeholderDetailView.removeFromSuperview()
 
         let filterMenu = (NSApp as? ViennaApp)?.filterMenu
         let filterMode = Preferences.standard().filterMode

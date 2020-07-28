@@ -60,6 +60,8 @@
 		03B752421B74814B00FD3FDB /* RichXMLParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B752411B74814B00FD3FDB /* RichXMLParserTests.m */; };
 		03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EFD56F1B720AB0007EF284 /* ExportTests.m */; };
 		03F33D961DF2A2F900B04FAF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03F33D951DF2A2F900B04FAF /* Images.xcassets */; };
+		2F07D28724BCFBA700E01663 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FC5218A26B0002F77E9 /* Browser.swift */; };
+		2F125EDE24D0638600868E11 /* BrowserTabBeforeMacOS12.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F125EDD24D0638600868E11 /* BrowserTabBeforeMacOS12.xib */; };
 		2F22803322719CC8005D1023 /* ArticleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F22803222719CC8005D1023 /* ArticleController.swift */; };
 		2F2280352271B041005D1023 /* ArticleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280342271B041005D1023 /* ArticleContentView.swift */; };
 		2F2280382271B18A005D1023 /* ArticleStyleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */; };
@@ -208,7 +210,6 @@
 		F628DFE31ED2698A00FACFD3 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F628DFE21ED2698A00FACFD3 /* FilterView.swift */; };
 		F6373A231F1D53B500ED3B09 /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6373A221F1D53B500ED3B09 /* MainWindow.swift */; };
 		F63833D81EF842EA00E07213 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63833D71EF842EA00E07213 /* MainWindowController.swift */; };
-		F63B71751ED252DD00CF9F32 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B71741ED252DD00CF9F32 /* GradientView.swift */; };
 		F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */; };
 		F64C2CCC1E83825D00ED4E04 /* DateFormatterExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */; };
 		F65D6D711E74619E00A30974 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4398241E1666B3DB00FFE219 /* Credits.rtf */; };
@@ -337,6 +338,7 @@
 		03EFD56F1B720AB0007EF284 /* ExportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportTests.m; sourceTree = "<group>"; };
 		03F33D951DF2A2F900B04FAF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; };
+		2F125EDD24D0638600868E11 /* BrowserTabBeforeMacOS12.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrowserTabBeforeMacOS12.xib; sourceTree = "<group>"; };
 		2F22803222719CC8005D1023 /* ArticleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleController.swift; sourceTree = "<group>"; };
 		2F2280342271B041005D1023 /* ArticleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleContentView.swift; sourceTree = "<group>"; };
 		2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleStyleLoader.swift; sourceTree = "<group>"; };
@@ -758,7 +760,6 @@
 		F6352BE51E2720E0005CD307 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RSSFeed.strings"; sourceTree = "<group>"; };
 		F6373A221F1D53B500ED3B09 /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
 		F63833D71EF842EA00E07213 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
-		F63B71741ED252DD00CF9F32 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		F647BC83209EFD820068F74D /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = gl; path = gl.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryMonitorTests.swift; sourceTree = "<group>"; };
 		F64C2CCA1E83825D00ED4E04 /* DateFormatterExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatterExtension.h; sourceTree = "<group>"; };
@@ -1130,6 +1131,7 @@
 			children = (
 				2FDF6FBC218A266A002F77E9 /* BrowserTab.swift */,
 				2FDF6FBE218A266A002F77E9 /* BrowserTab.xib */,
+				2F125EDD24D0638600868E11 /* BrowserTabBeforeMacOS12.xib */,
 				2FDF6FBF218A266A002F77E9 /* TabbedBrowserViewController.swift */,
 				2FDF6FBD218A266A002F77E9 /* TabbedBrowserViewController.xib */,
 				2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */,
@@ -1720,7 +1722,6 @@
 				EA6D3E5914D8048C004DCB80 /* Debug.h */,
 				F6164C571E32A6660086261C /* DisclosureView.h */,
 				F6164C581E32A6660086261C /* DisclosureView.m */,
-				F63B71741ED252DD00CF9F32 /* GradientView.swift */,
 				AA60237E08C298FB002CFD06 /* HelperFunctions.h */,
 				AA60237F08C298FB002CFD06 /* HelperFunctions.m */,
 				AA71168709BEB14A00E3EA8A /* ImageAndTextCell.h */,
@@ -1837,7 +1838,7 @@
 				};
 			};
 			buildConfigurationList = AA4F9AB60855422400C18279 /* Build configuration list for PBXProject "Vienna" */;
-			compatibilityVersion = "Xcode 10.0";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -1893,6 +1894,7 @@
 				F6FEE7AD209E500800BCAEC6 /* Localizable.stringsdict in Resources */,
 				F6D572AE1E26AA8A00CDA909 /* FeedCredentials.xib in Resources */,
 				03F33D961DF2A2F900B04FAF /* Images.xcassets in Resources */,
+				2F125EDE24D0638600868E11 /* BrowserTabBeforeMacOS12.xib in Resources */,
 				F6257FF51E28485F0035E43C /* Downloads.xib in Resources */,
 				0386A5C11E1FA586000C10CE /* BrowserPane.xib in Resources */,
 				AA26F448060490BE00FE7994 /* alphaPixel.tiff in Resources */,
@@ -2169,10 +2171,10 @@
 				AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */,
 				AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */,
 				AAD794E7088A25D200E2CE5E /* PopUpButtonExtensions.m in Sources */,
+				2F07D28724BCFBA700E01663 /* Browser.swift in Sources */,
 				032280311A33BCD8007DE933 /* Article.m in Sources */,
 				2F22803A2271CCAB005D1023 /* WebKitArticleView.swift in Sources */,
 				030C38901AABF12D00AE1EB8 /* FolderImageCache.m in Sources */,
-				F63B71751ED252DD00CF9F32 /* GradientView.swift in Sources */,
 				AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */,
 				AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */,
 				AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */,
@@ -3101,6 +3103,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = Vienna/ViennaDeployment.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
