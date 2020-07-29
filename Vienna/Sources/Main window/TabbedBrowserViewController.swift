@@ -97,6 +97,7 @@ class TabbedBrowserViewController: NSViewController, Browser {
         let newTab = BrowserTab()
 
 		newTab.tabUrl = url
+        newTab.title = title
 
         if load {
             newTab.loadTab()
@@ -108,6 +109,11 @@ class TabbedBrowserViewController: NSViewController, Browser {
 
 		if !inBackground {
 			tabBar.select(newTabViewItem)
+            if load {
+                newTab.webView.becomeFirstResponder()
+            } else {
+                newTab.activateAddressBar()
+            }
 			//TODO: make first responder?
 		}
 

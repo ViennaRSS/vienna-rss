@@ -47,10 +47,7 @@
                                         <rect key="frame" x="0.0" y="677" width="841" height="35"/>
                                         <subviews>
                                             <searchField wantsLayer="YES" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CJo-vt-zIx">
-                                                <rect key="frame" x="5" y="5" width="831" height="25"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="25" id="ksY-7k-pEf"/>
-                                                </constraints>
+                                                <rect key="frame" x="5" y="5" width="857" height="19"/>
                                                 <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" placeholderString="Search for folders" bezelStyle="round" sendsWholeSearchString="YES" recentsAutosaveName="filterStrings" id="lhy-4c-asJ">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
