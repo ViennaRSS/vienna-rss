@@ -43,13 +43,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <visualEffectView blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="o3u-Zs-gsz">
-                                        <rect key="frame" x="0.0" y="568" width="842" height="35"/>
+                                        <rect key="frame" x="0.0" y="574" width="842" height="29"/>
                                         <subviews>
                                             <searchField wantsLayer="YES" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CJo-vt-zIx">
-                                                <rect key="frame" x="5" y="5" width="832" height="25"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="25" id="ksY-7k-pEf"/>
-                                                </constraints>
+                                                <rect key="frame" x="5" y="5" width="832" height="19"/>
                                                 <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" placeholderString="Search for folders" bezelStyle="round" sendsWholeSearchString="YES" recentsAutosaveName="filterStrings" id="lhy-4c-asJ">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -68,13 +65,13 @@
                                         </constraints>
                                     </visualEffectView>
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8uX-2t-Ik7">
-                                        <rect key="frame" x="0.0" y="0.0" width="842" height="568"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="842" height="574"/>
                                         <clipView key="contentView" drawsBackground="NO" id="QAa-Gc-i1V">
-                                            <rect key="frame" x="0.0" y="0.0" width="842" height="553"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="842" height="559"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" columnResizing="NO" autosaveName="outViewer" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="14" outlineTableColumn="xXs-dn-GMc" id="Kk7-ax-B3r" customClass="FolderView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="942" height="553"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="942" height="559"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <size key="intercellSpacing" width="3" height="0.0"/>
                                                     <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -98,7 +95,7 @@
                                             <nil key="backgroundColor"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="u6a-gc-Hse">
-                                            <rect key="frame" x="0.0" y="553" width="842" height="15"/>
+                                            <rect key="frame" x="0.0" y="559" width="842" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="m9n-zp-NnZ">
@@ -419,7 +416,7 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="3C962AB1-0C7E-4CBA-8477-2436ED2B6383" explicitItemIdentifier="Styles" label="Style" paletteLabel="Style" toolTip="Display the list of available styles" image="StyleTemplate" sizingBehavior="auto" id="azL-oz-mJL" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <popUpButton key="view" verticalHuggingPriority="750" id="gOd-tT-XFQ">
-                            <rect key="frame" x="0.0" y="14" width="41" height="28"/>
+                            <rect key="frame" x="0.0" y="14" width="54" height="25"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="StyleTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="lu2-BZ-Gxd" id="5CR-Qn-4pP">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

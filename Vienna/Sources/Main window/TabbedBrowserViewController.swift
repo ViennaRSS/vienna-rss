@@ -97,6 +97,7 @@ class TabbedBrowserViewController: NSViewController, Browser {
         let newTab = BrowserTab()
 
 		newTab.tabUrl = url
+        newTab.title = title
 
         if load {
             newTab.loadTab()
@@ -108,6 +109,11 @@ class TabbedBrowserViewController: NSViewController, Browser {
 
 		if !inBackground {
 			tabBar.select(newTabViewItem)
+            if load {
+                newTab.webView.becomeFirstResponder()
+            } else {
+                newTab.activateAddressBar()
+            }
 			//TODO: make first responder?
 		}
 
@@ -225,8 +231,7 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
 
     func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
         let tab = (tabViewItem?.viewController as? BrowserTab)
-        if !(tab?.isLoading ?? false) {
-            // TODO: check if tab has completed loading
+        if let loaded = tab?.loadedUrl, !loaded {
             tab?.loadTab()
         }
     }

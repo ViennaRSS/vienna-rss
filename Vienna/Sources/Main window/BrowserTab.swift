@@ -58,6 +58,8 @@ class BrowserTab: NSViewController {
 		}
 	}
 
+    var loadedUrl: Bool = false
+
 	var titleObservation: NSKeyValueObservation!
 
 	init() {
@@ -67,7 +69,10 @@ class BrowserTab: NSViewController {
             super.init(nibName: "BrowserTabBeforeMacOS12", bundle: nil)
         }
 		titleObservation = webView.observe(\.title, options: .new) { _, change in
-			self.title = (change.newValue ?? "") ?? ""
+            guard let newValue = change.newValue ?? "", !newValue.isEmpty else {
+                return
+            }
+            self.title = newValue
 		}
 	}
 
@@ -84,9 +89,9 @@ class BrowserTab: NSViewController {
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
 		self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[addressBarContainer][webView]|", options: [], metrics: nil, views: ["webView": webView, "addressBarContainer": addressBarPaddingView as Any]))
 
-		if let title = webView.title {
+        if let title = webView.title, !title.isEmpty {
 			self.title = title
-		} else if let host = self.tabUrl?.host {
+        } else if self.title == nil || self.title!.isEmpty, let host = self.tabUrl?.host {
 			self.title = host
 		}
 		if let url = webView.url {
