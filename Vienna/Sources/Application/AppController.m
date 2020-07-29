@@ -3374,14 +3374,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     }
 	if (theAction == @selector(goBack:))
 	{
-        // TODO: Make this work without the protocol check.
-        if (false/*[self.browser.activeTab.view conformsToProtocol:@protocol(BaseView)]*/) {
-            *validateFlag = NO;
-            //TODO: implement in Tab ((NSView<BaseView> *)self.browser.activeTab.view).canGoBack && isMainWindowVisible;
-        } else {
-            *validateFlag = NO;
-        }
-		return YES;
+        return self.browser.activeTab != nil; //TODO: disable for cases when browser tab cannot go back
 	}
 	if (theAction == @selector(mailLinkToArticlePage:))
 	{
@@ -3448,12 +3441,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 		else
 		{
-			return self.browser.activeTab.isLoading;
+			return !self.browser.activeTab.isLoading;
 		}
 	}
 	else if (theAction == @selector(goForward:))
 	{
-        return false; //TODO: implement in tab ((NSView<BaseView> *)self.browser.activeTab.view).canGoForward && isMainWindowVisible;
+        return true; //TODO: implement canGoForward in browser or tab to filter for cases when this is not possible;
 	}
 	else if (theAction == @selector(newGroupFolder:))
 	{
@@ -3469,11 +3462,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else if (theAction == @selector(makeTextLarger:))
 	{
-        return false; //TODO: implement in tab (or drop, seems like a strange property anyway) ((NSView<BaseView> *)self.browser.activeTab.view).webView.canMakeTextLarger && isMainWindowVisible;
+        return self.browser.activeTab != nil; //TODO: this does not really work, remove.
 	}
 	else if (theAction == @selector(makeTextSmaller:))
 	{
-        return false; //TODO: implement in tab (or drop, seems like a strange property anyway) ((NSView<BaseView> *)self.browser.activeTab.view).webView.canMakeTextSmaller && isMainWindowVisible;
+        return self.browser.activeTab != nil; //TODO: this does not really work, remove.
 	}
 	else if (theAction == @selector(doViewColumn:))
 	{

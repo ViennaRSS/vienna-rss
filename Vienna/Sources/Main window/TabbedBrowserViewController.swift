@@ -111,6 +111,9 @@ class TabbedBrowserViewController: NSViewController, Browser {
 			//TODO: make first responder?
 		}
 
+        newTab.webView.uiDelegate = self
+        newTab.webView.navigationDelegate = self
+
         //TODO: tab view order
 
         return newTab

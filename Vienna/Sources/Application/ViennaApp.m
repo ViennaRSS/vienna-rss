@@ -262,8 +262,10 @@
         }
 
         if ([theView isKindOfClass:[UnifiedDisplayView class]]) {
-			//TODO: we do not necessarily get a webview here. Rely on tab protocol instead
-            //webPane = (WebView *)((UnifiedDisplayView *)theView).webView;
+            if ([((UnifiedDisplayView *)theView).webView isKindOfClass:WebView.class]) {
+                webPane = (WebView *)((UnifiedDisplayView *)theView).webView;
+            }
+            //TODO: we do not necessarily get a webview here. Rely on tab protocol in the future
         }
 
         if (webPane != nil)
