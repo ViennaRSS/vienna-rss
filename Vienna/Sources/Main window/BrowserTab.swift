@@ -213,15 +213,17 @@ extension BrowserTab: Tab {
     }
 
     func decreaseTextSize() {
-        //TODO
+        //TODO: apple has not implemented this on macOS. There is a property webkit-text-size-adjust on iOS though.
     }
 
     func increaseTextSize() {
-        //TODO
+        //TODO: apple has not implemented this on macOS. There is a property webkit-text-size-adjust on iOS though.
     }
 
     func print() {
-        //TODO
+        //TODO: neither Javascript nor the native print methods work here. This is a webkit bug:
+        // rdar://problem/36557179
+        self.webView.printView(nil)
     }
 
     func activateAddressBar() {
