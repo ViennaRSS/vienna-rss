@@ -21,8 +21,10 @@ echo "Compressing ${product_name} to ${zipped_app}"
 ditto -c -k --rsrc --keepParent "${app_path}" "${zipped_app}" 2>&1 > /dev/null
 
 uuid=$(uuidgen)
-echo "Uploading to Apple to notarize"
+echo "Uploading to Apple to notarize. Bundle id: ${uuid}"
 notarize_uuid=$(xcrun altool --notarize-app --primary-bundle-id "${uuid}" --username "${APP_STORE_ID}" --password "${APP_STORE_PASSWORD}" --asc-provider "${TEAM_SHORTNAME}" --file "${zipped_app}" 2>&1 |grep RequestUUID | awk '{print $3'})
+echo "Notarization info tracking id: ${notarize_uuid}"
+sleep 3
 
 success=0
 while true; do
