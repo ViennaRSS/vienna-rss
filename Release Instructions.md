@@ -2,6 +2,17 @@ Instructions for building and uploading Vienna binaries to Github, Sourceforge a
 
 ## One time setup step: ##
 
+### Build settings
+In Xcode->File->Project settings…, you should have :
+
+- Build System : New Build System
+- Derived Data : Default Location
+- Advanced… : Build Location : Custom : Relative to Workspace
+	- Products : Build/Products
+	- Intermediates : Build/Intermediates.noindex
+
+### CS-ID.xcconfig
+
 To ensure that Deployment releases are properly codesigned, Xcode needs the `Scripts/Resources/CS-ID.xcconfig` file.
 
 This file has been deliberately set to be ignored in our git repository, because its content should be personal to each developer. So you will have to create it, in order to define at least two environment variables:

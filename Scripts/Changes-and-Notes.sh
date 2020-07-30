@@ -1,8 +1,8 @@
 #!/bin/sh
 
-. "${SOURCE_ROOT}/build/Post-archive-exports.txt"
+. "${SOURCE_ROOT}/Build/Post-archive-exports.txt"
 
-VIENNA_UPLOADS_DIR="${BUILD_DIR}/Uploads"
+VIENNA_UPLOADS_DIR="${SOURCE_ROOT}/Build/Uploads"
 VIENNA_NOTES="${SRCROOT}/notes.html"
 
 # Fail if not deployment
@@ -13,15 +13,17 @@ fi
 
 echo "Running script to create web site files"
 if [ ! -d "${VIENNA_UPLOADS_DIR}" ] ; then
-	mkdir "${VIENNA_UPLOADS_DIR}"
+	mkdir -p "${VIENNA_UPLOADS_DIR}"
 else
 	rm -fr "${VIENNA_UPLOADS_DIR}"/*
 fi
 
-cd "${VIENNA_UPLOADS_DIR}"
+pushd "${VIENNA_UPLOADS_DIR}"
 
 if [ -f "${VIENNA_NOTES}" ] ; then
 	cp -a "${VIENNA_NOTES}" "noteson${N_VCS_TAG}.html"
 fi
+
+popd
 
 exit 0
