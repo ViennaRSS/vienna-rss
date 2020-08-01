@@ -204,8 +204,12 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
     }
 
     func tabView(_ aTabView: NSTabView, willClose tabViewItem: NSTabViewItem) {
-        guard let tab = tabViewItem.tabView as? Tab else { return }
+        guard let tab = tabViewItem.viewController as? Tab else {
+            return
+        }
         tab.stopLoadingTab()
+        tab.tabUrl = URL(string: "about:blank")
+        tab.loadTab()
     }
 
     func tabView(_ aTabView: NSTabView, menuFor tabViewItem: NSTabViewItem) -> NSMenu {
