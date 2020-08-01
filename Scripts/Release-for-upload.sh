@@ -1,9 +1,9 @@
 #!/bin/bash
 
-. "${SOURCE_ROOT}/build/Post-archive-exports.txt"
+. "${SOURCE_ROOT}/Build/Post-archive-exports.txt"
 
 # Directory created during the Changes-and-Notes.sh stage
-VIENNA_UPLOADS_DIR="${SOURCE_ROOT}/build/Uploads"
+VIENNA_UPLOADS_DIR="${SOURCE_ROOT}/Build/Uploads"
 DOWNLOAD_BASE_URL="${BASE_URL_TYP}://${BASE_URL_LOC}"
 
 TGZ_FILENAME="Vienna${N_VCS_TAG}.tar.gz"
@@ -21,7 +21,7 @@ case "${N_VCS_TAG}" in
 	;;
 esac
 
-cd "${VIENNA_UPLOADS_DIR}"
+pushd "${VIENNA_UPLOADS_DIR}"
 
 # Make the dSYM Bundle
 tar -czf "${dSYM_FILENAME}.tar.gz" --exclude '.DS_Store' "$ARCHIVE_DSYMS_PATH"
@@ -74,4 +74,5 @@ if [ -f "${VIENNA_UPLOADS_DIR}/changelog_rc.xml" ]; then
 fi
 
 open "${VIENNA_UPLOADS_DIR}"
+popd
 exit 0
