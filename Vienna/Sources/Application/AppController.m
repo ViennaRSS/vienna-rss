@@ -3482,7 +3482,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     if (theAction == @selector(markAllRead:))
     {
         Folder *folder = [db folderFromID:self.foldersTree.actualSelection];
-        if (folder.type == VNAFolderTypeRSS) {
+        if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) {
             *validateFlag = folder && folder.unreadCount > 0 && !db.readOnly && isMainWindowVisible;
         } else if (folder.type != VNAFolderTypeTrash) {
             *validateFlag = folder && !db.readOnly && db.countOfUnread > 0 && isMainWindowVisible;
