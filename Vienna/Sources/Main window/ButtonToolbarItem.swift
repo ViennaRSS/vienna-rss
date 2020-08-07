@@ -59,9 +59,7 @@ class ButtonToolbarItem: NSToolbarItem {
             return
         }
 
-        if let responder = responder as? NSToolbarItemValidation {
-            isEnabled = responder.validateToolbarItem(self)
-        }
+        isEnabled = (responder as AnyObject).validateToolbarItem(self)
     }
 
 }
