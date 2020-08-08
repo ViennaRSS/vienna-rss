@@ -995,7 +995,7 @@
 		{
 			NSArray * articleArray = [folder arrayOfUnreadArticlesRefs];
 			[refArray addObjectsFromArray:articleArray];
-			[self innerMarkReadByRefsArray:articleArray readFlag:YES];
+			[[OpenReader sharedManager] markAllReadInFolder:folder];
 		}
 		else
 		{

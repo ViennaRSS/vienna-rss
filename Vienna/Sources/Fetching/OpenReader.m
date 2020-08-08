@@ -23,7 +23,6 @@
 #import "HelperFunctions.h"
 #import "Folder.h"
 #import "Database.h"
-#import "AppController.h"
 #import "RefreshManager.h"
 #import "Preferences.h"
 #import "StringExtensions.h"
@@ -44,9 +43,8 @@ NSString *APIBaseURL;
 BOOL hostSendsHexaItemId;
 BOOL hostRequiresSParameter;
 BOOL hostRequiresHexaForFeedId;
-BOOL hostRequiresInoreaderAdditionalHeaders;
+BOOL hostRequiresInoreaderHeaders;
 BOOL hostRequiresBackcrawling;
-NSDictionary *inoreaderAdditionalHeaders;
 
 typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     notAuthenticated = 0,
@@ -64,10 +62,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 @property (atomic) NSString *clientAuthToken;
 @property (nonatomic) NSTimer *tTokenTimer;
 @property (nonatomic) NSTimer *clientAuthTimer;
-@property (nonatomic) NSMutableArray *tTokenWaitQueue;
 @property (nonatomic) dispatch_queue_t asyncQueue;
 @property (nonatomic) OpenReaderStatus openReaderStatus;
-@property (readonly, class, nonatomic) NSString *currentTimestamp;
 
 @end
 
@@ -80,18 +76,13 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     self = [super init];
     if (self) {
         // Initialization code here.
-        _tTokenWaitQueue = [[NSMutableArray alloc] init];
         _openReaderStatus = notAuthenticated;
         _countOfNewArticles = 0;
         openReaderHost = nil;
         username = nil;
         password = nil;
         APIBaseURL = nil;
-        inoreaderAdditionalHeaders = @{
-            @"AppID": @"1000001359",
-            @"AppKey": @"rAlfs2ELSuFxZJ5adJAW54qsNbUa45Qn"
-        };
-        _asyncQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.openReaderTasks", NULL);
+        _asyncQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.openReaderTasks", DISPATCH_QUEUE_SERIAL);
     }
 
     return self;
@@ -123,7 +114,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 -(NSMutableURLRequest *)requestFromURL:(NSURL *)url
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [self commonRequestPrepare:request];
+    [self addClientTokenToRequest:request];
+    [self specificHeadersPrepare:request];
     return request;
 }
 
@@ -138,13 +130,12 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     return request;
 }
 
--(void)commonRequestPrepare:(NSMutableURLRequest *)request
+-(void)specificHeadersPrepare:(NSMutableURLRequest *)request
 {
-    [self addClientTokenToRequest:request];
-    if (hostRequiresInoreaderAdditionalHeaders) {
-        NSMutableDictionary *theHeaders = [request.allHTTPHeaderFields mutableCopy] ? : [[NSMutableDictionary alloc] init];
-        [theHeaders addEntriesFromDictionary:inoreaderAdditionalHeaders];
-        request.allHTTPHeaderFields = theHeaders;
+    if (hostRequiresInoreaderHeaders) {
+        [request setValue:[Preferences standardPreferences].syncingAppId forHTTPHeaderField:@"AppID"];
+        [request setValue:[Preferences standardPreferences].syncingAppKey forHTTPHeaderField:@"AppKey"];
+        [request setValue:@"Mozilla/5.0 (compatible)" forHTTPHeaderField:@"User-Agent"];
     }
 }
 
@@ -177,12 +168,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost]];
         NSMutableURLRequest *myRequest = [NSMutableURLRequest requestWithURL:url];
         myRequest.HTTPMethod = @"POST";
-
-        if (hostRequiresInoreaderAdditionalHeaders) {
-            NSMutableDictionary *theHeaders = [myRequest.allHTTPHeaderFields mutableCopy];
-            [theHeaders addEntriesFromDictionary:inoreaderAdditionalHeaders];
-            myRequest.allHTTPHeaderFields = theHeaders;
-        }
+        [myRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [self specificHeadersPrepare:myRequest];
         [myRequest setPostValue:username forKey:@"Email"];
         [myRequest setPostValue:password forKey:@"Passwd"];
 
@@ -193,37 +180,32 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             NSURLSessionDataTask * task = [[NSURLSession sharedSession] dataTaskWithRequest:myRequest
                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                     self.openReaderStatus = notAuthenticated;
-                    if (error) {
-                        NSLog(@"clientAuthOperation error for URL %@", ((NSHTTPURLResponse *)response).URL);
-                        NSLog(@"Headers %@", ((NSHTTPURLResponse *)response).allHeaderFields);
-                        NSLog(@"Response data %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-                        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
-                    } else {
-                        if (((NSHTTPURLResponse *)response).statusCode != 200) {
-                            NSLog(@"clientAuthOperation statusCode %ld for URL %@", ((NSHTTPURLResponse *)response).statusCode, ((NSHTTPURLResponse *)response).URL);
-                            NSLog(@"Headers %@", ((NSHTTPURLResponse *)response).allHeaderFields);
-                            [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
-                        } else {         // statusCode 200
-                            NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                            NSArray *components = [response componentsSeparatedByString:@"\n"];
-                            for (NSString * item in components) {
-                                if([item hasPrefix:@"Auth="]) {
-                                    self.clientAuthToken = [item substringFromIndex:5];
-                                    self.openReaderStatus = missingTToken;
-                                    break;
-                                }
-                            }
+					if (error) {
+						NSString * info = error.localizedDescription;
+						[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:info];
+					} else if (((NSHTTPURLResponse *)response).statusCode != 200) {
+						NSString * info = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+						[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:info];
+ 					} else {         // statusCode 200
+						NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+						NSArray *components = [response componentsSeparatedByString:@"\n"];
+						for (NSString * item in components) {
+							if([item hasPrefix:@"Auth="]) {
+								self.clientAuthToken = [item substringFromIndex:5];
+								self.openReaderStatus = missingTToken;
+								break;
+							}
+						}
 
-                            if (self.openReaderStatus == missingTToken && (self.clientAuthTimer == nil || !self.clientAuthTimer.valid)) {
-                                //new request every 6 days
-                                self.clientAuthTimer = [NSTimer scheduledTimerWithTimeInterval:6 * 24 * 3600
-                                                                                        target:self
-                                                                                      selector:@selector(resetAuthentication)
-                                                                                      userInfo:nil
-                                                                                       repeats:YES];
-                            }
-                        }
-                    }  // if error
+						if (self.openReaderStatus == missingTToken && (self.clientAuthTimer == nil || !self.clientAuthTimer.valid)) {
+							//new request every 6 days
+							self.clientAuthTimer = [NSTimer scheduledTimerWithTimeInterval:6 * 24 * 3600
+																					target:self
+																				  selector:@selector(resetAuthentication)
+																				  userInfo:nil
+																				   repeats:YES];
+						}
+                    }  // if statusCode 200
 
                     // Signal that we are done
                     dispatch_semaphore_signal(sema);
@@ -257,7 +239,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     hostSendsHexaItemId = NO;
     hostRequiresSParameter = NO;
     hostRequiresHexaForFeedId = NO;
-    hostRequiresInoreaderAdditionalHeaders = NO;
+    hostRequiresInoreaderHeaders = NO;
     hostRequiresBackcrawling = YES;
     // settings for specific kind of servers
     if ([openReaderHost isEqualToString:@"theoldreader.com"]) {
@@ -267,7 +249,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         hostRequiresBackcrawling = NO;
     }
     if ([openReaderHost rangeOfString:@"inoreader.com"].length != 0) {
-        hostRequiresInoreaderAdditionalHeaders = YES;
+        hostRequiresInoreaderHeaders = YES;
         hostRequiresBackcrawling = NO;
     }
     if ([openReaderHost rangeOfString:@"bazqux.com"].length != 0) {
@@ -283,28 +265,19 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 -(void)getTokenForRequest:(NSMutableURLRequest *)clientRequest
 {
     static NSOperation * tTokenOperation;
+    dispatch_semaphore_t sema;
 
     if (self.openReaderStatus == fullyAuthenticated) {
         [clientRequest setPostValue:self.tToken forKey:@"T"];
         return;
-    } else if (self.openReaderStatus == waitingTToken && tTokenOperation != nil && !tTokenOperation.isFinished) {
-        if (clientRequest != nil) {
-            [clientRequest setInUserInfo:tTokenOperation forKey:@"dependency"];
-            [self.tTokenWaitQueue addObject:clientRequest];
-        }
-        return;
-    } else if (self.openReaderStatus == notAuthenticated || self.openReaderStatus == waitingClientToken) {
-        // in principle, this should only happen with _openReaderStatus == notAuthenticated, after failure to get clientAuthToken
-        if (clientRequest != nil) {
-            [self.tTokenWaitQueue addObject:clientRequest];
-        }
-        return;
     } else {
-        // openReaderStatus ==  missingTToken
+        // we might get here when status is missingTToken or waitingClientToken or notAuthenticated
         NSMutableURLRequest * myRequest = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
         self.openReaderStatus = waitingTToken;
-        [[RefreshManager sharedManager] suspendConnectionsQueue];
-        tTokenOperation = [[RefreshManager sharedManager] addConnection:myRequest
+        // semaphore with count equal to zero for synchronizing completion of work
+        sema = dispatch_semaphore_create(0);
+        tTokenOperation = [NSBlockOperation blockOperationWithBlock:^(void) {
+          NSURLSessionDataTask * task = [[NSURLSession sharedSession] dataTaskWithRequest:myRequest
             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                 if (error) {
                     NSLog(@"tTokenOperation error for URL %@", myRequest.URL);
@@ -314,15 +287,9 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     NSLog(@"Response data %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                     self.tToken = nil;
                     self.openReaderStatus = missingTToken;
-                    [self.tTokenWaitQueue removeAllObjects];
                 } else {
-                    [[RefreshManager sharedManager] suspendConnectionsQueue];
                     self.tToken = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                     self.openReaderStatus = fullyAuthenticated;
-                    for (id obj in self.tTokenWaitQueue) {
-                        [(NSMutableURLRequest *)obj setPostValue:self.tToken forKey:@"T"];
-                    }
-                    [self.tTokenWaitQueue removeAllObjects];
                     if (self.tTokenTimer == nil || !self.tTokenTimer.valid) {
                         //tokens expire after 30 minutes : renew them every 25 minutes
                         self.tTokenTimer = [NSTimer scheduledTimerWithTimeInterval:25 * 60
@@ -331,15 +298,20 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                                                                           userInfo:nil
                                                                            repeats:YES];
                     }
-                    [[RefreshManager sharedManager] resumeConnectionsQueue];
                 }
+				// Signal that we are done with the synchronous task
+				dispatch_semaphore_signal(sema);
+          }];
+          if (@available(macOS 10.10, *)) {
+              task.priority = NSURLSessionTaskPriorityHigh;
+          };
+          [task resume];
         }];
-        if (clientRequest != nil) {
-            [clientRequest setInUserInfo:tTokenOperation forKey:@"dependency"];
-            [self.tTokenWaitQueue addObject:clientRequest];
-        }
-        [[RefreshManager sharedManager] resumeConnectionsQueue];
-    } // missingTToken
+        [tTokenOperation start];
+        // we wait until the task response block above will send a signal
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        [clientRequest setPostValue:self.tToken forKey:@"T"];
+    } // missingTToken or waitingClientToken or notAuthenticated
 } // getTokenForRequest
 
 -(void)renewTToken
@@ -444,18 +416,16 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         }
     }
 
-    NSString *feedIdentifier;
-    if (hostRequiresHexaForFeedId) {
-        feedIdentifier = thisFolder.feedURL.lastPathComponent;
-    } else {
-        feedIdentifier =  thisFolder.feedURL;
+    NSString *feedIdentifier = thisFolder.remoteId;
+    if (feedIdentifier == nil || ![feedIdentifier hasPrefix:@"feed/"]) {
+            return;
     }
 
     NSURL *refreshFeedUrl =
         [NSURL URLWithString:[NSString stringWithFormat:
-                              @"%@stream/contents/feed/%@?client=%@&comments=false&likes=false%@&ck=%@&output=json",
+                              @"%@stream/contents/%@?client=%@&comments=false&likes=false%@&output=json",
                               APIBaseURL,
-                              percentEscape(feedIdentifier), ClientName, itemsLimitation, OpenReader.currentTimestamp]];
+                              [OpenReader escapeFeedId:feedIdentifier], ClientName, itemsLimitation]];
 
     NSMutableURLRequest *request = [self requestFromURL:refreshFeedUrl];
     [request setUserInfo:
@@ -463,9 +433,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
     // Request id's of unread items
     NSString *args =
-        [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&xt=user/-/state/com.google/read&n=1000&output=json",
-         OpenReader.currentTimestamp, ClientName,
-         percentEscape(feedIdentifier)];
+        [NSString stringWithFormat:@"?client=%@&s=%@&xt=user/-/state/com.google/read&n=1000&output=json", ClientName,
+         [OpenReader escapeFeedId:feedIdentifier]];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
     NSMutableURLRequest *request2 = [self requestFromURL:url];
     [request2 setUserInfo:@{ @"folder": thisFolder, @"log": aItem }];
@@ -480,8 +449,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     }
 
     NSString *args3 =
-        [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", OpenReader.currentTimestamp, ClientName,
-         percentEscape(feedIdentifier), starredSelector];
+        [NSString stringWithFormat:@"?client=%@&s=%@&%@&n=1000&output=json", ClientName,
+         [OpenReader escapeFeedId:feedIdentifier], starredSelector];
     NSURL *url3 = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args3]];
     NSMutableURLRequest *request3 = [self requestFromURL:url3];
     [request3 setUserInfo:@{ @"folder": thisFolder, @"log": aItem }];
@@ -537,6 +506,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     [aItem setStatus:NSLocalizedString(@"Error", nil)];
     [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
     [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
+    [refreshedFolder clearNonPersistedFlag:VNAFolderFlagSyncedOK]; // get ready for next request
 }
 
 // callback
@@ -714,6 +684,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             });
             [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
             [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
+            [refreshedFolder clearNonPersistedFlag:VNAFolderFlagSyncedOK];
         }
     });     //block for dispatch_async
 } // feedRequestDone
@@ -773,7 +744,9 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         } else { //response status other than OK (200)
             [aItem appendDetail:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Error", nil),
                                     [NSHTTPURLResponse localizedStringForStatusCode:((NSHTTPURLResponse *)response).statusCode]]];
-            [aItem setStatus:NSLocalizedString(@"Error", nil)];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [aItem setStatus:NSLocalizedString(@"Error", nil)];
+            });
             [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
             [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
         }
@@ -836,6 +809,43 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     });     //block for dispatch_async
 } // starredRequestDone
 
+-(void)loadSubscriptions
+{
+    [[RefreshManager sharedManager] suspendConnectionsQueue];
+    NSMutableURLRequest *subscriptionRequest =
+        [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json", APIBaseURL,
+                                                   ClientName]]];
+    __weak typeof(self) weakSelf = self;
+    NSOperation * subscriptionOperation = [[RefreshManager sharedManager] addConnection:subscriptionRequest
+        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error) {
+                [weakSelf requestFailed:subscriptionRequest response:response error:error];
+            } else {
+                [weakSelf subscriptionsRequestDone:subscriptionRequest response:response data:data];
+            }
+        }
+    ];
+
+    NSMutableURLRequest *unreadCountRequest =
+        [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@unread-count?client=%@&output=json&allcomments=false",
+                                                   APIBaseURL,
+                                                   ClientName]]];
+    self.unreadCountOperation = [[RefreshManager sharedManager] addConnection:unreadCountRequest
+        completionHandler:^(NSData *data1, NSURLResponse *response, NSError *error) {
+            if (error) {
+                [weakSelf requestFailed:unreadCountRequest response:response error:error];
+            } else {
+                [weakSelf unreadCountDone:unreadCountRequest response:response data:data1];
+            }
+            weakSelf.statusMessage = @"";
+        }
+    ];
+    [self.unreadCountOperation addDependency:subscriptionOperation];
+    [[RefreshManager sharedManager] resumeConnectionsQueue];
+    self.statusMessage = NSLocalizedString(@"Fetching Open Reader Subscriptions…", nil);
+} // loadSubscriptions
+
+// callback 1  to loadSubscriptions
 -(void)subscriptionsRequestDone:(NSMutableURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data
 {
     NSDictionary *subscriptionsDict;
@@ -845,27 +855,23 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                                                           error:&jsonError];
     NSMutableArray *localFeeds = [NSMutableArray array];
     NSMutableArray *remoteFeeds = [NSMutableArray array];
-    NSArray *localFolders = APPCONTROLLER.folders;
+    Database * db = [Database sharedManager];
+    NSArray *localFolders = db.arrayOfAllFolders;
 
     for (Folder *f in localFolders) {
-        if (f.feedURL && f.type == VNAFolderTypeOpenReader) {
-            [localFeeds addObject:f.feedURL];
+        if (f.isOpenReaderFolder && ![f.remoteId isEqualToString:@"0"]) {
+            [localFeeds addObject:f.remoteId];
         }
     }
 
     for (NSDictionary *feed in subscriptionsDict[@"subscriptions"]) {
         NSString *feedID = feed[@"id"];
-        if (feedID == nil) {
+        if (feedID == nil || ![feedID hasPrefix:@"feed/"]) {
             break;
         }
         NSString *feedURL = feed[@"url"];
-        if (feedURL == nil || hostRequiresHexaForFeedId) { // TheOldReader requires BSON identifier in stream Ids instead of URL (ex: feed/0125ef...)
-            NSString * feedIdentifier = [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)];
-            if (hostRequiresHexaForFeedId) { // TheOldReader
-                feedURL = [NSString stringWithFormat:@"https://%@/reader/public/atom/%@", openReaderHost, feedIdentifier];
-            } else { // most services use feed URL as identifier (like GoogleReader did)
-                feedURL = feedIdentifier;
-            }
+        if (!feedURL) {
+            feedURL = [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)];
         }
 
         NSString *folderName = nil;
@@ -888,92 +894,142 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         if (feed[@"title"]) {
             rssTitle = feed[@"title"];
         }
-        if (![localFeeds containsObject:feedURL]) {
-            // folderName could be nil
-            NSArray *params = folderName ? @[feedURL, rssTitle, folderName] : @[feedURL, rssTitle];
-            [self createNewSubscription:params];
+        if (![localFeeds containsObject:feedID]) {
+        // legacy search in stored URLs
+            NSString *legacyKey;
+            if (hostRequiresHexaForFeedId) {                     // TheOldReader
+                NSString *identifier =
+                  [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)];
+                legacyKey = [NSString stringWithFormat:@"https://%@/reader/public/atom/%@", openReaderHost, identifier];
+            } else {
+                legacyKey = feedURL;
+            }
+            Folder *f = [db folderFromFeedURL:legacyKey];
+            if (f && f.isOpenReaderFolder) {         // exists already, but we didn't store the remoteId
+                [db setRemoteId:feedID forFolder:f.itemId];
+                [db setFeedURL:feedURL forFolder:f.itemId];
+            } else {
+                // we need to create
+                // folderName could be nil
+                NSArray *params = folderName ? @[feedID, feedURL, rssTitle, folderName] : @[feedID, feedURL, rssTitle];
+                [self createNewSubscription:params];
+            }
         } else {
             // the feed is already known
-            // set HomePage if the info is available
+            // set HomePage and other infos if they are available
             NSString *homePageURL = feed[@"htmlUrl"];
-            if (homePageURL) {
-                for (Folder *localFolder in localFolders) {
-                    if (localFolder.type == VNAFolderTypeOpenReader && [localFolder.feedURL isEqualToString:feedURL]) {
-                        Database * db = [Database sharedManager];
-                        [db setHomePage:homePageURL forFolder:localFolder.itemId];
-                        if ([db folderFromName:rssTitle] == nil) { // no conflict
-                            [db setName:rssTitle forFolder:localFolder.itemId];
-                        };
-                        break;
+            for (Folder *localFolder in localFolders) {
+                if (localFolder.isOpenReaderFolder && [localFolder.remoteId isEqualToString:feedID]) {
+                    NSInteger nativeId = localFolder.itemId;
+                    [db setFeedURL:feedURL forFolder:nativeId];
+                    if (homePageURL) {
+                        [db setHomePage:homePageURL forFolder:nativeId];
                     }
+                    if ([db folderFromName:rssTitle] == nil) { // no conflict
+                        [db setName:rssTitle forFolder:nativeId];
+                    }
+                    NSInteger neededParentId = [db folderFromName:folderName].itemId;
+                    if (neededParentId == 0) {
+                        neededParentId = VNAFolderTypeRoot;
+                    }
+                    if (localFolder.parentId != neededParentId) {
+                        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_OpenReaderFolderChange"
+                                                              object:@[ [NSNumber numberWithInteger:nativeId],
+                                                                        [NSNumber numberWithInteger:neededParentId],
+                                                                        [NSNumber numberWithInteger:0]]];
+                    }
+                    break;
                 }
             }
         }
 
-        [remoteFeeds addObject:feedURL];
+        [remoteFeeds addObject:feedID];
     }
-
 
     if (subscriptionsDict[@"subscriptions"] != nil) { // detect probable authentication error
         //check if we have a folder which is not registered as a Open Reader feed
-        for (Folder *f in APPCONTROLLER.folders) {
-            if (f.type == VNAFolderTypeOpenReader && ![remoteFeeds containsObject:f.feedURL]) {
-                [[Database sharedManager] deleteFolder:f.itemId];
+        for (Folder *f in localFolders) {
+            if (f.isOpenReaderFolder) {
+             	if ([remoteFeeds containsObject:f.remoteId]  && [f.remoteId hasPrefix:@"feed/"]) {
+             		[f setNonPersistedFlag:VNAFolderFlagSyncedOK];
+            	} else {
+                	[[Database sharedManager] deleteFolder:f.itemId];
+            	}
             }
         }
     }
 } // subscriptionsRequestDone
 
--(void)loadSubscriptions
+// callback 2 to loadSubscriptions
+-(void)unreadCountDone:(NSMutableURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data
 {
-    NSMutableURLRequest *subscriptionRequest =
-        [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json", APIBaseURL,
-                                                   ClientName]]];
-    __weak typeof(self) weakSelf = self;
-    [[RefreshManager sharedManager] addConnection:subscriptionRequest
-        completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
-            if (error) {
-                [weakSelf requestFailed:subscriptionRequest response:response error:error];
-            } else {
-                [weakSelf subscriptionsRequestDone:subscriptionRequest response:response data:data];
+    NSDictionary *unreadDict;
+    NSError *jsonError;
+    unreadDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+    for (NSDictionary *feed in unreadDict[@"unreadcounts"]) {
+        NSString *feedID = feed[@"id"];
+        if ([feedID hasPrefix:@"feed/"]) {
+            Folder *folder = [[Database sharedManager] folderFromRemoteId:feedID];
+            if (folder) {
+                NSInteger remoteCount = ((NSString *)feed[@"count"]).intValue;
+                NSInteger localCount = folder.unreadCount;
+                NSInteger remoteTimestamp = ((NSString *)feed[@"newestItemTimestampUsec"]).longLongValue / 1000000; // convert in truncated seconds
+                NSString *folderLastUpdateString = folder.lastUpdateString;
+                if (folderLastUpdateString == nil || [folderLastUpdateString isEqualToString:@""] ||
+                    [folderLastUpdateString isEqualToString:@"(null)"])
+                {
+                    folderLastUpdateString = @"0";
+                }
+                NSInteger localTimestamp = folderLastUpdateString.longLongValue;
+                if (remoteTimestamp > localTimestamp || remoteCount != localCount) {
+                    // discrepancy between local feed and remote OpenReader server
+                    [folder clearNonPersistedFlag:VNAFolderFlagSyncedOK];
+                }
             }
-            weakSelf.statusMessage = @"";
         }
-    ];
+    }
+} // unreadCountDone
 
-    self.statusMessage = NSLocalizedString(@"Fetching Open Reader Subscriptions…", nil);
-}
-
--(void)subscribeToFeed:(NSString *)feedURL
+-(void)subscribeToFeed:(NSString *)feedURL withLabel:(NSString *)label
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/quickadd?client=%@", APIBaseURL, ClientName]];
 
     NSMutableURLRequest *request = [self authentifiedFormRequestFromURL:url];
     [request setPostValue:feedURL forKey:@"quickadd"];
+    [request setInUserInfo:label  forKey:@"label"];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:request
         completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
             if (error) {
                 [weakSelf requestFailed:request response:response error:error];
             } else {
-                [weakSelf requestFinished:request response:response data:data];
+                [weakSelf subscribeToFeedDone:request response:response data:data];
             }
         }
     ];
 }
 
--(void)unsubscribeFromFeed:(NSString *)feedURL
+-(void)subscribeToFeedDone:(NSMutableURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data
+{
+    NSDictionary *responseDict;
+    NSError *jsonError;
+    responseDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+    NSString *label = ((NSDictionary *)[request userInfo])[@"label"];
+    NSString * feedIdentifier = responseDict[@"streamId"];
+    if (feedIdentifier) {
+        if (label) {
+            [self setFolderLabel:label forFeed:feedIdentifier set:TRUE];
+        }
+	    [self loadSubscriptions];
+    }
+}
+
+-(void)unsubscribeFromFeedIdentifier:(NSString *)feedIdentifier
 {
     NSURL *unsubscribeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit", APIBaseURL]];
     NSMutableURLRequest *myRequest = [self authentifiedFormRequestFromURL:unsubscribeURL];
     [myRequest setPostValue:@"unsubscribe" forKey:@"ac"];
-    NSString *feedIdentifier;
-    if (hostRequiresHexaForFeedId) {
-        feedIdentifier = feedURL.lastPathComponent;
-    } else {
-        feedIdentifier = feedURL;
-    }
-    [myRequest setPostValue:[NSString stringWithFormat:@"feed/%@", feedIdentifier] forKey:@"s"];
+    [myRequest setPostValue:feedIdentifier forKey:@"s"];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:myRequest
         completionHandler :^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -990,19 +1046,13 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
  * add or remove a label (folder name) to a newsfeed
  * set parameter : TRUE => add ; FALSE => remove
  */
--(void)setFolderLabel:(NSString *)folderName forFeed:(NSString *)feedURL set:(BOOL)flag
+-(void)setFolderLabel:(NSString *)folderName forFeed:(NSString *)feedIdentifier set:(BOOL)flag
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?client=%@", APIBaseURL, ClientName]];
 
     NSMutableURLRequest *request = [self authentifiedFormRequestFromURL:url];
     [request setPostValue:@"edit" forKey:@"ac"];
-    NSString *feedIdentifier;
-    if (hostRequiresHexaForFeedId) {
-        feedIdentifier = feedURL.lastPathComponent;
-    } else {
-        feedIdentifier = feedURL;
-    }
-    [request setPostValue:[NSString stringWithFormat:@"feed/%@", feedIdentifier] forKey:@"s"];
+    [request setPostValue:feedIdentifier forKey:@"s"];
     [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", folderName] forKey:flag ? @"a" : @"r"];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:request
@@ -1019,19 +1069,13 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 /* setFolderTitle:forFeed:
  * set title of a newsfeed
  */
--(void)setFolderTitle:(NSString *)folderName forFeed:(NSString *)feedURL
+-(void)setFolderTitle:(NSString *)folderName forFeed:(NSString *)feedIdentifier
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?client=%@", APIBaseURL, ClientName]];
 
     NSMutableURLRequest *request = [self authentifiedFormRequestFromURL:url];
     [request setPostValue:@"edit" forKey:@"ac"];
-    NSString *feedIdentifier;
-    if (hostRequiresHexaForFeedId) {
-        feedIdentifier = feedURL.lastPathComponent;
-    } else {
-        feedIdentifier = feedURL;
-    }
-    [request setPostValue:[NSString stringWithFormat:@"feed/%@", feedIdentifier] forKey:@"s"];
+    [request setPostValue:feedIdentifier forKey:@"s"];
     [request setPostValue:folderName forKey:@"t"];
     __weak typeof(self) weakSelf = self;
     [[RefreshManager sharedManager] addConnection:request
@@ -1084,6 +1128,49 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     }
 }
 
+-(void)markAllReadInFolder:(Folder *)folder
+{
+    NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@mark-all-as-read", APIBaseURL]];
+    NSMutableURLRequest *request = [self authentifiedFormRequestFromURL:markReadURL];
+    [request setUserInfo: @{ @"folder": folder}];
+    NSString *feedIdentifier = folder.remoteId;
+    [request setPostValue:feedIdentifier forKey:@"s"];
+    NSString *folderLastUpdateString = folder.lastUpdateString;
+    //This is a workaround throw a BAD folderupdate value on DB
+    if (folderLastUpdateString == nil || [folderLastUpdateString isEqualToString:@""] ||
+        [folderLastUpdateString isEqualToString:@"(null)"])
+    {
+        folderLastUpdateString = @"0";
+    }
+    NSInteger localTimestamp = (folderLastUpdateString.longLongValue +1)* 1000000 ; // next second converted to microseconds
+    NSString * microsecondsUpdateString = @(localTimestamp).stringValue; // string value of NSNumber
+    [request setPostValue:microsecondsUpdateString forKey:@"ts"];
+    __weak typeof(self) weakSelf = self;
+    [[RefreshManager sharedManager] addConnection:request
+		completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+			if (error) {
+			[weakSelf requestFailed:request response:response error:error];
+			} else {
+			[weakSelf markAllReadDone:request response:response data:data];
+			}
+		}
+    ];
+} // markAllReadInFolder
+
+// callback : we check if the server did confirm the read status change
+-(void)markAllReadDone:(NSMutableURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data
+{
+    NSString *requestResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    if ([requestResponse isEqualToString:@"OK"]) {
+        Folder *folder = ((NSDictionary *)[request userInfo])[@"folder"];
+        [[Database sharedManager] markFolderRead:folder.itemId];
+        [folder markArticlesInCacheRead];
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
+        [nc postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:@(folder.itemId)];
+    }
+}
+
 -(void)markStarred:(Article *)article starredFlag:(BOOL)flag
 {
     NSURL *markStarredURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag", APIBaseURL]];
@@ -1110,20 +1197,21 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 -(void)createNewSubscription:(NSArray *)params
 {
     NSInteger underFolder = VNAFolderTypeRoot;
-    NSString *feedURL = params[0];
+    NSString *feedID = params[0];
+    NSString *feedURL = params[1];
     NSString *rssTitle = [NSString stringWithFormat:@""];
+    Database *db = [Database sharedManager];
 
-    if (params.count > 1) {
-        if (params.count > 2) {
-            NSString *folderName = params[2];
-            Database *db = [Database sharedManager];
+    if (params.count > 2) {
+        rssTitle = params[2];
+        if (params.count > 3) {
+            NSString *folderName = params[3];
             Folder *folder = [db folderFromName:folderName];
             underFolder = folder.itemId;
         }
-        rssTitle = params[1];
     }
 
-    [APPCONTROLLER createNewGoogleReaderSubscription:feedURL underFolder:underFolder withTitle:rssTitle afterChild:-1];
+    [db addOpenReaderFolder:rssTitle underParent:underFolder afterChild:-1 subscriptionURL:feedURL remoteId:feedID];
 }
 
 -(void)createFolders:(NSMutableArray *)params
@@ -1157,13 +1245,12 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
 
 /**
- * Get the current timestamp
+ * Percent escape the part after "feed/"
  *
- * @return current timestamp as a string
  */
-+(NSString *)currentTimestamp
++(NSString *)escapeFeedId:(NSString *)identifier
 {
-    return [NSString stringWithFormat:@"%0.0f", NSDate.date.timeIntervalSince1970];
+    return [NSString stringWithFormat:@"feed/%@", percentEscape([identifier stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)])];
 }
 
 @end

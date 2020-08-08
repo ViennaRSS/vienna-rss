@@ -77,6 +77,8 @@ NSString * MAPref_GoogleNewSubscription = @"GoogleNewSubscription";
 NSString * MAPref_ConcurrentDownloads = @"ConcurrentDownloads"; 
 NSString * MAPref_SyncServer = @"SyncServer";
 NSString * MAPref_SyncingUser = @"SyncingUser";
+NSString * MAPref_SyncingAppId = @"SyncingAppId";
+NSString * MAPref_SyncingAppKey = @"SyncingAppKey";
 NSString * MAPref_SendSystemProfileInfo = @"SUSendProfileInfo";
 NSString * MAPref_AlwaysAcceptBetas = @"AlwayAcceptBetas";
 

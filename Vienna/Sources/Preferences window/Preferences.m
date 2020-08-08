@@ -192,6 +192,8 @@ static Preferences * _standardPreferences = nil;
         prefersGoogleNewSubscription = [self boolForKey:MAPref_GoogleNewSubscription];
 		syncServer = [userPrefs valueForKey:MAPref_SyncServer];
 		syncingUser = [userPrefs valueForKey:MAPref_SyncingUser];
+		_syncingAppId = [userPrefs valueForKey:MAPref_SyncingAppId];
+		_syncingAppKey = [userPrefs valueForKey:MAPref_SyncingAppKey];
 				
 		//Sparkle autoupdate
 		checkForNewOnStartup = [SUUpdater sharedUpdater].automaticallyChecksForUpdates;
@@ -284,6 +286,8 @@ static Preferences * _standardPreferences = nil;
     defaultValues[MAPref_ConcurrentDownloads] = @(MA_Default_ConcurrentDownloads);
     defaultValues[MAPref_SyncGoogleReader] = boolNo;
     defaultValues[MAPref_GoogleNewSubscription] = boolNo;
+    defaultValues[MAPref_SyncingAppId] = @"1000001359";
+    defaultValues[MAPref_SyncingAppKey] = @"rAlfs2ELSuFxZJ5adJAW54qsNbUa45Qn";
     defaultValues[MAPref_AlwaysAcceptBetas] = boolNo;
 	
 	return [defaultValues copy];

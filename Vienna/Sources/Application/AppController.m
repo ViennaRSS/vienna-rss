@@ -1266,7 +1266,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     if (self.mainWindow.keyWindow) {
         NSAlert *alert = [NSAlert new];
         alert.messageText = NSLocalizedString(@"Open Reader Authentication Failed",nil);
-        alert.informativeText = NSLocalizedString(@"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access.",nil);
+        if (![nc.object isEqualToString:@""]) {
+            alert.informativeText = nc.object;
+        } else {
+            alert.informativeText = NSLocalizedString(@"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access.",nil);
+        }
         [alert beginSheetModalForWindow:self.mainWindow completionHandler:nil];
     }
 }
@@ -2388,43 +2392,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     }
 }
 
-/* createNewGoogleReaderSubscription
- * Create a new Open Reader subscription for the specified URL under the given parent folder.
- */
-
--(void)createNewGoogleReaderSubscription:(NSString *)url underFolder:(NSInteger)parentId withTitle:(NSString*)title afterChild:(NSInteger)predecessorId
-{
-	NSLog(@"Adding Open Reader Feed: %@ with Title: %@",url,title);
-	// Replace feed:// with http:// if necessary
-	if ([url hasPrefix:@"feed://"])
-		url = [NSString stringWithFormat:@"http://%@", [url substringFromIndex:7]];
-	
-	// If the folder already exists, just select it.
-	Folder * folder = [db folderFromFeedURL:url];
-	if (folder != nil)
-	{
-		//[self.browser setActiveTabToPrimaryTab];
-		//[self.foldersTree selectFolder:[folder itemId]];
-		return;
-	}
-	
-	// Create then select the new folder.
-	NSInteger folderId = [db addGoogleReaderFolder:title
-                                       underParent:parentId
-                                        afterChild:predecessorId
-                                   subscriptionURL:url];
-		
-	if (folderId != -1)
-	{
-		//		[self.foldersTree selectFolder:folderId];
-		//		if (isAccessible(url))
-		//{
-			Folder * folder = [db folderFromID:folderId];
-			[[RefreshManager sharedManager] refreshSubscriptions:@[folder] ignoringSubscriptionStatus:NO];
-		//}
-	}
-}
-
 /* createNewSubscription
  * Create a new subscription for the specified URL under the given parent folder.
  */
@@ -2447,14 +2414,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	
 	// Create the new folder.
 	if ([Preferences standardPreferences].syncGoogleReader && [Preferences standardPreferences].prefersGoogleNewSubscription)
-	{	//creates in Google
-		OpenReader * myGoogle = [OpenReader sharedManager];
-		[myGoogle subscribeToFeed:urlString];
+	{	//creates in OpenReader
 		NSString * folderName = [db folderFromID:parentId].name;
-		if (folderName != nil)
-			[myGoogle setFolderLabel:folderName forFeed:urlString set:TRUE];
-		[myGoogle loadSubscriptions];
-
+		[[OpenReader sharedManager] subscribeToFeed:urlString withLabel:folderName];
 	}
 	else
 	{ //creates locally
@@ -2813,7 +2775,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             
 			if (folder.type == VNAFolderTypeOpenReader) {
 				NSLog(@"Unsubscribe Open Reader folder");
-				[[OpenReader sharedManager] unsubscribeFromFeed:folder.feedURL];
+				[[OpenReader sharedManager] unsubscribeFromFeedIdentifier:folder.remoteId];
 			}
 		}
 	}
@@ -3250,18 +3212,17 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)refreshAllSubscriptions:(id)sender
 {
-    // Reset the refresh timer
-    [self handleCheckFrequencyChange:nil];
-
-    // Kick off the refresh
     if (!self.connecting) {
         if ([Preferences standardPreferences].syncGoogleReader){
             [[OpenReader sharedManager] loadSubscriptions];
         }
+
+        // Reset the refresh timer
+        [self handleCheckFrequencyChange:nil];
+        // Kick off the refresh
         [[RefreshManager sharedManager] refreshSubscriptions:[self.foldersTree folders:0]
           ignoringSubscriptionStatus:NO];
     }
-
 }
 
 -(IBAction)forceRefreshSelectedSubscriptions:(id)sender {

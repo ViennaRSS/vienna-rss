@@ -95,6 +95,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         config.timeoutIntervalForRequest = 180;
         config.URLCache = nil;
         config.HTTPAdditionalHeaders = @{@"User-Agent": userAgent};
+        config.HTTPMaximumConnectionsPerHost = 6;
+        config.HTTPShouldUsePipelining = YES;
         _urlSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];
 
         NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -222,19 +224,31 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     statusMessageDuringRefresh = NSLocalizedString(@"Refreshing subscriptions…", nil);
 
     for (Folder * folder in foldersArray) {
-        if (folder.type == VNAFolderTypeGroup) {
+        if (folder.isGroupFolder) {
             [self refreshSubscriptions:[[Database sharedManager] arrayOfFolders:folder.itemId] ignoringSubscriptionStatus:NO];
-        } else if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) {
-            if (!folder.isUnsubscribed || ignoreSubStatus) {
-                if (![self isRefreshingFolder:folder ofType:MA_Refresh_Feed] &&
-                    ![self isRefreshingFolder:folder ofType:MA_Refresh_GoogleFeed])
-                {
-                    [self pumpSubscriptionRefresh:folder shouldForceRefresh:NO];
+        } else if (folder.isRSSFolder) {
+            if ((!folder.isUnsubscribed || ignoreSubStatus) && ![self isRefreshingFolder:folder ofType:MA_Refresh_Feed]) {
+                [self pumpSubscriptionRefresh:folder shouldForceRefresh:NO];
+            }
+        } else if (folder.isOpenReaderFolder) {
+            if ((!folder.isUnsubscribed || ignoreSubStatus)  && ![self isRefreshingFolder:folder ofType:MA_Refresh_GoogleFeed] &&
+                ![self isRefreshingFolder:folder ofType:MA_ForceRefresh_Google_Feed])
+            {
+                // we depend of pieces of info gathered by loadSubscriptions
+                NSOperation * op = [NSBlockOperation blockOperationWithBlock:^(void) {
+                     if (!folder.isSyncedOK) {
+                        [self pumpSubscriptionRefresh:folder shouldForceRefresh:NO];
+                     }
+                }];
+                NSOperation * unreadCountOperation = [OpenReader sharedManager].unreadCountOperation;
+                if (unreadCountOperation != nil && !unreadCountOperation.isFinished) {
+                    [op addDependency:unreadCountOperation];
                 }
+                [[NSOperationQueue mainQueue] addOperation:op];
             }
         }
     }
-}
+} // refreshSubscriptions
 
 /* refreshFolderIconCacheForSubscriptions
  * Add the folders specified in the foldersArray to the refresh queue.
@@ -1118,13 +1132,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                                                      }];
     [completionOperation addDependency:op];
     [[NSOperationQueue mainQueue] addOperation:completionOperation];
-
-    NSOperation *requiredOperation = ((NSDictionary *)[urlRequest userInfo])[@"dependency"];
-    if (requiredOperation != nil) {
-        op.queuePriority = NSOperationQueuePriorityLow;
-        [op addDependency:requiredOperation];
-        [urlRequest setInUserInfo:nil forKey:@"dependency"];
-    }
 
     [networkQueue addOperation:op];
     if (networkQueue.operationCount == 1) {       // networkQueue is NOT YET started

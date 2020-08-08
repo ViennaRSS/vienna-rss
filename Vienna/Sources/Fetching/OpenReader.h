@@ -20,17 +20,19 @@
 
 // Check if an accessToken is available
 @property (nonatomic, getter=isReady, readonly) BOOL ready;
+@property (nonatomic) NSOperation * unreadCountOperation;
 
 -(void)loadSubscriptions;
 -(void)clearAuthentication;
 -(void)resetAuthentication;
 
--(void)subscribeToFeed:(NSString *)feedURL;
--(void)unsubscribeFromFeed:(NSString *)feedURL;
+-(void)subscribeToFeed:(NSString *)feedURL withLabel:(NSString *)label;
+-(void)unsubscribeFromFeedIdentifier:(NSString *)feedIdentifier;
 -(void)markRead:(Article *)article readFlag:(BOOL)flag;
 -(void)markStarred:(Article *)article starredFlag:(BOOL)flag;
--(void)setFolderLabel:(NSString *)folderName forFeed:(NSString *)feedURL set:(BOOL)flag;
--(void)setFolderTitle:(NSString *)folderName forFeed:(NSString *)feedURL;
+-(void)markAllReadInFolder:(Folder *)folder;
+-(void)setFolderLabel:(NSString *)folderName forFeed:(NSString *)feedIdentifier set:(BOOL)flag;
+-(void)setFolderTitle:(NSString *)folderName forFeed:(NSString *)feedIdentifier;
 -(void)refreshFeed:(Folder*)thisFolder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:(BOOL)ignoreLimit;
 @property (nonatomic, readonly) NSUInteger countOfNewArticles;
 

@@ -147,7 +147,7 @@
 	[nc addObserver:self selector:@selector(handleFolderFontChange:) name:@"MA_Notify_FolderFontChange" object:nil];
 	[nc addObserver:self selector:@selector(handleShowFolderImagesChange:) name:@"MA_Notify_ShowFolderImages" object:nil];
 	[nc addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
-    [nc addObserver:self selector:@selector(handleGRSFolderChange:) name:@"MA_Notify_GRSFolderChange" object:nil];
+    [nc addObserver:self selector:@selector(handleOpenReaderFolderChange:) name:@"MA_Notify_OpenReaderFolderChange" object:nil];
 }
 
 -(NSMenu *)folderMenu
@@ -192,10 +192,10 @@
     return folderMenu;
 }
 
--(void)handleGRSFolderChange:(NSNotification *)nc
+-(void)handleOpenReaderFolderChange:(NSNotification *)nc
 {
-    // No need to sync with Google because this is triggered when Open Reader
-    // folder layout has changed. Making a sync call would be redundant.
+    // No need to sync with OpenReader server because this is triggered when
+    // folder layout has changed at server level. Making a sync call would be redundant.
     [self moveFolders:nc.object withGoogleSync:NO];
 }
 
@@ -1142,7 +1142,7 @@
         {
             [dbManager setName:newName forFolder:folder.itemId];
             if (folder.type == VNAFolderTypeOpenReader) {
-                [[OpenReader sharedManager] setFolderTitle:newName forFeed:folder.feedURL];
+                [[OpenReader sharedManager] setFolderTitle:newName forFeed:folder.remoteId];
             }
         }
 	}
@@ -1334,15 +1334,17 @@
 				[newParent setCanHaveChildren:YES];
 			if ([dbManager setParent:newParentId forFolder:folderId])
 			{
-				if (folder.type == VNAFolderTypeOpenReader)
+				if (sync && folder.type == VNAFolderTypeOpenReader)
 				{
-					OpenReader * myGoogle = [OpenReader sharedManager];
+					OpenReader * myReader = [OpenReader sharedManager];
 					// remove old label
 					NSString * folderName = [dbManager folderFromID:oldParentId].name;
-					[myGoogle setFolderLabel:folderName forFeed:folder.feedURL set:FALSE];
+					[myReader setFolderLabel:folderName forFeed:folder.remoteId set:FALSE];
 					// add new label
 					folderName = [dbManager folderFromID:newParentId].name;
-					[myGoogle setFolderLabel:folderName forFeed:folder.feedURL set:TRUE];
+					if (folderName) {
+					    [myReader setFolderLabel:folderName forFeed:folder.remoteId set:TRUE];
+					}
 				}
 			}
 			else
