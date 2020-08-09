@@ -108,23 +108,68 @@ sup {
 
 <h1 id="toc_0">Version Notes</h1>
 
-<h2 id="toc_1">3.5.5</h2>
+<h3 id="toc_1">Information:</h3>
 
 <ul>
-<li>Fix sizes of cells in Unified view</li>
-<li>Fix our own RSS URL</li>
-<li>Fix multiple problems with input and encoding of OpenReader credentials</li>
-<li>fix selection of next unread article through spacebar when the article view is empty</li>
-<li>Update link templates for zh-Hant language</li>
-<li>Update Swift support to version 5</li>
-<li>Udate to Xcode 11</li>
-<li>Update Sparkle version to 1.22</li>
-<li>Improve build system</li>
-<li>Replace deprecated routines</li>
-<li>Fix some problem with processing of localizable strings</li>
+<li>3.6.x versions of Vienna can be used on OS X 10.11 (El Capitan) or later only !</li>
+<li>The version of the database remains fully compatible with all Vienna 3.x.x versions.</li>
 </ul>
 
-<p><strong>Note</strong> : this version will upgrade the database ; but the newer version of the database remains fully compatible with all Vienna 3.x.x versions. So there is no reason to fear upgrading, or at least testing this 3.5.5 version.</p>
+<h2 id="toc_2">3.6.0 Beta 1</h2>
+
+<ul>
+<li>Lift deployment target to macOS 10.11 and start modernizing code</li>
+<li>Replace MASPreferences with Storyboard implementation (Preferences window)</li>
+</ul>
+
+<h2 id="toc_3">3.5.6</h2>
+
+<ul>
+<li>Vienna is now notarized (needed by macOS Catalina and later)</li>
+<li><p>Much improved OpenReader support :</p>
+
+<ul>
+<li>sensibly decrease the number of network requests:
+
+<ul>
+<li>use single &#39;mark-all-as-read&#39; requests for marking folders read</li>
+<li>avoid requesting feeds which haven&#39;t been updated</li>
+</ul></li>
+<li>work around a blockade put on by Inoreader</li>
+<li><p>add ‘hidden’ preference to use specific AppId/AppKey with Inoreader:</p>
+
+<blockquote>
+<p>Each user of Inoreader user is able to define (and monitor) a personal
+set of AppId / AppKey values through Inoreader preferences located at
+https://www.inoreader.com/all_articles#preferences-developer</p>
+
+<p>To have Vienna use these values instead of the default one, you have to
+type in Terminal two commands similar to the following:</p>
+
+<blockquote>
+<p><code>defaults write uk.co.opencommunity.vienna2 SyncingAppId 9876543210</code>
+<code>defaults write uk.co.opencommunity.vienna2 SyncingAppKey JrS2smGyidtsxBOytDN1OWsSPcGURKWR</code></p>
+</blockquote>
+
+<p>To get back to the default values:</p>
+
+<blockquote>
+<p><code>defaults delete uk.co.opencommunity.vienna2 SyncingAppId</code>
+<code>defaults delete uk.co.opencommunity.vienna2 SyncingAppKey</code></p>
+</blockquote>
+</blockquote></li>
+<li><p>adapt to feed identifiers used by TheOldReader and FreshRSS (numerical Ids instead of URLs)</p></li>
+<li><p>improve feed infos synchronisation between Vienna and servers (feed name, homepage, folder/label)</p></li>
+<li><p>fix a problem with credential input in sync preferences panel</p></li>
+<li><p>improve first authentication on OpenReader server</p></li>
+</ul></li>
+<li><p>Fix feed subscription button in browser view</p></li>
+<li><p>Fix some problems with enabling/disabling of menu items and toolbar items</p></li>
+<li><p>Trim author names in database</p></li>
+<li><p>Update address of ArsTechnica feed</p></li>
+<li><p>Update components (FMDB 2.7.7 through Swift Package Manager insted of Carthage, TRVSURLSessionOperation)</p></li>
+<li><p>Modernize code, localization &amp; building tools</p></li>
+</ul>
 
 
 

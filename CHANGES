@@ -8,6 +8,50 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.6.0 Beta 1
+------------
+### ! For OS X 10.11 (El Capitan) or later only !
+- Lift deployment target to macOS 10.11 & start modernizing code
+- Replaced MASPreferences with Storyboard implementation (Preferences window)
+
+3.5.6
+-----
+- Vienna is now notarized (needed by macOS Catalina and later)
+- Much improved OpenReader support :
+    - sensibly decrease the number of network requests:
+        - use single 'mark-all-as-read' requests for marking folders read
+        - avoid requesting feeds which haven't been updated
+   - work around a blockade put on by Inoreader
+   - add ‘hidden’ preference to use specific AppId/AppKey with Inoreader:
+
+       > Each user of Inoreader user is able to define (and monitor) a personal
+       > set of AppId / AppKey values through Inoreader preferences located at
+       > https://www.inoreader.com/all_articles#preferences-developer
+       >
+       > To have Vienna use these values instead of the default one, you have to
+       > type in Terminal two commands similar to the following:
+       >
+       >>` defaults write uk.co.opencommunity.vienna2 SyncingAppId 9876543210`
+       >>` defaults write uk.co.opencommunity.vienna2 SyncingAppKey JrS2smGyidtsxBOytDN1OWsSPcGURKWR`
+       >
+       > To get back to the default values:
+       >
+       >>` defaults delete uk.co.opencommunity.vienna2 SyncingAppId`
+       >>` defaults delete uk.co.opencommunity.vienna2 SyncingAppKey`
+
+    - adapt to feed identifiers used by TheOldReader and FreshRSS (numerical Ids instead of URLs)
+    - improve feed infos synchronisation between Vienna and servers (feed name, homepage, folder/label)
+    - fix a problem with credential input in sync preferences panel
+    - improve first authentication on OpenReader server
+- Fix feed subscription button in browser view
+- Fix some problems with enabling/disabling of menu items and toolbar items
+- Trim author names in database
+- Update address of ArsTechnica feed
+- Update components (FMDB 2.7.7 through Swift Package Manager insted of Carthage, TRVSURLSessionOperation)
+- Modernize code, localization & building tools
+
+__Note__ : this version will upgrade the database ; but the newer version of the database remains fully compatible with all Vienna 3.x.x versions. So there is no reason to fear upgrading, or at least testing this 3.5.6 version.
+
 3.5.5
 -----
 - Fix sizes of cells in Unified view
