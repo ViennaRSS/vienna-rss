@@ -18,8 +18,6 @@
 	<string>twitterButton</string>
 	<key>ButtonImage@2x</key>
 	<string>twitterButton@2x</string>
-	<key>ShortenURLs</key>
-	<false/>
 	<key>MenuPath</key>
 	<string>Share With Twitter</string>
 </dict>
