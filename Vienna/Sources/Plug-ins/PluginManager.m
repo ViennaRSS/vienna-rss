@@ -25,7 +25,6 @@
 #import "Preferences.h"
 #import "Article.h"
 #import "BrowserPane.h"
-#import "BitlyAPIHelper.h"
 #import "SearchMethod.h"
 #import "Browser.h"
 
@@ -318,20 +317,7 @@
 			if ([theView isKindOfClass:[BrowserPane class]])
 			{	
 				[urlString replaceString:@"$ArticleTitle$" withString:theView.viewTitle];
-				
-				// If ShortenURLs is true in the plugin's info.plist, we attempt to shorten it via the bit.ly service.
-				if ([pluginItem[@"ShortenURLs"] boolValue])
-				{
-					BitlyAPIHelper * bitlyHelper = [[BitlyAPIHelper alloc] initWithLogin:@"viennarss" andAPIKey:@"R_852929122e82d2af45fe9e238f1012d3"];
-					NSString * shortURL = [bitlyHelper shortenURL:theView.viewLink];
-					
-					[urlString replaceString:@"$ArticleLink$" withString:shortURL];
-				}
-				else 
-				{
-					[urlString replaceString:@"$ArticleLink$" withString:[NSString stringByCleaningURLString:theView.viewLink]];
-				}
-
+				[urlString replaceString:@"$ArticleLink$" withString:[NSString stringByCleaningURLString:theView.viewLink]];
 			}
 			
 			// In case the user is currently looking at an article:
@@ -340,20 +326,7 @@
 				// We can only work on one article, so ignore selection range.
 				Article * currentMessage = APPCONTROLLER.selectedArticle;
 				[urlString replaceString:@"$ArticleTitle$" withString: currentMessage.title];
-				
-				// URL shortening again, as above...
-				if ([pluginItem[@"ShortenURLs"] boolValue])
-				{
-					BitlyAPIHelper * bitlyHelper = [[BitlyAPIHelper alloc] initWithLogin:@"viennarss" andAPIKey:@"R_852929122e82d2af45fe9e238f1012d3"];
-					NSString * shortURL = [bitlyHelper shortenURL:currentMessage.link];
-					
-					// If URL shortening fails, we fall back to the long URL.
-					[urlString replaceString:@"$ArticleLink$" withString:[NSString stringByCleaningURLString:(shortURL ? shortURL : currentMessage.link)]];
-				}
-				else 
-				{
-					[urlString replaceString:@"$ArticleLink$" withString:[NSString stringByCleaningURLString:currentMessage.link]];
-				}
+                [urlString replaceString:@"$ArticleLink$" withString:[NSString stringByCleaningURLString:currentMessage.link]];
 			}
 						
 			if (urlString != nil)
