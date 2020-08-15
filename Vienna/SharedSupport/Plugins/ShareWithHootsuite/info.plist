@@ -20,7 +20,5 @@
 	<string>hootsuiteButton@2x</string>
 	<key>MenuPath</key>
 	<string>Share With Hootsuite</string>
-	<key>ShortenURLs</key>
-	<false/>
 </dict>
 </plist>

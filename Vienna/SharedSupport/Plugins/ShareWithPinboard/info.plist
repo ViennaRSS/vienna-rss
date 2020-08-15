@@ -20,7 +20,5 @@
 	<string>pinboardButton@2x</string>
 	<key>MenuPath</key>
 	<string>Share With Pinboard</string>
-	<key>ShortenURLs</key>
-	<false/>
 </dict>
 </plist>
