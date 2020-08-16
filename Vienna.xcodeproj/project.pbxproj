@@ -51,7 +51,6 @@
 		034981411A20701600014F29 /* AdvancedPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 034981401A20701600014F29 /* AdvancedPreferencesViewController.m */; };
 		035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B703919E0E4AE00197334 /* Vienna_Tests.m */; };
 		035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B704119E0E4DC00197334 /* SubscriptionModelTests.m */; };
-		0377BDED1D3A009B00960555 /* BitlyAPIHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377BDEC1D3A009B00960555 /* BitlyAPIHelperTests.swift */; };
 		0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */; };
 		0379E23B1A20831600D58BFE /* SyncingPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */; };
 		0383DC551B71B44700A11950 /* CriteriaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383DC541B71B44700A11950 /* CriteriaTests.m */; };
@@ -312,7 +311,6 @@
 		035B703919E0E4AE00197334 /* Vienna_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vienna_Tests.m; sourceTree = "<group>"; };
 		035B704119E0E4DC00197334 /* SubscriptionModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionModelTests.m; sourceTree = "<group>"; };
 		0377BDEB1D3A009B00960555 /* Vienna Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vienna Tests-Bridging-Header.h"; sourceTree = "<group>"; };
-		0377BDEC1D3A009B00960555 /* BitlyAPIHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitlyAPIHelperTests.swift; sourceTree = "<group>"; };
 		0379E2361A2082E600D58BFE /* AppearancePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppearancePreferencesViewController.h; sourceTree = "<group>"; };
 		0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearancePreferencesViewController.m; sourceTree = "<group>"; };
 		0379E2391A20831600D58BFE /* SyncingPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncingPreferencesViewController.h; sourceTree = "<group>"; };
@@ -1051,7 +1049,6 @@
 				03B752411B74814B00FD3FDB /* RichXMLParserTests.m */,
 				4D36B44E1D38007D009736C1 /* NSURL+URIEquivalence.h */,
 				4D36B44F1D38007D009736C1 /* NSURL+URIEquivalence.m */,
-				0377BDEC1D3A009B00960555 /* BitlyAPIHelperTests.swift */,
 				F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */,
 				0377BDEB1D3A009B00960555 /* Vienna Tests-Bridging-Header.h */,
 			);
@@ -2074,7 +2071,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0377BDED1D3A009B00960555 /* BitlyAPIHelperTests.swift in Sources */,
 				035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */,
 				4D36B44B1D37F91E009736C1 /* ArticleTests.m in Sources */,
 				03B752421B74814B00FD3FDB /* RichXMLParserTests.m in Sources */,
