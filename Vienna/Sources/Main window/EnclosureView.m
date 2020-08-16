@@ -21,6 +21,7 @@
 #import "EnclosureView.h"
 #import "DownloadManager.h"
 #import "DSClickableURLTextField.h"
+#import "NSWorkspace+OpenWithMenu.h"
 #import "HelperFunctions.h"
 
 @interface EnclosureView ()
@@ -39,7 +40,6 @@
 	if ((self = [super initWithFrame:frameRect]) != nil)
 	{
 		enclosureURLString = nil;
-		isITunes = NO;
 
 		// Register to be notified when a download completes.
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -72,8 +72,6 @@
  */
 -(void)setEnclosureFile:(NSString *)newFilename
 {
-	CFURLRef appURL;
-	FSRef appRef;
 
 	// Keep this for the download/open
     enclosureURLString = cleanedUpUrlFromString(newFilename).absoluteString;
@@ -98,33 +96,12 @@
 	}
 	else
 	{
-		isITunes = NO;
-		if (LSGetApplicationForInfo(kLSUnknownType, kLSUnknownCreator, (__bridge CFStringRef)ext, kLSRolesAll, &appRef, &appURL) != kLSApplicationNotFoundErr)
-		{
-			LSItemInfoRecord outItemInfo;
-			
-			LSCopyItemInfoForURL(appURL, kLSRequestTypeCreator, &outItemInfo);
-			isITunes = [NSFileTypeForHFSTypeCode(outItemInfo.creator) isEqualToString:@"'hook'"];
-
-			CFRelease(appURL);
-		}
-
-		// Open/Play is pretty much the same thing but we want to be a bit friendlier to iTunes
-		// and make it clearer what will happen when the file is opened.
-		if (isITunes)
-		{
-			[downloadButton setTitle:NSLocalizedString(@"Play", nil)];
-			[downloadButton sizeToFit];
-			downloadButton.action = @selector(openFile:);
-			[filenameLabel setStringValue:NSLocalizedString(@"Click the Play button to play this enclosure in iTunes.", nil)];
-		}
-		else
-		{
-			[downloadButton setTitle:NSLocalizedString(@"Open", nil)];
-			[downloadButton sizeToFit];
-			downloadButton.action = @selector(openFile:);
-			[filenameLabel setStringValue:NSLocalizedString(@"Click the Open button to open this file.", nil)];
-		}
+		NSString * appPath = [[NSWorkspace sharedWorkspace] defaultHandlerApplicationForFile:destPath];
+        NSString *displayName = [[[NSFileManager defaultManager] displayNameAtPath:appPath] stringByDeletingPathExtension];
+        [downloadButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open with %@", "Name the application which should open a file"), displayName]];
+        [downloadButton sizeToFit];
+        downloadButton.action = @selector(openFile:);
+        [filenameLabel setStringValue:NSLocalizedString(@"Click the Open button to open this file.", nil)];
 	}
 	
 	NSImage * iconImage = [[NSWorkspace sharedWorkspace] iconForFileType:ext];
