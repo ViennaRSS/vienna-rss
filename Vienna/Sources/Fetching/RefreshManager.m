@@ -424,7 +424,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                     }
                 } else {
                     [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server",
-                                                                                     nil), ((NSHTTPURLResponse *)response).statusCode]];
+                                                                                     nil), (int)((NSHTTPURLResponse *)response).statusCode]];
                 }
 
                 [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
@@ -618,7 +618,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             }
         } else { //other HTTP response codes like 404, 403...
             [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil),
-                                         responseStatusCode]];
+                                         (int)responseStatusCode]];
             [connectorItem appendDetail:[NSHTTPURLResponse localizedStringForStatusCode:responseStatusCode]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [connectorItem setStatus:NSLocalizedString(@"Error", nil)];
@@ -867,7 +867,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             [connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
         });
     } else {
-        NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
+        NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), (int)newArticlesFromFeed];
         dispatch_async(dispatch_get_main_queue(), ^{
             connectorItem.status = logText;
         });

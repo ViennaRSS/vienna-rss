@@ -354,7 +354,7 @@
         if (auxiliaryImage && auxiliaryImage.accessibilityDescription)
             [bits addObject:auxiliaryImage.accessibilityDescription];
         if (hasCount)
-            [bits addObject:[NSString stringWithFormat:NSLocalizedString(@"%d unread articles", nil), count]];
+            [bits addObject:[NSString stringWithFormat:NSLocalizedString(@"%d unread articles", nil), (int)count]];
         if (inProgress)
             [bits addObject:NSLocalizedString(@"Loading", nil)];
         if (bits.count)
