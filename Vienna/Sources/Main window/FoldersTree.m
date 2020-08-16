@@ -934,7 +934,7 @@
 		    unreadCount = node.folder.unreadCount;
 		}
 		if (unreadCount) {
-			return [NSString stringWithFormat:NSLocalizedString(@"%d unread articles", nil), unreadCount];
+			return [NSString stringWithFormat:NSLocalizedString(@"%d unread articles", nil), (int)unreadCount];
 		}
 	}
 	return nil;

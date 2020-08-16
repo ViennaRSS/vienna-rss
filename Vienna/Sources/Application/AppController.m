@@ -1196,7 +1196,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
                 NSAlert *alert = [NSAlert new];
                 alert.alertStyle = NSAlertStyleInformational;
                 alert.messageText = NSLocalizedString(@"Export Completed", nil);
-                alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully exported", nil), countExported];
+                alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully exported", nil), (int)countExported];
                 [alert runModal];
             }
         }
@@ -2046,7 +2046,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         if (newUnread > 0) {
             NSUserNotification *notification = [NSUserNotification new];
             notification.title = NSLocalizedString(@"New articles retrieved", @"Notification title");
-            notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d new unread articles retrieved", @"Notification body"), newUnread];
+            notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d new unread articles retrieved", @"Notification body"), (int)newUnread];
             notification.userInfo = @{UserNotificationContextKey: UserNotificationContextFetchCompleted};
             notification.soundName = NSUserNotificationDefaultSoundName;
 
@@ -2721,7 +2721,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else
 	{
-		alertBody = [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to delete all %d selected folders? This operation cannot be undone.", nil), count];
+		alertBody = [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to delete all %d selected folders? This operation cannot be undone.", nil), (unsigned int)count];
 		alertTitle = NSLocalizedString(@"Delete multiple folders", nil);
 	}
 	

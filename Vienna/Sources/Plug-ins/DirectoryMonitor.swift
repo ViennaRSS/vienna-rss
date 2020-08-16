@@ -59,7 +59,8 @@ final class DirectoryMonitor: NSObject {
     /// - Parameter eventHandler: The handler to call when an event occurs.
     /// - Throws: An error of type `DirectoryMonitorError`.
     @objc
-    func start(eventHandler: @escaping EventHandler) throws {
+    func
+    start(eventHandler: @escaping EventHandler) throws {
         // If the stream exists, then stop it and start over. This will be the
         // case when start(eventHandler:) is called multiple times. Rather than
         // throwing an error, logging this will suffice.
