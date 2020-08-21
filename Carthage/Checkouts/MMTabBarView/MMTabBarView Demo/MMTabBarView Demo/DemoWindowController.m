@@ -555,11 +555,20 @@
 - (NSImage *)tabView:(NSTabView *)aTabView imageForTabViewItem:(NSTabViewItem *)tabViewItem offset:(NSSize *)offset styleMask:(NSUInteger *)styleMask {
 	// grabs whole window image
 	NSImage *viewImage = [[NSImage alloc] init];
-	NSRect contentFrame = self.window.contentView.frame;
-	[self.window.contentView lockFocus];
-	NSBitmapImageRep *viewRep = [[NSBitmapImageRep alloc] initWithFocusedViewRect:contentFrame];
+	NSBitmapImageRep *viewRep;
+	if (@available(macOS 10.14, *)) {
+		NSView *contentView=self.window.contentView;
+		NSRect rect=contentView.visibleRect;
+		viewRep=[contentView bitmapImageRepForCachingDisplayInRect:rect];
+		[contentView cacheDisplayInRect:rect toBitmapImageRep:viewRep];
+	}
+	else {
+		NSRect contentFrame = self.window.contentView.frame;
+		[self.window.contentView lockFocus];
+		viewRep = [[NSBitmapImageRep alloc] initWithFocusedViewRect:contentFrame];
+		[self.window.contentView unlockFocus];
+	}
 	[viewImage addRepresentation:viewRep];
-	[self.window.contentView unlockFocus];
 
 	// grabs snapshot of dragged tabViewItem's view (represents content being dragged)
 	NSView *viewForImage = tabViewItem.view;

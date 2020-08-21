@@ -10,6 +10,13 @@
 
 #import "DemoWindowController.h"
 
+@interface MMAppDelegate ()
+
+@property (strong) NSWindowController *mainWindowController;
+
+@end
+
+
 @implementation MMAppDelegate
 
 
@@ -26,7 +33,9 @@
         // add the default tabs
 	[newWindowController addDefaultTabs];
         // finally show the window
-	[newWindowController showWindow:self];    
+	[newWindowController showWindow:self];
+
+    _mainWindowController = newWindowController;
 }
 
 @end
