@@ -118,7 +118,6 @@ class TabbedBrowserViewController: NSViewController, Browser {
 		}
 
         newTab.webView.uiDelegate = self
-        newTab.webView.navigationDelegate = self
 
         //TODO: tab view order
 
@@ -244,9 +243,4 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
 @available(OSX 10.10, *)
 extension TabbedBrowserViewController: WKUIDelegate {
 	//TODO: implement functionality for opening new tabs and alerts, and maybe peek actions
-}
-
-@available(OSX 10.10, *)
-extension TabbedBrowserViewController: WKNavigationDelegate {
-	//TODO: implement UI response to webpage loading etc.
 }

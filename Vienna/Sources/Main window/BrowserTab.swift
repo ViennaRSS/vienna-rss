@@ -55,6 +55,7 @@ class BrowserTab: NSViewController {
 	var tabUrl: URL? {
 		didSet {
 			self.title = tabUrl?.host ?? NSLocalizedString("New Tab", comment: "")
+            self.addressField?.stringValue = tabUrl?.absoluteString ?? ""
 		}
 	}
 
@@ -68,11 +69,11 @@ class BrowserTab: NSViewController {
         } else {
             super.init(nibName: "BrowserTabBeforeMacOS12", bundle: nil)
         }
-		titleObservation = webView.observe(\.title, options: .new) { _, change in
+		titleObservation = webView.observe(\.title, options: .new) { [weak self] _, change in
             guard let newValue = change.newValue ?? "", !newValue.isEmpty else {
                 return
             }
-            self.title = newValue
+            self?.title = newValue
 		}
 	}
 
@@ -100,6 +101,15 @@ class BrowserTab: NSViewController {
 
 		//set up address bar handling
 		addressField.delegate = self
+
+        //set up navigation handling
+        webView.navigationDelegate = self
+    }
+
+    override func viewDidAppear() {
+        if self.loadedUrl {
+            self.view.window?.makeFirstResponder(self.webView)
+        }
     }
 
 	deinit {
@@ -110,43 +120,58 @@ class BrowserTab: NSViewController {
 @available(OSX 10.10, *)
 extension BrowserTab: NSTextFieldDelegate {
 	//TODO: things like address suggestion etc
+    //TODO: restore url string when user presses escape in textfield, make webview first responder
 
-	@IBAction func loadPageFromAddressBar(_ sender: Any) {
-		var theURL = addressField.stringValue
-		if URL(string: theURL)?.scheme == nil {
-			// If no '.' appears in the string, wrap it with 'www' and 'com'
-			if !theURL.contains(".") {
-				//TODO: search instead of assuming .com ending
-				theURL = "www." + theURL + ".com"
-			}
-			theURL = "http://" + theURL
-		}
 
-		// cleanUpUrl is a hack to handle Internationalized Domain Names. WebKit handles them automatically, so we tap into that.
-		let urlToLoad = cleanedUpUrlFromString(theURL)
-		if urlToLoad != nil {
-			//set url and load immediately, because action was invoked by user
-			self.tabUrl = urlToLoad
-			self.loadTab()
-		} else {
-			self.activateAddressBar()
-		}
 
-		self.tabUrl = URL(string: addressField.stringValue)
-		self.loadTab()
-	}
+    @IBAction func loadPageFromAddressBar(_ sender: Any) {
+        let theURL = addressField.stringValue
 
-	@IBAction func reload(_ sender: Any) {
-		self.reloadTab()
-	}
+        guard !theURL.isEmpty else {
+            tabUrl = nil
+            self.loadTab()
+            return
+        }
 
-	@IBAction func forward(_ sender: Any) {
-		_ = self.forward()
-	}
+        cleanAndLoad(theURL)
+    }
 
-	@IBAction func back(_ sender: Any) {
-		_ = self.back()
-	}
+
+    @IBAction func reload(_ sender: Any) {
+        self.reloadTab() //TODO: if cancelButton, stop loading
+    }
+
+    @IBAction func forward(_ sender: Any) {
+        _ = self.forward()
+    }
+
+    @IBAction func back(_ sender: Any) {
+        _ = self.back()
+    }
+
+    private func cleanAndLoad(_ theURL: String) {
+
+        var cleanedUrl = theURL
+
+        if URL(string: cleanedUrl)?.scheme == nil {
+            // If no '.' appears in the string, wrap it with 'www' and 'com'
+            if !cleanedUrl.contains(".") {
+                //TODO: search instead of assuming .com ending
+                cleanedUrl = "www." + cleanedUrl + ".com"
+            }
+            cleanedUrl = "http://" + cleanedUrl
+        }
+
+        // cleanUpUrl is a hack to handle Internationalized Domain Names. WebKit handles them automatically, so we tap into that.
+        let urlToLoad = cleanedUpUrlFromString(cleanedUrl)
+
+        //set url and load immediately, because action was invoked by user
+        self.tabUrl = urlToLoad
+        self.loadTab()
+
+        self.tabUrl = URL(string: addressField.stringValue)
+        self.loadTab()
+    }
 }
 
 @available(OSX 10.10, *)
@@ -200,14 +225,22 @@ extension BrowserTab: Tab {
         webView.evaluateJavaScript("window.find(textToFind='\(searchString)', matchCase=false, searchUpward=\(searchUpward), wrapAround=true)", completionHandler: nil)
     }
 
-	func loadTab() {
-		if self.isViewLoaded {
-			self.addressField.stringValue = self.tabUrl?.absoluteString ?? ""
-		}
-		if let url = self.tabUrl {
-			self.webView.load(URLRequest(url: url))
-		}
-	}
+    func loadTab() {
+        if self.isViewLoaded {
+            self.addressField.stringValue = self.tabUrl?.absoluteString ?? ""
+        }
+        if let url = self.tabUrl {
+            self.webView.load(URLRequest(url: url))
+            loadedUrl = true
+            if self.isViewLoaded && self.view.window != nil {
+                self.view.window?.makeFirstResponder(self.webView)
+            }
+        } else {
+            //TODO: this seems to wipe history, which we do not want
+            self.webView.loadHTMLString("", baseURL: nil)
+            self.activateAddressBar()
+        }
+    }
 
 	func reloadTab() {
 		self.webView.reload()
@@ -233,5 +266,22 @@ extension BrowserTab: Tab {
 
     func activateAddressBar() {
         NSApp.mainWindow?.makeFirstResponder(addressField)
+    }
+}
+
+@available(OSX 10.10, *)
+extension BrowserTab: WKNavigationDelegate {
+
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        //TODO: reload button -> cancel button
+    }
+
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        //TODO: cancel button -> reload button
+    }
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.tabUrl = self.webView.url
+        //TODO: cancel button -> reload button
     }
 }
