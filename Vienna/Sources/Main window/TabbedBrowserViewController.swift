@@ -58,6 +58,8 @@ class TabbedBrowserViewController: NSViewController, Browser {
         }
     }
 
+    var restoredTabs = false
+
     var activeTab: Tab? {
         tabView.selectedTabViewItem?.viewController as? Tab
     }
@@ -88,23 +90,28 @@ class TabbedBrowserViewController: NSViewController, Browser {
         aCoder.encode(tabBar, forKey: "primaryTab")
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        restoreTabs()
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        if !restoredTabs {
+            //defer to avoid loading first tab, because primary tab is set after view load
+            restoreTabs()
+            restoredTabs = true
+        }
     }
 
     func createNewTab(_ url: URL? = nil, inBackground: Bool = false, load: Bool = false) -> Tab {
         let newTab = BrowserTab()
 
-		newTab.tabUrl = url
-        newTab.title = title
+		let newTabViewItem = TitleChangingTabViewItem(viewController: newTab)
+		newTabViewItem.hasCloseButton = true
+
+        //this must be executed after setup of titleChangingTabViewItem to observe new title properly
+        newTab.tabUrl = url
 
         if load {
             newTab.loadTab()
         }
-
-		let newTabViewItem = TitleChangingTabViewItem(viewController: newTab)
-		newTabViewItem.hasCloseButton = true
+        
 		tabView.addTabViewItem(newTabViewItem)
 
 		if !inBackground {
@@ -147,7 +154,7 @@ class TabbedBrowserViewController: NSViewController, Browser {
                 continue
             }
             let tab = createNewTab(url, inBackground: true, load: false) as? BrowserTab
-            tab?.title = tabTitles?[urlString] ?? NSLocalizedString("New tab", comment: "")
+            tab?.title = tabTitles?[urlString]
         }
     }
 
@@ -234,7 +241,7 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
 
     func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
         let tab = (tabViewItem?.viewController as? BrowserTab)
-        if let loaded = tab?.loadedUrl, !loaded {
+        if let loaded = tab?.loadedTab, !loaded {
             tab?.loadTab()
         }
     }

@@ -754,7 +754,7 @@
 }
 
 
-- (void)print {
+- (void)printPage {
 	[self.webPane printDocument:self];
 }
 

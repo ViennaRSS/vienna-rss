@@ -78,6 +78,9 @@
 		2FDF6FC2218A266A002F77E9 /* BrowserTab.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDF6FBE218A266A002F77E9 /* BrowserTab.xib */; };
 		2FDF6FC3218A266A002F77E9 /* TabbedBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FBF218A266A002F77E9 /* TabbedBrowserViewController.swift */; };
 		2FDF6FC8218A289A002F77E9 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FC7218A289A002F77E9 /* Tab.swift */; };
+		2FF61D2C24F2AE8B00A7E2B5 /* RSSCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF61D2B24F2AE8B00A7E2B5 /* RSSCommunication.swift */; };
+		2FF61D2E24F2E71500A7E2B5 /* BrowserTabRss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF61D2D24F2E71500A7E2B5 /* BrowserTabRss.swift */; };
+		2FF61D3024F2ED1500A7E2B5 /* BrowserTabGui.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF61D2F24F2ED1500A7E2B5 /* BrowserTabGui.swift */; };
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		37C650801816EBAD3C0D9DBF /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */; };
 		3A171C00210B551B00B80FBB /* TRVSURLSessionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A171BF1210B551B00B80FBB /* TRVSURLSessionOperation.m */; };
@@ -357,6 +360,9 @@
 		2FDF6FBF218A266A002F77E9 /* TabbedBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedBrowserViewController.swift; sourceTree = "<group>"; };
 		2FDF6FC5218A26B0002F77E9 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
 		2FDF6FC7218A289A002F77E9 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		2FF61D2B24F2AE8B00A7E2B5 /* RSSCommunication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSCommunication.swift; sourceTree = "<group>"; };
+		2FF61D2D24F2E71500A7E2B5 /* BrowserTabRss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserTabRss.swift; sourceTree = "<group>"; };
+		2FF61D2F24F2ED1500A7E2B5 /* BrowserTabGui.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserTabGui.swift; sourceTree = "<group>"; };
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ClickableProgressIndicator.h; sourceTree = "<group>"; };
 		34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClickableProgressIndicator.m; sourceTree = "<group>"; };
 		37C652B4C918F312BA9F1AB1 /* NSURL+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Utils.h"; sourceTree = "<group>"; };
@@ -1132,6 +1138,8 @@
 			isa = PBXGroup;
 			children = (
 				2FDF6FBC218A266A002F77E9 /* BrowserTab.swift */,
+				2FF61D2F24F2ED1500A7E2B5 /* BrowserTabGui.swift */,
+				2FF61D2D24F2E71500A7E2B5 /* BrowserTabRss.swift */,
 				2FDF6FBE218A266A002F77E9 /* BrowserTab.xib */,
 				2F125EDD24D0638600868E11 /* BrowserTabBeforeMacOS12.xib */,
 				2FDF6FBF218A266A002F77E9 /* TabbedBrowserViewController.swift */,
@@ -1149,6 +1157,7 @@
 				F6A7EA5B1F1CE63B00BD4450 /* WebView Browser */,
 				2FDF6FC5218A26B0002F77E9 /* Browser.swift */,
 				2FDF6FC7218A289A002F77E9 /* Tab.swift */,
+				2FF61D2B24F2AE8B00A7E2B5 /* RSSCommunication.swift */,
 			);
 			name = Browser;
 			sourceTree = "<group>";
@@ -2189,6 +2198,7 @@
 				F63833D81EF842EA00E07213 /* MainWindowController.swift in Sources */,
 				F41CA694218F56140072F734 /* NSWorkspace+OpenWithMenu.m in Sources */,
 				F6D282641F1A8BEA00FF865E /* SearchFieldToolbarItem.swift in Sources */,
+				2FF61D3024F2ED1500A7E2B5 /* BrowserTabGui.swift in Sources */,
 				664F87C713C62DFE00E266DE /* OpenReader.m in Sources */,
 				F6D282621F1A87A900FF865E /* PopUpButtonToolbarItem.swift in Sources */,
 				EA43C70914A370DB00F2D843 /* VTPG_Common.m in Sources */,
@@ -2200,6 +2210,7 @@
 				F6CE47131E7E3DCB0045EAD7 /* ActivityItem.m in Sources */,
 				2FC91DDD21850ADB00D7F223 /* Browser+WebUIDelegate.m in Sources */,
 				43502897165DE9E00018EDB7 /* AppController.m in Sources */,
+				2FF61D2C24F2AE8B00A7E2B5 /* RSSCommunication.swift in Sources */,
 				43502898165DE9E00018EDB7 /* ArticleController.m in Sources */,
 				4350289A165DE9E00018EDB7 /* ArticleListView.m in Sources */,
 				4350289B165DE9E00018EDB7 /* ArticleView.m in Sources */,
@@ -2246,6 +2257,7 @@
 				F69964F71F13029600FC8493 /* OverlayStatusBar.swift in Sources */,
 				435028B7165DE9E00018EDB7 /* UnifiedDisplayView.m in Sources */,
 				435028B8165DE9E00018EDB7 /* URLHandlerCommand.m in Sources */,
+				2FF61D2E24F2E71500A7E2B5 /* BrowserTabRss.swift in Sources */,
 				3A171C00210B551B00B80FBB /* TRVSURLSessionOperation.m in Sources */,
 				F6373A231F1D53B500ED3B09 /* MainWindow.swift in Sources */,
 				435028B9165DE9E00018EDB7 /* ViennaApp.m in Sources */,

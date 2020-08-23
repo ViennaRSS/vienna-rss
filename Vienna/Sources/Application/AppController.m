@@ -1631,7 +1631,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     id<Tab> activeBrowserTab = self.browser.activeTab;
 
     if (activeBrowserTab) {
-        [activeBrowserTab print];
+        [activeBrowserTab printPage];
     }
 }
 

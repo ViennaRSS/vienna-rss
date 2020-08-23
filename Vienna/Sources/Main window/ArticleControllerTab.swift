@@ -63,7 +63,7 @@ extension ArticleController: Tab {
 
 	}
 
-	public func print() {
+	public func printPage() {
 
 	}
     

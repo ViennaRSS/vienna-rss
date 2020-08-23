@@ -399,7 +399,7 @@
 	return NO;
 }
 
-- (void)print {
+- (void)printPage {
 	//TODO
 }
 

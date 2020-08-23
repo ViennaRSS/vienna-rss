@@ -68,7 +68,7 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView {
 		//TODO
 	}
 
-	func print() {
+	func printPage() {
 		//TODO
 	}
 
