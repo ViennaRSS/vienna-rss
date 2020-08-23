@@ -557,4 +557,15 @@
 	theItem.filename = destPath;
 }
 
+/* didCreateDestination
+ * Sent when the destination file is created
+ * (possibly in a temporary folder)
+ */
+- (void)download:(NSURLDownload *)download didCreateDestination:(NSString *)path
+{
+    DownloadItem * theItem = [self itemForDownload:download];
+    [[NSFileManager defaultManager] moveItemAtPath:path toPath:theItem.filename error:nil];
+    [self deliverNotificationForDownloadItem:theItem];
+    theItem.state = DownloadStateCompleted;
+}
 @end
