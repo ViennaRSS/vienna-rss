@@ -51,14 +51,29 @@ class BrowserTab: NSViewController {
     @IBOutlet private(set) weak var backButton: NSButton!
     @IBOutlet private(set) weak var forwardButton: NSButton!
     @IBOutlet private(set) weak var reloadButton: NSButton!
+    @IBOutlet private(set) weak var cancelButtonWidth: NSLayoutConstraint!
+    @IBOutlet private(set) weak var reloadButtonWidth: NSLayoutConstraint!
 
 	var tabUrl: URL? {
 		didSet {
-			self.title = tabUrl?.host ?? NSLocalizedString("New Tab", comment: "")
+            if tabUrl != webView.url {
+                self.title = tabUrl?.host ?? NSLocalizedString("New Tab", comment: "")
+            }
             self.addressField?.stringValue = tabUrl?.absoluteString ?? ""
 		}
 	}
 
+    var loading: Bool = false {
+        didSet {
+            cancelButtonWidth?.constant = loading ? 30 : 0
+            reloadButtonWidth?.constant = loading ? 0 : 30
+            NSAnimationContext.runAnimationGroup({_ in
+                NSAnimationContext.current.duration = 0.2
+                NSAnimationContext.current.allowsImplicitAnimation = true
+                addressBarContainer.layoutSubtreeIfNeeded()
+            }, completionHandler: nil)
+        }
+    }
     var loadedUrl: Bool = false
 
 	var titleObservation: NSKeyValueObservation!
@@ -104,6 +119,8 @@ class BrowserTab: NSViewController {
 
         //set up navigation handling
         webView.navigationDelegate = self
+
+        loading = false
     }
 
     override func viewDidAppear() {
@@ -138,7 +155,11 @@ extension BrowserTab: NSTextFieldDelegate {
 
 
     @IBAction func reload(_ sender: Any) {
-        self.reloadTab() //TODO: if cancelButton, stop loading
+        self.reloadTab()
+    }
+
+    @IBAction func cancel(_ sender: Any) {
+        self.stopLoadingTab()
     }
 
     @IBAction func forward(_ sender: Any) {
@@ -200,11 +221,19 @@ extension BrowserTab: Tab {
     }
 
     func back() -> Bool {
-		self.webView.goBack() != nil
+		let couldGoBack = self.webView.goBack() != nil
+        self.tabUrl = self.webView.url
+        //title observation not triggered by goBack() -> manual setting
+        self.title = self.webView.title
+        return couldGoBack
     }
 
     func forward() -> Bool {
-		self.webView.goForward() != nil
+		let couldGoForward = self.webView.goForward() != nil
+        self.tabUrl = self.webView.url
+        //title observation not triggered by goForware() -> manual setting
+        self.title = self.webView.title
+        return couldGoForward
     }
 
     func pageDown() -> Bool {
@@ -248,6 +277,7 @@ extension BrowserTab: Tab {
 
     func stopLoadingTab() {
         self.webView.stopLoading()
+        loading = false //because delegate does not get called in this case
     }
 
     func decreaseTextSize() {
@@ -272,16 +302,24 @@ extension BrowserTab: Tab {
 @available(OSX 10.10, *)
 extension BrowserTab: WKNavigationDelegate {
 
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        //TODO: reload button -> cancel button
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation?) {
+        handleNavigationStart()
     }
 
-    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        //TODO: cancel button -> reload button
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation?, withError error: Error) {
+        handleNavigationEnd()
     }
 
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation?) {
+        handleNavigationEnd()
+    }
+
+    func handleNavigationStart() {
+        loading = true
+    }
+
+    func handleNavigationEnd() {
         self.tabUrl = self.webView.url
-        //TODO: cancel button -> reload button
+        loading = false
     }
 }
