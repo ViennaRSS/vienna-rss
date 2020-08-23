@@ -20,7 +20,6 @@
 import Foundation
 
 @objc protocol RSSSource {
-    var rssUrl: URL? { get }
     var rssSubscriber: RSSSubscriber? { get set }
 }
 

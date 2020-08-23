@@ -35,7 +35,9 @@ final class MainWindowController: NSWindowController {
 
 	@objc private(set) lazy var browser: (Browser & NSViewController) = {
 		if #available(macOS 10.10, *) {
-			return TabbedBrowserViewController()
+            var controller = TabbedBrowserViewController()
+            //TODO: set up browser rssSubscriber, either here or in appDidFinishLaunching
+			return controller
 		} else {
 			return WebViewBrowser()
 		}

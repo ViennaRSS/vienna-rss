@@ -21,7 +21,7 @@ import Cocoa
 import MMTabBarView
 
 @available(OSX 10.10, *)
-class TabbedBrowserViewController: NSViewController, Browser {
+class TabbedBrowserViewController: NSViewController, Browser, RSSSource {
 
     @IBOutlet private(set) weak var tabBar: MMTabBarView! {
         didSet {
@@ -68,6 +68,14 @@ class TabbedBrowserViewController: NSViewController, Browser {
         tabView.numberOfTabViewItems
     }
 
+    weak var rssSubscriber: RSSSubscriber? {
+        didSet {
+            for source in tabView.tabViewItems {
+                (source as? RSSSource)?.rssSubscriber = self.rssSubscriber
+            }
+        }
+    }
+
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -101,6 +109,8 @@ class TabbedBrowserViewController: NSViewController, Browser {
 
     func createNewTab(_ url: URL? = nil, inBackground: Bool = false, load: Bool = false) -> Tab {
         let newTab = BrowserTab()
+
+        newTab.rssSubscriber = self.rssSubscriber
 
 		let newTabViewItem = TitleChangingTabViewItem(viewController: newTab)
 		newTabViewItem.hasCloseButton = true
