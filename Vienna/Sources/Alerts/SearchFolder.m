@@ -116,14 +116,21 @@
 		{
 			[self initForField:criteria.field inRow:searchCriteriaView];
 
-			[fieldNamePopup selectItemWithTitle:[criteria field]];
             [operatorPopup selectItemWithTitle:[Criteria localizedStringFromOperator:criteria.operator]];
 
 			Field * field = [nameToFieldMap valueForKey:criteria.field];
+			[fieldNamePopup selectItemWithTitle:field.displayName];
 			switch (field.type)
 			{
 				case MA_FieldType_Flag: {
-					[flagValueField selectItemWithTitle:[criteria value]];
+					NSInteger tag;
+					if([criteria.value isEqualToString:@"Yes"]) {
+						tag=1;
+					} else {
+						tag=2;
+					}
+					BOOL found = [flagValueField selectItemWithTag:tag];
+					NSAssert (found, @"No menu item selected");
 					break;
 				}
 
@@ -203,8 +210,8 @@
 		
 		// Set Yes/No values on flag fields
 		[flagValueField removeAllItems];
-		[flagValueField addItemWithRepresentedObject:NSLocalizedString(@"Yes", nil) object:@"Yes"];
-		[flagValueField addItemWithRepresentedObject:NSLocalizedString(@"No", nil) object:@"No"];
+		[flagValueField addItemWithTagAndObject:NSLocalizedString(@"Yes", nil) tag:1 object:@"Yes"];
+		[flagValueField addItemWithTagAndObject:NSLocalizedString(@"No", nil) tag:2 object:@"No"];
 
 		// Set date popup values
 		[dateValueField removeAllItems];
