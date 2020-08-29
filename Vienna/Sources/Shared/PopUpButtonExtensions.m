@@ -44,13 +44,24 @@
 	[self.menu addItem:newItem];
 }
 
-/* addItemWithTag
+/* addItemWithTag:tag
  * Add an item to the popup button menu with the specified tag.
  */
 -(void)addItemWithTag:(NSString *)title tag:(NSInteger)tag
 {
 	NSMenuItem * newItem = [[NSMenuItem alloc] initWithTitle:title action:nil keyEquivalent:@""];
 	newItem.tag = tag;
+	[self.menu addItem:newItem];
+}
+
+/* addItemWithTagAndObject:tag:object
+ * Add an item to the popup button menu with the specified tag and represented object
+ */
+-(void)addItemWithTagAndObject:(NSString *)title tag:(NSInteger)tag object:(id)object
+{
+	NSMenuItem * newItem = [[NSMenuItem alloc] initWithTitle:title action:nil keyEquivalent:@""];
+	newItem.tag = tag;
+	newItem.representedObject = object;
 	[self.menu addItem:newItem];
 }
 
