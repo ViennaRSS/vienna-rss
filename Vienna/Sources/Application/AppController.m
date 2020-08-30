@@ -363,7 +363,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
 	[nc addObserver:self selector:@selector(handleShowAppInStatusBar:) name:@"MA_Notify_ShowAppInStatusBarChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleShowFilterBar:) name:@"MA_Notify_FilterBarChanged" object:nil];
-	[nc addObserver:self selector:@selector(showUnreadCountOnApplicationIconAndWindowTitle) name:@"MA_Notify_FoldersUpdated" object:nil];
+	[nc addObserver:self selector:@selector(handleUpdateUnreadCount:) name:@"MA_Notify_FoldersUpdated" object:nil];
 	//Open Reader Notifications
     [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
 
@@ -1571,6 +1571,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		lastCountOfUnread = -1;	// Force an update
 		[self showUnreadCountOnApplicationIconAndWindowTitle];
 	}
+}
+
+- (void)handleUpdateUnreadCount:(NSNotification *)nc
+{
+	[self showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* showUnreadCountOnApplicationIconAndWindowTitle
