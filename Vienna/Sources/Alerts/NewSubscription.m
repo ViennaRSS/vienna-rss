@@ -149,12 +149,7 @@
 		editFolderId = folderId;
 		
 		// Open the edit sheet.
-        [window beginSheet:editRSSFeedWindow completionHandler:^(NSModalResponse returnCode) {
-            if (returnCode == NSModalResponseOK) {
-                // Notify any open window
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:@(folderId)];
-            }
-        }];
+        [window beginSheet:editRSSFeedWindow completionHandler:nil];
 	}
 }
 

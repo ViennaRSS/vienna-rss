@@ -604,8 +604,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             // We got HTTP 410 which means the feed has been intentionally removed so unsubscribe the feed.
             [dbManager setFlag:VNAFolderFlagUnsubscribed forFolder:folderId];
 
-            [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
-                                                                                object:@(folderId)];
         } else if (responseStatusCode == 200 || responseStatusCode == 226) {
             if (receivedData != nil) {
                 [self finalizeFolderRefresh:@{
@@ -977,9 +975,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 -(void)syncFinishedForFolder:(Folder *)folder
 {
     [self setFolderUpdatingFlag:folder flag:NO];
-    // Unread count may have changed
-    [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
-                                                                        object:@(folder.itemId)];
 }
 
 #pragma mark NSURLSession redirection delegate
