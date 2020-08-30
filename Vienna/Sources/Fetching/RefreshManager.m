@@ -1170,13 +1170,18 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     self.statusMessage = self->statusMessageDuringRefresh;
 }
 
+/* finishConnectionQueue
+ * this is run on the main thread
+ * at the exhaustion of the network queue
+ */
 -(void)finishConnectionQueue
 {
     if (hasStarted) {
-        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:nil];
-        hasStarted = NO;
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+        [nc postNotificationName:@"MA_Notify_ArticleListContentChange" object:nil];
         statusMessageDuringRefresh = NSLocalizedString(@"Refresh completed", nil);
+        hasStarted = NO;
     } else {
         statusMessageDuringRefresh = @"";
     }
