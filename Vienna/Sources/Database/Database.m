@@ -546,6 +546,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update folders set flags=? where folder_id=?", @(folder.flags), @(folderId)];
+        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folderId)];
         }];
 	}
 }
@@ -571,6 +572,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update folders set flags=? where folder_id=?", @(folder.flags), @(folderId)];
+            [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folderId)];
         }];
 	}
 }
@@ -654,6 +656,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update rss_folders set feed_url=? where folder_id=?", feed_url, @(folderId)];
+            [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folderId)];
         }];
 	}
 	return YES;
@@ -2524,6 +2527,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"UPDATE folders set unread_count=? where folder_id=?", @(newCount), @(folder.itemId)];
+        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
     }];
 
 	// Update childUnreadCount for parents.

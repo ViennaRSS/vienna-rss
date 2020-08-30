@@ -986,10 +986,7 @@
 		else if (folder.type == VNAFolderTypeRSS)
 		{
 			[refArray addObjectsFromArray:[folder arrayOfUnreadArticlesRefs]];
-			if ([[Database sharedManager] markFolderRead:folderId]) {
-				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
-																	object:@(folderId)];
-			}
+			[[Database sharedManager] markFolderRead:folderId];
 		}
 		else if (folder.type == VNAFolderTypeOpenReader)
 		{

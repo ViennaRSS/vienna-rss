@@ -134,19 +134,6 @@
     [NSApp beginSheet:newRSSFeedWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
 } // newSubscription
 
-/* didEndSubscriptionEdit
- * Notification that the editing is done.
- */
-- (void)didEndSubscriptionEdit:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
-{
-	NSNumber * folderNumber = (__bridge NSNumber *)contextInfo;
-	
-	// Notify any open windows.
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:folderNumber];
-	
-	// Now release the folder number.
-}
-
 /* editSubscription
  * Edit an existing RSS subscription.
  */
@@ -161,13 +148,8 @@
 		[self enableSaveButton];
 		editFolderId = folderId;
 		
-		// Create a context object which contains the folder ID for the sheet to pass to
-		// selector which it will call when done. Retain it so it is still around for the
-		// selector.
-		NSNumber * folderContext = @(folderId);
-		
 		// Open the edit sheet.
-		[NSApp	beginSheet:editRSSFeedWindow modalForWindow:window modalDelegate:self didEndSelector:@selector(didEndSubscriptionEdit:returnCode:contextInfo:) contextInfo:(__bridge void *)(folderContext)];
+		[NSApp	beginSheet:editRSSFeedWindow modalForWindow:window modalDelegate:self didEndSelector:nil contextInfo:nil];
 	}
 }
 
