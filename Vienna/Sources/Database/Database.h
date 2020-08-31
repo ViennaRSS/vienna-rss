@@ -71,7 +71,7 @@ extern NSNotificationName const databaseDidDeleteFolderNotification;
 -(BOOL)setRemoteId:(NSString *)remoteId forFolder:(NSInteger)folderId;
 -(BOOL)setFolderUsername:(NSInteger)folderId newUsername:(NSString *)name;
 -(void)purgeDeletedArticles;
--(void)purgeArticlesOlderThanDays:(NSUInteger)daysToKeep;
+-(void)purgeArticlesOlderThanTag:(NSUInteger)tag;
 -(BOOL)markFolderRead:(NSInteger)folderId;
 -(void)clearFlag:(NSUInteger)flag forFolder:(NSInteger)folderId;
 -(void)setFlag:(NSUInteger)flag forFolder:(NSInteger)folderId;

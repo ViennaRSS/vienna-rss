@@ -2038,7 +2038,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		// Run the auto-expire now
 		Preferences * prefs = [Preferences standardPreferences];
-		[db purgeArticlesOlderThanDays:prefs.autoExpireDuration];
+		[db purgeArticlesOlderThanTag:prefs.autoExpireDuration];
 
 		// Toggle the refresh button
 		NSToolbarItem *item = [self toolbarItemWithIdentifier:@"Refresh"];
