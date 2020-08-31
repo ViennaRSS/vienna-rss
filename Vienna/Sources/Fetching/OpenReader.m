@@ -1167,7 +1167,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     if ([requestResponse isEqualToString:@"OK"]) {
         Folder *folder = ((NSDictionary *)[request userInfo])[@"folder"];
         [[Database sharedManager] markFolderRead:folder.itemId];
-        [folder markArticlesInCacheRead];
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:@(folder.itemId)];
     }
