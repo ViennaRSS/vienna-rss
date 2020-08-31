@@ -524,6 +524,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     }
     if (!hasStarted) {
         hasStarted = YES;
+        countOfNewArticles = 0;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
     }
 } // refreshFeed
@@ -1129,11 +1130,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     [[NSOperationQueue mainQueue] addOperation:completionOperation];
 
     [networkQueue addOperation:op];
-    if (networkQueue.operationCount == 1) {       // networkQueue is NOT YET started
-        [self updateStatus];
-        countOfNewArticles = 0;
-        [networkQueue setSuspended:NO];
-    }
     return op;
 } // addConnection
 
