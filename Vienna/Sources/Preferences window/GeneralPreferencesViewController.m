@@ -72,6 +72,9 @@
     checkOnStartUp.state = prefs.refreshOnStartup ? NSControlStateValueOn : NSControlStateValueOff;
     
     // Set range of auto-expire values
+    // Meaning of tag :
+    // 0 value disables auto-expire.
+    // Increments of 1000 specify months, so 1000 = 1 month, 1001 = 1 month and 1 day…
     [expireDuration removeAllItems];
     [expireDuration insertItemWithTag:NSLocalizedString(@"Never", nil) tag:0 atIndex:0];
     [expireDuration insertItemWithTag:NSLocalizedString(@"After a Day", nil) tag:1 atIndex:1];
