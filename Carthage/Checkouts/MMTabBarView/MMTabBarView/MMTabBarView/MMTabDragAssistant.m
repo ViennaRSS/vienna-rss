@@ -567,6 +567,8 @@ static MMTabDragAssistant *sharedDragAssistant = nil;
                         if (aPoint.y > NSMaxY(lastFrame))
                             resultingIndex = tabBarView.numberOfVisibleTabViewItems;
                     }
+                    if ([self.sourceTabBar selectedTabViewItem])
+						return [self.sourceTabBar indexOfTabViewItem:(NSTabViewItem *)self.sourceTabBar.selectedTabViewItem];
                 }
             }
         }
@@ -633,9 +635,9 @@ static MMTabDragAssistant *sharedDragAssistant = nil;
 		rect.origin = NSZeroPoint;
 		CGContextCopyWindowCaptureContentsToRect(graphicsPort, *(CGRect *)&rect, NSApp.contextID, window.windowNumber, 0);
 		[image unlockFocus];
+		return image;
 	}
-
-	return image;
+	return nil;
 }
 
 - (void)_expandWindow:(NSWindow *)window atPoint:(NSPoint)point {
