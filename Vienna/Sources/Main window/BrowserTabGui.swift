@@ -66,7 +66,7 @@ extension BrowserTab {
         }
 
         // cleanUpUrl is a hack to handle Internationalized Domain Names. WebKit handles them automatically, so we tap into that.
-        let urlToLoad = cleanedUpUrlFromString(cleanedUrl)
+        let urlToLoad = cleanedUpUrlFromString(cleanedUrl) //TODO: remove tight coupling to HelperFunctions
 
         //set url and load immediately, because action was invoked by user
         self.tabUrl = urlToLoad
