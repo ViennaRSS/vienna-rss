@@ -525,6 +525,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     if (!hasStarted) {
         hasStarted = YES;
         countOfNewArticles = 0;
+        [[OpenReader sharedManager] resetCountOfNewArticles];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
     }
 } // refreshFeed
