@@ -404,13 +404,13 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     limit = 0.0;
                 }
                 NSString *startEpoch = @(limit).stringValue;
-                itemsLimitation = [NSString stringWithFormat:@"&ot=%@&n=500", startEpoch];
+                itemsLimitation = [NSString stringWithFormat:@"&ot=%@&n=1000", startEpoch];
             } @catch (NSException *exception) {
-                itemsLimitation = @"&n=500";
+                itemsLimitation = @"&n=1000";
             }
         } else {
             // Bazqux.com, TheOldReader.com and Inoreader.com
-            itemsLimitation = [NSString stringWithFormat:@"&ot=%@&n=500", folderLastUpdateString];
+            itemsLimitation = [NSString stringWithFormat:@"&ot=%@&n=1000", folderLastUpdateString];
         }
     }
 
