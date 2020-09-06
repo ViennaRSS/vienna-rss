@@ -34,6 +34,7 @@
 -(void)setFolderLabel:(NSString *)folderName forFeed:(NSString *)feedIdentifier set:(BOOL)flag;
 -(void)setFolderTitle:(NSString *)folderName forFeed:(NSString *)feedIdentifier;
 -(void)refreshFeed:(Folder*)thisFolder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:(BOOL)ignoreLimit;
+-(void)resetCountOfNewArticles;
 @property (nonatomic, readonly) NSUInteger countOfNewArticles;
 
 @end

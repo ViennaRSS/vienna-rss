@@ -368,13 +368,11 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     return (self.openReaderStatus == fullyAuthenticated && self.tTokenTimer != nil);
 }
 
-/* countOfNewArticles
+/* resetCountOfNewArticles
  */
--(NSUInteger)countOfNewArticles
+-(void)resetCountOfNewArticles
 {
-    NSUInteger count = _countOfNewArticles;
-    _countOfNewArticles = 0;
-    return count;
+    self.countOfNewArticles=0;
 }
 
 # pragma mark operations
