@@ -49,17 +49,17 @@ class BrowserTab: NSViewController {
 		return wv
 	}()
 
-    @IBOutlet private(set) weak var addressBarPaddingView: NSView!
     @IBOutlet private(set) weak var addressBarContainer: NSView!
     @IBOutlet private(set) weak var addressField: NSTextField!
     @IBOutlet private(set) weak var backButton: NSButton!
     @IBOutlet private(set) weak var forwardButton: NSButton!
     @IBOutlet private(set) weak var reloadButton: NSButton!
-
+    @IBOutlet weak var progressBar: LoadingIndicator?
+    
     @IBOutlet private(set) weak var cancelButtonWidth: NSLayoutConstraint!
     @IBOutlet private(set) weak var reloadButtonWidth: NSLayoutConstraint!
     @IBOutlet private(set) weak var rssButtonWidth: NSLayoutConstraint!
-
+    
 	var url: URL? = nil {
 		didSet {
             if self.url != webView.url || self.url == nil {
@@ -84,6 +84,7 @@ class BrowserTab: NSViewController {
 
 	var titleObservation: NSKeyValueObservation!
     var loadingObservation: NSKeyValueObservation!
+    var progressObservation: NSKeyValueObservation!
     var urlObservation: NSKeyValueObservation!
 
     // MARK: object lifecycle
@@ -105,6 +106,12 @@ class BrowserTab: NSViewController {
                 return
             }
             self?.loading = newValue
+        }
+        progressObservation = webView.observe(\.estimatedProgress, options: .new) { [weak self] _, change in
+            guard let newValue = change.newValue else {
+                return
+            }
+            self?.loadingProgress = newValue
         }
         urlObservation = webView.observe(\.url, options: .new) { [weak self] _, change in
             guard let newValue = change.newValue else {
@@ -132,7 +139,7 @@ class BrowserTab: NSViewController {
         webView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(webView, positioned: .below, relativeTo: nil)
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[addressBarContainer][webView]|", options: [], metrics: nil, views: ["webView": webView, "addressBarContainer": addressBarPaddingView as Any]))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[addressBarContainer][webView]|", options: [], metrics: nil, views: ["webView": webView, "addressBarContainer": addressBarContainer as Any]))
 
         //title needs to be adjusted once view is loaded
 
@@ -171,30 +178,6 @@ class BrowserTab: NSViewController {
     override func viewDidDisappear() {
         super.viewDidDisappear()
         self.viewVisible = false
-    }
-
-    func updateAddressBarLayout() {
-
-        cancelButtonWidth?.constant = loading ? 30 : 0
-        reloadButtonWidth?.constant = loading ? 0 : 30
-
-        if showRssButton {
-            //show rss button
-            rssButtonWidth.constant = 40
-        } else {
-            //hide rss button
-            rssButtonWidth.constant = 0
-        }
-
-        if viewVisible {
-            NSAnimationContext.runAnimationGroup({_ in
-                NSAnimationContext.current.duration = 0.2
-                NSAnimationContext.current.allowsImplicitAnimation = true
-                addressBarContainer.layoutSubtreeIfNeeded()
-            }, completionHandler: nil)
-        } else {
-            addressBarContainer.layoutSubtreeIfNeeded()
-        }
     }
 }
 
