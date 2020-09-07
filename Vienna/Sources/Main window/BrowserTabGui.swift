@@ -19,7 +19,7 @@
 
 import Foundation
 
-//MARK: User Interaction
+// MARK: User Interaction
 
 extension BrowserTab {
 
@@ -34,7 +34,6 @@ extension BrowserTab {
 
         cleanAndLoad(url: enteredUrl)
     }
-
 
     @IBAction func reload(_ sender: Any) {
         self.reloadTab()
@@ -71,6 +70,48 @@ extension BrowserTab {
         //set url and load immediately, because action was invoked by user
         self.tabUrl = urlToLoad
         self.loadTab()
+    }
+
+    var loadingProgress: Double? {
+        get { Double(progressBar?.getCurrentLoadingProgress() ?? 0) }
+        set {
+            let new = CGFloat(newValue ?? 0)
+            let old = progressBar?.getCurrentLoadingProgress() ?? 0
+            progressBar?.setLoadingProgress(new, animationDuration: old < new ? 0.3 : 0.05)
+            if new == 1.0 {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4) {
+                    self.progressBar?.isHidden = true
+                }
+            } else {
+                self.progressBar?.isHidden = false
+            }
+        }
+    }
+
+    func updateAddressBarLayout() {
+
+        cancelButtonWidth?.constant = loading ? 30 : 0
+        reloadButtonWidth?.constant = loading ? 0 : 30
+
+        if showRssButton {
+            //show rss button
+            rssButtonWidth.constant = 40
+        } else {
+            //hide rss button
+            rssButtonWidth.constant = 0
+        }
+
+        addressBarContainer.needsLayout = true
+
+        if viewVisible {
+            NSAnimationContext.runAnimationGroup({_ in
+                NSAnimationContext.current.duration = 0.2
+                NSAnimationContext.current.allowsImplicitAnimation = true
+                self.addressBarContainer.layoutSubtreeIfNeeded()
+            }, completionHandler: nil)
+        } else {
+            self.addressBarContainer.layoutSubtreeIfNeeded()
+        }
     }
 }
 

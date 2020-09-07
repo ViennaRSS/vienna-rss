@@ -8,8 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BrowserTab" customModule="Vienna" customModuleProvider="target">
             <connections>
-                <outlet property="addressBarContainer" destination="OeK-Vl-Vdl" id="acx-aq-dnE"/>
-                <outlet property="addressBarPaddingView" destination="OdK-ur-PPi" id="NyC-QN-c8t"/>
+                <outlet property="addressBarContainer" destination="OdK-ur-PPi" id="Erc-1n-gBl"/>
                 <outlet property="addressField" destination="hfe-el-NfG" id="Sfl-fz-aCb"/>
                 <outlet property="backButton" destination="0rn-z0-yA2" id="1VR-2q-DKI"/>
                 <outlet property="cancelButtonWidth" destination="yiE-mL-DVV" id="wT4-Rq-NMn"/>
@@ -93,7 +92,7 @@
                                     </connections>
                                 </button>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KeR-ow-lja">
-                                    <rect key="frame" x="800" y="0.0" width="40" height="21"/>
+                                    <rect key="frame" x="800" y="-1" width="40" height="22"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="40" id="PoN-9V-QZr"/>
                                     </constraints>
