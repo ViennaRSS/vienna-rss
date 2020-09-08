@@ -8,6 +8,16 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.5.7
+-----
+- Fix file being hidden at end of "Download image"
+- Fix crash on editing search folder
+- Fix inaccurate information about number of unread articles
+- Fix wrong behaviour of "Move articles to Trash: After a Month" preference
+- Remove Google+ plugin ; replace it with Google Currents plugin
+- Increase to 1000 the limit of articles fetched at once from an Open Reader feed
+- Update Sparkle to v1.23.0 and MMTabBarView to v/1.4.7
+
 3.5.6
 -----
 - Vienna is now notarized (needed by macOS Catalina and later)
