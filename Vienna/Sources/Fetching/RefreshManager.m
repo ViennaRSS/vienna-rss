@@ -524,6 +524,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     }
     if (!hasStarted) {
         hasStarted = YES;
+        countOfNewArticles = 0;
+        [[OpenReader sharedManager] resetCountOfNewArticles];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
     }
 } // refreshFeed
@@ -604,8 +606,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             // We got HTTP 410 which means the feed has been intentionally removed so unsubscribe the feed.
             [dbManager setFlag:VNAFolderFlagUnsubscribed forFolder:folderId];
 
-            [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
-                                                                                object:@(folderId)];
         } else if (responseStatusCode == 200 || responseStatusCode == 226) {
             if (receivedData != nil) {
                 [self finalizeFolderRefresh:@{
@@ -977,9 +977,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 -(void)syncFinishedForFolder:(Folder *)folder
 {
     [self setFolderUpdatingFlag:folder flag:NO];
-    // Unread count may have changed
-    [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
-                                                                        object:@(folder.itemId)];
 }
 
 #pragma mark NSURLSession redirection delegate
@@ -1134,11 +1131,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     [[NSOperationQueue mainQueue] addOperation:completionOperation];
 
     [networkQueue addOperation:op];
-    if (networkQueue.operationCount == 1) {       // networkQueue is NOT YET started
-        [self updateStatus];
-        countOfNewArticles = 0;
-        [networkQueue setSuspended:NO];
-    }
     return op;
 } // addConnection
 
@@ -1175,13 +1167,18 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     self.statusMessage = self->statusMessageDuringRefresh;
 }
 
+/* finishConnectionQueue
+ * this is run on the main thread
+ * at the exhaustion of the network queue
+ */
 -(void)finishConnectionQueue
 {
     if (hasStarted) {
-        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:nil];
-        hasStarted = NO;
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+        [nc postNotificationName:@"MA_Notify_ArticleListContentChange" object:nil];
         statusMessageDuringRefresh = NSLocalizedString(@"Refresh completed", nil);
+        hasStarted = NO;
     } else {
         statusMessageDuringRefresh = @"";
     }

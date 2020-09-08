@@ -2,18 +2,23 @@
 
 
 
-MMTabBarView -- Sierra Style Fork
-=================================
+MMTabBarView -- ViennaRSS fork
+==============================
 
-This is a fork of the MMTabBarView to add a macOS Sierra style tabs. This enables look-alike tabs in use-cases where the built in macOS won't function.
+This is the fork of MMTabBarView which is used to build [Vienna](https://github.com/ViennaRSS/vienna-rss), an open source RSS/Atom newsreader. During a period when MMTabBarView seemed to be neglected, Vienna developers felt [compelled](https://github.com/ViennaRSS/vienna-rss/issues/762) to make changes to it.
 
-There are many Apple apps that include tabs that are similarly styled in Sierra, but each have subtle variations. After careful analysis it seems that the tabs in Safari are the most feature complete and stylistically consistent. So all gradient curves and behaviors are matched as closely as possible to that.
+We currently try to limit widening of divergences with [Michael Monscheuer's version](https://github.com/MiMo42/MMTabBarView), but at the time being, some noticeable changes remain:
 
-I have intentionally chosen to support the overflow menu instead of the overflowing bunched-tabs of macOS Sierra as it seems a bit more friendly.
+- while the original version requires 10.10+, Vienna's version is able to run on OS X 10.9
+- Vienna's version adds support of macOS Sierra style tabs (contributed by @yourhead)
+- we implement MMTabBarView's delegate property as weak, in order to avoid retain cycles
+- animations differ
+
+Note that to limit risks of confusion with the original version, we use a `v/x.x.x` scheme for version numbering.  
+Ex: our `v/1.4.7` can be compared to Mimo's `v1.4.1`
 
 
-
-Original ReadMe
+### Original ReadMe
 
 A Mac OS X tab bar view that works on 10.10+ with Xcode 9.3 or higher.<br>
 MMTabBarView is a modernized and view based re-write of PSMTabBarControl, <br>

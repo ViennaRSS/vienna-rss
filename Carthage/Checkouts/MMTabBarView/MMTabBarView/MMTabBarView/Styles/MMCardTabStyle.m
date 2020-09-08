@@ -14,6 +14,8 @@
 #import "MMTabBarView.Private.h"
 #import "MMOverflowPopUpButton.h"
 
+#define USE_DYNAMIC_APPEARANCE 1
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MMCardTabStyle ()
@@ -140,8 +142,132 @@ NS_ASSUME_NONNULL_BEGIN
     return rect;
 }
 
+#pragma mark - Cell Values
+
+
+- (NSAttributedString *)attributedStringValueForTabCell:(MMTabBarButtonCell *)cell
+ {
+    NSMutableAttributedString *attrStr;
+    NSString * contents = cell.title;
+    attrStr = [[NSMutableAttributedString alloc] initWithString:contents];
+    #if !__has_feature(objc_arc)
+		[attrStr autorelease];
+    #endif
+    NSRange range = NSMakeRange(0, [contents length]);
+    
+    [attrStr addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:11.0] range:range];
+    #if USE_DYNAMIC_APPEARANCE
+		NSColor *textColor;
+		if (([NSApp respondsToSelector:@selector(effectiveAppearance)]) && ([[[NSApp effectiveAppearance] name] isEqualToString:@"NSAppearanceNameDarkAqua"]))
+		{
+			if ([NSApp isActive])
+			{
+				if ([cell state] == NSOnState)
+	    			textColor=[NSColor controlTextColor];
+				else
+	    			textColor=[NSColor disabledControlTextColor];
+			}
+			else
+				textColor=[NSColor disabledControlTextColor];
+		}
+		else
+			textColor=[NSColor selectedControlTextColor];
+		[attrStr addAttribute:NSForegroundColorAttributeName value:textColor range:range];
+    #endif
+    
+    // Paragraph Style for Truncating Long Text
+    static NSMutableParagraphStyle *TruncatingTailParagraphStyle = nil;
+    if (!TruncatingTailParagraphStyle) {
+        TruncatingTailParagraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+		#if !__has_feature(objc_arc)
+			[TruncatingTailParagraphStyle retain];
+		#endif
+        [TruncatingTailParagraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
+    }
+    [attrStr addAttribute:NSParagraphStyleAttributeName value:TruncatingTailParagraphStyle range:range];
+    
+    return attrStr;	
+}
+
+
 #pragma mark -
 #pragma mark Drawing
+
+- (NSColor *)lineColor {
+	#if USE_DYNAMIC_APPEARANCE
+		#pragma clang diagnostic push
+		#pragma clang diagnostic ignored "-Wunguarded-availability"
+		if ([[NSColor class] respondsToSelector:@selector(separatorColor)])
+			return [NSColor separatorColor];
+		#pragma clang diagnostic pop
+	#endif
+	return [NSColor colorWithCalibratedWhite:0.576 alpha:1.0];
+}
+
+- (NSColor *)gradientTopColorActive:(BOOL)inActive highlighted:(BOOL)inHighlighted {
+	#if USE_DYNAMIC_APPEARANCE
+		#pragma clang diagnostic push
+		#pragma clang diagnostic ignored "-Wunguarded-availability"
+		if (inActive) {
+			if (([NSApp respondsToSelector:@selector(effectiveAppearance)])
+				&& ([[[NSApp effectiveAppearance] name] isEqualToString:@"NSAppearanceNameDarkAqua"])
+				&& ([[NSColor class] respondsToSelector:@selector(unemphasizedSelectedContentBackgroundColor)]))
+				return (NSColor *)[NSColor unemphasizedSelectedContentBackgroundColor];
+			else
+				return [NSColor colorWithDeviceWhite:1.0 alpha:1.0];
+ 		}
+		else if (inHighlighted) {
+			if ([[NSColor class] respondsToSelector:@selector(unemphasizedSelectedContentBackgroundColor)])
+				return(NSColor *) [[NSColor unemphasizedSelectedContentBackgroundColor] shadowWithLevel:0.1];
+			else
+				return [NSColor colorWithCalibratedWhite:0.80 alpha:1.0];
+		} else {
+			if ([[NSColor class] respondsToSelector:@selector(unemphasizedSelectedContentBackgroundColor)])
+				return (NSColor *)[NSColor unemphasizedSelectedContentBackgroundColor];
+			else
+				return [NSColor colorWithCalibratedWhite:0.835 alpha:1.0];
+		}
+		#pragma clang diagnostic pop
+	#else
+		if (inActive)
+			return [NSColor colorWithDeviceWhite:1.0 alpha:1.0];
+		else if (inHighlighted)
+			return [NSColor colorWithCalibratedWhite:0.80 alpha:1.0];
+		else
+			return [NSColor colorWithCalibratedWhite:0.835 alpha:1.0];
+	#endif
+}
+
+- (NSColor *)gradientBottomColorActive:(BOOL)inActive highlighted:(BOOL)inHighlighted {
+	#if USE_DYNAMIC_APPEARANCE
+		#pragma clang diagnostic push
+		#pragma clang diagnostic ignored "-Wunguarded-availability"
+		if (inActive)
+			if ([NSApp respondsToSelector:@selector(effectiveAppearance)])
+				return [NSColor windowBackgroundColor];
+			else
+				return [NSColor colorWithDeviceWhite:237.0/255.0 alpha:1.0];
+		else if (inHighlighted) {
+			if ([[NSColor class] respondsToSelector:@selector(unemphasizedSelectedContentBackgroundColor)])
+				return (NSColor *)[[NSColor unemphasizedSelectedContentBackgroundColor] shadowWithLevel:0.1];
+			else
+				return [NSColor colorWithCalibratedWhite:0.80 alpha:1.0];
+		} else {
+			if ([[NSColor class] respondsToSelector:@selector(unemphasizedSelectedContentBackgroundColor)])
+				return (NSColor *)[NSColor unemphasizedSelectedContentBackgroundColor];
+			else
+				return [NSColor colorWithCalibratedWhite:0.843 alpha:1.0];
+		}
+		#pragma clang diagnostic pop
+	#else
+		if (inActive)
+			return [NSColor colorWithDeviceWhite:37.0/255.0 alpha:1.0];
+		else if (inHighlighted)
+			return [NSColor colorWithCalibratedWhite:0.80 alpha:1.0];
+		else
+			return [NSColor colorWithCalibratedWhite:0.843 alpha:1.0];
+	#endif
+}
 
 - (void)drawBezelOfTabBarView:(MMTabBarView *)tabBarView inRect:(NSRect)rect {
 	//Draw for our whole bounds; it'll be automatically clipped to fit the appropriate drawing area
@@ -151,20 +277,11 @@ NS_ASSUME_NONNULL_BEGIN
 
     NSGradient *gradient = nil;
     
-    if (tabBarView.isWindowActive) {
-        // gray bar gradient
         gradient = [[NSGradient alloc] initWithColorsAndLocations:
-                        [NSColor colorWithCalibratedWhite:0.678 alpha:1.000],0.0,
-                        [NSColor colorWithCalibratedWhite:0.821 alpha:1.000],1.0,
+                        [self gradientBottomColorActive:NO highlighted:NO], 0.0,
+                        [self gradientBottomColorActive:NO highlighted:NO] ,1.0,
                         nil];
-    } else {
-        // light gray bar gradient
-        gradient = [[NSGradient alloc] initWithColorsAndLocations:
-                [NSColor colorWithCalibratedWhite:0.821 alpha:1.000],0.0,
-                [NSColor colorWithCalibratedWhite:0.956 alpha:1.000],1.0,
-                nil];
-    }
-    
+
     if (gradient) {
         [gradient drawInRect:bounds angle:270];
     
@@ -173,7 +290,7 @@ NS_ASSUME_NONNULL_BEGIN
     bounds = tabBarView.bounds;
         
         // draw additional separator line
-    [[NSColor colorWithCalibratedWhite:0.576 alpha:1.0] set];
+    [[self lineColor] set];
         
     [NSBezierPath strokeLineFromPoint:NSMakePoint(NSMinX(bounds),NSMaxY(bounds)-0.5)
                   toPoint:NSMakePoint(NSMaxX(bounds),NSMaxY(bounds)-0.5)];        
@@ -231,7 +348,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     capMask &= ~MMBezierShapeFillPath;
     
-    NSColor *lineColor = [NSColor colorWithCalibratedWhite:0.576 alpha:1.0];
+    NSColor *lineColor = [self lineColor];
 
     CGFloat radius = MIN(6.0, 0.5 * MIN(NSWidth(aRect), NSHeight(aRect)))-0.5;
 
@@ -241,19 +358,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSGradient *gradient = nil;
 
     if (tabBarView.isWindowActive) {
-        if (button.state == NSOnState) {
-              gradient = [[NSGradient alloc] initWithStartingColor:NSColor.whiteColor endingColor:[NSColor colorWithDeviceWhite:0.929 alpha:1.000]];
-        } else if (button.mouseHovered) {
-        
-            gradient = [[NSGradient alloc] 
-                initWithStartingColor: [NSColor colorWithCalibratedWhite:0.80 alpha:1.0]
-                endingColor:[NSColor colorWithCalibratedWhite:0.80 alpha:1.0]];           
-        } else {
-
-            gradient = [[NSGradient alloc] 
-                initWithStartingColor:[NSColor colorWithCalibratedWhite:0.835 alpha:1.0] 
-                endingColor:[NSColor colorWithCalibratedWhite:0.843 alpha:1.0]];                                
-        }
+        gradient = [[NSGradient alloc] initWithStartingColor:[self gradientTopColorActive:(button.state == NSOnState) highlighted:(button.mouseHovered)] endingColor:[self gradientBottomColorActive:(button.state == NSOnState) highlighted:(button.mouseHovered)]];
 
         if (gradient != nil) {
             [gradient drawInBezierPath:fillPath angle:90.0];
@@ -273,7 +378,7 @@ NS_ASSUME_NONNULL_BEGIN
     if (button.state == NSOffState) {
     
             // draw additional separator line
-        [[NSColor colorWithCalibratedWhite:0.576 alpha:1.0] set];
+        [[self lineColor] set];
         
         [NSBezierPath strokeLineFromPoint:NSMakePoint(NSMinX(aRect),NSMaxY(aRect)-0.5)
                   toPoint:NSMakePoint(NSMaxX(aRect),NSMaxY(aRect)-0.5)];

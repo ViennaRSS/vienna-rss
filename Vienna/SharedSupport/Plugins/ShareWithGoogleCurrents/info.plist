@@ -5,20 +5,20 @@
 	<key>Name</key>
 	<string>ShareWithGoogle+</string>
 	<key>Default</key>
-	<true/>
+	<false/>
 	<key>Type</key>
 	<string>Link</string>
 	<key>URL</key>
-	<string>https://plus.google.com/share?url=$ArticleLink$</string>
+	<string>https://currents.google.com/share?url=$ArticleLink$</string>
 	<key>FriendlyName</key>
-	<string>Google+</string>
+	<string>Google Currents</string>
 	<key>Tooltip</key>
-	<string>Share the current article on Google+</string>
+	<string>Share the current article on Google Currents</string>
 	<key>ButtonImage</key>
 	<string>google+Button</string>
 	<key>ButtonImage@2x</key>
 	<string>google+Button@2x</string>
 	<key>MenuPath</key>
-	<string>Share With Google+</string>
+	<string>Share With Google Currents</string>
 </dict>
 </plist>

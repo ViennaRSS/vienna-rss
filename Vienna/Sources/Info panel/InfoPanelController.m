@@ -141,8 +141,6 @@
     else {
 		[[Database sharedManager] setFlag:VNAFolderFlagUnsubscribed forFolder:self.infoFolderId];
     }
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
-                                                        object:@(self.infoFolderId)];
 }
 
 /* loadFullHTMLChanged

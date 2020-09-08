@@ -546,6 +546,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update folders set flags=? where folder_id=?", @(folder.flags), @(folderId)];
+        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folderId)];
         }];
 	}
 }
@@ -571,6 +572,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update folders set flags=? where folder_id=?", @(folder.flags), @(folderId)];
+            [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folderId)];
         }];
 	}
 }
@@ -654,6 +656,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update rss_folders set feed_url=? where folder_id=?", feed_url, @(folderId)];
+            [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folderId)];
         }];
 	}
 	return YES;
@@ -1646,17 +1649,25 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     }
 }
 
-/* purgeArticlesOlderThanDays
- * Deletes all non-flagged articles from the messages list that are older than the specified
- * number of days.
+/* purgeArticlesOlderThanTag
+ * Deletes all non-flagged articles from the messages list that are older than the 
+ * specification. Cf. comments about autoExpireDuration in Preferences.m :
+ *   A zero value disables auto-expire.
+ *   Increments of 1000 specify months, so 1000 = 1 month, 1001 = 1 month and 1 day
  */
--(void)purgeArticlesOlderThanDays:(NSUInteger)daysToKeep
+-(void)purgeArticlesOlderThanTag:(NSUInteger)tag
 {
-    if (daysToKeep > 0) {
-        NSDate *date = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay
-                                                                value:-daysToKeep
+    if (tag > 0) {
+        NSUInteger months = tag / 1000;
+        NSUInteger days = tag%1000;
+        NSDate *date = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMonth
+                                                                value:-months
                                                                toDate:[NSDate date]
                                                               options:0];
+        date = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay
+                                                        value:-days
+                                                        toDate:date
+                                                        options:0];
         NSTimeInterval timeDiff = date.timeIntervalSince1970;
 
         [self.databaseQueue inDatabase:^(FMDatabase *db) {
@@ -2524,6 +2535,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"UPDATE folders set unread_count=? where folder_id=?", @(newCount), @(folder.itemId)];
+        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
     }];
 
 	// Update childUnreadCount for parents.

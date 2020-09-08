@@ -363,7 +363,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
 	[nc addObserver:self selector:@selector(handleShowAppInStatusBar:) name:@"MA_Notify_ShowAppInStatusBarChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleShowFilterBar:) name:@"MA_Notify_FilterBarChanged" object:nil];
-	[nc addObserver:self selector:@selector(showUnreadCountOnApplicationIconAndWindowTitle) name:@"MA_Notify_FoldersUpdated" object:nil];
+	[nc addObserver:self selector:@selector(handleUpdateUnreadCount:) name:@"MA_Notify_FoldersUpdated" object:nil];
 	//Open Reader Notifications
     [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
 
@@ -1573,6 +1573,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 }
 
+- (void)handleUpdateUnreadCount:(NSNotification *)nc
+{
+	[self showUnreadCountOnApplicationIconAndWindowTitle];
+}
+
 /* showUnreadCountOnApplicationIconAndWindowTitle
  * Update the Vienna application icon to show the number of unread articles.
  */
@@ -2028,7 +2033,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		// Run the auto-expire now
 		Preferences * prefs = [Preferences standardPreferences];
-		[db purgeArticlesOlderThanDays:prefs.autoExpireDuration];
+		[db purgeArticlesOlderThanTag:prefs.autoExpireDuration];
 
 		// Toggle the refresh button
 		NSToolbarItem *item = [self toolbarItemWithIdentifier:@"Refresh"];
@@ -2820,8 +2825,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             [[Database sharedManager] setFlag:VNAFolderFlagUnsubscribed forFolder:folder.itemId];
         }
 
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
-                                                            object:@(folder.itemId)];
 	}
 }
 
