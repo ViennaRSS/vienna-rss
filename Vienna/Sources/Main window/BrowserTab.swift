@@ -33,10 +33,13 @@ class BrowserTab: NSViewController {
 		prefs.plugInsEnabled = true
 		let config = WKWebViewConfiguration()
 		config.preferences = prefs
-		if #available(OSX 10.11, *) {
-			config.applicationNameForUserAgent = "vienna-rss"
-			config.allowsAirPlayForMediaPlayback = true
-		}
+        if #available(OSX 10.11, *) {
+            // for useragent, we mimic the installed version of Safari and add our own identifier
+            let shortSafariVersion = Bundle(path: "/Applications/Safari.app")?.infoDictionary?["CFBundleShortVersionString"] as? String
+            let viennaVersion = (NSApp as? ViennaApp)?.applicationVersion?.prefix(while: { character in return character != " " })
+            config.applicationNameForUserAgent = "Version/\(shortSafariVersion ?? "9.1") Safari/605 Vienna/\(viennaVersion ?? "3.5+")"
+            config.allowsAirPlayForMediaPlayback = true
+        }
 		if #available(OSX 10.12, *) {
 			config.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.all
 		}
