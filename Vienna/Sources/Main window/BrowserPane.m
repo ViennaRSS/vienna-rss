@@ -457,17 +457,8 @@
 {
     if (hasRSSlink)
     {
-        Folder * currentFolder = APP.currentFolder;
-        NSInteger currentFolderId = currentFolder.itemId;
-        NSInteger parentFolderId = currentFolder.parentId;
-        if (currentFolder.firstChildId > 0)
-        {
-            parentFolderId = currentFolderId;
-            currentFolderId = 0;
-        }
-        SubscriptionModel *subscription = [[SubscriptionModel alloc] init];
-        NSString * verifiedURLString = [subscription verifiedFeedURLFromURL:self.tabUrl].absoluteString;
-        [APPCONTROLLER createNewSubscription:verifiedURLString underFolder:parentFolderId afterChild:currentFolderId];
+        NSURL *rssUrl = self.tabUrl;
+        [APPCONTROLLER createSubscriptionInCurrentLocationForUrl:rssUrl];
     }
 }
 

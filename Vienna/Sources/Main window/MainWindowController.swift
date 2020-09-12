@@ -35,7 +35,6 @@ final class MainWindowController: NSWindowController {
 	@objc private(set) lazy var browser: (Browser & NSViewController) = {
 		if #available(macOS 10.10, *) {
             var controller = TabbedBrowserViewController()
-            //TODO: set up browser rssSubscriber, either here or in appDidFinishLaunching
 			return controller
 		} else {
 			return WebViewBrowser()
@@ -46,6 +45,8 @@ final class MainWindowController: NSWindowController {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        (self.browser as? RSSSource)?.rssSubscriber = self
 
         // TODO: Move this to windowDidLoad()
         statusBarState(disclosed: Preferences.standard().showStatusBar, animate: false)
@@ -254,5 +255,12 @@ extension MainWindowController: NSMenuDelegate {
             }
         }
     }
+}
 
+// MARK: - Rss subscriber
+
+extension MainWindowController: RSSSubscriber {
+    func subscribeToRSS(_ url: URL?) {
+        (NSApp.delegate as? AppController)?.createSubscriptionInCurrentLocation(for: url)
+    }
 }

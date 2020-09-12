@@ -57,6 +57,7 @@
 #import "UnifiedDisplayView.h"
 #import "ArticleView.h"
 #import "FolderView.h"
+#import "SubscriptionModel.h"
 
 @interface AppController () <InfoPanelControllerDelegate, ActivityPanelControllerDelegate>
 
@@ -2378,6 +2379,20 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     if (!db.readOnly) {
         [self.articleController markAllFoldersReadByArray:arrayOfFolders];
     }
+}
+
+-(void)createSubscriptionInCurrentLocationForUrl:(NSURL *)url {
+    Folder * currentFolder = APP.currentFolder;
+    NSInteger currentFolderId = currentFolder.itemId;
+    NSInteger parentFolderId = currentFolder.parentId;
+    if (currentFolder.firstChildId > 0)
+    {
+        parentFolderId = currentFolderId;
+        currentFolderId = 0;
+    }
+    SubscriptionModel *subscription = [[SubscriptionModel alloc] init];
+    NSString * verifiedURLString = [subscription verifiedFeedURLFromURL:url].absoluteString;
+    [self createNewSubscription:verifiedURLString underFolder:parentFolderId afterChild:currentFolderId];
 }
 
 /* createNewSubscription
