@@ -23,24 +23,27 @@ import MMTabBarView
 @available(OSX 10.10, *)
 class TabbedBrowserViewController: NSViewController, RSSSource {
 
-    @IBOutlet private(set) weak var tabBar: MMTabBarView! {
+    @IBOutlet private(set) weak var tabBar: MMTabBarView? {
         didSet {
-            self.tabBar.setStyleNamed("Mojave")
-            self.tabBar.onlyShowCloseOnHover = true
-            self.tabBar.canCloseOnlyTab = false
-            self.tabBar.disableTabClose = false
-            self.tabBar.allowsBackgroundTabClosing = true
-            self.tabBar.hideForSingleTab = true
-            self.tabBar.showAddTabButton = true
-            self.tabBar.buttonMinWidth = 120
-            self.tabBar.useOverflowMenu = true
-            self.tabBar.automaticallyAnimates = true
+            guard let tabBar = self.tabBar else {
+                return
+            }
+            tabBar.setStyleNamed("Mojave")
+            tabBar.onlyShowCloseOnHover = true
+            tabBar.canCloseOnlyTab = false
+            tabBar.disableTabClose = false
+            tabBar.allowsBackgroundTabClosing = true
+            tabBar.hideForSingleTab = true
+            tabBar.showAddTabButton = true
+            tabBar.buttonMinWidth = 120
+            tabBar.useOverflowMenu = true
+            tabBar.automaticallyAnimates = true
             //TODO: figure out what this property means
-            self.tabBar.allowsScrubbing = true
+            tabBar.allowsScrubbing = true
         }
     }
 
-    @IBOutlet private(set) weak var tabView: NSTabView!
+    @IBOutlet private(set) weak var tabView: NSTabView?
 
     /// The browser can have a fixed first tab (e.g. bookmarks).
     /// This method will set the primary tab the first time it is called
@@ -52,8 +55,8 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
                 self.closeTab(primaryTab)
             }
             if let primaryTab = self.primaryTab {
-                tabView.insertTabViewItem(primaryTab, at: 0)
-                tabBar.select(primaryTab)
+                tabView?.insertTabViewItem(primaryTab, at: 0)
+                tabBar?.select(primaryTab)
             }
         }
     }
@@ -61,16 +64,16 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
     var restoredTabs = false
 
     var activeTab: Tab? {
-        tabView.selectedTabViewItem?.viewController as? Tab
+        tabView?.selectedTabViewItem?.viewController as? Tab
     }
 
     var browserTabCount: Int {
-        tabView.numberOfTabViewItems
+        tabView?.numberOfTabViewItems ?? 0
     }
 
     weak var rssSubscriber: RSSSubscriber? {
         didSet {
-            for source in tabView.tabViewItems {
+            for source in tabView?.tabViewItems ?? [] {
                 (source as? RSSSource)?.rssSubscriber = self.rssSubscriber
             }
         }
@@ -122,7 +125,10 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
 
     func saveOpenTabs() {
 
-        let tabs = tabBar.tabView.tabViewItems.compactMap { $0.viewController as? BrowserTab }
+        let tabsOptional = tabBar?.tabView.tabViewItems.compactMap { $0.viewController as? BrowserTab }
+        guard let tabs = tabsOptional else {
+            return
+        }
 
         let tabLinks = tabs.compactMap { $0.tabUrl?.absoluteString }
         let tabTitles = Dictionary(tabs.filter {
@@ -138,9 +144,12 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
     }
 
     func closeTab(_ tabViewItem: NSTabViewItem) {
-        self.tabBar.delegate?.tabView?(self.tabView, willClose: tabViewItem)
-        self.tabView.removeTabViewItem(tabViewItem)
-        self.tabBar.delegate?.tabView?(self.tabView, didClose: tabViewItem)
+        guard let tabView = self.tabView else {
+            return
+        }
+        self.tabBar?.delegate?.tabView?(tabView, willClose: tabViewItem)
+        self.tabView?.removeTabViewItem(tabViewItem)
+        self.tabBar?.delegate?.tabView?(tabView, didClose: tabViewItem)
     }
 }
 
@@ -160,10 +169,10 @@ extension TabbedBrowserViewController: Browser {
             newTab.loadTab()
         }
 
-        tabView.addTabViewItem(newTabViewItem)
+        tabView?.addTabViewItem(newTabViewItem)
 
 		if !inBackground {
-			tabBar.select(newTabViewItem)
+			tabBar?.select(newTabViewItem)
             if load {
                 newTab.webView.becomeFirstResponder()
             } else {
@@ -181,26 +190,26 @@ extension TabbedBrowserViewController: Browser {
 
     func switchToPrimaryTab() {
         if self.primaryTab != nil {
-            self.tabView.selectTabViewItem(at: 0)
+            self.tabView?.selectTabViewItem(at: 0)
         }
     }
 
 	func showPreviousTab() {
-        self.tabView.selectPreviousTabViewItem(nil)
+        self.tabView?.selectPreviousTabViewItem(nil)
     }
 
 	func showNextTab() {
-        self.tabView.selectNextTabViewItem(nil)
+        self.tabView?.selectNextTabViewItem(nil)
     }
 
     func closeActiveTab() {
-        if let selectedTabViewItem = self.tabView.selectedTabViewItem {
+        if let selectedTabViewItem = self.tabView?.selectedTabViewItem {
             self.closeTab(selectedTabViewItem)
         }
     }
 
     func closeAllTabs() {
-        self.tabView.tabViewItems.filter { $0 != primaryTab }
+        self.tabView?.tabViewItems.filter { $0 != primaryTab }
             .forEach(closeTab)
     }
 
