@@ -36,7 +36,7 @@ class BrowserTab: NSViewController {
         if #available(OSX 10.11, *) {
             // for useragent, we mimic the installed version of Safari and add our own identifier
             let shortSafariVersion = Bundle(path: "/Applications/Safari.app")?.infoDictionary?["CFBundleShortVersionString"] as? String
-            let viennaVersion = (NSApp as? ViennaApp)?.applicationVersion?.prefix(while: { character in return character != " " })
+            let viennaVersion = (NSApp as? ViennaApp)?.applicationVersion?.prefix(while: { character in character != " " })
             config.applicationNameForUserAgent = "Version/\(shortSafariVersion ?? "9.1") Safari/605 Vienna/\(viennaVersion ?? "3.5+")"
             config.allowsAirPlayForMediaPlayback = true
         }
@@ -57,12 +57,12 @@ class BrowserTab: NSViewController {
     @IBOutlet private(set) weak var backButton: NSButton!
     @IBOutlet private(set) weak var forwardButton: NSButton!
     @IBOutlet private(set) weak var reloadButton: NSButton!
-    @IBOutlet weak var progressBar: LoadingIndicator?
-    
+    @IBOutlet private(set) weak var progressBar: LoadingIndicator?
+
     @IBOutlet private(set) weak var cancelButtonWidth: NSLayoutConstraint!
     @IBOutlet private(set) weak var reloadButtonWidth: NSLayoutConstraint!
     @IBOutlet private(set) weak var rssButtonWidth: NSLayoutConstraint!
-    
+
 	var url: URL? = nil {
 		didSet {
             if self.url != webView.url || self.url == nil {
@@ -77,18 +77,18 @@ class BrowserTab: NSViewController {
     var loading: Bool = false
 
     /// backing storage only, access via rssSubscriber property
-    weak var rssDelegate: RSSSubscriber? = nil
+    weak var rssDelegate: RSSSubscriber?
     /// backing storage only, access via rssUrl property
-    var rssFeedUrl: URL? = nil
+    var rssFeedUrl: URL?
 
     var showRssButton: Bool = false
 
     var viewVisible: Bool = false
 
-	var titleObservation: NSKeyValueObservation!
-    var loadingObservation: NSKeyValueObservation!
-    var progressObservation: NSKeyValueObservation!
-    var urlObservation: NSKeyValueObservation!
+	var titleObservation: NSKeyValueObservation?
+    var loadingObservation: NSKeyValueObservation?
+    var progressObservation: NSKeyValueObservation?
+    var urlObservation: NSKeyValueObservation?
 
     // MARK: object lifecycle
 
@@ -129,8 +129,10 @@ class BrowserTab: NSViewController {
 	}
 
 	deinit {
-		titleObservation.invalidate()
-        loadingObservation.invalidate()
+		titleObservation?.invalidate()
+        loadingObservation?.invalidate()
+        progressObservation?.invalidate()
+        urlObservation?.invalidate()
 	}
 
     // MARK: ViewController lifecycle
@@ -184,7 +186,7 @@ class BrowserTab: NSViewController {
     }
 }
 
-//MARK: Tab functionality
+// MARK: Tab functionality
 
 @available(OSX 10.10, *)
 extension BrowserTab: Tab {
@@ -195,7 +197,7 @@ extension BrowserTab: Tab {
             self.loadedTab = false
         }
         get {
-            return self.url
+            self.url
         }
     }
 
