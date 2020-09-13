@@ -155,13 +155,23 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
 }
 
 extension TabbedBrowserViewController: Browser {
+
+    func createNewTab(_ request: URLRequest, config: WKWebViewConfiguration, inBackground: Bool) -> Tab {
+        let newTab = BrowserTab(request, config: config)
+        return initNewTab(newTab, request.url, false, inBackground)
+    }
+
     func createNewTab(_ url: URL? = nil, inBackground: Bool = false, load: Bool = false) -> Tab {
         let newTab = BrowserTab()
 
+        return initNewTab(newTab, url, load, inBackground)
+    }
+
+    private func initNewTab(_ newTab: BrowserTab, _ url: URL?, _ load: Bool, _ inBackground: Bool) -> Tab {
         newTab.rssSubscriber = self.rssSubscriber
 
-		let newTabViewItem = TitleChangingTabViewItem(viewController: newTab)
-		newTabViewItem.hasCloseButton = true
+        let newTabViewItem = TitleChangingTabViewItem(viewController: newTab)
+        newTabViewItem.hasCloseButton = true
 
         //this must be executed after setup of titleChangingTabViewItem to observe new title properly
         newTab.tabUrl = url
@@ -276,5 +286,10 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
 
 @available(OSX 10.10, *)
 extension TabbedBrowserViewController: WKUIDelegate {
-	//TODO: implement functionality for opening new tabs and alerts, and maybe peek actions
+	//TODO: implement functionality for alerts and maybe peek actions
+
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        let newTab = createNewTab(navigationAction.request, config: configuration, inBackground: false)
+        return (newTab as? BrowserTab)?.webView
+    }
 }

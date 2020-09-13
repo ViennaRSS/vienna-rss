@@ -26,31 +26,7 @@ class BrowserTab: NSViewController {
 
     // MARK: Properties
 
-	let webView: CustomWKWebView = {
-		let prefs = WKPreferences()
-		prefs.javaScriptEnabled = true
-		prefs.javaScriptCanOpenWindowsAutomatically = true
-		prefs.plugInsEnabled = true
-		let config = WKWebViewConfiguration()
-		config.preferences = prefs
-        if #available(OSX 10.11, *) {
-            // for useragent, we mimic the installed version of Safari and add our own identifier
-            let shortSafariVersion = Bundle(path: "/Applications/Safari.app")?.infoDictionary?["CFBundleShortVersionString"] as? String
-            let viennaVersion = (NSApp as? ViennaApp)?.applicationVersion?.prefix(while: { character in character != " " })
-            config.applicationNameForUserAgent = "Version/\(shortSafariVersion ?? "9.1") Safari/605 Vienna/\(viennaVersion ?? "3.5+")"
-            config.allowsAirPlayForMediaPlayback = true
-        }
-		if #available(OSX 10.12, *) {
-			config.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.all
-		}
-		let wv = CustomWKWebView(frame: .zero, configuration: config)
-		wv.allowsMagnification = true
-		wv.allowsBackForwardNavigationGestures = true
-		if #available(OSX 10.11, *) {
-			wv.allowsLinkPreview = true
-		}
-		return wv
-	}()
+	let webView: CustomWKWebView
 
     @IBOutlet private(set) weak var addressBarContainer: NSView!
     @IBOutlet private(set) weak var addressField: NSTextField!
@@ -92,12 +68,36 @@ class BrowserTab: NSViewController {
 
     // MARK: object lifecycle
 
-    init() {
+    init(_ request: URLRequest? = nil, config: WKWebViewConfiguration = WKWebViewConfiguration()) {
+
+        let prefs = WKPreferences()
+        prefs.javaScriptEnabled = true
+        prefs.javaScriptCanOpenWindowsAutomatically = true
+        prefs.plugInsEnabled = true
+        config.preferences = prefs
+        if #available(OSX 10.11, *) {
+            // for useragent, we mimic the installed version of Safari and add our own identifier
+            let shortSafariVersion = Bundle(path: "/Applications/Safari.app")?.infoDictionary?["CFBundleShortVersionString"] as? String
+            let viennaVersion = (NSApp as? ViennaApp)?.applicationVersion?.prefix(while: { character in character != " " })
+            config.applicationNameForUserAgent = "Version/\(shortSafariVersion ?? "9.1") Safari/605 Vienna/\(viennaVersion ?? "3.5+")"
+            config.allowsAirPlayForMediaPlayback = true
+        }
+        if #available(OSX 10.12, *) {
+            config.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.all
+        }
+        self.webView = CustomWKWebView(frame: .zero, configuration: config)
+        self.webView.allowsMagnification = true
+        self.webView.allowsBackForwardNavigationGestures = true
+        if #available(OSX 10.11, *) {
+            self.webView.allowsLinkPreview = true
+        }
+
         if #available(macOS 10.12, *) {
             super.init(nibName: nil, bundle: nil)
         } else {
             super.init(nibName: "BrowserTabBeforeMacOS12", bundle: nil)
         }
+        
         titleObservation = webView.observe(\.title, options: .new) { [weak self] _, change in
             guard let newValue = change.newValue ?? "", !newValue.isEmpty else {
                 return
@@ -121,6 +121,10 @@ class BrowserTab: NSViewController {
                 return
             }
             self?.url = newValue
+        }
+
+        if let request = request {
+            webView.load(request)
         }
     }
 

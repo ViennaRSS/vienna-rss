@@ -53,4 +53,13 @@ class CustomWKWebView: WKWebView {
 
 		synchronizationGroup.wait()
 	}
+
+    override func willOpenMenu(_ menu: NSMenu, with event: NSEvent) {
+        if let index = menu.items.firstIndex(where: { $0.identifier?.rawValue == "WKMenuItemIdentifierOpenLinkInNewWindow" }) {
+            menu.items[index].title = "Open link in new Tab"
+
+            let menuItem = NSMenuItem(title: "Open link in Safari", action: nil, keyEquivalent: "")
+            menu.items.insert(menuItem, at: menu.items.index(after: index))
+        }
+    }
 }
