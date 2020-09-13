@@ -131,11 +131,12 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
         }
 
         let tabLinks = tabs.compactMap { $0.tabUrl?.absoluteString }
-        let tabTitles = Dictionary(tabs.filter {
+        let tabTitleList: [(String, String)] = tabs.filter {
             $0.tabUrl != nil && $0.title != nil
         }.map {
-            ($0.tabUrl!.absoluteString, $0.title!)
-        }, uniquingKeysWith: { $1 })
+            ($0.tabUrl?.absoluteString ?? "", $0.title ?? "")
+        }
+        let tabTitles = Dictionary(tabTitleList) { $1 }
 
         Preferences.standard.setArray(tabLinks as [Any], forKey: "TabList")
         Preferences.standard.setObject(tabTitles, forKey: "TabTitleDict")
