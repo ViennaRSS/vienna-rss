@@ -351,10 +351,6 @@
 		// Release the progress indicator.
 		progressIndicator = nil;
 	}
-
-	// Make sure the children do the same in case this is being called on a folder node.
-	for (TreeNode * node in children)
-		[node stopAndReleaseProgressIndicator];
 }	
 
 /* setProgressIndicator:
