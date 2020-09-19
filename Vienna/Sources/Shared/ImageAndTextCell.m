@@ -204,9 +204,10 @@
 	// and then reduce cellFrame to keep from overlapping it
 	if (inProgress)
 	{
+		if (!item.progressIndicator) {
+			[item allocAndStartProgressIndicator];
+		}
 		NSProgressIndicator *progressIndicator = item.progressIndicator;
-		if (!progressIndicator)
-			progressIndicator = item.allocAndStartProgressIndicator;
 
 		NSRect progressIndicatorFrame;
 
