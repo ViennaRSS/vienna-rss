@@ -859,6 +859,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
         // Mark the feed as succeeded
         [self setFolderErrorFlag:folder flag:NO];
+        [folder clearNonPersistedFlag:VNAFolderFlagBuggySync];
     }
 
     // Send status to the activity log
