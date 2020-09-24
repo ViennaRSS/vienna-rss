@@ -2037,6 +2037,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         NSLog(@"Fixing unread count for %@ (%ld on folder versus %ld in articles)", folder.name, (long)folder.unreadCount, (long)unread_count);
         NSInteger diff = (unread_count - folder.unreadCount);
         [self setFolderUnreadCount:folder adjustment:diff];
+        [folder setNonPersistedFlag:VNAFolderFlagBuggySync];
     }
 
     return [myCache copy];
@@ -2395,6 +2396,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
             NSLog(@"Fixing unread count for %@ (%ld on folder versus %ld in articles)", folder.name, (long)folder.unreadCount, (long)unread_count);
             NSInteger diff = (unread_count - folder.unreadCount);
             [self setFolderUnreadCount:folder adjustment:diff];
+            [folder setNonPersistedFlag:VNAFolderFlagBuggySync];
         }
     }
 
