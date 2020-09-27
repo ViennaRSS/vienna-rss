@@ -18,6 +18,15 @@
 //  limitations under the License.
 //
 
+/*
+ * Unofficial references for OpenReader API :
+ * https://rss-sync.github.io/Open-Reader-API/
+ * https://ranchero.com/downloads/GoogleReaderAPI-2009.pdf
+ * https://feedhq.readthedocs.io/en/latest/api/index.html
+ * https://github.com/theoldreader/api
+ * https://www.inoreader.com/developers/
+ */
+
 #import "OpenReader.h"
 #import "URLRequestExtensions.h"
 #import "HelperFunctions.h"
