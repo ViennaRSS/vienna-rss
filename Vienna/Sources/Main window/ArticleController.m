@@ -498,7 +498,7 @@
           Article *article = self.selectedArticle;
 
           if (self->shouldPreserveSelectedArticle) {
-            if (article != nil && article.read && !article.deleted) {
+            if (article != nil && !article.deleted) {
                 self->articleToPreserve = article;
             }
             self->shouldPreserveSelectedArticle = NO;
