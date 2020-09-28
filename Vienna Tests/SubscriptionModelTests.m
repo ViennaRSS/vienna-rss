@@ -41,8 +41,8 @@
 
 - (void)testVerificationOfCompleteWebURLs {
     // Test that then passed a complete web URL to an rss feed, the verification doesn't change the original
-    NSURL *unverifiedURL = [NSURL URLWithString:@"http://www.abc.net.au/news/feed/51120/rss.xml"];
-    NSURL *expectedURL = [NSURL URLWithString:@"http://www.abc.net.au/news/feed/51120/rss.xml"];
+    NSURL *unverifiedURL = [NSURL URLWithString:@"https://www.vienna-rss.com/feed.xml"];
+    NSURL *expectedURL = [NSURL URLWithString:@"https://www.vienna-rss.com/feed.xml"];
     
     XCTAssertEqualObjects(expectedURL, [subscriptionModel verifiedFeedURLFromURL:unverifiedURL]);
 }
@@ -50,8 +50,8 @@
 - (void)testVerificationOfIncompleteWebURLs {
     // Test that when passed a URL without an rss feed in the path component and without a scheme
     // that the returned URL is correct
-    NSURL *unverifiedURL = [NSURL URLWithString:@"abc.net.au/news"];
-    NSURL *expectedURL = [NSURL URLWithString:@"http://abc.net.au/news/feed/51120/rss.xml"];
+    NSURL *unverifiedURL = [NSURL URLWithString:@"www.vienna-rss.com"];
+    NSURL *expectedURL = [NSURL URLWithString:@"https://www.vienna-rss.com/feed.xml"];
 
     NSURL *verifiedURL = [subscriptionModel verifiedFeedURLFromURL:unverifiedURL];
 
