@@ -18,6 +18,15 @@
 //  limitations under the License.
 //
 
+/*
+ * Unofficial references for OpenReader API :
+ * https://rss-sync.github.io/Open-Reader-API/
+ * https://ranchero.com/downloads/GoogleReaderAPI-2009.pdf
+ * https://feedhq.readthedocs.io/en/latest/api/index.html
+ * https://github.com/theoldreader/api
+ * https://www.inoreader.com/developers/
+ */
+
 #import "OpenReader.h"
 #import "URLRequestExtensions.h"
 #import "HelperFunctions.h"
@@ -44,7 +53,6 @@ BOOL hostSendsHexaItemId;
 BOOL hostRequiresSParameter;
 BOOL hostRequiresHexaForFeedId;
 BOOL hostRequiresInoreaderHeaders;
-BOOL hostRequiresBackcrawling;
 
 typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     notAuthenticated = 0,
@@ -240,20 +248,14 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     hostRequiresSParameter = NO;
     hostRequiresHexaForFeedId = NO;
     hostRequiresInoreaderHeaders = NO;
-    hostRequiresBackcrawling = YES;
     // settings for specific kind of servers
     if ([openReaderHost isEqualToString:@"theoldreader.com"]) {
         hostSendsHexaItemId = YES;
         hostRequiresSParameter = YES;
         hostRequiresHexaForFeedId = YES;
-        hostRequiresBackcrawling = NO;
     }
     if ([openReaderHost rangeOfString:@"inoreader.com"].length != 0) {
         hostRequiresInoreaderHeaders = YES;
-        hostRequiresBackcrawling = NO;
-    }
-    if ([openReaderHost rangeOfString:@"bazqux.com"].length != 0) {
-        hostRequiresBackcrawling = NO;
     }
     // restore from keychain
     password = [KeyChain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"];
@@ -396,21 +398,18 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         //But according to some documentation, Google Reader and TheOldReader
         //need "r=o" order to make the "ot" time limitation work.
         //In fact, Vienna used successfully "r=n" with Google Reader.
-        if (hostRequiresBackcrawling) {
-            // For FeedHQ servers, we need to search articles which are older than last refresh
-            @try {
-                double limit = folderLastUpdateString.doubleValue - 2 * 24 * 3600;
-                if (limit < 0.0f) {
-                    limit = 0.0;
-                }
-                NSString *startEpoch = @(limit).stringValue;
-                itemsLimitation = [NSString stringWithFormat:@"&ot=%@&n=1000", startEpoch];
-            } @catch (NSException *exception) {
-                itemsLimitation = @"&n=1000";
+        @try {
+            double limit = folderLastUpdateString.doubleValue - 15*60;
+            if (limit < 0.0f) {
+                limit = 0.0;
             }
-        } else {
-            // Bazqux.com, TheOldReader.com and Inoreader.com
-            itemsLimitation = [NSString stringWithFormat:@"&ot=%@&n=1000", folderLastUpdateString];
+            NSString *startEpoch = @(limit).stringValue;
+            itemsLimitation = [NSString stringWithFormat:@"&ot=%@&n=1000", startEpoch];
+        } @catch (NSException *exception) {
+            itemsLimitation = @"&n=1000";
+        }
+        if (thisFolder.flags & VNAFolderFlagBuggySync) {
+            itemsLimitation = @"&n=1000";
         }
     }
 
@@ -659,6 +658,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             self.countOfNewArticles += newArticlesFromFeed;
 
             [refreshedFolder clearNonPersistedFlag:VNAFolderFlagError];
+            [refreshedFolder clearNonPersistedFlag:VNAFolderFlagBuggySync];
             // Send status to the activity log
             if (newArticlesFromFeed == 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{

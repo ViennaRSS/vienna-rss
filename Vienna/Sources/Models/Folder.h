@@ -54,6 +54,8 @@ typedef NS_ENUM(NSInteger, VNAFolderType) {
  - VNAFolderFlagLoadFullHTML: load article's web page rather than display feed text
  - VNAFolderFlagSyncedOK: according to available info, no fresher information is available
                           on the OpenReader server
+ - VNAFolderFlagBuggySync: discrepancy has been detected between unread count on folder
+                           and unread count on articles. A force refresh may help.
  */
 typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
     VNAFolderFlagCheckForImage   = 1 << 0,
@@ -62,7 +64,8 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
     VNAFolderFlagUnsubscribed    = 1 << 3,
     VNAFolderFlagUpdating        = 1 << 4,
     VNAFolderFlagLoadFullHTML    = 1 << 5,
-    VNAFolderFlagSyncedOK        = 1 << 6
+    VNAFolderFlagSyncedOK        = 1 << 6,
+    VNAFolderFlagBuggySync       = 1 << 7
 };
 
 @interface Folder : NSObject <NSCacheDelegate> {

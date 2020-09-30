@@ -55,8 +55,8 @@
 @property (nonatomic) BOOL canHaveChildren;
 -(NSComparisonResult)folderNameCompare:(TreeNode *)otherObject;
 
-@property (nonatomic, readonly, strong) NSProgressIndicator *allocAndStartProgressIndicator;
+-(void)allocAndStartProgressIndicator;
 -(void)stopAndReleaseProgressIndicator;
-@property (nonatomic, strong) NSProgressIndicator *progressIndicator;
+@property (nonatomic, strong, readonly) NSProgressIndicator *progressIndicator;
 
 @end

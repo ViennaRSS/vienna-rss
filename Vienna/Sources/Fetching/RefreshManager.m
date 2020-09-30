@@ -859,6 +859,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
         // Mark the feed as succeeded
         [self setFolderErrorFlag:folder flag:NO];
+        [folder clearNonPersistedFlag:VNAFolderFlagBuggySync];
     }
 
     // Send status to the activity log
@@ -1123,7 +1124,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         [[TRVSURLSessionOperation alloc] initWithSession:self.urlSession request:urlRequest completionHandler:completionHandler];
     NSOperation *completionOperation = [NSBlockOperation blockOperationWithBlock:^{
                                                          if (self->networkQueue.operationCount == 0) {
-                                                            [self finishConnectionQueue];
+                                                            [self performSelector:@selector(finishConnectionQueue) withObject:nil afterDelay:0.1];
                                                          }
                                                          [self updateStatus];
                                                      }];
@@ -1173,16 +1174,17 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
  */
 -(void)finishConnectionQueue
 {
-    if (hasStarted) {
+    if (hasStarted && networkQueue.operationCount == 0) {
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
         [nc postNotificationName:@"MA_Notify_ArticleListContentChange" object:nil];
         statusMessageDuringRefresh = NSLocalizedString(@"Refresh completed", nil);
         hasStarted = NO;
+        LLog(@"Queue empty!!!");
     } else {
         statusMessageDuringRefresh = @"";
     }
-    LLog(@"Queue empty!!!");
+    [self updateStatus];
 }
 
 #pragma mark NSURLSession Authentication delegates

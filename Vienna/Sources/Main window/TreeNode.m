@@ -25,6 +25,8 @@
 
 @implementation TreeNode
 
+@synthesize progressIndicator;
+
 /* init
  * Initialises a treenode.
  */
@@ -321,18 +323,17 @@
 /* allocAndStartProgressIndicator:
  * Allocate a new progress indicator and start it animating.
  */
--(NSProgressIndicator *)allocAndStartProgressIndicator
+-(void)allocAndStartProgressIndicator
 {
 	// Allocate and initialize the spinning progress indicator.
-	NSRect progressRect = NSMakeRect(0, 0, PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION);
-	progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressRect];
-    progressIndicator.controlSize = NSControlSizeSmall;
-	progressIndicator.style = NSProgressIndicatorStyleSpinning;
-	[progressIndicator setUsesThreadedAnimation:YES];
-	
+	if (!progressIndicator) {
+	    NSRect progressRect = NSMakeRect(0, 0, PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION);
+	    progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressRect];
+	    progressIndicator.controlSize = NSControlSizeSmall;
+	    progressIndicator.usesThreadedAnimation = YES;
+	}
 	// Start the animation.
 	[progressIndicator startAnimation:self];
-	return progressIndicator;
 }
 
 /* stopAndReleaseProgressIndicator:
@@ -351,29 +352,6 @@
 		// Release the progress indicator.
 		progressIndicator = nil;
 	}
-
-	// Make sure the children do the same in case this is being called on a folder node.
-	for (TreeNode * node in children)
-		[node stopAndReleaseProgressIndicator];
 }	
-
-/* setProgressIndicator:
- * Retrieve a progressIndicator set by other code in association with this TreeNode
- */
-- (NSProgressIndicator *)progressIndicator
-{
-	return progressIndicator;
-}
-
-/* setProgressIndicator:
- * Allow code elsewhere to associate an NSProgressIndicator with this TreeNode
- */
-- (void)setProgressIndicator:(NSProgressIndicator *)inProgressIndicator
-{
-	if (progressIndicator != inProgressIndicator)
-	{
-		progressIndicator = inProgressIndicator;
-	}
-}
 
 @end

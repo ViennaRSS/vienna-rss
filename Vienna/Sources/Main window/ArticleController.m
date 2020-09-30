@@ -486,59 +486,52 @@
  */
 -(void)reloadArrayOfArticles
 {
-	reloadArrayOfArticlesSemaphor++;
-	[mainArticleView startLoadIndicator];
+    reloadArrayOfArticlesSemaphor++;
+    [mainArticleView startLoadIndicator];
 
-	[self getArticlesWithCompletionBlock:^(NSArray *resultArray) {
-	    // when multiple refreshes where queued, we update folderArrayOfArticles only once
-	    self->reloadArrayOfArticlesSemaphor--;
-	    if (self->reloadArrayOfArticlesSemaphor <=0)
-	    {
-            [self->mainArticleView stopLoadIndicator];
-            self.folderArrayOfArticles = resultArray;
-            Article * article = self.selectedArticle;
+    [self getArticlesWithCompletionBlock:^(NSArray *resultArray) {
+      // when multiple refreshes where queued, we update folderArrayOfArticles only once
+      self->reloadArrayOfArticlesSemaphor--;
+      if (self->reloadArrayOfArticlesSemaphor <= 0) {
+          [self->mainArticleView stopLoadIndicator];
+          self.folderArrayOfArticles = resultArray;
+          Article *article = self.selectedArticle;
 
-			if (self->shouldPreserveSelectedArticle)
-			{
-				if (article != nil && article.read && !article.deleted)
-				{
-					self->articleToPreserve = article;
-				}
-				self->shouldPreserveSelectedArticle = NO;
-			}
-
-            [self->mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
-
-			if (self->guidOfArticleToSelect != nil )
-			{
-				[self->mainArticleView scrollToArticle:self->guidOfArticleToSelect];
-				self->guidOfArticleToSelect = nil;
-			}
-            else if (self->firstUnreadArticleRequired)
-            {
-                [self->mainArticleView selectFirstUnreadInFolder];
-                self->firstUnreadArticleRequired = NO;
+          if (self->shouldPreserveSelectedArticle) {
+            if (article != nil && !article.deleted) {
+                self->articleToPreserve = article;
             }
+            self->shouldPreserveSelectedArticle = NO;
+          }
 
-            if (self->requireSelectArticleAfterReload)
-            {
-                [self ensureSelectedArticle];
-                self->requireSelectArticleAfterReload = NO;
-            }
+          [self->mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
 
-            // To avoid upsetting the current displayed article after a refresh,
-            // we check to see if the selected article is the same
-            // and if it has been updated
-            Article * currentArticle = self.selectedArticle;
-			if ( currentArticle == article &&
-				[[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]
-				&& currentArticle.revised && !currentArticle.read )
-			{
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
-            }
-		}
-	}];
-}
+          if (self->guidOfArticleToSelect != nil) {
+            [self->mainArticleView scrollToArticle:self->guidOfArticleToSelect];
+            self->guidOfArticleToSelect = nil;
+          } else if (self->firstUnreadArticleRequired) {
+            [self->mainArticleView selectFirstUnreadInFolder];
+            self->firstUnreadArticleRequired = NO;
+          }
+
+          if (self->requireSelectArticleAfterReload) {
+            [self ensureSelectedArticle];
+            self->requireSelectArticleAfterReload = NO;
+          }
+
+          // To avoid upsetting the current displayed article after a refresh,
+          // we check to see if the selected article is the same
+          // and if it has been updated
+          Article *currentArticle = self.selectedArticle;
+          if (currentArticle == article &&
+            [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]
+            && currentArticle.revised && !currentArticle.read)
+          {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
+          }
+      }
+    }];
+} // reloadArrayOfArticles
 
 /* getArticlesWithCompletionBlock
  * Launch articlesWithFilter on background queue and perform completion block
