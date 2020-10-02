@@ -251,17 +251,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 -(void)clearHTML
 {
     self.hidden = YES;
-    // ensures that future transitions are more consistent with theme used
-    if (@available(macOS 10.14, *)) {
-        if ([[NSApp.effectiveAppearance bestMatchFromAppearancesWithNames:@[NSAppearanceNameAqua,
-                                                                            NSAppearanceNameDarkAqua]] isEqualToString:
-             NSAppearanceNameDarkAqua])
-        {
-            [self.mainFrame loadHTMLString:@"<body style='background-color:#1E1E1E'></body>" baseURL:[NSURL URLWithString:@"/"]];
-            return;
-        }
-    }
-    [self setHTML:@""];
+    self.mainFrameURL = @"about:blank";
 }
 
 /* setHTML
