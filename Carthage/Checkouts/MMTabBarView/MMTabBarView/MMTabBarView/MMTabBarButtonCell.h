@@ -36,18 +36,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  The control view
- * 
- *  TODO: fix, rename "tabBarButton"
  */
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wincompatible-property-type"
-@property (assign) MMTabBarButton *controlView;
-#pragma clang diagnostic pop
+@property (nullable, weak) MMTabBarButton *tabBarButton;
 
 /**
  *  Tab bar view the tab bar button belongs to
  */
-@property (readonly) MMTabBarView *tabBarView;
+@property (nullable, readonly) MMTabBarView *tabBarView;
 
 #pragma mark Update images
 
@@ -118,14 +113,14 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Get progress indicator
  */
-@property (readonly) MMProgressIndicator *indicator;
+@property (nullable, readonly) MMProgressIndicator *indicator;
 
 #pragma mark Close Button Support
 
 /**
  *  The close button
  */
-@property (readonly) MMRolloverButton *closeButton;
+@property (nullable, readonly) MMRolloverButton *closeButton;
 
 /**
  *  Check if receiver should display close button
