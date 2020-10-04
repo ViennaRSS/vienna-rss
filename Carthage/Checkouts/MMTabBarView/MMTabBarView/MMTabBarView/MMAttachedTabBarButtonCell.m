@@ -24,12 +24,15 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark -
 #pragma mark Properties
 
-- (MMAttachedTabBarButton *)controlView {
-    return (MMAttachedTabBarButton *)[super controlView];
+- (nullable MMAttachedTabBarButton *)controlView {
+    // return (MMAttachedTabBarButton *)[super controlView];
+  return _attachedTabBarButton;
 }
 
-- (void)setControlView:(MMAttachedTabBarButton *)aView {
-    [super setControlView:aView];
+- (void) setControlView:(nullable NSView *)aView
+{
+  [super setControlView:aView];
+  _attachedTabBarButton = (MMAttachedTabBarButton*)aView;
 }
 
 #pragma mark -

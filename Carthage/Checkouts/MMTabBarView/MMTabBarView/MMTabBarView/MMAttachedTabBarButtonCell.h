@@ -18,13 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  The control view
- * 
- *  TODO: fix, rename "attachedTabBarButton"
  */
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wincompatible-property-type"
-@property (assign) MMAttachedTabBarButton *controlView;
-#pragma clang diagnostic pop
+@property (nullable, weak) MMAttachedTabBarButton *attachedTabBarButton;
 
 @end
 

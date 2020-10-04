@@ -204,15 +204,20 @@ static NSMutableDictionary<NSString*, Class <MMTabStyle>> *registeredStyleClasse
 }
 
 - (void)viewWillStartLiveResize {
+	[super viewWillStartLiveResize];
     for (MMAttachedTabBarButton *aButton in self.attachedButtons) {
 		[aButton.indicator stopAnimation:self];
 	}
-	[self setNeedsDisplay:YES];
 }
 
 -(void)viewDidEndLiveResize {
+    for (MMAttachedTabBarButton *aButton in self.attachedButtons) {
+		[aButton.indicator performSelector:@selector(startAnimation:) withObject:nil afterDelay:0.0];
+	}
+
 	[self _checkWindowFrame];
 	[self update:NO];
+	[super viewDidEndLiveResize];
 }
 
 - (void)resetCursorRects {
@@ -1318,6 +1323,13 @@ static NSMutableDictionary<NSString*, Class <MMTabStyle>> *registeredStyleClasse
 			}
 		}
 	}
+	[self applyFrameChangesAnimated:animate hide:hide
+		partnerTargetOrigin:partnerTargetOrigin partnerTargetSize:partnerTargetSize
+		completion:^{
+			[self setHidden:hide];
+			[self updateTrackingAreas];
+			[self sendTabBarShowHideCompletionCalls:hide];
+	}];
 }
 
 - (void)applyFrameChangesAnimated:(BOOL)animate hide:(BOOL)hide partnerTargetOrigin:(CGFloat)partnerTargetOrigin partnerTargetSize:(CGFloat)partnerTargetSize completion:(void(^)(void))completion {
