@@ -8,6 +8,17 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.5.8
+-----
+- Fix crash related to macOS Big Sur Beta
+- Fix crash related to Xcode12 (update MMTabBarView to v/1.4.8)
+- Fix tab bar to hide when a single tab is present
+- More fix for inaccurate info on number of unread articles
+- Fix to unread counts discrepancies on OpenReader feeds
+- Avoid intempestive refreshes of article pane during feed refreshes
+- Fix resetting of article pane when no article is selected anymore and "Use Web Pages for Articles" is enabled
+- Fix Vienna Tests target
+
 3.5.7
 -----
 - Fix file being hidden at end of "Download image"
