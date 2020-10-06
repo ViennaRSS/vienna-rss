@@ -445,6 +445,22 @@
                     continue;
                 }
 
+                // Parse media group
+                if ([itemChildElement.prefix isEqualToString:mediaPrefix] && [articleItemTag isEqualToString:@"group"]) {
+                    if ([newFeedItem.enclosure isEqualToString:@""]) {
+                        // group's first enclosure
+                        NSString *enclosureString = [NSString stringWithFormat:@"%@:content", mediaPrefix];
+                        newFeedItem.enclosure =
+                            ([[itemChildElement elementsForName:enclosureString].firstObject attributeForName:@"url"]).stringValue;
+                    }
+                    if (!articleBody) {
+                        // use enclosure description as a workaround for feed description
+                        NSString *descriptionString = [NSString stringWithFormat:@"%@:description", mediaPrefix];
+                        articleBody =
+                            [([itemChildElement elementsForName:descriptionString].firstObject).stringValue mutableCopy];
+                    }
+                    continue;
+                }
             }
 
             // If no link, set it to the feed link if there is one
@@ -735,6 +751,23 @@
                     NSString * resourceString = [NSString stringWithFormat:@"%@:resource", rdfPrefix];
                     if ([itemChildElement attributeForName:resourceString].stringValue) {
                         newFeedItem.enclosure = [itemChildElement attributeForName:resourceString].stringValue;
+                    }
+                    continue;
+                }
+
+                // Parse media group
+                if ([itemChildElement.prefix isEqualToString:mediaPrefix] && [articleItemTag isEqualToString:@"group"]) {
+                    if ([newFeedItem.enclosure isEqualToString:@""]) {
+                        // group's first enclosure
+                        NSString *enclosureString = [NSString stringWithFormat:@"%@:content", mediaPrefix];
+                        newFeedItem.enclosure =
+                            ([[itemChildElement elementsForName:enclosureString].firstObject attributeForName:@"url"]).stringValue;
+                    }
+                    if (!articleBody) {
+                        // use enclosure description as a workaround for feed description
+                        NSString *descriptionString = [NSString stringWithFormat:@"%@:description", mediaPrefix];
+                        articleBody =
+                            [([itemChildElement elementsForName:descriptionString].firstObject).stringValue mutableCopy];
                     }
                     continue;
                 }
