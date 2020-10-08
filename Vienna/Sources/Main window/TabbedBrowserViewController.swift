@@ -194,6 +194,8 @@ extension TabbedBrowserViewController: Browser {
 
         newTab.webView.uiDelegate = self
 
+        newTab.webView.contextMenuProvider = self
+
         //TODO: tab view order
 
         return newTab
@@ -285,11 +287,44 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
 }
 
 @available(OSX 10.10, *)
-extension TabbedBrowserViewController: WKUIDelegate {
+extension TabbedBrowserViewController: CustomWKUIDelegate {
 	//TODO: implement functionality for alerts and maybe peek actions
 
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         let newTab = createNewTab(navigationAction.request, config: configuration, inBackground: false)
         return (newTab as? BrowserTab)?.webView
+    }
+
+    func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem] {
+        var menuItems = existingMenuItems
+        if case let .link(url) = purpose,
+           let index = menuItems.firstIndex(where: { $0.identifier?.rawValue == "WKMenuItemIdentifierOpenLinkInNewWindow" }) {
+            menuItems[index].title = "Open link in new tab"
+
+            let openInBackgroundItem = NSMenuItem(title: "Open link in background", action: #selector(openLinkInBackground(menuItem:)), keyEquivalent: "")
+            openInBackgroundItem.identifier = .WKMenuItemIdentifierOpenLinkInBackground
+            openInBackgroundItem.representedObject = url
+            menuItems.insert(openInBackgroundItem, at: menuItems.index(after: index))
+
+            let openInDefaultBrowserItem = NSMenuItem(title: "Open link in [Default Browser Name]", action: #selector(openLinkInDefaultBrowser(menuItem:)), keyEquivalent: "")
+            openInDefaultBrowserItem.identifier = .WKMenuItemIdentifierOpenLinkInSystemBrowser
+            openInDefaultBrowserItem.representedObject = url
+            menuItems.insert(openInDefaultBrowserItem, at: menuItems.index(after: index))
+        }
+        return menuItems
+    }
+
+    @objc
+    func openLinkInBackground(menuItem: NSMenuItem) {
+        if let url = menuItem.representedObject as? URL {
+            // TODO: open in background
+        }
+    }
+
+    @objc
+    func openLinkInDefaultBrowser(menuItem: NSMenuItem) {
+        if let url = menuItem.representedObject as? URL {
+            // TODO: open in background
+        }
     }
 }
