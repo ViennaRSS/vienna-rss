@@ -155,19 +155,21 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
 }
 
 extension TabbedBrowserViewController: Browser {
+    func createNewTab(_ url: URL?, inBackground: Bool, load: Bool) -> Tab {
+        return createNewTab(url, inBackground: inBackground, load: load, insertAt: nil)
+    }
 
-    func createNewTab(_ request: URLRequest, config: WKWebViewConfiguration, inBackground: Bool) -> Tab {
+    func createNewTab(_ request: URLRequest, config: WKWebViewConfiguration, inBackground: Bool, insertAt index: Int? = nil) -> Tab {
         let newTab = BrowserTab(request, config: config)
-        return initNewTab(newTab, request.url, false, inBackground)
+        return initNewTab(newTab, request.url, false, inBackground, insertAt: index)
     }
 
-    func createNewTab(_ url: URL? = nil, inBackground: Bool = false, load: Bool = false) -> Tab {
+    func createNewTab(_ url: URL? = nil, inBackground: Bool = false, load: Bool = false, insertAt index: Int? = nil) -> Tab {
         let newTab = BrowserTab()
-
-        return initNewTab(newTab, url, load, inBackground)
+        return initNewTab(newTab, url, load, inBackground, insertAt: index)
     }
 
-    private func initNewTab(_ newTab: BrowserTab, _ url: URL?, _ load: Bool, _ inBackground: Bool) -> Tab {
+    private func initNewTab(_ newTab: BrowserTab, _ url: URL?, _ load: Bool, _ inBackground: Bool, insertAt index: Int? = nil) -> Tab {
         newTab.rssSubscriber = self.rssSubscriber
 
         let newTabViewItem = TitleChangingTabViewItem(viewController: newTab)
@@ -180,7 +182,11 @@ extension TabbedBrowserViewController: Browser {
             newTab.loadTab()
         }
 
-        tabView?.addTabViewItem(newTabViewItem)
+        if let index = index {
+            tabView?.insertTabViewItem(newTabViewItem, at: index)
+        } else {
+            tabView?.addTabViewItem(newTabViewItem)
+        }
 
 		if !inBackground {
 			tabBar?.select(newTabViewItem)
@@ -291,14 +297,29 @@ extension TabbedBrowserViewController: CustomWKUIDelegate {
 	//TODO: implement functionality for alerts and maybe peek actions
 
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        let newTab = createNewTab(navigationAction.request, config: configuration, inBackground: false)
+        let newTab = self.createNewTab(navigationAction.request, config: configuration, inBackground: false, insertAt: getIndexAfterSelected())
         return (newTab as? BrowserTab)?.webView
     }
 
     func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem] {
         var menuItems = existingMenuItems
-        if case let .link(url) = purpose,
-           let index = menuItems.firstIndex(where: { $0.identifier?.rawValue == "WKMenuItemIdentifierOpenLinkInNewWindow" }) {
+        switch purpose {
+        case .page(url: _):
+            break
+        case .link(let url):
+            addLinkMenuCustomizations(&menuItems, url)
+        case .picture(_):
+            break
+        case .pictureLink(image: _, link: let link):
+            addLinkMenuCustomizations(&menuItems, link)
+        case .text(_):
+            break
+        }
+        return menuItems
+    }
+
+    private func addLinkMenuCustomizations(_ menuItems: inout [NSMenuItem], _ url: (URL)) {
+        if let index = menuItems.firstIndex(where: { $0.identifier?.rawValue == "WKMenuItemIdentifierOpenLinkInNewWindow" }) {
             menuItems[index].title = "Open link in new tab"
 
             let openInBackgroundItem = NSMenuItem(title: "Open link in background", action: #selector(openLinkInBackground(menuItem:)), keyEquivalent: "")
@@ -311,20 +332,25 @@ extension TabbedBrowserViewController: CustomWKUIDelegate {
             openInDefaultBrowserItem.representedObject = url
             menuItems.insert(openInDefaultBrowserItem, at: menuItems.index(after: index))
         }
-        return menuItems
     }
 
     @objc
     func openLinkInBackground(menuItem: NSMenuItem) {
         if let url = menuItem.representedObject as? URL {
-            // TODO: open in background
+            _ = self.createNewTab(url, inBackground: true, load: true, insertAt: getIndexAfterSelected())
         }
     }
 
     @objc
     func openLinkInDefaultBrowser(menuItem: NSMenuItem) {
         if let url = menuItem.representedObject as? URL {
-            // TODO: open in background
+            // TODO: open in default browser
         }
+    }
+
+    private func getIndexAfterSelected() -> Int {
+        guard let tabView = tabView, let selectedItem = tabView.selectedTabViewItem else { return 0 }
+        let selectedIndex = tabView.tabViewItems.firstIndex(of: selectedItem) ?? 0
+        return tabView.tabViewItems.index(after: selectedIndex)
     }
 }
