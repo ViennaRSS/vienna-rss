@@ -519,6 +519,21 @@
                             <action selector="mailLinkToArticlePage:" target="-1" id="1ff-ox-Afg"/>
                         </connections>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="A9627EDC-4246-4CE6-B9A2-B1C43C372E58" explicitItemIdentifier="DeleteArticle" label="Delete" paletteLabel="Delete" toolTip="Email a link to the current article or website" image="DeleteTemplate" id="Y22-Ul-q6w" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                        <size key="minSize" width="41" height="25"/>
+                        <size key="maxSize" width="41" height="28"/>
+                        <button key="view" verticalHuggingPriority="750" id="mYu-BR-T3p">
+                            <rect key="frame" x="0.0" y="14" width="41" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="DeleteTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uAr-TV-Qaw">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <connections>
+                            <action selector="deleteMessage:" target="-2" id="ac7-TV-Pyz"/>
+                        </connections>
+                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="1B4A5BDF-4844-487B-A764-D611A54922F0" explicitItemIdentifier="EmptyTrash" label="Empty Trash" paletteLabel="Empty Trash" toolTip="Delete all articles in the trash" image="EmptyTrashTemplate" id="4c1-NR-ofo" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="25"/>
                         <size key="maxSize" width="41" height="28"/>
@@ -907,6 +922,7 @@
         <userDefaultsController representsSharedInstance="YES" id="fAX-Jg-YQ6"/>
     </objects>
     <resources>
+        <image name="DeleteTemplate" width="18" height="14"/>
         <image name="EmptyTrashTemplate" width="19" height="14"/>
         <image name="GetInfoTemplate" width="7" height="14"/>
         <image name="MailTemplate" width="17" height="12"/>
