@@ -3513,6 +3513,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			*validateFlag = (thisArticle != nil && isMainWindowVisible);
 		return NO; // Give the menu handler a chance too.
 	}
+	if (theAction == @selector(deleteMessage:)) {
+		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
+		*validateFlag = self.selectedArticle != nil && !db.readOnly
+	    		&& isMainWindowVisible && folder.type != VNAFolderTypeOpenReader;
+		return YES;
+	}
 	if (theAction == @selector(emptyTrash:))
 	{
 		*validateFlag = !db.readOnly;
@@ -3717,11 +3723,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
 		return folder.type == VNAFolderTypeTrash && self.selectedArticle != nil && !db.readOnly && isMainWindowVisible;
-	}
-	else if (theAction == @selector(deleteMessage:))
-	{
-		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
-		return self.selectedArticle != nil && !db.readOnly && isMainWindowVisible && folder.type != VNAFolderTypeOpenReader;
 	}
 	else if (theAction == @selector(previousTab:))
 	{
