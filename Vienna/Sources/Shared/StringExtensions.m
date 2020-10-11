@@ -723,10 +723,9 @@ static NSMutableDictionary * entityMap = nil;
 
 /* stringByCleaningURLString
  * Percent escape invalid and reserved URL characters and return a legal URL string.
- *   Better alternative to -stringByAddingPercentEscapesUsingEncoding:
- *   Will handle unescaped or partially escaped URL strings where sequences are unpredictable,
+ *   Should handle unescaped or partially escaped URL strings where sequences are unpredictable,
  *   for instance will preserve # announcing fragment from being escaped.
- *   Uses WebKit to clean up user-entered URLs that might contain umlauts, diacritics and other
+ *   User-entered URLs might contain umlauts, diacritics and other
  *   IDNA related stuff in the domain, or God knows what in filenames and arguments.
  */
 +(NSString * )stringByCleaningURLString:(NSString *) urlString
@@ -735,21 +734,7 @@ static NSMutableDictionary * entityMap = nil;
     if (urlString == nil) {
         newString = @"";
     } else {
-        NSPasteboard * pasteboard = [NSPasteboard pasteboardWithUniqueName];
-        [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
-        @try
-        {
-            if ([pasteboard setString:urlString forType:NSPasteboardTypeString]) {
-                newString = [WebView URLFromPasteboard:pasteboard].absoluteString;
-            } else {
-                newString = @"";
-            }
-        }
-        @catch (NSException * exception)
-        {
-            newString = @"";
-        }
-        [pasteboard releaseGlobally];
+        newString = [NSURLComponents componentsWithString:urlString].string;
     }
     return newString;
 }
