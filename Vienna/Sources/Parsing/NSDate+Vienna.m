@@ -17,15 +17,17 @@
 *
 */
 static NSString * kDateFormats[] = {
-	// 2010-09-28T15:31:25Z and 2010-09-28T17:31:25+02:00
-	@"yy-MM-dd'T'HH:mm:ssXXXX",       @"yyyy-MM-dd'T'HH:mm:ssXXXX",
+	// Most frequent and compliant dates :
+	// 2010-09-28T15:31:25Z / 2010-09-28T17:31:25+02:00 / Sat, 13 Dec 2008 18:45:15 +0300 / Sat, 13 Dec 2008 18:45:15 EAT
 	@"yy-MM-dd'T'HH:mm:ssXXXXX",      @"yyyy-MM-dd'T'HH:mm:ssXXXXX",
+	@"EEE, dd MMM yy HH:mm:ss XXXX",  @"EEE, dd MMM yyyy HH:mm:ss XXXX",
+	@"EEE, dd MMM yy HH:mm:ss zzz",   @"EEE, dd MMM yyyy HH:mm:ss zzz",
+	// 2010-09-28T17:31:25+0200
+	@"yy-MM-dd'T'HH:mm:ssXXXX",       @"yyyy-MM-dd'T'HH:mm:ssXXXX",
 	// 2010-09-28T15:31:25.815+02:00
 	@"yy-MM-dd'T'HH:mm:ss.SSSXXXX",   @"yyyy-MM-dd'T'HH:mm:ss.SSSXXXX",
 	@"yy-MM-dd'T'HH:mm:ss.SSSXXXXX",  @"yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX",
-	// "Sat, 13 Dec 2008 18:45:15 EAT" and "Fri, 12 Dec 2008 18:45:15 -08:00"
-	@"EEE, dd MMM yy HH:mm:ss zzz",   @"EEE, dd MMM yyyy HH:mm:ss zzz",
-	@"EEE, dd MMM yy HH:mm:ss XXXX",  @"EEE, dd MMM yyyy HH:mm:ss XXXX",
+	// Fri, 12 Dec 2008 18:45:15 -08:00
 	@"EEE, dd MMM yy HH:mm:ss XXXXX", @"EEE, dd MMM yyyy HH:mm:ss XXXXX",
 	@"EEE, dd MMM yy HH:mm:ss",       @"EEE, dd MMM yyyy HH:mm:ss",
 	// Other exotic and non standard date formats
