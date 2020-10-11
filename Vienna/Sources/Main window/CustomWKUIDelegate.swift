@@ -23,7 +23,8 @@ public protocol CustomWKUIDelegate: WKUIDelegate {
 
 public enum WKWebViewContextMenuContext {
     case page(url: URL)
-    case link(url: URL)
+    case link(_ url: URL)
+    case picture(_ image: URL)
+    case pictureLink(image: URL, link: URL)
     case text(_ text: String)
-    case picture(_ image: Data)
 }

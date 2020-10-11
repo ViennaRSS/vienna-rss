@@ -8,7 +8,7 @@
 import Cocoa
 
 @available(OSX 10.10, *)
-public class CustomWKWebView: WKWebView, WKScriptMessageHandler {
+public class CustomWKWebView: WKWebView {
 
     public weak var contextMenuProvider: CustomWKUIDelegate?
 
@@ -23,6 +23,7 @@ public class CustomWKWebView: WKWebView, WKScriptMessageHandler {
     }
 
     private var lastRightClickedLink: URL?
+    private var lastRightClickedImgSrc: URL?
 
     public override init(frame: CGRect = .zero, configuration: WKWebViewConfiguration = WKWebViewConfiguration()) {
 
@@ -36,43 +37,10 @@ public class CustomWKWebView: WKWebView, WKScriptMessageHandler {
         let contentController = configuration.userContentController
         contentController.removeAllUserScripts()
 
-        //TODO: use this line for debugging event related scripts. Remove for production.
-        //window.webkit.messageHandlers.clickListener.postMessage(e.target.outerHTML);
-
-        //TODO: debugging js in WKWebView thanks to https://stackoverflow.com/a/61031417/3311272 . Remove for production.
-        let errorScriptSource = """
-        window.onerror = (msg, url, line, column, error) => {
-            const message = {
-                message: msg,
-                url: url,
-                line: line,
-                column: column,
-                error: JSON.stringify(error)
-            }
-
-            if (window.webkit) {
-                window.webkit.messageHandlers.clickListener.postMessage(message);
-            } else {
-                console.log("Error:", message);
-            }
-        };
-        """
-        let errorScript = WKUserScript(source: errorScriptSource, injectionTime: .atDocumentStart, forMainFrameOnly: false)
+        let errorScript = WKUserScript(source: CustomWKWebView.errorScriptSource, injectionTime: .atDocumentStart, forMainFrameOnly: false)
         contentController.addUserScript(errorScript)
 
-        let contextMenuScriptSource = """
-        document.addEventListener('contextmenu', function(e) {
-            var tagName = e.target.tagName.toLowerCase()
-            if (tagName === 'a') { //if the right clicked element is a link
-                window.webkit.messageHandlers.clickListener.postMessage(new URL(e.target.getAttribute('href'), document.baseURI).href);
-            }
-            var links = e.target.getElementsByTagName('a');
-            if (links.length === 1) { //in case any subelement of the right clicked element is a link
-                window.webkit.messageHandlers.clickListener.postMessage(new URL(links[0].getAttribute('href'), document.baseURI).href);
-            }
-        })
-        """
-        let contextMenuScript = WKUserScript(source: contextMenuScriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+        let contextMenuScript = WKUserScript(source: CustomWKWebView.contextMenuScriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
         contentController.addUserScript(contextMenuScript)
 
         //configuration
@@ -105,13 +73,6 @@ public class CustomWKWebView: WKWebView, WKScriptMessageHandler {
 
     public func search(_ text: String = "", upward: Bool = false) {
         self.evaluateJavaScript("window.find(textToFind='\(text)', matchCase=false, searchUpward=\(upward ? "true" : "false"), wrapAround=true)", completionHandler: nil)
-    }
-
-    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print(message.body) //TODO: remove for production
-        if let urlString = message.body as? String, let url = URL(string: urlString) {
-            self.lastRightClickedLink = url
-        }
     }
 
     private func evaluateScrollPossibilities() -> (scrollDownPossible: Bool, scrollUpPossible: Bool) {
@@ -160,7 +121,59 @@ public class CustomWKWebView: WKWebView, WKScriptMessageHandler {
 }
 
 // MARK: context menu
-extension CustomWKWebView {
+extension CustomWKWebView: WKScriptMessageHandler {
+
+    //TODO: debugging js in WKWebView thanks to https://stackoverflow.com/a/61031417/3311272 . Remove for production.
+    static let errorScriptSource = """
+    window.onerror = (msg, url, line, column, error) => {
+        const message = {
+            message: msg,
+            url: url,
+            line: line,
+            column: column,
+            error: JSON.stringify(error)
+        }
+
+        if (window.webkit) {
+            window.webkit.messageHandlers.clickListener.postMessage(message);
+        } else {
+            console.log("Error:", message);
+        }
+    };
+    """
+
+    static let contextMenuScriptSource = """
+    document.addEventListener('contextmenu', function(e) {
+        //TODO: this works only starting with webkit version used in Safari 12
+        var elements = document.elementsFromPoint(e.clientX, e.clientY);
+        var link;
+        var img;
+        for(var element in elements) { //search first link and first image
+            var htmlElement = elements[element];
+            var tagName = htmlElement.tagName;
+            if (tagName === 'A' && link == undefined) {
+                link = htmlElement;
+                var url = new URL(link.getAttribute('href'), document.baseURI).href;
+                window.webkit.messageHandlers.clickListener.postMessage('link: ' + url);
+            } else if (tagName === 'IMG' && img == undefined) {
+                img = htmlElement;
+                var url = new URL(img.getAttribute('src'), document.baseURI).href;
+                window.webkit.messageHandlers.clickListener.postMessage('img: ' + url);
+            }
+        }
+    })
+    """
+
+    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        print(message.body) //TODO: remove for production
+        if let urlString = message.body as? String {
+            if urlString.starts(with: "link: "), let url = URL(string: urlString.replacingOccurrences(of: "link: ", with: "", options: .anchored)) {
+                self.lastRightClickedLink = url
+            } else if urlString.starts(with: "img: "), let url = URL(string: urlString.replacingOccurrences(of: "img: ", with: "", options: .anchored)) {
+                self.lastRightClickedImgSrc = url
+            }
+        }
+    }
 
     open override func willOpenMenu(_ menu: NSMenu, with event: NSEvent) {
 
@@ -171,11 +184,24 @@ extension CustomWKWebView {
     }
 
     private func customize(contextMenu menu: NSMenu) {
+
+        let clickedOnLink = menu.items.contains { $0.identifier?.rawValue == "WKMenuItemIdentifierOpenLinkInNewWindow" }
+        let clickedOnImage = menu.items.contains { $0.identifier?.rawValue == "WKMenuItemIdentifierOpenLinkInNewWindow" }
+        let clickedOnText = menu.items.contains { $0.identifier?.rawValue == "WKMenuItemIdentifierCopy" }
+
         let context: WKWebViewContextMenuContext
-        if menu.items.contains(where: { $0.identifier?.rawValue == "WKMenuItemIdentifierOpenLinkInNewWindow" }) {
-            context = .link(url: self.lastRightClickedLink ?? URL(string: "about:blank")!)
+        let blankUrl = URL(string: "about:blank")!
+
+        if clickedOnLink && clickedOnImage {
+            context = .pictureLink(image: self.lastRightClickedImgSrc ?? blankUrl, link: self.lastRightClickedLink ?? blankUrl)
+        } else if clickedOnLink {
+            context = .link(self.lastRightClickedLink ?? blankUrl)
+        } else if clickedOnImage {
+            context = .picture(self.lastRightClickedImgSrc ?? blankUrl)
+        } else if clickedOnText {
+            context = .text(getTextSelection())
         } else {
-            context = .page(url: self.url ?? URL(string: "about:blank")!)
+            context = .page(url: self.url ?? blankUrl)
         }
 
         menu.items = contextMenuProvider?.contextMenuItemsFor(purpose: context, existingMenuItems: menu.items) ?? menu.items
