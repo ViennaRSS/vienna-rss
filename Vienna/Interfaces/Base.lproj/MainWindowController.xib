@@ -531,7 +531,7 @@
                             </buttonCell>
                         </button>
                         <connections>
-                            <action selector="deleteMessage:" target="-2" id="ac7-TV-Pyz"/>
+                            <action selector="deleteMessage:" target="-1" id="K93-nE-1KC"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="1B4A5BDF-4844-487B-A764-D611A54922F0" explicitItemIdentifier="EmptyTrash" label="Empty Trash" paletteLabel="Empty Trash" toolTip="Delete all articles in the trash" image="EmptyTrashTemplate" id="4c1-NR-ofo" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
