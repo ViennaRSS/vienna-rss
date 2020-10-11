@@ -181,6 +181,7 @@ extension MainWindowController: NSToolbarDelegate {
             NSToolbarItem.Identifier("MarkAllItemsAsRead"),
             NSToolbarItem.Identifier("Refresh"),
             NSToolbarItem.Identifier("MailLink"),
+            NSToolbarItem.Identifier("DeleteArticle"),
             NSToolbarItem.Identifier("EmptyTrash"),
             NSToolbarItem.Identifier("GetInfo"),
             NSToolbarItem.Identifier("Action"),
