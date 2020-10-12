@@ -519,7 +519,7 @@
                             <action selector="mailLinkToArticlePage:" target="-1" id="1ff-ox-Afg"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="A9627EDC-4246-4CE6-B9A2-B1C43C372E58" explicitItemIdentifier="DeleteArticle" label="Delete" paletteLabel="Delete" toolTip="Email a link to the current article or website" image="DeleteTemplate" id="Y22-Ul-q6w" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="A9627EDC-4246-4CE6-B9A2-B1C43C372E58" explicitItemIdentifier="DeleteArticle" label="Delete" paletteLabel="Delete" toolTip="Delete the current article" image="DeleteTemplate" id="Y22-Ul-q6w" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <size key="minSize" width="41" height="25"/>
                         <size key="maxSize" width="41" height="28"/>
                         <button key="view" verticalHuggingPriority="750" id="mYu-BR-T3p">
