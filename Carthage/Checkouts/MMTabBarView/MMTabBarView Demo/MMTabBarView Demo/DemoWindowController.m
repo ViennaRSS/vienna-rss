@@ -30,6 +30,7 @@
 - (IBAction)configTabOptimumWidth:(id)sender;
 - (IBAction)configTabSizeToFit:(id)sender;
 - (IBAction)configTearOffStyle:(id)sender;
+- (IBAction)configSelectAfterClosing:(id)sender;
 - (IBAction)configUseOverflowMenu:(id)sender;
 - (IBAction)configAutomaticallyAnimates:(id)sender;
 - (IBAction)configAllowsScrubbing:(id)sender;
@@ -45,6 +46,7 @@
 		  @"Card", @"Style",
 		  @"Horizontal", @"Orientation",
 		  @"Miniwindow", @"Tear-Off",
+		  @"Left", @"SelectAfterClosing",
 		  @"100", @"TabMinWidth",
 		  @"280", @"TabMaxWidth",
 		  @"130", @"TabOptimalWidth",
@@ -98,21 +100,7 @@
 
     NSTabViewItem *tabViewItem = tabView.selectedTabViewItem;
 
-    if ((tabBar.delegate) && ([tabBar.delegate respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])) {
-        if (![tabBar.delegate tabView:tabView shouldCloseTabViewItem:tabViewItem]) {
-            return;
-        }
-    }
-    
-    if ((tabBar.delegate) && ([tabBar.delegate respondsToSelector:@selector(tabView:willCloseTabViewItem:)])) {
-        [tabBar.delegate tabView:tabView willCloseTabViewItem:tabViewItem];
-    }
-    
-    [tabView removeTabViewItem:tabViewItem];
-    
-    if ((tabBar.delegate) && ([tabBar.delegate respondsToSelector:@selector(tabView:didCloseTabViewItem:)])) {
-        [tabBar.delegate tabView:tabView didCloseTabViewItem:tabViewItem];
-    }
+    [tabBar closeTabViewItem:tabViewItem];
 }
 
 - (void)setIconNamed:(id)sender {
@@ -405,6 +393,13 @@
 	 forKey:@"Tear-Off"];
 }
 
+- (void)configSelectAfterClosing:(id)sender {
+    NSPopUpButton* const popupButton = sender;
+
+    [NSUserDefaults.standardUserDefaults setObject:popupButton.title
+     forKey:@"SelectAfterClosing"];
+}
+
 - (void)configUseOverflowMenu:(id)sender {
 	NSControlStateValue const state = [(NSButton*) sender state];
 
@@ -497,6 +492,32 @@
 		return NO;
 	}
 	return YES;
+}
+
+-(NSTabViewItem *)tabView:(NSTabView *)aTabView selectOnClosingTabViewItem:(NSTabViewItem *)tabViewItem {
+    NSString *selection = popUp_selectAfterClosing.title;
+
+    if (tabViewItem != tabBar.selectedTabViewItem) {
+        return nil; //selection behavior only applies when tab to close is selected
+    }
+
+    if ([@"Left" isEqualToString:selection]) {
+        return nil; //selecting left after closing tab is built-in tabbar default
+    } else if ([@"Right" isEqualToString:selection]) {
+        if (tabViewItem == [self.tabBar.tabView.tabViewItems lastObject]) {
+            return nil; //cannot select tab on the right if selected tab is rightmost one
+        }
+        int indexToSelect = [tabBar.tabView.tabViewItems indexOfObject:tabBar.selectedTabViewItem] + 1;
+        return [tabBar.tabView.tabViewItems objectAtIndex:indexToSelect];
+    } else if ([@"Random" isEqualToString:selection]) {
+        int currentlySelectedIndex = [tabBar.tabView.tabViewItems indexOfObject:tabBar.selectedTabViewItem] + 1;
+        int indexToSelect = arc4random_uniform([tabBar.tabView.tabViewItems count] - 1);
+        if (indexToSelect >= currentlySelectedIndex) {
+            indexToSelect += 1; //we cannot select the current tab as it is being closed
+        }
+        return [tabBar.tabView.tabViewItems objectAtIndex:indexToSelect];
+    }
+    return nil;
 }
 
 - (void)tabView:(NSTabView *)aTabView didCloseTabViewItem:(NSTabViewItem *)tabViewItem {
@@ -708,11 +729,13 @@
 	[popUp_orientation selectItemWithTitle:orientation != nil ? orientation : @"Horizontal"];
 	NSString* const tearOff = [defaults stringForKey:@"Tear-Off"];
 	[popUp_tearOff selectItemWithTitle:tearOff != nil ? tearOff : @"Miniwindow"];
+	NSString* const selectAfterClosing = [defaults stringForKey:@"SelectAfterClosing"];
+	[popUp_selectAfterClosing selectItemWithTitle:selectAfterClosing != nil ? selectAfterClosing : @"Left"];
 
 	[button_onlyShowCloseOnHover setState:[defaults boolForKey:@"OnlyShowCloseOnHover"]];
 	[button_canCloseOnlyTab setState:[defaults boolForKey:@"CanCloseOnlyTab"]];
 	[button_disableTabClosing setState:[defaults boolForKey:@"DisableTabClosing"]];
-    [button_allowBackgroundClosing setState:[defaults boolForKey:@"AllowBackgroundClosing"]];
+	[button_allowBackgroundClosing setState:[defaults boolForKey:@"AllowBackgroundClosing"]];
 	[button_hideForSingleTab setState:[defaults boolForKey:@"HideForSingleTab"]];
 	[button_showAddTab setState:[defaults boolForKey:@"ShowAddTabButton"]];
 	[button_sizeToFit setState:[defaults boolForKey:@"SizeToFit"]];
@@ -721,9 +744,9 @@
 	[button_allowScrubbing setState:[defaults boolForKey:@"AllowScrubbing"]];
 
 	[self configStyle:popUp_style];
-    [tabBar setOrientation:popUp_orientation.selectedTag];
+	[tabBar setOrientation:popUp_orientation.selectedTag];
 
-    [self configOnlyShowCloseOnHover:button_onlyShowCloseOnHover];    
+	[self configOnlyShowCloseOnHover:button_onlyShowCloseOnHover];    
 	[self configCanCloseOnlyTab:button_canCloseOnlyTab];
 	[self configDisableTabClose:button_disableTabClosing];
 	[self configAllowBackgroundClosing:button_allowBackgroundClosing];
@@ -734,6 +757,7 @@
 	[self configTabOptimumWidth:textField_optimumWidth];
 	[self configTabSizeToFit:button_sizeToFit];
 	[self configTearOffStyle:popUp_tearOff];
+	[self configSelectAfterClosing:popUp_selectAfterClosing];
 	[self configUseOverflowMenu:button_useOverflow];
 	[self configAutomaticallyAnimates:button_automaticallyAnimate];
 	[self configAllowsScrubbing:button_allowScrubbing];

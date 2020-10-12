@@ -37,6 +37,7 @@
 	IBOutlet NSPopUpButton			*popUp_style;
 	IBOutlet NSPopUpButton			*popUp_orientation;
 	IBOutlet NSPopUpButton			*popUp_tearOff;
+	IBOutlet NSPopUpButton          *popUp_selectAfterClosing;
 	IBOutlet NSButton               *button_onlyShowCloseOnHover;    
 	IBOutlet NSButton				*button_canCloseOnlyTab;
 	IBOutlet NSButton				*button_disableTabClosing;
