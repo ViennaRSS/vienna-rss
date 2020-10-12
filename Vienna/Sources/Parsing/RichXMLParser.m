@@ -66,6 +66,8 @@
                         return NO;
                     case NSXMLParserTagNameMismatchError:
                         return NO;
+                    case NSXMLParserEmptyDocumentError:
+                        return NO;
                 }
             }
 
