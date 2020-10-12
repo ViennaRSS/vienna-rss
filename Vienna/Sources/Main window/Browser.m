@@ -195,25 +195,7 @@
 -(void)closeTab:(NSTabViewItem *)tabViewItem
 {
 	MMTabBarView *tabBar = self.tabBarControl;
-	NSTabView *tabView = tabBar.tabView;
-
-    if ((tabBar.delegate)
-        && ([tabBar.delegate respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])
-        && ![tabBar.delegate tabView:tabView shouldCloseTabViewItem:tabViewItem]) {
-            return;
-    }
-    
-    if ((tabBar.delegate)
-        && ([tabBar.delegate respondsToSelector:@selector(tabView:willCloseTabViewItem:)])) {
-        [tabBar.delegate tabView:tabView willCloseTabViewItem:tabViewItem];
-    }
-    
-    [tabView removeTabViewItem:tabViewItem];
-    
-    if ((tabBar.delegate)
-        && ([tabBar.delegate respondsToSelector:@selector(tabView:didCloseTabViewItem:)])) {
-        [tabBar.delegate tabView:tabView didCloseTabViewItem:tabViewItem];
-    }
+    [tabBar closeTabViewItem:tabViewItem];
 }
 
 /* countOfTabs
@@ -274,26 +256,32 @@
 	//remove closing tab from tab order
 	[self.tabViewOrder removeObject:tabViewItem];
 
-	if (self.tabBarControl.selectedTabViewItem == tabViewItem)
-	{
-		if (self.selectPreviousOnClose) {
-			//open most recently opened tab
-			[self.tabBarControl.tabView selectTabViewItem:self.tabViewOrder.lastObject];
-		}
-		else if (self.selectRightItemFirst
-				 && [self.tabBarControl.tabView indexOfTabViewItem:tabViewItem] < self.tabBarControl.numberOfTabViewItems - 1)
-		{
-			//since tab is not the last, select the one right of it
-			[self.tabBarControl.tabView selectTabViewItemAtIndex:[self.tabBarControl.tabView indexOfTabViewItem:tabViewItem] + 1];
-		}
-		else if (self.canJumpToArticles == false
-				 && [self.tabBarControl.tabView indexOfTabViewItem:tabViewItem] == 1
-				 && self.tabBarControl.tabView.numberOfTabViewItems > 2)
-		{
-			//open tab to the right instead of article tab
-			[self.tabBarControl.tabView selectTabViewItemAtIndex:2];
-		}
-	}
+}
+
+- (NSTabViewItem *)tabView:(NSTabView *)aTabView selectOnClosingTabViewItem:(NSTabViewItem *)tabViewItem {
+
+    if (self.tabBarControl.selectedTabViewItem == tabViewItem)
+    {
+        if (self.selectPreviousOnClose) {
+            //open most recently opened tab
+            return self.tabViewOrder.lastObject;
+        }
+        else if (self.selectRightItemFirst
+                 && [self.tabBarControl.tabView indexOfTabViewItem:tabViewItem] < self.tabBarControl.numberOfTabViewItems - 1)
+        {
+            //since tab is not the last, select the one right of it
+            return [self.tabBarControl.tabView tabViewItemAtIndex:[self.tabBarControl.tabView indexOfTabViewItem:tabViewItem] + 1];
+        }
+        else if (self.canJumpToArticles == false
+                 && [self.tabBarControl.tabView indexOfTabViewItem:tabViewItem] == 1
+                 && self.tabBarControl.tabView.numberOfTabViewItems > 2)
+        {
+            //open tab to the right instead of article tab
+            return [self.tabBarControl.tabView tabViewItemAtIndex:2];
+        }
+    }
+
+    return nil;
 }
 
 // Closing behavior
