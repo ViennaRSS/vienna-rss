@@ -1,5 +1,6 @@
+os: osx
 language: objective-c
-osx_image: xcode11.6
+osx_image: xcode12
 xcode_project: Vienna.xcodeproj
 xcode_scheme: Vienna
 
