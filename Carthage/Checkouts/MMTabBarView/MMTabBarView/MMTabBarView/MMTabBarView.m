@@ -455,6 +455,31 @@ static NSMutableDictionary<NSString*, Class <MMTabStyle>> *registeredStyleClasse
         [_delegate tabView:_tabView didMoveTabViewItem:anItem toIndex:index];
 }
 
+- (void)closeTabViewItem:(NSTabViewItem *)tabViewItem {
+    if ((self.delegate) && ([self.delegate respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])) {
+        if (![self.delegate tabView:_tabView shouldCloseTabViewItem:tabViewItem]) {
+            return;
+        }
+    }
+
+    if ((self.delegate) && ([self.delegate respondsToSelector:@selector(tabView:willCloseTabViewItem:)])) {
+        [self.delegate tabView:_tabView willCloseTabViewItem:tabViewItem];
+    }
+
+    if ((self.delegate) && ([self.delegate respondsToSelector:@selector(tabView:selectOnClosingTabViewItem:)])) {
+        NSTabViewItem *toSelect = [self.delegate tabView:_tabView selectOnClosingTabViewItem:tabViewItem];
+        if (toSelect) {
+            [self selectTabViewItem:toSelect];
+        }
+    }
+
+    [_tabView removeTabViewItem:tabViewItem];
+
+    if ((self.delegate) && ([self.delegate respondsToSelector:@selector(tabView:didCloseTabViewItem:)])) {
+        [self.delegate tabView:_tabView didCloseTabViewItem:tabViewItem];
+    }
+}
+
 - (void)removeTabViewItem:(NSTabViewItem *)anItem {
     [_tabView removeTabViewItem:anItem];
 }
@@ -2234,22 +2259,7 @@ static NSMutableDictionary<NSString*, Class <MMTabStyle>> *registeredStyleClasse
 	}
 
 
-    if ((self.delegate) && ([self.delegate respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])) {
-        if (![self.delegate tabView:_tabView shouldCloseTabViewItem:tabViewItem]) {
-             return;
-         }
-    }
-
-    if ((self.delegate) && ([self.delegate respondsToSelector:@selector(tabView:willCloseTabViewItem:)])) {
-         [self.delegate tabView:_tabView willCloseTabViewItem:tabViewItem];
-    }
-     
-    [_tabView removeTabViewItem:tabViewItem];
-     
-    if ((self.delegate) && ([self.delegate respondsToSelector:@selector(tabView:didCloseTabViewItem:)])) {
-         [self.delegate tabView:_tabView didCloseTabViewItem:tabViewItem];
-    }
-
+    [self closeTabViewItem:tabViewItem];
 }
 
 - (void)frameDidChange:(NSNotification *)notification {
