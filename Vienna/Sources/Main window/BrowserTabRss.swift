@@ -45,9 +45,13 @@ extension BrowserTab: RSSSource {
         }
     }
 
-    @IBAction func subscribe(_ sender: Any) {
+    @IBAction func subscribe(_ sender: NSObject? = nil) {
         if let rssSubscriber = self.rssSubscriber, !self.rssUrls.isEmpty {
-            rssSubscriber.subscribeToRSS(self.rssUrls)
+            if let sender = sender, sender as? NSView != nil || sender as? NSCell != nil {
+                rssSubscriber.subscribeToRSS(self.rssUrls, uiElement: sender)
+            } else {
+                rssSubscriber.subscribeToRSS(self.rssUrls)
+            }
         }
     }
 
