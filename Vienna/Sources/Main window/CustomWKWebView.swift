@@ -206,5 +206,6 @@ extension CustomWKWebView: WKScriptMessageHandler {
 
         menu.items = contextMenuProvider?.contextMenuItemsFor(purpose: context, existingMenuItems: menu.items) ?? menu.items
         lastRightClickedLink = nil
+        lastRightClickedImgSrc = nil
     }
 }

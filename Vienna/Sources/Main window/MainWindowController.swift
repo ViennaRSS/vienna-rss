@@ -305,7 +305,7 @@ extension MainWindowController: BrowserContextMenuDelegate {
             //swap open link in new tab and open link in background items if necessary
             let openInBackground = Preferences.standard().openLinksInBackground
             if openInBackground && index < openInBackgroundIndex
-                || !openInBackground && openInBackgroundIndex > index {
+                || !openInBackground && openInBackgroundIndex < index {
                 menuItems.swapAt(index, openInBackgroundIndex)
             }
             index = max(index, openInBackgroundIndex)
