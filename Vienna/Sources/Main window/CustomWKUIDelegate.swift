@@ -17,14 +17,4 @@
 //  limitations under the License.
 //
 
-public protocol CustomWKUIDelegate: WKUIDelegate {
-    func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem]
-}
-
-public enum WKWebViewContextMenuContext {
-    case page(url: URL)
-    case link(_ url: URL)
-    case picture(_ image: URL)
-    case pictureLink(image: URL, link: URL)
-    case text(_ text: String)
-}
+protocol CustomWKUIDelegate: WKUIDelegate, BrowserContextMenuDelegate { }
