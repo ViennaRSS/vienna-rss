@@ -26,7 +26,7 @@ class BrowserTab: NSViewController {
 
     // MARK: Properties
 
-	let webView: CustomWKWebView
+    let webView: CustomWKWebView
 
     @IBOutlet private(set) weak var addressBarContainer: NSView!
     @IBOutlet private(set) weak var addressField: NSTextField!
@@ -39,14 +39,14 @@ class BrowserTab: NSViewController {
     @IBOutlet private(set) weak var reloadButtonWidth: NSLayoutConstraint!
     @IBOutlet private(set) weak var rssButtonWidth: NSLayoutConstraint!
 
-	var url: URL? = nil {
-		didSet {
+    var url: URL? = nil {
+        didSet {
             if self.url != webView.url || self.url == nil {
                 self.title = self.url?.host ?? NSLocalizedString("New Tab", comment: "")
             }
             self.addressField?.stringValue = self.url?.absoluteString ?? ""
-		}
-	}
+        }
+    }
 
     var loadedTab: Bool = false
 
@@ -61,7 +61,7 @@ class BrowserTab: NSViewController {
 
     var viewVisible: Bool = false
 
-	var titleObservation: NSKeyValueObservation?
+    var titleObservation: NSKeyValueObservation?
     var loadingObservation: NSKeyValueObservation?
     var progressObservation: NSKeyValueObservation?
     var urlObservation: NSKeyValueObservation?
@@ -77,7 +77,7 @@ class BrowserTab: NSViewController {
         } else {
             super.init(nibName: "BrowserTabBeforeMacOS12", bundle: nil)
         }
-        
+
         titleObservation = webView.observe(\.title, options: .new) { [weak self] _, change in
             guard let newValue = change.newValue ?? "", !newValue.isEmpty else {
                 return
@@ -108,16 +108,16 @@ class BrowserTab: NSViewController {
         }
     }
 
-	required init?(coder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
-	deinit {
-		titleObservation?.invalidate()
+    deinit {
+        titleObservation?.invalidate()
         loadingObservation?.invalidate()
         progressObservation?.invalidate()
         urlObservation?.invalidate()
-	}
+    }
 
     // MARK: ViewController lifecycle
 
@@ -194,11 +194,11 @@ extension BrowserTab: Tab {
     }
 
     var isLoading: Bool {
-		loading
+        loading
     }
 
     func back() -> Bool {
-		let couldGoBack = self.webView.goBack() != nil
+        let couldGoBack = self.webView.goBack() != nil
         //title observation not triggered by goBack() -> manual setting
         self.url = self.webView.url
         self.title = self.webView.title
@@ -206,7 +206,7 @@ extension BrowserTab: Tab {
     }
 
     func forward() -> Bool {
-		let couldGoForward = self.webView.goForward() != nil
+        let couldGoForward = self.webView.goForward() != nil
         //title observation not triggered by goForware() -> manual setting
         self.url = self.webView.url
         self.title = self.webView.title
@@ -214,15 +214,15 @@ extension BrowserTab: Tab {
     }
 
     func pageDown() -> Bool {
-		let canPageDown = self.webView.canScrollDown
+        let canPageDown = self.webView.canScrollDown
         self.webView.pageDown(nil)
-		return canPageDown
+        return canPageDown
     }
 
     func pageUp() -> Bool {
-		let canPageUp = self.webView.canScrollUp
+        let canPageUp = self.webView.canScrollUp
         self.webView.pageUp(nil)
-		return canPageUp
+        return canPageUp
     }
 
     func searchFor(_ searchString: String, action: NSFindPanelAction) {
@@ -247,8 +247,8 @@ extension BrowserTab: Tab {
         }
     }
 
-	func reloadTab() {
-		self.webView.reload()
+    func reloadTab() {
+        self.webView.reload()
     }
 
     func stopLoadingTab() {

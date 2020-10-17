@@ -121,5 +121,4 @@ extension BrowserTab {
 extension BrowserTab: NSTextFieldDelegate {
     //TODO: things like address suggestion etc
     //TODO: restore url string when user presses escape in textfield, make webview first responder
-
 }

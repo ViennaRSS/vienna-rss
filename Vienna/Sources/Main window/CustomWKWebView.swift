@@ -12,12 +12,12 @@ public class CustomWKWebView: WKWebView {
 
     public weak var contextMenuProvider: CustomWKUIDelegate?
 
-	var canScrollDown: Bool {
+    var canScrollDown: Bool {
         evaluateScrollPossibilities().scrollDownPossible
-	}
-	var canScrollUp: Bool {
+    }
+    var canScrollUp: Bool {
         evaluateScrollPossibilities().scrollUpPossible
-	}
+    }
     var textSelection: String {
         return getTextSelection()
     }
@@ -77,12 +77,12 @@ public class CustomWKWebView: WKWebView {
 
     private func evaluateScrollPossibilities() -> (scrollDownPossible: Bool, scrollUpPossible: Bool) {
 
-		//this is an idea adapted from Brent Simmons which he uses in NetNewsWire (https://github.com/brentsimmons/NetNewsWire)
+        //this is an idea adapted from Brent Simmons which he uses in NetNewsWire (https://github.com/brentsimmons/NetNewsWire)
 
         var scrollDownPossible = false
         var scrollUpPossible = false
 
-		let javascriptString = "var x = {contentHeight: document.body.scrollHeight, offsetY: document.body.scrollTop}; x"
+        let javascriptString = "var x = {contentHeight: document.body.scrollHeight, offsetY: document.body.scrollTop}; x"
 
         waitForAsyncExecution(until: DispatchTime.now() + DispatchTimeInterval.seconds(1)) { finishHandler in
             self.evaluateJavaScript(javascriptString) { info, error in
@@ -103,7 +103,7 @@ public class CustomWKWebView: WKWebView {
         }
 
         return (scrollDownPossible, scrollUpPossible)
-	}
+    }
 
     private func getTextSelection() -> String {
         var text = ""

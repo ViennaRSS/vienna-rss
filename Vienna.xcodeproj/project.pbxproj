@@ -1045,10 +1045,7 @@
 				2FDF6FBC218A266A002F77E9 /* BrowserTab.swift */,
 				2FF61D2F24F2ED1500A7E2B5 /* BrowserTabGui.swift */,
 				2FF61D2D24F2E71500A7E2B5 /* BrowserTabRss.swift */,
-				2FDF6FBE218A266A002F77E9 /* BrowserTab.xib */,
-				2F125EDD24D0638600868E11 /* BrowserTabBeforeMacOS12.xib */,
 				2FDF6FBF218A266A002F77E9 /* TabbedBrowserViewController.swift */,
-				2FDF6FBD218A266A002F77E9 /* TabbedBrowserViewController.xib */,
 				2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */,
 				2F06504B2506B5B500468A0E /* LoadingIndicator.swift */,
 			);
@@ -1131,6 +1128,9 @@
 		F63739FB1F1CFEDC00ED3B09 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				2FDF6FBD218A266A002F77E9 /* TabbedBrowserViewController.xib */,
+				2FDF6FBE218A266A002F77E9 /* BrowserTab.xib */,
+				2F125EDD24D0638600868E11 /* BrowserTabBeforeMacOS12.xib */,
 				F625815B1E29BEB90035E43C /* MainMenu.xib */,
 				F6832F661F10F5DA007920D4 /* MainWindowController.xib */,
 				F62581441E29B90A0035E43C /* SearchPanel.xib */,
