@@ -289,6 +289,12 @@ extension MainWindowController: NSMenuDelegate {
 // MARK: - Rss subscriber
 
 extension MainWindowController: RSSSubscriber {
+
+    func isInterestedIn(_ url: URL) -> Bool {
+        //TODO: check whether we already subscribed to feed
+        return true
+    }
+
     func subscribeToRSS(_ urls: [URL]) {
         // TODO : if there are multiple feeds, we should put up an UI inviting the user to pick one, as also mentioned in SubscriptionModel.m verifiedFeedURLFromURL method
         // TODO : allow user to select a folder instead of assuming current location (see #1163)
