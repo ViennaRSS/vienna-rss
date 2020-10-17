@@ -55,7 +55,7 @@ class BrowserTab: NSViewController {
     /// backing storage only, access via rssSubscriber property
     weak var rssDelegate: RSSSubscriber?
     /// backing storage only, access via rssUrl property
-    var rssFeedUrl: URL?
+    var rssFeedUrls: [URL] = []
 
     var showRssButton: Bool = false
 
