@@ -88,7 +88,7 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
             let tabBar = coder.decodeObject(of: MMTabBarView.self, forKey: "tabBar"),
             let tabView = coder.decodeObject(of: NSTabView.self, forKey: "tabView"),
             let primaryTab = coder.decodeObject(of: NSTabViewItem.self, forKey: "primaryTab")
-            else { return nil }
+        else { return nil }
         self.tabBar = tabBar
         self.tabView = tabView
         self.primaryTab = primaryTab
@@ -183,15 +183,15 @@ extension TabbedBrowserViewController: Browser {
             tabView?.addTabViewItem(newTabViewItem)
         }
 
-		if !inBackground {
-			tabBar?.select(newTabViewItem)
+        if !inBackground {
+            tabBar?.select(newTabViewItem)
             if load {
                 newTab.webView.becomeFirstResponder()
             } else {
                 newTab.activateAddressBar()
             }
-			//TODO: make first responder?
-		}
+            //TODO: make first responder?
+        }
 
         newTab.webView.uiDelegate = self
 
@@ -208,11 +208,11 @@ extension TabbedBrowserViewController: Browser {
         }
     }
 
-	func showPreviousTab() {
+    func showPreviousTab() {
         self.tabView?.selectPreviousTabViewItem(nil)
     }
 
-	func showNextTab() {
+    func showNextTab() {
         self.tabView?.selectNextTabViewItem(nil)
     }
 
@@ -301,7 +301,7 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
 
 @available(OSX 10.10, *)
 extension TabbedBrowserViewController: CustomWKUIDelegate {
-	//TODO: implement functionality for alerts and maybe peek actions
+    //TODO: implement functionality for alerts and maybe peek actions
 
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         let newTab = self.createNewTab(navigationAction.request, config: configuration, inBackground: false, insertAt: getIndexAfterSelected())

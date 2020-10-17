@@ -24,15 +24,15 @@ import Cocoa
 @available(OSX 10.10, *)
 class TitleChangingTabViewItem: NSTabViewItem {
 
-	var titleObservation: NSKeyValueObservation?
+    var titleObservation: NSKeyValueObservation?
 
     override var viewController: NSViewController? {
         didSet {
             super.viewController = viewController
             titleObservation?.invalidate()
-			titleObservation = self.viewController?.observe(\.title, options: .new) { _, change in
-				self.label = (change.newValue ?? "") ?? ""
-			}
+            titleObservation = self.viewController?.observe(\.title, options: .new) { _, change in
+                self.label = (change.newValue ?? "") ?? ""
+            }
         }
     }
 }
