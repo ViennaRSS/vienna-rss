@@ -24,5 +24,8 @@ import Foundation
 }
 
 @objc protocol RSSSubscriber {
-    func subscribeToRSS(_ url: URL?)
+
+    /// callback to the RSS subscriber when the browser user wants to subscribe to a feed
+    /// - Parameter urls: non-empty url array containing Atom or RSS feed urls
+    func subscribeToRSS(_ urls: [URL])
 }
