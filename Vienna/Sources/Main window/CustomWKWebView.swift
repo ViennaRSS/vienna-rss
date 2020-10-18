@@ -10,6 +10,12 @@ import Cocoa
 @available(OSX 10.10, *)
 public class CustomWKWebView: WKWebView {
 
+    static let clickListenerName = "clickListener"
+    static let jsErrorListenerName = "errorListener"
+
+    //store weakly here because contentController retains listener
+    weak var contextMenuListener: CustomWKWebViewContextMenuListener?
+
     weak var contextMenuProvider: CustomWKUIDelegate?
 
     var canScrollDown: Bool {
@@ -19,11 +25,8 @@ public class CustomWKWebView: WKWebView {
         evaluateScrollPossibilities().scrollUpPossible
     }
     var textSelection: String {
-        return getTextSelection()
+        getTextSelection()
     }
-
-    private var lastRightClickedLink: URL?
-    private var lastRightClickedImgSrc: URL?
 
     public override init(frame: CGRect = .zero, configuration: WKWebViewConfiguration = WKWebViewConfiguration()) {
 
@@ -57,8 +60,12 @@ public class CustomWKWebView: WKWebView {
 
         super.init(frame: frame, configuration: configuration)
 
-        contentController.removeScriptMessageHandler(forName: "clickListener")
-        contentController.add(self, name: "clickListener")
+        contentController.removeScriptMessageHandler(forName: CustomWKWebView.clickListenerName)
+        contentController.removeScriptMessageHandler(forName: CustomWKWebView.jsErrorListenerName)
+        let contextMenuListener = CustomWKWebViewContextMenuListener()
+        self.contextMenuListener = contextMenuListener
+        contentController.add(contextMenuListener, name: CustomWKWebView.clickListenerName)
+        contentController.add(CustomWKWebViewErrorListener(), name: CustomWKWebView.jsErrorListenerName)
 
         self.allowsMagnification = true
         self.allowsBackForwardNavigationGestures = true
@@ -85,7 +92,7 @@ public class CustomWKWebView: WKWebView {
         let javascriptString = "var x = {contentHeight: document.body.scrollHeight, offsetY: document.body.scrollTop}; x"
 
         waitForAsyncExecution(until: DispatchTime.now() + DispatchTimeInterval.seconds(1)) { finishHandler in
-            self.evaluateJavaScript(javascriptString) { info, error in
+            self.evaluateJavaScript(javascriptString) { info, _ in
 
                 guard let info = info as? [String: Any] else {
                     return
@@ -121,9 +128,9 @@ public class CustomWKWebView: WKWebView {
 }
 
 // MARK: context menu
-extension CustomWKWebView: WKScriptMessageHandler {
+extension CustomWKWebView {
 
-    //TODO: debugging js in WKWebView thanks to https://stackoverflow.com/a/61031417/3311272 . Remove for production.
+    //TODO: debugging js in WKWebView thanks to https://stackoverflow.com/a/61031417/3311272 .
     static let errorScriptSource = """
     window.onerror = (msg, url, line, column, error) => {
         const message = {
@@ -135,7 +142,7 @@ extension CustomWKWebView: WKScriptMessageHandler {
         }
 
         if (window.webkit) {
-            window.webkit.messageHandlers.clickListener.postMessage(message);
+            window.webkit.messageHandlers.\(jsErrorListenerName).postMessage(message);
         } else {
             console.log("Error:", message);
         }
@@ -154,26 +161,15 @@ extension CustomWKWebView: WKScriptMessageHandler {
             if (tagName === 'A' && link == undefined) {
                 link = htmlElement;
                 var url = new URL(link.getAttribute('href'), document.baseURI).href;
-                window.webkit.messageHandlers.clickListener.postMessage('link: ' + url);
+                window.webkit.messageHandlers.\(clickListenerName).postMessage('link: ' + url);
             } else if (tagName === 'IMG' && img == undefined) {
                 img = htmlElement;
                 var url = new URL(img.getAttribute('src'), document.baseURI).href;
-                window.webkit.messageHandlers.clickListener.postMessage('img: ' + url);
+                window.webkit.messageHandlers.\(clickListenerName).postMessage('img: ' + url);
             }
         }
     })
     """
-
-    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print(message.body) //TODO: remove for production
-        if let urlString = message.body as? String {
-            if urlString.starts(with: "link: "), let url = URL(string: urlString.replacingOccurrences(of: "link: ", with: "", options: .anchored)) {
-                self.lastRightClickedLink = url
-            } else if urlString.starts(with: "img: "), let url = URL(string: urlString.replacingOccurrences(of: "img: ", with: "", options: .anchored)) {
-                self.lastRightClickedImgSrc = url
-            }
-        }
-    }
 
     open override func willOpenMenu(_ menu: NSMenu, with event: NSEvent) {
 
@@ -193,11 +189,13 @@ extension CustomWKWebView: WKScriptMessageHandler {
         let blankUrl = URL(string: "about:blank")!
 
         if clickedOnLink && clickedOnImage {
-            context = .pictureLink(image: self.lastRightClickedImgSrc ?? blankUrl, link: self.lastRightClickedLink ?? blankUrl)
+            context = .pictureLink(
+                image: contextMenuListener?.lastRightClickedImgSrc ?? blankUrl,
+                link: contextMenuListener?.lastRightClickedLink ?? blankUrl)
         } else if clickedOnLink {
-            context = .link(self.lastRightClickedLink ?? blankUrl)
+            context = .link(contextMenuListener?.lastRightClickedLink ?? blankUrl)
         } else if clickedOnImage {
-            context = .picture(self.lastRightClickedImgSrc ?? blankUrl)
+            context = .picture(contextMenuListener?.lastRightClickedImgSrc ?? blankUrl)
         } else if clickedOnText {
             context = .text(getTextSelection())
         } else {
@@ -205,7 +203,30 @@ extension CustomWKWebView: WKScriptMessageHandler {
         }
 
         menu.items = contextMenuProvider?.contextMenuItemsFor(purpose: context, existingMenuItems: menu.items) ?? menu.items
-        lastRightClickedLink = nil
-        lastRightClickedImgSrc = nil
+        contextMenuListener?.lastRightClickedLink = nil
+        contextMenuListener?.lastRightClickedImgSrc = nil
+    }
+}
+
+class CustomWKWebViewContextMenuListener: NSObject, WKScriptMessageHandler {
+
+    var lastRightClickedLink: URL?
+    var lastRightClickedImgSrc: URL?
+
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if let urlString = message.body as? String {
+            if urlString.starts(with: "link: "), let url = URL(string: urlString.replacingOccurrences(of: "link: ", with: "", options: .anchored)) {
+                self.lastRightClickedLink = url
+            } else if urlString.starts(with: "img: "), let url = URL(string: urlString.replacingOccurrences(of: "img: ", with: "", options: .anchored)) {
+                self.lastRightClickedImgSrc = url
+            }
+        }
+    }
+}
+
+class CustomWKWebViewErrorListener: NSObject, WKScriptMessageHandler {
+
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        print(message.body)
     }
 }
