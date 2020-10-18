@@ -252,6 +252,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 {
     self.hidden = YES;
     self.mainFrameURL = @"about:blank";
+    currentHTML = @"";
 }
 
 /* setHTML
