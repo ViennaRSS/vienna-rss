@@ -30,9 +30,13 @@ class TitleChangingTabViewItem: NSTabViewItem {
         didSet {
             super.viewController = viewController
             titleObservation?.invalidate()
-            titleObservation = self.viewController?.observe(\.title, options: .new) { _, change in
-                self.label = (change.newValue ?? "") ?? ""
+            titleObservation = self.viewController?.observe(\.title, options: .new) { [weak self] _, change in
+                self?.label = (change.newValue ?? "") ?? ""
             }
         }
+    }
+
+    deinit {
+        print("Title changing tabviewitem deinited")
     }
 }
