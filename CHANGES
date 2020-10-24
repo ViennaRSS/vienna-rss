@@ -8,6 +8,18 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.5.9
+-----
+- Add toolbar icon for deleting articles
+- Parse more tags from 'media' namespace to get YouTube descriptions
+- Remove support of Bitly URL shortening in plugins
+- Speed up the cleaning of URL strings
+- Speed up parsing of date strings
+- Prevent crash when parsing non XML data
+- Fix empty ArticleView on returning to same article
+- Update to MMTabBarView v/1.4.9
+- Fix running individual Xcode tests
+
 3.5.8
 -----
 - Fix crash related to macOS Big Sur Beta
@@ -62,7 +74,7 @@ Thanks!
 - Fix some problems with enabling/disabling of menu items and toolbar items
 - Trim author names in database
 - Update address of ArsTechnica feed
-- Update components (FMDB, TRVSURLSessionOperation)
+- Update components (FMDB 2.7.7 through Swift Package Manager insted of Carthage, TRVSURLSessionOperation)
 - Modernize code, localization & building tools
 
 __Note__ : this version will upgrade the database ; but the newer version of the database remains fully compatible with all Vienna 3.x.x versions. So there is no reason to fear upgrading, or at least testing this 3.5.6 version.
