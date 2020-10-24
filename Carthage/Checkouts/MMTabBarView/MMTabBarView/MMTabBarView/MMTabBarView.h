@@ -232,7 +232,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)moveTabViewItem:(NSTabViewItem *)anItem toIndex:(NSUInteger)index;
 
 /**
- *  Remove a tab view item
+ *  Close a tab view item, executing all due delegate methods
+ *
+ *  @param anItem A tab view item
+ */
+- (void)closeTabViewItem:(NSTabViewItem *)anItem;
+
+/**
+ *  Remove a tab view item, skip all delegate methods
  *
  *  @param anItem Tab view item to remove
  */
@@ -629,6 +636,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     // Closing behavior
 - (BOOL)tabView:(NSTabView *)aTabView disableTabCloseForTabViewItem:(NSTabViewItem *)tabViewItem;
+- (nullable NSTabViewItem *)tabView:(NSTabView *)aTabView selectOnClosingTabViewItem:(NSTabViewItem *)tabViewItem;
 
     // Adding tabs
 - (void)addNewTabToTabView:(NSTabView *)aTabView;
