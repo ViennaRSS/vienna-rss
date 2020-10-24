@@ -43,7 +43,7 @@ class LoadingIndicator: NSView {
         self.wantsLayer = true
         self.layer?.addSublayer(animationLayer)
         self.layerContentsRedrawPolicy = .duringViewResize
-        animationLayer.strokeColor = NSColor.blue.cgColor
+        animationLayer.strokeColor = NSColor.systemGray.cgColor
         animationLayer.lineWidth = 4
         animationLayer.strokeEnd = 0
         animationLayer.actions = ["strokeEnd": NSNull()]
