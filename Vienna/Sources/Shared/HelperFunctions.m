@@ -18,6 +18,7 @@
 // 
 
 #import "HelperFunctions.h"
+#import "StringExtensions.h"
 
 /* hasOSScriptsMenu
  * Determines whether the OS script menu is present or not.
@@ -84,23 +85,12 @@ NSString * percentEscape(NSString *string)
  * Uses WebKit to clean up user-entered URLs that might contain umlauts, diacritics and other
  * IDNA related stuff in the domain, or God knows what in filenames and arguments.
  */
-NSURL * cleanedUpUrlFromString(NSString * theUrl)
+NSURL *_Nullable cleanedUpUrlFromString(NSString * theUrl)
 {
     NSURL *urlToLoad = nil;
-    if (theUrl != nil) {
-        NSPasteboard * pasteboard = [NSPasteboard pasteboardWithUniqueName];
-        [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
-        @try
-        {
-            if ([pasteboard setString:theUrl forType:NSPasteboardTypeString]) {
-                urlToLoad = [WebView URLFromPasteboard:pasteboard];
-            }
-        }
-        @catch (NSException * exception)
-        {
-            urlToLoad = nil;
-        }
-        [pasteboard releaseGlobally];
+    NSString *cleanedUpURLString = [NSString stringByCleaningURLString:theUrl];
+    if (![cleanedUpURLString isEqualToString:@""]) {
+        urlToLoad = [[NSURL alloc] initWithString:cleanedUpURLString];
     }
     return urlToLoad;
 }
