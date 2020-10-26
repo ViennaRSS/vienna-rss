@@ -74,9 +74,10 @@
 {
 
 	// Keep this for the download/open
-    enclosureURLString = cleanedUpUrlFromString(newFilename).absoluteString;
+    NSURL *enclosureUrl = cleanedUpUrlFromString(newFilename);
+    enclosureURLString = enclosureUrl.absoluteString;
 
-	NSString * basename = [NSURL URLWithString:enclosureURLString].lastPathComponent;
+	NSString * basename = enclosureUrl.lastPathComponent;
 	if (basename==nil)
 	{
 		return;
