@@ -279,7 +279,8 @@ static NSString * const Body =
 {
     NSString *string = @"$ArticleLink$";
 
-    NSString *expectedString = [NSString stringWithFormat:@"%@/", Link];
+    //previously, we expected a '/' at the end of the link, but that was only webkit behavior and is not necessary.
+    NSString *expectedString = [NSString stringWithFormat:@"%@", Link];
 
     self.article.link = Link;
 

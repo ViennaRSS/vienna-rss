@@ -18,7 +18,6 @@
 // 
 
 #import "HelperFunctions.h"
-#import "StringExtensions.h"
 
 /* hasOSScriptsMenu
  * Determines whether the OS script menu is present or not.
@@ -83,16 +82,12 @@ NSString * percentEscape(NSString *string)
 
 /* cleanedUpUrlFromString
  * Uses WebKit to clean up user-entered URLs that might contain umlauts, diacritics and other
- * IDNA related stuff in the domain, or God knows what in filenames and arguments.
+ * IDNA related stuff in the domain, or whatever may hide in filenames and arguments.
+ * See also stringByCleaningURLString in StringExtensions
  */
-NSURL *_Nullable cleanedUpUrlFromString(NSString * theUrl)
+NSURL *_Nullable cleanedUpUrlFromString(NSString *_Nullable theUrl)
 {
-    NSURL *urlToLoad = nil;
-    NSString *cleanedUpURLString = [NSString stringByCleaningURLString:theUrl];
-    if (![cleanedUpURLString isEqualToString:@""]) {
-        urlToLoad = [[NSURL alloc] initWithString:cleanedUpURLString];
-    }
-    return urlToLoad;
+    return theUrl ? [NSURLComponents componentsWithString:theUrl].URL : nil;
 }
 
 /* loadMapFromPath
