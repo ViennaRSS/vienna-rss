@@ -28,11 +28,9 @@
 #import "BaseView.h"
 #import "Vienna-Swift.h"
 
-@interface ArticleView ()
+@interface ArticleView () <WebUIDelegate, WebFrameLoadDelegate>
 
 @property (strong, nonatomic) OverlayStatusBar *statusBar;
--(BOOL)initForStyle:(NSString *)styleName;
--(void)handleStyleChange:(NSNotificationCenter *)nc;
 
 @end
 
@@ -53,20 +51,20 @@
 		jsScript = nil;
 		currentHTML = @"";
 
+        self.UIDelegate = self;
+        self.frameLoadDelegate = self;
+
+         // Updates the article pane when the active display style has been changed.
+        __weak ArticleView * weakSelf = self;
+        [[NSNotificationCenter defaultCenter] addObserverForName:@"MA_Notify_StyleChange" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+            Preferences * prefs = [Preferences standardPreferences];
+            weakSelf.textSizeMultiplier = prefs.textSizeMultiplier;
+        }];
+
 		// enlarge / reduce the text size according to user's setting
 		self.textSizeMultiplier = [Preferences standardPreferences].textSizeMultiplier;
 	}
 	return self;
-}
-
-/* handleStyleChange
- * Updates the article pane when the active display style has been changed.
- */
--(void)handleStyleChange:(NSNotificationCenter *)nc
-{
-	Preferences * prefs = [Preferences standardPreferences];
-	[self initForStyle:prefs.displayStyle];
-	self.textSizeMultiplier = prefs.textSizeMultiplier;
 }
 
 /* performDragOperation
@@ -83,7 +81,7 @@
 -(void)clearHTML
 {
     self.hidden = YES;
-    self.tabUrl = @"about:blank";
+    self.tabUrl = [NSURL URLWithString:@"about:blank"];
     [self loadTab];
     currentHTML = @"";
 }
@@ -247,7 +245,7 @@
 }
 
 - (void)loadTab {
-	//TODO
+    [[self mainFrame] loadRequest:[NSURLRequest requestWithURL: self.tabUrl]];
 }
 
 - (BOOL)pageDown {
@@ -268,42 +266,46 @@
 	//TODO
 }
 
-- (BOOL)searchFor:(NSString * _Nonnull)searchString action:(NSFindPanelAction)action {
+- (void)searchFor:(NSString * _Nonnull)searchString action:(NSFindPanelAction)action {
 	//TODO
-	return NO;
 }
 
 - (void)stopLoadingTab {
 	//TODO
 }
 
+- (void)activateAddressBar {
+    //TODO
+}
+
+
 - (nullable id)animationForKey:(nonnull NSAnimatablePropertyKey)key {
-	//TODO
-	return nil;
+    //TODO
+    return nil;
 }
 
 - (nonnull instancetype)animator {
-	//TODO
-	return nil;
+    //TODO
+    return nil;
 }
 
 + (nullable id)defaultAnimationForKey:(nonnull NSAnimatablePropertyKey)key {
-	//TODO
-	return nil;
+    //TODO
+    return nil;
 }
 
 - (NSRect)accessibilityFrame {
-	//TODO
-	return CGRectZero;
+    //TODO
+    return CGRectZero;
 }
 
 - (nullable id)accessibilityParent {
-	//TODO
-	return nil;
+    //TODO
+    return nil;
 }
 
 - (void)encodeWithCoder:(nonnull NSCoder *)aCoder {
-	//TODO
+    //TODO
 }
 
 #pragma mark Moved from ArticleListView

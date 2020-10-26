@@ -12,7 +12,7 @@ extension ArticleController: Tab {
 	public var tabUrl: URL? {
 		get {
             guard let selectedArticle = self.selectedArticle else { return nil }
-			return URL(string: selectedArticle.link) ?? cleanedUpUrlFromString(selectedArticle.link)
+            return URL(string: selectedArticle.link) ?? URLComponents(string: selectedArticle.link)?.url
 		}
 		set {}
 	}
