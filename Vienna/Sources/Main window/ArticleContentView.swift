@@ -9,6 +9,9 @@ import Foundation
 
 @objc
 protocol ArticleContentView: Tab {
+
+    var listView: ArticleViewDelegate? { get set }
+
 	var htmlTemplate: String { get set }
 	var cssStylesheet: String { get set }
 	var jsScript: String { get set }

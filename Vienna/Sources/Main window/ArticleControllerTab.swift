@@ -11,8 +11,8 @@ extension ArticleController: Tab {
 
 	public var tabUrl: URL? {
 		get {
-			guard let selectedArticle = self.selectedArticle else { return nil }
-			return urlFromUserString(selectedArticle.link)
+            guard let selectedArticle = self.selectedArticle else { return nil }
+            return urlFromUserString(selectedArticle.link)
 		}
 		set {}
 	}

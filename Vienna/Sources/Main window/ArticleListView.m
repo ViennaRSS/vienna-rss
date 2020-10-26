@@ -102,8 +102,6 @@
     if ([((NSObject *)articleText) isKindOfClass:ArticleView.class]) {
         ArticleView *articleView = (ArticleView *)articleText;
         // Make us the frame load and UI delegate for the web view
-        articleView.UIDelegate = self;
-        articleView.frameLoadDelegate = self;
         [articleView setOpenLinksInNewBrowser:YES];
 
         [articleView setMaintainsBackForwardList:NO];
@@ -126,7 +124,9 @@
 
 	// Mark the start of the init phase
 	isAppInitialising = YES;
-	
+
+    articleText.listView = self;
+
 	// Create report and condensed view attribute dictionaries
 	NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	style.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -150,7 +150,7 @@
 	[self initTableView];
 
 	// Make sure we skip the column filter button in the Tab order
-	articleList.nextKeyView = articleText;
+	articleList.nextKeyView = articleText; //TODO: change this so we can avoid cast
 	
 	// Done initialising
 	isAppInitialising = NO;
@@ -641,7 +641,7 @@
  */
 -(WebView *)webView
 {
-	return articleText;
+	return articleText; //TODO: differenciate between ArticleView and WebKitArticleView
 }
 
 /* canDeleteMessageAtRow
@@ -713,6 +713,10 @@
 -(void)printDocument:(id)sender
 {
 	[articleText printDocument:sender];
+}
+
+-(NSError *)error {
+    return lastError;
 }
 
 /* setError

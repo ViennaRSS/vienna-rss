@@ -13,10 +13,7 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView {
 
 	// MARK: Tab
 
-	var tabUrl: URL? {
-		get { return self.url }
-		set {  } //TODO do we actually want to do this?
-	}
+	var tabUrl: URL?
 
 	override var textSelection: String { "" } //TODO
 
@@ -45,15 +42,20 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView {
 	}
 
 	func searchFor(_ searchString: String, action: NSFindPanelAction) {
-		//TODO
+        search(searchString, upward: action == NSFindPanelAction.previous)
 	}
 
 	func loadTab() {
-		//TODO
+        if let url = tabUrl {
+            self.load(URLRequest(url: url))
+        } else {
+            let blankUrl = URL(string: "about:blank")!
+            self.load(URLRequest(url: blankUrl))
+        }
 	}
 
 	func reloadTab() {
-		//TODO
+        self.reload()
 	}
 
 	func stopLoadingTab() {
@@ -77,6 +79,8 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView {
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
+
+    var listView: ArticleViewDelegate?
 
 	var htmlTemplate: String = "" //TODO
 
