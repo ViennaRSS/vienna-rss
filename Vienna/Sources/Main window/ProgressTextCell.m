@@ -89,43 +89,26 @@
 		{
 			if (!progressIndicator)
 			{
-				// Allocate and initialize the spinning progress indicator. 
-				NSRect progressRect = NSMakeRect(0, 0, PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION);
-				progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressRect];
-                progressIndicator.controlSize = NSControlSizeSmall;
-				progressIndicator.style = NSProgressIndicatorStyleSpinning;
-				[progressIndicator setDisplayedWhenStopped:YES];
-				[progressIndicator setUsesThreadedAnimation:YES];
-			}
-			
-			// Recompute the new cell frame taking out space on the right for the
-			// progress indicator.
-			NSRect progressIndicatorFrame;
-			NSInteger cellHeight = cellFrame.size.height;
-			NSInteger progressIndicatorSize = cellHeight < PROGRESS_INDICATOR_DIMENSION ? cellHeight : PROGRESS_INDICATOR_DIMENSION;
-			NSInteger progressOffset = (cellHeight - progressIndicatorSize) / 2;
-			NSInteger progressWidth = progressIndicatorSize + PROGRESS_INDICATOR_LEFT_MARGIN ;
-			NSDivideRect(cellFrame, &progressIndicatorFrame, &cellFrame, progressWidth, NSMaxXEdge);
+				// Compute the progress indicator frame on the right side of the cell frame
+				NSRect progressIndicatorFrame;
+				NSInteger cellHeight = cellFrame.size.height;
+				NSInteger progressIndicatorSize = cellHeight < PROGRESS_INDICATOR_DIMENSION ? cellHeight : PROGRESS_INDICATOR_DIMENSION;
+				NSInteger progressOffset = (cellHeight - progressIndicatorSize) / 2;
 
-			// Set the size for the progress indicator frame and add the margin.
-			progressIndicatorFrame.size = NSMakeSize(progressIndicatorSize, progressIndicatorSize);
-			progressIndicatorFrame.origin.x += PROGRESS_INDICATOR_LEFT_MARGIN;
-			// vertically center
-			progressIndicatorFrame.origin.y += progressOffset;
-
-			// Add the progress indicator as a subview of the controlView if 
-			// it is not already one.
-			if (progressIndicator.superview != controlView)
+				progressIndicatorFrame = NSMakeRect(NSMaxX(cellFrame)-progressIndicatorSize,
+                                                    NSMinY(cellFrame)+progressOffset, // vertically centered
+                                                    progressIndicatorSize,
+                                                    progressIndicatorSize);
+				// Allocate and initialize the progress indicator.
+				progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressIndicatorFrame];
+				progressIndicator.displayedWhenStopped = NO;
+				progressIndicator.usesThreadedAnimation = YES;
 				[controlView addSubview:progressIndicator];
-
-			// Set the progress indicator frame.
-			if (!NSEqualRects(progressIndicator.frame, progressIndicatorFrame))
-				progressIndicator.frame = progressIndicatorFrame;
+			}
 		}
 		else
 		{
 			// Stop the animation and remove from the superview.
-			[progressIndicator setDisplayedWhenStopped:NO];
 			[progressIndicator stopAnimation:self];
 			[progressIndicator.superview setNeedsDisplayInRect:progressIndicator.frame];
 			[progressIndicator removeFromSuperviewWithoutNeedingDisplay];
@@ -142,6 +125,8 @@
 	[super drawInteriorWithFrame:cellFrame inView:controlView];
 
 	// Now that everything is set, start the animation if necessary
+	// TODO: on macOS 10.15, prevent pollution of the expansion tool tip by a shadow of the progress indicator
+	// TODO: on macOS 11 Beta, something calls NSView's deprecated method convertPointToBase:
 	if (currentRow == progressRow && inProgress) {
 		[progressIndicator startAnimation:self];
 	}
