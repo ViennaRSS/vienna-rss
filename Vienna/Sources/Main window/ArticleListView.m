@@ -1025,29 +1025,6 @@
 	progressIndicator = nil;
 }
 
-/* menuWillAppear
- * Called when the popup menu is opened on the table. We ensure that the item under the
- * cursor is selected.
- */
--(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
-{
-	NSInteger row = [articleList rowAtPoint:[articleList convertPoint:theEvent.locationInWindow fromView:nil]];
-	if (row >= 0)
-	{
-		// Select the row under the cursor if it isn't already selected
-		if (articleList.numberOfSelectedRows <= 1)
-		{
-			blockSelectionHandler = YES; // to prevent expansion tooltip from overlapping the menu
-			if (row != articleList.selectedRow) {
-				[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
-				// will perform a refresh once the menu is deselected
-				[self performSelector: @selector(refreshArticleAtCurrentRow) withObject:nil afterDelay:0.0];
-			}
-			blockSelectionHandler = NO;
-		}
-	}
-}
-
 /* refreshImmediatelyArticleAtCurrentRow
  * Refreshes the article at the current selected row.
  */
@@ -1405,6 +1382,29 @@
 	theAttributedString = [[NSMutableAttributedString alloc] initWithString:SafeString(cellString) attributes:(theArticle.read ? reportCellDict : unreadReportCellDict)];
 	[theAttributedString fixFontAttributeInRange:NSMakeRange(0u, theAttributedString.length)];
     return theAttributedString;
+}
+
+/* menuWillAppear [ExtendedTableView delegate]
+ * Called when the popup menu is opened on the table. We ensure that the item under the
+ * cursor is selected.
+ */
+-(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
+{
+	NSInteger row = [articleList rowAtPoint:[articleList convertPoint:theEvent.locationInWindow fromView:nil]];
+	if (row >= 0)
+	{
+		// Select the row under the cursor if it isn't already selected
+		if (articleList.numberOfSelectedRows <= 1)
+		{
+			blockSelectionHandler = YES; // to prevent expansion tooltip from overlapping the menu
+			if (row != articleList.selectedRow) {
+				[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+				// will perform a refresh once the menu is deselected
+				[self performSelector: @selector(refreshArticleAtCurrentRow) withObject:nil afterDelay:0.0];
+			}
+			blockSelectionHandler = NO;
+		}
+	}
 }
 
 /* tableViewSelectionDidChange [delegate]

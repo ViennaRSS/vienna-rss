@@ -134,21 +134,6 @@
 	[[DownloadManager sharedInstance] clearList];
 }
 
-/* menuWillAppear
- * Called when the popup menu is opened on the table. We ensure that the item under the
- * cursor is selected.
- */
--(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
-{
-	NSInteger row = [table rowAtPoint:[table convertPoint:theEvent.locationInWindow fromView:nil]];
-	if (row >= 0)
-	{
-		// Select the row under the cursor if it isn't already selected
-		if (table.numberOfSelectedRows <= 1)
-			[table selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)row] byExtendingSelection:NO];
-	}
-}
-
 /* handleDoubleClick
  * Handle a double click on a row. Use this to launch the file that was
  * downloaded if it has completed.
@@ -229,6 +214,21 @@
 	NSInteger itemCount = [DownloadManager sharedInstance].downloadsList.count;
 	clearButton.enabled = itemCount > 0;
 	return itemCount;
+}
+
+/* menuWillAppear [ExtendedTableView delegate]
+ * Called when the popup menu is opened on the table. We ensure that the item under the
+ * cursor is selected.
+ */
+-(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
+{
+	NSInteger row = [table rowAtPoint:[table convertPoint:theEvent.locationInWindow fromView:nil]];
+	if (row >= 0)
+	{
+		// Select the row under the cursor if it isn't already selected
+		if (table.numberOfSelectedRows <= 1)
+			[table selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)row] byExtendingSelection:NO];
+	}
 }
 
 /* willDisplayCell [delegate]
