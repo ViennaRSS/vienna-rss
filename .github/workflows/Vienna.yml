@@ -1,0 +1,18 @@
+name: Vienna
+
+on: pull_request
+
+jobs:
+  test:
+    name: Test
+    runs-on: macOS-latest
+
+    steps:
+    - name: Install SwiftLint
+      run: brew install swiftlint
+    - name: Set up Git repository
+      uses: actions/checkout@v1
+    - name: Build Xcode project
+      run: xcodebuild -project Vienna.xcodeproj -scheme Vienna -configuration Development build-for-testing | xcpretty && exit ${PIPESTATUS[0]}
+    - name: Test Xcode project
+      run: xcodebuild -project Vienna.xcodeproj -scheme Vienna -configuration Development test | xcpretty && exit ${PIPESTATUS[0]}
