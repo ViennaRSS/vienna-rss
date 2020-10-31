@@ -1049,7 +1049,13 @@
 		// Select the row under the cursor if it isn't already selected
 		if (articleList.numberOfSelectedRows <= 1)
 		{
-			[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+			blockSelectionHandler = YES; // to prevent expansion tooltip from overlapping the menu
+			if (row != articleList.selectedRow) {
+				[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+				// will perform a refresh once the menu is deselected
+				[self performSelector: @selector(refreshArticleAtCurrentRow) withObject:nil afterDelay:0.0];
+			}
+			blockSelectionHandler = NO;
 		}
 	}
 }
@@ -1425,6 +1431,15 @@
 	{
 		[self refreshArticleAtCurrentRow];
 	}
+}
+
+/* shouldShowCellExpansionForTableColumn [delegate]
+ * Handle expansion tooltip for truncated texts
+ */
+- (BOOL)tableView:(NSTableView *)tableView shouldShowCellExpansionForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+     // prevent overlapping of contextual menu and expansion tooltip
+     return !blockSelectionHandler;
 }
 
 /* didClickTableColumns
