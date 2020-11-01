@@ -121,7 +121,7 @@
 {
 	NSURL * queryURL;
 	NSString * temp = [self.searchQueryString stringByReplacingOccurrencesOfString:@"$SearchTerm$" withString:searchString];
-	queryURL = cleanedUpUrlFromString(temp);
+	queryURL = urlFromUserString(temp);
     return queryURL;
 }
 

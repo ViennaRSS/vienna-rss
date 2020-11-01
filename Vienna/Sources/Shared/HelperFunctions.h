@@ -43,6 +43,7 @@ void runOKAlertPanel(NSString * titleString, NSString * bodyText, ...);
 void runOKAlertSheet(NSString * titleString, NSString * bodyText, ...);
 NSMenuItem * menuItemWithAction(SEL theSelector);
 NSString * getDefaultBrowser(void);
-NSURL * cleanedUpUrlFromString(NSString * theUrl);
+NSURL *_Nullable cleanedUpUrlFromString(NSString *_Nullable theUrl);
+NSURL *_Nullable urlFromUserString(NSString *_Nullable theUrl);
 BOOL hasOSScriptsMenu(void);
 NSString * percentEscape(NSString *string);

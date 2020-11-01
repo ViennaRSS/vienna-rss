@@ -80,14 +80,38 @@ NSString * percentEscape(NSString *string)
 	    @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"]];
 }
 
-/* cleanedUpUrlFromString
- * Uses WebKit to clean up user-entered URLs that might contain umlauts, diacritics and other
- * IDNA related stuff in the domain, or whatever may hide in filenames and arguments.
+/*
+ * does a minimum of cleaning on a url string and convert it to NSURL
  * See also stringByCleaningURLString in StringExtensions
  */
 NSURL *_Nullable cleanedUpUrlFromString(NSString *_Nullable theUrl)
 {
     return theUrl ? [NSURLComponents componentsWithString:theUrl].URL : nil;
+}
+
+/* urlFromUserString
+ * Uses WebKit to clean up user-entered URLs that might contain umlauts, diacritics and other
+ * IDNA related stuff in the domain, or whatever may hide in filenames and arguments.
+ */
+NSURL *_Nullable urlFromUserString(NSString *_Nullable theUrl)
+{
+    NSURL *urlToLoad = nil;
+    if (theUrl != nil) {
+        NSPasteboard * pasteboard = [NSPasteboard pasteboardWithUniqueName];
+        [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
+        @try
+        {
+            if ([pasteboard setString:theUrl forType:NSPasteboardTypeString]) {
+                urlToLoad = [WebView URLFromPasteboard:pasteboard];
+            }
+        }
+        @catch (NSException * exception)
+        {
+            urlToLoad = nil;
+        }
+        [pasteboard releaseGlobally];
+    }
+    return urlToLoad;
 }
 
 /* loadMapFromPath

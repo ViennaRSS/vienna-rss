@@ -725,8 +725,6 @@ static NSMutableDictionary * entityMap = nil;
  * Percent escape invalid and reserved URL characters and return a legal URL string.
  *   Should handle unescaped or partially escaped URL strings where sequences are unpredictable,
  *   for instance will preserve # announcing fragment from being escaped.
- *   User-entered URLs might contain umlauts, diacritics and other
- *   IDNA related stuff in the domain, or God knows what in filenames and arguments.
  */
 +(NSString *_Nonnull)stringByCleaningURLString:(NSString *_Nullable)urlString
 {

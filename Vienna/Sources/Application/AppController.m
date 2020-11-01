@@ -2406,7 +2406,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	if ([urlString hasPrefix:@"feed://"])
 		urlString = [NSString stringWithFormat:@"http://%@", [urlString substringFromIndex:7]];
 
-	urlString = cleanedUpUrlFromString(urlString).absoluteString;
+	urlString = urlFromUserString(urlString).absoluteString;
 	
 	// If the folder already exists, just select it.
 	Folder * folder = [db folderFromFeedURL:urlString];
