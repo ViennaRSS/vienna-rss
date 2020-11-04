@@ -734,7 +734,25 @@ static NSMutableDictionary * entityMap = nil;
     if (urlString == nil) {
         newString = @"";
     } else {
-        newString = [NSURLComponents componentsWithString:urlString].URL.absoluteString;
+        // Try simple conversion first
+        NSURL *urlToLoad = [NSURLComponents componentsWithString:urlString].URL;
+        if (urlToLoad) {
+            newString = urlToLoad.absoluteString;
+        } else {
+            // Fallback : use WebKit to clean up user-entered URLs that might contain umlauts, diacritics
+            // and other IDNA related stuff in the domain, or whatever may hide in filenames and arguments
+            NSPasteboard *pasteboard = [NSPasteboard pasteboardWithUniqueName];
+            [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
+            @try
+            {
+                if ([pasteboard setString:urlString forType:NSPasteboardTypeString]) {
+                    newString = [WebView URLFromPasteboard:pasteboard].absoluteString;
+                }
+            } @catch (NSException *exception)   {
+                newString = @"";
+            }
+            [pasteboard releaseGlobally];
+        }
     }
     return newString;
 }
