@@ -277,9 +277,9 @@ static NSString * const Body =
 
 - (void)testExpandLinkTag
 {
-    NSString *string = @"$ArticleLink$";
+    NSString *string = @"$ArticleLink$/development";
 
-    NSString *expectedString = [NSString stringWithFormat:@"%@/", Link];
+    NSString *expectedString = [NSString stringWithFormat:@"%@/development", Link];
 
     self.article.link = Link;
 
