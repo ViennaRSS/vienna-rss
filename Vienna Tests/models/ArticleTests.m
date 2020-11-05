@@ -7,6 +7,7 @@
 
 #import <XCTest/XCTest.h>
 #import "Article.h"
+#import "ArticleView.h"
 
 static NSString * const GUID = @"07f446d2-8d6b-4d99-b488-cebc9eac7c33";
 static NSString * const Author = @"Author McAuthorface";
@@ -346,6 +347,20 @@ static NSString * const Body =
     NSString *expandedString = [self.article expandTags:string withConditional:YES];
 
     XCTAssertEqualObjects(expandedString, expectedString);
+}
+
+- (void)testURLIDNinArticleView
+{
+    ArticleView * view = [[ArticleView alloc] initWithFrame:NSMakeRect(0, 0, 100, 100)];
+
+    self.article.link = @"http://ουτοπία.δπθ.gr/نجيب_محفوظ/";
+    NSString * htmlText = [view articleTextFromArray:@[self.article]];
+    [view setHTML:htmlText];
+
+    self.article.link = @"http://xn--kxae4bafwg.xn--pxaix.gr/%D9%86%D8%AC%D9%8A%D8%A8_%D9%85%D8%AD%D9%81%D9%88%D8%B8/";
+    NSString * htmlText2 = [view articleTextFromArray:@[self.article]];
+
+    XCTAssertEqualObjects(htmlText, htmlText2);
 }
 
 @end
