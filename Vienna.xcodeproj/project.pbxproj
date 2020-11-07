@@ -71,6 +71,9 @@
 		2F5AC4202198E1AA00A7EDDE /* TitleChangingTabViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */; };
 		2F779111253B17C5004ED4EF /* BrowserContextMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F779110253B17C5004ED4EF /* BrowserContextMenuDelegate.swift */; };
 		2F7B91EB2198351A00E56F00 /* WebViewBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */; };
+		2F88B2A62545BB450067EEA6 /* ArticleConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F88B2A52545BB450067EEA6 /* ArticleConverter.m */; };
+		2F88B2AD2545BCA90067EEA6 /* ArticleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F88B2AC2545BCA90067EEA6 /* ArticleConverter.swift */; };
+		2F88B2C32545DAB40067EEA6 /* ArticleViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F88B2C22545DAB40067EEA6 /* ArticleViewDelegate.swift */; };
 		2FA946C52517D8D8006134C5 /* CustomWKUIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA946C42517D8D8006134C5 /* CustomWKUIDelegate.swift */; };
 		2FAA36402072F50B00169C8A /* MMTabBarView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FAA363F2072F50B00169C8A /* MMTabBarView.framework */; };
 		2FAA36422072F57500169C8A /* MMTabBarView.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 2FAA363F2072F50B00169C8A /* MMTabBarView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -355,6 +358,10 @@
 		2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleChangingTabViewItem.swift; sourceTree = "<group>"; };
 		2F779110253B17C5004ED4EF /* BrowserContextMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserContextMenuDelegate.swift; sourceTree = "<group>"; };
 		2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewBrowser.xib; sourceTree = "<group>"; };
+		2F88B2A42545BB450067EEA6 /* ArticleConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArticleConverter.h; sourceTree = "<group>"; };
+		2F88B2A52545BB450067EEA6 /* ArticleConverter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArticleConverter.m; sourceTree = "<group>"; };
+		2F88B2AC2545BCA90067EEA6 /* ArticleConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleConverter.swift; sourceTree = "<group>"; };
+		2F88B2C22545DAB40067EEA6 /* ArticleViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewDelegate.swift; sourceTree = "<group>"; };
 		2FA946C42517D8D8006134C5 /* CustomWKUIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWKUIDelegate.swift; sourceTree = "<group>"; };
 		2FAA363F2072F50B00169C8A /* MMTabBarView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MMTabBarView.framework; path = Carthage/Build/Mac/MMTabBarView.framework; sourceTree = "<group>"; };
 		2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Browser+WebUIDelegate.m"; sourceTree = "<group>"; };
@@ -1131,13 +1138,33 @@
 		2F2280362271B065005D1023 /* ArticleContent */ = {
 			isa = PBXGroup;
 			children = (
-				43502854165DE9DF0018EDB7 /* ArticleView.h */,
-				43502855165DE9DF0018EDB7 /* ArticleView.m */,
+				2F88B2BC2545C9660067EEA6 /* WebKitArticleContent */,
+				2F88B2BB2545C9410067EEA6 /* WebViewArticleContent */,
 				2F2280342271B041005D1023 /* ArticleContentView.swift */,
 				2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */,
-				2F2280392271CCAB005D1023 /* WebKitArticleView.swift */,
+				2F88B2A42545BB450067EEA6 /* ArticleConverter.h */,
+				2F88B2A52545BB450067EEA6 /* ArticleConverter.m */,
+				2F88B2AC2545BCA90067EEA6 /* ArticleConverter.swift */,
+				2F88B2C22545DAB40067EEA6 /* ArticleViewDelegate.swift */,
 			);
 			name = ArticleContent;
+			sourceTree = "<group>";
+		};
+		2F88B2BB2545C9410067EEA6 /* WebViewArticleContent */ = {
+			isa = PBXGroup;
+			children = (
+				43502854165DE9DF0018EDB7 /* ArticleView.h */,
+				43502855165DE9DF0018EDB7 /* ArticleView.m */,
+			);
+			name = WebViewArticleContent;
+			sourceTree = "<group>";
+		};
+		2F88B2BC2545C9660067EEA6 /* WebKitArticleContent */ = {
+			isa = PBXGroup;
+			children = (
+				2F2280392271CCAB005D1023 /* WebKitArticleView.swift */,
+			);
+			name = WebKitArticleContent;
 			sourceTree = "<group>";
 		};
 		2FA946DF2517E3E5006134C5 /* CustomWebKit */ = {
@@ -2191,9 +2218,11 @@
 				3A60E60B2114AD740004D81D /* URLRequestExtensions.m in Sources */,
 				AA26F4F00604927300FE7994 /* BackTrackArray.m in Sources */,
 				AAF3B14306095E7B0025CC7F /* StringExtensions.m in Sources */,
+				2F88B2A62545BB450067EEA6 /* ArticleConverter.m in Sources */,
 				AA36CD7C06100692001E33A4 /* Field.m in Sources */,
 				AA8C72F60641DE1F00649BA2 /* Criteria.m in Sources */,
 				0349813E1A206FD900014F29 /* GeneralPreferencesViewController.m in Sources */,
+				2F88B2AD2545BCA90067EEA6 /* ArticleConverter.swift in Sources */,
 				03B35B841B75E9E0001DB06D /* NSDate+Vienna.m in Sources */,
 				2F5AC4202198E1AA00A7EDDE /* TitleChangingTabViewItem.swift in Sources */,
 				2F2280382271B18A005D1023 /* ArticleStyleLoader.swift in Sources */,
@@ -2232,6 +2261,7 @@
 				2FF61D2C24F2AE8B00A7E2B5 /* RSSCommunication.swift in Sources */,
 				43502898165DE9E00018EDB7 /* ArticleController.m in Sources */,
 				4350289A165DE9E00018EDB7 /* ArticleListView.m in Sources */,
+				2F88B2C32545DAB40067EEA6 /* ArticleViewDelegate.swift in Sources */,
 				4350289B165DE9E00018EDB7 /* ArticleView.m in Sources */,
 				4350289C165DE9E00018EDB7 /* BrowserPane.m in Sources */,
 				F61CEA661F039E57009C878E /* ButtonToolbarItem.swift in Sources */,

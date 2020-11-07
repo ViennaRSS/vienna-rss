@@ -171,6 +171,10 @@ BOOL isAccessible(NSString * urlString)
         return NO;
 }
 
+void runOKAlertPanelPlain(NSString * titleString, NSString * bodyText) {
+    runOKAlertPanel(titleString, bodyText);
+}
+
 /* runOKAlertPanel
  * Displays an alert panel with just an OK button.
  */

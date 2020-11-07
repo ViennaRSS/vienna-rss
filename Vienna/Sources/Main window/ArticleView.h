@@ -33,6 +33,8 @@
 // Public functions
 -(void)clearHTML;
 -(void)setHTML:(NSString *)htmlText;
--(NSString *)articleTextFromArray:(NSArray *)msgArray;
 -(void)keyDown:(NSEvent *)theEvent;
+
+@property (strong, nonatomic) id<ArticleViewDelegate> listView;
+
 @end
