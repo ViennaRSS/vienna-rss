@@ -66,14 +66,14 @@
 	NSUInteger count = children.count;
 	NSInteger sortMethod = [Preferences standardPreferences].foldersTreeSortMethod;
 
-	if (sortMethod != MA_FolderSort_Manual)
+	if (sortMethod != MAFolderSortManual)
 	{
 		insertIndex = 0;
 
 		while (insertIndex < count)
 		{
 			TreeNode * theChild = children[insertIndex];
-			if (sortMethod == MA_FolderSort_ByName)
+			if (sortMethod == MAFolderSortByName)
 			{
 				if ([child folderNameCompare:theChild] == NSOrderedAscending)
 					break;
@@ -110,11 +110,11 @@
 {
 	switch (sortMethod)
 	{
-	case MA_FolderSort_Manual:
+	case MAFolderSortManual:
 		// Do nothing
 		break;
 
-	case MA_FolderSort_ByName:
+	case MAFolderSortByName:
 		[children sortUsingSelector:@selector(folderNameCompare:)];
 		break;
 		

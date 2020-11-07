@@ -626,13 +626,13 @@
 
     switch (refreshFlag)
     {
-        case MA_Refresh_RedrawList:
+        case MARefreshRedrawList:
             break;
-        case MA_Refresh_ReapplyFilter:
+        case MARefreshReapplyFilter:
             [self.controller.articleController refilterArrayOfArticles];
             [self.controller.articleController sortArticles];
             break;
-        case MA_Refresh_SortAndRedraw:
+        case MARefreshSortAndRedraw:
             [self.controller.articleController sortArticles];
             break;
     }
