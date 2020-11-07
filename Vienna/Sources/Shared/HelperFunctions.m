@@ -104,12 +104,11 @@ NSURL *_Nullable urlFromUserString(NSString *_Nonnull urlString) {
         // and other IDNA related stuff in the domain, or whatever may hide in filenames and arguments
         NSPasteboard *pasteboard = [NSPasteboard pasteboardWithUniqueName];
         [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
-        @try
-        {
+        @try {
             if ([pasteboard setString:urlString forType:NSPasteboardTypeString]) {
                 urlToLoad = [WebView URLFromPasteboard:pasteboard];
             }
-        } @catch (NSException *exception)   {
+        } @catch (NSException *exception) {
             NSLog(@"Failed to convert URL for string %@", urlString);
         }
         [pasteboard releaseGlobally];

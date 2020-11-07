@@ -354,13 +354,13 @@ static NSString * const Body =
     ArticleView * view = [[ArticleView alloc] initWithFrame:NSMakeRect(0, 0, 100, 100)];
 
     self.article.link = @"http://ουτοπία.δπθ.gr/نجيب_محفوظ/";
-    NSString * htmlText = [view articleTextFromArray:@[self.article]];
-    [view setHTML:htmlText];
+    NSString * htmlTextFromIDNALink = [view articleTextFromArray:@[self.article]];
+    [view setHTML:htmlTextFromIDNALink];
 
     self.article.link = @"http://xn--kxae4bafwg.xn--pxaix.gr/%D9%86%D8%AC%D9%8A%D8%A8_%D9%85%D8%AD%D9%81%D9%88%D8%B8/";
-    NSString * htmlText2 = [view articleTextFromArray:@[self.article]];
+    NSString * htmlTextFromResolvedIDNALink = [view articleTextFromArray:@[self.article]];
 
-    XCTAssertEqualObjects(htmlText, htmlText2);
+    XCTAssertEqualObjects(htmlTextFromIDNALink, htmlTextFromResolvedIDNALink);
 }
 
 @end
