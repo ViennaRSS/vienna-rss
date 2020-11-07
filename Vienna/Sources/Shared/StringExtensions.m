@@ -19,6 +19,7 @@
 //
 
 #import "StringExtensions.h"
+#import "HelperFunctions.h"
 
 @implementation NSMutableString (MutableStringExtensions)
 
@@ -728,30 +729,17 @@ static NSMutableDictionary * entityMap = nil;
  *   User-entered URLs might contain umlauts, diacritics and other
  *   IDNA related stuff in the domain, or God knows what in filenames and arguments.
  */
-+(NSString * )stringByCleaningURLString:(NSString *) urlString
++(NSString *_Nonnull)stringByCleaningURLString:(NSString *_Nullable) urlString
 {
     NSString * newString;
     if (urlString == nil) {
         newString = @"";
     } else {
-        // Try simple conversion first
-        NSURL *urlToLoad = [NSURLComponents componentsWithString:urlString].URL;
-        if (urlToLoad) {
-            newString = urlToLoad.absoluteString;
+        NSURL *url = urlFromUserString(urlString);
+        if (url != nil) {
+            newString = url.absoluteString;
         } else {
-            // Fallback : use WebKit to clean up user-entered URLs that might contain umlauts, diacritics
-            // and other IDNA related stuff in the domain, or whatever may hide in filenames and arguments
-            NSPasteboard *pasteboard = [NSPasteboard pasteboardWithUniqueName];
-            [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
-            @try
-            {
-                if ([pasteboard setString:urlString forType:NSPasteboardTypeString]) {
-                    newString = [WebView URLFromPasteboard:pasteboard].absoluteString;
-                }
-            } @catch (NSException *exception)   {
-                newString = @"";
-            }
-            [pasteboard releaseGlobally];
+            newString = @"";
         }
     }
     return newString;
