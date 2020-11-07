@@ -18,6 +18,7 @@
 // 
 
 #import "HelperFunctions.h"
+#import "StringExtensions.h"
 
 /* hasOSScriptsMenu
  * Determines whether the OS script menu is present or not.
@@ -84,21 +85,31 @@ NSString * percentEscape(NSString *string)
  * Uses WebKit to clean up user-entered URLs that might contain umlauts, diacritics and other
  * IDNA related stuff in the domain, or God knows what in filenames and arguments.
  */
-NSURL * cleanedUpUrlFromString(NSString * theUrl)
+NSURL *_Nullable cleanedUpUrlFromString(NSString * urlString)
 {
-    NSURL *urlToLoad = nil;
-    if (theUrl != nil) {
-        NSPasteboard * pasteboard = [NSPasteboard pasteboardWithUniqueName];
+    NSURL *urlToLoad;
+    if (urlString == nil) {
+        urlToLoad = nil;
+    } else {
+        urlToLoad = urlFromUserString(urlString);
+    }
+    return urlToLoad;
+}
+
+NSURL *_Nullable urlFromUserString(NSString *_Nonnull urlString) {
+    // Try simple conversion first
+    NSURL *urlToLoad = [NSURLComponents componentsWithString:urlString].URL;
+    if (urlToLoad == nil) {
+        // Fallback : use WebKit to clean up user-entered URLs that might contain umlauts, diacritics
+        // and other IDNA related stuff in the domain, or whatever may hide in filenames and arguments
+        NSPasteboard *pasteboard = [NSPasteboard pasteboardWithUniqueName];
         [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
-        @try
-        {
-            if ([pasteboard setString:theUrl forType:NSPasteboardTypeString]) {
+        @try {
+            if ([pasteboard setString:urlString forType:NSPasteboardTypeString]) {
                 urlToLoad = [WebView URLFromPasteboard:pasteboard];
             }
-        }
-        @catch (NSException * exception)
-        {
-            urlToLoad = nil;
+        } @catch (NSException *exception) {
+            NSLog(@"Failed to convert URL for string %@", urlString);
         }
         [pasteboard releaseGlobally];
     }

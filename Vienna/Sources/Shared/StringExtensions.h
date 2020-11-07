@@ -36,7 +36,7 @@
     +(NSString *)stringByConvertingHTMLEntities:(NSString *)stringToProcess;
     +(NSString *)toBase64String:(NSString *)stringToProcess;
     +(NSString *)fromBase64String:(NSString *)stringToProcess;
-    +(NSString * )stringByCleaningURLString:(NSString *) urlString;
+    +(NSString *_Nonnull)stringByCleaningURLString:(NSString *_Nullable) urlString;
 	@property (nonatomic, readonly, copy) NSString *firstNonBlankLine;
 	@property (nonatomic, readonly, copy) NSString *summaryTextFromHTML;
 	@property (nonatomic, readonly, copy) NSString *titleTextFromHTML;
