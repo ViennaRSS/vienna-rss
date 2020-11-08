@@ -15,35 +15,36 @@
 //  distributed under the License is distributed on an "AS IS" BASIS,
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
-// 
+//
 
 @import Cocoa;
 @import WebKit;
 @import SystemConfiguration;
 
-#define kLeftArrow 0x7B
+#define kLeftArrow  0x7B
 #define kRightArrow 0x7C
-#define kUpArrow 0x7E
-#define kDownArrow 0x7D
-#define kSpacebar 0x31
-#define kShift 0x38
-#define kControl 0x3B
-#define kCommand 0x37
-#define kOption 0x3A
-#define kEscape 0x35
-#define kTab 0x30
-#define kBackSpace 0x33
-#define kDelete 0x75
-#define kCapsLock 0x39
-#define kReturn 0x24
+#define kUpArrow    0x7E
+#define kDownArrow  0x7D
+#define kSpacebar   0x31
+#define kShift      0x38
+#define kControl    0x3B
+#define kCommand    0x37
+#define kOption     0x3A
+#define kEscape     0x35
+#define kTab        0x30
+#define kBackSpace  0x33
+#define kDelete     0x75
+#define kCapsLock   0x39
+#define kReturn     0x24
 
-void loadMapFromPath(NSString * path, NSMutableDictionary * pathMappings, BOOL foldersOnly, NSArray * validExtensions);
-BOOL isAccessible(NSString * urlString);
-void runOKAlertPanel(NSString * titleString, NSString * bodyText, ...);
-void runOKAlertSheet(NSString * titleString, NSString * bodyText, ...);
-NSMenuItem * menuItemWithAction(SEL theSelector);
-NSString * getDefaultBrowser(void);
-NSURL *_Nullable cleanedUpUrlFromString(NSString *_Nullable urlString);
-NSURL *_Nullable urlFromUserString(NSString *_Nonnull urlString);
+void loadMapFromPath(NSString *_Nonnull path, NSMutableDictionary *_Nonnull pathMappings, BOOL foldersOnly,
+                     NSArray *_Nullable validExtensions);
+BOOL isAccessible(NSString *_Nonnull urlString);
+void runOKAlertPanel(NSString *_Nonnull titleString, NSString *_Nonnull bodyText, ...);
+void runOKAlertSheet(NSString *_Nonnull titleString, NSString *_Nonnull bodyText, ...);
+NSMenuItem * _Nullable menuItemWithAction(SEL _Nonnull theSelector);
+NSString * _Nullable getDefaultBrowser(void);
+NSURL * _Nullable cleanedUpUrlFromString(NSString *_Nullable urlString);
+NSURL * _Nullable urlFromUserString(NSString *_Nonnull urlString);
 BOOL hasOSScriptsMenu(void);
-NSString * percentEscape(NSString *string);
+NSString * _Nullable percentEscape(NSString *_Nullable string);
