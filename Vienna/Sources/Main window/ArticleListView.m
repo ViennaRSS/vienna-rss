@@ -477,7 +477,7 @@
 		
 		// Handle which fields can be visible in the condensed (vertical) layout
 		// versus the report (horizontal) layout
-		if (tableLayout == MA_Layout_Report)
+		if (tableLayout == VNALayoutReport)
 			showField = field.visible && tag != ArticleFieldIDHeadlines && tag != ArticleFieldIDComments;
 		else
 		{
@@ -503,9 +503,9 @@
 			// in willDisplayCell:forTableColumn:row: where it sets the inProgress flag.
 			// We need to use a different column for condensed layout vs. table layout.
 			BOOL isProgressColumn = NO;
-			if (tableLayout == MA_Layout_Report && [column.identifier isEqualToString:MA_Field_Subject])
+			if (tableLayout == VNALayoutReport && [column.identifier isEqualToString:MA_Field_Subject])
 				isProgressColumn = YES;
-			if (tableLayout == MA_Layout_Condensed && [column.identifier isEqualToString:MA_Field_Headlines])
+			if (tableLayout == VNALayoutCondensed && [column.identifier isEqualToString:MA_Field_Headlines])
 				isProgressColumn = YES;
 			
 			if (isProgressColumn)
@@ -557,7 +557,7 @@
 	// Put the selection back
 	[articleList selectRowIndexes:selArray byExtendingSelection:NO];
 	
-	if (tableLayout == MA_Layout_Report)
+	if (tableLayout == VNALayoutReport)
 		articleList.autosaveName = @"Vienna3ReportLayoutColumns";
 	else
 		articleList.autosaveName = @"Vienna3CondensedLayoutColumns";
@@ -633,7 +633,7 @@
 	CGFloat height = [APPCONTROLLER.layoutManager defaultLineHeightForFont:articleListFont];
 	NSInteger numberOfRowsInCell;
 
-	if (tableLayout == MA_Layout_Report)
+	if (tableLayout == VNALayoutReport)
 		numberOfRowsInCell = 1;
 	else
 	{
@@ -836,9 +836,9 @@
 	isChangingOrientation = YES;
 	tableLayout = newLayout;
 	splitView2.autosaveName = nil;
-	splitView2.vertical = (newLayout == MA_Layout_Condensed);
+	splitView2.vertical = (newLayout == VNALayoutCondensed);
 	splitView2.dividerStyle = (splitView2.vertical ? NSSplitViewDividerStyleThin : NSSplitViewDividerStylePaneSplitter);
-	splitView2.autosaveName = (newLayout == MA_Layout_Condensed ? @"Vienna3SplitView2CondensedLayout" : @"Vienna3SplitView2ReportLayout");
+	splitView2.autosaveName = (newLayout == VNALayoutCondensed ? @"Vienna3SplitView2CondensedLayout" : @"Vienna3SplitView2ReportLayout");
 	[splitView2 display];
 	isChangingOrientation = NO;
 }
@@ -981,13 +981,13 @@
 
     switch (refreshFlag)
     {
-        case MA_Refresh_RedrawList:
+        case VNARefreshRedrawList:
             break;
-        case MA_Refresh_ReapplyFilter:
+        case VNARefreshReapplyFilter:
             [self.controller.articleController refilterArrayOfArticles];
             [self.controller.articleController sortArticles];
             break;
-        case MA_Refresh_SortAndRedraw:
+        case VNARefreshSortAndRedraw:
             [self.controller.articleController sortArticles];
             break;
     }
@@ -1479,9 +1479,9 @@
 	BOOL isProgressColumn = NO;
 
 	// We need to use a different column for condensed layout vs. table layout.
-	if (tableLayout == MA_Layout_Report && [columnIdentifer isEqualToString:MA_Field_Subject])
+	if (tableLayout == VNALayoutReport && [columnIdentifer isEqualToString:MA_Field_Subject])
 		isProgressColumn = YES;
-	else if (tableLayout == MA_Layout_Condensed && [columnIdentifer isEqualToString:MA_Field_Headlines])
+	else if (tableLayout == VNALayoutCondensed && [columnIdentifer isEqualToString:MA_Field_Headlines])
 		isProgressColumn = YES;
 	
 	if (isProgressColumn)
