@@ -53,13 +53,11 @@ extension ArticleConverter {
 
         htmlTemplate = templateString
 
-        cssStylesheet = ("file://localhost" + path.appendingPathComponent("stylesheet.css").path)
-            .addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        cssStylesheet = cleanedUpUrlFromString("file://localhost" + path.appendingPathComponent("stylesheet.css").path)?.absoluteString ?? ""
 
         let jsScriptPath = path.appendingPathComponent("script.js").path
         if FileManager.default.fileExists(atPath: jsScriptPath) {
-            jsScript = ("file://localhost" + jsScriptPath)
-                .addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            jsScript = cleanedUpUrlFromString("file://localhost" + jsScriptPath)?.absoluteString ?? ""
         } else {
             jsScript = ""
         }
