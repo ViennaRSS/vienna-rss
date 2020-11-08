@@ -24,34 +24,34 @@
 #define SafeString(s)   ((s) ?: @"")
 
 @interface NSMutableString (MutableStringExtensions)
-	-(void)replaceString:(NSString *)source withString:(NSString *)dest;
-	-(void)fixupRelativeImgTags:(NSString *)baseURL;
-	-(void)fixupRelativeAnchorTags:(NSString *)baseURL;
-	-(void)fixupRelativeIframeTags:(NSString *)baseURL;
+- (void)replaceString:(NSString *_Nonnull)source withString:(NSString *_Nonnull)dest;
+- (void)fixupRelativeImgTags:(NSString *_Nonnull)baseURL;
+- (void)fixupRelativeAnchorTags:(NSString *_Nonnull)baseURL;
+- (void)fixupRelativeIframeTags:(NSString *_Nonnull)baseURL;
 @end
 
 @interface NSString (StringExtensions)
-	+(NSString *)stringByRemovingHTML:(NSString *)theString;
-	+(NSString *)mapEntityToString:(NSString *)entityString;
-    +(NSString *)stringByConvertingHTMLEntities:(NSString *)stringToProcess;
-    +(NSString *)toBase64String:(NSString *)stringToProcess;
-    +(NSString *)fromBase64String:(NSString *)stringToProcess;
-    +(NSString *_Nonnull)stringByCleaningURLString:(NSString *_Nullable) urlString;
-	@property (nonatomic, readonly, copy) NSString *firstNonBlankLine;
-	@property (nonatomic, readonly, copy) NSString *summaryTextFromHTML;
-	@property (nonatomic, readonly, copy) NSString *titleTextFromHTML;
-	-(NSUInteger)indexOfCharacterInString:(char)ch afterIndex:(NSUInteger)startIndex;
-	@property (nonatomic, readonly, copy) NSString *stringByEscapingExtendedCharacters;
-	@property (nonatomic, readonly, copy) NSString *stringByUnescapingExtendedCharacters;
-	-(NSString *)stringByAppendingURLComponent:(NSString *)newComponent;
-	-(BOOL)hasCharacter:(char)ch;
-	@property (nonatomic, readonly, copy) NSString *firstWord;
-	@property (nonatomic, readonly, copy) NSString *convertStringToValidPath;
-	-(NSComparisonResult)numericCompare:(NSString *)aString;
-	@property (nonatomic, readonly, copy) NSString *normalised;
-	@property (nonatomic, readonly, copy) NSString *baseURL;
-	@property (nonatomic, readonly, copy) NSString *host;
-	@property (nonatomic, readonly, copy) NSString *trim;
-	@property (nonatomic, readonly) NSInteger hexValue;
-	@property (nonatomic, getter=isBlank, readonly) BOOL blank;
++ (NSString *_Nonnull)stringByRemovingHTML:(NSString *_Nonnull)theString;
++ (NSString *_Nonnull)mapEntityToString:(NSString *_Nonnull)entityString;
++ (NSString *_Nonnull)stringByConvertingHTMLEntities:(NSString *_Nonnull)stringToProcess;
++ (NSString *_Nullable)toBase64String:(NSString *_Nullable)stringToProcess;
++ (NSString *_Nullable)fromBase64String:(NSString *_Nullable)stringToProcess;
++ (NSString *_Nonnull)stringByCleaningURLString:(NSString *_Nullable)urlString;
+@property (nonatomic, readonly, copy) NSString *_Nonnull firstNonBlankLine;
+@property (nonatomic, readonly, copy) NSString *_Nonnull summaryTextFromHTML;
+@property (nonatomic, readonly, copy) NSString *_Nonnull titleTextFromHTML;
+- (NSUInteger)indexOfCharacterInString:(char)ch afterIndex:(NSUInteger)startIndex;
+@property (nonatomic, readonly, copy) NSString *_Nonnull stringByEscapingExtendedCharacters;
+@property (nonatomic, readonly, copy) NSString *_Nonnull stringByUnescapingExtendedCharacters;
+- (NSString *_Nonnull)stringByAppendingURLComponent:(NSString *_Nullable)newComponent;
+- (BOOL)hasCharacter:(char)ch;
+@property (nonatomic, readonly, copy) NSString *_Nonnull firstWord;
+@property (nonatomic, readonly, copy) NSString *_Nonnull convertStringToValidPath;
+- (NSComparisonResult)numericCompare:(NSString *_Nonnull)aString;
+@property (nonatomic, readonly, copy) NSString *_Nonnull normalised;
+@property (nonatomic, readonly, copy) NSString *_Nonnull baseURL;
+@property (nonatomic, readonly, copy) NSString *_Nonnull host;
+@property (nonatomic, readonly, copy) NSString *_Nonnull trim;
+@property (nonatomic, readonly) NSInteger hexValue;
+@property (nonatomic, getter = isBlank, readonly) BOOL blank;
 @end
