@@ -666,12 +666,12 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 });
             } else {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    aItem.status = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
+                    aItem.status = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), (int)newArticlesFromFeed];
                 });
             }
         } else { //other HTTP status response...
             [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil),
-                                 ((NSHTTPURLResponse *)response).statusCode]];
+                                 (int)((NSHTTPURLResponse *)response).statusCode]];
             LOG_EXPR(request.URL);
             LOG_EXPR(request.allHTTPHeaderFields);
             LOG_EXPR([[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);

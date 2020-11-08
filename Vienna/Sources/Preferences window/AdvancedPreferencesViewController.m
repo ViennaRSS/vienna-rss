@@ -27,34 +27,8 @@
 
 @implementation AdvancedPreferencesViewController
 
-
-- (instancetype)init {
-    return [super initWithNibName:@"AdvancedPreferencesView" bundle:nil];
-}
-
 - (void)viewWillAppear {
-    if([NSViewController instancesRespondToSelector:@selector(viewWillAppear)]) {
-        [super viewWillAppear];
-    }
-    // Do view setup here.
     [self initializePreferences];
-}
-
-
-#pragma mark - MASPreferencesViewController
-
-- (NSString *)viewIdentifier {
-    return @"AdvancedPreferences";
-}
-
-- (NSImage *)toolbarItemImage
-{
-    return [NSImage imageNamed:NSImageNameAdvanced];
-}
-
-- (NSString *)toolbarItemLabel
-{
-    return NSLocalizedString(@"Advanced", @"Toolbar item name for the Advanced preference pane");
 }
 
 #pragma mark - Vienna Preferences

@@ -115,8 +115,8 @@
 		self.password.textColor = [NSColor disabledControlTextColor];
 	}
 	self.folderDescription.stringValue = folder.feedDescription;
-	self.folderSize.stringValue = [NSString stringWithFormat:NSLocalizedString(@"%u articles", nil), MAX(0, [folder countOfCachedArticles])];
-	self.folderUnread.stringValue = [NSString stringWithFormat:NSLocalizedString(@"%u unread", nil), folder.unreadCount];
+	self.folderSize.stringValue = [NSString stringWithFormat:NSLocalizedString(@"%u articles", nil), (unsigned int)MAX(0, [folder countOfCachedArticles])];
+	self.folderUnread.stringValue = [NSString stringWithFormat:NSLocalizedString(@"%u unread", nil), (unsigned int)folder.unreadCount];
 	self.isSubscribed.state = (folder.flags & VNAFolderFlagUnsubscribed) ? NSControlStateValueOff : NSControlStateValueOn;
 	self.loadFullHTML.state = (folder.flags & VNAFolderFlagLoadFullHTML) ? NSControlStateValueOn : NSControlStateValueOff;
 }

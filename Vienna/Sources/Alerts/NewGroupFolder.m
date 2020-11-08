@@ -49,7 +49,7 @@
 	parentId = itemId;
 	folderName.stringValue = @"";
 	[self enableSaveButton];
-	[NSApp beginSheet:newGroupFolderWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
+    [window beginSheet:newGroupFolderWindow completionHandler:nil];
 }
 
 /* doSave
@@ -67,7 +67,7 @@
 												 canAppendIndex:NO];
 
 	// Close the window
-	[NSApp endSheet:newGroupFolderWindow];
+	[newGroupFolderWindow.sheetParent endSheet:newGroupFolderWindow];
 	[newGroupFolderWindow orderOut:self];
 	
 	if (newFolderId != -1)
@@ -79,7 +79,7 @@
  */
 -(IBAction)doCancel:(id)sender
 {
-	[NSApp endSheet:newGroupFolderWindow];
+	[newGroupFolderWindow.sheetParent endSheet:newGroupFolderWindow];
 	[newGroupFolderWindow orderOut:self];
 }
 

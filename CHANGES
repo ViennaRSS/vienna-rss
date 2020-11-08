@@ -8,6 +8,30 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.6.0 Beta 5
+------------
+- Silence some warnings
+- Remove unused code
+- Add GitHub workflow for testing
+
+3.6.0 Beta 4
+------------
+- Update to Xcode 12
+
+3.6.0 Beta 3
+------------
+- Configure Github configuration to close abandoned issues
+
+3.6.0 Beta 2
+------------
+- Replace deprecated methods
+
+3.6.0 Beta 1
+------------
+### ! For OS X 10.11 (El Capitan) or later only !
+- Lift deployment target to macOS 10.11 & start modernizing code
+- Replaced MASPreferences with Storyboard implementation (Preferences window)
+
 3.5.10
 ------
 - Fix application crashing on display of certain URLs (bug introduced by version 3.5.9) 

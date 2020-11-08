@@ -45,7 +45,6 @@
 #import "Debug.h"
 #import "Database.h"
 #import "NSURL+Utils.h"
-#import "PreferencesWindowController.h"
 #import "PluginManager.h"
 #import "ArticleController.h"
 #import "FoldersTree.h"
@@ -98,7 +97,7 @@
 @property (weak, nonatomic) NSWindow *mainWindow;
 @property (nonatomic) ActivityPanelController *activityPanelController;
 @property (nonatomic) DirectoryMonitor *directoryMonitor;
-@property (nonatomic) PreferencesWindowController *preferencesWindowController;
+@property (nonatomic) NSWindowController *preferencesWindowController;
 @property (weak, nonatomic) FolderView *outlineView;
 @property (weak, nonatomic) DisclosureView *filterDisclosureView;
 @property (weak, nonatomic) NSSearchField *filterSearchField;
@@ -423,11 +422,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	
 	// Set the placeholder string for the global search field
 	SearchMethod * currentSearchMethod = [Preferences standardPreferences].searchMethod;
-    if (@available(macOS 10.10, *)) {
-        self.toolbarSearchField.placeholderString = currentSearchMethod.friendlyName;
-    } else {
-        ((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = currentSearchMethod.friendlyName;
-    }
+    self.toolbarSearchField.placeholderString = currentSearchMethod.friendlyName;
 	
 	// Add Scripts menu if we have any scripts
 	if (!hasOSScriptsMenu())
@@ -1201,7 +1196,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
                 NSAlert *alert = [NSAlert new];
                 alert.alertStyle = NSAlertStyleInformational;
                 alert.messageText = NSLocalizedString(@"Export Completed", nil);
-                alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully exported", nil), countExported];
+                alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully exported", nil), (int)countExported];
                 [alert runModal];
             }
         }
@@ -2056,7 +2051,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         if (newUnread > 0) {
             NSUserNotification *notification = [NSUserNotification new];
             notification.title = NSLocalizedString(@"New articles retrieved", @"Notification title");
-            notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d new unread articles retrieved", @"Notification body"), newUnread];
+            notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d new unread articles retrieved", @"Notification body"), (int)newUnread];
             notification.userInfo = @{UserNotificationContextKey: UserNotificationContextFetchCompleted};
             notification.soundName = NSUserNotificationDefaultSoundName;
 
@@ -2731,7 +2726,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else
 	{
-		alertBody = [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to delete all %d selected folders? This operation cannot be undone.", nil), count];
+		alertBody = [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to delete all %d selected folders? This operation cannot be undone.", nil), (unsigned int)count];
 		alertTitle = NSLocalizedString(@"Delete multiple folders", nil);
 	}
 	
@@ -3035,11 +3030,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			for (NSMenuItem * menuItem in ((NSSearchFieldCell *)self.toolbarSearchField.cell).searchMenuTemplate.itemArray)
 			{
 				if ([[menuItem.representedObject friendlyName] isEqualToString:[SearchMethod searchCurrentWebPageMethod].friendlyName]) {
-                    if (@available(macOS 10.10, *)) {
-                        self.toolbarSearchField.placeholderString = [SearchMethod searchCurrentWebPageMethod].friendlyName;
-                    } else {
-                        ((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = [SearchMethod searchCurrentWebPageMethod].friendlyName;
-                    }
+                    self.toolbarSearchField.placeholderString = [SearchMethod searchCurrentWebPageMethod].friendlyName;
 					[Preferences standardPreferences].searchMethod = menuItem.representedObject;
 				}
 			}
@@ -3053,20 +3044,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			for (NSMenuItem * menuItem in ((NSSearchFieldCell *)self.toolbarSearchField.cell).searchMenuTemplate.itemArray)
 			{
 				if ([[menuItem.representedObject friendlyName] isEqualToString:[SearchMethod searchAllArticlesMethod].friendlyName]) {
-                    if (@available(macOS 10.10, *)) {
-                        self.toolbarSearchField.placeholderString = [SearchMethod searchAllArticlesMethod].friendlyName;
-                    } else {
-                        ((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = [SearchMethod searchAllArticlesMethod].friendlyName;
-                    }
+                    self.toolbarSearchField.placeholderString = [SearchMethod searchAllArticlesMethod].friendlyName;
 					[Preferences standardPreferences].searchMethod = menuItem.representedObject;
 				}
 			}
 		} else {
-            if (@available(macOS 10.10, *)) {
-                self.toolbarSearchField.placeholderString = prefs.searchMethod.friendlyName;
-            } else {
-                ((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = prefs.searchMethod.friendlyName;
-		}
+            self.toolbarSearchField.placeholderString = prefs.searchMethod.friendlyName;
 		}
 	// END of switching between "Search all articles" and "Search current web page".
 	}
@@ -3839,9 +3822,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 #pragma mark Preferences
 
-- (PreferencesWindowController *)preferencesWindowController {
+- (NSWindowController *)preferencesWindowController {
     if (!_preferencesWindowController) {
-        _preferencesWindowController = [PreferencesWindowController new];
+        NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Preferences"
+                                                             bundle:nil];
+        _preferencesWindowController = [storyboard instantiateInitialController];
     }
 
     return _preferencesWindowController;

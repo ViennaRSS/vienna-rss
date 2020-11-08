@@ -62,7 +62,7 @@
         NSAlert *alert = [NSAlert new];
         alert.alertStyle = NSAlertStyleInformational;
         alert.messageText = NSLocalizedString(@"Import Completed", nil);
-        alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully imported", nil), countImported];
+        alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully imported", nil), (int)countImported];
         [alert runModal];
     }
 }

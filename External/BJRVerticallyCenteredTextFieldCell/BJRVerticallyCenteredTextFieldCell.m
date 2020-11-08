@@ -22,12 +22,7 @@
     }
 
     // Initialize a graphics context
-    CGContextRef context;
-    if (@available(macOS 10.10, *)) {
-        context = (CGContextRef)[[NSGraphicsContext currentContext] CGContext];
-    } else {
-        context = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
-    }
+    CGContextRef context = NSGraphicsContext.currentContext.CGContext;
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
     CGRect rect = NSRectToCGRect([self titleRectForBounds:cellFrame]);
     // hack context to avoid flipped text

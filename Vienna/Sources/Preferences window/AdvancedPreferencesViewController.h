@@ -18,9 +18,9 @@
 //  limitations under the License.
 //
 
-@import MASPreferences;
+@import Cocoa;
 
-@interface AdvancedPreferencesViewController : NSViewController <MASPreferencesViewController> {
+@interface AdvancedPreferencesViewController : NSViewController {
     IBOutlet NSButton * useJavaScriptButton;
     IBOutlet NSPopUpButton * concurrentDownloads;
     IBOutlet NSButton *useWebPluginsButton;

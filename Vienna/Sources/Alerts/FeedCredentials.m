@@ -75,7 +75,7 @@
 	[credentialsWindow makeFirstResponder:(folder.username.blank) ? userName : password];
 
 	[self enableOKButton];
-	[NSApp beginSheet:credentialsWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
+    [window beginSheet:credentialsWindow completionHandler:nil];
 }
 
 /* doCancelButton
@@ -83,7 +83,7 @@
  */
 -(IBAction)doCancelButton:(id)sender
 {
-	[NSApp endSheet:credentialsWindow];
+	[credentialsWindow.sheetParent endSheet:credentialsWindow];
 	[credentialsWindow orderOut:self];
 
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_CancelAuthenticationForFolder" object:folder];
@@ -101,7 +101,7 @@
 	[db setFolderUsername:folder.itemId newUsername:usernameString];
 	folder.password = passwordString;
 	
-	[NSApp endSheet:credentialsWindow];
+	[credentialsWindow.sheetParent endSheet:credentialsWindow];
 	[credentialsWindow orderOut:self];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GotAuthenticationForFolder" object:folder];

@@ -118,10 +118,6 @@ extern NSString * MA_PBoardType_urln;
 #define MA_Refresh_ReapplyFilter		1
 #define MA_Refresh_SortAndRedraw		3
 
-// View animation tags
-#define MA_ViewTag_Filterbar			1
-#define MA_ViewTag_Statusbar			2
-
 extern AEKeyword EditDataItemAppleEventClass;
 extern AEKeyword EditDataItemAppleEventID;
 extern AEKeyword DataItemTitle;

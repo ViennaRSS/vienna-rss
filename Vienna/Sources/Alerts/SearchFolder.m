@@ -270,7 +270,7 @@
 {
 	// Begin the sheet
 	onScreen = YES;
-	[NSApp beginSheet:searchWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
+	[window beginSheet:searchWindow completionHandler:nil];
 	// Remember the initial size of the dialog sheet
 	// before addition of any criteria that would
 	// cause it to be resized. We need to know this
@@ -483,7 +483,7 @@
     }
 
 	
-	[NSApp endSheet:searchWindow];
+	[searchWindow.sheetParent endSheet:searchWindow];
 	[searchWindow orderOut:self];
 	onScreen = NO;
 }
@@ -492,7 +492,7 @@
  */
 -(IBAction)doCancel:(id)sender
 {
-	[NSApp endSheet:searchWindow];
+	[searchWindow.sheetParent endSheet:searchWindow];
 	[searchWindow orderOut:self];
 	onScreen = NO;
 }

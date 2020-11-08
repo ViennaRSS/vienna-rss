@@ -18,9 +18,9 @@
 //  limitations under the License.
 //
 
-@import MASPreferences;
+@import Cocoa;
 
-@interface SyncingPreferencesViewController : NSViewController <MASPreferencesViewController, NSTextFieldDelegate> {
+@interface SyncingPreferencesViewController : NSViewController <NSTextFieldDelegate> {
     IBOutlet NSPopUpButton * openReaderSource; //List of known service providers
     NSDictionary * sourcesDict;
     IBOutlet NSTextField * credentialsInfoText;

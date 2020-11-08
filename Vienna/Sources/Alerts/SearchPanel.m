@@ -38,7 +38,7 @@
 		((NSSearchFieldCell *)searchField.cell).searchMenuTemplate = APPCONTROLLER.searchFieldMenu;
 	}
 	[searchLabel setStringValue:NSLocalizedString(@"Search all articles or the current web page", nil)];
-	[NSApp beginSheet:searchPanelWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
+    [window beginSheet:searchPanelWindow completionHandler:nil];
 }
 
 /* newSearchString
@@ -67,7 +67,7 @@
 	else
 		[APPCONTROLLER searchArticlesWithString:searchField.stringValue];
 	
-	[NSApp endSheet:searchPanelWindow];
+	[searchPanelWindow.sheetParent endSheet:searchPanelWindow];
 	[searchPanelWindow orderOut:self];
 }
 @end
