@@ -103,8 +103,8 @@
     markReadAfterDelay.state = prefs.markReadInterval != 0 ? NSControlStateValueOn : NSControlStateValueOff;
     
     // Show new articles notification options
-    newArticlesNotificationBadgeButton.state = ((prefs.newArticlesNotification & MANewArticlesNotificationBadge) !=0) ? NSControlStateValueOn : NSControlStateValueOff;
-    newArticlesNotificationBounceButton.state = ((prefs.newArticlesNotification & MANewArticlesNotificationBounce) !=0) ? NSControlStateValueOn : NSControlStateValueOff;
+    newArticlesNotificationBadgeButton.state = ((prefs.newArticlesNotification & VNANewArticlesNotificationBadge) !=0) ? NSControlStateValueOn : NSControlStateValueOff;
+    newArticlesNotificationBounceButton.state = ((prefs.newArticlesNotification & VNANewArticlesNotificationBounce) !=0) ? NSControlStateValueOn : NSControlStateValueOff;
     
     // Set whether updated articles are considered as new
     markUpdatedAsNew.state = prefs.markUpdatedAsNew ? NSControlStateValueOn : NSControlStateValueOff;
@@ -366,11 +366,11 @@
     NSInteger currentNotificationValue = prefs.newArticlesNotification;
     if ([sender state] == NSControlStateValueOn)
     {
-        prefs.newArticlesNotification = currentNotificationValue | MANewArticlesNotificationBadge;
+        prefs.newArticlesNotification = currentNotificationValue | VNANewArticlesNotificationBadge;
     }
     else
     {
-        prefs.newArticlesNotification = currentNotificationValue & ~MANewArticlesNotificationBadge;
+        prefs.newArticlesNotification = currentNotificationValue & ~VNANewArticlesNotificationBadge;
     }
 }
 
@@ -383,11 +383,11 @@
     NSInteger currentNotificationValue = prefs.newArticlesNotification;
     if ([sender state] == NSControlStateValueOn)
     {
-        prefs.newArticlesNotification = currentNotificationValue | MANewArticlesNotificationBounce;
+        prefs.newArticlesNotification = currentNotificationValue | VNANewArticlesNotificationBounce;
     }
     else
     {
-        prefs.newArticlesNotification = currentNotificationValue & ~MANewArticlesNotificationBounce;
+        prefs.newArticlesNotification = currentNotificationValue & ~VNANewArticlesNotificationBounce;
     }
 }
 

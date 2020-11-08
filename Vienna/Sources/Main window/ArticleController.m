@@ -150,12 +150,12 @@
 
 	switch (newLayout)
 	{
-		case MALayoutReport:
-		case MALayoutCondensed:
+		case VNALayoutReport:
+		case VNALayoutCondensed:
 			self.mainArticleView = self.articleListView;
 			break;
 
-		case MALayoutUnified:
+		case VNALayoutUnified:
 			self.mainArticleView = self.unifiedListView;
 			break;
 	}
@@ -305,7 +305,7 @@
 		[descriptors insertObject:sortDescriptor atIndex:0];
 	}
 	prefs.articleSortDescriptors = descriptors;
-	[mainArticleView refreshFolder:MARefreshSortAndRedraw];
+	[mainArticleView refreshFolder:VNARefreshSortAndRedraw];
 }
 
 /* sortIsAscending
@@ -335,7 +335,7 @@
 	{
 		descriptors[0] = sortDescriptor.reversedSortDescriptor;
 		prefs.articleSortDescriptors = descriptors;
-		[mainArticleView refreshFolder:MARefreshSortAndRedraw];
+		[mainArticleView refreshFolder:VNARefreshSortAndRedraw];
 	}
 }
 
@@ -450,7 +450,7 @@
 		// This can happen with smart folders, which have the same articles as other folders.
 		self.currentArrayOfArticles = @[];
 		self.folderArrayOfArticles = @[];
-		[mainArticleView refreshFolder:MARefreshRedrawList];
+		[mainArticleView refreshFolder:VNARefreshRedrawList];
 
 		currentFolderId = newFolderId;
 		[self reloadArrayOfArticles];
@@ -504,7 +504,7 @@
             self->shouldPreserveSelectedArticle = NO;
           }
 
-          [self->mainArticleView refreshFolder:MARefreshReapplyFilter];
+          [self->mainArticleView refreshFolder:VNARefreshReapplyFilter];
 
           if (self->guidOfArticleToSelect != nil) {
             [self->mainArticleView scrollToArticle:self->guidOfArticleToSelect];
@@ -692,7 +692,7 @@
 		[self reloadArrayOfArticles];
 	else
 	{
-		[mainArticleView refreshFolder:MARefreshRedrawList];
+		[mainArticleView refreshFolder:VNARefreshRedrawList];
 		if (currentArrayOfArticles.count > 0u)
 		{
 			if (guidToSelect != nil)
@@ -762,7 +762,7 @@
 	}
 	self.currentArrayOfArticles = currentArrayCopy;
 	self.folderArrayOfArticles = folderArrayCopy;
-	[mainArticleView refreshFolder:MARefreshRedrawList];
+	[mainArticleView refreshFolder:VNARefreshRedrawList];
 
 	// Ensure there's a valid selection
     if (currentArrayOfArticles.count > 0u) {
@@ -804,7 +804,7 @@
 	[undoManager setActionName:NSLocalizedString(@"Flag", nil)];
 
     [self innerMarkFlaggedByArray:articleArray flagged:flagged];
-	[mainArticleView refreshFolder:MARefreshRedrawList];
+	[mainArticleView refreshFolder:VNARefreshRedrawList];
 }
 
 /* innerMarkFlaggedByArray
@@ -854,7 +854,7 @@
 
     [self innerMarkReadByArray:articleArray readFlag:readFlag];
 
-	[mainArticleView refreshFolder:MARefreshRedrawList];
+	[mainArticleView refreshFolder:VNARefreshRedrawList];
 }
 
 /* innerMarkReadByArray
@@ -958,7 +958,7 @@
 			[theArticle markRead:YES];
 	}
 	
-	[mainArticleView refreshFolder:MARefreshRedrawList];
+	[mainArticleView refreshFolder:VNARefreshRedrawList];
 }
 
 /* wrappedMarkAllFoldersReadInArray
@@ -1049,7 +1049,7 @@
 		[self reloadArrayOfArticles];
 	}
 	else if (needRefilter) {
-		[mainArticleView refreshFolder:MARefreshReapplyFilter];
+		[mainArticleView refreshFolder:VNARefreshReapplyFilter];
 	}
 }
 
@@ -1120,7 +1120,7 @@
     NSInteger folderId = ((NSNumber *)nc.object).integerValue;
     Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
     if ((folderId == currentFolderId) || (currentFolder.type != VNAFolderTypeRSS && currentFolder.type != VNAFolderTypeOpenReader)) {
-        [mainArticleView refreshFolder:MARefreshRedrawList];
+        [mainArticleView refreshFolder:VNARefreshRedrawList];
     }
 }
 
@@ -1147,20 +1147,20 @@
 
 - (BOOL)filterArticle:(Article *)article usingMode:(NSInteger)filterMode {
     switch (filterMode) {
-        case MAFilterUnread:
+        case VNAFilterUnread:
             return !article.read;
             break;
-        case MAFilterLastRefresh: {
+        case VNAFilterLastRefresh: {
             NSDate *date = article.createdDate;
             Preferences *prefs = [Preferences standardPreferences];
             NSComparisonResult result = [date compare:[prefs objectForKey:MAPref_LastRefreshDate]];
             return result != NSOrderedAscending;
             break;
         }
-        case MAFilterToday:
+        case VNAFilterToday:
             return [NSCalendar.currentCalendar isDateInToday:article.date];
             break;
-        case MAFilterTime48h: {
+        case VNAFilterTime48h: {
             NSDate *twoDaysAgo = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay
                                                                         value:-2
                                                                        toDate:[NSDate date]
@@ -1168,10 +1168,10 @@
             return [article.date compare:twoDaysAgo] != NSOrderedAscending;
             break;
         }
-        case MAFilterFlagged:
+        case VNAFilterFlagged:
             return article.flagged;
             break;
-        case MAFilterUnreadOrFlagged:
+        case VNAFilterUnreadOrFlagged:
             return (!article.read || article.flagged);
             break;
         default:
@@ -1188,7 +1188,7 @@
     if ([keyPath isEqualToString:MAPref_FilterMode]) {
         // Update the list of articles when the user changes the filter.
         @synchronized(mainArticleView) {
-            [mainArticleView refreshFolder:MARefreshReapplyFilter];
+            [mainArticleView refreshFolder:VNARefreshReapplyFilter];
         }
     }
 }

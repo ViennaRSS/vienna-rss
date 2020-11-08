@@ -19,14 +19,14 @@
 
 /// New articles notification method (managed as an array of binary flags)
 @objc
-enum MANewArticlesNotification: Int {
+enum VNANewArticlesNotification: Int {
     case badge = 1
     case bounce = 2
 }
 
 /// Filtering options
 @objc
-enum MAFilter: Int {
+enum VNAFilter: Int {
     case all = 0
     case unread = 1
     case lastRefresh = 2
@@ -38,7 +38,7 @@ enum MAFilter: Int {
 
 /// Refresh folder options
 @objc
-enum MARefresh: Int {
+enum VNARefresh: Int {
     case redrawList = 0
     case reapplyFilter = 1
     case sortAndRedraw = 3
@@ -46,7 +46,7 @@ enum MARefresh: Int {
 
 /// Layout styles
 @objc
-enum MALayout: Int {
+enum VNALayout: Int {
     case report = 1
     case condensed = 2
     case unified = 3
@@ -54,14 +54,14 @@ enum MALayout: Int {
 
 /// Folders tree sort method
 @objc
-enum MAFolderSort: Int {
+enum VNAFolderSort: Int {
     case manual = 0
     case byName = 1
 }
 
 /// Empty trash option on quitting
 @objc
-enum MAEmptyTrash: Int {
+enum VNAEmptyTrash: Int {
     case none = 0
     case withoutWarning = 1
     case withWarning = 2

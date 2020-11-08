@@ -504,16 +504,16 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	
 	switch ([[Preferences standardPreferences] integerForKey:MAPref_EmptyTrashNotification])
 	{
-		case MAEmptyTrashNone: break;
+		case VNAEmptyTrashNone: break;
 			
-		case MAEmptyTrashWithoutWarning:
+		case VNAEmptyTrashWithoutWarning:
 			if (!db.trashEmpty)
 			{
 				[db purgeDeletedArticles];
 			}
 			break;
 			
-		case MAEmptyTrashWithWarning:
+		case VNAEmptyTrashWithWarning:
 			if (!db.trashEmpty)
 			{
 				if (emptyTrashWarning == nil)
@@ -761,7 +761,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(IBAction)reportLayout:(id)sender
 {
-	[self setLayout:MALayoutReport withRefresh:YES];
+	[self setLayout:VNALayoutReport withRefresh:YES];
 }
 
 /* condensedLayout
@@ -769,7 +769,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(IBAction)condensedLayout:(id)sender
 {
-	[self setLayout:MALayoutCondensed withRefresh:YES];
+	[self setLayout:VNALayoutCondensed withRefresh:YES];
 }
 
 /* unifiedLayout
@@ -777,7 +777,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(IBAction)unifiedLayout:(id)sender
 {
-	[self setLayout:MALayoutUnified withRefresh:YES];
+	[self setLayout:VNALayoutUnified withRefresh:YES];
 }
 
 /* setLayout
@@ -787,7 +787,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 {
 	[self.articleController setLayout:newLayout];
     if (refreshFlag) {
-        [self.articleController.mainArticleView refreshFolder:MARefreshRedrawList];
+        [self.articleController.mainArticleView refreshFolder:VNARefreshRedrawList];
     }
 	[self.browser setPrimaryTabItemView:self.articleController.mainArticleView];
 	self.foldersTree.mainView.nextKeyView = [self.browser primaryTabItemView].mainView;
@@ -1561,7 +1561,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)updateNewArticlesNotification
 {
 	if (([Preferences standardPreferences].newArticlesNotification
-		& MANewArticlesNotificationBadge) == 0)
+		& VNANewArticlesNotificationBadge) == 0)
 	{
 		// Remove the badge if there was one.
 		[NSApp.dockTile setBadgeLabel:nil];
@@ -1604,7 +1604,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	
 	// Exit now if we're not showing the unread count on the application icon
 	if (([Preferences standardPreferences].newArticlesNotification
-		& MANewArticlesNotificationBadge) ==0)
+		& VNANewArticlesNotificationBadge) ==0)
 			return;
 	
 	NSString * countdown = [NSString stringWithFormat:@"%li", (long)currentCountOfUnread];
@@ -2044,7 +2044,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		
 		// Bounce the dock icon for 1 second if the bounce method has been selected.
 		NSInteger newUnread = [RefreshManager sharedManager].countOfNewArticles + [OpenReader sharedManager].countOfNewArticles;
-		if (newUnread > 0 && ((prefs.newArticlesNotification & MANewArticlesNotificationBounce) != 0))
+		if (newUnread > 0 && ((prefs.newArticlesNotification & VNANewArticlesNotificationBounce) != 0))
 			[NSApp requestUserAttention:NSInformationalRequest];
 
         // User notification
@@ -2195,7 +2195,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
     if (keyChar >= '0' && keyChar <= '9' && (flags & NSEventModifierFlagControl))
 	{
-		NSInteger layoutStyle = MALayoutReport + (keyChar - '0');
+		NSInteger layoutStyle = VNALayoutReport + (keyChar - '0');
 		[self setLayout:layoutStyle withRefresh:YES];
 		return YES;
 	}
@@ -3054,7 +3054,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	// END of switching between "Search all articles" and "Search current web page".
 	}
 	
-	if ([Preferences standardPreferences].layout == MALayoutUnified)
+	if ([Preferences standardPreferences].layout == VNALayoutUnified)
 	{
 		[self.filterSearchField.cell setSendsWholeSearchString:YES];
 		((NSSearchFieldCell *)self.filterSearchField.cell).placeholderString = self.articleController.searchPlaceholderString;
@@ -3746,19 +3746,19 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	else if (theAction == @selector(reportLayout:))
 	{
 		Preferences * prefs = [Preferences standardPreferences];
-		menuItem.state = (prefs.layout == MALayoutReport) ? NSControlStateValueOn : NSControlStateValueOff;
+		menuItem.state = (prefs.layout == VNALayoutReport) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(condensedLayout:))
 	{
 		Preferences * prefs = [Preferences standardPreferences];
-		menuItem.state = (prefs.layout == MALayoutCondensed) ? NSControlStateValueOn : NSControlStateValueOff;
+		menuItem.state = (prefs.layout == VNALayoutCondensed) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(unifiedLayout:))
 	{
 		Preferences * prefs = [Preferences standardPreferences];
-		menuItem.state = (prefs.layout == MALayoutUnified) ? NSControlStateValueOn : NSControlStateValueOff;
+		menuItem.state = (prefs.layout == VNALayoutUnified) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(markFlagged:))
