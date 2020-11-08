@@ -8,9 +8,15 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.6.0 Beta 5
+------------
+- Silence some warnings
+- Remove unused code
+- Add GitHub workflow for testing
+
 3.6.0 Beta 4
 ------------
-- Udate to Xcode 12
+- Update to Xcode 12
 
 3.6.0 Beta 3
 ------------
@@ -25,6 +31,12 @@ Thanks!
 ### ! For OS X 10.11 (El Capitan) or later only !
 - Lift deployment target to macOS 10.11 & start modernizing code
 - Replaced MASPreferences with Storyboard implementation (Preferences window)
+
+3.5.10
+------
+- Fix application crashing on display of certain URLs (bug introduced by version 3.5.9) 
+- Fix a crash when both expansion tooltip and progress animation were triggered
+- Fix an annoyance with tooltip obscuring contextual menu in article list or folder list
 
 3.5.9
 -----
@@ -105,7 +117,7 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 - fix selection of next unread article through spacebar when the article view is empty
 - Update link templates for zh-Hant language
 - Update Swift support to version 5
-- Udate to Xcode 11
+- Update to Xcode 11
 - Update Sparkle version to 1.22
 - Improve build system
 - Replace deprecated routines
