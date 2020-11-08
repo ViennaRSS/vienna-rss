@@ -18,7 +18,6 @@
 // 
 
 #import "HelperFunctions.h"
-#import "StringExtensions.h"
 
 /* hasOSScriptsMenu
  * Determines whether the OS script menu is present or not.
