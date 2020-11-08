@@ -1,0 +1,27 @@
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "102"; */
+"102.title" = "Скасувати";
+
+/* Class = "NSButtonCell"; title = "Subscribe"; ObjectID = "103"; */
+"103.title" = "Підписатися";
+
+/* Class = "NSTextFieldCell"; title = "Source:"; ObjectID = "104"; */
+"104.title" = "Джерело:";
+
+/* Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106"; */
+"106.title" = "Створити нову підписку";
+
+/* Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107"; */
+"107.title" = "Введіть адресу стрічки новин, або виберіть стрічку зі списку Джерело для того, щоб додати стрічку з заданого джерела.";
+
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "Адреса:";
+
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "111"; */
+"111.title" = "Зберегти";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "112"; */
+"112.title" = "Скасувати";
+
+/* Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114"; */
+"114.title" = "Редагування підписки";
+

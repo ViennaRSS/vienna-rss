@@ -1,0 +1,183 @@
+/* Class = "NSMenuItem"; title = "Today"; ObjectID = "3tM-J3-kmf"; */
+"3tM-J3-kmf.title" = "Сьогодні";
+
+/* Class = "NSToolbarItem"; label = "Empty Trash"; ObjectID = "4c1-NR-ofo"; */
+"4c1-NR-ofo.label" = "Спорожнити смітник";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Empty Trash"; ObjectID = "4c1-NR-ofo"; */
+"4c1-NR-ofo.paletteLabel" = "Спорожнити смітник";
+
+/* Class = "NSToolbarItem"; toolTip = "Delete all articles in the trash"; ObjectID = "4c1-NR-ofo"; */
+"4c1-NR-ofo.toolTip" = "Видалити всі статті у смітнику";
+
+/* Class = "NSToolbarItem"; label = "Get Info"; ObjectID = "7iy-IN-8oG"; */
+"7iy-IN-8oG.label" = "Інформація";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Get Info"; ObjectID = "7iy-IN-8oG"; */
+"7iy-IN-8oG.paletteLabel" = "Інформація";
+
+/* Class = "NSToolbarItem"; toolTip = "See information about the selected subscription"; ObjectID = "7iy-IN-8oG"; */
+"7iy-IN-8oG.toolTip" = "Показати інформацію про виділені підписки";
+
+/* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8LJ-RZ-pfu"; */
+"8LJ-RZ-pfu.title" = "З прапорцем";
+
+/* Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T"; */
+"10h-xf-C6T.label" = "Надіслати посилання";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T"; */
+"10h-xf-C6T.paletteLabel" = "Надіслати посилання";
+
+/* Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T"; */
+"10h-xf-C6T.toolTip" = "Відправити посилання на поточну статтю електронною поштою";
+
+/* Class = "NSSearchField"; ibShadowedToolTip = "Filter displayed articles by matching text"; ObjectID = "1304"; */
+"1304.ibShadowedToolTip" = "Фільтрувати статті за вмістом тексту";
+
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "Filter articles"; ObjectID = "1306"; */
+"1306.ibShadowedToolTip" = "Фільтрувати статті";
+
+/* Class = "NSButton"; ibExternalAccessibilityDescription = "Close the filter bar"; ObjectID = "1313"; */
+"1313.ibExternalAccessibilityDescription" = "Сховати стрічку фільтру";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Close the filter bar"; ObjectID = "1313"; */
+"1313.ibShadowedToolTip" = "Сховати стрічку фільтру";
+
+/* Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377"; */
+"1377.title" = "Фільтр:";
+
+/* Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404"; */
+"1404.title" = "Чинний фільтр";
+
+/* Class = "NSToolbarItem"; label = "Style"; ObjectID = "azL-oz-mJL"; */
+"azL-oz-mJL.label" = "Стиль";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Style"; ObjectID = "azL-oz-mJL"; */
+"azL-oz-mJL.paletteLabel" = "Стиль";
+
+/* Class = "NSToolbarItem"; toolTip = "Display the list of available styles"; ObjectID = "azL-oz-mJL"; */
+"azL-oz-mJL.toolTip" = "Показати список доступних стилів";
+
+/* Class = "NSToolbarItem"; label = "Add"; ObjectID = "CPA-Ha-aj1"; */
+"CPA-Ha-aj1.label" = "Додати";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1"; */
+"CPA-Ha-aj1.paletteLabel" = "Додати";
+
+/* Class = "NSToolbarItem"; label = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
+"fpY-CJ-hKU.label" = "Наступна непрочитана";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
+"fpY-CJ-hKU.paletteLabel" = "Наступна непрочитана";
+
+/* Class = "NSToolbarItem"; toolTip = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
+"fpY-CJ-hKU.toolTip" = "Наступна непрочитана";
+
+/* Class = "NSToolbarItem"; label = "Back"; ObjectID = "gOG-UJ-Pin"; */
+"gOG-UJ-Pin.label" = "Назад";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Back"; ObjectID = "gOG-UJ-Pin"; */
+"gOG-UJ-Pin.paletteLabel" = "Назад";
+
+/* Class = "NSToolbarItem"; toolTip = "Back"; ObjectID = "gOG-UJ-Pin"; */
+"gOG-UJ-Pin.toolTip" = "Назад";
+
+/* Class = "NSToolbarItem"; label = "All Read"; ObjectID = "Gyz-dq-ewv"; */
+"Gyz-dq-ewv.label" = "Усі прочитані";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Mark All Items as Read"; ObjectID = "Gyz-dq-ewv"; */
+"Gyz-dq-ewv.paletteLabel" = "Помітити всі як прочитані";
+
+/* Class = "NSToolbarItem"; toolTip = "Mark all items as read"; ObjectID = "Gyz-dq-ewv"; */
+"Gyz-dq-ewv.toolTip" = "Помітити всі як прочитані";
+
+/* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g"; */
+"Hs0-hu-A2g.title" = "Оновити виділені підписки";
+
+/* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "JT2-Q7-gRj"; */
+"JT2-Q7-gRj.title" = "Всі статті";
+
+/* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "l14-tu-w7l"; */
+"l14-tu-w7l.title" = "Переіменувати…";
+
+/* Class = "NSSearchFieldCell"; placeholderString = "Search for folders"; ObjectID = "lhy-4c-asJ"; */
+"lhy-4c-asJ.placeholderString" = "Знайти теки";
+
+/* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm"; */
+"MaO-r1-tcm.title" = "Більше стилів…";
+
+/* Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys"; */
+"Nmd-zx-Dys.label" = "Оновити";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Refresh"; ObjectID = "Nmd-zx-Dys"; */
+"Nmd-zx-Dys.paletteLabel" = "Оновити";
+
+/* Class = "NSToolbarItem"; toolTip = "Refresh all your subscriptions"; ObjectID = "Nmd-zx-Dys"; */
+"Nmd-zx-Dys.toolTip" = "Оновити всі підписки";
+
+/* Class = "NSToolbarItem"; label = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
+"OIA-vb-5jR.label" = "Шукати статті";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
+"OIA-vb-5jR.paletteLabel" = "Шукати статті";
+
+/* Class = "NSToolbarItem"; toolTip = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
+"OIA-vb-5jR.toolTip" = "Шукати статті";
+
+/* Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "Pqr-dM-SQQ"; */
+"Pqr-dM-SQQ.title" = "Нова вибірка…";
+
+/* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "psA-wp-PcZ"; */
+"psA-wp-PcZ.title" = "Нова підписка…";
+
+/* Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija"; */
+"RaH-Yu-Ija.title" = "Нова тека…";
+
+/* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Rdq-QU-3hM"; */
+"Rdq-QU-3hM.title" = "Видалити…";
+
+/* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "sDP-Ni-g3a"; */
+"sDP-Ni-g3a.title" = "Непрочитані статті";
+
+/* Class = "NSToolbarItem"; label = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
+"SoG-b2-O1S.label" = "Пропустити папку";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
+"SoG-b2-O1S.paletteLabel" = "Пропустити папку";
+
+/* Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
+"SoG-b2-O1S.toolTip" = "Пропустити папку";
+
+/* Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU"; */
+"TSQ-UW-4gU.label" = "Дія";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Action"; ObjectID = "TSQ-UW-4gU"; */
+"TSQ-UW-4gU.paletteLabel" = "Дія";
+
+/* Class = "NSToolbarItem"; toolTip = "Additional actions for the selected folder"; ObjectID = "TSQ-UW-4gU"; */
+"TSQ-UW-4gU.toolTip" = "Додаткові дії для виділеної папки";
+
+/* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "ty7-ph-peE"; */
+"ty7-ph-peE.title" = "Непрочитані або помічені";
+
+/* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "vOQ-xo-w8E"; */
+"vOQ-xo-w8E.title" = "Редагувати…";
+
+/* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "xNW-zC-IMZ"; */
+"xNW-zC-IMZ.title" = "Помітити всі статті як прочитані";
+
+/* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "xVH-W7-Br4"; */
+"xVH-W7-Br4.title" = "Останнє оновлення";
+
+/* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "Xw6-KX-rhd"; */
+"Xw6-KX-rhd.title" = "Останні 48 годин";
+
+/* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f"; */
+"Y0d-K7-46f.title" = "Інформація";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2"; */
+"Zu1-zW-uo2.title" = "Відкрити сторінку підписки";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "ZVp-Nv-0jh"; */
+"ZVp-Nv-0jh.title" = "Відкрити сторінку підписки у зовнішньому браузері";
+

@@ -1,0 +1,9 @@
+/* Class = "NSButtonCell"; title = "Export all subscriptions"; ObjectID = "6rj-zb-zOa"; */
+"6rj-zb-zOa.title" = "Eksportuoti visas prenumaratas";
+
+/* Class = "NSButtonCell"; title = "Preserve group folders in exported file"; ObjectID = "IYg-Pm-bcI"; */
+"IYg-Pm-bcI.title" = "Eksportuotame faile išsaugoti grupių aplankus";
+
+/* Class = "NSButtonCell"; title = "Export selected subscriptions"; ObjectID = "KgE-bb-aJn"; */
+"KgE-bb-aJn.title" = "Eksportuoti pasirinktas prenumeratas";
+

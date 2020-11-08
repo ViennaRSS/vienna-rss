@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>%d new articles retrieved</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@articles@</string>
+		<key>articles</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d ny artikel hentet</string>
+			<key>other</key>
+			<string>%d nye artikler hentet</string>
+		</dict>
+	</dict>
+	<key>%d subscriptions successfully exported</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@subscriptions@</string>
+		<key>subscriptions</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d abonnement successfuldt eksporteret</string>
+			<key>other</key>
+			<string>%d abonnementer successfuldt eksportert</string>
+		</dict>
+	</dict>
+	<key>%d subscriptions successfully imported</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@subscriptions@</string>
+		<key>subscriptions</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d abonnement successfuldt importeret</string>
+			<key>other</key>
+			<string>%d abonnementer successfuldt importeret</string>
+		</dict>
+	</dict>
+	<key>%d unread articles</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@articles@</string>
+		<key>articles</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d ulæst artikel</string>
+			<key>other</key>
+			<string>%d ulæste artikler</string>
+		</dict>
+	</dict>
+	<key>%u articles</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@articles@</string>
+		<key>articles</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>u</string>
+			<key>one</key>
+			<string>%u artikel</string>
+			<key>other</key>
+			<string>%u artikler</string>
+		</dict>
+	</dict>
+	<key>%u unread</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@unread@</string>
+		<key>unread</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>u</string>
+			<key>one</key>
+			<string>%u ulæst</string>
+			<key>other</key>
+			<string>%u ulæste</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

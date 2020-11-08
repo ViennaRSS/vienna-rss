@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="AdvancedPreferencesViewController">
+            <connections>
+                <outlet property="concurrentDownloads" destination="H1P-vO-Noj" id="1K8-fw-g1L"/>
+                <outlet property="useJavaScriptButton" destination="tVa-eQ-1Ic" id="IxK-oW-UeJ"/>
+                <outlet property="useWebPluginsButton" destination="E4n-wq-fUN" id="G22-Ry-F4o"/>
+                <outlet property="view" destination="Vsf-39-2Yj" id="Dp5-Be-4cB"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <view id="Vsf-39-2Yj">
+            <rect key="frame" x="0.0" y="0.0" width="426" height="237"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8eN-mz-Hbd">
+                    <rect key="frame" x="18" y="189" width="390" height="28"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="GaX-8c-QaN">
+                        <font key="font" metaFont="smallSystem"/>
+                        <string key="title">The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.</string>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tVa-eQ-1Ic">
+                    <rect key="frame" x="18" y="164" width="390" height="19"/>
+                    <buttonCell key="cell" type="check" title="Enable JavaScript in the internal browser" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="guK-dE-f6n">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="changeUseJavaScript:" target="-2" id="K6B-6z-GDo"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="E4n-wq-fUN">
+                    <rect key="frame" x="18" y="144" width="390" height="18"/>
+                    <buttonCell key="cell" type="check" title="Enable Plugins in the internal browser" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="fIz-4t-Ogg">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="changeUseWebPlugins:" target="-2" id="zbZ-Wt-vNl"/>
+                    </connections>
+                </button>
+                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="x1e-Vb-sUJ">
+                    <rect key="frame" x="18" y="121" width="145" height="17"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Concurrent downloads:" id="Ngw-hP-yW4">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <popUpButton verticalHuggingPriority="750" placeholderIntrinsicWidth="52" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="H1P-vO-Noj">
+                    <rect key="frame" x="167" y="115" width="57" height="26"/>
+                    <popUpButtonCell key="cell" type="push" title="10" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="p15-eO-dBa" id="hDb-uR-Acz">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" id="Gua-yV-73n">
+                            <items>
+                                <menuItem title="1" id="koF-ku-VbZ">
+                                    <attributedString key="userComments">
+                                        <fragment content="Do not localize">
+                                            <attributes>
+                                                <font key="NSFont" metaFont="smallSystem"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </menuItem>
+                                <menuItem title="2" id="bKP-m5-YPx">
+                                    <attributedString key="userComments">
+                                        <fragment content="Do not localize">
+                                            <attributes>
+                                                <font key="NSFont" metaFont="smallSystem"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </menuItem>
+                                <menuItem title="5" id="yD7-hF-SbK">
+                                    <attributedString key="userComments">
+                                        <fragment content="Do not localize">
+                                            <attributes>
+                                                <font key="NSFont" metaFont="smallSystem"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </menuItem>
+                                <menuItem title="10" state="on" id="p15-eO-dBa">
+                                    <attributedString key="userComments">
+                                        <fragment content="Do not localize">
+                                            <attributes>
+                                                <font key="NSFont" metaFont="smallSystem"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </menuItem>
+                                <menuItem title="15" id="dXW-1P-Mja">
+                                    <attributedString key="userComments">
+                                        <fragment content="Do not localize">
+                                            <attributes>
+                                                <font key="NSFont" metaFont="smallSystem"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </menuItem>
+                                <menuItem title="30" id="Mlu-22-guR">
+                                    <attributedString key="userComments">
+                                        <fragment content="Do not localize">
+                                            <attributes>
+                                                <font key="NSFont" metaFont="smallSystem"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </menuItem>
+                                <menuItem title="50" id="q0t-6p-Xd6">
+                                    <attributedString key="userComments">
+                                        <fragment content="Do not localize">
+                                            <attributes>
+                                                <font key="NSFont" metaFont="smallSystem"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </menuItem>
+                            </items>
+                        </menu>
+                        <connections>
+                            <action selector="changeConcurrentDownloads:" target="-2" id="XjX-o8-qjm"/>
+                        </connections>
+                    </popUpButtonCell>
+                </popUpButton>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lbl-Gt-1fA">
+                    <rect key="frame" x="18" y="85" width="390" height="28"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="The higher the number, the quicker your subscriptions will be downloaded." id="2GQ-cu-fbh" propertyAccessControl="none">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYk-Hr-rn0">
+                    <rect key="frame" x="18" y="49" width="390" height="28"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="However, high numbers also render your computer less responsive while refreshing feeds." id="S3T-cW-hys">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f3h-IR-LHW">
+                    <rect key="frame" x="383" y="17" width="25" height="25"/>
+                    <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="Gfp-vR-Bui">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="showAdvancedHelp:" target="-2" id="laa-9P-oV8"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Lbl-Gt-1fA" secondAttribute="trailing" constant="20" symbolic="YES" id="21Y-xB-izo"/>
+                <constraint firstItem="8eN-mz-Hbd" firstAttribute="leading" secondItem="Vsf-39-2Yj" secondAttribute="leading" constant="20" symbolic="YES" id="Ahr-tt-pg6"/>
+                <constraint firstItem="f3h-IR-LHW" firstAttribute="top" secondItem="wYk-Hr-rn0" secondAttribute="bottom" constant="8" symbolic="YES" id="CRV-Lq-e3b"/>
+                <constraint firstItem="x1e-Vb-sUJ" firstAttribute="leading" secondItem="Vsf-39-2Yj" secondAttribute="leading" constant="20" symbolic="YES" id="DKl-ip-yRF"/>
+                <constraint firstAttribute="bottom" secondItem="f3h-IR-LHW" secondAttribute="bottom" constant="20" symbolic="YES" id="EBs-98-Gaf"/>
+                <constraint firstItem="tVa-eQ-1Ic" firstAttribute="top" secondItem="8eN-mz-Hbd" secondAttribute="bottom" constant="8" symbolic="YES" id="EXL-Hy-6a8"/>
+                <constraint firstItem="wYk-Hr-rn0" firstAttribute="leading" secondItem="Vsf-39-2Yj" secondAttribute="leading" constant="20" symbolic="YES" id="EgO-B2-CNa"/>
+                <constraint firstItem="Lbl-Gt-1fA" firstAttribute="top" secondItem="x1e-Vb-sUJ" secondAttribute="bottom" constant="8" symbolic="YES" id="KlV-nU-WRR"/>
+                <constraint firstItem="E4n-wq-fUN" firstAttribute="leading" secondItem="Vsf-39-2Yj" secondAttribute="leading" constant="20" symbolic="YES" id="P2z-Yl-9B5"/>
+                <constraint firstAttribute="trailing" secondItem="E4n-wq-fUN" secondAttribute="trailing" constant="20" symbolic="YES" id="RUw-DJ-shb"/>
+                <constraint firstAttribute="trailing" secondItem="tVa-eQ-1Ic" secondAttribute="trailing" constant="20" symbolic="YES" id="Scj-4W-JtE"/>
+                <constraint firstItem="wYk-Hr-rn0" firstAttribute="top" secondItem="Lbl-Gt-1fA" secondAttribute="bottom" constant="8" symbolic="YES" id="TfS-Ji-9QE"/>
+                <constraint firstItem="E4n-wq-fUN" firstAttribute="top" secondItem="tVa-eQ-1Ic" secondAttribute="bottom" constant="6" symbolic="YES" id="b37-x3-FjV"/>
+                <constraint firstAttribute="trailing" secondItem="wYk-Hr-rn0" secondAttribute="trailing" constant="20" symbolic="YES" id="c9u-Gk-Ix4"/>
+                <constraint firstAttribute="trailing" secondItem="8eN-mz-Hbd" secondAttribute="trailing" constant="20" symbolic="YES" id="fQV-29-Ilh"/>
+                <constraint firstItem="tVa-eQ-1Ic" firstAttribute="leading" secondItem="Vsf-39-2Yj" secondAttribute="leading" constant="20" symbolic="YES" id="n8Q-bH-6DB"/>
+                <constraint firstItem="Lbl-Gt-1fA" firstAttribute="leading" secondItem="Vsf-39-2Yj" secondAttribute="leading" constant="20" symbolic="YES" id="of6-tz-1sV"/>
+                <constraint firstAttribute="trailing" secondItem="f3h-IR-LHW" secondAttribute="trailing" constant="20" symbolic="YES" id="p4Y-4W-OYC"/>
+                <constraint firstItem="x1e-Vb-sUJ" firstAttribute="baseline" secondItem="H1P-vO-Noj" secondAttribute="baseline" id="uIU-pa-bYc"/>
+                <constraint firstItem="8eN-mz-Hbd" firstAttribute="top" secondItem="Vsf-39-2Yj" secondAttribute="top" constant="20" symbolic="YES" id="uwF-X5-Q0R"/>
+                <constraint firstItem="H1P-vO-Noj" firstAttribute="leading" secondItem="x1e-Vb-sUJ" secondAttribute="trailing" constant="8" symbolic="YES" id="wzw-Ye-yTT"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="H1P-vO-Noj" secondAttribute="trailing" constant="20" symbolic="YES" id="y4N-SR-q5k"/>
+                <constraint firstItem="x1e-Vb-sUJ" firstAttribute="top" secondItem="E4n-wq-fUN" secondAttribute="bottom" constant="8" symbolic="YES" id="zbp-4G-9lm"/>
+            </constraints>
+            <point key="canvasLocation" x="438" y="350.5"/>
+        </view>
+    </objects>
+</document>

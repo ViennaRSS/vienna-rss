@@ -1,0 +1,6 @@
+/* Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "GaX-8c-QaN"; */
+"GaX-8c-QaN.title" = "通常 Vienna を使用するに当たってこの項目を設定する必要 はありません。各項目の詳細はヘルプを参照してください。";
+
+/* Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "guK-dE-f6n"; */
+"guK-dE-f6n.title" = "内蔵ブラウザの JavaScript を有効にする";
+

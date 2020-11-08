@@ -1,23 +1,26 @@
-WORKSPACE=Vienna.xcworkspace
-SCHEME=Vienna
+PROJECT=Vienna.xcodeproj
+LOCALES=cs da de es eu fr gl it ja ko lt nl pt-BR pt ru sv tr uk zh-Hans zh-Hant
 
 default:
-	xcodebuild -workspace $(WORKSPACE) -scheme "Pods-Vienna" -configuration Deployment\
-		CONFIGURATION_BUILD_DIR="../build" LIBRARY_SEARCH_PATHS="../build"
-	xcodebuild -workspace $(WORKSPACE) -scheme "Archive and Prep for Upload" -configuration Deployment\
-		CONFIGURATION_BUILD_DIR=build LIBRARY_SEARCH_PATHS="build"
+	xcodebuild -project $(PROJECT) -scheme Vienna archive
+	xcodebuild -project $(PROJECT) -target Notarization -configuration Deployment
+	xcodebuild -project $(PROJECT) -scheme Deployment
 
 release:
-	xcodebuild -workspace $(WORKSPACE) -scheme "Pods-Vienna" -configuration Deployment\
-		CONFIGURATION_BUILD_DIR="../build" LIBRARY_SEARCH_PATHS="../build"
-	xcodebuild -workspace $(WORKSPACE) -scheme "Archive and Prep for Upload" -configuration Deployment\
-		CONFIGURATION_BUILD_DIR=build LIBRARY_SEARCH_PATHS="build"
+	xcodebuild -project $(PROJECT) -scheme Vienna archive
+	xcodebuild -project $(PROJECT) -target Notarization -configuration Deployment
+	xcodebuild -project $(PROJECT) -scheme Deployment
 
 development:
-	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Development 
+	xcodebuild -project $(PROJECT) -scheme "Vienna" -configuration Development
 
 clean:
-	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Development clean
-	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Deployment clean
+	xcodebuild -project $(PROJECT) -scheme "Vienna" -configuration Development clean
+	xcodebuild -project $(PROJECT) -scheme "Vienna" -configuration Deployment clean
 	rm -fr build
-	rm -fr Pods/build
+	rm -fr Carthage/Build
+
+localize:
+	for locale in $(LOCALES); do \
+		xcodebuild -importLocalizations -project $(PROJECT) -localizationPath "Localizations/$${locale}.xliff"; \
+	done

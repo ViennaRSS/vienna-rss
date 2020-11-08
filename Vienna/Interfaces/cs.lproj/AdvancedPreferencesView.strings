@@ -1,0 +1,15 @@
+/* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "2GQ-cu-fbh"; */
+"2GQ-cu-fbh.title" = "Čím vyšší číslo, tím rychleji se Vám budou načítat Vaše odebírání.";
+
+/* Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "GaX-8c-QaN"; */
+"GaX-8c-QaN.title" = "Tato nastavení není třeba při běžném používání programu Vienna měnit. Podrobnosti k jednotlivým volbám naleznete v nápovědě.";
+
+/* Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "guK-dE-f6n"; */
+"guK-dE-f6n.title" = "Aktivovat JavaScript v interním prohlížeči";
+
+/* Class = "NSTextFieldCell"; title = "Concurrent downloads:"; ObjectID = "Ngw-hP-yW4"; */
+"Ngw-hP-yW4.title" = "Souběžná stahování:";
+
+/* Class = "NSTextFieldCell"; title = "However, high numbers also render your computer less responsive while refreshing feeds."; ObjectID = "S3T-cW-hys"; */
+"S3T-cW-hys.title" = "Nicméně vyšší čísla zároveň způsobí horší odezvu počítače během aktualizování odebírání.";
+

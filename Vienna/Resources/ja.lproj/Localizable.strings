@@ -1,0 +1,480 @@
+/* No comment provided by engineer. */
+"(No title)" = "(No subject)";
+
+/* No comment provided by engineer. */
+"(Untitled Feed)" = "(無名フィード)";
+
+/* No comment provided by engineer. */
+"%@ Info" = "%@ 情報";
+
+/* No comment provided by engineer. */
+"%d new articles retrieved" = "%d の新着記事があります";
+
+/* Notification body */
+"%d new unread articles retrieved" = "%d の未読記事があります。";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully exported" = "%d の購読の書き出しに成功しました。";
+
+/* No comment provided by engineer. */
+"%d subscriptions successfully imported" = "%d の購読の読み込みに成功しました。";
+
+/* No comment provided by engineer. */
+"%d unread articles" = "%d の未読記事";
+
+/* No comment provided by engineer. */
+"%u articles" = "%u 記事";
+
+/* No comment provided by engineer. */
+"%u unread" = "%u 未読";
+
+/* No comment provided by engineer. */
+"A folder with that name already exists" = "この名前のフォルダがすでに存在します。";
+
+/* No comment provided by engineer. */
+"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "フォルダがリモートネットワーク上にあるようなので、新規データベースを \"%@\" に作成できません。このバージョンの Vienna はリモートデータベースに対応していません。ローカルディスク上の他のフォルダを選択してください。";
+
+/* Toolbar item name for the Advanced preference pane */
+"Advanced" = "詳細";
+
+/* No comment provided by engineer. */
+"An error occurred when this feed was last refreshed" = "このフィードの前回更新時エラーが起こりました。";
+
+/* Toolbar item name for the Appearance preference pane */
+"Appearance" = "表示";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "選択されている %d のフォルダをすべて削除してもよろしいですか？この操作を元に戻すことはできません。";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "グループフォルダ \"%@\" と下位のフォルダを削除してもよろしいですか？この操作を元に戻すことはできません。";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "スマートフォルダ \"%@\" を削除してもよろしいですか？この操作では、検索にされた実際の記事は削除されません。";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete the messages in the Trash folder permanently?" = "ゴミ箱にある項目を完全に取り除いてもよろしいですか？";
+
+/* No comment provided by engineer. */
+"Are you sure you want to permanently delete the selected articles?" = "選択された記事を完全に消去してもよろしいですか？";
+
+/* No comment provided by engineer. */
+"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "購読中の \"%@\" を削除してもよろしいですか？この操作は伽周されているすべての記事を削除します。";
+
+/* No comment provided by engineer. */
+"Articles" = "記事";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Author" = "著者";
+
+/* Title of a button on an alert
+   Title of a popup menu item */
+"Cancel" = "キャンセル";
+
+/* No comment provided by engineer. */
+"Cannot create export output file" = "書き出し用アウトプットファイルを作成することができません";
+
+/* No comment provided by engineer. */
+"Cannot create the Vienna database" = "Vienna データベースを作成できません。";
+
+/* No comment provided by engineer. */
+"Cannot import the specified file. The file contents are not valid OPML XML format." = "指定されたファイルを読み込むことができません。ファイルの内容が、正しい OPML XML 形式ではありません。";
+
+/* No comment provided by engineer. */
+"Cannot rename folder" = "フォルダの名称変更ができません";
+
+/* No comment provided by engineer. */
+"Clear Recent Searches" = "最近の検索を消去";
+
+/* No comment provided by engineer. */
+"Connecting to %@" = "%@ に接続中";
+
+/* test for a string */
+"contains" = "が次を含む：";
+
+/* No comment provided by engineer. */
+"Copy Link to Clipboard" = "リンクをクリップボードにコピー";
+
+/* No comment provided by engineer. */
+"Copy Page Link to Clipboard" = "リンクタグをコピー";
+
+/* No comment provided by engineer. */
+"Database Upgrade" = "データベースアップグレード";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Date" = "日付";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Delete" = "削除";
+
+/* Title of a menu item */
+"Delete Article" = "記事を削除";
+
+/* No comment provided by engineer. */
+"Delete group folder" = "グループフォルダを削除";
+
+/* No comment provided by engineer. */
+"Delete multiple folders" = "複数のフォルダを削除";
+
+/* No comment provided by engineer. */
+"Delete smart folder" = "スマートフォルダを削除";
+
+/* No comment provided by engineer. */
+"Delete subscription" = "購読を削除";
+
+/* Title of a menu item */
+"Delete…" = "削除…";
+
+/* Data field name visible in smart folder definition */
+"Deleted" = "削除済み";
+
+/* No comment provided by engineer. */
+"Deleting folder \"%@\"…" = "フォルダ \"%@\" を削除中…";
+
+/* test for a string */
+"does not contain" = "が次を含まない：";
+
+/* Title of a menu item */
+"Edit…" = "編集…";
+
+/* Title of a button on an alert */
+"Empty" = "空にする";
+
+/* No comment provided by engineer. */
+"Enter the URL here" = "URL をここに入力";
+
+/* Already subscribed title */
+"Error" = "エラー";
+
+/* No comment provided by engineer. */
+"Error parsing XML data in feed" = "フィードの XML データ解析にエラーがあります。";
+
+/* No comment provided by engineer. */
+"Export Completed" = "書き出し終了";
+
+/* No comment provided by engineer. */
+"External Browser" = "他のブラウザ";
+
+/* No comment provided by engineer. */
+"Feed URL updated to %@" = "フィード URL が %@ にアップデートされました";
+
+/* No comment provided by engineer. */
+"Filter in %@" = "%@ の検索";
+
+/* No comment provided by engineer. */
+"Flag" = "フラッグ";
+
+/* Data field name visible in menu/smart folder definition */
+"Flagged" = "フラグ";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Folder" = "フォルダ";
+
+/* No comment provided by engineer. */
+"Folder image retrieved from %@" = "%@ 空フォルダイメージを取得";
+
+/* No comment provided by engineer. */
+"Folders" = "フォルダ";
+
+/* Toolbar item name for the General preference pane */
+"General" = "一般";
+
+/* Title of a menu item */
+"Get Info" = "情報を見る";
+
+/* No comment provided by engineer. */
+"Go forward to the next page" = "次のページに進む";
+
+/* Pseudo field name visible in article list */
+"Headlines" = "ヘッドライン";
+
+/* No comment provided by engineer. */
+"HTTP code %d reported from server" = "HTTP コード %d がサーバから送られました。";
+
+/* No comment provided by engineer. */
+"If you quit Vienna now, all downloads will stop." = "すべてのダウンロードを中止して、Vienna を終了しますか？";
+
+/* No comment provided by engineer. */
+"Import Completed" = "読み込み終了";
+
+/* No comment provided by engineer. */
+"Import error" = "読み込みエラー";
+
+/* test for a value */
+"is" = "が";
+
+/* test for a date */
+"is after" = "が次以降である：";
+
+/* test for a date */
+"is before" = "が次以前である：";
+
+/* test for a numeric value */
+"is greater than" = "が次より多い：";
+
+/* test for a numeric value */
+"is greater than or equal to" = "が次と同じか多い：";
+
+/* test for a numeric value */
+"is less than" = "が次より少ない：";
+
+/* test for a numeric value */
+"is less than or equal to" = "が次と同じか少ない：";
+
+/* test for a value */
+"is not" = "が次でない：";
+
+/* test for a date */
+"is on or after" = "次またはそれ以降である：";
+
+/* test for a date */
+"is on or before" = "次またはそれ以前である";
+
+/* No comment provided by engineer. */
+"Last Week" = "先週";
+
+/* Data field name visible in menu/article list */
+"Link" = "リンク";
+
+/* Title of a menu item */
+"Mark All Articles as Read" = "すべての記事を既読にする";
+
+/* No comment provided by engineer. */
+"Mark All Read" = "すべてを既読にする";
+
+/* Title of a menu item */
+"Mark All Subscriptions as Read" = "すべての購読を既読にする";
+
+/* Title of a menu item */
+"Mark Flagged" = "フラグあり";
+
+/* Title of a menu item */
+"Mark Read" = "既読にする";
+
+/* No comment provided by engineer. */
+"Mark Unflagged" = "フラグなし";
+
+/* Title of a menu item */
+"Mark Unread" = "未読にする";
+
+/* No comment provided by engineer. */
+"Marked Articles" = "フラグのついた記事";
+
+/* No comment provided by engineer. */
+"More Scripts…" = "スクリプト…";
+
+/* No comment provided by engineer. */
+"Move Folders" = "フォルダを移動";
+
+/* No comment provided by engineer. */
+"Never" = "しない";
+
+/* Notification title */
+"New articles retrieved" = "新着記事";
+
+/* No comment provided by engineer. */
+"No" = "ない";
+
+/* No comment provided by engineer. */
+"No new articles available" = "新着記事はありません";
+
+/* No comment provided by engineer. */
+"One or more downloads are in progress" = "ダウンロード中です";
+
+/* Title of a popup menu item */
+"Open" = "開く";
+
+/* Title of a menu item */
+"Open Article Page" = "記事のページに移動";
+
+/* No comment provided by engineer. */
+"Open Article Page in %@" = "記事のページを %@ で開く";
+
+/* Title of a menu item */
+"Open Article Page in External Browser" = "ブラウザで記事を開く";
+
+/* No comment provided by engineer. */
+"Open Frame" = "フレームを開く";
+
+/* No comment provided by engineer. */
+"Open Image in %@" = "画像 %@ を開く";
+
+/* No comment provided by engineer. */
+"Open Image in New Tab" = "イメージを新規タブで開く";
+
+/* No comment provided by engineer. */
+"Open Link in %@" = "%@ でリンクを開く";
+
+/* No comment provided by engineer. */
+"Open Link in New Tab" = "リンクを新規タブで開く";
+
+/* No comment provided by engineer. */
+"Open Page in %@" = "%@ でページを開く";
+
+/* No comment provided by engineer. */
+"Open Scripts Folder" = "スクリプトフォルダを開く";
+
+/* Title of a menu item */
+"Open Subscription Home Page" = "購読元のホームページに移動";
+
+/* No comment provided by engineer. */
+"Open Subscription Home Page in %@" = "購読先ホームページを %@ で開く";
+
+/* Title of a menu item */
+"Open Subscription Home Page in External Browser" = "ブラウザで購読先のホームページを開く";
+
+/* No comment provided by engineer. */
+"Other" = "その他";
+
+/* Title of the Preferences window */
+"Preferences" = "環境設定";
+
+/* Title of a button on an alert */
+"Quit" = "終了";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Quit Vienna" = "Vienna を終了";
+
+/* Data field name visible in menu/smart folder definition */
+"Read" = "既読";
+
+/* No comment provided by engineer. */
+"Recent Searches" = "最近の検索";
+
+/* No comment provided by engineer. */
+"Recents" = "最近";
+
+/* Title of a menu item */
+"Refresh All Subscriptions" = "すべての購読を更新";
+
+/* No comment provided by engineer. */
+"Refresh completed" = "更新が終了しました";
+
+/* Title of a menu item */
+"Refresh Selected Subscriptions" = "選択された購読を更新";
+
+/* No comment provided by engineer. */
+"Refresh the current page" = "現在のページを再読込";
+
+/* No comment provided by engineer. */
+"Refreshing subscriptions…" = "購読を更新…";
+
+/* Title of a popup menu item */
+"Remove From List" = "リストから削除";
+
+/* Title of a menu item */
+"Rename…" = "名称変更…";
+
+/* Title of a menu item */
+"Restore Article" = "記事を復元";
+
+/* No comment provided by engineer. */
+"Retrieving articles" = "記事を取得中";
+
+/* No comment provided by engineer. */
+"Retrieving folder image" = "フォルダイメージを取得中";
+
+/* No comment provided by engineer. */
+"Return to the previous page" = "前のページに戻る";
+
+/* Title of a popup menu item */
+"Select…" = "選択…";
+
+/* No comment provided by engineer. */
+"Send Link" = "リンクを送信";
+
+/* No comment provided by engineer. */
+"Send Links" = "リンクを送信";
+
+/* Title of a popup menu item */
+"Show in Finder" = "Finder に表示";
+
+/* No comment provided by engineer. */
+"Sorry but Vienna was unable to open the database" = "Vienna はデータベースを開くことができません。";
+
+/* No comment provided by engineer. */
+"Sorry, but Vienna was unable to create the database folder" = "Vienna はデータベースフォルダを作成することができません。";
+
+/* Data field name visible in menu/article list/smart folder definition */
+"Subject" = "タイトル";
+
+/* Pseudo field name visible in menu/article list */
+"Summary" = "要約";
+
+/* Data field name visible in smart folder definition */
+"Text" = "テキスト";
+
+/* No comment provided by engineer. */
+"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "データベース (%@) のファイルフォーマットはご利用のバージョンの Vienna でサポートされていません。ファイルを削除するか名前を変更した後、Vienna を再起動してください。";
+
+/* No comment provided by engineer. */
+"The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna." = "データベースファイル (%@) を開くことができません。データベースファイルを削除または名称を変更して Vienna を再起動してください。";
+
+/* No comment provided by engineer. */
+"The database file format has changed" = "データベースのファイルフォーマットが変更されました。";
+
+/* No comment provided by engineer. */
+"The Default style will be used instead." = "標準のスタイルを使用します。";
+
+/* No comment provided by engineer. */
+"The specified export output file could not be created. Check that it is not locked and no other application is using it." = "書き出し用アウトプットファイルを作成することができません。他のアプリケーションで使用されているまたはロックされていないか確認してください。";
+
+/* No comment provided by engineer. */
+"The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "スタイル \"%@\" はスタイルフォルダにインストールされました。スタイルメニューから選択できます。";
+
+/* No comment provided by engineer. */
+"The style %@ appears to be missing or corrupted" = "%@ というスタイルには問題があるようです。";
+
+/* No comment provided by engineer. */
+"The subscription for \"%@\" requires a user name and password for access." = "\"%@\" の購読にはユーザ名とパスワードが必要です。";
+
+/* No comment provided by engineer. */
+"This operation cannot be undone." = "この操作を元に戻すことはできません。";
+
+/* No comment provided by engineer. */
+"Today" = "今日";
+
+/* No comment provided by engineer. */
+"Today's Articles" = "今日の記事";
+
+/* No comment provided by engineer. */
+"Trash" = "ゴミ箱";
+
+/* No comment provided by engineer. */
+"Unread" = "未読";
+
+/* No comment provided by engineer. */
+"Unread Articles" = "未読の記事";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "\"%@\" というファイルは保存場所が移動されているためがを開くことができません。";
+
+/* No comment provided by engineer. */
+"Vienna cannot open the file." = "Vienna はこのファイルを開くことができません。";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file \"%@\" because it moved since you downloaded it." = "\"%@\" というファイルは保存場所が移動されているためがを開くことができません。";
+
+/* No comment provided by engineer. */
+"Vienna cannot show the file." = "Vienna はファイルを表示することができません。";
+
+/* No comment provided by engineer. */
+"Vienna has installed a new style" = "Vienna に新しいスタイルが追加されました";
+
+/* No comment provided by engineer. */
+"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna は \"%@\" と言うフォルダを作成しようとしましたが、エラーが発生しました。フォルダのパーミッションを確認してください。";
+
+/* No comment provided by engineer. */
+"Yes" = "ある";
+
+/* No comment provided by engineer. */
+"Yesterday" = "昨日";
+
+/* You are already subscribed to that feed */
+"You are already subscribed to that feed" = "このフィードはすでに購読中です。";
+
+/* No comment provided by engineer. */
+"You cannot undo this action" = "この操作は取り消せません。";
+

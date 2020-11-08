@@ -1,0 +1,6 @@
+/* Class = "NSWindow"; title = "Activity"; ObjectID = "8"; */
+"8.title" = "Aktivitetsvisare";
+
+/* Class = "NSTableColumn"; headerCell.title = "Source"; ObjectID = "18"; */
+"18.headerCell.title" = "Källa";
+

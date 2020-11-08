@@ -1,0 +1,393 @@
+/* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg"; */
+"2S3-dG-ZPg.title" = "Více stylů…";
+
+/* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "4ih-vj-fsk"; */
+"4ih-vj-fsk.title" = "Kontrolovat gramatiku a pravopis";
+
+/* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
+"5.title" = "Převést vše do popředí";
+
+/* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1"; */
+"6yn-y8-lF1.title" = "Obnovit všechna odebírání";
+
+/* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8Z3-Bg-ry2"; */
+"8Z3-Bg-ry2.title" = "Praporek";
+
+/* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
+"19.title" = "Okno";
+
+/* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
+"23.title" = "Minimalizovat";
+
+/* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
+"24.title" = "Okno";
+
+/* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "27s-E3-FHd"; */
+"27s-E3-FHd.title" = "Automaticky opravovat pravopis";
+
+/* Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58"; */
+"58.title" = "Co je Vienna";
+
+/* Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "77"; */
+"77.title" = "Vzhled stránky…";
+
+/* Class = "NSMenuItem"; title = "Print…"; ObjectID = "78"; */
+"78.title" = "Tisknout…";
+
+/* Class = "NSMenu"; title = "File"; ObjectID = "81"; */
+"81.title" = "Soubor";
+
+/* Class = "NSMenuItem"; title = "File"; ObjectID = "83"; */
+"83.title" = "Soubor";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "103"; */
+"103.title" = "Nápověda";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "106"; */
+"106.title" = "Nápověda";
+
+/* Class = "NSMenuItem"; title = "Vienna Help"; ObjectID = "111"; */
+"111.title" = "Nápověda pro Viennu";
+
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
+"129.title" = "Předvolby…";
+
+/* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
+"130.title" = "Služby";
+
+/* Class = "NSMenuItem"; title = "Services"; ObjectID = "131"; */
+"131.title" = "Služby";
+
+/* Class = "NSMenuItem"; title = "Hide Vienna"; ObjectID = "134"; */
+"134.title" = "Skrýt Viennu";
+
+/* Class = "NSMenuItem"; title = "Quit Vienna"; ObjectID = "136"; */
+"136.title" = "Ukončit Viennu";
+
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
+"145.title" = "Skrýt ostatní";
+
+/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
+"150.title" = "Zobrazit vše";
+
+/* Class = "NSMenuItem"; title = "Find…"; ObjectID = "154"; */
+"154.title" = "Hledat…";
+
+/* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "155"; */
+"155.title" = "Zobrazit výběr";
+
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "157"; */
+"157.title" = "Kopírovat";
+
+/* Class = "NSMenuItem"; title = "Undo"; ObjectID = "158"; */
+"158.title" = "Odvolat akci";
+
+/* Class = "NSMenu"; title = "Find"; ObjectID = "159"; */
+"159.title" = "Hledat";
+
+/* Class = "NSMenuItem"; title = "Cut"; ObjectID = "160"; */
+"160.title" = "Vyjmout";
+
+/* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "161"; */
+"161.title" = "Hledat výběr";
+
+/* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "162"; */
+"162.title" = "Hledat předchozí";
+
+/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "163"; */
+"163.title" = "Úpravy";
+
+/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "164"; */
+"164.title" = "Smazat";
+
+/* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "167"; */
+"167.title" = "Hledat další";
+
+/* Class = "NSMenuItem"; title = "Find"; ObjectID = "168"; */
+"168.title" = "Hledat";
+
+/* Class = "NSMenu"; title = "Edit"; ObjectID = "169"; */
+"169.title" = "Úpravy";
+
+/* Class = "NSMenuItem"; title = "Paste"; ObjectID = "171"; */
+"171.title" = "Vložit";
+
+/* Class = "NSMenuItem"; title = "Select All"; ObjectID = "172"; */
+"172.title" = "Vybrat vše";
+
+/* Class = "NSMenuItem"; title = "Redo"; ObjectID = "173"; */
+"173.title" = "Opakovat akci";
+
+/* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "197"; */
+"197.title" = "Přepnout velikost";
+
+/* Class = "NSMenuItem"; title = "View"; ObjectID = "235"; */
+"235.title" = "Zobrazení";
+
+/* Class = "NSMenu"; title = "View"; ObjectID = "237"; */
+"237.title" = "Zobrazení";
+
+/* Class = "NSMenu"; title = "Article"; ObjectID = "300"; */
+"300.title" = "Příspěvek";
+
+/* Class = "NSMenuItem"; title = "Article"; ObjectID = "301"; */
+"301.title" = "Příspěvek";
+
+/* Class = "NSMenuItem"; title = "Next Unread"; ObjectID = "344"; */
+"344.title" = "Další nečtený";
+
+/* Class = "NSMenuItem"; title = "Sort By"; ObjectID = "387"; */
+"387.title" = "Třídit";
+
+/* Class = "NSMenu"; title = "Sort By"; ObjectID = "388"; */
+"388.title" = "Třídit";
+
+/* Class = "NSMenuItem"; title = "Activity Window"; ObjectID = "402"; */
+"402.title" = "Monitor aktivity";
+
+/* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "406"; */
+"406.title" = "Obnovit všechna odebírání";
+
+/* Class = "NSMenuItem"; title = "Back"; ObjectID = "422"; */
+"422.title" = "Zpět";
+
+/* Class = "NSMenuItem"; title = "Forward"; ObjectID = "423"; */
+"423.title" = "Vpřed";
+
+/* Class = "NSMenuItem"; title = "Columns"; ObjectID = "442"; */
+"442.title" = "Sloupce";
+
+/* Class = "NSMenu"; title = "Columns"; ObjectID = "443"; */
+"443.title" = "Sloupce";
+
+/* Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "574"; */
+"574.title" = "Nová dynamická složka…";
+
+/* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "604"; */
+"604.title" = "Obnovit vybraná odebírání";
+
+/* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "690"; */
+"690.title" = "Nové odebírání…";
+
+/* Class = "NSMenuItem"; title = "Import Subscriptions…"; ObjectID = "780"; */
+"780.title" = "Importovat odebírání…";
+
+/* Class = "NSMenuItem"; title = "Export Subscriptions…"; ObjectID = "781"; */
+"781.title" = "Exportovat odebírání…";
+
+/* Class = "NSMenuItem"; title = "Mark Unread"; ObjectID = "789"; */
+"789.title" = "Označit jako nečtené";
+
+/* Class = "NSMenuItem"; title = "Mark Flagged"; ObjectID = "790"; */
+"790.title" = "Označit praporkem";
+
+/* Class = "NSMenuItem"; title = "New Group Folder…"; ObjectID = "806"; */
+"806.title" = "Nová skupinová složka…";
+
+/* Class = "NSMenuItem"; title = "Style"; ObjectID = "826"; */
+"826.title" = "Styl";
+
+/* Class = "NSMenu"; title = "Style"; ObjectID = "827"; */
+"827.title" = "Styl";
+
+/* Class = "NSMenuItem"; title = "Stop Refreshing"; ObjectID = "858"; */
+"858.title" = "Zastavit obnovu";
+
+/* Class = "NSMenuItem"; title = "Vienna Web Site"; ObjectID = "929"; */
+"929.title" = "Vienna - webové sídlo";
+
+/* Class = "NSMenuItem"; title = "Close Window"; ObjectID = "935"; */
+"935.title" = "Zavřít";
+
+/* Class = "NSMenuItem"; title = "Main Window"; ObjectID = "940"; */
+"940.title" = "Hlavní okno";
+
+/* Class = "NSMenuItem"; title = "Empty Trash"; ObjectID = "961"; */
+"961.title" = "Vysypat koš";
+
+/* Class = "NSMenuItem"; title = "Previous Tab"; ObjectID = "1008"; */
+"1008.title" = "Předchozí panel";
+
+/* Class = "NSMenuItem"; title = "Next Tab"; ObjectID = "1009"; */
+"1009.title" = "Následující panel";
+
+/* Class = "NSMenuItem"; title = "Close Tab"; ObjectID = "1023"; */
+"1023.title" = "Zavřít panel";
+
+/* Class = "NSMenuItem"; title = "Reload Page"; ObjectID = "1025"; */
+"1025.title" = "Obnovit stránku";
+
+/* Class = "NSMenuItem"; title = "Stop Reloading Page"; ObjectID = "1027"; */
+"1027.title" = "Zastavit opětovné načítání stránky";
+
+/* Class = "NSMenuItem"; title = "Close All Tabs"; ObjectID = "1036"; */
+"1036.title" = "Zavřít všechny panely";
+
+/* Class = "NSMenuItem"; title = "Open Article Page"; ObjectID = "1040"; */
+"1040.title" = "Otevřít stránku příspěvku";
+
+/* Class = "NSMenuItem"; title = "Restore Article"; ObjectID = "1044"; */
+"1044.title" = "Opětovně zařadit příspěvek";
+
+/* Class = "NSMenuItem"; title = "Downloads"; ObjectID = "1061"; */
+"1061.title" = "Záznamy kopírování";
+
+/* Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067"; */
+"1067.title" = "Otevřít stránku příspěvku v externím prohlížeči";
+
+/* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
+"1084.title" = "Zvětšit text";
+
+/* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
+"1085.title" = "Zmenšit text";
+
+/* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
+"1101.title" = "Otevřít webovou adresu…";
+
+/* Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "1104"; */
+"1104.title" = "Ověřit aktualizace…";
+
+/* Class = "NSMenuItem"; title = "Refresh Folder Images"; ObjectID = "1106"; */
+"1106.title" = "Obnovit ikony složek";
+
+/* Class = "NSMenuItem"; title = "Layout"; ObjectID = "1108"; */
+"1108.title" = "Rozvržení";
+
+/* Class = "NSMenu"; title = "Layout"; ObjectID = "1109"; */
+"1109.title" = "Rozvržení";
+
+/* Class = "NSMenuItem"; title = "Horizontal"; ObjectID = "1110"; */
+"1110.title" = "Standardní";
+
+/* Class = "NSMenuItem"; title = "Vertical"; ObjectID = "1116"; */
+"1116.title" = "Kompaktní";
+
+/* Class = "NSMenuItem"; title = "Filter By"; ObjectID = "1117"; */
+"1117.title" = "Filtrovat";
+
+/* Class = "NSMenu"; title = "Filter By"; ObjectID = "1118"; */
+"1118.title" = "Filtrovat";
+
+/* Class = "NSMenuItem"; title = "Keyboard Shortcuts"; ObjectID = "1146"; */
+"1146.title" = "Klávesové zkratky";
+
+/* Class = "NSMenuItem"; title = "Unified"; ObjectID = "1160"; */
+"1160.title" = "Sloučené";
+
+/* Class = "NSMenuItem"; title = "Folder"; ObjectID = "1177"; */
+"1177.title" = "Složka";
+
+/* Class = "NSMenu"; title = "Folder"; ObjectID = "1178"; */
+"1178.title" = "Složka";
+
+/* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "1180"; */
+"1180.title" = "Upravit…";
+
+/* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "1181"; */
+"1181.title" = "Přejmenovat…";
+
+/* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "1184"; */
+"1184.title" = "Smazat…";
+
+/* Class = "NSMenuItem"; title = "Skip Folder"; ObjectID = "1186"; */
+"1186.title" = "Vynechat složku";
+
+/* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "1187"; */
+"1187.title" = "Označit všechny příspěvky jako čtené";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "1191"; */
+"1191.title" = "Otevřít domovskou stránku odebírání";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "1192"; */
+"1192.title" = "Otevřít domovskou stránku odebírání v externím prohlížeči";
+
+/* Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "1195"; */
+"1195.title" = "Označit všechna odebírání jako čtená";
+
+/* Class = "NSMenuItem"; title = "Delete Article"; ObjectID = "1198"; */
+"1198.title" = "Smazat příspěvek";
+
+/* Class = "NSMenuItem"; title = "Open New Tab"; ObjectID = "1214"; */
+"1214.title" = "Otevřít nový panel";
+
+/* Class = "NSMenuItem"; title = "Download Enclosure"; ObjectID = "1216"; */
+"1216.title" = "Zkopírovat přílohu";
+
+/* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
+"1257.title" = "Přizpůsobit řádek nástrojů…";
+
+/* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
+"1258.title" = "Schovat lištu";
+
+/* Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259"; */
+"1259.title" = "Skrýt stavový řádek";
+
+/* Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "1325"; */
+"1325.title" = "Zobrazit řádek filtru";
+
+/* Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327"; */
+"1327.title" = "Hledat v příspěvcích";
+
+/* Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336"; */
+"1336.title" = "Seřadit podle";
+
+/* Class = "NSMenu"; title = "Order By"; ObjectID = "1337"; */
+"1337.title" = "Seřadit podle";
+
+/* Class = "NSMenuItem"; title = "Name"; ObjectID = "1339"; */
+"1339.title" = "Název";
+
+/* Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408"; */
+"1408.title" = "Ukončit odebírání kanálu";
+
+/* Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409"; */
+"1409.title" = "Informace…";
+
+/* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI"; */
+"CGp-H4-UaI.title" = "Posledních 48 hodin";
+
+/* Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi"; */
+"ecl-HO-Kpi.title" = "Označit všechna odebírání jako čtená";
+
+/* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "eVb-Qt-XJb"; */
+"eVb-Qt-XJb.title" = "Náhrady";
+
+/* Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI"; */
+"fad-Nj-OFI.title" = "Pravopis";
+
+/* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "joR-kW-sIU"; */
+"joR-kW-sIU.title" = "Transformace";
+
+/* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN"; */
+"MHF-D4-pRN.title" = "Všechna písmena velká";
+
+/* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
+"pKl-6f-Hlc.title" = "Označit jako čtené";
+
+/* Class = "NSMenu"; title = "Substitutions"; ObjectID = "QEb-Bm-CPN"; */
+"QEb-Bm-CPN.title" = "Náhrady";
+
+/* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "qzH-De-act"; */
+"qzH-De-act.title" = "Chytré kopírování/vkládání";
+
+/* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7"; */
+"rNG-xr-3x7.title" = "Nečtené příspěvky";
+
+/* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk"; */
+"RtQ-eP-bfk.title" = "Chytré pomlčky";
+
+/* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "t1E-6n-jtA"; */
+"t1E-6n-jtA.title" = "Všechny příspěvky";
+
+/* Class = "NSMenuItem"; title = "Today"; ObjectID = "t34-de-pMs"; */
+"t34-de-pMs.title" = "Dnes";
+
+/* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "tfv-fu-HFM"; */
+"tfv-fu-HFM.title" = "Kontrolovat pravopis při psaní";
+
+/* Class = "NSMenu"; title = "Transformations"; ObjectID = "UFF-Fn-8ti"; */
+"UFF-Fn-8ti.title" = "Transformace";
+
+/* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm"; */
+"wqh-Jc-gBm.title" = "Naposledy obnovené";
+

@@ -1,0 +1,21 @@
+/* Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "71S-pg-AjX"; */
+"71S-pg-AjX.title" = "При просмотре статей или страниц:";
+
+/* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "auD-UC-Pij"; */
+"auD-UC-Pij.title" = "Шрифт списка статей:";
+
+/* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "B5v-p5-vrf"; */
+"B5v-p5-vrf.title" = "Шрифт списка папок:";
+
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "BDw-v3-mpF"; */
+"BDw-v3-mpF.title" = "Выбрать…";
+
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "gGT-YP-aum"; */
+"gGT-YP-aum.title" = "Выбрать…";
+
+/* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "MEV-HA-bdL"; */
+"MEV-HA-bdL.title" = "Показывать изображения папок в списке папок";
+
+/* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "zfJ-Ge-Cxe"; */
+"zfJ-Ge-Cxe.title" = "Никогда не использовать размер шрифта меньше";
+

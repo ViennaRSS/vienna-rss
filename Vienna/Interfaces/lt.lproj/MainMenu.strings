@@ -1,0 +1,465 @@
+/* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg"; */
+"2S3-dG-ZPg.title" = "Daugiau stilių…";
+
+/* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "4ih-vj-fsk"; */
+"4ih-vj-fsk.title" = "Patikrinti gramatiką ir rašybą";
+
+/* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
+"5.title" = "Visus iškelti į priekį";
+
+/* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1"; */
+"6yn-y8-lF1.title" = "Atnaujinti visas prenumeratas";
+
+/* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8Z3-Bg-ry2"; */
+"8Z3-Bg-ry2.title" = "Pažymėta";
+
+/* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
+"19.title" = "Langas";
+
+/* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
+"23.title" = "Sumažinti";
+
+/* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
+"24.title" = "Langas";
+
+/* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "27s-E3-FHd"; */
+"27s-E3-FHd.title" = "Automatiškai taisyti rašybą";
+
+/* Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58"; */
+"58.title" = "Apie programą Vienna";
+
+/* Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "77"; */
+"77.title" = "Puslapio nustatymai…";
+
+/* Class = "NSMenuItem"; title = "Print…"; ObjectID = "78"; */
+"78.title" = "Spausdinti…";
+
+/* Class = "NSMenu"; title = "File"; ObjectID = "81"; */
+"81.title" = "Failas";
+
+/* Class = "NSMenuItem"; title = "File"; ObjectID = "83"; */
+"83.title" = "Failas";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "103"; */
+"103.title" = "Pagalba";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "106"; */
+"106.title" = "Pagalba";
+
+/* Class = "NSMenuItem"; title = "Vienna Help"; ObjectID = "111"; */
+"111.title" = "Programos Vienna pagalba";
+
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
+"129.title" = "Nuostatos...";
+
+/* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
+"130.title" = "Paslaugos";
+
+/* Class = "NSMenuItem"; title = "Services"; ObjectID = "131"; */
+"131.title" = "Paslaugos";
+
+/* Class = "NSMenuItem"; title = "Hide Vienna"; ObjectID = "134"; */
+"134.title" = "Slėpti programą";
+
+/* Class = "NSMenuItem"; title = "Quit Vienna"; ObjectID = "136"; */
+"136.title" = "Uždaryti programą Vienna";
+
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
+"145.title" = "Slėpti kitus";
+
+/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
+"150.title" = "Rodyti visus";
+
+/* Class = "NSMenuItem"; title = "Find…"; ObjectID = "154"; */
+"154.title" = "Rasti…";
+
+/* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "155"; */
+"155.title" = "Peršokti į pasirinktą vietą";
+
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "157"; */
+"157.title" = "Kopijuoti";
+
+/* Class = "NSMenuItem"; title = "Undo"; ObjectID = "158"; */
+"158.title" = "Atšaukti";
+
+/* Class = "NSMenu"; title = "Find"; ObjectID = "159"; */
+"159.title" = "Rasti";
+
+/* Class = "NSMenuItem"; title = "Cut"; ObjectID = "160"; */
+"160.title" = "Iškirpti";
+
+/* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "161"; */
+"161.title" = "Ieškoti pagal pasirinktą tekstą";
+
+/* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "162"; */
+"162.title" = "Rasti praeitą";
+
+/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "163"; */
+"163.title" = "Keisti";
+
+/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "164"; */
+"164.title" = "Ištrinti";
+
+/* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "167"; */
+"167.title" = "Rasti kitą";
+
+/* Class = "NSMenuItem"; title = "Find"; ObjectID = "168"; */
+"168.title" = "Rasti";
+
+/* Class = "NSMenu"; title = "Edit"; ObjectID = "169"; */
+"169.title" = "Keisti";
+
+/* Class = "NSMenuItem"; title = "Paste"; ObjectID = "171"; */
+"171.title" = "Įklijuoti";
+
+/* Class = "NSMenuItem"; title = "Select All"; ObjectID = "172"; */
+"172.title" = "Pasirinkti viską";
+
+/* Class = "NSMenuItem"; title = "Redo"; ObjectID = "173"; */
+"173.title" = "Grąžinti";
+
+/* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "197"; */
+"197.title" = "Keisti mastelį";
+
+/* Class = "NSMenuItem"; title = "View"; ObjectID = "235"; */
+"235.title" = "Rodymas";
+
+/* Class = "NSMenu"; title = "View"; ObjectID = "237"; */
+"237.title" = "Rodymas";
+
+/* Class = "NSMenu"; title = "Article"; ObjectID = "300"; */
+"300.title" = "Straipsnis";
+
+/* Class = "NSMenuItem"; title = "Article"; ObjectID = "301"; */
+"301.title" = "Straipsnis";
+
+/* Class = "NSMenuItem"; title = "Next Unread"; ObjectID = "344"; */
+"344.title" = "Kitas neperskaitytas";
+
+/* Class = "NSMenuItem"; title = "Sort By"; ObjectID = "387"; */
+"387.title" = "Rūšiuoti pagal";
+
+/* Class = "NSMenu"; title = "Sort By"; ObjectID = "388"; */
+"388.title" = "Rūšiuoti pagal";
+
+/* Class = "NSMenuItem"; title = "Activity Window"; ObjectID = "402"; */
+"402.title" = "Veiklos langas";
+
+/* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "406"; */
+"406.title" = "Atnaujinti visas prenumeratas";
+
+/* Class = "NSMenuItem"; title = "Back"; ObjectID = "422"; */
+"422.title" = "Atgal";
+
+/* Class = "NSMenuItem"; title = "Forward"; ObjectID = "423"; */
+"423.title" = "Pirmyn";
+
+/* Class = "NSMenuItem"; title = "Columns"; ObjectID = "442"; */
+"442.title" = "Stulpeliai";
+
+/* Class = "NSMenu"; title = "Columns"; ObjectID = "443"; */
+"443.title" = "Stulpeliai";
+
+/* Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "574"; */
+"574.title" = "Naujas išmanusis aplankas…";
+
+/* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "604"; */
+"604.title" = "Atnaujinti pasirinktas prenumeratas";
+
+/* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "690"; */
+"690.title" = "Nauja prenumerata…";
+
+/* Class = "NSMenuItem"; title = "Import Subscriptions…"; ObjectID = "780"; */
+"780.title" = "Importuoti prenumeratas…";
+
+/* Class = "NSMenuItem"; title = "Export Subscriptions…"; ObjectID = "781"; */
+"781.title" = "Eksportuoti prenumeratas…";
+
+/* Class = "NSMenuItem"; title = "Mark Unread"; ObjectID = "789"; */
+"789.title" = "Pažymėti kaip neskaitytą";
+
+/* Class = "NSMenuItem"; title = "Mark Flagged"; ObjectID = "790"; */
+"790.title" = "Pažymėti";
+
+/* Class = "NSMenuItem"; title = "New Group Folder…"; ObjectID = "806"; */
+"806.title" = "Naujas grupių aplankas…";
+
+/* Class = "NSMenuItem"; title = "Style"; ObjectID = "826"; */
+"826.title" = "Stilius";
+
+/* Class = "NSMenu"; title = "Style"; ObjectID = "827"; */
+"827.title" = "Stilius";
+
+/* Class = "NSMenuItem"; title = "Stop Refreshing"; ObjectID = "858"; */
+"858.title" = "Sustabdyti atnaujinimą";
+
+/* Class = "NSMenuItem"; title = "Vienna Web Site"; ObjectID = "929"; */
+"929.title" = "Vienna interneto svetainė";
+
+/* Class = "NSMenuItem"; title = "Close Window"; ObjectID = "935"; */
+"935.title" = "Uždaryti langą";
+
+/* Class = "NSMenuItem"; title = "Main Window"; ObjectID = "940"; */
+"940.title" = "Pagrindinis langas";
+
+/* Class = "NSMenuItem"; title = "Empty Trash"; ObjectID = "961"; */
+"961.title" = "Ištrinti šiukšles";
+
+/* Class = "NSMenuItem"; title = "Previous Tab"; ObjectID = "1008"; */
+"1008.title" = "Ankstesnis skirtukas";
+
+/* Class = "NSMenuItem"; title = "Next Tab"; ObjectID = "1009"; */
+"1009.title" = "Kitas skirtukas";
+
+/* Class = "NSMenuItem"; title = "Close Tab"; ObjectID = "1023"; */
+"1023.title" = "Uždaryti skirtuką";
+
+/* Class = "NSMenuItem"; title = "Reload Page"; ObjectID = "1025"; */
+"1025.title" = "Atnaujinti puslapį";
+
+/* Class = "NSMenuItem"; title = "Stop Reloading Page"; ObjectID = "1027"; */
+"1027.title" = "Nebeperkrovinėti puslapio";
+
+/* Class = "NSMenuItem"; title = "Close All Tabs"; ObjectID = "1036"; */
+"1036.title" = "Uždaryti visas korteles";
+
+/* Class = "NSMenuItem"; title = "Open Article Page"; ObjectID = "1040"; */
+"1040.title" = "Atidaryti straipsnio svetainę";
+
+/* Class = "NSMenuItem"; title = "Restore Article"; ObjectID = "1044"; */
+"1044.title" = "Atstatyti straipsnius";
+
+/* Class = "NSMenuItem"; title = "Downloads"; ObjectID = "1061"; */
+"1061.title" = "Parsisiųsti failai";
+
+/* Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067"; */
+"1067.title" = "Straipsnio svetainę atidaryti išorinėje naršyklėje";
+
+/* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
+"1073.title" = "Siųsti nuorodą el. paštu";
+
+/* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
+"1084.title" = "Didesnis tekstas";
+
+/* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
+"1085.title" = "Mažesnis tekstas";
+
+/* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
+"1101.title" = "Atidaryti internete…";
+
+/* Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "1104"; */
+"1104.title" = "Ieškoti atnaujinimų";
+
+/* Class = "NSMenuItem"; title = "Refresh Folder Images"; ObjectID = "1106"; */
+"1106.title" = "Atnaujinti aplanko piešinukus";
+
+/* Class = "NSMenuItem"; title = "Layout"; ObjectID = "1108"; */
+"1108.title" = "Išdėstymas";
+
+/* Class = "NSMenu"; title = "Layout"; ObjectID = "1109"; */
+"1109.title" = "Išdėstymas";
+
+/* Class = "NSMenuItem"; title = "Horizontal"; ObjectID = "1110"; */
+"1110.title" = "Horizontalus";
+
+/* Class = "NSMenuItem"; title = "Vertical"; ObjectID = "1116"; */
+"1116.title" = "Vertikalus";
+
+/* Class = "NSMenuItem"; title = "Filter By"; ObjectID = "1117"; */
+"1117.title" = "Filtruoti pagal";
+
+/* Class = "NSMenu"; title = "Filter By"; ObjectID = "1118"; */
+"1118.title" = "Filtruoti pagal";
+
+/* Class = "NSMenuItem"; title = "Keyboard Shortcuts"; ObjectID = "1146"; */
+"1146.title" = "Spartieji klavišai";
+
+/* Class = "NSMenuItem"; title = "Unified"; ObjectID = "1160"; */
+"1160.title" = "Suvienodintas";
+
+/* Class = "NSMenuItem"; title = "Folder"; ObjectID = "1177"; */
+"1177.title" = "Aplankas";
+
+/* Class = "NSMenu"; title = "Folder"; ObjectID = "1178"; */
+"1178.title" = "Aplankas";
+
+/* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "1180"; */
+"1180.title" = "Keisti…";
+
+/* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "1181"; */
+"1181.title" = "Pervadinti…";
+
+/* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "1184"; */
+"1184.title" = "Ištrinti…";
+
+/* Class = "NSMenuItem"; title = "Skip Folder"; ObjectID = "1186"; */
+"1186.title" = "Praleisti aplanką";
+
+/* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "1187"; */
+"1187.title" = "Viską pažymėti kaip perskaityta";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "1191"; */
+"1191.title" = "Atidaryti prenumeratos svetainę";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "1192"; */
+"1192.title" = "Prenumeratos svetainę atidaryti išorinėje naršyklėje";
+
+/* Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "1195"; */
+"1195.title" = "Pažymėti visas prenumeratas kaip skaitytas";
+
+/* Class = "NSMenuItem"; title = "Delete Article"; ObjectID = "1198"; */
+"1198.title" = "Ištrinti straipsnį";
+
+/* Class = "NSMenuItem"; title = "Open New Tab"; ObjectID = "1214"; */
+"1214.title" = "Atidaryti naują skirtuką";
+
+/* Class = "NSMenuItem"; title = "Download Enclosure"; ObjectID = "1216"; */
+"1216.title" = "Parsisiųsti įtalpintą turinį";
+
+/* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
+"1257.title" = "Keisti įrankių juostą…";
+
+/* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
+"1258.title" = "Slėpti įrankių juostą";
+
+/* Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259"; */
+"1259.title" = "Slėpti būsenos juostą";
+
+/* Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "1325"; */
+"1325.title" = "Rodyti filtro juostą";
+
+/* Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327"; */
+"1327.title" = "Ieškoti straipsnių";
+
+/* Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336"; */
+"1336.title" = "Rūšiuoti pagal";
+
+/* Class = "NSMenu"; title = "Order By"; ObjectID = "1337"; */
+"1337.title" = "Rūšiuoti pagal";
+
+/* Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338"; */
+"1338.title" = "Rankiniu būdu";
+
+/* Class = "NSMenuItem"; title = "Name"; ObjectID = "1339"; */
+"1339.title" = "Pavadinimas";
+
+/* Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408"; */
+"1408.title" = "Atsisakyti prenumeratos";
+
+/* Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409"; */
+"1409.title" = "Gauti informacijos…";
+
+/* Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413"; */
+"1413.title" = "Dabartinį stilių naudoti straipsniuose";
+
+/* Class = "NSMenuItem"; title = "Use Web Page for Articles"; ObjectID = "1415"; */
+"1415.title" = "Straipsnius rodyti kaip interneto puslapius";
+
+/* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "1425"; */
+"1425.title" = "Priverstinai atnaujinti pasirinktas prenumeratas iš Open Reader";
+
+/* Class = "NSMenuItem"; title = "Update Subscriptions From Open Reader"; ObjectID = "1428"; */
+"1428.title" = "Atnaujinti Open Reader prenumeratas";
+
+/* Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458"; */
+"1458.title" = "Perindeksuoti duomenų bazę";
+
+/* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "bd7-qY-ofB"; */
+"bd7-qY-ofB.title" = "Teksto pakeitimas";
+
+/* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "BUc-Ki-OOg"; */
+"BUc-Ki-OOg.title" = "Neperskaityti arba pažymėti";
+
+/* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI"; */
+"CGp-H4-UaI.title" = "Paskutines 48 valandas";
+
+/* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "cK9-Df-xA3"; */
+"cK9-Df-xA3.title" = "Pradėti kalbėti";
+
+/* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "CLG-Dq-a59"; */
+"CLG-Dq-a59.title" = "Rodyti rašybą ir gramatiką";
+
+/* Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi"; */
+"ecl-HO-Kpi.title" = "Pažymėti visas prenumeratas kaip skaitytas";
+
+/* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "eVb-Qt-XJb"; */
+"eVb-Qt-XJb.title" = "Teksto pakeitimai";
+
+/* Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI"; */
+"fad-Nj-OFI.title" = "Rašyba";
+
+/* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "fbd-ZI-tZW"; */
+"fbd-ZI-tZW.title" = "Patikrinti dabar";
+
+/* Class = "NSMenu"; title = "Speech"; ObjectID = "G6k-0L-moc"; */
+"G6k-0L-moc.title" = "Kalba";
+
+/* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "gbo-AM-wcF"; */
+"gbo-AM-wcF.title" = "Baigti kalbėti";
+
+/* Class = "NSMenuItem"; title = "Data Detectors"; ObjectID = "idm-wm-h8z"; */
+"idm-wm-h8z.title" = "Duomenų detektoriai";
+
+/* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "joR-kW-sIU"; */
+"joR-kW-sIU.title" = "Transformacijos";
+
+/* Class = "NSMenuItem"; title = "Speech"; ObjectID = "JXn-SB-3t2"; */
+"JXn-SB-3t2.title" = "Kalba";
+
+/* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "kCi-pf-mkc"; */
+"kCi-pf-mkc.title" = "Išmaniosios kabutės";
+
+/* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "l8F-tb-7E0"; */
+"l8F-tb-7E0.title" = "Rašyba ir gramatika";
+
+/* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN"; */
+"MHF-D4-pRN.title" = "Paversti didžiosiomis";
+
+/* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
+"pKl-6f-Hlc.title" = "Pažymėti kaip skaitytą";
+
+/* Class = "NSMenu"; title = "Substitutions"; ObjectID = "QEb-Bm-CPN"; */
+"QEb-Bm-CPN.title" = "Teksto pakeitimai";
+
+/* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "qzH-De-act"; */
+"qzH-De-act.title" = "Išmanusis iškirpti/įklijuoti";
+
+/* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7"; */
+"rNG-xr-3x7.title" = "Neperskaityti straipsniai";
+
+/* Class = "NSMenuItem"; title = "Article List"; ObjectID = "Rs9-r3-soc"; */
+"Rs9-r3-soc.title" = "Straipsnių sąrašas";
+
+/* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk"; */
+"RtQ-eP-bfk.title" = "Išmanieji brūkšniai";
+
+/* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "t1E-6n-jtA"; */
+"t1E-6n-jtA.title" = "Visi straipsniai";
+
+/* Class = "NSMenuItem"; title = "Today"; ObjectID = "t34-de-pMs"; */
+"t34-de-pMs.title" = "Šiandien";
+
+/* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "tfv-fu-HFM"; */
+"tfv-fu-HFM.title" = "Renkant tekstą, tikrinti rašybą";
+
+/* Class = "NSMenu"; title = "Transformations"; ObjectID = "UFF-Fn-8ti"; */
+"UFF-Fn-8ti.title" = "Transformacijos";
+
+/* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "v3R-CV-0b9"; */
+"v3R-CV-0b9.title" = "Pradėti didžiosiomis";
+
+/* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "w4Q-ne-FPI"; */
+"w4Q-ne-FPI.title" = "Išmaniosios nuorodos";
+
+/* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "wnc-vZ-fO4"; */
+"wnc-vZ-fO4.title" = "Rodyti teksto pakeitimus";
+
+/* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm"; */
+"wqh-Jc-gBm.title" = "Paskutinis atnaujinimas";
+
+/* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "xpF-dh-E2m"; */
+"xpF-dh-E2m.title" = "Paversti mažosiomis";
+
+/* Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "ZCa-7v-54l"; */
+"ZCa-7v-54l.title" = "Rodyti per visą ekraną";
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Name</key>
+	<string>ShareWithPinboard</string>
+	<key>Type</key>
+	<string>Link</string>
+	<key>URL</key>
+	<string>https://pinboard.in/add?showtags=yes&amp;url=$ArticleLink$&amp;description=&amp;title=$ArticleTitle$</string>
+	<key>Default</key>
+	<false/>
+	<key>FriendlyName</key>
+	<string>Pinboard</string>
+	<key>Tooltip</key>
+	<string>Share the current article on Pinboard</string>
+	<key>ButtonImage</key>
+	<string>pinboardButton</string>
+	<key>ButtonImage@2x</key>
+	<string>pinboardButton@2x</string>
+	<key>MenuPath</key>
+	<string>Share With Pinboard</string>
+</dict>
+</plist>

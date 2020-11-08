@@ -1,0 +1,162 @@
+/* Class = "NSMenuItem"; title = "Today"; ObjectID = "3tM-J3-kmf"; */
+"3tM-J3-kmf.title" = "Hoje";
+
+/* Class = "NSToolbarItem"; label = "Empty Trash"; ObjectID = "4c1-NR-ofo"; */
+"4c1-NR-ofo.label" = "Esvaziar Lixo";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Empty Trash"; ObjectID = "4c1-NR-ofo"; */
+"4c1-NR-ofo.paletteLabel" = "Esvaziar Lixo";
+
+/* Class = "NSToolbarItem"; toolTip = "Delete all articles in the trash"; ObjectID = "4c1-NR-ofo"; */
+"4c1-NR-ofo.toolTip" = "Apagor todos os artigos que estão no lixo";
+
+/* Class = "NSToolbarItem"; label = "Get Info"; ObjectID = "7iy-IN-8oG"; */
+"7iy-IN-8oG.label" = "Obter Informação";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Get Info"; ObjectID = "7iy-IN-8oG"; */
+"7iy-IN-8oG.paletteLabel" = "Obter Informação";
+
+/* Class = "NSToolbarItem"; toolTip = "See information about the selected subscription"; ObjectID = "7iy-IN-8oG"; */
+"7iy-IN-8oG.toolTip" = "Ver informação sobre a subscrição seleccionada";
+
+/* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8LJ-RZ-pfu"; */
+"8LJ-RZ-pfu.title" = "Marcados";
+
+/* Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T"; */
+"10h-xf-C6T.label" = "Enviar Link";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T"; */
+"10h-xf-C6T.paletteLabel" = "Enviar Link";
+
+/* Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T"; */
+"10h-xf-C6T.toolTip" = "Enviar um link para o artigo ou website atual";
+
+/* Class = "NSSearchField"; ibShadowedToolTip = "Filter displayed articles by matching text"; ObjectID = "1304"; */
+"1304.ibShadowedToolTip" = "Filtrar artigos mostrados de acordo com o texto";
+
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "Filter articles"; ObjectID = "1306"; */
+"1306.ibShadowedToolTip" = "Filtrar artigos";
+
+/* Class = "NSButton"; ibExternalAccessibilityDescription = "Close the filter bar"; ObjectID = "1313"; */
+"1313.ibExternalAccessibilityDescription" = "Fechar a barra de filtragem";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Close the filter bar"; ObjectID = "1313"; */
+"1313.ibShadowedToolTip" = "Fechar a barra de filtragem";
+
+/* Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377"; */
+"1377.title" = "Filtrar por:";
+
+/* Class = "NSToolbarItem"; label = "Style"; ObjectID = "azL-oz-mJL"; */
+"azL-oz-mJL.label" = "Estilo";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Style"; ObjectID = "azL-oz-mJL"; */
+"azL-oz-mJL.paletteLabel" = "Estilo";
+
+/* Class = "NSToolbarItem"; toolTip = "Display the list of available styles"; ObjectID = "azL-oz-mJL"; */
+"azL-oz-mJL.toolTip" = "Mostrar lista de estilos disponíveis";
+
+/* Class = "NSToolbarItem"; label = "Add"; ObjectID = "CPA-Ha-aj1"; */
+"CPA-Ha-aj1.label" = "Adicionar";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1"; */
+"CPA-Ha-aj1.paletteLabel" = "Adicionar";
+
+/* Class = "NSToolbarItem"; label = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
+"fpY-CJ-hKU.label" = "Próximo Não Lido";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
+"fpY-CJ-hKU.paletteLabel" = "Próximo Não Lido";
+
+/* Class = "NSToolbarItem"; toolTip = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
+"fpY-CJ-hKU.toolTip" = "Próximo Não Lido";
+
+/* Class = "NSToolbarItem"; label = "Back"; ObjectID = "gOG-UJ-Pin"; */
+"gOG-UJ-Pin.label" = "Voltar";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Back"; ObjectID = "gOG-UJ-Pin"; */
+"gOG-UJ-Pin.paletteLabel" = "Voltar";
+
+/* Class = "NSToolbarItem"; toolTip = "Back"; ObjectID = "gOG-UJ-Pin"; */
+"gOG-UJ-Pin.toolTip" = "Voltar";
+
+/* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g"; */
+"Hs0-hu-A2g.title" = "Actualizar Subscrições Seleccionadas";
+
+/* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "JT2-Q7-gRj"; */
+"JT2-Q7-gRj.title" = "Todos os Artigos";
+
+/* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "l14-tu-w7l"; */
+"l14-tu-w7l.title" = "Renomear…";
+
+/* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm"; */
+"MaO-r1-tcm.title" = "Mais Estilos…";
+
+/* Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys"; */
+"Nmd-zx-Dys.label" = "Actualizar";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Refresh"; ObjectID = "Nmd-zx-Dys"; */
+"Nmd-zx-Dys.paletteLabel" = "Actualizar";
+
+/* Class = "NSToolbarItem"; toolTip = "Refresh all your subscriptions"; ObjectID = "Nmd-zx-Dys"; */
+"Nmd-zx-Dys.toolTip" = "Actualizar todas as subscrições";
+
+/* Class = "NSToolbarItem"; label = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
+"OIA-vb-5jR.label" = "Procurar Artigos";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
+"OIA-vb-5jR.paletteLabel" = "Procurar Artigos";
+
+/* Class = "NSToolbarItem"; toolTip = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
+"OIA-vb-5jR.toolTip" = "Procurar Artigos";
+
+/* Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "Pqr-dM-SQQ"; */
+"Pqr-dM-SQQ.title" = "Nova Pasta Inteligente…";
+
+/* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "psA-wp-PcZ"; */
+"psA-wp-PcZ.title" = "Nova Subscrição…";
+
+/* Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija"; */
+"RaH-Yu-Ija.title" = "Nova pasta…";
+
+/* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "sDP-Ni-g3a"; */
+"sDP-Ni-g3a.title" = "Artigos Não Lidos";
+
+/* Class = "NSToolbarItem"; label = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
+"SoG-b2-O1S.label" = "Avançar Pasta";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
+"SoG-b2-O1S.paletteLabel" = "Avançar Pasta";
+
+/* Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
+"SoG-b2-O1S.toolTip" = "Avançar Pasta";
+
+/* Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU"; */
+"TSQ-UW-4gU.label" = "Acção";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Action"; ObjectID = "TSQ-UW-4gU"; */
+"TSQ-UW-4gU.paletteLabel" = "Acção";
+
+/* Class = "NSToolbarItem"; toolTip = "Additional actions for the selected folder"; ObjectID = "TSQ-UW-4gU"; */
+"TSQ-UW-4gU.toolTip" = "Acções adicionais para a pasta seleccionada";
+
+/* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "vOQ-xo-w8E"; */
+"vOQ-xo-w8E.title" = "Editar…";
+
+/* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "xNW-zC-IMZ"; */
+"xNW-zC-IMZ.title" = "Marcar Todos os Artigos como Lidos";
+
+/* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "xVH-W7-Br4"; */
+"xVH-W7-Br4.title" = "Última Actualização";
+
+/* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "Xw6-KX-rhd"; */
+"Xw6-KX-rhd.title" = "Últimas 48 horas";
+
+/* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f"; */
+"Y0d-K7-46f.title" = "Obter Informação";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2"; */
+"Zu1-zW-uo2.title" = "Abrir Página da Subscrição";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "ZVp-Nv-0jh"; */
+"ZVp-Nv-0jh.title" = "Abrir Página da Subscrição no Browser Externo";
+

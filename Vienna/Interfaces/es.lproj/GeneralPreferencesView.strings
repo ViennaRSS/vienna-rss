@@ -1,0 +1,81 @@
+/* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "1Ll-uG-QWh"; */
+"1Ll-uG-QWh.title" = "Cada 15 minutos";
+
+/* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "2oy-1i-QQP"; */
+"2oy-1i-QQP.title" = "Después del comando \"No leído siguiente\"";
+
+/* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "5VQ-jP-2rL"; */
+"5VQ-jP-2rL.title" = "Cada 30 minutos";
+
+/* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "6wU-yO-cnV"; */
+"6wU-yO-cnV.title" = "Cada 2 horas";
+
+/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "7e3-Hu-RB5"; */
+"7e3-Hu-RB5.title" = "Mostrar número de no leídos en el icono de la aplicación";
+
+/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "BbI-0A-zEG"; */
+"BbI-0A-zEG.title" = "Cuando se recuperan nuevos artículos no leídos:";
+
+/* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "ewU-JH-fMC"; */
+"ewU-JH-fMC.title" = "Buscar nuevos artículos:";
+
+/* Class = "NSMenuItem"; title = "Other…"; ObjectID = "FiK-E7-RnG"; */
+"FiK-E7-RnG.title" = "Otra…";
+
+/* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "geD-Ws-mQm"; */
+"geD-Ws-mQm.title" = "Guardar archivos descargados en:";
+
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "gi4-ao-0yS"; */
+"gi4-ao-0yS.title" = "Animar icono de la aplicación";
+
+/* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "GnT-xT-rAZ"; */
+"GnT-xT-rAZ.title" = "Buscar nuevas versiones de Vienna al inicio";
+
+/* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "gnX-dW-XUD"; */
+"gnX-dW-XUD.title" = "Cada 3 horas";
+
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "H9Q-du-oax"; */
+"H9Q-du-oax.title" = "Manualmente";
+
+/* Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "IMa-1h-lIO"; */
+"IMa-1h-lIO.title" = "Cada 6 horas";
+
+/* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "JDV-ek-xja"; */
+"JDV-ek-xja.title" = "Después de un breve instante";
+
+/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1"; */
+"JN6-lj-bQ1.title" = "Mostrar en la barra de menús";
+
+/* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "k6Y-ib-PGb"; */
+"k6Y-ib-PGb.title" = "Mover artículos a la papelera:";
+
+/* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG"; */
+"kGA-Sa-RLG.title" = "Lector RSS predeterminado:";
+
+/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl"; */
+"meo-78-YOl.title" = "Marcar artículos actualizados como nuevos";
+
+/* Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0"; */
+"OID-qF-Pp0.title" = "Buscar últimas versiones beta";
+
+/* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "oVW-ee-uJT"; */
+"oVW-ee-uJT.title" = "Cada 5 minutos";
+
+/* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "pjg-Ze-H3l"; */
+"pjg-Ze-H3l.title" = "Abrir nuevos enlaces en segundo plano";
+
+/* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "pXX-MI-tJX"; */
+"pXX-MI-tJX.title" = "Buscar nuevos artículos al inicio";
+
+/* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
+"qeb-at-hYb.title" = "Actualizaciones:";
+
+/* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "sCl-hz-PFF"; */
+"sCl-hz-PFF.title" = "Marcar artículo actual como leído:";
+
+/* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "sSj-zI-6RY"; */
+"sSj-zI-6RY.title" = "Cada hora";
+
+/* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "YoM-Gv-hXn"; */
+"YoM-Gv-hXn.title" = "Abrir enlaces en un navegador externo";
+

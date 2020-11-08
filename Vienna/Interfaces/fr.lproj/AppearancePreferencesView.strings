@@ -1,0 +1,21 @@
+/* Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "71S-pg-AjX"; */
+"71S-pg-AjX.title" = "Lors de l'affichage d'articles ou de pages Web:";
+
+/* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "auD-UC-Pij"; */
+"auD-UC-Pij.title" = "Liste des articles:";
+
+/* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "B5v-p5-vrf"; */
+"B5v-p5-vrf.title" = "Liste des dossiers:";
+
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "BDw-v3-mpF"; */
+"BDw-v3-mpF.title" = "Sélectionner…";
+
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "gGT-YP-aum"; */
+"gGT-YP-aum.title" = "Sélectionner…";
+
+/* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "MEV-HA-bdL"; */
+"MEV-HA-bdL.title" = "Afficher les icônes de flux dans la liste des dossiers";
+
+/* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "zfJ-Ge-Cxe"; */
+"zfJ-Ge-Cxe.title" = "Ne jamais utiliser de police de taille inférieure à";
+

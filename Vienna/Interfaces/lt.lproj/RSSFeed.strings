@@ -1,0 +1,30 @@
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "102"; */
+"102.title" = "Atšaukti";
+
+/* Class = "NSButtonCell"; title = "Subscribe"; ObjectID = "103"; */
+"103.title" = "Prenumeruoti";
+
+/* Class = "NSTextFieldCell"; title = "Source:"; ObjectID = "104"; */
+"104.title" = "Šaltinis:";
+
+/* Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106"; */
+"106.title" = "Sukurti naują prenumeratą";
+
+/* Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107"; */
+"107.title" = "Čia įveskite naujienų prenumeratos (feed) nuorodą. Arba pasirinkite šaltinį iš sąrašo, kad prenumeratą rastumėte pagal pavadinimą.";
+
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "Nuoroda:";
+
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "111"; */
+"111.title" = "Užsaugoti";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "112"; */
+"112.title" = "Atšaukti";
+
+/* Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114"; */
+"114.title" = "Keisti prenumeratą";
+
+/* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
+"116.title" = "Prenumeruoti Open Reader serveryje";
+

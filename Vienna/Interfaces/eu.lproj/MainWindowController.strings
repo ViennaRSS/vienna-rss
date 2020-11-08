@@ -1,0 +1,120 @@
+/* Class = "NSMenuItem"; title = "Today"; ObjectID = "3tM-J3-kmf"; */
+"3tM-J3-kmf.title" = "Gaur";
+
+/* Class = "NSToolbarItem"; label = "Empty Trash"; ObjectID = "4c1-NR-ofo"; */
+"4c1-NR-ofo.label" = "Zakarrontzia Hustu";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Empty Trash"; ObjectID = "4c1-NR-ofo"; */
+"4c1-NR-ofo.paletteLabel" = "Zakarrontzia Hustu";
+
+/* Class = "NSToolbarItem"; label = "Get Info"; ObjectID = "7iy-IN-8oG"; */
+"7iy-IN-8oG.label" = "Informazioa Lortu";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Get Info"; ObjectID = "7iy-IN-8oG"; */
+"7iy-IN-8oG.paletteLabel" = "Informazioa Lortu";
+
+/* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8LJ-RZ-pfu"; */
+"8LJ-RZ-pfu.title" = "Adierazlea";
+
+/* Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T"; */
+"10h-xf-C6T.label" = "Bidali Esteka";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T"; */
+"10h-xf-C6T.paletteLabel" = "Bidali Esteka";
+
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "Filter articles"; ObjectID = "1306"; */
+"1306.ibShadowedToolTip" = "Filtratu artikuluak";
+
+/* Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377"; */
+"1377.title" = "Honekin Filtratu:";
+
+/* Class = "NSToolbarItem"; label = "Style"; ObjectID = "azL-oz-mJL"; */
+"azL-oz-mJL.label" = "Estiloa";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Style"; ObjectID = "azL-oz-mJL"; */
+"azL-oz-mJL.paletteLabel" = "Estiloa";
+
+/* Class = "NSToolbarItem"; label = "Add"; ObjectID = "CPA-Ha-aj1"; */
+"CPA-Ha-aj1.label" = "Gehitu";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1"; */
+"CPA-Ha-aj1.paletteLabel" = "Gehitu";
+
+/* Class = "NSToolbarItem"; label = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
+"fpY-CJ-hKU.label" = "Hurrengo Irakurri Gabea";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
+"fpY-CJ-hKU.paletteLabel" = "Hurrengo Irakurri Gabea";
+
+/* Class = "NSToolbarItem"; toolTip = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
+"fpY-CJ-hKU.toolTip" = "Hurrengo Irakurri Gabea";
+
+/* Class = "NSToolbarItem"; label = "Back"; ObjectID = "gOG-UJ-Pin"; */
+"gOG-UJ-Pin.label" = "Atzera";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Back"; ObjectID = "gOG-UJ-Pin"; */
+"gOG-UJ-Pin.paletteLabel" = "Atzera";
+
+/* Class = "NSToolbarItem"; toolTip = "Back"; ObjectID = "gOG-UJ-Pin"; */
+"gOG-UJ-Pin.toolTip" = "Atzera";
+
+/* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g"; */
+"Hs0-hu-A2g.title" = "Eguneratu Aukeratutako Harpidetzak";
+
+/* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "JT2-Q7-gRj"; */
+"JT2-Q7-gRj.title" = "Artikulu Guztiak";
+
+/* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "l14-tu-w7l"; */
+"l14-tu-w7l.title" = "Berrizendatu…";
+
+/* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm"; */
+"MaO-r1-tcm.title" = "Estilo gehiago…";
+
+/* Class = "NSToolbarItem"; toolTip = "Refresh all your subscriptions"; ObjectID = "Nmd-zx-Dys"; */
+"Nmd-zx-Dys.toolTip" = "Harpidetza guztiak eguneratu";
+
+/* Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "Pqr-dM-SQQ"; */
+"Pqr-dM-SQQ.title" = "Direktorio Adimendu Berria…";
+
+/* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "psA-wp-PcZ"; */
+"psA-wp-PcZ.title" = "Harpidetza Berria…";
+
+/* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Rdq-QU-3hM"; */
+"Rdq-QU-3hM.title" = "Ezabatu…";
+
+/* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "sDP-Ni-g3a"; */
+"sDP-Ni-g3a.title" = "Irakurri Gabeko Artikuluak";
+
+/* Class = "NSToolbarItem"; label = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
+"SoG-b2-O1S.label" = "Direktorioa Saihestu";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
+"SoG-b2-O1S.paletteLabel" = "Direktorioa Saihestu";
+
+/* Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
+"SoG-b2-O1S.toolTip" = "Direktorioa Saihestu";
+
+/* Class = "NSToolbarItem"; toolTip = "Additional actions for the selected folder"; ObjectID = "TSQ-UW-4gU"; */
+"TSQ-UW-4gU.toolTip" = "Bestelako ekintzak aukeratutako direktorioarentzat";
+
+/* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "vOQ-xo-w8E"; */
+"vOQ-xo-w8E.title" = "Editatu…";
+
+/* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "xNW-zC-IMZ"; */
+"xNW-zC-IMZ.title" = "Artikulu Guztiak Irakurrita Moduan Jarri";
+
+/* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "xVH-W7-Br4"; */
+"xVH-W7-Br4.title" = "Azken Eguneratzea";
+
+/* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "Xw6-KX-rhd"; */
+"Xw6-KX-rhd.title" = "Azken 48 orduak";
+
+/* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f"; */
+"Y0d-K7-46f.title" = "Informazioa Lortu";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2"; */
+"Zu1-zW-uo2.title" = "Ireki Harpidetzaren Web Orri Nagusia";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "ZVp-Nv-0jh"; */
+"ZVp-Nv-0jh.title" = "Ireki Harpidetzaren Web Orri Nagusia Kanpo Nabegatzailean";
+

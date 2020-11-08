@@ -1,16 +1,17 @@
 language: objective-c
-osx_image: xcode8.3
-xcode_workspace: Vienna.xcworkspace
+osx_image: xcode11.1
+xcode_project: Vienna.xcodeproj
 xcode_scheme: Vienna
 
-script: xcodebuild -workspace "$TRAVIS_XCODE_WORKSPACE" -scheme "$TRAVIS_XCODE_SCHEME" test | xcpretty
+cache:
+  carthage: true
+  directories:
+    - Carthage/Build
 
-notifications:
-  webhooks:
-      urls:
-      on_failure: always
-      on_start: never
+install:
+  - brew outdated carthage || brew upgrade carthage
+  - brew outdated swiftlint || brew upgrade swiftlint
 
-# for container-based infrastructure
-sudo: false
-cache: cocoapods
+before_script:
+  - carthage version
+  - swiftlint version

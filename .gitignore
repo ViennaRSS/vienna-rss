@@ -61,6 +61,7 @@ DerivedData/
 # NB: slash on the end, so we only remove the FOLDER, not any files that were badly named "build"
 
 build/
+Build/
 
 
 #####
@@ -169,9 +170,14 @@ xcuserdata
 # Vienna RSS specific files
 #
 # Specific to each developer : codesign identity and private key location
-configs/CS-ID.xcconfig
+Scripts/Resources/CS-ID.xcconfig
 # auto-updated by autorevision
-src/autorevision.h
+Vienna/Sources/autorevision.h
 # someone seems to keep personal notes in this file
 .idea
+
+####
+# Carthage
+# Ignore build folder
+Carthage/Build/
 

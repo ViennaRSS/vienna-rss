@@ -1,25 +1,36 @@
 ![Vienna](https://vienna-rss.sourceforge.io/img/vienna_logo.png)
 
-[![Build Status](https://travis-ci.org/ViennaRSS/vienna-rss.svg?branch=master)](https://travis-ci.org/ViennaRSS/vienna-rss) [![Stories in Ready](https://badge.waffle.io/viennarss/vienna-rss.png?label=ready&title=Ready)](https://waffle.io/viennarss/vienna-rss)
+[![Build Status](https://travis-ci.org/ViennaRSS/vienna-rss.svg?branch=master)](https://travis-ci.org/ViennaRSS/vienna-rss)
+[![Crowdin](https://d322cqt584bo4o.cloudfront.net/vienna-rss/localized.svg)](https://crowdin.com/project/vienna-rss)
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/ViennaRSS/Lobby)
 
-[Vienna](http://www.vienna-rss.com) is an RSS/Atom reader for Mac OS X.
+[Vienna](http://www.vienna-rss.com) is an RSS/Atom reader for macOS.
 
 Vienna can connect directly to the websites you want to track.
-Additionally or alternatively, you can also sync with a server supporting the [Open Reader API](http://rss-sync.github.io/Open-Reader-API/rssconsensus/) (an adaptation of the now deceased Google Reader API). Vienna has been successfully tested with BazQux.com, FeedHQ.org, InoReader.com and TheOldReader.com.
+Additionally or alternatively, you can also sync with a server supporting the [Open Reader API](http://rss-sync.github.io/Open-Reader-API/rssconsensus/) (an adaptation of the now deceased Google Reader API). Vienna has been successfully tested with BazQux.com, FreshRSS.org, FeedHQ.org, InoReader.com and TheOldReader.com.
+
+
+Compatibility
+-------------
+
+Since version 3.2, Vienna requires a minimum of OS X 10.9 (Mavericks).
+
+Vienna 3.1.x requires a minimum of OS X 10.8 (Mountain Lion).
+Vienna 3.0.x requires a minimum of OS X 10.6 (Snow Leopard).
+
 
 Installing
 ----------
 
 Admins upload release and test versions at [bintray](https://bintray.com/viennarss/vienna-rss/vienna-rss/) and [Sourceforge](https://sourceforge.net/projects/vienna-rss/files/).  
-Alternatively, you can download releases from the [GitHub Releases page](https://github.com/ViennaRSS/vienna-rss/releases)
+Alternatively, you can download releases from the [GitHub Releases page](https://github.com/ViennaRSS/vienna-rss/releases).
 
 **Homebrew**
 
 Vienna is also available as a Cask for [Homebrew Cask](https://github.com/phinze/homebrew-cask).
-
-    brew cask install vienna
-
-
+```bash
+brew cask install vienna
+```
 
 Getting support
 ---------------
@@ -38,28 +49,15 @@ Contributing
 
 Want to contribute? Great! There are many ways you can, even if you aren't a developer.
 
-### Localizing and translating ###
+### Writing code
 
-We need help keeping Vienna translations up to date into different languages. Apart from English, here are the languages for which a localization effort has started:
+Please check [CONTRIBUTING.md](CONTRIBUTING.md).
 
-* German
-* French
-* Swedish
-* Italian
-* Dutch
-* Traditional Chinese
-* Spanish
-* Japanese
-* Korean
-* Brazilian Portuguese
-* Simplified Chinese
-* Danish
-* Czech
-* Euskara (Basque)
-* Russian
-* Ukrainian
+Vienna now uses [Carthage](https://github.com/Carthage/Carthage) for managing dependencies.
 
-Have a look at current localizations in their respective _.lproj_ folders. While translating, the [LangSwitch](http://www.seoxys.com/langswitch-2/) freeware might be handy for checking contexts.
+### Localizing ###
+
+We need help keeping Vienna translations up to date into different languages. You can contribute localizations at [Crowdin](https://crowdin.com/project/vienna-rss). Registration is required, but the account is free. If you want to contribute for a language that is not yet listed, then contact us. Do not localize the project's \*.strings files directly. Localizable \*.plist files have to be localized directly.
 
 ### Writing custom styles
 
@@ -73,22 +71,7 @@ Vienna supports plugins which are installed in menus and/or on the toolbar and c
 
 You can write plugins by referring to [this document](http://www.vienna-rss.com/?page_id=120). Have a look at existing plugins in the __Plugins__ folder.
 
-### Writing code
-
-The current version of Vienna requires Xcode 7 and Mac OS X 10.11 SDK. We will be officially moving to Xcode 8 and macOS Sierra SDK once it has been released. Currently the Unit Tests require Xcode 8 and Swift 3.
-
-Vienna uses [cocoapods](https://cocoapods.org) for managing dependencies. When building, make sure to always open the Xcode workspace `Viennna.xcworkspace` instead of a project file.
-
-You should have a basic knowledge of Git and read these [advices on workflow](https://github.com/ViennaRSS/vienna-rss/wiki/Good-manners-with-Git).
-
-As a starting point, search for any [issues with the *help-wanted* label](https://github.com/ViennaRSS/vienna-rss/issues?q=is%3Aopen+is%3Aissue+label%3Ahelp-wanted).
-
-Please let us know what you are working on by posting an issue on Vienna's github and assigning it to yourself.
-
-For more information please check [CONTRIBUTING.md](./CONTRIBUTING.md).
-
-
 Licensing
 ---------
 
-[Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
+[Apache License, Version 2.0](LICENCE.md).

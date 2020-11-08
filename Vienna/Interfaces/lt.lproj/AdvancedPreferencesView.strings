@@ -1,0 +1,18 @@
+/* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "2GQ-cu-fbh"; */
+"2GQ-cu-fbh.title" = "Kuo didesnis šis skaičius, tuo greičiau bus pasiųstos jūsų prenumeratos.";
+
+/* Class = "NSButtonCell"; title = "Enable Plugins in the internal browser"; ObjectID = "fIz-4t-Ogg"; */
+"fIz-4t-Ogg.title" = "Leisti naudoti įskiepius vidinėje naršyklėje";
+
+/* Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "GaX-8c-QaN"; */
+"GaX-8c-QaN.title" = "Šie nustatymai neturėtų būti keičiami norint normaliai naudoti programą Vienna. Norėdami daugiau sužinoti apie kiekvieną nustatymą, žiūrėkite Pagalbos failus.";
+
+/* Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "guK-dE-f6n"; */
+"guK-dE-f6n.title" = "Leisti naudoti JavaScript vidinėje naršyklėje";
+
+/* Class = "NSTextFieldCell"; title = "Concurrent downloads:"; ObjectID = "Ngw-hP-yW4"; */
+"Ngw-hP-yW4.title" = "Dabartiniai parsisiuntimai:";
+
+/* Class = "NSTextFieldCell"; title = "However, high numbers also render your computer less responsive while refreshing feeds."; ObjectID = "S3T-cW-hys"; */
+"S3T-cW-hys.title" = "Bet didesni skaičiai gali sulėtinti jūsų kompiuterį, kol atnaujinamos prenumeratos.";
+

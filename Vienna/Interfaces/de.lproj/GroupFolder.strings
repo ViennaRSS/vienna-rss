@@ -1,0 +1,12 @@
+/* Class = "NSTextFieldCell"; title = "New Group Folder"; ObjectID = "32"; */
+"32.title" = "Neuer Gruppenordner";
+
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "34"; */
+"34.title" = "Erstellen";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "35"; */
+"35.title" = "Abbrechen";
+
+/* Class = "NSTextFieldCell"; title = "Enter the group folder name:"; ObjectID = "36"; */
+"36.title" = "Geben Sie den Namen des Gruppenordners ein:";
+

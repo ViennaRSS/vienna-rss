@@ -1,0 +1,42 @@
+/* Class = "NSTextFieldCell"; title = "Last Refreshed:"; ObjectID = "105"; */
+"105.title" = "上次更新:";
+
+/* Class = "NSButtonCell"; title = "Validate"; ObjectID = "109"; */
+"109.title" = "认证";
+
+/* Class = "NSTextFieldCell"; title = "User name:"; ObjectID = "111"; */
+"111.title" = "用户名:";
+
+/* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "112"; */
+"112.title" = "密码:";
+
+/* Class = "NSButtonCell"; title = "Update Authentication"; ObjectID = "115"; */
+"115.title" = "更新验证信息";
+
+/* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "117"; */
+"117.title" = "大小:";
+
+/* Class = "NSTextFieldCell"; title = "Unread:"; ObjectID = "118"; */
+"118.title" = "未读:";
+
+/* Class = "NSButtonCell"; title = "Subscribed"; ObjectID = "121"; */
+"121.title" = "订阅";
+
+/* Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126"; */
+"126.title" = "载入完全的网页文章";
+
+/* Class = "NSTextFieldCell"; title = "Description"; ObjectID = "E84-Uo-ybg"; */
+"E84-Uo-ybg.title" = "介绍";
+
+/* Class = "NSTextFieldCell"; title = "General"; ObjectID = "i9j-KH-c3D"; */
+"i9j-KH-c3D.title" = "通用";
+
+/* Class = "NSTextFieldCell"; title = "Authentication"; ObjectID = "U0N-RF-bUt"; */
+"U0N-RF-bUt.title" = "验证";
+
+/* Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG"; */
+"xPF-M9-oZG.title" = "频道 URL";
+
+/* Class = "NSButtonCell"; title = "Open Cached File…"; ObjectID = "xTj-hY-aTU"; */
+"xTj-hY-aTU.title" = "打开缓存文件...";
+

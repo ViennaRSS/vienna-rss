@@ -1,0 +1,21 @@
+/* Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "71S-pg-AjX"; */
+"71S-pg-AjX.title" = "Peržiūrėdami straipsnius arba interneto puslapius:";
+
+/* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "auD-UC-Pij"; */
+"auD-UC-Pij.title" = "Prenumeratų sąrašo šriftas:";
+
+/* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "B5v-p5-vrf"; */
+"B5v-p5-vrf.title" = "Aplankų sąrašo šriftas:";
+
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "BDw-v3-mpF"; */
+"BDw-v3-mpF.title" = "Pasirinkti…";
+
+/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "gGT-YP-aum"; */
+"gGT-YP-aum.title" = "Pasirinkti…";
+
+/* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "MEV-HA-bdL"; */
+"MEV-HA-bdL.title" = "Rodyti prenumeratų paveikslėlius aplankų sąraše";
+
+/* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "zfJ-Ge-Cxe"; */
+"zfJ-Ge-Cxe.title" = "Niekada nenaudoti šriftų mažesnių nei";
+

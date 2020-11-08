@@ -1,0 +1,24 @@
+/* Class = "NSButton"; ibExternalAccessibilityDescription = "Visit the website"; ObjectID = "Ar5-Qc-YTe"; */
+"Ar5-Qc-YTe.ibExternalAccessibilityDescription" = "Navštívit webovou stránku";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe"; */
+"Ar5-Qc-YTe.ibShadowedToolTip" = "Navštívit webovou stránku";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "kM0-7a-obO"; */
+"kM0-7a-obO.ibShadowedToolTip" = "Vyberte server podporující Open Reader API";
+
+/* Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Lkv-md-rEW"; */
+"Lkv-md-rEW.title" = "Synchronizovat s Open Reader serverem";
+
+/* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "NKI-36-zCY"; */
+"NKI-36-zCY.title" = "Heslo:";
+
+/* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "O2q-8o-CSb"; */
+"O2q-8o-CSb.title" = "Jméno:";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "Address of a server supporting the Open Reader API"; ObjectID = "vZE-Pl-S9H"; */
+"vZE-Pl-S9H.ibShadowedToolTip" = "Adresa serveru podporujícího Open Reader API";
+
+/* Class = "NSPopUpButton"; ibExternalAccessibilityDescription = "Select a server supporting the Open Reader API"; ObjectID = "zAy-oc-zmb"; */
+"zAy-oc-zmb.ibExternalAccessibilityDescription" = "Vyberte server podporující Open Reader API";
+

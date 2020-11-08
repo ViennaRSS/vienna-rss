@@ -1,0 +1,11 @@
+ARCHS = $(ARCHS_STANDARD)
+GCC_C_LANGUAGE_STANDARD = gnu99
+MACOSX_DEPLOYMENT_TARGET = 10.9
+SDKROOT = macosx
+COMBINE_HIDPI_IMAGES = NO
+WARNING_CFLAGS = -Wmost -Wno-four-char-constants -Wno-unknown-pragmas
+GCC_VERSION = com.apple.compilers.llvm.clang.1_0
+GCC_PREFIX_HEADER = $(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h
+GCC_PRECOMPILE_PREFIX_HEADER = YES
+CLANG_ENABLE_MODULES = YES
+WARNING_CFLAGS = -Weverything -Wno-custom-atomic-properties -Wno-direct-ivar-access -Wno-float-equal -Wno-gnu  -Wno-objc-missing-property-synthesis

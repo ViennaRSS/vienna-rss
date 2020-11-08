@@ -1,0 +1,283 @@
+= AUTOREVISION(1) =
+
+== NAME ==
+autorevision - extract current-revision metadata from version-control repositories
+
+== SYNOPSIS ==
+*autorevision* *-t* <output-type> [*-o* <cache-file> [*-f*]&#8201;] [*-e* <name>] [*-U*] [*-q*]
+
+*autorevision* *-s* <symbol> [*-o* <cache-file> [*-f*]&#8201;] [*-e* <name>] [*-U*] [*-q*]
+
+*autorevision* *-V*
+
+== DESCRIPTION ==
+Extracts metadata about the head revision from your repository.
+
+This program is meant to be used by project build systems to extract
+properties that can be used in version strings. It can emit source
+files containing variable and macro definitions suitable for use with
+C, C++, Java, Mac info.plist, sh, Python, Perl and many other types of
+files (see below for the full list).
+
+The generated source is written to the standard output.
+
+This program can normally be called from anywhere within a repository
+copy.  Under bzr the copy must be of a branch, not a full multibranch
+repository.  Under Subversion it must be called under a repository
+checkout, not the repository itself.
+
+If you specify a cache file, then when *autorevision* is run where no
+repository can be recognized, the values from the cache file will be
+used instead.  If a repository can be recognized, the cache is
+rewritten. This feature makes it possible for your build to run from
+an unpacked tarball that includes the cache file.
+
+=== Valid Repository Types ===
+
+*Git*: A version greater than 1.7.2.3 is recommended.
+
+*Mercurial*: A version greater than 1.6 is recommended.
+
+*Subversion*: Any production version.
+
+*Bazaar*: Any production version.
+
+=== Valid Output Types ===
+
+*clojure*::
+A clojure source file setting clojure variables.
+
+*c*::
+A C/C++ source file. +
+`autorevision_declr.h` in the contribs dir is provided for use with
+this output.
+
+*cmake*::
+A cmake script file.
+
+*csharp*::
+C# file with Autorevision class
+
+*h*::
+A header file suitable for C/C++.
+
+*hpp*::
+Alternate C++ header file with namespace.  Namespace is assigned
+from VCS_BASENAME.
+
+*ini*::
+A ini source file setting ini variables.
+
+*java*::
+A Java source file setting class properties.
+
+*javaprop*::
+A Java properties file (like ini); useful when META-INF is readable in
+Java.
+
+*js*::
+A javascript source file setting javascript variables.
+
+*json*::
+A JSON format file.
+
+*lua*::
+A lua source file setting lua variables.
+
+*m4*::
+An m4 source file defining m4 macros.
+
+*matlab*::
+Matlab output.
+
+*octave*::
+Octave output.
+
+*php*::
+A PHP source file setting PHP variables.
+
+*pl*::
+A Perl source file setting Perl variables  (*`perl`* is an acceptable
+synonym).
+
+*py*::
+A Python source file setting Python variables (*`python`* is an
+acceptable synonym).
+
+*rpm*::
+A RPM spec file format setting spec file macros.
+
+*scheme*::
+A scheme source file setting scheme variables.
+
+*sed*::
+A sed script that replaces symbol names enclosed in @ symbols.
+It uses the | character as a separator in the sed commands.
+You can run it using `sed -f script.sed file-to-edit`.
+
+*sh*::
+A text file suitable for including from a bash script.  Will work with
+Ruby.
+
+*swift*::
+A Swift source file setting Swift global constants. +
+Unless set *VCS_EXTRA* and any symbols that are missing because of
+repository support are set to `nil`.
+
+*tex*::
+A TeX source file defining TeX macros.  Note that the symbols are
+given different names since the underscore has a special meaning in
+TeX. For example, VCS_SHORT_HASH is renamed to \vcsShortHash.
+
+*xcode*::
+A header like output for use with xcode to populate info.plist strings.
+
+=== Valid Symbol Names ===
+
+*VCS_TYPE*::
+The repository type - "git", "hg", "bzr", or "svn".
+
+*VCS_BASENAME*::
+The basename of the directory root.  For most VCSes this will simply
+be the basename of the repository root directory.  For Subversion,
+*autorevision* will attempt to navigate up though trunk, branches, and
+tags directories to find the actual root.
+
+*VCS_NUM*::
+A count of revisions between the current one and the initial
+one; useful for reporting build numbers.
+
+*VCS_UUID*::
+A universally unique identifier, generated from the root commit in git
+and hg; for svn it uses the supplied UUID. +
+For git we choose the oldest commit if there is more than one. +
+Not currently implemented for bzr.
+
+*VCS_DATE*::
+The date of the most recent commit in true ISO-8601/RFC3339
+format, including seconds.
+
+*VCS_BRANCH*::
+The name of the branch of the commit graph that was selected when
+autoversion was run. +
+Under git, this will normally be the shortname of the current branch
+(the asterisked line in the output of "git branch") except that
+when the branch doesn't have a shortname it will be a full
+refspec. +
+Under hg the feature that is called 'branches' is actually a sort of
+graph coloring (multiple heads can have the same branch name) so this
+symbol is filled with the current bookmark if it exists, with the
+current branch name as a fallback. +
+Under Subversion this will normally be either 'trunk' or the basename
+of some branch or tag subdirectory, depending on where *autoversion*
+was run. +
+Under bzr, this is the nick of the branch you are on.
+
+*VCS_TAG*::
+The name of the most recent tag ancestral to the current commit. +
+Empty under Subversion.
+
+*VCS_TAG_OPENPGP*::
+The fingerprint OpenPGP of the key that that signed the current tag. +
+Blank if the current tag is not signed or if no tags exist. +
+Currently only implemented for git.
+
+*VCS_TICK*::
+A count of commits since most recent tag ancestral to the current
+commit or an alias of *VCS_NUM* if there are no prior tags. +
+Empty under Subversion.
+
+*VCS_EXTRA*::
+A symbol set aside specifically to be set by the user through the
+environment or via scripts. +
+Additionally, the name of this symbol may be customized as well.  ('See *-e* for more info.')
+
+*VCS_ACTION_STAMP*::
+An "action stamp" consists of an RFC3339 timestamp in Zulu time,
+followed by an exclamation point, followed by an RFC822 address
+(technically, an "addr-spec" as defined in 6.1). +
+For svn the second part is simply the author name. +
+Not currently implemented for bzr.
+
+*VCS_FULL_HASH*::
+A full unique identifier for the current revision.
+
+*VCS_COMMIT_OPENPGP*::
+The fingerprint OpenPGP of the key that that signed the current revision. +
+Blank if the current revision is not signed. +
+Currently only implemented for git.
+
+*VCS_SHORT_HASH*::
+A shortened version of *VCS_FULL_HASH*, but *VCS_FULL_HASH* if it
+cannot be shortened.
+
+*VCS_WC_MODIFIED*::
+Set to `1` if the current working directory has been modified and `0`
+if not.  If the output language has native Boolean literals, true will
+mean modified and false unmodified.  The C/C++ output is left as
+numeric so the preprocessor can test it. +
+'Untracked files are not ignored; see *`-U`* for details.'
+
+== OPTIONS ==
+
+*-t* '<output-type>'::
+Sets the output type.  It is required unless *`-s`* is specified; both
+*`-t`* and *`-s`* cannot be used in the same invocation.
+
+*-s* '<symbol>'::
+Changes the reporting behavior; instead of emitting a symbol file to
+stdout, only the value of that individual symbol will be reported.  It
+is required unless *`-t`* is specified; both *`-t`* and *`-s`* cannot
+be used in the same invocation.
+
+*-o* '<cache-file>'::
+Sets the name of the cache file.
+
+*-e* '<name>'::
+Sets the output name of *VCS_EXTRA* +
+Defaults to `VCS_EXTRA`.
+
+*-f*::
+Forces the use of cache data even when in a repo; useful for speeding
+up subsequent runs if more than one output format is needed.
+
+*-U*::
+Causes untracked files to be checked when determining if the
+working copy is modified 'for Subversion only'.  While this is the
+default behavior for all other repository types, it is off by default
+for Subversion because of speed concerns.
+
+*-q*::
+Silence warnings.
+
+*-V*::
+Emits the autorevision version and exits.
+
+== BUGS ==
+The bzr extractor is not very well tested.
+
+When a git repo is actually a git-svn remote, this tool tries to do
+the right thing and return a Subversion revision.  The bug is that the
+detector code for this case is somewhat unreliable; you will get the
+hash instead if your configuration doesn't use svn-remote.svn.url.
+
+Nested repositories, particularly repositories of different types,
+_may_ result in incorrect and unintended behavior.
+
+Unpacking a tarball into a repository _will_ result in incorrect and
+unintended behavior.
+
+== Notes ==
+Development of autorevision is carried out at
+https://github.com/Autorevision/autorevision
+
+HTML rendered docs and usage examples can be found at
+https://autorevision.github.io/
+
+== AUTHORS ==
+
+dak180 <dak180@users.sf.net>: concept, bash/C/C++/XCode/PHP/ini
+support, git and hg extraction. +
+Eric S. Raymond <esr@thyrsus.com>: Python/Perl/lua/m4 support, svn and
+bzr extraction, git-svn support, CLI design, man page. +
+See AUTHORS.txt for a full list in order of number of contributions.

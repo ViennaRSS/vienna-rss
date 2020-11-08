@@ -1,0 +1,81 @@
+/* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "1Ll-uG-QWh"; */
+"1Ll-uG-QWh.title" = "Kas 15 minučių";
+
+/* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "2oy-1i-QQP"; */
+"2oy-1i-QQP.title" = "Po komandos „Kitas neskaitytas“";
+
+/* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "5VQ-jP-2rL"; */
+"5VQ-jP-2rL.title" = "Kas 30 minučių";
+
+/* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "6wU-yO-cnV"; */
+"6wU-yO-cnV.title" = "Kas 2 valandas";
+
+/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "7e3-Hu-RB5"; */
+"7e3-Hu-RB5.title" = "Neperskaitytų straipsnių skaičių rodyti programos paveikslėlyje";
+
+/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "BbI-0A-zEG"; */
+"BbI-0A-zEG.title" = "Kai parsiunčiami nauji neskaityti straipsniai:";
+
+/* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "ewU-JH-fMC"; */
+"ewU-JH-fMC.title" = "Tikrinti ar yra naujų straipsnių:";
+
+/* Class = "NSMenuItem"; title = "Other…"; ObjectID = "FiK-E7-RnG"; */
+"FiK-E7-RnG.title" = "Kita…";
+
+/* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "geD-Ws-mQm"; */
+"geD-Ws-mQm.title" = "Užsaugoti parsiųstus failus į:";
+
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "gi4-ao-0yS"; */
+"gi4-ao-0yS.title" = "Leisti programos paveikslėliui šokinėti";
+
+/* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "GnT-xT-rAZ"; */
+"GnT-xT-rAZ.title" = "Įjungiant programą patikrinti ar nėra naujos Vienna versijos";
+
+/* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "gnX-dW-XUD"; */
+"gnX-dW-XUD.title" = "Kas 3 valandas";
+
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "H9Q-du-oax"; */
+"H9Q-du-oax.title" = "Rankiniu būdu";
+
+/* Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "IMa-1h-lIO"; */
+"IMa-1h-lIO.title" = "Kas 6 valandas";
+
+/* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "JDV-ek-xja"; */
+"JDV-ek-xja.title" = "Po trumpos pertraukėlės";
+
+/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1"; */
+"JN6-lj-bQ1.title" = "Rodyti meniu juostoje";
+
+/* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "k6Y-ib-PGb"; */
+"k6Y-ib-PGb.title" = "Perkelti straipsnius į šiukšliadėžę:";
+
+/* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG"; */
+"kGA-Sa-RLG.title" = "Standartinė RSS prenumeratų programa:";
+
+/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl"; */
+"meo-78-YOl.title" = "Pažymėti atnaujintus straipsnius kaip naujus";
+
+/* Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0"; */
+"OID-qF-Pp0.title" = "Ieškoti naujausių Beta versijų";
+
+/* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "oVW-ee-uJT"; */
+"oVW-ee-uJT.title" = "Kas 5 minutes";
+
+/* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "pjg-Ze-H3l"; */
+"pjg-Ze-H3l.title" = "Naujas nuorodas atidaryti fone";
+
+/* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "pXX-MI-tJX"; */
+"pXX-MI-tJX.title" = "Tikrinti ar yra naujų straipsnių programai įsijungiant";
+
+/* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
+"qeb-at-hYb.title" = "Atnaujinimai:";
+
+/* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "sCl-hz-PFF"; */
+"sCl-hz-PFF.title" = "Pažymėti straipsnį kaip perskaitytą:";
+
+/* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "sSj-zI-6RY"; */
+"sSj-zI-6RY.title" = "Kas valandą";
+
+/* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "YoM-Gv-hXn"; */
+"YoM-Gv-hXn.title" = "Nuorodas atidaryti išorinėje naršyklėje";
+

@@ -1,0 +1,21 @@
+/* Class = "NSMenuItem"; title = "all"; ObjectID = "82"; */
+"82.title" = "denak";
+
+/* Class = "NSTextFieldCell"; title = "Smart folder name:"; ObjectID = "94"; */
+"94.title" = "Direktorio adimenduaren izena:";
+
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "96"; */
+"96.title" = "Gorde";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97"; */
+"97.title" = "Ezeztatu";
+
+/* Class = "NSTextFieldCell"; title = "Show all articles that match"; ObjectID = "98"; */
+"98.title" = "Erakutsi zerikusia duten artikulu guztiak";
+
+/* Class = "NSTextFieldCell"; title = "of the following conditions:"; ObjectID = "100"; */
+"100.title" = "honako baldintzekin:";
+
+/* Class = "NSMenuItem"; title = "any"; ObjectID = "j0v-xF-tpl"; */
+"j0v-xF-tpl.title" = "edozein";
+

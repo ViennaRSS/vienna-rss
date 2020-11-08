@@ -1,0 +1,42 @@
+/* Class = "NSTextFieldCell"; title = "Last Refreshed:"; ObjectID = "105"; */
+"105.title" = "Последние обновленные:";
+
+/* Class = "NSButtonCell"; title = "Validate"; ObjectID = "109"; */
+"109.title" = "Проверить";
+
+/* Class = "NSTextFieldCell"; title = "User name:"; ObjectID = "111"; */
+"111.title" = "Имя пользователя:";
+
+/* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "112"; */
+"112.title" = "Пароль:";
+
+/* Class = "NSButtonCell"; title = "Update Authentication"; ObjectID = "115"; */
+"115.title" = "Обновить параметры аутентификации";
+
+/* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "117"; */
+"117.title" = "Размер проекта:";
+
+/* Class = "NSTextFieldCell"; title = "Unread:"; ObjectID = "118"; */
+"118.title" = "Непрочитанное:";
+
+/* Class = "NSButtonCell"; title = "Subscribed"; ObjectID = "121"; */
+"121.title" = "Вы подписаны";
+
+/* Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126"; */
+"126.title" = "Загрузить полные HTML-статьи";
+
+/* Class = "NSTextFieldCell"; title = "Description"; ObjectID = "E84-Uo-ybg"; */
+"E84-Uo-ybg.title" = "Описание";
+
+/* Class = "NSTextFieldCell"; title = "General"; ObjectID = "i9j-KH-c3D"; */
+"i9j-KH-c3D.title" = "Общие";
+
+/* Class = "NSTextFieldCell"; title = "Authentication"; ObjectID = "U0N-RF-bUt"; */
+"U0N-RF-bUt.title" = "Авторизация";
+
+/* Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG"; */
+"xPF-M9-oZG.title" = "URL-адрес канала";
+
+/* Class = "NSButtonCell"; title = "Open Cached File…"; ObjectID = "xTj-hY-aTU"; */
+"xTj-hY-aTU.title" = "Открыть закэшированный файл…";
+

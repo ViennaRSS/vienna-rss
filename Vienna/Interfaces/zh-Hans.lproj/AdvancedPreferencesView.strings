@@ -1,0 +1,18 @@
+/* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "2GQ-cu-fbh"; */
+"2GQ-cu-fbh.title" = "设置的数字越高, 您的订阅就会越快被下载.";
+
+/* Class = "NSButtonCell"; title = "Enable Plugins in the internal browser"; ObjectID = "fIz-4t-Ogg"; */
+"fIz-4t-Ogg.title" = "在内置浏览器中启用插件";
+
+/* Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "GaX-8c-QaN"; */
+"GaX-8c-QaN.title" = "这里的设置一般来讲不需要做调整。如果有需要，请您参考帮助文件来了解每个设置的细节。";
+
+/* Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "guK-dE-f6n"; */
+"guK-dE-f6n.title" = "在内置浏览器中应用 Javascript";
+
+/* Class = "NSTextFieldCell"; title = "Concurrent downloads:"; ObjectID = "Ngw-hP-yW4"; */
+"Ngw-hP-yW4.title" = "同步下载中";
+
+/* Class = "NSTextFieldCell"; title = "However, high numbers also render your computer less responsive while refreshing feeds."; ObjectID = "S3T-cW-hys"; */
+"S3T-cW-hys.title" = "然而, 设置越高的数字, 也会使得您的电脑在更新订阅时失去响应时间越长.";
+

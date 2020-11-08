@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>本機檔案</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入您個人專屬檔案夾的路徑</string>
+		<key>LinkTemplate</key>
+		<string>file://~/%@</string>
+	</dict>
+	<key>Blogspot</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入 Blogspot 使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>http://%@.blogspot.com/atom.xml</string>
+		<key>SiteHomePage</key>
+		<string>http://www.blogspot.com</string>
+	</dict>
+	<key>LiveJournal</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入 LiveJournal 使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>http://www.livejournal.com/users/%@/data/rss</string>
+		<key>SiteHomePage</key>
+		<string>http://www.livejournal.com</string>
+	</dict>
+	<key>URL</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入 RSS feed 的網址</string>
+		<key>LinkTemplate</key>
+		<string>%@</string>
+	</dict>
+	<key>Xanga</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入 Xanga 使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>http://www.xanga.com/rss.aspx?user=%@</string>
+		<key>SiteHomePage</key>
+		<string>http://www.xanga.com</string>
+	</dict>
+	<key>WordPress.com</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入 WordPress.com 使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>http://%@.wordpress.com/feed/</string>
+		<key>SiteHomePage</key>
+		<string>http://wordpress.com</string>
+	</dict>
+	<key>痞客邦部落格</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入痞客邦部落格使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>https://feed.pixnet.net/blog/posts/atom/%@</string>
+		<key>SiteHomePage</key>
+		<string>https://www.pixnet.net/blog</string>
+	</dict>
+	<key>Logdown</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入 Logdown 使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>https://%@.logdown.com/posts.atom</string>
+		<key>SiteHomePage</key>
+		<string>https://logdown.com/</string>
+	</dict>
+	<key>字媒體</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入字媒體使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>https://zi.media/rss/authors/%@</string>
+		<key>SiteHomePage</key>
+		<string>https://zi.media/</string>
+	</dict>
+	<key>隨意窩</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入隨意窩使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>https://blog.xuite.net/%@/blog/rss.xml</string>
+		<key>SiteHomePage</key>
+		<string>https://blog.xuite.net/</string>
+	</dict>
+	<key>HatenaBlog</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入 HatenaBlog 使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>https://%@.hatenablog.com/feed</string>
+		<key>SiteHomePage</key>
+		<string>https://hatenablog.com/</string>
+	</dict>
+	<key>PChome 個人新聞台</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入 PChome 個人新聞台使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>http://mypaper.pchome.com.tw/%@/rss</string>
+		<key>SiteHomePage</key>
+		<string>http://mypaper.pchome.com.tw/</string>
+	</dict>
+</dict>
+</plist>

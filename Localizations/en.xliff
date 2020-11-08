@@ -1,0 +1,3097 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="Vienna/Interfaces/Base.lproj/ActivityViewer.xib" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3" build-num="11C29"/>
+    </header>
+    <body>
+      <trans-unit id="8.title" xml:space="preserve">
+        <source>Activity</source>
+        <target>Activity</target>
+        <note>Class = "NSWindow"; title = "Activity"; ObjectID = "8";</note>
+      </trans-unit>
+      <trans-unit id="18.headerCell.title" xml:space="preserve">
+        <source>Source</source>
+        <target>Source</target>
+        <note>Class = "NSTableColumn"; headerCell.title = "Source"; ObjectID = "18";</note>
+      </trans-unit>
+      <trans-unit id="19.headerCell.title" xml:space="preserve">
+        <source>Status</source>
+        <target>Status</target>
+        <note>Class = "NSTableColumn"; headerCell.title = "Status"; ObjectID = "19";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/AdvancedPreferencesView.xib" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3" build-num="11C29"/>
+    </header>
+    <body>
+      <trans-unit id="2GQ-cu-fbh.title" xml:space="preserve">
+        <source>The higher the number, the quicker your subscriptions will be downloaded.</source>
+        <target>The higher the number, the quicker your subscriptions will be downloaded.</target>
+        <note>Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "2GQ-cu-fbh";</note>
+      </trans-unit>
+      <trans-unit id="GaX-8c-QaN.title" xml:space="preserve">
+        <source>The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.</source>
+        <target>The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.</target>
+        <note>Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "GaX-8c-QaN";</note>
+      </trans-unit>
+      <trans-unit id="Mlu-22-guR.title" xml:space="preserve">
+        <source>30</source>
+        <target>30</target>
+        <note>Class = "NSMenuItem"; title = "30"; ObjectID = "Mlu-22-guR"; Note = "Do not localize";</note>
+      </trans-unit>
+      <trans-unit id="Ngw-hP-yW4.title" xml:space="preserve">
+        <source>Concurrent downloads:</source>
+        <target>Concurrent downloads:</target>
+        <note>Class = "NSTextFieldCell"; title = "Concurrent downloads:"; ObjectID = "Ngw-hP-yW4";</note>
+      </trans-unit>
+      <trans-unit id="S3T-cW-hys.title" xml:space="preserve">
+        <source>However, high numbers also render your computer less responsive while refreshing feeds.</source>
+        <target>However, high numbers also render your computer less responsive while refreshing feeds.</target>
+        <note>Class = "NSTextFieldCell"; title = "However, high numbers also render your computer less responsive while refreshing feeds."; ObjectID = "S3T-cW-hys";</note>
+      </trans-unit>
+      <trans-unit id="bKP-m5-YPx.title" xml:space="preserve">
+        <source>2</source>
+        <target>2</target>
+        <note>Class = "NSMenuItem"; title = "2"; ObjectID = "bKP-m5-YPx"; Note = "Do not localize";</note>
+      </trans-unit>
+      <trans-unit id="dXW-1P-Mja.title" xml:space="preserve">
+        <source>15</source>
+        <target>15</target>
+        <note>Class = "NSMenuItem"; title = "15"; ObjectID = "dXW-1P-Mja"; Note = "Do not localize";</note>
+      </trans-unit>
+      <trans-unit id="fIz-4t-Ogg.title" xml:space="preserve">
+        <source>Enable Plugins in the internal browser</source>
+        <target>Enable Plugins in the internal browser</target>
+        <note>Class = "NSButtonCell"; title = "Enable Plugins in the internal browser"; ObjectID = "fIz-4t-Ogg";</note>
+      </trans-unit>
+      <trans-unit id="guK-dE-f6n.title" xml:space="preserve">
+        <source>Enable JavaScript in the internal browser</source>
+        <target>Enable JavaScript in the internal browser</target>
+        <note>Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "guK-dE-f6n";</note>
+      </trans-unit>
+      <trans-unit id="koF-ku-VbZ.title" xml:space="preserve">
+        <source>1</source>
+        <target>1</target>
+        <note>Class = "NSMenuItem"; title = "1"; ObjectID = "koF-ku-VbZ"; Note = "Do not localize";</note>
+      </trans-unit>
+      <trans-unit id="p15-eO-dBa.title" xml:space="preserve">
+        <source>10</source>
+        <target>10</target>
+        <note>Class = "NSMenuItem"; title = "10"; ObjectID = "p15-eO-dBa"; Note = "Do not localize";</note>
+      </trans-unit>
+      <trans-unit id="q0t-6p-Xd6.title" xml:space="preserve">
+        <source>50</source>
+        <target>50</target>
+        <note>Class = "NSMenuItem"; title = "50"; ObjectID = "q0t-6p-Xd6"; Note = "Do not localize";</note>
+      </trans-unit>
+      <trans-unit id="yD7-hF-SbK.title" xml:space="preserve">
+        <source>5</source>
+        <target>5</target>
+        <note>Class = "NSMenuItem"; title = "5"; ObjectID = "yD7-hF-SbK"; Note = "Do not localize";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/AppearancePreferencesView.xib" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3" build-num="11C29"/>
+    </header>
+    <body>
+      <trans-unit id="71S-pg-AjX.title" xml:space="preserve">
+        <source>When viewing articles or web pages:</source>
+        <target>When viewing articles or web pages:</target>
+        <note>Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "71S-pg-AjX";</note>
+      </trans-unit>
+      <trans-unit id="B5v-p5-vrf.title" xml:space="preserve">
+        <source>Folder list font:</source>
+        <target>Folder list font:</target>
+        <note>Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "B5v-p5-vrf";</note>
+      </trans-unit>
+      <trans-unit id="BDw-v3-mpF.title" xml:space="preserve">
+        <source>Select…</source>
+        <target>Select…</target>
+        <note>Class = "NSButtonCell"; title = "Select…"; ObjectID = "BDw-v3-mpF";</note>
+      </trans-unit>
+      <trans-unit id="MEV-HA-bdL.title" xml:space="preserve">
+        <source>Show feeds icons in folder list</source>
+        <target>Show feeds icons in folder list</target>
+        <note>Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "MEV-HA-bdL";</note>
+      </trans-unit>
+      <trans-unit id="auD-UC-Pij.title" xml:space="preserve">
+        <source>Article list font:</source>
+        <target>Article list font:</target>
+        <note>Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "auD-UC-Pij";</note>
+      </trans-unit>
+      <trans-unit id="gGT-YP-aum.title" xml:space="preserve">
+        <source>Select…</source>
+        <target>Select…</target>
+        <note>Class = "NSButtonCell"; title = "Select…"; ObjectID = "gGT-YP-aum";</note>
+      </trans-unit>
+      <trans-unit id="zfJ-Ge-Cxe.title" xml:space="preserve">
+        <source>Never use font sizes smaller than</source>
+        <target>Never use font sizes smaller than</target>
+        <note>Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "zfJ-Ge-Cxe";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/Downloads.xib" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3" build-num="11C29"/>
+    </header>
+    <body>
+      <trans-unit id="5.title" xml:space="preserve">
+        <source>Downloads</source>
+        <target>Downloads</target>
+        <note>Class = "NSWindow"; title = "Downloads"; ObjectID = "5";</note>
+      </trans-unit>
+      <trans-unit id="23.title" xml:space="preserve">
+        <source>Clear</source>
+        <target>Clear</target>
+        <note>Class = "NSButtonCell"; title = "Clear"; ObjectID = "23";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/EmptyTrashWarning.xib" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3" build-num="11C29"/>
+    </header>
+    <body>
+      <trans-unit id="17.title" xml:space="preserve">
+        <source>Empty Trash</source>
+        <target>Empty Trash</target>
+        <note>Class = "NSButtonCell"; title = "Empty Trash"; ObjectID = "17";</note>
+      </trans-unit>
+      <trans-unit id="18.title" xml:space="preserve">
+        <source>Don't Empty Trash</source>
+        <target>Don't Empty Trash</target>
+        <note>Class = "NSButtonCell"; title = "Don't Empty Trash"; ObjectID = "18";</note>
+      </trans-unit>
+      <trans-unit id="19.title" xml:space="preserve">
+        <source>There are deleted articles in the trash. Would you like to empty the trash before quitting?</source>
+        <target>There are deleted articles in the trash. Would you like to empty the trash before quitting?</target>
+        <note>Class = "NSTextFieldCell"; title = "There are deleted articles in the trash. Would you like to empty the trash before quitting?"; ObjectID = "19";</note>
+      </trans-unit>
+      <trans-unit id="20.title" xml:space="preserve">
+        <source>Do not show this warning again</source>
+        <target>Do not show this warning again</target>
+        <note>Class = "NSButtonCell"; title = "Do not show this warning again"; ObjectID = "20";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/ExportAccessoryViewController.xib" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3" build-num="11C29"/>
+    </header>
+    <body>
+      <trans-unit id="6rj-zb-zOa.title" xml:space="preserve">
+        <source>Export all subscriptions</source>
+        <target>Export all subscriptions</target>
+        <note>Class = "NSButtonCell"; title = "Export all subscriptions"; ObjectID = "6rj-zb-zOa";</note>
+      </trans-unit>
+      <trans-unit id="IYg-Pm-bcI.title" xml:space="preserve">
+        <source>Preserve group folders in exported file</source>
+        <target>Preserve group folders in exported file</target>
+        <note>Class = "NSButtonCell"; title = "Preserve group folders in exported file"; ObjectID = "IYg-Pm-bcI";</note>
+      </trans-unit>
+      <trans-unit id="KgE-bb-aJn.title" xml:space="preserve">
+        <source>Export selected subscriptions</source>
+        <target>Export selected subscriptions</target>
+        <note>Class = "NSButtonCell"; title = "Export selected subscriptions"; ObjectID = "KgE-bb-aJn";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/FeedCredentials.xib" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3" build-num="11C29"/>
+    </header>
+    <body>
+      <trans-unit id="32.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target>Cancel</target>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "32";</note>
+      </trans-unit>
+      <trans-unit id="33.title" xml:space="preserve">
+        <source>Name:</source>
+        <target>Name:</target>
+        <note>Class = "NSTextFieldCell"; title = "Name:"; ObjectID = "33";</note>
+      </trans-unit>
+      <trans-unit id="34.title" xml:space="preserve">
+        <source>Access to %@ requires you to provide log in credentials</source>
+        <target>Access to %@ requires you to provide log in credentials</target>
+        <note>Class = "NSTextFieldCell"; title = "Access to %@ requires you to provide log in credentials"; ObjectID = "34";</note>
+      </trans-unit>
+      <trans-unit id="37.title" xml:space="preserve">
+        <source>Password:</source>
+        <target>Password:</target>
+        <note>Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "37";</note>
+      </trans-unit>
+      <trans-unit id="38.title" xml:space="preserve">
+        <source>Log In</source>
+        <target>Log In</target>
+        <note>Class = "NSButtonCell"; title = "Log In"; ObjectID = "38";</note>
+      </trans-unit>
+      <trans-unit id="39.title" xml:space="preserve">
+        <source>The user name and password you provide will be remembered for the next time you refresh this subscription.</source>
+        <target>The user name and password you provide will be remembered for the next time you refresh this subscription.</target>
+        <note>Class = "NSTextFieldCell"; title = "The user name and password you provide will be remembered for the next time you refresh this subscription."; ObjectID = "39";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/GeneralPreferencesView.xib" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3" build-num="11C29"/>
+    </header>
+    <body>
+      <trans-unit id="1Ll-uG-QWh.title" xml:space="preserve">
+        <source>Every 15 minutes</source>
+        <target>Every 15 minutes</target>
+        <note>Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "1Ll-uG-QWh";</note>
+      </trans-unit>
+      <trans-unit id="2oy-1i-QQP.title" xml:space="preserve">
+        <source>After "Next Unread" command</source>
+        <target>After "Next Unread" command</target>
+        <note>Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "2oy-1i-QQP";</note>
+      </trans-unit>
+      <trans-unit id="5VQ-jP-2rL.title" xml:space="preserve">
+        <source>Every 30 minutes</source>
+        <target>Every 30 minutes</target>
+        <note>Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "5VQ-jP-2rL";</note>
+      </trans-unit>
+      <trans-unit id="6wU-yO-cnV.title" xml:space="preserve">
+        <source>Every 2 hours</source>
+        <target>Every 2 hours</target>
+        <note>Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "6wU-yO-cnV";</note>
+      </trans-unit>
+      <trans-unit id="7e3-Hu-RB5.title" xml:space="preserve">
+        <source>Show the unread count on the application icon</source>
+        <target>Show the unread count on the application icon</target>
+        <note>Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "7e3-Hu-RB5";</note>
+      </trans-unit>
+      <trans-unit id="BbI-0A-zEG.title" xml:space="preserve">
+        <source>When new unread articles are retrieved:</source>
+        <target>When new unread articles are retrieved:</target>
+        <note>Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "BbI-0A-zEG";</note>
+      </trans-unit>
+      <trans-unit id="FiK-E7-RnG.title" xml:space="preserve">
+        <source>Other…</source>
+        <target>Other…</target>
+        <note>Class = "NSMenuItem"; title = "Other…"; ObjectID = "FiK-E7-RnG";</note>
+      </trans-unit>
+      <trans-unit id="GnT-xT-rAZ.title" xml:space="preserve">
+        <source>Check for newer versions of Vienna on start up</source>
+        <target>Check for newer versions of Vienna on start up</target>
+        <note>Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "GnT-xT-rAZ";</note>
+      </trans-unit>
+      <trans-unit id="H9Q-du-oax.title" xml:space="preserve">
+        <source>Manually</source>
+        <target>Manually</target>
+        <note>Class = "NSMenuItem"; title = "Manually"; ObjectID = "H9Q-du-oax";</note>
+      </trans-unit>
+      <trans-unit id="IMa-1h-lIO.title" xml:space="preserve">
+        <source>Every 6 hours</source>
+        <target>Every 6 hours</target>
+        <note>Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "IMa-1h-lIO";</note>
+      </trans-unit>
+      <trans-unit id="JDV-ek-xja.title" xml:space="preserve">
+        <source>After a short delay</source>
+        <target>After a short delay</target>
+        <note>Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "JDV-ek-xja";</note>
+      </trans-unit>
+      <trans-unit id="JN6-lj-bQ1.title" xml:space="preserve">
+        <source>Show in menu bar</source>
+        <target>Show in menu bar</target>
+        <note>Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1";</note>
+      </trans-unit>
+      <trans-unit id="OID-qF-Pp0.title" xml:space="preserve">
+        <source>Search for latest Beta versions</source>
+        <target>Search for latest Beta versions</target>
+        <note>Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0";</note>
+      </trans-unit>
+      <trans-unit id="YoM-Gv-hXn.title" xml:space="preserve">
+        <source>Open links in external browser</source>
+        <target>Open links in external browser</target>
+        <note>Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "YoM-Gv-hXn";</note>
+      </trans-unit>
+      <trans-unit id="ewU-JH-fMC.title" xml:space="preserve">
+        <source>Check for new articles:</source>
+        <target>Check for new articles:</target>
+        <note>Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "ewU-JH-fMC";</note>
+      </trans-unit>
+      <trans-unit id="geD-Ws-mQm.title" xml:space="preserve">
+        <source>Save downloaded files to:</source>
+        <target>Save downloaded files to:</target>
+        <note>Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "geD-Ws-mQm";</note>
+      </trans-unit>
+      <trans-unit id="gi4-ao-0yS.title" xml:space="preserve">
+        <source>Bounce the application icon</source>
+        <target>Bounce the application icon</target>
+        <note>Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "gi4-ao-0yS";</note>
+      </trans-unit>
+      <trans-unit id="gnX-dW-XUD.title" xml:space="preserve">
+        <source>Every 3 hours</source>
+        <target>Every 3 hours</target>
+        <note>Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "gnX-dW-XUD";</note>
+      </trans-unit>
+      <trans-unit id="k6Y-ib-PGb.title" xml:space="preserve">
+        <source>Move articles to Trash:</source>
+        <target>Move articles to Trash:</target>
+        <note>Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "k6Y-ib-PGb";</note>
+      </trans-unit>
+      <trans-unit id="kGA-Sa-RLG.title" xml:space="preserve">
+        <source>Default RSS Reader:</source>
+        <target>Default RSS Reader:</target>
+        <note>Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG";</note>
+      </trans-unit>
+      <trans-unit id="meo-78-YOl.title" xml:space="preserve">
+        <source>Mark updated articles as new</source>
+        <target>Mark updated articles as new</target>
+        <note>Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl";</note>
+      </trans-unit>
+      <trans-unit id="oVW-ee-uJT.title" xml:space="preserve">
+        <source>Every 5 minutes</source>
+        <target>Every 5 minutes</target>
+        <note>Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "oVW-ee-uJT";</note>
+      </trans-unit>
+      <trans-unit id="pXX-MI-tJX.title" xml:space="preserve">
+        <source>Check for new articles on start up</source>
+        <target>Check for new articles on start up</target>
+        <note>Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "pXX-MI-tJX";</note>
+      </trans-unit>
+      <trans-unit id="pjg-Ze-H3l.title" xml:space="preserve">
+        <source>Open new links in the background</source>
+        <target>Open new links in the background</target>
+        <note>Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "pjg-Ze-H3l";</note>
+      </trans-unit>
+      <trans-unit id="qeb-at-hYb.title" xml:space="preserve">
+        <source>Updates:</source>
+        <target>Updates:</target>
+        <note>Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb";</note>
+      </trans-unit>
+      <trans-unit id="sCl-hz-PFF.title" xml:space="preserve">
+        <source>Mark current article read:</source>
+        <target>Mark current article read:</target>
+        <note>Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "sCl-hz-PFF";</note>
+      </trans-unit>
+      <trans-unit id="sSj-zI-6RY.title" xml:space="preserve">
+        <source>Every hour</source>
+        <target>Every hour</target>
+        <note>Class = "NSMenuItem"; title = "Every hour"; ObjectID = "sSj-zI-6RY";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/GroupFolder.xib" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3" build-num="11C29"/>
+    </header>
+    <body>
+      <trans-unit id="32.title" xml:space="preserve">
+        <source>New Group Folder</source>
+        <target>New Group Folder</target>
+        <note>Class = "NSTextFieldCell"; title = "New Group Folder"; ObjectID = "32";</note>
+      </trans-unit>
+      <trans-unit id="34.title" xml:space="preserve">
+        <source>Save</source>
+        <target>Save</target>
+        <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "34";</note>
+      </trans-unit>
+      <trans-unit id="35.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target>Cancel</target>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "35";</note>
+      </trans-unit>
+      <trans-unit id="36.title" xml:space="preserve">
+        <source>Enter the group folder name:</source>
+        <target>Enter the group folder name:</target>
+        <note>Class = "NSTextFieldCell"; title = "Enter the group folder name:"; ObjectID = "36";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/InfoWindow.xib" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3" build-num="11C29"/>
+    </header>
+    <body>
+      <trans-unit id="105.title" xml:space="preserve">
+        <source>Last Refreshed:</source>
+        <target>Last Refreshed:</target>
+        <note>Class = "NSTextFieldCell"; title = "Last Refreshed:"; ObjectID = "105";</note>
+      </trans-unit>
+      <trans-unit id="109.title" xml:space="preserve">
+        <source>Validate</source>
+        <target>Validate</target>
+        <note>Class = "NSButtonCell"; title = "Validate"; ObjectID = "109";</note>
+      </trans-unit>
+      <trans-unit id="111.title" xml:space="preserve">
+        <source>User name:</source>
+        <target>User name:</target>
+        <note>Class = "NSTextFieldCell"; title = "User name:"; ObjectID = "111";</note>
+      </trans-unit>
+      <trans-unit id="112.title" xml:space="preserve">
+        <source>Password:</source>
+        <target>Password:</target>
+        <note>Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "112";</note>
+      </trans-unit>
+      <trans-unit id="115.title" xml:space="preserve">
+        <source>Update Authentication</source>
+        <target>Update Authentication</target>
+        <note>Class = "NSButtonCell"; title = "Update Authentication"; ObjectID = "115";</note>
+      </trans-unit>
+      <trans-unit id="117.title" xml:space="preserve">
+        <source>Size:</source>
+        <target>Size:</target>
+        <note>Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "117";</note>
+      </trans-unit>
+      <trans-unit id="118.title" xml:space="preserve">
+        <source>Unread:</source>
+        <target>Unread:</target>
+        <note>Class = "NSTextFieldCell"; title = "Unread:"; ObjectID = "118";</note>
+      </trans-unit>
+      <trans-unit id="121.title" xml:space="preserve">
+        <source>Subscribed</source>
+        <target>Subscribed</target>
+        <note>Class = "NSButtonCell"; title = "Subscribed"; ObjectID = "121";</note>
+      </trans-unit>
+      <trans-unit id="126.title" xml:space="preserve">
+        <source>Load Full HTML Articles</source>
+        <target>Load Full HTML Articles</target>
+        <note>Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126";</note>
+      </trans-unit>
+      <trans-unit id="E84-Uo-ybg.title" xml:space="preserve">
+        <source>Description</source>
+        <target>Description</target>
+        <note>Class = "NSTextFieldCell"; title = "Description"; ObjectID = "E84-Uo-ybg";</note>
+      </trans-unit>
+      <trans-unit id="U0N-RF-bUt.title" xml:space="preserve">
+        <source>Authentication</source>
+        <target>Authentication</target>
+        <note>Class = "NSTextFieldCell"; title = "Authentication"; ObjectID = "U0N-RF-bUt";</note>
+      </trans-unit>
+      <trans-unit id="i9j-KH-c3D.title" xml:space="preserve">
+        <source>General</source>
+        <target>General</target>
+        <note>Class = "NSTextFieldCell"; title = "General"; ObjectID = "i9j-KH-c3D";</note>
+      </trans-unit>
+      <trans-unit id="xPF-M9-oZG.title" xml:space="preserve">
+        <source>Feed URL</source>
+        <target>Feed URL</target>
+        <note>Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG";</note>
+      </trans-unit>
+      <trans-unit id="xTj-hY-aTU.title" xml:space="preserve">
+        <source>Open Cached File…</source>
+        <target>Open Cached File…</target>
+        <note>Class = "NSButtonCell"; title = "Open Cached File…"; ObjectID = "xTj-hY-aTU";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/MainMenu.xib" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3" build-num="11C29"/>
+    </header>
+    <body>
+      <trans-unit id="2S3-dG-ZPg.title" xml:space="preserve">
+        <source>More Styles…</source>
+        <target>More Styles…</target>
+        <note>Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg";</note>
+      </trans-unit>
+      <trans-unit id="4ih-vj-fsk.title" xml:space="preserve">
+        <source>Check Grammar With Spelling</source>
+        <target>Check Grammar With Spelling</target>
+        <note>Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "4ih-vj-fsk";</note>
+      </trans-unit>
+      <trans-unit id="5.title" xml:space="preserve">
+        <source>Bring All to Front</source>
+        <target>Bring All to Front</target>
+        <note>Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5";</note>
+      </trans-unit>
+      <trans-unit id="6yn-y8-lF1.title" xml:space="preserve">
+        <source>Refresh All Subscriptions</source>
+        <target>Refresh All Subscriptions</target>
+        <note>Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1";</note>
+      </trans-unit>
+      <trans-unit id="8Z3-Bg-ry2.title" xml:space="preserve">
+        <source>Flagged</source>
+        <target>Flagged</target>
+        <note>Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8Z3-Bg-ry2";</note>
+      </trans-unit>
+      <trans-unit id="19.title" xml:space="preserve">
+        <source>Window</source>
+        <target>Window</target>
+        <note>Class = "NSMenuItem"; title = "Window"; ObjectID = "19";</note>
+      </trans-unit>
+      <trans-unit id="23.title" xml:space="preserve">
+        <source>Minimize</source>
+        <target>Minimize</target>
+        <note>Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23";</note>
+      </trans-unit>
+      <trans-unit id="24.title" xml:space="preserve">
+        <source>Window</source>
+        <target>Window</target>
+        <note>Class = "NSMenu"; title = "Window"; ObjectID = "24";</note>
+      </trans-unit>
+      <trans-unit id="27s-E3-FHd.title" xml:space="preserve">
+        <source>Correct Spelling Automatically</source>
+        <target>Correct Spelling Automatically</target>
+        <note>Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "27s-E3-FHd";</note>
+      </trans-unit>
+      <trans-unit id="56.title" xml:space="preserve">
+        <source>Vienna</source>
+        <target>Vienna</target>
+        <note>Class = "NSMenuItem"; title = "Vienna"; ObjectID = "56";</note>
+      </trans-unit>
+      <trans-unit id="57.title" xml:space="preserve">
+        <source>Vienna</source>
+        <target>Vienna</target>
+        <note>Class = "NSMenu"; title = "Vienna"; ObjectID = "57";</note>
+      </trans-unit>
+      <trans-unit id="58.title" xml:space="preserve">
+        <source>About Vienna</source>
+        <target>About Vienna</target>
+        <note>Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58";</note>
+      </trans-unit>
+      <trans-unit id="77.title" xml:space="preserve">
+        <source>Page Setup…</source>
+        <target>Page Setup…</target>
+        <note>Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "77";</note>
+      </trans-unit>
+      <trans-unit id="78.title" xml:space="preserve">
+        <source>Print…</source>
+        <target>Print…</target>
+        <note>Class = "NSMenuItem"; title = "Print…"; ObjectID = "78";</note>
+      </trans-unit>
+      <trans-unit id="81.title" xml:space="preserve">
+        <source>File</source>
+        <target>File</target>
+        <note>Class = "NSMenu"; title = "File"; ObjectID = "81";</note>
+      </trans-unit>
+      <trans-unit id="83.title" xml:space="preserve">
+        <source>File</source>
+        <target>File</target>
+        <note>Class = "NSMenuItem"; title = "File"; ObjectID = "83";</note>
+      </trans-unit>
+      <trans-unit id="103.title" xml:space="preserve">
+        <source>Help</source>
+        <target>Help</target>
+        <note>Class = "NSMenuItem"; title = "Help"; ObjectID = "103";</note>
+      </trans-unit>
+      <trans-unit id="106.title" xml:space="preserve">
+        <source>Help</source>
+        <target>Help</target>
+        <note>Class = "NSMenu"; title = "Help"; ObjectID = "106";</note>
+      </trans-unit>
+      <trans-unit id="111.title" xml:space="preserve">
+        <source>Vienna Help</source>
+        <target>Vienna Help</target>
+        <note>Class = "NSMenuItem"; title = "Vienna Help"; ObjectID = "111";</note>
+      </trans-unit>
+      <trans-unit id="129.title" xml:space="preserve">
+        <source>Preferences…</source>
+        <target>Preferences…</target>
+        <note>Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129";</note>
+      </trans-unit>
+      <trans-unit id="130.title" xml:space="preserve">
+        <source>Services</source>
+        <target>Services</target>
+        <note>Class = "NSMenu"; title = "Services"; ObjectID = "130";</note>
+      </trans-unit>
+      <trans-unit id="131.title" xml:space="preserve">
+        <source>Services</source>
+        <target>Services</target>
+        <note>Class = "NSMenuItem"; title = "Services"; ObjectID = "131";</note>
+      </trans-unit>
+      <trans-unit id="134.title" xml:space="preserve">
+        <source>Hide Vienna</source>
+        <target>Hide Vienna</target>
+        <note>Class = "NSMenuItem"; title = "Hide Vienna"; ObjectID = "134";</note>
+      </trans-unit>
+      <trans-unit id="136.title" xml:space="preserve">
+        <source>Quit Vienna</source>
+        <target>Quit Vienna</target>
+        <note>Class = "NSMenuItem"; title = "Quit Vienna"; ObjectID = "136";</note>
+      </trans-unit>
+      <trans-unit id="145.title" xml:space="preserve">
+        <source>Hide Others</source>
+        <target>Hide Others</target>
+        <note>Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145";</note>
+      </trans-unit>
+      <trans-unit id="150.title" xml:space="preserve">
+        <source>Show All</source>
+        <target>Show All</target>
+        <note>Class = "NSMenuItem"; title = "Show All"; ObjectID = "150";</note>
+      </trans-unit>
+      <trans-unit id="154.title" xml:space="preserve">
+        <source>Find…</source>
+        <target>Find…</target>
+        <note>Class = "NSMenuItem"; title = "Find…"; ObjectID = "154";</note>
+      </trans-unit>
+      <trans-unit id="155.title" xml:space="preserve">
+        <source>Jump to Selection</source>
+        <target>Jump to Selection</target>
+        <note>Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "155";</note>
+      </trans-unit>
+      <trans-unit id="157.title" xml:space="preserve">
+        <source>Copy</source>
+        <target>Copy</target>
+        <note>Class = "NSMenuItem"; title = "Copy"; ObjectID = "157";</note>
+      </trans-unit>
+      <trans-unit id="158.title" xml:space="preserve">
+        <source>Undo</source>
+        <target>Undo</target>
+        <note>Class = "NSMenuItem"; title = "Undo"; ObjectID = "158";</note>
+      </trans-unit>
+      <trans-unit id="159.title" xml:space="preserve">
+        <source>Find</source>
+        <target>Find</target>
+        <note>Class = "NSMenu"; title = "Find"; ObjectID = "159";</note>
+      </trans-unit>
+      <trans-unit id="160.title" xml:space="preserve">
+        <source>Cut</source>
+        <target>Cut</target>
+        <note>Class = "NSMenuItem"; title = "Cut"; ObjectID = "160";</note>
+      </trans-unit>
+      <trans-unit id="161.title" xml:space="preserve">
+        <source>Use Selection for Find</source>
+        <target>Use Selection for Find</target>
+        <note>Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "161";</note>
+      </trans-unit>
+      <trans-unit id="162.title" xml:space="preserve">
+        <source>Find Previous</source>
+        <target>Find Previous</target>
+        <note>Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "162";</note>
+      </trans-unit>
+      <trans-unit id="163.title" xml:space="preserve">
+        <source>Edit</source>
+        <target>Edit</target>
+        <note>Class = "NSMenuItem"; title = "Edit"; ObjectID = "163";</note>
+      </trans-unit>
+      <trans-unit id="164.title" xml:space="preserve">
+        <source>Delete</source>
+        <target>Delete</target>
+        <note>Class = "NSMenuItem"; title = "Delete"; ObjectID = "164";</note>
+      </trans-unit>
+      <trans-unit id="167.title" xml:space="preserve">
+        <source>Find Next</source>
+        <target>Find Next</target>
+        <note>Class = "NSMenuItem"; title = "Find Next"; ObjectID = "167";</note>
+      </trans-unit>
+      <trans-unit id="168.title" xml:space="preserve">
+        <source>Find</source>
+        <target>Find</target>
+        <note>Class = "NSMenuItem"; title = "Find"; ObjectID = "168";</note>
+      </trans-unit>
+      <trans-unit id="169.title" xml:space="preserve">
+        <source>Edit</source>
+        <target>Edit</target>
+        <note>Class = "NSMenu"; title = "Edit"; ObjectID = "169";</note>
+      </trans-unit>
+      <trans-unit id="171.title" xml:space="preserve">
+        <source>Paste</source>
+        <target>Paste</target>
+        <note>Class = "NSMenuItem"; title = "Paste"; ObjectID = "171";</note>
+      </trans-unit>
+      <trans-unit id="172.title" xml:space="preserve">
+        <source>Select All</source>
+        <target>Select All</target>
+        <note>Class = "NSMenuItem"; title = "Select All"; ObjectID = "172";</note>
+      </trans-unit>
+      <trans-unit id="173.title" xml:space="preserve">
+        <source>Redo</source>
+        <target>Redo</target>
+        <note>Class = "NSMenuItem"; title = "Redo"; ObjectID = "173";</note>
+      </trans-unit>
+      <trans-unit id="197.title" xml:space="preserve">
+        <source>Zoom</source>
+        <target>Zoom</target>
+        <note>Class = "NSMenuItem"; title = "Zoom"; ObjectID = "197";</note>
+      </trans-unit>
+      <trans-unit id="235.title" xml:space="preserve">
+        <source>View</source>
+        <target>View</target>
+        <note>Class = "NSMenuItem"; title = "View"; ObjectID = "235";</note>
+      </trans-unit>
+      <trans-unit id="237.title" xml:space="preserve">
+        <source>View</source>
+        <target>View</target>
+        <note>Class = "NSMenu"; title = "View"; ObjectID = "237";</note>
+      </trans-unit>
+      <trans-unit id="300.title" xml:space="preserve">
+        <source>Article</source>
+        <target>Article</target>
+        <note>Class = "NSMenu"; title = "Article"; ObjectID = "300";</note>
+      </trans-unit>
+      <trans-unit id="301.title" xml:space="preserve">
+        <source>Article</source>
+        <target>Article</target>
+        <note>Class = "NSMenuItem"; title = "Article"; ObjectID = "301";</note>
+      </trans-unit>
+      <trans-unit id="344.title" xml:space="preserve">
+        <source>Next Unread</source>
+        <target>Next Unread</target>
+        <note>Class = "NSMenuItem"; title = "Next Unread"; ObjectID = "344";</note>
+      </trans-unit>
+      <trans-unit id="387.title" xml:space="preserve">
+        <source>Sort By</source>
+        <target>Sort By</target>
+        <note>Class = "NSMenuItem"; title = "Sort By"; ObjectID = "387";</note>
+      </trans-unit>
+      <trans-unit id="388.title" xml:space="preserve">
+        <source>Sort By</source>
+        <target>Sort By</target>
+        <note>Class = "NSMenu"; title = "Sort By"; ObjectID = "388";</note>
+      </trans-unit>
+      <trans-unit id="402.title" xml:space="preserve">
+        <source>Activity Window</source>
+        <target>Activity Window</target>
+        <note>Class = "NSMenuItem"; title = "Activity Window"; ObjectID = "402";</note>
+      </trans-unit>
+      <trans-unit id="406.title" xml:space="preserve">
+        <source>Refresh All Subscriptions</source>
+        <target>Refresh All Subscriptions</target>
+        <note>Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "406";</note>
+      </trans-unit>
+      <trans-unit id="422.title" xml:space="preserve">
+        <source>Back</source>
+        <target>Back</target>
+        <note>Class = "NSMenuItem"; title = "Back"; ObjectID = "422";</note>
+      </trans-unit>
+      <trans-unit id="423.title" xml:space="preserve">
+        <source>Forward</source>
+        <target>Forward</target>
+        <note>Class = "NSMenuItem"; title = "Forward"; ObjectID = "423";</note>
+      </trans-unit>
+      <trans-unit id="442.title" xml:space="preserve">
+        <source>Columns</source>
+        <target>Columns</target>
+        <note>Class = "NSMenuItem"; title = "Columns"; ObjectID = "442";</note>
+      </trans-unit>
+      <trans-unit id="443.title" xml:space="preserve">
+        <source>Columns</source>
+        <target>Columns</target>
+        <note>Class = "NSMenu"; title = "Columns"; ObjectID = "443";</note>
+      </trans-unit>
+      <trans-unit id="574.title" xml:space="preserve">
+        <source>New Smart Folder…</source>
+        <target>New Smart Folder…</target>
+        <note>Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "574";</note>
+      </trans-unit>
+      <trans-unit id="604.title" xml:space="preserve">
+        <source>Refresh Selected Subscriptions</source>
+        <target>Refresh Selected Subscriptions</target>
+        <note>Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "604";</note>
+      </trans-unit>
+      <trans-unit id="690.title" xml:space="preserve">
+        <source>New Subscription…</source>
+        <target>New Subscription…</target>
+        <note>Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "690";</note>
+      </trans-unit>
+      <trans-unit id="780.title" xml:space="preserve">
+        <source>Import Subscriptions…</source>
+        <target>Import Subscriptions…</target>
+        <note>Class = "NSMenuItem"; title = "Import Subscriptions…"; ObjectID = "780";</note>
+      </trans-unit>
+      <trans-unit id="781.title" xml:space="preserve">
+        <source>Export Subscriptions…</source>
+        <target>Export Subscriptions…</target>
+        <note>Class = "NSMenuItem"; title = "Export Subscriptions…"; ObjectID = "781";</note>
+      </trans-unit>
+      <trans-unit id="789.title" xml:space="preserve">
+        <source>Mark Unread</source>
+        <target>Mark Unread</target>
+        <note>Class = "NSMenuItem"; title = "Mark Unread"; ObjectID = "789";</note>
+      </trans-unit>
+      <trans-unit id="790.title" xml:space="preserve">
+        <source>Mark Flagged</source>
+        <target>Mark Flagged</target>
+        <note>Class = "NSMenuItem"; title = "Mark Flagged"; ObjectID = "790";</note>
+      </trans-unit>
+      <trans-unit id="806.title" xml:space="preserve">
+        <source>New Group Folder…</source>
+        <target>New Group Folder…</target>
+        <note>Class = "NSMenuItem"; title = "New Group Folder…"; ObjectID = "806";</note>
+      </trans-unit>
+      <trans-unit id="826.title" xml:space="preserve">
+        <source>Style</source>
+        <target>Style</target>
+        <note>Class = "NSMenuItem"; title = "Style"; ObjectID = "826";</note>
+      </trans-unit>
+      <trans-unit id="827.title" xml:space="preserve">
+        <source>Style</source>
+        <target>Style</target>
+        <note>Class = "NSMenu"; title = "Style"; ObjectID = "827";</note>
+      </trans-unit>
+      <trans-unit id="858.title" xml:space="preserve">
+        <source>Stop Refreshing</source>
+        <target>Stop Refreshing</target>
+        <note>Class = "NSMenuItem"; title = "Stop Refreshing"; ObjectID = "858";</note>
+      </trans-unit>
+      <trans-unit id="929.title" xml:space="preserve">
+        <source>Vienna Web Site</source>
+        <target>Vienna Web Site</target>
+        <note>Class = "NSMenuItem"; title = "Vienna Web Site"; ObjectID = "929";</note>
+      </trans-unit>
+      <trans-unit id="935.title" xml:space="preserve">
+        <source>Close Window</source>
+        <target>Close Window</target>
+        <note>Class = "NSMenuItem"; title = "Close Window"; ObjectID = "935";</note>
+      </trans-unit>
+      <trans-unit id="940.title" xml:space="preserve">
+        <source>Main Window</source>
+        <target>Main Window</target>
+        <note>Class = "NSMenuItem"; title = "Main Window"; ObjectID = "940";</note>
+      </trans-unit>
+      <trans-unit id="961.title" xml:space="preserve">
+        <source>Empty Trash</source>
+        <target>Empty Trash</target>
+        <note>Class = "NSMenuItem"; title = "Empty Trash"; ObjectID = "961";</note>
+      </trans-unit>
+      <trans-unit id="1008.title" xml:space="preserve">
+        <source>Previous Tab</source>
+        <target>Previous Tab</target>
+        <note>Class = "NSMenuItem"; title = "Previous Tab"; ObjectID = "1008";</note>
+      </trans-unit>
+      <trans-unit id="1009.title" xml:space="preserve">
+        <source>Next Tab</source>
+        <target>Next Tab</target>
+        <note>Class = "NSMenuItem"; title = "Next Tab"; ObjectID = "1009";</note>
+      </trans-unit>
+      <trans-unit id="1023.title" xml:space="preserve">
+        <source>Close Tab</source>
+        <target>Close Tab</target>
+        <note>Class = "NSMenuItem"; title = "Close Tab"; ObjectID = "1023";</note>
+      </trans-unit>
+      <trans-unit id="1025.title" xml:space="preserve">
+        <source>Reload Page</source>
+        <target>Reload Page</target>
+        <note>Class = "NSMenuItem"; title = "Reload Page"; ObjectID = "1025";</note>
+      </trans-unit>
+      <trans-unit id="1027.title" xml:space="preserve">
+        <source>Stop Reloading Page</source>
+        <target>Stop Reloading Page</target>
+        <note>Class = "NSMenuItem"; title = "Stop Reloading Page"; ObjectID = "1027";</note>
+      </trans-unit>
+      <trans-unit id="1036.title" xml:space="preserve">
+        <source>Close All Tabs</source>
+        <target>Close All Tabs</target>
+        <note>Class = "NSMenuItem"; title = "Close All Tabs"; ObjectID = "1036";</note>
+      </trans-unit>
+      <trans-unit id="1040.title" xml:space="preserve">
+        <source>Open Article Page</source>
+        <target>Open Article Page</target>
+        <note>Class = "NSMenuItem"; title = "Open Article Page"; ObjectID = "1040";</note>
+      </trans-unit>
+      <trans-unit id="1044.title" xml:space="preserve">
+        <source>Restore Article</source>
+        <target>Restore Article</target>
+        <note>Class = "NSMenuItem"; title = "Restore Article"; ObjectID = "1044";</note>
+      </trans-unit>
+      <trans-unit id="1061.title" xml:space="preserve">
+        <source>Downloads</source>
+        <target>Downloads</target>
+        <note>Class = "NSMenuItem"; title = "Downloads"; ObjectID = "1061";</note>
+      </trans-unit>
+      <trans-unit id="1067.title" xml:space="preserve">
+        <source>Open Article Page in External Browser</source>
+        <target>Open Article Page in External Browser</target>
+        <note>Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067";</note>
+      </trans-unit>
+      <trans-unit id="1073.title" xml:space="preserve">
+        <source>Send Link by Email</source>
+        <target>Send Link by Email</target>
+        <note>Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073";</note>
+      </trans-unit>
+      <trans-unit id="1084.title" xml:space="preserve">
+        <source>Bigger Text</source>
+        <target>Bigger Text</target>
+        <note>Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084";</note>
+      </trans-unit>
+      <trans-unit id="1085.title" xml:space="preserve">
+        <source>Smaller Text</source>
+        <target>Smaller Text</target>
+        <note>Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085";</note>
+      </trans-unit>
+      <trans-unit id="1101.title" xml:space="preserve">
+        <source>Open Web Location…</source>
+        <target>Open Web Location…</target>
+        <note>Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101";</note>
+      </trans-unit>
+      <trans-unit id="1104.title" xml:space="preserve">
+        <source>Check for Updates</source>
+        <target>Check for Updates</target>
+        <note>Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "1104";</note>
+      </trans-unit>
+      <trans-unit id="1106.title" xml:space="preserve">
+        <source>Refresh Folder Images</source>
+        <target>Refresh Folder Images</target>
+        <note>Class = "NSMenuItem"; title = "Refresh Folder Images"; ObjectID = "1106";</note>
+      </trans-unit>
+      <trans-unit id="1108.title" xml:space="preserve">
+        <source>Layout</source>
+        <target>Layout</target>
+        <note>Class = "NSMenuItem"; title = "Layout"; ObjectID = "1108";</note>
+      </trans-unit>
+      <trans-unit id="1109.title" xml:space="preserve">
+        <source>Layout</source>
+        <target>Layout</target>
+        <note>Class = "NSMenu"; title = "Layout"; ObjectID = "1109";</note>
+      </trans-unit>
+      <trans-unit id="1110.title" xml:space="preserve">
+        <source>Horizontal</source>
+        <target>Horizontal</target>
+        <note>Class = "NSMenuItem"; title = "Horizontal"; ObjectID = "1110";</note>
+      </trans-unit>
+      <trans-unit id="1116.title" xml:space="preserve">
+        <source>Vertical</source>
+        <target>Vertical</target>
+        <note>Class = "NSMenuItem"; title = "Vertical"; ObjectID = "1116";</note>
+      </trans-unit>
+      <trans-unit id="1117.title" xml:space="preserve">
+        <source>Filter By</source>
+        <target>Filter By</target>
+        <note>Class = "NSMenuItem"; title = "Filter By"; ObjectID = "1117";</note>
+      </trans-unit>
+      <trans-unit id="1118.title" xml:space="preserve">
+        <source>Filter By</source>
+        <target>Filter By</target>
+        <note>Class = "NSMenu"; title = "Filter By"; ObjectID = "1118";</note>
+      </trans-unit>
+      <trans-unit id="1146.title" xml:space="preserve">
+        <source>Keyboard Shortcuts</source>
+        <target>Keyboard Shortcuts</target>
+        <note>Class = "NSMenuItem"; title = "Keyboard Shortcuts"; ObjectID = "1146";</note>
+      </trans-unit>
+      <trans-unit id="1160.title" xml:space="preserve">
+        <source>Unified</source>
+        <target>Unified</target>
+        <note>Class = "NSMenuItem"; title = "Unified"; ObjectID = "1160";</note>
+      </trans-unit>
+      <trans-unit id="1177.title" xml:space="preserve">
+        <source>Folder</source>
+        <target>Folder</target>
+        <note>Class = "NSMenuItem"; title = "Folder"; ObjectID = "1177";</note>
+      </trans-unit>
+      <trans-unit id="1178.title" xml:space="preserve">
+        <source>Folder</source>
+        <target>Folder</target>
+        <note>Class = "NSMenu"; title = "Folder"; ObjectID = "1178";</note>
+      </trans-unit>
+      <trans-unit id="1180.title" xml:space="preserve">
+        <source>Edit…</source>
+        <target>Edit…</target>
+        <note>Class = "NSMenuItem"; title = "Edit…"; ObjectID = "1180";</note>
+      </trans-unit>
+      <trans-unit id="1181.title" xml:space="preserve">
+        <source>Rename…</source>
+        <target>Rename…</target>
+        <note>Class = "NSMenuItem"; title = "Rename…"; ObjectID = "1181";</note>
+      </trans-unit>
+      <trans-unit id="1184.title" xml:space="preserve">
+        <source>Delete…</source>
+        <target>Delete…</target>
+        <note>Class = "NSMenuItem"; title = "Delete…"; ObjectID = "1184";</note>
+      </trans-unit>
+      <trans-unit id="1186.title" xml:space="preserve">
+        <source>Skip Folder</source>
+        <target>Skip Folder</target>
+        <note>Class = "NSMenuItem"; title = "Skip Folder"; ObjectID = "1186";</note>
+      </trans-unit>
+      <trans-unit id="1187.title" xml:space="preserve">
+        <source>Mark All Articles as Read</source>
+        <target>Mark All Articles as Read</target>
+        <note>Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "1187";</note>
+      </trans-unit>
+      <trans-unit id="1191.title" xml:space="preserve">
+        <source>Open Subscription Home Page</source>
+        <target>Open Subscription Home Page</target>
+        <note>Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "1191";</note>
+      </trans-unit>
+      <trans-unit id="1192.title" xml:space="preserve">
+        <source>Open Subscription Home Page in External Browser</source>
+        <target>Open Subscription Home Page in External Browser</target>
+        <note>Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "1192";</note>
+      </trans-unit>
+      <trans-unit id="1195.title" xml:space="preserve">
+        <source>Mark All Subscriptions as Read</source>
+        <target>Mark All Subscriptions as Read</target>
+        <note>Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "1195";</note>
+      </trans-unit>
+      <trans-unit id="1198.title" xml:space="preserve">
+        <source>Delete Article</source>
+        <target>Delete Article</target>
+        <note>Class = "NSMenuItem"; title = "Delete Article"; ObjectID = "1198";</note>
+      </trans-unit>
+      <trans-unit id="1214.title" xml:space="preserve">
+        <source>Open New Tab</source>
+        <target>Open New Tab</target>
+        <note>Class = "NSMenuItem"; title = "Open New Tab"; ObjectID = "1214";</note>
+      </trans-unit>
+      <trans-unit id="1216.title" xml:space="preserve">
+        <source>Download Enclosure</source>
+        <target>Download Enclosure</target>
+        <note>Class = "NSMenuItem"; title = "Download Enclosure"; ObjectID = "1216";</note>
+      </trans-unit>
+      <trans-unit id="1257.title" xml:space="preserve">
+        <source>Customize Toolbar…</source>
+        <target>Customize Toolbar…</target>
+        <note>Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257";</note>
+      </trans-unit>
+      <trans-unit id="1258.title" xml:space="preserve">
+        <source>Hide Toolbar</source>
+        <target>Hide Toolbar</target>
+        <note>Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258";</note>
+      </trans-unit>
+      <trans-unit id="1259.title" xml:space="preserve">
+        <source>Hide Status Bar</source>
+        <target>Hide Status Bar</target>
+        <note>Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259";</note>
+      </trans-unit>
+      <trans-unit id="1325.title" xml:space="preserve">
+        <source>Show Filter Bar</source>
+        <target>Show Filter Bar</target>
+        <note>Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "1325";</note>
+      </trans-unit>
+      <trans-unit id="1327.title" xml:space="preserve">
+        <source>Search Articles</source>
+        <target>Search Articles</target>
+        <note>Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327";</note>
+      </trans-unit>
+      <trans-unit id="1336.title" xml:space="preserve">
+        <source>Order By</source>
+        <target>Order By</target>
+        <note>Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336";</note>
+      </trans-unit>
+      <trans-unit id="1337.title" xml:space="preserve">
+        <source>Order By</source>
+        <target>Order By</target>
+        <note>Class = "NSMenu"; title = "Order By"; ObjectID = "1337";</note>
+      </trans-unit>
+      <trans-unit id="1338.title" xml:space="preserve">
+        <source>Manual</source>
+        <target>Manual</target>
+        <note>Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338";</note>
+      </trans-unit>
+      <trans-unit id="1339.title" xml:space="preserve">
+        <source>Name</source>
+        <target>Name</target>
+        <note>Class = "NSMenuItem"; title = "Name"; ObjectID = "1339";</note>
+      </trans-unit>
+      <trans-unit id="1408.title" xml:space="preserve">
+        <source>Unsubscribe</source>
+        <target>Unsubscribe</target>
+        <note>Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408";</note>
+      </trans-unit>
+      <trans-unit id="1409.title" xml:space="preserve">
+        <source>Get Info…</source>
+        <target>Get Info…</target>
+        <note>Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409";</note>
+      </trans-unit>
+      <trans-unit id="1413.title" xml:space="preserve">
+        <source>Use Current Style for Articles</source>
+        <target>Use Current Style for Articles</target>
+        <note>Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413";</note>
+      </trans-unit>
+      <trans-unit id="1415.title" xml:space="preserve">
+        <source>Use Web Page for Articles</source>
+        <target>Use Web Page for Articles</target>
+        <note>Class = "NSMenuItem"; title = "Use Web Page for Articles"; ObjectID = "1415";</note>
+      </trans-unit>
+      <trans-unit id="1425.title" xml:space="preserve">
+        <source>Force Refresh Selected Subscriptions From Open Reader</source>
+        <target>Force Refresh Selected Subscriptions From Open Reader</target>
+        <note>Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "1425";</note>
+      </trans-unit>
+      <trans-unit id="1428.title" xml:space="preserve">
+        <source>Update Subscriptions From Open Reader</source>
+        <target>Update Subscriptions From Open Reader</target>
+        <note>Class = "NSMenuItem"; title = "Update Subscriptions From Open Reader"; ObjectID = "1428";</note>
+      </trans-unit>
+      <trans-unit id="1458.title" xml:space="preserve">
+        <source>Reindex Database</source>
+        <target>Reindex Database</target>
+        <note>Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458";</note>
+      </trans-unit>
+      <trans-unit id="BUc-Ki-OOg.title" xml:space="preserve">
+        <source>Unread or Flagged</source>
+        <target>Unread or Flagged</target>
+        <note>Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "BUc-Ki-OOg";</note>
+      </trans-unit>
+      <trans-unit id="CGp-H4-UaI.title" xml:space="preserve">
+        <source>Last 48 Hours</source>
+        <target>Last 48 Hours</target>
+        <note>Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI";</note>
+      </trans-unit>
+      <trans-unit id="CLG-Dq-a59.title" xml:space="preserve">
+        <source>Show Spelling and Grammar</source>
+        <target>Show Spelling and Grammar</target>
+        <note>Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "CLG-Dq-a59";</note>
+      </trans-unit>
+      <trans-unit id="G6k-0L-moc.title" xml:space="preserve">
+        <source>Speech</source>
+        <target>Speech</target>
+        <note>Class = "NSMenu"; title = "Speech"; ObjectID = "G6k-0L-moc";</note>
+      </trans-unit>
+      <trans-unit id="JXn-SB-3t2.title" xml:space="preserve">
+        <source>Speech</source>
+        <target>Speech</target>
+        <note>Class = "NSMenuItem"; title = "Speech"; ObjectID = "JXn-SB-3t2";</note>
+      </trans-unit>
+      <trans-unit id="MHF-D4-pRN.title" xml:space="preserve">
+        <source>Make Upper Case</source>
+        <target>Make Upper Case</target>
+        <note>Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN";</note>
+      </trans-unit>
+      <trans-unit id="QEb-Bm-CPN.title" xml:space="preserve">
+        <source>Substitutions</source>
+        <target>Substitutions</target>
+        <note>Class = "NSMenu"; title = "Substitutions"; ObjectID = "QEb-Bm-CPN";</note>
+      </trans-unit>
+      <trans-unit id="Rs9-r3-soc.title" xml:space="preserve">
+        <source>Article List</source>
+        <target>Article List</target>
+        <note>Class = "NSMenuItem"; title = "Article List"; ObjectID = "Rs9-r3-soc";</note>
+      </trans-unit>
+      <trans-unit id="RtQ-eP-bfk.title" xml:space="preserve">
+        <source>Smart Dashes</source>
+        <target>Smart Dashes</target>
+        <note>Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk";</note>
+      </trans-unit>
+      <trans-unit id="UFF-Fn-8ti.title" xml:space="preserve">
+        <source>Transformations</source>
+        <target>Transformations</target>
+        <note>Class = "NSMenu"; title = "Transformations"; ObjectID = "UFF-Fn-8ti";</note>
+      </trans-unit>
+      <trans-unit id="ZCa-7v-54l.title" xml:space="preserve">
+        <source>Enter Full Screen</source>
+        <target>Enter Full Screen</target>
+        <note>Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "ZCa-7v-54l";</note>
+      </trans-unit>
+      <trans-unit id="bd7-qY-ofB.title" xml:space="preserve">
+        <source>Text Replacement</source>
+        <target>Text Replacement</target>
+        <note>Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "bd7-qY-ofB";</note>
+      </trans-unit>
+      <trans-unit id="cK9-Df-xA3.title" xml:space="preserve">
+        <source>Start Speaking</source>
+        <target>Start Speaking</target>
+        <note>Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "cK9-Df-xA3";</note>
+      </trans-unit>
+      <trans-unit id="eVb-Qt-XJb.title" xml:space="preserve">
+        <source>Substitutions</source>
+        <target>Substitutions</target>
+        <note>Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "eVb-Qt-XJb";</note>
+      </trans-unit>
+      <trans-unit id="ecl-HO-Kpi.title" xml:space="preserve">
+        <source>Mark All Subscriptions as Read</source>
+        <target>Mark All Subscriptions as Read</target>
+        <note>Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi";</note>
+      </trans-unit>
+      <trans-unit id="fad-Nj-OFI.title" xml:space="preserve">
+        <source>Spelling</source>
+        <target>Spelling</target>
+        <note>Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI";</note>
+      </trans-unit>
+      <trans-unit id="fbd-ZI-tZW.title" xml:space="preserve">
+        <source>Check Document Now</source>
+        <target>Check Document Now</target>
+        <note>Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "fbd-ZI-tZW";</note>
+      </trans-unit>
+      <trans-unit id="gbo-AM-wcF.title" xml:space="preserve">
+        <source>Stop Speaking</source>
+        <target>Stop Speaking</target>
+        <note>Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "gbo-AM-wcF";</note>
+      </trans-unit>
+      <trans-unit id="idm-wm-h8z.title" xml:space="preserve">
+        <source>Data Detectors</source>
+        <target>Data Detectors</target>
+        <note>Class = "NSMenuItem"; title = "Data Detectors"; ObjectID = "idm-wm-h8z";</note>
+      </trans-unit>
+      <trans-unit id="joR-kW-sIU.title" xml:space="preserve">
+        <source>Transformations</source>
+        <target>Transformations</target>
+        <note>Class = "NSMenuItem"; title = "Transformations"; ObjectID = "joR-kW-sIU";</note>
+      </trans-unit>
+      <trans-unit id="kCi-pf-mkc.title" xml:space="preserve">
+        <source>Smart Quotes</source>
+        <target>Smart Quotes</target>
+        <note>Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "kCi-pf-mkc";</note>
+      </trans-unit>
+      <trans-unit id="l8F-tb-7E0.title" xml:space="preserve">
+        <source>Spelling and Grammar</source>
+        <target>Spelling and Grammar</target>
+        <note>Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "l8F-tb-7E0";</note>
+      </trans-unit>
+      <trans-unit id="pKl-6f-Hlc.title" xml:space="preserve">
+        <source>Mark Read</source>
+        <target>Mark Read</target>
+        <note>Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc";</note>
+      </trans-unit>
+      <trans-unit id="qzH-De-act.title" xml:space="preserve">
+        <source>Smart Copy/Paste</source>
+        <target>Smart Copy/Paste</target>
+        <note>Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "qzH-De-act";</note>
+      </trans-unit>
+      <trans-unit id="rNG-xr-3x7.title" xml:space="preserve">
+        <source>Unread Articles</source>
+        <target>Unread Articles</target>
+        <note>Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7";</note>
+      </trans-unit>
+      <trans-unit id="t1E-6n-jtA.title" xml:space="preserve">
+        <source>All Articles</source>
+        <target>All Articles</target>
+        <note>Class = "NSMenuItem"; title = "All Articles"; ObjectID = "t1E-6n-jtA";</note>
+      </trans-unit>
+      <trans-unit id="t34-de-pMs.title" xml:space="preserve">
+        <source>Today</source>
+        <target>Today</target>
+        <note>Class = "NSMenuItem"; title = "Today"; ObjectID = "t34-de-pMs";</note>
+      </trans-unit>
+      <trans-unit id="tfv-fu-HFM.title" xml:space="preserve">
+        <source>Check Spelling While Typing</source>
+        <target>Check Spelling While Typing</target>
+        <note>Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "tfv-fu-HFM";</note>
+      </trans-unit>
+      <trans-unit id="v3R-CV-0b9.title" xml:space="preserve">
+        <source>Capitalize</source>
+        <target>Capitalize</target>
+        <note>Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "v3R-CV-0b9";</note>
+      </trans-unit>
+      <trans-unit id="w4Q-ne-FPI.title" xml:space="preserve">
+        <source>Smart Links</source>
+        <target>Smart Links</target>
+        <note>Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "w4Q-ne-FPI";</note>
+      </trans-unit>
+      <trans-unit id="wnc-vZ-fO4.title" xml:space="preserve">
+        <source>Show Substitutions</source>
+        <target>Show Substitutions</target>
+        <note>Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "wnc-vZ-fO4";</note>
+      </trans-unit>
+      <trans-unit id="wqh-Jc-gBm.title" xml:space="preserve">
+        <source>Last Refresh</source>
+        <target>Last Refresh</target>
+        <note>Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm";</note>
+      </trans-unit>
+      <trans-unit id="xpF-dh-E2m.title" xml:space="preserve">
+        <source>Make Lower Case</source>
+        <target>Make Lower Case</target>
+        <note>Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "xpF-dh-E2m";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/MainWindowController.xib" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3" build-num="11C29"/>
+    </header>
+    <body>
+      <trans-unit id="3tM-J3-kmf.title" xml:space="preserve">
+        <source>Today</source>
+        <target>Today</target>
+        <note>Class = "NSMenuItem"; title = "Today"; ObjectID = "3tM-J3-kmf";</note>
+      </trans-unit>
+      <trans-unit id="4c1-NR-ofo.label" xml:space="preserve">
+        <source>Empty Trash</source>
+        <target>Empty Trash</target>
+        <note>Class = "NSToolbarItem"; label = "Empty Trash"; ObjectID = "4c1-NR-ofo";</note>
+      </trans-unit>
+      <trans-unit id="4c1-NR-ofo.paletteLabel" xml:space="preserve">
+        <source>Empty Trash</source>
+        <target>Empty Trash</target>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Empty Trash"; ObjectID = "4c1-NR-ofo";</note>
+      </trans-unit>
+      <trans-unit id="4c1-NR-ofo.toolTip" xml:space="preserve">
+        <source>Delete all articles in the trash</source>
+        <target>Delete all articles in the trash</target>
+        <note>Class = "NSToolbarItem"; toolTip = "Delete all articles in the trash"; ObjectID = "4c1-NR-ofo";</note>
+      </trans-unit>
+      <trans-unit id="7iy-IN-8oG.label" xml:space="preserve">
+        <source>Get Info</source>
+        <target>Get Info</target>
+        <note>Class = "NSToolbarItem"; label = "Get Info"; ObjectID = "7iy-IN-8oG";</note>
+      </trans-unit>
+      <trans-unit id="7iy-IN-8oG.paletteLabel" xml:space="preserve">
+        <source>Get Info</source>
+        <target>Get Info</target>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Get Info"; ObjectID = "7iy-IN-8oG";</note>
+      </trans-unit>
+      <trans-unit id="7iy-IN-8oG.toolTip" xml:space="preserve">
+        <source>See information about the selected subscription</source>
+        <target>See information about the selected subscription</target>
+        <note>Class = "NSToolbarItem"; toolTip = "See information about the selected subscription"; ObjectID = "7iy-IN-8oG";</note>
+      </trans-unit>
+      <trans-unit id="8LJ-RZ-pfu.title" xml:space="preserve">
+        <source>Flagged</source>
+        <target>Flagged</target>
+        <note>Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8LJ-RZ-pfu";</note>
+      </trans-unit>
+      <trans-unit id="10h-xf-C6T.label" xml:space="preserve">
+        <source>Send Link</source>
+        <target>Send Link</target>
+        <note>Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T";</note>
+      </trans-unit>
+      <trans-unit id="10h-xf-C6T.paletteLabel" xml:space="preserve">
+        <source>Send Link</source>
+        <target>Send Link</target>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T";</note>
+      </trans-unit>
+      <trans-unit id="10h-xf-C6T.toolTip" xml:space="preserve">
+        <source>Email a link to the current article or website</source>
+        <target>Email a link to the current article or website</target>
+        <note>Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T";</note>
+      </trans-unit>
+      <trans-unit id="21.title" xml:space="preserve">
+        <source>Vienna</source>
+        <target>Vienna</target>
+        <note>Class = "NSWindow"; title = "Vienna"; ObjectID = "21";</note>
+      </trans-unit>
+      <trans-unit id="1304.ibShadowedToolTip" xml:space="preserve">
+        <source>Filter displayed articles by matching text</source>
+        <target>Filter displayed articles by matching text</target>
+        <note>Class = "NSSearchField"; ibShadowedToolTip = "Filter displayed articles by matching text"; ObjectID = "1304";</note>
+      </trans-unit>
+      <trans-unit id="1306.ibShadowedToolTip" xml:space="preserve">
+        <source>Filter articles</source>
+        <target>Filter articles</target>
+        <note>Class = "NSPopUpButton"; ibShadowedToolTip = "Filter articles"; ObjectID = "1306";</note>
+      </trans-unit>
+      <trans-unit id="1313.ibExternalAccessibilityDescription" xml:space="preserve">
+        <source>Close the filter bar</source>
+        <target>Close the filter bar</target>
+        <note>Class = "NSButton"; ibExternalAccessibilityDescription = "Close the filter bar"; ObjectID = "1313";</note>
+      </trans-unit>
+      <trans-unit id="1313.ibShadowedToolTip" xml:space="preserve">
+        <source>Close the filter bar</source>
+        <target>Close the filter bar</target>
+        <note>Class = "NSButton"; ibShadowedToolTip = "Close the filter bar"; ObjectID = "1313";</note>
+      </trans-unit>
+      <trans-unit id="1377.title" xml:space="preserve">
+        <source>Filter by:</source>
+        <target>Filter by:</target>
+        <note>Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377";</note>
+      </trans-unit>
+      <trans-unit id="1404.title" xml:space="preserve">
+        <source>Current Filter</source>
+        <target>Current Filter</target>
+        <note>Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404";</note>
+      </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.label" xml:space="preserve">
+        <source>Add</source>
+        <target>Add</target>
+        <note>Class = "NSToolbarItem"; label = "Add"; ObjectID = "CPA-Ha-aj1";</note>
+      </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.paletteLabel" xml:space="preserve">
+        <source>Add</source>
+        <target>Add</target>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1";</note>
+      </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.toolTip" xml:space="preserve">
+        <source>Subscribe to a feed or add a folder or smart folder.</source>
+        <target>Subscribe to a feed or add a folder or smart folder.</target>
+        <note>Class = "NSToolbarItem"; toolTip = "Subscribe to a feed or add a folder or smart folder."; ObjectID = "CPA-Ha-aj1";</note>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.label" xml:space="preserve">
+        <source>All Read</source>
+        <target>All Read</target>
+        <note>Class = "NSToolbarItem"; label = "All Read"; ObjectID = "Gyz-dq-ewv";</note>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.paletteLabel" xml:space="preserve">
+        <source>Mark All Items as Read</source>
+        <target>Mark All Items as Read</target>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Mark All Items as Read"; ObjectID = "Gyz-dq-ewv";</note>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.toolTip" xml:space="preserve">
+        <source>Mark all items as read</source>
+        <target>Mark all items as read</target>
+        <note>Class = "NSToolbarItem"; toolTip = "Mark all items as read"; ObjectID = "Gyz-dq-ewv";</note>
+      </trans-unit>
+      <trans-unit id="Hs0-hu-A2g.title" xml:space="preserve">
+        <source>Refresh Selected Subscriptions</source>
+        <target>Refresh Selected Subscriptions</target>
+        <note>Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g";</note>
+      </trans-unit>
+      <trans-unit id="JT2-Q7-gRj.title" xml:space="preserve">
+        <source>All Articles</source>
+        <target>All Articles</target>
+        <note>Class = "NSMenuItem"; title = "All Articles"; ObjectID = "JT2-Q7-gRj";</note>
+      </trans-unit>
+      <trans-unit id="MaO-r1-tcm.title" xml:space="preserve">
+        <source>More Styles…</source>
+        <target>More Styles…</target>
+        <note>Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm";</note>
+      </trans-unit>
+      <trans-unit id="Nmd-zx-Dys.label" xml:space="preserve">
+        <source>Refresh</source>
+        <target>Refresh</target>
+        <note>Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys";</note>
+      </trans-unit>
+      <trans-unit id="Nmd-zx-Dys.paletteLabel" xml:space="preserve">
+        <source>Refresh</source>
+        <target>Refresh</target>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Refresh"; ObjectID = "Nmd-zx-Dys";</note>
+      </trans-unit>
+      <trans-unit id="Nmd-zx-Dys.toolTip" xml:space="preserve">
+        <source>Refresh all your subscriptions</source>
+        <target>Refresh all your subscriptions</target>
+        <note>Class = "NSToolbarItem"; toolTip = "Refresh all your subscriptions"; ObjectID = "Nmd-zx-Dys";</note>
+      </trans-unit>
+      <trans-unit id="OIA-vb-5jR.label" xml:space="preserve">
+        <source>Search Articles</source>
+        <target>Search Articles</target>
+        <note>Class = "NSToolbarItem"; label = "Search Articles"; ObjectID = "OIA-vb-5jR";</note>
+      </trans-unit>
+      <trans-unit id="OIA-vb-5jR.paletteLabel" xml:space="preserve">
+        <source>Search Articles</source>
+        <target>Search Articles</target>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Search Articles"; ObjectID = "OIA-vb-5jR";</note>
+      </trans-unit>
+      <trans-unit id="OIA-vb-5jR.toolTip" xml:space="preserve">
+        <source>Search Articles</source>
+        <target>Search Articles</target>
+        <note>Class = "NSToolbarItem"; toolTip = "Search Articles"; ObjectID = "OIA-vb-5jR";</note>
+      </trans-unit>
+      <trans-unit id="Pqr-dM-SQQ.title" xml:space="preserve">
+        <source>New Smart Folder…</source>
+        <target>New Smart Folder…</target>
+        <note>Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "Pqr-dM-SQQ";</note>
+      </trans-unit>
+      <trans-unit id="RaH-Yu-Ija.title" xml:space="preserve">
+        <source>New Folder…</source>
+        <target>New Folder…</target>
+        <note>Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija";</note>
+      </trans-unit>
+      <trans-unit id="Rdq-QU-3hM.title" xml:space="preserve">
+        <source>Delete…</source>
+        <target>Delete…</target>
+        <note>Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Rdq-QU-3hM";</note>
+      </trans-unit>
+      <trans-unit id="SoG-b2-O1S.label" xml:space="preserve">
+        <source>Skip Folder</source>
+        <target>Skip Folder</target>
+        <note>Class = "NSToolbarItem"; label = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
+      </trans-unit>
+      <trans-unit id="SoG-b2-O1S.paletteLabel" xml:space="preserve">
+        <source>Skip Folder</source>
+        <target>Skip Folder</target>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
+      </trans-unit>
+      <trans-unit id="SoG-b2-O1S.toolTip" xml:space="preserve">
+        <source>Skip Folder</source>
+        <target>Skip Folder</target>
+        <note>Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
+      </trans-unit>
+      <trans-unit id="TSQ-UW-4gU.label" xml:space="preserve">
+        <source>Action</source>
+        <target>Action</target>
+        <note>Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU";</note>
+      </trans-unit>
+      <trans-unit id="TSQ-UW-4gU.paletteLabel" xml:space="preserve">
+        <source>Action</source>
+        <target>Action</target>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Action"; ObjectID = "TSQ-UW-4gU";</note>
+      </trans-unit>
+      <trans-unit id="TSQ-UW-4gU.toolTip" xml:space="preserve">
+        <source>Additional actions for the selected folder</source>
+        <target>Additional actions for the selected folder</target>
+        <note>Class = "NSToolbarItem"; toolTip = "Additional actions for the selected folder"; ObjectID = "TSQ-UW-4gU";</note>
+      </trans-unit>
+      <trans-unit id="Xw6-KX-rhd.title" xml:space="preserve">
+        <source>Last 48 Hours</source>
+        <target>Last 48 Hours</target>
+        <note>Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "Xw6-KX-rhd";</note>
+      </trans-unit>
+      <trans-unit id="Y0d-K7-46f.title" xml:space="preserve">
+        <source>Get Info</source>
+        <target>Get Info</target>
+        <note>Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f";</note>
+      </trans-unit>
+      <trans-unit id="ZVp-Nv-0jh.title" xml:space="preserve">
+        <source>Open Subscription Home Page in External Browser</source>
+        <target>Open Subscription Home Page in External Browser</target>
+        <note>Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "ZVp-Nv-0jh";</note>
+      </trans-unit>
+      <trans-unit id="Zu1-zW-uo2.title" xml:space="preserve">
+        <source>Open Subscription Home Page</source>
+        <target>Open Subscription Home Page</target>
+        <note>Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2";</note>
+      </trans-unit>
+      <trans-unit id="azL-oz-mJL.label" xml:space="preserve">
+        <source>Style</source>
+        <target>Style</target>
+        <note>Class = "NSToolbarItem"; label = "Style"; ObjectID = "azL-oz-mJL";</note>
+      </trans-unit>
+      <trans-unit id="azL-oz-mJL.paletteLabel" xml:space="preserve">
+        <source>Style</source>
+        <target>Style</target>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Style"; ObjectID = "azL-oz-mJL";</note>
+      </trans-unit>
+      <trans-unit id="azL-oz-mJL.toolTip" xml:space="preserve">
+        <source>Display the list of available styles</source>
+        <target>Display the list of available styles</target>
+        <note>Class = "NSToolbarItem"; toolTip = "Display the list of available styles"; ObjectID = "azL-oz-mJL";</note>
+      </trans-unit>
+      <trans-unit id="fpY-CJ-hKU.label" xml:space="preserve">
+        <source>Next Unread</source>
+        <target>Next Unread</target>
+        <note>Class = "NSToolbarItem"; label = "Next Unread"; ObjectID = "fpY-CJ-hKU";</note>
+      </trans-unit>
+      <trans-unit id="fpY-CJ-hKU.paletteLabel" xml:space="preserve">
+        <source>Next Unread</source>
+        <target>Next Unread</target>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Next Unread"; ObjectID = "fpY-CJ-hKU";</note>
+      </trans-unit>
+      <trans-unit id="fpY-CJ-hKU.toolTip" xml:space="preserve">
+        <source>Next Unread</source>
+        <target>Next Unread</target>
+        <note>Class = "NSToolbarItem"; toolTip = "Next Unread"; ObjectID = "fpY-CJ-hKU";</note>
+      </trans-unit>
+      <trans-unit id="gOG-UJ-Pin.label" xml:space="preserve">
+        <source>Back</source>
+        <target>Back</target>
+        <note>Class = "NSToolbarItem"; label = "Back"; ObjectID = "gOG-UJ-Pin";</note>
+      </trans-unit>
+      <trans-unit id="gOG-UJ-Pin.paletteLabel" xml:space="preserve">
+        <source>Back</source>
+        <target>Back</target>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Back"; ObjectID = "gOG-UJ-Pin";</note>
+      </trans-unit>
+      <trans-unit id="gOG-UJ-Pin.toolTip" xml:space="preserve">
+        <source>Back</source>
+        <target>Back</target>
+        <note>Class = "NSToolbarItem"; toolTip = "Back"; ObjectID = "gOG-UJ-Pin";</note>
+      </trans-unit>
+      <trans-unit id="iqm-sr-F8U.title" xml:space="preserve">
+        <source>Force Refresh Selected Subscriptions From Open Reader</source>
+        <target>Force Refresh Selected Subscriptions From Open Reader</target>
+        <note>Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "iqm-sr-F8U";</note>
+      </trans-unit>
+      <trans-unit id="l14-tu-w7l.title" xml:space="preserve">
+        <source>Rename…</source>
+        <target>Rename…</target>
+        <note>Class = "NSMenuItem"; title = "Rename…"; ObjectID = "l14-tu-w7l";</note>
+      </trans-unit>
+      <trans-unit id="lhy-4c-asJ.placeholderString" xml:space="preserve">
+        <source>Search for folders</source>
+        <target>Search for folders</target>
+        <note>Class = "NSSearchFieldCell"; placeholderString = "Search for folders"; ObjectID = "lhy-4c-asJ";</note>
+      </trans-unit>
+      <trans-unit id="psA-wp-PcZ.title" xml:space="preserve">
+        <source>New Subscription…</source>
+        <target>New Subscription…</target>
+        <note>Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "psA-wp-PcZ";</note>
+      </trans-unit>
+      <trans-unit id="sDP-Ni-g3a.title" xml:space="preserve">
+        <source>Unread Articles</source>
+        <target>Unread Articles</target>
+        <note>Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "sDP-Ni-g3a";</note>
+      </trans-unit>
+      <trans-unit id="ty7-ph-peE.title" xml:space="preserve">
+        <source>Unread or Flagged</source>
+        <target>Unread or Flagged</target>
+        <note>Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "ty7-ph-peE";</note>
+      </trans-unit>
+      <trans-unit id="vOQ-xo-w8E.title" xml:space="preserve">
+        <source>Edit…</source>
+        <target>Edit…</target>
+        <note>Class = "NSMenuItem"; title = "Edit…"; ObjectID = "vOQ-xo-w8E";</note>
+      </trans-unit>
+      <trans-unit id="xNW-zC-IMZ.title" xml:space="preserve">
+        <source>Mark All Articles as Read</source>
+        <target>Mark All Articles as Read</target>
+        <note>Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "xNW-zC-IMZ";</note>
+      </trans-unit>
+      <trans-unit id="xVH-W7-Br4.title" xml:space="preserve">
+        <source>Last Refresh</source>
+        <target>Last Refresh</target>
+        <note>Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "xVH-W7-Br4";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/RSSFeed.xib" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3" build-num="11C29"/>
+    </header>
+    <body>
+      <trans-unit id="102.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target>Cancel</target>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "102";</note>
+      </trans-unit>
+      <trans-unit id="103.title" xml:space="preserve">
+        <source>Subscribe</source>
+        <target>Subscribe</target>
+        <note>Class = "NSButtonCell"; title = "Subscribe"; ObjectID = "103";</note>
+      </trans-unit>
+      <trans-unit id="104.title" xml:space="preserve">
+        <source>Source:</source>
+        <target>Source:</target>
+        <note>Class = "NSTextFieldCell"; title = "Source:"; ObjectID = "104";</note>
+      </trans-unit>
+      <trans-unit id="106.title" xml:space="preserve">
+        <source>Create a new subscription</source>
+        <target>Create a new subscription</target>
+        <note>Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106";</note>
+      </trans-unit>
+      <trans-unit id="107.title" xml:space="preserve">
+        <source>Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.</source>
+        <target>Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.</target>
+        <note>Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107";</note>
+      </trans-unit>
+      <trans-unit id="110.title" xml:space="preserve">
+        <source>URL:</source>
+        <target>URL:</target>
+        <note>Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110";</note>
+      </trans-unit>
+      <trans-unit id="111.title" xml:space="preserve">
+        <source>Save</source>
+        <target>Save</target>
+        <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "111";</note>
+      </trans-unit>
+      <trans-unit id="112.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target>Cancel</target>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "112";</note>
+      </trans-unit>
+      <trans-unit id="114.title" xml:space="preserve">
+        <source>Edit subscription</source>
+        <target>Edit subscription</target>
+        <note>Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114";</note>
+      </trans-unit>
+      <trans-unit id="116.title" xml:space="preserve">
+        <source>Subscribe in Open Reader</source>
+        <target>Subscribe in Open Reader</target>
+        <note>Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/SearchFolder.xib" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3" build-num="11C29"/>
+    </header>
+    <body>
+      <trans-unit id="82.title" xml:space="preserve">
+        <source>all</source>
+        <target>all</target>
+        <note>Class = "NSMenuItem"; title = "all"; ObjectID = "82";</note>
+      </trans-unit>
+      <trans-unit id="94.title" xml:space="preserve">
+        <source>Smart folder name:</source>
+        <target>Smart folder name:</target>
+        <note>Class = "NSTextFieldCell"; title = "Smart folder name:"; ObjectID = "94";</note>
+      </trans-unit>
+      <trans-unit id="96.title" xml:space="preserve">
+        <source>Save</source>
+        <target>Save</target>
+        <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "96";</note>
+      </trans-unit>
+      <trans-unit id="97.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target>Cancel</target>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97";</note>
+      </trans-unit>
+      <trans-unit id="98.title" xml:space="preserve">
+        <source>Show all articles that match</source>
+        <target>Show all articles that match</target>
+        <note>Class = "NSTextFieldCell"; title = "Show all articles that match"; ObjectID = "98";</note>
+      </trans-unit>
+      <trans-unit id="100.title" xml:space="preserve">
+        <source>of the following conditions:</source>
+        <target>of the following conditions:</target>
+        <note>Class = "NSTextFieldCell"; title = "of the following conditions:"; ObjectID = "100";</note>
+      </trans-unit>
+      <trans-unit id="j0v-xF-tpl.title" xml:space="preserve">
+        <source>any</source>
+        <target>any</target>
+        <note>Class = "NSMenuItem"; title = "any"; ObjectID = "j0v-xF-tpl";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/SyncingPreferencesView.xib" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3" build-num="11C29"/>
+    </header>
+    <body>
+      <trans-unit id="Ar5-Qc-YTe.ibExternalAccessibilityDescription" xml:space="preserve">
+        <source>Visit the website</source>
+        <target>Visit the website</target>
+        <note>Class = "NSButton"; ibExternalAccessibilityDescription = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
+      </trans-unit>
+      <trans-unit id="Ar5-Qc-YTe.ibShadowedToolTip" xml:space="preserve">
+        <source>Visit the website</source>
+        <target>Visit the website</target>
+        <note>Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
+      </trans-unit>
+      <trans-unit id="Lkv-md-rEW.title" xml:space="preserve">
+        <source>Sync with an Open Reader server</source>
+        <target>Sync with an Open Reader server</target>
+        <note>Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Lkv-md-rEW";</note>
+      </trans-unit>
+      <trans-unit id="NKI-36-zCY.title" xml:space="preserve">
+        <source>Password:</source>
+        <target>Password:</target>
+        <note>Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "NKI-36-zCY";</note>
+      </trans-unit>
+      <trans-unit id="O2q-8o-CSb.title" xml:space="preserve">
+        <source>Login:</source>
+        <target>Login:</target>
+        <note>Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "O2q-8o-CSb";</note>
+      </trans-unit>
+      <trans-unit id="e0z-IA-uBQ.title" xml:space="preserve">
+        <source>🌍</source>
+        <target>🌍</target>
+        <note>Class = "NSButtonCell"; title = "🌍"; ObjectID = "e0z-IA-uBQ";</note>
+      </trans-unit>
+      <trans-unit id="kM0-7a-obO.ibShadowedToolTip" xml:space="preserve">
+        <source>Select a server supporting the Open Reader API</source>
+        <target>Select a server supporting the Open Reader API</target>
+        <note>Class = "NSTextField"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "kM0-7a-obO";</note>
+      </trans-unit>
+      <trans-unit id="tec-2d-Xej.title" xml:space="preserve">
+        <source>URL: https://</source>
+        <target>URL: https://</target>
+        <note>Class = "NSTextFieldCell"; title = "URL: https://"; ObjectID = "tec-2d-Xej";</note>
+      </trans-unit>
+      <trans-unit id="uTl-XE-0ym.title" xml:space="preserve">
+        <source>Server:</source>
+        <target>Server:</target>
+        <note>Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "uTl-XE-0ym";</note>
+      </trans-unit>
+      <trans-unit id="vZE-Pl-S9H.ibShadowedToolTip" xml:space="preserve">
+        <source>Address of a server supporting the Open Reader API</source>
+        <target>Address of a server supporting the Open Reader API</target>
+        <note>Class = "NSTextField"; ibShadowedToolTip = "Address of a server supporting the Open Reader API"; ObjectID = "vZE-Pl-S9H";</note>
+      </trans-unit>
+      <trans-unit id="zAy-oc-zmb.ibExternalAccessibilityDescription" xml:space="preserve">
+        <source>Select a server supporting the Open Reader API</source>
+        <target>Select a server supporting the Open Reader API</target>
+        <note>Class = "NSPopUpButton"; ibExternalAccessibilityDescription = "Select a server supporting the Open Reader API"; ObjectID = "zAy-oc-zmb";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Resources/Base.lproj/InfoPlist.strings" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3" build-num="11C29"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>Vienna</source>
+        <target>Vienna</target>
+        <note>Bundle name</note>
+      </trans-unit>
+      <trans-unit id="NSAppleEventsUsageDescription" xml:space="preserve">
+        <source/>
+        <target/>
+        <note>Privacy - AppleEvents Sending Usage Description</note>
+      </trans-unit>
+      <trans-unit id="NSHumanReadableCopyright" xml:space="preserve">
+        <source>© 2004–2019 The Vienna RSS Project</source>
+        <target>© 2004–2019 The Vienna RSS Project</target>
+        <note>Copyright (human-readable)</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Resources/Base.lproj/Localizable.strings" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3" build-num="11C29"/>
+    </header>
+    <body>
+      <trans-unit id="%@ (default)" xml:space="preserve">
+        <source>%@ (default)</source>
+        <target>%@ (default)</target>
+        <note>Appended to application name in Open With menu</note>
+      </trans-unit>
+      <trans-unit id="%@ Info" xml:space="preserve">
+        <source>%@ Info</source>
+        <target>%@ Info</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%@ of %@" xml:space="preserve">
+        <source>%1$@ of %2$@</source>
+        <target>%1$@ of %2$@</target>
+        <note>Progress in bytes, e.g. 1 KB of 1 MB</note>
+      </trans-unit>
+      <trans-unit id="%@ received" xml:space="preserve">
+        <source>%@ received</source>
+        <target>%@ received</target>
+        <note>Number of bytes received, e.g. 1 MB received</note>
+      </trans-unit>
+      <trans-unit id="%@, %@" xml:space="preserve">
+        <source>%1$@, %2$@</source>
+        <target>%1$@, %2$@</target>
+        <note>{existing authors},{new author name}</note>
+      </trans-unit>
+      <trans-unit id="%d new articles retrieved" xml:space="preserve">
+        <source>%d new articles retrieved</source>
+        <target>%d new articles retrieved</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%d new unread articles retrieved" xml:space="preserve">
+        <source>%d new unread articles retrieved</source>
+        <target>%d new unread articles retrieved</target>
+        <note>Notification body</note>
+      </trans-unit>
+      <trans-unit id="%d subscriptions successfully exported" xml:space="preserve">
+        <source>%d subscriptions successfully exported</source>
+        <target>%d subscriptions successfully exported</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%d subscriptions successfully imported" xml:space="preserve">
+        <source>%d subscriptions successfully imported</source>
+        <target>%d subscriptions successfully imported</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%d unread articles" xml:space="preserve">
+        <source>%d unread articles</source>
+        <target>%d unread articles</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%u articles" xml:space="preserve">
+        <source>%u articles</source>
+        <target>%u articles</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%u unread" xml:space="preserve">
+        <source>%u unread</source>
+        <target>%u unread</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="(No title)" xml:space="preserve">
+        <source>(No title)</source>
+        <target>(No title)</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="(Untitled Feed)" xml:space="preserve">
+        <source>(Untitled Feed)</source>
+        <target>(Untitled Feed)</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="&lt;None&gt;" xml:space="preserve">
+        <source>&lt;None&gt;</source>
+        <target>&lt;None&gt;</target>
+        <note>Title in popup submenu</note>
+      </trans-unit>
+      <trans-unit id="A folder with that name already exists" xml:space="preserve">
+        <source>A folder with that name already exists</source>
+        <target>A folder with that name already exists</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="A new Vienna database cannot be created at &quot;%@&quot; because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." xml:space="preserve">
+        <source>A new Vienna database cannot be created at "%@" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.</source>
+        <target>A new Vienna database cannot be created at "%@" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." xml:space="preserve">
+        <source>A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.</source>
+        <target>A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Advanced" xml:space="preserve">
+        <source>Advanced</source>
+        <target>Advanced</target>
+        <note>Toolbar item name for the Advanced preference pane</note>
+      </trans-unit>
+      <trans-unit id="After 2 Days" xml:space="preserve">
+        <source>After 2 Days</source>
+        <target>After 2 Days</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="After 2 Weeks" xml:space="preserve">
+        <source>After 2 Weeks</source>
+        <target>After 2 Weeks</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="After a Day" xml:space="preserve">
+        <source>After a Day</source>
+        <target>After a Day</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="After a Month" xml:space="preserve">
+        <source>After a Month</source>
+        <target>After a Month</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="After a Week" xml:space="preserve">
+        <source>After a Week</source>
+        <target>After a Week</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="An error occurred when this feed was last refreshed" xml:space="preserve">
+        <source>An error occurred when this feed was last refreshed</source>
+        <target>An error occurred when this feed was last refreshed</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Appearance" xml:space="preserve">
+        <source>Appearance</source>
+        <target>Appearance</target>
+        <note>Toolbar item name for the Appearance preference pane</note>
+      </trans-unit>
+      <trans-unit id="AppleScript Error in '%@' script" xml:space="preserve">
+        <source>AppleScript Error in '%@' script</source>
+        <target>AppleScript Error in '%@' script</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to delete all %d selected folders? This operation cannot be undone." xml:space="preserve">
+        <source>Are you sure you want to delete all %d selected folders? This operation cannot be undone.</source>
+        <target>Are you sure you want to delete all %d selected folders? This operation cannot be undone.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to delete group folder &quot;%@&quot; and all sub folders? This operation cannot be undone." xml:space="preserve">
+        <source>Are you sure you want to delete group folder "%@" and all sub folders? This operation cannot be undone.</source>
+        <target>Are you sure you want to delete group folder "%@" and all sub folders? This operation cannot be undone.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to delete smart folder &quot;%@&quot;? This will not delete the actual articles matched by the search." xml:space="preserve">
+        <source>Are you sure you want to delete smart folder "%@"? This will not delete the actual articles matched by the search.</source>
+        <target>Are you sure you want to delete smart folder "%@"? This will not delete the actual articles matched by the search.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to delete the messages in the Trash folder permanently?" xml:space="preserve">
+        <source>Are you sure you want to delete the messages in the Trash folder permanently?</source>
+        <target>Are you sure you want to delete the messages in the Trash folder permanently?</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to permanently delete the selected articles?" xml:space="preserve">
+        <source>Are you sure you want to permanently delete the selected articles?</source>
+        <target>Are you sure you want to permanently delete the selected articles?</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to unsubscribe from &quot;%@&quot;? This operation will delete all cached articles." xml:space="preserve">
+        <source>Are you sure you want to unsubscribe from "%@"? This operation will delete all cached articles.</source>
+        <target>Are you sure you want to unsubscribe from "%@"? This operation will delete all cached articles.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Articles" xml:space="preserve">
+        <source>Articles</source>
+        <target>Articles</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Ascending" xml:space="preserve">
+        <source>Ascending</source>
+        <target>Ascending</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Authenticating on Open Reader" xml:space="preserve">
+        <source>Authenticating on Open Reader</source>
+        <target>Authenticating on Open Reader</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Author" xml:space="preserve">
+        <source>Author</source>
+        <target>Author</target>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+      </trans-unit>
+      <trans-unit id="Cancel" xml:space="preserve">
+        <source>Cancel</source>
+        <target>Cancel</target>
+        <note>Title of a button on an alert
+   Title of a popup menu item</note>
+      </trans-unit>
+      <trans-unit id="Cannot create export output file" xml:space="preserve">
+        <source>Cannot create export output file</source>
+        <target>Cannot create export output file</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cannot create folder" xml:space="preserve">
+        <source>Cannot create folder</source>
+        <target>Cannot create folder</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cannot create the Vienna database" xml:space="preserve">
+        <source>Cannot create the Vienna database</source>
+        <target>Cannot create the Vienna database</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cannot import the specified file. The file contents are not valid OPML XML format." xml:space="preserve">
+        <source>Cannot import the specified file. The file contents are not valid OPML XML format.</source>
+        <target>Cannot import the specified file. The file contents are not valid OPML XML format.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cannot rename folder" xml:space="preserve">
+        <source>Cannot rename folder</source>
+        <target>Cannot rename folder</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Clear Recent Searches" xml:space="preserve">
+        <source>Clear Recent Searches</source>
+        <target>Clear Recent Searches</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Click the Open button to open this file." xml:space="preserve">
+        <source>Click the Open button to open this file.</source>
+        <target>Click the Open button to open this file.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Click the Play button to play this enclosure in iTunes." xml:space="preserve">
+        <source>Click the Play button to play this enclosure in iTunes.</source>
+        <target>Click the Play button to play this enclosure in iTunes.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Connecting to %@" xml:space="preserve">
+        <source>Connecting to %@</source>
+        <target>Connecting to %@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Connecting to Open Reader server to retrieve %@" xml:space="preserve">
+        <source>Connecting to Open Reader server to retrieve %@</source>
+        <target>Connecting to Open Reader server to retrieve %@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copy Link to Clipboard" xml:space="preserve">
+        <source>Copy Link to Clipboard</source>
+        <target>Copy Link to Clipboard</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copy Page Link to Clipboard" xml:space="preserve">
+        <source>Copy Page Link to Clipboard</source>
+        <target>Copy Page Link to Clipboard</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copy URL" xml:space="preserve">
+        <source>Copy URL</source>
+        <target>Copy URL</target>
+        <note>Copy URL</note>
+      </trans-unit>
+      <trans-unit id="Database Upgrade" xml:space="preserve">
+        <source>Database Upgrade</source>
+        <target>Database Upgrade</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Date" xml:space="preserve">
+        <source>Date</source>
+        <target>Date</target>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+      </trans-unit>
+      <trans-unit id="Delete" xml:space="preserve">
+        <source>Delete</source>
+        <target>Delete</target>
+        <note>Title of a button on an alert
+   Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Delete Article" xml:space="preserve">
+        <source>Delete Article</source>
+        <target>Delete Article</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Delete Open Reader RSS feed" xml:space="preserve">
+        <source>Delete Open Reader RSS feed</source>
+        <target>Delete Open Reader RSS feed</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Delete group folder" xml:space="preserve">
+        <source>Delete group folder</source>
+        <target>Delete group folder</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Delete multiple folders" xml:space="preserve">
+        <source>Delete multiple folders</source>
+        <target>Delete multiple folders</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Delete smart folder" xml:space="preserve">
+        <source>Delete smart folder</source>
+        <target>Delete smart folder</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Delete subscription" xml:space="preserve">
+        <source>Delete subscription</source>
+        <target>Delete subscription</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Deleted" xml:space="preserve">
+        <source>Deleted</source>
+        <target>Deleted</target>
+        <note>Data field name visible in smart folder definition</note>
+      </trans-unit>
+      <trans-unit id="Delete…" xml:space="preserve">
+        <source>Delete…</source>
+        <target>Delete…</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Deleting folder &quot;%@&quot;…" xml:space="preserve">
+        <source>Deleting folder "%@"…</source>
+        <target>Deleting folder "%@"…</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Descending" xml:space="preserve">
+        <source>Descending</source>
+        <target>Descending</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Do you really want to import the subscriptions from the specified OPML file?" xml:space="preserve">
+        <source>Do you really want to import the subscriptions from the specified OPML file?</source>
+        <target>Do you really want to import the subscriptions from the specified OPML file?</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Download" xml:space="preserve">
+        <source>Download</source>
+        <target>Download</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Download Enclosure" xml:space="preserve">
+        <source>Download Enclosure</source>
+        <target>Download Enclosure</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Download Enclosures" xml:space="preserve">
+        <source>Download Enclosures</source>
+        <target>Download Enclosures</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Download completed" xml:space="preserve">
+        <source>Download completed</source>
+        <target>Download completed</target>
+        <note>Notification title</note>
+      </trans-unit>
+      <trans-unit id="Download failed" xml:space="preserve">
+        <source>Download failed</source>
+        <target>Download failed</target>
+        <note>Notification title</note>
+      </trans-unit>
+      <trans-unit id="Edit…" xml:space="preserve">
+        <source>Edit…</source>
+        <target>Edit…</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Empty" xml:space="preserve">
+        <source>Empty</source>
+        <target>Empty</target>
+        <note>Title of a button on an alert</note>
+      </trans-unit>
+      <trans-unit id="Enclosure" xml:space="preserve">
+        <source>Enclosure</source>
+        <target>Enclosure</target>
+        <note>Data field name (Y/N) visible in menu/smart folder definition</note>
+      </trans-unit>
+      <trans-unit id="Enclosure URL" xml:space="preserve">
+        <source>Enclosure URL</source>
+        <target>Enclosure URL</target>
+        <note>Data field name (URL) visible in menu/article list</note>
+      </trans-unit>
+      <trans-unit id="Enter the URL here" xml:space="preserve">
+        <source>Enter the URL here</source>
+        <target>Enter the URL here</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Error" xml:space="preserve">
+        <source>Error</source>
+        <target>Error</target>
+        <note>Already subscribed title</note>
+      </trans-unit>
+      <trans-unit id="Error loading script '%@'" xml:space="preserve">
+        <source>Error loading script '%@'</source>
+        <target>Error loading script '%@'</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Error parsing XML data in feed" xml:space="preserve">
+        <source>Error parsing XML data in feed</source>
+        <target>Error parsing XML data in feed</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Error retrieving RSS Icon:" xml:space="preserve">
+        <source>Error retrieving RSS Icon:</source>
+        <target>Error retrieving RSS Icon:</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Error retrieving RSS feed:" xml:space="preserve">
+        <source>Error retrieving RSS feed:</source>
+        <target>Error retrieving RSS feed:</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Error: Feed not found!" xml:space="preserve">
+        <source>Error: Feed not found!</source>
+        <target>Error: Feed not found!</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Export Completed" xml:space="preserve">
+        <source>Export Completed</source>
+        <target>Export Completed</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="External Browser" xml:space="preserve">
+        <source>External Browser</source>
+        <target>External Browser</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Feed URL updated to %@" xml:space="preserve">
+        <source>Feed URL updated to %@</source>
+        <target>Feed URL updated to %@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Fetching Open Reader Subscriptions…" xml:space="preserve">
+        <source>Fetching Open Reader Subscriptions…</source>
+        <target>Fetching Open Reader Subscriptions…</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="File %@ downloaded" xml:space="preserve">
+        <source>File %@ downloaded</source>
+        <target>File %@ downloaded</target>
+        <note>Notification body</note>
+      </trans-unit>
+      <trans-unit id="File %@ failed to download" xml:space="preserve">
+        <source>File %@ failed to download</source>
+        <target>File %@ failed to download</target>
+        <note>Notification body</note>
+      </trans-unit>
+      <trans-unit id="Filter in %@" xml:space="preserve">
+        <source>Filter in %@</source>
+        <target>Filter in %@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Flag" xml:space="preserve">
+        <source>Flag</source>
+        <target>Flag</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Flagged" xml:space="preserve">
+        <source>Flagged</source>
+        <target>Flagged</target>
+        <note>Data field name visible in menu/smart folder definition</note>
+      </trans-unit>
+      <trans-unit id="Folder" xml:space="preserve">
+        <source>Folder</source>
+        <target>Folder</target>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+      </trans-unit>
+      <trans-unit id="Folder image retrieved from %@" xml:space="preserve">
+        <source>Folder image retrieved from %@</source>
+        <target>Folder image retrieved from %@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Folders" xml:space="preserve">
+        <source>Folders</source>
+        <target>Folders</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Force Refresh Selected Subscriptions From Open Reader" xml:space="preserve">
+        <source>Force Refresh Selected Subscriptions From Open Reader</source>
+        <target>Force Refresh Selected Subscriptions From Open Reader</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Forcing Refresh subscriptions…" xml:space="preserve">
+        <source>Forcing Refresh subscriptions…</source>
+        <target>Forcing Refresh subscriptions…</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="General" xml:space="preserve">
+        <source>General</source>
+        <target>General</target>
+        <note>Toolbar item name for the General preference pane</note>
+      </trans-unit>
+      <trans-unit id="Get Info" xml:space="preserve">
+        <source>Get Info</source>
+        <target>Get Info</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Go forward to the next page" xml:space="preserve">
+        <source>Go forward to the next page</source>
+        <target>Go forward to the next page</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Got HTTP status 304 - No news from last check" xml:space="preserve">
+        <source>Got HTTP status 304 - No news from last check</source>
+        <target>Got HTTP status 304 - No news from last check</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="HTTP code %d reported from server" xml:space="preserve">
+        <source>HTTP code %d reported from server</source>
+        <target>HTTP code %d reported from server</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Headlines" xml:space="preserve">
+        <source>Headlines</source>
+        <target>Headlines</target>
+        <note>Pseudo field name visible in article list</note>
+      </trans-unit>
+      <trans-unit id="Hide Filter Bar" xml:space="preserve">
+        <source>Hide Filter Bar</source>
+        <target>Hide Filter Bar</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Hide Status Bar" xml:space="preserve">
+        <source>Hide Status Bar</source>
+        <target>Hide Status Bar</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Hide Toolbar" xml:space="preserve">
+        <source>Hide Toolbar</source>
+        <target>Hide Toolbar</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="If you quit Vienna now, all downloads will stop." xml:space="preserve">
+        <source>If you quit Vienna now, all downloads will stop.</source>
+        <target>If you quit Vienna now, all downloads will stop.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Import" xml:space="preserve">
+        <source>Import</source>
+        <target>Import</target>
+        <note>Title of a button on an alert</note>
+      </trans-unit>
+      <trans-unit id="Import Completed" xml:space="preserve">
+        <source>Import Completed</source>
+        <target>Import Completed</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Import error" xml:space="preserve">
+        <source>Import error</source>
+        <target>Import error</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Import subscriptions from OPML file?" xml:space="preserve">
+        <source>Import subscriptions from OPML file?</source>
+        <target>Import subscriptions from OPML file?</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Improper infinitely looping URL redirect to %@" xml:space="preserve">
+        <source>Improper infinitely looping URL redirect to %@</source>
+        <target>Improper infinitely looping URL redirect to %@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="JavaScript" xml:space="preserve">
+        <source>JavaScript</source>
+        <target>JavaScript</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Last Week" xml:space="preserve">
+        <source>Last Week</source>
+        <target>Last Week</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Link" xml:space="preserve">
+        <source>Link</source>
+        <target>Link</target>
+        <note>Data field name visible in menu/article list</note>
+      </trans-unit>
+      <trans-unit id="Loading" xml:space="preserve">
+        <source>Loading</source>
+        <target>Loading</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Locate…" xml:space="preserve">
+        <source>Locate…</source>
+        <target>Locate…</target>
+        <note>Title of a button on an alert</note>
+      </trans-unit>
+      <trans-unit id="Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." xml:space="preserve">
+        <source>Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access.</source>
+        <target>Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Mark All Articles as Read" xml:space="preserve">
+        <source>Mark All Articles as Read</source>
+        <target>Mark All Articles as Read</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Mark All Read" xml:space="preserve">
+        <source>Mark All Read</source>
+        <target>Mark All Read</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Mark All Subscriptions as Read" xml:space="preserve">
+        <source>Mark All Subscriptions as Read</source>
+        <target>Mark All Subscriptions as Read</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Mark Flagged" xml:space="preserve">
+        <source>Mark Flagged</source>
+        <target>Mark Flagged</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Mark Read" xml:space="preserve">
+        <source>Mark Read</source>
+        <target>Mark Read</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Mark Unflagged" xml:space="preserve">
+        <source>Mark Unflagged</source>
+        <target>Mark Unflagged</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Mark Unread" xml:space="preserve">
+        <source>Mark Unread</source>
+        <target>Mark Unread</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Marked Articles" xml:space="preserve">
+        <source>Marked Articles</source>
+        <target>Marked Articles</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="More Scripts…" xml:space="preserve">
+        <source>More Scripts…</source>
+        <target>More Scripts…</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Move Folders" xml:space="preserve">
+        <source>Move Folders</source>
+        <target>Move Folders</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Never" xml:space="preserve">
+        <source>Never</source>
+        <target>Never</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="New Tab" xml:space="preserve">
+        <source>New Tab</source>
+        <target>New Tab</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="New articles retrieved" xml:space="preserve">
+        <source>New articles retrieved</source>
+        <target>New articles retrieved</target>
+        <note>Notification title</note>
+      </trans-unit>
+      <trans-unit id="No" xml:space="preserve">
+        <source>No</source>
+        <target>No</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="No articles in feed" xml:space="preserve">
+        <source>No articles in feed</source>
+        <target>No articles in feed</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="No new articles available" xml:space="preserve">
+        <source>No new articles available</source>
+        <target>No new articles available</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="OK" xml:space="preserve">
+        <source>OK</source>
+        <target>OK</target>
+        <note>Title of a button on an alert</note>
+      </trans-unit>
+      <trans-unit id="One or more downloads are in progress" xml:space="preserve">
+        <source>One or more downloads are in progress</source>
+        <target>One or more downloads are in progress</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Open" xml:space="preserve">
+        <source>Open</source>
+        <target>Open</target>
+        <note>Title of a popup menu item</note>
+      </trans-unit>
+      <trans-unit id="Open Article Page" xml:space="preserve">
+        <source>Open Article Page</source>
+        <target>Open Article Page</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Open Article Page in %@" xml:space="preserve">
+        <source>Open Article Page in %@</source>
+        <target>Open Article Page in %@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Open Article Page in External Browser" xml:space="preserve">
+        <source>Open Article Page in External Browser</source>
+        <target>Open Article Page in External Browser</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Open Frame" xml:space="preserve">
+        <source>Open Frame</source>
+        <target>Open Frame</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Open Image in %@" xml:space="preserve">
+        <source>Open Image in %@</source>
+        <target>Open Image in %@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Open Image in New Tab" xml:space="preserve">
+        <source>Open Image in New Tab</source>
+        <target>Open Image in New Tab</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Open Link in %@" xml:space="preserve">
+        <source>Open Link in %@</source>
+        <target>Open Link in %@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Open Link in New Tab" xml:space="preserve">
+        <source>Open Link in New Tab</source>
+        <target>Open Link in New Tab</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Open Page in %@" xml:space="preserve">
+        <source>Open Page in %@</source>
+        <target>Open Page in %@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Open Reader Authentication Failed" xml:space="preserve">
+        <source>Open Reader Authentication Failed</source>
+        <target>Open Reader Authentication Failed</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Open Scripts Folder" xml:space="preserve">
+        <source>Open Scripts Folder</source>
+        <target>Open Scripts Folder</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Open Subscription Home Page" xml:space="preserve">
+        <source>Open Subscription Home Page</source>
+        <target>Open Subscription Home Page</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Open Subscription Home Page in %@" xml:space="preserve">
+        <source>Open Subscription Home Page in %@</source>
+        <target>Open Subscription Home Page in %@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Open Subscription Home Page in External Browser" xml:space="preserve">
+        <source>Open Subscription Home Page in External Browser</source>
+        <target>Open Subscription Home Page in External Browser</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Open With" xml:space="preserve">
+        <source>Open With</source>
+        <target>Open With</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Other" xml:space="preserve">
+        <source>Other</source>
+        <target>Other</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Play" xml:space="preserve">
+        <source>Play</source>
+        <target>Play</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Plugin installed" xml:space="preserve">
+        <source>Plugin installed</source>
+        <target>Plugin installed</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Preferences" xml:space="preserve">
+        <source>Preferences</source>
+        <target>Preferences</target>
+        <note>Title of the Preferences window</note>
+      </trans-unit>
+      <trans-unit id="Queue" xml:space="preserve">
+        <source>Queue</source>
+        <target>Queue</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Quit" xml:space="preserve">
+        <source>Quit</source>
+        <target>Quit</target>
+        <note>Title of a button on an alert</note>
+      </trans-unit>
+      <trans-unit id="Quit Vienna" xml:space="preserve">
+        <source>Quit Vienna</source>
+        <target>Quit Vienna</target>
+        <note>Title of a button on an alert
+   Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="RSS Icon not found!" xml:space="preserve">
+        <source>RSS Icon not found!</source>
+        <target>RSS Icon not found!</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Read" xml:space="preserve">
+        <source>Read</source>
+        <target>Read</target>
+        <note>Data field name visible in menu/smart folder definition</note>
+      </trans-unit>
+      <trans-unit id="Recent Searches" xml:space="preserve">
+        <source>Recent Searches</source>
+        <target>Recent Searches</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Recents" xml:space="preserve">
+        <source>Recents</source>
+        <target>Recents</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Redirection attempt treated as temporary for safety concern" xml:space="preserve">
+        <source>Redirection attempt treated as temporary for safety concern</source>
+        <target>Redirection attempt treated as temporary for safety concern</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Refresh All Subscriptions" xml:space="preserve">
+        <source>Refresh All Subscriptions</source>
+        <target>Refresh All Subscriptions</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Refresh Selected Subscriptions" xml:space="preserve">
+        <source>Refresh Selected Subscriptions</source>
+        <target>Refresh Selected Subscriptions</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Refresh completed" xml:space="preserve">
+        <source>Refresh completed</source>
+        <target>Refresh completed</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Refresh the current page" xml:space="preserve">
+        <source>Refresh the current page</source>
+        <target>Refresh the current page</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Refreshing folder images…" xml:space="preserve">
+        <source>Refreshing folder images…</source>
+        <target>Refreshing folder images…</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Refreshing subscriptions…" xml:space="preserve">
+        <source>Refreshing subscriptions…</source>
+        <target>Refreshing subscriptions…</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Remove From List" xml:space="preserve">
+        <source>Remove From List</source>
+        <target>Remove From List</target>
+        <note>Title of a popup menu item</note>
+      </trans-unit>
+      <trans-unit id="Rename…" xml:space="preserve">
+        <source>Rename…</source>
+        <target>Rename…</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Restore Article" xml:space="preserve">
+        <source>Restore Article</source>
+        <target>Restore Article</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Resubscribe to Feed" xml:space="preserve">
+        <source>Resubscribe to Feed</source>
+        <target>Resubscribe to Feed</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Retrieving articles" xml:space="preserve">
+        <source>Retrieving articles</source>
+        <target>Retrieving articles</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Retrieving folder image" xml:space="preserve">
+        <source>Retrieving folder image</source>
+        <target>Retrieving folder image</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Retrieving folder image for Open Reader Feed" xml:space="preserve">
+        <source>Retrieving folder image for Open Reader Feed</source>
+        <target>Retrieving folder image for Open Reader Feed</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Return to the previous page" xml:space="preserve">
+        <source>Return to the previous page</source>
+        <target>Return to the previous page</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Search Results" xml:space="preserve">
+        <source>Search Results</source>
+        <target>Search Results</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Search all articles" xml:space="preserve">
+        <source>Search all articles</source>
+        <target>Search all articles</target>
+        <note>Placeholder title of a search field</note>
+      </trans-unit>
+      <trans-unit id="Search all articles or the current web page" xml:space="preserve">
+        <source>Search all articles or the current web page</source>
+        <target>Search all articles or the current web page</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Search current web page" xml:space="preserve">
+        <source>Search current web page</source>
+        <target>Search current web page</target>
+        <note>Placeholder title of a search field</note>
+      </trans-unit>
+      <trans-unit id="Select…" xml:space="preserve">
+        <source>Select…</source>
+        <target>Select…</target>
+        <note>Title of a popup menu item</note>
+      </trans-unit>
+      <trans-unit id="Send Link" xml:space="preserve">
+        <source>Send Link</source>
+        <target>Send Link</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Send Links" xml:space="preserve">
+        <source>Send Links</source>
+        <target>Send Links</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Show Filter Bar" xml:space="preserve">
+        <source>Show Filter Bar</source>
+        <target>Show Filter Bar</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Show Main Window…" xml:space="preserve">
+        <source>Show Main Window…</source>
+        <target>Show Main Window…</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Show Status Bar" xml:space="preserve">
+        <source>Show Status Bar</source>
+        <target>Show Status Bar</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Show Toolbar" xml:space="preserve">
+        <source>Show Toolbar</source>
+        <target>Show Toolbar</target>
+        <note>Title of a menu item</note>
+      </trans-unit>
+      <trans-unit id="Show in Finder" xml:space="preserve">
+        <source>Show in Finder</source>
+        <target>Show in Finder</target>
+        <note>Title of a popup menu item</note>
+      </trans-unit>
+      <trans-unit id="Sorry but Vienna was unable to open the database" xml:space="preserve">
+        <source>Sorry but Vienna was unable to open the database</source>
+        <target>Sorry but Vienna was unable to open the database</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Sorry, but Vienna was unable to create the database folder" xml:space="preserve">
+        <source>Sorry, but Vienna was unable to create the database folder</source>
+        <target>Sorry, but Vienna was unable to create the database folder</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Subject" xml:space="preserve">
+        <source>Subject</source>
+        <target>Subject</target>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+      </trans-unit>
+      <trans-unit id="Subscribe to the feed for this page" xml:space="preserve">
+        <source>Subscribe to the feed for this page</source>
+        <target>Subscribe to the feed for this page</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Summary" xml:space="preserve">
+        <source>Summary</source>
+        <target>Summary</target>
+        <note>Pseudo field name visible in menu/article list</note>
+      </trans-unit>
+      <trans-unit id="Syncing" xml:space="preserve">
+        <source>Syncing</source>
+        <target>Syncing</target>
+        <note>Toolbar item name for the Syncing preference pane</note>
+      </trans-unit>
+      <trans-unit id="Text" xml:space="preserve">
+        <source>Text</source>
+        <target>Text</target>
+        <note>Data field name visible in smart folder definition</note>
+      </trans-unit>
+      <trans-unit id="The &quot;%@&quot; folder cannot be created." xml:space="preserve">
+        <source>The "%@" folder cannot be created.</source>
+        <target>The "%@" folder cannot be created.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="The Default style will be used instead." xml:space="preserve">
+        <source>The Default style will be used instead.</source>
+        <target>The Default style will be used instead.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." xml:space="preserve">
+        <source>The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.</source>
+        <target>The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna." xml:space="preserve">
+        <source>The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna.</source>
+        <target>The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="The database file format has changed" xml:space="preserve">
+        <source>The database file format has changed</source>
+        <target>The database file format has changed</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="The specified export output file could not be created. Check that it is not locked and no other application is using it." xml:space="preserve">
+        <source>The specified export output file could not be created. Check that it is not locked and no other application is using it.</source>
+        <target>The specified export output file could not be created. Check that it is not locked and no other application is using it.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="The style &quot;%@&quot; has been installed to your Styles folder and added to the Style menu." xml:space="preserve">
+        <source>The style "%@" has been installed to your Styles folder and added to the Style menu.</source>
+        <target>The style "%@" has been installed to your Styles folder and added to the Style menu.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="The style %@ appears to be missing or corrupted" xml:space="preserve">
+        <source>The style %@ appears to be missing or corrupted</source>
+        <target>The style %@ appears to be missing or corrupted</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="The subscription for &quot;%@&quot; requires a user name and password for access." xml:space="preserve">
+        <source>The subscription for "%@" requires a user name and password for access.</source>
+        <target>The subscription for "%@" requires a user name and password for access.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="This article contains an enclosed file." xml:space="preserve">
+        <source>This article contains an enclosed file.</source>
+        <target>This article contains an enclosed file.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="This operation cannot be undone." xml:space="preserve">
+        <source>This operation cannot be undone.</source>
+        <target>This operation cannot be undone.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Today" xml:space="preserve">
+        <source>Today</source>
+        <target>Today</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Today's Articles" xml:space="preserve">
+        <source>Today's Articles</source>
+        <target>Today's Articles</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Trash" xml:space="preserve">
+        <source>Trash</source>
+        <target>Trash</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="URL" xml:space="preserve">
+        <source>URL</source>
+        <target>URL</target>
+        <note>URL</note>
+      </trans-unit>
+      <trans-unit id="Unread" xml:space="preserve">
+        <source>Unread</source>
+        <target>Unread</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Unread Articles" xml:space="preserve">
+        <source>Unread Articles</source>
+        <target>Unread Articles</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Unsubscribe from Feed" xml:space="preserve">
+        <source>Unsubscribe from Feed</source>
+        <target>Unsubscribe from Feed</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles." xml:space="preserve">
+        <source>Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.</source>
+        <target>Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Upgrade Database" xml:space="preserve">
+        <source>Upgrade Database</source>
+        <target>Upgrade Database</target>
+        <note>Title of a button on an alert</note>
+      </trans-unit>
+      <trans-unit id="Vienna cannot open the file &quot;%@&quot; because it moved since you downloaded it." xml:space="preserve">
+        <source>Vienna cannot open the file "%@" because it moved since you downloaded it.</source>
+        <target>Vienna cannot open the file "%@" because it moved since you downloaded it.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Vienna cannot open the file." xml:space="preserve">
+        <source>Vienna cannot open the file.</source>
+        <target>Vienna cannot open the file.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Vienna cannot show the file &quot;%@&quot; because it moved since you downloaded it." xml:space="preserve">
+        <source>Vienna cannot show the file "%@" because it moved since you downloaded it.</source>
+        <target>Vienna cannot show the file "%@" because it moved since you downloaded it.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Vienna cannot show the file." xml:space="preserve">
+        <source>Vienna cannot show the file.</source>
+        <target>Vienna cannot show the file.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Vienna has installed a new style" xml:space="preserve">
+        <source>Vienna has installed a new style</source>
+        <target>Vienna has installed a new style</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." xml:space="preserve">
+        <source>Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience.</source>
+        <target>Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Vienna was trying to create the folder &quot;%@&quot; but an error occurred. Check the permissions on the folders on the path specified." xml:space="preserve">
+        <source>Vienna was trying to create the folder "%@" but an error occurred. Check the permissions on the folders on the path specified.</source>
+        <target>Vienna was trying to create the folder "%@" but an error occurred. Check the permissions on the folders on the path specified.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Yes" xml:space="preserve">
+        <source>Yes</source>
+        <target>Yes</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Yesterday" xml:space="preserve">
+        <source>Yesterday</source>
+        <target>Yesterday</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="You are already subscribed to that feed" xml:space="preserve">
+        <source>You are already subscribed to that feed</source>
+        <target>You are already subscribed to that feed</target>
+        <note>You are already subscribed to that feed</note>
+      </trans-unit>
+      <trans-unit id="You cannot undo this action" xml:space="preserve">
+        <source>You cannot undo this action</source>
+        <target>You cannot undo this action</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="contains" xml:space="preserve">
+        <source>contains</source>
+        <target>contains</target>
+        <note>test for a string</note>
+      </trans-unit>
+      <trans-unit id="does not contain" xml:space="preserve">
+        <source>does not contain</source>
+        <target>does not contain</target>
+        <note>test for a string</note>
+      </trans-unit>
+      <trans-unit id="is" xml:space="preserve">
+        <source>is</source>
+        <target>is</target>
+        <note>test for a value</note>
+      </trans-unit>
+      <trans-unit id="is after" xml:space="preserve">
+        <source>is after</source>
+        <target>is after</target>
+        <note>test for a date</note>
+      </trans-unit>
+      <trans-unit id="is before" xml:space="preserve">
+        <source>is before</source>
+        <target>is before</target>
+        <note>test for a date</note>
+      </trans-unit>
+      <trans-unit id="is greater than" xml:space="preserve">
+        <source>is greater than</source>
+        <target>is greater than</target>
+        <note>test for a numeric value</note>
+      </trans-unit>
+      <trans-unit id="is greater than or equal to" xml:space="preserve">
+        <source>is greater than or equal to</source>
+        <target>is greater than or equal to</target>
+        <note>test for a numeric value</note>
+      </trans-unit>
+      <trans-unit id="is less than" xml:space="preserve">
+        <source>is less than</source>
+        <target>is less than</target>
+        <note>test for a numeric value</note>
+      </trans-unit>
+      <trans-unit id="is less than or equal to" xml:space="preserve">
+        <source>is less than or equal to</source>
+        <target>is less than or equal to</target>
+        <note>test for a numeric value</note>
+      </trans-unit>
+      <trans-unit id="is not" xml:space="preserve">
+        <source>is not</source>
+        <target>is not</target>
+        <note>test for a value</note>
+      </trans-unit>
+      <trans-unit id="is on or after" xml:space="preserve">
+        <source>is on or after</source>
+        <target>is on or after</target>
+        <note>test for a date</note>
+      </trans-unit>
+      <trans-unit id="is on or before" xml:space="preserve">
+        <source>is on or before</source>
+        <target>is on or before</target>
+        <note>test for a date</note>
+      </trans-unit>
+      <trans-unit id="not under" xml:space="preserve">
+        <source>not under</source>
+        <target>not under</target>
+        <note>test for a folder (not operational as of Vienna 3.2)</note>
+      </trans-unit>
+      <trans-unit id="under" xml:space="preserve">
+        <source>under</source>
+        <target>under</target>
+        <note>test for a folder (not operational as of Vienna 3.2)</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Resources/Base.lproj/Localizable.stringsdict" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3" build-num="11C29"/>
+    </header>
+    <body>
+      <trans-unit id="/%d new articles retrieved:dict/NSStringLocalizedFormatKey:dict/:string" xml:space="preserve">
+        <source>%#@articles@</source>
+        <target>%#@articles@</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="/%d new articles retrieved:dict/articles:dict/one:dict/:string" xml:space="preserve">
+        <source>%d new article retrieved</source>
+        <target>%d new article retrieved</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="/%d new articles retrieved:dict/articles:dict/other:dict/:string" xml:space="preserve">
+        <source>%d new articles retrieved</source>
+        <target>%d new articles retrieved</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="/%d subscriptions successfully exported:dict/NSStringLocalizedFormatKey:dict/:string" xml:space="preserve">
+        <source>%#@subscriptions@</source>
+        <target>%#@subscriptions@</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="/%d subscriptions successfully exported:dict/subscriptions:dict/one:dict/:string" xml:space="preserve">
+        <source>%d subscription successfully exported</source>
+        <target>%d subscription successfully exported</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="/%d subscriptions successfully exported:dict/subscriptions:dict/other:dict/:string" xml:space="preserve">
+        <source>%d subscriptions successfully exported</source>
+        <target>%d subscriptions successfully exported</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="/%d subscriptions successfully imported:dict/NSStringLocalizedFormatKey:dict/:string" xml:space="preserve">
+        <source>%#@subscriptions@</source>
+        <target>%#@subscriptions@</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="/%d subscriptions successfully imported:dict/subscriptions:dict/one:dict/:string" xml:space="preserve">
+        <source>%d subscription successfully imported</source>
+        <target>%d subscription successfully imported</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="/%d subscriptions successfully imported:dict/subscriptions:dict/other:dict/:string" xml:space="preserve">
+        <source>%d subscriptions successfully imported</source>
+        <target>%d subscriptions successfully imported</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="/%d unread articles:dict/NSStringLocalizedFormatKey:dict/:string" xml:space="preserve">
+        <source>%#@articles@</source>
+        <target>%#@articles@</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="/%d unread articles:dict/articles:dict/one:dict/:string" xml:space="preserve">
+        <source>%d unread article</source>
+        <target>%d unread article</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="/%d unread articles:dict/articles:dict/other:dict/:string" xml:space="preserve">
+        <source>%d unread articles</source>
+        <target>%d unread articles</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="/%u articles:dict/NSStringLocalizedFormatKey:dict/:string" xml:space="preserve">
+        <source>%#@articles@</source>
+        <target>%#@articles@</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="/%u articles:dict/articles:dict/one:dict/:string" xml:space="preserve">
+        <source>%u article</source>
+        <target>%u article</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="/%u articles:dict/articles:dict/other:dict/:string" xml:space="preserve">
+        <source>%u articles</source>
+        <target>%u articles</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="/%u unread:dict/NSStringLocalizedFormatKey:dict/:string" xml:space="preserve">
+        <source>%#@unread@</source>
+        <target>%#@unread@</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="/%u unread:dict/unread:dict/one:dict/:string" xml:space="preserve">
+        <source>%u unread</source>
+        <target>%u unread</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="/%u unread:dict/unread:dict/other:dict/:string" xml:space="preserve">
+        <source>%u unread</source>
+        <target>%u unread</target>
+        <note/>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

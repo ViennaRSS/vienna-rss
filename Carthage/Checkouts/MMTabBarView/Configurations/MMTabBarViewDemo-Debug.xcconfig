@@ -1,0 +1,2 @@
+#include "Debug.xcconfig"
+#include "MMTabBarViewDemo-Base.xcconfig"
