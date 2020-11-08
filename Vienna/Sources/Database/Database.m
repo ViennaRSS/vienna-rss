@@ -216,8 +216,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         db.userVersion = (uint32_t)MA_Current_DB_Version;
 	
 		// Set the default sort order and write it to both the db and the prefs
-		[db executeUpdate:@"insert into info (first_folder, folder_sort) values (0, ?)",  @(MA_FolderSort_Manual)];
-		[[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_Manual];
+		[db executeUpdate:@"insert into info (first_folder, folder_sort) values (0, ?)",  @(VNAFolderSortManual)];
+		[[Preferences standardPreferences] setFoldersTreeSortMethod:VNAFolderSortManual];
 	}];
     
     // Set the initial folder order
@@ -806,7 +806,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	}
 
 	NSInteger nextSibling = 0;
-	BOOL manualSort = [Preferences standardPreferences].foldersTreeSortMethod == MA_FolderSort_Manual;
+	BOOL manualSort = [Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortManual;
 	if (manualSort)
 	{
 		if (predecessorId > 0)
@@ -991,7 +991,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	}
 
 	// Update the sort order if necessary
-	if ([Preferences standardPreferences].foldersTreeSortMethod == MA_FolderSort_Manual)
+	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortManual)
 	{
 		__block NSInteger previousSibling = -999;
         [queue inDatabase:^(FMDatabase *db) {
