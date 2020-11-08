@@ -37,7 +37,7 @@
  * article view. Thus all control of the article view now passes through the article
  * controller.
  */
-@interface ArticleController : NSObject
+@interface ArticleController : NSViewController
 {
 	NSView<ArticleBaseView, BaseView> * mainArticleView;
 	NSArray * currentArrayOfArticles;

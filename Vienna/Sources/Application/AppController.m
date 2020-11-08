@@ -779,7 +779,11 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
     }
     NSTabViewItem *primaryTab = [[NSTabViewItem alloc] initWithIdentifier:@"Articles"];
     [primaryTab setLabel:NSLocalizedString(@"Articles", nil)];
-    [primaryTab setView:self.articleController.mainArticleView];
+	if (@available(macOS 10.10, *)) {
+		[primaryTab setViewController:self.articleController];
+	} else {
+		[primaryTab setView:self.articleController.mainArticleView];
+	}
 	[self.browser setPrimaryTab:primaryTab];
 	self.foldersTree.mainView.nextKeyView = ((NSView<BaseView> *)self.browser.primaryTab.view).mainView;
     if (self.selectedArticle == nil)
@@ -1526,7 +1530,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     }
 
 	// Reinitialise the styles map.
-	NSArray *styles = [ArticleView loadStylesMap].allKeys;
+	NSArray *styles = [ArticleStyleLoader reloadStylesMap].allKeys;
     styles = [styles sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
 
     // Create new menu items.

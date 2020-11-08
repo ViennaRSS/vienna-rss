@@ -19,10 +19,11 @@
 //
 
 @import Cocoa;
-
 #import "TabbedWebView.h"
 
-@interface ArticleView : TabbedWebView {
+@protocol ArticleContentView;
+
+@interface ArticleView: TabbedWebView <ArticleContentView> {
 	NSString * htmlTemplate;
 	NSString * cssStylesheet;
 	NSString * jsScript;
@@ -30,8 +31,6 @@
 }
 
 // Public functions
-+(NSDictionary *)stylesMap;
-+(NSDictionary *)loadStylesMap;
 -(void)clearHTML;
 -(void)setHTML:(NSString *)htmlText;
 -(NSString *)articleTextFromArray:(NSArray *)msgArray;

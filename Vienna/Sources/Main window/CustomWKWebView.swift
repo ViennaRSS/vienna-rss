@@ -24,7 +24,7 @@ class CustomWKWebView: WKWebView {
 	private var scrollDownPossible = false
 	private var scrollUpPossible = false
 
-	fileprivate func evaluateScrollPossibilities() {
+	private func evaluateScrollPossibilities() {
 
 		//this is an idea adapted from Brent Simmons which he uses in NetNewsWire (https://github.com/brentsimmons/NetNewsWire)
 
