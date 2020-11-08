@@ -204,24 +204,13 @@
 	// and then reduce cellFrame to keep from overlapping it
 	if (inProgress)
 	{
-		if (!item.progressIndicator) {
-			[item allocAndStartProgressIndicator];
-		}
-		NSProgressIndicator *progressIndicator = item.progressIndicator;
-
 		NSRect progressIndicatorFrame;
-
 		NSDivideRect(cellFrame, &progressIndicatorFrame, &cellFrame, PROGRESS_INDICATOR_DIMENSION + PROGRESS_INDICATOR_LEFT_MARGIN, NSMaxXEdge);
-
-		progressIndicatorFrame.size = NSMakeSize(PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION);
-		progressIndicatorFrame.origin.x += PROGRESS_INDICATOR_LEFT_MARGIN;
-		progressIndicatorFrame.origin.y += (cellFrame.size.height - PROGRESS_INDICATOR_DIMENSION) / 2.0;
-
-		if (!NSEqualRects(progressIndicator.frame, progressIndicatorFrame)) {
-			progressIndicator.frame = progressIndicatorFrame;
-
-		if (progressIndicator.superview != controlView)
-			[controlView addSubview:progressIndicator];
+		if (!item.progressIndicator) {
+			progressIndicatorFrame.size = NSMakeSize(PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION);
+			progressIndicatorFrame.origin.x += PROGRESS_INDICATOR_LEFT_MARGIN;
+			progressIndicatorFrame.origin.y += (cellFrame.size.height - PROGRESS_INDICATOR_DIMENSION) / 2.0;
+			[item allocAndStartProgressIndicatorWithFrame:progressIndicatorFrame inView:controlView];
 		}
 	}
 	else

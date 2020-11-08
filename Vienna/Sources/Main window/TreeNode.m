@@ -320,18 +320,14 @@
             folder.name, parentNode, (unsigned long)children.count];
 }
 
-/* allocAndStartProgressIndicator:
+/* allocAndStartProgressIndicatorWithFrame:inView:
  * Allocate a new progress indicator and start it animating.
  */
--(void)allocAndStartProgressIndicator
+-(void)allocAndStartProgressIndicatorWithFrame:(NSRect)frame inView:(NSView *)controlView;
 {
 	// Allocate and initialize the spinning progress indicator.
-	if (!progressIndicator) {
-	    NSRect progressRect = NSMakeRect(0, 0, PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION);
-	    progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressRect];
-	    progressIndicator.controlSize = NSControlSizeSmall;
-	    progressIndicator.usesThreadedAnimation = YES;
-	}
+    progressIndicator = [[NSProgressIndicator alloc] initWithFrame:frame];
+    [controlView addSubview:progressIndicator];
 	// Start the animation.
 	[progressIndicator startAnimation:self];
 }
