@@ -1025,23 +1025,6 @@
 	progressIndicator = nil;
 }
 
-/* menuWillAppear
- * Called when the popup menu is opened on the table. We ensure that the item under the
- * cursor is selected.
- */
--(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
-{
-	NSInteger row = [articleList rowAtPoint:[articleList convertPoint:theEvent.locationInWindow fromView:nil]];
-	if (row >= 0)
-	{
-		// Select the row under the cursor if it isn't already selected
-		if (articleList.numberOfSelectedRows <= 1)
-		{
-			[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
-		}
-	}
-}
-
 /* refreshImmediatelyArticleAtCurrentRow
  * Refreshes the article at the current selected row.
  */
@@ -1401,6 +1384,29 @@
     return theAttributedString;
 }
 
+/* menuWillAppear [ExtendedTableView delegate]
+ * Called when the popup menu is opened on the table. We ensure that the item under the
+ * cursor is selected.
+ */
+-(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
+{
+	NSInteger row = [articleList rowAtPoint:[articleList convertPoint:theEvent.locationInWindow fromView:nil]];
+	if (row >= 0)
+	{
+		// Select the row under the cursor if it isn't already selected
+		if (articleList.numberOfSelectedRows <= 1)
+		{
+			blockSelectionHandler = YES; // to prevent expansion tooltip from overlapping the menu
+			if (row != articleList.selectedRow) {
+				[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+				// will perform a refresh once the menu is deselected
+				[self performSelector: @selector(refreshArticleAtCurrentRow) withObject:nil afterDelay:0.0];
+			}
+			blockSelectionHandler = NO;
+		}
+	}
+}
+
 /* tableViewSelectionDidChange [delegate]
  * Handle the selection changing in the table view unless blockSelectionHandler is set.
  */
@@ -1413,6 +1419,15 @@
 	{
 		[self refreshArticleAtCurrentRow];
 	}
+}
+
+/* shouldShowCellExpansionForTableColumn [delegate]
+ * Handle expansion tooltip for truncated texts
+ */
+- (BOOL)tableView:(NSTableView *)tableView shouldShowCellExpansionForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+     // prevent overlapping of contextual menu and expansion tooltip
+     return !blockSelectionHandler;
 }
 
 /* didClickTableColumns
