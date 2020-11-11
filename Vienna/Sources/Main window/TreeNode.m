@@ -323,7 +323,7 @@
 /* allocAndStartProgressIndicatorWithFrame:inView:
  * Allocate a new progress indicator and start it animating.
  */
--(void)allocAndStartProgressIndicatorWithFrame:(NSRect)frame inView:(NSView *)controlView;
+-(void)allocAndStartProgressIndicatorWithFrame:(NSRect)frame inView:(NSView *)controlView
 {
 	// Allocate and initialize the spinning progress indicator.
     progressIndicator = [[NSProgressIndicator alloc] initWithFrame:frame];
