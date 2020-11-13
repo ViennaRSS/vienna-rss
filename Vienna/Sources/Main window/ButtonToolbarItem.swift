@@ -18,7 +18,6 @@
 //
 
 import Cocoa
-import os.log
 
 /// A toolbar item with a button as its view. The toolbar item responds to
 /// validation requests.
