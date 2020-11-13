@@ -14,8 +14,8 @@ Compatibility
 
 Since version 3.6, Vienna requires a minimum of macOS 10.11 (El Capitan).
 
-Vienna 3.5.x requires a minimum of macOS 10.9 (Mavericks)
-Vienna 3.1.x requires a minimum of OS X 10.8 (Mountain Lion).
+Vienna 3.5.x requires a minimum of macOS 10.9 (Mavericks).  
+Vienna 3.1.x requires a minimum of OS X 10.8 (Mountain Lion).  
 Vienna 3.0.x requires a minimum of OS X 10.6 (Snow Leopard).
 
 
