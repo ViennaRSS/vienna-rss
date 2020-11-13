@@ -1581,36 +1581,43 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 /* showUnreadCountOnApplicationIconAndWindowTitle
  * Update the Vienna application icon to show the number of unread articles.
  */
--(void)showUnreadCountOnApplicationIconAndWindowTitle
-{
-	@synchronized(NSApp.dockTile) {
-	NSInteger currentCountOfUnread = db.countOfUnread;
-	if (currentCountOfUnread == lastCountOfUnread)
-		return;
-	lastCountOfUnread = currentCountOfUnread;
-	
-	// Always update the app status icon first
-	[self setAppStatusBarIcon];
-	
-	// Don't show a count if there are no unread articles
-	if (currentCountOfUnread <= 0)
-	{
-		[NSApp.dockTile setBadgeLabel:nil];
-		self.mainWindow.title = self.appName;
-		return;	
-	}	
-	
-	self.mainWindow.title = [NSString stringWithFormat:@"%@ (%li %@)", self.appName, (long)currentCountOfUnread, NSLocalizedString(@"Unread", nil)];
-	
-	// Exit now if we're not showing the unread count on the application icon
-	if (([Preferences standardPreferences].newArticlesNotification
-		& VNANewArticlesNotificationBadge) ==0)
-			return;
-	
-	NSString * countdown = [NSString stringWithFormat:@"%li", (long)currentCountOfUnread];
-	NSApp.dockTile.badgeLabel = countdown;
+- (void)showUnreadCountOnApplicationIconAndWindowTitle {
+    @synchronized(NSApp.dockTile) {
+        NSInteger currentCountOfUnread = db.countOfUnread;
+        if (currentCountOfUnread == lastCountOfUnread) {
+            return;
+        }
+        lastCountOfUnread = currentCountOfUnread;
 
-	} // @synchronized
+        // Always update the app status icon first
+        [self setAppStatusBarIcon];
+
+        // Don't show a count if there are no unread articles
+        if (currentCountOfUnread <= 0) {
+            NSApp.dockTile.badgeLabel = nil;
+            if (@available(macOS 11.0, *)) {
+                // Do nothing
+            } else {
+                self.mainWindow.title = self.appName;
+            }
+            return;
+        }
+
+        if (@available(macOS 11.0, *)) {
+            self.mainWindow.subtitle = [NSString stringWithFormat:@"%li %@", (long)currentCountOfUnread, NSLocalizedString(@"Unread", nil)];
+        } else {
+            self.mainWindow.title = [NSString stringWithFormat:@"%@ (%li %@)", self.appName, (long)currentCountOfUnread, NSLocalizedString(@"Unread", nil)];
+        }
+
+        // Exit now if we're not showing the unread count on the application icon
+        if (([Preferences standardPreferences].newArticlesNotification & VNANewArticlesNotificationBadge) ==0) {
+            return;
+        }
+
+        NSString *countdown = [NSString stringWithFormat:@"%li", (long)currentCountOfUnread];
+        NSApp.dockTile.badgeLabel = countdown;
+
+    }
 }
 
 /* emptyTrash
