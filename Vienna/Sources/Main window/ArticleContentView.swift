@@ -11,28 +11,18 @@ import Foundation
 protocol ArticleContentView: Tab {
 
     var listView: ArticleViewDelegate? { get set }
-
-	var htmlTemplate: String { get set }
-	var cssStylesheet: String { get set }
-	var jsScript: String { get set }
-	var currentHTML: String { get set }
-
+    var html: String { get set }
 	func clearHTML()
-	func setHTML(_ htmlText: String)
-	func articleText(fromArray msgArray: [Any])
+
 	@objc(keyDown:)
 	func keyDown(with event: NSEvent)
 
 	//from tabbedwebview
 	//TODO: evaluate and throw out what is not necessary / replace with Tab interface
-	func setOpenLinksInNewBrowser(_ flag: Bool)
 	func printDocument(_ sender: Any)
 	func abortJavascriptAndPlugIns()
 	func useUserPrefsForJavascriptAndPlugIns()
 	func forceJavascript()
-
-	var feedRedirect: Bool { get }
-	var download: Bool { get }
 
 	func scrollToTop()
 	func scrollToBottom()

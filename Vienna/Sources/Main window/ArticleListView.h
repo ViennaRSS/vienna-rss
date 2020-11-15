@@ -34,7 +34,7 @@
 @interface ArticleListView : NSView<BaseView, ArticleBaseView, ArticleViewDelegate, NSTableViewDelegate, NSTableViewDataSource>
 {
 	IBOutlet MessageListView * articleList;
-	IBOutlet id<ArticleContentView> articleText;
+    NSObject<ArticleContentView> *articleText;
 	IBOutlet NSSplitView * splitView2;
 	IBOutlet EnclosureView * enclosureView;
 

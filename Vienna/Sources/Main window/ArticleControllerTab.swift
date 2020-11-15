@@ -71,4 +71,7 @@ extension ArticleController: Tab {
         //there is no address bar in the articlecontroller
     }
 
+    public func activateWebView() {
+        //there is no webview in articlecontroller
+    }
 }
