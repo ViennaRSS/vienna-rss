@@ -34,12 +34,8 @@ final class MainWindowController: NSWindowController {
     @IBOutlet weak var placeholderDetailView: NSView!
 
 	@objc private(set) lazy var browser: (Browser & NSViewController) = {
-		if #available(macOS 10.10, *) {
-            var controller = TabbedBrowserViewController()
-			return controller
-		} else {
-			return WebViewBrowser()
-		}
+        var controller = TabbedBrowserViewController()
+        return controller
 	}()
 
     // MARK: Initialization

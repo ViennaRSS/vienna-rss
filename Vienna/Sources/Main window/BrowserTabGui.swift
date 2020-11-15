@@ -117,7 +117,6 @@ extension BrowserTab {
 
 // MARK: Address Bar Delegate
 
-@available(OSX 10.10, *)
 extension BrowserTab: NSTextFieldDelegate {
     //TODO: things like address suggestion etc
     //TODO: restore url string when user presses escape in textfield, make webview first responder

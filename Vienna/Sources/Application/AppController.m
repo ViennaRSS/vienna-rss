@@ -687,11 +687,8 @@
     }
     NSTabViewItem *primaryTab = [[NSTabViewItem alloc] initWithIdentifier:@"Articles"];
     [primaryTab setLabel:NSLocalizedString(@"Articles", nil)];
-	if (@available(macOS 10.10, *)) {
-		[primaryTab setViewController:self.articleController];
-	} else {
-		[primaryTab setView:self.articleController.mainArticleView];
-	}
+    [primaryTab setViewController:self.articleController];
+
 	[self.browser setPrimaryTab:primaryTab];
 	self.foldersTree.mainView.nextKeyView = ((NSView<BaseView> *)self.browser.primaryTab.view).mainView;
     if (self.selectedArticle == nil)

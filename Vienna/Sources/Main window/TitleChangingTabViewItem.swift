@@ -21,7 +21,6 @@
 
 import Cocoa
 
-@available(OSX 10.10, *)
 class TitleChangingTabViewItem: NSTabViewItem {
 
     var titleObservation: NSKeyValueObservation?

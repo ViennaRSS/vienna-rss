@@ -7,7 +7,6 @@
 
 import Cocoa
 
-@available(OSX 10.10, *)
 public class CustomWKWebView: WKWebView {
 
     static let clickListenerName = "clickListener"
