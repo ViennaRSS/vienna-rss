@@ -405,7 +405,7 @@
 		{
 			// If nothing found and smart folder, search if we have other fresh articles from same folder
 			Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
-			if (currentFolder.type == VNAFolderTypeSmart || currentFolder.type == VNAFolderTypeTrash || currentFolder.type == VNAFolderTypeSearch)
+			if (currentFolder.isSmartFolder || currentFolder.type == VNAFolderTypeTrash || currentFolder.type == VNAFolderTypeSearch)
 			{
                 if (!mainArticleView.selectFirstUnreadInFolder)
 				{
@@ -815,7 +815,7 @@
 	for (Article * theArticle in articleArray)
 	{
 		Folder *myFolder = [[Database sharedManager] folderFromID:theArticle.folderId];
-		if (myFolder.type == VNAFolderTypeOpenReader) {
+		if (myFolder.isOpenReaderFolder) {
 			[[OpenReader sharedManager] markStarred:theArticle starredFlag:flagged];
 		}
 		[[Database sharedManager] markArticleFlagged:theArticle.folderId
@@ -869,7 +869,7 @@
 		NSInteger folderId = theArticle.folderId;
 		if (theArticle.read != readFlag)
 		{
-			if ([[Database sharedManager] folderFromID:folderId].type == VNAFolderTypeOpenReader) {
+			if ([[Database sharedManager] folderFromID:folderId].isOpenReaderFolder) {
 				[[OpenReader sharedManager] markRead:theArticle readFlag:readFlag];
 			} else {
 				[[Database sharedManager] markArticleRead:folderId guid:theArticle.guid isRead:readFlag];
@@ -900,7 +900,7 @@
 	{
 		NSInteger folderId = articleRef.folderId;
 		Folder * folder = [db folderFromID:folderId];
-		if (folder.type == VNAFolderTypeOpenReader){
+		if (folder.isOpenReaderFolder){
 			Article * article = [folder articleFromGuid:articleRef.guid];
 			if (article != nil) {
                 [[OpenReader sharedManager] markRead:article readFlag:readFlag];
@@ -972,16 +972,16 @@
 	for (Folder * folder in folderArray)
 	{
 		NSInteger folderId = folder.itemId;
-		if (folder.type == VNAFolderTypeGroup)
+		if (folder.isGroupFolder)
 		{
 			[refArray addObjectsFromArray:[self wrappedMarkAllFoldersReadInArray:[[Database sharedManager] arrayOfFolders:folderId]]];
 		}
-		else if (folder.type == VNAFolderTypeRSS)
+		else if (folder.isRSSFolder)
 		{
 			[refArray addObjectsFromArray:[folder arrayOfUnreadArticlesRefs]];
 			[[Database sharedManager] markFolderRead:folderId];
 		}
-		else if (folder.type == VNAFolderTypeOpenReader)
+		else if (folder.isOpenReaderFolder)
 		{
 			NSArray * articleArray = [folder arrayOfUnreadArticlesRefs];
 			[refArray addObjectsFromArray:articleArray];
@@ -1021,7 +1021,7 @@
 		NSInteger folderId = ref.folderId;
 		NSString * theGuid = ref.guid;
 		Folder * folder = [dbManager folderFromID:folderId];
-        if (folder.type == VNAFolderTypeOpenReader) {
+        if (folder.isOpenReaderFolder) {
         	Article * article = [folder articleFromGuid:theGuid];
         	if (article != nil) {
 			    [[OpenReader sharedManager] markRead:article readFlag:readFlag];
@@ -1044,8 +1044,8 @@
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
 															object:@(lastFolderId)];
 	}
-	if (lastFolderId != -1 && [dbManager folderFromID:currentFolderId].type != VNAFolderTypeRSS
-		&& [dbManager folderFromID:currentFolderId].type != VNAFolderTypeOpenReader) {
+	if (lastFolderId != -1 && ![dbManager folderFromID:currentFolderId].isRSSFolder
+		&& ![dbManager folderFromID:currentFolderId].isOpenReaderFolder) {
 		[self reloadArrayOfArticles];
 	}
 	else if (needRefilter) {
@@ -1119,7 +1119,7 @@
 {
     NSInteger folderId = ((NSNumber *)nc.object).integerValue;
     Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
-    if ((folderId == currentFolderId) || (currentFolder.type != VNAFolderTypeRSS && currentFolder.type != VNAFolderTypeOpenReader)) {
+    if ((folderId == currentFolderId) || (!currentFolder.isRSSFolder && !currentFolder.isOpenReaderFolder)) {
         [mainArticleView refreshFolder:VNARefreshRedrawList];
     }
 }

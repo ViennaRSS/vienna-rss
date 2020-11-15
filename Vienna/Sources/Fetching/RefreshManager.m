@@ -204,9 +204,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     statusMessageDuringRefresh = NSLocalizedString(@"Forcing Refresh subscriptions…", nil);
 
     for (Folder * folder in foldersArray) {
-        if (folder.type == VNAFolderTypeGroup) {
+        if (folder.isGroupFolder) {
             [self forceRefreshSubscriptionForFolders:[[Database sharedManager] arrayOfFolders:folder.itemId]];
-        } else if (folder.type == VNAFolderTypeOpenReader) {
+        } else if (folder.isOpenReaderFolder) {
             if (![self isRefreshingFolder:folder ofType:MA_Refresh_GoogleFeed] &&
                 ![self isRefreshingFolder:folder ofType:MA_ForceRefresh_Google_Feed])
             {
@@ -258,9 +258,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     statusMessageDuringRefresh = NSLocalizedString(@"Refreshing folder images…", nil);
 
     for (Folder * folder in foldersArray) {
-        if (folder.type == VNAFolderTypeGroup) {
+        if (folder.isGroupFolder) {
             [self refreshFolderIconCacheForSubscriptions:[[Database sharedManager] arrayOfFolders:folder.itemId]];
-        } else if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) {
+        } else if (folder.isRSSFolder || folder.isOpenReaderFolder) {
             [self refreshFavIconForFolder:folder];
         }
     }
@@ -278,7 +278,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 {
     // Do nothing if there's no homepage associated with the feed
     // or if the feed already has a favicon.
-    if ((folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) &&
+    if ((folder.isRSSFolder || folder.isOpenReaderFolder) &&
         (folder.homePage == nil || folder.homePage.blank || folder.hasCachedImage))
     {
         [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
@@ -380,7 +380,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
     NSString * favIconPath;
 
-    if (folder.type == VNAFolderTypeRSS) {
+    if (folder.isRSSFolder) {
         [aItem appendDetail:NSLocalizedString(@"Retrieving folder image", nil)];
         favIconPath = [NSString stringWithFormat:@"%@/favicon.ico", folder.homePage.trim.baseURL];
     } else {     // Open Reader feed
@@ -475,7 +475,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     [self setFolderUpdatingFlag:folder flag:YES];
 
     // Additional detail for the log
-    if (folder.type == VNAFolderTypeOpenReader) {
+    if (folder.isOpenReaderFolder) {
         [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to Open Reader server to retrieve %@", nil),
                              urlString]];
     } else {
@@ -493,7 +493,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 {
     NSMutableURLRequest *myRequest;
 
-    if (folder.type == VNAFolderTypeRSS) {
+    if (folder.isRSSFolder) {
         myRequest = [NSMutableURLRequest requestWithURL:url];
         NSString * theLastUpdateString = folder.lastUpdateString;
         if (![theLastUpdateString isEqualToString:@""]) {

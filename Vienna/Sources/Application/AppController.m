@@ -1760,9 +1760,9 @@ static void MySleepCallBack(void *refCon, io_service_t service, natural_t messag
  */
 - (void)doEditFolder:(Folder *)folder
 {
-    if (folder.type == VNAFolderTypeRSS) {
+    if (folder.isRSSFolder) {
         [self.rssFeed editSubscription:self.mainWindow folderId:folder.itemId];
-    } else if (folder.type == VNAFolderTypeSmart) {
+    } else if (folder.isSmartFolder) {
         if (!smartFolder) {
             smartFolder = [[SmartFolder alloc] initWithDatabase:db];
         }
@@ -2616,7 +2616,7 @@ static void MySleepCallBack(void *refCon, io_service_t service, natural_t messag
 
     if (count == 1) {
         Folder *folder = selectedFolders[0];
-        if (folder.type == VNAFolderTypeSmart) {
+        if (folder.isSmartFolder) {
             alertBody =
                 [NSString stringWithFormat:NSLocalizedString(
                      @"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search.",
@@ -2624,19 +2624,19 @@ static void MySleepCallBack(void *refCon, io_service_t service, natural_t messag
             alertTitle = NSLocalizedString(@"Delete smart folder", nil);
         } else if (folder.type == VNAFolderTypeSearch) {
             needPrompt = NO;
-        } else if (folder.type == VNAFolderTypeRSS) {
+        } else if (folder.isRSSFolder) {
             alertBody =
                 [NSString stringWithFormat:NSLocalizedString(
                      @"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles.",
                      nil), folder.name];
             alertTitle = NSLocalizedString(@"Delete subscription", nil);
-        } else if (folder.type == VNAFolderTypeOpenReader) {
+        } else if (folder.isOpenReaderFolder) {
             alertBody =
                 [NSString stringWithFormat:NSLocalizedString(
                      @"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.",
                      nil), folder.name];
             alertTitle = NSLocalizedString(@"Delete Open Reader RSS feed", nil);
-        } else if (folder.type == VNAFolderTypeGroup) {
+        } else if (folder.isGroupFolder) {
             alertBody =
                 [NSString stringWithFormat:NSLocalizedString(
                      @"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone.",
@@ -2703,7 +2703,7 @@ static void MySleepCallBack(void *refCon, io_service_t service, natural_t messag
             // Now call the database to delete the folder.
             [db deleteFolder:folder.itemId];
 
-            if (folder.type == VNAFolderTypeOpenReader) {
+            if (folder.isOpenReaderFolder) {
                 NSLog(@"Unsubscribe Open Reader folder");
                 [[OpenReader sharedManager] unsubscribeFromFeedIdentifier:folder.remoteId];
             }
@@ -2799,7 +2799,7 @@ static void MySleepCallBack(void *refCon, io_service_t service, natural_t messag
 {
     Article *thisArticle = self.selectedArticle;
     Folder *folder = (thisArticle) ? [db folderFromID:thisArticle.folderId] : [db folderFromID:self.foldersTree.actualSelection];
-    if (thisArticle || folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) {
+    if (thisArticle || folder.isRSSFolder || folder.isOpenReaderFolder) {
         [self openURLFromString:folder.homePage inPreferredBrowser:YES];
     }
 }
@@ -2811,7 +2811,7 @@ static void MySleepCallBack(void *refCon, io_service_t service, natural_t messag
 {
     Article *thisArticle = self.selectedArticle;
     Folder *folder = (thisArticle) ? [db folderFromID:thisArticle.folderId] : [db folderFromID:self.foldersTree.actualSelection];
-    if (thisArticle || folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) {
+    if (thisArticle || folder.isRSSFolder || folder.isOpenReaderFolder) {
         [self openURLFromString:folder.homePage inPreferredBrowser:NO];
     }
 }
@@ -3349,12 +3349,12 @@ static void MySleepCallBack(void *refCon, io_service_t service, natural_t messag
     }
     if (theAction == @selector(getInfo:)) {
         Folder *folder = [db folderFromID:self.foldersTree.actualSelection];
-        *validateFlag = (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && isMainWindowVisible;
+        *validateFlag = (folder.isRSSFolder || folder.isOpenReaderFolder) && isMainWindowVisible;
         return YES;
     }
     if (theAction == @selector(forceRefreshSelectedSubscriptions:)) {
         Folder *folder = [db folderFromID:self.foldersTree.actualSelection];
-        *validateFlag = folder.type == VNAFolderTypeOpenReader;
+        *validateFlag = folder.isOpenReaderFolder;
         return YES;
     }
     if (theAction == @selector(viewArticlesTab:)) {
@@ -3367,7 +3367,7 @@ static void MySleepCallBack(void *refCon, io_service_t service, natural_t messag
     }
     if (theAction == @selector(markAllRead:)) {
         Folder *folder = [db folderFromID:self.foldersTree.actualSelection];
-        if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) {
+        if (folder.isRSSFolder || folder.isOpenReaderFolder) {
             *validateFlag = folder && folder.unreadCount > 0 && !db.readOnly && isMainWindowVisible;
         } else if (folder.type != VNAFolderTypeTrash) {
             *validateFlag = folder && !db.readOnly && db.countOfUnread > 0 && isMainWindowVisible;
@@ -3495,23 +3495,23 @@ static void MySleepCallBack(void *refCon, io_service_t service, natural_t messag
                 [menuItem setTitle:NSLocalizedString(@"Unsubscribe from Feed", nil)];
             }
         }
-        return folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && !db.readOnly && isMainWindowVisible;
+        return folder && (folder.isRSSFolder || folder.isOpenReaderFolder) && !db.readOnly && isMainWindowVisible;
     } else if (theAction == @selector(useCurrentStyleForArticles:)) {
         Folder *folder = [db folderFromID:self.foldersTree.actualSelection];
-        if (folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && !folder.loadsFullHTML) {
+        if (folder && (folder.isRSSFolder || folder.isOpenReaderFolder) && !folder.loadsFullHTML) {
             menuItem.state = NSControlStateValueOn;
         } else {
             menuItem.state = NSControlStateValueOff;
         }
-        return folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && !db.readOnly && isMainWindowVisible;
+        return folder && (folder.isRSSFolder || folder.isOpenReaderFolder) && !db.readOnly && isMainWindowVisible;
     } else if (theAction == @selector(useWebPageForArticles:)) {
         Folder *folder = [db folderFromID:self.foldersTree.actualSelection];
-        if (folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && folder.loadsFullHTML) {
+        if (folder && (folder.isRSSFolder || folder.isOpenReaderFolder) && folder.loadsFullHTML) {
             menuItem.state = NSControlStateValueOn;
         } else {
             menuItem.state = NSControlStateValueOff;
         }
-        return folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && !db.readOnly && isMainWindowVisible;
+        return folder && (folder.isRSSFolder || folder.isOpenReaderFolder) && !db.readOnly && isMainWindowVisible;
     } else if (theAction == @selector(deleteFolder:)) {
         Folder *folder = [db folderFromID:self.foldersTree.actualSelection];
         if (folder.type == VNAFolderTypeSearch) {
@@ -3522,7 +3522,7 @@ static void MySleepCallBack(void *refCon, io_service_t service, natural_t messag
         return folder && folder.type != VNAFolderTypeTrash && !db.readOnly && isMainWindowVisible;
     } else if (theAction == @selector(refreshSelectedSubscriptions:)) {
         Folder *folder = [db folderFromID:self.foldersTree.actualSelection];
-        return folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeGroup || folder.type == VNAFolderTypeOpenReader) &&
+        return folder && (folder.isRSSFolder || folder.isGroupFolder || folder.isOpenReaderFolder) &&
                !db.readOnly;
     } else if (theAction == @selector(refreshAllFolderIcons:)) {
         return !self.connecting && !db.readOnly;
@@ -3538,7 +3538,7 @@ static void MySleepCallBack(void *refCon, io_service_t service, natural_t messag
     } else if ((theAction == @selector(viewSourceHomePage:)) || (theAction == @selector(viewSourceHomePageInAlternateBrowser:))) {
         Article *thisArticle = self.selectedArticle;
         Folder *folder = (thisArticle) ? [db folderFromID:thisArticle.folderId] : [db folderFromID:self.foldersTree.actualSelection];
-        return folder && (thisArticle || folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) &&
+        return folder && (thisArticle || folder.isRSSFolder || folder.isOpenReaderFolder) &&
                (folder.homePage && !folder.homePage.blank && isMainWindowVisible);
     } else if ((theAction == @selector(viewArticlePages:)) || (theAction == @selector(viewArticlePagesInAlternateBrowser:))) {
         Article *thisArticle = self.selectedArticle;
@@ -3552,7 +3552,7 @@ static void MySleepCallBack(void *refCon, io_service_t service, natural_t messag
         return !self.connecting && !db.readOnly && isMainWindowVisible;
     } else if (theAction == @selector(editFolder:)) {
         Folder *folder = [db folderFromID:self.foldersTree.actualSelection];
-        return folder && (folder.type == VNAFolderTypeSmart || folder.type == VNAFolderTypeRSS) && !db.readOnly && isMainWindowVisible;
+        return folder && (folder.isSmartFolder || folder.isRSSFolder) && !db.readOnly && isMainWindowVisible;
     } else if (theAction == @selector(restoreMessage:)) {
         Folder *folder = [db folderFromID:self.foldersTree.actualSelection];
         return folder.type == VNAFolderTypeTrash && self.selectedArticle != nil && !db.readOnly && isMainWindowVisible;

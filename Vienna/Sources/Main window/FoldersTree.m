@@ -381,8 +381,9 @@
     } else {
 		node = [self.rootNode nodeFromID:folderId];
     }
-    if (node.folder != nil && (node.folder.type == VNAFolderTypeRSS || node.folder.type == VNAFolderTypeOpenReader)) {
-		[array addObject:node.folder];
+    Folder *folder = node.folder;
+    if (folder != nil && (folder.isRSSFolder || folder.isOpenReaderFolder)) {
+		[array addObject:folder];
     }
 	node = node.firstChild;
 	while (node != nil)
@@ -598,7 +599,7 @@
 -(NSInteger)groupParentSelection
 {
 	Folder * folder = [[Database sharedManager] folderFromID:self.actualSelection];
-	return folder ? ((folder.type == VNAFolderTypeGroup) ? folder.itemId : folder.parentId) : VNAFolderTypeRoot;
+	return folder ? ((folder.isGroupFolder) ? folder.itemId : folder.parentId) : VNAFolderTypeRoot;
 }
 
 /* actualSelection
@@ -729,14 +730,14 @@
 	
 	TreeNode * node = [self.outlineView itemAtRow:self.outlineView.selectedRow];
 
-	if (node.folder.type == VNAFolderTypeRSS || node.folder.type == VNAFolderTypeOpenReader)
+	if (node.folder.isRSSFolder || node.folder.isOpenReaderFolder)
 	{
 		NSString * urlString = node.folder.homePage;
         if (urlString && !urlString.blank) {
 			[APPCONTROLLER openURLFromString:urlString inPreferredBrowser:YES];
         }
 	}
-	else if (node.folder.type == VNAFolderTypeSmart) {
+	else if (node.folder.isSmartFolder) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_EditFolder" object:node];
 	}
 }
@@ -1008,7 +1009,7 @@
 			[realCell setInProgress:NO];
 		}
 
-		if (folder.type == VNAFolderTypeSmart)  // Because if the search results contain unread articles we don't want the smart folder name to be bold.
+		if (folder.isSmartFolder)  // Because if the search results contain unread articles we don't want the smart folder name to be bold.
 		{
 			[realCell clearCount];
 		}
@@ -1128,7 +1129,7 @@
 	Folder * folder = node.folder;
 	
 	// Remove the "☁️ " symbols on Open Reader feeds
-	if (folder.type == VNAFolderTypeOpenReader && [newName hasPrefix:@"☁️ "]) {
+	if (folder.isOpenReaderFolder && [newName hasPrefix:@"☁️ "]) {
 		NSString *tmpName = [newName substringFromIndex:3];
 		newName = tmpName;
 	}
@@ -1141,7 +1142,7 @@
 		else
         {
             [dbManager setName:newName forFolder:folder.itemId];
-            if (folder.type == VNAFolderTypeOpenReader) {
+            if (folder.isOpenReaderFolder) {
                 [[OpenReader sharedManager] setFolderTitle:newName forFeed:folder.remoteId];
             }
         }
@@ -1172,12 +1173,12 @@
     }
 	
 	// Can't drop anything on smart folders.
-    if (isOnDropTypeProposal && node != nil && node.folder.type == VNAFolderTypeSmart) {
+    if (isOnDropTypeProposal && node != nil && node.folder.isSmartFolder) {
 		return NSDragOperationNone;
     }
 	
 	// Can always drop something on a group folder.
-    if (isOnDropTypeProposal && node != nil && node.folder.type == VNAFolderTypeGroup) {
+    if (isOnDropTypeProposal && node != nil && node.folder.isGroupFolder) {
 		return dragType;
     }
 	
@@ -1231,8 +1232,8 @@
 			++countOfItems;
 		}
 
-		if (folder.type == VNAFolderTypeRSS
-            || folder.type == VNAFolderTypeOpenReader) {
+		if (folder.isRSSFolder
+            || folder.isOpenReaderFolder) {
 			NSString * feedURL = folder.feedURL;
 			
 			NSMutableDictionary * dict = [NSMutableDictionary dictionary];
@@ -1334,7 +1335,7 @@
 				[newParent setCanHaveChildren:YES];
 			if ([dbManager setParent:newParentId forFolder:folderId])
 			{
-				if (sync && folder.type == VNAFolderTypeOpenReader)
+				if (sync && folder.isOpenReaderFolder)
 				{
 					OpenReader * myReader = [OpenReader sharedManager];
 					// remove old label

@@ -191,7 +191,7 @@ static NSArray * iconArray = nil;
  * @return YES if the folder has an image stored in the cache.
  */
 -(BOOL)hasCachedImage {
-    if (self.type != VNAFolderTypeRSS && self.type != VNAFolderTypeOpenReader) {
+    if (!(self.isRSSFolder || self.isOpenReaderFolder)) {
 		return NO;
     }
 	NSImage * imagePtr = nil;
@@ -710,7 +710,7 @@ static NSArray * iconArray = nil;
 {
 	if ([filterString isEqualToString:@""])
 	{
-		if (self.type == VNAFolderTypeGroup) {
+		if (self.isGroupFolder) {
 			NSMutableArray * articles = [NSMutableArray array];
 			NSArray * subFolders = [[Database sharedManager] arrayOfFolders:self.itemId];
 			for (Folder * folder in subFolders) {
@@ -745,7 +745,7 @@ static NSArray * iconArray = nil;
                 NSArray * articles = [[Database sharedManager] arrayOfArticles:self.itemId filterString:filterString];
                 // Only feeds folders can be cached, as they are the only ones to guarantee
                 // bijection : one article <-> one guid
-                if (self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader) {
+                if (self.isRSSFolder || self.isOpenReaderFolder) {
                     self.isCached = NO;
                     self.containsBodies = NO;
                     [self.cachedArticles removeAllObjects];
@@ -792,7 +792,7 @@ static NSArray * iconArray = nil;
 -(NSString *)feedSourceFilePath
 {
 	NSString * feedSourceFilePath = nil;
-	if (self.type == VNAFolderTypeRSS) {
+	if (self.isRSSFolder) {
 		NSString * feedSourceFileName = [NSString stringWithFormat:@"folder%li.xml", (long)self.itemId];
 		feedSourceFilePath = [[Preferences standardPreferences].feedSourcesFolder stringByAppendingPathComponent:feedSourceFileName];
 	}
