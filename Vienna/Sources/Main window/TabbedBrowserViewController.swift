@@ -20,7 +20,6 @@
 import Cocoa
 import MMTabBarView
 
-@available(OSX 10.10, *)
 class TabbedBrowserViewController: NSViewController, RSSSource {
 
     @IBOutlet private(set) weak var tabBar: MMTabBarView? {
@@ -245,7 +244,6 @@ extension TabbedBrowserViewController: Browser {
     }
 }
 
-@available(OSX 10.10, *)
 extension TabbedBrowserViewController: MMTabBarViewDelegate {
     func tabView(_ aTabView: NSTabView, shouldClose tabViewItem: NSTabViewItem) -> Bool {
         tabViewItem != primaryTab
@@ -301,7 +299,7 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
     }
 }
 
-@available(OSX 10.10, *)
+
 extension TabbedBrowserViewController: CustomWKUIDelegate {
     //TODO: implement functionality for alerts and maybe peek actions
 
