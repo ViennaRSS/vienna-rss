@@ -212,6 +212,7 @@
 		F6A7DE4A1E4717970017BE5E /* shared in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE491E4717970017BE5E /* shared */; };
 		F6A7DE4F1E471A7F0017BE5E /* Vienna.help in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DDCA1E470E980017BE5E /* Vienna.help */; };
 		F6B355DB256025D3008CA1ED /* PreferenceTabViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B355DA256025D3008CA1ED /* PreferenceTabViewItem.swift */; };
+		F6B3561525616313008CA1ED /* DownloadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B3561425616313008CA1ED /* DownloadItem.m */; };
 		F6B7BC3624A2A9A40051D76F /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = F6B7BC3524A2A9A40051D76F /* FMDB */; };
 		F6CE47131E7E3DCB0045EAD7 /* ActivityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CE47121E7E3DCB0045EAD7 /* ActivityItem.m */; };
 		F6D0089C1EF95C9D008F2D3B /* InfoPanelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6D0089B1EF95C9D008F2D3B /* InfoPanelManager.m */; };
@@ -886,6 +887,8 @@
 		F6AAE39D209EFED80039CC04 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		F6B1233E1E474D2A00973699 /* IndexHelpbook.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = IndexHelpbook.sh; sourceTree = "<group>"; };
 		F6B355DA256025D3008CA1ED /* PreferenceTabViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceTabViewItem.swift; sourceTree = "<group>"; };
+		F6B3561325616302008CA1ED /* DownloadItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadItem.h; sourceTree = "<group>"; };
+		F6B3561425616313008CA1ED /* DownloadItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadItem.m; sourceTree = "<group>"; };
 		F6C3F9BA209EFD4E009936CC /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = eu; path = eu.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F6CB562F209EFDB5002EE27B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ja; path = ja.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F6CE47111E7E3DBD0045EAD7 /* ActivityItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityItem.h; sourceTree = "<group>"; };
@@ -1518,10 +1521,12 @@
 		F6D7FEDD1F1CDFCD004F095A /* Download window */ = {
 			isa = PBXGroup;
 			children = (
-				4350285F165DE9DF0018EDB7 /* DownloadManager.h */,
-				43502860165DE9DF0018EDB7 /* DownloadManager.m */,
 				43502861165DE9DF0018EDB7 /* DownloadWindow.h */,
 				43502862165DE9DF0018EDB7 /* DownloadWindow.m */,
+				4350285F165DE9DF0018EDB7 /* DownloadManager.h */,
+				43502860165DE9DF0018EDB7 /* DownloadManager.m */,
+				F6B3561325616302008CA1ED /* DownloadItem.h */,
+				F6B3561425616313008CA1ED /* DownloadItem.m */,
 			);
 			path = "Download window";
 			sourceTree = "<group>";
@@ -2067,6 +2072,7 @@
 				AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */,
 				AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */,
 				032280311A33BCD8007DE933 /* Article.m in Sources */,
+				F6B3561525616313008CA1ED /* DownloadItem.m in Sources */,
 				030C38901AABF12D00AE1EB8 /* FolderImageCache.m in Sources */,
 				F63B71751ED252DD00CF9F32 /* GradientView.swift in Sources */,
 				AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */,
