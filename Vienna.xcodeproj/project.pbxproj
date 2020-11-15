@@ -62,10 +62,10 @@
 		2F06504C2506B5B500468A0E /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F06504B2506B5B500468A0E /* LoadingIndicator.swift */; };
 		2F125EDE24D0638600868E11 /* BrowserTabBeforeMacOS12.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F125EDD24D0638600868E11 /* BrowserTabBeforeMacOS12.xib */; };
 		2F125EE024D066ED00868E11 /* AsyncHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F125EDF24D066ED00868E11 /* AsyncHelper.swift */; };
+		2F20FF8F25618627000F68C2 /* WebKitArticleTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F20FF8E25618627000F68C2 /* WebKitArticleTab.swift */; };
 		2F22803322719CC8005D1023 /* ArticleControllerTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F22803222719CC8005D1023 /* ArticleControllerTab.swift */; };
 		2F2280352271B041005D1023 /* ArticleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280342271B041005D1023 /* ArticleContentView.swift */; };
 		2F2280382271B18A005D1023 /* ArticleStyleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */; };
-		2F22803A2271CCAB005D1023 /* WebKitArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280392271CCAB005D1023 /* WebKitArticleView.swift */; };
 		2F5AC4202198E1AA00A7EDDE /* TitleChangingTabViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */; };
 		2F779111253B17C5004ED4EF /* BrowserContextMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F779110253B17C5004ED4EF /* BrowserContextMenuDelegate.swift */; };
 		2F7B91EB2198351A00E56F00 /* WebViewBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */; };
@@ -283,10 +283,10 @@
 		2F06504B2506B5B500468A0E /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		2F125EDD24D0638600868E11 /* BrowserTabBeforeMacOS12.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrowserTabBeforeMacOS12.xib; sourceTree = "<group>"; };
 		2F125EDF24D066ED00868E11 /* AsyncHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncHelper.swift; sourceTree = "<group>"; };
+		2F20FF8E25618627000F68C2 /* WebKitArticleTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKitArticleTab.swift; sourceTree = "<group>"; };
 		2F22803222719CC8005D1023 /* ArticleControllerTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleControllerTab.swift; sourceTree = "<group>"; };
 		2F2280342271B041005D1023 /* ArticleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleContentView.swift; sourceTree = "<group>"; };
 		2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleStyleLoader.swift; sourceTree = "<group>"; };
-		2F2280392271CCAB005D1023 /* WebKitArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKitArticleView.swift; sourceTree = "<group>"; };
 		2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleChangingTabViewItem.swift; sourceTree = "<group>"; };
 		2F779110253B17C5004ED4EF /* BrowserContextMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserContextMenuDelegate.swift; sourceTree = "<group>"; };
 		2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewBrowser.xib; sourceTree = "<group>"; };
@@ -1026,16 +1026,24 @@
 			tabWidth = 4;
 			usesTabs = 0;
 		};
-		2F2280362271B065005D1023 /* ArticleContent */ = {
+		2F20FF952561927D000F68C2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				2F88B2BC2545C9660067EEA6 /* WebKitArticleContent */,
-				2F88B2BB2545C9410067EEA6 /* WebViewArticleContent */,
-				2F2280342271B041005D1023 /* ArticleContentView.swift */,
 				2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */,
 				2F88B2A42545BB450067EEA6 /* ArticleConverter.h */,
 				2F88B2A52545BB450067EEA6 /* ArticleConverter.m */,
 				2F88B2AC2545BCA90067EEA6 /* ArticleConverter.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		2F2280362271B065005D1023 /* ArticleContent */ = {
+			isa = PBXGroup;
+			children = (
+				2F20FF952561927D000F68C2 /* Common */,
+				2F88B2BC2545C9660067EEA6 /* WebKitArticleContent */,
+				2F88B2BB2545C9410067EEA6 /* WebViewArticleContent */,
+				2F2280342271B041005D1023 /* ArticleContentView.swift */,
 				2F88B2C22545DAB40067EEA6 /* ArticleViewDelegate.swift */,
 			);
 			name = ArticleContent;
@@ -1053,7 +1061,7 @@
 		2F88B2BC2545C9660067EEA6 /* WebKitArticleContent */ = {
 			isa = PBXGroup;
 			children = (
-				2F2280392271CCAB005D1023 /* WebKitArticleView.swift */,
+				2F20FF8E25618627000F68C2 /* WebKitArticleTab.swift */,
 			);
 			name = WebKitArticleContent;
 			sourceTree = "<group>";
@@ -1993,7 +2001,6 @@
 				AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */,
 				032280311A33BCD8007DE933 /* Article.m in Sources */,
 				F6B3561525616313008CA1ED /* DownloadItem.m in Sources */,
-				2F22803A2271CCAB005D1023 /* WebKitArticleView.swift in Sources */,
 				030C38901AABF12D00AE1EB8 /* FolderImageCache.m in Sources */,
 				AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */,
 				AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */,
@@ -2035,6 +2042,7 @@
 				F64C2CCC1E83825D00ED4E04 /* DateFormatterExtension.m in Sources */,
 				B85F93E5255AE48000B54B68 /* NSPopUpButtonExtensions.swift in Sources */,
 				4350289F165DE9E00018EDB7 /* Constants.m in Sources */,
+				2F20FF8F25618627000F68C2 /* WebKitArticleTab.swift in Sources */,
 				034981411A20701600014F29 /* AdvancedPreferencesViewController.m in Sources */,
 				435028A0165DE9E00018EDB7 /* DownloadManager.m in Sources */,
 				435028A1165DE9E00018EDB7 /* DownloadWindow.m in Sources */,

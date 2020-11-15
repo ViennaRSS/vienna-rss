@@ -56,4 +56,5 @@ public protocol Tab {
 
     func printPage()
     func activateAddressBar()
+    func activateWebView()
 }

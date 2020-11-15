@@ -73,7 +73,7 @@ class BrowserTab: NSViewController {
         self.webView = CustomWKWebView(configuration: config)
 
         if #available(macOS 10.12, *) {
-            super.init(nibName: nil, bundle: nil)
+            super.init(nibName: "BrowserTab", bundle: nil) //TODO: allow override
         } else {
             super.init(nibName: "BrowserTabBeforeMacOS12", bundle: nil)
         }
@@ -160,7 +160,7 @@ class BrowserTab: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
         if self.loadedTab {
-            self.view.window?.makeFirstResponder(self.webView)
+            activateWebView()
         }
     }
 
@@ -238,7 +238,7 @@ extension BrowserTab: Tab {
             self.webView.load(URLRequest(url: url))
             loadedTab = true
             if self.isViewLoaded && self.view.window != nil {
-                self.view.window?.makeFirstResponder(self.webView)
+                self.activateWebView()
             }
         } else {
             //TODO: this seems to wipe history, which we do not want
@@ -271,6 +271,10 @@ extension BrowserTab: Tab {
 
     func activateAddressBar() {
         NSApp.mainWindow?.makeFirstResponder(addressField)
+    }
+
+    func activateWebView() {
+        self.view.window?.makeFirstResponder(self.webView)
     }
 }
 

@@ -99,15 +99,6 @@
 	[nc addObserver:self selector:@selector(handleLoadFullHTMLChange:) name:@"MA_Notify_LoadFullHTMLChange" object:nil];
 	[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
 
-    if ([((NSObject *)articleText) isKindOfClass:ArticleView.class]) {
-        ArticleView *articleView = (ArticleView *)articleText;
-        // Make us the frame load and UI delegate for the web view
-        [articleView setOpenLinksInNewBrowser:YES];
-
-        [articleView setMaintainsBackForwardList:NO];
-        [articleView.backForwardList setPageCacheSize:0];
-    }
-
     _articleConverter = [[ArticleConverter alloc] init];
 
     [self initialiseArticleView];
@@ -120,6 +111,25 @@
  */
 -(void)initialiseArticleView
 {
+    NSView *articleTextView;
+
+    if (@available(macOS 10.10, *)) {
+        NSViewController<ArticleContentView> *articleTextController = [[WebKitArticleTab alloc] init];
+        articleText = articleTextController;
+        articleTextView = articleTextController.view;
+    } else {
+        ArticleView *articleView = [[ArticleView alloc] init];
+        articleTextView = articleView;
+        articleText = articleView;
+        // Make us the frame load and UI delegate for the web view
+        [articleView setOpenLinksInNewBrowser:YES];
+
+        [articleView setMaintainsBackForwardList:NO];
+        [articleView.backForwardList setPageCacheSize:0];
+    }
+
+    [self.contentStackView addView:articleTextView inGravity:NSStackViewGravityTop];
+
 	Preferences * prefs = [Preferences standardPreferences];
 
 	// Mark the start of the init phase
@@ -150,8 +160,8 @@
 	[self initTableView];
 
 	// Make sure we skip the column filter button in the Tab order
-	articleList.nextKeyView = articleText; //TODO: change this so we can avoid cast
-	
+    articleList.nextKeyView = articleTextView;
+
 	// Done initialising
 	isAppInitialising = NO;
 
@@ -641,7 +651,11 @@
  */
 -(WebView *)webView
 {
-	return articleText; //TODO: differenciate between ArticleView and WebKitArticleView
+    if ([articleText isKindOfClass:ArticleView.class]) {
+        return (ArticleView *)articleText;
+    } else {
+        return nil;
+    }
 }
 
 /* canDeleteMessageAtRow
@@ -1112,7 +1126,7 @@
 			isLoadingHTMLArticle = NO;
 			
 			// Set the article to the HTML from the RSS feed.
-			[articleText setHTML:htmlText];
+			[articleText setHtml:htmlText];
 		}
 	}
 	

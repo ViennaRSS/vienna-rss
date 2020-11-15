@@ -36,7 +36,7 @@
 
 @implementation ArticleView
 
-@synthesize cssStylesheet, currentHTML, html, htmlTemplate, jsScript, tabUrl, textSelection, title, listView;
+@synthesize html, tabUrl, textSelection, title, listView;
 
 /* initWithFrame
  * The designated instance initialiser.
@@ -46,10 +46,7 @@
 	if ((self = [super initWithFrame:frameRect]) != nil)
 	{
 		// Init our vars
-		htmlTemplate = nil;
-		cssStylesheet = nil;
-		jsScript = nil;
-		currentHTML = @"";
+		html = @"";
 
         self.UIDelegate = self;
         self.frameLoadDelegate = self;
@@ -83,25 +80,25 @@
     self.hidden = YES;
     self.tabUrl = [NSURL URLWithString:@"about:blank"];
     [self loadTab];
-    currentHTML = @"";
+    html = @"";
 }
+
 
 /* setHTML
  * Loads the web view with the specified HTML text.
  */
--(void)setHTML:(NSString *)htmlText
-{
+- (void)setHtml:(NSString *)htmlText {
 	self.hidden = NO;
 	// If the current HTML is the same as the new HTML then we don't need to
 	// do anything here. This will stop the view from spurious redraws of the same
 	// article after a refresh.
-	if ([currentHTML isEqualToString:htmlText])
+	if ([html isEqualToString:htmlText])
 		return;
 	
 	// Remember the current html string.
-	currentHTML = [htmlText copy];
+	html = [htmlText copy];
 	
-	[self.mainFrame loadHTMLString:currentHTML
+	[self.mainFrame loadHTMLString:html
 							  baseURL:[NSURL URLWithString:@"/"]];
 }
 

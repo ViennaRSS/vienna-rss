@@ -460,23 +460,23 @@
             <point key="canvasLocation" x="138" y="-578"/>
         </window>
         <customView id="971" userLabel="ArticleDisplayView" customClass="ArticleListView">
-            <rect key="frame" x="0.0" y="0.0" width="700" height="629"/>
+            <rect key="frame" x="0.0" y="0.0" width="172" height="629"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="7tZ-qr-cec">
-                    <rect key="frame" x="0.0" y="0.0" width="700" height="629"/>
+                    <rect key="frame" x="0.0" y="0.0" width="172" height="629"/>
                     <subviews>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="cTN-D0-dY2" customClass="DisclosureView">
-                            <rect key="frame" x="0.0" y="600" width="700" height="29"/>
+                            <rect key="frame" x="0.0" y="600" width="172" height="29"/>
                             <subviews>
                                 <visualEffectView verticalHuggingPriority="255" blendingMode="withinWindow" material="headerView" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="1300" customClass="FilterView" customModule="Vienna" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="700" height="29"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="172" height="29"/>
                                     <subviews>
                                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1391">
-                                            <rect key="frame" x="0.0" y="26" width="700" height="5"/>
+                                            <rect key="frame" x="0.0" y="26" width="172" height="5"/>
                                         </box>
                                         <searchField toolTip="Filter displayed articles by matching text" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="1304">
-                                            <rect key="frame" x="8" y="5" width="283" height="19"/>
+                                            <rect key="frame" x="8" y="5" width="0.0" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="LD9-MT-Msv"/>
                                             </constraints>
@@ -491,7 +491,7 @@
                                             </connections>
                                         </searchField>
                                         <button toolTip="Close the filter bar" translatesAutoresizingMaskIntoConstraints="NO" id="1313">
-                                            <rect key="frame" x="679" y="7" width="13" height="13"/>
+                                            <rect key="frame" x="151" y="7" width="13" height="13"/>
                                             <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSStopProgressFreestandingTemplate" imagePosition="only" alignment="center" controlSize="small" lineBreakMode="truncatingTail" inset="2" id="1379">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="message" size="11"/>
@@ -502,7 +502,7 @@
                                             </connections>
                                         </button>
                                         <popUpButton toolTip="Filter articles" wantsLayer="YES" horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1306">
-                                            <rect key="frame" x="433" y="2" width="130" height="22"/>
+                                            <rect key="frame" x="17" y="2" width="130" height="22"/>
                                             <popUpButtonCell key="cell" type="push" title="All Articles" bezelStyle="rounded" alignment="center" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="JT2-Q7-gRj" id="1378">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="smallSystem"/>
@@ -564,7 +564,7 @@
                                             </popUpButtonCell>
                                         </popUpButton>
                                         <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="1305">
-                                            <rect key="frame" x="384" y="7" width="50" height="14"/>
+                                            <rect key="frame" x="14" y="7" width="4" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="right" title="Filter by:" id="1377">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -610,24 +610,21 @@
                             </connections>
                         </customView>
                         <splitView horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="972">
-                            <rect key="frame" x="0.0" y="0.0" width="700" height="600"/>
+                            <rect key="frame" x="0.0" y="0.0" width="172" height="600"/>
                             <subviews>
                                 <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="976">
-                                    <rect key="frame" x="0.0" y="0.0" width="700" height="443"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="172" height="590"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <clipView key="contentView" copiesOnScroll="NO" id="TOX-JT-adF">
-                                        <rect key="frame" x="0.0" y="0.0" width="700" height="443"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="172" height="590"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowHeight="15" headerView="1386" id="977" customClass="MessageListView">
-                                                <rect key="frame" x="0.0" y="0.0" width="700" height="420"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="172" height="567"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                                <connections>
-                                                    <outlet property="nextKeyView" destination="1DK-2K-uuy" id="Y8N-j9-7XX"/>
-                                                </connections>
                                             </tableView>
                                         </subviews>
                                     </clipView>
@@ -640,24 +637,13 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
                                     <tableHeaderView key="headerView" wantsLayer="YES" id="1386">
-                                        <rect key="frame" x="0.0" y="0.0" width="700" height="23"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="172" height="23"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </tableHeaderView>
                                 </scrollView>
                                 <stackView orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="750" verticalStackHuggingPriority="750" fixedFrame="YES" id="rHW-hk-9Of">
-                                    <rect key="frame" x="0.0" y="453" width="700" height="147"/>
+                                    <rect key="frame" x="0.0" y="600" width="172" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <beginningViews>
-                                        <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1DK-2K-uuy" customClass="ArticleView">
-                                            <rect key="frame" x="0.0" y="0.0" width="700" height="147"/>
-                                        </customView>
-                                    </beginningViews>
-                                    <visibilityPriorities>
-                                        <integer value="1000"/>
-                                    </visibilityPriorities>
-                                    <customSpacing>
-                                        <real value="3.4028234663852886e+38"/>
-                                    </customSpacing>
                                 </stackView>
                             </subviews>
                             <holdingPriorities>
@@ -685,12 +671,11 @@
             </constraints>
             <connections>
                 <outlet property="articleList" destination="977" id="996"/>
-                <outlet property="articleText" destination="1DK-2K-uuy" id="ggQ-XF-qtz"/>
                 <outlet property="contentStackView" destination="rHW-hk-9Of" id="oce-W6-yQd"/>
                 <outlet property="enclosureView" destination="1288" id="1296"/>
                 <outlet property="splitView2" destination="972" id="998"/>
             </connections>
-            <point key="canvasLocation" x="1066" y="-571"/>
+            <point key="canvasLocation" x="889" y="-628"/>
         </customView>
         <customView id="1148" userLabel="UnifiedDisplayView" customClass="UnifiedDisplayView">
             <rect key="frame" x="0.0" y="0.0" width="701" height="607"/>

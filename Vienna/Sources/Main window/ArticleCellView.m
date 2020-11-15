@@ -34,12 +34,14 @@
 		controller = APPCONTROLLER;
 
 		if (@available(macOS 10.10, *)) {
-			[self initializeWebKitArticleView];
+			[self initializeWebKitArticleTab];
 		} else {
 			[self initializeWebViewArticleView:frameRect];
 		}
 
-		[articleView setOpenLinksInNewBrowser:YES];
+        if ([(NSObject *)articleView isKindOfClass:ArticleView.class]) {
+            [(ArticleView *)articleView setOpenLinksInNewBrowser:YES];
+        }
 
 		[self setInProgress:NO];
 		progressIndicator = nil;
@@ -47,8 +49,8 @@
 	return self;
 }
 
--(void)initializeWebKitArticleView API_AVAILABLE(macosx(10.10)) {
-	articleView = [[WebKitArticleView alloc] init];
+-(void)initializeWebKitArticleTab API_AVAILABLE(macosx(10.10)) {
+	articleView = [[WebKitArticleTab alloc] init];
 }
 
 -(void)initializeWebViewArticleView:(NSRect)frameRect {

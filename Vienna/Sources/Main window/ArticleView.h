@@ -23,12 +23,7 @@
 
 @protocol ArticleContentView;
 
-@interface ArticleView: TabbedWebView <ArticleContentView> {
-	NSString * htmlTemplate;
-	NSString * cssStylesheet;
-	NSString * jsScript;
-	NSString * currentHTML;
-}
+@interface ArticleView: TabbedWebView <ArticleContentView>
 
 // Public functions
 -(void)clearHTML;
@@ -36,5 +31,6 @@
 -(void)keyDown:(NSEvent *)theEvent;
 
 @property (strong, nonatomic) id<ArticleViewDelegate> listView;
+@property (strong, nonatomic) NSString *html;
 
 @end
