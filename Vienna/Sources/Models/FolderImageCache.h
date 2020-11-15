@@ -8,14 +8,16 @@
 
 @import Cocoa;
 
-@interface FolderImageCache : NSObject {
-    NSString * imagesCacheFolder;
-    NSMutableDictionary * folderImagesArray;
+@interface FolderImageCache : NSObject
+{
+    NSString *imagesCacheFolder;
+    NSMutableDictionary *folderImagesArray;
     BOOL initializedFolderImagesArray;
 }
 
 // Indexes into folder image array
-typedef NS_ENUM(NSInteger, VNAFolderIconIndex) {
+typedef NS_ENUM (NSInteger, VNAFolderIconIndex)
+{
     MA_FolderIcon = 0,
     MA_SmartFolderIcon,
     MA_RSSFolderIcon,
@@ -26,8 +28,8 @@ typedef NS_ENUM(NSInteger, VNAFolderIconIndex) {
     MA_Max_Icons
 };
 
-+(FolderImageCache *)defaultCache;
--(void)addImage:(NSImage *)image forURL:(NSString *)baseURL;
--(NSImage *)retrieveImage:(NSString *)baseURL;
++ (FolderImageCache *)defaultCache;
+- (void)addImage:(NSImage *)image forURL:(NSString *)baseURL;
+- (NSImage *)retrieveImage:(NSString *)baseURL;
 
 @end

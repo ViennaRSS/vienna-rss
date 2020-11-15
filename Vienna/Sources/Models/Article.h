@@ -21,29 +21,29 @@
 
 @import Foundation;
 
-extern NSString * MA_Field_GUID;
-extern NSString * MA_Field_Subject;
-extern NSString * MA_Field_Author;
-extern NSString * MA_Field_Link;
-extern NSString * MA_Field_Date;
-extern NSString * MA_Field_Read;
-extern NSString * MA_Field_Flagged;
-extern NSString * MA_Field_Comments;
-extern NSString * MA_Field_Deleted;
-extern NSString * MA_Field_Text;
-extern NSString * MA_Field_Folder;
-extern NSString * MA_Field_Parent;
-extern NSString * MA_Field_Headlines;
-extern NSString * MA_Field_Summary;
-extern NSString * MA_Field_CreatedDate;
-extern NSString * MA_Field_Enclosure;
-extern NSString * MA_Field_EnclosureDownloaded;
-extern NSString * MA_Field_HasEnclosure;
+extern NSString *MA_Field_GUID;
+extern NSString *MA_Field_Subject;
+extern NSString *MA_Field_Author;
+extern NSString *MA_Field_Link;
+extern NSString *MA_Field_Date;
+extern NSString *MA_Field_Read;
+extern NSString *MA_Field_Flagged;
+extern NSString *MA_Field_Comments;
+extern NSString *MA_Field_Deleted;
+extern NSString *MA_Field_Text;
+extern NSString *MA_Field_Folder;
+extern NSString *MA_Field_Parent;
+extern NSString *MA_Field_Headlines;
+extern NSString *MA_Field_Summary;
+extern NSString *MA_Field_CreatedDate;
+extern NSString *MA_Field_Enclosure;
+extern NSString *MA_Field_EnclosureDownloaded;
+extern NSString *MA_Field_HasEnclosure;
 
 @class Folder;
 
 // Article field IDs
-typedef NS_ENUM(NSInteger, ArticleFieldID) {
+typedef NS_ENUM (NSInteger, ArticleFieldID) {
     ArticleFieldIDGUID = 400,
     ArticleFieldIDSubject,
     ArticleFieldIDAuthor,
@@ -64,15 +64,16 @@ typedef NS_ENUM(NSInteger, ArticleFieldID) {
     ArticleFieldIDHasEnclosure
 };
 
-typedef NS_ENUM(NSInteger, ArticleStatus) {
+typedef NS_ENUM (NSInteger, ArticleStatus) {
     ArticleStatusEmpty = 0,
     ArticleStatusNew,
     ArticleStatusUpdated
 };
 
-@interface Article : NSObject {
-    NSMutableDictionary * articleData;
-    NSMutableArray * commentsArray;
+@interface Article : NSObject
+{
+    NSMutableDictionary *articleData;
+    NSMutableArray *commentsArray;
     BOOL readFlag;
     BOOL revisedFlag;
     BOOL markedFlag;
@@ -83,7 +84,7 @@ typedef NS_ENUM(NSInteger, ArticleStatus) {
 }
 
 // Accessor functions
--(instancetype)initWithGuid:(NSString *)theGuid /*NS_DESIGNATED_INITIALIZER*/;
+- (instancetype)initWithGuid:(NSString *)theGuid /*NS_DESIGNATED_INITIALIZER*/;
 @property (nonatomic) NSInteger parentId;
 @property (nonatomic, copy) NSString *guid;
 @property (nonatomic, copy) NSString *author;
@@ -96,19 +97,19 @@ typedef NS_ENUM(NSInteger, ArticleStatus) {
 @property (nonatomic, copy) NSDate *createdDate;
 @property (nonatomic, readonly, strong) Folder *containingFolder;
 @property (nonatomic) NSInteger folderId;
-@property (nonatomic, getter=isRead, readonly) BOOL read;
-@property (nonatomic, getter=isRevised, readonly) BOOL revised;
-@property (nonatomic, getter=isFlagged, readonly) BOOL flagged;
-@property (nonatomic, getter=isDeleted, readonly) BOOL deleted;
+@property (nonatomic, getter = isRead, readonly) BOOL read;
+@property (nonatomic, getter = isRevised, readonly) BOOL revised;
+@property (nonatomic, getter = isFlagged, readonly) BOOL flagged;
+@property (nonatomic, getter = isDeleted, readonly) BOOL deleted;
 @property (nonatomic, readonly) BOOL hasComments;
 @property (nonatomic) BOOL hasEnclosure;
 @property (nonatomic, readonly) BOOL enclosureDownloaded;
 @property (nonatomic) NSInteger status;
--(void)markRead:(BOOL)flag;
--(void)markRevised:(BOOL)flag;
--(void)markFlagged:(BOOL)flag;
--(void)markDeleted:(BOOL)flag;
--(void)markEnclosureDownloaded:(BOOL)flag;
--(NSString *)expandTags:(NSString *)theString withConditional:(BOOL)cond;
+- (void)markRead:(BOOL)flag;
+- (void)markRevised:(BOOL)flag;
+- (void)markFlagged:(BOOL)flag;
+- (void)markDeleted:(BOOL)flag;
+- (void)markEnclosureDownloaded:(BOOL)flag;
+- (NSString *)expandTags:(NSString *)theString withConditional:(BOOL)cond;
 
 @end
