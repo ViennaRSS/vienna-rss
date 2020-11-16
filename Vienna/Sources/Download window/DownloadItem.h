@@ -1,5 +1,5 @@
 //
-//  DownloadManager.h
+//  DownloadItem.h
 //  Vienna
 //
 //  Created by Steve on 10/7/05.
@@ -19,23 +19,23 @@
 //
 
 @import Cocoa;
-@import WebKit;
 
-@class DownloadItem;
+typedef NS_ENUM(NSInteger, DownloadState) {
+    DownloadStateInit,
+    DownloadStateStarted,
+    DownloadStateCompleted,
+    DownloadStateFailed,
+    DownloadStateCancelled
+};
 
-@interface DownloadManager : NSObject <WebDownloadDelegate> {
-	NSMutableArray * downloadsList;
-	NSInteger activeDownloads;
-}
+@interface DownloadItem : NSObject <NSCoding>
 
-// Public functions
-+(DownloadManager *)sharedInstance;
-+(BOOL)isFileDownloaded:(NSString *)filename;
-+(NSString *)fullDownloadPath:(NSString *)filename;
-@property (nonatomic, readonly, copy) NSArray *downloadsList;
-@property (nonatomic, readonly) NSInteger activeDownloads;
--(void)clearList;
--(void)cancelItem:(DownloadItem *)item;
--(void)removeItem:(DownloadItem *)item;
--(void)downloadFileFromURL:(NSString *)url;
+@property (nonatomic) DownloadState state;
+@property (nonatomic) long long expectedSize;
+@property (nonatomic) long long size;
+@property (nonatomic) NSURLDownload *download;
+@property (nonatomic, copy) NSString *filename;
+@property (nonatomic, readonly, copy) NSImage *image;
+@property (nonatomic, copy) NSDate *startTime;
+
 @end
