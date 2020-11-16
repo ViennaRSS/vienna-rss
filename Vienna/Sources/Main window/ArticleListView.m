@@ -1239,26 +1239,26 @@
 	{
 		if (!theArticle.read)
 			return (theArticle.revised) ? [NSImage imageNamed:@"revised.tiff"] : [NSImage imageNamed:@"unread.tiff"];
-		return [NSImage imageNamed:@"alphaPixel.tiff"];
+        return nil;
 	}
 	if ([identifier isEqualToString:MA_Field_Flagged])
 	{
 		if (theArticle.flagged)
 			return [NSImage imageNamed:@"flagged.tiff"];
-		return [NSImage imageNamed:@"alphaPixel.tiff"];
+        return nil;
 	}
 	if ([identifier isEqualToString:MA_Field_Comments])
 	{
 		if (theArticle.hasComments)
 			return [NSImage imageNamed:@"comments.tiff"];
-		return [NSImage imageNamed:@"alphaPixel.tiff"];
+        return nil;
 	}
 	
 	if ([identifier isEqualToString:MA_Field_HasEnclosure])
 	{
 		if (theArticle.hasEnclosure)
 			return [NSImage imageNamed:@"enclosure.tiff"];
-		return [NSImage imageNamed:@"alphaPixel.tiff"];
+        return nil;
 	}
 	
 	NSMutableAttributedString * theAttributedString;
