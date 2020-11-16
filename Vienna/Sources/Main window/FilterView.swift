@@ -19,7 +19,7 @@
 
 import Cocoa
 
-final class FilterView: NSView {
+final class FilterView: NSVisualEffectView {
 
     @IBOutlet private(set) var filterSearchField: NSSearchField!
     @IBOutlet private(set) var filterViewPopUp: NSPopUpButton!

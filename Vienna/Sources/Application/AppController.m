@@ -493,16 +493,16 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	
 	switch ([[Preferences standardPreferences] integerForKey:MAPref_EmptyTrashNotification])
 	{
-		case MA_EmptyTrash_None: break;
+		case VNAEmptyTrashNone: break;
 			
-		case MA_EmptyTrash_WithoutWarning:
+		case VNAEmptyTrashWithoutWarning:
 			if (!db.trashEmpty)
 			{
 				[db purgeDeletedArticles];
 			}
 			break;
 			
-		case MA_EmptyTrash_WithWarning:
+		case VNAEmptyTrashWithWarning:
 			if (!db.trashEmpty)
 			{
 				if (emptyTrashWarning == nil)
@@ -750,7 +750,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(IBAction)reportLayout:(id)sender
 {
-	[self setLayout:MA_Layout_Report withRefresh:YES];
+	[self setLayout:VNALayoutReport withRefresh:YES];
 }
 
 /* condensedLayout
@@ -758,7 +758,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(IBAction)condensedLayout:(id)sender
 {
-	[self setLayout:MA_Layout_Condensed withRefresh:YES];
+	[self setLayout:VNALayoutCondensed withRefresh:YES];
 }
 
 /* unifiedLayout
@@ -766,7 +766,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(IBAction)unifiedLayout:(id)sender
 {
-	[self setLayout:MA_Layout_Unified withRefresh:YES];
+	[self setLayout:VNALayoutUnified withRefresh:YES];
 }
 
 /* setLayout
@@ -776,7 +776,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 {
 	[self.articleController setLayout:newLayout];
     if (refreshFlag) {
-        [self.articleController.mainArticleView refreshFolder:MA_Refresh_RedrawList];
+        [self.articleController.mainArticleView refreshFolder:VNARefreshRedrawList];
     }
     NSTabViewItem *primaryTab = [[NSTabViewItem alloc] initWithIdentifier:@"Articles"];
     [primaryTab setLabel:NSLocalizedString(@"Articles", nil)];
@@ -1497,10 +1497,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		{
 			[NSApp.mainMenu removeItem:scriptsMenuItem];
 		}
-		
+
         scriptsMenuItem = [[NSMenuItem alloc] initWithTitle:@"" action:NULL keyEquivalent:@""];
-		scriptsMenuItem.image = [NSImage imageNamed:@"ScriptsTemplate"];
-		
+        scriptsMenuItem.image = [NSImage imageNamed:@"NSScriptTemplate"];
+
 		NSInteger helpMenuIndex = NSApp.mainMenu.numberOfItems - 1;
 		[NSApp.mainMenu insertItem:scriptsMenuItem atIndex:helpMenuIndex];
 		scriptsMenuItem.submenu = scriptsMenu;
@@ -1542,7 +1542,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)updateNewArticlesNotification
 {
 	if (([Preferences standardPreferences].newArticlesNotification
-		& MA_NewArticlesNotification_Badge) == 0)
+		& VNANewArticlesNotificationBadge) == 0)
 	{
 		// Remove the badge if there was one.
 		[NSApp.dockTile setBadgeLabel:nil];
@@ -1562,36 +1562,43 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 /* showUnreadCountOnApplicationIconAndWindowTitle
  * Update the Vienna application icon to show the number of unread articles.
  */
--(void)showUnreadCountOnApplicationIconAndWindowTitle
-{
-	@synchronized(NSApp.dockTile) {
-	NSInteger currentCountOfUnread = db.countOfUnread;
-	if (currentCountOfUnread == lastCountOfUnread)
-		return;
-	lastCountOfUnread = currentCountOfUnread;
-	
-	// Always update the app status icon first
-	[self setAppStatusBarIcon];
-	
-	// Don't show a count if there are no unread articles
-	if (currentCountOfUnread <= 0)
-	{
-		[NSApp.dockTile setBadgeLabel:nil];
-		self.mainWindow.title = self.appName;
-		return;	
-	}	
-	
-	self.mainWindow.title = [NSString stringWithFormat:@"%@ (%li %@)", self.appName, (long)currentCountOfUnread, NSLocalizedString(@"Unread", nil)];
-	
-	// Exit now if we're not showing the unread count on the application icon
-	if (([Preferences standardPreferences].newArticlesNotification
-		& MA_NewArticlesNotification_Badge) ==0)
-			return;
-	
-	NSString * countdown = [NSString stringWithFormat:@"%li", (long)currentCountOfUnread];
-	NSApp.dockTile.badgeLabel = countdown;
+- (void)showUnreadCountOnApplicationIconAndWindowTitle {
+    @synchronized(NSApp.dockTile) {
+        NSInteger currentCountOfUnread = db.countOfUnread;
+        if (currentCountOfUnread == lastCountOfUnread) {
+            return;
+        }
+        lastCountOfUnread = currentCountOfUnread;
 
-	} // @synchronized
+        // Always update the app status icon first
+        [self setAppStatusBarIcon];
+
+        // Don't show a count if there are no unread articles
+        if (currentCountOfUnread <= 0) {
+            NSApp.dockTile.badgeLabel = nil;
+            if (@available(macOS 11.0, *)) {
+                // Do nothing
+            } else {
+                self.mainWindow.title = self.appName;
+            }
+            return;
+        }
+
+        if (@available(macOS 11.0, *)) {
+            self.mainWindow.subtitle = [NSString stringWithFormat:@"%li %@", (long)currentCountOfUnread, NSLocalizedString(@"Unread", nil)];
+        } else {
+            self.mainWindow.title = [NSString stringWithFormat:@"%@ (%li %@)", self.appName, (long)currentCountOfUnread, NSLocalizedString(@"Unread", nil)];
+        }
+
+        // Exit now if we're not showing the unread count on the application icon
+        if (([Preferences standardPreferences].newArticlesNotification & VNANewArticlesNotificationBadge) ==0) {
+            return;
+        }
+
+        NSString *countdown = [NSString stringWithFormat:@"%li", (long)currentCountOfUnread];
+        NSApp.dockTile.badgeLabel = countdown;
+
+    }
 }
 
 /* emptyTrash
@@ -2029,7 +2036,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		
 		// Bounce the dock icon for 1 second if the bounce method has been selected.
 		NSInteger newUnread = [RefreshManager sharedManager].countOfNewArticles + [OpenReader sharedManager].countOfNewArticles;
-		if (newUnread > 0 && ((prefs.newArticlesNotification & MA_NewArticlesNotification_Bounce) != 0))
+		if (newUnread > 0 && ((prefs.newArticlesNotification & VNANewArticlesNotificationBounce) != 0))
 			[NSApp requestUserAttention:NSInformationalRequest];
 
         // User notification
@@ -2181,7 +2188,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
     if (keyChar >= '0' && keyChar <= '9' && (flags & NSEventModifierFlagControl))
 	{
-		NSInteger layoutStyle = MA_Layout_Report + (keyChar - '0');
+		NSInteger layoutStyle = VNALayoutReport + (keyChar - '0');
 		[self setLayout:layoutStyle withRefresh:YES];
 		return YES;
 	}
@@ -3045,7 +3052,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	// END of switching between "Search all articles" and "Search current web page".
 	}
 	
-	if ([Preferences standardPreferences].layout == MA_Layout_Unified)
+	if ([Preferences standardPreferences].layout == VNALayoutUnified)
 	{
 		[self.filterSearchField.cell setSendsWholeSearchString:YES];
 		((NSSearchFieldCell *)self.filterSearchField.cell).placeholderString = self.articleController.searchPlaceholderString;
@@ -3734,19 +3741,19 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	else if (theAction == @selector(reportLayout:))
 	{
 		Preferences * prefs = [Preferences standardPreferences];
-		menuItem.state = (prefs.layout == MA_Layout_Report) ? NSControlStateValueOn : NSControlStateValueOff;
+		menuItem.state = (prefs.layout == VNALayoutReport) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(condensedLayout:))
 	{
 		Preferences * prefs = [Preferences standardPreferences];
-		menuItem.state = (prefs.layout == MA_Layout_Condensed) ? NSControlStateValueOn : NSControlStateValueOff;
+		menuItem.state = (prefs.layout == VNALayoutCondensed) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(unifiedLayout:))
 	{
 		Preferences * prefs = [Preferences standardPreferences];
-		menuItem.state = (prefs.layout == MA_Layout_Unified) ? NSControlStateValueOn : NSControlStateValueOff;
+		menuItem.state = (prefs.layout == VNALayoutUnified) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(markFlagged:))

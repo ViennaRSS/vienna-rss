@@ -20,7 +20,6 @@
 
 #import "Constants.h"
 #import "GeneralPreferencesViewController.h"
-#import "PopUpButtonExtensions.h"
 #import "Preferences.h"
 
 @interface GeneralPreferencesViewController ()
@@ -76,12 +75,12 @@
     // 0 value disables auto-expire.
     // Increments of 1000 specify months, so 1000 = 1 month, 1001 = 1 month and 1 day…
     [expireDuration removeAllItems];
-    [expireDuration insertItemWithTag:NSLocalizedString(@"Never", nil) tag:0 atIndex:0];
-    [expireDuration insertItemWithTag:NSLocalizedString(@"After a Day", nil) tag:1 atIndex:1];
-    [expireDuration insertItemWithTag:NSLocalizedString(@"After 2 Days", nil) tag:2 atIndex:2];
-    [expireDuration insertItemWithTag:NSLocalizedString(@"After a Week", nil) tag:7 atIndex:3];
-    [expireDuration insertItemWithTag:NSLocalizedString(@"After 2 Weeks", nil) tag:14 atIndex:4];
-    [expireDuration insertItemWithTag:NSLocalizedString(@"After a Month", nil) tag:1000 atIndex:5];
+    [expireDuration insertItemWithTitle:NSLocalizedString(@"Never", nil) tag:0 atIndex:0];
+    [expireDuration insertItemWithTitle:NSLocalizedString(@"After a Day", nil) tag:1 atIndex:1];
+    [expireDuration insertItemWithTitle:NSLocalizedString(@"After 2 Days", nil) tag:2 atIndex:2];
+    [expireDuration insertItemWithTitle:NSLocalizedString(@"After a Week", nil) tag:7 atIndex:3];
+    [expireDuration insertItemWithTitle:NSLocalizedString(@"After 2 Weeks", nil) tag:14 atIndex:4];
+    [expireDuration insertItemWithTitle:NSLocalizedString(@"After a Month", nil) tag:1000 atIndex:5];
     
     // Set auto-expire duration
     [expireDuration selectItemAtIndex:[expireDuration indexOfItemWithTag:prefs.autoExpireDuration]];
@@ -103,8 +102,8 @@
     markReadAfterDelay.state = prefs.markReadInterval != 0 ? NSControlStateValueOn : NSControlStateValueOff;
     
     // Show new articles notification options
-    newArticlesNotificationBadgeButton.state = ((prefs.newArticlesNotification & MA_NewArticlesNotification_Badge) !=0) ? NSControlStateValueOn : NSControlStateValueOff;
-    newArticlesNotificationBounceButton.state = ((prefs.newArticlesNotification & MA_NewArticlesNotification_Bounce) !=0) ? NSControlStateValueOn : NSControlStateValueOff;
+    newArticlesNotificationBadgeButton.state = ((prefs.newArticlesNotification & VNANewArticlesNotificationBadge) !=0) ? NSControlStateValueOn : NSControlStateValueOff;
+    newArticlesNotificationBounceButton.state = ((prefs.newArticlesNotification & VNANewArticlesNotificationBounce) !=0) ? NSControlStateValueOn : NSControlStateValueOff;
     
     // Set whether updated articles are considered as new
     markUpdatedAsNew.state = prefs.markUpdatedAsNew ? NSControlStateValueOn : NSControlStateValueOff;
@@ -189,7 +188,7 @@
     // Add a Select command so the user can manually pick a registered
     // application.
     [linksHandler addSeparator];
-    [linksHandler addItemWithTag:NSLocalizedString(@"Select…", nil) tag:-1];
+    [linksHandler addItemWithTitle:NSLocalizedString(@"Select…", nil) tag:-1];
     
     // Select the registered item
     [linksHandler selectItemAtIndex:0];
@@ -366,11 +365,11 @@
     NSInteger currentNotificationValue = prefs.newArticlesNotification;
     if ([sender state] == NSControlStateValueOn)
     {
-        prefs.newArticlesNotification = currentNotificationValue | MA_NewArticlesNotification_Badge;
+        prefs.newArticlesNotification = currentNotificationValue | VNANewArticlesNotificationBadge;
     }
     else
     {
-        prefs.newArticlesNotification = currentNotificationValue & ~MA_NewArticlesNotification_Badge;
+        prefs.newArticlesNotification = currentNotificationValue & ~VNANewArticlesNotificationBadge;
     }
 }
 
@@ -383,11 +382,11 @@
     NSInteger currentNotificationValue = prefs.newArticlesNotification;
     if ([sender state] == NSControlStateValueOn)
     {
-        prefs.newArticlesNotification = currentNotificationValue | MA_NewArticlesNotification_Bounce;
+        prefs.newArticlesNotification = currentNotificationValue | VNANewArticlesNotificationBounce;
     }
     else
     {
-        prefs.newArticlesNotification = currentNotificationValue & ~MA_NewArticlesNotification_Bounce;
+        prefs.newArticlesNotification = currentNotificationValue & ~VNANewArticlesNotificationBounce;
     }
 }
 

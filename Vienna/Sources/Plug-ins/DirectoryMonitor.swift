@@ -33,7 +33,8 @@ final class DirectoryMonitor: NSObject {
     /// - Parameter directories: The directories to monitor.
     @objc
     init(directories: [URL]) {
-        self.directories = directories
+        self.directories = directories.filter { $0.hasDirectoryPath }
+                                      .filter { (try? $0.checkResourceIsReachable()) == true }
     }
 
     // When the instance is ready to be deinitialized, the stream should be
@@ -59,73 +60,64 @@ final class DirectoryMonitor: NSObject {
     /// - Parameter eventHandler: The handler to call when an event occurs.
     /// - Throws: An error of type `DirectoryMonitorError`.
     @objc
-    func
-    start(eventHandler: @escaping EventHandler) throws {
-        // If the stream exists, then stop it and start over. This will be the
-        // case when start(eventHandler:) is called multiple times. Rather than
-        // throwing an error, logging this will suffice.
+    func start(eventHandler: @escaping EventHandler) throws {
         if stream != nil {
             stop()
-
-            if #available(macOS 10.12, *) {
-                os_log("Restarting directory monitor", type: .debug)
-            } else {
-                NSLog("Restarting directory monitor")
-            }
         }
 
-        // Check if proper URLs are provided.
         if directories.isEmpty {
-            throw DirectoryMonitorError.noDirectoriesProvided
-        }
-
-        for directory in directories {
-            guard (try? directory.checkResourceIsReachable()) == true else {
-                throw DirectoryMonitorError.directoryCannotBeOpened(path: directory.path)
-            }
+            return
         }
 
         // The callback does not allow capturing external properties. Instead,
         // the event handler is passed as a stream context, allowing the handler
         // to be called from within the closure.
-        let pointer = UnsafeMutableRawPointer(mutating: Unmanaged.passUnretained(self).toOpaque())
-        var context = FSEventStreamContext(info: pointer)
+        let pointer = Unmanaged.passUnretained(self).toOpaque()
+        var context = FSEventStreamContext(version: 0,
+                                           info: pointer,
+                                           retain: nil,
+                                           release: nil,
+                                           copyDescription: nil)
 
         // The callback will pass along the raw pointer to the direcory monitor
         // instance. Recasting this will make the event handler accessible.
-        let callback: FSEventStreamCallback = { _, context, _, _, _, _ -> Void in
-            if let context = context {
-                let monitor = Unmanaged<DirectoryMonitor>.fromOpaque(context).takeUnretainedValue()
-
-                if let eventHandler = monitor.eventHandler {
-                    eventHandler()
-                }
+        let callback: FSEventStreamCallback = { _, info, _, _, _, _ -> Void in
+            guard let info = info else {
+                return
             }
+
+            let monitor = Unmanaged<DirectoryMonitor>.fromOpaque(info).takeUnretainedValue()
+            monitor.eventHandler?()
         }
 
         // The directory monitor will listen to events that happen in both
         // directions of each directory's hierarchy and will coalesce events
         // that happen within 2 seconds of each other.
-        do {
-            let stream = try FSEventStreamRef(callback: callback, context: &context, directories: directories, latency: 2, configuration: [.fileEvents, .watchRoot])
-            self.stream = stream
-            self.eventHandler = eventHandler
-
-            // FSEvents has a two-pronged approach: schedule a stream (and
-            // record the changes) and start sending events. This granualarity
-            // is not desirable for the directory monitor, so they are combined.
-            do {
-                stream.schedule()
-                try stream.start()
-            } catch {
-                // This closure is executed if start() fails. Accordingly, the
-                // stream must be unscheduled.
-                stop()
-
-                throw DirectoryMonitorError.streamCouldNotBeStarted
-            }
-        } catch {
+        let paths = directories.map { $0.path as CFString } as CFArray
+        let flags = UInt32(kFSEventStreamCreateFlagFileEvents | kFSEventStreamCreateFlagWatchRoot)
+        guard let stream = FSEventStreamCreate(kCFAllocatorDefault,
+                                               callback,
+                                               &context,
+                                               paths,
+                                               FSEventStreamEventId(kFSEventStreamEventIdSinceNow),
+                                               2,
+                                               flags) else {
             throw DirectoryMonitorError.streamCouldNotBeCreated
+        }
+        self.stream = stream
+        self.eventHandler = eventHandler
+
+        // FSEvents has a two-pronged approach: schedule a stream (and
+        // record the changes) and start sending events. This granualarity
+        // is not desirable for the directory monitor, so they are combined.
+        FSEventStreamScheduleWithRunLoop(stream,
+                                         RunLoop.current.getCFRunLoop(),
+                                         CFRunLoopMode.defaultMode.rawValue)
+        if !FSEventStreamStart(stream) {
+            // This closure is executed if start() fails. Accordingly, the
+            // stream must be unscheduled.
+            stop()
+            throw DirectoryMonitorError.streamCouldNotBeStarted
         }
     }
 
@@ -135,9 +127,8 @@ final class DirectoryMonitor: NSObject {
         // Unschedule the stream from its run loop and remove the (only)
         // reference count before unsetting the pointer.
         if let stream = stream {
-            stream.stop()
-            stream.invalidate()
-            stream.release()
+            FSEventStreamInvalidate(stream)
+            FSEventStreamRelease(stream)
 
             self.stream = nil
         }
@@ -150,101 +141,15 @@ final class DirectoryMonitor: NSObject {
 // MARK: - Error handling
 
 enum DirectoryMonitorError: LocalizedError {
-    case noDirectoriesProvided
-    case directoryCannotBeOpened(path: String)
     case streamCouldNotBeCreated
     case streamCouldNotBeStarted
 
     var errorDescription: String? {
         switch self {
-        case .noDirectoriesProvided:
-            return "No directories have been provided"
-        case .directoryCannotBeOpened(let path):
-            return "The directory cannot be opened: \(path)"
         case .streamCouldNotBeCreated:
             return "The file-system event stream could not be created"
         case .streamCouldNotBeStarted:
             return "The file-system event stream could not be started"
         }
     }
-}
-
-// MARK: - Convenience extensions
-
-private extension FSEventStreamRef {
-
-    init(allocator: CFAllocator? = kCFAllocatorDefault, callback: @escaping FSEventStreamCallback, context: UnsafeMutablePointer<FSEventStreamContext>? = nil, directories: [URL], startAt: FSEventStreamEventId = .now, latency: TimeInterval = 0, configuration: FileSystemEventStreamConfiguration = .none) throws {
-        let directories = directories.map { $0.path as CFString } as CFArray
-
-        if let stream = FSEventStreamCreate(allocator, callback, context, directories, startAt, latency, configuration.rawValue) {
-            self = stream
-        } else {
-            throw FileSystemEventStreamError.streamCouldNotBeCreated
-        }
-    }
-
-    func schedule(runLoop: RunLoop = .current, runLoopMode: CFRunLoopMode = .defaultMode) {
-        FSEventStreamScheduleWithRunLoop(self, runLoop.getCFRunLoop(), runLoopMode.rawValue)
-    }
-
-    func start() throws {
-        if !FSEventStreamStart(self) {
-            throw FileSystemEventStreamError.streamCouldNotBeStarted
-        }
-    }
-
-    func stop() {
-        FSEventStreamStop(self)
-    }
-
-    func unschedule(runLoop: RunLoop, runLoopMode: CFRunLoopMode) {
-        FSEventStreamUnscheduleFromRunLoop(self, runLoop.getCFRunLoop(), runLoopMode.rawValue)
-    }
-
-    func invalidate() {
-        FSEventStreamInvalidate(self)
-    }
-
-    func release() {
-        FSEventStreamRelease(self)
-    }
-
-}
-
-private extension FSEventStreamContext {
-
-    init(info: UnsafeMutableRawPointer?) {
-        self.init(version: 0, info: info, retain: nil, release: nil, copyDescription: nil)
-    }
-
-}
-
-private extension FSEventStreamEventId {
-
-    static var now: FSEventStreamEventId {
-        return FSEventStreamEventId(kFSEventStreamEventIdSinceNow)
-    }
-
-}
-
-// MARK: - Convenience types
-
-private struct FileSystemEventStreamConfiguration: OptionSet {
-
-    let rawValue: FSEventStreamCreateFlags
-
-    static let none = flag(kFSEventStreamCreateFlagNone)
-    static let watchRoot = flag(kFSEventStreamCreateFlagWatchRoot)
-    static let ignoreSelf = flag(kFSEventStreamCreateFlagIgnoreSelf)
-    static let fileEvents = flag(kFSEventStreamCreateFlagFileEvents)
-
-    private static func flag(_ flag: Int) -> FileSystemEventStreamConfiguration {
-        return self.init(rawValue: FSEventStreamCreateFlags(flag))
-    }
-
-}
-
-private enum FileSystemEventStreamError: Error {
-    case streamCouldNotBeCreated
-    case streamCouldNotBeStarted
 }
