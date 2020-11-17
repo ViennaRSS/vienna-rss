@@ -100,9 +100,9 @@
 	tableColumn.dataCell = imageAndTextCell;
 
 	// Folder image
-	self.folderErrorImage = [NSImage imageNamed:@"folderError.tiff"];
+	self.folderErrorImage = [NSImage imageNamed:@"folderError"];
     self.folderErrorImage.accessibilityDescription = NSLocalizedString(@"Error", nil);
-	self.refreshProgressImage = [NSImage imageNamed:@"refreshProgress.tiff"];
+	self.refreshProgressImage = [NSImage imageNamed:@"refreshProgress"];
 	
 	// Create and set whatever font we're using for the folders
 	[self setFolderListFont];
