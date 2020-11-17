@@ -28,7 +28,6 @@
 #import "Constants.h"
 #import "OpenReader.h"
 #import "NSNotificationAdditions.h"
-#import "VTPG_Common.h"
 #import "Debug.h"
 #import "Article.h"
 #import "Folder.h"

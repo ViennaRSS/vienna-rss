@@ -68,7 +68,6 @@
 		3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBEC61733C206006DD2AB /* ArticleCellView.m */; };
 		3A60E60B2114AD740004D81D /* URLRequestExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A60E60A2114AD740004D81D /* URLRequestExtensions.m */; };
 		3A7BD0DD1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */; };
-		3ADBA70D23DDAFCA00156722 /* Notarize.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3ADBA70C23DDAFCA00156722 /* Notarize.sh */; };
 		3AEE7DE91695FC570018A17D /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* vienna_public_key.pem */; };
 		3AF896C71CD8FDB800A9FA22 /* AppController+Sparkle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF896C61CD8FDB800A9FA22 /* AppController+Sparkle.m */; };
 		435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 435026E5165DD8BE0018EDB7 /* ArticleRef.m */; };
@@ -1511,6 +1510,8 @@
 				43502860165DE9DF0018EDB7 /* DownloadManager.m */,
 				F6B3561325616302008CA1ED /* DownloadItem.h */,
 				F6B3561425616313008CA1ED /* DownloadItem.m */,
+				F41CA693218F56140072F734 /* NSWorkspace+OpenWithMenu.h */,
+				F41CA692218F56130072F734 /* NSWorkspace+OpenWithMenu.m */,
 			);
 			path = "Download window";
 			sourceTree = "<group>";
@@ -1629,8 +1630,6 @@
 				AAFAF3FC088056D800DAFF04 /* KeyChain.m */,
 				3A23F13315276935008AF863 /* NSNotificationAdditions.h */,
 				4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */,
-				F41CA693218F56140072F734 /* NSWorkspace+OpenWithMenu.h */,
-				F41CA692218F56130072F734 /* NSWorkspace+OpenWithMenu.m */,
 				F69964F61F13029500FC8493 /* OverlayStatusBar.swift */,
 				B85F93E4255AE48000B54B68 /* PopUpButtonExtensions.swift */,
 				AAF3B14006095E7B0025CC7F /* StringExtensions.h */,
@@ -1789,7 +1788,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F625801C1E2853B90035E43C /* ActivityViewer.xib in Resources */,
-				3ADBA70D23DDAFCA00156722 /* Notarize.sh in Resources */,
 				F62581591E29BEB90035E43C /* MainMenu.xib in Resources */,
 				F6FEE7AD209E500800BCAEC6 /* Localizable.stringsdict in Resources */,
 				F6D572AE1E26AA8A00CDA909 /* FeedCredentials.xib in Resources */,
