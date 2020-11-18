@@ -20,11 +20,11 @@
 
 @import Cocoa;
 
-#import "BJRVerticallyCenteredTextFieldCell.h"
+#import "VNAVerticallyCenteredTextFieldCell.h"
 
 @class TreeNode;
 
-@interface ImageAndTextCell : BJRVerticallyCenteredTextFieldCell {
+@interface ImageAndTextCell : VNAVerticallyCenteredTextFieldCell {
 	@private
 	NSImage	* image;
 	NSImage * auxiliaryImage;
