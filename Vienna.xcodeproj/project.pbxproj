@@ -65,7 +65,6 @@
 		2F125EDE24D0638600868E11 /* BrowserTabBeforeMacOS12.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F125EDD24D0638600868E11 /* BrowserTabBeforeMacOS12.xib */; };
 		2F125EE024D066ED00868E11 /* AsyncHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F125EDF24D066ED00868E11 /* AsyncHelper.swift */; };
 		2F20FF8F25618627000F68C2 /* WebKitArticleTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F20FF8E25618627000F68C2 /* WebKitArticleTab.swift */; };
-		2F22803322719CC8005D1023 /* ArticleControllerTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F22803222719CC8005D1023 /* ArticleControllerTab.swift */; };
 		2F2280352271B041005D1023 /* ArticleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280342271B041005D1023 /* ArticleContentView.swift */; };
 		2F2280382271B18A005D1023 /* ArticleStyleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */; };
 		2F5AC4202198E1AA00A7EDDE /* TitleChangingTabViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */; };
@@ -342,7 +341,6 @@
 		2F125EDD24D0638600868E11 /* BrowserTabBeforeMacOS12.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrowserTabBeforeMacOS12.xib; sourceTree = "<group>"; };
 		2F125EDF24D066ED00868E11 /* AsyncHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncHelper.swift; sourceTree = "<group>"; };
 		2F20FF8E25618627000F68C2 /* WebKitArticleTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKitArticleTab.swift; sourceTree = "<group>"; };
-		2F22803222719CC8005D1023 /* ArticleControllerTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleControllerTab.swift; sourceTree = "<group>"; };
 		2F2280342271B041005D1023 /* ArticleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleContentView.swift; sourceTree = "<group>"; };
 		2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleStyleLoader.swift; sourceTree = "<group>"; };
 		2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleChangingTabViewItem.swift; sourceTree = "<group>"; };
@@ -1464,7 +1462,6 @@
 				3A4DBEC51733C206006DD2AB /* ArticleCellView.h */,
 				3A4DBEC61733C206006DD2AB /* ArticleCellView.m */,
 				4350284E165DE9DF0018EDB7 /* ArticleController.h */,
-				2F22803222719CC8005D1023 /* ArticleControllerTab.swift */,
 				4350284F165DE9DF0018EDB7 /* ArticleController.m */,
 				4350284D165DE9DF0018EDB7 /* ArticleBaseView.h */,
 				43502852165DE9DF0018EDB7 /* ArticleListView.h */,
@@ -2257,7 +2254,6 @@
 				435028AF165DE9E00018EDB7 /* RefreshManager.m in Sources */,
 				435028B0165DE9E00018EDB7 /* SearchFolder.m in Sources */,
 				435028B1165DE9E00018EDB7 /* SearchMethod.m in Sources */,
-				2F22803322719CC8005D1023 /* ArticleControllerTab.swift in Sources */,
 				F6B355DB256025D3008CA1ED /* PreferenceTabViewItem.swift in Sources */,
 				435028B2165DE9E00018EDB7 /* SearchPanel.m in Sources */,
 				435028B3165DE9E00018EDB7 /* EnclosureView.m in Sources */,
