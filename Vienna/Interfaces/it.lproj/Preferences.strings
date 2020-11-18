@@ -10,6 +10,9 @@
 /* Class = "NSMenuItem"; title = "Manually"; ObjectID = "7Za-ay-jlt"; */
 "7Za-ay-jlt.title" = "Manualmente";
 
+/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "9a4-MM-Ufk"; */
+"9a4-MM-Ufk.title" = "Mostra nella barra menu";
+
 /* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "adB-qE-xKg"; */
 "adB-qE-xKg.title" = "Segnala l'articolo corrente come letto:";
 
@@ -31,9 +34,6 @@
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "erE-oh-cbw"; */
 "erE-oh-cbw.title" = "Apri nuovi collegamenti sullo sfondo";
 
-/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "FFP-H1-weF"; */
-"FFP-H1-weF.title" = "Mostra nella barra menu";
-
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "flH-2D-s6O"; */
 "flH-2D-s6O.title" = "Apri collegamenti in un browser esterno";
 
@@ -49,17 +49,14 @@
 /* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "haP-20-AwJ"; */
 "haP-20-AwJ.title" = "Controlla nuove versioni di Vienna all'avvio";
 
-/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iCs-T5-L1c"; */
-"iCs-T5-L1c.title" = "Quando vengono recuperati nuovi articoli non letti:";
-
 /* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "iEw-AM-tMF"; */
 "iEw-AM-tMF.label" = "Avanzate";
 
+/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iPx-Y4-IOB"; */
+"iPx-Y4-IOB.title" = "Quando vengono recuperati nuovi articoli non letti:";
+
 /* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "ITA-U9-lhX"; */
 "ITA-U9-lhX.title" = "Font elenco articoli:";
-
-/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "jfH-Hq-gRk"; */
-"jfH-Hq-gRk.title" = "Fai rimbalzare l'icona dell'applicazione";
 
 /* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "Jk6-0r-7Gs"; */
 "Jk6-0r-7Gs.title" = "Non utilizzare mai dimensioni font inferiori a";
@@ -70,8 +67,8 @@
 /* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "jvO-Ef-TTd"; */
 "jvO-Ef-TTd.title" = "Ogni ora";
 
-/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "jVU-m2-dsS"; */
-"jVU-m2-dsS.title" = "Mostra il contatore articoli non letti sull'icona dell'applicazione";
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "l6G-JM-fW5"; */
+"l6G-JM-fW5.title" = "Fai rimbalzare l'icona dell'applicazione";
 
 /* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "Ljf-Qd-6Ho"; */
 "Ljf-Qd-6Ho.title" = "Controlla nuovi articoli all'avvio";

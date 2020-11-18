@@ -19,6 +19,9 @@
 /* Class = "NSMenuItem"; title = "Manually"; ObjectID = "7Za-ay-jlt"; */
 "7Za-ay-jlt.title" = "nur manuell";
 
+/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "9a4-MM-Ufk"; */
+"9a4-MM-Ufk.title" = "In der Menüleiste zeigen";
+
 /* Class = "NSButtonCell"; title = "Enable Internet plug-ins in the internal browser"; ObjectID = "9bX-Lt-AWz"; */
 "9bX-Lt-AWz.title" = "Aktiviere Plugins im internen Browser";
 
@@ -43,9 +46,6 @@
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "erE-oh-cbw"; */
 "erE-oh-cbw.title" = "Öffne Links im Hintergrund";
 
-/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "FFP-H1-weF"; */
-"FFP-H1-weF.title" = "In der Menüleiste zeigen";
-
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "flH-2D-s6O"; */
 "flH-2D-s6O.title" = "Öffne Links im externen Browser";
 
@@ -67,20 +67,17 @@
 /* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "haP-20-AwJ"; */
 "haP-20-AwJ.title" = "Beim Start nach neuer Vienna-Version suchen";
 
-/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iCs-T5-L1c"; */
-"iCs-T5-L1c.title" = "Wenn neue ungelesene Artikel empfangen wurden:";
-
 /* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "iEw-AM-tMF"; */
 "iEw-AM-tMF.label" = "Erweitert";
 
 /* Class = "NSPopUpButton"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "iHl-tr-paa"; */
 "iHl-tr-paa.ibShadowedToolTip" = "Wähle einen Server, der das Open Reader API unterstützt";
 
+/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iPx-Y4-IOB"; */
+"iPx-Y4-IOB.title" = "Wenn neue ungelesene Artikel empfangen wurden:";
+
 /* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "ITA-U9-lhX"; */
 "ITA-U9-lhX.title" = "Artikelliste:";
-
-/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "jfH-Hq-gRk"; */
-"jfH-Hq-gRk.title" = "Docksymbol animieren";
 
 /* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "Jk6-0r-7Gs"; */
 "Jk6-0r-7Gs.title" = "Keine Schriftgrößen verwenden, die kleiner sind als";
@@ -91,8 +88,8 @@
 /* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "jvO-Ef-TTd"; */
 "jvO-Ef-TTd.title" = "jede Stunde";
 
-/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "jVU-m2-dsS"; */
-"jVU-m2-dsS.title" = "Zeige die Anzahl der ungelesen Artikel im Docksymbol";
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "l6G-JM-fW5"; */
+"l6G-JM-fW5.title" = "Docksymbol animieren";
 
 /* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "Ljf-Qd-6Ho"; */
 "Ljf-Qd-6Ho.title" = "Neue Artikel beim Programmstart abrufen";

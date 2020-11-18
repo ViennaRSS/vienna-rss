@@ -37,17 +37,14 @@
 /* Class = "NSMenuItem"; title = "Never"; ObjectID = "h9d-GD-q32"; */
 "h9d-GD-q32.title" = "しない";
 
-/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iCs-T5-L1c"; */
-"iCs-T5-L1c.title" = "新規未読記事を取得したとき：";
-
 /* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "iEw-AM-tMF"; */
 "iEw-AM-tMF.label" = "詳細";
 
+/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iPx-Y4-IOB"; */
+"iPx-Y4-IOB.title" = "新規未読記事を取得したとき：";
+
 /* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "ITA-U9-lhX"; */
 "ITA-U9-lhX.title" = "記事リストフォント：";
-
-/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "jfH-Hq-gRk"; */
-"jfH-Hq-gRk.title" = "アプリケーションアイコンを跳ねさせる";
 
 /* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "Jk6-0r-7Gs"; */
 "Jk6-0r-7Gs.title" = "これより小さいフォントサイズを使わない：";
@@ -58,8 +55,8 @@
 /* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "jvO-Ef-TTd"; */
 "jvO-Ef-TTd.title" = "１時間ごと";
 
-/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "jVU-m2-dsS"; */
-"jVU-m2-dsS.title" = "未読記事数をアプリケーションアイコンに表示";
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "l6G-JM-fW5"; */
+"l6G-JM-fW5.title" = "アプリケーションアイコンを跳ねさせる";
 
 /* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "M8s-xu-lWh"; */
 "M8s-xu-lWh.title" = "フォルダリストフォント：";

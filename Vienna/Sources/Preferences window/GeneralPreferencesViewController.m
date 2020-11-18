@@ -88,9 +88,6 @@
     // Set download folder
     [self updateDownloadsPopUp:prefs.downloadFolder];
     
-    // Set whether the application is shown in the menu bar
-    showAppInMenuBar.state = prefs.showAppInStatusBar ? NSControlStateValueOn : NSControlStateValueOff;
-    
     // Set whether links are opened in the background
     openLinksInBackground.state = prefs.openLinksInBackground ? NSControlStateValueOn : NSControlStateValueOff;
     
@@ -100,10 +97,6 @@
     // Set mark read behaviour
     markReadAfterNext.state = prefs.markReadInterval == 0 ? NSControlStateValueOn : NSControlStateValueOff;
     markReadAfterDelay.state = prefs.markReadInterval != 0 ? NSControlStateValueOn : NSControlStateValueOff;
-    
-    // Show new articles notification options
-    newArticlesNotificationBadgeButton.state = ((prefs.newArticlesNotification & VNANewArticlesNotificationBadge) !=0) ? NSControlStateValueOn : NSControlStateValueOff;
-    newArticlesNotificationBounceButton.state = ((prefs.newArticlesNotification & VNANewArticlesNotificationBounce) !=0) ? NSControlStateValueOn : NSControlStateValueOff;
     
     // Set whether updated articles are considered as new
     markUpdatedAsNew.state = prefs.markUpdatedAsNew ? NSControlStateValueOn : NSControlStateValueOff;
@@ -211,14 +204,6 @@
 -(IBAction)changeOpenLinksInBackground:(id)sender
 {
     [Preferences standardPreferences].openLinksInBackground = [sender state] == NSControlStateValueOn;
-}
-
-/* changeShowAppInMenuBar
- * Sets whether or not the application icon is shown in the menu bar.
- */
--(IBAction)changeShowAppInMenuBar:(id)sender
-{
-    [Preferences standardPreferences].showAppInStatusBar = [sender state] == NSControlStateValueOn;
 }
 
 /* changeMarkUpdatedAsNew
@@ -354,40 +339,6 @@
 {
     NSInteger newFrequency = checkFrequency.selectedItem.tag;
     [Preferences standardPreferences].refreshFrequency = newFrequency;
-}
-
-/* changeNewArticlesNotificationBadge
- * Change if we display badge when new articles are announced.
- */
--(IBAction)changeNewArticlesNotificationBadge:(id)sender
-{
-    Preferences * prefs = [Preferences standardPreferences];
-    NSInteger currentNotificationValue = prefs.newArticlesNotification;
-    if ([sender state] == NSControlStateValueOn)
-    {
-        prefs.newArticlesNotification = currentNotificationValue | VNANewArticlesNotificationBadge;
-    }
-    else
-    {
-        prefs.newArticlesNotification = currentNotificationValue & ~VNANewArticlesNotificationBadge;
-    }
-}
-
-/* changeNewArticlesNotificationBounce
- * Change if we require user attention (by bouncing the Dock icon) when new articles are announced.
- */
--(IBAction)changeNewArticlesNotificationBounce:(id)sender
-{
-    Preferences * prefs = [Preferences standardPreferences];
-    NSInteger currentNotificationValue = prefs.newArticlesNotification;
-    if ([sender state] == NSControlStateValueOn)
-    {
-        prefs.newArticlesNotification = currentNotificationValue | VNANewArticlesNotificationBounce;
-    }
-    else
-    {
-        prefs.newArticlesNotification = currentNotificationValue & ~VNANewArticlesNotificationBounce;
-    }
 }
 
 /* changeMarkReadBehaviour

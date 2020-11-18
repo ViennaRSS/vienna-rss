@@ -19,6 +19,9 @@
 /* Class = "NSMenuItem"; title = "Manually"; ObjectID = "7Za-ay-jlt"; */
 "7Za-ay-jlt.title" = "Вручную";
 
+/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "9a4-MM-Ufk"; */
+"9a4-MM-Ufk.title" = "Отображать меню";
+
 /* Class = "NSButtonCell"; title = "Enable Internet plug-ins in the internal browser"; ObjectID = "9bX-Lt-AWz"; */
 "9bX-Lt-AWz.title" = "Разрешить плагины во внешнем браузере";
 
@@ -43,9 +46,6 @@
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "erE-oh-cbw"; */
 "erE-oh-cbw.title" = "Открывать ссылки в фоне";
 
-/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "FFP-H1-weF"; */
-"FFP-H1-weF.title" = "Отображать меню";
-
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "flH-2D-s6O"; */
 "flH-2D-s6O.title" = "Открывать ссылки во внешнем браузере";
 
@@ -67,20 +67,17 @@
 /* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "haP-20-AwJ"; */
 "haP-20-AwJ.title" = "Проверять наличие новых версий Vienna при запуске";
 
-/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iCs-T5-L1c"; */
-"iCs-T5-L1c.title" = "При получении новых статей:";
-
 /* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "iEw-AM-tMF"; */
 "iEw-AM-tMF.label" = "Расширенные";
 
 /* Class = "NSPopUpButton"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "iHl-tr-paa"; */
 "iHl-tr-paa.ibShadowedToolTip" = "Выберите сервер поддерживающий Open Reader API";
 
+/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iPx-Y4-IOB"; */
+"iPx-Y4-IOB.title" = "При получении новых статей:";
+
 /* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "ITA-U9-lhX"; */
 "ITA-U9-lhX.title" = "Шрифт списка статей:";
-
-/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "jfH-Hq-gRk"; */
-"jfH-Hq-gRk.title" = "Трясти иконку в Док";
 
 /* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "Jk6-0r-7Gs"; */
 "Jk6-0r-7Gs.title" = "Никогда не использовать размер шрифта меньше";
@@ -91,8 +88,8 @@
 /* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "jvO-Ef-TTd"; */
 "jvO-Ef-TTd.title" = "Ежечасно";
 
-/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "jVU-m2-dsS"; */
-"jVU-m2-dsS.title" = "Отобразить их число в иконке приложения";
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "l6G-JM-fW5"; */
+"l6G-JM-fW5.title" = "Трясти иконку в Док";
 
 /* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "Ljf-Qd-6Ho"; */
 "Ljf-Qd-6Ho.title" = "Проверять наличие новых статей при запуске";

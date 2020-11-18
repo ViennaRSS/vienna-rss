@@ -10,6 +10,9 @@
 /* Class = "NSMenuItem"; title = "Manually"; ObjectID = "7Za-ay-jlt"; */
 "7Za-ay-jlt.title" = "Eskuz";
 
+/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "9a4-MM-Ufk"; */
+"9a4-MM-Ufk.title" = "Erakutsi menuan";
+
 /* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "aWg-mD-YWn"; */
 "aWg-mD-YWn.title" = "30 minuturo";
 
@@ -25,9 +28,6 @@
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "erE-oh-cbw"; */
 "erE-oh-cbw.title" = "Ireki esteka berriak atzekaldean";
 
-/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "FFP-H1-weF"; */
-"FFP-H1-weF.title" = "Erakutsi menuan";
-
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "flH-2D-s6O"; */
 "flH-2D-s6O.title" = "Ireki estekak kanpo nabegatzailean";
 
@@ -40,17 +40,14 @@
 /* Class = "NSMenuItem"; title = "Never"; ObjectID = "h9d-GD-q32"; */
 "h9d-GD-q32.title" = "Inoiz";
 
-/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iCs-T5-L1c"; */
-"iCs-T5-L1c.title" = "Artikulu berri irakurri gabeak jasotzerakoan";
-
 /* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "iEw-AM-tMF"; */
 "iEw-AM-tMF.label" = "Aurreratuta";
 
+/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iPx-Y4-IOB"; */
+"iPx-Y4-IOB.title" = "Artikulu berri irakurri gabeak jasotzerakoan";
+
 /* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "ITA-U9-lhX"; */
 "ITA-U9-lhX.title" = "Artikuluentzako letra lista:";
-
-/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "jfH-Hq-gRk"; */
-"jfH-Hq-gRk.title" = "Aplikazioaren ikonoa saltoka jarri";
 
 /* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "Jk6-0r-7Gs"; */
 "Jk6-0r-7Gs.title" = "Ez erabili inoiz letra tamainarik txikiagoa baino";
@@ -61,8 +58,8 @@
 /* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "jvO-Ef-TTd"; */
 "jvO-Ef-TTd.title" = "Orduro";
 
-/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "jVU-m2-dsS"; */
-"jVU-m2-dsS.title" = "Erakutsi programaren ikonoan irakurri gabeko artikuluen kontadorea";
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "l6G-JM-fW5"; */
+"l6G-JM-fW5.title" = "Aplikazioaren ikonoa saltoka jarri";
 
 /* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "M8s-xu-lWh"; */
 "M8s-xu-lWh.title" = "Direktorioentzako letra lista:";

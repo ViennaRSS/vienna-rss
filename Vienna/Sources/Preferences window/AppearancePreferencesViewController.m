@@ -33,6 +33,10 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 
 
 @interface AppearancePreferencesViewController ()
+
+@property (nonatomic) IBOutlet NSButton *showAppInMenuBar;
+@property (nonatomic) IBOutlet NSButton *articlesNotificationBounceButton;
+
 -(void)initializePreferences;
 -(void)selectUserDefaultFont:(NSString *)name size:(NSInteger)size control:(NSTextField *)control;
 
@@ -85,6 +89,12 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
     for (i = 0; i < countOfAvailableMinimumFontSizes; ++i)
         [minimumFontSizes addItemWithObjectValue:@(availableMinimumFontSizes[i])];
     minimumFontSizes.doubleValue = prefs.minimumFontSize;
+
+    // Set whether the application is shown in the menu bar
+    self.showAppInMenuBar.state = prefs.showAppInStatusBar ? NSControlStateValueOn : NSControlStateValueOff;
+
+    // Show new articles notification options
+    self.articlesNotificationBounceButton.state = ((prefs.newArticlesNotification & VNANewArticlesNotificationBounce) !=0) ? NSControlStateValueOn : NSControlStateValueOff;
 }
 
 /* changeShowFolderImages
@@ -180,6 +190,30 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
     prefs.folderListFont = font.fontName;
     prefs.folderListFontSize = font.pointSize;
     [self selectUserDefaultFont:prefs.folderListFont size:prefs.folderListFontSize control:folderFontSample];
+}
+
+/* changeNewArticlesNotificationBounce
+ * Change if we require user attention (by bouncing the Dock icon) when new articles are announced.
+ */
+-(IBAction)changeNewArticlesNotificationBounce:(id)sender
+{
+    Preferences * prefs = [Preferences standardPreferences];
+    if ([sender state] == NSControlStateValueOn)
+    {
+        prefs.newArticlesNotification = VNANewArticlesNotificationBounce;
+    }
+    else
+    {
+        prefs.newArticlesNotification = 0;
+    }
+}
+
+/* changeShowAppInMenuBar
+ * Sets whether or not the application icon is shown in the menu bar.
+ */
+-(IBAction)changeShowAppInMenuBar:(id)sender
+{
+    [Preferences standardPreferences].showAppInStatusBar = [sender state] == NSControlStateValueOn;
 }
 
 /* dealloc
