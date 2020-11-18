@@ -146,7 +146,7 @@
     // the new selection.
     if (regAppName != nil) {
         [linksHandler addItemWithTitle:regAppName image:[[NSWorkspace sharedWorkspace] iconForFile:registeredAppURL]];
-        [linksHandler addSeparator];
+        [linksHandler.menu addItem:[NSMenuItem separatorItem]];
         [appToPathMap setValue:registeredAppURL forKey:regAppName];
     }
 
@@ -187,7 +187,7 @@
     
     // Add a Select command so the user can manually pick a registered
     // application.
-    [linksHandler addSeparator];
+    [linksHandler.menu addItem:[NSMenuItem separatorItem]];
     [linksHandler addItemWithTitle:NSLocalizedString(@"Select…", nil) tag:-1];
     
     // Select the registered item

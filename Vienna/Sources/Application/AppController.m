@@ -41,7 +41,6 @@
 #import "SearchPanel.h"
 #import "SearchMethod.h"
 #import "OpenReader.h"
-#import "VTPG_Common.h"
 #import "Debug.h"
 #import "Database.h"
 #import "NSURL+Utils.h"

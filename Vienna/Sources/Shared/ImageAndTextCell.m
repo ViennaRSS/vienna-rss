@@ -325,32 +325,26 @@
 	[super selectWithFrame:aRect inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
 }
 
--(NSArray*)accessibilityAttributeNames
-{
-    static NSArray * attributes = nil;
-    if (!attributes)
-    {
-        NSSet * set = [NSSet setWithArray:[super accessibilityAttributeNames]];
-        attributes = [set setByAddingObject:NSAccessibilityDescriptionAttribute].allObjects;
-    }
-    return attributes;
-}
+- (NSString *)accessibilityLabel {
+    NSMutableArray *bits = [NSMutableArray arrayWithCapacity:3];
 
--(id)accessibilityAttributeValue:(NSString *)attribute
-{
-    if ([attribute isEqualToString:NSAccessibilityDescriptionAttribute])
-    {
-        NSMutableArray * bits = [NSMutableArray arrayWithCapacity:3];
-        if (auxiliaryImage && auxiliaryImage.accessibilityDescription)
-            [bits addObject:auxiliaryImage.accessibilityDescription];
-        if (hasCount)
-            [bits addObject:[NSString stringWithFormat:NSLocalizedString(@"%d unread articles", nil), (int)count]];
-        if (inProgress)
-            [bits addObject:NSLocalizedString(@"Loading", nil)];
-        if (bits.count)
-            return [bits componentsJoinedByString:@", "];
+    if (auxiliaryImage && auxiliaryImage.accessibilityDescription) {
+        [bits addObject:auxiliaryImage.accessibilityDescription];
     }
-    return [super accessibilityAttributeValue:attribute];
+
+    if (hasCount) {
+        [bits addObject:[NSString stringWithFormat:NSLocalizedString(@"%d unread articles", nil), (int)count]];
+    }
+
+    if (inProgress) {
+        [bits addObject:NSLocalizedString(@"Loading", nil)];
+    }
+
+    if (bits.count) {
+        return [bits componentsJoinedByString:@", "];
+    } else {
+        return [super accessibilityLabel];
+    }
 }
 
 -(NSShadow *)defaultCountLabelShadow

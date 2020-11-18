@@ -462,9 +462,9 @@
 	}
 	
 	// Set the images for specific header columns
-	[articleList setHeaderImage:MA_Field_Read imageName:@"unread_header.tiff"];
-	[articleList setHeaderImage:MA_Field_Flagged imageName:@"flagged_header.tiff"];
-	[articleList setHeaderImage:MA_Field_HasEnclosure imageName:@"enclosure_header.tiff"];
+	[articleList setHeaderImage:MA_Field_Read imageName:@"unread_header"];
+	[articleList setHeaderImage:MA_Field_Flagged imageName:@"flagged_header"];
+	[articleList setHeaderImage:MA_Field_HasEnclosure imageName:@"enclosure_header"];
 
 	// Initialise the sort direction
 	[self showSortDirection];	
@@ -1160,27 +1160,27 @@
 	if ([identifier isEqualToString:MA_Field_Read])
 	{
 		if (!theArticle.read)
-			return (theArticle.revised) ? [NSImage imageNamed:@"revised.tiff"] : [NSImage imageNamed:@"unread.tiff"];
-		return [NSImage imageNamed:@"alphaPixel.tiff"];
+			return (theArticle.revised) ? [NSImage imageNamed:@"revised"] : [NSImage imageNamed:@"unread"];
+        return nil;
 	}
 	if ([identifier isEqualToString:MA_Field_Flagged])
 	{
 		if (theArticle.flagged)
-			return [NSImage imageNamed:@"flagged.tiff"];
-		return [NSImage imageNamed:@"alphaPixel.tiff"];
+			return [NSImage imageNamed:@"flagged"];
+        return nil;
 	}
 	if ([identifier isEqualToString:MA_Field_Comments])
 	{
 		if (theArticle.hasComments)
-			return [NSImage imageNamed:@"comments.tiff"];
-		return [NSImage imageNamed:@"alphaPixel.tiff"];
+			return [NSImage imageNamed:@"comments"];
+        return nil;
 	}
 	
 	if ([identifier isEqualToString:MA_Field_HasEnclosure])
 	{
 		if (theArticle.hasEnclosure)
-			return [NSImage imageNamed:@"enclosure.tiff"];
-		return [NSImage imageNamed:@"alphaPixel.tiff"];
+			return [NSImage imageNamed:@"enclosure"];
+        return nil;
 	}
 	
 	NSMutableAttributedString * theAttributedString;
