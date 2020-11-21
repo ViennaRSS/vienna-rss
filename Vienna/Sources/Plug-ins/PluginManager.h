@@ -22,7 +22,7 @@
 
 @class SearchMethod;
 
-@interface PluginManager : NSObject {
+@interface PluginManager : NSObject <NSMenuItemValidation, NSToolbarItemValidation> {
 	NSMutableDictionary * allPlugins;
 }
 

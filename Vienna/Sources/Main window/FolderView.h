@@ -20,7 +20,7 @@
 
 @import Cocoa;
 
-@interface FolderView : NSOutlineView {
+@interface FolderView : NSOutlineView <NSMenuItemValidation> {
 	NSString * backupString;
 }
 
