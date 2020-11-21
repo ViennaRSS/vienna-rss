@@ -29,7 +29,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="302" y="347" width="942" height="625"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1025"/>
             <value key="minSize" type="size" width="700" height="350"/>
             <view key="contentView" wantsLayer="YES" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="942" height="625"/>
@@ -394,7 +394,7 @@
                         <popUpButton key="view" verticalHuggingPriority="750" id="DDQ-PY-F2c">
                             <rect key="frame" x="0.0" y="14" width="77" height="25"/>
                             <autoresizingMask key="autoresizingMask"/>
-                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NewFeedTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="pdk-MS-QME" id="xAh-aB-Ek3">
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="pdk-MS-QME" id="xAh-aB-Ek3">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" id="tQg-b5-Yiu">
@@ -672,7 +672,7 @@
             <rect key="frame" x="0.0" y="0.0" width="700" height="629"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <splitView dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="972">
+                <splitView horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="972">
                     <rect key="frame" x="0.0" y="0.0" width="700" height="630"/>
                     <subviews>
                         <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="976">
@@ -680,7 +680,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                             <clipView key="contentView" copiesOnScroll="NO" id="TOX-JT-adF">
                                 <rect key="frame" x="0.0" y="0.0" width="700" height="310"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowHeight="15" headerView="1386" id="977" customClass="MessageListView">
                                         <rect key="frame" x="0.0" y="0.0" width="700" height="287"/>
@@ -702,7 +702,7 @@
                                 <rect key="frame" x="-16" y="23" width="16" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </scroller>
-                            <tableHeaderView key="headerView" id="1386">
+                            <tableHeaderView key="headerView" wantsLayer="YES" id="1386">
                                 <rect key="frame" x="0.0" y="0.0" width="700" height="23"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </tableHeaderView>
@@ -753,7 +753,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" id="emU-La-Fur">
                         <rect key="frame" x="1" y="1" width="699" height="605"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="NgO-hM-mCz" customClass="ExtendedTableView">
                                 <rect key="frame" x="0.0" y="0.0" width="699" height="605"/>
@@ -808,8 +808,9 @@
                 <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="750" verticalStackHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PLo-xw-CXM">
                     <rect key="frame" x="8" y="6" width="475" height="32"/>
                     <beginningViews>
-                        <imageView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1289">
+                        <imageView id="1289">
                             <rect key="frame" x="0.0" y="0.0" width="79" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="32" id="DHh-hp-lMb"/>
                                 <constraint firstAttribute="height" constant="32" id="Nns-hC-vGL"/>
@@ -819,7 +820,7 @@
                         <stackView orientation="vertical" alignment="leading" spacing="3" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RFH-Us-xJO">
                             <rect key="frame" x="87" y="0.0" width="300" height="32"/>
                             <beginningViews>
-                                <textField verticalHuggingPriority="750" fixedFrame="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="9000" translatesAutoresizingMaskIntoConstraints="NO" id="1290">
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="9000" translatesAutoresizingMaskIntoConstraints="NO" id="1290">
                                     <rect key="frame" x="-2" y="18" width="304" height="14"/>
                                     <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" id="1373">
                                         <font key="font" metaFont="smallSystemBold"/>
@@ -846,7 +847,7 @@
                             </customSpacing>
                         </stackView>
                         <button horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" placeholderIntrinsicWidth="80" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="1291">
-                            <rect key="frame" x="389" y="-1" width="92" height="32"/>
+                            <rect key="frame" x="388" y="4" width="94" height="33"/>
                             <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="1374">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
