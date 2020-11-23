@@ -57,8 +57,11 @@ static NSString * _userAgent ;
         if (!shortSafariVersion) {
             shortSafariVersion = @"6.0";
         }
+        Preferences * prefs = [Preferences standardPreferences];
+        NSString *name = prefs.userAgentName;
+
         _userAgent =
-            [NSString stringWithFormat:MA_BrowserUserAgentString, osVersion, webkitVersion, shortSafariVersion,
+            [NSString stringWithFormat:MA_BrowserUserAgentString, osVersion, webkitVersion, shortSafariVersion, name,
              ((ViennaApp *)NSApp).applicationVersion.firstWord];
     }
     return _userAgent;
