@@ -67,7 +67,6 @@ extern NSString * MAPref_EmptyTrashNotification;
 extern NSString * MAPref_ShowAppInStatusBar;
 extern NSString * MAPref_ShowStatusBar;
 extern NSString * MAPref_ShowFilterBar;
-extern NSString * MAPref_NewFolderUI;
 extern NSString * MAPref_LastViennaVersionRun;
 extern NSString * MAPref_HighestViennaVersionRun;
 extern NSString * MAPref_ShouldSaveFeedSource;
@@ -80,7 +79,6 @@ extern NSString * MAPref_SyncServer;
 extern NSString * MAPref_SyncingUser;
 extern NSString * MAPref_SyncingAppId;
 extern NSString * MAPref_SyncingAppKey;
-extern NSString * MAPref_SendSystemProfileInfo;
 extern NSString * MAPref_AlwaysAcceptBetas;
 extern NSString * MAPref_UserAgentName;
 
