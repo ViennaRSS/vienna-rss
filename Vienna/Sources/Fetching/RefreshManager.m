@@ -89,7 +89,10 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         } else {
             osVersion = @"10_9_x";
         }
-        NSString * userAgent = [NSString stringWithFormat:MA_DefaultUserAgentString, [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], osVersion];
+        Preferences * prefs = [Preferences standardPreferences];
+        NSString *name = prefs.userAgentName;
+
+        NSString * userAgent = [NSString stringWithFormat:MA_DefaultUserAgentString, name, [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], osVersion];
         NSURLSessionConfiguration * config = [NSURLSessionConfiguration defaultSessionConfiguration];
         config.timeoutIntervalForRequest = 180;
         config.URLCache = nil;
