@@ -66,7 +66,6 @@ NSString * MAPref_EmptyTrashNotification = @"EmptyTrashNotification";
 NSString * MAPref_ShowAppInStatusBar = @"ShowAppInStatusBar";
 NSString * MAPref_ShowStatusBar = @"ShowStatusBar";
 NSString * MAPref_ShowFilterBar = @"ShowFilterBar";
-NSString * MAPref_NewFolderUI = @"NewFolderUI";
 NSString * MAPref_LastViennaVersionRun = @"LastViennaVersionRun";
 NSString * MAPref_HighestViennaVersionRun = @"HighestViennaVersionRun";
 NSString * MAPref_ShouldSaveFeedSource = @"ShouldSaveFeedSource";
@@ -79,7 +78,6 @@ NSString * MAPref_SyncServer = @"SyncServer";
 NSString * MAPref_SyncingUser = @"SyncingUser";
 NSString * MAPref_SyncingAppId = @"SyncingAppId";
 NSString * MAPref_SyncingAppKey = @"SyncingAppKey";
-NSString * MAPref_SendSystemProfileInfo = @"SUSendProfileInfo";
 NSString * MAPref_AlwaysAcceptBetas = @"AlwayAcceptBetas";
 NSString * MAPref_UserAgentName = @"UserAgentName";
 

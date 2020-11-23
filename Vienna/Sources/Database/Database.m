@@ -43,7 +43,6 @@ typedef NS_ENUM(NSInteger, VNAQueryScope) {
 @property (nonatomic) BOOL initializedSmartfoldersDict;
 @property (nonatomic) NSMutableArray *fieldsOrdered;
 @property (nonatomic) NSMutableDictionary *fieldsByName;
-@property (nonatomic) NSMutableDictionary *fieldsByTitle;
 @property (nonatomic) NSMutableDictionary *foldersDict;
 @property (nonatomic) NSMutableDictionary *smartfoldersDict;
 @property (readwrite, nonatomic) BOOL readOnly;
