@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "MMTabBarView",
+        "repositoryURL": "https://github.com/ViennaRSS/MMTabBarView",
+        "state": {
+          "branch": "v/1.4.11",
+          "revision": "e707144a851e04243d5eacc083e473c66be790fd",
+          "version": null
+        }
+      },
+      {
         "package": "Sparkle",
         "repositoryURL": "https://github.com/sparkle-project/Sparkle",
         "state": {
