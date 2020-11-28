@@ -69,6 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 	NSUInteger concurrentDownloads;
 	NSString * syncServer;
 	NSString * syncingUser;
+    NSString * userAgentName;
 }
 
 // String constants for NSNotificationCenter
@@ -203,6 +204,9 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 
 // Do we show updated articles as new ?
 @property (nonatomic) BOOL markUpdatedAsNew;
+
+// User Agent Name
+@property (nonatomic) NSString *userAgentName;
 
 #pragma mark -
 #pragma mark Open Reader syncing
