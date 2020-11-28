@@ -53,8 +53,6 @@ Want to contribute? Great! There are many ways you can, even if you aren't a dev
 
 Please check [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Vienna now uses [Carthage](https://github.com/Carthage/Carthage) for managing dependencies.
-
 ### Localizing ###
 
 We need help keeping Vienna translations up to date into different languages. You can contribute localizations at [Crowdin](https://crowdin.com/project/vienna-rss). Registration is required, but the account is free. If you want to contribute for a language that is not yet listed, then contact us. Do not localize the project's \*.strings files directly. Localizable \*.plist files have to be localized directly.
