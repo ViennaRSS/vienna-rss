@@ -20,8 +20,8 @@
 
 @import Foundation;
 
-NSString * MA_DefaultUserAgentString = @"Vienna/%@ (Macintosh; Intel macOS %@)";
-NSString * MA_BrowserUserAgentString = @"(Macintosh; Intel Mac OS X %@) AppleWebKit/%@ (KHTML, like Gecko) Version/%@ Safari/604.1.38 Vienna/%@";
+NSString * MA_DefaultUserAgentString = @"%@/%@ (Macintosh; Intel macOS %@)";
+NSString * MA_BrowserUserAgentString = @"(Macintosh; Intel Mac OS X %@) AppleWebKit/%@ (KHTML, like Gecko) Version/%@ Safari/604.1.38 %@/%@";
 
 NSString * MAPref_ArticleListFont = @"MessageListFont";
 NSString * MAPref_AutoSortFoldersTree = @"AutomaticallySortFoldersTree";
@@ -81,6 +81,7 @@ NSString * MAPref_SyncingAppId = @"SyncingAppId";
 NSString * MAPref_SyncingAppKey = @"SyncingAppKey";
 NSString * MAPref_SendSystemProfileInfo = @"SUSendProfileInfo";
 NSString * MAPref_AlwaysAcceptBetas = @"AlwayAcceptBetas";
+NSString * MAPref_UserAgentName = @"UserAgentName";
 
 const NSInteger MA_Default_BackTrackQueueSize = 20;
 const NSInteger MA_Default_RefreshThreads = 20;
