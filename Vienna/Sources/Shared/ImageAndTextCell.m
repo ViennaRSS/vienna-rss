@@ -43,7 +43,7 @@
 		hasCount = NO;
 		count = 0;
         countLabelShadow = [self defaultCountLabelShadow];
-		[self setCountBackgroundColour:[NSColor shadowColor]];
+		[self setCountBackgroundColour:NSColor.systemGrayColor];
 	}
 	return self;
 }
