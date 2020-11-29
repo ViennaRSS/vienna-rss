@@ -180,11 +180,6 @@
 		
 		imageSize = image.size;
 		NSDivideRect(*cellFrame, &imageFrame, cellFrame, 3 + imageSize.width, NSMinXEdge);
-		if (self.drawsBackground)
-		{
-			[self.backgroundColor set];
-			NSRectFill(imageFrame);
-		}
 		imageFrame.origin.x += 3;
 		imageFrame.size = imageSize;
 		// vertically center
@@ -232,11 +227,6 @@
 		
 		imageSize = auxiliaryImage.size;
 		NSDivideRect(cellFrame, &imageFrame, &cellFrame, 3 + imageSize.width, NSMaxXEdge);
-		if (self.drawsBackground)
-		{
-			[self.backgroundColor set];
-			NSRectFill(imageFrame);
-		}
 		imageFrame.size = imageSize;
 		// vertically center
 		imageFrame.origin.y += (cellFrame.size.height - imageSize.height) / 2.0;
@@ -264,11 +254,6 @@
 
 		NSRect countFrame;
 		NSDivideRect(cellFrame, &countFrame, &cellFrame, cellWidth, NSMaxXEdge);
-		if (self.drawsBackground)
-		{
-			[self.backgroundColor set];
-			NSRectFill(countFrame);
-		}
         
         // Provide a small amount of additional visual padding beyond the actual
         // count rectangle to ensure the text does not hit the edge of the count bubble
