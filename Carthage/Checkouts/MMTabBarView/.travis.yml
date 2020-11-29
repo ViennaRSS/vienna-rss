@@ -1,9 +1,0 @@
-language: objective-c
-osx_image: xcode9.4
-
-jobs:
-  include:
-    # testing
-    - stage: build
-      script: xcodebuild -workspace default.xcworkspace -scheme MMTabBarView | xcpretty
-    # linting
