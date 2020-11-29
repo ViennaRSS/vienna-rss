@@ -459,24 +459,23 @@
             </connections>
             <point key="canvasLocation" x="138" y="-578"/>
         </window>
-        <customView id="971" userLabel="ArticleDisplayView" customClass="ArticleListView">
-            <rect key="frame" x="0.0" y="0.0" width="172" height="629"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="971" userLabel="ArticleDisplayView" customClass="ArticleListView">
+            <rect key="frame" x="0.0" y="0.0" width="500" height="629"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="7tZ-qr-cec">
-                    <rect key="frame" x="0.0" y="0.0" width="172" height="629"/>
+                    <rect key="frame" x="0.0" y="0.0" width="500" height="629"/>
                     <subviews>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="cTN-D0-dY2" customClass="DisclosureView">
-                            <rect key="frame" x="0.0" y="600" width="172" height="29"/>
+                            <rect key="frame" x="0.0" y="600" width="500" height="29"/>
                             <subviews>
                                 <visualEffectView verticalHuggingPriority="255" blendingMode="withinWindow" material="headerView" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="1300" customClass="FilterView" customModule="Vienna" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="172" height="29"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="500" height="29"/>
                                     <subviews>
                                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1391">
-                                            <rect key="frame" x="0.0" y="26" width="172" height="5"/>
+                                            <rect key="frame" x="0.0" y="26" width="500" height="5"/>
                                         </box>
                                         <searchField toolTip="Filter displayed articles by matching text" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="1304">
-                                            <rect key="frame" x="8" y="5" width="0.0" height="19"/>
+                                            <rect key="frame" x="8" y="5" width="155" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="LD9-MT-Msv"/>
                                             </constraints>
@@ -501,6 +500,17 @@
                                                 <action selector="hideFilterBar:" target="-1" id="FpS-o7-Ir4"/>
                                             </connections>
                                         </button>
+                                        <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="1305">
+                                            <rect key="frame" x="217" y="7" width="50" height="14"/>
+                                            <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="right" title="Filter by:" id="1377">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <connections>
+                                                <accessibilityConnection property="title" destination="1306" id="BUw-GU-jKt"/>
+                                            </connections>
+                                        </textField>
                                         <popUpButton toolTip="Filter articles" wantsLayer="YES" horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1306">
                                             <rect key="frame" x="17" y="2" width="130" height="22"/>
                                             <popUpButtonCell key="cell" type="push" title="All Articles" bezelStyle="rounded" alignment="center" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="JT2-Q7-gRj" id="1378">
@@ -563,17 +573,6 @@
                                                 </connections>
                                             </popUpButtonCell>
                                         </popUpButton>
-                                        <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="1305">
-                                            <rect key="frame" x="14" y="7" width="4" height="14"/>
-                                            <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="right" title="Filter by:" id="1377">
-                                                <font key="font" metaFont="smallSystem"/>
-                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                            <connections>
-                                                <accessibilityConnection property="title" destination="1306" id="BUw-GU-jKt"/>
-                                            </connections>
-                                        </textField>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="1313" firstAttribute="leading" secondItem="1306" secondAttribute="trailing" multiplier="1.2" priority="250" constant="8" symbolic="YES" id="3Xe-VF-cew"/>
@@ -629,11 +628,11 @@
                                         </subviews>
                                     </clipView>
                                     <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="1385">
-                                        <rect key="frame" x="0.0" y="-30" width="683" height="15"/>
+                                        <rect key="frame" x="0.0" y="7" width="0.0" height="16"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
                                     <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="1384">
-                                        <rect key="frame" x="684" y="6" width="16" height="0.0"/>
+                                        <rect key="frame" x="-16" y="23" width="16" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
                                     <tableHeaderView key="headerView" wantsLayer="YES" id="1386">
