@@ -19,10 +19,10 @@
 //
 
 @import Cocoa;
+@import MMTabBarView;
 @import WebKit;
 
 #import "BaseView.h"
-#import <MMTabBarView/MMTabBarItem.h>
 #import "Vienna-Swift.h"
 
 // This is defined somewhere but I can't find where.
