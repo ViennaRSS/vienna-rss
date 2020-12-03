@@ -88,11 +88,13 @@ final class MainWindowController: NSWindowController {
 
     // MARK: Actions
 
+    // swiftlint:disable private_action
     @IBAction func changeFiltering(_ sender: NSMenuItem) { // TODO: This should be handled by ArticleController
         Preferences.standard().filterMode = sender.tag
         filterLabel.stringValue = sender.title
     }
 
+    // swiftlint:disable private_action
     @IBAction func toggleStatusBar(_ sender: AnyObject) {
         statusBarState(disclosed: !statusBar.isDisclosed)
     }
