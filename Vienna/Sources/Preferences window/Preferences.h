@@ -67,7 +67,6 @@
 	NSUInteger concurrentDownloads;
 	NSString * syncServer;
 	NSString * syncingUser;
-    NSString * userAgentName;
 }
 
 // String constants for NSNotificationCenter

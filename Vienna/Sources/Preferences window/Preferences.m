@@ -186,7 +186,7 @@ static Preferences * _standardPreferences = nil;
 		shouldSaveFeedSource = [self boolForKey:MAPref_ShouldSaveFeedSource];
 		searchMethod = [NSKeyedUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_SearchMethod]];
 		concurrentDownloads = [self integerForKey:MAPref_ConcurrentDownloads];
-        userAgentName = [self stringForKey:MAPref_UserAgentName];
+        _userAgentName = [self stringForKey:MAPref_UserAgentName];
         
         // Open Reader sync
         syncGoogleReader = [self boolForKey:MAPref_SyncGoogleReader];
@@ -837,16 +837,6 @@ static Preferences * _standardPreferences = nil;
 -(BOOL)markUpdatedAsNew
 {
 	return markUpdatedAsNew;
-}
-
-/* userAgentName
- * Returns the apps user agent name.
- * If not overridden by setting a user default preference it returns 'Vienna'.
- * Value is cached and there is no change notification if the value changes while the app is running.
- */
--(NSString *)userAgentName
-{
-    return userAgentName;
 }
 
 /* setMarkUpdatedAsNew
