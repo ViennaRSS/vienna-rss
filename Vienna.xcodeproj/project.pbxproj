@@ -52,7 +52,6 @@
 		035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B703919E0E4AE00197334 /* Vienna_Tests.m */; };
 		0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */; };
 		0379E23B1A20831600D58BFE /* SyncingPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */; };
-		0383DC551B71B44700A11950 /* CriteriaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383DC541B71B44700A11950 /* CriteriaTests.m */; };
 		0386A5C11E1FA586000C10CE /* BrowserPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0386A5BB1E1FA586000C10CE /* BrowserPane.xib */; };
 		03A131B31AA54EAC0037471F /* Database+Migration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B21AA54EAC0037471F /* Database+Migration.m */; };
 		03B35B841B75E9E0001DB06D /* NSDate+Vienna.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B35B831B75E9E0001DB06D /* NSDate+Vienna.m */; };
@@ -80,6 +79,7 @@
 		2FDF6FC0218A266A002F77E9 /* BrowserTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FBC218A266A002F77E9 /* BrowserTab.swift */; };
 		2FDF6FC3218A266A002F77E9 /* TabbedBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FBF218A266A002F77E9 /* TabbedBrowserViewController.swift */; };
 		2FDF6FC8218A289A002F77E9 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FC7218A289A002F77E9 /* Tab.swift */; };
+		2FE328F125CF436C005B9C18 /* CriteriaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE328F025CF436C005B9C18 /* CriteriaTests.swift */; };
 		2FE44CAD25B7995400554E82 /* NSApplication+AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE44CAC25B7995400554E82 /* NSApplication+AppController.swift */; };
 		2FE44CB525B79EDE00554E82 /* WebKitContextMenuCustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE44CB425B79EDD00554E82 /* WebKitContextMenuCustomizer.swift */; };
 		2FF61D2C24F2AE8B00A7E2B5 /* RSSSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF61D2B24F2AE8B00A7E2B5 /* RSSSubscriber.swift */; };
@@ -278,7 +278,6 @@
 		0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearancePreferencesViewController.m; sourceTree = "<group>"; };
 		0379E2391A20831600D58BFE /* SyncingPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncingPreferencesViewController.h; sourceTree = "<group>"; };
 		0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncingPreferencesViewController.m; sourceTree = "<group>"; };
-		0383DC541B71B44700A11950 /* CriteriaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CriteriaTests.m; sourceTree = "<group>"; };
 		0386A5BB1E1FA586000C10CE /* BrowserPane.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrowserPane.xib; sourceTree = "<group>"; };
 		03A131B11AA54EAC0037471F /* Database+Migration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Database+Migration.h"; sourceTree = "<group>"; };
 		03A131B21AA54EAC0037471F /* Database+Migration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Database+Migration.m"; sourceTree = "<group>"; };
@@ -315,6 +314,7 @@
 		2FDF6FBF218A266A002F77E9 /* TabbedBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedBrowserViewController.swift; sourceTree = "<group>"; };
 		2FDF6FC5218A26B0002F77E9 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
 		2FDF6FC7218A289A002F77E9 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		2FE328F025CF436C005B9C18 /* CriteriaTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CriteriaTests.swift; sourceTree = "<group>"; };
 		2FE44CAC25B7995400554E82 /* NSApplication+AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+AppController.swift"; sourceTree = "<group>"; };
 		2FE44CB425B79EDD00554E82 /* WebKitContextMenuCustomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKitContextMenuCustomizer.swift; sourceTree = "<group>"; };
 		2FF61D2B24F2AE8B00A7E2B5 /* RSSSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSSubscriber.swift; sourceTree = "<group>"; };
@@ -991,7 +991,7 @@
 				4D36B44A1D37F91E009736C1 /* VNAArticleTests.m */,
 				3A8D9AE225A9DA4B0016F30F /* ArticleTests.swift */,
 				2F437B3A25CF336400AD1B57 /* SubscriptionModelTests.swift */,
-				0383DC541B71B44700A11950 /* CriteriaTests.m */,
+				2FE328F025CF436C005B9C18 /* CriteriaTests.swift */,
 				2F437B6225CF423A00AD1B57 /* ExportTests.swift */,
 				2F437B3B25CF336400AD1B57 /* URL+URIEquivalence.swift */,
 				F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */,
@@ -1989,9 +1989,9 @@
 				2F437B3C25CF336400AD1B57 /* SubscriptionModelTests.swift in Sources */,
 				F6AC41AC25A4FAF6007DED7B /* FeedDiscovererTests.swift in Sources */,
 				4D36B44B1D37F91E009736C1 /* VNAArticleTests.m in Sources */,
-				0383DC551B71B44700A11950 /* CriteriaTests.m in Sources */,
 				F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */,
 				3A50014E259AA2BE00AA6AAD /* WebKitArticleConverter.swift in Sources */,
+				2FE328F125CF436C005B9C18 /* CriteriaTests.swift in Sources */,
 				035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
