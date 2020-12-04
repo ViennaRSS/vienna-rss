@@ -50,7 +50,6 @@
 		0349813E1A206FD900014F29 /* GeneralPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0349813D1A206FD900014F29 /* GeneralPreferencesViewController.m */; };
 		034981411A20701600014F29 /* AdvancedPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 034981401A20701600014F29 /* AdvancedPreferencesViewController.m */; };
 		035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B703919E0E4AE00197334 /* Vienna_Tests.m */; };
-		035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B704119E0E4DC00197334 /* SubscriptionModelTests.m */; };
 		0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */; };
 		0379E23B1A20831600D58BFE /* SyncingPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */; };
 		0383DC551B71B44700A11950 /* CriteriaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383DC541B71B44700A11950 /* CriteriaTests.m */; };
@@ -65,6 +64,8 @@
 		2F20FF8F25618627000F68C2 /* WebKitArticleTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F20FF8E25618627000F68C2 /* WebKitArticleTab.swift */; };
 		2F2280352271B041005D1023 /* ArticleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280342271B041005D1023 /* ArticleContentView.swift */; };
 		2F2280382271B18A005D1023 /* ArticleStyleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */; };
+		2F437B3C25CF336400AD1B57 /* SubscriptionModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F437B3A25CF336400AD1B57 /* SubscriptionModelTests.swift */; };
+		2F437B3D25CF336400AD1B57 /* URL+URIEquivalence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F437B3B25CF336400AD1B57 /* URL+URIEquivalence.swift */; };
 		2F5AC4202198E1AA00A7EDDE /* TitleChangingTabViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */; };
 		2F779111253B17C5004ED4EF /* BrowserContextMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F779110253B17C5004ED4EF /* BrowserContextMenuDelegate.swift */; };
 		2F7B91EB2198351A00E56F00 /* WebViewBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */; };
@@ -136,7 +137,6 @@
 		435028B9165DE9E00018EDB7 /* ViennaApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502892165DE9DF0018EDB7 /* ViennaApp.m */; };
 		43BA97FE1664804E00B95F35 /* DSClickableURLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */; };
 		4D36B44B1D37F91E009736C1 /* VNAArticleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D36B44A1D37F91E009736C1 /* VNAArticleTests.m */; };
-		4D36B4501D38007D009736C1 /* NSURL+URIEquivalence.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D36B44F1D38007D009736C1 /* NSURL+URIEquivalence.m */; };
 		664F87C713C62DFE00E266DE /* OpenReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 664F87C613C62DFE00E266DE /* OpenReader.m */; };
 		793C95331C42A0DD00984D4E /* FoldersFilterable.m in Sources */ = {isa = PBXBuildFile; fileRef = 793C95321C42A0DD00984D4E /* FoldersFilterable.m */; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -273,7 +273,6 @@
 		035B703519E0E4AE00197334 /* Vienna Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Vienna Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		035B703819E0E4AE00197334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		035B703919E0E4AE00197334 /* Vienna_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vienna_Tests.m; sourceTree = "<group>"; };
-		035B704119E0E4DC00197334 /* SubscriptionModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionModelTests.m; sourceTree = "<group>"; };
 		0377BDEB1D3A009B00960555 /* Vienna Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vienna Tests-Bridging-Header.h"; sourceTree = "<group>"; };
 		0379E2361A2082E600D58BFE /* AppearancePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppearancePreferencesViewController.h; sourceTree = "<group>"; };
 		0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearancePreferencesViewController.m; sourceTree = "<group>"; };
@@ -294,6 +293,8 @@
 		2F20FF8E25618627000F68C2 /* WebKitArticleTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKitArticleTab.swift; sourceTree = "<group>"; };
 		2F2280342271B041005D1023 /* ArticleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleContentView.swift; sourceTree = "<group>"; };
 		2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleStyleLoader.swift; sourceTree = "<group>"; };
+		2F437B3A25CF336400AD1B57 /* SubscriptionModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionModelTests.swift; sourceTree = "<group>"; };
+		2F437B3B25CF336400AD1B57 /* URL+URIEquivalence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+URIEquivalence.swift"; sourceTree = "<group>"; };
 		2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleChangingTabViewItem.swift; sourceTree = "<group>"; };
 		2F779110253B17C5004ED4EF /* BrowserContextMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserContextMenuDelegate.swift; sourceTree = "<group>"; };
 		2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewBrowser.xib; sourceTree = "<group>"; };
@@ -421,8 +422,6 @@
 		439824231666B3DB00FFE219 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		439824241666B3DB00FFE219 /* Release Instructions.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Release Instructions.md"; sourceTree = SOURCE_ROOT; };
 		4D36B44A1D37F91E009736C1 /* VNAArticleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VNAArticleTests.m; sourceTree = "<group>"; };
-		4D36B44E1D38007D009736C1 /* NSURL+URIEquivalence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+URIEquivalence.h"; sourceTree = "<group>"; };
-		4D36B44F1D38007D009736C1 /* NSURL+URIEquivalence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+URIEquivalence.m"; sourceTree = "<group>"; };
 		664F87C513C62DFE00E266DE /* OpenReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenReader.h; sourceTree = "<group>"; };
 		664F87C613C62DFE00E266DE /* OpenReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenReader.m; sourceTree = "<group>"; };
 		793C95311C42A0DD00984D4E /* FoldersFilterable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoldersFilterable.h; sourceTree = "<group>"; };
@@ -991,11 +990,10 @@
 				035B703919E0E4AE00197334 /* Vienna_Tests.m */,
 				4D36B44A1D37F91E009736C1 /* VNAArticleTests.m */,
 				3A8D9AE225A9DA4B0016F30F /* ArticleTests.swift */,
-				035B704119E0E4DC00197334 /* SubscriptionModelTests.m */,
+				2F437B3A25CF336400AD1B57 /* SubscriptionModelTests.swift */,
 				0383DC541B71B44700A11950 /* CriteriaTests.m */,
 				03EFD56F1B720AB0007EF284 /* ExportTests.m */,
-				4D36B44E1D38007D009736C1 /* NSURL+URIEquivalence.h */,
-				4D36B44F1D38007D009736C1 /* NSURL+URIEquivalence.m */,
+				2F437B3B25CF336400AD1B57 /* URL+URIEquivalence.swift */,
 				F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */,
 				F6AC41AB25A4FAF6007DED7B /* FeedDiscovererTests.swift */,
 				0377BDEB1D3A009B00960555 /* Vienna Tests-Bridging-Header.h */,
@@ -1984,15 +1982,15 @@
 			files = (
 				3A500129259A640D00AA6AAD /* ArticleStyleLoader.swift in Sources */,
 				3A500122259A63CB00AA6AAD /* ArticleConverter.swift in Sources */,
+				2F437B3D25CF336400AD1B57 /* URL+URIEquivalence.swift in Sources */,
 				3A8D9AE325A9DA4B0016F30F /* ArticleTests.swift in Sources */,
 				3A50011B259A5EF800AA6AAD /* WebViewArticleConverter.swift in Sources */,
-				035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */,
+				2F437B3C25CF336400AD1B57 /* SubscriptionModelTests.swift in Sources */,
 				F6AC41AC25A4FAF6007DED7B /* FeedDiscovererTests.swift in Sources */,
 				4D36B44B1D37F91E009736C1 /* VNAArticleTests.m in Sources */,
 				0383DC551B71B44700A11950 /* CriteriaTests.m in Sources */,
 				F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */,
 				3A50014E259AA2BE00AA6AAD /* WebKitArticleConverter.swift in Sources */,
-				4D36B4501D38007D009736C1 /* NSURL+URIEquivalence.m in Sources */,
 				035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */,
 				03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */,
 			);
