@@ -43,7 +43,6 @@
 @interface ArticleListView ()
 
 @property (weak, nonatomic) IBOutlet NSStackView *contentStackView;
-@property (strong, nonatomic) ArticleConverter *articleConverter;
 
 -(void)initTableView;
 -(BOOL)copyTableSelection:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard;
@@ -98,8 +97,6 @@
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
 	[nc addObserver:self selector:@selector(handleLoadFullHTMLChange:) name:@"MA_Notify_LoadFullHTMLChange" object:nil];
 	[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
-
-    _articleConverter = [[ArticleConverter alloc] init];
 
     [self initialiseArticleView];
 }
@@ -1001,7 +998,7 @@
 	Article * article = self.selectedArticle;
 	if (article == nil)
 	{
-		[articleText clearHTML];
+		[articleText setArticles:@[]];
 		[self hideEnclosureView];
 	}
 	else
@@ -1088,7 +1085,7 @@
 		isCurrentPageFullHTML = NO;
 		
 		// Clear out the page.
-		[articleText clearHTML];
+		[articleText setArticles:@[]];
 	}
 	else
 	{
@@ -1102,7 +1099,7 @@
 			
 			// Clear out the text so the user knows something happened in response to the
 			// click on the article.
-			[articleText clearHTML];
+			[articleText setArticles:@[]];
 			
 			// Now set the article to the URL in the RSS feed's article. NOTE: We use
 			// performSelector:withObject:afterDelay: here so that this link load gets
@@ -1112,8 +1109,6 @@
 		}
 		else
 		{
-			NSString * htmlText = [_articleConverter articleTextFromArray:msgArray];
-
 			// Clear the current URL.
 			[self clearCurrentURL];
 
@@ -1126,7 +1121,7 @@
 			isLoadingHTMLArticle = NO;
 			
 			// Set the article to the HTML from the RSS feed.
-			[articleText setHtml:htmlText];
+			[articleText setArticles:msgArray];
 		}
 	}
 	

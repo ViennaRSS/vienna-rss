@@ -19,10 +19,16 @@
 
 import Foundation
 
+protocol StyleListener {
+    var htmlTemplate: String { get set }
+    var cssStylesheet: URL { get set }
+    var jsScript: URL { get set }
+
+}
+
 @objc
 extension ArticleConverter {
 
-    @objc
     func setupStyle() {
         //update the article content style when the active display style has changed
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "MA_Notify_StyleChange"), object: nil, queue: nil) { [weak self] notification in
@@ -32,7 +38,6 @@ extension ArticleConverter {
         self.initForCurrentStyle()
     }
 
-    @objc
     func initForCurrentStyle() {
         self.initForStyle(Preferences.standard.displayStyle)
     }
@@ -80,7 +85,7 @@ extension ArticleConverter {
     func styleChangeFailed(_ name: String) {
         // If the template is invalid, revert to the default style
         // which should ALWAYS be valid.
-        assert(name != "Default", "Default style is corrupted!");
+        assert(name != "Default", "Default style is corrupted!")
 
         // Warn the user.
         let title = NSLocalizedString("The style %@ appears to be missing or corrupted", comment: "")
@@ -93,47 +98,4 @@ extension ArticleConverter {
         // style change to happen immediately.
         Preferences.standard.setDisplayStyle("Default", withNotification: false)
     }
-
-    /* TODO: finish converting this method to swift
-    func articleText(_ articles: [Article]) {
-        var html = """
-            <!DOCTYPE html><html><head><meta content="text/html; charset=UTF-8">
-            <base href="\(cleanedUpUrlFromString(articles[0].link)? .absoluteString ?? "")">
-        """
-
-        if cssStylesheet != "" {
-            html.append("""
-                    <link rel="stylesheet" type="text/css" href="\(cssStylesheet)">
-                """)
-        }
-
-        if jsScript != "" {
-            html.append("""
-                    <script type="text/javascript" src="\(jsScript)">
-                """)
-        }
-
-        html.append("""
-                <meta http-equiv="Pragma" content="no-cache">
-                </head><body>
-            """)
-
-        for (index, article) in articles.enumerated() {
-
-            var articleHtml = ""
-
-            if htmlTemplate != nil {
-                var articleBody = article.body ?? ""
-                //...
-            }
-
-            //...
-
-            if index > 0 {
-                html.append("<hr><br />")
-            }
-        }
-
-        //...
-    }*/
 }

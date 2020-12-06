@@ -23,10 +23,17 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
 
     var listView: ArticleViewDelegate?
 
-    override var html: String {
-        get { super.html }
-        set {
-            webView.loadHTMLString(newValue, baseURL: nil)
+    var articles: [Article] = [] {
+        didSet {
+            guard !articles.isEmpty else {
+                self.clearHTML()
+                return
+            }
+
+            let (htmlPath, accessPath) = converter.prepareArticleDisplay(self.articles)
+
+            webView.loadFileURL(htmlPath, allowingReadAccessTo: accessPath)
+            //TODO: prepare article files
             self.showAddressBar(false)
         }
     }
@@ -38,6 +45,8 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
             showAddressBar(true)
         }
     }
+
+    let converter = WebKitArticleConverter()
 
     @objc
     init() {
@@ -55,7 +64,11 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
     }
 
     func clearHTML() {
-        html = ""
+        guard let blankUrl = URL(string: "about:blank") else {
+            return
+        }
+        self.url = blankUrl
+        self.loadTab()
     }
 
     func printDocument(_ sender: Any) {

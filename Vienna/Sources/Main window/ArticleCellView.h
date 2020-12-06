@@ -19,7 +19,7 @@
 	NSTableView *__weak _listView;
 }
 
-@property (readonly, strong)id<ArticleContentView> articleView;
+@property (readonly, strong) NSObject<ArticleContentView> *articleView;
 @property (readonly, strong) ArticleConverter * articleConverter;
 @property (readonly, strong)NSProgressIndicator * progressIndicator;
 @property BOOL inProgress;
