@@ -357,10 +357,6 @@
     NSUserNotificationCenter.defaultUserNotificationCenter.delegate = self;
 
     // Schedule the background refresh
-    self.scheduler = [[NSBackgroundActivityScheduler alloc] initWithIdentifier:@"com.vienna-rss.Vienna"];
-    self.scheduler.interval = prefs.refreshFrequency;
-    self.scheduler.repeats = YES;
-    self.scheduler.qualityOfService = NSQualityOfServiceUtility;
     [self scheduleBackgroundRefresh];
 
 	// Register to be notified when the scripts folder changes.
@@ -1820,12 +1816,27 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 }
 
 - (void)handleCheckFrequencyChange:(NSNotification *)nc {
-    [self.scheduler invalidate];
-    self.scheduler.interval = [Preferences standardPreferences].refreshFrequency;
+    if (self.scheduler) {
+        [self.scheduler invalidate];
+        self.scheduler = nil;
+    }
     [self scheduleBackgroundRefresh];
 }
 
 - (void)scheduleBackgroundRefresh {
+    NSInteger interval = [Preferences standardPreferences].refreshFrequency;
+
+    // NSBackgroundActivityScheduler requires an interval value >= 1. A value
+    // less than that raises an unhandled exception.
+    if (interval < 1) {
+        return;
+    }
+
+    self.scheduler = [[NSBackgroundActivityScheduler alloc] initWithIdentifier:@"com.vienna-rss.Vienna"];
+    self.scheduler.interval = interval;
+    self.scheduler.repeats = YES;
+    self.scheduler.qualityOfService = NSQualityOfServiceUtility;
+
     typeof(self) __weak weakSelf = self;
     [self.scheduler scheduleWithBlock:^(NSBackgroundActivityCompletionHandler completionHandler) {
         dispatch_async(dispatch_get_main_queue(), ^{
