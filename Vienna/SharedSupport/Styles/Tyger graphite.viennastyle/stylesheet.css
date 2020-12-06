@@ -1,25 +1,48 @@
+/* custom properties */
+:root {
+    --background-color: #fff;
+    --text-color: #333;
+    --link: #009;
+    --hover: #F30;
+    --link-visited: #66F;
+    --author-name: #600;
+    --info-separator: #ddd;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #111111;
+        --text-color: #fefefe;
+        --link: #00D;
+        --hover: #D30;
+        --link-visited: #66F;
+        --author-name: #900;
+        --info-separator: #333;
+    }
+}
+
 body {
   margin: 0;
   padding: 0 0 10px;
-  background: #fff;
-  color: #333;
+  background: var(--background-color);
+  color: var(--text-color);
   font: medium/150% "Lucida Grande", sans-serif;
 }
 
 a:link {
-  color: #009;
+  color: var(--link);
   font-weight: bold;
   text-decoration: none;
 }
 
 a:visited {
-  color: #66F;
+  color: var(--link-visited);
   font-weight: bold;
   text-decoration: none;
 }
 
 a:hover {
-  color: #F30;
+  color: var(--hover);
   text-decoration: underline;
 }
 
@@ -42,7 +65,7 @@ a:hover {
 .info {
   margin: 0 15px 5px;
   padding: 5px 0;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--info-separator);
 }
 
 .info span {
@@ -62,7 +85,7 @@ a:hover {
 .articleBodyStyle {
   padding: 0 15px;
   font: medium/150% "Lucida Grande", sans-serif;
-  color: #333;
+  color: var(--text-color);
   overflow:auto;
 }
 
@@ -71,11 +94,11 @@ a:hover {
 }
 
 .articleDetails a {
-  color: #000;
+  color: var(--text-color);
 }
 
 .articleAuthorStyle {
-  color: #600;
+  color: var(--author-name);
 }
 
 /* fix a 100% max size to potentially problematic elements */
