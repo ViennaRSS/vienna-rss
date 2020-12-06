@@ -18,3 +18,24 @@
 //
 
 import Foundation
+
+public class WebKitArticleConverter: ArticleConverter {
+    func prepareArticleDisplay(_ articles: [Article]) -> (htmlPath: URL, accessPath: URL) {
+
+        guard !articles.isEmpty, let supportPathString = Bundle.main.sharedSupportPath else {
+            fatalError("an empty articles array cannot be presented, and access to the styles directory must be granted")
+        }
+
+        let supportPathUrl = URL(fileURLWithPath: supportPathString)
+        let stylesPath = supportPathUrl.appendingPathComponent("Styles").appendingPathComponent("Default.viennastyle")
+
+        let cachesPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)
+        let targetDirectory = URL(fileURLWithPath: cachesPath[0])
+
+        let htmlPath = targetDirectory.appendingPathComponent("article.html")
+
+        //TODO: move all files from styles to targetDirectory, fix relative references, write expanded html template to targetDirectory/article.html
+
+        return (htmlPath: htmlPath, accessPath: targetDirectory)
+    }
+}

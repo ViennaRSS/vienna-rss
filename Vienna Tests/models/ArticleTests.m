@@ -29,6 +29,7 @@ static NSString * const Body =
 @interface ArticleTests : XCTestCase
 
 @property (nonatomic, strong) Article *article;
+@property (nonatomic, strong) ArticleConverter *articleConverter;
 
 @end
 
@@ -39,6 +40,8 @@ static NSString * const Body =
     [super setUp];
 
     self.article = [[Article alloc] initWithGuid:GUID];
+
+    self.articleConverter = [[ArticleConverter alloc] init];
 }
 
 - (void)testAccessInstanceVariablesDirectly
@@ -284,7 +287,7 @@ static NSString * const Body =
 
     self.article.link = Link;
 
-    NSString *expandedString = [self.article expandTags:string withConditional:YES];
+    NSString *expandedString = [self.articleConverter expandTagsOfArticle:self.article intoTemplate:string withConditional:YES];
 
     XCTAssertEqualObjects(expandedString, expectedString);
 }
@@ -296,7 +299,7 @@ static NSString * const Body =
 
     self.article.title = Title;
 
-    NSString *expandedString = [self.article expandTags:string withConditional:YES];
+    NSString *expandedString = [self.articleConverter expandTagsOfArticle:self.article intoTemplate:string withConditional:YES];
 
     XCTAssertEqualObjects(expandedString, expectedString);
 }
@@ -308,7 +311,7 @@ static NSString * const Body =
 
     self.article.body = Body;
 
-    NSString *expandedString = [self.article expandTags:string withConditional:YES];
+    NSString *expandedString = [self.articleConverter expandTagsOfArticle:self.article intoTemplate:string withConditional:YES];
 
     XCTAssertEqualObjects(expandedString, expectedString);
 }
@@ -320,7 +323,7 @@ static NSString * const Body =
 
     self.article.author = Author;
 
-    NSString *expandedString = [self.article expandTags:string withConditional:YES];
+    NSString *expandedString = [self.articleConverter expandTagsOfArticle:self.article intoTemplate:string withConditional:YES];
 
     XCTAssertEqualObjects(expandedString, expectedString);
 }
@@ -332,7 +335,7 @@ static NSString * const Body =
 
     self.article.enclosure = Enclosure;
 
-    NSString *expandedString = [self.article expandTags:string withConditional:YES];
+    NSString *expandedString = [self.articleConverter expandTagsOfArticle:self.article intoTemplate:string withConditional:YES];
 
     XCTAssertEqualObjects(expandedString, expectedString);
 }
@@ -343,21 +346,18 @@ static NSString * const Body =
     NSString *expectedString = EnclosureFilename;
 
     self.article.enclosure = Enclosure;
-
-    NSString *expandedString = [self.article expandTags:string withConditional:YES];
+    NSString *expandedString = [self.articleConverter expandTagsOfArticle:self.article intoTemplate:string withConditional:YES];
 
     XCTAssertEqualObjects(expandedString, expectedString);
 }
 
 - (void)testURLIDNinArticleView
 {
-    ArticleConverter * converter = [[ArticleConverter alloc] init];
-
     self.article.link = @"http://ουτοπία.δπθ.gr/نجيب_محفوظ/";
     NSString * htmlTextFromIDNALink = [converter articleTextFromArray:@[self.article]];
 
     self.article.link = @"http://xn--kxae4bafwg.xn--pxaix.gr/%D9%86%D8%AC%D9%8A%D8%A8_%D9%85%D8%AD%D9%81%D9%88%D8%B8/";
-    NSString * htmlTextFromResolvedIDNALink = [converter articleTextFromArray:@[self.article]];
+    NSString * htmlTextFromResolvedIDNALink = [self.articleConverter articleTextFromArray:@[self.article]];
 
     XCTAssertEqualObjects(htmlTextFromIDNALink, htmlTextFromResolvedIDNALink);
 }

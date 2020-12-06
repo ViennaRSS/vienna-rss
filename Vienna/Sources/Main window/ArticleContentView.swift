@@ -11,8 +11,7 @@ import Foundation
 protocol ArticleContentView: Tab {
 
     var listView: ArticleViewDelegate? { get set }
-    var html: String { get set }
-	func clearHTML()
+    var articles: [Article] { get set }
 
 	@objc(keyDown:)
 	func keyDown(with event: NSEvent)

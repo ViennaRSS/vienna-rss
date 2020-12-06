@@ -23,6 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WebViewArticleConverter : ArticleConverter
 
+/* articleTextFromArray
+ * Create an HTML string comprising all articles in the specified array formatted using
+ * the currently selected template.
+ */
+-(NSString *)articleTextFromArray:(NSArray<Article *> *)msgArray;
+
 @end
 
 NS_ASSUME_NONNULL_END

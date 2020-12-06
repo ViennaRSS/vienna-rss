@@ -26,11 +26,13 @@
 #import "StringExtensions.h"
 #import "Article.h"
 #import "BaseView.h"
+#import "WebViewArticleConverter.h"
 #import "Vienna-Swift.h"
 
 @interface ArticleView () <WebUIDelegate, WebFrameLoadDelegate>
 
 @property (strong, nonatomic) OverlayStatusBar *statusBar;
+@property (strong, nonatomic) WebViewArticleConverter *converter;
 
 @end
 
@@ -83,8 +85,15 @@
     html = @"";
 }
 
+-(void)setArticles:(NSArray<Article *> *)articles {
+    if (articles.count > 0) {
+        [self setHtml:[self.converter articleTextFromArray:articles]];
+    } else {
+        [self clearHTML];
+    }
+}
 
-/* setHTML
+/* setHtml
  * Loads the web view with the specified HTML text.
  */
 - (void)setHtml:(NSString *)htmlText {
@@ -272,6 +281,10 @@
 }
 
 - (void)activateAddressBar {
+    //TODO
+}
+
+- (void)activateWebView {
     //TODO
 }
 

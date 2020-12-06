@@ -26,11 +26,9 @@
 @interface ArticleView: TabbedWebView <ArticleContentView>
 
 // Public functions
--(void)clearHTML;
--(void)setHTML:(NSString *)htmlText;
--(void)keyDown:(NSEvent *)theEvent;
+-(void)setArticles:(nonnull NSArray<Article *> *)articles;
+-(void)keyDown:(nonnull NSEvent *)theEvent;
 
-@property (strong, nonatomic) id<ArticleViewDelegate> listView;
-@property (strong, nonatomic) NSString *html;
+@property (nonnull, strong, nonatomic) id<ArticleViewDelegate> listView;
 
 @end

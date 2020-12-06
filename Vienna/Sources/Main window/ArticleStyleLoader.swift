@@ -14,7 +14,7 @@ class ArticleStyleLoader: NSObject {
 	private static var styles: NSMutableDictionary = NSMutableDictionary()
 
 	@objc static var stylesMap: NSMutableDictionary {
-		return loaded ? styles : reloadStylesMap()
+		loaded ? styles : reloadStylesMap()
 	}
 
 	@objc

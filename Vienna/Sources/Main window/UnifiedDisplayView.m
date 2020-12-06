@@ -744,13 +744,14 @@
 	cellView.folderId = articleFolderId;
 	cellView.articleRow = row;
 	cellView.listView = articleList;
-	//TODO: ArticleContentView does not have all methods from WebView that are used here...
-	/*id<ArticleContentView> view = cellView.articleView;
+	NSObject<ArticleContentView> *articleContentView = cellView.articleView;
+    NSView *view = [articleContentView isKindOfClass:WebKitArticleTab.class]
+    ? ((WebKitArticleTab *)articleContentView).view
+    : ((ArticleView *) articleContentView);
 	[view removeFromSuperviewWithoutNeedingDisplay];
 	[cellView setInProgress:YES];
-	NSString * htmlText = [view articleTextFromArray:@[theArticle]];
-	[view setHTML:htmlText];
-	[cellView addSubview:view];*/
+	[articleContentView setArticles:@[theArticle]];
+	[cellView addSubview:view];
     return cellView;
 }
 
