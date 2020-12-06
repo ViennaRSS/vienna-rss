@@ -14,3 +14,4 @@
 #import "ViennaApp.h"
 #import "WebViewBrowser.h"
 #import "ArticleConverter.h"
+#import "WKPreferences+Private.h"
