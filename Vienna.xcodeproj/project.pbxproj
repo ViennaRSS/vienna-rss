@@ -92,7 +92,6 @@
 		3A60E60B2114AD740004D81D /* URLRequestExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A60E60A2114AD740004D81D /* URLRequestExtensions.m */; };
 		3A7BD0DD1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7BD0DC1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m */; };
 		3AEE7DE91695FC570018A17D /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* vienna_public_key.pem */; };
-		3AF896C71CD8FDB800A9FA22 /* AppController+Sparkle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF896C61CD8FDB800A9FA22 /* AppController+Sparkle.m */; };
 		435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 435026E5165DD8BE0018EDB7 /* ArticleRef.m */; };
 		4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */; };
 		43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502848165DE9DF0018EDB7 /* ActivityLog.m */; };
@@ -158,7 +157,8 @@
 		B283D5A410986CE600A5CD72 /* RichXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3281A4084161EB00A7AD5A /* RichXMLParser.m */; };
 		B283D5A510986CE600A5CD72 /* XMLTag.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */; };
 		B81B536425565CD700C65459 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B536325565CD700C65459 /* Constants.swift */; };
-		B85F93E5255AE48000B54B68 /* PopUpButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F93E4255AE48000B54B68 /* PopUpButtonExtensions.swift */; };
+		B856F8E125782F8100E91AC7 /* AppController+Sparkle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856F8E025782F8100E91AC7 /* AppController+Sparkle.swift */; };
+		B85F93E5255AE48000B54B68 /* NSPopUpButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F93E4255AE48000B54B68 /* NSPopUpButtonExtensions.swift */; };
 		B8B9D6D323685C7400EAE65C /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B9D6D223685C7400EAE65C /* FeedItem.swift */; };
 		EA43C70914A370DB00F2D843 /* VTPG_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = EA43C70814A370DB00F2D843 /* VTPG_Common.m */; };
 		F41CA694218F56140072F734 /* NSWorkspace+OpenWithMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F41CA692218F56130072F734 /* NSWorkspace+OpenWithMenu.m */; };
@@ -325,15 +325,13 @@
 		3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "Sparkle-setup.sh"; sourceTree = "<group>"; };
 		3A60E6092114AD740004D81D /* URLRequestExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URLRequestExtensions.h; sourceTree = "<group>"; };
 		3A60E60A2114AD740004D81D /* URLRequestExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = URLRequestExtensions.m; sourceTree = "<group>"; };
-		3A6CC18623BBA49D0084ABEE /* CS-ID.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "CS-ID.xcconfig"; path = "Scripts/Resources/CS-ID.xcconfig"; sourceTree = SOURCE_ROOT; };
+		3A6CC18623BBA49D0084ABEE /* Codesigning.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Codesigning.xcconfig; sourceTree = "<group>"; };
 		3A7BD0DB1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VNAVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
 		3A7BD0DC1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VNAVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
 		3A932D8823BB999A009B8061 /* Vienna.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Vienna.entitlements; sourceTree = "<group>"; };
 		3A932D8923BB999A009B8061 /* ViennaDeployment.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = ViennaDeployment.entitlements; sourceTree = "<group>"; };
 		3ADBA70C23DDAFCA00156722 /* Notarize.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = Notarize.sh; sourceTree = "<group>"; };
 		3AEE7DE81695FC570018A17D /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vienna_public_key.pem; sourceTree = "<group>"; };
-		3AF896C51CD8FDB800A9FA22 /* AppController+Sparkle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppController+Sparkle.h"; sourceTree = "<group>"; };
-		3AF896C61CD8FDB800A9FA22 /* AppController+Sparkle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppController+Sparkle.m"; sourceTree = "<group>"; };
 		430C4ADB1661753F0079C9FC /* autorevision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autorevision.h; sourceTree = "<group>"; };
 		430C4AE0166175C20079C9FC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		435026E5165DD8BE0018EDB7 /* ArticleRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ArticleRef.m; sourceTree = "<group>"; };
@@ -464,7 +462,8 @@
 		B2E09F2B111192B7003B530A /* DSClickableURLTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSClickableURLTextField.h; sourceTree = "<group>"; };
 		B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSClickableURLTextField.m; sourceTree = "<group>"; };
 		B81B536325565CD700C65459 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		B85F93E4255AE48000B54B68 /* PopUpButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButtonExtensions.swift; sourceTree = "<group>"; };
+		B856F8E025782F8100E91AC7 /* AppController+Sparkle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppController+Sparkle.swift"; sourceTree = "<group>"; };
+		B85F93E4255AE48000B54B68 /* NSPopUpButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPopUpButtonExtensions.swift; sourceTree = "<group>"; };
 		B8B9D6D1236850DE00EAE65C /* Vienna_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vienna_Prefix.pch; sourceTree = "<group>"; };
 		B8B9D6D223685C7400EAE65C /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		EA43C70714A370DB00F2D843 /* VTPG_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPG_Common.h; sourceTree = "<group>"; };
@@ -1225,7 +1224,6 @@
 				F62580A81E286A8B0035E43C /* Localizable.strings */,
 				F6FEE7AF209E500800BCAEC6 /* Localizable.stringsdict */,
 				3AEE7DE81695FC570018A17D /* vienna_public_key.pem */,
-				3A6CC18623BBA49D0084ABEE /* CS-ID.xcconfig */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1375,6 +1373,7 @@
 				430C4AE0166175C20079C9FC /* Info.plist */,
 				3A932D8823BB999A009B8061 /* Vienna.entitlements */,
 				3A932D8923BB999A009B8061 /* ViennaDeployment.entitlements */,
+				3A6CC18623BBA49D0084ABEE /* Codesigning.xcconfig */,
 			);
 			path = Vienna;
 			sourceTree = "<group>";
@@ -1410,8 +1409,7 @@
 				4350284C165DE9DF0018EDB7 /* AppController.m */,
 				F69140E21E71B94200D51BFF /* AppController+Notifications.h */,
 				F69140E31E71B94200D51BFF /* AppController+Notifications.m */,
-				3AF896C51CD8FDB800A9FA22 /* AppController+Sparkle.h */,
-				3AF896C61CD8FDB800A9FA22 /* AppController+Sparkle.m */,
+				B856F8E025782F8100E91AC7 /* AppController+Sparkle.swift */,
 				4350288F165DE9DF0018EDB7 /* URLHandlerCommand.h */,
 				43502890165DE9DF0018EDB7 /* URLHandlerCommand.m */,
 				43502891165DE9DF0018EDB7 /* ViennaApp.h */,
@@ -1606,7 +1604,7 @@
 				3A23F13315276935008AF863 /* NSNotificationAdditions.h */,
 				4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */,
 				F69964F61F13029500FC8493 /* OverlayStatusBar.swift */,
-				B85F93E4255AE48000B54B68 /* PopUpButtonExtensions.swift */,
+				B85F93E4255AE48000B54B68 /* NSPopUpButtonExtensions.swift */,
 				AAF3B14006095E7B0025CC7F /* StringExtensions.h */,
 				AAF3B14106095E7B0025CC7F /* StringExtensions.m */,
 				031E082E19DFA3A900194F9F /* SubscriptionModel.h */,
@@ -1645,8 +1643,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA4F9AB20855422400C18279 /* Build configuration list for PBXNativeTarget "Vienna" */;
 			buildPhases = (
-				8D15AC300486D014006FF6A4 /* Sources */,
 				F68CBDA020323974003A6A9E /* Run SwiftLint */,
+				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
 				AAEF2001085D685900A0E675 /* Copy Shared Support Files */,
@@ -1992,7 +1990,6 @@
 				03B35B841B75E9E0001DB06D /* NSDate+Vienna.m in Sources */,
 				2F5AC4202198E1AA00A7EDDE /* TitleChangingTabViewItem.swift in Sources */,
 				2F2280382271B18A005D1023 /* ArticleStyleLoader.swift in Sources */,
-				3AF896C71CD8FDB800A9FA22 /* AppController+Sparkle.m in Sources */,
 				AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */,
 				AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */,
 				2F07D28724BCFBA700E01663 /* Browser.swift in Sources */,
@@ -2036,13 +2033,14 @@
 				4350289E165DE9E00018EDB7 /* WebViewBrowser.m in Sources */,
 				F628DFE31ED2698A00FACFD3 /* FilterView.swift in Sources */,
 				F64C2CCC1E83825D00ED4E04 /* DateFormatterExtension.m in Sources */,
-				B85F93E5255AE48000B54B68 /* PopUpButtonExtensions.swift in Sources */,
+				B85F93E5255AE48000B54B68 /* NSPopUpButtonExtensions.swift in Sources */,
 				4350289F165DE9E00018EDB7 /* Constants.m in Sources */,
 				2F20FF8F25618627000F68C2 /* WebKitArticleTab.swift in Sources */,
 				034981411A20701600014F29 /* AdvancedPreferencesViewController.m in Sources */,
 				435028A0165DE9E00018EDB7 /* DownloadManager.m in Sources */,
 				435028A1165DE9E00018EDB7 /* DownloadWindow.m in Sources */,
 				0379E23B1A20831600D58BFE /* SyncingPreferencesViewController.m in Sources */,
+				B856F8E125782F8100E91AC7 /* AppController+Sparkle.swift in Sources */,
 				435028A2165DE9E00018EDB7 /* EmptyTrashWarning.m in Sources */,
 				435028A3165DE9E00018EDB7 /* Export.m in Sources */,
 				435028A4165DE9E00018EDB7 /* FeedCredentials.m in Sources */,
@@ -2859,7 +2857,7 @@
 		};
 		3AE9F73923CB80C900DC6D8A /* Deployment */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3A6CC18623BBA49D0084ABEE /* CS-ID.xcconfig */;
+			baseConfigurationReference = 3A6CC18623BBA49D0084ABEE /* Codesigning.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2921,7 +2919,7 @@
 		};
 		AA4F9AB40855422400C18279 /* Deployment */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3A6CC18623BBA49D0084ABEE /* CS-ID.xcconfig */;
+			baseConfigurationReference = 3A6CC18623BBA49D0084ABEE /* Codesigning.xcconfig */;
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -3064,7 +3062,7 @@
 		};
 		EAAF335B14BDE402002A8837 /* Deployment */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3A6CC18623BBA49D0084ABEE /* CS-ID.xcconfig */;
+			baseConfigurationReference = 3A6CC18623BBA49D0084ABEE /* Codesigning.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "Archive and Prep for Upload";
 			};
@@ -3246,7 +3244,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ViennaRSS/MMTabBarView";
 			requirement = {
-				branch = v/1.4.11;
+				branch = v/1.4.12;
 				kind = branch;
 			};
 		};

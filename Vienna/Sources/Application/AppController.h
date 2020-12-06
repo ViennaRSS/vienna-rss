@@ -19,7 +19,6 @@
 //
 
 @import Cocoa;
-@import IOKit.pwr_mgt;
 @import WebKit;
 
 #define APPCONTROLLER ((AppController *)[NSApp delegate])
@@ -61,7 +60,6 @@
 	NSMutableDictionary * scriptPathMappings;
 	NSStatusItem * appStatusItem;
 	NSDictionary * standardURLs;
-	NSTimer * checkTimer;
 	NSInteger lastCountOfUnread;
 	NSMenuItem * scriptsMenuItem;
 	BOOL didCompleteInitialisation;

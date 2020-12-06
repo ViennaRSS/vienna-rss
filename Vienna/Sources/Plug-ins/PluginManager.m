@@ -111,8 +111,9 @@
         {
             NSString * bundleIdentifier = onePlugin[@"BundleIdentifier"];
 
-            if (![[NSWorkspace sharedWorkspace] absolutePathForAppBundleWithIdentifier: bundleIdentifier])
+            if (![NSWorkspace.sharedWorkspace URLForApplicationWithBundleIdentifier:bundleIdentifier]) {
                 continue;
+            }
         }
 
         NSString * pluginName = onePlugin[@"Name"];

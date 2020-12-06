@@ -14,7 +14,7 @@
 // Deal ourselves with drawing the text inside the cell
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
     /* if your values can be attributed strings, make them white when selected */
-    if (self.isHighlighted && self.backgroundStyle == NSBackgroundStyleDark) {
+    if (self.isHighlighted && self.backgroundStyle == NSBackgroundStyleEmphasized) {
         NSMutableAttributedString *whiteString = self.attributedStringValue.mutableCopy;
         [whiteString addAttribute:NSForegroundColorAttributeName
                             value:[NSColor whiteColor]

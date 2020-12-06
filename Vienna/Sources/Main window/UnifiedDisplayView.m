@@ -797,8 +797,13 @@
 
 	// Set up the pasteboard
 	[pboard declareTypes:@[MA_PBoardType_RSSItem, @"WebURLsWithTitlesPboardType", NSPasteboardTypeString, NSPasteboardTypeHTML] owner:self];
-	if (count == 1)
-		[pboard addTypes:@[MA_PBoardType_url, MA_PBoardType_urln, NSURLPboardType] owner:self];
+    if (count == 1) {
+        if (@available(macOS 10.13, *)) {
+            [pboard addTypes:@[MA_PBoardType_url, MA_PBoardType_urln, NSPasteboardTypeURL] owner:self];
+        } else {
+            [pboard addTypes:@[MA_PBoardType_url, MA_PBoardType_urln, NSURLPboardType] owner:self];
+        }
+    }
 
 	// Open the HTML string
 	[fullHTMLText appendString:@"<html><body>"];

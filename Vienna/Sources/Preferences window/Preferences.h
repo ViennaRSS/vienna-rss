@@ -69,7 +69,6 @@ NS_ASSUME_NONNULL_BEGIN
 	NSUInteger concurrentDownloads;
 	NSString * syncServer;
 	NSString * syncingUser;
-    NSString * userAgentName;
 }
 
 // String constants for NSNotificationCenter
