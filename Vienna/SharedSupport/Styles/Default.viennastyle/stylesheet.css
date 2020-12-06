@@ -12,9 +12,9 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --background-color: #111111;
-        --text-color: #fefefe;
-        --link: #00D;
-        --hover: #D30;
+        --text-color: #d7d7d8;
+        --link: #1d79cd;
+        --hover: #b20;
         --link-visited: #66F;
         --author-name: #900;
         --info-separator: #333;
