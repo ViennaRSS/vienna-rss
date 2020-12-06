@@ -8,6 +8,10 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.6.2
+-----
+- Fix main window not appearing when "checking for new articles" preference is set to "Manually" 
+
 3.6.1
 -----
 - Fix brutal resizing of article view column in vertical layout
