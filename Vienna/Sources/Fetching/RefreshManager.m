@@ -1078,8 +1078,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 {
     for (id obj in [self.redirect301WaitQueue reverseObjectEnumerator]) {
         NSURLSessionTask *theConnector = (NSURLSessionTask *)obj;
-        NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
         [self.redirect301WaitQueue removeObject:obj];
+        NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
         ActivityItem *connectorItem = ((NSDictionary *)[originalRequest userInfo])[@"log"];
         [connectorItem appendDetail:NSLocalizedString(@"Redirection attempt treated as temporary for safety concern", nil)];
     }
@@ -1095,9 +1095,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 {
     for (id obj in [self.redirect301WaitQueue reverseObjectEnumerator]) {
         NSURLSessionTask *theConnector = (NSURLSessionTask *)obj;
-        NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
         [self.redirect301WaitQueue removeObject:obj];
-        NSString * theNewURLString = theConnector.originalRequest.URL.absoluteString;
+        NSString * theNewURLString = theConnector.currentRequest.URL.absoluteString;
+        NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
         Folder * theFolder = (Folder *)((NSDictionary *)[originalRequest userInfo])[@"folder"];
         [[Database sharedManager] setFeedURL:theNewURLString forFolder:theFolder.itemId];
         ActivityItem *connectorItem = ((NSDictionary *)[originalRequest userInfo])[@"log"];
