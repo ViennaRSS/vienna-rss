@@ -1820,13 +1820,14 @@
 			files = (
 			);
 			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(SHARED_SUPPORT_FOLDER_PATH)/Sparkle.framework",
 			);
 			name = "Configure Sparkle";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/Sparkle-setup.sh\"\n";
+			shellScript = "# Workaround for this bug: https://bugs.swift.org/browse/SR-13840\nif [ -d \"${SCRIPT_INPUT_FILE_0}\" ]; then\n  echo \"note: Removing duplicate Sparkle framework\"\n  rm -r \"${SCRIPT_INPUT_FILE_0}\"\nfi\n\n\"${SRCROOT}/Scripts/Sparkle-setup.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3A6CC18823BBD1BF0084ABEE /* Archival Checks */ = {
