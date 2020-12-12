@@ -27,7 +27,7 @@ extension AppController: SUUpdaterDelegate {
 			return nil
 		}
 
-		if Preferences.standard()?.alwaysAcceptBetas == true {
+		if Preferences.standard().alwaysAcceptBetas == true {
 			guard let referenceURL = URL(string: urlString) else {
 				print("Invalid Sparkle feed URL : \(urlString)")
 				return nil
@@ -43,7 +43,7 @@ extension AppController: SUUpdaterDelegate {
 	}
 
 	public func updaterWillRelaunchApplication(_ updater: SUUpdater) {
-		Preferences.standard()?.handleUpdateRestart()
+		Preferences.standard().handleUpdateRestart()
 	}
 
 }

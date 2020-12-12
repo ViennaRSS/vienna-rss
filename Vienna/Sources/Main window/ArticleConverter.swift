@@ -19,17 +19,10 @@
 
 import Foundation
 
-protocol StyleListener {
-    var htmlTemplate: String { get set }
-    var cssStylesheet: URL { get set }
-    var jsScript: URL { get set }
-
-}
-
 @objc
 extension ArticleConverter {
 
-    func setupStyle() {
+    func setup() {
         //update the article content style when the active display style has changed
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "MA_Notify_StyleChange"), object: nil, queue: nil) { [weak self] notification in
             self?.initForCurrentStyle()
@@ -47,39 +40,12 @@ extension ArticleConverter {
             self.styleChangeFailed(name)
             return
         }
-
         let path = URL(fileURLWithPath: pathString)
+        self.initForStyle(at: path)
+    }
 
-        guard let templateString = try? String(contentsOf: path.appendingPathComponent("template.html")),
-            !templateString.isEmpty else {
-            self.styleChangeFailed(name)
-            return
-        }
-
-        htmlTemplate = templateString
-
-        cssStylesheet = cleanedUpUrlFromString("file://localhost" + path.appendingPathComponent("stylesheet.css").path)?.absoluteString ?? ""
-
-        let jsScriptPath = path.appendingPathComponent("script.js").path
-        if FileManager.default.fileExists(atPath: jsScriptPath) {
-            jsScript = cleanedUpUrlFromString("file://localhost" + jsScriptPath)?.absoluteString ?? ""
-        } else {
-            jsScript = ""
-        }
-
-        let nonEmptyRegex: NSRegularExpression? = try? NSRegularExpression(pattern: "\\S")
-        let stringRange = { (s: String.SubSequence) in
-            NSRange(location: 0, length: s.utf8.count) }
-        let nonEmptyMatchExists = { (s: String.SubSequence) in
-            nonEmptyRegex?.firstMatch(in: String(s), range: stringRange(s)) != nil }
-
-        let firstNonEmptyLine = htmlTemplate.split(separator: "\n").first(where: nonEmptyMatchExists)?.lowercased() ?? ""
-        guard !(firstNonEmptyLine.starts(with: "<html>") || firstNonEmptyLine.starts(with: "<!doctype")) else {
-            self.styleChangeFailed(name)
-            return
-        }
-
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "MA_Notify_ArticleViewChange"), object: nil)
+    func initForStyle(at path: URL) {
+        fatalError("must be overridden by subclasses")
     }
 
     func styleChangeFailed(_ name: String) {
