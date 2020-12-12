@@ -26,7 +26,6 @@
 #import "StringExtensions.h"
 #import "Article.h"
 #import "BaseView.h"
-#import "WebViewArticleConverter.h"
 #import "Vienna-Swift.h"
 
 @interface ArticleView () <WebUIDelegate, WebFrameLoadDelegate>

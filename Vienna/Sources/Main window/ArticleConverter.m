@@ -28,7 +28,7 @@
 {
     self = [super init];
     if (self) {
-        [self setupStyle];
+        [self setup];
     }
     return self;
 }
@@ -61,9 +61,9 @@
         // this is equivalent with replacementString = [self performSelector:selector];
         // http://stackoverflow.com/questions/7017281/performselector-may-cause-a-leak-because-its-selector-is-unknown
         // see also : http://stackoverflow.com/questions/7043999/im-writing-a-button-class-in-objective-c-with-arc-how-do-i-prevent-clangs-m
-        IMP imp = [self methodForSelector:selector];
+        IMP imp = [theArticle methodForSelector:selector];
         NSString * (*func)(id, SEL) = (void *)imp;
-        replacementString = func(self, selector);
+        replacementString = func(theArticle, selector);
 
         if (replacementString == nil)
             [newString deleteCharactersInRange:NSMakeRange(tagStartIndex, tagLength)];
@@ -79,6 +79,82 @@
         }
     }
     return (cond && hasOneTag) ? @"" : newString;
+}
+
+/* articleTextFromArray
+ * Create an HTML string comprising all articles in the specified array formatted using
+ * the currently selected template.
+ */
+-(NSString *)articleTextFromArray:(NSArray<Article *> *)msgArray
+{
+    NSUInteger index;
+
+    NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<!DOCTYPE html><html><head><meta content=\"text/html; charset=UTF-8\">"];
+    // the link for the first article will be the base URL for resolving relative URLs
+    [htmlText appendString:@"<base href=\""];
+    [htmlText appendString:[NSString stringByCleaningURLString:msgArray[0].link]];
+    [htmlText appendString:@"\">"];
+    if (self.cssStylesheet != nil && self.cssStylesheet.length != 0) {
+        [htmlText appendString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\""];
+        [htmlText appendString:self.cssStylesheet];
+        [htmlText appendString:@"\">"];
+    }
+    if (self.jsScript != nil && self.jsScript.length != 0) {
+        [htmlText appendString:@"<script type=\"text/javascript\" src=\""];
+        [htmlText appendString:self.jsScript];
+        [htmlText appendString:@"\"></script>"];
+    }
+    [htmlText appendString:@"<meta http-equiv=\"Pragma\" content=\"no-cache\">"];
+    [htmlText appendString:@"</head><body>"];
+    for (index = 0; index < msgArray.count; ++index) {
+        Article * theArticle = msgArray[index];
+
+        // Load the selected HTML template for the current view style and plug in the current
+        // article values and style sheet setting.
+        NSMutableString * htmlArticle;
+        if (self.htmlTemplate == nil || self.htmlTemplate.length == 0) {
+            NSMutableString * articleBody = [NSMutableString stringWithString:SafeString(theArticle.body)];
+            [articleBody fixupRelativeImgTags:SafeString([theArticle link])];
+            [articleBody fixupRelativeIframeTags:SafeString([theArticle link])];
+            [articleBody fixupRelativeAnchorTags:SafeString([theArticle link])];
+            htmlArticle = [[NSMutableString alloc] initWithString:articleBody];
+        } else {
+            htmlArticle = [[NSMutableString alloc] initWithString:@""];
+            NSScanner * scanner = [NSScanner scannerWithString:self.htmlTemplate];
+            NSString * theString = nil;
+            BOOL stripIfEmpty = NO;
+
+            // Handle conditional tag expansion. Sections in <!-- cond:noblank--> and <!--end-->
+            // are stripped out if all the tags inside are blank.
+            while(!scanner.atEnd) {
+                if ([scanner scanUpToString:@"<!--" intoString:&theString]) {
+                    [htmlArticle appendString:[self expandTagsOfArticle:theArticle intoTemplate:theString withConditional:stripIfEmpty]];
+                }
+                if ([scanner scanString:@"<!--" intoString:nil]) {
+                    NSString * commentTag = nil;
+
+                    if ([scanner scanUpToString:@"-->" intoString:&commentTag] && commentTag != nil) {
+                        commentTag = commentTag.trim;
+                        if ([commentTag isEqualToString:@"cond:noblank"]) {
+                            stripIfEmpty = YES;
+                        }
+                        if ([commentTag isEqualToString:@"end"]) {
+                            stripIfEmpty = NO;
+                        }
+                        [scanner scanString:@"-->" intoString:nil];
+                    }
+                }
+            }
+        }
+
+        // Separate each article with a horizontal divider line
+        if (index > 0) {
+            [htmlText appendString:@"<hr><br />"];
+        }
+        [htmlText appendString:htmlArticle];
+    }
+    [htmlText appendString:@"</body></html>"];
+    return htmlText;
 }
 
 @end

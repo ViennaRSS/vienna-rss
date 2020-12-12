@@ -27,8 +27,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString * cssStylesheet;
 @property NSString * jsScript;
 
-
 -(NSString *)expandTagsOfArticle:(Article *)theArticle intoTemplate:(NSString *)theString withConditional:(BOOL)cond;
+
+/* articleTextFromArray
+ * Create an HTML string comprising all articles in the specified array formatted using
+ * the currently selected template.
+ */
+-(NSString *)articleTextFromArray:(NSArray<Article *> *)msgArray;
 
 @end
 

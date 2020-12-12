@@ -20,22 +20,77 @@
 import Foundation
 
 public class WebKitArticleConverter: ArticleConverter {
-    func prepareArticleDisplay(_ articles: [Article]) -> (htmlPath: URL, accessPath: URL) {
 
-        guard !articles.isEmpty, let supportPathString = Bundle.main.sharedSupportPath else {
-            fatalError("an empty articles array cannot be presented, and access to the styles directory must be granted")
+    override public func initForStyle(at path: URL) {
+        copyStyleContent(from: path)
+    }
+
+    private func getCachesPath() -> URL {
+        let cachesPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)
+        let directory = URL(fileURLWithPath: cachesPath[0]).appendingPathComponent(Bundle.main.bundleIdentifier ?? "Vienna").appendingPathComponent("article")
+        do {
+            try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
+        } catch let error {
+            fatalError("Could not create cache directory for displaying article (\(error))")
+        }
+        return directory
+    }
+
+    func copyStyleContent(from path: URL) {
+
+        guard let files = try? FileManager.default.contentsOfDirectory(at: path, includingPropertiesForKeys: nil, options: .skipsSubdirectoryDescendants) else {
+            fatalError("Was not able to list files of style")
         }
 
-        let supportPathUrl = URL(fileURLWithPath: supportPathString)
-        let stylesPath = supportPathUrl.appendingPathComponent("Styles").appendingPathComponent("Default.viennastyle")
+        let targetDirectory = getCachesPath()
 
-        let cachesPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)
-        let targetDirectory = URL(fileURLWithPath: cachesPath[0])
+        do {
+            for url in try FileManager.default.contentsOfDirectory(at: targetDirectory, includingPropertiesForKeys: nil) {
+                try FileManager.default.removeItem(at: url)
+            }
+        } catch let error {
+            fatalError("Could not clear directory \(targetDirectory) because \(error)")
+        }
 
-        let htmlPath = targetDirectory.appendingPathComponent("article.html")
+        for url in files {
+            do {
+                try FileManager.default.copyItem(at: url, to: targetDirectory.appendingPathComponent(url.lastPathComponent))
+            } catch let error {
+                fatalError("copy \(url) failed because \(error)")
+            }
+        }
 
-        //TODO: move all files from styles to targetDirectory, fix relative references, write expanded html template to targetDirectory/article.html
+        let templateUrl = targetDirectory.appendingPathComponent("template.html")
+        if FileManager.default.fileExists(atPath: templateUrl.path) {
+            self.htmlTemplate = (try? String(contentsOf: templateUrl)) ?? ""
+        }
+        let cssUrl = targetDirectory.appendingPathComponent("stylesheet.css")
+        self.cssStylesheet = FileManager.default.fileExists(atPath: cssUrl.path) ? cssUrl.absoluteString : ""
+        let jsUrl = targetDirectory.appendingPathComponent("script.js")
+        self.jsScript = FileManager.default.fileExists(atPath: jsUrl.path) ? jsUrl.absoluteString : ""
+    }
 
-        return (htmlPath: htmlPath, accessPath: targetDirectory)
+    func prepareArticleDisplay(_ articles: [Article]) -> (htmlPath: URL, accessPath: URL) {
+
+        guard !articles.isEmpty else {
+            fatalError("an empty articles array cannot be presented")
+        }
+
+        let articleDirectory = getCachesPath()
+
+        let htmlPath = articleDirectory.appendingPathComponent("article.html")
+
+        let articleHtml: String = self.articleText(from: articles)
+
+        do {
+            if FileManager.default.fileExists(atPath: htmlPath.path) {
+                try FileManager.default.removeItem(at: htmlPath)
+            }
+            try articleHtml.write(to: htmlPath, atomically: true, encoding: .utf8)
+        } catch let error {
+            fatalError("Could not write article as html file to \(htmlPath) because \(error)")
+        }
+
+        return (htmlPath: htmlPath, accessPath: articleDirectory)
     }
 }

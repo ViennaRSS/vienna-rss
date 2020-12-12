@@ -112,11 +112,14 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
     }
 
     func restoreTabs() {
-        let tabLinks = Preferences.standard.array(forKey: "TabList") as? [String]
+        guard let tabLinks = Preferences.standard.array(forKey: "TabList") as? [String] else {
+            return
+        }
+
         let tabTitles = Preferences.standard.object(forKey: "TabTitleDict") as? [String: String]
 
-        for i in 0..<(tabLinks?.count ?? 0) {
-            guard let urlString = tabLinks?[i], let url = URL(string: urlString) else {
+        for urlString in tabLinks {
+            guard let url = URL(string: urlString) else {
                 continue
             }
             let tab = createNewTab(url, inBackground: true, load: false) as? BrowserTab
