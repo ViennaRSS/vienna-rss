@@ -1191,16 +1191,11 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
 #pragma mark NSURLSession Authentication delegates
 
--(void)URLSession:(NSURLSession *)session
-    task:(NSURLSessionTask *)task
-    didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
-    completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
+- (void)URLSession:(NSURLSession *)session
+              task:(NSURLSessionTask *)task
+didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
+ completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential *_Nullable))completionHandler
 {
-    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
-        NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
-        completionHandler(NSURLSessionAuthChallengeUseCredential, credential);
-    }
-
     if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodHTTPBasic] ||
         [challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodHTTPDigest])
     {
@@ -1226,6 +1221,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                 [self getCredentialsForFolder];
             }
         }
+    } else {
+        completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
     }
 } // URLSession
 
