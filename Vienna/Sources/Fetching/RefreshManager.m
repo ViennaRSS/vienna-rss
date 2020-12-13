@@ -99,7 +99,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         config.HTTPAdditionalHeaders = @{@"User-Agent": userAgent};
         config.HTTPMaximumConnectionsPerHost = 6;
         config.HTTPShouldUsePipelining = YES;
-        _urlSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];
+        _urlSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
 
         NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
         [nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
@@ -1078,8 +1078,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 {
     for (id obj in [self.redirect301WaitQueue reverseObjectEnumerator]) {
         NSURLSessionTask *theConnector = (NSURLSessionTask *)obj;
-        NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
         [self.redirect301WaitQueue removeObject:obj];
+        NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
         ActivityItem *connectorItem = ((NSDictionary *)[originalRequest userInfo])[@"log"];
         [connectorItem appendDetail:NSLocalizedString(@"Redirection attempt treated as temporary for safety concern", nil)];
     }
@@ -1095,9 +1095,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 {
     for (id obj in [self.redirect301WaitQueue reverseObjectEnumerator]) {
         NSURLSessionTask *theConnector = (NSURLSessionTask *)obj;
-        NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
         [self.redirect301WaitQueue removeObject:obj];
-        NSString * theNewURLString = theConnector.originalRequest.URL.absoluteString;
+        NSString * theNewURLString = theConnector.currentRequest.URL.absoluteString;
+        NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
         Folder * theFolder = (Folder *)((NSDictionary *)[originalRequest userInfo])[@"folder"];
         [[Database sharedManager] setFeedURL:theNewURLString forFolder:theFolder.itemId];
         ActivityItem *connectorItem = ((NSDictionary *)[originalRequest userInfo])[@"log"];
@@ -1232,5 +1232,6 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_urlSession invalidateAndCancel];
 }
 @end
