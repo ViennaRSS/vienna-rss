@@ -18,11 +18,13 @@
 //
 
 import Foundation
+import WebKit
 
 public class WebKitArticleConverter: ArticleConverter {
 
     override public func initForStyle(at path: URL) {
         copyStyleContent(from: path)
+        emptyLocalDataCache()
     }
 
     private func getCachesPath() -> URL {
@@ -68,6 +70,23 @@ public class WebKitArticleConverter: ArticleConverter {
         self.cssStylesheet = FileManager.default.fileExists(atPath: cssUrl.path) ? cssUrl.absoluteString : ""
         let jsUrl = targetDirectory.appendingPathComponent("script.js")
         self.jsScript = FileManager.default.fileExists(atPath: jsUrl.path) ? jsUrl.absoluteString : ""
+    }
+
+    private func emptyLocalDataCache() {
+        //WKWebsiteDataRecord does not give us an identifier.
+        // However, the only name with spaces in it is that for local files
+        // all the other names are the hostname of the corresponding website
+        let isLocalWebsiteData = { (record: WKWebsiteDataRecord) in record.displayName.contains(" ") }
+
+        let types: Set<String> = [WKWebsiteDataTypeMemoryCache]
+
+        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: types) { records in
+            for record in records {
+                if isLocalWebsiteData(record) {
+                    WKWebsiteDataStore.default().removeData(ofTypes: types, for: [record]) {}
+                }
+            }
+        }
     }
 
     func prepareArticleDisplay(_ articles: [Article]) -> (htmlPath: URL, accessPath: URL) {
