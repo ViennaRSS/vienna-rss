@@ -123,9 +123,6 @@
 "Click the Open button to open this file." = "按一下“打開”按鈕可打開此檔案。";
 
 /* No comment provided by engineer. */
-"Click the Play button to play this enclosure in iTunes." = "按一下“播放”按鈕可在 iTunes 中播放此隨附項目。";
-
-/* No comment provided by engineer. */
 "Connecting to %@" = "連線到 %@";
 
 /* No comment provided by engineer. */
@@ -464,9 +461,6 @@
 
 /* No comment provided by engineer. */
 "Other" = "其他";
-
-/* No comment provided by engineer. */
-"Play" = "播放";
 
 /* No comment provided by engineer. */
 "Plugin installed" = "已安裝的外掛項目";

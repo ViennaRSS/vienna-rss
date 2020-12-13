@@ -81,9 +81,6 @@
 "Click the Open button to open this file." = "Fai clic sul pulsante Apri per aprire il file.";
 
 /* No comment provided by engineer. */
-"Click the Play button to play this enclosure in iTunes." = "Fai clic sul pulsante Play per riprodurre l'enclosure in iTunes.";
-
-/* No comment provided by engineer. */
 "Connecting to %@" = "Collegamento in corso a %@";
 
 /* test for a string */
@@ -359,9 +356,6 @@
 
 /* No comment provided by engineer. */
 "Other" = "Altro";
-
-/* No comment provided by engineer. */
-"Play" = "Riproduci";
 
 /* Title of a button on an alert */
 "Quit" = "Esci";
