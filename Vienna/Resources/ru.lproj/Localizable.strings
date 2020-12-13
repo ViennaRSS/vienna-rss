@@ -120,9 +120,6 @@
 "Click the Open button to open this file." = "Нажмите кнопку Открыть для открытия файла.";
 
 /* No comment provided by engineer. */
-"Click the Play button to play this enclosure in iTunes." = "Нажмите кнопку Воспроизведение , для проигрывания в iTunes.";
-
-/* No comment provided by engineer. */
 "Connecting to %@" = "Соединяюсь с %@";
 
 /* No comment provided by engineer. */
@@ -467,9 +464,6 @@
 
 /* No comment provided by engineer. */
 "Other" = "Иное";
-
-/* No comment provided by engineer. */
-"Play" = "Воспроизведение";
 
 /* No comment provided by engineer. */
 "Plugin installed" = "Плагин установлен";
