@@ -27,25 +27,26 @@ extension BrowserTab: RSSSource {
     """
 
     var rssUrls: [URL] {
+        get {
+            self.rssFeedUrls
+        }
         set {
             self.rssFeedUrls = newValue
             refreshRSSState()
         }
-        get {
-            self.rssFeedUrls
-        }
     }
 
     var rssSubscriber: RSSSubscriber? {
+        get {
+            self.rssDelegate
+        }
         set {
             self.rssDelegate = newValue
             refreshRSSState()
-        } get {
-            self.rssDelegate
         }
     }
 
-    @IBAction func subscribe(_ sender: NSObject? = nil) {
+    @IBAction private func subscribe(_ sender: NSObject? = nil) {
         if let rssSubscriber = self.rssSubscriber, !self.rssUrls.isEmpty {
             if let sender = sender, sender as? NSView != nil || sender as? NSCell != nil {
                 rssSubscriber.subscribeToRSS(self.rssUrls, uiElement: sender)

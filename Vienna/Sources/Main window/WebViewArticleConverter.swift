@@ -1,5 +1,5 @@
 //
-//  ArticleConverter.swift
+//  WebViewArticleConverter.swift
 //  Vienna
 //
 //  Copyright 2020 Tassilo Karge

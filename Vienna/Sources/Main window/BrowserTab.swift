@@ -107,6 +107,7 @@ class BrowserTab: NSViewController {
         }
     }
 
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -174,12 +175,12 @@ class BrowserTab: NSViewController {
 extension BrowserTab: Tab {
 
     var tabUrl: URL? {
+        get {
+            self.url
+        }
         set {
             self.url = newValue
             self.loadedTab = false
-        }
-        get {
-            self.url
         }
     }
 

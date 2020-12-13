@@ -32,6 +32,6 @@ public enum WKWebViewContextMenuContext {
 }
 
 extension NSUserInterfaceItemIdentifier {
-    static let WKMenuItemIdentifierOpenLinkInBackground = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLinkInBackground")
-    static let WKMenuItemIdentifierOpenLinkInSystemBrowser = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLinkInSystemBrowser")
+    static let WKMenuItemOpenLinkInBackground = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLinkInBackground")
+    static let WKMenuItemOpenLinkInSystemBrowser = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLinkInSystemBrowser")
 }

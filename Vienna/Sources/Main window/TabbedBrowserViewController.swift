@@ -2,7 +2,7 @@
 //  TabbedBrowserViewController.swift
 //  Vienna
 //
-//  Copyright 2018
+//  Copyright 2018 Tassilo Karge
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -339,7 +339,7 @@ extension TabbedBrowserViewController: CustomWKUIDelegate {
 
         let openInBackgroundTitle = NSLocalizedString("Open Link in Background", comment: "")
         let openInBackgroundItem = NSMenuItem(title: openInBackgroundTitle, action: #selector(openLinkInBackground(menuItem:)), keyEquivalent: "")
-        openInBackgroundItem.identifier = .WKMenuItemIdentifierOpenLinkInBackground
+        openInBackgroundItem.identifier = .WKMenuItemOpenLinkInBackground
         openInBackgroundItem.representedObject = url
         menuItems.insert(openInBackgroundItem, at: menuItems.index(after: index))
     }

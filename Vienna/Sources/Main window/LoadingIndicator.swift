@@ -27,7 +27,7 @@ class LoadingIndicator: NSView {
         NSSize(width: NSView.noIntrinsicMetric, height: 4.0)
     }
 
-    let animationLayer: CAShapeLayer = CAShapeLayer()
+    let animationLayer = CAShapeLayer()
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)

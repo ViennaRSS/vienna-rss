@@ -24,9 +24,7 @@ extension ArticleConverter {
 
     func setup() {
         //update the article content style when the active display style has changed
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "MA_Notify_StyleChange"), object: nil, queue: nil) { [weak self] notification in
-            self?.initForCurrentStyle()
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(self.initForCurrentStyle), name: NSNotification.Name("MA_Notify_StyleChange"), object: nil)
 
         self.initForCurrentStyle()
     }
@@ -45,7 +43,7 @@ extension ArticleConverter {
     }
 
     func initForStyle(at path: URL) {
-        fatalError("must be overridden by subclasses")
+        preconditionFailure("must be overridden by subclasses")
     }
 
     func styleChangeFailed(_ name: String) {

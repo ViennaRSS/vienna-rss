@@ -27,7 +27,7 @@ public class CustomWKWebView: WKWebView {
         getTextSelection()
     }
 
-    public override init(frame: CGRect = .zero, configuration: WKWebViewConfiguration = WKWebViewConfiguration()) {
+    override public init(frame: CGRect = .zero, configuration: WKWebViewConfiguration = WKWebViewConfiguration()) {
 
         //preferences
         let prefs = configuration.preferences
@@ -75,6 +75,7 @@ public class CustomWKWebView: WKWebView {
         }
     }
 
+    @available(*, unavailable)
     public required init?(coder: NSCoder) {
         fatalError("initWithCoder not implemented for CustomWKWebView")
     }
@@ -172,7 +173,7 @@ extension CustomWKWebView {
     })
     """
 
-    open override func willOpenMenu(_ menu: NSMenu, with event: NSEvent) {
+    override public func willOpenMenu(_ menu: NSMenu, with event: NSEvent) {
 
         if contextMenuProvider != nil {
             customize(contextMenu: menu)

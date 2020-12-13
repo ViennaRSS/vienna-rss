@@ -1,5 +1,5 @@
 //
-//  WebviewContextMenuProvider.swift
+//  CustomWKUIDelegate.swift
 //  Vienna
 //
 //  Copyright 2020 Tassilo Karge
@@ -17,4 +17,6 @@
 //  limitations under the License.
 //
 
-protocol CustomWKUIDelegate: WKUIDelegate, BrowserContextMenuDelegate { }
+protocol CustomWKUIDelegate: WKUIDelegate, BrowserContextMenuDelegate {
+
+}

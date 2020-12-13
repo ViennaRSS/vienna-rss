@@ -25,22 +25,22 @@ import Foundation
 ///   - executingQueue: the queue where the execution shall happen. Must not be the same as queue!
 ///   - deadline: when to stop waiting for the task to finish execution
 ///   - task: the code that shall be executed. ATTENTION: must call the finishHandler at some point!
-func waitForAsyncExecution(on waitingQueue: DispatchQueue = DispatchQueue.global(qos: .userInitiated), executingQueue: DispatchQueue = DispatchQueue.main, until deadline: DispatchTime? = nil, _ task: @escaping (_ finishHandler: @escaping () -> ()) -> () ) {
+func waitForAsyncExecution(on waitingQueue: DispatchQueue = DispatchQueue.global(qos: .userInitiated), executingQueue: DispatchQueue = DispatchQueue.main, until deadline: DispatchTime? = nil, _ task: @escaping (_ finishHandler: @escaping () -> Void) -> Void ) {
 
     guard waitingQueue != executingQueue else {
-        NSException(name: .invalidArgumentException, reason: "Queue to wait and queue to execute block must never be the same!", userInfo: ["wait queue" : waitingQueue, "run queue": executingQueue]).raise()
+        NSException(name: .invalidArgumentException, reason: "Queue to wait and queue to execute block must never be the same!", userInfo: ["wait queue": waitingQueue, "run queue": executingQueue]).raise()
         return
     }
 
-    let dg = DispatchGroup()
+    let group = DispatchGroup()
     var didFinish = false
     let runLoop = CFRunLoopGetCurrent()
     let asyncBlock = {
-        dg.enter()
+        group.enter()
         executingQueue.async {
-            task { dg.leave() }
+            task { group.leave() }
         }
-        dg.wait()
+        group.wait()
         didFinish = true
         CFRunLoopPerformBlock(runLoop, CFRunLoopMode.commonModes?.rawValue) {
             CFRunLoopStop(runLoop)
