@@ -24,6 +24,7 @@ protocol ArticleViewDelegate {
     var error: NSError? { get set }
     var controller: AppController { get set }
     var isCurrentPageFullHTML: Bool { get }
+
     func startMainFrameLoad()
     func endMainFrameLoad()
 }

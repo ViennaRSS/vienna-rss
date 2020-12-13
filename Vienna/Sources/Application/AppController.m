@@ -984,8 +984,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             openInBackground = !openInBackground;
         }
 
-		for (NSURL * url in urls)
-			[self.browser createNewTab:url inBackground:openInBackground load:true];
+        for (NSURL * url in urls) {
+			(void)[self.browser createNewTab:url inBackground:openInBackground load:true];
+        }
 	}
 	else
 		[self openURLsInDefaultBrowser:urls];

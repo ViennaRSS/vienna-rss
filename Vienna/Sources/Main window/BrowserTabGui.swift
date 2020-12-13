@@ -23,7 +23,7 @@ import Foundation
 
 extension BrowserTab {
 
-    @IBAction func loadPageFromAddressBar(_ sender: Any) {
+    @IBAction private func loadPageFromAddressBar(_ sender: Any) {
         let enteredUrl = addressField.stringValue
 
         guard !enteredUrl.isEmpty else {
@@ -35,19 +35,19 @@ extension BrowserTab {
         cleanAndLoad(url: enteredUrl)
     }
 
-    @IBAction func reload(_ sender: Any) {
+    @IBAction private func reload(_ sender: Any) {
         self.reloadTab()
     }
 
-    @IBAction func cancel(_ sender: Any) {
+    @IBAction private func cancel(_ sender: Any) {
         self.stopLoadingTab()
     }
 
-    @IBAction func forward(_ sender: Any) {
+    @IBAction private func forward(_ sender: Any) {
         _ = self.forward()
     }
 
-    @IBAction func back(_ sender: Any) {
+    @IBAction private func back(_ sender: Any) {
         _ = self.back()
     }
 

@@ -30,7 +30,7 @@ public class WebKitArticleConverter: ArticleConverter {
         let directory = URL(fileURLWithPath: cachesPath[0]).appendingPathComponent(Bundle.main.bundleIdentifier ?? "Vienna").appendingPathComponent("article")
         do {
             try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
-        } catch let error {
+        } catch {
             fatalError("Could not create cache directory for displaying article (\(error))")
         }
         return directory
@@ -48,14 +48,14 @@ public class WebKitArticleConverter: ArticleConverter {
             for url in try FileManager.default.contentsOfDirectory(at: targetDirectory, includingPropertiesForKeys: nil) {
                 try FileManager.default.removeItem(at: url)
             }
-        } catch let error {
+        } catch {
             fatalError("Could not clear directory \(targetDirectory) because \(error)")
         }
 
         for url in files {
             do {
                 try FileManager.default.copyItem(at: url, to: targetDirectory.appendingPathComponent(url.lastPathComponent))
-            } catch let error {
+            } catch {
                 fatalError("copy \(url) failed because \(error)")
             }
         }
@@ -87,7 +87,7 @@ public class WebKitArticleConverter: ArticleConverter {
                 try FileManager.default.removeItem(at: htmlPath)
             }
             try articleHtml.write(to: htmlPath, atomically: true, encoding: .utf8)
-        } catch let error {
+        } catch {
             fatalError("Could not write article as html file to \(htmlPath) because \(error)")
         }
 

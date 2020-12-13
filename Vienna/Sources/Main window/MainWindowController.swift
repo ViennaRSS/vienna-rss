@@ -31,7 +31,7 @@ final class MainWindowController: NSWindowController {
     @IBOutlet private(set) var filterSearchField: NSSearchField?
 
     @objc private(set) var toolbarSearchField: NSSearchField?
-    @IBOutlet weak var placeholderDetailView: NSView!
+    @IBOutlet private(set) weak var placeholderDetailView: NSView!
 
 	@objc private(set) lazy var browser: (Browser & NSViewController) = {
         var controller = TabbedBrowserViewController()
@@ -326,7 +326,7 @@ extension MainWindowController: BrowserContextMenuDelegate {
             return
         }
 
-        if let openInBackgroundIndex = menuItems.firstIndex(where: { $0.identifier == NSUserInterfaceItemIdentifier.WKMenuItemIdentifierOpenLinkInBackground }) {
+        if let openInBackgroundIndex = menuItems.firstIndex(where: { $0.identifier == NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInBackground }) {
             //swap open link in new tab and open link in background items if necessary
             let openInBackground = Preferences.standard.openLinksInBackground
             if openInBackground && index < openInBackgroundIndex
@@ -342,7 +342,7 @@ extension MainWindowController: BrowserContextMenuDelegate {
         let openInDefaultBrowserItem = NSMenuItem(
             title: openInExternalBrowserTitle,
             action: #selector(openLinkInDefaultBrowser(menuItem:)), keyEquivalent: "")
-        openInDefaultBrowserItem.identifier = .WKMenuItemIdentifierOpenLinkInSystemBrowser
+        openInDefaultBrowserItem.identifier = .WKMenuItemOpenLinkInSystemBrowser
         openInDefaultBrowserItem.representedObject = url
         menuItems.insert(openInDefaultBrowserItem, at: menuItems.index(after: index))
     }
