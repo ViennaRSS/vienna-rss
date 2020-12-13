@@ -89,7 +89,7 @@
 {
     NSUInteger index;
 
-    NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<!DOCTYPE html><html><head><meta content=\"text/html; charset=UTF-8\">"];
+    NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<!DOCTYPE html><html><head><meta  http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"];
     // the link for the first article will be the base URL for resolving relative URLs
     [htmlText appendString:@"<base href=\""];
     [htmlText appendString:[NSString stringByCleaningURLString:msgArray[0].link]];
