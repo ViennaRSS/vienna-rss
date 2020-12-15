@@ -105,9 +105,6 @@
 "Click the Open button to open this file." = "Soubor otevřete klepnutím na tlačítko Otevřít.";
 
 /* No comment provided by engineer. */
-"Click the Play button to play this enclosure in iTunes." = "Přílohu přehrajete v iTunes klepnutím na tlačítko Pustit.";
-
-/* No comment provided by engineer. */
 "Connecting to %@" = "Připojuje se k %@";
 
 /* test for a string */
@@ -401,9 +398,6 @@
 
 /* No comment provided by engineer. */
 "Other" = "Jiná";
-
-/* No comment provided by engineer. */
-"Play" = "Pustit";
 
 /* No comment provided by engineer. */
 "Queue" = "Fronta";

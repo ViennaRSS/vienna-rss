@@ -1,5 +1,5 @@
 /* Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "2IW-It-hcT"; */
-"2IW-It-hcT.title" = "Lors de l'affichage d'articles ou de pages Web:";
+"2IW-It-hcT.title" = "Lors de l'affichage d'articles ou de pages Web :";
 
 /* Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "4Qn-qF-kSp"; */
 "4Qn-qF-kSp.title" = "Ces réglages ne nécessitent pas d'être changés pour une utilisation basique de Vienna. Se référer au fichier d'aide pour plus de détails.";
@@ -34,11 +34,17 @@
 /* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "bwY-9N-h4N"; */
 "bwY-9N-h4N.title" = "Nom utilisateur :";
 
+/* Class = "NSMenuItem"; title = "After a day"; ObjectID = "c4l-M5-qB1"; */
+"c4l-M5-qB1.title" = "Après un jour";
+
 /* Class = "NSButtonCell"; title = "Select…"; ObjectID = "cbn-xq-UFr"; */
 "cbn-xq-UFr.title" = "Sélectionner…";
 
 /* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "dkm-xW-4If"; */
 "dkm-xW-4If.title" = "Afficher les icônes de flux dans la liste des dossiers";
+
+/* Class = "NSMenuItem"; title = "After two weeks"; ObjectID = "Dw9-en-4Zu"; */
+"Dw9-en-4Zu.title" = "Après deux semaines";
 
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "erE-oh-cbw"; */
 "erE-oh-cbw.title" = "Ouvrir les liens à l'arrière plan";
@@ -77,7 +83,7 @@
 "iHl-tr-paa.ibShadowedToolTip" = "Sélection d'un serveur supportant l'API Open Reader";
 
 /* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "ITA-U9-lhX"; */
-"ITA-U9-lhX.title" = "Liste des articles:";
+"ITA-U9-lhX.title" = "Liste des articles :";
 
 /* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "jfH-Hq-gRk"; */
 "jfH-Hq-gRk.title" = "Faire rebondir l'icône de l'application";
@@ -98,7 +104,7 @@
 "Ljf-Qd-6Ho.title" = "Relever les nouveaux articles au lancement";
 
 /* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "M8s-xu-lWh"; */
-"M8s-xu-lWh.title" = "Liste des dossiers:";
+"M8s-xu-lWh.title" = "Liste des dossiers :";
 
 /* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "McN-fD-0Cv"; */
 "McN-fD-0Cv.title" = "Après un court délai";
@@ -111,6 +117,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "OD4-de-Vkx"; */
 "OD4-de-Vkx.title" = "Mot de passe :";
+
+/* Class = "NSMenuItem"; title = "After a month"; ObjectID = "OIa-NQ-jQi"; */
+"OIa-NQ-jQi.title" = "Après un mois";
 
 /* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "Oqg-6W-NAL"; */
 "Oqg-6W-NAL.title" = "Relever les nouveaux articles :";
@@ -127,6 +136,12 @@
 /* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "qYb-Sf-cEF"; */
 "qYb-Sf-cEF.title" = "Toutes les 5 minutes";
 
+/* Class = "NSTabViewItem"; label = "Updates"; ObjectID = "qyx-3u-1Io"; */
+"qyx-3u-1Io.label" = "Mises à jour";
+
+/* Class = "NSMenuItem"; title = "After two days"; ObjectID = "sJE-bd-4mK"; */
+"sJE-bd-4mK.title" = "Après deux jours";
+
 /* Class = "NSButtonCell"; title = "Search for latest beta versions"; ObjectID = "u92-Bh-Wrz"; */
 "u92-Bh-Wrz.title" = "Rechercher les dernières versions Beta";
 
@@ -141,6 +156,9 @@
 
 /* Class = "NSWindow"; title = "Preferences"; ObjectID = "X5g-th-bjd"; */
 "X5g-th-bjd.title" = "Préférences";
+
+/* Class = "NSMenuItem"; title = "After a week"; ObjectID = "xfd-Vp-kJy"; */
+"xfd-Vp-kJy.title" = "Après une semaine";
 
 /* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "YG6-9k-gKH"; */
 "YG6-9k-gKH.title" = "URL :";

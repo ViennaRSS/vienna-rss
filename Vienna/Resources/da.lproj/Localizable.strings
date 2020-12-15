@@ -123,9 +123,6 @@
 "Click the Open button to open this file." = "Klik Åben-knappen for at åbne dette arkiv.";
 
 /* No comment provided by engineer. */
-"Click the Play button to play this enclosure in iTunes." = "Klik Afspil-knappen for at afspille denne indpakning i iTunes.";
-
-/* No comment provided by engineer. */
 "Connecting to %@" = "Forbinder til %@";
 
 /* No comment provided by engineer. */
@@ -473,9 +470,6 @@
 
 /* No comment provided by engineer. */
 "Other" = "Andet";
-
-/* No comment provided by engineer. */
-"Play" = "Afspil";
 
 /* No comment provided by engineer. */
 "Plugin installed" = "Udvidelse installeret";

@@ -108,9 +108,6 @@
 "Click the Open button to open this file." = "Tryck på Öppna för att öppna denna bilaga.";
 
 /* No comment provided by engineer. */
-"Click the Play button to play this enclosure in iTunes." = "Tryck på Spela för att spela denna bilaga i iTunes";
-
-/* No comment provided by engineer. */
 "Connecting to %@" = "Ansluter till %@";
 
 /* test for a string */
@@ -422,9 +419,6 @@
 
 /* No comment provided by engineer. */
 "Other" = "Annan";
-
-/* No comment provided by engineer. */
-"Play" = "Spela";
 
 /* No comment provided by engineer. */
 "Plugin installed" = "Plugin installerat";
