@@ -13,7 +13,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d new article retrieved</string>
+			<string>%d nieuw artikel opgehaald</string>
 			<key>other</key>
 			<string>%d nieuwe artikelen opgehaald</string>
 		</dict>
@@ -29,7 +29,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d subscription successfully exported</string>
+			<string>%d abonnement geëxporteerd</string>
 			<key>other</key>
 			<string>%d abonnementen geëxporteerd</string>
 		</dict>
@@ -45,7 +45,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d subscription successfully imported</string>
+			<string>%d abonnement geïmporteerd</string>
 			<key>other</key>
 			<string>%d abonnementen geïmporteerd</string>
 		</dict>
@@ -61,7 +61,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d unread article</string>
+			<string>%d ongelezen artikel</string>
 			<key>other</key>
 			<string>%d ongelezen artikelen</string>
 		</dict>
@@ -77,7 +77,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>u</string>
 			<key>one</key>
-			<string>%u article</string>
+			<string>%u artikel</string>
 			<key>other</key>
 			<string>%u artikelen</string>
 		</dict>

@@ -118,6 +118,9 @@
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "173"; */
 "173.title" = "Rehacer";
 
+/* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "197"; */
+"197.title" = "Zoom";
+
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "235"; */
 "235.title" = "Visualización";
 
@@ -256,6 +259,9 @@
 /* Class = "NSMenu"; title = "Layout"; ObjectID = "1109"; */
 "1109.title" = "Formato";
 
+/* Class = "NSMenuItem"; title = "Horizontal"; ObjectID = "1110"; */
+"1110.title" = "Horizontal";
+
 /* Class = "NSMenuItem"; title = "Filter By"; ObjectID = "1117"; */
 "1117.title" = "Filtrar por";
 
@@ -327,6 +333,9 @@
 
 /* Class = "NSMenu"; title = "Order By"; ObjectID = "1337"; */
 "1337.title" = "Ordenar por";
+
+/* Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338"; */
+"1338.title" = "Manual";
 
 /* Class = "NSMenuItem"; title = "Name"; ObjectID = "1339"; */
 "1339.title" = "Nombre";
