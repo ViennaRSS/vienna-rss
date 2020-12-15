@@ -63,7 +63,6 @@ opt_in_rules:
   - sorted_imports
   - static_operator
   - strict_fileprivate
-  - strong_iboutlet
   - switch_case_on_newline
   - toggle_bool
   - trailing_closure
@@ -83,7 +82,7 @@ private_outlet:
 
 file_name:
   excluded: Constants.swift
-  suffix_pattern: Extensions?
+  suffix_pattern: (\+\w+|Extensions?)
 
 file_header:
   required_pattern: |
