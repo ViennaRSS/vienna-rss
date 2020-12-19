@@ -12,7 +12,12 @@ import MMTabBarView
 @available(OSX 10.10, *)
 class TabbedBrowserViewController: NSViewController, Browser, MMTabBarViewDelegate {
 
-    @IBOutlet weak var tabBar: MMTabBarView!
+    @IBOutlet weak var tabBar: MMTabBarView! {
+        didSet {
+            self.tabBar.setStyleNamed("Mojave");
+        }
+    }
+
     @IBOutlet weak var tabView: NSTabView!
 
     /// The browser can have a fixed first tab (e.g. bookmarks).
@@ -43,6 +48,10 @@ class TabbedBrowserViewController: NSViewController, Browser, MMTabBarViewDelega
         }
     }
 
+    override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
     required init?(coder: NSCoder) {
         guard
             let tabBar = coder.decodeObject(of: MMTabBarView.self, forKey: "tabBar"),
@@ -66,17 +75,17 @@ class TabbedBrowserViewController: NSViewController, Browser, MMTabBarViewDelega
         // Do view setup here.
     }
 
-    public func createNewTab(_ url:NSURL? = nil, inBackground: Bool = false, load: Bool = false) -> Tab {
+    public func createNewTab(_ url:URL? = nil, inBackground: Bool = false, load: Bool = false) -> Tab {
         let newTab = BrowserTab()
-        let newTabViewItem = NSTabViewItem(viewController: newTab)
+        let newTabViewItem = TitleChangingTabViewItem(viewController: newTab)
         tabView.addTabViewItem(newTabViewItem)
 
         if (url != nil) {
-            //TODO: set url to tab
+            newTab.url = url
         }
 
         if load {
-            //TODO: load new tab
+            newTab.load()
         }
 
         if !inBackground {

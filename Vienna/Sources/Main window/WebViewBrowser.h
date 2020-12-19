@@ -28,7 +28,7 @@
 @class MMTabBarView;
 @class BrowserPane;
 
-@interface WebViewBrowser : NSObject <Browser>
+@interface WebViewBrowser : NSViewController <Browser>
 
 #pragma mark - current state
 

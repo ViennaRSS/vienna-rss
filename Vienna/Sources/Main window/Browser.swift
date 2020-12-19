@@ -33,7 +33,7 @@ protocol Browser {
     ///   - load: whether the page to which the URL points is supposed to be loaded immediately
     ///           (otherwise it is opened when opening the tab)
     /// - Returns: the new tab
-    func createNewTab(_ url: NSURL?, inBackground: Bool, load: Bool) -> Tab
+    func createNewTab(_ url: URL?, inBackground: Bool, load: Bool) -> Tab
 
     /// Saves all tabs persistently.
     /// Next time when instanciating the browser, these tabs will be re-instanciated as well.

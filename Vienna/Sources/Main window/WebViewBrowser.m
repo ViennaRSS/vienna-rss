@@ -57,24 +57,21 @@
 
 -(void)awakeFromNib
 {
-	[self configureTabBar];
-	[self configureTabClosingBehavior];
+    [self commonInit];
+}
 
-	self.tabViewOrder = [NSMutableArray array];
+-(instancetype)initWithNibName:(NSNibName)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
 
+-(void)commonInit {
     [self restoreTabs];
 }
 
--(void)configureTabClosingBehavior
-{
-	self.selectPreviousOnClose = false;
-	//only works if selectpreviousonclose is true
-	self.selectNewItemFirst = false;
-	//only works if selectpreviousonclose is false
-	self.selectRightItemFirst = true;
-	//only relevant if (selectpreviousonclose is true) or (selectrightitemfirst is false)
-	self.canJumpToArticles = false;
-}
 
 -(void)configureTabBar
 {

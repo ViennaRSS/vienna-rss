@@ -23,6 +23,7 @@ final class MainWindowController: NSWindowController {
 
     // MARK: Transitional outlets
 
+    @IBOutlet weak var splitView: NSSplitView!
     @IBOutlet private(set) var outlineView: FolderView?
     @IBOutlet private(set) var browser: Browser?
     @IBOutlet private(set) var articleListView: ArticleListView?
@@ -39,6 +40,16 @@ final class MainWindowController: NSWindowController {
 
         // TODO: Move this to windowDidLoad()
         statusBarState(disclosed: Preferences.standard.showStatusBar, animate: false)
+
+        //TODO: use this switch also to load different browser views
+        if #available(OSX 10.10, *) {
+            // Leave the default
+        } else {
+            statusLabel.cell?.backgroundStyle = .raised
+            filterLabel.cell?.backgroundStyle = .raised
+        }
+
+        splitView.addSubview((self.browser as! NSViewController).view)
 
         let filterMenu = (NSApp as? ViennaApp)?.filterMenu
         let filterMode = Preferences.standard.filterMode
