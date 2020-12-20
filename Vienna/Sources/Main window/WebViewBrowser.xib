@@ -8,6 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="WebViewBrowser">
             <connections>
+                <outlet property="tabBarControl" destination="vnF-Ff-Ntd" id="A80-dY-Klj"/>
                 <outlet property="view" destination="c22-O7-iKe" id="Wco-1l-CZn"/>
             </connections>
         </customObject>
@@ -17,7 +18,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <customView placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="vnF-Ff-Ntd" customClass="MMTabBarView">
+                <customView verticalHuggingPriority="255" verticalCompressionResistancePriority="755" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="vnF-Ff-Ntd" customClass="MMTabBarView">
                     <rect key="frame" x="0.0" y="250" width="480" height="22"/>
                     <connections>
                         <outlet property="delegate" destination="-2" id="Gew-Gw-ivh"/>
