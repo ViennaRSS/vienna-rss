@@ -29,7 +29,8 @@ final class MainWindowController: NSWindowController {
     @IBOutlet private(set) var unifiedDisplayView: UnifiedDisplayView?
     @IBOutlet private(set) var filterDisclosureView: DisclosureView?
     @IBOutlet private(set) var filterSearchField: NSSearchField?
-    @IBOutlet private(set) var toolbarSearchField: NSSearchField?
+
+    @objc private(set) var toolbarSearchField: NSSearchField?
 
     // MARK: Initialization
 
@@ -171,6 +172,31 @@ extension MainWindowController: NSToolbarDelegate {
     }
 
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+        if itemIdentifier == NSToolbarItem.Identifier("SearchItem") {
+            let item: NSToolbarItem
+            if #available(macOS 11, *) {
+                item = NSSearchToolbarItem(itemIdentifier: itemIdentifier)
+                toolbarSearchField = (item as? NSSearchToolbarItem)?.searchField
+            } else {
+                item = NSToolbarItem(itemIdentifier: itemIdentifier)
+                item.view = NSSearchField()
+                item.visibilityPriority = .high
+                toolbarSearchField = item.view as? NSSearchField
+            }
+
+            item.label = NSLocalizedString("Search Articles", comment: "Toolbar item label")
+            item.paletteLabel = NSLocalizedString("Search Articles", comment: "Toolbar item palette label")
+            item.toolTip = NSLocalizedString("Search Articles", comment: "Toolbar item tooltip")
+
+            item.action = #selector(AppController.searchUsingToolbarTextField(_:))
+            item.menuFormRepresentation = NSMenuItem(title: item.label, action: item.action, keyEquivalent: "")
+
+            toolbarSearchField?.sendsWholeSearchString = true
+            toolbarSearchField?.sendsSearchStringImmediately = false
+
+            return item
+        }
+
         return pluginManager?.toolbarItem(forIdentifier: itemIdentifier.rawValue)
     }
 
