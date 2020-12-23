@@ -145,12 +145,7 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
     }
 
     func closeTab(_ tabViewItem: NSTabViewItem) {
-        guard let tabView = self.tabView else {
-            return
-        }
-        self.tabBar?.delegate?.tabView?(tabView, willClose: tabViewItem)
-        self.tabView?.removeTabViewItem(tabViewItem)
-        self.tabBar?.delegate?.tabView?(tabView, didClose: tabViewItem)
+        self.tabBar?.close(tabViewItem)
     }
 }
 
@@ -261,6 +256,18 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
         tab.stopLoadingTab()
         tab.tabUrl = URL(string: "about:blank")
         tab.loadTab()
+    }
+
+    func tabView(_ aTabView: NSTabView, selectOnClosing tabViewItem: NSTabViewItem) -> NSTabViewItem? {
+        //select tab item on the right of currently selected item
+        if let tabView = self.tabBar?.tabView,
+           let selected = tabBar?.selectedTabViewItem, selected == tabViewItem,
+           tabViewItem != tabView.tabViewItems.last, //cannot select tab on the right if selected tab is rightmost one
+           let indexToSelect = tabView.tabViewItems.firstIndex(of: selected)?.advanced(by: 1) {
+            return tabView.tabViewItems[indexToSelect]
+        } else {
+            return nil //default (left of currently selected item / no change if deleted item not selected)
+        }
     }
 
     func tabView(_ aTabView: NSTabView, menuFor tabViewItem: NSTabViewItem) -> NSMenu {
