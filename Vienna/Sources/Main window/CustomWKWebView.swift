@@ -36,11 +36,44 @@ public class CustomWKWebView: WKWebView, WKScriptMessageHandler {
         let contentController = configuration.userContentController
         contentController.removeAllUserScripts()
 
-        let scriptSource = "document.addEventListener('contextmenu', function(e) { window.webkit.messageHandlers.clickListener.postMessage(e.target.toString()); })"
-        //if($(e.target).is('a')) { window.webkit.messageHandlers.contextMenuListener.postMessage( e.target.attr('href') ) }
-        //window.location.protocol + "//" + window.location.host + "/" + e.target.attr('href')
-        let rightClickListenerScript = WKUserScript(source: scriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
-        contentController.addUserScript(rightClickListenerScript)
+        //TODO: use this line for debugging event related scripts. Remove for production.
+        //window.webkit.messageHandlers.clickListener.postMessage(e.target.outerHTML);
+
+        //TODO: debugging js in WKWebView thanks to https://stackoverflow.com/a/61031417/3311272 . Remove for production.
+        let errorScriptSource = """
+        window.onerror = (msg, url, line, column, error) => {
+            const message = {
+                message: msg,
+                url: url,
+                line: line,
+                column: column,
+                error: JSON.stringify(error)
+            }
+
+            if (window.webkit) {
+                window.webkit.messageHandlers.clickListener.postMessage(message);
+            } else {
+                console.log("Error:", message);
+            }
+        };
+        """
+        let errorScript = WKUserScript(source: errorScriptSource, injectionTime: .atDocumentStart, forMainFrameOnly: false)
+        contentController.addUserScript(errorScript)
+
+        let contextMenuScriptSource = """
+        document.addEventListener('contextmenu', function(e) {
+            var tagName = e.target.tagName.toLowerCase()
+            if (tagName === 'a') { //if the right clicked element is a link
+                window.webkit.messageHandlers.clickListener.postMessage(new URL(e.target.getAttribute('href'), document.baseURI).href);
+            }
+            var links = e.target.getElementsByTagName('a');
+            if (links.length === 1) { //in case any subelement of the right clicked element is a link
+                window.webkit.messageHandlers.clickListener.postMessage(new URL(links[0].getAttribute('href'), document.baseURI).href);
+            }
+        })
+        """
+        let contextMenuScript = WKUserScript(source: contextMenuScriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+        contentController.addUserScript(contextMenuScript)
 
         //configuration
         if #available(OSX 10.11, *) {
@@ -146,6 +179,7 @@ extension CustomWKWebView {
         }
 
         menu.items = contextMenuProvider?.contextMenuItemsFor(purpose: context, existingMenuItems: menu.items) ?? menu.items
+        lastRightClickedLink = nil
     }
 }
 
