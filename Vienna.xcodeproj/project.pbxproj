@@ -68,6 +68,7 @@
 		2F22803A2271CCAB005D1023 /* WebKitArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280392271CCAB005D1023 /* WebKitArticleView.swift */; };
 		2F5AC4202198E1AA00A7EDDE /* TitleChangingTabViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */; };
 		2F7B91EB2198351A00E56F00 /* WebViewBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */; };
+		2FA946C52517D8D8006134C5 /* CustomWKUIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA946C42517D8D8006134C5 /* CustomWKUIDelegate.swift */; };
 		2FC91DDD21850ADB00D7F223 /* Browser+WebUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */; };
 		2FCD69302260B3E7005BAA75 /* CustomWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCD692F2260B3E7005BAA75 /* CustomWKWebView.swift */; };
 		2FDF6FC0218A266A002F77E9 /* BrowserTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FBC218A266A002F77E9 /* BrowserTab.swift */; };
@@ -284,6 +285,7 @@
 		2F2280392271CCAB005D1023 /* WebKitArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKitArticleView.swift; sourceTree = "<group>"; };
 		2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleChangingTabViewItem.swift; sourceTree = "<group>"; };
 		2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewBrowser.xib; sourceTree = "<group>"; };
+		2FA946C42517D8D8006134C5 /* CustomWKUIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWKUIDelegate.swift; sourceTree = "<group>"; };
 		2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Browser+WebUIDelegate.m"; sourceTree = "<group>"; };
 		2FC91DDC21850ADB00D7F223 /* Browser+WebUIDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Browser+WebUIDelegate.h"; sourceTree = "<group>"; };
 		2FCD692F2260B3E7005BAA75 /* CustomWKWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWKWebView.swift; sourceTree = "<group>"; };
@@ -1027,9 +1029,19 @@
 			name = ArticleContent;
 			sourceTree = "<group>";
 		};
+		2FA946DF2517E3E5006134C5 /* CustomWebKit */ = {
+			isa = PBXGroup;
+			children = (
+				2FCD692F2260B3E7005BAA75 /* CustomWKWebView.swift */,
+				2FA946C42517D8D8006134C5 /* CustomWKUIDelegate.swift */,
+			);
+			name = CustomWebKit;
+			sourceTree = "<group>";
+		};
 		2FDF6FBB218A265A002F77E9 /* Webkit Browser */ = {
 			isa = PBXGroup;
 			children = (
+				2FA946DF2517E3E5006134C5 /* CustomWebKit */,
 				2FDF6FBC218A266A002F77E9 /* BrowserTab.swift */,
 				2FF61D2F24F2ED1500A7E2B5 /* BrowserTabGui.swift */,
 				2FF61D2D24F2E71500A7E2B5 /* BrowserTabRss.swift */,
@@ -1038,7 +1050,6 @@
 				2FDF6FBF218A266A002F77E9 /* TabbedBrowserViewController.swift */,
 				2FDF6FBD218A266A002F77E9 /* TabbedBrowserViewController.xib */,
 				2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */,
-				2FCD692F2260B3E7005BAA75 /* CustomWKWebView.swift */,
 				2F06504B2506B5B500468A0E /* LoadingIndicator.swift */,
 			);
 			name = "Webkit Browser";
@@ -2025,6 +2036,7 @@
 				435028B4165DE9E00018EDB7 /* TabbedWebView.m in Sources */,
 				435028B6165DE9E00018EDB7 /* TreeNode.m in Sources */,
 				F69964F71F13029600FC8493 /* OverlayStatusBar.swift in Sources */,
+				2FA946C52517D8D8006134C5 /* CustomWKUIDelegate.swift in Sources */,
 				435028B7165DE9E00018EDB7 /* UnifiedDisplayView.m in Sources */,
 				435028B8165DE9E00018EDB7 /* URLHandlerCommand.m in Sources */,
 				2FF61D2E24F2E71500A7E2B5 /* BrowserTabRss.swift in Sources */,

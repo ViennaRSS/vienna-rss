@@ -18,7 +18,7 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView {
 		set {  } //TODO do we actually want to do this?
 	}
 
-	var textSelection: String = "" //TODO
+	override var textSelection: String { "" } //TODO
 
 	var html: String = "" //TODO
 

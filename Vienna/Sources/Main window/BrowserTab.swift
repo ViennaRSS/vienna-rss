@@ -70,27 +70,7 @@ class BrowserTab: NSViewController {
 
     init(_ request: URLRequest? = nil, config: WKWebViewConfiguration = WKWebViewConfiguration()) {
 
-        let prefs = WKPreferences()
-        prefs.javaScriptEnabled = true
-        prefs.javaScriptCanOpenWindowsAutomatically = true
-        prefs.plugInsEnabled = true
-        config.preferences = prefs
-        if #available(OSX 10.11, *) {
-            // for useragent, we mimic the installed version of Safari and add our own identifier
-            let shortSafariVersion = Bundle(path: "/Applications/Safari.app")?.infoDictionary?["CFBundleShortVersionString"] as? String
-            let viennaVersion = (NSApp as? ViennaApp)?.applicationVersion?.prefix(while: { character in character != " " })
-            config.applicationNameForUserAgent = "Version/\(shortSafariVersion ?? "9.1") Safari/605 Vienna/\(viennaVersion ?? "3.5+")"
-            config.allowsAirPlayForMediaPlayback = true
-        }
-        if #available(OSX 10.12, *) {
-            config.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.all
-        }
-        self.webView = CustomWKWebView(frame: .zero, configuration: config)
-        self.webView.allowsMagnification = true
-        self.webView.allowsBackForwardNavigationGestures = true
-        if #available(OSX 10.11, *) {
-            self.webView.allowsLinkPreview = true
-        }
+        self.webView = CustomWKWebView(configuration: config)
 
         if #available(macOS 10.12, *) {
             super.init(nibName: nil, bundle: nil)
@@ -206,17 +186,7 @@ extension BrowserTab: Tab {
     }
 
     var textSelection: String {
-        var text = ""
-        waitForAsyncExecution(until: DispatchTime.now() + DispatchTimeInterval.seconds(1)) { finishHandler in
-            self.webView.evaluateJavaScript("window.getSelection().getRangeAt(0).toString()") { res, _ in
-                guard let selectedText = res as? String else {
-                    return
-                }
-                text = selectedText
-                finishHandler()
-            }
-        }
-        return text
+        return webView.textSelection
     }
 
     var html: String {
@@ -257,8 +227,7 @@ extension BrowserTab: Tab {
 
     func searchFor(_ searchString: String, action: NSFindPanelAction) {
         //webView.evaluateJavaScript("document.execCommand('HiliteColor', false, 'yellow')", completionHandler: nil)
-        let searchUpward = action == .previous ? "true" : "false"
-        webView.evaluateJavaScript("window.find(textToFind='\(searchString)', matchCase=false, searchUpward=\(searchUpward), wrapAround=true)", completionHandler: nil)
+        self.webView.search(searchString, upward: action == .previous)
     }
 
     func loadTab() {
