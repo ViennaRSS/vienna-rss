@@ -527,7 +527,7 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="3645E290-4147-4201-8018-6E3A685BE640" explicitItemIdentifier="GetInfo" label="Get Info" paletteLabel="Get Info" toolTip="See information about the selected subscription" image="GetInfoTemplate" sizingBehavior="auto" id="7iy-IN-8oG" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <button key="view" verticalHuggingPriority="750" id="dU4-uo-rcp">
-                            <rect key="frame" x="14" y="14" width="22" height="23"/>
+                            <rect key="frame" x="10" y="14" width="30" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="GetInfoTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1Lf-O5-dn9">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -875,7 +875,7 @@
     <resources>
         <image name="DeleteTemplate" width="18" height="14"/>
         <image name="EmptyTrashTemplate" width="19" height="14"/>
-        <image name="GetInfoTemplate" width="16" height="28"/>
+        <image name="GetInfoTemplate" width="28" height="28"/>
         <image name="MailTemplate" width="17" height="12"/>
         <image name="MarkReadTemplate" width="19" height="14"/>
         <image name="NSActionTemplate" width="15" height="15"/>
