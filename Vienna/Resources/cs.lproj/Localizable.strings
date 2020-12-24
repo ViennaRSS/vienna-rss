@@ -460,6 +460,11 @@
 /* Placeholder title of a search field */
 "Search all articles" = "Hledat ve všech příspěvcích";
 
+/* Toolbar item label
+   Toolbar item palette label
+   Toolbar item tooltip */
+"Search Articles" = "Hledat v příspěvcích";
+
 /* No comment provided by engineer. */
 "Search Results" = "Výsledky hledání";
 
