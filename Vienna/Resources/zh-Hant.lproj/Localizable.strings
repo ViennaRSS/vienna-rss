@@ -535,6 +535,11 @@
 /* No comment provided by engineer. */
 "Search all articles or the current web page" = "查詢當前網頁的所有文章";
 
+/* Toolbar item label
+   Toolbar item palette label
+   Toolbar item tooltip */
+"Search Articles" = "搜尋文章";
+
 /* Placeholder title of a search field */
 "Search current web page" = "查詢當前網頁";
 
