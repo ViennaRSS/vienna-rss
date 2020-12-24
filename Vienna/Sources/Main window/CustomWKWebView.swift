@@ -49,7 +49,7 @@ public class CustomWKWebView: WKWebView {
         if #available(OSX 10.11, *) {
             // for useragent, we mimic the installed version of Safari and add our own identifier
             let shortSafariVersion = Bundle(path: "/Applications/Safari.app")?.infoDictionary?["CFBundleShortVersionString"] as? String
-            let viennaVersion = (NSApp as? ViennaApp)?.applicationVersion?.prefix(while: { character in character != " " })
+            let viennaVersion = (NSApp as? ViennaApp)?.applicationVersion?.prefix { character in character != " " }
             configuration.applicationNameForUserAgent = "Version/\(shortSafariVersion ?? "9.1") Safari/605 Vienna/\(viennaVersion ?? "3.5+")"
             configuration.allowsAirPlayForMediaPlayback = true
         }
@@ -180,30 +180,36 @@ extension CustomWKWebView {
 
     private func customize(contextMenu menu: NSMenu) {
 
+        guard let contextMenuProvider = contextMenuProvider,
+              let contextMenuListener = contextMenuListener,
+              let blankUrl = URL(string: "about:blank") else {
+            return
+        }
+
         let clickedOnLink = menu.items.contains { $0.identifier?.rawValue == "WKMenuItemIdentifierOpenLinkInNewWindow" }
         let clickedOnImage = menu.items.contains { $0.identifier?.rawValue == "WKMenuItemIdentifierOpenLinkInNewWindow" }
         let clickedOnText = menu.items.contains { $0.identifier?.rawValue == "WKMenuItemIdentifierCopy" }
 
         let context: WKWebViewContextMenuContext
-        let blankUrl = URL(string: "about:blank")!
 
         if clickedOnLink && clickedOnImage {
             context = .pictureLink(
-                image: contextMenuListener?.lastRightClickedImgSrc ?? blankUrl,
-                link: contextMenuListener?.lastRightClickedLink ?? blankUrl)
+                image: contextMenuListener.lastRightClickedImgSrc ?? blankUrl,
+                link: contextMenuListener.lastRightClickedLink ?? blankUrl)
         } else if clickedOnLink {
-            context = .link(contextMenuListener?.lastRightClickedLink ?? blankUrl)
+            context = .link(contextMenuListener.lastRightClickedLink ?? blankUrl)
         } else if clickedOnImage {
-            context = .picture(contextMenuListener?.lastRightClickedImgSrc ?? blankUrl)
+            context = .picture(contextMenuListener.lastRightClickedImgSrc ?? blankUrl)
         } else if clickedOnText {
             context = .text(getTextSelection())
         } else {
             context = .page(url: self.url ?? blankUrl)
         }
 
-        menu.items = contextMenuProvider?.contextMenuItemsFor(purpose: context, existingMenuItems: menu.items) ?? menu.items
-        contextMenuListener?.lastRightClickedLink = nil
-        contextMenuListener?.lastRightClickedImgSrc = nil
+        menu.items = contextMenuProvider.contextMenuItemsFor(purpose: context, existingMenuItems: menu.items)
+
+        contextMenuListener.lastRightClickedLink = nil
+        contextMenuListener.lastRightClickedImgSrc = nil
     }
 }
 

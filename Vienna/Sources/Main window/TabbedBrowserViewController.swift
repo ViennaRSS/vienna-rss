@@ -152,7 +152,7 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
 
 extension TabbedBrowserViewController: Browser {
     func createNewTab(_ url: URL?, inBackground: Bool, load: Bool) -> Tab {
-        return createNewTab(url, inBackground: inBackground, load: load, insertAt: nil)
+        createNewTab(url, inBackground: inBackground, load: load, insertAt: nil)
     }
 
     func createNewTab(_ request: URLRequest, config: WKWebViewConfiguration, inBackground: Bool, insertAt index: Int? = nil) -> Tab {
@@ -299,6 +299,7 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
     }
 }
 
+// MARK: WKUIDelegate + BrowserContextMenuDelegate
 
 extension TabbedBrowserViewController: CustomWKUIDelegate {
     //TODO: implement functionality for alerts and maybe peek actions

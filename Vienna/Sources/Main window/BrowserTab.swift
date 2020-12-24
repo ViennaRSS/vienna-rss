@@ -184,7 +184,7 @@ extension BrowserTab: Tab {
     }
 
     var textSelection: String {
-        return webView.textSelection
+        webView.textSelection
     }
 
     var html: String {
