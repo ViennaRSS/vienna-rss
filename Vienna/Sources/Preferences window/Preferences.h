@@ -74,11 +74,10 @@ extern NSString * const kMA_Notify_MinimumFontSizeChange;
 extern NSString * const kMA_Notify_UseJavaScriptChange;
 extern NSString * const kMA_Notify_UseWebPluginsChange;
 
-// Accessor functions
-+(Preferences *)standardPreferences;
--(void)savePreferences;
+@property (class, readonly) Preferences *standardPreferences;
 
 // Accessor functions
+-(void)savePreferences;
 -(BOOL)boolForKey:(NSString *)defaultName;
 -(NSInteger)integerForKey:(NSString *)defaultName;
 -(NSString *)stringForKey:(NSString *)defaultName;
