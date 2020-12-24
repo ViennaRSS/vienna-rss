@@ -74,22 +74,22 @@
 "AppleScript Error in '%@' script" = "Erreur AppleScript dans le script \"%@\"";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Souhaitez-vous vraiment supprimer les %d groupes sélectionnés ? Cette opération est irréversible.";
+"Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Souhaitez-vous vraiment supprimer les %d groupes sélectionnés ? Cette opération est irréversible.";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Souhaitez-vous vraiment supprimer le groupe '%@' et ses sous-dossiers ? Cette opération est irréversible.";
+"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Souhaitez-vous vraiment supprimer le groupe '%@' et ses sous-dossiers ? Cette opération est irréversible.";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Souhaitez-vous vraiment supprimer le dossier intelligent '%@' ? Cela n'effacera pas les articles répondant à ses critères.";
+"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Souhaitez-vous vraiment supprimer le dossier intelligent '%@' ? Cela n'effacera pas les articles répondant à ses critères.";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete the messages in the Trash folder permanently?" = "Êtes-vous sûr de vouloir vider la corbeille définitivement ?";
+"Are you sure you want to delete the messages in the Trash folder permanently?" = "Êtes-vous sûr de vouloir vider la corbeille définitivement ?";
 
 /* No comment provided by engineer. */
-"Are you sure you want to permanently delete the selected articles?" = "Souhaitez-vous vraiment supprimer les articles sélectionnés ?";
+"Are you sure you want to permanently delete the selected articles?" = "Souhaitez-vous vraiment supprimer les articles sélectionnés ?";
 
 /* No comment provided by engineer. */
-"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Souhaitez-vous vraiment vous désabonner de '%@' ? Cette opération supprimera tous les articles associés.";
+"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Souhaitez-vous vraiment vous désabonner de '%@' ? Cette opération supprimera tous les articles associés.";
 
 /* No comment provided by engineer. */
 "Articles" = "Articles";
@@ -187,7 +187,7 @@
 "Descending" = "Décroissant";
 
 /* No comment provided by engineer. */
-"Do you really want to import the subscriptions from the specified OPML file?" = "Souhaitez-vous vraiment importer des abonnements à partir du fichier OPML désigné ?";
+"Do you really want to import the subscriptions from the specified OPML file?" = "Souhaitez-vous vraiment importer des abonnements à partir du fichier OPML désigné ?";
 
 /* test for a string */
 "does not contain" = "ne contient pas";
@@ -232,13 +232,13 @@
 "Error parsing XML data in feed" = "Erreur de traitement des données XML dans le flux";
 
 /* No comment provided by engineer. */
-"Error retrieving RSS feed:" = "Erreur de récupération du flux RSS :";
+"Error retrieving RSS feed:" = "Erreur de récupération du flux RSS :";
 
 /* No comment provided by engineer. */
 "Error retrieving RSS Icon:" = "Erreur lors de la recherche de l'icône RSS";
 
 /* No comment provided by engineer. */
-"Error: Feed not found!" = "Erreur : fil RSS non trouvé !";
+"Error: Feed not found!" = "Erreur : fil RSS non trouvé !";
 
 /* No comment provided by engineer. */
 "Export Completed" = "Exportation terminée";
@@ -247,7 +247,7 @@
 "External Browser" = "Navigateur externe";
 
 /* No comment provided by engineer. */
-"Feed URL updated to %@" = "Flux URL mis à jour vers : %@";
+"Feed URL updated to %@" = "Flux URL mis à jour vers : %@";
 
 /* No comment provided by engineer. */
 "Fetching Open Reader Subscriptions…" = "Récupération de la liste des abonnements Open Reader…";
@@ -319,7 +319,7 @@
 "Import error" = "Erreur d'importation";
 
 /* No comment provided by engineer. */
-"Import subscriptions from OPML file?" = "Importer des abonnements à partir d'un fichier OPML ?";
+"Import subscriptions from OPML file?" = "Importer des abonnements à partir d'un fichier OPML ?";
 
 /* No comment provided by engineer. */
 "Improper infinitely looping URL redirect to %@" = "Problème de boucle infinie de redirections d'URL vers %@";
@@ -548,13 +548,18 @@
 "Return to the previous page" = "Retourner à la page précédente";
 
 /* No comment provided by engineer. */
-"RSS Icon not found!" = "Icône RSS non trouvée !";
+"RSS Icon not found!" = "Icône RSS non trouvée !";
 
 /* Placeholder title of a search field */
 "Search all articles" = "Chercher dans les articles";
 
 /* No comment provided by engineer. */
 "Search all articles or the current web page" = "Chercher dans les articles ou dans la page actuelle";
+
+/* Toolbar item label
+   Toolbar item palette label
+   Toolbar item tooltip */
+"Search Articles" = "Rechercher des articles";
 
 /* Placeholder title of a search field */
 "Search current web page" = "Chercher dans la page actuelle";

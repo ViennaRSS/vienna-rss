@@ -38,46 +38,46 @@
 "A folder with that name already exists" = "Er bestaat al een map met deze naam";
 
 /* No comment provided by engineer. */
-"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Een nieuw plug-in is toegevoegd. Deze is nu beschikbaar in het menu of u kunt het toevegen aan de knoppenbalk.";
+"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Een nieuw plug-in is toegevoegd. Deze is nu beschikbaar in het menu. Je kunt hem ook toevegen aan de knoppenbalk.";
 
 /* No comment provided by engineer. */
-"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Een nieuwe Vienna-database kan niet worden aagemaakt in \"%@\". De database staat waarschijnlijk op een andere computer in het netwerk, hetgeen door deze versie van Vienna niet wordt ondersteund. Kiest u een andere locatie op deze computer.";
+"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Een nieuwe Vienna-databank kan niet worden aangemaakt in \"%@\". De databank bevindt zich waarschijnlijk op een andere computer in het netwerk, wat door deze versie van Vienna niet wordt ondersteund. Kies een andere locatie op deze Mac.";
 
 /* No comment provided by engineer. */
-"After 2 Days" = "Na 2 dagen";
+"After 2 Days" = "Na twee dagen";
 
 /* No comment provided by engineer. */
-"After 2 Weeks" = "Na 2 weken";
+"After 2 Weeks" = "Na twee weken";
 
 /* No comment provided by engineer. */
-"After a Day" = "Na een dag";
+"After a Day" = "Na één dag";
 
 /* No comment provided by engineer. */
-"After a Month" = "Na een maand";
+"After a Month" = "Na één maand";
 
 /* No comment provided by engineer. */
-"After a Week" = "Na een week";
+"After a Week" = "Na één week";
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "De laatste keer dat deze feed is bijgewerkt, is er een fout opgetreden";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Weet u zeker dat u deze %d groepen wilt verwijderen? U kunt dit niet ongedaan maken.";
+"Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Weet je zeker dat je deze %d groepen wilt verwijderen? Je kunt dit niet ongedaan maken.";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Weet u zeker dat u de groep \"%@\" en alle subgroepen wilt verwijderen? U kunt dit niet ongedaan maken.";
+"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Weet je zeker dat je de groep \"%@\" en alle subgroepen wilt verwijderen? Je kunt dit niet ongedaan maken.";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Weet u zeker dat u de slimme map \"%@\" wilt verwijderen? De originele artikelen worden niet verwijderd.";
+"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Weet je zeker dat je de slimme map \"%@\" wilt verwijderen? De originele artikelen worden niet verwijderd.";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete the messages in the Trash folder permanently?" = "Weet u zeker dat u de artikelen in de prullenmand definitief wilt verwijderen?";
+"Are you sure you want to delete the messages in the Trash folder permanently?" = "Weet je zeker dat je de artikelen in de prullenmand definitief wilt verwijderen?";
 
 /* No comment provided by engineer. */
-"Are you sure you want to permanently delete the selected articles?" = "Weet u zeker dat u de geselecteerde berichten wilt verwijderen?";
+"Are you sure you want to permanently delete the selected articles?" = "Weet je zeker dat je de geselecteerde berichten wilt verwijderen?";
 
 /* No comment provided by engineer. */
-"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Weet u zeker dat u het abonnement \"%@\" wilt opzeggen? Alle opgeslagen artikelen worden verwijderd.";
+"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Weet je zeker dat je het abonnement \"%@\" wilt opzeggen? Alle opgeslagen artikelen worden verwijderd.";
 
 /* No comment provided by engineer. */
 "Articles" = "Artikelen";
@@ -99,7 +99,7 @@
 "Cannot create folder" = "Kan map niet creëren";
 
 /* No comment provided by engineer. */
-"Cannot create the Vienna database" = "Kan de Vienna-database niet aanmaken";
+"Cannot create the Vienna database" = "Kan de Vienna-databank niet aanmaken";
 
 /* No comment provided by engineer. */
 "Cannot import the specified file. The file contents are not valid OPML XML format." = "Kan het opgegeven bestand niet importeren. Het is geen geldig OPML-bestand.";
@@ -129,7 +129,7 @@
 "Copy URL" = "Kopieer URL";
 
 /* No comment provided by engineer. */
-"Database Upgrade" = "Database bijwerken";
+"Database Upgrade" = "Databank bijwerken";
 
 /* Data field name visible in menu/article list/smart folder definition */
 "Date" = "Datum";
@@ -169,7 +169,7 @@
 "Descending" = "Aflopend";
 
 /* No comment provided by engineer. */
-"Do you really want to import the subscriptions from the specified OPML file?" = "Wilt u echt abonnementen uit dit OPML bestand importeren?";
+"Do you really want to import the subscriptions from the specified OPML file?" = "Wil je echt abonnementen uit dit OPML-bestand importeren?";
 
 /* test for a string */
 "does not contain" = "bevat niet";
@@ -268,7 +268,7 @@
 "HTTP code %d reported from server" = "HTTP-code %d gemeld door de server";
 
 /* No comment provided by engineer. */
-"If you quit Vienna now, all downloads will stop." = "Wilt u alle downloads annuleren en Vienna nu afsluiten?";
+"If you quit Vienna now, all downloads will stop." = "Wil je alle downloads annuleren en Vienna nu afsluiten?";
 
 /* Title of a button on an alert */
 "Import" = "Importeer";
@@ -317,6 +317,9 @@
 
 /* Title of a button on an alert */
 "Locate…" = "Zoek op…";
+
+/* No comment provided by engineer. */
+"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "Controleer of gebruikersnaam en wachtwoord voor de Open Reader-server juist zijn ingesteld in de voorkeuren. Controleer ook je netwerkverbinding.";
 
 /* Title of a menu item */
 "Mark All Articles as Read" = "Markeer alles als gelezen";
@@ -484,6 +487,11 @@
 /* No comment provided by engineer. */
 "Search all articles or the current web page" = "Doorzoek alle artikelen of de huidige webpagina";
 
+/* Toolbar item label
+   Toolbar item palette label
+   Toolbar item tooltip */
+"Search Articles" = "Zoek artikelen";
+
 /* Placeholder title of a search field */
 "Search current web page" = "Doorzoek huidige webpagina";
 
@@ -515,10 +523,10 @@
 "Show Toolbar" = "Toon knoppenbalk";
 
 /* No comment provided by engineer. */
-"Sorry but Vienna was unable to open the database" = "Vienna kon de database niet openen";
+"Sorry but Vienna was unable to open the database" = "Vienna kon de databank niet openen";
 
 /* No comment provided by engineer. */
-"Sorry, but Vienna was unable to create the database folder" = "Vienna kan de databasemap niet aanmaken";
+"Sorry, but Vienna was unable to create the database folder" = "Vienna kan de databank-map niet aanmaken";
 
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "Onderwerp";
@@ -536,13 +544,13 @@
 "The \"%@\" folder cannot be created." = "De map \"%@\" kan niet worden gecreëerd.";
 
 /* No comment provided by engineer. */
-"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "Het bestandsformaat van de database (%@) wordt door deze versie van Vienna niet ondersteund. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.";
+"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "Het bestandsformaat van de databank (%@) wordt door deze versie van Vienna niet ondersteund. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.";
 
 /* No comment provided by engineer. */
-"The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna." = "Het database-bestand (%@) kon niet worden geopend. Het zou beschadigd of ontoegankelijk kunnen zijn. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.";
+"The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna." = "Het databank-bestand (%@) kon niet worden geopend. Het zou beschadigd of ontoegankelijk kunnen zijn. Wijzig de naam of verwijder het bestand en start Vienna opnieuw.";
 
 /* No comment provided by engineer. */
-"The database file format has changed" = "Het bestandsformaat van de database is veranderd";
+"The database file format has changed" = "Het bestandsformaat van de databank is gewijzigd";
 
 /* No comment provided by engineer. */
 "The Default style will be used instead." = "De standaardstijl zal worden gebruikt.";
@@ -551,13 +559,13 @@
 "The specified export output file could not be created. Check that it is not locked and no other application is using it." = "Het opgegeven exportbestand kon niet worden aangemaakt. Controleer of het bestand niet is beveiligd of geopend in een ander programma.";
 
 /* No comment provided by engineer. */
-"The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "De stijl \"%@\" is in uw stijlenmap geïnstalleerd en toegevoegd aan het menu Stijlen.";
+"The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "De stijl \"%@\" is in je stijlenmap geïnstalleerd en toegevoegd aan het menu Stijlen.";
 
 /* No comment provided by engineer. */
 "The style %@ appears to be missing or corrupted" = "De stijl %@ lijkt te zijn beschadigd";
 
 /* No comment provided by engineer. */
-"The subscription for \"%@\" requires a user name and password for access." = "Voor toegang tot het abonnement op \"%@\" heeft u een gebruikersnaam en wachtwoord nodig.";
+"The subscription for \"%@\" requires a user name and password for access." = "Voor toegang tot het abonnement op \"%@\" heb je een gebruikersnaam en wachtwoord nodig.";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Dit artikel bevat een bijlage.";
@@ -590,19 +598,19 @@
 "Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles." = "Wis Open Reader RSS feed";
 
 /* Title of a button on an alert */
-"Upgrade Database" = "Bijwerken database";
+"Upgrade Database" = "Werk databank bij";
 
 /* URL */
 "URL" = "URL";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna kan het bestand \"%@\" niet openen, omdat het is verplaatst sinds u het heeft gedownload.";
+"Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna kan het bestand \"%@\" niet openen, omdat het is verplaatst sinds je het hebt gedownload.";
 
 /* No comment provided by engineer. */
 "Vienna cannot open the file." = "Vienna kan het bestand niet openen.";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file \"%@\" because it moved since you downloaded it." = "Vienna kan het bestand \"%@\" niet tonen, omdat het is verplaatst sinds u het heeft gedownload.";
+"Vienna cannot show the file \"%@\" because it moved since you downloaded it." = "Vienna kan het bestand \"%@\" niet tonen, omdat het is verplaatst sinds je het hebt gedownload.";
 
 /* No comment provided by engineer. */
 "Vienna cannot show the file." = "Vienna kan het bestand niet tonen.";
@@ -611,7 +619,7 @@
 "Vienna has installed a new style" = "Vienna heeft een nieuwe stijl geïnstalleerd";
 
 /* No comment provided by engineer. */
-"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." = "Vienna moet de database bijwerken naar de laatste versie. Dit kan enige tijd duren. Sorry voor het ongemak.";
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." = "Vienna moet de databank bijwerken naar de laatste versie. Dit kan enige tijd duren. Excuses voor het ongemak.";
 
 /* No comment provided by engineer. */
 "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna probeerde de map \"%@\" te maken, maar er ging iets fout. Controleer de bevoegdheden van de bovenliggende mappen.";
@@ -623,7 +631,7 @@
 "Yesterday" = "Gisteren";
 
 /* You are already subscribed to that feed */
-"You are already subscribed to that feed" = "U heeft al een abonnement op deze feed";
+"You are already subscribed to that feed" = "Je hebt al een abonnement op deze feed";
 
 /* No comment provided by engineer. */
 "You cannot undo this action" = "Dit kan niet ongedaan worden gemaakt";
