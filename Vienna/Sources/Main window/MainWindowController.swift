@@ -180,6 +180,7 @@ extension MainWindowController: NSToolbarDelegate {
             } else {
                 item = NSToolbarItem(itemIdentifier: itemIdentifier)
                 item.view = NSSearchField()
+                item.maxSize.width = 210
                 item.visibilityPriority = .high
                 toolbarSearchField = item.view as? NSSearchField
             }
