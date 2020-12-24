@@ -219,9 +219,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     dispatch_semaphore_signal(sema);
 
             }];
-            if (@available(macOS 10.10, *)) {
-                task.priority = NSURLSessionTaskPriorityHigh;
-            };
+            task.priority = NSURLSessionTaskPriorityHigh;
             [task resume];
 
         }];
@@ -301,13 +299,11 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                                                                            repeats:YES];
                     }
                 }
-				// Signal that we are done with the synchronous task
-				dispatch_semaphore_signal(sema);
-          }];
-          if (@available(macOS 10.10, *)) {
-              task.priority = NSURLSessionTaskPriorityHigh;
-          };
-          [task resume];
+                // Signal that we are done with the synchronous task
+                dispatch_semaphore_signal(sema);
+            }];
+            task.priority = NSURLSessionTaskPriorityHigh;
+            [task resume];
         }];
         [tTokenOperation start];
         // we wait until the task response block above will send a signal
