@@ -83,12 +83,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         networkQueue.name = @"VNAHTTPSession queue";
         networkQueue.maxConcurrentOperationCount = [[Preferences standardPreferences] integerForKey:MAPref_ConcurrentDownloads];
         NSString * osVersion;
-        if (@available(macOS 10.10, *)) {
-            NSOperatingSystemVersion version = [NSProcessInfo processInfo].operatingSystemVersion;
-            osVersion = [NSString stringWithFormat:@"%ld_%ld_%ld", version.majorVersion, version.minorVersion, version.patchVersion];
-        } else {
-            osVersion = @"10_9_x";
-        }
+        NSOperatingSystemVersion version = [NSProcessInfo processInfo].operatingSystemVersion;
+        osVersion = [NSString stringWithFormat:@"%ld_%ld_%ld", version.majorVersion, version.minorVersion, version.patchVersion];
         Preferences * prefs = [Preferences standardPreferences];
         NSString *name = prefs.userAgentName;
 
