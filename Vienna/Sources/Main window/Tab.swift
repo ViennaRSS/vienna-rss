@@ -54,6 +54,6 @@ public protocol Tab {
 
     // MARK: other actions
 
-    func print()
+    func printPage()
     func activateAddressBar()
 }

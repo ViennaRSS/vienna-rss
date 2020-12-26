@@ -19,8 +19,12 @@
 
 import Cocoa
 
+// MARK: State
+
 @available(OSX 10.10, *)
 class BrowserTab: NSViewController {
+
+    // MARK: Properties
 
 	let webView: CustomWKWebView = {
 		let prefs = WKPreferences()
@@ -51,152 +55,163 @@ class BrowserTab: NSViewController {
     @IBOutlet private(set) weak var backButton: NSButton!
     @IBOutlet private(set) weak var forwardButton: NSButton!
     @IBOutlet private(set) weak var reloadButton: NSButton!
+
     @IBOutlet private(set) weak var cancelButtonWidth: NSLayoutConstraint!
     @IBOutlet private(set) weak var reloadButtonWidth: NSLayoutConstraint!
+    @IBOutlet private(set) weak var rssButtonWidth: NSLayoutConstraint!
 
-	var tabUrl: URL? {
+	var url: URL? = nil {
 		didSet {
-            if tabUrl != webView.url {
-                self.title = tabUrl?.host ?? NSLocalizedString("New Tab", comment: "")
+            if self.url != webView.url || self.url == nil {
+                self.title = self.url?.host ?? NSLocalizedString("New Tab", comment: "")
             }
-            self.addressField?.stringValue = tabUrl?.absoluteString ?? ""
+            self.addressField?.stringValue = self.url?.absoluteString ?? ""
 		}
 	}
 
-    var loading: Bool = false {
-        didSet {
-            cancelButtonWidth?.constant = loading ? 30 : 0
-            reloadButtonWidth?.constant = loading ? 0 : 30
-            NSAnimationContext.runAnimationGroup({_ in
-                NSAnimationContext.current.duration = 0.2
-                NSAnimationContext.current.allowsImplicitAnimation = true
-                addressBarContainer.layoutSubtreeIfNeeded()
-            }, completionHandler: nil)
-        }
-    }
-    var loadedUrl: Bool = false
+    var loadedTab: Bool = false
+
+    var loading: Bool = false
+
+    /// backing storage only, access via rssSubscriber property
+    weak var rssDelegate: RSSSubscriber? = nil
+    /// backing storage only, access via rssUrl property
+    var rssFeedUrl: URL? = nil
+
+    var showRssButton: Bool = false
+
+    var viewVisible: Bool = false
 
 	var titleObservation: NSKeyValueObservation!
+    var loadingObservation: NSKeyValueObservation!
+    var urlObservation: NSKeyValueObservation!
 
-	init() {
+    // MARK: object lifecycle
+
+    init() {
         if #available(macOS 10.12, *) {
             super.init(nibName: nil, bundle: nil)
         } else {
             super.init(nibName: "BrowserTabBeforeMacOS12", bundle: nil)
         }
-		titleObservation = webView.observe(\.title, options: .new) { [weak self] _, change in
+        titleObservation = webView.observe(\.title, options: .new) { [weak self] _, change in
             guard let newValue = change.newValue ?? "", !newValue.isEmpty else {
                 return
             }
             self?.title = newValue
-		}
-	}
+        }
+        loadingObservation = webView.observe(\.isLoading, options: .new) { [weak self] _, change in
+            guard let newValue = change.newValue else {
+                return
+            }
+            self?.loading = newValue
+        }
+        urlObservation = webView.observe(\.url, options: .new) { [weak self] _, change in
+            guard let newValue = change.newValue else {
+                return
+            }
+            self?.url = newValue
+        }
+    }
 
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
 
+	deinit {
+		titleObservation.invalidate()
+        loadingObservation.invalidate()
+	}
+
+    // MARK: ViewController lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		//set up webview
+        //set up webview (not yet possible via interface builder)
         webView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(webView, positioned: .below, relativeTo: nil)
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
-		self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[addressBarContainer][webView]|", options: [], metrics: nil, views: ["webView": webView, "addressBarContainer": addressBarPaddingView as Any]))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[addressBarContainer][webView]|", options: [], metrics: nil, views: ["webView": webView, "addressBarContainer": addressBarPaddingView as Any]))
 
-        if let title = webView.title, !title.isEmpty {
-			self.title = title
-        } else if self.title == nil || self.title!.isEmpty, let host = self.tabUrl?.host {
-			self.title = host
-		}
-		if let url = webView.url {
-			self.addressField.stringValue = url.absoluteString
-		}
+        //title needs to be adjusted once view is loaded
 
-		//set up address bar handling
-		addressField.delegate = self
+        //reload button / cancel button layout is not determined yet
+        self.loading = self.webView.isLoading
+
+        //set up url displayed in address field
+        if let url = webView.url {
+            self.url = url
+        }
+
+        self.viewDidLoadRss()
+
+        updateAddressBarLayout()
+
+        //set up address bar handling
+        addressField.delegate = self
 
         //set up navigation handling
         webView.navigationDelegate = self
+    }
 
-        loading = false
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        addressBarContainer.layoutSubtreeIfNeeded()
+        self.viewVisible = true
     }
 
     override func viewDidAppear() {
-        if self.loadedUrl {
+        super.viewDidAppear()
+        if self.loadedTab {
             self.view.window?.makeFirstResponder(self.webView)
         }
     }
 
-	deinit {
-		titleObservation.invalidate()
-	}
-}
+    override func viewDidDisappear() {
+        super.viewDidDisappear()
+        self.viewVisible = false
+    }
 
-@available(OSX 10.10, *)
-extension BrowserTab: NSTextFieldDelegate {
-	//TODO: things like address suggestion etc
-    //TODO: restore url string when user presses escape in textfield, make webview first responder
+    func updateAddressBarLayout() {
 
+        cancelButtonWidth?.constant = loading ? 30 : 0
+        reloadButtonWidth?.constant = loading ? 0 : 30
 
-
-    @IBAction func loadPageFromAddressBar(_ sender: Any) {
-        let theURL = addressField.stringValue
-
-        guard !theURL.isEmpty else {
-            tabUrl = nil
-            self.loadTab()
-            return
+        if showRssButton {
+            //show rss button
+            rssButtonWidth.constant = 40
+        } else {
+            //hide rss button
+            rssButtonWidth.constant = 0
         }
 
-        cleanAndLoad(theURL)
-    }
-
-
-    @IBAction func reload(_ sender: Any) {
-        self.reloadTab()
-    }
-
-    @IBAction func cancel(_ sender: Any) {
-        self.stopLoadingTab()
-    }
-
-    @IBAction func forward(_ sender: Any) {
-        _ = self.forward()
-    }
-
-    @IBAction func back(_ sender: Any) {
-        _ = self.back()
-    }
-
-    private func cleanAndLoad(_ theURL: String) {
-
-        var cleanedUrl = theURL
-
-        if URL(string: cleanedUrl)?.scheme == nil {
-            // If no '.' appears in the string, wrap it with 'www' and 'com'
-            if !cleanedUrl.contains(".") {
-                //TODO: search instead of assuming .com ending
-                cleanedUrl = "www." + cleanedUrl + ".com"
-            }
-            cleanedUrl = "http://" + cleanedUrl
+        if viewVisible {
+            NSAnimationContext.runAnimationGroup({_ in
+                NSAnimationContext.current.duration = 0.2
+                NSAnimationContext.current.allowsImplicitAnimation = true
+                addressBarContainer.layoutSubtreeIfNeeded()
+            }, completionHandler: nil)
+        } else {
+            addressBarContainer.layoutSubtreeIfNeeded()
         }
-
-        // cleanUpUrl is a hack to handle Internationalized Domain Names. WebKit handles them automatically, so we tap into that.
-        let urlToLoad = cleanedUpUrlFromString(cleanedUrl)
-
-        //set url and load immediately, because action was invoked by user
-        self.tabUrl = urlToLoad
-        self.loadTab()
-
-        self.tabUrl = URL(string: addressField.stringValue)
-        self.loadTab()
     }
 }
+
+//MARK: Tab functionality
 
 @available(OSX 10.10, *)
 extension BrowserTab: Tab {
+
+    var tabUrl: URL? {
+        set {
+            self.url = newValue
+            self.loadedTab = false
+        }
+        get {
+            return self.url
+        }
+    }
 
     var textSelection: String {
         var text = ""
@@ -213,25 +228,25 @@ extension BrowserTab: Tab {
     }
 
     var html: String {
-        ""
+        "" //TODO: get HTML and return
     }
 
     var isLoading: Bool {
-		webView.isLoading
+		loading
     }
 
     func back() -> Bool {
 		let couldGoBack = self.webView.goBack() != nil
-        self.tabUrl = self.webView.url
         //title observation not triggered by goBack() -> manual setting
+        self.url = self.webView.url
         self.title = self.webView.title
         return couldGoBack
     }
 
     func forward() -> Bool {
 		let couldGoForward = self.webView.goForward() != nil
-        self.tabUrl = self.webView.url
         //title observation not triggered by goForware() -> manual setting
+        self.url = self.webView.url
         self.title = self.webView.title
         return couldGoForward
     }
@@ -256,11 +271,11 @@ extension BrowserTab: Tab {
 
     func loadTab() {
         if self.isViewLoaded {
-            self.addressField.stringValue = self.tabUrl?.absoluteString ?? ""
+            self.addressField.stringValue = self.url?.absoluteString ?? ""
         }
-        if let url = self.tabUrl {
+        if let url = self.url {
             self.webView.load(URLRequest(url: url))
-            loadedUrl = true
+            loadedTab = true
             if self.isViewLoaded && self.view.window != nil {
                 self.view.window?.makeFirstResponder(self.webView)
             }
@@ -277,7 +292,6 @@ extension BrowserTab: Tab {
 
     func stopLoadingTab() {
         self.webView.stopLoading()
-        loading = false //because delegate does not get called in this case
     }
 
     func decreaseTextSize() {
@@ -288,7 +302,7 @@ extension BrowserTab: Tab {
         //TODO: apple has not implemented this on macOS. There is a property webkit-text-size-adjust on iOS though.
     }
 
-    func print() {
+    func printPage() {
         //TODO: neither Javascript nor the native print methods work here. This is a webkit bug:
         // rdar://problem/36557179
         self.webView.printView(nil)
@@ -299,6 +313,8 @@ extension BrowserTab: Tab {
     }
 }
 
+// MARK: Webview navigation
+
 @available(OSX 10.10, *)
 extension BrowserTab: WKNavigationDelegate {
 
@@ -306,20 +322,27 @@ extension BrowserTab: WKNavigationDelegate {
         handleNavigationStart()
     }
 
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation?, withError error: Error) {
+        //TODO: provisional navigation fail seems to translate to error in resolving URL or similar. Treat different from normal navigation fail
+        handleNavigationEnd(success: false)
+    }
+
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation?, withError error: Error) {
-        handleNavigationEnd()
+        //TODO: show failure to load as page or symbol
+        handleNavigationEnd(success: false)
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation?) {
-        handleNavigationEnd()
+        handleNavigationEnd(success: true)
     }
 
     func handleNavigationStart() {
-        loading = true
+        self.handleNavigationStartRss()
+        updateAddressBarLayout()
     }
 
-    func handleNavigationEnd() {
-        self.tabUrl = self.webView.url
-        loading = false
+    func handleNavigationEnd(success: Bool) {
+        self.handleNavigationEndRss(success: success)
+        updateAddressBarLayout()
     }
 }
