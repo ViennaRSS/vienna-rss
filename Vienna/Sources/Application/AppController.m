@@ -52,7 +52,6 @@
 #import "TreeNode.h"
 #import "Field.h"
 #import "Folder.h"
-#import "Browser.h"
 #import "ArticleListView.h"
 #import "UnifiedDisplayView.h"
 #import "ArticleView.h"
@@ -853,24 +852,27 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)openPageInBrowser:(id)sender
 {
-	NSView * theView = self.browser.activeTab.view;
-	NSURL * url = nil;
-	
-	// Get the URL from the appropriate view.
-	if ([theView isKindOfClass:[BrowserPane class]])
-	{
-		BrowserPane * webPane = (BrowserPane *)theView;
-		url = webPane.url;
-	}
-	else if ([theView isKindOfClass:[ArticleListView class]])
-	{
-		ArticleListView * articleListView = (ArticleListView *)theView;
-		url = articleListView.url;
-	}
+	NSURL * url = [self getUrlFromCurrentView];
 
 	// If we have an URL then open it in the default browser.
-	if (url != nil)
+    if (url != nil) {
 		[self openURLInDefaultBrowser:url];
+    }
+}
+
+- (NSURL *)getUrlFromCurrentView {
+    id<Tab> activeBrowserTab = self.browser.activeTab;
+    NSURL * url = nil;
+
+    // Get the URL from the appropriate view.
+    if (activeBrowserTab) {
+        url = activeBrowserTab.url;
+    }
+    else {
+        ArticleListView * articleListView = (ArticleListView *)self.browser.primaryTab.view;
+        url = articleListView.url;
+    }
+    return url;
 }
 
 /* copyPageURLToClipboard
@@ -878,20 +880,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)copyPageURLToClipboard:(id)sender
 {
-	NSView * theView = self.browser.activeTab.view;
-	NSURL * url = nil;
-
-	// Get the URL from the appropriate view.
-	if ([theView isKindOfClass:[BrowserPane class]])
-	{
-		BrowserPane * webPane = (BrowserPane *)theView;
-		url = webPane.url;
-	}
-	else if ([theView isKindOfClass:[ArticleListView class]])
-	{
-		ArticleListView * articleListView = (ArticleListView *)theView;
-		url = articleListView.url;
-	}
+    NSURL * url = [self getUrlFromCurrentView];
 
 	// If we have an URL then copy it to the clipboard.
 	if (url != nil)
@@ -930,7 +919,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 -(void)newTab:(id)sender
 {
-	[self.browser createNewTab];
+    [self.browser createNewTab:nil inBackground:NO load:NO];
 }
 
 /* openWebElementInDefaultBrowser
@@ -951,17 +940,18 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)openWebLocation:(id)sender
 {
-	NSView * theView = self.browser.activeTab.view;
-	[self showMainWindow:self];
-	if (![theView isKindOfClass:[BrowserPane class]])
+	id<Tab> activeBrowserTab = self.browser.activeTab;
+
+    //TODO: check why this is necessary here
+    [self showMainWindow:self];
+	if (!activeBrowserTab)
 	{
-		[self.browser createNewTab:nil inBackground:NO];
-		theView = self.browser.activeTab.view;
-	}
-	if ([theView isKindOfClass:[BrowserPane class]])
-	{
-		BrowserPane * browserPane = (BrowserPane *)theView;
-		[browserPane activateAddressBar];
+		[self.browser createNewTab:nil inBackground:NO load:NO];
+    } else {
+        //TODO: open web location should activate address bar of tab.
+        //actually this is not really a crucial functionality.
+//        BrowserPane * browserPane = (BrowserPane *)theView;
+//        [browserPane activateAddressBar];
 	}
 }
 
@@ -1185,8 +1175,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)handleShowFilterBar:(NSNotification *)nc
 {
-	if (self.browser.activeTab == self.browser.primaryTab)
+    if (self.browser.activeTab == nil) {
 		[self setFilterBarState:[Preferences standardPreferences].showFilterBar withAnimation:YES];
+    }
 }
 
 /* showHideFilterBar
@@ -1557,7 +1548,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)printDocument:(id)sender
 {
-	[((NSView<BaseView> *)self.browser.activeTab.view) printDocument:sender];
+    //TODO: print webview content in article tab
+    id<Tab> activeBrowserTab = self.browser.activeTab;
+
+    if (activeBrowserTab) {
+        [activeBrowserTab print];
+    }
 }
 
 /* folders
@@ -2065,7 +2061,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)goForward:(id)sender
 {
-	[((NSView<BaseView> *)self.browser.activeTab.view) handleGoForward:sender];
+    [self.browser.activeTab forward];
 }
 
 /* goBack
@@ -2074,7 +2070,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)goBack:(id)sender
 {
-	[((NSView<BaseView> *)self.browser.activeTab.view) handleGoBack:sender];
+    [self.browser.activeTab back];
 }
 
 /* localPerformFindPanelAction
@@ -2098,7 +2094,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			break;
 			
 		default:
-			[((NSView<BaseView> *)self.browser.activeTab.view) performFindPanelAction:[sender tag]];
+            //TODO: does not seem to work anyway
+			//[((NSView<BaseView> *)self.browser.activeTab.view) performFindPanelAction:[sender tag]];
 			break;
 	}
 }
@@ -2245,17 +2242,19 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			
 		case ' ': //SPACE
 		{
-			WebView * view = ((NSView<BaseView> *)self.browser.activeTab.view).webView;
-			NSView * theView = view.mainFrame.frameView.documentView;
+            id<Tab> activeBrowserTab = self.browser.activeTab;
 			
-			if (theView == nil)
+            if (activeBrowserTab == nil) {
+                //we are in the article view
 				[self viewNextUnread:self];
+            }
+            /*
 			else
 			{
 				NSRect visibleRect = theView.visibleRect;
                 if (flags & NSEventModifierFlagShift)
 				{
-					if (visibleRect.origin.y < 2)
+                    if (visibleRect.origin.y < 2)
 						[self goBack:self];
 					else
 						[view scrollPageUp:self];
@@ -2268,7 +2267,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 					else
 						[view scrollPageDown:self];
 				}
-			}
+			}*/
 			return YES;
 		}
 	}
@@ -2842,7 +2841,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)closeAllTabs:(id)sender
 {
-	[self.browser closeAllTabs];
+    [self.browser closeAllTabs];
 }
 
 /* closeTab
@@ -2850,7 +2849,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)closeTab:(id)sender
 {
-	[self.browser closeActiveTab];
+	[self.browser.activeTab close];
 }
 
 /* reloadPage
@@ -2858,9 +2857,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)reloadPage:(id)sender
 {
-	NSView * theView = self.browser.activeTab.view;
-	if ([theView isKindOfClass:[BrowserPane class]])
-		[theView performSelector:@selector(handleReload:)];
+    [self.browser.activeTab reload];
 }
 
 /* stopReloadingPage
@@ -2868,9 +2865,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)stopReloadingPage:(id)sender
 {
-	NSView * theView = self.browser.activeTab.view;
-	if ([theView isKindOfClass:[BrowserPane class]])
-		[theView performSelector:@selector(handleStopLoading:)];
+    [self.browser.activeTab stopLoading];
 }
 
 /* updateAlternateMenuTitle
@@ -2906,8 +2901,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 -(void)updateStatusBarFilterButtonVisibility
 {
-	NSView * theView = self.browser.activeTab.view;
-	if ([theView isKindOfClass:[BrowserPane class]])
+    id<Tab> activeBrowserTab = self.browser.activeTab;
+	if (activeBrowserTab)
 	{
         self.mainWindowController.filterAreaIsHidden = YES;
 		[self setFilterBarState:NO withAnimation:NO];
@@ -2924,11 +2919,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)updateSearchPlaceholderAndSearchMethod
 {
-	NSView * theView = self.browser.activeTab.view;
+	id<Tab> activeBrowserTab = self.browser.activeTab;
 	Preferences * prefs = [Preferences standardPreferences];
 	
 	// START of rather verbose implementation of switching between "Search all articles" and "Search current web page".
-	if ([theView isKindOfClass:[BrowserPane class]])
+	if (activeBrowserTab)
 	{
 		// If the current view is a browser view and "Search all articles" is the current SearchMethod, switch to "Search current webpage"
 		if ([prefs.searchMethod.friendlyName isEqualToString:[SearchMethod searchAllArticlesMethod].friendlyName])
@@ -3028,7 +3023,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)searchUsingFilterField:(id)sender
 {
-	[((NSView<BaseView> *)self.browser.activeTab.view) performFindPanelAction:NSFindPanelActionNext];
+    //TODO: make this work for the article list
+	[self.browser.activeTab searchFor:self.searchString action:NSFindPanelActionNext];
 }
 
 - (IBAction)searchUsingTreeFilter:(NSSearchField* )field
@@ -3077,11 +3073,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)performWebPageSearch
 {
-	NSView<BaseView> * theView = (NSView<BaseView> *)self.browser.activeTab.view;
-	if ([theView isKindOfClass:[BrowserPane class]])
-	{
+	id<Tab> activeBrowserTab = self.browser.activeTab;
+	if (activeBrowserTab) {
 		[self setFocusToSearchField:self];
-		[theView performFindPanelAction:NSFindPanelActionSetFindString];
+        [activeBrowserTab searchFor:self.searchString action:NSFindPanelActionSetFindString];
 	}
 }	
 	
@@ -3182,11 +3177,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	Article * currentArticle;
 
     // If the active tab is a web view, mail the URL
-    NSTabViewItem *activeTab = self.browser.activeTab;
-    if (activeTab != [self.browser primaryTab]) {
-        NSURL *url = ((BrowserPane *)activeTab.view).url;
+    id<Tab> activeBrowserTab = self.browser.activeTab;
+    if (activeBrowserTab) {
+        NSURL *url = activeBrowserTab.url;
         if (url != nil) {
-			title = percentEscape(activeTab.label);
+			title = percentEscape(activeBrowserTab.title);
 			link = percentEscape(url.absoluteString);
 			mailtoLink = [NSMutableString stringWithFormat:@"mailto:?subject=%@&body=%@", title, link];
 		}
@@ -3224,21 +3219,28 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 /* makeTextSmaller
  * Make text size smaller in the article pane.
  * In the future, we may want this to make text size smaller in the article list instead.
+ * //TODO: do we really want this?
  */
--(IBAction)makeTextSmaller:(id)sender
-{
-	NSView<BaseView> * activeView = ((NSView<BaseView> *)self.browser.activeTab.view);
-	[activeView.webView makeTextSmaller:sender];
+-(IBAction)makeTextSmaller:(id)sender {
+    //TODO: make text smaller in article tab webview
+    id<Tab> activeBrowserTab = self.browser.activeTab;
+    if (activeBrowserTab) {
+        [activeBrowserTab decreaseTextSize];
+    }
 }
 
 /* makeTextLarger
  * Make text size larger in the article pane.
  * In the future, we may want this to make text size larger in the article list instead.
+ * //TODO: do we really want this?
  */
 -(IBAction)makeTextLarger:(id)sender
 {
-	NSView<BaseView> * activeView = ((NSView<BaseView> *)self.browser.activeTab.view);
-	[activeView.webView makeTextLarger:sender];
+    //TODO: make text larger in article tab webview
+    id<Tab> activeBrowserTab = self.browser.activeTab;
+    if (activeBrowserTab) {
+        [activeBrowserTab increaseTextSize];
+    }
 }
 
 #pragma mark Blogging
@@ -3259,10 +3261,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	
 	// If the active tab is a web view, blog the URL
-    NSTabViewItem *activeTab = self.browser.activeTab;
-    if (activeTab != [self.browser primaryTab]) {
+    id<Tab> activeBrowserTab = self.browser.activeTab;
+    if (activeBrowserTab) {
         //is browser tab
-        [self sendBlogEvent:externalEditorBundleIdentifier title:activeTab.label url:((BrowserPane *)activeTab.view).url.absoluteString body:APP.currentTextSelection author:@"" guid:@""];
+        [self sendBlogEvent:externalEditorBundleIdentifier title:activeBrowserTab.title url:activeBrowserTab.url.absoluteString body:APP.currentTextSelection author:@"" guid:@""];
     } else {
 		// Get the currently selected articles from the ArticleView and iterate over them.
         for (Article * currentArticle in self.articleController.markedArticleRange) {
@@ -3322,7 +3324,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(BOOL)validateCommonToolbarAndMenuItems:(SEL)theAction validateFlag:(BOOL *)validateFlag
 {
 	BOOL isMainWindowVisible = self.mainWindow.visible;
-	BOOL isAnyArticleView = self.browser.activeTab == self.browser.primaryTab;
+	BOOL isAnyArticleView = self.browser.activeTab == nil;
 	
 	*validateFlag = NO;
     
@@ -3381,8 +3383,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	if (theAction == @selector(goBack:))
 	{
         // TODO: Make this work without the protocol check.
-        if ([self.browser.activeTab.view conformsToProtocol:@protocol(BaseView)]) {
-            *validateFlag = ((NSView<BaseView> *)self.browser.activeTab.view).canGoBack && isMainWindowVisible;
+        if (false/*[self.browser.activeTab.view conformsToProtocol:@protocol(BaseView)]*/) {
+            *validateFlag = NO;
+            //TODO: implement in Tab ((NSView<BaseView> *)self.browser.activeTab.view).canGoBack && isMainWindowVisible;
         } else {
             *validateFlag = NO;
         }
@@ -3390,11 +3393,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	if (theAction == @selector(mailLinkToArticlePage:))
 	{
-		NSView<BaseView> * theView = ((NSView<BaseView> *)self.browser.activeTab.view);
+		id<Tab> activeBrowserTab = self.browser.activeTab;
 		Article * thisArticle = self.selectedArticle;
-		
-		if ([theView isKindOfClass:[BrowserPane class]])
-			*validateFlag = (theView.viewLink != nil);
+        //TODO: if a browser tab is open, the URL can also be a non-article URL.
+		if (activeBrowserTab)
+			*validateFlag = (activeBrowserTab.url != nil);
 		else
 			*validateFlag = (thisArticle != nil && isMainWindowVisible);
 		return NO; // Give the menu handler a chance too.
@@ -3435,8 +3438,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	SEL	theAction = menuItem.action;
 	BOOL isMainWindowVisible = self.mainWindow.visible;
-	BOOL isAnyArticleView = self.browser.activeTab == self.browser.primaryTab;
-	BOOL isArticleView = self.browser.activeTab.view == self.articleController.mainArticleView;
+	BOOL isAnyArticleView = self.browser.activeTab == nil;
+	BOOL isArticleView = self.browser.activeTab == nil;
 	BOOL flag;
 	
 	if ([self validateCommonToolbarAndMenuItems:theAction validateFlag:&flag])
@@ -3453,13 +3456,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 		else
 		{
-			NSView<BaseView> * theView = ((NSView<BaseView> *)self.browser.activeTab.view);
-			return theView != nil && [theView isKindOfClass:[BrowserPane class]] && !((BrowserPane *)theView).loading;
+			return self.browser.activeTab.loading;
 		}
 	}
 	else if (theAction == @selector(goForward:))
 	{
-		return ((NSView<BaseView> *)self.browser.activeTab.view).canGoForward && isMainWindowVisible;
+        return false; //TODO: implement in tab ((NSView<BaseView> *)self.browser.activeTab.view).canGoForward && isMainWindowVisible;
 	}
 	else if (theAction == @selector(newGroupFolder:))
 	{
@@ -3475,11 +3477,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else if (theAction == @selector(makeTextLarger:))
 	{
-		return ((NSView<BaseView> *)self.browser.activeTab.view).webView.canMakeTextLarger && isMainWindowVisible;
+        return false; //TODO: implement in tab (or drop, seems like a strange property anyway) ((NSView<BaseView> *)self.browser.activeTab.view).webView.canMakeTextLarger && isMainWindowVisible;
 	}
 	else if (theAction == @selector(makeTextSmaller:))
 	{
-		return ((NSView<BaseView> *)self.browser.activeTab.view).webView.canMakeTextSmaller && isMainWindowVisible;
+        return false; //TODO: implement in tab (or drop, seems like a strange property anyway) ((NSView<BaseView> *)self.browser.activeTab.view).webView.canMakeTextSmaller && isMainWindowVisible;
 	}
 	else if (theAction == @selector(doViewColumn:))
 	{
@@ -3628,13 +3630,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else if (theAction == @selector(reloadPage:))
 	{
-		NSView * theView = self.browser.activeTab.view;
-		return ([theView isKindOfClass:[BrowserPane class]]) && !((BrowserPane *)theView).loading;
+		return self.browser.activeTab.loading;
 	}
 	else if (theAction == @selector(stopReloadingPage:))
 	{
-		NSView * theView = self.browser.activeTab.view;
-		return ([theView isKindOfClass:[BrowserPane class]]) && ((BrowserPane *)theView).loading;
+		return self.browser.activeTab.loading;
 	}
 	else if (theAction == @selector(keepFoldersArranged:))
 	{

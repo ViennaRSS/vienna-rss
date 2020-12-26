@@ -21,7 +21,7 @@
 #import "SearchPanel.h"
 #import "BrowserPane.h"
 #import "AppController.h"
-#import "Browser.h"
+#import "Vienna-Swift.h"
 
 @implementation SearchPanel
 
@@ -57,16 +57,15 @@
 -(IBAction)searchStringChanged:(id)sender
 {
 	APPCONTROLLER.searchString = searchField.stringValue;
-	
-	NSView<BaseView> * theView = ((NSView<BaseView> *)APPCONTROLLER.browser.activeTab.view);
-	if ([theView isKindOfClass:[BrowserPane class]])
-	{
-		[theView performFindPanelAction:NSFindPanelActionSetFindString];
-		[APPCONTROLLER setFocusToSearchField:self];
-	}
-	else
-		[APPCONTROLLER searchArticlesWithString:searchField.stringValue];
-	
+
+    id<Tab> activeBrowserTab = APPCONTROLLER.browser.activeTab;
+    if (activeBrowserTab) {
+        [activeBrowserTab searchFor:APPCONTROLLER.searchString action:NSFindPanelActionSetFindString];
+        [APPCONTROLLER setFocusToSearchField:self];
+    } else {
+        [APPCONTROLLER searchArticlesWithString:searchField.stringValue];
+    }
+
 	[searchPanelWindow.sheetParent endSheet:searchPanelWindow];
 	[searchPanelWindow orderOut:self];
 }

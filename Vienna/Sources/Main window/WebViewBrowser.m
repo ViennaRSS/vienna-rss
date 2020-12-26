@@ -20,13 +20,16 @@
 
 #import "BrowserPane.h"
 #import "BrowserPaneTemplate.h"
-#import "Browser.h"
+#import "WebViewBrowser.h"
 #import "Preferences.h"
 #import "Constants.h"
 #import "Browser+WebUIDelegate.h"
 #import "TabbedWebView.h"
 
-@interface Browser () <MMTabBarViewDelegate>
+@interface WebViewBrowser () <MMTabBarViewDelegate>
+
+@property (assign) IBOutlet NSLayoutConstraint *tabBarHeightConstraint;
+@property (assign) IBOutlet MMTabBarView *tabBarControl;
 
 //queue for tab view items to select when current item is closed
 @property NSMutableArray<NSTabViewItem *> *tabViewOrder;
@@ -49,7 +52,7 @@
 
 @end
 
-@implementation Browser
+@implementation WebViewBrowser
 
 -(void)awakeFromNib
 {

@@ -29,7 +29,6 @@
 @class NewSubscription;
 @class NewGroupFolder;
 @class WebPreferences;
-@class Browser;
 @class EmptyTrashWarning;
 @class SearchPanel;
 @class DisclosureView;
@@ -41,6 +40,7 @@
 @class Article;
 @class UnifiedDisplayView;
 @class ArticleListView;
+@protocol Browser;
 
 @interface AppController : NSObject <NSApplicationDelegate>
 {
@@ -68,7 +68,7 @@
 }
 
 @property (nonatomic) PluginManager *pluginManager;
-@property (nonatomic, weak) Browser *browser;
+@property (nonatomic, weak) id<Browser> browser;
 @property (nonatomic) ArticleController *articleController;
 @property (nonatomic, weak) UnifiedDisplayView *unifiedListView;
 @property (nonatomic, weak) ArticleListView *articleListView;

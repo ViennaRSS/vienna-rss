@@ -769,7 +769,7 @@
             </connections>
             <point key="canvasLocation" x="1066" y="109"/>
         </customView>
-        <customObject id="eqp-AV-PHe" customClass="Browser">
+        <customObject id="eqp-AV-PHe" customClass="WebViewBrowser">
             <connections>
                 <outlet property="tabBarControl" destination="1238" id="2lB-oh-lMb"/>
                 <outlet property="tabBarHeightConstraint" destination="dYp-Gl-QZR" id="t6o-1h-aGO"/>

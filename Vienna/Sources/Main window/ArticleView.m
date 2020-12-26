@@ -24,8 +24,9 @@
 #import "Preferences.h"
 #import "HelperFunctions.h"
 #import "StringExtensions.h"
-#import "Browser.h"
 #import "Article.h"
+#import "BaseView.h"
+#import "Vienna-Swift.h"
 
 @interface ArticleView ()
 
