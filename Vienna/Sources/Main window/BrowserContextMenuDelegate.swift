@@ -31,7 +31,14 @@ public enum WKWebViewContextMenuContext {
     case text(_ text: String)
 }
 
+// Some Apple private menu-item identifiers in WKMenuItemIdentifiersPrivate.h
 extension NSUserInterfaceItemIdentifier {
+    static let WKMenuItemCopy = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierCopy")
+    static let WKMenuItemDownloadImage = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierDownloadImage")
+    static let WKMenuItemDownloadLinkedFile = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierDownloadLinkedFile")
+    static let WKMenuItemDownloadMedia = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierDownloadMedia")
     static let WKMenuItemOpenLinkInBackground = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLinkInBackground")
+    static let WKMenuItemOpenLinkInNewWindow = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLinkInNewWindow")
     static let WKMenuItemOpenLinkInSystemBrowser = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLinkInSystemBrowser")
+    static let WKMenuItemOpenMediaInNewWindow = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenMediaInNewWindow")
 }

@@ -189,9 +189,9 @@ extension CustomWKWebView {
             return
         }
 
-        let clickedOnLink = menu.items.contains { $0.identifier?.rawValue == "WKMenuItemIdentifierOpenLinkInNewWindow" }
-        let clickedOnImage = menu.items.contains { $0.identifier?.rawValue == "WKMenuItemIdentifierOpenLinkInNewWindow" }
-        let clickedOnText = menu.items.contains { $0.identifier?.rawValue == "WKMenuItemIdentifierCopy" }
+        let clickedOnLink = menu.items.contains { $0.identifier == .WKMenuItemOpenLinkInNewWindow }
+        let clickedOnImage = menu.items.contains { $0.identifier == .WKMenuItemOpenMediaInNewWindow }
+        let clickedOnText = menu.items.contains { $0.identifier == .WKMenuItemCopy }
 
         let context: WKWebViewContextMenuContext
 

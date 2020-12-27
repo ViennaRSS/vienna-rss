@@ -331,7 +331,7 @@ extension TabbedBrowserViewController: CustomWKUIDelegate {
     }
 
     private func addLinkMenuCustomizations(_ menuItems: inout [NSMenuItem], _ url: (URL)) {
-        guard let index = menuItems.firstIndex(where: { $0.identifier?.rawValue == "WKMenuItemIdentifierOpenLinkInNewWindow" }) else {
+        guard let index = menuItems.firstIndex(where: { $0.identifier == .WKMenuItemOpenLinkInNewWindow }) else {
             return
         }
 

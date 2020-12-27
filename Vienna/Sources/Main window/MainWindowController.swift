@@ -322,7 +322,7 @@ extension MainWindowController: BrowserContextMenuDelegate {
     }
 
     private func addLinkMenuCustomizations(_ menuItems: inout [NSMenuItem], _ url: (URL)) {
-        guard var index = menuItems.firstIndex(where: { $0.identifier?.rawValue == "WKMenuItemIdentifierOpenLinkInNewWindow" }) else {
+        guard var index = menuItems.firstIndex(where: { $0.identifier == .WKMenuItemOpenLinkInNewWindow }) else {
             return
         }
 
