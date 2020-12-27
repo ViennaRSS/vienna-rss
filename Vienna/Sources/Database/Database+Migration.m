@@ -234,6 +234,14 @@
             database.userVersion = (uint32_t)21;
             NSLog(@"Updated database schema to version 21.");
         }
+        case 22: {
+            // Enables auto-vacuum mode on the database. Enabling this requires
+            // a VACUUM operation, which usually takes some time to complete.
+            [database executeStatements:@"PRAGMA auto_vacuum = 1; VACUUM"];
+
+            database.userVersion = (uint32_t)22;
+            NSLog(@"Updated database schema to version 22.");
+        }
     }
 }
 
