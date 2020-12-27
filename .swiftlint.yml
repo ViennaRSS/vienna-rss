@@ -1,8 +1,11 @@
-# SwiftLint 0.41
+# SwiftLint 0.42
 # https://realm.github.io/SwiftLint/rule-directory.html
 
 included:
   - Vienna/Sources
+  - Vienna Tests
+
+#Rules
 
 disabled_rules:
   - function_body_length
@@ -14,23 +17,19 @@ opt_in_rules:
   - closure_end_indentation
   - closure_spacing
   - collection_alignment
+  - comment_spacing
   - conditional_returns_on_newline
   - contains_over_first_not_nil
   - convenience_type
-  - discouraged_object_literal
-  - discouraged_optional_boolean
-  - discouraged_optional_collection
   - empty_count
   - empty_string
   - extension_access_modifier
-  - fallthrough
   - fatal_error_message
   - file_header
   - file_name
   - first_where
   - force_unwrapping
   - identical_operands
-  - implicitly_unwrapped_optional
   - joined_default_parameter
   - last_where
   - legacy_multiple
@@ -62,7 +61,6 @@ opt_in_rules:
   - sorted_first_last
   - sorted_imports
   - static_operator
-  - strict_fileprivate
   - switch_case_on_newline
   - toggle_bool
   - trailing_closure
@@ -74,15 +72,7 @@ opt_in_rules:
   - vertical_parameter_alignment_on_call
   - yoda_condition
 
-object_literal:
-  image_literal: false
-
-private_outlet:
-  allow_private_set: true
-
-file_name:
-  excluded: Constants.swift
-  suffix_pattern: (\+\w+|Extensions?)
+# Rule configurations
 
 file_header:
   required_pattern: |
@@ -92,3 +82,11 @@ file_header:
     \/\/
     \/\/  Copyright (\d{4}|\d{4}-\d{4})(\s?\w+)*
     \/\/
+
+file_name:
+  excluded:
+    - Constants.swift
+  suffix_pattern: (\+\w+|Extensions?)
+
+private_outlet:
+  allow_private_set: true
