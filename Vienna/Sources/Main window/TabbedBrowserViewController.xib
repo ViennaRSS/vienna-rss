@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,7 +19,7 @@
             <rect key="frame" x="0.0" y="0.0" width="622" height="383"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <customView verticalHuggingPriority="255" verticalCompressionResistancePriority="755" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NQ9-WY-Cbm" customClass="MMTabBarView">
+                <customView verticalHuggingPriority="300" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NQ9-WY-Cbm" customClass="MMTabBarView">
                     <rect key="frame" x="0.0" y="355" width="622" height="28"/>
                     <connections>
                         <outlet property="delegate" destination="-2" id="N7U-Ul-9ts"/>

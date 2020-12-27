@@ -946,16 +946,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	id<Tab> activeBrowserTab = self.browser.activeTab;
 
-    //TODO: check why this is necessary here
     [self showMainWindow:self];
 	if (!activeBrowserTab)
 	{
 		(void)[self.browser createNewTab:nil inBackground:NO load:NO];
     } else {
-        //TODO: open web location should activate address bar of tab.
-        //actually this is not really a crucial functionality.
-//        BrowserPane * browserPane = (BrowserPane *)theView;
-//        [browserPane activateAddressBar];
+        [self.browser.activeTab activateAddressBar];
 	}
 }
 
@@ -1552,7 +1548,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)printDocument:(id)sender
 {
-    //TODO: print webview content in article tab
     id<Tab> activeBrowserTab = self.browser.activeTab;
 
     if (activeBrowserTab) {
@@ -2085,12 +2080,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)localPerformFindPanelAction:(id)sender
 {
-	switch ([sender tag]) 
+    NSInteger action = [sender tag];
+	switch (action)
 	{
 		case NSFindPanelActionSetFindString:
-			[self setFocusToSearchField:self];
 			self.toolbarSearchField.stringValue = APP.currentTextSelection;
 			[searchPanel setSearchString:APP.currentTextSelection];
+            [self setFocusToSearchField:self];
 			break;
 			
 		case NSFindPanelActionShowFindPanel:
@@ -2098,8 +2094,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			break;
 			
 		default:
-            //TODO: does not seem to work anyway
-			//[((NSView<BaseView> *)self.browser.activeTab.view) performFindPanelAction:[sender tag]];
+            (void)[self.browser.activeTab searchFor:self.toolbarSearchField.stringValue action:action];
 			break;
 	}
 }

@@ -45,9 +45,9 @@ extension ArticleController: Tab {
 		return false
 	}
 
-	public func searchFor(_ searchString: String, action: NSFindPanelAction) -> Bool {
-		return false
-	}
+	public func searchFor(_ searchString: String, action: NSFindPanelAction) {
+        //TODO
+    }
 
 	public func loadTab() {}
 
@@ -66,5 +66,9 @@ extension ArticleController: Tab {
 	public func print() {
 
 	}
+    
+    public func activateAddressBar() {
+        //there is no address bar in the articlecontroller
+    }
 
 }

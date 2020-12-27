@@ -20,21 +20,18 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="655" height="272"/>
+            <rect key="frame" x="0.0" y="0.0" width="681" height="272"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="OdK-ur-PPi">
-                    <rect key="frame" x="0.0" y="242" width="655" height="30"/>
+                    <rect key="frame" x="0.0" y="241" width="681" height="31"/>
                     <subviews>
-                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="3" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="255" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="755" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OeK-Vl-Vdl">
-                            <rect key="frame" x="5" y="5" width="645" height="20"/>
+                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="255" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="755" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OeK-Vl-Vdl">
+                            <rect key="frame" x="5" y="5" width="671" height="21"/>
                             <subviews>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0rn-z0-yA2">
-                                    <rect key="frame" x="0.0" y="4" width="20" height="12"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="20" id="HLA-5B-V5x"/>
-                                    </constraints>
-                                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSGoBackTemplate" imagePosition="only" alignment="center" inset="2" id="j5n-Oc-Vrp">
+                                    <rect key="frame" x="0.0" y="0.0" width="29" height="21"/>
+                                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="browserPreviousButton" imagePosition="only" alignment="center" inset="2" id="j5n-Oc-Vrp">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="systemBold" size="12"/>
                                     </buttonCell>
@@ -43,11 +40,8 @@
                                     </connections>
                                 </button>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aeH-Zd-eUj">
-                                    <rect key="frame" x="23" y="4" width="20" height="12"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="20" id="Qpb-UX-zNR"/>
-                                    </constraints>
-                                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSGoForwardTemplate" imagePosition="only" alignment="center" inset="2" id="0sn-QN-I23">
+                                    <rect key="frame" x="29" y="0.0" width="27" height="21"/>
+                                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="browserNextButton" imagePosition="only" alignment="center" inset="2" id="0sn-QN-I23">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                         <font key="font" metaFont="systemBold" size="12"/>
                                     </buttonCell>
@@ -56,7 +50,7 @@
                                     </connections>
                                 </button>
                                 <textField horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="hfe-el-NfG">
-                                    <rect key="frame" x="46" y="0.0" width="576" height="20"/>
+                                    <rect key="frame" x="56" y="1" width="586" height="20"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" drawsBackground="YES" id="jDD-sF-hKH">
                                         <font key="font" usesAppearanceFont="YES"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -67,11 +61,8 @@
                                     </connections>
                                 </textField>
                                 <button verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="u6u-kW-eOW">
-                                    <rect key="frame" x="625" y="3" width="20" height="15"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="20" id="iqg-Hq-m7A"/>
-                                    </constraints>
-                                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSRefreshTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="RBR-fu-w5E">
+                                    <rect key="frame" x="642" y="0.0" width="29" height="21"/>
+                                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="browserRefreshButton" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="RBR-fu-w5E">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                         <font key="font" metaFont="systemBold" size="12"/>
                                     </buttonCell>
@@ -111,8 +102,8 @@
         </customView>
     </objects>
     <resources>
-        <image name="NSGoBackTemplate" width="9" height="12"/>
-        <image name="NSGoForwardTemplate" width="9" height="12"/>
-        <image name="NSRefreshTemplate" width="11" height="15"/>
+        <image name="browserNextButton" width="27" height="21"/>
+        <image name="browserPreviousButton" width="29" height="21"/>
+        <image name="browserRefreshButton" width="29" height="21"/>
     </resources>
 </document>

@@ -38,8 +38,8 @@ public protocol Tab {
     func pageDown() -> Bool
 	//returns whether it was possible to scroll up
     func pageUp() -> Bool
-	//returns whether search found something / found next occurrence
-    func searchFor(_ searchString: String, action: NSFindPanelAction) -> Bool
+
+    func searchFor(_ searchString: String, action: NSFindPanelAction)
 
     // MARK: tab life cycle
 
@@ -55,4 +55,5 @@ public protocol Tab {
     // MARK: other actions
 
     func print()
+    func activateAddressBar()
 }

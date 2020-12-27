@@ -15,7 +15,7 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView {
 
 	var tabUrl: URL? {
 		get { return self.url }
-		set {  } //TODO (do we actually want to do this?)
+		set {  } //TODO do we actually want to do this?
 	}
 
 	var textSelection: String = "" //TODO
@@ -44,9 +44,8 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView {
 		return canScrollUp
 	}
 
-	func searchFor(_ searchString: String, action: NSFindPanelAction) -> Bool {
+	func searchFor(_ searchString: String, action: NSFindPanelAction) {
 		//TODO
-		return false
 	}
 
 	func loadTab() {
@@ -143,4 +142,8 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView {
 	func makeTextLarger(_ sender: Any) {
 		//TODO
 	}
+
+    func activateAddressBar() {
+        //there is no address bar in articleView
+    }
 }
