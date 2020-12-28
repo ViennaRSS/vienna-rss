@@ -95,7 +95,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         config.HTTPAdditionalHeaders = @{@"User-Agent": userAgent};
         config.HTTPMaximumConnectionsPerHost = 6;
         config.HTTPShouldUsePipelining = YES;
-        _urlSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
+        _urlSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];
 
         NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
         [nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
