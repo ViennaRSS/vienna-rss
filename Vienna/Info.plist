@@ -191,5 +191,11 @@
 	<string>VCS_FULL_HASH</string>
 	<key>VCSShortHash</key>
 	<string>VCS_SHORT_HASH</string>
+	<key>VNAHomePage</key>
+	<string>https://www.vienna-rss.com/</string>
+	<key>VNAScriptsPage</key>
+	<string>https://www.vienna-rss.com/faq#How_do_I_create_my_own_scripts</string>
+	<key>VNAStylesPage</key>
+	<string>https://www.vienna-rss.com/extras/</string>
 </dict>
 </plist>
