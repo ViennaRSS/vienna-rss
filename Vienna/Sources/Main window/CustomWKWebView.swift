@@ -12,7 +12,7 @@ public class CustomWKWebView: WKWebView {
     static let clickListenerName = "clickListener"
     static let jsErrorListenerName = "errorListener"
 
-    //store weakly here because contentController retains listener
+    // store weakly here because contentController retains listener
     weak var contextMenuListener: CustomWKWebViewContextMenuListener?
 
     weak var contextMenuProvider: CustomWKUIDelegate?
@@ -29,7 +29,7 @@ public class CustomWKWebView: WKWebView {
 
     override public init(frame: CGRect = .zero, configuration: WKWebViewConfiguration = WKWebViewConfiguration()) {
 
-        //preferences
+        // preferences
         let prefs = configuration.preferences
         prefs.javaScriptEnabled = true
         prefs.javaScriptCanOpenWindowsAutomatically = true
@@ -37,7 +37,7 @@ public class CustomWKWebView: WKWebView {
 
         prefs._developerExtrasEnabled = true
 
-        //user scripts (user content controller)
+        // user scripts (user content controller)
         let contentController = configuration.userContentController
         contentController.removeAllUserScripts()
 
@@ -47,7 +47,7 @@ public class CustomWKWebView: WKWebView {
         let contextMenuScript = WKUserScript(source: CustomWKWebView.contextMenuScriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
         contentController.addUserScript(contextMenuScript)
 
-        //configuration
+        // configuration
         if #available(OSX 10.11, *) {
             // for useragent, we mimic the installed version of Safari and add our own identifier
             let shortSafariVersion = Bundle(path: "/Applications/Safari.app")?.infoDictionary?["CFBundleShortVersionString"] as? String
@@ -86,7 +86,7 @@ public class CustomWKWebView: WKWebView {
 
     private func evaluateScrollPossibilities() -> (scrollDownPossible: Bool, scrollUpPossible: Bool) {
 
-        //this is an idea adapted from Brent Simmons which he uses in NetNewsWire (https://github.com/brentsimmons/NetNewsWire)
+        // this is an idea adapted from Brent Simmons which he uses in NetNewsWire (https://github.com/brentsimmons/NetNewsWire)
 
         var scrollDownPossible = false
         var scrollUpPossible = false
@@ -132,7 +132,7 @@ public class CustomWKWebView: WKWebView {
 // MARK: context menu
 extension CustomWKWebView {
 
-    //TODO: debugging js in WKWebView thanks to https://stackoverflow.com/a/61031417/3311272 .
+    // TODO: debugging js in WKWebView thanks to https://stackoverflow.com/a/61031417/3311272 .
     static let errorScriptSource = """
     window.onerror = (msg, url, line, column, error) => {
         const message = {

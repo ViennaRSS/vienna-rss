@@ -73,7 +73,7 @@ public class WebKitArticleConverter: ArticleConverter {
     }
 
     private func emptyLocalDataCache() {
-        //WKWebsiteDataRecord does not give us an identifier.
+        // WKWebsiteDataRecord does not give us an identifier.
         // However, the only name with spaces in it is that for local files
         // all the other names are the hostname of the corresponding website
         let isLocalWebsiteData = { (record: WKWebsiteDataRecord) in record.displayName.contains(" ") }

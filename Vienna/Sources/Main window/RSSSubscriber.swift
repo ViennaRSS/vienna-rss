@@ -1,5 +1,5 @@
 //
-//  RSSCommunication.swift
+//  RSSSubscriber.swift
 //  Vienna
 //
 //  Copyright 2020 Tassilo Karge
@@ -18,10 +18,6 @@
 //
 
 import Foundation
-
-protocol RSSSource: AnyObject {
-    var rssSubscriber: RSSSubscriber? { get set }
-}
 
 protocol RSSSubscriber: AnyObject {
 
@@ -43,11 +39,15 @@ protocol RSSSubscriber: AnyObject {
 
 extension RSSSubscriber {
 
-    //default: "interested" in all feeds
+    // default: "interested" in all feeds
     func isInterestedIn(_ url: URL) -> Bool { true }
 
-    //default: ignore ui element which triggered the subscribe request
+    // default: ignore ui element which triggered the subscribe request
     func subscribeToRSS(_ urls: [URL], uiElement: NSObject) {
         self.subscribeToRSS(urls)
     }
+}
+
+protocol RSSSource: AnyObject {
+    var rssSubscriber: RSSSubscriber? { get set }
 }

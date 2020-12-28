@@ -33,7 +33,7 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
             let (htmlPath, accessPath) = converter.prepareArticleDisplay(self.articles)
 
             webView.loadFileURL(htmlPath, allowingReadAccessTo: accessPath)
-            //TODO: prepare article files
+            // TODO: prepare article files
             self.showAddressBar(false)
         }
     }
@@ -68,58 +68,58 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
     }
 
     func printDocument(_ sender: Any) {
-        //TODO
+        // TODO
     }
 
     func abortJavascriptAndPlugIns() {
-        //TODO
+        // TODO
     }
 
     func useUserPrefsForJavascriptAndPlugIns() {
-        //TODO
+        // TODO
     }
 
     func forceJavascript() {
-        //TODO
+        // TODO
     }
 
     func scrollToTop() {
-        //TODO
+        // TODO
     }
 
     func scrollToBottom() {
-        //TODO
+        // TODO
     }
 
     func makeTextSmaller(_ sender: Any) {
-        //TODO
+        // TODO
     }
 
     func makeTextLarger(_ sender: Any) {
-        //TODO
+        // TODO
     }
 
     // MARK: gui
 
     func showAddressBar(_ show: Bool) {
-        //TODO: hide / show address bar
+        // TODO: hide / show address bar
     }
 
     override func activateAddressBar() {
-        //TODO: ignored intentionally. Find more elegant solution
+        // TODO: ignored intentionally. Find more elegant solution
     }
 
     override func activateWebView() {
-        //TODO: ignored intentionally. Find more elegant solution
+        // TODO: ignored intentionally. Find more elegant solution
     }
 
     // MARK: Navigation delegate
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        //TODO: prevent navigation to links opened through klick
-        //TODO: in the future, we might want to allow limited browsing in the primary tab
+        // TODO: prevent navigation to links opened through klick
+        // TODO: in the future, we might want to allow limited browsing in the primary tab
         decisionHandler(.allow)
-        //TODO: make listView open link in browser tab
+        // TODO: make listView open link in browser tab
     }
 
 }

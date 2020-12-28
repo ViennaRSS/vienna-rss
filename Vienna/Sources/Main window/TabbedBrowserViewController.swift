@@ -37,7 +37,7 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
             tabBar.buttonMinWidth = 120
             tabBar.useOverflowMenu = true
             tabBar.automaticallyAnimates = true
-            //TODO: figure out what this property means
+            // TODO: figure out what this property means
             tabBar.allowsScrubbing = true
         }
     }
@@ -49,7 +49,7 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
     /// - Parameter tabViewItem: the tab view item configured with the view that shall be in the first fixed tab.
     var primaryTab: NSTabViewItem? {
         didSet {
-            //remove from tabView if there was a prevous primary tab
+            // Temove from tabView if there was a prevous primary tab
             if let primaryTab = oldValue {
                 self.closeTab(primaryTab)
             }
@@ -105,7 +105,8 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
     override func viewWillAppear() {
         super.viewWillAppear()
         if !restoredTabs {
-            //defer to avoid loading first tab, because primary tab is set after view load
+            // Defer to avoid loading first tab, because primary tab is set
+            // after view load.
             restoreTabs()
             restoredTabs = true
         }
@@ -174,7 +175,8 @@ extension TabbedBrowserViewController: Browser {
         let newTabViewItem = TitleChangingTabViewItem(viewController: newTab)
         newTabViewItem.hasCloseButton = true
 
-        //this must be executed after setup of titleChangingTabViewItem to observe new title properly
+        // This must be executed after setup of titleChangingTabViewItem to
+        // observe new title properly.
         newTab.tabUrl = url
 
         if load {
@@ -194,14 +196,14 @@ extension TabbedBrowserViewController: Browser {
             } else {
                 newTab.activateAddressBar()
             }
-            //TODO: make first responder?
+            // TODO: make first responder?
         }
 
         newTab.webView.uiDelegate = self
 
         newTab.webView.contextMenuProvider = self
 
-        //TODO: tab view order
+        // TODO: tab view order
 
         return newTab
     }
@@ -232,17 +234,17 @@ extension TabbedBrowserViewController: Browser {
     }
 
     func getTextSelection() -> String {
-        //TODO: implement
+        // TODO: implement
         return ""
     }
 
     func getActiveTabHTML() -> String {
-        //TODO: implement
+        // TODO: implement
         return ""
     }
 
     func getActiveTabURL() -> URL? {
-        //TODO: implement
+        // TODO: implement
         return URL(string: "")
     }
 }
@@ -262,19 +264,22 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
     }
 
     func tabView(_ aTabView: NSTabView, selectOnClosing tabViewItem: NSTabViewItem) -> NSTabViewItem? {
-        //select tab item on the right of currently selected item
+        // Select tab item on the right of currently selected item. Cannot
+        // select tab on the right, if selected tab is rightmost one.
         if let tabView = self.tabBar?.tabView,
            let selected = tabBar?.selectedTabViewItem, selected == tabViewItem,
-           tabViewItem != tabView.tabViewItems.last, //cannot select tab on the right if selected tab is rightmost one
+           tabViewItem != tabView.tabViewItems.last,
            let indexToSelect = tabView.tabViewItems.firstIndex(of: selected)?.advanced(by: 1) {
             return tabView.tabViewItems[indexToSelect]
         } else {
-            return nil //default (left of currently selected item / no change if deleted item not selected)
+            // Default (left of currently selected item / no change if deleted
+            // item not selected)
+            return nil
         }
     }
 
     func tabView(_ aTabView: NSTabView, menuFor tabViewItem: NSTabViewItem) -> NSMenu {
-        //TODO: return menu corresponding to browser or primary tab view item
+        // TODO: return menu corresponding to browser or primary tab view item
         return NSMenu()
     }
 
@@ -305,7 +310,7 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
 // MARK: WKUIDelegate + BrowserContextMenuDelegate
 
 extension TabbedBrowserViewController: CustomWKUIDelegate {
-    //TODO: implement functionality for alerts and maybe peek actions
+    // TODO: implement functionality for alerts and maybe peek actions
 
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         let newTab = self.createNewTab(navigationAction.request, config: configuration, inBackground: false, insertAt: getIndexAfterSelected())
@@ -319,11 +324,11 @@ extension TabbedBrowserViewController: CustomWKUIDelegate {
             break
         case .link(let url):
             addLinkMenuCustomizations(&menuItems, url)
-        case .picture(_):
+        case .picture:
             break
         case .pictureLink(image: _, link: let link):
             addLinkMenuCustomizations(&menuItems, link)
-        case .text(_):
+        case .text:
             break
         }
         return self.contextMenuDelegate?

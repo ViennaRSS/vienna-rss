@@ -16,8 +16,8 @@ protocol ArticleContentView: Tab {
 	@objc(keyDown:)
 	func keyDown(with event: NSEvent)
 
-	//from tabbedwebview
-	//TODO: evaluate and throw out what is not necessary / replace with Tab interface
+	// from tabbedwebview
+	// TODO: evaluate and throw out what is not necessary / replace with Tab interface
 	func printDocument(_ sender: Any)
 	func abortJavascriptAndPlugIns()
 	func useUserPrefsForJavascriptAndPlugIns()
@@ -26,8 +26,8 @@ protocol ArticleContentView: Tab {
 	func scrollToTop()
 	func scrollToBottom()
 
-	//other requirements (originally from WebView)
-	//TODO: replace with Tab interface
+	// other requirements (originally from WebView)
+	// TODO: replace with Tab interface
 	func makeTextSmaller(_ sender: Any)
 	func makeTextLarger(_ sender: Any)
 }

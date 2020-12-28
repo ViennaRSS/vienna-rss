@@ -1,5 +1,5 @@
 //
-//  BrowserTabRss.swift
+//  BrowserTab+RSSSource.swift
 //  Vienna
 //
 //  Copyright 2020 Tassilo Karge
@@ -62,10 +62,10 @@ extension BrowserTab: RSSSource {
 
     func refreshRSSState() {
         if rssSubscriber != nil && !self.rssUrls.isEmpty {
-            //show RSS button
+            // show RSS button
             self.showRssButton = true
         } else {
-            //hide RSS button
+            // hide RSS button
             self.showRssButton = false
         }
     }
@@ -73,15 +73,15 @@ extension BrowserTab: RSSSource {
     func handleNavigationStartRss() { }
 
     func handleNavigationEndRss(success: Bool) {
-        //use javascript to detect RSS feed link
-        //TODO: deal with multiple links
+        // use javascript to detect RSS feed link
+        // TODO: deal with multiple links
         waitForAsyncExecution { finishHandler in
             self.webView.evaluateJavaScript(BrowserTab.extractRssLinkScript) { result, error in
                 if error == nil, let result = result as? [String] {
-                    //RSS feed link(s) detected
+                    // RSS feed link(s) detected
                     self.rssUrls = result.compactMap { URL(string: $0 as String) }
                 } else {
-                    //error or no rss url available
+                    // error or no rss url available
                     self.rssUrls = []
                 }
                 finishHandler()

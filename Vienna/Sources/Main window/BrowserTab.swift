@@ -72,7 +72,7 @@ class BrowserTab: NSViewController {
         self.webView = CustomWKWebView(configuration: config)
 
         if #available(macOS 10.12, *) {
-            super.init(nibName: "BrowserTab", bundle: nil) //TODO: allow override
+            super.init(nibName: "BrowserTab", bundle: nil) // TODO: allow override
         } else {
             super.init(nibName: "BrowserTabBeforeMacOS12", bundle: nil)
         }
@@ -124,18 +124,18 @@ class BrowserTab: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //set up webview (not yet possible via interface builder)
+        // set up webview (not yet possible via interface builder)
         webView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(webView, positioned: .below, relativeTo: nil)
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[addressBarContainer][webView]|", options: [], metrics: nil, views: ["webView": webView, "addressBarContainer": addressBarContainer as Any]))
 
-        //title needs to be adjusted once view is loaded
+        // title needs to be adjusted once view is loaded
 
-        //reload button / cancel button layout is not determined yet
+        // reload button / cancel button layout is not determined yet
         self.loading = self.webView.isLoading
 
-        //set up url displayed in address field
+        // set up url displayed in address field
         if let url = webView.url {
             self.url = url
         }
@@ -144,10 +144,10 @@ class BrowserTab: NSViewController {
 
         updateAddressBarLayout()
 
-        //set up address bar handling
+        // set up address bar handling
         addressField.delegate = self
 
-        //set up navigation handling
+        // set up navigation handling
         webView.navigationDelegate = self
     }
 
@@ -189,7 +189,7 @@ extension BrowserTab: Tab {
     }
 
     var html: String {
-        "" //TODO: get HTML and return
+        "" // TODO: get HTML and return
     }
 
     var isLoading: Bool {
@@ -198,7 +198,7 @@ extension BrowserTab: Tab {
 
     func back() -> Bool {
         let couldGoBack = self.webView.goBack() != nil
-        //title observation not triggered by goBack() -> manual setting
+        // title observation not triggered by goBack() -> manual setting
         self.url = self.webView.url
         self.title = self.webView.title
         return couldGoBack
@@ -206,7 +206,7 @@ extension BrowserTab: Tab {
 
     func forward() -> Bool {
         let couldGoForward = self.webView.goForward() != nil
-        //title observation not triggered by goForware() -> manual setting
+        // title observation not triggered by goForware() -> manual setting
         self.url = self.webView.url
         self.title = self.webView.title
         return couldGoForward
@@ -225,7 +225,7 @@ extension BrowserTab: Tab {
     }
 
     func searchFor(_ searchString: String, action: NSFindPanelAction) {
-        //webView.evaluateJavaScript("document.execCommand('HiliteColor', false, 'yellow')", completionHandler: nil)
+        // webView.evaluateJavaScript("document.execCommand('HiliteColor', false, 'yellow')", completionHandler: nil)
         self.webView.search(searchString, upward: action == .previous)
     }
 
@@ -240,7 +240,7 @@ extension BrowserTab: Tab {
                 self.activateWebView()
             }
         } else {
-            //TODO: this seems to wipe history, which we do not want
+            // TODO: this seems to wipe history, which we do not want
             self.webView.loadHTMLString("", baseURL: nil)
             self.activateAddressBar()
         }
@@ -255,15 +255,15 @@ extension BrowserTab: Tab {
     }
 
     func decreaseTextSize() {
-        //TODO: apple has not implemented this on macOS. There is a property webkit-text-size-adjust on iOS though.
+        // TODO: apple has not implemented this on macOS. There is a property webkit-text-size-adjust on iOS though.
     }
 
     func increaseTextSize() {
-        //TODO: apple has not implemented this on macOS. There is a property webkit-text-size-adjust on iOS though.
+        // TODO: apple has not implemented this on macOS. There is a property webkit-text-size-adjust on iOS though.
     }
 
     func printPage() {
-        //TODO: neither Javascript nor the native print methods work here. This is a webkit bug:
+        // TODO: neither Javascript nor the native print methods work here. This is a webkit bug:
         // rdar://problem/36557179
         self.webView.printView(nil)
     }
@@ -286,12 +286,12 @@ extension BrowserTab: WKNavigationDelegate {
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation?, withError error: Error) {
-        //TODO: provisional navigation fail seems to translate to error in resolving URL or similar. Treat different from normal navigation fail
+        // TODO: provisional navigation fail seems to translate to error in resolving URL or similar. Treat different from normal navigation fail
         handleNavigationEnd(success: false)
     }
 
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation?, withError error: Error) {
-        //TODO: show failure to load as page or symbol
+        // TODO: show failure to load as page or symbol
         handleNavigationEnd(success: false)
     }
 

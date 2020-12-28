@@ -21,7 +21,7 @@ import Foundation
 
 @objc
 public protocol Browser {
-    //TODO: I would love to use an associatedtype for tab here, but @objc does not allow this
+    // TODO: I would love to use an associatedtype for tab here, but @objc does not allow this
 
     var browserTabCount: Int { get }
 

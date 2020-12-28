@@ -1,5 +1,5 @@
 //
-//  BrowserTabGui.swift
+//  BrowserTab+Interface.swift
 //  Vienna
 //
 //  Copyright 2020 Tassilo Karge
@@ -58,16 +58,16 @@ extension BrowserTab {
         if URL(string: cleanedUrl)?.scheme == nil {
             // If no '.' appears in the string, wrap it with 'www' and 'com'
             if !cleanedUrl.contains(".") {
-                //TODO: search instead of assuming .com ending
+                // TODO: search instead of assuming .com ending
                 cleanedUrl = "www." + cleanedUrl + ".com"
             }
             cleanedUrl = "http://" + cleanedUrl
         }
 
         // cleanUpUrl is a hack to handle Internationalized Domain Names. WebKit handles them automatically, so we tap into that.
-        let urlToLoad = cleanedUpUrlFromString(cleanedUrl) //TODO: remove tight coupling to HelperFunctions
+        let urlToLoad = cleanedUpUrlFromString(cleanedUrl) // TODO: remove tight coupling to HelperFunctions
 
-        //set url and load immediately, because action was invoked by user
+        // set url and load immediately, because action was invoked by user
         self.tabUrl = urlToLoad
         self.loadTab()
     }
@@ -94,10 +94,10 @@ extension BrowserTab {
         reloadButtonWidth?.constant = loading ? 0 : 30
 
         if showRssButton {
-            //show rss button
+            // show rss button
             rssButtonWidth.constant = 40
         } else {
-            //hide rss button
+            // hide rss button
             rssButtonWidth.constant = 0
         }
 
@@ -118,6 +118,6 @@ extension BrowserTab {
 // MARK: Address Bar Delegate
 
 extension BrowserTab: NSTextFieldDelegate {
-    //TODO: things like address suggestion etc
-    //TODO: restore url string when user presses escape in textfield, make webview first responder
+    // TODO: things like address suggestion etc
+    // TODO: restore url string when user presses escape in textfield, make webview first responder
 }

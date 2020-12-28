@@ -289,7 +289,7 @@ extension MainWindowController: NSMenuDelegate {
 extension MainWindowController: RSSSubscriber {
 
     func isInterestedIn(_ url: URL) -> Bool {
-        //TODO: check whether we already subscribed to feed
+        // TODO: check whether we already subscribed to feed
         return true
     }
 
@@ -311,11 +311,11 @@ extension MainWindowController: BrowserContextMenuDelegate {
             break
         case .link(let url):
             addLinkMenuCustomizations(&menuItems, url)
-        case .picture(_):
+        case .picture:
             break
         case .pictureLink(image: _, link: let link):
             addLinkMenuCustomizations(&menuItems, link)
-        case .text(_):
+        case .text:
             break
         }
         return menuItems
@@ -327,7 +327,8 @@ extension MainWindowController: BrowserContextMenuDelegate {
         }
 
         if let openInBackgroundIndex = menuItems.firstIndex(where: { $0.identifier == NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInBackground }) {
-            //swap open link in new tab and open link in background items if necessary
+            // Swap open link in new tab and open link in background items if
+            // necessary/
             let openInBackground = Preferences.standard.openLinksInBackground
             if openInBackground && index < openInBackgroundIndex
                 || !openInBackground && openInBackgroundIndex < index {
