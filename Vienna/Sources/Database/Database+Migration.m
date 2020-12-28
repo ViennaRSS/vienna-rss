@@ -1,16 +1,16 @@
 //
-//  VNADatabaseMigration.m
+//  Database+Migration.m
 //  Vienna
 //
 //  Created by Joshua Pore on 3/03/2015.
 //  Copyright (c) 2015 The Vienna Project. All rights reserved.
 //
 
-#import "VNADatabaseMigration.h"
+#import "Database+Migration.h"
 #import "Preferences.h"
 #import "Constants.h"
 
-@implementation VNADatabaseMigration
+@implementation Database (Migration)
 
 
 /*!
