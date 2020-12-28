@@ -8,6 +8,7 @@
 #import <XCTest/XCTest.h>
 #import "Article.h"
 #import "ArticleConverter.h"
+#import "Vienna_Tests-Swift.h"
 
 static NSString * const GUID = @"07f446d2-8d6b-4d99-b488-cebc9eac7c33";
 static NSString * const Author = @"Author McAuthorface";
@@ -29,7 +30,7 @@ static NSString * const Body =
 @interface ArticleTests : XCTestCase
 
 @property (nonatomic, strong) Article *article;
-@property (nonatomic, strong) ArticleConverter *articleConverter;
+@property (nonatomic, strong) WebViewArticleConverter *articleConverter;
 
 @end
 
@@ -40,8 +41,7 @@ static NSString * const Body =
     [super setUp];
 
     self.article = [[Article alloc] initWithGuid:GUID];
-
-    self.articleConverter = [[ArticleConverter alloc] init];
+    self.articleConverter = [[WebViewArticleConverter alloc] init];
 }
 
 - (void)testAccessInstanceVariablesDirectly
@@ -354,7 +354,7 @@ static NSString * const Body =
 - (void)testURLIDNinArticleView
 {
     self.article.link = @"http://ουτοπία.δπθ.gr/نجيب_محفوظ/";
-    NSString * htmlTextFromIDNALink = [converter articleTextFromArray:@[self.article]];
+    NSString * htmlTextFromIDNALink = [self.articleConverter articleTextFromArray:@[self.article]];
 
     self.article.link = @"http://xn--kxae4bafwg.xn--pxaix.gr/%D9%86%D8%AC%D9%8A%D8%A8_%D9%85%D8%AD%D9%81%D9%88%D8%B8/";
     NSString * htmlTextFromResolvedIDNALink = [self.articleConverter articleTextFromArray:@[self.article]];

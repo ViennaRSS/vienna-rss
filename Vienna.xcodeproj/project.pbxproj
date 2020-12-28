@@ -87,6 +87,9 @@
 		3A0F2A9E258FCB780036397F /* BrowserTab.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDF6FBE218A266A002F77E9 /* BrowserTab.xib */; };
 		3A171C00210B551B00B80FBB /* TRVSURLSessionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A171BF1210B551B00B80FBB /* TRVSURLSessionOperation.m */; };
 		3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBEC61733C206006DD2AB /* ArticleCellView.m */; };
+		3A50011B259A5EF800AA6AAD /* WebViewArticleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F88B2AC2545BCA90067EEA6 /* WebViewArticleConverter.swift */; };
+		3A500122259A63CB00AA6AAD /* ArticleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4A1BE25852C0E005FF227 /* ArticleConverter.swift */; };
+		3A500129259A640D00AA6AAD /* ArticleStyleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */; };
 		3A60E60B2114AD740004D81D /* URLRequestExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A60E60A2114AD740004D81D /* URLRequestExtensions.m */; };
 		3A7BD0DD1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7BD0DC1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m */; };
 		3AB95743258DBC5A00C54E83 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FC5218A26B0002F77E9 /* Browser.swift */; };
@@ -1969,6 +1972,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A500129259A640D00AA6AAD /* ArticleStyleLoader.swift in Sources */,
+				3A500122259A63CB00AA6AAD /* ArticleConverter.swift in Sources */,
+				3A50011B259A5EF800AA6AAD /* WebViewArticleConverter.swift in Sources */,
 				035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */,
 				F6AC41AC25A4FAF6007DED7B /* FeedDiscovererTests.swift in Sources */,
 				4D36B44B1D37F91E009736C1 /* ArticleTests.m in Sources */,
