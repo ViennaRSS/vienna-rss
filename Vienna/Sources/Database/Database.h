@@ -19,8 +19,8 @@
 //
 
 @import Foundation;
+@import FMDB;
 
-@class FMDatabaseQueue;
 @class Folder;
 @class Field;
 @class CriteriaTree;
