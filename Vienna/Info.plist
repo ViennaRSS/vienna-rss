@@ -137,7 +137,7 @@
 	<key>NSSupportsAutomaticGraphicsSwitching</key>
 	<string>YES</string>
 	<key>SUPublicDSAKeyFile</key>
-	<string>vienna_public_key.pem</string>
+	<string>SparklePublicKey.pem</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
