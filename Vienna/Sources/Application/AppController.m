@@ -296,11 +296,6 @@
 		return;
 	}
 
-	// Preload dictionary of standard URLs
-	NSString * pathToPList = [[NSBundle mainBundle] pathForResource:@"StandardURLs.plist" ofType:@""];
-	if (pathToPList != nil)
-		standardURLs = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
-	
 	// Initialize the Sort By and Columns menu
 	[self initSortMenu];
 	[self initColumnsMenu];
@@ -658,13 +653,6 @@
 {
 	[Preferences standardPreferences].searchMethod = sender.representedObject;
 	((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = sender.title;
-}
-
-/* standardURLs
- */
--(NSDictionary *)standardURLs
-{
-	return standardURLs;
 }
 
 /* reindexDatabase
@@ -1432,7 +1420,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Scripts Folder", nil) action:@selector(doOpenScriptsFolder:) keyEquivalent:@""];
 		[scriptsMenu addItem:menuItem];
 		
-		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Scripts…", nil) action:@selector(moreScripts:) keyEquivalent:@""];
+		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Scripts…", nil) action:@selector(openScriptsPage:) keyEquivalent:@""];
 		[scriptsMenu addItem:menuItem];
 		
 		// If this is the first call to initScriptsMenu, create the scripts menu. Otherwise we just
@@ -2013,24 +2001,18 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 }
 
-/* moreStyles
- * Display the web page where the user can download additional styles.
- */
--(IBAction)moreStyles:(id)sender
+- (IBAction)openStylesPage:(id)sender
 {
-	NSString * stylesPage = [standardURLs valueForKey:@"ViennaMoreStylesPage"];
-	if (stylesPage != nil)
-		[self openURLInDefaultBrowser:[NSURL URLWithString:stylesPage]];
+    NSBundle *bundle = NSBundle.mainBundle;
+    NSString *urlString = [bundle objectForInfoDictionaryKey:@"VNAStylesPage"];
+    [self openURLInDefaultBrowser:[NSURL URLWithString:urlString]];
 }
 
-/* moreScripts
- * Display the web page where the user can download additional scripts.
- */
--(IBAction)moreScripts:(id)sender
+- (IBAction)openScriptsPage:(id)sender
 {
-	NSString * scriptsPage = [standardURLs valueForKey:@"ViennaMoreScriptsPage"];
-	if (scriptsPage != nil)
-		[self openURLInDefaultBrowser:[NSURL URLWithString:scriptsPage]];
+    NSBundle *bundle = NSBundle.mainBundle;
+    NSString *urlString = [bundle objectForInfoDictionaryKey:@"VNAScriptsPage"];
+    [self openURLInDefaultBrowser:[NSURL URLWithString:urlString]];
 }
 
 /* viewArticlePages inPreferredBrowser
@@ -2830,14 +2812,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[self openURLFromString:folder.homePage inPreferredBrowser:NO];
 }
 
-/* showViennaHomePage
- * Open the Vienna home page in the default browser.
- */
--(IBAction)showViennaHomePage:(id)sender
+- (IBAction)openHomePage:(id)sender
 {
-	NSString * homePage = [standardURLs valueForKey:@"ViennaHomePage"];
-	if (homePage != nil)
-		[self openURLInDefaultBrowser:[NSURL URLWithString:homePage]];
+    NSBundle *bundle = NSBundle.mainBundle;
+    NSString *urlString = [bundle objectForInfoDictionaryKey:@"VNAHomePage"];
+    [self openURLInDefaultBrowser:[NSURL URLWithString:urlString]];
 }
 
 #pragma mark Tabs
