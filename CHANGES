@@ -8,6 +8,23 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.7.0
+-----
+- Update database to enable auto-vacuum mode (the updated database remains compatible with older versions of Vienna)
+- Add dark color scheme to Default and Serifim styles
+- Fix search field for some macOS versions prior to macOS 11
+- Fix database update on permanent HTTP redirections
+- Fix a problem with some authentication challenges sent by servers
+- Limit duration of requests to unresponding websites
+- Modify symbols displayed in article list on macOS 11 Big Sur
+- Update some localizations
+- Update an URL in the default set of feeds
+- Various code modernizations
+- More coherent project settings
+- Rearrange some files ; move images into a single Assets.xcassets folder
+- Build with Xcode 12.3
+- Improve SwiftLint settings
+
 3.6.2
 -----
 - Fix main window not appearing when "checking for new articles" preference is set to "Manually" 

@@ -108,30 +108,23 @@ sup {
 
 <h1 id="toc_0">Version Notes</h1>
 
-<h2 id="toc_1">3.6.2</h2>
-
-<h4 id="toc_2">Bugfix</h4>
+<h2 id="toc_1">3.7.0</h2>
 
 <ul>
-<li>Fix main window not appearing when &quot;checking for new articles&quot; preference is set to &quot;Manually&quot; </li>
-</ul>
-
-<h2 id="toc_3">3.6.1</h2>
-
-<ul>
-<li>Fix brutal resizing of article view column in vertical layout</li>
-<li>Add ‘hidden’ preference to specify web user agent through command line : <code>defaults write uk.co.opencommunity.vienna2 UserAgentName &lt;...&gt;</code></li>
-<li>Improve look of main window toolbar under macOS Big Sur</li>
-<li>Use adaptative grey for unread count in folders tree</li>
-<li>Update toolbar icons of preferences window</li>
-<li>Replace IOKit calls with NSBackgroundActivityScheduler for scheduling refreshes</li>
-<li>Address several deprecation warnings</li>
-<li>Refactor some methods from Objective-C to Swift (PopUpButton, AppController+Sparkle)</li>
-<li>Remove unused code and images, slightly reorganize project, move images and icons into assets catalog</li>
-<li>Handle gracefully when CS-ID.xcconfig file is missing</li>
-<li>Use Swift Package Manager instead of Carthage for managing dependencies (Sparkle, MMTabBarView v/1.4.12)</li>
-<li>Use Github Workflows instead of Travis CI for continuous integrations tests</li>
-<li>Update SwiftLint configuration</li>
+<li>Update database to enable auto-vacuum mode (the updated database remains compatible with older versions of Vienna)</li>
+<li>Add dark color scheme to Default and Serifim styles</li>
+<li>Fix search field for some macOS versions prior to macOS 11</li>
+<li>Fix database update on permanent HTTP redirections</li>
+<li>Fix a problem with some authentication challenges sent by servers</li>
+<li>Limit duration of requests to unresponding websites</li>
+<li>Modify symbols displayed in article list on macOS 11 Big Sur</li>
+<li>Update some localizations</li>
+<li>Update an URL in the default set of feeds</li>
+<li>Various code modernizations</li>
+<li>More coherent project settings</li>
+<li>Rearrange some files ; move images into a single Assets.xcassets folder</li>
+<li>Build with Xcode 12.3</li>
+<li>Improve SwiftLint settings</li>
 </ul>
 
 
