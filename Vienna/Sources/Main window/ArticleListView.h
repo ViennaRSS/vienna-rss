@@ -28,11 +28,13 @@
 @class ArticleView;
 @class MessageListView;
 @class EnclosureView;
+@protocol ArticleContentView;
+@protocol ArticleViewDelegate;
 
-@interface ArticleListView : NSView<BaseView, ArticleBaseView, NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate>
+@interface ArticleListView : NSView<BaseView, ArticleBaseView, ArticleViewDelegate, NSTableViewDelegate, NSTableViewDataSource>
 {
 	IBOutlet MessageListView * articleList;
-	IBOutlet ArticleView * articleText;
+	IBOutlet id<ArticleContentView> articleText;
 	IBOutlet NSSplitView * splitView2;
 	IBOutlet EnclosureView * enclosureView;
 

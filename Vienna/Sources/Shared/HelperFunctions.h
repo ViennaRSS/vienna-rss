@@ -40,6 +40,7 @@
 void loadMapFromPath(NSString *_Nonnull path, NSMutableDictionary *_Nonnull pathMappings, BOOL foldersOnly,
                      NSArray *_Nullable validExtensions);
 BOOL isAccessible(NSString *_Nonnull urlString);
+void runOKAlertPanelPlain(NSString *_Nonnull titleString, NSString *_Nonnull bodyText);
 void runOKAlertPanel(NSString *_Nonnull titleString, NSString *_Nonnull bodyText, ...);
 void runOKAlertSheet(NSString *_Nonnull titleString, NSString *_Nonnull bodyText, ...);
 NSMenuItem * _Nullable menuItemWithAction(SEL _Nonnull theSelector);

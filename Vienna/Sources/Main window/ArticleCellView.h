@@ -20,6 +20,7 @@
 }
 
 @property (readonly, strong)id<ArticleContentView> articleView;
+@property (readonly, strong) ArticleConverter * articleConverter;
 @property (readonly, strong)NSProgressIndicator * progressIndicator;
 @property BOOL inProgress;
 @property NSInteger folderId;

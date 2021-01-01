@@ -13,3 +13,4 @@
 #import "UnifiedDisplayView.h"
 #import "ViennaApp.h"
 #import "WebViewBrowser.h"
+#import "ArticleConverter.h"

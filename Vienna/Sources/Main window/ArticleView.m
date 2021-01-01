@@ -30,6 +30,7 @@
 
 @interface ArticleView ()
 
+@property (strong, nonatomic) OverlayStatusBar *statusBar;
 -(BOOL)initForStyle:(NSString *)styleName;
 -(void)handleStyleChange:(NSNotificationCenter *)nc;
 
@@ -37,7 +38,7 @@
 
 @implementation ArticleView
 
-@synthesize cssStylesheet, currentHTML, html, htmlTemplate, jsScript, tabUrl, textSelection, title;
+@synthesize cssStylesheet, currentHTML, html, htmlTemplate, jsScript, tabUrl, textSelection, title, listView;
 
 /* initWithFrame
  * The designated instance initialiser.
@@ -52,16 +53,8 @@
 		jsScript = nil;
 		currentHTML = @"";
 
-		// Set up to be notified when style changes
-		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self selector:@selector(handleStyleChange:) name:@"MA_Notify_StyleChange" object:nil];
-
-		// Select the user's current style or revert back to the
-		// default style otherwise.
-		Preferences * prefs = [Preferences standardPreferences];
-		[self initForStyle:prefs.displayStyle];
 		// enlarge / reduce the text size according to user's setting
-		self.textSizeMultiplier = prefs.textSizeMultiplier;
+		self.textSizeMultiplier = [Preferences standardPreferences].textSizeMultiplier;
 	}
 	return self;
 }
@@ -84,146 +77,14 @@
 	return NO;
 }
 
-/* initForStyle
- * Initialise the template and stylesheet for the specified display style if it can be
- * found. Otherwise the existing template and stylesheet are not changed.
- */
--(BOOL)initForStyle:(NSString *)styleName
-{
-	NSString * path = ArticleStyleLoader.stylesMap[styleName];
-	if (path != nil)
-	{
-		NSString * filePath = [path stringByAppendingPathComponent:@"template.html"];
-		NSString * templateString = [NSString stringWithContentsOfFile:filePath usedEncoding:NULL error:NULL];
-		// Sanity check the file. Obviously anything bigger than 0 bytes but smaller than a valid template
-		// format is a problem but we'll worry about that later. There's only so much rope we can give.
-		if (templateString != nil && templateString.length > 0u)
-		{
-			
-			htmlTemplate = templateString;
-			cssStylesheet = [@"file://localhost" stringByAppendingString:
-			    [[path stringByAppendingPathComponent:@"stylesheet.css"]
-			    stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLPathAllowedCharacterSet]];
-			NSString * javaScriptPath = [path stringByAppendingPathComponent:@"script.js"];
-			if ([[NSFileManager defaultManager] fileExistsAtPath:javaScriptPath])
-				jsScript = [@"file://localhost" stringByAppendingString:[javaScriptPath
-				stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLPathAllowedCharacterSet]];
-			else
-				jsScript = nil;
-			
-			// Make sure the template is valid
-			NSString * firstLine = htmlTemplate.firstNonBlankLine.lowercaseString;
-			if (![firstLine hasPrefix:@"<html>"] && ![firstLine hasPrefix:@"<!doctype"])
-			{
-				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
-				return YES;
-			}
-		}
-	}
-	
-	// If the template is invalid, revert to the default style
-	// which should ALWAYS be valid.
-	NSAssert(![styleName isEqualToString:@"Default"], @"Default style is corrupted!");
-	
-	// Warn the user.
-	NSString * titleText = [NSString stringWithFormat:NSLocalizedString(@"The style %@ appears to be missing or corrupted", nil), styleName];
-	runOKAlertPanel(titleText, NSLocalizedString(@"The Default style will be used instead.", nil));
-
-	// We need to reset the preferences without firing off a notification since we want the
-	// style change to happen immediately.
-	Preferences * prefs = [Preferences standardPreferences];
-	[prefs setDisplayStyle:MA_DefaultStyleName withNotification:NO];
-	return [self initForStyle:MA_DefaultStyleName];
-}
-
-/* articleTextFromArray
- * Create an HTML string comprising all articles in the specified array formatted using
- * the currently selected template.
- */
--(NSString *)articleTextFromArray:(NSArray<Article *> *)msgArray
-{
-	NSUInteger index;
-	
-	NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<!DOCTYPE html><html><head><meta content=\"text/html; charset=UTF-8\">"];
-	// the link for the first article will be the base URL for resolving relative URLs
-	[htmlText appendString:@"<base href=\""];
-	[htmlText appendString:[NSString stringByCleaningURLString:msgArray[0].link]];
-	[htmlText appendString:@"\">"];
-	if (cssStylesheet != nil)
-	{
-		[htmlText appendString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\""];
-		[htmlText appendString:cssStylesheet];
-		[htmlText appendString:@"\">"];
-	}
-	if (jsScript != nil)
-	{
-		[htmlText appendString:@"<script type=\"text/javascript\" src=\""];
-		[htmlText appendString:jsScript];
-		[htmlText appendString:@"\"></script>"];
-	}
-	[htmlText appendString:@"<meta http-equiv=\"Pragma\" content=\"no-cache\">"];
-	[htmlText appendString:@"</head><body>"];
-	for (index = 0; index < msgArray.count; ++index)
-	{
-		Article * theArticle = msgArray[index];
-		
-		// Load the selected HTML template for the current view style and plug in the current
-		// article values and style sheet setting.
-		NSMutableString * htmlArticle;
-		if (htmlTemplate == nil)
-		{
-			NSMutableString * articleBody = [NSMutableString stringWithString:SafeString(theArticle.body)];
-			[articleBody fixupRelativeImgTags:SafeString([theArticle link])];
-			[articleBody fixupRelativeIframeTags:SafeString([theArticle link])];
-			[articleBody fixupRelativeAnchorTags:SafeString([theArticle link])];
-			htmlArticle = [[NSMutableString alloc] initWithString:articleBody];
-		}
-		else
-		{
-			htmlArticle = [[NSMutableString alloc] initWithString:@""];
-			NSScanner * scanner = [NSScanner scannerWithString:htmlTemplate];
-			NSString * theString = nil;
-			BOOL stripIfEmpty = NO;
-
-			// Handle conditional tag expansion. Sections in <!-- cond:noblank--> and <!--end-->
-			// are stripped out if all the tags inside are blank.
-			while(!scanner.atEnd)
-			{
-				if ([scanner scanUpToString:@"<!--" intoString:&theString])
-					[htmlArticle appendString:[theArticle expandTags:theString withConditional:stripIfEmpty]];
-				if ([scanner scanString:@"<!--" intoString:nil])
-				{
-					NSString * commentTag = nil;
-
-					if ([scanner scanUpToString:@"-->" intoString:&commentTag] && commentTag != nil)
-					{
-						commentTag = commentTag.trim;
-						if ([commentTag isEqualToString:@"cond:noblank"])
-							stripIfEmpty = YES;
-						if ([commentTag isEqualToString:@"end"])
-							stripIfEmpty = NO;
-						[scanner scanString:@"-->" intoString:nil];
-					}
-				}
-			}
-		}
-		
-		// Separate each article with a horizontal divider line
-		if (index > 0)
-			[htmlText appendString:@"<hr><br />"];
-		[htmlText appendString:htmlArticle];
-	}
-	[htmlText appendString:@"</body></html>"];
-	return htmlText;
-}
-
 /* clearHTML
  * Make the web view behave like a blank page.
  */
 -(void)clearHTML
 {
     self.hidden = YES;
-    self.mainFrameURL = @"about:blank";
+    self.tabUrl = @"about:blank";
+    [self loadTab];
     currentHTML = @"";
 }
 
@@ -443,6 +304,200 @@
 
 - (void)encodeWithCoder:(nonnull NSCoder *)aCoder {
 	//TODO
+}
+
+#pragma mark Moved from ArticleListView
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+                       context:(void *)context {
+    if ([keyPath isEqualToString:MAPref_ShowStatusBar]) {
+        BOOL isStatusBarShown = [Preferences standardPreferences].showStatusBar;
+        if (isStatusBarShown && !self.statusBar) {
+            self.statusBar = [OverlayStatusBar new];
+            [self addSubview:self.statusBar];
+        } else if (!isStatusBarShown && self.statusBar) {
+            [self.statusBar removeFromSuperview];
+            self.statusBar = nil;
+        }
+    }
+}
+
+#pragma mark - WebView Delegate
+
+/* didStartProvisionalLoadForFrame
+ * Invoked when a new client request is made by sender to load a provisional data source for frame.
+ */
+-(void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
+{
+    if (frame == self.mainFrame)
+    {
+        [listView setError:nil];
+    }
+
+}
+
+/* didCommitLoadForFrame
+ * Invoked when data source of frame has started to receive data.
+ */
+-(void)webView:(WebView *)sender didCommitLoadForFrame:(WebFrame *)frame
+{
+}
+
+/* didFailProvisionalLoadWithError
+ * Invoked when a location request for frame has failed to load.
+ */
+-(void)webView:(WebView *)sender didFailProvisionalLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
+{
+    if (frame == self.mainFrame)
+    {
+        [self handleError:error withDataSource: frame.provisionalDataSource];
+    }
+}
+
+/* didFailLoadWithError
+ * Invoked when a location request for frame has failed to load.
+ */
+-(void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
+{
+    if (frame == self.mainFrame)
+    {
+        // Not really errors. Load is cancelled or a plugin is grabbing the URL and will handle it by itself.
+        if (!([error.domain isEqualToString:WebKitErrorDomain] && (error.code == NSURLErrorCancelled || error.code == /*WebKitErrorPlugInWillHandleLoad*/ 204)))
+            [self handleError:error withDataSource:frame.dataSource];
+        [listView endMainFrameLoad];
+    }
+}
+
+-(void)handleError:(NSError *)error withDataSource:(WebDataSource *)dataSource
+{
+    // Remember the error.
+    [listView setError:error];
+
+    // Load the localized verion of the error page
+    WebFrame * frame = self.mainFrame;
+    NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
+    if (pathToErrorPage != nil)
+    {
+        NSString *errorMessage = [NSString stringWithContentsOfFile:pathToErrorPage encoding:NSUTF8StringEncoding error:NULL];
+        errorMessage = [errorMessage stringByReplacingOccurrencesOfString: @"$ErrorInformation" withString: error.localizedDescription];
+        if (errorMessage != nil)
+            [frame loadAlternateHTMLString:errorMessage baseURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] forUnreachableURL:dataSource.request.URL];
+    }
+}
+
+/* didFinishLoadForFrame
+ * Invoked when a location request for frame has successfully; that is, when all the resources are done loading.
+ */
+-(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
+{
+    if (frame == self.mainFrame)
+        [listView endMainFrameLoad];
+}
+
+-(void)webViewLoadFinished:(NSNotification *)notification
+{
+}
+
+// MARK: - WebUIDelegate methods
+
+
+/* createWebViewWithRequest
+ * Called when the browser wants to create a new window. The request is opened in a new tab.
+ */
+-(WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
+{
+    [listView.controller openURL:request.URL inPreferredBrowser:YES];
+    // Change this to handle modifier key?
+    // Is this covered by the webView policy?
+    return nil;
+}
+
+/* runJavaScriptAlertPanelWithMessage
+ * Called when the browser wants to display a JavaScript alert panel containing the specified message.
+ */
+- (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
+    NSAlert *alert = [NSAlert new];
+    alert.alertStyle = NSAlertStyleInformational;
+    alert.messageText = NSLocalizedString(@"JavaScript", @"");
+    alert.informativeText = message;
+    [alert runModal];
+}
+
+/* runJavaScriptConfirmPanelWithMessage
+ * Called when the browser wants to display a JavaScript confirmation panel with the specified message.
+ */
+- (BOOL)webView:(WebView *)sender runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
+    NSAlert *alert = [NSAlert new];
+    alert.alertStyle = NSAlertStyleInformational;
+    alert.messageText = NSLocalizedString(@"JavaScript", @"");
+    alert.informativeText = message;
+    [alert addButtonWithTitle:NSLocalizedString(@"OK", @"Title of a button on an alert")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
+    NSModalResponse alertResponse = [alert runModal];
+
+    return alertResponse == NSAlertFirstButtonReturn;
+}
+
+/* mouseDidMoveOverElement
+ * Called from the webview when the user positions the mouse over an element. If it's a link
+ * then echo the URL to the status bar like Safari does.
+ */
+- (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation
+  modifierFlags:(NSUInteger)modifierFlags {
+    if (self.statusBar) {
+        NSURL *url = [elementInformation valueForKey:@"WebElementLinkURL"];
+        self.statusBar.label = url.absoluteString;
+    }
+}
+
+/* contextMenuItemsForElement
+ * Creates a new context menu for our article's web view.
+ */
+-(NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems
+{
+    // If this is an URL link, do the link-specific items.
+    NSURL * urlLink = [element valueForKey:WebElementLinkURLKey];
+    if (urlLink != nil)
+        return [listView.controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
+
+    // If we have a full HTML page then do the additional web-page specific items.
+    if (listView.isCurrentPageFullHTML)
+    {
+        WebFrame * frameKey = [element valueForKey:WebElementFrameKey];
+        if (frameKey != nil)
+            return [listView.controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
+    }
+
+    // Remove the reload menu item if we don't have a full HTML page.
+    if (!listView.isCurrentPageFullHTML)
+    {
+        NSMutableArray * newDefaultMenu = [[NSMutableArray alloc] init];
+        NSInteger count = defaultMenuItems.count;
+        NSInteger index;
+
+        // Copy over everything but the reload menu item, which we can't handle if
+        // this is not a full HTML page since we don't have an URL.
+        for (index = 0; index < count; index++)
+        {
+            NSMenuItem * menuItem = defaultMenuItems[index];
+            if (menuItem.tag != WebMenuItemTagReload)
+                [newDefaultMenu addObject:menuItem];
+        }
+
+        // If we still have some menu items then use that for the new default menu, otherwise
+        // set the default items to nil as we may have removed all the items.
+        if (newDefaultMenu.count > 0)
+            defaultMenuItems = newDefaultMenu;
+        else
+        {
+            defaultMenuItems = nil;
+        }
+    }
+
+    // Return the default menu items.
+    return defaultMenuItems;
 }
 
 @end
