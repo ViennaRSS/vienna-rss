@@ -21,7 +21,7 @@ import Cocoa
 import MMTabBarView
 
 @available(OSX 10.10, *)
-class TabbedBrowserViewController: NSViewController, Browser, RSSSource {
+class TabbedBrowserViewController: NSViewController, RSSSource {
 
     @IBOutlet private(set) weak var tabBar: MMTabBarView! {
         didSet {
@@ -49,7 +49,7 @@ class TabbedBrowserViewController: NSViewController, Browser, RSSSource {
         didSet {
             //remove from tabView if there was a prevous primary tab
             if let primaryTab = oldValue {
-                tabView.removeTabViewItem(primaryTab)
+                self.closeTab(primaryTab)
             }
             if let primaryTab = self.primaryTab {
                 tabView.insertTabViewItem(primaryTab, at: 0)
@@ -107,6 +107,44 @@ class TabbedBrowserViewController: NSViewController, Browser, RSSSource {
         }
     }
 
+    func restoreTabs() {
+        let tabLinks = Preferences.standard.array(forKey: "TabList") as? [String]
+        let tabTitles = Preferences.standard.object(forKey: "TabTitleDict") as? [String: String]
+
+        for i in 0..<(tabLinks?.count ?? 0) {
+            guard let urlString = tabLinks?[i], let url = URL(string: urlString) else {
+                continue
+            }
+            let tab = createNewTab(url, inBackground: true, load: false) as? BrowserTab
+            tab?.title = tabTitles?[urlString]
+        }
+    }
+
+    func saveOpenTabs() {
+
+        let tabs = tabBar.tabView.tabViewItems.compactMap { $0.viewController as? BrowserTab }
+
+        let tabLinks = tabs.compactMap { $0.tabUrl?.absoluteString }
+        let tabTitles = Dictionary(tabs.filter {
+            $0.tabUrl != nil && $0.title != nil
+        }.map {
+            ($0.tabUrl!.absoluteString, $0.title!)
+        }, uniquingKeysWith: { $1 })
+
+        Preferences.standard.setArray(tabLinks as [Any], forKey: "TabList")
+        Preferences.standard.setObject(tabTitles, forKey: "TabTitleDict")
+
+        Preferences.standard.save()
+    }
+
+    func closeTab(_ tabViewItem: NSTabViewItem) {
+        self.tabBar.delegate?.tabView?(self.tabView, willClose: tabViewItem)
+        self.tabView.removeTabViewItem(tabViewItem)
+        self.tabBar.delegate?.tabView?(self.tabView, didClose: tabViewItem)
+    }
+}
+
+extension TabbedBrowserViewController: Browser {
     func createNewTab(_ url: URL? = nil, inBackground: Bool = false, load: Bool = false) -> Tab {
         let newTab = BrowserTab()
 
@@ -121,8 +159,8 @@ class TabbedBrowserViewController: NSViewController, Browser, RSSSource {
         if load {
             newTab.loadTab()
         }
-        
-		tabView.addTabViewItem(newTabViewItem)
+
+        tabView.addTabViewItem(newTabViewItem)
 
 		if !inBackground {
 			tabBar.select(newTabViewItem)
@@ -155,46 +193,15 @@ class TabbedBrowserViewController: NSViewController, Browser, RSSSource {
         self.tabView.selectNextTabViewItem(nil)
     }
 
-    func restoreTabs() {
-        let tabLinks = Preferences.standard().array(forKey: "TabList") as? [String]
-        let tabTitles = Preferences.standard().object(forKey: "TabTitleDict") as? [String: String]
-
-        for i in 0..<(tabLinks?.count ?? 0) {
-            guard let urlString = tabLinks?[i], let url = URL(string: urlString) else {
-                continue
-            }
-            let tab = createNewTab(url, inBackground: true, load: false) as? BrowserTab
-            tab?.title = tabTitles?[urlString]
-        }
-    }
-
-	func saveOpenTabs() {
-
-        let tabs = tabBar.tabView.tabViewItems.compactMap { $0.viewController as? BrowserTab }
-
-        let tabLinks = tabs.compactMap { $0.tabUrl?.absoluteString }
-        let tabTitles = Dictionary(tabs.filter {
-            $0.tabUrl != nil && $0.title != nil
-        }.map {
-            ($0.tabUrl!.absoluteString, $0.title!)
-        }, uniquingKeysWith: { $1 })
-
-        Preferences.standard().setArray(tabLinks as [Any], forKey: "TabList")
-        Preferences.standard().setObject(tabTitles, forKey: "TabTitleDict")
-
-        Preferences.standard().save()
-    }
-
     func closeActiveTab() {
         if let selectedTabViewItem = self.tabView.selectedTabViewItem {
-            self.tabView.removeTabViewItem(selectedTabViewItem)
+            self.closeTab(selectedTabViewItem)
         }
     }
 
     func closeAllTabs() {
-        self.tabView.tabViewItems.filter { $0 != primaryTab }.forEach {
-            self.tabView.removeTabViewItem($0)
-        }
+        self.tabView.tabViewItems.filter { $0 != primaryTab }
+            .forEach(closeTab)
     }
 
     func getTextSelection() -> String {
