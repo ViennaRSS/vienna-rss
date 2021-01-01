@@ -79,6 +79,8 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
         }
     }
 
+    weak var contextMenuDelegate: BrowserContextMenuDelegate?
+
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -322,23 +324,22 @@ extension TabbedBrowserViewController: CustomWKUIDelegate {
         case .text(_):
             break
         }
-        return menuItems
+        return self.contextMenuDelegate?
+            .contextMenuItemsFor(purpose: purpose, existingMenuItems: menuItems) ?? menuItems
     }
 
     private func addLinkMenuCustomizations(_ menuItems: inout [NSMenuItem], _ url: (URL)) {
-        if let index = menuItems.firstIndex(where: { $0.identifier?.rawValue == "WKMenuItemIdentifierOpenLinkInNewWindow" }) {
-            menuItems[index].title = "Open link in new tab"
-
-            let openInBackgroundItem = NSMenuItem(title: "Open link in background", action: #selector(openLinkInBackground(menuItem:)), keyEquivalent: "")
-            openInBackgroundItem.identifier = .WKMenuItemIdentifierOpenLinkInBackground
-            openInBackgroundItem.representedObject = url
-            menuItems.insert(openInBackgroundItem, at: menuItems.index(after: index))
-
-            let openInDefaultBrowserItem = NSMenuItem(title: "Open link in [Default Browser Name]", action: #selector(openLinkInDefaultBrowser(menuItem:)), keyEquivalent: "")
-            openInDefaultBrowserItem.identifier = .WKMenuItemIdentifierOpenLinkInSystemBrowser
-            openInDefaultBrowserItem.representedObject = url
-            menuItems.insert(openInDefaultBrowserItem, at: menuItems.index(after: index))
+        guard let index = menuItems.firstIndex(where: { $0.identifier?.rawValue == "WKMenuItemIdentifierOpenLinkInNewWindow" }) else {
+            return
         }
+
+        menuItems[index].title = NSLocalizedString("Open Link in New Tab", comment: "")
+
+        let openInBackgroundTitle = NSLocalizedString("Open Link in Background", comment: "")
+        let openInBackgroundItem = NSMenuItem(title: openInBackgroundTitle, action: #selector(openLinkInBackground(menuItem:)), keyEquivalent: "")
+        openInBackgroundItem.identifier = .WKMenuItemIdentifierOpenLinkInBackground
+        openInBackgroundItem.representedObject = url
+        menuItems.insert(openInBackgroundItem, at: menuItems.index(after: index))
     }
 
     @objc
@@ -348,15 +349,10 @@ extension TabbedBrowserViewController: CustomWKUIDelegate {
         }
     }
 
-    @objc
-    func openLinkInDefaultBrowser(menuItem: NSMenuItem) {
-        if let url = menuItem.representedObject as? URL {
-            // TODO: open in default browser
-        }
-    }
-
     private func getIndexAfterSelected() -> Int {
-        guard let tabView = tabView, let selectedItem = tabView.selectedTabViewItem else { return 0 }
+        guard let tabView = tabView, let selectedItem = tabView.selectedTabViewItem else {
+            return 0
+        }
         let selectedIndex = tabView.tabViewItems.firstIndex(of: selectedItem) ?? 0
         return tabView.tabViewItems.index(after: selectedIndex)
     }

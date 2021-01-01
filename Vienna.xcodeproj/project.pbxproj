@@ -67,6 +67,7 @@
 		2F2280382271B18A005D1023 /* ArticleStyleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */; };
 		2F22803A2271CCAB005D1023 /* WebKitArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280392271CCAB005D1023 /* WebKitArticleView.swift */; };
 		2F5AC4202198E1AA00A7EDDE /* TitleChangingTabViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */; };
+		2F779111253B17C5004ED4EF /* BrowserContextMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F779110253B17C5004ED4EF /* BrowserContextMenuDelegate.swift */; };
 		2F7B91EB2198351A00E56F00 /* WebViewBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */; };
 		2FA946C52517D8D8006134C5 /* CustomWKUIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA946C42517D8D8006134C5 /* CustomWKUIDelegate.swift */; };
 		2FC91DDD21850ADB00D7F223 /* Browser+WebUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */; };
@@ -284,6 +285,7 @@
 		2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleStyleLoader.swift; sourceTree = "<group>"; };
 		2F2280392271CCAB005D1023 /* WebKitArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKitArticleView.swift; sourceTree = "<group>"; };
 		2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleChangingTabViewItem.swift; sourceTree = "<group>"; };
+		2F779110253B17C5004ED4EF /* BrowserContextMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserContextMenuDelegate.swift; sourceTree = "<group>"; };
 		2F7B91EA2198351A00E56F00 /* WebViewBrowser.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewBrowser.xib; sourceTree = "<group>"; };
 		2FA946C42517D8D8006134C5 /* CustomWKUIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWKUIDelegate.swift; sourceTree = "<group>"; };
 		2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Browser+WebUIDelegate.m"; sourceTree = "<group>"; };
@@ -1059,6 +1061,7 @@
 				F6A7EA5B1F1CE63B00BD4450 /* WebView Browser */,
 				2FDF6FC7218A289A002F77E9 /* Tab.swift */,
 				2FF61D2B24F2AE8B00A7E2B5 /* RSSCommunication.swift */,
+				2F779110253B17C5004ED4EF /* BrowserContextMenuDelegate.swift */,
 			);
 			name = Browser;
 			sourceTree = "<group>";
@@ -1974,6 +1977,7 @@
 				F63833D81EF842EA00E07213 /* MainWindowController.swift in Sources */,
 				F41CA694218F56140072F734 /* NSWorkspace+OpenWithMenu.m in Sources */,
 				2FF61D3024F2ED1500A7E2B5 /* BrowserTabGui.swift in Sources */,
+				2F779111253B17C5004ED4EF /* BrowserContextMenuDelegate.swift in Sources */,
 				664F87C713C62DFE00E266DE /* OpenReader.m in Sources */,
 				F6D282621F1A87A900FF865E /* PopUpButtonToolbarItem.swift in Sources */,
 				EA43C70914A370DB00F2D843 /* VTPG_Common.m in Sources */,

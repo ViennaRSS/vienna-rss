@@ -10,7 +10,7 @@ import Cocoa
 @available(OSX 10.10, *)
 public class CustomWKWebView: WKWebView {
 
-    public weak var contextMenuProvider: CustomWKUIDelegate?
+    weak var contextMenuProvider: CustomWKUIDelegate?
 
     var canScrollDown: Bool {
         evaluateScrollPossibilities().scrollDownPossible
@@ -207,9 +207,4 @@ extension CustomWKWebView: WKScriptMessageHandler {
         menu.items = contextMenuProvider?.contextMenuItemsFor(purpose: context, existingMenuItems: menu.items) ?? menu.items
         lastRightClickedLink = nil
     }
-}
-
-extension NSUserInterfaceItemIdentifier {
-    static let WKMenuItemIdentifierOpenLinkInBackground = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLinkInBackground")
-    static let WKMenuItemIdentifierOpenLinkInSystemBrowser = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLinkInSystemBrowser")
 }
