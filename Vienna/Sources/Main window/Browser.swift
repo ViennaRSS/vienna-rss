@@ -35,7 +35,7 @@ public protocol Browser {
     /// A tabbed browser always has one tab that is selected. It is called the active tab.
     /// In case the primary tab is selected, the return value is nil
     /// (because it does not necessarily implement the Tab protocol)
-	var activeTab: Tab? { get }
+    var activeTab: Tab? { get }
 
     /// Add a new tab to the open tabs of the browser
     ///

@@ -30,13 +30,13 @@ public protocol Tab {
 
     // MARK: navigating
 
-	// goes back and returns whether going back was possible
+    // goes back and returns whether going back was possible
     func back() -> Bool
-	// goes forward and returns whether going forward was possible
+    // goes forward and returns whether going forward was possible
     func forward() -> Bool
-	// returns whether it was possible to scroll down
+    // returns whether it was possible to scroll down
     func pageDown() -> Bool
-	// returns whether it was possible to scroll up
+    // returns whether it was possible to scroll up
     func pageUp() -> Bool
 
     func searchFor(_ searchString: String, action: NSFindPanelAction)

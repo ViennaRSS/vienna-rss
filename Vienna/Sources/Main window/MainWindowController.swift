@@ -33,10 +33,10 @@ final class MainWindowController: NSWindowController {
     @objc private(set) var toolbarSearchField: NSSearchField?
     @IBOutlet private(set) weak var placeholderDetailView: NSView!
 
-	@objc private(set) lazy var browser: (Browser & NSViewController) = {
+    @objc private(set) lazy var browser: (Browser & NSViewController) = {
         var controller = TabbedBrowserViewController()
         return controller
-	}()
+    }()
 
     // MARK: Initialization
 
@@ -50,7 +50,7 @@ final class MainWindowController: NSWindowController {
         // TODO: Move this to windowDidLoad()
         statusBarState(disclosed: Preferences.standard.showStatusBar, animate: false)
 
-		splitView.addSubview(browser.view)
+        splitView.addSubview(browser.view)
         placeholderDetailView.removeFromSuperview()
 
         let filterMenu = (NSApp as? ViennaApp)?.filterMenu
@@ -271,7 +271,7 @@ extension MainWindowController: NSMenuDelegate {
             menu.removeItem(menuItem)
         }
 
-		if let styles = (Array(ArticleStyleLoader.reloadStylesMap().allKeys) as? [String])?.sorted() {
+        if let styles = (Array(ArticleStyleLoader.reloadStylesMap().allKeys) as? [String])?.sorted() {
             var index = 0
             while index < styles.count {
                 menu.insertItem(withTitle: styles[index],

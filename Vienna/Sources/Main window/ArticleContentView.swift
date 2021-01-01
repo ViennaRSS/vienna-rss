@@ -13,21 +13,21 @@ protocol ArticleContentView: Tab {
     var listView: ArticleViewDelegate? { get set }
     var articles: [Article] { get set }
 
-	@objc(keyDown:)
-	func keyDown(with event: NSEvent)
+    @objc(keyDown:)
+    func keyDown(with event: NSEvent)
 
-	// from tabbedwebview
-	// TODO: evaluate and throw out what is not necessary / replace with Tab interface
-	func printDocument(_ sender: Any)
-	func abortJavascriptAndPlugIns()
-	func useUserPrefsForJavascriptAndPlugIns()
-	func forceJavascript()
+    // from tabbedwebview
+    // TODO: evaluate and throw out what is not necessary / replace with Tab interface
+    func printDocument(_ sender: Any)
+    func abortJavascriptAndPlugIns()
+    func useUserPrefsForJavascriptAndPlugIns()
+    func forceJavascript()
 
-	func scrollToTop()
-	func scrollToBottom()
+    func scrollToTop()
+    func scrollToBottom()
 
-	// other requirements (originally from WebView)
-	// TODO: replace with Tab interface
-	func makeTextSmaller(_ sender: Any)
-	func makeTextLarger(_ sender: Any)
+    // other requirements (originally from WebView)
+    // TODO: replace with Tab interface
+    func makeTextSmaller(_ sender: Any)
+    func makeTextLarger(_ sender: Any)
 }
