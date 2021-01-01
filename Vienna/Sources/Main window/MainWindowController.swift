@@ -25,7 +25,7 @@ final class MainWindowController: NSWindowController {
 
     @IBOutlet private(set) var splitView: NSSplitView!
     @IBOutlet private(set) var outlineView: FolderView?
-    @IBOutlet private(set) var browser: (Browser&NSViewController)?
+    @IBOutlet private(set) var browser: (Browser & NSViewController)?
     @IBOutlet private(set) var articleListView: ArticleListView?
     @IBOutlet private(set) var unifiedDisplayView: UnifiedDisplayView?
     @IBOutlet private(set) var filterDisclosureView: DisclosureView?
@@ -271,7 +271,7 @@ extension MainWindowController: NSMenuDelegate {
             menu.removeItem(menuItem)
         }
 
-        if let styles = (Array(ArticleView.loadStylesMap().keys) as? [String])?.sorted() {
+		if let styles = (Array(ArticleStyleLoader.reloadStylesMap().allKeys) as? [String])?.sorted() {
             var index = 0
             while index < styles.count {
                 menu.insertItem(withTitle: styles[index],

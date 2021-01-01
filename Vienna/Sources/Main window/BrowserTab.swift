@@ -65,6 +65,7 @@ class BrowserTab: NSViewController {
         //TODO: set top constraint to view top, insets to webview
 		self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[addressBarContainer]-[webView]|", options: [], metrics: nil, views: ["webView": webView, "addressBarContainer": addressBarContainer as Any]))
 
+		self.title = webView.title
 		titleObservation = webView.observe(\.title, options: [.new]) { _, change in
 			self.title = change.newValue ?? nil
 		}

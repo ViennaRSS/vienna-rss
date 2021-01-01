@@ -35,9 +35,6 @@
 
 @end
 
-// Styles path mappings is global across all instances
-static NSMutableDictionary * stylePathMappings = nil;
-
 @implementation ArticleView
 
 /* initWithFrame
@@ -85,41 +82,13 @@ static NSMutableDictionary * stylePathMappings = nil;
 	return NO;
 }
 
-/* stylesMap
- * Returns the article view styles map
- */
-+(NSDictionary *)stylesMap
-{
-	return stylePathMappings;
-}
-
-/* loadStylesMap
- * Reinitialise the styles map from the styles folder.
- */
-+(NSDictionary *)loadStylesMap
-{
-	if (stylePathMappings == nil)
-		stylePathMappings = [[NSMutableDictionary alloc] init];
-	
-	NSString * path = [[NSBundle mainBundle].sharedSupportPath stringByAppendingPathComponent:@"Styles"];
-	loadMapFromPath(path, stylePathMappings, YES, nil);
-	
-	path = [Preferences standardPreferences].stylesFolder;
-	loadMapFromPath(path, stylePathMappings, YES, nil);
-
-	return stylePathMappings;
-}
-
 /* initForStyle
  * Initialise the template and stylesheet for the specified display style if it can be
  * found. Otherwise the existing template and stylesheet are not changed.
  */
 -(BOOL)initForStyle:(NSString *)styleName
 {
-	if (stylePathMappings == nil)
-		[ArticleView loadStylesMap];
-
-	NSString * path = stylePathMappings[styleName];
+	NSString * path = ArticleStyleLoader.stylesMap[styleName];
 	if (path != nil)
 	{
 		NSString * filePath = [path stringByAppendingPathComponent:@"template.html"];
@@ -169,14 +138,14 @@ static NSMutableDictionary * stylePathMappings = nil;
  * Create an HTML string comprising all articles in the specified array formatted using
  * the currently selected template.
  */
--(NSString *)articleTextFromArray:(NSArray *)msgArray
+-(NSString *)articleTextFromArray:(NSArray<Article *> *)msgArray
 {
 	NSUInteger index;
 	
 	NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<!DOCTYPE html><html><head><meta content=\"text/html; charset=UTF-8\">"];
 	// the link for the first article will be the base URL for resolving relative URLs
 	[htmlText appendString:@"<base href=\""];
-	[htmlText appendString:[NSString stringByCleaningURLString:((Article *)msgArray[0]).link]];
+	[htmlText appendString:[NSString stringByCleaningURLString:msgArray[0].link]];
 	[htmlText appendString:@"\">"];
 	if (cssStylesheet != nil)
 	{

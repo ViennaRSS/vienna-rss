@@ -732,12 +732,12 @@
 }
 
 
-- (void)pageDown {
+- (BOOL)pageDown {
 	[self.webPane scrollPageDown:nil];
 }
 
 
-- (void)pageUp {
+- (BOOL)pageUp {
 	[self.webPane scrollPageUp:nil];
 }
 
@@ -751,12 +751,10 @@
     [self handleReload:nil];
 }
 
-
-- (void)searchFor:(NSString * _Nonnull)searchString action:(NSFindPanelAction)action {
+- (BOOL)searchFor:(NSString * _Nonnull)searchString action:(NSFindPanelAction)action {
 	self.searchString = searchString;
 	[self performFindPanelAction:action];
 }
-
 
 - (void)stopLoading {
     [self handleStopLoading:nil];
