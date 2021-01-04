@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment version="101200" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -36,7 +36,7 @@
                             <rect key="frame" x="5" y="5" width="869" height="20"/>
                             <subviews>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0rn-z0-yA2">
-                                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                    <rect key="frame" x="0.0" y="-2" width="20" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="20" id="HLA-5B-V5x"/>
                                     </constraints>
@@ -49,7 +49,7 @@
                                     </connections>
                                 </button>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aeH-Zd-eUj">
-                                    <rect key="frame" x="23" y="0.0" width="20" height="20"/>
+                                    <rect key="frame" x="23" y="-2" width="20" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="20" id="Qpb-UX-zNR"/>
                                     </constraints>
@@ -157,7 +157,7 @@
                         <constraint firstItem="OeK-Vl-Vdl" firstAttribute="top" secondItem="OdK-ur-PPi" secondAttribute="top" constant="5" id="JCE-Ao-Vhl"/>
                         <constraint firstItem="t9A-Dp-YtC" firstAttribute="leading" secondItem="OdK-ur-PPi" secondAttribute="leading" id="OS4-ki-7NH"/>
                         <constraint firstItem="OeK-Vl-Vdl" firstAttribute="leading" secondItem="OdK-ur-PPi" secondAttribute="leading" constant="5" id="X9W-5S-Mxh"/>
-                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="OeK-Vl-Vdl" secondAttribute="bottom" constant="5" id="bJ5-s8-g8i"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="OeK-Vl-Vdl" secondAttribute="bottom" constant="5" placeholder="YES" id="bJ5-s8-g8i"/>
                         <constraint firstAttribute="bottom" secondItem="t9A-Dp-YtC" secondAttribute="bottom" priority="999" id="exe-5X-px6"/>
                         <constraint firstAttribute="trailing" secondItem="t9A-Dp-YtC" secondAttribute="trailing" id="rHZ-MY-l59"/>
                         <constraint firstAttribute="trailing" secondItem="OeK-Vl-Vdl" secondAttribute="trailing" constant="5" id="wyE-Du-Aml"/>
@@ -173,9 +173,9 @@
         </customView>
     </objects>
     <resources>
-        <image name="NSGoBackTemplate" width="9" height="12"/>
-        <image name="NSGoForwardTemplate" width="9" height="12"/>
-        <image name="NSRefreshTemplate" width="11" height="15"/>
-        <image name="NSStopProgressTemplate" width="11" height="11"/>
+        <image name="NSGoBackTemplate" width="10" height="14"/>
+        <image name="NSGoForwardTemplate" width="10" height="14"/>
+        <image name="NSRefreshTemplate" width="14" height="16"/>
+        <image name="NSStopProgressTemplate" width="15" height="13"/>
     </resources>
 </document>

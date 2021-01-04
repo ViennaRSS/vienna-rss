@@ -33,8 +33,6 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
             let (htmlPath, accessPath) = converter.prepareArticleDisplay(self.articles)
 
             webView.loadFileURL(htmlPath, allowingReadAccessTo: accessPath)
-            // TODO: prepare article files
-            self.showAddressBar(false)
         }
     }
 
@@ -42,7 +40,6 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
         get { super.tabUrl }
         set {
             super.tabUrl = newValue
-            showAddressBar(true)
         }
     }
 
@@ -56,7 +53,7 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
     override func viewDidLoad() {
         super.viewDidLoad()
         addressField.isEditable = false
-        showAddressBar(false)
+        hideAddressBar(true)
     }
 
     func clearHTML() {
@@ -100,10 +97,6 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
     }
 
     // MARK: gui
-
-    func showAddressBar(_ show: Bool) {
-        // TODO: hide / show address bar
-    }
 
     override func activateAddressBar() {
         // TODO: ignored intentionally. Find more elegant solution

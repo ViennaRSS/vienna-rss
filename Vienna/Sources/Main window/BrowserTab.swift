@@ -34,6 +34,8 @@ class BrowserTab: NSViewController {
     @IBOutlet private(set) weak var reloadButton: NSButton!
     @IBOutlet private(set) weak var progressBar: LoadingIndicator?
 
+    var fullscreenWebViewTopConstraint: NSLayoutConstraint!
+
     @IBOutlet private(set) weak var cancelButtonWidth: NSLayoutConstraint!
     @IBOutlet private(set) weak var reloadButtonWidth: NSLayoutConstraint!
     @IBOutlet private(set) weak var rssButtonWidth: NSLayoutConstraint!
@@ -128,7 +130,17 @@ class BrowserTab: NSViewController {
         webView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(webView, positioned: .below, relativeTo: nil)
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[addressBarContainer][webView]|", options: [], metrics: nil, views: ["webView": webView, "addressBarContainer": addressBarContainer as Any]))
+
+        let defaultWebViewTopConstraint = NSLayoutConstraint(item: addressBarContainer!, attribute: .bottom, relatedBy: .equal, toItem: webView, attribute: .top, multiplier: 1, constant: 0)
+        // Lower priority than fullscreen constraint so we can compress it
+        defaultWebViewTopConstraint.priority = NSLayoutConstraint.Priority(999)
+        let webViewBottomConstraint = NSLayoutConstraint(item: webView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 0)
+
+        self.view.addConstraints([defaultWebViewTopConstraint, webViewBottomConstraint])
+
+        // Only prepare fullscreen constraint,
+        // add / remove it with hideAddressBar(true / false)
+        self.fullscreenWebViewTopConstraint = NSLayoutConstraint(item: webView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0)
 
         // title needs to be adjusted once view is loaded
 
@@ -168,6 +180,14 @@ class BrowserTab: NSViewController {
         super.viewDidDisappear()
         self.viewVisible = false
     }
+
+    func hideAddressBar(_ hide: Bool, animated: Bool = false) {
+        // We need to use the optional here in case view is not yet loaded
+        addressBarContainer?.isHidden = hide
+        fullscreenWebViewTopConstraint?.isActive = hide
+        //TODO: animated show / hide
+    }
+
 }
 
 // MARK: Tab functionality
