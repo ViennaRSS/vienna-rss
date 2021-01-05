@@ -78,7 +78,7 @@ file_header:
   required_pattern: |
     \/\/
     \/\/  SWIFTLINT_CURRENT_FILENAME
-    \/\/  Vienna
+    \/\/  Vienna(\s?\w+)*
     \/\/
     \/\/  Copyright (\d{4}|\d{4}-\d{4})(\s?\w+)*
     \/\/
