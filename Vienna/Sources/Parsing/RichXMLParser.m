@@ -19,7 +19,6 @@
 
 #import "RichXMLParser.h"
 #import "StringExtensions.h"
-#import "XMLTag.h"
 #import "NSDate+Vienna.h"
 
 @interface RichXMLParser ()
@@ -93,57 +92,6 @@
 
     return success;
 } /* parseRichXML */
-
-/* extractFeeds
- * Given a block of XML data, determine whether this is HTML format and, if so,
- * extract all RSS links in the data. Returns YES if we found any feeds, or NO if
- * this was not HTML.
- */
-+(BOOL)extractFeeds:(NSData *)xmlData toArray:(NSMutableArray *)linkArray
-{
-    BOOL success = NO;
-
-    @try {
-        NSArray * arrayOfTags = [XMLTag parserFromData:xmlData];
-        if (arrayOfTags != nil) {
-            for (XMLTag * tag in arrayOfTags) {
-                NSString * tagName = tag.name;
-
-                if ([tagName isEqualToString:@"rss"] || [tagName isEqualToString:@"rdf:rdf"] || [tagName isEqualToString:@"feed"]) {
-                    success = NO;
-                    break;
-                }
-                if ([tagName isEqualToString:@"link"]) {
-                    NSDictionary * tagAttributes = tag.attributes;
-                    NSString * linkType = tagAttributes[@"type"];
-
-                    // We're looking for the link tag. Specifically we're looking for the one which
-                    // has application/rss+xml or atom+xml type. There may be more than one which is why we're
-                    // going to be returning an array.
-                    if ([linkType isEqualToString:@"application/rss+xml"]) {
-                        NSString * href = tagAttributes[@"href"];
-                        if (href != nil) {
-                            [linkArray addObject:href];
-                        }
-                    } else if ([linkType isEqualToString:@"application/atom+xml"]) {
-                        NSString * href = tagAttributes[@"href"];
-                        if (href != nil) {
-                            [linkArray addObject:href];
-                        }
-                    }
-                }
-                if ([tagName isEqualToString:@"/head"]) {
-                    break;
-                }
-                success = linkArray.count > 0;
-            }
-        }
-    }
-    @catch (NSException * error) {
-        success = NO;
-    }
-    return success;
-} /* extractFeeds */
 
 /* initRSSFeed
  * Prime the feed with header and items from an RSS feed
