@@ -57,7 +57,6 @@
 		0386A5C11E1FA586000C10CE /* BrowserPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0386A5BB1E1FA586000C10CE /* BrowserPane.xib */; };
 		03A131B31AA54EAC0037471F /* Database+Migration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B21AA54EAC0037471F /* Database+Migration.m */; };
 		03B35B841B75E9E0001DB06D /* NSDate+Vienna.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B35B831B75E9E0001DB06D /* NSDate+Vienna.m */; };
-		03B752421B74814B00FD3FDB /* RichXMLParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B752411B74814B00FD3FDB /* RichXMLParserTests.m */; };
 		03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EFD56F1B720AB0007EF284 /* ExportTests.m */; };
 		03F33D961DF2A2F900B04FAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03F33D951DF2A2F900B04FAF /* Assets.xcassets */; };
 		2FA79F192170C55D00228482 /* Browser+WebUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA79F182170C55D00228482 /* Browser+WebUIDelegate.m */; };
@@ -153,6 +152,7 @@
 		F6373A231F1D53B500ED3B09 /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6373A221F1D53B500ED3B09 /* MainWindow.swift */; };
 		F63833D81EF842EA00E07213 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63833D71EF842EA00E07213 /* MainWindowController.swift */; };
 		F63B71751ED252DD00CF9F32 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B71741ED252DD00CF9F32 /* GradientView.swift */; };
+		F6449A0325977521005A1EFA /* FeedDiscovery.html in Resources */ = {isa = PBXBuildFile; fileRef = F64499FB259773B9005A1EFA /* FeedDiscovery.html */; };
 		F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */; };
 		F64C2CCC1E83825D00ED4E04 /* DateFormatterExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */; };
 		F65D6D711E74619E00A30974 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4398241E1666B3DB00FFE219 /* Credits.rtf */; };
@@ -172,6 +172,7 @@
 		F6A7DE381E47138B0017BE5E /* Vienna.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE321E47138B0017BE5E /* Vienna.html */; };
 		F6A7DE4A1E4717970017BE5E /* shared in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE491E4717970017BE5E /* shared */; };
 		F6A7DE4F1E471A7F0017BE5E /* Vienna.help in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DDCA1E470E980017BE5E /* Vienna.help */; };
+		F6AC41AC25A4FAF6007DED7B /* FeedDiscovererTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AC41AB25A4FAF6007DED7B /* FeedDiscovererTests.swift */; };
 		F6B355DB256025D3008CA1ED /* PreferenceTabViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B355DA256025D3008CA1ED /* PreferenceTabViewItem.swift */; };
 		F6B3561525616313008CA1ED /* DownloadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B3561425616313008CA1ED /* DownloadItem.m */; };
 		F6B7BC3624A2A9A40051D76F /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = F6B7BC3524A2A9A40051D76F /* FMDB */; };
@@ -253,7 +254,6 @@
 		03A131B21AA54EAC0037471F /* Database+Migration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Database+Migration.m"; sourceTree = "<group>"; };
 		03B35B821B75E9E0001DB06D /* NSDate+Vienna.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Vienna.h"; sourceTree = "<group>"; };
 		03B35B831B75E9E0001DB06D /* NSDate+Vienna.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Vienna.m"; sourceTree = "<group>"; };
-		03B752411B74814B00FD3FDB /* RichXMLParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichXMLParserTests.m; sourceTree = "<group>"; };
 		03EFD56F1B720AB0007EF284 /* ExportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportTests.m; sourceTree = "<group>"; };
 		03F33D951DF2A2F900B04FAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -620,6 +620,7 @@
 		F6373A221F1D53B500ED3B09 /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
 		F63833D71EF842EA00E07213 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		F63B71741ED252DD00CF9F32 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		F64499FB259773B9005A1EFA /* FeedDiscovery.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FeedDiscovery.html; sourceTree = "<group>"; };
 		F647BC83209EFD820068F74D /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = gl; path = gl.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryMonitorTests.swift; sourceTree = "<group>"; };
 		F64C2CCA1E83825D00ED4E04 /* DateFormatterExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatterExtension.h; sourceTree = "<group>"; };
@@ -782,6 +783,7 @@
 		F6A7DEAD1E471E450017BE5E /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hant"; path = "zh-Hant.lproj/advanced.html"; sourceTree = "<group>"; };
 		F6A7DEAE1E471E460017BE5E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/advanced.html"; sourceTree = "<group>"; };
 		F6AAE39D209EFED80039CC04 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
+		F6AC41AB25A4FAF6007DED7B /* FeedDiscovererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDiscovererTests.swift; sourceTree = "<group>"; };
 		F6B1233E1E474D2A00973699 /* IndexHelpbook.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = IndexHelpbook.sh; sourceTree = "<group>"; };
 		F6B355DA256025D3008CA1ED /* PreferenceTabViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceTabViewItem.swift; sourceTree = "<group>"; };
 		F6B3561325616302008CA1ED /* DownloadItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadItem.h; sourceTree = "<group>"; };
@@ -926,17 +928,18 @@
 		035B703619E0E4AE00197334 /* Vienna Tests */ = {
 			isa = PBXGroup;
 			children = (
-				4D36B4491D37F902009736C1 /* models */,
 				035B703919E0E4AE00197334 /* Vienna_Tests.m */,
-				035B703719E0E4AE00197334 /* Supporting Files */,
+				4D36B44A1D37F91E009736C1 /* ArticleTests.m */,
 				035B704119E0E4DC00197334 /* SubscriptionModelTests.m */,
 				0383DC541B71B44700A11950 /* CriteriaTests.m */,
 				03EFD56F1B720AB0007EF284 /* ExportTests.m */,
-				03B752411B74814B00FD3FDB /* RichXMLParserTests.m */,
 				4D36B44E1D38007D009736C1 /* NSURL+URIEquivalence.h */,
 				4D36B44F1D38007D009736C1 /* NSURL+URIEquivalence.m */,
 				F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */,
+				F6AC41AB25A4FAF6007DED7B /* FeedDiscovererTests.swift */,
 				0377BDEB1D3A009B00960555 /* Vienna Tests-Bridging-Header.h */,
+				F6AC41C525A501B9007DED7B /* Files */,
+				035B703719E0E4AE00197334 /* Supporting Files */,
 			);
 			path = "Vienna Tests";
 			sourceTree = "<group>";
@@ -1026,14 +1029,6 @@
 				4398241C1666B37000FFE219 /* Release-for-upload.sh */,
 			);
 			path = Scripts;
-			sourceTree = "<group>";
-		};
-		4D36B4491D37F902009736C1 /* models */ = {
-			isa = PBXGroup;
-			children = (
-				4D36B44A1D37F91E009736C1 /* ArticleTests.m */,
-			);
-			path = models;
 			sourceTree = "<group>";
 		};
 		EA43C70614A370CB00F2D843 /* DebugHelper */ = {
@@ -1224,6 +1219,14 @@
 				43502888165DE9DF0018EDB7 /* TabbedWebView.m */,
 			);
 			name = Browser;
+			sourceTree = "<group>";
+		};
+		F6AC41C525A501B9007DED7B /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				F64499FB259773B9005A1EFA /* FeedDiscovery.html */,
+			);
+			path = Files;
 			sourceTree = "<group>";
 		};
 		F6D7FED61F1CDD88004F095A /* Vienna */ = {
@@ -1497,6 +1500,7 @@
 			buildConfigurationList = 035B704019E0E4AE00197334 /* Build configuration list for PBXNativeTarget "Vienna Tests" */;
 			buildPhases = (
 				035B703119E0E4AE00197334 /* Sources */,
+				F6449A022597751B005A1EFA /* Resources */,
 			);
 			buildRules = (
 			);
@@ -1664,6 +1668,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F6449A022597751B005A1EFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6449A0325977521005A1EFA /* FeedDiscovery.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F6A7DDC81E470E980017BE5E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1822,8 +1834,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */,
+				F6AC41AC25A4FAF6007DED7B /* FeedDiscovererTests.swift in Sources */,
 				4D36B44B1D37F91E009736C1 /* ArticleTests.m in Sources */,
-				03B752421B74814B00FD3FDB /* RichXMLParserTests.m in Sources */,
 				0383DC551B71B44700A11950 /* CriteriaTests.m in Sources */,
 				F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */,
 				4D36B4501D38007D009736C1 /* NSURL+URIEquivalence.m in Sources */,
