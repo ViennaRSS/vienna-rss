@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Vienna test</title>
+
+        <!-- Accepted -->
+        <link rel="alternate" type="application/rss+xml" href="feed.xml">
+        <link rel="alternate" type="application/atom+xml" href="feed.xml">
+
+        <!-- Accepted -->
+        <LINK rel="alternate" type="application/rss+xml" href="feed.xml">
+        <link REL="alternate" TYPE="application/atom+xml" HREF="feed.xml">
+        <link rel=" alternate " type=" application/rss+xml " href="feed.xml">
+        <link rel="ALTERNATE" type="APPLICATION/ATOM+XML" href="feed.xml">
+
+        <!-- Accepted -->
+        <link rel="alternate" type="application/rss" href="feed.xml" title="Feed">
+        <link rel="alternate" type="application/rdf+xml" href="feed.xml" title="Feed">
+        <link rel="alternate" type="text/xml" href="feed.xml" title="Feed">
+
+        <!-- Not accepted, due to missing rel attribute -->
+        <link type="application/rss+xml" href="feed.xml">
+
+        <!-- Not accepted, due to missing type attribute -->
+        <link rel="alternate" href="feed.xml">
+
+        <!-- Not accepted, due to not having 'feed' or 'rss' in the title -->
+        <link rel="alternate" type="application/rss" href="posts.xml">
+    </head>
+    <body>
+        <!-- Not accepted, because the a element is not supported -->
+        <p>Subscribe to Vienna test:</p>
+        <ul>
+            <li><a href="posts.xml" rel="alternate" type="application/atom+xml">RSS feed</a></li>
+        </ul>
+        <!-- Accepted -->
+        <link rel="alternate" type="application/rss+xml" href="posts.xml">
+    </body>
+</html>

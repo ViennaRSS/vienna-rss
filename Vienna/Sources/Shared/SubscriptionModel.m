@@ -52,21 +52,12 @@
         if (error || (((NSHTTPURLResponse *)response).statusCode != 200)) {
             myURL = rssFeedURL;
         } else {
-            NSMutableArray * linkArray = [NSMutableArray arrayWithCapacity:10];
-            // Get all the feeds on the page. If there's more than one, use the first one.
-            // TODO : if there are multiple feeds, we should put up an UI inviting the user to pick one
-            // That would require modifying extractFeeds to provide URL strings and titles
-            // as feeds' links are often advertised in the HTML head
-            // as <link rel="alternate" type="application/rss+xml" title="..." href="...">
-            if ([RichXMLParser extractFeeds:data toArray:linkArray]) {
-                NSString * feedPart = linkArray.firstObject;
-                myURL = [NSURL URLWithString:feedPart relativeToURL:rssFeedURL];
-                if (myURL == nil) {
-                    NSString * urlString = feedPart.stringByUnescapingExtendedCharacters;
-                    myURL = [NSURL URLWithString:urlString relativeToURL:rssFeedURL];
-                }
+            VNAFeedDiscoverer *discoverer = [[VNAFeedDiscoverer alloc] initWithData:data
+                                                                            baseURL:rssFeedURL];
+            NSArray<VNAFeedURL *> *urls = [discoverer feedURLs];
+            if (urls.count > 0) {
+                myURL = urls.firstObject.absoluteURL;
             } else {
-                // no link found, return the original URL
                 myURL = rssFeedURL;
             }
         }
