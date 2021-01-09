@@ -36,6 +36,7 @@ public class CustomWKWebView: WKWebView {
         prefs.plugInsEnabled = true
 
         prefs._developerExtrasEnabled = true
+        prefs._fullScreenEnabled = true
 
         // user scripts (user content controller)
         let contentController = configuration.userContentController

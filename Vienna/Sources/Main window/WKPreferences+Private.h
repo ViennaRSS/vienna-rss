@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WKPreferences (Private)
 @property (nonatomic, setter=_setDeveloperExtrasEnabled:) BOOL _developerExtrasEnabled;
+@property (nonatomic, setter=_setFullScreenEnabled:) BOOL _fullScreenEnabled;
 @end
 
 NS_ASSUME_NONNULL_END
