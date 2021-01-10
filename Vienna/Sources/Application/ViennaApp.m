@@ -34,6 +34,12 @@
 #import "Database.h"
 #import "Vienna-Swift.h"
 
+@interface ViennaApp ()
+
+@property (readonly, nonatomic) BOOL readingPaneOnRight;
+
+@end
+
 @implementation ViennaApp
 
 /* handleRefreshAllSubscriptions
@@ -355,7 +361,6 @@
  */
 -(void)setAutoExpireDuration:(NSInteger)newDuration		{ [Preferences standardPreferences].autoExpireDuration = newDuration; }
 -(void)setMarkReadInterval:(float)newInterval		{ [Preferences standardPreferences].markReadInterval = newInterval; }
--(void)setReadingPaneOnRight:(BOOL)flag				{ ; }
 -(void)setRefreshOnStartup:(BOOL)flag				{ [Preferences standardPreferences].refreshOnStartup = flag; }
 -(void)setFilterMode:(NSInteger)newMode					{ [Preferences standardPreferences].filterMode = newMode; }
 -(void)setCheckForNewOnStartup:(BOOL)flag			{ [Preferences standardPreferences].checkForNewOnStartup = flag; }
