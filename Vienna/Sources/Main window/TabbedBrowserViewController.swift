@@ -199,8 +199,6 @@ extension TabbedBrowserViewController: Browser {
             // TODO: make first responder?
         }
 
-        newTab.webView.uiDelegate = self
-
         newTab.webView.contextMenuProvider = self
 
         // TODO: tab view order

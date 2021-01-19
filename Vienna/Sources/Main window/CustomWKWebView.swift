@@ -15,7 +15,11 @@ public class CustomWKWebView: WKWebView {
     // store weakly here because contentController retains listener
     weak var contextMenuListener: CustomWKWebViewContextMenuListener?
 
-    weak var contextMenuProvider: CustomWKUIDelegate?
+    weak var contextMenuProvider: CustomWKUIDelegate? {
+        didSet {
+            self.uiDelegate = contextMenuProvider
+        }
+    }
 
     var canScrollDown: Bool {
         evaluateScrollPossibilities().scrollDownPossible

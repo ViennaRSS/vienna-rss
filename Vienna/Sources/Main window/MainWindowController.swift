@@ -181,7 +181,7 @@ extension MainWindowController: NSWindowDelegate {
 extension MainWindowController: NSToolbarDelegate {
 
     private var pluginManager: PluginManager? {
-        return (NSApp.delegate as? AppController)?.pluginManager
+        return NSApp.appController.pluginManager
     }
 
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
@@ -296,7 +296,7 @@ extension MainWindowController: RSSSubscriber {
     func subscribeToRSS(_ urls: [URL]) {
         // TODO : if there are multiple feeds, we should put up an UI inviting the user to pick one, as also mentioned in SubscriptionModel.m verifiedFeedURLFromURL method
         // TODO : allow user to select a folder instead of assuming current location (see #1163)
-        (NSApp.delegate as? AppController)?.createSubscriptionInCurrentLocation(for: urls[0])
+        NSApp.appController.createSubscriptionInCurrentLocation(for: urls[0])
     }
 }
 
@@ -304,54 +304,6 @@ extension MainWindowController: RSSSubscriber {
 
 extension MainWindowController: BrowserContextMenuDelegate {
     func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem] {
-
-        var menuItems = existingMenuItems
-        switch purpose {
-        case .page(url: _):
-            break
-        case .link(let url):
-            addLinkMenuCustomizations(&menuItems, url)
-        case .picture:
-            break
-        case .pictureLink(image: _, link: let link):
-            addLinkMenuCustomizations(&menuItems, link)
-        case .text:
-            break
-        }
-        return menuItems
-    }
-
-    private func addLinkMenuCustomizations(_ menuItems: inout [NSMenuItem], _ url: (URL)) {
-        guard var index = menuItems.firstIndex(where: { $0.identifier == .WKMenuItemOpenLinkInNewWindow }) else {
-            return
-        }
-
-        if let openInBackgroundIndex = menuItems.firstIndex(where: { $0.identifier == NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInBackground }) {
-            // Swap open link in new tab and open link in background items if
-            // necessary/
-            let openInBackground = Preferences.standard.openLinksInBackground
-            if openInBackground && index < openInBackgroundIndex
-                || !openInBackground && openInBackgroundIndex < index {
-                menuItems.swapAt(index, openInBackgroundIndex)
-            }
-            index = max(index, openInBackgroundIndex)
-        }
-
-        let defaultBrowser = getDefaultBrowser() ?? NSLocalizedString("External Browser", comment: "")
-        let openInExternalBrowserTitle = NSLocalizedString("Open Link in %@", comment: "")
-            .replacingOccurrences(of: "%@", with: defaultBrowser)
-        let openInDefaultBrowserItem = NSMenuItem(
-            title: openInExternalBrowserTitle,
-            action: #selector(openLinkInDefaultBrowser(menuItem:)), keyEquivalent: "")
-        openInDefaultBrowserItem.identifier = .WKMenuItemOpenLinkInSystemBrowser
-        openInDefaultBrowserItem.representedObject = url
-        menuItems.insert(openInDefaultBrowserItem, at: menuItems.index(after: index))
-    }
-
-    @objc
-    func openLinkInDefaultBrowser(menuItem: NSMenuItem) {
-        if let url = menuItem.representedObject as? URL {
-            (NSApp.delegate as? AppController)?.openURL(inDefaultBrowser: url)
-        }
+        return WebKitContextMenuCustomizer.contextMenuItemsFor(purpose: purpose, existingMenuItems: existingMenuItems)
     }
 }

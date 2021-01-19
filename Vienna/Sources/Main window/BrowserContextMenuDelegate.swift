@@ -39,6 +39,7 @@ extension NSUserInterfaceItemIdentifier {
     static let WKMenuItemDownloadMedia = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierDownloadMedia")
     static let WKMenuItemOpenLinkInBackground = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLinkInBackground")
     static let WKMenuItemOpenLinkInNewWindow = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLinkInNewWindow")
+    static let WKMenuItemOpenLink = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLink")
     static let WKMenuItemOpenLinkInSystemBrowser = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLinkInSystemBrowser")
     static let WKMenuItemOpenMediaInNewWindow = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenMediaInNewWindow")
 }
