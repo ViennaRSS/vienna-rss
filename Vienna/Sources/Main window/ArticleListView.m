@@ -110,7 +110,7 @@
 {
     NSView *articleTextView;
 
-    if (@available(macOS 10.10, *)) {
+    if (Preferences.standardPreferences.useNewBrowser) {
         NSViewController<ArticleContentView> *articleTextController = [[WebKitArticleTab alloc] init];
         articleText = articleTextController;
         articleTextView = articleTextController.view;
@@ -120,7 +120,6 @@
         articleText = articleView;
         // Make us the frame load and UI delegate for the web view
         [articleView setOpenLinksInNewBrowser:YES];
-
         [articleView setMaintainsBackForwardList:NO];
         [articleView.backForwardList setPageCacheSize:0];
     }

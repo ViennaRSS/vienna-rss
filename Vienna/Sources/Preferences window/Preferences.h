@@ -206,7 +206,10 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 // User Agent Name
 @property (nonatomic) NSString *userAgentName;
 
-#pragma mark -
+#pragma mark Browser choice
+
+@property (nonatomic) BOOL useNewBrowser;
+
 #pragma mark Open Reader syncing
 
 @property (nonatomic) BOOL syncGoogleReader;

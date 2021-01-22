@@ -32,7 +32,11 @@
 	if((self = [super initWithFrame:frameRect]))
 	{
 		controller = APPCONTROLLER;
-        [self initializeWebKitArticleTab];
+        if (Preferences.standardPreferences.useNewBrowser) {
+            [self initializeWebKitArticleTab];
+        } else {
+            [self initializeWebViewArticleView:frameRect];
+        }
 
         if ([(NSObject *)articleView isKindOfClass:ArticleView.class]) {
             [(ArticleView *)articleView setOpenLinksInNewBrowser:YES];

@@ -746,8 +746,8 @@
 	cellView.listView = articleList;
 	NSObject<ArticleContentView> *articleContentView = cellView.articleView;
     NSView *view = [articleContentView isKindOfClass:WebKitArticleTab.class]
-    ? ((WebKitArticleTab *)articleContentView).view
-    : ((ArticleView *) articleContentView);
+        ? ((WebKitArticleTab *)articleContentView).view
+        : ((ArticleView *) articleContentView);
 	[view removeFromSuperviewWithoutNeedingDisplay];
 	[cellView setInProgress:YES];
 	[articleContentView setArticles:@[theArticle]];

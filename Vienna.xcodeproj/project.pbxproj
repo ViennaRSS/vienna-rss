@@ -1111,6 +1111,7 @@
 			children = (
 				2FDF6FBB218A265A002F77E9 /* Webkit Browser */,
 				F6A7EA5B1F1CE63B00BD4450 /* WebView Browser */,
+				2FDF6FC5218A26B0002F77E9 /* Browser.swift */,
 				2FDF6FC7218A289A002F77E9 /* Tab.swift */,
 				2FF61D2B24F2AE8B00A7E2B5 /* RSSSubscriber.swift */,
 				2F779110253B17C5004ED4EF /* BrowserContextMenuDelegate.swift */,
@@ -1345,7 +1346,6 @@
 		F6A7EA5B1F1CE63B00BD4450 /* WebView Browser */ = {
 			isa = PBXGroup;
 			children = (
-				2FDF6FC5218A26B0002F77E9 /* Browser.swift */,
 				2FC91DDC21850ADB00D7F223 /* Browser+WebUIDelegate.h */,
 				2FC91DDB21850ADB00D7F223 /* Browser+WebUIDelegate.m */,
 				4350285B165DE9DF0018EDB7 /* WebViewBrowser.h */,
