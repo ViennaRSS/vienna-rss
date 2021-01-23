@@ -45,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 	BOOL hasPrefs;
 	BOOL showFolderImages;
 	BOOL useJavaScript;
+    BOOL useNewBrowser;
     BOOL useWebPlugins;
 	BOOL showAppInStatusBar;
 	BOOL showStatusBar;
