@@ -69,6 +69,7 @@
 }
 
 -(void)commonInit {
+    [self configureTabBar];
     [self restoreTabs];
 }
 
@@ -419,7 +420,7 @@
 
     for (int i = 0; i < tabLinks.count; i++)
     {
-        NSString *tabLink = tabLinks[i].length ? tabLinks[i] : nil;
+        NSString *tabLink = tabLinks[i];
         [self createNewTab:([NSURL URLWithString:tabLink])
                              withTitle:tabTitles[tabLink] inBackground:YES];
     }

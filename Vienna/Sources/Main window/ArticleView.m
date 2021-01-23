@@ -49,6 +49,8 @@
 		// Init our vars
 		html = @"";
 
+self.converter = [[WebViewArticleConverter alloc] init];
+
         self.UIDelegate = self;
         self.frameLoadDelegate = self;
 

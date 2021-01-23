@@ -119,7 +119,7 @@
 -(IBAction)showMainWindow:(id)sender;
 -(IBAction)previousTab:(id)sender;
 -(IBAction)nextTab:(id)sender;
--(IBAction)closeTab:(id)sender;
+-(IBAction)closeActiveTab:(id)sender;
 -(IBAction)closeAllTabs:(id)sender;
 -(IBAction)reloadPage:(id)sender;
 -(IBAction)stopReloadingPage:(id)sender;

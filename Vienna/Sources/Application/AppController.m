@@ -2852,7 +2852,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 /* closeTab
  * Close the active tab unless it's the primary view.
  */
--(IBAction)closeTab:(id)sender
+-(IBAction)closeActiveTab:(id)sender
 {
 	[self.browser closeActiveTab];
 }
@@ -3618,7 +3618,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		return isMainWindowVisible && self.browser.browserTabCount > 1;
 	}
-	else if (theAction == @selector(closeTab:))
+	else if (theAction == @selector(closeActiveTab:))
 	{
 		return isMainWindowVisible && !isArticleView;
 	}
