@@ -17,13 +17,18 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WKPreferences (Private)
-@property (nonatomic, setter=_setDeveloperExtrasEnabled:) BOOL _developerExtrasEnabled;
-@property (nonatomic, setter=_setFullScreenEnabled:) BOOL _fullScreenEnabled;
+
+#ifdef DEBUG
+@property (setter=_setDeveloperExtrasEnabled:, nonatomic) BOOL _developerExtrasEnabled;
+#endif
+
+@property (setter=_setFullScreenEnabled:, nonatomic) BOOL _fullScreenEnabled;
+
 @end
 
 NS_ASSUME_NONNULL_END

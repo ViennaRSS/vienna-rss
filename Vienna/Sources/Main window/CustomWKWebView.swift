@@ -38,9 +38,11 @@ class CustomWKWebView: WKWebView {
         prefs.javaScriptEnabled = true
         prefs.javaScriptCanOpenWindowsAutomatically = true
         prefs.plugInsEnabled = true
-
-        prefs._developerExtrasEnabled = true
         prefs._fullScreenEnabled = true
+
+        #if DEBUG
+        prefs._developerExtrasEnabled = true
+        #endif
 
         // user scripts (user content controller)
         let contentController = configuration.userContentController
