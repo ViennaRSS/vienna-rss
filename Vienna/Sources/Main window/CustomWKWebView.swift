@@ -7,7 +7,7 @@
 
 import Cocoa
 
-public class CustomWKWebView: WKWebView {
+class CustomWKWebView: WKWebView {
 
     static let clickListenerName = "clickListener"
     static let jsErrorListenerName = "errorListener"
@@ -31,7 +31,7 @@ public class CustomWKWebView: WKWebView {
         getTextSelection()
     }
 
-    override public init(frame: CGRect = .zero, configuration: WKWebViewConfiguration = WKWebViewConfiguration()) {
+    override init(frame: CGRect = .zero, configuration: WKWebViewConfiguration = WKWebViewConfiguration()) {
 
         // preferences
         let prefs = configuration.preferences
@@ -81,11 +81,11 @@ public class CustomWKWebView: WKWebView {
     }
 
     @available(*, unavailable)
-    public required init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("initWithCoder not implemented for CustomWKWebView")
     }
 
-    public func search(_ text: String = "", upward: Bool = false) {
+    func search(_ text: String = "", upward: Bool = false) {
         self.evaluateJavaScript("window.find(textToFind='\(text)', matchCase=false, searchUpward=\(upward ? "true" : "false"), wrapAround=true)", completionHandler: nil)
     }
 
@@ -178,7 +178,7 @@ extension CustomWKWebView {
     })
     """
 
-    override public func willOpenMenu(_ menu: NSMenu, with event: NSEvent) {
+    override func willOpenMenu(_ menu: NSMenu, with event: NSEvent) {
 
         if contextMenuProvider != nil {
             customize(contextMenu: menu)

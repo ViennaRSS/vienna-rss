@@ -19,11 +19,11 @@
 
 import Foundation
 
-public protocol BrowserContextMenuDelegate: AnyObject {
+protocol BrowserContextMenuDelegate: AnyObject {
     func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem]
 }
 
-public enum WKWebViewContextMenuContext {
+enum WKWebViewContextMenuContext {
     case page(url: URL)
     case link(_ url: URL)
     case picture(_ image: URL)

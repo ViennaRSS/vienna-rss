@@ -20,7 +20,7 @@
 import Foundation
 
 @objc
-public class WebViewArticleConverter: ArticleConverter {
+class WebViewArticleConverter: ArticleConverter {
 
     override func initForStyle(at path: URL) {
 

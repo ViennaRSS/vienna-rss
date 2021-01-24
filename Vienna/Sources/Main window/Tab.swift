@@ -20,7 +20,7 @@
 import Foundation
 
 @objc
-public protocol Tab {
+protocol Tab {
 
     var tabUrl: URL? { get set }
     var title: String? { get }

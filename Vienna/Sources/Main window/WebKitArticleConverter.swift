@@ -20,9 +20,9 @@
 import Foundation
 import WebKit
 
-public class WebKitArticleConverter: ArticleConverter {
+class WebKitArticleConverter: ArticleConverter {
 
-    override public func initForStyle(at path: URL) {
+    override func initForStyle(at path: URL) {
         copyStyleContent(from: path)
         emptyLocalDataCache()
     }
