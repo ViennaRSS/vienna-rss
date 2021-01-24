@@ -766,4 +766,8 @@
     [self handleStopLoading:nil];
 }
 
+- (void)activateWebView {
+    [self.window makeFirstResponder:self.webPane];
+}
+
 @end
