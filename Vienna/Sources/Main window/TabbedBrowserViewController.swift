@@ -312,6 +312,10 @@ extension TabbedBrowserViewController: CustomWKUIDelegate {
 
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         let newTab = self.createNewTab(navigationAction.request, config: configuration, inBackground: false, insertAt: getIndexAfterSelected())
+        if let webView = webView as? CustomWKWebView {
+            //the listeners are removed from the old webview userContentController on creating the new one, restore them
+            webView.resetScriptListeners()
+        }
         return (newTab as? BrowserTab)?.webView
     }
 

@@ -66,12 +66,7 @@ class CustomWKWebView: WKWebView {
 
         super.init(frame: frame, configuration: configuration)
 
-        contentController.removeScriptMessageHandler(forName: CustomWKWebView.clickListenerName)
-        contentController.removeScriptMessageHandler(forName: CustomWKWebView.jsErrorListenerName)
-        let contextMenuListener = CustomWKWebViewContextMenuListener()
-        self.contextMenuListener = contextMenuListener
-        contentController.add(contextMenuListener, name: CustomWKWebView.clickListenerName)
-        contentController.add(CustomWKWebViewErrorListener(), name: CustomWKWebView.jsErrorListenerName)
+        resetScriptListeners()
 
         self.allowsMagnification = true
         self.allowsBackForwardNavigationGestures = true
@@ -83,6 +78,16 @@ class CustomWKWebView: WKWebView {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("initWithCoder not implemented for CustomWKWebView")
+    }
+
+    func resetScriptListeners() {
+        let contentController = self.configuration.userContentController
+        contentController.removeScriptMessageHandler(forName: CustomWKWebView.clickListenerName)
+        contentController.removeScriptMessageHandler(forName: CustomWKWebView.jsErrorListenerName)
+        let contextMenuListener = CustomWKWebViewContextMenuListener()
+        self.contextMenuListener = contextMenuListener
+        contentController.add(contextMenuListener, name: CustomWKWebView.clickListenerName)
+        contentController.add(CustomWKWebViewErrorListener(), name: CustomWKWebView.jsErrorListenerName)
     }
 
     func search(_ text: String = "", upward: Bool = false) {

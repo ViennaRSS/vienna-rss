@@ -131,6 +131,10 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
         let browser = NSApp.appController.browser
         if let webKitBrowser = browser as? TabbedBrowserViewController {
             let newTab = webKitBrowser.createNewTab(navigationAction.request, config: configuration, inBackground: false)
+            if let webView = webView as? CustomWKWebView {
+                //the listeners are removed from the old webview userContentController on creating the new one, restore them
+                webView.resetScriptListeners()
+            }
             return (newTab as? BrowserTab)?.webView
         } else {
             // Fallback for old browser
