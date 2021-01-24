@@ -34,8 +34,4 @@ class TitleChangingTabViewItem: NSTabViewItem {
             }
         }
     }
-
-    deinit {
-        print("Title changing tabviewitem deinited")
-    }
 }

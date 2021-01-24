@@ -179,6 +179,7 @@ extension CustomWKWebView {
                 var url = new URL(img.getAttribute('src'), document.baseURI).href;
                 window.webkit.messageHandlers.\(clickListenerName).postMessage('img: ' + url);
             }
+            window.webkit.messageHandlers.\(clickListenerName).postMessage('text: ' + window.getSelection().getRangeAt(0).toString())
         }
     })
     """
@@ -214,7 +215,7 @@ extension CustomWKWebView {
         } else if clickedOnImage {
             context = .picture(contextMenuListener.lastRightClickedImgSrc ?? blankUrl)
         } else if clickedOnText {
-            context = .text(getTextSelection())
+            context = .text(contextMenuListener.lastSelectedText ?? "")
         } else {
             context = .page(url: self.url ?? blankUrl)
         }
@@ -223,6 +224,7 @@ extension CustomWKWebView {
 
         contextMenuListener.lastRightClickedLink = nil
         contextMenuListener.lastRightClickedImgSrc = nil
+        contextMenuListener.lastSelectedText = nil
     }
 }
 
@@ -230,6 +232,7 @@ class CustomWKWebViewContextMenuListener: NSObject, WKScriptMessageHandler {
 
     var lastRightClickedLink: URL?
     var lastRightClickedImgSrc: URL?
+    var lastSelectedText: String?
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if let urlString = message.body as? String {
@@ -237,6 +240,8 @@ class CustomWKWebViewContextMenuListener: NSObject, WKScriptMessageHandler {
                 self.lastRightClickedLink = url
             } else if urlString.starts(with: "img: "), let url = URL(string: urlString.replacingOccurrences(of: "img: ", with: "", options: .anchored)) {
                 self.lastRightClickedImgSrc = url
+            } else if urlString.starts(with: "text: ") {
+                lastSelectedText = urlString.replacingOccurrences(of: "text: ", with: "", options: .anchored)
             }
         }
     }
