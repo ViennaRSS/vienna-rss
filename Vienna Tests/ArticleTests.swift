@@ -19,31 +19,33 @@
 
 import XCTest
 
-let GUID = "07f446d2-8d6b-4d99-b488-cebc9eac7c33"
-let Author = "Author McAuthorface"
-let Title = "Lorem ipsum dolor sit amet"
-let Link = "http://www.vienna-rss.com"
-let Enclosure = "http://vienna-rss.sourceforge.net/img/vienna_logo.png"
-let EnclosureFilename = "vienna_logo.png" // last path component of Enclosure
-let Body =
-    "<p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus " +
-    "et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, " +
-    "ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper." +
-    "<em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet " +
-    "est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo " +
-    "vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, " +
-    "eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. " +
-    "<a href=\"#\">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>"
+class ArticleTests: XCTestCase {
 
+    let guid = "07f446d2-8d6b-4d99-b488-cebc9eac7c33"
+    let author = "Author McAuthorface"
+    let title = "Lorem ipsum dolor sit amet"
+    let link = "http://www.vienna-rss.com"
+    let enclosure = "http://vienna-rss.sourceforge.net/img/vienna_logo.png"
+    let enclosureFilename = "vienna_logo.png" // last path component of Enclosure
+    let body = """
+    <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus
+    et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae,
+    ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
+    semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend
+    leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat
+    wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi.
+    Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci,
+    sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis
+    pulvinar facilisis. Ut felis.</p>
+    """
 
-class ArticleTestsSwift: XCTestCase {
     var article: Article!
     var articleConverter: WebKitArticleConverter!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        self.article = Article(guid: GUID)
+        self.article = Article(guid: guid)
         self.articleConverter = WebKitArticleConverter()
     }
 
@@ -62,21 +64,21 @@ class ArticleTestsSwift: XCTestCase {
     // MARK: - Test custom setters
 
     func testTitle() {
-        self.article.title = Title;
+        self.article.title = title
 
-        XCTAssertEqual(self.article.title, Title);
+        XCTAssertEqual(self.article.title, title)
     }
 
     func testAuthor() {
-        self.article.author = Author;
+        self.article.author = author
 
-        XCTAssertEqual(self.article.author, Author);
+        XCTAssertEqual(self.article.author, author)
     }
 
     func testLink() {
-        self.article.link = Link;
+        self.article.link = link
 
-        XCTAssertEqual(self.article.link, Link);
+        XCTAssertEqual(self.article.link, link)
     }
 
     func testDate() {
@@ -96,15 +98,15 @@ class ArticleTestsSwift: XCTestCase {
     }
 
     func testBody() {
-        self.article.body = Body
+        self.article.body = body
 
-        XCTAssertEqual(self.article.body, Body)
+        XCTAssertEqual(self.article.body, body)
     }
 
     func testEnclosure() {
-        self.article.enclosure = Enclosure
+        self.article.enclosure = enclosure
 
-        XCTAssertEqual(self.article.enclosure, Enclosure)
+        XCTAssertEqual(self.article.enclosure, enclosure)
     }
 
     func testEnclosureRemoval() {
@@ -128,9 +130,9 @@ class ArticleTestsSwift: XCTestCase {
     }
 
     func testGuid() {
-        self.article.guid = GUID
+        self.article.guid = guid
 
-        XCTAssertEqual(self.article.guid, GUID)
+        XCTAssertEqual(self.article.guid, guid)
     }
 
     func testParentId() {
@@ -195,15 +197,15 @@ class ArticleTestsSwift: XCTestCase {
 
         self.article.date = date
 
-        XCTAssertEqual(self.article.value(forKeyPath: dateKeyPath) as? Date, date);
+        XCTAssertEqual(self.article.value(forKeyPath: dateKeyPath) as? Date, date)
     }
 
     func testCompatibilityAuthor() {
         let authorKeyPath = "articleData." + MA_Field_Author
 
-        self.article.author = Author
+        self.article.author = author
 
-        XCTAssertEqual(self.article.value(forKeyPath: authorKeyPath) as? String, Author)
+        XCTAssertEqual(self.article.value(forKeyPath: authorKeyPath) as? String, author)
     }
 
     func testCompatibilitySubject() {
@@ -233,27 +235,27 @@ class ArticleTestsSwift: XCTestCase {
         XCTAssertEqual(self.article.value(forKeyPath: summaryKeyPath) as? String, summary)
     }
 
-    func testRandomCompatibilityKeyPath() {
-        //let randomArticleDataKeyPath = "articleData.dummyProperty"
+//    func testRandomCompatibilityKeyPath() {
+//        let randomArticleDataKeyPath = "articleData.dummyProperty"
+//
+//        XCTAssertThrowsSpecificNamed(self.article.value(forKeyPath: randomArticleDataKeyPath), NSException, NSUndefinedKeyException);
+//    }
 
-        //XCTAssertThrowsSpecificNamed(self.article.value(forKeyPath: randomArticleDataKeyPath), NSException, NSUndefinedKeyException);
-    }
-
-    func testRandomKeyPath() {
-        //let randomKeyPath = "dummyProperty"
-
-        //XCTAssertThrowsSpecificNamed(self.article.value(forKeyPath: randomKeyPath), NSException, NSUndefinedKeyException);
-    }
+//    func testRandomKeyPath() {
+//        let randomKeyPath = "dummyProperty"
+//
+//        XCTAssertThrowsSpecificNamed(self.article.value(forKeyPath: randomKeyPath), NSException, NSUndefinedKeyException);
+//    }
 
     func testDescription() {
         let title = "Lorem ipsum dolor sit amet"
 
-        self.article.guid = GUID
+        self.article.guid = guid
         self.article.title = title
 
-        let expectedDescription = String(format: "{GUID=%@ title=\"%@\"", GUID, title)
+        let expectedDescription = String(format: "{GUID=%@ title=\"%@\"", guid, title)
 
-        XCTAssertEqual(self.article.description, expectedDescription);
+        XCTAssertEqual(self.article.description, expectedDescription)
     }
 
     // MARK: - Expand tags
@@ -261,65 +263,65 @@ class ArticleTestsSwift: XCTestCase {
     func testExpandLinkTag() {
         let string = "$ArticleLink$/development"
 
-        let expectedString = Link + "/development"
+        let expectedString = link + "/development"
 
-        self.article.link = Link
+        self.article.link = link
 
-        let expandedString = self.articleConverter.expandTags(of: self.article, intoTemplate:string, withConditional: true)
+        let expandedString = self.articleConverter.expandTags(of: self.article, intoTemplate: string, withConditional: true)
 
         XCTAssertEqual(expandedString, expectedString)
     }
 
     func testExpandTitleTag() {
         let string = "$ArticleTitle$"
-        let expectedString = Title
+        let expectedString = title
 
-        self.article.title = Title
+        self.article.title = title
 
-        let expandedString = self.articleConverter.expandTags(of: self.article, intoTemplate:string, withConditional: true)
+        let expandedString = self.articleConverter.expandTags(of: self.article, intoTemplate: string, withConditional: true)
         XCTAssertEqual(expandedString, expectedString)
     }
 
     func testExpandArticleBodyTag() {
         let string = "$ArticleBody$"
-        let expectedString = Body
+        let expectedString = body
 
-        self.article.body = Body
+        self.article.body = body
 
-        let expandedString = self.articleConverter.expandTags(of: self.article, intoTemplate:string, withConditional: true)
+        let expandedString = self.articleConverter.expandTags(of: self.article, intoTemplate: string, withConditional: true)
 
         XCTAssertEqual(expandedString, expectedString)
     }
 
     func testExpandArticleAuthorTag() {
         let string = "$ArticleAuthor$"
-        let expectedString = Author
+        let expectedString = author
 
-        self.article.author = Author
+        self.article.author = author
 
-        let expandedString = self.articleConverter.expandTags(of: self.article, intoTemplate:string, withConditional: true)
+        let expandedString = self.articleConverter.expandTags(of: self.article, intoTemplate: string, withConditional: true)
 
         XCTAssertEqual(expandedString, expectedString)
     }
 
     func testExpandArticleEnclosureLinkTag() {
         let string = "$ArticleEnclosureLink$"
-        let expectedString = Enclosure
+        let expectedString = enclosure
 
-        self.article.enclosure = Enclosure
+        self.article.enclosure = enclosure
 
-        let expandedString = self.articleConverter.expandTags(of: self.article, intoTemplate:string, withConditional: true)
+        let expandedString = self.articleConverter.expandTags(of: self.article, intoTemplate: string, withConditional: true)
 
         XCTAssertEqual(expandedString, expectedString)
     }
 
     func testExpandArticleEnclosureFileName() {
         let string = "$ArticleEnclosureFilename$"
-        let expectedString = EnclosureFilename
+        let expectedString = enclosureFilename
 
-        self.article.enclosure = Enclosure
+        self.article.enclosure = enclosure
 
-        let expandedString = self.articleConverter.expandTags(of: self.article, intoTemplate:string, withConditional: true)
+        let expandedString = self.articleConverter.expandTags(of: self.article, intoTemplate: string, withConditional: true)
 
         XCTAssertEqual(expandedString, expectedString)
     }
@@ -332,7 +334,7 @@ class ArticleTestsSwift: XCTestCase {
         self.article.link = "http://xn--kxae4bafwg.xn--pxaix.gr/%D9%86%D8%AC%D9%8A%D8%A8_%D9%85%D8%AD%D9%81%D9%88%D8%B8/"
         let htmlTextFromResolvedIDNALink = self.articleConverter.articleText(from: [ self.article ])
 
-        XCTAssertEqual(htmlTextFromIDNALink, htmlTextFromResolvedIDNALink);
+        XCTAssertEqual(htmlTextFromIDNALink, htmlTextFromResolvedIDNALink)
     }
 
 }

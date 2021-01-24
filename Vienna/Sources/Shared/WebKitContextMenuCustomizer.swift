@@ -1,5 +1,5 @@
 //
-//  WebKitContextMenuUtil.swift
+//  WebKitContextMenuCustomizer.swift
 //  Vienna
 //
 //  Copyright 2021 Tassilo Karge

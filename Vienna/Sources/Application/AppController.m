@@ -2093,7 +2093,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			break;
 			
 		default:
-            (void)[self.browser.activeTab searchFor:self.toolbarSearchField.stringValue action:action];
+            [self.browser.activeTab searchFor:self.toolbarSearchField.stringValue
+                                       action:action];
 			break;
 	}
 }
@@ -3029,7 +3030,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)searchUsingFilterField:(id)sender
 {
     //TODO: make this work for the article list
-	(void)[self.browser.activeTab searchFor:self.searchString action:NSFindPanelActionNext];
+	[self.browser.activeTab searchFor:self.searchString
+                               action:NSFindPanelActionNext];
 }
 
 - (IBAction)searchUsingTreeFilter:(NSSearchField* )field
@@ -3081,7 +3083,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	id<Tab> activeBrowserTab = self.browser.activeTab;
 	if (activeBrowserTab) {
 		[self setFocusToSearchField:self];
-        (void)[activeBrowserTab searchFor:self.searchString action:NSFindPanelActionSetFindString];
+        [activeBrowserTab searchFor:self.searchString
+                             action:NSFindPanelActionSetFindString];
 	}
 }	
 	
@@ -3701,10 +3704,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			[menuItem setTitle:NSLocalizedString(@"Download Enclosure", @"Title of a menu item")];
         }
 		return (self.selectedArticle.hasEnclosure && isMainWindowVisible);
-	}
-	else if (theAction == @selector(createNewTab:))
-	{
-		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(setSearchMethod:))
 	{

@@ -1,5 +1,5 @@
 //
-//  ArticleTests.m
+//  VNAArticleTests.m
 //  Vienna
 //
 //  Copyright © 2016 uk.co.opencommunity. All rights reserved.
@@ -27,14 +27,14 @@ static NSString * const Body =
     "<a href=\"#\">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>";
 
 
-@interface ArticleTests : XCTestCase
+@interface VNAArticleTests : XCTestCase
 
 @property (nonatomic, strong) Article *article;
 @property (nonatomic, strong) WebViewArticleConverter *articleConverter;
 
 @end
 
-@implementation ArticleTests
+@implementation VNAArticleTests
 
 - (void)setUp
 {

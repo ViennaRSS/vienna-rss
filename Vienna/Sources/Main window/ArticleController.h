@@ -69,7 +69,7 @@
 -(NSView<ArticleBaseView, BaseView> *)mainArticleView;
 -(void)setLayout:(NSInteger)newLayout;
 @property (nonatomic, readonly) NSInteger currentFolderId;
-@property (nullable, nonatomic, readonly, strong) Article *selectedArticle;
+@property (nonatomic, readonly) Article *selectedArticle;
 @property (nonatomic, readonly, copy) NSArray *markedArticleRange;
 -(void)updateAlternateMenuTitle;
 -(void)updateVisibleColumns;

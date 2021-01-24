@@ -79,7 +79,7 @@
 		2FDF6FC0218A266A002F77E9 /* BrowserTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FBC218A266A002F77E9 /* BrowserTab.swift */; };
 		2FDF6FC3218A266A002F77E9 /* TabbedBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FBF218A266A002F77E9 /* TabbedBrowserViewController.swift */; };
 		2FDF6FC8218A289A002F77E9 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FC7218A289A002F77E9 /* Tab.swift */; };
-		2FE44CAD25B7995400554E82 /* NSApp+AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE44CAC25B7995400554E82 /* NSApp+AppController.swift */; };
+		2FE44CAD25B7995400554E82 /* NSApplication+AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE44CAC25B7995400554E82 /* NSApplication+AppController.swift */; };
 		2FE44CB525B79EDE00554E82 /* WebKitContextMenuCustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE44CB425B79EDD00554E82 /* WebKitContextMenuCustomizer.swift */; };
 		2FF61D2C24F2AE8B00A7E2B5 /* RSSSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF61D2B24F2AE8B00A7E2B5 /* RSSSubscriber.swift */; };
 		2FF61D2E24F2E71500A7E2B5 /* BrowserTab+RSSSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF61D2D24F2E71500A7E2B5 /* BrowserTab+RSSSource.swift */; };
@@ -135,7 +135,7 @@
 		435028B8165DE9E00018EDB7 /* URLHandlerCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502890165DE9DF0018EDB7 /* URLHandlerCommand.m */; };
 		435028B9165DE9E00018EDB7 /* ViennaApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502892165DE9DF0018EDB7 /* ViennaApp.m */; };
 		43BA97FE1664804E00B95F35 /* DSClickableURLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */; };
-		4D36B44B1D37F91E009736C1 /* ArticleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D36B44A1D37F91E009736C1 /* ArticleTests.m */; };
+		4D36B44B1D37F91E009736C1 /* VNAArticleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D36B44A1D37F91E009736C1 /* VNAArticleTests.m */; };
 		4D36B4501D38007D009736C1 /* NSURL+URIEquivalence.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D36B44F1D38007D009736C1 /* NSURL+URIEquivalence.m */; };
 		664F87C713C62DFE00E266DE /* OpenReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 664F87C613C62DFE00E266DE /* OpenReader.m */; };
 		793C95331C42A0DD00984D4E /* FoldersFilterable.m in Sources */ = {isa = PBXBuildFile; fileRef = 793C95321C42A0DD00984D4E /* FoldersFilterable.m */; };
@@ -314,7 +314,7 @@
 		2FDF6FBF218A266A002F77E9 /* TabbedBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedBrowserViewController.swift; sourceTree = "<group>"; };
 		2FDF6FC5218A26B0002F77E9 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
 		2FDF6FC7218A289A002F77E9 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
-		2FE44CAC25B7995400554E82 /* NSApp+AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApp+AppController.swift"; sourceTree = "<group>"; };
+		2FE44CAC25B7995400554E82 /* NSApplication+AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+AppController.swift"; sourceTree = "<group>"; };
 		2FE44CB425B79EDD00554E82 /* WebKitContextMenuCustomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKitContextMenuCustomizer.swift; sourceTree = "<group>"; };
 		2FF61D2B24F2AE8B00A7E2B5 /* RSSSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSSubscriber.swift; sourceTree = "<group>"; };
 		2FF61D2D24F2E71500A7E2B5 /* BrowserTab+RSSSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BrowserTab+RSSSource.swift"; sourceTree = "<group>"; };
@@ -420,7 +420,7 @@
 		439824221666B3DB00FFE219 /* notes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = notes.html; sourceTree = SOURCE_ROOT; };
 		439824231666B3DB00FFE219 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		439824241666B3DB00FFE219 /* Release Instructions.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Release Instructions.md"; sourceTree = SOURCE_ROOT; };
-		4D36B44A1D37F91E009736C1 /* ArticleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleTests.m; sourceTree = "<group>"; };
+		4D36B44A1D37F91E009736C1 /* VNAArticleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VNAArticleTests.m; sourceTree = "<group>"; };
 		4D36B44E1D38007D009736C1 /* NSURL+URIEquivalence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+URIEquivalence.h"; sourceTree = "<group>"; };
 		4D36B44F1D38007D009736C1 /* NSURL+URIEquivalence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+URIEquivalence.m"; sourceTree = "<group>"; };
 		664F87C513C62DFE00E266DE /* OpenReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenReader.h; sourceTree = "<group>"; };
@@ -989,7 +989,7 @@
 			isa = PBXGroup;
 			children = (
 				035B703919E0E4AE00197334 /* Vienna_Tests.m */,
-				4D36B44A1D37F91E009736C1 /* ArticleTests.m */,
+				4D36B44A1D37F91E009736C1 /* VNAArticleTests.m */,
 				3A8D9AE225A9DA4B0016F30F /* ArticleTests.swift */,
 				035B704119E0E4DC00197334 /* SubscriptionModelTests.m */,
 				0383DC541B71B44700A11950 /* CriteriaTests.m */,
@@ -1622,7 +1622,7 @@
 				3A7BD0DB1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.h */,
 				3A7BD0DC1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m */,
 				2F125EDF24D066ED00868E11 /* AsyncHelper.swift */,
-				2FE44CAC25B7995400554E82 /* NSApp+AppController.swift */,
+				2FE44CAC25B7995400554E82 /* NSApplication+AppController.swift */,
 				2FE44CB425B79EDD00554E82 /* WebKitContextMenuCustomizer.swift */,
 			);
 			path = Shared;
@@ -1988,7 +1988,7 @@
 				3A50011B259A5EF800AA6AAD /* WebViewArticleConverter.swift in Sources */,
 				035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */,
 				F6AC41AC25A4FAF6007DED7B /* FeedDiscovererTests.swift in Sources */,
-				4D36B44B1D37F91E009736C1 /* ArticleTests.m in Sources */,
+				4D36B44B1D37F91E009736C1 /* VNAArticleTests.m in Sources */,
 				0383DC551B71B44700A11950 /* CriteriaTests.m in Sources */,
 				F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */,
 				3A50014E259AA2BE00AA6AAD /* WebKitArticleConverter.swift in Sources */,
@@ -2045,7 +2045,7 @@
 				4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */,
 				43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */,
 				43502896165DE9E00018EDB7 /* ActivityPanelController.m in Sources */,
-				2FE44CAD25B7995400554E82 /* NSApp+AppController.swift in Sources */,
+				2FE44CAD25B7995400554E82 /* NSApplication+AppController.swift in Sources */,
 				F6CE47131E7E3DCB0045EAD7 /* ActivityItem.m in Sources */,
 				2FC91DDD21850ADB00D7F223 /* Browser+WebUIDelegate.m in Sources */,
 				43502897165DE9E00018EDB7 /* AppController.m in Sources */,

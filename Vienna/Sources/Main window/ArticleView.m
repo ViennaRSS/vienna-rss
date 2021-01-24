@@ -37,7 +37,7 @@
 
 @implementation ArticleView
 
-@synthesize html, tabUrl, textSelection, title, listView;
+@synthesize html, tabUrl, textSelection, title, listView, articles;
 
 /* initWithFrame
  * The designated instance initialiser.

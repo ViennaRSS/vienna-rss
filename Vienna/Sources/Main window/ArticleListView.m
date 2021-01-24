@@ -58,9 +58,9 @@
 -(void)setOrientation:(NSInteger)newLayout;
 -(void)showEnclosureView;
 -(void)hideEnclosureView;
--(void)setError:(NSError *)newError;
--(void)handleError:(NSError *)error withDataSource:(WebDataSource *)dataSource;
--(void)endMainFrameLoad;
+
+// MARK: ArticleView delegate
+@property (readwrite, getter=isCurrentPageFullHTML, nonatomic) BOOL currentPageFullHTML;
 
 @end
 
@@ -78,8 +78,7 @@
 		isInTableInit = NO;
 		blockSelectionHandler = NO;
 		markReadTimer = nil;
-		lastError = nil;
-		isCurrentPageFullHTML = NO;
+		_currentPageFullHTML = NO;
 		isLoadingHTMLArticle = NO;
 		currentURL = nil;
     }
@@ -725,18 +724,6 @@
 	[articleText printDocument:sender];
 }
 
--(NSError *)error {
-    return lastError;
-}
-
-/* setError
- * Save the most recent error instance.
- */
--(void)setError:(NSError *)newError
-{
-	lastError = newError;
-}
-
 /* handleArticleListFontChange
  * Called when the user changes the article list font and/or size in the Preferences
  */
@@ -1062,7 +1049,7 @@
  */
 -(NSURL *)url
 {
-	if (isCurrentPageFullHTML)
+	if (self.isCurrentPageFullHTML)
 		return currentURL;
 	else 
 		return nil;
@@ -1081,7 +1068,7 @@
 		[self clearCurrentURL];
 
 		// We are not a FULL HTML page.
-		isCurrentPageFullHTML = NO;
+		self.currentPageFullHTML = NO;
 		
 		// Clear out the page.
 		[articleText setArticles:@[]];
@@ -1094,7 +1081,7 @@
 		{
 			// Remember we have a full HTML page so we can setup the context menus
 			// appropriately.
-			isCurrentPageFullHTML = YES;
+			self.currentPageFullHTML = YES;
 			
 			// Clear out the text so the user knows something happened in response to the
 			// click on the article.
@@ -1113,7 +1100,7 @@
 
 			// Remember we do NOT have a full HTML page so we can setup the context menus
 			// appropriately.
-			isCurrentPageFullHTML = NO;
+			self.currentPageFullHTML = NO;
 			
 			// Remember we're NOT loading from HTML so the status message is set
 			// appropriately.
@@ -1589,25 +1576,6 @@
 	return [articleArray copy];
 }
 
--(void)startMainFrameLoad
-{
-    isLoadingHTMLArticle = YES;
-}
-
-/* endMainFrameLoad
- * Handle the end of a load whether or not it completed and whether or not an error
- * occurred. The error variable is nil for no error or it contains the most recent
- * NSError incident.
- */
--(void)endMainFrameLoad
-{
-	if (isLoadingHTMLArticle)
-	{
-		isLoadingHTMLArticle = NO;
-        articleList.needsDisplay = YES;
-	}
-}
-
 /* dealloc
  * Clean up behind ourself.
  */
@@ -1628,6 +1596,27 @@
                         change:(NSDictionary<NSKeyValueChangeKey,id> *)change
                        context:(void *)context {
     //TODO
+}
+
+// MARK: ArticleView delegate
+
+@synthesize error;
+@synthesize controller;
+
+- (void)startMainFrameLoad
+{
+    isLoadingHTMLArticle = YES;
+}
+
+/// Handle the end of a load whether or not it completed and whether or not an
+/// error occurred. The error variable is nil for no error or it contains the
+/// most recent NSError incident.
+- (void)endMainFrameLoad
+{
+    if (isLoadingHTMLArticle) {
+        isLoadingHTMLArticle = NO;
+        articleList.needsDisplay = YES;
+    }
 }
 
 @end

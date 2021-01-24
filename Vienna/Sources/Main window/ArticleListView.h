@@ -58,13 +58,9 @@
 	NSMutableDictionary * unreadTopLineSelectionDict;
 
 	NSURL *	currentURL;
-	BOOL isCurrentPageFullHTML;
 	BOOL isLoadingHTMLArticle;
-	NSError * lastError;
 	NSProgressIndicator * progressIndicator;
 }
-
-@property (weak, nonatomic) AppController *controller;
 
 // Public functions
 -(void)updateAlternateMenuTitle;
@@ -73,5 +69,5 @@
 -(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 -(void)loadArticleLink:(NSString *) articleLink;
 @property (nonatomic, readonly, copy) NSURL *url;
--(void)webViewLoadFinished:(NSNotification *)notification;
+
 @end

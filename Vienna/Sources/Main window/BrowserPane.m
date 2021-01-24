@@ -314,7 +314,7 @@
         NSView * docView = self.webPane.mainFrame.frameView.documentView;
 
         if ([docView conformsToProtocol:@protocol(WebDocumentText)]) {
-            return [(id<WebDocumentText>)docView selectedString];
+            return [[(id<WebDocumentText>)docView selectedString] copy];
         } else {
             return @"";
         }
@@ -333,7 +333,7 @@
         {
             id representation = dataSource.representation;
             if ((representation != nil) && ([representation conformsToProtocol:@protocol(WebDocumentRepresentation)]) && ([(id<WebDocumentRepresentation>)representation canProvideDocumentSource]))
-                return [(id<WebDocumentRepresentation>)representation documentSource];
+                return [[(id<WebDocumentRepresentation>)representation documentSource] copy];
         }
     }
     return @"";
@@ -355,11 +355,17 @@
         }
 
         case NSFindPanelActionNext:
-            [self.webPane searchFor:self.searchString direction:YES caseSensitive:NO wrap:YES];
+            [self.webPane searchFor:self.searchString
+                          direction:YES
+                      caseSensitive:NO
+                               wrap:YES];
             break;
 
         case NSFindPanelActionPrevious:
-            [self.webPane searchFor:self.searchString direction:NO caseSensitive:NO wrap:YES];
+            [self.webPane searchFor:self.searchString
+                          direction:NO
+                      caseSensitive:NO
+                               wrap:YES];
             break;
     }
 }
@@ -750,10 +756,10 @@
     [self handleReload:nil];
 }
 
-- (BOOL)searchFor:(NSString * _Nonnull)searchString action:(NSFindPanelAction)action {
-	self.searchString = searchString;
-	[self performFindPanelAction:action];
-	return false; //TODO
+- (void)searchFor:(NSString * _Nonnull)searchString
+           action:(NSFindPanelAction)action {
+    self.searchString = searchString;
+    [self performFindPanelAction:action];
 }
 
 - (void)stopLoadingTab {

@@ -133,7 +133,7 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
             let newTab = webKitBrowser.createNewTab(navigationAction.request, config: configuration, inBackground: false)
             return (newTab as? BrowserTab)?.webView
         } else {
-            //fallback for old browser
+            // Fallback for old browser
             _ = browser?.createNewTab(navigationAction.request.url, inBackground: false, load: false)
             return nil
         }

@@ -23,7 +23,7 @@ import Foundation
 protocol ArticleViewDelegate {
     var error: NSError? { get set }
     var controller: AppController { get set }
-    var isCurrentPageFullHTML: Bool { get }
+    @objc(currentPageFullHTML) var isCurrentPageFullHTML: Bool { @objc(isCurrentPageFullHTML) get }
 
     func startMainFrameLoad()
     func endMainFrameLoad()

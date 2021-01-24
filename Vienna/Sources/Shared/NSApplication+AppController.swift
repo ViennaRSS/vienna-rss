@@ -1,5 +1,5 @@
 //
-//  NSApp+AppController.swift
+//  NSApplication+AppController.swift
 //  Vienna
 //
 //  Copyright 2021 Tassilo Karge
@@ -20,7 +20,9 @@
 import Foundation
 
 extension NSApplication {
+
     var appController: AppController {
         return self.delegate as! AppController
     }
+
 }

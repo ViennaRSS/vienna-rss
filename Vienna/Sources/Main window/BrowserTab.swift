@@ -185,7 +185,7 @@ class BrowserTab: NSViewController {
         // We need to use the optional here in case view is not yet loaded
         addressBarContainer?.isHidden = hide
         fullscreenWebViewTopConstraint?.isActive = hide
-        //TODO: animated show / hide
+        // TODO: animated show / hide
     }
 
 }
