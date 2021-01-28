@@ -373,19 +373,21 @@
 
 }
 
-/* applicationShouldHandleReopen
- * Handle the notification sent when the application is reopened such as when the dock icon
- * is clicked. If the main window was previously hidden, we show it again here.
- */
--(BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
+/// Handle the notification sent when the application is reopened, such as when
+/// the Dock icon is clicked. If the main window was previously hidden, we show
+/// it again here.
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)sender
+                    hasVisibleWindows:(BOOL)flag
 {
-	if (!didCompleteInitialisation)
-		return NO;
-	
-	[self showMainWindow:self];
-	if (emptyTrashWarning != nil)
-		[emptyTrashWarning showWindow:self];
-	return YES;
+    if (!didCompleteInitialisation) {
+        return NO;
+    }
+
+    if (!flag) {
+        [self showMainWindow:self];
+    }
+
+    return YES;
 }
 
 /* applicationShouldTerminate
