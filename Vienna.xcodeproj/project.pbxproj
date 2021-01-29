@@ -218,6 +218,7 @@
 		F6D572B71E26AAA100CDA909 /* RSSFeed.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B91E26AAA100CDA909 /* RSSFeed.xib */; };
 		F6D572BA1E26AAA900CDA909 /* SearchFolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572BC1E26AAA900CDA909 /* SearchFolder.xib */; };
 		F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */; };
+		F6F12AFD25ABDDE3005B2DCE /* NSFileManager+Paths.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F12AFC25ABDDE3005B2DCE /* NSFileManager+Paths.m */; };
 		F6FEE7AD209E500800BCAEC6 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = F6FEE7AF209E500800BCAEC6 /* Localizable.stringsdict */; };
 /* End PBXBuildFile section */
 
@@ -950,6 +951,8 @@
 		F6DFB033209EFE8500262069 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = tr; path = tr.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F6E771C3209EFD00002EC659 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = da; path = da.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryMonitor.swift; sourceTree = "<group>"; };
+		F6F12AFB25ABDDE3005B2DCE /* NSFileManager+Paths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSFileManager+Paths.h"; sourceTree = "<group>"; };
+		F6F12AFC25ABDDE3005B2DCE /* NSFileManager+Paths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSFileManager+Paths.m"; sourceTree = "<group>"; };
 		F6FB2EC7209EF1AC00521B61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F6FB2EC8209EF22D00521B61 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F6FB2EC9209EF22E00521B61 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1614,6 +1617,8 @@
 				AAFAF3FB088056D800DAFF04 /* KeyChain.h */,
 				AAFAF3FC088056D800DAFF04 /* KeyChain.m */,
 				2FE44CAC25B7995400554E82 /* NSApplication+AppController.swift */,
+				F6F12AFB25ABDDE3005B2DCE /* NSFileManager+Paths.h */,
+				F6F12AFC25ABDDE3005B2DCE /* NSFileManager+Paths.m */,
 				3A23F13315276935008AF863 /* NSNotificationAdditions.h */,
 				4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */,
 				B85F93E4255AE48000B54B68 /* NSPopUpButtonExtensions.swift */,
@@ -2033,6 +2038,7 @@
 				AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */,
 				AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */,
 				F6164C591E32A6660086261C /* DisclosureView.m in Sources */,
+				F6F12AFD25ABDDE3005B2DCE /* NSFileManager+Paths.m in Sources */,
 				031E083019DFA3A900194F9F /* SubscriptionModel.m in Sources */,
 				2F125EE024D066ED00868E11 /* AsyncHelper.swift in Sources */,
 				AA71168F09BEB17300E3EA8A /* AddressBarCell.m in Sources */,
