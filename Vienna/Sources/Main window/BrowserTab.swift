@@ -154,7 +154,7 @@ class BrowserTab: NSViewController {
 
         self.viewDidLoadRss()
 
-        updateAddressBarLayout()
+        updateAddressBarButtons()
 
         // set up address bar handling
         addressField.delegate = self
@@ -179,13 +179,6 @@ class BrowserTab: NSViewController {
     override func viewDidDisappear() {
         super.viewDidDisappear()
         self.viewVisible = false
-    }
-
-    func hideAddressBar(_ hide: Bool, animated: Bool = false) {
-        // We need to use the optional here in case view is not yet loaded
-        addressBarContainer?.isHidden = hide
-        fullscreenWebViewTopConstraint?.isActive = hide
-        // TODO: animated show / hide
     }
 
 }
@@ -321,11 +314,11 @@ extension BrowserTab: WKNavigationDelegate {
 
     func handleNavigationStart() {
         self.handleNavigationStartRss()
-        updateAddressBarLayout()
+        updateAddressBarButtons()
     }
 
     func handleNavigationEnd(success: Bool) {
         self.handleNavigationEndRss(success: success)
-        updateAddressBarLayout()
+        updateAddressBarButtons()
     }
 }

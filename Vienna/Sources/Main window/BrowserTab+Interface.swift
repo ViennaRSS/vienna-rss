@@ -19,9 +19,9 @@
 
 import Foundation
 
-// MARK: User Interaction
-
 extension BrowserTab {
+
+    // MARK: User Interaction
 
     @IBAction private func loadPageFromAddressBar(_ sender: Any) {
         let enteredUrl = addressField.stringValue
@@ -51,25 +51,6 @@ extension BrowserTab {
         _ = self.back()
     }
 
-    var loadingProgress: Double {
-        get { Double(progressBar?.currentLoadingProgress ?? 0) }
-        set {
-            guard let progressBar = progressBar else {
-                return
-            }
-            let new = CGFloat(newValue)
-            let old = progressBar.currentLoadingProgress
-            progressBar.setLoadingProgress(new, animationDuration: old < new ? 0.3 : 0.05)
-            if new == 1.0 {
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4) {
-                    progressBar.isHidden = true
-                }
-            } else {
-                progressBar.isHidden = false
-            }
-        }
-    }
-
     private func cleanAndLoad(url: String) {
 
         var cleanedUrl = url
@@ -91,8 +72,30 @@ extension BrowserTab {
         self.loadTab()
     }
 
+    // MARK: UI Updates
 
-    func updateAddressBarLayout() {
+    var loadingProgress: Double {
+        get { Double(progressBar?.currentLoadingProgress ?? 0) }
+        set { updateLoadingProgress(newValue) }
+    }
+
+    private func updateLoadingProgress(_ newValue: Double) {
+        guard let progressBar = progressBar else {
+            return
+        }
+        let new = CGFloat(newValue)
+        let old = progressBar.currentLoadingProgress
+        progressBar.setLoadingProgress(new, animationDuration: old < new ? 0.3 : 0.05)
+        if new == 1.0 {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4) {
+                progressBar.isHidden = true
+            }
+        } else {
+            progressBar.isHidden = false
+        }
+    }
+
+    func updateAddressBarButtons() {
 
         cancelButtonWidth?.constant = loading ? 30 : 0
         reloadButtonWidth?.constant = loading ? 0 : 30
@@ -116,6 +119,13 @@ extension BrowserTab {
         } else {
             self.addressBarContainer.layoutSubtreeIfNeeded()
         }
+    }
+
+    func hideAddressBar(_ hide: Bool, animated: Bool = false) {
+        // We need to use the optional here in case view is not yet loaded
+        addressBarContainer?.isHidden = hide
+        fullscreenWebViewTopConstraint?.isActive = hide
+        // TODO: animated show / hide
     }
 }
 
