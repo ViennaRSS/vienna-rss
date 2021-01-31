@@ -1092,7 +1092,7 @@
 			name = CustomWebKit;
 			sourceTree = "<group>";
 		};
-		2FDF6FBB218A265A002F77E9 /* Webkit Browser */ = {
+		2FDF6FBB218A265A002F77E9 /* WebKit browser */ = {
 			isa = PBXGroup;
 			children = (
 				2FA946DF2517E3E5006134C5 /* CustomWebKit */,
@@ -1103,14 +1103,14 @@
 				2F5AC41F2198E1AA00A7EDDE /* TitleChangingTabViewItem.swift */,
 				2F06504B2506B5B500468A0E /* LoadingIndicator.swift */,
 			);
-			name = "Webkit Browser";
+			name = "WebKit browser";
 			sourceTree = "<group>";
 		};
 		2FDF6FC4218A267D002F77E9 /* Browser */ = {
 			isa = PBXGroup;
 			children = (
-				2FDF6FBB218A265A002F77E9 /* Webkit Browser */,
-				F6A7EA5B1F1CE63B00BD4450 /* WebView Browser */,
+				2FDF6FBB218A265A002F77E9 /* WebKit browser */,
+				F6A7EA5B1F1CE63B00BD4450 /* WebView browser */,
 				2FDF6FC5218A26B0002F77E9 /* Browser.swift */,
 				2FDF6FC7218A289A002F77E9 /* Tab.swift */,
 				2FF61D2B24F2AE8B00A7E2B5 /* RSSSubscriber.swift */,
@@ -1184,11 +1184,11 @@
 		F63739FB1F1CFEDC00ED3B09 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				F625815B1E29BEB90035E43C /* MainMenu.xib */,
+				F6832F661F10F5DA007920D4 /* MainWindowController.xib */,
 				2FDF6FBD218A266A002F77E9 /* TabbedBrowserViewController.xib */,
 				2FDF6FBE218A266A002F77E9 /* BrowserTab.xib */,
 				2F125EDD24D0638600868E11 /* BrowserTabBeforeMacOS12.xib */,
-				F625815B1E29BEB90035E43C /* MainMenu.xib */,
-				F6832F661F10F5DA007920D4 /* MainWindowController.xib */,
 				F62581441E29B90A0035E43C /* SearchPanel.xib */,
 				F6D572AD1E26AA8200CDA909 /* EmptyTrashWarning.xib */,
 				F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */,
@@ -1343,7 +1343,7 @@
 			name = "Article list";
 			sourceTree = "<group>";
 		};
-		F6A7EA5B1F1CE63B00BD4450 /* WebView Browser */ = {
+		F6A7EA5B1F1CE63B00BD4450 /* WebView browser */ = {
 			isa = PBXGroup;
 			children = (
 				2FC91DDC21850ADB00D7F223 /* Browser+WebUIDelegate.h */,
@@ -1361,7 +1361,7 @@
 				43502887165DE9DF0018EDB7 /* TabbedWebView.h */,
 				43502888165DE9DF0018EDB7 /* TabbedWebView.m */,
 			);
-			name = "WebView Browser";
+			name = "WebView browser";
 			sourceTree = "<group>";
 		};
 		F6AC41C525A501B9007DED7B /* Files */ = {
@@ -1430,13 +1430,13 @@
 		F6D7FED91F1CDE62004F095A /* Main window */ = {
 			isa = PBXGroup;
 			children = (
-				2FDF6FC4218A267D002F77E9 /* Browser */,
 				F63833D71EF842EA00E07213 /* MainWindowController.swift */,
 				F6373A221F1D53B500ED3B09 /* MainWindow.swift */,
-				F69964F61F13029500FC8493 /* OverlayStatusBar.swift */,
 				F6A7EA571F1CE5DD00BD4450 /* Toolbar */,
 				F6A7EA581F1CE60100BD4450 /* Folder list */,
 				F6A7EA5A1F1CE63500BD4450 /* Article list */,
+				2FDF6FC4218A267D002F77E9 /* Browser */,
+				F69964F61F13029500FC8493 /* OverlayStatusBar.swift */,
 			);
 			path = "Main window";
 			sourceTree = "<group>";
@@ -1595,6 +1595,7 @@
 		F6D7FEE41F1CE16A004F095A /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2F125EDF24D066ED00868E11 /* AsyncHelper.swift */,
 				43502856165DE9DF0018EDB7 /* BaseView.h */,
 				4350285D165DE9DF0018EDB7 /* Constants.h */,
 				4350285E165DE9DF0018EDB7 /* Constants.m */,
@@ -1610,6 +1611,7 @@
 				AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */,
 				AAFAF3FB088056D800DAFF04 /* KeyChain.h */,
 				AAFAF3FC088056D800DAFF04 /* KeyChain.m */,
+				2FE44CAC25B7995400554E82 /* NSApplication+AppController.swift */,
 				3A23F13315276935008AF863 /* NSNotificationAdditions.h */,
 				4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */,
 				B85F93E4255AE48000B54B68 /* NSPopUpButtonExtensions.swift */,
@@ -1621,8 +1623,6 @@
 				AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */,
 				3A7BD0DB1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.h */,
 				3A7BD0DC1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m */,
-				2F125EDF24D066ED00868E11 /* AsyncHelper.swift */,
-				2FE44CAC25B7995400554E82 /* NSApplication+AppController.swift */,
 				2FE44CB425B79EDD00554E82 /* WebKitContextMenuCustomizer.swift */,
 			);
 			path = Shared;
