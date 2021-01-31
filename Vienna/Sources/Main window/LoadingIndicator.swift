@@ -18,16 +18,14 @@
 //
 
 import Cocoa
-import Foundation
 
 @IBDesignable
 class LoadingIndicator: NSView {
 
-    override var intrinsicContentSize: NSSize {
-        NSSize(width: NSView.noIntrinsicMetric, height: 4.0)
-    }
+    // MARK: Initialization
 
-    let animationLayer = CAShapeLayer()
+    private var observer: AnyObject?
+    private let animationLayer = CAShapeLayer()
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -39,42 +37,93 @@ class LoadingIndicator: NSView {
         commonInit()
     }
 
-    func commonInit() {
+    private func commonInit() {
         self.wantsLayer = true
         self.layer?.addSublayer(animationLayer)
         self.layerContentsRedrawPolicy = .duringViewResize
-        animationLayer.strokeColor = NSColor.systemGray.cgColor
-        animationLayer.lineWidth = 4
-        animationLayer.strokeEnd = 0
+        if #available(macOS 10.14, *) {
+            animationLayer.strokeColor = NSColor.controlAccentColor.cgColor
+        } else {
+            animationLayer.strokeColor = NSColor(for: NSColor.currentControlTint).cgColor
+        }
+        animationLayer.lineWidth = 2.0
+        animationLayer.strokeEnd = 0.0
         animationLayer.actions = ["strokeEnd": NSNull()]
+
+        if #available(macOS 10.14, *) {
+            observer = NSApp.observe(\.effectiveAppearance) { [weak self] _, _ in
+                self?.animationLayer.strokeColor = NSColor.controlAccentColor.cgColor
+            }
+        } else {
+            let center = NotificationCenter.default
+            let name = NSColor.currentControlTintDidChangeNotification
+            observer = center.addObserver(forName: name, object: NSApp, queue: .main) { [weak self] _ in
+                self?.animationLayer.strokeColor = NSColor(for: NSColor.currentControlTint).cgColor
+            }
+        }
+    }
+
+    deinit {
+        if #available(macOS 10.14, *) {
+            // Do nothing
+        } else {
+            if let observer = observer {
+                let center = NotificationCenter.default
+                let name = NSColor.currentControlTintDidChangeNotification
+                center.removeObserver(observer, name: name, object: NSApp)
+            }
+        }
+    }
+
+    // MARK: Drawing
+
+    override var intrinsicContentSize: NSSize {
+        NSSize(width: NSView.noIntrinsicMetric, height: 4.0)
     }
 
     override func draw(_ dirtyRect: NSRect) {
-        let loadingProgress = getCurrentLoadingProgress()
+        let loadingProgress = currentLoadingProgress
         animationLayer.frame = self.frame
         let path = CGMutablePath()
-        path.move(to: CGPoint(x: 0, y: 2.0))
-        path.addLine(to: CGPoint(x: self.frame.size.width, y: 2.0))
+        path.move(to: CGPoint(x: 0.0, y: 1.0))
+        path.addLine(to: CGPoint(x: self.frame.size.width, y: 1.0))
         animationLayer.path = path
         setLoadingProgress(loadingProgress)
     }
 
-    func getCurrentLoadingProgress() -> CGFloat {
+    // MARK: Animating
+
+    var currentLoadingProgress: CGFloat {
         animationLayer.presentation()?.strokeEnd ?? animationLayer.strokeEnd
     }
 
     func setLoadingProgress(_ newProgress: CGFloat, animationDuration: Double = 0.0) {
-
-        if animationDuration > 0 {
+        if animationDuration > 0.0 {
             let animation = CABasicAnimation(keyPath: "strokeEnd")
             animation.fromValue = animationLayer.presentation()?.strokeEnd ?? animationLayer.strokeEnd
             animation.toValue = newProgress
             animation.duration = animationDuration
-            animation.isRemovedOnCompletion = false
+            animation.delegate = self
+            animationLayer.strokeEnd = newProgress
             animationLayer.add(animation, forKey: "strokeEndAnimation")
         } else {
             animationLayer.removeAllAnimations()
             animationLayer.strokeEnd = newProgress
         }
     }
+
+}
+
+// MARK: - Animation delegate
+
+extension LoadingIndicator: CAAnimationDelegate {
+
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        // When the animation is complete, the stroke end should return to zero.
+        // This avoids a noticeable jump when the user reloads the webpage.
+        if flag && animationLayer.strokeEnd == 1.0 {
+            animationLayer.strokeEnd = 0.0
+        }
+    }
+
 }

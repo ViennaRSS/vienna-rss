@@ -73,10 +73,10 @@ extension BrowserTab {
     }
 
     var loadingProgress: Double? {
-        get { Double(progressBar?.getCurrentLoadingProgress() ?? 0) }
+        get { Double(progressBar?.currentLoadingProgress ?? 0) }
         set {
             let new = CGFloat(newValue ?? 0)
-            let old = progressBar?.getCurrentLoadingProgress() ?? 0
+            let old = progressBar?.currentLoadingProgress ?? 0
             progressBar?.setLoadingProgress(new, animationDuration: old < new ? 0.3 : 0.05)
             if new == 1.0 {
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4) {
