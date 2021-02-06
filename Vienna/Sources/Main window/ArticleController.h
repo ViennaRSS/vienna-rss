@@ -37,7 +37,7 @@
  * article view. Thus all control of the article view now passes through the article
  * controller.
  */
-@interface ArticleController : NSObject
+@interface ArticleController : NSViewController
 {
 	NSView<ArticleBaseView, BaseView> * mainArticleView;
 	NSArray * currentArrayOfArticles;
@@ -69,7 +69,7 @@
 -(NSView<ArticleBaseView, BaseView> *)mainArticleView;
 -(void)setLayout:(NSInteger)newLayout;
 @property (nonatomic, readonly) NSInteger currentFolderId;
-@property (nonatomic, readonly, strong) Article *selectedArticle;
+@property (nonatomic, readonly) Article *selectedArticle;
 @property (nonatomic, readonly, copy) NSArray *markedArticleRange;
 -(void)updateAlternateMenuTitle;
 -(void)updateVisibleColumns;

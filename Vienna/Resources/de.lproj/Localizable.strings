@@ -241,7 +241,7 @@
 "Export Completed" = "Export fertig";
 
 /* No comment provided by engineer. */
-"External Browser" = "Externer Browser";
+"External Browser" = "Externem Browser";
 
 /* No comment provided by engineer. */
 "Feed URL updated to %@" = "Die Feed URL wurd auf %@ aktualisiert";
@@ -448,7 +448,10 @@
 "Open Link in %@" = "Öffne Link in %@";
 
 /* No comment provided by engineer. */
-"Open Link in New Tab" = "Link im neuem Tab öffnen";
+"Open Link in New Tab" = "Link in neuem Tab öffnen";
+
+/* No comment provided by engineer. */
+"Open Link in Background" = "Link im Hintergrund öffnen";
 
 /* No comment provided by engineer. */
 "Open Page in %@" = "Öffne Seite in %@";

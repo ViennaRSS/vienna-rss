@@ -49,11 +49,17 @@
 -(void)initializePreferences
 {
     Preferences * prefs = [Preferences standardPreferences];
-    
+
+    previewNewBrowserButton.state = prefs.useNewBrowser ? NSControlStateValueOn : NSControlStateValueOff;
     // Show use JavaScript option
     useJavaScriptButton.state = prefs.useJavaScript ? NSControlStateValueOn : NSControlStateValueOff;
     useWebPluginsButton.state = prefs.useWebPlugins ? NSControlStateValueOn : NSControlStateValueOff;
     [concurrentDownloads selectItemWithTitle:[NSString stringWithFormat:@"%lu",(unsigned long)prefs.concurrentDownloads]];
+}
+
+- (IBAction)changeUseNewBrowser:(id)sender {
+    BOOL useNewBroser = [sender state] == NSControlStateValueOn;
+    [Preferences standardPreferences].useNewBrowser = useNewBroser;
 }
 
 /* changeUseJavaScript

@@ -53,6 +53,7 @@ extern NSString * MAPref_AutoExpireDuration;
 extern NSString * MAPref_DownloadsList;
 extern NSString * MAPref_ShowFolderImages;
 extern NSString * MAPref_UseJavaScript;
+extern NSString * MAPref_UseNewBrowser;
 extern NSString * MAPref_UseWebPlugins;
 extern NSString * MAPref_CachedArticleGUID;
 extern NSString * MAPref_ArticleSortDescriptors;

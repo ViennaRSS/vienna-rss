@@ -26,7 +26,7 @@
 #import "Article.h"
 #import "BrowserPane.h"
 #import "SearchMethod.h"
-#import "Browser.h"
+#import "Vienna-Swift.h"
 
 @implementation PluginManager
 
@@ -261,13 +261,14 @@
  */
 -(BOOL)validateToolbarItem:(NSToolbarItem *)toolbarItem
 {
-    NSView<BaseView> * theView = APPCONTROLLER.browser.activeTabItemView;
-    Article * thisArticle = APPCONTROLLER.selectedArticle;
+    id<Tab> activeBrowserTab = APPCONTROLLER.browser.activeTab;
 
-    if ([theView isKindOfClass:[BrowserPane class]])
-        return ((theView.viewLink != nil) && NSApp.active);
-    else
+    if (activeBrowserTab)
+        return ((activeBrowserTab.tabUrl != nil) && NSApp.active);
+    else {
+        Article * thisArticle = APPCONTROLLER.selectedArticle;
         return (thisArticle != nil && NSApp.active);
+    }
 }
 
 /* validateMenuItem
@@ -275,13 +276,14 @@
  */
 -(BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-    NSView<BaseView> * theView = APPCONTROLLER.browser.activeTabItemView;
-    Article * thisArticle = APPCONTROLLER.selectedArticle;
+    id<Tab> activeBrowserTab = APPCONTROLLER.browser.activeTab;
 
-    if ([theView isKindOfClass:[BrowserPane class]])
-        return ((theView.viewLink != nil) && NSApp.active);
-    else
+    if (activeBrowserTab)
+        return ((activeBrowserTab.tabUrl != nil) && NSApp.active);
+    else {
+        Article * thisArticle = APPCONTROLLER.selectedArticle;
         return (thisArticle != nil && NSApp.active);
+    }
 }
 
 /* pluginInvocator
@@ -310,15 +312,14 @@
 			NSMutableString * urlString  = [NSMutableString stringWithString:pluginItem[@"URL"]];
 			if (urlString == nil)
 				return;
-			
-			// Get the view that the user is currently looking at...
-			NSView<BaseView> * theView = APPCONTROLLER.browser.activeTabItemView;
-			
+
+            id<Tab> activeBrowserTab = APPCONTROLLER.browser.activeTab;
+
 			// ...and do the following in case the user is currently looking at a website.
-			if ([theView isKindOfClass:[BrowserPane class]])
+			if (activeBrowserTab)
 			{	
-				[urlString replaceString:@"$ArticleTitle$" withString:theView.viewTitle];
-				[urlString replaceString:@"$ArticleLink$" withString:[NSString stringByCleaningURLString:theView.viewLink]];
+				[urlString replaceString:@"$ArticleTitle$" withString:activeBrowserTab.title];
+				[urlString replaceString:@"$ArticleLink$" withString:[NSString stringByCleaningURLString:activeBrowserTab.tabUrl.absoluteString]];
 			}
 			
 			// In case the user is currently looking at an article:
@@ -334,7 +335,7 @@
 			{
 				NSURL * urlToLoad = cleanedUpUrlFromString(urlString);				
 				if (urlToLoad != nil)
-					[APPCONTROLLER.browser createAndLoadNewTab:urlToLoad inBackground:NO];
+					(void)[APPCONTROLLER.browser createNewTab:urlToLoad inBackground:NO load:true];
 			}
 			else
 			{

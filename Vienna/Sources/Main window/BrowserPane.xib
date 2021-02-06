@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="14313.18"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="16097.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,7 +21,7 @@
                 <view translatesAutoresizingMaskIntoConstraints="NO" id="Bbc-ej-ccq">
                     <rect key="frame" x="0.0" y="0.0" width="833" height="575"/>
                     <subviews>
-                        <customView verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jfz-EV-1Re" customClass="GradientView" customModule="Vienna" customModuleProvider="target">
+                        <customView verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jfz-EV-1Re">
                             <rect key="frame" x="0.0" y="546" width="833" height="29"/>
                             <subviews>
                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="RJc-eu-7Rd" customClass="BrowserPaneButton">
@@ -121,14 +122,6 @@
                                 <constraint firstAttribute="trailing" secondItem="Uij-h1-YdD" secondAttribute="trailing" id="vRx-RB-zuw"/>
                                 <constraint firstItem="4dH-y6-1w2" firstAttribute="leading" secondItem="RJc-eu-7Rd" secondAttribute="trailing" id="yHt-7h-1Pv"/>
                             </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="color" keyPath="startingColor">
-                                    <color key="value" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="angle">
-                                    <real key="value" value="270"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                         </customView>
                         <webView translatesAutoresizingMaskIntoConstraints="NO" id="5Jt-eD-fKX" customClass="TabbedWebView">
                             <rect key="frame" x="0.0" y="0.0" width="833" height="546"/>

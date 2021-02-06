@@ -1,5 +1,5 @@
 //
-//  ArticleTests.m
+//  VNAArticleTests.m
 //  Vienna
 //
 //  Copyright © 2016 uk.co.opencommunity. All rights reserved.
@@ -7,7 +7,8 @@
 
 #import <XCTest/XCTest.h>
 #import "Article.h"
-#import "ArticleView.h"
+#import "ArticleConverter.h"
+#import "Vienna_Tests-Swift.h"
 
 static NSString * const GUID = @"07f446d2-8d6b-4d99-b488-cebc9eac7c33";
 static NSString * const Author = @"Author McAuthorface";
@@ -26,19 +27,21 @@ static NSString * const Body =
     "<a href=\"#\">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>";
 
 
-@interface ArticleTests : XCTestCase
+@interface VNAArticleTests : XCTestCase
 
 @property (nonatomic, strong) Article *article;
+@property (nonatomic, strong) WebViewArticleConverter *articleConverter;
 
 @end
 
-@implementation ArticleTests
+@implementation VNAArticleTests
 
 - (void)setUp
 {
     [super setUp];
 
     self.article = [[Article alloc] initWithGuid:GUID];
+    self.articleConverter = [[WebViewArticleConverter alloc] init];
 }
 
 - (void)testAccessInstanceVariablesDirectly
@@ -284,7 +287,7 @@ static NSString * const Body =
 
     self.article.link = Link;
 
-    NSString *expandedString = [self.article expandTags:string withConditional:YES];
+    NSString *expandedString = [self.articleConverter expandTagsOfArticle:self.article intoTemplate:string withConditional:YES];
 
     XCTAssertEqualObjects(expandedString, expectedString);
 }
@@ -296,7 +299,7 @@ static NSString * const Body =
 
     self.article.title = Title;
 
-    NSString *expandedString = [self.article expandTags:string withConditional:YES];
+    NSString *expandedString = [self.articleConverter expandTagsOfArticle:self.article intoTemplate:string withConditional:YES];
 
     XCTAssertEqualObjects(expandedString, expectedString);
 }
@@ -308,7 +311,7 @@ static NSString * const Body =
 
     self.article.body = Body;
 
-    NSString *expandedString = [self.article expandTags:string withConditional:YES];
+    NSString *expandedString = [self.articleConverter expandTagsOfArticle:self.article intoTemplate:string withConditional:YES];
 
     XCTAssertEqualObjects(expandedString, expectedString);
 }
@@ -320,7 +323,7 @@ static NSString * const Body =
 
     self.article.author = Author;
 
-    NSString *expandedString = [self.article expandTags:string withConditional:YES];
+    NSString *expandedString = [self.articleConverter expandTagsOfArticle:self.article intoTemplate:string withConditional:YES];
 
     XCTAssertEqualObjects(expandedString, expectedString);
 }
@@ -332,7 +335,7 @@ static NSString * const Body =
 
     self.article.enclosure = Enclosure;
 
-    NSString *expandedString = [self.article expandTags:string withConditional:YES];
+    NSString *expandedString = [self.articleConverter expandTagsOfArticle:self.article intoTemplate:string withConditional:YES];
 
     XCTAssertEqualObjects(expandedString, expectedString);
 }
@@ -343,22 +346,18 @@ static NSString * const Body =
     NSString *expectedString = EnclosureFilename;
 
     self.article.enclosure = Enclosure;
-
-    NSString *expandedString = [self.article expandTags:string withConditional:YES];
+    NSString *expandedString = [self.articleConverter expandTagsOfArticle:self.article intoTemplate:string withConditional:YES];
 
     XCTAssertEqualObjects(expandedString, expectedString);
 }
 
 - (void)testURLIDNinArticleView
 {
-    ArticleView * view = [[ArticleView alloc] initWithFrame:NSMakeRect(0, 0, 100, 100)];
-
     self.article.link = @"http://ουτοπία.δπθ.gr/نجيب_محفوظ/";
-    NSString * htmlTextFromIDNALink = [view articleTextFromArray:@[self.article]];
-    [view setHTML:htmlTextFromIDNALink];
+    NSString * htmlTextFromIDNALink = [self.articleConverter articleTextFromArray:@[self.article]];
 
     self.article.link = @"http://xn--kxae4bafwg.xn--pxaix.gr/%D9%86%D8%AC%D9%8A%D8%A8_%D9%85%D8%AD%D9%81%D9%88%D8%B8/";
-    NSString * htmlTextFromResolvedIDNALink = [view articleTextFromArray:@[self.article]];
+    NSString * htmlTextFromResolvedIDNALink = [self.articleConverter articleTextFromArray:@[self.article]];
 
     XCTAssertEqualObjects(htmlTextFromIDNALink, htmlTextFromResolvedIDNALink);
 }

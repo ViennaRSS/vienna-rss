@@ -141,6 +141,10 @@
     return self;
 }
 
+-(void)loadView {
+	self.view = [self mainArticleView];
+}
+
 /* setLayout
  * Changes the layout of the panes.
  */

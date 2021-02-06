@@ -8,7 +8,7 @@
 @import Cocoa;
 
 @class AppController;
-@class ArticleView;
+@protocol ArticleContentView;
 
 @interface ArticleCellView : NSTableCellView
 {
@@ -19,7 +19,8 @@
 	NSTableView *__weak _listView;
 }
 
-@property (readonly, strong)ArticleView *articleView;
+@property (readonly, strong) NSObject<ArticleContentView> *articleView;
+@property (readonly, strong) ArticleConverter * articleConverter;
 @property (readonly, strong)NSProgressIndicator * progressIndicator;
 @property BOOL inProgress;
 @property NSInteger folderId;

@@ -42,7 +42,6 @@
 
 @interface ArticleListView ()
 
-@property (nonatomic) OverlayStatusBar *statusBar;
 @property (weak, nonatomic) IBOutlet NSStackView *contentStackView;
 
 -(void)initTableView;
@@ -59,9 +58,9 @@
 -(void)setOrientation:(NSInteger)newLayout;
 -(void)showEnclosureView;
 -(void)hideEnclosureView;
--(void)setError:(NSError *)newError;
--(void)handleError:(NSError *)error withDataSource:(WebDataSource *)dataSource;
--(void)endMainFrameLoad;
+
+// MARK: ArticleView delegate
+@property (readwrite, getter=isCurrentPageFullHTML, nonatomic) BOOL currentPageFullHTML;
 
 @end
 
@@ -79,8 +78,7 @@
 		isInTableInit = NO;
 		blockSelectionHandler = NO;
 		markReadTimer = nil;
-		lastError = nil;
-		isCurrentPageFullHTML = NO;
+		_currentPageFullHTML = NO;
 		isLoadingHTMLArticle = NO;
 		currentURL = nil;
     }
@@ -99,14 +97,6 @@
 	[nc addObserver:self selector:@selector(handleLoadFullHTMLChange:) name:@"MA_Notify_LoadFullHTMLChange" object:nil];
 	[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
 
-	// Make us the frame load and UI delegate for the web view
-	articleText.UIDelegate = self;
-	articleText.frameLoadDelegate = self;
-	[articleText setOpenLinksInNewBrowser:YES];
-
-	[articleText setMaintainsBackForwardList:NO];
-	[articleText.backForwardList setPageCacheSize:0];
-
     [self initialiseArticleView];
 }
 
@@ -117,11 +107,31 @@
  */
 -(void)initialiseArticleView
 {
+    NSView *articleTextView;
+
+    if (Preferences.standardPreferences.useNewBrowser) {
+        NSViewController<ArticleContentView> *articleTextController = [[WebKitArticleTab alloc] init];
+        articleText = articleTextController;
+        articleTextView = articleTextController.view;
+    } else {
+        ArticleView *articleView = [[ArticleView alloc] init];
+        articleTextView = articleView;
+        articleText = articleView;
+        // Make us the frame load and UI delegate for the web view
+        [articleView setOpenLinksInNewBrowser:YES];
+        [articleView setMaintainsBackForwardList:NO];
+        [articleView.backForwardList setPageCacheSize:0];
+    }
+
+    [self.contentStackView addView:articleTextView inGravity:NSStackViewGravityTop];
+
 	Preferences * prefs = [Preferences standardPreferences];
 
 	// Mark the start of the init phase
 	isAppInitialising = YES;
-	
+
+    articleText.listView = self;
+
 	// Create report and condensed view attribute dictionaries
 	NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	style.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -145,8 +155,8 @@
 	[self initTableView];
 
 	// Make sure we skip the column filter button in the Tab order
-	articleList.nextKeyView = articleText;
-	
+    articleList.nextKeyView = articleTextView;
+
 	// Done initialising
 	isAppInitialising = NO;
 
@@ -154,106 +164,6 @@
                                           forKeyPath:MAPref_ShowStatusBar
                                              options:NSKeyValueObservingOptionInitial
                                              context:nil];
-}
-
-// MARK: - WebUIDelegate methods
-
-
-/* createWebViewWithRequest
- * Called when the browser wants to create a new window. The request is opened in a new tab.
- */
--(WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
-{
-	[self.controller openURL:request.URL inPreferredBrowser:YES];
-	// Change this to handle modifier key?
-	// Is this covered by the webView policy?
-	return nil;
-}
-
-/* runJavaScriptAlertPanelWithMessage
- * Called when the browser wants to display a JavaScript alert panel containing the specified message.
- */
-- (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
-    NSAlert *alert = [NSAlert new];
-    alert.alertStyle = NSAlertStyleInformational;
-    alert.messageText = NSLocalizedString(@"JavaScript", @"");
-    alert.informativeText = message;
-    [alert runModal];
-}
-
-/* runJavaScriptConfirmPanelWithMessage
- * Called when the browser wants to display a JavaScript confirmation panel with the specified message.
- */
-- (BOOL)webView:(WebView *)sender runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
-    NSAlert *alert = [NSAlert new];
-    alert.alertStyle = NSAlertStyleInformational;
-    alert.messageText = NSLocalizedString(@"JavaScript", @"");
-    alert.informativeText = message;
-    [alert addButtonWithTitle:NSLocalizedString(@"OK", @"Title of a button on an alert")];
-    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
-    NSModalResponse alertResponse = [alert runModal];
-
-	return alertResponse == NSAlertFirstButtonReturn;
-}
-
-/* mouseDidMoveOverElement
- * Called from the webview when the user positions the mouse over an element. If it's a link
- * then echo the URL to the status bar like Safari does.
- */
-- (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation
-  modifierFlags:(NSUInteger)modifierFlags {
-    if (self.statusBar) {
-        NSURL *url = [elementInformation valueForKey:@"WebElementLinkURL"];
-        self.statusBar.label = url.absoluteString;
-    }
-}
-
-/* contextMenuItemsForElement
- * Creates a new context menu for our article's web view.
- */
--(NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems
-{
-	// If this is an URL link, do the link-specific items.
-	NSURL * urlLink = [element valueForKey:WebElementLinkURLKey];
-	if (urlLink != nil)
-		return [self.controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
-	
-	// If we have a full HTML page then do the additional web-page specific items.
-	if (isCurrentPageFullHTML)
-	{
-		WebFrame * frameKey = [element valueForKey:WebElementFrameKey];
-		if (frameKey != nil)
-			return [self.controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
-	}
-	
-	// Remove the reload menu item if we don't have a full HTML page.
-	if (!isCurrentPageFullHTML)
-	{
-		NSMutableArray * newDefaultMenu = [[NSMutableArray alloc] init];
-		NSInteger count = defaultMenuItems.count;
-		NSInteger index;
-		
-		// Copy over everything but the reload menu item, which we can't handle if
-		// this is not a full HTML page since we don't have an URL.
-		for (index = 0; index < count; index++)
-		{
-			NSMenuItem * menuItem = defaultMenuItems[index];
-			if (menuItem.tag != WebMenuItemTagReload)
-				[newDefaultMenu addObject:menuItem];
-		}
-		
-		// If we still have some menu items then use that for the new default menu, otherwise
-		// set the default items to nil as we may have removed all the items.
-		if (newDefaultMenu.count > 0)
-			defaultMenuItems = newDefaultMenu;
-		else
-        {
-			defaultMenuItems = nil;
-        }
-    }
-
-	// Return the default menu items.
-    return defaultMenuItems;
 }
 
 /* initTableView
@@ -736,7 +646,11 @@
  */
 -(WebView *)webView
 {
-	return articleText;
+    if ([articleText isKindOfClass:ArticleView.class]) {
+        return (ArticleView *)articleText;
+    } else {
+        return nil;
+    }
 }
 
 /* canDeleteMessageAtRow
@@ -808,14 +722,6 @@
 -(void)printDocument:(id)sender
 {
 	[articleText printDocument:sender];
-}
-
-/* setError
- * Save the most recent error instance.
- */
--(void)setError:(NSError *)newError
-{
-	lastError = newError;
 }
 
 /* handleArticleListFontChange
@@ -1078,7 +984,7 @@
 	Article * article = self.selectedArticle;
 	if (article == nil)
 	{
-		[articleText clearHTML];
+		[articleText setArticles:@[]];
 		[self hideEnclosureView];
 	}
 	else
@@ -1122,12 +1028,11 @@
 {
 	// Remember we're loading from HTML so the status message is set
 	// appropriately.
-	isLoadingHTMLArticle = YES;
+    [self startMainFrameLoad];
 	
 	// Load the actual link.
-	articleText.mainFrameURL = articleLink;
-	// After any clearHTML call, ensure the page gets visible
-	articleText.hidden = NO;
+	articleText.tabUrl = cleanedUpUrlFromString(articleLink);
+    [articleText loadTab];
 	
 	// Clear the current URL.
 	[self clearCurrentURL];
@@ -1144,7 +1049,7 @@
  */
 -(NSURL *)url
 {
-	if (isCurrentPageFullHTML)
+	if (self.isCurrentPageFullHTML)
 		return currentURL;
 	else 
 		return nil;
@@ -1163,10 +1068,10 @@
 		[self clearCurrentURL];
 
 		// We are not a FULL HTML page.
-		isCurrentPageFullHTML = NO;
+		self.currentPageFullHTML = NO;
 		
 		// Clear out the page.
-		[articleText clearHTML];
+		[articleText setArticles:@[]];
 	}
 	else
 	{
@@ -1176,11 +1081,11 @@
 		{
 			// Remember we have a full HTML page so we can setup the context menus
 			// appropriately.
-			isCurrentPageFullHTML = YES;
+			self.currentPageFullHTML = YES;
 			
 			// Clear out the text so the user knows something happened in response to the
 			// click on the article.
-			[articleText clearHTML];
+			[articleText setArticles:@[]];
 			
 			// Now set the article to the URL in the RSS feed's article. NOTE: We use
 			// performSelector:withObject:afterDelay: here so that this link load gets
@@ -1190,21 +1095,19 @@
 		}
 		else
 		{
-			NSString * htmlText = [articleText articleTextFromArray:msgArray];
-
 			// Clear the current URL.
 			[self clearCurrentURL];
 
 			// Remember we do NOT have a full HTML page so we can setup the context menus
 			// appropriately.
-			isCurrentPageFullHTML = NO;
+			self.currentPageFullHTML = NO;
 			
 			// Remember we're NOT loading from HTML so the status message is set
 			// appropriately.
 			isLoadingHTMLArticle = NO;
 			
 			// Set the article to the HTML from the RSS feed.
-			[articleText setHTML:htmlText];
+			[articleText setArticles:msgArray];
 		}
 	}
 	
@@ -1673,94 +1576,6 @@
 	return [articleArray copy];
 }
 
-/* didStartProvisionalLoadForFrame
- * Invoked when a new client request is made by sender to load a provisional data source for frame.
- */
--(void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
-{
-	if (frame == articleText.mainFrame)
-	{
-		[self setError:nil];
-	}
-	
-}
-
-/* didCommitLoadForFrame
- * Invoked when data source of frame has started to receive data.
- */
--(void)webView:(WebView *)sender didCommitLoadForFrame:(WebFrame *)frame
-{
-}
-
-/* didFailProvisionalLoadWithError
- * Invoked when a location request for frame has failed to load.
- */
--(void)webView:(WebView *)sender didFailProvisionalLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
-{
-	if (frame == articleText.mainFrame)
-	{
-		[self handleError:error withDataSource: frame.provisionalDataSource];
-	}
-}
-
-/* didFailLoadWithError
- * Invoked when a location request for frame has failed to load.
- */
--(void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
-{
-	if (frame == articleText.mainFrame)
-	{
-		// Not really errors. Load is cancelled or a plugin is grabbing the URL and will handle it by itself.
-		if (!([error.domain isEqualToString:WebKitErrorDomain] && (error.code == NSURLErrorCancelled || error.code == WebKitErrorPlugInWillHandleLoad)))
-			[self handleError:error withDataSource:frame.dataSource];
-		[self endMainFrameLoad];
-	}
-}
-
--(void)handleError:(NSError *)error withDataSource:(WebDataSource *)dataSource
-{
-	// Remember the error.
-	[self setError:error];
-	
-	// Load the localized verion of the error page
-	WebFrame * frame = articleText.mainFrame;
-	NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
-	if (pathToErrorPage != nil)
-	{
-		NSString *errorMessage = [NSString stringWithContentsOfFile:pathToErrorPage encoding:NSUTF8StringEncoding error:NULL];
-		errorMessage = [errorMessage stringByReplacingOccurrencesOfString: @"$ErrorInformation" withString: error.localizedDescription];
-		if (errorMessage != nil)
-			[frame loadAlternateHTMLString:errorMessage baseURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] forUnreachableURL:dataSource.request.URL];
-	}		
-}
-
-/* endMainFrameLoad
- * Handle the end of a load whether or not it completed and whether or not an error
- * occurred. The error variable is nil for no error or it contains the most recent
- * NSError incident.
- */
--(void)endMainFrameLoad
-{
-	if (isLoadingHTMLArticle)
-	{
-		isLoadingHTMLArticle = NO;
-        articleList.needsDisplay = YES;
-	}
-}
-
-/* didFinishLoadForFrame
- * Invoked when a location request for frame has successfully; that is, when all the resources are done loading.
- */
--(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
-{
-	if (frame == articleText.mainFrame)
-		[self endMainFrameLoad];
-}
-
--(void)webViewLoadFinished:(NSNotification *)notification
-{
-}
-
 /* dealloc
  * Clean up behind ourself.
  */
@@ -1769,27 +1584,38 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
     [NSUserDefaults.standardUserDefaults removeObserver:self
                                              forKeyPath:MAPref_ShowStatusBar];
-	[articleText setUIDelegate:nil];
-	[articleText setFrameLoadDelegate:nil];
 	[splitView2 setDelegate:nil];
 	[articleList setDelegate:nil];
 }
 
 // MARK: Key-value observation
 
+
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary<NSKeyValueChangeKey,id> *)change
                        context:(void *)context {
-    if ([keyPath isEqualToString:MAPref_ShowStatusBar]) {
-        BOOL isStatusBarShown = [Preferences standardPreferences].showStatusBar;
-        if (isStatusBarShown && !self.statusBar) {
-            self.statusBar = [OverlayStatusBar new];
-            [articleText addSubview:self.statusBar];
-        } else if (!isStatusBarShown && self.statusBar) {
-            [self.statusBar removeFromSuperview];
-            self.statusBar = nil;
-        }
+    //TODO
+}
+
+// MARK: ArticleView delegate
+
+@synthesize error;
+@synthesize controller;
+
+- (void)startMainFrameLoad
+{
+    isLoadingHTMLArticle = YES;
+}
+
+/// Handle the end of a load whether or not it completed and whether or not an
+/// error occurred. The error variable is nil for no error or it contains the
+/// most recent NSError incident.
+- (void)endMainFrameLoad
+{
+    if (isLoadingHTMLArticle) {
+        isLoadingHTMLArticle = NO;
+        articleList.needsDisplay = YES;
     }
 }
 

@@ -22,6 +22,8 @@
 
 @class SearchMethod;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface Preferences : NSObject {
 	id userPrefs;
 	NSString * profilePath;
@@ -43,6 +45,7 @@
 	BOOL hasPrefs;
 	BOOL showFolderImages;
 	BOOL useJavaScript;
+    BOOL useNewBrowser;
     BOOL useWebPlugins;
 	BOOL showAppInStatusBar;
 	BOOL showStatusBar;
@@ -204,7 +207,10 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 // User Agent Name
 @property (nonatomic) NSString *userAgentName;
 
-#pragma mark -
+#pragma mark Browser choice
+
+@property (nonatomic) BOOL useNewBrowser;
+
 #pragma mark Open Reader syncing
 
 @property (nonatomic) BOOL syncGoogleReader;
@@ -222,3 +228,5 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 @property (nonatomic, copy) NSString *syncingAppKey;
 
 @end
+
+NS_ASSUME_NONNULL_END

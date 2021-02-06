@@ -29,7 +29,6 @@
 @class NewSubscription;
 @class NewGroupFolder;
 @class WebPreferences;
-@class Browser;
 @class EmptyTrashWarning;
 @class SearchPanel;
 @class DisclosureView;
@@ -41,6 +40,7 @@
 @class Article;
 @class UnifiedDisplayView;
 @class ArticleListView;
+@protocol Browser;
 
 @interface AppController : NSObject <NSApplicationDelegate>
 {
@@ -68,7 +68,7 @@
 }
 
 @property (nonatomic) PluginManager *pluginManager;
-@property (nonatomic, weak) Browser *browser;
+@property (nonatomic, weak) id<Browser> browser;
 @property (nonatomic) ArticleController *articleController;
 @property (nonatomic, weak) UnifiedDisplayView *unifiedListView;
 @property (nonatomic, weak) ArticleListView *articleListView;
@@ -119,7 +119,7 @@
 -(IBAction)showMainWindow:(id)sender;
 -(IBAction)previousTab:(id)sender;
 -(IBAction)nextTab:(id)sender;
--(IBAction)closeTab:(id)sender;
+-(IBAction)closeActiveTab:(id)sender;
 -(IBAction)closeAllTabs:(id)sender;
 -(IBAction)reloadPage:(id)sender;
 -(IBAction)stopReloadingPage:(id)sender;
@@ -158,6 +158,7 @@
 -(void)openURLInDefaultBrowser:(NSURL *)url;
 -(void)handleRSSLink:(NSString *)linkPath;
 -(void)selectFolder:(NSInteger)folderId;
+-(void)createSubscriptionInCurrentLocationForUrl:(NSURL *)url;
 -(void)createNewSubscription:(NSString *)urlString underFolder:(NSInteger)parentId afterChild:(NSInteger)predecessorId;
 -(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders;
 -(void)doSafeInitialisation;

@@ -26,32 +26,31 @@
 
 @class MMTabBarView;
 @class BrowserPane;
+@protocol Browser;
+@protocol Tab;
 
-@interface Browser : NSObject
-{
-	NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate> * primaryTabItemView;
-}
+@interface WebViewBrowser : NSViewController <Browser>
 
-@property (assign) IBOutlet NSLayoutConstraint *tabBarHeightConstraint;
-@property (assign) IBOutlet MMTabBarView *tabBarControl;
+#pragma mark - current state
 
-// Accessors
--(BrowserPane *)newTab;
--(BrowserPane *)createAndLoadNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
+@property (nonatomic) NSTabViewItem *primaryTab;
+@property (nonatomic, readonly) id<Tab> activeTab;
+@property (nonatomic, readonly) NSInteger browserTabCount;
+
+#pragma mark - opening tabs
+
+-(BrowserPane *)createNewTab;
+-(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag load:(BOOL)load;
 -(BrowserPane *)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
 -(BrowserPane *)createNewTab:(NSURL *)url withTitle:(NSString *)title inBackground:(BOOL)openInBackgroundFlag;
 
--(void)setPrimaryTabItemView:(NSView *)newPrimaryTabItemView;
--(NSString *)tabItemViewTitle:(NSView *)tabView;
-@property (nonatomic, readonly) NSTabViewItem *activeTab;
-@property (nonatomic, readonly) NSView<BaseView> *activeTabItemView;
--(NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate> *)primaryTabItemView;
--(void)setActiveTabToPrimaryTab;
--(void)closeTab:(NSTabViewItem *)tabViewItem;
--(void)closeAllTabs;
-@property (nonatomic, readonly) NSInteger countOfTabs;
--(void)showArticlesTab;
+#pragma mark - tab controls
+
+-(void)switchToPrimaryTab;
 -(void)showPreviousTab;
 -(void)showNextTab;
 -(void)saveOpenTabs;
+-(void)closeActiveTab;
+-(void)closeAllTabs;
+
 @end

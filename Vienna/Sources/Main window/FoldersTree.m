@@ -27,11 +27,11 @@
 #import "HelperFunctions.h"
 #import "StringExtensions.h"
 #import "FolderView.h"
-#import "Browser.h"
 #import "OpenReader.h"
 #import "Database.h"
 #import "TreeNode.h"
 #import "Folder.h"
+#import "Vienna-Swift.h"
 
 @interface FoldersTree ()
 
@@ -1102,7 +1102,7 @@
  */
 -(void)outlineViewWillBecomeFirstResponder
 {
-	[self.controller.browser setActiveTabToPrimaryTab];
+	[self.controller.browser switchToPrimaryTab];
 	[self enableFoldersRenamingAfterDelay];
 }
 

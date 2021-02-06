@@ -19,10 +19,10 @@
 //
 
 @import Cocoa;
-@import MMTabBarView;
 @import WebKit;
 
 #import "BaseView.h"
+#import "Vienna-Swift.h"
 
 // This is defined somewhere but I can't find where.
 #define WebKitErrorPlugInWillHandleLoad	204
@@ -35,7 +35,7 @@
 @interface BrowserPaneButton : NSButton {}
 @end
 
-@interface BrowserPane : NSView<BaseView, WebFrameLoadDelegate, MMTabBarItem> {
+@interface BrowserPane : NSView <BaseView, WebFrameLoadDelegate, MMTabBarItem, Tab> {
 	IBOutlet NSButton * backButton;
 	IBOutlet NSButton * forwardButton;
 	IBOutlet NSButton * refreshButton;
@@ -45,8 +45,7 @@
 	IBOutlet NSImageView * lockIconImage;
 	NSString * pageFilename;
 	NSError * lastError;
-	BOOL isLocalFile;
-	BOOL isLoading;
+	BOOL loading;
 	BOOL hasRSSlink;
 }
 
@@ -60,15 +59,18 @@
 -(IBAction)handleRSSPage:(id)sender;
 
 // Accessor functions
--(void)load;
+-(void)loadTab;
 @property (weak) NSTabViewItem *tab;
-@property (nonatomic) NSURL *url;
-@property (nonatomic, copy) NSString *viewTitle;
-@property (nonatomic, getter=isLoading, readonly) BOOL loading;
+@property (nonatomic, copy) NSURL *tabUrl;
+@property (copy) NSString *title;
+@property (nonatomic, readonly) BOOL loading;
 @property (nonatomic, readonly) BOOL canGoBack;
 @property (nonatomic, readonly) BOOL canGoForward;
 -(void)handleStopLoading:(id)sender;
 -(void)activateAddressBar;
+@property (readonly, copy) NSString *textSelection;
+@property (readonly, copy) NSString *html;
+
 
 //tabBarItem functions
 @property (assign) BOOL hasCloseButton;

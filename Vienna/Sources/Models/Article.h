@@ -109,6 +109,5 @@ typedef NS_ENUM(NSInteger, ArticleStatus) {
 -(void)markFlagged:(BOOL)flag;
 -(void)markDeleted:(BOOL)flag;
 -(void)markEnclosureDownloaded:(BOOL)flag;
--(NSString *)expandTags:(NSString *)theString withConditional:(BOOL)cond;
 
 @end

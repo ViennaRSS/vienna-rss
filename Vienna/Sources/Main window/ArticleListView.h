@@ -28,11 +28,13 @@
 @class ArticleView;
 @class MessageListView;
 @class EnclosureView;
+@protocol ArticleContentView;
+@protocol ArticleViewDelegate;
 
-@interface ArticleListView : NSView<BaseView, ArticleBaseView, NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate>
+@interface ArticleListView : NSView<BaseView, ArticleBaseView, ArticleViewDelegate, NSTableViewDelegate, NSTableViewDataSource>
 {
 	IBOutlet MessageListView * articleList;
-	IBOutlet ArticleView * articleText;
+    NSObject<ArticleContentView> *articleText;
 	IBOutlet NSSplitView * splitView2;
 	IBOutlet EnclosureView * enclosureView;
 
@@ -56,13 +58,9 @@
 	NSMutableDictionary * unreadTopLineSelectionDict;
 
 	NSURL *	currentURL;
-	BOOL isCurrentPageFullHTML;
 	BOOL isLoadingHTMLArticle;
-	NSError * lastError;
 	NSProgressIndicator * progressIndicator;
 }
-
-@property (weak, nonatomic) AppController *controller;
 
 // Public functions
 -(void)updateAlternateMenuTitle;
@@ -71,5 +69,5 @@
 -(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 -(void)loadArticleLink:(NSString *) articleLink;
 @property (nonatomic, readonly, copy) NSURL *url;
--(void)webViewLoadFinished:(NSNotification *)notification;
+
 @end

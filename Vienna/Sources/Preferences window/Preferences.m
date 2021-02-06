@@ -49,6 +49,8 @@ static Preferences * _standardPreferences = nil;
 
 @property (nonatomic, readonly, copy) NSDictionary *allocFactoryDefaults;
 
+@property (nonatomic) NSNumber *useNewBrowserInternal;
+
 -(void)createFeedSourcesFolderIfNecessary;
 
 @end
@@ -178,6 +180,7 @@ static Preferences * _standardPreferences = nil;
 		showStatusBar = [self boolForKey:MAPref_ShowStatusBar];
 		showFilterBar = [self boolForKey:MAPref_ShowFilterBar];
 		useJavaScript = [self boolForKey:MAPref_UseJavaScript];
+        useNewBrowser = [self boolForKey:MAPref_UseNewBrowser];
         useWebPlugins = [self boolForKey:MAPref_UseWebPlugins];
 		showAppInStatusBar = [self boolForKey:MAPref_ShowAppInStatusBar];
 		folderFont = [NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_FolderFont]];
@@ -261,6 +264,7 @@ static Preferences * _standardPreferences = nil;
 	defaultValues[MAPref_AutoSortFoldersTree] = [NSNumber numberWithInt:VNAFolderSortManual];
 	defaultValues[MAPref_ShowFolderImages] = boolYes;
 	defaultValues[MAPref_UseJavaScript] = boolYes;
+    defaultValues[MAPref_UseNewBrowser] = boolNo;
     defaultValues[MAPref_UseWebPlugins] = boolYes;
 	defaultValues[MAPref_OpenLinksInVienna] = boolYes;
 	defaultValues[MAPref_OpenLinksInBackground] = boolYes;
@@ -464,6 +468,15 @@ static Preferences * _standardPreferences = nil;
 	return useJavaScript;
 }
 
+-(BOOL)useNewBrowser
+{
+    if (!_useNewBrowserInternal) {
+        //init only once per application run
+        _useNewBrowserInternal = [NSNumber numberWithBool:useNewBrowser];
+    }
+    return [_useNewBrowserInternal boolValue];
+}
+
 /* setEnableJavaScript
  * Enable whether JavaScript is used.
  */
@@ -476,6 +489,12 @@ static Preferences * _standardPreferences = nil;
 		[[NSNotificationCenter defaultCenter] postNotificationName:kMA_Notify_UseJavaScriptChange
                                                             object:nil];
 	}
+}
+
+-(void)setUseNewBrowser:(BOOL)flag
+{
+    [self setBool:flag forKey:MAPref_UseNewBrowser];
+    useNewBrowser = flag;
 }
 
 

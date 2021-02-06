@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Browser.h"
+#import "WebViewBrowser.h"
 @import WebKit;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Browser (WebUIDelegate) <WebUIDelegate>
+@interface WebViewBrowser (WebUIDelegate) <WebUIDelegate>
 
 @end
 

@@ -23,22 +23,37 @@ final class MainWindowController: NSWindowController {
 
     // MARK: Transitional outlets
 
+    @IBOutlet private(set) var splitView: NSSplitView!
     @IBOutlet private(set) var outlineView: FolderView?
-    @IBOutlet private(set) var browser: Browser?
     @IBOutlet private(set) var articleListView: ArticleListView?
     @IBOutlet private(set) var unifiedDisplayView: UnifiedDisplayView?
     @IBOutlet private(set) var filterDisclosureView: DisclosureView?
     @IBOutlet private(set) var filterSearchField: NSSearchField?
 
     @objc private(set) var toolbarSearchField: NSSearchField?
+    @IBOutlet private(set) weak var placeholderDetailView: NSView!
+
+    @objc private(set) lazy var browser: (Browser & NSViewController) = {
+        var controller = Preferences.standard.useNewBrowser
+            ? TabbedBrowserViewController() as (Browser & NSViewController)
+            : WebViewBrowser()
+        return controller
+    }()
 
     // MARK: Initialization
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        (self.browser as? RSSSource)?.rssSubscriber = self
+
+        (self.browser as? TabbedBrowserViewController)?.contextMenuDelegate = self
+
         // TODO: Move this to windowDidLoad()
         statusBarState(disclosed: Preferences.standard.showStatusBar, animate: false)
+
+        splitView.addSubview(browser.view)
+        placeholderDetailView.removeFromSuperview()
 
         let filterMenu = (NSApp as? ViennaApp)?.filterMenu
         let filterMode = Preferences.standard.filterMode
@@ -168,7 +183,7 @@ extension MainWindowController: NSWindowDelegate {
 extension MainWindowController: NSToolbarDelegate {
 
     private var pluginManager: PluginManager? {
-        return (NSApp.delegate as? AppController)?.pluginManager
+        return NSApp.appController.pluginManager
     }
 
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
@@ -258,7 +273,7 @@ extension MainWindowController: NSMenuDelegate {
             menu.removeItem(menuItem)
         }
 
-        if let styles = (Array(ArticleView.loadStylesMap().keys) as? [String])?.sorted() {
+        if let styles = (Array(ArticleStyleLoader.reloadStylesMap().allKeys) as? [String])?.sorted() {
             var index = 0
             while index < styles.count {
                 menu.insertItem(withTitle: styles[index],
@@ -269,5 +284,28 @@ extension MainWindowController: NSMenuDelegate {
             }
         }
     }
+}
 
+// MARK: - Rss subscriber
+
+extension MainWindowController: RSSSubscriber {
+
+    func isInterestedIn(_ url: URL) -> Bool {
+        // TODO: check whether we already subscribed to feed
+        return true
+    }
+
+    func subscribeToRSS(_ urls: [URL]) {
+        // TODO : if there are multiple feeds, we should put up an UI inviting the user to pick one, as also mentioned in SubscriptionModel.m verifiedFeedURLFromURL method
+        // TODO : allow user to select a folder instead of assuming current location (see #1163)
+        NSApp.appController.createSubscriptionInCurrentLocation(for: urls[0])
+    }
+}
+
+// MARK: - Browser context menu
+
+extension MainWindowController: BrowserContextMenuDelegate {
+    func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem] {
+        return WebKitContextMenuCustomizer.contextMenuItemsFor(purpose: purpose, existingMenuItems: existingMenuItems)
+    }
 }
