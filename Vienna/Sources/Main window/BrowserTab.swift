@@ -42,10 +42,8 @@ class BrowserTab: NSViewController {
 
     var url: URL? = nil {
         didSet {
-            if self.url != webView.url || self.url == nil {
-                self.title = self.url?.host ?? NSLocalizedString("New Tab", comment: "")
-            }
-            self.addressField?.stringValue = self.url?.absoluteString ?? ""
+            updateTabTitle()
+            updateUrlTextField()
         }
     }
 
@@ -74,7 +72,7 @@ class BrowserTab: NSViewController {
         self.webView = CustomWKWebView(configuration: config)
 
         if #available(macOS 10.14, *) {
-            super.init(nibName: "BrowserTab", bundle: nil) // TODO: allow override
+            super.init(nibName: "BrowserTab", bundle: nil)
         } else {
             super.init(nibName: "BrowserTabWithLegacyAddressBar", bundle: nil)
         }
@@ -98,7 +96,7 @@ class BrowserTab: NSViewController {
             self?.loadingProgress = newValue
         }
         urlObservation = webView.observe(\.url, options: .new) { [weak self] _, change in
-            guard let newValue = change.newValue else {
+            guard let newValue = change.newValue, newValue != nil else {
                 return
             }
             self?.url = newValue
@@ -205,9 +203,9 @@ extension BrowserTab: Tab {
 
     func back() -> Bool {
         let couldGoBack = self.webView.goBack() != nil
-        // title observation not triggered by goBack() -> manual setting
+        // title and url observation not triggered by goBack() -> manual setting
         self.url = self.webView.url
-        self.title = self.webView.title
+        updateTabTitle()
         return couldGoBack
     }
 
@@ -215,7 +213,7 @@ extension BrowserTab: Tab {
         let couldGoForward = self.webView.goForward() != nil
         // title observation not triggered by goForware() -> manual setting
         self.url = self.webView.url
-        self.title = self.webView.title
+        updateTabTitle()
         return couldGoForward
     }
 
@@ -253,7 +251,14 @@ extension BrowserTab: Tab {
     }
 
     func reloadTab() {
-        self.webView.reload()
+        if self.webView.url != nil {
+            self.webView.reload()
+            //to know what we have reloaded if the text was changed manually
+            updateUrlTextField()
+        } else {
+            //when we have never loaded the webview yet, reload is actually load
+            loadTab()
+        }
     }
 
     func stopLoadingTab() {

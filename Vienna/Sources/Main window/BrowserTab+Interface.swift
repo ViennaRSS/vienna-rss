@@ -139,6 +139,26 @@ extension BrowserTab {
             }
         }
     }
+
+    func updateTabTitle() {
+        if self.url != webView.url || self.url == nil {
+            //currently loading (the first time), webview title not yet correct / available
+            self.title = self.url?.host ?? NSLocalizedString("New Tab", comment: "")
+        } else if let title = self.webView.title, !title.isEmpty {
+            self.title = title
+        } else {
+            //webview is about:blank or empty
+            self.title = NSLocalizedString("New Tab", comment: "")
+        }
+    }
+
+    func updateUrlTextField() {
+        if let url = self.url, url != URL.blank {
+            self.addressField?.stringValue = url.absoluteString
+        } else {
+            self.addressField?.stringValue = ""
+        }
+    }
 }
 
 // MARK: Address Bar Delegate
