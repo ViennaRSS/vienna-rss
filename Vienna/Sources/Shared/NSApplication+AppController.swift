@@ -22,7 +22,9 @@ import Foundation
 extension NSApplication {
 
     var appController: AppController {
-        return self.delegate as! AppController
+        return self.delegate as? AppController ?? {
+            fatalError("AppController must be the delegate of this applicaiton")
+        }()
     }
 
 }
