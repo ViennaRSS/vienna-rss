@@ -247,8 +247,7 @@ extension BrowserTab: Tab {
                 self.activateWebView()
             }
         } else {
-            // TODO: this seems to wipe history, which we do not want
-            self.webView.loadHTMLString("", baseURL: nil)
+            self.webView.load(URLRequest(url: URL.blank))
             self.activateAddressBar()
         }
     }

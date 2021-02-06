@@ -197,8 +197,7 @@ extension CustomWKWebView {
     private func customize(contextMenu menu: NSMenu) {
 
         guard let contextMenuProvider = contextMenuProvider,
-              let contextMenuListener = contextMenuListener,
-              let blankUrl = URL(string: "about:blank") else {
+              let contextMenuListener = contextMenuListener else {
             return
         }
 
@@ -210,16 +209,16 @@ extension CustomWKWebView {
 
         if clickedOnLink && clickedOnImage {
             context = .pictureLink(
-                image: contextMenuListener.lastRightClickedImgSrc ?? blankUrl,
-                link: contextMenuListener.lastRightClickedLink ?? blankUrl)
+                image: contextMenuListener.lastRightClickedImgSrc ?? URL.blank,
+                link: contextMenuListener.lastRightClickedLink ?? URL.blank)
         } else if clickedOnLink {
-            context = .link(contextMenuListener.lastRightClickedLink ?? blankUrl)
+            context = .link(contextMenuListener.lastRightClickedLink ?? URL.blank)
         } else if clickedOnImage {
-            context = .picture(contextMenuListener.lastRightClickedImgSrc ?? blankUrl)
+            context = .picture(contextMenuListener.lastRightClickedImgSrc ?? URL.blank)
         } else if clickedOnText {
             context = .text(contextMenuListener.lastSelectedText ?? "")
         } else {
-            context = .page(url: self.url ?? blankUrl)
+            context = .page(url: self.url ?? URL.blank)
         }
 
         menu.items = contextMenuProvider.contextMenuItemsFor(purpose: context, existingMenuItems: menu.items)

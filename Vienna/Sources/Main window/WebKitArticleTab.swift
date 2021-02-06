@@ -58,10 +58,7 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
     }
 
     func clearHTML() {
-        guard let blankUrl = URL(string: "about:blank") else {
-            return
-        }
-        self.url = blankUrl
+        self.url = URL.blank
         self.loadTab()
     }
 
