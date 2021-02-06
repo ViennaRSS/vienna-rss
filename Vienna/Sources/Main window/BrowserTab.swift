@@ -34,7 +34,7 @@ class BrowserTab: NSViewController {
     @IBOutlet private(set) weak var reloadButton: NSButton!
     @IBOutlet private(set) weak var progressBar: LoadingIndicator?
 
-    var fullscreenWebViewTopConstraint: NSLayoutConstraint!
+    var webViewTopConstraint: NSLayoutConstraint!
 
     @IBOutlet private(set) weak var cancelButtonWidth: NSLayoutConstraint!
     @IBOutlet private(set) weak var reloadButtonWidth: NSLayoutConstraint!
@@ -73,10 +73,10 @@ class BrowserTab: NSViewController {
 
         self.webView = CustomWKWebView(configuration: config)
 
-        if #available(macOS 10.12, *) {
+        if #available(macOS 10.14, *) {
             super.init(nibName: "BrowserTab", bundle: nil) // TODO: allow override
         } else {
-            super.init(nibName: "BrowserTabBeforeMacOS12", bundle: nil)
+            super.init(nibName: "BrowserTabWithLegacyAddressBar", bundle: nil)
         }
 
         titleObservation = webView.observe(\.title, options: .new) { [weak self] _, change in
@@ -128,19 +128,11 @@ class BrowserTab: NSViewController {
 
         // set up webview (not yet possible via interface builder)
         webView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(webView, positioned: .below, relativeTo: nil)
+        self.view.addSubview(webView, positioned: .below, relativeTo: addressBarContainer)
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
-
-        let defaultWebViewTopConstraint = NSLayoutConstraint(item: addressBarContainer!, attribute: .bottom, relatedBy: .equal, toItem: webView, attribute: .top, multiplier: 1, constant: 0)
-        // Lower priority than fullscreen constraint so we can compress it
-        defaultWebViewTopConstraint.priority = NSLayoutConstraint.Priority(999)
+        webViewTopConstraint = NSLayoutConstraint(item: self.view, attribute: .top, relatedBy: .equal, toItem: webView, attribute: .top, multiplier: -1, constant: 0)
         let webViewBottomConstraint = NSLayoutConstraint(item: webView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 0)
-
-        self.view.addConstraints([defaultWebViewTopConstraint, webViewBottomConstraint])
-
-        // Only prepare fullscreen constraint,
-        // add / remove it with hideAddressBar(true / false)
-        self.fullscreenWebViewTopConstraint = NSLayoutConstraint(item: webView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0)
+        self.view.addConstraints([webViewTopConstraint, webViewBottomConstraint])
 
         // title needs to be adjusted once view is loaded
 
@@ -155,6 +147,8 @@ class BrowserTab: NSViewController {
         self.viewDidLoadRss()
 
         updateAddressBarButtons()
+
+        updateWebViewInsets()
 
         // set up address bar handling
         addressField.delegate = self

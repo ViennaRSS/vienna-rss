@@ -124,8 +124,20 @@ extension BrowserTab {
     func hideAddressBar(_ hide: Bool, animated: Bool = false) {
         // We need to use the optional here in case view is not yet loaded
         addressBarContainer?.isHidden = hide
-        fullscreenWebViewTopConstraint?.isActive = hide
+        updateWebViewInsets()
         // TODO: animated show / hide
+    }
+
+    func updateWebViewInsets() {
+        if let addressBarContainer = addressBarContainer {
+            let distanceToTop = addressBarContainer.isHidden ? 0 : addressBarContainer.frame.height
+            if #available(macOS 10.14, *) {
+                webView._automaticallyAdjustsContentInsets = false
+                webView._topContentInset = distanceToTop
+            } else {
+                self.webViewTopConstraint.constant = distanceToTop
+            }
+        }
     }
 }
 

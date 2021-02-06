@@ -8,7 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BrowserTab" customModule="Vienna" customModuleProvider="target">
             <connections>
-                <outlet property="addressBarContainer" destination="OdK-ur-PPi" id="m02-Ac-2eP"/>
+                <outlet property="addressBarContainer" destination="yDt-Ik-jdd" id="hDR-Xi-rRd"/>
                 <outlet property="addressField" destination="hfe-el-NfG" id="Sfl-fz-aCb"/>
                 <outlet property="backButton" destination="0rn-z0-yA2" id="1VR-2q-DKI"/>
                 <outlet property="cancelButtonWidth" destination="d6o-Yg-btU" id="JzC-dn-rMv"/>
@@ -26,7 +26,7 @@
             <rect key="frame" x="0.0" y="0.0" width="879" height="272"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="OdK-ur-PPi">
+                <visualEffectView blendingMode="withinWindow" material="titlebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="yDt-Ik-jdd">
                     <rect key="frame" x="0.0" y="242" width="879" height="30"/>
                     <subviews>
                         <customView verticalHuggingPriority="999" verticalCompressionResistancePriority="999" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="4" translatesAutoresizingMaskIntoConstraints="NO" id="t9A-Dp-YtC" customClass="LoadingIndicator" customModule="Vienna" customModuleProvider="target">
@@ -36,7 +36,7 @@
                             <rect key="frame" x="5" y="5" width="869" height="20"/>
                             <subviews>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0rn-z0-yA2">
-                                    <rect key="frame" x="0.0" y="-2" width="20" height="25"/>
+                                    <rect key="frame" x="0.0" y="-2" width="20.5" height="24.5"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="20" id="HLA-5B-V5x"/>
                                     </constraints>
@@ -49,7 +49,7 @@
                                     </connections>
                                 </button>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aeH-Zd-eUj">
-                                    <rect key="frame" x="23" y="-2" width="20" height="25"/>
+                                    <rect key="frame" x="23" y="-2" width="20" height="24.5"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="20" id="Qpb-UX-zNR"/>
                                     </constraints>
@@ -92,7 +92,7 @@
                                     <rect key="frame" x="806" y="0.0" width="30" height="20"/>
                                     <subviews>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oDE-XG-Zic">
-                                            <rect key="frame" x="0.0" y="0.0" width="30" height="20"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="30" height="21.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSStopProgressTemplate" imagePosition="only" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="Qgx-sg-FMt">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
@@ -111,7 +111,7 @@
                                     <rect key="frame" x="839" y="0.0" width="30" height="20"/>
                                     <subviews>
                                         <button verticalHuggingPriority="751" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u6u-kW-eOW">
-                                            <rect key="frame" x="0.0" y="0.0" width="30" height="20"/>
+                                            <rect key="frame" x="0.0" y="1.5" width="30" height="19.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSRefreshTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="RBR-fu-w5E">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
@@ -153,29 +153,34 @@
                         </stackView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="t9A-Dp-YtC" firstAttribute="top" secondItem="OeK-Vl-Vdl" secondAttribute="bottom" constant="1" id="CWf-ps-4nd"/>
-                        <constraint firstItem="OeK-Vl-Vdl" firstAttribute="top" secondItem="OdK-ur-PPi" secondAttribute="top" constant="5" id="JCE-Ao-Vhl"/>
-                        <constraint firstItem="t9A-Dp-YtC" firstAttribute="leading" secondItem="OdK-ur-PPi" secondAttribute="leading" id="OS4-ki-7NH"/>
-                        <constraint firstItem="OeK-Vl-Vdl" firstAttribute="leading" secondItem="OdK-ur-PPi" secondAttribute="leading" constant="5" id="X9W-5S-Mxh"/>
-                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="OeK-Vl-Vdl" secondAttribute="bottom" constant="5" placeholder="YES" id="bJ5-s8-g8i"/>
-                        <constraint firstAttribute="bottom" secondItem="t9A-Dp-YtC" secondAttribute="bottom" priority="999" id="exe-5X-px6"/>
-                        <constraint firstAttribute="trailing" secondItem="t9A-Dp-YtC" secondAttribute="trailing" id="rHZ-MY-l59"/>
-                        <constraint firstAttribute="trailing" secondItem="OeK-Vl-Vdl" secondAttribute="trailing" constant="5" id="wyE-Du-Aml"/>
+                        <constraint firstAttribute="trailing" secondItem="t9A-Dp-YtC" secondAttribute="trailing" id="1GT-yq-ra5"/>
+                        <constraint firstItem="OeK-Vl-Vdl" firstAttribute="leading" secondItem="yDt-Ik-jdd" secondAttribute="leading" constant="5" id="Roh-3q-E6k"/>
+                        <constraint firstItem="OeK-Vl-Vdl" firstAttribute="top" secondItem="yDt-Ik-jdd" secondAttribute="top" constant="5" id="fwP-dp-v16"/>
+                        <constraint firstItem="t9A-Dp-YtC" firstAttribute="leading" secondItem="yDt-Ik-jdd" secondAttribute="leading" id="gvW-92-c7x"/>
+                        <constraint firstItem="t9A-Dp-YtC" firstAttribute="top" secondItem="OeK-Vl-Vdl" secondAttribute="bottom" constant="1" id="lLg-eq-Aqr"/>
+                        <constraint firstAttribute="bottom" secondItem="t9A-Dp-YtC" secondAttribute="bottom" priority="999" id="nS3-mV-Bdd"/>
+                        <constraint firstAttribute="trailing" secondItem="OeK-Vl-Vdl" secondAttribute="trailing" constant="5" id="pbd-b7-r9E"/>
+                        <constraint firstAttribute="bottom" secondItem="OeK-Vl-Vdl" secondAttribute="bottom" constant="5" id="pmp-Fq-Yim"/>
                     </constraints>
-                </customView>
+                </visualEffectView>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="OdK-ur-PPi" secondAttribute="trailing" id="GQl-7P-Zxv"/>
-                <constraint firstItem="OdK-ur-PPi" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="HPX-M0-cM2"/>
-                <constraint firstItem="OdK-ur-PPi" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="VMa-hU-e5D"/>
+                <constraint firstAttribute="trailing" secondItem="yDt-Ik-jdd" secondAttribute="trailing" id="AIS-Sn-9ds"/>
+                <constraint firstItem="yDt-Ik-jdd" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="Rwy-av-How"/>
+                <constraint firstItem="yDt-Ik-jdd" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="cjv-Rr-cHU"/>
             </constraints>
             <point key="canvasLocation" x="106.5" y="154"/>
         </customView>
     </objects>
+    <designables>
+        <designable name="t9A-Dp-YtC">
+            <size key="intrinsicContentSize" width="-1" height="4"/>
+        </designable>
+    </designables>
     <resources>
         <image name="NSGoBackTemplate" width="10" height="14"/>
         <image name="NSGoForwardTemplate" width="10" height="14"/>
         <image name="NSRefreshTemplate" width="14" height="16"/>
-        <image name="NSStopProgressTemplate" width="15" height="13"/>
+        <image name="NSStopProgressTemplate" width="14" height="13"/>
     </resources>
 </document>
