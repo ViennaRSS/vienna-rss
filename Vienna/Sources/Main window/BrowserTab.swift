@@ -259,6 +259,8 @@ extension BrowserTab: Tab {
 
     func stopLoadingTab() {
         self.webView.stopLoading()
+        //we must manually invoke navigation end callbacks
+        self.handleNavigationEnd(success: false)
     }
 
     func decreaseTextSize() {
