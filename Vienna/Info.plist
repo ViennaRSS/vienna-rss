@@ -129,7 +129,7 @@
 	<key>NSAppleScriptEnabled</key>
 	<string>YES</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2004–2019 The Vienna RSS Project</string>
+	<string>© 2004–2021 The Vienna RSS Project</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
@@ -151,7 +151,7 @@
 			<key>UTTypeIcons</key>
 			<dict>
 				<key>UTTypeIconText</key>
-				<string>Vienna plug-in</string>
+				<string>Plug-in</string>
 			</dict>
 			<key>UTTypeIdentifier</key>
 			<string>com.vienna-rss.plugin</string>
@@ -174,7 +174,7 @@
 			<key>UTTypeIcons</key>
 			<dict>
 				<key>UTTypeIconText</key>
-				<string>Vienna style</string>
+				<string>Style</string>
 			</dict>
 			<key>UTTypeIdentifier</key>
 			<string>com.vienna-rss.style</string>
