@@ -80,7 +80,6 @@
 -(void)setFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
 -(void)setPersistedFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
 -(void)runAppleScript:(NSString *)scriptName;
-@property (nonatomic, readonly, copy) NSString *appName;
 -(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url body:(NSString *)body author:(NSString *)author guid:(NSString *)guid;
 -(void)setLayout:(NSInteger)newLayout withRefresh:(BOOL)refreshFlag;
 -(void)updateAlternateMenuTitle;
@@ -1490,18 +1489,19 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         // Don't show a count if there are no unread articles
         if (currentCountOfUnread <= 0) {
             NSApp.dockTile.badgeLabel = nil;
-            if (@available(macOS 11.0, *)) {
-                // Do nothing
+            if (@available(macOS 11, *)) {
+                self.mainWindow.subtitle = [NSString string];
             } else {
-                self.mainWindow.title = self.appName;
+                self.mainWindow.title = NSRunningApplication.currentApplication.localizedName;
             }
             return;
         }
 
-        if (@available(macOS 11.0, *)) {
-            self.mainWindow.subtitle = [NSString stringWithFormat:@"%li %@", (long)currentCountOfUnread, NSLocalizedString(@"Unread", nil)];
-        } else {
-            self.mainWindow.title = [NSString stringWithFormat:@"%@ (%li %@)", self.appName, (long)currentCountOfUnread, NSLocalizedString(@"Unread", nil)];
+        NSString *countString = [NSString stringWithFormat:NSLocalizedString(@"%u unread", nil), (unsigned)currentCountOfUnread];
+        if (@available(macOS 11, *)) {
+            self.mainWindow.subtitle = countString;
+        } else {;
+            self.mainWindow.title = [NSString stringWithFormat:@"%@ (%@)", NSRunningApplication.currentApplication.localizedName, countString];
         }
 
         // Exit now if we're not showing the unread count on the application icon
@@ -1560,14 +1560,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(NSArray *)folders
 {
 	return [db arrayOfAllFolders];
-}
-
-/* appName
- * Returns's the application friendly (localized) name.
- */
--(NSString *)appName
-{
-	return [NSBundle mainBundle].infoDictionary[@"CFBundleName"];
 }
 
 /* selectedArticle
@@ -2890,7 +2882,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			alternateLocation = NSLocalizedString(@"External Browser", nil);
 	}
 	else
-		alternateLocation = self.appName;
+		alternateLocation = NSRunningApplication.currentApplication.localizedName;
 	NSMenuItem * item = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
 	if (item != nil)
 	{
