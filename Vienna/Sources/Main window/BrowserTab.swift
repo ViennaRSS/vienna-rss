@@ -51,6 +51,10 @@ class BrowserTab: NSViewController {
 
     var loading: Bool = false
 
+    var loadingProgress: Double = 0 {
+        didSet { updateVisualLoadingProgress() }
+    }
+
     /// backing storage only, access via rssSubscriber property
     weak var rssDelegate: RSSSubscriber?
     /// backing storage only, access via rssUrl property
@@ -60,10 +64,10 @@ class BrowserTab: NSViewController {
 
     var viewVisible: Bool = false
 
-    var titleObservation: NSKeyValueObservation?
-    var loadingObservation: NSKeyValueObservation?
-    var progressObservation: NSKeyValueObservation?
-    var urlObservation: NSKeyValueObservation?
+    private var titleObservation: NSKeyValueObservation?
+    private var loadingObservation: NSKeyValueObservation?
+    private var progressObservation: NSKeyValueObservation?
+    private var urlObservation: NSKeyValueObservation?
 
     // MARK: object lifecycle
 

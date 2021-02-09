@@ -38,8 +38,12 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
 
     override var tabUrl: URL? {
         get { super.tabUrl }
-        set {
-            super.tabUrl = newValue
+        set { super.tabUrl = newValue }
+    }
+
+    override var loadingProgress: Double {
+        didSet {
+            updateLoadingProgress(oldValue)
         }
     }
 
@@ -102,6 +106,23 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
 
     override func activateWebView() {
         // TODO: ignored intentionally. Find more elegant solution
+    }
+
+    func updateLoadingProgress(_ oldProgress: Double) {
+        guard let animationLayer = self.view.layer else {
+            return
+        }
+
+        let toValue = Float(loadingProgress)
+        let fromValue = animationLayer.presentation()?.opacity ?? animationLayer.opacity
+
+        let animation = CABasicAnimation(keyPath: "opacity")
+        animation.fromValue = fromValue
+        animation.toValue = toValue
+        animation.duration = fromValue < toValue ? 0.3 : 0.05
+        animationLayer.add(animation, forKey: "opacityAnimation")
+
+        animationLayer.opacity = toValue
     }
 
     // MARK: Navigation delegate

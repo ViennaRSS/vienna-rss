@@ -74,19 +74,15 @@ extension BrowserTab {
 
     // MARK: UI Updates
 
-    var loadingProgress: Double {
-        get { Double(progressBar?.currentLoadingProgress ?? 0) }
-        set { updateLoadingProgress(newValue) }
-    }
-
-    private func updateLoadingProgress(_ newValue: Double) {
+    func updateVisualLoadingProgress() {
         guard let progressBar = progressBar else {
             return
         }
-        let new = CGFloat(newValue)
-        let old = progressBar.currentLoadingProgress
-        progressBar.setLoadingProgress(new, animationDuration: old < new ? 0.3 : 0.05)
-        if new == 1.0 {
+        let loadingProgress = CGFloat(self.loadingProgress)
+        //small value for backwards animation to avoid default duration
+        let duration = progressBar.currentLoadingProgress < loadingProgress ? 0.3 : 0.001
+        progressBar.setLoadingProgress(loadingProgress, animationDuration: duration)
+        if loadingProgress == 1.0 {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4) {
                 progressBar.isHidden = true
             }

@@ -88,7 +88,7 @@ class LoadingIndicator: NSView {
         path.move(to: CGPoint(x: 0.0, y: 1.0))
         path.addLine(to: CGPoint(x: self.frame.size.width, y: 1.0))
         animationLayer.path = path
-        setLoadingProgress(loadingProgress)
+        setLoadingProgress(currentLoadingProgress)
     }
 
     // MARK: Animating
@@ -98,18 +98,13 @@ class LoadingIndicator: NSView {
     }
 
     func setLoadingProgress(_ newProgress: CGFloat, animationDuration: Double = 0.0) {
-        if animationDuration > 0.0 {
-            let animation = CABasicAnimation(keyPath: "strokeEnd")
-            animation.fromValue = animationLayer.presentation()?.strokeEnd ?? animationLayer.strokeEnd
-            animation.toValue = newProgress
-            animation.duration = animationDuration
-            animation.delegate = self
-            animationLayer.strokeEnd = newProgress
-            animationLayer.add(animation, forKey: "strokeEndAnimation")
-        } else {
-            animationLayer.removeAllAnimations()
-            animationLayer.strokeEnd = newProgress
-        }
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.fromValue = animationLayer.presentation()?.strokeEnd ?? animationLayer.strokeEnd
+        animation.toValue = newProgress
+        animation.duration = animationDuration
+        animation.delegate = self
+        animationLayer.add(animation, forKey: "strokeEndAnimation")
+        animationLayer.strokeEnd = newProgress
     }
 
 }
