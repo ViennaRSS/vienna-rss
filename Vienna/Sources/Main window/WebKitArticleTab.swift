@@ -113,8 +113,8 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
             return
         }
 
-        let toValue = Float(loadingProgress)
-        let fromValue = animationLayer.presentation()?.opacity ?? animationLayer.opacity
+        let toValue = max(0.75, Float(loadingProgress))
+        let fromValue = max(0.50, animationLayer.presentation()?.opacity ?? animationLayer.opacity)
 
         let animation = CABasicAnimation(keyPath: "opacity")
         animation.fromValue = fromValue
