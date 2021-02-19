@@ -98,22 +98,22 @@ extension BrowserTab {
 
         if showRssButton {
             // show rss button
-            rssButtonWidth.constant = 40
+            rssButtonWidth?.constant = 40
         } else {
             // hide rss button
-            rssButtonWidth.constant = 0
+            rssButtonWidth?.constant = 0
         }
 
-        addressBarContainer.needsLayout = true
+        addressBarContainer?.needsLayout = true
 
         if viewVisible {
             NSAnimationContext.runAnimationGroup({_ in
                 NSAnimationContext.current.duration = 0.2
                 NSAnimationContext.current.allowsImplicitAnimation = true
-                self.addressBarContainer.layoutSubtreeIfNeeded()
+                self.addressBarContainer?.layoutSubtreeIfNeeded()
             }, completionHandler: nil)
         } else {
-            self.addressBarContainer.layoutSubtreeIfNeeded()
+            self.addressBarContainer?.layoutSubtreeIfNeeded()
         }
     }
 
