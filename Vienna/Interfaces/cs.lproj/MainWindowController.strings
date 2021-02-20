@@ -136,6 +136,12 @@
 /* Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
 "SoG-b2-O1S.toolTip" = "Vynechat složku";
 
+/* Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU"; */
+"TSQ-UW-4gU.label" = "Akce";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Action"; ObjectID = "TSQ-UW-4gU"; */
+"TSQ-UW-4gU.paletteLabel" = "Akce";
+
 /* Class = "NSToolbarItem"; toolTip = "Additional actions for the selected folder"; ObjectID = "TSQ-UW-4gU"; */
 "TSQ-UW-4gU.toolTip" = "Dodatečné akce pro vybranou složku";
 
@@ -153,6 +159,12 @@
 
 /* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f"; */
 "Y0d-K7-46f.title" = "Informace";
+
+/* Class = "NSToolbarItem"; label = "Delete"; ObjectID = "Y22-Ul-q6w"; */
+"Y22-Ul-q6w.label" = "Odstranit";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Delete"; ObjectID = "Y22-Ul-q6w"; */
+"Y22-Ul-q6w.paletteLabel" = "Odstranit";
 
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2"; */
 "Zu1-zW-uo2.title" = "Otevřít domovskou stránku odebírání";

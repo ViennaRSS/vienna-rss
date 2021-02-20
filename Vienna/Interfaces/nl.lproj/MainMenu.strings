@@ -236,7 +236,7 @@
 "1067.title" = "Open artikelpagina in externe browser";
 
 /* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
-"1073.title" = "Link per e-mail verzenden";
+"1073.title" = "Verstuur link via e-mail";
 
 /* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
 "1084.title" = "Grotere tekst";
@@ -362,7 +362,7 @@
 "1428.title" = "Bijwerken abonnementen van Open Reader";
 
 /* Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458"; */
-"1458.title" = "Herindexeer databank";
+"1458.title" = "Indexeer databank opnieuw";
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "bd7-qY-ofB"; */
 "bd7-qY-ofB.title" = "Tekstvervanging";
@@ -449,7 +449,7 @@
 "v3R-CV-0b9.title" = "Zet om in beginhoofdletters";
 
 /* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "w4Q-ne-FPI"; */
-"w4Q-ne-FPI.title" = "Slimme koppelingen";
+"w4Q-ne-FPI.title" = "Slimme links";
 
 /* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "wnc-vZ-fO4"; */
 "wnc-vZ-fO4.title" = "Toon vervangingen";

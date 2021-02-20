@@ -25,12 +25,6 @@
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "27s-E3-FHd"; */
 "27s-E3-FHd.title" = "Corriger l'orthographe automatiquement";
 
-/* Class = "NSMenuItem"; title = "Vienna"; ObjectID = "56"; */
-"56.title" = "Vienna";
-
-/* Class = "NSMenu"; title = "Vienna"; ObjectID = "57"; */
-"57.title" = "Vienna";
-
 /* Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58"; */
 "58.title" = "À propos de Vienna";
 

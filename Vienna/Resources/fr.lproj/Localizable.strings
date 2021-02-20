@@ -16,9 +16,6 @@
 /* Number of bytes received, e.g. 1 MB received */
 "%@ received" = "%@ reçu";
 
-/* {existing authors}, {new author name} */
-"%@, %@" = "%1$@, %2$@";
-
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "%d nouveaux articles récupérés";
 
@@ -653,9 +650,6 @@
 
 /* test for a folder (not operational as of Vienna 3.2) */
 "under" = "est inclus dans";
-
-/* No comment provided by engineer. */
-"Unread" = "Non lus";
 
 /* No comment provided by engineer. */
 "Unread Articles" = "Articles non lus";

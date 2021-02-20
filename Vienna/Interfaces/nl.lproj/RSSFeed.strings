@@ -11,7 +11,7 @@
 "106.title" = "Neem een nieuw abonnement";
 
 /* Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107"; */
-"107.title" = "Geef hieronder de koppeling voor het abonnement op, of kies een door de uitgever aangegeven koppeling op uit het menu hieronder.";
+"107.title" = "Geef hieronder de link voor het abonnement op, of kies een door de uitgever aangegeven link op uit het menu hieronder.";
 
 /* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
 "110.title" = "URL:";

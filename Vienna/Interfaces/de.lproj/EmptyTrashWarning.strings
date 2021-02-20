@@ -2,7 +2,7 @@
 "17.title" = "Papierkorb leeren";
 
 /* Class = "NSButtonCell"; title = "Don't Empty Trash"; ObjectID = "18"; */
-"18.title" = "Papierkorb NICHT leeren";
+"18.title" = "Papierkorb nicht leeren";
 
 /* Class = "NSTextFieldCell"; title = "There are deleted articles in the trash. Would you like to empty the trash before quitting?"; ObjectID = "19"; */
 "19.title" = "Es gibt noch gelöschte Artikel im Papierkorb. Möchtest du den Papierkorb vor Beenden leeren?";
