@@ -53,6 +53,28 @@
 	return [super becomeFirstResponder];
 }
 
+- (BOOL)validateProposedFirstResponder:(NSResponder *)responder
+                              forEvent:(NSEvent *)event
+{
+    // This prevents the text field in the outline-view cell to respond to right
+    // clicks. A right click can enable the text-field editing, e.g. when a cell
+    // is selected and the user right clicks on the cell to open the menu. Since
+    // this is unwanted behavior, the right click should simply be ignored.
+    if ([((NSTextField *)responder).identifier isEqualToString:@"TextField"] &&
+        event.type == NSEventTypeRightMouseDown) {
+        return NO;
+    }
+
+    // This prevents the unread count from responding to mouse clicks; it will
+    // behave like a view instead of a button. The clicks will fall through to
+    // enclosing outline-view cell instead.
+    if ([((NSButton *)responder).identifier isEqualToString:@"CountButton"]) {
+        return NO;
+    }
+
+    return [super validateProposedFirstResponder:responder forEvent:event];
+}
+
 /* draggingSession:sourceOperationMaskForDraggingContext
  * Let the control know the expected behaviour for local and external drags.
  */

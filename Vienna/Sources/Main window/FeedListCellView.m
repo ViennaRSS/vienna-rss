@@ -46,6 +46,18 @@
     return self;
 }
 
+// MARK: Overrides
+
+// The cell view does not use the responder status itself, as selection and
+// clicking is handled by the outline view. It will give up first responder
+// status to the text field however. Since the whole frame of the cell view
+// responds to events, the text field is activated needlessly when the user
+// clicks anywhere within the frame. Disabling first responder avoids that.
+- (BOOL)acceptsFirstResponder
+{
+    return NO;
+}
+
 // MARK: Accessors
 
 - (void)setInProgress:(BOOL)inProgress

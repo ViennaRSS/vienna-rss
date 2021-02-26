@@ -47,6 +47,8 @@
 @property (nonatomic) BOOL canRenameFolders;
 @property (nonatomic) BOOL useToolTips;
 
+@property (nullable, weak) NSText *fieldEditor;
+
 -(void)setFolderListFont;
 -(void)unarchiveState:(NSArray *)stateArray;
 -(void)reloadDatabase:(NSArray *)stateArray;
@@ -63,8 +65,6 @@
 -(void)reloadFolderItem:(id)node reloadChildren:(BOOL)flag;
 -(void)expandToParent:(TreeNode *)node;
 -(BOOL)moveFolders:(NSArray *)array withGoogleSync:(BOOL)sync;
--(void)enableFoldersRenaming:(id)sender;
--(void)enableFoldersRenamingAfterDelay;
 
 @end
 
@@ -108,7 +108,6 @@
 	[self setFolderListFont];
 
 	// Allow a second click in a node to edit the node
-	self.outlineView.action = @selector(handleSingleClick:);
 	self.outlineView.doubleAction = @selector(handleDoubleClick:);
 	self.outlineView.target = self;
 
@@ -601,51 +600,75 @@
 	return folder ? ((folder.type == VNAFolderTypeGroup) ? folder.itemId : folder.parentId) : VNAFolderTypeRoot;
 }
 
-/* actualSelection
- * Return the ID of the selected folder in the folder list.
- */
--(NSInteger)actualSelection
+/// Returns the node identifier of the selected folder in the folder list.
+/// If the user has right-clicked a folder then that folder is returned.
+/// Otherwise, the last selected (i.e. highlighted) folder is returned.
+- (NSInteger)actualSelection
 {
-	TreeNode * node = [self.outlineView itemAtRow:self.outlineView.selectedRow];
+    NSInteger rowIndex = self.outlineView.clickedRow;
+
+    // A rowIndex of -1 means that no row has been clicked. In that case, fall
+    // back to the selected row. Note that a user might have selected multiple
+    // rows, but only the row that was added last to the selection is returned.
+    if (rowIndex == -1) {
+        rowIndex = self.outlineView.selectedRow;
+    }
+
+    TreeNode *node = [self.outlineView itemAtRow:rowIndex];
 	return node.nodeId;
 }
 
-/* countOfSelectedFolders
- * Return the total number of folders selected in the tree.
- */
--(NSInteger)countOfSelectedFolders
+/// Returns the total number of folders selected.
+- (NSInteger)countOfSelectedFolders
 {
-	return self.outlineView.numberOfSelectedRows;
+    return self.outlineView.numberOfSelectedRows;
 }
 
-/* selectedFolders
- * Returns an exclusive array of all selected folders. Exclusive means that if any folder is
- * a group folder, we don't automatically return a list of all folders within that group.
- */
--(NSArray *)selectedFolders
+/// Returns an array of all selected folders, without subfolders. If the user
+/// has clicked folders then those are returned, otherwise, selected (i.e.
+/// highlighted) folders are returned.
+- (NSArray *)selectedFolders
 {
-	NSIndexSet * rowIndexes = self.outlineView.selectedRowIndexes;
-	NSUInteger count = rowIndexes.count;
-	
-	// Make a mutable array
-	NSMutableArray * arrayOfSelectedFolders = [NSMutableArray arrayWithCapacity:count];
+    // Check first whether the user has selected a row by right-clicking. The
+    // tricky part is that the user can highlight multiple rows first and then
+    // either click on any one of the highlighted rows to make them all appear
+    // clicked (shown by a border around the selection) or click on a row that
+    // is not highlighted, in which case that row will not be highlighted, but
+    // still appear clicked.
+    //
+    // -clickedRow only ever returns the actual clicked row. In that case, the
+    // -selectedRowIndexes must be cross-checked to ascertain that the clicked
+    // row is part of the selection.
+    NSInteger clickedRow = self.outlineView.clickedRow;
+    NSIndexSet *selectedRows = self.outlineView.selectedRowIndexes;
 
-	if (count > 0)
-	{
-		NSUInteger index = rowIndexes.firstIndex;
-		while (index != NSNotFound)
-		{
-			TreeNode * node = [self.outlineView itemAtRow:index];
-			Folder * folder = node.folder;
-			if (folder != nil)
-			{
-				[arrayOfSelectedFolders addObject:folder];
-			}
-			index = [rowIndexes indexGreaterThanIndex:index];
-		}
-	}
-	
-	return [arrayOfSelectedFolders copy];
+    // A row index of -1 means that no row has been clicked.
+    if (clickedRow >= 0 && ![selectedRows containsIndex:clickedRow]) {
+        TreeNode *node = [self.outlineView itemAtRow:clickedRow];
+        Folder *folder = node.folder;
+        if (folder) {
+            return @[folder];
+        } else {
+            return @[];
+        }
+    }
+
+    NSUInteger count = selectedRows.count;
+    NSMutableArray *selectedFolders = [NSMutableArray arrayWithCapacity:count];
+
+    if (count > 0) {
+        NSUInteger index = selectedRows.firstIndex;
+        while (index != NSNotFound) {
+            TreeNode *node = [self.outlineView itemAtRow:index];
+            Folder *folder = node.folder;
+            if (folder) {
+                [selectedFolders addObject:folder];
+            }
+            index = [selectedRows indexGreaterThanIndex:index];
+        }
+    }
+
+    return [selectedFolders copy];
 }
 
 /* setManualSortOrderForNode
@@ -706,28 +729,12 @@
 	[self.outlineView reloadData];
 }
 
-/* handleSingleClick
- * If the folder is already highlighted, then edit the folder name.
- */
--(void)handleSingleClick:(id)sender
-{
-	if (self.canRenameFolders)
-	{
-		NSInteger clickedRow = self.outlineView.clickedRow;
-		if (clickedRow >= 0)
-			[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(renameFolderByTimer:) userInfo:[self.outlineView itemAtRow:clickedRow] repeats:NO];
-	}
-}
-
 /* handleDoubleClick
  * Handle the user double-clicking a node.
  */
 -(void)handleDoubleClick:(id)sender
 {
-	// Prevent the first click of the double click from triggering immediate folder name editing.
-	[self enableFoldersRenamingAfterDelay];
-	
-	TreeNode * node = [self.outlineView itemAtRow:self.outlineView.selectedRow];
+    TreeNode * node = [self.outlineView itemAtRow:self.outlineView.selectedRow];
 
 	if (node.folder.type == VNAFolderTypeRSS || node.folder.type == VNAFolderTypeOpenReader)
 	{
@@ -901,37 +908,14 @@
 		
 	if (rowIndex != -1)
 	{
+        if (self.fieldEditor && self.fieldEditor.delegate) {
+            NSTextField *textField = (NSTextField *)self.fieldEditor.delegate;
+            [textField abortEditing];
+        }
+
 		[self.outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)rowIndex] byExtendingSelection:NO];
 		[self.outlineView editColumn:[self.outlineView columnWithIdentifier:@"folderColumns"] row:rowIndex withEvent:nil select:YES];
 	}
-}
-
-/* renameFolderByTimer
- * If no disabling events have occurred during the timer interval, rename the folder.
- */
--(void)renameFolderByTimer:(id)sender
-{
-	if (self.canRenameFolders)
-	{
-		[self renameFolder:((TreeNode *)[sender userInfo]).nodeId];
-	}
-}
-
-/* enableFoldersRenaming
- * Enable the renaming of folders.
- */
--(void)enableFoldersRenaming:(id)sender
-{
-	self.canRenameFolders = YES;
-}
-
-/* enableFoldersRenamingAfterDelay
- * Set a timer to enable renaming of folders.
- */
--(void)enableFoldersRenamingAfterDelay
-{
-	self.canRenameFolders = NO;
-	[NSTimer scheduledTimerWithTimeInterval:[NSEvent doubleClickInterval] target:self selector:@selector(enableFoldersRenaming:) userInfo:nil repeats:NO];
 }
 
 /* folderViewWillBecomeFirstResponder
@@ -941,7 +925,6 @@
 -(void)folderViewWillBecomeFirstResponder
 {
 	[self.controller.browser switchToPrimaryTab];
-	[self enableFoldersRenamingAfterDelay];
 }
 
 /* copyTableSelection
@@ -1455,6 +1438,7 @@
     Preferences *prefs = [Preferences standardPreferences];
     cellView.imageView.image = (prefs.showFolderImages ? folder.image : [folder standardImage]);
     cellView.textField.attributedStringValue = [[NSAttributedString alloc] initWithString:node.nodeName attributes:myInfo];
+    cellView.textField.delegate = self;
 
     // Use the auxiliary position of the feed item to show
     // the refresh icon if the feed is being refreshed, or an
@@ -1472,19 +1456,12 @@
     // Because if the search results contain unread articles we don't want the smart folder name to be bold.
     if (folder.type == VNAFolderTypeSmart) {
         cellView.unreadCount = 0;
+    } else if (folder.type == VNAFolderTypeGroup) {
+        cellView.unreadCount = folder.childUnreadCount;
     } else {
         cellView.unreadCount = folder.unreadCount;
     }
-    //        else if (folder.childUnreadCount && ![olv isItemExpanded:item])
-    //        {
-    //            [realCell setCount:folder.childUnreadCount];
-    //            [realCell setCountBackgroundColour:[NSColor colorForControlTint:[NSColor currentControlTint]]];
-    //        }
-    //        else
-    //        {
-    //            [realCell clearCount];
-    //        }
-    //
+
     return cellView;
 }
 
@@ -1530,12 +1507,54 @@
  */
 -(void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
-	[self enableFoldersRenamingAfterDelay];
-
     if (!self.blockSelectionHandler)
     {
         TreeNode * node = [self.outlineView itemAtRow:self.outlineView.selectedRow];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:node];
+    }
+}
+
+// MARK: - NSTextFieldDelegate
+
+- (void)controlTextDidBeginEditing:(NSNotification *)obj
+{
+    self.fieldEditor = obj.userInfo[@"NSFieldEditor"];
+}
+
+// Called when the user finishes editing a folder name
+- (void)controlTextDidEndEditing:(NSNotification *)obj
+{
+    self.fieldEditor = nil;
+
+    NSText *fieldEditor = obj.userInfo[@"NSFieldEditor"];
+    NSString *newValue = [fieldEditor.string copy];
+    NSTextField *textField = (NSTextField *)obj.object;
+    NSInteger rowIndex = [self.outlineView rowForView:textField];
+    TreeNode *node = [self.outlineView itemAtRow:rowIndex];
+    Folder *folder = node.folder;
+
+    if ([newValue isEqualToString:folder.name]) {
+        return;
+    }
+
+    if (newValue.vna_isBlank) {
+        textField.stringValue = folder.name;
+        return;
+    }
+
+    if (folder.type == VNAFolderTypeOpenReader && [newValue hasPrefix:@"☁️ "]) {
+        NSString *tmpName = [newValue substringFromIndex:3];
+        newValue = tmpName;
+    }
+
+    Database *dbManager = [Database sharedManager];
+    if ([dbManager folderFromName:newValue] != nil) {
+        runOKAlertPanel(NSLocalizedString(@"Cannot rename folder", nil), NSLocalizedString(@"A folder with that name already exists", nil));
+    } else {
+        [dbManager setName:newValue forFolder:folder.itemId];
+        if (folder.type == VNAFolderTypeOpenReader) {
+            [[OpenReader sharedManager] setFolderTitle:newValue forFeed:folder.remoteId];
+        }
     }
 }
 
