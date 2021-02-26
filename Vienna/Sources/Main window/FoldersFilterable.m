@@ -31,14 +31,6 @@
     return [_dataSource outlineView:outlineView isItemExpandable:item];
 }
 
-- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
-    return [_dataSource outlineView:outlineView objectValueForTableColumn:tableColumn byItem:item];
-}
-
-- (void)outlineView:(NSOutlineView *)outlineView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
-    [_dataSource outlineView:outlineView setObjectValue:object forTableColumn:tableColumn byItem:item];
-}
-
 - (id)outlineView:(NSOutlineView *)outlineView itemForPersistentObject:(id)object {
     return [_dataSource outlineView:outlineView itemForPersistentObject:object];
 }

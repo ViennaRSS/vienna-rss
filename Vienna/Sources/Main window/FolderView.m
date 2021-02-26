@@ -94,11 +94,13 @@
 /* reloadData
  * Called when the user reloads the view data.
  */
--(void)reloadData
+- (void)reloadData
 {
-    if (_filterDataSource && _filterPredicate)
+    if (_filterDataSource && _filterPredicate) {
         [_filterDataSource reloadData:self];
-	[super reloadData];
+    } else {
+        [super reloadData];
+    }
 }
 
 - (NSPredicate*)filterPredicate {
