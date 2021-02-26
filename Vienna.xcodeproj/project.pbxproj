@@ -49,6 +49,7 @@
 		032280311A33BCD8007DE933 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 032280301A33BCD8007DE933 /* Article.m */; };
 		0349813E1A206FD900014F29 /* GeneralPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0349813D1A206FD900014F29 /* GeneralPreferencesViewController.m */; };
 		034981411A20701600014F29 /* AdvancedPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 034981401A20701600014F29 /* AdvancedPreferencesViewController.m */; };
+		0378753125E34743009AB1C9 /* FeedListCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0378753025E34743009AB1C9 /* FeedListCellView.m */; };
 		0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */; };
 		0379E23B1A20831600D58BFE /* SyncingPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */; };
 		0386A5C11E1FA586000C10CE /* BrowserPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0386A5BB1E1FA586000C10CE /* BrowserPane.xib */; };
@@ -278,6 +279,8 @@
 		035B703519E0E4AE00197334 /* Vienna Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Vienna Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		035B703819E0E4AE00197334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0377BDEB1D3A009B00960555 /* Vienna Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vienna Tests-Bridging-Header.h"; sourceTree = "<group>"; };
+		0378752F25E34743009AB1C9 /* FeedListCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedListCellView.h; sourceTree = "<group>"; };
+		0378753025E34743009AB1C9 /* FeedListCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedListCellView.m; sourceTree = "<group>"; };
 		0379E2361A2082E600D58BFE /* AppearancePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppearancePreferencesViewController.h; sourceTree = "<group>"; };
 		0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearancePreferencesViewController.m; sourceTree = "<group>"; };
 		0379E2391A20831600D58BFE /* SyncingPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncingPreferencesViewController.h; sourceTree = "<group>"; };
@@ -1309,6 +1312,8 @@
 				793C95321C42A0DD00984D4E /* FoldersFilterable.m */,
 				4350286D165DE9DF0018EDB7 /* FolderView.h */,
 				4350286E165DE9DF0018EDB7 /* FolderView.m */,
+				0378752F25E34743009AB1C9 /* FeedListCellView.h */,
+				0378753025E34743009AB1C9 /* FeedListCellView.m */,
 				4350288B165DE9DF0018EDB7 /* TreeNode.h */,
 				4350288C165DE9DF0018EDB7 /* TreeNode.m */,
 			);
@@ -2057,6 +2062,7 @@
 				F633157626ED73CB008A3673 /* URLFormatter.swift in Sources */,
 				43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */,
 				43502896165DE9E00018EDB7 /* ActivityPanelController.m in Sources */,
+				0378753125E34743009AB1C9 /* FeedListCellView.m in Sources */,
 				2FE44CAD25B7995400554E82 /* NSApplication+AppController.swift in Sources */,
 				F6CE47131E7E3DCB0045EAD7 /* ActivityItem.m in Sources */,
 				2FC91DDD21850ADB00D7F223 /* Browser+WebUIDelegate.m in Sources */,
