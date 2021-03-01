@@ -1,5 +1,5 @@
 //
-//  NSApplication+AppController.swift
+//  URL+Blank.swift
 //  Vienna
 //
 //  Copyright 2021 Tassilo Karge
@@ -19,12 +19,8 @@
 
 import Foundation
 
-extension NSApplication {
-
-    var appController: AppController {
-        return self.delegate as? AppController ?? {
-            fatalError("AppController must be the delegate of this applicaiton")
-        }()
-    }
-
+extension URL {
+    static let blank: URL = URL(string: "about:blank") ?? {
+        fatalError("blank url must exist")
+    }()
 }

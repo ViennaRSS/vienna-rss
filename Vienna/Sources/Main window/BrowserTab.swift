@@ -34,7 +34,7 @@ class BrowserTab: NSViewController {
     @IBOutlet private(set) weak var reloadButton: NSButton!
     @IBOutlet private(set) weak var progressBar: LoadingIndicator?
 
-    var fullscreenWebViewTopConstraint: NSLayoutConstraint!
+    var webViewTopConstraint: NSLayoutConstraint!
 
     @IBOutlet private(set) weak var cancelButtonWidth: NSLayoutConstraint!
     @IBOutlet private(set) weak var reloadButtonWidth: NSLayoutConstraint!
@@ -42,16 +42,18 @@ class BrowserTab: NSViewController {
 
     var url: URL? = nil {
         didSet {
-            if self.url != webView.url || self.url == nil {
-                self.title = self.url?.host ?? NSLocalizedString("New Tab", comment: "")
-            }
-            self.addressField?.stringValue = self.url?.absoluteString ?? ""
+            updateTabTitle()
+            updateUrlTextField()
         }
     }
 
     var loadedTab: Bool = false
 
     var loading: Bool = false
+
+    var loadingProgress: Double = 0 {
+        didSet { updateVisualLoadingProgress() }
+    }
 
     /// backing storage only, access via rssSubscriber property
     weak var rssDelegate: RSSSubscriber?
@@ -62,10 +64,10 @@ class BrowserTab: NSViewController {
 
     var viewVisible: Bool = false
 
-    var titleObservation: NSKeyValueObservation?
-    var loadingObservation: NSKeyValueObservation?
-    var progressObservation: NSKeyValueObservation?
-    var urlObservation: NSKeyValueObservation?
+    private var titleObservation: NSKeyValueObservation?
+    private var loadingObservation: NSKeyValueObservation?
+    private var progressObservation: NSKeyValueObservation?
+    private var urlObservation: NSKeyValueObservation?
 
     // MARK: object lifecycle
 
@@ -73,10 +75,10 @@ class BrowserTab: NSViewController {
 
         self.webView = CustomWKWebView(configuration: config)
 
-        if #available(macOS 10.12, *) {
-            super.init(nibName: "BrowserTab", bundle: nil) // TODO: allow override
+        if #available(macOS 10.14, *) {
+            super.init(nibName: "BrowserTab", bundle: nil)
         } else {
-            super.init(nibName: "BrowserTabBeforeMacOS12", bundle: nil)
+            super.init(nibName: "BrowserTabWithLegacyAddressBar", bundle: nil)
         }
 
         titleObservation = webView.observe(\.title, options: .new) { [weak self] _, change in
@@ -98,7 +100,7 @@ class BrowserTab: NSViewController {
             self?.loadingProgress = newValue
         }
         urlObservation = webView.observe(\.url, options: .new) { [weak self] _, change in
-            guard let newValue = change.newValue else {
+            guard let newValue = change.newValue, newValue != nil else {
                 return
             }
             self?.url = newValue
@@ -128,19 +130,11 @@ class BrowserTab: NSViewController {
 
         // set up webview (not yet possible via interface builder)
         webView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(webView, positioned: .below, relativeTo: nil)
+        self.view.addSubview(webView, positioned: .below, relativeTo: addressBarContainer)
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
-
-        let defaultWebViewTopConstraint = NSLayoutConstraint(item: addressBarContainer!, attribute: .bottom, relatedBy: .equal, toItem: webView, attribute: .top, multiplier: 1, constant: 0)
-        // Lower priority than fullscreen constraint so we can compress it
-        defaultWebViewTopConstraint.priority = NSLayoutConstraint.Priority(999)
+        webViewTopConstraint = NSLayoutConstraint(item: self.view, attribute: .top, relatedBy: .equal, toItem: webView, attribute: .top, multiplier: -1, constant: 0)
         let webViewBottomConstraint = NSLayoutConstraint(item: webView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 0)
-
-        self.view.addConstraints([defaultWebViewTopConstraint, webViewBottomConstraint])
-
-        // Only prepare fullscreen constraint,
-        // add / remove it with hideAddressBar(true / false)
-        self.fullscreenWebViewTopConstraint = NSLayoutConstraint(item: webView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0)
+        self.view.addConstraints([webViewTopConstraint, webViewBottomConstraint])
 
         // title needs to be adjusted once view is loaded
 
@@ -154,7 +148,9 @@ class BrowserTab: NSViewController {
 
         self.viewDidLoadRss()
 
-        updateAddressBarLayout()
+        updateAddressBarButtons()
+
+        updateWebViewInsets()
 
         // set up address bar handling
         addressField.delegate = self
@@ -179,13 +175,6 @@ class BrowserTab: NSViewController {
     override func viewDidDisappear() {
         super.viewDidDisappear()
         self.viewVisible = false
-    }
-
-    func hideAddressBar(_ hide: Bool, animated: Bool = false) {
-        // We need to use the optional here in case view is not yet loaded
-        addressBarContainer?.isHidden = hide
-        fullscreenWebViewTopConstraint?.isActive = hide
-        // TODO: animated show / hide
     }
 
 }
@@ -218,9 +207,9 @@ extension BrowserTab: Tab {
 
     func back() -> Bool {
         let couldGoBack = self.webView.goBack() != nil
-        // title observation not triggered by goBack() -> manual setting
+        // title and url observation not triggered by goBack() -> manual setting
         self.url = self.webView.url
-        self.title = self.webView.title
+        updateTabTitle()
         return couldGoBack
     }
 
@@ -228,7 +217,7 @@ extension BrowserTab: Tab {
         let couldGoForward = self.webView.goForward() != nil
         // title observation not triggered by goForware() -> manual setting
         self.url = self.webView.url
-        self.title = self.webView.title
+        updateTabTitle()
         return couldGoForward
     }
 
@@ -260,18 +249,26 @@ extension BrowserTab: Tab {
                 self.activateWebView()
             }
         } else {
-            // TODO: this seems to wipe history, which we do not want
-            self.webView.loadHTMLString("", baseURL: nil)
+            self.webView.load(URLRequest(url: URL.blank))
             self.activateAddressBar()
         }
     }
 
     func reloadTab() {
-        self.webView.reload()
+        if self.webView.url != nil {
+            self.webView.reload()
+            //to know what we have reloaded if the text was changed manually
+            updateUrlTextField()
+        } else {
+            //when we have never loaded the webview yet, reload is actually load
+            loadTab()
+        }
     }
 
     func stopLoadingTab() {
         self.webView.stopLoading()
+        //we must manually invoke navigation end callbacks
+        self.handleNavigationEnd(success: false)
     }
 
     func decreaseTextSize() {
@@ -321,11 +318,11 @@ extension BrowserTab: WKNavigationDelegate {
 
     func handleNavigationStart() {
         self.handleNavigationStartRss()
-        updateAddressBarLayout()
+        updateAddressBarButtons()
     }
 
     func handleNavigationEnd(success: Bool) {
         self.handleNavigationEndRss(success: success)
-        updateAddressBarLayout()
+        updateAddressBarButtons()
     }
 }

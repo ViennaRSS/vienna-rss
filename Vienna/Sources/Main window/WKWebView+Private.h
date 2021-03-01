@@ -1,5 +1,5 @@
 //
-//  NSApplication+AppController.swift
+//  WKWebView+Private.h
 //  Vienna
 //
 //  Copyright 2021 Tassilo Karge
@@ -17,14 +17,15 @@
 //  limitations under the License.
 //
 
-import Foundation
+@import Foundation;
 
-extension NSApplication {
+NS_ASSUME_NONNULL_BEGIN
 
-    var appController: AppController {
-        return self.delegate as? AppController ?? {
-            fatalError("AppController must be the delegate of this applicaiton")
-        }()
-    }
+@interface WKWebView (Private)
 
-}
+@property (nonatomic, setter=_setTopContentInset:) CGFloat _topContentInset;
+@property (nonatomic, setter=_setAutomaticallyAdjustsContentInsets:) BOOL _automaticallyAdjustsContentInsets;
+
+@end
+
+NS_ASSUME_NONNULL_END

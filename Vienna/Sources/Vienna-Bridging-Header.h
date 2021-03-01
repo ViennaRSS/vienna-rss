@@ -15,3 +15,4 @@
 #import "WebViewBrowser.h"
 #import "ArticleConverter.h"
 #import "WKPreferences+Private.h"
+#import "WKWebView+Private.h"

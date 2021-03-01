@@ -19,9 +19,9 @@
 
 import Foundation
 
-// MARK: User Interaction
-
 extension BrowserTab {
+
+    // MARK: User Interaction
 
     @IBAction private func loadPageFromAddressBar(_ sender: Any) {
         let enteredUrl = addressField.stringValue
@@ -72,45 +72,87 @@ extension BrowserTab {
         self.loadTab()
     }
 
-    var loadingProgress: Double? {
-        get { Double(progressBar?.currentLoadingProgress ?? 0) }
-        set {
-            let new = CGFloat(newValue ?? 0)
-            let old = progressBar?.currentLoadingProgress ?? 0
-            progressBar?.setLoadingProgress(new, animationDuration: old < new ? 0.3 : 0.05)
-            if new == 1.0 {
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4) {
-                    self.progressBar?.isHidden = true
-                }
-            } else {
-                self.progressBar?.isHidden = false
+    // MARK: UI Updates
+
+    func updateVisualLoadingProgress() {
+        guard let progressBar = progressBar else {
+            return
+        }
+        let loadingProgress = CGFloat(self.loadingProgress)
+        //small value for backwards animation to avoid default duration
+        let duration = progressBar.currentLoadingProgress < loadingProgress ? 0.3 : 0.001
+        progressBar.setLoadingProgress(loadingProgress, animationDuration: duration)
+        if loadingProgress == 1.0 {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4) {
+                progressBar.isHidden = true
             }
+        } else {
+            progressBar.isHidden = false
         }
     }
 
-    func updateAddressBarLayout() {
+    func updateAddressBarButtons() {
 
         cancelButtonWidth?.constant = loading ? 30 : 0
         reloadButtonWidth?.constant = loading ? 0 : 30
 
         if showRssButton {
             // show rss button
-            rssButtonWidth.constant = 40
+            rssButtonWidth?.constant = 40
         } else {
             // hide rss button
-            rssButtonWidth.constant = 0
+            rssButtonWidth?.constant = 0
         }
 
-        addressBarContainer.needsLayout = true
+        addressBarContainer?.needsLayout = true
 
         if viewVisible {
             NSAnimationContext.runAnimationGroup({_ in
                 NSAnimationContext.current.duration = 0.2
                 NSAnimationContext.current.allowsImplicitAnimation = true
-                self.addressBarContainer.layoutSubtreeIfNeeded()
+                self.addressBarContainer?.layoutSubtreeIfNeeded()
             }, completionHandler: nil)
         } else {
-            self.addressBarContainer.layoutSubtreeIfNeeded()
+            self.addressBarContainer?.layoutSubtreeIfNeeded()
+        }
+    }
+
+    func hideAddressBar(_ hide: Bool, animated: Bool = false) {
+        // We need to use the optional here in case view is not yet loaded
+        addressBarContainer?.isHidden = hide
+        updateWebViewInsets()
+        // TODO: animated show / hide
+    }
+
+    func updateWebViewInsets() {
+        if let addressBarContainer = addressBarContainer {
+            let distanceToTop = addressBarContainer.isHidden ? 0 : addressBarContainer.frame.height
+            if #available(macOS 10.14, *) {
+                webView._automaticallyAdjustsContentInsets = false
+                webView._topContentInset = distanceToTop
+            } else {
+                self.webViewTopConstraint.constant = distanceToTop
+            }
+        }
+    }
+
+    func updateTabTitle() {
+        if self.url != webView.url || self.url == nil {
+            //currently loading (the first time), webview title not yet correct / available
+            self.title = self.url?.host ?? NSLocalizedString("New Tab", comment: "")
+        } else if let title = self.webView.title, !title.isEmpty {
+            self.title = title
+        } else {
+            //webview is about:blank or empty
+            self.title = NSLocalizedString("New Tab", comment: "")
+        }
+    }
+
+    func updateUrlTextField() {
+        if let url = self.url, url != URL.blank {
+            self.addressField?.stringValue = url.absoluteString
+        } else {
+            self.addressField?.stringValue = ""
         }
     }
 }
