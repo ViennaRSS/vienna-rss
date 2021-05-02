@@ -26,7 +26,7 @@ esac
 pushd "${VIENNA_UPLOADS_DIR}"
 
 # Make the dSYM Bundle
-tar -czf "${dSYM_FILENAME}.tar.gz" --exclude '.DS_Store' "$ARCHIVE_DSYMS_PATH"
+tar -czf "${dSYM_FILENAME}.tar.gz" --exclude '.DS_Store' -C "$ARCHIVE_DSYMS_PATH" .
 
 # Zip up the app
 # Copy the app cleanly
