@@ -1848,6 +1848,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		3A5482F6168F5C1700887F91 /* Configure Sparkle */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -2990,8 +2991,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BASE_URL_LOC = "dl.bintray.com/viennarss/vienna-rss";
-				BASE_URL_TYP = https;
 				CLANG_ANALYZER_GCD_PERFORMANCE = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -3037,8 +3036,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BASE_URL_LOC = "dl.bintray.com/viennarss/vienna-rss";
-				BASE_URL_TYP = https;
 				CLANG_ANALYZER_GCD_PERFORMANCE = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_MODULES = YES;
