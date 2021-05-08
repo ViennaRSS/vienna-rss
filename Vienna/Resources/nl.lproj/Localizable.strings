@@ -4,6 +4,9 @@
 /* No comment provided by engineer. */
 "(Untitled Feed)" = "(Naamloze feed)";
 
+/* Appended to application name in Open With menu */
+"%@ (default)" = "%@ (standaard)";
+
 /* No comment provided by engineer. */
 "%@ Info" = "%@ Info";
 
@@ -120,7 +123,7 @@
 "contains" = "bevat";
 
 /* No comment provided by engineer. */
-"Copy Link to Clipboard" = "Kopieer koppeling naar klembord";
+"Copy Link to Clipboard" = "Kopieer link naar klembord";
 
 /* No comment provided by engineer. */
 "Copy Page Link to Clipboard" = "Kopieer locatie naar klembord";
@@ -313,7 +316,7 @@
 "Last Week" = "Vorige week";
 
 /* Data field name visible in menu/article list */
-"Link" = "Koppeling";
+"Link" = "Link";
 
 /* Title of a button on an alert */
 "Locate…" = "Zoek op…";
@@ -372,6 +375,9 @@
 /* No comment provided by engineer. */
 "One or more downloads are in progress" = "Eén of meer downloads zijn nog bezig";
 
+/* Title of a popup menu item */
+"Open" = "Open";
+
 /* Title of a menu item */
 "Open Article Page" = "Ga naar artikelpagina";
 
@@ -391,10 +397,13 @@
 "Open Image in New Tab" = "Open afbeelding in nieuwe tab";
 
 /* No comment provided by engineer. */
-"Open Link in %@" = "Open koppeling in %@";
+"Open Link in %@" = "Open link in %@";
 
 /* No comment provided by engineer. */
-"Open Link in New Tab" = "Open koppeling in nieuwe tab";
+"Open Link in Background" = "Open link op de achtergrond";
+
+/* No comment provided by engineer. */
+"Open Link in New Tab" = "Open link in nieuwe tab";
 
 /* No comment provided by engineer. */
 "Open Page in %@" = "Open pagina in %@";
@@ -502,10 +511,10 @@
 "Select…" = "Selecteer…";
 
 /* No comment provided by engineer. */
-"Send Link" = "Verzend koppeling";
+"Send Link" = "Verstuur link";
 
 /* No comment provided by engineer. */
-"Send Links" = "Verzend koppelingen";
+"Send Links" = "Verstuur links";
 
 /* No comment provided by engineer. */
 "Show Filter Bar" = "Toon filterbalk";
@@ -584,9 +593,6 @@
 
 /* test for a folder (not operational as of Vienna 3.2) */
 "under" = "onder";
-
-/* No comment provided by engineer. */
-"Unread" = "Ongelezen";
 
 /* No comment provided by engineer. */
 "Unread Articles" = "Ongelezen artikelen";

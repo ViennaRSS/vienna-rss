@@ -1,9 +1,9 @@
-/* Privacy - AppleEvents Sending Usage Description */
+/* A message that tells the user why Vienna is requesting the ability to send Apple events. */
 "NSAppleEventsUsageDescription" = "";
 
-/* (No Comment) */
+/* A label for plug-in bundles. This is shown in Finder's Get Info window, for example. */
 "Vienna plug-in" = "Vienna-plug-in";
 
-/* (No Comment) */
+/* A label for style bundles. This is shown in Finder's Get Info window, for example. */
 "Vienna style" = "Vienna-stijl";
 

@@ -23,13 +23,13 @@
 "8LJ-RZ-pfu.title" = "Gemarkeerd";
 
 /* Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.label" = "Verzend koppeling";
+"10h-xf-C6T.label" = "Verstuur link";
 
 /* Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.paletteLabel" = "Verzend koppeling";
+"10h-xf-C6T.paletteLabel" = "Verstuur link";
 
 /* Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.toolTip" = "Email een koppeling naar huidige artikel of website";
+"10h-xf-C6T.toolTip" = "Email een link naar huidig artikel of website";
 
 /* Class = "NSSearchField"; ibShadowedToolTip = "Filter displayed articles by matching text"; ObjectID = "1304"; */
 "1304.ibShadowedToolTip" = "Filter getoonde artikelen op deze tekst";

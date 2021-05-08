@@ -235,6 +235,9 @@
 /* Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067"; */
 "1067.title" = "Otevřít stránku příspěvku v externím prohlížeči";
 
+/* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
+"1073.title" = "Poslat odkaz e-mailem";
+
 /* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
 "1084.title" = "Zvětšit text";
 
@@ -334,6 +337,9 @@
 /* Class = "NSMenu"; title = "Order By"; ObjectID = "1337"; */
 "1337.title" = "Seřadit podle";
 
+/* Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338"; */
+"1338.title" = "Příručka";
+
 /* Class = "NSMenuItem"; title = "Name"; ObjectID = "1339"; */
 "1339.title" = "Název";
 
@@ -343,8 +349,23 @@
 /* Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409"; */
 "1409.title" = "Informace…";
 
+/* Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413"; */
+"1413.title" = "Použít současný styl pro články";
+
+/* Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458"; */
+"1458.title" = "Znovu indexovat databázi";
+
+/* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "bd7-qY-ofB"; */
+"bd7-qY-ofB.title" = "Nahrazení textu";
+
 /* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI"; */
 "CGp-H4-UaI.title" = "Posledních 48 hodin";
+
+/* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "cK9-Df-xA3"; */
+"cK9-Df-xA3.title" = "Spustit předčítání";
+
+/* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "CLG-Dq-a59"; */
+"CLG-Dq-a59.title" = "Zobrazit pravopis a gramatiku";
 
 /* Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi"; */
 "ecl-HO-Kpi.title" = "Označit všechna odebírání jako čtená";
@@ -355,8 +376,26 @@
 /* Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI"; */
 "fad-Nj-OFI.title" = "Pravopis";
 
+/* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "fbd-ZI-tZW"; */
+"fbd-ZI-tZW.title" = "Zkontrolovat dokument";
+
+/* Class = "NSMenu"; title = "Speech"; ObjectID = "G6k-0L-moc"; */
+"G6k-0L-moc.title" = "Řeč";
+
+/* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "gbo-AM-wcF"; */
+"gbo-AM-wcF.title" = "Zastavit předčítání";
+
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "joR-kW-sIU"; */
 "joR-kW-sIU.title" = "Transformace";
+
+/* Class = "NSMenuItem"; title = "Speech"; ObjectID = "JXn-SB-3t2"; */
+"JXn-SB-3t2.title" = "Řeč";
+
+/* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "kCi-pf-mkc"; */
+"kCi-pf-mkc.title" = "Chytré uvozovky";
+
+/* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "l8F-tb-7E0"; */
+"l8F-tb-7E0.title" = "Pravopis a gramatika";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN"; */
 "MHF-D4-pRN.title" = "Všechna písmena velká";
@@ -373,6 +412,9 @@
 /* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7"; */
 "rNG-xr-3x7.title" = "Nečtené příspěvky";
 
+/* Class = "NSMenuItem"; title = "Article List"; ObjectID = "Rs9-r3-soc"; */
+"Rs9-r3-soc.title" = "Seznam článků";
+
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk"; */
 "RtQ-eP-bfk.title" = "Chytré pomlčky";
 
@@ -388,6 +430,18 @@
 /* Class = "NSMenu"; title = "Transformations"; ObjectID = "UFF-Fn-8ti"; */
 "UFF-Fn-8ti.title" = "Transformace";
 
+/* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "w4Q-ne-FPI"; */
+"w4Q-ne-FPI.title" = "Chytré odkazy";
+
+/* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "wnc-vZ-fO4"; */
+"wnc-vZ-fO4.title" = "Zobrazit náhrady";
+
 /* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm"; */
 "wqh-Jc-gBm.title" = "Naposledy obnovené";
+
+/* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "xpF-dh-E2m"; */
+"xpF-dh-E2m.title" = "Převést na malá písmena";
+
+/* Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "ZCa-7v-54l"; */
+"ZCa-7v-54l.title" = "Režim celé obrazovky";
 

@@ -31,6 +31,9 @@
 /* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "bwY-9N-h4N"; */
 "bwY-9N-h4N.title" = "Jméno:";
 
+/* Class = "NSMenuItem"; title = "After a day"; ObjectID = "c4l-M5-qB1"; */
+"c4l-M5-qB1.title" = "Po dni";
+
 /* Class = "NSButtonCell"; title = "Select…"; ObjectID = "cbn-xq-UFr"; */
 "cbn-xq-UFr.title" = "Vybrat…";
 
@@ -112,6 +115,9 @@
 /* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "Oqg-6W-NAL"; */
 "Oqg-6W-NAL.title" = "Ověřovat nové položky:";
 
+/* Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "OuH-3K-YPK"; */
+"OuH-3K-YPK.title" = "Server:";
+
 /* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "pLH-VU-z2d"; */
 "pLH-VU-z2d.title" = "Každé dvě hodiny";
 
@@ -120,6 +126,15 @@
 
 /* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "qYb-Sf-cEF"; */
 "qYb-Sf-cEF.title" = "Každých 5 minut";
+
+/* Class = "NSTabViewItem"; label = "Updates"; ObjectID = "qyx-3u-1Io"; */
+"qyx-3u-1Io.label" = "Aktualizace";
+
+/* Class = "NSMenuItem"; title = "After two days"; ObjectID = "sJE-bd-4mK"; */
+"sJE-bd-4mK.title" = "Po dvou dnech";
+
+/* Class = "NSButtonCell"; title = "Search for latest beta versions"; ObjectID = "u92-Bh-Wrz"; */
+"u92-Bh-Wrz.title" = "Vyhledat nejnovější beta verze";
 
 /* Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Uyd-GK-jtn"; */
 "Uyd-GK-jtn.title" = "Synchronizovat s Open Reader serverem";
@@ -132,6 +147,12 @@
 
 /* Class = "NSWindow"; title = "Preferences"; ObjectID = "X5g-th-bjd"; */
 "X5g-th-bjd.title" = "Předvolby";
+
+/* Class = "NSMenuItem"; title = "After a week"; ObjectID = "xfd-Vp-kJy"; */
+"xfd-Vp-kJy.title" = "Po týdnu";
+
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "YG6-9k-gKH"; */
+"YG6-9k-gKH.title" = "URL:";
 
 /* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "Ygu-Rj-E7a"; */
 "Ygu-Rj-E7a.title" = "Každých 15 minut";

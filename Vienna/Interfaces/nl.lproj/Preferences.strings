@@ -40,6 +40,9 @@
 /* Class = "NSButtonCell"; title = "Select…"; ObjectID = "cbn-xq-UFr"; */
 "cbn-xq-UFr.title" = "Kies…";
 
+/* Class = "NSButtonCell"; title = "Preview new browser"; ObjectID = "DDY-fS-V5T"; */
+"DDY-fS-V5T.title" = "Probeer nieuwe browser";
+
 /* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "dkm-xW-4If"; */
 "dkm-xW-4If.title" = "Toon symbolen in mappenlijst";
 
@@ -47,13 +50,16 @@
 "Dw9-en-4Zu.title" = "Na twee weken";
 
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "erE-oh-cbw"; */
-"erE-oh-cbw.title" = "Open koppeling op de achtergrond";
+"erE-oh-cbw.title" = "Open links op de achtergrond";
 
 /* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "FFP-H1-weF"; */
 "FFP-H1-weF.title" = "Toon in menubalk";
 
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "flH-2D-s6O"; */
-"flH-2D-s6O.title" = "Open koppeling in externe browser";
+"flH-2D-s6O.title" = "Open links in externe browser";
+
+/* Class = "NSTextFieldCell"; title = "Vienna has a new browser built on top of WebKit. It is faster and more secure.\nAfter changing this setting, restart Vienna to test it. Feedback is very welcome!"; ObjectID = "Fv8-Xx-YR0"; */
+"Fv8-Xx-YR0.title" = "Vienna heeft een nieuwe browser die is gebaseerd op WebKit. Hij is sneller en veiliger. Herstart Vienna na het wijzigen van deze voorkeur. Feedback ontvangen wij graag!";
 
 /* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "g3K-qh-M6y"; */
 "g3K-qh-M6y.title" = "Hoe hoger de waarde, des te sneller worden je abonnementen gedownload.";
