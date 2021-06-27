@@ -55,23 +55,21 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
         self.webView.contextMenuProvider = self
     }
 
-    // handle special keys when the article view has the focus
-    override func keyDown(with theEvent: NSEvent) {
-        guard let theString = theEvent.characters else {
-            return
-        }
-        if theString.count == 1 {
-            let keyChar = (theString as NSString).character(at: 0)
-            if NSApp.appController.handleKeyDown(keyChar, withFlags: theEvent.modifierFlags.rawValue) {
+    /// handle special keys when the article view has the focus
+    override func keyDown(with event: NSEvent) {
+        if let pressedKeys = event.characters, pressedKeys.count == 1 {
+            let pressedKey = (pressedKeys as NSString).character(at: 0)
+            //give app controller preference when handling commands
+            if NSApp.appController.handleKeyDown(pressedKey, withFlags: event.modifierFlags.rawValue) {
                 return
             }
             // Don't go back or forward in article view.
-            if ((theEvent.modifierFlags.rawValue & NSEvent.ModifierFlags.command.rawValue) != 0)
-            && ((keyChar == NSLeftArrowFunctionKey) || (keyChar == NSRightArrowFunctionKey)) {
+            let backForwardKeys = [NSLeftArrowFunctionKey, NSRightArrowFunctionKey]
+            if event.modifierFlags.contains(.command) && backForwardKeys.contains(Int(pressedKey)) {
                 return
             }
         }
-        super.keyDown(with: theEvent)
+        super.keyDown(with: event)
     }
 
     override func viewDidLoad() {
