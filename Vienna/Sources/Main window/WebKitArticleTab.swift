@@ -59,13 +59,8 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
     override func keyDown(with event: NSEvent) {
         if let pressedKeys = event.characters, pressedKeys.count == 1 {
             let pressedKey = (pressedKeys as NSString).character(at: 0)
-            //give app controller preference when handling commands
+            // give app controller preference when handling commands
             if NSApp.appController.handleKeyDown(pressedKey, withFlags: event.modifierFlags.rawValue) {
-                return
-            }
-            // Don't go back or forward in article view.
-            let backForwardKeys = [NSLeftArrowFunctionKey, NSRightArrowFunctionKey]
-            if event.modifierFlags.contains(.command) && backForwardKeys.contains(Int(pressedKey)) {
                 return
             }
         }
