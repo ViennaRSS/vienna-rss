@@ -55,6 +55,18 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
         self.webView.contextMenuProvider = self
     }
 
+    /// handle special keys when the article view has the focus
+    override func keyDown(with event: NSEvent) {
+        if let pressedKeys = event.characters, pressedKeys.count == 1 {
+            let pressedKey = (pressedKeys as NSString).character(at: 0)
+            // give app controller preference when handling commands
+            if NSApp.appController.handleKeyDown(pressedKey, withFlags: event.modifierFlags.rawValue) {
+                return
+            }
+        }
+        super.keyDown(with: event)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addressField.isEditable = false
