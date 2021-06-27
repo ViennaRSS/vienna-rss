@@ -55,6 +55,25 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
         self.webView.contextMenuProvider = self
     }
 
+    // handle special keys when the article view has the focus
+    override func keyDown(with theEvent: NSEvent) {
+        guard let theString = theEvent.characters else {
+            return
+        }
+        if theString.count == 1 {
+            let keyChar = (theString as NSString).character(at: 0)
+            if NSApp.appController.handleKeyDown(keyChar, withFlags: theEvent.modifierFlags.rawValue) {
+                return
+            }
+            // Don't go back or forward in article view.
+            if ((theEvent.modifierFlags.rawValue & NSEvent.ModifierFlags.command.rawValue) != 0)
+            && ((keyChar == NSLeftArrowFunctionKey) || (keyChar == NSRightArrowFunctionKey)) {
+                return
+            }
+        }
+        super.keyDown(with: theEvent)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addressField.isEditable = false
