@@ -164,6 +164,7 @@
 			break;
 	}
 
+	[self loadView];
 	[Preferences standardPreferences].layout = newLayout;
 	if (currentSelectedArticle != nil)
 	{
