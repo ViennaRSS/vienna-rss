@@ -332,7 +332,7 @@
  */
 -(void)tabView:(NSTabView *)inTabView didSelectTabViewItem:(NSTabViewItem *)inTabViewItem
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabChanged" object:inTabViewItem.identifier];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabChanged" object:inTabViewItem.view];
 	if (self.canJumpToArticles || inTabViewItem != self.primaryTab)
 	{
 		[self.tabViewOrder removeObject:self.tabBarControl.tabView.selectedTabViewItem];
