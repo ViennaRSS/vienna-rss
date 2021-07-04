@@ -653,6 +653,11 @@
     }
 }
 
+// TODO : clarify why we need this to avoid some "unrecognized selector" exceptions
+-(void)webViewLoadFinished:(NSNotification *)notification
+{
+}
+
 /* canDeleteMessageAtRow
  * Returns YES if the message at the specified row can be deleted, otherwise NO.
  */
