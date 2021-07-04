@@ -74,6 +74,14 @@
 }
 
 
+- (void)configureTabClosingBehavior
+{
+    self.selectPreviousOnClose = false;
+    self.selectNewItemFirst = false;    // only works if selectpreviousonclose is true
+    self.selectRightItemFirst = true;   // only works if selectpreviousonclose is false
+    self.canJumpToArticles = false;     // only relevant if (selectpreviousonclose is true) or (selectrightitemfirst is false)
+}
+
 -(void)configureTabBar
 {
     if (@available(macOS 10.14, *)) {
@@ -93,6 +101,8 @@
 	[self.tabBarControl setAutomaticallyAnimates:YES];
 	//TODO: figure out what this property means
 	[self.tabBarControl setAllowsScrubbing:YES];
+
+	[self configureTabClosingBehavior];
 }
 
 /* stringForToolTip
