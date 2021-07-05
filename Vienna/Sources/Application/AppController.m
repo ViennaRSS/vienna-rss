@@ -248,8 +248,6 @@
     self.articleController.unifiedListView = self.unifiedListView;
     self.articleController.articleListView = self.articleListView;
 
-	self.filterDisclosureView = self.mainWindowController.filterDisclosureView;
-	self.filterSearchField = self.mainWindowController.filterSearchField;
 	self.toolbarSearchField = self.mainWindowController.toolbarSearchField;
 
 	Preferences * prefs = [Preferences standardPreferences];
@@ -696,6 +694,22 @@
         [self.mainWindow makeFirstResponder:self.foldersTree.mainView];
     else
         [self.mainWindow makeFirstResponder:((NSView<BaseView> *)self.browser.primaryTab.view).mainView];
+
+	BOOL isFilterBarVisible = self.isFilterBarVisible;
+	switch (newLayout)
+	{
+		case VNALayoutReport:
+		case VNALayoutCondensed:
+			self.filterDisclosureView = self.mainWindowController.filterDisclosureView;
+			self.filterSearchField = self.mainWindowController.filterSearchField;
+			break;
+
+		case VNALayoutUnified:
+			self.filterDisclosureView = self.mainWindowController.filterDisclosureView2;
+			self.filterSearchField = self.mainWindowController.filterSearchField2;
+			break;
+	}
+	[self setFilterBarState:isFilterBarVisible withAnimation:NO];
 	[self updateSearchPlaceholderAndSearchMethod];
 }
 
@@ -2941,16 +2955,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	// END of switching between "Search all articles" and "Search current web page".
 	}
 	
-	if ([Preferences standardPreferences].layout == VNALayoutUnified)
-	{
-		[self.filterSearchField.cell setSendsWholeSearchString:YES];
-		((NSSearchFieldCell *)self.filterSearchField.cell).placeholderString = self.articleController.searchPlaceholderString;
-	}
-	else
-	{
-		[self.filterSearchField.cell setSendsWholeSearchString:NO];
-		((NSSearchFieldCell *)self.filterSearchField.cell).placeholderString = self.articleController.searchPlaceholderString;
-	}
+	((NSSearchFieldCell *)self.filterSearchField.cell).placeholderString = self.articleController.searchPlaceholderString;
 }
 
 #pragma mark Searching

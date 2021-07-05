@@ -28,7 +28,9 @@ final class MainWindowController: NSWindowController {
     @IBOutlet private(set) var articleListView: ArticleListView?
     @IBOutlet private(set) var unifiedDisplayView: UnifiedDisplayView?
     @IBOutlet private(set) var filterDisclosureView: DisclosureView?
+    @IBOutlet private(set) var filterDisclosureView2: DisclosureView?
     @IBOutlet private(set) var filterSearchField: NSSearchField?
+    @IBOutlet private(set) var filterSearchField2: NSSearchField?
 
     @objc private(set) var toolbarSearchField: NSSearchField?
     @IBOutlet private(set) weak var placeholderDetailView: NSView!

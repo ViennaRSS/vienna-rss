@@ -436,7 +436,7 @@
 {
 	[self.controller.articleController reloadArrayOfArticles];
 
-	// This action is send continuously by the filter field, so make sure not the mark read while searching
+	// make sure to not change the mark read while searching
     if (articleList.selectedRow < 0 && self.controller.articleController.allArticles.count > 0 )
 	{
 		BOOL shouldSelectArticle = YES;
