@@ -3009,9 +3009,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)searchUsingFilterField:(id)sender
 {
-    //TODO: make this work for the article list
-	[self.browser.activeTab searchFor:self.searchString
-                               action:NSFindPanelActionNext];
+    NSView<BaseView> * articleListView = (NSView<BaseView> *)self.browser.primaryTab.view;
+    [articleListView performFindPanelAction:NSFindPanelActionNext];
 }
 
 - (IBAction)searchUsingTreeFilter:(NSSearchField* )field
