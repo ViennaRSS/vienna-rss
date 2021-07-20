@@ -278,6 +278,15 @@
 	}
 }
 
+- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)webFrame
+{
+    id obj = sender.superview;
+    if ([obj isKindOfClass:[ArticleCellView class]]) {
+        ArticleCellView *cell = (ArticleCellView *)obj;
+        [cell setInProgress:NO];
+    }
+}
+
 #pragma mark -
 #pragma mark webView progress notifications
 
@@ -733,6 +742,7 @@
 	} else {
 	    // recycled cell : minimum safety measures
 	    [cellView.articleView useUserPrefsForJavascriptAndPlugIns];
+	    [cellView setInProgress:NO];
 	}
 
 	NSArray * allArticles = self.controller.articleController.allArticles;
