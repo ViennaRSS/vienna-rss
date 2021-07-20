@@ -73,14 +73,6 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:controller.browser.primaryTab.view name:WebViewProgressFinishedNotification object:articleView];
 }
 
--(void)tearDownWebViewArticleView {
-	ArticleView *webViewArticleView = (ArticleView *)articleView;
-	[webViewArticleView setUIDelegate:nil];
-	[webViewArticleView setFrameLoadDelegate:nil];
-	[webViewArticleView abortJavascriptAndPlugIns];
-	[webViewArticleView stopLoading:self];
-}
-
 #pragma mark -
 #pragma mark Drawing
 
@@ -93,8 +85,6 @@
 	else {
 		[[NSColor controlColor] set];
     }
-	//TODO: use autolayout
-    //[self layoutSubviews];
 
     //Draw the border and background
 	NSBezierPath *roundedRect = [NSBezierPath bezierPathWithRect:self.bounds];
@@ -134,19 +124,6 @@
 	}
 
 }
-
-//TODO: replace with autolayout
-/*-(void)layoutSubviews
-{
-	//calculate the new frame
-	NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
-							   YPOS_IN_CELL,
-							   NSWidth(self.frame) - XPOS_IN_CELL,
-							   NSHeight(self.frame) -YPOS_IN_CELL);
-	//set the new frame to the webview
-
-	articleView.frame = newWebViewRect;
-}*/
 
 - (BOOL)acceptsFirstResponder
 {

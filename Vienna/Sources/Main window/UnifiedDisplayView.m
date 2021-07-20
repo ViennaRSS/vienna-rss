@@ -90,6 +90,7 @@
 -(void)initTableView
 {
 	// Variable initialization here
+	[articleList sizeToFit];
 	[articleList setAllowsMultipleSelection:YES];
 
 	NSMenu * articleListMenu = [[NSMenu alloc] init];
@@ -751,6 +752,7 @@
 	[view removeFromSuperviewWithoutNeedingDisplay];
 	[cellView setInProgress:YES];
 	[articleContentView setArticles:@[theArticle]];
+	view.frame = cellView.frame;
 	[cellView addSubview:view];
     return cellView;
 }
@@ -778,6 +780,17 @@
  */
 -(void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
+}
+
+/* tableViewColumnDidResize
+ * This notification is called when the user completes resizing a column.
+ */
+- (void)tableViewColumnDidResize:(NSNotification *)notification
+{
+    if ([notification.object isEqualTo:articleList]) {
+        [articleList sizeToFit];
+        [articleList reloadData];
+     }
 }
 
 /* copyTableSelection
