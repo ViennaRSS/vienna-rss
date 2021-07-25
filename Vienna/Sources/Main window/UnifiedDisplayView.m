@@ -760,10 +760,10 @@
         ? ((WebKitArticleTab *)articleContentView).view
         : ((ArticleView *) articleContentView);
 	[view removeFromSuperviewWithoutNeedingDisplay];
-	[cellView setInProgress:YES];
-	[articleContentView setArticles:@[theArticle]];
 	view.frame = cellView.frame;
 	[cellView addSubview:view];
+	[cellView setInProgress:YES];
+	[articleContentView setArticles:@[theArticle]];
     return cellView;
 }
 

@@ -33,6 +33,11 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
             let (htmlPath, accessPath) = converter.prepareArticleDisplay(self.articles)
 
             webView.loadFileURL(htmlPath, allowingReadAccessTo: accessPath)
+            do {
+                try FileManager.default.removeItem(at: htmlPath)
+            } catch {
+               fatalError("Could not remove file \(htmlPath) because \(error)")
+            }
         }
     }
 
