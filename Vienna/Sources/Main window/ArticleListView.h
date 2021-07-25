@@ -63,7 +63,6 @@
 }
 
 // Public functions
--(void)updateAlternateMenuTitle;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
 -(BOOL)canDeleteMessageAtRow:(NSInteger)row;

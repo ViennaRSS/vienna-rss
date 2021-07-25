@@ -200,21 +200,6 @@
 	[mainArticleView saveTableSettings];
 }
 
-/* updateAlternateMenuTitle
- * Sets the approprate title for the alternate item in the contextual menu
- */
- -(void)updateAlternateMenuTitle
-{
-	if (mainArticleView ==  self.articleListView)
-	{
-		[self.articleListView updateAlternateMenuTitle];
-	}
-	else
-	{
-		[self.unifiedListView updateAlternateMenuTitle];
-	}
-}
-
 /* updateVisibleColumns
  * For relevant layouts, adapt table settings
  */

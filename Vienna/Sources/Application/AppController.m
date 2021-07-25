@@ -1770,7 +1770,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	[self updateAlternateMenuTitle];
 	[self.foldersTree updateAlternateMenuTitle];
-	[self.articleController updateAlternateMenuTitle];
+	[self.articleController.mainArticleView updateAlternateMenuTitle];
 	[self updateNewArticlesNotification];
 }
 

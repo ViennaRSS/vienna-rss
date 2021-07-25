@@ -34,6 +34,7 @@
 	@property (nonatomic, readonly, strong) WebView *webView;
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
 @optional
+	-(void)updateAlternateMenuTitle;
 	@property (nonatomic, readonly, copy) NSString *title;
 @end
 

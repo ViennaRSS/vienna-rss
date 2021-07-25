@@ -402,6 +402,11 @@
     [self.webPane goBack];
 }
 
+-(void)updateAlternateMenuTitle
+{
+    // TODO: use to add "Open page in (external browser)"
+}
+
 /* swipeWithEvent
  * Enables "back"/"forward" and "scroll to top"/"scroll to bottom" via three-finger swipes as in Safari and other applications.
  */
