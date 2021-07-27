@@ -355,6 +355,23 @@
 #pragma mark -
 #pragma mark WKNavigationDelegate
 
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error
+{
+    // sometimes, for some unknown reason, the html file is missing in action.
+    // If it occurs, we just provoke a new request
+    // hack: get the enclosing ArticleCellView
+    id objView = webView.superview.superview;
+    if ([objView isKindOfClass:[ArticleCellView class]]) {
+        ArticleCellView *cell = (ArticleCellView *)objView;
+        [cell setInProgress:NO];
+        NSUInteger row = cell.articleRow;
+        NSArray *allArticles = self.controller.articleController.allArticles;
+        if (row < (NSInteger)allArticles.count) {
+            [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+        }
+    }
+}
+
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
 {
     // Not really errors. Load is cancelled or a plugin is grabbing the URL and will handle it by itself.
