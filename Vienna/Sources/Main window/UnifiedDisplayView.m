@@ -352,6 +352,79 @@
 	}
 }
 
+#pragma mark -
+#pragma mark WKNavigationDelegate
+
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
+{
+    // Not really errors. Load is cancelled or a plugin is grabbing the URL and will handle it by itself.
+    if (!([error.domain isEqualToString:WebKitErrorDomain] &&
+          (error.code == NSURLErrorCancelled || error.code == WebKitErrorPlugInWillHandleLoad)))
+    {
+        // hack: get the enclosing ArticleCellView
+        id objView = webView.superview.superview;
+        if ([objView isKindOfClass:[ArticleCellView class]]) {
+            ArticleCellView *cell = (ArticleCellView *)objView;
+            [cell setInProgress:NO];
+            NSUInteger row = cell.articleRow;
+            NSArray *allArticles = self.controller.articleController.allArticles;
+            if (row < (NSInteger)allArticles.count) {
+                [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+            }
+        } else {
+            // TODO : what should we do ?
+            NSLog(@"Webview error %@ associated to object of class %@", error, [objView class]);
+        }
+    }
+}
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
+{
+    // hack: get the enclosing ArticleCellView
+    id objView = webView.superview.superview;
+    if ([objView isKindOfClass:[ArticleCellView class]]) {
+        ArticleCellView *cell = (ArticleCellView *)objView;
+        NSUInteger row = [articleList rowForView:objView];
+        if (row == cell.articleRow && row < self.controller.articleController.allArticles.count
+            && cell.folderId == [self.controller.articleController.allArticles[row] folderId])
+        {    //relevant cell
+            [webView evaluateJavaScript:@"document.documentElement.offsetHeight"
+                      completionHandler:^(id _Nullable result, NSError *_Nullable error) {
+                          CGFloat fittingHeight = ((NSNumber *)result).doubleValue;
+                          //get the rect of the current webview frame
+                          NSRect webViewRect = webView.frame;
+                          //calculate the new frame
+                          NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
+                                                             YPOS_IN_CELL,
+                                                             NSWidth(webViewRect),
+                                                             fittingHeight);
+                          //set the new frame to the webview
+                          webView.frame = newWebViewRect;
+                          // update rowHeightArray
+                          if (row < self->rowHeightArray.count) {
+                              self->rowHeightArray[row] = @(fittingHeight);
+                          } else {
+                              NSInteger toAdd = row - self->rowHeightArray.count;
+                              for (NSInteger i = 0; i < toAdd; i++) {
+                                  [self->rowHeightArray addObject:@(0)];
+                              }
+                              [self->rowHeightArray addObject:@(fittingHeight)];
+                          }
+                          [cell setInProgress:NO];
+                          [self->articleList noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+                      }];
+        } else { //non relevant cell
+            [cell setInProgress:NO];
+            if (row < self.controller.articleController.allArticles.count) {
+                [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+            }
+        }
+    }
+} // webView:didFinishNavigation:
+
+#pragma mark -
+#pragma ArticleBaseView delegate
+
 /* ensureSelectedArticle
  * Ensure that there is a selected article and that it is visible.
  */
@@ -761,6 +834,12 @@
 	view.frame = cellView.frame;
 	[cellView addSubview:view];
 	[cellView setInProgress:YES];
+	// hack: find the WKWebView and become its navigation delegate
+    for (NSView * subview in view.subviews) {
+        if ([subview isKindOfClass:CustomWKWebView.class]) {
+	        ((CustomWKWebView *)subview).navigationDelegate = self;
+	    }
+	}
 	[articleContentView setArticles:@[theArticle]];
     return cellView;
 }
