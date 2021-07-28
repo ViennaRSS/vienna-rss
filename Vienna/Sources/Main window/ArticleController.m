@@ -170,10 +170,10 @@
 	{
 		[self selectFolderAndArticle:currentFolderId guid:currentSelectedArticle.guid];
 		[self ensureSelectedArticle];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
 	}
-
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
 }
+
 /* currentFolderId
  * Returns the ID of the current folder being displayed by the view.
  */
