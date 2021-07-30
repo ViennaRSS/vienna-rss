@@ -22,8 +22,8 @@ import Foundation
 extension BrowserTab: RSSSource {
 
     static let extractRssLinkScript = """
-        Array.from(document.querySelectorAll("link[type*='rss'], link[type*='atom']"),
-            link => new URL(link.getAttribute('href'), document.baseURI).href);
+        Array.from( document.querySelectorAll("link[type*='rss'], link[type*='atom']"),
+            function(link) {return new URL(link.getAttribute('href'), document.baseURI).href;} );
     """
 
     var rssUrls: [URL] {
