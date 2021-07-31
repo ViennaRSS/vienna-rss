@@ -31,7 +31,7 @@ ditto -c -k --rsrc --keepParent "${app_path}" "${zipped_app}" 2>&1 > /dev/null
 uuid=$(uuidgen)
 echo "Uploading to Apple to notarize. Bundle id: ${uuid}"
 set -x
-notarize_uuid=$(xcrun altool --notarize-app --primary-bundle-id "${uuid}" --username "${APP_STORE_ID}" --password "${APP_STORE_PASSWORD}" --asc-provider "${TEAM_SHORTNAME}" --file "${zipped_app}" 2>&1 |grep RequestUUID | awk '{print $3'})
+notarize_uuid=$(xcrun altool --notarize-app --primary-bundle-id "${uuid}" --username "${APP_STORE_ID}" --password "${APP_STORE_PASSWORD}" --team-id "${TEAM_ID}" --file "${zipped_app}" 2>&1 |grep RequestUUID | awk '{print $3'})
 set +x
 echo "Notarization info tracking id: ${notarize_uuid}"
 sleep 3
