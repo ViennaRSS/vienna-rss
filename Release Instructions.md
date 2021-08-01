@@ -31,8 +31,8 @@ is the Apple ID used to connect to App Store Connect
 `APP_STORE_PASSWORD`  
 is an app-specific password created for `altool`
 
-`TEAM_SHORTNAME`  
-is the provider short name for the appropriate developer team.
+`TEAM_ID`  
+is the appropriate developer team identifier. It is generally a 10-character code. You can look-up the teams you are part of in the “Membership” area of [Apple's developer portal](https://developer.apple.com/account/).
 
 For instance, the content of my `Scripts/Resources/CS-ID.xcconfig` file looks like this :
 
@@ -41,7 +41,9 @@ For instance, the content of my `Scripts/Resources/CS-ID.xcconfig` file looks li
     PRIVATE_KEY_PATH = $(SRCROOT)/../secrets/vienna_private_key.pem
     APP_STORE_ID = barijaona@mac.com
     APP_STORE_PASSWORD = @keychain:altool-barijaona@mac.com
-    TEAM_SHORTNAME = BarijaonaRamaholimihaso38280830
+    TEAM_ID = KUU2LM7U9K
+
+__Note:__ Vienna maintainers can [contact me](https://github.com/barijaona "Github") to get provisioning profiles for the above mentioned Team ID, in order to decentralize the distribution of Vienna's official builds.
 
 ## Tag Formatting ##
 
