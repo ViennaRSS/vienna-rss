@@ -34,7 +34,6 @@ final class DirectoryMonitor: NSObject {
     @objc
     init(directories: [URL]) {
         self.directories = directories.filter { $0.hasDirectoryPath }
-                                      .filter { (try? $0.checkResourceIsReachable()) == true }
     }
 
     // When the instance is ready to be deinitialized, the stream should be
@@ -116,7 +115,8 @@ final class DirectoryMonitor: NSObject {
         if !FSEventStreamStart(stream) {
             // This closure is executed if start() fails. Accordingly, the
             // stream must be unscheduled.
-            stop()
+            FSEventStreamInvalidate(stream)
+            FSEventStreamRelease(stream)
             throw DirectoryMonitorError.streamCouldNotBeStarted
         }
     }
