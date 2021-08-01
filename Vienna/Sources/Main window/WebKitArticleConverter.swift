@@ -28,8 +28,7 @@ class WebKitArticleConverter: ArticleConverter {
     }
 
     private func getCachesPath() -> URL {
-        let cachesPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)
-        let directory = URL(fileURLWithPath: cachesPath[0]).appendingPathComponent(Bundle.main.bundleIdentifier ?? "Vienna").appendingPathComponent("article")
+        let directory = FileManager.default.cachesDirectory.appendingPathComponent("article")
         do {
             try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
         } catch {
