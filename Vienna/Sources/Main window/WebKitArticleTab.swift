@@ -60,6 +60,7 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
         self.registerNavigationEndHandler { [weak self] _ in self?.deleteHtmlFile() }
     }
 
+    @objc
     func deleteHtmlFile() {
         guard let htmlPath = htmlPath else {
             return

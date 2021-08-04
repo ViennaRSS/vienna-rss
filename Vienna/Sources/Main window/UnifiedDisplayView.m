@@ -3,7 +3,7 @@
 //  Vienna
 //
 //  Created by Steve Palmer, Barijaona Ramaholimihaso and other Vienna contributors
-//  Copyright (c) 2004-2014 Vienna contributors. All rights reserved.
+//  Copyright (c) 2004-2021 Vienna contributors. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -17,6 +17,8 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
+
+// TODO : refactor this in Swift and use a class more appropriate than WebKitArticleTab
 
 #import "UnifiedDisplayView.h"
 #import "ArticleController.h"
@@ -369,6 +371,11 @@
         if (row < (NSInteger)allArticles.count) {
             [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
         }
+        // Note: it's on purpose that we do not call deleteHtmlFile here,
+        // because it's almost certain that the reason we got into this delegate call
+        // is that the file is already missing.
+        // Not removing the file does not seem to cause orphan files,
+        // while trying to remove it causes much more error messages in log.
     }
 }
 
@@ -388,6 +395,8 @@
             if (row < (NSInteger)allArticles.count) {
                 [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
             }
+            WebKitArticleTab *articleContentView = (WebKitArticleTab *)(cell.articleView);
+            [articleContentView deleteHtmlFile];
         } else {
             // TODO : what should we do ?
             NSLog(@"Webview error %@ associated to object of class %@", error, [objView class]);
@@ -429,12 +438,16 @@
                           }
                           [cell setInProgress:NO];
                           [self->articleList noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+                          WebKitArticleTab *articleContentView = (WebKitArticleTab *)(cell.articleView);
+                          [articleContentView deleteHtmlFile];
                       }];
         } else { //non relevant cell
             [cell setInProgress:NO];
             if (row < self.controller.articleController.allArticles.count) {
                 [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
             }
+            WebKitArticleTab *articleContentView = (WebKitArticleTab *)(cell.articleView);
+            [articleContentView deleteHtmlFile];
         }
     }
 } // webView:didFinishNavigation:
