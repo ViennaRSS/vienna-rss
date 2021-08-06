@@ -222,6 +222,16 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
             openInBackgroundItem.identifier = .WKMenuItemOpenLinkInBackground
             openInBackgroundItem.representedObject = url
             menuItems.insert(openInBackgroundItem, at: menuItems.index(after: index))
+
+            let defaultBrowser = getDefaultBrowser() ?? NSLocalizedString("External Browser", comment: "")
+            let openInExternalBrowserTitle = NSLocalizedString("Open Link in %@", comment: "")
+                .replacingOccurrences(of: "%@", with: defaultBrowser)
+            let openInDefaultBrowserItem = NSMenuItem(
+                title: openInExternalBrowserTitle,
+                action: #selector(openLinkInDefaultBrowser(menuItem:)), keyEquivalent: "")
+            openInDefaultBrowserItem.identifier = .WKMenuItemOpenLinkInSystemBrowser
+            openInDefaultBrowserItem.representedObject = url
+            menuItems.insert(openInDefaultBrowserItem, at: menuItems.index(after: index + 1))
         }
     }
 
@@ -229,6 +239,13 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
     func openLinkInBackground(menuItem: NSMenuItem) {
         if let url = menuItem.representedObject as? URL {
             _ = NSApp.appController.browser.createNewTab(url, inBackground: true, load: true)
+        }
+    }
+
+    @objc
+    func openLinkInDefaultBrowser(menuItem: NSMenuItem) {
+        if let url = menuItem.representedObject as? URL {
+            NSApp.appController.openURL(inDefaultBrowser: url)
         }
     }
 
