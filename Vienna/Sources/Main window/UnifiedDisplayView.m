@@ -439,6 +439,22 @@
     }
 } // webView:didFinishNavigation:
 
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction
+    decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
+{
+    if ((navigationAction.navigationType) == WKNavigationTypeLinkActivated) {
+        // prevent navigation to links opened through click
+        decisionHandler(WKNavigationActionPolicyCancel);
+        // open in new preferred browser instead, or the alternate one if the option key is pressed
+        NSUInteger modifierFlags = navigationAction.modifierFlags;
+        BOOL openInPreferredBrower = (modifierFlags & NSEventModifierFlagOption) ? NO : YES; // This is to avoid problems in casting the value into BOOL
+        // TODO: maybe we need to add an api that opens a clicked link in foreground to the AppController
+        [APPCONTROLLER openURL:navigationAction.request.URL inPreferredBrowser:openInPreferredBrower];
+    } else {
+        decisionHandler(WKNavigationActionPolicyAllow);
+    }
+}
+
 #pragma mark -
 #pragma ArticleBaseView delegate
 
