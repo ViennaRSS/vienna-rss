@@ -458,8 +458,6 @@
     [self willChangeValueForKey:@"loading"];
     // stop Javascript and plugings
     [self.webPane abortJavascriptAndPlugIns];
-    [self.webPane setFrameLoadDelegate:nil];
-    //TODO: why do we remove the delegate here??
     [self.webPane setUIDelegate:nil];
     [self.webPane stopLoading:self];
     [self didChangeValueForKey:@"loading"];
@@ -496,11 +494,6 @@
                                              forKeyPath:MAPref_ShowStatusBar];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self handleStopLoading:nil];
-    //TODO: this should not be necessary, since webview would get deallocated once it stops being referenced
-    //and webview close already does this!
-    //[_webPane setFrameLoadDelegate:nil];
-    //and this is already done in handleStopLoading, and webview close also does this!
-    //[_webPane setUIDelegate:nil];
     [_webPane close];
 }
 

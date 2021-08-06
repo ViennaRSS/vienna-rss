@@ -28,7 +28,7 @@
 #import "BaseView.h"
 #import "Vienna-Swift.h"
 
-@interface ArticleView () <WebUIDelegate, WebFrameLoadDelegate>
+@interface ArticleView () <WebUIDelegate, WebFrameLoadDelegate, Tab>
 
 @property (strong, nonatomic) OverlayStatusBar *statusBar;
 @property (strong, nonatomic) WebViewArticleConverter *converter;

@@ -30,11 +30,12 @@
 @class EnclosureView;
 @protocol ArticleContentView;
 @protocol ArticleViewDelegate;
+@protocol Tab;
 
 @interface ArticleListView : NSView<BaseView, ArticleBaseView, ArticleViewDelegate, NSTableViewDelegate, NSTableViewDataSource>
 {
 	IBOutlet MessageListView * articleList;
-    NSObject<ArticleContentView> *articleText;
+	NSObject<ArticleContentView, Tab> *articleText;
 	IBOutlet NSSplitView * splitView2;
 	IBOutlet EnclosureView * enclosureView;
 

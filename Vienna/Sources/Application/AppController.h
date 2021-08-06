@@ -137,8 +137,6 @@
 -(IBAction)unifiedLayout:(id)sender;
 -(IBAction)reportLayout:(id)sender;
 -(IBAction)condensedLayout:(id)sender;
--(IBAction)makeTextLarger:(id)sender;
--(IBAction)makeTextSmaller:(id)sender;
 -(IBAction)downloadEnclosure:(id)sender;
 -(IBAction)showHideFilterBar:(id)sender;
 -(IBAction)hideFilterBar:(id)sender;

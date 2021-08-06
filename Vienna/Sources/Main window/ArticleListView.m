@@ -110,7 +110,7 @@
     NSView *articleTextView;
 
     if (Preferences.standardPreferences.useNewBrowser) {
-        NSViewController<ArticleContentView> *articleTextController = [[WebKitArticleTab alloc] init];
+        WebKitArticleTab *articleTextController = [[WebKitArticleTab alloc] init];
         articleText = articleTextController;
         articleTextView = articleTextController.view;
     } else {
@@ -664,6 +664,22 @@
 	[self.controller.articleController goBack];
 }
 
+/* makeTextSmaller
+ * Make webview text size smaller
+ */
+-(IBAction)makeTextSmaller:(id)sender
+{
+	[articleText decreaseTextSize];
+}
+
+/* makeTextLarger
+ * Make webview text size larger
+ */
+-(IBAction)makeTextLarger:(id)sender
+{
+	[articleText increaseTextSize];
+}
+
 /* updateAlternateMenuTitle
  * Sets the approprate title for the alternate item in the contextual menu
  * when user changes preference for opening pages in external browser
@@ -723,7 +739,11 @@
  */
 -(void)printDocument:(id)sender
 {
-	[articleText printDocument:sender];
+    if (Preferences.standardPreferences.useNewBrowser) {
+        [articleText printPage];
+    } else {
+        [((TabbedWebView *)articleText) printDocument:sender];
+    }
 }
 
 /* handleArticleListFontChange

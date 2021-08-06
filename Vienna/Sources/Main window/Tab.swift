@@ -47,11 +47,6 @@ protocol Tab {
     func reloadTab()
     func stopLoadingTab()
 
-    // MARK: visual settings
-
-    func decreaseTextSize()
-    func increaseTextSize()
-
     // MARK: other actions
 
     func printPage()

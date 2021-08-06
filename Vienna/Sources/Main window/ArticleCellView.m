@@ -132,7 +132,7 @@
  */
 -(IBAction)makeTextSmaller:(id)sender
 {
-	[articleView makeTextSmaller:sender];
+	[articleView decreaseTextSize];
 }
 
 /* makeTextLarger
@@ -140,7 +140,7 @@
  */
 -(IBAction)makeTextLarger:(id)sender
 {
-	[articleView makeTextLarger:sender];
+	[articleView increaseTextSize];
 }
 
 @end

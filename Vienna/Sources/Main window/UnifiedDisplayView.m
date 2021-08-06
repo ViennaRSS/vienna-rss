@@ -863,7 +863,6 @@
 		cellView.identifier = LISTVIEW_CELL_IDENTIFIER;
 	} else {
 	    // recycled cell : minimum safety measures
-	    [cellView.articleView useUserPrefsForJavascriptAndPlugIns];
 	    [cellView setInProgress:NO];
 	}
 

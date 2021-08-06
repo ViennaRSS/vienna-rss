@@ -276,10 +276,12 @@ extension BrowserTab: Tab {
         self.handleNavigationEnd(success: false)
     }
 
+    @objc
     func decreaseTextSize() {
         // TODO: apple has not implemented this on macOS. There is a property webkit-text-size-adjust on iOS though.
     }
 
+    @objc
     func increaseTextSize() {
         // TODO: apple has not implemented this on macOS. There is a property webkit-text-size-adjust on iOS though.
     }

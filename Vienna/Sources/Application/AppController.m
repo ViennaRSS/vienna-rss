@@ -3208,33 +3208,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[self openURLInDefaultBrowser:[NSURL URLWithString: mailtoLink]];
 }
 
-/* makeTextSmaller
- * Make text size smaller in the article pane.
- * In the future, we may want this to make text size smaller in the article list instead.
- * //TODO: do we really want this?
- */
--(IBAction)makeTextSmaller:(id)sender {
-    //TODO: make text smaller in article tab webview
-    id<Tab> activeBrowserTab = self.browser.activeTab;
-    if (activeBrowserTab) {
-        [activeBrowserTab decreaseTextSize];
-    }
-}
-
-/* makeTextLarger
- * Make text size larger in the article pane.
- * In the future, we may want this to make text size larger in the article list instead.
- * //TODO: do we really want this?
- */
--(IBAction)makeTextLarger:(id)sender
-{
-    //TODO: make text larger in article tab webview
-    id<Tab> activeBrowserTab = self.browser.activeTab;
-    if (activeBrowserTab) {
-        [activeBrowserTab increaseTextSize];
-    }
-}
-
 #pragma mark Blogging
 
 /* blogWithExternalEditor

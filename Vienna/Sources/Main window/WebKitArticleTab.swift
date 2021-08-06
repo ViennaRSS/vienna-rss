@@ -99,18 +99,6 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
         // TODO
     }
 
-    func abortJavascriptAndPlugIns() {
-        // TODO
-    }
-
-    func useUserPrefsForJavascriptAndPlugIns() {
-        // TODO
-    }
-
-    func forceJavascript() {
-        // TODO
-    }
-
     func scrollToTop() {
         // TODO
     }
