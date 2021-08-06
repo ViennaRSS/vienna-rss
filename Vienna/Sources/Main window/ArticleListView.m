@@ -619,7 +619,7 @@
     }
 }
 
-// TODO : clarify why we need this to avoid some "unrecognized selector" exceptions
+// invoked after a WebViewProgressFinishedNotification notification
 -(void)webViewLoadFinished:(NSNotification *)notification
 {
 }

@@ -409,10 +409,6 @@ self.converter = [[WebViewArticleConverter alloc] init];
         [listView endMainFrameLoad];
 }
 
--(void)webViewLoadFinished:(NSNotification *)notification
-{
-}
-
 // MARK: - WebUIDelegate methods
 
 

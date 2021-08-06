@@ -292,6 +292,7 @@
 
 /* webViewLoadFinished
  * Invoked when a web view load has finished
+ * (called via a WebViewProgressFinishedNotification notification)
  */
 - (void)webViewLoadFinished:(NSNotification *)notification
 {

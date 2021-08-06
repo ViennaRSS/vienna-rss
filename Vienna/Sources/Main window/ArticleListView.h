@@ -67,6 +67,7 @@
 -(void)saveTableSettings;
 -(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 -(void)loadArticleLink:(NSString *) articleLink;
+- (void)webViewLoadFinished:(NSNotification *)notification;
 @property (nonatomic, readonly, copy) NSURL *url;
 
 @end
