@@ -517,12 +517,17 @@
 }
 
 /* webView
- * Returns the webview used to display the articles
+ * Returns the selected webview
  */
 -(id<ArticleContentView>)webView
 {
-	ArticleCellView * cellView = (ArticleCellView *)[articleList viewAtColumn:0 row:0 makeIfNecessary:YES];
-	return cellView.articleView;
+    NSInteger currentSelectedRow = articleList.selectedRow;
+    if (currentSelectedRow >= 0) {
+        ArticleCellView *cellView = (ArticleCellView *)[articleList viewAtColumn:0 row:currentSelectedRow makeIfNecessary:YES];
+        return cellView.articleView;
+    } else {
+        return nil;
+    }
 }
 
 /* performFindPanelAction
