@@ -88,7 +88,7 @@ class WebKitArticleConverter: ArticleConverter {
         }
     }
 
-    func prepareArticleDisplay(_ articles: [Article]) -> (htmlPath: URL, accessPath: URL) {
+    func prepareArticleDisplay(_ articles: [Article]) -> (URL) {
 
         guard !articles.isEmpty else {
             fatalError("an empty articles array cannot be presented")
@@ -96,7 +96,8 @@ class WebKitArticleConverter: ArticleConverter {
 
         let articleDirectory = getCachesPath()
 
-        let htmlPath = articleDirectory.appendingPathComponent("article.html")
+        let uuidFileName = NSUUID.init().uuidString.appending(".html")
+        let htmlPath = articleDirectory.appendingPathComponent(uuidFileName)
 
         let articleHtml: String = self.articleText(from: articles)
 
@@ -109,6 +110,6 @@ class WebKitArticleConverter: ArticleConverter {
             fatalError("Could not write article as html file to \(htmlPath) because \(error)")
         }
 
-        return (htmlPath: htmlPath, accessPath: articleDirectory)
+        return (htmlPath)
     }
 }

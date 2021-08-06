@@ -48,12 +48,10 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 
 @implementation Article
 
-/* initWithGuid
- */
--(instancetype)initWithGuid:(NSString *)theGuid
+- (instancetype)init
 {
-    if ((self = [super init]) != nil)
-    {
+    self = [super init];
+    if (self) {
         articleData = [[NSMutableDictionary alloc] init];
         commentsArray = [[NSMutableArray alloc] init];
         readFlag = NO;
@@ -64,8 +62,18 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
         enclosureDownloadedFlag = NO;
         status = ArticleStatusEmpty;
         self.folderId = -1;
-        self.guid = theGuid;
         self.parentId = 0;
+    }
+    return self;
+}
+
+/* initWithGuid
+ */
+-(instancetype)initWithGuid:(NSString *)theGuid
+{
+    if ((self = [self init]) != nil)
+    {
+        self.guid = theGuid;
     }
     return self;
 }

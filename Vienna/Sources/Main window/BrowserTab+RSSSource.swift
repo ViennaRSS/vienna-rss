@@ -58,6 +58,7 @@ extension BrowserTab: RSSSource {
 
     func viewDidLoadRss() {
         refreshRSSState()
+        registerNavigationEndHandler { [weak self] success in self?.handleNavigationEndRss(success: success) }
     }
 
     func refreshRSSState() {
@@ -69,8 +70,6 @@ extension BrowserTab: RSSSource {
             self.showRssButton = false
         }
     }
-
-    func handleNavigationStartRss() { }
 
     func handleNavigationEndRss(success: Bool) {
         // use javascript to detect RSS feed link

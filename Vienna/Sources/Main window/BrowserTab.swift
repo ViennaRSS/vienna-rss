@@ -55,6 +55,11 @@ class BrowserTab: NSViewController {
         didSet { updateVisualLoadingProgress() }
     }
 
+    /// functions that get callbacks on every navigation start
+    var navigationStartHandler: [() -> Void] = []
+    /// functions that get callbacks on every navigation end or abort
+    var navigationEndHandler: [(_ success: Bool) -> Void] = []
+
     /// backing storage only, access via rssSubscriber property
     weak var rssDelegate: RSSSubscriber?
     /// backing storage only, access via rssUrl property
@@ -317,12 +322,20 @@ extension BrowserTab: WKNavigationDelegate {
     }
 
     func handleNavigationStart() {
-        self.handleNavigationStartRss()
+        navigationStartHandler.forEach { $0() }
         updateAddressBarButtons()
     }
 
     func handleNavigationEnd(success: Bool) {
-        self.handleNavigationEndRss(success: success)
+        navigationEndHandler.forEach { $0(success) }
         updateAddressBarButtons()
+    }
+
+    func registerNavigationStartHandler(_ navigationStartHandler: @escaping () -> Void) {
+        self.navigationStartHandler.append(navigationStartHandler)
+    }
+
+    func registerNavigationEndHandler(_ navigationEndHandler: @escaping (_ success: Bool) -> Void) {
+        self.navigationEndHandler.append(navigationEndHandler)
     }
 }

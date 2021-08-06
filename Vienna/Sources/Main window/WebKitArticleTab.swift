@@ -30,16 +30,15 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
                 return
             }
 
-            let (htmlPath, accessPath) = converter.prepareArticleDisplay(self.articles)
+            deleteHtmlFile()
+            let htmlPath = converter.prepareArticleDisplay(self.articles)
+            self.htmlPath = htmlPath
 
-            webView.loadFileURL(htmlPath, allowingReadAccessTo: accessPath)
-            do {
-                try FileManager.default.removeItem(at: htmlPath)
-            } catch {
-               fatalError("Could not remove file \(htmlPath) because \(error)")
-            }
+            webView.loadFileURL(htmlPath, allowingReadAccessTo: htmlPath.deletingLastPathComponent())
         }
     }
+
+    var htmlPath: URL?
 
     override var tabUrl: URL? {
         get { super.tabUrl }
@@ -58,6 +57,17 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
     init() {
         super.init()
         self.webView.contextMenuProvider = self
+        self.registerNavigationEndHandler { [weak self] _ in self?.deleteHtmlFile() }
+    }
+
+    func deleteHtmlFile() {
+        guard let htmlPath = htmlPath else {
+            return
+        }
+        do {
+            try FileManager.default.removeItem(at: htmlPath)
+        } catch {
+        }
     }
 
     /// handle special keys when the article view has the focus
@@ -79,6 +89,7 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
     }
 
     func clearHTML() {
+        deleteHtmlFile()
         self.url = URL.blank
         self.loadTab()
     }
@@ -218,5 +229,9 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
         if let url = menuItem.representedObject as? URL {
             _ = NSApp.appController.browser.createNewTab(url, inBackground: true, load: true)
         }
+    }
+
+    deinit {
+        deleteHtmlFile()
     }
 }
