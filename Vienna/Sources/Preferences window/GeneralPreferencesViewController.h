@@ -29,7 +29,6 @@
     IBOutlet NSButton * openLinksInExternalBrowser;
     IBOutlet NSButton * showAppInMenuBar;
     IBOutlet NSPopUpButton * downloadFolder;
-    IBOutlet NSButtonCell * newArticlesNotificationBadgeButton;
     IBOutlet NSButtonCell * newArticlesNotificationBounceButton;
     IBOutlet NSButtonCell * markReadAfterNext;
     IBOutlet NSButtonCell * markReadAfterDelay;
@@ -45,7 +44,6 @@
 -(IBAction)changeOpenLinksInExternalBrowser:(id)sender;
 -(IBAction)changeExpireDuration:(id)sender;
 -(IBAction)changeDownloadFolder:(id)sender;
--(IBAction)changeNewArticlesNotificationBadge:(id)sender;
 -(IBAction)changeNewArticlesNotificationBounce:(id)sender;
 -(IBAction)changeMarkReadBehaviour:(id)sender;
 -(IBAction)changeShowAppInMenuBar:(id)sender;

@@ -1456,17 +1456,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)updateNewArticlesNotification
 {
-	if (([Preferences standardPreferences].newArticlesNotification
-		& VNANewArticlesNotificationBadge) == 0)
-	{
-		// Remove the badge if there was one.
-		[NSApp.dockTile setBadgeLabel:nil];
-	}
-	else
-	{
-		lastCountOfUnread = -1;	// Force an update
-		[self showUnreadCountOnApplicationIconAndWindowTitle];
-	}
+	lastCountOfUnread = -1;	// Force an update
+	[self showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 - (void)handleUpdateUnreadCount:(NSNotification *)nc
@@ -1504,11 +1495,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             self.mainWindow.subtitle = countString;
         } else {;
             self.mainWindow.title = [NSString stringWithFormat:@"%@ (%@)", NSRunningApplication.currentApplication.localizedName, countString];
-        }
-
-        // Exit now if we're not showing the unread count on the application icon
-        if (([Preferences standardPreferences].newArticlesNotification & VNANewArticlesNotificationBadge) ==0) {
-            return;
         }
 
         NSString *countdown = [NSString stringWithFormat:@"%li", (long)currentCountOfUnread];
