@@ -320,8 +320,8 @@
                 //get the rect of the current webview frame
                 NSRect webViewRect = sender.frame;
                 //calculate the new frame
-                NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
-                                           YPOS_IN_CELL,
+                NSRect newWebViewRect = NSMakeRect(0,
+                                           0,
                                            NSWidth(webViewRect),
                                            fittingHeight);
                 //set the new frame to the webview
