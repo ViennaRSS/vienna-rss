@@ -24,17 +24,46 @@
  */
 BOOL hasOSScriptsMenu(void)
 {
-	NSString * pathToUIServerPlist = (@"~/Library/Preferences/com.apple.systemuiserver.plist").stringByExpandingTildeInPath;
-	NSDictionary * properties = [NSDictionary dictionaryWithContentsOfFile:pathToUIServerPlist];
-	NSArray * menuExtras = properties[@"menuExtras"];
-	NSInteger index;
+    NSFileManager *fileManager = NSFileManager.defaultManager;
+    NSURL *libraryURL = [fileManager URLForDirectory:NSLibraryDirectory
+                                            inDomain:NSUserDomainMask
+                                   appropriateForURL:nil
+                                              create:NO
+                                               error:nil];
+    NSURL *prefsURL = [libraryURL URLByAppendingPathComponent:@"Preferences"
+                                                  isDirectory:YES];
 
-	for (index = 0; index < menuExtras.count; ++index)
-	{
-		if ([menuExtras[index] hasSuffix:@"Script Menu.menu"])
-			return YES;
-	}
-	return NO;
+    if (@available(macOS 10.14, *)) {
+        NSString *fileName = @"com.apple.scriptmenu.plist";
+        NSURL *fileURL = [prefsURL URLByAppendingPathComponent:fileName
+                                                   isDirectory:NO];
+        NSError *error = nil;
+        NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfURL:fileURL
+                                                                  error:&error];
+        if (!prefs && error) {
+            NSLog(@"%@", error);
+        }
+
+        NSNumber *pref = prefs[@"ScriptMenuEnabled"];
+        return pref.boolValue;
+    } else {
+        NSString *fileName = @"com.apple.systemuiserver.plist";
+        NSURL *fileURL = [prefsURL URLByAppendingPathComponent:fileName
+                                                   isDirectory:NO];
+
+        NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfURL:fileURL];
+        if (!prefs) {
+            NSLog(@"File %@ not present, not accessible or invalid", fileURL.path);
+        }
+
+        NSArray *menuExtras = prefs[@"menuExtras"];
+        for (NSUInteger index = 0; index < menuExtras.count; ++index) {
+            if ([menuExtras[index] hasSuffix:@"Script Menu.menu"]) {
+                return YES;
+            }
+        }
+        return NO;
+    }
 }
 
 /* getDefaultBrowser
