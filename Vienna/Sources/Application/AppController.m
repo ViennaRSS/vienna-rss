@@ -3177,14 +3177,15 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	NSString * title;
 	NSString * link;
 	Article * currentArticle;
+	NSCharacterSet *charSet = NSCharacterSet.URLQueryAllowedCharacterSet;
 
     // If the active tab is a web view, mail the URL
     id<Tab> activeBrowserTab = self.browser.activeTab;
     if (activeBrowserTab) {
         NSURL *url = activeBrowserTab.tabUrl;
         if (url != nil) {
-			title = percentEscape(activeBrowserTab.title);
-			link = percentEscape(url.absoluteString);
+			title = [activeBrowserTab.title stringByAddingPercentEncodingWithAllowedCharacters:charSet];
+			link = [url.absoluteString stringByAddingPercentEncodingWithAllowedCharacters:charSet];
 			mailtoLink = [NSMutableString stringWithFormat:@"mailto:?subject=%@&body=%@", title, link];
 		}
 	}
@@ -3197,8 +3198,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			if (articleArray.count == 1)
 			{
 				currentArticle = articleArray[0];
-				title = percentEscape(currentArticle.title);
-				link = percentEscape(currentArticle.link);
+				title = [currentArticle.title stringByAddingPercentEncodingWithAllowedCharacters:charSet];
+				link = [currentArticle.link stringByAddingPercentEncodingWithAllowedCharacters:charSet];
 				mailtoLink = [NSMutableString stringWithFormat: @"mailto:?subject=%@&body=%@", title, link];
 			}
 			else
@@ -3206,8 +3207,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 				mailtoLink = [NSMutableString stringWithFormat:@"mailto:?subject=&body="];
 				for (currentArticle in articleArray)
 				{
-					title = percentEscape(currentArticle.title);
-					link = percentEscape(currentArticle.link);
+					title = [currentArticle.title stringByAddingPercentEncodingWithAllowedCharacters:charSet];
+					link = [currentArticle.link stringByAddingPercentEncodingWithAllowedCharacters:charSet];
 					[mailtoLink appendFormat: @"%@%@%@%@%@", title, mailtoLineBreak, link, mailtoLineBreak, mailtoLineBreak];
 				}
 			}

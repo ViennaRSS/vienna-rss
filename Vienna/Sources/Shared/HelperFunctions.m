@@ -68,18 +68,6 @@ NSMenuItem * menuItemWithAction(SEL theSelector)
 	return nil;
 }
 
-/* percentEscape
- * Escape invalid and reserved URL characters to make string suitable 
- * for embedding in mailto: URLs and custom app-specific schemes like papers://
- * cf unreserved characters in section 2.3 of RFC3986
- */ 
-NSString * percentEscape(NSString *string)
-{
-	return [string stringByAddingPercentEncodingWithAllowedCharacters:
-	    [NSCharacterSet characterSetWithCharactersInString:
-	    @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"]];
-}
-
 /* cleanedUpUrlFromString
  * Uses WebKit to clean up user-entered URLs that might contain umlauts, diacritics and other
  * IDNA related stuff in the domain, or whatever may hide in filenames and arguments.

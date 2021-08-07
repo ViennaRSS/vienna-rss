@@ -48,4 +48,3 @@ NSString * _Nullable getDefaultBrowser(void);
 NSURL * _Nullable cleanedUpUrlFromString(NSString *_Nullable urlString);
 NSURL * _Nullable urlFromUserString(NSString *_Nonnull urlString);
 BOOL hasOSScriptsMenu(void);
-NSString * _Nullable percentEscape(NSString *_Nullable string);

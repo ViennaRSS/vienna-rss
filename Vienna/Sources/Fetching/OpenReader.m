@@ -29,7 +29,6 @@
 
 #import "OpenReader.h"
 #import "URLRequestExtensions.h"
-#import "HelperFunctions.h"
 #import "Folder.h"
 #import "Database.h"
 #import "RefreshManager.h"
@@ -1238,14 +1237,20 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     }
 } // createFolders
 
-
-/**
- * Percent escape the part after "feed/"
- *
- */
-+(NSString *)escapeFeedId:(NSString *)identifier
+// Escape invalid and reserved URL characters to make string suitable for
+// embedding in mailto: URLs and custom app-specific schemes like papers://
+// cf unreserved characters in section 2.3 of RFC3986
++ (NSString *)escapeFeedId:(NSString *)identifier
 {
-    return [NSString stringWithFormat:@"feed/%@", percentEscape([identifier stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)])];
+    NSString *shortenedStr = [identifier stringByReplacingOccurrencesOfString:@"feed/"
+                                                                   withString:@""
+                                                                      options:0
+                                                                        range:NSMakeRange(0, 5)];
+    NSString *chars = @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
+    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:chars];
+    NSString *escapedStr = [shortenedStr stringByAddingPercentEncodingWithAllowedCharacters:set];
+
+    return [NSString stringWithFormat:@"feed/%@", escapedStr];
 }
 
 @end
