@@ -7,4 +7,5 @@
 #import "Database.h"
 #import "Export.h"
 #import "FoldersTree.h"
+#import "NSFileManager+Paths.h"
 #import "SubscriptionModel.h"

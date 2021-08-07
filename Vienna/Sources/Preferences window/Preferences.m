@@ -25,8 +25,6 @@
 #import <Sparkle/Sparkle.h>
 
 // Initial paths
-NSString * MA_ApplicationSupportFolder = @"~/Library/Application Support/Vienna";
-NSString * MA_ScriptsFolder = @"~/Library/Scripts/Applications/Vienna";
 NSString * MA_DefaultStyleName = @"Default";
 NSString * MA_Database_Name = @"messages.db";
 NSString * MA_ImagesFolder_Name = @"Images";
@@ -114,11 +112,13 @@ static Preferences * _standardPreferences = nil;
 			
 			// Application-specific folder locations
 			defaultDatabase = [userPrefs valueForKey:MAPref_DefaultDatabase];
-			imagesFolder = [MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_ImagesFolder_Name].stringByExpandingTildeInPath;
-			stylesFolder = [MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_StylesFolder_Name].stringByExpandingTildeInPath;
-			pluginsFolder = [MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_PluginsFolder_Name].stringByExpandingTildeInPath;
-			scriptsFolder = MA_ScriptsFolder.stringByExpandingTildeInPath;
-			feedSourcesFolder = [MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_FeedSourcesFolder_Name].stringByExpandingTildeInPath;
+			NSFileManager *fileManager = NSFileManager.defaultManager;
+			NSString *appSupportPath = fileManager.applicationSupportDirectory.path;
+			imagesFolder = [appSupportPath stringByAppendingPathComponent:MA_ImagesFolder_Name];
+			stylesFolder = [appSupportPath stringByAppendingPathComponent:MA_StylesFolder_Name];
+			pluginsFolder = [appSupportPath stringByAppendingPathComponent:MA_PluginsFolder_Name];
+			scriptsFolder = fileManager.applicationScriptsDirectory.path;
+			feedSourcesFolder = [appSupportPath stringByAppendingPathComponent:MA_FeedSourcesFolder_Name];
 		}
 		else
 		{
@@ -247,8 +247,11 @@ static Preferences * _standardPreferences = nil;
 	
 	NSNumber * boolNo = @NO;
 	NSNumber * boolYes = @YES;
-	
-	defaultValues[MAPref_DefaultDatabase] = [MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_Database_Name];
+
+	NSFileManager *fileManager = NSFileManager.defaultManager;
+	NSString *appSupportPath = fileManager.applicationSupportDirectory.path;
+
+	defaultValues[MAPref_DefaultDatabase] = [appSupportPath stringByAppendingPathComponent:MA_Database_Name];
 	defaultValues[MAPref_CheckForUpdatedArticles] = boolNo;
 	defaultValues[MAPref_ShowUnreadArticlesInBold] = boolYes;
 	defaultValues[MAPref_ArticleListFont] = defaultArticleListFont;

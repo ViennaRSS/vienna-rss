@@ -6,6 +6,7 @@
 #import "DisclosureView.h"
 #import "FolderView.h"
 #import "HelperFunctions.h"
+#import "NSFileManager+Paths.h"
 #import "OpenReader.h"
 #import "PluginManager.h"
 #import "Preferences.h"
