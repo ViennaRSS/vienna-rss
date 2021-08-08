@@ -19,26 +19,36 @@
 
 import Foundation
 
-class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
+class WebKitArticleTab: BrowserTab, ArticleContentView {
+
+    // make articleWebView property something like an "override" of BrowserTab's webView property
+    var articleWebView: WebKitArticleView
+    override var webView: CustomWKWebView {
+        get {
+            return articleWebView
+        }
+        set {
+            if let newArticleWebView = newValue as? WebKitArticleView {
+                self.webView = newArticleWebView
+            }
+        }
+    }
 
     var listView: ArticleViewDelegate?
 
     var articles: [Article] = [] {
         didSet {
             guard !articles.isEmpty else {
-                self.clearHTML()
+                self.articleWebView.clearHTML()
                 return
             }
 
-            deleteHtmlFile()
-            let htmlPath = converter.prepareArticleDisplay(self.articles)
-            self.htmlPath = htmlPath
+            articleWebView.deleteHtmlFile()
+            let htmlPath = articleWebView.converter.prepareArticleDisplay(self.articles)
 
             webView.loadFileURL(htmlPath, allowingReadAccessTo: htmlPath.deletingLastPathComponent())
         }
     }
-
-    var htmlPath: URL?
 
     override var tabUrl: URL? {
         get { super.tabUrl }
@@ -51,47 +61,17 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
         }
     }
 
-    let converter = WebKitArticleConverter()
-
     @objc
     init() {
+        self.articleWebView = WebKitArticleView.init(frame: CGRect.zero)
         super.init()
-        self.webView.contextMenuProvider = self
-        self.registerNavigationEndHandler { [weak self] _ in self?.deleteHtmlFile() }
-    }
-
-    func deleteHtmlFile() {
-        guard let htmlPath = htmlPath else {
-            return
-        }
-        do {
-            try FileManager.default.removeItem(at: htmlPath)
-        } catch {
-        }
-    }
-
-    /// handle special keys when the article view has the focus
-    override func keyDown(with event: NSEvent) {
-        if let pressedKeys = event.characters, pressedKeys.count == 1 {
-            let pressedKey = (pressedKeys as NSString).character(at: 0)
-            // give app controller preference when handling commands
-            if NSApp.appController.handleKeyDown(pressedKey, withFlags: event.modifierFlags.rawValue) {
-                return
-            }
-        }
-        super.keyDown(with: event)
+        self.registerNavigationEndHandler { [weak self] _ in self?.articleWebView.deleteHtmlFile() }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         addressField.isEditable = false
         hideAddressBar(true)
-    }
-
-    func clearHTML() {
-        deleteHtmlFile()
-        self.url = URL.blank
-        self.loadTab()
     }
 
     func printDocument(_ sender: Any) {
@@ -157,86 +137,5 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
         } else {
             decisionHandler(.allow)
         }
-    }
-
-    // MARK: CustomWKUIDelegate
-
-    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        let browser = NSApp.appController.browser
-        if let webKitBrowser = browser as? TabbedBrowserViewController {
-            let newTab = webKitBrowser.createNewTab(navigationAction.request, config: configuration, inBackground: false)
-            if let webView = webView as? CustomWKWebView {
-                //the listeners are removed from the old webview userContentController on creating the new one, restore them
-                webView.resetScriptListeners()
-            }
-            return (newTab as? BrowserTab)?.webView
-        } else {
-            // Fallback for old browser
-            _ = browser?.createNewTab(navigationAction.request.url, inBackground: false, load: false)
-            return nil
-        }
-    }
-
-    func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem] {
-        var menuItems = existingMenuItems
-        switch purpose {
-        case .page(url: _):
-            break
-        case .link(let url):
-            addLinkMenuCustomizations(&menuItems, url)
-        case .picture:
-            break
-        case .pictureLink(image: _, link: let link):
-            addLinkMenuCustomizations(&menuItems, link)
-        case .text:
-            break
-        }
-        return WebKitContextMenuCustomizer.contextMenuItemsFor(purpose: purpose, existingMenuItems: menuItems)
-    }
-
-    private func addLinkMenuCustomizations(_ menuItems: inout [NSMenuItem], _ url: (URL)) {
-
-        if let index = menuItems.firstIndex(where: { $0.identifier == .WKMenuItemOpenLink }) {
-            menuItems.remove(at: index)
-        }
-
-        if let index = menuItems.firstIndex(where: { $0.identifier == .WKMenuItemOpenLinkInNewWindow }) {
-
-            menuItems[index].title = NSLocalizedString("Open Link in New Tab", comment: "")
-
-            let openInBackgroundTitle = NSLocalizedString("Open Link in Background", comment: "")
-            let openInBackgroundItem = NSMenuItem(title: openInBackgroundTitle, action: #selector(openLinkInBackground(menuItem:)), keyEquivalent: "")
-            openInBackgroundItem.identifier = .WKMenuItemOpenLinkInBackground
-            openInBackgroundItem.representedObject = url
-            menuItems.insert(openInBackgroundItem, at: menuItems.index(after: index))
-
-            let defaultBrowser = getDefaultBrowser() ?? NSLocalizedString("External Browser", comment: "")
-            let openInExternalBrowserTitle = NSLocalizedString("Open Link in %@", comment: "")
-                .replacingOccurrences(of: "%@", with: defaultBrowser)
-            let openInDefaultBrowserItem = NSMenuItem(
-                title: openInExternalBrowserTitle,
-                action: #selector(openLinkInDefaultBrowser(menuItem:)), keyEquivalent: "")
-            openInDefaultBrowserItem.identifier = .WKMenuItemOpenLinkInSystemBrowser
-            openInDefaultBrowserItem.representedObject = url
-            menuItems.insert(openInDefaultBrowserItem, at: menuItems.index(after: index + 1))
-        }
-    }
-
-    @objc
-    func openLinkInBackground(menuItem: NSMenuItem) {
-        if let url = menuItem.representedObject as? URL {
-            _ = NSApp.appController.browser.createNewTab(url, inBackground: true, load: true)
-        }
-    }
-
-    @objc
-    func openLinkInDefaultBrowser(menuItem: NSMenuItem) {
-        if let url = menuItem.representedObject as? URL {
-            NSApp.appController.openURL(inDefaultBrowser: url)
-        }
-    }
-
-    deinit {
-        deleteHtmlFile()
     }
 }

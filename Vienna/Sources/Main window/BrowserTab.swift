@@ -25,7 +25,7 @@ class BrowserTab: NSViewController {
 
     // MARK: Properties
 
-    let webView: CustomWKWebView
+    var webView: CustomWKWebView
 
     @IBOutlet private(set) weak var addressBarContainer: NSView!
     @IBOutlet private(set) weak var addressField: NSTextField!
