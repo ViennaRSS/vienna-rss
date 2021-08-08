@@ -19,6 +19,8 @@
 
 @import Foundation;
 
+@class Article;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ArticleConverter : NSObject

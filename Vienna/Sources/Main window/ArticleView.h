@@ -19,9 +19,13 @@
 //
 
 @import Cocoa;
+
 #import "TabbedWebView.h"
 
+@class Article;
+
 @protocol ArticleContentView;
+@protocol ArticleViewDelegate;
 
 @interface ArticleView: TabbedWebView <ArticleContentView, Tab>
 
