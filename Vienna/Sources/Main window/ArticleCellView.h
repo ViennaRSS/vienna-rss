@@ -6,6 +6,7 @@
 //
 
 @import Cocoa;
+@import WebKit;
 
 @class AppController;
 @class ArticleConverter;

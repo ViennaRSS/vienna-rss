@@ -37,6 +37,7 @@
 #import "Folder.h"
 #import "EnclosureView.h"
 #import "Database.h"
+#import "Vienna-Swift.h"
 
 #define PROGRESS_INDICATOR_DIMENSION 8
 

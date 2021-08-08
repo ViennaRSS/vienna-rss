@@ -18,6 +18,7 @@
 //
 
 import Cocoa
+import WebKit
 
 // MARK: State
 

@@ -17,7 +17,8 @@
 //  limitations under the License.
 //
 
-import Foundation
+import Cocoa
+import WebKit
 
 class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelegate, CustomWKUIDelegate {
 

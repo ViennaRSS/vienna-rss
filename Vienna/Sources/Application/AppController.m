@@ -59,6 +59,7 @@
 #import "ArticleView.h"
 #import "FolderView.h"
 #import "SubscriptionModel.h"
+#import "Vienna-Swift.h"
 
 #define VNA_LOG os_log_create("--", "AppController")
 

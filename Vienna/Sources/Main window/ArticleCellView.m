@@ -8,7 +8,9 @@
 #import "ArticleCellView.h"
 
 #import "AppController.h"
+#import "ArticleController.h"
 #import "ArticleView.h"
+#import "Preferences.h"
 #import "Vienna-Swift.h"
 
 #define PROGRESS_INDICATOR_LEFT_MARGIN	8

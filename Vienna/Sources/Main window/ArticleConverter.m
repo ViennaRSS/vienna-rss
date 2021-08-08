@@ -18,7 +18,10 @@
 //
 
 #import "ArticleConverter.h"
+
+#import "Article.h"
 #import "StringExtensions.h"
+#import "Vienna-Swift.h"
 
 @implementation ArticleConverter
 

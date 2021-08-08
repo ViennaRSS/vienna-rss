@@ -17,7 +17,7 @@
 //  limitations under the License.
 //
 
-import Foundation
+import Cocoa
 
 protocol BrowserContextMenuDelegate: AnyObject {
     func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem]

@@ -18,6 +18,7 @@
 //
 
 import Foundation
+import QuartzCore
 
 class WebKitArticleTab: BrowserTab, ArticleContentView {
 

@@ -20,6 +20,7 @@
 #import "RichXMLParser.h"
 #import "StringExtensions.h"
 #import "NSDate+Vienna.h"
+#import "Vienna-Swift.h"
 
 @interface RichXMLParser ()
 

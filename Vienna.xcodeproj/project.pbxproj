@@ -483,7 +483,6 @@
 		B81B536325565CD700C65459 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B856F8E025782F8100E91AC7 /* AppController+Sparkle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppController+Sparkle.swift"; sourceTree = "<group>"; };
 		B85F93E4255AE48000B54B68 /* NSPopUpButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPopUpButtonExtensions.swift; sourceTree = "<group>"; };
-		B8B9D6D1236850DE00EAE65C /* Vienna_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vienna_Prefix.pch; sourceTree = "<group>"; };
 		B8B9D6D223685C7400EAE65C /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		F41CA692218F56130072F734 /* NSWorkspace+OpenWithMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWorkspace+OpenWithMenu.m"; sourceTree = "<group>"; };
 		F41CA693218F56140072F734 /* NSWorkspace+OpenWithMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWorkspace+OpenWithMenu.h"; sourceTree = "<group>"; };
@@ -1417,7 +1416,6 @@
 				F6D7FEE31F1CE162004F095A /* Plug-ins */,
 				F6D7FEE41F1CE16A004F095A /* Shared */,
 				F6DAD20A1E75892C00FE2645 /* Vienna-Bridging-Header.h */,
-				B8B9D6D1236850DE00EAE65C /* Vienna_Prefix.pch */,
 				430C4ADB1661753F0079C9FC /* autorevision.h */,
 				2A37F4B0FDCFA73011CA2CEA /* main.m */,
 			);
@@ -2936,7 +2934,6 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREFIX_HEADER = Vienna/Sources/Vienna_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"$(BUILD_PREPROCESSOR_DEFINITIONS)",
@@ -2977,7 +2974,6 @@
 				DEPLOYMENT_POSTPROCESSING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_NS_ASSERTIONS = NO;
-				GCC_PREFIX_HEADER = Vienna/Sources/Vienna_Prefix.pch;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				INFOPLIST_FILE = Vienna/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";

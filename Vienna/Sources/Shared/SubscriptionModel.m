@@ -9,6 +9,7 @@
 #import "SubscriptionModel.h"
 #import "RichXMLParser.h"
 #import "StringExtensions.h"
+#import "Vienna-Swift.h"
 
 @implementation SubscriptionModel
 

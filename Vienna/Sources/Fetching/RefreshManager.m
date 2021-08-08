@@ -36,6 +36,7 @@
 #import "Database.h"
 #import "TRVSURLSessionOperation.h"
 #import "URLRequestExtensions.h"
+#import "Vienna-Swift.h"
 
 typedef NS_ENUM (NSInteger, Redirect301Status) {
     HTTP301Unknown = 0,

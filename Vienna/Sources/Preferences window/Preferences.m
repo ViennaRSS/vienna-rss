@@ -24,8 +24,9 @@
 
 #import "Article.h"
 #import "Constants.h"
-#import "SearchMethod.h"
 #import "NSFileManager+Paths.h"
+#import "SearchMethod.h"
+#import "Vienna-Swift.h"
 
 // Initial paths
 NSString * MA_DefaultStyleName = @"Default";

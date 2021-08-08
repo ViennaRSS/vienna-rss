@@ -19,6 +19,7 @@
 
 import Cocoa
 import MMTabBarView
+import WebKit
 
 class TabbedBrowserViewController: NSViewController, RSSSource {
 

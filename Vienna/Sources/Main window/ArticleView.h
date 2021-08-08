@@ -26,6 +26,7 @@
 
 @protocol ArticleContentView;
 @protocol ArticleViewDelegate;
+@protocol Tab;
 
 @interface ArticleView: TabbedWebView <ArticleContentView, Tab>
 
