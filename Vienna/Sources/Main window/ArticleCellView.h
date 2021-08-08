@@ -26,5 +26,6 @@
 @property NSInteger folderId;
 @property NSUInteger articleRow;
 @property (nonatomic, weak) NSTableView *listView;
+@property CGFloat fittingHeight;
 
 @end

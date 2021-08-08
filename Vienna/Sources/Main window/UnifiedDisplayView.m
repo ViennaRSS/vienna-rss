@@ -49,6 +49,7 @@
 
 -(void)initTableView;
 -(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
+-(void)handleCellDidResize:(NSNotificationCenter *)nc;
 -(BOOL)viewNextUnreadInCurrentFolder:(NSInteger)currentRow;
 -(void)markCurrentRead:(NSTimer *)aTimer;
 -(void)makeRowSelectedAndVisible:(NSInteger)rowIndex;
@@ -82,6 +83,7 @@
 	// Register for notification
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
+	[nc addObserver:self selector:@selector(handleCellDidResize:) name:@"MA_Notify_CellResize" object:nil];
 
     [self initTableView];
 }
@@ -159,6 +161,24 @@
 	[articleList setDataSource:nil];
 	[articleList setDelegate:nil];
 	[rowHeightArray removeAllObjects];
+}
+
+- (void)handleCellDidResize:(NSNotification *)nc
+{
+    ArticleCellView * cell = nc.object;
+    NSUInteger row = cell.articleRow;
+    CGFloat fittingHeight = cell.fittingHeight;
+    if (row < rowHeightArray.count) {
+        rowHeightArray[row] = @(fittingHeight);
+    } else {
+        NSInteger toAdd = row - rowHeightArray.count;
+        for (NSInteger i = 0; i < toAdd; i++) {
+            [rowHeightArray addObject:@(0)];
+        }
+        [rowHeightArray addObject:@(fittingHeight)];
+    }
+    [articleList noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+    [cell setInProgress:NO];
 }
 
 #pragma mark -
@@ -326,19 +346,8 @@
                                            fittingHeight);
                 //set the new frame to the webview
                 sender.frame = newWebViewRect;
-
-                if (row < rowHeightArray.count)
-					rowHeightArray[row] = @(fittingHeight);
-                else
-                {	NSInteger toAdd = row - rowHeightArray.count ;
-                    for (NSInteger i = 0 ; i < toAdd ; i++)
-                    {
-                        [rowHeightArray addObject:@(0)];
-                    }
-                    [rowHeightArray addObject:@(fittingHeight)];
-                }
-                [cell setInProgress:NO];
-                [articleList noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+                cell.fittingHeight = fittingHeight;
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_CellResize" object:cell];
             }
             else {	//non relevant cell
                 [cell setInProgress:NO];
@@ -352,120 +361,6 @@
 			// ???
 		}
 	}
-}
-
-#pragma mark -
-#pragma mark WKNavigationDelegate
-
-- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error
-{
-    // sometimes, for some unknown reason, the html file is missing in action.
-    // If it occurs, we just provoke a new request
-    // hack: get the enclosing ArticleCellView
-    id objView = webView.superview.superview;
-    if ([objView isKindOfClass:[ArticleCellView class]]) {
-        ArticleCellView *cell = (ArticleCellView *)objView;
-        [cell setInProgress:NO];
-        NSUInteger row = cell.articleRow;
-        NSArray *allArticles = self.controller.articleController.allArticles;
-        if (row < (NSInteger)allArticles.count) {
-            [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-        }
-        // Note: it's on purpose that we do not call deleteHtmlFile here,
-        // because it's almost certain that the reason we got into this delegate call
-        // is that the file is already missing.
-        // Not removing the file does not seem to cause orphan files,
-        // while trying to remove it causes much more error messages in log.
-    }
-}
-
-- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
-{
-    // Not really errors. Load is cancelled or a plugin is grabbing the URL and will handle it by itself.
-    if (!([error.domain isEqualToString:WebKitErrorDomain] &&
-          (error.code == NSURLErrorCancelled || error.code == WebKitErrorPlugInWillHandleLoad)))
-    {
-        // hack: get the enclosing ArticleCellView
-        id objView = webView.superview.superview;
-        if ([objView isKindOfClass:[ArticleCellView class]]) {
-            ArticleCellView *cell = (ArticleCellView *)objView;
-            [cell setInProgress:NO];
-            NSUInteger row = cell.articleRow;
-            NSArray *allArticles = self.controller.articleController.allArticles;
-            if (row < (NSInteger)allArticles.count) {
-                [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-            }
-            WebKitArticleTab *articleContentView = (WebKitArticleTab *)(cell.articleView);
-            [articleContentView deleteHtmlFile];
-        } else {
-            // TODO : what should we do ?
-            NSLog(@"Webview error %@ associated to object of class %@", error, [objView class]);
-        }
-    }
-}
-
-- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
-{
-    // hack: get the enclosing ArticleCellView
-    id objView = webView.superview.superview;
-    if ([objView isKindOfClass:[ArticleCellView class]]) {
-        ArticleCellView *cell = (ArticleCellView *)objView;
-        NSUInteger row = [articleList rowForView:objView];
-        if (row == cell.articleRow && row < self.controller.articleController.allArticles.count
-            && cell.folderId == [self.controller.articleController.allArticles[row] folderId])
-        {    //relevant cell
-            [webView evaluateJavaScript:@"document.documentElement.offsetHeight"
-                      completionHandler:^(id _Nullable result, NSError *_Nullable error) {
-                          CGFloat fittingHeight = ((NSNumber *)result).doubleValue;
-                          //get the rect of the current webview frame
-                          NSRect webViewRect = webView.frame;
-                          //calculate the new frame
-                          NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
-                                                             YPOS_IN_CELL,
-                                                             NSWidth(webViewRect),
-                                                             fittingHeight);
-                          //set the new frame to the webview
-                          webView.frame = newWebViewRect;
-                          // update rowHeightArray
-                          if (row < self->rowHeightArray.count) {
-                              self->rowHeightArray[row] = @(fittingHeight);
-                          } else {
-                              NSInteger toAdd = row - self->rowHeightArray.count;
-                              for (NSInteger i = 0; i < toAdd; i++) {
-                                  [self->rowHeightArray addObject:@(0)];
-                              }
-                              [self->rowHeightArray addObject:@(fittingHeight)];
-                          }
-                          [cell setInProgress:NO];
-                          [self->articleList noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
-                          WebKitArticleTab *articleContentView = (WebKitArticleTab *)(cell.articleView);
-                          [articleContentView deleteHtmlFile];
-                      }];
-        } else { //non relevant cell
-            [cell setInProgress:NO];
-            if (row < self.controller.articleController.allArticles.count) {
-                [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-            }
-            WebKitArticleTab *articleContentView = (WebKitArticleTab *)(cell.articleView);
-            [articleContentView deleteHtmlFile];
-        }
-    }
-} // webView:didFinishNavigation:
-
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction
-    decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
-{
-    if ((navigationAction.navigationType) == WKNavigationTypeLinkActivated) {
-        // prevent navigation to links opened through click
-        decisionHandler(WKNavigationActionPolicyCancel);
-        // open in new preferred browser instead, or the alternate one if the option key is pressed
-        NSUInteger modifierFlags = navigationAction.modifierFlags;
-        BOOL openInPreferredBrower = (modifierFlags & NSEventModifierFlagOption) ? NO : YES; // This is to avoid problems in casting the value into BOOL
-        // TODO: maybe we need to add an api that opens a clicked link in foreground to the AppController
-        [APPCONTROLLER openURL:navigationAction.request.URL inPreferredBrowser:openInPreferredBrower];
-    } else {
-        decisionHandler(WKNavigationActionPolicyAllow);
-    }
 }
 
 #pragma mark -
@@ -877,19 +772,13 @@
 	cellView.articleRow = row;
 	cellView.listView = articleList;
 	NSObject<ArticleContentView> *articleContentView = cellView.articleView;
-    NSView *view = [articleContentView isKindOfClass:WebKitArticleTab.class]
-        ? ((WebKitArticleTab *)articleContentView).view
+    NSView *view = [articleContentView isKindOfClass:WebKitArticleView.class]
+        ? ((WebKitArticleView *)articleContentView)
         : ((ArticleView *) articleContentView);
 	[view removeFromSuperviewWithoutNeedingDisplay];
 	view.frame = cellView.frame;
 	[cellView addSubview:view];
 	[cellView setInProgress:YES];
-	// hack: find the WKWebView and become its navigation delegate
-    for (NSView * subview in view.subviews) {
-        if ([subview isKindOfClass:CustomWKWebView.class]) {
-	        ((CustomWKWebView *)subview).navigationDelegate = self;
-	    }
-	}
 	[articleContentView setArticles:@[theArticle]];
     return cellView;
 }

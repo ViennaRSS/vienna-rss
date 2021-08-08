@@ -149,16 +149,7 @@
  */
 -(id<Tab>)activeTab
 {
-    if (self.activeTabViewItem != self.primaryTab) {
-        id view = self.activeTabViewItem.view;
-        if ([[view class] conformsToProtocol:@protocol(Tab)]) {
-            return view;
-        }  else {
-            return nil;
-        }
-    } else {
-        return nil;
-    }
+    return self.activeTabViewItem != self.primaryTab ? (id<Tab>)self.activeTabViewItem.view : nil;
 }
 
 - (NSTabViewItem *)activeTabViewItem {

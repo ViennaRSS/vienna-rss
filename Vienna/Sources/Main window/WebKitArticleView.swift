@@ -1,8 +1,8 @@
 //
-//  WebKitArticleTab.swift
+//  WebKitArticleView.swift
 //  Vienna
 //
-//  Copyright 2020 Tassilo Karge
+//  Copyright 2021 Barijaona Ramaholimihaso
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
 
 import Foundation
 
-class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
+class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelegate, CustomWKUIDelegate {
 
     var listView: ArticleViewDelegate?
 
@@ -34,32 +34,21 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
             let htmlPath = converter.prepareArticleDisplay(self.articles)
             self.htmlPath = htmlPath
 
-            webView.loadFileURL(htmlPath, allowingReadAccessTo: htmlPath.deletingLastPathComponent())
+            self.loadFileURL(htmlPath, allowingReadAccessTo: htmlPath.deletingLastPathComponent())
         }
     }
 
     var htmlPath: URL?
 
-    override var tabUrl: URL? {
-        get { super.tabUrl }
-        set { super.tabUrl = newValue }
-    }
-
-    override var loadingProgress: Double {
-        didSet {
-            updateLoadingProgress(oldValue)
-        }
-    }
-
     let converter = WebKitArticleConverter()
 
     @objc
-    init() {
-        super.init()
-        self.webView.contextMenuProvider = self
-        self.registerNavigationEndHandler { [weak self] _ in self?.deleteHtmlFile() }
+    init(frame: NSRect) {
+        super.init(frame: frame, configuration: WKWebViewConfiguration())
+        contextMenuProvider = self
     }
 
+    @objc
     func deleteHtmlFile() {
         guard let htmlPath = htmlPath else {
             return
@@ -82,63 +71,17 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
         super.keyDown(with: event)
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        addressField.isEditable = false
-        hideAddressBar(true)
-    }
-
     func clearHTML() {
         deleteHtmlFile()
-        self.url = URL.blank
-        self.loadTab()
-    }
+        load(URLRequest(url: URL.blank))
+     }
 
-    func printDocument(_ sender: Any) {
+    func decreaseTextSize() {
         // TODO
     }
 
-    func scrollToTop() {
+    func increaseTextSize() {
         // TODO
-    }
-
-    func scrollToBottom() {
-        // TODO
-    }
-
-    func makeTextSmaller(_ sender: Any) {
-        // TODO
-    }
-
-    func makeTextLarger(_ sender: Any) {
-        // TODO
-    }
-
-    // MARK: gui
-
-    override func activateAddressBar() {
-        // TODO: ignored intentionally. Find more elegant solution
-    }
-
-    override func activateWebView() {
-        // TODO: ignored intentionally. Find more elegant solution
-    }
-
-    func updateLoadingProgress(_ oldProgress: Double) {
-        guard let animationLayer = self.view.layer else {
-            return
-        }
-
-        let toValue = max(0.75, Float(loadingProgress))
-        let fromValue = max(0.50, animationLayer.presentation()?.opacity ?? animationLayer.opacity)
-
-        let animation = CABasicAnimation(keyPath: "opacity")
-        animation.fromValue = fromValue
-        animation.toValue = toValue
-        animation.duration = fromValue < toValue ? 0.3 : 0.05
-        animationLayer.add(animation, forKey: "opacityAnimation")
-
-        animationLayer.opacity = toValue
     }
 
     // MARK: Navigation delegate
