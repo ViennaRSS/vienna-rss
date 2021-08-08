@@ -5,7 +5,8 @@
 //  Copyright © 2016 uk.co.opencommunity. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+@import XCTest;
+
 #import "Article.h"
 #import "ArticleView.h"
 

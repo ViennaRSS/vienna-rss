@@ -6,7 +6,7 @@
 //  Copyright © 2018 uk.co.opencommunity. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 // category of NSMutableURLRequest for adding properties with getter and setter
 @interface NSMutableURLRequest (userDict)
