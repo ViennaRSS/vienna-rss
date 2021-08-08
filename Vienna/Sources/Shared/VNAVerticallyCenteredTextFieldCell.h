@@ -7,8 +7,7 @@
 //  Modified by Barijaona Ramaholimihaso
 //
 
-#import <Cocoa/Cocoa.h>
-
+@import Cocoa;
 
 @interface VNAVerticallyCenteredTextFieldCell : NSTextFieldCell
 {

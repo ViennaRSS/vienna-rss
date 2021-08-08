@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 uk.co.opencommunity. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
-#import <XCTest/XCTest.h>
+@import Cocoa;
+@import XCTest;
 
 @interface Vienna_Tests : XCTestCase
 

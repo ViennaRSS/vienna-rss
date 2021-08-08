@@ -19,10 +19,12 @@
 //
 
 #import "Preferences.h"
+
+@import Sparkle;
+
 #import "Constants.h"
 #import "Article.h"
 #import "SearchMethod.h"
-#import <Sparkle/Sparkle.h>
 
 // Initial paths
 NSString * MA_DefaultStyleName = @"Default";
