@@ -192,7 +192,10 @@ extension CustomWKWebView {
                 var url = new URL(img.getAttribute('src'), document.baseURI).href;
                 window.webkit.messageHandlers.\(clickListenerName).postMessage('img: ' + url);
             }
-            window.webkit.messageHandlers.\(clickListenerName).postMessage('text: ' + window.getSelection().getRangeAt(0).toString())
+            var userselection = window.getSelection();
+            if (userselection.rangeCount > 0) {
+                window.webkit.messageHandlers.\(clickListenerName).postMessage('text: ' + userselection.getRangeAt(0).toString())
+            }
         }
     })
     """
@@ -213,7 +216,7 @@ extension CustomWKWebView {
         }
 
         let clickedOnLink = menu.items.contains { $0.identifier == .WKMenuItemOpenLinkInNewWindow }
-        let clickedOnImage = menu.items.contains { $0.identifier == .WKMenuItemOpenMediaInNewWindow }
+        let clickedOnImage = menu.items.contains { $0.identifier == .WKMenuItemOpenMediaInNewWindow || $0.identifier == .WKMenuItemOpenImageInNewWindow }
         let clickedOnText = menu.items.contains { $0.identifier == .WKMenuItemCopy }
 
         let context: WKWebViewContextMenuContext

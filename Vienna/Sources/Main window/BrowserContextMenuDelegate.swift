@@ -42,4 +42,5 @@ extension NSUserInterfaceItemIdentifier {
     static let WKMenuItemOpenLink = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLink")
     static let WKMenuItemOpenLinkInSystemBrowser = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLinkInSystemBrowser")
     static let WKMenuItemOpenMediaInNewWindow = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenMediaInNewWindow")
+    static let WKMenuItemOpenImageInNewWindow = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenImageInNewWindow")
 }
