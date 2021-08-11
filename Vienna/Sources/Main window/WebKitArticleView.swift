@@ -84,24 +84,6 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
         // TODO
     }
 
-    // MARK: Navigation delegate
-
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        // TODO: how do forms work in the article view?
-        // i.e. navigationAction.navigationType == .formSubmitted or .formResubmitted
-        // TODO: in the future, we might want to allow limited browsing in the primary tab
-        if navigationAction.navigationType == .linkActivated {
-            // prevent navigation to links opened through klick
-            decisionHandler(.cancel)
-            // open in new preferred browser instead, or the alternate one if the option key is pressed
-            let openInPreferredBrower = !navigationAction.modifierFlags.contains(.option)
-            // TODO: maybe we need to add an api that opens a clicked link in foreground to the AppController
-            NSApp.appController.open(navigationAction.request.url, inPreferredBrowser: openInPreferredBrower)
-        } else {
-            decisionHandler(.allow)
-        }
-    }
-
     // MARK: CustomWKUIDelegate
 
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
