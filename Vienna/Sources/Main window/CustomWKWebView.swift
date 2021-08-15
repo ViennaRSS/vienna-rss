@@ -103,7 +103,7 @@ class CustomWKWebView: WKWebView {
         var scrollDownPossible = false
         var scrollUpPossible = false
 
-        let javascriptString = "var x = {contentHeight: document.body.scrollHeight, offsetY: document.body.scrollTop}; x"
+        let javascriptString = "var x = {contentHeight: document.body.scrollHeight, offsetY: window.scrollY}; x"
 
         waitForAsyncExecution(until: DispatchTime.now() + DispatchTimeInterval.seconds(1)) { finishHandler in
             self.evaluateJavaScript(javascriptString) { info, _ in
