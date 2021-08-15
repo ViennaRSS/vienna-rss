@@ -78,14 +78,6 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
         // TODO
     }
 
-    func scrollToTop() {
-        // TODO
-    }
-
-    func scrollToBottom() {
-        // TODO
-    }
-
     func makeTextSmaller(_ sender: Any) {
         // TODO
     }

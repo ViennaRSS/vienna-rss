@@ -18,8 +18,6 @@
 //  limitations under the License.
 //
 
-// TODO : refactor this in Swift and use a class more appropriate than WebKitArticleTab
-
 #import "UnifiedDisplayView.h"
 #import "ArticleController.h"
 #import "AppController.h"
@@ -411,20 +409,6 @@
 	return self;
 }
 
-/* webView
- * Returns the selected webview
- */
--(id<ArticleContentView>)webView
-{
-    NSInteger currentSelectedRow = articleList.selectedRow;
-    if (currentSelectedRow >= 0) {
-        ArticleCellView *cellView = (ArticleCellView *)[articleList viewAtColumn:0 row:currentSelectedRow makeIfNecessary:YES];
-        return cellView.articleView;
-    } else {
-        return nil;
-    }
-}
-
 /* performFindPanelAction
  * Implement the search action.
  */
@@ -445,36 +429,6 @@
 		if (shouldSelectArticle)
 			[self makeRowSelectedAndVisible:0];
 	}
-}
-
-/* canGoForward
- * Return TRUE if we can go forward in the backtrack queue.
- */
--(BOOL)canGoForward
-{
-	return FALSE;
-}
-
-/* canGoBack
- * Return TRUE if we can go backward in the backtrack queue.
- */
--(BOOL)canGoBack
-{
-	return FALSE;
-}
-
-/* handleGoForward
- * Move forward through the backtrack queue.
- */
--(IBAction)handleGoForward:(id)sender
-{
-}
-
-/* handleGoBack
- * Move backward through the backtrack queue.
- */
--(IBAction)handleGoBack:(id)sender
-{
 }
 
 /* updateAlternateMenuTitle
