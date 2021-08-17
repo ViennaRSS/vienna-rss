@@ -36,17 +36,12 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
 
     var listView: ArticleViewDelegate?
 
-    var articles: [Article] = [] {
-        didSet {
-            guard !articles.isEmpty else {
-                self.articleWebView.clearHTML()
-                return
-            }
-
-            articleWebView.deleteHtmlFile()
-            let htmlPath = articleWebView.converter.prepareArticleDisplay(self.articles)
-
-            webView.loadFileURL(htmlPath, allowingReadAccessTo: htmlPath.deletingLastPathComponent())
+    var articles: [Article] {
+        set {
+            self.articleWebView.articles = newValue
+        }
+        get {
+            self.articleWebView.articles
         }
     }
 
@@ -63,9 +58,11 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
 
     @objc
     init() {
-        self.articleWebView = WebKitArticleView.init(frame: CGRect.zero)
+        self.articleWebView = WebKitArticleView(frame: CGRect.zero)
         super.init()
-        self.registerNavigationEndHandler { [weak self] _ in self?.articleWebView.deleteHtmlFile() }
+        self.registerNavigationEndHandler {
+            [weak self] _ in self?.articleWebView.deleteHtmlFile()
+        }
     }
 
     override func viewDidLoad() {
