@@ -54,6 +54,22 @@ class WebKitContextMenuCustomizer {
             }
             index = max(index, openInBackgroundIndex)
         }
+
+        let defaultBrowser = getDefaultBrowser() ?? NSLocalizedString("External Browser", comment: "")
+        let openInExternalBrowserTitle = NSLocalizedString("Open Link in %@", comment: "")
+            .replacingOccurrences(of: "%@", with: defaultBrowser)
+        let openInDefaultBrowserItem = NSMenuItem(
+            title: openInExternalBrowserTitle,
+            action: #selector(openLinkInDefaultBrowser(menuItem:)), keyEquivalent: "")
+        openInDefaultBrowserItem.identifier = .WKMenuItemOpenLinkInSystemBrowser
+        openInDefaultBrowserItem.representedObject = url
+        menuItems.insert(openInDefaultBrowserItem, at: menuItems.index(after: index + 1))
     }
 
+    @objc
+    func openLinkInDefaultBrowser(menuItem: NSMenuItem) {
+        if let url = menuItem.representedObject as? URL {
+            NSApp.appController.openURL(inDefaultBrowser: url)
+        }
+    }
 }
