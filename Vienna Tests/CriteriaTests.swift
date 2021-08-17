@@ -38,7 +38,10 @@ class CriteriaTests: XCTestCase {
         // Only called by the Database class when loading smart folders
         let criteriaTreeString = "<?xml version=\"1.0\" encoding=\"utf-8\"?><criteriagroup condition=\"all\"><criteria field=\"Flagged\"><operator>1</operator><value>Yes</value></criteria></criteriagroup>"
 
-        let testCriteriaTree = CriteriaTree(string: criteriaTreeString)!
+        guard let testCriteriaTree = CriteriaTree(string: criteriaTreeString) else {
+            XCTAssertTrue(false)
+            fatalError("cannot happen")
+        }
         XCTAssertTrue(testCriteriaTree.criteriaEnumerator.allObjects.first is Criteria, "Pass")
     }
 
@@ -48,8 +51,11 @@ class CriteriaTests: XCTestCase {
         // Only called by the Database class when loading smart folders
         let criteriaTreeString = "<?xml version=\"1.0\" encoding=\"utf-8\"?><criteriagroup condition=\"all\"><criteria field=\"Flagged\"><operator>1</operator><value>Yes</value></criteria><criteria field=\"Date\"><operator>1</operator><value>today</value></criteria></criteriagroup>"
 
-        let testCriteriaTree = CriteriaTree(string: criteriaTreeString)!
-        let allCriteria = testCriteriaTree.criteriaEnumerator.allObjects;
+        guard let testCriteriaTree = CriteriaTree(string: criteriaTreeString) else {
+            XCTAssertTrue(false)
+            fatalError("cannot happen")
+        }
+        let allCriteria = testCriteriaTree.criteriaEnumerator.allObjects
         XCTAssertGreaterThan(allCriteria.count, 1, "Pass")
     }
 
@@ -57,7 +63,10 @@ class CriteriaTests: XCTestCase {
         // This tests returning a criteria tree as an XML string
         let criteriaTreeString = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?><criteriagroup condition=\"all\"><criteria field=\"Flagged\"><operator>1</operator><value>Yes</value></criteria></criteriagroup>"
 
-        let testCriteriaTree = CriteriaTree(string: criteriaTreeString)!
+        guard let testCriteriaTree = CriteriaTree(string: criteriaTreeString) else {
+            XCTAssertTrue(false)
+            fatalError("cannot happen")
+        }
         XCTAssertEqual(testCriteriaTree.string.lowercased(), criteriaTreeString.lowercased())
     }
 

@@ -25,7 +25,7 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
     var articleWebView: WebKitArticleView
     override var webView: CustomWKWebView {
         get {
-            return articleWebView
+            articleWebView
         }
         set {
             if let newArticleWebView = newValue as? WebKitArticleView {
@@ -37,11 +37,11 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
     var listView: ArticleViewDelegate?
 
     var articles: [Article] {
-        set {
-            self.articleWebView.articles = newValue
-        }
         get {
             self.articleWebView.articles
+        }
+        set {
+            self.articleWebView.articles = newValue
         }
     }
 
@@ -60,8 +60,8 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
     init() {
         self.articleWebView = WebKitArticleView(frame: CGRect.zero)
         super.init()
-        self.registerNavigationEndHandler {
-            [weak self] _ in self?.articleWebView.deleteHtmlFile()
+        self.registerNavigationEndHandler { [weak self] _ in
+            self?.articleWebView.deleteHtmlFile()
         }
     }
 

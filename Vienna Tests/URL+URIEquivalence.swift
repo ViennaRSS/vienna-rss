@@ -26,14 +26,26 @@ extension URL {
 	/// http://stackoverflow.com/questions/12310258/reliable-way-to-compare-two-nsurl-or-one-nsurl-and-an-nsstring
 	///
 	func isEquivalent(_ aURL: URL) -> Bool {
-		if self == aURL { return true }
+		if self == aURL {
+            return true
+        }
 
-		if self.scheme!.caseInsensitiveCompare(aURL.scheme!) != .orderedSame { return false }
-		if self.host!.caseInsensitiveCompare(aURL.host!) != .orderedSame { return false }
+        guard let host = self.host, let scheme = self.scheme, let otherHost = aURL.host, let otherScheme = aURL.scheme else {
+            return false
+        }
+
+		if scheme.caseInsensitiveCompare(otherScheme) != .orderedSame {
+            return false
+        }
+		if host.caseInsensitiveCompare(otherHost) != .orderedSame {
+            return false
+        }
 
 		// NSURL path is smart about trimming trailing slashes
 		// note case-sensitivty here
-		if self.path.compare(aURL.path) != .orderedSame { return false }
+		if self.path.compare(aURL.path) != .orderedSame {
+            return false
+        }
 
 		// at this point, we've established that the urls are equivalent according to the rfc
 		// insofar as scheme, host, and paths match
@@ -41,8 +53,12 @@ extension URL {
 		// according to rfc2616, port's can weakly match if one is missing and the
 		// other is default for the scheme, but for now, let's insist on an explicit match
 		if self.port != nil || aURL.port != nil {
-			if !(self.port == aURL.port) { return false }
-			if !(self.query == aURL.query) { return false }
+			if !(self.port == aURL.port) {
+                return false
+            }
+			if !(self.query == aURL.query) {
+                return false
+            }
 		}
 
 		// for things like user/pw, fragment, etc., seems sensible to be

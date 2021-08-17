@@ -17,9 +17,9 @@
 //  limitations under the License.
 //
 
+import CommonCrypto
 import Foundation
 import WebKit
-import CommonCrypto
 
 class WebKitArticleConverter: ArticleConverter {
 

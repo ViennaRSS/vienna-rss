@@ -129,7 +129,7 @@ class CustomWKWebView: WKWebView {
     // disable scrolling of the webview if it is included in a NSScrollView
     // (https://stackoverflow.com/questions/43961952/disable-scrolling-of-wkwebview-in-nsscrollview)
     // (needed for correct scrolling in Unified layout)
-    override public func scrollWheel(with theEvent: NSEvent) {
+    override func scrollWheel(with theEvent: NSEvent) {
         if self.enclosingScrollView != nil {
             nextResponder?.scrollWheel(with: theEvent)
         } else {
