@@ -255,14 +255,16 @@ self.converter = [[WebViewArticleConverter alloc] init];
     [[self mainFrame] loadRequest:[NSURLRequest requestWithURL: self.tabUrl]];
 }
 
-- (BOOL)pageDown {
-	//TODO
-	return NO;
+- (BOOL)canScrollDown {
+    NSView *theView = self.mainFrame.frameView.documentView;
+    NSRect visibleRect = theView.visibleRect;
+    return (visibleRect.origin.y + visibleRect.size.height < theView.frame.size.height - 2);
 }
 
-- (BOOL)pageUp {
-	//TODO
-	return NO;
+- (BOOL)canScrollUp {
+    NSView *theView = self.mainFrame.frameView.documentView;
+    NSRect visibleRect = theView.visibleRect;
+    return (visibleRect.origin.y > 2);
 }
 
 - (void)printPage {

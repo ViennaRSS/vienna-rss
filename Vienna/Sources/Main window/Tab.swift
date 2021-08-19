@@ -34,10 +34,12 @@ protocol Tab {
     func back() -> Bool
     // goes forward and returns whether going forward was possible
     func forward() -> Bool
-    // returns whether it was possible to scroll down
-    func pageDown() -> Bool
-    // returns whether it was possible to scroll up
-    func pageUp() -> Bool
+    // returns whether it is possible to scroll down
+    @objc
+    optional func canScrollDown() -> Bool
+    // returns whether it is possible to scroll up
+    @objc
+    optional func canScrollUp() -> Bool
 
     func searchFor(_ searchString: String, action: NSFindPanelAction)
 

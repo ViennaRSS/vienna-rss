@@ -732,19 +732,6 @@
 	[self.webPane makeTextLarger:nil];
 }
 
-
-- (BOOL)pageDown {
-	[self.webPane scrollPageDown:nil];
-	return false; //TODO
-}
-
-
-- (BOOL)pageUp {
-	[self.webPane scrollPageUp:nil];
-	return false; //TODO
-}
-
-
 - (void)printPage {
 	[self.webPane printDocument:self];
 }

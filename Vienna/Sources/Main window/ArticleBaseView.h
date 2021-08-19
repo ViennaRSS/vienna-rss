@@ -26,6 +26,8 @@
 @protocol ArticleBaseView
     @property (readonly, nonatomic) BOOL selectFirstUnreadInFolder;
     @property (readonly, nonatomic) BOOL viewNextUnreadInFolder;
+	-(void)scrollDownDetailsOrNextUnread;
+	-(void)scrollUpDetailsOrGoBack;
 	-(void)scrollToArticle:(NSString *)guid;
 	-(void)refreshFolder:(NSInteger)refreshFlag;
 	@property (nonatomic, readonly, strong) Article *selectedArticle;

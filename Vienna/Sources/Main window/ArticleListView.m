@@ -888,6 +888,26 @@
 	return result;
 }
 
+-(void)scrollDownDetailsOrNextUnread
+{
+    if (articleText.canScrollDown) {
+        [(NSView *)articleText scrollPageDown:nil];
+    } else {
+        ArticleController * articleController = self.controller.articleController;
+        [articleController markReadByArray:articleController.markedArticleRange readFlag:YES];
+        [articleController displayNextUnread];
+    }
+}
+
+-(void)scrollUpDetailsOrGoBack
+{
+    if (articleText.canScrollUp) {
+        [(NSView *)articleText scrollPageUp:nil];
+    } else {
+        [self.controller.articleController goBack];
+    }
+}
+
 /* viewLink
  * There's no view link address for article views. If we eventually implement a local
  * scheme such as vienna:<feedurl>/<guid> then we could use that as a link address.

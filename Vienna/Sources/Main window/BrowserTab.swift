@@ -226,16 +226,20 @@ extension BrowserTab: Tab {
         return couldGoForward
     }
 
-    func pageDown() -> Bool {
-        let canPageDown = self.webView.canScrollDown
-        self.webView.pageDown(nil)
-        return canPageDown
+    func canScrollDown() -> Bool {
+        return self.webView.canScrollDown
     }
 
-    func pageUp() -> Bool {
-        let canPageUp = self.webView.canScrollUp
-        self.webView.pageUp(nil)
-        return canPageUp
+    func canScrollUp() -> Bool {
+        return self.webView.canScrollUp
+    }
+
+    override func scrollPageDown(_ sender: Any?) {
+        self.webView.scrollPageDown(sender)
+    }
+
+    override func scrollPageUp(_ sender: Any?) {
+        self.webView.scrollPageUp(sender)
     }
 
     func searchFor(_ searchString: String, action: NSFindPanelAction) {

@@ -2239,22 +2239,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			
             if (activeBrowserTab == nil) {
                 //we are in the article view
-				[self viewNextUnread:self];
-			} else {
-                if (flags & NSEventModifierFlagShift)
-				{
-					if (![activeBrowserTab pageUp]) {
-						[self goBack:self];
-					}
+                if (flags & NSEventModifierFlagShift) {
+                    [self.articleController.mainArticleView scrollUpDetailsOrGoBack];
+				} else {
+                    [self.articleController.mainArticleView scrollDownDetailsOrNextUnread];
 				}
-				else
-				{
-					if (![activeBrowserTab pageDown]) {
-						[self viewNextUnread:self];
-					}
-				}
+				return YES;
 			}
-			return YES;
 		}
 	}
 	return NO;

@@ -587,6 +587,40 @@
 	return result;
 }
 
+- (void)scrollDownDetailsOrNextUnread
+{
+    NSScrollView *scrollView = [articleList enclosingScrollView];
+    NSClipView *clipView = [scrollView contentView];
+    NSPoint newOrigin = [clipView bounds].origin;
+    newOrigin.y = newOrigin.y + NSHeight(scrollView.documentVisibleRect) -20;
+    if (newOrigin.y < articleList.frame.size.height - 20) {
+        [NSAnimationContext beginGrouping];
+        [[NSAnimationContext currentContext] setDuration:0.3];
+        [[clipView animator] setBoundsOrigin:newOrigin];
+        [scrollView reflectScrolledClipView:[scrollView contentView]];
+        [NSAnimationContext endGrouping];
+    } else {
+        [self.controller skipFolder:nil];
+    }
+}
+
+- (void)scrollUpDetailsOrGoBack
+{
+    NSScrollView *scrollView = [articleList enclosingScrollView];
+    NSClipView *clipView = [scrollView contentView];
+    NSPoint newOrigin = [clipView bounds].origin;
+    if (newOrigin.y > 2) {
+        newOrigin.y = newOrigin.y - NSHeight(scrollView.documentVisibleRect);
+        [NSAnimationContext beginGrouping];
+        [[NSAnimationContext currentContext] setDuration:0.3];
+        [[clipView animator] setBoundsOrigin:newOrigin];
+        [scrollView reflectScrolledClipView:[scrollView contentView]];
+        [NSAnimationContext endGrouping];
+    } else {
+        [self.controller.articleController goBack];
+    }
+}
+
 /* viewLink
  * There's no view link address for article views. If we eventually implement a local
  * scheme such as vienna:<feedurl>/<guid> then we could use that as a link address.
