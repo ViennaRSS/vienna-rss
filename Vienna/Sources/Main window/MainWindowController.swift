@@ -306,8 +306,13 @@ extension MainWindowController: RSSSubscriber {
 
 // MARK: - Browser context menu
 
+private var contextMenuDelegate: BrowserContextMenuDelegate = WebKitContextMenuCustomizer()
+
 extension MainWindowController: BrowserContextMenuDelegate {
     func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem] {
-        return WebKitContextMenuCustomizer.contextMenuItemsFor(purpose: purpose, existingMenuItems: existingMenuItems)
+        return contextMenuDelegate.contextMenuItemsFor(purpose: purpose, existingMenuItems: existingMenuItems)
+    }
+    func contextMenuItemAction(menuItem: NSMenuItem) {
+        contextMenuDelegate.contextMenuItemAction(menuItem: menuItem)
     }
 }

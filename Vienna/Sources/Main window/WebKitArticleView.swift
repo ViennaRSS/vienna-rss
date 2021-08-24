@@ -42,6 +42,8 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
 
     let converter = WebKitArticleConverter()
 
+    let contextMenuDelegate: BrowserContextMenuDelegate = WebKitContextMenuCustomizer()
+
     @objc
     init(frame: NSRect) {
         super.init(frame: frame, configuration: WKWebViewConfiguration())
@@ -116,7 +118,7 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
         case .text:
             break
         }
-        return WebKitContextMenuCustomizer.contextMenuItemsFor(purpose: purpose, existingMenuItems: menuItems)
+        return contextMenuDelegate.contextMenuItemsFor(purpose: purpose, existingMenuItems: menuItems)
     }
 
     private func addLinkMenuCustomizations(_ menuItems: inout [NSMenuItem], _ url: (URL)) {
@@ -149,6 +151,11 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
         if let url = menuItem.representedObject as? URL {
             NSApp.appController.openURL(inDefaultBrowser: url)
         }
+    }
+
+    @objc
+    func contextMenuItemAction(menuItem: NSMenuItem) {
+        contextMenuDelegate.contextMenuItemAction(menuItem: menuItem)
     }
 
     deinit {

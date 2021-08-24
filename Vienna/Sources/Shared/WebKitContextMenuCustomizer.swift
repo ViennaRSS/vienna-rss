@@ -19,9 +19,9 @@
 
 import Foundation
 
-class WebKitContextMenuCustomizer {
+class WebKitContextMenuCustomizer: BrowserContextMenuDelegate {
 
-    static func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem] {
+    func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem] {
 
         var menuItems = existingMenuItems
         switch purpose {
@@ -39,7 +39,7 @@ class WebKitContextMenuCustomizer {
         return menuItems
     }
 
-    private static func addLinkMenuCustomizations(_ menuItems: inout [NSMenuItem], _ url: (URL)) {
+    func addLinkMenuCustomizations(_ menuItems: inout [NSMenuItem], _ url: (URL)) {
         guard var index = menuItems.firstIndex(where: { $0.identifier == .WKMenuItemOpenLinkInNewWindow }) else {
             return
         }
@@ -56,17 +56,21 @@ class WebKitContextMenuCustomizer {
         }
 
         let defaultBrowser = getDefaultBrowser() ?? NSLocalizedString("External Browser", comment: "")
-        let openInExternalBrowserTitle = NSLocalizedString("Open Link in %@", comment: "")
-            .replacingOccurrences(of: "%@", with: defaultBrowser)
-        let openInDefaultBrowserItem = NSMenuItem(
-            title: openInExternalBrowserTitle,
-            action: #selector(openLinkInDefaultBrowser(menuItem:)), keyEquivalent: "")
+        let openInExternalBrowserTitle = String(format: NSLocalizedString("Open Link in %@", comment: ""), defaultBrowser)
+        let openInDefaultBrowserItem = NSMenuItem(title: openInExternalBrowserTitle,
+                                                  action: #selector(contextMenuItemAction(menuItem:)), keyEquivalent: "")
         openInDefaultBrowserItem.identifier = .WKMenuItemOpenLinkInSystemBrowser
         openInDefaultBrowserItem.representedObject = url
         menuItems.insert(openInDefaultBrowserItem, at: menuItems.index(after: index + 1))
     }
 
     @objc
+    func contextMenuItemAction(menuItem: NSMenuItem) {
+        if menuItem.identifier == .WKMenuItemOpenLinkInSystemBrowser {
+            openLinkInDefaultBrowser(menuItem: menuItem)
+        }
+    }
+
     func openLinkInDefaultBrowser(menuItem: NSMenuItem) {
         if let url = menuItem.representedObject as? URL {
             NSApp.appController.openURL(inDefaultBrowser: url)

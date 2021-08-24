@@ -358,6 +358,11 @@ extension TabbedBrowserViewController: CustomWKUIDelegate {
         }
     }
 
+    @objc
+    func contextMenuItemAction(menuItem: NSMenuItem) {
+        self.contextMenuDelegate?.contextMenuItemAction(menuItem: menuItem)
+    }
+
     private func getIndexAfterSelected() -> Int {
         guard let tabView = tabView, let selectedItem = tabView.selectedTabViewItem else {
             return 0
