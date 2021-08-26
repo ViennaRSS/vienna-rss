@@ -1740,7 +1740,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[self updateSearchPlaceholderAndSearchMethod];
 	
 	// Make sure article viewer is active
+	// and an adequate responder exists
 	[self.browser switchToPrimaryTab];
+	if ([self.mainWindow.firstResponder isEqualTo:self.mainWindow]) {
+		[self.mainWindow makeFirstResponder:self.foldersTree.mainView];
+	}
 
     // If the user selects the unread-articles smart folder, then clear the
     // relevant user notifications.
