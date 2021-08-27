@@ -20,7 +20,7 @@
 import Foundation
 
 extension URL {
-    static let blank: URL = URL(string: "about:blank") ?? {
+    static let blank = URL(string: "about:blank") ?? {
         fatalError("blank url must exist")
     }()
 }

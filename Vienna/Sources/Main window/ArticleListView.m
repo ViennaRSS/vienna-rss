@@ -110,7 +110,7 @@
     NSView *articleTextView;
 
     if (Preferences.standardPreferences.useNewBrowser) {
-        NSViewController<ArticleContentView> *articleTextController = [[WebKitArticleTab alloc] init];
+        WebKitArticleTab *articleTextController = [[WebKitArticleTab alloc] init];
         articleText = articleTextController;
         articleTextView = articleTextController.view;
     } else {
@@ -309,40 +309,6 @@
 	{
 		Article * theArticle = self.controller.articleController.allArticles[clickedRow];
 		[self.controller openURLFromString:theArticle.link inPreferredBrowser:YES];
-	}
-}
-
-/* updateAlternateMenuTitle
- * Sets the approprate title for the alternate item in the contextual menu
- * when user changes preference for opening pages in external browser
- */
--(void)updateAlternateMenuTitle
-{
-	NSMenuItem * mainMenuItem;
-	NSMenuItem * contextualMenuItem;
-	NSInteger index;
-	NSMenu * articleListMenu = articleList.menu;
-	if (articleListMenu == nil)
-		return;
-	mainMenuItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-	if (mainMenuItem != nil)
-	{
-		index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
-		if (index >= 0)
-		{
-			contextualMenuItem = [articleListMenu itemAtIndex:index];
-			contextualMenuItem.title = mainMenuItem.title;
-		}
-	}
-	mainMenuItem = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
-	if (mainMenuItem != nil)
-	{
-		index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewArticlePagesInAlternateBrowser:)];
-		if (index >= 0)
-		{
-			contextualMenuItem = [articleListMenu itemAtIndex:index];
-			contextualMenuItem.title = mainMenuItem.title;
-		}
 	}
 }
 
@@ -653,6 +619,11 @@
     }
 }
 
+// invoked after a WebViewProgressFinishedNotification notification
+-(void)webViewLoadFinished:(NSNotification *)notification
+{
+}
+
 /* canDeleteMessageAtRow
  * Returns YES if the message at the specified row can be deleted, otherwise NO.
  */
@@ -693,6 +664,53 @@
 	[self.controller.articleController goBack];
 }
 
+/* makeTextSmaller
+ * Make webview text size smaller
+ */
+-(IBAction)makeTextSmaller:(id)sender
+{
+	[articleText decreaseTextSize];
+}
+
+/* makeTextLarger
+ * Make webview text size larger
+ */
+-(IBAction)makeTextLarger:(id)sender
+{
+	[articleText increaseTextSize];
+}
+
+/* updateAlternateMenuTitle
+ * Sets the approprate title for the alternate item in the contextual menu
+ * when user changes preference for opening pages in external browser
+ */
+- (void)updateAlternateMenuTitle
+{
+    NSMenuItem *mainMenuItem;
+    NSMenuItem *contextualMenuItem;
+    NSInteger index;
+    NSMenu *articleListMenu = articleList.menu;
+    if (articleListMenu == nil) {
+        return;
+    }
+    mainMenuItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+    if (mainMenuItem != nil) {
+        index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
+        if (index >= 0) {
+            contextualMenuItem = [articleListMenu itemAtIndex:index];
+            contextualMenuItem.title = mainMenuItem.title;
+        }
+    }
+    mainMenuItem = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
+    if (mainMenuItem != nil) {
+        index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewArticlePagesInAlternateBrowser:)];
+        if (index >= 0) {
+            contextualMenuItem = [articleListMenu itemAtIndex:index];
+            contextualMenuItem.title = mainMenuItem.title;
+        }
+    }
+} // updateAlternateMenuTitle
+
 - (BOOL)acceptsFirstResponder
 {
 	return YES;
@@ -721,7 +739,11 @@
  */
 -(void)printDocument:(id)sender
 {
-	[articleText printDocument:sender];
+    if (Preferences.standardPreferences.useNewBrowser) {
+        [articleText printPage];
+    } else {
+        [((TabbedWebView *)articleText) printDocument:sender];
+    }
 }
 
 /* handleArticleListFontChange
@@ -864,6 +886,26 @@
 			[self makeRowSelectedAndVisible:0];
 	}
 	return result;
+}
+
+-(void)scrollDownDetailsOrNextUnread
+{
+    if (articleText.canScrollDown) {
+        [(NSView *)articleText scrollPageDown:nil];
+    } else {
+        ArticleController * articleController = self.controller.articleController;
+        [articleController markReadByArray:articleController.markedArticleRange readFlag:YES];
+        [articleController displayNextUnread];
+    }
+}
+
+-(void)scrollUpDetailsOrGoBack
+{
+    if (articleText.canScrollUp) {
+        [(NSView *)articleText scrollPageUp:nil];
+    } else {
+        [self.controller.articleController goBack];
+    }
 }
 
 /* viewLink

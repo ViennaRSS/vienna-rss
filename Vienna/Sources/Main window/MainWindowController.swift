@@ -28,7 +28,9 @@ final class MainWindowController: NSWindowController {
     @IBOutlet private(set) var articleListView: ArticleListView?
     @IBOutlet private(set) var unifiedDisplayView: UnifiedDisplayView?
     @IBOutlet private(set) var filterDisclosureView: DisclosureView?
+    @IBOutlet private(set) var filterDisclosureView2: DisclosureView?
     @IBOutlet private(set) var filterSearchField: NSSearchField?
+    @IBOutlet private(set) var filterSearchField2: NSSearchField?
 
     @objc private(set) var toolbarSearchField: NSSearchField?
     @IBOutlet private(set) weak var placeholderDetailView: NSView!
@@ -304,8 +306,13 @@ extension MainWindowController: RSSSubscriber {
 
 // MARK: - Browser context menu
 
+private var contextMenuDelegate: BrowserContextMenuDelegate = WebKitContextMenuCustomizer()
+
 extension MainWindowController: BrowserContextMenuDelegate {
     func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem] {
-        return WebKitContextMenuCustomizer.contextMenuItemsFor(purpose: purpose, existingMenuItems: existingMenuItems)
+        return contextMenuDelegate.contextMenuItemsFor(purpose: purpose, existingMenuItems: existingMenuItems)
+    }
+    func contextMenuItemAction(menuItem: NSMenuItem) {
+        contextMenuDelegate.contextMenuItemAction(menuItem: menuItem)
     }
 }

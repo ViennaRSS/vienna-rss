@@ -21,6 +21,7 @@ import Foundation
 
 protocol BrowserContextMenuDelegate: AnyObject {
     func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem]
+    func contextMenuItemAction(menuItem: NSMenuItem)
 }
 
 enum WKWebViewContextMenuContext {
@@ -42,4 +43,5 @@ extension NSUserInterfaceItemIdentifier {
     static let WKMenuItemOpenLink = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLink")
     static let WKMenuItemOpenLinkInSystemBrowser = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLinkInSystemBrowser")
     static let WKMenuItemOpenMediaInNewWindow = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenMediaInNewWindow")
+    static let WKMenuItemOpenImageInNewWindow = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenImageInNewWindow")
 }

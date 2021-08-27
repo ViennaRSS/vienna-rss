@@ -25,7 +25,7 @@ class BrowserTab: NSViewController {
 
     // MARK: Properties
 
-    let webView: CustomWKWebView
+    var webView: CustomWKWebView
 
     @IBOutlet private(set) weak var addressBarContainer: NSView!
     @IBOutlet private(set) weak var addressField: NSTextField!
@@ -54,6 +54,11 @@ class BrowserTab: NSViewController {
     var loadingProgress: Double = 0 {
         didSet { updateVisualLoadingProgress() }
     }
+
+    /// functions that get callbacks on every navigation start
+    var navigationStartHandler: [() -> Void] = []
+    /// functions that get callbacks on every navigation end or abort
+    var navigationEndHandler: [(_ success: Bool) -> Void] = []
 
     /// backing storage only, access via rssSubscriber property
     weak var rssDelegate: RSSSubscriber?
@@ -221,16 +226,20 @@ extension BrowserTab: Tab {
         return couldGoForward
     }
 
-    func pageDown() -> Bool {
-        let canPageDown = self.webView.canScrollDown
-        self.webView.pageDown(nil)
-        return canPageDown
+    func canScrollDown() -> Bool {
+        return self.webView.canScrollDown
     }
 
-    func pageUp() -> Bool {
-        let canPageUp = self.webView.canScrollUp
-        self.webView.pageUp(nil)
-        return canPageUp
+    func canScrollUp() -> Bool {
+        return self.webView.canScrollUp
+    }
+
+    override func scrollPageDown(_ sender: Any?) {
+        self.webView.scrollPageDown(sender)
+    }
+
+    override func scrollPageUp(_ sender: Any?) {
+        self.webView.scrollPageUp(sender)
     }
 
     func searchFor(_ searchString: String, action: NSFindPanelAction) {
@@ -271,10 +280,12 @@ extension BrowserTab: Tab {
         self.handleNavigationEnd(success: false)
     }
 
+    @objc
     func decreaseTextSize() {
         // TODO: apple has not implemented this on macOS. There is a property webkit-text-size-adjust on iOS though.
     }
 
+    @objc
     func increaseTextSize() {
         // TODO: apple has not implemented this on macOS. There is a property webkit-text-size-adjust on iOS though.
     }
@@ -317,12 +328,20 @@ extension BrowserTab: WKNavigationDelegate {
     }
 
     func handleNavigationStart() {
-        self.handleNavigationStartRss()
+        navigationStartHandler.forEach { $0() }
         updateAddressBarButtons()
     }
 
     func handleNavigationEnd(success: Bool) {
-        self.handleNavigationEndRss(success: success)
+        navigationEndHandler.forEach { $0(success) }
         updateAddressBarButtons()
+    }
+
+    func registerNavigationStartHandler(_ navigationStartHandler: @escaping () -> Void) {
+        self.navigationStartHandler.append(navigationStartHandler)
+    }
+
+    func registerNavigationEndHandler(_ navigationEndHandler: @escaping (_ success: Bool) -> Void) {
+        self.navigationEndHandler.append(navigationEndHandler)
     }
 }

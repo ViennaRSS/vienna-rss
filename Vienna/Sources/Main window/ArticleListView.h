@@ -30,11 +30,12 @@
 @class EnclosureView;
 @protocol ArticleContentView;
 @protocol ArticleViewDelegate;
+@protocol Tab;
 
 @interface ArticleListView : NSView<BaseView, ArticleBaseView, ArticleViewDelegate, NSTableViewDelegate, NSTableViewDataSource>
 {
 	IBOutlet MessageListView * articleList;
-    NSObject<ArticleContentView> *articleText;
+	NSObject<ArticleContentView, Tab> *articleText;
 	IBOutlet NSSplitView * splitView2;
 	IBOutlet EnclosureView * enclosureView;
 
@@ -63,11 +64,11 @@
 }
 
 // Public functions
--(void)updateAlternateMenuTitle;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
 -(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 -(void)loadArticleLink:(NSString *) articleLink;
+- (void)webViewLoadFinished:(NSNotification *)notification;
 @property (nonatomic, readonly, copy) NSURL *url;
 
 @end

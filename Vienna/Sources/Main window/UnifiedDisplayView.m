@@ -3,7 +3,7 @@
 //  Vienna
 //
 //  Created by Steve Palmer, Barijaona Ramaholimihaso and other Vienna contributors
-//  Copyright (c) 2004-2014 Vienna contributors. All rights reserved.
+//  Copyright (c) 2004-2021 Vienna contributors. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -47,6 +47,7 @@
 
 -(void)initTableView;
 -(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
+-(void)handleCellDidResize:(NSNotificationCenter *)nc;
 -(BOOL)viewNextUnreadInCurrentFolder:(NSInteger)currentRow;
 -(void)markCurrentRead:(NSTimer *)aTimer;
 -(void)makeRowSelectedAndVisible:(NSInteger)rowIndex;
@@ -80,6 +81,7 @@
 	// Register for notification
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
+	[nc addObserver:self selector:@selector(handleCellDidResize:) name:@"MA_Notify_CellResize" object:nil];
 
     [self initTableView];
 }
@@ -90,6 +92,7 @@
 -(void)initTableView
 {
 	// Variable initialization here
+	[articleList sizeToFit];
 	[articleList setAllowsMultipleSelection:YES];
 
 	NSMenu * articleListMenu = [[NSMenu alloc] init];
@@ -156,6 +159,24 @@
 	[articleList setDataSource:nil];
 	[articleList setDelegate:nil];
 	[rowHeightArray removeAllObjects];
+}
+
+- (void)handleCellDidResize:(NSNotification *)nc
+{
+    ArticleCellView * cell = nc.object;
+    NSUInteger row = cell.articleRow;
+    CGFloat fittingHeight = cell.fittingHeight;
+    if (row < rowHeightArray.count) {
+        rowHeightArray[row] = @(fittingHeight);
+    } else {
+        NSInteger toAdd = row - rowHeightArray.count;
+        for (NSInteger i = 0; i < toAdd; i++) {
+            [rowHeightArray addObject:@(0)];
+        }
+        [rowHeightArray addObject:@(fittingHeight)];
+    }
+    [articleList noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+    [cell setInProgress:NO];
 }
 
 #pragma mark -
@@ -277,11 +298,21 @@
 	}
 }
 
+- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)webFrame
+{
+    id obj = sender.superview;
+    if ([obj isKindOfClass:[ArticleCellView class]]) {
+        ArticleCellView *cell = (ArticleCellView *)obj;
+        [cell setInProgress:NO];
+    }
+}
+
 #pragma mark -
 #pragma mark webView progress notifications
 
 /* webViewLoadFinished
  * Invoked when a web view load has finished
+ * (called via a WebViewProgressFinishedNotification notification)
  */
 - (void)webViewLoadFinished:(NSNotification *)notification
 {
@@ -307,25 +338,14 @@
                 //get the rect of the current webview frame
                 NSRect webViewRect = sender.frame;
                 //calculate the new frame
-                NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
-                                           YPOS_IN_CELL,
+                NSRect newWebViewRect = NSMakeRect(0,
+                                           0,
                                            NSWidth(webViewRect),
                                            fittingHeight);
                 //set the new frame to the webview
                 sender.frame = newWebViewRect;
-
-                if (row < rowHeightArray.count)
-					rowHeightArray[row] = @(fittingHeight);
-                else
-                {	NSInteger toAdd = row - rowHeightArray.count ;
-                    for (NSInteger i = 0 ; i < toAdd ; i++)
-                    {
-                        [rowHeightArray addObject:@DEFAULT_CELL_HEIGHT];
-                    }
-                    [rowHeightArray addObject:@(fittingHeight)];
-                }
-                [cell setInProgress:NO];
-                [articleList noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+                cell.fittingHeight = fittingHeight;
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_CellResize" object:cell];
             }
             else {	//non relevant cell
                 [cell setInProgress:NO];
@@ -341,39 +361,8 @@
 	}
 }
 
-/* updateAlternateMenuTitle
- * Sets the approprate title for the alternate item in the contextual menu
- * when user changes preference for opening pages in external browser
- */
--(void)updateAlternateMenuTitle
-{
-	NSMenuItem * mainMenuItem;
-	NSMenuItem * contextualMenuItem;
-	NSInteger index;
-	NSMenu * articleListMenu = articleList.menu;
-	if (articleListMenu == nil)
-		return;
-	mainMenuItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-	if (mainMenuItem != nil)
-	{
-		index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
-		if (index >= 0)
-		{
-			contextualMenuItem = [articleListMenu itemAtIndex:index];
-			contextualMenuItem.title = mainMenuItem.title;
-		}
-	}
-	mainMenuItem = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
-	if (mainMenuItem != nil)
-	{
-		index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewArticlePagesInAlternateBrowser:)];
-		if (index >= 0)
-		{
-			contextualMenuItem = [articleListMenu itemAtIndex:index];
-			contextualMenuItem.title = mainMenuItem.title;
-		}
-	}
-}
+#pragma mark -
+#pragma ArticleBaseView delegate
 
 /* ensureSelectedArticle
  * Ensure that there is a selected article and that it is visible.
@@ -420,15 +409,6 @@
 	return self;
 }
 
-/* webView
- * Returns the webview used to display the articles
- */
--(id<ArticleContentView>)webView
-{
-	ArticleCellView * cellView = (ArticleCellView *)[articleList viewAtColumn:0 row:0 makeIfNecessary:YES];
-	return cellView.articleView;
-}
-
 /* performFindPanelAction
  * Implement the search action.
  */
@@ -436,7 +416,7 @@
 {
 	[self.controller.articleController reloadArrayOfArticles];
 
-	// This action is send continuously by the filter field, so make sure not the mark read while searching
+	// make sure to not change the mark read while searching
     if (articleList.selectedRow < 0 && self.controller.articleController.allArticles.count > 0 )
 	{
 		BOOL shouldSelectArticle = YES;
@@ -451,35 +431,36 @@
 	}
 }
 
-/* canGoForward
- * Return TRUE if we can go forward in the backtrack queue.
+/* updateAlternateMenuTitle
+ * Sets the approprate title for the alternate item in the contextual menu
+ * when user changes preference for opening pages in external browser
  */
--(BOOL)canGoForward
+- (void)updateAlternateMenuTitle
 {
-	return FALSE;
-}
-
-/* canGoBack
- * Return TRUE if we can go backward in the backtrack queue.
- */
--(BOOL)canGoBack
-{
-	return FALSE;
-}
-
-/* handleGoForward
- * Move forward through the backtrack queue.
- */
--(IBAction)handleGoForward:(id)sender
-{
-}
-
-/* handleGoBack
- * Move backward through the backtrack queue.
- */
--(IBAction)handleGoBack:(id)sender
-{
-}
+    NSMenuItem *mainMenuItem;
+    NSMenuItem *contextualMenuItem;
+    NSInteger index;
+    NSMenu *articleListMenu = articleList.menu;
+    if (articleListMenu == nil) {
+        return;
+    }
+    mainMenuItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+    if (mainMenuItem != nil) {
+        index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
+        if (index >= 0) {
+            contextualMenuItem = [articleListMenu itemAtIndex:index];
+            contextualMenuItem.title = mainMenuItem.title;
+        }
+    }
+    mainMenuItem = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
+    if (mainMenuItem != nil) {
+        index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewArticlePagesInAlternateBrowser:)];
+        if (index >= 0) {
+            contextualMenuItem = [articleListMenu itemAtIndex:index];
+            contextualMenuItem.title = mainMenuItem.title;
+        }
+    }
+} // updateAlternateMenuTitle
 
 /* saveTableSettings
  * Save the current folder and article
@@ -606,6 +587,40 @@
 	return result;
 }
 
+- (void)scrollDownDetailsOrNextUnread
+{
+    NSScrollView *scrollView = [articleList enclosingScrollView];
+    NSClipView *clipView = [scrollView contentView];
+    NSPoint newOrigin = [clipView bounds].origin;
+    newOrigin.y = newOrigin.y + NSHeight(scrollView.documentVisibleRect) -20;
+    if (newOrigin.y < articleList.frame.size.height - 20) {
+        [NSAnimationContext beginGrouping];
+        [[NSAnimationContext currentContext] setDuration:0.3];
+        [[clipView animator] setBoundsOrigin:newOrigin];
+        [scrollView reflectScrolledClipView:[scrollView contentView]];
+        [NSAnimationContext endGrouping];
+    } else {
+        [self.controller skipFolder:nil];
+    }
+}
+
+- (void)scrollUpDetailsOrGoBack
+{
+    NSScrollView *scrollView = [articleList enclosingScrollView];
+    NSClipView *clipView = [scrollView contentView];
+    NSPoint newOrigin = [clipView bounds].origin;
+    if (newOrigin.y > 2) {
+        newOrigin.y = newOrigin.y - NSHeight(scrollView.documentVisibleRect);
+        [NSAnimationContext beginGrouping];
+        [[NSAnimationContext currentContext] setDuration:0.3];
+        [[clipView animator] setBoundsOrigin:newOrigin];
+        [scrollView reflectScrolledClipView:[scrollView contentView]];
+        [NSAnimationContext endGrouping];
+    } else {
+        [self.controller.articleController goBack];
+    }
+}
+
 /* viewLink
  * There's no view link address for article views. If we eventually implement a local
  * scheme such as vienna:<feedurl>/<guid> then we could use that as a link address.
@@ -698,7 +713,7 @@
 	{
 		NSInteger toAdd = row - rowHeightArray.count + 1 ;
 		for (NSInteger i = 0 ; i < toAdd ; i++) {
-			[rowHeightArray addObject:@(DEFAULT_CELL_HEIGHT)];
+			[rowHeightArray addObject:@(0)];
 		}
 		return (CGFloat)DEFAULT_CELL_HEIGHT;
 	}
@@ -731,7 +746,7 @@
 		cellView.identifier = LISTVIEW_CELL_IDENTIFIER;
 	} else {
 	    // recycled cell : minimum safety measures
-	    [cellView.articleView useUserPrefsForJavascriptAndPlugIns];
+	    [cellView setInProgress:NO];
 	}
 
 	NSArray * allArticles = self.controller.articleController.allArticles;
@@ -745,13 +760,14 @@
 	cellView.articleRow = row;
 	cellView.listView = articleList;
 	NSObject<ArticleContentView> *articleContentView = cellView.articleView;
-    NSView *view = [articleContentView isKindOfClass:WebKitArticleTab.class]
-        ? ((WebKitArticleTab *)articleContentView).view
+    NSView *view = [articleContentView isKindOfClass:WebKitArticleView.class]
+        ? ((WebKitArticleView *)articleContentView)
         : ((ArticleView *) articleContentView);
 	[view removeFromSuperviewWithoutNeedingDisplay];
+	view.frame = cellView.frame;
+	[cellView addSubview:view];
 	[cellView setInProgress:YES];
 	[articleContentView setArticles:@[theArticle]];
-	[cellView addSubview:view];
     return cellView;
 }
 
@@ -778,6 +794,17 @@
  */
 -(void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
+}
+
+/* tableViewColumnDidResize
+ * This notification is called when the user completes resizing a column.
+ */
+- (void)tableViewColumnDidResize:(NSNotification *)notification
+{
+    if ([notification.object isEqualTo:articleList]) {
+        [articleList sizeToFit];
+        [articleList reloadData];
+     }
 }
 
 /* copyTableSelection

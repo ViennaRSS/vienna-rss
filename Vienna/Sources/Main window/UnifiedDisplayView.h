@@ -37,7 +37,6 @@
 @property (weak, nonatomic) AppController *controller;
 
 // Public functions
--(void)updateAlternateMenuTitle;
 -(void)saveTableSettings;
 -(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 - (void)webViewLoadFinished:(NSNotification *)notification;

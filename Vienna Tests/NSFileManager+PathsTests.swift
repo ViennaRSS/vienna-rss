@@ -22,7 +22,7 @@ import XCTest
 class NSFileManagerPathsTests: XCTestCase {
 
     let homePath = NSHomeDirectory()
-    let bundleID = Bundle.main.bundleIdentifier!
+    let bundleID = Bundle.main.bundleIdentifier ?? ""
 
     func testApplicationScriptsPath() throws {
         let result = FileManager.default.applicationScriptsDirectory

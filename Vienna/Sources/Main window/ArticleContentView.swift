@@ -8,7 +8,7 @@
 import Foundation
 
 @objc
-protocol ArticleContentView: Tab {
+protocol ArticleContentView {
 
     var listView: ArticleViewDelegate? { get set }
     var articles: [Article] { get set }
@@ -16,18 +16,9 @@ protocol ArticleContentView: Tab {
     @objc(keyDown:)
     func keyDown(with event: NSEvent)
 
-    // from tabbedwebview
-    // TODO: evaluate and throw out what is not necessary / replace with Tab interface
-    func printDocument(_ sender: Any)
-    func abortJavascriptAndPlugIns()
-    func useUserPrefsForJavascriptAndPlugIns()
-    func forceJavascript()
+    // MARK: visual settings
 
-    func scrollToTop()
-    func scrollToBottom()
+    func decreaseTextSize()
+    func increaseTextSize()
 
-    // other requirements (originally from WebView)
-    // TODO: replace with Tab interface
-    func makeTextSmaller(_ sender: Any)
-    func makeTextLarger(_ sender: Any)
 }

@@ -103,7 +103,7 @@ class CustomWKWebView: WKWebView {
         var scrollDownPossible = false
         var scrollUpPossible = false
 
-        let javascriptString = "var x = {contentHeight: document.body.scrollHeight, offsetY: document.body.scrollTop}; x"
+        let javascriptString = "var x = {contentHeight: document.body.scrollHeight, offsetY: window.scrollY}; x"
 
         waitForAsyncExecution(until: DispatchTime.now() + DispatchTimeInterval.seconds(1)) { finishHandler in
             self.evaluateJavaScript(javascriptString) { info, _ in
@@ -124,6 +124,17 @@ class CustomWKWebView: WKWebView {
         }
 
         return (scrollDownPossible, scrollUpPossible)
+    }
+
+    // disable scrolling of the webview if it is included in a NSScrollView
+    // (https://stackoverflow.com/questions/43961952/disable-scrolling-of-wkwebview-in-nsscrollview)
+    // (needed for correct scrolling in Unified layout)
+    override func scrollWheel(with theEvent: NSEvent) {
+        if self.enclosingScrollView != nil {
+            nextResponder?.scrollWheel(with: theEvent)
+        } else {
+            super.scrollWheel(with: theEvent) // usual behavior of a WKWebView
+        }
     }
 
     private func getTextSelection() -> String {
@@ -181,7 +192,10 @@ extension CustomWKWebView {
                 var url = new URL(img.getAttribute('src'), document.baseURI).href;
                 window.webkit.messageHandlers.\(clickListenerName).postMessage('img: ' + url);
             }
-            window.webkit.messageHandlers.\(clickListenerName).postMessage('text: ' + window.getSelection().getRangeAt(0).toString())
+            var userselection = window.getSelection();
+            if (userselection.rangeCount > 0) {
+                window.webkit.messageHandlers.\(clickListenerName).postMessage('text: ' + userselection.getRangeAt(0).toString())
+            }
         }
     })
     """
@@ -202,7 +216,7 @@ extension CustomWKWebView {
         }
 
         let clickedOnLink = menu.items.contains { $0.identifier == .WKMenuItemOpenLinkInNewWindow }
-        let clickedOnImage = menu.items.contains { $0.identifier == .WKMenuItemOpenMediaInNewWindow }
+        let clickedOnImage = menu.items.contains { $0.identifier == .WKMenuItemOpenMediaInNewWindow || $0.identifier == .WKMenuItemOpenImageInNewWindow }
         let clickedOnText = menu.items.contains { $0.identifier == .WKMenuItemCopy }
 
         let context: WKWebViewContextMenuContext

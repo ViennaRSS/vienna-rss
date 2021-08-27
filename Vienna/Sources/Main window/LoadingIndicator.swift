@@ -82,7 +82,6 @@ class LoadingIndicator: NSView {
     }
 
     override func draw(_ dirtyRect: NSRect) {
-        let loadingProgress = currentLoadingProgress
         animationLayer.frame = self.frame
         let path = CGMutablePath()
         path.move(to: CGPoint(x: 0.0, y: 1.0))

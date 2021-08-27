@@ -248,8 +248,6 @@
     self.articleController.unifiedListView = self.unifiedListView;
     self.articleController.articleListView = self.articleListView;
 
-	self.filterDisclosureView = self.mainWindowController.filterDisclosureView;
-	self.filterSearchField = self.mainWindowController.filterSearchField;
 	self.toolbarSearchField = self.mainWindowController.toolbarSearchField;
 
 	Preferences * prefs = [Preferences standardPreferences];
@@ -696,6 +694,22 @@
         [self.mainWindow makeFirstResponder:self.foldersTree.mainView];
     else
         [self.mainWindow makeFirstResponder:((NSView<BaseView> *)self.browser.primaryTab.view).mainView];
+
+	BOOL isFilterBarVisible = self.isFilterBarVisible;
+	switch (newLayout)
+	{
+		case VNALayoutReport:
+		case VNALayoutCondensed:
+			self.filterDisclosureView = self.mainWindowController.filterDisclosureView;
+			self.filterSearchField = self.mainWindowController.filterSearchField;
+			break;
+
+		case VNALayoutUnified:
+			self.filterDisclosureView = self.mainWindowController.filterDisclosureView2;
+			self.filterSearchField = self.mainWindowController.filterSearchField2;
+			break;
+	}
+	[self setFilterBarState:isFilterBarVisible withAnimation:NO];
 	[self updateSearchPlaceholderAndSearchMethod];
 }
 
@@ -1726,7 +1740,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[self updateSearchPlaceholderAndSearchMethod];
 	
 	// Make sure article viewer is active
+	// and an adequate responder exists
 	[self.browser switchToPrimaryTab];
+	if ([self.mainWindow.firstResponder isEqualTo:self.mainWindow]) {
+		[self.mainWindow makeFirstResponder:self.foldersTree.mainView];
+	}
 
     // If the user selects the unread-articles smart folder, then clear the
     // relevant user notifications.
@@ -1756,7 +1774,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	[self updateAlternateMenuTitle];
 	[self.foldersTree updateAlternateMenuTitle];
-	[self.articleController updateAlternateMenuTitle];
+	[self.articleController.mainArticleView updateAlternateMenuTitle];
 	[self updateNewArticlesNotification];
 }
 
@@ -2225,22 +2243,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			
             if (activeBrowserTab == nil) {
                 //we are in the article view
-				[self viewNextUnread:self];
-			} else {
-                if (flags & NSEventModifierFlagShift)
-				{
-					if (![activeBrowserTab pageUp]) {
-						[self goBack:self];
-					}
+                if (flags & NSEventModifierFlagShift) {
+                    [self.articleController.mainArticleView scrollUpDetailsOrGoBack];
+				} else {
+                    [self.articleController.mainArticleView scrollDownDetailsOrNextUnread];
 				}
-				else
-				{
-					if (![activeBrowserTab pageDown]) {
-						[self viewNextUnread:self];
-					}
-				}
+				return YES;
 			}
-			return YES;
 		}
 	}
 	return NO;
@@ -2941,16 +2950,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	// END of switching between "Search all articles" and "Search current web page".
 	}
 	
-	if ([Preferences standardPreferences].layout == VNALayoutUnified)
-	{
-		[self.filterSearchField.cell setSendsWholeSearchString:YES];
-		((NSSearchFieldCell *)self.filterSearchField.cell).placeholderString = self.articleController.searchPlaceholderString;
-	}
-	else
-	{
-		[self.filterSearchField.cell setSendsWholeSearchString:NO];
-		((NSSearchFieldCell *)self.filterSearchField.cell).placeholderString = self.articleController.searchPlaceholderString;
-	}
+	((NSSearchFieldCell *)self.filterSearchField.cell).placeholderString = self.articleController.searchPlaceholderString;
 }
 
 #pragma mark Searching
@@ -3009,9 +3009,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)searchUsingFilterField:(id)sender
 {
-    //TODO: make this work for the article list
-	[self.browser.activeTab searchFor:self.searchString
-                               action:NSFindPanelActionNext];
+    NSView<BaseView> * articleListView = (NSView<BaseView> *)self.browser.primaryTab.view;
+    [articleListView performFindPanelAction:NSFindPanelActionNext];
 }
 
 - (IBAction)searchUsingTreeFilter:(NSSearchField* )field
@@ -3202,33 +3201,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	
 	if (mailtoLink != nil)
 		[self openURLInDefaultBrowser:[NSURL URLWithString: mailtoLink]];
-}
-
-/* makeTextSmaller
- * Make text size smaller in the article pane.
- * In the future, we may want this to make text size smaller in the article list instead.
- * //TODO: do we really want this?
- */
--(IBAction)makeTextSmaller:(id)sender {
-    //TODO: make text smaller in article tab webview
-    id<Tab> activeBrowserTab = self.browser.activeTab;
-    if (activeBrowserTab) {
-        [activeBrowserTab decreaseTextSize];
-    }
-}
-
-/* makeTextLarger
- * Make text size larger in the article pane.
- * In the future, we may want this to make text size larger in the article list instead.
- * //TODO: do we really want this?
- */
--(IBAction)makeTextLarger:(id)sender
-{
-    //TODO: make text larger in article tab webview
-    id<Tab> activeBrowserTab = self.browser.activeTab;
-    if (activeBrowserTab) {
-        [activeBrowserTab increaseTextSize];
-    }
 }
 
 #pragma mark Blogging

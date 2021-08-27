@@ -11,8 +11,10 @@
                 <outlet property="articleListView" destination="971" id="OE4-G3-4mz"/>
                 <outlet property="filterButton" destination="1400" id="06C-9S-q2e"/>
                 <outlet property="filterDisclosureView" destination="cTN-D0-dY2" id="sKF-FL-hKC"/>
+                <outlet property="filterDisclosureView2" destination="jsc-Kj-wj8" id="Zjf-Wd-fF4"/>
                 <outlet property="filterLabel" destination="1403" id="JQl-as-cDO"/>
                 <outlet property="filterSearchField" destination="1304" id="n8w-oi-CCg"/>
+                <outlet property="filterSearchField2" destination="a7v-eM-oW1" id="1gv-eS-8ME"/>
                 <outlet property="outlineView" destination="Kk7-ax-B3r" id="bhW-7c-vBp"/>
                 <outlet property="placeholderDetailView" destination="9MG-Tu-1xT" id="hUt-Ea-jcm"/>
                 <outlet property="splitView" destination="993" id="adu-5b-ldR"/>
@@ -29,7 +31,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="302" y="347" width="942" height="625"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1025"/>
             <value key="minSize" type="size" width="700" height="350"/>
             <view key="contentView" wantsLayer="YES" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="942" height="625"/>
@@ -39,14 +41,14 @@
                         <rect key="frame" x="0.0" y="22" width="942" height="603"/>
                         <subviews>
                             <view id="PG8-8Y-Lzt">
-                                <rect key="frame" x="0.0" y="0.0" width="842" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="288" height="603"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <visualEffectView blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="o3u-Zs-gsz">
-                                        <rect key="frame" x="0.0" y="574" width="842" height="29"/>
+                                        <rect key="frame" x="0.0" y="574" width="288" height="29"/>
                                         <subviews>
                                             <searchField wantsLayer="YES" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CJo-vt-zIx">
-                                                <rect key="frame" x="5" y="5" width="832" height="19"/>
+                                                <rect key="frame" x="5" y="5" width="278" height="19"/>
                                                 <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" placeholderString="Search for folders" bezelStyle="round" sendsWholeSearchString="YES" recentsAutosaveName="filterStrings" id="lhy-4c-asJ">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -65,13 +67,13 @@
                                         </constraints>
                                     </visualEffectView>
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8uX-2t-Ik7">
-                                        <rect key="frame" x="0.0" y="0.0" width="842" height="574"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="288" height="574"/>
                                         <clipView key="contentView" drawsBackground="NO" id="QAa-Gc-i1V">
-                                            <rect key="frame" x="0.0" y="0.0" width="842" height="559"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="574"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" columnResizing="NO" autosaveName="outViewer" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="14" outlineTableColumn="xXs-dn-GMc" id="Kk7-ax-B3r" customClass="FolderView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="942" height="559"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="942" height="574"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <size key="intercellSpacing" width="3" height="0.0"/>
                                                     <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -95,7 +97,7 @@
                                             <nil key="backgroundColor"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="u6a-gc-Hse">
-                                            <rect key="frame" x="0.0" y="559" width="842" height="15"/>
+                                            <rect key="frame" x="0.0" y="558" width="288" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="m9n-zp-NnZ">
@@ -115,12 +117,9 @@
                                     <constraint firstAttribute="trailing" secondItem="8uX-2t-Ik7" secondAttribute="trailing" id="uAd-Tx-1yF"/>
                                 </constraints>
                             </view>
-                            <customView id="9MG-Tu-1xT">
-                                <rect key="frame" x="843" y="0.0" width="99" height="603"/>
+                            <customView fixedFrame="YES" id="9MG-Tu-1xT">
+                                <rect key="frame" x="289" y="0.0" width="653" height="603"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="99" id="Q8e-26-Vxy"/>
-                                </constraints>
                             </customView>
                         </subviews>
                         <holdingPriorities>
@@ -459,27 +458,28 @@
             </connections>
             <point key="canvasLocation" x="138" y="-578"/>
         </window>
-        <customView translatesAutoresizingMaskIntoConstraints="NO" id="971" userLabel="ArticleDisplayView" customClass="ArticleListView">
-            <rect key="frame" x="0.0" y="0.0" width="500" height="629"/>
+        <customView id="971" userLabel="ArticleDisplayView" customClass="ArticleListView">
+            <rect key="frame" x="0.0" y="0.0" width="172" height="629"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="7tZ-qr-cec">
-                    <rect key="frame" x="0.0" y="0.0" width="500" height="629"/>
+                    <rect key="frame" x="0.0" y="0.0" width="172" height="629"/>
                     <subviews>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="cTN-D0-dY2" customClass="DisclosureView">
-                            <rect key="frame" x="0.0" y="600" width="500" height="29"/>
+                            <rect key="frame" x="0.0" y="600" width="172" height="29"/>
                             <subviews>
                                 <visualEffectView verticalHuggingPriority="255" blendingMode="withinWindow" material="headerView" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="1300" customClass="FilterView" customModule="Vienna" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="500" height="29"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="172" height="29"/>
                                     <subviews>
                                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1391">
-                                            <rect key="frame" x="0.0" y="26" width="500" height="5"/>
+                                            <rect key="frame" x="0.0" y="26" width="172" height="5"/>
                                         </box>
                                         <searchField toolTip="Filter displayed articles by matching text" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="1304">
-                                            <rect key="frame" x="8" y="5" width="155" height="19"/>
+                                            <rect key="frame" x="8" y="5" width="0.0" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="LD9-MT-Msv"/>
                                             </constraints>
-                                            <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" bezelStyle="round" sendsWholeSearchString="YES" recentsAutosaveName="filterStrings" id="1376">
+                                            <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" bezelStyle="round" recentsAutosaveName="filterStrings" id="1376">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -490,7 +490,7 @@
                                             </connections>
                                         </searchField>
                                         <button toolTip="Close the filter bar" translatesAutoresizingMaskIntoConstraints="NO" id="1313">
-                                            <rect key="frame" x="151" y="7" width="13" height="13"/>
+                                            <rect key="frame" x="151" y="7.5" width="13" height="13"/>
                                             <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSStopProgressFreestandingTemplate" imagePosition="only" alignment="center" controlSize="small" lineBreakMode="truncatingTail" inset="2" id="1379">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="message" size="11"/>
@@ -501,7 +501,7 @@
                                             </connections>
                                         </button>
                                         <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="1305">
-                                            <rect key="frame" x="217" y="7" width="50" height="14"/>
+                                            <rect key="frame" x="14" y="7" width="4" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="right" title="Filter by:" id="1377">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -593,7 +593,6 @@
                                     </constraints>
                                     <connections>
                                         <outlet property="filterByLabel" destination="1305" id="Toc-r7-JYz"/>
-                                        <outlet property="filterSearchField" destination="1304" id="1321"/>
                                         <outlet property="filterViewPopUp" destination="1306" id="1322"/>
                                     </connections>
                                 </visualEffectView>
@@ -677,49 +676,212 @@
             <point key="canvasLocation" x="889" y="-628"/>
         </customView>
         <customView id="1148" userLabel="UnifiedDisplayView" customClass="UnifiedDisplayView">
-            <rect key="frame" x="0.0" y="0.0" width="701" height="607"/>
+            <rect key="frame" x="0.0" y="0.0" width="701" height="677"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQ8-bu-Pg4">
-                    <rect key="frame" x="0.0" y="0.0" width="701" height="607"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <clipView key="contentView" id="emU-La-Fur">
-                        <rect key="frame" x="1" y="1" width="699" height="605"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="NgO-hM-mCz" customClass="ExtendedTableView">
-                                <rect key="frame" x="0.0" y="0.0" width="699" height="605"/>
+                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mN2-fi-cwa">
+                    <rect key="frame" x="0.0" y="0.0" width="701" height="677"/>
+                    <subviews>
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="jsc-Kj-wj8" customClass="DisclosureView">
+                            <rect key="frame" x="0.0" y="627" width="701" height="50"/>
+                            <subviews>
+                                <visualEffectView verticalHuggingPriority="255" blendingMode="withinWindow" material="headerView" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="oq7-In-wpt" customClass="FilterView" customModule="Vienna" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="701" height="29"/>
+                                    <subviews>
+                                        <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="6nJ-Cc-qUM">
+                                            <rect key="frame" x="0.0" y="26" width="701" height="5"/>
+                                        </box>
+                                        <searchField toolTip="Filter displayed articles by matching text" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="a7v-eM-oW1">
+                                            <rect key="frame" x="8" y="5" width="284" height="19"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="4mp-AL-ns3"/>
+                                            </constraints>
+                                            <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" bezelStyle="round" sendsWholeSearchString="YES" recentsAutosaveName="filterStrings" id="1ur-gV-Qe2">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </searchFieldCell>
+                                            <connections>
+                                                <action selector="searchUsingFilterField:" target="-1" id="piw-E3-tvl"/>
+                                                <outlet property="nextKeyView" destination="971" id="a4E-tj-qLT"/>
+                                            </connections>
+                                        </searchField>
+                                        <button toolTip="Close the filter bar" translatesAutoresizingMaskIntoConstraints="NO" id="ZBo-PU-Lx7">
+                                            <rect key="frame" x="680" y="7.5" width="13" height="13"/>
+                                            <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSStopProgressFreestandingTemplate" imagePosition="only" alignment="center" controlSize="small" lineBreakMode="truncatingTail" inset="2" id="P1d-SX-Oec">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="message" size="11"/>
+                                            </buttonCell>
+                                            <accessibility description="Close the filter bar"/>
+                                            <connections>
+                                                <action selector="hideFilterBar:" target="-1" id="ky2-GB-9kE"/>
+                                            </connections>
+                                        </button>
+                                        <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="249" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="FDm-UJ-4O9">
+                                            <rect key="frame" x="385" y="7" width="50" height="14"/>
+                                            <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="right" title="Filter by:" id="VXV-Rv-wn5">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <connections>
+                                                <accessibilityConnection property="title" destination="Ymd-v7-5ML" id="Rb3-ae-7vP"/>
+                                            </connections>
+                                        </textField>
+                                        <popUpButton toolTip="Filter articles" wantsLayer="YES" horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ymd-v7-5ML">
+                                            <rect key="frame" x="434" y="2" width="130" height="22"/>
+                                            <popUpButtonCell key="cell" type="push" title="All Articles" bezelStyle="rounded" alignment="center" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="FDh-ie-FnZ" id="C9j-bn-pJQ">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <menu key="menu" id="0ft-Li-IBV">
+                                                    <items>
+                                                        <menuItem title="All Articles" state="on" id="FDh-ie-FnZ">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                            <connections>
+                                                                <action selector="changeFiltering:" target="-1" id="REE-SD-F1r"/>
+                                                            </connections>
+                                                        </menuItem>
+                                                        <menuItem title="Unread or Flagged" tag="6" id="771-UJ-rsF">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                            <connections>
+                                                                <action selector="changeFiltering:" target="-1" id="I4H-mj-glS"/>
+                                                            </connections>
+                                                        </menuItem>
+                                                        <menuItem title="Last Refresh" tag="2" id="bhs-vZ-HCm">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                            <connections>
+                                                                <action selector="changeFiltering:" target="-1" id="g3s-dK-EVa"/>
+                                                            </connections>
+                                                        </menuItem>
+                                                        <menuItem title="Today" tag="3" id="pZm-V9-RVd">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                            <connections>
+                                                                <action selector="changeFiltering:" target="-1" id="8f9-gi-FM1"/>
+                                                            </connections>
+                                                        </menuItem>
+                                                        <menuItem title="Last 48 Hours" tag="4" id="yvh-qU-EAm">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                            <connections>
+                                                                <action selector="changeFiltering:" target="-1" id="J3H-GZ-0g3"/>
+                                                            </connections>
+                                                        </menuItem>
+                                                        <menuItem title="Flagged" tag="5" id="vqZ-zm-Blb">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                            <connections>
+                                                                <action selector="changeFiltering:" target="-1" id="7HX-Sf-XmT"/>
+                                                            </connections>
+                                                        </menuItem>
+                                                        <menuItem title="Unread Articles" tag="1" id="lDl-nn-yvL">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                            <connections>
+                                                                <action selector="changeFiltering:" target="-1" id="C1k-Bw-GnO"/>
+                                                            </connections>
+                                                        </menuItem>
+                                                    </items>
+                                                </menu>
+                                                <connections>
+                                                    <binding destination="fAX-Jg-YQ6" name="selectedTag" keyPath="values.FilterMode" id="OP8-nN-BUO">
+                                                        <dictionary key="options">
+                                                            <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                                            <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                                            <integer key="NSNullPlaceholder" value="0"/>
+                                                        </dictionary>
+                                                    </binding>
+                                                </connections>
+                                            </popUpButtonCell>
+                                        </popUpButton>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Ymd-v7-5ML" firstAttribute="leading" secondItem="FDm-UJ-4O9" secondAttribute="trailing" constant="5" id="2DQ-Vi-Kbw"/>
+                                        <constraint firstItem="ZBo-PU-Lx7" firstAttribute="centerY" secondItem="Ymd-v7-5ML" secondAttribute="centerY" id="5g8-jb-FEg"/>
+                                        <constraint firstItem="a7v-eM-oW1" firstAttribute="top" secondItem="oq7-In-wpt" secondAttribute="top" constant="5" id="9v7-6M-9Vf"/>
+                                        <constraint firstItem="ZBo-PU-Lx7" firstAttribute="leading" secondItem="Ymd-v7-5ML" secondAttribute="trailing" multiplier="1.2" priority="250" constant="8" symbolic="YES" id="BuG-6G-dsB"/>
+                                        <constraint firstItem="FDm-UJ-4O9" firstAttribute="leading" secondItem="a7v-eM-oW1" secondAttribute="trailing" multiplier="1.3" priority="250" constant="8" symbolic="YES" id="FWU-9P-qPv"/>
+                                        <constraint firstItem="6nJ-Cc-qUM" firstAttribute="leading" secondItem="oq7-In-wpt" secondAttribute="leading" id="JoO-X9-VRZ"/>
+                                        <constraint firstAttribute="bottom" secondItem="a7v-eM-oW1" secondAttribute="bottom" constant="5" id="Nsl-5H-7ti"/>
+                                        <constraint firstAttribute="trailing" secondItem="ZBo-PU-Lx7" secondAttribute="trailing" constant="8" id="WMr-qf-yQ2"/>
+                                        <constraint firstItem="Ymd-v7-5ML" firstAttribute="baseline" secondItem="FDm-UJ-4O9" secondAttribute="baseline" id="d3W-pF-j1b"/>
+                                        <constraint firstAttribute="trailing" secondItem="6nJ-Cc-qUM" secondAttribute="trailing" id="fOM-j9-I8z"/>
+                                        <constraint firstItem="FDm-UJ-4O9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="a7v-eM-oW1" secondAttribute="trailing" constant="8" symbolic="YES" id="fT5-iZ-2hG"/>
+                                        <constraint firstItem="ZBo-PU-Lx7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ymd-v7-5ML" secondAttribute="trailing" constant="8" id="oYc-va-hPK"/>
+                                        <constraint firstItem="FDm-UJ-4O9" firstAttribute="baseline" secondItem="a7v-eM-oW1" secondAttribute="baseline" id="p64-4s-aM0"/>
+                                        <constraint firstItem="a7v-eM-oW1" firstAttribute="leading" secondItem="oq7-In-wpt" secondAttribute="leading" constant="8" id="vCB-bE-KVH"/>
+                                        <constraint firstItem="6nJ-Cc-qUM" firstAttribute="top" secondItem="oq7-In-wpt" secondAttribute="top" id="wJk-Th-9Po"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="filterByLabel" destination="FDm-UJ-4O9" id="u9z-Rg-07U"/>
+                                        <outlet property="filterViewPopUp" destination="Ymd-v7-5ML" id="v4W-E6-1vU"/>
+                                    </connections>
+                                </visualEffectView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="oq7-In-wpt" secondAttribute="trailing" id="05v-Nk-B8T"/>
+                                <constraint firstItem="oq7-In-wpt" firstAttribute="top" secondItem="jsc-Kj-wj8" secondAttribute="top" priority="600" id="0u1-3P-V8o"/>
+                                <constraint firstItem="oq7-In-wpt" firstAttribute="leading" secondItem="jsc-Kj-wj8" secondAttribute="leading" id="gAu-xI-682"/>
+                                <constraint firstAttribute="bottom" secondItem="oq7-In-wpt" secondAttribute="bottom" id="jyU-4J-nFY"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="disclosedView" destination="oq7-In-wpt" id="Xk1-K9-6ax"/>
+                            </connections>
+                        </customView>
+                        <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQ8-bu-Pg4">
+                            <rect key="frame" x="0.0" y="0.0" width="701" height="627"/>
+                            <clipView key="contentView" id="emU-La-Fur">
+                                <rect key="frame" x="1" y="1" width="699" height="625"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <size key="intercellSpacing" width="3" height="2"/>
-                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                <tableColumns>
-                                    <tableColumn identifier="ArticleCellView" width="658" minWidth="40" maxWidth="3000" id="8CZ-rM-yXF">
-                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
-                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
-                                        </tableHeaderCell>
-                                        <textFieldCell key="dataCell" selectable="YES" editable="YES" alignment="left" id="vZe-8N-E3r">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
-                                    </tableColumn>
-                                </tableColumns>
-                            </tableView>
-                        </subviews>
-                    </clipView>
-                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="S05-md-m5A">
-                        <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </scroller>
-                    <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="fza-gl-TLT">
-                        <rect key="frame" x="224" y="17" width="15" height="102"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </scroller>
-                </scrollView>
+                                <subviews>
+                                    <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="NgO-hM-mCz" customClass="ExtendedTableView">
+                                        <rect key="frame" x="0.0" y="0.0" width="699" height="625"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <size key="intercellSpacing" width="3" height="2"/>
+                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                        <tableColumns>
+                                            <tableColumn identifier="ArticleCellView" width="658" minWidth="40" maxWidth="65535" id="8CZ-rM-yXF">
+                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                </tableHeaderCell>
+                                                <textFieldCell key="dataCell" selectable="YES" editable="YES" alignment="left" id="vZe-8N-E3r">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                                <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
+                                            </tableColumn>
+                                        </tableColumns>
+                                    </tableView>
+                                </subviews>
+                            </clipView>
+                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="S05-md-m5A">
+                                <rect key="frame" x="1" y="550" width="659" height="16"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </scroller>
+                            <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="fza-gl-TLT">
+                                <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </scroller>
+                        </scrollView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="jsc-Kj-wj8" secondAttribute="trailing" id="qHb-Fe-x7i"/>
+                    </constraints>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
             </subviews>
+            <constraints>
+                <constraint firstItem="mN2-fi-cwa" firstAttribute="top" secondItem="1148" secondAttribute="top" id="28v-cP-gxb"/>
+                <constraint firstAttribute="bottom" secondItem="mN2-fi-cwa" secondAttribute="bottom" id="3Dk-1R-3iU"/>
+                <constraint firstItem="mN2-fi-cwa" firstAttribute="leading" secondItem="1148" secondAttribute="leading" id="8Hh-VB-sxk"/>
+                <constraint firstAttribute="trailing" secondItem="mN2-fi-cwa" secondAttribute="trailing" id="AJg-eo-73R"/>
+            </constraints>
             <connections>
                 <outlet property="articleList" destination="NgO-hM-mCz" id="x5w-1V-UjV"/>
             </connections>
@@ -817,17 +979,17 @@
     <resources>
         <image name="DeleteTemplate" width="18" height="14"/>
         <image name="EmptyTrashTemplate" width="19" height="14"/>
-        <image name="GetInfoTemplate" width="7" height="14"/>
+        <image name="GetInfoTemplate" width="28" height="28"/>
         <image name="MailTemplate" width="17" height="12"/>
         <image name="MarkReadTemplate" width="19" height="14"/>
         <image name="NSActionTemplate" width="15" height="15"/>
         <image name="NSStopProgressFreestandingTemplate" width="15" height="15"/>
-        <image name="NewFeedTemplate" width="19" height="12"/>
+        <image name="NewFeedTemplate" width="38" height="24"/>
         <image name="NextFolderTemplate" width="19" height="12"/>
         <image name="NextItemTemplate" width="18" height="12"/>
         <image name="PreviousItemTemplate" width="18" height="12"/>
         <image name="StyleTemplate" width="15" height="15"/>
-        <image name="SyncTemplate" width="19" height="12"/>
+        <image name="SyncTemplate" width="38" height="24"/>
         <image name="filter-icon" width="16" height="16"/>
     </resources>
 </document>

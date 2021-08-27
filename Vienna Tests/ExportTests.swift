@@ -33,8 +33,11 @@ class ExportTests: XCTestCase {
 
     /// Test helper method to return an array of folders for export
     func foldersArray() -> [Any] {
-        let db = Database.shared!
-        return db.arrayOfAllFolders()
+        guard let database = Database.shared else {
+            XCTAssertTrue(false)
+            fatalError("cannot happen")
+        }
+        return database.arrayOfAllFolders()
     }
 
     // MARK: Export Tests
@@ -42,7 +45,10 @@ class ExportTests: XCTestCase {
     func testExportWithoutGroups() {
         // Test exporting feeds to opml file without groups
         let folders = self.foldersArray()
-        let tmpUrl = URL(string: "/tmp/vienna-test-nogroups.opml")!
+        guard let tmpUrl = URL(string: "/tmp/vienna-test-nogroups.opml") else {
+            XCTAssertTrue(false)
+            fatalError("cannot happen")
+        }
 
         let countExported = Export.export(toFile: tmpUrl.absoluteString, from: folders, in: nil, withGroups: false)
         XCTAssertGreaterThan(countExported, 0, "Pass")
@@ -51,7 +57,10 @@ class ExportTests: XCTestCase {
     func testExportWithGroups() {
         // Test exporting feeds to opml file without groups
         let folders = self.foldersArray()
-        let tmpUrl = URL(string: "/tmp/vienna-test-groups.opml")!
+        guard let tmpUrl = URL(string: "/tmp/vienna-test-groups.opml") else {
+            XCTAssertTrue(false)
+            fatalError("cannot happen")
+        }
 
         let countExported = Export.export(toFile: tmpUrl.absoluteString, from: folders, in: nil, withGroups: true)
         XCTAssertGreaterThan(countExported, 0, "Pass")

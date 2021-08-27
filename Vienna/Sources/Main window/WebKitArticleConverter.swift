@@ -17,6 +17,7 @@
 //  limitations under the License.
 //
 
+import CommonCrypto
 import Foundation
 import WebKit
 
@@ -88,17 +89,19 @@ class WebKitArticleConverter: ArticleConverter {
         }
     }
 
-    func prepareArticleDisplay(_ articles: [Article]) -> (htmlPath: URL, accessPath: URL) {
+    func prepareArticleDisplay(_ articles: [Article]) -> (URL) {
 
         guard !articles.isEmpty else {
             fatalError("an empty articles array cannot be presented")
         }
 
-        let articleDirectory = getCachesPath()
-
-        let htmlPath = articleDirectory.appendingPathComponent("article.html")
-
         let articleHtml: String = self.articleText(from: articles)
+
+        //give an article or specific array of articles always the same name
+        let uuidFileName = uniqueId(for: articleHtml).appending(".html")
+
+        let articleDirectory = getCachesPath()
+        let htmlPath = articleDirectory.appendingPathComponent(uuidFileName)
 
         do {
             if FileManager.default.fileExists(atPath: htmlPath.path) {
@@ -109,6 +112,24 @@ class WebKitArticleConverter: ArticleConverter {
             fatalError("Could not write article as html file to \(htmlPath) because \(error)")
         }
 
-        return (htmlPath: htmlPath, accessPath: articleDirectory)
+        return (htmlPath)
+    }
+
+    func uniqueId(for articleText: String) -> String {
+        if let data = articleText.data(using: String.Encoding.utf8) {
+            var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
+
+            // CC_MD5 performs digest calculation and places the result in the caller-supplied buffer for digest (md)
+            // Calls the given closure with a pointer to the underlying unsafe bytes of the data’s contiguous storage.
+            _ = data.withUnsafeBytes {
+                CC_MD5($0.baseAddress, UInt32(data.count), &digest)
+            }
+
+            let md5String = digest
+                .map { byte in String(format: "%02x", UInt8(byte)) }
+                .reduce(into: "") { result, newValue in result += newValue }
+            return md5String
+        }
+        return ""
     }
 }

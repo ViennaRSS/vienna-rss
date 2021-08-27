@@ -23,11 +23,13 @@
 
 @protocol ArticleContentView;
 
-@interface ArticleView: TabbedWebView <ArticleContentView>
+@interface ArticleView: TabbedWebView <ArticleContentView, Tab>
 
 // Public functions
 -(void)setArticles:(nonnull NSArray<Article *> *)articles;
 -(void)keyDown:(nonnull NSEvent *)theEvent;
+- (void)decreaseTextSize;
+- (void)increaseTextSize;
 
 @property (nonnull, strong, nonatomic) id<ArticleViewDelegate> listView;
 

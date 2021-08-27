@@ -164,15 +164,16 @@
 			break;
 	}
 
+	[self loadView];
 	[Preferences standardPreferences].layout = newLayout;
 	if (currentSelectedArticle != nil)
 	{
 		[self selectFolderAndArticle:currentFolderId guid:currentSelectedArticle.guid];
 		[self ensureSelectedArticle];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
 	}
-
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
 }
+
 /* currentFolderId
  * Returns the ID of the current folder being displayed by the view.
  */
@@ -197,21 +198,6 @@
 -(void)saveTableSettings
 {
 	[mainArticleView saveTableSettings];
-}
-
-/* updateAlternateMenuTitle
- * Sets the approprate title for the alternate item in the contextual menu
- */
- -(void)updateAlternateMenuTitle
-{
-	if (mainArticleView ==  self.articleListView)
-	{
-		[self.articleListView updateAlternateMenuTitle];
-	}
-	else
-	{
-		[self.unifiedListView updateAlternateMenuTitle];
-	}
 }
 
 /* updateVisibleColumns

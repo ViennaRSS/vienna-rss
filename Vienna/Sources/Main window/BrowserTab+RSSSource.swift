@@ -22,8 +22,8 @@ import Foundation
 extension BrowserTab: RSSSource {
 
     static let extractRssLinkScript = """
-        Array.from(document.querySelectorAll("link[type*='rss'], link[type*='atom']"),
-            link => new URL(link.getAttribute('href'), document.baseURI).href);
+        Array.from( document.querySelectorAll("link[type*='rss'], link[type*='atom']"),
+            function(link) {return new URL(link.getAttribute('href'), document.baseURI).href;} );
     """
 
     var rssUrls: [URL] {
@@ -58,6 +58,7 @@ extension BrowserTab: RSSSource {
 
     func viewDidLoadRss() {
         refreshRSSState()
+        registerNavigationEndHandler { [weak self] success in self?.handleNavigationEndRss(success: success) }
     }
 
     func refreshRSSState() {
@@ -69,8 +70,6 @@ extension BrowserTab: RSSSource {
             self.showRssButton = false
         }
     }
-
-    func handleNavigationStartRss() { }
 
     func handleNavigationEndRss(success: Bool) {
         // use javascript to detect RSS feed link

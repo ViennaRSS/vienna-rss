@@ -71,7 +71,6 @@
 @property (nonatomic, readonly) NSInteger currentFolderId;
 @property (nonatomic, readonly) Article *selectedArticle;
 @property (nonatomic, readonly, copy) NSArray *markedArticleRange;
--(void)updateAlternateMenuTitle;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
 -(void)sortArticles;
