@@ -8,6 +8,21 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.8.0 Beta 1
+------------
+- Implement an experimental new browser based on WKWebView : it can be selected in Advanced preferences, and will be available after application restart. It is fastest and more secure.
+- Refactor code:
+    - modify ArticleController to be a NSViewController
+    - structurate code around protocols like Browser, Tab, ArticleContentView, ArticleViewDelegate and BrowserContextMenuDelegate
+    - change many methods of BaseView protocol to be optional and remove unneeded code
+    - introduce new classes : ArticleConverter, ArticleStyleLoader, RSSSubscriber
+- Remove preference setting related to notifications (already handled by System Preferences)
+- Fix image overflow with certain feeds
+- Update Sparkle to version 1.26
+- Use NSFileManager properties for library paths
+- Migrate some tests to Swift
+- Update procedures for building binaries (don't use Bintray anymore, fix notarization)
+
 3.7.1
 -----
 - Improve autodiscovery of feeds inside webpages (among other improvements, detect URLs of feeds for YouTube channels or users)

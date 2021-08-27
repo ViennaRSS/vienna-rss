@@ -108,12 +108,24 @@ sup {
 
 <h1 id="toc_0">Version Notes</h1>
 
-<h2 id="toc_1">3.7.1</h2>
+<h2 id="toc_1">3.8.0 Beta 1</h2>
 
 <ul>
-<li>Improve autodiscovery of feeds inside webpages (among other improvements, detect URLs of feeds for YouTube channels or users)</li>
-<li>Fix wrong image used in article list to indicate existence of an enclosure</li>
-<li>Fix empty folders in build which interferes with plug-in loading</li>
+<li>Implement an experimental new browser based on WKWebView : it can be selected in Advanced preferences, and will be available after application restart. It is fastest and more secure.</li>
+<li>Refactor code:
+
+<ul>
+<li>modify ArticleController to be a NSViewController</li>
+<li>structurate code around protocols like Browser, Tab, ArticleContentView, ArticleViewDelegate and BrowserContextMenuDelegate</li>
+<li>change many methods of BaseView protocol to be optional and remove unneeded code</li>
+<li>introduce new classes : ArticleConverter, ArticleStyleLoader, RSSSubscriber</li>
+</ul></li>
+<li>Remove preference setting related to notifications (already handled by System Preferences)</li>
+<li>Fix image overflow with certain feeds</li>
+<li>Update Sparkle to version 1.26</li>
+<li>Use NSFileManager properties for library paths</li>
+<li>Migrate some tests to Swift</li>
+<li>Update procedures for building binaries (don&#39;t use Bintray anymore, fix notarization)</li>
 </ul>
 
 
