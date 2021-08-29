@@ -58,7 +58,7 @@ class CustomWKWebView: WKWebView {
         if #available(OSX 10.11, *) {
             // for useragent, we mimic the installed version of Safari and add our own identifier
             let shortSafariVersion = Bundle(path: "/Applications/Safari.app")?.infoDictionary?["CFBundleShortVersionString"] as? String
-            let viennaVersion = (NSApp as? ViennaApp)?.applicationVersion?.prefix { character in character != " " }
+            let viennaVersion = (NSApp as? ViennaApp)?.applicationVersion
             configuration.applicationNameForUserAgent = "Version/\(shortSafariVersion ?? "9.1") Safari/605 Vienna/\(viennaVersion ?? "3.5+")"
             configuration.allowsAirPlayForMediaPlayback = true
         }
