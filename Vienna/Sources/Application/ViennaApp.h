@@ -71,7 +71,6 @@
 // Preference properties
 @property (nonatomic) NSInteger autoExpireDuration;
 @property (nonatomic) float markReadInterval;
-@property (nonatomic) BOOL readingPaneOnRight;
 @property (nonatomic) BOOL refreshOnStartup;
 @property (nonatomic) BOOL checkForNewOnStartup;
 @property (nonatomic) BOOL openLinksInVienna;

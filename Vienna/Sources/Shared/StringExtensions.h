@@ -45,7 +45,6 @@
 @property (nonatomic, readonly, copy) NSString *_Nonnull stringByUnescapingExtendedCharacters;
 - (NSString *_Nonnull)stringByAppendingURLComponent:(NSString *_Nullable)newComponent;
 - (BOOL)hasCharacter:(char)ch;
-@property (nonatomic, readonly, copy) NSString *_Nonnull firstWord;
 @property (nonatomic, readonly, copy) NSString *_Nonnull convertStringToValidPath;
 - (NSComparisonResult)numericCompare:(NSString *_Nonnull)aString;
 @property (nonatomic, readonly, copy) NSString *_Nonnull normalised;

@@ -246,16 +246,6 @@ static NSMutableDictionary * entityMap = nil;
 	return [NSString stringByRemovingHTML:self].firstNonBlankLine;
 }
 
-/* firstWord
- * Returns the first word in self.
- */
--(NSString *)firstWord
-{
-	NSString * trimmedSelf = self.trim;
-	NSInteger wordLength = [trimmedSelf indexOfCharacterInString:' ' afterIndex:0];
-	return (wordLength == NSNotFound) ? trimmedSelf : [trimmedSelf substringToIndex:wordLength];
-}
-
 /* stringByRemovingHTML
  * Returns an autoreleased instance of the specified string with all HTML tags removed.
  */

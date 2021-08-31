@@ -62,7 +62,7 @@ static NSString * _userAgent ;
 
         _userAgent =
             [NSString stringWithFormat:MA_BrowserUserAgentString, osVersion, webkitVersion, shortSafariVersion, name,
-             ((ViennaApp *)NSApp).applicationVersion.firstWord];
+             ((ViennaApp *)NSApp).applicationVersion];
     }
     return _userAgent;
 }

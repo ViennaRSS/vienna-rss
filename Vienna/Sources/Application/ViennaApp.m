@@ -32,7 +32,14 @@
 #import "Folder.h"
 #import "Article.h"
 #import "Database.h"
+#import "StringExtensions.h"
 #import "Vienna-Swift.h"
+
+@interface ViennaApp ()
+
+@property (readonly, nonatomic) BOOL readingPaneOnRight;
+
+@end
 
 @implementation ViennaApp
 
@@ -208,14 +215,18 @@
 	return nil;
 }
 
-/* applicationVersion
- * Return the applications version number.
- */
--(NSString *)applicationVersion
+- (NSString *)applicationVersion
 {
-	NSBundle * appBundle = [NSBundle mainBundle];
-	NSDictionary * fileAttributes = appBundle.infoDictionary;
-	return fileAttributes[@"CFBundleShortVersionString"];
+    NSDictionary *infoDictionary = NSBundle.mainBundle.infoDictionary;
+    NSString *versionString = infoDictionary[@"CFBundleShortVersionString"];
+    NSString *trimmedVersionString = versionString.trim;
+    NSUInteger wordLength = [trimmedVersionString indexOfCharacterInString:' '
+                                                                afterIndex:0];
+    if (wordLength == NSNotFound) {
+        return trimmedVersionString;
+    } else {
+        return [trimmedVersionString substringToIndex:wordLength];
+    }
 }
 
 /* folders
@@ -355,7 +366,6 @@
  */
 -(void)setAutoExpireDuration:(NSInteger)newDuration		{ [Preferences standardPreferences].autoExpireDuration = newDuration; }
 -(void)setMarkReadInterval:(float)newInterval		{ [Preferences standardPreferences].markReadInterval = newInterval; }
--(void)setReadingPaneOnRight:(BOOL)flag				{ ; }
 -(void)setRefreshOnStartup:(BOOL)flag				{ [Preferences standardPreferences].refreshOnStartup = flag; }
 -(void)setFilterMode:(NSInteger)newMode					{ [Preferences standardPreferences].filterMode = newMode; }
 -(void)setCheckForNewOnStartup:(BOOL)flag			{ [Preferences standardPreferences].checkForNewOnStartup = flag; }
