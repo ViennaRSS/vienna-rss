@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="VBW-RM-gbf">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="VBW-RM-gbf">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -944,7 +944,7 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="changeCheckForUpdates:" target="wyk-W1-xMh" id="6eq-pl-Yjj"/>
+                                    <binding destination="eQA-bh-7fE" name="value" keyPath="updater.automaticallyChecksForUpdates" id="0W5-Vp-vyg"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5PT-JI-Zq4">
@@ -955,6 +955,7 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                                 </buttonCell>
                                 <connections>
                                     <action selector="changeAlwaysAcceptBetas:" target="wyk-W1-xMh" id="4q9-1K-wEy"/>
+                                    <binding destination="eQA-bh-7fE" name="enabled" keyPath="updater.automaticallyChecksForUpdates" id="n4D-P8-96i"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -970,10 +971,10 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                     </view>
                     <connections>
                         <outlet property="alwaysAcceptBetas" destination="5PT-JI-Zq4" id="Rt4-3D-Piw"/>
-                        <outlet property="checkForUpdates" destination="FqV-7o-x3D" id="fye-iO-rqw"/>
                     </connections>
                 </viewController>
                 <customObject id="mJu-QW-8f4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="eQA-bh-7fE" userLabel="Sparkle Updater Controller" customClass="SPUStandardUpdaterController"/>
             </objects>
             <point key="canvasLocation" x="619" y="928"/>
         </scene>

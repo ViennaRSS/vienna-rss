@@ -37,7 +37,6 @@ NS_ASSUME_NONNULL_BEGIN
 	NSInteger newArticlesNotification;
 	NSInteger foldersTreeSortMethod;
 	BOOL refreshOnStartup;
-	BOOL checkForNewOnStartup;
 	BOOL alwaysAcceptBetas;
 	BOOL enableMinimumFontSize;
 	BOOL openLinksInVienna;
@@ -134,9 +133,6 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 
 // Refresh all subscriptions on startup
 @property (nonatomic) BOOL refreshOnStartup;
-
-// Check for new versions of Vienna on startup
-@property (nonatomic) BOOL checkForNewOnStartup;
 
 // When checking a newer version, always search for Betas versions
 @property (nonatomic) BOOL alwaysAcceptBetas;

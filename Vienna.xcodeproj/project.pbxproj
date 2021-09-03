@@ -166,6 +166,7 @@
 		B8B9D6D323685C7400EAE65C /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B9D6D223685C7400EAE65C /* FeedItem.swift */; };
 		EA43C70914A370DB00F2D843 /* VTPG_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = EA43C70814A370DB00F2D843 /* VTPG_Common.m */; };
 		F41CA694218F56140072F734 /* NSWorkspace+OpenWithMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F41CA692218F56130072F734 /* NSWorkspace+OpenWithMenu.m */; };
+		F602CFBD26E25B040015D580 /* org.sparkle-project.InstallerLauncher.xpc in Copy XPC Services Bundles */ = {isa = PBXBuildFile; fileRef = F602CFBC26E25A370015D580 /* org.sparkle-project.InstallerLauncher.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F6094E331F10107800677D3B /* ExportAccessoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6094E311F10107800677D3B /* ExportAccessoryViewController.swift */; };
 		F615824323834D6500D2BD41 /* FeedDiscoverer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F615824223834D6500D2BD41 /* FeedDiscoverer.swift */; };
 		F6164C591E32A6660086261C /* DisclosureView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6164C581E32A6660086261C /* DisclosureView.m */; };
@@ -258,6 +259,17 @@
 				AA67F353089728AD008BBC37 /* Styles in Copy Shared Support Files */,
 			);
 			name = "Copy Shared Support Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F602CFB826E246D90015D580 /* Copy XPC Services Bundles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
+			dstSubfolderSpec = 16;
+			files = (
+				F602CFBD26E25B040015D580 /* org.sparkle-project.InstallerLauncher.xpc in Copy XPC Services Bundles */,
+			);
+			name = "Copy XPC Services Bundles";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -478,6 +490,7 @@
 		EA6D3E5914D8048C004DCB80 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
 		F41CA692218F56130072F734 /* NSWorkspace+OpenWithMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWorkspace+OpenWithMenu.m"; sourceTree = "<group>"; };
 		F41CA693218F56140072F734 /* NSWorkspace+OpenWithMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWorkspace+OpenWithMenu.h"; sourceTree = "<group>"; };
+		F602CFBC26E25A370015D580 /* org.sparkle-project.InstallerLauncher.xpc */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.xpc-service"; name = "org.sparkle-project.InstallerLauncher.xpc"; path = "../../../SourcePackages/artifacts/Sparkle/XPCServices/org.sparkle-project.InstallerLauncher.xpc"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6052438209EFD680000D4E1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = fr; path = fr.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F60642751F1A314700A12272 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 		F60642761F1A314900A12272 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/MainWindowController.strings; sourceTree = "<group>"; };
@@ -1220,6 +1233,7 @@
 				43501F8E165DBCCB0018EDB7 /* DSClickableURLTextField */,
 				F6F2CD1A25853B5F003C80D3 /* NSURL+CaminoExtensions */,
 				3A171BDF210B551A00B80FBB /* TRVSURLSessionOperation */,
+				F602CFBC26E25A370015D580 /* org.sparkle-project.InstallerLauncher.xpc */,
 			);
 			path = External;
 			sourceTree = "<group>";
@@ -1676,8 +1690,8 @@
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
+				F602CFB826E246D90015D580 /* Copy XPC Services Bundles */,
 				AAEF2001085D685900A0E675 /* Copy Shared Support Files */,
-				3A5482F6168F5C1700887F91 /* Configure Sparkle */,
 				3A6CC18823BBD1BF0084ABEE /* Archival Checks */,
 			);
 			buildRules = (
@@ -1851,23 +1865,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3A5482F6168F5C1700887F91 /* Configure Sparkle */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(SHARED_SUPPORT_FOLDER_PATH)/Sparkle.framework",
-			);
-			name = "Configure Sparkle";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Workaround for this bug: https://bugs.swift.org/browse/SR-13840\nif [ -d \"${SCRIPT_INPUT_FILE_0}\" ]; then\n  echo \"note: Removing duplicate Sparkle framework\"\n  rm -r \"${SCRIPT_INPUT_FILE_0}\"\nfi\n\n\"${SRCROOT}/Scripts/Sparkle-setup.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3A6CC18823BBD1BF0084ABEE /* Archival Checks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
@@ -3284,7 +3281,7 @@
 			repositoryURL = "https://github.com/sparkle-project/Sparkle";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.26.0;
+				minimumVersion = "2.0.0-beta.1";
 			};
 		};
 		F6B7BC3424A2A9A40051D76F /* XCRemoteSwiftPackageReference "fmdb" */ = {

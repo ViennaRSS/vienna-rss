@@ -347,7 +347,7 @@
 -(BOOL)readingPaneOnRight			{ return [Preferences standardPreferences].layout == VNALayoutCondensed; }
 -(NSInteger)filterMode					{ return [Preferences standardPreferences].filterMode; }
 -(BOOL)refreshOnStartup				{ return [Preferences standardPreferences].refreshOnStartup; }
--(BOOL)checkForNewOnStartup			{ return [Preferences standardPreferences].checkForNewOnStartup; }
+-(BOOL)checkForNewOnStartup			{ return APPCONTROLLER.sparkleController.updater.automaticallyChecksForUpdates; }
 -(BOOL)openLinksInVienna			{ return [Preferences standardPreferences].openLinksInVienna; }
 -(BOOL)openLinksInBackground		{ return [Preferences standardPreferences].openLinksInBackground; }
 -(NSInteger)minimumFontSize				{ return [Preferences standardPreferences].minimumFontSize; }
@@ -368,7 +368,7 @@
 -(void)setMarkReadInterval:(float)newInterval		{ [Preferences standardPreferences].markReadInterval = newInterval; }
 -(void)setRefreshOnStartup:(BOOL)flag				{ [Preferences standardPreferences].refreshOnStartup = flag; }
 -(void)setFilterMode:(NSInteger)newMode					{ [Preferences standardPreferences].filterMode = newMode; }
--(void)setCheckForNewOnStartup:(BOOL)flag			{ [Preferences standardPreferences].checkForNewOnStartup = flag; }
+-(void)setCheckForNewOnStartup:(BOOL)flag			{ APPCONTROLLER.sparkleController.updater.automaticallyChecksForUpdates = flag; }
 -(void)setOpenLinksInVienna:(BOOL)flag				{ [Preferences standardPreferences].openLinksInVienna = flag; }
 -(void)setOpenLinksInBackground:(BOOL)flag			{ [Preferences standardPreferences].openLinksInBackground = flag; }
 -(void)setMinimumFontSize:(NSInteger)newSize				{ [Preferences standardPreferences].minimumFontSize = newSize; }
