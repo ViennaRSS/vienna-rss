@@ -58,8 +58,10 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 			<title>Vienna ${V_VCS_TAG} :${VCS_SHORT_HASH}:</title>
 			<pubDate>${pubDate}</pubDate>
 			<link>${GITHUB_RELEASE_URL}</link>
+			<sparkle:version>${N_VCS_NUM}</sparkle:version>
+			<sparkle:shortVersionString>${V_VCS_TAG} :${VCS_SHORT_HASH}:</sparkle:shortVersionString>
 			<sparkle:minimumSystemVersion>${MACOSX_DEPLOYMENT_TARGET}.0</sparkle:minimumSystemVersion>
-			<enclosure url="${GITHUB_ASSETS_URL}/${TGZ_FILENAME}" sparkle:version="${N_VCS_NUM}" sparkle:shortVersionString="${V_VCS_TAG} :${VCS_SHORT_HASH}:" length="${TGZSIZE}" sparkle:dsaSignature="${SIGNATURE}" type="application/octet-stream"/>
+			<enclosure url="${GITHUB_ASSETS_URL}/${TGZ_FILENAME}" length="${TGZSIZE}" sparkle:dsaSignature="${SIGNATURE}" type="application/octet-stream"/>
 			<sparkle:releaseNotesLink>https://viennarss.github.io/sparkle-files/noteson${N_VCS_TAG}.html</sparkle:releaseNotesLink>
 		</item>
 	</channel>
