@@ -73,6 +73,9 @@ class BrowserTab: NSViewController {
     private var loadingObservation: NSKeyValueObservation?
     private var progressObservation: NSKeyValueObservation?
     private var urlObservation: NSKeyValueObservation?
+    private var statusBarObservation: NSKeyValueObservation?
+
+    private var statusBar: OverlayStatusBar?
 
     // MARK: object lifecycle
 
@@ -110,6 +113,19 @@ class BrowserTab: NSViewController {
             }
             self?.url = newValue
         }
+        statusBarObservation = Preferences.standard.observe(\.showStatusBar, options: [.initial, .new]) { [weak self] _, change in
+            guard let newValue = change.newValue else {
+                return
+            }
+            if newValue && self?.statusBar == nil {
+                let newBar = OverlayStatusBar()
+                self?.statusBar = newBar
+                self?.view.addSubview(newBar)
+             } else if !newValue && self?.statusBar != nil {
+                self?.statusBar?.removeFromSuperview()
+                self?.statusBar = nil
+             }
+        }
 
         if let request = request {
             webView.load(request)
@@ -126,6 +142,7 @@ class BrowserTab: NSViewController {
         loadingObservation?.invalidate()
         progressObservation?.invalidate()
         urlObservation?.invalidate()
+        statusBarObservation?.invalidate()
     }
 
     // MARK: ViewController lifecycle
@@ -311,6 +328,10 @@ extension BrowserTab: WKNavigationDelegate {
 
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation?) {
         handleNavigationStart()
+        if let webView = webView as? CustomWKWebView {
+            webView.hoverListener = self
+            self.statusBar?.label = ""
+        }
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation?, withError error: Error) {
@@ -343,5 +364,22 @@ extension BrowserTab: WKNavigationDelegate {
 
     func registerNavigationEndHandler(_ navigationEndHandler: @escaping (_ success: Bool) -> Void) {
         self.navigationEndHandler.append(navigationEndHandler)
+    }
+}
+
+// MARK: Javascript messages handler
+
+extension BrowserTab: WKScriptMessageHandler {
+
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if self.statusBar != nil {
+            if message.name == CustomWKWebView.mouseDidEnterName {
+                if let link = message.body as? String {
+                    self.statusBar?.label = link
+                }
+            } else if message.name == CustomWKWebView.mouseDidExitName {
+                self.statusBar?.label = ""
+            }
+        }
     }
 }
