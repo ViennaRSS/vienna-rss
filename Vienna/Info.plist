@@ -138,6 +138,8 @@
 	<string>YES</string>
 	<key>OSAScriptingDefinition</key>
 	<string>Vienna.sdef</string>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
 	<key>SUPublicDSAKeyFile</key>
 	<string>SparklePublicKey.pem</string>
 	<key>SUPublicEDKey</key>
