@@ -918,7 +918,6 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                         <outlet property="markReadAfterDelay" destination="McN-fD-0Cv" id="kbs-6x-LQ1"/>
                         <outlet property="markReadAfterNext" destination="jkb-TT-wPC" id="A95-fa-Lby"/>
                         <outlet property="markUpdatedAsNew" destination="YHk-qo-gYO" id="pgB-L1-fdL"/>
-                        <outlet property="newArticlesNotificationBadgeButton" destination="jVU-m2-dsS" id="jCv-zD-Wii"/>
                         <outlet property="newArticlesNotificationBounceButton" destination="jfH-Hq-gRk" id="8ST-KL-P8p"/>
                         <outlet property="openLinksInBackground" destination="7gv-LJ-Ouu" id="sb9-n8-thN"/>
                         <outlet property="openLinksInExternalBrowser" destination="Py0-wt-kSJ" id="nbX-7m-Oad"/>
