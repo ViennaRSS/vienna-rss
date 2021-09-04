@@ -62,7 +62,7 @@ final class OverlayStatusBar: NSView {
     // MARK: Initialization
 
     init() {
-        super.init(frame: NSRect(x: 0, y: 0, width: 240, height: 26))
+        super.init(frame: NSRect(x: 0, y: 0, width: 4800, height: 26))
 
         // Make sure that no other constraints are created.
         translatesAutoresizingMaskIntoConstraints = false
