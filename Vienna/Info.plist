@@ -140,6 +140,8 @@
 	<string>Vienna.sdef</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>SparklePublicKey.pem</string>
+	<key>SUPublicEDKey</key>
+	<string>&lt;insert public key&gt;</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
