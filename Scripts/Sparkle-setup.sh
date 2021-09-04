@@ -17,7 +17,7 @@ case "${N_VCS_TAG}" in
 	;;
 esac
 
-INFO="${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/../Info.plist"
+INFO="$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH"
 
 /usr/libexec/PlistBuddy "$INFO" -c "add SUFeedURL string $SU_FEED_URL"
 /usr/libexec/PlistBuddy "$INFO" -c "set :SUFeedURL $SU_FEED_URL"
