@@ -34,9 +34,8 @@ xcodebuild -exportNotarizedApp -archivePath "$ARCHIVE_PATH" -exportPath .
 tar -czf "${TGZ_FILENAME}" --exclude '.DS_Store' Vienna.app
 rm -rf Vienna.app
 
-
 # Output the sparkle change log
-SPARKLE_BIN="$BUILD_DIR/../../SourcePackages/artifacts/Sparkle/bin"
+SPARKLE_BIN="${SOURCE_ROOT}/DerivedData/Vienna/SourcePackages/artifacts/Sparkle/bin"
 
 if [ ! -d "$SPARKLE_BIN" ]; then
 	printf 'Unable to locate Sparkle binaries in the binary Swift Package. ' 1>&2
