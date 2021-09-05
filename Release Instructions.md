@@ -6,7 +6,8 @@ Instructions for building and uploading Vienna binaries to Github and Sourceforg
 In Xcode->File->Project settings…, you should have :
 
 - Build System : New Build System
-- Derived Data : Default Location
+- Derived Data : Project-relative Location
+	- DerivedData
 - Advanced… : Build Location : Custom : Relative to Workspace
 	- Products : Build/Products
 	- Intermediates : Build/Intermediates.noindex
