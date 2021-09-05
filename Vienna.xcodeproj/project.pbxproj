@@ -263,14 +263,14 @@
 		};
 		F602CFB826E246D90015D580 /* Copy XPC Services Bundles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
 			dstSubfolderSpec = 16;
 			files = (
 				F602CFBD26E25B040015D580 /* org.sparkle-project.InstallerLauncher.xpc in Copy XPC Services Bundles */,
 			);
 			name = "Copy XPC Services Bundles";
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
