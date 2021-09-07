@@ -116,8 +116,8 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 		// Application-specific folder locations
 		defaultDatabase = [userPrefs stringForKey:MAPref_DefaultDatabase];
 		NSFileManager *fileManager = NSFileManager.defaultManager;
-		NSString *appSupportPath = fileManager.vna_applicationSupportDirectory.path;
-		feedSourcesFolder = [appSupportPath stringByAppendingPathComponent:MA_FeedSourcesFolder_Name];
+		NSString *cachesPath = fileManager.vna_cachesDirectory.path;
+		feedSourcesFolder = [cachesPath stringByAppendingPathComponent:MA_FeedSourcesFolder_Name];
 		
 		// Load those settings that we cache.
 		foldersTreeSortMethod = [self integerForKey:MAPref_AutoSortFoldersTree];

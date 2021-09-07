@@ -21,6 +21,21 @@ import XCTest
 
 class ExportTests: XCTestCase {
 
+    var tempURL: URL!
+
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+
+        let downloadsDirectory = FileManager.default.downloadsDirectory
+        tempURL = try FileManager.default.url(for: .itemReplacementDirectory, in: .userDomainMask, appropriateFor: downloadsDirectory, create: true)
+    }
+
+    override func tearDownWithError() throws {
+        try FileManager.default.removeItem(at: tempURL)
+
+        try super.tearDownWithError()
+    }
+
     /// Test helper method to return an array of folders for export
     func foldersArray() -> [Any] {
         guard let database = Database.shared else {
@@ -35,24 +50,16 @@ class ExportTests: XCTestCase {
     func testExportWithoutGroups() {
         // Test exporting feeds to opml file without groups
         let folders = self.foldersArray()
-        guard let tmpUrl = URL(string: "/tmp/vienna-test-nogroups.opml") else {
-            XCTAssertTrue(false)
-            fatalError("cannot happen")
-        }
-
-        let countExported = Export.export(toFile: tmpUrl.absoluteString, from: folders, in: nil, withGroups: false)
+        let tmpUrl = tempURL.appendingPathComponent("vienna-test-nogroups.opml", isDirectory: false)
+        let countExported = Export.export(toFile: tmpUrl.path, from: folders, in: nil, withGroups: false)
         XCTAssertGreaterThan(countExported, 0, "Pass")
     }
 
     func testExportWithGroups() {
         // Test exporting feeds to opml file without groups
         let folders = self.foldersArray()
-        guard let tmpUrl = URL(string: "/tmp/vienna-test-groups.opml") else {
-            XCTAssertTrue(false)
-            fatalError("cannot happen")
-        }
-
-        let countExported = Export.export(toFile: tmpUrl.absoluteString, from: folders, in: nil, withGroups: true)
+        let tmpUrl = tempURL.appendingPathComponent("vienna-test-groups.opml", isDirectory: false)
+        let countExported = Export.export(toFile: tmpUrl.path, from: folders, in: nil, withGroups: true)
         XCTAssertGreaterThan(countExported, 0, "Pass")
     }
 

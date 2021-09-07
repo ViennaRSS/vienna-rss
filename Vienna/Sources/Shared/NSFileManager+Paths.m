@@ -25,12 +25,6 @@
 
 @implementation NSFileManager (Paths)
 
-// The NSApplicationScriptsDirectory search path returns a subdirectory in the
-// Library/Application Scripts directory. Vienna currently uses a subdirectory
-// in Library/Scripts/Applications instead. The sandboxing migration performs
-// an automatic migration to Library/Application Scripts/<bundle identifier>
-// and places a symlink at the old location. This code needs to be updated
-// accordingly.
 - (NSURL *)vna_applicationScriptsDirectory {
     static NSURL *url = nil;
     if (url) {
@@ -39,16 +33,11 @@
 
     NSFileManager *fileManager = NSFileManager.defaultManager;
     NSError *error = nil;
-    // Replace NSLibraryDirectory with NSApplicationScriptsDirectory for
-    // sandboxing.
-    url = [fileManager URLForDirectory:NSLibraryDirectory
+    url = [fileManager URLForDirectory:NSApplicationScriptsDirectory
                               inDomain:NSUserDomainMask
                      appropriateForURL:nil
                                 create:NO
                                  error:&error];
-    // Remove the following lines for sandboxing.
-    url = [url URLByAppendingPathComponent:@"Scripts/Applications/Vienna"
-                               isDirectory:YES];
 
     if (!url && error) {
         const char *function = __PRETTY_FUNCTION__;
@@ -59,9 +48,6 @@
     return (id _Nonnull)url;
 }
 
-// According to Apple's file-system programming guide, the bundle identifier
-// should be used as the subdirectory name. However, Vienna presently uses the
-// app name instead. This should be changed when Vienna migrates to sandboxing.
 - (NSURL *)vna_applicationSupportDirectory {
     static NSURL *url = nil;
     if (url) {
@@ -75,8 +61,6 @@
                      appropriateForURL:nil
                                 create:NO
                                  error:&error];
-    // For sandboxing, use NSBundle.mainBundle.bundleIdentifier instead of the
-    // application name (recommendation by Apple, but not required).
     url = [url URLByAppendingPathComponent:@"Vienna"
                                isDirectory:YES];
 
