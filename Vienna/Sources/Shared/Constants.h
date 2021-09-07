@@ -61,7 +61,6 @@ extern NSString * MAPref_TabList;
 extern NSString * MAPref_TabTitleDictionary;
 extern NSString * MAPref_Layout;
 extern NSString * MAPref_NewArticlesNotification;
-extern NSString * MAPref_Profile_Path;
 extern NSString * MAPref_EmptyTrashNotification;
 extern NSString * MAPref_ShowAppInStatusBar;
 extern NSString * MAPref_ShowStatusBar;

@@ -42,8 +42,4 @@ extension AppController: SPUUpdaterDelegate {
 		return urlString
 	}
 
-	public func updaterWillRelaunchApplication(_ updater: SPUUpdater) {
-		Preferences.standard.handleUpdateRestart()
-	}
-
 }

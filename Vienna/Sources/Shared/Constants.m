@@ -61,7 +61,6 @@ NSString * MAPref_TabList = @"TabList";
 NSString * MAPref_TabTitleDictionary = @"TabTitleDict";
 NSString * MAPref_Layout = @"Layout";
 NSString * MAPref_NewArticlesNotification = @"NewArticlesNotification";
-NSString * MAPref_Profile_Path = @"ProfilePath";
 NSString * MAPref_EmptyTrashNotification = @"EmptyTrashNotification";
 NSString * MAPref_ShowAppInStatusBar = @"ShowAppInStatusBar";
 NSString * MAPref_ShowStatusBar = @"ShowStatusBar";

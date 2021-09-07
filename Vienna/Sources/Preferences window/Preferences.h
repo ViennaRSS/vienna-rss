@@ -25,9 +25,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Preferences : NSObject {
-	id userPrefs;
-	NSString * profilePath;
-	NSString * preferencesPath;
+	NSUserDefaults *userPrefs;
 	float markReadInterval;
 	NSInteger minimumFontSize;
 	NSInteger refreshFrequency;
@@ -169,9 +167,6 @@ extern NSString * const kMA_Notify_UseJavaScriptChange;
 
 // Do we show an icon in the status bar?
 @property (nonatomic) BOOL showAppInStatusBar;
-
-// Handle update via Sparkle / ViennaSparkleDelegate
--(void)handleUpdateRestart;
 
 // Show or hide the status bar
 @property (nonatomic) BOOL showStatusBar;
