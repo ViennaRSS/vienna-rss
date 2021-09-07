@@ -74,7 +74,6 @@ extern NSString * const kMA_Notify_UseJavaScriptChange;
 @property (class, readonly, nonatomic) Preferences *standardPreferences;
 
 // Accessor functions
--(void)savePreferences;
 -(BOOL)boolForKey:(NSString *)defaultName;
 -(NSInteger)integerForKey:(NSString *)defaultName;
 -(NSString *)stringForKey:(NSString *)defaultName;

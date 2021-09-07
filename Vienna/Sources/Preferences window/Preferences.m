@@ -328,15 +328,6 @@ static Preferences * _standardPreferences = nil;
     }
 }
 
-/* savePreferences
- * Save the user preferences back to where we loaded them from.
- */
--(void)savePreferences
-{
-	if (preferencesPath == nil)
-		[userPrefs synchronize];
-}
-
 /* setBool
  * Sets the value of the specified default to the given boolean value.
  */

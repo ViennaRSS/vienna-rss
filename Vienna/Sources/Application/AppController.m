@@ -481,8 +481,6 @@
     
 	if (didCompleteInitialisation)
 	{
-		Preferences * prefs = [Preferences standardPreferences];
-		
 		// Close the activity window explicitly to force it to
 		// save its split bar position to the preferences.
 		NSWindow *activityPanel = self.activityPanelController.window;
@@ -502,9 +500,6 @@
 		NSFileManager * fileManager = [NSFileManager defaultManager];
 		NSURL * dirUrl = [fileManager.vna_cachesDirectory URLByAppendingPathComponent:@"article"];
 		[fileManager removeItemAtURL:dirUrl error:nil];
-
-		// Finally save preferences
-		[prefs savePreferences];
 		
         [[NSNotificationCenter defaultCenter]  removeObserver:self];
 	}
