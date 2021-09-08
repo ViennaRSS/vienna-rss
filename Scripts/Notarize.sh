@@ -19,6 +19,12 @@ LOCATION="${app_path}/Contents/Frameworks"
 codesign --verbose --force --deep -o runtime --sign "${CODE_SIGN_IDENTITY}" "$LOCATION/Sparkle.framework/Versions/A/Resources/AutoUpdate.app"
 codesign --verbose --force -o runtime --sign "${CODE_SIGN_IDENTITY}" "$LOCATION/Sparkle.framework/Versions/A"
 
+codesign --verbose --force --deep -o runtime --sign "${CODE_SIGN_IDENTITY}" "${app_path}"
+
+if ! spctl --verbose=4 --assess --type execute "${app_path}"; then
+    echo "error: Signature will not be accepted by Gatekeeper!" 1>&2
+    exit 1
+fi
 
 product_name=$(/usr/libexec/PlistBuddy -c "Print CFBundleName" "${app_path}/Contents/Info.plist")
 zipped_app="${product_name}.zip"

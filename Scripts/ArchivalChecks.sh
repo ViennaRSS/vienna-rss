@@ -23,11 +23,4 @@ if ! git describe --exact-match "${VCS_TAG}"; then
 	exit 1
 fi
 
-# cf. https://furbo.org/2019/08/16/catalina-app-notarization-and-sparkle/
-LOCATION="${BUILT_PRODUCTS_DIR}"/"${FRAMEWORKS_FOLDER_PATH}"
-IDENTITY=${EXPANDED_CODE_SIGN_IDENTITY_NAME}
-
-codesign --verbose --force --deep -o runtime --sign "$IDENTITY" "$LOCATION/Sparkle.framework/Versions/A/Resources/AutoUpdate.app"
-codesign --verbose --force -o runtime --sign "$IDENTITY" "$LOCATION/Sparkle.framework/Versions/A"
-
 exit 0
