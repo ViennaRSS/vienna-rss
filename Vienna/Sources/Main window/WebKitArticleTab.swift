@@ -60,9 +60,6 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
     init() {
         self.articleWebView = WebKitArticleView(frame: CGRect.zero)
         super.init()
-        self.registerNavigationEndHandler { [weak self] _ in
-            self?.articleWebView.deleteHtmlFile()
-        }
     }
 
     override func viewDidLoad() {
