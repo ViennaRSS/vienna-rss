@@ -34,6 +34,11 @@ final class OverlayStatusBar: NSView {
         let backgroundView = NSVisualEffectView(frame: NSRect.zero)
         backgroundView.wantsLayer = true
         backgroundView.blendingMode = .withinWindow
+        if #available(macOS 10.14, *) {
+            backgroundView.material = .toolTip
+        } else {
+            backgroundView.material = .popover
+        }
         backgroundView.alphaValue = 0
         backgroundView.layer?.cornerRadius = 3
 
@@ -83,8 +88,9 @@ final class OverlayStatusBar: NSView {
                                                                     metrics: nil, views: ["view": backgroundView])
 
         var addressFieldConstraints: [NSLayoutConstraint] = []
-        addressFieldConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-2-[label]-2-|",
-                                                                  metrics: nil, views: ["label": addressField])
+        addressFieldConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-1@250-[label]-3@250-|",
+                                                                  options: .alignAllCenterY, metrics: nil,
+                                                                  views: ["label": addressField])
         addressFieldConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-6-[label]-6-|",
                                                                   metrics: nil, views: ["label": addressField])
 
