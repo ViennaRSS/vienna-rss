@@ -47,7 +47,11 @@ export PATH="$SPARKLE_BIN:$PATH"
 
 # Generate EdDSA signature. This command outputs a string of attributes for the
 # appcast feed, e.g. sparkle:edSignature="<signature>" length="<length>"
-ED_SIGNATURE_AND_LENGTH="$(sign_update "$TGZ_FILENAME")"
+if [ ! -f "$PRIVATE_EDDSA_KEY_PATH" ]; then
+	printf 'Unable to load signing private key vienna_private_eddsa_key.pem. Set PRIVATE_EDDSA_KEY_PATH in Scripts/Resources/CS-ID.xcconfig\n' 1>&2
+	exit 1
+fi
+ED_SIGNATURE_AND_LENGTH="$(sign_update "$TGZ_FILENAME" -f "$PRIVATE_EDDSA_KEY_PATH")"
 
 # Generate DSA signature (deprecated; used for backwards compatibility). This
 # command outputs only a signature string, cf. the EdDSA signature string.
