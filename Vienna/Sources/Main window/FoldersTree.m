@@ -1441,6 +1441,15 @@ static void *ObserverContext = &ObserverContext;
 
     cellView.inactive = folder.isUnsubscribed;
 
+    // The content tint color should only apply to the SF Symbol.
+    if (@available(macOS 11, *)) {
+        if (folder.type == VNAFolderTypeSmart) {
+            cellView.imageView.contentTintColor = NSColor.systemGrayColor;
+        } else {
+            cellView.imageView.contentTintColor = nil;
+        }
+    }
+
     return cellView;
 }
 

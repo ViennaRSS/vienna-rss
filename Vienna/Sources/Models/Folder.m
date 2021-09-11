@@ -40,8 +40,6 @@
 @property (nonatomic) NSMutableArray * cachedGuids;
 @property (nonatomic) NSMutableDictionary * attributes;
 
-+(NSArray<NSImage *> *)_iconArray;
-
 @end
 
 // Static pointers
@@ -80,23 +78,6 @@ static NSArray * iconArray = nil;
 		self.remoteId = @"0";
 	}
 	return self;
-}
-
-/* _iconArray
- * Return the internal array of pre-defined folder images
- */
-+(NSArray<NSImage *> *)_iconArray {
-	if (iconArray == nil)
-		iconArray = @[
-					  [NSImage imageNamed:@"smallFolder"],
-					  [NSImage imageNamed:@"smartFolder"],
-					  [NSImage imageNamed:@"rssFolder"],
-					  [NSImage imageNamed:@"rssFeedNew"],
-					  [NSImage imageNamed:@"trashFolder"],
-					  [NSImage imageNamed:@"searchFolder"],
-					  [NSImage imageNamed:@"googleFeed"],
-					  ];
-	return iconArray;
 }
 
 /* unreadCount
@@ -151,22 +132,42 @@ static NSArray * iconArray = nil;
     NSImage *folderImage = nil;
     switch (self.type) {
         case VNAFolderTypeSmart:
-            folderImage = Folder._iconArray[MA_SmartFolderIcon];
+            if (@available(macOS 11, *)) {
+                folderImage = [NSImage imageWithSystemSymbolName:@"gearshape"
+                                        accessibilityDescription:nil];
+            } else {
+                folderImage = [NSImage imageNamed:@"smartFolder"];
+            }
             break;
         case VNAFolderTypeGroup:
-            folderImage = Folder._iconArray[MA_RSSFolderIcon];
+            if (@available(macOS 11, *)) {
+                folderImage = [NSImage imageWithSystemSymbolName:@"folder"
+                                        accessibilityDescription:nil];
+            } else {
+                folderImage = [NSImage imageNamed:@"rssFolder"];
+            }
             break;
         case VNAFolderTypeTrash:
-            folderImage = Folder._iconArray[MA_TrashFolderIcon];
+            if (@available(macOS 11, *)) {
+                folderImage = [NSImage imageWithSystemSymbolName:@"trash"
+                                        accessibilityDescription:nil];
+            } else {
+                folderImage = [NSImage imageNamed:@"trashFolder"];
+            }
             break;
         case VNAFolderTypeSearch:
-            folderImage = Folder._iconArray[MA_SmartFolderIcon];
+            if (@available(macOS 11, *)) {
+                folderImage = [NSImage imageWithSystemSymbolName:@"magnifyingglass"
+                                        accessibilityDescription:nil];
+            } else {
+                folderImage = [NSImage imageNamed:@"searchFolder"];
+            }
             break;
         case VNAFolderTypeRSS: {
             NSString *homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
             folderImage = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
             if (folderImage == nil) {
-                folderImage = Folder._iconArray[MA_RSSFeedIcon];
+                folderImage = [NSImage imageNamed:@"rssFeedNew"];
             }
             break;
         }
@@ -174,12 +175,22 @@ static NSArray * iconArray = nil;
             NSString *homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
             folderImage = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
             if (folderImage == nil) {
-                folderImage = Folder._iconArray[MA_GoogleReaderFolderIcon];
+                if (@available(macOS 11, *)) {
+                    folderImage = [NSImage imageWithSystemSymbolName:@"cloud"
+                                            accessibilityDescription:nil];
+                } else {
+                    folderImage = [NSImage imageNamed:@"googleFeed"];
+                }
             }
             break;
         }
         default: // Use the generic folder icon for anything else
-            folderImage = Folder._iconArray[MA_FolderIcon];
+            if (@available(macOS 11, *)) {
+                folderImage = [NSImage imageWithSystemSymbolName:@"folder.badge.questionmark"
+                                        accessibilityDescription:nil];
+            } else {
+                folderImage = [NSImage imageNamed:@"smallFolder"];
+            }
             break;
     }
     
@@ -207,9 +218,17 @@ static NSArray * iconArray = nil;
  */
 -(NSImage *)standardImage {
     switch (self.type) {
-        case VNAFolderTypeRSS: return Folder._iconArray[MA_RSSFeedIcon];
-        case VNAFolderTypeOpenReader: return Folder._iconArray[MA_GoogleReaderFolderIcon];
-        default: return self.image;
+        case VNAFolderTypeRSS:
+            return [NSImage imageNamed:@"rssFeedNew"];
+        case VNAFolderTypeOpenReader:
+            if (@available(macOS 11, *)) {
+                return [NSImage imageWithSystemSymbolName:@"cloud"
+                                 accessibilityDescription:nil];
+            } else {
+                return [NSImage imageNamed:@"googleFeed"];
+            }
+        default:
+            return self.image;
     }
 }
 
