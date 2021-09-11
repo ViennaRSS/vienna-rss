@@ -5,8 +5,8 @@
 # Directory created during the Changes-and-Notes.sh stage
 VIENNA_UPLOADS_DIR="${SOURCE_ROOT}/Build/Uploads"
 GITHUB_REPO="https://github.com/ViennaRSS/vienna-rss"
-GITHUB_RELEASE_URL="${GITHUB_REPO}/releases/tag/${VCS_TAG}"
-GITHUB_ASSETS_URL="${GITHUB_REPO}/releases/download/${VCS_TAG}"
+GITHUB_RELEASE_URL="${GITHUB_REPO}/releases/tag/v%2F${N_VCS_TAG}"
+GITHUB_ASSETS_URL="${GITHUB_REPO}/releases/download/v%2F${N_VCS_TAG}"
 
 TGZ_FILENAME="Vienna${N_VCS_TAG}.tar.gz"
 dSYM_FILENAME="Vienna${N_VCS_TAG}.${VCS_SHORT_HASH}-dSYM"
@@ -80,7 +80,7 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 			<sparkle:shortVersionString>${V_VCS_TAG} :${VCS_SHORT_HASH}:</sparkle:shortVersionString>
 			<sparkle:minimumSystemVersion>${MACOSX_DEPLOYMENT_TARGET}.0</sparkle:minimumSystemVersion>
 			<enclosure url="${GITHUB_ASSETS_URL}/${TGZ_FILENAME}" $ED_SIGNATURE_AND_LENGTH $DSA_SIGNATURE type="application/octet-stream" />
-			<sparkle:releaseNotesLink>https://viennarss.github.io/sparkle-files/noteson${N_VCS_TAG}.html</sparkle:releaseNotesLink>
+			<sparkle:releaseNotesLink>https://www.vienna-rss.com/sparkle-files/noteson${N_VCS_TAG}.html</sparkle:releaseNotesLink>
 		</item>
 	</channel>
 </rss>
