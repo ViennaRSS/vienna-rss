@@ -606,7 +606,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "Формат базы данных изменился";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "Будет использован стиль по умолчанию.";
 
 /* No comment provided by engineer. */
@@ -615,7 +615,7 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Стиль \"%@\" был установлен в папку стилей и добавлен в меню Стиль.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "Стиль %@ отсутствует или поврежден";
 
 /* No comment provided by engineer. */

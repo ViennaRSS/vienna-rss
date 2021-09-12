@@ -534,6 +534,9 @@
 /* No comment provided by engineer. */
 "RSS Icon not found!" = "RSS ikon ikke fundet!";
 
+/* A formatted URL string with the javascript: URL scheme. */
+"Run script “%@”" = "Kør skriptet \"%@\"";
+
 /* Placeholder title of a search field */
 "Search all articles" = "Søg alle artikler";
 
@@ -553,6 +556,12 @@
 
 /* Title of a popup menu item */
 "Select…" = "Vælg…";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@" = "Send email til %@";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@ with subject “%@”" = "Send email til %1$@ med emnet “%2$@”";
 
 /* No comment provided by engineer. */
 "Send Link" = "Send henvisning";
@@ -605,7 +614,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "Database filformatet er blevet ændret";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "Standard stilen vil blive brugt istedet.";
 
 /* No comment provided by engineer. */
@@ -614,7 +623,7 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Stilen \"%@\" er blevet installeret i din Stil-mappe og er blevet tilføjet til Stil-menuen.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "Stilen %@ mangler eller er beskadiget";
 
 /* No comment provided by engineer. */

@@ -588,13 +588,13 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "Neatpažintas duomenų bazės formatas";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "Neteisingas stilius";
 
 /* No comment provided by engineer. */
 "The specified export output file could not be created. Check that it is not locked and no other application is using it." = "Nepavyko atidaryti eksportuoto failo";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "Neteisingas stilius";
 
 /* No comment provided by engineer. */

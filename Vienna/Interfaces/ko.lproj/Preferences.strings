@@ -61,9 +61,6 @@
 /* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "jvO-Ef-TTd"; */
 "jvO-Ef-TTd.title" = "1시간마다";
 
-/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "jVU-m2-dsS"; */
-"jVU-m2-dsS.title" = "응용 프로그램 아이콘에 읽지 않은 항목 수 표시";
-
 /* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "M8s-xu-lWh"; */
 "M8s-xu-lWh.title" = "폴더 및 구독 목록  서체:";
 

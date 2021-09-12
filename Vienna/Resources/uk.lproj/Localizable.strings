@@ -519,7 +519,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "Формат баз даних змінився";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "Замість цього використовуватиметься стиль за замовчуванням.";
 
 /* No comment provided by engineer. */
@@ -528,7 +528,7 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Стиль \"%@\" установлено до Вашої папки Styles і додано до меню Стиль.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "Стиль %@ має невірну структуру, або пошкоджений";
 
 /* No comment provided by engineer. */

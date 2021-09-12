@@ -600,7 +600,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "資料庫檔案格式已變更";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "將會改用預設的顯示樣式。";
 
 /* No comment provided by engineer. */
@@ -609,7 +609,7 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "“%@”樣式已順利安裝到您的“樣式”檔案夾，並已加入“樣式”選單。";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "%@ 樣式的檔案遺失或已損壞";
 
 /* No comment provided by engineer. */

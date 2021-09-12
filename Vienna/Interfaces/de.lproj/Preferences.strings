@@ -59,7 +59,7 @@
 "flH-2D-s6O.title" = "Links in externem Browser öffnen";
 
 /* Class = "NSTextFieldCell"; title = "Vienna has a new browser built on top of WebKit. It is faster and more secure.\nAfter changing this setting, restart Vienna to test it. Feedback is very welcome!"; ObjectID = "Fv8-Xx-YR0"; */
-"Fv8-Xx-YR0.title" = "Vienna hat einen neuen Browser, der auf WebKit basiert. Er ist schneller und sicherer. Starte Vienna neu, wenn du diese Einstellung änderst. Feedback ist gern gesehen!";
+"Fv8-Xx-YR0.title" = "Vienna hat einen neuen Browser, der auf WebKit basiert. Er ist schneller und sicherer. Starte Vienna neu, wenn du diese Einstellung änderst. Feedback ist erwünscht!";
 
 /* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "g3K-qh-M6y"; */
 "g3K-qh-M6y.title" = "Je höher die Zahl desto schneller werden die Abonnements herunter geladen.";
@@ -102,9 +102,6 @@
 
 /* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "jvO-Ef-TTd"; */
 "jvO-Ef-TTd.title" = "Stündlich";
-
-/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "jVU-m2-dsS"; */
-"jVU-m2-dsS.title" = "Zeige die Anzahl der ungelesen Artikel im Docksymbol";
 
 /* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "Ljf-Qd-6Ho"; */
 "Ljf-Qd-6Ho.title" = "Neue Artikel beim Programmstart abrufen";

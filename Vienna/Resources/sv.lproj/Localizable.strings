@@ -478,6 +478,9 @@
 /* No comment provided by engineer. */
 "Return to the previous page" = "Återgå till föregående sida";
 
+/* A formatted URL string with the javascript: URL scheme. */
+"Run script “%@”" = "Kör skriptet ”%@”";
+
 /* Placeholder title of a search field */
 "Search all articles" = "Sök genom alla artiklar";
 
@@ -491,6 +494,12 @@
 
 /* Title of a popup menu item */
 "Select…" = "Markera…";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@" = "Skicka mejl till %@";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@ with subject “%@”" = "Skicka mejl till %1$@ med ämnet ”%2$@”";
 
 /* No comment provided by engineer. */
 "Send Link" = "Skicka länk";
@@ -537,7 +546,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "Databasens filformat har ändrats";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "Standardstilen används istället.";
 
 /* No comment provided by engineer. */
@@ -546,7 +555,7 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Stilen '%@' har installerats i din stilmapp och har lagts till i stilmenyn.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "Stilen %@ verkar vara korrupt";
 
 /* No comment provided by engineer. */

@@ -550,6 +550,9 @@
 /* No comment provided by engineer. */
 "RSS Icon not found!" = "RSS-Symbol nicht gefunden!";
 
+/* A formatted URL string with the javascript: URL scheme. */
+"Run script “%@”" = "Skript „%@“ ausführen";
+
 /* Placeholder title of a search field */
 "Search all articles" = "In allen Artikeln suchen";
 
@@ -569,6 +572,12 @@
 
 /* Title of a popup menu item */
 "Select…" = "Auswählen…";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@" = "E-Mail an %@ senden";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@ with subject “%@”" = "E-Mail an %1$@ senden mit dem Betreff „%2$@“";
 
 /* No comment provided by engineer. */
 "Send Link" = "Link senden";
@@ -621,7 +630,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "Das Datenbankdateiformat hat sich geändert";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "Stattdessen wird der Standard-Stil benutzt.";
 
 /* No comment provided by engineer. */
@@ -630,7 +639,7 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Der Stil '%@' wurde im Stilordner installiert und zum Stilmenü hinzugefügt.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "Der Stil %@ scheint defekt zu sein.";
 
 /* No comment provided by engineer. */

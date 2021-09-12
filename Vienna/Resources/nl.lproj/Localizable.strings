@@ -490,6 +490,9 @@
 /* No comment provided by engineer. */
 "Return to the previous page" = "Ga terug naar de vorige pagina";
 
+/* A formatted URL string with the javascript: URL scheme. */
+"Run script “%@”" = "Voer script '%@' uit";
+
 /* Placeholder title of a search field */
 "Search all articles" = "Zoek naar artikels";
 
@@ -505,10 +508,16 @@
 "Search current web page" = "Doorzoek huidige webpagina";
 
 /* No comment provided by engineer. */
-"Search Results" = "Zoek resultaten";
+"Search Results" = "Zoekresultaten";
 
 /* Title of a popup menu item */
 "Select…" = "Selecteer…";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@" = "Stuur e-mail naar %@";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@ with subject “%@”" = "Stuur e-mail naar %1$@ met als onderwerp '%2$@'";
 
 /* No comment provided by engineer. */
 "Send Link" = "Verstuur link";
@@ -561,7 +570,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "Het bestandsformaat van de databank is gewijzigd";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "De standaardstijl zal worden gebruikt.";
 
 /* No comment provided by engineer. */
@@ -570,7 +579,7 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "De stijl \"%@\" is in je stijlenmap geïnstalleerd en toegevoegd aan het menu Stijlen.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "De stijl %@ lijkt te zijn beschadigd";
 
 /* No comment provided by engineer. */

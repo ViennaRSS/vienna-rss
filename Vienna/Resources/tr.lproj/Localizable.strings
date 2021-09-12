@@ -492,7 +492,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "Veritabanı dosya biçimi değişmiş";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "Geçerli stil onun yerine kullanılacak.";
 
 /* No comment provided by engineer. */
@@ -501,7 +501,7 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "\"%@\" stili Stiller klasörünüze yüklendi ve Stil menüsüne eklendi.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "%@ stilinde ya bir sorun var ya da stil bulunamadı";
 
 /* No comment provided by engineer. */

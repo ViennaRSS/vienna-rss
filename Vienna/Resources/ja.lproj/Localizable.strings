@@ -403,7 +403,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "データベースのファイルフォーマットが変更されました。";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "標準のスタイルを使用します。";
 
 /* No comment provided by engineer. */
@@ -412,7 +412,7 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "スタイル \"%@\" はスタイルフォルダにインストールされました。スタイルメニューから選択できます。";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "%@ というスタイルには問題があるようです。";
 
 /* No comment provided by engineer. */
