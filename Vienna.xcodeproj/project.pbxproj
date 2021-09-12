@@ -65,7 +65,7 @@
 		3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBEC61733C206006DD2AB /* ArticleCellView.m */; };
 		3A60E60B2114AD740004D81D /* URLRequestExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A60E60A2114AD740004D81D /* URLRequestExtensions.m */; };
 		3A7BD0DD1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7BD0DC1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m */; };
-		3AEE7DE91695FC570018A17D /* SparklePublicKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* SparklePublicKey.pem */; };
+		3AEE7DE91695FC570018A17D /* SparkleDSAPublicKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* SparkleDSAPublicKey.pem */; };
 		435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 435026E5165DD8BE0018EDB7 /* ArticleRef.m */; };
 		4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */; };
 		43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502848165DE9DF0018EDB7 /* ActivityLog.m */; };
@@ -277,7 +277,7 @@
 		3A932D8823BB999A009B8061 /* Vienna.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Vienna.entitlements; sourceTree = "<group>"; };
 		3A932D8923BB999A009B8061 /* ViennaDeployment.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = ViennaDeployment.entitlements; sourceTree = "<group>"; };
 		3ADBA70C23DDAFCA00156722 /* Notarize.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = Notarize.sh; sourceTree = "<group>"; };
-		3AEE7DE81695FC570018A17D /* SparklePublicKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SparklePublicKey.pem; sourceTree = "<group>"; };
+		3AEE7DE81695FC570018A17D /* SparkleDSAPublicKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SparkleDSAPublicKey.pem; sourceTree = "<group>"; };
 		430C4ADB1661753F0079C9FC /* autorevision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autorevision.h; sourceTree = "<group>"; };
 		430C4AE0166175C20079C9FC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		435026E5165DD8BE0018EDB7 /* ArticleRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleRef.m; sourceTree = "<group>"; };
@@ -1083,7 +1083,7 @@
 				F69AE79C1F2215D600342640 /* InfoPlist.strings */,
 				F62580A81E286A8B0035E43C /* Localizable.strings */,
 				F6FEE7AF209E500800BCAEC6 /* Localizable.stringsdict */,
-				3AEE7DE81695FC570018A17D /* SparklePublicKey.pem */,
+				3AEE7DE81695FC570018A17D /* SparkleDSAPublicKey.pem */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1663,7 +1663,7 @@
 				B2554731106913760065E9C3 /* errorpagelogo.png in Resources */,
 				F6D572BA1E26AAA900CDA909 /* SearchFolder.xib in Resources */,
 				F626F5F424A76B9100D3AAD8 /* Preferences.storyboard in Resources */,
-				3AEE7DE91695FC570018A17D /* SparklePublicKey.pem in Resources */,
+				3AEE7DE91695FC570018A17D /* SparkleDSAPublicKey.pem in Resources */,
 				F62580E71E286CEC0035E43C /* RSSSources.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
