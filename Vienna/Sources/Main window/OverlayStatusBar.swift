@@ -187,6 +187,34 @@ final class OverlayStatusBar: NSView {
 
     // MARK: Handling status updates
 
+    private lazy var formatter: URLFormatter = {
+        let urlFormatter = URLFormatter()
+
+        // Set the default attributes. This should match addressField.
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .byTruncatingMiddle
+        paragraphStyle.allowsDefaultTighteningForTruncation = true
+        var attributes: [NSAttributedString.Key : Any] = [
+            .font : NSFont.systemFont(ofSize: 12, weight: .medium),
+            .paragraphStyle : paragraphStyle,
+            .foregroundColor : NSColor.labelColor,
+        ]
+        urlFormatter.defaultAttributes = attributes
+
+        // The popover material of NSVisualEffect view is brighter than the
+        // tooltip material. The secondary label color is not as readable on
+        // that material.
+        if #available(macOS 10.14, *) {
+            // Do nothing
+        } else {
+            urlFormatter.secondaryAttributes = [
+                .foregroundColor : NSColor.labelColor,
+            ]
+        }
+
+        return urlFormatter
+    }()
+
     /// The label to show. Setting this property will show or hide the status
     /// bar. It will remain visible until the label is set to `nil`.
     @objc var label: String? {
@@ -194,7 +222,13 @@ final class OverlayStatusBar: NSView {
             // This closure is meant to be called very often. It should not
             // cause any expensive computations.
             if let label = label, !label.isEmpty {
-                if label != addressField.stringValue {
+                // URLs can have special formatting with an attributed string.
+                if let url = URL(string: label) {
+                    let attrString = formatter.attributedString(from: url)
+                    if attrString != addressField.attributedStringValue {
+                        addressField.attributedStringValue = attrString
+                    }
+                } else if label != addressField.stringValue {
                     addressField.stringValue = label
                 }
 
