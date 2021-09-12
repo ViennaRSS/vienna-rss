@@ -19,6 +19,7 @@
 //
 
 @import Cocoa;
+@import Sparkle;
 @import WebKit;
 
 #define APPCONTROLLER ((AppController *)[NSApp delegate])
@@ -67,6 +68,7 @@
     NewSubscription * _rssFeed;
 }
 
+@property (nonatomic) IBOutlet SPUStandardUpdaterController *sparkleController;
 @property (nonatomic) PluginManager *pluginManager;
 @property (nonatomic, weak) id<Browser> browser;
 @property (nonatomic) ArticleController *articleController;

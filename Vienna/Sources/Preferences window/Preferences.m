@@ -200,7 +200,6 @@ static Preferences * _standardPreferences = nil;
 		_syncingAppKey = [userPrefs valueForKey:MAPref_SyncingAppKey];
 				
 		//Sparkle autoupdate
-		checkForNewOnStartup = [SUUpdater sharedUpdater].automaticallyChecksForUpdates;
         alwaysAcceptBetas = [self boolForKey:MAPref_AlwaysAcceptBetas];
 
 		if (shouldSaveFeedSource)
@@ -720,27 +719,6 @@ static Preferences * _standardPreferences = nil;
 	}
 }
 
-/* checkForNewOnStartup
- * Returns whether or not Vienna checks for new versions when it starts.
- */
--(BOOL)checkForNewOnStartup
-{
-	return checkForNewOnStartup;
-}
-
-/* setCheckForNewOnStartup
- * Changes whether or not Vienna checks for new versions when it starts.
- */
--(void)setCheckForNewOnStartup:(BOOL)flag
-{
-	if (flag != checkForNewOnStartup)
-	{
-		checkForNewOnStartup = flag;
-		[SUUpdater sharedUpdater].automaticallyChecksForUpdates = flag;
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
-	}
-}
-
 /* alwaysAcceptBetas
  * Returns whether when checking for new versions, we should always search for Betas versions
  */
@@ -758,9 +736,6 @@ static Preferences * _standardPreferences = nil;
 	{
 		alwaysAcceptBetas = flag;
 		[self setBool:flag forKey:MAPref_AlwaysAcceptBetas];
-		// we suppress what might be in user prefs for the SUFeedURL key :
-		// feed URL is now handled by -feedURLStringForUpdater: and Info.plist
-		[[SUUpdater sharedUpdater] setFeedURL:nil];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
 }

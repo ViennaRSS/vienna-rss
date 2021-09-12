@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ViennaApp">
@@ -37,7 +37,7 @@
                             </menuItem>
                             <menuItem title="Check for Updates" id="1104">
                                 <connections>
-                                    <action selector="checkForUpdates:" target="1175" id="1176"/>
+                                    <action selector="checkForUpdates:" target="LzF-8y-hiG" id="1176"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="143">
@@ -881,11 +881,12 @@ CA
                 <outlet property="closeWindowItem" destination="935" id="1034"/>
                 <outlet property="columnsMenu" destination="442" id="1050"/>
                 <outlet property="sortByMenu" destination="387" id="1054"/>
+                <outlet property="sparkleController" destination="LzF-8y-hiG" id="7Oy-0I-Ll4"/>
             </connections>
         </customObject>
-        <customObject id="1175" userLabel="Sparkle" customClass="SUUpdater">
+        <customObject id="LzF-8y-hiG" userLabel="Sparkle Updater Controller" customClass="SPUStandardUpdaterController">
             <connections>
-                <outlet property="delegate" destination="233" id="RcS-xf-Kv5"/>
+                <outlet property="updaterDelegate" destination="233" id="fpC-Bd-pjz"/>
             </connections>
         </customObject>
     </objects>

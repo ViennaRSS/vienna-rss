@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/sparkle-project/Sparkle",
         "state": {
           "branch": null,
-          "revision": "c0933a516b420806e9216e71bd13ba76c54f0de6",
-          "version": "1.26.0"
+          "revision": "76acd9cb5f52c9a0024d26e6d68917bbcb385b7a",
+          "version": "2.0.0-beta.2"
         }
       }
     ]

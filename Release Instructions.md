@@ -6,7 +6,8 @@ Instructions for building and uploading Vienna binaries to Github and Sourceforg
 In Xcode->File->Project settings…, you should have :
 
 - Build System : New Build System
-- Derived Data : Default Location
+- Derived Data : Project-relative Location
+	- DerivedData
 - Advanced… : Build Location : Custom : Relative to Workspace
 	- Products : Build/Products
 	- Intermediates : Build/Intermediates.noindex
@@ -20,8 +21,11 @@ This file has been deliberately set to be ignored in our git repository, because
 `CODE_SIGN_IDENTITY`  
 should be exactly the name of your certificate as it is stored in Keychain.
 
+`PRIVATE_EDDSA_KEY_PATH`  
+should be the location of the private EdDSA (ed25519) key used by Sparkle 2, which for obvious security reasons should not be located in the source directory !
+
 `PRIVATE_KEY_PATH`  
-should be the location of the private DSA key used by Sparkle, which for obvious security reasons should not be located in the source directory !
+should be the location of the (legacy) private DSA key used by Sparkle, which for obvious security reasons should not be located in the source directory !
 
 If you want to go further in automation of package building, you will have to define three additional environment variables in the `CS-ID.xcconfig` file. These ones are used to automate the use of the `altool` command line tool as described in [this page of Apple's documentation](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow).
 
@@ -38,6 +42,7 @@ For instance, the content of my `Scripts/Resources/CS-ID.xcconfig` file looks li
 
 
     CODE_SIGN_IDENTITY = Developer ID Application: Barijaona Ramaholimihaso
+    PRIVATE_EDDSA_KEY_PATH = $(SRCROOT)/../secrets/vienna_private_eddsa_key.pem
     PRIVATE_KEY_PATH = $(SRCROOT)/../secrets/vienna_private_key.pem
     APP_STORE_ID = barijaona@mac.com
     APP_STORE_PASSWORD = @keychain:altool-barijaona@mac.com
