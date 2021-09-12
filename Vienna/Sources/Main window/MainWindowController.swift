@@ -44,32 +44,86 @@ final class MainWindowController: NSWindowController {
 
     // MARK: Initialization
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func windowDidLoad() {
+        super.windowDidLoad()
 
         (self.browser as? RSSSource)?.rssSubscriber = self
 
         (self.browser as? TabbedBrowserViewController)?.contextMenuDelegate = self
 
-        // TODO: Move this to windowDidLoad()
         statusBarState(disclosed: Preferences.standard.showStatusBar, animate: false)
 
         splitView.addSubview(browser.view)
         placeholderDetailView.removeFromSuperview()
+    }
 
-        let filterMenu = (NSApp as? ViennaApp)?.filterMenu
-        let filterMode = Preferences.standard.filterMode
-        if let menuTitle = filterMenu?.item(withTag: filterMode)?.title {
-            filterLabel.stringValue = menuTitle
+    // MARK: Subtitle
+
+    @objc dynamic var unreadCount: UInt = 0 {
+        didSet {
+            updateSubtitle()
         }
+    }
+
+    @objc dynamic var currentFilter: String = "" {
+        didSet {
+            updateSubtitle()
+        }
+    }
+
+    private func updateSubtitle() {
+        // Unread counter
+        var countString = String()
+        if unreadCount > 0 {
+            let number = NSNumber(value: unreadCount)
+            let formattedNumber = NumberFormatter.localizedString(from: number, number: .decimal)
+            countString = String(format: NSLocalizedString("%@ unread", comment: ""), formattedNumber)
+        }
+
+        // Filter label
+        var filterString = String()
+        var filterStringCapitalized = String()
+        if !currentFilter.isEmpty {
+            filterString = String(format: NSLocalizedString("filter by: %@", comment: ""), currentFilter)
+            filterStringCapitalized = String(format: NSLocalizedString("Filter by: %@", comment: ""), currentFilter)
+        }
+
+        // Combine the strings
+        if !countString.isEmpty && !filterString.isEmpty {
+            if #available(macOS 11, *) {
+                window?.subtitle = "\(countString) – \(filterString)"
+            } else {
+                let appName = NSRunningApplication.current.localizedName!
+                window?.title = "\(appName) (\(countString), \(filterString))"
+            }
+        } else if !countString.isEmpty && filterString.isEmpty {
+            if #available(macOS 11, *) {
+                window?.subtitle = countString
+            } else {
+                let appName = NSRunningApplication.current.localizedName!
+                window?.title = "\(appName) (\(countString))"
+            }
+        } else if countString.isEmpty && !filterString.isEmpty {
+            if #available(macOS 11, *) {
+                window?.subtitle = filterStringCapitalized
+            } else {
+                let appName = NSRunningApplication.current.localizedName!
+                window?.title = "\(appName) (\(filterString))"
+            }
+        } else {
+            if #available(macOS 11, *) {
+                window?.subtitle = ""
+            } else {
+                window?.title = NSRunningApplication.current.localizedName!
+            }
+        }
+
     }
 
     // MARK: Status bar
 
     @IBOutlet private var statusBar: DisclosureView!
     @IBOutlet private var statusLabel: NSTextField!
-    @IBOutlet private var filterLabel: NSTextField!
-    @IBOutlet private var filterButton: NSButton!
 
     @objc var statusText: String? {
         get {
@@ -77,13 +131,6 @@ final class MainWindowController: NSWindowController {
         }
         set {
             statusLabel.stringValue = newValue ?? ""
-        }
-    }
-
-    @objc var filterAreaIsHidden = false {
-        didSet {
-            filterLabel.isHidden = filterAreaIsHidden
-            filterButton.isHidden = filterAreaIsHidden
         }
     }
 
@@ -109,7 +156,11 @@ final class MainWindowController: NSWindowController {
     // swiftlint:disable private_action
     @IBAction func changeFiltering(_ sender: NSMenuItem) { // TODO: This should be handled by ArticleController
         Preferences.standard.filterMode = sender.tag
-        filterLabel.stringValue = sender.title
+        if sender.tag == VNAFilter.all.rawValue {
+            currentFilter = ""
+        } else {
+            currentFilter = sender.title
+        }
     }
 
     // swiftlint:disable private_action
@@ -120,6 +171,14 @@ final class MainWindowController: NSWindowController {
     // MARK: Observation
 
     private var observationTokens: [NSKeyValueObservation] = []
+
+    // MARK: Window restoration
+
+    override class var restorableStateKeyPaths: [String] {
+        var keyPaths = super.restorableStateKeyPaths
+        keyPaths += ["unreadCount", "currentFilter"]
+        return keyPaths
+    }
 
 }
 
@@ -153,8 +212,6 @@ extension MainWindowController: NSWindowDelegate {
 
     func windowDidBecomeMain(_ notification: Notification) {
         statusLabel.textColor = .windowFrameTextColor
-        filterLabel.textColor = .windowFrameTextColor
-        filterButton.isEnabled = true
 
         observationTokens = [
             OpenReader.shared.observe(\.statusMessage, options: .new) { [weak self] manager, change in
@@ -172,8 +229,6 @@ extension MainWindowController: NSWindowDelegate {
 
     func windowDidResignMain(_ notification: Notification) {
         statusLabel.textColor = .disabledControlTextColor
-        filterLabel.textColor = .disabledControlTextColor
-        filterButton.isEnabled = false
 
         observationTokens.removeAll()
     }
@@ -226,6 +281,7 @@ extension MainWindowController: NSToolbarDelegate {
             NSToolbarItem.Identifier("SkipFolder"),
             NSToolbarItem.Identifier("MarkAllItemsAsRead"),
             NSToolbarItem.Identifier("Refresh"),
+            NSToolbarItem.Identifier("Filter"),
             NSToolbarItem.Identifier("MailLink"),
             NSToolbarItem.Identifier("DeleteArticle"),
             NSToolbarItem.Identifier("EmptyTrash"),
@@ -250,7 +306,8 @@ extension MainWindowController: NSToolbarDelegate {
             NSToolbarItem.Identifier("Subscribe"),
             NSToolbarItem.Identifier("SkipFolder"),
             NSToolbarItem.Identifier("Action"),
-            NSToolbarItem.Identifier("Refresh")
+            NSToolbarItem.Identifier("Refresh"),
+            NSToolbarItem.Identifier("Filter"),
         ]
 
         let pluginIdentifiers = pluginManager?.defaultToolbarItems() as? [String] ?? []
