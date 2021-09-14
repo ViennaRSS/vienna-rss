@@ -3368,11 +3368,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	BOOL flag;
 	if (toolbarItem.action == @selector(showHideFilterBar:))
 	{
-		if ([Preferences standardPreferences].showFilterBar) {
-			toolbarItem.label = NSLocalizedString(@"Hide Filter Bar", nil);
-		} else {
-			toolbarItem.label = NSLocalizedString(@"Show Filter Bar", nil);
-		}
 		return self.mainWindow.visible && self.browser.activeTab == nil;
 	}
 	[self validateCommonToolbarAndMenuItems:toolbarItem.action validateFlag:&flag];

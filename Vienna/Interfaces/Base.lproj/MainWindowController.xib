@@ -194,7 +194,6 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem title="New Smart Folder…" id="Pqr-dM-SQQ">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="newSmartFolder:" target="-1" id="zGS-yX-GNs"/>
                                             </connections>
@@ -321,18 +320,62 @@
                             <action selector="getInfo:" target="-1" id="Xvh-S3-PIS"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="C907E8D1-9919-4292-AF82-865D069359AA" explicitItemIdentifier="Filter" label="Show/Hide Filters" paletteLabel="Show/Hide Filters" image="line.horizontal.3.decrease.circle" catalog="system" bordered="YES" sizingBehavior="auto" id="I8N-Dr-P6W" userLabel="Show/Hide Filter Bar" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
-                        <button key="view" verticalHuggingPriority="750" id="eKU-qn-2dn">
-                            <rect key="frame" x="36" y="14" width="27" height="23"/>
+                    <toolbarItem implicitItemIdentifier="C907E8D1-9919-4292-AF82-865D069359AA" explicitItemIdentifier="Filter" label="Filter" paletteLabel="Filter" image="line.horizontal.3.decrease.circle" catalog="system" bordered="YES" sizingBehavior="auto" id="I8N-Dr-P6W" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                        <popUpButton key="view" verticalHuggingPriority="750" id="eKU-qn-2dn">
+                            <rect key="frame" x="0.0" y="14" width="50" height="25"/>
                             <autoresizingMask key="autoresizingMask"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="line.horizontal.3.decrease.circle" catalog="system" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NJC-fy-OS8">
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="NJC-fy-OS8">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </button>
-                        <connections>
-                            <action selector="showHideFilterBar:" target="-1" id="43z-2V-zCg"/>
-                        </connections>
+                                <font key="font" metaFont="menu"/>
+                                <menu key="menu" id="Mx2-fn-A84">
+                                    <items>
+                                        <menuItem image="line.horizontal.3.decrease.circle" catalog="system" hidden="YES" id="yGM-WH-fbb"/>
+                                        <menuItem title="All Articles" id="cJi-Kc-4fg">
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="VaW-FL-0JJ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="h5j-08-XNb"/>
+                                        <menuItem title="Unread or Flagged" tag="6" id="mbZ-oU-TDn">
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="QC3-cR-Lqx"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Last Refresh" tag="2" id="5RA-iE-L8a">
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="eVE-5R-l4E"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Today" tag="3" id="Sne-Nd-bEA">
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="ifP-Af-Q2b"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Last 48 Hours" tag="4" id="yqJ-tO-HNW">
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="oKL-XJ-BAA"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Flagged" tag="5" id="ci8-W6-ewN">
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="zc2-22-OLF"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Unread Articles" tag="1" id="dId-uc-qfG">
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="BCF-fe-yba"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="CE6-oq-8KJ"/>
+                                        <menuItem title="Show Filter Bar" id="Wy3-T4-9eO">
+                                            <connections>
+                                                <action selector="showHideFilterBar:" target="-1" id="kSu-qc-5hy"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </popUpButtonCell>
+                        </popUpButton>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="A51AB11F-9F76-48DF-A4E8-39C7224775BA" explicitItemIdentifier="Action" label="Action" paletteLabel="Action" toolTip="Additional actions for the selected folder" image="NSActionTemplate" sizingBehavior="auto" id="TSQ-UW-4gU" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <popUpButton key="view" verticalHuggingPriority="750" id="Tq4-6N-ErM">
@@ -514,6 +557,7 @@
                                                                 <action selector="changeFiltering:" target="-1" id="YCS-te-Yoj"/>
                                                             </connections>
                                                         </menuItem>
+                                                        <menuItem isSeparatorItem="YES" id="A5F-1n-xUd"/>
                                                         <menuItem title="Unread or Flagged" tag="6" id="ty7-ph-peE">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
                                                             <connections>
