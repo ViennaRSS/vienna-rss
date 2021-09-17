@@ -17,7 +17,9 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
+
+@class Article;
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -24,8 +24,8 @@
 
 #import "BaseView.h"
 
-@class MMTabBarView;
 @class BrowserPane;
+
 @protocol Browser;
 @protocol Tab;
 

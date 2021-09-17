@@ -19,6 +19,8 @@
 
 #import "NSFileManager+Paths.h"
 
+@import os.log;
+
 @implementation NSFileManager (Paths)
 
 // The NSApplicationScriptsDirectory search path returns a subdirectory in the
@@ -35,23 +37,24 @@
 
     NSFileManager *fileManager = NSFileManager.defaultManager;
     NSError *error = nil;
+    // Replace NSLibraryDirectory with NSApplicationScriptsDirectory for
+    // sandboxing.
     url = [fileManager URLForDirectory:NSLibraryDirectory
                               inDomain:NSUserDomainMask
                      appropriateForURL:nil
-                                create:YES
+                                create:NO
                                  error:&error];
+    if (!url && error) {
+        if (@available(macOS 10.12, *)) {
+            os_log_error(OS_LOG_DEFAULT, "%@", error.localizedDescription);
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }
+
+    // Remove the following lines for sandboxing.
     url = [url URLByAppendingPathComponent:@"Scripts/Applications/Vienna"
                                isDirectory:YES];
-// This is the replacement code for sandboxing:
-//
-//    NSURL *url = [fileManager URLForDirectory:NSApplicationScriptsDirectory
-//                                     inDomain:NSUserDomainMask
-//                            appropriateForURL:nil
-//                                       create:YES
-//                                        error:&error];
-    if (!url && error) {
-        [NSApp presentError:error];
-    }
 
     return [url copy];
 }
@@ -70,18 +73,20 @@
     url = [fileManager URLForDirectory:NSApplicationSupportDirectory
                               inDomain:NSUserDomainMask
                      appropriateForURL:nil
-                                create:YES
+                                create:NO
                                  error:&error];
     if (!url && error) {
-        [NSApp presentError:error];
+        if (@available(macOS 10.12, *)) {
+            os_log_error(OS_LOG_DEFAULT, "%@", error.localizedDescription);
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
     }
 
+    // For sandboxing, use NSBundle.mainBundle.bundleIdentifier instead of the
+    // application name (recommendation by Apple, but not required).
     url = [url URLByAppendingPathComponent:@"Vienna"
                                isDirectory:YES];
-// This is the replacement code for sandboxing:
-//
-//    url = [url URLByAppendingPathComponent:NSBundle.mainBundle.bundleIdentifier
-//                               isDirectory:YES];
 
     return [url copy];
 }
@@ -97,10 +102,14 @@
     url = [fileManager URLForDirectory:NSCachesDirectory
                               inDomain:NSUserDomainMask
                      appropriateForURL:nil
-                                create:YES
+                                create:NO
                                  error:&error];
     if (!url && error) {
-        [NSApp presentError:error];
+        if (@available(macOS 10.12, *)) {
+            os_log_error(OS_LOG_DEFAULT, "%@", error.localizedDescription);
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
     }
 
     url = [url URLByAppendingPathComponent:NSBundle.mainBundle.bundleIdentifier

@@ -6,7 +6,7 @@
 //  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
 int main(int argc, const char *argv[])
 {

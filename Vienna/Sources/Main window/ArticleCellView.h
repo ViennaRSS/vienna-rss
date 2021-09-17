@@ -8,6 +8,7 @@
 @import Cocoa;
 
 @class AppController;
+@class ArticleConverter;
 @protocol ArticleContentView;
 
 @interface ArticleCellView : NSTableCellView

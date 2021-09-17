@@ -19,10 +19,12 @@
 //
 
 @import Cocoa;
+@import MMTabBarView;
 @import WebKit;
 
 #import "BaseView.h"
-#import "Vienna-Swift.h"
+
+@protocol Tab;
 
 // This is defined somewhere but I can't find where.
 #define WebKitErrorPlugInWillHandleLoad	204

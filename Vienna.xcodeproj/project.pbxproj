@@ -49,7 +49,6 @@
 		032280311A33BCD8007DE933 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 032280301A33BCD8007DE933 /* Article.m */; };
 		0349813E1A206FD900014F29 /* GeneralPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0349813D1A206FD900014F29 /* GeneralPreferencesViewController.m */; };
 		034981411A20701600014F29 /* AdvancedPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 034981401A20701600014F29 /* AdvancedPreferencesViewController.m */; };
-		035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B703919E0E4AE00197334 /* Vienna_Tests.m */; };
 		0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */; };
 		0379E23B1A20831600D58BFE /* SyncingPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */; };
 		0386A5C11E1FA586000C10CE /* BrowserPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0386A5BB1E1FA586000C10CE /* BrowserPane.xib */; };
@@ -100,7 +99,7 @@
 		3A8D9AE325A9DA4B0016F30F /* ArticleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D9AE225A9DA4B0016F30F /* ArticleTests.swift */; };
 		3AB95743258DBC5A00C54E83 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FC5218A26B0002F77E9 /* Browser.swift */; };
 		3AC411A526BBFDFD004A8700 /* WebKitArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC411A426BBFDFD004A8700 /* WebKitArticleView.swift */; };
-		3AEE7DE91695FC570018A17D /* SparklePublicKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* SparklePublicKey.pem */; };
+		3AEE7DE91695FC570018A17D /* SparkleDSAPublicKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* SparkleDSAPublicKey.pem */; };
 		435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 435026E5165DD8BE0018EDB7 /* ArticleRef.m */; };
 		4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */; };
 		43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502848165DE9DF0018EDB7 /* ActivityLog.m */; };
@@ -287,7 +286,6 @@
 		034981401A20701600014F29 /* AdvancedPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedPreferencesViewController.m; sourceTree = "<group>"; };
 		035B703519E0E4AE00197334 /* Vienna Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Vienna Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		035B703819E0E4AE00197334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		035B703919E0E4AE00197334 /* Vienna_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vienna_Tests.m; sourceTree = "<group>"; };
 		0377BDEB1D3A009B00960555 /* Vienna Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vienna Tests-Bridging-Header.h"; sourceTree = "<group>"; };
 		0379E2361A2082E600D58BFE /* AppearancePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppearancePreferencesViewController.h; sourceTree = "<group>"; };
 		0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearancePreferencesViewController.m; sourceTree = "<group>"; };
@@ -357,7 +355,7 @@
 		3A932D8923BB999A009B8061 /* ViennaDeployment.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = ViennaDeployment.entitlements; sourceTree = "<group>"; };
 		3AC411A426BBFDFD004A8700 /* WebKitArticleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebKitArticleView.swift; sourceTree = "<group>"; };
 		3ADBA70C23DDAFCA00156722 /* Notarize.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = Notarize.sh; sourceTree = "<group>"; };
-		3AEE7DE81695FC570018A17D /* SparklePublicKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SparklePublicKey.pem; sourceTree = "<group>"; };
+		3AEE7DE81695FC570018A17D /* SparkleDSAPublicKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SparkleDSAPublicKey.pem; sourceTree = "<group>"; };
 		430C4ADB1661753F0079C9FC /* autorevision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autorevision.h; sourceTree = "<group>"; };
 		430C4AE0166175C20079C9FC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		435026E5165DD8BE0018EDB7 /* ArticleRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleRef.m; sourceTree = "<group>"; };
@@ -1008,7 +1006,6 @@
 		035B703619E0E4AE00197334 /* Vienna Tests */ = {
 			isa = PBXGroup;
 			children = (
-				035B703919E0E4AE00197334 /* Vienna_Tests.m */,
 				4D36B44A1D37F91E009736C1 /* VNAArticleTests.m */,
 				3A8D9AE225A9DA4B0016F30F /* ArticleTests.swift */,
 				2F437B3A25CF336400AD1B57 /* SubscriptionModelTests.swift */,
@@ -1246,7 +1243,7 @@
 				F63DA1731F1CF025007CBED4 /* Error page */,
 				03F33D951DF2A2F900B04FAF /* Assets.xcassets */,
 				F6209C5923D3FFA700D5537D /* Vienna.sdef */,
-				3AEE7DE81695FC570018A17D /* SparklePublicKey.pem */,
+				3AEE7DE81695FC570018A17D /* SparkleDSAPublicKey.pem */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1835,7 +1832,7 @@
 				B2554731106913760065E9C3 /* errorpagelogo.png in Resources */,
 				F6D572BA1E26AAA900CDA909 /* SearchFolder.xib in Resources */,
 				F626F5F424A76B9100D3AAD8 /* Preferences.storyboard in Resources */,
-				3AEE7DE91695FC570018A17D /* SparklePublicKey.pem in Resources */,
+				3AEE7DE91695FC570018A17D /* SparkleDSAPublicKey.pem in Resources */,
 				F6209C5A23D3FFA700D5537D /* Vienna.sdef in Resources */,
 				F62580E71E286CEC0035E43C /* RSSSources.plist in Resources */,
 			);
@@ -2003,7 +2000,6 @@
 				F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */,
 				3A50014E259AA2BE00AA6AAD /* WebKitArticleConverter.swift in Sources */,
 				2FE328F125CF436C005B9C18 /* CriteriaTests.swift in Sources */,
-				035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

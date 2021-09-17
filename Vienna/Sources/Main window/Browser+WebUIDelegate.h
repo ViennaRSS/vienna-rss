@@ -6,9 +6,7 @@
 //  Copyright © 2018 uk.co.opencommunity. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "WebViewBrowser.h"
-@import WebKit;
 
 NS_ASSUME_NONNULL_BEGIN
 
