@@ -6,7 +6,7 @@
 VIENNA_UPLOADS_DIR="${SOURCE_ROOT}/Build/Uploads"
 GITHUB_REPO="https://github.com/ViennaRSS/vienna-rss"
 GITHUB_RELEASE_URL="${GITHUB_REPO}/releases/tag/v%2F${N_VCS_TAG}"
-GITHUB_ASSETS_URL="${GITHUB_REPO}/releases/download/v%2F${N_VCS_TAG}"
+SOURCEFORGE_ASSETS_URL="https://downloads.sourceforge.net/project/vienna-rss/v_${N_VCS_TAG}"
 
 TGZ_FILENAME="Vienna${N_VCS_TAG}.tar.gz"
 dSYM_FILENAME="Vienna${N_VCS_TAG}.${VCS_SHORT_HASH}-dSYM"
@@ -81,7 +81,7 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 			<pubDate>${pubDate}</pubDate>
 			<link>${GITHUB_RELEASE_URL}</link>
 			<sparkle:minimumSystemVersion>${MACOSX_DEPLOYMENT_TARGET}.0</sparkle:minimumSystemVersion>
-			<enclosure url="${GITHUB_ASSETS_URL}/${TGZ_FILENAME}" $ED_SIGNATURE_AND_LENGTH $DSA_SIGNATURE type="application/octet-stream" />
+			<enclosure url="${SOURCEFORGE_ASSETS_URL}/${TGZ_FILENAME}" $ED_SIGNATURE_AND_LENGTH $DSA_SIGNATURE type="application/octet-stream" />
 			<sparkle:releaseNotesLink>https://www.vienna-rss.com/sparkle-files/noteson${N_VCS_TAG}.html</sparkle:releaseNotesLink>
 		</item>
 	</channel>
