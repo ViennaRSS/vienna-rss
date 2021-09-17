@@ -190,6 +190,7 @@ extension MainWindowController: NSMenuItemValidation {
         switch menuItem.action {
         case #selector(changeFiltering(_:)):
             menuItem.state = menuItem.tag == Preferences.standard.filterMode ? .on : .off
+            return browser.activeTab == nil
         case #selector(toggleStatusBar(_:)):
             if statusBar.isDisclosed {
                 menuItem.title = NSLocalizedString("Hide Status Bar", comment: "Title of a menu item")
