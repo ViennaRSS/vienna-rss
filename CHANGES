@@ -8,35 +8,73 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.7.1
+-----
+- Improve autodiscovery of feeds inside webpages (among other improvements, detect URLs of feeds for YouTube channels or users)
+- Fix wrong image used in article list to indicate existence of an enclosure
+- Fix empty folders in build which interferes with plug-in loading
+
+3.7.0
+-----
+- Update database to enable auto-vacuum mode (the updated database remains compatible with older versions of Vienna)
+- Add dark color scheme to Default and Serifim styles
+- Fix search field for some macOS versions prior to macOS 11
+- Fix database update on permanent HTTP redirections
+- Fix a problem with some authentication challenges sent by servers
+- Limit duration of requests to unresponding websites
+- Modify symbols displayed in article list on macOS 11 Big Sur
+- Update some localizations
+- Update an URL in the default set of feeds
+- Various code modernizations
+- More coherent project settings
+- Rearrange some files ; move images into a single Assets.xcassets folder
+- Build with Xcode 12.3
+- Improve SwiftLint settings
+
+3.6.2
+-----
+- Fix main window not appearing when "checking for new articles" preference is set to "Manually" 
+
+3.6.1
+-----
+- Fix brutal resizing of article view column in vertical layout
+- Add ‘hidden’ preference to specify web user agent through command line : `defaults write uk.co.opencommunity.vienna2 UserAgentName <...>`
+- Improve look of main window toolbar under macOS Big Sur
+- Use adaptative grey for unread count in folders tree
+- Update toolbar icons of preferences window
+- Replace IOKit calls with NSBackgroundActivityScheduler for scheduling refreshes
+- Address several deprecation warnings
+- Refactor some methods from Objective-C to Swift (PopUpButton, AppController+Sparkle)
+- Remove unused code and images, slightly reorganize project, move images and icons into assets catalog
+- Handle gracefully when CS-ID.xcconfig file is missing
+- Use Swift Package Manager instead of Carthage for managing dependencies (Sparkle, MMTabBarView v/1.4.12)
+- Use Github Workflows instead of Travis CI for continuous integrations tests
+- Update SwiftLint configuration
+
+3.6.0
+-----
+### ! 3.6 versions require OS X 10.11 (El Capitan) or later !
+- Universal build (support Apple Silicon processors as well as Intel processors) through Xcode 12.2
+- Refactor constants to be usable by Swift code
+- Tweak DirectoryMonitor code
+- Fix a warning
+- Change configuration of handling of stale Github issues
+
 3.6.0 Beta 5
 ------------
 - Silence some warnings
 - Remove unused code
 - Add GitHub workflow for testing
 
-3.6.0 Beta 4
-------------
-- Update to Xcode 12
-
-3.6.0 Beta 3
-------------
-- Configure Github configuration to close abandoned issues
-
-3.6.0 Beta 2
-------------
-- Replace deprecated methods
-
-3.6.0 Beta 1
-------------
-### ! For OS X 10.11 (El Capitan) or later only !
-- Lift deployment target to macOS 10.11 & start modernizing code
-- Replaced MASPreferences with Storyboard implementation (Preferences window)
-
 3.5.10
 ------
 - Fix application crashing on display of certain URLs (bug introduced by version 3.5.9) 
 - Fix a crash when both expansion tooltip and progress animation were triggered
 - Fix an annoyance with tooltip obscuring contextual menu in article list or folder list
+
+3.6.0 Beta 4
+------------
+- Update to Xcode 12
 
 3.5.9
 -----
@@ -50,6 +88,10 @@ Thanks!
 - Update to MMTabBarView v/1.4.9
 - Fix running individual Xcode tests
 
+3.6.0 Beta 3
+------------
+- Configure Github configuration to close abandoned issues
+
 3.5.8
 -----
 - Fix crash related to macOS Big Sur Beta
@@ -61,6 +103,10 @@ Thanks!
 - Fix resetting of article pane when no article is selected anymore and "Use Web Pages for Articles" is enabled
 - Fix Vienna Tests target
 
+3.6.0 Beta 2
+------------
+- Replace deprecated methods
+
 3.5.7
 -----
 - Fix file being hidden at end of "Download image"
@@ -70,6 +116,12 @@ Thanks!
 - Remove Google+ plugin ; replace it with Google Currents plugin
 - Increase to 1000 the limit of articles fetched at once from an Open Reader feed
 - Update Sparkle to v1.23.0 and MMTabBarView to v/1.4.7
+
+3.6.0 Beta 1
+------------
+### ! 3.6.x versions are for OS X 10.11 (El Capitan) or later only !
+- Lift deployment target to macOS 10.11 & start modernizing code
+- Replaced MASPreferences with Storyboard implementation (Preferences window)
 
 3.5.6
 -----

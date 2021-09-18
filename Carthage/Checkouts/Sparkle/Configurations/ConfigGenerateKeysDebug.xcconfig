@@ -1,4 +1,0 @@
-// Generate Appcast Debug
-
-#include "ConfigGenerateKeys.xcconfig"
-#include "ConfigSwiftDebug.xcconfig"

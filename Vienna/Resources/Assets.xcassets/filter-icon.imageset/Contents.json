@@ -1,0 +1,18 @@
+{
+  "images" : [
+    {
+      "filename" : "filter-icon.png",
+      "idiom" : "mac",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "filter-icon@2x.png",
+      "idiom" : "mac",
+      "scale" : "2x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

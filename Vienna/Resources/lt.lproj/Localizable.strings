@@ -108,9 +108,6 @@
 "Click the Open button to open this file." = "Spustelkite ant mygtuko Atidaryti, kad atvertumėte failą.";
 
 /* No comment provided by engineer. */
-"Click the Play button to play this enclosure in iTunes." = "Spustelkite ant mygtuko Paleisti, kad peržiūrėtumėte programoje iTunes.";
-
-/* No comment provided by engineer. */
 "Connecting to %@" = "Jungiamasi prie %@";
 
 /* No comment provided by engineer. */
@@ -454,9 +451,6 @@
 "Other" = "Kita";
 
 /* No comment provided by engineer. */
-"Play" = "Paleisti";
-
-/* No comment provided by engineer. */
 "Plugin installed" = "Įskiepis įdiegtas";
 
 /* No comment provided by engineer. */
@@ -531,6 +525,11 @@
 
 /* No comment provided by engineer. */
 "Search all articles or the current web page" = "Ieškoti visuose straipsniuose arba šiame puslapyje";
+
+/* Toolbar item label
+   Toolbar item palette label
+   Toolbar item tooltip */
+"Search Articles" = "Ieškoti straipsnių";
 
 /* Placeholder title of a search field */
 "Search current web page" = "Ieškoti šiame puslapyje";

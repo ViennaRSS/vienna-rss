@@ -1,7 +1,7 @@
 ![Vienna](https://vienna-rss.sourceforge.io/img/vienna_logo.png)
 
-[![Build Status](https://travis-ci.org/ViennaRSS/vienna-rss.svg?branch=master)](https://travis-ci.org/ViennaRSS/vienna-rss)
-[![Crowdin](https://d322cqt584bo4o.cloudfront.net/vienna-rss/localized.svg)](https://crowdin.com/project/vienna-rss)
+![Build status](https://github.com/ViennaRSS/vienna-rss/workflows/Vienna/badge.svg)
+[![Localization status](https://d322cqt584bo4o.cloudfront.net/vienna-rss/localized.svg)](https://crowdin.com/project/vienna-rss "Crowdin")
 
 [Vienna](https://www.vienna-rss.com) is an RSS/Atom reader for macOS.
 
@@ -14,8 +14,8 @@ Compatibility
 
 Since version 3.6, Vienna requires a minimum of macOS 10.11 (El Capitan).
 
-Vienna 3.5.x requires a minimum of macOS 10.9 (Mavericks)
-Vienna 3.1.x requires a minimum of OS X 10.8 (Mountain Lion).
+Vienna 3.5.x requires a minimum of macOS 10.9 (Mavericks).  
+Vienna 3.1.x requires a minimum of OS X 10.8 (Mountain Lion).  
 Vienna 3.0.x requires a minimum of OS X 10.6 (Snow Leopard).
 
 
@@ -29,7 +29,7 @@ Alternatively, you can download releases from the [GitHub Releases page](https:/
 
 Vienna is also available as a Cask for [Homebrew Cask](https://github.com/phinze/homebrew-cask).
 ```bash
-brew cask install vienna
+brew install --cask vienna
 ```
 
 Getting support
@@ -52,8 +52,6 @@ Want to contribute? Great! There are many ways you can, even if you aren't a dev
 ### Writing code
 
 Please check [CONTRIBUTING.md](CONTRIBUTING.md).
-
-Vienna now uses [Carthage](https://github.com/Carthage/Carthage) for managing dependencies.
 
 ### Localizing ###
 

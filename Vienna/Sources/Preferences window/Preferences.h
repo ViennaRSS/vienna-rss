@@ -74,11 +74,10 @@ extern NSString * const kMA_Notify_MinimumFontSizeChange;
 extern NSString * const kMA_Notify_UseJavaScriptChange;
 extern NSString * const kMA_Notify_UseWebPluginsChange;
 
-// Accessor functions
-+(Preferences *)standardPreferences;
--(void)savePreferences;
+@property (class, readonly) Preferences *standardPreferences;
 
 // Accessor functions
+-(void)savePreferences;
 -(BOOL)boolForKey:(NSString *)defaultName;
 -(NSInteger)integerForKey:(NSString *)defaultName;
 -(NSString *)stringForKey:(NSString *)defaultName;
@@ -201,6 +200,9 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 
 // Do we show updated articles as new ?
 @property (nonatomic) BOOL markUpdatedAsNew;
+
+// User Agent Name
+@property (nonatomic) NSString *userAgentName;
 
 #pragma mark -
 #pragma mark Open Reader syncing

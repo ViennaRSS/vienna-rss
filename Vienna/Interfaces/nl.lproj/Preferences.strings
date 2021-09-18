@@ -8,7 +8,7 @@
 "4vm-80-j33.title" = "Markeer bijgewerkte artikelen als nieuw";
 
 /* Class = "NSTextFieldCell"; title = "However, high numbers also render your computer less responsive while refreshing feeds."; ObjectID = "5EA-1i-TuA"; */
-"5EA-1i-TuA.title" = "Echter, hogere waarden kunnen er ook voor zorgen dat uw computer trager reageert tijdens het downloaden van abonnementen.";
+"5EA-1i-TuA.title" = "Echter, hogere waarden kunnen er ook voor zorgen dat je Mac trager reageert tijdens het downloaden van abonnementen.";
 
 /* Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "6GF-Pk-gI9"; */
 "6GF-Pk-gI9.title" = "Elke 6 uur";
@@ -26,7 +26,7 @@
 "adB-qE-xKg.title" = "Markeer huidige artikel als gelezen:";
 
 /* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "aWg-mD-YWn"; */
-"aWg-mD-YWn.title" = "Elke 30 minuten";
+"aWg-mD-YWn.title" = "Elk half uur";
 
 /* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "bom-nB-4zx"; */
 "bom-nB-4zx.title" = "Verplaats artikelen naar prullenmand:";
@@ -34,11 +34,17 @@
 /* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "bwY-9N-h4N"; */
 "bwY-9N-h4N.title" = "Gebruikersnaam:";
 
+/* Class = "NSMenuItem"; title = "After a day"; ObjectID = "c4l-M5-qB1"; */
+"c4l-M5-qB1.title" = "Na één dag";
+
 /* Class = "NSButtonCell"; title = "Select…"; ObjectID = "cbn-xq-UFr"; */
 "cbn-xq-UFr.title" = "Kies…";
 
 /* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "dkm-xW-4If"; */
 "dkm-xW-4If.title" = "Toon symbolen in mappenlijst";
+
+/* Class = "NSMenuItem"; title = "After two weeks"; ObjectID = "Dw9-en-4Zu"; */
+"Dw9-en-4Zu.title" = "Na twee weken";
 
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "erE-oh-cbw"; */
 "erE-oh-cbw.title" = "Open koppeling op de achtergrond";
@@ -50,7 +56,7 @@
 "flH-2D-s6O.title" = "Open koppeling in externe browser";
 
 /* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "g3K-qh-M6y"; */
-"g3K-qh-M6y.title" = "Hoe hoger de waarde, des te sneller worden uw abonnementen gedownload.";
+"g3K-qh-M6y.title" = "Hoe hoger de waarde, des te sneller worden je abonnementen gedownload.";
 
 /* Class = "NSTabViewItem"; label = "General"; ObjectID = "GJ3-1q-004"; */
 "GJ3-1q-004.label" = "Algemeen";
@@ -112,6 +118,9 @@
 /* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "OD4-de-Vkx"; */
 "OD4-de-Vkx.title" = "Wachtwoord:";
 
+/* Class = "NSMenuItem"; title = "After a month"; ObjectID = "OIa-NQ-jQi"; */
+"OIa-NQ-jQi.title" = "Na één maand";
+
 /* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "Oqg-6W-NAL"; */
 "Oqg-6W-NAL.title" = "Zoek naar nieuwe artikelen:";
 
@@ -126,6 +135,12 @@
 
 /* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "qYb-Sf-cEF"; */
 "qYb-Sf-cEF.title" = "Elke 5 minuten";
+
+/* Class = "NSTabViewItem"; label = "Updates"; ObjectID = "qyx-3u-1Io"; */
+"qyx-3u-1Io.label" = "Updates";
+
+/* Class = "NSMenuItem"; title = "After two days"; ObjectID = "sJE-bd-4mK"; */
+"sJE-bd-4mK.title" = "Na twee dagen";
 
 /* Class = "NSButtonCell"; title = "Search for latest beta versions"; ObjectID = "u92-Bh-Wrz"; */
 "u92-Bh-Wrz.title" = "Zoek naar bèta-updates";
@@ -142,11 +157,14 @@
 /* Class = "NSWindow"; title = "Preferences"; ObjectID = "X5g-th-bjd"; */
 "X5g-th-bjd.title" = "Voorkeuren";
 
+/* Class = "NSMenuItem"; title = "After a week"; ObjectID = "xfd-Vp-kJy"; */
+"xfd-Vp-kJy.title" = "Na één week";
+
 /* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "YG6-9k-gKH"; */
 "YG6-9k-gKH.title" = "URL:";
 
 /* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "Ygu-Rj-E7a"; */
-"Ygu-Rj-E7a.title" = "Elke 15 minuten";
+"Ygu-Rj-E7a.title" = "Elk kwartier";
 
 /* Class = "NSTextFieldCell"; title = "Default RSS reader:"; ObjectID = "YHN-Up-rwa"; */
 "YHN-Up-rwa.title" = "Standaard RSS-lezer:";

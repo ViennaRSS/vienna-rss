@@ -477,7 +477,7 @@
 		
 		// Handle which fields can be visible in the condensed (vertical) layout
 		// versus the report (horizontal) layout
-		if (tableLayout == MA_Layout_Report)
+		if (tableLayout == VNALayoutReport)
 			showField = field.visible && tag != ArticleFieldIDHeadlines && tag != ArticleFieldIDComments;
 		else
 		{
@@ -503,9 +503,9 @@
 			// in willDisplayCell:forTableColumn:row: where it sets the inProgress flag.
 			// We need to use a different column for condensed layout vs. table layout.
 			BOOL isProgressColumn = NO;
-			if (tableLayout == MA_Layout_Report && [column.identifier isEqualToString:MA_Field_Subject])
+			if (tableLayout == VNALayoutReport && [column.identifier isEqualToString:MA_Field_Subject])
 				isProgressColumn = YES;
-			if (tableLayout == MA_Layout_Condensed && [column.identifier isEqualToString:MA_Field_Headlines])
+			if (tableLayout == VNALayoutCondensed && [column.identifier isEqualToString:MA_Field_Headlines])
 				isProgressColumn = YES;
 			
 			if (isProgressColumn)
@@ -517,9 +517,9 @@
 			}
 			else
 			{
-				BJRVerticallyCenteredTextFieldCell * cell;
+				VNAVerticallyCenteredTextFieldCell * cell;
 
-				cell = [[BJRVerticallyCenteredTextFieldCell alloc] init];
+				cell = [[VNAVerticallyCenteredTextFieldCell alloc] init];
 				column.dataCell = cell;
 			}
 
@@ -547,9 +547,34 @@
 	}
 	
 	// Set the images for specific header columns
-	[articleList setHeaderImage:MA_Field_Read imageName:@"unread_header.tiff"];
-	[articleList setHeaderImage:MA_Field_Flagged imageName:@"flagged_header.tiff"];
-	[articleList setHeaderImage:MA_Field_HasEnclosure imageName:@"enclosure_header.tiff"];
+    if (@available(macOS 11, *)) {
+        NSImageSymbolScale scale = NSImageSymbolScaleSmall;
+        NSImageSymbolConfiguration *config = nil;
+        config = [NSImageSymbolConfiguration configurationWithScale:scale];
+        NSImage *readImage = [NSImage imageWithSystemSymbolName:@"circlebadge"
+                                       accessibilityDescription:nil];
+        readImage = [readImage imageWithSymbolConfiguration:config];
+        NSImage *flagImage = [NSImage imageWithSystemSymbolName:@"flag"
+                                       accessibilityDescription:nil];
+        flagImage = [flagImage imageWithSymbolConfiguration:config];
+        NSImage *enclImage = [NSImage imageWithSystemSymbolName:@"paperclip"
+                                       accessibilityDescription:nil];
+        enclImage = [enclImage imageWithSymbolConfiguration:config];
+
+        [articleList setHeaderImage:MA_Field_Read
+                              image:readImage];
+        [articleList setHeaderImage:MA_Field_Flagged
+                              image:flagImage];
+        [articleList setHeaderImage:MA_Field_HasEnclosure
+                              image:enclImage];
+    } else {
+        [articleList setHeaderImage:MA_Field_Read
+                              image:[NSImage imageNamed:@"unread_header"]];
+        [articleList setHeaderImage:MA_Field_Flagged
+                              image:[NSImage imageNamed:@"flagged_header"]];
+        [articleList setHeaderImage:MA_Field_HasEnclosure
+                              image:[NSImage imageNamed:@"enclosure_header"]];
+    }
 
 	// Initialise the sort direction
 	[self showSortDirection];	
@@ -557,7 +582,7 @@
 	// Put the selection back
 	[articleList selectRowIndexes:selArray byExtendingSelection:NO];
 	
-	if (tableLayout == MA_Layout_Report)
+	if (tableLayout == VNALayoutReport)
 		articleList.autosaveName = @"Vienna3ReportLayoutColumns";
 	else
 		articleList.autosaveName = @"Vienna3CondensedLayoutColumns";
@@ -633,7 +658,7 @@
 	CGFloat height = [APPCONTROLLER.layoutManager defaultLineHeightForFont:articleListFont];
 	NSInteger numberOfRowsInCell;
 
-	if (tableLayout == MA_Layout_Report)
+	if (tableLayout == VNALayoutReport)
 		numberOfRowsInCell = 1;
 	else
 	{
@@ -836,9 +861,9 @@
 	isChangingOrientation = YES;
 	tableLayout = newLayout;
 	splitView2.autosaveName = nil;
-	splitView2.vertical = (newLayout == MA_Layout_Condensed);
+	splitView2.vertical = (newLayout == VNALayoutCondensed);
 	splitView2.dividerStyle = (splitView2.vertical ? NSSplitViewDividerStyleThin : NSSplitViewDividerStylePaneSplitter);
-	splitView2.autosaveName = (newLayout == MA_Layout_Condensed ? @"Vienna3SplitView2CondensedLayout" : @"Vienna3SplitView2ReportLayout");
+	splitView2.autosaveName = (newLayout == VNALayoutCondensed ? @"Vienna3SplitView2CondensedLayout" : @"Vienna3SplitView2ReportLayout");
 	[splitView2 display];
 	isChangingOrientation = NO;
 }
@@ -981,13 +1006,13 @@
 
     switch (refreshFlag)
     {
-        case MA_Refresh_RedrawList:
+        case VNARefreshRedrawList:
             break;
-        case MA_Refresh_ReapplyFilter:
+        case VNARefreshReapplyFilter:
             [self.controller.articleController refilterArrayOfArticles];
             [self.controller.articleController sortArticles];
             break;
-        case MA_Refresh_SortAndRedraw:
+        case VNARefreshSortAndRedraw:
             [self.controller.articleController sortArticles];
             break;
     }
@@ -1237,28 +1262,72 @@
 	NSString * identifier = aTableColumn.identifier;
 	if ([identifier isEqualToString:MA_Field_Read])
 	{
-		if (!theArticle.read)
-			return (theArticle.revised) ? [NSImage imageNamed:@"revised.tiff"] : [NSImage imageNamed:@"unread.tiff"];
-		return [NSImage imageNamed:@"alphaPixel.tiff"];
+        if (!theArticle.read) {
+            if (@available(macOS 11, *)) {
+                NSImage *image = nil;
+                if (theArticle.revised) {
+                    image = [NSImage imageWithSystemSymbolName:@"sparkles"
+                                      accessibilityDescription:nil];
+                    // Setting the template property to NO enables the tint color.
+                    image.template = NO;
+                } else {
+                    image = [NSImage imageWithSystemSymbolName:@"circlebadge.fill"
+                                      accessibilityDescription:nil];
+                    // Setting the template property to NO enables the tint color.
+                    image.template = NO;
+                }
+                return image;
+            } else {
+                if (theArticle.revised) {
+                    return [NSImage imageNamed:@"revised"];
+                } else {
+                    return [NSImage imageNamed:@"unread"];
+                }
+            }
+        }
+        return nil;
 	}
 	if ([identifier isEqualToString:MA_Field_Flagged])
 	{
-		if (theArticle.flagged)
-			return [NSImage imageNamed:@"flagged.tiff"];
-		return [NSImage imageNamed:@"alphaPixel.tiff"];
+        if (theArticle.flagged) {
+            if (@available(macOS 11, *)) {
+                NSImage *image = [NSImage imageWithSystemSymbolName:@"flag.fill"
+                                           accessibilityDescription:nil];
+                // Setting the template property to NO enables the tint color.
+                image.template = NO;
+                return image;
+            } else {
+                return [NSImage imageNamed:@"flagged"];
+            }
+        }
+        return nil;
 	}
 	if ([identifier isEqualToString:MA_Field_Comments])
 	{
-		if (theArticle.hasComments)
-			return [NSImage imageNamed:@"comments.tiff"];
-		return [NSImage imageNamed:@"alphaPixel.tiff"];
+        if (theArticle.hasComments) {
+            if (@available(macOS 11, *)) {
+                NSImage *image = [NSImage imageWithSystemSymbolName:@"ellipsis.bubble.fill"
+                                           accessibilityDescription:nil];
+                return image;
+            } else {
+                return [NSImage imageNamed:@"comments"];
+            }
+        }
+        return nil;
 	}
 	
 	if ([identifier isEqualToString:MA_Field_HasEnclosure])
 	{
-		if (theArticle.hasEnclosure)
-			return [NSImage imageNamed:@"enclosure.tiff"];
-		return [NSImage imageNamed:@"alphaPixel.tiff"];
+        if (theArticle.hasEnclosure) {
+            if (@available(macOS 11, *)) {
+                NSImage *image = [NSImage imageWithSystemSymbolName:@"paperclip"
+                                           accessibilityDescription:nil];
+                return image;
+            } else {
+                return [NSImage imageNamed:@"enclosure"];
+            }
+        }
+        return nil;
 	}
 	
 	NSMutableAttributedString * theAttributedString;
@@ -1479,9 +1548,9 @@
 	BOOL isProgressColumn = NO;
 
 	// We need to use a different column for condensed layout vs. table layout.
-	if (tableLayout == MA_Layout_Report && [columnIdentifer isEqualToString:MA_Field_Subject])
+	if (tableLayout == VNALayoutReport && [columnIdentifer isEqualToString:MA_Field_Subject])
 		isProgressColumn = YES;
-	else if (tableLayout == MA_Layout_Condensed && [columnIdentifer isEqualToString:MA_Field_Headlines])
+	else if (tableLayout == VNALayoutCondensed && [columnIdentifer isEqualToString:MA_Field_Headlines])
 		isProgressColumn = YES;
 	
 	if (isProgressColumn)
@@ -1516,10 +1585,18 @@
 	NSInteger count = rowIndexes.count;
 	
 	// Set up the pasteboard
-	[pboard declareTypes:@[MA_PBoardType_RSSItem, @"WebURLsWithTitlesPboardType", NSPasteboardTypeString, NSPasteboardTypeHTML] owner:self];
-	if (count == 1)
-		[pboard addTypes:@[MA_PBoardType_url, MA_PBoardType_urln, NSURLPboardType] owner:self];
-	
+	[pboard declareTypes:@[MA_PBoardType_RSSItem, @"WebURLsWithTitlesPboardType", NSPasteboardTypeString, NSPasteboardTypeHTML]
+                   owner:self];
+    if (count == 1) {
+        if (@available(macOS 10.13, *)) {
+            [pboard addTypes:@[MA_PBoardType_url, MA_PBoardType_urln, NSPasteboardTypeURL]
+                       owner:self];
+        } else {
+            [pboard addTypes:@[MA_PBoardType_url, MA_PBoardType_urln, NSURLPboardType]
+                       owner:self];
+        }
+    }
+
 	// Open the HTML string
 	[fullHTMLText appendString:@"<html><body>"];
 	

@@ -19,8 +19,8 @@
 //
 
 @import Foundation;
+@import FMDB;
 
-@class FMDatabaseQueue;
 @class Folder;
 @class Field;
 @class CriteriaTree;
@@ -36,9 +36,10 @@ extern NSNotificationName const databaseDidDeleteFolderNotification;
 @property(nonatomic, strong) FMDatabaseQueue * databaseQueue;
 @property (copy, nonatomic) NSString *searchString;
 
+@property (class, readonly) Database *sharedManager NS_SWIFT_NAME(shared);
+
 // General database functions
 - (instancetype)initWithDatabaseAtPath:(NSString *)dbPath /*NS_DESIGNATED_INITIALIZER*/;
-+(instancetype)sharedManager;
 -(void)syncLastUpdate;
 -(void)compactDatabase;
 -(void)reindexDatabase;

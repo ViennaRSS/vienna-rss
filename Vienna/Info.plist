@@ -9,30 +9,44 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>viennastyle</string>
+				<string>viennaplugin</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>vienna3style.icns</string>
+			<string>PluginIcon</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>1</integer>
 			<key>CFBundleTypeName</key>
-			<string>Vienna Style Package</string>
+			<string>Vienna plug-in</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.vienna-rss.plugin</string>
+			</array>
 			<key>LSTypeIsPackage</key>
 			<string>YES</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>viennaplugin</string>
+				<string>viennastyle</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>vienna3plugin.icns</string>
+			<string>StyleIcon</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>1</integer>
 			<key>CFBundleTypeName</key>
-			<string>Vienna Plugin Package</string>
+			<string>Vienna style</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.vienna-rss.style</string>
+			</array>
 			<key>LSTypeIsPackage</key>
 			<string>YES</string>
 		</dict>
@@ -49,6 +63,8 @@
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
@@ -121,10 +137,65 @@
 	<key>NSSupportsAutomaticGraphicsSwitching</key>
 	<string>YES</string>
 	<key>SUPublicDSAKeyFile</key>
-	<string>vienna_public_key.pem</string>
+	<string>SparklePublicKey.pem</string>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.apple.bundle</string>
+				<string>com.apple.package</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Vienna plug-in</string>
+			<key>UTTypeIcons</key>
+			<dict>
+				<key>UTTypeIconText</key>
+				<string>Vienna plug-in</string>
+			</dict>
+			<key>UTTypeIdentifier</key>
+			<string>com.vienna-rss.plugin</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>viennaplugin</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.apple.bundle</string>
+				<string>com.apple.package</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Vienna style</string>
+			<key>UTTypeIcons</key>
+			<dict>
+				<key>UTTypeIconText</key>
+				<string>Vienna style</string>
+			</dict>
+			<key>UTTypeIdentifier</key>
+			<string>com.vienna-rss.style</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>viennastyle</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 	<key>VCSLongHash</key>
 	<string>VCS_FULL_HASH</string>
 	<key>VCSShortHash</key>
 	<string>VCS_SHORT_HASH</string>
+	<key>VNAHomePage</key>
+	<string>https://www.vienna-rss.com/</string>
+	<key>VNAScriptsPage</key>
+	<string>https://www.vienna-rss.com/faq#How_do_I_create_my_own_scripts</string>
+	<key>VNAStylesPage</key>
+	<string>https://www.vienna-rss.com/extras/</string>
 </dict>
 </plist>

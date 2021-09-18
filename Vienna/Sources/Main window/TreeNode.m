@@ -66,14 +66,14 @@
 	NSUInteger count = children.count;
 	NSInteger sortMethod = [Preferences standardPreferences].foldersTreeSortMethod;
 
-	if (sortMethod != MA_FolderSort_Manual)
+	if (sortMethod != VNAFolderSortManual)
 	{
 		insertIndex = 0;
 
 		while (insertIndex < count)
 		{
 			TreeNode * theChild = children[insertIndex];
-			if (sortMethod == MA_FolderSort_ByName)
+			if (sortMethod == VNAFolderSortByName)
 			{
 				if ([child folderNameCompare:theChild] == NSOrderedAscending)
 					break;
@@ -110,11 +110,11 @@
 {
 	switch (sortMethod)
 	{
-	case MA_FolderSort_Manual:
+	case VNAFolderSortManual:
 		// Do nothing
 		break;
 
-	case MA_FolderSort_ByName:
+	case VNAFolderSortByName:
 		[children sortUsingSelector:@selector(folderNameCompare:)];
 		break;
 		
@@ -323,7 +323,7 @@
 /* allocAndStartProgressIndicatorWithFrame:inView:
  * Allocate a new progress indicator and start it animating.
  */
--(void)allocAndStartProgressIndicatorWithFrame:(NSRect)frame inView:(NSView *)controlView;
+-(void)allocAndStartProgressIndicatorWithFrame:(NSRect)frame inView:(NSView *)controlView
 {
 	// Allocate and initialize the spinning progress indicator.
     progressIndicator = [[NSProgressIndicator alloc] initWithFrame:frame];

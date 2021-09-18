@@ -114,9 +114,6 @@
 "Click the Open button to open this file." = "Faga clic no botón Abrir para abrir este arquivo.";
 
 /* No comment provided by engineer. */
-"Click the Play button to play this enclosure in iTunes." = "Faga clic no botón Reproducir para reproducir este arquivo adxunto en iTunes.";
-
-/* No comment provided by engineer. */
 "Connecting to %@" = "Conectando con %@";
 
 /* No comment provided by engineer. */
@@ -454,9 +451,6 @@
 "Other" = "Outro";
 
 /* No comment provided by engineer. */
-"Play" = "Reproducir";
-
-/* No comment provided by engineer. */
 "Plugin installed" = "Plugin instalado";
 
 /* No comment provided by engineer. */
@@ -531,6 +525,11 @@
 
 /* No comment provided by engineer. */
 "Search all articles or the current web page" = "Procurar en todos os artigos ou na páxina web actual";
+
+/* Toolbar item label
+   Toolbar item palette label
+   Toolbar item tooltip */
+"Search Articles" = "Procurar artigos";
 
 /* Placeholder title of a search field */
 "Search current web page" = "Procurar na páxina web actual";

@@ -24,7 +24,7 @@
 @class FeedCredentials;
 @class Folder;
 
-@interface RefreshManager : NSObject <NSURLSessionDelegate> {
+@interface RefreshManager : NSObject <NSURLSessionTaskDelegate> {
 	NSUInteger countOfNewArticles;
 	NSMutableArray * authQueue;
 	FeedCredentials * credentialsController;
@@ -34,7 +34,7 @@
 	dispatch_queue_t _queue;
 }
 
-+(RefreshManager *)sharedManager;
+@property (class, readonly) RefreshManager *sharedManager;
 
 @property (readonly, copy) NSString *statusMessage;
 @property (nonatomic, getter=isConnecting, readonly) BOOL connecting;

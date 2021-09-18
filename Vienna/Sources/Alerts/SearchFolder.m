@@ -22,7 +22,6 @@
 #import "StringExtensions.h"
 #import "AppController.h"
 #import "HelperFunctions.h"
-#import "PopUpButtonExtensions.h"
 #import "Article.h"
 #import "Folder.h"
 #import "Criteria.h"
@@ -203,21 +202,21 @@
 				field.tag != ArticleFieldIDEnclosure &&
 				field.tag != ArticleFieldIDEnclosureDownloaded)
 			{
-				[fieldNamePopup addItemWithRepresentedObject:field.displayName object:field];
+				[fieldNamePopup addItemWithTitle:field.displayName representedObject:field];
 				[nameToFieldMap setValue:field forKey:field.name];
 			}
 		}
 		
 		// Set Yes/No values on flag fields
 		[flagValueField removeAllItems];
-		[flagValueField addItemWithTagAndObject:NSLocalizedString(@"Yes", nil) tag:1 object:@"Yes"];
-		[flagValueField addItemWithTagAndObject:NSLocalizedString(@"No", nil) tag:2 object:@"No"];
+		[flagValueField addItemWithTitle:NSLocalizedString(@"Yes", nil) tag:1 representedObject:@"Yes"];
+		[flagValueField addItemWithTitle:NSLocalizedString(@"No", nil) tag:2 representedObject:@"No"];
 
 		// Set date popup values
 		[dateValueField removeAllItems];
-		[dateValueField addItemWithRepresentedObject:NSLocalizedString(@"Today", nil) object:@"today"];
-		[dateValueField addItemWithRepresentedObject:NSLocalizedString(@"Yesterday", nil) object:@"yesterday"];
-		[dateValueField addItemWithRepresentedObject:NSLocalizedString(@"Last Week", nil) object:@"last week"];
+		[dateValueField addItemWithTitle:NSLocalizedString(@"Today", nil) representedObject:@"today"];
+		[dateValueField addItemWithTitle:NSLocalizedString(@"Yesterday", nil) representedObject:@"yesterday"];
+		[dateValueField addItemWithTitle:NSLocalizedString(@"Last Week", nil) representedObject:@"last week"];
 
 		// Set the tags on the controls
 		[fieldNamePopup setTag:MA_SFEdit_FieldTag];
@@ -318,10 +317,9 @@
  * Handle the case where the field has changed. Update the valid list of
  * operators for the selected field.
  */
--(IBAction)fieldChanged:(id)sender
-{
-	Field * field = [sender representedObjectForSelection];
-	[self initForField:field.name inRow:[sender superview]];
+- (IBAction)fieldChanged:(NSPopUpButton *)sender {
+	Field *field = sender.selectedItem.representedObject;
+	[self initForField:field.name inRow:sender.superview];
 }
 
 /* initForField
@@ -404,7 +402,7 @@
 	{
         CriteriaOperator operator = number.integerValue;
 		NSString * operatorString = [Criteria localizedStringFromOperator:operator];
-		[popUpButton addItemWithTag:operatorString tag:operator];
+        [popUpButton addItemWithTitle:operatorString tag:operator];
 	}
 }
 
@@ -434,19 +432,19 @@
 		NSPopUpButton * theField = [row viewWithTag:MA_SFEdit_FieldTag];
 		NSPopUpButton * theOperator = [row viewWithTag:MA_SFEdit_OperatorTag];
 
-		Field * field = theField.representedObjectForSelection;
-		CriteriaOperator operator = theOperator.tagForSelection;
+		Field * field = theField.selectedItem.representedObject;
+		CriteriaOperator operator = theOperator.selectedItem.tag;
 		NSString * valueString;
 
 		if (field.type == MA_FieldType_Flag)
 		{
 			NSPopUpButton * theValue = [row viewWithTag:MA_SFEdit_FlagValueTag];
-			valueString = theValue.representedObjectForSelection;
+			valueString = theValue.selectedItem.representedObject;
 		}
 		else if (field.type == MA_FieldType_Date)
 		{
 			NSPopUpButton * theValue = [row viewWithTag:MA_SFEdit_DateValueTag];
-			valueString = theValue.representedObjectForSelection;
+			valueString = theValue.selectedItem.representedObject;
 		}
 		else if (field.type == MA_FieldType_Folder)
 		{

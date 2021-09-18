@@ -20,13 +20,13 @@
 
 #import "Database.h"
 
+#import "Database+Migration.h"
 #import "Preferences.h"
 #import "StringExtensions.h"
 #import "Constants.h"
 #import "ArticleRef.h"
 #import "NSNotificationAdditions.h"
 #import "Debug.h"
-#import "VNADatabaseMigration.h"
 #import "Article.h"
 #import "Folder.h"
 #import "Field.h"
@@ -43,7 +43,6 @@ typedef NS_ENUM(NSInteger, VNAQueryScope) {
 @property (nonatomic) BOOL initializedSmartfoldersDict;
 @property (nonatomic) NSMutableArray *fieldsOrdered;
 @property (nonatomic) NSMutableDictionary *fieldsByName;
-@property (nonatomic) NSMutableDictionary *fieldsByTitle;
 @property (nonatomic) NSMutableDictionary *foldersDict;
 @property (nonatomic) NSMutableDictionary *smartfoldersDict;
 @property (readwrite, nonatomic) BOOL readOnly;
@@ -62,7 +61,7 @@ typedef NS_ENUM(NSInteger, VNAQueryScope) {
 
 // The current database version number
 const NSInteger MA_Min_Supported_DB_Version = 12;
-const NSInteger MA_Current_DB_Version = 21;
+const NSInteger MA_Current_DB_Version = 22;
 
 @implementation Database
 
@@ -153,7 +152,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         [self.databaseQueue inDatabase:^(FMDatabase *db) {
             // Migrate the database to the newest version
             // TODO: move this into transaction so we can rollback on failure
-            [VNADatabaseMigration migrateDatabase:db fromVersion:databaseVersion];
+            [Database migrateDatabase:db fromVersion:databaseVersion];
         }];
         
         // Confirm the database is now at the correct version
@@ -216,8 +215,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         db.userVersion = (uint32_t)MA_Current_DB_Version;
 	
 		// Set the default sort order and write it to both the db and the prefs
-		[db executeUpdate:@"insert into info (first_folder, folder_sort) values (0, ?)",  @(MA_FolderSort_Manual)];
-		[[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_Manual];
+		[db executeUpdate:@"insert into info (first_folder, folder_sort) values (0, ?)",  @(VNAFolderSortManual)];
+		[[Preferences standardPreferences] setFoldersTreeSortMethod:VNAFolderSortManual];
 	}];
     
     // Set the initial folder order
@@ -260,6 +259,9 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 
 
 -(BOOL)createTablesOnDatabase:(FMDatabase *)db {
+    // Enable FULL auto-vacuum mode before creating tables.
+    [db executeUpdate:@"PRAGMA auto_vacuum = 1"];
+
     // Create the tables. We use the first table as a test whether we can
     // setup at the specified location
     [db executeUpdate:@"create table info (version, last_opened, first_folder, folder_sort)"];
@@ -806,7 +808,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	}
 
 	NSInteger nextSibling = 0;
-	BOOL manualSort = [Preferences standardPreferences].foldersTreeSortMethod == MA_FolderSort_Manual;
+	BOOL manualSort = [Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortManual;
 	if (manualSort)
 	{
 		if (predecessorId > 0)
@@ -991,7 +993,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	}
 
 	// Update the sort order if necessary
-	if ([Preferences standardPreferences].foldersTreeSortMethod == MA_FolderSort_Manual)
+	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortManual)
 	{
 		__block NSInteger previousSibling = -999;
         [queue inDatabase:^(FMDatabase *db) {
@@ -1689,7 +1691,6 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 
 	if (success)
 	{
-		[self compactDatabase];
 		for (Folder * folder in [self.foldersDict objectEnumerator])
 			[folder clearCache];
 
