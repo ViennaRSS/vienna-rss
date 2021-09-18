@@ -3097,8 +3097,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sparkle-project/Sparkle";
 			requirement = {
-				kind = revision;
-				revision = 891afd44c7075e699924ed9b81d8dc94a5111dfd;
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.27.0;
 			};
 		};
 		F6B7BC3424A2A9A40051D76F /* XCRemoteSwiftPackageReference "fmdb" */ = {
