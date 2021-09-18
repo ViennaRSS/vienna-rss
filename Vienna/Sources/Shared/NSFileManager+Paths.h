@@ -34,6 +34,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// The caches directory for the current user (Library/Caches).
 @property (readonly, copy, nonatomic) NSURL *cachesDirectory;
 
+/// The downloads directory for the current user.
+@property (readonly, copy, nonatomic) NSURL *downloadsDirectory;
+
 @end
 
 NS_ASSUME_NONNULL_END

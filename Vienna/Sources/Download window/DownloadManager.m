@@ -20,10 +20,11 @@
 
 #import "DownloadManager.h"
 
-#import "AppController+Notifications.h"
 #import "AppController.h"
+#import "AppController+Notifications.h"
 #import "Constants.h"
 #import "DownloadItem.h"
+#import "NSFileManager+Paths.h"
 #import "Preferences.h"
 
 @interface DownloadManager ()
@@ -178,10 +179,10 @@
     BOOL isDir = YES;
 
     if (![fileManager fileExistsAtPath:downloadPath isDirectory:&isDir] || !isDir) {
-        downloadPath = @"~/Desktop";
+        downloadPath = fileManager.downloadsDirectory.path;
     }
 
-    return [downloadPath.stringByExpandingTildeInPath stringByAppendingPathComponent:filename];
+    return [downloadPath stringByAppendingPathComponent:filename];
 }
 
 // Looks up the specified file in the download list to determine if it is being

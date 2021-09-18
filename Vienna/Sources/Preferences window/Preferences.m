@@ -22,9 +22,10 @@
 
 @import Sparkle;
 
-#import "Constants.h"
 #import "Article.h"
+#import "Constants.h"
 #import "SearchMethod.h"
+#import "NSFileManager+Paths.h"
 
 // Initial paths
 NSString * MA_DefaultStyleName = @"Default";
@@ -279,8 +280,7 @@ static Preferences * _standardPreferences = nil;
 	defaultValues[MAPref_FilterMode] = [NSNumber numberWithInt:VNAFilterAll];
 	defaultValues[MAPref_MinimumFontSize] = @(MA_Default_MinimumFontSize);
 	defaultValues[MAPref_AutoExpireDuration] = @(MA_Default_AutoExpireDuration);
-	defaultValues[MAPref_DownloadsFolder] = [NSFileManager.defaultManager URLsForDirectory:NSDownloadsDirectory
-                                                                                 inDomains:NSUserDomainMask].firstObject.path;
+    defaultValues[MAPref_DownloadsFolder] = fileManager.downloadsDirectory.path;
 	defaultValues[MAPref_ArticleSortDescriptors] = defaultArticleSortDescriptors;
 	defaultValues[MAPref_LastRefreshDate] = [NSDate distantPast];
 	defaultValues[MAPref_Layout] = [NSNumber numberWithInt:VNALayoutReport];

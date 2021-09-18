@@ -46,17 +46,17 @@
                      appropriateForURL:nil
                                 create:NO
                                  error:&error];
+    // Remove the following lines for sandboxing.
+    url = [url URLByAppendingPathComponent:@"Scripts/Applications/Vienna"
+                               isDirectory:YES];
+
     if (!url && error) {
         char *function = __PRETTY_FUNCTION__;
         NSString *description = error.localizedDescription;
         os_log_fault(VNA_LOG, "%{public}s %{public}@", function, description);
     }
 
-    // Remove the following lines for sandboxing.
-    url = [url URLByAppendingPathComponent:@"Scripts/Applications/Vienna"
-                               isDirectory:YES];
-
-    return [url copy];
+    return (id _Nonnull)[url copy];
 }
 
 // According to Apple's file-system programming guide, the bundle identifier
@@ -75,18 +75,18 @@
                      appropriateForURL:nil
                                 create:NO
                                  error:&error];
+    // For sandboxing, use NSBundle.mainBundle.bundleIdentifier instead of the
+    // application name (recommendation by Apple, but not required).
+    url = [url URLByAppendingPathComponent:@"Vienna"
+                               isDirectory:YES];
+
     if (!url && error) {
         char *function = __PRETTY_FUNCTION__;
         NSString *description = error.localizedDescription;
         os_log_fault(VNA_LOG, "%{public}s %{public}@", function, description);
     }
 
-    // For sandboxing, use NSBundle.mainBundle.bundleIdentifier instead of the
-    // application name (recommendation by Apple, but not required).
-    url = [url URLByAppendingPathComponent:@"Vienna"
-                               isDirectory:YES];
-
-    return [url copy];
+    return (id _Nonnull)[url copy];
 }
 
 - (NSURL *)cachesDirectory {
@@ -102,16 +102,39 @@
                      appropriateForURL:nil
                                 create:NO
                                  error:&error];
+    url = [url URLByAppendingPathComponent:NSBundle.mainBundle.bundleIdentifier
+                               isDirectory:YES];
+
     if (!url && error) {
         char *function = __PRETTY_FUNCTION__;
         NSString *description = error.localizedDescription;
         os_log_fault(VNA_LOG, "%{public}s %{public}@", function, description);
     }
 
-    url = [url URLByAppendingPathComponent:NSBundle.mainBundle.bundleIdentifier
-                               isDirectory:YES];
+    return (id _Nonnull)[url copy];
+}
 
-    return [url copy];
+- (NSURL *)downloadsDirectory {
+    static NSURL *url = nil;
+    if (url) {
+        return [url copy];
+    }
+
+    NSFileManager *fileManager = NSFileManager.defaultManager;
+    NSError *error = nil;
+    url = [fileManager URLForDirectory:NSDownloadsDirectory
+                              inDomain:NSUserDomainMask
+                     appropriateForURL:nil
+                                create:NO
+                                 error:&error];
+
+    if (!url && error) {
+        char *function = __PRETTY_FUNCTION__;
+        NSString *description = error.localizedDescription;
+        os_log_fault(VNA_LOG, "%{public}s %{public}@", function, description);
+    }
+
+    return (id _Nonnull)[url copy];
 }
 
 @end
