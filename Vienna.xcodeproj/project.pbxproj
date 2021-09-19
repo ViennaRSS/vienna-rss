@@ -1683,13 +1683,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA4F9AB20855422400C18279 /* Build configuration list for PBXNativeTarget "Vienna" */;
 			buildPhases = (
+				3A6CC18823BBD1BF0084ABEE /* Archival Checks */,
 				F68CBDA020323974003A6A9E /* Run SwiftLint */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
 				F602CFB826E246D90015D580 /* Copy XPC Services Bundles */,
 				AAEF2001085D685900A0E675 /* Copy Shared Support Files */,
-				3A6CC18823BBD1BF0084ABEE /* Archival Checks */,
+				3A5482F6168F5C1700887F91 /* Configure Sparkle */,
 			);
 			buildRules = (
 			);
@@ -1862,6 +1863,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3A5482F6168F5C1700887F91 /* Configure Sparkle */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Configure Sparkle";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/Sparkle-setup.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3A6CC18823BBD1BF0084ABEE /* Archival Checks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
@@ -2931,7 +2948,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				INFOPLIST_FILE = Vienna/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
-				INFOPLIST_PREFIX_HEADER = "$(OBJROOT)/autorevision.h";
+				INFOPLIST_PREFIX_HEADER = "$(OBJROOT)/autorevision.plist.h";
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2968,7 +2985,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				INFOPLIST_FILE = Vienna/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
-				INFOPLIST_PREFIX_HEADER = "$(OBJROOT)/autorevision.h";
+				INFOPLIST_PREFIX_HEADER = "$(OBJROOT)/autorevision.plist.h";
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
