@@ -1683,6 +1683,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA4F9AB20855422400C18279 /* Build configuration list for PBXNativeTarget "Vienna" */;
 			buildPhases = (
+				3A6CC18823BBD1BF0084ABEE /* Archival Checks */,
 				F68CBDA020323974003A6A9E /* Run SwiftLint */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
@@ -1690,7 +1691,6 @@
 				F602CFB826E246D90015D580 /* Copy XPC Services Bundles */,
 				AAEF2001085D685900A0E675 /* Copy Shared Support Files */,
 				3A5482F6168F5C1700887F91 /* Configure Sparkle */,
-				3A6CC18823BBD1BF0084ABEE /* Archival Checks */,
 			);
 			buildRules = (
 			);
