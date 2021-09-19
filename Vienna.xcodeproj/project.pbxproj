@@ -1689,6 +1689,7 @@
 				8D15AC2B0486D014006FF6A4 /* Resources */,
 				F602CFB826E246D90015D580 /* Copy XPC Services Bundles */,
 				AAEF2001085D685900A0E675 /* Copy Shared Support Files */,
+				3A5482F6168F5C1700887F91 /* Configure Sparkle */,
 				3A6CC18823BBD1BF0084ABEE /* Archival Checks */,
 			);
 			buildRules = (
@@ -1862,6 +1863,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3A5482F6168F5C1700887F91 /* Configure Sparkle */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Configure Sparkle";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/Sparkle-setup.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3A6CC18823BBD1BF0084ABEE /* Archival Checks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
