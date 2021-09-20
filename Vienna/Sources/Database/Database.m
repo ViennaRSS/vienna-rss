@@ -145,10 +145,23 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
             return NO;
         }
 
-        // Backup the database before any upgrade
-        NSString * backupDatabaseFileName = [[Database databasePath] stringByAppendingPathExtension:@"bak"];
-        [[NSFileManager defaultManager] copyItemAtPath:[Database databasePath] toPath:backupDatabaseFileName error:nil];
-        
+        // Back up the database before any upgrade.
+        NSFileManager *fileManager = NSFileManager.defaultManager;
+        NSString *databaseBackupPath = [[Database databasePath] stringByAppendingPathExtension:@"bak"];
+        NSError *error = nil;
+        if ([fileManager fileExistsAtPath:databaseBackupPath]) {
+            [fileManager removeItemAtPath:databaseBackupPath
+                                    error:&error];
+        }
+        [fileManager copyItemAtPath:[Database databasePath]
+                             toPath:databaseBackupPath
+                              error:&error];
+
+        // Log the error if the backup creation failed, but continue regardless.
+        if (error) {
+            NSLog(@"Database backup could not created: %@", error.localizedDescription);
+        }
+
         [self.databaseQueue inDatabase:^(FMDatabase *db) {
             // Migrate the database to the newest version
             // TODO: move this into transaction so we can rollback on failure
