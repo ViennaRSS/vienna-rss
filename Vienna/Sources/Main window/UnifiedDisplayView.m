@@ -747,6 +747,7 @@
 	} else {
 	    // recycled cell : minimum safety measures
 	    [cellView setInProgress:NO];
+        self.statusBar.label = nil;
 	}
 
 	NSArray * allArticles = self.controller.articleController.allArticles;
