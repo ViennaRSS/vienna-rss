@@ -31,14 +31,10 @@ final class OverlayStatusBar: NSView {
     // MARK: Subviews
 
     private var backgroundView: NSVisualEffectView = {
-        let backgroundView = NSVisualEffectView(frame: NSRect.zero)
+        let backgroundView = NSVisualEffectView(frame: .zero)
         backgroundView.wantsLayer = true
         backgroundView.blendingMode = .withinWindow
-        if #available(macOS 10.14, *) {
-            backgroundView.material = .toolTip
-        } else {
-            backgroundView.material = .popover
-        }
+        backgroundView.material = .menu
         backgroundView.alphaValue = 0
         backgroundView.layer?.cornerRadius = 3
 
@@ -50,14 +46,14 @@ final class OverlayStatusBar: NSView {
         if #available(macOS 10.12, *) {
             addressField = NSTextField(labelWithString: "")
         } else {
-            addressField = NSTextField(frame: NSRect.zero)
+            addressField = NSTextField(frame: .zero)
             addressField.isBezeled = false
             addressField.isSelectable = false
             addressField.drawsBackground = false
-            addressField.textColor = .labelColor
         }
 
         addressField.font = .systemFont(ofSize: 12, weight: .medium)
+        addressField.textColor = .overlayStatusBarPrimaryLabelColor
         addressField.lineBreakMode = .byTruncatingMiddle
         addressField.allowsDefaultTighteningForTruncation = true
 
@@ -75,6 +71,7 @@ final class OverlayStatusBar: NSView {
         addressField.translatesAutoresizingMaskIntoConstraints = false
 
         // The text field should always be among the first views to shrink.
+        addressField.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         addressField.setContentCompressionResistancePriority(.fittingSizeCompression, for: .horizontal)
 
         addSubview(backgroundView)
@@ -194,23 +191,19 @@ final class OverlayStatusBar: NSView {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineBreakMode = .byTruncatingMiddle
         paragraphStyle.allowsDefaultTighteningForTruncation = true
-        var attributes: [NSAttributedString.Key : Any] = [
+        urlFormatter.defaultAttributes = [
             .font : NSFont.systemFont(ofSize: 12, weight: .medium),
             .paragraphStyle : paragraphStyle,
-            .foregroundColor : NSColor.labelColor,
+            .foregroundColor : NSColor.overlayStatusBarPrimaryLabelColor,
         ]
-        urlFormatter.defaultAttributes = attributes
-
-        // The popover material of NSVisualEffect view is brighter than the
-        // tooltip material. The secondary label color is not as readable on
-        // that material.
-        if #available(macOS 10.14, *) {
-            // Do nothing
-        } else {
-            urlFormatter.secondaryAttributes = [
-                .foregroundColor : NSColor.labelColor,
-            ]
-        }
+        urlFormatter.primaryAttributes = [
+            .font : NSFont.systemFont(ofSize: 12, weight: .medium),
+            .foregroundColor : NSColor.overlayStatusBarPrimaryLabelColor
+        ]
+        urlFormatter.secondaryAttributes = [
+            .font : NSFont.systemFont(ofSize: 12, weight: .regular),
+            .foregroundColor : NSColor.overlayStatusBarSecondaryLabelColor
+        ]
 
         return urlFormatter
     }()
@@ -356,6 +349,34 @@ final class OverlayStatusBar: NSView {
             // Delete the constraint to make sure that a new one is created,
             // appropriate for the superview size (which may change).
             widthConstraint = nil
+        }
+    }
+
+}
+
+private extension NSColor {
+
+    class var overlayStatusBarPrimaryLabelColor: NSColor {
+        if #available(macOS 10.13, *) {
+            return NSColor(named: "OverlayStatusBarPrimaryTextColor")!
+        } else {
+            if NSWorkspace.shared.accessibilityDisplayShouldIncreaseContrast {
+                return .black.withAlphaComponent(0.85)
+            } else {
+                return .black.withAlphaComponent(0.70)
+            }
+        }
+    }
+
+    class var overlayStatusBarSecondaryLabelColor: NSColor {
+        if #available(macOS 10.13, *) {
+            return NSColor(named: "OverlayStatusBarSecondaryTextColor")!
+        } else {
+            if NSWorkspace.shared.accessibilityDisplayShouldIncreaseContrast {
+                return .black.withAlphaComponent(0.70)
+            } else {
+                return .black.withAlphaComponent(0.55)
+            }
         }
     }
 
