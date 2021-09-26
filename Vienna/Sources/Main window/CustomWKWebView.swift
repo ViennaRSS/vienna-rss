@@ -11,6 +11,8 @@ class CustomWKWebView: WKWebView {
 
     static let clickListenerName = "clickListener"
     static let jsErrorListenerName = "errorListener"
+    @objc static let mouseDidEnterName = "mouseDidEnter"
+    @objc static let mouseDidExitName = "mouseDidExit"
 
     // store weakly here because contentController retains listener
     weak var contextMenuListener: CustomWKWebViewContextMenuListener?
@@ -18,6 +20,18 @@ class CustomWKWebView: WKWebView {
     weak var contextMenuProvider: CustomWKUIDelegate? {
         didSet {
             self.uiDelegate = contextMenuProvider
+        }
+    }
+
+    @objc weak var hoverListener: WKScriptMessageHandler? {
+        didSet {
+            let contentController = self.configuration.userContentController
+            contentController.removeScriptMessageHandler(forName: CustomWKWebView.mouseDidEnterName)
+            contentController.removeScriptMessageHandler(forName: CustomWKWebView.mouseDidExitName)
+            if let hoverListener = hoverListener {
+                contentController.add(hoverListener, name: CustomWKWebView.mouseDidEnterName)
+                contentController.add(hoverListener, name: CustomWKWebView.mouseDidExitName)
+            }
         }
     }
 
@@ -53,6 +67,9 @@ class CustomWKWebView: WKWebView {
 
         let contextMenuScript = WKUserScript(source: CustomWKWebView.contextMenuScriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
         contentController.addUserScript(contextMenuScript)
+
+        let linkHoverScript = WKUserScript(source: CustomWKWebView.linkHoverScriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+        contentController.addUserScript(linkHoverScript)
 
         // configuration
         if #available(OSX 10.11, *) {
@@ -198,6 +215,21 @@ extension CustomWKWebView {
             }
         }
     })
+    """
+
+    static let linkHoverScriptSource = """
+    window.onmouseover = function(event) {
+        var closestAnchor = event.target.closest('a')
+        if (closestAnchor) {
+            window.webkit.messageHandlers.\(mouseDidEnterName).postMessage(closestAnchor.href);
+        }
+    }
+    window.onmouseout = function(event) {
+        var closestAnchor = event.target.closest('a')
+        if (closestAnchor) {
+            window.webkit.messageHandlers.\(mouseDidExitName).postMessage(closestAnchor.href);
+        }
+    }
     """
 
     override func willOpenMenu(_ menu: NSMenu, with event: NSEvent) {

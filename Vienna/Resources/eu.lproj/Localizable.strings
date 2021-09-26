@@ -448,7 +448,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "Datu basearen fitxategiaren formatua aldatu egin da";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "Bestela estilo nagusia erabiliko da.";
 
 /* No comment provided by engineer. */
@@ -457,7 +457,7 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "\"%@\" estiloa istalatu egin da Styles direktorioan eta Style menura gehitu da.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "%@ estiloa desagertu edota erroreak ditu";
 
 /* No comment provided by engineer. */

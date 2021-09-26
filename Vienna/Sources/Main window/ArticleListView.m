@@ -607,18 +607,6 @@
 	return articleList;
 }
 
-/* webView
- * Returns the webview used to display the articles
- */
--(WebView *)webView
-{
-    if ([articleText isKindOfClass:ArticleView.class]) {
-        return (ArticleView *)articleText;
-    } else {
-        return nil;
-    }
-}
-
 // invoked after a WebViewProgressFinishedNotification notification
 -(void)webViewLoadFinished:(NSNotification *)notification
 {

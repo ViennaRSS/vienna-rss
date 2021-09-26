@@ -53,9 +53,8 @@ extension ArticleConverter {
         assert(name != "Default", "Default style is corrupted!")
 
         // Warn the user.
-        let title = NSLocalizedString("The style %@ appears to be missing or corrupted", comment: "")
-            .replacingOccurrences(of: "%@", with: name)
-        let body = NSLocalizedString("The Default style will be used instead.", comment: "")
+        let title = String(format: NSLocalizedString("The style %@ appears to be missing or corrupted", comment: "Title of an alert"), name)
+        let body = NSLocalizedString("The Default style will be used instead.", comment: "Body of an alert")
 
         runOKAlertPanelPlain(title, body)
 

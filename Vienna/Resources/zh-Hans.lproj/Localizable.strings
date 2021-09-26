@@ -558,7 +558,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "数据库文件格式已改变";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "将会替换为默认的风格";
 
 /* No comment provided by engineer. */
@@ -567,7 +567,7 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "\"%@\" 这个风格已经成功安装到了风格文件夹中，您现在可以从风格菜单中选择它了。";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "%@ 这个风格貌似有问题";
 
 /* No comment provided by engineer. */

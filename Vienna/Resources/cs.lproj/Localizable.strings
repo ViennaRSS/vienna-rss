@@ -513,7 +513,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "Formát databázového soubor byl změněn";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "Bude použit výchozí styl (Default).";
 
 /* No comment provided by engineer. */
@@ -522,7 +522,7 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Styl „%@“ byl instalován do složky se styly a přidán do nabídky Styly.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "Styl %@ pravděpodobně chybí nebo je poškozený.";
 
 /* No comment provided by engineer. */

@@ -424,7 +424,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "데이터베이스 파일 형식이 변경되었습니다.";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "기본 스타일로 대체될 것입니다.";
 
 /* No comment provided by engineer. */
@@ -433,7 +433,7 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "\"%@\" 스타일이 사용자의 스타일 폴더에 설치되었으며, 스타일 메뉴에 등록되었습니다.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "스타일 %@ 항목은 손상되었거나 유효하지 않은 형식입니다.";
 
 /* No comment provided by engineer. */

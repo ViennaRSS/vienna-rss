@@ -467,6 +467,11 @@
 		[self.articleController saveTableSettings];
 		[self.foldersTree saveFolderSettings];
 		
+		// Remove "article" directory in cache
+		NSFileManager * fileManager = [NSFileManager defaultManager];
+		NSURL * dirUrl = [fileManager.cachesDirectory URLByAppendingPathComponent:@"article"];
+		[fileManager removeItemAtURL:dirUrl error:nil];
+
 		// Finally save preferences
 		[prefs savePreferences];
 		

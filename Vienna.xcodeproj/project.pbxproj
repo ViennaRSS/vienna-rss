@@ -182,6 +182,8 @@
 		F62581591E29BEB90035E43C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625815B1E29BEB90035E43C /* MainMenu.xib */; };
 		F626F5F424A76B9100D3AAD8 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F626F5F624A76B9100D3AAD8 /* Preferences.storyboard */; };
 		F628DFE31ED2698A00FACFD3 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F628DFE21ED2698A00FACFD3 /* FilterView.swift */; };
+		F633157626ED73CB008A3673 /* URLFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F633157526ED73CB008A3673 /* URLFormatter.swift */; };
+		F633157826EE3D06008A3673 /* URLFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F633157726EE3D06008A3673 /* URLFormatterTests.swift */; };
 		F6373A231F1D53B500ED3B09 /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6373A221F1D53B500ED3B09 /* MainWindow.swift */; };
 		F63833D81EF842EA00E07213 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63833D71EF842EA00E07213 /* MainWindowController.swift */; };
 		F6449A0325977521005A1EFA /* FeedDiscovery.html in Resources */ = {isa = PBXBuildFile; fileRef = F64499FB259773B9005A1EFA /* FeedDiscovery.html */; };
@@ -670,6 +672,8 @@
 		F626F61E24A76BDE00D3AAD8 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Preferences.strings; sourceTree = "<group>"; };
 		F628DFE21ED2698A00FACFD3 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		F62CE1C0209EFD1B008F1D19 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = de; path = de.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		F633157526ED73CB008A3673 /* URLFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = URLFormatter.swift; sourceTree = "<group>"; };
+		F633157726EE3D06008A3673 /* URLFormatterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = URLFormatterTests.swift; sourceTree = "<group>"; };
 		F6352BB81E2706DD005CD307 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6352BB91E2706E1005CD307 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6352BBA1E2706EB005CD307 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoWindow.strings"; sourceTree = "<group>"; };
@@ -1015,6 +1019,7 @@
 				F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */,
 				F6AC41AB25A4FAF6007DED7B /* FeedDiscovererTests.swift */,
 				F6A179D226B82BE3008DDA42 /* NSFileManager+PathsTests.swift */,
+				F633157726EE3D06008A3673 /* URLFormatterTests.swift */,
 				0377BDEB1D3A009B00960555 /* Vienna Tests-Bridging-Header.h */,
 				F6AC41C525A501B9007DED7B /* Files */,
 				035B703719E0E4AE00197334 /* Supporting Files */,
@@ -1642,6 +1647,7 @@
 				031E082F19DFA3A900194F9F /* SubscriptionModel.m */,
 				AAA305FC0682A25200E4A6DC /* TableViewExtensions.h */,
 				AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */,
+				F633157526ED73CB008A3673 /* URLFormatter.swift */,
 				3A7BD0DB1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.h */,
 				3A7BD0DC1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m */,
 				2FE44CB425B79EDD00554E82 /* WebKitContextMenuCustomizer.swift */,
@@ -2017,6 +2023,7 @@
 				F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */,
 				3A50014E259AA2BE00AA6AAD /* WebKitArticleConverter.swift in Sources */,
 				2FE328F125CF436C005B9C18 /* CriteriaTests.swift in Sources */,
+				F633157826EE3D06008A3673 /* URLFormatterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2067,6 +2074,7 @@
 				F6D0089C1EF95C9D008F2D3B /* InfoPanelManager.m in Sources */,
 				4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */,
 				2F82DCB725CEFC2800F00EE8 /* URL+Blank.swift in Sources */,
+				F633157626ED73CB008A3673 /* URLFormatter.swift in Sources */,
 				43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */,
 				43502896165DE9E00018EDB7 /* ActivityPanelController.m in Sources */,
 				2FE44CAD25B7995400554E82 /* NSApplication+AppController.swift in Sources */,

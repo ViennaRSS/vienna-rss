@@ -510,7 +510,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "O formato do arquivo de dados foi alterado";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "O estilo Padrão será usado.";
 
 /* No comment provided by engineer. */
@@ -519,7 +519,7 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "O estilo \"%@\" foi instalado em sua pasta de Estilos e adicionado no menu de Estilos.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "O estilo %@ parece estar corrompido";
 
 /* No comment provided by engineer. */

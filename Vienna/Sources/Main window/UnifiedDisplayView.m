@@ -747,6 +747,7 @@
 	} else {
 	    // recycled cell : minimum safety measures
 	    [cellView setInProgress:NO];
+        self.statusBar.label = nil;
 	}
 
 	NSArray * allArticles = self.controller.articleController.allArticles;
@@ -760,9 +761,14 @@
 	cellView.articleRow = row;
 	cellView.listView = articleList;
 	NSObject<ArticleContentView> *articleContentView = cellView.articleView;
-    NSView *view = [articleContentView isKindOfClass:WebKitArticleView.class]
-        ? ((WebKitArticleView *)articleContentView)
-        : ((ArticleView *) articleContentView);
+    NSView *view;
+    if ([articleContentView isKindOfClass:WebKitArticleView.class])
+    {
+        view = (WebKitArticleView *)articleContentView;
+        ((CustomWKWebView *)view).hoverListener = self;
+    } else {
+        view = ((ArticleView *) articleContentView);
+    }
 	[view removeFromSuperviewWithoutNeedingDisplay];
 	view.frame = cellView.frame;
 	[cellView addSubview:view];
@@ -1011,4 +1017,15 @@
     }
 }
 
+// MARK: WKScriptMessageHandler
+
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
+{
+    if ([message.name isEqualToString:CustomWKWebView.mouseDidEnterName]) {
+        NSString * link = (NSString *)message.body;
+        self.statusBar.label = link;
+    } else if ([message.name isEqualToString:CustomWKWebView.mouseDidExitName]) {
+        self.statusBar.label = nil;
+    }
+}
 @end
