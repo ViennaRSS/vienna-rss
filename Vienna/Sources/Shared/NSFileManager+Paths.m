@@ -45,11 +45,7 @@
                                 create:NO
                                  error:&error];
     if (!url && error) {
-        if (@available(macOS 10.12, *)) {
-            os_log_error(OS_LOG_DEFAULT, "%@", error.localizedDescription);
-        } else {
-            NSLog(@"%@", error.localizedDescription);
-        }
+        os_log_error(OS_LOG_DEFAULT, "%@", error.localizedDescription);
     }
 
     // Remove the following lines for sandboxing.
@@ -76,11 +72,7 @@
                                 create:NO
                                  error:&error];
     if (!url && error) {
-        if (@available(macOS 10.12, *)) {
-            os_log_error(OS_LOG_DEFAULT, "%@", error.localizedDescription);
-        } else {
-            NSLog(@"%@", error.localizedDescription);
-        }
+        os_log_error(OS_LOG_DEFAULT, "%@", error.localizedDescription);
     }
 
     // For sandboxing, use NSBundle.mainBundle.bundleIdentifier instead of the
@@ -105,11 +97,7 @@
                                 create:NO
                                  error:&error];
     if (!url && error) {
-        if (@available(macOS 10.12, *)) {
-            os_log_error(OS_LOG_DEFAULT, "%@", error.localizedDescription);
-        } else {
-            NSLog(@"%@", error.localizedDescription);
-        }
+        os_log_error(OS_LOG_DEFAULT, "%@", error.localizedDescription);
     }
 
     url = [url URLByAppendingPathComponent:NSBundle.mainBundle.bundleIdentifier

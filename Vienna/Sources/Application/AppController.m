@@ -1675,11 +1675,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             statusBarImage.template = YES;
             appStatusItem.button.image = statusBarImage;
 			appStatusItem.button.title = [NSString stringWithFormat:@"%ld", (long)lastCountOfUnread];
-            if (@available(macOS 10.12, *)) {
-                appStatusItem.button.imagePosition = NSImageLeading;
-            } else {
-                appStatusItem.button.imagePosition = NSImageLeft;
-            }
+            appStatusItem.button.imagePosition = NSImageLeading;
 		}
 	}
 }

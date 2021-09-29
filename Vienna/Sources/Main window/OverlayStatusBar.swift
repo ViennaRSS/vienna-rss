@@ -42,16 +42,7 @@ final class OverlayStatusBar: NSView {
     }()
 
     private var addressField: NSTextField = {
-        let addressField: NSTextField
-        if #available(macOS 10.12, *) {
-            addressField = NSTextField(labelWithString: "")
-        } else {
-            addressField = NSTextField(frame: .zero)
-            addressField.isBezeled = false
-            addressField.isSelectable = false
-            addressField.drawsBackground = false
-        }
-
+        let addressField = NSTextField(labelWithString: "")
         addressField.font = .systemFont(ofSize: 12, weight: .medium)
         addressField.textColor = .overlayStatusBarPrimaryLabelColor
         addressField.lineBreakMode = .byTruncatingMiddle

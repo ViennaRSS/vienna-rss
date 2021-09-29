@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WKWebViewConfiguration (Private)
 
-@property (setter=_setAllowsJavaScriptMarkup:, nonatomic) BOOL _allowsJavaScriptMarkup NS_AVAILABLE_MAC(10.12);
+@property (setter=_setAllowsJavaScriptMarkup:, nonatomic) BOOL _allowsJavaScriptMarkup;
 
 @end
 

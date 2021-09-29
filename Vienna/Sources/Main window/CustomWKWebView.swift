@@ -97,16 +97,12 @@ class CustomWKWebView: WKWebView {
         contentController.addUserScript(linkHoverScript)
 
         // configuration
-        if #available(OSX 10.11, *) {
-            // for useragent, we mimic the installed version of Safari and add our own identifier
-            let shortSafariVersion = Bundle(path: "/Applications/Safari.app")?.infoDictionary?["CFBundleShortVersionString"] as? String
-            let viennaVersion = (NSApp as? ViennaApp)?.applicationVersion
-            configuration.applicationNameForUserAgent = "Version/\(shortSafariVersion ?? "9.1") Safari/605 Vienna/\(viennaVersion ?? "3.5+")"
-            configuration.allowsAirPlayForMediaPlayback = true
-        }
-        if #available(OSX 10.12, *) {
-            configuration.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.all
-        }
+        // for useragent, we mimic the installed version of Safari and add our own identifier
+        let shortSafariVersion = Bundle(path: "/Applications/Safari.app")?.infoDictionary?["CFBundleShortVersionString"] as? String
+        let viennaVersion = (NSApp as? ViennaApp)?.applicationVersion
+        configuration.applicationNameForUserAgent = "Version/\(shortSafariVersion ?? "9.1") Safari/605 Vienna/\(viennaVersion ?? "3.5+")"
+        configuration.allowsAirPlayForMediaPlayback = true
+        configuration.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.all
 
         super.init(frame: frame, configuration: configuration)
 
@@ -114,9 +110,7 @@ class CustomWKWebView: WKWebView {
 
         self.allowsMagnification = true
         self.allowsBackForwardNavigationGestures = true
-        if #available(OSX 10.11, *) {
-            self.allowsLinkPreview = true
-        }
+        self.allowsLinkPreview = true
     }
 
     @available(*, unavailable)
