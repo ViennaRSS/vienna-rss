@@ -51,15 +51,41 @@
     Preferences * prefs = [Preferences standardPreferences];
 
     previewNewBrowserButton.state = prefs.useNewBrowser ? NSControlStateValueOn : NSControlStateValueOff;
-    // Show use JavaScript option
     useJavaScriptButton.state = prefs.useJavaScript ? NSControlStateValueOn : NSControlStateValueOff;
-    useWebPluginsButton.state = prefs.useWebPlugins ? NSControlStateValueOn : NSControlStateValueOff;
+
+    if (@available(macOS 11, *)) {
+        // WKWebKit has no more support for plug-ins. The same might not be true
+        // for WebView, however.
+        if (prefs.useNewBrowser) {
+            useWebPluginsButton.enabled = NO;
+            useWebPluginsButton.state = NSControlStateValueOff;
+        } else {
+            useWebPluginsButton.enabled = YES;
+            useWebPluginsButton.state = prefs.useWebPlugins ? NSControlStateValueOn : NSControlStateValueOff;
+        }
+    } else {
+        useWebPluginsButton.state = prefs.useWebPlugins ? NSControlStateValueOn : NSControlStateValueOff;
+    }
+
     [concurrentDownloads selectItemWithTitle:[NSString stringWithFormat:@"%lu",(unsigned long)prefs.concurrentDownloads]];
 }
 
-- (IBAction)changeUseNewBrowser:(id)sender {
-    BOOL useNewBroser = [sender state] == NSControlStateValueOn;
-    [Preferences standardPreferences].useNewBrowser = useNewBroser;
+- (IBAction)changeUseNewBrowser:(NSButton *)sender {
+    BOOL useNewBrowser = sender.state == NSControlStateValueOn;
+    Preferences *preferences = Preferences.standardPreferences;
+    preferences.useNewBrowser = useNewBrowser;
+
+    if (@available(macOS 11, *)) {
+        // WKWebKit has no more support for plug-ins. The same might not be true
+        // for WebView, however.
+        if (useNewBrowser) {
+            useWebPluginsButton.enabled = NO;
+            useWebPluginsButton.state = NSControlStateValueOff;
+        } else {
+            useWebPluginsButton.enabled = YES;
+            useWebPluginsButton.state = preferences.useWebPlugins ? NSControlStateValueOn : NSControlStateValueOff;
+        }
+    }
 }
 
 /* changeUseJavaScript

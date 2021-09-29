@@ -28,7 +28,7 @@
 }
 
 // Action functions
--(IBAction)changeUseNewBrowser:(id)sender;
+-(IBAction)changeUseNewBrowser:(NSButton *)sender;
 -(IBAction)changeUseJavaScript:(id)sender;
 -(IBAction)changeConcurrentDownloads:(id)sender;
 -(IBAction)showAdvancedHelp:(id)sender;
