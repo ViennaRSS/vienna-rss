@@ -82,7 +82,6 @@ extern NSString * MAPref_SyncingAppId;
 extern NSString * MAPref_SyncingAppKey;
 extern NSString * MAPref_SendSystemProfileInfo;
 extern NSString * MAPref_AlwaysAcceptBetas;
-extern NSString * MAPref_UserAgentName;
 
 extern NSInteger MA_Default_BackTrackQueueSize;
 extern NSInteger MA_Default_RefreshThreads;
