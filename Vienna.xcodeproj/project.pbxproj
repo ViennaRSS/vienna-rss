@@ -273,7 +273,7 @@
 		3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "Sparkle-setup.sh"; sourceTree = "<group>"; };
 		3A60E6092114AD740004D81D /* URLRequestExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URLRequestExtensions.h; sourceTree = "<group>"; };
 		3A60E60A2114AD740004D81D /* URLRequestExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = URLRequestExtensions.m; sourceTree = "<group>"; };
-		3A6CC18623BBA49D0084ABEE /* Codesigning.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Codesigning.xcconfig; sourceTree = "<group>"; };
+		3A6CC18623BBA49D0084ABEE /* CS-ID.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "CS-ID.xcconfig"; path = "Scripts/Resources/CS-ID.xcconfig"; sourceTree = SOURCE_ROOT; };
 		3A7BD0DB1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VNAVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
 		3A7BD0DC1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VNAVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
 		3A932D8823BB999A009B8061 /* Vienna.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Vienna.entitlements; sourceTree = "<group>"; };
@@ -1092,6 +1092,7 @@
 				F62580A81E286A8B0035E43C /* Localizable.strings */,
 				F6FEE7AF209E500800BCAEC6 /* Localizable.stringsdict */,
 				3AEE7DE81695FC570018A17D /* vienna_public_key.pem */,
+				3A6CC18623BBA49D0084ABEE /* CS-ID.xcconfig */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1240,7 +1241,6 @@
 				430C4AE0166175C20079C9FC /* Info.plist */,
 				3A932D8823BB999A009B8061 /* Vienna.entitlements */,
 				3A932D8923BB999A009B8061 /* ViennaDeployment.entitlements */,
-				3A6CC18623BBA49D0084ABEE /* Codesigning.xcconfig */,
 			);
 			path = Vienna;
 			sourceTree = "<group>";
@@ -2701,7 +2701,7 @@
 		};
 		3AE9F73923CB80C900DC6D8A /* Deployment */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3A6CC18623BBA49D0084ABEE /* Codesigning.xcconfig */;
+			baseConfigurationReference = 3A6CC18623BBA49D0084ABEE /* CS-ID.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2763,7 +2763,7 @@
 		};
 		AA4F9AB40855422400C18279 /* Deployment */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3A6CC18623BBA49D0084ABEE /* Codesigning.xcconfig */;
+			baseConfigurationReference = 3A6CC18623BBA49D0084ABEE /* CS-ID.xcconfig */;
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2905,7 +2905,7 @@
 		};
 		EAAF335B14BDE402002A8837 /* Deployment */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3A6CC18623BBA49D0084ABEE /* Codesigning.xcconfig */;
+			baseConfigurationReference = 3A6CC18623BBA49D0084ABEE /* CS-ID.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "Archive and Prep for Upload";
 			};
