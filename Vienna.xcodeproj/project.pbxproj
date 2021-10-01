@@ -124,6 +124,7 @@
 		AACAEA3E0954E71100ACD502 /* DemoFeeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */; };
 		AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */; };
 		AAF3B14306095E7B0025CC7F /* StringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF3B14106095E7B0025CC7F /* StringExtensions.m */; };
+		AAF6C3A308B06BA00077BAB8 /* StandardURLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAF6C3A208B06BA00077BAB8 /* StandardURLs.plist */; };
 		AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
 		B2554731106913760065E9C3 /* errorpagelogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B2554730106913760065E9C3 /* errorpagelogo.png */; };
 		B273E8EC106910B2001ADEF8 /* errorpagebg.png in Resources */ = {isa = PBXBuildFile; fileRef = B273E8EB106910B2001ADEF8 /* errorpagebg.png */; };
@@ -400,6 +401,7 @@
 		AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageAndTextCell.m; sourceTree = "<group>"; };
 		AAF3B14006095E7B0025CC7F /* StringExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringExtensions.h; sourceTree = "<group>"; };
 		AAF3B14106095E7B0025CC7F /* StringExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringExtensions.m; sourceTree = "<group>"; };
+		AAF6C3A208B06BA00077BAB8 /* StandardURLs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StandardURLs.plist; sourceTree = "<group>"; };
 		AAFAF3FB088056D800DAFF04 /* KeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyChain.h; sourceTree = "<group>"; };
 		AAFAF3FC088056D800DAFF04 /* KeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChain.m; sourceTree = "<group>"; };
 		B2554730106913760065E9C3 /* errorpagelogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = errorpagelogo.png; sourceTree = "<group>"; };
@@ -1122,6 +1124,7 @@
 				F62580E21E286CE60035E43C /* KnownSyncServers.plist */,
 				F62580E51E286CEC0035E43C /* RSSSources.plist */,
 				AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */,
+				AAF6C3A208B06BA00077BAB8 /* StandardURLs.plist */,
 			);
 			name = Lists;
 			sourceTree = "<group>";
@@ -1649,6 +1652,7 @@
 				AA829D4508DA7EF800983120 /* ViennaApp.scriptTerminology in Resources */,
 				AA167A850658361B0091365D /* ViennaApp.scriptSuite in Resources */,
 				F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */,
+				AAF6C3A308B06BA00077BAB8 /* StandardURLs.plist in Resources */,
 				AACAEA3E0954E71100ACD502 /* DemoFeeds.plist in Resources */,
 				F65D6D711E74619E00A30974 /* Credits.rtf in Resources */,
 				F69AE79A1F2215D600342640 /* InfoPlist.strings in Resources */,

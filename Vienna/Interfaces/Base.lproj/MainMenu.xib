@@ -551,7 +551,7 @@ CA
                                         <menuItem title="More Styles…" id="2S3-dG-ZPg">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="openStylesPage:" target="-1" id="pk4-6e-u9J"/>
+                                                <action selector="moreStyles:" target="-1" id="pk4-6e-u9J"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -848,7 +848,7 @@ CA
                             </menuItem>
                             <menuItem title="Vienna Web Site" id="929">
                                 <connections>
-                                    <action selector="openHomePage:" target="-1" id="QcX-Jg-MIJ"/>
+                                    <action selector="showViennaHomePage:" target="-1" id="QcX-Jg-MIJ"/>
                                 </connections>
                             </menuItem>
                         </items>

@@ -59,6 +59,7 @@
 	Database * db;
 	NSMutableDictionary * scriptPathMappings;
 	NSStatusItem * appStatusItem;
+	NSDictionary * standardURLs;
 	NSInteger lastCountOfUnread;
 	NSMenuItem * scriptsMenuItem;
 	BOOL didCompleteInitialisation;
@@ -98,7 +99,7 @@
 -(IBAction)newSubscription:(id)sender;
 -(IBAction)newGroupFolder:(id)sender;
 -(IBAction)editFolder:(id)sender;
--(IBAction)openHomePage:(id)sender;
+-(IBAction)showViennaHomePage:(id)sender;
 -(IBAction)viewArticlePages:(id)sender;
 -(IBAction)viewArticlePagesInAlternateBrowser:(id)sender;
 -(IBAction)openWebElementInNewTab:(id)sender;
@@ -115,7 +116,7 @@
 -(IBAction)updateRemoteSubscriptions:(id)sender;
 -(IBAction)refreshAllSubscriptions:(id)sender;
 -(IBAction)cancelAllRefreshes:(id)sender;
--(IBAction)openStylesPage:(id)sender;
+-(IBAction)moreStyles:(id)sender;
 -(IBAction)showMainWindow:(id)sender;
 -(IBAction)previousTab:(id)sender;
 -(IBAction)nextTab:(id)sender;
@@ -168,6 +169,7 @@
 @property (nonatomic, readonly) NSInteger currentFolderId;
 @property (nonatomic, getter=isConnecting, readonly) BOOL connecting;
 -(void)runAppleScript:(NSString *)scriptName;
+-(NSDictionary *)standardURLs;
 @property (nonatomic, readonly, copy) NSArray *folders;
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
 -(void)updateStatusBarFilterButtonVisibility;

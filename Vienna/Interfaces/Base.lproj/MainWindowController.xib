@@ -621,7 +621,7 @@
                                         <menuItem title="More Styles…" id="MaO-r1-tcm">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="openStylesPage:" target="-1" id="YsY-VC-HFK"/>
+                                                <action selector="moreStyles:" target="-1" id="YsY-VC-HFK"/>
                                             </connections>
                                         </menuItem>
                                     </items>
