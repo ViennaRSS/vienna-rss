@@ -1,7 +1,7 @@
 ![Vienna](https://vienna-rss.sourceforge.io/img/vienna_logo.png)
 
-![Build status](https://github.com/ViennaRSS/vienna-rss/workflows/Vienna/badge.svg)
-[![Localization status](https://d322cqt584bo4o.cloudfront.net/vienna-rss/localized.svg)](https://crowdin.com/project/vienna-rss "Crowdin")
+[![Build Status](https://travis-ci.org/ViennaRSS/vienna-rss.svg?branch=master)](https://travis-ci.org/ViennaRSS/vienna-rss)
+[![Crowdin](https://d322cqt584bo4o.cloudfront.net/vienna-rss/localized.svg)](https://crowdin.com/project/vienna-rss)
 
 [Vienna](https://www.vienna-rss.com) is an RSS/Atom reader for macOS.
 
