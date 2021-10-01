@@ -1015,10 +1015,12 @@
 		else if (folder.unreadCount)
 		{
 			[realCell setCount:folder.unreadCount];
+			[realCell setCountBackgroundColour:[NSColor colorForControlTint:[NSColor currentControlTint]]];
 		}
 		else if (folder.childUnreadCount && ![olv isItemExpanded:item])
 		{
 			[realCell setCount:folder.childUnreadCount];
+			[realCell setCountBackgroundColour:[NSColor colorForControlTint:[NSColor currentControlTint]]];
 		}
 		else
 		{

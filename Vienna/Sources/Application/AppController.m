@@ -58,7 +58,7 @@
 #import "ArticleView.h"
 #import "FolderView.h"
 
-@interface AppController () <InfoPanelControllerDelegate, ActivityPanelControllerDelegate, NSMenuItemValidation, NSToolbarItemValidation>
+@interface AppController () <InfoPanelControllerDelegate, ActivityPanelControllerDelegate>
 
 -(void)installScriptsFolderWatcher;
 -(void)handleTabChange:(NSNotification *)nc;
@@ -920,14 +920,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	// If we have an URL then copy it to the clipboard.
 	if (url != nil)
 	{
-		NSPasteboard *pboard = NSPasteboard.generalPasteboard;
-        if (@available(macOS 10.13, *)) {
-            [pboard declareTypes:@[NSPasteboardTypeString, NSPasteboardTypeURL]
-                           owner:self];
-        } else {
-            [pboard declareTypes:@[NSPasteboardTypeString, NSURLPboardType]
-                           owner:self];
-        }
+		NSPasteboard * pboard = [NSPasteboard generalPasteboard];
+        [pboard declareTypes:@[NSPasteboardTypeString, NSURLPboardType] owner:self];
 		[url writeToPasteboard:pboard];
 		[pboard setString:url.description forType:NSPasteboardTypeString];
 	}
@@ -1657,8 +1651,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	Preferences * prefs = [Preferences standardPreferences];
 	if (prefs.showAppInStatusBar && appStatusItem == nil)
 	{
-		appStatusItem = [NSStatusBar.systemStatusBar statusItemWithLength:NSVariableStatusItemLength];
-        [self setAppStatusBarIcon];
+		appStatusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+		[self setAppStatusBarIcon];
+		[appStatusItem setHighlightMode:YES];
 		
         NSMenu * statusBarMenu = [NSMenu new];
         [statusBarMenu addItemWithTitle:NSLocalizedString(@"Show Main Window…", @"Title of a menu item")
@@ -1679,7 +1674,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else if (!prefs.showAppInStatusBar && appStatusItem != nil)
 	{
-		[NSStatusBar.systemStatusBar removeStatusItem:appStatusItem];
+		[[NSStatusBar systemStatusBar] removeStatusItem:appStatusItem];
 		appStatusItem = nil;
 	}
 }
@@ -1695,22 +1690,18 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		if (lastCountOfUnread == 0)
 		{
             NSImage *statusBarImage = [NSImage imageNamed:@"statusBarIcon"];
-            statusBarImage.template = YES;
-            appStatusItem.button.image = statusBarImage;
-            appStatusItem.button.title = @"";
-            appStatusItem.button.imagePosition = NSImageOnly;
+            [statusBarImage setTemplate:YES];
+            appStatusItem.image = statusBarImage;
+			[appStatusItem setTitle:nil];
 		}
 		else
 		{
             NSImage *statusBarImage = [NSImage imageNamed:@"statusBarIconUnread"];
-            statusBarImage.template = YES;
-            appStatusItem.button.image = statusBarImage;
-			appStatusItem.button.title = [NSString stringWithFormat:@"%ld", (long)lastCountOfUnread];
-            if (@available(macOS 10.12, *)) {
-                appStatusItem.button.imagePosition = NSImageLeading;
-            } else {
-                appStatusItem.button.imagePosition = NSImageLeft;
-            }
+            [statusBarImage setTemplate:YES];
+            appStatusItem.image = statusBarImage;
+			appStatusItem.title = [NSString stringWithFormat:@"%ld", (long)lastCountOfUnread];
+			// Yosemite hack : need to insist for displaying correctly icon and text
+            appStatusItem.image = statusBarImage;
 		}
 	}
 }
