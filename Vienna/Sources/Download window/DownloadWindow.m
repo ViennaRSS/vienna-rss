@@ -21,7 +21,6 @@
 #import "DownloadWindow.h"
 
 #import "AppController+Notifications.h"
-#import "DownloadItem.h"
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
 #import "ImageAndTextCell.h"
