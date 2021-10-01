@@ -526,7 +526,7 @@
 {
     if (frame == self.webPane.mainFrame)
     {
-        [self showRssPageButton:NO];
+        [self detectedRSSLink:NO];
         [self resetError];
     }
 
@@ -577,20 +577,24 @@
     }
 }
 
-- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
+/* didFinishLoadForFrame
+ * Invoked when a location request for frame has successfully; that is, when all the resources are done loading.
+ */
+-(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
-    if (frame != self.webPane.mainFrame) {
-        return;
+    if (frame == self.webPane.mainFrame)
+    {
+        // Once the frame is loaded, trawl the source for possible links to RSS
+        // pages.
+        NSData * webSrc = frame.dataSource.data;
+        NSMutableArray * arrayOfLinks = [NSMutableArray array];
+
+        if ([RichXMLParser extractFeeds:webSrc toArray:arrayOfLinks])
+        {
+            [self detectedRSSLink:YES];
+        }
+        [self endFrameLoad];
     }
-
-    NSData *data = frame.dataSource.data;
-    NSURL *url = frame.dataSource.response.URL;
-    VNAFeedDiscoverer *parser = [[VNAFeedDiscoverer alloc] initWithData:data
-                                                                baseURL:url];
-    hasRSSlink = [parser documentHasFeeds];
-    [self showRssPageButton:hasRSSlink];
-
-    [self endFrameLoad];
 }
 
 /* didReceiveTitle
@@ -669,6 +673,11 @@
         if (unreachableURL != nil)
             self.url = frame.provisionalDataSource.unreachableURL;
     }
+}
+
+- (void)detectedRSSLink:(BOOL)detected {
+    hasRSSlink = detected;
+    [self showRssPageButton:detected];
 }
 
 #pragma mark - WebUIDelegate helper methods
