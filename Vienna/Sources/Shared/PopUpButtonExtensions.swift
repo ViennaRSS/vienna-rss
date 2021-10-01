@@ -32,6 +32,13 @@ extension NSPopUpButton {
 		self.menu?.addItem(newItem)
 	}
 
+	/// Add an item to the popup button menu with the specified target.
+	@objc
+	func addItem(withTitle title: String, target: Selector) {
+		let newItem = NSMenuItem(title: title, action: target, keyEquivalent: "")
+		self.menu?.addItem(newItem)
+	}
+
 	/// Add an item to the popup button menu with the specified tag.
 	@objc
 	func addItem(withTitle title: String, tag: Int) {
@@ -64,6 +71,18 @@ extension NSPopUpButton {
 		let newItem = NSMenuItem(title: title, action: nil, keyEquivalent: "")
 		newItem.tag = tag
 		self.menu?.insertItem(newItem, at: index)
+	}
+
+	/// Returns the represented object associated with the selected item.
+	@objc
+	func representedObjectForSelection() -> Any? {
+		return self.selectedItem?.representedObject
+	}
+
+	/// Add a separator item to the popup button menu.
+	@objc
+	func addSeparator() {
+		self.menu?.addItem(.separator())
 	}
 
 }

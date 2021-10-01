@@ -317,9 +317,10 @@
  * Handle the case where the field has changed. Update the valid list of
  * operators for the selected field.
  */
-- (IBAction)fieldChanged:(NSPopUpButton *)sender {
-	Field *field = sender.selectedItem.representedObject;
-	[self initForField:field.name inRow:sender.superview];
+-(IBAction)fieldChanged:(id)sender
+{
+	Field * field = [sender representedObjectForSelection];
+	[self initForField:field.name inRow:[sender superview]];
 }
 
 /* initForField
@@ -432,19 +433,19 @@
 		NSPopUpButton * theField = [row viewWithTag:MA_SFEdit_FieldTag];
 		NSPopUpButton * theOperator = [row viewWithTag:MA_SFEdit_OperatorTag];
 
-		Field * field = theField.selectedItem.representedObject;
+		Field * field = theField.representedObjectForSelection;
 		CriteriaOperator operator = theOperator.selectedItem.tag;
 		NSString * valueString;
 
 		if (field.type == MA_FieldType_Flag)
 		{
 			NSPopUpButton * theValue = [row viewWithTag:MA_SFEdit_FlagValueTag];
-			valueString = theValue.selectedItem.representedObject;
+			valueString = theValue.representedObjectForSelection;
 		}
 		else if (field.type == MA_FieldType_Date)
 		{
 			NSPopUpButton * theValue = [row viewWithTag:MA_SFEdit_DateValueTag];
-			valueString = theValue.selectedItem.representedObject;
+			valueString = theValue.representedObjectForSelection;
 		}
 		else if (field.type == MA_FieldType_Folder)
 		{
