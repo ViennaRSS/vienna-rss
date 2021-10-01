@@ -517,9 +517,9 @@
 			}
 			else
 			{
-				VNAVerticallyCenteredTextFieldCell * cell;
+				BJRVerticallyCenteredTextFieldCell * cell;
 
-				cell = [[VNAVerticallyCenteredTextFieldCell alloc] init];
+				cell = [[BJRVerticallyCenteredTextFieldCell alloc] init];
 				column.dataCell = cell;
 			}
 
