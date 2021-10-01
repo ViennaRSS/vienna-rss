@@ -102,6 +102,7 @@
     markReadAfterDelay.state = prefs.markReadInterval != 0 ? NSControlStateValueOn : NSControlStateValueOff;
     
     // Show new articles notification options
+    newArticlesNotificationBadgeButton.state = ((prefs.newArticlesNotification & VNANewArticlesNotificationBadge) !=0) ? NSControlStateValueOn : NSControlStateValueOff;
     newArticlesNotificationBounceButton.state = ((prefs.newArticlesNotification & VNANewArticlesNotificationBounce) !=0) ? NSControlStateValueOn : NSControlStateValueOff;
     
     // Set whether updated articles are considered as new
@@ -353,6 +354,23 @@
 {
     NSInteger newFrequency = checkFrequency.selectedItem.tag;
     [Preferences standardPreferences].refreshFrequency = newFrequency;
+}
+
+/* changeNewArticlesNotificationBadge
+ * Change if we display badge when new articles are announced.
+ */
+-(IBAction)changeNewArticlesNotificationBadge:(id)sender
+{
+    Preferences * prefs = [Preferences standardPreferences];
+    NSInteger currentNotificationValue = prefs.newArticlesNotification;
+    if ([sender state] == NSControlStateValueOn)
+    {
+        prefs.newArticlesNotification = currentNotificationValue | VNANewArticlesNotificationBadge;
+    }
+    else
+    {
+        prefs.newArticlesNotification = currentNotificationValue & ~VNANewArticlesNotificationBadge;
+    }
 }
 
 /* changeNewArticlesNotificationBounce

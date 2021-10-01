@@ -588,11 +588,11 @@
             <objects>
                 <viewController id="T2z-OK-VtO" customClass="GeneralPreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="6Zn-BI-L2K">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="445"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="467"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rmx-sO-e7b">
-                                <rect key="frame" x="18" y="408" width="144" height="16"/>
+                                <rect key="frame" x="18" y="430" width="144" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Check for new articles:" id="Oqg-6W-NAL">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -600,7 +600,7 @@
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hd9-hf-LFo">
-                                <rect key="frame" x="165" y="401" width="154" height="25"/>
+                                <rect key="frame" x="165" y="423" width="154" height="25"/>
                                 <popUpButtonCell key="cell" type="push" title="Manually" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="7Za-ay-jlt" id="ohB-Gl-p3X">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -638,7 +638,7 @@
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rjk-vu-JNM">
-                                <rect key="frame" x="36" y="380" width="394" height="18"/>
+                                <rect key="frame" x="36" y="402" width="394" height="18"/>
                                 <buttonCell key="cell" type="check" title="Check for new articles on start up" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="Ljf-Qd-6Ho">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -648,7 +648,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YHk-qo-gYO">
-                                <rect key="frame" x="36" y="358" width="394" height="18"/>
+                                <rect key="frame" x="36" y="380" width="394" height="18"/>
                                 <buttonCell key="cell" type="check" title="Mark updated articles as new" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="4vm-80-j33">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -658,7 +658,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Wi-RB-PIn">
-                                <rect key="frame" x="18" y="323" width="414" height="16"/>
+                                <rect key="frame" x="18" y="345" width="414" height="16"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="When new unread articles are retrieved:" id="iCs-T5-L1c">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -666,8 +666,19 @@
                                 </textFieldCell>
                                 <connections>
                                     <accessibilityConnection property="link" destination="0oy-fx-aoF" id="L75-S9-bG8"/>
+                                    <accessibilityConnection property="link" destination="jcL-HY-Lcc" id="Rsa-6d-Jm7"/>
                                 </connections>
                             </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jcL-HY-Lcc">
+                                <rect key="frame" x="36" y="320" width="394" height="18"/>
+                                <buttonCell key="cell" type="check" title="Show the unread count on the application icon" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="jVU-m2-dsS">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="changeNewArticlesNotificationBadge:" target="T2z-OK-VtO" id="0yG-SA-jar"/>
+                                </connections>
+                            </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0oy-fx-aoF">
                                 <rect key="frame" x="36" y="298" width="394" height="18"/>
                                 <buttonCell key="cell" type="check" title="Bounce the application icon" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="jfH-Hq-gRk">
@@ -827,7 +838,7 @@
                             <constraint firstAttribute="trailing" secondItem="Py0-wt-kSJ" secondAttribute="trailing" constant="20" symbolic="YES" id="0Kj-Ur-S4Z"/>
                             <constraint firstItem="rjk-vu-JNM" firstAttribute="leading" secondItem="rmx-sO-e7b" secondAttribute="leading" constant="18" id="0lh-hn-Sdb"/>
                             <constraint firstItem="cDG-ln-uKe" firstAttribute="trailing" secondItem="Hd9-hf-LFo" secondAttribute="trailing" id="0w3-fU-ctV"/>
-                            <constraint firstItem="0oy-fx-aoF" firstAttribute="top" secondItem="4Wi-RB-PIn" secondAttribute="bottom" constant="8" id="16R-rY-DRq"/>
+                            <constraint firstItem="jcL-HY-Lcc" firstAttribute="top" secondItem="4Wi-RB-PIn" secondAttribute="bottom" constant="8" symbolic="YES" id="16R-rY-DRq"/>
                             <constraint firstAttribute="bottom" secondItem="I7s-YO-KpK" secondAttribute="bottom" constant="20" symbolic="YES" id="2kt-DT-5Px"/>
                             <constraint firstItem="fZd-pw-BJu" firstAttribute="top" secondItem="0oy-fx-aoF" secondAttribute="bottom" constant="20" id="2mu-ZD-ulx"/>
                             <constraint firstItem="YHk-qo-gYO" firstAttribute="leading" secondItem="rmx-sO-e7b" secondAttribute="leading" constant="18" id="3jY-KI-0aI"/>
@@ -842,8 +853,10 @@
                             <constraint firstItem="7gv-LJ-Ouu" firstAttribute="leading" secondItem="6Zn-BI-L2K" secondAttribute="leading" constant="20" symbolic="YES" id="G6H-id-JSw"/>
                             <constraint firstItem="Py0-wt-kSJ" firstAttribute="top" secondItem="7gv-LJ-Ouu" secondAttribute="bottom" constant="6" symbolic="YES" id="IPP-4I-zJv"/>
                             <constraint firstItem="rjk-vu-JNM" firstAttribute="top" secondItem="Hd9-hf-LFo" secondAttribute="bottom" constant="8" symbolic="YES" id="KHz-0N-z9O"/>
+                            <constraint firstItem="jcL-HY-Lcc" firstAttribute="leading" secondItem="4Wi-RB-PIn" secondAttribute="leading" constant="18" id="MKc-lx-Ot1"/>
                             <constraint firstItem="mgd-Xn-r0g" firstAttribute="top" secondItem="fZd-pw-BJu" secondAttribute="bottom" constant="8" symbolic="YES" id="Mqa-LV-RxF"/>
                             <constraint firstItem="7gv-LJ-Ouu" firstAttribute="top" secondItem="U0G-xt-64s" secondAttribute="bottom" constant="20" id="Qma-Hk-xoc"/>
+                            <constraint firstAttribute="trailing" secondItem="jcL-HY-Lcc" secondAttribute="trailing" constant="20" symbolic="YES" id="RC0-wZ-uFV"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="U0G-xt-64s" secondAttribute="trailing" constant="20" symbolic="YES" id="T2A-ee-YV1"/>
                             <constraint firstItem="4Wi-RB-PIn" firstAttribute="leading" secondItem="6Zn-BI-L2K" secondAttribute="leading" constant="20" symbolic="YES" id="UPv-1O-Waz"/>
                             <constraint firstItem="rmx-sO-e7b" firstAttribute="baseline" secondItem="Hd9-hf-LFo" secondAttribute="baseline" id="Vcf-TH-puY"/>
@@ -878,6 +891,7 @@
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Aw4-0j-7h9" secondAttribute="trailing" constant="20" symbolic="YES" id="xQe-Ck-S14"/>
                             <constraint firstItem="Aw4-0j-7h9" firstAttribute="leading" secondItem="UVp-Fb-Vxi" secondAttribute="trailing" constant="8" symbolic="YES" id="yaJ-6n-a7X"/>
                             <constraint firstItem="Hd9-hf-LFo" firstAttribute="top" secondItem="6Zn-BI-L2K" secondAttribute="top" constant="20" symbolic="YES" id="yhD-LY-FW9"/>
+                            <constraint firstItem="0oy-fx-aoF" firstAttribute="top" secondItem="jcL-HY-Lcc" secondAttribute="bottom" constant="6" symbolic="YES" id="zHX-p4-c6X"/>
                             <constraint firstItem="Aw4-0j-7h9" firstAttribute="trailing" secondItem="cDG-ln-uKe" secondAttribute="trailing" id="zf6-0s-XxX"/>
                             <constraint firstAttribute="trailing" secondItem="YHk-qo-gYO" secondAttribute="trailing" constant="20" symbolic="YES" id="ziR-we-eOq"/>
                         </constraints>
@@ -891,6 +905,7 @@
                         <outlet property="markReadAfterDelay" destination="McN-fD-0Cv" id="kbs-6x-LQ1"/>
                         <outlet property="markReadAfterNext" destination="jkb-TT-wPC" id="A95-fa-Lby"/>
                         <outlet property="markUpdatedAsNew" destination="YHk-qo-gYO" id="pgB-L1-fdL"/>
+                        <outlet property="newArticlesNotificationBadgeButton" destination="jVU-m2-dsS" id="jCv-zD-Wii"/>
                         <outlet property="newArticlesNotificationBounceButton" destination="jfH-Hq-gRk" id="8ST-KL-P8p"/>
                         <outlet property="openLinksInBackground" destination="7gv-LJ-Ouu" id="sb9-n8-thN"/>
                         <outlet property="openLinksInExternalBrowser" destination="Py0-wt-kSJ" id="nbX-7m-Oad"/>

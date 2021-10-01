@@ -20,6 +20,7 @@
 /// New articles notification method (managed as an array of binary flags)
 @objc
 enum VNANewArticlesNotification: Int {
+    case badge = 1
     case bounce = 2
 }
 
