@@ -101,17 +101,15 @@ There are two distinct ways to get the different files needed to publish an upda
 ### On Github:
 
    1. Go to Vienna's releases page on Github : <https://github.com/ViennaRSS/vienna-rss/releases>
-   2. Choose "Draft a new release", type the tag name (`v/3.3.0_beta4`), a description ("Vienna 3.3.0 Beta 4").
-   3. Upload the `Vienna3.3.0_beta4.tar.gz` file.
-   4. Upload also the compressed dSYM file (whose nome should be something similar to `Vienna3.3.0_beta4.5b272a6-dSYM.tar.gz`)
-   5. For beta and release candidates, check the "This is a prerelease" box.
-   6. Click the "Publish" button.
-   7. Verify the uploaded app: download it, uncompress it and check that it runs OK.
+   2. Choose "Draft a new release", type the tag name (`v/3.3.0_beta4`), a description ("Vienna 3.3.0 Beta 4"). Upload the `Vienna3.3.0_beta4.tar.gz` file.
+   3. For beta and release candidates, check the "This is a prerelease" box.
+   4. Click the "Publish" button.
+   5. Verify the uploaded file: download it, uncompress it and check that it runs OK.
 
 ### On Sourceforge.net:
 
    12. Check that the SourceForge Downloads page for Vienna at <https://sourceforge.net/projects/vienna-rss/files/> got the new files.
-   13. For stable releases only : from the Sourceforge site, choose the ℹ️ button ("View details") of "Vienna3.3.0.tar.gz" (be careful to select the binary and not the code source file or the dSYM file!) and set the file as default download for Mac OS X. Don't do this for beta releases!
+   13. For stable releases only : from the Sourceforge site, choose the ℹ️ button ("View details") of "Vienna3.3.0.tar.gz" (be careful to select the binary and not the code source file !) and set the file as default download for Mac OS X. Don't do this for beta releases!
 
 ### On viennarss.github.io
 

@@ -22,8 +22,8 @@ Vienna 3.0.x requires a minimum of OS X 10.6 (Snow Leopard).
 Installing
 ----------
 
-Admins upload release and test versions at the [GitHub Releases page](https://github.com/ViennaRSS/vienna-rss/releases).  
-Alternatively, you can download releases from [Sourceforge](https://sourceforge.net/projects/vienna-rss/files/).
+Admins upload release and test versions at [Sourceforge](https://sourceforge.net/projects/vienna-rss/files/).  
+Alternatively, you can download releases from the [GitHub Releases page](https://github.com/ViennaRSS/vienna-rss/releases).
 
 **Homebrew**
 
