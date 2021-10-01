@@ -234,7 +234,7 @@
 	[self.rootNode removeChildren];
 	if (![self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode])
 	{
-		[[Preferences standardPreferences] setFoldersTreeSortMethod:VNAFolderSortByName];
+		[[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_ByName];
 		[self.rootNode removeChildren];
 		[self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode];
 	}
@@ -314,7 +314,7 @@
 -(BOOL)loadTree:(NSArray *)listOfFolders rootNode:(TreeNode *)node
 {
 	Folder * folder;
-	if ([Preferences standardPreferences].foldersTreeSortMethod != VNAFolderSortManual)
+	if ([Preferences standardPreferences].foldersTreeSortMethod != MA_FolderSort_Manual)
 	{
 		for (folder in listOfFolders)
 		{
@@ -685,7 +685,7 @@
 {
 	NSInteger selectedFolderId = self.actualSelection;
 	
-	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortManual)
+	if ([Preferences standardPreferences].foldersTreeSortMethod == MA_FolderSort_Manual)
 	{
         [self setManualSortOrderForNode:self.rootNode];
 	}
@@ -795,8 +795,8 @@
 
 	BOOL moveSelection = (folderId == self.actualSelection);
 
-	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortByName)
-		[parentNode sortChildren:VNAFolderSortByName];
+	if ([Preferences standardPreferences].foldersTreeSortMethod == MA_FolderSort_ByName)
+		[parentNode sortChildren:MA_FolderSort_ByName];
 
 	[self reloadFolderItem:parentNode reloadChildren:YES];
 	if (moveSelection)
@@ -840,7 +840,7 @@
 		[node setCanHaveChildren:YES];
 	
 	NSInteger childIndex = -1;
-	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortManual)
+	if ([Preferences standardPreferences].foldersTreeSortMethod == MA_FolderSort_Manual)
 	{
 		NSInteger nextSiblingId = newFolder.nextSiblingId;
 		if (nextSiblingId > 0)
@@ -1292,7 +1292,7 @@
 	// we have to watch for is to make sure that we don't re-parent to a subordinate
 	// folder.
 	Database * dbManager = [Database sharedManager];
-	BOOL autoSort = [Preferences standardPreferences].foldersTreeSortMethod != VNAFolderSortManual;
+	BOOL autoSort = [Preferences standardPreferences].foldersTreeSortMethod != MA_FolderSort_Manual;
 
 	while (index < count)
 	{

@@ -203,8 +203,8 @@
 -(id)resetFolderSort:(NSScriptCommand *)cmd
 {
 	Preferences * prefs = [Preferences standardPreferences];
-	[prefs setFoldersTreeSortMethod:VNAFolderSortByName];
-	[prefs setFoldersTreeSortMethod:VNAFolderSortManual];
+	[prefs setFoldersTreeSortMethod:MA_FolderSort_ByName];
+	[prefs setFoldersTreeSortMethod:MA_FolderSort_Manual];
 	return nil;
 }
 
@@ -330,7 +330,7 @@
  */
 -(NSInteger)autoExpireDuration			{ return [Preferences standardPreferences].autoExpireDuration; }
 -(float)markReadInterval			{ return [Preferences standardPreferences].markReadInterval; }
--(BOOL)readingPaneOnRight			{ return [Preferences standardPreferences].layout == VNALayoutCondensed; }
+-(BOOL)readingPaneOnRight			{ return [Preferences standardPreferences].layout == MA_Layout_Condensed; }
 -(NSInteger)filterMode					{ return [Preferences standardPreferences].filterMode; }
 -(BOOL)refreshOnStartup				{ return [Preferences standardPreferences].refreshOnStartup; }
 -(BOOL)checkForNewOnStartup			{ return [Preferences standardPreferences].checkForNewOnStartup; }

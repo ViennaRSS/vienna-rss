@@ -49,7 +49,7 @@
             [db executeUpdate:@"alter table folders add column first_child"];
             [db executeUpdate:@"update folders set first_child=0"];
             
-            [[Preferences standardPreferences] setFoldersTreeSortMethod:VNAFolderSortByName];
+            [[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_ByName];
             
             FMResultSet * results = [db executeQuery:@"select folder_id, parent_id from folders"];
             while([results next])
