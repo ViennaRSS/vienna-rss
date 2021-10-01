@@ -8,30 +8,35 @@ most recent build should be at the top of this file.
 
 Thanks!
 
-3.6.0
------
-### ! 3.6 versions require OS X 10.11 (El Capitan) or later !
-- Universal build (support Apple Silicon processors as well as Intel processors) through Xcode 12.2
-- Refactor constants to be usable by Swift code
-- Tweak DirectoryMonitor code
-- Fix a warning
-- Change configuration of handling of stale Github issues
-
 3.6.0 Beta 5
 ------------
 - Silence some warnings
 - Remove unused code
 - Add GitHub workflow for testing
 
+3.6.0 Beta 4
+------------
+- Update to Xcode 12
+
+3.6.0 Beta 3
+------------
+- Configure Github configuration to close abandoned issues
+
+3.6.0 Beta 2
+------------
+- Replace deprecated methods
+
+3.6.0 Beta 1
+------------
+### ! For OS X 10.11 (El Capitan) or later only !
+- Lift deployment target to macOS 10.11 & start modernizing code
+- Replaced MASPreferences with Storyboard implementation (Preferences window)
+
 3.5.10
 ------
 - Fix application crashing on display of certain URLs (bug introduced by version 3.5.9) 
 - Fix a crash when both expansion tooltip and progress animation were triggered
 - Fix an annoyance with tooltip obscuring contextual menu in article list or folder list
-
-3.6.0 Beta 4
-------------
-- Update to Xcode 12
 
 3.5.9
 -----
@@ -45,10 +50,6 @@ Thanks!
 - Update to MMTabBarView v/1.4.9
 - Fix running individual Xcode tests
 
-3.6.0 Beta 3
-------------
-- Configure Github configuration to close abandoned issues
-
 3.5.8
 -----
 - Fix crash related to macOS Big Sur Beta
@@ -60,10 +61,6 @@ Thanks!
 - Fix resetting of article pane when no article is selected anymore and "Use Web Pages for Articles" is enabled
 - Fix Vienna Tests target
 
-3.6.0 Beta 2
-------------
-- Replace deprecated methods
-
 3.5.7
 -----
 - Fix file being hidden at end of "Download image"
@@ -73,12 +70,6 @@ Thanks!
 - Remove Google+ plugin ; replace it with Google Currents plugin
 - Increase to 1000 the limit of articles fetched at once from an Open Reader feed
 - Update Sparkle to v1.23.0 and MMTabBarView to v/1.4.7
-
-3.6.0 Beta 1
-------------
-### ! 3.6.x versions are for OS X 10.11 (El Capitan) or later only !
-- Lift deployment target to macOS 10.11 & start modernizing code
-- Replaced MASPreferences with Storyboard implementation (Preferences window)
 
 3.5.6
 -----
