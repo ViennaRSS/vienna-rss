@@ -59,7 +59,7 @@
 		03B35B841B75E9E0001DB06D /* NSDate+Vienna.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B35B831B75E9E0001DB06D /* NSDate+Vienna.m */; };
 		03B752421B74814B00FD3FDB /* RichXMLParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B752411B74814B00FD3FDB /* RichXMLParserTests.m */; };
 		03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EFD56F1B720AB0007EF284 /* ExportTests.m */; };
-		03F33D961DF2A2F900B04FAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03F33D951DF2A2F900B04FAF /* Assets.xcassets */; };
+		03F33D961DF2A2F900B04FAF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03F33D951DF2A2F900B04FAF /* Images.xcassets */; };
 		2FA79F192170C55D00228482 /* Browser+WebUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA79F182170C55D00228482 /* Browser+WebUIDelegate.m */; };
 		37C650801816EBAD3C0D9DBF /* NSURL+CaminoExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+CaminoExtensions.m */; };
 		3A171C00210B551B00B80FBB /* TRVSURLSessionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A171BF1210B551B00B80FBB /* TRVSURLSessionOperation.m */; };
@@ -136,6 +136,7 @@
 		B8B9D6D323685C7400EAE65C /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B9D6D223685C7400EAE65C /* FeedItem.swift */; };
 		EA43C70914A370DB00F2D843 /* VTPG_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = EA43C70814A370DB00F2D843 /* VTPG_Common.m */; };
 		F41CA694218F56140072F734 /* NSWorkspace+OpenWithMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F41CA692218F56130072F734 /* NSWorkspace+OpenWithMenu.m */; };
+		F600B19A2202536800684F5C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F600B1992202536800684F5C /* Colors.xcassets */; };
 		F6094E331F10107800677D3B /* ExportAccessoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6094E311F10107800677D3B /* ExportAccessoryViewController.swift */; };
 		F6164C591E32A6660086261C /* DisclosureView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6164C581E32A6660086261C /* DisclosureView.m */; };
 		F61CEA661F039E57009C878E /* ButtonToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61CEA651F039E56009C878E /* ButtonToolbarItem.swift */; };
@@ -255,7 +256,7 @@
 		03B35B831B75E9E0001DB06D /* NSDate+Vienna.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Vienna.m"; sourceTree = "<group>"; };
 		03B752411B74814B00FD3FDB /* RichXMLParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichXMLParserTests.m; sourceTree = "<group>"; };
 		03EFD56F1B720AB0007EF284 /* ExportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportTests.m; sourceTree = "<group>"; };
-		03F33D951DF2A2F900B04FAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		03F33D951DF2A2F900B04FAF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FA79F172170C55D00228482 /* Browser+WebUIDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Browser+WebUIDelegate.h"; sourceTree = "<group>"; };
 		2FA79F182170C55D00228482 /* Browser+WebUIDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Browser+WebUIDelegate.m"; sourceTree = "<group>"; };
@@ -416,6 +417,7 @@
 		EA6D3E5914D8048C004DCB80 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
 		F41CA692218F56130072F734 /* NSWorkspace+OpenWithMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWorkspace+OpenWithMenu.m"; sourceTree = "<group>"; };
 		F41CA693218F56140072F734 /* NSWorkspace+OpenWithMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWorkspace+OpenWithMenu.h"; sourceTree = "<group>"; };
+		F600B1992202536800684F5C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		F6052438209EFD680000D4E1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = fr; path = fr.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F60642751F1A314700A12272 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 		F60642761F1A314900A12272 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/MainWindowController.strings; sourceTree = "<group>"; };
@@ -1085,7 +1087,8 @@
 				F63DA1741F1CF04F007CBED4 /* Lists */,
 				F63DA1721F1CEFC3007CBED4 /* AppleScript */,
 				F63DA1731F1CF025007CBED4 /* Error page */,
-				03F33D951DF2A2F900B04FAF /* Assets.xcassets */,
+				F600B1992202536800684F5C /* Colors.xcassets */,
+				03F33D951DF2A2F900B04FAF /* Images.xcassets */,
 				F69AE79C1F2215D600342640 /* InfoPlist.strings */,
 				F62580A81E286A8B0035E43C /* Localizable.strings */,
 				F6FEE7AF209E500800BCAEC6 /* Localizable.stringsdict */,
@@ -1638,7 +1641,7 @@
 				F62581591E29BEB90035E43C /* MainMenu.xib in Resources */,
 				F6FEE7AD209E500800BCAEC6 /* Localizable.stringsdict in Resources */,
 				F6D572AE1E26AA8A00CDA909 /* FeedCredentials.xib in Resources */,
-				03F33D961DF2A2F900B04FAF /* Assets.xcassets in Resources */,
+				03F33D961DF2A2F900B04FAF /* Images.xcassets in Resources */,
 				F6257FF51E28485F0035E43C /* Downloads.xib in Resources */,
 				0386A5C11E1FA586000C10CE /* BrowserPane.xib in Resources */,
 				F6D572B71E26AAA100CDA909 /* RSSFeed.xib in Resources */,
@@ -1651,6 +1654,7 @@
 				F69AE79A1F2215D600342640 /* InfoPlist.strings in Resources */,
 				F6A7DE4F1E471A7F0017BE5E /* Vienna.help in Resources */,
 				F6D572AB1E26AA8200CDA909 /* EmptyTrashWarning.xib in Resources */,
+				F600B19A2202536800684F5C /* Colors.xcassets in Resources */,
 				F62580E11E286CDE0035E43C /* errorpage.html in Resources */,
 				F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */,
 				F62580E41E286CE60035E43C /* KnownSyncServers.plist in Resources */,
