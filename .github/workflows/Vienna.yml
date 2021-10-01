@@ -8,10 +8,12 @@ jobs:
     runs-on: macos-11.0
 
     steps:
-    - name: Use Xcode 12.3
-      run: sudo xcode-select -s "/Applications/Xcode_12.3.app"
+    - name: Use Xcode 12
+      run: sudo xcode-select -s "/Applications/Xcode_12.2.app"
+    - name: Install SwiftLint
+      run: brew install swiftlint
     - name: Set up Git repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v1
     - name: Build Xcode project
       run: xcodebuild -project Vienna.xcodeproj -scheme Vienna -configuration Development build-for-testing | xcpretty && exit ${PIPESTATUS[0]}
     - name: Test Xcode project
