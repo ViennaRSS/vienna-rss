@@ -61,7 +61,7 @@
 		03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EFD56F1B720AB0007EF284 /* ExportTests.m */; };
 		03F33D961DF2A2F900B04FAF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03F33D951DF2A2F900B04FAF /* Images.xcassets */; };
 		2FA79F192170C55D00228482 /* Browser+WebUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA79F182170C55D00228482 /* Browser+WebUIDelegate.m */; };
-		37C650801816EBAD3C0D9DBF /* NSURL+CaminoExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+CaminoExtensions.m */; };
+		37C650801816EBAD3C0D9DBF /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */; };
 		3A171C00210B551B00B80FBB /* TRVSURLSessionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A171BF1210B551B00B80FBB /* TRVSURLSessionOperation.m */; };
 		3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBEC61733C206006DD2AB /* ArticleCellView.m */; };
 		3A60E60B2114AD740004D81D /* URLRequestExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A60E60A2114AD740004D81D /* URLRequestExtensions.m */; };
@@ -261,8 +261,8 @@
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; };
 		2FA79F172170C55D00228482 /* Browser+WebUIDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Browser+WebUIDelegate.h"; sourceTree = "<group>"; };
 		2FA79F182170C55D00228482 /* Browser+WebUIDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Browser+WebUIDelegate.m"; sourceTree = "<group>"; };
-		37C652B4C918F312BA9F1AB1 /* NSURL+CaminoExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+CaminoExtensions.h"; sourceTree = "<group>"; };
-		37C65C3C01B0F8EE0C0E5A52 /* NSURL+CaminoExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+CaminoExtensions.m"; sourceTree = "<group>"; };
+		37C652B4C918F312BA9F1AB1 /* NSURL+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Utils.h"; sourceTree = "<group>"; };
+		37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Utils.m"; sourceTree = "<group>"; };
 		3A171BE0210B551A00B80FBB /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		3A171BEE210B551B00B80FBB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3A171BF0210B551B00B80FBB /* TRVSURLSessionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRVSURLSessionOperation.h; sourceTree = "<group>"; };
@@ -1074,7 +1074,6 @@
 			children = (
 				EA43C70614A370CB00F2D843 /* DebugHelper */,
 				43501F8E165DBCCB0018EDB7 /* DSClickableURLTextField */,
-				F6F2CD1A25853B5F003C80D3 /* NSURL+CaminoExtensions */,
 				3A171BDF210B551A00B80FBB /* TRVSURLSessionOperation */,
 			);
 			path = External;
@@ -1290,7 +1289,6 @@
 			children = (
 				F63833D71EF842EA00E07213 /* MainWindowController.swift */,
 				F6373A221F1D53B500ED3B09 /* MainWindow.swift */,
-				F69964F61F13029500FC8493 /* OverlayStatusBar.swift */,
 				F6A7EA571F1CE5DD00BD4450 /* Toolbar */,
 				F6A7EA581F1CE60100BD4450 /* Folder list */,
 				F6A7EA5A1F1CE63500BD4450 /* Article list */,
@@ -1370,6 +1368,8 @@
 				43502876165DE9DF0018EDB7 /* NewGroupFolder.m */,
 				43502877165DE9DF0018EDB7 /* NewSubscription.h */,
 				43502878165DE9DF0018EDB7 /* NewSubscription.m */,
+				37C652B4C918F312BA9F1AB1 /* NSURL+Utils.h */,
+				37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */,
 				4350287F165DE9DF0018EDB7 /* SearchFolder.h */,
 				43502880165DE9DF0018EDB7 /* SearchFolder.m */,
 				43502883165DE9DF0018EDB7 /* SearchPanel.h */,
@@ -1385,8 +1385,6 @@
 				664F87C613C62DFE00E266DE /* OpenReader.m */,
 				4350287D165DE9DF0018EDB7 /* RefreshManager.h */,
 				4350287E165DE9DF0018EDB7 /* RefreshManager.m */,
-				3A60E6092114AD740004D81D /* URLRequestExtensions.h */,
-				3A60E60A2114AD740004D81D /* URLRequestExtensions.m */,
 			);
 			path = Fetching;
 			sourceTree = "<group>";
@@ -1472,6 +1470,7 @@
 				AAFAF3FC088056D800DAFF04 /* KeyChain.m */,
 				3A23F13315276935008AF863 /* NSNotificationAdditions.h */,
 				4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */,
+				F69964F61F13029500FC8493 /* OverlayStatusBar.swift */,
 				B85F93E4255AE48000B54B68 /* NSPopUpButtonExtensions.swift */,
 				AAF3B14006095E7B0025CC7F /* StringExtensions.h */,
 				AAF3B14106095E7B0025CC7F /* StringExtensions.m */,
@@ -1479,19 +1478,12 @@
 				031E082F19DFA3A900194F9F /* SubscriptionModel.m */,
 				AAA305FC0682A25200E4A6DC /* TableViewExtensions.h */,
 				AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */,
+				3A60E6092114AD740004D81D /* URLRequestExtensions.h */,
+				3A60E60A2114AD740004D81D /* URLRequestExtensions.m */,
 				3A7BD0DB1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.h */,
 				3A7BD0DC1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m */,
 			);
 			path = Shared;
-			sourceTree = "<group>";
-		};
-		F6F2CD1A25853B5F003C80D3 /* NSURL+CaminoExtensions */ = {
-			isa = PBXGroup;
-			children = (
-				37C652B4C918F312BA9F1AB1 /* NSURL+CaminoExtensions.h */,
-				37C65C3C01B0F8EE0C0E5A52 /* NSURL+CaminoExtensions.m */,
-			);
-			path = "NSURL+CaminoExtensions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1935,7 +1927,7 @@
 				43BA97FE1664804E00B95F35 /* DSClickableURLTextField.m in Sources */,
 				F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */,
 				3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */,
-				37C650801816EBAD3C0D9DBF /* NSURL+CaminoExtensions.m in Sources */,
+				37C650801816EBAD3C0D9DBF /* NSURL+Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

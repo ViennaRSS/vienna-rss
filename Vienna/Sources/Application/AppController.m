@@ -43,7 +43,7 @@
 #import "OpenReader.h"
 #import "Debug.h"
 #import "Database.h"
-#import "NSURL+CaminoExtensions.h"
+#import "NSURL+Utils.h"
 #import "PluginManager.h"
 #import "ArticleController.h"
 #import "FoldersTree.h"
