@@ -19,7 +19,7 @@
 
 import Cocoa
 
-final class FilterView: NSVisualEffectView {
+final class FilterView: GradientView {
 
     @IBOutlet private(set) var filterSearchField: NSSearchField!
     @IBOutlet private(set) var filterViewPopUp: NSPopUpButton!
