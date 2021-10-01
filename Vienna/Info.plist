@@ -12,7 +12,7 @@
 				<string>viennastyle</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>StyleIcon</string>
+			<string>vienna3style.icns</string>
 			<key>CFBundleTypeName</key>
 			<string>Vienna Style Package</string>
 			<key>CFBundleTypeRole</key>
@@ -26,7 +26,7 @@
 				<string>viennaplugin</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>PluginIcon</string>
+			<string>vienna3plugin.icns</string>
 			<key>CFBundleTypeName</key>
 			<string>Vienna Plugin Package</string>
 			<key>CFBundleTypeRole</key>
