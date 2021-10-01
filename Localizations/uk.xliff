@@ -1,0 +1,2544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="Vienna/Interfaces/Base.lproj/ActivityViewer.xib" datatype="plaintext" source-language="en" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="8.title">
+        <source>Activity</source>
+        <note>Class = "NSWindow"; title = "Activity"; ObjectID = "8";</note>
+        <target xml:lang="uk" state="translated">Вікно активності</target>
+      </trans-unit>
+      <trans-unit id="18.headerCell.title">
+        <source>Source</source>
+        <note>Class = "NSTableColumn"; headerCell.title = "Source"; ObjectID = "18";</note>
+        <target xml:lang="uk" state="translated">Джерело</target>
+      </trans-unit>
+      <trans-unit id="19.headerCell.title">
+        <source>Status</source>
+        <note>Class = "NSTableColumn"; headerCell.title = "Status"; ObjectID = "19";</note>
+        <target xml:lang="uk" state="translated">Статус</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/AdvancedPreferencesView.xib" datatype="plaintext" source-language="en" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="GaX-8c-QaN.title">
+        <source>The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.</source>
+        <note>Class = "NSTextFieldCell"; title = "The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting."; ObjectID = "GaX-8c-QaN";</note>
+        <target xml:lang="uk" state="translated">Параметри представлені тут не повинні змінюватися за умов звичайного використання Vienna. За інформацією про параметри звертайтеся у відповідний розділ Довідки.</target>
+      </trans-unit>
+      <trans-unit id="Ngw-hP-yW4.title">
+        <source>Concurrent downloads:</source>
+        <note>Class = "NSTextFieldCell"; title = "Concurrent downloads:"; ObjectID = "Ngw-hP-yW4";</note>
+        <target xml:lang="uk" state="translated">Одночасне завантаження:</target>
+      </trans-unit>
+      <trans-unit id="guK-dE-f6n.title">
+        <source>Enable JavaScript in the internal browser</source>
+        <note>Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "guK-dE-f6n";</note>
+        <target xml:lang="uk" state="translated">Увімкнути JavaScript у внутрішньому браузері</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/AppearancePreferencesView.xib" datatype="plaintext" source-language="en" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="71S-pg-AjX.title">
+        <source>When viewing articles or web pages:</source>
+        <note>Class = "NSTextFieldCell"; title = "When viewing articles or web pages:"; ObjectID = "71S-pg-AjX";</note>
+        <target xml:lang="uk" state="translated">Переглядати статті чи веб-сторінки:</target>
+      </trans-unit>
+      <trans-unit id="B5v-p5-vrf.title">
+        <source>Folder list font:</source>
+        <note>Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "B5v-p5-vrf";</note>
+        <target xml:lang="uk" state="translated">Шрифт списку папок:</target>
+      </trans-unit>
+      <trans-unit id="BDw-v3-mpF.title">
+        <source>Select…</source>
+        <note>Class = "NSButtonCell"; title = "Select…"; ObjectID = "BDw-v3-mpF";</note>
+        <target xml:lang="uk" state="translated">Вибрати…</target>
+      </trans-unit>
+      <trans-unit id="MEV-HA-bdL.title">
+        <source>Show feeds icons in folder list</source>
+        <note>Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "MEV-HA-bdL";</note>
+        <target xml:lang="uk" state="translated">Показувати зображення стрічок у списку тек</target>
+      </trans-unit>
+      <trans-unit id="auD-UC-Pij.title">
+        <source>Article list font:</source>
+        <note>Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "auD-UC-Pij";</note>
+        <target xml:lang="uk" state="translated">Шрифт списку статей:</target>
+      </trans-unit>
+      <trans-unit id="gGT-YP-aum.title">
+        <source>Select…</source>
+        <note>Class = "NSButtonCell"; title = "Select…"; ObjectID = "gGT-YP-aum";</note>
+        <target xml:lang="uk" state="translated">Вибрати…</target>
+      </trans-unit>
+      <trans-unit id="zfJ-Ge-Cxe.title">
+        <source>Never use font sizes smaller than</source>
+        <note>Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "zfJ-Ge-Cxe";</note>
+        <target xml:lang="uk" state="translated">Ніколи не використовувати шрифт менший за</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/Downloads.xib" datatype="plaintext" source-language="en" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="5.title">
+        <source>Downloads</source>
+        <note>Class = "NSWindow"; title = "Downloads"; ObjectID = "5";</note>
+        <target xml:lang="uk" state="translated">Завантаження</target>
+      </trans-unit>
+      <trans-unit id="23.title">
+        <source>Clear</source>
+        <note>Class = "NSButtonCell"; title = "Clear"; ObjectID = "23";</note>
+        <target xml:lang="uk" state="translated">Очистити</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/EmptyTrashWarning.xib" datatype="plaintext" source-language="en" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="17.title">
+        <source>Empty Trash</source>
+        <note>Class = "NSButtonCell"; title = "Empty Trash"; ObjectID = "17";</note>
+        <target xml:lang="uk" state="translated">Спорожнити смітник</target>
+      </trans-unit>
+      <trans-unit id="18.title">
+        <source>Don't Empty Trash</source>
+        <note>Class = "NSButtonCell"; title = "Don't Empty Trash"; ObjectID = "18";</note>
+        <target xml:lang="uk" state="translated">Не спорожняти смітник</target>
+      </trans-unit>
+      <trans-unit id="19.title">
+        <source>There are deleted articles in the trash. Would you like to empty the trash before quitting?</source>
+        <note>Class = "NSTextFieldCell"; title = "There are deleted articles in the trash. Would you like to empty the trash before quitting?"; ObjectID = "19";</note>
+        <target xml:lang="uk" state="translated">У смітнику є видалені статті. Чи не хотіли б ви спорожнити смітник перед тим, як завершити програму?</target>
+      </trans-unit>
+      <trans-unit id="20.title">
+        <source>Do not show this warning again</source>
+        <note>Class = "NSButtonCell"; title = "Do not show this warning again"; ObjectID = "20";</note>
+        <target xml:lang="uk" state="translated">Більше не показувати це попередження</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/ExportAccessoryViewController.xib" datatype="plaintext" source-language="en" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="6rj-zb-zOa.title">
+        <source>Export all subscriptions</source>
+        <note>Class = "NSButtonCell"; title = "Export all subscriptions"; ObjectID = "6rj-zb-zOa";</note>
+        <target xml:lang="uk" state="translated">Експортувати всі підписки</target>
+      </trans-unit>
+      <trans-unit id="IYg-Pm-bcI.title">
+        <source>Preserve group folders in exported file</source>
+        <note>Class = "NSButtonCell"; title = "Preserve group folders in exported file"; ObjectID = "IYg-Pm-bcI";</note>
+        <target xml:lang="uk" state="translated">Зберігати папки у експортованих файлах</target>
+      </trans-unit>
+      <trans-unit id="KgE-bb-aJn.title">
+        <source>Export selected subscriptions</source>
+        <note>Class = "NSButtonCell"; title = "Export selected subscriptions"; ObjectID = "KgE-bb-aJn";</note>
+        <target xml:lang="uk" state="translated">Експортувати виділені підписки</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/FeedCredentials.xib" datatype="plaintext" source-language="en" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="32.title">
+        <source>Cancel</source>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "32";</note>
+        <target xml:lang="uk" state="translated">Скасувати</target>
+      </trans-unit>
+      <trans-unit id="33.title">
+        <source>Name:</source>
+        <note>Class = "NSTextFieldCell"; title = "Name:"; ObjectID = "33";</note>
+        <target xml:lang="uk" state="translated">Ім'я:</target>
+      </trans-unit>
+      <trans-unit id="34.title">
+        <source>Access to %@ requires you to provide log in credentials</source>
+        <note>Class = "NSTextFieldCell"; title = "Access to %@ requires you to provide log in credentials"; ObjectID = "34";</note>
+        <target xml:lang="uk" state="translated">Правила доступу до %@ вимагають введення імені користувача та паролю</target>
+      </trans-unit>
+      <trans-unit id="37.title">
+        <source>Password:</source>
+        <note>Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "37";</note>
+        <target xml:lang="uk" state="translated">Пароль:</target>
+      </trans-unit>
+      <trans-unit id="38.title">
+        <source>Log In</source>
+        <note>Class = "NSButtonCell"; title = "Log In"; ObjectID = "38";</note>
+        <target xml:lang="uk" state="translated">Увійти</target>
+      </trans-unit>
+      <trans-unit id="39.title">
+        <source>The user name and password you provide will be remembered for the next time you refresh this subscription.</source>
+        <note>Class = "NSTextFieldCell"; title = "The user name and password you provide will be remembered for the next time you refresh this subscription."; ObjectID = "39";</note>
+        <target xml:lang="uk" state="translated">Ім'я користувача та пароль будуть збережені, отож вам не доведеться вводити їх знову.</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/GeneralPreferencesView.xib" datatype="plaintext" source-language="en" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="1Ll-uG-QWh.title">
+        <source>Every 15 minutes</source>
+        <note>Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "1Ll-uG-QWh";</note>
+        <target xml:lang="uk" state="translated">Кожні 15 хвилин</target>
+      </trans-unit>
+      <trans-unit id="2oy-1i-QQP.title">
+        <source>After "Next Unread" command</source>
+        <note>Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "2oy-1i-QQP";</note>
+        <target xml:lang="uk" state="translated">Післи команди "Наступне непрочитане"</target>
+      </trans-unit>
+      <trans-unit id="5VQ-jP-2rL.title">
+        <source>Every 30 minutes</source>
+        <note>Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "5VQ-jP-2rL";</note>
+        <target xml:lang="uk" state="translated">Кожні 30 хвилин</target>
+      </trans-unit>
+      <trans-unit id="6wU-yO-cnV.title">
+        <source>Every 2 hours</source>
+        <note>Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "6wU-yO-cnV";</note>
+        <target xml:lang="uk" state="translated">Кожні 2 години</target>
+      </trans-unit>
+      <trans-unit id="7e3-Hu-RB5.title">
+        <source>Show the unread count on the application icon</source>
+        <note>Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "7e3-Hu-RB5";</note>
+        <target xml:lang="uk" state="translated">Показувати кількість непрочитаних статей на іконці програми</target>
+      </trans-unit>
+      <trans-unit id="BbI-0A-zEG.title">
+        <source>When new unread articles are retrieved:</source>
+        <note>Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "BbI-0A-zEG";</note>
+        <target xml:lang="uk" state="translated">Коли отримані нові статті:</target>
+      </trans-unit>
+      <trans-unit id="FiK-E7-RnG.title">
+        <source>Other…</source>
+        <note>Class = "NSMenuItem"; title = "Other…"; ObjectID = "FiK-E7-RnG";</note>
+        <target xml:lang="uk" state="translated">Інше…</target>
+      </trans-unit>
+      <trans-unit id="GnT-xT-rAZ.title">
+        <source>Check for newer versions of Vienna on start up</source>
+        <note>Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "GnT-xT-rAZ";</note>
+        <target xml:lang="uk" state="translated">Перевіряти наявність нових версій Vienna при запуску</target>
+      </trans-unit>
+      <trans-unit id="H9Q-du-oax.title">
+        <source>Manually</source>
+        <note>Class = "NSMenuItem"; title = "Manually"; ObjectID = "H9Q-du-oax";</note>
+        <target xml:lang="uk" state="translated">Вручну</target>
+      </trans-unit>
+      <trans-unit id="IMa-1h-lIO.title">
+        <source>Every 6 hours</source>
+        <note>Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "IMa-1h-lIO";</note>
+        <target xml:lang="uk" state="translated">Кожні 6 годин</target>
+      </trans-unit>
+      <trans-unit id="JDV-ek-xja.title">
+        <source>After a short delay</source>
+        <note>Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "JDV-ek-xja";</note>
+        <target xml:lang="uk" state="translated">Після невеликої паузи</target>
+      </trans-unit>
+      <trans-unit id="JN6-lj-bQ1.title">
+        <source>Show in menu bar</source>
+        <note>Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1";</note>
+        <target xml:lang="uk" state="translated">Показувати у меню</target>
+      </trans-unit>
+      <trans-unit id="YoM-Gv-hXn.title">
+        <source>Open links in external browser</source>
+        <note>Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "YoM-Gv-hXn";</note>
+        <target xml:lang="uk" state="translated">Відкривати посилання у зовнішньому браузері</target>
+      </trans-unit>
+      <trans-unit id="ewU-JH-fMC.title">
+        <source>Check for new articles:</source>
+        <note>Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "ewU-JH-fMC";</note>
+        <target xml:lang="uk" state="translated">Перевіряти наявність нових статей:</target>
+      </trans-unit>
+      <trans-unit id="geD-Ws-mQm.title">
+        <source>Save downloaded files to:</source>
+        <note>Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "geD-Ws-mQm";</note>
+        <target xml:lang="uk" state="translated">Зберігати завантажені файли до:</target>
+      </trans-unit>
+      <trans-unit id="gi4-ao-0yS.title">
+        <source>Bounce the application icon</source>
+        <note>Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "gi4-ao-0yS";</note>
+        <target xml:lang="uk" state="translated">Заставити іконку програми стрибати</target>
+      </trans-unit>
+      <trans-unit id="gnX-dW-XUD.title">
+        <source>Every 3 hours</source>
+        <note>Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "gnX-dW-XUD";</note>
+        <target xml:lang="uk" state="translated">Кожні 3 години</target>
+      </trans-unit>
+      <trans-unit id="k6Y-ib-PGb.title">
+        <source>Move articles to Trash:</source>
+        <note>Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "k6Y-ib-PGb";</note>
+        <target xml:lang="uk" state="translated">Перемістити статті до Смітника:</target>
+      </trans-unit>
+      <trans-unit id="kGA-Sa-RLG.title">
+        <source>Default RSS Reader:</source>
+        <note>Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG";</note>
+        <target xml:lang="uk" state="translated">RSS-переглядач за замовчуванням:</target>
+      </trans-unit>
+      <trans-unit id="meo-78-YOl.title">
+        <source>Mark updated articles as new</source>
+        <note>Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl";</note>
+        <target xml:lang="uk" state="translated">Помічати оновлені статті як нові</target>
+      </trans-unit>
+      <trans-unit id="oVW-ee-uJT.title">
+        <source>Every 5 minutes</source>
+        <note>Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "oVW-ee-uJT";</note>
+        <target xml:lang="uk" state="translated">Кожні 5 хвилин</target>
+      </trans-unit>
+      <trans-unit id="pXX-MI-tJX.title">
+        <source>Check for new articles on start up</source>
+        <note>Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "pXX-MI-tJX";</note>
+        <target xml:lang="uk" state="translated">Перевіряти наявність нових статей при запуску</target>
+      </trans-unit>
+      <trans-unit id="pjg-Ze-H3l.title">
+        <source>Open new links in the background</source>
+        <note>Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "pjg-Ze-H3l";</note>
+        <target xml:lang="uk" state="translated">Відкривати посилання на задньому плані</target>
+      </trans-unit>
+      <trans-unit id="qeb-at-hYb.title">
+        <source>Updates:</source>
+        <note>Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb";</note>
+        <target xml:lang="uk" state="translated">Оновлення:</target>
+      </trans-unit>
+      <trans-unit id="sCl-hz-PFF.title">
+        <source>Mark current article read:</source>
+        <note>Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "sCl-hz-PFF";</note>
+        <target xml:lang="uk" state="translated">Помітити поточну статтю як прочитану:</target>
+      </trans-unit>
+      <trans-unit id="sSj-zI-6RY.title">
+        <source>Every hour</source>
+        <note>Class = "NSMenuItem"; title = "Every hour"; ObjectID = "sSj-zI-6RY";</note>
+        <target xml:lang="uk" state="translated">Кожної години</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/GroupFolder.xib" datatype="plaintext" source-language="en" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="32.title">
+        <source>New Group Folder</source>
+        <note>Class = "NSTextFieldCell"; title = "New Group Folder"; ObjectID = "32";</note>
+        <target xml:lang="uk" state="translated">Нова папка</target>
+      </trans-unit>
+      <trans-unit id="34.title">
+        <source>Save</source>
+        <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "34";</note>
+        <target xml:lang="uk" state="translated">Зберегти</target>
+      </trans-unit>
+      <trans-unit id="35.title">
+        <source>Cancel</source>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "35";</note>
+        <target xml:lang="uk" state="translated">Скасувати</target>
+      </trans-unit>
+      <trans-unit id="36.title">
+        <source>Enter the group folder name:</source>
+        <note>Class = "NSTextFieldCell"; title = "Enter the group folder name:"; ObjectID = "36";</note>
+        <target xml:lang="uk" state="translated">Введіть ім'я папки:</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/InfoWindow.xib" datatype="plaintext" source-language="en" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="105.title">
+        <source>Last Refreshed:</source>
+        <note>Class = "NSTextFieldCell"; title = "Last Refreshed:"; ObjectID = "105";</note>
+        <target xml:lang="uk" state="translated">Останнє оновлення:</target>
+      </trans-unit>
+      <trans-unit id="109.title">
+        <source>Validate</source>
+        <note>Class = "NSButtonCell"; title = "Validate"; ObjectID = "109";</note>
+        <target xml:lang="uk" state="translated">Валідувати</target>
+      </trans-unit>
+      <trans-unit id="111.title">
+        <source>User name:</source>
+        <note>Class = "NSTextFieldCell"; title = "User name:"; ObjectID = "111";</note>
+        <target xml:lang="uk" state="translated">Ім'я користувача:</target>
+      </trans-unit>
+      <trans-unit id="112.title">
+        <source>Password:</source>
+        <note>Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "112";</note>
+        <target xml:lang="uk" state="translated">Пароль:</target>
+      </trans-unit>
+      <trans-unit id="115.title">
+        <source>Update Authentication</source>
+        <note>Class = "NSButtonCell"; title = "Update Authentication"; ObjectID = "115";</note>
+        <target xml:lang="uk" state="translated">Оновити</target>
+      </trans-unit>
+      <trans-unit id="117.title">
+        <source>Size:</source>
+        <note>Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "117";</note>
+        <target xml:lang="uk" state="translated">Розмір:</target>
+      </trans-unit>
+      <trans-unit id="118.title">
+        <source>Unread:</source>
+        <note>Class = "NSTextFieldCell"; title = "Unread:"; ObjectID = "118";</note>
+        <target xml:lang="uk" state="translated">Непрочитані:</target>
+      </trans-unit>
+      <trans-unit id="121.title">
+        <source>Subscribed</source>
+        <note>Class = "NSButtonCell"; title = "Subscribed"; ObjectID = "121";</note>
+        <target xml:lang="uk" state="translated">Підписаний</target>
+      </trans-unit>
+      <trans-unit id="E84-Uo-ybg.title">
+        <source>Description</source>
+        <note>Class = "NSTextFieldCell"; title = "Description"; ObjectID = "E84-Uo-ybg";</note>
+        <target xml:lang="uk" state="translated">Опис</target>
+      </trans-unit>
+      <trans-unit id="U0N-RF-bUt.title">
+        <source>Authentication</source>
+        <note>Class = "NSTextFieldCell"; title = "Authentication"; ObjectID = "U0N-RF-bUt";</note>
+        <target xml:lang="uk" state="translated">Аутентифікація</target>
+      </trans-unit>
+      <trans-unit id="i9j-KH-c3D.title">
+        <source>General</source>
+        <note>Class = "NSTextFieldCell"; title = "General"; ObjectID = "i9j-KH-c3D";</note>
+        <target xml:lang="uk" state="translated">Загальне</target>
+      </trans-unit>
+      <trans-unit id="xPF-M9-oZG.title">
+        <source>Feed URL</source>
+        <note>Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG";</note>
+        <target xml:lang="uk" state="translated">Адреса стрічки</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/MainMenu.xib" datatype="plaintext" source-language="en" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="2S3-dG-ZPg.title">
+        <source>More Styles…</source>
+        <note>Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg";</note>
+        <target xml:lang="uk" state="translated">Більше стилів…</target>
+      </trans-unit>
+      <trans-unit id="4ih-vj-fsk.title">
+        <source>Check Grammar With Spelling</source>
+        <note>Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "4ih-vj-fsk";</note>
+        <target xml:lang="uk" state="translated">Перевіряти правопис з граматикою</target>
+      </trans-unit>
+      <trans-unit id="5.title">
+        <source>Bring All to Front</source>
+        <note>Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5";</note>
+        <target xml:lang="uk" state="translated">Витягнути все на передній план</target>
+      </trans-unit>
+      <trans-unit id="6yn-y8-lF1.title">
+        <source>Refresh All Subscriptions</source>
+        <note>Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1";</note>
+        <target xml:lang="uk" state="translated">Оновити всі підписки</target>
+      </trans-unit>
+      <trans-unit id="8Z3-Bg-ry2.title">
+        <source>Flagged</source>
+        <note>Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8Z3-Bg-ry2";</note>
+        <target xml:lang="uk" state="translated">З прапорцем</target>
+      </trans-unit>
+      <trans-unit id="19.title">
+        <source>Window</source>
+        <note>Class = "NSMenuItem"; title = "Window"; ObjectID = "19";</note>
+        <target xml:lang="uk" state="translated">Вікно</target>
+      </trans-unit>
+      <trans-unit id="23.title">
+        <source>Minimize</source>
+        <note>Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23";</note>
+        <target xml:lang="uk" state="translated">Згорнути</target>
+      </trans-unit>
+      <trans-unit id="24.title">
+        <source>Window</source>
+        <note>Class = "NSMenu"; title = "Window"; ObjectID = "24";</note>
+        <target xml:lang="uk" state="translated">Вікно</target>
+      </trans-unit>
+      <trans-unit id="27s-E3-FHd.title">
+        <source>Correct Spelling Automatically</source>
+        <note>Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "27s-E3-FHd";</note>
+        <target xml:lang="uk" state="translated">Виправляти правопис автоматично</target>
+      </trans-unit>
+      <trans-unit id="58.title">
+        <source>About Vienna</source>
+        <note>Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58";</note>
+        <target xml:lang="uk" state="translated">Про Vienna</target>
+      </trans-unit>
+      <trans-unit id="77.title">
+        <source>Page Setup…</source>
+        <note>Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "77";</note>
+        <target xml:lang="uk" state="translated">Параметри сторінки…</target>
+      </trans-unit>
+      <trans-unit id="78.title">
+        <source>Print…</source>
+        <note>Class = "NSMenuItem"; title = "Print…"; ObjectID = "78";</note>
+        <target xml:lang="uk" state="translated">Друкувати…</target>
+      </trans-unit>
+      <trans-unit id="81.title">
+        <source>File</source>
+        <note>Class = "NSMenu"; title = "File"; ObjectID = "81";</note>
+        <target xml:lang="uk" state="translated">Файл</target>
+      </trans-unit>
+      <trans-unit id="83.title">
+        <source>File</source>
+        <note>Class = "NSMenuItem"; title = "File"; ObjectID = "83";</note>
+        <target xml:lang="uk" state="translated">Файл</target>
+      </trans-unit>
+      <trans-unit id="103.title">
+        <source>Help</source>
+        <note>Class = "NSMenuItem"; title = "Help"; ObjectID = "103";</note>
+        <target xml:lang="uk" state="translated">Допомога</target>
+      </trans-unit>
+      <trans-unit id="106.title">
+        <source>Help</source>
+        <note>Class = "NSMenu"; title = "Help"; ObjectID = "106";</note>
+        <target xml:lang="uk" state="translated">Допомога</target>
+      </trans-unit>
+      <trans-unit id="111.title">
+        <source>Vienna Help</source>
+        <note>Class = "NSMenuItem"; title = "Vienna Help"; ObjectID = "111";</note>
+        <target xml:lang="uk" state="translated">Допомога Vienna</target>
+      </trans-unit>
+      <trans-unit id="129.title">
+        <source>Preferences…</source>
+        <note>Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129";</note>
+        <target xml:lang="uk" state="translated">Параметри…</target>
+      </trans-unit>
+      <trans-unit id="130.title">
+        <source>Services</source>
+        <note>Class = "NSMenu"; title = "Services"; ObjectID = "130";</note>
+        <target xml:lang="uk" state="translated">Сервіси</target>
+      </trans-unit>
+      <trans-unit id="131.title">
+        <source>Services</source>
+        <note>Class = "NSMenuItem"; title = "Services"; ObjectID = "131";</note>
+        <target xml:lang="uk" state="translated">Сервіси</target>
+      </trans-unit>
+      <trans-unit id="134.title">
+        <source>Hide Vienna</source>
+        <note>Class = "NSMenuItem"; title = "Hide Vienna"; ObjectID = "134";</note>
+        <target xml:lang="uk" state="translated">Заховати Vienna</target>
+      </trans-unit>
+      <trans-unit id="136.title">
+        <source>Quit Vienna</source>
+        <note>Class = "NSMenuItem"; title = "Quit Vienna"; ObjectID = "136";</note>
+        <target xml:lang="uk" state="translated">Завершити Vienna</target>
+      </trans-unit>
+      <trans-unit id="145.title">
+        <source>Hide Others</source>
+        <note>Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145";</note>
+        <target xml:lang="uk" state="translated">Заховати інші програми</target>
+      </trans-unit>
+      <trans-unit id="150.title">
+        <source>Show All</source>
+        <note>Class = "NSMenuItem"; title = "Show All"; ObjectID = "150";</note>
+        <target xml:lang="uk" state="translated">Показати всі програми</target>
+      </trans-unit>
+      <trans-unit id="154.title">
+        <source>Find…</source>
+        <note>Class = "NSMenuItem"; title = "Find…"; ObjectID = "154";</note>
+        <target xml:lang="uk" state="translated">Шукати…</target>
+      </trans-unit>
+      <trans-unit id="155.title">
+        <source>Jump to Selection</source>
+        <note>Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "155";</note>
+        <target xml:lang="uk" state="translated">Перейти до виділеного</target>
+      </trans-unit>
+      <trans-unit id="157.title">
+        <source>Copy</source>
+        <note>Class = "NSMenuItem"; title = "Copy"; ObjectID = "157";</note>
+        <target xml:lang="uk" state="translated">Копіювати</target>
+      </trans-unit>
+      <trans-unit id="158.title">
+        <source>Undo</source>
+        <note>Class = "NSMenuItem"; title = "Undo"; ObjectID = "158";</note>
+        <target xml:lang="uk" state="translated">Відмінити</target>
+      </trans-unit>
+      <trans-unit id="159.title">
+        <source>Find</source>
+        <note>Class = "NSMenu"; title = "Find"; ObjectID = "159";</note>
+        <target xml:lang="uk" state="translated">Шукати</target>
+      </trans-unit>
+      <trans-unit id="160.title">
+        <source>Cut</source>
+        <note>Class = "NSMenuItem"; title = "Cut"; ObjectID = "160";</note>
+        <target xml:lang="uk" state="translated">Вирізати</target>
+      </trans-unit>
+      <trans-unit id="161.title">
+        <source>Use Selection for Find</source>
+        <note>Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "161";</note>
+        <target xml:lang="uk" state="translated">Використати виділення для пошуку</target>
+      </trans-unit>
+      <trans-unit id="162.title">
+        <source>Find Previous</source>
+        <note>Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "162";</note>
+        <target xml:lang="uk" state="translated">Шукати попереднє</target>
+      </trans-unit>
+      <trans-unit id="163.title">
+        <source>Edit</source>
+        <note>Class = "NSMenuItem"; title = "Edit"; ObjectID = "163";</note>
+        <target xml:lang="uk" state="translated">Редагування</target>
+      </trans-unit>
+      <trans-unit id="164.title">
+        <source>Delete</source>
+        <note>Class = "NSMenuItem"; title = "Delete"; ObjectID = "164";</note>
+        <target xml:lang="uk" state="translated">Видалити</target>
+      </trans-unit>
+      <trans-unit id="167.title">
+        <source>Find Next</source>
+        <note>Class = "NSMenuItem"; title = "Find Next"; ObjectID = "167";</note>
+        <target xml:lang="uk" state="translated">Шукати наступне</target>
+      </trans-unit>
+      <trans-unit id="168.title">
+        <source>Find</source>
+        <note>Class = "NSMenuItem"; title = "Find"; ObjectID = "168";</note>
+        <target xml:lang="uk" state="translated">Шукати</target>
+      </trans-unit>
+      <trans-unit id="169.title">
+        <source>Edit</source>
+        <note>Class = "NSMenu"; title = "Edit"; ObjectID = "169";</note>
+        <target xml:lang="uk" state="translated">Редагування</target>
+      </trans-unit>
+      <trans-unit id="171.title">
+        <source>Paste</source>
+        <note>Class = "NSMenuItem"; title = "Paste"; ObjectID = "171";</note>
+        <target xml:lang="uk" state="translated">Вставити</target>
+      </trans-unit>
+      <trans-unit id="172.title">
+        <source>Select All</source>
+        <note>Class = "NSMenuItem"; title = "Select All"; ObjectID = "172";</note>
+        <target xml:lang="uk" state="translated">Виділити все</target>
+      </trans-unit>
+      <trans-unit id="173.title">
+        <source>Redo</source>
+        <note>Class = "NSMenuItem"; title = "Redo"; ObjectID = "173";</note>
+        <target xml:lang="uk" state="translated">Застосувати</target>
+      </trans-unit>
+      <trans-unit id="197.title">
+        <source>Zoom</source>
+        <note>Class = "NSMenuItem"; title = "Zoom"; ObjectID = "197";</note>
+        <target xml:lang="uk" state="translated">Розгорнути</target>
+      </trans-unit>
+      <trans-unit id="235.title">
+        <source>View</source>
+        <note>Class = "NSMenuItem"; title = "View"; ObjectID = "235";</note>
+        <target xml:lang="uk" state="translated">Вигляд</target>
+      </trans-unit>
+      <trans-unit id="237.title">
+        <source>View</source>
+        <note>Class = "NSMenu"; title = "View"; ObjectID = "237";</note>
+        <target xml:lang="uk" state="translated">Вигляд</target>
+      </trans-unit>
+      <trans-unit id="300.title">
+        <source>Article</source>
+        <note>Class = "NSMenu"; title = "Article"; ObjectID = "300";</note>
+        <target xml:lang="uk" state="translated">Стаття</target>
+      </trans-unit>
+      <trans-unit id="301.title">
+        <source>Article</source>
+        <note>Class = "NSMenuItem"; title = "Article"; ObjectID = "301";</note>
+        <target xml:lang="uk" state="translated">Стаття</target>
+      </trans-unit>
+      <trans-unit id="344.title">
+        <source>Next Unread</source>
+        <note>Class = "NSMenuItem"; title = "Next Unread"; ObjectID = "344";</note>
+        <target xml:lang="uk" state="translated">Наступна непрочитана</target>
+      </trans-unit>
+      <trans-unit id="387.title">
+        <source>Sort By</source>
+        <note>Class = "NSMenuItem"; title = "Sort By"; ObjectID = "387";</note>
+        <target xml:lang="uk" state="translated">Сортувати за</target>
+      </trans-unit>
+      <trans-unit id="388.title">
+        <source>Sort By</source>
+        <note>Class = "NSMenu"; title = "Sort By"; ObjectID = "388";</note>
+        <target xml:lang="uk" state="translated">Сортувати за</target>
+      </trans-unit>
+      <trans-unit id="402.title">
+        <source>Activity Window</source>
+        <note>Class = "NSMenuItem"; title = "Activity Window"; ObjectID = "402";</note>
+        <target xml:lang="uk" state="translated">Вікно активності</target>
+      </trans-unit>
+      <trans-unit id="406.title">
+        <source>Refresh All Subscriptions</source>
+        <note>Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "406";</note>
+        <target xml:lang="uk" state="translated">Оновити всі підписки</target>
+      </trans-unit>
+      <trans-unit id="422.title">
+        <source>Back</source>
+        <note>Class = "NSMenuItem"; title = "Back"; ObjectID = "422";</note>
+        <target xml:lang="uk" state="translated">Назад</target>
+      </trans-unit>
+      <trans-unit id="423.title">
+        <source>Forward</source>
+        <note>Class = "NSMenuItem"; title = "Forward"; ObjectID = "423";</note>
+        <target xml:lang="uk" state="translated">Вперед</target>
+      </trans-unit>
+      <trans-unit id="442.title">
+        <source>Columns</source>
+        <note>Class = "NSMenuItem"; title = "Columns"; ObjectID = "442";</note>
+        <target xml:lang="uk" state="translated">Стовпці</target>
+      </trans-unit>
+      <trans-unit id="443.title">
+        <source>Columns</source>
+        <note>Class = "NSMenu"; title = "Columns"; ObjectID = "443";</note>
+        <target xml:lang="uk" state="translated">Стовпці</target>
+      </trans-unit>
+      <trans-unit id="574.title">
+        <source>New Smart Folder…</source>
+        <note>Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "574";</note>
+        <target xml:lang="uk" state="translated">Нова вибірка…</target>
+      </trans-unit>
+      <trans-unit id="604.title">
+        <source>Refresh Selected Subscriptions</source>
+        <note>Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "604";</note>
+        <target xml:lang="uk" state="translated">Оновити виділені підписки</target>
+      </trans-unit>
+      <trans-unit id="690.title">
+        <source>New Subscription…</source>
+        <note>Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "690";</note>
+        <target xml:lang="uk" state="translated">Нова підписка…</target>
+      </trans-unit>
+      <trans-unit id="780.title">
+        <source>Import Subscriptions…</source>
+        <note>Class = "NSMenuItem"; title = "Import Subscriptions…"; ObjectID = "780";</note>
+        <target xml:lang="uk" state="translated">Імпортувати підписки…</target>
+      </trans-unit>
+      <trans-unit id="781.title">
+        <source>Export Subscriptions…</source>
+        <note>Class = "NSMenuItem"; title = "Export Subscriptions…"; ObjectID = "781";</note>
+        <target xml:lang="uk" state="translated">Експортувати підписки…</target>
+      </trans-unit>
+      <trans-unit id="789.title">
+        <source>Mark Unread</source>
+        <note>Class = "NSMenuItem"; title = "Mark Unread"; ObjectID = "789";</note>
+        <target xml:lang="uk" state="translated">Помітити як непрочитане</target>
+      </trans-unit>
+      <trans-unit id="790.title">
+        <source>Mark Flagged</source>
+        <note>Class = "NSMenuItem"; title = "Mark Flagged"; ObjectID = "790";</note>
+        <target xml:lang="uk" state="translated">Помітити прапорцем</target>
+      </trans-unit>
+      <trans-unit id="806.title">
+        <source>New Group Folder…</source>
+        <note>Class = "NSMenuItem"; title = "New Group Folder…"; ObjectID = "806";</note>
+        <target xml:lang="uk" state="translated">Нова папка…</target>
+      </trans-unit>
+      <trans-unit id="826.title">
+        <source>Style</source>
+        <note>Class = "NSMenuItem"; title = "Style"; ObjectID = "826";</note>
+        <target xml:lang="uk" state="translated">Стиль</target>
+      </trans-unit>
+      <trans-unit id="827.title">
+        <source>Style</source>
+        <note>Class = "NSMenu"; title = "Style"; ObjectID = "827";</note>
+        <target xml:lang="uk" state="translated">Стиль</target>
+      </trans-unit>
+      <trans-unit id="858.title">
+        <source>Stop Refreshing</source>
+        <note>Class = "NSMenuItem"; title = "Stop Refreshing"; ObjectID = "858";</note>
+        <target xml:lang="uk" state="translated">Зупинити оновлення</target>
+      </trans-unit>
+      <trans-unit id="929.title">
+        <source>Vienna Web Site</source>
+        <note>Class = "NSMenuItem"; title = "Vienna Web Site"; ObjectID = "929";</note>
+        <target xml:lang="uk" state="translated">Веб-сайт Vienna</target>
+      </trans-unit>
+      <trans-unit id="935.title">
+        <source>Close Window</source>
+        <note>Class = "NSMenuItem"; title = "Close Window"; ObjectID = "935";</note>
+        <target xml:lang="uk" state="translated">Закрити вікно</target>
+      </trans-unit>
+      <trans-unit id="940.title">
+        <source>Main Window</source>
+        <note>Class = "NSMenuItem"; title = "Main Window"; ObjectID = "940";</note>
+        <target xml:lang="uk" state="translated">Головне вікно</target>
+      </trans-unit>
+      <trans-unit id="961.title">
+        <source>Empty Trash</source>
+        <note>Class = "NSMenuItem"; title = "Empty Trash"; ObjectID = "961";</note>
+        <target xml:lang="uk" state="translated">Спорожнити смітник</target>
+      </trans-unit>
+      <trans-unit id="1008.title">
+        <source>Previous Tab</source>
+        <note>Class = "NSMenuItem"; title = "Previous Tab"; ObjectID = "1008";</note>
+        <target xml:lang="uk" state="translated">Попередня закладка</target>
+      </trans-unit>
+      <trans-unit id="1009.title">
+        <source>Next Tab</source>
+        <note>Class = "NSMenuItem"; title = "Next Tab"; ObjectID = "1009";</note>
+        <target xml:lang="uk" state="translated">Наступна вкладка</target>
+      </trans-unit>
+      <trans-unit id="1023.title">
+        <source>Close Tab</source>
+        <note>Class = "NSMenuItem"; title = "Close Tab"; ObjectID = "1023";</note>
+        <target xml:lang="uk" state="translated">Закрити вкладку</target>
+      </trans-unit>
+      <trans-unit id="1025.title">
+        <source>Reload Page</source>
+        <note>Class = "NSMenuItem"; title = "Reload Page"; ObjectID = "1025";</note>
+        <target xml:lang="uk" state="translated">Перезавантажити сторінку</target>
+      </trans-unit>
+      <trans-unit id="1027.title">
+        <source>Stop Reloading Page</source>
+        <note>Class = "NSMenuItem"; title = "Stop Reloading Page"; ObjectID = "1027";</note>
+        <target xml:lang="uk" state="translated">Зупинити перезавантаження сторінки</target>
+      </trans-unit>
+      <trans-unit id="1036.title">
+        <source>Close All Tabs</source>
+        <note>Class = "NSMenuItem"; title = "Close All Tabs"; ObjectID = "1036";</note>
+        <target xml:lang="uk" state="translated">Закрити всі вкладки</target>
+      </trans-unit>
+      <trans-unit id="1040.title">
+        <source>Open Article Page</source>
+        <note>Class = "NSMenuItem"; title = "Open Article Page"; ObjectID = "1040";</note>
+        <target xml:lang="uk" state="translated">Відкрити сторінку статті</target>
+      </trans-unit>
+      <trans-unit id="1044.title">
+        <source>Restore Article</source>
+        <note>Class = "NSMenuItem"; title = "Restore Article"; ObjectID = "1044";</note>
+        <target xml:lang="uk" state="translated">Відновити статтю</target>
+      </trans-unit>
+      <trans-unit id="1061.title">
+        <source>Downloads</source>
+        <note>Class = "NSMenuItem"; title = "Downloads"; ObjectID = "1061";</note>
+        <target xml:lang="uk" state="translated">Завантаження</target>
+      </trans-unit>
+      <trans-unit id="1067.title">
+        <source>Open Article Page in External Browser</source>
+        <note>Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067";</note>
+        <target xml:lang="uk" state="translated">Відкрити сторінку статті у зовнішньому браузері</target>
+      </trans-unit>
+      <trans-unit id="1073.title">
+        <source>Send Link by Email</source>
+        <note>Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073";</note>
+        <target xml:lang="uk" state="translated">Надіслати посилання на ел. пошту</target>
+      </trans-unit>
+      <trans-unit id="1084.title">
+        <source>Bigger Text</source>
+        <note>Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084";</note>
+        <target xml:lang="uk" state="translated">Більший текст</target>
+      </trans-unit>
+      <trans-unit id="1085.title">
+        <source>Smaller Text</source>
+        <note>Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085";</note>
+        <target xml:lang="uk" state="translated">Менший текст</target>
+      </trans-unit>
+      <trans-unit id="1101.title">
+        <source>Open Web Location…</source>
+        <note>Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101";</note>
+        <target xml:lang="uk" state="translated">Відкрити веб-сторінку…</target>
+      </trans-unit>
+      <trans-unit id="1104.title">
+        <source>Check for Updates</source>
+        <note>Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "1104";</note>
+        <target xml:lang="uk" state="translated">Перевірити наявність оновлень</target>
+      </trans-unit>
+      <trans-unit id="1106.title">
+        <source>Refresh Folder Images</source>
+        <note>Class = "NSMenuItem"; title = "Refresh Folder Images"; ObjectID = "1106";</note>
+        <target xml:lang="uk" state="translated">Оновити зображення папок</target>
+      </trans-unit>
+      <trans-unit id="1108.title">
+        <source>Layout</source>
+        <note>Class = "NSMenuItem"; title = "Layout"; ObjectID = "1108";</note>
+        <target xml:lang="uk" state="translated">Розташування</target>
+      </trans-unit>
+      <trans-unit id="1109.title">
+        <source>Layout</source>
+        <note>Class = "NSMenu"; title = "Layout"; ObjectID = "1109";</note>
+        <target xml:lang="uk" state="translated">Розташування</target>
+      </trans-unit>
+      <trans-unit id="1110.title">
+        <source>Horizontal</source>
+        <note>Class = "NSMenuItem"; title = "Horizontal"; ObjectID = "1110";</note>
+        <target xml:lang="uk" state="translated">Звіт</target>
+      </trans-unit>
+      <trans-unit id="1116.title">
+        <source>Vertical</source>
+        <note>Class = "NSMenuItem"; title = "Vertical"; ObjectID = "1116";</note>
+        <target xml:lang="uk" state="translated">Стиснутий</target>
+      </trans-unit>
+      <trans-unit id="1117.title">
+        <source>Filter By</source>
+        <note>Class = "NSMenuItem"; title = "Filter By"; ObjectID = "1117";</note>
+        <target xml:lang="uk" state="translated">Фільтр</target>
+      </trans-unit>
+      <trans-unit id="1118.title">
+        <source>Filter By</source>
+        <note>Class = "NSMenu"; title = "Filter By"; ObjectID = "1118";</note>
+        <target xml:lang="uk" state="translated">Фільтр</target>
+      </trans-unit>
+      <trans-unit id="1146.title">
+        <source>Keyboard Shortcuts</source>
+        <note>Class = "NSMenuItem"; title = "Keyboard Shortcuts"; ObjectID = "1146";</note>
+        <target xml:lang="uk" state="translated">Клавіатурні скорочення</target>
+      </trans-unit>
+      <trans-unit id="1160.title">
+        <source>Unified</source>
+        <note>Class = "NSMenuItem"; title = "Unified"; ObjectID = "1160";</note>
+        <target xml:lang="uk" state="translated">Уніфікований</target>
+      </trans-unit>
+      <trans-unit id="1177.title">
+        <source>Folder</source>
+        <note>Class = "NSMenuItem"; title = "Folder"; ObjectID = "1177";</note>
+        <target xml:lang="uk" state="translated">Папка</target>
+      </trans-unit>
+      <trans-unit id="1178.title">
+        <source>Folder</source>
+        <note>Class = "NSMenu"; title = "Folder"; ObjectID = "1178";</note>
+        <target xml:lang="uk" state="translated">Папка</target>
+      </trans-unit>
+      <trans-unit id="1180.title">
+        <source>Edit…</source>
+        <note>Class = "NSMenuItem"; title = "Edit…"; ObjectID = "1180";</note>
+        <target xml:lang="uk" state="translated">Редагувати…</target>
+      </trans-unit>
+      <trans-unit id="1181.title">
+        <source>Rename…</source>
+        <note>Class = "NSMenuItem"; title = "Rename…"; ObjectID = "1181";</note>
+        <target xml:lang="uk" state="translated">Переіменувати…</target>
+      </trans-unit>
+      <trans-unit id="1184.title">
+        <source>Delete…</source>
+        <note>Class = "NSMenuItem"; title = "Delete…"; ObjectID = "1184";</note>
+        <target xml:lang="uk" state="translated">Видалити…</target>
+      </trans-unit>
+      <trans-unit id="1186.title">
+        <source>Skip Folder</source>
+        <note>Class = "NSMenuItem"; title = "Skip Folder"; ObjectID = "1186";</note>
+        <target xml:lang="uk" state="translated">Пропустити папку</target>
+      </trans-unit>
+      <trans-unit id="1187.title">
+        <source>Mark All Articles as Read</source>
+        <note>Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "1187";</note>
+        <target xml:lang="uk" state="translated">Помітити всі статті як прочитані</target>
+      </trans-unit>
+      <trans-unit id="1191.title">
+        <source>Open Subscription Home Page</source>
+        <note>Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "1191";</note>
+        <target xml:lang="uk" state="translated">Відкрити сторінку підписки</target>
+      </trans-unit>
+      <trans-unit id="1192.title">
+        <source>Open Subscription Home Page in External Browser</source>
+        <note>Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "1192";</note>
+        <target xml:lang="uk" state="translated">Відкрити сторінку підписки у зовнішньому браузері</target>
+      </trans-unit>
+      <trans-unit id="1195.title">
+        <source>Mark All Subscriptions as Read</source>
+        <note>Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "1195";</note>
+        <target xml:lang="uk" state="translated">Помітити всі підписки як прочинаті</target>
+      </trans-unit>
+      <trans-unit id="1198.title">
+        <source>Delete Article</source>
+        <note>Class = "NSMenuItem"; title = "Delete Article"; ObjectID = "1198";</note>
+        <target xml:lang="uk" state="translated">Видалити статтю</target>
+      </trans-unit>
+      <trans-unit id="1214.title">
+        <source>Open New Tab</source>
+        <note>Class = "NSMenuItem"; title = "Open New Tab"; ObjectID = "1214";</note>
+        <target xml:lang="uk" state="translated">Відкрити нову вкладку</target>
+      </trans-unit>
+      <trans-unit id="1216.title">
+        <source>Download Enclosure</source>
+        <note>Class = "NSMenuItem"; title = "Download Enclosure"; ObjectID = "1216";</note>
+        <target xml:lang="uk" state="translated">Завантажити додаток</target>
+      </trans-unit>
+      <trans-unit id="1259.title">
+        <source>Hide Status Bar</source>
+        <note>Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259";</note>
+        <target xml:lang="uk" state="translated">Заховати стрічку статусу</target>
+      </trans-unit>
+      <trans-unit id="1325.title">
+        <source>Show Filter Bar</source>
+        <note>Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "1325";</note>
+        <target xml:lang="uk" state="translated">Показати стрічку фільтру</target>
+      </trans-unit>
+      <trans-unit id="1327.title">
+        <source>Search Articles</source>
+        <note>Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327";</note>
+        <target xml:lang="uk" state="translated">Шукати статті</target>
+      </trans-unit>
+      <trans-unit id="1336.title">
+        <source>Order By</source>
+        <note>Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336";</note>
+        <target xml:lang="uk" state="translated">Впорядкувати за</target>
+      </trans-unit>
+      <trans-unit id="1337.title">
+        <source>Order By</source>
+        <note>Class = "NSMenu"; title = "Order By"; ObjectID = "1337";</note>
+        <target xml:lang="uk" state="translated">Впорядкувати за</target>
+      </trans-unit>
+      <trans-unit id="1338.title">
+        <source>Manual</source>
+        <note>Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338";</note>
+        <target xml:lang="uk" state="translated">Вручну</target>
+      </trans-unit>
+      <trans-unit id="1339.title">
+        <source>Name</source>
+        <note>Class = "NSMenuItem"; title = "Name"; ObjectID = "1339";</note>
+        <target xml:lang="uk" state="translated">Назвою</target>
+      </trans-unit>
+      <trans-unit id="1408.title">
+        <source>Unsubscribe</source>
+        <note>Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408";</note>
+        <target xml:lang="uk" state="translated">Відписатися від стрічки новин</target>
+      </trans-unit>
+      <trans-unit id="1409.title">
+        <source>Get Info…</source>
+        <note>Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409";</note>
+        <target xml:lang="uk" state="translated">Інформація…</target>
+      </trans-unit>
+      <trans-unit id="CGp-H4-UaI.title">
+        <source>Last 48 Hours</source>
+        <note>Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI";</note>
+        <target xml:lang="uk" state="translated">Останні 48 годин</target>
+      </trans-unit>
+      <trans-unit id="ecl-HO-Kpi.title">
+        <source>Mark All Subscriptions as Read</source>
+        <note>Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi";</note>
+        <target xml:lang="uk" state="translated">Помітити всі підписки як прочинаті</target>
+      </trans-unit>
+      <trans-unit id="fad-Nj-OFI.title">
+        <source>Spelling</source>
+        <note>Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI";</note>
+        <target xml:lang="uk" state="translated">Правопис</target>
+      </trans-unit>
+      <trans-unit id="pKl-6f-Hlc.title">
+        <source>Mark Read</source>
+        <note>Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc";</note>
+        <target xml:lang="uk" state="translated">Помітити як прочитане</target>
+      </trans-unit>
+      <trans-unit id="rNG-xr-3x7.title">
+        <source>Unread Articles</source>
+        <note>Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7";</note>
+        <target xml:lang="uk" state="translated">Непрочитані статті</target>
+      </trans-unit>
+      <trans-unit id="t1E-6n-jtA.title">
+        <source>All Articles</source>
+        <note>Class = "NSMenuItem"; title = "All Articles"; ObjectID = "t1E-6n-jtA";</note>
+        <target xml:lang="uk" state="translated">Всі статті</target>
+      </trans-unit>
+      <trans-unit id="t34-de-pMs.title">
+        <source>Today</source>
+        <note>Class = "NSMenuItem"; title = "Today"; ObjectID = "t34-de-pMs";</note>
+        <target xml:lang="uk" state="translated">Сьогодні</target>
+      </trans-unit>
+      <trans-unit id="wqh-Jc-gBm.title">
+        <source>Last Refresh</source>
+        <note>Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm";</note>
+        <target xml:lang="uk" state="translated">Останнє оновлення</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/MainWindowController.xib" datatype="plaintext" source-language="en" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="3tM-J3-kmf.title">
+        <source>Today</source>
+        <note>Class = "NSMenuItem"; title = "Today"; ObjectID = "3tM-J3-kmf";</note>
+        <target xml:lang="uk" state="translated">Сьогодні</target>
+      </trans-unit>
+      <trans-unit id="4c1-NR-ofo.label">
+        <source>Empty Trash</source>
+        <note>Class = "NSToolbarItem"; label = "Empty Trash"; ObjectID = "4c1-NR-ofo";</note>
+        <target xml:lang="uk" state="translated">Спорожнити смітник</target>
+      </trans-unit>
+      <trans-unit id="4c1-NR-ofo.paletteLabel">
+        <source>Empty Trash</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Empty Trash"; ObjectID = "4c1-NR-ofo";</note>
+        <target xml:lang="uk" state="translated">Спорожнити смітник</target>
+      </trans-unit>
+      <trans-unit id="4c1-NR-ofo.toolTip">
+        <source>Delete all articles in the trash</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Delete all articles in the trash"; ObjectID = "4c1-NR-ofo";</note>
+        <target xml:lang="uk" state="translated">Видалити всі статті у смітнику</target>
+      </trans-unit>
+      <trans-unit id="7iy-IN-8oG.label">
+        <source>Get Info</source>
+        <note>Class = "NSToolbarItem"; label = "Get Info"; ObjectID = "7iy-IN-8oG";</note>
+        <target xml:lang="uk" state="translated">Інформація</target>
+      </trans-unit>
+      <trans-unit id="7iy-IN-8oG.paletteLabel">
+        <source>Get Info</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Get Info"; ObjectID = "7iy-IN-8oG";</note>
+        <target xml:lang="uk" state="translated">Інформація</target>
+      </trans-unit>
+      <trans-unit id="7iy-IN-8oG.toolTip">
+        <source>See information about the selected subscription</source>
+        <note>Class = "NSToolbarItem"; toolTip = "See information about the selected subscription"; ObjectID = "7iy-IN-8oG";</note>
+        <target xml:lang="uk" state="translated">Показати інформацію про виділені підписки</target>
+      </trans-unit>
+      <trans-unit id="8LJ-RZ-pfu.title">
+        <source>Flagged</source>
+        <note>Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8LJ-RZ-pfu";</note>
+        <target xml:lang="uk" state="translated">З прапорцем</target>
+      </trans-unit>
+      <trans-unit id="10h-xf-C6T.label">
+        <source>Send Link</source>
+        <note>Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T";</note>
+        <target xml:lang="uk" state="translated">Надіслати посилання</target>
+      </trans-unit>
+      <trans-unit id="10h-xf-C6T.paletteLabel">
+        <source>Send Link</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T";</note>
+        <target xml:lang="uk" state="translated">Надіслати посилання</target>
+      </trans-unit>
+      <trans-unit id="10h-xf-C6T.toolTip">
+        <source>Email a link to the current article or website</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T";</note>
+        <target xml:lang="uk" state="translated">Відправити посилання на поточну статтю електронною поштою</target>
+      </trans-unit>
+      <trans-unit id="1304.ibShadowedToolTip">
+        <source>Filter displayed articles by matching text</source>
+        <note>Class = "NSSearchField"; ibShadowedToolTip = "Filter displayed articles by matching text"; ObjectID = "1304";</note>
+        <target xml:lang="uk" state="translated">Фільтрувати статті за вмістом тексту</target>
+      </trans-unit>
+      <trans-unit id="1306.ibShadowedToolTip">
+        <source>Filter articles</source>
+        <note>Class = "NSPopUpButton"; ibShadowedToolTip = "Filter articles"; ObjectID = "1306";</note>
+        <target xml:lang="uk" state="translated">Фільтрувати статті</target>
+      </trans-unit>
+      <trans-unit id="1313.ibExternalAccessibilityDescription">
+        <source>Close the filter bar</source>
+        <note>Class = "NSButton"; ibExternalAccessibilityDescription = "Close the filter bar"; ObjectID = "1313";</note>
+        <target xml:lang="uk" state="translated">Сховати стрічку фільтру</target>
+      </trans-unit>
+      <trans-unit id="1313.ibShadowedToolTip">
+        <source>Close the filter bar</source>
+        <note>Class = "NSButton"; ibShadowedToolTip = "Close the filter bar"; ObjectID = "1313";</note>
+        <target xml:lang="uk" state="translated">Сховати стрічку фільтру</target>
+      </trans-unit>
+      <trans-unit id="1377.title">
+        <source>Filter by:</source>
+        <note>Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377";</note>
+        <target xml:lang="uk" state="translated">Фільтр:</target>
+      </trans-unit>
+      <trans-unit id="1404.title">
+        <source>Current Filter</source>
+        <note>Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404";</note>
+        <target xml:lang="uk" state="translated">Чинний фільтр</target>
+      </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.label">
+        <source>Add</source>
+        <note>Class = "NSToolbarItem"; label = "Add"; ObjectID = "CPA-Ha-aj1";</note>
+        <target xml:lang="uk" state="translated">Додати</target>
+      </trans-unit>
+      <trans-unit id="CPA-Ha-aj1.paletteLabel">
+        <source>Add</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Add"; ObjectID = "CPA-Ha-aj1";</note>
+        <target xml:lang="uk" state="translated">Додати</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.label">
+        <source>All Read</source>
+        <note>Class = "NSToolbarItem"; label = "All Read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="uk" state="translated">Усі прочитані</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.paletteLabel">
+        <source>Mark All Items as Read</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Mark All Items as Read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="uk" state="translated">Помітити всі як прочитані</target>
+      </trans-unit>
+      <trans-unit id="Gyz-dq-ewv.toolTip">
+        <source>Mark all items as read</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Mark all items as read"; ObjectID = "Gyz-dq-ewv";</note>
+        <target xml:lang="uk" state="translated">Помітити всі як прочитані</target>
+      </trans-unit>
+      <trans-unit id="Hs0-hu-A2g.title">
+        <source>Refresh Selected Subscriptions</source>
+        <note>Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g";</note>
+        <target xml:lang="uk" state="translated">Оновити виділені підписки</target>
+      </trans-unit>
+      <trans-unit id="JT2-Q7-gRj.title">
+        <source>All Articles</source>
+        <note>Class = "NSMenuItem"; title = "All Articles"; ObjectID = "JT2-Q7-gRj";</note>
+        <target xml:lang="uk" state="translated">Всі статті</target>
+      </trans-unit>
+      <trans-unit id="MaO-r1-tcm.title">
+        <source>More Styles…</source>
+        <note>Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm";</note>
+        <target xml:lang="uk" state="translated">Більше стилів…</target>
+      </trans-unit>
+      <trans-unit id="Nmd-zx-Dys.label">
+        <source>Refresh</source>
+        <note>Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys";</note>
+        <target xml:lang="uk" state="translated">Оновити</target>
+      </trans-unit>
+      <trans-unit id="Nmd-zx-Dys.paletteLabel">
+        <source>Refresh</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Refresh"; ObjectID = "Nmd-zx-Dys";</note>
+        <target xml:lang="uk" state="translated">Оновити</target>
+      </trans-unit>
+      <trans-unit id="Nmd-zx-Dys.toolTip">
+        <source>Refresh all your subscriptions</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Refresh all your subscriptions"; ObjectID = "Nmd-zx-Dys";</note>
+        <target xml:lang="uk" state="translated">Оновити всі підписки</target>
+      </trans-unit>
+      <trans-unit id="OIA-vb-5jR.label">
+        <source>Search Articles</source>
+        <note>Class = "NSToolbarItem"; label = "Search Articles"; ObjectID = "OIA-vb-5jR";</note>
+        <target xml:lang="uk" state="translated">Шукати статті</target>
+      </trans-unit>
+      <trans-unit id="OIA-vb-5jR.paletteLabel">
+        <source>Search Articles</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Search Articles"; ObjectID = "OIA-vb-5jR";</note>
+        <target xml:lang="uk" state="translated">Шукати статті</target>
+      </trans-unit>
+      <trans-unit id="OIA-vb-5jR.toolTip">
+        <source>Search Articles</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Search Articles"; ObjectID = "OIA-vb-5jR";</note>
+        <target xml:lang="uk" state="translated">Шукати статті</target>
+      </trans-unit>
+      <trans-unit id="Pqr-dM-SQQ.title">
+        <source>New Smart Folder…</source>
+        <note>Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "Pqr-dM-SQQ";</note>
+        <target xml:lang="uk" state="translated">Нова вибірка…</target>
+      </trans-unit>
+      <trans-unit id="RaH-Yu-Ija.title">
+        <source>New Folder…</source>
+        <note>Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija";</note>
+        <target xml:lang="uk" state="translated">Нова тека…</target>
+      </trans-unit>
+      <trans-unit id="Rdq-QU-3hM.title">
+        <source>Delete…</source>
+        <note>Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Rdq-QU-3hM";</note>
+        <target xml:lang="uk" state="translated">Видалити…</target>
+      </trans-unit>
+      <trans-unit id="SoG-b2-O1S.label">
+        <source>Skip Folder</source>
+        <note>Class = "NSToolbarItem"; label = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
+        <target xml:lang="uk" state="translated">Пропустити папку</target>
+      </trans-unit>
+      <trans-unit id="SoG-b2-O1S.paletteLabel">
+        <source>Skip Folder</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
+        <target xml:lang="uk" state="translated">Пропустити папку</target>
+      </trans-unit>
+      <trans-unit id="SoG-b2-O1S.toolTip">
+        <source>Skip Folder</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S";</note>
+        <target xml:lang="uk" state="translated">Пропустити папку</target>
+      </trans-unit>
+      <trans-unit id="TSQ-UW-4gU.label">
+        <source>Action</source>
+        <note>Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU";</note>
+        <target xml:lang="uk" state="translated">Дія</target>
+      </trans-unit>
+      <trans-unit id="TSQ-UW-4gU.paletteLabel">
+        <source>Action</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Action"; ObjectID = "TSQ-UW-4gU";</note>
+        <target xml:lang="uk" state="translated">Дія</target>
+      </trans-unit>
+      <trans-unit id="TSQ-UW-4gU.toolTip">
+        <source>Additional actions for the selected folder</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Additional actions for the selected folder"; ObjectID = "TSQ-UW-4gU";</note>
+        <target xml:lang="uk" state="translated">Додаткові дії для виділеної папки</target>
+      </trans-unit>
+      <trans-unit id="Xw6-KX-rhd.title">
+        <source>Last 48 Hours</source>
+        <note>Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "Xw6-KX-rhd";</note>
+        <target xml:lang="uk" state="translated">Останні 48 годин</target>
+      </trans-unit>
+      <trans-unit id="Y0d-K7-46f.title">
+        <source>Get Info</source>
+        <note>Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f";</note>
+        <target xml:lang="uk" state="translated">Інформація</target>
+      </trans-unit>
+      <trans-unit id="ZVp-Nv-0jh.title">
+        <source>Open Subscription Home Page in External Browser</source>
+        <note>Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "ZVp-Nv-0jh";</note>
+        <target xml:lang="uk" state="translated">Відкрити сторінку підписки у зовнішньому браузері</target>
+      </trans-unit>
+      <trans-unit id="Zu1-zW-uo2.title">
+        <source>Open Subscription Home Page</source>
+        <note>Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2";</note>
+        <target xml:lang="uk" state="translated">Відкрити сторінку підписки</target>
+      </trans-unit>
+      <trans-unit id="azL-oz-mJL.label">
+        <source>Style</source>
+        <note>Class = "NSToolbarItem"; label = "Style"; ObjectID = "azL-oz-mJL";</note>
+        <target xml:lang="uk" state="translated">Стиль</target>
+      </trans-unit>
+      <trans-unit id="azL-oz-mJL.paletteLabel">
+        <source>Style</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Style"; ObjectID = "azL-oz-mJL";</note>
+        <target xml:lang="uk" state="translated">Стиль</target>
+      </trans-unit>
+      <trans-unit id="azL-oz-mJL.toolTip">
+        <source>Display the list of available styles</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Display the list of available styles"; ObjectID = "azL-oz-mJL";</note>
+        <target xml:lang="uk" state="translated">Показати список доступних стилів</target>
+      </trans-unit>
+      <trans-unit id="fpY-CJ-hKU.label">
+        <source>Next Unread</source>
+        <note>Class = "NSToolbarItem"; label = "Next Unread"; ObjectID = "fpY-CJ-hKU";</note>
+        <target xml:lang="uk" state="translated">Наступна непрочитана</target>
+      </trans-unit>
+      <trans-unit id="fpY-CJ-hKU.paletteLabel">
+        <source>Next Unread</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Next Unread"; ObjectID = "fpY-CJ-hKU";</note>
+        <target xml:lang="uk" state="translated">Наступна непрочитана</target>
+      </trans-unit>
+      <trans-unit id="fpY-CJ-hKU.toolTip">
+        <source>Next Unread</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Next Unread"; ObjectID = "fpY-CJ-hKU";</note>
+        <target xml:lang="uk" state="translated">Наступна непрочитана</target>
+      </trans-unit>
+      <trans-unit id="gOG-UJ-Pin.label">
+        <source>Back</source>
+        <note>Class = "NSToolbarItem"; label = "Back"; ObjectID = "gOG-UJ-Pin";</note>
+        <target xml:lang="uk" state="translated">Назад</target>
+      </trans-unit>
+      <trans-unit id="gOG-UJ-Pin.paletteLabel">
+        <source>Back</source>
+        <note>Class = "NSToolbarItem"; paletteLabel = "Back"; ObjectID = "gOG-UJ-Pin";</note>
+        <target xml:lang="uk" state="translated">Назад</target>
+      </trans-unit>
+      <trans-unit id="gOG-UJ-Pin.toolTip">
+        <source>Back</source>
+        <note>Class = "NSToolbarItem"; toolTip = "Back"; ObjectID = "gOG-UJ-Pin";</note>
+        <target xml:lang="uk" state="translated">Назад</target>
+      </trans-unit>
+      <trans-unit id="l14-tu-w7l.title">
+        <source>Rename…</source>
+        <note>Class = "NSMenuItem"; title = "Rename…"; ObjectID = "l14-tu-w7l";</note>
+        <target xml:lang="uk" state="translated">Переіменувати…</target>
+      </trans-unit>
+      <trans-unit id="lhy-4c-asJ.placeholderString">
+        <source>Search for folders</source>
+        <note>Class = "NSSearchFieldCell"; placeholderString = "Search for folders"; ObjectID = "lhy-4c-asJ";</note>
+        <target xml:lang="uk" state="translated">Знайти теки</target>
+      </trans-unit>
+      <trans-unit id="psA-wp-PcZ.title">
+        <source>New Subscription…</source>
+        <note>Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "psA-wp-PcZ";</note>
+        <target xml:lang="uk" state="translated">Нова підписка…</target>
+      </trans-unit>
+      <trans-unit id="sDP-Ni-g3a.title">
+        <source>Unread Articles</source>
+        <note>Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "sDP-Ni-g3a";</note>
+        <target xml:lang="uk" state="translated">Непрочитані статті</target>
+      </trans-unit>
+      <trans-unit id="ty7-ph-peE.title">
+        <source>Unread or Flagged</source>
+        <note>Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "ty7-ph-peE";</note>
+        <target xml:lang="uk" state="translated">Непрочитані або помічені</target>
+      </trans-unit>
+      <trans-unit id="vOQ-xo-w8E.title">
+        <source>Edit…</source>
+        <note>Class = "NSMenuItem"; title = "Edit…"; ObjectID = "vOQ-xo-w8E";</note>
+        <target xml:lang="uk" state="translated">Редагувати…</target>
+      </trans-unit>
+      <trans-unit id="xNW-zC-IMZ.title">
+        <source>Mark All Articles as Read</source>
+        <note>Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "xNW-zC-IMZ";</note>
+        <target xml:lang="uk" state="translated">Помітити всі статті як прочитані</target>
+      </trans-unit>
+      <trans-unit id="xVH-W7-Br4.title">
+        <source>Last Refresh</source>
+        <note>Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "xVH-W7-Br4";</note>
+        <target xml:lang="uk" state="translated">Останнє оновлення</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/RSSFeed.xib" datatype="plaintext" source-language="en" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="102.title">
+        <source>Cancel</source>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "102";</note>
+        <target xml:lang="uk" state="translated">Скасувати</target>
+      </trans-unit>
+      <trans-unit id="103.title">
+        <source>Subscribe</source>
+        <note>Class = "NSButtonCell"; title = "Subscribe"; ObjectID = "103";</note>
+        <target xml:lang="uk" state="translated">Підписатися</target>
+      </trans-unit>
+      <trans-unit id="104.title">
+        <source>Source:</source>
+        <note>Class = "NSTextFieldCell"; title = "Source:"; ObjectID = "104";</note>
+        <target xml:lang="uk" state="translated">Джерело:</target>
+      </trans-unit>
+      <trans-unit id="106.title">
+        <source>Create a new subscription</source>
+        <note>Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106";</note>
+        <target xml:lang="uk" state="translated">Створити нову підписку</target>
+      </trans-unit>
+      <trans-unit id="107.title">
+        <source>Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.</source>
+        <note>Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107";</note>
+        <target xml:lang="uk" state="translated">Введіть адресу стрічки новин, або виберіть стрічку зі списку Джерело для того, щоб додати стрічку з заданого джерела.</target>
+      </trans-unit>
+      <trans-unit id="110.title">
+        <source>URL:</source>
+        <note>Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110";</note>
+        <target xml:lang="uk" state="translated">Адреса:</target>
+      </trans-unit>
+      <trans-unit id="111.title">
+        <source>Save</source>
+        <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "111";</note>
+        <target xml:lang="uk" state="translated">Зберегти</target>
+      </trans-unit>
+      <trans-unit id="112.title">
+        <source>Cancel</source>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "112";</note>
+        <target xml:lang="uk" state="translated">Скасувати</target>
+      </trans-unit>
+      <trans-unit id="114.title">
+        <source>Edit subscription</source>
+        <note>Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114";</note>
+        <target xml:lang="uk" state="translated">Редагування підписки</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/SearchFolder.xib" datatype="plaintext" source-language="en" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="82.title">
+        <source>all</source>
+        <note>Class = "NSMenuItem"; title = "all"; ObjectID = "82";</note>
+        <target xml:lang="uk" state="translated">всі</target>
+      </trans-unit>
+      <trans-unit id="94.title">
+        <source>Smart folder name:</source>
+        <note>Class = "NSTextFieldCell"; title = "Smart folder name:"; ObjectID = "94";</note>
+        <target xml:lang="uk" state="translated">Назва вибірки:</target>
+      </trans-unit>
+      <trans-unit id="96.title">
+        <source>Save</source>
+        <note>Class = "NSButtonCell"; title = "Save"; ObjectID = "96";</note>
+        <target xml:lang="uk" state="translated">Зберегти</target>
+      </trans-unit>
+      <trans-unit id="97.title">
+        <source>Cancel</source>
+        <note>Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97";</note>
+        <target xml:lang="uk" state="translated">Скасувати</target>
+      </trans-unit>
+      <trans-unit id="98.title">
+        <source>Show all articles that match</source>
+        <note>Class = "NSTextFieldCell"; title = "Show all articles that match"; ObjectID = "98";</note>
+        <target xml:lang="uk" state="translated">Показати всі статті, які відповідають</target>
+      </trans-unit>
+      <trans-unit id="100.title">
+        <source>of the following conditions:</source>
+        <note>Class = "NSTextFieldCell"; title = "of the following conditions:"; ObjectID = "100";</note>
+        <target xml:lang="uk" state="translated">з наступних умов:</target>
+      </trans-unit>
+      <trans-unit id="j0v-xF-tpl.title">
+        <source>any</source>
+        <note>Class = "NSMenuItem"; title = "any"; ObjectID = "j0v-xF-tpl";</note>
+        <target xml:lang="uk" state="translated">будь-які</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Interfaces/Base.lproj/SyncingPreferencesView.xib" datatype="plaintext" source-language="en" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="Ar5-Qc-YTe.ibExternalAccessibilityDescription">
+        <source>Visit the website</source>
+        <note>Class = "NSButton"; ibExternalAccessibilityDescription = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
+        <target xml:lang="uk" state="translated">Відвідати веб-сторінку</target>
+      </trans-unit>
+      <trans-unit id="Ar5-Qc-YTe.ibShadowedToolTip">
+        <source>Visit the website</source>
+        <note>Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "Ar5-Qc-YTe";</note>
+        <target xml:lang="uk" state="translated">Відвідати веб-сторінку</target>
+      </trans-unit>
+      <trans-unit id="NKI-36-zCY.title">
+        <source>Password:</source>
+        <note>Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "NKI-36-zCY";</note>
+        <target xml:lang="uk" state="translated">Пароль:</target>
+      </trans-unit>
+      <trans-unit id="O2q-8o-CSb.title">
+        <source>Login:</source>
+        <note>Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "O2q-8o-CSb";</note>
+        <target xml:lang="uk" state="translated">Ім'я:</target>
+      </trans-unit>
+      <trans-unit id="uTl-XE-0ym.title">
+        <source>Server:</source>
+        <note>Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "uTl-XE-0ym";</note>
+        <target xml:lang="uk" state="translated">Сервер:</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Resources/Base.lproj/InfoPlist.strings" datatype="plaintext" source-language="en" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      
+      
+    </body>
+  </file>
+  <file original="Vienna/Resources/Base.lproj/Localizable.strings" datatype="plaintext" source-language="en" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="%@ Info">
+        <source>%@ Info</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Інформація про %@</target>
+      </trans-unit>
+      <trans-unit id="%@ of %@">
+        <source>%1$@ of %2$@</source>
+        <note>Progress in bytes, e.g. 1 KB of 1 MB</note>
+        <target xml:lang="uk" state="translated">%1$@ з %2$@</target>
+      </trans-unit>
+      <trans-unit id="%@ received">
+        <source>%@ received</source>
+        <note>Number of bytes received, e.g. 1 MB received</note>
+        <target xml:lang="uk" state="translated">одержано %@</target>
+      </trans-unit>
+      <trans-unit id="%d new articles retrieved">
+        <source>%d new articles retrieved</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Отримано %d нових статей</target>
+      </trans-unit>
+      <trans-unit id="%d subscriptions successfully exported">
+        <source>%d subscriptions successfully exported</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Успішно експортовано %d підписок</target>
+      </trans-unit>
+      <trans-unit id="%d subscriptions successfully imported">
+        <source>%d subscriptions successfully imported</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Успішно імпортовано %d підписок</target>
+      </trans-unit>
+      <trans-unit id="%d unread articles">
+        <source>%d unread articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">%d непрочитаних статей</target>
+      </trans-unit>
+      <trans-unit id="%u articles">
+        <source>%u articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">%u статей</target>
+      </trans-unit>
+      <trans-unit id="%u unread">
+        <source>%u unread</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">%u непрочитаних</target>
+      </trans-unit>
+      <trans-unit id="(No title)">
+        <source>(No title)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">(Без заголовку)</target>
+      </trans-unit>
+      <trans-unit id="(Untitled Feed)">
+        <source>(Untitled Feed)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">(Безіменна стрічка)</target>
+      </trans-unit>
+      <trans-unit id="A folder with that name already exists">
+        <source>A folder with that name already exists</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Папка з таким іменем уже існує</target>
+      </trans-unit>
+      <trans-unit id="A new Vienna database cannot be created at \&quot;%@\&quot; because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.">
+        <source>A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Не можу створити нову базу даних Vienna  \"%@\" тому, що папка імовірно розміщення на віддаленому диску. Будь-ласка виберіть інше місце збереження бази даних на вашому локальному диску.</target>
+      </trans-unit>
+      <trans-unit id="Advanced">
+        <source>Advanced</source>
+        <note>Toolbar item name for the Advanced preference pane</note>
+        <target xml:lang="uk" state="translated">Додатково</target>
+      </trans-unit>
+      <trans-unit id="After 2 Days">
+        <source>After 2 Days</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Після двох днів</target>
+      </trans-unit>
+      <trans-unit id="After 2 Weeks">
+        <source>After 2 Weeks</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Після 2-х тижнів</target>
+      </trans-unit>
+      <trans-unit id="After a Day">
+        <source>After a Day</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Наступного дня</target>
+      </trans-unit>
+      <trans-unit id="After a Month">
+        <source>After a Month</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Після місяця</target>
+      </trans-unit>
+      <trans-unit id="After a Week">
+        <source>After a Week</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Після тижня</target>
+      </trans-unit>
+      <trans-unit id="An error occurred when this feed was last refreshed">
+        <source>An error occurred when this feed was last refreshed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Трапилася помилка при оновленні цієї стрічки</target>
+      </trans-unit>
+      <trans-unit id="Appearance">
+        <source>Appearance</source>
+        <note>Toolbar item name for the Appearance preference pane</note>
+        <target xml:lang="uk" state="translated">Вигляд</target>
+      </trans-unit>
+      <trans-unit id="AppleScript Error in '%@' script">
+        <source>AppleScript Error in '%@' script</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Помилка AppleScript у сценарії «%@»</target>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to delete all %d selected folders? This operation cannot be undone.">
+        <source>Are you sure you want to delete all %d selected folders? This operation cannot be undone.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Ви дійсно хочете видалити всі %d виділених папок? Цю операцію неможливо відмінити.</target>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to delete group folder \&quot;%@\&quot; and all sub folders? This operation cannot be undone.">
+        <source>Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Ви дійсно хочете видалити папку \"%@\" і весь її вміст? Цю операцію неможливо відмінити.</target>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to delete smart folder \&quot;%@\&quot;? This will not delete the actual articles matched by the search.">
+        <source>Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Ви дійсно хочете видалити вибірку \"%@\"? Це не видалить всі статті які співпадають з її критеріями.</target>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to delete the messages in the Trash folder permanently?">
+        <source>Are you sure you want to delete the messages in the Trash folder permanently?</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Ви дійсно хочете видалити всі повідомлення зі Смітника?</target>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to permanently delete the selected articles?">
+        <source>Are you sure you want to permanently delete the selected articles?</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Ви дійсно хочете видалити виділене повідомлення?</target>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to unsubscribe from \&quot;%@\&quot;? This operation will delete all cached articles.">
+        <source>Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Ви дійсно хочете відписатися від \"%@\"? Ця операція видалить всі збережені статті.</target>
+      </trans-unit>
+      <trans-unit id="Articles">
+        <source>Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Статті</target>
+      </trans-unit>
+      <trans-unit id="Ascending">
+        <source>Ascending</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">У висхідному</target>
+      </trans-unit>
+      <trans-unit id="Author">
+        <source>Author</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="uk" state="translated">Автор</target>
+      </trans-unit>
+      <trans-unit id="Cancel">
+        <source>Cancel</source>
+        <note>Title of a button on an alert
+   Title of a popup menu item</note>
+        <target xml:lang="uk" state="translated">Скасувати</target>
+      </trans-unit>
+      <trans-unit id="Cannot create export output file">
+        <source>Cannot create export output file</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Не можу створити експортний файл</target>
+      </trans-unit>
+      <trans-unit id="Cannot create the Vienna database">
+        <source>Cannot create the Vienna database</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Не можу створити базу даних Vienna</target>
+      </trans-unit>
+      <trans-unit id="Cannot import the specified file. The file contents are not valid OPML XML format.">
+        <source>Cannot import the specified file. The file contents are not valid OPML XML format.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Не можу імпортувати вказаний файл. Вміст файлу не відповідає вимогам формату OPML XML.</target>
+      </trans-unit>
+      <trans-unit id="Cannot rename folder">
+        <source>Cannot rename folder</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Не можу переіменувати папку</target>
+      </trans-unit>
+      <trans-unit id="Clear Recent Searches">
+        <source>Clear Recent Searches</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Очистити останні пошуки</target>
+      </trans-unit>
+      <trans-unit id="Click the Open button to open this file.">
+        <source>Click the Open button to open this file.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Натисніть кнопку Відкрити щоб відкрити файл.</target>
+      </trans-unit>
+      <trans-unit id="Click the Play button to play this enclosure in iTunes.">
+        <source>Click the Play button to play this enclosure in iTunes.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Натисніть кнопку Програти, для того, щоб програти вкладене в iTunes.</target>
+      </trans-unit>
+      <trans-unit id="Connecting to %@">
+        <source>Connecting to %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">З'єднуюся з %@</target>
+      </trans-unit>
+      <trans-unit id="Copy Link to Clipboard">
+        <source>Copy Link to Clipboard</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Копіювати посилання у буфер</target>
+      </trans-unit>
+      <trans-unit id="Copy Page Link to Clipboard">
+        <source>Copy Page Link to Clipboard</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Копіювати посилання на сторінку у буфер</target>
+      </trans-unit>
+      <trans-unit id="Copy URL">
+        <source>Copy URL</source>
+        <note>Copy URL</note>
+        <target xml:lang="uk" state="translated">Скопіювати адресу</target>
+      </trans-unit>
+      <trans-unit id="Database Upgrade">
+        <source>Database Upgrade</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Оновлення бази даних</target>
+      </trans-unit>
+      <trans-unit id="Date">
+        <source>Date</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="uk" state="translated">Дата</target>
+      </trans-unit>
+      <trans-unit id="Delete">
+        <source>Delete</source>
+        <note>Title of a button on an alert
+   Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Видалити</target>
+      </trans-unit>
+      <trans-unit id="Delete Article">
+        <source>Delete Article</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Видалити статтю</target>
+      </trans-unit>
+      <trans-unit id="Delete group folder">
+        <source>Delete group folder</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Видалити папку</target>
+      </trans-unit>
+      <trans-unit id="Delete multiple folders">
+        <source>Delete multiple folders</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Видалити папки</target>
+      </trans-unit>
+      <trans-unit id="Delete smart folder">
+        <source>Delete smart folder</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Видалити вибірку</target>
+      </trans-unit>
+      <trans-unit id="Delete subscription">
+        <source>Delete subscription</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Видалити підписку</target>
+      </trans-unit>
+      <trans-unit id="Deleted">
+        <source>Deleted</source>
+        <note>Data field name visible in smart folder definition</note>
+        <target xml:lang="uk" state="translated">Видалено</target>
+      </trans-unit>
+      <trans-unit id="Delete…">
+        <source>Delete…</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Видалити…</target>
+      </trans-unit>
+      <trans-unit id="Deleting folder \&quot;%@\&quot;…">
+        <source>Deleting folder \"%@\"…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Видаляю папку \"%@\"…</target>
+      </trans-unit>
+      <trans-unit id="Descending">
+        <source>Descending</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">У спадному</target>
+      </trans-unit>
+      <trans-unit id="Do you really want to import the subscriptions from the specified OPML file?">
+        <source>Do you really want to import the subscriptions from the specified OPML file?</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Ви дійсно хочете імпортувати підписки з вказаного OPML-файлу?</target>
+      </trans-unit>
+      <trans-unit id="Download">
+        <source>Download</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Завантажити</target>
+      </trans-unit>
+      <trans-unit id="Download Enclosure">
+        <source>Download Enclosure</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Завантажити додаток</target>
+      </trans-unit>
+      <trans-unit id="Download Enclosures">
+        <source>Download Enclosures</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Завантажити додатки</target>
+      </trans-unit>
+      <trans-unit id="Download completed">
+        <source>Download completed</source>
+        <note>Notification title</note>
+        <target xml:lang="uk" state="translated">Завантаження завершено</target>
+      </trans-unit>
+      <trans-unit id="Download failed">
+        <source>Download failed</source>
+        <note>Notification title</note>
+        <target xml:lang="uk" state="translated">Помилка завантаження</target>
+      </trans-unit>
+      <trans-unit id="Edit…">
+        <source>Edit…</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Редагувати…</target>
+      </trans-unit>
+      <trans-unit id="Empty">
+        <source>Empty</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="uk" state="translated">Спорожнити</target>
+      </trans-unit>
+      <trans-unit id="Enclosure">
+        <source>Enclosure</source>
+        <note>Data field name (Y/N) visible in menu/smart folder definition</note>
+        <target xml:lang="uk" state="translated">Додаток</target>
+      </trans-unit>
+      <trans-unit id="Enclosure URL">
+        <source>Enclosure URL</source>
+        <note>Data field name (URL) visible in menu/article list</note>
+        <target xml:lang="uk" state="translated">URL додатку</target>
+      </trans-unit>
+      <trans-unit id="Enter the URL here">
+        <source>Enter the URL here</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Тут введіть URL</target>
+      </trans-unit>
+      <trans-unit id="Error">
+        <source>Error</source>
+        <note>Already subscribed title</note>
+        <target xml:lang="uk" state="translated">Помилка</target>
+      </trans-unit>
+      <trans-unit id="Error loading script '%@'">
+        <source>Error loading script '%@'</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Помилка завантаження сценарію «%@»</target>
+      </trans-unit>
+      <trans-unit id="Error parsing XML data in feed">
+        <source>Error parsing XML data in feed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Помилка при обробці XML-даних у стрічці</target>
+      </trans-unit>
+      <trans-unit id="Error: Feed not found!">
+        <source>Error: Feed not found!</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Помилка: стрічку не знайдено!</target>
+      </trans-unit>
+      <trans-unit id="Export Completed">
+        <source>Export Completed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Експорт завершено</target>
+      </trans-unit>
+      <trans-unit id="External Browser">
+        <source>External Browser</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Зовнішній браузер</target>
+      </trans-unit>
+      <trans-unit id="Feed URL updated to %@">
+        <source>Feed URL updated to %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">URL стрічки змінено на %@</target>
+      </trans-unit>
+      <trans-unit id="File %@ downloaded">
+        <source>File %@ downloaded</source>
+        <note>Notification body</note>
+        <target xml:lang="uk" state="translated">Файл %@ завантажено</target>
+      </trans-unit>
+      <trans-unit id="File %@ failed to download">
+        <source>File %@ failed to download</source>
+        <note>Notification body</note>
+        <target xml:lang="uk" state="translated">Не вдалося завантажити файл %@</target>
+      </trans-unit>
+      <trans-unit id="Filter in %@">
+        <source>Filter in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Пошук у %@</target>
+      </trans-unit>
+      <trans-unit id="Flag">
+        <source>Flag</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Встановити прапорець</target>
+      </trans-unit>
+      <trans-unit id="Flagged">
+        <source>Flagged</source>
+        <note>Data field name visible in menu/smart folder definition</note>
+        <target xml:lang="uk" state="translated">З прапорцем</target>
+      </trans-unit>
+      <trans-unit id="Folder">
+        <source>Folder</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="uk" state="translated">Папка</target>
+      </trans-unit>
+      <trans-unit id="Folder image retrieved from %@">
+        <source>Folder image retrieved from %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Отримано зображення папки %@</target>
+      </trans-unit>
+      <trans-unit id="Folders">
+        <source>Folders</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Папки</target>
+      </trans-unit>
+      <trans-unit id="General">
+        <source>General</source>
+        <note>Toolbar item name for the General preference pane</note>
+        <target xml:lang="uk" state="translated">Загальні</target>
+      </trans-unit>
+      <trans-unit id="Get Info">
+        <source>Get Info</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Інформація</target>
+      </trans-unit>
+      <trans-unit id="Go forward to the next page">
+        <source>Go forward to the next page</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Перейти вперед до наступної сторінки</target>
+      </trans-unit>
+      <trans-unit id="HTTP code %d reported from server">
+        <source>HTTP code %d reported from server</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">З серверу отримано HTTP код %d</target>
+      </trans-unit>
+      <trans-unit id="Headlines">
+        <source>Headlines</source>
+        <note>Pseudo field name visible in article list</note>
+        <target xml:lang="uk" state="translated">Заголовки</target>
+      </trans-unit>
+      <trans-unit id="Hide Filter Bar">
+        <source>Hide Filter Bar</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Сховати стрічку фільтру</target>
+      </trans-unit>
+      <trans-unit id="Hide Status Bar">
+        <source>Hide Status Bar</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Заховати стрічку статусу</target>
+      </trans-unit>
+      <trans-unit id="If you quit Vienna now, all downloads will stop.">
+        <source>If you quit Vienna now, all downloads will stop.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Якщо Ви завершити Vienna зараз, всі завантаження зупиняться.</target>
+      </trans-unit>
+      <trans-unit id="Import">
+        <source>Import</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="uk" state="translated">Імпортувати</target>
+      </trans-unit>
+      <trans-unit id="Import Completed">
+        <source>Import Completed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Імпорт завершено</target>
+      </trans-unit>
+      <trans-unit id="Import error">
+        <source>Import error</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Помилка імпорту</target>
+      </trans-unit>
+      <trans-unit id="Import subscriptions from OPML file?">
+        <source>Import subscriptions from OPML file?</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Імпортувати підписки з OPML-файлу?</target>
+      </trans-unit>
+      <trans-unit id="Last Week">
+        <source>Last Week</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Останнього тижня</target>
+      </trans-unit>
+      <trans-unit id="Link">
+        <source>Link</source>
+        <note>Data field name visible in menu/article list</note>
+        <target xml:lang="uk" state="translated">Посилання</target>
+      </trans-unit>
+      <trans-unit id="Loading">
+        <source>Loading</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Завантаження</target>
+      </trans-unit>
+      <trans-unit id="Mark All Articles as Read">
+        <source>Mark All Articles as Read</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Помітити всі статті як прочитані</target>
+      </trans-unit>
+      <trans-unit id="Mark All Read">
+        <source>Mark All Read</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Помітити все як прочитане</target>
+      </trans-unit>
+      <trans-unit id="Mark All Subscriptions as Read">
+        <source>Mark All Subscriptions as Read</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Помітити всі підписки як прочинаті</target>
+      </trans-unit>
+      <trans-unit id="Mark Flagged">
+        <source>Mark Flagged</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Помітити прапорцем</target>
+      </trans-unit>
+      <trans-unit id="Mark Read">
+        <source>Mark Read</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Помітити як прочитане</target>
+      </trans-unit>
+      <trans-unit id="Mark Unflagged">
+        <source>Mark Unflagged</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Зняти прапорець</target>
+      </trans-unit>
+      <trans-unit id="Mark Unread">
+        <source>Mark Unread</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Помітити як непрочитане</target>
+      </trans-unit>
+      <trans-unit id="Marked Articles">
+        <source>Marked Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Помічені статті</target>
+      </trans-unit>
+      <trans-unit id="More Scripts…">
+        <source>More Scripts…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Більше сценаріїв…</target>
+      </trans-unit>
+      <trans-unit id="Move Folders">
+        <source>Move Folders</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Перемістити папки</target>
+      </trans-unit>
+      <trans-unit id="Never">
+        <source>Never</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Ніколи</target>
+      </trans-unit>
+      <trans-unit id="New Tab">
+        <source>New Tab</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Нова вкладка</target>
+      </trans-unit>
+      <trans-unit id="No">
+        <source>No</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Ні</target>
+      </trans-unit>
+      <trans-unit id="No articles in feed">
+        <source>No articles in feed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Стрічка не містить статей</target>
+      </trans-unit>
+      <trans-unit id="No new articles available">
+        <source>No new articles available</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Немає нових статей</target>
+      </trans-unit>
+      <trans-unit id="OK">
+        <source>OK</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="uk" state="translated">Добре</target>
+      </trans-unit>
+      <trans-unit id="One or more downloads are in progress">
+        <source>One or more downloads are in progress</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Одне або більше завантажень ще не завершені</target>
+      </trans-unit>
+      <trans-unit id="Open">
+        <source>Open</source>
+        <note>Title of a popup menu item</note>
+        <target xml:lang="uk" state="translated">Відкрити</target>
+      </trans-unit>
+      <trans-unit id="Open Article Page">
+        <source>Open Article Page</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Відкрити сторінку статті</target>
+      </trans-unit>
+      <trans-unit id="Open Article Page in %@">
+        <source>Open Article Page in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Відкрити сторінку статті у %@</target>
+      </trans-unit>
+      <trans-unit id="Open Article Page in External Browser">
+        <source>Open Article Page in External Browser</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Відкрити сторінку статті у зовнішньому браузері</target>
+      </trans-unit>
+      <trans-unit id="Open Frame">
+        <source>Open Frame</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Відкрити фрейм</target>
+      </trans-unit>
+      <trans-unit id="Open Image in %@">
+        <source>Open Image in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Відкрити зображення у %@</target>
+      </trans-unit>
+      <trans-unit id="Open Image in New Tab">
+        <source>Open Image in New Tab</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Відкрити зображення у новій вкладці</target>
+      </trans-unit>
+      <trans-unit id="Open Link in %@">
+        <source>Open Link in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Відкрити посилання у %@</target>
+      </trans-unit>
+      <trans-unit id="Open Link in New Tab">
+        <source>Open Link in New Tab</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Відкрити посилання у новій вкладці</target>
+      </trans-unit>
+      <trans-unit id="Open Page in %@">
+        <source>Open Page in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Відкрити сторінку у %@</target>
+      </trans-unit>
+      <trans-unit id="Open Scripts Folder">
+        <source>Open Scripts Folder</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Відкрити папку сценаріїв</target>
+      </trans-unit>
+      <trans-unit id="Open Subscription Home Page">
+        <source>Open Subscription Home Page</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Відкрити сторінку підписки</target>
+      </trans-unit>
+      <trans-unit id="Open Subscription Home Page in %@">
+        <source>Open Subscription Home Page in %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Відкрити сторінку підписки у %@</target>
+      </trans-unit>
+      <trans-unit id="Open Subscription Home Page in External Browser">
+        <source>Open Subscription Home Page in External Browser</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Відкрити сторінку підписки у зовнішньому браузері</target>
+      </trans-unit>
+      <trans-unit id="Other">
+        <source>Other</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Інше</target>
+      </trans-unit>
+      <trans-unit id="Play">
+        <source>Play</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Програти</target>
+      </trans-unit>
+      <trans-unit id="Preferences">
+        <source>Preferences</source>
+        <note>Title of the Preferences window</note>
+        <target xml:lang="uk" state="translated">Параметри</target>
+      </trans-unit>
+      <trans-unit id="Quit">
+        <source>Quit</source>
+        <note>Title of a button on an alert</note>
+        <target xml:lang="uk" state="translated">Завершити</target>
+      </trans-unit>
+      <trans-unit id="Quit Vienna">
+        <source>Quit Vienna</source>
+        <note>Title of a button on an alert
+   Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Завершити Vienna</target>
+      </trans-unit>
+      <trans-unit id="Read">
+        <source>Read</source>
+        <note>Data field name visible in menu/smart folder definition</note>
+        <target xml:lang="uk" state="translated">Прочитане</target>
+      </trans-unit>
+      <trans-unit id="Recent Searches">
+        <source>Recent Searches</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Останні пошуки</target>
+      </trans-unit>
+      <trans-unit id="Recents">
+        <source>Recents</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Останні</target>
+      </trans-unit>
+      <trans-unit id="Refresh All Subscriptions">
+        <source>Refresh All Subscriptions</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Оновити всі підписки</target>
+      </trans-unit>
+      <trans-unit id="Refresh Selected Subscriptions">
+        <source>Refresh Selected Subscriptions</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Оновити виділені підписки</target>
+      </trans-unit>
+      <trans-unit id="Refresh completed">
+        <source>Refresh completed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Оновлення завершено</target>
+      </trans-unit>
+      <trans-unit id="Refresh the current page">
+        <source>Refresh the current page</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Оновити поточну сторінку</target>
+      </trans-unit>
+      <trans-unit id="Refreshing folder images…">
+        <source>Refreshing folder images…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Оновити зображення у папці…</target>
+      </trans-unit>
+      <trans-unit id="Refreshing subscriptions…">
+        <source>Refreshing subscriptions…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Оновити підписки…</target>
+      </trans-unit>
+      <trans-unit id="Remove From List">
+        <source>Remove From List</source>
+        <note>Title of a popup menu item</note>
+        <target xml:lang="uk" state="translated">Видалити зі списку</target>
+      </trans-unit>
+      <trans-unit id="Rename…">
+        <source>Rename…</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Переіменувати…</target>
+      </trans-unit>
+      <trans-unit id="Restore Article">
+        <source>Restore Article</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Відновити статтю</target>
+      </trans-unit>
+      <trans-unit id="Resubscribe to Feed">
+        <source>Resubscribe to Feed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Підписатися до стрічки заново</target>
+      </trans-unit>
+      <trans-unit id="Retrieving articles">
+        <source>Retrieving articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Отримую статті</target>
+      </trans-unit>
+      <trans-unit id="Retrieving folder image">
+        <source>Retrieving folder image</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Отримую зображення папки</target>
+      </trans-unit>
+      <trans-unit id="Return to the previous page">
+        <source>Return to the previous page</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Повернутися до попередньої сторінки</target>
+      </trans-unit>
+      <trans-unit id="Search Results">
+        <source>Search Results</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Результати пошуку</target>
+      </trans-unit>
+      <trans-unit id="Search all articles">
+        <source>Search all articles</source>
+        <note>Placeholder title of a search field</note>
+        <target xml:lang="uk" state="translated">Пошук по всіх статтях</target>
+      </trans-unit>
+      <trans-unit id="Select…">
+        <source>Select…</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Виділити…</target>
+      </trans-unit>
+      <trans-unit id="Send Link">
+        <source>Send Link</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Надіслати посилання</target>
+      </trans-unit>
+      <trans-unit id="Send Links">
+        <source>Send Links</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Надіслати посилання</target>
+      </trans-unit>
+      <trans-unit id="Show Filter Bar">
+        <source>Show Filter Bar</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Показати стрічку фільтру</target>
+      </trans-unit>
+      <trans-unit id="Show Status Bar">
+        <source>Show Status Bar</source>
+        <note>Title of a menu item</note>
+        <target xml:lang="uk" state="translated">Показати стрічку статусу</target>
+      </trans-unit>
+      <trans-unit id="Show in Finder">
+        <source>Show in Finder</source>
+        <note>Title of a popup menu item</note>
+        <target xml:lang="uk" state="translated">Показати у Finder</target>
+      </trans-unit>
+      <trans-unit id="Sorry but Vienna was unable to open the database">
+        <source>Sorry but Vienna was unable to open the database</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Вибачте, але Vienna не взмозі відкрити базу даних</target>
+      </trans-unit>
+      <trans-unit id="Sorry, but Vienna was unable to create the database folder">
+        <source>Sorry, but Vienna was unable to create the database folder</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Вибачте, але Vienna не може створити папку баз даних</target>
+      </trans-unit>
+      <trans-unit id="Subject">
+        <source>Subject</source>
+        <note>Data field name visible in menu/article list/smart folder definition</note>
+        <target xml:lang="uk" state="translated">Тема</target>
+      </trans-unit>
+      <trans-unit id="Subscribe to the feed for this page">
+        <source>Subscribe to the feed for this page</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Підписатися на стрічку новин цієї сторінки</target>
+      </trans-unit>
+      <trans-unit id="Summary">
+        <source>Summary</source>
+        <note>Pseudo field name visible in menu/article list</note>
+        <target xml:lang="uk" state="translated">Підсумок</target>
+      </trans-unit>
+      <trans-unit id="Text">
+        <source>Text</source>
+        <note>Data field name visible in smart folder definition</note>
+        <target xml:lang="uk" state="translated">Текст</target>
+      </trans-unit>
+      <trans-unit id="The Default style will be used instead.">
+        <source>The Default style will be used instead.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Замість цього використовуватиметься стиль за замовчуванням.</target>
+      </trans-unit>
+      <trans-unit id="The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.">
+        <source>The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Формат баз даних файлу (%@) не підтримується цією версією Vienna. Переіменуйте або видаліть цей файл і перезапустіть Vienna.</target>
+      </trans-unit>
+      <trans-unit id="The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna.">
+        <source>The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Не можу відкрити файл бази даних (%@). Він мабуть пошкоджений або недоступний. Будь-ласка видаліть або переіменуйте цей файл і паразапустіть Vienna.</target>
+      </trans-unit>
+      <trans-unit id="The database file format has changed">
+        <source>The database file format has changed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Формат баз даних змінився</target>
+      </trans-unit>
+      <trans-unit id="The specified export output file could not be created. Check that it is not locked and no other application is using it.">
+        <source>The specified export output file could not be created. Check that it is not locked and no other application is using it.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Не можу створити вказаний експортний файл. Перевірте будь-ласка чи він не замкнений і чи не використовується іншою програмою.</target>
+      </trans-unit>
+      <trans-unit id="The style %@ appears to be missing or corrupted">
+        <source>The style %@ appears to be missing or corrupted</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Стиль %@ має невірну структуру, або пошкоджений</target>
+      </trans-unit>
+      <trans-unit id="The style \&quot;%@\&quot; has been installed to your Styles folder and added to the Style menu.">
+        <source>The style \"%@\" has been installed to your Styles folder and added to the Style menu.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Стиль \"%@\" установлено до Вашої папки Styles і додано до меню Стиль.</target>
+      </trans-unit>
+      <trans-unit id="The subscription for \&quot;%@\&quot; requires a user name and password for access.">
+        <source>The subscription for \"%@\" requires a user name and password for access.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Підписка \"%@\" вимагає введення імені користувача та паролю.</target>
+      </trans-unit>
+      <trans-unit id="This article contains an enclosed file.">
+        <source>This article contains an enclosed file.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Ця стаття містить вкладений файл.</target>
+      </trans-unit>
+      <trans-unit id="This operation cannot be undone.">
+        <source>This operation cannot be undone.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Цю операцію неможливо відмінити.</target>
+      </trans-unit>
+      <trans-unit id="Today">
+        <source>Today</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Сьогодні</target>
+      </trans-unit>
+      <trans-unit id="Today's Articles">
+        <source>Today's Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Сьогоднішні статті</target>
+      </trans-unit>
+      <trans-unit id="Trash">
+        <source>Trash</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Смітник</target>
+      </trans-unit>
+      <trans-unit id="Unread">
+        <source>Unread</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Непрочитані</target>
+      </trans-unit>
+      <trans-unit id="Unread Articles">
+        <source>Unread Articles</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Непрочитані статті</target>
+      </trans-unit>
+      <trans-unit id="Unsubscribe from Feed">
+        <source>Unsubscribe from Feed</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Відписатися від стрічки новин</target>
+      </trans-unit>
+      <trans-unit id="Vienna cannot open the file \&quot;%@\&quot; because it moved since you downloaded it.">
+        <source>Vienna cannot open the file \"%@\" because it moved since you downloaded it.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Vienna не може відкрити файл \"%@\" тому, що його перемістили з того місця куди він був завантажений.</target>
+      </trans-unit>
+      <trans-unit id="Vienna cannot open the file.">
+        <source>Vienna cannot open the file.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Vienna не може відкрити файл.</target>
+      </trans-unit>
+      <trans-unit id="Vienna cannot show the file \&quot;%@\&quot; because it moved since you downloaded it.">
+        <source>Vienna cannot show the file \"%@\" because it moved since you downloaded it.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Vienna не може показати файл \"%@\" тому, що його перемістили з того місця куди він був завантажений.</target>
+      </trans-unit>
+      <trans-unit id="Vienna cannot show the file.">
+        <source>Vienna cannot show the file.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Vienna не може показати файл.</target>
+      </trans-unit>
+      <trans-unit id="Vienna has installed a new style">
+        <source>Vienna has installed a new style</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Vienna установила новий стиль</target>
+      </trans-unit>
+      <trans-unit id="Vienna was trying to create the folder \&quot;%@\&quot; but an error occurred. Check the permissions on the folders on the path specified.">
+        <source>Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Через помилку, Vienna не змогла створити папку \"%@\". Перевірте права доступу за вказаним шляхом.</target>
+      </trans-unit>
+      <trans-unit id="Yes">
+        <source>Yes</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Так</target>
+      </trans-unit>
+      <trans-unit id="Yesterday">
+        <source>Yesterday</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Вчора</target>
+      </trans-unit>
+      <trans-unit id="You are already subscribed to that feed">
+        <source>You are already subscribed to that feed</source>
+        <note>You are already subscribed to that feed</note>
+        <target xml:lang="uk" state="translated">Ви вже підписані до даної стрічки</target>
+      </trans-unit>
+      <trans-unit id="You cannot undo this action">
+        <source>You cannot undo this action</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="uk" state="translated">Ви не зможете відмінити цю дію</target>
+      </trans-unit>
+      <trans-unit id="contains">
+        <source>contains</source>
+        <note>test for a string</note>
+        <target xml:lang="uk" state="translated">містить</target>
+      </trans-unit>
+      <trans-unit id="does not contain">
+        <source>does not contain</source>
+        <note>test for a string</note>
+        <target xml:lang="uk" state="translated">не містить</target>
+      </trans-unit>
+      <trans-unit id="is">
+        <source>is</source>
+        <note>test for a value</note>
+        <target xml:lang="uk" state="translated">є</target>
+      </trans-unit>
+      <trans-unit id="is after">
+        <source>is after</source>
+        <note>test for a date</note>
+        <target xml:lang="uk" state="translated">після</target>
+      </trans-unit>
+      <trans-unit id="is before">
+        <source>is before</source>
+        <note>test for a date</note>
+        <target xml:lang="uk" state="translated">перед</target>
+      </trans-unit>
+      <trans-unit id="is greater than">
+        <source>is greater than</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="uk" state="translated">більше ніж</target>
+      </trans-unit>
+      <trans-unit id="is greater than or equal to">
+        <source>is greater than or equal to</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="uk" state="translated">більше ніж, або рівне</target>
+      </trans-unit>
+      <trans-unit id="is less than">
+        <source>is less than</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="uk" state="translated">менше ніж</target>
+      </trans-unit>
+      <trans-unit id="is less than or equal to">
+        <source>is less than or equal to</source>
+        <note>test for a numeric value</note>
+        <target xml:lang="uk" state="translated">менше ніж, або рівне</target>
+      </trans-unit>
+      <trans-unit id="is not">
+        <source>is not</source>
+        <note>test for a value</note>
+        <target xml:lang="uk" state="translated">не є</target>
+      </trans-unit>
+      <trans-unit id="is on or after">
+        <source>is on or after</source>
+        <note>test for a date</note>
+        <target xml:lang="uk" state="translated">є на або після</target>
+      </trans-unit>
+      <trans-unit id="is on or before">
+        <source>is on or before</source>
+        <note>test for a date</note>
+        <target xml:lang="uk" state="translated">є на або перед</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vienna/Resources/Base.lproj/Localizable.stringsdict" datatype="plaintext" source-language="en" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="/%d new articles retrieved:dict/articles:dict/other:dict/:string">
+        <source>%d new articles retrieved</source>
+        <note/>
+        <target xml:lang="uk" state="translated">Отримано %d нових статей</target>
+      </trans-unit>
+      <trans-unit id="/%d subscriptions successfully exported:dict/subscriptions:dict/other:dict/:string">
+        <source>%d subscriptions successfully exported</source>
+        <note/>
+        <target xml:lang="uk" state="translated">Успішно експортовано %d підписок</target>
+      </trans-unit>
+      <trans-unit id="/%d subscriptions successfully imported:dict/subscriptions:dict/other:dict/:string">
+        <source>%d subscriptions successfully imported</source>
+        <note/>
+        <target xml:lang="uk" state="translated">Успішно імпортовано %d підписок</target>
+      </trans-unit>
+      <trans-unit id="/%d unread articles:dict/articles:dict/other:dict/:string">
+        <source>%d unread articles</source>
+        <note/>
+        <target xml:lang="uk" state="translated">%d непрочитаних статей</target>
+      </trans-unit>
+      <trans-unit id="/%u articles:dict/articles:dict/other:dict/:string">
+        <source>%u articles</source>
+        <note/>
+        <target xml:lang="uk" state="translated">%u статей</target>
+      </trans-unit>
+      <trans-unit id="/%u unread:dict/unread:dict/one:dict/:string">
+        <source>%u unread</source>
+        <note/>
+        <target xml:lang="uk" state="translated">%u непрочитаних</target>
+      </trans-unit>
+      <trans-unit id="/%u unread:dict/unread:dict/other:dict/:string">
+        <source>%u unread</source>
+        <note/>
+        <target xml:lang="uk" state="translated">%u непрочитаних</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
