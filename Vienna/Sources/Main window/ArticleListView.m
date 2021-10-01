@@ -547,34 +547,9 @@
 	}
 	
 	// Set the images for specific header columns
-    if (@available(macOS 11, *)) {
-        NSImageSymbolScale scale = NSImageSymbolScaleSmall;
-        NSImageSymbolConfiguration *config = nil;
-        config = [NSImageSymbolConfiguration configurationWithScale:scale];
-        NSImage *readImage = [NSImage imageWithSystemSymbolName:@"circlebadge"
-                                       accessibilityDescription:nil];
-        readImage = [readImage imageWithSymbolConfiguration:config];
-        NSImage *flagImage = [NSImage imageWithSystemSymbolName:@"flag"
-                                       accessibilityDescription:nil];
-        flagImage = [flagImage imageWithSymbolConfiguration:config];
-        NSImage *enclImage = [NSImage imageWithSystemSymbolName:@"paperclip"
-                                       accessibilityDescription:nil];
-        enclImage = [enclImage imageWithSymbolConfiguration:config];
-
-        [articleList setHeaderImage:MA_Field_Read
-                              image:readImage];
-        [articleList setHeaderImage:MA_Field_Flagged
-                              image:flagImage];
-        [articleList setHeaderImage:MA_Field_HasEnclosure
-                              image:enclImage];
-    } else {
-        [articleList setHeaderImage:MA_Field_Read
-                              image:[NSImage imageNamed:@"unread_header"]];
-        [articleList setHeaderImage:MA_Field_Flagged
-                              image:[NSImage imageNamed:@"flagged_header"]];
-        [articleList setHeaderImage:MA_Field_HasEnclosure
-                              image:[NSImage imageNamed:@"enclosure_header"]];
-    }
+	[articleList setHeaderImage:MA_Field_Read imageName:@"unread_header"];
+	[articleList setHeaderImage:MA_Field_Flagged imageName:@"flagged_header"];
+	[articleList setHeaderImage:MA_Field_HasEnclosure imageName:@"enclosure_header"];
 
 	// Initialise the sort direction
 	[self showSortDirection];	
@@ -1262,71 +1237,27 @@
 	NSString * identifier = aTableColumn.identifier;
 	if ([identifier isEqualToString:MA_Field_Read])
 	{
-        if (!theArticle.read) {
-            if (@available(macOS 11, *)) {
-                NSImage *image = nil;
-                if (theArticle.revised) {
-                    image = [NSImage imageWithSystemSymbolName:@"sparkles"
-                                      accessibilityDescription:nil];
-                    // Setting the template property to NO enables the tint color.
-                    image.template = NO;
-                } else {
-                    image = [NSImage imageWithSystemSymbolName:@"circlebadge.fill"
-                                      accessibilityDescription:nil];
-                    // Setting the template property to NO enables the tint color.
-                    image.template = NO;
-                }
-                return image;
-            } else {
-                if (theArticle.revised) {
-                    return [NSImage imageNamed:@"revised"];
-                } else {
-                    return [NSImage imageNamed:@"unread"];
-                }
-            }
-        }
+		if (!theArticle.read)
+			return (theArticle.revised) ? [NSImage imageNamed:@"revised"] : [NSImage imageNamed:@"unread"];
         return nil;
 	}
 	if ([identifier isEqualToString:MA_Field_Flagged])
 	{
-        if (theArticle.flagged) {
-            if (@available(macOS 11, *)) {
-                NSImage *image = [NSImage imageWithSystemSymbolName:@"flag.fill"
-                                           accessibilityDescription:nil];
-                // Setting the template property to NO enables the tint color.
-                image.template = NO;
-                return image;
-            } else {
-                return [NSImage imageNamed:@"flagged"];
-            }
-        }
+		if (theArticle.flagged)
+			return [NSImage imageNamed:@"flagged"];
         return nil;
 	}
 	if ([identifier isEqualToString:MA_Field_Comments])
 	{
-        if (theArticle.hasComments) {
-            if (@available(macOS 11, *)) {
-                NSImage *image = [NSImage imageWithSystemSymbolName:@"ellipsis.bubble.fill"
-                                           accessibilityDescription:nil];
-                return image;
-            } else {
-                return [NSImage imageNamed:@"comments"];
-            }
-        }
+		if (theArticle.hasComments)
+			return [NSImage imageNamed:@"comments"];
         return nil;
 	}
 	
 	if ([identifier isEqualToString:MA_Field_HasEnclosure])
 	{
-        if (theArticle.hasEnclosure) {
-            if (@available(macOS 11, *)) {
-                NSImage *image = [NSImage imageWithSystemSymbolName:@"paperclip"
-                                           accessibilityDescription:nil];
-                return image;
-            } else {
-                return [NSImage imageNamed:@"comments"];
-            }
-        }
+		if (theArticle.hasEnclosure)
+			return [NSImage imageNamed:@"enclosure"];
         return nil;
 	}
 	

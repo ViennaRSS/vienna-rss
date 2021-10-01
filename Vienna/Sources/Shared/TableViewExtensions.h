@@ -25,7 +25,7 @@
 	BOOL delegateImplementsToolTip;
 }
 
--(void)setHeaderImage:(NSString *)identifier image:(NSImage *)image;
+-(void)setHeaderImage:(NSString *)identifier imageName:(NSString *)name;
 
 @end
 
