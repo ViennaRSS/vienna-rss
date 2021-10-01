@@ -127,7 +127,6 @@ final class DirectoryMonitor: NSObject {
         // Unschedule the stream from its run loop and remove the (only)
         // reference count before unsetting the pointer.
         if let stream = stream {
-            FSEventStreamStop(stream)
             FSEventStreamInvalidate(stream)
             FSEventStreamRelease(stream)
 
