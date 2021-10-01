@@ -61,7 +61,7 @@ typedef NS_ENUM(NSInteger, VNAQueryScope) {
 
 // The current database version number
 const NSInteger MA_Min_Supported_DB_Version = 12;
-const NSInteger MA_Current_DB_Version = 22;
+const NSInteger MA_Current_DB_Version = 21;
 
 @implementation Database
 
@@ -259,9 +259,6 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 
 
 -(BOOL)createTablesOnDatabase:(FMDatabase *)db {
-    // Enable FULL auto-vacuum mode before creating tables.
-    [db executeUpdate:@"PRAGMA auto_vacuum = 1"];
-
     // Create the tables. We use the first table as a test whether we can
     // setup at the specified location
     [db executeUpdate:@"create table info (version, last_opened, first_folder, folder_sort)"];
@@ -1691,6 +1688,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 
 	if (success)
 	{
+		[self compactDatabase];
 		for (Folder * folder in [self.foldersDict objectEnumerator])
 			[folder clearCache];
 
