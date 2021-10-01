@@ -42,6 +42,7 @@
 @property (nonatomic) NSFont *cellFont;
 @property (nonatomic) NSFont *boldCellFont;
 @property (nonatomic) NSImage *folderErrorImage;
+@property (nonatomic) NSImage *refreshProgressImage;
 @property (nonatomic) BOOL blockSelectionHandler;
 @property (nonatomic) BOOL canRenameFolders;
 @property (nonatomic) BOOL useToolTips;
@@ -101,6 +102,7 @@
 	// Folder image
 	self.folderErrorImage = [NSImage imageNamed:@"folderError"];
     self.folderErrorImage.accessibilityDescription = NSLocalizedString(@"Error", nil);
+	self.refreshProgressImage = [NSImage imageNamed:@"refreshProgress"];
 	
 	// Create and set whatever font we're using for the folders
 	[self setFolderListFont];

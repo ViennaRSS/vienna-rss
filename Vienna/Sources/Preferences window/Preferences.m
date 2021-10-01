@@ -267,6 +267,7 @@ static Preferences * _standardPreferences = nil;
 	defaultValues[MAPref_ShowAppInStatusBar] = boolNo;
 	defaultValues[MAPref_ShowStatusBar] = boolYes;
 	defaultValues[MAPref_ShowFilterBar] = boolYes;
+	defaultValues[MAPref_NewFolderUI] = boolNo;
 	defaultValues[MAPref_UseMinimumFontSize] = boolNo;
 	defaultValues[MAPref_FilterMode] = [NSNumber numberWithInt:VNAFilterAll];
 	defaultValues[MAPref_MinimumFontSize] = @(MA_Default_MinimumFontSize);
