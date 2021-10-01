@@ -29,7 +29,7 @@ Alternatively, you can download releases from the [GitHub Releases page](https:/
 
 Vienna is also available as a Cask for [Homebrew Cask](https://github.com/phinze/homebrew-cask).
 ```bash
-brew install --cask vienna
+brew cask install vienna
 ```
 
 Getting support
