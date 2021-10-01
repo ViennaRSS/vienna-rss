@@ -139,7 +139,7 @@
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUPublicDSAKeyFile</key>
-	<string>SparkleDSAPublicKey.pem</string>
+	<string>SparklePublicKey.pem</string>
 	<key>SUPublicEDKey</key>
 	<string>nPwwT+poO5Kmi1NZkE5OveKB8lvQVY20N22E8jgxLCg=</string>
 	<key>UTExportedTypeDeclarations</key>
