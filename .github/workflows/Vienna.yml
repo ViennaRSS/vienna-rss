@@ -5,7 +5,7 @@ on: pull_request
 jobs:
   test:
     name: Test
-    runs-on: macos-11.0
+    runs-on: macOS-latest
 
     steps:
     - name: Install SwiftLint
