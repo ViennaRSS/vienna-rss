@@ -1,5 +1,5 @@
 //
-//  ButtonToolbarItem.swift
+//  SearchFieldToolbarItem.swift
 //  Vienna
 //
 //  Copyright 2017
@@ -18,16 +18,14 @@
 //
 
 import Cocoa
-import os.log
 
-/// A toolbar item with a button as its view. The toolbar item responds to
-/// validation requests.
-class ButtonToolbarItem: NSToolbarItem {
+/// A toolbar item with a search field as its view.
+class SearchFieldToolbarItem: NSToolbarItem {
 
     // Assign the item's target to the menu-form representation.
     override var target: AnyObject? {
         didSet {
-            if view is NSButton {
+            if view is NSSearchField {
                 menuFormRepresentation?.target = target
             }
         }
@@ -36,30 +34,10 @@ class ButtonToolbarItem: NSToolbarItem {
     // Assign the item's action to the menu-form representation.
     override var action: Selector? {
         didSet {
-            if view is NSButton {
+            if view is NSSearchField {
                 menuFormRepresentation?.action = action
             }
         }
-    }
-
-    // Assign the item's enabled state to the menu-form representation.
-    override var isEnabled: Bool {
-        didSet {
-            if view is NSButton {
-                menuFormRepresentation?.isEnabled = isEnabled
-            }
-        }
-    }
-
-    // The default implementation of this method does nothing. Overriding this
-    // will allow any responder object to validate the toolbar item. This method
-    // is also invoked in text-only mode.
-    override func validate() {
-        guard let action = action, let responder = NSApp.target(forAction: action, to: target, from: self) else {
-            return
-        }
-
-        isEnabled = (responder as AnyObject).validateToolbarItem(self)
     }
 
 }

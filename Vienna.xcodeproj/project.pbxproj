@@ -219,6 +219,7 @@
 		F6CE47131E7E3DCB0045EAD7 /* ActivityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CE47121E7E3DCB0045EAD7 /* ActivityItem.m */; };
 		F6D0089C1EF95C9D008F2D3B /* InfoPanelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6D0089B1EF95C9D008F2D3B /* InfoPanelManager.m */; };
 		F6D282621F1A87A900FF865E /* PopUpButtonToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D282611F1A87A900FF865E /* PopUpButtonToolbarItem.swift */; };
+		F6D282641F1A8BEA00FF865E /* SearchFieldToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D282631F1A8BEA00FF865E /* SearchFieldToolbarItem.swift */; };
 		F6D572AB1E26AA8200CDA909 /* EmptyTrashWarning.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572AD1E26AA8200CDA909 /* EmptyTrashWarning.xib */; };
 		F6D572AE1E26AA8A00CDA909 /* FeedCredentials.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */; };
 		F6D572B11E26AA9000CDA909 /* GroupFolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B31E26AA9000CDA909 /* GroupFolder.xib */; };
@@ -899,6 +900,7 @@
 		F6D0089B1EF95C9D008F2D3B /* InfoPanelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoPanelManager.m; sourceTree = "<group>"; };
 		F6D0089D1EF95CAC008F2D3B /* InfoPanelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoPanelManager.h; sourceTree = "<group>"; };
 		F6D282611F1A87A900FF865E /* PopUpButtonToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButtonToolbarItem.swift; sourceTree = "<group>"; };
+		F6D282631F1A8BEA00FF865E /* SearchFieldToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFieldToolbarItem.swift; sourceTree = "<group>"; };
 		F6D448EA209EFE1D00C63333 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "pt-BR"; path = "pt-BR.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		F6D573291E26B19D00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/EmptyTrashWarning.xib; sourceTree = "<group>"; };
 		F6D5732A1E26B19E00CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeedCredentials.xib; sourceTree = "<group>"; };
@@ -1344,6 +1346,7 @@
 			isa = PBXGroup;
 			children = (
 				F61CEA651F039E56009C878E /* ButtonToolbarItem.swift */,
+				F6D282631F1A8BEA00FF865E /* SearchFieldToolbarItem.swift */,
 				F6D282611F1A87A900FF865E /* PopUpButtonToolbarItem.swift */,
 				F61CEA671F03F277009C878E /* PluginToolbarItem.swift */,
 				F6A4E8471F040D58001C9191 /* PluginToolbarItemButton.swift */,
@@ -2099,6 +2102,7 @@
 				0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */,
 				F63833D81EF842EA00E07213 /* MainWindowController.swift in Sources */,
 				F41CA694218F56140072F734 /* NSWorkspace+OpenWithMenu.m in Sources */,
+				F6D282641F1A8BEA00FF865E /* SearchFieldToolbarItem.swift in Sources */,
 				664F87C713C62DFE00E266DE /* OpenReader.m in Sources */,
 				F6D282621F1A87A900FF865E /* PopUpButtonToolbarItem.swift in Sources */,
 				EA43C70914A370DB00F2D843 /* VTPG_Common.m in Sources */,
