@@ -229,6 +229,9 @@
 /* Class = "NSMenuItem"; title = "Restore Article"; ObjectID = "1044"; */
 "1044.title" = "Herstel artikel";
 
+/* Class = "NSMenuItem"; title = "Downloads"; ObjectID = "1061"; */
+"1061.title" = "Downloads";
+
 /* Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067"; */
 "1067.title" = "Open artikelpagina in externe browser";
 

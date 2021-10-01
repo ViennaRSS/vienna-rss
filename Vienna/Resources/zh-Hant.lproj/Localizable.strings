@@ -123,9 +123,6 @@
 "Click the Open button to open this file." = "按一下“打開”按鈕可打開此檔案。";
 
 /* No comment provided by engineer. */
-"Click the Play button to play this enclosure in iTunes." = "按一下“播放”按鈕可在 iTunes 中播放此隨附項目。";
-
-/* No comment provided by engineer. */
 "Connecting to %@" = "連線到 %@";
 
 /* No comment provided by engineer. */
@@ -466,9 +463,6 @@
 "Other" = "其他";
 
 /* No comment provided by engineer. */
-"Play" = "播放";
-
-/* No comment provided by engineer. */
 "Plugin installed" = "已安裝的外掛項目";
 
 /* No comment provided by engineer. */
@@ -540,6 +534,11 @@
 
 /* No comment provided by engineer. */
 "Search all articles or the current web page" = "查詢當前網頁的所有文章";
+
+/* Toolbar item label
+   Toolbar item palette label
+   Toolbar item tooltip */
+"Search Articles" = "搜尋文章";
 
 /* Placeholder title of a search field */
 "Search current web page" = "查詢當前網頁";

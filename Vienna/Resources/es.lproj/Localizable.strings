@@ -126,9 +126,6 @@
 "Click the Open button to open this file." = "Haga clic en el botón Abrir para abrir este archivo.";
 
 /* No comment provided by engineer. */
-"Click the Play button to play this enclosure in iTunes." = "Haga clic en el botón Reproducir para reproducir este archivo adjunto en iTunes.";
-
-/* No comment provided by engineer. */
 "Connecting to %@" = "Conectando con %@";
 
 /* No comment provided by engineer. */
@@ -221,6 +218,9 @@
 
 /* No comment provided by engineer. */
 "Enter the URL here" = "Introduzca la URL aquí";
+
+/* Already subscribed title */
+"Error" = "Error";
 
 /* No comment provided by engineer. */
 "Error loading script '%@'" = "Error cargando script '%@'";
@@ -472,9 +472,6 @@
 "Other" = "Otro";
 
 /* No comment provided by engineer. */
-"Play" = "Reproducir";
-
-/* No comment provided by engineer. */
 "Plugin installed" = "Plugin instalado";
 
 /* No comment provided by engineer. */
@@ -549,6 +546,11 @@
 
 /* No comment provided by engineer. */
 "Search all articles or the current web page" = "Buscar todos los artículos o en la página web actual";
+
+/* Toolbar item label
+   Toolbar item palette label
+   Toolbar item tooltip */
+"Search Articles" = "Buscar artículos";
 
 /* Placeholder title of a search field */
 "Search current web page" = "Buscar en página web actual";

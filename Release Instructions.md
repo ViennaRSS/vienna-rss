@@ -1,4 +1,4 @@
-Instructions for building and uploading Vienna binaries to Github, Sourceforge and Bintray.
+Instructions for building and uploading Vienna binaries to Github and Sourceforge.
 
 ## One time setup step: ##
 
@@ -6,7 +6,8 @@ Instructions for building and uploading Vienna binaries to Github, Sourceforge a
 In Xcode->File->Project settings…, you should have :
 
 - Build System : New Build System
-- Derived Data : Default Location
+- Derived Data : Project-relative Location
+	- DerivedData
 - Advanced… : Build Location : Custom : Relative to Workspace
 	- Products : Build/Products
 	- Intermediates : Build/Intermediates.noindex
@@ -20,8 +21,11 @@ This file has been deliberately set to be ignored in our git repository, because
 `CODE_SIGN_IDENTITY`  
 should be exactly the name of your certificate as it is stored in Keychain.
 
+`PRIVATE_EDDSA_KEY_PATH`  
+should be the location of the private EdDSA (ed25519) key used by Sparkle 2, which for obvious security reasons should not be located in the source directory !
+
 `PRIVATE_KEY_PATH`  
-should be the location of the private DSA key used by Sparkle, which for obvious security reasons should not be located in the source directory !
+should be the location of the (legacy) private DSA key used by Sparkle, which for obvious security reasons should not be located in the source directory !
 
 If you want to go further in automation of package building, you will have to define three additional environment variables in the `CS-ID.xcconfig` file. These ones are used to automate the use of the `altool` command line tool as described in [this page of Apple's documentation](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow).
 
@@ -31,17 +35,20 @@ is the Apple ID used to connect to App Store Connect
 `APP_STORE_PASSWORD`  
 is an app-specific password created for `altool`
 
-`TEAM_SHORTNAME`  
-is the provider short name for the appropriate developer team.
+`TEAM_ID`  
+is the appropriate developer team identifier. It is generally a 10-character code. You can look-up the teams you are part of in the “Membership” area of [Apple's developer portal](https://developer.apple.com/account/).
 
 For instance, the content of my `Scripts/Resources/CS-ID.xcconfig` file looks like this :
 
 
     CODE_SIGN_IDENTITY = Developer ID Application: Barijaona Ramaholimihaso
+    PRIVATE_EDDSA_KEY_PATH = $(SRCROOT)/../secrets/vienna_private_eddsa_key.pem
     PRIVATE_KEY_PATH = $(SRCROOT)/../secrets/vienna_private_key.pem
     APP_STORE_ID = barijaona@mac.com
     APP_STORE_PASSWORD = @keychain:altool-barijaona@mac.com
-    TEAM_SHORTNAME = BarijaonaRamaholimihaso38280830
+    TEAM_ID = KUU2LM7U9K
+
+__Note:__ Vienna maintainers can [contact me](https://github.com/barijaona "Github") to get provisioning profiles for the above mentioned Team ID, in order to decentralize the distribution of Vienna's official builds.
 
 ## Tag Formatting ##
 
@@ -86,6 +93,7 @@ There are two distinct ways to get the different files needed to publish an upda
 
 ### Building through the command line
 
+- If you have multiple versions of Xcode installed on your machine, ensure that an adequate version is selected. For instance, you might have to type `sudo xcode-select --switch /Applications/Xcode-beta.app` at the command line
 - At the command line, run `make release`
 - You will have enough time to take a tea, walk the dog or read your mails…
 - At the end of the process, the Uploads window should open in the Finder,
@@ -100,24 +108,17 @@ There are two distinct ways to get the different files needed to publish an upda
 ### On Github:
 
    1. Go to Vienna's releases page on Github : <https://github.com/ViennaRSS/vienna-rss/releases>
-   2. Choose "Draft a new release", type the tag name (`v/3.3.0_beta4`), a description ("Vienna 3.3.0 Beta 4"). Upload the `Vienna3.3.0_beta4.tar.gz` file.
-   3. For beta and release candidates, check the "This is a prerelease" box.
-   4. Click the "Publish" button.
-   5. Verify the uploaded file: download it, uncompress it and check that it runs OK.
-
-### On Bintray.com:
-	
-   6. Sign in and go to <https://bintray.com/viennarss/vienna-rss/vienna-rss/view>
-   7. Choose "New version".
-   8. Fill the name ("3.3.0Beta4"), the description from the version notes, then click "Create version". Add the VCS tag (`v/3.3.0_beta4`) and update.
-   9. Check the version (at <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4>), click "Upload files" to go to <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4/upload> and upload the two .tar.gz files (whose name should be like `Vienna3.3.0_beta4.tar.gz` and `Vienna3.3.0_beta4.5b272a6-dSYM.tar.gz`).
-   10. Click "Save Changes", then click "Publish".
-   11. Go back to the files list (<https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4/#files>), select the binary ("Vienna3.3.0_beta4.tar.gz") and choose "Show in download list" in the contextual menu.
+   2. Choose "Draft a new release", type the tag name (`v/3.3.0_beta4`), a description ("Vienna 3.3.0 Beta 4").
+   3. Upload the `Vienna3.3.0_beta4.tar.gz` file.
+   4. Upload also the compressed dSYM file (whose nome should be something similar to `Vienna3.3.0_beta4.5b272a6-dSYM.tar.gz`)
+   5. For beta and release candidates, check the "This is a prerelease" box.
+   6. Click the "Publish" button.
+   7. Verify the uploaded app: download it, uncompress it and check that it runs OK.
 
 ### On Sourceforge.net:
 
    12. Check that the SourceForge Downloads page for Vienna at <https://sourceforge.net/projects/vienna-rss/files/> got the new files.
-   13. For stable releases only : from the Sourceforge site, choose the ℹ️ button ("View details") of "Vienna3.3.0.tar.gz" (be careful to select the binary and not the code source file !) and set the file as default download for Mac OS X. Don't do this for beta releases!
+   13. For stable releases only : from the Sourceforge site, choose the ℹ️ button ("View details") of "Vienna3.3.0.tar.gz" (be careful to select the binary and not the code source file or the dSYM file!) and set the file as default download for Mac OS X. Don't do this for beta releases!
 
 ### On viennarss.github.io
 

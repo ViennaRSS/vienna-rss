@@ -46,7 +46,7 @@ enum
 	
 	if (doNotShowWarningAgain.state == NSControlStateValueOn)
 	{
-		[[Preferences standardPreferences] setInteger:(shouldEmptyTrash ? MA_EmptyTrash_WithoutWarning : MA_EmptyTrash_None) forKey:MAPref_EmptyTrashNotification];
+		[[Preferences standardPreferences] setInteger:(shouldEmptyTrash ? VNAEmptyTrashWithoutWarning : VNAEmptyTrashNone) forKey:MAPref_EmptyTrashNotification];
 	}
 	
 	[self close];

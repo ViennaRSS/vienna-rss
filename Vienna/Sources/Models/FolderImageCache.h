@@ -26,7 +26,8 @@ typedef NS_ENUM(NSInteger, VNAFolderIconIndex) {
     MA_Max_Icons
 };
 
-+(FolderImageCache *)defaultCache;
+@property (class, readonly) FolderImageCache *defaultCache;
+
 -(void)addImage:(NSImage *)image forURL:(NSString *)baseURL;
 -(NSImage *)retrieveImage:(NSString *)baseURL;
 

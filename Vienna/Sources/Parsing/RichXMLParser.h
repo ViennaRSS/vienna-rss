@@ -39,7 +39,6 @@
 
 // General functions
 -(BOOL)parseRichXML:(NSData *)xmlData;
-+(BOOL)extractFeeds:(NSData *)xmlData toArray:(NSMutableArray *)linkArray;
 @property (nonatomic, readonly, copy) NSString * title;
 @property (nonatomic, readonly, copy) NSString * description;
 @property (nonatomic, readonly, copy) NSString * link;

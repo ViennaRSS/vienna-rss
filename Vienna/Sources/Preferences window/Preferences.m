@@ -186,6 +186,7 @@ static Preferences * _standardPreferences = nil;
 		shouldSaveFeedSource = [self boolForKey:MAPref_ShouldSaveFeedSource];
 		searchMethod = [NSKeyedUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_SearchMethod]];
 		concurrentDownloads = [self integerForKey:MAPref_ConcurrentDownloads];
+        _userAgentName = [self stringForKey:MAPref_UserAgentName];
         
         // Open Reader sync
         syncGoogleReader = [self boolForKey:MAPref_SyncGoogleReader];
@@ -257,7 +258,7 @@ static Preferences * _standardPreferences = nil;
 	defaultValues[MAPref_ActiveStyleName] = MA_DefaultStyleName;
 	defaultValues[MAPref_ActiveTextSizeMultiplier] = @1.0;
 	defaultValues[MAPref_BacktrackQueueSize] = @(MA_Default_BackTrackQueueSize);
-	defaultValues[MAPref_AutoSortFoldersTree] = @MA_FolderSort_Manual;
+	defaultValues[MAPref_AutoSortFoldersTree] = [NSNumber numberWithInt:VNAFolderSortManual];
 	defaultValues[MAPref_ShowFolderImages] = boolYes;
 	defaultValues[MAPref_UseJavaScript] = boolYes;
     defaultValues[MAPref_UseWebPlugins] = boolYes;
@@ -266,18 +267,17 @@ static Preferences * _standardPreferences = nil;
 	defaultValues[MAPref_ShowAppInStatusBar] = boolNo;
 	defaultValues[MAPref_ShowStatusBar] = boolYes;
 	defaultValues[MAPref_ShowFilterBar] = boolYes;
-	defaultValues[MAPref_NewFolderUI] = boolNo;
 	defaultValues[MAPref_UseMinimumFontSize] = boolNo;
-	defaultValues[MAPref_FilterMode] = @MA_Filter_All;
+	defaultValues[MAPref_FilterMode] = [NSNumber numberWithInt:VNAFilterAll];
 	defaultValues[MAPref_MinimumFontSize] = @(MA_Default_MinimumFontSize);
 	defaultValues[MAPref_AutoExpireDuration] = @(MA_Default_AutoExpireDuration);
 	defaultValues[MAPref_DownloadsFolder] = [NSFileManager.defaultManager URLsForDirectory:NSDownloadsDirectory
                                                                                  inDomains:NSUserDomainMask].firstObject.path;
 	defaultValues[MAPref_ArticleSortDescriptors] = defaultArticleSortDescriptors;
 	defaultValues[MAPref_LastRefreshDate] = [NSDate distantPast];
-	defaultValues[MAPref_Layout] = @MA_Layout_Report;
-	defaultValues[MAPref_NewArticlesNotification] = @MA_NewArticlesNotification_Badge;
-	defaultValues[MAPref_EmptyTrashNotification] = @MA_EmptyTrash_WithWarning;
+	defaultValues[MAPref_Layout] = [NSNumber numberWithInt:VNALayoutReport];
+	defaultValues[MAPref_NewArticlesNotification] = [NSNumber numberWithInt:0];
+	defaultValues[MAPref_EmptyTrashNotification] = [NSNumber numberWithInt:VNAEmptyTrashWithWarning];
 	defaultValues[MAPref_HighestViennaVersionRun] = @0;
 	defaultValues[MAPref_LastViennaVersionRun] = @0;
 	defaultValues[MAPref_ShouldSaveFeedSource] = boolYes;
@@ -289,7 +289,8 @@ static Preferences * _standardPreferences = nil;
     defaultValues[MAPref_SyncingAppId] = @"1000001359";
     defaultValues[MAPref_SyncingAppKey] = @"rAlfs2ELSuFxZJ5adJAW54qsNbUa45Qn";
     defaultValues[MAPref_AlwaysAcceptBetas] = boolNo;
-	
+    defaultValues[MAPref_UserAgentName] = @"Vienna";
+
 	return [defaultValues copy];
 }
 

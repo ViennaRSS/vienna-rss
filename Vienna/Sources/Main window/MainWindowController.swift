@@ -29,7 +29,8 @@ final class MainWindowController: NSWindowController {
     @IBOutlet private(set) var unifiedDisplayView: UnifiedDisplayView?
     @IBOutlet private(set) var filterDisclosureView: DisclosureView?
     @IBOutlet private(set) var filterSearchField: NSSearchField?
-    @IBOutlet private(set) var toolbarSearchField: NSSearchField?
+
+    @objc private(set) var toolbarSearchField: NSSearchField?
 
     // MARK: Initialization
 
@@ -37,10 +38,10 @@ final class MainWindowController: NSWindowController {
         super.awakeFromNib()
 
         // TODO: Move this to windowDidLoad()
-        statusBarState(disclosed: Preferences.standard().showStatusBar, animate: false)
+        statusBarState(disclosed: Preferences.standard.showStatusBar, animate: false)
 
         let filterMenu = (NSApp as? ViennaApp)?.filterMenu
-        let filterMode = Preferences.standard().filterMode
+        let filterMode = Preferences.standard.filterMode
         if let menuTitle = filterMenu?.item(withTag: filterMode)?.title {
             filterLabel.stringValue = menuTitle
         }
@@ -72,7 +73,7 @@ final class MainWindowController: NSWindowController {
     private func statusBarState(disclosed: Bool, animate: Bool = true) {
         if statusBar.isDisclosed && !disclosed {
             statusBar.collapse(animate)
-            Preferences.standard().showStatusBar = false
+            Preferences.standard.showStatusBar = false
 
             // If the animation is interrupted, don't hide the content border.
             if !statusBar.isDisclosed {
@@ -82,17 +83,19 @@ final class MainWindowController: NSWindowController {
             let height = statusBar.disclosedView.frame.size.height
             window?.setContentBorderThickness(height, for: .minY)
             statusBar.disclose(animate)
-            Preferences.standard().showStatusBar = true
+            Preferences.standard.showStatusBar = true
         }
     }
 
     // MARK: Actions
 
+    // swiftlint:disable private_action
     @IBAction func changeFiltering(_ sender: NSMenuItem) { // TODO: This should be handled by ArticleController
-        Preferences.standard().filterMode = sender.tag
+        Preferences.standard.filterMode = sender.tag
         filterLabel.stringValue = sender.title
     }
 
+    // swiftlint:disable private_action
     @IBAction func toggleStatusBar(_ sender: AnyObject) {
         statusBarState(disclosed: !statusBar.isDisclosed)
     }
@@ -110,7 +113,7 @@ extension MainWindowController: NSMenuItemValidation {
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         switch menuItem.action {
         case #selector(changeFiltering(_:)):
-            menuItem.state = menuItem.tag == Preferences.standard().filterMode ? .on : .off
+            menuItem.state = menuItem.tag == Preferences.standard.filterMode ? .on : .off
         case #selector(toggleStatusBar(_:)):
             if statusBar.isDisclosed {
                 menuItem.title = NSLocalizedString("Hide Status Bar", comment: "Title of a menu item")
@@ -137,12 +140,12 @@ extension MainWindowController: NSWindowDelegate {
         filterButton.isEnabled = true
 
         observationTokens = [
-            OpenReader.sharedManager().observe(\.statusMessage, options: .new) { [weak self] manager, change in
+            OpenReader.shared.observe(\.statusMessage, options: .new) { [weak self] manager, change in
                 if change.newValue is String {
                     self?.statusLabel.stringValue = manager.statusMessage
                 }
             },
-            RefreshManager.shared().observe(\.statusMessage, options: .new) { [weak self] manager, change in
+            RefreshManager.shared.observe(\.statusMessage, options: .new) { [weak self] manager, change in
                 if change.newValue is String {
                     self?.statusLabel.stringValue = manager.statusMessage
                 }
@@ -169,6 +172,32 @@ extension MainWindowController: NSToolbarDelegate {
     }
 
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+        if itemIdentifier == NSToolbarItem.Identifier("SearchItem") {
+            let item: NSToolbarItem
+            if #available(macOS 11, *) {
+                item = NSSearchToolbarItem(itemIdentifier: itemIdentifier)
+                toolbarSearchField = (item as? NSSearchToolbarItem)?.searchField
+            } else {
+                item = NSToolbarItem(itemIdentifier: itemIdentifier)
+                item.view = NSSearchField()
+                item.maxSize.width = 210
+                item.visibilityPriority = .high
+                toolbarSearchField = item.view as? NSSearchField
+            }
+
+            item.label = NSLocalizedString("Search Articles", comment: "Toolbar item label")
+            item.paletteLabel = NSLocalizedString("Search Articles", comment: "Toolbar item palette label")
+            item.toolTip = NSLocalizedString("Search Articles", comment: "Toolbar item tooltip")
+
+            item.action = #selector(AppController.searchUsingToolbarTextField(_:))
+            item.menuFormRepresentation = NSMenuItem(title: item.label, action: item.action, keyEquivalent: "")
+
+            toolbarSearchField?.sendsWholeSearchString = true
+            toolbarSearchField?.sendsSearchStringImmediately = false
+
+            return item
+        }
+
         return pluginManager?.toolbarItem(forIdentifier: itemIdentifier.rawValue)
     }
 

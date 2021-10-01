@@ -22,6 +22,6 @@
 
 #import "TableViewExtensions.h"
 
-@interface MessageListView : ExtendedTableView
+@interface MessageListView : ExtendedTableView <NSMenuItemValidation>
 	-(void)keyDown:(NSEvent *)theEvent;
 @end

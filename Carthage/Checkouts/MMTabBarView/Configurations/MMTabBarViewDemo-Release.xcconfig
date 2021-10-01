@@ -1,5 +1,0 @@
-#include "Release.xcconfig"
-#include "MMTabBarViewDemo-Base.xcconfig"
-
-COPY_PHASE_STRIP = YES
-ZERO_LINK = NO

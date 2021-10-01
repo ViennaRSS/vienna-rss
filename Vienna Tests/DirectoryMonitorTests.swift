@@ -1,8 +1,8 @@
 //
 //  DirectoryMonitorTests.swift
-//  Vienna
+//  Vienna Tests
 //
-//  Copyright 2017
+//  Copyright 2017 Eitot
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@
 //  limitations under the License.
 //
 
-import XCTest
 @testable import Vienna
+import XCTest
 
 class DirectoryMonitorTests: XCTestCase {
 
@@ -51,7 +51,7 @@ class DirectoryMonitorTests: XCTestCase {
         testExpectation = expectation(description: "The monitor's event handler is called")
 
         // Create the temp directory.
-        try! fileManager.createDirectory(at: tempDirectory, withIntermediateDirectories: false)
+        XCTAssertNoThrow(try fileManager.createDirectory(at: tempDirectory, withIntermediateDirectories: false))
 
         // Create the monitor.
         monitor = DirectoryMonitor(directories: [tempDirectory])
@@ -63,7 +63,7 @@ class DirectoryMonitorTests: XCTestCase {
         hasHandlerBeenCalled = false
 
         // Delete the temp directory.
-        try! fileManager.removeItem(at: tempDirectory)
+        XCTAssertNoThrow(try fileManager.removeItem(at: tempDirectory))
 
         // Unset the test expectation.
         testExpectation = nil
@@ -75,7 +75,7 @@ class DirectoryMonitorTests: XCTestCase {
 
     func testCreatingFile() {
         // Start monitoring.
-        try! monitor?.start(eventHandler: handler)
+        XCTAssertNoThrow(try monitor?.start(eventHandler: handler))
 
         // Create a file and observe the changes.
         let file = tempDirectory.appendingPathComponent("File 1")
@@ -97,11 +97,11 @@ class DirectoryMonitorTests: XCTestCase {
         XCTAssertEqual(tempDirectoryItemCount, 1)
 
         // Start monitoring.
-        try! monitor?.start(eventHandler: handler)
+        XCTAssertNoThrow(try monitor?.start(eventHandler: handler))
 
         // Rename the file and observe the changes.
         let renamedFile = tempDirectory.appendingPathComponent("File 2")
-        try! fileManager.moveItem(at: file, to: renamedFile)
+        XCTAssertNoThrow(try fileManager.moveItem(at: file, to: renamedFile))
 
         // Make sure that there is still exactly one file.
         XCTAssertEqual(tempDirectoryItemCount, 1)
@@ -112,7 +112,10 @@ class DirectoryMonitorTests: XCTestCase {
 
     func testEditingFile() {
         // The file data for one of the files.
-        let fileData = "Data".data(using: .unicode)!
+        guard let fileData = "Data".data(using: .unicode) else {
+            XCTFail("Failed to create data blob")
+            return
+        }
 
         // Create two files.
         let file1 = tempDirectory.appendingPathComponent("File 1")
@@ -127,10 +130,10 @@ class DirectoryMonitorTests: XCTestCase {
         XCTAssertNotEqual(fileManager.contents(atPath: file1.path), fileData)
 
         // Start monitoring.
-        try! monitor?.start(eventHandler: handler)
+        XCTAssertNoThrow(try monitor?.start(eventHandler: handler))
 
         // Replace the contents of file 1 with the contents of file 2.
-        try! fileManager.replaceItem(at: file1, withItemAt: file2, backupItemName: nil, resultingItemURL: nil)
+        XCTAssertNoThrow(try fileManager.replaceItem(at: file1, withItemAt: file2, backupItemName: nil, resultingItemURL: nil))
 
         // Make sure that the content of file 1 is now the same as the variable.
         XCTAssertEqual(fileManager.contents(atPath: file1.path), fileData)
@@ -148,10 +151,10 @@ class DirectoryMonitorTests: XCTestCase {
         XCTAssertEqual(tempDirectoryItemCount, 1)
 
         // Start monitoring.
-        try! monitor?.start(eventHandler: handler)
+        XCTAssertNoThrow(try monitor?.start(eventHandler: handler))
 
         // Delete the file and observe the changes.
-        try! fileManager.removeItem(at: file)
+        XCTAssertNoThrow(try fileManager.removeItem(at: file))
 
         // Make sure that there is no file left.
         XCTAssertEqual(tempDirectoryItemCount, 0)
@@ -165,9 +168,9 @@ class DirectoryMonitorTests: XCTestCase {
     let fileManager = FileManager.default
 
     let tempDirectory = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ProcessInfo.processInfo.globallyUniqueString, isDirectory: true)
-    
+
     var tempDirectoryItemCount: Int {
-        return try! fileManager.contentsOfDirectory(at: tempDirectory, includingPropertiesForKeys: nil).count
+        return (try? fileManager.contentsOfDirectory(at: tempDirectory, includingPropertiesForKeys: nil))?.count ?? -1
     }
-    
+
 }

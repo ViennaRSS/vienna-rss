@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="VBW-RM-gbf">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="VBW-RM-gbf">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -10,7 +10,7 @@
         <scene sceneID="eaY-hs-qZ7">
             <objects>
                 <windowController storyboardIdentifier="preferencesWindow" showSeguePresentationStyle="single" id="VBW-RM-gbf" sceneMemberID="viewController">
-                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="X5g-th-bjd">
+                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" toolbarStyle="preference" id="X5g-th-bjd">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
                         <windowCollectionBehavior key="collectionBehavior" fullScreenAuxiliary="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -33,11 +33,11 @@
             <objects>
                 <tabViewController tabStyle="toolbar" canPropagateSelectedChildViewControllerTitle="NO" id="VCh-Za-CPt" sceneMemberID="viewController">
                     <tabViewItems>
-                        <tabViewItem label="General" image="NSPreferencesGeneral" id="GJ3-1q-004"/>
-                        <tabViewItem label="Appearance" image="appearancePrefImage" id="WK4-g4-vJd"/>
-                        <tabViewItem label="Syncing" image="sync" id="zkN-he-3BT"/>
-                        <tabViewItem label="Updates" image="NSNetwork" id="qyx-3u-1Io"/>
-                        <tabViewItem label="Advanced" image="NSAdvanced" id="iEw-AM-tMF"/>
+                        <tabViewItem label="General" identifier="general" image="gearshape" catalog="system" id="GJ3-1q-004" customClass="PreferenceTabViewItem" customModule="Vienna" customModuleProvider="target"/>
+                        <tabViewItem label="Appearance" image="paintbrush" catalog="system" id="WK4-g4-vJd"/>
+                        <tabViewItem label="Syncing" image="arrow.triangle.2.circlepath" catalog="system" id="zkN-he-3BT"/>
+                        <tabViewItem label="Updates" identifier="updates" image="square.and.arrow.down" catalog="system" id="qyx-3u-1Io" customClass="PreferenceTabViewItem" customModule="Vienna" customModuleProvider="target"/>
+                        <tabViewItem label="Advanced" identifier="advanced" image="wrench.and.screwdriver" catalog="system" id="iEw-AM-tMF" customClass="PreferenceTabViewItem" customModule="Vienna" customModuleProvider="target"/>
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
                     <tabView key="tabView" wantsLayer="YES" type="noTabsNoBorder" id="VWZ-OZ-KI2">
@@ -66,11 +66,11 @@
             <objects>
                 <viewController id="Lfh-L2-KcO" customClass="SyncingPreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="Iqj-1b-Nzr">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="218"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="220"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YuE-bx-yZN">
-                                <rect key="frame" x="18" y="182" width="414" height="18"/>
+                                <rect key="frame" x="18" y="183" width="412" height="18"/>
                                 <buttonCell key="cell" type="check" title="Sync with an Open Reader server" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Uyd-GK-jtn">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -80,7 +80,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1AL-bw-HAe">
-                                <rect key="frame" x="36" y="147" width="66" height="16"/>
+                                <rect key="frame" x="36" y="146" width="66" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Server:" id="OuH-3K-YPK">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -91,10 +91,10 @@
                                 </connections>
                             </textField>
                             <popUpButton toolTip="Select a server supporting the Open Reader API" verticalHuggingPriority="750" placeholderIntrinsicWidth="74" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="iHl-tr-paa">
-                                <rect key="frame" x="106" y="140" width="79" height="25"/>
+                                <rect key="frame" x="105" y="139" width="81" height="26"/>
                                 <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="dZU-tN-Cq4">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="kHb-Cd-0xr"/>
                                 </popUpButtonCell>
                                 <connections>
@@ -121,7 +121,7 @@
                                 </textFieldCell>
                             </textField>
                             <button toolTip="Visit the website" translatesAutoresizingMaskIntoConstraints="NO" id="V12-Ua-skO">
-                                <rect key="frame" x="321" y="114" width="21" height="21"/>
+                                <rect key="frame" x="321" y="111" width="21" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="V12-Ua-skO" secondAttribute="height" multiplier="1:1" id="jGj-dm-w5k"/>
                                 </constraints>
@@ -241,11 +241,11 @@
             <objects>
                 <viewController id="NjZ-bv-EoA" customClass="AdvancedPreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="8J7-Mc-HHy">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="251"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="254"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vvG-VT-CVp">
-                                <rect key="frame" x="18" y="199" width="414" height="32"/>
+                                <rect key="frame" x="18" y="202" width="414" height="32"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="4Qn-qF-kSp">
                                     <font key="font" metaFont="system"/>
                                     <string key="title">The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.</string>
@@ -254,7 +254,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1u1-uu-U0M">
-                                <rect key="frame" x="18" y="163" width="414" height="18"/>
+                                <rect key="frame" x="18" y="165" width="412" height="18"/>
                                 <buttonCell key="cell" type="check" title="Enable JavaScript in the internal browser" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="MnV-8D-Qyq">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -264,7 +264,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fnP-kR-L8c">
-                                <rect key="frame" x="18" y="143" width="414" height="18"/>
+                                <rect key="frame" x="18" y="143" width="412" height="18"/>
                                 <buttonCell key="cell" type="check" title="Enable Internet plug-ins in the internal browser" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="9bX-Lt-AWz">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -274,7 +274,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="VMW-g6-f00">
-                                <rect key="frame" x="18" y="107" width="145" height="16"/>
+                                <rect key="frame" x="18" y="106" width="145" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Concurrent downloads:" id="6oJ-Rh-rgA">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -282,13 +282,13 @@
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" placeholderIntrinsicWidth="71" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="8eb-2O-wjd">
-                                <rect key="frame" x="167" y="101" width="76" height="25"/>
-                                <popUpButtonCell key="cell" type="push" title="1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Byc-c2-qnN" id="nFS-Xo-Mn1">
+                                <rect key="frame" x="166" y="99" width="78" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title="1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Byc-c2-qnN" id="nFS-Xo-Mn1">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="Awq-ex-o9L">
                                         <items>
-                                            <menuItem title="1" id="Byc-c2-qnN">
+                                            <menuItem title="1" state="on" id="Byc-c2-qnN">
                                                 <attributedString key="userComments">
                                                     <fragment content="Do not localize">
                                                         <attributes>
@@ -318,7 +318,7 @@
                                                     </fragment>
                                                 </attributedString>
                                             </menuItem>
-                                            <menuItem title="10" state="on" id="xjZ-nG-iOH">
+                                            <menuItem title="10" id="xjZ-nG-iOH">
                                                 <attributedString key="userComments">
                                                     <fragment content="Do not localize">
                                                         <attributes>
@@ -366,7 +366,7 @@
                                 </connections>
                             </popUpButton>
                             <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GDE-ah-5QX">
-                                <rect key="frame" x="18" y="83" width="414" height="13"/>
+                                <rect key="frame" x="18" y="82" width="414" height="13"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="The higher the number, the quicker your subscriptions will be downloaded." id="g3K-qh-M6y">
                                     <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -374,7 +374,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="37K-gU-v9y">
-                                <rect key="frame" x="18" y="49" width="414" height="26"/>
+                                <rect key="frame" x="18" y="48" width="414" height="26"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="However, high numbers also render your computer less responsive while refreshing feeds." id="5EA-1i-TuA">
                                     <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -434,11 +434,11 @@
             <objects>
                 <viewController id="U0J-a5-0Pj" customClass="AppearancePreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="57X-N5-EiK">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="184"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="188"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WR8-u8-Vm9">
-                                <rect key="frame" x="18" y="146" width="97" height="16"/>
+                                <rect key="frame" x="18" y="150" width="97" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Article list font:" id="ITA-U9-lhX">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -449,7 +449,7 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1RP-By-TQq">
-                                <rect key="frame" x="121" y="143" width="224" height="21"/>
+                                <rect key="frame" x="121" y="147" width="232" height="21"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="3NA-G9-1c6">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -457,7 +457,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5dd-GM-M3b">
-                                <rect key="frame" x="347" y="136" width="89" height="32"/>
+                                <rect key="frame" x="354" y="140" width="83" height="32"/>
                                 <buttonCell key="cell" type="push" title="Select…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cbn-xq-UFr">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -467,7 +467,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cAr-Rb-nLB">
-                                <rect key="frame" x="18" y="115" width="97" height="16"/>
+                                <rect key="frame" x="18" y="119" width="97" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Folder list font:" id="M8s-xu-lWh">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -478,7 +478,7 @@
                                 </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kjQ-IL-0ll">
-                                <rect key="frame" x="121" y="112" width="224" height="21"/>
+                                <rect key="frame" x="121" y="116" width="232" height="21"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="QsM-oK-2uw">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -486,7 +486,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m6u-2B-CWe">
-                                <rect key="frame" x="347" y="105" width="89" height="32"/>
+                                <rect key="frame" x="354" y="109" width="83" height="32"/>
                                 <buttonCell key="cell" type="push" title="Select…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PmX-nw-uOn">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -496,7 +496,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1fA-eb-j2c">
-                                <rect key="frame" x="18" y="76" width="414" height="16"/>
+                                <rect key="frame" x="18" y="80" width="414" height="16"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="When viewing articles or web pages:" id="2IW-It-hcT">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -507,7 +507,7 @@
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wIv-zK-n6S">
-                                <rect key="frame" x="36" y="52" width="223" height="18"/>
+                                <rect key="frame" x="36" y="55" width="227" height="18"/>
                                 <buttonCell key="cell" type="check" title="Never use font sizes smaller than" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Jk6-0r-7Gs">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -517,7 +517,7 @@
                                 </connections>
                             </button>
                             <comboBox horizontalHuggingPriority="750" verticalHuggingPriority="750" placeholderIntrinsicWidth="42" placeholderIntrinsicHeight="20" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MkS-Vx-yr4">
-                                <rect key="frame" x="265" y="47" width="45" height="26"/>
+                                <rect key="frame" x="271" y="50" width="45" height="26"/>
                                 <comboBoxCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="left" drawsBackground="YES" completes="NO" numberOfVisibleItems="6" id="NvB-jU-vOK">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -528,7 +528,7 @@
                                 </connections>
                             </comboBox>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mm1-tH-CAy">
-                                <rect key="frame" x="18" y="18" width="414" height="18"/>
+                                <rect key="frame" x="18" y="19" width="412" height="18"/>
                                 <buttonCell key="cell" type="check" title="Show feeds icons in folder list" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="dkm-xW-4If">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -588,11 +588,11 @@
             <objects>
                 <viewController id="T2z-OK-VtO" customClass="GeneralPreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="6Zn-BI-L2K">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="454"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="445"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rmx-sO-e7b">
-                                <rect key="frame" x="18" y="416" width="144" height="16"/>
+                                <rect key="frame" x="18" y="408" width="144" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Check for new articles:" id="Oqg-6W-NAL">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -600,13 +600,13 @@
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hd9-hf-LFo">
-                                <rect key="frame" x="166" y="410" width="152" height="25"/>
-                                <popUpButtonCell key="cell" type="push" title="Manually" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="7Za-ay-jlt" id="ohB-Gl-p3X">
+                                <rect key="frame" x="165" y="401" width="154" height="25"/>
+                                <popUpButtonCell key="cell" type="push" title="Manually" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="7Za-ay-jlt" id="ohB-Gl-p3X">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="XDd-bZ-4En">
                                         <items>
-                                            <menuItem title="Manually" id="7Za-ay-jlt"/>
+                                            <menuItem title="Manually" state="on" id="7Za-ay-jlt"/>
                                             <menuItem isSeparatorItem="YES" id="R3T-7q-4kD"/>
                                             <menuItem title="Every 5 minutes" tag="300" id="qYb-Sf-cEF">
                                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -638,7 +638,7 @@
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rjk-vu-JNM">
-                                <rect key="frame" x="36" y="389" width="396" height="18"/>
+                                <rect key="frame" x="36" y="380" width="394" height="18"/>
                                 <buttonCell key="cell" type="check" title="Check for new articles on start up" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="Ljf-Qd-6Ho">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -648,7 +648,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YHk-qo-gYO">
-                                <rect key="frame" x="36" y="369" width="396" height="18"/>
+                                <rect key="frame" x="36" y="358" width="394" height="18"/>
                                 <buttonCell key="cell" type="check" title="Mark updated articles as new" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="4vm-80-j33">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -658,7 +658,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Wi-RB-PIn">
-                                <rect key="frame" x="18" y="335" width="414" height="16"/>
+                                <rect key="frame" x="18" y="323" width="414" height="16"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="When new unread articles are retrieved:" id="iCs-T5-L1c">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -666,21 +666,10 @@
                                 </textFieldCell>
                                 <connections>
                                     <accessibilityConnection property="link" destination="0oy-fx-aoF" id="L75-S9-bG8"/>
-                                    <accessibilityConnection property="link" destination="jcL-HY-Lcc" id="Rsa-6d-Jm7"/>
                                 </connections>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jcL-HY-Lcc">
-                                <rect key="frame" x="36" y="311" width="396" height="18"/>
-                                <buttonCell key="cell" type="check" title="Show the unread count on the application icon" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="jVU-m2-dsS">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="changeNewArticlesNotificationBadge:" target="T2z-OK-VtO" id="0yG-SA-jar"/>
-                                </connections>
-                            </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0oy-fx-aoF">
-                                <rect key="frame" x="36" y="291" width="396" height="18"/>
+                                <rect key="frame" x="36" y="298" width="394" height="18"/>
                                 <buttonCell key="cell" type="check" title="Bounce the application icon" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="jfH-Hq-gRk">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -690,7 +679,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fZd-pw-BJu">
-                                <rect key="frame" x="18" y="257" width="414" height="16"/>
+                                <rect key="frame" x="18" y="263" width="414" height="16"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Mark current article read:" id="adB-qE-xKg">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -698,7 +687,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mgd-Xn-r0g">
-                                <rect key="frame" x="35" y="232" width="397" height="18"/>
+                                <rect key="frame" x="34" y="238" width="396" height="18"/>
                                 <buttonCell key="cell" type="radio" title="After &quot;Next Unread&quot; command" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="jkb-TT-wPC">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -708,7 +697,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qF5-CX-w0a">
-                                <rect key="frame" x="35" y="210" width="397" height="18"/>
+                                <rect key="frame" x="34" y="216" width="396" height="18"/>
                                 <buttonCell key="cell" type="radio" title="After a short delay" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="McN-fD-0Cv">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -718,7 +707,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BhA-zb-SHx">
-                                <rect key="frame" x="18" y="173" width="159" height="16"/>
+                                <rect key="frame" x="18" y="179" width="159" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Move articles to Trash:" id="bom-nB-4zx">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -726,13 +715,13 @@
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" placeholderIntrinsicWidth="132" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="cDG-ln-uKe">
-                                <rect key="frame" x="181" y="167" width="137" height="25"/>
-                                <popUpButtonCell key="cell" type="push" title="Never" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="h9d-GD-q32" id="JSK-7c-lnj">
+                                <rect key="frame" x="180" y="172" width="139" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title="Never" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="h9d-GD-q32" id="JSK-7c-lnj">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="niU-QW-win">
                                         <items>
-                                            <menuItem title="Never" id="h9d-GD-q32"/>
+                                            <menuItem title="Never" state="on" id="h9d-GD-q32"/>
                                             <menuItem title="After a day" id="c4l-M5-qB1"/>
                                             <menuItem title="After two days" id="sJE-bd-4mK"/>
                                             <menuItem title="After a week" id="xfd-Vp-kJy">
@@ -752,7 +741,7 @@
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UVp-Fb-Vxi">
-                                <rect key="frame" x="18" y="143" width="159" height="16"/>
+                                <rect key="frame" x="18" y="149" width="159" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Save downloaded files to:" id="yLU-Xs-TGw">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -760,10 +749,10 @@
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" placeholderIntrinsicWidth="132" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="Aw4-0j-7h9">
-                                <rect key="frame" x="181" y="136" width="137" height="25"/>
+                                <rect key="frame" x="180" y="141" width="139" height="26"/>
                                 <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="CXe-aF-iLH" id="Fvw-QL-Jga">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="3Di-sX-ys8">
                                         <items>
                                             <menuItem state="on" id="CXe-aF-iLH"/>
@@ -779,7 +768,7 @@
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Aqt-Jk-SB3">
-                                <rect key="frame" x="18" y="112" width="159" height="16"/>
+                                <rect key="frame" x="18" y="118" width="159" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Default RSS reader:" id="YHN-Up-rwa">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -787,10 +776,10 @@
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" placeholderIntrinsicWidth="132" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="U0G-xt-64s">
-                                <rect key="frame" x="181" y="105" width="137" height="25"/>
+                                <rect key="frame" x="180" y="110" width="139" height="26"/>
                                 <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="ZMF-yd-3Ps" id="0y5-Pf-IS7">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="3Zm-0u-E1b">
                                         <items>
                                             <menuItem state="on" id="ZMF-yd-3Ps">
@@ -804,7 +793,7 @@
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7gv-LJ-Ouu">
-                                <rect key="frame" x="18" y="72" width="414" height="18"/>
+                                <rect key="frame" x="18" y="77" width="412" height="18"/>
                                 <buttonCell key="cell" type="check" title="Open new links in the background" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="erE-oh-cbw">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -814,7 +803,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Py0-wt-kSJ">
-                                <rect key="frame" x="18" y="52" width="414" height="18"/>
+                                <rect key="frame" x="18" y="55" width="412" height="18"/>
                                 <buttonCell key="cell" type="check" title="Open links in external browser" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="flH-2D-s6O">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -824,7 +813,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="I7s-YO-KpK">
-                                <rect key="frame" x="18" y="18" width="414" height="18"/>
+                                <rect key="frame" x="18" y="19" width="412" height="18"/>
                                 <buttonCell key="cell" type="check" title="Show in menu bar" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="FFP-H1-weF">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -838,7 +827,7 @@
                             <constraint firstAttribute="trailing" secondItem="Py0-wt-kSJ" secondAttribute="trailing" constant="20" symbolic="YES" id="0Kj-Ur-S4Z"/>
                             <constraint firstItem="rjk-vu-JNM" firstAttribute="leading" secondItem="rmx-sO-e7b" secondAttribute="leading" constant="18" id="0lh-hn-Sdb"/>
                             <constraint firstItem="cDG-ln-uKe" firstAttribute="trailing" secondItem="Hd9-hf-LFo" secondAttribute="trailing" id="0w3-fU-ctV"/>
-                            <constraint firstItem="jcL-HY-Lcc" firstAttribute="top" secondItem="4Wi-RB-PIn" secondAttribute="bottom" constant="8" symbolic="YES" id="16R-rY-DRq"/>
+                            <constraint firstItem="0oy-fx-aoF" firstAttribute="top" secondItem="4Wi-RB-PIn" secondAttribute="bottom" constant="8" id="16R-rY-DRq"/>
                             <constraint firstAttribute="bottom" secondItem="I7s-YO-KpK" secondAttribute="bottom" constant="20" symbolic="YES" id="2kt-DT-5Px"/>
                             <constraint firstItem="fZd-pw-BJu" firstAttribute="top" secondItem="0oy-fx-aoF" secondAttribute="bottom" constant="20" id="2mu-ZD-ulx"/>
                             <constraint firstItem="YHk-qo-gYO" firstAttribute="leading" secondItem="rmx-sO-e7b" secondAttribute="leading" constant="18" id="3jY-KI-0aI"/>
@@ -853,10 +842,8 @@
                             <constraint firstItem="7gv-LJ-Ouu" firstAttribute="leading" secondItem="6Zn-BI-L2K" secondAttribute="leading" constant="20" symbolic="YES" id="G6H-id-JSw"/>
                             <constraint firstItem="Py0-wt-kSJ" firstAttribute="top" secondItem="7gv-LJ-Ouu" secondAttribute="bottom" constant="6" symbolic="YES" id="IPP-4I-zJv"/>
                             <constraint firstItem="rjk-vu-JNM" firstAttribute="top" secondItem="Hd9-hf-LFo" secondAttribute="bottom" constant="8" symbolic="YES" id="KHz-0N-z9O"/>
-                            <constraint firstItem="jcL-HY-Lcc" firstAttribute="leading" secondItem="4Wi-RB-PIn" secondAttribute="leading" constant="18" id="MKc-lx-Ot1"/>
                             <constraint firstItem="mgd-Xn-r0g" firstAttribute="top" secondItem="fZd-pw-BJu" secondAttribute="bottom" constant="8" symbolic="YES" id="Mqa-LV-RxF"/>
                             <constraint firstItem="7gv-LJ-Ouu" firstAttribute="top" secondItem="U0G-xt-64s" secondAttribute="bottom" constant="20" id="Qma-Hk-xoc"/>
-                            <constraint firstAttribute="trailing" secondItem="jcL-HY-Lcc" secondAttribute="trailing" constant="20" symbolic="YES" id="RC0-wZ-uFV"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="U0G-xt-64s" secondAttribute="trailing" constant="20" symbolic="YES" id="T2A-ee-YV1"/>
                             <constraint firstItem="4Wi-RB-PIn" firstAttribute="leading" secondItem="6Zn-BI-L2K" secondAttribute="leading" constant="20" symbolic="YES" id="UPv-1O-Waz"/>
                             <constraint firstItem="rmx-sO-e7b" firstAttribute="baseline" secondItem="Hd9-hf-LFo" secondAttribute="baseline" id="Vcf-TH-puY"/>
@@ -891,7 +878,6 @@
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Aw4-0j-7h9" secondAttribute="trailing" constant="20" symbolic="YES" id="xQe-Ck-S14"/>
                             <constraint firstItem="Aw4-0j-7h9" firstAttribute="leading" secondItem="UVp-Fb-Vxi" secondAttribute="trailing" constant="8" symbolic="YES" id="yaJ-6n-a7X"/>
                             <constraint firstItem="Hd9-hf-LFo" firstAttribute="top" secondItem="6Zn-BI-L2K" secondAttribute="top" constant="20" symbolic="YES" id="yhD-LY-FW9"/>
-                            <constraint firstItem="0oy-fx-aoF" firstAttribute="top" secondItem="jcL-HY-Lcc" secondAttribute="bottom" constant="6" symbolic="YES" id="zHX-p4-c6X"/>
                             <constraint firstItem="Aw4-0j-7h9" firstAttribute="trailing" secondItem="cDG-ln-uKe" secondAttribute="trailing" id="zf6-0s-XxX"/>
                             <constraint firstAttribute="trailing" secondItem="YHk-qo-gYO" secondAttribute="trailing" constant="20" symbolic="YES" id="ziR-we-eOq"/>
                         </constraints>
@@ -905,7 +891,6 @@
                         <outlet property="markReadAfterDelay" destination="McN-fD-0Cv" id="kbs-6x-LQ1"/>
                         <outlet property="markReadAfterNext" destination="jkb-TT-wPC" id="A95-fa-Lby"/>
                         <outlet property="markUpdatedAsNew" destination="YHk-qo-gYO" id="pgB-L1-fdL"/>
-                        <outlet property="newArticlesNotificationBadgeButton" destination="jVU-m2-dsS" id="jCv-zD-Wii"/>
                         <outlet property="newArticlesNotificationBounceButton" destination="jfH-Hq-gRk" id="8ST-KL-P8p"/>
                         <outlet property="openLinksInBackground" destination="7gv-LJ-Ouu" id="sb9-n8-thN"/>
                         <outlet property="openLinksInExternalBrowser" destination="Py0-wt-kSJ" id="nbX-7m-Oad"/>
@@ -921,11 +906,11 @@
             <objects>
                 <viewController id="wyk-W1-xMh" customClass="UpdatePreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="37U-37-0Sn">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="74"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="78"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FqV-7o-x3D">
-                                <rect key="frame" x="18" y="38" width="414" height="18"/>
+                                <rect key="frame" x="18" y="41" width="412" height="18"/>
                                 <buttonCell key="cell" type="check" title="Check for newer versions of Vienna on start up" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="haP-20-AwJ">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -935,7 +920,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5PT-JI-Zq4">
-                                <rect key="frame" x="36" y="18" width="396" height="18"/>
+                                <rect key="frame" x="36" y="19" width="394" height="18"/>
                                 <buttonCell key="cell" type="check" title="Search for latest beta versions" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="u92-Bh-Wrz">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -966,11 +951,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSAdvanced" width="32" height="32"/>
-        <image name="NSFollowLinkFreestandingTemplate" width="14" height="14"/>
-        <image name="NSNetwork" width="32" height="32"/>
-        <image name="NSPreferencesGeneral" width="32" height="32"/>
-        <image name="appearancePrefImage" width="32" height="32"/>
-        <image name="sync" width="32" height="32"/>
+        <image name="NSFollowLinkFreestandingTemplate" width="15" height="15"/>
+        <image name="arrow.triangle.2.circlepath" catalog="system" width="18" height="15"/>
+        <image name="gearshape" catalog="system" width="16" height="16"/>
+        <image name="paintbrush" catalog="system" width="17" height="18"/>
+        <image name="square.and.arrow.down" catalog="system" width="15" height="16"/>
+        <image name="wrench.and.screwdriver" catalog="system" width="19" height="18"/>
     </resources>
 </document>

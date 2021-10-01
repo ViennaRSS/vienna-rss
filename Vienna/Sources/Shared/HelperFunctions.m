@@ -24,17 +24,46 @@
  */
 BOOL hasOSScriptsMenu(void)
 {
-	NSString * pathToUIServerPlist = (@"~/Library/Preferences/com.apple.systemuiserver.plist").stringByExpandingTildeInPath;
-	NSDictionary * properties = [NSDictionary dictionaryWithContentsOfFile:pathToUIServerPlist];
-	NSArray * menuExtras = properties[@"menuExtras"];
-	NSInteger index;
+    NSFileManager *fileManager = NSFileManager.defaultManager;
+    NSURL *libraryURL = [fileManager URLForDirectory:NSLibraryDirectory
+                                            inDomain:NSUserDomainMask
+                                   appropriateForURL:nil
+                                              create:NO
+                                               error:nil];
+    NSURL *prefsURL = [libraryURL URLByAppendingPathComponent:@"Preferences"
+                                                  isDirectory:YES];
 
-	for (index = 0; index < menuExtras.count; ++index)
-	{
-		if ([menuExtras[index] hasSuffix:@"Script Menu.menu"])
-			return YES;
-	}
-	return NO;
+    if (@available(macOS 10.14, *)) {
+        NSString *fileName = @"com.apple.scriptmenu.plist";
+        NSURL *fileURL = [prefsURL URLByAppendingPathComponent:fileName
+                                                   isDirectory:NO];
+        NSError *error = nil;
+        NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfURL:fileURL
+                                                                  error:&error];
+        if (!prefs && error) {
+            NSLog(@"%@", error);
+        }
+
+        NSNumber *pref = prefs[@"ScriptMenuEnabled"];
+        return pref.boolValue;
+    } else {
+        NSString *fileName = @"com.apple.systemuiserver.plist";
+        NSURL *fileURL = [prefsURL URLByAppendingPathComponent:fileName
+                                                   isDirectory:NO];
+
+        NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfURL:fileURL];
+        if (!prefs) {
+            NSLog(@"File %@ not present, not accessible or invalid", fileURL.path);
+        }
+
+        NSArray *menuExtras = prefs[@"menuExtras"];
+        for (NSUInteger index = 0; index < menuExtras.count; ++index) {
+            if ([menuExtras[index] hasSuffix:@"Script Menu.menu"]) {
+                return YES;
+            }
+        }
+        return NO;
+    }
 }
 
 /* getDefaultBrowser
@@ -95,24 +124,43 @@ NSURL *_Nullable cleanedUpUrlFromString(NSString * urlString)
     return urlToLoad;
 }
 
-NSURL *_Nullable urlFromUserString(NSString *_Nonnull urlString) {
+NSURL *_Nullable urlFromUserString(NSString *_Nonnull urlString)
+{
+    NSURL *url = nil;
     // Try simple conversion first
-    NSURL *urlToLoad = [NSURLComponents componentsWithString:urlString].URL;
-    if (urlToLoad == nil) {
-        // Fallback : use WebKit to clean up user-entered URLs that might contain umlauts, diacritics
-        // and other IDNA related stuff in the domain, or whatever may hide in filenames and arguments
+    NSURLComponents *urlComponents =
+        [NSURLComponents componentsWithString:urlString];
+    if (urlComponents) {
+        // NSURLComponents percent-encodes the semicolon character in the path
+        // component of the URL. Although it is recommended by Apple, it leads
+        // to problems when the URL is loaded and the server cannot handle the
+        // percent-encoding. This workaround removes the percent-encoding for
+        // the semicolon character in the path component.
+        NSCharacterSet *pathCharSet = NSCharacterSet.URLPathAllowedCharacterSet;
+        NSMutableCharacterSet *extendedCharSet = [pathCharSet mutableCopy];
+        [extendedCharSet addCharactersInString:@";"];
+
+        NSString *path = [urlComponents.path
+            stringByAddingPercentEncodingWithAllowedCharacters:extendedCharSet];
+        urlComponents.percentEncodedPath = path;
+        url = urlComponents.URL;
+    } else {
+        // Use WebKit to clean up user-entered URLs that might contain umlauts,
+        // diacritics and other IDNA related stuff in the domain, or whatever
+        // may hide in filenames and arguments.
         NSPasteboard *pasteboard = [NSPasteboard pasteboardWithUniqueName];
         [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
         @try {
-            if ([pasteboard setString:urlString forType:NSPasteboardTypeString]) {
-                urlToLoad = [WebView URLFromPasteboard:pasteboard];
+            if ([pasteboard setString:urlString
+                              forType:NSPasteboardTypeString]) {
+                url = [WebView URLFromPasteboard:pasteboard];
             }
         } @catch (NSException *exception) {
             NSLog(@"Failed to convert URL for string %@", urlString);
         }
         [pasteboard releaseGlobally];
     }
-    return urlToLoad;
+    return url;
 }
 
 /* loadMapFromPath

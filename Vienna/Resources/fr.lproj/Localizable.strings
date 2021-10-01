@@ -4,6 +4,9 @@
 /* No comment provided by engineer. */
 "(Untitled Feed)" = "(flux sans nom)";
 
+/* Appended to application name in Open With menu */
+"%@ (default)" = "%@ (par défaut)";
+
 /* No comment provided by engineer. */
 "%@ Info" = "Infos sur %@";
 
@@ -12,6 +15,9 @@
 
 /* Number of bytes received, e.g. 1 MB received */
 "%@ received" = "%@ reçu";
+
+/* {existing authors}, {new author name} */
+"%@, %@" = "%1$@, %2$@";
 
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "%d nouveaux articles récupérés";
@@ -68,22 +74,22 @@
 "AppleScript Error in '%@' script" = "Erreur AppleScript dans le script \"%@\"";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Souhaitez-vous vraiment supprimer les %d groupes sélectionnés ? Cette opération est irréversible.";
+"Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Souhaitez-vous vraiment supprimer les %d groupes sélectionnés ? Cette opération est irréversible.";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Souhaitez-vous vraiment supprimer le groupe '%@' et ses sous-dossiers ? Cette opération est irréversible.";
+"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Souhaitez-vous vraiment supprimer le groupe '%@' et ses sous-dossiers ? Cette opération est irréversible.";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Souhaitez-vous vraiment supprimer le dossier intelligent '%@' ? Cela n'effacera pas les articles répondant à ses critères.";
+"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Souhaitez-vous vraiment supprimer le dossier intelligent '%@' ? Cela n'effacera pas les articles répondant à ses critères.";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete the messages in the Trash folder permanently?" = "Êtes-vous sûr de vouloir vider la corbeille définitivement ?";
+"Are you sure you want to delete the messages in the Trash folder permanently?" = "Êtes-vous sûr de vouloir vider la corbeille définitivement ?";
 
 /* No comment provided by engineer. */
-"Are you sure you want to permanently delete the selected articles?" = "Souhaitez-vous vraiment supprimer les articles sélectionnés ?";
+"Are you sure you want to permanently delete the selected articles?" = "Souhaitez-vous vraiment supprimer les articles sélectionnés ?";
 
 /* No comment provided by engineer. */
-"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Souhaitez-vous vraiment vous désabonner de '%@' ? Cette opération supprimera tous les articles associés.";
+"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Souhaitez-vous vraiment vous désabonner de '%@' ? Cette opération supprimera tous les articles associés.";
 
 /* No comment provided by engineer. */
 "Articles" = "Articles";
@@ -105,7 +111,7 @@
 "Cannot create export output file" = "Exportation impossible";
 
 /* No comment provided by engineer. */
-"Cannot create folder" = "Vienna ne peut pas créer le dossier.";
+"Cannot create folder" = "Vienna ne peut pas créer le dossier";
 
 /* No comment provided by engineer. */
 "Cannot create the Vienna database" = "Création de la base de données Vienna impossible";
@@ -121,9 +127,6 @@
 
 /* No comment provided by engineer. */
 "Click the Open button to open this file." = "Presser le bouton Ouvrir pour ouvrir ce fichier.";
-
-/* No comment provided by engineer. */
-"Click the Play button to play this enclosure in iTunes." = "Presser le bouton Lire pour jouer ce fichier incorporé dans iTunes.";
 
 /* No comment provided by engineer. */
 "Connecting to %@" = "Connexion à %@";
@@ -184,7 +187,7 @@
 "Descending" = "Décroissant";
 
 /* No comment provided by engineer. */
-"Do you really want to import the subscriptions from the specified OPML file?" = "Souhaitez-vous vraiment importer des abonnements à partir du fichier OPML désigné ?";
+"Do you really want to import the subscriptions from the specified OPML file?" = "Souhaitez-vous vraiment importer des abonnements à partir du fichier OPML désigné ?";
 
 /* test for a string */
 "does not contain" = "ne contient pas";
@@ -196,10 +199,10 @@
 "Download completed" = "Téléchargement réussi";
 
 /* Title of a menu item */
-"Download Enclosure" = "Télécharger le fichier incorporé";
+"Download Enclosure" = "Télécharger le fichier joint";
 
 /* Title of a menu item */
-"Download Enclosures" = "Télécharger les fichiers incorporés";
+"Download Enclosures" = "Télécharger les fichiers joints";
 
 /* Notification title */
 "Download failed" = "Téléchargement non réussi";
@@ -211,10 +214,10 @@
 "Empty" = "Vider";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
-"Enclosure" = "Fichier incorporé";
+"Enclosure" = "Fichier joint";
 
 /* Data field name (URL) visible in menu/article list */
-"Enclosure URL" = "URL du fichier incorporé";
+"Enclosure URL" = "URL du fichier joint";
 
 /* No comment provided by engineer. */
 "Enter the URL here" = "Entrer l'URL ici";
@@ -229,13 +232,13 @@
 "Error parsing XML data in feed" = "Erreur de traitement des données XML dans le flux";
 
 /* No comment provided by engineer. */
-"Error retrieving RSS feed:" = "Erreur de récupération du flux RSS :";
+"Error retrieving RSS feed:" = "Erreur de récupération du flux RSS :";
 
 /* No comment provided by engineer. */
 "Error retrieving RSS Icon:" = "Erreur lors de la recherche de l'icône RSS";
 
 /* No comment provided by engineer. */
-"Error: Feed not found!" = "Erreur : fil RSS non trouvé !";
+"Error: Feed not found!" = "Erreur : fil RSS non trouvé !";
 
 /* No comment provided by engineer. */
 "Export Completed" = "Exportation terminée";
@@ -244,7 +247,7 @@
 "External Browser" = "Navigateur externe";
 
 /* No comment provided by engineer. */
-"Feed URL updated to %@" = "Flux URL mis à jour vers : %@";
+"Feed URL updated to %@" = "Flux URL mis à jour vers : %@";
 
 /* No comment provided by engineer. */
 "Fetching Open Reader Subscriptions…" = "Récupération de la liste des abonnements Open Reader…";
@@ -304,7 +307,7 @@
 "HTTP code %d reported from server" = "Code HTTP %d renvoyé par le serveur";
 
 /* No comment provided by engineer. */
-"If you quit Vienna now, all downloads will stop." = "Voulez-vous interrompre les téléchargements et fermer Vienna maintenant?";
+"If you quit Vienna now, all downloads will stop." = "Si vous quittez Vienna maintenant, tous les téléchargements seront interrompus.";
 
 /* Title of a button on an alert */
 "Import" = "Importer";
@@ -316,7 +319,7 @@
 "Import error" = "Erreur d'importation";
 
 /* No comment provided by engineer. */
-"Import subscriptions from OPML file?" = "Importer des abonnements à partir d'un fichier OPML ?";
+"Import subscriptions from OPML file?" = "Importer des abonnements à partir d'un fichier OPML ?";
 
 /* No comment provided by engineer. */
 "Improper infinitely looping URL redirect to %@" = "Problème de boucle infinie de redirections d'URL vers %@";
@@ -469,10 +472,13 @@
 "Open Subscription Home Page in External Browser" = "Afficher la page source de l'abonnement dans le navigateur externe";
 
 /* No comment provided by engineer. */
-"Other" = "Autre";
+"Open With" = "Ouvrir avec";
+
+/* Name the application which should open a file */
+"Open with %@" = "Ouvrir avec %@";
 
 /* No comment provided by engineer. */
-"Play" = "Lire";
+"Other" = "Autre";
 
 /* No comment provided by engineer. */
 "Plugin installed" = "Plugin installé";
@@ -497,7 +503,7 @@
 "Recents" = "Récents";
 
 /* No comment provided by engineer. */
-"Redirection attempt treated as temporary for safety concern" = "Tentative de redirection traitée de façon temporaire par souci de prudence";
+"Redirection attempt treated as temporary for safety concern" = "Demande de redirection traitée, par mesure de prudence, à titre temporaire";
 
 /* Title of a menu item */
 "Refresh All Subscriptions" = "Rafraîchir tous les abonnements";
@@ -542,13 +548,18 @@
 "Return to the previous page" = "Retourner à la page précédente";
 
 /* No comment provided by engineer. */
-"RSS Icon not found!" = "Icône RSS non trouvée !";
+"RSS Icon not found!" = "Icône RSS non trouvée !";
 
 /* Placeholder title of a search field */
 "Search all articles" = "Chercher dans les articles";
 
 /* No comment provided by engineer. */
 "Search all articles or the current web page" = "Chercher dans les articles ou dans la page actuelle";
+
+/* Toolbar item label
+   Toolbar item palette label
+   Toolbar item tooltip */
+"Search Articles" = "Rechercher des articles";
 
 /* Placeholder title of a search field */
 "Search current web page" = "Chercher dans la page actuelle";
@@ -602,7 +613,7 @@
 "The \"%@\" folder cannot be created." = "Le dossier \"%@\" ne peut pas être créé.";
 
 /* No comment provided by engineer. */
-"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "Votre fichier %@ n'est pas reconnu par cette version de Vienna. Supprimez ou renommez ce fichier et relancez Vienna.";
+"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "Votre base de données (%@) n'est pas reconnue par cette version de Vienna. Supprimez ou renommez ce fichier et relancez Vienna.";
 
 /* No comment provided by engineer. */
 "The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna." = "La base de données (%@) ne peut être ouverte. Elle pourrait être corrompue ou inaccessible. S'il vous plait, effacez ou renommez la base de données et relancez Vienna.";
@@ -623,7 +634,7 @@
 "The style %@ appears to be missing or corrupted" = "Le style %@ semble être corrompu";
 
 /* No comment provided by engineer. */
-"The subscription for \"%@\" requires a user name and password for access." = "L'abonnement à '%@' nécessite un nom d'utilisateur et un mot de passe.";
+"The subscription for \"%@\" requires a user name and password for access." = "L'abonnement à \"%@\" nécessite un nom d'utilisateur et un mot de passe.";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Cet article contient un fichier incorporé.";
@@ -680,7 +691,7 @@
 "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." = "Vienna doit effectuer une mise à jour de sa base de données. Cela peut prendre une minute ou plus. Merci de votre compréhension.";
 
 /* No comment provided by engineer. */
-"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna a essyé de créer le dossier '%@' mais une erreur est apparue. Vérifiez les authorisations des dossiers sur le chemin indiqué.";
+"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna a essayé de créer le dossier '%@' mais une erreur est apparue. Vérifiez les autorisations des dossiers sur le chemin indiqué.";
 
 /* No comment provided by engineer. */
 "Yes" = "Oui";

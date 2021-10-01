@@ -22,6 +22,18 @@ import Cocoa
 /// A toolbar item with a pop-up button as its view.
 class PopUpButtonToolbarItem: NSToolbarItem {
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        // The toolbar item's width is too wide on older systems.
+        if #available(macOS 11, *) {
+            // Do nothing
+        } else {
+            minSize = NSSize(width: 41, height: 25)
+            maxSize = NSSize(width: 41, height: 28)
+        }
+    }
+
     // Assign the pop-up button's menu to the menu-form representation.
     override var view: NSView? {
         didSet {

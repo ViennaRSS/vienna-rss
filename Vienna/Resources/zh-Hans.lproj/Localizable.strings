@@ -117,9 +117,6 @@
 "Click the Open button to open this file." = "点击开启按钮来开启文件";
 
 /* No comment provided by engineer. */
-"Click the Play button to play this enclosure in iTunes." = "点击播放按钮来通过 iTunes 来播放这个附带文件。";
-
-/* No comment provided by engineer. */
 "Connecting to %@" = "正在连接到 %@";
 
 /* No comment provided by engineer. */
@@ -450,9 +447,6 @@
 /* No comment provided by engineer. */
 "Other" = "其他";
 
-/* No comment provided by engineer. */
-"Play" = "播放";
-
 /* Title of a button on an alert */
 "Quit" = "退出";
 
@@ -507,6 +501,11 @@
 
 /* Placeholder title of a search field */
 "Search all articles" = "搜索所有文章";
+
+/* Toolbar item label
+   Toolbar item palette label
+   Toolbar item tooltip */
+"Search Articles" = "搜索文章";
 
 /* No comment provided by engineer. */
 "Search Results" = "搜索结果";

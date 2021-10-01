@@ -25,7 +25,6 @@
 #import "Constants.h"
 #import "Browser+WebUIDelegate.h"
 #import "TabbedWebView.h"
-#import <MMTabBarView/MMTabBarView.h>
 
 @interface Browser () <MMTabBarViewDelegate>
 
