@@ -8,12 +8,6 @@ most recent build should be at the top of this file.
 
 Thanks!
 
-3.7.1
------
-- Improve autodiscovery of feeds inside webpages (among other improvements, detect URLs of feeds for YouTube channels or users)
-- Fix wrong image used in article list to indicate existence of an enclosure
-- Fix empty folders in build which interferes with plug-in loading
-
 3.7.0
 -----
 - Update database to enable auto-vacuum mode (the updated database remains compatible with older versions of Vienna)
