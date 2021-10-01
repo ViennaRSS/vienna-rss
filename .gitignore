@@ -176,3 +176,8 @@ Vienna/Sources/autorevision.h
 # someone seems to keep personal notes in this file
 .idea
 
+####
+# Carthage
+# Ignore build folder
+Carthage/Build/
+

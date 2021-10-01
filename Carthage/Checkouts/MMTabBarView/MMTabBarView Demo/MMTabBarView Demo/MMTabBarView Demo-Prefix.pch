@@ -1,0 +1,11 @@
+//
+// Prefix header for all source files of the 'MMTabBarView Demo' target in the 'MMTabBarView Demo' project
+//
+
+#ifdef __OBJC__
+	#if __has_feature(modules)
+		@import Cocoa;
+	#else
+		#import <Cocoa/Cocoa.h>
+	#endif
+#endif
