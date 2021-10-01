@@ -1,27 +1,8 @@
 /* @group Reset */
-/* http://meyerweb.com/eric/tools/css/reset/
+/* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
-
-/* custom properties */
-:root {
-    --background-color: #fafafa;
-    --text-color: #111;
-    --title-color: #111;
-    --link-visited: #3c90e8;
-    --img-border: #ccc;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background-color: #111111;
-        --text-color: #fefefe;
-        --title-color: #fefefe;
-        --link-visited: #fc804e;
-        --img-border: #eee;
-    }
-}
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -32,8 +13,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
   margin: 0;
@@ -44,7 +25,7 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
+article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
@@ -69,14 +50,14 @@ table {
 /* @end */
 
 body {
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: #fafafa;
+  color: #111;
   font-family: Palatino, Georgia, "Times New Roman", Times, serif;
 }
 
 a,
 a:visited {
-  color: var(--link-visited);
+  color: #3c90e8;
   text-decoration: none;
 }
 
@@ -103,7 +84,7 @@ a:visited {
 
 .articleTitle a,
 .articleTitle a:visited {
-  color: var(--title-color);
+  color: #111;
 }
 
 .articleAuthor,
@@ -152,10 +133,6 @@ ul {
   clear: both;
   margin-bottom: 1em;
   height: auto !important;
-}
-
-.articleBody img {
-  border: 4px solid var(--img-border);
 }
 
 /* fix a 100% max size to potentially problematic elements */
