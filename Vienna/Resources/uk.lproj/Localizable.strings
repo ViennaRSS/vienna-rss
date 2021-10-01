@@ -466,11 +466,6 @@
 /* Placeholder title of a search field */
 "Search all articles" = "Пошук по всіх статтях";
 
-/* Toolbar item label
-   Toolbar item palette label
-   Toolbar item tooltip */
-"Search Articles" = "Шукати статті";
-
 /* No comment provided by engineer. */
 "Search Results" = "Результати пошуку";
 

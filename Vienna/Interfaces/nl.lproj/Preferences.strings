@@ -8,7 +8,7 @@
 "4vm-80-j33.title" = "Markeer bijgewerkte artikelen als nieuw";
 
 /* Class = "NSTextFieldCell"; title = "However, high numbers also render your computer less responsive while refreshing feeds."; ObjectID = "5EA-1i-TuA"; */
-"5EA-1i-TuA.title" = "Echter, hogere waarden kunnen er ook voor zorgen dat je Mac trager reageert tijdens het downloaden van abonnementen.";
+"5EA-1i-TuA.title" = "Echter, hogere waarden kunnen er ook voor zorgen dat uw computer trager reageert tijdens het downloaden van abonnementen.";
 
 /* Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "6GF-Pk-gI9"; */
 "6GF-Pk-gI9.title" = "Elke 6 uur";
@@ -26,7 +26,7 @@
 "adB-qE-xKg.title" = "Markeer huidige artikel als gelezen:";
 
 /* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "aWg-mD-YWn"; */
-"aWg-mD-YWn.title" = "Elk half uur";
+"aWg-mD-YWn.title" = "Elke 30 minuten";
 
 /* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "bom-nB-4zx"; */
 "bom-nB-4zx.title" = "Verplaats artikelen naar prullenmand:";
@@ -56,7 +56,7 @@
 "flH-2D-s6O.title" = "Open koppeling in externe browser";
 
 /* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "g3K-qh-M6y"; */
-"g3K-qh-M6y.title" = "Hoe hoger de waarde, des te sneller worden je abonnementen gedownload.";
+"g3K-qh-M6y.title" = "Hoe hoger de waarde, des te sneller worden uw abonnementen gedownload.";
 
 /* Class = "NSTabViewItem"; label = "General"; ObjectID = "GJ3-1q-004"; */
 "GJ3-1q-004.label" = "Algemeen";
@@ -158,13 +158,13 @@
 "X5g-th-bjd.title" = "Voorkeuren";
 
 /* Class = "NSMenuItem"; title = "After a week"; ObjectID = "xfd-Vp-kJy"; */
-"xfd-Vp-kJy.title" = "Na één week";
+"xfd-Vp-kJy.title" = "Na een week";
 
 /* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "YG6-9k-gKH"; */
 "YG6-9k-gKH.title" = "URL:";
 
 /* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "Ygu-Rj-E7a"; */
-"Ygu-Rj-E7a.title" = "Elk kwartier";
+"Ygu-Rj-E7a.title" = "Elke 15 minuten";
 
 /* Class = "NSTextFieldCell"; title = "Default RSS reader:"; ObjectID = "YHN-Up-rwa"; */
 "YHN-Up-rwa.title" = "Standaard RSS-lezer:";

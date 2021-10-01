@@ -5,7 +5,7 @@
 "18.title" = "Annuleer";
 
 /* Class = "NSTextFieldCell"; title = "There are deleted articles in the trash. Would you like to empty the trash before quitting?"; ObjectID = "19"; */
-"19.title" = "Er zijn gewiste artikelen in de prullenmand. Wil je de prullenmand nu legen?";
+"19.title" = "Er zijn gewiste artikelen in de prullenmand. Wilt u de prullenmand nu leeg maken?";
 
 /* Class = "NSButtonCell"; title = "Do not show this warning again"; ObjectID = "20"; */
 "20.title" = "Toon deze waarschuwing niet opnieuw";

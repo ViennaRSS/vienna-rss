@@ -481,11 +481,6 @@
 /* Placeholder title of a search field */
 "Search all articles" = "Sök genom alla artiklar";
 
-/* Toolbar item label
-   Toolbar item palette label
-   Toolbar item tooltip */
-"Search Articles" = "Sök i artiklar";
-
 /* No comment provided by engineer. */
 "Search Results" = "Sökresultat";
 

@@ -541,11 +541,6 @@
 /* No comment provided by engineer. */
 "Search all articles or the current web page" = "Поиск в статьях или по текущей веб-странице";
 
-/* Toolbar item label
-   Toolbar item palette label
-   Toolbar item tooltip */
-"Search Articles" = "Искать статьи";
-
 /* Placeholder title of a search field */
 "Search current web page" = "Поиск по текущей веб-странице";
 

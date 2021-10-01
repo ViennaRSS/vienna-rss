@@ -412,11 +412,6 @@
 /* Placeholder title of a search field */
 "Search all articles" = "Cerca in tutti gli articoli";
 
-/* Toolbar item label
-   Toolbar item palette label
-   Toolbar item tooltip */
-"Search Articles" = "Cerca negli Articoli";
-
 /* No comment provided by engineer. */
 "Search Results" = "Cerca nei Risultati";
 

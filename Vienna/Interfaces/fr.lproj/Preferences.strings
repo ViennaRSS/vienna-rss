@@ -116,7 +116,7 @@
 "nSW-3T-Zoh.title" = "Autre…";
 
 /* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "OD4-de-Vkx"; */
-"OD4-de-Vkx.title" = "Mot de passe :";
+"OD4-de-Vkx.title" = "Mot de passe :";
 
 /* Class = "NSMenuItem"; title = "After a month"; ObjectID = "OIa-NQ-jQi"; */
 "OIa-NQ-jQi.title" = "Après un mois";
@@ -161,7 +161,7 @@
 "xfd-Vp-kJy.title" = "Après une semaine";
 
 /* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "YG6-9k-gKH"; */
-"YG6-9k-gKH.title" = "URL :";
+"YG6-9k-gKH.title" = "URL :";
 
 /* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "Ygu-Rj-E7a"; */
 "Ygu-Rj-E7a.title" = "Toutes les 15 minutes";

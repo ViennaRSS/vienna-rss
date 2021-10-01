@@ -540,11 +540,6 @@
 /* No comment provided by engineer. */
 "Search all articles or the current web page" = "Søg i alle artikler eller den nuværende hjemmeside";
 
-/* Toolbar item label
-   Toolbar item palette label
-   Toolbar item tooltip */
-"Search Articles" = "Søg i artikler";
-
 /* Placeholder title of a search field */
 "Search current web page" = "Søg nuværende hjemmeside";
 

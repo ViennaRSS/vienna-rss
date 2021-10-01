@@ -547,11 +547,6 @@
 /* No comment provided by engineer. */
 "Search all articles or the current web page" = "Buscar todos los artículos o en la página web actual";
 
-/* Toolbar item label
-   Toolbar item palette label
-   Toolbar item tooltip */
-"Search Articles" = "Buscar artículos";
-
 /* Placeholder title of a search field */
 "Search current web page" = "Buscar en página web actual";
 

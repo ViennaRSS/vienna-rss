@@ -526,11 +526,6 @@
 /* No comment provided by engineer. */
 "Search all articles or the current web page" = "Ieškoti visuose straipsniuose arba šiame puslapyje";
 
-/* Toolbar item label
-   Toolbar item palette label
-   Toolbar item tooltip */
-"Search Articles" = "Ieškoti straipsnių";
-
 /* Placeholder title of a search field */
 "Search current web page" = "Ieškoti šiame puslapyje";
 

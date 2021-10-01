@@ -439,11 +439,6 @@
 /* Placeholder title of a search field */
 "Search all articles" = "Tüm makalelerde ara";
 
-/* Toolbar item label
-   Toolbar item palette label
-   Toolbar item tooltip */
-"Search Articles" = "Makalelerde Ara";
-
 /* No comment provided by engineer. */
 "Search Results" = "Arama Sonuçları";
 
