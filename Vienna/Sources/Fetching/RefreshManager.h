@@ -24,7 +24,7 @@
 @class FeedCredentials;
 @class Folder;
 
-@interface RefreshManager : NSObject <NSURLSessionTaskDelegate> {
+@interface RefreshManager : NSObject <NSURLSessionDelegate> {
 	NSUInteger countOfNewArticles;
 	NSMutableArray * authQueue;
 	FeedCredentials * credentialsController;
