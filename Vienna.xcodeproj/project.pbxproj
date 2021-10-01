@@ -1399,8 +1399,6 @@
 				43502860165DE9DF0018EDB7 /* DownloadManager.m */,
 				F6B3561325616302008CA1ED /* DownloadItem.h */,
 				F6B3561425616313008CA1ED /* DownloadItem.m */,
-				F41CA693218F56140072F734 /* NSWorkspace+OpenWithMenu.h */,
-				F41CA692218F56130072F734 /* NSWorkspace+OpenWithMenu.m */,
 			);
 			path = "Download window";
 			sourceTree = "<group>";
@@ -1519,6 +1517,8 @@
 				AAFAF3FC088056D800DAFF04 /* KeyChain.m */,
 				3A23F13315276935008AF863 /* NSNotificationAdditions.h */,
 				4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */,
+				F41CA693218F56140072F734 /* NSWorkspace+OpenWithMenu.h */,
+				F41CA692218F56130072F734 /* NSWorkspace+OpenWithMenu.m */,
 				F69964F61F13029500FC8493 /* OverlayStatusBar.swift */,
 				B85F93E4255AE48000B54B68 /* PopUpButtonExtensions.swift */,
 				AAF3B14006095E7B0025CC7F /* StringExtensions.h */,
