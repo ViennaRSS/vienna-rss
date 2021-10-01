@@ -1232,6 +1232,5 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_urlSession invalidateAndCancel];
 }
 @end
