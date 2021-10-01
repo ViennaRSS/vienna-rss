@@ -108,24 +108,20 @@ sup {
 
 <h1 id="toc_0">Version Notes</h1>
 
-<h2 id="toc_1">3.6.1</h2>
+<h2 id="toc_1">3.6.0</h2>
 
-<h3 id="toc_2">A bug fix plus some subtle improvements or modernizations</h3>
+<h3 id="toc_2">! 3.6 versions require OS X 10.11 (El Capitan) or later !</h3>
 
 <ul>
-<li>Fix brutal resizing of article view column in vertical layout</li>
-<li>Add ‘hidden’ preference to specify web user agent through command line : <code>defaults write uk.co.opencommunity.vienna2 UserAgentName &lt;...&gt;</code></li>
-<li>Improve look of main window toolbar under macOS Big Sur</li>
-<li>Use adaptative grey for unread count in folders tree</li>
-<li>Update toolbar icons of preferences window</li>
-<li>Replace IOKit calls with NSBackgroundActivityScheduler for scheduling refreshes</li>
-<li>Address several deprecation warnings</li>
-<li>Refactor some methods from Objective-C to Swift (PopUpButton, AppController+Sparkle)</li>
-<li>Remove unused code and images, slightly reorganize project, move images and icons into assets catalog</li>
-<li>Handle gracefully when CS-ID.xcconfig file is missing</li>
-<li>Use Swift Package Manager instead of Carthage for managing dependencies (Sparkle, MMTabBarView v/1.4.12)</li>
-<li>Use Github Workflows instead of Travis CI for continuous integrations tests</li>
-<li>Update SwiftLint configuration</li>
+<li>Universal build (support Apple Silicon processors as well as Intel processors) through Xcode 12.2</li>
+<li>Revamp Preferences window (use Storyboard implementation)</li>
+<li>Modernize code:
+
+<ul>
+<li>remove deprecated methods</li>
+<li>improve coexistence of Swift and Objective-C</li>
+<li>improve development workflows</li>
+</ul></li>
 </ul>
 
 

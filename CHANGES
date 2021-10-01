@@ -8,22 +8,6 @@ most recent build should be at the top of this file.
 
 Thanks!
 
-3.6.1
------
-- Fix brutal resizing of article view column in vertical layout
-- Add ‘hidden’ preference to specify web user agent through command line : `defaults write uk.co.opencommunity.vienna2 UserAgentName <...>`
-- Improve look of main window toolbar under macOS Big Sur
-- Use adaptative grey for unread count in folders tree
-- Update toolbar icons of preferences window
-- Replace IOKit calls with NSBackgroundActivityScheduler for scheduling refreshes
-- Address several deprecation warnings
-- Refactor some methods from Objective-C to Swift (PopUpButton, AppController+Sparkle)
-- Remove unused code and images, slightly reorganize project, move images and icons into assets catalog
-- Handle gracefully when CS-ID.xcconfig file is missing
-- Use Swift Package Manager instead of Carthage for managing dependencies (Sparkle, MMTabBarView v/1.4.12)
-- Use Github Workflows instead of Travis CI for continuous integrations tests
-- Update SwiftLint configuration
-
 3.6.0
 -----
 ### ! 3.6 versions require OS X 10.11 (El Capitan) or later !
