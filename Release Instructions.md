@@ -86,7 +86,6 @@ There are two distinct ways to get the different files needed to publish an upda
 
 ### Building through the command line
 
-- If you have multiple versions of Xcode installed on your machine, ensure that an adequate version is selected. For instance, you might have to type `sudo xcode-select --switch /Applications/Xcode-beta.app` at the command line
 - At the command line, run `make release`
 - You will have enough time to take a tea, walk the dog or read your mails…
 - At the end of the process, the Uploads window should open in the Finder,
