@@ -6,7 +6,7 @@ dSYM files containing the debug symbols can be found at [bintray](https://bintra
 
 ## Writing code
 
-The current version of Vienna requires Xcode 12.2 and the macOS 11 SDK. Most of Vienna is made with Objective-C, but some newer code is being created in Swift 5. We welcome both Objective-C and Swift contributions.
+The current version of Vienna requires Xcode 10 and the macOS 10.14 SDK. Most of Vienna is made with Objective-C, but some newer code is being created in Swift 4. We welcome both Objective-C and Swift contributions.
 
 You should have a basic knowledge of Git and read this [suggested workflow](https://github.com/ViennaRSS/vienna-rss/wiki/Good-manners-with-Git).
 
