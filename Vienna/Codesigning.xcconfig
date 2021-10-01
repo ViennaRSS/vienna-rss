@@ -3,8 +3,5 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 //
 
-CODE_SIGN_IDENTITY = Apple Development
-
-// This file has to be created manually, per release instructions. This include
-// has to be put at the end to override the CODE_SIGN_IDENTITY build setting.
+// This file has to be created manually, per release instructions.
 #include? "../Scripts/Resources/CS-ID.xcconfig"
