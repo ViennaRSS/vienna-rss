@@ -20,13 +20,13 @@
 
 #import "Database.h"
 
-#import "Database+Migration.h"
 #import "Preferences.h"
 #import "StringExtensions.h"
 #import "Constants.h"
 #import "ArticleRef.h"
 #import "NSNotificationAdditions.h"
 #import "Debug.h"
+#import "VNADatabaseMigration.h"
 #import "Article.h"
 #import "Folder.h"
 #import "Field.h"
@@ -152,7 +152,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         [self.databaseQueue inDatabase:^(FMDatabase *db) {
             // Migrate the database to the newest version
             // TODO: move this into transaction so we can rollback on failure
-            [Database migrateDatabase:db fromVersion:databaseVersion];
+            [VNADatabaseMigration migrateDatabase:db fromVersion:databaseVersion];
         }];
         
         // Confirm the database is now at the correct version
