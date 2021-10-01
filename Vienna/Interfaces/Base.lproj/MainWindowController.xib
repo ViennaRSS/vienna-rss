@@ -394,7 +394,7 @@
                         <popUpButton key="view" verticalHuggingPriority="750" id="DDQ-PY-F2c">
                             <rect key="frame" x="0.0" y="14" width="77" height="25"/>
                             <autoresizingMask key="autoresizingMask"/>
-                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NewFeedTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="pdk-MS-QME" id="xAh-aB-Ek3">
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="pdk-MS-QME" id="xAh-aB-Ek3">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" id="tQg-b5-Yiu">
@@ -612,7 +612,7 @@
                         <popUpButton key="view" verticalHuggingPriority="750" id="gOd-tT-XFQ">
                             <rect key="frame" x="0.0" y="14" width="54" height="25"/>
                             <autoresizingMask key="autoresizingMask"/>
-                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="lu2-BZ-Gxd" id="5CR-Qn-4pP">
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="StyleTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="lu2-BZ-Gxd" id="5CR-Qn-4pP">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" id="mit-Vi-iR1">
@@ -805,11 +805,11 @@
                 <box verticalHuggingPriority="750" alphaValue="0.79577457904815674" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1392">
                     <rect key="frame" x="0.0" y="42" width="491" height="5"/>
                 </box>
-                <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="PLo-xw-CXM">
+                <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="750" verticalStackHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PLo-xw-CXM">
                     <rect key="frame" x="8" y="6" width="475" height="32"/>
-                    <subviews>
+                    <beginningViews>
                         <imageView id="1289">
-                            <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                            <rect key="frame" x="0.0" y="0.0" width="79" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="32" id="DHh-hp-lMb"/>
@@ -817,26 +817,26 @@
                             </constraints>
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="1372"/>
                         </imageView>
-                        <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="3" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RFH-Us-xJO">
-                            <rect key="frame" x="40" y="1" width="347" height="31"/>
-                            <subviews>
-                                <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="9000" translatesAutoresizingMaskIntoConstraints="NO" id="1290">
-                                    <rect key="frame" x="-2" y="17" width="351" height="14"/>
+                        <stackView orientation="vertical" alignment="leading" spacing="3" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RFH-Us-xJO">
+                            <rect key="frame" x="87" y="0.0" width="300" height="32"/>
+                            <beginningViews>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="9000" translatesAutoresizingMaskIntoConstraints="NO" id="1290">
+                                    <rect key="frame" x="-2" y="18" width="304" height="14"/>
                                     <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" id="1373">
                                         <font key="font" metaFont="smallSystemBold"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="9000" translatesAutoresizingMaskIntoConstraints="NO" id="1292" customClass="DSClickableURLTextField">
-                                    <rect key="frame" x="-2" y="0.0" width="351" height="14"/>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="9000" translatesAutoresizingMaskIntoConstraints="NO" id="1292" customClass="DSClickableURLTextField">
+                                    <rect key="frame" x="-2" y="0.0" width="304" height="14"/>
                                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" id="1375">
                                         <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                            </subviews>
+                            </beginningViews>
                             <visibilityPriorities>
                                 <integer value="1000"/>
                                 <integer value="1000"/>
@@ -846,8 +846,8 @@
                                 <real value="3.4028234663852886e+38"/>
                             </customSpacing>
                         </stackView>
-                        <button horizontalHuggingPriority="251" verticalHuggingPriority="750" placeholderIntrinsicWidth="80" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="1291">
-                            <rect key="frame" x="388" y="-1" width="94" height="33"/>
+                        <button horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" placeholderIntrinsicWidth="80" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="1291">
+                            <rect key="frame" x="388" y="4" width="94" height="33"/>
                             <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="1374">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -856,7 +856,7 @@
                                 <action selector="downloadFile:" target="1288" id="1293"/>
                             </connections>
                         </button>
-                    </subviews>
+                    </beginningViews>
                     <visibilityPriorities>
                         <integer value="1000"/>
                         <integer value="1000"/>
