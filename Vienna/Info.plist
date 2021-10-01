@@ -136,8 +136,6 @@
 	<string>ViennaApp</string>
 	<key>NSSupportsAutomaticGraphicsSwitching</key>
 	<string>YES</string>
-	<key>SUEnableAutomaticChecks</key>
-	<true/>
 	<key>SUPublicDSAKeyFile</key>
 	<string>SparklePublicKey.pem</string>
 	<key>SUPublicEDKey</key>
