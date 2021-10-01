@@ -197,10 +197,12 @@
 		F64C2CCC1E83825D00ED4E04 /* DateFormatterExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */; };
 		F65D6D711E74619E00A30974 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4398241E1666B3DB00FFE219 /* Credits.rtf */; };
 		F672876824A2D2170043432F /* UpdatePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F672876724A2D2170043432F /* UpdatePreferencesViewController.m */; };
+		F67F6DE52030604A006C9D72 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDE2030604A006C9D72 /* Sparkle.framework */; };
+		F67F6DE62030604A006C9D72 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F67F6DDE2030604A006C9D72 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F67F6DEF203060B1006C9D72 /* Sparkle.framework.dSYM in Copy Framework Symbols */ = {isa = PBXBuildFile; fileRef = F67F6DEB203060B1006C9D72 /* Sparkle.framework.dSYM */; };
 		F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */; };
 		F6832F681F10F5DA007920D4 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F661F10F5DA007920D4 /* MainWindowController.xib */; };
 		F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = F69140E31E71B94200D51BFF /* AppController+Notifications.m */; };
-		F696D23E2561F9FC003DF0C0 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = F696D23D2561F9FC003DF0C0 /* Sparkle */; };
 		F69964F71F13029600FC8493 /* OverlayStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69964F61F13029500FC8493 /* OverlayStatusBar.swift */; };
 		F69AE79A1F2215D600342640 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F69AE79C1F2215D600342640 /* InfoPlist.strings */; };
 		F6A4E8481F040D58001C9191 /* PluginToolbarItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4E8471F040D58001C9191 /* PluginToolbarItemButton.swift */; };
@@ -258,6 +260,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				2FAA36422072F57500169C8A /* MMTabBarView.framework in Copy Frameworks */,
+				F67F6DE62030604A006C9D72 /* Sparkle.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,6 +284,7 @@
 			dstSubfolderSpec = 16;
 			files = (
 				F62152632083475800FEE960 /* MMTabBarView.framework.dSYM in Copy Framework Symbols */,
+				F67F6DEF203060B1006C9D72 /* Sparkle.framework.dSYM in Copy Framework Symbols */,
 			);
 			name = "Copy Framework Symbols";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -742,6 +746,8 @@
 		F664A9A2209EFEBF003B0F7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		F672876624A2D20A0043432F /* UpdatePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePreferencesViewController.h; sourceTree = "<group>"; };
 		F672876724A2D2170043432F /* UpdatePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePreferencesViewController.m; sourceTree = "<group>"; };
+		F67F6DDE2030604A006C9D72 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
+		F67F6DEB203060B1006C9D72 /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Sparkle.framework.dSYM; path = Carthage/Build/Mac/Sparkle.framework.dSYM; sourceTree = "<group>"; };
 		F68176D4209EFD35004AA256 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = es; path = es.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F6832F641F10C4C9007920D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ExportAccessoryViewController.xib; sourceTree = "<group>"; };
 		F6832F671F10F5DA007920D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
@@ -1013,8 +1019,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6B7BC3624A2A9A40051D76F /* FMDB in Frameworks */,
-				F696D23E2561F9FC003DF0C0 /* Sparkle in Frameworks */,
 				2FAA36402072F50B00169C8A /* MMTabBarView.framework in Frameworks */,
+				F67F6DE52030604A006C9D72 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1135,8 +1141,9 @@
 		7F60B6D7AEFB47009A82F8BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F67F6DF0203060D9006C9D72 /* Symbols */,
 				2FAA363F2072F50B00169C8A /* MMTabBarView.framework */,
-				F62152622083475800FEE960 /* MMTabBarView.framework.dSYM */,
+				F67F6DDE2030604A006C9D72 /* Sparkle.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1237,6 +1244,15 @@
 				AA67F32E089727FB008BBC37 /* Styles */,
 			);
 			path = SharedSupport;
+			sourceTree = "<group>";
+		};
+		F67F6DF0203060D9006C9D72 /* Symbols */ = {
+			isa = PBXGroup;
+			children = (
+				F62152622083475800FEE960 /* MMTabBarView.framework.dSYM */,
+				F67F6DEB203060B1006C9D72 /* Sparkle.framework.dSYM */,
+			);
+			name = Symbols;
 			sourceTree = "<group>";
 		};
 		F68E63411F1CF9CA002D1E0D /* Images */ = {
@@ -1697,7 +1713,6 @@
 			name = Vienna;
 			packageProductDependencies = (
 				F6B7BC3524A2A9A40051D76F /* FMDB */,
-				F696D23D2561F9FC003DF0C0 /* Sparkle */,
 			);
 			productInstallPath = "$(HOME)/Applications";
 			productName = Vienna;
@@ -1776,7 +1791,6 @@
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Vienna */;
 			packageReferences = (
 				F6B7BC3424A2A9A40051D76F /* XCRemoteSwiftPackageReference "fmdb" */,
-				F696D23C2561F9FC003DF0C0 /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			productRefGroup = 19C28FB0FE9D524F11CA2CBB /* Products */;
 			projectDirPath = "";
@@ -3315,14 +3329,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F696D23C2561F9FC003DF0C0 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sparkle-project/Sparkle";
-			requirement = {
-				kind = revision;
-				revision = 891afd44c7075e699924ed9b81d8dc94a5111dfd;
-			};
-		};
 		F6B7BC3424A2A9A40051D76F /* XCRemoteSwiftPackageReference "fmdb" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ccgus/fmdb";
@@ -3334,11 +3340,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F696D23D2561F9FC003DF0C0 /* Sparkle */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F696D23C2561F9FC003DF0C0 /* XCRemoteSwiftPackageReference "Sparkle" */;
-			productName = Sparkle;
-		};
 		F6B7BC3524A2A9A40051D76F /* FMDB */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F6B7BC3424A2A9A40051D76F /* XCRemoteSwiftPackageReference "fmdb" */;

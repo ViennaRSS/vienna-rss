@@ -1,2 +1,5 @@
 # MMTabBarView
 github "ViennaRSS/MMTabBarView" ~> 1.4
+
+# Sparkle
+github "sparkle-project/Sparkle" ~> 1.21
