@@ -1324,7 +1324,7 @@
                                            accessibilityDescription:nil];
                 return image;
             } else {
-                return [NSImage imageNamed:@"enclosure"];
+                return [NSImage imageNamed:@"comments"];
             }
         }
         return nil;
