@@ -77,7 +77,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>u</string>
 			<key>one</key>
-			<string>%u article</string>
+			<string>%u articles</string>
 			<key>other</key>
 			<string>%u articles</string>
 		</dict>

@@ -181,15 +181,6 @@
 /* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f"; */
 "Y0d-K7-46f.title" = "Information";
 
-/* Class = "NSToolbarItem"; label = "Delete"; ObjectID = "Y22-Ul-q6w"; */
-"Y22-Ul-q6w.label" = "Löschen";
-
-/* Class = "NSToolbarItem"; paletteLabel = "Delete"; ObjectID = "Y22-Ul-q6w"; */
-"Y22-Ul-q6w.paletteLabel" = "Löschen";
-
-/* Class = "NSToolbarItem"; toolTip = "Delete the current article"; ObjectID = "Y22-Ul-q6w"; */
-"Y22-Ul-q6w.toolTip" = "Aktuellen Artikel löschen";
-
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2"; */
 "Zu1-zW-uo2.title" = "Öffne Webseite des Abonnements";
 

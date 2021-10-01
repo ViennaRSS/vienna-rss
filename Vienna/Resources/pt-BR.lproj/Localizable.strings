@@ -102,6 +102,9 @@
 "Click the Open button to open this file." = "Clique no botão Abrir para abrir este arquivo.";
 
 /* No comment provided by engineer. */
+"Click the Play button to play this enclosure in iTunes." = "Clique no botão Tocar para tocar este anexo no iTunes.";
+
+/* No comment provided by engineer. */
 "Connecting to %@" = "conectando a %@";
 
 /* test for a string */
@@ -386,6 +389,9 @@
 
 /* No comment provided by engineer. */
 "Other" = "Outro";
+
+/* No comment provided by engineer. */
+"Play" = "Tocar";
 
 /* Title of a button on an alert */
 "Quit" = "Encerrar";

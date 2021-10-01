@@ -126,6 +126,9 @@
 "Click the Open button to open this file." = "Klicken Sie auf Öffnen um die Datei anzuzeigen.";
 
 /* No comment provided by engineer. */
+"Click the Play button to play this enclosure in iTunes." = "Klicken Sie den Play-Button um die Datei in iTunes abzuspielen";
+
+/* No comment provided by engineer. */
 "Connecting to %@" = "Verbinde mit %@";
 
 /* No comment provided by engineer. */
@@ -471,11 +474,11 @@
 /* No comment provided by engineer. */
 "Open With" = "Öffnen mit";
 
-/* Name the application which should open a file */
-"Open with %@" = "Öffnen mit %@";
-
 /* No comment provided by engineer. */
 "Other" = "Auswählen";
+
+/* No comment provided by engineer. */
+"Play" = "Abspielen";
 
 /* No comment provided by engineer. */
 "Plugin installed" = "Plugin installiert";

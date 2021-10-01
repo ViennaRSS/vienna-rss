@@ -38,9 +38,6 @@
 "A folder with that name already exists" = "Er bestaat al een map met deze naam";
 
 /* No comment provided by engineer. */
-"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Een nieuw plug-in is toegevoegd. Deze is nu beschikbaar in het menu of u kunt het toevegen aan de knoppenbalk.";
-
-/* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Een nieuwe Vienna-database kan niet worden aagemaakt in \"%@\". De database staat waarschijnlijk op een andere computer in het netwerk, hetgeen door deze versie van Vienna niet wordt ondersteund. Kiest u een andere locatie op deze computer.";
 
 /* No comment provided by engineer. */
@@ -112,6 +109,9 @@
 
 /* No comment provided by engineer. */
 "Click the Open button to open this file." = "Klik de Open knop om dit bestand te openen.";
+
+/* No comment provided by engineer. */
+"Click the Play button to play this enclosure in iTunes." = "Klik de Afspelen knop om deze bijlage in ITunes af te spelen.";
 
 /* No comment provided by engineer. */
 "Connecting to %@" = "Verbinden met %@";
@@ -363,9 +363,6 @@
 /* No comment provided by engineer. */
 "No new articles available" = "Geen nieuwe artikelen beschikbaar";
 
-/* test for a folder (not operational as of Vienna 3.2) */
-"not under" = "niet onder";
-
 /* No comment provided by engineer. */
 "One or more downloads are in progress" = "Eén of meer downloads zijn nog bezig";
 
@@ -409,16 +406,10 @@
 "Open Subscription Home Page in External Browser" = "Open abonnement-pagina in externe browser";
 
 /* No comment provided by engineer. */
-"Open With" = "Open met";
-
-/* Name the application which should open a file */
-"Open with %@" = "Open met %@";
-
-/* No comment provided by engineer. */
 "Other" = "Andere";
 
 /* No comment provided by engineer. */
-"Plugin installed" = "Plug-in toegevoegd";
+"Play" = "Afspelen";
 
 /* No comment provided by engineer. */
 "Queue" = "Wachtrij";
@@ -574,9 +565,6 @@
 /* No comment provided by engineer. */
 "Trash" = "Prullenmand";
 
-/* test for a folder (not operational as of Vienna 3.2) */
-"under" = "onder";
-
 /* No comment provided by engineer. */
 "Unread" = "Ongelezen";
 
@@ -591,9 +579,6 @@
 
 /* Title of a button on an alert */
 "Upgrade Database" = "Bijwerken database";
-
-/* URL */
-"URL" = "URL";
 
 /* No comment provided by engineer. */
 "Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna kan het bestand \"%@\" niet openen, omdat het is verplaatst sinds u het heeft gedownload.";

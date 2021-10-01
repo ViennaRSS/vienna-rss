@@ -99,6 +99,9 @@
 "Click the Open button to open this file." = "Clique no botão Abrir para abrir este ficheiro.";
 
 /* No comment provided by engineer. */
+"Click the Play button to play this enclosure in iTunes." = "Clique no botão Reproduzir para abrir este anexo no iTunes.";
+
+/* No comment provided by engineer. */
 "Connecting to %@" = "A conectar a %@";
 
 /* test for a string */
@@ -368,6 +371,9 @@
 
 /* No comment provided by engineer. */
 "Other" = "Outro";
+
+/* No comment provided by engineer. */
+"Play" = "Reproduzir";
 
 /* Title of a button on an alert */
 "Quit" = "Encerrar";

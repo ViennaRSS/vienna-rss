@@ -25,12 +25,6 @@
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "27s-E3-FHd"; */
 "27s-E3-FHd.title" = "Corriger l'orthographe automatiquement";
 
-/* Class = "NSMenuItem"; title = "Vienna"; ObjectID = "56"; */
-"56.title" = "Vienna";
-
-/* Class = "NSMenu"; title = "Vienna"; ObjectID = "57"; */
-"57.title" = "Vienna";
-
 /* Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58"; */
 "58.title" = "À propos de Vienna";
 
@@ -60,9 +54,6 @@
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
 "130.title" = "Services";
-
-/* Class = "NSMenuItem"; title = "Services"; ObjectID = "131"; */
-"131.title" = "Services";
 
 /* Class = "NSMenuItem"; title = "Hide Vienna"; ObjectID = "134"; */
 "134.title" = "Masquer Vienna";
@@ -136,9 +127,6 @@
 /* Class = "NSMenu"; title = "Article"; ObjectID = "300"; */
 "300.title" = "Article";
 
-/* Class = "NSMenuItem"; title = "Article"; ObjectID = "301"; */
-"301.title" = "Article";
-
 /* Class = "NSMenuItem"; title = "Next Unread"; ObjectID = "344"; */
 "344.title" = "Suivant non lu";
 
@@ -192,9 +180,6 @@
 
 /* Class = "NSMenuItem"; title = "Style"; ObjectID = "826"; */
 "826.title" = "Style";
-
-/* Class = "NSMenu"; title = "Style"; ObjectID = "827"; */
-"827.title" = "Style";
 
 /* Class = "NSMenuItem"; title = "Stop Refreshing"; ObjectID = "858"; */
 "858.title" = "Arrêter le rafraichissement";
@@ -320,7 +305,7 @@
 "1214.title" = "Ouvrir nouvel onglet";
 
 /* Class = "NSMenuItem"; title = "Download Enclosure"; ObjectID = "1216"; */
-"1216.title" = "Télécharger le fichier joint";
+"1216.title" = "Télécharger le fichier incorporé";
 
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
 "1257.title" = "Personnaliser la barre d'outils…";
@@ -388,9 +373,6 @@
 /* Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi"; */
 "ecl-HO-Kpi.title" = "Marquer tous les abonnements comme lu";
 
-/* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "eVb-Qt-XJb"; */
-"eVb-Qt-XJb.title" = "Substitutions";
-
 /* Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI"; */
 "fad-Nj-OFI.title" = "Orthographe";
 
@@ -405,9 +387,6 @@
 
 /* Class = "NSMenuItem"; title = "Data Detectors"; ObjectID = "idm-wm-h8z"; */
 "idm-wm-h8z.title" = "Détecteurs de données";
-
-/* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "joR-kW-sIU"; */
-"joR-kW-sIU.title" = "Transformations";
 
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "JXn-SB-3t2"; */
 "JXn-SB-3t2.title" = "Parole";

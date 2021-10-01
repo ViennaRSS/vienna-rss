@@ -99,6 +99,9 @@
 "Click the Open button to open this file." = "Bu dosyayı açmak için Aç düğmesine basın.";
 
 /* No comment provided by engineer. */
+"Click the Play button to play this enclosure in iTunes." = "Bu eki iTunes'ta çalmak için Yürüt düğmesine basın.";
+
+/* No comment provided by engineer. */
 "Connecting to %@" = "Bağlanılıyor: %@";
 
 /* test for a string */
@@ -380,6 +383,9 @@
 
 /* No comment provided by engineer. */
 "Other" = "Diğer";
+
+/* No comment provided by engineer. */
+"Play" = "Yürüt";
 
 /* Title of a button on an alert */
 "Quit" = "Çık";

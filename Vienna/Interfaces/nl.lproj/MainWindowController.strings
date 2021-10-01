@@ -178,15 +178,6 @@
 /* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f"; */
 "Y0d-K7-46f.title" = "Toon info";
 
-/* Class = "NSToolbarItem"; label = "Delete"; ObjectID = "Y22-Ul-q6w"; */
-"Y22-Ul-q6w.label" = "Verwijder";
-
-/* Class = "NSToolbarItem"; paletteLabel = "Delete"; ObjectID = "Y22-Ul-q6w"; */
-"Y22-Ul-q6w.paletteLabel" = "Verwijder";
-
-/* Class = "NSToolbarItem"; toolTip = "Delete the current article"; ObjectID = "Y22-Ul-q6w"; */
-"Y22-Ul-q6w.toolTip" = "Huidig artikel verwijderen";
-
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2"; */
 "Zu1-zW-uo2.title" = "Ga naar startpagina van abonnement";
 
