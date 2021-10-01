@@ -3087,7 +3087,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ViennaRSS/MMTabBarView";
 			requirement = {
-				branch = v/1.4.12;
+				branch = v/1.4.11;
 				kind = branch;
 			};
 		};
