@@ -97,7 +97,7 @@ body {
 	textarea, input,
 	iframe, object,
 	embed, video {
-	  max-width: 100% !important;
+	  max-width: 100%;
 	}
 
 	/* specific direction for code */

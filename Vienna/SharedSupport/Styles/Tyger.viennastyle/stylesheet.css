@@ -77,7 +77,7 @@ span.articleAuthorStyle {
 
 /* fix a 100% max size to potentially problematic elements */
 img, table, td, blockquote, code, pre, textarea, input, iframe, object, embed, video {
-	max-width: 100% !important;
+	max-width: 100%;
 }
 
 /* specific direction for code */
