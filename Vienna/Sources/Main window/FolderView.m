@@ -325,9 +325,6 @@
 	}
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-implementations"
-
 /* textDidChange
  * When the cell contents are edited, redraw the border so it wraps the text
  * rather than the cell.
@@ -374,8 +371,6 @@
 	else
 		[super textDidEndEditing:notification];
 }
-
-#pragma clang diagnostic pop
 
 /* cancelOperation
  * If Escape key or Command-. is pressed,
