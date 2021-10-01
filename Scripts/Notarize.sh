@@ -12,14 +12,6 @@ fi
 
 local_apps_dir="${ARCHIVE_PATH}/Products/Applications"
 app_path="${local_apps_dir}/Vienna.app"
-
-# cf. https://furbo.org/2019/08/16/catalina-app-notarization-and-sparkle/
-LOCATION="${app_path}/Contents/Frameworks"
-
-codesign --verbose --force --deep -o runtime --sign "${CODE_SIGN_IDENTITY}" "$LOCATION/Sparkle.framework/Versions/A/Resources/AutoUpdate.app"
-codesign --verbose --force -o runtime --sign "${CODE_SIGN_IDENTITY}" "$LOCATION/Sparkle.framework/Versions/A"
-
-
 product_name=$(/usr/libexec/PlistBuddy -c "Print CFBundleName" "${app_path}/Contents/Info.plist")
 zipped_app="${product_name}.zip"
 
@@ -30,9 +22,7 @@ ditto -c -k --rsrc --keepParent "${app_path}" "${zipped_app}" 2>&1 > /dev/null
 
 uuid=$(uuidgen)
 echo "Uploading to Apple to notarize. Bundle id: ${uuid}"
-set -x
 notarize_uuid=$(xcrun altool --notarize-app --primary-bundle-id "${uuid}" --username "${APP_STORE_ID}" --password "${APP_STORE_PASSWORD}" --asc-provider "${TEAM_SHORTNAME}" --file "${zipped_app}" 2>&1 |grep RequestUUID | awk '{print $3'})
-set +x
 echo "Notarization info tracking id: ${notarize_uuid}"
 sleep 3
 
@@ -56,7 +46,6 @@ while true; do
 		sleep 30
 	else
 		echo "Unknown error during notarization. Exiting"
-		xcrun altool --notarization-info "${notarize_uuid}"  -u "${APP_STORE_ID}" -p "${APP_STORE_PASSWORD}"
 		break
 	fi
 done
