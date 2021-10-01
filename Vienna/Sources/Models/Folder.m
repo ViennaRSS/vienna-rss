@@ -88,13 +88,13 @@ static NSArray * iconArray = nil;
 +(NSArray<NSImage *> *)_iconArray {
 	if (iconArray == nil)
 		iconArray = @[
-					  [NSImage imageNamed:@"smallFolder"],
-					  [NSImage imageNamed:@"smartFolder"],
-					  [NSImage imageNamed:@"rssFolder"],
-					  [NSImage imageNamed:@"rssFeedNew"],
-					  [NSImage imageNamed:@"trashFolder"],
-					  [NSImage imageNamed:@"searchFolder"],
-					  [NSImage imageNamed:@"googleFeed"],
+					  [NSImage imageNamed:@"smallFolder.tiff"],
+					  [NSImage imageNamed:@"smartFolder.tiff"],
+					  [NSImage imageNamed:@"rssFolder.tiff"],
+					  [NSImage imageNamed:@"rssFeedNew.tiff"],
+					  [NSImage imageNamed:@"trashFolder.tiff"],
+					  [NSImage imageNamed:@"searchFolder.tiff"],
+					  [NSImage imageNamed:@"googleFeed.tiff"],
 					  ];
 	return iconArray;
 }
