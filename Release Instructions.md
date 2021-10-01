@@ -1,4 +1,4 @@
-Instructions for building and uploading Vienna binaries to Github and Sourceforge.
+Instructions for building and uploading Vienna binaries to Github, Sourceforge and Bintray.
 
 ## One time setup step: ##
 
@@ -105,6 +105,15 @@ There are two distinct ways to get the different files needed to publish an upda
    3. For beta and release candidates, check the "This is a prerelease" box.
    4. Click the "Publish" button.
    5. Verify the uploaded file: download it, uncompress it and check that it runs OK.
+
+### On Bintray.com:
+	
+   6. Sign in and go to <https://bintray.com/viennarss/vienna-rss/vienna-rss/view>
+   7. Choose "New version".
+   8. Fill the name ("3.3.0Beta4"), the description from the version notes, then click "Create version". Add the VCS tag (`v/3.3.0_beta4`) and update.
+   9. Check the version (at <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4>), click "Upload files" to go to <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4/upload> and upload the two .tar.gz files (whose name should be like `Vienna3.3.0_beta4.tar.gz` and `Vienna3.3.0_beta4.5b272a6-dSYM.tar.gz`).
+   10. Click "Save Changes", then click "Publish".
+   11. Go back to the files list (<https://bintray.com/viennarss/vienna-rss/vienna-rss/3.3.0Beta4/#files>), select the binary ("Vienna3.3.0_beta4.tar.gz") and choose "Show in download list" in the contextual menu.
 
 ### On Sourceforge.net:
 

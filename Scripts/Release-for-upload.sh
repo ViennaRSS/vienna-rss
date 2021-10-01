@@ -4,9 +4,7 @@
 
 # Directory created during the Changes-and-Notes.sh stage
 VIENNA_UPLOADS_DIR="${SOURCE_ROOT}/Build/Uploads"
-GITHUB_REPO="https://github.com/ViennaRSS/vienna-rss"
-GITHUB_RELEASE_URL="${GITHUB_REPO}/releases/tag/${VCS_TAG}"
-GITHUB_ASSETS_URL="${GITHUB_REPO}/releases/download/${VCS_TAG}"
+DOWNLOAD_BASE_URL="${BASE_URL_TYP}://${BASE_URL_LOC}"
 
 TGZ_FILENAME="Vienna${N_VCS_TAG}.tar.gz"
 dSYM_FILENAME="Vienna${N_VCS_TAG}.${VCS_SHORT_HASH}-dSYM"
@@ -57,9 +55,9 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 		<item>
 			<title>Vienna ${V_VCS_TAG} :${VCS_SHORT_HASH}:</title>
 			<pubDate>${pubDate}</pubDate>
-			<link>${GITHUB_RELEASE_URL}</link>
+			<link>${DOWNLOAD_BASE_URL}/${TGZ_FILENAME}</link>
 			<sparkle:minimumSystemVersion>${MACOSX_DEPLOYMENT_TARGET}.0</sparkle:minimumSystemVersion>
-			<enclosure url="${GITHUB_ASSETS_URL}/${TGZ_FILENAME}" sparkle:version="${N_VCS_NUM}" sparkle:shortVersionString="${V_VCS_TAG} :${VCS_SHORT_HASH}:" length="${TGZSIZE}" sparkle:dsaSignature="${SIGNATURE}" type="application/octet-stream"/>
+			<enclosure url="${DOWNLOAD_BASE_URL}/${TGZ_FILENAME}" sparkle:version="${N_VCS_NUM}" sparkle:shortVersionString="${V_VCS_TAG} :${VCS_SHORT_HASH}:" length="${TGZSIZE}" sparkle:dsaSignature="${SIGNATURE}" type="application/octet-stream"/>
 			<sparkle:releaseNotesLink>https://viennarss.github.io/sparkle-files/noteson${N_VCS_TAG}.html</sparkle:releaseNotesLink>
 		</item>
 	</channel>
