@@ -1516,10 +1516,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		{
 			[NSApp.mainMenu removeItem:scriptsMenuItem];
 		}
-
+		
         scriptsMenuItem = [[NSMenuItem alloc] initWithTitle:@"" action:NULL keyEquivalent:@""];
-        scriptsMenuItem.image = [NSImage imageNamed:@"NSScriptTemplate"];
-
+		scriptsMenuItem.image = [NSImage imageNamed:@"ScriptsTemplate"];
+		
 		NSInteger helpMenuIndex = NSApp.mainMenu.numberOfItems - 1;
 		[NSApp.mainMenu insertItem:scriptsMenuItem atIndex:helpMenuIndex];
 		scriptsMenuItem.submenu = scriptsMenu;
