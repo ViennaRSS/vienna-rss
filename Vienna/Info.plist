@@ -139,7 +139,7 @@
 	<key>SUPublicDSAKeyFile</key>
 	<string>SparklePublicKey.pem</string>
 	<key>SUPublicEDKey</key>
-	<string>nPwwT+poO5Kmi1NZkE5OveKB8lvQVY20N22E8jgxLCg=</string>
+	<string>&lt;insert public key&gt;</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
