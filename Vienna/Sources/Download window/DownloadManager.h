@@ -28,9 +28,8 @@
 	NSInteger activeDownloads;
 }
 
-@property (class, readonly) DownloadManager *sharedInstance NS_SWIFT_NAME(shared);
-
 // Public functions
++(DownloadManager *)sharedInstance;
 +(BOOL)isFileDownloaded:(NSString *)filename;
 +(NSString *)fullDownloadPath:(NSString *)filename;
 @property (nonatomic, readonly, copy) NSArray *downloadsList;

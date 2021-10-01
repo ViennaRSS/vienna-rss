@@ -26,7 +26,7 @@
 	NSMutableDictionary * controllerList;
 }
 
-@property (class, readonly) InfoPanelManager *infoWindowManager;
++(InfoPanelManager *)infoWindowManager;
 
 -(void)showInfoWindowForFolder:(NSInteger)folderId
                          block:(void (^)(InfoPanelController *infoPanelController))block;

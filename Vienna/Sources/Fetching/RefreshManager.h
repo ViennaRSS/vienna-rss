@@ -34,7 +34,7 @@
 	dispatch_queue_t _queue;
 }
 
-@property (class, readonly) RefreshManager *sharedManager;
++(RefreshManager *)sharedManager;
 
 @property (readonly, copy) NSString *statusMessage;
 @property (nonatomic, getter=isConnecting, readonly) BOOL connecting;

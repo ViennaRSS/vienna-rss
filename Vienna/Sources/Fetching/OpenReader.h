@@ -14,7 +14,7 @@
 
 @interface OpenReader : NSObject
 
-@property (class, readonly) OpenReader *sharedManager NS_SWIFT_NAME(shared);
++(OpenReader *)sharedManager;
 
 @property (readonly, copy) NSString *statusMessage;
 
