@@ -244,8 +244,8 @@
         }
         case 23: {
             // Create indexes for unread and non deleted messages
-            [database executeStatements:@"CREATE INDEX messages_read_flag ON messages(read_flag)"];
-            [database executeStatements:@"CREATE INDEX messages_deleted_flag ON messages(deleted_flag)"];
+            [database executeStatements:@"create index messages_read_flag on messages(read_flag)"];
+            [database executeStatements:@"create index messages_deleted_flag on messages(deleted_flag)"];
 
             database.userVersion = (uint32_t)23;
             NSLog(@"Updated database schema to version 23.");
