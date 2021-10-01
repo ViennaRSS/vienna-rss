@@ -20,6 +20,7 @@
 
 #import "Constants.h"
 #import "GeneralPreferencesViewController.h"
+#import "PopUpButtonExtensions.h"
 #import "Preferences.h"
 
 @interface GeneralPreferencesViewController ()
@@ -75,12 +76,12 @@
     // 0 value disables auto-expire.
     // Increments of 1000 specify months, so 1000 = 1 month, 1001 = 1 month and 1 day…
     [expireDuration removeAllItems];
-    [expireDuration insertItemWithTitle:NSLocalizedString(@"Never", nil) tag:0 atIndex:0];
-    [expireDuration insertItemWithTitle:NSLocalizedString(@"After a Day", nil) tag:1 atIndex:1];
-    [expireDuration insertItemWithTitle:NSLocalizedString(@"After 2 Days", nil) tag:2 atIndex:2];
-    [expireDuration insertItemWithTitle:NSLocalizedString(@"After a Week", nil) tag:7 atIndex:3];
-    [expireDuration insertItemWithTitle:NSLocalizedString(@"After 2 Weeks", nil) tag:14 atIndex:4];
-    [expireDuration insertItemWithTitle:NSLocalizedString(@"After a Month", nil) tag:1000 atIndex:5];
+    [expireDuration insertItemWithTag:NSLocalizedString(@"Never", nil) tag:0 atIndex:0];
+    [expireDuration insertItemWithTag:NSLocalizedString(@"After a Day", nil) tag:1 atIndex:1];
+    [expireDuration insertItemWithTag:NSLocalizedString(@"After 2 Days", nil) tag:2 atIndex:2];
+    [expireDuration insertItemWithTag:NSLocalizedString(@"After a Week", nil) tag:7 atIndex:3];
+    [expireDuration insertItemWithTag:NSLocalizedString(@"After 2 Weeks", nil) tag:14 atIndex:4];
+    [expireDuration insertItemWithTag:NSLocalizedString(@"After a Month", nil) tag:1000 atIndex:5];
     
     // Set auto-expire duration
     [expireDuration selectItemAtIndex:[expireDuration indexOfItemWithTag:prefs.autoExpireDuration]];
@@ -188,7 +189,7 @@
     // Add a Select command so the user can manually pick a registered
     // application.
     [linksHandler addSeparator];
-    [linksHandler addItemWithTitle:NSLocalizedString(@"Select…", nil) tag:-1];
+    [linksHandler addItemWithTag:NSLocalizedString(@"Select…", nil) tag:-1];
     
     // Select the registered item
     [linksHandler selectItemAtIndex:0];
