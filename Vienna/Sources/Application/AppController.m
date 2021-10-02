@@ -44,7 +44,6 @@
 #import "SearchPanel.h"
 #import "SearchMethod.h"
 #import "OpenReader.h"
-#import "Debug.h"
 #import "Database.h"
 #import "NSURL+CaminoExtensions.h"
 #import "PluginManager.h"
@@ -3084,7 +3083,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)refreshAllFolderIcons:(id)sender
 {
-	LOG_EXPR([self.foldersTree folders:0]);
+    os_log_info(VNA_LOG, "Refreshing icons for %lu folders", [self.foldersTree folders:0].count);
     if (!self.connecting) {
 		[[RefreshManager sharedManager] refreshFolderIconCacheForSubscriptions:[self.foldersTree folders:0]];
     }

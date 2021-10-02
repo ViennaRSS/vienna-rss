@@ -31,7 +31,6 @@
 #import "Constants.h"
 #import "OpenReader.h"
 #import "NSNotificationAdditions.h"
-#import "Debug.h"
 #import "Article.h"
 #import "Folder.h"
 #import "Database.h"
@@ -537,7 +536,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 // failure callback
 -(void)folderRefreshFailed:(NSMutableURLRequest *)request error:(NSError *)error
 {
-    LOG_EXPR(error);
+    os_log_debug(VNA_LOG, "Refresh of %@ failed. Reason: %{public}@", error.userInfo[NSURLErrorFailingURLStringErrorKey], error.localizedDescription);
     Folder * folder = ((NSDictionary *)[request userInfo])[@"folder"];
     if (error.code == NSURLErrorCancelled) {
         // Stopping the connection isn't an error, so clear any existing error flag.
@@ -1034,9 +1033,10 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             [self   addConnection:testRequest
                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                     if (error) {
-                    LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
-                    LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-                    [weakSelf void301WaitQueue];
+                        NSDictionary *headers = ((NSHTTPURLResponse *)response).allHeaderFields;
+                        NSString *dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                        os_log_fault(VNA_LOG, "Test requested failed.\n\nHeaders: %@\n\nData: %@", headers, dataStr);
+                        [weakSelf void301WaitQueue];
                     } else {
                     if (![((NSHTTPURLResponse *)response).URL.host isEqualToString:testRequest.URL.host]) {
                         // we probably have a misconfigured router / proxy
