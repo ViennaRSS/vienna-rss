@@ -33,7 +33,7 @@ final class DirectoryMonitor: NSObject {
     /// - Parameter directories: The directories to monitor.
     @objc
     init(directories: [URL]) {
-        self.directories = directories.filter { $0.hasDirectoryPath }
+        self.directories = directories.filter { $0.isFileURL }
     }
 
     // When the instance is ready to be deinitialized, the stream should be
@@ -80,10 +80,43 @@ final class DirectoryMonitor: NSObject {
 
         // The callback will pass along the raw pointer to the direcory monitor
         // instance. Recasting this will make the event handler accessible.
-        let callback: FSEventStreamCallback = { _, info, _, _, _, _ -> Void in
+        let callback: FSEventStreamCallback = { _, info, eventCount, paths, flags, _ -> Void in
             guard let info = info else {
+                os_log("No pointer to the event handler", log: .discoverer, type: .fault)
                 return
             }
+
+            if let paths = Unmanaged<NSArray>.fromOpaque(paths).takeUnretainedValue() as? [String] {
+                for index in 0..<eventCount {
+                    let path = paths[index]
+                    let flag = flags[index]
+
+                    if flag & UInt32(kFSEventStreamEventFlagRootChanged) != 0 {
+                        os_log("Root path %@ changed", log: .discoverer, type: .debug, path)
+                    }
+
+                    if flag & UInt32(kFSEventStreamEventFlagItemCreated) != 0 {
+                        os_log("%@ added", log: .discoverer, type: .debug, path)
+                    }
+
+                    if flag & UInt32(kFSEventStreamEventFlagItemRenamed) != 0 {
+                        os_log("%@ renamed or moved", log: .discoverer, type: .debug, path)
+                    }
+
+                    if flag & UInt32(kFSEventStreamEventFlagItemRemoved) != 0 {
+                        os_log("%@ removed", log: .discoverer, type: .debug, path)
+                    }
+
+                    if flag & UInt32(kFSEventStreamEventFlagRootChanged) == 0,
+                       flag & UInt32(kFSEventStreamEventFlagItemCreated) == 0,
+                       flag & UInt32(kFSEventStreamEventFlagItemRenamed) == 0,
+                       flag & UInt32(kFSEventStreamEventFlagItemRemoved) == 0 {
+                        os_log("Unhandled file-system event: %d", log: .discoverer, type: .debug, flag)
+                    }
+                }
+            }
+
+            os_log("Calling the event handler", log: .discoverer, type: .debug)
 
             let monitor = Unmanaged<DirectoryMonitor>.fromOpaque(info).takeUnretainedValue()
             monitor.eventHandler?()
@@ -93,7 +126,7 @@ final class DirectoryMonitor: NSObject {
         // directions of each directory's hierarchy and will coalesce events
         // that happen within 2 seconds of each other.
         let paths = directories.map { $0.path as CFString } as CFArray
-        let flags = UInt32(kFSEventStreamCreateFlagFileEvents | kFSEventStreamCreateFlagWatchRoot)
+        let flags = UInt32(kFSEventStreamCreateFlagFileEvents | kFSEventStreamCreateFlagWatchRoot | kFSEventStreamCreateFlagUseCFTypes)
         guard let stream = FSEventStreamCreate(kCFAllocatorDefault,
                                                callback,
                                                &context,
@@ -153,4 +186,12 @@ enum DirectoryMonitorError: LocalizedError {
             return "The file-system event stream could not be started"
         }
     }
+}
+
+// MARK: - Public extensions
+
+extension OSLog {
+
+    static let monitor = OSLog(subsystem: "--", category: "DirectoryMonitor")
+
 }
