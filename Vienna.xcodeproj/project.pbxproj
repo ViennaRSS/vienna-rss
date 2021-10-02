@@ -163,7 +163,6 @@
 		B856F8E125782F8100E91AC7 /* AppController+Sparkle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856F8E025782F8100E91AC7 /* AppController+Sparkle.swift */; };
 		B85F93E5255AE48000B54B68 /* NSPopUpButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F93E4255AE48000B54B68 /* NSPopUpButtonExtensions.swift */; };
 		B8B9D6D323685C7400EAE65C /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B9D6D223685C7400EAE65C /* FeedItem.swift */; };
-		EA43C70914A370DB00F2D843 /* VTPG_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = EA43C70814A370DB00F2D843 /* VTPG_Common.m */; };
 		F41CA694218F56140072F734 /* NSWorkspace+OpenWithMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F41CA692218F56130072F734 /* NSWorkspace+OpenWithMenu.m */; };
 		F602CFBD26E25B040015D580 /* org.sparkle-project.InstallerLauncher.xpc in Copy XPC Services Bundles */ = {isa = PBXBuildFile; fileRef = F602CFBC26E25A370015D580 /* org.sparkle-project.InstallerLauncher.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F6094E331F10107800677D3B /* ExportAccessoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6094E311F10107800677D3B /* ExportAccessoryViewController.swift */; };
@@ -485,9 +484,6 @@
 		B85F93E4255AE48000B54B68 /* NSPopUpButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPopUpButtonExtensions.swift; sourceTree = "<group>"; };
 		B8B9D6D1236850DE00EAE65C /* Vienna_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vienna_Prefix.pch; sourceTree = "<group>"; };
 		B8B9D6D223685C7400EAE65C /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
-		EA43C70714A370DB00F2D843 /* VTPG_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPG_Common.h; sourceTree = "<group>"; };
-		EA43C70814A370DB00F2D843 /* VTPG_Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTPG_Common.m; sourceTree = "<group>"; };
-		EA6D3E5914D8048C004DCB80 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
 		F41CA692218F56130072F734 /* NSWorkspace+OpenWithMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWorkspace+OpenWithMenu.m"; sourceTree = "<group>"; };
 		F41CA693218F56140072F734 /* NSWorkspace+OpenWithMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWorkspace+OpenWithMenu.h"; sourceTree = "<group>"; };
 		F602CFBC26E25A370015D580 /* org.sparkle-project.InstallerLauncher.xpc */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.xpc-service"; name = "org.sparkle-project.InstallerLauncher.xpc"; path = "DerivedData/Vienna/SourcePackages/artifacts/Sparkle/XPCServices/org.sparkle-project.InstallerLauncher.xpc"; sourceTree = SOURCE_ROOT; };
@@ -1197,16 +1193,6 @@
 			path = Scripts;
 			sourceTree = "<group>";
 		};
-		EA43C70614A370CB00F2D843 /* DebugHelper */ = {
-			isa = PBXGroup;
-			children = (
-				EA43C70714A370DB00F2D843 /* VTPG_Common.h */,
-				EA43C70814A370DB00F2D843 /* VTPG_Common.m */,
-			);
-			name = DebugHelper;
-			path = VTPG;
-			sourceTree = "<group>";
-		};
 		F63739FB1F1CFEDC00ED3B09 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
@@ -1233,7 +1219,6 @@
 		F63B7D701F1CD001002F71BF /* External */ = {
 			isa = PBXGroup;
 			children = (
-				EA43C70614A370CB00F2D843 /* DebugHelper */,
 				43501F8E165DBCCB0018EDB7 /* DSClickableURLTextField */,
 				F6F2CD1A25853B5F003C80D3 /* NSURL+CaminoExtensions */,
 				3A171BDF210B551A00B80FBB /* TRVSURLSessionOperation */,
@@ -1628,7 +1613,6 @@
 				B81B536325565CD700C65459 /* Constants.swift */,
 				F64C2CCA1E83825D00ED4E04 /* DateFormatterExtension.h */,
 				F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */,
-				EA6D3E5914D8048C004DCB80 /* Debug.h */,
 				F6164C571E32A6660086261C /* DisclosureView.h */,
 				F6164C581E32A6660086261C /* DisclosureView.m */,
 				AA60237E08C298FB002CFD06 /* HelperFunctions.h */,
@@ -2071,7 +2055,6 @@
 				2F779111253B17C5004ED4EF /* BrowserContextMenuDelegate.swift in Sources */,
 				664F87C713C62DFE00E266DE /* OpenReader.m in Sources */,
 				F6D282621F1A87A900FF865E /* PopUpButtonToolbarItem.swift in Sources */,
-				EA43C70914A370DB00F2D843 /* VTPG_Common.m in Sources */,
 				435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */,
 				F6D0089C1EF95C9D008F2D3B /* InfoPanelManager.m in Sources */,
 				4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */,
@@ -2828,8 +2811,8 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
 					"$(inherited)",
+					DEBUG,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2953,7 +2936,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"$(BUILD_PREPROCESSOR_DEFINITIONS)",
-					"DEBUG=1",
+					DEBUG,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				INFOPLIST_FILE = Vienna/Info.plist;
@@ -2964,7 +2947,6 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				OTHER_CFLAGS = "-DDEBUG=1";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.opencommunity.vienna2;
 				PRODUCT_NAME = Vienna;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -3001,7 +2983,6 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				OTHER_CFLAGS = "-DNO_LOG_MACROS";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.opencommunity.vienna2;
 				PRODUCT_NAME = Vienna;
 				SEPARATE_STRIP = YES;
@@ -3151,10 +3132,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
