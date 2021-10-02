@@ -28,6 +28,9 @@
  */
 
 #import "OpenReader.h"
+
+#import <os/log.h>
+
 #import "URLRequestExtensions.h"
 #import "Folder.h"
 #import "Database.h"
@@ -60,6 +63,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     waitingTToken,
     fullyAuthenticated
 };
+
+#define VNA_LOG os_log_create("--", "OpenReader")
 
 @interface OpenReader ()
 
@@ -539,7 +544,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 NSLog(@"Found %lu items", (unsigned long)[subscriptionsDict[@"items"] count]);
                 LOG_EXPR(subscriptionsDict);
                 LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-                ALog(@"Error !!! Incoherent data !");
+                os_log_error(VNA_LOG, "Error! Incoherent data!");
                 //keep the previously recorded one
                 folderLastUpdateString = ((NSDictionary *)[request userInfo])[@"lastupdatestring"];
             }
