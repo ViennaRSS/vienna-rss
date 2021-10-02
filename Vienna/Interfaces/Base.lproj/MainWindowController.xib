@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="Window Controller" customClass="MainWindowController" customModule="Vienna" customModuleProvider="target">
             <connections>
                 <outlet property="articleListView" destination="971" id="OE4-G3-4mz"/>
-                <outlet property="filterButton" destination="1400" id="06C-9S-q2e"/>
                 <outlet property="filterDisclosureView" destination="cTN-D0-dY2" id="sKF-FL-hKC"/>
                 <outlet property="filterDisclosureView2" destination="jsc-Kj-wj8" id="Zjf-Wd-fF4"/>
-                <outlet property="filterLabel" destination="1403" id="JQl-as-cDO"/>
                 <outlet property="filterSearchField" destination="1304" id="n8w-oi-CCg"/>
                 <outlet property="filterSearchField2" destination="a7v-eM-oW1" id="1gv-eS-8ME"/>
                 <outlet property="outlineView" destination="Kk7-ax-B3r" id="bhW-7c-vBp"/>
@@ -141,32 +139,11 @@
                                             <color key="backgroundColor" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="1400">
-                                        <rect key="frame" x="918" y="3" width="16" height="16"/>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="filter-icon" imagePosition="overlaps" alignment="center" focusRingType="none" inset="2" id="1401">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="showHideFilterBar:" target="-1" id="LjF-v8-BMB"/>
-                                        </connections>
-                                    </button>
-                                    <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="1403">
-                                        <rect key="frame" x="838" y="4" width="74" height="14"/>
-                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="right" title="Current Filter" id="1404">
-                                            <font key="font" metaFont="smallSystem"/>
-                                            <color key="textColor" name="windowFrameTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="1400" firstAttribute="centerY" secondItem="1403" secondAttribute="centerY" id="1HT-JZ-80R"/>
-                                    <constraint firstItem="1403" firstAttribute="baseline" secondItem="917" secondAttribute="baseline" id="Ap7-nD-raV"/>
-                                    <constraint firstAttribute="trailing" secondItem="1400" secondAttribute="trailing" constant="8" id="GD6-qg-ock"/>
-                                    <constraint firstItem="1400" firstAttribute="leading" secondItem="1403" secondAttribute="trailing" constant="8" symbolic="YES" id="TXz-Sd-EOf"/>
-                                    <constraint firstItem="1403" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="917" secondAttribute="trailing" constant="8" symbolic="YES" id="XyQ-gd-mxb"/>
+                                    <constraint firstItem="917" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5Fc-hn-Xm4" secondAttribute="leading" constant="20" symbolic="YES" id="dlF-mp-uKi"/>
                                     <constraint firstItem="917" firstAttribute="centerX" secondItem="5Fc-hn-Xm4" secondAttribute="centerX" id="iTz-2S-WML"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="917" secondAttribute="trailing" constant="20" symbolic="YES" id="icp-Sn-sg0"/>
                                     <constraint firstAttribute="bottom" secondItem="917" secondAttribute="bottom" constant="4" id="wVA-ge-Yto"/>
                                     <constraint firstItem="917" firstAttribute="top" secondItem="5Fc-hn-Xm4" secondAttribute="top" constant="4" id="xnO-hq-FTt"/>
                                 </constraints>
@@ -197,7 +174,7 @@
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="3B81A7E6-BC01-4E5D-8598-E3749E1C39BF" explicitItemIdentifier="Subscribe" label="Add" paletteLabel="Add" toolTip="Subscribe to a feed or add a folder or smart folder." image="NewFeedTemplate" sizingBehavior="auto" id="CPA-Ha-aj1" userLabel="Add" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <popUpButton key="view" verticalHuggingPriority="750" id="DDQ-PY-F2c">
-                            <rect key="frame" x="0.0" y="14" width="58" height="25"/>
+                            <rect key="frame" x="0.0" y="14" width="73" height="25"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NewFeedTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="pdk-MS-QME" id="xAh-aB-Ek3">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -217,7 +194,6 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem title="New Smart Folder…" id="Pqr-dM-SQQ">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="newSmartFolder:" target="-1" id="zGS-yX-GNs"/>
                                             </connections>
@@ -281,7 +257,7 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="145A8A8B-193F-46E7-87FD-FE2B915C1B08" explicitItemIdentifier="Refresh" label="Refresh" paletteLabel="Refresh" toolTip="Refresh all your subscriptions" image="SyncTemplate" sizingBehavior="auto" id="Nmd-zx-Dys" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <button key="view" verticalHuggingPriority="750" id="PJJ-4H-4dE">
-                            <rect key="frame" x="9" y="14" width="31" height="23"/>
+                            <rect key="frame" x="9" y="14" width="30" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="SyncTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="F19-ww-YfI">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -333,7 +309,7 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="3645E290-4147-4201-8018-6E3A685BE640" explicitItemIdentifier="GetInfo" label="Get Info" paletteLabel="Get Info" toolTip="See information about the selected subscription" image="GetInfoTemplate" sizingBehavior="auto" id="7iy-IN-8oG" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <button key="view" verticalHuggingPriority="750" id="dU4-uo-rcp">
-                            <rect key="frame" x="15" y="14" width="19" height="23"/>
+                            <rect key="frame" x="10" y="14" width="30" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="GetInfoTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1Lf-O5-dn9">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -344,9 +320,66 @@
                             <action selector="getInfo:" target="-1" id="Xvh-S3-PIS"/>
                         </connections>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="C907E8D1-9919-4292-AF82-865D069359AA" explicitItemIdentifier="Filter" label="Filter" paletteLabel="Filter" image="FunnelFilterTemplate" bordered="YES" sizingBehavior="auto" id="I8N-Dr-P6W" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                        <popUpButton key="view" verticalHuggingPriority="750" id="eKU-qn-2dn">
+                            <rect key="frame" x="0.0" y="14" width="60" height="25"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="FunnelFilterTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="NJC-fy-OS8">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="menu"/>
+                                <menu key="menu" id="Mx2-fn-A84">
+                                    <items>
+                                        <menuItem image="FunnelFilterTemplate" hidden="YES" id="yGM-WH-fbb"/>
+                                        <menuItem title="All Articles" id="cJi-Kc-4fg">
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="VaW-FL-0JJ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="h5j-08-XNb"/>
+                                        <menuItem title="Unread or Flagged" tag="6" id="mbZ-oU-TDn">
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="QC3-cR-Lqx"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Last Refresh" tag="2" id="5RA-iE-L8a">
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="eVE-5R-l4E"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Today" tag="3" id="Sne-Nd-bEA">
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="ifP-Af-Q2b"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Last 48 Hours" tag="4" id="yqJ-tO-HNW">
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="oKL-XJ-BAA"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Flagged" tag="5" id="ci8-W6-ewN">
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="zc2-22-OLF"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Unread Articles" tag="1" id="dId-uc-qfG">
+                                            <connections>
+                                                <action selector="changeFiltering:" target="-1" id="BCF-fe-yba"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="CE6-oq-8KJ"/>
+                                        <menuItem title="Show Filter Bar" id="Wy3-T4-9eO">
+                                            <connections>
+                                                <action selector="showHideFilterBar:" target="-1" id="kSu-qc-5hy"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </popUpButtonCell>
+                        </popUpButton>
+                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="A51AB11F-9F76-48DF-A4E8-39C7224775BA" explicitItemIdentifier="Action" label="Action" paletteLabel="Action" toolTip="Additional actions for the selected folder" image="NSActionTemplate" sizingBehavior="auto" id="TSQ-UW-4gU" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <popUpButton key="view" verticalHuggingPriority="750" id="Tq4-6N-ErM">
-                            <rect key="frame" x="0.0" y="14" width="54" height="25"/>
+                            <rect key="frame" x="0.0" y="14" width="50" height="25"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="anL-VR-Fny">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -415,7 +448,7 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="3C962AB1-0C7E-4CBA-8477-2436ED2B6383" explicitItemIdentifier="Styles" label="Style" paletteLabel="Style" toolTip="Display the list of available styles" image="StyleTemplate" sizingBehavior="auto" id="azL-oz-mJL" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <popUpButton key="view" verticalHuggingPriority="750" id="gOd-tT-XFQ">
-                            <rect key="frame" x="0.0" y="14" width="54" height="25"/>
+                            <rect key="frame" x="0.0" y="14" width="50" height="25"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="StyleTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="lu2-BZ-Gxd" id="5CR-Qn-4pP">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -524,6 +557,7 @@
                                                                 <action selector="changeFiltering:" target="-1" id="YCS-te-Yoj"/>
                                                             </connections>
                                                         </menuItem>
+                                                        <menuItem isSeparatorItem="YES" id="A5F-1n-xUd"/>
                                                         <menuItem title="Unread or Flagged" tag="6" id="ty7-ph-peE">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
                                                             <connections>
@@ -828,7 +862,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="701" height="627"/>
                             <clipView key="contentView" id="emU-La-Fur">
                                 <rect key="frame" x="1" y="1" width="699" height="625"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="NgO-hM-mCz" customClass="ExtendedTableView">
                                         <rect key="frame" x="0.0" y="0.0" width="699" height="625"/>
@@ -979,6 +1013,7 @@
     <resources>
         <image name="DeleteTemplate" width="18" height="14"/>
         <image name="EmptyTrashTemplate" width="19" height="14"/>
+        <image name="FunnelFilterTemplate" width="35" height="35"/>
         <image name="GetInfoTemplate" width="28" height="28"/>
         <image name="MailTemplate" width="17" height="12"/>
         <image name="MarkReadTemplate" width="19" height="14"/>
@@ -989,7 +1024,6 @@
         <image name="NextItemTemplate" width="18" height="12"/>
         <image name="PreviousItemTemplate" width="18" height="12"/>
         <image name="StyleTemplate" width="15" height="15"/>
-        <image name="SyncTemplate" width="38" height="24"/>
-        <image name="filter-icon" width="16" height="16"/>
+        <image name="SyncTemplate" width="30" height="30"/>
     </resources>
 </document>

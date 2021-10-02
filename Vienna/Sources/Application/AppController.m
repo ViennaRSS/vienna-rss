@@ -1501,24 +1501,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         // Don't show a count if there are no unread articles
         if (currentCountOfUnread <= 0) {
             NSApp.dockTile.badgeLabel = nil;
-            if (@available(macOS 11, *)) {
-                self.mainWindow.subtitle = [NSString string];
-            } else {
-                self.mainWindow.title = NSRunningApplication.currentApplication.localizedName;
-            }
-            return;
+            self.mainWindowController.unreadCount = 0;
+        } else {
+            NSString *countdown = [NSString stringWithFormat:@"%li", (long)currentCountOfUnread];
+            NSApp.dockTile.badgeLabel = countdown;
+            self.mainWindowController.unreadCount = currentCountOfUnread;
         }
-
-        NSString *countString = [NSString stringWithFormat:NSLocalizedString(@"%u unread", nil), (unsigned)currentCountOfUnread];
-        if (@available(macOS 11, *)) {
-            self.mainWindow.subtitle = countString;
-        } else {;
-            self.mainWindow.title = [NSString stringWithFormat:@"%@ (%@)", NSRunningApplication.currentApplication.localizedName, countString];
-        }
-
-        NSString *countdown = [NSString stringWithFormat:@"%li", (long)currentCountOfUnread];
-        NSApp.dockTile.badgeLabel = countdown;
-
     }
 }
 
@@ -2904,11 +2892,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     id<Tab> activeBrowserTab = self.browser.activeTab;
 	if (activeBrowserTab)
 	{
-        self.mainWindowController.filterAreaIsHidden = YES;
 		[self setFilterBarState:NO withAnimation:NO];
 	}
 	else {
-        self.mainWindowController.filterAreaIsHidden = NO;
 		[self setFilterBarState:[Preferences standardPreferences].showFilterBar withAnimation:NO];
 	}
 }
@@ -3385,6 +3371,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(BOOL)validateToolbarItem:(NSToolbarItem *)toolbarItem
 {
 	BOOL flag;
+	if (toolbarItem.action == @selector(showHideFilterBar:))
+	{
+		return self.mainWindow.visible && self.browser.activeTab == nil;
+	}
 	[self validateCommonToolbarAndMenuItems:toolbarItem.action validateFlag:&flag];
 	return (flag && (NSApp.active));
 }
