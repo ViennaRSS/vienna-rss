@@ -19,6 +19,9 @@
 //
 
 #import "AppController.h"
+
+#import <os/log.h>
+
 #import "AppController+Notifications.h"
 #import "Import.h"
 #import "Export.h"
@@ -57,6 +60,8 @@
 #import "ArticleView.h"
 #import "FolderView.h"
 #import "SubscriptionModel.h"
+
+#define VNA_LOG os_log_create("--", "AppController")
 
 @interface AppController () <InfoPanelControllerDelegate, ActivityPanelControllerDelegate, NSMenuItemValidation, NSToolbarItemValidation>
 
@@ -206,7 +211,7 @@
         [weakSelf initScriptsMenu];
     }];
     if (error) {
-        LLog(@"%@", error.localizedDescription);
+        os_log_error(VNA_LOG, "Failed to watch scripts directory. Reason: %{public}@", error.localizedDescription);
     }
 }
 

@@ -341,7 +341,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 // default handler for didFailSelector
 -(void)requestFailed:(NSMutableURLRequest *)request response:(NSURLResponse *)response error:(NSError *)error
 {
-    LLog(@"Failed on request %@", request.URL);
+    os_log_debug(VNA_LOG, "Failed on request %@", request.URL);
     LOG_EXPR(error);
     LOG_EXPR(request.allHTTPHeaderFields);
     LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
@@ -355,7 +355,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 {
     NSString *requestResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     if (![requestResponse isEqualToString:@"OK"]) {
-        LLog(@"Error (response status code %ld) on request %@", (long)((NSHTTPURLResponse *)response).statusCode, request.URL);
+        os_log_debug(VNA_LOG, "Error (response status code %ld) on request %@", ((NSHTTPURLResponse *)response).statusCode, request.URL);
         LOG_EXPR(request.allHTTPHeaderFields);
         LOG_EXPR([[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
         LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
@@ -491,7 +491,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 // callback : handler for timed out feeds, etc...
 -(void)feedRequestFailed:(NSMutableURLRequest *)request response:(NSURLResponse *)response error:(NSError *)error
 {
-    LLog(@"Open Reader feed request Failed : %@", request.URL);
+    os_log_debug(VNA_LOG, "Open Reader feed request Failed: %@", request.URL);
     LOG_EXPR(error);
     LOG_EXPR(request.allHTTPHeaderFields);
     LOG_EXPR([[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
