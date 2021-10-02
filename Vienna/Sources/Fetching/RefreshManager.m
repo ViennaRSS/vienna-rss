@@ -19,6 +19,9 @@
 //
 
 #import "RefreshManager.h"
+
+#import <os/log.h>
+
 #import "FeedCredentials.h"
 #import "ActivityItem.h"
 #import "ActivityLog.h"
@@ -41,6 +44,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     HTTP301Unsafe,
     HTTP301Safe
 };
+
+#define VNA_LOG os_log_create("--", "RefreshManager")
 
 @interface RefreshManager ()
 
@@ -632,7 +637,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
 -(void)finalizeFolderRefresh:(NSDictionary *)parameters
 {
-    ZAssert(parameters != NULL, @"Null");
+    if (!parameters) {
+        os_log_error(VNA_LOG, "%{public}s has no parameters", __PRETTY_FUNCTION__);
+    }
     Folder * folder = (Folder *)parameters[@"folder"];
     NSInteger folderId = folder.itemId;
     Database * dbManager = [Database sharedManager];
