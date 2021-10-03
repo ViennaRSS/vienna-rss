@@ -94,6 +94,8 @@ static NSString * _userAgent ;
         _webPrefs.standardFontFamily = @"Arial";
         _webPrefs.defaultFontSize = 16;
         _webPrefs.privateBrowsingEnabled = NO;
+        _webPrefs.plugInsEnabled = NO;
+        _webPrefs.javaEnabled = NO;
     });
     return _webPrefs;
 }
@@ -109,6 +111,8 @@ static NSString * _userAgent ;
         _webPrefs.defaultFontSize = 16;
         _webPrefs.privateBrowsingEnabled = NO;
         _webPrefs.javaScriptEnabled = YES;
+        _webPrefs.plugInsEnabled = NO;
+        _webPrefs.javaEnabled = NO;
     });
     return _webPrefs;
 }
@@ -125,6 +129,7 @@ static NSString * _userAgent ;
         _webPrefs.privateBrowsingEnabled = NO;
         _webPrefs.javaScriptEnabled = NO;
         _webPrefs.plugInsEnabled = NO;
+        _webPrefs.javaEnabled = NO;
     });
     return _webPrefs;
 }
@@ -162,16 +167,13 @@ static NSString * _userAgent ;
                name:kMA_Notify_MinimumFontSizeChange object:nil];
 	[nc addObserver:self selector:@selector(handleUseJavaScriptChange:)
                name:kMA_Notify_UseJavaScriptChange object:nil];
-    [nc addObserver:self selector:@selector(handleUseWebPluginsChange:)
-               name:kMA_Notify_UseWebPluginsChange object:nil];
 	
     // handle UserAgent
     self.customUserAgent = [TabbedWebView userAgent];
-	// Handle minimum font size, use of JavaScript, and use of plugins
+	// Handle minimum font size and use of JavaScript.
 	self.preferences = [TabbedWebView defaultWebPrefs];
 	[self loadMinimumFontSize];
 	[self loadUseJavaScript];
-    [self loadUseWebPlugins];
 }
 
 /* setOpenLinksInNewBrowser
@@ -360,14 +362,6 @@ static NSString * _userAgent ;
 	[self loadUseJavaScript];
 }
 
-/* handleUseWebPluginsChange
- * Called when the user changes the 'Use Javascript' setting.
- */
--(void)handleUseWebPluginsChange:(NSNotification *)nc
-{
-    [self loadUseWebPlugins];
-}
-
 /* loadMinimumFontSize
  * Sets up the web preferences for a minimum font size.
  */
@@ -422,33 +416,24 @@ static NSString * _userAgent ;
 	[TabbedWebView defaultWebPrefs].javaScriptEnabled = prefs.useJavaScript;
 }
 
-/* loadUseWebPlugins
- * Sets up the web preferences for using WebPlugins.
+/* abortJavascript
+ * Sets up the web preferences to stop JavaScript
  */
--(void)loadUseWebPlugins
-{
-    Preferences * prefs = [Preferences standardPreferences];
-    [TabbedWebView defaultWebPrefs].plugInsEnabled = prefs.useWebPlugins;
-}
-
-/* abortJavascriptAndPlugIns
- * Sets up the web preferences to stop JavaScript and WebPlugins
- */
--(void)abortJavascriptAndPlugIns
+-(void)abortJavascript
 {
     self.preferences = [TabbedWebView passiveWebPrefs];
 }
 
-/* useUserPrefsForJavascriptAndPlugIns
- * Sets up the web preferences to use JavaScript and WebPlugins as defined by user preferences
+/* useUserPrefsForJavascript
+ * Sets up the web preferences to use JavaScript as defined by user preferences
  */
--(void)useUserPrefsForJavascriptAndPlugIns
+-(void)useUserPrefsForJavascript
 {
     self.preferences = [TabbedWebView defaultWebPrefs];
 }
 
 /* forceJavascript
- * Sets up the web preferences to use JavaScript (without WebPlugins)
+ * Sets up the web preferences to use JavaScript
  */
 -(void)forceJavascript
 {

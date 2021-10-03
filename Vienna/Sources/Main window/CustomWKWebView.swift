@@ -47,7 +47,6 @@ class CustomWKWebView: WKWebView {
     }
 
     private var useJavaScriptObservation: NSKeyValueObservation?
-    private var useWebPluginsObservation: NSKeyValueObservation?
 
     override init(frame: CGRect = .zero, configuration: WKWebViewConfiguration = WKWebViewConfiguration()) {
 
@@ -68,19 +67,6 @@ class CustomWKWebView: WKWebView {
                 configuration.defaultWebpagePreferences.allowsContentJavaScript = newValue
             } else {
                  configuration._allowsJavaScriptMarkup = newValue
-            }
-        }
-
-        useWebPluginsObservation = Preferences.standard.observe(\.useWebPlugins, options: [.initial, .new]) { _, change  in
-            guard let newValue = change.newValue else {
-                return
-            }
-            if #available(macOS 11, *) {
-                // TODO: remove the plugins preference once minimal requirement is macOS 11
-                // because plugins are deprecated and unsupported
-            } else {
-                prefs.plugInsEnabled = newValue
-                prefs.javaEnabled = newValue
             }
         }
 
