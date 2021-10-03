@@ -171,8 +171,6 @@ class BrowserTab: NSViewController {
 
         self.viewDidLoadRss()
 
-        updateAddressBarButtons()
-
         updateWebViewInsets()
 
         // set up address bar handling
