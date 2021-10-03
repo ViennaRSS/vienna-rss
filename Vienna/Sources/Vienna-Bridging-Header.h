@@ -17,3 +17,4 @@
 #import "ArticleConverter.h"
 #import "WKPreferences+Private.h"
 #import "WKWebView+Private.h"
+#import "WKWebViewConfiguration+Private.h"

@@ -45,18 +45,43 @@ class CustomWKWebView: WKWebView {
         getTextSelection()
     }
 
+    private var useJavaScriptObservation : NSKeyValueObservation?
+    private var useWebPluginsObservation : NSKeyValueObservation?
+
     override init(frame: CGRect = .zero, configuration: WKWebViewConfiguration = WKWebViewConfiguration()) {
 
         // preferences
         let prefs = configuration.preferences
-        prefs.javaScriptEnabled = true
         prefs.javaScriptCanOpenWindowsAutomatically = true
-        prefs.plugInsEnabled = true
         prefs._fullScreenEnabled = true
 
         #if DEBUG
         prefs._developerExtrasEnabled = true
         #endif
+
+        useJavaScriptObservation = Preferences.standard.observe(\.useJavaScript, options: [.initial, .new]) { _, change  in
+            guard let newValue = change.newValue else {
+                return
+            }
+            if #available(macOS 11, *) {
+                configuration.defaultWebpagePreferences.allowsContentJavaScript = newValue
+            } else {
+                 configuration._allowsJavaScriptMarkup = newValue
+            }
+        }
+
+        useWebPluginsObservation = Preferences.standard.observe(\.useWebPlugins, options: [.initial, .new]) { _, change  in
+            guard let newValue = change.newValue else {
+                return
+            }
+            if #available(macOS 11, *) {
+                // TODO: remove the plugins preference once minimal requirement is macOS 11
+                // because plugins are deprecated and unsupported
+            } else {
+                prefs.plugInsEnabled = newValue
+                prefs.javaEnabled = newValue
+            }
+        }
 
         // user scripts (user content controller)
         let contentController = configuration.userContentController
@@ -72,16 +97,12 @@ class CustomWKWebView: WKWebView {
         contentController.addUserScript(linkHoverScript)
 
         // configuration
-        if #available(OSX 10.11, *) {
-            // for useragent, we mimic the installed version of Safari and add our own identifier
-            let shortSafariVersion = Bundle(path: "/Applications/Safari.app")?.infoDictionary?["CFBundleShortVersionString"] as? String
-            let viennaVersion = (NSApp as? ViennaApp)?.applicationVersion
-            configuration.applicationNameForUserAgent = "Version/\(shortSafariVersion ?? "9.1") Safari/605 Vienna/\(viennaVersion ?? "3.5+")"
-            configuration.allowsAirPlayForMediaPlayback = true
-        }
-        if #available(OSX 10.12, *) {
-            configuration.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.all
-        }
+        // for useragent, we mimic the installed version of Safari and add our own identifier
+        let shortSafariVersion = Bundle(path: "/Applications/Safari.app")?.infoDictionary?["CFBundleShortVersionString"] as? String
+        let viennaVersion = (NSApp as? ViennaApp)?.applicationVersion
+        configuration.applicationNameForUserAgent = "Version/\(shortSafariVersion ?? "9.1") Safari/605 Vienna/\(viennaVersion ?? "3.5+")"
+        configuration.allowsAirPlayForMediaPlayback = true
+        configuration.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.all
 
         super.init(frame: frame, configuration: configuration)
 
@@ -89,9 +110,7 @@ class CustomWKWebView: WKWebView {
 
         self.allowsMagnification = true
         self.allowsBackForwardNavigationGestures = true
-        if #available(OSX 10.11, *) {
-            self.allowsLinkPreview = true
-        }
+        self.allowsLinkPreview = true
     }
 
     @available(*, unavailable)
