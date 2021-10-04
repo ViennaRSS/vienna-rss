@@ -18,8 +18,10 @@
 //  limitations under the License.
 //
 
-#import "Constants.h"
 #import "GeneralPreferencesViewController.h"
+
+#import "Constants.h"
+#import "NSFileManager+Paths.h"
 #import "Preferences.h"
 
 @interface GeneralPreferencesViewController ()
@@ -243,27 +245,25 @@
  */
 -(IBAction)changeDownloadFolder:(id)sender
 {
-    NSOpenPanel * openPanel = [NSOpenPanel openPanel];
-    NSWindow * prefPaneWindow = downloadFolder.window;
-    
-    [openPanel setCanChooseDirectories:YES];
-    [openPanel setCanCreateDirectories:YES];
-    [openPanel setCanChooseFiles:NO];
-    openPanel.directoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDownloadsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
-    [openPanel beginSheetModalForWindow:prefPaneWindow completionHandler:^(NSInteger returnCode) {
-        // Force the focus back to the main preferences pane
-        [openPanel orderOut:self];
-        [prefPaneWindow makeKeyAndOrderFront:prefPaneWindow];
-        
-        if (returnCode == NSModalResponseOK)
-        {
-            NSString * downloadFolderPath = openPanel.directoryURL.path;
+    NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+    openPanel.delegate = self;
+    openPanel.canChooseFiles = NO;
+    openPanel.canChooseDirectories = YES;
+    openPanel.canCreateDirectories = YES;
+    openPanel.allowsMultipleSelection = NO;
+    openPanel.prompt = NSLocalizedString(@"Select",
+                                         @"Label of a button on an open panel");
+
+    openPanel.directoryURL = NSFileManager.defaultManager.downloadsDirectory;
+    [openPanel beginSheetModalForWindow:self.view.window
+                      completionHandler:^(NSInteger returnCode) {
+        if (returnCode == NSModalResponseOK) {
+            NSString * downloadFolderPath = openPanel.URL.path;
             [Preferences standardPreferences].downloadFolder = downloadFolderPath;
             [self updateDownloadsPopUp:downloadFolderPath];
-        }
-        
-        if (returnCode == NSModalResponseCancel)
+        } else if (returnCode == NSModalResponseCancel) {
             [self->downloadFolder selectItemAtIndex:0];
+        }
     }];
 }
 
@@ -387,6 +387,28 @@
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+// MARK: - NSOpenSavePanelDelegate
+
+- (BOOL)panel:(id)sender shouldEnableURL:(NSURL *)url {
+    NSFileManager *fileManager = NSFileManager.defaultManager;
+    return [fileManager isWritableFileAtPath:url.path];
+}
+
+- (BOOL)panel:(id)sender validateURL:(NSURL *)url error:(NSError **)outError {
+    NSFileManager *fileManager = NSFileManager.defaultManager;
+    BOOL isWritable = [fileManager isWritableFileAtPath:url.path];
+    if (!isWritable) {
+        NSString *str = NSLocalizedString(@"This folder cannot be chosen "
+                                          "because you don’t have permission.",
+                                          @"Message text of a modal alert");
+        NSDictionary *userInfoDict = @{NSLocalizedDescriptionKey: str};
+        *outError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                        code:NSFileWriteNoPermissionError
+                                    userInfo:userInfoDict];
+    }
+    return isWritable;
 }
 
 @end
