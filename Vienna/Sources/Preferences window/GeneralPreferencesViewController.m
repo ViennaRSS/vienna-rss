@@ -23,6 +23,7 @@
 #import "Constants.h"
 #import "NSFileManager+Paths.h"
 #import "Preferences.h"
+#import "Vienna-Swift.h"
 
 @interface GeneralPreferencesViewController ()
 
@@ -88,7 +89,18 @@
     [expireDuration selectItemAtIndex:[expireDuration indexOfItemWithTag:prefs.autoExpireDuration]];
     
     // Set download folder
-    [self updateDownloadsPopUp:prefs.downloadFolder];
+    [self updateDownloadsPopUp:NSFileManager.defaultManager.downloadsDirectory.path];
+
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    NSData *data = [userDefaults dataForKey:MAPref_DownloadsFolderBookmark];
+    if (data) {
+        NSError *error = nil;
+        VNASecurityScopedBookmark *bookmark = [[VNASecurityScopedBookmark alloc] initWithBookmarkData:data
+                                                                                                error:&error];
+        if (!error) {
+            [self updateDownloadsPopUp:bookmark.resolvedURL.path];
+        }
+    }
     
     // Set whether the application is shown in the menu bar
     showAppInMenuBar.state = prefs.showAppInStatusBar ? NSControlStateValueOn : NSControlStateValueOff;
@@ -258,9 +270,14 @@
     [openPanel beginSheetModalForWindow:self.view.window
                       completionHandler:^(NSInteger returnCode) {
         if (returnCode == NSModalResponseOK) {
-            NSString * downloadFolderPath = openPanel.URL.path;
-            [Preferences standardPreferences].downloadFolder = downloadFolderPath;
-            [self updateDownloadsPopUp:downloadFolderPath];
+            NSError *error = nil;
+            NSData *data = [VNASecurityScopedBookmark bookmark:openPanel.URL
+                                                         error:&error];
+            if (!error) {
+                NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+                [userDefaults setObject:data forKey:MAPref_DownloadsFolderBookmark];
+                [self updateDownloadsPopUp:openPanel.URL.path];
+            }
         } else if (returnCode == NSModalResponseCancel) {
             [self->downloadFolder selectItemAtIndex:0];
         }

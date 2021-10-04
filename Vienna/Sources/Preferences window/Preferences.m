@@ -188,7 +188,6 @@ static Preferences * _standardPreferences = nil;
 		showAppInStatusBar = [self boolForKey:MAPref_ShowAppInStatusBar];
 		folderFont = [NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_FolderFont]];
 		articleFont = [NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_ArticleListFont]];
-		downloadFolder = [userPrefs valueForKey:MAPref_DownloadsFolder];
 		shouldSaveFeedSource = [self boolForKey:MAPref_ShouldSaveFeedSource];
 		searchMethod = [NSKeyedUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_SearchMethod]];
 		concurrentDownloads = [self integerForKey:MAPref_ConcurrentDownloads];
@@ -280,7 +279,6 @@ static Preferences * _standardPreferences = nil;
 	defaultValues[MAPref_FilterMode] = [NSNumber numberWithInt:VNAFilterAll];
 	defaultValues[MAPref_MinimumFontSize] = @(MA_Default_MinimumFontSize);
 	defaultValues[MAPref_AutoExpireDuration] = @(MA_Default_AutoExpireDuration);
-    defaultValues[MAPref_DownloadsFolder] = fileManager.downloadsDirectory.path;
 	defaultValues[MAPref_ArticleSortDescriptors] = defaultArticleSortDescriptors;
 	defaultValues[MAPref_LastRefreshDate] = [NSDate distantPast];
 	defaultValues[MAPref_Layout] = [NSNumber numberWithInt:VNALayoutReport];
@@ -615,27 +613,6 @@ static Preferences * _standardPreferences = nil;
 	{
 		autoExpireDuration = newDuration;
 		[self setInteger:newDuration forKey:MAPref_AutoExpireDuration];
-	}
-}
-
-/* downloadFolder
- * Returns the path of the current download folder.
- */
--(NSString *)downloadFolder
-{
-	return downloadFolder;
-}
-
-/* setDownloadFolder
- * Sets the new download folder path.
- */
--(void)setDownloadFolder:(NSString *)newFolder
-{
-	if (![newFolder isEqualToString:downloadFolder])
-	{
-		downloadFolder = newFolder;
-		[self setObject:downloadFolder forKey:MAPref_DownloadsFolder];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
 }
 

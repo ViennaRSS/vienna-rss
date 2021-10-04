@@ -53,7 +53,6 @@ NS_ASSUME_NONNULL_BEGIN
     BOOL syncGoogleReader;
     BOOL prefersGoogleNewSubscription;
     BOOL markUpdatedAsNew;
-	NSString * downloadFolder;
 	NSString * displayStyle;
 	CGFloat textSizeMultiplier;
 	NSString * defaultDatabase;
@@ -112,9 +111,6 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 
 // Auto-expire values
 @property (nonatomic) NSInteger autoExpireDuration;
-
-// Download folder
-@property (nonatomic, copy) NSString *downloadFolder;
 
 // New articles notification method
 @property (nonatomic) NSInteger newArticlesNotification;

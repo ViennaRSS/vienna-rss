@@ -26,6 +26,7 @@
 #import "DownloadItem.h"
 #import "NSFileManager+Paths.h"
 #import "Preferences.h"
+#import "Vienna-Swift.h"
 
 @interface DownloadManager ()
 
@@ -174,8 +175,22 @@
 // downloaded by using the user's preferred download folder. If that folder is
 // absent then we default to downloading to the desktop instead.
 + (NSString *)fullDownloadPath:(NSString *)filename {
-    NSString *downloadPath = Preferences.standardPreferences.downloadFolder;
     NSFileManager *fileManager = NSFileManager.defaultManager;
+    NSURL *downloadFolderURL = fileManager.downloadsDirectory;
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    NSData *data = [userDefaults dataForKey:MAPref_DownloadsFolderBookmark];
+
+    if (data) {
+        NSError *error = nil;
+        VNASecurityScopedBookmark *bookmark = [[VNASecurityScopedBookmark alloc] initWithBookmarkData:data
+                                                                                                error:&error];
+
+        if (!error) {
+            downloadFolderURL = bookmark.resolvedURL;
+        }
+    }
+
+    NSString *downloadPath = downloadFolderURL.path;
     BOOL isDir = YES;
 
     if (![fileManager fileExistsAtPath:downloadPath isDirectory:&isDir] || !isDir) {
