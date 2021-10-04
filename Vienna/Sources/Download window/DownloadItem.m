@@ -28,12 +28,6 @@
 
 @implementation DownloadItem
 
-- (void)setExpectedSize:(long long)expectedSize
-{
-    _expectedSize = expectedSize;
-    self.size = 0;
-}
-
 - (void)setFilename:(NSString *)filename
 {
     _filename = filename;

@@ -28,11 +28,9 @@
 
 @interface DownloadManager ()
 
-// Public properties
-@property (readwrite, nonatomic) NSInteger activeDownloads;
-
 // Private properties
 @property NSMutableArray<DownloadItem *> *downloads;
+@property NSURLSession *session;
 
 @end
 
@@ -55,16 +53,39 @@
 
     if (self) {
         _downloads = [[NSMutableArray alloc] init];
-        _activeDownloads = 0;
+        NSURLSessionConfiguration *config;
+        config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+        _session = [NSURLSession sessionWithConfiguration:config
+                                                 delegate:self
+                                            delegateQueue:nil];
     }
 
     return self;
+}
+
+- (void)dealloc {
+    [self.session invalidateAndCancel];
 }
 
 // MARK: Accessors
 
 - (NSArray *)downloadsList {
     return [self.downloads copy];
+}
+
+- (BOOL)hasActiveDownloads {
+    __block BOOL hasActiveDownloads = NO;
+
+    [self.downloads enumerateObjectsUsingBlock:^(DownloadItem *obj,
+                                                 NSUInteger idx, BOOL *stop) {
+        if (obj.state == DownloadStateStarted ||
+            obj.state == DownloadStateInit) {
+            hasActiveDownloads = YES;
+            *stop = YES;
+        }
+    }];
+
+    return hasActiveDownloads;
 }
 
 // MARK: Public methods
@@ -111,11 +132,8 @@
 
 // Abort the specified item and remove it from the list
 - (void)cancelItem:(DownloadItem *)item {
-    [item.download cancel];
+    [item.downloadTask cancel];
     item.state = DownloadStateCancelled;
-    NSAssert(self.activeDownloads > 0,
-             @"cancelItem called with zero activeDownloads count!");
-    --self.activeDownloads;
     [self notifyDownloadItemChange:item];
     [self.downloads removeObject:item];
     [self archiveDownloadsList];
@@ -125,35 +143,26 @@
 - (void)downloadFileFromURL:(NSString *)url {
     NSString *filename = [NSURL URLWithString:url].lastPathComponent;
     NSString *destPath = [DownloadManager fullDownloadPath:filename];
-    NSURLRequest *theRequest =
-        [NSURLRequest requestWithURL:[NSURL URLWithString:url]
-                         cachePolicy:NSURLRequestUseProtocolCachePolicy
-                     timeoutInterval:60.0];
-    NSURLDownload *theDownload =
-        [[NSURLDownload alloc] initWithRequest:theRequest delegate:self];
-    if (theDownload) {
-        DownloadItem *newItem = [DownloadItem new];
-        newItem.state = DownloadStateInit;
-        newItem.download = theDownload;
-        newItem.filename = destPath;
-        [self.downloads addObject:newItem];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
+                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                         timeoutInterval:60.0];
+    NSURLSessionDownloadTask *task = [self.session downloadTaskWithRequest:request];
 
-        // The following line will stop us getting
-        // decideDestinationWithSuggestedFilename.
-        [theDownload setDestination:destPath allowOverwrite:YES];
-    }
+    DownloadItem *item = [[DownloadItem alloc] init];
+    item.state = DownloadStateInit;
+    item.downloadTask = task;
+    item.filename = destPath;
+    item.fileURL = [NSURL fileURLWithPath:destPath];
+    [self.downloads addObject:item];
+
+    [task resume];
 }
 
-/* itemForDownload
- * Retrieves the DownloadItem for the given NSURLDownload object. We scan from
- * the last item since the odds are that the one we want will be at the end
- * given that new items are always appended to the list.
- */
-- (DownloadItem *)itemForDownload:(NSURLDownload *)download {
+- (DownloadItem *)itemForSessionTask:(NSURLSessionTask *)task {
     NSInteger index = self.downloads.count - 1;
     while (index >= 0) {
         DownloadItem *item = self.downloads[index--];
-        if (item.download == download) {
+        if (item.downloadTask == task) {
             return item;
         }
     }
@@ -216,8 +225,6 @@
         return;
     }
 
-    NSAssert(self.activeDownloads > 0, @"deliverNotificationForDownloadItem called with zero activeDownloads count!");
-    --self.activeDownloads;
     [self notifyDownloadItemChange:item];
     [self archiveDownloadsList];
 
@@ -243,7 +250,69 @@
     [NSUserNotificationCenter.defaultUserNotificationCenter deliverNotification:notification];
 }
 
-// MARK: - WebDownloadDelegate
+// MARK: - NSURLSessionDownloadDelegate
+
+- (void)URLSession:(NSURLSession *)session
+                 downloadTask:(NSURLSessionDownloadTask *)downloadTask
+                 didWriteData:(int64_t)bytesWritten
+            totalBytesWritten:(int64_t)totalBytesWritten
+    totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        DownloadItem *item = [self itemForSessionTask:downloadTask];
+
+        if (item.state == DownloadStateInit) {
+            item.state = DownloadStateStarted;
+        }
+
+        item.size = totalBytesWritten;
+        item.expectedSize = totalBytesExpectedToWrite;
+        [self notifyDownloadItemChange:item];
+    });
+}
+
+- (void)URLSession:(NSURLSession *)session
+                 downloadTask:(NSURLSessionDownloadTask *)downloadTask
+    didFinishDownloadingToURL:(NSURL *)location {
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        DownloadItem *item = [self itemForSessionTask:downloadTask];
+        [NSFileManager.defaultManager moveItemAtURL:location
+                                              toURL:item.fileURL
+                                              error:nil];
+        item.state = DownloadStateCompleted;
+        [self deliverNotificationForDownloadItem:item];
+    });
+}
+
+- (void)URLSession:(NSURLSession *)session
+                    task:(NSURLSessionTask *)task
+    didCompleteWithError:(NSError *)error {
+    // Only handle errors here, since a successful completion should call the
+    // method -URLSession:session:downloadTask:didFinishDownloadingToURL: too.
+    if (!error) {
+        return;
+    }
+
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        DownloadItem *item = [self itemForSessionTask:task];
+        item.state = DownloadStateFailed;
+        [self deliverNotificationForDownloadItem:item];
+    });
+}
+
+// MARK: - WebDownload (deprecated)
+
+- (DownloadItem *)itemForDownload:(NSURLDownload *)download {
+    NSInteger index = self.downloads.count - 1;
+    while (index >= 0) {
+        DownloadItem *item = self.downloads[index--];
+        if (item.download == download) {
+            return item;
+        }
+    }
+    return nil;
+}
+
+// MARK: - WebDownloadDelegate (deprecated)
 
 - (void)downloadDidBegin:(NSURLDownload *)download {
     DownloadItem *theItem = [self itemForDownload:download];
@@ -256,8 +325,6 @@
     if (theItem.filename) {
         theItem.filename = download.request.URL.path;
     }
-    // Keep count of active downloads
-    ++self.activeDownloads;
 
     // Record the time we started. We'll need this to work out the remaining
     // time and the number of KBytes/second we're getting
