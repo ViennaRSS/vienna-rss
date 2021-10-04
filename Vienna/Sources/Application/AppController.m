@@ -386,7 +386,7 @@
  */
 -(NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
-	if ([DownloadManager sharedInstance].activeDownloads > 0)
+	if (DownloadManager.sharedInstance.hasActiveDownloads)
 	{
         NSAlert *alert = [NSAlert new];
         alert.messageText = NSLocalizedString(@"One or more downloads are in progress", nil);

@@ -23,12 +23,12 @@
 
 @class DownloadItem;
 
-@interface DownloadManager : NSObject <WebDownloadDelegate>
+@interface DownloadManager : NSObject <NSURLSessionDownloadDelegate, WebDownloadDelegate>
 
 @property (class, readonly) DownloadManager *sharedInstance NS_SWIFT_NAME(shared);
 
 @property (readonly, copy, nonatomic) NSArray<DownloadItem *> *downloadsList;
-@property (readonly, nonatomic) NSInteger activeDownloads;
+@property (readonly, nonatomic) BOOL hasActiveDownloads;
 
 + (BOOL)isFileDownloaded:(NSString *)filename;
 + (NSString *)fullDownloadPath:(NSString *)filename;
