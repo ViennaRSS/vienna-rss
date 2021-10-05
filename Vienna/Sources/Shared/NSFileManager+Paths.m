@@ -19,7 +19,9 @@
 
 #import "NSFileManager+Paths.h"
 
-@import os.log;
+#import <os/log.h>
+
+#define VNA_LOG os_log_create("--", "Paths")
 
 @implementation NSFileManager (Paths)
 
@@ -45,7 +47,9 @@
                                 create:NO
                                  error:&error];
     if (!url && error) {
-        os_log_error(OS_LOG_DEFAULT, "%@", error.localizedDescription);
+        char *function = __PRETTY_FUNCTION__;
+        NSString *description = error.localizedDescription;
+        os_log_fault(VNA_LOG, "%{public}s %{public}@", function, description);
     }
 
     // Remove the following lines for sandboxing.
@@ -72,7 +76,9 @@
                                 create:NO
                                  error:&error];
     if (!url && error) {
-        os_log_error(OS_LOG_DEFAULT, "%@", error.localizedDescription);
+        char *function = __PRETTY_FUNCTION__;
+        NSString *description = error.localizedDescription;
+        os_log_fault(VNA_LOG, "%{public}s %{public}@", function, description);
     }
 
     // For sandboxing, use NSBundle.mainBundle.bundleIdentifier instead of the
@@ -97,7 +103,9 @@
                                 create:NO
                                  error:&error];
     if (!url && error) {
-        os_log_error(OS_LOG_DEFAULT, "%@", error.localizedDescription);
+        char *function = __PRETTY_FUNCTION__;
+        NSString *description = error.localizedDescription;
+        os_log_fault(VNA_LOG, "%{public}s %{public}@", function, description);
     }
 
     url = [url URLByAppendingPathComponent:NSBundle.mainBundle.bundleIdentifier

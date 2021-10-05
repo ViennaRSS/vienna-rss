@@ -19,6 +19,9 @@
 //
 
 #import "RefreshManager.h"
+
+#import <os/log.h>
+
 #import "FeedCredentials.h"
 #import "ActivityItem.h"
 #import "ActivityLog.h"
@@ -28,7 +31,6 @@
 #import "Constants.h"
 #import "OpenReader.h"
 #import "NSNotificationAdditions.h"
-#import "Debug.h"
 #import "Article.h"
 #import "Folder.h"
 #import "Database.h"
@@ -41,6 +43,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     HTTP301Unsafe,
     HTTP301Safe
 };
+
+#define VNA_LOG os_log_create("--", "RefreshManager")
 
 @interface RefreshManager ()
 
@@ -532,7 +536,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 // failure callback
 -(void)folderRefreshFailed:(NSMutableURLRequest *)request error:(NSError *)error
 {
-    LOG_EXPR(error);
+    os_log_debug(VNA_LOG, "Refresh of %@ failed. Reason: %{public}@", error.userInfo[NSURLErrorFailingURLStringErrorKey], error.localizedDescription);
     Folder * folder = ((NSDictionary *)[request userInfo])[@"folder"];
     if (error.code == NSURLErrorCancelled) {
         // Stopping the connection isn't an error, so clear any existing error flag.
@@ -632,7 +636,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
 -(void)finalizeFolderRefresh:(NSDictionary *)parameters
 {
-    ZAssert(parameters != NULL, @"Null");
+    if (!parameters) {
+        os_log_error(VNA_LOG, "%{public}s has no parameters", __PRETTY_FUNCTION__);
+    }
     Folder * folder = (Folder *)parameters[@"folder"];
     NSInteger folderId = folder.itemId;
     Database * dbManager = [Database sharedManager];
@@ -1027,9 +1033,10 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             [self   addConnection:testRequest
                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                     if (error) {
-                    LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
-                    LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-                    [weakSelf void301WaitQueue];
+                        NSDictionary *headers = ((NSHTTPURLResponse *)response).allHeaderFields;
+                        NSString *dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                        os_log_fault(VNA_LOG, "Test requested failed.\n\nHeaders: %@\n\nData: %@", headers, dataStr);
+                        [weakSelf void301WaitQueue];
                     } else {
                     if (![((NSHTTPURLResponse *)response).URL.host isEqualToString:testRequest.URL.host]) {
                         // we probably have a misconfigured router / proxy
@@ -1178,7 +1185,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         [nc postNotificationName:@"MA_Notify_ArticleListContentChange" object:nil];
         statusMessageDuringRefresh = NSLocalizedString(@"Refresh completed", nil);
         hasStarted = NO;
-        LLog(@"Queue empty!!!");
+        os_log_info(VNA_LOG, "Finished refreshing");
     } else {
         statusMessageDuringRefresh = @"";
     }

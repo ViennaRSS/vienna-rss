@@ -19,6 +19,9 @@
 //
 
 #import "AppController.h"
+
+#import <os/log.h>
+
 #import "AppController+Notifications.h"
 #import "Import.h"
 #import "Export.h"
@@ -41,7 +44,6 @@
 #import "SearchPanel.h"
 #import "SearchMethod.h"
 #import "OpenReader.h"
-#import "Debug.h"
 #import "Database.h"
 #import "NSURL+CaminoExtensions.h"
 #import "PluginManager.h"
@@ -57,6 +59,8 @@
 #import "ArticleView.h"
 #import "FolderView.h"
 #import "SubscriptionModel.h"
+
+#define VNA_LOG os_log_create("--", "AppController")
 
 @interface AppController () <InfoPanelControllerDelegate, ActivityPanelControllerDelegate, NSMenuItemValidation, NSToolbarItemValidation>
 
@@ -206,7 +210,7 @@
         [weakSelf initScriptsMenu];
     }];
     if (error) {
-        LLog(@"%@", error.localizedDescription);
+        os_log_error(VNA_LOG, "Failed to watch scripts directory. Reason: %{public}@", error.localizedDescription);
     }
 }
 
@@ -3079,7 +3083,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)refreshAllFolderIcons:(id)sender
 {
-	LOG_EXPR([self.foldersTree folders:0]);
+    os_log_info(VNA_LOG, "Refreshing icons for %lu folders", [self.foldersTree folders:0].count);
     if (!self.connecting) {
 		[[RefreshManager sharedManager] refreshFolderIconCacheForSubscriptions:[self.foldersTree folders:0]];
     }

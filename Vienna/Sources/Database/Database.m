@@ -20,13 +20,14 @@
 
 #import "Database.h"
 
+#import <os/log.h>
+
 #import "Database+Migration.h"
 #import "Preferences.h"
 #import "StringExtensions.h"
 #import "Constants.h"
 #import "ArticleRef.h"
 #import "NSNotificationAdditions.h"
-#import "Debug.h"
 #import "Article.h"
 #import "Folder.h"
 #import "Field.h"
@@ -36,6 +37,8 @@ typedef NS_ENUM(NSInteger, VNAQueryScope) {
     VNAQueryScopeInclusive = 1,
     VNAQueryScopeSubFolders = 2
 };
+
+#define VNA_LOG os_log_create("--", "Database")
 
 @interface Database ()
 
@@ -127,7 +130,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
  */
 - (BOOL)initialiseDatabase {
     NSInteger databaseVersion = self.databaseVersion;
-    LLog(@"database version: %ld", databaseVersion);
+    os_log_debug(VNA_LOG, "Database version: %ld", databaseVersion);
     
     if (databaseVersion >= MA_Current_DB_Version) {
         // Most common case, so it is first

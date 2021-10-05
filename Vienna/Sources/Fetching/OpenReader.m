@@ -28,6 +28,9 @@
  */
 
 #import "OpenReader.h"
+
+#import <os/log.h>
+
 #import "URLRequestExtensions.h"
 #import "Folder.h"
 #import "Database.h"
@@ -38,7 +41,6 @@
 #import "KeyChain.h"
 #import "ActivityItem.h"
 #import "Article.h"
-#import "Debug.h"
 
 static NSString *LoginBaseURL = @"https://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader";
 static NSString *ClientName = @"ViennaRSS";
@@ -60,6 +62,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     waitingTToken,
     fullyAuthenticated
 };
+
+#define VNA_LOG os_log_create("--", "OpenReader")
 
 @interface OpenReader ()
 
@@ -336,10 +340,9 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 // default handler for didFailSelector
 -(void)requestFailed:(NSMutableURLRequest *)request response:(NSURLResponse *)response error:(NSError *)error
 {
-    LLog(@"Failed on request %@", request.URL);
-    LOG_EXPR(error);
-    LOG_EXPR(request.allHTTPHeaderFields);
-    LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
+    os_log_error(VNA_LOG, "Failed on request %{mask.hash}@. Reason: %{public}@", request.URL, error.localizedDescription);
+    os_log_debug(VNA_LOG, "Request header for %{mask.hash}@: %@", request.URL, request.allHTTPHeaderFields);
+    os_log_debug(VNA_LOG, "Response header for %{mask.hash}@: %@", request.URL, ((NSHTTPURLResponse *)response).allHeaderFields);
     if (error.code == NSURLErrorUserAuthenticationRequired) {   //Error caused by lack of authentication
         [self clearAuthentication];
     }
@@ -350,11 +353,9 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 {
     NSString *requestResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     if (![requestResponse isEqualToString:@"OK"]) {
-        LLog(@"Error (response status code %ld) on request %@", (long)((NSHTTPURLResponse *)response).statusCode, request.URL);
-        LOG_EXPR(request.allHTTPHeaderFields);
-        LOG_EXPR([[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
-        LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
-        LOG_EXPR(requestResponse);
+        os_log_error(VNA_LOG, "Error (response: %{public}@, status code: %ld) on request %{mask.hash}@", requestResponse, ((NSHTTPURLResponse *)response).statusCode, request.URL);
+        os_log_debug(VNA_LOG, "Request header for %{mask.hash}@: %@", request.URL, request.allHTTPHeaderFields);
+        os_log_debug(VNA_LOG, "Response header for %{mask.hash}@: %@", request.URL, ((NSHTTPURLResponse *)response).allHeaderFields);
     }
 }
 
@@ -486,11 +487,10 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 // callback : handler for timed out feeds, etc...
 -(void)feedRequestFailed:(NSMutableURLRequest *)request response:(NSURLResponse *)response error:(NSError *)error
 {
-    LLog(@"Open Reader feed request Failed : %@", request.URL);
-    LOG_EXPR(error);
-    LOG_EXPR(request.allHTTPHeaderFields);
-    LOG_EXPR([[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
-    LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
+    os_log_error(VNA_LOG, "Open Reader feed request %{mask.hash}@ failed. Reason: %{public}@", request.URL, error.localizedDescription);
+    os_log_debug(VNA_LOG, "Request header for request %{mask.hash}@: %@", request.URL, request.allHTTPHeaderFields);
+    os_log_debug(VNA_LOG, "Request body for request %{mask.hash}@: %@", request.URL, [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
+    os_log_debug(VNA_LOG, "Response header for request %{mask.hash}@: %@", request.URL, ((NSHTTPURLResponse *)response).allHeaderFields);
     ActivityItem *aItem = ((NSDictionary *)[request userInfo])[@"log"];
     Folder *refreshedFolder = ((NSDictionary *)[request userInfo])[@"folder"];
 
@@ -532,14 +532,13 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 || [folderLastUpdateString isEqualToString:@""]
                 || [folderLastUpdateString isEqualToString:@"(null)"])
             {
-                LOG_EXPR(request.URL);
-                NSLog(@"Feed name: %@", subscriptionsDict[@"title"]);
-                NSLog(@"Last Check: %@", ((NSDictionary *)[request userInfo])[@"lastupdatestring"]);
-                NSLog(@"Last update: %@", folderLastUpdateString);
-                NSLog(@"Found %lu items", (unsigned long)[subscriptionsDict[@"items"] count]);
-                LOG_EXPR(subscriptionsDict);
-                LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-                ALog(@"Error !!! Incoherent data !");
+                os_log_error(VNA_LOG, "Incoherent data for %{mask.hash}@", request.URL);
+                os_log_debug(VNA_LOG, "Feed name for %{mask.hash}@: %@", request.URL, subscriptionsDict[@"title"]);
+                os_log_debug(VNA_LOG, "Last check for %{mask.hash}@: %@", request.URL, ((NSDictionary *)[request userInfo])[@"lastupdatestring"]);
+                os_log_debug(VNA_LOG, "Last update for %{mask.hash}@: %@", request.URL, folderLastUpdateString);
+                os_log_debug(VNA_LOG, "Found %lu items for %{mask.hash}@", (unsigned long)[subscriptionsDict[@"items"] count], request.URL);
+                os_log_debug(VNA_LOG, "Subscriptions: %@", subscriptionsDict);
+                os_log_debug(VNA_LOG, "Data for %{mask.hash}@: %@", request.URL, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                 //keep the previously recorded one
                 folderLastUpdateString = ((NSDictionary *)[request userInfo])[@"lastupdatestring"];
             }
@@ -667,11 +666,11 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         } else { //other HTTP status response...
             [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil),
                                  (int)((NSHTTPURLResponse *)response).statusCode]];
-            LOG_EXPR(request.URL);
-            LOG_EXPR(request.allHTTPHeaderFields);
-            LOG_EXPR([[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
-            LOG_EXPR(((NSHTTPURLResponse *)response).allHeaderFields);
-            LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+            os_log_error(VNA_LOG, "Unhandled status code %ld for request %{mask.hash}@", ((NSHTTPURLResponse *)response).statusCode, request.URL);
+            os_log_debug(VNA_LOG, "Request header for request %{mask.hash}@: %@", request.URL, request.allHTTPHeaderFields);
+            os_log_debug(VNA_LOG, "Request body for request %{mask.hash}@: %@", request.URL, [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
+            os_log_debug(VNA_LOG, "Response header for request %{mask.hash}@: %@", request.URL, ((NSHTTPURLResponse *)response).allHeaderFields);
+            os_log_debug(VNA_LOG, "Data for request %{mask.hash}@: %@", request.URL, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [aItem setStatus:NSLocalizedString(@"Error", nil)];
             });
