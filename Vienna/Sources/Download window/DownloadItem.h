@@ -42,6 +42,5 @@ typedef NS_ENUM(NSInteger, DownloadState) {
 // MARK: WebDownload (deprecated)
 
 @property (nonatomic) NSURLDownload *download;
-@property (nonatomic, copy) NSDate *startTime;
 
 @end

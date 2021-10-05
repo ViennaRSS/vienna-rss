@@ -134,7 +134,11 @@
 
 // Abort the specified item and remove it from the list
 - (void)cancelItem:(DownloadItem *)item {
-    [item.downloadTask cancel];
+    if (item.download) {
+        [item.download cancel];
+    } else if (item.downloadTask) {
+        [item.downloadTask cancel];
+    }
     item.state = DownloadStateCancelled;
     [self notifyDownloadItemChange:item];
     [self.downloads removeObject:item];
@@ -328,23 +332,23 @@
     return nil;
 }
 
+- (DownloadItem *)newDownloadItemForDownload:(NSURLDownload *)download {
+    DownloadItem *item = [[DownloadItem alloc] init];
+    item.download = download;
+    item.filename = download.request.URL.path;
+    return item;
+}
+
 // MARK: - WebDownloadDelegate (deprecated)
 
 - (void)downloadDidBegin:(NSURLDownload *)download {
     DownloadItem *theItem = [self itemForDownload:download];
     if (!theItem) {
-        theItem = [[DownloadItem alloc] init];
-        theItem.download = download;
+        theItem = [self newDownloadItemForDownload:download];
         [self.downloads addObject:theItem];
     }
     theItem.state = DownloadStateStarted;
-    if (theItem.filename) {
-        theItem.filename = download.request.URL.path;
-    }
 
-    // Record the time we started. We'll need this to work out the remaining
-    // time and the number of KBytes/second we're getting
-    theItem.startTime = [NSDate date];
     [self notifyDownloadItemChange:theItem];
 
     // If there's no download window visible, display one now.
@@ -418,10 +422,19 @@
 - (void)download:(NSURLDownload *)download
     decideDestinationWithSuggestedFilename:(NSString *)filename {
     NSString *destPath = [DownloadManager fullDownloadPath:filename];
+    DownloadItem *theItem = [self itemForDownload:download];
+
+    // If the URL download was started by WebView, then it may have bypassed the
+    // -downloadDidBegin: callback.
+    if (!theItem) {
+        theItem = [self newDownloadItemForDownload:download];
+        theItem.state = DownloadStateStarted;
+        [self.downloads addObject:theItem];
+        [self notifyDownloadItemChange:theItem];
+    }
 
     // Hack for certain compression types that are converted to .txt extension
     // when downloaded. SITX is the only one I know about.
-    DownloadItem *theItem = [self itemForDownload:download];
     if ([theItem.filename.pathExtension isEqualToString:@"sitx"] &&
         [filename.pathExtension isEqualToString:@"txt"]) {
         destPath = destPath.stringByDeletingPathExtension;
@@ -436,6 +449,16 @@
 - (void)download:(NSURLDownload *)download
     didCreateDestination:(NSString *)path {
     DownloadItem *theItem = [self itemForDownload:download];
+
+    // If the URL download was started by WebView, then it may have bypassed the
+    // -downloadDidBegin: callback.
+    if (!theItem) {
+        theItem = [self newDownloadItemForDownload:download];
+        theItem.state = DownloadStateStarted;
+        [self.downloads addObject:theItem];
+        [self notifyDownloadItemChange:theItem];
+    }
+
     [[NSFileManager defaultManager] moveItemAtPath:path
                                             toPath:theItem.filename
                                              error:nil];
