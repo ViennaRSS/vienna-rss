@@ -20,6 +20,14 @@
 
 #import "Field.h"
 
+static NSString *const VNACodingKeyDisplayName = @"displayName";
+static NSString *const VNACodingKeyName = @"name";
+static NSString *const VNACodingKeySQLField = @"sqlField";
+static NSString *const VNACodingKeyTag = @"tag";
+static NSString *const VNACodingKeyType = @"type";
+static NSString *const VNACodingKeyVisible = @"visible";
+static NSString *const VNACodingKeyWidth = @"width";
+
 @implementation Field
 
 // MARK: Initialization
@@ -52,20 +60,44 @@
                                       self.visible];
 }
 
-// MARK: - NSCoding
+// MARK: - NSSecureCoding
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
+}
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
     self = [super init];
 
     if (self) {
-        _displayName = [coder decodeObject];
-        _name = [coder decodeObject];
-        _sqlField = [coder decodeObject];
-        [coder decodeValueOfObjCType:@encode(bool) at:&_visible];
-        [coder decodeValueOfObjCType:@encode(NSInteger) at:&_width];
-        [coder decodeValueOfObjCType:@encode(NSInteger) at:&_tag];
-        [coder decodeValueOfObjCType:@encode(NSInteger) at:&_type];
+        if (coder.allowsKeyedCoding) {
+            _name = [coder decodeObjectOfClass:[NSString class]
+                                        forKey:VNACodingKeyName];
+            _displayName = [coder decodeObjectOfClass:[NSString class]
+                                               forKey:VNACodingKeyDisplayName];
+            _sqlField = [coder decodeObjectOfClass:[NSString class]
+                                            forKey:VNACodingKeySQLField];
+            _tag = [coder decodeIntegerForKey:VNACodingKeyTag];
+            _type = [coder decodeIntegerForKey:VNACodingKeyType];
+            _width = [coder decodeIntegerForKey:VNACodingKeyWidth];
+            _visible = [coder decodeBoolForKey:VNACodingKeyVisible];
+        } else {
+            // NSUnarchiver is deprecated since macOS 10.13 and replaced with
+            // NSKeyedUnarchiver.
+            //
+            // Important: The order in which the values are decoded must match
+            // the order in which they were encoded. Changing the code below can
+            // lead to decoding failure.
+            _displayName = [coder decodeObject];
+            _name = [coder decodeObject];
+            _sqlField = [coder decodeObject];
+            [coder decodeValueOfObjCType:@encode(bool) at:&_visible];
+            [coder decodeValueOfObjCType:@encode(NSInteger) at:&_width];
+            [coder decodeValueOfObjCType:@encode(NSInteger) at:&_tag];
+            [coder decodeValueOfObjCType:@encode(NSInteger) at:&_type];
+        }
     }
 
     return self;
@@ -73,13 +105,29 @@
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-    [coder encodeObject:self.displayName];
-    [coder encodeObject:self.name];
-    [coder encodeObject:self.sqlField];
-    [coder encodeValueOfObjCType:@encode(bool) at:&_visible];
-    [coder encodeValueOfObjCType:@encode(NSInteger) at:&_width];
-    [coder encodeValueOfObjCType:@encode(NSInteger) at:&_tag];
-    [coder encodeValueOfObjCType:@encode(NSInteger) at:&_type];
+    if (coder.allowsKeyedCoding) {
+        [coder encodeObject:self.name forKey:VNACodingKeyName];
+        [coder encodeObject:self.displayName forKey:VNACodingKeyDisplayName];
+        [coder encodeObject:self.sqlField forKey:VNACodingKeySQLField];
+        [coder encodeInteger:self.tag forKey:VNACodingKeyTag];
+        [coder encodeInteger:self.type forKey:VNACodingKeyType];
+        [coder encodeInteger:self.width forKey:VNACodingKeyWidth];
+        [coder encodeBool:self.visible forKey:VNACodingKeyVisible];
+    } else {
+        // NSArchiver is deprecated since macOS 10.13 and replaced with
+        // NSKeyedArchiver.
+        //
+        // Important: The order in which the values are encoded must match the
+        // the order in which they will be decoded. Changing the code below can
+        // lead to decoding failure.
+        [coder encodeObject:self.displayName];
+        [coder encodeObject:self.name];
+        [coder encodeObject:self.sqlField];
+        [coder encodeValueOfObjCType:@encode(bool) at:&_visible];
+        [coder encodeValueOfObjCType:@encode(NSInteger) at:&_width];
+        [coder encodeValueOfObjCType:@encode(NSInteger) at:&_tag];
+        [coder encodeValueOfObjCType:@encode(NSInteger) at:&_type];
+    }
 }
 
 @end

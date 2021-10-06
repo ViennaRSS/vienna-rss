@@ -87,7 +87,12 @@ static NSString *const VNACodingKeyQueryString = @"searchQueryString";
     return queryURL;
 }
 
-// MARK: - NSCoding
+// MARK: - NSSecureCoding
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
+}
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
@@ -101,9 +106,23 @@ static NSString *const VNACodingKeyQueryString = @"searchQueryString";
     }
 
     if (self) {
-        _displayName = [coder decodeObjectForKey:VNACodingKeyDisplayName];
-        _queryString = [coder decodeObjectForKey:VNACodingKeyQueryString];
-        [coder decodeValueOfObjCType:@encode(SEL) at:&_handler];
+        _displayName = [coder decodeObjectOfClass:[NSString class]
+                                           forKey:VNACodingKeyDisplayName];
+        _queryString = [coder decodeObjectOfClass:[NSString class]
+                                           forKey:VNACodingKeyQueryString];
+
+        // TODO: Improve compatibility with keyed coding
+        //
+        // These methods retrieve the value from an undefined coding key. It
+        // should be assigned to a defined coding key. One way to do this is by
+        // converting the selector from a string (NSSelectorFromString) instead.
+        if (@available(macOS 10.13, *)) {
+            [coder decodeValueOfObjCType:@encode(SEL)
+                                      at:&_handler
+                                    size:sizeof(SEL)];
+        } else {
+            [coder decodeValueOfObjCType:@encode(SEL) at:&_handler];
+        }
     }
 
     return self;
@@ -121,6 +140,12 @@ static NSString *const VNACodingKeyQueryString = @"searchQueryString";
 
     [coder encodeObject:self.displayName forKey:VNACodingKeyDisplayName];
     [coder encodeObject:self.queryString forKey:VNACodingKeyQueryString];
+
+    // TODO: Improve compatibility with keyed coding
+    //
+    // This method assigns the value to an undefined coding key. It should be
+    // assigned to a defined coding key. One way to do this is by converting the
+    // selector to a string (NSStringFromSelector) instead.
     [coder encodeValueOfObjCType:@encode(SEL) at:&_handler];
 }
 

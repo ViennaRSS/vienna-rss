@@ -20,6 +20,9 @@
 
 #import "DownloadItem.h"
 
+static NSString *const VNACodingKeyFilename = @"filename";
+static NSString *const VNACodingKeySize = @"size";
+
 @interface DownloadItem ()
 
 @property (readwrite, copy, nonatomic) NSImage *image;
@@ -50,15 +53,33 @@
     return [_image copy];
 }
 
-#pragma mark NSCoding
+// MARK: - NSSecureCoding
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
+}
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
     self = [self init];
 
     if (self) {
-        _filename = [coder decodeObject];
-        [coder decodeValueOfObjCType:@encode(long long) at:&_size];
+        if (coder.allowsKeyedCoding) {
+            _filename = [coder decodeObjectOfClass:[NSString class]
+                                            forKey:VNACodingKeyFilename];
+            _size = [coder decodeInt64ForKey:VNACodingKeySize];
+        } else {
+            // NSUnarchiver is deprecated since macOS 10.13 and replaced with
+            // NSKeyedUnarchiver. For backwards-compatibility with NSArchiver,
+            // decoding using NSUnarchiver is still supported.
+            //
+            // Important: The order in which the values are decoded must match
+            // the order in which they were encoded. Changing the code below can
+            // lead to decoding failure.
+            _filename = [coder decodeObject];
+            [coder decodeValueOfObjCType:@encode(long long) at:&_size];
+        }
         _state = DownloadStateCompleted;
     }
 
@@ -67,8 +88,20 @@
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-    [coder encodeObject:self.filename];
-    [coder encodeValueOfObjCType:@encode(long long) at:&_size];
+    if (coder.allowsKeyedCoding) {
+        [coder encodeObject:self.filename forKey:VNACodingKeyFilename];
+        [coder encodeInt64:self.size forKey:VNACodingKeySize];
+    } else {
+        // NSArchiver is deprecated since macOS 10.13 and replaced with
+        // NSKeyedArchiver. For testing purposes only, encoding with NSArchiver
+        // is still supported.
+        //
+        // Important: The order in which the values are encoded must match the
+        // the order in which they will be decoded. Changing the code below can
+        // lead to decoding failure.
+        [coder encodeObject:self.filename];
+        [coder encodeValueOfObjCType:@encode(long long) at:&_size];
+    }
 }
 
 @end

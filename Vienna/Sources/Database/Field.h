@@ -29,7 +29,7 @@ typedef NS_ENUM(NSUInteger, VNAFieldType) {
     VNAFieldTypeFolder
 } NS_SWIFT_NAME(Field.FieldType);
 
-@interface Field : NSObject <NSCoding>
+@interface Field : NSObject <NSSecureCoding>
 
 /// The field name is the unlocalised display name; useful for writing to data
 /// files where sysName isn't appropriate.

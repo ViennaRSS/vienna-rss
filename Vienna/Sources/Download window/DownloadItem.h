@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, DownloadState) {
     DownloadStateCancelled
 };
 
-@interface DownloadItem : NSObject <NSCoding>
+@interface DownloadItem : NSObject <NSSecureCoding>
 
 @property (nonatomic) DownloadState state;
 @property (nonatomic) long long expectedSize;

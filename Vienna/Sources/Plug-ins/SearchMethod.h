@@ -20,7 +20,7 @@
 
 @import Foundation;
 
-@interface SearchMethod : NSObject <NSCoding>
+@interface SearchMethod : NSObject <NSSecureCoding>
 
 /// Used to init fron a plugin's info.dict. This class is designed to be capable
 /// of doing different things with searches according to the plugin definition.
