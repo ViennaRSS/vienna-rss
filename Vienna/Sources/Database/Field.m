@@ -1,5 +1,5 @@
 //
-//  VField.m
+//  Field.m
 //  Vienna
 //
 //  Created by Steve on Mon Mar 22 2004.
@@ -22,181 +22,64 @@
 
 @implementation Field
 
-/* init
- * Init an empty Field object.
- */
--(instancetype)init
+// MARK: Initialization
+
+- (instancetype)init
 {
-	if ((self = [super init]) != nil)
-	{
-		name = nil;
-		displayName = nil;
-		sqlField = nil;
-		visible = NO;
-		width = 20;
-		type = MA_FieldType_Integer;
-		tag = -1;
-	}
-	return self;
+    self = [super init];
+
+    if (self) {
+        _name = nil;
+        _displayName = nil;
+        _sqlField = nil;
+        _tag = -1;
+        _type = VNAFieldTypeInteger;
+        _width = 20;
+        _visible = NO;
+    }
+
+    return self;
 }
 
-/* initWithCoder
- * Initalises a decoded object
- */
--(instancetype)initWithCoder:(NSCoder *)coder
+// MARK: Overrides
+
+- (NSString *)description
 {
-	if ((self = [super init]) != nil)
-	{
-		displayName = [coder decodeObject];
-		name = [coder decodeObject];
-		sqlField = [coder decodeObject];
-		[coder decodeValueOfObjCType:@encode(bool) at:&visible];
-		[coder decodeValueOfObjCType:@encode(NSInteger) at:&width];
-		[coder decodeValueOfObjCType:@encode(NSInteger) at:&tag];
-		[coder decodeValueOfObjCType:@encode(NSInteger) at:&type];
-	}
-	return self;
+    return [NSString stringWithFormat:@"('%@', displayName='%@', sqlField='%@'"
+                                       ", tag=%ld, width=%ld, visible=%d)",
+                                      self.name, self.displayName,
+                                      self.sqlField, self.tag, self.width,
+                                      self.visible];
 }
 
-/* setName
- * Sets the name of the field. The field name is the unlocalised display name useful
- * for writing to data files where sysName isn't appropriate.
- */
--(void)setName:(NSString *)newName
+// MARK: - NSCoding
+
+- (instancetype)initWithCoder:(NSCoder *)coder
 {
-	name = newName;
+    self = [super init];
+
+    if (self) {
+        _displayName = [coder decodeObject];
+        _name = [coder decodeObject];
+        _sqlField = [coder decodeObject];
+        [coder decodeValueOfObjCType:@encode(bool) at:&_visible];
+        [coder decodeValueOfObjCType:@encode(NSInteger) at:&_width];
+        [coder decodeValueOfObjCType:@encode(NSInteger) at:&_tag];
+        [coder decodeValueOfObjCType:@encode(NSInteger) at:&_type];
+    }
+
+    return self;
 }
 
-/* setDisplayName
- * Sets the display name of the field. This is the name that is intended to be
- * displayed in the UI.
- */
--(void)setDisplayName:(NSString *)newDisplayName
+- (void)encodeWithCoder:(NSCoder *)coder
 {
-	displayName = newDisplayName;
-}
-
-/* setSqlField
- * Sets the SQL column name of the field. This must correspond to the name used
- * in the 'create table' statement when the table of which this field is part was
- * originally created.
- */
--(void)setSqlField:(NSString *)newSqlField
-{
-	sqlField = newSqlField;
-}
-
-/* setType
- * Sets the field type. This must be one of the valid values in the FieldType enum.
- * The field type is used to govern how the field value is interpreted.
- */
--(void)setType:(FieldType)newType
-{
-	type = newType;
-}
-
-/* setTag
- * Sets the field tag. The tag is simply an unique integer that identifies the field
- * in the same way that the field name is used. I suspect that at some point one of
- * these two will be deprecated for simplicity.
- */
--(void)setTag:(NSInteger)newTag
-{
-	tag = newTag;
-}
-
-/* setVisible
- * Sets whether or not this field is intended to be visible in the article list view by default.
- */
--(void)setVisible:(BOOL)flag
-{
-	visible = flag;
-}
-
-/* setWidth
- * Sets the default width of the field in the article list view.
- */
--(void)setWidth:(NSInteger)newWidth
-{
-	width = newWidth;
-}
-
-/* name
- * Returns the field name
- */
--(NSString *)name
-{
-	return name;
-}
-
-/* displayName
- * Returns the field display name.
- */
--(NSString *)displayName
-{
-	return displayName;
-}
-
-/* sqlField
- * Returns the SQL column name for this field.
- */
--(NSString *)sqlField
-{
-	return sqlField;
-}
-
-/* tag
- * Returns the field's tag number.
- */
--(NSInteger)tag
-{
-	return tag;
-}
-
-/* type
- * Returns the fields type.
- */
--(FieldType)type
-{
-	return type;
-}
-
-/* width
- * Returns the default width of the field in the article list view.
- */
--(NSInteger)width
-{
-	return width;
-}
-
-/* visible
- * Returns whether or not this field is visible by default in the article list view.
- */
--(BOOL)visible
-{
-	return visible;
-}
-
-/* description
- * Returns a detailed description of the field for debugging purposes.
- */
--(NSString *)description
-{
-	return [NSString stringWithFormat:@"('%@', displayName='%@', sqlField='%@', tag=%ld, width=%ld, visible=%d)", name, displayName, sqlField, (long)tag, (long)width, visible];
-}
-
-/* encodeWithCoder
- * Encodes a single Field object for archiving.
- */
--(void)encodeWithCoder:(NSCoder *)coder
-{
-	[coder encodeObject:displayName];
-	[coder encodeObject:name];
-	[coder encodeObject:sqlField];
-	[coder encodeValueOfObjCType:@encode(bool) at:&visible];
-	[coder encodeValueOfObjCType:@encode(NSInteger) at:&width];
-	[coder encodeValueOfObjCType:@encode(NSInteger) at:&tag];
-	[coder encodeValueOfObjCType:@encode(NSInteger) at:&type];
+    [coder encodeObject:self.displayName];
+    [coder encodeObject:self.name];
+    [coder encodeObject:self.sqlField];
+    [coder encodeValueOfObjCType:@encode(bool) at:&_visible];
+    [coder encodeValueOfObjCType:@encode(NSInteger) at:&_width];
+    [coder encodeValueOfObjCType:@encode(NSInteger) at:&_tag];
+    [coder encodeValueOfObjCType:@encode(NSInteger) at:&_type];
 }
 
 @end
