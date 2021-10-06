@@ -18,163 +18,110 @@
 //  limitations under the License.
 //
 
-
 #import "SearchMethod.h"
-#import "HelperFunctions.h"
+
 #import "AppController.h"
+#import "HelperFunctions.h"
+
+static NSString *const VNACodingKeyDisplayName = @"friendlyName";
+static NSString *const VNACodingKeyQueryString = @"searchQueryString";
 
 @implementation SearchMethod
 
-/* init
- * Create an "empty" search method that will not do anything on its own.
- */
--(instancetype)init
+// MARK: Initialization
+
+- (instancetype)initWithDictionary:(NSDictionary *)dict
 {
-	if ((self = [super init]) != nil)
-	{
-		friendlyName = nil;
-		searchQueryString = nil;
-		handler = nil;
-	}
-	return self;
-}
+    self = [self init];
 
-/* initWithDictionary:
- * Used to init fron a plugin's info.dict. This class is designed to be capable 
- * of doing different things with searches according to the plugin definition. 
- * At the moment, however, we only ever do a normal web-search.*/
+    if (self) {
+        _displayName = [dict valueForKey:@"FriendlyName"];
+        _queryString = [dict valueForKey:@"SearchQueryString"];
+        _handler = @selector(performWebSearch:);
+    }
 
--(instancetype)initWithDictionary:(NSDictionary *)dict 
-{
-	if ((self = [super init]) != nil)
-	{
-		friendlyName = [dict valueForKey:@"FriendlyName"];
-		searchQueryString = [dict valueForKey:@"SearchQueryString"];
-		handler = @selector(performWebSearch:);
-	}
-	return self;
-}
-
-# pragma mark NSCoder Conformity
-
-- (void)encodeWithCoder:(NSCoder *)coder
-{
-    [coder encodeObject:friendlyName forKey:@"friendlyName"];
-	[coder encodeObject:searchQueryString forKey:@"searchQueryString"];
-	[coder encodeValueOfObjCType:@encode(SEL) at:&handler];
-}
-
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-	if ((self = [super init]) != nil)
-    {
-		self.friendlyName = [coder decodeObjectForKey:@"friendlyName"];
-		self.searchQueryString = [coder decodeObjectForKey:@"searchQueryString"];
-		[coder decodeValueOfObjCType:@encode(SEL) at:&handler];
-    }   
     return self;
 }
 
-# pragma mark Class Methods
+// MARK: Public methods
 
-/* builtInSearchMethods
- * Class method that returns all built-in SearchMethods. They are defined 
- * immediately below.If you add a new one, add it to the array. 
- * Remember: arrayWithObjects needs a "nil" termination.
- */
-+(NSArray *)builtInSearchMethods
++ (SearchMethod *)allArticlesSearchMethod
 {
-	return @[[SearchMethod searchAllArticlesMethod], [SearchMethod searchCurrentWebPageMethod]];
+    SearchMethod *method = [[SearchMethod alloc] init];
+    method.displayName = NSLocalizedString(@"Search all articles",
+                                           @"Placeholder title of a search "
+                                            "field");
+    method.handler = @selector(performAllArticlesSearch);
+
+    return method;
 }
 
-/* searchAllArticlesMethod
- * Class method that returns the standard SearchMethod "Search all Articles".
- */
-+(SearchMethod *)searchAllArticlesMethod
++ (SearchMethod *)currentWebPageSearchMethod
 {
-	SearchMethod * method = [[SearchMethod alloc] init];
-	method.friendlyName = NSLocalizedString(@"Search all articles", @"Placeholder title of a search field");
-	method.handler = @selector(performAllArticlesSearch);
-	
-	return method; 
+    SearchMethod *method = [[SearchMethod alloc] init];
+    method.displayName = NSLocalizedString(@"Search current web page",
+                                           @"Placeholder title of a search "
+                                            "field");
+    method.handler = @selector(performWebPageSearch);
+
+    return method;
 }
 
-/* searchCurrentWebPageMethod
- * Class method that Returns a SearchMethod that only works when 
- * the active view is a web pane.
- */
-+(SearchMethod *)searchCurrentWebPageMethod
+// If you add a new one, add it to the array. Remember: arrayWithObjects needs
+// a "nil" termination.
++ (NSArray *)builtInSearchMethods
 {
-	SearchMethod * method = [[SearchMethod alloc] init];
-	method.friendlyName = NSLocalizedString(@"Search current web page", @"Placeholder title of a search field");
-	method.handler = @selector(performWebPageSearch);
-	
-	return method; 
-}	
+    return @[
+        [SearchMethod allArticlesSearchMethod],
+        [SearchMethod currentWebPageSearchMethod]
+    ];
+}
 
-# pragma mark Instance Methods
-
-/* searchCurrentWebPageMethod
- * Returns the URL that needs to be accessed to send the query.
- */
 - (NSURL *)queryURLforSearchString:(NSString *)searchString
 {
-	NSURL * queryURL;
-	NSString * temp = [self.searchQueryString stringByReplacingOccurrencesOfString:@"$SearchTerm$" withString:searchString];
-	queryURL = cleanedUpUrlFromString(temp);
+    NSURL *queryURL;
+    NSString *temp =
+        [self.queryString stringByReplacingOccurrencesOfString:@"$SearchTerm$"
+                                                    withString:searchString];
+    queryURL = cleanedUpUrlFromString(temp);
     return queryURL;
 }
 
-#pragma mark Getters and setters
+// MARK: - NSCoding
 
-/* setFriendlyName
- * Sets the name of the search method to be displayed in Vienna.
- */
--(void)setFriendlyName:(NSString *) newName 
-{ 
-	friendlyName = newName; 
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    if (coder.allowsKeyedCoding) {
+        self = [self init];
+    } else {
+        NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
+                                             code:NSCoderReadCorruptError
+                                         userInfo:nil];
+        [coder failWithError:error];
+    }
+
+    if (self) {
+        _displayName = [coder decodeObjectForKey:VNACodingKeyDisplayName];
+        _queryString = [coder decodeObjectForKey:VNACodingKeyQueryString];
+        [coder decodeValueOfObjCType:@encode(SEL) at:&_handler];
+    }
+
+    return self;
 }
 
-/* friendlyName
- * Returns the name of the search method to be displayed in Vienna.
- */
--(NSString *)friendlyName 
-{ 
-	return friendlyName; 
-}
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    if (!coder.allowsKeyedCoding) {
+        NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
+                                             code:NSCoderReadCorruptError
+                                         userInfo:nil];
+        [coder failWithError:error];
+        return;
+    }
 
-/* setSearchQueryString
- * Sets the format string from the plugin info that we plug the search terms into.
- */
--(void)setSearchQueryString:(NSString *) newQueryString 
-{ 
-	searchQueryString = newQueryString; 
-}
-
-/* searchQueryString
- * Returns the format string from the plugin info that we plug the search terms into.
- */
--(NSString *)searchQueryString 
-{ 
-	return searchQueryString; 
-}
-
-/* setHandler
- * Sets the handler for the SearchMetod. Handling happens in AppController, 
- * because that's where these always get called.
- */
--(void)setHandler:(SEL) theHandler 
-{ 
-	handler = theHandler; 
-}
-
-/* setHandler
- * Returns the handler for the SearchMetod. Handling happens in AppController, 
- * because that's where these always get called.
- */
--(SEL)handler 
-{ 
-	return handler; 
+    [coder encodeObject:self.displayName forKey:VNACodingKeyDisplayName];
+    [coder encodeObject:self.queryString forKey:VNACodingKeyQueryString];
+    [coder encodeValueOfObjCType:@encode(SEL) at:&_handler];
 }
 
 @end

@@ -20,20 +20,28 @@
 
 @import Foundation;
 
-@interface SearchMethod : NSObject <NSCoding> {
-	NSString * friendlyName;
-	NSString * searchQueryString;
-	SEL handler;
-}
+@interface SearchMethod : NSObject <NSCoding>
 
-+(SearchMethod *)searchAllArticlesMethod;
-+(SearchMethod *)searchCurrentWebPageMethod;
-+(NSArray *)builtInSearchMethods;
+/// Used to init fron a plugin's info.dict. This class is designed to be capable
+/// of doing different things with searches according to the plugin definition.
+/// At the moment, however, we only ever do a normal web search.
+- (instancetype)initWithDictionary:(NSDictionary *)dict;
 
--(instancetype)initWithDictionary:(NSDictionary *)dict /*NS_DESIGNATED_INITIALIZER*/;
--(NSURL *)queryURLforSearchString:(NSString *)searchString;
-@property (nonatomic, copy) NSString *searchQueryString;
-@property (nonatomic, copy) NSString *friendlyName;
+/// Class method that returns the standard SearchMethod "Search all Articles".
++ (SearchMethod *)allArticlesSearchMethod;
+
+/// Class method that Returns a SearchMethod that only works when the active
+/// view is a web pane.
++ (SearchMethod *)currentWebPageSearchMethod;
+
+/// Class method that returns all built-in SearchMethods.
++ (NSArray *)builtInSearchMethods;
+
+@property (copy, nonatomic) NSString *displayName;
+@property (copy, nonatomic) NSString *queryString;
 @property (nonatomic) SEL handler;
+
+/// Returns the URL that needs to be accessed to send the query.
+- (NSURL *)queryURLforSearchString:(NSString *)searchString;
 
 @end
