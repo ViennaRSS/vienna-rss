@@ -192,6 +192,7 @@
 		F672876824A2D2170043432F /* UpdatePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F672876724A2D2170043432F /* UpdatePreferencesViewController.m */; };
 		F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */; };
 		F6832F681F10F5DA007920D4 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F661F10F5DA007920D4 /* MainWindowController.xib */; };
+		F68792872700A678009B7BB5 /* SecurityScopedBookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68792862700A678009B7BB5 /* SecurityScopedBookmark.swift */; };
 		F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = F69140E31E71B94200D51BFF /* AppController+Notifications.m */; };
 		F692559A2572A32900D387D8 /* MMTabBarView in Frameworks */ = {isa = PBXBuildFile; productRef = F69255992572A32900D387D8 /* MMTabBarView */; };
 		F696D23E2561F9FC003DF0C0 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = F696D23D2561F9FC003DF0C0 /* Sparkle */; };
@@ -721,6 +722,7 @@
 		F68176D4209EFD35004AA256 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = es; path = es.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F6832F641F10C4C9007920D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ExportAccessoryViewController.xib; sourceTree = "<group>"; };
 		F6832F671F10F5DA007920D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
+		F68792862700A678009B7BB5 /* SecurityScopedBookmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityScopedBookmark.swift; sourceTree = "<group>"; };
 		F6879288270117AF009B7BB5 /* WKWebViewConfiguration+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WKWebViewConfiguration+Private.h"; sourceTree = "<group>"; };
 		F6893969209EFD9C007D36C0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = it; path = it.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F68F724A1E2A0937007FADA5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -1468,6 +1470,7 @@
 				0349813F1A20701600014F29 /* AdvancedPreferencesViewController.h */,
 				034981401A20701600014F29 /* AdvancedPreferencesViewController.m */,
 				F6B355DA256025D3008CA1ED /* PreferenceTabViewItem.swift */,
+				F68792862700A678009B7BB5 /* SecurityScopedBookmark.swift */,
 			);
 			path = "Preferences window";
 			sourceTree = "<group>";
@@ -2075,6 +2078,7 @@
 				4350289B165DE9E00018EDB7 /* ArticleView.m in Sources */,
 				4350289C165DE9E00018EDB7 /* BrowserPane.m in Sources */,
 				F61CEA661F039E57009C878E /* ButtonToolbarItem.swift in Sources */,
+				F68792872700A678009B7BB5 /* SecurityScopedBookmark.swift in Sources */,
 				4350289D165DE9E00018EDB7 /* BrowserPaneTemplate.m in Sources */,
 				F6094E331F10107800677D3B /* ExportAccessoryViewController.swift in Sources */,
 				2FCD69302260B3E7005BAA75 /* CustomWKWebView.swift in Sources */,

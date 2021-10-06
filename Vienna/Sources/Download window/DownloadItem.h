@@ -33,9 +33,14 @@ typedef NS_ENUM(NSInteger, DownloadState) {
 @property (nonatomic) DownloadState state;
 @property (nonatomic) long long expectedSize;
 @property (nonatomic) long long size;
-@property (nonatomic) NSURLDownload *download;
 @property (nonatomic, copy) NSString *filename;
 @property (nonatomic, readonly, copy) NSImage *image;
-@property (nonatomic, copy) NSDate *startTime;
+
+@property (nonatomic) NSURLSessionDownloadTask *downloadTask;
+@property (nonatomic) NSURL *fileURL;
+
+// MARK: WebDownload (deprecated)
+
+@property (nonatomic) NSURLDownload *download;
 
 @end

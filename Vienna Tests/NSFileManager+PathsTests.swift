@@ -42,4 +42,10 @@ class NSFileManagerPathsTests: XCTestCase {
         XCTAssertEqual(result.path, fullPath)
     }
 
+    func testDownloadsPath() throws {
+        let result = FileManager.default.downloadsDirectory
+        let fullPath = "\(homePath)/Downloads"
+        XCTAssertEqual(result.path, fullPath)
+    }
+
 }

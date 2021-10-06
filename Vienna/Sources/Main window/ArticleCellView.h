@@ -11,7 +11,7 @@
 @class ArticleConverter;
 @protocol ArticleContentView;
 
-@interface ArticleCellView : NSTableCellView
+@interface ArticleCellView : NSTableCellView <WKNavigationDelegate>
 {
 	AppController * controller;
 	BOOL inProgress;

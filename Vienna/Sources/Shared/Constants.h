@@ -31,7 +31,7 @@ extern NSString * MAPref_ShowUnreadArticlesInBold;
 extern NSString * MAPref_FolderFont;
 extern NSString * MAPref_CachedFolderID;
 extern NSString * MAPref_DefaultDatabase;
-extern NSString * MAPref_DownloadsFolder;
+extern NSString *const MAPref_DownloadsFolderBookmark;
 extern NSString * MAPref_SortColumn;
 extern NSString * MAPref_CheckFrequency;
 extern NSString * MAPref_ArticleListColumns;
