@@ -193,6 +193,7 @@
 		F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */; };
 		F6832F681F10F5DA007920D4 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F661F10F5DA007920D4 /* MainWindowController.xib */; };
 		F68792872700A678009B7BB5 /* SecurityScopedBookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68792862700A678009B7BB5 /* SecurityScopedBookmark.swift */; };
+		F68FE3A6270F6DC700C89D16 /* UnarchiverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68FE3A5270F6DC700C89D16 /* UnarchiverTests.swift */; };
 		F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = F69140E31E71B94200D51BFF /* AppController+Notifications.m */; };
 		F692559A2572A32900D387D8 /* MMTabBarView in Frameworks */ = {isa = PBXBuildFile; productRef = F69255992572A32900D387D8 /* MMTabBarView */; };
 		F696D23E2561F9FC003DF0C0 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = F696D23D2561F9FC003DF0C0 /* Sparkle */; };
@@ -725,6 +726,7 @@
 		F6879288270117AF009B7BB5 /* WKWebViewConfiguration+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WKWebViewConfiguration+Private.h"; sourceTree = "<group>"; };
 		F6893969209EFD9C007D36C0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = it; path = it.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F68F724A1E2A0937007FADA5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		F68FE3A5270F6DC700C89D16 /* UnarchiverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnarchiverTests.swift; sourceTree = "<group>"; };
 		F69140E21E71B94200D51BFF /* AppController+Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppController+Notifications.h"; sourceTree = "<group>"; };
 		F69140E31E71B94200D51BFF /* AppController+Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppController+Notifications.m"; sourceTree = "<group>"; };
 		F69140ED1E71D72100D51BFF /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -1017,6 +1019,7 @@
 				F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */,
 				F6AC41AB25A4FAF6007DED7B /* FeedDiscovererTests.swift */,
 				F6A179D226B82BE3008DDA42 /* NSFileManagerExtensionTests.swift */,
+				F68FE3A5270F6DC700C89D16 /* UnarchiverTests.swift */,
 				F633157726EE3D06008A3673 /* URLFormatterTests.swift */,
 				0377BDEB1D3A009B00960555 /* Vienna Tests-Bridging-Header.h */,
 				F6AC41C525A501B9007DED7B /* Files */,
@@ -2009,6 +2012,7 @@
 				4D36B44B1D37F91E009736C1 /* VNAArticleTests.m in Sources */,
 				F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */,
 				3A50014E259AA2BE00AA6AAD /* WebKitArticleConverter.swift in Sources */,
+				F68FE3A6270F6DC700C89D16 /* UnarchiverTests.swift in Sources */,
 				2FE328F125CF436C005B9C18 /* CriteriaTests.swift in Sources */,
 				F633157826EE3D06008A3673 /* URLFormatterTests.swift in Sources */,
 			);
