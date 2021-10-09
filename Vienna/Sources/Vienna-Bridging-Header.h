@@ -2,6 +2,7 @@
 #import "Article.h"
 #import "ArticleConverter.h"
 #import "ArticleListView.h"
+#import "ArticleViewDelegate.h"
 #import "DisclosureView.h"
 #import "FolderView.h"
 #import "HelperFunctions.h"
