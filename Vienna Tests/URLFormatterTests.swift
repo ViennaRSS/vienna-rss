@@ -22,12 +22,8 @@ import XCTest
 
 class URLFormatterTests: XCTestCase {
 
-    var formatter: URLFormatter?
-
-    func testStringFromHTTPURL() {
-        formatter = URLFormatter()
-        XCTAssertNotNil(formatter)
-
+    func testStringFromHTTPURL() throws {
+        let formatter = URLFormatter()
         let urlTuples = [
             (unformatted: "http://", formatted: "http://"),
             (unformatted: "http://host", formatted: "http://host"),
@@ -37,16 +33,13 @@ class URLFormatterTests: XCTestCase {
         ]
 
         for tuple in urlTuples {
-            let url = URL(string: tuple.unformatted)
-            XCTAssertNotNil(url)
-            XCTAssertEqual(formatter!.string(from: url!), tuple.formatted)
+            let url = try XCTUnwrap(URL(string: tuple.unformatted))
+            XCTAssertEqual(formatter.string(from: url), tuple.formatted)
         }
     }
 
-    func testStringFromHTTPSURL() {
-        formatter = URLFormatter()
-        XCTAssertNotNil(formatter)
-
+    func testStringFromHTTPSURL() throws {
+        let formatter = URLFormatter()
         let urlTuples = [
             (unformatted: "https://", formatted: "https://"),
             (unformatted: "https://host", formatted: "https://host"),
@@ -56,25 +49,21 @@ class URLFormatterTests: XCTestCase {
         ]
 
         for tuple in urlTuples {
-            let url = URL(string: tuple.unformatted)
-            XCTAssertNotNil(url)
-            XCTAssertEqual(formatter!.string(from: url!), tuple.formatted)
+            let url = try XCTUnwrap(URL(string: tuple.unformatted))
+            XCTAssertEqual(formatter.string(from: url), tuple.formatted)
         }
     }
 
-    func testStringFromMailtoURL() {
-        formatter = URLFormatter()
-        XCTAssertNotNil(formatter)
-
+    func testStringFromMailtoURL() throws {
+        let formatter = URLFormatter()
         let urlTuples = [
             (unformatted: "mailto:recipient@host", formatted: "Send email to recipient@host"),
             (unformatted: "mailto:recipient@host?subject=Hello", formatted: "Send email to recipient@host with subject “Hello”")
         ]
 
         for tuple in urlTuples {
-            let url = URL(string: tuple.unformatted)
-            XCTAssertNotNil(url)
-            XCTAssertEqual(formatter!.string(from: url!), tuple.formatted)
+            let url = try XCTUnwrap(URL(string: tuple.unformatted))
+            XCTAssertEqual(formatter.string(from: url), tuple.formatted)
         }
     }
 

@@ -22,7 +22,7 @@ import XCTest
 class NSFileManagerExtensionTests: XCTestCase {
 
     let homePath = NSHomeDirectory()
-    let bundleID = Bundle.main.bundleIdentifier ?? ""
+    let bundleID = Bundle.main.bundleIdentifier
 
     func testApplicationScriptsPath() throws {
         let result = FileManager.default.applicationScriptsDirectory
@@ -38,6 +38,7 @@ class NSFileManagerExtensionTests: XCTestCase {
 
     func testCachesPath() throws {
         let result = FileManager.default.cachesDirectory
+        let bundleID = try XCTUnwrap(bundleID)
         let fullPath = "\(homePath)/Library/Caches/\(bundleID)"
         XCTAssertEqual(result.path, fullPath)
     }
