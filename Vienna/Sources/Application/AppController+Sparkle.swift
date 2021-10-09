@@ -17,6 +17,9 @@
 //  limitations under the License.
 //
 
+import Foundation
+import Sparkle
+
 extension AppController: SPUUpdaterDelegate {
 
 	public func feedURLString(for updater: SPUUpdater) -> String? {

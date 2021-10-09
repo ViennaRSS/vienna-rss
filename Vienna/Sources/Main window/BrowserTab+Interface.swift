@@ -17,7 +17,7 @@
 //  limitations under the License.
 //
 
-import Foundation
+import Cocoa
 
 extension BrowserTab {
 
@@ -79,7 +79,7 @@ extension BrowserTab {
             return
         }
         let loadingProgress = CGFloat(self.loadingProgress)
-        //small value for backwards animation to avoid default duration
+        // Small value for backwards animation to avoid default duration
         let duration = progressBar.currentLoadingProgress < loadingProgress ? 0.3 : 0.001
         progressBar.setLoadingProgress(loadingProgress, animationDuration: duration)
         if loadingProgress == 1.0 {
@@ -138,12 +138,12 @@ extension BrowserTab {
 
     func updateTabTitle() {
         if self.url != webView.url || self.url == nil {
-            //currently loading (the first time), webview title not yet correct / available
+            // Currently loading (the first time), webview title not yet correct / available
             self.title = self.url?.host ?? NSLocalizedString("New Tab", comment: "")
         } else if let title = self.webView.title, !title.isEmpty {
             self.title = title
         } else {
-            //webview is about:blank or empty
+            // Webview is about:blank or empty
             self.title = NSLocalizedString("New Tab", comment: "")
         }
     }

@@ -34,18 +34,18 @@ final class URLFormatter: Formatter {
 
     /// These attributes determine the default style of the URL string. These
     /// are overridden by `primaryAttributes` and `secondaryAttributes`.
-    @objc var defaultAttributes: [NSAttributedString.Key : Any] = [:]
+    @objc var defaultAttributes: [NSAttributedString.Key: Any] = [:]
 
     /// These attributes determine the general look of the URL string, except
     /// for the parts with secondary attributes.
-    @objc var primaryAttributes: [NSAttributedString.Key : Any] = [
-        .foregroundColor : NSColor.labelColor
+    @objc var primaryAttributes: [NSAttributedString.Key: Any] = [
+        .foregroundColor: NSColor.labelColor
     ]
 
     /// These attributes determine the look of less important parts of the URL
     /// string, such as the path and query components of a URL.
-    @objc var secondaryAttributes: [NSAttributedString.Key : Any] = [
-        .foregroundColor : NSColor.secondaryLabelColor
+    @objc var secondaryAttributes: [NSAttributedString.Key: Any] = [
+        .foregroundColor: NSColor.secondaryLabelColor
     ]
 
     // MARK: Methods
@@ -88,7 +88,7 @@ final class URLFormatter: Formatter {
         }
     }
 
-    override func attributedString(for obj: Any, withDefaultAttributes attrs: [NSAttributedString.Key : Any]? = nil) -> NSAttributedString? {
+    override func attributedString(for obj: Any, withDefaultAttributes attrs: [NSAttributedString.Key: Any]? = nil) -> NSAttributedString? {
         guard let url = obj as? URL else {
             return nil
         }
@@ -144,11 +144,11 @@ final class URLFormatter: Formatter {
         }
     }
 
-    private func attributedString(for scheme: Scheme, url: URL, withDefaultAttributes attributes: [NSAttributedString.Key : Any]) -> NSAttributedString {
+    private func attributedString(for scheme: Scheme, url: URL, withDefaultAttributes attributes: [NSAttributedString.Key: Any]) -> NSAttributedString {
         switch scheme {
         case .http, .https:
             let urlString = urlStringWhileRemovingSlash(from: url)
-            let attributes = attributes.merging(secondaryAttributes) { (_, newValue) in newValue }
+            let attributes = attributes.merging(secondaryAttributes) { _, newValue in newValue }
             let attrURLString = NSMutableAttributedString(string: urlString, attributes: attributes)
 
             guard let urlComponents = NSURLComponents(string: urlString) else {

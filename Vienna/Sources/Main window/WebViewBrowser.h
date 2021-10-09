@@ -29,7 +29,10 @@
 @protocol Browser;
 @protocol Tab;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Weverything"
 @interface WebViewBrowser : NSViewController <Browser>
+#pragma clang diagnostic pop
 
 #pragma mark - current state
 

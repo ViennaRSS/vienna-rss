@@ -25,6 +25,7 @@
 #import "Constants.h"
 #import "Browser+WebUIDelegate.h"
 #import "TabbedWebView.h"
+#import "Vienna-Swift.h"
 
 @interface WebViewBrowser () <MMTabBarViewDelegate>
 

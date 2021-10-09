@@ -32,6 +32,7 @@
 #import "Folder.h"
 #import "Field.h"
 #import "Criteria.h"
+#import "Vienna-Swift.h"
 
 typedef NS_ENUM(NSInteger, VNAQueryScope) {
     VNAQueryScopeInclusive = 1,

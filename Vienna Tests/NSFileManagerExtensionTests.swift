@@ -1,5 +1,5 @@
 //
-//  NSFileManager+PathsTests.swift
+//  NSFileManagerExtensionTests.swift
 //  Vienna Tests
 //
 //  Copyright 2021 Eitot
@@ -19,10 +19,10 @@
 
 import XCTest
 
-class NSFileManagerPathsTests: XCTestCase {
+class NSFileManagerExtensionTests: XCTestCase {
 
     let homePath = NSHomeDirectory()
-    let bundleID = Bundle.main.bundleIdentifier ?? ""
+    let bundleID = Bundle.main.bundleIdentifier
 
     func testApplicationScriptsPath() throws {
         let result = FileManager.default.applicationScriptsDirectory
@@ -38,6 +38,7 @@ class NSFileManagerPathsTests: XCTestCase {
 
     func testCachesPath() throws {
         let result = FileManager.default.cachesDirectory
+        let bundleID = try XCTUnwrap(bundleID)
         let fullPath = "\(homePath)/Library/Caches/\(bundleID)"
         XCTAssertEqual(result.path, fullPath)
     }

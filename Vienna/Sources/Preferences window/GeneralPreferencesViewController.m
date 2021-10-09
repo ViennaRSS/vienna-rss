@@ -421,9 +421,11 @@
                                           "because you don’t have permission.",
                                           @"Message text of a modal alert");
         NSDictionary *userInfoDict = @{NSLocalizedDescriptionKey: str};
-        *outError = [NSError errorWithDomain:NSCocoaErrorDomain
-                                        code:NSFileWriteNoPermissionError
-                                    userInfo:userInfoDict];
+        if (outError) {
+            *outError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                            code:NSFileWriteNoPermissionError
+                                        userInfo:userInfoDict];
+        }
     }
     return isWritable;
 }

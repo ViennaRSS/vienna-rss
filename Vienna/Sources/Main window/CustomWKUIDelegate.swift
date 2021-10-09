@@ -17,6 +17,8 @@
 //  limitations under the License.
 //
 
+import WebKit
+
 protocol CustomWKUIDelegate: WKUIDelegate, BrowserContextMenuDelegate {
 
 }

@@ -51,7 +51,7 @@
                                isDirectory:YES];
 
     if (!url && error) {
-        char *function = __PRETTY_FUNCTION__;
+        const char *function = __PRETTY_FUNCTION__;
         NSString *description = error.localizedDescription;
         os_log_fault(VNA_LOG, "%{public}s %{public}@", function, description);
     }
@@ -81,7 +81,7 @@
                                isDirectory:YES];
 
     if (!url && error) {
-        char *function = __PRETTY_FUNCTION__;
+        const char *function = __PRETTY_FUNCTION__;
         NSString *description = error.localizedDescription;
         os_log_fault(VNA_LOG, "%{public}s %{public}@", function, description);
     }
@@ -106,7 +106,7 @@
                                isDirectory:YES];
 
     if (!url && error) {
-        char *function = __PRETTY_FUNCTION__;
+        const char *function = __PRETTY_FUNCTION__;
         NSString *description = error.localizedDescription;
         os_log_fault(VNA_LOG, "%{public}s %{public}@", function, description);
     }
@@ -129,7 +129,7 @@
                                  error:&error];
 
     if (!url && error) {
-        char *function = __PRETTY_FUNCTION__;
+        const char *function = __PRETTY_FUNCTION__;
         NSString *description = error.localizedDescription;
         os_log_fault(VNA_LOG, "%{public}s %{public}@", function, description);
     }

@@ -23,13 +23,13 @@
 
 #import "BaseView.h"
 #import "ArticleBaseView.h"
+#import "ArticleViewDelegate.h"
 
 @class AppController;
 @class ArticleView;
 @class MessageListView;
 @class EnclosureView;
 @protocol ArticleContentView;
-@protocol ArticleViewDelegate;
 @protocol Tab;
 
 @interface ArticleListView : NSView<BaseView, ArticleBaseView, ArticleViewDelegate, NSTableViewDelegate, NSTableViewDataSource>

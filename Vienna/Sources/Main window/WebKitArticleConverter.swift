@@ -97,7 +97,7 @@ class WebKitArticleConverter: ArticleConverter {
 
         let articleHtml: String = self.articleText(from: articles)
 
-        //give an article or specific array of articles always the same name
+        // Give an article or specific array of articles always the same name
         let uuidFileName = uniqueId(for: articleHtml).appending(".html")
 
         let articleDirectory = getCachesPath()

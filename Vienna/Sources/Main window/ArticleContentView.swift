@@ -5,7 +5,7 @@
 //  Copyright 2019
 //
 
-import Foundation
+import Cocoa
 
 @objc
 protocol ArticleContentView {

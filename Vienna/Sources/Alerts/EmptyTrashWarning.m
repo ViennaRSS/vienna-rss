@@ -21,6 +21,7 @@
 #import "EmptyTrashWarning.h"
 #import "Constants.h"
 #import "Preferences.h"
+#import "Vienna-Swift.h"
 
 enum
 {

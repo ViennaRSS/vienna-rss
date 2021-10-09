@@ -54,7 +54,7 @@ final class OverlayStatusBar: NSView {
     // MARK: Initialization
 
     init() {
-        super.init(frame: NSRect(x: 0, y: 0, width: 4800, height: 26))
+        super.init(frame: NSRect(x: 0, y: 0, width: 4_800, height: 26))
 
         // Make sure that no other constraints are created.
         translatesAutoresizingMaskIntoConstraints = false
@@ -183,17 +183,17 @@ final class OverlayStatusBar: NSView {
         paragraphStyle.lineBreakMode = .byTruncatingMiddle
         paragraphStyle.allowsDefaultTighteningForTruncation = true
         urlFormatter.defaultAttributes = [
-            .font : NSFont.systemFont(ofSize: 12, weight: .medium),
-            .paragraphStyle : paragraphStyle,
-            .foregroundColor : NSColor.overlayStatusBarPrimaryLabelColor,
+            .font: NSFont.systemFont(ofSize: 12, weight: .medium),
+            .paragraphStyle: paragraphStyle,
+            .foregroundColor: NSColor.overlayStatusBarPrimaryLabelColor
         ]
         urlFormatter.primaryAttributes = [
-            .font : NSFont.systemFont(ofSize: 12, weight: .medium),
-            .foregroundColor : NSColor.overlayStatusBarPrimaryLabelColor
+            .font: NSFont.systemFont(ofSize: 12, weight: .medium),
+            .foregroundColor: NSColor.overlayStatusBarPrimaryLabelColor
         ]
         urlFormatter.secondaryAttributes = [
-            .font : NSFont.systemFont(ofSize: 12, weight: .regular),
-            .foregroundColor : NSColor.overlayStatusBarSecondaryLabelColor
+            .font: NSFont.systemFont(ofSize: 12, weight: .regular),
+            .foregroundColor: NSColor.overlayStatusBarSecondaryLabelColor
         ]
 
         return urlFormatter

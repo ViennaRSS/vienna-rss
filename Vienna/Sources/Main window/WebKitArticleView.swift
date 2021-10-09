@@ -17,7 +17,8 @@
 //  limitations under the License.
 //
 
-import Foundation
+import Cocoa
+import WebKit
 
 class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelegate, CustomWKUIDelegate {
 
@@ -42,7 +43,7 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
 
     let converter = WebKitArticleConverter()
 
-    let contextMenuDelegate: BrowserContextMenuDelegate = WebKitContextMenuCustomizer()
+    let contextMenuCustomizer: BrowserContextMenuDelegate = WebKitContextMenuCustomizer()
 
     @objc
     init(frame: NSRect) {
@@ -93,7 +94,7 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
         if let webKitBrowser = browser as? TabbedBrowserViewController {
             let newTab = webKitBrowser.createNewTab(navigationAction.request, config: configuration, inBackground: false)
             if let webView = webView as? CustomWKWebView {
-                //the listeners are removed from the old webview userContentController on creating the new one, restore them
+                // The listeners are removed from the old webview userContentController on creating the new one, restore them
                 webView.resetScriptListeners()
             }
             return (newTab as? BrowserTab)?.webView
@@ -118,7 +119,7 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
         case .text:
             break
         }
-        return contextMenuDelegate.contextMenuItemsFor(purpose: purpose, existingMenuItems: menuItems)
+        return contextMenuCustomizer.contextMenuItemsFor(purpose: purpose, existingMenuItems: menuItems)
     }
 
     private func addLinkMenuCustomizations(_ menuItems: inout [NSMenuItem], _ url: (URL)) {
@@ -155,7 +156,7 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
 
     @objc
     func contextMenuItemAction(menuItem: NSMenuItem) {
-        contextMenuDelegate.contextMenuItemAction(menuItem: menuItem)
+        contextMenuCustomizer.contextMenuItemAction(menuItem: menuItem)
     }
 
     deinit {

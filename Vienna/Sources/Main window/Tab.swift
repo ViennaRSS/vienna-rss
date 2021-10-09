@@ -17,7 +17,7 @@
 //  limitations under the License.
 //
 
-import Foundation
+import Cocoa
 
 @objc
 protocol Tab {

@@ -32,6 +32,7 @@
 #import "Article.h"
 #import "Folder.h"
 #import "BackTrackArray.h"
+#import "Vienna-Swift.h"
 
 @interface ArticleController ()
 

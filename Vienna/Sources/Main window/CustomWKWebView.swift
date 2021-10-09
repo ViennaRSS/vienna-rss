@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import WebKit
 
 class CustomWKWebView: WKWebView {
 
@@ -45,8 +46,8 @@ class CustomWKWebView: WKWebView {
         getTextSelection()
     }
 
-    private var useJavaScriptObservation : NSKeyValueObservation?
-    private var useWebPluginsObservation : NSKeyValueObservation?
+    private var useJavaScriptObservation: NSKeyValueObservation?
+    private var useWebPluginsObservation: NSKeyValueObservation?
 
     override init(frame: CGRect = .zero, configuration: WKWebViewConfiguration = WKWebViewConfiguration()) {
 

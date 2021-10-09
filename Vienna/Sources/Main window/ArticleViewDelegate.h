@@ -1,5 +1,5 @@
 //
-//  ArticleViewDelegate.swift
+//  ArticleViewDelegate.h
 //  Vienna
 //
 //  Copyright 2020 Tassilo Karge
@@ -17,14 +17,21 @@
 //  limitations under the License.
 //
 
-import Foundation
+@import Foundation;
 
-@objc
-protocol ArticleViewDelegate {
-    var error: NSError? { get set }
-    var controller: AppController { get set }
-    @objc(currentPageFullHTML) var isCurrentPageFullHTML: Bool { @objc(isCurrentPageFullHTML) get }
+@class AppController;
 
-    func startMainFrameLoad()
-    func endMainFrameLoad()
-}
+NS_ASSUME_NONNULL_BEGIN
+
+@protocol ArticleViewDelegate <NSObject>
+
+@property (nullable) NSError *error;
+@property AppController *controller;
+@property (getter=isCurrentPageFullHTML, readonly) BOOL currentPageFullHTML;
+
+- (void)startMainFrameLoad;
+- (void)endMainFrameLoad;
+
+@end
+
+NS_ASSUME_NONNULL_END
