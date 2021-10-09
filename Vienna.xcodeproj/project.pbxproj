@@ -198,7 +198,7 @@
 		F696D23E2561F9FC003DF0C0 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = F696D23D2561F9FC003DF0C0 /* Sparkle */; };
 		F69964F71F13029600FC8493 /* OverlayStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69964F61F13029500FC8493 /* OverlayStatusBar.swift */; };
 		F69AE79A1F2215D600342640 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F69AE79C1F2215D600342640 /* InfoPlist.strings */; };
-		F6A179D326B82BE3008DDA42 /* NSFileManager+PathsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A179D226B82BE3008DDA42 /* NSFileManager+PathsTests.swift */; };
+		F6A179D326B82BE3008DDA42 /* NSFileManagerExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A179D226B82BE3008DDA42 /* NSFileManagerExtensionTests.swift */; };
 		F6A4E8481F040D58001C9191 /* PluginToolbarItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4E8471F040D58001C9191 /* PluginToolbarItemButton.swift */; };
 		F6A7DE341E47138B0017BE5E /* advanced.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2A1E47138B0017BE5E /* advanced.html */; };
 		F6A7DE351E47138B0017BE5E /* faq.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2C1E47138B0017BE5E /* faq.html */; };
@@ -754,7 +754,7 @@
 		F69AE7C81F22195300342640 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/EmptyTrashWarning.strings; sourceTree = "<group>"; };
 		F69AE7D71F221B2800342640 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F69AE7E91F2224F500342640 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = da; path = da.lproj/RSSSources.plist; sourceTree = "<group>"; };
-		F6A179D226B82BE3008DDA42 /* NSFileManager+PathsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSFileManager+PathsTests.swift"; sourceTree = "<group>"; };
+		F6A179D226B82BE3008DDA42 /* NSFileManagerExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSFileManagerExtensionTests.swift; sourceTree = "<group>"; };
 		F6A403CF209EFCE70024470C /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = cs; path = cs.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F6A4E8471F040D58001C9191 /* PluginToolbarItemButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PluginToolbarItemButton.swift; sourceTree = "<group>"; };
 		F6A7DDCA1E470E980017BE5E /* Vienna.help */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Vienna.help; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1016,7 +1016,7 @@
 				2F437B3B25CF336400AD1B57 /* URL+URIEquivalence.swift */,
 				F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */,
 				F6AC41AB25A4FAF6007DED7B /* FeedDiscovererTests.swift */,
-				F6A179D226B82BE3008DDA42 /* NSFileManager+PathsTests.swift */,
+				F6A179D226B82BE3008DDA42 /* NSFileManagerExtensionTests.swift */,
 				F633157726EE3D06008A3673 /* URLFormatterTests.swift */,
 				0377BDEB1D3A009B00960555 /* Vienna Tests-Bridging-Header.h */,
 				F6AC41C525A501B9007DED7B /* Files */,
@@ -2004,7 +2004,7 @@
 				3A8D9AE325A9DA4B0016F30F /* ArticleTests.swift in Sources */,
 				3A50011B259A5EF800AA6AAD /* WebViewArticleConverter.swift in Sources */,
 				2F437B3C25CF336400AD1B57 /* SubscriptionModelTests.swift in Sources */,
-				F6A179D326B82BE3008DDA42 /* NSFileManager+PathsTests.swift in Sources */,
+				F6A179D326B82BE3008DDA42 /* NSFileManagerExtensionTests.swift in Sources */,
 				F6AC41AC25A4FAF6007DED7B /* FeedDiscovererTests.swift in Sources */,
 				4D36B44B1D37F91E009736C1 /* VNAArticleTests.m in Sources */,
 				F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */,

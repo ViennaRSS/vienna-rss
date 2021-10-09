@@ -1,5 +1,5 @@
 //
-//  NSFileManager+PathsTests.swift
+//  NSFileManagerExtensionTests.swift
 //  Vienna Tests
 //
 //  Copyright 2021 Eitot
@@ -19,7 +19,7 @@
 
 import XCTest
 
-class NSFileManagerPathsTests: XCTestCase {
+class NSFileManagerExtensionTests: XCTestCase {
 
     let homePath = NSHomeDirectory()
     let bundleID = Bundle.main.bundleIdentifier ?? ""

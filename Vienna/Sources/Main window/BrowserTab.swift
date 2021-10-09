@@ -41,16 +41,16 @@ class BrowserTab: NSViewController {
     @IBOutlet private(set) weak var reloadButtonWidth: NSLayoutConstraint!
     @IBOutlet private(set) weak var rssButtonWidth: NSLayoutConstraint!
 
-    var url: URL? = nil {
+    var url: URL? {
         didSet {
             updateTabTitle()
             updateUrlTextField()
         }
     }
 
-    var loadedTab: Bool = false
+    var loadedTab = false
 
-    var loading: Bool = false
+    var loading = false
 
     var loadingProgress: Double = 0 {
         didSet { updateVisualLoadingProgress() }
@@ -66,9 +66,9 @@ class BrowserTab: NSViewController {
     /// backing storage only, access via rssUrl property
     var rssFeedUrls: [URL] = []
 
-    var showRssButton: Bool = false
+    var showRssButton = false
 
-    var viewVisible: Bool = false
+    var viewVisible = false
 
     private var titleObservation: NSKeyValueObservation?
     private var loadingObservation: NSKeyValueObservation?
@@ -284,17 +284,17 @@ extension BrowserTab: Tab {
     func reloadTab() {
         if self.webView.url != nil {
             self.webView.reload()
-            //to know what we have reloaded if the text was changed manually
+            // To know what we have reloaded if the text was changed manually
             updateUrlTextField()
         } else {
-            //when we have never loaded the webview yet, reload is actually load
+            // When we have never loaded the webview yet, reload is actually load
             loadTab()
         }
     }
 
     func stopLoadingTab() {
         self.webView.stopLoading()
-        //we must manually invoke navigation end callbacks
+        // We must manually invoke navigation end callbacks
         self.handleNavigationEnd(success: false)
     }
 

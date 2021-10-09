@@ -308,7 +308,7 @@ extension MainWindowController: NSToolbarDelegate {
             NSToolbarItem.Identifier("SkipFolder"),
             NSToolbarItem.Identifier("Action"),
             NSToolbarItem.Identifier("Refresh"),
-            NSToolbarItem.Identifier("Filter"),
+            NSToolbarItem.Identifier("Filter")
         ]
 
         let pluginIdentifiers = pluginManager?.defaultToolbarItems() as? [String] ?? []

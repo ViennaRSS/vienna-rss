@@ -33,7 +33,7 @@ class URLFormatterTests: XCTestCase {
             (unformatted: "http://host", formatted: "http://host"),
             (unformatted: "http://host/", formatted: "http://host"),
             (unformatted: "http://host/path?queries", formatted: "http://host/path?queries"),
-            (unformatted: "http://host/path#fragment", formatted: "http://host/path#fragment"),
+            (unformatted: "http://host/path#fragment", formatted: "http://host/path#fragment")
         ]
 
         for tuple in urlTuples {
@@ -52,7 +52,7 @@ class URLFormatterTests: XCTestCase {
             (unformatted: "https://host", formatted: "https://host"),
             (unformatted: "https://host/", formatted: "https://host"),
             (unformatted: "https://host/path?queries", formatted: "https://host/path?queries"),
-            (unformatted: "https://host/path#fragment", formatted: "https://host/path#fragment"),
+            (unformatted: "https://host/path#fragment", formatted: "https://host/path#fragment")
         ]
 
         for tuple in urlTuples {
@@ -68,7 +68,7 @@ class URLFormatterTests: XCTestCase {
 
         let urlTuples = [
             (unformatted: "mailto:recipient@host", formatted: "Send email to recipient@host"),
-            (unformatted: "mailto:recipient@host?subject=Hello", formatted: "Send email to recipient@host with subject “Hello”"),
+            (unformatted: "mailto:recipient@host?subject=Hello", formatted: "Send email to recipient@host with subject “Hello”")
         ]
 
         for tuple in urlTuples {
