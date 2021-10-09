@@ -37,6 +37,8 @@
 @interface BrowserPaneButton : NSButton {}
 @end
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Weverything"
 @interface BrowserPane : NSView <BaseView, WebFrameLoadDelegate, MMTabBarItem, Tab> {
 	IBOutlet NSButton * backButton;
 	IBOutlet NSButton * forwardButton;
@@ -50,6 +52,7 @@
 	BOOL loading;
 	BOOL hasRSSlink;
 }
+#pragma clang diagnostic pop
 
 @property (nonatomic, strong) IBOutlet TabbedWebView * webPane;
 
@@ -64,7 +67,10 @@
 -(void)loadTab;
 @property (weak) NSTabViewItem *tab;
 @property (nonatomic, copy) NSURL *tabUrl;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 @property (copy) NSString *title;
+#pragma clang diagnostic pop
 @property (nonatomic, readonly) BOOL loading;
 @property (nonatomic, readonly) BOOL canGoBack;
 @property (nonatomic, readonly) BOOL canGoForward;

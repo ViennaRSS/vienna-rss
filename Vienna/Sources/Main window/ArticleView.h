@@ -28,7 +28,10 @@
 @protocol ArticleViewDelegate;
 @protocol Tab;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Weverything"
 @interface ArticleView: TabbedWebView <ArticleContentView, Tab>
+#pragma clang diagnostic pop
 
 // Public functions
 -(void)setArticles:(nonnull NSArray<Article *> *)articles;
