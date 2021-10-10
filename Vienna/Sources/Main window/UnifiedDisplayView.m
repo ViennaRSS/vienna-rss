@@ -334,7 +334,7 @@
 
                 [sender forceJavascript];
                 offsetHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.offsetHeight"];
-                [sender useUserPrefsForJavascriptAndPlugIns];
+                [sender useUserPrefsForJavascript];
                 fittingHeight = offsetHeight.doubleValue;
                 //get the rect of the current webview frame
                 NSRect webViewRect = sender.frame;

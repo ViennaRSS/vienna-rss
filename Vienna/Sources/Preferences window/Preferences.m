@@ -40,7 +40,6 @@ NSString * MA_FeedSourcesFolder_Name = @"Sources";
 // NSNotificationCenter string constants
 NSString * const kMA_Notify_MinimumFontSizeChange = @"MA_Notify_MinimumFontSizeChange";
 NSString * const kMA_Notify_UseJavaScriptChange = @"MA_Notify_UseJavaScriptChange";
-NSString * const kMA_Notify_UseWebPluginsChange = @"MA_Notify_UseWebPluginsChange";
 
 
 // The default preferences object.
@@ -185,7 +184,6 @@ static Preferences * _standardPreferences = nil;
 		showFilterBar = [self boolForKey:MAPref_ShowFilterBar];
 		useJavaScript = [self boolForKey:MAPref_UseJavaScript];
         useNewBrowser = [self boolForKey:MAPref_UseNewBrowser];
-        useWebPlugins = [self boolForKey:MAPref_UseWebPlugins];
 		showAppInStatusBar = [self boolForKey:MAPref_ShowAppInStatusBar];
 		folderFont = [NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_FolderFont]];
 		articleFont = [NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_ArticleListFont]];
@@ -270,7 +268,6 @@ static Preferences * _standardPreferences = nil;
 	defaultValues[MAPref_ShowFolderImages] = boolYes;
 	defaultValues[MAPref_UseJavaScript] = boolYes;
 	defaultValues[MAPref_UseNewBrowser] = boolNo;
-	defaultValues[MAPref_UseWebPlugins] = boolNo;
 	defaultValues[MAPref_OpenLinksInVienna] = boolYes;
 	defaultValues[MAPref_OpenLinksInBackground] = boolYes;
 	defaultValues[MAPref_ShowAppInStatusBar] = boolNo;
@@ -498,29 +495,6 @@ static Preferences * _standardPreferences = nil;
 {
     [self setBool:flag forKey:MAPref_UseNewBrowser];
     useNewBrowser = flag;
-}
-
-
-/* useWebPlugins
- * Specifies whether or not to enable web plugins
- */
--(BOOL)useWebPlugins
-{
-    return useWebPlugins;
-}
-
-/* setEnableJavaScript
- * Enable whether JavaScript is used.
- */
--(void)setUseWebPlugins:(BOOL)flag
-{
-    if (useWebPlugins != flag)
-    {
-        useWebPlugins = flag;
-        [self setBool:flag forKey:MAPref_UseWebPlugins];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kMA_Notify_UseWebPluginsChange
-                                                            object:nil];
-    }
 }
 
 -(NSUInteger)concurrentDownloads {

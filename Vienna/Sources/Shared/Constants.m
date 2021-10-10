@@ -53,7 +53,6 @@ NSString * MAPref_DownloadsList = @"DownloadsList";
 NSString * MAPref_ShowFolderImages = @"ShowFolderImages";
 NSString * MAPref_UseJavaScript = @"UseJavaScript";
 NSString * MAPref_UseNewBrowser = @"UseNewBrowser";
-NSString * MAPref_UseWebPlugins = @"UseWebPlugins";
 NSString * MAPref_CachedArticleGUID = @"CachedArticleGUID";
 NSString * MAPref_ArticleSortDescriptors = @"ArticleSortDescriptors";
 NSString * MAPref_FilterMode = @"FilterMode";

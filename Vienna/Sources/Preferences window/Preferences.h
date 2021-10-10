@@ -45,7 +45,6 @@ NS_ASSUME_NONNULL_BEGIN
 	BOOL showFolderImages;
 	BOOL useJavaScript;
     BOOL useNewBrowser;
-    BOOL useWebPlugins;
 	BOOL showAppInStatusBar;
 	BOOL showStatusBar;
 	BOOL showFilterBar;
@@ -73,7 +72,6 @@ NS_ASSUME_NONNULL_BEGIN
 // String constants for NSNotificationCenter
 extern NSString * const kMA_Notify_MinimumFontSizeChange;
 extern NSString * const kMA_Notify_UseJavaScriptChange;
-extern NSString * const kMA_Notify_UseWebPluginsChange;
 
 @property (class, readonly) Preferences *standardPreferences;
 
@@ -145,9 +143,6 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 
 // JavaScript settings
 @property (nonatomic) BOOL useJavaScript;
-
-// Web Plugins settings
-@property (nonatomic) BOOL useWebPlugins;
 
 // Refresh frequency
 @property (nonatomic) NSInteger refreshFrequency;

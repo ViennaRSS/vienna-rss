@@ -458,7 +458,7 @@
 {
     [self willChangeValueForKey:@"loading"];
     // stop Javascript and plugings
-    [self.webPane abortJavascriptAndPlugIns];
+    [self.webPane abortJavascript];
     [self.webPane setUIDelegate:nil];
     [self.webPane stopLoading:self];
     [self didChangeValueForKey:@"loading"];

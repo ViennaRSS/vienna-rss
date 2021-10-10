@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="VBW-RM-gbf">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="VBW-RM-gbf">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -241,11 +241,11 @@
             <objects>
                 <viewController id="NjZ-bv-EoA" customClass="AdvancedPreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="8J7-Mc-HHy">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="324"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="302"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vvG-VT-CVp">
-                                <rect key="frame" x="18" y="272" width="414" height="32"/>
+                                <rect key="frame" x="18" y="250" width="414" height="32"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="4Qn-qF-kSp">
                                     <font key="font" metaFont="system"/>
                                     <string key="title">The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.</string>
@@ -254,7 +254,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HJu-JH-e1a">
-                                <rect key="frame" x="18" y="235" width="412" height="18"/>
+                                <rect key="frame" x="18" y="213" width="412" height="18"/>
                                 <buttonCell key="cell" type="check" title="Preview new browser" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="DDY-fS-V5T">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -264,23 +264,13 @@
                                 </buttonCell>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1u1-uu-U0M">
-                                <rect key="frame" x="18" y="165" width="412" height="18"/>
+                                <rect key="frame" x="18" y="143" width="412" height="18"/>
                                 <buttonCell key="cell" type="check" title="Enable JavaScript in the internal browser" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="MnV-8D-Qyq">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="changeUseJavaScript:" target="NjZ-bv-EoA" id="UiT-ZF-E7L"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fnP-kR-L8c">
-                                <rect key="frame" x="18" y="143" width="412" height="18"/>
-                                <buttonCell key="cell" type="check" title="Enable Internet plug-ins in the internal browser" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="9bX-Lt-AWz">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="changeUseWebPlugins:" target="NjZ-bv-EoA" id="izU-ob-bND"/>
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="VMW-g6-f00">
@@ -402,7 +392,7 @@
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BGf-AD-UAd">
-                                <rect key="frame" x="18" y="202" width="414" height="26"/>
+                                <rect key="frame" x="18" y="180" width="414" height="26"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="Fv8-Xx-YR0">
                                     <font key="font" metaFont="system" size="10"/>
                                     <string key="title">Vienna has a new browser built on top of WebKit. It is faster and more secure.
@@ -424,7 +414,6 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                             <constraint firstItem="vvG-VT-CVp" firstAttribute="leading" secondItem="8J7-Mc-HHy" secondAttribute="leading" constant="20" symbolic="YES" id="NlN-UY-n3b"/>
                             <constraint firstAttribute="trailing" secondItem="1u1-uu-U0M" secondAttribute="trailing" constant="20" symbolic="YES" id="PBF-4N-WSt"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8eb-2O-wjd" secondAttribute="trailing" constant="20" symbolic="YES" id="Rtg-SH-5JK"/>
-                            <constraint firstAttribute="trailing" secondItem="fnP-kR-L8c" secondAttribute="trailing" constant="20" symbolic="YES" id="TO7-9Y-6pF"/>
                             <constraint firstItem="HJu-JH-e1a" firstAttribute="leading" secondItem="8J7-Mc-HHy" secondAttribute="leading" constant="20" symbolic="YES" id="U52-Om-beq"/>
                             <constraint firstItem="pfv-Xq-7Aq" firstAttribute="top" secondItem="37K-gU-v9y" secondAttribute="bottom" constant="8" symbolic="YES" id="Wya-pc-Cgb"/>
                             <constraint firstItem="37K-gU-v9y" firstAttribute="leading" secondItem="GDE-ah-5QX" secondAttribute="leading" id="c3X-0q-2dl"/>
@@ -432,24 +421,21 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                             <constraint firstAttribute="trailing" secondItem="pfv-Xq-7Aq" secondAttribute="trailing" constant="20" symbolic="YES" id="eAB-Mh-vTh"/>
                             <constraint firstAttribute="bottom" secondItem="pfv-Xq-7Aq" secondAttribute="bottom" constant="20" symbolic="YES" id="fQl-Qa-iAH"/>
                             <constraint firstItem="37K-gU-v9y" firstAttribute="trailing" secondItem="GDE-ah-5QX" secondAttribute="trailing" id="ggE-Ik-kJd"/>
-                            <constraint firstItem="fnP-kR-L8c" firstAttribute="top" secondItem="1u1-uu-U0M" secondAttribute="bottom" constant="6" symbolic="YES" id="ght-wc-p0P"/>
+                            <constraint firstItem="8eb-2O-wjd" firstAttribute="top" secondItem="1u1-uu-U0M" secondAttribute="bottom" constant="20" symbolic="YES" id="ght-wc-p0P"/>
                             <constraint firstAttribute="trailing" secondItem="BGf-AD-UAd" secondAttribute="trailing" constant="20" symbolic="YES" id="khx-C3-8Dc"/>
                             <constraint firstAttribute="trailing" secondItem="GDE-ah-5QX" secondAttribute="trailing" constant="20" symbolic="YES" id="lT0-TT-aR5"/>
                             <constraint firstItem="37K-gU-v9y" firstAttribute="top" secondItem="GDE-ah-5QX" secondAttribute="bottom" constant="8" symbolic="YES" id="mt1-a8-Zmf"/>
                             <constraint firstItem="1u1-uu-U0M" firstAttribute="leading" secondItem="8J7-Mc-HHy" secondAttribute="leading" constant="20" symbolic="YES" id="p1Z-8J-PDc"/>
                             <constraint firstItem="1u1-uu-U0M" firstAttribute="top" secondItem="BGf-AD-UAd" secondAttribute="bottom" constant="20" id="qaV-wu-Khx"/>
                             <constraint firstItem="BGf-AD-UAd" firstAttribute="top" secondItem="HJu-JH-e1a" secondAttribute="bottom" constant="8" symbolic="YES" id="tNk-IT-HgU"/>
-                            <constraint firstItem="fnP-kR-L8c" firstAttribute="leading" secondItem="8J7-Mc-HHy" secondAttribute="leading" constant="20" symbolic="YES" id="v8T-6Y-For"/>
                             <constraint firstAttribute="trailing" secondItem="vvG-VT-CVp" secondAttribute="trailing" constant="20" symbolic="YES" id="vtd-DY-6PJ"/>
                             <constraint firstItem="VMW-g6-f00" firstAttribute="baseline" secondItem="8eb-2O-wjd" secondAttribute="baseline" id="w5o-QA-RVB"/>
-                            <constraint firstItem="8eb-2O-wjd" firstAttribute="top" secondItem="fnP-kR-L8c" secondAttribute="bottom" constant="20" id="xXz-wQ-hax"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="concurrentDownloads" destination="8eb-2O-wjd" id="pIP-FA-KAN"/>
                         <outlet property="previewNewBrowserButton" destination="HJu-JH-e1a" id="yCg-55-dum"/>
                         <outlet property="useJavaScriptButton" destination="1u1-uu-U0M" id="D4j-kD-89C"/>
-                        <outlet property="useWebPluginsButton" destination="fnP-kR-L8c" id="oI5-zU-G58"/>
                     </connections>
                 </viewController>
                 <customObject id="kO8-qM-JFc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
