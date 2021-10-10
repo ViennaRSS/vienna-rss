@@ -1,8 +1,5 @@
 ![Vienna](https://vienna-rss.sourceforge.io/img/vienna_logo.png)
 
-![Build status](https://github.com/ViennaRSS/vienna-rss/workflows/Vienna/badge.svg)
-[![Localization status](https://d322cqt584bo4o.cloudfront.net/vienna-rss/localized.svg)](https://crowdin.com/project/vienna-rss "Crowdin")
-
 [Vienna](https://www.vienna-rss.com) is an RSS/Atom reader for macOS.
 
 Vienna can connect directly to the websites you want to track.
@@ -55,6 +52,7 @@ Want to contribute? Great! There are many ways you can, even if you aren't a dev
 Please check [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ### Localizing ###
+[![Localization status](https://badges.crowdin.net/vienna-rss/localized.svg)](https://crowdin.com/project/vienna-rss "Crowdin")
 
 We need help keeping Vienna translations up to date into different languages. You can contribute localizations at [Crowdin](https://crowdin.com/project/vienna-rss). Registration is required, but the account is free. If you want to contribute for a language that is not yet listed, then contact us. Do not localize the project's \*.strings files directly. Localizable \*.plist files have to be localized directly.
 
