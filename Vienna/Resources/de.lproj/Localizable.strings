@@ -17,16 +17,19 @@
 "%@ received" = "%@ empfangen";
 
 /* No comment provided by engineer. */
+"%@ unread" = "%@ ungelesen";
+
+/* No comment provided by engineer. */
 "%d new articles retrieved" = "%d neue Artikel empfangen";
 
 /* Notification body */
-"%d new unread articles retrieved" = "%d neue ungelesene Artikel empfangen.";
+"%d new unread articles retrieved" = "%d neue ungelesene Artikel empfangen";
 
 /* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d Abonnements erfolgreich exportiert.";
+"%d subscriptions successfully exported" = "%d Abonnements erfolgreich exportiert";
 
 /* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d Abonnements erfolgreich importiert.";
+"%d subscriptions successfully imported" = "%d Abonnements erfolgreich importiert";
 
 /* No comment provided by engineer. */
 "%d unread articles" = "%d ungelesene Artikel";
@@ -44,7 +47,7 @@
 "A folder with that name already exists" = "Ein Ordner mit dem Namen existiert bereits";
 
 /* No comment provided by engineer. */
-"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Ein neues Plugin wurde installiert. Du kannst es im Menü aufrufen und zur Werkzeugleiste hinzugfügen.";
+"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Ein neues Plug-In wurde installiert. Du kannst es im Menü aufrufen und zur Werkzeugleiste hinzufügen.";
 
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Eine neue Vienna0Datenbank konnte in '%@' nicht erstellt werden, weil der Ordner möglicherweise auf einem Netzwerklaufwerk liegt. Diese Version von Vienna kann nicht mit derartigen Datenbanken genutzt werden. Bitte wähle einen anderen Ordner auf deinem Mac aus.";
@@ -65,10 +68,10 @@
 "After a Week" = "Nach einer Woche";
 
 /* No comment provided by engineer. */
-"An error occurred when this feed was last refreshed" = "Bei der letzten Aktualisierung dieses Abonnements ist ein Fehler aufgetreten.";
+"An error occurred when this feed was last refreshed" = "Bei der letzten Aktualisierung dieses Abonnements ist ein Fehler aufgetreten";
 
 /* No comment provided by engineer. */
-"AppleScript Error in '%@' script" = "AppleScript Fehler in Script '%@'";
+"AppleScript Error in '%@' script" = "AppleScript-Fehler in Skript '%@'";
 
 /* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Möchtest du alle %d ausgewählten Ordner wirklich löschen? Dieser Befehl kann nicht rückgängig gemacht werden.";
@@ -108,7 +111,7 @@
 "Cannot create export output file" = "Konnte Exportdatei nicht erstellen";
 
 /* No comment provided by engineer. */
-"Cannot create folder" = "Der Ordner konnte nicht erstellt werden.";
+"Cannot create folder" = "Der Ordner konnte nicht erstellt werden";
 
 /* No comment provided by engineer. */
 "Cannot create the Vienna database" = "Vienna konnte die Datenbank nicht erstellen";
@@ -172,13 +175,13 @@
 "Delete subscription" = "Lösche Abonnement";
 
 /* Title of a menu item */
-"Delete…" = "Löschen…";
+"Delete…" = "Löschen …";
 
 /* Data field name visible in smart folder definition */
 "Deleted" = "Gelöscht";
 
 /* No comment provided by engineer. */
-"Deleting folder \"%@\"…" = "Lösche Ordner '%@'…";
+"Deleting folder \"%@\"…" = "Lösche Ordner '%@' …";
 
 /* No comment provided by engineer. */
 "Descending" = "Absteigend";
@@ -205,7 +208,7 @@
 "Download failed" = "Download fehlgeschlagen";
 
 /* Title of a menu item */
-"Edit…" = "Bearbeiten…";
+"Edit…" = "Bearbeiten …";
 
 /* Title of a button on an alert */
 "Empty" = "Entleeren";
@@ -223,7 +226,7 @@
 "Error" = "Fehler";
 
 /* No comment provided by engineer. */
-"Error loading script '%@'" = "Fehler beim Laden des Scripts: %@";
+"Error loading script '%@'" = "Fehler beim Laden des Skripts: %@";
 
 /* No comment provided by engineer. */
 "Error parsing XML data in feed" = "Fehler beim Parsen der XML-Daten des Feeds";
@@ -247,13 +250,19 @@
 "Feed URL updated to %@" = "Die Feed URL wurd auf %@ aktualisiert";
 
 /* No comment provided by engineer. */
-"Fetching Open Reader Subscriptions…" = "Rufe Open Reader Abonnements ab…";
+"Fetching Open Reader Subscriptions…" = "Rufe Open Reader Abonnements ab …";
 
 /* Notification body */
 "File %@ downloaded" = "Datei %@ heruntergeladen";
 
 /* Notification body */
 "File %@ failed to download" = "Datei %@ nicht heruntergeladen";
+
+/* No comment provided by engineer. */
+"filter by: %@" = "filtern nach: %@";
+
+/* No comment provided by engineer. */
+"Filter by: %@" = "Filtern nach: %@";
 
 /* No comment provided by engineer. */
 "Filter in %@" = "Suche in %@";
@@ -277,7 +286,7 @@
 "Force Refresh Selected Subscriptions From Open Reader" = "Erzwinge das Aktualisieren der ausgewählten Abonnements von Open Reader";
 
 /* No comment provided by engineer. */
-"Forcing Refresh subscriptions…" = "Feedaktualisierung erzwingen…";
+"Forcing Refresh subscriptions…" = "Feedaktualisierung erzwingen …";
 
 /* Title of a menu item */
 "Get Info" = "Information";
@@ -292,7 +301,7 @@
 "Headlines" = "Überschrift";
 
 /* No comment provided by engineer. */
-"Hide Filter Bar" = "Filter-Leiste ausblenden";
+"Hide Filter Bar" = "Filterleiste ausblenden";
 
 /* Title of a menu item */
 "Hide Status Bar" = "Statusleiste ausblenden";
@@ -358,10 +367,10 @@
 "Link" = "Link";
 
 /* No comment provided by engineer. */
-"Loading" = "Lade ...";
+"Loading" = "Lade …";
 
 /* Title of a button on an alert */
-"Locate…" = "Auswählen …";
+"Locate…" = "Auswählen …";
 
 /* No comment provided by engineer. */
 "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "Überprüfe ob Benutzername und Passwort für den Zugang zum Open Reader Server in den Einstellungen von Vienna richtig gespeichert sind. Überprüfe auch ob Zugang zum Internet besteht.";
@@ -391,7 +400,7 @@
 "Marked Articles" = "Markierte Artikel";
 
 /* No comment provided by engineer. */
-"More Scripts…" = "Mehr Skripte…";
+"More Scripts…" = "Mehr Skripts …";
 
 /* No comment provided by engineer. */
 "Move Folders" = "Bewege Ordner";
@@ -460,7 +469,7 @@
 "Open Reader Authentication Failed" = "Open Reader Authentifizierungsfehler";
 
 /* No comment provided by engineer. */
-"Open Scripts Folder" = "Öffne Skriptordner";
+"Open Scripts Folder" = "Skriptordner öffnen";
 
 /* Title of a menu item */
 "Open Subscription Home Page" = "Öffne Webseite des Abonnements";
@@ -481,7 +490,7 @@
 "Other" = "Auswählen";
 
 /* No comment provided by engineer. */
-"Plugin installed" = "Plugin installiert";
+"Plugin installed" = "Plug-In installiert";
 
 /* No comment provided by engineer. */
 "Queue" = "Warteschlange";
@@ -518,16 +527,16 @@
 "Refresh the current page" = "Seite neu laden";
 
 /* No comment provided by engineer. */
-"Refreshing folder images…" = "Aktualisiere Ordnericons…";
+"Refreshing folder images…" = "Aktualisiere Ordnericons …";
 
 /* No comment provided by engineer. */
-"Refreshing subscriptions…" = "Abonnements aktualisieren…";
+"Refreshing subscriptions…" = "Abonnements aktualisieren …";
 
 /* Title of a popup menu item */
 "Remove From List" = "Aus Liste entfernen";
 
 /* Title of a menu item */
-"Rename…" = "Umbenennen…";
+"Rename…" = "Umbenennen …";
 
 /* Title of a menu item */
 "Restore Article" = "Artikel wiederherstellen";
@@ -570,8 +579,11 @@
 /* No comment provided by engineer. */
 "Search Results" = "Suchergebnisse";
 
+/* Label of a button on an open panel */
+"Select" = "Auswählen";
+
 /* Title of a popup menu item */
-"Select…" = "Auswählen…";
+"Select…" = "Auswählen …";
 
 /* A formatted URL string with the mailto: URL scheme. */
 "Send email to %@" = "E-Mail an %@ senden";
@@ -586,19 +598,19 @@
 "Send Links" = "Links senden";
 
 /* No comment provided by engineer. */
-"Show Filter Bar" = "Filter-Leiste anzeigen";
+"Show Filter Bar" = "Filterleiste einblenden";
 
 /* Title of a popup menu item */
 "Show in Finder" = "Im Finder anzeigen";
 
 /* Title of a menu item */
-"Show Main Window…" = "Hauptfenster anzeigen …";
+"Show Main Window…" = "Hauptfenster anzeigen …";
 
 /* Title of a menu item */
-"Show Status Bar" = "Statusleiste anzeigen";
+"Show Status Bar" = "Statusleiste einblenden";
 
 /* Title of a menu item */
-"Show Toolbar" = "Symbolleiste anzeigen";
+"Show Toolbar" = "Symbolleiste einblenden";
 
 /* No comment provided by engineer. */
 "Sorry but Vienna was unable to open the database" = "Vienna war es nicht möglich die Datenbank zu öffnen";
@@ -640,13 +652,16 @@
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Der Stil '%@' wurde im Stilordner installiert und zum Stilmenü hinzugefügt.";
 
 /* Title of an alert */
-"The style %@ appears to be missing or corrupted" = "Der Stil %@ scheint defekt zu sein.";
+"The style %@ appears to be missing or corrupted" = "Der Stil %@ scheint defekt zu sein";
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "Der Zugriff auf den Feed %@ benötigt das Einloggen am Server.";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Dieser Artikel enthält einen Anhang.";
+
+/* Message text of a modal alert */
+"This folder cannot be chosen because you don’t have permission." = "Dieser Ordner kann nicht ausgewählt werden, da du nicht über die erforderlichen Zugriffsrechte verfügst.";
 
 /* No comment provided by engineer. */
 "This operation cannot be undone." = "Dieser Befehl kann nicht wieder rückgängig gemacht werden.";

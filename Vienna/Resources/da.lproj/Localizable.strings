@@ -14,6 +14,9 @@
 "%@ received" = "%@ modtaget";
 
 /* No comment provided by engineer. */
+"%@ unread" = "%@ ulæste";
+
+/* No comment provided by engineer. */
 "%d new articles retrieved" = "%d nye artikler hentet";
 
 /* Notification body */
@@ -251,6 +254,12 @@
 
 /* Notification body */
 "File %@ failed to download" = "Arkivet %@ kunne ikke hentes";
+
+/* No comment provided by engineer. */
+"filter by: %@" = "filtrer ved: %@";
+
+/* No comment provided by engineer. */
+"Filter by: %@" = "Filtrer ved: %@";
 
 /* No comment provided by engineer. */
 "Filter in %@" = "Søg i %@";
@@ -554,6 +563,9 @@
 /* No comment provided by engineer. */
 "Search Results" = "Søg i resultater";
 
+/* Label of a button on an open panel */
+"Select" = "Vælg";
+
 /* Title of a popup menu item */
 "Select…" = "Vælg…";
 
@@ -631,6 +643,9 @@
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Denne artikel har en vedlagt fil.";
+
+/* Message text of a modal alert */
+"This folder cannot be chosen because you don’t have permission." = "Denne mappe kan ikke vælges eftersom du ikke har tilladelser til den.";
 
 /* No comment provided by engineer. */
 "This operation cannot be undone." = "Denne handling kan ikke fortrydes.";

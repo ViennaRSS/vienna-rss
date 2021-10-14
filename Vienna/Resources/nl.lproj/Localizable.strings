@@ -17,6 +17,9 @@
 "%@ received" = "%@ ontvangen";
 
 /* No comment provided by engineer. */
+"%@ unread" = "%@ ongelezen";
+
+/* No comment provided by engineer. */
 "%d new articles retrieved" = "%d nieuwe artikelen opgehaald";
 
 /* Notification body */
@@ -36,6 +39,9 @@
 
 /* No comment provided by engineer. */
 "%u unread" = "%u ongelezen";
+
+/* Title in popup submenu */
+"<None>" = "<Geen>";
 
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "Er bestaat al een map met deze naam";
@@ -63,6 +69,9 @@
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "De laatste keer dat deze feed is bijgewerkt, is er een fout opgetreden";
+
+/* No comment provided by engineer. */
+"AppleScript Error in '%@' script" = "AppleScript-fout in script '%@'";
 
 /* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Weet je zeker dat je deze %d groepen wilt verwijderen? Je kunt dit niet ongedaan maken.";
@@ -211,7 +220,19 @@
 "Error" = "Fout";
 
 /* No comment provided by engineer. */
+"Error loading script '%@'" = "Fout bij het laden van het script '%@'";
+
+/* No comment provided by engineer. */
 "Error parsing XML data in feed" = "Fout tijdens het verwerken van de XML van deze feed";
+
+/* No comment provided by engineer. */
+"Error retrieving RSS feed:" = "Fout bij het ophalen van RSS-feed:";
+
+/* No comment provided by engineer. */
+"Error retrieving RSS Icon:" = "Fout bij het ophalen van RSS-symbool:";
+
+/* No comment provided by engineer. */
+"Error: Feed not found!" = "Fout: feed niet gevonden!";
 
 /* No comment provided by engineer. */
 "Export Completed" = "Exporteren voltooid";
@@ -227,6 +248,12 @@
 
 /* Notification body */
 "File %@ failed to download" = "Niet gelukt bestand %@ te downloaden";
+
+/* No comment provided by engineer. */
+"filter by: %@" = "filter op: %@";
+
+/* No comment provided by engineer. */
+"Filter by: %@" = "Filter op: %@";
 
 /* No comment provided by engineer. */
 "Filter in %@" = "Zoek in %@";
@@ -285,6 +312,9 @@
 /* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "Importeer abonnementen uit OPML bestand?";
 
+/* test for a value */
+"is" = "is";
+
 /* test for a date */
 "is after" = "ligt na";
 
@@ -317,6 +347,9 @@
 
 /* Data field name visible in menu/article list */
 "Link" = "Link";
+
+/* No comment provided by engineer. */
+"Loading" = "Laden";
 
 /* Title of a button on an alert */
 "Locate…" = "Zoek op…";
@@ -367,10 +400,16 @@
 "No" = "Nee";
 
 /* No comment provided by engineer. */
+"No articles in feed" = "Geen artikelen in deze feed";
+
+/* No comment provided by engineer. */
 "No new articles available" = "Geen nieuwe artikelen beschikbaar";
 
 /* test for a folder (not operational as of Vienna 3.2) */
 "not under" = "niet onder";
+
+/* Title of a button on an alert */
+"OK" = "OK";
 
 /* No comment provided by engineer. */
 "One or more downloads are in progress" = "Eén of meer downloads zijn nog bezig";
@@ -488,13 +527,19 @@
 "Retrieving folder image" = "Map-icoon ophalen";
 
 /* No comment provided by engineer. */
+"Retrieving folder image for Open Reader Feed" = "Mapsymbool voor Open Reader-feed ophalen";
+
+/* No comment provided by engineer. */
 "Return to the previous page" = "Ga terug naar de vorige pagina";
+
+/* No comment provided by engineer. */
+"RSS Icon not found!" = "RSS-symbool niet gevonden!";
 
 /* A formatted URL string with the javascript: URL scheme. */
 "Run script “%@”" = "Voer script '%@' uit";
 
 /* Placeholder title of a search field */
-"Search all articles" = "Zoek naar artikels";
+"Search all articles" = "Zoek naar artikelen";
 
 /* No comment provided by engineer. */
 "Search all articles or the current web page" = "Doorzoek alle artikelen of de huidige webpagina";
@@ -509,6 +554,9 @@
 
 /* No comment provided by engineer. */
 "Search Results" = "Zoekresultaten";
+
+/* Label of a button on an open panel */
+"Select" = "Selecteer";
 
 /* Title of a popup menu item */
 "Select…" = "Selecteer…";
@@ -588,6 +636,9 @@
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Dit artikel bevat een bijlage.";
 
+/* Message text of a modal alert */
+"This folder cannot be chosen because you don’t have permission." = "Deze map kan niet worden gekozen, omdat je geen bevoegdheden hebt.";
+
 /* No comment provided by engineer. */
 "This operation cannot be undone." = "Deze actie kan niet ongedaan worden gemaakt.";
 
@@ -610,7 +661,7 @@
 "Unsubscribe from Feed" = "Zeg abonnement op";
 
 /* No comment provided by engineer. */
-"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles." = "Wis Open Reader RSS feed";
+"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles." = "Het opzeggen van een Open Reader-abonnement verwijdert ook de gecachete artikelen.";
 
 /* Title of a button on an alert */
 "Upgrade Database" = "Werk databank bij";

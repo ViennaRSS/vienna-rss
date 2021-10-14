@@ -35,7 +35,7 @@
 "c4l-M5-qB1.title" = "Nach einem Tag";
 
 /* Class = "NSButtonCell"; title = "Select…"; ObjectID = "cbn-xq-UFr"; */
-"cbn-xq-UFr.title" = "Auswählen…";
+"cbn-xq-UFr.title" = "Auswählen …";
 
 /* Class = "NSButtonCell"; title = "Preview new browser"; ObjectID = "DDY-fS-V5T"; */
 "DDY-fS-V5T.title" = "Neuen Browser ausprobieren";
@@ -113,7 +113,7 @@
 "MnV-8D-Qyq.title" = "Aktiviere JavaScript im internen Browser";
 
 /* Class = "NSMenuItem"; title = "Other…"; ObjectID = "nSW-3T-Zoh"; */
-"nSW-3T-Zoh.title" = "Auswählen…";
+"nSW-3T-Zoh.title" = "Andere …";
 
 /* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "OD4-de-Vkx"; */
 "OD4-de-Vkx.title" = "Passwort:";
@@ -131,7 +131,7 @@
 "pLH-VU-z2d.title" = "Alle 2 Stunden";
 
 /* Class = "NSButtonCell"; title = "Select…"; ObjectID = "PmX-nw-uOn"; */
-"PmX-nw-uOn.title" = "Auswählen…";
+"PmX-nw-uOn.title" = "Auswählen …";
 
 /* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "qYb-Sf-cEF"; */
 "qYb-Sf-cEF.title" = "Alle 5 Minuten";

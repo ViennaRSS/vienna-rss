@@ -92,7 +92,7 @@
 "jfH-Hq-gRk.title" = "Springend toepassingssymbool";
 
 /* Class = "NSButtonCell"; title = "Never use font sizes smaller than"; ObjectID = "Jk6-0r-7Gs"; */
-"Jk6-0r-7Gs.title" = "Gebruik nooit lettergrootte kleiner dan:";
+"Jk6-0r-7Gs.title" = "Gebruik nooit lettergrootte kleiner dan";
 
 /* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "jkb-TT-wPC"; */
 "jkb-TT-wPC.title" = "Na \"Volgende ongelezen\"-commando";
@@ -146,7 +146,7 @@
 "u92-Bh-Wrz.title" = "Zoek naar bèta-updates";
 
 /* Class = "NSButtonCell"; title = "Sync with an Open Reader server"; ObjectID = "Uyd-GK-jtn"; */
-"Uyd-GK-jtn.title" = "Synchroniseer met een Open Reader server";
+"Uyd-GK-jtn.title" = "Synchroniseer met een Open Reader-server";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "V12-Ua-skO"; */
 "V12-Ua-skO.ibShadowedToolTip" = "Bezoek website";

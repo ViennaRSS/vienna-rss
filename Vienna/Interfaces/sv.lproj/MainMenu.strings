@@ -253,6 +253,12 @@
 /* Class = "NSMenuItem"; title = "Refresh Folder Images"; ObjectID = "1106"; */
 "1106.title" = "Ladda om mappbilder";
 
+/* Class = "NSMenuItem"; title = "Layout"; ObjectID = "1108"; */
+"1108.title" = "Layout";
+
+/* Class = "NSMenu"; title = "Layout"; ObjectID = "1109"; */
+"1109.title" = "Layout";
+
 /* Class = "NSMenuItem"; title = "Horizontal"; ObjectID = "1110"; */
 "1110.title" = "Rapport";
 
@@ -311,16 +317,16 @@
 "1216.title" = "Ladda ner bilaga";
 
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
-"1257.title" = "Anpassa verktygsrad…";
+"1257.title" = "Anpassa verktygsfältet…";
 
 /* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
-"1258.title" = "Dölj verktygsfält";
+"1258.title" = "Göm verktygsfältet";
 
 /* Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259"; */
 "1259.title" = "Göm statusfältet";
 
 /* Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "1325"; */
-"1325.title" = "Visa filtrera-fältet";
+"1325.title" = "Visa filterfältet";
 
 /* Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327"; */
 "1327.title" = "Sök i artiklar";
@@ -354,6 +360,9 @@
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "bd7-qY-ofB"; */
 "bd7-qY-ofB.title" = "Textersättning";
+
+/* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "BUc-Ki-OOg"; */
+"BUc-Ki-OOg.title" = "Oläst eller flaggat";
 
 /* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI"; */
 "CGp-H4-UaI.title" = "Senaste 48 timmarna";
@@ -391,6 +400,9 @@
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "JXn-SB-3t2"; */
 "JXn-SB-3t2.title" = "Tal";
 
+/* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "kCi-pf-mkc"; */
+"kCi-pf-mkc.title" = "Smarta citationstecken";
+
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "l8F-tb-7E0"; */
 "l8F-tb-7E0.title" = "Stavning och grammatik";
 
@@ -408,6 +420,12 @@
 
 /* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7"; */
 "rNG-xr-3x7.title" = "Olästa artiklar";
+
+/* Class = "NSMenuItem"; title = "Article List"; ObjectID = "Rs9-r3-soc"; */
+"Rs9-r3-soc.title" = "Artikellista";
+
+/* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk"; */
+"RtQ-eP-bfk.title" = "Smarta streck";
 
 /* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "t1E-6n-jtA"; */
 "t1E-6n-jtA.title" = "Alla artiklar";

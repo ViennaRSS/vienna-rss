@@ -17,6 +17,9 @@
 "%@ received" = "%@ recibidos";
 
 /* No comment provided by engineer. */
+"%@ unread" = "%@ no leídos";
+
+/* No comment provided by engineer. */
 "%d new articles retrieved" = "%d nuevos artículos recuperados";
 
 /* Notification body */
@@ -68,7 +71,7 @@
 "An error occurred when this feed was last refreshed" = "Ha ocurrido un error al actualizar esta fuente";
 
 /* No comment provided by engineer. */
-"AppleScript Error in '%@' script" = "Error de appleScript en script '%@'";
+"AppleScript Error in '%@' script" = "Error de AppleScript en script '%@'";
 
 /* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "¿Está seguro que desea eliminar todas las carpetas seleccionadas? Esta operación no se puede deshacer.";
@@ -254,6 +257,12 @@
 
 /* Notification body */
 "File %@ failed to download" = "Error al descargar archivo %@";
+
+/* No comment provided by engineer. */
+"filter by: %@" = "filtrar por: %@";
+
+/* No comment provided by engineer. */
+"Filter by: %@" = "Filtrar por: %@";
 
 /* No comment provided by engineer. */
 "Filter in %@" = "Buscar en %@";
@@ -445,6 +454,9 @@
 "Open Link in %@" = "Abrir enlace en %@";
 
 /* No comment provided by engineer. */
+"Open Link in Background" = "Abrir enlace en segundo plano";
+
+/* No comment provided by engineer. */
 "Open Link in New Tab" = "Abrir enlace en una nueva pestaña";
 
 /* No comment provided by engineer. */
@@ -467,6 +479,9 @@
 
 /* No comment provided by engineer. */
 "Open With" = "Abrir con";
+
+/* Name the application which should open a file */
+"Open with %@" = "Abrir con %@";
 
 /* No comment provided by engineer. */
 "Other" = "Otro";
@@ -541,6 +556,9 @@
 /* No comment provided by engineer. */
 "RSS Icon not found!" = "¡Icono de la suscripción no encontrado!";
 
+/* A formatted URL string with the javascript: URL scheme. */
+"Run script “%@”" = "Ejecutar script “%@”";
+
 /* Placeholder title of a search field */
 "Search all articles" = "Buscar todos los artículos";
 
@@ -558,8 +576,17 @@
 /* No comment provided by engineer. */
 "Search Results" = "Resultados de la búsqueda";
 
+/* Label of a button on an open panel */
+"Select" = "Seleccionar";
+
 /* Title of a popup menu item */
 "Select…" = "Seleccionar…";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@" = "Enviar mensaje de correo a %@";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@ with subject “%@”" = "Enviar correo electrónico a %1$@ con el asunto “%2$@”";
 
 /* No comment provided by engineer. */
 "Send Link" = "Enviar enlace";
@@ -688,5 +715,5 @@
 "You are already subscribed to that feed" = "Ya está suscrito a esta fuente";
 
 /* No comment provided by engineer. */
-"You cannot undo this action" = "Esta acción no se puede deshacer.";
+"You cannot undo this action" = "Esta acción no se puede deshacer";
 

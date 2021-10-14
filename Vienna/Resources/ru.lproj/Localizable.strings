@@ -4,6 +4,9 @@
 /* No comment provided by engineer. */
 "(Untitled Feed)" = "без имени";
 
+/* Appended to application name in Open With menu */
+"%@ (default)" = "%@ (по умолчанию)";
+
 /* No comment provided by engineer. */
 "%@ Info" = "%@ Сведения";
 
@@ -12,6 +15,9 @@
 
 /* Number of bytes received, e.g. 1 MB received */
 "%@ received" = "%@ получено";
+
+/* No comment provided by engineer. */
+"%@ unread" = "%@ непрочитано";
 
 /* No comment provided by engineer. */
 "%d new articles retrieved" = "Получено %d новых статей";
@@ -33,6 +39,9 @@
 
 /* No comment provided by engineer. */
 "%u unread" = "%u непрочитано";
+
+/* Title in popup submenu */
+"<None>" = "<Нет>";
 
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "Папка с данным именем уже существует";
@@ -250,6 +259,12 @@
 "File %@ failed to download" = "Ошибка при загрузке файла %@";
 
 /* No comment provided by engineer. */
+"filter by: %@" = "фильтровать по: %@";
+
+/* No comment provided by engineer. */
+"Filter by: %@" = "Фильтровать по: %@";
+
+/* No comment provided by engineer. */
 "Filter in %@" = "Поиск в %@";
 
 /* No comment provided by engineer. */
@@ -442,6 +457,9 @@
 "Open Link in %@" = "Открыть ссылку в %@";
 
 /* No comment provided by engineer. */
+"Open Link in Background" = "Открыть ссылку в фоне";
+
+/* No comment provided by engineer. */
 "Open Link in New Tab" = "Открыть ссылку в новой вкладке";
 
 /* No comment provided by engineer. */
@@ -461,6 +479,12 @@
 
 /* Title of a menu item */
 "Open Subscription Home Page in External Browser" = "Открыть страницу подписки во внешнем браузере";
+
+/* No comment provided by engineer. */
+"Open With" = "Открыть с помощью";
+
+/* Name the application which should open a file */
+"Open with %@" = "Открыть с помощью %@";
 
 /* No comment provided by engineer. */
 "Other" = "Иное";
@@ -535,6 +559,9 @@
 /* No comment provided by engineer. */
 "RSS Icon not found!" = "Иконка RSS не найдена!";
 
+/* A formatted URL string with the javascript: URL scheme. */
+"Run script “%@”" = "Запустить скрипт “%@”";
+
 /* Placeholder title of a search field */
 "Search all articles" = "Поиск в статьях";
 
@@ -552,8 +579,17 @@
 /* No comment provided by engineer. */
 "Search Results" = "Результаты поиска";
 
+/* Label of a button on an open panel */
+"Select" = "Выбрать";
+
 /* Title of a popup menu item */
 "Select…" = "Выбрать…";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@" = "Отправить письмо на %@";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@ with subject “%@”" = "Отправить письмо на %1$@ с заголовком \"%2$@\"";
 
 /* No comment provided by engineer. */
 "Send Link" = "Отправить ссылку";
@@ -623,6 +659,9 @@
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Эта статья содержит вложенный файл.";
+
+/* Message text of a modal alert */
+"This folder cannot be chosen because you don’t have permission." = "Эта папка не может быть выбрана, потому что у вас недостаточно прав.";
 
 /* No comment provided by engineer. */
 "This operation cannot be undone." = "Это действие не может быть отменено.";

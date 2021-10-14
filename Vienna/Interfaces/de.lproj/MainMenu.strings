@@ -1,5 +1,5 @@
 /* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg"; */
-"2S3-dG-ZPg.title" = "Mehr Stile…";
+"2S3-dG-ZPg.title" = "Mehr Stile …";
 
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "4ih-vj-fsk"; */
 "4ih-vj-fsk.title" = "Rechtschreib- und Grammatikprüfung";
@@ -29,10 +29,10 @@
 "58.title" = "Über Vienna";
 
 /* Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "77"; */
-"77.title" = "Papierformat…";
+"77.title" = "Papierformat …";
 
 /* Class = "NSMenuItem"; title = "Print…"; ObjectID = "78"; */
-"78.title" = "Drucken…";
+"78.title" = "Drucken …";
 
 /* Class = "NSMenu"; title = "File"; ObjectID = "81"; */
 "81.title" = "Ablage";
@@ -47,10 +47,10 @@
 "106.title" = "Hilfe";
 
 /* Class = "NSMenuItem"; title = "Vienna Help"; ObjectID = "111"; */
-"111.title" = "Vienna Hilfe";
+"111.title" = "Vienna-Hilfe";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
-"129.title" = "Einstellungen…";
+"129.title" = "Einstellungen …";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
 "130.title" = "Dienste";
@@ -71,7 +71,7 @@
 "150.title" = "Alle einblenden";
 
 /* Class = "NSMenuItem"; title = "Find…"; ObjectID = "154"; */
-"154.title" = "Suchen…";
+"154.title" = "Suchen …";
 
 /* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "155"; */
 "155.title" = "Auswahl anzeigen";
@@ -89,7 +89,7 @@
 "160.title" = "Ausschneiden";
 
 /* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "161"; */
-"161.title" = "Auswahl suchen";
+"161.title" = "Auswahl für Suche übernehmen";
 
 /* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "162"; */
 "162.title" = "Weitersuchen (rückwärts)";
@@ -122,10 +122,10 @@
 "197.title" = "Zoomen";
 
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "235"; */
-"235.title" = "Ansicht";
+"235.title" = "Darstellung";
 
 /* Class = "NSMenu"; title = "View"; ObjectID = "237"; */
-"237.title" = "Ansicht";
+"237.title" = "Darstellung";
 
 /* Class = "NSMenu"; title = "Article"; ObjectID = "300"; */
 "300.title" = "Artikel";
@@ -161,19 +161,19 @@
 "443.title" = "Spalten";
 
 /* Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "574"; */
-"574.title" = "Neuer intelligenter Ordner…";
+"574.title" = "Neuer intelligenter Ordner …";
 
 /* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "604"; */
 "604.title" = "Ausgewähltes Abonnement aktualisieren";
 
 /* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "690"; */
-"690.title" = "Neues Abonnement…";
+"690.title" = "Neues Abonnement …";
 
 /* Class = "NSMenuItem"; title = "Import Subscriptions…"; ObjectID = "780"; */
-"780.title" = "Abonnements importieren…";
+"780.title" = "Abonnements importieren …";
 
 /* Class = "NSMenuItem"; title = "Export Subscriptions…"; ObjectID = "781"; */
-"781.title" = "Abonnements exportieren…";
+"781.title" = "Abonnements exportieren …";
 
 /* Class = "NSMenuItem"; title = "Mark Unread"; ObjectID = "789"; */
 "789.title" = "Als ungelesen markieren";
@@ -182,7 +182,7 @@
 "790.title" = "Als markiert markieren";
 
 /* Class = "NSMenuItem"; title = "New Group Folder…"; ObjectID = "806"; */
-"806.title" = "Neuer Ordner…";
+"806.title" = "Neuer Ordner …";
 
 /* Class = "NSMenuItem"; title = "Style"; ObjectID = "826"; */
 "826.title" = "Stile";
@@ -245,7 +245,7 @@
 "1085.title" = "Schrift kleiner";
 
 /* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
-"1101.title" = "Web-Adresse öffnen…";
+"1101.title" = "Webadresse öffnen …";
 
 /* Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "1104"; */
 "1104.title" = "Auf Software-Aktualisierung prüfen";
@@ -266,10 +266,10 @@
 "1116.title" = "Vertikal";
 
 /* Class = "NSMenuItem"; title = "Filter By"; ObjectID = "1117"; */
-"1117.title" = "Filtern Nach";
+"1117.title" = "Filtern nach";
 
 /* Class = "NSMenu"; title = "Filter By"; ObjectID = "1118"; */
-"1118.title" = "Filtern Nach";
+"1118.title" = "Filtern nach";
 
 /* Class = "NSMenuItem"; title = "Keyboard Shortcuts"; ObjectID = "1146"; */
 "1146.title" = "Tastaturbefehle";
@@ -284,13 +284,13 @@
 "1178.title" = "Ordner";
 
 /* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "1180"; */
-"1180.title" = "Bearbeiten…";
+"1180.title" = "Bearbeiten …";
 
 /* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "1181"; */
-"1181.title" = "Umbenennen…";
+"1181.title" = "Umbenennen …";
 
 /* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "1184"; */
-"1184.title" = "Löschen…";
+"1184.title" = "Löschen …";
 
 /* Class = "NSMenuItem"; title = "Skip Folder"; ObjectID = "1186"; */
 "1186.title" = "Ordner überspringen";
@@ -317,7 +317,7 @@
 "1216.title" = "Anhang herunterladen";
 
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
-"1257.title" = "Symbolleiste anpassen …";
+"1257.title" = "Symbolleiste anpassen …";
 
 /* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
 "1258.title" = "Symbolleiste ausblenden";
@@ -326,16 +326,16 @@
 "1259.title" = "Statusleiste ausblenden";
 
 /* Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "1325"; */
-"1325.title" = "Filter-Leiste anzeigen";
+"1325.title" = "Filterleiste einblenden";
 
 /* Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327"; */
 "1327.title" = "Artikel durchsuchen";
 
 /* Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336"; */
-"1336.title" = "Sortiermodus…";
+"1336.title" = "Sortiermodus";
 
 /* Class = "NSMenu"; title = "Order By"; ObjectID = "1337"; */
-"1337.title" = "Sortiermodus…";
+"1337.title" = "Sortiermodus";
 
 /* Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338"; */
 "1338.title" = "Manuell";
@@ -347,7 +347,7 @@
 "1408.title" = "Abonnement entfernen";
 
 /* Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409"; */
-"1409.title" = "Information…";
+"1409.title" = "Informationen";
 
 /* Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413"; */
 "1413.title" = "Aktuellen Style zur Artikel-Anzeige verwenden";
