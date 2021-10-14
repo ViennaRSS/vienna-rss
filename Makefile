@@ -12,15 +12,17 @@ release:
 	xcodebuild -project $(PROJECT) -scheme Deployment
 
 development:
-	xcodebuild -project $(PROJECT) -scheme "Vienna" -configuration Development
+	xcodebuild -project $(PROJECT) -scheme Vienna -configuration Development
 
 clean:
-	xcodebuild -project $(PROJECT) -scheme "Vienna" -configuration Development clean
-	xcodebuild -project $(PROJECT) -scheme "Vienna" -configuration Deployment clean
+	xcodebuild -project $(PROJECT) -scheme Vienna -configuration Development clean
+	xcodebuild -project $(PROJECT) -scheme Vienna -configuration Deployment clean
 	rm -fr Build
 	rm -fr DerivedData
 
 localize:
 	for locale in $(LOCALES); do \
-		xcodebuild -importLocalizations -project $(PROJECT) -localizationPath "Localizations/$${locale}.xliff"; \
+		xcodebuild -importLocalizations -project $(PROJECT) \
+		-localizationPath Localizations/$${locale}.xliff \
+		-disableAutomaticPackageResolution; \
 	done
