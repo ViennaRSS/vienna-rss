@@ -19,16 +19,12 @@
 
 @import Foundation;
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface WKWebView (Private)
 
-@property (nonatomic, setter=_setTopContentInset:) CGFloat _topContentInset;
-@property (nonatomic, setter=_setAutomaticallyAdjustsContentInsets:) BOOL _automaticallyAdjustsContentInsets;
+@property (setter=_setTopContentInset:, nonatomic) CGFloat _topContentInset;
+@property (setter=_setAutomaticallyAdjustsContentInsets:, nonatomic) BOOL _automaticallyAdjustsContentInsets;
 
 @property (readonly, nonatomic) BOOL _supportsTextZoom;
 @property (setter=_setTextZoomFactor:, nonatomic) double _textZoomFactor;
 
 @end
-
-NS_ASSUME_NONNULL_END

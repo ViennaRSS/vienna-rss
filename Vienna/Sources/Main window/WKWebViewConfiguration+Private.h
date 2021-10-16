@@ -19,12 +19,8 @@
 
 @import Foundation;
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface WKWebViewConfiguration (Private)
 
 @property (setter=_setAllowsJavaScriptMarkup:, nonatomic) BOOL _allowsJavaScriptMarkup;
 
 @end
-
-NS_ASSUME_NONNULL_END
