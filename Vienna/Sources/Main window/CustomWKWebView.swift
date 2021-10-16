@@ -53,10 +53,15 @@ class CustomWKWebView: WKWebView {
         // preferences
         let prefs = configuration.preferences
         prefs.javaScriptCanOpenWindowsAutomatically = true
-        prefs._fullScreenEnabled = true
+
+        if prefs.responds(to: #selector(setter: WKPreferences._fullScreenEnabled)) {
+            prefs._fullScreenEnabled = true
+        }
 
         #if DEBUG
-        prefs._developerExtrasEnabled = true
+        if prefs.responds(to: #selector(setter: WKPreferences._developerExtrasEnabled)) {
+            prefs._developerExtrasEnabled = true
+        }
         #endif
 
         useJavaScriptObservation = Preferences.standard.observe(\.useJavaScript, options: [.initial, .new]) { _, change  in
@@ -65,8 +70,8 @@ class CustomWKWebView: WKWebView {
             }
             if #available(macOS 11, *) {
                 configuration.defaultWebpagePreferences.allowsContentJavaScript = newValue
-            } else {
-                 configuration._allowsJavaScriptMarkup = newValue
+            } else if configuration.responds(to: #selector(setter: WKWebViewConfiguration._allowsJavaScriptMarkup)) {
+                configuration._allowsJavaScriptMarkup = newValue
             }
         }
 
