@@ -133,6 +133,11 @@
 	return NO;
 }
 
+- (IBAction)makeTextStandardSize:(id)sender
+{
+    [articleView resetTextSize];
+}
+
 /* makeTextSmaller
  * Make webview text size smaller
  */

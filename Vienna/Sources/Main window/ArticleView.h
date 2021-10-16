@@ -36,6 +36,7 @@
 // Public functions
 -(void)setArticles:(nonnull NSArray<Article *> *)articles;
 -(void)keyDown:(nonnull NSEvent *)theEvent;
+- (void)resetTextSize;
 - (void)decreaseTextSize;
 - (void)increaseTextSize;
 

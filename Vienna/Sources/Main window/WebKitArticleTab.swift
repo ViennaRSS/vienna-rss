@@ -73,12 +73,19 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
         // TODO
     }
 
+    func makeTextStandardSize(_ sender: Any) {
+        // TODO: Handle preferences
+        decreaseTextSize()
+    }
+
     func makeTextSmaller(_ sender: Any) {
-        // TODO
+        // TODO: Handle preferences
+        decreaseTextSize()
     }
 
     func makeTextLarger(_ sender: Any) {
-        // TODO
+        // TODO: Handle preferences
+        increaseTextSize()
     }
 
     // MARK: gui

@@ -226,6 +226,18 @@ extension BrowserTab: Tab {
         loading
     }
 
+    @objc var canResetTextSize: Bool {
+        return webView.canMakeTextStandardSize
+    }
+
+    @objc var canIncreaseTextSize: Bool {
+        return webView.canMakeTextBigger
+    }
+
+    @objc var canDecreaseTextSize: Bool {
+        return webView.canMakeTextSmaller
+    }
+
     func back() -> Bool {
         let couldGoBack = self.webView.goBack() != nil
         // title and url observation not triggered by goBack() -> manual setting
@@ -307,13 +319,18 @@ extension BrowserTab: Tab {
     }
 
     @objc
-    func decreaseTextSize() {
-        // TODO: apple has not implemented this on macOS. There is a property webkit-text-size-adjust on iOS though.
+    func resetTextSize() {
+        webView.makeTextStandardSize()
     }
 
     @objc
     func increaseTextSize() {
-        // TODO: apple has not implemented this on macOS. There is a property webkit-text-size-adjust on iOS though.
+        webView.makeTextBigger()
+    }
+
+    @objc
+    func decreaseTextSize() {
+        webView.makeTextSmaller()
     }
 
     func printPage() {

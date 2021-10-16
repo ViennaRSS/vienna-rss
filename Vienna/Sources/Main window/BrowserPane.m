@@ -724,13 +724,31 @@
 	return canGoForward;
 }
 
-- (void)decreaseTextSize {
-	[self.webPane makeTextSmaller:nil];
+- (BOOL)canResetTextSize
+{
+    return self.webPane.canMakeTextStandardSize;
 }
 
+- (BOOL)canIncreaseTextSize
+{
+    return self.webPane.canMakeTextLarger;
+}
+
+- (BOOL)canDecreaseTextSize
+{
+    return self.webPane.canMakeTextSmaller;
+}
+
+- (void)resetTextSize {
+    [self.webPane makeTextStandardSize:nil];
+}
 
 - (void)increaseTextSize {
-	[self.webPane makeTextLarger:nil];
+    [self.webPane makeTextLarger:nil];
+}
+
+- (void)decreaseTextSize {
+    [self.webPane makeTextSmaller:nil];
 }
 
 - (void)printPage {

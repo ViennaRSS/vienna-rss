@@ -653,6 +653,11 @@
 	[self.controller.articleController goBack];
 }
 
+- (IBAction)makeTextStandardSize:(id)sender
+{
+    [articleText resetTextSize];
+}
+
 /* makeTextSmaller
  * Make webview text size smaller
  */

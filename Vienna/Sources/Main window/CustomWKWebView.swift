@@ -173,6 +173,71 @@ class CustomWKWebView: WKWebView {
         }
         return text
     }
+
+    // MARK: Text zoom
+
+    var canMakeTextBigger: Bool {
+        guard responds(to: #selector(getter: _supportsTextZoom)),
+              responds(to: #selector(getter: _textZoomFactor)),
+              _supportsTextZoom
+        else {
+            return false
+        }
+
+        return Float(_textZoomFactor) < 3.0
+    }
+
+    var canMakeTextSmaller: Bool {
+        guard responds(to: #selector(getter: _supportsTextZoom)),
+              responds(to: #selector(getter: _textZoomFactor)),
+              _supportsTextZoom
+        else {
+            return false
+        }
+
+        return Float(_textZoomFactor) > 0.5
+    }
+
+    var canMakeTextStandardSize: Bool {
+        guard responds(to: #selector(getter: _supportsTextZoom)),
+              responds(to: #selector(getter: _textZoomFactor)),
+              _supportsTextZoom
+        else {
+            return false
+        }
+
+        return Float(_textZoomFactor) != 1.0
+    }
+
+    func makeTextBigger() {
+        guard responds(to: #selector(setter: _textZoomFactor)),
+              canMakeTextBigger
+        else {
+            return
+        }
+
+        _textZoomFactor += 0.1
+    }
+
+    func makeTextSmaller() {
+        guard responds(to: #selector(setter: _textZoomFactor)),
+              canMakeTextSmaller
+        else {
+            return
+        }
+
+        _textZoomFactor -= 0.1
+    }
+
+    func makeTextStandardSize() {
+        guard responds(to: #selector(setter: _textZoomFactor)),
+              canMakeTextStandardSize
+        else {
+            return
+        }
+
+        _textZoomFactor = 1.0
+    }
 }
 
 // MARK: context menu

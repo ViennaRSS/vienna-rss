@@ -18,6 +18,7 @@ protocol ArticleContentView {
 
     // MARK: visual settings
 
+    func resetTextSize()
     func decreaseTextSize()
     func increaseTextSize()
 

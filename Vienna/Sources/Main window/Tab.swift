@@ -28,6 +28,10 @@ protocol Tab {
     var html: String { get }
     var isLoading: Bool { get }
 
+    var canResetTextSize: Bool { get }
+    var canIncreaseTextSize: Bool { get }
+    var canDecreaseTextSize: Bool { get }
+
     // MARK: navigating
 
     // goes back and returns whether going back was possible
@@ -50,6 +54,10 @@ protocol Tab {
     func stopLoadingTab()
 
     // MARK: other actions
+
+    func resetTextSize()
+    func increaseTextSize()
+    func decreaseTextSize()
 
     func printPage()
     func activateAddressBar()

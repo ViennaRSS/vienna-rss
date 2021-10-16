@@ -170,6 +170,12 @@ self.converter = [[WebViewArticleConverter alloc] init];
 #pragma mark -
 #pragma mark WebView methods overrides
 
+-(IBAction)makeTextStandardSize:(id)sender
+{
+    [super makeTextStandardSize:sender];
+    [Preferences standardPreferences].textSizeMultiplier = self.textSizeMultiplier;
+}
+
 /* makeTextSmaller
  */
 -(IBAction)makeTextSmaller:(id)sender
@@ -243,6 +249,25 @@ self.converter = [[WebViewArticleConverter alloc] init];
 
 - (BOOL)forward {
 	return false;
+}
+
+- (BOOL)canResetTextSize
+{
+    return self.canMakeTextStandardSize;
+}
+
+- (BOOL)canIncreaseTextSize
+{
+    return self.canMakeTextLarger;
+}
+
+- (BOOL)canDecreaseTextSize
+{
+    return self.canMakeTextSmaller;
+}
+
+- (void)resetTextSize {
+    [self makeTextStandardSize:self];
 }
 
 - (void)decreaseTextSize {
