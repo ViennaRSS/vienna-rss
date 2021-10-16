@@ -313,7 +313,7 @@ extension BrowserTab: Tab {
     }
 
     func activateAddressBar() {
-        NSApp.mainWindow?.makeFirstResponder(addressField)
+        self.view.window?.makeFirstResponder(addressField)
     }
 
     func activateWebView() {
