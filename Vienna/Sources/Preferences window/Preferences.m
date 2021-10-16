@@ -294,6 +294,7 @@ static Preferences * _standardPreferences = nil;
     defaultValues[MAPref_SyncingAppKey] = @"rAlfs2ELSuFxZJ5adJAW54qsNbUa45Qn";
     defaultValues[MAPref_AlwaysAcceptBetas] = boolNo;
     defaultValues[MAPref_UserAgentName] = @"Vienna";
+    defaultValues[MAPref_UseRelativeDates] = boolYes;
 
 	return [defaultValues copy];
 }
