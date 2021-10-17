@@ -292,6 +292,16 @@ extension BrowserTab: Tab {
 
     func stopLoadingTab() {
         self.webView.stopLoading()
+        // free webView by force stopping JavaScript and resetting delegates
+        let group = DispatchGroup()
+        group.enter()
+        self.webView.evaluateJavaScript("window.location.replace('about:blank');") { _, _ in
+            group.leave()
+        }
+        group.notify(queue: DispatchQueue.main) {
+            self.webView.navigationDelegate = nil
+            self.webView.uiDelegate = nil
+        }
         // We must manually invoke navigation end callbacks
         self.handleNavigationEnd(success: false)
     }
@@ -313,7 +323,7 @@ extension BrowserTab: Tab {
     }
 
     func activateAddressBar() {
-        NSApp.mainWindow?.makeFirstResponder(addressField)
+        self.view.window?.makeFirstResponder(addressField)
     }
 
     func activateWebView() {

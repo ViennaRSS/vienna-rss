@@ -258,8 +258,6 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
             return
         }
         tab.stopLoadingTab()
-        tab.tabUrl = URL(string: "about:blank")
-        tab.loadTab()
     }
 
     func tabView(_ aTabView: NSTabView, selectOnClosing tabViewItem: NSTabViewItem) -> NSTabViewItem? {
