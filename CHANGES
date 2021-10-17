@@ -8,6 +8,18 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.7.2
+-----
+- Speed up database handling (the updated database remains fully compatible with all 3.x.x versions of Vienna)
+- Remove preference setting related to notifications (already handled by System Preferences)
+- Fix image overflow with certain feeds
+- Fix download manager and replace NSURLDownload with NSURLSessionDownloadTask
+- Fix scripts handling in menubar
+- Fix behavior when clicking on Dock icon
+- Improve handling of URLs containing semicolon character in the path component
+- Update Sparkle to version 1.27 and add an EdDSA key
+- Update procedures for building binaries (use Sourceforge for binaries instead of Bintray, fix notarization and Github test action)
+
 3.7.1
 -----
 - Improve autodiscovery of feeds inside webpages (among other improvements, detect URLs of feeds for YouTube channels or users)

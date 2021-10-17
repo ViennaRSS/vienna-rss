@@ -108,12 +108,18 @@ sup {
 
 <h1 id="toc_0">Version Notes</h1>
 
-<h2 id="toc_1">3.7.1</h2>
+<h2 id="toc_1">3.7.2</h2>
 
 <ul>
-<li>Improve autodiscovery of feeds inside webpages (among other improvements, detect URLs of feeds for YouTube channels or users)</li>
-<li>Fix wrong image used in article list to indicate existence of an enclosure</li>
-<li>Fix empty folders in build which interferes with plug-in loading</li>
+<li>Speed up database handling (the updated database remains fully compatible with all 3.x.x versions of Vienna)</li>
+<li>Remove preference setting related to notifications (already handled by System Preferences)</li>
+<li>Fix image overflow with certain feeds</li>
+<li>Fix download manager and replace NSURLDownload with NSURLSessionDownloadTask</li>
+<li>Fix scripts handling in menubar</li>
+<li>Fix behavior when clicking on Dock icon</li>
+<li>Improve handling of URLs containing semicolon character in the path component</li>
+<li>Update Sparkle to version 1.27 and add an EdDSA key</li>
+<li>Update procedures for building binaries (use Sourceforge for binaries instead of Bintray, fix notarization and Github test action)</li>
 </ul>
 
 
