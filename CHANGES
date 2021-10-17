@@ -8,6 +8,37 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.8.0 Beta 2
+------------
+- Change minimum macOS requirement to 10.12 (Sierra)
+- Speed up database handling (the updated database remains fully compatible with all 3.x.x versions of Vienna)
+- When hovering over a link with new browser, display its address on a floating bar
+- Add a hidden preference for always displaying the full date, not using relative dates like Today or Yesterday. This is enabled with the Terminal command: `defaults write uk.co.opencommunity.vienna2 DoesRelativeDateFormatting -bool NO` and can be reversed with `defaults delete uk.co.opencommunity.vienna2 DoesRelativeDateFormatting`
+- Remove support for web plug-ins
+- Respect new browser's preference setting regarding JavaScript (might require application restart)
+- Fix download manager (old browser only at the time) and replace NSURLDownload with NSURLSessionDownloadTask
+- Update AppleScript architecture (use definition files instead of suite/terminology files)
+- Improve handling of URLs containing semicolon character in the path component
+- Update Sparkle to version 2.0 beta 3 and add an EdDSA key
+- Fix some application locks caused by new browser
+- Fix some leaks with new browser
+- Use Sourceforge for downloading binaries updates
+- Replace older logging tools with os_log
+- Silence many warnings
+- Fix Github test action
+
+3.7.2
+-----
+- Speed up database handling (the updated database remains fully compatible with all 3.x.x versions of Vienna)
+- Remove preference setting related to notifications (already handled by System Preferences)
+- Fix image overflow with certain feeds
+- Fix download manager and replace NSURLDownload with NSURLSessionDownloadTask
+- Fix scripts handling in menubar
+- Fix behavior when clicking on Dock icon
+- Improve handling of URLs containing semicolon character in the path component
+- Update Sparkle to version 1.27 and add an EdDSA key
+- Update procedures for building binaries (use Sourceforge for binaries instead of Bintray, fix notarization and Github test action)
+
 3.8.0 Beta 1
 ------------
 - Implement an experimental new browser based on WKWebView : it can be selected in Advanced preferences, and will be available after application restart. It is fastest and more secure.
@@ -18,6 +49,8 @@ Thanks!
     - introduce new classes : ArticleConverter, ArticleStyleLoader, RSSSubscriber
 - Remove preference setting related to notifications (already handled by System Preferences)
 - Fix image overflow with certain feeds
+- Fix scripts handling in menubar
+- Fix behavior when clicking on Dock icon
 - Update Sparkle to version 1.26
 - Use NSFileManager properties for library paths
 - Migrate some tests to Swift
