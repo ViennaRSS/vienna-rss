@@ -25,7 +25,6 @@
 #import "HelperFunctions.h"
 #import "StringExtensions.h"
 #import "AddressBarCell.h"
-#import "RichXMLParser.h"
 #import "SubscriptionModel.h"
 #import "Folder.h"
 #import "Constants.h"
