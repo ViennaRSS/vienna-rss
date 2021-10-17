@@ -23,20 +23,19 @@
 
 @class DownloadItem;
 
-@interface DownloadManager : NSObject <WebDownloadDelegate> {
-	NSMutableArray * downloadsList;
-	NSInteger activeDownloads;
-}
+@interface DownloadManager : NSObject <NSURLSessionDownloadDelegate, WebDownloadDelegate>
 
 @property (class, readonly) DownloadManager *sharedInstance NS_SWIFT_NAME(shared);
 
-// Public functions
-+(BOOL)isFileDownloaded:(NSString *)filename;
-+(NSString *)fullDownloadPath:(NSString *)filename;
-@property (nonatomic, readonly, copy) NSArray *downloadsList;
-@property (nonatomic, readonly) NSInteger activeDownloads;
--(void)clearList;
--(void)cancelItem:(DownloadItem *)item;
--(void)removeItem:(DownloadItem *)item;
--(void)downloadFileFromURL:(NSString *)url;
+@property (readonly, copy, nonatomic) NSArray<DownloadItem *> *downloadsList;
+@property (readonly, nonatomic) BOOL hasActiveDownloads;
+
++ (BOOL)isFileDownloaded:(NSString *)filename;
++ (NSString *)fullDownloadPath:(NSString *)filename;
+
+- (void)clearList;
+- (void)cancelItem:(DownloadItem *)item;
+- (void)removeItem:(DownloadItem *)item;
+- (void)downloadFileFromURL:(NSString *)url;
+
 @end

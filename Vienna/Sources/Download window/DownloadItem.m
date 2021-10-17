@@ -22,30 +22,28 @@
 
 @interface DownloadItem ()
 
-@property (nonatomic, readwrite, copy) NSImage *image;
+@property (readwrite, copy, nonatomic) NSImage *image;
 
 @end
 
 @implementation DownloadItem
 
-- (void)setExpectedSize:(long long)expectedSize {
-    _expectedSize = expectedSize;
-    self.size = 0;
-}
-
-- (void)setFilename:(NSString *)filename {
+- (void)setFilename:(NSString *)filename
+{
     _filename = filename;
 
     // Force the image to be recached.
     self.image = nil;
 }
 
-- (NSImage *)image {
+- (NSImage *)image
+{
     if (!_image) {
-        _image = [NSWorkspace.sharedWorkspace iconForFileType:self.filename.pathExtension];
+        NSString *extension = self.filename.pathExtension;
+        _image = [NSWorkspace.sharedWorkspace iconForFileType:extension];
         if (!_image.valid) {
             _image = nil;
-        } else{
+        } else {
             _image.size = NSMakeSize(32, 32);
         }
     }
@@ -54,17 +52,21 @@
 
 #pragma mark NSCoding
 
-- (instancetype)initWithCoder:(NSCoder *)coder {
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
     self = [self init];
+
     if (self) {
-        self.filename = [coder decodeObject];
+        _filename = [coder decodeObject];
         [coder decodeValueOfObjCType:@encode(long long) at:&_size];
-        self.state = DownloadStateCompleted;
+        _state = DownloadStateCompleted;
     }
+
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)coder {
+- (void)encodeWithCoder:(NSCoder *)coder
+{
     [coder encodeObject:self.filename];
     [coder encodeValueOfObjCType:@encode(long long) at:&_size];
 }
