@@ -14,6 +14,9 @@
 "%@ received" = "%@ mottaget";
 
 /* No comment provided by engineer. */
+"%@ unread" = "%@ olästa";
+
+/* No comment provided by engineer. */
 "%d new articles retrieved" = "%d nya artiklar mottagna";
 
 /* Notification body */
@@ -229,6 +232,12 @@
 "File %@ failed to download" = "Filen med namn %@ misslyckades att laddas ner";
 
 /* No comment provided by engineer. */
+"filter by: %@" = "filtrera efter: %@";
+
+/* No comment provided by engineer. */
+"Filter by: %@" = "Filtrera efter: %@";
+
+/* No comment provided by engineer. */
 "Filter in %@" = "Sök i %@";
 
 /* No comment provided by engineer. */
@@ -256,13 +265,13 @@
 "Headlines" = "Rubriker";
 
 /* No comment provided by engineer. */
-"Hide Filter Bar" = "Göm filtera-fältet";
+"Hide Filter Bar" = "Göm filterfältet";
 
 /* Title of a menu item */
 "Hide Status Bar" = "Göm statusfältet";
 
 /* Title of a menu item */
-"Hide Toolbar" = "Dölj verktygsfält";
+"Hide Toolbar" = "Göm verktygsfältet";
 
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "HTTP-kod %d rapporterad från server";
@@ -372,6 +381,9 @@
 /* No comment provided by engineer. */
 "No new articles available" = "Inga nya artiklar tillgängliga";
 
+/* Title of a button on an alert */
+"OK" = "OK";
+
 /* No comment provided by engineer. */
 "One or more downloads are in progress" = "En eller flera nedladdningar pågår";
 
@@ -418,10 +430,16 @@
 "Open Subscription Home Page in External Browser" = "Öppna prenumerationhemsida i extern webbläsare";
 
 /* No comment provided by engineer. */
+"Open With" = "Öppna med";
+
+/* Name the application which should open a file */
+"Open with %@" = "Öppna med %@";
+
+/* No comment provided by engineer. */
 "Other" = "Annan";
 
 /* No comment provided by engineer. */
-"Plugin installed" = "Plugin installerat";
+"Plugin installed" = "Insticksfil installerat";
 
 /* No comment provided by engineer. */
 "Queue" = "Kö";
@@ -492,6 +510,9 @@
 /* No comment provided by engineer. */
 "Search Results" = "Sökresultat";
 
+/* Label of a button on an open panel */
+"Select" = "Välj";
+
 /* Title of a popup menu item */
 "Select…" = "Markera…";
 
@@ -508,7 +529,7 @@
 "Send Links" = "Skicka länkar";
 
 /* No comment provided by engineer. */
-"Show Filter Bar" = "Visa filtrera-fältet";
+"Show Filter Bar" = "Visa filterfältet";
 
 /* Title of a popup menu item */
 "Show in Finder" = "Visa i Finder";
@@ -520,7 +541,7 @@
 "Show Status Bar" = "Visa statusfältet";
 
 /* Title of a menu item */
-"Show Toolbar" = "Visa verktygsfält";
+"Show Toolbar" = "Visa verktygsfältet";
 
 /* No comment provided by engineer. */
 "Sorry but Vienna was unable to open the database" = "Ursäkta, men Vienna kan inte öppna databasen";
@@ -536,6 +557,9 @@
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Sammanfattning";
+
+/* Data field name visible in smart folder definition */
+"Text" = "Text";
 
 /* No comment provided by engineer. */
 "The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "Din nuvarande %@ stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.";
@@ -584,6 +608,9 @@
 
 /* Title of a button on an alert */
 "Upgrade Database" = "Uppgradera databas";
+
+/* URL */
+"URL" = "URL";
 
 /* No comment provided by engineer. */
 "Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna kan inte öppna filen \"%@\" eftersom den har flyttats sedan du laddade ner den.";

@@ -46,9 +46,6 @@
 /* Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377"; */
 "1377.title" = "Filtruoti pagal:";
 
-/* Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404"; */
-"1404.title" = "Dabartinis filtras";
-
 /* Class = "NSToolbarItem"; label = "Style"; ObjectID = "azL-oz-mJL"; */
 "azL-oz-mJL.label" = "Stilius";
 
@@ -120,15 +117,6 @@
 
 /* Class = "NSToolbarItem"; toolTip = "Refresh all your subscriptions"; ObjectID = "Nmd-zx-Dys"; */
 "Nmd-zx-Dys.toolTip" = "Atnaujinti visas prenumeratas";
-
-/* Class = "NSToolbarItem"; label = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
-"OIA-vb-5jR.label" = "Ieškoti straipsnių";
-
-/* Class = "NSToolbarItem"; paletteLabel = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
-"OIA-vb-5jR.paletteLabel" = "Ieškoti straipsnių";
-
-/* Class = "NSToolbarItem"; toolTip = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
-"OIA-vb-5jR.toolTip" = "Ieškoti straipsnių";
 
 /* Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "Pqr-dM-SQQ"; */
 "Pqr-dM-SQQ.title" = "Naujas išmanusis aplankas…";

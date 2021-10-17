@@ -93,7 +93,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>u</string>
 			<key>one</key>
-			<string>%u non lus</string>
+			<string>%u non lu</string>
 			<key>other</key>
 			<string>%u non lus</string>
 		</dict>

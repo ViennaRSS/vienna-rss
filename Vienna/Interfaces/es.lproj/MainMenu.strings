@@ -262,6 +262,9 @@
 /* Class = "NSMenuItem"; title = "Horizontal"; ObjectID = "1110"; */
 "1110.title" = "Horizontal";
 
+/* Class = "NSMenuItem"; title = "Vertical"; ObjectID = "1116"; */
+"1116.title" = "Vertical";
+
 /* Class = "NSMenuItem"; title = "Filter By"; ObjectID = "1117"; */
 "1117.title" = "Filtrar por";
 
@@ -388,6 +391,9 @@
 /* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "fbd-ZI-tZW"; */
 "fbd-ZI-tZW.title" = "Comprobar documento ahora";
 
+/* Class = "NSMenu"; title = "Speech"; ObjectID = "G6k-0L-moc"; */
+"G6k-0L-moc.title" = "Habla";
+
 /* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "gbo-AM-wcF"; */
 "gbo-AM-wcF.title" = "Detener locución";
 
@@ -412,6 +418,9 @@
 /* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
 "pKl-6f-Hlc.title" = "Marcar como leído";
 
+/* Class = "NSMenu"; title = "Substitutions"; ObjectID = "QEb-Bm-CPN"; */
+"QEb-Bm-CPN.title" = "Sustituciones";
+
 /* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "qzH-De-act"; */
 "qzH-De-act.title" = "Copiado/Pegado inteligente";
 
@@ -432,6 +441,9 @@
 
 /* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "tfv-fu-HFM"; */
 "tfv-fu-HFM.title" = "Comprobar ortografía mientras se escribe";
+
+/* Class = "NSMenu"; title = "Transformations"; ObjectID = "UFF-Fn-8ti"; */
+"UFF-Fn-8ti.title" = "Transformaciones";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "v3R-CV-0b9"; */
 "v3R-CV-0b9.title" = "Mayúsculas iniciales";

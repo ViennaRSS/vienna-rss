@@ -100,15 +100,6 @@
 /* Class = "NSToolbarItem"; toolTip = "Refresh all your subscriptions"; ObjectID = "Nmd-zx-Dys"; */
 "Nmd-zx-Dys.toolTip" = "Aggiorna tutte le tue iscrizioni";
 
-/* Class = "NSToolbarItem"; label = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
-"OIA-vb-5jR.label" = "Cerca negli Articoli";
-
-/* Class = "NSToolbarItem"; paletteLabel = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
-"OIA-vb-5jR.paletteLabel" = "Cerca negli Articoli";
-
-/* Class = "NSToolbarItem"; toolTip = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
-"OIA-vb-5jR.toolTip" = "Cerca negli Articoli";
-
 /* Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "Pqr-dM-SQQ"; */
 "Pqr-dM-SQQ.title" = "Nuova Cartella Smart…";
 

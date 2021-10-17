@@ -11,7 +11,7 @@
 "6yn-y8-lF1.title" = "Rafraîchir tous les abonnements";
 
 /* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8Z3-Bg-ry2"; */
-"8Z3-Bg-ry2.title" = "Signalé";
+"8Z3-Bg-ry2.title" = "Signalés";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
 "19.title" = "Fenêtre";
@@ -368,7 +368,7 @@
 "bd7-qY-ofB.title" = "Remplacement de texte";
 
 /* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "BUc-Ki-OOg"; */
-"BUc-Ki-OOg.title" = "Non lu ou signalé";
+"BUc-Ki-OOg.title" = "Non lus ou signalés";
 
 /* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI"; */
 "CGp-H4-UaI.title" = "Dernières 48 heures";
@@ -455,7 +455,7 @@
 "wnc-vZ-fO4.title" = "Afficher les substitutions";
 
 /* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm"; */
-"wqh-Jc-gBm.title" = "Dernier rafraîchi";
+"wqh-Jc-gBm.title" = "Dernière actualisation";
 
 /* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "xpF-dh-E2m"; */
 "xpF-dh-E2m.title" = "Mettre en minuscules";

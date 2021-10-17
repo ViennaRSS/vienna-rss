@@ -31,7 +31,7 @@
 			<key>one</key>
 			<string>%d Abonnement erfolgreich exportiert</string>
 			<key>other</key>
-			<string>%d Abonnements erfolgreich exportiert.</string>
+			<string>%d Abonnements erfolgreich exportiert</string>
 		</dict>
 	</dict>
 	<key>%d subscriptions successfully imported</key>
@@ -47,7 +47,7 @@
 			<key>one</key>
 			<string>%d Abonnement erfolgreich importiert</string>
 			<key>other</key>
-			<string>%d Abonnements erfolgreich importiert.</string>
+			<string>%d Abonnements erfolgreich importiert</string>
 		</dict>
 	</dict>
 	<key>%d unread articles</key>

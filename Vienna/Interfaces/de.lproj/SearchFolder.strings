@@ -5,7 +5,7 @@
 "94.title" = "Name des intelligenten Ordners:";
 
 /* Class = "NSButtonCell"; title = "Save"; ObjectID = "96"; */
-"96.title" = "OK";
+"96.title" = "Sichern";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97"; */
 "97.title" = "Abbrechen";

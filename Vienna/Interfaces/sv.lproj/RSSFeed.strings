@@ -13,6 +13,9 @@
 /* Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107"; */
 "107.title" = "Ange länk till RSS-ström nedan. Eller välj från listan och ange ett kortnamn på RSS-ström som tillhandahålls av specificerad källa.";
 
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "URL:";
+
 /* Class = "NSButtonCell"; title = "Save"; ObjectID = "111"; */
 "111.title" = "Spara";
 

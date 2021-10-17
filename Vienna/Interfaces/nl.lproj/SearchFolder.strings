@@ -11,7 +11,7 @@
 "97.title" = "Annuleer";
 
 /* Class = "NSTextFieldCell"; title = "Show all articles that match"; ObjectID = "98"; */
-"98.title" = "Toon de artikelen die voldoen aan:";
+"98.title" = "Toon de artikelen die voldoen aan";
 
 /* Class = "NSTextFieldCell"; title = "of the following conditions:"; ObjectID = "100"; */
 "100.title" = "van de volgende voorwaarden:";

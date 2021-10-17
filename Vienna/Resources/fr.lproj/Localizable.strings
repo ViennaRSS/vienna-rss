@@ -17,6 +17,9 @@
 "%@ received" = "%@ reçu";
 
 /* No comment provided by engineer. */
+"%@ unread" = "%@ non lus";
+
+/* No comment provided by engineer. */
 "%d new articles retrieved" = "%d nouveaux articles récupérés";
 
 /* Notification body */
@@ -256,6 +259,12 @@
 "File %@ failed to download" = "Echec de téléchargement du fichier %@";
 
 /* No comment provided by engineer. */
+"filter by: %@" = "filtrer par : %@";
+
+/* No comment provided by engineer. */
+"Filter by: %@" = "Filtrer par : %@";
+
+/* No comment provided by engineer. */
 "Filter in %@" = "Rechercher dans %@";
 
 /* No comment provided by engineer. */
@@ -448,6 +457,9 @@
 "Open Link in %@" = "Ouvrir le lien dans %@";
 
 /* No comment provided by engineer. */
+"Open Link in Background" = "Ouvrir le lien en arrière plan";
+
+/* No comment provided by engineer. */
 "Open Link in New Tab" = "Ouvrir le lien dans un nouvel onglet";
 
 /* No comment provided by engineer. */
@@ -567,6 +579,9 @@
 /* No comment provided by engineer. */
 "Search Results" = "Chercher dans les résultats";
 
+/* Label of a button on an open panel */
+"Select" = "Sélectionner";
+
 /* Title of a popup menu item */
 "Select…" = "Sélectionner…";
 
@@ -644,6 +659,9 @@
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Cet article contient un fichier incorporé.";
+
+/* Message text of a modal alert */
+"This folder cannot be chosen because you don’t have permission." = "Vous n'avez pas les autorisations nécessaires pour utiliser ce dossier.";
 
 /* No comment provided by engineer. */
 "This operation cannot be undone." = "Cette opération est irréversible.";

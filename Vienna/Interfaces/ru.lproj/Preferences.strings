@@ -31,11 +31,20 @@
 /* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "bwY-9N-h4N"; */
 "bwY-9N-h4N.title" = "Логин:";
 
+/* Class = "NSMenuItem"; title = "After a day"; ObjectID = "c4l-M5-qB1"; */
+"c4l-M5-qB1.title" = "Через день";
+
 /* Class = "NSButtonCell"; title = "Select…"; ObjectID = "cbn-xq-UFr"; */
 "cbn-xq-UFr.title" = "Выбрать…";
 
+/* Class = "NSButtonCell"; title = "Preview new browser"; ObjectID = "DDY-fS-V5T"; */
+"DDY-fS-V5T.title" = "Просмотр нового браузера";
+
 /* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "dkm-xW-4If"; */
 "dkm-xW-4If.title" = "Показывать изображения папок в списке папок";
+
+/* Class = "NSMenuItem"; title = "After two weeks"; ObjectID = "Dw9-en-4Zu"; */
+"Dw9-en-4Zu.title" = "Через две недели";
 
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "erE-oh-cbw"; */
 "erE-oh-cbw.title" = "Открывать ссылки в фоне";
@@ -45,6 +54,9 @@
 
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "flH-2D-s6O"; */
 "flH-2D-s6O.title" = "Открывать ссылки во внешнем браузере";
+
+/* Class = "NSTextFieldCell"; title = "Vienna has a new browser built on top of WebKit. It is faster and more secure.\nAfter changing this setting, restart Vienna to test it. Feedback is very welcome!"; ObjectID = "Fv8-Xx-YR0"; */
+"Fv8-Xx-YR0.title" = "В Vienna появился новый браузер построенный на WebKit. Он быстрее и безопаснее.\nПосле изменения данной настройки перезапустите Vienna, чтобы протестировать его. Мы будем рады вашим отзывам!";
 
 /* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "g3K-qh-M6y"; */
 "g3K-qh-M6y.title" = "Чем выше номер, тем быстрее ваши подписки будут скачаны.";
@@ -106,6 +118,9 @@
 /* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "OD4-de-Vkx"; */
 "OD4-de-Vkx.title" = "Пароль:";
 
+/* Class = "NSMenuItem"; title = "After a month"; ObjectID = "OIa-NQ-jQi"; */
+"OIa-NQ-jQi.title" = "Через месяц";
+
 /* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "Oqg-6W-NAL"; */
 "Oqg-6W-NAL.title" = "Проверять наличие статей:";
 
@@ -121,6 +136,12 @@
 /* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "qYb-Sf-cEF"; */
 "qYb-Sf-cEF.title" = "Каждые 5 минут";
 
+/* Class = "NSTabViewItem"; label = "Updates"; ObjectID = "qyx-3u-1Io"; */
+"qyx-3u-1Io.label" = "Обновления";
+
+/* Class = "NSMenuItem"; title = "After two days"; ObjectID = "sJE-bd-4mK"; */
+"sJE-bd-4mK.title" = "Через два дня";
+
 /* Class = "NSButtonCell"; title = "Search for latest beta versions"; ObjectID = "u92-Bh-Wrz"; */
 "u92-Bh-Wrz.title" = "Проверить наличие последней бета-версии";
 
@@ -135,6 +156,9 @@
 
 /* Class = "NSWindow"; title = "Preferences"; ObjectID = "X5g-th-bjd"; */
 "X5g-th-bjd.title" = "Настройки";
+
+/* Class = "NSMenuItem"; title = "After a week"; ObjectID = "xfd-Vp-kJy"; */
+"xfd-Vp-kJy.title" = "Через неделю";
 
 /* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "YG6-9k-gKH"; */
 "YG6-9k-gKH.title" = "URL-адрес:";
