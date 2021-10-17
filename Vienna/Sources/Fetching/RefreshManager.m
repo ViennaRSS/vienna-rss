@@ -25,7 +25,7 @@
 #import "FeedCredentials.h"
 #import "ActivityItem.h"
 #import "ActivityLog.h"
-#import "RichXMLParser.h"
+#import "XMLFeedParser.h"
 #import "StringExtensions.h"
 #import "Preferences.h"
 #import "Constants.h"
@@ -670,7 +670,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
     // Empty data feed is OK if we got HTTP 200
     __block NSUInteger newArticlesFromFeed = 0;
-    RichXMLParser *newFeed = [[RichXMLParser alloc] init];
+    VNAXMLFeedParser *newFeed = [[VNAXMLFeedParser alloc] init];
     if (receivedData.length > 0) {
         Preferences *standardPreferences = [Preferences standardPreferences];
         if (standardPreferences.shouldSaveFeedSource) {
@@ -692,7 +692,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
         // Create a new rich XML parser instance that will take care of
         // parsing the XML data we just got.
-        if (newFeed == nil || ![newFeed parseRichXML:receivedData]) {
+        if (newFeed == nil || ![newFeed parseXMLData:receivedData]) {
             // Mark the feed as failed
             [self setFolderErrorFlag:folder flag:YES];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -742,7 +742,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
         // Parse off items.
 
-        for (FeedItem * newsItem in newFeed.items) {
+        for (VNAXMLFeedItem * newsItem in newFeed.items) {
             NSDate * articleDate = newsItem.date;
 
             NSString * articleGuid = newsItem.guid;

@@ -1,5 +1,5 @@
 //
-//  RichXMLParser.h
+//  XMLFeedParser.h
 //  Vienna
 //
 //  Copyright 2004-2005 Steve Palmer
@@ -19,7 +19,7 @@
 
 @import Foundation;
 
-@interface RichXMLParser : NSObject
+@interface VNAXMLFeedParser : NSObject
 
 @property (readonly, nonatomic) NSString *title;
 @property (readonly, nonatomic) NSString *feedDescription;
@@ -27,6 +27,6 @@
 @property (readonly, nonatomic) NSDate *lastModified;
 @property (readonly, nonatomic) NSArray *items;
 
-- (BOOL)parseRichXML:(NSData *)xmlData;
+- (BOOL)parseXMLData:(NSData *)xmlData;
 
 @end

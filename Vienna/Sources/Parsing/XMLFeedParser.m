@@ -1,5 +1,5 @@
 //
-//  RichXMLParser.m
+//  XMLFeedParser.m
 //  Vienna
 //
 //  Copyright 2004-2005 Steve Palmer
@@ -17,13 +17,13 @@
 //  limitations under the License.
 //
 
-#import "RichXMLParser.h"
+#import "XMLFeedParser.h"
 
 #import "NSDate+Vienna.h"
 #import "StringExtensions.h"
 #import "Vienna-Swift.h"
 
-@interface RichXMLParser ()
+@interface VNAXMLFeedParser ()
 
 // MARK: Public properties
 
@@ -47,7 +47,7 @@
 
 @end
 
-@implementation RichXMLParser
+@implementation VNAXMLFeedParser
 
 // MARK: Accessors
 
@@ -58,11 +58,11 @@
 
 // MARK: Parsing
 
-/* parseRichXML
+/* parseXMLData
  * Given an XML feed in xmlData, parses the feed as either an RSS or an Atom feed.
  * The actual parsed items can subsequently be accessed through the interface.
  */
-- (BOOL)parseRichXML:(NSData *)xmlData
+- (BOOL)parseXMLData:(NSData *)xmlData
 {
     BOOL success = NO;
     NSError *error = nil;
@@ -303,7 +303,7 @@
         // Parse a single item to construct a FeedItem object which is appended to
         // the items array we maintain.
         if ([element.prefix isEqualToString:self.rssPrefix] && [element.localName isEqualToString:@"item"]) {
-            FeedItem *newFeedItem = [FeedItem new];
+            VNAXMLFeedItem *newFeedItem = [VNAXMLFeedItem new];
             NSMutableString *articleBody = nil;
             BOOL hasDetailedContent = NO;
             BOOL hasLink = NO;
@@ -557,7 +557,7 @@
         // Parse a single item to construct a FeedItem object which is appended to
         // the items array we maintain.
         if (isAtomElement && [elementTag isEqualToString:@"entry"]) {
-            FeedItem *newFeedItem = [FeedItem new];
+            VNAXMLFeedItem *newFeedItem = [VNAXMLFeedItem new];
             NSMutableString *articleBody = nil;
 
             // Look for the xml:base attribute, and use absolute url or stack relative url
@@ -769,7 +769,7 @@
 /* ensureTitle
  * Make sure we have a title and synthesize one from the description if we don't.
  */
-- (void)ensureTitle:(FeedItem *)item
+- (void)ensureTitle:(VNAXMLFeedItem *)item
 {
     if (!item.title || item.title.vna_isBlank) {
         NSString *newTitle = item.feedItemDescription.vna_titleTextFromHTML.vna_stringByUnescapingExtendedCharacters;

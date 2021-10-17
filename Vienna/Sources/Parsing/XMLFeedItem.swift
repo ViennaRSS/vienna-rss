@@ -1,5 +1,5 @@
 //
-//  FeedItem.swift
+//  XMLFeedItem.swift
 //  Vienna
 //
 //  Copyright 2019
@@ -19,7 +19,8 @@
 
 import Foundation
 
-final class FeedItem: NSObject {
+@objc(VNAXMLFeedItem)
+final class XMLFeedItem: NSObject {
 
     @objc var title = ""
     @objc var feedItemDescription = ""
