@@ -19,11 +19,8 @@
 //
 
 #import "ImageAndTextCell.h"
-#import "FolderView.h"
+
 #import "TreeNode.h"
-
-#define PROGRESS_INDICATOR_LEFT_MARGIN	1
-
 
 /* All of this stuff taken from public stuff published
  * by Apple.
@@ -181,25 +178,6 @@
  */
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-	// If the cell has a progress indicator, ensure it's framed properly
-	// and then reduce cellFrame to keep from overlapping it
-	if (inProgress)
-	{
-		NSRect progressIndicatorFrame;
-		NSDivideRect(cellFrame, &progressIndicatorFrame, &cellFrame, PROGRESS_INDICATOR_DIMENSION + PROGRESS_INDICATOR_LEFT_MARGIN, NSMaxXEdge);
-		if (!item.progressIndicator) {
-			progressIndicatorFrame.size = NSMakeSize(PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION);
-			progressIndicatorFrame.origin.x += PROGRESS_INDICATOR_LEFT_MARGIN;
-			progressIndicatorFrame.origin.y += (cellFrame.size.height - PROGRESS_INDICATOR_DIMENSION) / 2.0;
-			[item allocAndStartProgressIndicatorWithFrame:progressIndicatorFrame inView:controlView];
-		}
-	}
-	else
-	{
-		[item stopAndReleaseProgressIndicator];
-	}
-
-
 	// If the cell has an image, draw the image and then reduce
 	// cellFrame to move the text to the right of the image.
 	if (image != nil)
@@ -278,22 +256,6 @@
 	cellFrame.size.height -= 1;
 	
 	[super drawInteriorWithFrame:cellFrame inView:controlView];
-}
-
-/* selectWithFrame
- * Draws the selection around the cell. We overload this to handle our custom field editor
- * frame in the FolderView class, and to keep the image visible
- */
--(void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(NSInteger)selStart length:(NSInteger)selLength
-{
-	if ([controlView isKindOfClass:[FolderView class]])
-	{
-		if (image != nil)
-			aRect.origin.x += image.size.width + 3;
-		++aRect.origin.y;
-		[controlView performSelector:@selector(prvtResizeTheFieldEditor) withObject:nil afterDelay:0.001];
-	}
-	[super selectWithFrame:aRect inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
 }
 
 - (NSString *)accessibilityLabel {

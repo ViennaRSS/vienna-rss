@@ -1496,6 +1496,8 @@
 				43502860165DE9DF0018EDB7 /* DownloadManager.m */,
 				F6B3561325616302008CA1ED /* DownloadItem.h */,
 				F6B3561425616313008CA1ED /* DownloadItem.m */,
+				AA71168709BEB14A00E3EA8A /* ImageAndTextCell.h */,
+				AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */,
 				F41CA693218F56140072F734 /* NSWorkspace+OpenWithMenu.h */,
 				F41CA692218F56130072F734 /* NSWorkspace+OpenWithMenu.m */,
 			);
@@ -1606,8 +1608,6 @@
 				F6164C581E32A6660086261C /* DisclosureView.m */,
 				AA60237E08C298FB002CFD06 /* HelperFunctions.h */,
 				AA60237F08C298FB002CFD06 /* HelperFunctions.m */,
-				AA71168709BEB14A00E3EA8A /* ImageAndTextCell.h */,
-				AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */,
 				AAFAF3FB088056D800DAFF04 /* Keychain.h */,
 				AAFAF3FC088056D800DAFF04 /* Keychain.m */,
 				2FE44CAC25B7995400554E82 /* NSApplication+AppController.swift */,

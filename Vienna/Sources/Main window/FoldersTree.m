@@ -20,7 +20,6 @@
 
 #import "FoldersTree.h"
 
-#import "ImageAndTextCell.h"
 #import "AppController.h"
 #import "Constants.h"
 #import "Preferences.h"
@@ -42,10 +41,7 @@
 @property (nonatomic) TreeNode *rootNode;
 @property (nonatomic) NSFont *cellFont;
 @property (nonatomic) NSFont *boldCellFont;
-@property (nonatomic) NSImage *folderErrorImage;
 @property (nonatomic) BOOL blockSelectionHandler;
-@property (nonatomic) BOOL canRenameFolders;
-@property (nonatomic) BOOL useToolTips;
 
 @property (nullable, weak) NSText *fieldEditor;
 
@@ -79,8 +75,6 @@
 		// of containing the other nodes.
 		_rootNode = [[TreeNode alloc] init:nil atIndex:0 folder:nil canHaveChildren:YES];
 		_blockSelectionHandler = NO;
-		_canRenameFolders = NO;
-		_useToolTips = NO;
 	}
 
 	return self;
@@ -91,22 +85,6 @@
  */
 -(void)initialiseFoldersTree
 {
-	NSTableColumn * tableColumn;
-	ImageAndTextCell * imageAndTextCell;
-
-	// Our folders have images next to them.
-	tableColumn = [self.outlineView tableColumnWithIdentifier:@"folderColumns"];
-	imageAndTextCell = [[ImageAndTextCell alloc] init];
-	[imageAndTextCell setEditable:YES];
-	tableColumn.dataCell = imageAndTextCell;
-
-	// Folder image
-	self.folderErrorImage = [NSImage imageNamed:@"folderError"];
-    self.folderErrorImage.accessibilityDescription = NSLocalizedString(@"Error", nil);
-	
-	// Create and set whatever font we're using for the folders
-	[self setFolderListFont];
-
 	// Allow a second click in a node to edit the node
 	self.outlineView.doubleAction = @selector(handleDoubleClick:);
 	self.outlineView.target = self;
@@ -127,9 +105,6 @@
 
     self.outlineView.accessibilityValueDescription = NSLocalizedString(@"Folders", nil);
 
-	// Want tooltips
-	self.useToolTips = YES;
-	
 	// Set the menu for the popup button
 	self.outlineView.menu = self.folderMenu;
 	
@@ -759,9 +734,6 @@
 	NSInteger folderId = ((NSNumber *)nc.object).integerValue;
 	TreeNode * thisNode = [self.rootNode nodeFromID:folderId];
 	TreeNode * nextNode;
-	
-	// Stop any in process progress indicators.
-	[thisNode stopAndReleaseProgressIndicator];
 
 	// First find the next node we'll select
 	if (thisNode.nextSibling != nil)
@@ -872,22 +844,6 @@
 		[self.outlineView reloadData];
 	else
 		[self.outlineView reloadItem:node reloadChildren:YES];
-}
-
-/* menuWillAppear
- * Called when the popup menu is opened on the folder list. We move the
- * selection to whichever node is under the cursor so the context between
- * the menu items and the node is made clear.
- */
--(void)folderView:(FolderView *)olv menuWillAppear:(NSEvent *)theEvent
-{
-	NSInteger row = [olv rowAtPoint:[olv convertPoint:theEvent.locationInWindow fromView:nil]];
-	if (row >= 0)
-	{
-		// Select the row under the cursor if it isn't already selected
-		if (olv.numberOfSelectedRows <= 1)
-			[olv selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)row] byExtendingSelection:NO];
-	}
 }
 
 /* mainView

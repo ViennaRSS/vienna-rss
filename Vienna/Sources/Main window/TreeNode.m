@@ -26,8 +26,6 @@
 
 @implementation TreeNode
 
-@synthesize progressIndicator;
-
 /* init
  * Initialises a treenode.
  */
@@ -45,7 +43,6 @@
 			[parent addChild:self atIndex:insertIndex];
 		}
 		children = [NSMutableArray array];
-		progressIndicator = nil;
 	}
 	return self;
 }
@@ -320,35 +317,5 @@
 	return [NSString stringWithFormat:@"%@ (Parent=%p, # of children=%ld)",
             folder.name, parentNode, (unsigned long)children.count];
 }
-
-/* allocAndStartProgressIndicatorWithFrame:inView:
- * Allocate a new progress indicator and start it animating.
- */
--(void)allocAndStartProgressIndicatorWithFrame:(NSRect)frame inView:(NSView *)controlView
-{
-	// Allocate and initialize the spinning progress indicator.
-    progressIndicator = [[NSProgressIndicator alloc] initWithFrame:frame];
-    [controlView addSubview:progressIndicator];
-	// Start the animation.
-	[progressIndicator startAnimation:self];
-}
-
-/* stopAndReleaseProgressIndicator:
- * Stops the progress indicator and releases it, also calls recursively for child
- * nodes so that this can be called when a tree node is collapsed to stop the
- * progress indicators for all children.
- */
--(void)stopAndReleaseProgressIndicator
-{
-	if ( progressIndicator)
-	{
-		// Stop the animation and remove from the superview.
-		[progressIndicator stopAnimation:self];
-		[progressIndicator removeFromSuperviewWithoutNeedingDisplay];
-		
-		// Release the progress indicator.
-		progressIndicator = nil;
-	}
-}	
 
 @end
