@@ -46,6 +46,27 @@
 			• Added in the ability for the user to copy URLs to the clipboard.
 			  Note that this is off by default.
 			• Some code clean up.
+	* December 6, 2011
+		Changes by Salvatore Ansani:
+			• Added 64-bit support.
+	* January 21, 2012
+		Changes by Barijaona Ramholimihaso:
+			• Fixed build warnings.
+	* August 23, 2015
+		Changes by Barijaona Ramholimihaso:
+			• Converted code to ARC.
+	* March 14, 2016
+		Changes by Jan Weiß:
+			• Converted code to modern Objective-C.
+	* February 3, 2019
+		Changes by Eitot:
+			• Replaced deprecated APIs.
+	* April 28, 2019
+		Changes by Eitot:
+			• Fixed build warnings.
+	* October 22, 2021
+		Changes by Eitot:
+			• Replaced deprecated APIs.
 */
 
 #import "DSClickableURLTextField.h"
@@ -233,10 +254,16 @@
 
 - (void)copyURL:(id)sender
 {
-	NSPasteboard *copyBoard = [NSPasteboard pasteboardWithName:NSGeneralPboard];
+	NSPasteboard *copyBoard = nil;
+	if (@available(macOS 10.13, *)) {
+		copyBoard = [NSPasteboard pasteboardWithName:NSPasteboardNameGeneral];
+		[copyBoard declareTypes:@[NSPasteboardTypeURL, NSPasteboardTypeString] owner:nil];
+	} else {
+		copyBoard = [NSPasteboard pasteboardWithName:NSGeneralPboard];
+		[copyBoard declareTypes:@[NSURLPboardType, NSPasteboardTypeString] owner:nil];
+	}
 	NSURL *copyURL = [sender representedObject];
 	
-	[copyBoard declareTypes:@[NSURLPboardType, NSPasteboardTypeString] owner:nil];
 	[copyURL writeToPasteboard:copyBoard];
 	[copyBoard setString:copyURL.absoluteString forType:NSPasteboardTypeString];
 }
