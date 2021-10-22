@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-@import Foundation;
+@import Cocoa;
 
 extern NSString * MA_DefaultStyleName;
 extern NSString * MA_DefaultUserAgentString;
@@ -93,23 +93,24 @@ extern CGFloat MA_Default_Main_Window_Min_Width;
 extern CGFloat MA_Default_Main_Window_Min_Height;
 extern NSInteger MA_Default_ConcurrentDownloads;
 
-extern NSString * MA_PBoardType_RSSItem;
-extern NSString * MA_PBoardType_FolderList;
-extern NSString * MA_PBoardType_RSSSource;
-extern NSString * MA_PBoardType_url;
-extern NSString * MA_PBoardType_urln;
+extern NSPasteboardType const VNAPasteboardTypeRSSItem;
+extern NSPasteboardType const VNAPasteboardTypeFolderList;
+extern NSPasteboardType const VNAPasteboardTypeRSSSource;
+extern NSPasteboardType const VNAPasteboardTypeURL;
+extern NSPasteboardType const VNAPasteboardTypeURLName;
+extern NSPasteboardType const VNAPasteboardTypeWebURLsWithTitles;
 
-extern AEKeyword EditDataItemAppleEventClass;
-extern AEKeyword EditDataItemAppleEventID;
-extern AEKeyword DataItemTitle;
-extern AEKeyword DataItemDescription;
-extern AEKeyword DataItemSummary;
-extern AEKeyword DataItemLink;
-extern AEKeyword DataItemPermalink;
-extern AEKeyword DataItemSubject;
-extern AEKeyword DataItemCreator;
-extern AEKeyword DataItemCommentsURL;
-extern AEKeyword DataItemGUID;
-extern AEKeyword DataItemSourceName;
-extern AEKeyword DataItemSourceHomeURL;
-extern AEKeyword DataItemSourceFeedURL;
+extern AEKeyword const EditDataItemAppleEventClass;
+extern AEKeyword const EditDataItemAppleEventID;
+extern AEKeyword const DataItemTitle;
+extern AEKeyword const DataItemDescription;
+extern AEKeyword const DataItemSummary;
+extern AEKeyword const DataItemLink;
+extern AEKeyword const DataItemPermalink;
+extern AEKeyword const DataItemSubject;
+extern AEKeyword const DataItemCreator;
+extern AEKeyword const DataItemCommentsURL;
+extern AEKeyword const DataItemGUID;
+extern AEKeyword const DataItemSourceName;
+extern AEKeyword const DataItemSourceHomeURL;
+extern AEKeyword const DataItemSourceFeedURL;
