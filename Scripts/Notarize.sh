@@ -12,8 +12,11 @@ fi
 
 local_apps_dir="${ARCHIVE_PATH}/Products/Applications"
 app_path="${local_apps_dir}/Vienna.app"
+frameworks_path="$app_path/Contents/Frameworks"
 
-codesign --verbose --force --deep -o runtime --sign "${CODE_SIGN_IDENTITY}" "${app_path}"
+codesign --verbose --force --sign "$CODE_SIGN_IDENTITY" --options runtime "$frameworks_path/Sparkle.framework/XPCServices/org.sparkle-project.InstallerLauncher.xpc"
+codesign --verbose --force --sign "$CODE_SIGN_IDENTITY" --options runtime --preserve-metadata=entitlements "$frameworks_path/Sparkle.framework/XPCServices/org.sparkle-project.Downloader.xpc"
+codesign --verbose --force --sign "$CODE_SIGN_IDENTITY" --options runtime --deep "$app_path"
 
 if ! spctl --verbose=4 --assess --type execute "${app_path}"; then
     echo "error: Signature will not be accepted by Gatekeeper!" 1>&2
