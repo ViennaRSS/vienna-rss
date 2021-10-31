@@ -559,7 +559,7 @@ static Preferences * _standardPreferences = nil;
 
 -(BOOL)useNewBrowser
 {
-    if (!_useNewBrowserInternal) {
+    if (!_useNewBrowserInternal.boolValue) {
         //init only once per application run
         _useNewBrowserInternal = [NSNumber numberWithBool:useNewBrowser];
     }

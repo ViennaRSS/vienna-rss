@@ -83,7 +83,7 @@ final class SecurityScopedBookmark: NSObject {
 
     /// Creates bookmark data from the given URL.
     ///
-    /// - Parameter data: The URL to create a bookmark for.
+    /// - Parameter url: The URL to create a bookmark for.
     /// - Returns: An object containing the bookmark data.
     /// - Note: Fails when the bookmark cannot be created with the given URL or
     ///     the bookmark cannot be resolved into a URL.
