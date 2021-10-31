@@ -424,7 +424,7 @@
 		439824191666B37000FFE219 /* autorevision.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = autorevision.sh; path = Scripts/autorevision.sh; sourceTree = SOURCE_ROOT; };
 		4398241A1666B37000FFE219 /* Changes-and-Notes.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Changes-and-Notes.sh"; path = "Scripts/Changes-and-Notes.sh"; sourceTree = SOURCE_ROOT; };
 		4398241C1666B37000FFE219 /* Release-for-upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Release-for-upload.sh"; path = "Scripts/Release-for-upload.sh"; sourceTree = SOURCE_ROOT; };
-		4398241E1666B3DB00FFE219 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = SOURCE_ROOT; };
+		4398241E1666B3DB00FFE219 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Credits.rtf; path = Vienna/Resources/Credits.rtf; sourceTree = SOURCE_ROOT; };
 		439824201666B3DB00FFE219 /* CHANGES */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES; sourceTree = SOURCE_ROOT; };
 		439824221666B3DB00FFE219 /* notes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = notes.html; sourceTree = SOURCE_ROOT; };
 		439824231666B3DB00FFE219 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -684,6 +684,8 @@
 		F6352BE51E2720E0005CD307 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RSSFeed.strings"; sourceTree = "<group>"; };
 		F6373A221F1D53B500ED3B09 /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
 		F63833D71EF842EA00E07213 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		F639D3602737DC3500FEA0E0 /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
+		F639D3612737DC4300FEA0E0 /* LICENCE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENCE.md; sourceTree = "<group>"; };
 		F64499FB259773B9005A1EFA /* FeedDiscovery.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FeedDiscovery.html; sourceTree = "<group>"; };
 		F647BC83209EFD820068F74D /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = gl; path = gl.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryMonitorTests.swift; sourceTree = "<group>"; };
@@ -1159,8 +1161,9 @@
 		439824161666B1ED00FFE219 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
-				4398241E1666B3DB00FFE219 /* Credits.rtf */,
+				F639D3602737DC3500FEA0E0 /* CONTRIBUTING.md */,
 				439824201666B3DB00FFE219 /* CHANGES */,
+				F639D3612737DC4300FEA0E0 /* LICENCE.md */,
 				439824221666B3DB00FFE219 /* notes.html */,
 				439824231666B3DB00FFE219 /* README.md */,
 				439824241666B3DB00FFE219 /* Release Instructions.md */,
@@ -1220,6 +1223,7 @@
 				F63DA1721F1CEFC3007CBED4 /* Strings */,
 				F63DA1731F1CF025007CBED4 /* Error page */,
 				03F33D951DF2A2F900B04FAF /* Assets.xcassets */,
+				4398241E1666B3DB00FFE219 /* Credits.rtf */,
 				F6209C5923D3FFA700D5537D /* Vienna.sdef */,
 				3AEE7DE81695FC570018A17D /* SparkleDSAPublicKey.pem */,
 			);
