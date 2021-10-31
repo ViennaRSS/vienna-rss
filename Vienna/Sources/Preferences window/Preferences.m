@@ -22,11 +22,18 @@
 
 @import Sparkle;
 
+#import <os/log.h>
+
 #import "Article.h"
 #import "Constants.h"
+#import "DownloadItem.h"
 #import "NSFileManager+Paths.h"
+#import "NSKeyedArchiver+Compatibility.h"
+#import "NSKeyedUnarchiver+Compatibility.h"
 #import "SearchMethod.h"
 #import "Vienna-Swift.h"
+
+#define VNA_LOG os_log_create("--", "Preferences")
 
 // Initial paths
 NSString * MA_DefaultStyleName = @"Default";
@@ -111,6 +118,7 @@ static Preferences * _standardPreferences = nil;
 		{
 			preferencesPath = nil;
 			userPrefs = [NSUserDefaults standardUserDefaults];
+            [self migratePreferences];
 			[userPrefs registerDefaults:defaults];
 			
 			// Application-specific folder locations
@@ -149,6 +157,7 @@ static Preferences * _standardPreferences = nil;
 				preferencesPath = [preferencesPath stringByAppendingString:@".plist"];
 			}
 			userPrefs = [[NSMutableDictionary alloc] initWithDictionary:defaults];
+            [self migratePreferences];
 			if (preferencesPath != nil)
 				[userPrefs addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:preferencesPath]];
             
@@ -164,7 +173,6 @@ static Preferences * _standardPreferences = nil;
 		
 		// Load those settings that we cache.
 		foldersTreeSortMethod = [self integerForKey:MAPref_AutoSortFoldersTree];
-		articleSortDescriptors = [NSUnarchiver unarchiveObjectWithData:[userPrefs valueForKey:MAPref_ArticleSortDescriptors]];
 		refreshFrequency = [self integerForKey:MAPref_CheckFrequency];
 		filterMode = [self integerForKey:MAPref_FilterMode];
 		layout = [self integerForKey:MAPref_Layout];
@@ -185,12 +193,24 @@ static Preferences * _standardPreferences = nil;
 		useJavaScript = [self boolForKey:MAPref_UseJavaScript];
         useNewBrowser = [self boolForKey:MAPref_UseNewBrowser];
 		showAppInStatusBar = [self boolForKey:MAPref_ShowAppInStatusBar];
-		folderFont = [NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_FolderFont]];
-		articleFont = [NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_ArticleListFont]];
 		shouldSaveFeedSource = [self boolForKey:MAPref_ShouldSaveFeedSource];
-		searchMethod = [NSKeyedUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_SearchMethod]];
 		concurrentDownloads = [self integerForKey:MAPref_ConcurrentDownloads];
         _userAgentName = [self stringForKey:MAPref_UserAgentName];
+
+        // Archived objects
+        articleFont = [NSKeyedUnarchiver unarchivedObjectOfClass:[NSFont class]
+                                                        fromData:[self objectForKey:MAPref_ArticleListFont]];
+        folderFont = [NSKeyedUnarchiver unarchivedObjectOfClass:[NSFont class]
+                                                        fromData:[self objectForKey:MAPref_FolderListFont]];
+        searchMethod = [NSKeyedUnarchiver unarchivedObjectOfClass:[SearchMethod class]
+                                                       fromData:[self objectForKey:MAPref_SearchMethod]];
+        articleSortDescriptors = [NSKeyedUnarchiver unarchivedArrayOfObjectsOfClass:[NSSortDescriptor class]
+                                                                           fromData:[self objectForKey:MAPref_ArticleListSortOrders]];
+        // Securely decoded sort descriptors must be explicitely set to allow
+        // evaluation, otherwise an exception is thrown.
+        for (NSSortDescriptor *descriptor in articleSortDescriptors) {
+            [descriptor allowEvaluation];
+        }
         
         // Open Reader sync
         syncGoogleReader = [self boolForKey:MAPref_SyncGoogleReader];
@@ -241,10 +261,8 @@ static Preferences * _standardPreferences = nil;
 {
 	// Set the preference defaults
 	NSMutableDictionary * defaultValues = [[NSMutableDictionary alloc] init];
-	NSData * defaultArticleListFont = [NSArchiver archivedDataWithRootObject:[NSFont fontWithName:@"LucidaGrande" size:11.0]];
-	NSData * defaultFolderFont = [NSArchiver archivedDataWithRootObject:[NSFont fontWithName:@"LucidaGrande" size:11.0]];
-	NSData * defaultArticleSortDescriptors = [NSArchiver archivedDataWithRootObject:@[]];
-	
+    NSFont *defaultFont = [NSFont fontWithName:@"LucidaGrande" size:11.0];
+
 	NSNumber * boolNo = @NO;
 	NSNumber * boolYes = @YES;
 
@@ -254,8 +272,6 @@ static Preferences * _standardPreferences = nil;
 	defaultValues[MAPref_DefaultDatabase] = [appSupportPath stringByAppendingPathComponent:MA_Database_Name];
 	defaultValues[MAPref_CheckForUpdatedArticles] = boolNo;
 	defaultValues[MAPref_ShowUnreadArticlesInBold] = boolYes;
-	defaultValues[MAPref_ArticleListFont] = defaultArticleListFont;
-	defaultValues[MAPref_FolderFont] = defaultFolderFont;
 	defaultValues[MAPref_CheckForNewArticlesOnStartup] = boolYes;
 	defaultValues[MAPref_CachedFolderID] = @1;
 	defaultValues[MAPref_SortColumn] = MA_Field_Date;
@@ -277,7 +293,6 @@ static Preferences * _standardPreferences = nil;
 	defaultValues[MAPref_FilterMode] = [NSNumber numberWithInt:VNAFilterAll];
 	defaultValues[MAPref_MinimumFontSize] = @(MA_Default_MinimumFontSize);
 	defaultValues[MAPref_AutoExpireDuration] = @(MA_Default_AutoExpireDuration);
-	defaultValues[MAPref_ArticleSortDescriptors] = defaultArticleSortDescriptors;
 	defaultValues[MAPref_LastRefreshDate] = [NSDate distantPast];
 	defaultValues[MAPref_Layout] = [NSNumber numberWithInt:VNALayoutReport];
 	defaultValues[MAPref_NewArticlesNotification] = [NSNumber numberWithInt:0];
@@ -286,7 +301,17 @@ static Preferences * _standardPreferences = nil;
 	defaultValues[MAPref_LastViennaVersionRun] = @0;
 	defaultValues[MAPref_ShouldSaveFeedSource] = boolYes;
 	defaultValues[MAPref_ShouldSaveFeedSourceBackup] = boolNo;
-	defaultValues[MAPref_SearchMethod] = [NSKeyedArchiver archivedDataWithRootObject:[SearchMethod allArticlesSearchMethod]];
+
+    // Archives
+    defaultValues[MAPref_ArticleListFont] = [NSKeyedArchiver archivedDataWithRootObject:defaultFont
+                                                                  requiringSecureCoding:YES];
+    defaultValues[MAPref_FolderListFont] = [NSKeyedArchiver archivedDataWithRootObject:defaultFont
+                                                                  requiringSecureCoding:YES];
+    defaultValues[MAPref_ArticleListSortOrders] = [NSKeyedArchiver archivedDataWithRootObject:@[]
+                                                                        requiringSecureCoding:YES];
+    defaultValues[MAPref_SearchMethod] = [NSKeyedArchiver archivedDataWithRootObject:[SearchMethod allArticlesSearchMethod]
+                                                               requiringSecureCoding:YES];
+
     defaultValues[MAPref_ConcurrentDownloads] = @(MA_Default_ConcurrentDownloads);
     defaultValues[MAPref_SyncGoogleReader] = boolNo;
     defaultValues[MAPref_GoogleNewSubscription] = boolNo;
@@ -297,6 +322,69 @@ static Preferences * _standardPreferences = nil;
     defaultValues[MAPref_UseRelativeDates] = boolYes;
 
 	return [defaultValues copy];
+}
+
+- (void)migratePreferences
+{
+    if ([userPrefs objectForKey:MAPref_Deprecated_ArticleListSortOrders]) {
+        NSData *archive = [self objectForKey:MAPref_Deprecated_ArticleListSortOrders];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        NSArray *sortDescriptors = [NSUnarchiver unarchiveObjectWithData:archive];
+#pragma clang diagnostic pop
+        NSData *keyedArchive = [NSKeyedArchiver archivedDataWithRootObject:sortDescriptors
+                                                     requiringSecureCoding:YES];
+        [self setObject:keyedArchive forKey:MAPref_ArticleListSortOrders];
+        [userPrefs removeObjectForKey:MAPref_Deprecated_ArticleListSortOrders];
+    }
+
+    if ([userPrefs objectForKey:MAPref_Deprecated_DownloadItemList]) {
+        // Download items were stored as an array of non-keyed archives.
+        NSArray *array = [self objectForKey:MAPref_Deprecated_DownloadItemList];
+        NSMutableArray *downloadItems = [NSMutableArray array];
+
+        for (NSData *archive in array) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+            DownloadItem *item = [NSUnarchiver unarchiveObjectWithData:archive];
+#pragma clang diagnostic pop
+            if (item) {
+                [downloadItems addObject:item];
+            } else {
+                os_log_error(VNA_LOG, "Failed to unarchive download item using "
+                             "unkeyed unarchiver. The item is skipped.");
+            }
+        }
+
+        NSData *keyedArchive = [NSKeyedArchiver archivedDataWithRootObject:downloadItems
+                                                     requiringSecureCoding:YES];
+        [self setObject:keyedArchive forKey:MAPref_DownloadItemList];
+        [userPrefs removeObjectForKey:MAPref_Deprecated_DownloadItemList];
+    }
+
+    if ([userPrefs objectForKey:MAPref_Deprecated_FolderListFont]) {
+        NSData *archive = [self objectForKey:MAPref_Deprecated_FolderListFont];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        NSFont *font = [NSUnarchiver unarchiveObjectWithData:archive];
+#pragma clang diagnostic pop
+        NSData *keyedArchive = [NSKeyedArchiver archivedDataWithRootObject:font
+                                                     requiringSecureCoding:YES];
+        [self setObject:keyedArchive forKey:MAPref_FolderListFont];
+        [userPrefs removeObjectForKey:MAPref_Deprecated_FolderListFont];
+    }
+
+    if ([userPrefs objectForKey:MAPref_Deprecated_ArticleListFont]) {
+        NSData *archive = [self objectForKey:MAPref_Deprecated_ArticleListFont];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        NSFont *font = [NSUnarchiver unarchiveObjectWithData:archive];
+#pragma clang diagnostic pop
+        NSData *keyedArchive = [NSKeyedArchiver archivedDataWithRootObject:font
+                                                     requiringSecureCoding:YES];
+        [self setObject:keyedArchive forKey:MAPref_ArticleListFont];
+        [userPrefs removeObjectForKey:MAPref_Deprecated_ArticleListFont];
+    }
 }
 
 /* savePreferences
@@ -619,7 +707,9 @@ static Preferences * _standardPreferences = nil;
 -(void)setSearchMethod:(SearchMethod *)newMethod
 {
 	searchMethod = newMethod;
-	[self setObject:[NSKeyedArchiver archivedDataWithRootObject:newMethod] forKey:MAPref_SearchMethod];
+    NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:searchMethod
+                                            requiringSecureCoding:YES];
+    [self setObject:archive forKey:MAPref_SearchMethod];
 }
 
 /* searchMethod
@@ -878,7 +968,9 @@ static Preferences * _standardPreferences = nil;
 -(void)setFolderListFont:(NSString *)newFontName
 {
 	folderFont = [NSFont fontWithName:newFontName size:self.folderListFontSize];
-	[self setObject:[NSArchiver archivedDataWithRootObject:folderFont] forKey:MAPref_FolderFont];
+    NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:folderFont
+                                            requiringSecureCoding:YES];
+    [self setObject:archive forKey:MAPref_FolderListFont];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderFontChange" object:folderFont];
 }
 
@@ -888,7 +980,9 @@ static Preferences * _standardPreferences = nil;
 -(void)setFolderListFontSize:(NSInteger)newFontSize
 {
 	folderFont = [NSFont fontWithName:self.folderListFont size:newFontSize];
-	[self setObject:[NSArchiver archivedDataWithRootObject:folderFont] forKey:MAPref_FolderFont];
+    NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:folderFont
+                                            requiringSecureCoding:YES];
+    [self setObject:archive forKey:MAPref_FolderListFont];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderFontChange" object:folderFont];
 }
 
@@ -914,7 +1008,9 @@ static Preferences * _standardPreferences = nil;
 -(void)setArticleListFont:(NSString *)newFontName
 {
 	articleFont = [NSFont fontWithName:newFontName size:self.articleListFontSize];
-	[self setObject:[NSArchiver archivedDataWithRootObject:articleFont] forKey:MAPref_ArticleListFont];
+    NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:articleFont
+                                            requiringSecureCoding:YES];
+    [self setObject:archive forKey:MAPref_ArticleListFont];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListFontChange" object:articleFont];
 }
 
@@ -924,7 +1020,9 @@ static Preferences * _standardPreferences = nil;
 -(void)setArticleListFontSize:(NSInteger)newFontSize
 {
 	articleFont = [NSFont fontWithName:self.articleListFont size:newFontSize];
-	[self setObject:[NSArchiver archivedDataWithRootObject:articleFont] forKey:MAPref_ArticleListFont];
+    NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:articleFont
+                                            requiringSecureCoding:YES];
+    [self setObject:archive forKey:MAPref_ArticleListFont];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListFontChange" object:articleFont];
 }
 
@@ -943,9 +1041,10 @@ static Preferences * _standardPreferences = nil;
 {
 	if (![articleSortDescriptors isEqualToArray:newSortDescriptors])
 	{
-		NSArray * descriptors = [[NSArray alloc] initWithArray:newSortDescriptors];
-		articleSortDescriptors = descriptors;
-		[self setObject:[NSArchiver archivedDataWithRootObject:descriptors] forKey:MAPref_ArticleSortDescriptors];
+		articleSortDescriptors = [newSortDescriptors copy];
+        NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:articleSortDescriptors
+                                                requiringSecureCoding:YES];
+        [self setObject:archive forKey:MAPref_ArticleListSortOrders];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
 }

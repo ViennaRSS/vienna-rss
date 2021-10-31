@@ -23,11 +23,11 @@
 NSString * MA_DefaultUserAgentString = @"%@/%@ (Macintosh; Intel macOS %@)";
 NSString * MA_BrowserUserAgentString = @"(Macintosh; Intel Mac OS X %@) AppleWebKit/%@ (KHTML, like Gecko) Version/%@ Safari/604.1.38 %@/%@";
 
-NSString * MAPref_ArticleListFont = @"MessageListFont";
+NSString *const MAPref_ArticleListFont = @"ArticleListFont";
 NSString * MAPref_AutoSortFoldersTree = @"AutomaticallySortFoldersTree";
 NSString * MAPref_CheckForUpdatedArticles = @"CheckForUpdatedArticles";
 NSString * MAPref_ShowUnreadArticlesInBold = @"ShowUnreadArticlesInBold";
-NSString * MAPref_FolderFont = @"FolderFont";
+NSString *const MAPref_FolderListFont = @"FolderListFont";
 NSString * MAPref_CachedFolderID = @"CachedFolderID";
 NSString * MAPref_DefaultDatabase = @"DefaultDatabase";
 NSString *const MAPref_DownloadsFolderBookmark = @"DownloadsFolderBookmark";
@@ -49,12 +49,12 @@ NSString * MAPref_OpenLinksInBackground = @"OpenLinksInBackground";
 NSString * MAPref_MinimumFontSize = @"MinimumFontSize";
 NSString * MAPref_UseMinimumFontSize = @"UseMinimumFontSize";
 NSString * MAPref_AutoExpireDuration = @"AutoExpireFrequency";
-NSString * MAPref_DownloadsList = @"DownloadsList";
+NSString *const MAPref_DownloadItemList = @"DownloadItemsList";
 NSString * MAPref_ShowFolderImages = @"ShowFolderImages";
 NSString * MAPref_UseJavaScript = @"UseJavaScript";
 NSString * MAPref_UseNewBrowser = @"UseNewBrowser";
 NSString * MAPref_CachedArticleGUID = @"CachedArticleGUID";
-NSString * MAPref_ArticleSortDescriptors = @"ArticleSortDescriptors";
+NSString *const MAPref_ArticleListSortOrders = @"ArticleListSortOrders";
 NSString * MAPref_FilterMode = @"FilterMode";
 NSString * MAPref_LastRefreshDate = @"LastRefreshDate";
 NSString * MAPref_TabList = @"TabList";
@@ -80,6 +80,12 @@ NSString * MAPref_SyncingAppId = @"SyncingAppId";
 NSString * MAPref_SyncingAppKey = @"SyncingAppKey";
 NSString * MAPref_AlwaysAcceptBetas = @"AlwayAcceptBetas";
 NSString * MAPref_UserAgentName = @"UserAgentName";
+
+// Deprecated defaults keys
+NSString *const MAPref_Deprecated_ArticleListFont = @"MessageListFont";
+NSString *const MAPref_Deprecated_ArticleListSortOrders = @"ArticleSortDescriptors";
+NSString *const MAPref_Deprecated_DownloadItemList = @"DownloadsList";
+NSString *const MAPref_Deprecated_FolderListFont = @"FolderFont";
 
 const NSInteger MA_Default_BackTrackQueueSize = 20;
 const NSInteger MA_Default_RefreshThreads = 20;

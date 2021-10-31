@@ -24,11 +24,11 @@ extern NSString * MA_DefaultStyleName;
 extern NSString * MA_DefaultUserAgentString;
 extern NSString * MA_BrowserUserAgentString;
 
-extern NSString * MAPref_ArticleListFont;
+extern NSString *const MAPref_ArticleListFont;
 extern NSString * MAPref_AutoSortFoldersTree;
 extern NSString * MAPref_CheckForUpdatedArticles;
 extern NSString * MAPref_ShowUnreadArticlesInBold;
-extern NSString * MAPref_FolderFont;
+extern NSString *const MAPref_FolderListFont;
 extern NSString * MAPref_CachedFolderID;
 extern NSString * MAPref_DefaultDatabase;
 extern NSString *const MAPref_DownloadsFolderBookmark;
@@ -50,12 +50,12 @@ extern NSString * MAPref_OpenLinksInBackground;
 extern NSString * MAPref_MinimumFontSize;
 extern NSString * MAPref_UseMinimumFontSize;
 extern NSString * MAPref_AutoExpireDuration;
-extern NSString * MAPref_DownloadsList;
+extern NSString *const MAPref_DownloadItemList;
 extern NSString * MAPref_ShowFolderImages;
 extern NSString * MAPref_UseJavaScript;
 extern NSString * MAPref_UseNewBrowser;
 extern NSString * MAPref_CachedArticleGUID;
-extern NSString * MAPref_ArticleSortDescriptors;
+extern NSString *const MAPref_ArticleListSortOrders;
 extern NSString * MAPref_FilterMode;
 extern NSString * MAPref_LastRefreshDate;
 extern NSString * MAPref_TabList;
@@ -82,6 +82,12 @@ extern NSString * MAPref_SyncingAppKey;
 extern NSString * MAPref_AlwaysAcceptBetas;
 extern NSString * MAPref_UserAgentName;
 extern NSString *const MAPref_UseRelativeDates;
+
+// Deprecated defaults keys
+extern NSString *const MAPref_Deprecated_ArticleListFont;
+extern NSString *const MAPref_Deprecated_ArticleListSortOrders;
+extern NSString *const MAPref_Deprecated_DownloadItemList;
+extern NSString *const MAPref_Deprecated_FolderListFont;
 
 extern NSInteger MA_Default_BackTrackQueueSize;
 extern NSInteger MA_Default_RefreshThreads;

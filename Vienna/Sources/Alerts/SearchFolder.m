@@ -565,6 +565,11 @@
 		index = arrayOfViews.count;
 
 	// Now add the new subview
+    //
+    // FIXME: NSArchiver and NSUnarchiver are deprecated since macOS 10.13
+    //
+    // NSArchiver and NSUnarchiver are used here to copy searchCriteriaView.
+    // NSKeyedArchiver is not a replacement for this.
 	archRow = [NSArchiver archivedDataWithRootObject:searchCriteriaView];
 	NSRect bounds = searchCriteriaSuperview.bounds;
 	NSView * row = (NSView *)[NSUnarchiver unarchiveObjectWithData:archRow];
