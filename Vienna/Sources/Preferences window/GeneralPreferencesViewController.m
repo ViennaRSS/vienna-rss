@@ -73,19 +73,10 @@
     // Set check for new articles when starting
     checkOnStartUp.state = prefs.refreshOnStartup ? NSControlStateValueOn : NSControlStateValueOff;
     
-    // Set range of auto-expire values
+    // Set auto-expire duration
     // Meaning of tag :
     // 0 value disables auto-expire.
     // Increments of 1000 specify months, so 1000 = 1 month, 1001 = 1 month and 1 day…
-    [expireDuration removeAllItems];
-    [expireDuration insertItemWithTitle:NSLocalizedString(@"Never", nil) tag:0 atIndex:0];
-    [expireDuration insertItemWithTitle:NSLocalizedString(@"After a Day", nil) tag:1 atIndex:1];
-    [expireDuration insertItemWithTitle:NSLocalizedString(@"After 2 Days", nil) tag:2 atIndex:2];
-    [expireDuration insertItemWithTitle:NSLocalizedString(@"After a Week", nil) tag:7 atIndex:3];
-    [expireDuration insertItemWithTitle:NSLocalizedString(@"After 2 Weeks", nil) tag:14 atIndex:4];
-    [expireDuration insertItemWithTitle:NSLocalizedString(@"After a Month", nil) tag:1000 atIndex:5];
-    
-    // Set auto-expire duration
     [expireDuration selectItemAtIndex:[expireDuration indexOfItemWithTag:prefs.autoExpireDuration]];
     
     // Set download folder

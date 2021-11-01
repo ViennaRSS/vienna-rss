@@ -768,15 +768,15 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                                                     <items>
                                                         <menuItem title="Manually" state="on" id="h9d-GD-q32"/>
                                                         <menuItem isSeparatorItem="YES" id="Lxi-Tn-40b"/>
-                                                        <menuItem title="After one day" id="c4l-M5-qB1"/>
-                                                        <menuItem title="After two days" id="sJE-bd-4mK"/>
-                                                        <menuItem title="After one week" id="xfd-Vp-kJy">
+                                                        <menuItem title="After one day" tag="1" id="c4l-M5-qB1"/>
+                                                        <menuItem title="After two days" tag="2" id="sJE-bd-4mK"/>
+                                                        <menuItem title="After one week" tag="7" id="xfd-Vp-kJy">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
                                                         </menuItem>
-                                                        <menuItem title="After two weeks" id="Dw9-en-4Zu">
+                                                        <menuItem title="After two weeks" tag="14" id="Dw9-en-4Zu">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
                                                         </menuItem>
-                                                        <menuItem title="After one month" id="OIa-NQ-jQi">
+                                                        <menuItem title="After one month" tag="1000" id="OIa-NQ-jQi">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
                                                         </menuItem>
                                                     </items>
