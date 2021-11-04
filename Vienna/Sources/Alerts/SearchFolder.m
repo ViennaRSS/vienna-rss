@@ -122,7 +122,7 @@
 			[fieldNamePopup selectItemWithTitle:field.displayName];
 			switch (field.type)
 			{
-				case MA_FieldType_Flag: {
+				case VNAFieldTypeFlag: {
 					NSInteger tag;
 					if([criteria.value isEqualToString:@"Yes"]) {
 						tag=1;
@@ -134,24 +134,24 @@
 					break;
 				}
 
-				case MA_FieldType_Folder: {
+				case VNAFieldTypeFolder: {
 					Folder * folder = [db folderFromName:criteria.value];
 					if (folder != nil)
 						[folderValueField selectItemWithTitle:folder.name];
 					break;
 				}
 
-				case MA_FieldType_String: {
+				case VNAFieldTypeString: {
 					valueField.stringValue = criteria.value;
 					break;
 				}
 
-				case MA_FieldType_Integer: {
+				case VNAFieldTypeInteger: {
 					numberValueField.stringValue = criteria.value;
 					break;
 				}
 
-				case MA_FieldType_Date: {
+				case VNAFieldTypeDate: {
 					[dateValueField selectItemAtIndex:[dateValueField indexOfItemWithRepresentedObject:criteria.value]];
 					break;
 				}
@@ -336,20 +336,20 @@
 	[theOperatorPopup removeAllItems];	
 	switch (field.type)
 	{
-		case MA_FieldType_Flag:
+		case VNAFieldTypeFlag:
 			[self setOperatorsPopup:theOperatorPopup operators:@[
 									@(MA_CritOper_Is)]
 									];
 			break;
 
-		case MA_FieldType_Folder:
+		case VNAFieldTypeFolder:
 			[self setOperatorsPopup:theOperatorPopup operators:@[
 									@(MA_CritOper_Is),
 									@(MA_CritOper_IsNot)]
 									];
 			break;
 
-		case MA_FieldType_String:
+		case VNAFieldTypeString:
 			[self setOperatorsPopup:theOperatorPopup operators:@[
 									@(MA_CritOper_Is),
 									@(MA_CritOper_IsNot),
@@ -358,7 +358,7 @@
 									];
 			break;
 
-		case MA_FieldType_Integer:
+		case VNAFieldTypeInteger:
 			[self setOperatorsPopup:theOperatorPopup operators:@[
 									@(MA_CritOper_Is),
 									@(MA_CritOper_IsNot),
@@ -369,7 +369,7 @@
 									];
 			break;
 
-		case MA_FieldType_Date:
+		case VNAFieldTypeDate:
 			[self setOperatorsPopup:theOperatorPopup operators:@[
 									@(MA_CritOper_Is),
 									@(MA_CritOper_IsAfter),
@@ -387,11 +387,11 @@
 	NSView * theDateValueField = [row viewWithTag:MA_SFEdit_DateValueTag];
 	NSView * theFolderValueField = [row viewWithTag:MA_SFEdit_FolderValueTag];
 
-	theFlagValueField.hidden = field.type != MA_FieldType_Flag;
-	theValueField.hidden = field.type != MA_FieldType_String;
-	theDateValueField.hidden = field.type != MA_FieldType_Date;
-	theNumberValueField.hidden = field.type != MA_FieldType_Integer;
-	theFolderValueField.hidden = field.type != MA_FieldType_Folder;
+	theFlagValueField.hidden = field.type != VNAFieldTypeFlag;
+	theValueField.hidden = field.type != VNAFieldTypeString;
+	theDateValueField.hidden = field.type != VNAFieldTypeDate;
+	theNumberValueField.hidden = field.type != VNAFieldTypeInteger;
+	theFolderValueField.hidden = field.type != VNAFieldTypeFolder;
 }
 
 /* setOperatorsPopup
@@ -437,22 +437,22 @@
 		CriteriaOperator operator = theOperator.selectedItem.tag;
 		NSString * valueString;
 
-		if (field.type == MA_FieldType_Flag)
+		if (field.type == VNAFieldTypeFlag)
 		{
 			NSPopUpButton * theValue = [row viewWithTag:MA_SFEdit_FlagValueTag];
 			valueString = theValue.selectedItem.representedObject;
 		}
-		else if (field.type == MA_FieldType_Date)
+		else if (field.type == VNAFieldTypeDate)
 		{
 			NSPopUpButton * theValue = [row viewWithTag:MA_SFEdit_DateValueTag];
 			valueString = theValue.selectedItem.representedObject;
 		}
-		else if (field.type == MA_FieldType_Folder)
+		else if (field.type == VNAFieldTypeFolder)
 		{
 			NSPopUpButton * theValue = [row viewWithTag:MA_SFEdit_FolderValueTag];
 			valueString = theValue.titleOfSelectedItem;
 		}
-		else if (field.type == MA_FieldType_Integer)
+		else if (field.type == VNAFieldTypeInteger)
 		{
 			NSTextField * theValue = [row viewWithTag:MA_SFEdit_NumberValueTag];
 			valueString = theValue.stringValue;
@@ -565,6 +565,11 @@
 		index = arrayOfViews.count;
 
 	// Now add the new subview
+    //
+    // FIXME: NSArchiver and NSUnarchiver are deprecated since macOS 10.13
+    //
+    // NSArchiver and NSUnarchiver are used here to copy searchCriteriaView.
+    // NSKeyedArchiver is not a replacement for this.
 	archRow = [NSArchiver archivedDataWithRootObject:searchCriteriaView];
 	NSRect bounds = searchCriteriaSuperview.bounds;
 	NSView * row = (NSView *)[NSUnarchiver unarchiveObjectWithData:archRow];

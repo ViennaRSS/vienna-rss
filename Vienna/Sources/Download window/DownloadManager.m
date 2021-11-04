@@ -25,6 +25,8 @@
 #import "Constants.h"
 #import "DownloadItem.h"
 #import "NSFileManager+Paths.h"
+#import "NSKeyedArchiver+Compatibility.h"
+#import "NSKeyedUnarchiver+Compatibility.h"
 #import "Preferences.h"
 #import "Vienna-Swift.h"
 
@@ -107,22 +109,31 @@
 
 // Archive the downloads list to the preferences.
 - (void)archiveDownloadsList {
-    NSMutableArray *listArray = [[NSMutableArray alloc] initWithCapacity:self.downloads.count];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[self.downloads copy]
+                                         requiringSecureCoding:YES];
 
-    for (DownloadItem *item in self.downloads) {
-        [listArray addObject:[NSArchiver archivedDataWithRootObject:item]];
+    if (data) {
+        [Preferences.standardPreferences setObject:data
+                                            forKey:MAPref_DownloadItemList];
     }
-
-    [Preferences.standardPreferences setArray:listArray
-                                       forKey:MAPref_DownloadsList];
 }
 
 // Unarchive the downloads list from the preferences.
 - (void)unarchiveDownloadsList {
-    NSArray *listArray = [Preferences.standardPreferences arrayForKey:MAPref_DownloadsList];
-    if (listArray != nil) {
-        for (NSData *dataItem in listArray)
-            [self.downloads addObject:[NSUnarchiver unarchiveObjectWithData:dataItem]];
+    Preferences *preferences = Preferences.standardPreferences;
+    NSData *archive = [preferences objectForKey:MAPref_DownloadItemList];
+
+    if (!archive) {
+        return;
+    }
+
+    NSArray<DownloadItem *> *items = nil;
+    Class cls = [DownloadItem class];
+    items = [NSKeyedUnarchiver unarchivedArrayOfObjectsOfClass:cls
+                                                      fromData:archive];
+
+    if (items) {
+        [self.downloads addObjectsFromArray:items];
     }
 }
 

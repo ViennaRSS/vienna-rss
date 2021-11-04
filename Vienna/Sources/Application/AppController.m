@@ -330,7 +330,7 @@
 	
 	// Set the placeholder string for the global search field
 	SearchMethod * currentSearchMethod = [Preferences standardPreferences].searchMethod;
-    self.toolbarSearchField.placeholderString = currentSearchMethod.friendlyName;
+    self.toolbarSearchField.placeholderString = currentSearchMethod.displayName;
 	
 	// Add Scripts menu if we have any scripts
 	if (!hasOSScriptsMenu())
@@ -611,14 +611,14 @@
 	// Add all built-in search methods to the menu. 
 	for (searchMethod in [SearchMethod builtInSearchMethods])
 	{
-		friendlyName = searchMethod.friendlyName;
+		friendlyName = searchMethod.displayName;
 		item = [[NSMenuItem alloc] initWithTitle:friendlyName
                                           action:@selector(setSearchMethod:)
                                    keyEquivalent:@""];
 		item.representedObject = searchMethod;
 		
 		// Is this the currently set search method? If yes, mark it as such.
-		if ( [friendlyName isEqualToString:[Preferences standardPreferences].searchMethod.friendlyName] )
+		if ( [friendlyName isEqualToString:[Preferences standardPreferences].searchMethod.displayName] )
 			item.state = NSControlStateValueOn;
 		
 		[cellMenu addItem:item];
@@ -632,12 +632,12 @@
 		
 		for (searchMethod in searchMethods)
 		{
-			if (!searchMethod.friendlyName) 
+			if (!searchMethod.displayName) 
 				continue;
-			item = [[NSMenuItem alloc] initWithTitle:searchMethod.friendlyName action:@selector(setSearchMethod:) keyEquivalent:@""];
+			item = [[NSMenuItem alloc] initWithTitle:searchMethod.displayName action:@selector(setSearchMethod:) keyEquivalent:@""];
 			item.representedObject = searchMethod;
 			// Is this the currently set search method? If yes, mark it as such.
-			if ( [searchMethod.friendlyName isEqualToString: [Preferences standardPreferences].searchMethod.friendlyName] )
+			if ( [searchMethod.displayName isEqualToString: [Preferences standardPreferences].searchMethod.displayName] )
 				item.state = NSControlStateValueOn;
 			[cellMenu addItem:item];
 		}
@@ -2913,12 +2913,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	if (activeBrowserTab)
 	{
 		// If the current view is a browser view and "Search all articles" is the current SearchMethod, switch to "Search current webpage"
-		if ([prefs.searchMethod.friendlyName isEqualToString:[SearchMethod searchAllArticlesMethod].friendlyName])
+		if ([prefs.searchMethod.displayName isEqualToString:[SearchMethod allArticlesSearchMethod].displayName])
 		{
 			for (NSMenuItem * menuItem in ((NSSearchFieldCell *)self.toolbarSearchField.cell).searchMenuTemplate.itemArray)
 			{
-				if ([[menuItem.representedObject friendlyName] isEqualToString:[SearchMethod searchCurrentWebPageMethod].friendlyName]) {
-                    self.toolbarSearchField.placeholderString = [SearchMethod searchCurrentWebPageMethod].friendlyName;
+				if ([[menuItem.representedObject displayName] isEqualToString:[SearchMethod currentWebPageSearchMethod].displayName]) {
+                    self.toolbarSearchField.placeholderString = [SearchMethod currentWebPageSearchMethod].displayName;
 					[Preferences standardPreferences].searchMethod = menuItem.representedObject;
 				}
 			}
@@ -2927,17 +2927,17 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	else 
 	{
 		// If the current view is anything else "Search current webpage" is active, switch to "Search all articles".
-		if ([prefs.searchMethod.friendlyName isEqualToString:[SearchMethod searchCurrentWebPageMethod].friendlyName])
+		if ([prefs.searchMethod.displayName isEqualToString:[SearchMethod currentWebPageSearchMethod].displayName])
 		{
 			for (NSMenuItem * menuItem in ((NSSearchFieldCell *)self.toolbarSearchField.cell).searchMenuTemplate.itemArray)
 			{
-				if ([[menuItem.representedObject friendlyName] isEqualToString:[SearchMethod searchAllArticlesMethod].friendlyName]) {
-                    self.toolbarSearchField.placeholderString = [SearchMethod searchAllArticlesMethod].friendlyName;
+				if ([[menuItem.representedObject displayName] isEqualToString:[SearchMethod allArticlesSearchMethod].displayName]) {
+                    self.toolbarSearchField.placeholderString = [SearchMethod allArticlesSearchMethod].displayName;
 					[Preferences standardPreferences].searchMethod = menuItem.representedObject;
 				}
 			}
 		} else {
-            self.toolbarSearchField.placeholderString = prefs.searchMethod.friendlyName;
+            self.toolbarSearchField.placeholderString = prefs.searchMethod.displayName;
 		}
 	// END of switching between "Search all articles" and "Search current web page".
 	}
@@ -3657,7 +3657,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	else if (theAction == @selector(setSearchMethod:))
 	{
 		Preferences * prefs = [Preferences standardPreferences];
-		if ([prefs.searchMethod.friendlyName isEqualToString:[menuItem.representedObject friendlyName]])
+		if ([prefs.searchMethod.displayName isEqualToString:[menuItem.representedObject displayName]])
 			menuItem.state = NSControlStateValueOn;
 		else 
 			menuItem.state = NSControlStateValueOff;
