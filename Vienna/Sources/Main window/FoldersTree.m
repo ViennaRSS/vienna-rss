@@ -170,6 +170,10 @@
 						  action:@selector(markAllRead:)
 				   keyEquivalent:@""];
     [folderMenu addItem:[NSMenuItem separatorItem]];
+    [folderMenu addItemWithTitle:NSLocalizedString(@"Empty Trash…", @"Title of a menu item")
+                          action:@selector(emptyTrash:)
+                   keyEquivalent:@""];
+    [folderMenu addItem:[NSMenuItem separatorItem]];
 	[folderMenu addItemWithTitle:NSLocalizedString(@"Open Subscription Home Page", @"Title of a menu item")
 						  action:@selector(viewSourceHomePage:)
 				   keyEquivalent:@""];

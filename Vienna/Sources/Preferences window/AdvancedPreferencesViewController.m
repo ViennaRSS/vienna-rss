@@ -23,9 +23,22 @@
 
 @interface AdvancedPreferencesViewController ()
 
+@property (weak, nonatomic) IBOutlet NSTextField *javaScriptNoticeTextField;
+
 @end
 
 @implementation AdvancedPreferencesViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    // WKWebViewConfiguration._allowsJavaScriptMarkup may require a restart.
+    // This is only necessary for versions older than macOS 11, because the
+    // latter use WKWebpagePreferences.allowsContentJavaScript instead.
+    if (@available(macOS 11, *)) {
+        [self.javaScriptNoticeTextField removeFromSuperview];
+    }
+}
 
 - (void)viewWillAppear {
     [self initializePreferences];

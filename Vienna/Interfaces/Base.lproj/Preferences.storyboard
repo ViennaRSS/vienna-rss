@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="VBW-RM-gbf">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="VBW-RM-gbf">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -241,11 +241,11 @@
             <objects>
                 <viewController id="NjZ-bv-EoA" customClass="AdvancedPreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="8J7-Mc-HHy">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="302"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="317"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vvG-VT-CVp">
-                                <rect key="frame" x="18" y="250" width="414" height="32"/>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vvG-VT-CVp">
+                                <rect key="frame" x="18" y="265" width="444" height="32"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="4Qn-qF-kSp">
                                     <font key="font" metaFont="system"/>
                                     <string key="title">The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.</string>
@@ -254,7 +254,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HJu-JH-e1a">
-                                <rect key="frame" x="18" y="213" width="412" height="18"/>
+                                <rect key="frame" x="18" y="228" width="442" height="18"/>
                                 <buttonCell key="cell" type="check" title="Preview new browser" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="DDY-fS-V5T">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -264,7 +264,7 @@
                                 </buttonCell>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1u1-uu-U0M">
-                                <rect key="frame" x="18" y="143" width="412" height="18"/>
+                                <rect key="frame" x="18" y="160" width="442" height="18"/>
                                 <buttonCell key="cell" type="check" title="Enable JavaScript in the internal browser" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="MnV-8D-Qyq">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -273,8 +273,16 @@
                                     <action selector="changeUseJavaScript:" target="NjZ-bv-EoA" id="UiT-ZF-E7L"/>
                                 </connections>
                             </button>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="QZV-Nb-fvA">
+                                <rect key="frame" x="38" y="143" width="424" height="14"/>
+                                <textFieldCell key="cell" controlSize="small" title="You may have to relaunch Vienna after changing this setting for it to take effect." id="fgw-cI-bAr">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="VMW-g6-f00">
-                                <rect key="frame" x="18" y="106" width="145" height="16"/>
+                                <rect key="frame" x="18" y="105" width="145" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Concurrent downloads:" id="6oJ-Rh-rgA">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -282,7 +290,7 @@
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" placeholderIntrinsicWidth="71" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="8eb-2O-wjd">
-                                <rect key="frame" x="166" y="99" width="78" height="26"/>
+                                <rect key="frame" x="166" y="98" width="78" height="26"/>
                                 <popUpButtonCell key="cell" type="push" title="1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Byc-c2-qnN" id="nFS-Xo-Mn1">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -365,24 +373,24 @@
                                     <action selector="changeConcurrentDownloads:" target="NjZ-bv-EoA" id="M6N-Ks-Che"/>
                                 </connections>
                             </popUpButton>
-                            <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GDE-ah-5QX">
-                                <rect key="frame" x="18" y="82" width="414" height="13"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="The higher the number, the quicker your subscriptions will be downloaded." id="g3K-qh-M6y">
-                                    <font key="font" metaFont="system" size="10"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GDE-ah-5QX">
+                                <rect key="frame" x="18" y="84" width="444" height="14"/>
+                                <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="The higher the number, the quicker your subscriptions will be downloaded." id="g3K-qh-M6y">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="37K-gU-v9y">
-                                <rect key="frame" x="18" y="48" width="414" height="26"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="However, high numbers also render your computer less responsive while refreshing feeds." id="5EA-1i-TuA">
-                                    <font key="font" metaFont="system" size="10"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="37K-gU-v9y">
+                                <rect key="frame" x="18" y="52" width="444" height="28"/>
+                                <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="However, high numbers also render your computer less responsive while refreshing feeds." id="5EA-1i-TuA">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pfv-Xq-7Aq">
-                                <rect key="frame" x="407" y="16" width="25" height="25"/>
+                                <rect key="frame" x="437" y="16" width="25" height="25"/>
                                 <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ud1-jM-s7K">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -391,13 +399,13 @@
                                     <action selector="showAdvancedHelp:" target="NjZ-bv-EoA" id="yjF-Sz-geR"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BGf-AD-UAd">
-                                <rect key="frame" x="18" y="180" width="414" height="26"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="Fv8-Xx-YR0">
-                                    <font key="font" metaFont="system" size="10"/>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BGf-AD-UAd">
+                                <rect key="frame" x="38" y="197" width="424" height="28"/>
+                                <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" id="Fv8-Xx-YR0">
+                                    <font key="font" metaFont="smallSystem"/>
                                     <string key="title">Vienna has a new browser built on top of WebKit. It is faster and more secure.
 After changing this setting, restart Vienna to test it. Feedback is very welcome!</string>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -407,40 +415,48 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                             <constraint firstItem="8eb-2O-wjd" firstAttribute="leading" secondItem="VMW-g6-f00" secondAttribute="trailing" constant="8" symbolic="YES" id="1Pt-do-a08"/>
                             <constraint firstItem="vvG-VT-CVp" firstAttribute="top" secondItem="8J7-Mc-HHy" secondAttribute="top" constant="20" symbolic="YES" id="5gp-qM-zw6"/>
                             <constraint firstItem="pfv-Xq-7Aq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8J7-Mc-HHy" secondAttribute="leading" constant="20" symbolic="YES" id="86k-vd-NJl"/>
-                            <constraint firstItem="GDE-ah-5QX" firstAttribute="top" secondItem="8eb-2O-wjd" secondAttribute="bottom" constant="8" symbolic="YES" id="Epf-N1-ked"/>
+                            <constraint firstItem="GDE-ah-5QX" firstAttribute="top" secondItem="8eb-2O-wjd" secondAttribute="bottom" constant="4" id="Epf-N1-ked"/>
                             <constraint firstItem="HJu-JH-e1a" firstAttribute="top" secondItem="vvG-VT-CVp" secondAttribute="bottom" constant="20" id="Fy2-6p-uH5"/>
                             <constraint firstAttribute="trailing" secondItem="HJu-JH-e1a" secondAttribute="trailing" constant="20" symbolic="YES" id="JjT-sm-cXF"/>
-                            <constraint firstItem="BGf-AD-UAd" firstAttribute="leading" secondItem="8J7-Mc-HHy" secondAttribute="leading" constant="20" symbolic="YES" id="LZP-qO-2uX"/>
+                            <constraint firstItem="QZV-Nb-fvA" firstAttribute="leading" secondItem="1u1-uu-U0M" secondAttribute="leading" constant="20" id="Kes-D1-Euq"/>
+                            <constraint firstItem="BGf-AD-UAd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8J7-Mc-HHy" secondAttribute="leading" constant="20" symbolic="YES" id="LZP-qO-2uX"/>
+                            <constraint firstItem="BGf-AD-UAd" firstAttribute="leading" secondItem="HJu-JH-e1a" secondAttribute="leading" constant="20" id="Lbi-Iw-heF"/>
+                            <constraint firstItem="QZV-Nb-fvA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8J7-Mc-HHy" secondAttribute="leading" constant="20" symbolic="YES" id="Mio-pG-UVv"/>
                             <constraint firstItem="vvG-VT-CVp" firstAttribute="leading" secondItem="8J7-Mc-HHy" secondAttribute="leading" constant="20" symbolic="YES" id="NlN-UY-n3b"/>
                             <constraint firstAttribute="trailing" secondItem="1u1-uu-U0M" secondAttribute="trailing" constant="20" symbolic="YES" id="PBF-4N-WSt"/>
+                            <constraint firstItem="8eb-2O-wjd" firstAttribute="top" secondItem="QZV-Nb-fvA" secondAttribute="bottom" constant="20" id="QwZ-0u-pfM"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8eb-2O-wjd" secondAttribute="trailing" constant="20" symbolic="YES" id="Rtg-SH-5JK"/>
                             <constraint firstItem="HJu-JH-e1a" firstAttribute="leading" secondItem="8J7-Mc-HHy" secondAttribute="leading" constant="20" symbolic="YES" id="U52-Om-beq"/>
-                            <constraint firstItem="pfv-Xq-7Aq" firstAttribute="top" secondItem="37K-gU-v9y" secondAttribute="bottom" constant="8" symbolic="YES" id="Wya-pc-Cgb"/>
+                            <constraint firstItem="pfv-Xq-7Aq" firstAttribute="top" secondItem="37K-gU-v9y" secondAttribute="bottom" constant="12" symbolic="YES" id="Wya-pc-Cgb"/>
+                            <constraint firstItem="8eb-2O-wjd" firstAttribute="top" secondItem="1u1-uu-U0M" secondAttribute="bottom" priority="750" constant="20" id="beK-Zh-WaT"/>
                             <constraint firstItem="37K-gU-v9y" firstAttribute="leading" secondItem="GDE-ah-5QX" secondAttribute="leading" id="c3X-0q-2dl"/>
                             <constraint firstItem="GDE-ah-5QX" firstAttribute="leading" secondItem="VMW-g6-f00" secondAttribute="leading" id="dai-0I-OCx"/>
+                            <constraint firstAttribute="trailing" secondItem="QZV-Nb-fvA" secondAttribute="trailing" constant="20" symbolic="YES" id="dhu-FJ-hqa"/>
                             <constraint firstAttribute="trailing" secondItem="pfv-Xq-7Aq" secondAttribute="trailing" constant="20" symbolic="YES" id="eAB-Mh-vTh"/>
                             <constraint firstAttribute="bottom" secondItem="pfv-Xq-7Aq" secondAttribute="bottom" constant="20" symbolic="YES" id="fQl-Qa-iAH"/>
                             <constraint firstItem="37K-gU-v9y" firstAttribute="trailing" secondItem="GDE-ah-5QX" secondAttribute="trailing" id="ggE-Ik-kJd"/>
-                            <constraint firstItem="8eb-2O-wjd" firstAttribute="top" secondItem="1u1-uu-U0M" secondAttribute="bottom" constant="20" symbolic="YES" id="ght-wc-p0P"/>
+                            <constraint firstItem="QZV-Nb-fvA" firstAttribute="top" secondItem="1u1-uu-U0M" secondAttribute="bottom" constant="4" id="ght-wc-p0P"/>
+                            <constraint firstItem="8eb-2O-wjd" firstAttribute="top" relation="greaterThanOrEqual" secondItem="1u1-uu-U0M" secondAttribute="bottom" constant="20" id="gke-S7-GZ1"/>
                             <constraint firstAttribute="trailing" secondItem="BGf-AD-UAd" secondAttribute="trailing" constant="20" symbolic="YES" id="khx-C3-8Dc"/>
                             <constraint firstAttribute="trailing" secondItem="GDE-ah-5QX" secondAttribute="trailing" constant="20" symbolic="YES" id="lT0-TT-aR5"/>
-                            <constraint firstItem="37K-gU-v9y" firstAttribute="top" secondItem="GDE-ah-5QX" secondAttribute="bottom" constant="8" symbolic="YES" id="mt1-a8-Zmf"/>
+                            <constraint firstItem="37K-gU-v9y" firstAttribute="top" secondItem="GDE-ah-5QX" secondAttribute="bottom" constant="4" id="mt1-a8-Zmf"/>
                             <constraint firstItem="1u1-uu-U0M" firstAttribute="leading" secondItem="8J7-Mc-HHy" secondAttribute="leading" constant="20" symbolic="YES" id="p1Z-8J-PDc"/>
                             <constraint firstItem="1u1-uu-U0M" firstAttribute="top" secondItem="BGf-AD-UAd" secondAttribute="bottom" constant="20" id="qaV-wu-Khx"/>
-                            <constraint firstItem="BGf-AD-UAd" firstAttribute="top" secondItem="HJu-JH-e1a" secondAttribute="bottom" constant="8" symbolic="YES" id="tNk-IT-HgU"/>
+                            <constraint firstItem="BGf-AD-UAd" firstAttribute="top" secondItem="HJu-JH-e1a" secondAttribute="bottom" constant="4" id="tNk-IT-HgU"/>
                             <constraint firstAttribute="trailing" secondItem="vvG-VT-CVp" secondAttribute="trailing" constant="20" symbolic="YES" id="vtd-DY-6PJ"/>
                             <constraint firstItem="VMW-g6-f00" firstAttribute="baseline" secondItem="8eb-2O-wjd" secondAttribute="baseline" id="w5o-QA-RVB"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="concurrentDownloads" destination="8eb-2O-wjd" id="pIP-FA-KAN"/>
+                        <outlet property="javaScriptNoticeTextField" destination="QZV-Nb-fvA" id="7BA-gp-SqN"/>
                         <outlet property="previewNewBrowserButton" destination="HJu-JH-e1a" id="yCg-55-dum"/>
                         <outlet property="useJavaScriptButton" destination="1u1-uu-U0M" id="D4j-kD-89C"/>
                     </connections>
                 </viewController>
                 <customObject id="kO8-qM-JFc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="619" y="1166"/>
+            <point key="canvasLocation" x="619" y="1202"/>
         </scene>
         <!--Appearance Preferences View Controller-->
         <scene sceneID="YM9-5d-aO0">
@@ -451,7 +467,7 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WR8-u8-Vm9">
-                                <rect key="frame" x="18" y="150" width="97" height="16"/>
+                                <rect key="frame" x="18" y="150" width="96" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Article list font:" id="ITA-U9-lhX">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -462,7 +478,7 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1RP-By-TQq">
-                                <rect key="frame" x="121" y="147" width="232" height="21"/>
+                                <rect key="frame" x="120" y="147" width="233" height="21"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="3NA-G9-1c6">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -480,7 +496,7 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cAr-Rb-nLB">
-                                <rect key="frame" x="18" y="119" width="97" height="16"/>
+                                <rect key="frame" x="18" y="119" width="96" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Folder list font:" id="M8s-xu-lWh">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -491,7 +507,7 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                                 </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kjQ-IL-0ll">
-                                <rect key="frame" x="121" y="116" width="232" height="21"/>
+                                <rect key="frame" x="120" y="116" width="233" height="21"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="QsM-oK-2uw">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -601,19 +617,19 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
             <objects>
                 <viewController id="T2z-OK-VtO" customClass="GeneralPreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="6Zn-BI-L2K">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="445"/>
+                        <rect key="frame" x="0.0" y="0.0" width="458" height="472"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rmx-sO-e7b">
-                                <rect key="frame" x="18" y="408" width="144" height="16"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Check for new articles:" id="Oqg-6W-NAL">
+                                <rect key="frame" x="18" y="435" width="143" height="16"/>
+                                <textFieldCell key="cell" title="Check for new articles:" id="Oqg-6W-NAL">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hd9-hf-LFo">
-                                <rect key="frame" x="165" y="401" width="154" height="25"/>
+                                <rect key="frame" x="164" y="428" width="192" height="25"/>
                                 <popUpButtonCell key="cell" type="push" title="Manually" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="7Za-ay-jlt" id="ohB-Gl-p3X">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -651,8 +667,8 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rjk-vu-JNM">
-                                <rect key="frame" x="36" y="380" width="394" height="18"/>
-                                <buttonCell key="cell" type="check" title="Check for new articles on start up" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="Ljf-Qd-6Ho">
+                                <rect key="frame" x="36" y="407" width="231" height="18"/>
+                                <buttonCell key="cell" type="check" title="Check for new articles on start up" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Ljf-Qd-6Ho">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -661,8 +677,8 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YHk-qo-gYO">
-                                <rect key="frame" x="36" y="358" width="394" height="18"/>
-                                <buttonCell key="cell" type="check" title="Mark updated articles as new" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="4vm-80-j33">
+                                <rect key="frame" x="36" y="385" width="204" height="18"/>
+                                <buttonCell key="cell" type="check" title="Mark updated articles as new" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="4vm-80-j33">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -671,19 +687,19 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Wi-RB-PIn">
-                                <rect key="frame" x="18" y="323" width="414" height="16"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="When new unread articles are retrieved:" id="iCs-T5-L1c">
+                                <rect key="frame" x="18" y="350" width="245" height="16"/>
+                                <textFieldCell key="cell" title="When new unread articles are retrieved:" id="iCs-T5-L1c">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
                                     <accessibilityConnection property="link" destination="0oy-fx-aoF" id="L75-S9-bG8"/>
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0oy-fx-aoF">
-                                <rect key="frame" x="36" y="298" width="394" height="18"/>
-                                <buttonCell key="cell" type="check" title="Bounce the application icon" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="jfH-Hq-gRk">
+                                <rect key="frame" x="36" y="325" width="194" height="18"/>
+                                <buttonCell key="cell" type="check" title="Bounce the application icon" bezelStyle="regularSquare" imagePosition="left" inset="2" id="jfH-Hq-gRk">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -692,16 +708,16 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fZd-pw-BJu">
-                                <rect key="frame" x="18" y="263" width="414" height="16"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Mark current article read:" id="adB-qE-xKg">
+                                <rect key="frame" x="18" y="290" width="158" height="16"/>
+                                <textFieldCell key="cell" alignment="left" title="Mark current article read:" id="adB-qE-xKg">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mgd-Xn-r0g">
-                                <rect key="frame" x="34" y="238" width="396" height="18"/>
-                                <buttonCell key="cell" type="radio" title="After &quot;Next Unread&quot; command" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="jkb-TT-wPC">
+                                <rect key="frame" x="34" y="265" width="211" height="18"/>
+                                <buttonCell key="cell" type="radio" title="After &quot;Next Unread&quot; command" bezelStyle="regularSquare" imagePosition="left" inset="2" id="jkb-TT-wPC">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -710,8 +726,8 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qF5-CX-w0a">
-                                <rect key="frame" x="34" y="216" width="396" height="18"/>
-                                <buttonCell key="cell" type="radio" title="After a short delay" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="McN-fD-0Cv">
+                                <rect key="frame" x="34" y="243" width="138" height="18"/>
+                                <buttonCell key="cell" type="radio" title="After a short delay" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="McN-fD-0Cv">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -719,95 +735,164 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                                     <action selector="changeMarkReadBehaviour:" target="T2z-OK-VtO" id="pKl-Rr-0Du"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BhA-zb-SHx">
-                                <rect key="frame" x="18" y="179" width="159" height="16"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Move articles to Trash:" id="bom-nB-4zx">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <popUpButton verticalHuggingPriority="750" placeholderIntrinsicWidth="132" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="cDG-ln-uKe">
-                                <rect key="frame" x="180" y="172" width="139" height="26"/>
-                                <popUpButtonCell key="cell" type="push" title="Never" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="h9d-GD-q32" id="JSK-7c-lnj">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="niU-QW-win">
-                                        <items>
-                                            <menuItem title="Never" state="on" id="h9d-GD-q32"/>
-                                            <menuItem title="After a day" id="c4l-M5-qB1"/>
-                                            <menuItem title="After two days" id="sJE-bd-4mK"/>
-                                            <menuItem title="After a week" id="xfd-Vp-kJy">
-                                                <modifierMask key="keyEquivalentModifierMask"/>
-                                            </menuItem>
-                                            <menuItem title="After two weeks" id="Dw9-en-4Zu">
-                                                <modifierMask key="keyEquivalentModifierMask"/>
-                                            </menuItem>
-                                            <menuItem title="After a month" id="OIa-NQ-jQi">
-                                                <modifierMask key="keyEquivalentModifierMask"/>
-                                            </menuItem>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                                <connections>
-                                    <action selector="changeExpireDuration:" target="T2z-OK-VtO" id="M5u-6p-LxF"/>
-                                </connections>
-                            </popUpButton>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UVp-Fb-Vxi">
-                                <rect key="frame" x="18" y="149" width="159" height="16"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Save downloaded files to:" id="yLU-Xs-TGw">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <popUpButton verticalHuggingPriority="750" placeholderIntrinsicWidth="132" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="Aw4-0j-7h9">
-                                <rect key="frame" x="180" y="141" width="139" height="26"/>
-                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="CXe-aF-iLH" id="Fvw-QL-Jga">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="3Di-sX-ys8">
-                                        <items>
-                                            <menuItem state="on" id="CXe-aF-iLH"/>
-                                            <menuItem isSeparatorItem="YES" id="FUw-xb-ICZ">
-                                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                                            </menuItem>
-                                            <menuItem title="Other…" id="nSW-3T-Zoh"/>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                                <connections>
-                                    <action selector="changeDownloadFolder:" target="T2z-OK-VtO" id="YXa-tp-RKh"/>
-                                </connections>
-                            </popUpButton>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Aqt-Jk-SB3">
-                                <rect key="frame" x="18" y="118" width="159" height="16"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Default RSS reader:" id="YHN-Up-rwa">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <popUpButton verticalHuggingPriority="750" placeholderIntrinsicWidth="132" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="U0G-xt-64s">
-                                <rect key="frame" x="180" y="110" width="139" height="26"/>
-                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="ZMF-yd-3Ps" id="0y5-Pf-IS7">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="3Zm-0u-E1b">
-                                        <items>
-                                            <menuItem state="on" id="ZMF-yd-3Ps">
-                                                <modifierMask key="keyEquivalentModifierMask"/>
-                                            </menuItem>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                                <connections>
-                                    <action selector="selectDefaultLinksHandler:" target="T2z-OK-VtO" id="Xfe-1n-FZS"/>
-                                </connections>
-                            </popUpButton>
+                            <gridView xPlacement="trailing" yPlacement="fill" rowAlignment="firstBaseline" rowSpacing="10" columnSpacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="waH-jq-hvj">
+                                <rect key="frame" x="20" y="114" width="332" height="110"/>
+                                <rows>
+                                    <gridRow id="jiB-sm-Qgl"/>
+                                    <gridRow id="jYj-Or-3bF"/>
+                                    <gridRow id="4ed-Yn-iO9"/>
+                                    <gridRow id="NvZ-rV-Kju"/>
+                                </rows>
+                                <columns>
+                                    <gridColumn id="bJ4-jq-nRI"/>
+                                    <gridColumn xPlacement="fill" id="d5X-pS-6iy"/>
+                                </columns>
+                                <gridCells>
+                                    <gridCell row="jiB-sm-Qgl" column="bJ4-jq-nRI" id="eap-Lr-EBH">
+                                        <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BhA-zb-SHx">
+                                            <rect key="frame" x="15" y="93" width="142" height="16"/>
+                                            <textFieldCell key="cell" title="Move articles to Trash:" id="bom-nB-4zx">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </gridCell>
+                                    <gridCell row="jiB-sm-Qgl" column="d5X-pS-6iy" id="w4O-zX-elL">
+                                        <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cDG-ln-uKe">
+                                            <rect key="frame" x="160" y="86" width="176" height="25"/>
+                                            <popUpButtonCell key="cell" type="push" title="Manually" bezelStyle="rounded" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="h9d-GD-q32" id="JSK-7c-lnj">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" id="niU-QW-win">
+                                                    <items>
+                                                        <menuItem title="Manually" state="on" id="h9d-GD-q32"/>
+                                                        <menuItem isSeparatorItem="YES" id="Lxi-Tn-40b"/>
+                                                        <menuItem title="After one day" tag="1" id="c4l-M5-qB1"/>
+                                                        <menuItem title="After two days" tag="2" id="sJE-bd-4mK"/>
+                                                        <menuItem title="After one week" tag="7" id="xfd-Vp-kJy">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
+                                                        <menuItem title="After two weeks" tag="14" id="Dw9-en-4Zu">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
+                                                        <menuItem title="After one month" tag="1000" id="OIa-NQ-jQi">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
+                                                    </items>
+                                                </menu>
+                                            </popUpButtonCell>
+                                            <connections>
+                                                <action selector="changeExpireDuration:" target="T2z-OK-VtO" id="M5u-6p-LxF"/>
+                                            </connections>
+                                        </popUpButton>
+                                    </gridCell>
+                                    <gridCell row="jYj-Or-3bF" column="bJ4-jq-nRI" id="l30-2b-cs7">
+                                        <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GTr-OG-SUc">
+                                            <rect key="frame" x="18" y="63" width="139" height="16"/>
+                                            <textFieldCell key="cell" title="Erase deleted articles:" id="HH2-sh-rEx">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </gridCell>
+                                    <gridCell row="jYj-Or-3bF" column="d5X-pS-6iy" id="Bnv-IZ-34h">
+                                        <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Fo-FS-Msx">
+                                            <rect key="frame" x="160" y="56" width="176" height="25"/>
+                                            <popUpButtonCell key="cell" type="push" title="Ask when Vienna quits" bezelStyle="rounded" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="2" imageScaling="proportionallyDown" inset="2" selectedItem="gnv-f7-Z4Z" id="tvD-fU-081">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" id="zPX-8x-Osm">
+                                                    <items>
+                                                        <menuItem title="Ask when Vienna quits" state="on" tag="2" id="gnv-f7-Z4Z">
+                                                            <attributedString key="userComments">
+                                                                <fragment content="Erase deleted articles: Ask when Vienna quits"/>
+                                                            </attributedString>
+                                                        </menuItem>
+                                                        <menuItem title="When Vienna quits" tag="1" id="Z9k-7x-3gF">
+                                                            <attributedString key="userComments">
+                                                                <fragment content="Erase deleted articles: When Vienna quits"/>
+                                                            </attributedString>
+                                                        </menuItem>
+                                                        <menuItem title="Manually" id="ANH-Pd-PJC">
+                                                            <attributedString key="userComments">
+                                                                <fragment content="Erase deleted articles: Manually"/>
+                                                            </attributedString>
+                                                        </menuItem>
+                                                    </items>
+                                                </menu>
+                                            </popUpButtonCell>
+                                            <connections>
+                                                <binding destination="xVo-6Y-uJQ" name="selectedTag" keyPath="values.EmptyTrashNotification" id="3mU-gj-Cs1"/>
+                                            </connections>
+                                        </popUpButton>
+                                    </gridCell>
+                                    <gridCell row="4ed-Yn-iO9" column="bJ4-jq-nRI" id="2gG-tp-UOw">
+                                        <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UVp-Fb-Vxi">
+                                            <rect key="frame" x="-2" y="33" width="159" height="16"/>
+                                            <textFieldCell key="cell" title="Save downloaded files to:" id="yLU-Xs-TGw">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </gridCell>
+                                    <gridCell row="4ed-Yn-iO9" column="d5X-pS-6iy" id="nZ6-Zw-RvH">
+                                        <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Aw4-0j-7h9">
+                                            <rect key="frame" x="160" y="26" width="176" height="25"/>
+                                            <popUpButtonCell key="cell" type="push" bezelStyle="rounded" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="CXe-aF-iLH" id="Fvw-QL-Jga">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" id="3Di-sX-ys8">
+                                                    <items>
+                                                        <menuItem state="on" id="CXe-aF-iLH"/>
+                                                        <menuItem isSeparatorItem="YES" id="FUw-xb-ICZ">
+                                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                                        </menuItem>
+                                                        <menuItem title="Other…" id="nSW-3T-Zoh"/>
+                                                    </items>
+                                                </menu>
+                                            </popUpButtonCell>
+                                            <connections>
+                                                <action selector="changeDownloadFolder:" target="T2z-OK-VtO" id="YXa-tp-RKh"/>
+                                            </connections>
+                                        </popUpButton>
+                                    </gridCell>
+                                    <gridCell row="NvZ-rV-Kju" column="bJ4-jq-nRI" id="cfM-eG-DXp">
+                                        <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Aqt-Jk-SB3">
+                                            <rect key="frame" x="34" y="3" width="123" height="16"/>
+                                            <textFieldCell key="cell" title="Default RSS reader:" id="YHN-Up-rwa">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </gridCell>
+                                    <gridCell row="NvZ-rV-Kju" column="d5X-pS-6iy" id="w4H-hQ-EUx">
+                                        <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U0G-xt-64s">
+                                            <rect key="frame" x="160" y="-4" width="176" height="25"/>
+                                            <popUpButtonCell key="cell" type="push" bezelStyle="rounded" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="ZMF-yd-3Ps" id="0y5-Pf-IS7">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" id="3Zm-0u-E1b">
+                                                    <items>
+                                                        <menuItem state="on" id="ZMF-yd-3Ps">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
+                                                    </items>
+                                                </menu>
+                                            </popUpButtonCell>
+                                            <connections>
+                                                <action selector="selectDefaultLinksHandler:" target="T2z-OK-VtO" id="Xfe-1n-FZS"/>
+                                            </connections>
+                                        </popUpButton>
+                                    </gridCell>
+                                </gridCells>
+                            </gridView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7gv-LJ-Ouu">
-                                <rect key="frame" x="18" y="77" width="412" height="18"/>
-                                <buttonCell key="cell" type="check" title="Open new links in the background" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="erE-oh-cbw">
+                                <rect key="frame" x="18" y="77" width="231" height="18"/>
+                                <buttonCell key="cell" type="check" title="Open new links in the background" bezelStyle="regularSquare" imagePosition="left" inset="2" id="erE-oh-cbw">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -816,8 +901,8 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Py0-wt-kSJ">
-                                <rect key="frame" x="18" y="55" width="412" height="18"/>
-                                <buttonCell key="cell" type="check" title="Open links in external browser" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="flH-2D-s6O">
+                                <rect key="frame" x="18" y="55" width="209" height="18"/>
+                                <buttonCell key="cell" type="check" title="Open links in external browser" bezelStyle="regularSquare" imagePosition="left" inset="2" id="flH-2D-s6O">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -826,8 +911,8 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="I7s-YO-KpK">
-                                <rect key="frame" x="18" y="19" width="412" height="18"/>
-                                <buttonCell key="cell" type="check" title="Show in menu bar" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="FFP-H1-weF">
+                                <rect key="frame" x="18" y="19" width="134" height="18"/>
+                                <buttonCell key="cell" type="check" title="Show in menu bar" bezelStyle="regularSquare" imagePosition="left" inset="2" id="FFP-H1-weF">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -837,62 +922,47 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Py0-wt-kSJ" secondAttribute="trailing" constant="20" symbolic="YES" id="0Kj-Ur-S4Z"/>
+                            <constraint firstItem="waH-jq-hvj" firstAttribute="top" secondItem="qF5-CX-w0a" secondAttribute="bottom" constant="20" id="0A9-MI-j9A"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Py0-wt-kSJ" secondAttribute="trailing" constant="20" symbolic="YES" id="0Kj-Ur-S4Z"/>
                             <constraint firstItem="rjk-vu-JNM" firstAttribute="leading" secondItem="rmx-sO-e7b" secondAttribute="leading" constant="18" id="0lh-hn-Sdb"/>
-                            <constraint firstItem="cDG-ln-uKe" firstAttribute="trailing" secondItem="Hd9-hf-LFo" secondAttribute="trailing" id="0w3-fU-ctV"/>
                             <constraint firstItem="0oy-fx-aoF" firstAttribute="top" secondItem="4Wi-RB-PIn" secondAttribute="bottom" constant="8" id="16R-rY-DRq"/>
                             <constraint firstAttribute="bottom" secondItem="I7s-YO-KpK" secondAttribute="bottom" constant="20" symbolic="YES" id="2kt-DT-5Px"/>
                             <constraint firstItem="fZd-pw-BJu" firstAttribute="top" secondItem="0oy-fx-aoF" secondAttribute="bottom" constant="20" id="2mu-ZD-ulx"/>
                             <constraint firstItem="YHk-qo-gYO" firstAttribute="leading" secondItem="rmx-sO-e7b" secondAttribute="leading" constant="18" id="3jY-KI-0aI"/>
-                            <constraint firstItem="cDG-ln-uKe" firstAttribute="leading" secondItem="BhA-zb-SHx" secondAttribute="trailing" constant="8" symbolic="YES" id="6uQ-KY-pCg"/>
                             <constraint firstItem="Py0-wt-kSJ" firstAttribute="leading" secondItem="6Zn-BI-L2K" secondAttribute="leading" constant="20" symbolic="YES" id="732-5g-8v8"/>
                             <constraint firstItem="qF5-CX-w0a" firstAttribute="top" secondItem="mgd-Xn-r0g" secondAttribute="bottom" constant="6" symbolic="YES" id="7By-Vr-xGR"/>
                             <constraint firstItem="mgd-Xn-r0g" firstAttribute="leading" secondItem="fZd-pw-BJu" secondAttribute="leading" constant="16" id="BSd-V9-lTT"/>
-                            <constraint firstItem="rmx-sO-e7b" firstAttribute="leading" secondItem="6Zn-BI-L2K" secondAttribute="leading" constant="20" symbolic="YES" id="C50-29-AKF"/>
-                            <constraint firstAttribute="trailing" secondItem="qF5-CX-w0a" secondAttribute="trailing" constant="20" symbolic="YES" id="CJy-5I-1vC"/>
-                            <constraint firstItem="Aw4-0j-7h9" firstAttribute="top" secondItem="cDG-ln-uKe" secondAttribute="bottom" constant="10" symbolic="YES" id="EDf-m7-1nc"/>
-                            <constraint firstItem="U0G-xt-64s" firstAttribute="leading" secondItem="Aw4-0j-7h9" secondAttribute="leading" id="FKb-jG-PC0"/>
+                            <constraint firstItem="rmx-sO-e7b" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Zn-BI-L2K" secondAttribute="leading" constant="20" symbolic="YES" id="C50-29-AKF"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qF5-CX-w0a" secondAttribute="trailing" constant="20" symbolic="YES" id="CJy-5I-1vC"/>
                             <constraint firstItem="7gv-LJ-Ouu" firstAttribute="leading" secondItem="6Zn-BI-L2K" secondAttribute="leading" constant="20" symbolic="YES" id="G6H-id-JSw"/>
                             <constraint firstItem="Py0-wt-kSJ" firstAttribute="top" secondItem="7gv-LJ-Ouu" secondAttribute="bottom" constant="6" symbolic="YES" id="IPP-4I-zJv"/>
                             <constraint firstItem="rjk-vu-JNM" firstAttribute="top" secondItem="Hd9-hf-LFo" secondAttribute="bottom" constant="8" symbolic="YES" id="KHz-0N-z9O"/>
                             <constraint firstItem="mgd-Xn-r0g" firstAttribute="top" secondItem="fZd-pw-BJu" secondAttribute="bottom" constant="8" symbolic="YES" id="Mqa-LV-RxF"/>
-                            <constraint firstItem="7gv-LJ-Ouu" firstAttribute="top" secondItem="U0G-xt-64s" secondAttribute="bottom" constant="20" id="Qma-Hk-xoc"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="U0G-xt-64s" secondAttribute="trailing" constant="20" symbolic="YES" id="T2A-ee-YV1"/>
                             <constraint firstItem="4Wi-RB-PIn" firstAttribute="leading" secondItem="6Zn-BI-L2K" secondAttribute="leading" constant="20" symbolic="YES" id="UPv-1O-Waz"/>
                             <constraint firstItem="rmx-sO-e7b" firstAttribute="baseline" secondItem="Hd9-hf-LFo" secondAttribute="baseline" id="Vcf-TH-puY"/>
                             <constraint firstItem="qF5-CX-w0a" firstAttribute="leading" secondItem="fZd-pw-BJu" secondAttribute="leading" constant="16" id="XOe-ZO-Wcd"/>
-                            <constraint firstItem="Aqt-Jk-SB3" firstAttribute="leading" secondItem="BhA-zb-SHx" secondAttribute="leading" id="Xcd-xE-jei"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Hd9-hf-LFo" secondAttribute="trailing" constant="20" symbolic="YES" id="Y73-1I-NM9"/>
                             <constraint firstItem="I7s-YO-KpK" firstAttribute="leading" secondItem="6Zn-BI-L2K" secondAttribute="leading" constant="20" symbolic="YES" id="YcX-Vr-AFP"/>
-                            <constraint firstAttribute="trailing" secondItem="7gv-LJ-Ouu" secondAttribute="trailing" constant="20" symbolic="YES" id="aB9-s9-eFb"/>
-                            <constraint firstItem="BhA-zb-SHx" firstAttribute="leading" secondItem="rmx-sO-e7b" secondAttribute="leading" id="axU-AU-6YR"/>
-                            <constraint firstItem="BhA-zb-SHx" firstAttribute="baseline" secondItem="cDG-ln-uKe" secondAttribute="baseline" id="cCb-uf-zOn"/>
-                            <constraint firstItem="U0G-xt-64s" firstAttribute="top" secondItem="Aw4-0j-7h9" secondAttribute="bottom" constant="10" symbolic="YES" id="cj7-qe-xPH"/>
-                            <constraint firstAttribute="trailing" secondItem="4Wi-RB-PIn" secondAttribute="trailing" constant="20" symbolic="YES" id="dMe-dS-ITz"/>
-                            <constraint firstItem="U0G-xt-64s" firstAttribute="leading" secondItem="Aqt-Jk-SB3" secondAttribute="trailing" constant="8" symbolic="YES" id="dge-CB-hOO"/>
+                            <constraint firstItem="Hd9-hf-LFo" firstAttribute="trailing" secondItem="waH-jq-hvj" secondAttribute="trailing" id="Zvd-Zq-rcU"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7gv-LJ-Ouu" secondAttribute="trailing" constant="20" symbolic="YES" id="aB9-s9-eFb"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4Wi-RB-PIn" secondAttribute="trailing" constant="20" symbolic="YES" id="dMe-dS-ITz"/>
                             <constraint firstItem="Hd9-hf-LFo" firstAttribute="leading" secondItem="rmx-sO-e7b" secondAttribute="trailing" constant="8" symbolic="YES" id="g3C-Ms-rXa"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cDG-ln-uKe" secondAttribute="trailing" constant="20" symbolic="YES" id="hBy-bm-aWe"/>
-                            <constraint firstItem="Aw4-0j-7h9" firstAttribute="firstBaseline" secondItem="UVp-Fb-Vxi" secondAttribute="firstBaseline" id="jXk-cL-Tid"/>
-                            <constraint firstAttribute="trailing" secondItem="0oy-fx-aoF" secondAttribute="trailing" constant="20" symbolic="YES" id="jie-C9-Wfc"/>
+                            <constraint firstItem="rmx-sO-e7b" firstAttribute="leading" secondItem="waH-jq-hvj" secondAttribute="leading" id="hQP-Ns-Sma"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0oy-fx-aoF" secondAttribute="trailing" constant="20" symbolic="YES" id="jie-C9-Wfc"/>
                             <constraint firstItem="YHk-qo-gYO" firstAttribute="top" secondItem="rjk-vu-JNM" secondAttribute="bottom" constant="6" symbolic="YES" id="jzV-X1-6b4"/>
                             <constraint firstItem="I7s-YO-KpK" firstAttribute="top" secondItem="Py0-wt-kSJ" secondAttribute="bottom" constant="20" id="kUc-cF-sXc"/>
-                            <constraint firstItem="cDG-ln-uKe" firstAttribute="top" secondItem="qF5-CX-w0a" secondAttribute="bottom" constant="20" id="kz4-5T-s9R"/>
-                            <constraint firstAttribute="trailing" secondItem="fZd-pw-BJu" secondAttribute="trailing" constant="20" symbolic="YES" id="lZd-AR-KB3"/>
-                            <constraint firstItem="U0G-xt-64s" firstAttribute="trailing" secondItem="Aw4-0j-7h9" secondAttribute="trailing" id="llt-wf-QnR"/>
-                            <constraint firstItem="Aw4-0j-7h9" firstAttribute="leading" secondItem="cDG-ln-uKe" secondAttribute="leading" id="qDo-wq-To1"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fZd-pw-BJu" secondAttribute="trailing" constant="20" symbolic="YES" id="lZd-AR-KB3"/>
                             <constraint firstItem="0oy-fx-aoF" firstAttribute="leading" secondItem="4Wi-RB-PIn" secondAttribute="leading" constant="18" id="qOu-RA-jDw"/>
-                            <constraint firstAttribute="trailing" secondItem="I7s-YO-KpK" secondAttribute="trailing" constant="20" symbolic="YES" id="sis-JQ-jnw"/>
-                            <constraint firstItem="U0G-xt-64s" firstAttribute="firstBaseline" secondItem="Aqt-Jk-SB3" secondAttribute="firstBaseline" id="smh-2z-dF5"/>
-                            <constraint firstAttribute="trailing" secondItem="rjk-vu-JNM" secondAttribute="trailing" constant="20" symbolic="YES" id="sq3-bO-a7Z"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="I7s-YO-KpK" secondAttribute="trailing" constant="20" symbolic="YES" id="sis-JQ-jnw"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rjk-vu-JNM" secondAttribute="trailing" constant="20" symbolic="YES" id="sq3-bO-a7Z"/>
                             <constraint firstItem="fZd-pw-BJu" firstAttribute="leading" secondItem="6Zn-BI-L2K" secondAttribute="leading" constant="20" symbolic="YES" id="twi-ks-uZK"/>
-                            <constraint firstAttribute="trailing" secondItem="mgd-Xn-r0g" secondAttribute="trailing" constant="20" symbolic="YES" id="wDU-d3-3wm"/>
-                            <constraint firstItem="UVp-Fb-Vxi" firstAttribute="leading" secondItem="Aqt-Jk-SB3" secondAttribute="leading" id="wGH-ij-Hah"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mgd-Xn-r0g" secondAttribute="trailing" constant="20" symbolic="YES" id="wDU-d3-3wm"/>
                             <constraint firstItem="4Wi-RB-PIn" firstAttribute="top" secondItem="YHk-qo-gYO" secondAttribute="bottom" constant="20" id="wQ6-J4-vmL"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Aw4-0j-7h9" secondAttribute="trailing" constant="20" symbolic="YES" id="xQe-Ck-S14"/>
-                            <constraint firstItem="Aw4-0j-7h9" firstAttribute="leading" secondItem="UVp-Fb-Vxi" secondAttribute="trailing" constant="8" symbolic="YES" id="yaJ-6n-a7X"/>
+                            <constraint firstItem="7gv-LJ-Ouu" firstAttribute="top" secondItem="waH-jq-hvj" secondAttribute="bottom" constant="20" id="y4h-0U-fEB"/>
+                            <constraint firstItem="waH-jq-hvj" firstAttribute="leading" secondItem="6Zn-BI-L2K" secondAttribute="leading" constant="20" symbolic="YES" id="yBg-SN-hms"/>
                             <constraint firstItem="Hd9-hf-LFo" firstAttribute="top" secondItem="6Zn-BI-L2K" secondAttribute="top" constant="20" symbolic="YES" id="yhD-LY-FW9"/>
-                            <constraint firstItem="Aw4-0j-7h9" firstAttribute="trailing" secondItem="cDG-ln-uKe" secondAttribute="trailing" id="zf6-0s-XxX"/>
-                            <constraint firstAttribute="trailing" secondItem="YHk-qo-gYO" secondAttribute="trailing" constant="20" symbolic="YES" id="ziR-we-eOq"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="waH-jq-hvj" secondAttribute="trailing" constant="98" id="zYm-hW-0Hs"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YHk-qo-gYO" secondAttribute="trailing" constant="20" symbolic="YES" id="ziR-we-eOq"/>
                         </constraints>
                     </view>
                     <connections>
@@ -911,8 +981,9 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                     </connections>
                 </viewController>
                 <customObject id="XD4-bF-7vi" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="xVo-6Y-uJQ"/>
             </objects>
-            <point key="canvasLocation" x="-362" y="1117"/>
+            <point key="canvasLocation" x="-362" y="1124"/>
         </scene>
         <!--Update Preferences View Controller-->
         <scene sceneID="fY4-8F-Vij">
