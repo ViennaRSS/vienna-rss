@@ -140,6 +140,8 @@
 	<string>Vienna.sdef</string>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
+	<key>SUEnableInstallerLauncherService</key>
+	<false/>
 	<key>SUPublicDSAKeyFile</key>
 	<string>SparkleDSAPublicKey.pem</string>
 	<key>SUPublicEDKey</key>
