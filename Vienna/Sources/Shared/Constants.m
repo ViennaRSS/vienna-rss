@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-@import Foundation;
+@import Cocoa;
 
 NSString * MA_DefaultUserAgentString = @"%@/%@ (Macintosh; Intel macOS %@)";
 NSString * MA_BrowserUserAgentString = @"(Macintosh; Intel Mac OS X %@) AppleWebKit/%@ (KHTML, like Gecko) Version/%@ Safari/604.1.38 %@/%@";
@@ -99,24 +99,25 @@ const NSInteger MA_Default_ConcurrentDownloads = 10;
 
 // Constants for External Weblog Editor Interface according to http://ranchero.com/netnewswire/developers/externalinterface.php
 // We are not using all of them yet, but they might become useful in the future.
-const AEKeyword EditDataItemAppleEventClass = 'EBlg';
-const AEKeyword EditDataItemAppleEventID = 'oitm';
-const AEKeyword DataItemTitle = 'titl';
-const AEKeyword DataItemDescription = 'desc';
-const AEKeyword DataItemSummary = 'summ';
-const AEKeyword DataItemLink = 'link';
-const AEKeyword DataItemPermalink = 'plnk';
-const AEKeyword DataItemSubject = 'subj';
-const AEKeyword DataItemCreator = 'crtr';
-const AEKeyword DataItemCommentsURL = 'curl';
-const AEKeyword DataItemGUID = 'guid';
-const AEKeyword DataItemSourceName = 'snam';
-const AEKeyword DataItemSourceHomeURL = 'hurl';
-const AEKeyword DataItemSourceFeedURL = 'furl';
+AEKeyword const EditDataItemAppleEventClass = 'EBlg';
+AEKeyword const EditDataItemAppleEventID = 'oitm';
+AEKeyword const DataItemTitle = 'titl';
+AEKeyword const DataItemDescription = 'desc';
+AEKeyword const DataItemSummary = 'summ';
+AEKeyword const DataItemLink = 'link';
+AEKeyword const DataItemPermalink = 'plnk';
+AEKeyword const DataItemSubject = 'subj';
+AEKeyword const DataItemCreator = 'crtr';
+AEKeyword const DataItemCommentsURL = 'curl';
+AEKeyword const DataItemGUID = 'guid';
+AEKeyword const DataItemSourceName = 'snam';
+AEKeyword const DataItemSourceHomeURL = 'hurl';
+AEKeyword const DataItemSourceFeedURL = 'furl';
 
 // Custom pasteboard types
-NSString * MA_PBoardType_FolderList = @"ViennaFolderType";
-NSString * MA_PBoardType_RSSSource = @"CorePasteboardFlavorType 0x52535373";
-NSString * MA_PBoardType_RSSItem = @"CorePasteboardFlavorType 0x52535369";
-NSString * MA_PBoardType_url = @"CorePasteboardFlavorType 0x75726C20";
-NSString * MA_PBoardType_urln = @"CorePasteboardFlavorType 0x75726C6E";
+NSPasteboardType const VNAPasteboardTypeFolderList = @"ViennaFolderType";
+NSPasteboardType const VNAPasteboardTypeRSSSource = @"CorePasteboardFlavorType 0x52535373";
+NSPasteboardType const VNAPasteboardTypeRSSItem = @"CorePasteboardFlavorType 0x52535369";
+NSPasteboardType const VNAPasteboardTypeURL = @"CorePasteboardFlavorType 0x75726C20";
+NSPasteboardType const VNAPasteboardTypeURLName = @"CorePasteboardFlavorType 0x75726C6E";
+NSPasteboardType const VNAPasteboardTypeWebURLsWithTitles = @"WebURLsWithTitlesPboardType";

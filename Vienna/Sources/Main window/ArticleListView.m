@@ -1519,14 +1519,14 @@
 	NSInteger count = rowIndexes.count;
 	
 	// Set up the pasteboard
-	[pboard declareTypes:@[MA_PBoardType_RSSItem, @"WebURLsWithTitlesPboardType", NSPasteboardTypeString, NSPasteboardTypeHTML]
+	[pboard declareTypes:@[VNAPasteboardTypeRSSItem, VNAPasteboardTypeWebURLsWithTitles, NSPasteboardTypeString, NSPasteboardTypeHTML]
                    owner:self];
     if (count == 1) {
         if (@available(macOS 10.13, *)) {
-            [pboard addTypes:@[MA_PBoardType_url, MA_PBoardType_urln, NSPasteboardTypeURL]
+            [pboard addTypes:@[VNAPasteboardTypeURL, VNAPasteboardTypeURLName, NSPasteboardTypeURL]
                        owner:self];
         } else {
-            [pboard addTypes:@[MA_PBoardType_url, MA_PBoardType_urln, NSURLPboardType]
+            [pboard addTypes:@[VNAPasteboardTypeURL, VNAPasteboardTypeURLName, NSURLPboardType]
                        owner:self];
         }
     }
@@ -1564,8 +1564,8 @@
 		
 		if (count == 1)
 		{
-			[pboard setString:msgLink forType:MA_PBoardType_url];
-			[pboard setString:msgTitle forType:MA_PBoardType_urln];
+			[pboard setString:msgLink forType:VNAPasteboardTypeURL];
+			[pboard setString:msgTitle forType:VNAPasteboardTypeURLName];
 			
 			// Write the link to the pastboard.
 			[[NSURL URLWithString:msgLink] writeToPasteboard:pboard];
@@ -1578,8 +1578,8 @@
 	[fullHTMLText appendString:@"</body></html>"];
 
 	// Put string on the pasteboard for external drops.
-	[pboard setPropertyList:arrayOfArticles forType:MA_PBoardType_RSSItem];
-	[pboard setPropertyList:@[arrayOfURLs, arrayOfTitles] forType:@"WebURLsWithTitlesPboardType"];
+	[pboard setPropertyList:arrayOfArticles forType:VNAPasteboardTypeRSSItem];
+	[pboard setPropertyList:@[arrayOfURLs, arrayOfTitles] forType:VNAPasteboardTypeWebURLsWithTitles];
 	[pboard setString:fullPlainText forType:NSPasteboardTypeString];
     [pboard setString:fullHTMLText.stringByEscapingExtendedCharacters forType:NSPasteboardTypeHTML];
 
