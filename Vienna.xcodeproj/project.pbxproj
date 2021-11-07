@@ -686,6 +686,10 @@
 		F63833D71EF842EA00E07213 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		F639D3602737DC3500FEA0E0 /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
 		F639D3612737DC4300FEA0E0 /* LICENCE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENCE.md; sourceTree = "<group>"; };
+		F639D3662737E18700FEA0E0 /* ArchivalChecks.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ArchivalChecks.sh; sourceTree = "<group>"; };
+		F639D3672737E18F00FEA0E0 /* generate_keys.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = generate_keys.rb; sourceTree = "<group>"; };
+		F639D3682737E19600FEA0E0 /* PostArchive.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = PostArchive.sh; sourceTree = "<group>"; };
+		F639D3692737E1A100FEA0E0 /* sign_update.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = sign_update.rb; sourceTree = "<group>"; };
 		F64499FB259773B9005A1EFA /* FeedDiscovery.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FeedDiscovery.html; sourceTree = "<group>"; };
 		F647BC83209EFD820068F74D /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = gl; path = gl.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryMonitorTests.swift; sourceTree = "<group>"; };
@@ -1174,11 +1178,15 @@
 		439824171666B31700FFE219 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				F639D3662737E18700FEA0E0 /* ArchivalChecks.sh */,
 				439824191666B37000FFE219 /* autorevision.sh */,
-				3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */,
+				F639D3672737E18F00FEA0E0 /* generate_keys.rb */,
 				4398241A1666B37000FFE219 /* Changes-and-Notes.sh */,
 				3ADBA70C23DDAFCA00156722 /* Notarize.sh */,
+				F639D3682737E19600FEA0E0 /* PostArchive.sh */,
 				4398241C1666B37000FFE219 /* Release-for-upload.sh */,
+				F639D3692737E1A100FEA0E0 /* sign_update.rb */,
+				3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
