@@ -69,8 +69,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
 @property (readwrite, copy) NSString *statusMessage;
 @property (readwrite, nonatomic) NSUInteger countOfNewArticles;
-@property (atomic) NSString *tToken;
-@property (atomic) NSString *clientAuthToken;
+@property NSString *tToken;
+@property NSString *clientAuthToken;
 @property (nonatomic) NSTimer *tTokenTimer;
 @property (nonatomic) NSTimer *clientAuthTimer;
 @property (nonatomic) dispatch_queue_t asyncQueue;

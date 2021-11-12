@@ -26,7 +26,7 @@
 	-(void)performFindPanelAction:(NSInteger)tag;
 	-(void)printDocument:(id)sender;
 	@property (readonly, nonatomic) NSString *viewLink;
-	@property (nonatomic, readonly, strong) NSView *mainView;
+	@property (nonatomic, readonly) NSView *mainView;
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
 @optional
 	-(void)updateAlternateMenuTitle;
@@ -35,6 +35,6 @@
 	-(IBAction)handleGoBack:(id)sender;
 	@property (nonatomic, readonly) BOOL canGoForward;
 	@property (nonatomic, readonly) BOOL canGoBack;
-	@property (nonatomic, readonly, strong) WebView *webView;
+	@property (nonatomic, readonly) WebView *webView;
 @end
 

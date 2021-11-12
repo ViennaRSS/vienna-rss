@@ -43,7 +43,7 @@
 -(NSInteger)nextFolderWithUnread:(NSInteger)currentFolderId;
 -(NSArray *)folders:(NSInteger)folderId;
 -(NSArray *)children:(NSInteger)folderId;
-@property (nonatomic, readonly, strong) NSView *mainView;
+@property (nonatomic, readonly) NSView *mainView;
 -(void)outlineViewWillBecomeFirstResponder;
 -(void)setSearch:(NSString *)string;
 

@@ -29,8 +29,8 @@
 
 @interface WebViewBrowser () <MMTabBarViewDelegate>
 
-@property (assign) IBOutlet NSLayoutConstraint *tabBarHeightConstraint;
-@property (assign) IBOutlet MMTabBarView *tabBarControl;
+@property (weak) IBOutlet NSLayoutConstraint *tabBarHeightConstraint;
+@property (weak) IBOutlet MMTabBarView *tabBarControl;
 @property (readonly) NSTabViewItem *activeTabViewItem;
 
 //queue for tab view items to select when current item is closed

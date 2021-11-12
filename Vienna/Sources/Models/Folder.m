@@ -36,9 +36,9 @@
 @property (nonatomic) BOOL isCached;
 @property (nonatomic) BOOL containsBodies;
 @property (nonatomic) BOOL hasPassword;
-@property (nonatomic, strong) NSCache * cachedArticles;
-@property (nonatomic, strong) NSMutableArray * cachedGuids;
-@property (nonatomic, strong) NSMutableDictionary * attributes;
+@property (nonatomic) NSCache * cachedArticles;
+@property (nonatomic) NSMutableArray * cachedGuids;
+@property (nonatomic) NSMutableDictionary * attributes;
 
 +(NSArray<NSImage *> *)_iconArray;
 

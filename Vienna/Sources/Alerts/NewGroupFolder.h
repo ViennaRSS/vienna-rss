@@ -28,7 +28,7 @@
 	NSInteger parentId;
 }
 
-@property(strong) NSArray * topObjects;
+@property NSArray * topObjects;
 
 // Action handlers
 -(IBAction)doSave:(id)sender;

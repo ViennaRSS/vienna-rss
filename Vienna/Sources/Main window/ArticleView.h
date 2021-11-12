@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)decreaseTextSize;
 - (void)increaseTextSize;
 
-@property (strong, nonatomic) id<ArticleViewDelegate> listView;
+@property (nonatomic) id<ArticleViewDelegate> listView;
 
 @end
 

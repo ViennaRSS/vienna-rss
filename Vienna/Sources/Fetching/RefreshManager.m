@@ -50,8 +50,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 @interface RefreshManager ()
 
 @property (readwrite, copy) NSString * statusMessage;
-@property (nonatomic, retain) NSTimer * unsafe301RedirectionTimer;
-@property (atomic, copy) NSString * riskyIPAddress;
+@property (nonatomic) NSTimer * unsafe301RedirectionTimer;
+@property (copy) NSString * riskyIPAddress;
 @property (nonatomic) Redirect301Status redirect301Status;
 @property (nonatomic) NSMutableArray * redirect301WaitQueue;
 @property (nonatomic, readonly) NSURLSession * urlSession;

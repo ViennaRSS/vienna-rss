@@ -56,10 +56,10 @@
 	BOOL requireSelectArticleAfterReload;
 }
 
-@property (nonatomic, strong) FoldersTree * foldersTree;
-@property (nonatomic, strong) ArticleListView *articleListView;
-@property (nonatomic, strong) UnifiedDisplayView *unifiedListView;
-@property (nonatomic, strong) NSView<ArticleBaseView, BaseView> * mainArticleView;
+@property (nonatomic) FoldersTree * foldersTree;
+@property (nonatomic) ArticleListView *articleListView;
+@property (nonatomic) UnifiedDisplayView *unifiedListView;
+@property (nonatomic) NSView<ArticleBaseView, BaseView> * mainArticleView;
 @property (nonatomic, copy) NSArray * currentArrayOfArticles;
 @property (nonatomic, copy) NSArray * folderArrayOfArticles;
 @property (nonatomic) NSDictionary * articleSortSpecifiers;

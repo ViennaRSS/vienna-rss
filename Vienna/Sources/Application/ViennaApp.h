@@ -63,10 +63,10 @@
 @property (readonly, nonatomic) NSString *documentTabURL;
 
 // Change folder selection
-@property (nonatomic, strong) Folder *currentFolder;
+@property (nonatomic) Folder *currentFolder;
 
 // Current article
-@property (nonatomic, readonly, strong) Article *currentArticle;
+@property (nonatomic, readonly) Article *currentArticle;
 
 // Preference properties
 @property (nonatomic) NSInteger autoExpireDuration;

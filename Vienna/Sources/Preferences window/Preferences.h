@@ -183,7 +183,7 @@ extern NSString * const kMA_Notify_UseJavaScriptChange;
 @property (nonatomic) BOOL shouldSaveFeedSource;
 
 // Current search method
-@property (nonatomic, strong) SearchMethod *searchMethod;
+@property (nonatomic) SearchMethod *searchMethod;
 
 // Concurrent download settings
 @property (nonatomic) NSUInteger concurrentDownloads;
