@@ -85,7 +85,7 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 @property (nonatomic, copy) NSString *lastUpdateString;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *password;
-@property (nonatomic, readonly, copy) NSArray<Article *> *articles;
+@property (readonly, nonatomic) NSArray<Article *> *articles;
 -(NSArray<Article *> *)articlesWithFilter:(NSString *)filterString;
 @property (nonatomic, readonly) NSInteger itemId;
 @property (nonatomic, copy) NSString *remoteId;
@@ -124,5 +124,6 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 -(NSArray *)arrayOfUnreadArticlesRefs;
 -(NSComparisonResult)folderNameCompare:(Folder *)otherObject;
 -(NSComparisonResult)folderIDCompare:(Folder *)otherObject;
-@property (nonatomic, readonly, copy) NSString *feedSourceFilePath;
+@property (readonly, nonatomic) NSString *feedSourceFilePath;
+
 @end

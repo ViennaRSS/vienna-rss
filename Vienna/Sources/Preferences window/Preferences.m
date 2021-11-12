@@ -55,7 +55,7 @@ static Preferences * _standardPreferences = nil;
 // Private methods
 @interface Preferences ()
 
-@property (nonatomic, readonly, copy) NSDictionary *allocFactoryDefaults;
+@property (readonly, nonatomic) NSDictionary *allocFactoryDefaults;
 
 @property (nonatomic) NSNumber *useNewBrowserInternal;
 

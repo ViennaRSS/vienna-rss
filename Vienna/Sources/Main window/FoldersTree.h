@@ -38,7 +38,7 @@
 @property (nonatomic, readonly) NSInteger actualSelection;
 @property (nonatomic, readonly) NSInteger groupParentSelection;
 @property (nonatomic, readonly) NSInteger countOfSelectedFolders;
-@property (nonatomic, readonly, copy) NSArray *selectedFolders;
+@property (readonly, nonatomic) NSArray *selectedFolders;
 @property (nonatomic, readonly) NSInteger firstFolderWithUnread;
 -(NSInteger)nextFolderWithUnread:(NSInteger)currentFolderId;
 -(NSArray *)folders:(NSInteger)folderId;

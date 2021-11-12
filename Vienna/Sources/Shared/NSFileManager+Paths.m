@@ -34,7 +34,7 @@
 - (NSURL *)vna_applicationScriptsDirectory {
     static NSURL *url = nil;
     if (url) {
-        return [url copy];
+        return url;
     }
 
     NSFileManager *fileManager = NSFileManager.defaultManager;
@@ -56,7 +56,7 @@
         os_log_fault(VNA_LOG, "%{public}s %{public}@", function, description);
     }
 
-    return (id _Nonnull)[url copy];
+    return (id _Nonnull)url;
 }
 
 // According to Apple's file-system programming guide, the bundle identifier
@@ -65,7 +65,7 @@
 - (NSURL *)vna_applicationSupportDirectory {
     static NSURL *url = nil;
     if (url) {
-        return [url copy];
+        return url;
     }
 
     NSFileManager *fileManager = NSFileManager.defaultManager;
@@ -86,13 +86,13 @@
         os_log_fault(VNA_LOG, "%{public}s %{public}@", function, description);
     }
 
-    return (id _Nonnull)[url copy];
+    return (id _Nonnull)url;
 }
 
 - (NSURL *)vna_cachesDirectory {
     static NSURL *url = nil;
     if (url) {
-        return [url copy];
+        return url;
     }
 
     NSFileManager *fileManager = NSFileManager.defaultManager;
@@ -111,13 +111,13 @@
         os_log_fault(VNA_LOG, "%{public}s %{public}@", function, description);
     }
 
-    return (id _Nonnull)[url copy];
+    return (id _Nonnull)url;
 }
 
 - (NSURL *)vna_downloadsDirectory {
     static NSURL *url = nil;
     if (url) {
-        return [url copy];
+        return url;
     }
 
     NSFileManager *fileManager = NSFileManager.defaultManager;
@@ -134,7 +134,7 @@
         os_log_fault(VNA_LOG, "%{public}s %{public}@", function, description);
     }
 
-    return (id _Nonnull)[url copy];
+    return (id _Nonnull)url;
 }
 
 @end

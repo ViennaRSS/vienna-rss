@@ -76,8 +76,8 @@
 @property (nonatomic, readonly) BOOL canGoForward;
 -(void)handleStopLoading:(id)sender;
 -(void)activateAddressBar;
-@property (readonly, copy) NSString *textSelection;
-@property (readonly, copy) NSString *html;
+@property (readonly) NSString *textSelection;
+@property (readonly) NSString *html;
 
 
 //tabBarItem functions

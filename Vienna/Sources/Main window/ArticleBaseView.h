@@ -31,7 +31,7 @@
 	-(void)scrollToArticle:(NSString *)guid;
 	-(void)refreshFolder:(NSInteger)refreshFlag;
 	@property (nonatomic, readonly, strong) Article *selectedArticle;
-	@property (nonatomic, readonly, copy) NSArray *markedArticleRange;
+	@property (readonly, nonatomic) NSArray *markedArticleRange;
 	-(void)saveTableSettings;
 	-(void)ensureSelectedArticle;
 	-(void)startLoadIndicator;

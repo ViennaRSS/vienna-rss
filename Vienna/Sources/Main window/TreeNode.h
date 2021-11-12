@@ -44,7 +44,7 @@
 -(void)removeChildren;
 -(void)removeChild:(TreeNode *)child andChildren:(BOOL)removeChildrenFlag;
 -(void)sortChildren:(NSInteger)sortMethod;
-@property (nonatomic, readonly, copy) NSString *nodeName;
+@property (readonly, nonatomic) NSString *nodeName;
 -(TreeNode *)childByName:(NSString *)childName;
 -(TreeNode *)childByIndex:(NSInteger)index;
 -(NSInteger)indexOfChild:(TreeNode *)node;

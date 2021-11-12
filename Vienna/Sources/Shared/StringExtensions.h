@@ -42,22 +42,22 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable NSString *)vna_toBase64String:(nullable NSString *)stringToProcess;
 + (nullable NSString *)vna_fromBase64String:(nullable NSString *)stringToProcess;
 + (NSString *)vna_stringByCleaningURLString:(nullable NSString *)urlString;
-@property (nonatomic, readonly, copy) NSString *vna_firstNonBlankLine;
-@property (nonatomic, readonly, copy) NSString *vna_summaryTextFromHTML;
-@property (nonatomic, readonly, copy) NSString *vna_titleTextFromHTML;
+@property (readonly, nonatomic) NSString *vna_firstNonBlankLine;
+@property (readonly, nonatomic) NSString *vna_summaryTextFromHTML;
+@property (readonly, nonatomic) NSString *vna_titleTextFromHTML;
 - (NSUInteger)vna_indexOfCharacterInString:(char)ch afterIndex:(NSUInteger)startIndex;
-@property (nonatomic, readonly, copy) NSString *vna_stringByEscapingExtendedCharacters;
-@property (nonatomic, readonly, copy) NSString *vna_stringByUnescapingExtendedCharacters;
+@property (readonly, nonatomic) NSString *vna_stringByEscapingExtendedCharacters;
+@property (readonly, nonatomic) NSString *vna_stringByUnescapingExtendedCharacters;
 - (NSString *)vna_stringByAppendingURLComponent:(nullable NSString *)newComponent;
 - (BOOL)vna_hasCharacter:(char)ch;
-@property (nonatomic, readonly, copy) NSString *vna_convertStringToValidPath;
+@property (readonly, nonatomic) NSString *vna_convertStringToValidPath;
 - (NSComparisonResult)vna_numericCompare:(NSString *)aString;
-@property (nonatomic, readonly, copy) NSString *vna_normalised;
-@property (nonatomic, readonly, copy) NSString *vna_baseURL;
-@property (nonatomic, readonly, copy) NSString *vna_host;
-@property (nonatomic, readonly, copy) NSString *vna_trimmed;
-@property (nonatomic, readonly) NSInteger vna_hexValue;
-@property (nonatomic, readonly) BOOL vna_isBlank;
+@property (readonly, nonatomic) NSString *vna_normalised;
+@property (readonly, nonatomic) NSString *vna_baseURL;
+@property (readonly, nonatomic) NSString *vna_host;
+@property (readonly, nonatomic) NSString *vna_trimmed;
+@property (readonly, nonatomic) NSInteger vna_hexValue;
+@property (readonly, nonatomic) BOOL vna_isBlank;
 
 @end
 

@@ -36,7 +36,7 @@ extern NSNotificationName const activityLogUpdatedNotification;
 /**
  An array of activity items.
  */
-@property (readonly, copy, nonatomic) NSArray<ActivityItem *> *allItems;
+@property (readonly, nonatomic) NSArray<ActivityItem *> *allItems;
 
 /**
  Returns an activity item for the name of the item.

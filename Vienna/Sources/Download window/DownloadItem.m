@@ -25,7 +25,7 @@ static NSString *const VNACodingKeySize = @"size";
 
 @interface DownloadItem ()
 
-@property (readwrite, copy, nonatomic) NSImage *image;
+@property (readwrite, nonatomic) NSImage *image;
 
 @end
 

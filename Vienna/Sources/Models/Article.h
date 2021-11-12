@@ -90,7 +90,7 @@ typedef NS_ENUM(NSInteger, ArticleStatus) {
 @property (nullable, nonatomic, copy) NSString *body;
 @property (nullable, nonatomic, copy) NSString *title;
 @property (nullable, nonatomic, copy) NSString *link;
-@property (nullable, nonatomic, readonly, copy) NSString *summary;
+@property (readonly, nullable, nonatomic) NSString *summary;
 @property (nullable, nonatomic, copy) NSString *enclosure;
 @property (nullable, nonatomic, copy) NSDate *date;
 @property (nullable, nonatomic, copy) NSDate *createdDate;

@@ -76,7 +76,7 @@
 @property (nonatomic, weak) ArticleListView *articleListView;
 @property (nonatomic, strong) NewSubscription *rssFeed;
 @property (nonatomic) FoldersTree *foldersTree;
-@property (readonly, copy, nonatomic) NSMenu *searchFieldMenu;
+@property (readonly, nonatomic) NSMenu *searchFieldMenu;
 
 // Menu action items
 -(IBAction)reindexDatabase:(id)sender;
@@ -169,7 +169,7 @@
 @property (nonatomic, readonly) NSInteger currentFolderId;
 @property (nonatomic, getter=isConnecting, readonly) BOOL connecting;
 -(void)runAppleScript:(NSString *)scriptName;
-@property (nonatomic, readonly, copy) NSArray *folders;
+@property (readonly, nonatomic) NSArray *folders;
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
 -(void)updateStatusBarFilterButtonVisibility;
 @property (nonatomic, readonly, strong) NSLayoutManager *layoutManager;

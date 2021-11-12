@@ -35,9 +35,9 @@
 
 @interface FoldersTree ()
 
-@property (nonatomic, readonly, copy) NSMenu *folderMenu;
+@property (readonly, nonatomic) NSMenu *folderMenu;
 
-@property (nonatomic, readonly, copy) NSArray *archiveState;
+@property (readonly, nonatomic) NSArray *archiveState;
 @property (nonatomic) TreeNode *rootNode;
 @property (nonatomic) NSFont *cellFont;
 @property (nonatomic) NSFont *boldCellFont;

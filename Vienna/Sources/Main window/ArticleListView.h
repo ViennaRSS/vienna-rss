@@ -69,6 +69,6 @@
 -(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 -(void)loadArticleLink:(NSString *) articleLink;
 - (void)webViewLoadFinished:(NSNotification *)notification;
-@property (nonatomic, readonly, copy) NSURL *url;
+@property (readonly, nonatomic) NSURL *url;
 
 @end
