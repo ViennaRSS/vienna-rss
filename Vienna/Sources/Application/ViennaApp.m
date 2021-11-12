@@ -219,9 +219,9 @@
 {
     NSDictionary *infoDictionary = NSBundle.mainBundle.infoDictionary;
     NSString *versionString = infoDictionary[@"CFBundleShortVersionString"];
-    NSString *trimmedVersionString = versionString.trim;
-    NSUInteger wordLength = [trimmedVersionString indexOfCharacterInString:' '
-                                                                afterIndex:0];
+    NSString *trimmedVersionString = versionString.vna_trimmed;
+    NSUInteger wordLength = [trimmedVersionString vna_indexOfCharacterInString:' '
+                                                                    afterIndex:0];
     if (wordLength == NSNotFound) {
         return trimmedVersionString;
     } else {

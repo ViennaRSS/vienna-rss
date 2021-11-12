@@ -28,6 +28,6 @@
  @param date A date.
  @return A localized, relative-date string representation of the date.
  */
-+ (nonnull NSString *)relativeDateStringFromDate:(nonnull NSDate *)date;
++ (nonnull NSString *)vna_relativeDateStringFromDate:(nonnull NSDate *)date;
 
 @end

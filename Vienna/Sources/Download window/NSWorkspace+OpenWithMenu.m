@@ -34,7 +34,7 @@
 
 #pragma mark - Handler apps
 
-- (NSArray *)handlerApplicationsForFile:(NSString *)filePath {
+- (NSArray *)vna_handlerApplicationsForFile:(NSString *)filePath {
     NSURL *url = [NSURL fileURLWithPath:filePath];
     NSMutableArray *appPaths = [[NSMutableArray alloc] initWithCapacity:256];
     
@@ -49,7 +49,7 @@
     return [NSArray arrayWithArray:appPaths];
 }
 
-- (NSString *)defaultHandlerApplicationForFile:(NSString *)filePath {
+- (NSString *)vna_defaultHandlerApplicationForFile:(NSString *)filePath {
     NSURL *fileURL = [NSURL fileURLWithPath:filePath];    
     NSURL *appURL = [[NSWorkspace sharedWorkspace] URLForApplicationToOpenURL:fileURL];
     return [appURL path];
@@ -57,7 +57,7 @@
 
 // Generate Open With menu for a given file. If no target and action are provided, we use our own.
 // If no menu is supplied as parameter, a new menu is created and returned.
-- (NSMenu *)openWithMenuForFile:(NSString *)path target:(id)t action:(SEL)s menu:(NSMenu *)menu {
+- (NSMenu *)vna_openWithMenuForFile:(NSString *)path target:(id)t action:(SEL)s menu:(NSMenu *)menu {
     [menu removeAllItems];
 
     NSString *noneTitle = NSLocalizedString(@"<None>", @"Title in popup submenu");
@@ -74,7 +74,7 @@
     [submenu setTitle:path]; // Used by selector
     
     // Add menu item for default app
-    NSString *defaultApp = [self defaultHandlerApplicationForFile:path];
+    NSString *defaultApp = [self vna_defaultHandlerApplicationForFile:path];
     NSString *displayName = [[[NSFileManager defaultManager] displayNameAtPath:defaultApp] stringByDeletingPathExtension];
     NSString *defaultAppName = [NSString stringWithFormat:NSLocalizedString(@"%@ (default)", @"Appended to application name in Open With menu"), displayName];
     
@@ -89,7 +89,7 @@
     [submenu addItem:[NSMenuItem separatorItem]];
     
     // Add items for all other apps that can open this file
-    NSArray *apps = [self handlerApplicationsForFile:path];
+    NSArray *apps = [self vna_handlerApplicationsForFile:path];
     int numOtherApps = 0;
     if ([apps count]) {
     

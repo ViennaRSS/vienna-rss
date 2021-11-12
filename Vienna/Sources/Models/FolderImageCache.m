@@ -134,7 +134,7 @@ static FolderImageCache * _folderImageCache = nil;
                     if (iconImage.valid)
                     {
                         iconImage.size = NSMakeSize(16, 16);
-                        NSString * homePageSiteRoot = (fullPath.lastPathComponent.stringByDeletingPathExtension).convertStringToValidPath;
+                        NSString * homePageSiteRoot = (fullPath.lastPathComponent.stringByDeletingPathExtension).vna_convertStringToValidPath;
                         folderImagesArray[homePageSiteRoot] = iconImage;
                     }
                 }

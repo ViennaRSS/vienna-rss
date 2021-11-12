@@ -25,17 +25,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The scripts directory for the current user (Library/Application Scripts or
 /// Library/Scripts/Applications depending on whether sandboxing is enabled).
-@property (readonly, copy, nonatomic) NSURL *applicationScriptsDirectory;
+@property (readonly, copy, nonatomic) NSURL *vna_applicationScriptsDirectory
+    NS_SWIFT_NAME(applicationScriptsDirectory);
 
 /// The application support directory for the current user (Library/Application
 /// Support).
-@property (readonly, copy, nonatomic) NSURL *applicationSupportDirectory;
+@property (readonly, copy, nonatomic) NSURL *vna_applicationSupportDirectory
+    NS_SWIFT_NAME(applicationSupportDirectory);
 
 /// The caches directory for the current user (Library/Caches).
-@property (readonly, copy, nonatomic) NSURL *cachesDirectory;
+@property (readonly, copy, nonatomic) NSURL *vna_cachesDirectory
+    NS_SWIFT_NAME(cachesDirectory);
 
 /// The downloads directory for the current user.
-@property (readonly, copy, nonatomic) NSURL *downloadsDirectory;
+@property (readonly, copy, nonatomic) NSURL *vna_downloadsDirectory
+    NS_SWIFT_NAME(downloadsDirectory);
 
 @end
 

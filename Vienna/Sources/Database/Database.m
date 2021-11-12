@@ -567,7 +567,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"UPDATE folders SET flags=? WHERE folder_id=?", @(folder.flags), @(folderId)];
-        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folderId)];
+        [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folderId)];
         }];
 	}
 }
@@ -593,7 +593,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"UPDATE folders SET flags=? WHERE folder_id=?", @(folder.flags), @(folderId)];
-            [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folderId)];
+            [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folderId)];
         }];
 	}
 }
@@ -677,7 +677,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"UPDATE rss_folders SET feed_url=? WHERE folder_id=?", feed_url, @(folderId)];
-            [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folderId)];
+            [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folderId)];
         }];
 	}
 	return YES;
@@ -888,7 +888,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		}
 
 		// Send a notification when new folders are added
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderAdded" object:folder];
+		[[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_FolderAdded" object:folder];
 	}
 	return newItemId;
 }
@@ -1075,7 +1075,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	{
 		numFolder = @(folder.itemId);
 		[arrayOfFolderIds addObject:numFolder];
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:databaseWillDeleteFolderNotification object:numFolder];
+		[[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:databaseWillDeleteFolderNotification object:numFolder];
 	}
 
 	// Now do the deletion.
@@ -1084,7 +1084,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	// Send the post-delete notification after we're finished. Note that the folder actually corresponding to
 	// each numFolder won't exist any more and the handlers need to be aware of this.
     for (numFolder in arrayOfFolderIds) {
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:databaseDidDeleteFolderNotification object:numFolder];
+		[[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:databaseDidDeleteFolderNotification object:numFolder];
     }
 	
 	return result;
@@ -1127,7 +1127,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the name is the part that has changed.
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderNameChanged" object:@(folderId)];
+	[[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_FolderNameChanged" object:@(folderId)];
 	return YES;
 }
 
@@ -1169,7 +1169,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the description is the part that has changed.
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderDescriptionChanged"
+	[[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_FolderDescriptionChanged"
                                                                         object:@(folderId)];
 	return YES;
 }
@@ -1213,7 +1213,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the link is the part that has changed.
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderHomePageChanged"
+	[[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_FolderHomePageChanged"
                                                                         object:@(folderId)];
 	return YES;
 }
@@ -1502,9 +1502,9 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     NSString * articleBody = article.body;
     NSString * articleTitle = article.title;
     NSDate * articleDate = article.date;
-    NSString * articleLink = article.link.trim;
-    NSString * userName = article.author.trim;
-    NSString * articleEnclosure = article.enclosure.trim;
+    NSString * articleLink = article.link.vna_trimmed;
+    NSString * userName = article.author.vna_trimmed;
+    NSString * articleEnclosure = article.enclosure.vna_trimmed;
     NSString * articleGuid = article.guid;
     NSInteger parentId = article.parentId;
     BOOL marked_flag = article.flagged;
@@ -1523,8 +1523,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         userName = @"";
 
     // Parse off the title
-    if (articleTitle == nil || articleTitle.blank)
-        articleTitle = [NSString stringByRemovingHTML:articleBody].firstNonBlankLine;
+    if (articleTitle == nil || articleTitle.vna_isBlank)
+        articleTitle = [NSString vna_stringByRemovingHTML:articleBody].vna_firstNonBlankLine;
 
     // Dates are stored as time intervals
     NSTimeInterval interval = articleDate.timeIntervalSince1970;
@@ -1583,8 +1583,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     NSString * articleBody = article.body;
     NSString * articleTitle = article.title;
     NSDate * articleDate = article.date;
-    NSString * articleLink = article.link.trim;
-    NSString * userName = article.author.trim;
+    NSString * articleLink = article.link.vna_trimmed;
+    NSString * userName = article.author.vna_trimmed;
     NSString * articleGuid = article.guid;
     NSInteger parentId = article.parentId;
     BOOL revised_flag = article.revised;
@@ -1596,8 +1596,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         userName = @"";
 
     // Parse off the title
-    if (articleTitle == nil || articleTitle.blank)
-        articleTitle = [NSString stringByRemovingHTML:articleBody].firstNonBlankLine;
+    if (articleTitle == nil || articleTitle.vna_isBlank)
+        articleTitle = [NSString vna_stringByRemovingHTML:articleBody].vna_firstNonBlankLine;
 
     // Dates are stored as time intervals
     NSTimeInterval interval = articleDate.timeIntervalSince1970;
@@ -1713,7 +1713,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		for (Folder * folder in [self.foldersDict objectEnumerator])
 			[folder clearCache];
 
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(self.trashFolderId)];
+		[[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(self.trashFolderId)];
 	}
 }
 
@@ -1832,8 +1832,8 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	self.smartfoldersDict[@(folderId)] = criteriaTree;
 	
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange"
-                                      object:@(folderId)];
+	[nc vna_postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange"
+                                          object:@(folderId)];
 }
 
 /* initFolderArray
@@ -2557,7 +2557,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"UPDATE folders SET unread_count=? WHERE folder_id=?", @(newCount), @(folder.itemId)];
-        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
+        [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
     }];
 
 	// Update childUnreadCount for parents.

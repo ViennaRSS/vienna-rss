@@ -25,8 +25,8 @@
 
 @implementation NSKeyedArchiver (Compatibility)
 
-+ (nullable NSData *)archivedDataWithRootObject:(id)object
-                          requiringSecureCoding:(BOOL)requiresSecureCoding
++ (nullable NSData *)vna_archivedDataWithRootObject:(id)object
+                              requiringSecureCoding:(BOOL)requiresSecureCoding
 {
     if (![object conformsToProtocol:@protocol(NSSecureCoding)]) {
         os_log_fault(VNA_LOG, "%{public}@ does not conform to NSSecureCoding",

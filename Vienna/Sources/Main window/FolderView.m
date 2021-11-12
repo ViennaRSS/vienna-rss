@@ -25,11 +25,13 @@
 #import "FoldersFilterable.h"
 
 @interface NSObject (FolderViewDelegate)
-	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
-	-(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
-	-(BOOL)canDeleteFolderAtRow:(NSInteger)row;
-	-(IBAction)deleteFolder:(id)sender;
-	-(void)outlineViewWillBecomeFirstResponder;
+
+- (BOOL)vna_handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
+- (BOOL)vna_copyTableSelection:(NSArray *)items
+                  toPasteboard:(NSPasteboard *)pboard;
+- (BOOL)vna_canDeleteFolderAtRow:(NSInteger)row;
+- (void)vna_outlineViewWillBecomeFirstResponder;
+
 @end
 
 @implementation FolderView {
@@ -55,7 +57,7 @@
  */
 -(BOOL)becomeFirstResponder
 {
-    [(id)self.delegate outlineViewWillBecomeFirstResponder];
+    [(id)self.delegate vna_outlineViewWillBecomeFirstResponder];
 	return [super becomeFirstResponder];
 }
 
@@ -117,7 +119,7 @@
         return;
 
     if (_filterPredicate == nil) {
-        _prefilterState = self.state;
+        _prefilterState = self.vna_state;
     }
 
     _filterPredicate = filterPredicate;
@@ -133,10 +135,10 @@
 
     if (_filterPredicate) {
         [self expandItem:nil expandChildren:YES];
-        self.selectionState = _prefilterState[@"Selection"];
+        self.vna_selectionState = _prefilterState[@"Selection"];
     }
     else if (_prefilterState) {
-        self.state = _prefilterState;
+        self.vna_state = _prefilterState;
         _prefilterState = nil;
     }
 }
@@ -176,8 +178,8 @@
  */
 -(NSMenu *)menuForEvent:(NSEvent *)theEvent
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(outlineView:menuWillAppear:)])
-        [(id)self.delegate outlineView:self menuWillAppear:theEvent];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(vna_outlineView:menuWillAppear:)])
+        [(id)self.delegate vna_outlineView:self menuWillAppear:theEvent];
 	return self.menu;
 }
 
@@ -198,7 +200,7 @@
 			[array addObject:node];
 			item = [selectedRowIndexes indexGreaterThanIndex:item];
 		}
-        [(id)self.delegate copyTableSelection:array toPasteboard:[NSPasteboard generalPasteboard]];
+        [(id)self.delegate vna_copyTableSelection:array toPasteboard:[NSPasteboard generalPasteboard]];
 	}
 }
 
@@ -222,7 +224,7 @@
 	}
 	if (menuItem.action == @selector(delete:))
 	{
-        return [(id)self.delegate canDeleteFolderAtRow:self.selectedRow];
+        return [(id)self.delegate vna_canDeleteFolderAtRow:self.selectedRow];
 	}
 	if (menuItem.action == @selector(selectAll:))
 	{

@@ -163,7 +163,7 @@ static NSArray * iconArray = nil;
             folderImage = Folder._iconArray[MA_SmartFolderIcon];
             break;
         case VNAFolderTypeRSS: {
-            NSString *homePageSiteRoot = self.homePage.host.convertStringToValidPath;
+            NSString *homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
             folderImage = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
             if (folderImage == nil) {
                 folderImage = Folder._iconArray[MA_RSSFeedIcon];
@@ -171,7 +171,7 @@ static NSArray * iconArray = nil;
             break;
         }
         case VNAFolderTypeOpenReader: {
-            NSString *homePageSiteRoot = self.homePage.host.convertStringToValidPath;
+            NSString *homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
             folderImage = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
             if (folderImage == nil) {
                 folderImage = Folder._iconArray[MA_GoogleReaderFolderIcon];
@@ -196,7 +196,7 @@ static NSArray * iconArray = nil;
     }
 	NSImage * imagePtr = nil;
 	if (self.feedURL) {
-		NSString * homePageSiteRoot = self.homePage.host.convertStringToValidPath;
+		NSString * homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
 		imagePtr = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
 	}
 	return (imagePtr != nil);
@@ -222,7 +222,7 @@ static NSArray * iconArray = nil;
 	if (self.feedURL != nil && iconImage != nil)
 	{
 		NSString * homePageSiteRoot;
-		homePageSiteRoot = self.homePage.host.convertStringToValidPath;
+		homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
 		[[FolderImageCache defaultCache] addImage:iconImage forURL:homePageSiteRoot];
 	}
 }

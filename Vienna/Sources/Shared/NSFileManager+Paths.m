@@ -31,7 +31,7 @@
 // an automatic migration to Library/Application Scripts/<bundle identifier>
 // and places a symlink at the old location. This code needs to be updated
 // accordingly.
-- (NSURL *)applicationScriptsDirectory {
+- (NSURL *)vna_applicationScriptsDirectory {
     static NSURL *url = nil;
     if (url) {
         return [url copy];
@@ -62,7 +62,7 @@
 // According to Apple's file-system programming guide, the bundle identifier
 // should be used as the subdirectory name. However, Vienna presently uses the
 // app name instead. This should be changed when Vienna migrates to sandboxing.
-- (NSURL *)applicationSupportDirectory {
+- (NSURL *)vna_applicationSupportDirectory {
     static NSURL *url = nil;
     if (url) {
         return [url copy];
@@ -89,7 +89,7 @@
     return (id _Nonnull)[url copy];
 }
 
-- (NSURL *)cachesDirectory {
+- (NSURL *)vna_cachesDirectory {
     static NSURL *url = nil;
     if (url) {
         return [url copy];
@@ -114,7 +114,7 @@
     return (id _Nonnull)[url copy];
 }
 
-- (NSURL *)downloadsDirectory {
+- (NSURL *)vna_downloadsDirectory {
     static NSURL *url = nil;
     if (url) {
         return [url copy];

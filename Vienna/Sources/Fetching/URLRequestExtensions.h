@@ -10,13 +10,18 @@
 
 // category of NSMutableURLRequest for adding properties with getter and setter
 @interface NSMutableURLRequest (userDict)
-@property (nullable, copy, setter=setUserInfo:) id userInfo;
+
+@property (nullable, copy, setter=vna_setUserInfo:) id vna_userInfo;
 // add/set object into current userInfo
--(void)setInUserInfo:(nullable id)object forKey:(nonnull NSString *)key;
--(void)addInfoFromDictionary:(NSDictionary *_Nullable)additionalDictionary;
+-(void)vna_setInUserInfo:(nullable id)object forKey:(nonnull NSString *)key;
+-(void)vna_addInfoFromDictionary:(NSDictionary *_Nullable)additionalDictionary;
+
 @end
 
 // category of "POST" NSMutableURLRequest for setting POST values
 @interface NSMutableURLRequest (MutablePostExtensions)
--(void)setPostValue:(nullable NSString *)value forKey:(nonnull NSString *)key;
+
+- (void)vna_setPostValue:(nullable NSString *)value
+                  forKey:(nonnull NSString *)key;
+
 @end

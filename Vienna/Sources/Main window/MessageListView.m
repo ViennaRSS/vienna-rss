@@ -22,10 +22,12 @@
 #import "AppController.h"
 
 @interface NSObject(MessageListViewDelegate)
-	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
-	-(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
-	-(BOOL)canDeleteMessageAtRow:(NSInteger)row;
-	-(IBAction)deleteMessage:(id)sender;
+
+- (BOOL)vna_handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
+- (BOOL)vna_copyTableSelection:(NSArray *)rows
+                  toPasteboard:(NSPasteboard *)pboard;
+- (BOOL)vna_canDeleteMessageAtRow:(NSInteger)row;
+
 @end
 
 @implementation MessageListView
@@ -60,7 +62,7 @@
 			[rows addObject:@(rowIndex)];
 			rowIndex = [selectedRowIndexes indexGreaterThanIndex:rowIndex];
 		}
-        [(id)self.delegate copyTableSelection:rows toPasteboard:[NSPasteboard generalPasteboard]];
+        [(id)self.delegate vna_copyTableSelection:rows toPasteboard:[NSPasteboard generalPasteboard]];
 	}
 }
 
@@ -84,7 +86,7 @@
 	}
 	if (menuItem.action == @selector(delete:))
 	{
-        return [(id)self.delegate canDeleteMessageAtRow:self.selectedRow];
+        return [(id)self.delegate vna_canDeleteMessageAtRow:self.selectedRow];
 	}
 	if (menuItem.action == @selector(selectAll:))
 	{

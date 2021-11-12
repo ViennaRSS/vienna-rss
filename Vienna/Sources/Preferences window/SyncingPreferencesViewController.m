@@ -182,11 +182,11 @@ static BOOL _credentialsChanged;
 {
     _credentialsChanged = YES;
     Preferences *prefs = [Preferences standardPreferences];
-    if ( !((openReaderHost.stringValue).blank || (username.stringValue).blank) )
+    if ( !((openReaderHost.stringValue).vna_isBlank || (username.stringValue).vna_isBlank) )
     {
         // can we get password via keychain ?
         NSString * thePass = [KeyChain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"https://%@", openReaderHost.stringValue]];
-        if (!thePass.blank)
+        if (!thePass.vna_isBlank)
         {
             password.stringValue = thePass;
             [KeyChain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];
@@ -206,11 +206,11 @@ static BOOL _credentialsChanged;
     _credentialsChanged = YES;
     Preferences *prefs = [Preferences standardPreferences];
     [KeyChain deleteGenericPasswordInKeychain:prefs.syncingUser service:@"Vienna sync"];
-    if ( !((openReaderHost.stringValue).blank || (username.stringValue).blank) )
+    if ( !((openReaderHost.stringValue).vna_isBlank || (username.stringValue).vna_isBlank) )
     {
         // can we get password via keychain ?
         NSString * thePass = [KeyChain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"https://%@", openReaderHost.stringValue]];
-        if (!thePass.blank)
+        if (!thePass.vna_isBlank)
         {
             password.stringValue = thePass;
             [KeyChain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];

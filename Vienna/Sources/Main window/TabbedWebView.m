@@ -27,7 +27,9 @@
 #import "Constants.h"
 
 @interface NSObject (TabbedWebViewDelegate)
-	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
+
+- (BOOL)vna_handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
+
 @end
 
 @interface TabbedWebView ()

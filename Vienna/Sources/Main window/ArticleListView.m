@@ -1329,12 +1329,12 @@
 		}
 		if ([db fieldByName:MA_Field_Date].visible)
 		{
-			[summaryString appendFormat:@"%@%@", delimiter, [NSDateFormatter relativeDateStringFromDate:theArticle.date]];
+			[summaryString appendFormat:@"%@%@", delimiter, [NSDateFormatter vna_relativeDateStringFromDate:theArticle.date]];
 			delimiter = @" - ";
 		}
 		if ([db fieldByName:MA_Field_Author].visible)
 		{
-			if (!theArticle.author.blank)
+			if (!theArticle.author.vna_isBlank)
 				[summaryString appendFormat:@"%@%@", delimiter, theArticle.author];
 		}
 		if (![summaryString isEqualToString:@""])
@@ -1349,7 +1349,7 @@
 	NSString * cellString;
 	if ([identifier isEqualToString:MA_Field_Date])
 	{
-        cellString = [NSDateFormatter relativeDateStringFromDate:theArticle.date];
+        cellString = [NSDateFormatter vna_relativeDateStringFromDate:theArticle.date];
 	}
 	else if ([identifier isEqualToString:MA_Field_Folder])
 	{
@@ -1581,7 +1581,7 @@
 	[pboard setPropertyList:arrayOfArticles forType:VNAPasteboardTypeRSSItem];
 	[pboard setPropertyList:@[arrayOfURLs, arrayOfTitles] forType:VNAPasteboardTypeWebURLsWithTitles];
 	[pboard setString:fullPlainText forType:NSPasteboardTypeString];
-    [pboard setString:fullHTMLText.stringByEscapingExtendedCharacters forType:NSPasteboardTypeHTML];
+    [pboard setString:fullHTMLText.vna_stringByEscapingExtendedCharacters forType:NSPasteboardTypeHTML];
 
 	return YES;
 }

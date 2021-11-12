@@ -98,7 +98,7 @@
 	if ([folder.lastUpdate isEqualToDate:[NSDate distantPast]])
 		[self.lastRefreshDate setStringValue:NSLocalizedString(@"Never", nil)];
 	else
-        self.lastRefreshDate.stringValue = [NSDateFormatter relativeDateStringFromDate:folder.lastUpdate];
+        self.lastRefreshDate.stringValue = [NSDateFormatter vna_relativeDateStringFromDate:folder.lastUpdate];
 
 	// Fill out the panels
 	self.urlField.stringValue = folder.feedURL;
@@ -126,7 +126,7 @@
  */
 -(IBAction)urlFieldChanged:(id)sender
 {
-	NSString * newUrl = self.urlField.stringValue.trim;
+	NSString * newUrl = self.urlField.stringValue.vna_trimmed;
     [[Database sharedManager] setFeedURL:newUrl forFolder:self.infoFolderId];
 }
 
@@ -181,7 +181,7 @@
  */
 -(void)enableValidateButton
 {
-	self.validateButton.enabled = !self.urlField.stringValue.blank;
+	self.validateButton.enabled = !self.urlField.stringValue.vna_isBlank;
 }
 
 /* validateURL
@@ -191,7 +191,7 @@
     NSString *validatorURL = @"https://validator.w3.org/feed/check.cgi";
     NSURLComponents *urlComponents = [NSURLComponents componentsWithString:validatorURL];
 
-    NSString *validatedURL = self.urlField.stringValue.trim;
+    NSString *validatedURL = self.urlField.stringValue.vna_trimmed;
     NSCharacterSet *urlQuerySet = NSCharacterSet.URLQueryAllowedCharacterSet;
     NSString *encodedURL = [validatedURL stringByAddingPercentEncodingWithAllowedCharacters:urlQuerySet];
 
@@ -216,7 +216,7 @@
  */
 -(IBAction)authenticationChanged:(id)sender
 {
-	NSString * usernameString = self.username.stringValue.trim;
+	NSString * usernameString = self.username.stringValue.vna_trimmed;
 	NSString * passwordString = self.password.stringValue;
 	
 	Database * db = [Database sharedManager];

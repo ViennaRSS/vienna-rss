@@ -734,7 +734,7 @@
 	if (node.folder.type == VNAFolderTypeRSS || node.folder.type == VNAFolderTypeOpenReader)
 	{
 		NSString * urlString = node.folder.homePage;
-        if (urlString && !urlString.blank) {
+        if (urlString && !urlString.vna_isBlank) {
 			[APPCONTROLLER openURLFromString:urlString inPreferredBrowser:YES];
         }
 	}
@@ -874,7 +874,7 @@
  * selection to whichever node is under the cursor so the context between
  * the menu items and the node is made clear.
  */
--(void)outlineView:(FolderView *)olv menuWillAppear:(NSEvent *)theEvent
+-(void)vna_outlineView:(FolderView *)olv menuWillAppear:(NSEvent *)theEvent
 {
 	NSInteger row = [olv rowAtPoint:[olv convertPoint:theEvent.locationInWindow fromView:nil]];
 	if (row >= 0)

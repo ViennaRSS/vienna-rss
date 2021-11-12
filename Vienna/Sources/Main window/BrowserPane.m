@@ -202,7 +202,7 @@
 	if ([NSURL URLWithString:theURL].scheme == nil)
 	{
 	    // If no '.' appears in the string, wrap it with 'www' and 'com'
-	    if (![theURL hasCharacter:'.'])
+	    if (![theURL vna_hasCharacter:'.'])
 	    {
 		    theURL = [NSString stringWithFormat:@"www.%@.com", theURL];
         }

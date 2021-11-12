@@ -80,7 +80,7 @@
     [expireDuration selectItemAtIndex:[expireDuration indexOfItemWithTag:prefs.autoExpireDuration]];
     
     // Set download folder
-    [self updateDownloadsPopUp:NSFileManager.defaultManager.downloadsDirectory.path];
+    [self updateDownloadsPopUp:NSFileManager.defaultManager.vna_downloadsDirectory.path];
 
     NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
     NSData *data = [userDefaults dataForKey:MAPref_DownloadsFolderBookmark];
@@ -257,7 +257,7 @@
     openPanel.prompt = NSLocalizedString(@"Select",
                                          @"Label of a button on an open panel");
 
-    openPanel.directoryURL = NSFileManager.defaultManager.downloadsDirectory;
+    openPanel.directoryURL = NSFileManager.defaultManager.vna_downloadsDirectory;
     [openPanel beginSheetModalForWindow:self.view.window
                       completionHandler:^(NSInteger returnCode) {
         if (returnCode == NSModalResponseOK) {
