@@ -51,7 +51,7 @@
 
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(handleWillDeleteFolder:)
-                                                   name:databaseWillDeleteFolderNotification
+                                                   name:VNADatabaseWillDeleteFolderNotification
                                                  object:nil];
     }
 

@@ -28,8 +28,8 @@
 
 @interface Database : NSObject
 
-extern NSNotificationName const databaseWillDeleteFolderNotification;
-extern NSNotificationName const databaseDidDeleteFolderNotification;
+extern NSNotificationName const VNADatabaseWillDeleteFolderNotification;
+extern NSNotificationName const VNAdatabaseDidDeleteFolderNotification;
 
 @property(nonatomic) Folder * trashFolder;
 @property(nonatomic) Folder * searchFolder;

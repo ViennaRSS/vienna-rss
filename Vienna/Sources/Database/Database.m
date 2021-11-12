@@ -64,13 +64,13 @@ typedef NS_ENUM(NSInteger, VNAQueryScope) {
 @end
 
 // The current database version number
-const NSInteger MA_Min_Supported_DB_Version = 12;
-const NSInteger MA_Current_DB_Version = 23;
+static NSInteger const VNAMinimumSupportedDatabaseVersion = 12;
+static NSInteger const VNACurrentDatabaseVersion = 23;
 
 @implementation Database
 
-NSNotificationName const databaseWillDeleteFolderNotification = @"Database Will Delete Folder";
-NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did Delete Folder";
+NSNotificationName const VNADatabaseWillDeleteFolderNotification = @"Database Will Delete Folder";
+NSNotificationName const VNAdatabaseDidDeleteFolderNotification = @"Database Did Delete Folder";
 
 /*!
  *  initialise the Database object with a specific path
@@ -133,11 +133,11 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
     NSInteger databaseVersion = self.databaseVersion;
     os_log_debug(VNA_LOG, "Database version: %ld", databaseVersion);
     
-    if (databaseVersion >= MA_Current_DB_Version) {
+    if (databaseVersion >= VNACurrentDatabaseVersion) {
         // Most common case, so it is first
         // Nothing to do here
         return YES;
-    } else if (databaseVersion >= MA_Min_Supported_DB_Version) {
+    } else if (databaseVersion >= VNAMinimumSupportedDatabaseVersion) {
         NSAlert * alert = [[NSAlert alloc] init];
         [alert setMessageText:NSLocalizedString(@"Database Upgrade", nil)];
         [alert setInformativeText:NSLocalizedString(@"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience.", nil)];
@@ -173,12 +173,12 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
         }];
         
         // Confirm the database is now at the correct version
-        if (self.databaseVersion == MA_Current_DB_Version) {
+        if (self.databaseVersion == VNACurrentDatabaseVersion) {
             return YES;
         } else {
             return NO;
         }
-    } else if ((databaseVersion > 0) && (databaseVersion < MA_Min_Supported_DB_Version)) {
+    } else if ((databaseVersion > 0) && (databaseVersion < VNAMinimumSupportedDatabaseVersion)) {
         // database version is too old or schema not supported
         // TODO: help text for the user to fix the issue
         NSAlert *alert = [NSAlert new];
@@ -229,7 +229,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 		 NSLocalizedString(@"Trash", nil), @(VNAFolderTypeTrash)];
 	
 		// Set the initial version
-        db.userVersion = (uint32_t)MA_Current_DB_Version;
+        db.userVersion = (uint32_t)VNACurrentDatabaseVersion;
 	
 		// Set the default sort order and write it to both the db and the prefs
 		[db executeUpdate:@"INSERT INTO info (first_folder, folder_sort) VALUES (0, ?)",  @(VNAFolderSortManual)];
@@ -1075,7 +1075,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	{
 		numFolder = @(folder.itemId);
 		[arrayOfFolderIds addObject:numFolder];
-		[[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:databaseWillDeleteFolderNotification object:numFolder];
+		[[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:VNADatabaseWillDeleteFolderNotification object:numFolder];
 	}
 
 	// Now do the deletion.
@@ -1084,7 +1084,7 @@ NSNotificationName const databaseDidDeleteFolderNotification = @"Database Did De
 	// Send the post-delete notification after we're finished. Note that the folder actually corresponding to
 	// each numFolder won't exist any more and the handlers need to be aware of this.
     for (numFolder in arrayOfFolderIds) {
-		[[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:databaseDidDeleteFolderNotification object:numFolder];
+		[[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:VNAdatabaseDidDeleteFolderNotification object:numFolder];
     }
 	
 	return result;
