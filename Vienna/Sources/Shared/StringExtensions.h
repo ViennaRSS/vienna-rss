@@ -21,37 +21,44 @@
 @import Foundation;
 @import WebKit;
 
-#define SafeString(s)   ((s) ?: @"")
+#define SafeString(s) ((s) ?: @"")
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSMutableString (MutableStringExtensions)
-- (void)vna_replaceString:(NSString *_Nonnull)source withString:(NSString *_Nonnull)dest;
-- (void)vna_fixupRelativeImgTags:(NSString *_Nonnull)baseURL;
-- (void)vna_fixupRelativeAnchorTags:(NSString *_Nonnull)baseURL;
-- (void)vna_fixupRelativeIframeTags:(NSString *_Nonnull)baseURL;
+
+- (void)vna_replaceString:(NSString *)source withString:(NSString *)dest;
+- (void)vna_fixupRelativeImgTags:(NSString *)baseURL;
+- (void)vna_fixupRelativeAnchorTags:(NSString *)baseURL;
+- (void)vna_fixupRelativeIframeTags:(NSString *)baseURL;
+
 @end
 
 @interface NSString (StringExtensions)
-+ (NSString *_Nonnull)vna_stringByRemovingHTML:(NSString *_Nonnull)theString;
-+ (NSString *_Nonnull)vna_mapEntityToString:(NSString *_Nonnull)entityString;
-+ (NSString *_Nonnull)vna_stringByConvertingHTMLEntities:(NSString *_Nonnull)stringToProcess;
-+ (NSString *_Nullable)vna_toBase64String:(NSString *_Nullable)stringToProcess;
-+ (NSString *_Nullable)vna_fromBase64String:(NSString *_Nullable)stringToProcess;
-+ (NSString *_Nonnull)vna_stringByCleaningURLString:(NSString *_Nullable)urlString;
-@property (nonatomic, readonly, copy) NSString *_Nonnull vna_firstNonBlankLine;
-@property (nonatomic, readonly, copy) NSString *_Nonnull vna_summaryTextFromHTML;
-@property (nonatomic, readonly, copy) NSString *_Nonnull vna_titleTextFromHTML;
+
++ (NSString *)vna_stringByRemovingHTML:(NSString *)theString;
++ (NSString *)vna_mapEntityToString:(NSString *)entityString;
++ (NSString *)vna_stringByConvertingHTMLEntities:(NSString *)stringToProcess;
++ (nullable NSString *)vna_toBase64String:(nullable NSString *)stringToProcess;
++ (nullable NSString *)vna_fromBase64String:(nullable NSString *)stringToProcess;
++ (NSString *)vna_stringByCleaningURLString:(nullable NSString *)urlString;
+@property (nonatomic, readonly, copy) NSString *vna_firstNonBlankLine;
+@property (nonatomic, readonly, copy) NSString *vna_summaryTextFromHTML;
+@property (nonatomic, readonly, copy) NSString *vna_titleTextFromHTML;
 - (NSUInteger)vna_indexOfCharacterInString:(char)ch afterIndex:(NSUInteger)startIndex;
-@property (nonatomic, readonly, copy) NSString *_Nonnull vna_stringByEscapingExtendedCharacters;
-@property (nonatomic, readonly, copy) NSString *_Nonnull vna_stringByUnescapingExtendedCharacters;
-- (NSString *_Nonnull)vna_stringByAppendingURLComponent:(NSString *_Nullable)newComponent;
+@property (nonatomic, readonly, copy) NSString *vna_stringByEscapingExtendedCharacters;
+@property (nonatomic, readonly, copy) NSString *vna_stringByUnescapingExtendedCharacters;
+- (NSString *)vna_stringByAppendingURLComponent:(nullable NSString *)newComponent;
 - (BOOL)vna_hasCharacter:(char)ch;
-@property (nonatomic, readonly, copy) NSString *_Nonnull vna_convertStringToValidPath;
-- (NSComparisonResult)vna_numericCompare:(NSString *_Nonnull)aString;
-@property (nonatomic, readonly, copy) NSString *_Nonnull vna_normalised;
-@property (nonatomic, readonly, copy) NSString *_Nonnull vna_baseURL;
-@property (nonatomic, readonly, copy) NSString *_Nonnull vna_host;
-@property (nonatomic, readonly, copy) NSString *_Nonnull vna_trimmed;
+@property (nonatomic, readonly, copy) NSString *vna_convertStringToValidPath;
+- (NSComparisonResult)vna_numericCompare:(NSString *)aString;
+@property (nonatomic, readonly, copy) NSString *vna_normalised;
+@property (nonatomic, readonly, copy) NSString *vna_baseURL;
+@property (nonatomic, readonly, copy) NSString *vna_host;
+@property (nonatomic, readonly, copy) NSString *vna_trimmed;
 @property (nonatomic, readonly) NSInteger vna_hexValue;
 @property (nonatomic, readonly) BOOL vna_isBlank;
 
 @end
+
+NS_ASSUME_NONNULL_END

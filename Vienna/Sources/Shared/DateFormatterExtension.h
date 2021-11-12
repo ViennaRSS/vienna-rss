@@ -19,6 +19,8 @@
 
 @import Foundation;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSDateFormatter (RelativeDateFormatter)
 
 /**
@@ -28,6 +30,8 @@
  @param date A date.
  @return A localized, relative-date string representation of the date.
  */
-+ (nonnull NSString *)vna_relativeDateStringFromDate:(nonnull NSDate *)date;
++ (NSString *)vna_relativeDateStringFromDate:(NSDate *)date;
 
 @end
+
+NS_ASSUME_NONNULL_END

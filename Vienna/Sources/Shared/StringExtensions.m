@@ -719,7 +719,7 @@ static NSMutableDictionary * entityMap = nil;
  *   User-entered URLs might contain umlauts, diacritics and other
  *   IDNA related stuff in the domain, or God knows what in filenames and arguments.
  */
-+(NSString *_Nonnull)vna_stringByCleaningURLString:(NSString *_Nullable) urlString
++(nonnull NSString *)vna_stringByCleaningURLString:(nullable NSString *) urlString
 {
     NSString * newString;
     if (urlString == nil) {

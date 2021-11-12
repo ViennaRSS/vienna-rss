@@ -22,19 +22,21 @@
 
 @class ActivityItem;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ActivityLog : NSObject
 
-extern NSNotificationName const _Nonnull activityLogUpdatedNotification;
+extern NSNotificationName const activityLogUpdatedNotification;
 
 /**
  The default activity log.
  */
-@property (readonly, class, nonnull) ActivityLog *defaultLog;
+@property (class, readonly) ActivityLog *defaultLog;
 
 /**
  An array of activity items.
  */
-@property (readonly, copy, nonnull) NSArray<ActivityItem *> *allItems;
+@property (readonly, copy, nonatomic) NSArray<ActivityItem *> *allItems;
 
 /**
  Returns an activity item for the name of the item.
@@ -42,8 +44,10 @@ extern NSNotificationName const _Nonnull activityLogUpdatedNotification;
  @param name The name of the item.
  @return An activity item.
  */
-- (nonnull ActivityItem *)itemByName:(nonnull NSString *)name;
+- (ActivityItem *)itemByName:(NSString *)name;
 
--(void)sortUsingDescriptors:(NSArray *_Nonnull)sortDescriptors;
+- (void)sortUsingDescriptors:(NSArray *)sortDescriptors;
 
 @end
+
+NS_ASSUME_NONNULL_END
