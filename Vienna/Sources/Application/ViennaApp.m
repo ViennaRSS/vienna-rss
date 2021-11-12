@@ -374,10 +374,10 @@
 -(void)setMinimumFontSize:(NSInteger)newSize				{ [Preferences standardPreferences].minimumFontSize = newSize; }
 -(void)setEnableMinimumFontSize:(BOOL)flag			{ [Preferences standardPreferences].enableMinimumFontSize = flag; }
 -(void)setRefreshFrequency:(NSInteger)newFrequency		{ [Preferences standardPreferences].refreshFrequency = newFrequency; }
--(void)setDisplayStyle:(NSString *)newStyle			{ [Preferences standardPreferences].displayStyle = newStyle; }
--(void)setFolderListFont:(NSString *)newFontName	{ [Preferences standardPreferences].folderListFont = newFontName; }
+-(void)setDisplayStyle:(NSString *)newStyle			{ [Preferences standardPreferences].displayStyle = [newStyle copy]; }
+-(void)setFolderListFont:(NSString *)newFontName	{ [Preferences standardPreferences].folderListFont = [newFontName copy]; }
 -(void)setFolderListFontSize:(NSInteger)newFontSize		{ [Preferences standardPreferences].folderListFontSize = newFontSize; }
--(void)setArticleListFont:(NSString *)newFontName	{ [Preferences standardPreferences].articleListFont = newFontName; }
+-(void)setArticleListFont:(NSString *)newFontName	{ [Preferences standardPreferences].articleListFont = [newFontName copy]; }
 -(void)setArticleListFontSize:(NSInteger)newFontSize		{ [Preferences standardPreferences].articleListFontSize = newFontSize; }
 -(void)setStatusBarVisible:(BOOL)flag				{ [Preferences standardPreferences].showStatusBar = flag; }
 -(void)setFilterBarVisible:(BOOL)flag				{ [Preferences standardPreferences].showFilterBar = flag; }

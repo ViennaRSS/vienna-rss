@@ -217,8 +217,9 @@ static NSArray * iconArray = nil;
  * Used to set the image for a folder in the array. The image is cached for this session
  * and also written to the image folder if there is a valid one.
  */
--(void)setImage:(NSImage *)iconImage
+-(void)setImage:(NSImage *)image
 {
+    NSImage *iconImage = [image copy];
 	if (self.feedURL != nil && iconImage != nil)
 	{
 		NSString * homePageSiteRoot;
@@ -232,7 +233,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setFeedDescription:(NSString *)newFeedDescription
 {
-	[self.attributes setValue:SafeString(newFeedDescription) forKey:@"FeedDescription"];
+	[self.attributes setValue:SafeString([newFeedDescription copy]) forKey:@"FeedDescription"];
 }
 
 /* setHomePage
@@ -240,7 +241,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setHomePage:(NSString *)newHomePage
 {
-	[self.attributes setValue:SafeString(newHomePage) forKey:@"HomePage"];
+	[self.attributes setValue:SafeString([newHomePage copy]) forKey:@"HomePage"];
 }
 
 /* username
@@ -256,7 +257,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setUsername:(NSString *)newUsername
 {
-	[self.attributes setValue:newUsername forKey:@"Username"];
+	[self.attributes setValue:[newUsername copy] forKey:@"Username"];
 }
 
 /* password
@@ -276,8 +277,9 @@ static NSArray * iconArray = nil;
 /* setPassword
  * Sets the password associated with this feed.
  */
--(void)setPassword:(NSString *)newPassword
+-(void)setPassword:(NSString *)password
 {
+	NSString *newPassword = [password copy];
 	if (self.username != nil && self.feedURL != nil)
 		[KeyChain setPasswordInKeychain:newPassword username:self.username url:self.feedURL];
 	[self.attributes setValue:newPassword forKey:@"Password"];
@@ -299,7 +301,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setLastUpdateString:(NSString *)newLastUpdateString
 {
-	[self.attributes setValue:newLastUpdateString forKey:@"LastUpdateString"];
+	[self.attributes setValue:[newLastUpdateString copy] forKey:@"LastUpdateString"];
 }
 
 /* feedURL
@@ -315,7 +317,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setFeedURL:(NSString *)newURL
 {
-	[self.attributes setValue:newURL forKey:@"FeedURL"];
+	[self.attributes setValue:[newURL copy] forKey:@"FeedURL"];
 }
 
 /* remoteId
@@ -331,7 +333,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setRemoteId:(NSString *)newId
 {
-	[self.attributes setValue:newId forKey:@"remoteId"];
+	[self.attributes setValue:[newId copy] forKey:@"remoteId"];
 }
 
 /* name
@@ -347,7 +349,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setName:(NSString *)newName
 {
-	[self.attributes setValue:newName forKey:@"Name"];
+	[self.attributes setValue:[newName copy] forKey:@"Name"];
 }
 
 /* isGroupFolder

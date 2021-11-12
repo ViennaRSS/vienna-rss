@@ -19,7 +19,7 @@
 
 -(void)vna_setUserInfo:(id)userDict
 {
-    [NSURLProtocol setProperty:userDict forKey:NSStringFromSelector(@selector(vna_userInfo)) inRequest:self];
+    [NSURLProtocol setProperty:[userDict copy] forKey:NSStringFromSelector(@selector(vna_userInfo)) inRequest:self];
 }
 
 -(void)vna_setInUserInfo:(id)object forKey:(NSString *)key

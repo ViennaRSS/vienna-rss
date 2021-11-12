@@ -259,9 +259,9 @@
 }
 
 -(void)setTabUrl:(NSURL *)url {
-    tabUrl = url;
-    addressField.stringValue = url ? url.absoluteString : @"";
-    self.tab.label = url ? url.host : NSLocalizedString(@"New Tab", nil);
+    tabUrl = [url copy];
+    addressField.stringValue = tabUrl ? tabUrl.absoluteString : @"";
+    self.tab.label = tabUrl ? tabUrl.host : NSLocalizedString(@"New Tab", nil);
 }
 
 /* endFrameLoad

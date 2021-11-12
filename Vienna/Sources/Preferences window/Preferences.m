@@ -908,7 +908,7 @@ static Preferences * _standardPreferences = nil;
  */
 -(void)setDisplayStyle:(NSString *)newStyleName
 {
-	[self setDisplayStyle:newStyleName withNotification:YES];
+	[self setDisplayStyle:[newStyleName copy] withNotification:YES];
 }
 
 /* setDisplayStyle
@@ -967,7 +967,7 @@ static Preferences * _standardPreferences = nil;
  */
 -(void)setFolderListFont:(NSString *)newFontName
 {
-	folderFont = [NSFont fontWithName:newFontName size:self.folderListFontSize];
+	folderFont = [NSFont fontWithName:[newFontName copy] size:self.folderListFontSize];
     NSData *archive = [NSKeyedArchiver vna_archivedDataWithRootObject:folderFont
                                                 requiringSecureCoding:YES];
     [self setObject:archive forKey:MAPref_FolderListFont];
@@ -1007,7 +1007,7 @@ static Preferences * _standardPreferences = nil;
  */
 -(void)setArticleListFont:(NSString *)newFontName
 {
-	articleFont = [NSFont fontWithName:newFontName size:self.articleListFontSize];
+	articleFont = [NSFont fontWithName:[newFontName copy] size:self.articleListFontSize];
     NSData *archive = [NSKeyedArchiver vna_archivedDataWithRootObject:articleFont
                                                 requiringSecureCoding:YES];
     [self setObject:archive forKey:MAPref_ArticleListFont];
@@ -1260,7 +1260,7 @@ static Preferences * _standardPreferences = nil;
 {
 	if (![syncServer isEqualToString:newServer])
 	{
-		syncServer = newServer;
+		syncServer = [newServer copy];
 		[self setString:syncServer forKey:MAPref_SyncServer];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
 	}
@@ -1278,7 +1278,7 @@ static Preferences * _standardPreferences = nil;
 {
 	if (![syncingUser isEqualToString:newUser])
 	{
-		syncingUser = newUser;
+		syncingUser = [newUser copy];
 		[self setString:syncingUser forKey:MAPref_SyncingUser];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
 	}

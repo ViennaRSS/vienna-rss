@@ -2968,7 +2968,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)setSearchString:(NSString *)newSearchString
 {
-	searchString = newSearchString;
+	searchString = [newSearchString copy];
 }
 
 /* searchString
@@ -2985,7 +2985,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)setFilterString:(NSString *)newFilterString
 {
-	self.filterSearchField.stringValue = newFilterString;
+	self.filterSearchField.stringValue = [newFilterString copy];
 }
 
 /* filterString
