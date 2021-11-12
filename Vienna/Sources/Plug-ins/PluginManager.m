@@ -170,7 +170,7 @@
                                                                   selector:@selector(localizedCaseInsensitiveCompare:)];
     [plugins sortUsingDescriptors:@[descriptor]];
 
-    return plugins;
+    return [plugins copy];
 }
 
 /* searchMethods
@@ -187,7 +187,7 @@
 			[searchMethods addObject:method];
 		}
 	}
-	return searchMethods;
+	return [searchMethods copy];
 }	
 
 /* toolbarItems
@@ -205,7 +205,7 @@
 		if (![pluginType isEqualToString:@"SearchEngine"])
 			[toolbarKeys addObject:pluginName];
 	}
-	return toolbarKeys;
+	return [toolbarKeys copy];
 }
 
 /* defaultToolbarItems
@@ -222,7 +222,7 @@
 		if ([onePlugin[@"Default"] integerValue])
 			[newArray addObject:pluginName];
 	}
-	return newArray;
+	return [newArray copy];
 }
 
 /* toolbarItem

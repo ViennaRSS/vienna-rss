@@ -65,7 +65,7 @@
 #pragma mark Accessors
 
 - (NSArray *)allItems {
-    return self.log;
+    return [self.log copy];
 }
 
 - (ActivityItem *)itemByName:(NSString *)name {
