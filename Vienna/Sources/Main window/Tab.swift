@@ -48,6 +48,8 @@ protocol Tab {
     func loadTab()
     func reloadTab()
     func stopLoadingTab()
+    /// prepare tab for being closed
+    func closeTab()
 
     // MARK: other actions
 

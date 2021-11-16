@@ -262,6 +262,7 @@
 {
 	//remove closing tab from tab order
 	[self.tabViewOrder removeObject:tabViewItem];
+    [(id<Tab>)tabViewItem.view closeTab];
 
 }
 

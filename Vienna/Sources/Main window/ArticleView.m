@@ -285,6 +285,10 @@ self.converter = [[WebViewArticleConverter alloc] init];
 	//TODO
 }
 
+- (void)closeTab {
+    [NSException raise:@"ForbiddenMethodException" format:@"Cannot close article tab"];
+}
+
 - (void)activateAddressBar {
     //TODO
 }
