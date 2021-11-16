@@ -25,7 +25,7 @@ import Foundation
 ///   - executingQueue: the queue where the execution shall happen. Must not be the same as queue!
 ///   - deadline: when to stop waiting for the task to finish execution
 ///   - task: the code that shall be executed. ATTENTION: must call the finishHandler at some point!
-func waitForAsyncExecution(on waitingQueue: DispatchQueue = DispatchQueue.global(qos: .userInitiated), executingQueue: DispatchQueue = DispatchQueue.main, until deadline: DispatchTime? = nil, _ task: @escaping (_ finishHandler: @escaping () -> Void) -> Void ) {
+func waitForAsyncExecution(on waitingQueue: DispatchQueue = DispatchQueue.global(qos: .userInitiated), executingQueue: DispatchQueue = DispatchQueue.main, after delay: DispatchTime? = nil, until deadline: DispatchTime? = nil, _ task: @escaping (_ finishHandler: @escaping () -> Void) -> Void ) {
 
     guard waitingQueue != executingQueue else {
         NSException(name: .invalidArgumentException, reason: "Queue to wait and queue to execute block must never be the same!", userInfo: ["wait queue": waitingQueue, "run queue": executingQueue]).raise()
@@ -37,18 +37,27 @@ func waitForAsyncExecution(on waitingQueue: DispatchQueue = DispatchQueue.global
     let runLoop = CFRunLoopGetCurrent()
     let asyncBlock = {
         group.enter()
+        var timedOut = false
         executingQueue.async {
-            task { group.leave() }
+            task {
+                if !timedOut {
+                    group.leave()
+                }
+            }
         }
-        group.wait()
+        if let deadline = deadline {
+            timedOut = group.wait(timeout: deadline) == .timedOut
+        } else {
+            group.wait()
+        }
         didFinish = true
         CFRunLoopPerformBlock(runLoop, CFRunLoopMode.commonModes?.rawValue) {
             CFRunLoopStop(runLoop)
         }
         CFRunLoopWakeUp(runLoop)
     }
-    if let deadline = deadline {
-        waitingQueue.asyncAfter(deadline: deadline, execute: asyncBlock)
+    if let delay = delay {
+        waitingQueue.asyncAfter(deadline: delay, execute: asyncBlock)
     } else {
         waitingQueue.async(execute: asyncBlock)
     }
