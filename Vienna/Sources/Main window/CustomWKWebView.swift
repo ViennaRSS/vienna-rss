@@ -128,7 +128,7 @@ class CustomWKWebView: WKWebView {
 
         let javascriptString = "var x = {contentHeight: document.body.scrollHeight, offsetY: window.scrollY}; x"
 
-        waitForAsyncExecution(until: DispatchTime.now() + DispatchTimeInterval.seconds(1)) { finishHandler in
+        waitForAsyncExecution(until: DispatchTime.now() + DispatchTimeInterval.milliseconds(200)) { finishHandler in
             self.evaluateJavaScript(javascriptString) { info, _ in
 
                 guard let info = info as? [String: Any] else {

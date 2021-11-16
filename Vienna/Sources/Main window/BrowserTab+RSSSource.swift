@@ -78,7 +78,7 @@ extension BrowserTab: RSSSource {
         }
         // use javascript to detect RSS feed link
         // TODO: deal with multiple links
-        waitForAsyncExecution { finishHandler in
+        waitForAsyncExecution(until: DispatchTime.now() + DispatchTimeInterval.milliseconds(200)) { finishHandler in
             self.webView.evaluateJavaScript(BrowserTab.extractRssLinkScript) { result, error in
                 if error == nil, let result = result as? [String] {
                     // RSS feed link(s) detected
