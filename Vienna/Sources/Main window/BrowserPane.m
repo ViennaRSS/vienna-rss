@@ -752,6 +752,10 @@
     [self handleStopLoading:nil];
 }
 
+- (void)closeTab {
+    [self stopLoadingTab]; //remainder will be handeled by dealloc
+}
+
 - (void)activateWebView {
     [self.window makeFirstResponder:self.webPane];
 }

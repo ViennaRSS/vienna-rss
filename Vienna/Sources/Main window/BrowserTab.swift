@@ -291,19 +291,23 @@ extension BrowserTab: Tab {
     }
 
     func stopLoadingTab() {
+        let wasLoading = loading
         self.webView.stopLoading()
+        if wasLoading {
+            // We must manually invoke navigation end callbacks
+            self.handleNavigationEnd(success: false)
+        }
+    }
+
+    func closeTab() {
+        stopLoadingTab()
         // free webView by force stopping JavaScript and resetting delegates
-        let group = DispatchGroup()
-        group.enter()
         self.webView.evaluateJavaScript("window.location.replace('about:blank');") { _, _ in
-            group.leave()
+            DispatchQueue.main.async {
+                self.webView.navigationDelegate = nil
+                self.webView.uiDelegate = nil
+            }
         }
-        group.notify(queue: DispatchQueue.main) {
-            self.webView.navigationDelegate = nil
-            self.webView.uiDelegate = nil
-        }
-        // We must manually invoke navigation end callbacks
-        self.handleNavigationEnd(success: false)
     }
 
     @objc

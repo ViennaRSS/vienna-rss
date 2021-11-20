@@ -257,7 +257,7 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
         guard let tab = tabViewItem.viewController as? Tab else {
             return
         }
-        tab.stopLoadingTab()
+        tab.closeTab()
     }
 
     func tabView(_ aTabView: NSTabView, selectOnClosing tabViewItem: NSTabViewItem) -> NSTabViewItem? {
