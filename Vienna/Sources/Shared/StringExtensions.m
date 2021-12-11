@@ -28,7 +28,7 @@
  * NSMutableString replaceOccurrencesOfString function with NSLiteralString implied
  * and the range set to the entire string.
  */
--(void)replaceString:(NSString *)source withString:(NSString *)dest
+-(void)vna_replaceString:(NSString *)source withString:(NSString *)dest
 {
 	[self replaceOccurrencesOfString:source withString:dest options:NSLiteralSearch range:NSMakeRange(0, self.length)];
 }
@@ -37,9 +37,9 @@
  * Scans the text for <img...> tags that have relative links in the src attribute and fixes
  * up the relative links to be absolute to the base URL.
  */
--(void)fixupRelativeImgTags:(NSString *)baseURL
+-(void)vna_fixupRelativeImgTags:(NSString *)baseURL
 {
-	baseURL = [NSString stringByCleaningURLString:baseURL];
+	baseURL = [NSString vna_stringByCleaningURLString:baseURL];
 	if (baseURL == nil)
 		return;
 	NSURL * imgBaseURL = [NSURL URLWithString:baseURL];
@@ -91,9 +91,9 @@
  * Scans the text for <a...> tags that have relative links in the src attribute and fixes
  * up the relative links to be absolute to the base URL.
  */
--(void)fixupRelativeAnchorTags:(NSString *)baseURL
+-(void)vna_fixupRelativeAnchorTags:(NSString *)baseURL
 {
-	baseURL = [NSString stringByCleaningURLString:baseURL];
+	baseURL = [NSString vna_stringByCleaningURLString:baseURL];
 	if (baseURL == nil)
 		return;
 	NSURL * anchorBaseURL = [NSURL URLWithString:baseURL];
@@ -145,9 +145,9 @@
  * Scans the text for <iframe...> tags that have relative links in the src attribute and fixes
  * up the relative links to be absolute to the base URL.
  */
--(void)fixupRelativeIframeTags:(NSString *)baseURL
+-(void)vna_fixupRelativeIframeTags:(NSString *)baseURL
 {
-	baseURL = [NSString stringByCleaningURLString:baseURL];
+	baseURL = [NSString vna_stringByCleaningURLString:baseURL];
 	if (baseURL == nil)
 		return;
 	NSURL * imgBaseURL = [NSURL URLWithString:baseURL];
@@ -204,7 +204,7 @@ static NSMutableDictionary * entityMap = nil;
 /* hexValue
  * A counterpart to integerValue, but parses a hexadecimal number.
  */
--(NSInteger)hexValue
+-(NSInteger)vna_hexValue
 {
 	NSInteger count = self.length;
 	NSInteger intValue = 0;
@@ -231,9 +231,9 @@ static NSMutableDictionary * entityMap = nil;
  * characters to their unicode equivalents. Newlines are replaced with spaces then the string
  * is truncated to the given number of characters.
  */
--(NSString *)summaryTextFromHTML
+-(NSString *)vna_summaryTextFromHTML
 {
-	return [NSString stringByRemovingHTML:self].normalised;
+	return [NSString vna_stringByRemovingHTML:self].vna_normalised;
 }
 
 /* titleTextFromHTML
@@ -241,15 +241,15 @@ static NSMutableDictionary * entityMap = nil;
  * characters are converted to their unicode equivalents. Then the first newline is returned up to
  * the given number of characters.
  */
--(NSString *)titleTextFromHTML
+-(NSString *)vna_titleTextFromHTML
 {
-	return [NSString stringByRemovingHTML:self].firstNonBlankLine;
+	return [NSString vna_stringByRemovingHTML:self].vna_firstNonBlankLine;
 }
 
 /* stringByRemovingHTML
  * Returns an autoreleased instance of the specified string with all HTML tags removed.
  */
-+(NSString *)stringByRemovingHTML:(NSString *)theString
++(NSString *)vna_stringByRemovingHTML:(NSString *)theString
 {
     NSMutableString *aString = [NSMutableString stringWithString:theString];
     NSInteger maxChrs = theString.length;
@@ -320,14 +320,14 @@ static NSMutableDictionary * entityMap = nil;
         [aString deleteCharactersInRange:NSMakeRange(cutOff, maxChrs - cutOff)];
     }
 
-    return aString.stringByUnescapingExtendedCharacters;
+    return aString.vna_stringByUnescapingExtendedCharacters;
 } // stringByRemovingHTML
 
 /* normalised
  * Returns the current string normalised. Newlines are removed and replaced with spaces and multiple
  * spaces are collapsed to one.
  */
--(NSString *)normalised
+-(NSString *)vna_normalised
 {
 	NSMutableString * string = [NSMutableString stringWithString:self];
 	BOOL isInWhitespace = YES;
@@ -359,7 +359,7 @@ static NSMutableDictionary * entityMap = nil;
  * Returns the first line of the string that isn't entirely spaces or tabs. If all lines in the string are
  * empty, we return an empty string.
  */
--(NSString *)firstNonBlankLine
+-(NSString *)vna_firstNonBlankLine
 {
 	BOOL hasNonEmptyChars = NO;
 	NSUInteger indexOfFirstChr = 0;
@@ -398,7 +398,7 @@ static NSMutableDictionary * entityMap = nil;
  * Appends the specified component to the end of our URL. It is similar to stringByAppendingPathComponent
  * but it doesn't attempt to interpret the current string as a file path and 'fixup' slashes.
  */
--(NSString *)stringByAppendingURLComponent:(NSString *)newComponent
+-(NSString *)vna_stringByAppendingURLComponent:(NSString *)newComponent
 {
 	NSMutableString * newString = [NSMutableString stringWithString:self];
 	NSInteger index = newString.length - 1;
@@ -416,7 +416,7 @@ static NSMutableDictionary * entityMap = nil;
  * Returns a string that consisted of the receiver but with all extended characters
  * escaped in the format &#code; where code is the character code.
  */
--(NSString *)stringByEscapingExtendedCharacters
+-(NSString *)vna_stringByEscapingExtendedCharacters
 {
 	NSMutableString * escapedString = [NSMutableString stringWithString:self];
 	NSInteger length = escapedString.length;
@@ -442,34 +442,34 @@ static NSMutableDictionary * entityMap = nil;
  * Scan the specified string and convert attribute characters to their literals. Also trim leading and trailing
  * whitespace.
  */
--(NSString *)stringByUnescapingExtendedCharacters
+-(NSString *)vna_stringByUnescapingExtendedCharacters
 {
 	NSMutableString * processedString = [[NSMutableString alloc] initWithString:self];
 	NSUInteger entityStart;
 	NSUInteger entityEnd;
 	
-	entityStart = [processedString indexOfCharacterInString:'&' afterIndex:0];
+	entityStart = [processedString vna_indexOfCharacterInString:'&' afterIndex:0];
 	while (entityStart != NSNotFound)
 	{
-		entityEnd = [processedString indexOfCharacterInString:';' afterIndex:entityStart + 1];
+		entityEnd = [processedString vna_indexOfCharacterInString:';' afterIndex:entityStart + 1];
 		if (entityEnd != NSNotFound)
 		{
 			NSRange entityRange = NSMakeRange(entityStart, (entityEnd - entityStart) + 1);
 			NSRange innerEntityRange = NSMakeRange(entityRange.location + 1, entityRange.length - 2);
 			NSString * entityString = [processedString substringWithRange:innerEntityRange];
-			[processedString replaceCharactersInRange:entityRange withString:[NSString mapEntityToString:entityString]];
+			[processedString replaceCharactersInRange:entityRange withString:[NSString vna_mapEntityToString:entityString]];
 		}
-		entityStart = [processedString indexOfCharacterInString:'&' afterIndex:entityStart + 1];
+		entityStart = [processedString vna_indexOfCharacterInString:'&' afterIndex:entityStart + 1];
 	}
 	
-	NSString * returnString = processedString.trim;
+	NSString * returnString = processedString.vna_trimmed;
 	return returnString;
 }
 
 /* mapEntityToString
  * Maps an entity sequence to its character equivalent.
  */
-+(NSString *)mapEntityToString:(NSString *)entityString
++(NSString *)vna_mapEntityToString:(NSString *)entityString
 {
 	if (entityMap == nil)
 	{
@@ -589,7 +589,7 @@ static NSMutableDictionary * entityMap = nil;
 	{
 		NSInteger intValue;
 		if ([entityString characterAtIndex:1] == 'x')
-			intValue = [entityString substringFromIndex:2].hexValue;
+			intValue = [entityString substringFromIndex:2].vna_hexValue;
 		else
 			intValue = [entityString substringFromIndex:1].integerValue;
 		return [NSString stringWithFormat:@"%C", (unsigned short)MAX(intValue, ' ')];
@@ -603,7 +603,7 @@ static NSMutableDictionary * entityMap = nil;
  * Returns the index of the first occurrence of the specified character at or after
  * the starting index. If no occurrence is found, returns NSNotFound.
  */
--(NSUInteger)indexOfCharacterInString:(char)ch afterIndex:(NSUInteger)startIndex
+-(NSUInteger)vna_indexOfCharacterInString:(char)ch afterIndex:(NSUInteger)startIndex
 {
 	NSUInteger length = self.length;
 	NSUInteger index;
@@ -620,15 +620,15 @@ static NSMutableDictionary * entityMap = nil;
 /* hasCharacter
  * Returns YES if the specified character appears in the string. NO otherwise.
  */
--(BOOL)hasCharacter:(char)ch
+-(BOOL)vna_hasCharacter:(char)ch
 {
-	return [self indexOfCharacterInString:ch afterIndex:0] != NSNotFound;
+	return [self vna_indexOfCharacterInString:ch afterIndex:0] != NSNotFound;
 }
 
 /* trim
  * Removes leading and trailing whitespace from the string.
  */
--(NSString *)trim
+-(NSString *)vna_trimmed
 {
 	return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
@@ -637,16 +637,16 @@ static NSMutableDictionary * entityMap = nil;
  * Returns YES if the string is blank. No otherwise. A blank string is defined
  * as one comprising entirely one or more combination of spaces, tabs or newlines.
  */
--(BOOL)isBlank
+-(BOOL)vna_isBlank
 {
-	return self.trim.length == 0;
+	return self.vna_trimmed.length == 0;
 }
 
 /* convertStringToValidPath
  * This function normalises a string to make it suitable for use as a path. It converts any part
  * of the string that is a 'path' separator to an underscore.
  */
--(NSString *)convertStringToValidPath
+-(NSString *)vna_convertStringToValidPath
 {
 	NSMutableString * baseURLString = [NSMutableString stringWithString:self];
     [baseURLString replaceOccurrencesOfString:@":" withString:@"_" options:NSLiteralSearch range:NSMakeRange(0, baseURLString.length)];
@@ -667,7 +667,7 @@ static NSMutableDictionary * entityMap = nil;
  * we can't parse anything, we just return ourselves. Thus we're guaranteed to
  * return a non-nil value.
  */
--(NSString *)baseURL
+-(NSString *)vna_baseURL
 {
 	NSURL * url = [NSURL URLWithString:self];
 	return (url && url.host) ? [NSString stringWithFormat:@"%@://%@", url.scheme, url.host] : self;
@@ -683,7 +683,7 @@ static NSMutableDictionary * entityMap = nil;
  * we can't parse anything, we just return ourselves. Thus we're guaranteed to
  * return a non-nil value.
  */
--(NSString *)host
+-(NSString *)vna_host
 {
 	NSURL * url = [NSURL URLWithString:self];
 	return (url && url.host) ? url.host : self;
@@ -692,7 +692,7 @@ static NSMutableDictionary * entityMap = nil;
 /* numericCompare
  * Compares two strings using both case insensitivity and numeric comparisons.
  */
--(NSComparisonResult)numericCompare:(NSString *)aString
+-(NSComparisonResult)vna_numericCompare:(NSString *)aString
 {
 	return [self compare:aString options:NSCaseInsensitiveSearch|NSNumericSearch];
 }
@@ -701,14 +701,14 @@ static NSMutableDictionary * entityMap = nil;
 /* convertHTMLEntities
  * Scan the specified string and convert HTML literal characters to their entity equivalents.
  */
-+(NSString *)stringByConvertingHTMLEntities:(NSString *)stringToProcess
++(NSString *)vna_stringByConvertingHTMLEntities:(NSString *)stringToProcess
 {
     NSMutableString * newString = [NSMutableString stringWithString:stringToProcess];
-    [newString replaceString:@"&" withString:@"&amp;"];
-    [newString replaceString:@"<" withString:@"&lt;"];
-    [newString replaceString:@">" withString:@"&gt;"];
-    [newString replaceString:@"\"" withString:@"&quot;"];
-    [newString replaceString:@"'" withString:@"&apos;"];
+    [newString vna_replaceString:@"&" withString:@"&amp;"];
+    [newString vna_replaceString:@"<" withString:@"&lt;"];
+    [newString vna_replaceString:@">" withString:@"&gt;"];
+    [newString vna_replaceString:@"\"" withString:@"&quot;"];
+    [newString vna_replaceString:@"'" withString:@"&apos;"];
     return newString;
 }
 
@@ -719,7 +719,7 @@ static NSMutableDictionary * entityMap = nil;
  *   User-entered URLs might contain umlauts, diacritics and other
  *   IDNA related stuff in the domain, or God knows what in filenames and arguments.
  */
-+(NSString *_Nonnull)stringByCleaningURLString:(NSString *_Nullable) urlString
++(nonnull NSString *)vna_stringByCleaningURLString:(nullable NSString *) urlString
 {
     NSString * newString;
     if (urlString == nil) {
@@ -735,13 +735,13 @@ static NSMutableDictionary * entityMap = nil;
     return newString;
 }
 
-+ (NSString *)toBase64String:(NSString *)string {
++ (NSString *)vna_toBase64String:(NSString *)string {
     NSData * data = [string dataUsingEncoding:NSUTF8StringEncoding];
     NSString * ret = [data base64EncodedStringWithOptions:0];
     return ret;
 }
 
-+ (NSString *)fromBase64String:(NSString *)string {
++ (NSString *)vna_fromBase64String:(NSString *)string {
     NSData * base64Data = [[NSData alloc] initWithBase64EncodedString:string options:0];
     NSString * decryptedStr = [[NSString alloc] initWithData:base64Data encoding:NSUTF8StringEncoding];
     return decryptedStr;

@@ -72,7 +72,7 @@
 	password.stringValue = folder.password;
 	
 	// Set the focus
-	[credentialsWindow makeFirstResponder:(folder.username.blank) ? userName : password];
+	[credentialsWindow makeFirstResponder:(folder.username.vna_isBlank) ? userName : password];
 
 	[self enableOKButton];
     [window beginSheet:credentialsWindow completionHandler:nil];
@@ -94,7 +94,7 @@
  */
 -(IBAction)doOKButton:(id)sender
 {
-	NSString * usernameString = (userName.stringValue).trim;
+	NSString * usernameString = (userName.stringValue).vna_trimmed;
 	NSString * passwordString = password.stringValue;
 
 	Database * db = [Database sharedManager];
@@ -122,7 +122,7 @@
  */
 -(void)enableOKButton
 {
-	okButton.enabled = !(userName.stringValue).blank;
+	okButton.enabled = !(userName.stringValue).vna_isBlank;
 }
 
 /* dealloc

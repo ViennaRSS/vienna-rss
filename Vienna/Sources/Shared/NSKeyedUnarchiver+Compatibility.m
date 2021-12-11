@@ -26,7 +26,7 @@
 
 @implementation NSKeyedUnarchiver (Compatibility)
 
-+ (nullable id)unarchivedObjectOfClass:(Class)cls fromData:(NSData *)data
++ (nullable id)vna_unarchivedObjectOfClass:(Class)cls fromData:(NSData *)data
 {
     id object = nil;
 
@@ -55,8 +55,8 @@
     return object;
 }
 
-+ (nullable id)unarchivedArrayOfObjectsOfClass:(Class)cls
-                                      fromData:(NSData *)data
++ (nullable id)vna_unarchivedArrayOfObjectsOfClass:(Class)cls
+                                          fromData:(NSData *)data
 {
     id object = nil;
 

@@ -37,19 +37,19 @@
 
 // Accessor functions
 -(instancetype)init:(TreeNode *)parentNode atIndex:(NSInteger)insertIndex folder:(Folder *)folder canHaveChildren:(BOOL)childflag /*NS_DESIGNATED_INITIALIZER*/;
-@property (nonatomic, strong) TreeNode *parentNode;
-@property (nonatomic, readonly, strong) TreeNode *nextSibling;
-@property (nonatomic, readonly, strong) TreeNode *firstChild;
+@property (nonatomic) TreeNode *parentNode;
+@property (nonatomic, readonly) TreeNode *nextSibling;
+@property (nonatomic, readonly) TreeNode *firstChild;
 -(void)addChild:(TreeNode *)child atIndex:(NSInteger)insertIndex;
 -(void)removeChildren;
 -(void)removeChild:(TreeNode *)child andChildren:(BOOL)removeChildrenFlag;
 -(void)sortChildren:(NSInteger)sortMethod;
-@property (nonatomic, readonly, copy) NSString *nodeName;
+@property (readonly, nonatomic) NSString *nodeName;
 -(TreeNode *)childByName:(NSString *)childName;
 -(TreeNode *)childByIndex:(NSInteger)index;
 -(NSInteger)indexOfChild:(TreeNode *)node;
 -(TreeNode *)nodeFromID:(NSInteger)n;
-@property (nonatomic, strong) Folder *folder;
+@property (nonatomic) Folder *folder;
 @property (nonatomic) NSInteger nodeId;
 @property (nonatomic, readonly) NSUInteger countOfChildren;
 @property (nonatomic) BOOL canHaveChildren;
@@ -57,6 +57,6 @@
 
 -(void)allocAndStartProgressIndicatorWithFrame:(NSRect)frame inView:(NSView *)controlView;
 -(void)stopAndReleaseProgressIndicator;
-@property (nonatomic, strong, readonly) NSProgressIndicator *progressIndicator;
+@property (nonatomic, readonly) NSProgressIndicator *progressIndicator;
 
 @end

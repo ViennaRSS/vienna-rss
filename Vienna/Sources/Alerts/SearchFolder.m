@@ -238,7 +238,7 @@
 	
 	// Init the folder name field and disable the Save button if it is blank
 	smartFolderName.stringValue = folderName;
-	saveButton.enabled = !folderName.blank;
+	saveButton.enabled = !folderName.vna_isBlank;
 }
 
 /* initFolderValueField
@@ -413,8 +413,8 @@
  */
 -(IBAction)doSave:(id)sender
 {
-	NSString * folderName = (smartFolderName.stringValue).trim;
-	NSAssert(![folderName isBlank], @"doSave called with empty folder name");
+	NSString * folderName = (smartFolderName.stringValue).vna_trimmed;
+	NSAssert(![folderName vna_isBlank], @"doSave called with empty folder name");
 	NSUInteger  c;
 
 	// Check whether there is another folder with the same name.
@@ -503,7 +503,7 @@
 -(void)handleTextDidChange:(NSNotification *)aNotification
 {
 	NSString * folderName = smartFolderName.stringValue;
-	saveButton.enabled = !folderName.blank;
+	saveButton.enabled = !folderName.vna_isBlank;
 }
 
 /* removeAllCriteria

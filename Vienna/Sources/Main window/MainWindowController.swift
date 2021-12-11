@@ -156,7 +156,7 @@ final class MainWindowController: NSWindowController {
     // swiftlint:disable private_action
     @IBAction func changeFiltering(_ sender: NSMenuItem) { // TODO: This should be handled by ArticleController
         Preferences.standard.filterMode = sender.tag
-        if sender.tag == VNAFilter.all.rawValue {
+        if sender.tag == Filter.all.rawValue {
             currentFilter = ""
         } else {
             currentFilter = sender.title

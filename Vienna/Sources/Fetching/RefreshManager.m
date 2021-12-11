@@ -50,8 +50,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 @interface RefreshManager ()
 
 @property (readwrite, copy) NSString * statusMessage;
-@property (nonatomic, retain) NSTimer * unsafe301RedirectionTimer;
-@property (atomic, copy) NSString * riskyIPAddress;
+@property (nonatomic) NSTimer * unsafe301RedirectionTimer;
+@property (copy) NSString * riskyIPAddress;
 @property (nonatomic) Redirect301Status redirect301Status;
 @property (nonatomic) NSMutableArray * redirect301WaitQueue;
 @property (nonatomic, readonly) NSURLSession * urlSession;
@@ -106,7 +106,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         [nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
         [nc addObserver:self selector:@selector(handleCancelAuthenticationForFolder:) name:@"MA_Notify_CancelAuthenticationForFolder"
             object:nil];
-        [nc addObserver:self selector:@selector(handleWillDeleteFolder:) name:databaseWillDeleteFolderNotification object:nil];
+        [nc addObserver:self selector:@selector(handleWillDeleteFolder:) name:VNADatabaseWillDeleteFolderNotification object:nil];
         [nc addObserver:self selector:@selector(handleChangeConcurrentDownloads:) name:@"MA_Notify_CowncurrentDownloadsChange" object:nil];
         // be notified on system wake up after sleep
         [[NSWorkspace sharedWorkspace].notificationCenter addObserver:self selector:@selector(handleDidWake:)
@@ -151,7 +151,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     if (folder != nil) {
         for (TRVSURLSessionOperation *theRequest in networkQueue.operations) {
             NSMutableURLRequest *urlRequest = (NSMutableURLRequest *)(theRequest.task.originalRequest);
-            if (((NSDictionary *)[urlRequest userInfo])[@"folder"] == folder) {
+            if (((NSDictionary *)[urlRequest vna_userInfo])[@"folder"] == folder) {
                 [theRequest.task cancel];
                 break;
             }
@@ -282,7 +282,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     // Do nothing if there's no homepage associated with the feed
     // or if the feed already has a favicon.
     if ((folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) &&
-        (folder.homePage == nil || folder.homePage.blank || folder.hasCachedImage))
+        (folder.homePage == nil || folder.homePage.vna_isBlank || folder.hasCachedImage))
     {
         [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
         return;
@@ -301,8 +301,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 {
     for (TRVSURLSessionOperation *theRequest in networkQueue.operations) {
         NSMutableURLRequest *urlRequest = (NSMutableURLRequest *)(theRequest.task.originalRequest);
-        if ((((NSDictionary *)[urlRequest userInfo])[@"folder"] == folder) &&
-            ([[((NSDictionary *)[urlRequest userInfo]) valueForKey:@"type"] integerValue] == @(type).integerValue))
+        if ((((NSDictionary *)[urlRequest vna_userInfo])[@"folder"] == folder) &&
+            ([[((NSDictionary *)[urlRequest vna_userInfo]) valueForKey:@"type"] integerValue] == @(type).integerValue))
         {
             return YES;
         }
@@ -355,7 +355,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     } else {
         [folder clearNonPersistedFlag:VNAFolderFlagError];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
+    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
 }
 
 /* setFolderUpdatingFlag
@@ -369,7 +369,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     } else {
         [folder clearNonPersistedFlag:VNAFolderFlagUpdating];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
+    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
 }
 
 /* pumpFolderIconRefresh
@@ -385,10 +385,10 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
     if (folder.type == VNAFolderTypeRSS) {
         [aItem appendDetail:NSLocalizedString(@"Retrieving folder image", nil)];
-        favIconPath = [NSString stringWithFormat:@"%@/favicon.ico", folder.homePage.trim.baseURL];
+        favIconPath = [NSString stringWithFormat:@"%@/favicon.ico", folder.homePage.vna_trimmed.vna_baseURL];
     } else {     // Open Reader feed
         [aItem appendDetail:NSLocalizedString(@"Retrieving folder image for Open Reader Feed", nil)];
-        favIconPath = [NSString stringWithFormat:@"%@/favicon.ico", folder.homePage.trim.baseURL];
+        favIconPath = [NSString stringWithFormat:@"%@/favicon.ico", folder.homePage.vna_trimmed.vna_baseURL];
     }
 
     NSMutableURLRequest *myRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:favIconPath]];
@@ -409,9 +409,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                         folder.image = iconImage;
 
                         // Broadcast a notification since the folder image has now changed
-                        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:
-                         @"MA_Notify_FoldersUpdated"
-                                                                                            object:@(folder.itemId)];
+                        [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
+                                                                                                object:@(folder.itemId)];
 
                         // Log additional details about this.
                         [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@",
@@ -503,13 +502,13 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             [myRequest setValue:theLastUpdateString forHTTPHeaderField:@"If-Modified-Since"];
             [myRequest setValue:@"feed" forHTTPHeaderField:@"A-IM"];
         }
-        [myRequest setUserInfo:@{ @"folder": folder, @"log": aItem, @"type": @(MA_Refresh_Feed) }];
+        [myRequest vna_setUserInfo:@{ @"folder": folder, @"log": aItem, @"type": @(MA_Refresh_Feed) }];
         [myRequest addValue:
          @"application/rss+xml,application/rdf+xml,application/atom+xml,text/xml,application/xml,application/xhtml+xml;q=0.9,text/html;q=0.8,*/*;q=0.5"
                       forHTTPHeaderField:@"Accept"];
         // if authentication infos are present, try basic authentication first
         if (![folder.username isEqualToString:@""]) {
-            NSString* usernameAndPassword = [NSString toBase64String:[NSString stringWithFormat:@"%@:%@", folder.username, folder.password]];
+            NSString* usernameAndPassword = [NSString vna_toBase64String:[NSString stringWithFormat:@"%@:%@", folder.username, folder.password]];
 			[myRequest setValue:[NSString stringWithFormat:@"Basic %@", usernameAndPassword] forHTTPHeaderField:@"Authorization"];
 		}
 
@@ -538,7 +537,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 -(void)folderRefreshFailed:(NSMutableURLRequest *)request error:(NSError *)error
 {
     os_log_debug(VNA_LOG, "Refresh of %@ failed. Reason: %{public}@", error.userInfo[NSURLErrorFailingURLStringErrorKey], error.localizedDescription);
-    Folder * folder = ((NSDictionary *)[request userInfo])[@"folder"];
+    Folder * folder = ((NSDictionary *)[request vna_userInfo])[@"folder"];
     if (error.code == NSURLErrorCancelled) {
         // Stopping the connection isn't an error, so clear any existing error flag.
         [self setFolderErrorFlag:folder flag:NO];
@@ -553,7 +552,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         }
         [self getCredentialsForFolder];
     }
-    ActivityItem *aItem = (ActivityItem *)((NSDictionary *)[request userInfo])[@"log"];
+    ActivityItem *aItem = (ActivityItem *)((NSDictionary *)[request vna_userInfo])[@"log"];
     [self setFolderErrorFlag:folder flag:YES];
     [aItem appendDetail:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Error retrieving RSS feed:", nil),
                          error.localizedDescription ]];
@@ -569,8 +568,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     dispatch_async(_queue, ^() {
         // TODO : refactor code to separate feed refresh code and UI
 
-        Folder * folder = (Folder *)((NSDictionary *)[connector userInfo])[@"folder"];
-        ActivityItem *connectorItem = ((NSDictionary *)[connector userInfo])[@"log"];
+        Folder * folder = (Folder *)((NSDictionary *)[connector vna_userInfo])[@"folder"];
+        ActivityItem *connectorItem = ((NSDictionary *)[connector vna_userInfo])[@"log"];
         NSURL * url = connector.URL;
         NSInteger folderId = folder.itemId;
         Database *dbManager = [Database sharedManager];
@@ -721,8 +720,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         NSString * feedLink = newFeed.link;
 
         // Synthesize feed link if it is missing
-        if (feedLink == nil || feedLink.blank) {
-            feedLink = folder.feedURL.baseURL;
+        if (feedLink == nil || feedLink.vna_isBlank) {
+            feedLink = folder.feedURL.vna_baseURL;
         }
         if (feedLink != nil && ![feedLink hasPrefix:@"http:"] && ![feedLink hasPrefix:@"https:"]) {
             feedLink = [NSURL URLWithString:feedLink relativeToURL:url].absoluteString;
@@ -833,7 +832,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
 
         // A notify is only needed if we added any new articles.
-        if (feedTitle != nil  && !feedTitle.blank && [folder.name hasPrefix:[Database untitledFeedFolderName]]) {
+        if (feedTitle != nil  && !feedTitle.vna_isBlank && [folder.name hasPrefix:[Database untitledFeedFolderName]]) {
             // If there's an existing feed with this title, make ours unique
             // BUGBUG: This duplicates logic in database.m so consider moving it there.
             NSString * oldFeedTitle = feedTitle;
@@ -877,7 +876,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         dispatch_async(dispatch_get_main_queue(), ^{
             connectorItem.status = logText;
         });
-        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:@(folder.
+        [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:@(folder.
                                                                                                                                   itemId)];
     }
 
@@ -991,9 +990,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 {
     completionHandler(newRequest);
     NSMutableURLRequest *originalRequest = (NSMutableURLRequest *)task.originalRequest;
-    if ([originalRequest userInfo] != nil) {
-        Folder * folder = (Folder *)[originalRequest userInfo][@"folder"];
-        NSInteger type = [[(NSDictionary *)[originalRequest userInfo] valueForKey:@"type"] integerValue];
+    if ([originalRequest vna_userInfo] != nil) {
+        Folder * folder = (Folder *)[originalRequest vna_userInfo][@"folder"];
+        NSInteger type = [[(NSDictionary *)[originalRequest vna_userInfo] valueForKey:@"type"] integerValue];
         if (((NSHTTPURLResponse *)response).statusCode == 301 && folder != nil && type == MA_Refresh_Feed) {
             // We got a permanent redirect from the feed so we probably need to change the feed URL to the new location.
             [self verify301Status:task];
@@ -1084,7 +1083,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         NSURLSessionTask *theConnector = (NSURLSessionTask *)obj;
         [self.redirect301WaitQueue removeObject:obj];
         NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
-        ActivityItem *connectorItem = ((NSDictionary *)[originalRequest userInfo])[@"log"];
+        ActivityItem *connectorItem = ((NSDictionary *)[originalRequest vna_userInfo])[@"log"];
         [connectorItem appendDetail:NSLocalizedString(@"Redirection attempt treated as temporary for safety concern", nil)];
     }
 }
@@ -1102,9 +1101,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         [self.redirect301WaitQueue removeObject:obj];
         NSString * theNewURLString = theConnector.currentRequest.URL.absoluteString;
         NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
-        Folder * theFolder = (Folder *)((NSDictionary *)[originalRequest userInfo])[@"folder"];
+        Folder * theFolder = (Folder *)((NSDictionary *)[originalRequest vna_userInfo])[@"folder"];
         [[Database sharedManager] setFeedURL:theNewURLString forFolder:theFolder.itemId];
-        ActivityItem *connectorItem = ((NSDictionary *)[originalRequest userInfo])[@"log"];
+        ActivityItem *connectorItem = ((NSDictionary *)[originalRequest vna_userInfo])[@"log"];
         [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@",
                                                                                  nil), theNewURLString]];
     }
@@ -1207,7 +1206,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
             completionHandler(NSURLSessionAuthChallengeRejectProtectionSpace, nil);
         } else {
             NSMutableURLRequest *urlRequest = (NSMutableURLRequest *)(task.originalRequest);
-            Folder * folder = ((NSDictionary *)[urlRequest userInfo])[@"folder"];
+            Folder * folder = ((NSDictionary *)[urlRequest vna_userInfo])[@"folder"];
             if (![folder.username isEqualToString:@""]) {
                 NSURLCredential *credential = [NSURLCredential credentialWithUser:folder.username
                                                                          password:folder.password

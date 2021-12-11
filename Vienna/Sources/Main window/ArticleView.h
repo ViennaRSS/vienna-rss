@@ -28,17 +28,21 @@
 @protocol ArticleViewDelegate;
 @protocol Tab;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Weverything"
 @interface ArticleView: TabbedWebView <ArticleContentView, Tab>
 #pragma clang diagnostic pop
 
 // Public functions
--(void)setArticles:(nonnull NSArray<Article *> *)articles;
--(void)keyDown:(nonnull NSEvent *)theEvent;
+-(void)setArticles:(NSArray<Article *> *)articles;
+-(void)keyDown:(NSEvent *)theEvent;
 - (void)decreaseTextSize;
 - (void)increaseTextSize;
 
-@property (nonnull, strong, nonatomic) id<ArticleViewDelegate> listView;
+@property (nonatomic) id<ArticleViewDelegate> listView;
 
 @end
+
+NS_ASSUME_NONNULL_END

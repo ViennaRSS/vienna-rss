@@ -890,7 +890,7 @@
 	[pboard setPropertyList:arrayOfArticles forType:VNAPasteboardTypeRSSItem];
 	[pboard setPropertyList:@[arrayOfURLs, arrayOfTitles] forType:VNAPasteboardTypeWebURLsWithTitles];
 	[pboard setString:fullPlainText forType:NSPasteboardTypeString];
-	[pboard setString:fullHTMLText.stringByEscapingExtendedCharacters forType:NSPasteboardTypeHTML];
+	[pboard setString:fullHTMLText.vna_stringByEscapingExtendedCharacters forType:NSPasteboardTypeHTML];
 
 	return YES;
 }

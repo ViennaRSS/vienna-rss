@@ -90,11 +90,11 @@ typedef NS_ENUM(NSInteger, ArticleStatus) {
 @property (nullable, nonatomic, copy) NSString *body;
 @property (nullable, nonatomic, copy) NSString *title;
 @property (nullable, nonatomic, copy) NSString *link;
-@property (nullable, nonatomic, readonly, copy) NSString *summary;
+@property (readonly, nullable, nonatomic) NSString *summary;
 @property (nullable, nonatomic, copy) NSString *enclosure;
 @property (nullable, nonatomic, copy) NSDate *date;
 @property (nullable, nonatomic, copy) NSDate *createdDate;
-@property (nullable, nonatomic, readonly, strong) Folder *containingFolder;
+@property (nullable, nonatomic, readonly) Folder *containingFolder;
 @property (nonatomic) NSInteger folderId;
 @property (nonatomic, getter=isRead, readonly) BOOL read;
 @property (nonatomic, getter=isRevised, readonly) BOOL revised;

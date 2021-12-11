@@ -21,9 +21,9 @@
 	NSTableView *__weak _listView;
 }
 
-@property (readonly, strong) NSObject<ArticleContentView> *articleView;
-@property (readonly, strong) ArticleConverter * articleConverter;
-@property (readonly, strong)NSProgressIndicator * progressIndicator;
+@property (readonly) NSObject<ArticleContentView> *articleView;
+@property (readonly) ArticleConverter * articleConverter;
+@property (readonly)NSProgressIndicator * progressIndicator;
 @property BOOL inProgress;
 @property NSInteger folderId;
 @property NSUInteger articleRow;

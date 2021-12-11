@@ -56,10 +56,10 @@
 	BOOL requireSelectArticleAfterReload;
 }
 
-@property (nonatomic, strong) FoldersTree * foldersTree;
-@property (nonatomic, strong) ArticleListView *articleListView;
-@property (nonatomic, strong) UnifiedDisplayView *unifiedListView;
-@property (nonatomic, strong) NSView<ArticleBaseView, BaseView> * mainArticleView;
+@property (nonatomic) FoldersTree * foldersTree;
+@property (nonatomic) ArticleListView *articleListView;
+@property (nonatomic) UnifiedDisplayView *unifiedListView;
+@property (nonatomic) NSView<ArticleBaseView, BaseView> * mainArticleView;
 @property (nonatomic, copy) NSArray * currentArrayOfArticles;
 @property (nonatomic, copy) NSArray * folderArrayOfArticles;
 @property (nonatomic) NSDictionary * articleSortSpecifiers;
@@ -70,19 +70,19 @@
 -(void)setLayout:(NSInteger)newLayout;
 @property (nonatomic, readonly) NSInteger currentFolderId;
 @property (nonatomic, readonly) Article *selectedArticle;
-@property (nonatomic, readonly, copy) NSArray *markedArticleRange;
+@property (readonly, nonatomic) NSArray *markedArticleRange;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
 -(void)sortArticles;
-@property (nonatomic, readonly, copy) NSArray *allArticles;
+@property (readonly, nonatomic) NSArray *allArticles;
 -(void)displayFirstUnread;
 -(void)displayNextUnread;
 -(void)displayNextFolderWithUnread;
-@property (nonatomic, readonly, copy) NSString *searchPlaceholderString;
+@property (readonly, nonatomic) NSString *searchPlaceholderString;
 -(void)reloadArrayOfArticles;
 -(void)displayFolder:(NSInteger)newFolderId;
 -(void)refilterArrayOfArticles;
-@property (nonatomic, readonly, copy) NSString *sortColumnIdentifier;
+@property (readonly, nonatomic) NSString *sortColumnIdentifier;
 @property (nonatomic, readonly) BOOL sortIsAscending;
 -(void)ensureSelectedArticle;
 -(void)sortByIdentifier:(NSString *)columnName;

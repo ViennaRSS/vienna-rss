@@ -38,12 +38,12 @@
 @property (nonatomic, readonly) NSInteger actualSelection;
 @property (nonatomic, readonly) NSInteger groupParentSelection;
 @property (nonatomic, readonly) NSInteger countOfSelectedFolders;
-@property (nonatomic, readonly, copy) NSArray *selectedFolders;
+@property (readonly, nonatomic) NSArray *selectedFolders;
 @property (nonatomic, readonly) NSInteger firstFolderWithUnread;
 -(NSInteger)nextFolderWithUnread:(NSInteger)currentFolderId;
 -(NSArray *)folders:(NSInteger)folderId;
 -(NSArray *)children:(NSInteger)folderId;
-@property (nonatomic, readonly, strong) NSView *mainView;
+@property (nonatomic, readonly) NSView *mainView;
 -(void)outlineViewWillBecomeFirstResponder;
 -(void)setSearch:(NSString *)string;
 

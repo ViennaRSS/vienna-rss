@@ -174,7 +174,7 @@
 		// Select the folder and article from the last session
 		NSInteger previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
 		NSString * previousArticleGuid = [prefs stringForKey:MAPref_CachedArticleGUID];
-		if (previousArticleGuid.blank)
+		if (previousArticleGuid.vna_isBlank)
 			previousArticleGuid = nil;
 		[self.articleController selectFolderAndArticle:previousFolderId guid:previousArticleGuid];
 
@@ -474,7 +474,7 @@
 		
 		// Remove "article" directory in cache
 		NSFileManager * fileManager = [NSFileManager defaultManager];
-		NSURL * dirUrl = [fileManager.cachesDirectory URLByAppendingPathComponent:@"article"];
+		NSURL * dirUrl = [fileManager.vna_cachesDirectory URLByAppendingPathComponent:@"article"];
 		[fileManager removeItemAtURL:dirUrl error:nil];
 
 		// Finally save preferences
@@ -2009,7 +2009,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		
 		for (currentArticle in articleArray)
 		{
-			if (currentArticle && !currentArticle.link.blank)
+			if (currentArticle && !currentArticle.link.vna_isBlank)
             {
                 [articlesWithLinks addObject:currentArticle];
                 NSURL * theURL = [NSURL URLWithString:currentArticle.link];
@@ -2968,7 +2968,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)setSearchString:(NSString *)newSearchString
 {
-	searchString = newSearchString;
+	searchString = [newSearchString copy];
 }
 
 /* searchString
@@ -2985,7 +2985,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)setFilterString:(NSString *)newFilterString
 {
-	self.filterSearchField.stringValue = newFilterString;
+	self.filterSearchField.stringValue = [newFilterString copy];
 }
 
 /* filterString
@@ -3066,7 +3066,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)searchArticlesWithString:(NSString *)theSearchString
 {
-	if (!theSearchString.blank)
+	if (!theSearchString.vna_isBlank)
 	{
         db.searchString = theSearchString;
         if (self.foldersTree.actualSelection != db.searchFolderId) {
@@ -3536,13 +3536,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		Article * thisArticle = self.selectedArticle;
 		Folder * folder = (thisArticle) ? [db folderFromID:thisArticle.folderId] : [db folderFromID:self.foldersTree.actualSelection];
-		return folder && (thisArticle || folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && (folder.homePage && !folder.homePage.blank && isMainWindowVisible);
+		return folder && (thisArticle || folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && (folder.homePage && !folder.homePage.vna_isBlank && isMainWindowVisible);
 	}
 	else if ((theAction == @selector(viewArticlePages:)) || (theAction == @selector(viewArticlePagesInAlternateBrowser:)))
 	{
 		Article * thisArticle = self.selectedArticle;
 		if (thisArticle != nil)
-			return (thisArticle.link && !thisArticle.link.blank && isMainWindowVisible);
+			return (thisArticle.link && !thisArticle.link.vna_isBlank && isMainWindowVisible);
 		return NO;
 	}
 	else if (theAction == @selector(exportSubscriptions:))

@@ -93,16 +93,16 @@ extern NSString * const kMA_Notify_UseJavaScriptChange;
 -(void)setDefaultDatabase:(NSString *)newDatabase;
 
 // Path to scripts folder
-@property (nonatomic, readonly, copy) NSString *scriptsFolder;
+@property (readonly, nonatomic) NSString *scriptsFolder;
 
 // Path to images folder
-@property (nonatomic, readonly, copy) NSString *imagesFolder;
+@property (readonly, nonatomic) NSString *imagesFolder;
 
 // Path to styles folder
-@property (nonatomic, readonly, copy) NSString *stylesFolder;
+@property (readonly, nonatomic) NSString *stylesFolder;
 
 // Path to the external plugins folder
-@property (nonatomic, readonly, copy) NSString *pluginsFolder;
+@property (readonly, nonatomic) NSString *pluginsFolder;
 
 // Read-only internal settings
 @property (nonatomic, readonly) NSInteger backTrackQueueSize;
@@ -179,11 +179,11 @@ extern NSString * const kMA_Notify_UseJavaScriptChange;
 @property (nonatomic) BOOL showFilterBar;
 
 // Should we save the raw feed source XML?
-@property (nonatomic, readonly, copy) NSString *feedSourcesFolder;
+@property (readonly, nonatomic) NSString *feedSourcesFolder;
 @property (nonatomic) BOOL shouldSaveFeedSource;
 
 // Current search method
-@property (nonatomic, strong) SearchMethod *searchMethod;
+@property (nonatomic) SearchMethod *searchMethod;
 
 // Concurrent download settings
 @property (nonatomic) NSUInteger concurrentDownloads;

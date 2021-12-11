@@ -82,21 +82,21 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(void)setTitle:(NSString *)newTitle
 {
-    articleData[MA_Field_Subject] = newTitle;
+    articleData[MA_Field_Subject] = [newTitle copy];
 }
 
 /* setAuthor
  */
 -(void)setAuthor:(NSString *)newAuthor
 {
-    articleData[MA_Field_Author] = newAuthor;
+    articleData[MA_Field_Author] = [newAuthor copy];
 }
 
 /* setLink
  */
 -(void)setLink:(NSString *)newLink
 {
-    articleData[MA_Field_Link] = newLink;
+    articleData[MA_Field_Link] = [newLink copy];
 }
 
 /* setDate
@@ -104,7 +104,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(void)setDate:(NSDate *)newDate
 {
-    articleData[MA_Field_Date] = newDate;
+    articleData[MA_Field_Date] = [newDate copy];
 }
 
 /* setCreatedDate
@@ -112,21 +112,22 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(void)setCreatedDate:(NSDate *)newCreatedDate
 {
-    articleData[MA_Field_CreatedDate] = newCreatedDate;
+    articleData[MA_Field_CreatedDate] = [newCreatedDate copy];
 }
 
 /* setBody
  */
 -(void)setBody:(NSString *)newText
 {
-    articleData[MA_Field_Text] = newText;
+    articleData[MA_Field_Text] = [newText copy];
     [articleData removeObjectForKey:MA_Field_Summary];
 }
 
 /* setEnclosure
  */
--(void)setEnclosure:(NSString *)newEnclosure
+-(void)setEnclosure:(NSString *)enclosure
 {
+    NSString *newEnclosure = [enclosure copy];
     if (newEnclosure)
         articleData[MA_Field_Enclosure] = newEnclosure;
     else
@@ -243,7 +244,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
     NSString * summary = articleData[MA_Field_Summary];
     if (summary == nil)
     {
-        summary = [articleData[MA_Field_Text] summaryTextFromHTML];
+        summary = [articleData[MA_Field_Text] vna_summaryTextFromHTML];
         if (summary == nil)
             summary = @"";
         articleData[MA_Field_Summary] = summary;
@@ -273,7 +274,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(void)setGuid:(NSString *)newGuid
 {
-    articleData[MA_Field_GUID] = newGuid;
+    articleData[MA_Field_GUID] = [newGuid copy];
 }
 
 /* setParentId
@@ -330,9 +331,9 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(NSString *)tagArticleTitle
 {
     NSMutableString * articleTitle = [NSMutableString stringWithString:SafeString([self title])];
-    [articleTitle replaceString:@"$Article" withString:@"$_%$%_Article"];
-    [articleTitle replaceString:@"$Feed" withString:@"$_%$%_Feed"];
-    return [NSString stringByConvertingHTMLEntities:articleTitle];
+    [articleTitle vna_replaceString:@"$Article" withString:@"$_%$%_Article"];
+    [articleTitle vna_replaceString:@"$Feed" withString:@"$_%$%_Feed"];
+    return [NSString vna_stringByConvertingHTMLEntities:articleTitle];
 }
 
 /* tagArticleBody
@@ -341,11 +342,11 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(NSString *)tagArticleBody
 {
     NSMutableString * articleBody = [NSMutableString stringWithString:SafeString(self.body)];
-    [articleBody replaceString:@"$Article" withString:@"$_%$%_Article"];
-    [articleBody replaceString:@"$Feed" withString:@"$_%$%_Feed"];
-    [articleBody fixupRelativeImgTags:self.link];
-    [articleBody fixupRelativeIframeTags:self.link];
-    [articleBody fixupRelativeAnchorTags:self.link];
+    [articleBody vna_replaceString:@"$Article" withString:@"$_%$%_Article"];
+    [articleBody vna_replaceString:@"$Feed" withString:@"$_%$%_Feed"];
+    [articleBody vna_fixupRelativeImgTags:self.link];
+    [articleBody vna_fixupRelativeIframeTags:self.link];
+    [articleBody vna_fixupRelativeAnchorTags:self.link];
     return articleBody;
 }
 
@@ -362,7 +363,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagArticleDate
 {
-    return [NSDateFormatter relativeDateStringFromDate:self.date];
+    return [NSDateFormatter vna_relativeDateStringFromDate:self.date];
 }
 
 /* tagArticleEnclosureLink
@@ -387,7 +388,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(NSString *)tagFeedTitle
 {
     Folder * folder = [[Database sharedManager] folderFromID:self.folderId];
-    return [NSString stringByConvertingHTMLEntities:SafeString([folder name])];
+    return [NSString vna_stringByConvertingHTMLEntities:SafeString([folder name])];
 }
 
 /* tagFeedLink

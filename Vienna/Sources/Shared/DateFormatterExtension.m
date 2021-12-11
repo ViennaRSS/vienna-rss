@@ -43,7 +43,7 @@ NSString *const MAPref_UseRelativeDates = @"DoesRelativeDateFormatting";
     return _relativeDateFormatter;
 }
 
-+ (NSString *)relativeDateStringFromDate:(NSDate *)date {
++ (NSString *)vna_relativeDateStringFromDate:(NSDate *)date {
     return [NSDateFormatter.relativeDateFormatter stringFromDate:date];
 }
 

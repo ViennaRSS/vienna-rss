@@ -28,9 +28,9 @@
 
 -(void)resetPlugins;
 @property (readonly, nonatomic) NSUInteger numberOfPlugins;
-@property (nonatomic, readonly, copy) NSArray<SearchMethod *> *searchMethods;
-@property (nonatomic, readonly, copy) NSArray<NSString *> *toolbarItems;
-@property (readonly, copy, nonatomic) NSArray<NSMenuItem *> *menuItems;
+@property (readonly, nonatomic) NSArray<SearchMethod *> *searchMethods;
+@property (readonly, nonatomic) NSArray<NSString *> *toolbarItems;
+@property (readonly, nonatomic) NSArray<NSMenuItem *> *menuItems;
 -(NSArray *)defaultToolbarItems;
 -(void)loadPlugin:(NSString *)pluginPath;
 -(NSToolbarItem *)toolbarItemForIdentifier:(NSString *)itemIdentifier;

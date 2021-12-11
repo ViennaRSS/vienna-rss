@@ -67,9 +67,9 @@ typedef NS_ENUM(NSUInteger, CriteriaCondition) {
 
 // Public functions
 -(instancetype)initWithString:(NSString *)string NS_DESIGNATED_INITIALIZER;
-@property (nonatomic, readonly, strong) NSEnumerator *criteriaEnumerator;
+@property (nonatomic, readonly) NSEnumerator *criteriaEnumerator;
 -(void)addCriteria:(Criteria *)newCriteria;
-@property (nonatomic, readonly, copy) NSString *string;
+@property (readonly, nonatomic) NSString *string;
 @property (nonatomic) CriteriaCondition condition;
 
 @end

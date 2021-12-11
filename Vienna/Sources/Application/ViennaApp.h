@@ -54,19 +54,19 @@
 -(id)resetFolderSort:(NSScriptCommand *)cmd;
 
 // General read-only properties.
-@property (nonatomic, readonly, copy) NSString *applicationVersion;
-@property (nonatomic, readonly, copy) NSArray *folders;
+@property (readonly, nonatomic) NSString *applicationVersion;
+@property (readonly, nonatomic) NSArray *folders;
 @property (nonatomic, getter=isRefreshing, readonly) BOOL refreshing;
 @property (nonatomic, readonly) NSInteger totalUnreadCount;
-@property (nonatomic, readonly, copy) NSString *currentTextSelection;
-@property (nonatomic, readonly, copy) NSString *documentHTMLSource;
-@property (nonatomic, readonly, copy) NSString *documentTabURL;
+@property (readonly, nonatomic) NSString *currentTextSelection;
+@property (readonly, nonatomic) NSString *documentHTMLSource;
+@property (readonly, nonatomic) NSString *documentTabURL;
 
 // Change folder selection
-@property (nonatomic, strong) Folder *currentFolder;
+@property (nonatomic) Folder *currentFolder;
 
 // Current article
-@property (nonatomic, readonly, strong) Article *currentArticle;
+@property (nonatomic, readonly) Article *currentArticle;
 
 // Preference properties
 @property (nonatomic) NSInteger autoExpireDuration;

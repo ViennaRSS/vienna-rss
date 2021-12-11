@@ -54,7 +54,7 @@
 }
 #pragma clang diagnostic pop
 
-@property (nonatomic, strong) IBOutlet TabbedWebView * webPane;
+@property (nonatomic) IBOutlet TabbedWebView * webPane;
 
 // Action functions
 -(IBAction)handleGoForward:(id)sender;
@@ -76,13 +76,13 @@
 @property (nonatomic, readonly) BOOL canGoForward;
 -(void)handleStopLoading:(id)sender;
 -(void)activateAddressBar;
-@property (readonly, copy) NSString *textSelection;
-@property (readonly, copy) NSString *html;
+@property (readonly) NSString *textSelection;
+@property (readonly) NSString *html;
 
 
 //tabBarItem functions
-@property (assign) BOOL hasCloseButton;
-@property (assign) BOOL isProcessing;
+@property BOOL hasCloseButton;
+@property BOOL isProcessing;
 
 -(void)hoveredOverURL:(NSURL *)url;
 

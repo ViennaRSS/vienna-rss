@@ -25,7 +25,7 @@ static NSString *const VNACodingKeySize = @"size";
 
 @interface DownloadItem ()
 
-@property (readwrite, copy, nonatomic) NSImage *image;
+@property (readwrite, nonatomic) NSImage *image;
 
 @end
 
@@ -33,7 +33,7 @@ static NSString *const VNACodingKeySize = @"size";
 
 - (void)setFilename:(NSString *)filename
 {
-    _filename = filename;
+    _filename = [filename copy];
 
     // Force the image to be recached.
     self.image = nil;

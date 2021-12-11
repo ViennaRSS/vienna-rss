@@ -97,7 +97,7 @@
 	}
 	else
 	{
-		NSString * appPath = [[NSWorkspace sharedWorkspace] defaultHandlerApplicationForFile:destPath];
+		NSString * appPath = [[NSWorkspace sharedWorkspace] vna_defaultHandlerApplicationForFile:destPath];
         NSString *displayName = [[[NSFileManager defaultManager] displayNameAtPath:appPath] stringByDeletingPathExtension];
         [downloadButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open with %@", "Name the application which should open a file"), displayName]];
         [downloadButton sizeToFit];

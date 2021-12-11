@@ -147,7 +147,7 @@
                     keyMod |= NSEventModifierFlagControl;
                 else
                 {
-                    if (!keyChar.blank)
+                    if (!keyChar.vna_isBlank)
                         NSLog(@"Warning: malformed MenuKey found in info.plist for plugin %@", pluginName);
                     keyChar = oneKey;
                 }
@@ -170,7 +170,7 @@
                                                                   selector:@selector(localizedCaseInsensitiveCompare:)];
     [plugins sortUsingDescriptors:@[descriptor]];
 
-    return plugins;
+    return [plugins copy];
 }
 
 /* searchMethods
@@ -187,7 +187,7 @@
 			[searchMethods addObject:method];
 		}
 	}
-	return searchMethods;
+	return [searchMethods copy];
 }	
 
 /* toolbarItems
@@ -205,7 +205,7 @@
 		if (![pluginType isEqualToString:@"SearchEngine"])
 			[toolbarKeys addObject:pluginName];
 	}
-	return toolbarKeys;
+	return [toolbarKeys copy];
 }
 
 /* defaultToolbarItems
@@ -222,7 +222,7 @@
 		if ([onePlugin[@"Default"] integerValue])
 			[newArray addObject:pluginName];
 	}
-	return newArray;
+	return [newArray copy];
 }
 
 /* toolbarItem
@@ -318,8 +318,8 @@
 			// ...and do the following in case the user is currently looking at a website.
 			if (activeBrowserTab)
 			{	
-				[urlString replaceString:@"$ArticleTitle$" withString:activeBrowserTab.title];
-				[urlString replaceString:@"$ArticleLink$" withString:[NSString stringByCleaningURLString:activeBrowserTab.tabUrl.absoluteString]];
+				[urlString vna_replaceString:@"$ArticleTitle$" withString:activeBrowserTab.title];
+				[urlString vna_replaceString:@"$ArticleLink$" withString:[NSString vna_stringByCleaningURLString:activeBrowserTab.tabUrl.absoluteString]];
 			}
 			
 			// In case the user is currently looking at an article:
@@ -327,8 +327,8 @@
 			{
 				// We can only work on one article, so ignore selection range.
 				Article * currentMessage = APPCONTROLLER.selectedArticle;
-				[urlString replaceString:@"$ArticleTitle$" withString: currentMessage.title];
-                [urlString replaceString:@"$ArticleLink$" withString:[NSString stringByCleaningURLString:currentMessage.link]];
+				[urlString vna_replaceString:@"$ArticleTitle$" withString: currentMessage.title];
+                [urlString vna_replaceString:@"$ArticleLink$" withString:[NSString vna_stringByCleaningURLString:currentMessage.link]];
 			}
 						
 			if (urlString != nil)

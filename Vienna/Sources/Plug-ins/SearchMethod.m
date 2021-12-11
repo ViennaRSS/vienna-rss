@@ -35,8 +35,8 @@ static NSString *const VNACodingKeyQueryString = @"searchQueryString";
     self = [self init];
 
     if (self) {
-        _displayName = [dict valueForKey:@"FriendlyName"];
-        _queryString = [dict valueForKey:@"SearchQueryString"];
+        _displayName = [[dict valueForKey:@"FriendlyName"] copy];
+        _queryString = [[dict valueForKey:@"SearchQueryString"] copy];
         _handler = @selector(performWebSearch:);
     }
 

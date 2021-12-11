@@ -35,9 +35,9 @@
 
 @interface FoldersTree ()
 
-@property (nonatomic, readonly, copy) NSMenu *folderMenu;
+@property (readonly, nonatomic) NSMenu *folderMenu;
 
-@property (nonatomic, readonly, copy) NSArray *archiveState;
+@property (readonly, nonatomic) NSArray *archiveState;
 @property (nonatomic) TreeNode *rootNode;
 @property (nonatomic) NSFont *cellFont;
 @property (nonatomic) NSFont *boldCellFont;
@@ -141,7 +141,7 @@
 	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderAdded:) name:@"MA_Notify_FolderAdded" object:nil];
-	[nc addObserver:self selector:@selector(handleFolderDeleted:) name:databaseDidDeleteFolderNotification object:nil];
+	[nc addObserver:self selector:@selector(handleFolderDeleted:) name:VNAdatabaseDidDeleteFolderNotification object:nil];
 	[nc addObserver:self selector:@selector(handleFolderFontChange:) name:@"MA_Notify_FolderFontChange" object:nil];
 	[nc addObserver:self selector:@selector(handleShowFolderImagesChange:) name:@"MA_Notify_ShowFolderImages" object:nil];
 	[nc addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
@@ -734,7 +734,7 @@
 	if (node.folder.type == VNAFolderTypeRSS || node.folder.type == VNAFolderTypeOpenReader)
 	{
 		NSString * urlString = node.folder.homePage;
-        if (urlString && !urlString.blank) {
+        if (urlString && !urlString.vna_isBlank) {
 			[APPCONTROLLER openURLFromString:urlString inPreferredBrowser:YES];
         }
 	}
@@ -874,7 +874,7 @@
  * selection to whichever node is under the cursor so the context between
  * the menu items and the node is made clear.
  */
--(void)outlineView:(FolderView *)olv menuWillAppear:(NSEvent *)theEvent
+-(void)vna_outlineView:(FolderView *)olv menuWillAppear:(NSEvent *)theEvent
 {
 	NSInteger row = [olv rowAtPoint:[olv convertPoint:theEvent.locationInWindow fromView:nil]];
 	if (row >= 0)

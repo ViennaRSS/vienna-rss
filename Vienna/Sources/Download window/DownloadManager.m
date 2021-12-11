@@ -109,8 +109,8 @@
 
 // Archive the downloads list to the preferences.
 - (void)archiveDownloadsList {
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[self.downloads copy]
-                                         requiringSecureCoding:YES];
+    NSData *data = [NSKeyedArchiver vna_archivedDataWithRootObject:[self.downloads copy]
+                                             requiringSecureCoding:YES];
 
     if (data) {
         [Preferences.standardPreferences setObject:data
@@ -129,8 +129,8 @@
 
     NSArray<DownloadItem *> *items = nil;
     Class cls = [DownloadItem class];
-    items = [NSKeyedUnarchiver unarchivedArrayOfObjectsOfClass:cls
-                                                      fromData:archive];
+    items = [NSKeyedUnarchiver vna_unarchivedArrayOfObjectsOfClass:cls
+                                                          fromData:archive];
 
     if (items) {
         [self.downloads addObjectsFromArray:items];
@@ -191,7 +191,7 @@
 // absent then we default to downloading to the desktop instead.
 + (NSString *)fullDownloadPath:(NSString *)filename {
     NSFileManager *fileManager = NSFileManager.defaultManager;
-    NSURL *downloadFolderURL = fileManager.downloadsDirectory;
+    NSURL *downloadFolderURL = fileManager.vna_downloadsDirectory;
     NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
     NSData *data = [userDefaults dataForKey:MAPref_DownloadsFolderBookmark];
 
@@ -209,7 +209,7 @@
     BOOL isDir = YES;
 
     if (![fileManager fileExistsAtPath:downloadPath isDirectory:&isDir] || !isDir) {
-        downloadPath = fileManager.downloadsDirectory.path;
+        downloadPath = fileManager.vna_downloadsDirectory.path;
     }
 
     return [downloadPath stringByAppendingPathComponent:filename];

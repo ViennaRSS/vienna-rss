@@ -107,7 +107,7 @@
 		if (index != -1)
 		{
 			DownloadItem * item = list[index];
-			[[NSWorkspace sharedWorkspace] openWithMenuForFile:item.filename target:nil action:nil menu:menu];
+			[[NSWorkspace sharedWorkspace] vna_openWithMenuForFile:item.filename target:nil action:nil menu:menu];
 		}
 	}
 }

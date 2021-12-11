@@ -23,8 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSKeyedArchiver (Compatibility)
 
-+ (nullable NSData *)archivedDataWithRootObject:(id)object
-                          requiringSecureCoding:(BOOL)requiresSecureCoding
++ (nullable NSData *)vna_archivedDataWithRootObject:(id)object
+                              requiringSecureCoding:(BOOL)requiresSecureCoding
     NS_SWIFT_NOTHROW NS_DEPRECATED_MAC(10.12, 10.13);
 
 @end

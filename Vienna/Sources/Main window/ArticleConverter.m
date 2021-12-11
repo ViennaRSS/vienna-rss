@@ -46,9 +46,9 @@
     BOOL hasOneTag = NO;
     NSUInteger tagStartIndex = 0;
 
-    while ((tagStartIndex = [newString indexOfCharacterInString:'$' afterIndex:tagStartIndex]) != NSNotFound)
+    while ((tagStartIndex = [newString vna_indexOfCharacterInString:'$' afterIndex:tagStartIndex]) != NSNotFound)
     {
-        NSUInteger tagEndIndex = [newString indexOfCharacterInString:'$' afterIndex:tagStartIndex + 1];
+        NSUInteger tagEndIndex = [newString vna_indexOfCharacterInString:'$' afterIndex:tagStartIndex + 1];
         if (tagEndIndex == NSNotFound)
             break;
 
@@ -75,7 +75,7 @@
             [newString replaceCharactersInRange:NSMakeRange(tagStartIndex, tagLength) withString:replacementString];
             hasOneTag = YES;
 
-            if (!replacementString.blank)
+            if (!replacementString.vna_isBlank)
                 cond = NO;
 
             tagStartIndex += replacementString.length;
@@ -95,7 +95,7 @@
     NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<!DOCTYPE html><html><head><meta  http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"];
     // the link for the first article will be the base URL for resolving relative URLs
     [htmlText appendString:@"<base href=\""];
-    [htmlText appendString:[NSString stringByCleaningURLString:msgArray[0].link]];
+    [htmlText appendString:[NSString vna_stringByCleaningURLString:msgArray[0].link]];
     [htmlText appendString:@"\">"];
     if (self.cssStylesheet != nil && self.cssStylesheet.length != 0) {
         [htmlText appendString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\""];
@@ -117,9 +117,9 @@
         NSMutableString * htmlArticle;
         if (self.htmlTemplate == nil || self.htmlTemplate.length == 0) {
             NSMutableString * articleBody = [NSMutableString stringWithString:SafeString(theArticle.body)];
-            [articleBody fixupRelativeImgTags:SafeString([theArticle link])];
-            [articleBody fixupRelativeIframeTags:SafeString([theArticle link])];
-            [articleBody fixupRelativeAnchorTags:SafeString([theArticle link])];
+            [articleBody vna_fixupRelativeImgTags:SafeString([theArticle link])];
+            [articleBody vna_fixupRelativeIframeTags:SafeString([theArticle link])];
+            [articleBody vna_fixupRelativeAnchorTags:SafeString([theArticle link])];
             htmlArticle = [[NSMutableString alloc] initWithString:articleBody];
         } else {
             htmlArticle = [[NSMutableString alloc] initWithString:@""];
@@ -137,7 +137,7 @@
                     NSString * commentTag = nil;
 
                     if ([scanner scanUpToString:@"-->" intoString:&commentTag] && commentTag != nil) {
-                        commentTag = commentTag.trim;
+                        commentTag = commentTag.vna_trimmed;
                         if ([commentTag isEqualToString:@"cond:noblank"]) {
                             stripIfEmpty = YES;
                         }

@@ -28,12 +28,12 @@
 
 @interface Database : NSObject
 
-extern NSNotificationName const databaseWillDeleteFolderNotification;
-extern NSNotificationName const databaseDidDeleteFolderNotification;
+extern NSNotificationName const VNADatabaseWillDeleteFolderNotification;
+extern NSNotificationName const VNAdatabaseDidDeleteFolderNotification;
 
-@property(nonatomic, strong) Folder * trashFolder;
-@property(nonatomic, strong) Folder * searchFolder;
-@property(nonatomic, strong) FMDatabaseQueue * databaseQueue;
+@property(nonatomic) Folder * trashFolder;
+@property(nonatomic) Folder * searchFolder;
+@property(nonatomic) FMDatabaseQueue * databaseQueue;
 @property (copy, nonatomic) NSString *searchString;
 
 @property (class, readonly) Database *sharedManager NS_SWIFT_NAME(shared);

@@ -74,9 +74,9 @@
 @property (nonatomic) ArticleController *articleController;
 @property (nonatomic, weak) UnifiedDisplayView *unifiedListView;
 @property (nonatomic, weak) ArticleListView *articleListView;
-@property (nonatomic, strong) NewSubscription *rssFeed;
+@property (nonatomic) NewSubscription *rssFeed;
 @property (nonatomic) FoldersTree *foldersTree;
-@property (readonly, copy, nonatomic) NSMenu *searchFieldMenu;
+@property (readonly, nonatomic) NSMenu *searchFieldMenu;
 
 // Menu action items
 -(IBAction)reindexDatabase:(id)sender;
@@ -165,14 +165,14 @@
 -(void)clearUndoStack;
 @property (nonatomic, copy) NSString *filterString;
 @property (nonatomic, copy) NSString *searchString;
-@property (nonatomic, readonly, strong) Article *selectedArticle;
+@property (nonatomic, readonly) Article *selectedArticle;
 @property (nonatomic, readonly) NSInteger currentFolderId;
 @property (nonatomic, getter=isConnecting, readonly) BOOL connecting;
 -(void)runAppleScript:(NSString *)scriptName;
-@property (nonatomic, readonly, copy) NSArray *folders;
+@property (readonly, nonatomic) NSArray *folders;
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
 -(void)updateStatusBarFilterButtonVisibility;
-@property (nonatomic, readonly, strong) NSLayoutManager *layoutManager;
+@property (nonatomic, readonly) NSLayoutManager *layoutManager;
 -(void)performWebSearch:(SearchMethod *)searchMethod;
 -(void)performAllArticlesSearch;
 -(void)performWebPageSearch;

@@ -10,6 +10,6 @@
 
 @interface NSDate (Vienna)
 
-+ (NSDate *)parseXMLDate:(NSString *)dateString;
++ (NSDate *)vna_parseXMLDate:(NSString *)dateString;
 
 @end
