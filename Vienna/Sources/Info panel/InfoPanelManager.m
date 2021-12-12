@@ -59,7 +59,7 @@
 		controllerList = [[NSMutableDictionary alloc] initWithCapacity:10];
 		
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self selector:@selector(handleFolderDeleted:) name:VNAdatabaseDidDeleteFolderNotification object:nil];
+		[nc addObserver:self selector:@selector(handleFolderDeleted:) name:VNADatabaseDidDeleteFolderNotification object:nil];
 		[nc addObserver:self selector:@selector(handleFolderChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 		[nc addObserver:self selector:@selector(handleFolderChange:) name:@"MA_Notify_FoldersUpdated" object:nil];
 		[nc addObserver:self selector:@selector(handleFolderChange:) name:@"MA_Notify_LoadFullHTMLChange" object:nil];
