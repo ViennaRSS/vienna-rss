@@ -24,22 +24,14 @@
 #import "AppController.h"
 #import "FoldersFilterable.h"
 
-@interface NSObject (FolderViewDelegate)
-
-- (BOOL)vna_handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
-- (BOOL)vna_copyTableSelection:(NSArray *)items
-                  toPasteboard:(NSPasteboard *)pboard;
-- (BOOL)vna_canDeleteFolderAtRow:(NSInteger)row;
-- (void)vna_outlineViewWillBecomeFirstResponder;
-
-@end
-
 @implementation FolderView {
     NSPredicate*            _filterPredicate;
     FoldersFilterableDataSourceImpl* _filterDataSource;
     NSDictionary*           _prefilterState;
     id _directDataSource;
 }
+
+@dynamic delegate;
 
 /* awakeFromNib
  * Our init.
@@ -57,7 +49,7 @@
  */
 -(BOOL)becomeFirstResponder
 {
-    [(id)self.delegate vna_outlineViewWillBecomeFirstResponder];
+    [self.delegate folderViewWillBecomeFirstResponder];
 	return [super becomeFirstResponder];
 }
 
@@ -178,8 +170,8 @@
  */
 -(NSMenu *)menuForEvent:(NSEvent *)theEvent
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(vna_outlineView:menuWillAppear:)])
-        [(id)self.delegate vna_outlineView:self menuWillAppear:theEvent];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(folderView:menuWillAppear:)])
+        [self.delegate folderView:self menuWillAppear:theEvent];
 	return self.menu;
 }
 
@@ -200,7 +192,7 @@
 			[array addObject:node];
 			item = [selectedRowIndexes indexGreaterThanIndex:item];
 		}
-        [(id)self.delegate vna_copyTableSelection:array toPasteboard:[NSPasteboard generalPasteboard]];
+        [self.delegate copyTableSelection:array toPasteboard:NSPasteboard.generalPasteboard];
 	}
 }
 
@@ -224,7 +216,7 @@
 	}
 	if (menuItem.action == @selector(delete:))
 	{
-        return [(id)self.delegate vna_canDeleteFolderAtRow:self.selectedRow];
+        return [self.delegate canDeleteFolderAtRow:self.selectedRow];
 	}
 	if (menuItem.action == @selector(selectAll:))
 	{

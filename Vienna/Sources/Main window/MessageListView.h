@@ -22,6 +22,26 @@
 
 #import "TableViewExtensions.h"
 
-@interface MessageListView : ExtendedTableView <NSMenuItemValidation>
-	-(void)keyDown:(NSEvent *)theEvent;
+NS_ASSUME_NONNULL_BEGIN
+
+@protocol MessageListViewDelegate <NSTableViewDelegate>
+
+- (BOOL)canDeleteMessageAtRow:(NSInteger)row;
+
+@optional
+
+// TODO: Implement this in UnifiedDisplayView and make it non-optional
+- (BOOL)copyTableSelection:(NSArray *)rows
+              toPasteboard:(NSPasteboard *)pboard;
+
 @end
+
+@interface MessageListView : ExtendedTableView <NSMenuItemValidation>
+
+@property (weak, nullable) id <MessageListViewDelegate> delegate;
+
+- (void)keyDown:(NSEvent *)theEvent;
+
+@end
+
+NS_ASSUME_NONNULL_END

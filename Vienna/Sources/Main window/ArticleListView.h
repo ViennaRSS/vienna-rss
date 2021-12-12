@@ -24,15 +24,15 @@
 #import "BaseView.h"
 #import "ArticleBaseView.h"
 #import "ArticleViewDelegate.h"
+#import "MessageListView.h"
 
 @class AppController;
 @class ArticleView;
-@class MessageListView;
 @class EnclosureView;
 @protocol ArticleContentView;
 @protocol Tab;
 
-@interface ArticleListView : NSView<BaseView, ArticleBaseView, ArticleViewDelegate, NSTableViewDelegate, NSTableViewDataSource>
+@interface ArticleListView : NSView<BaseView, ArticleBaseView, ArticleViewDelegate, MessageListViewDelegate, NSTableViewDataSource>
 {
 	IBOutlet MessageListView * articleList;
 	NSObject<ArticleContentView, Tab> *articleText;
@@ -66,7 +66,6 @@
 // Public functions
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
--(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 -(void)loadArticleLink:(NSString *) articleLink;
 - (void)webViewLoadFinished:(NSNotification *)notification;
 @property (readonly, nonatomic) NSURL *url;

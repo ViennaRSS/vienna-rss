@@ -26,12 +26,6 @@
 #import "ViennaApp.h"
 #import "Constants.h"
 
-@interface NSObject (TabbedWebViewDelegate)
-
-- (BOOL)vna_handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
-
-@end
-
 @interface TabbedWebView ()
 
 +(NSArray *)acceptedSchemes;

@@ -61,7 +61,6 @@
 -(void)handleFolderFontChange:(NSNotification *)nc;
 -(void)reloadFolderItem:(id)node reloadChildren:(BOOL)flag;
 -(void)expandToParent:(TreeNode *)node;
--(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
 -(BOOL)moveFolders:(NSArray *)array withGoogleSync:(BOOL)sync;
 -(void)enableFoldersRenaming:(id)sender;
 -(void)enableFoldersRenamingAfterDelay;
@@ -874,7 +873,7 @@
  * selection to whichever node is under the cursor so the context between
  * the menu items and the node is made clear.
  */
--(void)vna_outlineView:(FolderView *)olv menuWillAppear:(NSEvent *)theEvent
+-(void)folderView:(FolderView *)olv menuWillAppear:(NSEvent *)theEvent
 {
 	NSInteger row = [olv rowAtPoint:[olv convertPoint:theEvent.locationInWindow fromView:nil]];
 	if (row >= 0)
@@ -1100,11 +1099,11 @@
 	[NSTimer scheduledTimerWithTimeInterval:[NSEvent doubleClickInterval] target:self selector:@selector(enableFoldersRenaming:) userInfo:nil repeats:NO];
 }
 
-/* outlineViewWillBecomeFirstResponder
+/* folderViewWillBecomeFirstResponder
  * When outline view becomes first responder, bring the article view to the front,
  * and prevent immediate folder renaming.
  */
--(void)outlineViewWillBecomeFirstResponder
+-(void)folderViewWillBecomeFirstResponder
 {
 	[self.controller.browser switchToPrimaryTab];
 	[self enableFoldersRenamingAfterDelay];
