@@ -20,10 +20,11 @@
 
 @import Cocoa;
 
-@class AppController;
-@class FolderView;
+#import "FolderView.h"
 
-@interface FoldersTree : NSObject <NSOutlineViewDelegate, NSOutlineViewDataSource>
+@class AppController;
+
+@interface FoldersTree : NSObject <FolderViewDelegate, NSOutlineViewDataSource>
 
 @property (weak, nonatomic) AppController *controller;
 @property (weak, nonatomic) FolderView *outlineView;
@@ -32,7 +33,6 @@
 -(void)saveFolderSettings;
 -(void)updateAlternateMenuTitle;
 -(void)updateFolder:(NSInteger)folderId recurseToParents:(BOOL)recurseToParents;
--(BOOL)canDeleteFolderAtRow:(NSInteger)row;
 -(BOOL)selectFolder:(NSInteger)folderId;
 -(void)renameFolder:(NSInteger)folderId;
 @property (nonatomic, readonly) NSInteger actualSelection;
@@ -44,7 +44,6 @@
 -(NSArray *)folders:(NSInteger)folderId;
 -(NSArray *)children:(NSInteger)folderId;
 @property (nonatomic, readonly) NSView *mainView;
--(void)outlineViewWillBecomeFirstResponder;
 -(void)setSearch:(NSString *)string;
 
 @end

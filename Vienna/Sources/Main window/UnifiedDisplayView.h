@@ -20,11 +20,12 @@
 
 #import "ArticleBaseView.h"
 #import "BaseView.h"
+#import "MessageListView.h"
 
 @class AppController;
 @class ExtendedTableView;
 
-@interface UnifiedDisplayView : NSView <BaseView, ArticleBaseView, NSMenuItemValidation, NSTableViewDelegate, NSTableViewDataSource, WKScriptMessageHandler>
+@interface UnifiedDisplayView : NSView <BaseView, ArticleBaseView, NSMenuItemValidation, MessageListViewDelegate, NSTableViewDataSource, WKScriptMessageHandler>
 {
     IBOutlet ExtendedTableView *articleList;
 
@@ -38,6 +39,6 @@
 
 // Public functions
 -(void)saveTableSettings;
--(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 - (void)webViewLoadFinished:(NSNotification *)notification;
+
 @end

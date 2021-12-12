@@ -21,16 +21,9 @@
 #import "MessageListView.h"
 #import "AppController.h"
 
-@interface NSObject(MessageListViewDelegate)
-
-- (BOOL)vna_handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
-- (BOOL)vna_copyTableSelection:(NSArray *)rows
-                  toPasteboard:(NSPasteboard *)pboard;
-- (BOOL)vna_canDeleteMessageAtRow:(NSInteger)row;
-
-@end
-
 @implementation MessageListView
+
+@dynamic delegate;
 
 /* keyDown
  * Here is where we handle special keys when the article list view
@@ -62,7 +55,7 @@
 			[rows addObject:@(rowIndex)];
 			rowIndex = [selectedRowIndexes indexGreaterThanIndex:rowIndex];
 		}
-        [(id)self.delegate vna_copyTableSelection:rows toPasteboard:[NSPasteboard generalPasteboard]];
+		[self.delegate copyTableSelection:rows toPasteboard:NSPasteboard.generalPasteboard];
 	}
 }
 
@@ -86,7 +79,7 @@
 	}
 	if (menuItem.action == @selector(delete:))
 	{
-        return [(id)self.delegate vna_canDeleteMessageAtRow:self.selectedRow];
+        return [self.delegate canDeleteMessageAtRow:self.selectedRow];
 	}
 	if (menuItem.action == @selector(selectAll:))
 	{
