@@ -70,7 +70,7 @@ static NSInteger const VNACurrentDatabaseVersion = 23;
 @implementation Database
 
 NSNotificationName const VNADatabaseWillDeleteFolderNotification = @"Database Will Delete Folder";
-NSNotificationName const VNAdatabaseDidDeleteFolderNotification = @"Database Did Delete Folder";
+NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did Delete Folder";
 
 /*!
  *  initialise the Database object with a specific path
@@ -1084,7 +1084,7 @@ NSNotificationName const VNAdatabaseDidDeleteFolderNotification = @"Database Did
 	// Send the post-delete notification after we're finished. Note that the folder actually corresponding to
 	// each numFolder won't exist any more and the handlers need to be aware of this.
     for (numFolder in arrayOfFolderIds) {
-		[[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:VNAdatabaseDidDeleteFolderNotification object:numFolder];
+		[[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:VNADatabaseDidDeleteFolderNotification object:numFolder];
     }
 	
 	return result;
