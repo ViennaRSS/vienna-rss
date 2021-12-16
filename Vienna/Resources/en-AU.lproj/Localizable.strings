@@ -1,0 +1,15 @@
+/* No comment provided by engineer. */
+"Are you sure you want to delete the messages in the Trash folder permanently?" = "Are you sure you want to delete the messages in the Bin folder permanently?";
+
+/* Title of a menu item */
+"Empty Trash…" = "Empty Bin…";
+
+/* No comment provided by engineer. */
+"The subscription for \"%@\" requires a user name and password for access." = "The subscription for “%@” requires a username and password for access.";
+
+/* No comment provided by engineer. */
+"Trash" = "Bin";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." = "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologise for the inconvenience.";
+

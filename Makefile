@@ -1,5 +1,5 @@
 PROJECT=Vienna.xcodeproj
-LOCALES=cs da de es eu fr gl it ja ko lt nl pt-BR pt ru sv tr uk zh-Hans zh-Hant
+LOCALES=cs da de en-AU en-GB es eu fr gl it ja ko lt nl pt-BR pt ru sv tr uk zh-Hans zh-Hant
 
 default:
 	xcodebuild -project $(PROJECT) -scheme Vienna archive
