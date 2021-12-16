@@ -35,21 +35,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Yeni bir Vienna veritabanı \"%@\" konumunda oluşturulamıyor çünkü muhtemelen o klasör ya uzaktaki bir ağa dahil, zira Vienna'nın bu versiyonu ağ üzerindeki klasörler ile çalışacak şekilde tasarlanmamıştır. Bilgisayarınız üzerinde bulunan bir klasörü seçmeyi deneyin.";
 
 /* No comment provided by engineer. */
-"After 2 Days" = "2 Gün Sonra";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "2 Hafta Sonra";
-
-/* No comment provided by engineer. */
-"After a Day" = "Bir Gün Sonra";
-
-/* No comment provided by engineer. */
-"After a Month" = "Bir Ay Sonra";
-
-/* No comment provided by engineer. */
-"After a Week" = "Bir Hafta Sonra";
-
-/* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Bu besleme en son yenilendiğinde bir hata oluştu";
 
 /* No comment provided by engineer. */

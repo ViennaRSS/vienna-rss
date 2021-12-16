@@ -220,6 +220,15 @@
 /* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f"; */
 "Y0d-K7-46f.title" = "Vis info";
 
+/* Class = "NSToolbarItem"; label = "Delete"; ObjectID = "Y22-Ul-q6w"; */
+"Y22-Ul-q6w.label" = "Slet";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Delete"; ObjectID = "Y22-Ul-q6w"; */
+"Y22-Ul-q6w.paletteLabel" = "Slet";
+
+/* Class = "NSToolbarItem"; toolTip = "Delete the current article"; ObjectID = "Y22-Ul-q6w"; */
+"Y22-Ul-q6w.toolTip" = "Slet den nuværende artikel";
+
 /* Class = "NSPopUpButton"; ibShadowedToolTip = "Filter articles"; ObjectID = "Ymd-v7-5ML"; */
 "Ymd-v7-5ML.ibShadowedToolTip" = "Filtrer artikler";
 

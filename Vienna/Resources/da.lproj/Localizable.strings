@@ -4,6 +4,9 @@
 /* No comment provided by engineer. */
 "(Untitled Feed)" = "(Unavngivet feed)";
 
+/* Appended to application name in Open With menu */
+"%@ (default)" = "%@ (Standard)";
+
 /* No comment provided by engineer. */
 "%@ Info" = "%@ info";
 
@@ -48,21 +51,6 @@
 
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "En ny Vienna database kan ikke laves i \"%@\" fordi mappen sandsynligvis ligger på en netværksdelt enhed og denne version af Vienna kan ikke håndtere databaser som ikke ligger lokalt. Vælg venligst en alternativ mappe som ligger på din lokale maskine.";
-
-/* No comment provided by engineer. */
-"After 2 Days" = "Efter 2 dage";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "Efter 2 uger";
-
-/* No comment provided by engineer. */
-"After a Day" = "Efter 1 dag";
-
-/* No comment provided by engineer. */
-"After a Month" = "Efter 1 måned";
-
-/* No comment provided by engineer. */
-"After a Week" = "Efter 1 uge";
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "En fejl opstod da dette feed sidst blev refreshet";
@@ -209,6 +197,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Tom";
+
+/* Title of a menu item */
+"Empty Trash…" = "Tøm papirkurv…";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Indpakning";
@@ -454,6 +445,9 @@
 "Open Link in %@" = "Åben henvisning i %@";
 
 /* No comment provided by engineer. */
+"Open Link in Background" = "Åben henvisning i baggrunden";
+
+/* No comment provided by engineer. */
 "Open Link in New Tab" = "Åben henvisning i ny fane";
 
 /* No comment provided by engineer. */
@@ -477,6 +471,9 @@
 /* No comment provided by engineer. */
 "Open With" = "Åben med";
 
+/* Name the application which should open a file */
+"Open with %@" = "Åben med %@";
+
 /* No comment provided by engineer. */
 "Other" = "Andet";
 
@@ -485,6 +482,13 @@
 
 /* No comment provided by engineer. */
 "Queue" = "Kø";
+
+/* Title of a button on an alert */
+"Quit" = "Slut";
+
+/* Title of a button on an alert
+   Title of a menu item */
+"Quit Vienna" = "Slut Vienna";
 
 /* Data field name visible in menu/smart folder definition */
 "Read" = "Læs";
@@ -630,7 +634,7 @@
 "The Default style will be used instead." = "Standard stilen vil blive brugt istedet.";
 
 /* No comment provided by engineer. */
-"The specified export output file could not be created. Check that it is not locked and no other application is using it." = "Det specificerede eksport output-arkiv kan ikke laves. Tjek at den ikke er låst og at ingen andre programmer bruger den";
+"The specified export output file could not be created. Check that it is not locked and no other application is using it." = "Det specificerede eksport output-arkiv kan ikke laves. Tjek at den ikke er låst og at ingen andre programmer bruger den.";
 
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Stilen \"%@\" er blevet installeret i din Stil-mappe og er blevet tilføjet til Stil-menuen.";
@@ -668,9 +672,6 @@
 /* No comment provided by engineer. */
 "Unsubscribe from Feed" = "Af-abonner feedet";
 
-/* No comment provided by engineer. */
-"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles." = "Slet Open Reader RSS feed";
-
 /* Title of a button on an alert */
 "Upgrade Database" = "Opgrader databasen";
 
@@ -681,13 +682,13 @@
 "Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna kan ikke åbne arkivet \"%@\" fordi det er flyttet siden du hentede det.";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file." = "Vienna kan ikke åbne arkivtitlen";
+"Vienna cannot open the file." = "Vienna kan ikke åbne arkivtitlen.";
 
 /* No comment provided by engineer. */
 "Vienna cannot show the file \"%@\" because it moved since you downloaded it." = "Vienna kan ikke vise arkivet \"%@\" fordi det er flyttet siden du hentede det.";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file." = "Vienna kan ikke vise arkivtitlen";
+"Vienna cannot show the file." = "Vienna kan ikke vise arkivtitlen.";
 
 /* No comment provided by engineer. */
 "Vienna has installed a new style" = "Vienna har installeret en ny stil";

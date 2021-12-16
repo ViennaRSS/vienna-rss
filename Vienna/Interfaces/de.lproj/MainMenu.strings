@@ -203,7 +203,7 @@
 "940.title" = "Hauptfenster";
 
 /* Class = "NSMenuItem"; title = "Empty Trash"; ObjectID = "961"; */
-"961.title" = "Papierkorb leeren";
+"961.title" = "Papierkorb entleeren";
 
 /* Class = "NSMenuItem"; title = "Previous Tab"; ObjectID = "1008"; */
 "1008.title" = "Vorheriger Tab";
@@ -238,17 +238,17 @@
 /* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
 "1073.title" = "Link per E-Mail senden";
 
-/* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
+/* Class = "NSMenuItem"; title = "Make Text Bigger"; ObjectID = "1084"; Note = "This string is also used in Safari"; */
 "1084.title" = "Schrift größer";
 
-/* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
+/* Class = "NSMenuItem"; title = "Make Text Smaller"; ObjectID = "1085"; Note = "This string is also used in Safari"; */
 "1085.title" = "Schrift kleiner";
 
 /* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
 "1101.title" = "Webadresse öffnen …";
 
 /* Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "1104"; */
-"1104.title" = "Auf Software-Aktualisierung prüfen";
+"1104.title" = "Nach Updates suchen";
 
 /* Class = "NSMenuItem"; title = "Refresh Folder Images"; ObjectID = "1106"; */
 "1106.title" = "Ordner-Icons aktualisieren";
@@ -414,6 +414,9 @@
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN"; */
 "MHF-D4-pRN.title" = "Großbuchstaben";
+
+/* Class = "NSMenuItem"; title = "Actual Size"; ObjectID = "OiG-oc-aVj"; Note = "This string is also used in Safari"; */
+"OiG-oc-aVj.title" = "Originalgröße";
 
 /* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
 "pKl-6f-Hlc.title" = "Als gelesen markieren";

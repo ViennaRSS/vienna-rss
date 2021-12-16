@@ -44,21 +44,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "无法在 \"%@\" 创建新的 Vienna 数据库。可能是因为此文件夹处于远端共享网络上，当前版本的 Vienna 不支持远端共享网络上的数据库。请选择一个在您本地机器上的文件夹。";
 
 /* No comment provided by engineer. */
-"After 2 Days" = "两天后";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "两周后";
-
-/* No comment provided by engineer. */
-"After a Day" = "一天后";
-
-/* No comment provided by engineer. */
-"After a Month" = "一个月后";
-
-/* No comment provided by engineer. */
-"After a Week" = "一周后";
-
-/* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "上次更新这个频道时发生了一个错误";
 
 /* No comment provided by engineer. */

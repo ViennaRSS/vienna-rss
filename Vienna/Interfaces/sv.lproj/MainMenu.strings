@@ -238,11 +238,11 @@
 /* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
 "1073.title" = "Skicka länk via e-post";
 
-/* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
-"1084.title" = "Större text";
+/* Class = "NSMenuItem"; title = "Make Text Bigger"; ObjectID = "1084"; Note = "This string is also used in Safari"; */
+"1084.title" = "Öka textstorleken";
 
-/* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
-"1085.title" = "Mindre text";
+/* Class = "NSMenuItem"; title = "Make Text Smaller"; ObjectID = "1085"; Note = "This string is also used in Safari"; */
+"1085.title" = "Minska textstorleken";
 
 /* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
 "1101.title" = "Öppna plats…";
@@ -408,6 +408,9 @@
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN"; */
 "MHF-D4-pRN.title" = "Gör till versaler";
+
+/* Class = "NSMenuItem"; title = "Actual Size"; ObjectID = "OiG-oc-aVj"; Note = "This string is also used in Safari"; */
+"OiG-oc-aVj.title" = "Verklig storlek";
 
 /* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
 "pKl-6f-Hlc.title" = "Markera som läst";

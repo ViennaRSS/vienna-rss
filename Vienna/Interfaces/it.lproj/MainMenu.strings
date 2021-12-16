@@ -229,10 +229,13 @@
 /* Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067"; */
 "1067.title" = "Apri la Pagina dell'Articolo nel Browser Esterno";
 
-/* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
+/* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
+"1073.title" = "Invia link via email";
+
+/* Class = "NSMenuItem"; title = "Make Text Bigger"; ObjectID = "1084"; Note = "This string is also used in Safari"; */
 "1084.title" = "Testo Più Grande";
 
-/* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
+/* Class = "NSMenuItem"; title = "Make Text Smaller"; ObjectID = "1085"; Note = "This string is also used in Safari"; */
 "1085.title" = "Testo Più Piccolo";
 
 /* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
@@ -243,6 +246,9 @@
 
 /* Class = "NSMenuItem"; title = "Refresh Folder Images"; ObjectID = "1106"; */
 "1106.title" = "Ricarica tutte le Icone dei Feed";
+
+/* Class = "NSMenuItem"; title = "Layout"; ObjectID = "1108"; */
+"1108.title" = "Layout";
 
 /* Class = "NSMenuItem"; title = "Horizontal"; ObjectID = "1110"; */
 "1110.title" = "Rapporto";
@@ -304,6 +310,9 @@
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
 "1257.title" = "Personalizza Barra Strumenti…";
 
+/* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
+"1258.title" = "Nascondi barra degli strumenti";
+
 /* Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259"; */
 "1259.title" = "Nascondi Barra di Stato";
 
@@ -312,6 +321,12 @@
 
 /* Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327"; */
 "1327.title" = "Cerca negli Articoli";
+
+/* Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336"; */
+"1336.title" = "Ordina per";
+
+/* Class = "NSMenu"; title = "Order By"; ObjectID = "1337"; */
+"1337.title" = "Ordina per";
 
 /* Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408"; */
 "1408.title" = "Disiscriviti dal Feed";

@@ -53,21 +53,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Een nieuwe Vienna-databank kan niet worden aangemaakt in \"%@\". De databank bevindt zich waarschijnlijk op een andere computer in het netwerk, wat door deze versie van Vienna niet wordt ondersteund. Kies een andere locatie op deze Mac.";
 
 /* No comment provided by engineer. */
-"After 2 Days" = "Na twee dagen";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "Na twee weken";
-
-/* No comment provided by engineer. */
-"After a Day" = "Na één dag";
-
-/* No comment provided by engineer. */
-"After a Month" = "Na één maand";
-
-/* No comment provided by engineer. */
-"After a Week" = "Na één week";
-
-/* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "De laatste keer dat deze feed is bijgewerkt, is er een fout opgetreden";
 
 /* No comment provided by engineer. */
@@ -96,6 +81,9 @@
 
 /* No comment provided by engineer. */
 "Ascending" = "Oplopend";
+
+/* No comment provided by engineer. */
+"Authenticating on Open Reader" = "Identiteitscontrole op Open Reader";
 
 /* Data field name visible in menu/article list/smart folder definition */
 "Author" = "Auteur";
@@ -127,6 +115,9 @@
 
 /* No comment provided by engineer. */
 "Connecting to %@" = "Verbinden met %@";
+
+/* No comment provided by engineer. */
+"Connecting to Open Reader server to retrieve %@" = "Verbinden met Open Reader-server om %@ op te vragen";
 
 /* test for a string */
 "contains" = "bevat";
@@ -207,6 +198,9 @@
 /* Title of a button on an alert */
 "Empty" = "Leeg";
 
+/* Title of a menu item */
+"Empty Trash…" = "Leeg prullenmand…";
+
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Bijlage";
 
@@ -243,6 +237,9 @@
 /* No comment provided by engineer. */
 "Feed URL updated to %@" = "De URL van deze feed is veranderd in %@";
 
+/* No comment provided by engineer. */
+"Fetching Open Reader Subscriptions…" = "Open Reader-abonnementen ophalen…";
+
 /* Notification body */
 "File %@ downloaded" = "Bestand %@ gedownload";
 
@@ -276,11 +273,17 @@
 /* Title of a menu item */
 "Force Refresh Selected Subscriptions From Open Reader" = "Forceer bijwerken abonnementen van Open Reader";
 
+/* No comment provided by engineer. */
+"Forcing Refresh subscriptions…" = "Abonnementen geforceerd vernieuwen…";
+
 /* Title of a menu item */
 "Get Info" = "Toon info";
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "Ga verder naar de volgende pagina";
+
+/* No comment provided by engineer. */
+"Got HTTP status 304 - No news from last check" = "HTTP-status 304 ontvangen – geen nieuws sinds de laatste controle";
 
 /* Pseudo field name visible in article list */
 "Headlines" = "Koppen";
@@ -311,6 +314,9 @@
 
 /* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "Importeer abonnementen uit OPML bestand?";
+
+/* No comment provided by engineer. */
+"Improper infinitely looping URL redirect to %@" = "Onjuiste oneindig doorlopende URL-doorverwijzing naar %@";
 
 /* test for a value */
 "is" = "is";
@@ -448,6 +454,9 @@
 "Open Page in %@" = "Open pagina in %@";
 
 /* No comment provided by engineer. */
+"Open Reader Authentication Failed" = "Open Reader-identiteitscontrole mislukt";
+
+/* No comment provided by engineer. */
 "Open Scripts Folder" = "Open scripts-map";
 
 /* Title of a menu item */
@@ -489,6 +498,9 @@
 
 /* No comment provided by engineer. */
 "Recents" = "Recente onderdelen";
+
+/* No comment provided by engineer. */
+"Redirection attempt treated as temporary for safety concern" = "Poging tot doorverwijzing behandeld als tijdelijk om veiligheidsredenen";
 
 /* Title of a menu item */
 "Refresh All Subscriptions" = "Werk alle abonnementen bij";

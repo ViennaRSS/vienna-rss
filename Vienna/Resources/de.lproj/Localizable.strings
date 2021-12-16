@@ -20,10 +20,10 @@
 "%@ unread" = "%@ ungelesen";
 
 /* No comment provided by engineer. */
-"%d new articles retrieved" = "%d neue Artikel empfangen";
+"%d new articles retrieved" = "%d neue Artikel abgerufen";
 
 /* Notification body */
-"%d new unread articles retrieved" = "%d neue ungelesene Artikel empfangen";
+"%d new unread articles retrieved" = "%d neue ungelesene Artikel abgerufen";
 
 /* No comment provided by engineer. */
 "%d subscriptions successfully exported" = "%d Abonnements erfolgreich exportiert";
@@ -51,21 +51,6 @@
 
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Eine neue Vienna0Datenbank konnte in '%@' nicht erstellt werden, weil der Ordner möglicherweise auf einem Netzwerklaufwerk liegt. Diese Version von Vienna kann nicht mit derartigen Datenbanken genutzt werden. Bitte wähle einen anderen Ordner auf deinem Mac aus.";
-
-/* No comment provided by engineer. */
-"After 2 Days" = "Nach zwei Tagen";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "Nach zwei Wochen";
-
-/* No comment provided by engineer. */
-"After a Day" = "Nach einem Tag";
-
-/* No comment provided by engineer. */
-"After a Month" = "Nach einem Monat";
-
-/* No comment provided by engineer. */
-"After a Week" = "Nach einer Woche";
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Bei der letzten Aktualisierung dieses Abonnements ist ein Fehler aufgetreten";
@@ -213,6 +198,9 @@
 /* Title of a button on an alert */
 "Empty" = "Entleeren";
 
+/* Title of a menu item */
+"Empty Trash…" = "Papierkorb entleeren …";
+
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Anhang";
 
@@ -277,7 +265,7 @@
 "Folder" = "Ordner";
 
 /* No comment provided by engineer. */
-"Folder image retrieved from %@" = "Ordnerbild von %@ empfangen";
+"Folder image retrieved from %@" = "Ordnerbild von %@ abgerufen";
 
 /* No comment provided by engineer. */
 "Folders" = "Ordner";
@@ -409,7 +397,7 @@
 "Never" = "Nie";
 
 /* Notification title */
-"New articles retrieved" = "Neue Artikel";
+"New articles retrieved" = "Neue Artikel abgerufen";
 
 /* No comment provided by engineer. */
 "New Tab" = "Ohne Titel";

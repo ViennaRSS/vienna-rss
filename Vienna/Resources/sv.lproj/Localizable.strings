@@ -4,6 +4,9 @@
 /* No comment provided by engineer. */
 "(Untitled Feed)" = "(Icke namngiven ström)";
 
+/* Appended to application name in Open With menu */
+"%@ (default)" = "%@ (förval)";
+
 /* No comment provided by engineer. */
 "%@ Info" = "%@ info";
 
@@ -42,21 +45,6 @@
 
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "En ny Vienna-databas kan ej skapas i '%@' för att mappen förmodligen finns på en nätverksdelning och den här versionen av Vienna stöder inte detta. Var vänlig och välj en mapp som finns på din lokala hårddisk.";
-
-/* No comment provided by engineer. */
-"After 2 Days" = "Efter 2 dagar";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "Efter 2 veckor";
-
-/* No comment provided by engineer. */
-"After a Day" = "Efter en dag";
-
-/* No comment provided by engineer. */
-"After a Month" = "Efter en månad";
-
-/* No comment provided by engineer. */
-"After a Week" = "Efter en vecka";
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Ett fel uppstod när denna prenumeration uppdaterades senast";
@@ -191,6 +179,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Töm";
+
+/* Title of a menu item */
+"Empty Trash…" = "Töm papperskorgen…";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Bilaga";

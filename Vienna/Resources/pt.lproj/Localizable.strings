@@ -35,21 +35,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Uma nova base de dados do Vienna não pode ser criada em \"%@\" porque provavelmente a pasta está localizada num disco de rede e esta versão do Vienna não consegue manipular bases de dados remotas. Por favor escolha uma máquina que esteja localizada no seu computador.";
 
 /* No comment provided by engineer. */
-"After 2 Days" = "Após 2 Dias";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "Após 2 Semanas";
-
-/* No comment provided by engineer. */
-"After a Day" = "Após um Dia";
-
-/* No comment provided by engineer. */
-"After a Month" = "Após um Mês";
-
-/* No comment provided by engineer. */
-"After a Week" = "Após uma Semana";
-
-/* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Ocorreu um erro da última vez que esta fonte foi actualizada";
 
 /* No comment provided by engineer. */

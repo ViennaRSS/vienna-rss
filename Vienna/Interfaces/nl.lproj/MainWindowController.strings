@@ -146,10 +146,10 @@
 "mbZ-oU-TDn.title" = "Ongelezen of gemarkeerd";
 
 /* Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys"; */
-"Nmd-zx-Dys.label" = "Ververs";
+"Nmd-zx-Dys.label" = "Vernieuw";
 
 /* Class = "NSToolbarItem"; paletteLabel = "Refresh"; ObjectID = "Nmd-zx-Dys"; */
-"Nmd-zx-Dys.paletteLabel" = "Ververs";
+"Nmd-zx-Dys.paletteLabel" = "Vernieuw";
 
 /* Class = "NSToolbarItem"; toolTip = "Refresh all your subscriptions"; ObjectID = "Nmd-zx-Dys"; */
 "Nmd-zx-Dys.toolTip" = "Werk alle abonnementen bij";

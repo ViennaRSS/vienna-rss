@@ -4,7 +4,7 @@
 /* Class = "NSTabViewItem"; label = "General"; ObjectID = "GJ3-1q-004"; */
 "GJ3-1q-004.label" = "Xeral";
 
-/* Class = "NSMenuItem"; title = "Never"; ObjectID = "h9d-GD-q32"; */
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "h9d-GD-q32"; */
 "h9d-GD-q32.title" = "Nunca";
 
 /* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "iEw-AM-tMF"; */

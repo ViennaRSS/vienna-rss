@@ -17,6 +17,9 @@
 "%@ received" = "已接收 %@";
 
 /* No comment provided by engineer. */
+"%@ unread" = "%@ 篇未讀的";
+
+/* No comment provided by engineer. */
 "%d new articles retrieved" = "已取得 %d 則新文章";
 
 /* Notification body */
@@ -48,21 +51,6 @@
 
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "無法在“%@”建立新的 Vienna 資料庫，原因可能是這個檔案夾位在遠端網路分享空間中，而 Vienna 無法管理遠端的資料庫。請在您的本機電腦上，選擇其他的檔案夾。";
-
-/* No comment provided by engineer. */
-"After 2 Days" = "2 天後";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "2 週後";
-
-/* No comment provided by engineer. */
-"After a Day" = "1 天後";
-
-/* No comment provided by engineer. */
-"After a Month" = "1 個月後";
-
-/* No comment provided by engineer. */
-"After a Week" = "1 週後";
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "最後一次更新此訂閱頻道時，發生錯誤";
@@ -210,6 +198,9 @@
 /* Title of a button on an alert */
 "Empty" = "清除";
 
+/* Title of a menu item */
+"Empty Trash…" = "清空垃圾桶...";
+
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "隨附項目";
 
@@ -254,6 +245,12 @@
 
 /* Notification body */
 "File %@ failed to download" = "無法下載檔案 %@";
+
+/* No comment provided by engineer. */
+"filter by: %@" = "篩選條件：%@";
+
+/* No comment provided by engineer. */
+"Filter by: %@" = "篩選條件：%@";
 
 /* No comment provided by engineer. */
 "Filter in %@" = "在 %@ 中過濾";
@@ -570,6 +567,9 @@
 /* No comment provided by engineer. */
 "Search Results" = "搜尋結果";
 
+/* Label of a button on an open panel */
+"Select" = "選擇";
+
 /* Title of a popup menu item */
 "Select…" = "選取⋯";
 
@@ -647,6 +647,9 @@
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "此文章隨附一個檔案。";
+
+/* Message text of a modal alert */
+"This folder cannot be chosen because you don’t have permission." = "因為你沒有權限，所以這個資料夾不能選。";
 
 /* No comment provided by engineer. */
 "This operation cannot be undone." = "此項操作無法還原。";

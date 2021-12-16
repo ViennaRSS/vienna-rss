@@ -61,6 +61,9 @@
 /* Class = "NSMenuItem"; title = "Hide Vienna"; ObjectID = "134"; */
 "134.title" = "Skjul Vienna";
 
+/* Class = "NSMenuItem"; title = "Quit Vienna"; ObjectID = "136"; */
+"136.title" = "Slut Vienna";
+
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
 "145.title" = "Skjul andre";
 
@@ -99,6 +102,9 @@
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "167"; */
 "167.title" = "Find næste";
+
+/* Class = "NSMenuItem"; title = "Find"; ObjectID = "168"; */
+"168.title" = "Find";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "169"; */
 "169.title" = "Rediger";
@@ -232,11 +238,11 @@
 /* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
 "1073.title" = "Send henvisning via email";
 
-/* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
-"1084.title" = "Større tekst";
+/* Class = "NSMenuItem"; title = "Make Text Bigger"; ObjectID = "1084"; Note = "This string is also used in Safari"; */
+"1084.title" = "Gør tekst større";
 
-/* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
-"1085.title" = "Mindre tekst";
+/* Class = "NSMenuItem"; title = "Make Text Smaller"; ObjectID = "1085"; Note = "This string is also used in Safari"; */
+"1085.title" = "Gør tekst mindre";
 
 /* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
 "1101.title" = "Åben Internet-lokation…";
@@ -408,6 +414,9 @@
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN"; */
 "MHF-D4-pRN.title" = "Lav om til store bogstaver";
+
+/* Class = "NSMenuItem"; title = "Actual Size"; ObjectID = "OiG-oc-aVj"; Note = "This string is also used in Safari"; */
+"OiG-oc-aVj.title" = "Faktisk størrelse";
 
 /* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
 "pKl-6f-Hlc.title" = "Marker som læst";
