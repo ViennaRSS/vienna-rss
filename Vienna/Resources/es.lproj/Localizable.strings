@@ -47,25 +47,10 @@
 "A folder with that name already exists" = "Una carpeta con ese nombre ya existe";
 
 /* No comment provided by engineer. */
-"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Un nuevo plugin ha sido instalado. Ahora está disponible en el menú y puede añadirlo a la barra de herramientas.";
+"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Un nuevo complemento ha sido instalado. Ahora está disponible en el menú y puede añadirlo a la barra de herramientas.";
 
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "No se puede crear la nueva base de datos de Vienna en \"%@\" ya que la carpeta probablemente está ubicada en un recurso compartido de una red remota y esta versión de Vienna no puede gestionar bases de datos remotas. Por favor, elija una carpeta alternativa ubicada en su equipo local.";
-
-/* No comment provided by engineer. */
-"After 2 Days" = "Después de 2 días";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "Después de 2 semanas";
-
-/* No comment provided by engineer. */
-"After a Day" = "Después de un día";
-
-/* No comment provided by engineer. */
-"After a Month" = "Después de un mes";
-
-/* No comment provided by engineer. */
-"After a Week" = "Después de una semana";
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Ha ocurrido un error al actualizar esta fuente";
@@ -212,6 +197,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Vaciar";
+
+/* Title of a menu item */
+"Empty Trash…" = "Vaciar papelera…";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Archivo adjunto";
@@ -487,7 +475,7 @@
 "Other" = "Otro";
 
 /* No comment provided by engineer. */
-"Plugin installed" = "Plugin instalado";
+"Plugin installed" = "Complemento instalado";
 
 /* No comment provided by engineer. */
 "Queue" = "Cola";
@@ -583,10 +571,10 @@
 "Select…" = "Seleccionar…";
 
 /* A formatted URL string with the mailto: URL scheme. */
-"Send email to %@" = "Enviar mensaje de correo a %@";
+"Send email to %@" = "Enviar correo electrónico a %@";
 
 /* A formatted URL string with the mailto: URL scheme. */
-"Send email to %@ with subject “%@”" = "Enviar correo electrónico a %1$@ con el asunto “%2$@”";
+"Send email to %@ with subject “%@”" = "Enviar correo electrónico a %1$@ con asunto “%2$@”";
 
 /* No comment provided by engineer. */
 "Send Link" = "Enviar enlace";
@@ -656,6 +644,9 @@
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Este artículo contiene un archivo adjunto.";
+
+/* Message text of a modal alert */
+"This folder cannot be chosen because you don’t have permission." = "No se puede elegir esta carpeta ya que no tiene permiso.";
 
 /* No comment provided by engineer. */
 "This operation cannot be undone." = "Esta operación no se puede deshacer.";

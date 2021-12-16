@@ -35,21 +35,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Ezin da Vienna datu base berri bat sortu \"%@\" -(e)n direktorioa urruneko direktorio batean kokatua dagoelako eta Vienna-k ezin ditu urruneko datu baseak kudeatu. Mesedez aukeratu zeure disko gogorrean dagoen direktorioren bat.";
 
 /* No comment provided by engineer. */
-"After 2 Days" = "2 Egunen Ostean";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "2 Asteren Ostean";
-
-/* No comment provided by engineer. */
-"After a Day" = "Egun Baten Ostean";
-
-/* No comment provided by engineer. */
-"After a Month" = "Hilabete Baten Ostean";
-
-/* No comment provided by engineer. */
-"After a Week" = "Aste Baten Ostean";
-
-/* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Errore bat gertatu zen jario hau azken aldiz eguneratu zenean";
 
 /* No comment provided by engineer. */

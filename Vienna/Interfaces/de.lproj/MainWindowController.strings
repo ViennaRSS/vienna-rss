@@ -2,10 +2,10 @@
 "3tM-J3-kmf.title" = "Heute";
 
 /* Class = "NSToolbarItem"; label = "Empty Trash"; ObjectID = "4c1-NR-ofo"; */
-"4c1-NR-ofo.label" = "Papierkorb leeren";
+"4c1-NR-ofo.label" = "Papierkorb entleeren";
 
 /* Class = "NSToolbarItem"; paletteLabel = "Empty Trash"; ObjectID = "4c1-NR-ofo"; */
-"4c1-NR-ofo.paletteLabel" = "Papierkorb leeren";
+"4c1-NR-ofo.paletteLabel" = "Papierkorb entleeren";
 
 /* Class = "NSToolbarItem"; toolTip = "Delete all articles in the trash"; ObjectID = "4c1-NR-ofo"; */
 "4c1-NR-ofo.toolTip" = "Alle Artikel im Papierkorb endgültig löschen";

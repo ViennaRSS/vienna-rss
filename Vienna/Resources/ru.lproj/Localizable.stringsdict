@@ -13,11 +13,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>few</key>
-			<string>%d new articles retrieved</string>
+			<string>Получено %d новые статьи</string>
 			<key>many</key>
-			<string>%d new articles retrieved</string>
-			<key>one</key>
 			<string>Получено %d новых статей</string>
+			<key>one</key>
+			<string>Получена %d новая статья</string>
 			<key>other</key>
 			<string>Получено %d новых статей</string>
 		</dict>
@@ -33,11 +33,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>few</key>
-			<string>%d subscriptions successfully exported</string>
+			<string>%d канала успешно экспортированы</string>
 			<key>many</key>
-			<string>%d subscriptions successfully exported</string>
+			<string>%d каналов успешно экспортировано</string>
 			<key>one</key>
-			<string>Успешно экспортировано %d каналов</string>
+			<string>%d канал успешно экспортирован</string>
 			<key>other</key>
 			<string>Успешно экспортировано %d каналов</string>
 		</dict>
@@ -53,11 +53,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>few</key>
-			<string>%d subscriptions successfully imported</string>
+			<string>%d канала успешно импортированы</string>
 			<key>many</key>
-			<string>%d subscriptions successfully imported</string>
+			<string>%d каналов успешно импортировано</string>
 			<key>one</key>
-			<string>Успешно импортировано %d каналов</string>
+			<string>%d канал успешно импортирован</string>
 			<key>other</key>
 			<string>Успешно импортировано %d каналов</string>
 		</dict>
@@ -73,11 +73,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>few</key>
-			<string>%d unread articles</string>
+			<string>%d непрочитанные статьи</string>
 			<key>many</key>
-			<string>%d unread articles</string>
-			<key>one</key>
 			<string>%d непрочитанных статей</string>
+			<key>one</key>
+			<string>%d непрочитанная статья</string>
 			<key>other</key>
 			<string>%d непрочитанных статей</string>
 		</dict>
@@ -93,11 +93,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>u</string>
 			<key>few</key>
-			<string>%u articles</string>
+			<string>%u статьи</string>
 			<key>many</key>
-			<string>%u articles</string>
-			<key>one</key>
 			<string>%u статей</string>
+			<key>one</key>
+			<string>%u статья</string>
 			<key>other</key>
 			<string>%u статей</string>
 		</dict>
@@ -113,11 +113,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>u</string>
 			<key>few</key>
-			<string>%u unread</string>
+			<string>%u непрочитаны</string>
 			<key>many</key>
-			<string>%u unread</string>
-			<key>one</key>
 			<string>%u непрочитано</string>
+			<key>one</key>
+			<string>%u непрочитана</string>
 			<key>other</key>
 			<string>%u непрочитано</string>
 		</dict>

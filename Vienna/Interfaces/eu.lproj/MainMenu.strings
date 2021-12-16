@@ -226,10 +226,10 @@
 /* Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067"; */
 "1067.title" = "Ireki Artikuluaren Orria Kanpo Nabegatzailean";
 
-/* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
+/* Class = "NSMenuItem"; title = "Make Text Bigger"; ObjectID = "1084"; Note = "This string is also used in Safari"; */
 "1084.title" = "Testu Haundiagoa";
 
-/* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
+/* Class = "NSMenuItem"; title = "Make Text Smaller"; ObjectID = "1085"; Note = "This string is also used in Safari"; */
 "1085.title" = "Testu Txikiagoa";
 
 /* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */

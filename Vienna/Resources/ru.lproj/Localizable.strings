@@ -53,21 +53,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Новая база данных Vienna не может быть создана в \"%@\" из-за того, что папка, возможно, находится на удаленном сервере, а текущая версия Vienna не может работать с удаленными базами данных. Пожалуйста, выберите папку на своем компьютере.";
 
 /* No comment provided by engineer. */
-"After 2 Days" = "Через 2 дня";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "Через 2 недели";
-
-/* No comment provided by engineer. */
-"After a Day" = "Через день";
-
-/* No comment provided by engineer. */
-"After a Month" = "Через месяц";
-
-/* No comment provided by engineer. */
-"After a Week" = "Через неделю";
-
-/* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "При последнем обновлении канала произошла ошибка";
 
 /* No comment provided by engineer. */
@@ -212,6 +197,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Очистить";
+
+/* Title of a menu item */
+"Empty Trash…" = "Очистить Корзину…";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Вложения";

@@ -236,12 +236,12 @@
 "1067.title" = "Abrir página del artículo en un navegador externo";
 
 /* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
-"1073.title" = "Enviar enlace por email";
+"1073.title" = "Enviar enlace por correo electrónico";
 
-/* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
+/* Class = "NSMenuItem"; title = "Make Text Bigger"; ObjectID = "1084"; Note = "This string is also used in Safari"; */
 "1084.title" = "Aumentar tamaño del texto";
 
-/* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
+/* Class = "NSMenuItem"; title = "Make Text Smaller"; ObjectID = "1085"; Note = "This string is also used in Safari"; */
 "1085.title" = "Reducir tamaño del texto";
 
 /* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
@@ -414,6 +414,9 @@
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN"; */
 "MHF-D4-pRN.title" = "Todo en mayúsculas";
+
+/* Class = "NSMenuItem"; title = "Actual Size"; ObjectID = "OiG-oc-aVj"; Note = "This string is also used in Safari"; */
+"OiG-oc-aVj.title" = "Tamaño real";
 
 /* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
 "pKl-6f-Hlc.title" = "Marcar como leído";

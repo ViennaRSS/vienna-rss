@@ -13,9 +13,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d neuer Artikel empfangen</string>
+			<string>%d neuer Artikel abgerufen</string>
 			<key>other</key>
-			<string>%d neue Artikel empfangen</string>
+			<string>%d neue Artikel abgerufen</string>
 		</dict>
 	</dict>
 	<key>%d subscriptions successfully exported</key>

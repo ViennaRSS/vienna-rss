@@ -10,6 +10,9 @@
 /* Class = "NSToolbarItem"; toolTip = "Delete all articles in the trash"; ObjectID = "4c1-NR-ofo"; */
 "4c1-NR-ofo.toolTip" = "刪除垃圾桶的所有文章";
 
+/* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "5RA-iE-L8a"; */
+"5RA-iE-L8a.title" = "上次更新";
+
 /* Class = "NSToolbarItem"; label = "Get Info"; ObjectID = "7iy-IN-8oG"; */
 "7iy-IN-8oG.label" = "簡介";
 
@@ -64,6 +67,12 @@
 /* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "bhs-vZ-HCm"; */
 "bhs-vZ-HCm.title" = "上次更新";
 
+/* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "ci8-W6-ewN"; */
+"ci8-W6-ewN.title" = "加了標記的";
+
+/* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "cJi-Kc-4fg"; */
+"cJi-Kc-4fg.title" = "所有文章";
+
 /* Class = "NSToolbarItem"; label = "Add"; ObjectID = "CPA-Ha-aj1"; */
 "CPA-Ha-aj1.label" = "新增";
 
@@ -72,6 +81,9 @@
 
 /* Class = "NSToolbarItem"; toolTip = "Subscribe to a feed or add a folder or smart folder."; ObjectID = "CPA-Ha-aj1"; */
 "CPA-Ha-aj1.toolTip" = "訂閱項目至資料夾或智慧型檔案夾。";
+
+/* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "dId-uc-qfG"; */
+"dId-uc-qfG.title" = "未讀的文章";
 
 /* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "FDh-ie-FnZ"; */
 "FDh-ie-FnZ.title" = "所有文章";
@@ -106,6 +118,12 @@
 /* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g"; */
 "Hs0-hu-A2g.title" = "重新整理所選訂閱頻道";
 
+/* Class = "NSToolbarItem"; label = "Filter"; ObjectID = "I8N-Dr-P6W"; */
+"I8N-Dr-P6W.label" = "過濾器";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Filter"; ObjectID = "I8N-Dr-P6W"; */
+"I8N-Dr-P6W.paletteLabel" = "過濾器";
+
 /* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "iqm-sr-F8U"; */
 "iqm-sr-F8U.title" = "從 Open Reader 中強制重新整理選擇的訂閱項目";
 
@@ -123,6 +141,9 @@
 
 /* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm"; */
 "MaO-r1-tcm.title" = "更多樣式⋯";
+
+/* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "mbZ-oU-TDn"; */
+"mbZ-oU-TDn.title" = "未讀的或標記的";
 
 /* Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys"; */
 "Nmd-zx-Dys.label" = "重新整理";
@@ -150,6 +171,9 @@
 
 /* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "sDP-Ni-g3a"; */
 "sDP-Ni-g3a.title" = "未讀文章";
+
+/* Class = "NSMenuItem"; title = "Today"; ObjectID = "Sne-Nd-bEA"; */
+"Sne-Nd-bEA.title" = "今天";
 
 /* Class = "NSToolbarItem"; label = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
 "SoG-b2-O1S.label" = "略過檔案夾";
@@ -181,6 +205,9 @@
 /* Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "VXV-Rv-wn5"; */
 "VXV-Rv-wn5.title" = "篩選方式：";
 
+/* Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "Wy3-T4-9eO"; */
+"Wy3-T4-9eO.title" = "顯示過濾器列";
+
 /* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "xNW-zC-IMZ"; */
 "xNW-zC-IMZ.title" = "將所有文章標示為已閱讀";
 
@@ -204,6 +231,9 @@
 
 /* Class = "NSPopUpButton"; ibShadowedToolTip = "Filter articles"; ObjectID = "Ymd-v7-5ML"; */
 "Ymd-v7-5ML.ibShadowedToolTip" = "篩選文章";
+
+/* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "yqJ-tO-HNW"; */
+"yqJ-tO-HNW.title" = "過去 48 小時";
 
 /* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "yvh-qU-EAm"; */
 "yvh-qU-EAm.title" = "過去 48 小時";

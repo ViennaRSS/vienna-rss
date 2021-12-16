@@ -13,7 +13,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d new article retrieved</string>
+			<string>%d ny artikel mottagen</string>
 			<key>other</key>
 			<string>%d nya artiklar mottagna</string>
 		</dict>
@@ -29,9 +29,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d subscription successfully exported</string>
+			<string>%d prenumeration exporterades</string>
 			<key>other</key>
-			<string>%d prenumerationer exporterades felfritt</string>
+			<string>%d prenumerationer exporterades</string>
 		</dict>
 	</dict>
 	<key>%d subscriptions successfully imported</key>
@@ -45,9 +45,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d subscription successfully imported</string>
+			<string>%d prenumeration importerades</string>
 			<key>other</key>
-			<string>%d prenumerationer importerades felfritt</string>
+			<string>%d prenumerationer importerades</string>
 		</dict>
 	</dict>
 	<key>%d unread articles</key>
@@ -61,7 +61,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d unread article</string>
+			<string>%d oläst artikel</string>
 			<key>other</key>
 			<string>%d olästa artiklar</string>
 		</dict>
@@ -77,7 +77,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>u</string>
 			<key>one</key>
-			<string>%u article</string>
+			<string>%u artikel</string>
 			<key>other</key>
 			<string>%u artiklar</string>
 		</dict>
@@ -93,7 +93,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>u</string>
 			<key>one</key>
-			<string>%u olästa</string>
+			<string>%u oläst</string>
 			<key>other</key>
 			<string>%u olästa</string>
 		</dict>

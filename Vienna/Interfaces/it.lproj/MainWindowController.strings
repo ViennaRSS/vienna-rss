@@ -79,6 +79,9 @@
 /* Class = "NSToolbarItem"; toolTip = "Back"; ObjectID = "gOG-UJ-Pin"; */
 "gOG-UJ-Pin.toolTip" = "Indietro";
 
+/* Class = "NSToolbarItem"; toolTip = "Mark all items as read"; ObjectID = "Gyz-dq-ewv"; */
+"Gyz-dq-ewv.toolTip" = "Segna tutti come già letti";
+
 /* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g"; */
 "Hs0-hu-A2g.title" = "Aggiorna Iscrizioni Selezionate";
 
@@ -130,6 +133,9 @@
 /* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "vOQ-xo-w8E"; */
 "vOQ-xo-w8E.title" = "Modifica…";
 
+/* Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "Wy3-T4-9eO"; */
+"Wy3-T4-9eO.title" = "Mostra la barra dei filtri";
+
 /* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "xNW-zC-IMZ"; */
 "xNW-zC-IMZ.title" = "Segnala tutti gli articoli come letti";
 
@@ -141,6 +147,18 @@
 
 /* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f"; */
 "Y0d-K7-46f.title" = "Ottieni Info";
+
+/* Class = "NSToolbarItem"; label = "Delete"; ObjectID = "Y22-Ul-q6w"; */
+"Y22-Ul-q6w.label" = "Elimina";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Delete"; ObjectID = "Y22-Ul-q6w"; */
+"Y22-Ul-q6w.paletteLabel" = "Elimina";
+
+/* Class = "NSToolbarItem"; toolTip = "Delete the current article"; ObjectID = "Y22-Ul-q6w"; */
+"Y22-Ul-q6w.toolTip" = "Elimina l'articolo corrente";
+
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "Filter articles"; ObjectID = "Ymd-v7-5ML"; */
+"Ymd-v7-5ML.ibShadowedToolTip" = "Filtra articoli";
 
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2"; */
 "Zu1-zW-uo2.title" = "Vai alla Pagina Iniziale dell'Iscrizione";
