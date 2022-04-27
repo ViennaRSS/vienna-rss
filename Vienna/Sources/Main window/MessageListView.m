@@ -48,14 +48,7 @@
 	if (self.selectedRow >= 0)
 	{
 		NSIndexSet * selectedRowIndexes = self.selectedRowIndexes;
-		NSMutableArray *rows = [NSMutableArray arrayWithCapacity:selectedRowIndexes.count];
-		NSUInteger  rowIndex = selectedRowIndexes.firstIndex;
-		while (rowIndex != NSNotFound)
-		{
-			[rows addObject:@(rowIndex)];
-			rowIndex = [selectedRowIndexes indexGreaterThanIndex:rowIndex];
-		}
-		[self.delegate copyTableSelection:rows toPasteboard:NSPasteboard.generalPasteboard];
+		[self.delegate copyTableSelection:selectedRowIndexes toPasteboard:NSPasteboard.generalPasteboard];
 	}
 }
 
