@@ -38,8 +38,6 @@ NS_ASSUME_NONNULL_BEGIN
 // Public functions
 -(void)setArticles:(NSArray<Article *> *)articles;
 -(void)keyDown:(NSEvent *)theEvent;
-- (void)decreaseTextSize;
-- (void)increaseTextSize;
 
 @property (nonatomic) id<ArticleViewDelegate> listView;
 

@@ -73,14 +73,6 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
         // TODO
     }
 
-    func makeTextSmaller(_ sender: Any) {
-        // TODO
-    }
-
-    func makeTextLarger(_ sender: Any) {
-        // TODO
-    }
-
     // MARK: gui
 
     override func activateAddressBar() {
