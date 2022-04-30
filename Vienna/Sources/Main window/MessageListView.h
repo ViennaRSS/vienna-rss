@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 // TODO: Implement this in UnifiedDisplayView and make it non-optional
-- (BOOL)copyTableSelection:(NSArray *)rows
+- (BOOL)copyTableSelection:(NSIndexSet *)rowIndexes
               toPasteboard:(NSPasteboard *)pboard;
 
 @end
