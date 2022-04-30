@@ -173,6 +173,50 @@ class CustomWKWebView: WKWebView {
         }
         return text
     }
+
+    // MARK: Text zoom
+
+    var canMakeTextLarger: Bool {
+        guard responds(to: #selector(getter: _supportsTextZoom)),
+              responds(to: #selector(setter: _textZoomFactor)),
+              _supportsTextZoom
+        else {
+            return false
+        }
+
+        return Float(_textZoomFactor) < 3.0
+    }
+
+    var canMakeTextSmaller: Bool {
+        guard responds(to: #selector(getter: _supportsTextZoom)),
+              responds(to: #selector(setter: _textZoomFactor)),
+              _supportsTextZoom
+        else {
+            return false
+        }
+
+        return Float(_textZoomFactor) > 0.5
+    }
+
+    // swiftlint:disable private_action
+    @IBAction func makeTextLarger(_ sender: Any?) {
+        guard canMakeTextLarger
+        else {
+            return
+        }
+
+        _textZoomFactor += 0.1
+    }
+
+    // swiftlint:disable private_action
+    @IBAction func makeTextSmaller(_ sender: Any?) {
+        guard canMakeTextSmaller
+        else {
+            return
+        }
+
+        _textZoomFactor -= 0.1
+    }
 }
 
 // MARK: context menu

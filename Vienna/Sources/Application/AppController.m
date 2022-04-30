@@ -3428,11 +3428,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else if (theAction == @selector(makeTextLarger:))
 	{
-        return self.browser.activeTab != nil; //TODO: this does not really work, remove.
+        return self.browser.activeTab != nil;
 	}
 	else if (theAction == @selector(makeTextSmaller:))
 	{
-        return self.browser.activeTab != nil; //TODO: this does not really work, remove.
+        return self.browser.activeTab != nil;
 	}
 	else if (theAction == @selector(doViewColumn:))
 	{

@@ -26,6 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, setter=_setTopContentInset:) CGFloat _topContentInset;
 @property (nonatomic, setter=_setAutomaticallyAdjustsContentInsets:) BOOL _automaticallyAdjustsContentInsets;
 
+@property (readonly, nonatomic) BOOL _supportsTextZoom;
+@property (setter=_setTextZoomFactor:, nonatomic) double _textZoomFactor;
+
 @end
 
 NS_ASSUME_NONNULL_END
