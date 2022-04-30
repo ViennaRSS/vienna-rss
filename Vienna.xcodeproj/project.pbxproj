@@ -2928,6 +2928,8 @@
 				WARNING_CFLAGS = (
 					"-Wextra-semi",
 					"-Wmissing-method-return-type",
+					"-Wunreachable-code-break",
+					"-Wunreachable-code-return",
 				);
 			};
 			name = Development;
@@ -2962,6 +2964,8 @@
 				WARNING_CFLAGS = (
 					"-Wextra-semi",
 					"-Wmissing-method-return-type",
+					"-Wunreachable-code-break",
+					"-Wunreachable-code-return",
 				);
 			};
 			name = Deployment;

@@ -322,8 +322,6 @@
     } else {
         return @"";
     }
-
-    return @"";
 }
 
 - (NSString *)html {

@@ -1146,31 +1146,25 @@
     switch (filterMode) {
         case VNAFilterUnread:
             return !article.read;
-            break;
         case VNAFilterLastRefresh: {
             NSDate *date = article.createdDate;
             Preferences *prefs = [Preferences standardPreferences];
             NSComparisonResult result = [date compare:[prefs objectForKey:MAPref_LastRefreshDate]];
             return result != NSOrderedAscending;
-            break;
         }
         case VNAFilterToday:
             return [NSCalendar.currentCalendar isDateInToday:article.date];
-            break;
         case VNAFilterTime48h: {
             NSDate *twoDaysAgo = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay
                                                                         value:-2
                                                                        toDate:[NSDate date]
                                                                       options:0];
             return [article.date compare:twoDaysAgo] != NSOrderedAscending;
-            break;
         }
         case VNAFilterFlagged:
             return article.flagged;
-            break;
         case VNAFilterUnreadOrFlagged:
             return (!article.read || article.flagged);
-            break;
         default:
             return true;
     }

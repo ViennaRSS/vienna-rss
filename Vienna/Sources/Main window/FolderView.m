@@ -61,7 +61,6 @@
     switch(context) {
         case NSDraggingContextWithinApplication:
             return NSDragOperationMove|NSDragOperationGeneric;
-            break;
         default:
             return NSDragOperationCopy;
     }
