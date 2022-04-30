@@ -30,6 +30,8 @@
 
 #import "NSWorkspace+OpenWithMenu.h"
 
+@import UniformTypeIdentifiers;
+
 @implementation NSWorkspace (OpenWithMenu)
 
 #pragma mark - Handler apps
@@ -140,8 +142,12 @@
         NSOpenPanel *oPanel = [NSOpenPanel openPanel];
         [oPanel setAllowsMultipleSelection:NO];
         [oPanel setCanChooseDirectories:NO];
-        [oPanel setAllowedFileTypes:@[(NSString *)kUTTypeApplicationBundle]];
-        
+        if (@available(macOS 11, *)) {
+            oPanel.allowedContentTypes = @[UTTypeApplicationBundle];
+        } else {
+            oPanel.allowedFileTypes = @[(__bridge NSString *)kUTTypeApplicationBundle];
+        };
+
         // Set Applications folder as default directory
         NSArray *applicationFolderPaths = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationDirectory inDomains:NSLocalDomainMask];
         if ([applicationFolderPaths count]) {

@@ -20,6 +20,8 @@
 
 #import "DownloadItem.h"
 
+@import UniformTypeIdentifiers;
+
 static NSString *const VNACodingKeyFilename = @"filename";
 static NSString *const VNACodingKeySize = @"size";
 
@@ -43,7 +45,12 @@ static NSString *const VNACodingKeySize = @"size";
 {
     if (!_image) {
         NSString *extension = self.filename.pathExtension;
-        _image = [NSWorkspace.sharedWorkspace iconForFileType:extension];
+        if (@available(macOS 11, *)) {
+            UTType *contentType = [UTType typeWithFilenameExtension:extension];
+            _image = [NSWorkspace.sharedWorkspace iconForContentType:contentType];
+        } else {
+            _image = [NSWorkspace.sharedWorkspace iconForFileType:extension];
+        }
         if (!_image.valid) {
             _image = nil;
         } else {

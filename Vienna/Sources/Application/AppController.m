@@ -21,6 +21,7 @@
 #import "AppController.h"
 
 @import os.log;
+@import UniformTypeIdentifiers;
 
 #import "AppController+Notifications.h"
 #import "Import.h"
@@ -879,13 +880,32 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[self.mainWindow orderFront:self];
     }
 	
-	// Launch in the foreground or background as needed
-	NSWorkspaceLaunchOptions lOptions = openLinksInBackground ? (NSWorkspaceLaunchWithoutActivation | NSWorkspaceLaunchDefault) : NSWorkspaceLaunchDefault;
-	[[NSWorkspace sharedWorkspace] openURLs:urlArray
-					withAppBundleIdentifier:NULL
-									options:lOptions
-			 additionalEventParamDescriptor:NULL
-						  launchIdentifiers:NULL];
+    if (@available(macOS 10.15, *)) {
+        NSWorkspaceOpenConfiguration *configuration = [NSWorkspaceOpenConfiguration configuration];
+        configuration.activates = !openLinksInBackground;
+        for (NSURL *url in urlArray) {
+            if (!url) {
+                continue;
+            }
+            [NSWorkspace.sharedWorkspace openURL:url
+                                   configuration:configuration
+                               completionHandler:^(__unused NSRunningApplication * _Nullable app,
+                                                   NSError * _Nullable error) {
+                if (error) {
+                    os_log_error(VNA_LOG,
+                                 "Could not open URL %@ in external browser. Reason: %{public}@",
+                                 url.path, error.localizedDescription);
+                }
+            }];
+        }
+    } else {
+        NSWorkspaceLaunchOptions lOptions = openLinksInBackground ? (NSWorkspaceLaunchWithoutActivation | NSWorkspaceLaunchDefault) : NSWorkspaceLaunchDefault;
+        [NSWorkspace.sharedWorkspace openURLs:urlArray
+                      withAppBundleIdentifier:nil
+                                      options:lOptions
+               additionalEventParamDescriptor:nil
+                            launchIdentifiers:nil];
+    }
 }
 
 /* openURLInDefaultBrowser
@@ -1115,7 +1135,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     }
     
     panel.accessoryView = accessoryController.view;
-    panel.allowedFileTypes = @[@"opml"];
+    if (@available(macOS 11, *)) {
+        panel.allowedContentTypes = @[[UTType typeWithFilenameExtension:@"opml"]];
+    } else {
+        panel.allowedFileTypes = @[@"opml"];
+    }
     [panel beginSheetModalForWindow:self.mainWindow completionHandler:^(NSInteger returnCode) {
         if (returnCode == NSModalResponseOK)
         {
@@ -1884,7 +1908,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)doOpenScriptsFolder:(id)sender
 {
-	[[NSWorkspace sharedWorkspace] openFile:[Preferences standardPreferences].scriptsFolder];
+    NSURL *url = [NSURL fileURLWithPath:Preferences.standardPreferences.scriptsFolder
+                            isDirectory:YES];
+    [NSWorkspace.sharedWorkspace openURL:url];
 }
 
 /* doSelectScript
@@ -3229,13 +3255,29 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier
 {
 	// Is our target application running? If not, we'll launch it.
-	if ([NSRunningApplication runningApplicationsWithBundleIdentifier:externalEditorBundleIdentifier].count == 0)
-	{
-		[[NSWorkspace sharedWorkspace] launchAppWithBundleIdentifier:externalEditorBundleIdentifier
-															 options:NSWorkspaceLaunchWithoutActivation
-									  additionalEventParamDescriptor:NULL
-													launchIdentifier:nil];
-	}
+    if ([NSRunningApplication runningApplicationsWithBundleIdentifier:externalEditorBundleIdentifier].count == 0) {
+        NSWorkspace *workspace = NSWorkspace.sharedWorkspace;
+        if (@available(macOS 10.15, *)) {
+            NSURL *appURL = [workspace URLForApplicationWithBundleIdentifier:externalEditorBundleIdentifier];
+            NSWorkspaceOpenConfiguration *configuration = [NSWorkspaceOpenConfiguration configuration];
+            configuration.activates = NO;
+            [NSWorkspace.sharedWorkspace openApplicationAtURL:appURL
+                                                configuration:configuration
+                                            completionHandler:^(__unused NSRunningApplication * _Nullable app,
+                                                                NSError * _Nullable error) {
+                if (error) {
+                    os_log_error(VNA_LOG,
+                                 "Could not open app with identifier %{public}@. Reason: %{public}@",
+                                 appURL.path, error.localizedDescription);
+                }
+            }];
+        } else {
+            [workspace launchAppWithBundleIdentifier:externalEditorBundleIdentifier
+                                             options:NSWorkspaceLaunchWithoutActivation
+                      additionalEventParamDescriptor:NULL
+                                    launchIdentifier:nil];
+        }
+    }
 	
 	// If the active tab is a web view, blog the URL
     id<Tab> activeBrowserTab = self.browser.activeTab;
