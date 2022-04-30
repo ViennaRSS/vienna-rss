@@ -313,8 +313,8 @@
             [self handleLinkSelector:self];
             return;
         }
+        [self setDefaultLinksHandler:[appToPathMap valueForKey:selectedItem.title]];
     }
-    [self setDefaultLinksHandler:[appToPathMap valueForKey:selectedItem.title]];
     [self refreshLinkHandler];
 }
 
@@ -332,7 +332,6 @@
     panel.allowedFileTypes = @[NSFileTypeForHFSTypeCode('APPL')];
     [panel beginSheetModalForWindow:prefPaneWindow completionHandler:^(NSInteger returnCode) {
         [panel orderOut:self];
-        NSWindow * prefPaneWindow = self->linksHandler.window;
         [prefPaneWindow makeKeyAndOrderFront:self];
         
         if (returnCode == NSModalResponseOK)

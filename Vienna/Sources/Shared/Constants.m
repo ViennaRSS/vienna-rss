@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-@import Cocoa;
+#import "Constants.h"
 
 NSString * MA_DefaultUserAgentString = @"%@/%@ (Macintosh; Intel macOS %@)";
 NSString * MA_BrowserUserAgentString = @"(Macintosh; Intel Mac OS X %@) AppleWebKit/%@ (KHTML, like Gecko) Version/%@ Safari/604.1.38 %@/%@";
@@ -73,7 +73,7 @@ NSString * MAPref_ShouldSaveFeedSourceBackup = @"ShouldSaveFeedSourceBackup";
 NSString * MAPref_SearchMethod = @"SearchMethod";
 NSString * MAPref_SyncGoogleReader = @"SyncGoogleReader";
 NSString * MAPref_GoogleNewSubscription = @"GoogleNewSubscription";
-NSString * MAPref_ConcurrentDownloads = @"ConcurrentDownloads"; 
+NSString * MAPref_ConcurrentDownloads = @"ConcurrentDownloads";
 NSString * MAPref_SyncServer = @"SyncServer";
 NSString * MAPref_SyncingUser = @"SyncingUser";
 NSString * MAPref_SyncingAppId = @"SyncingAppId";
@@ -87,15 +87,15 @@ NSString *const MAPref_Deprecated_ArticleListSortOrders = @"ArticleSortDescripto
 NSString *const MAPref_Deprecated_DownloadItemList = @"DownloadsList";
 NSString *const MAPref_Deprecated_FolderListFont = @"FolderFont";
 
-const NSInteger MA_Default_BackTrackQueueSize = 20;
-const NSInteger MA_Default_RefreshThreads = 20;
-const NSInteger MA_Default_MinimumFontSize = 9;
-const float MA_Default_Read_Interval = 0.5;
-const NSInteger MA_Default_AutoExpireDuration = 0;
-const NSInteger MA_Default_Check_Frequency = 10800;
-const CGFloat MA_Default_Main_Window_Min_Width = 700.0;
-const CGFloat MA_Default_Main_Window_Min_Height = 350.0;
-const NSInteger MA_Default_ConcurrentDownloads = 10;
+NSInteger const MA_Default_BackTrackQueueSize = 20;
+NSInteger const MA_Default_RefreshThreads = 20;
+NSInteger const MA_Default_MinimumFontSize = 9;
+float const MA_Default_Read_Interval = 0.5;
+NSInteger const MA_Default_AutoExpireDuration = 0;
+NSInteger const MA_Default_Check_Frequency = 10800;
+CGFloat const MA_Default_Main_Window_Min_Width = 700.0;
+CGFloat const MA_Default_Main_Window_Min_Height = 350.0;
+NSInteger const MA_Default_ConcurrentDownloads = 10;
 
 // Constants for External Weblog Editor Interface according to http://ranchero.com/netnewswire/developers/externalinterface.php
 // We are not using all of them yet, but they might become useful in the future.

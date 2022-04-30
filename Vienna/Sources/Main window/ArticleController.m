@@ -20,7 +20,7 @@
 
 #import "ArticleController.h"
 
-#import <os/log.h>
+@import os.log;
 
 #import "AppController.h"
 #import "Preferences.h"

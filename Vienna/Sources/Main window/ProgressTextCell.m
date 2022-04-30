@@ -20,7 +20,6 @@
 
 #import "ProgressTextCell.h"
 
-#define PROGRESS_INDICATOR_LEFT_MARGIN	2
 #define PROGRESS_INDICATOR_DIMENSION 16
 #define NO_ROW -1
 

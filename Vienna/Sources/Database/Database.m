@@ -20,7 +20,7 @@
 
 #import "Database.h"
 
-#import <os/log.h>
+@import os.log;
 
 #import "Database+Migration.h"
 #import "Preferences.h"

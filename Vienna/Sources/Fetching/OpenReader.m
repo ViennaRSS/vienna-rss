@@ -29,7 +29,7 @@
 
 #import "OpenReader.h"
 
-#import <os/log.h>
+@import os.log;
 
 #import "URLRequestExtensions.h"
 #import "Folder.h"
@@ -46,14 +46,14 @@ static NSString *LoginBaseURL = @"https://%@/accounts/ClientLogin?accountType=GO
 static NSString *ClientName = @"ViennaRSS";
 
 // host specific variables
-NSString *openReaderHost;
-NSString *username;
-NSString *password;
-NSString *APIBaseURL;
-BOOL hostSendsHexaItemId;
-BOOL hostRequiresSParameter;
-BOOL hostRequiresHexaForFeedId;
-BOOL hostRequiresInoreaderHeaders;
+static NSString *openReaderHost;
+static NSString *username;
+static NSString *password;
+static NSString *APIBaseURL;
+static BOOL hostSendsHexaItemId;
+static BOOL hostRequiresSParameter;
+static BOOL hostRequiresHexaForFeedId;
+static BOOL hostRequiresInoreaderHeaders;
 
 typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     notAuthenticated = 0,

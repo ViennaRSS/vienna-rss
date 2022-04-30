@@ -36,7 +36,7 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 @property(nonatomic) FMDatabaseQueue * databaseQueue;
 @property (copy, nonatomic) NSString *searchString;
 
-@property (class, readonly) Database *sharedManager NS_SWIFT_NAME(shared);
+@property (class, readonly, nonatomic) Database *sharedManager NS_SWIFT_NAME(shared);
 
 // General database functions
 - (instancetype)initWithDatabaseAtPath:(NSString *)dbPath /*NS_DESIGNATED_INITIALIZER*/;

@@ -19,7 +19,7 @@
 
 #import "NSKeyedArchiver+Compatibility.h"
 
-#import <os/log.h>
+@import os.log;
 
 #define VNA_LOG os_log_create("--", "KeyedArchiver")
 

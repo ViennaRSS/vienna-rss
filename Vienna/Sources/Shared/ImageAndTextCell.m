@@ -30,6 +30,8 @@
  */
 @implementation ImageAndTextCell
 
+@synthesize image = image;
+
 /* init
  * Initialise a default instance of our cell.
  */
@@ -78,22 +80,6 @@
 -(NSInteger)offset
 {
 	return offset;
-}
-
-/* setImage
- * Set the new image for the cell.
- */
--(void)setImage:(NSImage *)anImage
-{
-	image = anImage;
-}
-
-/* image
- * Return the current image.
- */
--(NSImage *)image
-{
-	return image;
 }
 
 /* setAuxiliaryImage

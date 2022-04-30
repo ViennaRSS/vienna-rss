@@ -20,9 +20,8 @@
 
 #import "Preferences.h"
 
+@import os.log;
 @import Sparkle;
-
-#import <os/log.h>
 
 #import "Article.h"
 #import "Constants.h"
@@ -37,13 +36,13 @@
 #define VNA_LOG os_log_create("--", "Preferences")
 
 // Initial paths
-NSString * MA_DefaultStyleName = @"Default";
-NSString * MA_Database_Name = @"messages.db";
-NSString * MA_ImagesFolder_Name = @"Images";
-NSString * MA_StylesFolder_Name = @"Styles";
-NSString * MA_ScriptsFolder_Name = @"Scripts";
-NSString * MA_PluginsFolder_Name = @"Plugins";
-NSString * MA_FeedSourcesFolder_Name = @"Sources";
+static NSString * const MA_DefaultStyleName = @"Default";
+static NSString * const MA_Database_Name = @"messages.db";
+static NSString * const MA_ImagesFolder_Name = @"Images";
+static NSString * const MA_StylesFolder_Name = @"Styles";
+static NSString * const MA_ScriptsFolder_Name = @"Scripts";
+static NSString * const MA_PluginsFolder_Name = @"Plugins";
+static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 
 // NSNotificationCenter string constants
 NSString * const kMA_Notify_MinimumFontSizeChange = @"MA_Notify_MinimumFontSizeChange";

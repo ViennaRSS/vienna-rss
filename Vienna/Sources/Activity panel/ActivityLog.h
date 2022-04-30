@@ -31,7 +31,7 @@ extern NSNotificationName const activityLogUpdatedNotification;
 /**
  The default activity log.
  */
-@property (class, readonly) ActivityLog *defaultLog;
+@property (class, readonly, nonatomic) ActivityLog *defaultLog;
 
 /**
  An array of activity items.
