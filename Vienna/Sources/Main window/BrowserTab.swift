@@ -312,12 +312,12 @@ extension BrowserTab: Tab {
 
     @objc
     func decreaseTextSize() {
-        // TODO: apple has not implemented this on macOS. There is a property webkit-text-size-adjust on iOS though.
+        webView.makeTextSmaller(self)
     }
 
     @objc
     func increaseTextSize() {
-        // TODO: apple has not implemented this on macOS. There is a property webkit-text-size-adjust on iOS though.
+        webView.makeTextLarger(self)
     }
 
     func printPage() {

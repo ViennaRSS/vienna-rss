@@ -80,11 +80,11 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
      }
 
     func decreaseTextSize() {
-        // TODO
+        makeTextSmaller(self)
     }
 
     func increaseTextSize() {
-        // TODO
+        makeTextLarger(self)
     }
 
     // MARK: CustomWKUIDelegate
