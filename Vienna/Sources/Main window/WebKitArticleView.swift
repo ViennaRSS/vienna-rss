@@ -48,6 +48,9 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
     @objc
     init(frame: NSRect) {
         super.init(frame: frame, configuration: WKWebViewConfiguration())
+        if responds(to: #selector(setter: _textZoomFactor)) {
+            _textZoomFactor = Preferences.standard.textSizeMultiplier
+        }
         contextMenuProvider = self
     }
 
@@ -89,6 +92,27 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
 
     func increaseTextSize() {
         makeTextLarger(self)
+    }
+
+    override func makeTextStandardSize(_ sender: Any?) {
+        super.makeTextStandardSize(sender)
+        if responds(to: #selector(getter: _textZoomFactor)) {
+            Preferences.standard.textSizeMultiplier = _textZoomFactor
+        }
+    }
+
+    override func makeTextLarger(_ sender: Any?) {
+        super.makeTextLarger(sender)
+        if responds(to: #selector(getter: _textZoomFactor)) {
+            Preferences.standard.textSizeMultiplier = _textZoomFactor
+        }
+    }
+
+    override func makeTextSmaller(_ sender: Any?) {
+        super.makeTextSmaller(sender)
+        if responds(to: #selector(getter: _textZoomFactor)) {
+            Preferences.standard.textSizeMultiplier = _textZoomFactor
+        }
     }
 
     // MARK: CustomWKUIDelegate
