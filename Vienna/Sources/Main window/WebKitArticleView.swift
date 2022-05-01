@@ -79,6 +79,10 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
         load(URLRequest(url: URL.blank))
      }
 
+    func resetTextSize() {
+        makeTextStandardSize(self)
+    }
+
     func decreaseTextSize() {
         makeTextSmaller(self)
     }

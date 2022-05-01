@@ -181,6 +181,18 @@ class CustomWKWebView: WKWebView {
 
     // MARK: Text zoom
 
+    // swiftlint:disable private_action
+    @IBAction func makeTextStandardSize(_ sender: Any?) {
+        guard responds(to: #selector(getter: _supportsTextZoom)),
+              responds(to: #selector(setter: _textZoomFactor)),
+              _supportsTextZoom
+        else {
+            return
+        }
+
+        _textZoomFactor = 1.0
+    }
+
     var canMakeTextLarger: Bool {
         guard responds(to: #selector(getter: _supportsTextZoom)),
               responds(to: #selector(setter: _textZoomFactor)),

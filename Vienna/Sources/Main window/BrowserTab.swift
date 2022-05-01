@@ -311,6 +311,11 @@ extension BrowserTab: Tab {
     }
 
     @objc
+    func resetTextSize() {
+        webView.makeTextStandardSize(self)
+    }
+
+    @objc
     func decreaseTextSize() {
         webView.makeTextSmaller(self)
     }
