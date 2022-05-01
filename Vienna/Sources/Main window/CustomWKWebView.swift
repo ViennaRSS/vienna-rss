@@ -195,6 +195,7 @@ class CustomWKWebView: WKWebView {
 
     var canMakeTextLarger: Bool {
         guard responds(to: #selector(getter: _supportsTextZoom)),
+              responds(to: #selector(getter: _textZoomFactor)),
               responds(to: #selector(setter: _textZoomFactor)),
               _supportsTextZoom
         else {
@@ -206,6 +207,7 @@ class CustomWKWebView: WKWebView {
 
     var canMakeTextSmaller: Bool {
         guard responds(to: #selector(getter: _supportsTextZoom)),
+              responds(to: #selector(getter: _textZoomFactor)),
               responds(to: #selector(setter: _textZoomFactor)),
               _supportsTextZoom
         else {
