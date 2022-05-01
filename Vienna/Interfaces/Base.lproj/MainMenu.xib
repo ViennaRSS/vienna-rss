@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ViennaApp">
@@ -559,6 +559,14 @@ CA
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="1088">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Actual Size" keyEquivalent="0" id="OiG-oc-aVj">
+                                <attributedString key="userComments">
+                                    <fragment content="This string is also used in Safari"/>
+                                </attributedString>
+                                <connections>
+                                    <action selector="makeTextStandardSize:" target="-1" id="waF-l7-Sgn"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Bigger Text" keyEquivalent="+" id="1084">
                                 <connections>

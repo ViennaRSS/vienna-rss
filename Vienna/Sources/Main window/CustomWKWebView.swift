@@ -53,10 +53,15 @@ class CustomWKWebView: WKWebView {
         // preferences
         let prefs = configuration.preferences
         prefs.javaScriptCanOpenWindowsAutomatically = true
-        prefs._fullScreenEnabled = true
+
+        if prefs.responds(to: #selector(setter: WKPreferences._fullScreenEnabled)) {
+            prefs._fullScreenEnabled = true
+        }
 
         #if DEBUG
-        prefs._developerExtrasEnabled = true
+        if prefs.responds(to: #selector(setter: WKPreferences._developerExtrasEnabled)) {
+            prefs._developerExtrasEnabled = true
+        }
         #endif
 
         useJavaScriptObservation = Preferences.standard.observe(\.useJavaScript, options: [.initial, .new]) { _, change  in
@@ -65,8 +70,8 @@ class CustomWKWebView: WKWebView {
             }
             if #available(macOS 11, *) {
                 configuration.defaultWebpagePreferences.allowsContentJavaScript = newValue
-            } else {
-                 configuration._allowsJavaScriptMarkup = newValue
+            } else if configuration.responds(to: #selector(setter: WKWebViewConfiguration._allowsJavaScriptMarkup)) {
+                configuration._allowsJavaScriptMarkup = newValue
             }
         }
 
@@ -172,6 +177,64 @@ class CustomWKWebView: WKWebView {
             }
         }
         return text
+    }
+
+    // MARK: Text zoom
+
+    // swiftlint:disable private_action
+    @IBAction func makeTextStandardSize(_ sender: Any?) {
+        guard responds(to: #selector(getter: _supportsTextZoom)),
+              responds(to: #selector(setter: _textZoomFactor)),
+              _supportsTextZoom
+        else {
+            return
+        }
+
+        _textZoomFactor = 1.0
+    }
+
+    var canMakeTextLarger: Bool {
+        guard responds(to: #selector(getter: _supportsTextZoom)),
+              responds(to: #selector(getter: _textZoomFactor)),
+              responds(to: #selector(setter: _textZoomFactor)),
+              _supportsTextZoom
+        else {
+            return false
+        }
+
+        return Float(_textZoomFactor) < 3.0
+    }
+
+    var canMakeTextSmaller: Bool {
+        guard responds(to: #selector(getter: _supportsTextZoom)),
+              responds(to: #selector(getter: _textZoomFactor)),
+              responds(to: #selector(setter: _textZoomFactor)),
+              _supportsTextZoom
+        else {
+            return false
+        }
+
+        return Float(_textZoomFactor) > 0.5
+    }
+
+    // swiftlint:disable private_action
+    @IBAction func makeTextLarger(_ sender: Any?) {
+        guard canMakeTextLarger
+        else {
+            return
+        }
+
+        _textZoomFactor += 0.1
+    }
+
+    // swiftlint:disable private_action
+    @IBAction func makeTextSmaller(_ sender: Any?) {
+        guard canMakeTextSmaller
+        else {
+            return
+        }
+
+        _textZoomFactor -= 0.1
     }
 }
 

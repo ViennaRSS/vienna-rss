@@ -128,8 +128,11 @@ extension BrowserTab {
         if let addressBarContainer = addressBarContainer {
             let distanceToTop = addressBarContainer.isHidden ? 0 : addressBarContainer.frame.height
             if #available(macOS 10.14, *) {
-                webView._automaticallyAdjustsContentInsets = false
-                webView._topContentInset = distanceToTop
+                if webView.responds(to: #selector(setter: WKWebView._automaticallyAdjustsContentInsets)),
+                   webView.responds(to: #selector(setter: WKWebView._topContentInset)) {
+                    webView._automaticallyAdjustsContentInsets = false
+                    webView._topContentInset = distanceToTop
+                }
             } else {
                 self.webViewTopConstraint.constant = distanceToTop
             }

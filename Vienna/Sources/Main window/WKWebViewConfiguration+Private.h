@@ -19,12 +19,10 @@
 
 @import Foundation;
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface WKWebViewConfiguration (Private)
 
-@property (setter=_setAllowsJavaScriptMarkup:, nonatomic) BOOL _allowsJavaScriptMarkup;
+// This is implemented by WKWebpagePreferences.allowsContentJavaScript as of
+// macOS 11.
+@property (setter=_setAllowsJavaScriptMarkup:, nonatomic) BOOL _allowsJavaScriptMarkup NS_DEPRECATED_MAC(10.12, 11);
 
 @end
-
-NS_ASSUME_NONNULL_END

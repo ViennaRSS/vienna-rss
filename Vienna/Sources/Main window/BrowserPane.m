@@ -724,15 +724,6 @@
 	return canGoForward;
 }
 
-- (void)decreaseTextSize {
-	[self.webPane makeTextSmaller:nil];
-}
-
-
-- (void)increaseTextSize {
-	[self.webPane makeTextLarger:nil];
-}
-
 - (void)printPage {
 	[self.webPane printDocument:self];
 }

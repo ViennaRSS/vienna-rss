@@ -3426,13 +3426,17 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			[menuItem setTitle:NSLocalizedString(@"Show Filter Bar", nil)];
 		return isMainWindowVisible && isAnyArticleView;
 	}
+	else if (theAction == @selector(makeTextStandardSize:))
+	{
+        return self.browser.activeTab != nil;
+	}
 	else if (theAction == @selector(makeTextLarger:))
 	{
-        return self.browser.activeTab != nil; //TODO: this does not really work, remove.
+        return self.browser.activeTab != nil;
 	}
 	else if (theAction == @selector(makeTextSmaller:))
 	{
-        return self.browser.activeTab != nil; //TODO: this does not really work, remove.
+        return self.browser.activeTab != nil;
 	}
 	else if (theAction == @selector(doViewColumn:))
 	{

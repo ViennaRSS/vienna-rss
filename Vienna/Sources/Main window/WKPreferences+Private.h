@@ -1,5 +1,5 @@
 //
-//  NSObject+WebKit_Private_h.h
+//  WKPreferences_Private.h
 //  Vienna
 //
 //  Copyright 2020 Tassilo Karge
@@ -19,8 +19,6 @@
 
 @import Foundation;
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface WKPreferences (Private)
 
 #ifdef DEBUG
@@ -30,5 +28,3 @@ NS_ASSUME_NONNULL_BEGIN
 @property (setter=_setFullScreenEnabled:, nonatomic) BOOL _fullScreenEnabled;
 
 @end
-
-NS_ASSUME_NONNULL_END
