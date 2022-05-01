@@ -1888,9 +1888,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)handleTabChange:(NSNotification *)nc
 {
-	NSView<BaseView> * newView = nc.object;
-	if (newView == ((NSView<BaseView> *)self.browser.primaryTab.view))
+	id<Tab> activeBrowserTab = self.browser.activeTab;
+	if (activeBrowserTab == nil)
 	{
+		//we are in the article view
 		if (self.selectedArticle == nil)
 			[self.mainWindow makeFirstResponder:self.foldersTree.mainView];
 		else
@@ -1898,14 +1899,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else
 	{
-		BrowserPane * webPane = (BrowserPane *)newView;
-		[self.mainWindow makeFirstResponder:webPane.mainView];
+		[activeBrowserTab activateWebView];
 	}
 	[self updateStatusBarFilterButtonVisibility];
 	[self updateSearchPlaceholderAndSearchMethod];
 }
 
-/* handleTabChange
+/* handleTabCountChange
  * Handle a change in the number of tabs.
  */
 - (void)handleTabCountChange:(NSNotification *)nc
