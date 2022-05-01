@@ -4,6 +4,8 @@
 #import "ArticleListView.h"
 #import "ArticleViewDelegate.h"
 #import "DisclosureView.h"
+#import "Feed.h"
+#import "FeedItem.h"
 #import "FolderView.h"
 #import "HelperFunctions.h"
 #import "NSFileManager+Paths.h"

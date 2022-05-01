@@ -19,14 +19,10 @@
 
 @import Foundation;
 
+@class VNAXMLFeed;
+
 @interface VNAXMLFeedParser : NSObject
 
-@property (readonly, nonatomic) NSString *title;
-@property (readonly, nonatomic) NSString *feedDescription;
-@property (readonly, nonatomic) NSString *link;
-@property (readonly, nonatomic) NSDate *lastModified;
-@property (readonly, nonatomic) NSArray *items;
-
-- (BOOL)parseXMLData:(NSData *)xmlData;
+- (VNAXMLFeed *)feedWithXMLData:(NSData *)xmlData error:(NSError **)error;
 
 @end

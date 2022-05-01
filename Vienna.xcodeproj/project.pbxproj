@@ -198,6 +198,7 @@
 		F6832F681F10F5DA007920D4 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F661F10F5DA007920D4 /* MainWindowController.xib */; };
 		F685D24C292460210097C0D3 /* Predicates.strings in Resources */ = {isa = PBXBuildFile; fileRef = F685D24A292460210097C0D3 /* Predicates.strings */; };
 		F68792872700A678009B7BB5 /* SecurityScopedBookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68792862700A678009B7BB5 /* SecurityScopedBookmark.swift */; };
+		F689820A281DD62B0010F4C5 /* XMLFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F6898209281DD62B0010F4C5 /* XMLFeed.m */; };
 		F68FE3A6270F6DC700C89D16 /* UnarchiverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68FE3A5270F6DC700C89D16 /* UnarchiverTests.swift */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = F69140E31E71B94200D51BFF /* AppController+Notifications.m */; };
 		F692559A2572A32900D387D8 /* MMTabBarView in Frameworks */ = {isa = PBXBuildFile; productRef = F69255992572A32900D387D8 /* MMTabBarView */; };
@@ -219,6 +220,8 @@
 		F6B355DB256025D3008CA1ED /* PreferenceTabViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B355DA256025D3008CA1ED /* PreferenceTabViewItem.swift */; };
 		F6B3561525616313008CA1ED /* DownloadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B3561425616313008CA1ED /* DownloadItem.m */; };
 		F6B7BC3624A2A9A40051D76F /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = F6B7BC3524A2A9A40051D76F /* FMDB */; };
+		F6C9DA70271BB3BB00FC3027 /* RSSFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C9DA6F271BB3BB00FC3027 /* RSSFeed.m */; };
+		F6C9DA73271BB55000FC3027 /* AtomFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C9DA72271BB55000FC3027 /* AtomFeed.m */; };
 		F6CE47131E7E3DCB0045EAD7 /* ActivityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CE47121E7E3DCB0045EAD7 /* ActivityItem.m */; };
 		F6D0089C1EF95C9D008F2D3B /* InfoPanelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6D0089B1EF95C9D008F2D3B /* InfoPanelManager.m */; };
 		F6D282621F1A87A900FF865E /* PopUpButtonToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D282611F1A87A900FF865E /* PopUpButtonToolbarItem.swift */; };
@@ -679,6 +682,7 @@
 		F62CE1C0209EFD1B008F1D19 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = de; path = de.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F633157526ED73CB008A3673 /* URLFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = URLFormatter.swift; sourceTree = "<group>"; };
 		F633157726EE3D06008A3673 /* URLFormatterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = URLFormatterTests.swift; sourceTree = "<group>"; };
+		F63503F32960846D006F1F76 /* FeedItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedItem.h; sourceTree = "<group>"; };
 		F6352BB81E2706DD005CD307 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6352BB91E2706E1005CD307 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoWindow.strings; sourceTree = "<group>"; };
 		F6352BBA1E2706EB005CD307 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoWindow.strings"; sourceTree = "<group>"; };
@@ -732,6 +736,9 @@
 		F68792862700A678009B7BB5 /* SecurityScopedBookmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityScopedBookmark.swift; sourceTree = "<group>"; };
 		F6879288270117AF009B7BB5 /* WKWebViewConfiguration+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WKWebViewConfiguration+Private.h"; sourceTree = "<group>"; };
 		F6893969209EFD9C007D36C0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = it; path = it.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		F6898208281DD62B0010F4C5 /* XMLFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMLFeed.h; sourceTree = "<group>"; };
+		F6898209281DD62B0010F4C5 /* XMLFeed.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XMLFeed.m; sourceTree = "<group>"; };
+		F6898213281EE7650010F4C5 /* Feed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Feed.h; sourceTree = "<group>"; };
 		F68F724A1E2A0937007FADA5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F68FE3A5270F6DC700C89D16 /* UnarchiverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnarchiverTests.swift; sourceTree = "<group>"; };
 		F69140E21E71B94200D51BFF /* AppController+Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppController+Notifications.h"; sourceTree = "<group>"; };
@@ -881,6 +888,10 @@
 		F6B3561425616313008CA1ED /* DownloadItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadItem.m; sourceTree = "<group>"; };
 		F6B76B43284B492E009961AD /* NSPredicateEditor+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSPredicateEditor+Private.h"; sourceTree = "<group>"; };
 		F6C3F9BA209EFD4E009936CC /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = eu; path = eu.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		F6C9DA6E271BB3BB00FC3027 /* RSSFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSFeed.h; sourceTree = "<group>"; };
+		F6C9DA6F271BB3BB00FC3027 /* RSSFeed.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSFeed.m; sourceTree = "<group>"; };
+		F6C9DA71271BB55000FC3027 /* AtomFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AtomFeed.h; sourceTree = "<group>"; };
+		F6C9DA72271BB55000FC3027 /* AtomFeed.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AtomFeed.m; sourceTree = "<group>"; };
 		F6CB562F209EFDB5002EE27B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ja; path = ja.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F6CE47111E7E3DBD0045EAD7 /* ActivityItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityItem.h; sourceTree = "<group>"; };
 		F6CE47121E7E3DCB0045EAD7 /* ActivityItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityItem.m; sourceTree = "<group>"; };
@@ -1445,6 +1456,17 @@
 			path = Files;
 			sourceTree = "<group>";
 		};
+		F6C9DA74271BBA4800FC3027 /* Feed types */ = {
+			isa = PBXGroup;
+			children = (
+				F6C9DA71271BB55000FC3027 /* AtomFeed.h */,
+				F6C9DA72271BB55000FC3027 /* AtomFeed.m */,
+				F6C9DA6E271BB3BB00FC3027 /* RSSFeed.h */,
+				F6C9DA6F271BB3BB00FC3027 /* RSSFeed.m */,
+			);
+			name = "Feed types";
+			sourceTree = "<group>";
+		};
 		F6D7FED61F1CDD88004F095A /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
@@ -1612,7 +1634,12 @@
 			children = (
 				AA3281A3084161EB00A7AD5A /* XMLFeedParser.h */,
 				AA3281A4084161EB00A7AD5A /* XMLFeedParser.m */,
+				F6898213281EE7650010F4C5 /* Feed.h */,
+				F63503F32960846D006F1F76 /* FeedItem.h */,
+				F6898208281DD62B0010F4C5 /* XMLFeed.h */,
+				F6898209281DD62B0010F4C5 /* XMLFeed.m */,
 				B8B9D6D223685C7400EAE65C /* XMLFeedItem.swift */,
+				F6C9DA74271BBA4800FC3027 /* Feed types */,
 				03B35B821B75E9E0001DB06D /* NSDate+Vienna.h */,
 				03B35B831B75E9E0001DB06D /* NSDate+Vienna.m */,
 				F615824223834D6500D2BD41 /* FeedDiscoverer.swift */,
@@ -2120,6 +2147,7 @@
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				2FDF6FC3218A266A002F77E9 /* TabbedBrowserViewController.swift in Sources */,
 				03A131B31AA54EAC0037471F /* Database+Migration.m in Sources */,
+				F689820A281DD62B0010F4C5 /* XMLFeed.m in Sources */,
 				AA26F4E30604927300FE7994 /* Folder.m in Sources */,
 				AA26F4ED0604927300FE7994 /* Database.m in Sources */,
 				2F06504C2506B5B500468A0E /* LoadingIndicator.swift in Sources */,
@@ -2130,6 +2158,7 @@
 				2F88B2A62545BB450067EEA6 /* ArticleConverter.m in Sources */,
 				AA36CD7C06100692001E33A4 /* Field.m in Sources */,
 				AA8C72F60641DE1F00649BA2 /* Criteria.m in Sources */,
+				F6C9DA70271BB3BB00FC3027 /* RSSFeed.m in Sources */,
 				0349813E1A206FD900014F29 /* GeneralPreferencesViewController.m in Sources */,
 				2F88B2AD2545BCA90067EEA6 /* WebViewArticleConverter.swift in Sources */,
 				03B35B841B75E9E0001DB06D /* NSDate+Vienna.m in Sources */,
@@ -2157,6 +2186,7 @@
 				F6D282621F1A87A900FF865E /* PopUpButtonToolbarItem.swift in Sources */,
 				435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */,
 				F6D0089C1EF95C9D008F2D3B /* InfoPanelManager.m in Sources */,
+				F6C9DA73271BB55000FC3027 /* AtomFeed.m in Sources */,
 				4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */,
 				2FEA5829291FD511008C42D3 /* Criteria+NSPredicate.swift in Sources */,
 				2F82DCB725CEFC2800F00EE8 /* URL+Blank.swift in Sources */,

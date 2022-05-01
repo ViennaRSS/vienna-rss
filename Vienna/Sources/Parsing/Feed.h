@@ -1,8 +1,8 @@
 //
-//  XMLFeedItem.swift
+//  Feed.h
 //  Vienna
 //
-//  Copyright 2019, 2021-2022
+//  Copyright 2022 Eitot
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -17,17 +17,21 @@
 //  limitations under the License.
 //
 
-import Foundation
+@import Foundation;
 
-@objc(VNAXMLFeedItem)
-class XMLFeedItem: NSObject, FeedItem {
+@protocol VNAFeedItem;
 
-    @objc var guid = ""
-    @objc var title: String?
-    @objc var authors: String?
-    @objc var content = ""
-    @objc var modifiedDate: Date?
-    @objc var url: String?
-    @objc var enclosure: String?
+NS_ASSUME_NONNULL_BEGIN
 
-}
+NS_SWIFT_NAME(Feed)
+@protocol VNAFeed <NSObject>
+
+@property (copy, nonatomic) NSString *title;
+@property (nullable, copy, nonatomic) NSString *feedDescription;
+@property (nullable, copy, nonatomic) NSString *homePageURL;
+@property (nullable, nonatomic) NSDate *modifiedDate;
+@property (copy, nonatomic) NSArray<id<VNAFeedItem>> *items;
+
+@end
+
+NS_ASSUME_NONNULL_END

@@ -1,8 +1,8 @@
 //
-//  XMLFeedItem.swift
+//  RSSFeed.h
 //  Vienna
 //
-//  Copyright 2019, 2021-2022
+//  Copyright 2004-2005 Steve Palmer, 2021-2022 Eitot
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -17,17 +17,22 @@
 //  limitations under the License.
 //
 
-import Foundation
+@import Foundation;
 
-@objc(VNAXMLFeedItem)
-class XMLFeedItem: NSObject, FeedItem {
+#import "XMLFeed.h"
 
-    @objc var guid = ""
-    @objc var title: String?
-    @objc var authors: String?
-    @objc var content = ""
-    @objc var modifiedDate: Date?
-    @objc var url: String?
-    @objc var enclosure: String?
+NS_ASSUME_NONNULL_BEGIN
 
-}
+NS_SWIFT_NAME(RSSFeed)
+@interface VNARSSFeed : VNAXMLFeed
+
+- (nullable instancetype)initWithXMLRootElement:(NSXMLElement *)rootElement
+                                          isRDF:(BOOL)isRDF
+    NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+NS_ASSUME_NONNULL_END
