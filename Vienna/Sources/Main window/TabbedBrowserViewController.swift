@@ -302,6 +302,10 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
             tab?.loadTab()
         }
     }
+
+    func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "MA_Notify_TabChanged"), object: tabViewItem?.view)
+    }
 }
 
 // MARK: WKUIDelegate + BrowserContextMenuDelegate
