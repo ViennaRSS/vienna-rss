@@ -19,7 +19,6 @@
 
 #import "AtomFeed.h"
 
-#import "NSDate+Vienna.h"
 #import "StringExtensions.h"
 #import "Vienna-Swift.h"
 
@@ -124,7 +123,7 @@
         // Parse the date when this feed was last updated
         if (isAtomElement && [elementTag isEqualToString:@"updated"]) {
             NSString *dateString = atomChildElement.stringValue;
-            self.modifiedDate = [NSDate vna_parseXMLDate:dateString];
+            self.modifiedDate = [self dateWithXMLString:dateString];
             success = YES;
             continue;
         }
@@ -132,7 +131,7 @@
         // Parse the date when this feed was last updated
         if (isAtomElement && [elementTag isEqualToString:@"modified"]) {
             NSString *dateString = atomChildElement.stringValue;
-            self.modifiedDate = [NSDate vna_parseXMLDate:dateString];
+            self.modifiedDate = [self dateWithXMLString:dateString];
             success = YES;
             continue;
         }
@@ -264,7 +263,7 @@
                 // Parse item date
                 if (isArticleElementAtomType && [articleItemTag isEqualToString:@"modified"]) {
                     NSString *dateString = itemChildElement.stringValue;
-                    NSDate *newDate = [NSDate vna_parseXMLDate:dateString];
+                    NSDate *newDate = [self dateWithXMLString:dateString];
                     if (newFeedItem.modifiedDate == nil || [newDate isGreaterThan:newFeedItem.modifiedDate]) {
                         newFeedItem.modifiedDate = newDate;
                     }
@@ -274,7 +273,7 @@
                 // Parse item date
                 if (isArticleElementAtomType && [articleItemTag isEqualToString:@"created"]) {
                     NSString *dateString = itemChildElement.stringValue;
-                    NSDate *newDate = [NSDate vna_parseXMLDate:dateString];
+                    NSDate *newDate = [self dateWithXMLString:dateString];
                     if (newFeedItem.modifiedDate == nil || [newDate isGreaterThan:newFeedItem.modifiedDate]) {
                         newFeedItem.modifiedDate = newDate;
                     }
@@ -284,7 +283,7 @@
                 // Parse item date
                 if (isArticleElementAtomType && [articleItemTag isEqualToString:@"updated"]) {
                     NSString *dateString = itemChildElement.stringValue;
-                    NSDate *newDate = [NSDate vna_parseXMLDate:dateString];
+                    NSDate *newDate = [self dateWithXMLString:dateString];
                     if (newFeedItem.modifiedDate == nil || [newDate isGreaterThan:newFeedItem.modifiedDate]) {
                         newFeedItem.modifiedDate = newDate;
                     }

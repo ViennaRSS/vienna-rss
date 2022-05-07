@@ -19,7 +19,6 @@
 
 #import "RSSFeed.h"
 
-#import "NSDate+Vienna.h"
 #import "StringExtensions.h"
 #import "Vienna-Swift.h"
 
@@ -138,7 +137,7 @@
             (isRSSElement && [channelItemTag isEqualToString:@"pubDate"]) ||
             ([element.prefix isEqualToString:self.dcPrefix] && [channelItemTag isEqualToString:@"date"])) {
             NSString *dateString = element.stringValue;
-            self.modifiedDate = [NSDate vna_parseXMLDate:dateString];
+            self.modifiedDate = [self dateWithXMLString:dateString];
             success = YES;
             continue;
         }
@@ -259,7 +258,7 @@
                 // Parse item date
                 if ((isRSSElement && [articleItemTag isEqualToString:@"pubDate"]) || ([itemChildElement.prefix isEqualToString:self.dcPrefix] && [articleItemTag isEqualToString:@"date"])) {
                     NSString *dateString = itemChildElement.stringValue;
-                    newFeedItem.modifiedDate = [NSDate vna_parseXMLDate:dateString];
+                    newFeedItem.modifiedDate = [self dateWithXMLString:dateString];
                     continue;
                 }
 

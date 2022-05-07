@@ -2,7 +2,7 @@
 //  XMLFeed.h
 //  Vienna
 //
-//  Copyright 2004-2005 Steve Palmer
+//  Copyright 2004-2005 Steve Palmer, 2015 Joshua Pore
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -43,6 +43,11 @@ NS_SWIFT_NAME(XMLFeed)
 /// Identify the prefixes used for namespaces that Vienna handles, if defined.
 /// If prefixes are not defined in the data, set to frequently used ones.
 - (void)identifyNamespacesPrefixes:(NSXMLElement *)element;
+
+// MARK: Date parsing
+
+/// Parse a date in an XML header into an NSDate.
+- (nullable NSDate *)dateWithXMLString:(NSString *)dateString;
 
 @end
 
