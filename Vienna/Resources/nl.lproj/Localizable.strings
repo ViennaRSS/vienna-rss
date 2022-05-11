@@ -171,11 +171,17 @@
 /* No comment provided by engineer. */
 "Descending" = "Aflopend";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Toon deze waarschuwing niet opnieuw";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Wil je echt abonnementen uit dit OPML-bestand importeren?";
 
 /* test for a string */
 "does not contain" = "bevat niet";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Leeg prullenmand niet";
 
 /* No comment provided by engineer. */
 "Download" = "Download";
@@ -197,6 +203,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Leeg";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Leeg prullenmand";
 
 /* Title of a menu item */
 "Empty Trash…" = "Leeg prullenmand…";
@@ -300,7 +309,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "HTTP-code %d gemeld door de server";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Wil je alle downloads annuleren en Vienna nu afsluiten?";
 
 /* Title of a button on an alert */
@@ -417,7 +426,7 @@
 /* Title of a button on an alert */
 "OK" = "OK";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Eén of meer downloads zijn nog bezig";
 
 /* Title of a popup menu item */
@@ -644,6 +653,9 @@
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "Voor toegang tot het abonnement op \"%@\" heb je een gebruikersnaam en wachtwoord nodig.";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "Er zijn gewiste artikelen in de prullenmand. Wil je de prullenmand nu legen?";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Dit artikel bevat een bijlage.";

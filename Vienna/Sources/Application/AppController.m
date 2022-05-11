@@ -34,7 +34,6 @@
 #import "ActivityPanelController.h"
 #import "BrowserPaneTemplate.h"
 #import "Constants.h"
-#import "EmptyTrashWarning.h"
 #import "Preferences.h"
 #import "InfoPanelController.h"
 #import "InfoPanelManager.h"
@@ -123,7 +122,6 @@
 		appStatusItem = nil;
 		scriptsMenuItem = nil;
 		didCompleteInitialisation = NO;
-		emptyTrashWarning = nil;
 		searchString = nil;
 	}
 	return self;
@@ -385,58 +383,85 @@
  * This function is called when the user wants to close Vienna. First we check to see
  * if a connection or import is running and that all articles are saved.
  */
--(NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
-	if (DownloadManager.sharedInstance.hasActiveDownloads)
-	{
+    if (DownloadManager.sharedInstance.hasActiveDownloads) {
         NSAlert *alert = [NSAlert new];
-        alert.messageText = NSLocalizedString(@"One or more downloads are in progress", nil);
-        alert.informativeText = NSLocalizedString(@"If you quit Vienna now, all downloads will stop.", nil);
+        alert.messageText = NSLocalizedString(@"One or more downloads are in progress", @"Message text of an alert");
+        alert.informativeText = NSLocalizedString(@"If you quit Vienna now, all downloads will stop.", @"Message text of an alert");
         [alert addButtonWithTitle:NSLocalizedString(@"Quit", @"Title of a button on an alert")];
         [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
         NSModalResponse alertResponse = [alert runModal];
 
-		if (alertResponse == NSAlertSecondButtonReturn)
-		{
+        if (alertResponse == NSAlertSecondButtonReturn) {
             [[NSNotificationCenter defaultCenter]  removeObserver:self];
-			return NSTerminateCancel;
-		}
-	}
-	
-	if (!didCompleteInitialisation)
-	{
+            return NSTerminateCancel;
+        }
+    }
+
+    if (!didCompleteInitialisation) {
         [[NSNotificationCenter defaultCenter]  removeObserver:self];
-		return NSTerminateNow;
-	}
-	
-	switch ([[Preferences standardPreferences] integerForKey:MAPref_EmptyTrashNotification])
-	{
-		case VNAEmptyTrashNone: break;
-			
-		case VNAEmptyTrashWithoutWarning:
-			if (!db.trashEmpty)
-			{
-				[db purgeDeletedArticles];
-			}
-			break;
-			
-		case VNAEmptyTrashWithWarning:
-			if (!db.trashEmpty)
-			{
-				if (emptyTrashWarning == nil)
-					emptyTrashWarning = [[EmptyTrashWarning alloc] init];
-				if (emptyTrashWarning.shouldEmptyTrash)
-				{
-					[db purgeDeletedArticles];
-				}
-				emptyTrashWarning = nil;
-			}
-			break;
-			
-		default: break;
-	}
-	
-	return NSTerminateNow;
+        return NSTerminateNow;
+    }
+
+    switch ([Preferences.standardPreferences integerForKey:MAPref_EmptyTrashNotification]) {
+        case VNAEmptyTrashNone:
+            break;
+
+        case VNAEmptyTrashWithoutWarning:
+            if (!db.trashEmpty) {
+                [db purgeDeletedArticles];
+            }
+            break;
+
+        case VNAEmptyTrashWithWarning: {
+            if (db.trashEmpty) {
+                break;
+            }
+
+            NSAlert *alert = [NSAlert new];
+            alert.messageText = NSLocalizedString(@"There are deleted articles in the trash. Would you like to empty the trash before quitting?", @"Message text of an alert");
+            alert.showsSuppressionButton = YES;
+            alert.suppressionButton.title = NSLocalizedString(@"Do not show this warning again", @"Title of a checkbox on an alert");
+            [alert addButtonWithTitle:NSLocalizedString(@"Empty Trash", @"Title of a button on an alert")];
+            [alert addButtonWithTitle:NSLocalizedString(@"Don’t Empty Trash", @"Title of a button on an alert")];
+            // The "Don’t Empty Trash" button should respond to the escape key.
+            for (NSButton *button in alert.buttons) {
+                if (button.tag != NSAlertSecondButtonReturn) {
+                    continue;
+                }
+                unichar escapeKey[] = {0x001B};
+                button.keyEquivalent = [NSString stringWithCharacters:escapeKey
+                                                               length:1];
+            }
+
+            NSModalResponse alertResponse = [alert runModal];
+
+            // The user pressed the "Empty Trash" button.
+            if (alertResponse == NSAlertFirstButtonReturn) {
+                [db purgeDeletedArticles];
+            }
+
+            if (alert.suppressionButton.state == NSControlStateValueOn) {
+                Preferences *preferences = Preferences.standardPreferences;
+                // The user pressed the "Empty Trash" button
+                if (alertResponse == NSAlertFirstButtonReturn) {
+                    [preferences setInteger:VNAEmptyTrashWithoutWarning
+                                     forKey:MAPref_EmptyTrashNotification];
+                }
+                // The user pressed the "Don’t Empty Trash" button
+                else if (alertResponse == NSAlertSecondButtonReturn) {
+                    [preferences setInteger:VNAEmptyTrashNone
+                                     forKey:MAPref_EmptyTrashNotification];
+                }
+            }
+            break;
+        }
+        default:
+            break;
+    }
+
+    return NSTerminateNow;
 }
 
 - (void)unregisterEventHandlers

@@ -153,11 +153,17 @@
 /* No comment provided by engineer. */
 "Descending" = "Fallande";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Visa inte denna varning igen";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Vill du verkligen importera premnumerationerna från valda OPML fil?";
 
 /* test for a string */
 "does not contain" = "innehåller inte";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Töm inte papperskorgen";
 
 /* No comment provided by engineer. */
 "Download" = "Ladda ner";
@@ -179,6 +185,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Töm";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Töm papperskorgen";
 
 /* Title of a menu item */
 "Empty Trash…" = "Töm papperskorgen…";
@@ -267,7 +276,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "HTTP-kod %d rapporterad från server";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Vill du avbryta alla nedladdningar och avsluta Vienna nu?";
 
 /* Title of a button on an alert */
@@ -375,7 +384,7 @@
 /* Title of a button on an alert */
 "OK" = "OK";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "En eller flera nedladdningar pågår";
 
 /* Title of a popup menu item */
@@ -575,6 +584,9 @@
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "Prenumeration av '%@' kräven ett användarnamn och lösenord för åtkomst.";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "Det finns raderade artiklar i papperskorgen. Vill du tömma papperskorgen innan du avslutar Vienna?";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Den här artikeln innehåller en bilaga.";

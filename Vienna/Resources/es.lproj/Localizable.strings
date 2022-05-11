@@ -171,11 +171,17 @@
 /* No comment provided by engineer. */
 "Descending" = "Descendente";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "No volver a mostrar este mensaje";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "¿Realmente desea importar las suscripciones del archivo OPML especificado?";
 
 /* test for a string */
 "does not contain" = "no contiene";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "No vaciar papelera";
 
 /* No comment provided by engineer. */
 "Download" = "Descargar";
@@ -197,6 +203,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Vaciar";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Vaciar papelera";
 
 /* Title of a menu item */
 "Empty Trash…" = "Vaciar papelera…";
@@ -300,7 +309,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "Código HTTP %d notificado desde el servidor";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Si sale de Vienna ahora, todas las descargas se detendrán.";
 
 /* Title of a button on an alert */
@@ -414,7 +423,7 @@
 /* Title of a button on an alert */
 "OK" = "Aceptar";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Una o más descargas están en curso";
 
 /* Title of a popup menu item */
@@ -641,6 +650,9 @@
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "La suscripción a \"%@\" requiere un nombre de usuario y una contraseña.";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "Hay artículos eliminados en la papelera. ¿Desea vaciar la papelera antes de salir?";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Este artículo contiene un archivo adjunto.";

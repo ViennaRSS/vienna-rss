@@ -135,6 +135,9 @@
 /* Title of a button on an alert */
 "Empty" = "비우기";
 
+/* Title of a button on an alert */
+"Empty Trash" = "휴지통 비우기";
+
 /* No comment provided by engineer. */
 "Enter the URL here" = "여기에 URL 입력";
 
@@ -183,7 +186,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "서버로부터 HTTP 코드 보고: %d";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "모든 다운로드를 취소하고 Vienna 를 지금 종료하시겠습니까?";
 
 /* No comment provided by engineer. */
@@ -273,7 +276,7 @@
 /* Title of a button on an alert */
 "OK" = "확인";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "하나 이상의 다운로드가 진행 중입니다.";
 
 /* Title of a popup menu item */
