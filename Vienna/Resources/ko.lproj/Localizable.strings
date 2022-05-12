@@ -7,26 +7,8 @@
 /* No comment provided by engineer. */
 "%@ Info" = "%@ 정보";
 
-/* No comment provided by engineer. */
-"%d new articles retrieved" = "%d 항목의 새 기사를 등록";
-
 /* Notification body */
 "%d new unread articles retrieved" = "%d 항목의 읽지 않은 새 기사가 추가되었습니다.";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d 항목의 구독을 성공적으로 저장했습니다.";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d 항목의 구독을 성공적으로 가져왔습니다.";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d 항목의 읽지 않은 기사";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u 기사";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u 읽지 않음";
 
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "지정한 이름의 항목이 이미 존재합니다.";

@@ -1,3 +1,6 @@
 /* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "bom-nB-4zx"; */
 "bom-nB-4zx.title" = "Move articles to Bin:";
 
+/* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "jkb-TT-wPC"; */
+"jkb-TT-wPC.title" = "After “Next Unread” command";
+

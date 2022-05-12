@@ -19,26 +19,8 @@
 /* No comment provided by engineer. */
 "%@ unread" = "%@ ungelesen";
 
-/* No comment provided by engineer. */
-"%d new articles retrieved" = "%d neue Artikel abgerufen";
-
 /* Notification body */
 "%d new unread articles retrieved" = "%d neue ungelesene Artikel abgerufen";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d Abonnements erfolgreich exportiert";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d Abonnements erfolgreich importiert";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d ungelesene Artikel";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u Artikel";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u ungelesen";
 
 /* Title in popup submenu */
 "<None>" = "<Nichts>";
@@ -102,7 +84,7 @@
 "Cannot create the Vienna database" = "Vienna konnte die Datenbank nicht erstellen";
 
 /* No comment provided by engineer. */
-"Cannot import the specified file. The file contents are not valid OPML XML format." = "Die ausgewählte Datei konnte nicht importiert werden. Der Dateiinhalt ist nicht valides OPML";
+"Cannot import the specified file. The file contents are not valid OPML XML format." = "Die ausgewählte Datei kann nicht importiert werden, da sie kein gültiges OPML-Format beinhaltet.";
 
 /* No comment provided by engineer. */
 "Cannot rename folder" = "Konnte den Ordner nicht umbenennen";
@@ -207,9 +189,6 @@
 /* Title of a button on an alert */
 "Empty Trash" = "Papierkorb entleeren";
 
-/* Title of a menu item */
-"Empty Trash…" = "Papierkorb entleeren …";
-
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Anhang";
 
@@ -244,7 +223,7 @@
 "External Browser" = "Externer Browser";
 
 /* No comment provided by engineer. */
-"Feed URL updated to %@" = "Die Feed URL wurd auf %@ aktualisiert";
+"Feed URL updated to %@" = "Feed-URL geändert in %@";
 
 /* No comment provided by engineer. */
 "Fetching Open Reader Subscriptions…" = "Rufe Open Reader Abonnements ab …";
@@ -310,7 +289,7 @@
 "HTTP code %d reported from server" = "Der Server lieferte den HTTP-Code %d";
 
 /* Message text of an alert */
-"If you quit Vienna now, all downloads will stop." = "Möchtest du die laufenden Downloads unterbrechen und Vienna jetzt schließen?";
+"If you quit Vienna now, all downloads will stop." = "Wenn du Vienna jetzt beendest, werden alle Downloads abgebrochen.";
 
 /* Title of a button on an alert */
 "Import" = "Importieren";
@@ -427,7 +406,7 @@
 "OK" = "OK";
 
 /* Message text of an alert */
-"One or more downloads are in progress" = "Eine oder mehrere Dateien werden heruntergeladen.";
+"One or more downloads are in progress" = "Eine oder mehrere Dateien werden heruntergeladen";
 
 /* Title of a popup menu item */
 "Open" = "Öffnen";
@@ -515,7 +494,7 @@
 "Refresh All Subscriptions" = "Alle Abonnements aktualisieren";
 
 /* No comment provided by engineer. */
-"Refresh completed" = "Aktualisierung durchgeführt.";
+"Refresh completed" = "Aktualisierung abgeschlossen";
 
 /* Title of a menu item */
 "Refresh Selected Subscriptions" = "Ausgewähltes Abonnement aktualisieren";

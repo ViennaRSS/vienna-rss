@@ -4,26 +4,8 @@
 /* No comment provided by engineer. */
 "(Untitled Feed)" = "(Notícias Sem Título)";
 
-/* No comment provided by engineer. */
-"%d new articles retrieved" = "%d novos artigos descarregados";
-
 /* Notification body */
 "%d new unread articles retrieved" = "%d novos artigos recebidos";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d assinaturas exportadas com sucesso";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d assinaturas importadas com sucesso";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d artigos não lidos";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u artigos";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u não lidos";
 
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "Uma pasta com este nome já existe";
@@ -578,16 +560,4 @@
 
 /* No comment provided by engineer. */
 "You cannot undo this action" = "Você não poderá desfazer essa ação";
-
-/* Class = "NSButtonCell"; title = "Empty Trash"; ObjectID = "17"; */
-"Empty Trash" = "Esvaziar Lixeira";
-
-/* Class = "NSButtonCell"; title = "Don't Empty Trash"; ObjectID = "18"; */
-"Don’t Empty Trash" = "Não Esvaziar Lixeira";
-
-/* Class = "NSTextFieldCell"; title = "There are deleted articles in the trash. Would you like to empty the trash before quitting?"; ObjectID = "19"; */
-"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "Existem artigos apagados na lixeira. Você deseja esvaziar a lixeira antes de encerrar?";
-
-/* Class = "NSButtonCell"; title = "Do not show this warning again"; ObjectID = "20"; */
-"Do not show this warning again" = "Não mostrar este aviso novamente";
 

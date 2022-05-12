@@ -14,24 +14,6 @@
 "%@ received" = "одержано %@";
 
 /* No comment provided by engineer. */
-"%d new articles retrieved" = "Отримано %d нових статей";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "Успішно експортовано %d підписок";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "Успішно імпортовано %d підписок";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d непрочитаних статей";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u статей";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u непрочитаних";
-
-/* No comment provided by engineer. */
 "A folder with that name already exists" = "Папка з таким іменем уже існує";
 
 /* No comment provided by engineer. */

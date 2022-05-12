@@ -10,26 +10,8 @@
 /* Progress in bytes, e.g. 1 KB of 1 MB */
 "%@ of %@" = "%1$@ z %2$@";
 
-/* No comment provided by engineer. */
-"%d new articles retrieved" = "Nově přijato příspěvků: %d";
-
 /* Notification body */
 "%d new unread articles retrieved" = "Přijato nových nepřečtených příspěvků: %d";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "Bylo úspěšně exportováno celkem odebírání: %d";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "Bylo úspěšně importováno celkem odebírání: %d";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "Nečtených příspěvků: %d";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u příspěvků";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u nečtených";
 
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "Složka s tímto jménem již existuje.";

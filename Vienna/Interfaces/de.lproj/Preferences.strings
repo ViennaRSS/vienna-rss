@@ -44,7 +44,7 @@
 "DDY-fS-V5T.title" = "Neuen Browser ausprobieren";
 
 /* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "dkm-xW-4If"; */
-"dkm-xW-4If.title" = "Abonnementenicons anzeigen";
+"dkm-xW-4If.title" = "Feedsymbole in der Feedleiste anzeigen";
 
 /* Class = "NSMenuItem"; title = "After two weeks"; ObjectID = "Dw9-en-4Zu"; */
 "Dw9-en-4Zu.title" = "Nach zwei Wochen";

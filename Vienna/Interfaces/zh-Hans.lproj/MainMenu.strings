@@ -238,10 +238,10 @@
 /* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
 "1073.title" = "通过邮件方式发送";
 
-/* Class = "NSMenuItem"; title = "Make Text Bigger"; ObjectID = "1084"; Note = "This string is also used in Safari"; */
+/* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
 "1084.title" = "发大文章字体";
 
-/* Class = "NSMenuItem"; title = "Make Text Smaller"; ObjectID = "1085"; Note = "This string is also used in Safari"; */
+/* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
 "1085.title" = "缩小文章字体";
 
 /* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */

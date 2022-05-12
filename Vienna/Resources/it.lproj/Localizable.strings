@@ -4,26 +4,8 @@
 /* No comment provided by engineer. */
 "(Untitled Feed)" = "(Feed Senza Titolo)";
 
-/* No comment provided by engineer. */
-"%d new articles retrieved" = "%d nuovi articoli ricevuti";
-
 /* Notification body */
 "%d new unread articles retrieved" = "%d nuovi articoli non letti ricevuti";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d iscrizioni esportate correttamente";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d iscrizioni importate correttamente";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d articoli non letti";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u articoli";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u non letti";
 
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "Una cartella con lo stesso nome esiste di già";
