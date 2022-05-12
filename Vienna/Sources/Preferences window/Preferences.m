@@ -48,10 +48,6 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 NSString * const kMA_Notify_MinimumFontSizeChange = @"MA_Notify_MinimumFontSizeChange";
 NSString * const kMA_Notify_UseJavaScriptChange = @"MA_Notify_UseJavaScriptChange";
 
-
-// The default preferences object.
-static Preferences * _standardPreferences = nil;
-
 // Private methods
 @interface Preferences ()
 
@@ -68,11 +64,14 @@ static Preferences * _standardPreferences = nil;
 /* standardPreferences
  * Return the single set of Vienna wide preferences object.
  */
-+(Preferences *)standardPreferences
++ (Preferences *)standardPreferences
 {
-	if (_standardPreferences == nil)
-		_standardPreferences = [[Preferences alloc] init];
-	return _standardPreferences;
+    static Preferences *preferences = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        preferences = [self new];
+    });
+    return preferences;
 }
 
 /* init
@@ -84,12 +83,11 @@ static Preferences * _standardPreferences = nil;
 	{
 		// Merge in the user preferences from the defaults.
 		NSDictionary * defaults = self.allocFactoryDefaults;
-		userPrefs = NSUserDefaults.standardUserDefaults;
 		[self migrateEncodedPreferences];
-		[userPrefs registerDefaults:defaults];
+		[self registerDefaults:defaults];
 
 		// Application-specific folder locations
-		defaultDatabase = [userPrefs stringForKey:MAPref_DefaultDatabase];
+		defaultDatabase = [self stringForKey:MAPref_DefaultDatabase];
 		NSFileManager *fileManager = NSFileManager.defaultManager;
 		NSString *appSupportPath = fileManager.vna_applicationSupportDirectory.path;
 		imagesFolder = [appSupportPath stringByAppendingPathComponent:MA_ImagesFolder_Name];
@@ -105,15 +103,15 @@ static Preferences * _standardPreferences = nil;
 		layout = [self integerForKey:MAPref_Layout];
 		refreshOnStartup = [self boolForKey:MAPref_CheckForNewArticlesOnStartup];
 		markUpdatedAsNew = [self boolForKey:MAPref_CheckForUpdatedArticles];
-		markReadInterval = [userPrefs floatForKey:MAPref_MarkReadInterval];
+		markReadInterval = [self floatForKey:MAPref_MarkReadInterval];
 		minimumFontSize = [self integerForKey:MAPref_MinimumFontSize];
 		newArticlesNotification = [self integerForKey:MAPref_NewArticlesNotification];
 		enableMinimumFontSize = [self boolForKey:MAPref_UseMinimumFontSize];
 		autoExpireDuration = [self integerForKey:MAPref_AutoExpireDuration];
 		openLinksInVienna = [self boolForKey:MAPref_OpenLinksInVienna];
 		openLinksInBackground = [self boolForKey:MAPref_OpenLinksInBackground];
-		displayStyle = [userPrefs stringForKey:MAPref_ActiveStyleName];
-		textSizeMultiplier = [userPrefs doubleForKey:MAPref_ActiveTextSizeMultiplier];
+		displayStyle = [self stringForKey:MAPref_ActiveStyleName];
+		textSizeMultiplier = [self doubleForKey:MAPref_ActiveTextSizeMultiplier];
 		showFolderImages = [self boolForKey:MAPref_ShowFolderImages];
 		showStatusBar = [self boolForKey:MAPref_ShowStatusBar];
 		showFilterBar = [self boolForKey:MAPref_ShowFilterBar];
@@ -142,10 +140,10 @@ static Preferences * _standardPreferences = nil;
         // Open Reader sync
         syncGoogleReader = [self boolForKey:MAPref_SyncGoogleReader];
         prefersGoogleNewSubscription = [self boolForKey:MAPref_GoogleNewSubscription];
-		syncServer = [userPrefs stringForKey:MAPref_SyncServer];
-		syncingUser = [userPrefs stringForKey:MAPref_SyncingUser];
-		_syncingAppId = [userPrefs stringForKey:MAPref_SyncingAppId];
-		_syncingAppKey = [userPrefs stringForKey:MAPref_SyncingAppKey];
+		syncServer = [self stringForKey:MAPref_SyncServer];
+		syncingUser = [self stringForKey:MAPref_SyncingUser];
+		_syncingAppId = [self stringForKey:MAPref_SyncingAppId];
+		_syncingAppKey = [self stringForKey:MAPref_SyncingAppKey];
 				
 		//Sparkle autoupdate
         alwaysAcceptBetas = [self boolForKey:MAPref_AlwaysAcceptBetas];
@@ -256,7 +254,7 @@ static Preferences * _standardPreferences = nil;
 
 - (void)migrateEncodedPreferences
 {
-    if ([userPrefs objectForKey:MAPref_Deprecated_ArticleListSortOrders]) {
+    if ([self objectForKey:MAPref_Deprecated_ArticleListSortOrders]) {
         NSData *archive = [self objectForKey:MAPref_Deprecated_ArticleListSortOrders];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -276,10 +274,10 @@ static Preferences * _standardPreferences = nil;
         NSData *keyedArchive = [NSKeyedArchiver vna_archivedDataWithRootObject:[sortDescriptors copy]
                                                          requiringSecureCoding:YES];
         [self setObject:keyedArchive forKey:MAPref_ArticleListSortOrders];
-        [userPrefs removeObjectForKey:MAPref_Deprecated_ArticleListSortOrders];
+        [self removeObjectForKey:MAPref_Deprecated_ArticleListSortOrders];
     }
 
-    if ([userPrefs objectForKey:MAPref_Deprecated_DownloadItemList]) {
+    if ([self objectForKey:MAPref_Deprecated_DownloadItemList]) {
         // Download items were stored as an array of non-keyed archives.
         NSArray *array = [self objectForKey:MAPref_Deprecated_DownloadItemList];
         NSMutableArray *downloadItems = [NSMutableArray array];
@@ -300,10 +298,10 @@ static Preferences * _standardPreferences = nil;
         NSData *keyedArchive = [NSKeyedArchiver vna_archivedDataWithRootObject:downloadItems
                                                          requiringSecureCoding:YES];
         [self setObject:keyedArchive forKey:MAPref_DownloadItemList];
-        [userPrefs removeObjectForKey:MAPref_Deprecated_DownloadItemList];
+        [self removeObjectForKey:MAPref_Deprecated_DownloadItemList];
     }
 
-    if ([userPrefs objectForKey:MAPref_Deprecated_FolderListFont]) {
+    if ([self objectForKey:MAPref_Deprecated_FolderListFont]) {
         NSData *archive = [self objectForKey:MAPref_Deprecated_FolderListFont];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -312,10 +310,10 @@ static Preferences * _standardPreferences = nil;
         NSData *keyedArchive = [NSKeyedArchiver vna_archivedDataWithRootObject:font
                                                          requiringSecureCoding:YES];
         [self setObject:keyedArchive forKey:MAPref_FolderListFont];
-        [userPrefs removeObjectForKey:MAPref_Deprecated_FolderListFont];
+        [self removeObjectForKey:MAPref_Deprecated_FolderListFont];
     }
 
-    if ([userPrefs objectForKey:MAPref_Deprecated_ArticleListFont]) {
+    if ([self objectForKey:MAPref_Deprecated_ArticleListFont]) {
         NSData *archive = [self objectForKey:MAPref_Deprecated_ArticleListFont];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -324,92 +322,8 @@ static Preferences * _standardPreferences = nil;
         NSData *keyedArchive = [NSKeyedArchiver vna_archivedDataWithRootObject:font
                                                          requiringSecureCoding:YES];
         [self setObject:keyedArchive forKey:MAPref_ArticleListFont];
-        [userPrefs removeObjectForKey:MAPref_Deprecated_ArticleListFont];
+        [self removeObjectForKey:MAPref_Deprecated_ArticleListFont];
     }
-}
-
-/* setBool
- * Sets the value of the specified default to the given boolean value.
- */
--(void)setBool:(BOOL)value forKey:(NSString *)defaultName
-{
-	[userPrefs setBool:value forKey:defaultName];
-}
-
-/* setInteger
- * Sets the value of the specified default to the given integer value.
- */
--(void)setInteger:(NSInteger)value forKey:(NSString *)defaultName
-{
-	[userPrefs setInteger:value forKey:defaultName];
-}
-
-/* setString
- * Sets the value of the specified default to the given string.
- */
--(void)setString:(NSString *)value forKey:(NSString *)defaultName
-{
-	[userPrefs setObject:value forKey:defaultName];
-}
-
-/* setArray
- * Sets the value of the specified default to the given array.
- */
--(void)setArray:(NSArray *)value forKey:(NSString *)defaultName
-{
-	[userPrefs setObject:value forKey:defaultName];
-}
-
-/* setObject
- * Sets the value of the specified default to the given object.
- */
--(void)setObject:(id)value forKey:(NSString *)defaultName
-{
-	[userPrefs setObject:value forKey:defaultName];
-}
-
-/* boolForKey
- * Returns the boolean value of the given default object.
- */
--(BOOL)boolForKey:(NSString *)defaultName
-{
-	return [userPrefs boolForKey:defaultName];
-}
-
-/* integerForKey
- * Returns the integer value of the given default object.
- */
--(NSInteger)integerForKey:(NSString *)defaultName
-{
-	return [userPrefs integerForKey:defaultName];
-}
-
-/* stringForKey
- * Returns the string value of the given default object.
- */
--(NSString *)stringForKey:(NSString *)defaultName
-{
-	return [userPrefs stringForKey:defaultName];
-}
-
-/* arrayForKey
- * Returns the string value of the given default array.
- */
--(NSArray *)arrayForKey:(NSString *)defaultName
-{
-	return [userPrefs arrayForKey:defaultName];
-}
-
-/* objectForKey
- * Returns the value of the given default object.
- */
--(id)objectForKey:(NSString *)defaultName
-{
-	return [userPrefs objectForKey:defaultName];
-}
-
-- (void)removeObjectForKey:(NSString *)defaultName {
-    [userPrefs removeObjectForKey:defaultName];
 }
 
 /* imagesFolder
@@ -460,7 +374,7 @@ static Preferences * _standardPreferences = nil;
 	if (defaultDatabase != newDatabase)
 	{
 		defaultDatabase = newDatabase;
-		[userPrefs setObject:newDatabase forKey:MAPref_DefaultDatabase];
+		[self setObject:newDatabase forKey:MAPref_DefaultDatabase];
 	}
 }
 
@@ -850,7 +764,7 @@ static Preferences * _standardPreferences = nil;
 	if (![displayStyle isEqualToString:newStyleName])
 	{
 		displayStyle = newStyleName;
-		[self setString:displayStyle forKey:MAPref_ActiveStyleName];
+		[self setObject:displayStyle forKey:MAPref_ActiveStyleName];
 		if (flag)
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_StyleChange" object:nil];
 	}
@@ -1196,7 +1110,7 @@ static Preferences * _standardPreferences = nil;
 	if (![syncServer isEqualToString:newServer])
 	{
 		syncServer = [newServer copy];
-		[self setString:syncServer forKey:MAPref_SyncServer];
+		[self setObject:syncServer forKey:MAPref_SyncServer];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
 	}
 }
@@ -1214,7 +1128,7 @@ static Preferences * _standardPreferences = nil;
 	if (![syncingUser isEqualToString:newUser])
 	{
 		syncingUser = [newUser copy];
-		[self setString:syncingUser forKey:MAPref_SyncingUser];
+		[self setObject:syncingUser forKey:MAPref_SyncingUser];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
 	}
 }

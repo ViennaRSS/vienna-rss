@@ -500,7 +500,7 @@
 	// Remember the current folder and article
     NSString * guid = self.selectedArticle.guid;
 	[prefs setInteger:self.controller.articleController.currentFolderId forKey:MAPref_CachedFolderID];
-	[prefs setString:(guid != nil ? guid : @"") forKey:MAPref_CachedArticleGUID];
+	[prefs setObject:(guid != nil ? guid : @"") forKey:MAPref_CachedArticleGUID];
 
 	// An array we need for the settings
 	NSMutableArray * dataArray = [[NSMutableArray alloc] init];
