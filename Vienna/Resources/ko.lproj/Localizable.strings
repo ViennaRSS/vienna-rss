@@ -7,9 +7,6 @@
 /* No comment provided by engineer. */
 "%@ Info" = "%@ 정보";
 
-/* Notification body */
-"%d new unread articles retrieved" = "%d 항목의 읽지 않은 새 기사가 추가되었습니다.";
-
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "지정한 이름의 항목이 이미 존재합니다.";
 

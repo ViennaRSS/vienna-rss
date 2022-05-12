@@ -7,9 +7,6 @@
 /* No comment provided by engineer. */
 "%@ Info" = "%@ Bilgi";
 
-/* Notification body */
-"%d new unread articles retrieved" = "%d yeni okunmayan makale alındı";
-
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "Bu isimde başka bir klasör var";
 

@@ -19,9 +19,6 @@
 /* No comment provided by engineer. */
 "%@ unread" = "%@ непрочитано";
 
-/* Notification body */
-"%d new unread articles retrieved" = "Получено %d новых статей";
-
 /* Title in popup submenu */
 "<None>" = "<Нет>";
 

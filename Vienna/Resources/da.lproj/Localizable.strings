@@ -19,9 +19,6 @@
 /* No comment provided by engineer. */
 "%@ unread" = "%@ ulæste";
 
-/* Notification body */
-"%d new unread articles retrieved" = "%d nye ulæste artikler hentet";
-
 /* Title in popup submenu */
 "<None>" = "<Ingen>";
 

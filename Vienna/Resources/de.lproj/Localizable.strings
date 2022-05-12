@@ -19,9 +19,6 @@
 /* No comment provided by engineer. */
 "%@ unread" = "%@ ungelesen";
 
-/* Notification body */
-"%d new unread articles retrieved" = "%d neue ungelesene Artikel abgerufen";
-
 /* Title in popup submenu */
 "<None>" = "<Nichts>";
 

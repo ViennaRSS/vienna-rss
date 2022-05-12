@@ -19,9 +19,6 @@
 /* No comment provided by engineer. */
 "%@ unread" = "%@ olästa";
 
-/* Notification body */
-"%d new unread articles retrieved" = "%d nya olästa artiklar mottagna";
-
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "En mapp med det namnet finns redan";
 

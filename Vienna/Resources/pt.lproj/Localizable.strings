@@ -7,9 +7,6 @@
 /* No comment provided by engineer. */
 "%@ Info" = "%@ Informação";
 
-/* Notification body */
-"%d new unread articles retrieved" = "%d novos artigos recebidos";
-
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "Já existe uma pasta com esse nome";
 

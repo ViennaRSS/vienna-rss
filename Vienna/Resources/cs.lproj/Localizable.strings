@@ -10,9 +10,6 @@
 /* Progress in bytes, e.g. 1 KB of 1 MB */
 "%@ of %@" = "%1$@ z %2$@";
 
-/* Notification body */
-"%d new unread articles retrieved" = "Přijato nových nepřečtených příspěvků: %d";
-
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "Složka s tímto jménem již existuje.";
 

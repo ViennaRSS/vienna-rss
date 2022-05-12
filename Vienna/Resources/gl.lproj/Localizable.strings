@@ -7,9 +7,6 @@
 /* No comment provided by engineer. */
 "%@ Info" = "Información de %@";
 
-/* Notification body */
-"%d new unread articles retrieved" = "Recuperados novos artigos sen ler";
-
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "Xa existe un cartafol con ese nome";
 

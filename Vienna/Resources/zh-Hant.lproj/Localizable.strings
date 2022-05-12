@@ -19,9 +19,6 @@
 /* No comment provided by engineer. */
 "%@ unread" = "%@ 篇未讀的";
 
-/* Notification body */
-"%d new unread articles retrieved" = "已順利取得 %d 則未閱讀的新文章";
-
 /* Title in popup submenu */
 "<None>" = "<无>";
 

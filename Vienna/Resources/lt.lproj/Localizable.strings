@@ -13,9 +13,6 @@
 /* Number of bytes received, e.g. 1 MB received */
 "%@ received" = "Gauta %@";
 
-/* Notification body */
-"%d new unread articles retrieved" = "Parsiųsta naujų neperskaitytų straipsnių";
-
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "Aplankas su tokiu pavadinimu jau yra";
 

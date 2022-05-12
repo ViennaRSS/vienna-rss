@@ -7,9 +7,6 @@
 /* No comment provided by engineer. */
 "%@ Info" = "%@ 情報";
 
-/* Notification body */
-"%d new unread articles retrieved" = "%d の未読記事があります。";
-
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "この名前のフォルダがすでに存在します。";
 

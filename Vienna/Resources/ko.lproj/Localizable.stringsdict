@@ -16,6 +16,20 @@
 			<string>%d 항목의 새 기사를 등록</string>
 		</dict>
 	</dict>
+	<key>%d new unread articles retrieved</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@articles@</string>
+		<key>articles</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>other</key>
+			<string>%d 항목의 읽지 않은 새 기사가 추가되었습니다.</string>
+		</dict>
+	</dict>
 	<key>%d subscriptions successfully exported</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

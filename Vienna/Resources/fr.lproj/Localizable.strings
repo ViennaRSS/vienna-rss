@@ -19,9 +19,6 @@
 /* No comment provided by engineer. */
 "%@ unread" = "%@ non lus";
 
-/* Notification body */
-"%d new unread articles retrieved" = "%d nouveaux articles non lus récupérés";
-
 /* Title in popup submenu */
 "<None>" = "<Aucun>";
 

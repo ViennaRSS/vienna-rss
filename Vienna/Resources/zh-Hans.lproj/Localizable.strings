@@ -10,9 +10,6 @@
 /* Number of bytes received, e.g. 1 MB received */
 "%@ received" = "收到 %@";
 
-/* Notification body */
-"%d new unread articles retrieved" = "收到了 %d 篇新文章";
-
 /* Title in popup submenu */
 "<None>" = "<无>";
 

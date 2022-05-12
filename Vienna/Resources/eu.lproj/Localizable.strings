@@ -7,9 +7,6 @@
 /* No comment provided by engineer. */
 "%@ Info" = "%@ Informazioa";
 
-/* Notification body */
-"%d new unread articles retrieved" = "%d artikulu berri irakurri gabe jasota";
-
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "Izen berdineko direktorioa existitzen da";
 
