@@ -38,10 +38,6 @@
 // Initial paths
 static NSString * const MA_DefaultStyleName = @"Default";
 static NSString * const MA_Database_Name = @"messages.db";
-static NSString * const MA_ImagesFolder_Name = @"Images";
-static NSString * const MA_StylesFolder_Name = @"Styles";
-static NSString * const MA_ScriptsFolder_Name = @"Scripts";
-static NSString * const MA_PluginsFolder_Name = @"Plugins";
 static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 
 // NSNotificationCenter string constants
@@ -90,10 +86,6 @@ NSString * const kMA_Notify_UseJavaScriptChange = @"MA_Notify_UseJavaScriptChang
 		defaultDatabase = [self stringForKey:MAPref_DefaultDatabase];
 		NSFileManager *fileManager = NSFileManager.defaultManager;
 		NSString *appSupportPath = fileManager.vna_applicationSupportDirectory.path;
-		imagesFolder = [appSupportPath stringByAppendingPathComponent:MA_ImagesFolder_Name];
-		stylesFolder = [appSupportPath stringByAppendingPathComponent:MA_StylesFolder_Name];
-		pluginsFolder = [appSupportPath stringByAppendingPathComponent:MA_PluginsFolder_Name];
-		scriptsFolder = fileManager.vna_applicationScriptsDirectory.path;
 		feedSourcesFolder = [appSupportPath stringByAppendingPathComponent:MA_FeedSourcesFolder_Name];
 		
 		// Load those settings that we cache.
@@ -324,38 +316,6 @@ NSString * const kMA_Notify_UseJavaScriptChange = @"MA_Notify_UseJavaScriptChang
         [self setObject:keyedArchive forKey:MAPref_ArticleListFont];
         [self removeObjectForKey:MAPref_Deprecated_ArticleListFont];
     }
-}
-
-/* imagesFolder
- * Return the path to where the folder images are stored.
- */
--(NSString *)imagesFolder
-{
-	return imagesFolder;
-}
-
-/* pluginsFolder
- * Returns the path to where the user plugins are stored
- */
--(NSString *)pluginsFolder
-{
-	return pluginsFolder;
-}
-
-/* stylesFolder
- * Return the path to where the user styles are stored.
- */
--(NSString *)stylesFolder
-{
-	return stylesFolder;
-}
-
-/* scriptsFolder
- * Return the path to where the scripts are stored.
- */
--(NSString *)scriptsFolder
-{
-	return scriptsFolder;
 }
 
 /* defaultDatabase

@@ -52,10 +52,6 @@ NS_ASSUME_NONNULL_BEGIN
 	NSString * displayStyle;
 	CGFloat textSizeMultiplier;
 	NSString * defaultDatabase;
-	NSString * imagesFolder;
-	NSString * scriptsFolder;
-	NSString * stylesFolder;
-	NSString * pluginsFolder;
 	NSString * feedSourcesFolder;
 	NSFont * folderFont;
 	NSFont * articleFont;
@@ -78,18 +74,6 @@ extern NSString * const kMA_Notify_UseJavaScriptChange;
 // Path to default database
 -(NSString *)defaultDatabase;
 -(void)setDefaultDatabase:(NSString *)newDatabase;
-
-// Path to scripts folder
-@property (readonly, nonatomic) NSString *scriptsFolder;
-
-// Path to images folder
-@property (readonly, nonatomic) NSString *imagesFolder;
-
-// Path to styles folder
-@property (readonly, nonatomic) NSString *stylesFolder;
-
-// Path to the external plugins folder
-@property (readonly, nonatomic) NSString *pluginsFolder;
 
 // Read-only internal settings
 @property (nonatomic, readonly) NSInteger backTrackQueueSize;

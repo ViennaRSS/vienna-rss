@@ -201,7 +201,7 @@
  * The handler is a code block which triggers a refresh of the scripts menu
  */
 - (void)installScriptsFolderWatcher {
-    NSURL *path = [NSURL fileURLWithPath:Preferences.standardPreferences.scriptsFolder];
+    NSURL *path = NSFileManager.defaultManager.vna_applicationScriptsDirectory;
     self.directoryMonitor = [[DirectoryMonitor alloc] initWithDirectories:@[path]];
 
     NSError *error = nil;
@@ -516,8 +516,8 @@
 	if ([filename.pathExtension isEqualToString:@"viennastyle"])
 	{
 		NSString * styleName = filename.lastPathComponent.stringByDeletingPathExtension;
-		if (![self installFilename:filename toPath:prefs.stylesFolder])
-			[Preferences standardPreferences].displayStyle = styleName;
+		if (![self installFilename:filename toPath:ArticleStyleLoader.stylesDirectoryURL.path])
+			prefs.displayStyle = styleName;
 		else
 		{
             [self populateStyleMenu];
@@ -528,7 +528,7 @@
 	}
 	if ([filename.pathExtension isEqualToString:@"viennaplugin"])
 	{
-		NSString * path = prefs.pluginsFolder;
+		NSString * path = PluginManager.plugInsDirectoryURL.path;
 		if ([self installFilename:filename toPath:path])
 		{
 			runOKAlertPanel(NSLocalizedString(@"Plugin installed", nil), NSLocalizedString(@"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.", nil));			
@@ -539,7 +539,9 @@
 	}
 	if ([filename.pathExtension isEqualToString:@"scpt"])
 	{
-		if ([self installFilename:filename toPath:prefs.scriptsFolder])
+		NSFileManager *fileManager = NSFileManager.defaultManager;
+		NSURL *scriptsURL = fileManager.vna_applicationScriptsDirectory;
+		if ([self installFilename:filename toPath:scriptsURL.path])
 		{
 			if (!hasOSScriptsMenu())
 				[self initScriptsMenu];
@@ -1442,8 +1444,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	loadMapFromPath(path, scriptPathMappings, NO, exts);
 	
 	// Add scripts that the user created and stored in the scripts folder
-	path = [Preferences standardPreferences].scriptsFolder;
-	loadMapFromPath(path, scriptPathMappings, NO, exts);
+	NSFileManager *fileManager = NSFileManager.defaultManager;
+	NSURL *scriptsURL = fileManager.vna_applicationScriptsDirectory;
+	loadMapFromPath(scriptsURL.path, scriptPathMappings, NO, exts);
 	
 	// Add the contents of the scriptsPathMappings dictionary keys to the menu sorted
 	// by key name.
@@ -1903,9 +1906,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)doOpenScriptsFolder:(id)sender
 {
-    NSURL *url = [NSURL fileURLWithPath:Preferences.standardPreferences.scriptsFolder
-                            isDirectory:YES];
-    [NSWorkspace.sharedWorkspace openURL:url];
+	NSFileManager *fileManager = NSFileManager.defaultManager;
+	NSURL *scriptsURL = fileManager.vna_applicationScriptsDirectory;
+	[NSWorkspace.sharedWorkspace openURL:scriptsURL];
 }
 
 /* doSelectScript
