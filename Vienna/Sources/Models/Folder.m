@@ -163,24 +163,12 @@ static NSArray * iconArray = nil;
                 folderImage = [NSImage imageNamed:@"searchFolder"];
             }
             break;
-        case VNAFolderTypeRSS: {
-            NSString *homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
-            folderImage = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
-            if (folderImage == nil) {
-                folderImage = [NSImage imageNamed:@"rssFeedNew"];
-            }
-            break;
-        }
+        case VNAFolderTypeRSS:
         case VNAFolderTypeOpenReader: {
             NSString *homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
-            folderImage = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
-            if (folderImage == nil) {
-                if (@available(macOS 11, *)) {
-                    folderImage = [NSImage imageWithSystemSymbolName:@"cloud"
-                                            accessibilityDescription:nil];
-                } else {
-                    folderImage = [NSImage imageNamed:@"googleFeed"];
-                }
+            folderImage = [FolderImageCache.defaultCache retrieveImage:homePageSiteRoot];
+            if (!folderImage) {
+                folderImage = [NSImage imageNamed:@"rssFeed"];
             }
             break;
         }
@@ -219,14 +207,8 @@ static NSArray * iconArray = nil;
 -(NSImage *)standardImage {
     switch (self.type) {
         case VNAFolderTypeRSS:
-            return [NSImage imageNamed:@"rssFeedNew"];
         case VNAFolderTypeOpenReader:
-            if (@available(macOS 11, *)) {
-                return [NSImage imageWithSystemSymbolName:@"cloud"
-                                 accessibilityDescription:nil];
-            } else {
-                return [NSImage imageNamed:@"googleFeed"];
-            }
+            return [NSImage imageNamed:@"rssFeed"];
         default:
             return self.image;
     }
