@@ -1,0 +1,22 @@
+name: Build and test
+
+on: pull_request
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [macos-12, macos-11]
+    name: Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+
+    steps:
+    - name: Set up Git repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Build Xcode project
+      run: xcodebuild build-for-testing -project Vienna.xcodeproj -scheme Vienna -configuration Development | xcpretty && exit ${PIPESTATUS[0]}
+    - name: Test Xcode project
+      run: xcodebuild test -project Vienna.xcodeproj -scheme Vienna -configuration Development | xcpretty && exit ${PIPESTATUS[0]}
