@@ -138,11 +138,17 @@
 /* No comment provided by engineer. */
 "Descending" = "Decrescente";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Não mostrar este aviso novamente";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Você realmente deseja importar as assinaturas do arquivo OPML especificado?";
 
 /* test for a string */
 "does not contain" = "não contém";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Não Esvaziar Lixeira";
 
 /* No comment provided by engineer. */
 "Download" = "Descarregar";
@@ -164,6 +170,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Esvaziar";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Esvaziar Lixeira";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Anexo";
@@ -231,7 +240,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "Código HTTP %d relatado do servidor";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Deseja cancelar todos os descarregamentos e fechar o Vienna agora?";
 
 /* Title of a button on an alert */
@@ -324,7 +333,7 @@
 /* No comment provided by engineer. */
 "No new articles available" = "Nenhum artigo novo disponível";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Um ou mais descarregamentos estão ocorrendo";
 
 /* Title of a popup menu item */
@@ -510,6 +519,9 @@
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "A assinatura de \"%@\" requer um usuário e senha cadastrados para acesso.";
 
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "Existem artigos apagados na lixeira. Você deseja esvaziar a lixeira antes de encerrar?";
+
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Este artigo contém um arquivo anexado.";
 
@@ -566,4 +578,16 @@
 
 /* No comment provided by engineer. */
 "You cannot undo this action" = "Você não poderá desfazer essa ação";
+
+/* Class = "NSButtonCell"; title = "Empty Trash"; ObjectID = "17"; */
+"Empty Trash" = "Esvaziar Lixeira";
+
+/* Class = "NSButtonCell"; title = "Don't Empty Trash"; ObjectID = "18"; */
+"Don’t Empty Trash" = "Não Esvaziar Lixeira";
+
+/* Class = "NSTextFieldCell"; title = "There are deleted articles in the trash. Would you like to empty the trash before quitting?"; ObjectID = "19"; */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "Existem artigos apagados na lixeira. Você deseja esvaziar a lixeira antes de encerrar?";
+
+/* Class = "NSButtonCell"; title = "Do not show this warning again"; ObjectID = "20"; */
+"Do not show this warning again" = "Não mostrar este aviso novamente";
 

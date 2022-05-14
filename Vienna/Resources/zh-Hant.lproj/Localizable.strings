@@ -171,11 +171,17 @@
 /* No comment provided by engineer. */
 "Descending" = "倒排";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "不要再顯示此警告";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "您是否確定要從指定的 OPML 檔案輸入訂閱頻道？";
 
 /* test for a string */
 "does not contain" = "不包含";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "不要清空垃圾桶";
 
 /* No comment provided by engineer. */
 "Download" = "下載";
@@ -197,6 +203,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "清除";
+
+/* Title of a button on an alert */
+"Empty Trash" = "清空垃圾桶";
 
 /* Title of a menu item */
 "Empty Trash…" = "清空垃圾桶...";
@@ -300,7 +309,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "伺服器回報 HTTP 碼 %d";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "您是否要停止下載所有項目，並立即結束 Vienna？";
 
 /* Title of a button on an alert */
@@ -417,7 +426,7 @@
 /* Title of a button on an alert */
 "OK" = "好";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Vienna 目前正在下載一或多個項目";
 
 /* Title of a popup menu item */
@@ -644,6 +653,9 @@
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "“%@”這個訂閱頻道需要您提供使用者名稱與密碼進行認證，才可加以存取。";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "垃圾桶中有刪除的文章。您是否要在結束前清空垃圾桶？";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "此文章隨附一個檔案。";

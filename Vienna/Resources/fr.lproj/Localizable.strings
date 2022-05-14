@@ -171,11 +171,17 @@
 /* No comment provided by engineer. */
 "Descending" = "Décroissant";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Ne plus afficher cette alerte";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Souhaitez-vous vraiment importer des abonnements à partir du fichier OPML désigné ?";
 
 /* test for a string */
 "does not contain" = "ne contient pas";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Ne pas vider la corbeille";
 
 /* No comment provided by engineer. */
 "Download" = "Télécharger";
@@ -197,6 +203,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Vider";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Vider la corbeille";
 
 /* Title of a menu item */
 "Empty Trash…" = "Vider la corbeille…";
@@ -300,7 +309,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "Code HTTP %d renvoyé par le serveur";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Si vous quittez Vienna maintenant, tous les téléchargements seront interrompus.";
 
 /* Title of a button on an alert */
@@ -417,7 +426,7 @@
 /* Title of a button on an alert */
 "OK" = "OK";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Un ou plusieurs téléchargements sont en cours";
 
 /* Title of a popup menu item */
@@ -644,6 +653,9 @@
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "L'abonnement à \"%@\" nécessite un nom d'utilisateur et un mot de passe.";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "La corbeille contient des articles supprimés. Souhaitez-vous la vider avant de quitter ?";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Cet article contient un fichier incorporé.";

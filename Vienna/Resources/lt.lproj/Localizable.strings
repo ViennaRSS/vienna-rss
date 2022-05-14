@@ -147,11 +147,17 @@
 /* No comment provided by engineer. */
 "Descending" = "Mažėjimo tvarka";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Daugiau nerodyti šio perspėjimo";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Ar tikrai norite importuoti prenumeratas iš pasirinkto OPML failo?";
 
 /* test for a string */
 "does not contain" = "neturi";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Nevalyti šiukšlių";
 
 /* No comment provided by engineer. */
 "Download" = "Atsisiuntimas";
@@ -173,6 +179,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Tuščia";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Ištrinti šiukšles";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Turi įtalpinto turinio";
@@ -267,7 +276,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "Serveris pateikė HTTP kodą %d";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Vykstantys parsisiuntimai";
 
 /* Title of a button on an alert */
@@ -381,7 +390,7 @@
 /* Title of a button on an alert */
 "OK" = "Gerai";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Vykstantys parsisiuntimai";
 
 /* Title of a popup menu item */
@@ -581,6 +590,9 @@
 
 /* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "Neteisingas stilius";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "Šiukšlių dėžėje yra ištrintų straipsnių. Ar prieš uždarant programą išvalyti siukšles?";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Šiame straipsnyje yra failas.";

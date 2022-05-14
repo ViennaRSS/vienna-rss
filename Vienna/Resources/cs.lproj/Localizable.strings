@@ -138,11 +138,17 @@
 /* No comment provided by engineer. */
 "Descending" = "Sestupně";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Příště nezobrazovat";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Určitě chcete importovat odebírání z vybraného souboru OPML?";
 
 /* test for a string */
 "does not contain" = "neobsahuje";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Nevysypávat";
 
 /* No comment provided by engineer. */
 "Download" = "Zkopírovat";
@@ -164,6 +170,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Smazat";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Vysypat koš";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Příloha";
@@ -234,7 +243,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "Ze serveru byl obdržen kód HTTP: %d";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Ukončíte-li program Vienna nyní, všechna kopírování budou zastavena.";
 
 /* Title of a button on an alert */
@@ -336,7 +345,7 @@
 /* Title of a button on an alert */
 "OK" = "Budiž";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Probíhá jedno nebo více kopírování";
 
 /* Title of a popup menu item */
@@ -512,6 +521,9 @@
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "Odebírání položky „%@“ vyžaduje uživatelské jméno a heslo.";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "V koši jsou smazané příspěvky. Chcete před ukončením programu vysypat koš?";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Tento příspěvek obsahuje v příloze soubor.";

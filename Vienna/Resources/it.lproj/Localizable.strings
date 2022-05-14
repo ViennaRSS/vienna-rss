@@ -126,11 +126,17 @@
 /* No comment provided by engineer. */
 "Deleting folder \"%@\"…" = "Elimino cartella '%@'…";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Non mostrare di nuovo questo avviso";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Vuoi davvero importare le iscrizioni dal file OPML specificato?";
 
 /* test for a string */
 "does not contain" = "non contiene";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Non Svuotare il Cestino";
 
 /* No comment provided by engineer. */
 "Download" = "Scarica";
@@ -152,6 +158,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Vuota";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Svuota Cestino";
 
 /* Data field name (URL) visible in menu/article list */
 "Enclosure URL" = "URL enclosure";
@@ -216,7 +225,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "codice HTTP %d riportato dal server";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Vuoi interrompere tutti i download e chiudere Vienna ora?";
 
 /* Title of a button on an alert */
@@ -309,7 +318,7 @@
 /* No comment provided by engineer. */
 "No new articles available" = "Nessun nuovo articolo disponibile";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Ci sono uno o più downloads in corso";
 
 /* Title of a popup menu item */
@@ -482,6 +491,9 @@
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "L'iscrizione a '%@' richiede un nome utente ed una password per l'accesso.";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "Ci sono degli articoli eliminati nel cestino. Desideri svuotare il cestino prima di uscire?";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Questo articolo contiene un file allegato.";

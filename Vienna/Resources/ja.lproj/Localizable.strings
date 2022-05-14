@@ -463,3 +463,6 @@
 /* No comment provided by engineer. */
 "You cannot undo this action" = "この操作は取り消せません。";
 
+/* Class = "NSButtonCell"; title = "Empty Trash"; ObjectID = "17"; */
+"Empty Trash" = "ゴミ箱を空にする";
+

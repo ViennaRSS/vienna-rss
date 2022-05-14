@@ -126,17 +126,26 @@
 /* No comment provided by engineer. */
 "Deleting folder \"%@\"…" = "\"%@\" direktorioa ezabatzen…";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Ez erakutsi ohar hau berriro";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "OPML fitxategitik harpidetzak inportatu nahi al dituzu?";
 
 /* test for a string */
 "does not contain" = "ez dauka";
 
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Ez hustu zakarrontzia";
+
 /* Title of a menu item */
 "Edit…" = "Editatu…";
 
 /* Title of a button on an alert */
 "Empty" = "Hustu";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Zakarrontzia Hustu";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Esparrua";
@@ -192,7 +201,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "Zerbitzariak %d HTTP kodea bueltatu du";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Vienna-tik irten eskero deskargatzen hari den guztia geratu egingo da.";
 
 /* Title of a button on an alert */
@@ -291,7 +300,7 @@
 /* Title of a button on an alert */
 "OK" = "ADOS";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Gauza bat edota gehiago deskargatzen ari dira";
 
 /* Title of a popup menu item */
@@ -447,6 +456,9 @@
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "\"%@\"-entzako harpidetza erabiltzaile izena eta pasahitza behar ditu.";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "Ezabatutako artikuluak zakarrontzian daude. Irten aurretik zakarrontzia hustu nahi al duzu?";
 
 /* No comment provided by engineer. */
 "This operation cannot be undone." = "Ekintza hau ezingo da desegin.";

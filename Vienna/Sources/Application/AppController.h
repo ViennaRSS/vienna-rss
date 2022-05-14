@@ -30,7 +30,6 @@
 @class NewSubscription;
 @class NewGroupFolder;
 @class WebPreferences;
-@class EmptyTrashWarning;
 @class SearchPanel;
 @class DisclosureView;
 @class PluginManager;
@@ -54,7 +53,6 @@
 	DownloadWindow * downloadWindow;
 	SmartFolder * smartFolder;
 	NewGroupFolder * groupFolder;
-	EmptyTrashWarning * emptyTrashWarning;
 	SearchPanel * searchPanel;
 	
 	Database * db;

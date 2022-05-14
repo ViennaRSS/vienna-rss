@@ -144,11 +144,17 @@
 /* No comment provided by engineer. */
 "Descending" = "У спадному";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Більше не показувати це попередження";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Ви дійсно хочете імпортувати підписки з вказаного OPML-файлу?";
 
 /* test for a string */
 "does not contain" = "не містить";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Не спорожняти смітник";
 
 /* No comment provided by engineer. */
 "Download" = "Завантажити";
@@ -170,6 +176,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Спорожнити";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Спорожнити смітник";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Додаток";
@@ -243,7 +252,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "З серверу отримано HTTP код %d";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Якщо Ви завершити Vienna зараз, всі завантаження зупиняться.";
 
 /* Title of a button on an alert */
@@ -345,7 +354,7 @@
 /* Title of a button on an alert */
 "OK" = "Добре";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Одне або більше завантажень ще не завершені";
 
 /* Title of a popup menu item */
@@ -518,6 +527,9 @@
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "Підписка \"%@\" вимагає введення імені користувача та паролю.";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "У смітнику є видалені статті. Чи не хотіли б ви спорожнити смітник перед тим, як завершити програму?";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Ця стаття містить вкладений файл.";

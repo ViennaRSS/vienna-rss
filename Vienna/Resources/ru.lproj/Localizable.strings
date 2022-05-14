@@ -171,11 +171,17 @@
 /* No comment provided by engineer. */
 "Descending" = "По убыванию";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Больше не показывать это сообщение";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Действительно импортировать подписки из указанного файла OPML?";
 
 /* test for a string */
 "does not contain" = "не содержит";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Не очищать";
 
 /* No comment provided by engineer. */
 "Download" = "Загрузка";
@@ -197,6 +203,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Очистить";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Очистить Корзину";
 
 /* Title of a menu item */
 "Empty Trash…" = "Очистить Корзину…";
@@ -300,7 +309,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "Сервер передал HTTP код %d";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Если вы сейчас выйдете из Vienna, все загрузки будут остановлены.";
 
 /* Title of a button on an alert */
@@ -417,7 +426,7 @@
 /* Title of a button on an alert */
 "OK" = "ОК";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Одна или более загрузок еще не завершена";
 
 /* Title of a popup menu item */
@@ -644,6 +653,9 @@
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "Для доступа к подписке \"%@\" требуется имя пользователя и пароль.";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "В Корзине есть удаленные статьи. Очистить Корзину перед завершением работы?";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Эта статья содержит вложенный файл.";

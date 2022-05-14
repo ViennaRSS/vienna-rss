@@ -153,11 +153,17 @@
 /* No comment provided by engineer. */
 "Descending" = "Descendente";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Non amosar este aviso de novo";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Realmente desexa importar as subscricións do arquivo OPML especificado?";
 
 /* test for a string */
 "does not contain" = "non contén";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Non baleirar a papeleira";
 
 /* No comment provided by engineer. */
 "Download" = "Descargar";
@@ -179,6 +185,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Baleirar";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Baleirar papeleira";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Arquivo adxunto";
@@ -273,7 +282,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "Código HTTP %d notificado dende o servidor";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Se saes de Vienna agora, deteranse as descargas.";
 
 /* Title of a button on an alert */
@@ -384,7 +393,7 @@
 /* Title of a button on an alert */
 "OK" = "Aceptar";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Unha ou máis descargas en curso";
 
 /* Title of a popup menu item */
@@ -587,6 +596,9 @@
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "A subscrición a \"%@\" precisa dun nome de usuario e dun contrasinal.";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "Hai artigos eliminados na papeleira. Queres baleirala antes de saír?";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Este artigo contén un arquivo adxunto.";

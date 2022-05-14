@@ -156,11 +156,17 @@
 /* No comment provided by engineer. */
 "Descending" = "降序";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "不要再显示这个提示";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "您确定要通过 OPML 文件来导入频道么？";
 
 /* test for a string */
 "does not contain" = "不包含";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "不要清空废纸篓";
 
 /* No comment provided by engineer. */
 "Download" = "下载";
@@ -182,6 +188,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "清空";
+
+/* Title of a button on an alert */
+"Empty Trash" = "清空废纸篓";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "附带文件";
@@ -273,7 +282,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "服务器回报 HTTP 代码 %d";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "您确定要取消所有下载并且退出 Vienna 么？";
 
 /* Title of a button on an alert */
@@ -384,7 +393,7 @@
 /* Title of a button on an alert */
 "OK" = "是的";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "下载进行中";
 
 /* Title of a popup menu item */
@@ -557,6 +566,9 @@
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "\"%@\" 这个订阅需要提供账号和密码";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "废纸篓中有被删除的文章。您想在退出前清空废纸篓么？";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "这篇文章包含附带文件。";
