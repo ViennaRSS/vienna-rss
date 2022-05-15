@@ -8,6 +8,29 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.8.0 Beta 3
+------------
+- Add "Empty Trash…" menu command to folder list's contextual menu
+- Add setting regarding trash emptying in preferences window
+- Add "Actual Size" menu command for resetting text zoom
+- Make text zoom menu commands work with new browser
+- Fix copy of articles in article list
+- Fix search method selection with new browser
+- Add a warning in advanced preferences that enabling/disabling Javascript might, for systems prior to macOS 11, require a restart
+- Add Australian and British English as localization variants
+- Improve handling of asynchronous actions in new browser
+- Use NSSecureCoding for encoding/decoding of database fields definitions, download list and some preferences
+- Use NSAlert for emptying trash warning
+- Replace deprecated methods
+- Rename some constants, clean up code
+- Update build architecture
+- Update Sparkle to version 2.1
+
+3.7.3
+-----
+- Fix copy of articles in article list
+- Update Sparkle to version 1.27.1
+
 3.8.0 Beta 2
 ------------
 - Change minimum macOS requirement to 10.12 (Sierra)

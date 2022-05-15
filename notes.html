@@ -108,61 +108,24 @@ sup {
 
 <h1 id="toc_0">Version Notes</h1>
 
-<h2 id="toc_1">3.8.0 Beta 2</h2>
+<h2 id="toc_1">3.8.0 Beta 3</h2>
 
 <ul>
-<li>Change minimum macOS requirement to 10.12 (Sierra)</li>
-<li>Speed up database handling (the updated database remains fully compatible with all 3.x.x versions of Vienna)</li>
-<li>When hovering over a link with new browser, display its address on a floating bar</li>
-<li>Add a hidden preference for always displaying the full date, not using relative dates like Today or Yesterday. This is enabled with the Terminal command: <code>defaults write uk.co.opencommunity.vienna2 DoesRelativeDateFormatting -bool NO</code> and can be reversed with <code>defaults delete uk.co.opencommunity.vienna2 DoesRelativeDateFormatting</code></li>
-<li>Remove support for web plug-ins</li>
-<li>Respect new browser&#39;s preference setting regarding JavaScript (might require application restart)</li>
-<li>Fix download manager (old browser only at the time) and replace NSURLDownload with NSURLSessionDownloadTask</li>
-<li>Update AppleScript architecture (use definition files instead of suite/terminology files)</li>
-<li>Improve handling of URLs containing semicolon character in the path component</li>
-<li>Update Sparkle to version 2.0 beta 3 and add an EdDSA key</li>
-<li>Fix some application locks caused by new browser</li>
-<li>Fix some leaks with new browser</li>
-<li>Use Sourceforge for downloading binaries updates</li>
-<li>Replace older logging tools with os_log</li>
-<li>Silence many warnings</li>
-<li>Fix Github test action</li>
-</ul>
-
-<h2 id="toc_2">3.7.2</h2>
-
-<ul>
-<li>Speed up database handling (the updated database remains fully compatible with all 3.x.x versions of Vienna)</li>
-<li>Remove preference setting related to notifications (already handled by System Preferences)</li>
-<li>Fix image overflow with certain feeds</li>
-<li>Fix download manager and replace NSURLDownload with NSURLSessionDownloadTask</li>
-<li>Fix scripts handling in menubar</li>
-<li>Fix behavior when clicking on Dock icon</li>
-<li>Improve handling of URLs containing semicolon character in the path component</li>
-<li>Update Sparkle to version 1.27 and add an EdDSA key</li>
-<li>Update procedures for building binaries (use Sourceforge for binaries instead of Bintray, fix notarization and Github test action)</li>
-</ul>
-
-<h2 id="toc_3">3.8.0 Beta 1</h2>
-
-<ul>
-<li>Implement an experimental new browser based on WKWebView : it can be selected in Advanced preferences, and will be available after application restart. It is fastest and more secure.</li>
-<li>Refactor code:
-
-<ul>
-<li>modify ArticleController to be a NSViewController</li>
-<li>structurate code around protocols like Browser, Tab, ArticleContentView, ArticleViewDelegate and BrowserContextMenuDelegate</li>
-<li>change many methods of BaseView protocol to be optional and remove unneeded code</li>
-<li>introduce new classes : ArticleConverter, ArticleStyleLoader, RSSSubscriber</li>
-</ul></li>
-<li>Remove preference setting related to notifications (already handled by System Preferences)</li>
-<li>Fix image overflow with certain feeds</li>
-<li>Fix scripts handling in menubar</li>
-<li>Fix behavior when clicking on Dock icon</li>
-<li>Update Sparkle to version 1.26</li>
-<li>Use NSFileManager properties for library paths</li>
-<li>Migrate some tests to Swift</li>
-<li>Update procedures for building binaries (don&#39;t use Bintray anymore, fix notarization)</li>
+<li>Add &quot;Empty Trash…&quot; menu command to folder list&#39;s contextual menu</li>
+<li>Add setting regarding trash emptying in preferences window</li>
+<li>Add &quot;Actual Size&quot; menu command for resetting text zoom</li>
+<li>Make text zoom menu commands work with new browser</li>
+<li>Fix copy of articles in article list</li>
+<li>Fix search method selection with new browser</li>
+<li>Add a warning in advanced preferences that enabling/disabling Javascript might, for systems prior to macOS 11, require a restart</li>
+<li>Add Australian and British English as localization variants</li>
+<li>Improve handling of asynchronous actions in new browser</li>
+<li>Use NSSecureCoding for encoding/decoding of database fields definitions, download list and some preferences</li>
+<li>Use NSAlert for emptying trash warning</li>
+<li>Replace deprecated methods</li>
+<li>Rename some constants, clean up code</li>
+<li>Update build architecture</li>
+<li>Update Sparkle to version 2.1</li>
 </ul>
 
 
