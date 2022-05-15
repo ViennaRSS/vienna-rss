@@ -31,19 +31,19 @@
             <rect key="contentRect" x="302" y="347" width="942" height="625"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1025"/>
             <value key="minSize" type="size" width="700" height="350"/>
-            <view key="contentView" wantsLayer="YES" id="2">
+            <view key="contentView" wantsLayer="YES" misplaced="YES" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="942" height="625"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <splitView autosaveName="" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="993">
-                        <rect key="frame" x="0.0" y="22" width="942" height="603"/>
+                        <rect key="frame" x="0.0" y="22" width="942" height="598"/>
                         <subviews>
-                            <view id="PG8-8Y-Lzt">
-                                <rect key="frame" x="0.0" y="0.0" width="288" height="603"/>
+                            <view misplaced="YES" id="PG8-8Y-Lzt">
+                                <rect key="frame" x="0.0" y="0.0" width="288" height="599"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <visualEffectView blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="o3u-Zs-gsz">
-                                        <rect key="frame" x="0.0" y="574" width="288" height="29"/>
+                                        <rect key="frame" x="0.0" y="569" width="288" height="29"/>
                                         <subviews>
                                             <searchField wantsLayer="YES" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CJo-vt-zIx">
                                                 <rect key="frame" x="5" y="5" width="278" height="19"/>
@@ -65,20 +65,20 @@
                                         </constraints>
                                     </visualEffectView>
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8uX-2t-Ik7">
-                                        <rect key="frame" x="0.0" y="0.0" width="288" height="574"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="288" height="569"/>
                                         <clipView key="contentView" drawsBackground="NO" id="QAa-Gc-i1V">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="574"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="569"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" autosaveName="outViewer" rowHeight="24" rowSizeStyle="small" viewBased="YES" indentationPerLevel="13" outlineTableColumn="xXs-dn-GMc" id="Kk7-ax-B3r" customClass="FolderView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="574"/>
+                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" autosaveName="outViewer" rowHeight="24" viewBased="YES" indentationPerLevel="13" outlineTableColumn="xXs-dn-GMc" id="Kk7-ax-B3r" customClass="FolderView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="569"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <size key="intercellSpacing" width="3" height="0.0"/>
                                                     <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
                                                         <tableColumn identifier="folderColumns" width="256" minWidth="16" maxWidth="1000" id="xXs-dn-GMc">
-                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
                                                             </tableHeaderCell>
@@ -97,12 +97,12 @@
                                                                             <rect key="frame" x="2" y="2" width="15" height="15"/>
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="a3L-k0-Hh3"/>
                                                                         </imageView>
-                                                                        <textField identifier="TextField" horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JQW-he-OfP">
+                                                                        <textField identifier="TextField" horizontalHuggingPriority="249" verticalHuggingPriority="751" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JQW-he-OfP">
                                                                             <rect key="frame" x="19" y="1" width="182" height="16"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Folder Name" id="RHN-51-qgk">
                                                                                 <font key="font" metaFont="system"/>
-                                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="4" horizontalStackHuggingPriority="750" verticalStackHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ujq-2L-ZIq">
@@ -147,10 +147,13 @@
                                                                     </constraints>
                                                                     <connections>
                                                                         <outlet property="errorImageView" destination="Zar-1U-8CD" id="n6e-Cp-LCK"/>
+                                                                        <outlet property="iconHorizontalDistance" destination="cEs-gO-a0v" id="cI3-Ap-CLr"/>
                                                                         <outlet property="imageView" destination="N4h-ph-608" id="xhO-cc-OoY"/>
                                                                         <outlet property="progressIndicator" destination="Zii-IU-mH4" id="FFu-ji-rJa"/>
                                                                         <outlet property="stackView" destination="ujq-2L-ZIq" id="Kpi-XH-dvD"/>
                                                                         <outlet property="textField" destination="JQW-he-OfP" id="GMd-dy-KB5"/>
+                                                                        <outlet property="textFieldLeadingSpace" destination="Tuv-eU-9NA" id="YgG-Ez-cOt"/>
+                                                                        <outlet property="unreadCountBaseline" destination="Nps-3X-1De" id="JFh-RB-hPf"/>
                                                                         <outlet property="unreadCountButton" destination="J4i-Hs-cUg" id="adA-1e-aAt"/>
                                                                     </connections>
                                                                 </tableCellView>
@@ -183,7 +186,7 @@
                                 </constraints>
                             </view>
                             <customView fixedFrame="YES" id="9MG-Tu-1xT">
-                                <rect key="frame" x="289" y="0.0" width="653" height="603"/>
+                                <rect key="frame" x="289" y="0.0" width="653" height="599"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </customView>
                         </subviews>
@@ -393,7 +396,7 @@
                         <popUpButton key="view" verticalHuggingPriority="750" id="eKU-qn-2dn">
                             <rect key="frame" x="0.0" y="14" width="53" height="25"/>
                             <autoresizingMask key="autoresizingMask"/>
-                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="FunnelFilterTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="NJC-fy-OS8">
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="NJC-fy-OS8">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" id="Mx2-fn-A84">
@@ -523,7 +526,7 @@
                         <popUpButton key="view" verticalHuggingPriority="750" id="gOd-tT-XFQ">
                             <rect key="frame" x="0.0" y="14" width="50" height="25"/>
                             <autoresizingMask key="autoresizingMask"/>
-                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="lu2-BZ-Gxd" id="5CR-Qn-4pP">
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="StyleTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="lu2-BZ-Gxd" id="5CR-Qn-4pP">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" id="mit-Vi-iR1">

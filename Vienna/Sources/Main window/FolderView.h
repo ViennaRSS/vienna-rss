@@ -20,6 +20,8 @@
 
 @import Cocoa;
 
+#import "FeedListConstants.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol FolderViewDelegate <NSOutlineViewDelegate>
@@ -32,8 +34,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FolderView : NSOutlineView <NSMenuItemValidation>
 
-@property (weak, nullable) id <FolderViewDelegate> delegate;
-@property (nullable, nonatomic) NSPredicate* filterPredicate;
+@property (nonatomic) VNAFeedListSizeMode sizeMode;
+- (CGFloat)rowHeightForSize:(VNAFeedListSizeMode)sizeMode;
+
+- (void)reloadDataWhilePreservingSelection;
+- (void)reloadDataForRowIndexWhilePreservingSelection:(NSInteger)rowIndex;
+
+@property (weak, nullable) id<FolderViewDelegate> delegate;
+@property (nullable, nonatomic) NSPredicate *filterPredicate;
 
 @end
 

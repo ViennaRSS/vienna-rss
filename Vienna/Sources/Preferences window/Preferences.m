@@ -26,6 +26,7 @@
 #import "Article.h"
 #import "Constants.h"
 #import "DownloadItem.h"
+#import "FeedListConstants.h"
 #import "NSFileManager+Paths.h"
 #import "NSKeyedArchiver+Compatibility.h"
 #import "NSKeyedUnarchiver+Compatibility.h"
@@ -240,6 +241,7 @@ static Preferences * _standardPreferences = nil;
     defaultValues[MAPref_AlwaysAcceptBetas] = boolNo;
     defaultValues[MAPref_UserAgentName] = @"Vienna";
     defaultValues[MAPref_UseRelativeDates] = boolYes;
+    defaultValues[MAPref_FeedListSizeMode] = [NSNumber numberWithInteger:VNAFeedListSizeModeSmall];
 
 	return [defaultValues copy];
 }
@@ -303,6 +305,33 @@ static Preferences * _standardPreferences = nil;
                                                          requiringSecureCoding:YES];
         [self setObject:keyedArchive forKey:MAPref_ArticleListFont];
         [userPrefs removeObjectForKey:MAPref_Deprecated_ArticleListFont];
+    }
+
+    if ([userPrefs objectForKey:MAPref_Deprecated_FolderFont]) {
+        NSData *archive = [self objectForKey:MAPref_Deprecated_FolderFont];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        NSFont *font = [NSUnarchiver unarchiveObjectWithData:archive];
+#pragma clang diagnostic pop
+        if (font && font.pointSize <= 11.0) {
+            [userPrefs setInteger:VNAFeedListSizeModeTiny
+                           forKey:MAPref_FeedListSizeMode];
+        }
+        [userPrefs removeObjectForKey:MAPref_Deprecated_FolderFont];
+    }
+
+    if ([userPrefs objectForKey:MAPref_Deprecated_FolderListFont]) {
+        NSData *archive = [self objectForKey:MAPref_Deprecated_FolderListFont];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        NSFont *font = [NSKeyedUnarchiver vna_unarchivedObjectOfClass:[NSFont class]
+                                                             fromData:archive];
+#pragma clang diagnostic pop
+        if (font && font.pointSize <= 11.0) {
+            [userPrefs setInteger:VNAFeedListSizeModeTiny
+                           forKey:MAPref_FeedListSizeMode];
+        }
+        [userPrefs removeObjectForKey:MAPref_Deprecated_FolderListFont];
     }
 }
 

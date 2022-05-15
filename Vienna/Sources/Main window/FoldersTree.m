@@ -25,13 +25,19 @@
 #import "Preferences.h"
 #import "HelperFunctions.h"
 #import "StringExtensions.h"
+#import "FeedListConstants.h"
 #import "FolderView.h"
+#import "FeedListCellView.h"
 #import "OpenReader.h"
 #import "Database.h"
 #import "TreeNode.h"
 #import "Folder.h"
-#import "FeedListCellView.h"
 #import "Vienna-Swift.h"
+
+NSString * const MAPref_FeedListSizeMode = @"FeedListSizeMode";
+NSString * const MAPref_ShowFeedsWithUnreadItemsInBold = @"ShowFeedsWithUnreadItemsInBold";
+
+static void *ObserverContext = &ObserverContext;
 
 @interface FoldersTree ()
 
@@ -62,7 +68,8 @@
 
 @implementation FoldersTree
 
-- (instancetype)init {
+- (instancetype)init
+{
     self = [super init];
 
 	if (self) {
@@ -88,9 +95,8 @@
 	// Initially size the outline view column to be the correct width
 	[self.outlineView sizeLastColumnToFit];
 
-	// Don't resize the column when items are expanded as this messes up
-	// the placement of the unread count button.
-	[self.outlineView setAutoresizesOutlineColumn:NO];
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [self updateCellSize:[userDefaults integerForKey:MAPref_FeedListSizeMode]];
 
 	// Register for dragging
 	[self.outlineView registerForDraggedTypes:@[VNAPasteboardTypeFolderList, VNAPasteboardTypeRSSSource, VNAPasteboardTypeWebURLsWithTitles, NSPasteboardTypeString]];
@@ -107,7 +113,7 @@
 	self.blockSelectionHandler = YES;
 	[self reloadDatabase:[[Preferences standardPreferences] arrayForKey:MAPref_FolderStates]];
 	self.blockSelectionHandler = NO;
-	
+
 	// Register for notifications
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
@@ -117,6 +123,28 @@
 	[nc addObserver:self selector:@selector(handleShowFolderImagesChange:) name:@"MA_Notify_ShowFolderImages" object:nil];
 	[nc addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
     [nc addObserver:self selector:@selector(handleOpenReaderFolderChange:) name:@"MA_Notify_OpenReaderFolderChange" object:nil];
+
+    [userDefaults addObserver:self
+                   forKeyPath:MAPref_FeedListSizeMode
+                      options:0
+                      context:ObserverContext];
+    [userDefaults addObserver:self
+                   forKeyPath:MAPref_ShowFeedsWithUnreadItemsInBold
+                      options:0
+                      context:ObserverContext];
+}
+
+- (void)dealloc
+{
+    [NSNotificationCenter.defaultCenter removeObserver:self];
+
+    NSUserDefaults *userDefaults;
+    [userDefaults removeObserver:self
+                      forKeyPath:MAPref_FeedListSizeMode
+                         context:ObserverContext];
+    [userDefaults removeObserver:self
+                      forKeyPath:MAPref_ShowFeedsWithUnreadItemsInBold
+                         context:ObserverContext];
 }
 
 -(NSMenu *)folderMenu
@@ -389,7 +417,7 @@
 	TreeNode * node = [self.rootNode nodeFromID:folderId];
 	if (node != nil)
 	{
-		[self.outlineView reloadItem:node reloadChildren:YES];
+		[self.outlineView reloadItem:node];
 		if (recurseToParents)
 		{
 			while (node.parentNode != self.rootNode)
@@ -810,8 +838,9 @@
 {
 	if (node == self.rootNode)
 		[self.outlineView reloadData];
-	else
-		[self.outlineView reloadItem:node reloadChildren:YES];
+    else {
+        [self.outlineView reloadItem:node];
+    }
 }
 
 /* mainView
@@ -1111,12 +1140,51 @@
     self.outlineView.filterPredicate = predicate;
 }
 
-/* dealloc
- * Clean up and release resources.
- */
--(void)dealloc
+// MARK: Key-value observing
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+                       context:(void *)context
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    if (context != ObserverContext) {
+        [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
+        return;
+    }
+
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    if ([object isNotEqualTo:userDefaults]) {
+        return;
+    }
+
+    if ([keyPath isEqualToString:MAPref_FeedListSizeMode]) {
+        [self updateCellSize:[userDefaults integerForKey:MAPref_FeedListSizeMode]];
+    }
+    if ([keyPath isEqualToString:MAPref_ShowFeedsWithUnreadItemsInBold]) {
+        [self.outlineView reloadDataWhilePreservingSelection];
+    }
+}
+
+- (void)updateCellSize:(VNAFeedListSizeMode)size
+{
+    switch (size) {
+    case VNAFeedListSizeModeTiny:
+    case VNAFeedListSizeModeSmall:
+    case VNAFeedListSizeModeMedium:
+        self.outlineView.sizeMode = size;
+        break;
+    default:
+        self.outlineView.sizeMode = VNAFeedListSizeModeTiny;
+    }
+
+    self.outlineView.rowHeight = [self.outlineView rowHeightForSize:size];
+    NSRange rowsRange = NSMakeRange(0, self.outlineView.numberOfRows);
+    NSIndexSet *rowIndexes = [NSIndexSet indexSetWithIndexesInRange:rowsRange];
+    [self.outlineView noteHeightOfRowsWithIndexesChanged:rowIndexes];
+    [self.outlineView reloadDataWhilePreservingSelection];
 }
 
 // MARK: - NSOutlineViewDataSource
@@ -1130,7 +1198,7 @@
     TreeNode * node = (TreeNode *)item;
     if (node == nil)
         node = self.rootNode;
-    return node.canHaveChildren;
+    return node.canHaveChildren && node.countOfChildren > 0;
 }
 
 /* validateDrop
@@ -1319,54 +1387,6 @@
     return NO;
 }
 
-- (NSView *)outlineView:(NSOutlineView *)outlineView
-     viewForTableColumn:(NSTableColumn *)tableColumn
-                   item:(id)item
-{
-    VNAFeedListCellView *cellView = nil;
-
-    if (![tableColumn.identifier isEqualToString:@"folderColumns"]) {
-        return cellView;
-    }
-
-    cellView = [outlineView makeViewWithIdentifier:@"FeedListCellView" owner:self];
-    TreeNode *node = (TreeNode *)item;
-    if (!node) {
-        node = self.rootNode;
-    }
-    Folder *folder = node.folder;
-
-    // Only show folder images if the user prefers them.
-    Preferences *prefs = [Preferences standardPreferences];
-    cellView.imageView.image = (prefs.showFolderImages ? folder.image : [folder standardImage]);
-    cellView.textField.stringValue = node.nodeName;
-    cellView.textField.delegate = self;
-
-    // Use the auxiliary position of the feed item to show
-    // the refresh icon if the feed is being refreshed, or an
-    // error icon if the feed failed to refresh last time.
-    if (folder.isUpdating) {
-        cellView.inProgress = YES;
-    } else if (folder.isError) {
-        cellView.showError = YES;
-        cellView.inProgress = NO;
-    } else {
-        cellView.showError = NO;
-        cellView.inProgress = NO;
-    }
-
-    // Because if the search results contain unread articles we don't want the smart folder name to be bold.
-    if (folder.type == VNAFolderTypeSmart) {
-        cellView.unreadCount = 0;
-    } else if (folder.type == VNAFolderTypeGroup) {
-        cellView.unreadCount = folder.childUnreadCount;
-    } else {
-        cellView.unreadCount = folder.unreadCount;
-    }
-
-    return cellView;
-}
-
 /* numberOfChildrenOfItem
  * Returns the number of children belonging to the specified item
  */
@@ -1403,6 +1423,128 @@
 }
 
 // MARK: - NSOutlineViewDelegate
+
+- (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
+{
+    VNAFeedListSizeMode size = self.outlineView.sizeMode;
+    return [self.outlineView rowHeightForSize:size];
+}
+
+- (NSView *)outlineView:(NSOutlineView *)outlineView
+     viewForTableColumn:(NSTableColumn *)tableColumn
+                   item:(id)item
+{
+    if ([tableColumn isNotEqualTo:outlineView.outlineTableColumn]) {
+        return nil;
+    }
+
+    VNAFeedListCellView *cellView = [outlineView makeViewWithIdentifier:VNAFeedListCellViewIdentifier owner:self];
+    TreeNode *node = (TreeNode *)item;
+    if (!node && node == self.rootNode) {
+        node = self.rootNode;
+    }
+    Folder *folder = node.folder;
+
+    // Only show folder images if the user prefers them.
+    Preferences *prefs = [Preferences standardPreferences];
+    cellView.imageView.image = (prefs.showFolderImages ? folder.image : [folder standardImage]);
+    cellView.textField.stringValue = node.nodeName;
+    cellView.textField.delegate = self;
+
+    cellView.sizeMode = self.outlineView.sizeMode;
+
+    // Use the auxiliary position of the feed item to show
+    // the refresh icon if the feed is being refreshed, or an
+    // error icon if the feed failed to refresh last time.
+    if (folder.isUpdating) {
+        cellView.inProgress = YES;
+    } else if (folder.isError) {
+        cellView.showError = YES;
+        cellView.inProgress = NO;
+    } else {
+        cellView.showError = NO;
+        cellView.inProgress = NO;
+    }
+
+    BOOL useEmphasis = [prefs boolForKey:MAPref_ShowFeedsWithUnreadItemsInBold];
+
+    switch (folder.type) {
+        case VNAFolderTypeSmart:
+        case VNAFolderTypeTrash:
+        case VNAFolderTypeSearch:
+            cellView.emphasized = NO;
+            cellView.canShowUnreadCount = NO;
+            break;
+        case VNAFolderTypeGroup:
+            cellView.emphasized = useEmphasis && folder.childUnreadCount > 0 && ![outlineView isItemExpanded:item];
+            cellView.canShowUnreadCount = ![outlineView isItemExpanded:item];
+            cellView.unreadCount = folder.childUnreadCount;
+            break;
+        default:
+            cellView.emphasized = useEmphasis && folder.unreadCount > 0;
+            cellView.canShowUnreadCount = YES;
+            cellView.unreadCount = folder.unreadCount;
+    }
+
+    cellView.inactive = folder.isUnsubscribed;
+
+    return cellView;
+}
+
+- (void)outlineViewItemDidCollapse:(NSNotification *)notification
+{
+    FolderView *folderView = notification.object;
+    TreeNode *node = notification.userInfo[@"NSObject"];
+
+    if (!folderView || !node || folderView.numberOfColumns != 1) {
+        return;
+    }
+
+    if (node.folder.type != VNAFolderTypeGroup) {
+        return;
+    }
+
+    NSInteger rowIndex = [folderView rowForItem:node];
+    VNAFeedListCellView *cellView = [folderView viewAtColumn:0
+                                                         row:rowIndex
+                                             makeIfNecessary:NO];
+    // This block allows the accessor to query whether implicit animations are
+    // allowed, in which case it can show animations.
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+        context.allowsImplicitAnimation = YES;
+        cellView.canShowUnreadCount = YES;
+    }];
+
+    Preferences *preferences = Preferences.standardPreferences;
+    BOOL useEmphasis = [preferences boolForKey:MAPref_ShowFeedsWithUnreadItemsInBold];
+    cellView.emphasized = useEmphasis && node.folder.childUnreadCount;
+}
+
+- (void)outlineViewItemDidExpand:(NSNotification *)notification
+{
+    FolderView *folderView = notification.object;
+    TreeNode *node = notification.userInfo[@"NSObject"];
+
+    if (!folderView || !node || folderView.numberOfColumns != 1) {
+        return;
+    }
+
+    if (node.folder.type != VNAFolderTypeGroup) {
+        return;
+    }
+
+    NSInteger rowIndex = [folderView rowForItem:node];
+    VNAFeedListCellView *cellView = [folderView viewAtColumn:0
+                                                         row:rowIndex
+                                             makeIfNecessary:NO];
+    // This block allows the accessor to query whether implicit animations are
+    // allowed for the current animation context (the default is nil).
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+        context.allowsImplicitAnimation = YES;
+        cellView.canShowUnreadCount = NO;
+    }];
+    cellView.emphasized = NO;
+}
 
 /* outlineViewSelectionDidChange
  * Called when the selection in the folder list has changed.

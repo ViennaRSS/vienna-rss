@@ -19,26 +19,40 @@
 //
 
 #import "FolderView.h"
-#import "TreeNode.h"
+
+#import <os/log.h>
+
 #import "AppController.h"
+#import "FeedListCellView.h"
 #import "FoldersFilterable.h"
+#import "TreeNode.h"
+
+#define VNA_LOG os_log_create("--", "FolderView")
+
+VNAFeedListRowHeight const VNAFeedListRowHeightTiny = 20.0;
+VNAFeedListRowHeight const VNAFeedListRowHeightSmall = 24.0;
+VNAFeedListRowHeight const VNAFeedListRowHeightMedium = 28.0;
+
+static void *ObserverContext = &ObserverContext;
 
 @implementation FolderView {
-    NSPredicate*            _filterPredicate;
-    FoldersFilterableDataSourceImpl* _filterDataSource;
-    NSDictionary*           _prefilterState;
+    NSPredicate *_filterPredicate;
+    FoldersFilterableDataSourceImpl *_filterDataSource;
+    NSDictionary *_prefilterState;
     id _directDataSource;
 }
 
 @dynamic delegate;
 
+// MARK: Overrides
+
 /* becomeFirstResponder
  * Let the delegate prepare for the outline view to become first responder.
  */
--(BOOL)becomeFirstResponder
+- (BOOL)becomeFirstResponder
 {
     [self.delegate folderViewWillBecomeFirstResponder];
-	return [super becomeFirstResponder];
+    return [super becomeFirstResponder];
 }
 
 - (BOOL)validateProposedFirstResponder:(NSResponder *)responder
@@ -48,7 +62,8 @@
     // clicks. A right click can enable the text-field editing, e.g. when a cell
     // is selected and the user right clicks on the cell to open the menu. Since
     // this is unwanted behavior, the right click should simply be ignored.
-    if ([((NSTextField *)responder).identifier isEqualToString:@"TextField"] &&
+    if ([((id<NSUserInterfaceItemIdentification>)responder).identifier
+            isEqualToString:VNAFeedListCellViewTextFieldIdentifier] &&
         event.type == NSEventTypeRightMouseDown) {
         return NO;
     }
@@ -56,54 +71,31 @@
     // This prevents the unread count from responding to mouse clicks; it will
     // behave like a view instead of a button. The clicks will fall through to
     // enclosing outline-view cell instead.
-    if ([((NSButton *)responder).identifier isEqualToString:@"CountButton"]) {
+    if ([((id<NSUserInterfaceItemIdentification>)responder).identifier
+            isEqualToString:VNAFeedListCellViewCountButtonIdentifier]) {
         return NO;
     }
 
     return [super validateProposedFirstResponder:responder forEvent:event];
 }
 
-/* draggingSession:sourceOperationMaskForDraggingContext
- * Let the control know the expected behaviour for local and external drags.
- */
--(NSDragOperation)draggingSession:(NSDraggingSession *)session sourceOperationMaskForDraggingContext:(NSDraggingContext)context
+- (void)keyDown:(NSEvent *)theEvent
 {
-    switch(context) {
-        case NSDraggingContextWithinApplication:
-            return NSDragOperationMove|NSDragOperationGeneric;
-        default:
-            return NSDragOperationCopy;
+    if (theEvent.characters.length == 1) {
+        unichar keyChar = [theEvent.characters characterAtIndex:0];
+        if ([APPCONTROLLER handleKeyDown:keyChar withFlags:theEvent.modifierFlags])
+            return;
     }
+    [super keyDown:theEvent];
 }
 
-/* keyDown
- * Here is where we handle special keys when the outline view
- * has the focus so we can do custom things.
- */
--(void)keyDown:(NSEvent *)theEvent
-{
-	if (theEvent.characters.length == 1)
-	{
-		unichar keyChar = [theEvent.characters characterAtIndex:0];
-		if ([APPCONTROLLER handleKeyDown:keyChar withFlags:theEvent.modifierFlags])
-			return;
-	}
-	[super keyDown:theEvent];
-}
-
-/* setDataSource
- * Called when the data source changes.
- */
--(void)setDataSource:(id)aSource
+- (void)setDataSource:(id)aSource
 {
     _directDataSource = aSource;
     _filterDataSource = [[FoldersFilterableDataSourceImpl alloc] initWithDataSource:aSource];
-       super.dataSource = aSource;
+    super.dataSource = aSource;
 }
 
-/* reloadData
- * Called when the user reloads the view data.
- */
 - (void)reloadData
 {
     if (_filterDataSource && _filterPredicate) {
@@ -113,24 +105,28 @@
     }
 }
 
-- (NSPredicate*)filterPredicate {
+// MARK: Accessors
+
+- (NSPredicate *)filterPredicate
+{
     return _filterPredicate;
 }
 
-- (void)setFilterPredicate:(NSPredicate *)filterPredicate {
-    if (_filterPredicate == filterPredicate)
+- (void)setFilterPredicate:(NSPredicate *)filterPredicate
+{
+    if (_filterPredicate == filterPredicate) {
         return;
+    }
 
     if (_filterPredicate == nil) {
         _prefilterState = self.vna_state;
     }
 
     _filterPredicate = filterPredicate;
-    if (_filterDataSource && _filterPredicate){
+    if (_filterDataSource && _filterPredicate) {
         [_filterDataSource setFilterPredicate:_filterPredicate outlineView:self];
         super.dataSource = _filterDataSource;
-    }
-    else{
+    } else {
         super.dataSource = _directDataSource;
     }
 
@@ -139,61 +135,100 @@
     if (_filterPredicate) {
         [self expandItem:nil expandChildren:YES];
         self.vna_selectionState = _prefilterState[@"Selection"];
-    }
-    else if (_prefilterState) {
+    } else if (_prefilterState) {
         self.vna_state = _prefilterState;
         _prefilterState = nil;
     }
 }
 
-/* copy
- * Handle the Copy action when the outline view has focus.
- */
--(IBAction)copy:(id)sender
+// MARK: Methods
+
+- (CGFloat)rowHeightForSize:(VNAFeedListSizeMode)sizeMode
 {
-	if (self.selectedRow >= 0)
-	{
-		NSMutableArray * array = [NSMutableArray arrayWithCapacity:self.numberOfSelectedRows];
-		NSIndexSet * selectedRowIndexes = self.selectedRowIndexes;
-		NSUInteger  item = selectedRowIndexes.firstIndex;
-		
-		while (item != NSNotFound)
-		{
-			id node = [self itemAtRow:item];
-			[array addObject:node];
-			item = [selectedRowIndexes indexGreaterThanIndex:item];
-		}
+    // As of macOS 11 no inter-cell spacing is applied. Since the row heights
+    // (see below) were based on macOS 11+, they look taller on older systems
+    // because of the additional inter-cell spacing.
+    CGFloat cellSpacing = self.intercellSpacing.height;
+
+    switch (sizeMode) {
+    case VNAFeedListSizeModeTiny:
+        return VNAFeedListRowHeightTiny - cellSpacing;
+    case VNAFeedListSizeModeSmall:
+        return VNAFeedListRowHeightSmall - cellSpacing;
+    case VNAFeedListSizeModeMedium:
+        return VNAFeedListRowHeightMedium - cellSpacing;
+    default:
+        os_log_fault(VNA_LOG, "Invalid cell view size");
+        return -1.0;
+    }
+}
+
+- (void)reloadDataWhilePreservingSelection
+{
+    NSRange rowsRange = NSMakeRange(0, self.numberOfRows);
+    NSRange columnsRange = NSMakeRange(0, self.numberOfColumns);
+    NSIndexSet *rowIndexes = [NSIndexSet indexSetWithIndexesInRange:rowsRange];
+    NSIndexSet *columnIndexes = [NSIndexSet indexSetWithIndexesInRange:columnsRange];
+    [self reloadDataForRowIndexes:rowIndexes columnIndexes:columnIndexes];
+}
+
+- (void)reloadDataForRowIndexWhilePreservingSelection:(NSInteger)rowIndex
+{
+    NSRange range = NSMakeRange(0, self.numberOfColumns);
+    NSIndexSet *rowIndexes = [NSIndexSet indexSetWithIndex:rowIndex];
+    NSIndexSet *columnIndexes = [NSIndexSet indexSetWithIndexesInRange:range];
+    [self reloadDataForRowIndexes:rowIndexes columnIndexes:columnIndexes];
+}
+
+// MARK: Actions
+
+- (IBAction)copy:(id)sender
+{
+    if (self.selectedRow >= 0) {
+        NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.numberOfSelectedRows];
+        NSIndexSet *selectedRowIndexes = self.selectedRowIndexes;
+        NSUInteger item = selectedRowIndexes.firstIndex;
+
+        while (item != NSNotFound) {
+            id node = [self itemAtRow:item];
+            [array addObject:node];
+            item = [selectedRowIndexes indexGreaterThanIndex:item];
+        }
         [self.delegate copyTableSelection:array toPasteboard:NSPasteboard.generalPasteboard];
-	}
+    }
 }
 
-/* delete
- * Handle the Delete action when the outline view has focus.
- */
--(IBAction)delete:(id)sender
+- (IBAction)delete:(id)sender
 {
-	[APPCONTROLLER deleteFolder:self];
+    [APPCONTROLLER deleteFolder:self];
 }
 
-/* validateMenuItem
- * This is our override where we handle item validation for the
- * commands that we own.
- */
--(BOOL)validateMenuItem:(NSMenuItem *)menuItem
+// MARK: - NSDraggingSource
+
+- (NSDragOperation)draggingSession:(NSDraggingSession *)session sourceOperationMaskForDraggingContext:(NSDraggingContext)context
 {
-	if (menuItem.action == @selector(copy:))
-	{
-		return (self.selectedRow >= 0);
-	}
-	if (menuItem.action == @selector(delete:))
-	{
+    switch (context) {
+    case NSDraggingContextWithinApplication:
+        return NSDragOperationMove | NSDragOperationGeneric;
+    default:
+        return NSDragOperationCopy;
+    }
+}
+
+// MARK: - NSMenuItemValidation
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+    if (menuItem.action == @selector(copy:)) {
+        return (self.selectedRow >= 0);
+    }
+    if (menuItem.action == @selector(delete:)) {
         return [self.delegate canDeleteFolderAtRow:self.selectedRow];
-	}
-	if (menuItem.action == @selector(selectAll:))
-	{
-		return YES;
-	}
-	return NO;
+    }
+    if (menuItem.action == @selector(selectAll:)) {
+        return YES;
+    }
+    return NO;
 }
 
 @end

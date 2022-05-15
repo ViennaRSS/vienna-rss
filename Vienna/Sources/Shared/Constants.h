@@ -78,6 +78,8 @@ extern NSString * MAPref_UserAgentName;
 extern NSString *const MAPref_UseRelativeDates;
 extern NSString * const MAPref_ShowDetailsOnFeedCredentialsDialog;
 extern NSString * const MAPref_ShowEnclosureBar;
+extern NSString * const MAPref_FeedListSizeMode;
+extern NSString * const MAPref_ShowFeedsWithUnreadItemsInBold;
 
 // Deprecated defaults keys
 extern NSString *const MAPref_Deprecated_ArticleListFont;

@@ -2,7 +2,7 @@
 //  FeedListCellView.h
 //  Vienna
 //
-//  Copyright 2021 Joshua Pore
+//  Copyright 2021 Joshua Pore, 2021-2022 Eitot
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -19,13 +19,23 @@
 
 @import Cocoa;
 
+#import "FeedListConstants.h"
+
 NS_ASSUME_NONNULL_BEGIN
+
+extern NSUserInterfaceItemIdentifier const VNAFeedListCellViewIdentifier;
+extern NSUserInterfaceItemIdentifier const VNAFeedListCellViewTextFieldIdentifier;
+extern NSUserInterfaceItemIdentifier const VNAFeedListCellViewCountButtonIdentifier;
 
 @interface VNAFeedListCellView : NSTableCellView
 
+@property (nonatomic) VNAFeedListSizeMode sizeMode;
 @property (nonatomic) BOOL inProgress;
 @property (nonatomic) NSInteger unreadCount;
+@property (nonatomic) BOOL canShowUnreadCount;
 @property (nonatomic) BOOL showError;
+@property (getter=isEmphasized, nonatomic) BOOL emphasized;
+@property (getter=isInactive, nonatomic) BOOL inactive;
 
 @end
 
