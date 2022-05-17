@@ -32,6 +32,7 @@
 #import "Article.h"
 #import "Folder.h"
 #import "BackTrackArray.h"
+#import "StringExtensions.h"
 #import "Vienna-Swift.h"
 
 @interface ArticleController ()
@@ -63,51 +64,51 @@
 		articleSortSpecifiers = @{
 								  MA_Field_Folder: @{
 										  @"key": @"containingFolder.name",
-										  @"selector": @"compare:"
+										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
 								  MA_Field_Read: @{
 										  @"key": @"isRead",
-										  @"selector": @"compare:"
+										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
 								  MA_Field_Flagged: @{
 										  @"key": @"isFlagged",
-										  @"selector": @"compare:"
+										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
 								  MA_Field_Comments: @{
 										  @"key": @"hasComments",
-										  @"selector": @"compare:"
+										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
 								  MA_Field_Date: @{
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_Date],
-										  @"selector": @"compare:"
+										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
 								  MA_Field_Author: @{
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_Author],
-										  @"selector": @"caseInsensitiveCompare:"
+										  @"selector": NSStringFromSelector(@selector(caseInsensitiveCompare:))
 										  },
 								  MA_Field_Headlines: @{
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_Subject],
-										  @"selector": @"numericCompare:"
+										  @"selector": NSStringFromSelector(@selector(vna_numericCompare:))
 										  },
 								  MA_Field_Subject: @{
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_Subject],
-										  @"selector": @"numericCompare:"
+										  @"selector": NSStringFromSelector(@selector(vna_numericCompare:))
 										  },
 								  MA_Field_Link: @{
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_Link],
-										  @"selector": @"caseInsensitiveCompare:"
+										  @"selector": NSStringFromSelector(@selector(caseInsensitiveCompare:))
 										  },
 								  MA_Field_Summary: @{
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_Summary],
-										  @"selector": @"caseInsensitiveCompare:"
+										  @"selector": NSStringFromSelector(@selector(caseInsensitiveCompare:))
 										  },
 								  MA_Field_HasEnclosure: @{
 										  @"key": @"hasEnclosure",
-										  @"selector": @"compare:"
+										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
 								  MA_Field_Enclosure: @{
 										  @"key": @"enclosure",
-										  @"selector": @"caseInsensitiveCompare:"
+										  @"selector": NSStringFromSelector(@selector(caseInsensitiveCompare:))
 										  },
 								  };
 
