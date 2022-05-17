@@ -158,10 +158,10 @@ static Preferences * _standardPreferences = nil;
 				preferencesPath = [preferencesPath stringByAppendingString:@".plist"];
 			}
 			userPrefs = [[NSMutableDictionary alloc] initWithDictionary:defaults];
-            [self migrateEncodedPreferences];
 			if (preferencesPath != nil)
 				[userPrefs addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:preferencesPath]];
-            
+			[self migrateEncodedPreferences];
+
 			// Other folders are local to the profilePath
 			defaultDatabase = [profilePath stringByAppendingPathComponent:MA_Database_Name];
 			imagesFolder = [profilePath stringByAppendingPathComponent:MA_ImagesFolder_Name].stringByExpandingTildeInPath;
@@ -269,6 +269,8 @@ static Preferences * _standardPreferences = nil;
 
 	NSFileManager *fileManager = NSFileManager.defaultManager;
 	NSString *appSupportPath = fileManager.vna_applicationSupportDirectory.path;
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[@"articleData." stringByAppendingString:MA_Field_Date]
+                                                                   ascending:YES];
 
 	defaultValues[MAPref_DefaultDatabase] = [appSupportPath stringByAppendingPathComponent:MA_Database_Name];
 	defaultValues[MAPref_CheckForUpdatedArticles] = boolNo;
@@ -308,7 +310,7 @@ static Preferences * _standardPreferences = nil;
                                                                       requiringSecureCoding:YES];
     defaultValues[MAPref_FolderListFont] = [NSKeyedArchiver vna_archivedDataWithRootObject:defaultFont
                                                                      requiringSecureCoding:YES];
-    defaultValues[MAPref_ArticleListSortOrders] = [NSKeyedArchiver vna_archivedDataWithRootObject:@[]
+    defaultValues[MAPref_ArticleListSortOrders] = [NSKeyedArchiver vna_archivedDataWithRootObject:@[sortDescriptor]
                                                                             requiringSecureCoding:YES];
     defaultValues[MAPref_SearchMethod] = [NSKeyedArchiver vna_archivedDataWithRootObject:[SearchMethod allArticlesSearchMethod]
                                                                    requiringSecureCoding:YES];
@@ -327,11 +329,6 @@ static Preferences * _standardPreferences = nil;
 
 - (void)migrateEncodedPreferences
 {
-    // Users who ran a beta build of Vienna might have invalid sort descriptors.
-    if ([self integerForKey:MAPref_HighestViennaVersionRun] == 7775) {
-        [userPrefs removeObjectForKey:MAPref_ArticleListSortOrders];
-    }
-
     if ([userPrefs objectForKey:MAPref_Deprecated_ArticleListSortOrders]) {
         NSData *archive = [self objectForKey:MAPref_Deprecated_ArticleListSortOrders];
 #pragma clang diagnostic push
@@ -496,6 +493,10 @@ static Preferences * _standardPreferences = nil;
 -(id)objectForKey:(NSString *)defaultName
 {
 	return [userPrefs objectForKey:defaultName];
+}
+
+- (void)removeObjectForKey:(NSString *)defaultName {
+    [userPrefs removeObjectForKey:defaultName];
 }
 
 /* imagesFolder
@@ -1056,6 +1057,18 @@ static Preferences * _standardPreferences = nil;
  */
 -(void)setArticleSortDescriptors:(NSArray *)newSortDescriptors
 {
+    if (!newSortDescriptors) {
+        // Reset to registered default value.
+        articleSortDescriptors = [NSKeyedUnarchiver vna_unarchivedArrayOfObjectsOfClass:[NSSortDescriptor class]
+                                                                               fromData:[self objectForKey:MAPref_ArticleListSortOrders]];
+        // Securely decoded sort descriptors must be explicitely set to allow
+        // evaluation, otherwise an exception is thrown.
+        for (NSSortDescriptor *descriptor in articleSortDescriptors) {
+            [descriptor allowEvaluation];
+        }
+        return;
+    }
+
 	if (![articleSortDescriptors isEqualToArray:newSortDescriptors])
 	{
 		articleSortDescriptors = [newSortDescriptors copy];
