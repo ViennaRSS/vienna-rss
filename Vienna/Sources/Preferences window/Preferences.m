@@ -341,7 +341,7 @@ static Preferences * _standardPreferences = nil;
             if ([NSStringFromSelector(descriptor.selector) isEqualToString:@"numericCompare:"]) {
                 descriptor = [NSSortDescriptor sortDescriptorWithKey:descriptor.key
                                                            ascending:descriptor.ascending
-                                                            selector:@selector(vna_numericCompare:)];
+                                                            selector:@selector(vna_caseInsensitiveNumericCompare:)];
                 [sortDescriptors replaceObjectAtIndex:idx
                                            withObject:descriptor];
             }

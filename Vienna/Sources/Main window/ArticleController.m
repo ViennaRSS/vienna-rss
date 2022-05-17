@@ -92,11 +92,11 @@
 										  },
 								  MA_Field_Headlines: @{
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_Subject],
-										  @"selector": NSStringFromSelector(@selector(vna_numericCompare:))
+										  @"selector": NSStringFromSelector(@selector(vna_caseInsensitiveNumericCompare:))
 										  },
 								  MA_Field_Subject: @{
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_Subject],
-										  @"selector": NSStringFromSelector(@selector(vna_numericCompare:))
+										  @"selector": NSStringFromSelector(@selector(vna_caseInsensitiveNumericCompare:))
 										  },
 								  MA_Field_Link: @{
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_Link],

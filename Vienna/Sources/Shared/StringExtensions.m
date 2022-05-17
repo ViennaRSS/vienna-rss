@@ -689,12 +689,12 @@ static NSMutableDictionary * entityMap = nil;
 	return (url && url.host) ? url.host : self;
 }
 
-/* numericCompare
+/* vna_caseInsensitiveNumericCompare
  * Compares two strings using both case insensitivity and numeric comparisons.
  */
--(NSComparisonResult)vna_numericCompare:(NSString *)aString
+- (NSComparisonResult)vna_caseInsensitiveNumericCompare:(NSString *)string
 {
-	return [self compare:aString options:NSCaseInsensitiveSearch|NSNumericSearch];
+    return [self compare:string options:NSCaseInsensitiveSearch | NSNumericSearch];
 }
 
 
