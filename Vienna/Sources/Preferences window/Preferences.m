@@ -31,6 +31,7 @@
 #import "NSKeyedArchiver+Compatibility.h"
 #import "NSKeyedUnarchiver+Compatibility.h"
 #import "SearchMethod.h"
+#import "StringExtensions.h"
 #import "Vienna-Swift.h"
 
 #define VNA_LOG os_log_create("--", "Preferences")
@@ -118,7 +119,7 @@ static Preferences * _standardPreferences = nil;
 		{
 			preferencesPath = nil;
 			userPrefs = [NSUserDefaults standardUserDefaults];
-            [self migratePreferences];
+            [self migrateEncodedPreferences];
 			[userPrefs registerDefaults:defaults];
 			
 			// Application-specific folder locations
@@ -157,7 +158,7 @@ static Preferences * _standardPreferences = nil;
 				preferencesPath = [preferencesPath stringByAppendingString:@".plist"];
 			}
 			userPrefs = [[NSMutableDictionary alloc] initWithDictionary:defaults];
-            [self migratePreferences];
+            [self migrateEncodedPreferences];
 			if (preferencesPath != nil)
 				[userPrefs addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:preferencesPath]];
             
@@ -324,15 +325,31 @@ static Preferences * _standardPreferences = nil;
 	return [defaultValues copy];
 }
 
-- (void)migratePreferences
+- (void)migrateEncodedPreferences
 {
+    // Users who ran a beta build of Vienna might have invalid sort descriptors.
+    if ([self integerForKey:MAPref_HighestViennaVersionRun] == 7775) {
+        [userPrefs removeObjectForKey:MAPref_ArticleListSortOrders];
+    }
+
     if ([userPrefs objectForKey:MAPref_Deprecated_ArticleListSortOrders]) {
         NSData *archive = [self objectForKey:MAPref_Deprecated_ArticleListSortOrders];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        NSArray *sortDescriptors = [NSUnarchiver unarchiveObjectWithData:archive];
+        NSMutableArray *sortDescriptors = [[NSUnarchiver unarchiveObjectWithData:archive] mutableCopy];
 #pragma clang diagnostic pop
-        NSData *keyedArchive = [NSKeyedArchiver vna_archivedDataWithRootObject:sortDescriptors
+        // Two sort descriptors have a selector that was renamed.
+        [sortDescriptors enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSSortDescriptor *descriptor = obj;
+            if ([NSStringFromSelector(descriptor.selector) isEqualToString:@"numericCompare:"]) {
+                descriptor = [NSSortDescriptor sortDescriptorWithKey:descriptor.key
+                                                           ascending:descriptor.ascending
+                                                            selector:@selector(vna_numericCompare:)];
+                [sortDescriptors replaceObjectAtIndex:idx
+                                           withObject:descriptor];
+            }
+        }];
+        NSData *keyedArchive = [NSKeyedArchiver vna_archivedDataWithRootObject:[sortDescriptors copy]
                                                          requiringSecureCoding:YES];
         [self setObject:keyedArchive forKey:MAPref_ArticleListSortOrders];
         [userPrefs removeObjectForKey:MAPref_Deprecated_ArticleListSortOrders];
