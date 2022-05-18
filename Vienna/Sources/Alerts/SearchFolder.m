@@ -255,7 +255,9 @@
 		{
 			[folderValueField addItemWithTitle:folder.name];
 			NSMenuItem * menuItem = [folderValueField itemWithTitle:folder.name];
-			menuItem.image = folder.image;
+			// Workaround for an exception in -addCriteria:. The reason is that
+			// SF Symbol images cannot be encoded with NSArchiver.
+			menuItem.image = folder.archivableImage;
 			menuItem.indentationLevel = indentation;
 			if (folder.type == VNAFolderTypeGroup)
 				[self initFolderValueField:folder.itemId atIndent:indentation + 2];
