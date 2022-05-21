@@ -20,6 +20,8 @@
 
 #import "ArticleController.h"
 
+#import <os/log.h>
+
 #import "AppController.h"
 #import "Preferences.h"
 #import "Constants.h"
@@ -32,7 +34,10 @@
 #import "Article.h"
 #import "Folder.h"
 #import "BackTrackArray.h"
+#import "StringExtensions.h"
 #import "Vienna-Swift.h"
+
+#define VNA_LOG os_log_create("--", "ArticleController")
 
 @interface ArticleController ()
 
@@ -63,63 +68,56 @@
 		articleSortSpecifiers = @{
 								  MA_Field_Folder: @{
 										  @"key": @"containingFolder.name",
-										  @"selector": @"compare:"
+										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
 								  MA_Field_Read: @{
 										  @"key": @"isRead",
-										  @"selector": @"compare:"
+										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
 								  MA_Field_Flagged: @{
 										  @"key": @"isFlagged",
-										  @"selector": @"compare:"
+										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
 								  MA_Field_Comments: @{
 										  @"key": @"hasComments",
-										  @"selector": @"compare:"
+										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
 								  MA_Field_Date: @{
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_Date],
-										  @"selector": @"compare:"
+										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
 								  MA_Field_Author: @{
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_Author],
-										  @"selector": @"caseInsensitiveCompare:"
+										  @"selector": NSStringFromSelector(@selector(caseInsensitiveCompare:))
 										  },
 								  MA_Field_Headlines: @{
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_Subject],
-										  @"selector": @"numericCompare:"
+										  @"selector": NSStringFromSelector(@selector(vna_caseInsensitiveNumericCompare:))
 										  },
 								  MA_Field_Subject: @{
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_Subject],
-										  @"selector": @"numericCompare:"
+										  @"selector": NSStringFromSelector(@selector(vna_caseInsensitiveNumericCompare:))
 										  },
 								  MA_Field_Link: @{
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_Link],
-										  @"selector": @"caseInsensitiveCompare:"
+										  @"selector": NSStringFromSelector(@selector(caseInsensitiveCompare:))
 										  },
 								  MA_Field_Summary: @{
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_Summary],
-										  @"selector": @"caseInsensitiveCompare:"
+										  @"selector": NSStringFromSelector(@selector(caseInsensitiveCompare:))
 										  },
 								  MA_Field_HasEnclosure: @{
 										  @"key": @"hasEnclosure",
-										  @"selector": @"compare:"
+										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
 								  MA_Field_Enclosure: @{
 										  @"key": @"enclosure",
-										  @"selector": @"caseInsensitiveCompare:"
+										  @"selector": NSStringFromSelector(@selector(caseInsensitiveCompare:))
 										  },
 								  };
 
 		// Pre-set sort to what was saved in the preferences
 		Preferences * prefs = [Preferences standardPreferences];
-		NSArray * sortDescriptors = prefs.articleSortDescriptors;
-		if (sortDescriptors.count == 0)
-		{
-			NSSortDescriptor * descriptor = [[NSSortDescriptor alloc] initWithKey:[@"articleData." stringByAppendingString:MA_Field_Date] ascending:YES];
-			prefs.articleSortDescriptors = @[descriptor];
-			[prefs setObject:MA_Field_Date forKey:MAPref_SortColumn];
-		}
 		[self setSortColumnIdentifier:[prefs stringForKey:MAPref_SortColumn]];
 		
 		// Create a backtrack array
@@ -335,11 +333,19 @@
  */
 -(void)sortArticles
 {
-	NSArray * sortedArrayOfArticles;
-
-	sortedArrayOfArticles = [currentArrayOfArticles sortedArrayUsingDescriptors:[Preferences standardPreferences].articleSortDescriptors];
-	NSAssert([sortedArrayOfArticles count] == [currentArrayOfArticles count], @"Lost articles from currentArrayOfArticles during sort");
-	self.currentArrayOfArticles = sortedArrayOfArticles;
+    Preferences *preferences = Preferences.standardPreferences;
+    @try {
+        NSArray *sortDescriptors = preferences.articleSortDescriptors;
+        NSArray *sortedArrayOfArticles  = [currentArrayOfArticles sortedArrayUsingDescriptors:sortDescriptors];
+        NSAssert([sortedArrayOfArticles count] == [currentArrayOfArticles count], @"Lost articles from currentArrayOfArticles during sort");
+        self.currentArrayOfArticles = sortedArrayOfArticles;
+    } @catch (NSException *exception) {
+        os_log_error(VNA_LOG, "Exception caught: %{public}@", exception.reason);
+        [preferences removeObjectForKey:MAPref_ArticleListSortOrders];
+        [preferences removeObjectForKey:MAPref_SortColumn];
+        preferences.articleSortDescriptors = nil;
+        [self setSortColumnIdentifier:[preferences stringForKey:MAPref_SortColumn]];
+    }
 }
 
 /* displayFirstUnread

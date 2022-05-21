@@ -87,6 +87,7 @@ extern NSString * const kMA_Notify_UseJavaScriptChange;
 -(void)setString:(NSString *)value forKey:(NSString *)defaultName;
 -(void)setArray:(NSArray *)value forKey:(NSString *)defaultName;
 -(void)setObject:(id)value forKey:(NSString *)defaultName;
+- (void)removeObjectForKey:(NSString *)defaultName;
 
 // Path to default database
 -(NSString *)defaultDatabase;
@@ -161,7 +162,7 @@ extern NSString * const kMA_Notify_UseJavaScriptChange;
 @property (nonatomic) NSInteger articleListFontSize;
 
 // Article list sort descriptors
-@property (nonatomic, copy) NSArray *articleSortDescriptors;
+@property (null_resettable, nonatomic, copy) NSArray *articleSortDescriptors;
 
 // Automatically sort folders tree
 @property (nonatomic) NSInteger foldersTreeSortMethod;

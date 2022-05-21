@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)vna_stringByAppendingURLComponent:(nullable NSString *)newComponent;
 - (BOOL)vna_hasCharacter:(char)ch;
 @property (readonly, nonatomic) NSString *vna_convertStringToValidPath;
-- (NSComparisonResult)vna_numericCompare:(NSString *)aString;
+- (NSComparisonResult)vna_caseInsensitiveNumericCompare:(NSString *)string;
 @property (readonly, nonatomic) NSString *vna_normalised;
 @property (readonly, nonatomic) NSString *vna_baseURL;
 @property (readonly, nonatomic) NSString *vna_host;
