@@ -340,7 +340,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     // next one.
     if (authQueue.count > 0 && !credentialsController.window.visible) {
         Folder * folder = authQueue[0];
-        [credentialsController credentialsForFolder:NSApp.mainWindow folder:folder];
+        [credentialsController requestCredentialsInWindow:NSApp.mainWindow forFolder:folder];
     }
 }
 
