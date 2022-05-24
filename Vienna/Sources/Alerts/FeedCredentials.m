@@ -19,12 +19,23 @@
 //
 
 #import "FeedCredentials.h"
+
 #import "StringExtensions.h"
 #import "Folder.h"
 #import "Database.h"
+#import "DisclosureView.h"
+#import "Constants.h"
+#import "Preferences.h"
 
+NSString * const MAPref_ShowDetailsOnFeedCredentialsDialog = @"ShowDetailsOnFeedCredentialsDialog";
+
+static NSUserInterfaceItemIdentifier const VNADisclosureButtonIdentifier = @"DisclosureButton";
 
 @interface FeedCredentials ()
+
+@property (weak, nonatomic) IBOutlet DisclosureView *disclosureView;
+@property (weak, nonatomic) IBOutlet NSTextField *feedTextField;
+@property (weak, nonatomic) IBOutlet NSTextField *feedURLTextField;
 
 -(void)enableOKButton;
 
@@ -70,7 +81,20 @@
 	// Fill out any existing values.
 	userName.stringValue = folder.username;
 	password.stringValue = folder.password;
-	
+
+    // Fill out feed details.
+    self.feedTextField.stringValue = folder.name;
+    self.feedURLTextField.stringValue = folder.feedURL;
+
+    // Show or hide the details view.
+    Preferences *preferences = Preferences.standardPreferences;
+    BOOL showDetails = [preferences boolForKey:MAPref_ShowDetailsOnFeedCredentialsDialog];
+    if (showDetails) {
+        [self.disclosureView disclose:NO];
+    } else {
+        [self.disclosureView collapse:NO];
+    }
+
 	// Set the focus
 	[credentialsWindow makeFirstResponder:(folder.username.vna_isBlank) ? userName : password];
 
@@ -132,4 +156,19 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+- (IBAction)toggleDisclosure:(NSButton *)sender
+{
+    if (![sender.identifier isEqualToString:VNADisclosureButtonIdentifier]) {
+        return;
+    }
+
+    BOOL shouldShowDetails = sender.state == NSControlStateValueOn;
+    if (shouldShowDetails) {
+        [self.disclosureView disclose:YES];
+    } else {
+        [self.disclosureView collapse:YES];
+    }
+}
+
 @end
