@@ -733,6 +733,7 @@
 		F69140FE1E71D74800D51BFF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		F692BFEA209EFE0300C7AC36 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = nl; path = nl.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F695E9E1283CF02D00320578 /* FeedListConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedListConstants.h; sourceTree = "<group>"; };
+		F695E9E2283D0C8100320578 /* FolderViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FolderViewDelegate.h; sourceTree = "<group>"; };
 		F69964F61F13029500FC8493 /* OverlayStatusBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayStatusBar.swift; sourceTree = "<group>"; };
 		F69A39E8209EFE6B0036A742 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = sv; path = sv.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F69AE7B61F22187200342640 /* gl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gl; path = gl.lproj/SearchFolder.strings; sourceTree = "<group>"; };
@@ -1313,6 +1314,7 @@
 				793C95321C42A0DD00984D4E /* FoldersFilterable.m */,
 				4350286D165DE9DF0018EDB7 /* FolderView.h */,
 				4350286E165DE9DF0018EDB7 /* FolderView.m */,
+				F695E9E2283D0C8100320578 /* FolderViewDelegate.h */,
 				F695E9E1283CF02D00320578 /* FeedListConstants.h */,
 				0378752F25E34743009AB1C9 /* FeedListCellView.h */,
 				0378753025E34743009AB1C9 /* FeedListCellView.m */,

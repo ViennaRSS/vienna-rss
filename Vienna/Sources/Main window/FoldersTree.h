@@ -20,9 +20,10 @@
 
 @import Cocoa;
 
-#import "FolderView.h"
+#import "FolderViewDelegate.h"
 
 @class AppController;
+@class FolderView;
 
 @interface FoldersTree : NSObject <FolderViewDelegate, NSOutlineViewDataSource, NSTextFieldDelegate>
 
