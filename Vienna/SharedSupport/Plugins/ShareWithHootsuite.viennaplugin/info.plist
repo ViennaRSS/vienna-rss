@@ -16,8 +16,6 @@
 	<string>Share the current article on Hootsuite</string>
 	<key>ButtonImage</key>
 	<string>hootsuiteButton</string>
-	<key>ButtonImage@2x</key>
-	<string>hootsuiteButton@2x</string>
 	<key>MenuPath</key>
 	<string>Share With Hootsuite</string>
 </dict>

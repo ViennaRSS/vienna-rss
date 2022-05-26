@@ -9,15 +9,13 @@
 	<key>URL</key>
 	<string>https://twitter.com/intent/tweet?url=$ArticleLink$</string>
 	<key>Default</key>
-	<true/>
+	<false/>
 	<key>FriendlyName</key>
 	<string>Twitter</string>
 	<key>Tooltip</key>
 	<string>Share the current article on twitter</string>
 	<key>ButtonImage</key>
 	<string>twitterButton</string>
-	<key>ButtonImage@2x</key>
-	<string>twitterButton@2x</string>
 	<key>MenuPath</key>
 	<string>Share With Twitter</string>
 </dict>

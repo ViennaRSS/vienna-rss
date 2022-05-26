@@ -16,8 +16,6 @@
 	<string>Share the current article on Google Currents</string>
 	<key>ButtonImage</key>
 	<string>google+Button</string>
-	<key>ButtonImage@2x</key>
-	<string>google+Button@2x</string>
 	<key>MenuPath</key>
 	<string>Share With Google Currents</string>
 </dict>

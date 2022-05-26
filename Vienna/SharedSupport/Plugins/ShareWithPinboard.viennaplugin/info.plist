@@ -16,8 +16,6 @@
 	<string>Share the current article on Pinboard</string>
 	<key>ButtonImage</key>
 	<string>pinboardButton</string>
-	<key>ButtonImage@2x</key>
-	<string>pinboardButton@2x</string>
 	<key>MenuPath</key>
 	<string>Share With Pinboard</string>
 </dict>
