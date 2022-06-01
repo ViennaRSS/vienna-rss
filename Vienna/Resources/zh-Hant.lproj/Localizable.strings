@@ -483,6 +483,9 @@
 /* Placeholder title of a search field */
 "Search current web page" = "查詢當前網頁";
 
+/* Placeholder title of a search field */
+"Search for folders" = "查詢所有資料夾";
+
 /* No comment provided by engineer. */
 "Search Results" = "搜尋結果";
 

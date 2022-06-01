@@ -483,6 +483,9 @@
 /* Placeholder title of a search field */
 "Search current web page" = "Поиск по текущей веб-странице";
 
+/* Placeholder title of a search field */
+"Search for folders" = "Поиск по подпискам";
+
 /* No comment provided by engineer. */
 "Search Results" = "Результаты поиска";
 
