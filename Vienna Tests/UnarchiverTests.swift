@@ -90,7 +90,7 @@ class UnarchiverTests: XCTestCase {
     }
 
     func testUnarchivingSearchMethod() throws {
-        let method = try XCTUnwrap(SearchMethod.allArticles())
+        let method = try XCTUnwrap(SearchMethod.allArticles)
 
         // Note: SearchMethod has never supported NSArchiver, thus no testing for it needed.
 

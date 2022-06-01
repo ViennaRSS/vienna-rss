@@ -630,9 +630,14 @@
 
 	[cellMenu addItem: [NSMenuItem separatorItem]];
 
+    NSArray *builtInSearchMethods = @[
+        SearchMethod.allArticlesSearchMethod,
+        SearchMethod.currentWebPageSearchMethod,
+        SearchMethod.searchForFoldersMethod
+    ];
+
 	// Add all built-in search methods to the menu. 
-	for (searchMethod in [SearchMethod builtInSearchMethods])
-	{
+	for (searchMethod in builtInSearchMethods) {
 		friendlyName = searchMethod.displayName;
 		item = [[NSMenuItem alloc] initWithTitle:friendlyName
                                           action:@selector(setSearchMethod:)
@@ -643,7 +648,11 @@
 		if ( [friendlyName isEqualToString:[Preferences standardPreferences].searchMethod.displayName] )
 			item.state = NSControlStateValueOn;
 		
-		[cellMenu addItem:item];
+        if ([searchMethod isEqualTo:SearchMethod.searchForFoldersMethod]) {
+            [cellMenu addItem:[NSMenuItem separatorItem]];
+        }
+
+        [cellMenu addItem:item];
 	}
 	
 	// Add all available plugged-in search methods to the menu.
@@ -3047,10 +3056,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [articleListView performFindPanelAction:NSFindPanelActionNext];
 }
 
-- (IBAction)searchUsingTreeFilter:(NSSearchField* )field
+- (IBAction)searchUsingTreeFilter:(id)sender
 {
-    NSString* f = field.stringValue;
-    [self.foldersTree setSearch:f];
+    if ([sender isKindOfClass:[NSSearchField class]]) {
+        NSString *searchString = ((NSSearchField *)sender).stringValue;
+        [self.foldersTree setSearch:searchString];
+    } else if ([sender isKindOfClass:[SearchMethod class]]) {
+        [self.foldersTree setSearch:self.toolbarSearchField.stringValue];
+    }
 }
 
 /* searchUsingToolbarTextField

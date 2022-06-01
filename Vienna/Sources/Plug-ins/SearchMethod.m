@@ -23,8 +23,8 @@
 #import "AppController.h"
 #import "HelperFunctions.h"
 
-static NSString *const VNACodingKeyDisplayName = @"friendlyName";
-static NSString *const VNACodingKeyQueryString = @"searchQueryString";
+static NSString * const VNACodingKeyDisplayName = @"friendlyName";
+static NSString * const VNACodingKeyQueryString = @"searchQueryString";
 
 @implementation SearchMethod
 
@@ -33,13 +33,11 @@ static NSString *const VNACodingKeyQueryString = @"searchQueryString";
 - (instancetype)initWithDictionary:(NSDictionary *)dict
 {
     self = [self init];
-
     if (self) {
         _displayName = [[dict valueForKey:@"FriendlyName"] copy];
         _queryString = [[dict valueForKey:@"SearchQueryString"] copy];
         _handler = @selector(performWebSearch:);
     }
-
     return self;
 }
 
@@ -47,34 +45,41 @@ static NSString *const VNACodingKeyQueryString = @"searchQueryString";
 
 + (SearchMethod *)allArticlesSearchMethod
 {
-    SearchMethod *method = [[SearchMethod alloc] init];
-    method.displayName = NSLocalizedString(@"Search all articles",
-                                           @"Placeholder title of a search "
-                                            "field");
-    method.handler = @selector(performAllArticlesSearch);
-
+    static SearchMethod *method;
+    if (!method) {
+        method = [SearchMethod new];
+        method.displayName = NSLocalizedString(@"Search all articles",
+                                               @"Placeholder title of a search "
+                                               "field");
+        method.handler = @selector(performAllArticlesSearch);
+    }
     return method;
 }
 
 + (SearchMethod *)currentWebPageSearchMethod
 {
-    SearchMethod *method = [[SearchMethod alloc] init];
-    method.displayName = NSLocalizedString(@"Search current web page",
-                                           @"Placeholder title of a search "
-                                            "field");
-    method.handler = @selector(performWebPageSearch);
-
+    static SearchMethod *method;
+    if (!method) {
+        method = [SearchMethod new];
+        method.displayName = NSLocalizedString(@"Search current web page",
+                                               @"Placeholder title of a search "
+                                                "field");
+        method.handler = @selector(performWebPageSearch);
+    }
     return method;
 }
 
-// If you add a new one, add it to the array. Remember: arrayWithObjects needs
-// a "nil" termination.
-+ (NSArray *)builtInSearchMethods
++ (SearchMethod *)searchForFoldersMethod
 {
-    return @[
-        [SearchMethod allArticlesSearchMethod],
-        [SearchMethod currentWebPageSearchMethod]
-    ];
+    static SearchMethod *method;
+    if (!method) {
+        method = [SearchMethod new];
+        method.displayName = NSLocalizedString(@"Search for folders",
+                                               @"Placeholder title of a search "
+                                               "field");
+        method.handler = @selector(searchUsingTreeFilter:);
+    }
+    return method;
 }
 
 - (NSURL *)queryURLforSearchString:(NSString *)searchString

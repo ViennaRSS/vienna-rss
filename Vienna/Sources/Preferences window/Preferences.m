@@ -230,7 +230,7 @@ static Preferences * _standardPreferences = nil;
                                                                       requiringSecureCoding:YES];
     defaultValues[MAPref_ArticleListSortOrders] = [NSKeyedArchiver vna_archivedDataWithRootObject:@[sortDescriptor]
                                                                             requiringSecureCoding:YES];
-    defaultValues[MAPref_SearchMethod] = [NSKeyedArchiver vna_archivedDataWithRootObject:[SearchMethod allArticlesSearchMethod]
+    defaultValues[MAPref_SearchMethod] = [NSKeyedArchiver vna_archivedDataWithRootObject:SearchMethod.allArticlesSearchMethod
                                                                    requiringSecureCoding:YES];
 
     defaultValues[MAPref_ConcurrentDownloads] = @(MA_Default_ConcurrentDownloads);
