@@ -265,6 +265,13 @@ CA
                             <menuItem title="Find" id="168">
                                 <menu key="submenu" title="Find" id="159">
                                     <items>
+                                        <menuItem title="Search Articles" keyEquivalent="f" id="1327">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="setFocusToSearchField:" target="-1" id="1po-bJ-a0K"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="1328"/>
                                         <menuItem title="Find…" tag="1" keyEquivalent="f" id="154">
                                             <connections>
                                                 <action selector="localPerformFindPanelAction:" target="-1" id="NUj-Gm-lhM"/>
@@ -660,14 +667,6 @@ CA
                 <menuItem title="Folder" id="1177">
                     <menu key="submenu" title="Folder" id="1178">
                         <items>
-                            <menuItem title="Search Articles" id="1327">
-                                <connections>
-                                    <action selector="setFocusToSearchField:" target="-1" id="1po-bJ-a0K"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="1328">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
                             <menuItem title="Edit…" keyEquivalent="E" id="1180">
                                 <connections>
                                     <action selector="editFolder:" target="-1" id="2Im-E6-9HS"/>
