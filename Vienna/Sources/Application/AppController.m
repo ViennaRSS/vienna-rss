@@ -3381,8 +3381,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	if (theAction == @selector(emptyTrash:))
 	{
-		Folder *folder = [db folderFromID:self.foldersTree.actualSelection];
-		*validateFlag = folder.type == VNAFolderTypeTrash && !db.readOnly;
+		*validateFlag = !db.readOnly;
 		return YES;
 	}
 	if (theAction == @selector(searchUsingToolbarTextField:))
