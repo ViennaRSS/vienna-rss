@@ -22,9 +22,6 @@
 /* Class = "NSMenuItem"; title = "After one month"; ObjectID = "OIa-NQ-jQi"; */
 "OIa-NQ-jQi.title" = "Despois dun mes";
 
-/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "PmX-nw-uOn"; */
-"PmX-nw-uOn.title" = "Seleccionar…";
-
 /* Class = "NSMenuItem"; title = "After two days"; ObjectID = "sJE-bd-4mK"; */
 "sJE-bd-4mK.title" = "Despois de 2 días";
 

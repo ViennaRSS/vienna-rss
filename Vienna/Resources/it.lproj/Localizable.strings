@@ -11,9 +11,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Non è stato possibile creare un nuovo database per Vienna in '%@' poiché probabilmente la cartella si trova su una condivisione di rete remota e questa versione di Vienna non può gestire database remoti. Prego scegli una cartella alternativa che si trovi in locale sulla tua macchina.";
 
 /* No comment provided by engineer. */
-"An error occurred when this feed was last refreshed" = "Si è verificato un errore nell'ultimo aggiornamento di questo feed";
-
-/* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Sei sicuro di voler eliminare tutte le %d cartelle selezionate? Questa operazione non può essere annullata.";
 
 /* No comment provided by engineer. */
@@ -132,9 +129,6 @@
 /* Notification title */
 "Download failed" = "Scaricamento fallito";
 
-/* Title of a menu item */
-"Edit…" = "Modifica…";
-
 /* Title of a button on an alert */
 "Empty" = "Vuota";
 
@@ -185,9 +179,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "Cartelle";
-
-/* Title of a menu item */
-"Get Info" = "Ottieni Info";
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "Vai alla prossima pagina";
@@ -254,9 +245,6 @@
 
 /* Data field name visible in menu/article list */
 "Link" = "Collegamento";
-
-/* Title of a menu item */
-"Mark All Articles as Read" = "Segnala tutti gli articoli come letti";
 
 /* No comment provided by engineer. */
 "Mark All Read" = "Segnala tutti come Letti";
@@ -367,9 +355,6 @@
 /* No comment provided by engineer. */
 "Refresh completed" = "Aggiornamento completato";
 
-/* Title of a menu item */
-"Refresh Selected Subscriptions" = "Aggiorna Iscrizioni Selezionate";
-
 /* No comment provided by engineer. */
 "Refresh the current page" = "Ricarica la pagina attuale";
 
@@ -378,9 +363,6 @@
 
 /* Title of a popup menu item */
 "Remove From List" = "Elimina dall'elenco";
-
-/* Title of a menu item */
-"Rename…" = "Rinomina…";
 
 /* Title of a menu item */
 "Restore Article" = "Ripristina Articolo";

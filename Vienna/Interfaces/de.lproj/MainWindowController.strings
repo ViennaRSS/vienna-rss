@@ -25,6 +25,9 @@
 /* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8LJ-RZ-pfu"; */
 "8LJ-RZ-pfu.title" = "Markiert";
 
+/* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "9os-ks-jzh"; */
+"9os-ks-jzh.title" = "Erzwinge das Aktualisieren der ausgewählten Abonnements von Open Reader";
+
 /* Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T"; */
 "10h-xf-C6T.label" = "Link senden";
 
@@ -33,6 +36,9 @@
 
 /* Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T"; */
 "10h-xf-C6T.toolTip" = "Einen Link zum momentanen Artikel oder der momentanen Website versenden …";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "676-5a-TdF"; */
+"676-5a-TdF.title" = "Öffne Webseite des Abonnements";
 
 /* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "771-UJ-rsF"; */
 "771-UJ-rsF.title" = "Ungelesen oder markiert";
@@ -97,6 +103,9 @@
 /* Class = "NSToolbarItem"; toolTip = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
 "fpY-CJ-hKU.toolTip" = "Nächster ungelesener Artikel";
 
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "gCt-tf-kmv"; */
+"gCt-tf-kmv.title" = "Öffne Homepage des Abonnements im externen Browser";
+
 /* Class = "NSToolbarItem"; label = "Back"; ObjectID = "gOG-UJ-Pin"; */
 "gOG-UJ-Pin.label" = "Zurück";
 
@@ -139,11 +148,17 @@
 /* Class = "NSSearchFieldCell"; placeholderString = "Search for folders"; ObjectID = "lhy-4c-asJ"; */
 "lhy-4c-asJ.placeholderString" = "Suche nach Ordnern";
 
+/* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "lxY-yo-Hjh"; */
+"lxY-yo-Hjh.title" = "Umbenennen …";
+
 /* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm"; */
 "MaO-r1-tcm.title" = "Mehr Stile …";
 
 /* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "mbZ-oU-TDn"; */
 "mbZ-oU-TDn.title" = "Ungelesen oder markiert";
+
+/* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "MMp-XG-ASM"; */
+"MMp-XG-ASM.title" = "Information";
 
 /* Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys"; */
 "Nmd-zx-Dys.label" = "Aktualisieren";
@@ -162,6 +177,9 @@
 
 /* Class = "NSMenuItem"; title = "Today"; ObjectID = "pZm-V9-RVd"; */
 "pZm-V9-RVd.title" = "Heute";
+
+/* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "Qj9-p3-QXB"; */
+"Qj9-p3-QXB.title" = "Alle Artikel als gelesen markieren";
 
 /* Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija"; */
 "RaH-Yu-Ija.title" = "Neuer Ordner …";
@@ -183,6 +201,9 @@
 
 /* Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
 "SoG-b2-O1S.toolTip" = "Ordner überspringen";
+
+/* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "tHY-Fr-Ili"; */
+"tHY-Fr-Ili.title" = "Bearbeiten …";
 
 /* Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU"; */
 "TSQ-UW-4gU.label" = "Aktion";
@@ -238,11 +259,20 @@
 /* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "yvh-qU-EAm"; */
 "yvh-qU-EAm.title" = "Letzten 48 Stunden";
 
+/* Class = "NSImageView"; ibShadowedToolTip = "An error occurred when this feed was last refreshed"; ObjectID = "Zar-1U-8CD"; */
+"Zar-1U-8CD.ibShadowedToolTip" = "Bei der letzten Aktualisierung dieses Abonnements ist ein Fehler aufgetreten";
+
 /* Class = "NSButton"; ibExternalAccessibilityDescription = "Close the filter bar"; ObjectID = "ZBo-PU-Lx7"; */
 "ZBo-PU-Lx7.ibExternalAccessibilityDescription" = "Filterleiste schließen";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Close the filter bar"; ObjectID = "ZBo-PU-Lx7"; */
 "ZBo-PU-Lx7.ibShadowedToolTip" = "Filterleiste schließen";
+
+/* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "zPC-lc-x1k"; */
+"zPC-lc-x1k.title" = "Ausgewähltes Abonnement aktualisieren";
+
+/* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Zsz-uP-pM7"; */
+"Zsz-uP-pM7.title" = "Löschen …";
 
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2"; */
 "Zu1-zW-uo2.title" = "Öffne Webseite des Abonnements";

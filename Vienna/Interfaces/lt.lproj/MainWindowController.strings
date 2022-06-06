@@ -22,6 +22,9 @@
 /* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8LJ-RZ-pfu"; */
 "8LJ-RZ-pfu.title" = "Pažymėta";
 
+/* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "9os-ks-jzh"; */
+"9os-ks-jzh.title" = "Priverstinai atnaujinti pasirinktas prenumeratas iš Open Reader";
+
 /* Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T"; */
 "10h-xf-C6T.label" = "Siųsti nuorodą";
 
@@ -30,6 +33,9 @@
 
 /* Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T"; */
 "10h-xf-C6T.toolTip" = "El. paštu siųsti šio straipsnio ar svetainės nuorodą";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "676-5a-TdF"; */
+"676-5a-TdF.title" = "Atidaryti prenumeratos svetainę";
 
 /* Class = "NSSearchField"; ibShadowedToolTip = "Filter displayed articles by matching text"; ObjectID = "1304"; */
 "1304.ibShadowedToolTip" = "Filtruoti rodomus straipsnius pagal tekstą";
@@ -73,6 +79,9 @@
 /* Class = "NSToolbarItem"; toolTip = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
 "fpY-CJ-hKU.toolTip" = "Kitas neperskaitytas";
 
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "gCt-tf-kmv"; */
+"gCt-tf-kmv.title" = "Prenumeratos svetainę atidaryti išorinėje naršyklėje";
+
 /* Class = "NSToolbarItem"; label = "Back"; ObjectID = "gOG-UJ-Pin"; */
 "gOG-UJ-Pin.label" = "Atgal";
 
@@ -106,8 +115,14 @@
 /* Class = "NSSearchFieldCell"; placeholderString = "Search for folders"; ObjectID = "lhy-4c-asJ"; */
 "lhy-4c-asJ.placeholderString" = "Ieškoti aplankų";
 
+/* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "lxY-yo-Hjh"; */
+"lxY-yo-Hjh.title" = "Pervadinti…";
+
 /* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm"; */
 "MaO-r1-tcm.title" = "Daugiau stilių…";
+
+/* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "MMp-XG-ASM"; */
+"MMp-XG-ASM.title" = "Gauti informaciją";
 
 /* Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys"; */
 "Nmd-zx-Dys.label" = "Atnaujinti";
@@ -123,6 +138,9 @@
 
 /* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "psA-wp-PcZ"; */
 "psA-wp-PcZ.title" = "Nauja prenumerata…";
+
+/* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "Qj9-p3-QXB"; */
+"Qj9-p3-QXB.title" = "Viską pažymėti kaip perskaityta";
 
 /* Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija"; */
 "RaH-Yu-Ija.title" = "Naujas aplankas…";
@@ -141,6 +159,9 @@
 
 /* Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
 "SoG-b2-O1S.toolTip" = "Praleisti aplanką";
+
+/* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "tHY-Fr-Ili"; */
+"tHY-Fr-Ili.title" = "Keisti…";
 
 /* Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU"; */
 "TSQ-UW-4gU.label" = "Veiksmas";
@@ -168,6 +189,15 @@
 
 /* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f"; */
 "Y0d-K7-46f.title" = "Gauti informaciją";
+
+/* Class = "NSImageView"; ibShadowedToolTip = "An error occurred when this feed was last refreshed"; ObjectID = "Zar-1U-8CD"; */
+"Zar-1U-8CD.ibShadowedToolTip" = "Paskutinįkart atnaujinant šią prenumeratą įvyko klaida";
+
+/* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "zPC-lc-x1k"; */
+"zPC-lc-x1k.title" = "Atnaujinti pasirinktas prenumeratas";
+
+/* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Zsz-uP-pM7"; */
+"Zsz-uP-pM7.title" = "Ištrinti…";
 
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2"; */
 "Zu1-zW-uo2.title" = "Atidaryti prenumeratos svetainę";

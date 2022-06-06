@@ -25,6 +25,9 @@
 /* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8LJ-RZ-pfu"; */
 "8LJ-RZ-pfu.title" = "Gemarkeerd";
 
+/* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "9os-ks-jzh"; */
+"9os-ks-jzh.title" = "Forceer bijwerken abonnementen van Open Reader";
+
 /* Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T"; */
 "10h-xf-C6T.label" = "Verstuur link";
 
@@ -33,6 +36,9 @@
 
 /* Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T"; */
 "10h-xf-C6T.toolTip" = "Email een link naar huidig artikel of website";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "676-5a-TdF"; */
+"676-5a-TdF.title" = "Ga naar startpagina van abonnement";
 
 /* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "771-UJ-rsF"; */
 "771-UJ-rsF.title" = "Ongelezen of gemarkeerd";
@@ -97,6 +103,9 @@
 /* Class = "NSToolbarItem"; toolTip = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
 "fpY-CJ-hKU.toolTip" = "Volgende ongelezen";
 
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "gCt-tf-kmv"; */
+"gCt-tf-kmv.title" = "Open abonnement-pagina in externe browser";
+
 /* Class = "NSToolbarItem"; label = "Back"; ObjectID = "gOG-UJ-Pin"; */
 "gOG-UJ-Pin.label" = "Vorige";
 
@@ -139,11 +148,17 @@
 /* Class = "NSSearchFieldCell"; placeholderString = "Search for folders"; ObjectID = "lhy-4c-asJ"; */
 "lhy-4c-asJ.placeholderString" = "Zoek naar mappen";
 
+/* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "lxY-yo-Hjh"; */
+"lxY-yo-Hjh.title" = "Wijzig naam…";
+
 /* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm"; */
 "MaO-r1-tcm.title" = "Meer stijlen…";
 
 /* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "mbZ-oU-TDn"; */
 "mbZ-oU-TDn.title" = "Ongelezen of gemarkeerd";
+
+/* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "MMp-XG-ASM"; */
+"MMp-XG-ASM.title" = "Toon info";
 
 /* Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys"; */
 "Nmd-zx-Dys.label" = "Vernieuw";
@@ -162,6 +177,9 @@
 
 /* Class = "NSMenuItem"; title = "Today"; ObjectID = "pZm-V9-RVd"; */
 "pZm-V9-RVd.title" = "Vandaag";
+
+/* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "Qj9-p3-QXB"; */
+"Qj9-p3-QXB.title" = "Markeer alles als gelezen";
 
 /* Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija"; */
 "RaH-Yu-Ija.title" = "Nieuwe map…";
@@ -183,6 +201,9 @@
 
 /* Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
 "SoG-b2-O1S.toolTip" = "Sla map over";
+
+/* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "tHY-Fr-Ili"; */
+"tHY-Fr-Ili.title" = "Bewerk…";
 
 /* Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU"; */
 "TSQ-UW-4gU.label" = "Actie";
@@ -238,11 +259,20 @@
 /* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "yvh-qU-EAm"; */
 "yvh-qU-EAm.title" = "Afgelopen 48 uur";
 
+/* Class = "NSImageView"; ibShadowedToolTip = "An error occurred when this feed was last refreshed"; ObjectID = "Zar-1U-8CD"; */
+"Zar-1U-8CD.ibShadowedToolTip" = "De laatste keer dat deze feed is bijgewerkt, is er een fout opgetreden";
+
 /* Class = "NSButton"; ibExternalAccessibilityDescription = "Close the filter bar"; ObjectID = "ZBo-PU-Lx7"; */
 "ZBo-PU-Lx7.ibExternalAccessibilityDescription" = "Sluit de filterbalk";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Close the filter bar"; ObjectID = "ZBo-PU-Lx7"; */
 "ZBo-PU-Lx7.ibShadowedToolTip" = "Sluit de filterbalk";
+
+/* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "zPC-lc-x1k"; */
+"zPC-lc-x1k.title" = "Werk geselecteerde abonnementen bij";
+
+/* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Zsz-uP-pM7"; */
+"Zsz-uP-pM7.title" = "Wis…";
 
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2"; */
 "Zu1-zW-uo2.title" = "Ga naar startpagina van abonnement";

@@ -14,9 +14,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Ezin da Vienna datu base berri bat sortu \"%@\" -(e)n direktorioa urruneko direktorio batean kokatua dagoelako eta Vienna-k ezin ditu urruneko datu baseak kudeatu. Mesedez aukeratu zeure disko gogorrean dagoen direktorioren bat.";
 
 /* No comment provided by engineer. */
-"An error occurred when this feed was last refreshed" = "Errore bat gertatu zen jario hau azken aldiz eguneratu zenean";
-
-/* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Ziur zaude aukeratutako %d direktorioak ezabatu nahi dituzula? Ekintza hau ezingo da desegin.";
 
 /* No comment provided by engineer. */
@@ -117,9 +114,6 @@
 /* Title of a button on an alert */
 "Don’t Empty Trash" = "Ez hustu zakarrontzia";
 
-/* Title of a menu item */
-"Edit…" = "Editatu…";
-
 /* Title of a button on an alert */
 "Empty" = "Hustu";
 
@@ -167,9 +161,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "Direktorioak";
-
-/* Title of a menu item */
-"Get Info" = "Informazioa Lortu";
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "Joan hurrengo orrira";
@@ -230,9 +221,6 @@
 
 /* Data field name visible in menu/article list */
 "Link" = "Esteka";
-
-/* Title of a menu item */
-"Mark All Articles as Read" = "Artikulu Guztiak Irakurrita Moduan Jarri";
 
 /* No comment provided by engineer. */
 "Mark All Read" = "Jarri Denak Irakurrita Moduan";
@@ -349,9 +337,6 @@
 /* No comment provided by engineer. */
 "Refresh completed" = "Eguneratzea eginda";
 
-/* Title of a menu item */
-"Refresh Selected Subscriptions" = "Eguneratu Aukeratutako Harpidetzak";
-
 /* No comment provided by engineer. */
 "Refresh the current page" = "Eguneratu orri hau";
 
@@ -363,9 +348,6 @@
 
 /* Title of a popup menu item */
 "Remove From List" = "Listatik ezabatu";
-
-/* Title of a menu item */
-"Rename…" = "Berrizendatu…";
 
 /* Title of a menu item */
 "Restore Article" = "Artikuluak Berrezarri";

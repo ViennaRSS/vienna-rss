@@ -22,6 +22,9 @@
 /* Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T"; */
 "10h-xf-C6T.paletteLabel" = "링크 보내기";
 
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "676-5a-TdF"; */
+"676-5a-TdF.title" = "구독 홈페이지 열기";
+
 /* Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377"; */
 "1377.title" = "필터:";
 
@@ -39,6 +42,9 @@
 
 /* Class = "NSToolbarItem"; toolTip = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
 "fpY-CJ-hKU.toolTip" = "읽지 않은 다음 항목";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "gCt-tf-kmv"; */
+"gCt-tf-kmv.title" = "외부 브라우져에서 구독 홈페이지 열기";
 
 /* Class = "NSToolbarItem"; label = "Back"; ObjectID = "gOG-UJ-Pin"; */
 "gOG-UJ-Pin.label" = "뒤로";
@@ -58,8 +64,14 @@
 /* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "l14-tu-w7l"; */
 "l14-tu-w7l.title" = "이름 변경…";
 
+/* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "lxY-yo-Hjh"; */
+"lxY-yo-Hjh.title" = "이름 변경…";
+
 /* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm"; */
 "MaO-r1-tcm.title" = "스타일 추가…";
+
+/* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "MMp-XG-ASM"; */
+"MMp-XG-ASM.title" = "정보 입수";
 
 /* Class = "NSToolbarItem"; toolTip = "Refresh all your subscriptions"; ObjectID = "Nmd-zx-Dys"; */
 "Nmd-zx-Dys.toolTip" = "모든 구독 갱신";
@@ -69,6 +81,9 @@
 
 /* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "psA-wp-PcZ"; */
 "psA-wp-PcZ.title" = "새 구독…";
+
+/* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "Qj9-p3-QXB"; */
+"Qj9-p3-QXB.title" = "모든 기사를 읽음으로 표시";
 
 /* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Rdq-QU-3hM"; */
 "Rdq-QU-3hM.title" = "삭제…";
@@ -85,6 +100,9 @@
 /* Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
 "SoG-b2-O1S.toolTip" = "구독 생략";
 
+/* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "tHY-Fr-Ili"; */
+"tHY-Fr-Ili.title" = "편집…";
+
 /* Class = "NSToolbarItem"; toolTip = "Additional actions for the selected folder"; ObjectID = "TSQ-UW-4gU"; */
 "TSQ-UW-4gU.toolTip" = "선택된 항목에 대한 추가 액션";
 
@@ -99,6 +117,15 @@
 
 /* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f"; */
 "Y0d-K7-46f.title" = "정보 입수";
+
+/* Class = "NSImageView"; ibShadowedToolTip = "An error occurred when this feed was last refreshed"; ObjectID = "Zar-1U-8CD"; */
+"Zar-1U-8CD.ibShadowedToolTip" = "이전 갱신시 이 피드에서 오류가 발생했습니다.";
+
+/* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "zPC-lc-x1k"; */
+"zPC-lc-x1k.title" = "선택된 구독 갱신";
+
+/* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Zsz-uP-pM7"; */
+"Zsz-uP-pM7.title" = "삭제…";
 
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2"; */
 "Zu1-zW-uo2.title" = "구독 홈페이지 열기";

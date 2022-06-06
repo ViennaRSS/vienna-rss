@@ -11,9 +11,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Um novo arquivo de dados do Vienna não pode ser criado em \"%@\" pois a pasta está provavelmente localizada em um disco de rede e esta versão do Vienna não gerencia dados remotos. Por favor escolha uma pasta alternativa que esteja localizada em seu computador.";
 
 /* No comment provided by engineer. */
-"An error occurred when this feed was last refreshed" = "Um erro ocorreu quando estas notícias foram atualizadas";
-
-/* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Você tem certeza que deseja apagar todas as %d pastas selecionadas? Esta operação não pode ser desfeita.";
 
 /* No comment provided by engineer. */
@@ -144,9 +141,6 @@
 /* Notification title */
 "Download failed" = "Descarregamento falhou";
 
-/* Title of a menu item */
-"Edit…" = "Editar…";
-
 /* Title of a button on an alert */
 "Empty" = "Esvaziar";
 
@@ -197,12 +191,6 @@
 
 /* No comment provided by engineer. */
 "Folder image retrieved from %@" = "Imagem de pasta recebida de %@";
-
-/* Title of a menu item */
-"Force Refresh Selected Subscriptions From Open Reader" = "Forçar Atualização das Assinaturas Selecionadas do Open Reader";
-
-/* Title of a menu item */
-"Get Info" = "Obter Informações";
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "Avançara para a próxima página";
@@ -266,9 +254,6 @@
 
 /* No comment provided by engineer. */
 "Last Week" = "Última Semana";
-
-/* Title of a menu item */
-"Mark All Articles as Read" = "Marcar Todos os Artigos como Lidos";
 
 /* No comment provided by engineer. */
 "Mark All Read" = "Marcar Todas como Lidas";
@@ -382,9 +367,6 @@
 /* No comment provided by engineer. */
 "Refresh completed" = "Atualização completada";
 
-/* Title of a menu item */
-"Refresh Selected Subscriptions" = "Atualizar Assinaturas Selecionadas";
-
 /* No comment provided by engineer. */
 "Refresh the current page" = "Atualizar a página atual";
 
@@ -396,9 +378,6 @@
 
 /* Title of a popup menu item */
 "Remove From List" = "Remover da lista";
-
-/* Title of a menu item */
-"Rename…" = "Renomear…";
 
 /* Title of a menu item */
 "Restore Article" = "Restaurar Artigo";

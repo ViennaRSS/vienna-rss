@@ -22,6 +22,9 @@
 /* Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T"; */
 "10h-xf-C6T.paletteLabel" = "リンクを送信";
 
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "676-5a-TdF"; */
+"676-5a-TdF.title" = "購読元のホームページに移動";
+
 /* Class = "NSPopUpButton"; ibShadowedToolTip = "Filter articles"; ObjectID = "1306"; */
 "1306.ibShadowedToolTip" = "記事をフィルター";
 
@@ -43,6 +46,9 @@
 /* Class = "NSToolbarItem"; toolTip = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
 "fpY-CJ-hKU.toolTip" = "次の未読";
 
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "gCt-tf-kmv"; */
+"gCt-tf-kmv.title" = "ブラウザで購読先のホームページを開く";
+
 /* Class = "NSToolbarItem"; label = "Back"; ObjectID = "gOG-UJ-Pin"; */
 "gOG-UJ-Pin.label" = "戻る";
 
@@ -61,8 +67,14 @@
 /* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "l14-tu-w7l"; */
 "l14-tu-w7l.title" = "名称変更…";
 
+/* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "lxY-yo-Hjh"; */
+"lxY-yo-Hjh.title" = "名称変更…";
+
 /* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm"; */
 "MaO-r1-tcm.title" = "他のスタイル…";
+
+/* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "MMp-XG-ASM"; */
+"MMp-XG-ASM.title" = "情報を見る";
 
 /* Class = "NSToolbarItem"; toolTip = "Refresh all your subscriptions"; ObjectID = "Nmd-zx-Dys"; */
 "Nmd-zx-Dys.toolTip" = "すべての購読を更新";
@@ -72,6 +84,9 @@
 
 /* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "psA-wp-PcZ"; */
 "psA-wp-PcZ.title" = "新規購読…";
+
+/* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "Qj9-p3-QXB"; */
+"Qj9-p3-QXB.title" = "すべての記事を既読にする";
 
 /* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Rdq-QU-3hM"; */
 "Rdq-QU-3hM.title" = "削除…";
@@ -88,6 +103,9 @@
 /* Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
 "SoG-b2-O1S.toolTip" = "フォルダをスキップ";
 
+/* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "tHY-Fr-Ili"; */
+"tHY-Fr-Ili.title" = "編集…";
+
 /* Class = "NSToolbarItem"; toolTip = "Additional actions for the selected folder"; ObjectID = "TSQ-UW-4gU"; */
 "TSQ-UW-4gU.toolTip" = "選択したフォルダにアクションを追加";
 
@@ -102,6 +120,15 @@
 
 /* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f"; */
 "Y0d-K7-46f.title" = "情報を見る";
+
+/* Class = "NSImageView"; ibShadowedToolTip = "An error occurred when this feed was last refreshed"; ObjectID = "Zar-1U-8CD"; */
+"Zar-1U-8CD.ibShadowedToolTip" = "このフィードの前回更新時エラーが起こりました。";
+
+/* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "zPC-lc-x1k"; */
+"zPC-lc-x1k.title" = "選択された購読を更新";
+
+/* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Zsz-uP-pM7"; */
+"Zsz-uP-pM7.title" = "削除…";
 
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2"; */
 "Zu1-zW-uo2.title" = "購読元のホームページに移動";

@@ -31,6 +31,9 @@
 /* Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T"; */
 "10h-xf-C6T.toolTip" = "Geçerli makaleye ya da websitesine bağlantı gönder";
 
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "676-5a-TdF"; */
+"676-5a-TdF.title" = "Aboneliğin Giriş Sayfasını Aç";
+
 /* Class = "NSSearchField"; ibShadowedToolTip = "Filter displayed articles by matching text"; ObjectID = "1304"; */
 "1304.ibShadowedToolTip" = "Görünen makaleleri uyumlu metinle filtrele";
 
@@ -61,6 +64,9 @@
 /* Class = "NSToolbarItem"; toolTip = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
 "fpY-CJ-hKU.toolTip" = "Sonraki Okunmayan";
 
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "gCt-tf-kmv"; */
+"gCt-tf-kmv.title" = "Aboneliğin Giriş Sayfasını Harici Tarayıcıda Aç";
+
 /* Class = "NSToolbarItem"; label = "Back"; ObjectID = "gOG-UJ-Pin"; */
 "gOG-UJ-Pin.label" = "Geri";
 
@@ -79,8 +85,14 @@
 /* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "l14-tu-w7l"; */
 "l14-tu-w7l.title" = "Yeniden adlandır…";
 
+/* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "lxY-yo-Hjh"; */
+"lxY-yo-Hjh.title" = "Yeniden adlandır…";
+
 /* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm"; */
 "MaO-r1-tcm.title" = "Daha Fazla Stil…";
+
+/* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "MMp-XG-ASM"; */
+"MMp-XG-ASM.title" = "Bilgi Al";
 
 /* Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys"; */
 "Nmd-zx-Dys.label" = "Yenile";
@@ -97,6 +109,9 @@
 /* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "psA-wp-PcZ"; */
 "psA-wp-PcZ.title" = "Yeni Abonelik…";
 
+/* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "Qj9-p3-QXB"; */
+"Qj9-p3-QXB.title" = "Tüm Makaleleri Okundu Olarak İşaretle";
+
 /* Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija"; */
 "RaH-Yu-Ija.title" = "Yeni klasör…";
 
@@ -111,6 +126,9 @@
 
 /* Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
 "SoG-b2-O1S.toolTip" = "Klasörü Geç";
+
+/* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "tHY-Fr-Ili"; */
+"tHY-Fr-Ili.title" = "Düzenle…";
 
 /* Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU"; */
 "TSQ-UW-4gU.label" = "Uygulama";
@@ -135,6 +153,12 @@
 
 /* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f"; */
 "Y0d-K7-46f.title" = "Bilgi Al";
+
+/* Class = "NSImageView"; ibShadowedToolTip = "An error occurred when this feed was last refreshed"; ObjectID = "Zar-1U-8CD"; */
+"Zar-1U-8CD.ibShadowedToolTip" = "Bu besleme en son yenilendiğinde bir hata oluştu";
+
+/* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "zPC-lc-x1k"; */
+"zPC-lc-x1k.title" = "Seçili Abonelikleri Yenile";
 
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2"; */
 "Zu1-zW-uo2.title" = "Aboneliğin Giriş Sayfasını Aç";

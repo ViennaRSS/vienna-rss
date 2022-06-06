@@ -20,9 +20,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Не можу створити нову базу даних Vienna \"%@\" тому, що папка імовірно розміщення на віддаленому диску. Будь-ласка виберіть інше місце збереження бази даних на вашому локальному диску.";
 
 /* No comment provided by engineer. */
-"An error occurred when this feed was last refreshed" = "Трапилася помилка при оновленні цієї стрічки";
-
-/* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "Помилка AppleScript у сценарії «%@»";
 
 /* No comment provided by engineer. */
@@ -153,9 +150,6 @@
 /* Notification title */
 "Download failed" = "Помилка завантаження";
 
-/* Title of a menu item */
-"Edit…" = "Редагувати…";
-
 /* Title of a button on an alert */
 "Empty" = "Спорожнити";
 
@@ -215,9 +209,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "Папки";
-
-/* Title of a menu item */
-"Get Info" = "Інформація";
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "Перейти вперед до наступної сторінки";
@@ -287,9 +278,6 @@
 
 /* No comment provided by engineer. */
 "Loading" = "Завантаження";
-
-/* Title of a menu item */
-"Mark All Articles as Read" = "Помітити всі статті як прочитані";
 
 /* No comment provided by engineer. */
 "Mark All Read" = "Помітити все як прочитане";
@@ -406,9 +394,6 @@
 /* No comment provided by engineer. */
 "Refresh completed" = "Оновлення завершено";
 
-/* Title of a menu item */
-"Refresh Selected Subscriptions" = "Оновити виділені підписки";
-
 /* No comment provided by engineer. */
 "Refresh the current page" = "Оновити поточну сторінку";
 
@@ -420,9 +405,6 @@
 
 /* Title of a popup menu item */
 "Remove From List" = "Видалити зі списку";
-
-/* Title of a menu item */
-"Rename…" = "Переіменувати…";
 
 /* Title of a menu item */
 "Restore Article" = "Відновити статтю";

@@ -14,9 +14,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Uma nova base de dados do Vienna não pode ser criada em \"%@\" porque provavelmente a pasta está localizada num disco de rede e esta versão do Vienna não consegue manipular bases de dados remotas. Por favor escolha uma máquina que esteja localizada no seu computador.";
 
 /* No comment provided by engineer. */
-"An error occurred when this feed was last refreshed" = "Ocorreu um erro da última vez que esta fonte foi actualizada";
-
-/* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Tem a certeza que deseja apagar todas as %d pastas seleccionadas? Esta operação não pode ser anulada.";
 
 /* No comment provided by engineer. */
@@ -129,9 +126,6 @@
 /* Notification title */
 "Download failed" = "Download falhou";
 
-/* Title of a menu item */
-"Edit…" = "Editar…";
-
 /* Title of a button on an alert */
 "Empty" = "Vazio";
 
@@ -185,9 +179,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "Pastas";
-
-/* Title of a menu item */
-"Get Info" = "Obter Informação";
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "Ir para a página seguinte";
@@ -248,9 +239,6 @@
 
 /* No comment provided by engineer. */
 "Last Week" = "Última Semana";
-
-/* Title of a menu item */
-"Mark All Articles as Read" = "Marcar Todos os Artigos como Lidos";
 
 /* No comment provided by engineer. */
 "Mark All Read" = "Marcar Todos como Lidos";
@@ -364,9 +352,6 @@
 /* No comment provided by engineer. */
 "Refresh completed" = "Actualização Completada";
 
-/* Title of a menu item */
-"Refresh Selected Subscriptions" = "Actualizar Subscrições Seleccionadas";
-
 /* No comment provided by engineer. */
 "Refresh the current page" = "Actualizar a página actual";
 
@@ -378,9 +363,6 @@
 
 /* Title of a popup menu item */
 "Remove From List" = "Remover da lista";
-
-/* Title of a menu item */
-"Rename…" = "Renomear…";
 
 /* Title of a menu item */
 "Restore Article" = "Restaurar Artigo";

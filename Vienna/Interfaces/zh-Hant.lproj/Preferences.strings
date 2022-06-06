@@ -43,7 +43,7 @@
 /* Class = "NSButtonCell"; title = "Preview new browser"; ObjectID = "DDY-fS-V5T"; */
 "DDY-fS-V5T.title" = "在 Web 瀏覽器中預覽";
 
-/* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "dkm-xW-4If"; */
+/* Class = "NSButtonCell"; title = "Show website icons in the feed list"; ObjectID = "dkm-xW-4If"; */
 "dkm-xW-4If.title" = "在檔案夾列表中顯示檔案夾影像";
 
 /* Class = "NSMenuItem"; title = "After two weeks"; ObjectID = "Dw9-en-4Zu"; */
@@ -112,9 +112,6 @@
 /* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "Ljf-Qd-6Ho"; */
 "Ljf-Qd-6Ho.title" = "啟動時檢查是否有新文章";
 
-/* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "M8s-xu-lWh"; */
-"M8s-xu-lWh.title" = "檔案夾列表字體：";
-
 /* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "McN-fD-0Cv"; */
 "McN-fD-0Cv.title" = "在短暫時間後";
 
@@ -141,9 +138,6 @@
 
 /* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "pLH-VU-z2d"; */
 "pLH-VU-z2d.title" = "每 2 小時";
-
-/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "PmX-nw-uOn"; */
-"PmX-nw-uOn.title" = "選取⋯";
 
 /* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "qYb-Sf-cEF"; */
 "qYb-Sf-cEF.title" = "每 5 分鐘";

@@ -19,6 +19,9 @@
 /* Class = "NSMenuItem"; title = "Manually"; ObjectID = "7Za-ay-jlt"; */
 "7Za-ay-jlt.title" = "Handmatig";
 
+/* Class = "NSButtonCell"; title = "Display feeds with unread articles with bold font"; ObjectID = "86e-38-zCh"; */
+"86e-38-zCh.title" = "Geef feeds met ongelezen artikelen in vet lettertype weer";
+
 /* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "adB-qE-xKg"; */
 "adB-qE-xKg.title" = "Markeer huidige artikel als gelezen:";
 
@@ -40,11 +43,14 @@
 /* Class = "NSButtonCell"; title = "Select…"; ObjectID = "cbn-xq-UFr"; */
 "cbn-xq-UFr.title" = "Kies…";
 
+/* Class = "NSMenuItem"; title = "Medium"; ObjectID = "ClO-ha-l48"; */
+"ClO-ha-l48.title" = "Normaal";
+
 /* Class = "NSButtonCell"; title = "Preview new browser"; ObjectID = "DDY-fS-V5T"; */
 "DDY-fS-V5T.title" = "Probeer nieuwe browser";
 
-/* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "dkm-xW-4If"; */
-"dkm-xW-4If.title" = "Toon symbolen in mappenlijst";
+/* Class = "NSButtonCell"; title = "Show website icons in the feed list"; ObjectID = "dkm-xW-4If"; */
+"dkm-xW-4If.title" = "Toon symbolen van websites in de feedlijst";
 
 /* Class = "NSMenuItem"; title = "After two weeks"; ObjectID = "Dw9-en-4Zu"; */
 "Dw9-en-4Zu.title" = "Na twee weken";
@@ -82,6 +88,9 @@
 /* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "haP-20-AwJ"; */
 "haP-20-AwJ.title" = "Zoek naar nieuwere versie bij het starten";
 
+/* Class = "NSMenuItem"; title = "Small"; ObjectID = "hd4-wx-xuK"; */
+"hd4-wx-xuK.title" = "Klein";
+
 /* Class = "NSTextFieldCell"; title = "Erase deleted articles:"; ObjectID = "HH2-sh-rEx"; */
 "HH2-sh-rEx.title" = "Wis verwijderde artikelen:";
 
@@ -92,7 +101,7 @@
 "iHl-tr-paa.ibShadowedToolTip" = "Kies een server met Open Reader-ondersteuning";
 
 /* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "ITA-U9-lhX"; */
-"ITA-U9-lhX.title" = "Lettertype voor artikelen:";
+"ITA-U9-lhX.title" = "Lettertype voor artikellijst:";
 
 /* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "jfH-Hq-gRk"; */
 "jfH-Hq-gRk.title" = "Beweeg appsymbool in het Dock";
@@ -111,9 +120,6 @@
 
 /* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "Ljf-Qd-6Ho"; */
 "Ljf-Qd-6Ho.title" = "Zoek naar nieuwe artikelen bij het starten";
-
-/* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "M8s-xu-lWh"; */
-"M8s-xu-lWh.title" = "Lettertype voor lijsten:";
 
 /* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "McN-fD-0Cv"; */
 "McN-fD-0Cv.title" = "Na een korte vertraging";
@@ -142,14 +148,14 @@
 /* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "pLH-VU-z2d"; */
 "pLH-VU-z2d.title" = "Elke 2 uur";
 
-/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "PmX-nw-uOn"; */
-"PmX-nw-uOn.title" = "Kies…";
-
 /* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "qYb-Sf-cEF"; */
 "qYb-Sf-cEF.title" = "Elke 5 minuten";
 
 /* Class = "NSMenuItem"; title = "After two days"; ObjectID = "sJE-bd-4mK"; */
 "sJE-bd-4mK.title" = "Na twee dagen";
+
+/* Class = "NSTextFieldCell"; title = "Feed list font size:"; ObjectID = "Sxj-Uk-jhk"; */
+"Sxj-Uk-jhk.title" = "Lettergrootte feedlijst:";
 
 /* Class = "NSViewController"; title = "General"; ObjectID = "T2z-OK-VtO"; */
 "T2z-OK-VtO.title" = "Algemeen";
@@ -166,11 +172,17 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "V12-Ua-skO"; */
 "V12-Ua-skO.ibShadowedToolTip" = "Bezoek website";
 
+/* Class = "NSButtonCell"; title = "Display unread articles with bold font"; ObjectID = "VQH-xk-s5g"; */
+"VQH-xk-s5g.title" = "Geef ongelezen artikelen in vet lettertype weer";
+
 /* Class = "NSViewController"; title = "Updates"; ObjectID = "wyk-W1-xMh"; */
 "wyk-W1-xMh.title" = "Updates";
 
 /* Class = "NSMenuItem"; title = "After one week"; ObjectID = "xfd-Vp-kJy"; */
 "xfd-Vp-kJy.title" = "Na één week";
+
+/* Class = "NSMenuItem"; title = "Large"; ObjectID = "xIg-ej-t3j"; */
+"xIg-ej-t3j.title" = "Groot";
 
 /* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "YG6-9k-gKH"; */
 "YG6-9k-gKH.title" = "URL:";

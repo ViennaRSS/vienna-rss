@@ -25,6 +25,9 @@
 /* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8LJ-RZ-pfu"; */
 "8LJ-RZ-pfu.title" = "已加上旗標";
 
+/* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "9os-ks-jzh"; */
+"9os-ks-jzh.title" = "從 Open Reader 中強制重新整理選擇的訂閱項目";
+
 /* Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T"; */
 "10h-xf-C6T.label" = "寄送連結";
 
@@ -33,6 +36,9 @@
 
 /* Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T"; */
 "10h-xf-C6T.toolTip" = "寄送目前文章或網站的連結";
+
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "676-5a-TdF"; */
+"676-5a-TdF.title" = "打開訂閱頻道首頁";
 
 /* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "771-UJ-rsF"; */
 "771-UJ-rsF.title" = "尚未讀的，或是加了標記的";
@@ -97,6 +103,9 @@
 /* Class = "NSToolbarItem"; toolTip = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
 "fpY-CJ-hKU.toolTip" = "下一個未閱讀項目";
 
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "gCt-tf-kmv"; */
+"gCt-tf-kmv.title" = "在外部瀏覽器中打開訂閱頻道首頁";
+
 /* Class = "NSToolbarItem"; label = "Back"; ObjectID = "gOG-UJ-Pin"; */
 "gOG-UJ-Pin.label" = "返回";
 
@@ -139,11 +148,17 @@
 /* Class = "NSSearchFieldCell"; placeholderString = "Search for folders"; ObjectID = "lhy-4c-asJ"; */
 "lhy-4c-asJ.placeholderString" = "查詢所有資料夾";
 
+/* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "lxY-yo-Hjh"; */
+"lxY-yo-Hjh.title" = "重新命名⋯";
+
 /* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm"; */
 "MaO-r1-tcm.title" = "更多樣式⋯";
 
 /* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "mbZ-oU-TDn"; */
 "mbZ-oU-TDn.title" = "未讀的或標記的";
+
+/* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "MMp-XG-ASM"; */
+"MMp-XG-ASM.title" = "簡介";
 
 /* Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys"; */
 "Nmd-zx-Dys.label" = "重新整理";
@@ -162,6 +177,9 @@
 
 /* Class = "NSMenuItem"; title = "Today"; ObjectID = "pZm-V9-RVd"; */
 "pZm-V9-RVd.title" = "今天";
+
+/* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "Qj9-p3-QXB"; */
+"Qj9-p3-QXB.title" = "將所有文章標示為已閱讀";
 
 /* Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija"; */
 "RaH-Yu-Ija.title" = "新資料夾…";
@@ -183,6 +201,9 @@
 
 /* Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
 "SoG-b2-O1S.toolTip" = "略過檔案夾";
+
+/* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "tHY-Fr-Ili"; */
+"tHY-Fr-Ili.title" = "編輯⋯";
 
 /* Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU"; */
 "TSQ-UW-4gU.label" = "動作";
@@ -238,11 +259,20 @@
 /* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "yvh-qU-EAm"; */
 "yvh-qU-EAm.title" = "過去 48 小時";
 
+/* Class = "NSImageView"; ibShadowedToolTip = "An error occurred when this feed was last refreshed"; ObjectID = "Zar-1U-8CD"; */
+"Zar-1U-8CD.ibShadowedToolTip" = "最後一次更新此訂閱頻道時，發生錯誤";
+
 /* Class = "NSButton"; ibExternalAccessibilityDescription = "Close the filter bar"; ObjectID = "ZBo-PU-Lx7"; */
 "ZBo-PU-Lx7.ibExternalAccessibilityDescription" = "關閉篩選列";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Close the filter bar"; ObjectID = "ZBo-PU-Lx7"; */
 "ZBo-PU-Lx7.ibShadowedToolTip" = "關閉篩選列";
+
+/* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "zPC-lc-x1k"; */
+"zPC-lc-x1k.title" = "重新整理所選訂閱頻道";
+
+/* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Zsz-uP-pM7"; */
+"Zsz-uP-pM7.title" = "删除…";
 
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2"; */
 "Zu1-zW-uo2.title" = "打開訂閱頻道首頁";

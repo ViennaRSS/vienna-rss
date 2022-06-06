@@ -17,9 +17,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Non se pode crear a nova base de datos de Vienna en \"%@\" debido a que probablemente o cartafol está ubicado nun recurso compartido dunha rede remota e esta versión de Vienna non pode xestionar bases de datos remotas. Por favor, escolle un cartafol alternativo ubicado no seu equipo local.";
 
 /* No comment provided by engineer. */
-"An error occurred when this feed was last refreshed" = "Produciuse un erro ao actualizar esta fonte";
-
-/* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "Erro de appleScript en script '%@'";
 
 /* No comment provided by engineer. */
@@ -159,9 +156,6 @@
 /* Notification title */
 "Download failed" = "Erro ao descargar";
 
-/* Title of a menu item */
-"Edit…" = "Editar…";
-
 /* Title of a button on an alert */
 "Empty" = "Baleirar";
 
@@ -231,14 +225,8 @@
 /* No comment provided by engineer. */
 "Folders" = "Cartafpñes";
 
-/* Title of a menu item */
-"Force Refresh Selected Subscriptions From Open Reader" = "Forzar a actualización das subscricións seleccionadas dende Open Reader";
-
 /* No comment provided by engineer. */
 "Forcing Refresh subscriptions…" = "A forzar a actualización de subscricións…";
-
-/* Title of a menu item */
-"Get Info" = "Obter información";
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "Avanzar á páxina seguinte";
@@ -323,9 +311,6 @@
 
 /* No comment provided by engineer. */
 "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "Asegúrate de que o nome de usuario e o contrasinal precisos para acceder ao servidor de Open Reader foron inseridos correctamente nas preferencias de Vienna. Comproba tamén o teu acceso a internet.";
-
-/* Title of a menu item */
-"Mark All Articles as Read" = "Marcar todos os artigos como lidos";
 
 /* No comment provided by engineer. */
 "Mark All Read" = "Marcar todos como lidos";
@@ -454,9 +439,6 @@
 /* No comment provided by engineer. */
 "Refresh completed" = "Actualización completada";
 
-/* Title of a menu item */
-"Refresh Selected Subscriptions" = "Actualizar subscricións seleccionadas";
-
 /* No comment provided by engineer. */
 "Refresh the current page" = "Actualizar a páxina actual";
 
@@ -468,9 +450,6 @@
 
 /* Title of a popup menu item */
 "Remove From List" = "Borrar da listaxe";
-
-/* Title of a menu item */
-"Rename…" = "Renomear…";
 
 /* Title of a menu item */
 "Restore Article" = "Restaurar artigo";

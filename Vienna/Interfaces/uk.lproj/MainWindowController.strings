@@ -31,6 +31,9 @@
 /* Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T"; */
 "10h-xf-C6T.toolTip" = "Відправити посилання на поточну статтю електронною поштою";
 
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "676-5a-TdF"; */
+"676-5a-TdF.title" = "Відкрити сторінку підписки";
+
 /* Class = "NSSearchField"; ibShadowedToolTip = "Filter displayed articles by matching text"; ObjectID = "1304"; */
 "1304.ibShadowedToolTip" = "Фільтрувати статті за вмістом тексту";
 
@@ -70,6 +73,9 @@
 /* Class = "NSToolbarItem"; toolTip = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
 "fpY-CJ-hKU.toolTip" = "Наступна непрочитана";
 
+/* Class = "NSMenuItem"; title = "Open Subscription Home Page in External Browser"; ObjectID = "gCt-tf-kmv"; */
+"gCt-tf-kmv.title" = "Відкрити сторінку підписки у зовнішньому браузері";
+
 /* Class = "NSToolbarItem"; label = "Back"; ObjectID = "gOG-UJ-Pin"; */
 "gOG-UJ-Pin.label" = "Назад";
 
@@ -100,8 +106,14 @@
 /* Class = "NSSearchFieldCell"; placeholderString = "Search for folders"; ObjectID = "lhy-4c-asJ"; */
 "lhy-4c-asJ.placeholderString" = "Знайти теки";
 
+/* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "lxY-yo-Hjh"; */
+"lxY-yo-Hjh.title" = "Переіменувати…";
+
 /* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm"; */
 "MaO-r1-tcm.title" = "Більше стилів…";
+
+/* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "MMp-XG-ASM"; */
+"MMp-XG-ASM.title" = "Інформація";
 
 /* Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys"; */
 "Nmd-zx-Dys.label" = "Оновити";
@@ -117,6 +129,9 @@
 
 /* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "psA-wp-PcZ"; */
 "psA-wp-PcZ.title" = "Нова підписка…";
+
+/* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "Qj9-p3-QXB"; */
+"Qj9-p3-QXB.title" = "Помітити всі статті як прочитані";
 
 /* Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija"; */
 "RaH-Yu-Ija.title" = "Нова тека…";
@@ -135,6 +150,9 @@
 
 /* Class = "NSToolbarItem"; toolTip = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
 "SoG-b2-O1S.toolTip" = "Пропустити папку";
+
+/* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "tHY-Fr-Ili"; */
+"tHY-Fr-Ili.title" = "Редагувати…";
 
 /* Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU"; */
 "TSQ-UW-4gU.label" = "Дія";
@@ -162,6 +180,15 @@
 
 /* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f"; */
 "Y0d-K7-46f.title" = "Інформація";
+
+/* Class = "NSImageView"; ibShadowedToolTip = "An error occurred when this feed was last refreshed"; ObjectID = "Zar-1U-8CD"; */
+"Zar-1U-8CD.ibShadowedToolTip" = "Трапилася помилка при оновленні цієї стрічки";
+
+/* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "zPC-lc-x1k"; */
+"zPC-lc-x1k.title" = "Оновити виділені підписки";
+
+/* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Zsz-uP-pM7"; */
+"Zsz-uP-pM7.title" = "Видалити…";
 
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2"; */
 "Zu1-zW-uo2.title" = "Відкрити сторінку підписки";

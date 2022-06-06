@@ -43,7 +43,7 @@
 /* Class = "NSButtonCell"; title = "Preview new browser"; ObjectID = "DDY-fS-V5T"; */
 "DDY-fS-V5T.title" = "Test ny browser";
 
-/* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "dkm-xW-4If"; */
+/* Class = "NSButtonCell"; title = "Show website icons in the feed list"; ObjectID = "dkm-xW-4If"; */
 "dkm-xW-4If.title" = "Vis mappeikoner i mappeliste";
 
 /* Class = "NSMenuItem"; title = "After two weeks"; ObjectID = "Dw9-en-4Zu"; */
@@ -112,9 +112,6 @@
 /* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "Ljf-Qd-6Ho"; */
 "Ljf-Qd-6Ho.title" = "Tjek for nye artikler ved opstart";
 
-/* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "M8s-xu-lWh"; */
-"M8s-xu-lWh.title" = "Mappeliste skrifttype:";
-
 /* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "McN-fD-0Cv"; */
 "McN-fD-0Cv.title" = "Efter et kort øjeblik";
 
@@ -141,9 +138,6 @@
 
 /* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "pLH-VU-z2d"; */
 "pLH-VU-z2d.title" = "Hver 2 timer";
-
-/* Class = "NSButtonCell"; title = "Select…"; ObjectID = "PmX-nw-uOn"; */
-"PmX-nw-uOn.title" = "Vælg…";
 
 /* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "qYb-Sf-cEF"; */
 "qYb-Sf-cEF.title" = "Hver 5 minutter";

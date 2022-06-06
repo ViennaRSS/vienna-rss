@@ -17,9 +17,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Nelze vytvořit novou databázi programu Vienna v položce „%@“, protože složka je pravděpodobně umístěna v síti. Tato verze programu Vienna nemůže spravovat vzdálené databáze. Vyberte prosím jinou složku, která je umístěna v tomto počítači.";
 
 /* No comment provided by engineer. */
-"An error occurred when this feed was last refreshed" = "Při poslední obnově tohoto zdroje se vyskytla chyba.";
-
-/* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Určitě chcete smazat všechny vybrané složky (celkem: %d)? Tuto operaci nelze odvolat.";
 
 /* No comment provided by engineer. */
@@ -144,9 +141,6 @@
 /* Notification title */
 "Download failed" = "Kopírování selhalo";
 
-/* Title of a menu item */
-"Edit…" = "Upravit…";
-
 /* Title of a button on an alert */
 "Empty" = "Smazat";
 
@@ -200,9 +194,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "Složky";
-
-/* Title of a menu item */
-"Get Info" = "Informace";
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "Otevřít následující stránku";
@@ -275,9 +266,6 @@
 
 /* No comment provided by engineer. */
 "Loading" = "Načítám";
-
-/* Title of a menu item */
-"Mark All Articles as Read" = "Označit všechny příspěvky jako čtené";
 
 /* No comment provided by engineer. */
 "Mark All Read" = "Označit vše jako čtené";
@@ -397,9 +385,6 @@
 /* No comment provided by engineer. */
 "Refresh completed" = "Obnovení dokončeno";
 
-/* Title of a menu item */
-"Refresh Selected Subscriptions" = "Obnovit vybraná odebírání";
-
 /* No comment provided by engineer. */
 "Refresh the current page" = "Obnovit stávající stránku";
 
@@ -411,9 +396,6 @@
 
 /* Title of a popup menu item */
 "Remove From List" = "Odstranit ze seznamu";
-
-/* Title of a menu item */
-"Rename…" = "Přejmenovat…";
 
 /* Title of a menu item */
 "Restore Article" = "Opětovně zařadit příspěvek";
