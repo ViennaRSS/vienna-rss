@@ -13,6 +13,7 @@ xcuserdata/
 
 # SwiftPM
 .build/
+Package.resolved
 
 # Vienna
 Vienna/Localizations/

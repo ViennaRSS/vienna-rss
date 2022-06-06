@@ -43,6 +43,7 @@ extension ArticleConverter {
         self.initForStyle(at: path)
     }
 
+    // swiftlint:disable unavailable_function
     func initForStyle(at path: URL) {
         preconditionFailure("must be overridden by subclasses")
     }
