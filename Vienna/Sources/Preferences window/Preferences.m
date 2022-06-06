@@ -119,8 +119,6 @@ static Preferences * _standardPreferences = nil;
         // Archived objects
         articleFont = [NSKeyedUnarchiver vna_unarchivedObjectOfClass:[NSFont class]
                                                             fromData:[self objectForKey:MAPref_ArticleListFont]];
-        folderFont = [NSKeyedUnarchiver vna_unarchivedObjectOfClass:[NSFont class]
-                                                           fromData:[self objectForKey:MAPref_FolderListFont]];
         searchMethod = [NSKeyedUnarchiver vna_unarchivedObjectOfClass:[SearchMethod class]
                                                              fromData:[self objectForKey:MAPref_SearchMethod]];
         articleSortDescriptors = [NSKeyedUnarchiver vna_unarchivedArrayOfObjectsOfClass:[NSSortDescriptor class]
@@ -229,8 +227,6 @@ static Preferences * _standardPreferences = nil;
     // Archives
     defaultValues[MAPref_ArticleListFont] = [NSKeyedArchiver vna_archivedDataWithRootObject:defaultFont
                                                                       requiringSecureCoding:YES];
-    defaultValues[MAPref_FolderListFont] = [NSKeyedArchiver vna_archivedDataWithRootObject:defaultFont
-                                                                     requiringSecureCoding:YES];
     defaultValues[MAPref_ArticleListSortOrders] = [NSKeyedArchiver vna_archivedDataWithRootObject:@[sortDescriptor]
                                                                             requiringSecureCoding:YES];
     defaultValues[MAPref_SearchMethod] = [NSKeyedArchiver vna_archivedDataWithRootObject:[SearchMethod allArticlesSearchMethod]
@@ -295,18 +291,6 @@ static Preferences * _standardPreferences = nil;
                                                          requiringSecureCoding:YES];
         [self setObject:keyedArchive forKey:MAPref_DownloadItemList];
         [userPrefs removeObjectForKey:MAPref_Deprecated_DownloadItemList];
-    }
-
-    if ([userPrefs objectForKey:MAPref_Deprecated_FolderListFont]) {
-        NSData *archive = [self objectForKey:MAPref_Deprecated_FolderListFont];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        NSFont *font = [NSUnarchiver unarchiveObjectWithData:archive];
-#pragma clang diagnostic pop
-        NSData *keyedArchive = [NSKeyedArchiver vna_archivedDataWithRootObject:font
-                                                         requiringSecureCoding:YES];
-        [self setObject:keyedArchive forKey:MAPref_FolderListFont];
-        [userPrefs removeObjectForKey:MAPref_Deprecated_FolderListFont];
     }
 
     if ([userPrefs objectForKey:MAPref_Deprecated_ArticleListFont]) {
@@ -837,46 +821,6 @@ static Preferences * _standardPreferences = nil;
 		[self setObject:@(newValue) forKey:MAPref_ActiveTextSizeMultiplier];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_StyleChange" object:nil];
 	}
-}
-
-/* folderListFont
- * Retrieve the name of the font used in the folder list
- */
--(NSString *)folderListFont
-{
-	return folderFont.fontName;
-}
-
-/* folderListFontSize
- * Retrieve the size of the font used in the folder list
- */
--(NSInteger)folderListFontSize
-{
-	return folderFont.pointSize;
-}
-
-/* setFolderListFont
- * Retrieve the name of the font used in the folder list
- */
--(void)setFolderListFont:(NSString *)newFontName
-{
-	folderFont = [NSFont fontWithName:[newFontName copy] size:self.folderListFontSize];
-    NSData *archive = [NSKeyedArchiver vna_archivedDataWithRootObject:folderFont
-                                                requiringSecureCoding:YES];
-    [self setObject:archive forKey:MAPref_FolderListFont];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderFontChange" object:folderFont];
-}
-
-/* setFolderListFontSize
- * Changes the size of the font used in the folder list.
- */
--(void)setFolderListFontSize:(NSInteger)newFontSize
-{
-	folderFont = [NSFont fontWithName:self.folderListFont size:newFontSize];
-    NSData *archive = [NSKeyedArchiver vna_archivedDataWithRootObject:folderFont
-                                                requiringSecureCoding:YES];
-    [self setObject:archive forKey:MAPref_FolderListFont];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderFontChange" object:folderFont];
 }
 
 /* articleListFont

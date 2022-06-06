@@ -39,6 +39,11 @@
 
 @property (readonly, nonatomic) BOOL readingPaneOnRight;
 
+// MARK: Obsolete
+
+@property (nonatomic) NSString *folderListFont;
+@property (nonatomic) NSInteger folderListFontSize;
+
 @end
 
 @implementation ViennaApp
@@ -354,8 +359,6 @@
 -(BOOL)enableMinimumFontSize		{ return [Preferences standardPreferences].enableMinimumFontSize; }
 -(NSInteger)refreshFrequency				{ return [Preferences standardPreferences].refreshFrequency; }
 -(NSString *)displayStyle			{ return [Preferences standardPreferences].displayStyle; }
--(NSString *)folderListFont			{ return [Preferences standardPreferences].folderListFont; }
--(NSInteger)folderListFontSize			{ return [Preferences standardPreferences].folderListFontSize; }
 -(NSString *)articleListFont		{ return [Preferences standardPreferences].articleListFont; }
 -(NSInteger)articleListFontSize			{ return [Preferences standardPreferences].articleListFontSize; }
 -(BOOL)statusBarVisible				{ return [Preferences standardPreferences].showStatusBar; }
@@ -375,10 +378,32 @@
 -(void)setEnableMinimumFontSize:(BOOL)flag			{ [Preferences standardPreferences].enableMinimumFontSize = flag; }
 -(void)setRefreshFrequency:(NSInteger)newFrequency		{ [Preferences standardPreferences].refreshFrequency = newFrequency; }
 -(void)setDisplayStyle:(NSString *)newStyle			{ [Preferences standardPreferences].displayStyle = [newStyle copy]; }
--(void)setFolderListFont:(NSString *)newFontName	{ [Preferences standardPreferences].folderListFont = [newFontName copy]; }
--(void)setFolderListFontSize:(NSInteger)newFontSize		{ [Preferences standardPreferences].folderListFontSize = newFontSize; }
 -(void)setArticleListFont:(NSString *)newFontName	{ [Preferences standardPreferences].articleListFont = [newFontName copy]; }
 -(void)setArticleListFontSize:(NSInteger)newFontSize		{ [Preferences standardPreferences].articleListFontSize = newFontSize; }
 -(void)setStatusBarVisible:(BOOL)flag				{ [Preferences standardPreferences].showStatusBar = flag; }
 -(void)setFilterBarVisible:(BOOL)flag				{ [Preferences standardPreferences].showFilterBar = flag; }
+
+// MARK: Obsolete accessors
+// The following accessors are defined for compatibility with scripting.
+
+- (NSString *)folderListFont
+{
+    return @"";
+}
+
+- (void)setFolderListFont:(__unused NSString *)folderListFont
+{
+    // Not implemented
+}
+
+- (NSInteger)folderListFontSize
+{
+    return -1;
+}
+
+- (void)setFolderListFontSize:(__unused NSInteger)folderListFontSize
+{
+    // Not implemented
+}
+
 @end

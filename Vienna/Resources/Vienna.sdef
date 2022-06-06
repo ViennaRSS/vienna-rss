@@ -223,10 +223,12 @@
 			<property type="integer" name="filter by" code="flMO" description="Sets how articles are filtered in the display list">
 				<cocoa key="filterMode"/>
 			</property>
-			<property type="text" name="folder list font" code="flFn" description="The font used in the folder list pane">
+			<!-- This property is obsolete -->
+			<property type="text" name="folder list font" code="flFn" description="The font used in the folder list pane" hidden="yes">
 				<cocoa key="folderListFont"/>
 			</property>
-			<property type="integer" name="folder list font size" code="flFS" description="The size of the font used in the folder list pane">
+			<!-- This property is obsolete -->
+			<property type="integer" name="folder list font size" code="flFS" description="The size of the font used in the folder list pane" hidden="yes">
 				<cocoa key="folderListFontSize"/>
 			</property>
 			<property type="real" name="mark read interval" code="mrIN" description="The interval after an article is displayed before it is marked read">

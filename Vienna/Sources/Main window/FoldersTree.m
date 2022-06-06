@@ -39,13 +39,10 @@
 
 @property (readonly, nonatomic) NSArray *archiveState;
 @property (nonatomic) TreeNode *rootNode;
-@property (nonatomic) NSFont *cellFont;
-@property (nonatomic) NSFont *boldCellFont;
 @property (nonatomic) BOOL blockSelectionHandler;
 
 @property (nullable, weak) NSText *fieldEditor;
 
--(void)setFolderListFont;
 -(void)unarchiveState:(NSArray *)stateArray;
 -(void)reloadDatabase:(NSArray *)stateArray;
 -(BOOL)loadTree:(NSArray *)listOfFolders rootNode:(TreeNode *)node;
@@ -57,7 +54,6 @@
 -(void)handleFolderUpdate:(NSNotification *)nc;
 -(void)handleFolderDeleted:(NSNotification *)nc;
 -(void)handleShowFolderImagesChange:(NSNotification *)nc;
--(void)handleFolderFontChange:(NSNotification *)nc;
 -(void)reloadFolderItem:(id)node reloadChildren:(BOOL)flag;
 -(void)expandToParent:(TreeNode *)node;
 -(BOOL)moveFolders:(NSArray *)array withGoogleSync:(BOOL)sync;
@@ -118,7 +114,6 @@
 	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderAdded:) name:@"MA_Notify_FolderAdded" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderDeleted:) name:VNADatabaseDidDeleteFolderNotification object:nil];
-	[nc addObserver:self selector:@selector(handleFolderFontChange:) name:@"MA_Notify_FolderFontChange" object:nil];
 	[nc addObserver:self selector:@selector(handleShowFolderImagesChange:) name:@"MA_Notify_ShowFolderImages" object:nil];
 	[nc addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
     [nc addObserver:self selector:@selector(handleOpenReaderFolderChange:) name:@"MA_Notify_OpenReaderFolderChange" object:nil];
@@ -171,33 +166,6 @@
     // No need to sync with OpenReader server because this is triggered when
     // folder layout has changed at server level. Making a sync call would be redundant.
     [self moveFolders:nc.object withGoogleSync:NO];
-}
-
-/* handleFolderFontChange
- * Called when the user changes the folder font and/or size in the Preferences
- */
--(void)handleFolderFontChange:(NSNotification *)nc
-{
-	[self setFolderListFont];
-	[self.outlineView reloadData];
-}
-
-/* setFolderListFont
- * Creates or updates the fonts used by the article list. The folder
- * list isn't automatically refreshed afterward - call reloadData for that.
- */
--(void)setFolderListFont
-{
-	NSInteger height;
-
-
-	Preferences * prefs = [Preferences standardPreferences];
-	self.cellFont = [NSFont fontWithName:prefs.folderListFont size:prefs.folderListFontSize];
-	self.boldCellFont = [[NSFontManager sharedFontManager] convertWeight:YES ofFont:self.cellFont];
-
-	height = [APPCONTROLLER.layoutManager defaultLineHeightForFont:self.boldCellFont];
-	self.outlineView.rowHeight = height + 5;
-	self.outlineView.intercellSpacing = NSMakeSize(10, 2);
 }
 
 /* reloadDatabase
@@ -1366,34 +1334,12 @@
     if (!node) {
         node = self.rootNode;
     }
-
-    static NSDictionary *info = nil;
-    if (!info) {
-        NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-        style.lineBreakMode = NSLineBreakByTruncatingTail;
-        style.tighteningFactorForTruncation = 0.0;
-        style.alignment = NSTextAlignmentLeft;
-        info = @{NSParagraphStyleAttributeName: style};
-    }
-
     Folder *folder = node.folder;
-    NSMutableDictionary *myInfo = [NSMutableDictionary dictionaryWithDictionary:info];
-    if (folder.isUnsubscribed) {
-        myInfo[NSForegroundColorAttributeName] = NSColor.secondaryLabelColor;
-    } else {
-        myInfo[NSForegroundColorAttributeName] = NSColor.labelColor;
-    }
-    // Set the font
-    if (folder.unreadCount || (folder.childUnreadCount && ![outlineView isItemExpanded:item])) {
-        myInfo[NSFontAttributeName] = self.boldCellFont;
-    } else {
-        myInfo[NSFontAttributeName] = self.cellFont;
-    }
 
     // Only show folder images if the user prefers them.
     Preferences *prefs = [Preferences standardPreferences];
     cellView.imageView.image = (prefs.showFolderImages ? folder.image : [folder standardImage]);
-    cellView.textField.attributedStringValue = [[NSAttributedString alloc] initWithString:node.nodeName attributes:myInfo];
+    cellView.textField.stringValue = node.nodeName;
     cellView.textField.delegate = self;
 
     // Use the auxiliary position of the feed item to show
