@@ -47,7 +47,11 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
 
     @objc
     init(frame: NSRect) {
-        super.init(frame: frame, configuration: WKWebViewConfiguration())
+        let configuration = WKWebViewConfiguration()
+        if #available(macOS 10.14, *), configuration.responds(to: #selector(setter: WKWebViewConfiguration._drawsBackground)) {
+            configuration._drawsBackground = false
+        }
+        super.init(frame: frame, configuration: configuration)
         if responds(to: #selector(setter: _textZoomFactor)) {
             _textZoomFactor = Preferences.standard.textSizeMultiplier
         }
