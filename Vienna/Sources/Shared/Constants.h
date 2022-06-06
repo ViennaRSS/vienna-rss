@@ -82,6 +82,7 @@ extern NSString * MAPref_SyncingAppKey;
 extern NSString * MAPref_AlwaysAcceptBetas;
 extern NSString * MAPref_UserAgentName;
 extern NSString *const MAPref_UseRelativeDates;
+extern NSString * const MAPref_ShowDetailsOnFeedCredentialsDialog;
 
 // Deprecated defaults keys
 extern NSString *const MAPref_Deprecated_ArticleListFont;

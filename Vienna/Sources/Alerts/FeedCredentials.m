@@ -19,117 +19,144 @@
 //
 
 #import "FeedCredentials.h"
-#import "StringExtensions.h"
-#import "Folder.h"
-#import "Database.h"
 
+#import "Constants.h"
+#import "Database.h"
+#import "DisclosureView.h"
+#import "Folder.h"
+#import "Preferences.h"
+#import "StringExtensions.h"
+
+NSString * const MAPref_ShowDetailsOnFeedCredentialsDialog = @"ShowDetailsOnFeedCredentialsDialog";
+
+static NSNibName const VNAFeedCredentialsNibName = @"FeedCredentials";
+static NSUserInterfaceItemIdentifier const VNADisclosureButtonIdentifier = @"DisclosureButton";
 
 @interface FeedCredentials ()
 
--(void)enableOKButton;
+// MARK: Outlets
+
+@property (weak, nonatomic) IBOutlet NSWindow *credentialsWindow;
+@property (weak, nonatomic) IBOutlet NSTextField *messageTextField;
+@property (weak, nonatomic) IBOutlet NSTextField *userNameTextField;
+@property (weak, nonatomic) IBOutlet NSSecureTextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet DisclosureView *disclosureView;
+@property (weak, nonatomic) IBOutlet NSTextField *feedTextField;
+@property (weak, nonatomic) IBOutlet NSTextField *feedURLTextField;
+@property (weak, nonatomic) IBOutlet NSButton *okButton;
+
+// MARK: Storage
+
+@property NSArray *topObjects;
+@property Folder *folder;
 
 @end
 
 @implementation FeedCredentials
 
-/* init
- * Initialise an instance of ourselves with the specified database
- */
--(instancetype)init
+// MARK: Initialization
+
+- (void)requestCredentialsInWindow:(NSWindow *)window forFolder:(Folder *)folder
 {
-	if ((self = [super init]) != nil)
-	{
-		folder = nil;
-	}
-	return self;
+    if (!self.credentialsWindow) {
+        NSArray *objects;
+        [NSBundle.mainBundle loadNibNamed:VNAFeedCredentialsNibName
+                                    owner:self
+                          topLevelObjects:&objects];
+        self.topObjects = objects;
+        self.userNameTextField.delegate = self;
+    }
+
+    // Retain the folder as we need it to update the
+    // username and/or password.
+    self.folder = folder;
+
+    // Show the feed URL in the prompt so the user knows which site credentials
+    // are being requested. (We don't use [folder name] here as that is likely
+    // to be "Untitled Folder" mostly).
+    NSURL *secureURL = [NSURL URLWithString:self.folder.feedURL];
+    NSString *prompt =
+        [NSString stringWithFormat:NSLocalizedString(
+                                       @"The subscription for \"%@\" requires "
+                                       @"a user name and password for access.",
+                                       nil),
+                                   secureURL.host];
+    self.messageTextField.stringValue = prompt;
+
+    // Fill out any existing values.
+    self.userNameTextField.stringValue = self.folder.username;
+    self.passwordTextField.stringValue = self.folder.password;
+
+    // Fill out feed details.
+    self.feedTextField.stringValue = self.folder.name;
+    self.feedURLTextField.stringValue = self.folder.feedURL;
+
+    // Show or hide the details view.
+    Preferences *preferences = Preferences.standardPreferences;
+    BOOL showDetails = [preferences boolForKey:MAPref_ShowDetailsOnFeedCredentialsDialog];
+    if (showDetails) {
+        [self.disclosureView disclose:NO];
+    } else {
+        [self.disclosureView collapse:NO];
+    }
+
+    // Set the focus
+    [self.credentialsWindow makeFirstResponder:self.folder.username.vna_isBlank ? self.userNameTextField
+                                                                                : self.passwordTextField];
+
+    self.okButton.enabled = !self.userNameTextField.stringValue.vna_isBlank;
+    [window beginSheet:self.credentialsWindow completionHandler:nil];
 }
 
-/* credentialsForFolder
- * Obtains the credentials for the specified folder.
- */
--(void)credentialsForFolder:(NSWindow *)window folder:(Folder *)aFolder
+// MARK: Actions
+
+- (IBAction)toggleDisclosure:(NSButton *)sender
 {
-	if (credentialsWindow == nil)
-	{
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextDidChange:) name:NSControlTextDidChangeNotification object:userName];
-		NSArray * objects;
-		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"FeedCredentials" owner:self topLevelObjects:&objects];
-		self.topObjects = objects;
-	}
+    if (![sender.identifier isEqualToString:VNADisclosureButtonIdentifier]) {
+        return;
+    }
 
-	// Retain the folder as we need it to update the
-	// username and/or password.
-	folder = aFolder;
-
-	// Show the feed URL in the prompt so the user knows which site credentials are being
-	// requested. (We don't use [folder name] here as that is likely to be "Untitled Folder" mostly).
-	NSURL * secureURL = [NSURL URLWithString:folder.feedURL];
-	NSString * prompt = [NSString stringWithFormat:NSLocalizedString(@"The subscription for \"%@\" requires a user name and password for access.", nil), secureURL.host];
-	promptString.stringValue = prompt;
-
-	// Fill out any existing values.
-	userName.stringValue = folder.username;
-	password.stringValue = folder.password;
-	
-	// Set the focus
-	[credentialsWindow makeFirstResponder:(folder.username.vna_isBlank) ? userName : password];
-
-	[self enableOKButton];
-    [window beginSheet:credentialsWindow completionHandler:nil];
+    BOOL shouldShowDetails = sender.state == NSControlStateValueOn;
+    if (shouldShowDetails) {
+        [self.disclosureView disclose:YES];
+    } else {
+        [self.disclosureView collapse:YES];
+    }
 }
 
-/* doCancelButton
- * Respond to the Cancel button being clicked. Just close the UI.
- */
--(IBAction)doCancelButton:(id)sender
+- (IBAction)updateCredentials:(id)sender
 {
-	[credentialsWindow.sheetParent endSheet:credentialsWindow];
-	[credentialsWindow orderOut:self];
+    NSString *usernameString = self.userNameTextField.stringValue.vna_trimmed;
+    NSString *passwordString = self.passwordTextField.stringValue;
 
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_CancelAuthenticationForFolder" object:folder];
+    Database *database = Database.sharedManager;
+    [database setFolderUsername:self.folder.itemId newUsername:usernameString];
+    self.folder.password = passwordString;
+
+    [self.credentialsWindow.sheetParent endSheet:self.credentialsWindow];
+    [self.credentialsWindow orderOut:self];
+
+    [NSNotificationCenter.defaultCenter postNotificationName:@"MA_Notify_GotAuthenticationForFolder"
+                                                      object:self.folder];
 }
 
-/* doOKButton
- * Respond to the OK button being clicked.
- */
--(IBAction)doOKButton:(id)sender
+- (IBAction)cancel:(id)sender
 {
-	NSString * usernameString = (userName.stringValue).vna_trimmed;
-	NSString * passwordString = password.stringValue;
+    [self.credentialsWindow.sheetParent endSheet:self.credentialsWindow];
+    [self.credentialsWindow orderOut:self];
 
-	Database * db = [Database sharedManager];
-	[db setFolderUsername:folder.itemId newUsername:usernameString];
-	folder.password = passwordString;
-	
-	[credentialsWindow.sheetParent endSheet:credentialsWindow];
-	[credentialsWindow orderOut:self];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GotAuthenticationForFolder" object:folder];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"MA_Notify_CancelAuthenticationForFolder"
+                                                      object:self.folder];
 }
 
-/* handleTextDidChange [delegate]
- * This function is called when the contents of the input field is changed.
- * We disable the Subscribe button if the input fields are empty or enable it otherwise.
- */
--(void)handleTextDidChange:(NSNotification *)aNotification
+// MARK: - NSTextFieldDelegate
+
+// This function is called when the contents of the input field is changed. We
+// disable the Subscribe button if the input fields are empty or enable it
+// otherwise.
+- (void)controlTextDidChange:(NSNotification *)obj
 {
-	[self enableOKButton];
+    self.okButton.enabled = !self.userNameTextField.stringValue.vna_isBlank;
 }
 
-/* enableSaveButton
- * Enable or disable the Save button depending on whether or not there is a non-blank
- * string in the input fields.
- */
--(void)enableOKButton
-{
-	okButton.enabled = !(userName.stringValue).vna_isBlank;
-}
-
-/* dealloc
- * Clean up after ourself.
- */
--(void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 @end
