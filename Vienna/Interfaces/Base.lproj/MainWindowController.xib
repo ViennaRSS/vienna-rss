@@ -160,6 +160,9 @@
                                                             </prototypeCellViews>
                                                         </tableColumn>
                                                     </tableColumns>
+                                                    <connections>
+                                                        <outlet property="menu" destination="uhR-6M-OgB" id="4rs-9J-nb7"/>
+                                                    </connections>
                                                 </outlineView>
                                             </subviews>
                                             <nil key="backgroundColor"/>
@@ -1081,6 +1084,69 @@
             </connections>
             <point key="canvasLocation" x="-186" y="42.5"/>
         </customView>
+        <menu id="uhR-6M-OgB">
+            <items>
+                <menuItem title="Refresh Selected Subscriptions" id="zPC-lc-x1k">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="refreshSelectedSubscriptions:" target="-1" id="YrQ-Gn-tb7"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="PMz-xU-PdA"/>
+                <menuItem title="Edit…" id="tHY-Fr-Ili">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="editFolder:" target="-1" id="man-8N-bl6"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Rename…" id="lxY-yo-Hjh">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="renameFolder:" target="-1" id="OJ9-3F-pzB"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Delete…" id="Zsz-uP-pM7">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="deleteFolder:" target="-1" id="7pr-W3-FEK"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="5SQ-2o-tr6"/>
+                <menuItem title="Mark All Articles as Read" id="Qj9-p3-QXB">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="markAllRead:" target="-1" id="tfp-6U-Nif"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="i13-YT-b6U"/>
+                <menuItem title="Open Subscription Home Page" id="676-5a-TdF">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="viewSourceHomePage:" target="-1" id="70r-c1-5hf"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Open Subscription Home Page in External Browser" alternate="YES" id="gCt-tf-kmv">
+                    <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                    <connections>
+                        <action selector="viewSourceHomePageInAlternateBrowser:" target="-1" id="Tlk-yR-61C"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Get Info" id="MMp-XG-ASM">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="getInfo:" target="-1" id="g8w-jC-EZ9"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="Ujv-wN-Fmi"/>
+                <menuItem title="Force Refresh Selected Subscriptions From Open Reader" id="9os-ks-jzh">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="forceRefreshSelectedSubscriptions:" target="-1" id="APM-tB-ZbU"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="72" y="-1173"/>
+        </menu>
         <userDefaultsController representsSharedInstance="YES" id="fAX-Jg-YQ6"/>
     </objects>
     <resources>

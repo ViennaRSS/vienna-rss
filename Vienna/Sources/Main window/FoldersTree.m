@@ -41,8 +41,6 @@ static void *ObserverContext = &ObserverContext;
 
 @interface FoldersTree ()
 
-@property (readonly, nonatomic) NSMenu *folderMenu;
-
 @property (readonly, nonatomic) NSArray *archiveState;
 @property (nonatomic) TreeNode *rootNode;
 @property (nonatomic) BOOL blockSelectionHandler;
@@ -106,9 +104,6 @@ static void *ObserverContext = &ObserverContext;
 	[self.outlineView scrollRowToVisible:self.outlineView.selectedRow];
 
     self.outlineView.accessibilityValueDescription = NSLocalizedString(@"Folders", nil);
-
-	// Set the menu for the popup button
-	self.outlineView.menu = self.folderMenu;
 	
 	self.blockSelectionHandler = YES;
 	[self reloadDatabase:[[Preferences standardPreferences] arrayForKey:MAPref_FolderStates]];
@@ -145,48 +140,6 @@ static void *ObserverContext = &ObserverContext;
     [userDefaults removeObserver:self
                       forKeyPath:MAPref_ShowFeedsWithUnreadItemsInBold
                          context:ObserverContext];
-}
-
--(NSMenu *)folderMenu
-{
-    NSMenu *folderMenu = [[NSMenu alloc] init];
-
-	[folderMenu addItemWithTitle:NSLocalizedString(@"Refresh Selected Subscriptions", @"Title of a menu item")
-						  action:@selector(refreshSelectedSubscriptions:)
-				   keyEquivalent:@""];
-    [folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItemWithTitle:NSLocalizedString(@"Edit…", @"Title of a menu item")
-						  action:@selector(editFolder:)
-				   keyEquivalent:@""];
-	[folderMenu addItemWithTitle:NSLocalizedString(@"Rename…", @"Title of a menu item")
-						  action:@selector(renameFolder:)
-				   keyEquivalent:@""];
-	[folderMenu addItemWithTitle:NSLocalizedString(@"Delete…", @"Title of a menu item")
-						  action:@selector(deleteFolder:)
-				   keyEquivalent:@""];
-    [folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItemWithTitle:NSLocalizedString(@"Mark All Articles as Read", @"Title of a menu item")
-						  action:@selector(markAllRead:)
-				   keyEquivalent:@""];
-    [folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItemWithTitle:NSLocalizedString(@"Open Subscription Home Page", @"Title of a menu item")
-						  action:@selector(viewSourceHomePage:)
-				   keyEquivalent:@""];
-    NSMenuItem *alternateItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Subscription Home Page in External Browser", @"Title of a menu item")
-														   action:@selector(viewSourceHomePageInAlternateBrowser:)
-													keyEquivalent:@""];
-    alternateItem.keyEquivalentModifierMask = NSEventModifierFlagOption;
-	alternateItem.alternate = YES;
-    [folderMenu addItem:alternateItem];
-	[folderMenu addItemWithTitle:NSLocalizedString(@"Get Info", @"Title of a menu item")
-						  action:@selector(getInfo:)
-				   keyEquivalent:@""];
-    [folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItemWithTitle:NSLocalizedString(@"Force Refresh Selected Subscriptions From Open Reader", @"Title of a menu item")
-						  action:@selector(forceRefreshSelectedSubscriptions:)
-				   keyEquivalent:@""];
-
-    return folderMenu;
 }
 
 -(void)handleOpenReaderFolderChange:(NSNotification *)nc
