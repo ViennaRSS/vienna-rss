@@ -64,14 +64,10 @@ class LoadingIndicator: NSView {
     }
 
     deinit {
-        if #available(macOS 10.14, *) {
-            // Do nothing
-        } else {
-            if let observer = observer {
-                let center = NotificationCenter.default
-                let name = NSColor.currentControlTintDidChangeNotification
-                center.removeObserver(observer, name: name, object: NSApp)
-            }
+        if #unavailable(macOS 10.14), let observer = observer {
+            let center = NotificationCenter.default
+            let name = NSColor.currentControlTintDidChangeNotification
+            center.removeObserver(observer, name: name, object: NSApp)
         }
     }
 
