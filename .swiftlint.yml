@@ -7,6 +7,7 @@ included:
 # Rules
 
 disabled_rules:
+  - file_length
   - function_body_length
   - line_length
   - todo

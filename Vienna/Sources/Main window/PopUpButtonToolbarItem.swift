@@ -28,9 +28,7 @@ class PopUpButtonToolbarItem: NSToolbarItem {
         super.awakeFromNib()
 
         // The toolbar item's width is too wide on older systems.
-        if #available(macOS 11, *) {
-            // Do nothing
-        } else {
+        if #unavailable(macOS 11) {
             minSize = NSSize(width: 41, height: 25)
             maxSize = NSSize(width: 41, height: 28)
         }
