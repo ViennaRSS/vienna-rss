@@ -137,7 +137,7 @@
  *  Identify the prefixes used for namespaces we handle, if defined
  *  If prefixes are not defined in our data, set to frequently used ones
  *
- *  @param rssElement The rss of atom element of the feed
+ *  @param element The rss of atom element of the feed
  *
  */
 -(void)identifyNamespacesPrefixes:(NSXMLElement *)element

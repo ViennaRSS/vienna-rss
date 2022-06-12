@@ -198,8 +198,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 /*!
  *  sets up an inital Vienna database at the given path
  *
- *  @param dbPath The path to create the database at
- *
  *  @return True on succes
  */
 - (BOOL)setupInitialDatabase {

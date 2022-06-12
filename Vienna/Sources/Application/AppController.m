@@ -1874,7 +1874,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	NSMenuItem * menuItem = (NSMenuItem *)sender;
 	NSNumber * ascendingNumber = menuItem.representedObject;
 	
-	NSAssert1(ascendingNumber, @"Somehow got a nil representedObject for Sort direction sub-menu item '%@'", [menuItem title]);
+	NSAssert1(ascendingNumber != nil, @"Somehow got a nil representedObject for Sort direction sub-menu item '%@'", [menuItem title]);
 	BOOL ascending = ascendingNumber.boolValue;
 	[self.articleController sortAscending:ascending];
 }

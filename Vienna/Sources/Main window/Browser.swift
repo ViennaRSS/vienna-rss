@@ -27,9 +27,10 @@ protocol Browser {
 
     // MARK: tab management
 
-    /// The browser can have a fixed first tab (e.g. bookmarks).
-    /// The tab has to be managed by the setter. It will not be saved, nor be returned by the activeTab property.
-    /// - Parameter tabViewItem: the tab view item configured with the view that shall be in the first fixed tab.
+    /// The tab view item configured with the view that shall be in the first
+    /// fixed tab.The browser can have a fixed first tab (e.g. bookmarks). The
+    /// tab has to be managed by the setter. It will not be saved, nor be
+    /// returned by the activeTab property.
     var primaryTab: NSTabViewItem? { get set }
 
     /// A tabbed browser always has one tab that is selected. It is called the active tab.

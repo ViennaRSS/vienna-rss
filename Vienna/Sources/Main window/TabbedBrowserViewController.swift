@@ -45,9 +45,9 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
 
     @IBOutlet private(set) weak var tabView: NSTabView?
 
-    /// The browser can have a fixed first tab (e.g. bookmarks).
-    /// This method will set the primary tab the first time it is called
-    /// - Parameter tabViewItem: the tab view item configured with the view that shall be in the first fixed tab.
+    /// The tab view item configured with the view that shall be in the first
+    /// fixed (e.g. bookmarks). This method will set the primary tab the first
+    /// time it is called.
     var primaryTab: NSTabViewItem? {
         didSet {
             // Temove from tabView if there was a prevous primary tab

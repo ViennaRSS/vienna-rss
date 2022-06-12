@@ -30,7 +30,7 @@
 	NSURL * secureUrl = [NSURL URLWithString:url];
 	const char * cServiceName = secureUrl.host.UTF8String;
 	const char * cUsername = username.UTF8String;
-	NSInteger portNumber = secureUrl.port ? secureUrl.port.integerValue : ([secureUrl.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame ? 443 : 80);
+	NSInteger portNumber = secureUrl.port != nil ? secureUrl.port.integerValue : ([secureUrl.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame ? 443 : 80);
 	SecProtocolType protocolType = ([secureUrl.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame) ? kSecProtocolTypeHTTPS : kSecProtocolTypeHTTP;
 	NSString * thePassword;
 
@@ -78,7 +78,7 @@
 	const char * cServiceName = secureUrl.host.UTF8String;
 	const char * cUsername = username.UTF8String;
 	const char * cPath = "";
-	NSInteger portNumber = secureUrl.port ? secureUrl.port.integerValue : ([secureUrl.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame ? 443 : 80);
+	NSInteger portNumber = secureUrl.port != nil ? secureUrl.port.integerValue : ([secureUrl.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame ? 443 : 80);
 	SecProtocolType protocolType = ([secureUrl.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame) ? kSecProtocolTypeHTTPS : kSecProtocolTypeHTTP;
 	const char * cPassword = password.UTF8String;
 	SecKeychainItemRef itemRef;
