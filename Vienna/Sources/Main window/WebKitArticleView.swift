@@ -27,6 +27,7 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
     var articles: [Article] = [] {
         didSet {
             guard !articles.isEmpty else {
+                isHidden = true
                 self.clearHTML()
                 return
             }
@@ -36,6 +37,7 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
             self.htmlPath = htmlPath
 
             self.loadFileURL(htmlPath, allowingReadAccessTo: htmlPath.deletingLastPathComponent())
+            isHidden = false
         }
     }
 
