@@ -1325,6 +1325,8 @@
 				4350284D165DE9DF0018EDB7 /* ArticleBaseView.h */,
 				43502852165DE9DF0018EDB7 /* ArticleListView.h */,
 				43502853165DE9DF0018EDB7 /* ArticleListView.m */,
+				43502885165DE9DF0018EDB7 /* EnclosureView.h */,
+				43502886165DE9DF0018EDB7 /* EnclosureView.m */,
 				2F2280362271B065005D1023 /* ArticleContent */,
 				AA26F4D70604927300FE7994 /* BackTrackArray.h */,
 				AA26F4D80604927300FE7994 /* BackTrackArray.m */,
@@ -1332,8 +1334,6 @@
 				43502874165DE9DF0018EDB7 /* MessageListView.m */,
 				4350287B165DE9DF0018EDB7 /* ProgressTextCell.h */,
 				4350287C165DE9DF0018EDB7 /* ProgressTextCell.m */,
-				43502885165DE9DF0018EDB7 /* EnclosureView.h */,
-				43502886165DE9DF0018EDB7 /* EnclosureView.m */,
 				4350288D165DE9DF0018EDB7 /* UnifiedDisplayView.h */,
 				4350288E165DE9DF0018EDB7 /* UnifiedDisplayView.m */,
 			);
