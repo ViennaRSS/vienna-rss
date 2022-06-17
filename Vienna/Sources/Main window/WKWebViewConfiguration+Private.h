@@ -2,7 +2,7 @@
 //  WKWebViewConfiguration+Private.h
 //  Vienna
 //
-//  Copyright 2021-2022 Eitot
+//  Copyright 2021 Eitot
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -24,7 +24,5 @@
 // This is implemented by WKWebpagePreferences.allowsContentJavaScript as of
 // macOS 11.
 @property (setter=_setAllowsJavaScriptMarkup:, nonatomic) BOOL _allowsJavaScriptMarkup NS_DEPRECATED_MAC(10.12, 11);
-
-@property (setter=_setDrawsBackground:, nonatomic) BOOL _drawsBackground NS_AVAILABLE_MAC(10.14);
 
 @end
