@@ -170,18 +170,20 @@
                     <constraint firstAttribute="trailing" secondItem="993" secondAttribute="trailing" id="x4Z-s7-D3P"/>
                 </constraints>
             </view>
-            <toolbar key="toolbar" implicitIdentifier="9BE5691C-FD10-407B-A43E-74580FF42F4B" explicitIdentifier="MA_Toolbar" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="Vtx-1j-Pbt">
+            <toolbar key="toolbar" implicitIdentifier="9BE5691C-FD10-407B-A43E-74580FF42F4B" explicitIdentifier="MA_Toolbar" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="Vtx-1j-Pbt" customClass="VNAToolbar">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="3B81A7E6-BC01-4E5D-8598-E3749E1C39BF" explicitItemIdentifier="Subscribe" label="Add" paletteLabel="Add" toolTip="Subscribe to a feed or add a folder or smart folder." image="NewFeedTemplate" sizingBehavior="auto" id="CPA-Ha-aj1" userLabel="Add" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="3B81A7E6-BC01-4E5D-8598-E3749E1C39BF" explicitItemIdentifier="Subscribe" label="Add" paletteLabel="Add" toolTip="Subscribe to a feed or add a folder or smart folder." image="NewFeedTemplate" sizingBehavior="auto" autovalidates="NO" id="CPA-Ha-aj1" userLabel="Add" customClass="VNAPopUpButtonToolbarItem">
                         <popUpButton key="view" verticalHuggingPriority="750" id="DDQ-PY-F2c">
-                            <rect key="frame" x="0.0" y="14" width="73" height="25"/>
+                            <rect key="frame" x="0.0" y="14" width="64" height="25"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NewFeedTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="pdk-MS-QME" id="xAh-aB-Ek3">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" id="tQg-b5-Yiu">
                                     <items>
-                                        <menuItem state="on" image="NewFeedTemplate" hidden="YES" id="pdk-MS-QME"/>
+                                        <menuItem state="on" image="NewFeedTemplate" hidden="YES" id="pdk-MS-QME">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
                                         <menuItem title="New Subscription…" id="psA-wp-PcZ">
                                             <connections>
                                                 <action selector="newSubscription:" target="-1" id="ZrW-KY-2C0"/>
@@ -203,7 +205,7 @@
                             </popUpButtonCell>
                         </popUpButton>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="0E560FB8-D8D4-477F-87CE-D3451015D08F" explicitItemIdentifier="PreviousButton" label="Back" paletteLabel="Back" toolTip="Back" image="PreviousItemTemplate" sizingBehavior="auto" id="gOG-UJ-Pin" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="0E560FB8-D8D4-477F-87CE-D3451015D08F" explicitItemIdentifier="PreviousButton" label="Back" paletteLabel="Back" toolTip="Back" image="PreviousItemTemplate" sizingBehavior="auto" id="gOG-UJ-Pin" customClass="VNAButtonToolbarItem">
                         <button key="view" verticalHuggingPriority="750" id="tUv-uw-U24">
                             <rect key="frame" x="2" y="14" width="30" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
@@ -216,7 +218,7 @@
                             <action selector="goBack:" target="-1" id="vfV-Zh-Djc"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="B455B425-67E7-44CA-8DDA-7188C9BBFDF7" explicitItemIdentifier="NextButton" label="Next Unread" paletteLabel="Next Unread" toolTip="Next Unread" image="NextItemTemplate" sizingBehavior="auto" id="fpY-CJ-hKU" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="B455B425-67E7-44CA-8DDA-7188C9BBFDF7" explicitItemIdentifier="NextButton" label="Next Unread" paletteLabel="Next Unread" toolTip="Next Unread" image="NextItemTemplate" sizingBehavior="auto" id="fpY-CJ-hKU" customClass="VNAButtonToolbarItem">
                         <button key="view" verticalHuggingPriority="750" id="DGs-HX-KGa">
                             <rect key="frame" x="22" y="14" width="30" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
@@ -229,7 +231,7 @@
                             <action selector="viewNextUnread:" target="-1" id="bxj-nt-KuQ"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="A62CF72C-0A55-43F3-9737-DAD4E0E93C95" explicitItemIdentifier="SkipFolder" label="Skip Folder" paletteLabel="Skip Folder" toolTip="Skip Folder" image="NextFolderTemplate" sizingBehavior="auto" id="SoG-b2-O1S" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="A62CF72C-0A55-43F3-9737-DAD4E0E93C95" explicitItemIdentifier="SkipFolder" label="Skip Folder" paletteLabel="Skip Folder" toolTip="Skip Folder" image="NextFolderTemplate" sizingBehavior="auto" id="SoG-b2-O1S" customClass="VNAButtonToolbarItem">
                         <button key="view" verticalHuggingPriority="750" id="Xbk-bR-TPc">
                             <rect key="frame" x="18" y="14" width="31" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
@@ -242,7 +244,7 @@
                             <action selector="skipFolder:" target="-1" id="9Qr-v5-cZv"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="1329F46E-D435-463A-9269-8FA4B1670A89" explicitItemIdentifier="MarkAllItemsAsRead" label="All Read" paletteLabel="Mark All Items as Read" toolTip="Mark all items as read" image="MarkReadTemplate" sizingBehavior="auto" id="Gyz-dq-ewv" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="1329F46E-D435-463A-9269-8FA4B1670A89" explicitItemIdentifier="MarkAllItemsAsRead" label="All Read" paletteLabel="Mark All Items as Read" toolTip="Mark all items as read" image="MarkReadTemplate" sizingBehavior="auto" id="Gyz-dq-ewv" customClass="VNAButtonToolbarItem">
                         <button key="view" verticalHuggingPriority="750" id="21u-wz-hAI">
                             <rect key="frame" x="48" y="14" width="31" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
@@ -255,7 +257,7 @@
                             <action selector="markAllRead:" target="-1" id="Am6-Sz-pet"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="145A8A8B-193F-46E7-87FD-FE2B915C1B08" explicitItemIdentifier="Refresh" label="Refresh" paletteLabel="Refresh" toolTip="Refresh all your subscriptions" image="SyncTemplate" sizingBehavior="auto" id="Nmd-zx-Dys" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="145A8A8B-193F-46E7-87FD-FE2B915C1B08" explicitItemIdentifier="Refresh" label="Refresh" paletteLabel="Refresh" toolTip="Refresh all your subscriptions" image="SyncTemplate" sizingBehavior="auto" id="Nmd-zx-Dys" customClass="VNAButtonToolbarItem">
                         <button key="view" verticalHuggingPriority="750" id="PJJ-4H-4dE">
                             <rect key="frame" x="9" y="14" width="30" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
@@ -268,7 +270,7 @@
                             <action selector="refreshAllSubscriptions:" target="-1" id="SRS-ST-tVf"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="006BC31E-0D67-4BDB-95C0-FA6220913D81" explicitItemIdentifier="MailLink" label="Send Link" paletteLabel="Send Link" toolTip="Email a link to the current article or website" image="MailTemplate" sizingBehavior="auto" id="10h-xf-C6T" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="006BC31E-0D67-4BDB-95C0-FA6220913D81" explicitItemIdentifier="MailLink" label="Send Link" paletteLabel="Send Link" toolTip="Email a link to the current article or website" image="MailTemplate" sizingBehavior="auto" id="10h-xf-C6T" customClass="VNAButtonToolbarItem">
                         <button key="view" verticalHuggingPriority="750" id="EJA-2q-HQu">
                             <rect key="frame" x="15" y="14" width="29" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
@@ -281,7 +283,7 @@
                             <action selector="mailLinkToArticlePage:" target="-1" id="1ff-ox-Afg"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="A9627EDC-4246-4CE6-B9A2-B1C43C372E58" explicitItemIdentifier="DeleteArticle" label="Delete" paletteLabel="Delete" toolTip="Delete the current article" image="DeleteTemplate" sizingBehavior="auto" id="Y22-Ul-q6w" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="A9627EDC-4246-4CE6-B9A2-B1C43C372E58" explicitItemIdentifier="DeleteArticle" label="Delete" paletteLabel="Delete" toolTip="Delete the current article" image="DeleteTemplate" sizingBehavior="auto" id="Y22-Ul-q6w" customClass="VNAButtonToolbarItem">
                         <button key="view" verticalHuggingPriority="750" id="mYu-BR-T3p">
                             <rect key="frame" x="6" y="14" width="30" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
@@ -294,7 +296,7 @@
                             <action selector="deleteMessage:" target="-1" id="K93-nE-1KC"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="1B4A5BDF-4844-487B-A764-D611A54922F0" explicitItemIdentifier="EmptyTrash" label="Empty Trash" paletteLabel="Empty Trash" toolTip="Delete all articles in the trash" image="EmptyTrashTemplate" sizingBehavior="auto" id="4c1-NR-ofo" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="1B4A5BDF-4844-487B-A764-D611A54922F0" explicitItemIdentifier="EmptyTrash" label="Empty Trash" paletteLabel="Empty Trash" toolTip="Delete all articles in the trash" image="EmptyTrashTemplate" sizingBehavior="auto" id="4c1-NR-ofo" customClass="VNAButtonToolbarItem">
                         <button key="view" verticalHuggingPriority="750" id="b4P-2h-b0r">
                             <rect key="frame" x="21" y="14" width="31" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
@@ -307,7 +309,7 @@
                             <action selector="emptyTrash:" target="-1" id="LGn-HP-E1Z"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="3645E290-4147-4201-8018-6E3A685BE640" explicitItemIdentifier="GetInfo" label="Get Info" paletteLabel="Get Info" toolTip="See information about the selected subscription" image="GetInfoTemplate" sizingBehavior="auto" id="7iy-IN-8oG" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="3645E290-4147-4201-8018-6E3A685BE640" explicitItemIdentifier="GetInfo" label="Get Info" paletteLabel="Get Info" toolTip="See information about the selected subscription" image="GetInfoTemplate" sizingBehavior="auto" id="7iy-IN-8oG" customClass="VNAButtonToolbarItem">
                         <button key="view" verticalHuggingPriority="750" id="dU4-uo-rcp">
                             <rect key="frame" x="10" y="14" width="30" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
@@ -320,16 +322,18 @@
                             <action selector="getInfo:" target="-1" id="Xvh-S3-PIS"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="C907E8D1-9919-4292-AF82-865D069359AA" explicitItemIdentifier="Filter" label="Filter" paletteLabel="Filter" image="FunnelFilterTemplate" bordered="YES" sizingBehavior="auto" id="I8N-Dr-P6W" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="C907E8D1-9919-4292-AF82-865D069359AA" explicitItemIdentifier="Filter" label="Filter" paletteLabel="Filter" image="FunnelFilterTemplate" sizingBehavior="auto" autovalidates="NO" id="I8N-Dr-P6W" customClass="VNAPopUpButtonToolbarItem">
                         <popUpButton key="view" verticalHuggingPriority="750" id="eKU-qn-2dn">
-                            <rect key="frame" x="0.0" y="14" width="60" height="25"/>
+                            <rect key="frame" x="0.0" y="14" width="53" height="25"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="FunnelFilterTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="NJC-fy-OS8">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" id="Mx2-fn-A84">
                                     <items>
-                                        <menuItem image="FunnelFilterTemplate" hidden="YES" id="yGM-WH-fbb"/>
+                                        <menuItem image="FunnelFilterTemplate" hidden="YES" id="yGM-WH-fbb">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
                                         <menuItem title="All Articles" id="cJi-Kc-4fg">
                                             <connections>
                                                 <action selector="changeFiltering:" target="-1" id="VaW-FL-0JJ"/>
@@ -377,7 +381,7 @@
                             </popUpButtonCell>
                         </popUpButton>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="A51AB11F-9F76-48DF-A4E8-39C7224775BA" explicitItemIdentifier="Action" label="Action" paletteLabel="Action" toolTip="Additional actions for the selected folder" image="NSActionTemplate" sizingBehavior="auto" id="TSQ-UW-4gU" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="A51AB11F-9F76-48DF-A4E8-39C7224775BA" explicitItemIdentifier="Action" label="Action" paletteLabel="Action" toolTip="Additional actions for the selected folder" image="NSActionTemplate" sizingBehavior="auto" autovalidates="NO" id="TSQ-UW-4gU" customClass="VNAPopUpButtonToolbarItem">
                         <popUpButton key="view" verticalHuggingPriority="750" id="Tq4-6N-ErM">
                             <rect key="frame" x="0.0" y="14" width="50" height="25"/>
                             <autoresizingMask key="autoresizingMask"/>
@@ -386,7 +390,9 @@
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" id="0bc-TU-NSg">
                                     <items>
-                                        <menuItem state="on" image="NSActionTemplate" hidden="YES" id="A67-46-hiu"/>
+                                        <menuItem state="on" image="NSActionTemplate" hidden="YES" id="A67-46-hiu">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
                                         <menuItem title="Refresh Selected Subscriptions" id="Hs0-hu-A2g">
                                             <connections>
                                                 <action selector="refreshSelectedSubscriptions:" target="-1" id="Ehf-dd-Y5q"/>
@@ -446,7 +452,7 @@
                             </popUpButtonCell>
                         </popUpButton>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="3C962AB1-0C7E-4CBA-8477-2436ED2B6383" explicitItemIdentifier="Styles" label="Style" paletteLabel="Style" toolTip="Display the list of available styles" image="StyleTemplate" sizingBehavior="auto" id="azL-oz-mJL" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="3C962AB1-0C7E-4CBA-8477-2436ED2B6383" explicitItemIdentifier="Styles" label="Style" paletteLabel="Style" toolTip="Display the list of available styles" image="StyleTemplate" sizingBehavior="auto" autovalidates="NO" id="azL-oz-mJL" customClass="VNAPopUpButtonToolbarItem">
                         <popUpButton key="view" verticalHuggingPriority="750" id="gOd-tT-XFQ">
                             <rect key="frame" x="0.0" y="14" width="50" height="25"/>
                             <autoresizingMask key="autoresizingMask"/>
@@ -455,7 +461,9 @@
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" id="mit-Vi-iR1">
                                     <items>
-                                        <menuItem state="on" image="StyleTemplate" hidden="YES" id="lu2-BZ-Gxd"/>
+                                        <menuItem state="on" image="StyleTemplate" hidden="YES" id="lu2-BZ-Gxd">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="Bld-FV-QeM"/>
                                         <menuItem title="More Styles…" id="MaO-r1-tcm">
                                             <modifierMask key="keyEquivalentModifierMask"/>

@@ -1,8 +1,8 @@
 //
-//  PluginToolbarItem.swift
+//  Toolbar.swift
 //  Vienna
 //
-//  Copyright 2017
+//  Copyright 2022 Eitot
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -19,18 +19,21 @@
 
 import Cocoa
 
-/// A toolbar item with a button as its view.
-///
-/// - Note: This item should only be initialized programmatically.
-final class PluginToolbarItem: ButtonToolbarItem {
+@objc(VNAToolbar)
+class Toolbar: NSToolbar {
 
-    override init(itemIdentifier: NSToolbarItem.Identifier) {
-        super.init(itemIdentifier: itemIdentifier)
+    // Contrary to Apple's documentation, toolbar items are not validated if
+    // text-only mode is used. This affects toolbar items that do not have a
+    // menu, currently only ButtonToolbarItem.
+    override func validateVisibleItems() {
+        guard displayMode == .labelOnly else {
+            super.validateVisibleItems()
+            return
+        }
 
-        let button = PluginToolbarItemButton(frame: NSRect(x: 0, y: 0, width: 41, height: 25))
-        button.bezelStyle = .texturedRounded
-        button.toolbarItem = self
-        view = button
+        for item in visibleItems ?? [] where item is ButtonToolbarItem {
+            item.validate()
+        }
     }
 
 }

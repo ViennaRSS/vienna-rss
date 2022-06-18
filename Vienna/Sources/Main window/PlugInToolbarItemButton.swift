@@ -1,5 +1,5 @@
 //
-//  PluginToolbarItemButton.swift
+//  PlugInToolbarItemButton.swift
 //  Vienna
 //
 //  Copyright 2017
@@ -20,7 +20,8 @@
 import Cocoa
 
 /// A button that can be embedded within a toolbar item.
-final class PluginToolbarItemButton: NSButton {
+@objc(VNAPlugInToolbarItemButton)
+class PlugInToolbarItemButton: NSButton {
 
     /// The toolbar item to which the button belongs.
     @objc weak var toolbarItem: NSToolbarItem?

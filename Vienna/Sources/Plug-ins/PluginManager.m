@@ -232,7 +232,7 @@
 {
     NSDictionary *pluginItem = allPlugins[itemIdentifier];
     if (pluginItem) {
-        PluginToolbarItem *item = [[PluginToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
+        VNAPlugInToolbarItem *item = [[VNAPlugInToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
 		NSString * friendlyName = pluginItem[@"FriendlyName"];
 		NSString * tooltip = pluginItem[@"Tooltip"];
         NSString *imagePath = [NSString stringWithFormat:@"%@/%@.tiff", pluginItem[@"Path"], pluginItem[@"ButtonImage"]];
@@ -293,8 +293,8 @@
 {
 	NSDictionary * pluginItem;
 
-    if ([sender isKindOfClass:[PluginToolbarItemButton class]]) {
-        PluginToolbarItemButton *button = sender;
+    if ([sender isKindOfClass:[VNAPlugInToolbarItemButton class]]) {
+        VNAPlugInToolbarItemButton *button = sender;
         pluginItem = allPlugins[button.toolbarItem.itemIdentifier];
     } else {
 		NSMenuItem * menuItem = (NSMenuItem *)sender;
