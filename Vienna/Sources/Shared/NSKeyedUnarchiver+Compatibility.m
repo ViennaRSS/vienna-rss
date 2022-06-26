@@ -19,8 +19,8 @@
 
 #import "NSKeyedUnarchiver+Compatibility.h"
 
-#import <objc/runtime.h>
-#import <os/log.h>
+@import ObjectiveC.runtime;
+@import os.log;
 
 #define VNA_LOG os_log_create("--", "KeyedUnarchiver")
 

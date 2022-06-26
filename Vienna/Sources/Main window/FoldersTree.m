@@ -70,7 +70,9 @@
 @implementation FoldersTree
 
 - (instancetype)init {
-	if (self = [super init]) {
+    self = [super init];
+
+	if (self) {
 		// Root node is never displayed since we always display from
 		// the second level down. It simply provides a convenient way
 		// of containing the other nodes.
@@ -1441,7 +1443,7 @@
 	TreeNode * node = targetItem ? (TreeNode *)targetItem : self.rootNode;
 
 	NSInteger parentId = node.nodeId;
-	if ((childIndex == NSOutlineViewDropOnItemIndex) || (childIndex < 0))
+	if (childIndex < 0)
 		childIndex = 0;
 
 	// Check the type

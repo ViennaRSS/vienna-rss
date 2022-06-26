@@ -31,7 +31,7 @@
 
 @property (weak) IBOutlet NSLayoutConstraint *tabBarHeightConstraint;
 @property (weak) IBOutlet MMTabBarView *tabBarControl;
-@property (readonly) NSTabViewItem *activeTabViewItem;
+@property (readonly, nonatomic) NSTabViewItem *activeTabViewItem;
 
 //queue for tab view items to select when current item is closed
 @property NSMutableArray<NSTabViewItem *> *tabViewOrder;

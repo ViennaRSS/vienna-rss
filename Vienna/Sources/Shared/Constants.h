@@ -20,7 +20,6 @@
 
 @import Cocoa;
 
-extern NSString * MA_DefaultStyleName;
 extern NSString * MA_DefaultUserAgentString;
 extern NSString * MA_BrowserUserAgentString;
 
@@ -90,15 +89,15 @@ extern NSString *const MAPref_Deprecated_ArticleListSortOrders;
 extern NSString *const MAPref_Deprecated_DownloadItemList;
 extern NSString *const MAPref_Deprecated_FolderListFont;
 
-extern NSInteger MA_Default_BackTrackQueueSize;
-extern NSInteger MA_Default_RefreshThreads;
-extern float MA_Default_Read_Interval;
-extern NSInteger MA_Default_MinimumFontSize;
-extern NSInteger MA_Default_AutoExpireDuration;
-extern NSInteger MA_Default_Check_Frequency;
-extern CGFloat MA_Default_Main_Window_Min_Width;
-extern CGFloat MA_Default_Main_Window_Min_Height;
-extern NSInteger MA_Default_ConcurrentDownloads;
+extern NSInteger const MA_Default_BackTrackQueueSize;
+extern NSInteger const MA_Default_RefreshThreads;
+extern float const MA_Default_Read_Interval;
+extern NSInteger const MA_Default_MinimumFontSize;
+extern NSInteger const MA_Default_AutoExpireDuration;
+extern NSInteger const MA_Default_Check_Frequency;
+extern CGFloat const MA_Default_Main_Window_Min_Width;
+extern CGFloat const MA_Default_Main_Window_Min_Height;
+extern NSInteger const MA_Default_ConcurrentDownloads;
 
 extern NSPasteboardType const VNAPasteboardTypeRSSItem;
 extern NSPasteboardType const VNAPasteboardTypeFolderList;

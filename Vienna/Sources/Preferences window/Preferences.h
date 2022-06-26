@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSString * const kMA_Notify_MinimumFontSizeChange;
 extern NSString * const kMA_Notify_UseJavaScriptChange;
 
-@property (class, readonly) Preferences *standardPreferences;
+@property (class, readonly, nonatomic) Preferences *standardPreferences;
 
 // Accessor functions
 -(void)savePreferences;

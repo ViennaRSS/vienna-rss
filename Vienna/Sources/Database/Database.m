@@ -20,7 +20,7 @@
 
 #import "Database.h"
 
-#import <os/log.h>
+@import os.log;
 
 #import "Database+Migration.h"
 #import "Preferences.h"
@@ -197,8 +197,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
 /*!
  *  sets up an inital Vienna database at the given path
- *
- *  @param dbPath The path to create the database at
  *
  *  @return True on succes
  */

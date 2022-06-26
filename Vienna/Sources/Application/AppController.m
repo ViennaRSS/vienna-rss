@@ -20,7 +20,7 @@
 
 #import "AppController.h"
 
-#import <os/log.h>
+@import os.log;
 
 #import "AppController+Notifications.h"
 #import "Import.h"
@@ -524,7 +524,6 @@
 			[Preferences standardPreferences].displayStyle = styleName;
 		else
 		{
-			Preferences * prefs = [Preferences standardPreferences];
             [self populateStyleMenu];
 			prefs.displayStyle = styleName;
             runOKAlertPanel(NSLocalizedString(@"Vienna has installed a new style", nil), NSLocalizedString(@"The style \"%@\" has been installed to your Styles folder and added to the Style menu.", nil), styleName);
@@ -881,7 +880,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     }
 	
 	// Launch in the foreground or background as needed
-	NSWorkspaceLaunchOptions lOptions = openLinksInBackground ? (NSWorkspaceLaunchWithoutActivation | NSWorkspaceLaunchDefault) : (NSWorkspaceLaunchDefault | NSWorkspaceLaunchDefault);
+	NSWorkspaceLaunchOptions lOptions = openLinksInBackground ? (NSWorkspaceLaunchWithoutActivation | NSWorkspaceLaunchDefault) : NSWorkspaceLaunchDefault;
 	[[NSWorkspace sharedWorkspace] openURLs:urlArray
 					withAppBundleIdentifier:NULL
 									options:lOptions
@@ -1875,7 +1874,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	NSMenuItem * menuItem = (NSMenuItem *)sender;
 	NSNumber * ascendingNumber = menuItem.representedObject;
 	
-	NSAssert1(ascendingNumber, @"Somehow got a nil representedObject for Sort direction sub-menu item '%@'", [menuItem title]);
+	NSAssert1(ascendingNumber != nil, @"Somehow got a nil representedObject for Sort direction sub-menu item '%@'", [menuItem title]);
 	BOOL ascending = ascendingNumber.boolValue;
 	[self.articleController sortAscending:ascending];
 }

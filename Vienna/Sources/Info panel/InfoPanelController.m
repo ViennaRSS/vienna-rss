@@ -51,7 +51,9 @@
 // MARK: Initialization
 
 - (instancetype)initWithFolder:(NSInteger)folderId {
-    if (self = [super initWithWindowNibName:@"InfoWindow"]) {
+    self = [super initWithWindowNibName:@"InfoWindow"];
+
+    if (self) {
 		_infoFolderId = folderId;
 
         Database *database = [Database sharedManager];

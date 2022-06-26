@@ -20,7 +20,7 @@
 
 #import "RefreshManager.h"
 
-#import <os/log.h>
+@import os.log;
 
 #import "FeedCredentials.h"
 #import "ActivityItem.h"
@@ -416,7 +416,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                         [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@",
                                                                                          nil), myRequest.URL]];
 
-                        NSString * byteCount = [NSByteCountFormatter stringFromByteCount:data.length
+                        NSString * byteCount = [NSByteCountFormatter stringFromByteCount:(long long)data.length
                                                                               countStyle:NSByteCountFormatterCountStyleFile];
                         [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%@ received",
                                                                                          @"Number of bytes received, e.g. 1 MB received"),
@@ -649,21 +649,15 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
     // Check whether this is an HTML redirect. If so, create a new connection using
     // the redirect.
-
     NSString * redirectURL = [self getRedirectURL:receivedData];
-
-
-    if (redirectURL != nil) {
-        if ([redirectURL isEqualToString:url.absoluteString]) {
-            // To prevent an infinite loop, don't redirect to the same URL.
-            [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Improper infinitely looping URL redirect to %@",
-                                                                                     nil), url.absoluteString]];
-        } else {
-            [self refreshFeed:folder fromURL:[NSURL URLWithString:redirectURL] withLog:connectorItem shouldForceRefresh:NO];
-            return;
-        }
+    if (redirectURL && url && [redirectURL isEqualToString:url.absoluteString]) {
+        // To prevent an infinite loop, don't redirect to the same URL.
+        [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Improper infinitely looping URL redirect to %@",
+                                                                                 nil), url.absoluteString]];
+    } else {
+        [self refreshFeed:folder fromURL:[NSURL URLWithString:redirectURL] withLog:connectorItem shouldForceRefresh:NO];
+        return;
     }
-
 
     // Empty data feed is OK if we got HTTP 200
     __block NSUInteger newArticlesFromFeed = 0;

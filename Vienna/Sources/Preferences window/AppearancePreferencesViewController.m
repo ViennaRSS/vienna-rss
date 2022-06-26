@@ -21,14 +21,9 @@
 #import "AppearancePreferencesViewController.h"
 #import "Preferences.h"
 
-// List of available font sizes. I picked the ones that matched
-// Mail but you easily could add or remove from the list as needed.
-NSInteger availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64 };
-#define countOfAvailableFontSizes  (sizeof(availableFontSizes)/sizeof(availableFontSizes[0]))
-
 // List of minimum font sizes. I picked the ones that matched the same option in
 // Safari but you easily could add or remove from the list as needed.
-NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
+static NSInteger const availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 #define countOfAvailableMinimumFontSizes  (sizeof(availableMinimumFontSizes)/sizeof(availableMinimumFontSizes[0]))
 
 

@@ -76,13 +76,16 @@
 @property (nonatomic, readonly) BOOL canGoForward;
 -(void)handleStopLoading:(id)sender;
 -(void)activateAddressBar;
-@property (readonly) NSString *textSelection;
-@property (readonly) NSString *html;
+@property (readonly, nonatomic) NSString *textSelection;
+@property (readonly, nonatomic) NSString *html;
 
 
 //tabBarItem functions
-@property BOOL hasCloseButton;
-@property BOOL isProcessing;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
+@property (nonatomic) BOOL hasCloseButton;
+@property (nonatomic) BOOL isProcessing;
+#pragma clang diagnostic pop
 
 -(void)hoveredOverURL:(NSURL *)url;
 
