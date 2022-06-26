@@ -27,6 +27,7 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
     var articles: [Article] = [] {
         didSet {
             guard !articles.isEmpty else {
+                isHidden = true
                 self.clearHTML()
                 return
             }
@@ -36,6 +37,7 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
             self.htmlPath = htmlPath
 
             self.loadFileURL(htmlPath, allowingReadAccessTo: htmlPath.deletingLastPathComponent())
+            isHidden = false
         }
     }
 
@@ -47,11 +49,7 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
 
     @objc
     init(frame: NSRect) {
-        let configuration = WKWebViewConfiguration()
-        if #available(macOS 10.14, *), configuration.responds(to: #selector(setter: WKWebViewConfiguration._drawsBackground)) {
-            configuration._drawsBackground = false
-        }
-        super.init(frame: frame, configuration: configuration)
+        super.init(frame: frame, configuration: WKWebViewConfiguration())
         if responds(to: #selector(setter: _textZoomFactor)) {
             _textZoomFactor = Preferences.standard.textSizeMultiplier
         }
