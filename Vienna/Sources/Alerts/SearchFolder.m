@@ -570,9 +570,12 @@
     //
     // NSArchiver and NSUnarchiver are used here to copy searchCriteriaView.
     // NSKeyedArchiver is not a replacement for this.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 	archRow = [NSArchiver archivedDataWithRootObject:searchCriteriaView];
 	NSRect bounds = searchCriteriaSuperview.bounds;
 	NSView * row = (NSView *)[NSUnarchiver unarchiveObjectWithData:archRow];
+#pragma clang diagnostic pop
 	if (onScreen) {
 		[row setFrameOrigin:NSMakePoint(bounds.origin.x, bounds.origin.y + (NSInteger)(totalCriteria - 1 - index) * rowHeight)];
 	} else {  // computation is affected by resizeSearchWindow being called only once, after the search panel is displayed
