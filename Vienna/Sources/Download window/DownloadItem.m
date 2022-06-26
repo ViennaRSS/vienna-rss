@@ -85,7 +85,9 @@ static NSString *const VNACodingKeySize = @"size";
             // the order in which they were encoded. Changing the code below can
             // lead to decoding failure.
             _filename = [coder decodeObject];
-            [coder decodeValueOfObjCType:@encode(long long) at:&_size];
+            [coder decodeValueOfObjCType:@encode(long long)
+                                      at:&_size
+                                    size:sizeof(long long)];
         }
         _state = DownloadStateCompleted;
     }

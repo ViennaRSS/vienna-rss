@@ -23,9 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSKeyedArchiver (Compatibility)
 
+// TODO: Make this a method of NSUserDefaults instead
 + (nullable NSData *)vna_archivedDataWithRootObject:(id)object
                               requiringSecureCoding:(BOOL)requiresSecureCoding
-    NS_SWIFT_NOTHROW NS_DEPRECATED_MAC(10.12, 10.13);
+    NS_SWIFT_NOTHROW;
 
 @end
 

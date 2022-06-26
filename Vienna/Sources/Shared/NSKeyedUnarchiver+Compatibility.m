@@ -30,26 +30,15 @@
 {
     id object = nil;
 
-    if (@available(macOS 10.13, *)) {
-        NSError *error = nil;
-        object = [NSKeyedUnarchiver unarchivedObjectOfClass:cls
-                                                   fromData:data
-                                                      error:&error];
-        if (error) {
-            os_log_error(VNA_LOG,
-                         "Failed to unarchive %{public}s using keyed "
-                         "unarchiver",
-                         class_getName(cls));
-        }
-    } else {
-        @try {
-            object = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        } @catch (NSException *exception) {
-            os_log_error(VNA_LOG,
-                         "Failed to unarchive %{public}s using keyed "
-                         "unarchiver. Reason: %{public}@",
-                         class_getName(cls), exception.reason);
-        }
+    NSError *error = nil;
+    object = [NSKeyedUnarchiver unarchivedObjectOfClass:cls
+                                               fromData:data
+                                                  error:&error];
+    if (error) {
+        os_log_error(VNA_LOG,
+                     "Failed to unarchive %{public}s using keyed "
+                     "unarchiver",
+                     class_getName(cls));
     }
 
     return object;
@@ -71,7 +60,7 @@
                          "unarchiver",
                          class_getName(cls));
         }
-    } else if (@available(macOS 10.13, *)) {
+    } else {
         NSError *error = nil;
         NSSet *classes = [NSSet setWithArray:@[[NSArray class], cls]];
         object = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes
@@ -82,15 +71,6 @@
                          "Failed to unarchive %{public}s using keyed "
                          "unarchiver",
                          class_getName(cls));
-        }
-    } else {
-        @try {
-            object = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        } @catch (NSException *exception) {
-            os_log_error(VNA_LOG,
-                         "Failed to unarchive %{public}s using keyed "
-                         "unarchiver. Reason: %{public}@",
-                         class_getName(cls), exception.reason);
         }
     }
 
