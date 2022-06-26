@@ -832,11 +832,8 @@
 	// Set up the pasteboard
 	[pboard declareTypes:@[VNAPasteboardTypeRSSItem, VNAPasteboardTypeWebURLsWithTitles, NSPasteboardTypeString, NSPasteboardTypeHTML] owner:self];
     if (count == 1) {
-        if (@available(macOS 10.13, *)) {
-            [pboard addTypes:@[VNAPasteboardTypeURL, VNAPasteboardTypeURLName, NSPasteboardTypeURL] owner:self];
-        } else {
-            [pboard addTypes:@[VNAPasteboardTypeURL, VNAPasteboardTypeURLName, NSURLPboardType] owner:self];
-        }
+        [pboard addTypes:@[VNAPasteboardTypeURL, VNAPasteboardTypeURLName, NSPasteboardTypeURL]
+                   owner:self];
     }
 
 	// Open the HTML string

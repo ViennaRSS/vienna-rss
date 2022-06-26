@@ -954,13 +954,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	if (url != nil)
 	{
 		NSPasteboard *pboard = NSPasteboard.generalPasteboard;
-        if (@available(macOS 10.13, *)) {
-            [pboard declareTypes:@[NSPasteboardTypeString, NSPasteboardTypeURL]
-                           owner:self];
-        } else {
-            [pboard declareTypes:@[NSPasteboardTypeString, NSURLPboardType]
-                           owner:self];
-        }
+        [pboard declareTypes:@[NSPasteboardTypeString, NSPasteboardTypeURL]
+                       owner:self];
 		[url writeToPasteboard:pboard];
 		[pboard setString:url.description forType:NSPasteboardTypeString];
 	}

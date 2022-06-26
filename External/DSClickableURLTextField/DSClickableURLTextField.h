@@ -68,6 +68,9 @@
 		Changes by Eitot:
 			• Replaced deprecated APIs.
 			• Fixed analyzer warning.
+	* June 26, 2022
+		Changes by Eitot:
+			• Removed obsolete APIs.
 */
 
 #import <Cocoa/Cocoa.h>

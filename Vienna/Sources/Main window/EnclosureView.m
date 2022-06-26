@@ -146,11 +146,7 @@
  * Paint the enclosure background.
  */
 - (void)drawRect:(NSRect)rect {
-    if (@available(macOS 10.13, *)) {
-        [[NSColor colorNamed:@"AttachmentView"] setFill];
-    } else {
-        [[NSColor colorWithSRGBRed:237 green:249 blue:255 alpha:1] setFill];
-    }
+    [[NSColor colorNamed:@"AttachmentView"] setFill];
 	NSRectFill(rect);
 }
 
