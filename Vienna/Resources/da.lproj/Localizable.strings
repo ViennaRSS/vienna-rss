@@ -19,27 +19,6 @@
 /* No comment provided by engineer. */
 "%@ unread" = "%@ ulæste";
 
-/* No comment provided by engineer. */
-"%d new articles retrieved" = "%d nye artikler hentet";
-
-/* Notification body */
-"%d new unread articles retrieved" = "%d nye ulæste artikler hentet";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d abonnementer successfuldt eksportert";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d abonnementer successfuldt importeret";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d ulæste artikler";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u artikler";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u ulæste";
-
 /* Title in popup submenu */
 "<None>" = "<Ingen>";
 
@@ -206,9 +185,6 @@
 
 /* Title of a button on an alert */
 "Empty Trash" = "Tøm Papirkurven";
-
-/* Title of a menu item */
-"Empty Trash…" = "Tøm papirkurv…";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Indpakning";
@@ -683,6 +659,9 @@
 
 /* No comment provided by engineer. */
 "Unsubscribe from Feed" = "Af-abonner feedet";
+
+/* No comment provided by engineer. */
+"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles." = "Hvis du afabonnerer fra et Open Reader RSS feed vil det også automatisk fjerne de lokalt cachede artikler.";
 
 /* Title of a button on an alert */
 "Upgrade Database" = "Opgrader databasen";

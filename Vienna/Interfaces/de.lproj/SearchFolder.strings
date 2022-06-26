@@ -14,7 +14,7 @@
 "98.title" = "Enthält Artikel mit";
 
 /* Class = "NSTextFieldCell"; title = "of the following conditions:"; ObjectID = "100"; */
-"100.title" = "der folgenden Eigenschaften";
+"100.title" = "der folgenden Eigenschaften:";
 
 /* Class = "NSMenuItem"; title = "any"; ObjectID = "j0v-xF-tpl"; */
 "j0v-xF-tpl.title" = "einer";

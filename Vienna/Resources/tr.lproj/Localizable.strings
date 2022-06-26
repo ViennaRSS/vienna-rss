@@ -8,27 +8,6 @@
 "%@ Info" = "%@ Bilgi";
 
 /* No comment provided by engineer. */
-"%d new articles retrieved" = "%d yeni makale alındı";
-
-/* Notification body */
-"%d new unread articles retrieved" = "%d yeni okunmayan makale alındı";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d abonelikleri başarılı bir şekilde çıkarıldı";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d abonelikleri başarılı bir şekilde dahil edildi";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d okunmamış makale";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u makale";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u okunmayan";
-
-/* No comment provided by engineer. */
 "A folder with that name already exists" = "Bu isimde başka bir klasör var";
 
 /* No comment provided by engineer. */

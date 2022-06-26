@@ -19,27 +19,6 @@
 /* No comment provided by engineer. */
 "%@ unread" = "%@ 篇未讀的";
 
-/* No comment provided by engineer. */
-"%d new articles retrieved" = "已取得 %d 則新文章";
-
-/* Notification body */
-"%d new unread articles retrieved" = "已順利取得 %d 則未閱讀的新文章";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "已順利匯出 %d 個訂閱頻道";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "已順利匯入 %d 個訂閱頻道";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d 則未閱讀的文章";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u 則文章";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u 則未閱讀";
-
 /* Title in popup submenu */
 "<None>" = "<无>";
 
@@ -206,9 +185,6 @@
 
 /* Title of a button on an alert */
 "Empty Trash" = "清空垃圾桶";
-
-/* Title of a menu item */
-"Empty Trash…" = "清空垃圾桶...";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "隨附項目";

@@ -8,27 +8,6 @@
 "%@ Info" = "%@ 情報";
 
 /* No comment provided by engineer. */
-"%d new articles retrieved" = "%d の新着記事があります";
-
-/* Notification body */
-"%d new unread articles retrieved" = "%d の未読記事があります。";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d の購読の書き出しに成功しました。";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d の購読の読み込みに成功しました。";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d の未読記事";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u 記事";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u 未読";
-
-/* No comment provided by engineer. */
 "A folder with that name already exists" = "この名前のフォルダがすでに存在します。";
 
 /* No comment provided by engineer. */
@@ -135,6 +114,9 @@
 /* Title of a button on an alert */
 "Empty" = "空にする";
 
+/* Title of a button on an alert */
+"Empty Trash" = "ゴミ箱を空にする";
+
 /* No comment provided by engineer. */
 "Enter the URL here" = "URL をここに入力";
 
@@ -183,7 +165,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "HTTP コード %d がサーバから送られました。";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "すべてのダウンロードを中止して、Vienna を終了しますか？";
 
 /* No comment provided by engineer. */
@@ -270,7 +252,7 @@
 /* No comment provided by engineer. */
 "No new articles available" = "新着記事はありません";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "ダウンロード中です";
 
 /* Title of a popup menu item */
@@ -462,7 +444,4 @@
 
 /* No comment provided by engineer. */
 "You cannot undo this action" = "この操作は取り消せません。";
-
-/* Class = "NSButtonCell"; title = "Empty Trash"; ObjectID = "17"; */
-"Empty Trash" = "ゴミ箱を空にする";
 

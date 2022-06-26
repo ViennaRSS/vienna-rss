@@ -14,27 +14,6 @@
 "%@ received" = "Gauta %@";
 
 /* No comment provided by engineer. */
-"%d new articles retrieved" = "Parsiųsta %d naujų straipsnių";
-
-/* Notification body */
-"%d new unread articles retrieved" = "Parsiųsta naujų neperskaitytų straipsnių";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "Sėkmingai importuota %d naujų prenumeratų";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "Sėkmingai importuota %d naujų prenumeratų";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d neskaitytų straipsnių";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u straipsniai";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u neperskaityta";
-
-/* No comment provided by engineer. */
 "A folder with that name already exists" = "Aplankas su tokiu pavadinimu jau yra";
 
 /* No comment provided by engineer. */

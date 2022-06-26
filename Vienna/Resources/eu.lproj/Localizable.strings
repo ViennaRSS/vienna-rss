@@ -8,27 +8,6 @@
 "%@ Info" = "%@ Informazioa";
 
 /* No comment provided by engineer. */
-"%d new articles retrieved" = "%d artikulu berri jasota";
-
-/* Notification body */
-"%d new unread articles retrieved" = "%d artikulu berri irakurri gabe jasota";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d harpidetzak zuzen esportatu dira";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d harpidetzak zuzen inportatu dira";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d artikulu irakurri gabe";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u artikulu";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u irakurri gabeak";
-
-/* No comment provided by engineer. */
 "A folder with that name already exists" = "Izen berdineko direktorioa existitzen da";
 
 /* No comment provided by engineer. */

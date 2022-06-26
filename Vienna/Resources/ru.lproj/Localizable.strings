@@ -19,27 +19,6 @@
 /* No comment provided by engineer. */
 "%@ unread" = "%@ непрочитано";
 
-/* No comment provided by engineer. */
-"%d new articles retrieved" = "Получено %d новых статей";
-
-/* Notification body */
-"%d new unread articles retrieved" = "Получено %d новых статей";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "Успешно экспортировано %d каналов";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "Успешно импортировано %d каналов";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d непрочитанных статей";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u статей";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u непрочитано";
-
 /* Title in popup submenu */
 "<None>" = "<Нет>";
 
@@ -206,9 +185,6 @@
 
 /* Title of a button on an alert */
 "Empty Trash" = "Очистить Корзину";
-
-/* Title of a menu item */
-"Empty Trash…" = "Очистить Корзину…";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Вложения";

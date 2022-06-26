@@ -8,27 +8,6 @@
 "%@ Info" = "%@ Informação";
 
 /* No comment provided by engineer. */
-"%d new articles retrieved" = "%d novos artigos recebidos";
-
-/* Notification body */
-"%d new unread articles retrieved" = "%d novos artigos recebidos";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d subscrições exportadas com sucesso";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d subscrições importadas com sucesso";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d artigos não lidos";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u artigos";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u não lidos";
-
-/* No comment provided by engineer. */
 "A folder with that name already exists" = "Já existe uma pasta com esse nome";
 
 /* No comment provided by engineer. */

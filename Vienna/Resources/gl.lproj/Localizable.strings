@@ -8,27 +8,6 @@
 "%@ Info" = "Información de %@";
 
 /* No comment provided by engineer. */
-"%d new articles retrieved" = "Recuperados %d novos artigos";
-
-/* Notification body */
-"%d new unread articles retrieved" = "Recuperados novos artigos sen ler";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d subscricións correctamente exportadas";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d subscricións importadas correctamente";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d artigos sen ler";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u artigos";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u sen ler";
-
-/* No comment provided by engineer. */
 "A folder with that name already exists" = "Xa existe un cartafol con ese nome";
 
 /* No comment provided by engineer. */

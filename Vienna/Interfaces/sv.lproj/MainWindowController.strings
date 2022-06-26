@@ -223,6 +223,9 @@
 /* Class = "NSToolbarItem"; toolTip = "Delete the current article"; ObjectID = "Y22-Ul-q6w"; */
 "Y22-Ul-q6w.toolTip" = "Radera den markerade artikeln";
 
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "Filter articles"; ObjectID = "Ymd-v7-5ML"; */
+"Ymd-v7-5ML.ibShadowedToolTip" = "Filtrera artiklar";
+
 /* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "yqJ-tO-HNW"; */
 "yqJ-tO-HNW.title" = "Senaste 48 timmarna";
 

@@ -10,27 +10,6 @@
 /* Number of bytes received, e.g. 1 MB received */
 "%@ received" = "收到 %@";
 
-/* No comment provided by engineer. */
-"%d new articles retrieved" = "有 %d 篇新文章";
-
-/* Notification body */
-"%d new unread articles retrieved" = "收到了 %d 篇新文章";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "已经成功输出了 %d 个频道";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "已经成功导入了 %d 个频道";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d 篇未读文章";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u 文章";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u 未读";
-
 /* Title in popup submenu */
 "<None>" = "<无>";
 

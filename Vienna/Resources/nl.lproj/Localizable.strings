@@ -19,27 +19,6 @@
 /* No comment provided by engineer. */
 "%@ unread" = "%@ ongelezen";
 
-/* No comment provided by engineer. */
-"%d new articles retrieved" = "%d nieuwe artikelen opgehaald";
-
-/* Notification body */
-"%d new unread articles retrieved" = "%d nieuwe ongelezen artikelen opgehaald";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d abonnementen geëxporteerd";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d abonnementen geïmporteerd";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d ongelezen artikelen";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u artikelen";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u ongelezen";
-
 /* Title in popup submenu */
 "<None>" = "<Geen>";
 
@@ -206,9 +185,6 @@
 
 /* Title of a button on an alert */
 "Empty Trash" = "Leeg prullenmand";
-
-/* Title of a menu item */
-"Empty Trash…" = "Leeg prullenmand…";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Bijlage";

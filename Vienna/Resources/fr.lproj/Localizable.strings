@@ -19,27 +19,6 @@
 /* No comment provided by engineer. */
 "%@ unread" = "%@ non lus";
 
-/* No comment provided by engineer. */
-"%d new articles retrieved" = "%d nouveaux articles récupérés";
-
-/* Notification body */
-"%d new unread articles retrieved" = "%d nouveaux articles non lus récupérés";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d abonnements exportés avec succès";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d abonnements importés avec succès";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d articles non lus";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u articles";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u non lus";
-
 /* Title in popup submenu */
 "<None>" = "<Aucun>";
 
@@ -206,9 +185,6 @@
 
 /* Title of a button on an alert */
 "Empty Trash" = "Vider la corbeille";
-
-/* Title of a menu item */
-"Empty Trash…" = "Vider la corbeille…";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Fichier joint";

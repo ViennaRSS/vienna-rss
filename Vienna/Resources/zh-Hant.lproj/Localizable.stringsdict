@@ -16,6 +16,20 @@
 			<string>已取得 %d 則新文章</string>
 		</dict>
 	</dict>
+	<key>%d new unread articles retrieved</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@articles@</string>
+		<key>articles</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>other</key>
+			<string>已順利取得 %d 則未閱讀的新文章</string>
+		</dict>
+	</dict>
 	<key>%d subscriptions successfully exported</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

@@ -19,27 +19,6 @@
 /* No comment provided by engineer. */
 "%@ unread" = "%@ no leídos";
 
-/* No comment provided by engineer. */
-"%d new articles retrieved" = "%d nuevos artículos recuperados";
-
-/* Notification body */
-"%d new unread articles retrieved" = "%d nuevos artículos no leídos recuperados";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d suscripciones exportadas correctamente";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d suscripciones importadas correctamente";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d artículos no leídos";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u artículos";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u no leídos";
-
 /* Title in popup submenu */
 "<None>" = "<Ninguna>";
 
@@ -206,9 +185,6 @@
 
 /* Title of a button on an alert */
 "Empty Trash" = "Vaciar papelera";
-
-/* Title of a menu item */
-"Empty Trash…" = "Vaciar papelera…";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Archivo adjunto";
