@@ -650,13 +650,15 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     // Check whether this is an HTML redirect. If so, create a new connection using
     // the redirect.
     NSString * redirectURL = [self getRedirectURL:receivedData];
-    if (redirectURL && url && [redirectURL isEqualToString:url.absoluteString]) {
-        // To prevent an infinite loop, don't redirect to the same URL.
-        [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Improper infinitely looping URL redirect to %@",
-                                                                                 nil), url.absoluteString]];
-    } else {
-        [self refreshFeed:folder fromURL:[NSURL URLWithString:redirectURL] withLog:connectorItem shouldForceRefresh:NO];
-        return;
+    if (redirectURL != nil) {
+        if ([redirectURL isEqualToString:url.absoluteString]) {
+            // To prevent an infinite loop, don't redirect to the same URL.
+            [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Improper infinitely looping URL redirect to %@",
+                                                                                     nil), url.absoluteString]];
+        } else {
+            [self refreshFeed:folder fromURL:[NSURL URLWithString:redirectURL] withLog:connectorItem shouldForceRefresh:NO];
+            return;
+        }
     }
 
     // Empty data feed is OK if we got HTTP 200
