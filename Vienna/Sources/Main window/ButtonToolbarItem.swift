@@ -23,6 +23,24 @@ import Cocoa
 /// validation requests.
 class ButtonToolbarItem: NSToolbarItem {
 
+    // image property
+    override var image: NSImage? {
+        get {
+            if let button = view as? NSButton {
+                return button.image
+            } else {
+                return super.image
+            }
+        }
+        set {
+             if let button = view as? NSButton {
+                button.image = newValue
+            } else {
+                super.image = newValue
+            }
+        }
+    }
+
     // Assign the item's target to the menu-form representation.
     override var target: AnyObject? {
         didSet {
