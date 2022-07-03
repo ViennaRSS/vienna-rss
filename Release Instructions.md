@@ -27,13 +27,13 @@ should be the location of the private EdDSA (ed25519) key used by Sparkle 2, whi
 `PRIVATE_KEY_PATH`  
 should be the location of the (legacy) private DSA key used by Sparkle, which for obvious security reasons should not be located in the source directory !
 
-If you want to go further in automation of package building, you will have to define three additional environment variables in the `CS-ID.xcconfig` file. These ones are used to automate the use of the `altool` command line tool as described in [this page of Apple's documentation](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow).
+If you want to go further in automation of package building, you will have to define three additional environment variables in the `CS-ID.xcconfig` file. These ones are used to automate the use of the `notarytool` command line tool as described in [this page of Apple's documentation](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow).
 
 `APP_STORE_ID`  
 is the Apple ID used to connect to App Store Connect
 
-`APP_STORE_PASSWORD`  
-is an app-specific password created for `altool`
+`KEYCHAIN_PROFILE`  
+is the key to an app-specific password created for `notarytool` and stored through `xcrun notarytool store-credentials …`
 
 `TEAM_ID`  
 is the appropriate developer team identifier. It is generally a 10-character code. You can look-up the teams you are part of in the “Membership” area of [Apple's developer portal](https://developer.apple.com/account/).
@@ -45,7 +45,7 @@ For instance, the content of my `Scripts/Resources/CS-ID.xcconfig` file looks li
     PRIVATE_EDDSA_KEY_PATH = $(SRCROOT)/../secrets/vienna_private_eddsa_key.pem
     PRIVATE_KEY_PATH = $(SRCROOT)/../secrets/vienna_private_key.pem
     APP_STORE_ID = barijaona@mac.com
-    APP_STORE_PASSWORD = @keychain:altool-barijaona@mac.com
+    KEYCHAIN_PROFILE = AC_PASSWORD
     TEAM_ID = KUU2LM7U9K
 
 __Note:__ Vienna maintainers can [contact me](https://github.com/barijaona "Github") to get provisioning profiles for the above mentioned Team ID, in order to decentralize the distribution of Vienna's official builds.
