@@ -51,7 +51,7 @@ if [ ! -f "$PRIVATE_EDDSA_KEY_PATH" ]; then
 	printf 'Unable to load signing private key vienna_private_eddsa_key.pem. Set PRIVATE_EDDSA_KEY_PATH in Scripts/Resources/CS-ID.xcconfig\n' 1>&2
 	exit 1
 fi
-ED_SIGNATURE_AND_LENGTH="$(sign_update "$TGZ_FILENAME" -f "$PRIVATE_EDDSA_KEY_PATH")"
+ED_SIGNATURE_AND_LENGTH="$(sign_update -s `cat "$PRIVATE_EDDSA_KEY_PATH"` "$TGZ_FILENAME")"
 
 # Generate DSA signature (deprecated; used for backwards compatibility). This
 # command outputs only a signature string, cf. the EdDSA signature string.
@@ -80,6 +80,8 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 			<title>Vienna ${V_VCS_TAG} :${VCS_SHORT_HASH}:</title>
 			<pubDate>${pubDate}</pubDate>
 			<link>${GITHUB_RELEASE_URL}</link>
+			<sparkle:version>${N_VCS_NUM}</sparkle:version>
+			<sparkle:shortVersionString>${V_VCS_TAG} :${VCS_SHORT_HASH}:</sparkle:shortVersionString>
 			<sparkle:minimumSystemVersion>${MACOSX_DEPLOYMENT_TARGET}.0</sparkle:minimumSystemVersion>
 			<enclosure url="${SOURCEFORGE_ASSETS_URL}/${TGZ_FILENAME}" $ED_SIGNATURE_AND_LENGTH $DSA_SIGNATURE type="application/octet-stream" />
 			<sparkle:releaseNotesLink>https://www.vienna-rss.com/sparkle-files/noteson${N_VCS_TAG}.html</sparkle:releaseNotesLink>
