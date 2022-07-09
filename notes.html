@@ -108,24 +108,45 @@ sup {
 
 <h1 id="toc_0">Version Notes</h1>
 
-<h2 id="toc_1">3.8.0 Beta 3</h2>
+<h2 id="toc_1">3.8.0</h2>
+
+<h3 id="toc_2">! 3.8 versions require macOS 10.12 (Sierra) or later !</h3>
+
+<h3 id="toc_3">Changes since 3.7.3</h3>
 
 <ul>
-<li>Add &quot;Empty Trash…&quot; menu command to folder list&#39;s contextual menu</li>
-<li>Add setting regarding trash emptying in preferences window</li>
+<li>Implement an experimental new browser based on WKWebView : it can be selected in Advanced preferences, and will be available after application restart. It is faster and more secure.</li>
+<li>Remove support for web plug-ins (which were deprecated for a long time and unsecure)</li>
 <li>Add &quot;Actual Size&quot; menu command for resetting text zoom</li>
-<li>Make text zoom menu commands work with new browser</li>
-<li>Fix copy of articles in article list</li>
-<li>Fix search method selection with new browser</li>
-<li>Add a warning in advanced preferences that enabling/disabling Javascript might, for systems prior to macOS 11, require a restart</li>
+<li>Add a disclosure triangle in feed credentials dialog, in order to provide additional feed details whenever it is needed to disambiguate the feed</li>
+<li>Add setting regarding trash emptying in preferences window</li>
+<li>Add a hidden preference for always displaying the full date, not using relative dates like Today or Yesterday. This is enabled with the Terminal command: <code>defaults write uk.co.opencommunity.vienna2 DoesRelativeDateFormatting -bool NO</code> and can be reversed with <code>defaults delete uk.co.opencommunity.vienna2 DoesRelativeDateFormatting</code></li>
+<li>Remove floodmagazine.com from default feed list and update other URLs</li>
 <li>Add Australian and British English as localization variants</li>
-<li>Improve handling of asynchronous actions in new browser</li>
-<li>Use NSSecureCoding for encoding/decoding of database fields definitions, download list and some preferences</li>
-<li>Use NSAlert for emptying trash warning</li>
-<li>Replace deprecated methods</li>
-<li>Rename some constants, clean up code</li>
+<li>Fix unwanted changes of toolbar mode (prevent unrequested switches to text+icon while the user had requested text-only)</li>
+<li>Refactor and modernize many parts of code (modify ArticleController to be a NSViewController, restructurate code around new protocols, update AppleScript architecture, update logging tools, use NSSecureCoding, replace deprecated methods, rename some constants/methods…)</li>
+<li>Improve handling of URLs containing semicolon character in the path component</li>
 <li>Update build architecture</li>
-<li>Update Sparkle to version 2.1</li>
+<li>Update Sparkle to version 2.2; use a new EdDSA key for updates whenever possible</li>
+</ul>
+
+<h4 id="toc_4">Known issue : the experimental new browser does not yet handle file downloads</h4>
+
+<h3 id="toc_5">Changes since 3.8.0 Beta 3</h3>
+
+<ul>
+<li>Add a disclosure triangle in feed credentials dialog, in order to provide additional feed details whenever it is needed to disambiguate the feed</li>
+<li>Remove &quot;Empty Trash…&quot; contextual menu command added in 3.8.0 Beta 3</li>
+<li>Fix a crash when trying to view a smart folder (problem introduced by 3.8.0 Beta 3)</li>
+<li>Fix toolbar&#39;s item validation problems when text-only mode is used on macOS 12</li>
+<li>Prevent white background from briefly appearing in article view while appearance is set to dark</li>
+<li>Optimize code, fix warnings</li>
+<li>Add a recommended ClangFormat configuration</li>
+<li>Update localizations</li>
+<li>Fix unwanted changes of toolbar mode (switches to text+icon while the user requested text-only)</li>
+<li>Remove floodmagazine.com from default feed list and update other URLs</li>
+<li>Update scripts building release binaries</li>
+<li>Update Sparkle to version 2.2</li>
 </ul>
 
 

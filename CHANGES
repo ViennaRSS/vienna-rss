@@ -8,6 +8,27 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.8.0
+-----
+- Add a disclosure triangle in feed credentials dialog, in order to provide additional feed details whenever it is needed to disambiguate the feed
+- Remove "Empty Trash…" contextual menu command added in 3.8.0 Beta 3
+- Fix a crash when trying to view a smart folder (problem introduced by 3.8.0 Beta 3)
+- Fix toolbar's item validation problems when text-only mode is used on macOS 12
+- Prevent white background from briefly appearing in article view while appearance is set to dark
+- Optimize code, fix warnings
+- Add a recommended ClangFormat configuration
+- Update localizations
+- Fix unwanted changes of toolbar mode (switches to text+icon while the user requested text-only)
+- Remove floodmagazine.com from default feed list and update other URLs
+- Update scripts building release binaries
+- Update Sparkle to version 2.2
+
+3.7.4
+-----
+- Fix unwanted changes of toolbar mode (switches to text+icon while the user requested text-only)
+- Remove floodmagazine.com from default feed list and update other URLs
+- Fix scripts building release binaries
+
 3.8.0 Beta 3
 ------------
 - Add "Empty Trash…" menu command to folder list's contextual menu
