@@ -8,6 +8,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.7.4
+-----
+- Fix unwanted changes of toolbar mode (switches to text+icon while the user requested text-only)
+- Remove floodmagazine.com from default feed list and update other URLs
+- Fix scripts building release binaries
+
 3.7.3
 -----
 - Fix copy of articles in article list
