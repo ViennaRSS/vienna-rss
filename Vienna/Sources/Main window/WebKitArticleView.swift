@@ -28,7 +28,6 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
         didSet {
             guard !articles.isEmpty else {
                 isHidden = true
-                self.clearHTML()
                 return
             }
 
@@ -67,6 +66,13 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
         }
     }
 
+    override func load(_ request: URLRequest) -> WKNavigation? {
+        var navig: WKNavigation?
+        navig = super.load(request)
+        isHidden = false
+        return navig
+    }
+
     /// handle special keys when the article view has the focus
     override func keyDown(with event: NSEvent) {
         if let pressedKeys = event.characters, pressedKeys.count == 1 {
@@ -78,11 +84,6 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
         }
         super.keyDown(with: event)
     }
-
-    func clearHTML() {
-        deleteHtmlFile()
-        load(URLRequest(url: URL.blank))
-     }
 
     func resetTextSize() {
         makeTextStandardSize(self)
