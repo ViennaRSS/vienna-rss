@@ -77,22 +77,11 @@ self.converter = [[WebViewArticleConverter alloc] init];
 	return NO;
 }
 
-/* clearHTML
- * Make the web view behave like a blank page.
- */
--(void)clearHTML
-{
-    self.hidden = YES;
-    self.tabUrl = [NSURL URLWithString:@"about:blank"];
-    [self loadTab];
-    html = @"";
-}
-
 -(void)setArticles:(NSArray<Article *> *)articles {
     if (articles.count > 0) {
         [self setHtml:[self.converter articleTextFromArray:articles]];
     } else {
-        [self clearHTML];
+        self.hidden = YES;
     }
 }
 
@@ -266,7 +255,8 @@ self.converter = [[WebViewArticleConverter alloc] init];
 }
 
 - (void)loadTab {
-    [[self mainFrame] loadRequest:[NSURLRequest requestWithURL: self.tabUrl]];
+    [self.mainFrame loadRequest:[NSURLRequest requestWithURL: self.tabUrl]];
+    self.hidden = NO;
 }
 
 - (BOOL)canScrollDown {
