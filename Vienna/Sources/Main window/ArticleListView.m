@@ -1118,13 +1118,15 @@
 		Folder * folder = [[Database sharedManager] folderFromID:firstArticle.folderId];
 		if (folder.loadsFullHTML && msgArray.count == 1)
 		{
+			if (!self.currentPageFullHTML) {
+			    // Clear out the text so the user knows something happened in response to the
+			    // click on the article.
+			    [articleText setArticles:@[]];
+			}
+
 			// Remember we have a full HTML page so we can setup the context menus
 			// appropriately.
 			self.currentPageFullHTML = YES;
-			
-			// Clear out the text so the user knows something happened in response to the
-			// click on the article.
-			[articleText setArticles:@[]];
 			
 			// Now set the article to the URL in the RSS feed's article. NOTE: We use
 			// performSelector:withObject:afterDelay: here so that this link load gets

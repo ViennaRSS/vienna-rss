@@ -27,6 +27,7 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
     var articles: [Article] = [] {
         didSet {
             guard !articles.isEmpty else {
+                self.loadHTMLString("<html><meta name=\"color-scheme\" content=\"light dark\"><body></body></html>", baseURL: URL.blank)
                 isHidden = true
                 return
             }
