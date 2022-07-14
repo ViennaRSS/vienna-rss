@@ -81,6 +81,7 @@ self.converter = [[WebViewArticleConverter alloc] init];
     if (articles.count > 0) {
         [self setHtml:[self.converter articleTextFromArray:articles]];
     } else {
+        [self setHtml:@"<html><meta name=\"color-scheme\" content=\"light dark\"><body></body></html>"];
         self.hidden = YES;
     }
 }
@@ -89,7 +90,6 @@ self.converter = [[WebViewArticleConverter alloc] init];
  * Loads the web view with the specified HTML text.
  */
 - (void)setHtml:(NSString *)htmlText {
-	self.hidden = NO;
 	// If the current HTML is the same as the new HTML then we don't need to
 	// do anything here. This will stop the view from spurious redraws of the same
 	// article after a refresh.
@@ -101,6 +101,7 @@ self.converter = [[WebViewArticleConverter alloc] init];
 	
 	[self.mainFrame loadHTMLString:html
 							  baseURL:[NSURL URLWithString:@"/"]];
+	self.hidden = NO;
 }
 
 /* keyDown
