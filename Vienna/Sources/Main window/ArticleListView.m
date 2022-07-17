@@ -160,11 +160,6 @@
 
 	// Done initialising
 	isAppInitialising = NO;
-
-    [NSUserDefaults.standardUserDefaults addObserver:self
-                                          forKeyPath:MAPref_ShowStatusBar
-                                             options:NSKeyValueObservingOptionInitial
-                                             context:nil];
 }
 
 /* initTableView
@@ -1623,8 +1618,6 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    [NSUserDefaults.standardUserDefaults removeObserver:self
-                                             forKeyPath:MAPref_ShowStatusBar];
 	[splitView2 setDelegate:nil];
 	[articleList setDelegate:nil];
 }

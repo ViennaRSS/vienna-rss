@@ -63,6 +63,11 @@ self.converter = [[WebViewArticleConverter alloc] init];
             weakSelf.textSizeMultiplier = prefs.textSizeMultiplier;
         }];
 
+		[NSUserDefaults.standardUserDefaults addObserver:self
+		                                      forKeyPath:MAPref_ShowStatusBar
+		                                         options:NSKeyValueObservingOptionInitial
+		                                         context:nil];
+
 		// enlarge / reduce the text size according to user's setting
 		self.textSizeMultiplier = [Preferences standardPreferences].textSizeMultiplier;
 	}
@@ -229,6 +234,8 @@ self.converter = [[WebViewArticleConverter alloc] init];
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[NSUserDefaults.standardUserDefaults removeObserver:self
+	                                         forKeyPath:MAPref_ShowStatusBar];
 }
 
 
