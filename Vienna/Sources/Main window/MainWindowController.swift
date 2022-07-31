@@ -46,6 +46,9 @@ final class MainWindowController: NSWindowController {
 
     override func windowDidLoad() {
         super.windowDidLoad()
+        // workaround for autosave not working when name is set in Interface Builder
+        // cf. https://stackoverflow.com/q/16587058
+        splitView.autosaveName = "VNASplitView"
 
         (self.browser as? RSSSource)?.rssSubscriber = self
 
