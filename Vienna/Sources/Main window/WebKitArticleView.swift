@@ -28,7 +28,6 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
         didSet {
             guard !articles.isEmpty else {
                 self.loadHTMLString("<html><meta name=\"color-scheme\" content=\"light dark\"><body></body></html>", baseURL: URL.blank)
-                isHidden = true
                 return
             }
 
@@ -37,7 +36,6 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
             self.htmlPath = htmlPath
 
             self.loadFileURL(htmlPath, allowingReadAccessTo: htmlPath.deletingLastPathComponent())
-            isHidden = false
         }
     }
 
@@ -65,13 +63,6 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
             try FileManager.default.removeItem(at: htmlPath)
         } catch {
         }
-    }
-
-    override func load(_ request: URLRequest) -> WKNavigation? {
-        var navig: WKNavigation?
-        navig = super.load(request)
-        isHidden = false
-        return navig
     }
 
     /// handle special keys when the article view has the focus
