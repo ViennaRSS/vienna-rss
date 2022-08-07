@@ -117,4 +117,14 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
             decisionHandler(.allow)
         }
     }
+
+    override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        super.webView(webView, didFinish: navigation)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "MA_Notify_ArticleViewEnded"), object: self)
+    }
+
+    override func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        super.webView(webView, didFailProvisionalNavigation: navigation, withError: error)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "MA_Notify_ArticleViewEnded"), object: self)
+    }
 }

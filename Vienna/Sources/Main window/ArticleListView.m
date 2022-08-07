@@ -97,6 +97,7 @@
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
 	[nc addObserver:self selector:@selector(handleLoadFullHTMLChange:) name:@"MA_Notify_LoadFullHTMLChange" object:nil];
 	[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
+	[nc addObserver:self selector:@selector(handleArticleViewEnded:) name:@"MA_Notify_ArticleViewEnded" object:nil];
 
     [self initialiseArticleView];
 }
@@ -1040,6 +1041,17 @@
 		[self refreshArticlePane];
 }
 
+/* handleArticleViewEnded
+ * Handle the end of a load whether or not it completed and whether or not an
+ * error occurred.
+ */
+- (void)handleArticleViewEnded:(NSNotification *)nc
+{
+    if (nc.object == articleText) {
+        [self endMainFrameLoad];
+    }
+}
+
 /* clearCurrentURL
  * Clears the current URL.
  */
@@ -1643,8 +1655,7 @@
 }
 
 /// Handle the end of a load whether or not it completed and whether or not an
-/// error occurred. The error variable is nil for no error or it contains the
-/// most recent NSError incident.
+/// error occurred.
 - (void)endMainFrameLoad
 {
     if (isLoadingHTMLArticle) {
