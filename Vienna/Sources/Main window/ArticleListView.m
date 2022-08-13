@@ -60,6 +60,10 @@
 -(void)showEnclosureView;
 -(void)hideEnclosureView;
 
+@property NSView *articleTextView;
+@property (strong) NSLayoutConstraint *textViewWidthConstraint;
+@property (nonatomic) BOOL imbricatedSplitViewResizes; // used to avoid warnings about missing invalidation for a view's changing state
+@property (nonatomic) BOOL useNewBrowser;
 // MARK: ArticleView delegate
 @property (readwrite, getter=isCurrentPageFullHTML, nonatomic) BOOL currentPageFullHTML;
 
@@ -82,6 +86,7 @@
 		_currentPageFullHTML = NO;
 		isLoadingHTMLArticle = NO;
 		currentURL = nil;
+		self.imbricatedSplitViewResizes = NO;
     }
     return self;
 }
@@ -109,23 +114,40 @@
  */
 -(void)initialiseArticleView
 {
-    NSView *articleTextView;
-
-    if (Preferences.standardPreferences.useNewBrowser) {
+    self.useNewBrowser = Preferences.standardPreferences.useNewBrowser;
+    if (self.useNewBrowser) {
         WebKitArticleTab *articleTextController = [[WebKitArticleTab alloc] init];
         articleText = articleTextController;
-        articleTextView = articleTextController.view;
+        self.articleTextView = articleTextController.view;
     } else {
         ArticleView *articleView = [[ArticleView alloc] init];
-        articleTextView = articleView;
         articleText = articleView;
+        self.articleTextView = articleView;
         // Make us the frame load and UI delegate for the web view
         [articleView setOpenLinksInNewBrowser:YES];
         [articleView setMaintainsBackForwardList:NO];
         [articleView.backForwardList setPageCacheSize:0];
     }
 
-    [self.contentStackView addView:articleTextView inGravity:NSStackViewGravityTop];
+    [self.contentStackView addView:self.articleTextView inGravity:NSStackViewGravityTop];
+
+    // With vertical layout and "Use Web Page for Articles" set, we need to
+    // manage article view's width so that it does not grow or shrink randomly
+    // on certain sites.
+    // The best solution I found is programmatically setting a constraint with a
+    // "constant" value.
+    // This did not work for me: self.textViewWidthConstraint =
+    //     [NSLayoutConstraint constraintWithItem:articleTextView attribute:NSLayoutAttributeWidth
+    //         relatedBy:NSLayoutRelationEqual toItem:self.contentStackView attribute:NSLayoutAttributeWidth
+    //         multiplier:1.f constant:0.f];
+    self.textViewWidthConstraint =
+        [NSLayoutConstraint constraintWithItem:self.articleTextView attribute:NSLayoutAttributeWidth
+            relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute
+            multiplier:0.f constant:self.contentStackView.frame.size.width];
+    self.textViewWidthConstraint.priority = NSLayoutPriorityRequired;
+    self.articleTextView.translatesAutoresizingMaskIntoConstraints = NO;
+    // for some reason, new browser requires this constraint but it is counterproductive with old browser
+    self.textViewWidthConstraint.active = self.useNewBrowser;
 
 	Preferences * prefs = [Preferences standardPreferences];
 
@@ -157,7 +179,10 @@
 	[self initTableView];
 
 	// Make sure we skip the column filter button in the Tab order
-    articleList.nextKeyView = articleTextView;
+    articleList.nextKeyView = self.articleTextView;
+
+    // Allow us to control the behavior of the NSSplitView
+    splitView2.delegate = self;
 
 	// Done initialising
 	isAppInitialising = NO;
@@ -732,7 +757,7 @@
  */
 -(void)printDocument:(id)sender
 {
-    if (Preferences.standardPreferences.useNewBrowser) {
+    if (self.useNewBrowser) {
         [articleText printPage];
     } else {
         [((TabbedWebView *)articleText) printDocument:sender];
@@ -1661,6 +1686,51 @@
     if (isLoadingHTMLArticle) {
         isLoadingHTMLArticle = NO;
         articleList.needsDisplay = YES;
+    }
+}
+
+// MARK : splitView2 delegate
+
+- (void)splitViewWillResizeSubviews:(NSNotification *)notification {
+    NSDictionary * info = notification.userInfo;
+    NSInteger userResizeKey = ((NSNumber *)info[@"NSSplitViewUserResizeKey"]).integerValue;
+    if (userResizeKey == 1) { // user initiated resize
+        self.textViewWidthConstraint.active = NO;
+        if (self.imbricatedSplitViewResizes) {
+            // remove any other constraint affecting articleTextView's horizontal axis,
+            // and let autoresizing do the job
+            for (NSLayoutConstraint *c in [self.articleTextView constraintsAffectingLayoutForOrientation:NSLayoutConstraintOrientationHorizontal]) {
+                if ((c.firstItem == self.articleTextView || c.secondItem == self.articleTextView) && (c != self.textViewWidthConstraint)) {
+                    [self.articleTextView removeConstraint:c];
+                }
+            }
+            self.articleTextView.translatesAutoresizingMaskIntoConstraints = YES;
+        } else {
+            self.imbricatedSplitViewResizes = YES;
+        }
+    }
+}
+
+- (void)splitViewDidResizeSubviews:(NSNotification *)notification {
+    // update and reactivate constraint
+    self.textViewWidthConstraint.constant = self.contentStackView.frame.size.width;
+    NSDictionary * info = notification.userInfo;
+    NSInteger userResizeKey = ((NSNumber *)info[@"NSSplitViewUserResizeKey"]).integerValue;
+    if (userResizeKey == 1) {
+        if (self.imbricatedSplitViewResizes && self.useNewBrowser) {
+            // remove again any other constraint affecting articleTextView's horizontal axis,
+            // and let autoresizing do the job
+            for (NSLayoutConstraint *c in [self.articleTextView constraintsAffectingLayoutForOrientation:NSLayoutConstraintOrientationHorizontal]) {
+                if ((c.firstItem == self.articleTextView || c.secondItem == self.articleTextView) && (c != self.textViewWidthConstraint)) {
+                    [self.articleTextView removeConstraint:c];
+                }
+            }
+            self.articleTextView.translatesAutoresizingMaskIntoConstraints = YES;
+        } else {
+            self.articleTextView.translatesAutoresizingMaskIntoConstraints = NO;
+            self.textViewWidthConstraint.active = self.useNewBrowser; // constraint only needed by new browser
+        }
+        self.imbricatedSplitViewResizes = NO;
     }
 }
 
