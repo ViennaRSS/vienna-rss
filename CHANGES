@@ -8,6 +8,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.8.1
+-----
+- Fix and improve display when "Use Web Page for Articles" option is enabled for a feed
+- Fix link preview on legacy browser's article view
+- Restore folder list width between app relaunches
+
 3.8.0
 -----
 - Add a disclosure triangle in feed credentials dialog, in order to provide additional feed details whenever it is needed to disambiguate the feed
@@ -21,7 +27,7 @@ Thanks!
 - Fix unwanted changes of toolbar mode (switches to text+icon while the user requested text-only)
 - Remove floodmagazine.com from default feed list and update other URLs
 - Update scripts building release binaries
-- Update Sparkle to version 2.2
+- Update Sparkle to version 2.2.0
 
 3.7.4
 -----
@@ -32,7 +38,7 @@ Thanks!
 3.8.0 Beta 3
 ------------
 - Add "Empty Trash…" menu command to folder list's contextual menu
-- Add setting regarding trash emptying in preferences window
+- Add a setting regarding emptying of trash in Preferences window
 - Add "Actual Size" menu command for resetting text zoom
 - Make text zoom menu commands work with new browser
 - Fix copy of articles in article list
