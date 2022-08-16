@@ -32,7 +32,7 @@
 @protocol ArticleContentView;
 @protocol Tab;
 
-@interface ArticleListView : NSView<BaseView, ArticleBaseView, ArticleViewDelegate, MessageListViewDelegate, NSTableViewDataSource>
+@interface ArticleListView : NSView<BaseView, ArticleBaseView, ArticleViewDelegate, MessageListViewDelegate, NSTableViewDataSource, NSSplitViewDelegate>
 {
 	IBOutlet MessageListView * articleList;
 	NSObject<ArticleContentView, Tab> *articleText;

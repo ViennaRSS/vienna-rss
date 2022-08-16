@@ -28,7 +28,6 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
         didSet {
             guard !articles.isEmpty else {
                 self.loadHTMLString("<html><meta name=\"color-scheme\" content=\"light dark\"><body></body></html>", baseURL: URL.blank)
-                isHidden = true
                 return
             }
 
@@ -37,7 +36,6 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
             self.htmlPath = htmlPath
 
             self.loadFileURL(htmlPath, allowingReadAccessTo: htmlPath.deletingLastPathComponent())
-            isHidden = false
         }
     }
 
@@ -65,13 +63,6 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
             try FileManager.default.removeItem(at: htmlPath)
         } catch {
         }
-    }
-
-    override func load(_ request: URLRequest) -> WKNavigation? {
-        var navig: WKNavigation?
-        navig = super.load(request)
-        isHidden = false
-        return navig
     }
 
     /// handle special keys when the article view has the focus
@@ -120,22 +111,6 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
     }
 
     // MARK: CustomWKUIDelegate
-
-    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        let browser = NSApp.appController.browser
-        if let webKitBrowser = browser as? TabbedBrowserViewController {
-            let newTab = webKitBrowser.createNewTab(navigationAction.request, config: configuration, inBackground: false)
-            if let webView = webView as? CustomWKWebView {
-                // The listeners are removed from the old webview userContentController on creating the new one, restore them
-                webView.resetScriptListeners()
-            }
-            return (newTab as? BrowserTab)?.webView
-        } else {
-            // Fallback for old browser
-            _ = browser?.createNewTab(navigationAction.request.url, inBackground: false, load: false)
-            return nil
-        }
-    }
 
     func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem] {
         var menuItems = existingMenuItems

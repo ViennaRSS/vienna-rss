@@ -86,8 +86,8 @@ self.converter = [[WebViewArticleConverter alloc] init];
     if (articles.count > 0) {
         [self setHtml:[self.converter articleTextFromArray:articles]];
     } else {
+        html = @"";
         [self setHtml:@"<html><meta name=\"color-scheme\" content=\"light dark\"><body></body></html>"];
-        self.hidden = YES;
     }
 }
 
@@ -106,7 +106,6 @@ self.converter = [[WebViewArticleConverter alloc] init];
 	
 	[self.mainFrame loadHTMLString:html
 							  baseURL:[NSURL URLWithString:@"/"]];
-	self.hidden = NO;
 }
 
 /* keyDown
@@ -264,7 +263,6 @@ self.converter = [[WebViewArticleConverter alloc] init];
 
 - (void)loadTab {
     [self.mainFrame loadRequest:[NSURLRequest requestWithURL: self.tabUrl]];
-    self.hidden = NO;
 }
 
 - (BOOL)canScrollDown {
