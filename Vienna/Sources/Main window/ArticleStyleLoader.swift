@@ -19,7 +19,7 @@ class ArticleStyleLoader: NSObject {
 
     @objc
     static func reloadStylesMap() -> NSMutableDictionary {
-        guard let pathString = Bundle.main.sharedSupportPath, let path = URL(string: pathString)?.appendingPathComponent("Styles").absoluteString else {
+        guard let path = Bundle.main.sharedSupportURL?.appendingPathComponent("Styles").path else {
             return [:]
         }
         loadMapFromPath(path, styles, true, nil)
