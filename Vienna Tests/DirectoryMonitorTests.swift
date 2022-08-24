@@ -28,7 +28,7 @@ class DirectoryMonitorTests: XCTestCase {
 
     var hasHandlerBeenCalled = false
 
-    lazy var handler: () -> Void  = { [weak self] in
+    lazy var handler: () -> Void = { [weak self] in
         guard self?.hasHandlerBeenCalled == false else {
             XCTFail("The handler has been called more often than expected")
             return

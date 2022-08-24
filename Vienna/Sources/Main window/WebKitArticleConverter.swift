@@ -81,10 +81,8 @@ class WebKitArticleConverter: ArticleConverter {
         let types: Set<String> = [WKWebsiteDataTypeMemoryCache]
 
         WKWebsiteDataStore.default().fetchDataRecords(ofTypes: types) { records in
-            for record in records {
-                if isLocalWebsiteData(record) {
-                    WKWebsiteDataStore.default().removeData(ofTypes: types, for: [record]) {}
-                }
+            for record in records where isLocalWebsiteData(record) {
+                WKWebsiteDataStore.default().removeData(ofTypes: types, for: [record]) {}
             }
         }
     }
