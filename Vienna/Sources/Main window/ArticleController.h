@@ -52,7 +52,6 @@
 	NSString * guidOfArticleToSelect;
 	BOOL firstUnreadArticleRequired;
 	dispatch_queue_t queue;
-	NSInteger reloadArrayOfArticlesSemaphor;
 	BOOL requireSelectArticleAfterReload;
 }
 
