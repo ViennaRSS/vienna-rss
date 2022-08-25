@@ -134,7 +134,6 @@
                                                  context:nil];
 
         queue = dispatch_queue_create("uk.co.opencommunity.vienna2.displayRefresh", DISPATCH_QUEUE_SERIAL);
-        reloadArrayOfArticlesSemaphor = 0;
         requireSelectArticleAfterReload = NO;
     }
     return self;
@@ -231,11 +230,7 @@
  */
 -(void)ensureSelectedArticle
 {
-	if (reloadArrayOfArticlesSemaphor <= 0) {
-	    [mainArticleView ensureSelectedArticle];
-	} else {
-	    requireSelectArticleAfterReload = YES;
-	}
+    [mainArticleView ensureSelectedArticle];
 }
 
 /* searchPlaceholderString
@@ -483,70 +478,46 @@
  */
 -(void)reloadArrayOfArticles
 {
-    reloadArrayOfArticlesSemaphor++;
-    [mainArticleView startLoadIndicator];
-
-    [self getArticlesWithCompletionBlock:^(NSArray *resultArray) {
-      // when multiple refreshes where queued, we update folderArrayOfArticles only once
-      self->reloadArrayOfArticlesSemaphor--;
-      if (self->reloadArrayOfArticlesSemaphor <= 0) {
-          [self->mainArticleView stopLoadIndicator];
-          self.folderArrayOfArticles = resultArray;
-          Article *article = self.selectedArticle;
-
-          if (self->shouldPreserveSelectedArticle) {
-            if (article != nil && !article.deleted) {
-                self->articleToPreserve = article;
-            }
-            self->shouldPreserveSelectedArticle = NO;
-          }
-
-          [self->mainArticleView refreshFolder:VNARefreshReapplyFilter];
-
-          if (self->guidOfArticleToSelect != nil) {
-            [self->mainArticleView scrollToArticle:self->guidOfArticleToSelect];
-            self->guidOfArticleToSelect = nil;
-          } else if (self->firstUnreadArticleRequired) {
-            [self->mainArticleView selectFirstUnreadInFolder];
-            self->firstUnreadArticleRequired = NO;
-          }
-
-          if (self->requireSelectArticleAfterReload) {
-            [self ensureSelectedArticle];
-            self->requireSelectArticleAfterReload = NO;
-          }
-
-          // To avoid upsetting the current displayed article after a refresh,
-          // we check to see if the selected article is the same
-          // and if it has been updated
-          Article *currentArticle = self.selectedArticle;
-          if (currentArticle == article &&
-            [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]
-            && currentArticle.revised && !currentArticle.read)
-          {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
-          }
-      }
-    }];
-} // reloadArrayOfArticles
-
-/* getArticlesWithCompletionBlock
- * Launch articlesWithFilter on background queue and perform completion block
- */
-- (void)getArticlesWithCompletionBlock:(void(^)(NSArray * resultArray))completionBlock {
-	Folder * folder = [[Database sharedManager] folderFromID:currentFolderId];
+    Folder *folder = [[Database sharedManager] folderFromID:currentFolderId];
     NSString *filterString = APPCONTROLLER.filterString;
-    dispatch_async(queue, ^{
-        NSArray * articleArray = [folder articlesWithFilter:filterString];
-
-        // call the completion block with the result when finished
-        if (completionBlock) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completionBlock(articleArray);
-            });
-        }        
+    dispatch_sync(queue, ^{
+        self.folderArrayOfArticles = [folder articlesWithFilter:filterString];
     });
-}
+    Article *article = self.selectedArticle;
+
+    if (self->shouldPreserveSelectedArticle) {
+        if (article != nil && !article.deleted) {
+            self->articleToPreserve = article;
+        }
+        self->shouldPreserveSelectedArticle = NO;
+    }
+
+    [self->mainArticleView refreshFolder:VNARefreshReapplyFilter];
+
+    if (self->guidOfArticleToSelect != nil) {
+        [self->mainArticleView scrollToArticle:self->guidOfArticleToSelect];
+        self->guidOfArticleToSelect = nil;
+    } else if (self->firstUnreadArticleRequired) {
+        [self->mainArticleView selectFirstUnreadInFolder];
+        self->firstUnreadArticleRequired = NO;
+    }
+
+    if (self->requireSelectArticleAfterReload) {
+        [self ensureSelectedArticle];
+        self->requireSelectArticleAfterReload = NO;
+    }
+
+    // To avoid upsetting the current displayed article after a refresh,
+    // we check to see if the selected article is the same
+    // and if it has been updated
+    Article *currentArticle = self.selectedArticle;
+    if (currentArticle == article &&
+        [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]
+        && currentArticle.revised && !currentArticle.read)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
+    }
+} // reloadArrayOfArticles
 
 /* refilterArrayOfArticles
  * Reapply the current filter to the article array.
