@@ -2070,21 +2070,21 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 
 /* goForward
- * In article view, forward track through the list of articles displayed. In 
- * web view, go to the next web page.
+ * In article view, forward track through the list of articles displayed.
  */
 -(IBAction)goForward:(id)sender
 {
-    (void)[self.browser.activeTab forward];
+    [self.browser switchToPrimaryTab];
+    [self.articleController goForward];
 }
 
 /* goBack
- * In article view, back track through the list of articles displayed. In 
- * web view, go to the previous web page.
+ * In article view, back track through the list of articles displayed.
  */
 -(IBAction)goBack:(id)sender
 {
-    (void)[self.browser.activeTab back];
+    [self.browser switchToPrimaryTab];
+    [self.articleController goBack];
 }
 
 /* localPerformFindPanelAction
@@ -3359,7 +3359,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     }
 	if (theAction == @selector(goBack:))
 	{
-        return self.browser.activeTab != nil; //TODO: disable for cases when browser tab cannot go back
+        *validateFlag = isMainWindowVisible && isAnyArticleView && self.articleController.canGoBack;
+        return YES;
 	}
 	if (theAction == @selector(mailLinkToArticlePage:))
 	{
@@ -3435,7 +3436,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else if (theAction == @selector(goForward:))
 	{
-        return true; //TODO: implement canGoForward in browser or tab to filter for cases when this is not possible;
+        return isMainWindowVisible && isAnyArticleView && self.articleController.canGoForward;
 	}
 	else if (theAction == @selector(newGroupFolder:))
 	{
