@@ -22,10 +22,24 @@
 @import Security;
 
 @interface KeyChain : NSObject
-	+(NSString *)getPasswordFromKeychain:(NSString *)username url:(NSString *)url;
-	+(void)setPasswordInKeychain:(NSString *)password username:(NSString *)username url:(NSString *)url;
-	+(NSString *)getWebPasswordFromKeychain:(NSString *)username url:(NSString *)url;
-	+(NSString *)getGenericPasswordFromKeychain:(NSString *)username serviceName:(NSString *)service;
-	+(void)deleteGenericPasswordInKeychain:(NSString *)username service:(NSString *)service;
-	+(void)setGenericPasswordInKeychain:(NSString *)password username:(NSString *)username service:(NSString *)service;
+
++ (NSString *)getPasswordFromKeychain:(NSString *)username url:(NSString *)url;
+
++ (void)setPasswordInKeychain:(NSString *)password
+                     username:(NSString *)username
+                          url:(NSString *)url;
+
++ (NSString *)getWebPasswordFromKeychain:(NSString *)username
+                                     url:(NSString *)url;
+
++ (NSString *)getGenericPasswordFromKeychain:(NSString *)username
+                                 serviceName:(NSString *)service;
+
++ (void)deleteGenericPasswordInKeychain:(NSString *)username
+                                service:(NSString *)service;
+
++ (void)setGenericPasswordInKeychain:(NSString *)password
+                            username:(NSString *)username
+                             service:(NSString *)service;
+
 @end

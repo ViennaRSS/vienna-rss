@@ -20,234 +20,194 @@
 
 #import "KeyChain.h"
 
+static NSString * const VNAURLSchemeHTTPS = @"https";
+
 @implementation KeyChain
 
 /* getPasswordFromKeychain
  * Retrieves an internet password from the Keychain.
  */
-+(NSString *)getPasswordFromKeychain:(NSString *)username url:(NSString *)url
++ (NSString *)getPasswordFromKeychain:(NSString *)username url:(NSString *)url
 {
-	NSURL * secureUrl = [NSURL URLWithString:url];
-	const char * cServiceName = secureUrl.host.UTF8String;
-	const char * cUsername = username.UTF8String;
-	NSInteger portNumber = secureUrl.port != nil ? secureUrl.port.integerValue : ([secureUrl.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame ? 443 : 80);
-	SecProtocolType protocolType = ([secureUrl.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame) ? kSecProtocolTypeHTTPS : kSecProtocolTypeHTTP;
-	NSString * thePassword;
+    NSURL *secureUrl = [NSURL URLWithString:url];
+    NSString *host = secureUrl.host;
+    if (!username || !secureUrl || !host) {
+        return @"";
+    }
 
-	if (!cServiceName || !cUsername)
-		thePassword = @"";
-	else
-	{
-		const char * cPath = "";
-		UInt32 passwordLength;
-		void * passwordPtr;
-		OSStatus status;
-
-		status = SecKeychainFindInternetPassword(NULL,
-												 (UInt32)strlen(cServiceName),
-												 cServiceName,
-												 0,
-												 NULL,
-												 (UInt32)strlen(cUsername),
-												 cUsername,
-												 (UInt32)strlen(cPath),
-												 cPath,
-												 portNumber,
-												 protocolType,
-												 kSecAuthenticationTypeDefault,
-												 &passwordLength,
-												 &passwordPtr,
-												 NULL);
-		if (status != noErr)
-			thePassword = @"";
-		else
-		{
-			thePassword = [[NSString alloc] initWithBytes:passwordPtr length:passwordLength encoding:NSUTF8StringEncoding];
-			SecKeychainItemFreeContent(NULL, passwordPtr);
-		}
-	}
-	return thePassword;
+    NSNumber *port = secureUrl.port != nil ? secureUrl.port : ([secureUrl.scheme caseInsensitiveCompare:VNAURLSchemeHTTPS] == NSOrderedSame ? @443 : @80);
+    CFStringRef protocol = ([secureUrl.scheme caseInsensitiveCompare:VNAURLSchemeHTTPS] == NSOrderedSame) ? kSecAttrProtocolHTTPS : kSecAttrProtocolHTTP;
+    NSDictionary *query = @{
+        (__bridge NSString *)kSecClass: (__bridge NSString *)kSecClassInternetPassword,
+        (__bridge NSString *)kSecAttrServer: host,
+        (__bridge NSString *)kSecAttrAccount: username,
+        (__bridge NSString *)kSecAttrPath: @"",
+        (__bridge NSString *)kSecAttrPort: port,
+        (__bridge NSString *)kSecAttrProtocol: (__bridge NSString *)protocol,
+        (__bridge NSString *)kSecAttrAuthenticationType: (__bridge NSString *)kSecAttrAuthenticationTypeDefault,
+        (__bridge NSString *)kSecReturnData: @YES
+    };
+    CFTypeRef result;
+    OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query,
+                                          &result);
+    if (status != errSecSuccess) {
+        return @"";
+    }
+    // The result (CFTypeRef) is a CFDataRef here, because only kSecReturnData
+    // was set to YES.
+    NSData *passwordData = (__bridge NSData *)result;
+    NSString *password = [[NSString alloc] initWithData:passwordData
+                                               encoding:NSUTF8StringEncoding];
+    return password;
 }
 
 /* setPasswordInKeychain
  * Updates an internet password for the service.
  */
-+(void)setPasswordInKeychain:(NSString *)password username:(NSString *)username url:(NSString *)url
++ (void)setPasswordInKeychain:(NSString *)password
+                     username:(NSString *)username
+                          url:(NSString *)url
 {
-	NSURL * secureUrl = [NSURL URLWithString:url];
-	const char * cServiceName = secureUrl.host.UTF8String;
-	const char * cUsername = username.UTF8String;
-	const char * cPath = "";
-	NSInteger portNumber = secureUrl.port != nil ? secureUrl.port.integerValue : ([secureUrl.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame ? 443 : 80);
-	SecProtocolType protocolType = ([secureUrl.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame) ? kSecProtocolTypeHTTPS : kSecProtocolTypeHTTP;
-	const char * cPassword = password.UTF8String;
-	SecKeychainItemRef itemRef;
-	OSStatus status;
-	
-	if (!cServiceName || !cUsername || !cPassword)
-		return;
-	status = SecKeychainFindInternetPassword(NULL,
-											 (UInt32)strlen(cServiceName),
-											 cServiceName,
-											 0,
-											 NULL,
-											 (UInt32)strlen(cUsername),
-											 cUsername,
-											 (UInt32)strlen(cPath),
-											 cPath,
-											 portNumber,
-											 protocolType,
-											 kSecAuthenticationTypeDefault,
-											 NULL,
-											 NULL,
-											 &itemRef);
-	if (status == noErr)
-		SecKeychainItemDelete(itemRef);
-	SecKeychainAddInternetPassword(NULL,
-								   (UInt32)strlen(cServiceName),
-								   cServiceName,
-								   0,
-								   NULL,
-								   (UInt32)strlen(cUsername),
-								   cUsername,
-								   (UInt32)strlen(cPath),
-								   cPath,
-								   portNumber,
-								   protocolType,
-								   kSecAuthenticationTypeDefault,
-								   (UInt32)strlen(cPassword),
-								   cPassword,
-								   NULL);
+    NSURL *secureUrl = [NSURL URLWithString:url];
+    NSString *host = secureUrl.host;
+    if (!password || !username || !secureUrl || !host) {
+        return;
+    }
+
+    NSNumber *port = secureUrl.port != nil ? secureUrl.port : ([secureUrl.scheme caseInsensitiveCompare:VNAURLSchemeHTTPS] == NSOrderedSame ? @443 : @80);
+    CFStringRef protocol = ([secureUrl.scheme caseInsensitiveCompare:VNAURLSchemeHTTPS] == NSOrderedSame) ? kSecAttrProtocolHTTPS : kSecAttrProtocolHTTP;
+    NSDictionary *query = @{
+        (__bridge NSString *)kSecClass: (__bridge NSString *)kSecClassInternetPassword,
+        (__bridge NSString *)kSecAttrServer: host,
+        (__bridge NSString *)kSecAttrAccount: username,
+        (__bridge NSString *)kSecAttrPath: @"",
+        (__bridge NSString *)kSecAttrPort: port,
+        (__bridge NSString *)kSecAttrProtocol: (__bridge NSString *)protocol,
+        (__bridge NSString *)kSecAttrAuthenticationType: (__bridge NSString *)kSecAttrAuthenticationTypeDefault
+    };
+    CFTypeRef result;
+    OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query,
+                                          &result);
+    NSData *passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
+    if (status == errSecSuccess) {
+        NSDictionary *attributes = @{
+            (__bridge NSString *)kSecValueData: passwordData
+        };
+        SecItemUpdate((__bridge CFDictionaryRef)query,
+                      (__bridge CFDictionaryRef)attributes);
+    } else {
+        NSMutableDictionary *mutableQuery = [query mutableCopy];
+        mutableQuery[(__bridge NSString *)kSecValueData] = passwordData;
+        NSDictionary *attributes = [mutableQuery copy];
+        SecItemAdd((__bridge CFDictionaryRef)attributes, NULL);
+    }
 }
 
 /* getWebPasswordFromKeychain
  * Retrieves an web form password from the Keychain.
  */
-+(NSString *)getWebPasswordFromKeychain:(NSString *)username url:(NSString *)url
++ (NSString *)getWebPasswordFromKeychain:(NSString *)username
+                                     url:(NSString *)url
 {
-	NSURL * secureUrl = [NSURL URLWithString:url];
-	const char * cServiceName = secureUrl.host.UTF8String;
-	const char * cUsername = username.UTF8String;
-	NSInteger portNumber = 0;
-	SecProtocolType protocolType = kSecProtocolTypeHTTPS ;
-	NSString * thePassword;
+    NSURL *secureUrl = [NSURL URLWithString:url];
+    NSString *host = secureUrl.host;
+    if (!username || !secureUrl || !host) {
+        return @"";
+    }
 
-	if (!cServiceName || !cUsername)
-		thePassword = @"";
-	else
-	{
-		const char * cPath = "";
-		UInt32 passwordLength;
-		void * passwordPtr;
-		OSStatus status;
-
-		status = SecKeychainFindInternetPassword(NULL,
-												 (UInt32)strlen(cServiceName),
-												 cServiceName,
-												 0,
-												 NULL,
-												 (UInt32)strlen(cUsername),
-												 cUsername,
-												 (UInt32)strlen(cPath),
-												 cPath,
-												 portNumber,
-												 protocolType,
-												 kSecAuthenticationTypeHTMLForm,
-												 &passwordLength,
-												 &passwordPtr,
-												 NULL);
-		if (status != noErr)
-			thePassword = @"";
-		else
-		{
-			thePassword = [[NSString alloc] initWithBytes:passwordPtr length:passwordLength encoding:NSUTF8StringEncoding];
-			SecKeychainItemFreeContent(NULL, passwordPtr);
-		}
-	}
-	return thePassword;
+    NSDictionary *query = @{
+        (__bridge NSString *)kSecClass: (__bridge NSString *)kSecClassInternetPassword,
+        (__bridge NSString *)kSecAttrServer: host,
+        (__bridge NSString *)kSecAttrAccount: username,
+        (__bridge NSString *)kSecAttrPath: @"",
+        (__bridge NSString *)kSecAttrPort: @0,
+        (__bridge NSString *)kSecAttrProtocol: (__bridge NSString *)kSecAttrProtocolHTTPS,
+        (__bridge NSString *)kSecAttrAuthenticationType: (__bridge NSString *)kSecAttrAuthenticationTypeHTMLForm,
+        (__bridge NSString *)kSecReturnData: @YES
+    };
+    CFTypeRef result;
+    OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query,
+                                          &result);
+    if (status != errSecSuccess) {
+        return @"";
+    }
+    // The result (CFTypeRef) is a CFDataRef here, because only kSecReturnData
+    // was set to YES.
+    NSData *passwordData = (__bridge NSData *)result;
+    NSString *password = [[NSString alloc] initWithData:passwordData
+                                               encoding:NSUTF8StringEncoding];
+    return password;
 }
 
 /* getGenericPasswordFromKeychain
  * Retrieves a generic password from the Keychain.
  */
-+(NSString *)getGenericPasswordFromKeychain:(NSString *)username serviceName:(NSString *)service
++ (NSString *)getGenericPasswordFromKeychain:(NSString *)username
+                                 serviceName:(NSString *)service
 {
-	const char * cServiceName = service.UTF8String;
-	const char * cUsername = username.UTF8String;
-	NSString * thePassword;
+    if (!username || !service) {
+        return @"";
+    }
 
-	if (!cServiceName || !cUsername)
-		thePassword = @"";
-	else
-	{
-		UInt32 passwordLength;
-		void * passwordPtr;
-		OSStatus status;
-
-		status = SecKeychainFindGenericPassword(NULL,
-											 (UInt32)strlen(cServiceName),
-											 cServiceName,
-											 (UInt32)strlen(cUsername),
-											 cUsername,
-											 &passwordLength,
-											 &passwordPtr,
-											 NULL);
-		if (status != noErr)
-			thePassword = @"";
-		else
-		{
-			thePassword = [[NSString alloc] initWithBytes:passwordPtr length:passwordLength encoding:NSUTF8StringEncoding];
-			SecKeychainItemFreeContent(NULL, passwordPtr);
-		}
-	}
-	return thePassword;
+    NSDictionary *query = @{
+        (__bridge NSString *)kSecClass: (__bridge NSString *)kSecClassGenericPassword,
+        (__bridge NSString *)kSecAttrService: service,
+        (__bridge NSString *)kSecAttrAccount: username,
+        (__bridge NSString *)kSecReturnData: @YES
+    };
+    CFTypeRef result;
+    OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query,
+                                          &result);
+    if (status != errSecSuccess) {
+        return @"";
+    }
+    // The result (CFTypeRef) is a CFDataRef here, because only kSecReturnData
+    // was set to YES.
+    NSData *passwordData = (__bridge NSData *)result;
+    NSString *password = [[NSString alloc] initWithData:passwordData
+                                               encoding:NSUTF8StringEncoding];
+    return password;
 }
 
 /* deleteGenericPasswordInKeychain
  * delete a generic password for the service.
  */
-+(void)deleteGenericPasswordInKeychain:(NSString *)username service:(NSString *)service
++ (void)deleteGenericPasswordInKeychain:(NSString *)username
+                                service:(NSString *)service
 {
-	const char * cServiceName = service.UTF8String;
-	const char * cUsername = username.UTF8String;
-	SecKeychainItemRef itemRef;
-	OSStatus status;
+    if (!username || !service) {
+        return;
+    }
 
-	if (!cServiceName || !cUsername)
-		return;
-	status = SecKeychainFindGenericPassword(NULL,
-											 (UInt32)strlen(cServiceName),
-											 cServiceName,
-											 (UInt32)strlen(cUsername),
-											 cUsername,
-											 NULL,
-											 NULL,
-											 &itemRef);
-	if (status == noErr)
-		SecKeychainItemDelete(itemRef);
+    NSDictionary *query = @{
+        (__bridge NSString *)kSecClass: (__bridge NSString *)kSecClassGenericPassword,
+        (__bridge NSString *)kSecAttrService: service,
+        (__bridge NSString *)kSecAttrAccount: username
+    };
+    SecItemDelete((__bridge CFDictionaryRef)query);
 }
 
 /* setGenericPasswordInKeychain
  * Updates a generic password for the service.
  */
-+(void)setGenericPasswordInKeychain:(NSString *)password username:(NSString *)username service:(NSString *)service
++ (void)setGenericPasswordInKeychain:(NSString *)password
+                            username:(NSString *)username
+                             service:(NSString *)service
 {
-	const char * cServiceName = service.UTF8String;
-	const char * cUsername = username.UTF8String;
-	const char * cPassword = password.UTF8String;
+    if (!password || !username || !service) {
+        return;
+    }
 
-	if (!cServiceName || !cUsername || !cPassword)
-		return;
+    [self deleteGenericPasswordInKeychain:username service:service];
 
-	[self deleteGenericPasswordInKeychain:username service:service];
-	SecKeychainAddGenericPassword(NULL,
-								   (UInt32)strlen(cServiceName),
-								   cServiceName,
-								   (UInt32)strlen(cUsername),
-								   cUsername,
-								   (UInt32)strlen(cPassword),
-								   cPassword,
-								   NULL);
+    NSData *passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *attributes = @{
+        (__bridge NSString *)kSecClass: (__bridge NSString *)kSecClassGenericPassword,
+        (__bridge NSString *)kSecAttrService: service,
+        (__bridge NSString *)kSecAttrAccount: username,
+        (__bridge NSString *)kSecValueData: passwordData
+    };
+    SecItemAdd((__bridge CFDictionaryRef)attributes, NULL);
 }
 
 @end
