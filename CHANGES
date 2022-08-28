@@ -8,6 +8,10 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.7.5
+-----
+- Fix backtrack queue used for handling the 'Back' / 'Forward' commands on main tab
+
 3.7.4
 -----
 - Fix unwanted changes of toolbar mode (switches to text+icon while the user requested text-only)
