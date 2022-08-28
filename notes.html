@@ -108,32 +108,14 @@ sup {
 
 <h1 id="toc_0">Version Notes</h1>
 
-<h2 id="toc_1">3.8.1</h2>
-
-<h3 id="toc_2">! 3.8 versions require macOS 10.12 (Sierra) or later !</h3>
-
-<h3 id="toc_3">Changes since 3.7.4</h3>
+<h2 id="toc_1">3.8.2</h2>
 
 <ul>
-<li>Implement an experimental new browser based on WKWebView : it can be selected in Advanced preferences, and will be available after application restart. It is faster and more secure.</li>
-<li>Remove support for web plug-ins (which were deprecated for a long time and unsecure)</li>
-<li>Add &quot;Actual Size&quot; menu command for resetting text zoom</li>
-<li>Add a disclosure triangle in feed credentials dialog, in order to provide additional feed details whenever it is needed to disambiguate the feed</li>
-<li>Add a setting regarding emptying of trash in Preferences window</li>
-<li>Add a hidden preference for always displaying the full date, not using relative dates like Today or Yesterday. This is enabled with the Terminal command: <code>defaults write uk.co.opencommunity.vienna2 DoesRelativeDateFormatting -bool NO</code> and can be reversed with <code>defaults delete uk.co.opencommunity.vienna2 DoesRelativeDateFormatting</code></li>
-<li>Add Australian and British English as localization variants</li>
-<li>Refactor and modernize many parts of code (modify ArticleController to be a NSViewController, restructurate code around new protocols, update AppleScript architecture, update logging tools, use NSSecureCoding, replace deprecated methods, rename some constants/methods…)</li>
-<li>Improve handling of URLs containing semicolon character in the path component</li>
-<li>Update build architecture</li>
-<li>Update Sparkle to version 2.2.0; use a new EdDSA key for updates whenever possible</li>
-</ul>
-
-<h3 id="toc_4">Changes since 3.8.0</h3>
-
-<ul>
-<li>Fix article view when &quot;Use Web Page for Articles&quot; option is enabled for a feed</li>
-<li>Fix link preview on legacy browser&#39;s article view</li>
-<li>Restore folder list width between app relaunches</li>
+<li>Fix loading of styles when the application is launched from a folder with special characters in its path</li>
+<li>Fix &#39;Back&#39; / &#39;Forward&#39; commands on main tab (items activation and management of queue)</li>
+<li>Update Italian localization</li>
+<li>Update Sparkle to version 2.2.1</li>
+<li>Silence some warnings</li>
 </ul>
 
 

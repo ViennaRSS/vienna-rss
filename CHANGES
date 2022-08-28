@@ -8,6 +8,18 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.8.2
+-----
+- Fix loading of styles when the application is launched from a folder with special characters in its path
+- Fix 'Back' / 'Forward' commands on main tab (items activation and management of queue)
+- Update Italian localization
+- Update Sparkle to version 2.2.1
+- Silence some warnings
+
+3.7.5
+-----
+- Fix backtrack queue used for handling the 'Back' / 'Forward' commands on main tab
+
 3.8.1
 -----
 - Fix and improve display when "Use Web Page for Articles" option is enabled for a feed
