@@ -1,5 +1,5 @@
 //
-//  KeyChain.m
+//  Keychain.m
 //  Vienna
 //
 //  Created by Steve on Sat Jul 9 2005.
@@ -18,11 +18,11 @@
 //  limitations under the License.
 //
 
-#import "KeyChain.h"
+#import "Keychain.h"
 
 static NSString * const VNAURLSchemeHTTPS = @"https";
 
-@implementation KeyChain
+@implementation VNAKeychain
 
 /* getPasswordFromKeychain
  * Retrieves an internet password from the Keychain.

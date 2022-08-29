@@ -22,7 +22,7 @@
 
 #import "AppController.h"
 #import "Constants.h"
-#import "KeyChain.h"
+#import "Keychain.h"
 #import "FolderImageCache.h"
 #import "StringExtensions.h"
 #import "Preferences.h"
@@ -268,7 +268,7 @@ static NSArray * iconArray = nil;
 	if (!self.hasPassword)
 	{
 		if (self.username != nil && self.feedURL != nil)
-			[self.attributes setValue:[KeyChain getPasswordFromKeychain:self.username url:self.feedURL] forKey:@"Password"];
+			[self.attributes setValue:[VNAKeychain getPasswordFromKeychain:self.username url:self.feedURL] forKey:@"Password"];
 		self.hasPassword = YES;
 	}
 	return [self.attributes valueForKey:@"Password"];
@@ -281,7 +281,7 @@ static NSArray * iconArray = nil;
 {
 	NSString *newPassword = [password copy];
 	if (self.username != nil && self.feedURL != nil)
-		[KeyChain setPasswordInKeychain:newPassword username:self.username url:self.feedURL];
+		[VNAKeychain setPasswordInKeychain:newPassword username:self.username url:self.feedURL];
 	[self.attributes setValue:newPassword forKey:@"Password"];
 	self.hasPassword = YES;
 }

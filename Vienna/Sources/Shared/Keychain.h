@@ -1,5 +1,5 @@
 //
-//  KeyChain.h
+//  Keychain.h
 //  Vienna
 //
 //  Created by Steve on 7/9/05.
@@ -21,7 +21,7 @@
 @import Foundation;
 @import Security;
 
-@interface KeyChain : NSObject
+@interface VNAKeychain : NSObject
 
 + (NSString *)getPasswordFromKeychain:(NSString *)username url:(NSString *)url;
 

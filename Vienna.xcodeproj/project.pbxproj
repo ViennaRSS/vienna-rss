@@ -152,7 +152,7 @@
 		AACAEA3E0954E71100ACD502 /* DemoFeeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */; };
 		AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */; };
 		AAF3B14306095E7B0025CC7F /* StringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF3B14106095E7B0025CC7F /* StringExtensions.m */; };
-		AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
+		AAFAF3FE088056D800DAFF04 /* Keychain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* Keychain.m */; };
 		B2554731106913760065E9C3 /* errorpagelogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B2554730106913760065E9C3 /* errorpagelogo.png */; };
 		B273E8EC106910B2001ADEF8 /* errorpagebg.png in Resources */ = {isa = PBXBuildFile; fileRef = B273E8EB106910B2001ADEF8 /* errorpagebg.png */; };
 		B27CD00C1100E728001F3C83 /* Plugins in Copy Shared Support Files */ = {isa = PBXBuildFile; fileRef = B27CCFFD1100E728001F3C83 /* Plugins */; };
@@ -460,8 +460,8 @@
 		AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageAndTextCell.m; sourceTree = "<group>"; };
 		AAF3B14006095E7B0025CC7F /* StringExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringExtensions.h; sourceTree = "<group>"; };
 		AAF3B14106095E7B0025CC7F /* StringExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringExtensions.m; sourceTree = "<group>"; };
-		AAFAF3FB088056D800DAFF04 /* KeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyChain.h; sourceTree = "<group>"; };
-		AAFAF3FC088056D800DAFF04 /* KeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChain.m; sourceTree = "<group>"; };
+		AAFAF3FB088056D800DAFF04 /* Keychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keychain.h; sourceTree = "<group>"; };
+		AAFAF3FC088056D800DAFF04 /* Keychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keychain.m; sourceTree = "<group>"; };
 		B2554730106913760065E9C3 /* errorpagelogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = errorpagelogo.png; sourceTree = "<group>"; };
 		B273E8EB106910B2001ADEF8 /* errorpagebg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = errorpagebg.png; sourceTree = "<group>"; };
 		B27CCFFD1100E728001F3C83 /* Plugins */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Plugins; path = Vienna/SharedSupport/Plugins; sourceTree = SOURCE_ROOT; };
@@ -1603,8 +1603,8 @@
 				AA60237F08C298FB002CFD06 /* HelperFunctions.m */,
 				AA71168709BEB14A00E3EA8A /* ImageAndTextCell.h */,
 				AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */,
-				AAFAF3FB088056D800DAFF04 /* KeyChain.h */,
-				AAFAF3FC088056D800DAFF04 /* KeyChain.m */,
+				AAFAF3FB088056D800DAFF04 /* Keychain.h */,
+				AAFAF3FC088056D800DAFF04 /* Keychain.m */,
 				2FE44CAC25B7995400554E82 /* NSApplication+AppController.swift */,
 				F6F12AFB25ABDDE3005B2DCE /* NSFileManager+Paths.h */,
 				F6F12AFC25ABDDE3005B2DCE /* NSFileManager+Paths.m */,
@@ -2025,7 +2025,7 @@
 				2F5AC4202198E1AA00A7EDDE /* TitleChangingTabViewItem.swift in Sources */,
 				2F2280382271B18A005D1023 /* ArticleStyleLoader.swift in Sources */,
 				AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */,
-				AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */,
+				AAFAF3FE088056D800DAFF04 /* Keychain.m in Sources */,
 				032280311A33BCD8007DE933 /* Article.m in Sources */,
 				F6B3561525616313008CA1ED /* DownloadItem.m in Sources */,
 				030C38901AABF12D00AE1EB8 /* FolderImageCache.m in Sources */,
