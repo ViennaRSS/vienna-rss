@@ -2261,6 +2261,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			
             if (activeBrowserTab == nil) {
                 //we are in the article view
+                [self.mainWindow makeFirstResponder:((NSView<BaseView> *)self.browser.primaryTab.view).mainView];
                 if (flags & NSEventModifierFlagShift) {
                     [self.articleController.mainArticleView scrollUpDetailsOrGoBack];
 				} else {
