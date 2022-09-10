@@ -138,12 +138,22 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
         if let index = menuItems.firstIndex(where: { $0.identifier == .WKMenuItemOpenLinkInNewWindow }) {
 
             menuItems[index].title = NSLocalizedString("Open Link in New Tab", comment: "")
+            menuItems[index].target = nil
+            menuItems[index].representedObject = url
+            menuItems[index].action = #selector(openLinkInNewTab(menuItem:))
 
             let openInBackgroundTitle = NSLocalizedString("Open Link in Background", comment: "")
             let openInBackgroundItem = NSMenuItem(title: openInBackgroundTitle, action: #selector(openLinkInBackground(menuItem:)), keyEquivalent: "")
             openInBackgroundItem.identifier = .WKMenuItemOpenLinkInBackground
             openInBackgroundItem.representedObject = url
             menuItems.insert(openInBackgroundItem, at: menuItems.index(after: index))
+        }
+    }
+
+    @objc
+    func openLinkInNewTab(menuItem: NSMenuItem) {
+        if let url = menuItem.representedObject as? URL {
+            _ = NSApp.appController.browser.createNewTab(url, inBackground: false, load: true)
         }
     }
 
