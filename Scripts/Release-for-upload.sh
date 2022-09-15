@@ -31,6 +31,7 @@ tar -a -cf "${dSYM_FILENAME}.tgz" --exclude '.DS_Store' -C "$ARCHIVE_DSYMS_PATH"
 # Zip up the app
 # Copy the app cleanly
 xcodebuild -exportNotarizedApp -archivePath "$ARCHIVE_PATH" -exportPath .
+xattr -c -r Vienna.app
 tar -a -cf "${TGZ_FILENAME}" --exclude '.DS_Store' Vienna.app
 rm -rf Vienna.app
 
