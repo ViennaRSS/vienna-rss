@@ -8,7 +8,7 @@ GITHUB_REPO="https://github.com/ViennaRSS/vienna-rss"
 GITHUB_RELEASE_URL="${GITHUB_REPO}/releases/tag/v%2F${N_VCS_TAG}"
 SOURCEFORGE_ASSETS_URL="https://downloads.sourceforge.net/project/vienna-rss/v_${N_VCS_TAG}"
 
-TGZ_FILENAME="Vienna${N_VCS_TAG}.tar.gz"
+TGZ_FILENAME="Vienna${N_VCS_TAG}.tgz"
 dSYM_FILENAME="Vienna${N_VCS_TAG}.${VCS_SHORT_HASH}-dSYM"
 
 case "${N_VCS_TAG}" in
@@ -26,7 +26,7 @@ esac
 pushd "${VIENNA_UPLOADS_DIR}"
 
 # Make the dSYM Bundle
-tar -a -cf "${dSYM_FILENAME}.tar.gz" --exclude '.DS_Store' -C "$ARCHIVE_DSYMS_PATH" .
+tar -a -cf "${dSYM_FILENAME}.tgz" --exclude '.DS_Store' -C "$ARCHIVE_DSYMS_PATH" .
 
 # Zip up the app
 # Copy the app cleanly
