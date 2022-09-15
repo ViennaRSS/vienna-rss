@@ -26,12 +26,12 @@ esac
 pushd "${VIENNA_UPLOADS_DIR}"
 
 # Make the dSYM Bundle
-tar -czf "${dSYM_FILENAME}.tar.gz" --exclude '.DS_Store' -C "$ARCHIVE_DSYMS_PATH" .
+tar -a -cf "${dSYM_FILENAME}.tar.gz" --exclude '.DS_Store' -C "$ARCHIVE_DSYMS_PATH" .
 
 # Zip up the app
 # Copy the app cleanly
 xcodebuild -exportNotarizedApp -archivePath "$ARCHIVE_PATH" -exportPath .
-tar -czf "${TGZ_FILENAME}" --exclude '.DS_Store' Vienna.app
+tar -a -cf "${TGZ_FILENAME}" --exclude '.DS_Store' Vienna.app
 rm -rf Vienna.app
 
 # Output the sparkle change log
