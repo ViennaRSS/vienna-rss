@@ -8,6 +8,13 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.8.3
+-----
+- Fix "Open Link in New Tab" contextual menu item (on main tab when the new browser option is enabled)
+- When the user uses the Space keyboard shortcut, keep the focus on the article list (as version 3.7.x did) to ease navigation with keyboard
+- Fix a problem that could prevent decompression of the application on some configurations
+- Improve various points of build process
+
 3.8.2
 -----
 - Fix loading of styles when the application is launched from a folder with special characters in its path
