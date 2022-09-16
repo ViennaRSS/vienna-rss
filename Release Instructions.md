@@ -128,20 +128,10 @@ There are two distinct ways to get the different files needed to publish an upda
 
 ### On Brew Cask
 
-17. __For stable releases only :__ follow the steps listed below, adapted from the [Brew Cask Wiki](https://github.com/caskroom/homebrew-cask/blob/master/CONTRIBUTING.md#updating-a-cask):
+17. __For stable releases only :__ Check the version number in the format needed by Brew Cask (have a look at the final messages of build phase) and submit it using a command similar to this:
 
->We have a [script](https://github.com/vitorgalvao/tiny-scripts/blob/master/cask-repair) that will ask for the new version number, and take care of updating the Cask file and submitting a pull request to homebrew-cask:
-
-```bash
-# install and setup script - only needed once
-brew install vitorgalvao/tiny-scripts/cask-repair
-cask-repair --help
-
-# from time to time (especially on major macOS updates)
-brew upgrade cask-repair
-
-# use to update <outdated_cask>
-cask-repair vienna
-```
+````bash
+brew bump-cask-pr vienna --version=3.8.1,7830
+````
 
 Finally, consider posting an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18> and/or <http://vienna-rss.com>.
