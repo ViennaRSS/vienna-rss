@@ -128,10 +128,10 @@ There are two distinct ways to get the different files needed to publish an upda
 
 ### On Brew Cask
 
-17. __For stable releases only :__ Check the version number in the format needed by Brew Cask (have a look at the final messages of build phase) and submit it using a command similar to this:
+17. __Optional and for stable releases only :__ submit the version to Homebrew Casks with a command similar to this one:
 
 ````bash
-brew bump-cask-pr vienna --version=3.8.1,7830
+brew bump-cask-pr vienna --version=3.3.0
 ````
 
 Finally, consider posting an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18> and/or <http://vienna-rss.com>.

@@ -95,7 +95,6 @@ EOF
 # hierarchy between final releases, release candidates and betas
 if [ -f "${VIENNA_UPLOADS_DIR}/changelog.xml" ]; then
 	cp "${VIENNA_UPLOADS_DIR}/changelog.xml" "${VIENNA_UPLOADS_DIR}/changelog_rc.xml"
-	echo "Version number for brew bump-cask : ${N_VCS_TAG},${N_VCS_NUM}" >&2
 fi
 if [ -f "${VIENNA_UPLOADS_DIR}/changelog_rc.xml" ]; then
 	cp "${VIENNA_UPLOADS_DIR}/changelog_rc.xml" "${VIENNA_UPLOADS_DIR}/changelog_beta.xml"
