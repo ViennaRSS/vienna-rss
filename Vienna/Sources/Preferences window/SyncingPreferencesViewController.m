@@ -19,7 +19,7 @@
 //
 
 #import "OpenReader.h"
-#import "KeyChain.h"
+#import "Keychain.h"
 #import "Preferences.h"
 #import "StringExtensions.h"
 #import "SyncingPreferencesViewController.h"
@@ -56,7 +56,7 @@ static BOOL _credentialsChanged;
     NSString * theHost = prefs.syncServer;
     if (!theHost)
         theHost=@"";
-    NSString * thePassword = [KeyChain getGenericPasswordFromKeychain:theUsername serviceName:@"Vienna sync"];
+    NSString * thePassword = [VNAKeychain getGenericPasswordFromKeychain:theUsername serviceName:@"Vienna sync"];
     if (!thePassword)
         thePassword=@"";
     username.stringValue = theUsername;
@@ -185,11 +185,11 @@ static BOOL _credentialsChanged;
     if ( !((openReaderHost.stringValue).vna_isBlank || (username.stringValue).vna_isBlank) )
     {
         // can we get password via keychain ?
-        NSString * thePass = [KeyChain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"https://%@", openReaderHost.stringValue]];
+        NSString * thePass = [VNAKeychain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"https://%@", openReaderHost.stringValue]];
         if (!thePass.vna_isBlank)
         {
             password.stringValue = thePass;
-            [KeyChain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];
+            [VNAKeychain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];
         }
     }
     prefs.syncServer = openReaderHost.stringValue;
@@ -205,15 +205,15 @@ static BOOL _credentialsChanged;
 {
     _credentialsChanged = YES;
     Preferences *prefs = [Preferences standardPreferences];
-    [KeyChain deleteGenericPasswordInKeychain:prefs.syncingUser service:@"Vienna sync"];
+    [VNAKeychain deleteGenericPasswordInKeychain:prefs.syncingUser service:@"Vienna sync"];
     if ( !((openReaderHost.stringValue).vna_isBlank || (username.stringValue).vna_isBlank) )
     {
         // can we get password via keychain ?
-        NSString * thePass = [KeyChain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"https://%@", openReaderHost.stringValue]];
+        NSString * thePass = [VNAKeychain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"https://%@", openReaderHost.stringValue]];
         if (!thePass.vna_isBlank)
         {
             password.stringValue = thePass;
-            [KeyChain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];
+            [VNAKeychain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];
         }
     }
     prefs.syncingUser = username.stringValue;
@@ -228,7 +228,7 @@ static BOOL _credentialsChanged;
 -(void)handlePasswordTextDidChange:(NSNotification *)aNotification
 {
     _credentialsChanged = YES;
-    [KeyChain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];
+    [VNAKeychain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];
 }
 
 -(void)handleGoogleAuthFailed:(NSNotification *)nc

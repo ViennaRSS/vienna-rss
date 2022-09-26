@@ -38,7 +38,7 @@
 #import "Preferences.h"
 #import "StringExtensions.h"
 #import "NSNotificationAdditions.h"
-#import "KeyChain.h"
+#import "Keychain.h"
 #import "ActivityItem.h"
 #import "Article.h"
 
@@ -259,7 +259,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         hostRequiresInoreaderHeaders = YES;
     }
     // restore from keychain
-    password = [KeyChain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"];
+    password = [VNAKeychain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"];
     APIBaseURL = [NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost];
 } // configureForSpecificHost
 
