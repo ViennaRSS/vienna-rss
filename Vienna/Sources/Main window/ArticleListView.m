@@ -1696,7 +1696,7 @@ static void *ObserverContext = &ObserverContext;
     if ([keyPath isEqualToString:MAPref_ShowEnclosureBar]) {
         NSNumber *showEnclosureBar = change[NSKeyValueChangeNewKey];
         if (showEnclosureBar.boolValue) {
-            [self showEnclosureView];
+            [self refreshArticlePane];
         } else {
             [self hideEnclosureView];
         }
