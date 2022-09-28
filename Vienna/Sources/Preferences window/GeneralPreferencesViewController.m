@@ -20,16 +20,20 @@
 
 #import "GeneralPreferencesViewController.h"
 
+@import os.log;
+@import UniformTypeIdentifiers;
+
 #import "Constants.h"
 #import "NSFileManager+Paths.h"
 #import "Preferences.h"
 #import "Vienna-Swift.h"
 
+#define VNA_LOG os_log_create("--", "GeneralPreferencesViewController")
+
 @interface GeneralPreferencesViewController ()
 
 -(void)initializePreferences;
 // -(void)selectUserDefaultFont:(NSString *)name size:(int)size control:(NSPopUpButton *)control sizeControl:(NSComboBox *)sizeControl;
--(void)setDefaultLinksHandler:(NSURL *)pathToNewHandler;
 // -(void)controlTextDidEndEditing:(NSNotification *)notification;
 -(void)refreshLinkHandler;
 -(IBAction)handleLinkSelector:(id)sender;
@@ -124,32 +128,26 @@
     NSBundle * appBundle = [NSBundle mainBundle];
     NSString * ourAppName = [[NSFileManager defaultManager] displayNameAtPath:appBundle.bundlePath];
     BOOL onTheList = NO;
-    NSURL * testURL = [NSURL URLWithString:@"feed://www.test.com"];
-    NSString * registeredAppURL = nil;
+    NSURL *testURL = [NSURL URLWithString:@"feed://www.test.com"];
+    NSURL *registeredAppURL = [NSWorkspace.sharedWorkspace URLForApplicationToOpenURL:testURL];
     
     // Clear all existing items
     [linksHandler removeAllItems];
     
-    // Add the current registered link handler to the start of the list as Safari does. If
-    // there's no current registered handler, default to ourself.
-    CFStringRef defaultBundleIdentifier = LSCopyDefaultHandlerForURLScheme((__bridge CFStringRef)@"feed");
-    if (defaultBundleIdentifier != NULL)
-    {
-        registeredAppURL = [[NSWorkspace sharedWorkspace] URLForApplicationWithBundleIdentifier:(__bridge NSString *)defaultBundleIdentifier].path;
-        CFRelease(defaultBundleIdentifier);
-    }
-    else
-    {
-        registeredAppURL = appBundle.executablePath;
+    // Add the current registered link handler to the start of the list. If
+    // there is no current registered handler then default to Vienna.
+    if (!registeredAppURL) {
+        registeredAppURL = appBundle.executableURL;
         onTheList = YES;
     }
     
-    NSString * regAppName = [[NSFileManager defaultManager] displayNameAtPath:registeredAppURL];
+    NSString * regAppName = [[NSFileManager defaultManager] displayNameAtPath:registeredAppURL.path];
     // Maintain a table to map from the short name to the file URL for when
     // the user changes selection and we later need the file URL to register
     // the new selection.
     if (regAppName != nil) {
-        [linksHandler addItemWithTitle:regAppName image:[[NSWorkspace sharedWorkspace] iconForFile:registeredAppURL]];
+        NSImage *image = [NSWorkspace.sharedWorkspace iconForFile:registeredAppURL.path];
+        [linksHandler addItemWithTitle:regAppName image:image];
         [linksHandler.menu addItem:[NSMenuItem separatorItem]];
         [appToPathMap setValue:registeredAppURL forKey:regAppName];
     }
@@ -313,7 +311,7 @@
             [self handleLinkSelector:self];
             return;
         }
-        [self setDefaultLinksHandler:[appToPathMap valueForKey:selectedItem.title]];
+        [self setDefaultApplicationForFeedScheme:[appToPathMap valueForKey:selectedItem.title]];
     }
     [self refreshLinkHandler];
 }
@@ -329,27 +327,49 @@
     NSWindow * prefPaneWindow = linksHandler.window;
     
     panel.directoryURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:NO error:nil];
-    panel.allowedFileTypes = @[NSFileTypeForHFSTypeCode('APPL')];
+    if (@available(macOS 11, *)) {
+        panel.allowedContentTypes = @[UTTypeApplicationBundle];
+    } else {
+        panel.allowedFileTypes = @[NSFileTypeForHFSTypeCode('APPL')];
+    }
     [panel beginSheetModalForWindow:prefPaneWindow completionHandler:^(NSInteger returnCode) {
         [panel orderOut:self];
         [prefPaneWindow makeKeyAndOrderFront:self];
         
         if (returnCode == NSModalResponseOK)
-            [self setDefaultLinksHandler:panel.URL];
+            [self setDefaultApplicationForFeedScheme:panel.URL];
         [self refreshLinkHandler];
     }];
 }
 
-/* setDefaultLinksHandler
- * Set the default handler for feed links via Launch Services
- */
--(void)setDefaultLinksHandler:(NSURL *)fileURLToNewHandler
+- (void)setDefaultApplicationForFeedScheme:(NSURL *)applicationURL
 {
-    NSBundle * appBundle = [NSBundle bundleWithURL:fileURLToNewHandler];
-    NSDictionary * fileAttributes = appBundle.infoDictionary;
-    CFStringRef bundleIdentifier = (__bridge CFStringRef)fileAttributes[@"CFBundleIdentifier"];
-    CFStringRef scheme = (__bridge CFStringRef)@"feed";
-    LSSetDefaultHandlerForURLScheme(scheme, bundleIdentifier);
+    NSString *feedURLScheme = @"feed";
+    if (@available(macOS 12, *)) {
+        NSWorkspace *workspace = NSWorkspace.sharedWorkspace;
+        // "Some" schemes require user consent to change the handlers. The docs
+        // do not state which ones, but as of macOS 12, "feed" does not require
+        // a confirmation. The completion handler is called in either case and
+        // presumably returns an error if the user does not consent. If that
+        // happens, the change is not applied and Vienna fails gracefully.
+        [workspace setDefaultApplicationAtURL:applicationURL
+                         toOpenURLsWithScheme:feedURLScheme
+                            completionHandler:^(NSError * _Nullable error) {
+            // This error code indicates that the user rejected the change.
+            if (error && error.code == NSFileReadUnknownError) {
+                os_log_error(VNA_LOG, "Handler for the feed URL scheme not changed, because consent was refused");
+            } else if (error) {
+                os_log_error(VNA_LOG, "Handler for the feed URL scheme not changed. Error: %{public}@ (%ld)", error.domain, error.code);
+            } else {
+                os_log_debug(VNA_LOG, "Handler for the feed URL scheme changed to %@", applicationURL.lastPathComponent);
+            }
+        }];
+    } else {
+        CFStringRef scheme = (__bridge CFStringRef)feedURLScheme;
+        NSBundle *bundle = [NSBundle bundleWithURL:applicationURL];
+        CFStringRef bundleID = (__bridge CFStringRef)bundle.bundleIdentifier;
+        LSSetDefaultHandlerForURLScheme(scheme, bundleID);
+    }
 }
 
 /* changeCheckFrequency

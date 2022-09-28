@@ -243,8 +243,9 @@
  Opens the cached file of the feed using the default application associated
  with its type.
  */
-- (IBAction)openCachedFile:(id)sender {
-    [[NSWorkspace sharedWorkspace] openFile:self.cachedFile];
+- (IBAction)openCachedFile:(id)sender
+{
+    [NSWorkspace.sharedWorkspace openURL:[NSURL fileURLWithPath:self.cachedFile]];
 }
 
 @end
