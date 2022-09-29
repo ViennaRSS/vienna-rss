@@ -247,7 +247,7 @@
  */
 -(void)saveFolderSettings
 {
-	[[Preferences standardPreferences] setObject:self.archiveState forKey:MAPref_FolderStates];
+	[[Preferences standardPreferences] setArray:self.archiveState forKey:MAPref_FolderStates];
 }
 
 /* archiveState
