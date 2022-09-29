@@ -28,7 +28,6 @@
 
 @class AppController;
 @class ArticleView;
-@class EnclosureView;
 @protocol ArticleContentView;
 @protocol Tab;
 
@@ -37,7 +36,6 @@
 	IBOutlet MessageListView * articleList;
 	NSObject<ArticleContentView, Tab> *articleText;
 	IBOutlet NSSplitView * splitView2;
-	IBOutlet EnclosureView * enclosureView;
 
 	NSInteger tableLayout;
 	BOOL isAppInitialising;

@@ -591,19 +591,6 @@ CA
                                     <action selector="goForward:" target="-1" id="W9b-gw-hWo"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="1260">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
-                            <menuItem title="Hide Status Bar" keyEquivalent="/" id="1259">
-                                <connections>
-                                    <action selector="toggleStatusBar:" target="-1" id="3d0-Ea-3TY"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Show Filter Bar" keyEquivalent="B" id="1325">
-                                <connections>
-                                    <action selector="showHideFilterBar:" target="-1" id="WfC-Sk-kRK"/>
-                                </connections>
-                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="1256">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
@@ -615,6 +602,43 @@ CA
                             <menuItem title="Customize Toolbar…" id="1257">
                                 <connections>
                                     <action selector="runToolbarCustomizationPalette:" target="-1" id="1263"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="1260">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Show Filter Bar" keyEquivalent="B" id="1325">
+                                <connections>
+                                    <action selector="showHideFilterBar:" target="-1" id="WfC-Sk-kRK"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Hide Status Bar" keyEquivalent="/" id="1259">
+                                <connections>
+                                    <action selector="toggleStatusBar:" target="-1" id="3d0-Ea-3TY"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Hide Enclosure Bar" id="Ke1-zq-KLc">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="233" name="enabled" keyPath="self.mainWindow.isKeyWindow" id="9vk-Xi-YWs"/>
+                                    <binding destination="EBo-gz-68t" name="hidden" keyPath="values.ShowEnclosureBar" id="QnW-ky-QM6">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="EBo-gz-68t" name="value" keyPath="values.ShowEnclosureBar" id="SLW-Ba-hcT">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Show Enclosure Bar" id="5V8-N1-SQd">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="233" name="enabled" keyPath="self.mainWindow.isKeyWindow" id="8vr-rK-zhC"/>
+                                    <binding destination="EBo-gz-68t" name="hidden" keyPath="values.ShowEnclosureBar" id="7He-1A-3pi"/>
+                                    <binding destination="EBo-gz-68t" name="value" keyPath="values.ShowEnclosureBar" id="LCx-JV-B8N"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="XJ7-to-sLq"/>
@@ -897,5 +921,6 @@ CA
                 <outlet property="updaterDelegate" destination="233" id="fpC-Bd-pjz"/>
             </connections>
         </customObject>
+        <userDefaultsController representsSharedInstance="YES" id="EBo-gz-68t"/>
     </objects>
 </document>

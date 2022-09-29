@@ -41,9 +41,15 @@
 
 #define PROGRESS_INDICATOR_DIMENSION 8
 
+// Shared defaults key
+NSString * const MAPref_ShowEnclosureBar = @"ShowEnclosureBar";
+
+static void *ObserverContext = &ObserverContext;
+
 @interface ArticleListView ()
 
 @property (weak, nonatomic) IBOutlet NSStackView *contentStackView;
+@property (weak, nonatomic) IBOutlet EnclosureView *enclosureView;
 
 -(void)initTableView;
 -(BOOL)copyTableSelection:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard;
@@ -57,8 +63,6 @@
 -(void)makeRowSelectedAndVisible:(NSInteger)rowIndex;
 -(void)updateArticleListRowHeight;
 -(void)setOrientation:(NSInteger)newLayout;
--(void)showEnclosureView;
--(void)hideEnclosureView;
 
 @property NSView *articleTextView;
 @property (strong) NSLayoutConstraint *textViewWidthConstraint;
@@ -186,6 +190,12 @@
 
 	// Done initialising
 	isAppInitialising = NO;
+
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults addObserver:self
+                   forKeyPath:MAPref_ShowEnclosureBar
+                      options:NSKeyValueObservingOptionNew
+                      context:ObserverContext];
 }
 
 /* initTableView
@@ -877,16 +887,21 @@
 
 // Display the enclosure view below the article list view.
 - (void)showEnclosureView {
-    if (![self.contentStackView.views containsObject:enclosureView]) {
-        [self.contentStackView addView:enclosureView
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    if (![userDefaults boolForKey:MAPref_ShowEnclosureBar]) {
+        return;
+    }
+
+    if (![self.contentStackView.views containsObject:self.enclosureView]) {
+        [self.contentStackView addView:self.enclosureView
                             inGravity:NSStackViewGravityTop];
     }
 }
 
 // Hide the enclosure view if it is present.
 - (void)hideEnclosureView {
-    if ([self.contentStackView.views containsObject:enclosureView]) {
-        [self.contentStackView removeView:enclosureView];
+    if ([self.contentStackView.views containsObject:self.enclosureView]) {
+        [self.contentStackView removeView:self.enclosureView];
     }
 }
 
@@ -1196,7 +1211,7 @@
 		else
 		{
 			[self showEnclosureView];
-			[enclosureView setEnclosureFile:oneArticle.enclosure];
+			[self.enclosureView setEnclosureFile:oneArticle.enclosure];
 		}
 	}
 }
@@ -1655,17 +1670,39 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults removeObserver:self
+                      forKeyPath:MAPref_ShowEnclosureBar
+                         context:ObserverContext];
 	[splitView2 setDelegate:nil];
 	[articleList setDelegate:nil];
 }
 
 // MARK: Key-value observation
 
-
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary<NSKeyValueChangeKey,id> *)change
-                       context:(void *)context {
+                       context:(void *)context
+{
+    if (context != ObserverContext) {
+        [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
+        return;
+    }
+
+    if ([keyPath isEqualToString:MAPref_ShowEnclosureBar]) {
+        NSNumber *showEnclosureBar = change[NSKeyValueChangeNewKey];
+        if (showEnclosureBar.boolValue) {
+            [self refreshArticlePane];
+        } else {
+            [self hideEnclosureView];
+        }
+        return;
+    }
+
     //TODO
 }
 

@@ -304,6 +304,7 @@ static Preferences * _standardPreferences = nil;
 	defaultValues[MAPref_ShouldSaveFeedSource] = boolYes;
 	defaultValues[MAPref_ShouldSaveFeedSourceBackup] = boolNo;
     defaultValues[MAPref_ShowDetailsOnFeedCredentialsDialog] = boolNo;
+    defaultValues[MAPref_ShowEnclosureBar] = boolYes;
 
     // Archives
     defaultValues[MAPref_ArticleListFont] = [NSKeyedArchiver vna_archivedDataWithRootObject:defaultFont
