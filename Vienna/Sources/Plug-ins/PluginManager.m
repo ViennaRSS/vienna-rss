@@ -19,14 +19,18 @@
 //
 
 #import "PluginManager.h"
-#import "HelperFunctions.h"
-#import "StringExtensions.h"
+
 #import "AppController.h"
-#import "Preferences.h"
 #import "Article.h"
 #import "BrowserPane.h"
+#import "HelperFunctions.h"
+#import "NSFileManager+Paths.h"
+#import "Preferences.h"
 #import "SearchMethod.h"
+#import "StringExtensions.h"
 #import "Vienna-Swift.h"
+
+static NSString * const VNAPlugInsDirectoryName = @"Plugins";
 
 @implementation PluginManager
 
@@ -40,6 +44,16 @@
 		allPlugins = nil;
 	}
 	return self;
+}
+
++ (NSURL *)plugInsDirectoryURL
+{
+    NSFileManager *fileManager = NSFileManager.defaultManager;
+    NSURL *appSupportURL = fileManager.vna_applicationSupportDirectory;
+    NSString *pathComponent = VNAPlugInsDirectoryName;
+    NSURL *plugInsURL = [appSupportURL URLByAppendingPathComponent:pathComponent
+                                                       isDirectory:YES];
+    return plugInsURL;
 }
 
 /* resetPlugins
@@ -62,7 +76,7 @@
 	path = [[NSBundle mainBundle].sharedSupportPath stringByAppendingPathComponent:@"Plugins"];
 	loadMapFromPath(path, pluginPaths, YES, nil);
 
-	path = [Preferences standardPreferences].pluginsFolder;
+	path = PluginManager.plugInsDirectoryURL.path;
 	loadMapFromPath(path, pluginPaths, YES, nil);
 
 	for (pluginName in pluginPaths)

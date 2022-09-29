@@ -421,8 +421,6 @@
 
 	[[Preferences standardPreferences] setObject:tabLinks forKey:MAPref_TabList];
 	[[Preferences standardPreferences] setObject:tabTitles forKey:MAPref_TabTitleDictionary];
-
-	[[Preferences standardPreferences] savePreferences];
 }
 
 -(void)restoreTabs {

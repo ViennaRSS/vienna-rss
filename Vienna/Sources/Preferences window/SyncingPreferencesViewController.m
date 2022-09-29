@@ -133,7 +133,6 @@ static BOOL _credentialsChanged;
     BOOL sync = [sender state] == NSControlStateValueOn;
     Preferences *prefs = [Preferences standardPreferences];
     prefs.syncGoogleReader = sync;
-    [prefs savePreferences];
     if (sync) {
         [openReaderSource setEnabled:YES];
         [openReaderHost setEnabled:YES];
@@ -193,7 +192,6 @@ static BOOL _credentialsChanged;
         }
     }
     prefs.syncServer = openReaderHost.stringValue;
-    [prefs savePreferences];
 }
 
 /* handleUserTextDidChange [delegate]
@@ -217,7 +215,6 @@ static BOOL _credentialsChanged;
         }
     }
     prefs.syncingUser = username.stringValue;
-    [prefs savePreferences];
 }
 
 /* handlePasswordTextDidChange [delegate]

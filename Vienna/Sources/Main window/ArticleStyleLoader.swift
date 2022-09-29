@@ -9,6 +9,8 @@ import Foundation
 
 class ArticleStyleLoader: NSObject {
 
+    @objc static var stylesDirectoryURL = FileManager.default.applicationSupportDirectory.appendingPathComponent("Styles", isDirectory: true)
+
     private static var loaded = false
 
     private static var styles = NSMutableDictionary()
@@ -23,7 +25,7 @@ class ArticleStyleLoader: NSObject {
             return [:]
         }
         loadMapFromPath(path, styles, true, nil)
-        loadMapFromPath(Preferences.standard.stylesFolder, styles, true, nil)
+        loadMapFromPath(stylesDirectoryURL.path, styles, true, nil)
 
         loaded = true
 

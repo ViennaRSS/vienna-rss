@@ -144,10 +144,8 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
         }
         let tabTitles = Dictionary(tabTitleList) { $1 }
 
-        Preferences.standard.setArray(tabLinks as [Any], forKey: "TabList")
-        Preferences.standard.setObject(tabTitles, forKey: "TabTitleDict")
-
-        Preferences.standard.save()
+        Preferences.standard.set(tabLinks, forKey: "TabList")
+        Preferences.standard.set(tabTitles, forKey: "TabTitleDict")
     }
 
     func closeTab(_ tabViewItem: NSTabViewItem) {

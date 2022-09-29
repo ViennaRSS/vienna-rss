@@ -24,10 +24,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Preferences : NSObject {
-	id userPrefs;
-	NSString * profilePath;
-	NSString * preferencesPath;
+@interface Preferences : NSUserDefaults {
 	float markReadInterval;
 	NSInteger minimumFontSize;
 	NSInteger refreshFrequency;
@@ -55,10 +52,6 @@ NS_ASSUME_NONNULL_BEGIN
 	NSString * displayStyle;
 	CGFloat textSizeMultiplier;
 	NSString * defaultDatabase;
-	NSString * imagesFolder;
-	NSString * scriptsFolder;
-	NSString * stylesFolder;
-	NSString * pluginsFolder;
 	NSString * feedSourcesFolder;
 	NSFont * folderFont;
 	NSFont * articleFont;
@@ -75,35 +68,12 @@ extern NSString * const kMA_Notify_UseJavaScriptChange;
 
 @property (class, readonly, nonatomic) Preferences *standardPreferences;
 
-// Accessor functions
--(void)savePreferences;
--(BOOL)boolForKey:(NSString *)defaultName;
--(NSInteger)integerForKey:(NSString *)defaultName;
--(NSString *)stringForKey:(NSString *)defaultName;
--(NSArray *)arrayForKey:(NSString *)defaultName;
--(id)objectForKey:(NSString *)defaulName;
--(void)setBool:(BOOL)value forKey:(NSString *)defaultName;
--(void)setInteger:(NSInteger)value forKey:(NSString *)defaultName;
--(void)setString:(NSString *)value forKey:(NSString *)defaultName;
--(void)setArray:(NSArray *)value forKey:(NSString *)defaultName;
--(void)setObject:(id)value forKey:(NSString *)defaultName;
-- (void)removeObjectForKey:(NSString *)defaultName;
+@property (class, readonly) NSUserDefaults *standardUserDefaults NS_UNAVAILABLE;
+- (instancetype)initWithSuiteName:(nullable NSString *)suitename NS_UNAVAILABLE;
 
 // Path to default database
 -(NSString *)defaultDatabase;
 -(void)setDefaultDatabase:(NSString *)newDatabase;
-
-// Path to scripts folder
-@property (readonly, nonatomic) NSString *scriptsFolder;
-
-// Path to images folder
-@property (readonly, nonatomic) NSString *imagesFolder;
-
-// Path to styles folder
-@property (readonly, nonatomic) NSString *stylesFolder;
-
-// Path to the external plugins folder
-@property (readonly, nonatomic) NSString *pluginsFolder;
 
 // Read-only internal settings
 @property (nonatomic, readonly) NSInteger backTrackQueueSize;
@@ -169,9 +139,6 @@ extern NSString * const kMA_Notify_UseJavaScriptChange;
 
 // Do we show an icon in the status bar?
 @property (nonatomic) BOOL showAppInStatusBar;
-
-// Handle update via Sparkle / ViennaSparkleDelegate
--(void)handleUpdateRestart;
 
 // Show or hide the status bar
 @property (nonatomic) BOOL showStatusBar;

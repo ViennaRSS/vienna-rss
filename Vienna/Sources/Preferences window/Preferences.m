@@ -38,19 +38,11 @@
 // Initial paths
 static NSString * const MA_DefaultStyleName = @"Default";
 static NSString * const MA_Database_Name = @"messages.db";
-static NSString * const MA_ImagesFolder_Name = @"Images";
-static NSString * const MA_StylesFolder_Name = @"Styles";
-static NSString * const MA_ScriptsFolder_Name = @"Scripts";
-static NSString * const MA_PluginsFolder_Name = @"Plugins";
 static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 
 // NSNotificationCenter string constants
 NSString * const kMA_Notify_MinimumFontSizeChange = @"MA_Notify_MinimumFontSizeChange";
 NSString * const kMA_Notify_UseJavaScriptChange = @"MA_Notify_UseJavaScriptChange";
-
-
-// The default preferences object.
-static Preferences * _standardPreferences = nil;
 
 // Private methods
 @interface Preferences ()
@@ -68,11 +60,14 @@ static Preferences * _standardPreferences = nil;
 /* standardPreferences
  * Return the single set of Vienna wide preferences object.
  */
-+(Preferences *)standardPreferences
++ (Preferences *)standardPreferences
 {
-	if (_standardPreferences == nil)
-		_standardPreferences = [[Preferences alloc] init];
-	return _standardPreferences;
+    static Preferences *preferences = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        preferences = [self new];
+    });
+    return preferences;
 }
 
 /* init
@@ -82,94 +77,16 @@ static Preferences * _standardPreferences = nil;
 {
 	if ((self = [super init]) != nil)
 	{
-		// Look to see where we're getting our preferences from. This is a command line
-		// argument of the form:
-		//
-		//  -profile <name>
-		//
-		// where <name> is the name of the folder at the same level of the application.
-		// If no profile is specified, is called "default" or is absent then we fall back
-		// on the user profile.
-		//
-		NSArray * appArguments = [NSProcessInfo processInfo].arguments;
-		NSEnumerator * enumerator = [appArguments objectEnumerator];
-		NSString * argName;
-		
-		while ((argName = [enumerator nextObject]) != nil)
-		{
-			if ([argName.lowercaseString isEqualToString:@"-profile"])
-			{
-				NSString * argValue = [enumerator nextObject];
-				if (argValue == nil || [argValue isEqualToString:@"default"])
-					break;
-				profilePath = argValue;
-				break;
-			}
-		}
-		
-		// Look to see if there's a cached profile path from the updater
-		if (profilePath == nil)
-			profilePath = [[NSUserDefaults standardUserDefaults] stringForKey:MAPref_Profile_Path];
-		[[NSUserDefaults standardUserDefaults] removeObjectForKey:MAPref_Profile_Path];
-		
 		// Merge in the user preferences from the defaults.
 		NSDictionary * defaults = self.allocFactoryDefaults;
-		if (profilePath == nil)
-		{
-			preferencesPath = nil;
-			userPrefs = [NSUserDefaults standardUserDefaults];
-            [self migrateEncodedPreferences];
-			[userPrefs registerDefaults:defaults];
-			
-			// Application-specific folder locations
-			defaultDatabase = [userPrefs valueForKey:MAPref_DefaultDatabase];
-			NSFileManager *fileManager = NSFileManager.defaultManager;
-			NSString *appSupportPath = fileManager.vna_applicationSupportDirectory.path;
-			imagesFolder = [appSupportPath stringByAppendingPathComponent:MA_ImagesFolder_Name];
-			stylesFolder = [appSupportPath stringByAppendingPathComponent:MA_StylesFolder_Name];
-			pluginsFolder = [appSupportPath stringByAppendingPathComponent:MA_PluginsFolder_Name];
-			scriptsFolder = fileManager.vna_applicationScriptsDirectory.path;
-			feedSourcesFolder = [appSupportPath stringByAppendingPathComponent:MA_FeedSourcesFolder_Name];
-		}
-		else
-		{
-			// Make sure profilePath exists and create it otherwise. A failure to create the profile
-			// path counts as treating the profile as transient for this session.
-			NSFileManager * fileManager = [NSFileManager defaultManager];
-			BOOL isDir;
-			
-			if (![fileManager fileExistsAtPath:profilePath isDirectory:&isDir])
-			{
-				NSError * error;
-				if (![fileManager createDirectoryAtPath:profilePath withIntermediateDirectories:YES attributes:NULL error:&error])
-				{
-					NSLog(@"Cannot create profile folder %@: %@", profilePath, error);
-					profilePath = nil;
-				}
-			}
-			
-			// The preferences file is stored under the profile folder with the bundle identifier
-			// name plus the .plist extension. (This is the same convention used by NSUserDefaults.)
-			if (profilePath != nil)
-			{
-				NSDictionary * fileAttributes = [NSBundle mainBundle].infoDictionary;
-				preferencesPath = [profilePath stringByAppendingPathComponent:fileAttributes[@"CFBundleIdentifier"]];
-				preferencesPath = [preferencesPath stringByAppendingString:@".plist"];
-			}
-			userPrefs = [[NSMutableDictionary alloc] initWithDictionary:defaults];
-			if (preferencesPath != nil)
-				[userPrefs addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:preferencesPath]];
-			[self migrateEncodedPreferences];
+		[self migrateEncodedPreferences];
+		[self registerDefaults:defaults];
 
-			// Other folders are local to the profilePath
-			defaultDatabase = [profilePath stringByAppendingPathComponent:MA_Database_Name];
-			imagesFolder = [profilePath stringByAppendingPathComponent:MA_ImagesFolder_Name].stringByExpandingTildeInPath;
-			stylesFolder = [profilePath stringByAppendingPathComponent:MA_StylesFolder_Name].stringByExpandingTildeInPath;
-			scriptsFolder = [profilePath stringByAppendingPathComponent:MA_ScriptsFolder_Name].stringByExpandingTildeInPath;
-			pluginsFolder = [profilePath stringByAppendingPathComponent:MA_PluginsFolder_Name].stringByExpandingTildeInPath;
-			feedSourcesFolder = [profilePath stringByAppendingPathComponent:MA_FeedSourcesFolder_Name].stringByExpandingTildeInPath;
-		}
-        
+		// Application-specific folder locations
+		defaultDatabase = [self stringForKey:MAPref_DefaultDatabase];
+		NSFileManager *fileManager = NSFileManager.defaultManager;
+		NSString *appSupportPath = fileManager.vna_applicationSupportDirectory.path;
+		feedSourcesFolder = [appSupportPath stringByAppendingPathComponent:MA_FeedSourcesFolder_Name];
 		
 		// Load those settings that we cache.
 		foldersTreeSortMethod = [self integerForKey:MAPref_AutoSortFoldersTree];
@@ -178,15 +95,15 @@ static Preferences * _standardPreferences = nil;
 		layout = [self integerForKey:MAPref_Layout];
 		refreshOnStartup = [self boolForKey:MAPref_CheckForNewArticlesOnStartup];
 		markUpdatedAsNew = [self boolForKey:MAPref_CheckForUpdatedArticles];
-		markReadInterval = [[userPrefs valueForKey:MAPref_MarkReadInterval] floatValue];
+		markReadInterval = [self floatForKey:MAPref_MarkReadInterval];
 		minimumFontSize = [self integerForKey:MAPref_MinimumFontSize];
 		newArticlesNotification = [self integerForKey:MAPref_NewArticlesNotification];
 		enableMinimumFontSize = [self boolForKey:MAPref_UseMinimumFontSize];
 		autoExpireDuration = [self integerForKey:MAPref_AutoExpireDuration];
 		openLinksInVienna = [self boolForKey:MAPref_OpenLinksInVienna];
 		openLinksInBackground = [self boolForKey:MAPref_OpenLinksInBackground];
-		displayStyle = [userPrefs valueForKey:MAPref_ActiveStyleName];
-		textSizeMultiplier = [[userPrefs valueForKey:MAPref_ActiveTextSizeMultiplier] doubleValue];
+		displayStyle = [self stringForKey:MAPref_ActiveStyleName];
+		textSizeMultiplier = [self doubleForKey:MAPref_ActiveTextSizeMultiplier];
 		showFolderImages = [self boolForKey:MAPref_ShowFolderImages];
 		showStatusBar = [self boolForKey:MAPref_ShowStatusBar];
 		showFilterBar = [self boolForKey:MAPref_ShowFilterBar];
@@ -215,10 +132,10 @@ static Preferences * _standardPreferences = nil;
         // Open Reader sync
         syncGoogleReader = [self boolForKey:MAPref_SyncGoogleReader];
         prefersGoogleNewSubscription = [self boolForKey:MAPref_GoogleNewSubscription];
-		syncServer = [userPrefs valueForKey:MAPref_SyncServer];
-		syncingUser = [userPrefs valueForKey:MAPref_SyncingUser];
-		_syncingAppId = [userPrefs valueForKey:MAPref_SyncingAppId];
-		_syncingAppKey = [userPrefs valueForKey:MAPref_SyncingAppKey];
+		syncServer = [self stringForKey:MAPref_SyncServer];
+		syncingUser = [self stringForKey:MAPref_SyncingUser];
+		_syncingAppId = [self stringForKey:MAPref_SyncingAppId];
+		_syncingAppKey = [self stringForKey:MAPref_SyncingAppKey];
 				
 		//Sparkle autoupdate
         alwaysAcceptBetas = [self boolForKey:MAPref_AlwaysAcceptBetas];
@@ -330,7 +247,7 @@ static Preferences * _standardPreferences = nil;
 
 - (void)migrateEncodedPreferences
 {
-    if ([userPrefs objectForKey:MAPref_Deprecated_ArticleListSortOrders]) {
+    if ([self objectForKey:MAPref_Deprecated_ArticleListSortOrders]) {
         NSData *archive = [self objectForKey:MAPref_Deprecated_ArticleListSortOrders];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -350,10 +267,10 @@ static Preferences * _standardPreferences = nil;
         NSData *keyedArchive = [NSKeyedArchiver vna_archivedDataWithRootObject:[sortDescriptors copy]
                                                          requiringSecureCoding:YES];
         [self setObject:keyedArchive forKey:MAPref_ArticleListSortOrders];
-        [userPrefs removeObjectForKey:MAPref_Deprecated_ArticleListSortOrders];
+        [self removeObjectForKey:MAPref_Deprecated_ArticleListSortOrders];
     }
 
-    if ([userPrefs objectForKey:MAPref_Deprecated_DownloadItemList]) {
+    if ([self objectForKey:MAPref_Deprecated_DownloadItemList]) {
         // Download items were stored as an array of non-keyed archives.
         NSArray *array = [self objectForKey:MAPref_Deprecated_DownloadItemList];
         NSMutableArray *downloadItems = [NSMutableArray array];
@@ -374,10 +291,10 @@ static Preferences * _standardPreferences = nil;
         NSData *keyedArchive = [NSKeyedArchiver vna_archivedDataWithRootObject:downloadItems
                                                          requiringSecureCoding:YES];
         [self setObject:keyedArchive forKey:MAPref_DownloadItemList];
-        [userPrefs removeObjectForKey:MAPref_Deprecated_DownloadItemList];
+        [self removeObjectForKey:MAPref_Deprecated_DownloadItemList];
     }
 
-    if ([userPrefs objectForKey:MAPref_Deprecated_FolderListFont]) {
+    if ([self objectForKey:MAPref_Deprecated_FolderListFont]) {
         NSData *archive = [self objectForKey:MAPref_Deprecated_FolderListFont];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -386,10 +303,10 @@ static Preferences * _standardPreferences = nil;
         NSData *keyedArchive = [NSKeyedArchiver vna_archivedDataWithRootObject:font
                                                          requiringSecureCoding:YES];
         [self setObject:keyedArchive forKey:MAPref_FolderListFont];
-        [userPrefs removeObjectForKey:MAPref_Deprecated_FolderListFont];
+        [self removeObjectForKey:MAPref_Deprecated_FolderListFont];
     }
 
-    if ([userPrefs objectForKey:MAPref_Deprecated_ArticleListFont]) {
+    if ([self objectForKey:MAPref_Deprecated_ArticleListFont]) {
         NSData *archive = [self objectForKey:MAPref_Deprecated_ArticleListFont];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -398,138 +315,8 @@ static Preferences * _standardPreferences = nil;
         NSData *keyedArchive = [NSKeyedArchiver vna_archivedDataWithRootObject:font
                                                          requiringSecureCoding:YES];
         [self setObject:keyedArchive forKey:MAPref_ArticleListFont];
-        [userPrefs removeObjectForKey:MAPref_Deprecated_ArticleListFont];
+        [self removeObjectForKey:MAPref_Deprecated_ArticleListFont];
     }
-}
-
-/* savePreferences
- * Save the user preferences back to where we loaded them from.
- */
--(void)savePreferences
-{
-	if (preferencesPath == nil)
-		[userPrefs synchronize];
-	else
-	{
-		if (![userPrefs writeToFile:preferencesPath atomically:NO])
-			NSLog(@"Failed to update preferences to %@", preferencesPath);
-	}
-}
-
-/* setBool
- * Sets the value of the specified default to the given boolean value.
- */
--(void)setBool:(BOOL)value forKey:(NSString *)defaultName
-{
-	[userPrefs setObject:@(value) forKey:defaultName];
-}
-
-/* setInteger
- * Sets the value of the specified default to the given integer value.
- */
--(void)setInteger:(NSInteger)value forKey:(NSString *)defaultName
-{
-	[userPrefs setObject:@(value) forKey:defaultName];
-}
-
-/* setString
- * Sets the value of the specified default to the given string.
- */
--(void)setString:(NSString *)value forKey:(NSString *)defaultName
-{
-	[userPrefs setObject:value forKey:defaultName];
-}
-
-/* setArray
- * Sets the value of the specified default to the given array.
- */
--(void)setArray:(NSArray *)value forKey:(NSString *)defaultName
-{
-	[userPrefs setObject:value forKey:defaultName];
-}
-
-/* setObject
- * Sets the value of the specified default to the given object.
- */
--(void)setObject:(id)value forKey:(NSString *)defaultName
-{
-	[userPrefs setObject:value forKey:defaultName];
-}
-
-/* boolForKey
- * Returns the boolean value of the given default object.
- */
--(BOOL)boolForKey:(NSString *)defaultName
-{
-	return [[userPrefs valueForKey:defaultName] boolValue];
-}
-
-/* integerForKey
- * Returns the integer value of the given default object.
- */
--(NSInteger)integerForKey:(NSString *)defaultName
-{
-	return [[userPrefs valueForKey:defaultName] integerValue];
-}
-
-/* stringForKey
- * Returns the string value of the given default object.
- */
--(NSString *)stringForKey:(NSString *)defaultName
-{
-	return [userPrefs valueForKey:defaultName];
-}
-
-/* arrayForKey
- * Returns the string value of the given default array.
- */
--(NSArray *)arrayForKey:(NSString *)defaultName
-{
-	return [userPrefs valueForKey:defaultName];
-}
-
-/* objectForKey
- * Returns the value of the given default object.
- */
--(id)objectForKey:(NSString *)defaultName
-{
-	return [userPrefs objectForKey:defaultName];
-}
-
-- (void)removeObjectForKey:(NSString *)defaultName {
-    [userPrefs removeObjectForKey:defaultName];
-}
-
-/* imagesFolder
- * Return the path to where the folder images are stored.
- */
--(NSString *)imagesFolder
-{
-	return imagesFolder;
-}
-
-/* pluginsFolder
- * Returns the path to where the user plugins are stored
- */
--(NSString *)pluginsFolder
-{
-	return pluginsFolder;
-}
-
-/* stylesFolder
- * Return the path to where the user styles are stored.
- */
--(NSString *)stylesFolder
-{
-	return stylesFolder;
-}
-
-/* scriptsFolder
- * Return the path to where the scripts are stored.
- */
--(NSString *)scriptsFolder
-{
-	return scriptsFolder;
 }
 
 /* defaultDatabase
@@ -548,7 +335,7 @@ static Preferences * _standardPreferences = nil;
 	if (defaultDatabase != newDatabase)
 	{
 		defaultDatabase = newDatabase;
-		[userPrefs setValue:newDatabase forKey:MAPref_DefaultDatabase];
+		[self setObject:newDatabase forKey:MAPref_DefaultDatabase];
 	}
 }
 
@@ -938,7 +725,7 @@ static Preferences * _standardPreferences = nil;
 	if (![displayStyle isEqualToString:newStyleName])
 	{
 		displayStyle = newStyleName;
-		[self setString:displayStyle forKey:MAPref_ActiveStyleName];
+		[self setObject:displayStyle forKey:MAPref_ActiveStyleName];
 		if (flag)
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_StyleChange" object:nil];
 	}
@@ -1122,14 +909,6 @@ static Preferences * _standardPreferences = nil;
 	}
 }
 
-/* handleUpdateRestart
- * Called when Sparkle is about to restart Vienna.
- */
--(void)handleUpdateRestart
-{
-	[[NSUserDefaults standardUserDefaults] setObject:profilePath forKey:MAPref_Profile_Path];
-}
-
 /* showAppInStatusBar
  * Returns whether Vienna shows an icon in the status bar.
  */
@@ -1292,7 +1071,7 @@ static Preferences * _standardPreferences = nil;
 	if (![syncServer isEqualToString:newServer])
 	{
 		syncServer = [newServer copy];
-		[self setString:syncServer forKey:MAPref_SyncServer];
+		[self setObject:syncServer forKey:MAPref_SyncServer];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
 	}
 }
@@ -1310,7 +1089,7 @@ static Preferences * _standardPreferences = nil;
 	if (![syncingUser isEqualToString:newUser])
 	{
 		syncingUser = [newUser copy];
-		[self setString:syncingUser forKey:MAPref_SyncingUser];
+		[self setObject:syncingUser forKey:MAPref_SyncingUser];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
 	}
 }
