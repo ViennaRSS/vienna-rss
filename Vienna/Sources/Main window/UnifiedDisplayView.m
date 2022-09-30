@@ -473,7 +473,7 @@
 	// Remember the current folder and article
     NSString * guid = self.selectedArticle.guid;
 	[prefs setInteger:self.controller.articleController.currentFolderId forKey:MAPref_CachedFolderID];
-	[prefs setObject:(guid != nil ? guid : @"") forKey:MAPref_CachedArticleGUID];
+	[prefs setString:(guid != nil ? guid : @"") forKey:MAPref_CachedArticleGUID];
 }
 
 /* handleKeyDown [delegate]

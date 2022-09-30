@@ -24,7 +24,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Preferences : NSUserDefaults {
+@interface Preferences : NSObject {
+	NSUserDefaults *userPrefs;
 	float markReadInterval;
 	NSInteger minimumFontSize;
 	NSInteger refreshFrequency;
@@ -68,8 +69,18 @@ extern NSString * const kMA_Notify_UseJavaScriptChange;
 
 @property (class, readonly, nonatomic) Preferences *standardPreferences;
 
-@property (class, readonly) NSUserDefaults *standardUserDefaults NS_UNAVAILABLE;
-- (instancetype)initWithSuiteName:(nullable NSString *)suitename NS_UNAVAILABLE;
+// Accessor functions
+-(BOOL)boolForKey:(NSString *)defaultName;
+-(NSInteger)integerForKey:(NSString *)defaultName;
+-(NSString *)stringForKey:(NSString *)defaultName;
+-(NSArray *)arrayForKey:(NSString *)defaultName;
+-(id)objectForKey:(NSString *)defaulName;
+-(void)setBool:(BOOL)value forKey:(NSString *)defaultName;
+-(void)setInteger:(NSInteger)value forKey:(NSString *)defaultName;
+-(void)setString:(NSString *)value forKey:(NSString *)defaultName;
+-(void)setArray:(NSArray *)value forKey:(NSString *)defaultName;
+-(void)setObject:(id)value forKey:(NSString *)defaultName;
+- (void)removeObjectForKey:(NSString *)defaultName;
 
 // Path to default database
 -(NSString *)defaultDatabase;
