@@ -42,11 +42,12 @@
 #import "ActivityItem.h"
 #import "Article.h"
 
-static NSString *LoginBaseURL = @"https://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader";
+static NSString *LoginBaseURL = @"%@://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader";
 static NSString *ClientName = @"ViennaRSS";
 
 // host specific variables
 static NSString *openReaderHost;
+static NSString *openReaderScheme;
 static NSString *username;
 static NSString *password;
 static NSString *APIBaseURL;
@@ -109,11 +110,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _openReader = [[OpenReader alloc] init];
-        Preferences *prefs = [Preferences standardPreferences];
-        if (prefs.syncGoogleReader) {
-            openReaderHost = prefs.syncServer;
-            APIBaseURL = [NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost];
-        }
+        [_openReader configureForSpecificHost];
     });
     return _openReader;
 }
@@ -176,7 +173,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         self.openReaderStatus = waitingClientToken;
 
         [self configureForSpecificHost];
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost]];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderScheme, openReaderHost]];
         NSMutableURLRequest *myRequest = [NSMutableURLRequest requestWithURL:url];
         myRequest.HTTPMethod = @"POST";
         [myRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
@@ -244,6 +241,10 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     Preferences *prefs = [Preferences standardPreferences];
     username = prefs.syncingUser;
     openReaderHost = prefs.syncServer;
+    openReaderScheme = prefs.syncScheme;
+    if (!openReaderScheme) {
+        openReaderScheme = @"https";
+    }
     // default settings
     hostSendsHexaItemId = NO;
     hostRequiresSParameter = NO;
@@ -260,7 +261,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     }
     // restore from keychain
     password = [VNAKeychain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"];
-    APIBaseURL = [NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost];
+    APIBaseURL = [NSString stringWithFormat:@"%@://%@/reader/api/0/", openReaderScheme, openReaderHost];
 } // configureForSpecificHost
 
 /* pass the T token
@@ -895,7 +896,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             if (hostRequiresHexaForFeedId) {                     // TheOldReader
                 NSString *identifier =
                   [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)];
-                legacyKey = [NSString stringWithFormat:@"https://%@/reader/public/atom/%@", openReaderHost, identifier];
+                legacyKey = [NSString stringWithFormat:@"%@://%@/reader/public/atom/%@", openReaderScheme, openReaderHost, identifier];
             } else {
                 legacyKey = feedURL;
             }

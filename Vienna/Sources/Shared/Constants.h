@@ -70,6 +70,7 @@ extern NSString * MAPref_SyncGoogleReader;
 extern NSString * MAPref_GoogleNewSubscription;
 extern NSString * MAPref_ConcurrentDownloads;
 extern NSString * MAPref_SyncServer;
+extern NSString * MAPref_SyncScheme;
 extern NSString * MAPref_SyncingUser;
 extern NSString * MAPref_SyncingAppId;
 extern NSString * MAPref_SyncingAppKey;

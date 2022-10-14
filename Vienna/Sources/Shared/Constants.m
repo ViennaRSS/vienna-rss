@@ -70,6 +70,7 @@ NSString * MAPref_SyncGoogleReader = @"SyncGoogleReader";
 NSString * MAPref_GoogleNewSubscription = @"GoogleNewSubscription";
 NSString * MAPref_ConcurrentDownloads = @"ConcurrentDownloads";
 NSString * MAPref_SyncServer = @"SyncServer";
+NSString * MAPref_SyncScheme = @"SyncScheme";
 NSString * MAPref_SyncingUser = @"SyncingUser";
 NSString * MAPref_SyncingAppId = @"SyncingAppId";
 NSString * MAPref_SyncingAppKey = @"SyncingAppKey";

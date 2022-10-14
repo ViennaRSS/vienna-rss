@@ -31,6 +31,11 @@
 @implementation SyncingPreferencesViewController
 static BOOL _credentialsChanged;
 
+static NSString *syncScheme;
+static NSString *serverAndPath;
+static NSURL *serverURL;
+static NSString *syncingUser;
+
 @synthesize syncButton;
 
 - (void)viewWillAppear {
@@ -50,17 +55,24 @@ static BOOL _credentialsChanged;
     // restore from Preferences and from keychain
     Preferences * prefs = [Preferences standardPreferences];
     syncButton.state = prefs.syncGoogleReader ? NSControlStateValueOn : NSControlStateValueOff;
-    NSString * theUsername = prefs.syncingUser;
-    if (!theUsername)
-        theUsername=@"";
-    NSString * theHost = prefs.syncServer;
-    if (!theHost)
-        theHost=@"";
-    NSString * thePassword = [VNAKeychain getGenericPasswordFromKeychain:theUsername serviceName:@"Vienna sync"];
+    syncingUser = prefs.syncingUser;
+    if (!syncingUser) {
+        syncingUser=@"";
+    }
+    syncScheme = prefs.syncScheme;
+    if (!syncScheme) {
+        syncScheme = @"https";
+    }
+    serverAndPath = prefs.syncServer;
+    if (!serverAndPath) {
+        serverAndPath=@"";
+    }
+    serverURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@", syncScheme, serverAndPath]];
+    NSString * thePassword = [VNAKeychain getGenericPasswordFromKeychain:syncingUser serviceName:@"Vienna sync"];
     if (!thePassword)
         thePassword=@"";
-    username.stringValue = theUsername;
-    openReaderHost.stringValue = theHost;
+    username.stringValue = syncingUser;
+    openReaderHost.stringValue = serverAndPath;
     password.stringValue = thePassword;
     
     if(!prefs.syncGoogleReader)
@@ -92,7 +104,7 @@ static BOOL _credentialsChanged;
                 {
                     [openReaderSource addItemWithTitle:key];
                     NSDictionary * itemDict = [sourcesDict valueForKey:key];
-                    if ([theHost isEqualToString:[itemDict valueForKey:@"Address"]])
+                    if ([serverAndPath isEqualToString:[itemDict valueForKey:@"Address"]])
                     {
                         [openReaderSource selectItemWithTitle:key];
                         [self changeSource:nil];
@@ -102,7 +114,7 @@ static BOOL _credentialsChanged;
                 if (!match)
                 {
                     [openReaderSource selectItemWithTitle:NSLocalizedString(@"Other", nil)];
-                    openReaderHost.stringValue = theHost;
+                    openReaderHost.stringValue = serverURL.absoluteString;
                 }
             }
         }
@@ -118,6 +130,10 @@ static BOOL _credentialsChanged;
 -(void)viewWillDisappear
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    Preferences * prefs = [Preferences standardPreferences];
+    prefs.syncScheme = syncScheme;
+    prefs.syncServer = serverAndPath;
+    prefs.syncingUser = syncingUser;
     if(syncButton.state == NSControlStateValueOn && _credentialsChanged)
     {
         [[OpenReader sharedManager] resetAuthentication];
@@ -168,8 +184,7 @@ static BOOL _credentialsChanged;
 
 - (IBAction)visitWebsite:(id)sender
 {
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"https://%@/", openReaderHost.stringValue]];
-    [[NSWorkspace sharedWorkspace] openURL:url];
+    [[NSWorkspace sharedWorkspace] openURL:serverURL];
 }
 
 /* handleServerTextDidChange [delegate]
@@ -180,18 +195,30 @@ static BOOL _credentialsChanged;
 -(void)handleServerTextDidChange:(NSNotification *)aNotification
 {
     _credentialsChanged = YES;
-    Preferences *prefs = [Preferences standardPreferences];
+    NSString *theString  = openReaderHost.stringValue.vna_trimmed;
+    NSURL *url = [NSURL URLWithString:theString];
+    if (url.scheme) {
+        syncScheme = url.scheme;
+        if (url.host) {
+            serverAndPath = [theString substringFromIndex:[theString rangeOfString:url.host].location];
+        } else {
+            serverAndPath = @"";
+        }
+    } else {
+        syncScheme = @"https";
+        serverAndPath = theString;
+    }
+    serverURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@", syncScheme, serverAndPath]];
     if ( !((openReaderHost.stringValue).vna_isBlank || (username.stringValue).vna_isBlank) )
     {
         // can we get password via keychain ?
-        NSString * thePass = [VNAKeychain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"https://%@", openReaderHost.stringValue]];
+        NSString * thePass = [VNAKeychain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"%@://%@", syncScheme, serverURL.host]];
         if (!thePass.vna_isBlank)
         {
             password.stringValue = thePass;
-            [VNAKeychain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];
+            [VNAKeychain setGenericPasswordInKeychain:thePass username:username.stringValue service:@"Vienna sync"];
         }
     }
-    prefs.syncServer = openReaderHost.stringValue;
 }
 
 /* handleUserTextDidChange [delegate]
@@ -207,14 +234,14 @@ static BOOL _credentialsChanged;
     if ( !((openReaderHost.stringValue).vna_isBlank || (username.stringValue).vna_isBlank) )
     {
         // can we get password via keychain ?
-        NSString * thePass = [VNAKeychain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"https://%@", openReaderHost.stringValue]];
+        NSString * thePass = [VNAKeychain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"%@://%@", syncScheme, serverURL.host]];
         if (!thePass.vna_isBlank)
         {
             password.stringValue = thePass;
             [VNAKeychain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];
         }
     }
-    prefs.syncingUser = username.stringValue;
+    syncingUser = username.stringValue;
 }
 
 /* handlePasswordTextDidChange [delegate]
