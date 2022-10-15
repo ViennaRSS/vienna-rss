@@ -179,6 +179,9 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         myRequest.HTTPMethod = @"POST";
         [myRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
         [self specificHeadersPrepare:myRequest];
+        username = [Preferences standardPreferences].syncingUser;
+        // restore from keychain
+        password = [VNAKeychain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"];
         [myRequest vna_setPostValue:username forKey:@"Email"];
         [myRequest vna_setPostValue:password forKey:@"Passwd"];
 
@@ -247,7 +250,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 {
     // restore from Preferences
     Preferences *prefs = [Preferences standardPreferences];
-    username = prefs.syncingUser;
     openReaderHost = prefs.syncServer;
     openReaderScheme = prefs.syncScheme;
     if (!openReaderScheme) {
@@ -267,8 +269,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     if ([openReaderHost rangeOfString:@"inoreader.com"].length != 0) {
         hostRequiresInoreaderHeaders = YES;
     }
-    // restore from keychain
-    password = [VNAKeychain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"];
     APIBaseURL = [NSString stringWithFormat:@"%@://%@/reader/api/0/", openReaderScheme, openReaderHost];
 } // configureForSpecificHost
 
