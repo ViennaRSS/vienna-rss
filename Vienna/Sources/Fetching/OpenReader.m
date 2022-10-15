@@ -44,6 +44,7 @@
 
 static NSString *LoginBaseURL = @"%@://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader";
 static NSString *ClientName = @"ViennaRSS";
+static NSString *latestAlertDescription = @"";
 
 // host specific variables
 static NSString *openReaderHost;
@@ -189,12 +190,19 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                     self.openReaderStatus = notAuthenticated;
 					if (error) {
-						NSString * info = error.localizedDescription;
-						[[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:info];
+						NSString * alertDescription = error.localizedDescription;
+						if (![alertDescription isEqualToString:latestAlertDescription]) {
+						    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:alertDescription];
+						    latestAlertDescription = alertDescription;
+						}
 					} else if (((NSHTTPURLResponse *)response).statusCode != 200) {
-						NSString * info = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-						[[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:info];
+						NSString * alertDescription = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+						if (![alertDescription isEqualToString:latestAlertDescription]) {
+						    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:alertDescription];
+						    latestAlertDescription = alertDescription;
+						}
  					} else {         // statusCode 200
+						latestAlertDescription = @"";
 						NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 						NSArray *components = [response componentsSeparatedByString:@"\n"];
 						for (NSString * item in components) {
