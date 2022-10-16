@@ -1907,6 +1907,9 @@
 			);
 			name = "Run Autorevision";
 			outputPaths = (
+				"${SRCROOT}/Vienna/Sources/autorevision.h",
+				"${OBJROOT}/autorevision.cache",
+				"${OBJROOT}/autorevision.plist.h",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
