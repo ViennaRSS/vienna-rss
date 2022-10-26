@@ -239,7 +239,14 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             {
                 // we depend of pieces of info gathered by loadSubscriptions
                 NSOperation * op = [NSBlockOperation blockOperationWithBlock:^(void) {
-                     if (!folder.isSyncedOK) {
+                     if (folder.isSyncedOK) { // provide feedback that there is no need to fetch this feed
+                        NSString * name = [folder.name hasPrefix:[Database untitledFeedFolderName]] ? folder.feedURL : folder.name;
+                        ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:name];
+                        [aItem setStatus:NSLocalizedString(@"No new articles available", nil)];
+                        [aItem clearDetails];
+                        [self setFolderErrorFlag:folder flag:NO];
+                        [folder clearNonPersistedFlag:VNAFolderFlagSyncedOK]; // get ready for next request
+                     } else {
                         [self pumpSubscriptionRefresh:folder shouldForceRefresh:NO];
                      }
                 }];

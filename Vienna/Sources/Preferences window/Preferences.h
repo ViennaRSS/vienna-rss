@@ -60,6 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 	SearchMethod * searchMethod;
 	NSUInteger concurrentDownloads;
 	NSString * syncServer;
+    NSString * syncScheme;
 	NSString * syncingUser;
 }
 
@@ -185,6 +186,7 @@ extern NSString * const kMA_Notify_UseJavaScriptChange;
 
 // server used for syncing
 @property (nonatomic, copy) NSString *syncServer;
+@property (nonatomic, copy) NSString *syncScheme;
 
 // username used for syncing
 @property (nonatomic, copy) NSString *syncingUser;

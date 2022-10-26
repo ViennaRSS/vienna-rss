@@ -42,11 +42,13 @@
 #import "ActivityItem.h"
 #import "Article.h"
 
-static NSString *LoginBaseURL = @"https://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader";
+static NSString *LoginBaseURL = @"%@://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader";
 static NSString *ClientName = @"ViennaRSS";
+static NSString *latestAlertDescription = @"";
 
 // host specific variables
 static NSString *openReaderHost;
+static NSString *openReaderScheme;
 static NSString *username;
 static NSString *password;
 static NSString *APIBaseURL;
@@ -109,11 +111,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _openReader = [[OpenReader alloc] init];
-        Preferences *prefs = [Preferences standardPreferences];
-        if (prefs.syncGoogleReader) {
-            openReaderHost = prefs.syncServer;
-            APIBaseURL = [NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost];
-        }
+        [_openReader configureForSpecificHost];
     });
     return _openReader;
 }
@@ -176,11 +174,14 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         self.openReaderStatus = waitingClientToken;
 
         [self configureForSpecificHost];
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost]];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderScheme, openReaderHost]];
         NSMutableURLRequest *myRequest = [NSMutableURLRequest requestWithURL:url];
         myRequest.HTTPMethod = @"POST";
         [myRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
         [self specificHeadersPrepare:myRequest];
+        username = [Preferences standardPreferences].syncingUser;
+        // restore from keychain
+        password = [VNAKeychain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"];
         [myRequest vna_setPostValue:username forKey:@"Email"];
         [myRequest vna_setPostValue:password forKey:@"Passwd"];
 
@@ -192,12 +193,19 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                     self.openReaderStatus = notAuthenticated;
 					if (error) {
-						NSString * info = error.localizedDescription;
-						[[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:info];
+						NSString * alertDescription = error.localizedDescription;
+						if (![alertDescription isEqualToString:latestAlertDescription]) {
+						    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:alertDescription];
+						    latestAlertDescription = alertDescription;
+						}
 					} else if (((NSHTTPURLResponse *)response).statusCode != 200) {
-						NSString * info = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-						[[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:info];
+						NSString * alertDescription = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+						if (![alertDescription isEqualToString:latestAlertDescription]) {
+						    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:alertDescription];
+						    latestAlertDescription = alertDescription;
+						}
  					} else {         // statusCode 200
+						latestAlertDescription = @"";
 						NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 						NSArray *components = [response componentsSeparatedByString:@"\n"];
 						for (NSString * item in components) {
@@ -242,8 +250,11 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 {
     // restore from Preferences
     Preferences *prefs = [Preferences standardPreferences];
-    username = prefs.syncingUser;
     openReaderHost = prefs.syncServer;
+    openReaderScheme = prefs.syncScheme;
+    if (!openReaderScheme) {
+        openReaderScheme = @"https";
+    }
     // default settings
     hostSendsHexaItemId = NO;
     hostRequiresSParameter = NO;
@@ -258,9 +269,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     if ([openReaderHost rangeOfString:@"inoreader.com"].length != 0) {
         hostRequiresInoreaderHeaders = YES;
     }
-    // restore from keychain
-    password = [VNAKeychain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"];
-    APIBaseURL = [NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost];
+    APIBaseURL = [NSString stringWithFormat:@"%@://%@/reader/api/0/", openReaderScheme, openReaderHost];
 } // configureForSpecificHost
 
 /* pass the T token
@@ -895,7 +904,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             if (hostRequiresHexaForFeedId) {                     // TheOldReader
                 NSString *identifier =
                   [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)];
-                legacyKey = [NSString stringWithFormat:@"https://%@/reader/public/atom/%@", openReaderHost, identifier];
+                legacyKey = [NSString stringWithFormat:@"%@://%@/reader/public/atom/%@", openReaderScheme, openReaderHost, identifier];
             } else {
                 legacyKey = feedURL;
             }

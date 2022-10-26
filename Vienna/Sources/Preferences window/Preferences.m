@@ -135,6 +135,7 @@ static Preferences * _standardPreferences = nil;
         syncGoogleReader = [self boolForKey:MAPref_SyncGoogleReader];
         prefersGoogleNewSubscription = [self boolForKey:MAPref_GoogleNewSubscription];
 		syncServer = [userPrefs stringForKey:MAPref_SyncServer];
+        syncScheme = [userPrefs stringForKey:MAPref_SyncScheme];
 		syncingUser = [userPrefs stringForKey:MAPref_SyncingUser];
 		_syncingAppId = [userPrefs stringForKey:MAPref_SyncingAppId];
 		_syncingAppKey = [userPrefs stringForKey:MAPref_SyncingAppKey];
@@ -1160,6 +1161,24 @@ static Preferences * _standardPreferences = nil;
 		[self setString:syncServer forKey:MAPref_SyncServer];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
 	}
+}
+
+-(NSString *)syncScheme
+{
+    return syncScheme;
+}
+
+/* setSyncServer
+ * Changes the scheme used for synchronization and sends a notification
+ */
+-(void)setSyncScheme:(NSString *)newScheme
+{
+    if (![syncScheme isEqualToString:newScheme])
+    {
+        syncScheme = [newScheme copy];
+        [self setString:syncScheme forKey:MAPref_SyncScheme];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
+    }
 }
 
 -(NSString *)syncingUser
