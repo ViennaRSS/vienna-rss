@@ -54,9 +54,6 @@
 // Action routines
 -(IBAction)doSave:(id)sender;
 -(IBAction)doCancel:(id)sender;
--(IBAction)addNewCriteria:(id)sender;
--(IBAction)removeCurrentCriteria:(id)sender;
--(IBAction)fieldChanged:(id)sender;
 
 // Public functions
 -(void)newCriteria:(NSWindow *)window underParent:(NSInteger)itemId;
