@@ -1712,7 +1712,7 @@
 			attributes = {
 				CLASSPREFIX = VNA;
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 1410;
 				ORGANIZATIONNAME = "Vienna project";
 				TargetAttributes = {
 					035B703419E0E4AE00197334 = {
