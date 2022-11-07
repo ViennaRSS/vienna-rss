@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ViennaApp">
@@ -31,6 +31,11 @@
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
                             <menuItem title="Preferences…" keyEquivalent="," id="129">
+                                <attributedString key="userComments">
+                                    <fragment>
+                                        <string key="content">Apple renamed "Preferences" to "Settings" in macOS 13. The menu item is renamed automatically at runtime. Please use the default term for the preferences window that was used until macOS 12.</string>
+                                    </fragment>
+                                </attributedString>
                                 <connections>
                                     <action selector="showPreferences:" target="-1" id="UuH-UI-a6l"/>
                                 </connections>
