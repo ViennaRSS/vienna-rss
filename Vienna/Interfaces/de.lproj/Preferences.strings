@@ -67,9 +67,6 @@
 /* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "g3K-qh-M6y"; */
 "g3K-qh-M6y.title" = "Je höher die Zahl desto schneller werden die Abonnements herunter geladen.";
 
-/* Class = "NSTabViewItem"; label = "General"; ObjectID = "GJ3-1q-004"; */
-"GJ3-1q-004.label" = "Allgemein";
-
 /* Class = "NSTextField"; ibShadowedToolTip = "Address of a server supporting the Open Reader API"; ObjectID = "gKc-l8-p9m"; */
 "gKc-l8-p9m.ibShadowedToolTip" = "Adresse eines Servers, der das Open Reader API unterstützt";
 
@@ -91,9 +88,6 @@
 /* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iCs-T5-L1c"; */
 "iCs-T5-L1c.title" = "Wenn neue ungelesene Artikel abgerufen wurden:";
 
-/* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "iEw-AM-tMF"; */
-"iEw-AM-tMF.label" = "Erweitert";
-
 /* Class = "NSPopUpButton"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "iHl-tr-paa"; */
 "iHl-tr-paa.ibShadowedToolTip" = "Wähle einen Server, der das Open Reader API unterstützt";
 
@@ -112,6 +106,9 @@
 /* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "jvO-Ef-TTd"; */
 "jvO-Ef-TTd.title" = "Stündlich";
 
+/* Class = "NSViewController"; title = "Syncing"; ObjectID = "Lfh-L2-KcO"; */
+"Lfh-L2-KcO.title" = "Synchronisierung";
+
 /* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "Ljf-Qd-6Ho"; */
 "Ljf-Qd-6Ho.title" = "Neue Artikel beim Programmstart abrufen";
 
@@ -123,6 +120,9 @@
 
 /* Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "MnV-8D-Qyq"; */
 "MnV-8D-Qyq.title" = "JavaScript im internen Browser aktivieren";
+
+/* Class = "NSViewController"; title = "Advanced"; ObjectID = "NjZ-bv-EoA"; */
+"NjZ-bv-EoA.title" = "Erweitert";
 
 /* Class = "NSMenuItem"; title = "Other…"; ObjectID = "nSW-3T-Zoh"; */
 "nSW-3T-Zoh.title" = "Andere …";
@@ -148,11 +148,14 @@
 /* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "qYb-Sf-cEF"; */
 "qYb-Sf-cEF.title" = "Alle 5 Minuten";
 
-/* Class = "NSTabViewItem"; label = "Updates"; ObjectID = "qyx-3u-1Io"; */
-"qyx-3u-1Io.label" = "Updates";
-
 /* Class = "NSMenuItem"; title = "After two days"; ObjectID = "sJE-bd-4mK"; */
 "sJE-bd-4mK.title" = "Nach zwei Tagen";
+
+/* Class = "NSViewController"; title = "General"; ObjectID = "T2z-OK-VtO"; */
+"T2z-OK-VtO.title" = "Allgemein";
+
+/* Class = "NSViewController"; title = "Appearance"; ObjectID = "U0J-a5-0Pj"; */
+"U0J-a5-0Pj.title" = "Erscheinungsbild";
 
 /* Class = "NSButtonCell"; title = "Search for latest beta versions"; ObjectID = "u92-Bh-Wrz"; */
 "u92-Bh-Wrz.title" = "Nach aktuellen Betaversionen suchen";
@@ -163,11 +166,8 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "V12-Ua-skO"; */
 "V12-Ua-skO.ibShadowedToolTip" = "Website besuchen";
 
-/* Class = "NSTabViewItem"; label = "Appearance"; ObjectID = "WK4-g4-vJd"; */
-"WK4-g4-vJd.label" = "Erscheinungsbild";
-
-/* Class = "NSWindow"; title = "Preferences"; ObjectID = "X5g-th-bjd"; */
-"X5g-th-bjd.title" = "Einstellungen";
+/* Class = "NSViewController"; title = "Updates"; ObjectID = "wyk-W1-xMh"; */
+"wyk-W1-xMh.title" = "Updates";
 
 /* Class = "NSMenuItem"; title = "After one week"; ObjectID = "xfd-Vp-kJy"; */
 "xfd-Vp-kJy.title" = "Nach einer Woche";
@@ -186,7 +186,4 @@
 
 /* Class = "NSMenuItem"; title = "When Vienna quits"; ObjectID = "Z9k-7x-3gF"; Note = "Erase deleted articles: When Vienna quits"; */
 "Z9k-7x-3gF.title" = "Beim Beenden von Vienna";
-
-/* Class = "NSTabViewItem"; label = "Syncing"; ObjectID = "zkN-he-3BT"; */
-"zkN-he-3BT.label" = "Synchronisierung";
 
