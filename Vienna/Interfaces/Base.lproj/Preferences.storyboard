@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="VBW-RM-gbf">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="VBW-RM-gbf">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -10,13 +10,14 @@
         <scene sceneID="eaY-hs-qZ7">
             <objects>
                 <windowController storyboardIdentifier="preferencesWindow" showSeguePresentationStyle="single" id="VBW-RM-gbf" sceneMemberID="viewController">
-                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" toolbarStyle="preference" id="X5g-th-bjd">
+                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" toolbarStyle="preference" id="X5g-th-bjd">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
                         <windowCollectionBehavior key="collectionBehavior" fullScreenAuxiliary="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="294" y="323" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
                         <connections>
+                            <binding destination="VBW-RM-gbf" name="title" keyPath="window.contentViewController.title" id="ZRo-I9-960"/>
                             <outlet property="delegate" destination="VBW-RM-gbf" id="7FA-DJ-mgN"/>
                         </connections>
                     </window>
@@ -31,13 +32,13 @@
         <!--Tab View Controller-->
         <scene sceneID="qiK-Ji-WhE">
             <objects>
-                <tabViewController tabStyle="toolbar" canPropagateSelectedChildViewControllerTitle="NO" id="VCh-Za-CPt" sceneMemberID="viewController">
+                <tabViewController tabStyle="toolbar" id="VCh-Za-CPt" sceneMemberID="viewController">
                     <tabViewItems>
-                        <tabViewItem label="General" identifier="general" image="gearshape" catalog="system" id="GJ3-1q-004" customClass="PreferenceTabViewItem" customModule="Vienna" customModuleProvider="target"/>
-                        <tabViewItem label="Appearance" image="paintbrush" catalog="system" id="WK4-g4-vJd"/>
-                        <tabViewItem label="Syncing" image="arrow.triangle.2.circlepath" catalog="system" id="zkN-he-3BT"/>
-                        <tabViewItem label="Updates" identifier="updates" image="square.and.arrow.down" catalog="system" id="qyx-3u-1Io" customClass="PreferenceTabViewItem" customModule="Vienna" customModuleProvider="target"/>
-                        <tabViewItem label="Advanced" identifier="advanced" image="wrench.and.screwdriver" catalog="system" id="iEw-AM-tMF" customClass="PreferenceTabViewItem" customModule="Vienna" customModuleProvider="target"/>
+                        <tabViewItem identifier="general" image="gearshape" catalog="system" id="GJ3-1q-004" userLabel="General" customClass="PreferenceTabViewItem" customModule="Vienna" customModuleProvider="target"/>
+                        <tabViewItem image="paintbrush" catalog="system" id="WK4-g4-vJd" userLabel="Appearance"/>
+                        <tabViewItem image="arrow.triangle.2.circlepath" catalog="system" id="zkN-he-3BT" userLabel="Syncing"/>
+                        <tabViewItem identifier="updates" image="square.and.arrow.down" catalog="system" id="qyx-3u-1Io" userLabel="Updates" customClass="PreferenceTabViewItem" customModule="Vienna" customModuleProvider="target"/>
+                        <tabViewItem identifier="advanced" image="wrench.and.screwdriver" catalog="system" id="iEw-AM-tMF" userLabel="Advanced" customClass="PreferenceTabViewItem" customModule="Vienna" customModuleProvider="target"/>
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
                     <tabView key="tabView" wantsLayer="YES" type="noTabsNoBorder" id="VWZ-OZ-KI2">
@@ -61,10 +62,10 @@
             </objects>
             <point key="canvasLocation" x="129.5" y="585"/>
         </scene>
-        <!--Syncing Preferences View Controller-->
+        <!--Syncing-->
         <scene sceneID="ZZR-k7-wGN">
             <objects>
-                <viewController id="Lfh-L2-KcO" customClass="SyncingPreferencesViewController" sceneMemberID="viewController">
+                <viewController title="Syncing" id="Lfh-L2-KcO" customClass="SyncingPreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="Iqj-1b-Nzr">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="220"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -236,10 +237,10 @@
             </objects>
             <point key="canvasLocation" x="127" y="1250"/>
         </scene>
-        <!--Advanced Preferences View Controller-->
+        <!--Advanced-->
         <scene sceneID="99N-ez-bLO">
             <objects>
-                <viewController id="NjZ-bv-EoA" customClass="AdvancedPreferencesViewController" sceneMemberID="viewController">
+                <viewController title="Advanced" id="NjZ-bv-EoA" customClass="AdvancedPreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="8J7-Mc-HHy">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="317"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -458,10 +459,10 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
             </objects>
             <point key="canvasLocation" x="619" y="1202"/>
         </scene>
-        <!--Appearance Preferences View Controller-->
+        <!--Appearance-->
         <scene sceneID="YM9-5d-aO0">
             <objects>
-                <viewController id="U0J-a5-0Pj" customClass="AppearancePreferencesViewController" sceneMemberID="viewController">
+                <viewController title="Appearance" id="U0J-a5-0Pj" customClass="AppearancePreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="57X-N5-EiK">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="188"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -612,10 +613,10 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
             </objects>
             <point key="canvasLocation" x="127" y="983"/>
         </scene>
-        <!--General Preferences View Controller-->
+        <!--General-->
         <scene sceneID="Bqg-9r-5LY">
             <objects>
-                <viewController id="T2z-OK-VtO" customClass="GeneralPreferencesViewController" sceneMemberID="viewController">
+                <viewController title="General" id="T2z-OK-VtO" customClass="GeneralPreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="6Zn-BI-L2K">
                         <rect key="frame" x="0.0" y="0.0" width="458" height="472"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -985,10 +986,10 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
             </objects>
             <point key="canvasLocation" x="-362" y="1124"/>
         </scene>
-        <!--Update Preferences View Controller-->
+        <!--Updates-->
         <scene sceneID="fY4-8F-Vij">
             <objects>
-                <viewController id="wyk-W1-xMh" customClass="UpdatePreferencesViewController" sceneMemberID="viewController">
+                <viewController title="Updates" id="wyk-W1-xMh" customClass="UpdatePreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="37U-37-0Sn">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="78"/>
                         <autoresizingMask key="autoresizingMask"/>
