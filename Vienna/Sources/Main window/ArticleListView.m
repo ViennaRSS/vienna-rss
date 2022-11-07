@@ -135,23 +135,6 @@ static void *ObserverContext = &ObserverContext;
 
     [self.contentStackView addView:self.articleTextView inGravity:NSStackViewGravityTop];
 
-    // With vertical layout and "Use Web Page for Articles" set, we need to
-    // manage article view's width so that it does not grow or shrink randomly
-    // on certain sites.
-    // The best solution I found is programmatically setting a constraint with a
-    // "constant" value.
-    // This did not work for me: self.textViewWidthConstraint =
-    //     [NSLayoutConstraint constraintWithItem:articleTextView attribute:NSLayoutAttributeWidth
-    //         relatedBy:NSLayoutRelationEqual toItem:self.contentStackView attribute:NSLayoutAttributeWidth
-    //         multiplier:1.f constant:0.f];
-    self.textViewWidthConstraint =
-        [NSLayoutConstraint constraintWithItem:self.articleTextView attribute:NSLayoutAttributeWidth
-            relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute
-            multiplier:0.f constant:self.contentStackView.frame.size.width];
-    self.textViewWidthConstraint.priority = NSLayoutPriorityRequired;
-    self.articleTextView.translatesAutoresizingMaskIntoConstraints = NO;
-    // for some reason, new browser requires this constraint but it is counterproductive with old browser
-    self.textViewWidthConstraint.active = self.useNewBrowser;
 
 	Preferences * prefs = [Preferences standardPreferences];
 
@@ -179,6 +162,24 @@ static void *ObserverContext = &ObserverContext;
 	// Set the reading pane orientation
 	[self setOrientation:prefs.layout];
 	
+    // With vertical layout and "Use Web Page for Articles" set, we need to
+    // manage article view's width so that it does not grow or shrink randomly
+    // on certain sites.
+    // The best solution I found is programmatically setting a constraint with a
+    // "constant" value.
+    // This did not work for me: self.textViewWidthConstraint =
+    //     [NSLayoutConstraint constraintWithItem:articleTextView attribute:NSLayoutAttributeWidth
+    //         relatedBy:NSLayoutRelationEqual toItem:self.contentStackView attribute:NSLayoutAttributeWidth
+    //         multiplier:1.f constant:0.f];
+    self.textViewWidthConstraint =
+        [NSLayoutConstraint constraintWithItem:self.articleTextView attribute:NSLayoutAttributeWidth
+            relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute
+            multiplier:0.f constant:self.contentStackView.frame.size.width];
+    self.textViewWidthConstraint.priority = NSLayoutPriorityRequired;
+    self.articleTextView.translatesAutoresizingMaskIntoConstraints = NO;
+    // for some reason, this constraint is necessary for new browser with vertical layout, but it is counterproductive with other configurations
+    self.textViewWidthConstraint.active = self.useNewBrowser && splitView2.vertical;
+
 	// Initialise the article list view
 	[self initTableView];
 
@@ -820,6 +821,7 @@ static void *ObserverContext = &ObserverContext;
 	splitView2.vertical = (newLayout == VNALayoutCondensed);
 	splitView2.dividerStyle = (splitView2.vertical ? NSSplitViewDividerStyleThin : NSSplitViewDividerStylePaneSplitter);
 	splitView2.autosaveName = (newLayout == VNALayoutCondensed ? @"Vienna3SplitView2CondensedLayout" : @"Vienna3SplitView2ReportLayout");
+	self.textViewWidthConstraint.active = self.useNewBrowser && splitView2.vertical;
 	[splitView2 display];
 	isChangingOrientation = NO;
 }
