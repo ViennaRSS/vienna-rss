@@ -130,19 +130,15 @@
     if (_primaryTab) {
         [self.tabBarControl.tabView removeTabViewItem:_primaryTab];
     }
+    _primaryTab = newPrimaryTab;
 
     [self.tabBarControl.tabView insertTabViewItem:newPrimaryTab atIndex:0];
 
 	[newPrimaryTab setHasCloseButton:NO];
 	newPrimaryTab.identifier = newPrimaryTab.view;
 
-	_primaryTab = newPrimaryTab;
-	
 	[self.primaryTab.view setNeedsDisplay:YES];
 	[self switchToPrimaryTab];
-	//this call seems to be necessary manually here, no delegate call
-	//maybe setPrimaryTab is called earlier than the delegate IBOutlet setup.
-	[self tabView:self.tabBarControl.tabView didSelectTabViewItem:newPrimaryTab];
 }
 
 /* activeTab

@@ -254,11 +254,6 @@
 
 	self.toolbarSearchField = self.mainWindowController.toolbarSearchField;
 
-	Preferences * prefs = [Preferences standardPreferences];
-
-    // Restore the most recent layout
-    [self setLayout:prefs.layout withRefresh:NO];
-
     // Set the delegates
     [NSApplication sharedApplication].delegate = self;
 	
@@ -285,6 +280,11 @@
 		[NSApp terminate:nil];
 		return;
 	}
+
+	Preferences * prefs = [Preferences standardPreferences];
+
+    // Restore the most recent layout
+    [self setLayout:prefs.layout withRefresh:NO];
 
 	// Initialize the Sort By and Columns menu
 	[self initSortMenu];
