@@ -547,7 +547,10 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                                 </connections>
                             </button>
                             <comboBox horizontalHuggingPriority="750" verticalHuggingPriority="750" placeholderIntrinsicWidth="42" placeholderIntrinsicHeight="20" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MkS-Vx-yr4">
-                                <rect key="frame" x="271" y="50" width="45" height="26"/>
+                                <rect key="frame" x="270" y="52" width="67" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="63" id="YAf-11-8AA"/>
+                                </constraints>
                                 <comboBoxCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="left" drawsBackground="YES" completes="NO" numberOfVisibleItems="6" id="NvB-jU-vOK">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1037,7 +1040,7 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
         </scene>
     </scenes>
     <resources>
-        <image name="NSFollowLinkFreestandingTemplate" width="15" height="15"/>
+        <image name="NSFollowLinkFreestandingTemplate" width="20" height="20"/>
         <image name="arrow.triangle.2.circlepath" catalog="system" width="18" height="15"/>
         <image name="gearshape" catalog="system" width="16" height="16"/>
         <image name="paintbrush" catalog="system" width="17" height="18"/>
