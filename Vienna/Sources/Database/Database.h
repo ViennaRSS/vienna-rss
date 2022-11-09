@@ -20,10 +20,10 @@
 
 @import Foundation;
 @import FMDB;
+#import "Criteria.h"
 
 @class Folder;
 @class Field;
-@class CriteriaTree;
 @class Article;
 
 @interface Database : NSObject
@@ -98,7 +98,6 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 -(NSInteger)addSmartFolder:(NSString *)folderName underParent:(NSInteger)parentId withQuery:(CriteriaTree *)criteriaTree;
 -(void)updateSearchFolder:(NSInteger)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree;
 -(CriteriaTree *)searchStringForSmartFolder:(NSInteger)folderId;
--(NSString *)criteriaToSQL:(CriteriaTree *)criteriaTree;
 
 // Article functions
 -(BOOL)addArticle:(Article *)article toFolder:(NSInteger)folderID;
@@ -113,4 +112,10 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 -(void)markStarredArticlesFromFolder:(Folder *)folder guidArray:(NSArray *)guidArray;
 @property (nonatomic, getter=isTrashEmpty, readonly) BOOL trashEmpty;
 -(NSArray *)guidHistoryForFolderId:(NSInteger)folderId;
+@end
+
+@interface CriteriaTree (SQL)
+
+-(NSString *)toSQLForDatabase:(Database *)database;
+
 @end

@@ -19,6 +19,11 @@
 //
 
 #import "Criteria.h"
+#import "Database.h"
+
+@implementation CriteriaElement
+
+@end
 
 @implementation Criteria
 
@@ -152,12 +157,25 @@
 
 @implementation CriteriaTree
 
+static NSString *const CRITERIAGROUP_TAG = @"criteriagroup";
+static NSString *const CRITERIAGROUP_CONDITION_ATTRIBUTE = @"condition";
+
+static NSString *const CRITERIAGROUP_CONDITION_VALUE_ALL = @"all";
+static NSString *const CRITERIAGROUP_CONDITION_VALUE_ANY = @"any";
+static NSString *const CRITERIAGROUP_CONDITION_VALUE_NONE = @"none";
+
+static NSString *const CRITERIA_TAG = @"criteria";
+static NSString *const CRITERIA_FIELD_ATTRIBUTE = @"field";
+
+static NSString *const CRITERIA_VALUE_TAG = @"value";
+static NSString *const CRITERIA_OPERATOR_TAG = @"operator";
+
 /* init
  * Initialise an empty CriteriaTree
  */
 -(instancetype)init
 {
-	return [self initWithString:@""];
+	return [self initWithXml:nil];
 }
 
 /* initWithString
@@ -166,41 +184,64 @@
  */
 -(instancetype)initWithString:(NSString *)string
 {
-	if ((self = [super init]) != nil)
-	{
-		criteriaTree = [[NSMutableArray alloc] init];
-		condition = MA_CritCondition_All;
-        NSError *error = nil;
-        NSXMLDocument *criteriaTreeDoc = [[NSXMLDocument alloc]
-                                          initWithXMLString:string
-                                          options:NSXMLNodeOptionsNone
-                                          error:&error];
-        
-		if (!error)
-		{
-            NSArray *criteriaArray = [criteriaTreeDoc.rootElement elementsForName:@"criteria"];
-            condition = [CriteriaTree conditionFromString:[criteriaTreeDoc.rootElement attributeForName:@"condition"].stringValue];
-            if (condition == MA_CritCondition_Invalid) {
-                // For backward compatibility, the absence of the condition attribute
-                // assumes that we're matching ALL conditions.
-                condition = MA_CritCondition_All;
-            }
-            
-            for (NSXMLElement *criteriaElement in criteriaArray) {
-                NSString *fieldname = [criteriaElement attributeForName:@"field"].stringValue;
-                NSString *operator = [criteriaElement elementsForName:@"operator"].firstObject.stringValue;
-                NSString *value = [criteriaElement elementsForName:@"value"].firstObject.stringValue;
-                
-                Criteria *newCriteria = [[Criteria alloc]
-                                         initWithField:fieldname
-                                         withOperator:operator.integerValue
-                                         withValue:value];
-                [self addCriteria:newCriteria];
-                
-            }
+    NSError *error = nil;
+    NSXMLDocument *criteriaTreeDoc = [[NSXMLDocument alloc]
+                                      initWithXMLString:string
+                                      options:NSXMLNodeOptionsNone
+                                      error:&error];
+
+    if (error) {
+        NSLog(@"%@", error.localizedDescription);
+        return nil;
+    }
+
+    return [self initWithXml:criteriaTreeDoc.rootElement];
+}
+
+-(instancetype) initWithXml:(NSXMLElement *)xml {
+
+    if ((self = [super init]) == nil) {
+        return self;
+    }
+
+    criteriaTree = [[NSMutableArray alloc] init];
+    condition = MA_CritCondition_All;
+
+    condition = [CriteriaTree conditionFromString:[xml attributeForName:CRITERIAGROUP_CONDITION_ATTRIBUTE].stringValue];
+    if (condition == MA_CritCondition_Invalid) {
+        // For backward compatibility, the absence of the condition attribute
+        // assumes that we're matching ALL conditions.
+        condition = MA_CritCondition_All;
+    }
+
+    for (NSXMLNode *groupElementChild in xml.children) {
+
+        if (![groupElementChild isKindOfClass:[NSXMLElement class]]) {
+            [NSException raise:@"CriteriaXmlContentException"
+                        format:@"Illegal subelement of criteriagroup, must only contain xml elements but contained %@", [groupElementChild class]];
         }
-	}
-	return self;
+
+        NSXMLElement *criteriaElementXml = (NSXMLElement *)groupElementChild;
+
+        if ([CRITERIAGROUP_TAG isEqualToString: criteriaElementXml.name]) {
+            CriteriaTree *newCriteria = [[CriteriaTree alloc] initWithXml:criteriaElementXml];
+            [self addCriteria:newCriteria];
+        } else if ([CRITERIA_TAG isEqualToString:criteriaElementXml.name]) {
+            NSString *fieldname = [criteriaElementXml attributeForName:CRITERIA_FIELD_ATTRIBUTE].stringValue;
+            NSString *operator = [criteriaElementXml elementsForName:CRITERIA_OPERATOR_TAG].firstObject.stringValue;
+            NSString *value = [criteriaElementXml elementsForName:CRITERIA_VALUE_TAG].firstObject.stringValue;
+
+            Criteria *newCriteria = [[Criteria alloc]
+                                     initWithField:fieldname
+                                     withOperator:operator.integerValue
+                                     withValue:value];
+            [self addCriteria:newCriteria];
+        } else {
+            continue; //TODO maybe log something or throw error
+        }
+    }
+
+    return self;
 }
 
 /* conditionFromString
@@ -212,10 +253,12 @@
 {
 	if (string != nil)
 	{
-		if ([string.lowercaseString isEqualToString:@"any"])
+		if ([string.lowercaseString isEqualToString:CRITERIAGROUP_CONDITION_VALUE_ANY])
 			return MA_CritCondition_Any;
-		if ([string.lowercaseString isEqualToString:@"all"])
+		if ([string.lowercaseString isEqualToString:CRITERIAGROUP_CONDITION_VALUE_ALL])
 			return MA_CritCondition_All;
+        if ([string.lowercaseString isEqualToString:CRITERIAGROUP_CONDITION_VALUE_NONE])
+            return MA_CritCondition_None;
 	}
 	return MA_CritCondition_Invalid;
 }
@@ -227,9 +270,11 @@
 +(NSString *)conditionToString:(CriteriaCondition)condition
 {
 	if (condition == MA_CritCondition_Any)
-		return @"any";
+		return CRITERIAGROUP_CONDITION_VALUE_ANY;
 	if (condition == MA_CritCondition_All)
-		return @"all";
+		return CRITERIAGROUP_CONDITION_VALUE_ALL;
+    if (condition == MA_CritCondition_None)
+        return CRITERIAGROUP_CONDITION_VALUE_NONE;
 	return @"";
 }
 
@@ -255,7 +300,7 @@
  * that the criteria will be stored in an NSArray or any other collection
  * object for which NSEnumerator is supported.
  */
--(NSEnumerator *)criteriaEnumerator
+-(NSEnumerator<CriteriaElement *> *)criteriaEnumerator
 {
 	return [criteriaTree objectEnumerator];
 }
@@ -263,45 +308,55 @@
 /* addCriteria
  * Adds the specified criteria to the criteria array.
  */
--(void)addCriteria:(Criteria *)newCriteria
+-(void)addCriteria:(CriteriaElement *)newCriteria
 {
 	[criteriaTree addObject:newCriteria];
+}
+
+-(NSXMLElement *)toXml {
+    NSDictionary * conditionDict = @{CRITERIAGROUP_CONDITION_ATTRIBUTE: [CriteriaTree conditionToString:condition]};
+    NSXMLElement *criteriaGroup = [[NSXMLElement alloc] initWithName:CRITERIAGROUP_TAG];
+    [criteriaGroup setAttributesWithDictionary:conditionDict];
+
+    for (Criteria *criteria in criteriaTree) {
+        NSXMLElement *criteriaElement;
+        if ([criteria isKindOfClass:[CriteriaTree class]]) {
+            criteriaElement = [(CriteriaTree *)criteria toXml];
+        } else {
+            criteriaElement = [[NSXMLElement alloc] initWithName:CRITERIA_TAG];
+            [criteriaElement setAttributesWithDictionary:@{CRITERIA_FIELD_ATTRIBUTE: criteria.field}];
+            NSXMLElement *operatorElement = [[NSXMLElement alloc]
+                                             initWithName:CRITERIA_OPERATOR_TAG
+                                             stringValue:[NSString stringWithFormat:
+                                                          @"%lu", (unsigned long)criteria.operator]];
+            NSXMLElement *valueElement = [[NSXMLElement alloc]
+                                          initWithName:CRITERIA_VALUE_TAG
+                                          stringValue:criteria.value];
+
+            [criteriaElement addChild:operatorElement];
+            [criteriaElement addChild:valueElement];
+        }
+        [criteriaGroup addChild:criteriaElement];
+    }
+
+    return criteriaGroup;
+}
+
+-(NSXMLDocument *)toXmlDocument {
+    NSXMLDocument *criteriaDoc = [NSXMLDocument document];
+    [criteriaDoc setStandalone:YES];
+    criteriaDoc.characterEncoding = @"UTF-8";
+    criteriaDoc.version = @"1.0";
+
+    [criteriaDoc addChild:[self toXml]];
+    return criteriaDoc;
 }
 
 /* string
  * Returns the complete criteria tree as a string.
  */
--(NSString *)string
-{
-    NSXMLDocument *criteriaDoc = [NSXMLDocument document];
-    [criteriaDoc setStandalone:YES];
-    criteriaDoc.characterEncoding = @"UTF-8";
-    criteriaDoc.version = @"1.0";
-    
-    NSDictionary * conditionDict = @{@"condition": [CriteriaTree conditionToString:condition]};
-    NSXMLElement *criteriaGroup = [[NSXMLElement alloc] initWithName:@"criteriagroup"];
-    [criteriaGroup setAttributesWithDictionary:conditionDict];
-    
-    for (Criteria *criteria in criteriaTree) {
-        NSDictionary * criteriaDict = @{@"field": criteria.field};
-        NSXMLElement *criteriaElement = [[NSXMLElement alloc] initWithName:@"criteria"];
-        [criteriaElement setAttributesWithDictionary:criteriaDict];
-        NSXMLElement *operatorElement = [[NSXMLElement alloc]
-                                        initWithName:@"operator"
-                                        stringValue:[NSString stringWithFormat:
-                                                     @"%lu", (unsigned long)criteria.operator]];
-        NSXMLElement *valueElement = [[NSXMLElement alloc]
-                                        initWithName:@"value"
-                                        stringValue:criteria.value];
-        
-        [criteriaGroup addChild:criteriaElement];
-        [criteriaElement addChild:operatorElement];
-        [criteriaElement addChild:valueElement];
-        
-    }
-    [criteriaDoc addChild:criteriaGroup];
-    
-	return criteriaDoc.XMLString;
+-(NSString *)string {
+	return [self toXmlDocument].XMLString;
 }
 
 @end

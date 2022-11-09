@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21225" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21225"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -235,42 +235,71 @@
                                                 </menu>
                                             </popUpMenus>
                                         </predicateEditorRowTemplate>
-                                        <predicateEditorRowTemplate rowType="simple" id="EgX-T6-DtG">
+                                        <predicateEditorRowTemplate rowType="simple" id="npF-oN-pT0">
                                             <array key="leftExpressionObject">
                                                 <expression type="keyPath">
                                                     <string key="keyPath">date</string>
                                                 </expression>
                                             </array>
-                                            <integer key="rightExpressionObject" value="900"/>
+                                            <array key="rightExpressionObject">
+                                                <expression type="constant">
+                                                    <string key="constantValue">today</string>
+                                                </expression>
+                                                <expression type="constant">
+                                                    <string key="constantValue">yesterday</string>
+                                                </expression>
+                                                <expression type="constant">
+                                                    <string key="constantValue">last week</string>
+                                                </expression>
+                                            </array>
                                             <popUpMenus>
-                                                <menu id="23M-zE-VzJ">
+                                                <menu id="87z-mI-y4A">
                                                     <items>
-                                                        <menuItem title="date" state="on" id="siv-4H-oAT">
+                                                        <menuItem title="date" state="on" id="2DQ-P1-y0U">
                                                             <expression key="representedObject" type="keyPath">
                                                                 <string key="keyPath">date</string>
                                                             </expression>
                                                         </menuItem>
                                                     </items>
                                                 </menu>
-                                                <menu id="dVH-v9-f4r">
+                                                <menu id="UaN-cb-wyb">
                                                     <items>
-                                                        <menuItem title="is" state="on" id="57q-kN-dpL">
+                                                        <menuItem title="is" state="on" id="OeF-ya-gJs">
                                                             <integer key="representedObject" value="4"/>
                                                         </menuItem>
-                                                        <menuItem title="is not" id="BGV-IV-Yt5">
-                                                            <integer key="representedObject" value="5"/>
-                                                        </menuItem>
-                                                        <menuItem title="is less than" id="aOK-7q-K11">
-                                                            <integer key="representedObject" value="0"/>
-                                                        </menuItem>
-                                                        <menuItem title="is greater than" id="cUN-oN-nlk">
+                                                        <menuItem title="is greater than" id="eiY-Pb-5sI">
                                                             <integer key="representedObject" value="2"/>
                                                         </menuItem>
-                                                        <menuItem title="is less than or equal to" id="xhh-AS-u25">
+                                                        <menuItem title="is less than" id="NMb-LH-ULD">
+                                                            <integer key="representedObject" value="0"/>
+                                                        </menuItem>
+                                                        <menuItem title="is greater than or equal to" id="CXy-ZH-c0j">
+                                                            <integer key="representedObject" value="3"/>
+                                                        </menuItem>
+                                                        <menuItem title="is less than or equal to" id="suK-UH-h2G">
                                                             <integer key="representedObject" value="1"/>
                                                         </menuItem>
-                                                        <menuItem title="is greater than or equal to" id="Qgp-nY-sl8">
-                                                            <integer key="representedObject" value="3"/>
+                                                        <menuItem title="is not" id="EKz-BT-7sf">
+                                                            <integer key="representedObject" value="5"/>
+                                                        </menuItem>
+                                                    </items>
+                                                </menu>
+                                                <menu id="Pcw-lE-Kal">
+                                                    <items>
+                                                        <menuItem title="today" state="on" id="SBI-Wd-vm8">
+                                                            <expression key="representedObject" type="constant">
+                                                                <string key="constantValue">today</string>
+                                                            </expression>
+                                                        </menuItem>
+                                                        <menuItem title="yesterday" id="3To-NX-pJT">
+                                                            <expression key="representedObject" type="constant">
+                                                                <string key="constantValue">yesterday</string>
+                                                            </expression>
+                                                        </menuItem>
+                                                        <menuItem title="last week" id="Z2p-gj-2ku">
+                                                            <expression key="representedObject" type="constant">
+                                                                <string key="constantValue">last week</string>
+                                                            </expression>
                                                         </menuItem>
                                                     </items>
                                                 </menu>

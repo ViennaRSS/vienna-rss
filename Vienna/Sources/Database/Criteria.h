@@ -42,10 +42,16 @@ typedef NS_ENUM(NSUInteger, CriteriaOperator) {
 typedef NS_ENUM(NSUInteger, CriteriaCondition) {
 	MA_CritCondition_All = 0,
 	MA_CritCondition_Any,
-	MA_CritCondition_Invalid
+	MA_CritCondition_Invalid,
+    MA_CritCondition_None,
 };
 
-@interface Criteria : NSObject {
+@interface CriteriaElement : NSObject {
+
+}
+@end
+
+@interface Criteria : CriteriaElement {
 	NSString * field;
 	NSString * value;
 	CriteriaOperator operator;
@@ -60,15 +66,16 @@ typedef NS_ENUM(NSUInteger, CriteriaCondition) {
 @property (nonatomic) CriteriaOperator operator;
 @end
 
-@interface CriteriaTree : NSObject {
+@interface CriteriaTree : CriteriaElement {
 	CriteriaCondition condition;
-	NSMutableArray * criteriaTree;
+	NSMutableArray<CriteriaElement *> * criteriaTree;
 }
 
 // Public functions
--(instancetype)initWithString:(NSString *)string NS_DESIGNATED_INITIALIZER;
-@property (nonatomic, readonly) NSEnumerator *criteriaEnumerator;
--(void)addCriteria:(Criteria *)newCriteria;
+-(instancetype)initWithString:(NSString *)string;
+-(instancetype)initWithXml:(NSXMLElement *)xml NS_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly) NSEnumerator<CriteriaElement *> *criteriaEnumerator;
+-(void)addCriteria:(CriteriaElement *)newCriteria;
 @property (readonly, nonatomic) NSString *string;
 @property (nonatomic) CriteriaCondition condition;
 

@@ -2116,151 +2116,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	return sqlString;
 }
 
-/* criteriaToSQL
- * Converts a criteria tree to it's SQL representative.
- */
--(NSString *)criteriaToSQL:(CriteriaTree *)criteriaTree
-{
-	NSMutableString * sqlString = [[NSMutableString alloc] init];
-	NSInteger count = 0;
-
-	for (Criteria * criteria in criteriaTree.criteriaEnumerator)
-	{
-		Field * field = [self fieldByName:criteria.field];
-		NSAssert1(field != nil, @"Criteria field %@ does not have an associated database field", [criteria field]);
-
-		NSString * operatorString = nil;
-		NSString * valueString = nil;
-		
-		switch (criteria.operator)
-		{
-			case MA_CritOper_Is:					operatorString = @"=%@"; break;
-			case MA_CritOper_IsNot:					operatorString = @"<>%@"; break;
-			case MA_CritOper_IsLessThan:			operatorString = @"<%@"; break;
-			case MA_CritOper_IsGreaterThan:			operatorString = @">%@"; break;
-			case MA_CritOper_IsLessThanOrEqual:		operatorString = @"<=%@"; break;
-			case MA_CritOper_IsGreaterThanOrEqual:  operatorString = @">=%@"; break;
-			case MA_CritOper_Contains:				operatorString = @" LIKE '%%%@%%'"; break;
-			case MA_CritOper_NotContains:			operatorString = @" NOT LIKE '%%%@%%'"; break;
-			case MA_CritOper_IsBefore:				operatorString = @"<%@"; break;
-			case MA_CritOper_IsAfter:				operatorString = @">%@"; break;
-			case MA_CritOper_IsOnOrBefore:			operatorString = @"<=%@"; break;
-			case MA_CritOper_IsOnOrAfter:			operatorString = @">=%@"; break;
-				
-			case MA_CritOper_Under:
-			case MA_CritOper_NotUnder:
-				// Handle the operatorString later. For now just make sure we're working with the
-				// right field types.
-				NSAssert([field type] == VNAFieldTypeFolder, @"Under operators only valid for folder field types");
-				break;
-		}
-
-		// Unknown operator - skip this clause
-		if (operatorString == nil)
-			continue;
-		
-		if (count++ > 0)
-			[sqlString appendString:criteriaTree.condition == MA_CritCondition_All ? @" AND " : @" OR "];
-		
-		switch (field.type)
-		{
-			case VNAFieldTypeFlag:
-				valueString = [criteria.value isEqualToString:@"Yes"] ? @"1" : @"0";
-				break;
-				
-			case VNAFieldTypeFolder: {
-				Folder * folder = [self folderFromName:criteria.value];
-				NSInteger scopeFlags = 0;
-
-				switch (criteria.operator)
-				{
-					case MA_CritOper_Under:		scopeFlags = VNAQueryScopeSubFolders|VNAQueryScopeInclusive; break;
-					case MA_CritOper_NotUnder:	scopeFlags = VNAQueryScopeSubFolders; break;
-					case MA_CritOper_Is:		scopeFlags = VNAQueryScopeInclusive; break;
-					case MA_CritOper_IsNot:		scopeFlags = 0; break;
-					default:					NSAssert(false, @"Invalid operator for folder field type");
-				}
-				[sqlString appendString:[self sqlScopeForFolder:folder flags:scopeFlags]];
-				break;
-				}
-				
-			case VNAFieldTypeDate: {
-                NSCalendar *calendar = NSCalendar.currentCalendar;
-                NSDate *startDate = [calendar startOfDayForDate:[NSDate date]];
-                NSString * criteriaValue = criteria.value.lowercaseString;
-                NSCalendarUnit calendarUnit = NSCalendarUnitDay;
-
-                // "yesterday" is a short hand way of specifying the previous day.
-                if ([criteriaValue isEqualToString:@"yesterday"])
-                {
-                    startDate = [calendar dateByAddingUnit:NSCalendarUnitDay
-                                                     value:-1
-                                                    toDate:startDate
-                                                   options:0];
-                }
-                // "last week" is a short hand way of specifying a range from 7 days ago to today.
-                else if ([criteriaValue isEqualToString:@"last week"])
-                {
-                    startDate = [calendar dateByAddingUnit:NSCalendarUnitWeekOfYear
-                                                     value:-1
-                                                    toDate:startDate
-                                                   options:0];
-                    calendarUnit = NSCalendarUnitWeekOfYear;
-                }
-
-                if (criteria.operator == MA_CritOper_Is)
-                {
-                    NSDate *endDate = [calendar dateByAddingUnit:calendarUnit
-                                                           value:1
-                                                          toDate:startDate
-                                                         options:0];
-                    operatorString = [NSString stringWithFormat:@">=%f AND %@<%f", startDate.timeIntervalSince1970, field.sqlField, endDate.timeIntervalSince1970];
-					valueString = @"";
-				}
-				else
-				{
-                    if ((criteria.operator == MA_CritOper_IsAfter) || (criteria.operator == MA_CritOper_IsOnOrBefore)) {
-                        startDate = [calendar dateByAddingUnit:NSCalendarUnitDay
-                                                         value:1
-                                                        toDate:startDate
-                                                       options:0];
-                    }
-
-					valueString = [NSString stringWithFormat:@"%f", startDate.timeIntervalSince1970];
-				}
-				break;
-				}
-
-			case VNAFieldTypeString:
-				if (field.tag == ArticleFieldIDText)
-				{
-					// Special case for searching the text field. We always include the title field in the
-					// search so the resulting SQL statement becomes:
-					//
-					//   (text op value or title op value)
-					//
-					// where op is the appropriate operator.
-					//
-					Field * titleField = [self fieldByName:MA_Field_Subject];
-					NSString * value = [NSString stringWithFormat:operatorString, criteria.value];
-					[sqlString appendFormat:@"(%@%@ OR %@%@)", field.sqlField, value, titleField.sqlField, value];
-					break;
-				}
-					
-			case VNAFieldTypeInteger:
-				valueString = [NSString stringWithFormat:@"%@", criteria.value];
-				break;
-		}
-		
-		if (valueString != nil)
-		{
-			[sqlString appendString:field.sqlField];
-			[sqlString appendFormat:operatorString, valueString];
-		}
-	}
-	return sqlString;
-}
-
 /* criteriaForFolder
  * Returns the CriteriaTree that will return the folder contents.
  */
@@ -2352,7 +2207,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 			return nil;
         }
 		CriteriaTree * tree = [self criteriaForFolder:folderId];
-		queryString = [NSString stringWithFormat:@"%@ WHERE (%@)", queryString, [self criteriaToSQL:tree]];
+        queryString = [NSString stringWithFormat:@"%@ WHERE (%@)", queryString, [tree toSQLForDatabase:self]];
 	}
 
 	// prepare filter if needed
@@ -2736,4 +2591,184 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 {
 	[self close];
 }
+@end
+
+@implementation CriteriaTree (SQL)
+
+-(NSString *)stringForCriteria:(Criteria *)criteria database:(Database *)database {
+
+    NSMutableString *sqlString = [NSMutableString string];
+
+    Field * field = [database fieldByName:criteria.field];
+    NSAssert1(field != nil, @"Criteria field %@ does not have an associated database field", [criteria field]);
+
+    NSString * operatorString = nil;
+    NSString * valueString = nil;
+
+    switch (criteria.operator)
+    {
+        case MA_CritOper_Is:                    operatorString = @"=%@"; break;
+        case MA_CritOper_IsNot:                    operatorString = @"<>%@"; break;
+        case MA_CritOper_IsLessThan:            operatorString = @"<%@"; break;
+        case MA_CritOper_IsGreaterThan:            operatorString = @">%@"; break;
+        case MA_CritOper_IsLessThanOrEqual:        operatorString = @"<=%@"; break;
+        case MA_CritOper_IsGreaterThanOrEqual:  operatorString = @">=%@"; break;
+        case MA_CritOper_Contains:                operatorString = @" LIKE '%%%@%%'"; break;
+        case MA_CritOper_NotContains:            operatorString = @" NOT LIKE '%%%@%%'"; break;
+        case MA_CritOper_IsBefore:                operatorString = @"<%@"; break;
+        case MA_CritOper_IsAfter:                operatorString = @">%@"; break;
+        case MA_CritOper_IsOnOrBefore:            operatorString = @"<=%@"; break;
+        case MA_CritOper_IsOnOrAfter:            operatorString = @">=%@"; break;
+
+        case MA_CritOper_Under:
+        case MA_CritOper_NotUnder:
+            // Handle the operatorString later. For now just make sure we're working with the
+            // right field types.
+            NSAssert([field type] == VNAFieldTypeFolder, @"Under operators only valid for folder field types");
+            break;
+    }
+
+    // Unknown operator - skip this clause
+    if (operatorString == nil) {
+        return nil;
+    }
+
+    switch (field.type)
+    {
+        case VNAFieldTypeFlag:
+            valueString = [criteria.value isEqualToString:@"Yes"] ? @"1" : @"0";
+            break;
+
+        case VNAFieldTypeFolder: {
+            Folder * folder = [database folderFromName:criteria.value];
+            NSInteger scopeFlags = 0;
+
+            switch (criteria.operator)
+            {
+                case MA_CritOper_Under:        scopeFlags = VNAQueryScopeSubFolders|VNAQueryScopeInclusive; break;
+                case MA_CritOper_NotUnder:    scopeFlags = VNAQueryScopeSubFolders; break;
+                case MA_CritOper_Is:        scopeFlags = VNAQueryScopeInclusive; break;
+                case MA_CritOper_IsNot:        scopeFlags = 0; break;
+                default:                    NSAssert(false, @"Invalid operator for folder field type");
+            }
+            [sqlString appendString:[database sqlScopeForFolder:folder flags:scopeFlags]];
+            break;
+            }
+
+        case VNAFieldTypeDate: {
+            NSCalendar *calendar = NSCalendar.currentCalendar;
+            NSDate *startDate = [calendar startOfDayForDate:[NSDate date]];
+            NSString * criteriaValue = criteria.value.lowercaseString;
+            NSCalendarUnit calendarUnit = NSCalendarUnitDay;
+
+            // "yesterday" is a short hand way of specifying the previous day.
+            if ([criteriaValue isEqualToString:@"yesterday"])
+            {
+                startDate = [calendar dateByAddingUnit:NSCalendarUnitDay
+                                                 value:-1
+                                                toDate:startDate
+                                               options:0];
+            }
+            // "last week" is a short hand way of specifying a range from 7 days ago to today.
+            else if ([criteriaValue isEqualToString:@"last week"])
+            {
+                startDate = [calendar dateByAddingUnit:NSCalendarUnitWeekOfYear
+                                                 value:-1
+                                                toDate:startDate
+                                               options:0];
+                calendarUnit = NSCalendarUnitWeekOfYear;
+            }
+
+            if (criteria.operator == MA_CritOper_Is)
+            {
+                NSDate *endDate = [calendar dateByAddingUnit:calendarUnit
+                                                       value:1
+                                                      toDate:startDate
+                                                     options:0];
+                NSString *dateIs = [NSString stringWithFormat:@"( %@>=%f AND %@<%f )", field.sqlField, startDate.timeIntervalSince1970, field.sqlField, endDate.timeIntervalSince1970];
+                [sqlString appendString:dateIs];
+            }
+            else
+            {
+                if ((criteria.operator == MA_CritOper_IsAfter) || (criteria.operator == MA_CritOper_IsOnOrBefore)) {
+                    startDate = [calendar dateByAddingUnit:NSCalendarUnitDay
+                                                     value:1
+                                                    toDate:startDate
+                                                   options:0];
+                }
+
+                valueString = [NSString stringWithFormat:@"%f", startDate.timeIntervalSince1970];
+            }
+            break;
+            }
+
+        case VNAFieldTypeString:
+            if (field.tag == ArticleFieldIDText)
+            {
+                // Special case for searching the text field. We always include the title field in the
+                // search so the resulting SQL statement becomes:
+                //
+                //   (text op value or title op value)
+                //
+                // where op is the appropriate operator.
+                //
+                Field * titleField = [database fieldByName:MA_Field_Subject];
+                NSString * value = [NSString stringWithFormat:operatorString, criteria.value];
+                [sqlString appendFormat:@"(%@%@ OR %@%@)", field.sqlField, value, titleField.sqlField, value];
+                break;
+            }
+
+        case VNAFieldTypeInteger:
+            valueString = [NSString stringWithFormat:@"%@", criteria.value];
+            break;
+    }
+
+    if (valueString != nil)
+    {
+        [sqlString appendString:field.sqlField];
+        [sqlString appendFormat:operatorString, valueString];
+    }
+
+    return sqlString;
+}
+
+/* criteriaToSQLForDatabase
+ * Converts a criteria tree to it's SQL representative.
+ */
+-(NSString *)toSQLForDatabase:(Database *)database
+{
+    NSMutableString * sqlString = [NSMutableString string];
+    NSInteger count = 0;
+
+    for (CriteriaElement * criteria in self.criteriaEnumerator)
+    {
+        NSString *conditionString = @"";
+        if (count++ > 0) {
+            switch (self.condition) {
+               case MA_CritCondition_Any:
+                    conditionString = @" OR ";
+                    break;
+                case MA_CritCondition_None:
+                    conditionString = @" AND NOT ";
+                    break;
+                case MA_CritCondition_All:
+                default:
+                    conditionString = @" AND ";
+                    break; //Unknown condition
+            }
+        } else if (condition == MA_CritCondition_None) {
+            conditionString = @"NOT ";
+        }
+
+        [sqlString appendString:conditionString];
+
+        if ([criteria isKindOfClass:[CriteriaTree class]]) {
+            [sqlString appendString:[NSString stringWithFormat:@"( %@ )", [(CriteriaTree *)criteria toSQLForDatabase:database]]];
+        } else {
+            [sqlString appendString:[self stringForCriteria:(Criteria *)criteria database:database]];
+        }
+    }
+    return sqlString;
+}
+
 @end
