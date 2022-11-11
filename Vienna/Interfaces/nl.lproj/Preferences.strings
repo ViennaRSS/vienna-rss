@@ -56,13 +56,13 @@
 "FFP-H1-weF.title" = "Toon in menubalk";
 
 /* Class = "NSTextFieldCell"; title = "You may have to relaunch Vienna after changing this setting for it to take effect."; ObjectID = "fgw-cI-bAr"; */
-"fgw-cI-bAr.title" = "Mogelijk moet je Vienna opnieuw starten voordat een wijziging van deze voorkeur van kracht wordt.";
+"fgw-cI-bAr.title" = "Mogelijk moet je Vienna opnieuw starten voordat een wijziging van deze instelling van kracht wordt.";
 
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "flH-2D-s6O"; */
 "flH-2D-s6O.title" = "Open links in externe browser";
 
 /* Class = "NSTextFieldCell"; title = "Vienna has a new browser built on top of WebKit. It is faster and more secure.\nAfter changing this setting, restart Vienna to test it. Feedback is very welcome!"; ObjectID = "Fv8-Xx-YR0"; */
-"Fv8-Xx-YR0.title" = "Vienna heeft een nieuwe browser die is gebaseerd op WebKit. Hij is sneller en veiliger. Herstart Vienna na het wijzigen van deze voorkeur. Feedback ontvangen wij graag!";
+"Fv8-Xx-YR0.title" = "Vienna heeft een nieuwe browser die is gebaseerd op WebKit. Hij is sneller en veiliger. Herstart Vienna na het wijzigen van deze instelling. Feedback ontvangen wij graag!";
 
 /* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "g3K-qh-M6y"; */
 "g3K-qh-M6y.title" = "Hoe hoger de waarde, des te sneller worden je abonnementen gedownload.";
