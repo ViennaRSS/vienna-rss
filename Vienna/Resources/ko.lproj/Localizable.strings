@@ -8,46 +8,10 @@
 "%@ Info" = "%@ 정보";
 
 /* No comment provided by engineer. */
-"%d new articles retrieved" = "%d 항목의 새 기사를 등록";
-
-/* Notification body */
-"%d new unread articles retrieved" = "%d 항목의 읽지 않은 새 기사가 추가되었습니다.";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d 항목의 구독을 성공적으로 저장했습니다.";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d 항목의 구독을 성공적으로 가져왔습니다.";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d 항목의 읽지 않은 기사";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u 기사";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u 읽지 않음";
-
-/* No comment provided by engineer. */
 "A folder with that name already exists" = "지정한 이름의 항목이 이미 존재합니다.";
 
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "새로운 Vienna 데이터베이스를 \"%@\" 위치에 생성할 수 없습니다. 아마도 해당 폴더가 원격 네트워크 공유에 위치해 있을 것이며, 현재 버전의 Vienna 로는 원격 데이트베이스를 관리할 수 없습니다. 로컬 머신에 위치한 다른 폴더를 선택해 재시도하시기 바랍니다.";
-
-/* No comment provided by engineer. */
-"After 2 Days" = "2일 후";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "2주일 후";
-
-/* No comment provided by engineer. */
-"After a Day" = "1일 후";
-
-/* No comment provided by engineer. */
-"After a Month" = "1개월 후";
-
-/* No comment provided by engineer. */
-"After a Week" = "1주일 후";
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "이전 갱신시 이 피드에서 오류가 발생했습니다.";
@@ -150,6 +114,9 @@
 /* Title of a button on an alert */
 "Empty" = "비우기";
 
+/* Title of a button on an alert */
+"Empty Trash" = "휴지통 비우기";
+
 /* No comment provided by engineer. */
 "Enter the URL here" = "여기에 URL 입력";
 
@@ -198,7 +165,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "서버로부터 HTTP 코드 보고: %d";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "모든 다운로드를 취소하고 Vienna 를 지금 종료하시겠습니까?";
 
 /* No comment provided by engineer. */
@@ -288,7 +255,7 @@
 /* Title of a button on an alert */
 "OK" = "확인";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "하나 이상의 다운로드가 진행 중입니다.";
 
 /* Title of a popup menu item */
@@ -424,7 +391,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "데이터베이스 파일 형식이 변경되었습니다.";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "기본 스타일로 대체될 것입니다.";
 
 /* No comment provided by engineer. */
@@ -433,7 +400,7 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "\"%@\" 스타일이 사용자의 스타일 폴더에 설치되었으며, 스타일 메뉴에 등록되었습니다.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "스타일 %@ 항목은 손상되었거나 유효하지 않은 형식입니다.";
 
 /* No comment provided by engineer. */
@@ -450,9 +417,6 @@
 
 /* No comment provided by engineer. */
 "Trash" = "휴지통";
-
-/* No comment provided by engineer. */
-"Unread" = "읽지 않음";
 
 /* No comment provided by engineer. */
 "Unread Articles" = "읽지 않은 기사";

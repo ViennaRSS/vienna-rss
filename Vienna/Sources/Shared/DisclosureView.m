@@ -32,7 +32,9 @@
 
 // Override designated initializer
 - (instancetype)initWithFrame:(NSRect)frameRect {
-    if (self = [super initWithFrame:frameRect]) {
+    self = [super initWithFrame:frameRect];
+
+    if (self) {
         _disclosed = frameRect.size.height > 0;
     }
 

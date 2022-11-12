@@ -49,7 +49,7 @@
 /* Class = "NSMenuItem"; title = "Vienna Help"; ObjectID = "111"; */
 "111.title" = "Справка Vienna";
 
-/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; Note = "Apple renamed \"Preferences\" to \"Settings\" in macOS 13. The menu item is renamed automatically at runtime. Please use the default term for the preferences window that was used until macOS 12."; */
 "129.title" = "Настройки…";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
@@ -239,10 +239,10 @@
 "1073.title" = "Отправить ссылку электронной почтой";
 
 /* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
-"1084.title" = "Увеличить шрифт";
+"1084.title" = "Увеличить текст";
 
 /* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
-"1085.title" = "Уменьшить шрифт";
+"1085.title" = "Уменьшить текст";
 
 /* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
 "1101.title" = "Открыть адрес веб…";
@@ -414,6 +414,9 @@
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN"; */
 "MHF-D4-pRN.title" = "ПРОПИСНЫМИ";
+
+/* Class = "NSMenuItem"; title = "Actual Size"; ObjectID = "OiG-oc-aVj"; Note = "This string is also used in Safari"; */
+"OiG-oc-aVj.title" = "Реальный размер";
 
 /* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
 "pKl-6f-Hlc.title" = "Отметить как прочитанное";

@@ -30,6 +30,7 @@
 #import "Folder.h"
 #import "Constants.h"
 #import "Preferences.h"
+#import "Vienna-Swift.h"
 
 @implementation BrowserPaneButtonCell
 
@@ -65,6 +66,7 @@
 @interface BrowserPane ()
 
 @property (nonatomic) OverlayStatusBar *statusBar;
+@property (nonatomic) NSString *searchString;
 
 -(void)endFrameLoad;
 -(void)showRssPageButton:(BOOL)showButton;
@@ -74,11 +76,13 @@
 
 @implementation BrowserPane
 
+@synthesize tabUrl, loading;
+
 + (void)load
 {
     if (self == [BrowserPane class]) {
         //These are synonyms
-        [self exposeBinding:@"isLoading"];
+        [self exposeBinding:@"loading"];
         [self exposeBinding:@"isProcessing"];
     }
 }
@@ -88,7 +92,7 @@
 	    NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	    
 	    if ([key isEqualToString:@"isProcessing"]) {
-	        NSSet *affectingKeys = [NSSet setWithObjects:@"isLoading", nil];
+	        NSSet *affectingKeys = [NSSet setWithObjects:@"loading", nil];
 	        keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKeys];
 	    }
 	    
@@ -103,10 +107,10 @@
     self = [super initWithFrame:frame];
     if (self)
 	{
-		[self willChangeValueForKey:@"isLoading"];
-		isLoading = NO;
-		[self didChangeValueForKey:@"isLoading"];
-		_viewTitle = @"";
+		[self willChangeValueForKey:@"loading"];
+		loading = NO;
+		[self didChangeValueForKey:@"loading"];
+		_title = @"";
 		pageFilename = nil;
 		lastError = nil;
 		hasRSSlink = NO;
@@ -165,7 +169,7 @@
 {
 	if (self.webPane.mainFrame.dataSource.unreachableURL)
 		return self.webPane.mainFrame.dataSource.unreachableURL.absoluteString;
-	return self.url.absoluteString;
+	return self.tabUrl.absoluteString;
 }
 
 /* showRssPageButton
@@ -198,7 +202,7 @@
 	if ([NSURL URLWithString:theURL].scheme == nil)
 	{
 	    // If no '.' appears in the string, wrap it with 'www' and 'com'
-	    if (![theURL hasCharacter:'.'])
+	    if (![theURL vna_hasCharacter:'.'])
 	    {
 		    theURL = [NSString stringWithFormat:@"www.%@.com", theURL];
         }
@@ -210,8 +214,8 @@
 	if (urlToLoad != nil)
 	{
 		//set url and load immediately, because action was invoked by user
-		self.url = urlToLoad;
-		[self load];
+		self.tabUrl = urlToLoad;
+		[self loadTab];
 	}
 	else
 		[self activateAddressBar];
@@ -230,34 +234,34 @@
 -(void)checkAndLoad:(NSNotification *)notification {
 	if (self.webPane.mainFrame.dataSource.request == nil)
 	{
-		[self load];
+		[self loadTab];
 	}
 }
 
 /* loadURL
  * Load the specified URL into the web frame.
  */
--(void)load
+-(void)loadTab
 {
-	if (!self.url) {
+	if (!self.tabUrl) {
 		return;
 	}
 
-	pageFilename = self.url.path.lastPathComponent.stringByDeletingPathExtension;
+	pageFilename = self.tabUrl.path.lastPathComponent.stringByDeletingPathExtension;
 	
 	if (self.webPane.loading)
 	{
 		[self willChangeValueForKey:@"isLoading"];
 		[self.webPane stopLoading:self];
-		[self didChangeValueForKey:@"isLoading"];
+		[self didChangeValueForKey:@"loading"];
 	}
-	[self.webPane.mainFrame loadRequest:[NSURLRequest requestWithURL:self.url]];
+	[self.webPane.mainFrame loadRequest:[NSURLRequest requestWithURL:self.tabUrl]];
 }
 
--(void)setUrl:(NSURL *)url {
-	_url = url;
-	addressField.stringValue = url ? url.absoluteString : @"";
-    self.tab.label = url ? url.host : NSLocalizedString(@"New Tab", nil);
+-(void)setTabUrl:(NSURL *)url {
+    tabUrl = [url copy];
+    addressField.stringValue = tabUrl ? tabUrl.absoluteString : @"";
+    self.tab.label = tabUrl ? tabUrl.host : NSLocalizedString(@"New Tab", nil);
 }
 
 /* endFrameLoad
@@ -267,18 +271,18 @@
  */
 -(void)endFrameLoad
 {
-	if ([self.viewTitle isEqualToString:@""])
-	{
-		if (lastError == nil)
-		{
-			self.tab.label = pageFilename;
-			self.viewTitle = pageFilename;
-		}
-	}
-	
-	[self willChangeValueForKey:@"isLoading"];
-	isLoading = NO;
-	[self didChangeValueForKey:@"isLoading"];
+    if ([self.title isEqualToString:@""])
+    {
+        if (lastError == nil)
+        {
+            self.tab.label = pageFilename;
+            self.title = pageFilename;
+        }
+    }
+
+    [self willChangeValueForKey:@"loading"];
+    loading = NO;
+    [self didChangeValueForKey:@"loading"];
 }
 
 /* printDocument
@@ -286,7 +290,7 @@
  */
 -(void)printDocument:(id)sender
 {
-	[self.webPane printDocument:sender];
+    [self.webPane printDocument:sender];
 }
 
 /* mainView
@@ -294,7 +298,7 @@
  */
 -(NSView *)mainView
 {
-	return self.webPane;
+    return self.webPane;
 }
 
 /* webView
@@ -302,7 +306,36 @@
  */
 -(WebView *)webView
 {
-	return self.webPane;
+    return self.webPane;
+}
+
+- (NSString *)textSelection {
+    if (self.webPane != nil)
+    {
+        NSView * docView = self.webPane.mainFrame.frameView.documentView;
+
+        if ([docView conformsToProtocol:@protocol(WebDocumentText)]) {
+            return [[(id<WebDocumentText>)docView selectedString] copy];
+        } else {
+            return @"";
+        }
+    } else {
+        return @"";
+    }
+}
+
+- (NSString *)html {
+    if (self.webPane != nil)
+    {
+        WebDataSource * dataSource = self.webPane.mainFrame.dataSource;
+        if (dataSource != nil)
+        {
+            id representation = dataSource.representation;
+            if ((representation != nil) && ([representation conformsToProtocol:@protocol(WebDocumentRepresentation)]) && ([(id<WebDocumentRepresentation>)representation canProvideDocumentSource]))
+                return [[(id<WebDocumentRepresentation>)representation documentSource] copy];
+        }
+    }
+    return @"";
 }
 
 /* performFindPanelAction
@@ -311,22 +344,29 @@
  */
 -(void)performFindPanelAction:(NSInteger)actionTag
 {
-	switch (actionTag)
-	{
-		case NSFindPanelActionSetFindString:
-		{			
-			[self.webPane searchFor:APPCONTROLLER.searchString direction:YES caseSensitive:NO wrap:YES];
-			break;
-		}
-			
-		case NSFindPanelActionNext:
-			[self.webPane searchFor:APPCONTROLLER.searchString direction:YES caseSensitive:NO wrap:YES];
-			break;
-			
-		case NSFindPanelActionPrevious:
-			[self.webPane searchFor:APPCONTROLLER.searchString direction:NO caseSensitive:NO wrap:YES];
-			break;
-	}
+    switch (actionTag)
+    {
+        case NSFindPanelActionSetFindString:
+        {
+			//TODO: unfortunately, webpane takes focus after every search action. Continuous searching would be nice if it worked though
+			//[self.webPane searchFor:self.searchString direction:YES caseSensitive:NO wrap:YES];
+            break;
+        }
+
+        case NSFindPanelActionNext:
+            [self.webPane searchFor:self.searchString
+                          direction:YES
+                      caseSensitive:NO
+                               wrap:YES];
+            break;
+
+        case NSFindPanelActionPrevious:
+            [self.webPane searchFor:self.searchString
+                          direction:NO
+                      caseSensitive:NO
+                               wrap:YES];
+            break;
+    }
 }
 
 /* canGoForward
@@ -334,7 +374,7 @@
  */
 -(BOOL)canGoForward
 {
-	return self.webPane.canGoForward;
+    return self.webPane.canGoForward;
 }
 
 /* canGoBack
@@ -342,7 +382,7 @@
  */
 -(BOOL)canGoBack
 {
-	return self.webPane.canGoBack;
+    return self.webPane.canGoBack;
 }
 
 /* handleGoForward
@@ -350,7 +390,7 @@
  */
 -(IBAction)handleGoForward:(id)sender
 {
-	[self.webPane goForward];
+    [self.webPane goForward];
 }
 
 /* handleGoBack
@@ -358,39 +398,44 @@
  */
 -(IBAction)handleGoBack:(id)sender
 {
-	[self.webPane goBack];
+    [self.webPane goBack];
 }
 
-/* swipeWithEvent 
+-(void)updateAlternateMenuTitle
+{
+    // TODO: use to add "Open page in (external browser)"
+}
+
+/* swipeWithEvent
  * Enables "back"/"forward" and "scroll to top"/"scroll to bottom" via three-finger swipes as in Safari and other applications.
  */
--(void)swipeWithEvent:(NSEvent *)event 
-{	
-	CGFloat deltaX = event.deltaX;
-	CGFloat deltaY = event.deltaY;
+-(void)swipeWithEvent:(NSEvent *)event
+{
+    CGFloat deltaX = event.deltaX;
+    CGFloat deltaY = event.deltaY;
 
-	// If the horizontal component of the swipe is larger, the user wants to go back or forward...
-	if (fabs(deltaX) > fabs(deltaY))
-	{
-		if (deltaX != 0)
-		{
-			if (deltaX > 0)
-				[self handleGoBack:self];
-			else 
-				[self handleGoForward:self];
-		}
-	}
-	// Otherwise, she wants to go to the top/bottom of the page.
-	else 
-	{
-		if (deltaY != 0)
-		{
-			if (deltaY > 0)
-				[self.webPane scrollToTop];
-			else 
-				[self.webPane scrollToBottom];
-		}
-	}
+    // If the horizontal component of the swipe is larger, the user wants to go back or forward...
+    if (fabs(deltaX) > fabs(deltaY))
+    {
+        if (deltaX != 0)
+        {
+            if (deltaX > 0)
+                [self handleGoBack:self];
+            else
+                [self handleGoForward:self];
+        }
+    }
+    // Otherwise, she wants to go to the top/bottom of the page.
+    else
+    {
+        if (deltaY != 0)
+        {
+            if (deltaY > 0)
+                [self.webPane scrollToTop];
+            else
+                [self.webPane scrollToBottom];
+        }
+    }
 }
 
 /* handleReload
@@ -398,10 +443,10 @@
  */
 -(IBAction)handleReload:(id)sender
 {
-	if (self.webPane.mainFrame.dataSource != nil)
-		[self.webPane reload:self];
-	else
-		[self handleAddress:self];
+    if (self.webPane.mainFrame.dataSource != nil)
+        [self.webPane reload:self];
+    else
+        [self handleAddress:self];
 }
 
 /* handleStopLoading webview
@@ -409,15 +454,13 @@
  */
 -(void)handleStopLoading:(id)sender
 {
-	[self willChangeValueForKey:@"isLoading"];
-	// stop Javascript and plugings
-	[self.webPane abortJavascriptAndPlugIns];
-	[self.webPane setFrameLoadDelegate:nil];
-    //TODO: why do we remove the delegate here??
-	[self.webPane setUIDelegate:nil];
-	[self.webPane stopLoading:self];
-	[self didChangeValueForKey:@"isLoading"];
-	[self.webPane.mainFrame loadHTMLString:@"" baseURL:nil];
+    [self willChangeValueForKey:@"loading"];
+    // stop Javascript and plugings
+    [self.webPane abortJavascript];
+    [self.webPane setUIDelegate:nil];
+    [self.webPane stopLoading:self];
+    [self didChangeValueForKey:@"loading"];
+    [self.webPane.mainFrame loadHTMLString:@"" baseURL:nil];
 }
 
 /* handleRSSPage
@@ -425,20 +468,11 @@
  */
 -(IBAction)handleRSSPage:(id)sender
 {
-	if (hasRSSlink)
-	{
-		Folder * currentFolder = APP.currentFolder;
-		NSInteger currentFolderId = currentFolder.itemId;
-		NSInteger parentFolderId = currentFolder.parentId;
-		if (currentFolder.firstChildId > 0)
-		{
-			parentFolderId = currentFolderId;
-			currentFolderId = 0;
-		}
-		SubscriptionModel *subscription = [[SubscriptionModel alloc] init];
-		NSString * verifiedURLString = [subscription verifiedFeedURLFromURL:self.url].absoluteString;
-		[APPCONTROLLER createNewSubscription:verifiedURLString underFolder:parentFolderId afterChild:currentFolderId];
-	}
+    if (hasRSSlink)
+    {
+        NSURL *rssUrl = self.tabUrl;
+        [APPCONTROLLER createSubscriptionInCurrentLocationForUrl:rssUrl];
+    }
 }
 
 /* handleKeyDown [delegate]
@@ -447,7 +481,7 @@
  */
 -(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags
 {
-	return NO;
+    return NO;
 }
 
 /* dealloc
@@ -457,14 +491,9 @@
 {
     [NSUserDefaults.standardUserDefaults removeObserver:self
                                              forKeyPath:MAPref_ShowStatusBar];
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[self handleStopLoading:nil];
-    //TODO: this should not be necessary, since webview would get deallocated once it stops being referenced
-    //and webview close already does this!
-	//[_webPane setFrameLoadDelegate:nil];
-    //and this is already done in handleStopLoading, and webview close also does this!
-    //[_webPane setUIDelegate:nil];
-	[_webPane close];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self handleStopLoading:nil];
+    [_webPane close];
 }
 
 // MARK: Key-value observation
@@ -485,12 +514,12 @@
     }
 }
 
-/* isLoading
+/* loading
  * Returns whether the current web page is in the process of being loaded.
  */
 -(BOOL)isLoading
 {
-	return isLoading;
+    return loading;
 }
 
 /* isProcessing
@@ -498,23 +527,23 @@
  */
 -(BOOL)isProcessing
 {
-	return self.loading;
+    return self.loading;
 }
 
 -(void)setIsProcessing:(BOOL)isProcessing
 {
-	//TODO: intentionally does nothing. Find more elegant way
+    //TODO: intentionally does nothing. Find more elegant way
 }
 
 -(void)setHasCloseButton:(BOOL)hasCloseButton
 {
-	//TODO: INTENTIONALLY EMPTY, find more elegant way
+    //TODO: INTENTIONALLY EMPTY, find more elegant way
 }
 
 -(BOOL)hasCloseButton
 {
-	//TODO: find out why MMTabBar needs this and fix
-	return YES;
+    //TODO: find out why MMTabBar needs this and fix
+    return YES;
 }
 
 #pragma mark - WebFrameLoadDelegate
@@ -602,7 +631,7 @@
     {
         //TODO: do not use reference from browswerpane to tab
         self.tab.label = title;
-        self.viewTitle = title;
+        self.title = title;
     }
 }
 
@@ -622,11 +651,11 @@
 #pragma mark - WebFrameLoad helper methods
 
 -(void)setLoadingURL:(NSURL *)url unreachable:(NSURL *)unreachableURL {
-    if (!isLoading)
+    if (!loading)
     {
-        [self willChangeValueForKey:@"isLoading"];
-        isLoading = YES;
-        [self didChangeValueForKey:@"isLoading"];
+        [self willChangeValueForKey:@"loading"];
+        loading = YES;
+        [self didChangeValueForKey:@"loading"];
     }
 
     // Show or hide the lock icon depending on whether this is a secure
@@ -643,9 +672,9 @@
     }
 
     if (!unreachableURL) {
-        self.url = url;
+        self.tabUrl = url;
     } else {
-        self.url = unreachableURL;
+        self.tabUrl = unreachableURL;
     }
 }
 
@@ -667,7 +696,7 @@
         }
         NSString *unreachableURL = frame.provisionalDataSource.unreachableURL.absoluteString;
         if (unreachableURL != nil)
-            self.url = frame.provisionalDataSource.unreachableURL;
+            self.tabUrl = frame.provisionalDataSource.unreachableURL;
     }
 }
 
@@ -677,6 +706,47 @@
     if (self.statusBar) {
         self.statusBar.label = url.absoluteString;
     }
+}
+
+#pragma mark - BrowserTab Protocol Requirements
+
+- (BOOL)back {
+	BOOL canGoBack = [self.webPane canGoBack];
+    [self handleGoBack:nil];
+	return canGoBack;
+}
+
+- (BOOL)forward {
+	BOOL canGoForward = [self.webPane canGoForward];
+	[self handleGoForward:nil];
+	return canGoForward;
+}
+
+- (void)printPage {
+	[self.webPane printDocument:self];
+}
+
+
+- (void)reloadTab {
+    [self handleReload:nil];
+}
+
+- (void)searchFor:(NSString * _Nonnull)searchString
+           action:(NSFindPanelAction)action {
+    self.searchString = searchString;
+    [self performFindPanelAction:action];
+}
+
+- (void)stopLoadingTab {
+    [self handleStopLoading:nil];
+}
+
+- (void)closeTab {
+    [self stopLoadingTab]; //remainder will be handeled by dealloc
+}
+
+- (void)activateWebView {
+    [self.window makeFirstResponder:self.webPane];
 }
 
 @end

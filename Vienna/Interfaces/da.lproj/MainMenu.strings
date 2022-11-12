@@ -7,6 +7,9 @@
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
 "5.title" = "Anbring alle forrest";
 
+/* Class = "NSMenuItem"; title = "Show Enclosure Bar"; ObjectID = "5V8-N1-SQd"; */
+"5V8-N1-SQd.title" = "Vis værktøjslinie for vedhæftninger";
+
 /* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1"; */
 "6yn-y8-lF1.title" = "Opdater alle abonnementer";
 
@@ -49,7 +52,7 @@
 /* Class = "NSMenuItem"; title = "Vienna Help"; ObjectID = "111"; */
 "111.title" = "Vienna hjælp";
 
-/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; Note = "Apple renamed \"Preferences\" to \"Settings\" in macOS 13. The menu item is renamed automatically at runtime. Please use the default term for the preferences window that was used until macOS 12."; */
 "129.title" = "Indstillinger…";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
@@ -60,6 +63,9 @@
 
 /* Class = "NSMenuItem"; title = "Hide Vienna"; ObjectID = "134"; */
 "134.title" = "Skjul Vienna";
+
+/* Class = "NSMenuItem"; title = "Quit Vienna"; ObjectID = "136"; */
+"136.title" = "Slut Vienna";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
 "145.title" = "Skjul andre";
@@ -99,6 +105,9 @@
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "167"; */
 "167.title" = "Find næste";
+
+/* Class = "NSMenuItem"; title = "Find"; ObjectID = "168"; */
+"168.title" = "Find";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "169"; */
 "169.title" = "Rediger";
@@ -233,10 +242,10 @@
 "1073.title" = "Send henvisning via email";
 
 /* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
-"1084.title" = "Større tekst";
+"1084.title" = "Gør tekst større";
 
 /* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
-"1085.title" = "Mindre tekst";
+"1085.title" = "Gør tekst mindre";
 
 /* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
 "1101.title" = "Åben Internet-lokation…";
@@ -403,11 +412,17 @@
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "kCi-pf-mkc"; */
 "kCi-pf-mkc.title" = "Smarte anførselstegn";
 
+/* Class = "NSMenuItem"; title = "Hide Enclosure Bar"; ObjectID = "Ke1-zq-KLc"; */
+"Ke1-zq-KLc.title" = "Skjul værktøjslinie for vedhæftninger";
+
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "l8F-tb-7E0"; */
 "l8F-tb-7E0.title" = "Stavekontrol og grammatik";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN"; */
 "MHF-D4-pRN.title" = "Lav om til store bogstaver";
+
+/* Class = "NSMenuItem"; title = "Actual Size"; ObjectID = "OiG-oc-aVj"; Note = "This string is also used in Safari"; */
+"OiG-oc-aVj.title" = "Faktisk størrelse";
 
 /* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
 "pKl-6f-Hlc.title" = "Marker som læst";

@@ -5,7 +5,7 @@
 "94.title" = "Name des intelligenten Ordners:";
 
 /* Class = "NSButtonCell"; title = "Save"; ObjectID = "96"; */
-"96.title" = "OK";
+"96.title" = "Sichern";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97"; */
 "97.title" = "Abbrechen";
@@ -14,7 +14,7 @@
 "98.title" = "Enthält Artikel mit";
 
 /* Class = "NSTextFieldCell"; title = "of the following conditions:"; ObjectID = "100"; */
-"100.title" = "der folgenden Eigenschaften";
+"100.title" = "der folgenden Eigenschaften:";
 
 /* Class = "NSMenuItem"; title = "any"; ObjectID = "j0v-xF-tpl"; */
 "j0v-xF-tpl.title" = "einer";

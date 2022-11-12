@@ -67,6 +67,7 @@
 	* October 22, 2021
 		Changes by Eitot:
 			• Replaced deprecated APIs.
+			• Fixed analyzer warning.
 */
 
 #import <Cocoa/Cocoa.h>

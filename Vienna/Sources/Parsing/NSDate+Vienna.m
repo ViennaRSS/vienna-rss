@@ -74,7 +74,7 @@ static NSLocale * enUSLocale;
  * Parse a date in an XML header into an NSDate.
  *
  */
-+ (NSDate *)parseXMLDate:(NSString *)dateString
++ (NSDate *)vna_parseXMLDate:(NSString *)dateString
 {
 	NSDate *date ;
     NSString *modifiedDateString = [dateString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];

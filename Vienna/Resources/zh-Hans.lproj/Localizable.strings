@@ -10,27 +10,6 @@
 /* Number of bytes received, e.g. 1 MB received */
 "%@ received" = "收到 %@";
 
-/* No comment provided by engineer. */
-"%d new articles retrieved" = "有 %d 篇新文章";
-
-/* Notification body */
-"%d new unread articles retrieved" = "收到了 %d 篇新文章";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "已经成功输出了 %d 个频道";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "已经成功导入了 %d 个频道";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d 篇未读文章";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u 文章";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u 未读";
-
 /* Title in popup submenu */
 "<None>" = "<无>";
 
@@ -42,21 +21,6 @@
 
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "无法在 \"%@\" 创建新的 Vienna 数据库。可能是因为此文件夹处于远端共享网络上，当前版本的 Vienna 不支持远端共享网络上的数据库。请选择一个在您本地机器上的文件夹。";
-
-/* No comment provided by engineer. */
-"After 2 Days" = "两天后";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "两周后";
-
-/* No comment provided by engineer. */
-"After a Day" = "一天后";
-
-/* No comment provided by engineer. */
-"After a Month" = "一个月后";
-
-/* No comment provided by engineer. */
-"After a Week" = "一周后";
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "上次更新这个频道时发生了一个错误";
@@ -171,11 +135,17 @@
 /* No comment provided by engineer. */
 "Descending" = "降序";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "不要再显示这个提示";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "您确定要通过 OPML 文件来导入频道么？";
 
 /* test for a string */
 "does not contain" = "不包含";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "不要清空废纸篓";
 
 /* No comment provided by engineer. */
 "Download" = "下载";
@@ -197,6 +167,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "清空";
+
+/* Title of a button on an alert */
+"Empty Trash" = "清空废纸篓";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "附带文件";
@@ -288,7 +261,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "服务器回报 HTTP 代码 %d";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "您确定要取消所有下载并且退出 Vienna 么？";
 
 /* Title of a button on an alert */
@@ -399,7 +372,7 @@
 /* Title of a button on an alert */
 "OK" = "是的";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "下载进行中";
 
 /* Title of a popup menu item */
@@ -558,7 +531,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "数据库文件格式已改变";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "将会替换为默认的风格";
 
 /* No comment provided by engineer. */
@@ -567,11 +540,14 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "\"%@\" 这个风格已经成功安装到了风格文件夹中，您现在可以从风格菜单中选择它了。";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "%@ 这个风格貌似有问题";
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "\"%@\" 这个订阅需要提供账号和密码";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "废纸篓中有被删除的文章。您想在退出前清空废纸篓么？";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "这篇文章包含附带文件。";
@@ -587,9 +563,6 @@
 
 /* No comment provided by engineer. */
 "Trash" = "废纸篓";
-
-/* No comment provided by engineer. */
-"Unread" = "未读";
 
 /* No comment provided by engineer. */
 "Unread Articles" = "未读文章";

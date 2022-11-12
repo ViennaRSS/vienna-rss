@@ -23,36 +23,110 @@ final class MainWindowController: NSWindowController {
 
     // MARK: Transitional outlets
 
+    @IBOutlet private(set) var splitView: NSSplitView!
     @IBOutlet private(set) var outlineView: FolderView?
-    @IBOutlet private(set) var browser: Browser?
     @IBOutlet private(set) var articleListView: ArticleListView?
     @IBOutlet private(set) var unifiedDisplayView: UnifiedDisplayView?
     @IBOutlet private(set) var filterDisclosureView: DisclosureView?
+    @IBOutlet private(set) var filterDisclosureView2: DisclosureView?
     @IBOutlet private(set) var filterSearchField: NSSearchField?
+    @IBOutlet private(set) var filterSearchField2: NSSearchField?
 
     @objc private(set) var toolbarSearchField: NSSearchField?
+    @IBOutlet private(set) weak var placeholderDetailView: NSView!
+
+    @objc private(set) lazy var browser: (Browser & NSViewController) = {
+        var controller = Preferences.standard.useNewBrowser
+            ? TabbedBrowserViewController() as (Browser & NSViewController)
+            : WebViewBrowser()
+        return controller
+    }()
 
     // MARK: Initialization
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func windowDidLoad() {
+        super.windowDidLoad()
+        // workaround for autosave not working when name is set in Interface Builder
+        // cf. https://stackoverflow.com/q/16587058
+        splitView.autosaveName = "VNASplitView"
 
-        // TODO: Move this to windowDidLoad()
+        (self.browser as? RSSSource)?.rssSubscriber = self
+
+        (self.browser as? TabbedBrowserViewController)?.contextMenuDelegate = self
+
         statusBarState(disclosed: Preferences.standard.showStatusBar, animate: false)
 
-        let filterMenu = (NSApp as? ViennaApp)?.filterMenu
-        let filterMode = Preferences.standard.filterMode
-        if let menuTitle = filterMenu?.item(withTag: filterMode)?.title {
-            filterLabel.stringValue = menuTitle
+        splitView.addSubview(browser.view)
+        placeholderDetailView.removeFromSuperview()
+    }
+
+    // MARK: Subtitle
+
+    @objc dynamic var unreadCount: UInt = 0 {
+        didSet {
+            updateSubtitle()
         }
+    }
+
+    @objc dynamic var currentFilter: String = "" {
+        didSet {
+            updateSubtitle()
+        }
+    }
+
+    private func updateSubtitle() {
+        // Unread counter
+        var countString = String()
+        if unreadCount > 0 {
+            let number = NSNumber(value: unreadCount)
+            let formattedNumber = NumberFormatter.localizedString(from: number, number: .decimal)
+            countString = String(format: NSLocalizedString("%@ unread", comment: ""), formattedNumber)
+        }
+
+        // Filter label
+        var filterString = String()
+        var filterStringCapitalized = String()
+        if !currentFilter.isEmpty {
+            filterString = String(format: NSLocalizedString("filter by: %@", comment: ""), currentFilter)
+            filterStringCapitalized = String(format: NSLocalizedString("Filter by: %@", comment: ""), currentFilter)
+        }
+
+        // Combine the strings
+        if !countString.isEmpty && !filterString.isEmpty {
+            if #available(macOS 11, *) {
+                window?.subtitle = "\(countString) – \(filterString)"
+            } else {
+                let appName = NSRunningApplication.current.localizedName!
+                window?.title = "\(appName) (\(countString), \(filterString))"
+            }
+        } else if !countString.isEmpty && filterString.isEmpty {
+            if #available(macOS 11, *) {
+                window?.subtitle = countString
+            } else {
+                let appName = NSRunningApplication.current.localizedName!
+                window?.title = "\(appName) (\(countString))"
+            }
+        } else if countString.isEmpty && !filterString.isEmpty {
+            if #available(macOS 11, *) {
+                window?.subtitle = filterStringCapitalized
+            } else {
+                let appName = NSRunningApplication.current.localizedName!
+                window?.title = "\(appName) (\(filterString))"
+            }
+        } else {
+            if #available(macOS 11, *) {
+                window?.subtitle = ""
+            } else {
+                window?.title = NSRunningApplication.current.localizedName!
+            }
+        }
+
     }
 
     // MARK: Status bar
 
     @IBOutlet private var statusBar: DisclosureView!
     @IBOutlet private var statusLabel: NSTextField!
-    @IBOutlet private var filterLabel: NSTextField!
-    @IBOutlet private var filterButton: NSButton!
 
     @objc var statusText: String? {
         get {
@@ -60,13 +134,6 @@ final class MainWindowController: NSWindowController {
         }
         set {
             statusLabel.stringValue = newValue ?? ""
-        }
-    }
-
-    @objc var filterAreaIsHidden = false {
-        didSet {
-            filterLabel.isHidden = filterAreaIsHidden
-            filterButton.isHidden = filterAreaIsHidden
         }
     }
 
@@ -92,7 +159,11 @@ final class MainWindowController: NSWindowController {
     // swiftlint:disable private_action
     @IBAction func changeFiltering(_ sender: NSMenuItem) { // TODO: This should be handled by ArticleController
         Preferences.standard.filterMode = sender.tag
-        filterLabel.stringValue = sender.title
+        if sender.tag == Filter.all.rawValue {
+            currentFilter = ""
+        } else {
+            currentFilter = sender.title
+        }
     }
 
     // swiftlint:disable private_action
@@ -104,6 +175,14 @@ final class MainWindowController: NSWindowController {
 
     private var observationTokens: [NSKeyValueObservation] = []
 
+    // MARK: Window restoration
+
+    override class var restorableStateKeyPaths: [String] {
+        var keyPaths = super.restorableStateKeyPaths
+        keyPaths += ["unreadCount", "currentFilter"]
+        return keyPaths
+    }
+
 }
 
 // MARK: - Menu-item validation
@@ -114,6 +193,7 @@ extension MainWindowController: NSMenuItemValidation {
         switch menuItem.action {
         case #selector(changeFiltering(_:)):
             menuItem.state = menuItem.tag == Preferences.standard.filterMode ? .on : .off
+            return browser.activeTab == nil
         case #selector(toggleStatusBar(_:)):
             if statusBar.isDisclosed {
                 menuItem.title = NSLocalizedString("Hide Status Bar", comment: "Title of a menu item")
@@ -136,8 +216,6 @@ extension MainWindowController: NSWindowDelegate {
 
     func windowDidBecomeMain(_ notification: Notification) {
         statusLabel.textColor = .windowFrameTextColor
-        filterLabel.textColor = .windowFrameTextColor
-        filterButton.isEnabled = true
 
         observationTokens = [
             OpenReader.shared.observe(\.statusMessage, options: .new) { [weak self] manager, change in
@@ -155,8 +233,6 @@ extension MainWindowController: NSWindowDelegate {
 
     func windowDidResignMain(_ notification: Notification) {
         statusLabel.textColor = .disabledControlTextColor
-        filterLabel.textColor = .disabledControlTextColor
-        filterButton.isEnabled = false
 
         observationTokens.removeAll()
     }
@@ -168,7 +244,7 @@ extension MainWindowController: NSWindowDelegate {
 extension MainWindowController: NSToolbarDelegate {
 
     private var pluginManager: PluginManager? {
-        return (NSApp.delegate as? AppController)?.pluginManager
+        return NSApp.appController.pluginManager
     }
 
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
@@ -209,6 +285,7 @@ extension MainWindowController: NSToolbarDelegate {
             NSToolbarItem.Identifier("SkipFolder"),
             NSToolbarItem.Identifier("MarkAllItemsAsRead"),
             NSToolbarItem.Identifier("Refresh"),
+            NSToolbarItem.Identifier("Filter"),
             NSToolbarItem.Identifier("MailLink"),
             NSToolbarItem.Identifier("DeleteArticle"),
             NSToolbarItem.Identifier("EmptyTrash"),
@@ -233,7 +310,8 @@ extension MainWindowController: NSToolbarDelegate {
             NSToolbarItem.Identifier("Subscribe"),
             NSToolbarItem.Identifier("SkipFolder"),
             NSToolbarItem.Identifier("Action"),
-            NSToolbarItem.Identifier("Refresh")
+            NSToolbarItem.Identifier("Refresh"),
+            NSToolbarItem.Identifier("Filter")
         ]
 
         let pluginIdentifiers = pluginManager?.defaultToolbarItems() as? [String] ?? []
@@ -258,7 +336,7 @@ extension MainWindowController: NSMenuDelegate {
             menu.removeItem(menuItem)
         }
 
-        if let styles = (Array(ArticleView.loadStylesMap().keys) as? [String])?.sorted() {
+        if let styles = (Array(ArticleStyleLoader.reloadStylesMap().allKeys) as? [String])?.sorted() {
             var index = 0
             while index < styles.count {
                 menu.insertItem(withTitle: styles[index],
@@ -269,5 +347,33 @@ extension MainWindowController: NSMenuDelegate {
             }
         }
     }
+}
 
+// MARK: - Rss subscriber
+
+extension MainWindowController: RSSSubscriber {
+
+    func isInterestedIn(_ url: URL) -> Bool {
+        // TODO: check whether we already subscribed to feed
+        return true
+    }
+
+    func subscribeToRSS(_ urls: [URL]) {
+        // TODO : if there are multiple feeds, we should put up an UI inviting the user to pick one, as also mentioned in SubscriptionModel.m verifiedFeedURLFromURL method
+        // TODO : allow user to select a folder instead of assuming current location (see #1163)
+        NSApp.appController.createSubscriptionInCurrentLocation(for: urls[0])
+    }
+}
+
+// MARK: - Browser context menu
+
+private var contextMenuDelegate: BrowserContextMenuDelegate = WebKitContextMenuCustomizer()
+
+extension MainWindowController: BrowserContextMenuDelegate {
+    func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem] {
+        return contextMenuDelegate.contextMenuItemsFor(purpose: purpose, existingMenuItems: existingMenuItems)
+    }
+    func contextMenuItemAction(menuItem: NSMenuItem) {
+        contextMenuDelegate.contextMenuItemAction(menuItem: menuItem)
+    }
 }

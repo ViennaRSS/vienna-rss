@@ -27,7 +27,7 @@
 @interface ActivityPanelController ()
 
 @property (weak, nonatomic) IBOutlet NSTableView *tableView;
-@property (assign, nonatomic) IBOutlet NSTextView *textView;
+@property (weak, nonatomic) IBOutlet NSTextView *textView;
 
 @property (nonatomic) ActivityLog *activityLog;
 

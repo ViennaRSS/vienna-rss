@@ -11,46 +11,10 @@
 "%@ of %@" = "%1$@ z %2$@";
 
 /* No comment provided by engineer. */
-"%d new articles retrieved" = "Nově přijato příspěvků: %d";
-
-/* Notification body */
-"%d new unread articles retrieved" = "Přijato nových nepřečtených příspěvků: %d";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "Bylo úspěšně exportováno celkem odebírání: %d";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "Bylo úspěšně importováno celkem odebírání: %d";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "Nečtených příspěvků: %d";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u příspěvků";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u nečtených";
-
-/* No comment provided by engineer. */
 "A folder with that name already exists" = "Složka s tímto jménem již existuje.";
 
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Nelze vytvořit novou databázi programu Vienna v položce „%@“, protože složka je pravděpodobně umístěna v síti. Tato verze programu Vienna nemůže spravovat vzdálené databáze. Vyberte prosím jinou složku, která je umístěna v tomto počítači.";
-
-/* No comment provided by engineer. */
-"After 2 Days" = "Po dvou dnech";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "Po dvou týdnech";
-
-/* No comment provided by engineer. */
-"After a Day" = "Po dni";
-
-/* No comment provided by engineer. */
-"After a Month" = "Po měsíci";
-
-/* No comment provided by engineer. */
-"After a Week" = "Po týdnu";
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Při poslední obnově tohoto zdroje se vyskytla chyba.";
@@ -153,11 +117,17 @@
 /* No comment provided by engineer. */
 "Descending" = "Sestupně";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Příště nezobrazovat";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Určitě chcete importovat odebírání z vybraného souboru OPML?";
 
 /* test for a string */
 "does not contain" = "neobsahuje";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Nevysypávat";
 
 /* No comment provided by engineer. */
 "Download" = "Zkopírovat";
@@ -179,6 +149,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Smazat";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Vysypat koš";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Příloha";
@@ -249,7 +222,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "Ze serveru byl obdržen kód HTTP: %d";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Ukončíte-li program Vienna nyní, všechna kopírování budou zastavena.";
 
 /* Title of a button on an alert */
@@ -351,7 +324,7 @@
 /* Title of a button on an alert */
 "OK" = "Budiž";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Probíhá jedno nebo více kopírování";
 
 /* Title of a popup menu item */
@@ -513,7 +486,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "Formát databázového soubor byl změněn";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "Bude použit výchozí styl (Default).";
 
 /* No comment provided by engineer. */
@@ -522,11 +495,14 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Styl „%@“ byl instalován do složky se styly a přidán do nabídky Styly.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "Styl %@ pravděpodobně chybí nebo je poškozený.";
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "Odebírání položky „%@“ vyžaduje uživatelské jméno a heslo.";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "V koši jsou smazané příspěvky. Chcete před ukončením programu vysypat koš?";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Tento příspěvek obsahuje v příloze soubor.";
@@ -542,9 +518,6 @@
 
 /* No comment provided by engineer. */
 "Trash" = "Koš";
-
-/* No comment provided by engineer. */
-"Unread" = "Nečtené";
 
 /* No comment provided by engineer. */
 "Unread Articles" = "Nečtené příspěvky";

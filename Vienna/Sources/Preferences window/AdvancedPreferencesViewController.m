@@ -23,9 +23,22 @@
 
 @interface AdvancedPreferencesViewController ()
 
+@property (weak, nonatomic) IBOutlet NSTextField *javaScriptNoticeTextField;
+
 @end
 
 @implementation AdvancedPreferencesViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    // WKWebViewConfiguration._allowsJavaScriptMarkup may require a restart.
+    // This is only necessary for versions older than macOS 11, because the
+    // latter use WKWebpagePreferences.allowsContentJavaScript instead.
+    if (@available(macOS 11, *)) {
+        [self.javaScriptNoticeTextField removeFromSuperview];
+    }
+}
 
 - (void)viewWillAppear {
     [self initializePreferences];
@@ -49,11 +62,17 @@
 -(void)initializePreferences
 {
     Preferences * prefs = [Preferences standardPreferences];
-    
-    // Show use JavaScript option
+
+    previewNewBrowserButton.state = prefs.useNewBrowser ? NSControlStateValueOn : NSControlStateValueOff;
     useJavaScriptButton.state = prefs.useJavaScript ? NSControlStateValueOn : NSControlStateValueOff;
-    useWebPluginsButton.state = prefs.useWebPlugins ? NSControlStateValueOn : NSControlStateValueOff;
+
     [concurrentDownloads selectItemWithTitle:[NSString stringWithFormat:@"%lu",(unsigned long)prefs.concurrentDownloads]];
+}
+
+- (IBAction)changeUseNewBrowser:(NSButton *)sender {
+    BOOL useNewBrowser = sender.state == NSControlStateValueOn;
+    Preferences *preferences = Preferences.standardPreferences;
+    preferences.useNewBrowser = useNewBrowser;
 }
 
 /* changeUseJavaScript
@@ -64,16 +83,6 @@
     BOOL useJavaScript = [sender state] == NSControlStateValueOn;
     [Preferences standardPreferences].useJavaScript = useJavaScript;
 }
-
-/* changeUseWebPlugins
- * Toggle whether or not the internel webkit browser should use plugins
- * e.g. Flash
- */
-- (IBAction)changeUseWebPlugins:(NSButton *)sender {
-    BOOL useWebPlugins = sender.state == NSControlStateValueOn;
-    [Preferences standardPreferences].useWebPlugins = useWebPlugins;
-}
-
 
 -(IBAction)changeConcurrentDownloads:(id)sender {
     [Preferences standardPreferences].concurrentDownloads = concurrentDownloads.titleOfSelectedItem.integerValue;

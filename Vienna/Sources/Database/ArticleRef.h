@@ -33,6 +33,6 @@
 +(ArticleReference *)makeReferenceFromGUID:(NSString *)aGuid inFolder:(NSInteger)folderId;
 
 // Accessors
-@property (nonatomic, readonly, copy) NSString *guid;
+@property (readonly, nonatomic) NSString *guid;
 @property (nonatomic, readonly) NSInteger folderId;
 @end

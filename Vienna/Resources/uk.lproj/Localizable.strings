@@ -14,43 +14,10 @@
 "%@ received" = "одержано %@";
 
 /* No comment provided by engineer. */
-"%d new articles retrieved" = "Отримано %d нових статей";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "Успішно експортовано %d підписок";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "Успішно імпортовано %d підписок";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d непрочитаних статей";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u статей";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u непрочитаних";
-
-/* No comment provided by engineer. */
 "A folder with that name already exists" = "Папка з таким іменем уже існує";
 
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Не можу створити нову базу даних Vienna \"%@\" тому, що папка імовірно розміщення на віддаленому диску. Будь-ласка виберіть інше місце збереження бази даних на вашому локальному диску.";
-
-/* No comment provided by engineer. */
-"After 2 Days" = "Після двох днів";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "Після 2-х тижнів";
-
-/* No comment provided by engineer. */
-"After a Day" = "Наступного дня";
-
-/* No comment provided by engineer. */
-"After a Month" = "Після місяця";
-
-/* No comment provided by engineer. */
-"After a Week" = "Після тижня";
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Трапилася помилка при оновленні цієї стрічки";
@@ -159,11 +126,17 @@
 /* No comment provided by engineer. */
 "Descending" = "У спадному";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Більше не показувати це попередження";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Ви дійсно хочете імпортувати підписки з вказаного OPML-файлу?";
 
 /* test for a string */
 "does not contain" = "не містить";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Не спорожняти смітник";
 
 /* No comment provided by engineer. */
 "Download" = "Завантажити";
@@ -185,6 +158,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Спорожнити";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Спорожнити смітник";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Додаток";
@@ -258,7 +234,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "З серверу отримано HTTP код %d";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Якщо Ви завершити Vienna зараз, всі завантаження зупиняться.";
 
 /* Title of a button on an alert */
@@ -360,7 +336,7 @@
 /* Title of a button on an alert */
 "OK" = "Добре";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Одне або більше завантажень ще не завершені";
 
 /* Title of a popup menu item */
@@ -519,7 +495,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "Формат баз даних змінився";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "Замість цього використовуватиметься стиль за замовчуванням.";
 
 /* No comment provided by engineer. */
@@ -528,11 +504,14 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Стиль \"%@\" установлено до Вашої папки Styles і додано до меню Стиль.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "Стиль %@ має невірну структуру, або пошкоджений";
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "Підписка \"%@\" вимагає введення імені користувача та паролю.";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "У смітнику є видалені статті. Чи не хотіли б ви спорожнити смітник перед тим, як завершити програму?";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Ця стаття містить вкладений файл.";
@@ -548,9 +527,6 @@
 
 /* No comment provided by engineer. */
 "Trash" = "Смітник";
-
-/* No comment provided by engineer. */
-"Unread" = "Непрочитані";
 
 /* No comment provided by engineer. */
 "Unread Articles" = "Непрочитані статті";

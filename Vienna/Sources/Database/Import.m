@@ -77,17 +77,17 @@
 	
 	for (NSXMLElement *outlineElement in outlines)
 	{
-        NSString *feedText = ([outlineElement attributeForName:@"text"].stringValue).stringByEscapingExtendedCharacters;
-        NSString *feedDescription = ([outlineElement attributeForName:@"description"].stringValue).stringByEscapingExtendedCharacters;
-        NSString *feedURL = ([outlineElement attributeForName:@"xmlUrl"].stringValue).stringByEscapingExtendedCharacters;
-        NSString *feedHomePage = ([outlineElement attributeForName:@"htmlUrl"].stringValue).stringByEscapingExtendedCharacters;
+        NSString *feedText = ([outlineElement attributeForName:@"text"].stringValue).vna_stringByEscapingExtendedCharacters;
+        NSString *feedDescription = ([outlineElement attributeForName:@"description"].stringValue).vna_stringByEscapingExtendedCharacters;
+        NSString *feedURL = ([outlineElement attributeForName:@"xmlUrl"].stringValue).vna_stringByEscapingExtendedCharacters;
+        NSString *feedHomePage = ([outlineElement attributeForName:@"htmlUrl"].stringValue).vna_stringByEscapingExtendedCharacters;
         
         Database * dbManager = [Database sharedManager];
 
 		// Some OPML exports use 'title' instead of 'text'.
 		if (feedText == nil || feedText.length == 0u)
 		{
-            NSString * feedTitle = ([outlineElement attributeForName:@"title"].stringValue).stringByEscapingExtendedCharacters;
+            NSString * feedTitle = ([outlineElement attributeForName:@"title"].stringValue).vna_stringByEscapingExtendedCharacters;
             if (feedTitle != nil) {
 				feedText = feedTitle;
             }
@@ -95,8 +95,8 @@
 
 		// Do double-decoding of the title and description to get around a bug in some commercial newsreaders
 		// where they double-encode characters
-		feedText = feedText.stringByUnescapingExtendedCharacters;
-		feedDescription = feedDescription.stringByUnescapingExtendedCharacters;
+		feedText = feedText.vna_stringByUnescapingExtendedCharacters;
+		feedDescription = feedDescription.vna_stringByUnescapingExtendedCharacters;
 		
 		if (feedURL == nil)
 		{

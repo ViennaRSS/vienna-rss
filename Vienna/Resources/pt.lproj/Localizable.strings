@@ -8,46 +8,10 @@
 "%@ Info" = "%@ Informação";
 
 /* No comment provided by engineer. */
-"%d new articles retrieved" = "%d novos artigos recebidos";
-
-/* Notification body */
-"%d new unread articles retrieved" = "%d novos artigos recebidos";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d subscrições exportadas com sucesso";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d subscrições importadas com sucesso";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d artigos não lidos";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u artigos";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u não lidos";
-
-/* No comment provided by engineer. */
 "A folder with that name already exists" = "Já existe uma pasta com esse nome";
 
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Uma nova base de dados do Vienna não pode ser criada em \"%@\" porque provavelmente a pasta está localizada num disco de rede e esta versão do Vienna não consegue manipular bases de dados remotas. Por favor escolha uma máquina que esteja localizada no seu computador.";
-
-/* No comment provided by engineer. */
-"After 2 Days" = "Após 2 Dias";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "Após 2 Semanas";
-
-/* No comment provided by engineer. */
-"After a Day" = "Após um Dia";
-
-/* No comment provided by engineer. */
-"After a Month" = "Após um Mês";
-
-/* No comment provided by engineer. */
-"After a Week" = "Após uma Semana";
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Ocorreu um erro da última vez que esta fonte foi actualizada";
@@ -141,11 +105,17 @@
 /* No comment provided by engineer. */
 "Deleting folder \"%@\"…" = "A apagar pasta \"%@\"…";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Não voltar a mostrar este aviso";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Deseja realmente importar as subscrições do ficheiro OPML especificado?";
 
 /* test for a string */
 "does not contain" = "não contém";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Não Esvaziar Lixo";
 
 /* Notification title */
 "Download completed" = "Download completo";
@@ -164,6 +134,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Vazio";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Esvaziar Lixo";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Anexo";
@@ -228,7 +201,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "Código HTTP %d devolvido pelo servidor";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Se encerrar o Vienna agora, todos os downloads serão parados.";
 
 /* Title of a button on an alert */
@@ -321,7 +294,7 @@
 /* No comment provided by engineer. */
 "No new articles available" = "Nenhum artigo novo disponível";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Um ou mais downloads estão em progresso";
 
 /* Title of a popup menu item */
@@ -483,7 +456,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "O formato de ficheiro da base de dados foi alterado";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "Será usado o estilo Padrão em alternativa.";
 
 /* No comment provided by engineer. */
@@ -492,11 +465,14 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "O estilo \"%@\" foi instalado na sua pasta de estilos e adicionado ao menu de estilos.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "O estilo %@ parece estar em falta ou corrompido";
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "A subscrição de \"%@\" de nome de utilizador e palavra-passe para acesso.";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "Existem artigos apagados no lixo. Deseja esvaziar o lixo antes de encerrar?";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Este artigo contém um ficheiro anexo.";
@@ -512,9 +488,6 @@
 
 /* No comment provided by engineer. */
 "Trash" = "Lixo";
-
-/* No comment provided by engineer. */
-"Unread" = "Não Lidos";
 
 /* No comment provided by engineer. */
 "Unread Articles" = "Artigos Não Lidos";

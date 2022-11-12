@@ -4,6 +4,9 @@
 /* No comment provided by engineer. */
 "(Untitled Feed)" = "(Naamloze feed)";
 
+/* Appended to application name in Open With menu */
+"%@ (default)" = "%@ (standaard)";
+
 /* No comment provided by engineer. */
 "%@ Info" = "%@ Info";
 
@@ -14,25 +17,10 @@
 "%@ received" = "%@ ontvangen";
 
 /* No comment provided by engineer. */
-"%d new articles retrieved" = "%d nieuwe artikelen opgehaald";
+"%@ unread" = "%@ ongelezen";
 
-/* Notification body */
-"%d new unread articles retrieved" = "%d nieuwe ongelezen artikelen opgehaald";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d abonnementen geëxporteerd";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d abonnementen geïmporteerd";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d ongelezen artikelen";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u artikelen";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u ongelezen";
+/* Title in popup submenu */
+"<None>" = "<Geen>";
 
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "Er bestaat al een map met deze naam";
@@ -44,22 +32,10 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Een nieuwe Vienna-databank kan niet worden aangemaakt in \"%@\". De databank bevindt zich waarschijnlijk op een andere computer in het netwerk, wat door deze versie van Vienna niet wordt ondersteund. Kies een andere locatie op deze Mac.";
 
 /* No comment provided by engineer. */
-"After 2 Days" = "Na twee dagen";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "Na twee weken";
-
-/* No comment provided by engineer. */
-"After a Day" = "Na één dag";
-
-/* No comment provided by engineer. */
-"After a Month" = "Na één maand";
-
-/* No comment provided by engineer. */
-"After a Week" = "Na één week";
-
-/* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "De laatste keer dat deze feed is bijgewerkt, is er een fout opgetreden";
+
+/* No comment provided by engineer. */
+"AppleScript Error in '%@' script" = "AppleScript-fout in script '%@'";
 
 /* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Weet je zeker dat je deze %d groepen wilt verwijderen? Je kunt dit niet ongedaan maken.";
@@ -84,6 +60,9 @@
 
 /* No comment provided by engineer. */
 "Ascending" = "Oplopend";
+
+/* No comment provided by engineer. */
+"Authenticating on Open Reader" = "Identiteitscontrole op Open Reader";
 
 /* Data field name visible in menu/article list/smart folder definition */
 "Author" = "Auteur";
@@ -116,11 +95,14 @@
 /* No comment provided by engineer. */
 "Connecting to %@" = "Verbinden met %@";
 
+/* No comment provided by engineer. */
+"Connecting to Open Reader server to retrieve %@" = "Verbinden met Open Reader-server om %@ op te vragen";
+
 /* test for a string */
 "contains" = "bevat";
 
 /* No comment provided by engineer. */
-"Copy Link to Clipboard" = "Kopieer koppeling naar klembord";
+"Copy Link to Clipboard" = "Kopieer link naar klembord";
 
 /* No comment provided by engineer. */
 "Copy Page Link to Clipboard" = "Kopieer locatie naar klembord";
@@ -168,11 +150,17 @@
 /* No comment provided by engineer. */
 "Descending" = "Aflopend";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Toon deze waarschuwing niet opnieuw";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Wil je echt abonnementen uit dit OPML-bestand importeren?";
 
 /* test for a string */
 "does not contain" = "bevat niet";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Leeg prullenmand niet";
 
 /* No comment provided by engineer. */
 "Download" = "Download";
@@ -195,6 +183,9 @@
 /* Title of a button on an alert */
 "Empty" = "Leeg";
 
+/* Title of a button on an alert */
+"Empty Trash" = "Leeg prullenmand";
+
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Bijlage";
 
@@ -208,7 +199,19 @@
 "Error" = "Fout";
 
 /* No comment provided by engineer. */
+"Error loading script '%@'" = "Fout bij het laden van het script '%@'";
+
+/* No comment provided by engineer. */
 "Error parsing XML data in feed" = "Fout tijdens het verwerken van de XML van deze feed";
+
+/* No comment provided by engineer. */
+"Error retrieving RSS feed:" = "Fout bij het ophalen van RSS-feed:";
+
+/* No comment provided by engineer. */
+"Error retrieving RSS Icon:" = "Fout bij het ophalen van RSS-symbool:";
+
+/* No comment provided by engineer. */
+"Error: Feed not found!" = "Fout: feed niet gevonden!";
 
 /* No comment provided by engineer. */
 "Export Completed" = "Exporteren voltooid";
@@ -219,11 +222,20 @@
 /* No comment provided by engineer. */
 "Feed URL updated to %@" = "De URL van deze feed is veranderd in %@";
 
+/* No comment provided by engineer. */
+"Fetching Open Reader Subscriptions…" = "Open Reader-abonnementen ophalen…";
+
 /* Notification body */
 "File %@ downloaded" = "Bestand %@ gedownload";
 
 /* Notification body */
 "File %@ failed to download" = "Niet gelukt bestand %@ te downloaden";
+
+/* No comment provided by engineer. */
+"filter by: %@" = "filter op: %@";
+
+/* No comment provided by engineer. */
+"Filter by: %@" = "Filter op: %@";
 
 /* No comment provided by engineer. */
 "Filter in %@" = "Zoek in %@";
@@ -246,11 +258,17 @@
 /* Title of a menu item */
 "Force Refresh Selected Subscriptions From Open Reader" = "Forceer bijwerken abonnementen van Open Reader";
 
+/* No comment provided by engineer. */
+"Forcing Refresh subscriptions…" = "Abonnementen geforceerd vernieuwen…";
+
 /* Title of a menu item */
 "Get Info" = "Toon info";
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "Ga verder naar de volgende pagina";
+
+/* No comment provided by engineer. */
+"Got HTTP status 304 - No news from last check" = "HTTP-status 304 ontvangen – geen nieuws sinds de laatste controle";
 
 /* Pseudo field name visible in article list */
 "Headlines" = "Koppen";
@@ -267,7 +285,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "HTTP-code %d gemeld door de server";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Wil je alle downloads annuleren en Vienna nu afsluiten?";
 
 /* Title of a button on an alert */
@@ -281,6 +299,12 @@
 
 /* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "Importeer abonnementen uit OPML bestand?";
+
+/* No comment provided by engineer. */
+"Improper infinitely looping URL redirect to %@" = "Onjuiste oneindig doorlopende URL-doorverwijzing naar %@";
+
+/* test for a value */
+"is" = "is";
 
 /* test for a date */
 "is after" = "ligt na";
@@ -313,13 +337,16 @@
 "Last Week" = "Vorige week";
 
 /* Data field name visible in menu/article list */
-"Link" = "Koppeling";
+"Link" = "Link";
+
+/* No comment provided by engineer. */
+"Loading" = "Laden";
 
 /* Title of a button on an alert */
 "Locate…" = "Zoek op…";
 
 /* No comment provided by engineer. */
-"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "Controleer of gebruikersnaam en wachtwoord voor de Open Reader-server juist zijn ingesteld in de voorkeuren. Controleer ook je netwerkverbinding.";
+"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "Controleer of gebruikersnaam en wachtwoord voor de Open Reader-server juist zijn ingesteld in de instellingen. Controleer ook je netwerkverbinding.";
 
 /* Title of a menu item */
 "Mark All Articles as Read" = "Markeer alles als gelezen";
@@ -364,13 +391,22 @@
 "No" = "Nee";
 
 /* No comment provided by engineer. */
+"No articles in feed" = "Geen artikelen in deze feed";
+
+/* No comment provided by engineer. */
 "No new articles available" = "Geen nieuwe artikelen beschikbaar";
 
 /* test for a folder (not operational as of Vienna 3.2) */
 "not under" = "niet onder";
 
-/* No comment provided by engineer. */
+/* Title of a button on an alert */
+"OK" = "OK";
+
+/* Message text of an alert */
 "One or more downloads are in progress" = "Eén of meer downloads zijn nog bezig";
+
+/* Title of a popup menu item */
+"Open" = "Open";
 
 /* Title of a menu item */
 "Open Article Page" = "Ga naar artikelpagina";
@@ -391,13 +427,19 @@
 "Open Image in New Tab" = "Open afbeelding in nieuwe tab";
 
 /* No comment provided by engineer. */
-"Open Link in %@" = "Open koppeling in %@";
+"Open Link in %@" = "Open link in %@";
 
 /* No comment provided by engineer. */
-"Open Link in New Tab" = "Open koppeling in nieuwe tab";
+"Open Link in Background" = "Open link op de achtergrond";
+
+/* No comment provided by engineer. */
+"Open Link in New Tab" = "Open link in nieuwe tab";
 
 /* No comment provided by engineer. */
 "Open Page in %@" = "Open pagina in %@";
+
+/* No comment provided by engineer. */
+"Open Reader Authentication Failed" = "Open Reader-identiteitscontrole mislukt";
 
 /* No comment provided by engineer. */
 "Open Scripts Folder" = "Open scripts-map";
@@ -442,6 +484,9 @@
 /* No comment provided by engineer. */
 "Recents" = "Recente onderdelen";
 
+/* No comment provided by engineer. */
+"Redirection attempt treated as temporary for safety concern" = "Poging tot doorverwijzing behandeld als tijdelijk om veiligheidsredenen";
+
 /* Title of a menu item */
 "Refresh All Subscriptions" = "Werk alle abonnementen bij";
 
@@ -479,10 +524,19 @@
 "Retrieving folder image" = "Map-icoon ophalen";
 
 /* No comment provided by engineer. */
+"Retrieving folder image for Open Reader Feed" = "Mapsymbool voor Open Reader-feed ophalen";
+
+/* No comment provided by engineer. */
 "Return to the previous page" = "Ga terug naar de vorige pagina";
 
+/* No comment provided by engineer. */
+"RSS Icon not found!" = "RSS-symbool niet gevonden!";
+
+/* A formatted URL string with the javascript: URL scheme. */
+"Run script “%@”" = "Voer script '%@' uit";
+
 /* Placeholder title of a search field */
-"Search all articles" = "Zoek naar artikels";
+"Search all articles" = "Zoek naar artikelen";
 
 /* No comment provided by engineer. */
 "Search all articles or the current web page" = "Doorzoek alle artikelen of de huidige webpagina";
@@ -496,16 +550,25 @@
 "Search current web page" = "Doorzoek huidige webpagina";
 
 /* No comment provided by engineer. */
-"Search Results" = "Zoek resultaten";
+"Search Results" = "Zoekresultaten";
+
+/* Label of a button on an open panel */
+"Select" = "Selecteer";
 
 /* Title of a popup menu item */
 "Select…" = "Selecteer…";
 
-/* No comment provided by engineer. */
-"Send Link" = "Verzend koppeling";
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@" = "Stuur e-mail naar %@";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@ with subject “%@”" = "Stuur e-mail naar %1$@ met als onderwerp '%2$@'";
 
 /* No comment provided by engineer. */
-"Send Links" = "Verzend koppelingen";
+"Send Link" = "Verstuur link";
+
+/* No comment provided by engineer. */
+"Send Links" = "Verstuur links";
 
 /* No comment provided by engineer. */
 "Show Filter Bar" = "Toon filterbalk";
@@ -552,7 +615,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "Het bestandsformaat van de databank is gewijzigd";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "De standaardstijl zal worden gebruikt.";
 
 /* No comment provided by engineer. */
@@ -561,14 +624,20 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "De stijl \"%@\" is in je stijlenmap geïnstalleerd en toegevoegd aan het menu Stijlen.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "De stijl %@ lijkt te zijn beschadigd";
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "Voor toegang tot het abonnement op \"%@\" heb je een gebruikersnaam en wachtwoord nodig.";
 
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "Er zijn gewiste artikelen in de prullenmand. Wil je de prullenmand nu legen?";
+
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Dit artikel bevat een bijlage.";
+
+/* Message text of a modal alert */
+"This folder cannot be chosen because you don’t have permission." = "Deze map kan niet worden gekozen, omdat je geen bevoegdheden hebt.";
 
 /* No comment provided by engineer. */
 "This operation cannot be undone." = "Deze actie kan niet ongedaan worden gemaakt.";
@@ -586,16 +655,13 @@
 "under" = "onder";
 
 /* No comment provided by engineer. */
-"Unread" = "Ongelezen";
-
-/* No comment provided by engineer. */
 "Unread Articles" = "Ongelezen artikelen";
 
 /* No comment provided by engineer. */
 "Unsubscribe from Feed" = "Zeg abonnement op";
 
 /* No comment provided by engineer. */
-"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles." = "Wis Open Reader RSS feed";
+"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles." = "Het opzeggen van een Open Reader-abonnement verwijdert ook de gecachete artikelen.";
 
 /* Title of a button on an alert */
 "Upgrade Database" = "Werk databank bij";

@@ -24,20 +24,14 @@
 #import "AppController.h"
 #import "FoldersFilterable.h"
 
-@interface NSObject (FolderViewDelegate)
-	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
-	-(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
-	-(BOOL)canDeleteFolderAtRow:(NSInteger)row;
-	-(IBAction)deleteFolder:(id)sender;
-	-(void)outlineViewWillBecomeFirstResponder;
-@end
-
 @implementation FolderView {
     NSPredicate*            _filterPredicate;
     FoldersFilterableDataSourceImpl* _filterDataSource;
     NSDictionary*           _prefilterState;
     id _directDataSource;
 }
+
+@dynamic delegate;
 
 /* awakeFromNib
  * Our init.
@@ -55,7 +49,7 @@
  */
 -(BOOL)becomeFirstResponder
 {
-    [(id)self.delegate outlineViewWillBecomeFirstResponder];
+    [self.delegate folderViewWillBecomeFirstResponder];
 	return [super becomeFirstResponder];
 }
 
@@ -67,7 +61,6 @@
     switch(context) {
         case NSDraggingContextWithinApplication:
             return NSDragOperationMove|NSDragOperationGeneric;
-            break;
         default:
             return NSDragOperationCopy;
     }
@@ -117,7 +110,7 @@
         return;
 
     if (_filterPredicate == nil) {
-        _prefilterState = self.state;
+        _prefilterState = self.vna_state;
     }
 
     _filterPredicate = filterPredicate;
@@ -133,10 +126,10 @@
 
     if (_filterPredicate) {
         [self expandItem:nil expandChildren:YES];
-        self.selectionState = _prefilterState[@"Selection"];
+        self.vna_selectionState = _prefilterState[@"Selection"];
     }
     else if (_prefilterState) {
-        self.state = _prefilterState;
+        self.vna_state = _prefilterState;
         _prefilterState = nil;
     }
 }
@@ -176,8 +169,8 @@
  */
 -(NSMenu *)menuForEvent:(NSEvent *)theEvent
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(outlineView:menuWillAppear:)])
-        [(id)self.delegate outlineView:self menuWillAppear:theEvent];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(folderView:menuWillAppear:)])
+        [self.delegate folderView:self menuWillAppear:theEvent];
 	return self.menu;
 }
 
@@ -198,7 +191,7 @@
 			[array addObject:node];
 			item = [selectedRowIndexes indexGreaterThanIndex:item];
 		}
-        [(id)self.delegate copyTableSelection:array toPasteboard:[NSPasteboard generalPasteboard]];
+        [self.delegate copyTableSelection:array toPasteboard:NSPasteboard.generalPasteboard];
 	}
 }
 
@@ -222,7 +215,7 @@
 	}
 	if (menuItem.action == @selector(delete:))
 	{
-        return [(id)self.delegate canDeleteFolderAtRow:self.selectedRow];
+        return [self.delegate canDeleteFolderAtRow:self.selectedRow];
 	}
 	if (menuItem.action == @selector(selectAll:))
 	{

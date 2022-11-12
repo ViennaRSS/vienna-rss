@@ -18,15 +18,22 @@
 //  limitations under the License.
 //
 
-#import "Constants.h"
 #import "GeneralPreferencesViewController.h"
+
+@import os.log;
+@import UniformTypeIdentifiers;
+
+#import "Constants.h"
+#import "NSFileManager+Paths.h"
 #import "Preferences.h"
+#import "Vienna-Swift.h"
+
+#define VNA_LOG os_log_create("--", "GeneralPreferencesViewController")
 
 @interface GeneralPreferencesViewController ()
 
 -(void)initializePreferences;
 // -(void)selectUserDefaultFont:(NSString *)name size:(int)size control:(NSPopUpButton *)control sizeControl:(NSComboBox *)sizeControl;
--(void)setDefaultLinksHandler:(NSURL *)pathToNewHandler;
 // -(void)controlTextDidEndEditing:(NSNotification *)notification;
 -(void)refreshLinkHandler;
 -(IBAction)handleLinkSelector:(id)sender;
@@ -70,23 +77,25 @@
     // Set check for new articles when starting
     checkOnStartUp.state = prefs.refreshOnStartup ? NSControlStateValueOn : NSControlStateValueOff;
     
-    // Set range of auto-expire values
+    // Set auto-expire duration
     // Meaning of tag :
     // 0 value disables auto-expire.
     // Increments of 1000 specify months, so 1000 = 1 month, 1001 = 1 month and 1 day…
-    [expireDuration removeAllItems];
-    [expireDuration insertItemWithTitle:NSLocalizedString(@"Never", nil) tag:0 atIndex:0];
-    [expireDuration insertItemWithTitle:NSLocalizedString(@"After a Day", nil) tag:1 atIndex:1];
-    [expireDuration insertItemWithTitle:NSLocalizedString(@"After 2 Days", nil) tag:2 atIndex:2];
-    [expireDuration insertItemWithTitle:NSLocalizedString(@"After a Week", nil) tag:7 atIndex:3];
-    [expireDuration insertItemWithTitle:NSLocalizedString(@"After 2 Weeks", nil) tag:14 atIndex:4];
-    [expireDuration insertItemWithTitle:NSLocalizedString(@"After a Month", nil) tag:1000 atIndex:5];
-    
-    // Set auto-expire duration
     [expireDuration selectItemAtIndex:[expireDuration indexOfItemWithTag:prefs.autoExpireDuration]];
     
     // Set download folder
-    [self updateDownloadsPopUp:prefs.downloadFolder];
+    [self updateDownloadsPopUp:NSFileManager.defaultManager.vna_downloadsDirectory.path];
+
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    NSData *data = [userDefaults dataForKey:MAPref_DownloadsFolderBookmark];
+    if (data) {
+        NSError *error = nil;
+        VNASecurityScopedBookmark *bookmark = [[VNASecurityScopedBookmark alloc] initWithBookmarkData:data
+                                                                                                error:&error];
+        if (!error) {
+            [self updateDownloadsPopUp:bookmark.resolvedURL.path];
+        }
+    }
     
     // Set whether the application is shown in the menu bar
     showAppInMenuBar.state = prefs.showAppInStatusBar ? NSControlStateValueOn : NSControlStateValueOff;
@@ -119,32 +128,26 @@
     NSBundle * appBundle = [NSBundle mainBundle];
     NSString * ourAppName = [[NSFileManager defaultManager] displayNameAtPath:appBundle.bundlePath];
     BOOL onTheList = NO;
-    NSURL * testURL = [NSURL URLWithString:@"feed://www.test.com"];
-    NSString * registeredAppURL = nil;
+    NSURL *testURL = [NSURL URLWithString:@"feed://www.test.com"];
+    NSURL *registeredAppURL = [NSWorkspace.sharedWorkspace URLForApplicationToOpenURL:testURL];
     
     // Clear all existing items
     [linksHandler removeAllItems];
     
-    // Add the current registered link handler to the start of the list as Safari does. If
-    // there's no current registered handler, default to ourself.
-    CFStringRef defaultBundleIdentifier = LSCopyDefaultHandlerForURLScheme((__bridge CFStringRef)@"feed");
-    if (defaultBundleIdentifier != NULL)
-    {
-        registeredAppURL = [[NSWorkspace sharedWorkspace] URLForApplicationWithBundleIdentifier:(__bridge NSString *)defaultBundleIdentifier].path;
-        CFRelease(defaultBundleIdentifier);
-    }
-    else
-    {
-        registeredAppURL = appBundle.executablePath;
+    // Add the current registered link handler to the start of the list. If
+    // there is no current registered handler then default to Vienna.
+    if (!registeredAppURL) {
+        registeredAppURL = appBundle.executableURL;
         onTheList = YES;
     }
     
-    NSString * regAppName = [[NSFileManager defaultManager] displayNameAtPath:registeredAppURL];
+    NSString * regAppName = [[NSFileManager defaultManager] displayNameAtPath:registeredAppURL.path];
     // Maintain a table to map from the short name to the file URL for when
     // the user changes selection and we later need the file URL to register
     // the new selection.
     if (regAppName != nil) {
-        [linksHandler addItemWithTitle:regAppName image:[[NSWorkspace sharedWorkspace] iconForFile:registeredAppURL]];
+        NSImage *image = [NSWorkspace.sharedWorkspace iconForFile:registeredAppURL.path];
+        [linksHandler addItemWithTitle:regAppName image:image];
         [linksHandler.menu addItem:[NSMenuItem separatorItem]];
         [appToPathMap setValue:registeredAppURL forKey:regAppName];
     }
@@ -243,27 +246,30 @@
  */
 -(IBAction)changeDownloadFolder:(id)sender
 {
-    NSOpenPanel * openPanel = [NSOpenPanel openPanel];
-    NSWindow * prefPaneWindow = downloadFolder.window;
-    
-    [openPanel setCanChooseDirectories:YES];
-    [openPanel setCanCreateDirectories:YES];
-    [openPanel setCanChooseFiles:NO];
-    openPanel.directoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDownloadsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
-    [openPanel beginSheetModalForWindow:prefPaneWindow completionHandler:^(NSInteger returnCode) {
-        // Force the focus back to the main preferences pane
-        [openPanel orderOut:self];
-        [prefPaneWindow makeKeyAndOrderFront:prefPaneWindow];
-        
-        if (returnCode == NSModalResponseOK)
-        {
-            NSString * downloadFolderPath = openPanel.directoryURL.path;
-            [Preferences standardPreferences].downloadFolder = downloadFolderPath;
-            [self updateDownloadsPopUp:downloadFolderPath];
-        }
-        
-        if (returnCode == NSModalResponseCancel)
+    NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+    openPanel.delegate = self;
+    openPanel.canChooseFiles = NO;
+    openPanel.canChooseDirectories = YES;
+    openPanel.canCreateDirectories = YES;
+    openPanel.allowsMultipleSelection = NO;
+    openPanel.prompt = NSLocalizedString(@"Select",
+                                         @"Label of a button on an open panel");
+
+    openPanel.directoryURL = NSFileManager.defaultManager.vna_downloadsDirectory;
+    [openPanel beginSheetModalForWindow:self.view.window
+                      completionHandler:^(NSInteger returnCode) {
+        if (returnCode == NSModalResponseOK) {
+            NSError *error = nil;
+            NSData *data = [VNASecurityScopedBookmark bookmark:openPanel.URL
+                                                         error:&error];
+            if (!error) {
+                NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+                [userDefaults setObject:data forKey:MAPref_DownloadsFolderBookmark];
+                [self updateDownloadsPopUp:openPanel.URL.path];
+            }
+        } else if (returnCode == NSModalResponseCancel) {
             [self->downloadFolder selectItemAtIndex:0];
+        }
     }];
 }
 
@@ -305,8 +311,8 @@
             [self handleLinkSelector:self];
             return;
         }
+        [self setDefaultApplicationForFeedScheme:[appToPathMap valueForKey:selectedItem.title]];
     }
-    [self setDefaultLinksHandler:[appToPathMap valueForKey:selectedItem.title]];
     [self refreshLinkHandler];
 }
 
@@ -321,28 +327,49 @@
     NSWindow * prefPaneWindow = linksHandler.window;
     
     panel.directoryURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:NO error:nil];
-    panel.allowedFileTypes = @[NSFileTypeForHFSTypeCode('APPL')];
+    if (@available(macOS 11, *)) {
+        panel.allowedContentTypes = @[UTTypeApplicationBundle];
+    } else {
+        panel.allowedFileTypes = @[NSFileTypeForHFSTypeCode('APPL')];
+    }
     [panel beginSheetModalForWindow:prefPaneWindow completionHandler:^(NSInteger returnCode) {
         [panel orderOut:self];
-        NSWindow * prefPaneWindow = self->linksHandler.window;
         [prefPaneWindow makeKeyAndOrderFront:self];
         
         if (returnCode == NSModalResponseOK)
-            [self setDefaultLinksHandler:panel.URL];
+            [self setDefaultApplicationForFeedScheme:panel.URL];
         [self refreshLinkHandler];
     }];
 }
 
-/* setDefaultLinksHandler
- * Set the default handler for feed links via Launch Services
- */
--(void)setDefaultLinksHandler:(NSURL *)fileURLToNewHandler
+- (void)setDefaultApplicationForFeedScheme:(NSURL *)applicationURL
 {
-    NSBundle * appBundle = [NSBundle bundleWithURL:fileURLToNewHandler];
-    NSDictionary * fileAttributes = appBundle.infoDictionary;
-    CFStringRef bundleIdentifier = (__bridge CFStringRef)fileAttributes[@"CFBundleIdentifier"];
-    CFStringRef scheme = (__bridge CFStringRef)@"feed";
-    LSSetDefaultHandlerForURLScheme(scheme, bundleIdentifier);
+    NSString *feedURLScheme = @"feed";
+    if (@available(macOS 12, *)) {
+        NSWorkspace *workspace = NSWorkspace.sharedWorkspace;
+        // "Some" schemes require user consent to change the handlers. The docs
+        // do not state which ones, but as of macOS 12, "feed" does not require
+        // a confirmation. The completion handler is called in either case and
+        // presumably returns an error if the user does not consent. If that
+        // happens, the change is not applied and Vienna fails gracefully.
+        [workspace setDefaultApplicationAtURL:applicationURL
+                         toOpenURLsWithScheme:feedURLScheme
+                            completionHandler:^(NSError * _Nullable error) {
+            // This error code indicates that the user rejected the change.
+            if (error && error.code == NSFileReadUnknownError) {
+                os_log_error(VNA_LOG, "Handler for the feed URL scheme not changed, because consent was refused");
+            } else if (error) {
+                os_log_error(VNA_LOG, "Handler for the feed URL scheme not changed. Error: %{public}@ (%ld)", error.domain, error.code);
+            } else {
+                os_log_debug(VNA_LOG, "Handler for the feed URL scheme changed to %@", applicationURL.lastPathComponent);
+            }
+        }];
+    } else {
+        CFStringRef scheme = (__bridge CFStringRef)feedURLScheme;
+        NSBundle *bundle = [NSBundle bundleWithURL:applicationURL];
+        CFStringRef bundleID = (__bridge CFStringRef)bundle.bundleIdentifier;
+        LSSetDefaultHandlerForURLScheme(scheme, bundleID);
+    }
 }
 
 /* changeCheckFrequency
@@ -387,6 +414,30 @@
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+// MARK: - NSOpenSavePanelDelegate
+
+- (BOOL)panel:(id)sender shouldEnableURL:(NSURL *)url {
+    NSFileManager *fileManager = NSFileManager.defaultManager;
+    return [fileManager isWritableFileAtPath:url.path];
+}
+
+- (BOOL)panel:(id)sender validateURL:(NSURL *)url error:(NSError **)outError {
+    NSFileManager *fileManager = NSFileManager.defaultManager;
+    BOOL isWritable = [fileManager isWritableFileAtPath:url.path];
+    if (!isWritable) {
+        NSString *str = NSLocalizedString(@"This folder cannot be chosen "
+                                          "because you don’t have permission.",
+                                          @"Message text of a modal alert");
+        NSDictionary *userInfoDict = @{NSLocalizedDescriptionKey: str};
+        if (outError) {
+            *outError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                            code:NSFileWriteNoPermissionError
+                                        userInfo:userInfoDict];
+        }
+    }
+    return isWritable;
 }
 
 @end

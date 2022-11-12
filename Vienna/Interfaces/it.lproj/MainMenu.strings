@@ -1,6 +1,9 @@
 /* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "2S3-dG-ZPg"; */
 "2S3-dG-ZPg.title" = "Altri Stili…";
 
+/* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "4ih-vj-fsk"; */
+"4ih-vj-fsk.title" = "Controlla la grammatica con l'ortografia";
+
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
 "5.title" = "Porta tutto in primo piano";
 
@@ -18,6 +21,9 @@
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
 "24.title" = "Finestra";
+
+/* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "27s-E3-FHd"; */
+"27s-E3-FHd.title" = "Correggi automaticamente l'ortografia";
 
 /* Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58"; */
 "58.title" = "Informazioni su Vienna";
@@ -43,7 +49,7 @@
 /* Class = "NSMenuItem"; title = "Vienna Help"; ObjectID = "111"; */
 "111.title" = "Aiuto Vienna";
 
-/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; Note = "Apple renamed \"Preferences\" to \"Settings\" in macOS 13. The menu item is renamed automatically at runtime. Please use the default term for the preferences window that was used until macOS 12."; */
 "129.title" = "Preferenze…";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
@@ -229,6 +235,9 @@
 /* Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067"; */
 "1067.title" = "Apri la Pagina dell'Articolo nel Browser Esterno";
 
+/* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
+"1073.title" = "Invia link via email";
+
 /* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
 "1084.title" = "Testo Più Grande";
 
@@ -243,6 +252,12 @@
 
 /* Class = "NSMenuItem"; title = "Refresh Folder Images"; ObjectID = "1106"; */
 "1106.title" = "Ricarica tutte le Icone dei Feed";
+
+/* Class = "NSMenuItem"; title = "Layout"; ObjectID = "1108"; */
+"1108.title" = "Layout";
+
+/* Class = "NSMenu"; title = "Layout"; ObjectID = "1109"; */
+"1109.title" = "Disposizione";
 
 /* Class = "NSMenuItem"; title = "Horizontal"; ObjectID = "1110"; */
 "1110.title" = "Rapporto";
@@ -304,6 +319,9 @@
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1257"; */
 "1257.title" = "Personalizza Barra Strumenti…";
 
+/* Class = "NSMenuItem"; title = "Hide Toolbar"; ObjectID = "1258"; */
+"1258.title" = "Nascondi barra degli strumenti";
+
 /* Class = "NSMenuItem"; title = "Hide Status Bar"; ObjectID = "1259"; */
 "1259.title" = "Nascondi Barra di Stato";
 
@@ -313,14 +331,50 @@
 /* Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327"; */
 "1327.title" = "Cerca negli Articoli";
 
+/* Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336"; */
+"1336.title" = "Ordina per";
+
+/* Class = "NSMenu"; title = "Order By"; ObjectID = "1337"; */
+"1337.title" = "Ordina per";
+
+/* Class = "NSMenuItem"; title = "Manual"; ObjectID = "1338"; */
+"1338.title" = "Manuale";
+
+/* Class = "NSMenuItem"; title = "Name"; ObjectID = "1339"; */
+"1339.title" = "Nome";
+
 /* Class = "NSMenuItem"; title = "Unsubscribe"; ObjectID = "1408"; */
 "1408.title" = "Disiscriviti dal Feed";
 
 /* Class = "NSMenuItem"; title = "Get Info…"; ObjectID = "1409"; */
 "1409.title" = "Ottieni Info…";
 
+/* Class = "NSMenuItem"; title = "Use Current Style for Articles"; ObjectID = "1413"; */
+"1413.title" = "Usa lo stile corrente per gli articoli";
+
+/* Class = "NSMenuItem"; title = "Use Web Page for Articles"; ObjectID = "1415"; */
+"1415.title" = "Usa la pagina web per gli articoli";
+
+/* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "1425"; */
+"1425.title" = "Forza l'aggiornamento degli abbonamenti selezionati da Open Reader";
+
+/* Class = "NSMenuItem"; title = "Update Subscriptions From Open Reader"; ObjectID = "1428"; */
+"1428.title" = "Aggiorna abbonamenti da Open Reader";
+
+/* Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458"; */
+"1458.title" = "Reindicizza database";
+
+/* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "bd7-qY-ofB"; */
+"bd7-qY-ofB.title" = "Sostituzione testo";
+
+/* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "BUc-Ki-OOg"; */
+"BUc-Ki-OOg.title" = "Non letto o contrassegnato";
+
 /* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI"; */
 "CGp-H4-UaI.title" = "Ultime 48 ore";
+
+/* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "CLG-Dq-a59"; */
+"CLG-Dq-a59.title" = "Mostra ortografia e grammatica";
 
 /* Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi"; */
 "ecl-HO-Kpi.title" = "Segnala Tutte le Iscrizioni come Lette";
@@ -328,11 +382,32 @@
 /* Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI"; */
 "fad-Nj-OFI.title" = "Ortografia";
 
+/* Class = "NSMenu"; title = "Speech"; ObjectID = "G6k-0L-moc"; */
+"G6k-0L-moc.title" = "Voce";
+
+/* Class = "NSMenuItem"; title = "Speech"; ObjectID = "JXn-SB-3t2"; */
+"JXn-SB-3t2.title" = "Voce";
+
+/* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN"; */
+"MHF-D4-pRN.title" = "Rendi Maiuscolo";
+
+/* Class = "NSMenuItem"; title = "Actual Size"; ObjectID = "OiG-oc-aVj"; Note = "This string is also used in Safari"; */
+"OiG-oc-aVj.title" = "Dimensione Attuale";
+
 /* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
 "pKl-6f-Hlc.title" = "Segnala Come Letto";
 
+/* Class = "NSMenu"; title = "Substitutions"; ObjectID = "QEb-Bm-CPN"; */
+"QEb-Bm-CPN.title" = "Sostituzioni";
+
 /* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "rNG-xr-3x7"; */
 "rNG-xr-3x7.title" = "Articoli Non Letti";
+
+/* Class = "NSMenuItem"; title = "Article List"; ObjectID = "Rs9-r3-soc"; */
+"Rs9-r3-soc.title" = "Elenco articoli";
+
+/* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk"; */
+"RtQ-eP-bfk.title" = "Trattini rapidi";
 
 /* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "t1E-6n-jtA"; */
 "t1E-6n-jtA.title" = "Tutti gli Articoli";
@@ -340,6 +415,12 @@
 /* Class = "NSMenuItem"; title = "Today"; ObjectID = "t34-de-pMs"; */
 "t34-de-pMs.title" = "Oggi";
 
+/* Class = "NSMenu"; title = "Transformations"; ObjectID = "UFF-Fn-8ti"; */
+"UFF-Fn-8ti.title" = "Trasformazioni";
+
 /* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm"; */
 "wqh-Jc-gBm.title" = "Ultimo Aggiornamento";
+
+/* Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "ZCa-7v-54l"; */
+"ZCa-7v-54l.title" = "Visualizza a Schermo Intero";
 

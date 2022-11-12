@@ -107,7 +107,7 @@
 		if (index != -1)
 		{
 			DownloadItem * item = list[index];
-			[[NSWorkspace sharedWorkspace] openWithMenuForFile:item.filename target:nil action:nil menu:menu];
+			[[NSWorkspace sharedWorkspace] vna_openWithMenuForFile:item.filename target:nil action:nil menu:menu];
 		}
 	}
 }
@@ -146,10 +146,13 @@
 	if (index != -1)
 	{
 		DownloadItem * item = list[index];
-		if (item)
-		{
-			if ([[NSWorkspace sharedWorkspace] openFile:item.filename] == NO)
-				runOKAlertSheet(NSLocalizedString(@"Vienna cannot open the file.", nil), NSLocalizedString(@"Vienna cannot open the file \"%@\" because it moved since you downloaded it.", nil), item.filename.lastPathComponent);
+		if (item) {
+            NSURL *url = [NSURL fileURLWithPath:item.filename];
+            if (url && ![NSWorkspace.sharedWorkspace openURL:url]) {
+                runOKAlertSheet(NSLocalizedString(@"Vienna cannot open the file.", nil),
+                                NSLocalizedString(@"Vienna cannot open the file \"%@\" because it moved since you downloaded it.", nil),
+                                item.filename.lastPathComponent);
+            }
 		}
 	}
 }

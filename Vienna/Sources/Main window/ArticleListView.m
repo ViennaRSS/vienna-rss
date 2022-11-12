@@ -37,13 +37,19 @@
 #import "Folder.h"
 #import "EnclosureView.h"
 #import "Database.h"
+#import "Vienna-Swift.h"
 
 #define PROGRESS_INDICATOR_DIMENSION 8
 
+// Shared defaults key
+NSString * const MAPref_ShowEnclosureBar = @"ShowEnclosureBar";
+
+static void *ObserverContext = &ObserverContext;
+
 @interface ArticleListView ()
 
-@property (nonatomic) OverlayStatusBar *statusBar;
 @property (weak, nonatomic) IBOutlet NSStackView *contentStackView;
+@property (weak, nonatomic) IBOutlet EnclosureView *enclosureView;
 
 -(void)initTableView;
 -(BOOL)copyTableSelection:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard;
@@ -57,11 +63,13 @@
 -(void)makeRowSelectedAndVisible:(NSInteger)rowIndex;
 -(void)updateArticleListRowHeight;
 -(void)setOrientation:(NSInteger)newLayout;
--(void)showEnclosureView;
--(void)hideEnclosureView;
--(void)setError:(NSError *)newError;
--(void)handleError:(NSError *)error withDataSource:(WebDataSource *)dataSource;
--(void)endMainFrameLoad;
+
+@property NSView *articleTextView;
+@property (strong) NSLayoutConstraint *textViewWidthConstraint;
+@property (nonatomic) BOOL imbricatedSplitViewResizes; // used to avoid warnings about missing invalidation for a view's changing state
+@property (nonatomic) BOOL useNewBrowser;
+// MARK: ArticleView delegate
+@property (readwrite, getter=isCurrentPageFullHTML, nonatomic) BOOL currentPageFullHTML;
 
 @end
 
@@ -79,10 +87,10 @@
 		isInTableInit = NO;
 		blockSelectionHandler = NO;
 		markReadTimer = nil;
-		lastError = nil;
-		isCurrentPageFullHTML = NO;
+		_currentPageFullHTML = NO;
 		isLoadingHTMLArticle = NO;
 		currentURL = nil;
+		self.imbricatedSplitViewResizes = NO;
     }
     return self;
 }
@@ -98,14 +106,7 @@
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
 	[nc addObserver:self selector:@selector(handleLoadFullHTMLChange:) name:@"MA_Notify_LoadFullHTMLChange" object:nil];
 	[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
-
-	// Make us the frame load and UI delegate for the web view
-	articleText.UIDelegate = self;
-	articleText.frameLoadDelegate = self;
-	[articleText setOpenLinksInNewBrowser:YES];
-
-	[articleText setMaintainsBackForwardList:NO];
-	[articleText.backForwardList setPageCacheSize:0];
+	[nc addObserver:self selector:@selector(handleArticleViewEnded:) name:@"MA_Notify_ArticleViewEnded" object:nil];
 
     [self initialiseArticleView];
 }
@@ -117,11 +118,31 @@
  */
 -(void)initialiseArticleView
 {
+    self.useNewBrowser = Preferences.standardPreferences.useNewBrowser;
+    if (self.useNewBrowser) {
+        WebKitArticleTab *articleTextController = [[WebKitArticleTab alloc] init];
+        articleText = articleTextController;
+        self.articleTextView = articleTextController.view;
+    } else {
+        ArticleView *articleView = [[ArticleView alloc] init];
+        articleText = articleView;
+        self.articleTextView = articleView;
+        // Make us the frame load and UI delegate for the web view
+        [articleView setOpenLinksInNewBrowser:YES];
+        [articleView setMaintainsBackForwardList:NO];
+        [articleView.backForwardList setPageCacheSize:0];
+    }
+
+    [self.contentStackView addView:self.articleTextView inGravity:NSStackViewGravityTop];
+
+
 	Preferences * prefs = [Preferences standardPreferences];
 
 	// Mark the start of the init phase
 	isAppInitialising = YES;
-	
+
+    articleText.listView = self;
+
 	// Create report and condensed view attribute dictionaries
 	NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	style.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -141,119 +162,41 @@
 	// Set the reading pane orientation
 	[self setOrientation:prefs.layout];
 	
+    // With vertical layout and "Use Web Page for Articles" set, we need to
+    // manage article view's width so that it does not grow or shrink randomly
+    // on certain sites.
+    // The best solution I found is programmatically setting a constraint with a
+    // "constant" value.
+    // This did not work for me: self.textViewWidthConstraint =
+    //     [NSLayoutConstraint constraintWithItem:articleTextView attribute:NSLayoutAttributeWidth
+    //         relatedBy:NSLayoutRelationEqual toItem:self.contentStackView attribute:NSLayoutAttributeWidth
+    //         multiplier:1.f constant:0.f];
+    self.textViewWidthConstraint =
+        [NSLayoutConstraint constraintWithItem:self.articleTextView attribute:NSLayoutAttributeWidth
+            relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute
+            multiplier:0.f constant:self.contentStackView.frame.size.width];
+    self.textViewWidthConstraint.priority = NSLayoutPriorityRequired;
+    self.articleTextView.translatesAutoresizingMaskIntoConstraints = NO;
+    // for some reason, this constraint is necessary for new browser with vertical layout, but it is counterproductive with other configurations
+    self.textViewWidthConstraint.active = self.useNewBrowser && splitView2.vertical;
+
 	// Initialise the article list view
 	[self initTableView];
 
 	// Make sure we skip the column filter button in the Tab order
-	articleList.nextKeyView = articleText;
-	
+    articleList.nextKeyView = self.articleTextView;
+
+    // Allow us to control the behavior of the NSSplitView
+    splitView2.delegate = self;
+
 	// Done initialising
 	isAppInitialising = NO;
 
-    [NSUserDefaults.standardUserDefaults addObserver:self
-                                          forKeyPath:MAPref_ShowStatusBar
-                                             options:NSKeyValueObservingOptionInitial
-                                             context:nil];
-}
-
-// MARK: - WebUIDelegate methods
-
-
-/* createWebViewWithRequest
- * Called when the browser wants to create a new window. The request is opened in a new tab.
- */
--(WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
-{
-	[self.controller openURL:request.URL inPreferredBrowser:YES];
-	// Change this to handle modifier key?
-	// Is this covered by the webView policy?
-	return nil;
-}
-
-/* runJavaScriptAlertPanelWithMessage
- * Called when the browser wants to display a JavaScript alert panel containing the specified message.
- */
-- (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
-    NSAlert *alert = [NSAlert new];
-    alert.alertStyle = NSAlertStyleInformational;
-    alert.messageText = NSLocalizedString(@"JavaScript", @"");
-    alert.informativeText = message;
-    [alert runModal];
-}
-
-/* runJavaScriptConfirmPanelWithMessage
- * Called when the browser wants to display a JavaScript confirmation panel with the specified message.
- */
-- (BOOL)webView:(WebView *)sender runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
-    NSAlert *alert = [NSAlert new];
-    alert.alertStyle = NSAlertStyleInformational;
-    alert.messageText = NSLocalizedString(@"JavaScript", @"");
-    alert.informativeText = message;
-    [alert addButtonWithTitle:NSLocalizedString(@"OK", @"Title of a button on an alert")];
-    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
-    NSModalResponse alertResponse = [alert runModal];
-
-	return alertResponse == NSAlertFirstButtonReturn;
-}
-
-/* mouseDidMoveOverElement
- * Called from the webview when the user positions the mouse over an element. If it's a link
- * then echo the URL to the status bar like Safari does.
- */
-- (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation
-  modifierFlags:(NSUInteger)modifierFlags {
-    if (self.statusBar) {
-        NSURL *url = [elementInformation valueForKey:@"WebElementLinkURL"];
-        self.statusBar.label = url.absoluteString;
-    }
-}
-
-/* contextMenuItemsForElement
- * Creates a new context menu for our article's web view.
- */
--(NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems
-{
-	// If this is an URL link, do the link-specific items.
-	NSURL * urlLink = [element valueForKey:WebElementLinkURLKey];
-	if (urlLink != nil)
-		return [self.controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
-	
-	// If we have a full HTML page then do the additional web-page specific items.
-	if (isCurrentPageFullHTML)
-	{
-		WebFrame * frameKey = [element valueForKey:WebElementFrameKey];
-		if (frameKey != nil)
-			return [self.controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
-	}
-	
-	// Remove the reload menu item if we don't have a full HTML page.
-	if (!isCurrentPageFullHTML)
-	{
-		NSMutableArray * newDefaultMenu = [[NSMutableArray alloc] init];
-		NSInteger count = defaultMenuItems.count;
-		NSInteger index;
-		
-		// Copy over everything but the reload menu item, which we can't handle if
-		// this is not a full HTML page since we don't have an URL.
-		for (index = 0; index < count; index++)
-		{
-			NSMenuItem * menuItem = defaultMenuItems[index];
-			if (menuItem.tag != WebMenuItemTagReload)
-				[newDefaultMenu addObject:menuItem];
-		}
-		
-		// If we still have some menu items then use that for the new default menu, otherwise
-		// set the default items to nil as we may have removed all the items.
-		if (newDefaultMenu.count > 0)
-			defaultMenuItems = newDefaultMenu;
-		else
-        {
-			defaultMenuItems = nil;
-        }
-    }
-
-	// Return the default menu items.
-    return defaultMenuItems;
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults addObserver:self
+                   forKeyPath:MAPref_ShowEnclosureBar
+                      options:NSKeyValueObservingOptionNew
+                      context:ObserverContext];
 }
 
 /* initTableView
@@ -399,40 +342,6 @@
 	{
 		Article * theArticle = self.controller.articleController.allArticles[clickedRow];
 		[self.controller openURLFromString:theArticle.link inPreferredBrowser:YES];
-	}
-}
-
-/* updateAlternateMenuTitle
- * Sets the approprate title for the alternate item in the contextual menu
- * when user changes preference for opening pages in external browser
- */
--(void)updateAlternateMenuTitle
-{
-	NSMenuItem * mainMenuItem;
-	NSMenuItem * contextualMenuItem;
-	NSInteger index;
-	NSMenu * articleListMenu = articleList.menu;
-	if (articleListMenu == nil)
-		return;
-	mainMenuItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-	if (mainMenuItem != nil)
-	{
-		index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
-		if (index >= 0)
-		{
-			contextualMenuItem = [articleListMenu itemAtIndex:index];
-			contextualMenuItem.title = mainMenuItem.title;
-		}
-	}
-	mainMenuItem = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
-	if (mainMenuItem != nil)
-	{
-		index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewArticlePagesInAlternateBrowser:)];
-		if (index >= 0)
-		{
-			contextualMenuItem = [articleListMenu itemAtIndex:index];
-			contextualMenuItem.title = mainMenuItem.title;
-		}
 	}
 }
 
@@ -731,12 +640,9 @@
 	return articleList;
 }
 
-/* webView
- * Returns the webview used to display the articles
- */
--(WebView *)webView
+// invoked after a WebViewProgressFinishedNotification notification
+-(void)webViewLoadFinished:(NSNotification *)notification
 {
-	return articleText;
 }
 
 /* canDeleteMessageAtRow
@@ -779,6 +685,61 @@
 	[self.controller.articleController goBack];
 }
 
+/* makeTextStandardSize
+ * Reset webview text size to default
+ */
+-(IBAction)makeTextStandardSize:(id)sender
+{
+	[articleText resetTextSize];
+}
+
+/* makeTextSmaller
+ * Make webview text size smaller
+ */
+-(IBAction)makeTextSmaller:(id)sender
+{
+	[articleText decreaseTextSize];
+}
+
+/* makeTextLarger
+ * Make webview text size larger
+ */
+-(IBAction)makeTextLarger:(id)sender
+{
+	[articleText increaseTextSize];
+}
+
+/* updateAlternateMenuTitle
+ * Sets the approprate title for the alternate item in the contextual menu
+ * when user changes preference for opening pages in external browser
+ */
+- (void)updateAlternateMenuTitle
+{
+    NSMenuItem *mainMenuItem;
+    NSMenuItem *contextualMenuItem;
+    NSInteger index;
+    NSMenu *articleListMenu = articleList.menu;
+    if (articleListMenu == nil) {
+        return;
+    }
+    mainMenuItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+    if (mainMenuItem != nil) {
+        index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
+        if (index >= 0) {
+            contextualMenuItem = [articleListMenu itemAtIndex:index];
+            contextualMenuItem.title = mainMenuItem.title;
+        }
+    }
+    mainMenuItem = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
+    if (mainMenuItem != nil) {
+        index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewArticlePagesInAlternateBrowser:)];
+        if (index >= 0) {
+            contextualMenuItem = [articleListMenu itemAtIndex:index];
+            contextualMenuItem.title = mainMenuItem.title;
+        }
+    }
+} // updateAlternateMenuTitle
+
 - (BOOL)acceptsFirstResponder
 {
 	return YES;
@@ -807,15 +768,11 @@
  */
 -(void)printDocument:(id)sender
 {
-	[articleText printDocument:sender];
-}
-
-/* setError
- * Save the most recent error instance.
- */
--(void)setError:(NSError *)newError
-{
-	lastError = newError;
+    if (self.useNewBrowser) {
+        [articleText printPage];
+    } else {
+        [((TabbedWebView *)articleText) printDocument:sender];
+    }
 }
 
 /* handleArticleListFontChange
@@ -864,6 +821,7 @@
 	splitView2.vertical = (newLayout == VNALayoutCondensed);
 	splitView2.dividerStyle = (splitView2.vertical ? NSSplitViewDividerStyleThin : NSSplitViewDividerStylePaneSplitter);
 	splitView2.autosaveName = (newLayout == VNALayoutCondensed ? @"Vienna3SplitView2CondensedLayout" : @"Vienna3SplitView2ReportLayout");
+	self.textViewWidthConstraint.active = self.useNewBrowser && splitView2.vertical;
 	[splitView2 display];
 	isChangingOrientation = NO;
 }
@@ -931,16 +889,21 @@
 
 // Display the enclosure view below the article list view.
 - (void)showEnclosureView {
-    if (![self.contentStackView.views containsObject:enclosureView]) {
-        [self.contentStackView addView:enclosureView
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    if (![userDefaults boolForKey:MAPref_ShowEnclosureBar]) {
+        return;
+    }
+
+    if (![self.contentStackView.views containsObject:self.enclosureView]) {
+        [self.contentStackView addView:self.enclosureView
                             inGravity:NSStackViewGravityTop];
     }
 }
 
 // Hide the enclosure view if it is present.
 - (void)hideEnclosureView {
-    if ([self.contentStackView.views containsObject:enclosureView]) {
-        [self.contentStackView removeView:enclosureView];
+    if ([self.contentStackView.views containsObject:self.enclosureView]) {
+        [self.contentStackView removeView:self.enclosureView];
     }
 }
 
@@ -958,6 +921,26 @@
 			[self makeRowSelectedAndVisible:0];
 	}
 	return result;
+}
+
+-(void)scrollDownDetailsOrNextUnread
+{
+    if (articleText.canScrollDown) {
+        [(NSView *)articleText scrollPageDown:nil];
+    } else {
+        ArticleController * articleController = self.controller.articleController;
+        [articleController markReadByArray:articleController.markedArticleRange readFlag:YES];
+        [articleController displayNextUnread];
+    }
+}
+
+-(void)scrollUpDetailsOrGoBack
+{
+    if (articleText.canScrollUp) {
+        [(NSView *)articleText scrollPageUp:nil];
+    } else {
+        [self.controller.articleController goBack];
+    }
 }
 
 /* viewLink
@@ -1078,7 +1061,7 @@
 	Article * article = self.selectedArticle;
 	if (article == nil)
 	{
-		[articleText clearHTML];
+		[articleText setArticles:@[]];
 		[self hideEnclosureView];
 	}
 	else
@@ -1098,6 +1081,17 @@
 {
 	if (self == self.controller.articleController.mainArticleView && !isAppInitialising)
 		[self refreshArticlePane];
+}
+
+/* handleArticleViewEnded
+ * Handle the end of a load whether or not it completed and whether or not an
+ * error occurred.
+ */
+- (void)handleArticleViewEnded:(NSNotification *)nc
+{
+    if (nc.object == articleText) {
+        [self endMainFrameLoad];
+    }
 }
 
 /* clearCurrentURL
@@ -1122,12 +1116,11 @@
 {
 	// Remember we're loading from HTML so the status message is set
 	// appropriately.
-	isLoadingHTMLArticle = YES;
+    [self startMainFrameLoad];
 	
 	// Load the actual link.
-	articleText.mainFrameURL = articleLink;
-	// After any clearHTML call, ensure the page gets visible
-	articleText.hidden = NO;
+	articleText.tabUrl = cleanedUpUrlFromString(articleLink);
+    [articleText loadTab];
 	
 	// Clear the current URL.
 	[self clearCurrentURL];
@@ -1144,7 +1137,7 @@
  */
 -(NSURL *)url
 {
-	if (isCurrentPageFullHTML)
+	if (self.isCurrentPageFullHTML)
 		return currentURL;
 	else 
 		return nil;
@@ -1163,10 +1156,10 @@
 		[self clearCurrentURL];
 
 		// We are not a FULL HTML page.
-		isCurrentPageFullHTML = NO;
+		self.currentPageFullHTML = NO;
 		
 		// Clear out the page.
-		[articleText clearHTML];
+		[articleText setArticles:@[]];
 	}
 	else
 	{
@@ -1174,13 +1167,15 @@
 		Folder * folder = [[Database sharedManager] folderFromID:firstArticle.folderId];
 		if (folder.loadsFullHTML && msgArray.count == 1)
 		{
+			if (!self.currentPageFullHTML) {
+			    // Clear out the text so the user knows something happened in response to the
+			    // click on the article.
+			    [articleText setArticles:@[]];
+			}
+
 			// Remember we have a full HTML page so we can setup the context menus
 			// appropriately.
-			isCurrentPageFullHTML = YES;
-			
-			// Clear out the text so the user knows something happened in response to the
-			// click on the article.
-			[articleText clearHTML];
+			self.currentPageFullHTML = YES;
 			
 			// Now set the article to the URL in the RSS feed's article. NOTE: We use
 			// performSelector:withObject:afterDelay: here so that this link load gets
@@ -1190,21 +1185,19 @@
 		}
 		else
 		{
-			NSString * htmlText = [articleText articleTextFromArray:msgArray];
-
 			// Clear the current URL.
 			[self clearCurrentURL];
 
 			// Remember we do NOT have a full HTML page so we can setup the context menus
 			// appropriately.
-			isCurrentPageFullHTML = NO;
+			self.currentPageFullHTML = NO;
 			
 			// Remember we're NOT loading from HTML so the status message is set
 			// appropriately.
 			isLoadingHTMLArticle = NO;
 			
 			// Set the article to the HTML from the RSS feed.
-			[articleText setHTML:htmlText];
+			[articleText setArticles:msgArray];
 		}
 	}
 	
@@ -1220,7 +1213,7 @@
 		else
 		{
 			[self showEnclosureView];
-			[enclosureView setEnclosureFile:oneArticle.enclosure];
+			[self.enclosureView setEnclosureFile:oneArticle.enclosure];
 		}
 	}
 }
@@ -1395,12 +1388,12 @@
 		}
 		if ([db fieldByName:MA_Field_Date].visible)
 		{
-			[summaryString appendFormat:@"%@%@", delimiter, [NSDateFormatter relativeDateStringFromDate:theArticle.date]];
+			[summaryString appendFormat:@"%@%@", delimiter, [NSDateFormatter vna_relativeDateStringFromDate:theArticle.date]];
 			delimiter = @" - ";
 		}
 		if ([db fieldByName:MA_Field_Author].visible)
 		{
-			if (!theArticle.author.blank)
+			if (!theArticle.author.vna_isBlank)
 				[summaryString appendFormat:@"%@%@", delimiter, theArticle.author];
 		}
 		if (![summaryString isEqualToString:@""])
@@ -1415,7 +1408,7 @@
 	NSString * cellString;
 	if ([identifier isEqualToString:MA_Field_Date])
 	{
-        cellString = [NSDateFormatter relativeDateStringFromDate:theArticle.date];
+        cellString = [NSDateFormatter vna_relativeDateStringFromDate:theArticle.date];
 	}
 	else if ([identifier isEqualToString:MA_Field_Folder])
 	{
@@ -1585,14 +1578,14 @@
 	NSInteger count = rowIndexes.count;
 	
 	// Set up the pasteboard
-	[pboard declareTypes:@[MA_PBoardType_RSSItem, @"WebURLsWithTitlesPboardType", NSPasteboardTypeString, NSPasteboardTypeHTML]
+	[pboard declareTypes:@[VNAPasteboardTypeRSSItem, VNAPasteboardTypeWebURLsWithTitles, NSPasteboardTypeString, NSPasteboardTypeHTML]
                    owner:self];
     if (count == 1) {
         if (@available(macOS 10.13, *)) {
-            [pboard addTypes:@[MA_PBoardType_url, MA_PBoardType_urln, NSPasteboardTypeURL]
+            [pboard addTypes:@[VNAPasteboardTypeURL, VNAPasteboardTypeURLName, NSPasteboardTypeURL]
                        owner:self];
         } else {
-            [pboard addTypes:@[MA_PBoardType_url, MA_PBoardType_urln, NSURLPboardType]
+            [pboard addTypes:@[VNAPasteboardTypeURL, VNAPasteboardTypeURLName, NSURLPboardType]
                        owner:self];
         }
     }
@@ -1630,8 +1623,8 @@
 		
 		if (count == 1)
 		{
-			[pboard setString:msgLink forType:MA_PBoardType_url];
-			[pboard setString:msgTitle forType:MA_PBoardType_urln];
+			[pboard setString:msgLink forType:VNAPasteboardTypeURL];
+			[pboard setString:msgTitle forType:VNAPasteboardTypeURLName];
 			
 			// Write the link to the pastboard.
 			[[NSURL URLWithString:msgLink] writeToPasteboard:pboard];
@@ -1644,10 +1637,10 @@
 	[fullHTMLText appendString:@"</body></html>"];
 
 	// Put string on the pasteboard for external drops.
-	[pboard setPropertyList:arrayOfArticles forType:MA_PBoardType_RSSItem];
-	[pboard setPropertyList:@[arrayOfURLs, arrayOfTitles] forType:@"WebURLsWithTitlesPboardType"];
+	[pboard setPropertyList:arrayOfArticles forType:VNAPasteboardTypeRSSItem];
+	[pboard setPropertyList:@[arrayOfURLs, arrayOfTitles] forType:VNAPasteboardTypeWebURLsWithTitles];
 	[pboard setString:fullPlainText forType:NSPasteboardTypeString];
-    [pboard setString:fullHTMLText.stringByEscapingExtendedCharacters forType:NSPasteboardTypeHTML];
+    [pboard setString:fullHTMLText.vna_stringByEscapingExtendedCharacters forType:NSPasteboardTypeHTML];
 
 	return YES;
 }
@@ -1673,104 +1666,16 @@
 	return [articleArray copy];
 }
 
-/* didStartProvisionalLoadForFrame
- * Invoked when a new client request is made by sender to load a provisional data source for frame.
- */
--(void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
-{
-	if (frame == articleText.mainFrame)
-	{
-		[self setError:nil];
-	}
-	
-}
-
-/* didCommitLoadForFrame
- * Invoked when data source of frame has started to receive data.
- */
--(void)webView:(WebView *)sender didCommitLoadForFrame:(WebFrame *)frame
-{
-}
-
-/* didFailProvisionalLoadWithError
- * Invoked when a location request for frame has failed to load.
- */
--(void)webView:(WebView *)sender didFailProvisionalLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
-{
-	if (frame == articleText.mainFrame)
-	{
-		[self handleError:error withDataSource: frame.provisionalDataSource];
-	}
-}
-
-/* didFailLoadWithError
- * Invoked when a location request for frame has failed to load.
- */
--(void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
-{
-	if (frame == articleText.mainFrame)
-	{
-		// Not really errors. Load is cancelled or a plugin is grabbing the URL and will handle it by itself.
-		if (!([error.domain isEqualToString:WebKitErrorDomain] && (error.code == NSURLErrorCancelled || error.code == WebKitErrorPlugInWillHandleLoad)))
-			[self handleError:error withDataSource:frame.dataSource];
-		[self endMainFrameLoad];
-	}
-}
-
--(void)handleError:(NSError *)error withDataSource:(WebDataSource *)dataSource
-{
-	// Remember the error.
-	[self setError:error];
-	
-	// Load the localized verion of the error page
-	WebFrame * frame = articleText.mainFrame;
-	NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
-	if (pathToErrorPage != nil)
-	{
-		NSString *errorMessage = [NSString stringWithContentsOfFile:pathToErrorPage encoding:NSUTF8StringEncoding error:NULL];
-		errorMessage = [errorMessage stringByReplacingOccurrencesOfString: @"$ErrorInformation" withString: error.localizedDescription];
-		if (errorMessage != nil)
-			[frame loadAlternateHTMLString:errorMessage baseURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] forUnreachableURL:dataSource.request.URL];
-	}		
-}
-
-/* endMainFrameLoad
- * Handle the end of a load whether or not it completed and whether or not an error
- * occurred. The error variable is nil for no error or it contains the most recent
- * NSError incident.
- */
--(void)endMainFrameLoad
-{
-	if (isLoadingHTMLArticle)
-	{
-		isLoadingHTMLArticle = NO;
-        articleList.needsDisplay = YES;
-	}
-}
-
-/* didFinishLoadForFrame
- * Invoked when a location request for frame has successfully; that is, when all the resources are done loading.
- */
--(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
-{
-	if (frame == articleText.mainFrame)
-		[self endMainFrameLoad];
-}
-
--(void)webViewLoadFinished:(NSNotification *)notification
-{
-}
-
 /* dealloc
  * Clean up behind ourself.
  */
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    [NSUserDefaults.standardUserDefaults removeObserver:self
-                                             forKeyPath:MAPref_ShowStatusBar];
-	[articleText setUIDelegate:nil];
-	[articleText setFrameLoadDelegate:nil];
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults removeObserver:self
+                      forKeyPath:MAPref_ShowEnclosureBar
+                         context:ObserverContext];
 	[splitView2 setDelegate:nil];
 	[articleList setDelegate:nil];
 }
@@ -1780,16 +1685,91 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary<NSKeyValueChangeKey,id> *)change
-                       context:(void *)context {
-    if ([keyPath isEqualToString:MAPref_ShowStatusBar]) {
-        BOOL isStatusBarShown = [Preferences standardPreferences].showStatusBar;
-        if (isStatusBarShown && !self.statusBar) {
-            self.statusBar = [OverlayStatusBar new];
-            [articleText addSubview:self.statusBar];
-        } else if (!isStatusBarShown && self.statusBar) {
-            [self.statusBar removeFromSuperview];
-            self.statusBar = nil;
+                       context:(void *)context
+{
+    if (context != ObserverContext) {
+        [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
+        return;
+    }
+
+    if ([keyPath isEqualToString:MAPref_ShowEnclosureBar]) {
+        NSNumber *showEnclosureBar = change[NSKeyValueChangeNewKey];
+        if (showEnclosureBar.boolValue) {
+            [self refreshArticlePane];
+        } else {
+            [self hideEnclosureView];
         }
+        return;
+    }
+
+    //TODO
+}
+
+// MARK: ArticleView delegate
+
+@synthesize error;
+@synthesize controller;
+
+- (void)startMainFrameLoad
+{
+    isLoadingHTMLArticle = YES;
+}
+
+/// Handle the end of a load whether or not it completed and whether or not an
+/// error occurred.
+- (void)endMainFrameLoad
+{
+    if (isLoadingHTMLArticle) {
+        isLoadingHTMLArticle = NO;
+        articleList.needsDisplay = YES;
+    }
+}
+
+// MARK : splitView2 delegate
+
+- (void)splitViewWillResizeSubviews:(NSNotification *)notification {
+    NSDictionary * info = notification.userInfo;
+    NSInteger userResizeKey = ((NSNumber *)info[@"NSSplitViewUserResizeKey"]).integerValue;
+    if (userResizeKey == 1) { // user initiated resize
+        self.textViewWidthConstraint.active = NO;
+        if (self.imbricatedSplitViewResizes) {
+            // remove any other constraint affecting articleTextView's horizontal axis,
+            // and let autoresizing do the job
+            for (NSLayoutConstraint *c in [self.articleTextView constraintsAffectingLayoutForOrientation:NSLayoutConstraintOrientationHorizontal]) {
+                if ((c.firstItem == self.articleTextView || c.secondItem == self.articleTextView) && (c != self.textViewWidthConstraint)) {
+                    [self.articleTextView removeConstraint:c];
+                }
+            }
+            self.articleTextView.translatesAutoresizingMaskIntoConstraints = YES;
+        } else {
+            self.imbricatedSplitViewResizes = YES;
+        }
+    }
+}
+
+- (void)splitViewDidResizeSubviews:(NSNotification *)notification {
+    // update and reactivate constraint
+    self.textViewWidthConstraint.constant = self.contentStackView.frame.size.width;
+    NSDictionary * info = notification.userInfo;
+    NSInteger userResizeKey = ((NSNumber *)info[@"NSSplitViewUserResizeKey"]).integerValue;
+    if (userResizeKey == 1) {
+        if (self.imbricatedSplitViewResizes && self.useNewBrowser) {
+            // remove again any other constraint affecting articleTextView's horizontal axis,
+            // and let autoresizing do the job
+            for (NSLayoutConstraint *c in [self.articleTextView constraintsAffectingLayoutForOrientation:NSLayoutConstraintOrientationHorizontal]) {
+                if ((c.firstItem == self.articleTextView || c.secondItem == self.articleTextView) && (c != self.textViewWidthConstraint)) {
+                    [self.articleTextView removeConstraint:c];
+                }
+            }
+            self.articleTextView.translatesAutoresizingMaskIntoConstraints = YES;
+        } else {
+            self.articleTextView.translatesAutoresizingMaskIntoConstraints = NO;
+            self.textViewWidthConstraint.active = self.useNewBrowser; // constraint only needed by new browser
+        }
+        self.imbricatedSplitViewResizes = NO;
     }
 }
 

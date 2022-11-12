@@ -13,13 +13,33 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>few</key>
-			<string>%d new articles retrieved</string>
+			<string>obdrženy %d nové články</string>
 			<key>many</key>
-			<string>%d new articles retrieved</string>
+			<string>obdrženo %d nových článků</string>
 			<key>one</key>
-			<string>%d new article retrieved</string>
+			<string>obdržen %d nový článek</string>
 			<key>other</key>
 			<string>Nově přijato příspěvků: %d</string>
+		</dict>
+	</dict>
+	<key>%d new unread articles retrieved</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@articles@</string>
+		<key>articles</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>few</key>
+			<string>%d new unread articles retrieved</string>
+			<key>many</key>
+			<string>%d new unread articles retrieved</string>
+			<key>one</key>
+			<string>%d new unread article retrieved</string>
+			<key>other</key>
+			<string>Přijato nových nepřečtených příspěvků: %d</string>
 		</dict>
 	</dict>
 	<key>%d subscriptions successfully exported</key>
@@ -33,11 +53,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>few</key>
-			<string>%d subscriptions successfully exported</string>
+			<string>%d odebírání úspěšně exportovány</string>
 			<key>many</key>
-			<string>%d subscriptions successfully exported</string>
+			<string>%d odebírání úspěšně exportováno</string>
 			<key>one</key>
-			<string>%d subscription successfully exported</string>
+			<string>%d odebírání úspěšně exportováno</string>
 			<key>other</key>
 			<string>Bylo úspěšně exportováno celkem odebírání: %d</string>
 		</dict>
@@ -53,11 +73,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>few</key>
-			<string>%d subscriptions successfully imported</string>
+			<string>%d odebírání úspěšně exportovány</string>
 			<key>many</key>
-			<string>%d subscriptions successfully imported</string>
+			<string>%d odebírání úspěšně exportováno</string>
 			<key>one</key>
-			<string>%d subscription successfully imported</string>
+			<string>%d odebírání úspěšně importováno</string>
 			<key>other</key>
 			<string>Bylo úspěšně importováno celkem odebírání: %d</string>
 		</dict>
@@ -73,11 +93,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>few</key>
-			<string>%d unread articles</string>
+			<string>%d nepřečtené články</string>
 			<key>many</key>
-			<string>%d unread articles</string>
+			<string>%d nepřečtených článků</string>
 			<key>one</key>
-			<string>%d unread article</string>
+			<string>%d nepřečtený článek</string>
 			<key>other</key>
 			<string>Nečtených příspěvků: %d</string>
 		</dict>
@@ -93,11 +113,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>u</string>
 			<key>few</key>
-			<string>%u articles</string>
+			<string>%u články</string>
 			<key>many</key>
-			<string>%u articles</string>
+			<string>%u článků</string>
 			<key>one</key>
-			<string>%u article</string>
+			<string>%u článek</string>
 			<key>other</key>
 			<string>%u příspěvků</string>
 		</dict>
@@ -113,11 +133,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>u</string>
 			<key>few</key>
-			<string>%u unread</string>
+			<string>%u nečtené</string>
 			<key>many</key>
-			<string>%u unread</string>
-			<key>one</key>
 			<string>%u nečtených</string>
+			<key>one</key>
+			<string>%u nečtený</string>
 			<key>other</key>
 			<string>%u nečtených</string>
 		</dict>

@@ -21,6 +21,7 @@ import Cocoa
 
 /// A toolbar item with a button as its view. The toolbar item responds to
 /// validation requests.
+@objc(VNAButtonToolbarItem)
 class ButtonToolbarItem: NSToolbarItem {
 
     // image property
@@ -80,7 +81,7 @@ class ButtonToolbarItem: NSToolbarItem {
         switch NSApp.target(forAction: action, to: target, from: self) {
         case let validator as NSToolbarItemValidation:
             isEnabled = validator.validateToolbarItem(self)
-        case .some, .none:
+        default:
             isEnabled = false
         }
     }

@@ -1,9 +1,12 @@
-/* Privacy - AppleEvents Sending Usage Description */
+/* A message that tells the user why Vienna is requesting the ability to send Apple events. */
 "NSAppleEventsUsageDescription" = "";
 
-/* (No Comment) */
-"Vienna plug-in" = "Vienna-Plug-in";
+/* A label for OPML (Outline Processor Markup Language) documents. This is shown in Finder's Get Info window, for example. */
+"OPML document" = "OPML-Dokument";
 
-/* (No Comment) */
+/* A label for plug-in bundles. This is shown in Finder's Get Info window, for example. */
+"Vienna plug-in" = "Vienna-Plug-In";
+
+/* A label for style bundles. This is shown in Finder's Get Info window, for example. */
 "Vienna style" = "Vienna-Stil";
 

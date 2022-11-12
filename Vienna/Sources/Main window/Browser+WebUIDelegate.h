@@ -6,13 +6,11 @@
 //  Copyright © 2018 uk.co.opencommunity. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "Browser.h"
-@import WebKit;
+#import "WebViewBrowser.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Browser (WebUIDelegate) <WebUIDelegate>
+@interface WebViewBrowser (WebUIDelegate) <WebUIDelegate>
 
 @end
 

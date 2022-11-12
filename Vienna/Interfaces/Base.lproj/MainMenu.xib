@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ViennaApp">
@@ -31,13 +31,18 @@
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
                             <menuItem title="Preferences…" keyEquivalent="," id="129">
+                                <attributedString key="userComments">
+                                    <fragment>
+                                        <string key="content">Apple renamed "Preferences" to "Settings" in macOS 13. The menu item is renamed automatically at runtime. Please use the default term for the preferences window that was used until macOS 12.</string>
+                                    </fragment>
+                                </attributedString>
                                 <connections>
                                     <action selector="showPreferences:" target="-1" id="UuH-UI-a6l"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Check for Updates" id="1104">
                                 <connections>
-                                    <action selector="checkForUpdates:" target="1175" id="1176"/>
+                                    <action selector="checkForUpdates:" target="LzF-8y-hiG" id="1176"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="143">
@@ -138,7 +143,7 @@ CA
                             <menuItem title="Close Tab" id="1023">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="closeTab:" target="-1" id="UQG-Ie-lZB"/>
+                                    <action selector="closeActiveTab:" target="-1" id="pfp-12-YWv"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Close All Tabs" alternate="YES" id="1036">
@@ -560,6 +565,14 @@ CA
                             <menuItem isSeparatorItem="YES" id="1088">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
+                            <menuItem title="Actual Size" keyEquivalent="0" id="OiG-oc-aVj">
+                                <attributedString key="userComments">
+                                    <fragment content="This string is also used in Safari"/>
+                                </attributedString>
+                                <connections>
+                                    <action selector="makeTextStandardSize:" target="-1" id="waF-l7-Sgn"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Bigger Text" keyEquivalent="+" id="1084">
                                 <connections>
                                     <action selector="makeTextLarger:" target="-1" id="1141"/>
@@ -583,19 +596,6 @@ CA
                                     <action selector="goForward:" target="-1" id="W9b-gw-hWo"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="1260">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
-                            <menuItem title="Hide Status Bar" keyEquivalent="/" id="1259">
-                                <connections>
-                                    <action selector="toggleStatusBar:" target="-1" id="3d0-Ea-3TY"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Show Filter Bar" keyEquivalent="B" id="1325">
-                                <connections>
-                                    <action selector="showHideFilterBar:" target="-1" id="WfC-Sk-kRK"/>
-                                </connections>
-                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="1256">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
@@ -607,6 +607,43 @@ CA
                             <menuItem title="Customize Toolbar…" id="1257">
                                 <connections>
                                     <action selector="runToolbarCustomizationPalette:" target="-1" id="1263"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="1260">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Show Filter Bar" keyEquivalent="B" id="1325">
+                                <connections>
+                                    <action selector="showHideFilterBar:" target="-1" id="WfC-Sk-kRK"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Hide Status Bar" keyEquivalent="/" id="1259">
+                                <connections>
+                                    <action selector="toggleStatusBar:" target="-1" id="3d0-Ea-3TY"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Hide Enclosure Bar" id="Ke1-zq-KLc">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="233" name="enabled" keyPath="self.mainWindow.isKeyWindow" id="9vk-Xi-YWs"/>
+                                    <binding destination="EBo-gz-68t" name="hidden" keyPath="values.ShowEnclosureBar" id="QnW-ky-QM6">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="EBo-gz-68t" name="value" keyPath="values.ShowEnclosureBar" id="SLW-Ba-hcT">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Show Enclosure Bar" id="5V8-N1-SQd">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="233" name="enabled" keyPath="self.mainWindow.isKeyWindow" id="8vr-rK-zhC"/>
+                                    <binding destination="EBo-gz-68t" name="hidden" keyPath="values.ShowEnclosureBar" id="7He-1A-3pi"/>
+                                    <binding destination="EBo-gz-68t" name="value" keyPath="values.ShowEnclosureBar" id="LCx-JV-B8N"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="XJ7-to-sLq"/>
@@ -855,6 +892,7 @@ CA
                     </menu>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="-35" y="-56"/>
         </menu>
         <menu id="JWi-Bw-kAV">
             <items>
@@ -880,12 +918,14 @@ CA
                 <outlet property="closeWindowItem" destination="935" id="1034"/>
                 <outlet property="columnsMenu" destination="442" id="1050"/>
                 <outlet property="sortByMenu" destination="387" id="1054"/>
+                <outlet property="sparkleController" destination="LzF-8y-hiG" id="7Oy-0I-Ll4"/>
             </connections>
         </customObject>
-        <customObject id="1175" userLabel="Sparkle" customClass="SUUpdater">
+        <customObject id="LzF-8y-hiG" userLabel="Sparkle Updater Controller" customClass="SPUStandardUpdaterController">
             <connections>
-                <outlet property="delegate" destination="233" id="RcS-xf-Kv5"/>
+                <outlet property="updaterDelegate" destination="233" id="fpC-Bd-pjz"/>
             </connections>
         </customObject>
+        <userDefaultsController representsSharedInstance="YES" id="EBo-gz-68t"/>
     </objects>
 </document>

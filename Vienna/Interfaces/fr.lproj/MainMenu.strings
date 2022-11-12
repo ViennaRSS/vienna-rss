@@ -7,11 +7,14 @@
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
 "5.title" = "Tout ramener au premier plan";
 
+/* Class = "NSMenuItem"; title = "Show Enclosure Bar"; ObjectID = "5V8-N1-SQd"; */
+"5V8-N1-SQd.title" = "Afficher la barre des fichiers joints";
+
 /* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1"; */
 "6yn-y8-lF1.title" = "Rafraîchir tous les abonnements";
 
 /* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8Z3-Bg-ry2"; */
-"8Z3-Bg-ry2.title" = "Signalé";
+"8Z3-Bg-ry2.title" = "Signalés";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
 "19.title" = "Fenêtre";
@@ -24,12 +27,6 @@
 
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "27s-E3-FHd"; */
 "27s-E3-FHd.title" = "Corriger l'orthographe automatiquement";
-
-/* Class = "NSMenuItem"; title = "Vienna"; ObjectID = "56"; */
-"56.title" = "Vienna";
-
-/* Class = "NSMenu"; title = "Vienna"; ObjectID = "57"; */
-"57.title" = "Vienna";
 
 /* Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58"; */
 "58.title" = "À propos de Vienna";
@@ -55,7 +52,7 @@
 /* Class = "NSMenuItem"; title = "Vienna Help"; ObjectID = "111"; */
 "111.title" = "Aide Vienna";
 
-/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; Note = "Apple renamed \"Preferences\" to \"Settings\" in macOS 13. The menu item is renamed automatically at runtime. Please use the default term for the preferences window that was used until macOS 12."; */
 "129.title" = "Préférences…";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
@@ -245,10 +242,10 @@
 "1073.title" = "Partager le lien par e-mail";
 
 /* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
-"1084.title" = "Texte plus gros";
+"1084.title" = "Agrandir le texte";
 
 /* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
-"1085.title" = "Texte plus petit";
+"1085.title" = "Réduire le texte";
 
 /* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
 "1101.title" = "Ouvrir une page Web…";
@@ -374,7 +371,7 @@
 "bd7-qY-ofB.title" = "Remplacement de texte";
 
 /* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "BUc-Ki-OOg"; */
-"BUc-Ki-OOg.title" = "Non lu ou signalé";
+"BUc-Ki-OOg.title" = "Non lus ou signalés";
 
 /* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "CGp-H4-UaI"; */
 "CGp-H4-UaI.title" = "Dernières 48 heures";
@@ -415,11 +412,17 @@
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "kCi-pf-mkc"; */
 "kCi-pf-mkc.title" = "Guillemets courbes";
 
+/* Class = "NSMenuItem"; title = "Hide Enclosure Bar"; ObjectID = "Ke1-zq-KLc"; */
+"Ke1-zq-KLc.title" = "Masquer la barre des fichiers joints";
+
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "l8F-tb-7E0"; */
 "l8F-tb-7E0.title" = "Orthographe et grammaire";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN"; */
 "MHF-D4-pRN.title" = "Mettre en majuscules";
+
+/* Class = "NSMenuItem"; title = "Actual Size"; ObjectID = "OiG-oc-aVj"; Note = "This string is also used in Safari"; */
+"OiG-oc-aVj.title" = "Taille réelle";
 
 /* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
 "pKl-6f-Hlc.title" = "Marquer comme lu";
@@ -461,7 +464,7 @@
 "wnc-vZ-fO4.title" = "Afficher les substitutions";
 
 /* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "wqh-Jc-gBm"; */
-"wqh-Jc-gBm.title" = "Dernier rafraîchi";
+"wqh-Jc-gBm.title" = "Dernière actualisation";
 
 /* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "xpF-dh-E2m"; */
 "xpF-dh-E2m.title" = "Mettre en minuscules";

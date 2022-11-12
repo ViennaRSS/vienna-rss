@@ -27,17 +27,17 @@
 #import "HelperFunctions.h"
 #import "StringExtensions.h"
 #import "FolderView.h"
-#import "Browser.h"
 #import "OpenReader.h"
 #import "Database.h"
 #import "TreeNode.h"
 #import "Folder.h"
+#import "Vienna-Swift.h"
 
 @interface FoldersTree ()
 
-@property (nonatomic, readonly, copy) NSMenu *folderMenu;
+@property (readonly, nonatomic) NSMenu *folderMenu;
 
-@property (nonatomic, readonly, copy) NSArray *archiveState;
+@property (readonly, nonatomic) NSArray *archiveState;
 @property (nonatomic) TreeNode *rootNode;
 @property (nonatomic) NSFont *cellFont;
 @property (nonatomic) NSFont *boldCellFont;
@@ -61,7 +61,6 @@
 -(void)handleFolderFontChange:(NSNotification *)nc;
 -(void)reloadFolderItem:(id)node reloadChildren:(BOOL)flag;
 -(void)expandToParent:(TreeNode *)node;
--(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
 -(BOOL)moveFolders:(NSArray *)array withGoogleSync:(BOOL)sync;
 -(void)enableFoldersRenaming:(id)sender;
 -(void)enableFoldersRenamingAfterDelay;
@@ -71,7 +70,9 @@
 @implementation FoldersTree
 
 - (instancetype)init {
-	if (self = [super init]) {
+    self = [super init];
+
+	if (self) {
 		// Root node is never displayed since we always display from
 		// the second level down. It simply provides a convenient way
 		// of containing the other nodes.
@@ -118,7 +119,7 @@
 	[self.outlineView setAutoresizesOutlineColumn:NO];
 
 	// Register for dragging
-	[self.outlineView registerForDraggedTypes:@[MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSPasteboardTypeString]]; 
+	[self.outlineView registerForDraggedTypes:@[VNAPasteboardTypeFolderList, VNAPasteboardTypeRSSSource, VNAPasteboardTypeWebURLsWithTitles, NSPasteboardTypeString]];
 	[self.outlineView setVerticalMotionCanBeginDrag:YES];
 	
 	// Make sure selected row is visible
@@ -141,7 +142,7 @@
 	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderAdded:) name:@"MA_Notify_FolderAdded" object:nil];
-	[nc addObserver:self selector:@selector(handleFolderDeleted:) name:databaseDidDeleteFolderNotification object:nil];
+	[nc addObserver:self selector:@selector(handleFolderDeleted:) name:VNADatabaseDidDeleteFolderNotification object:nil];
 	[nc addObserver:self selector:@selector(handleFolderFontChange:) name:@"MA_Notify_FolderFontChange" object:nil];
 	[nc addObserver:self selector:@selector(handleShowFolderImagesChange:) name:@"MA_Notify_ShowFolderImages" object:nil];
 	[nc addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
@@ -730,7 +731,7 @@
 	if (node.folder.type == VNAFolderTypeRSS || node.folder.type == VNAFolderTypeOpenReader)
 	{
 		NSString * urlString = node.folder.homePage;
-        if (urlString && !urlString.blank) {
+        if (urlString && !urlString.vna_isBlank) {
 			[APPCONTROLLER openURLFromString:urlString inPreferredBrowser:YES];
         }
 	}
@@ -870,7 +871,7 @@
  * selection to whichever node is under the cursor so the context between
  * the menu items and the node is made clear.
  */
--(void)outlineView:(FolderView *)olv menuWillAppear:(NSEvent *)theEvent
+-(void)folderView:(FolderView *)olv menuWillAppear:(NSEvent *)theEvent
 {
 	NSInteger row = [olv rowAtPoint:[olv convertPoint:theEvent.locationInWindow fromView:nil]];
 	if (row >= 0)
@@ -1096,13 +1097,13 @@
 	[NSTimer scheduledTimerWithTimeInterval:[NSEvent doubleClickInterval] target:self selector:@selector(enableFoldersRenaming:) userInfo:nil repeats:NO];
 }
 
-/* outlineViewWillBecomeFirstResponder
+/* folderViewWillBecomeFirstResponder
  * When outline view becomes first responder, bring the article view to the front,
  * and prevent immediate folder renaming.
  */
--(void)outlineViewWillBecomeFirstResponder
+-(void)folderViewWillBecomeFirstResponder
 {
-	[self.controller.browser setActiveTabToPrimaryTab];
+	[self.controller.browser switchToPrimaryTab];
 	[self enableFoldersRenamingAfterDelay];
 }
 
@@ -1151,8 +1152,8 @@
 -(NSDragOperation)outlineView:(NSOutlineView*)olv validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(NSInteger)index
 {
 	NSPasteboard * pb = [info draggingPasteboard]; 
-	NSString * type = [pb availableTypeFromArray:@[MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSPasteboardTypeString]]; 
-	NSDragOperation dragType = ([type isEqualToString:MA_PBoardType_FolderList]) ? NSDragOperationMove : NSDragOperationCopy;
+	NSString * type = [pb availableTypeFromArray:@[VNAPasteboardTypeFolderList, VNAPasteboardTypeRSSSource, VNAPasteboardTypeWebURLsWithTitles, NSPasteboardTypeString]];
+	NSDragOperation dragType = ([type isEqualToString:VNAPasteboardTypeFolderList]) ? NSDragOperationMove : NSDragOperationCopy;
 
 	TreeNode * node = (TreeNode *)item;
 	BOOL isOnDropTypeProposal = index == NSOutlineViewDropOnItemIndex;
@@ -1208,7 +1209,7 @@
 	NSInteger index;
 
 	// We'll create the types of data on the clipboard.
-	[pboard declareTypes:@[MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSPasteboardTypeString] owner:self]; 
+	[pboard declareTypes:@[VNAPasteboardTypeFolderList, VNAPasteboardTypeRSSSource, VNAPasteboardTypeWebURLsWithTitles, NSPasteboardTypeString] owner:self];
 
 	// Create an array of NSNumber objects containing the selected folder IDs.
 	NSInteger countOfItems = 0;
@@ -1254,10 +1255,10 @@
 	}
 
 	// Copy the data to the pasteboard 
-	[pboard setPropertyList:externalDragData forType:MA_PBoardType_RSSSource];
+	[pboard setPropertyList:externalDragData forType:VNAPasteboardTypeRSSSource];
 	[pboard setString:stringDragData forType:NSPasteboardTypeString];
-	[pboard setPropertyList:internalDragData forType:MA_PBoardType_FolderList]; 
-	[pboard setPropertyList:@[arrayOfURLs, arrayOfTitles] forType:@"WebURLsWithTitlesPboardType"]; 
+	[pboard setPropertyList:internalDragData forType:VNAPasteboardTypeFolderList]; 
+	[pboard setPropertyList:@[arrayOfURLs, arrayOfTitles] forType:VNAPasteboardTypeWebURLsWithTitles];
 	return countOfItems > 0; 
 }
 
@@ -1438,11 +1439,11 @@
 { 
 	__block NSInteger childIndex = child;
 	NSPasteboard * pb = [info draggingPasteboard];
-	NSString * type = [pb availableTypeFromArray:@[MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSPasteboardTypeString]];
+	NSString * type = [pb availableTypeFromArray:@[VNAPasteboardTypeFolderList, VNAPasteboardTypeRSSSource, VNAPasteboardTypeWebURLsWithTitles, NSPasteboardTypeString]];
 	TreeNode * node = targetItem ? (TreeNode *)targetItem : self.rootNode;
 
 	NSInteger parentId = node.nodeId;
-	if ((childIndex == NSOutlineViewDropOnItemIndex) || (childIndex < 0))
+	if (childIndex < 0)
 		childIndex = 0;
 
 	// Check the type
@@ -1454,7 +1455,7 @@
 		[APPCONTROLLER createNewSubscription:[pb stringForType:type] underFolder:parentId afterChild:predecessorId];
 		return YES;
 	}
-	if ([type isEqualToString:MA_PBoardType_FolderList])
+	if ([type isEqualToString:VNAPasteboardTypeFolderList])
 	{
 		Database * db = [Database sharedManager];
 		NSArray * arrayOfSources = [pb propertyListForType:type];
@@ -1485,7 +1486,7 @@
 		BOOL result = [self moveFolders:array withGoogleSync:YES];
 		return result;
 	}
-	if ([type isEqualToString:MA_PBoardType_RSSSource])
+	if ([type isEqualToString:VNAPasteboardTypeRSSSource])
 	{
 		Database * dbManager = [Database sharedManager];
 		NSArray * arrayOfSources = [pb propertyListForType:type];

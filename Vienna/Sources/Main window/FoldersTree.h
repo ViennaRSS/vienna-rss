@@ -20,10 +20,11 @@
 
 @import Cocoa;
 
-@class AppController;
-@class FolderView;
+#import "FolderView.h"
 
-@interface FoldersTree : NSObject <NSOutlineViewDelegate, NSOutlineViewDataSource>
+@class AppController;
+
+@interface FoldersTree : NSObject <FolderViewDelegate, NSOutlineViewDataSource>
 
 @property (weak, nonatomic) AppController *controller;
 @property (weak, nonatomic) FolderView *outlineView;
@@ -32,19 +33,17 @@
 -(void)saveFolderSettings;
 -(void)updateAlternateMenuTitle;
 -(void)updateFolder:(NSInteger)folderId recurseToParents:(BOOL)recurseToParents;
--(BOOL)canDeleteFolderAtRow:(NSInteger)row;
 -(BOOL)selectFolder:(NSInteger)folderId;
 -(void)renameFolder:(NSInteger)folderId;
 @property (nonatomic, readonly) NSInteger actualSelection;
 @property (nonatomic, readonly) NSInteger groupParentSelection;
 @property (nonatomic, readonly) NSInteger countOfSelectedFolders;
-@property (nonatomic, readonly, copy) NSArray *selectedFolders;
+@property (readonly, nonatomic) NSArray *selectedFolders;
 @property (nonatomic, readonly) NSInteger firstFolderWithUnread;
 -(NSInteger)nextFolderWithUnread:(NSInteger)currentFolderId;
 -(NSArray *)folders:(NSInteger)folderId;
 -(NSArray *)children:(NSInteger)folderId;
-@property (nonatomic, readonly, strong) NSView *mainView;
--(void)outlineViewWillBecomeFirstResponder;
+@property (nonatomic, readonly) NSView *mainView;
 -(void)setSearch:(NSString *)string;
 
 @end

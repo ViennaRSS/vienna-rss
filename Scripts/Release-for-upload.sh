@@ -8,7 +8,7 @@ GITHUB_REPO="https://github.com/ViennaRSS/vienna-rss"
 GITHUB_RELEASE_URL="${GITHUB_REPO}/releases/tag/v%2F${N_VCS_TAG}"
 SOURCEFORGE_ASSETS_URL="https://downloads.sourceforge.net/project/vienna-rss/v_${N_VCS_TAG}"
 
-TGZ_FILENAME="Vienna${N_VCS_TAG}.tar.gz"
+TGZ_FILENAME="Vienna${N_VCS_TAG}.tgz"
 dSYM_FILENAME="Vienna${N_VCS_TAG}.${VCS_SHORT_HASH}-dSYM"
 
 case "${N_VCS_TAG}" in
@@ -26,12 +26,13 @@ esac
 pushd "${VIENNA_UPLOADS_DIR}"
 
 # Make the dSYM Bundle
-tar -czf "${dSYM_FILENAME}.tar.gz" --exclude '.DS_Store' -C "$ARCHIVE_DSYMS_PATH" .
+tar -a -cf "${dSYM_FILENAME}.tgz" --exclude '.DS_Store' -C "$ARCHIVE_DSYMS_PATH" .
 
 # Zip up the app
 # Copy the app cleanly
 xcodebuild -exportNotarizedApp -archivePath "$ARCHIVE_PATH" -exportPath .
-tar -czf "${TGZ_FILENAME}" --exclude '.DS_Store' Vienna.app
+xattr -c -r Vienna.app
+tar -a -cf "${TGZ_FILENAME}" --exclude '.DS_Store' Vienna.app
 rm -rf Vienna.app
 
 # Output the sparkle change log
@@ -51,7 +52,7 @@ if [ ! -f "$PRIVATE_EDDSA_KEY_PATH" ]; then
 	printf 'Unable to load signing private key vienna_private_eddsa_key.pem. Set PRIVATE_EDDSA_KEY_PATH in Scripts/Resources/CS-ID.xcconfig\n' 1>&2
 	exit 1
 fi
-ED_SIGNATURE_AND_LENGTH="$(sign_update -s `cat "$PRIVATE_EDDSA_KEY_PATH"` "$TGZ_FILENAME")"
+ED_SIGNATURE_AND_LENGTH="$(sign_update "$TGZ_FILENAME" -f "$PRIVATE_EDDSA_KEY_PATH")"
 
 # Generate DSA signature (deprecated; used for backwards compatibility). This
 # command outputs only a signature string, cf. the EdDSA signature string.

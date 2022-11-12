@@ -18,27 +18,23 @@
 //  limitations under the License.
 //
 
-@import Foundation;
+#import "Constants.h"
 
 NSString * MA_DefaultUserAgentString = @"%@/%@ (Macintosh; Intel macOS %@)";
 NSString * MA_BrowserUserAgentString = @"(Macintosh; Intel Mac OS X %@) AppleWebKit/%@ (KHTML, like Gecko) Version/%@ Safari/604.1.38 %@/%@";
 
-NSString * MAPref_ArticleListFont = @"MessageListFont";
+NSString *const MAPref_ArticleListFont = @"ArticleListFont";
 NSString * MAPref_AutoSortFoldersTree = @"AutomaticallySortFoldersTree";
 NSString * MAPref_CheckForUpdatedArticles = @"CheckForUpdatedArticles";
 NSString * MAPref_ShowUnreadArticlesInBold = @"ShowUnreadArticlesInBold";
-NSString * MAPref_FolderFont = @"FolderFont";
+NSString *const MAPref_FolderListFont = @"FolderListFont";
 NSString * MAPref_CachedFolderID = @"CachedFolderID";
 NSString * MAPref_DefaultDatabase = @"DefaultDatabase";
-NSString * MAPref_DownloadsFolder = @"DownloadsFolder";
+NSString *const MAPref_DownloadsFolderBookmark = @"DownloadsFolderBookmark";
 NSString * MAPref_SortColumn = @"SortColumn";
 NSString * MAPref_CheckFrequency = @"CheckFrequencyInSeconds";
 NSString * MAPref_ArticleListColumns = @"MessageColumns";
 NSString * MAPref_CheckForNewArticlesOnStartup = @"CheckForNewMessagesOnStartup";
-NSString * MAPref_FolderImagesFolder = @"FolderIconsCache";
-NSString * MAPref_StylesFolder = @"StylesFolder";
-NSString * MAPref_PluginsFolder = @"PluginsFolder";
-NSString * MAPref_ScriptsFolder = @"ScriptsFolder";
 NSString * MAPref_ActiveStyleName = @"ActiveStyle";
 NSString * MAPref_ActiveTextSizeMultiplier = @"TextSizeMultiplier";
 NSString * MAPref_FolderStates = @"FolderStates";
@@ -49,19 +45,18 @@ NSString * MAPref_OpenLinksInBackground = @"OpenLinksInBackground";
 NSString * MAPref_MinimumFontSize = @"MinimumFontSize";
 NSString * MAPref_UseMinimumFontSize = @"UseMinimumFontSize";
 NSString * MAPref_AutoExpireDuration = @"AutoExpireFrequency";
-NSString * MAPref_DownloadsList = @"DownloadsList";
+NSString *const MAPref_DownloadItemList = @"DownloadItemsList";
 NSString * MAPref_ShowFolderImages = @"ShowFolderImages";
 NSString * MAPref_UseJavaScript = @"UseJavaScript";
-NSString * MAPref_UseWebPlugins = @"UseWebPlugins";
+NSString * MAPref_UseNewBrowser = @"UseNewBrowser";
 NSString * MAPref_CachedArticleGUID = @"CachedArticleGUID";
-NSString * MAPref_ArticleSortDescriptors = @"ArticleSortDescriptors";
+NSString *const MAPref_ArticleListSortOrders = @"ArticleListSortOrders";
 NSString * MAPref_FilterMode = @"FilterMode";
 NSString * MAPref_LastRefreshDate = @"LastRefreshDate";
 NSString * MAPref_TabList = @"TabList";
 NSString * MAPref_TabTitleDictionary = @"TabTitleDict";
 NSString * MAPref_Layout = @"Layout";
 NSString * MAPref_NewArticlesNotification = @"NewArticlesNotification";
-NSString * MAPref_Profile_Path = @"ProfilePath";
 NSString * MAPref_EmptyTrashNotification = @"EmptyTrashNotification";
 NSString * MAPref_ShowAppInStatusBar = @"ShowAppInStatusBar";
 NSString * MAPref_ShowStatusBar = @"ShowStatusBar";
@@ -73,44 +68,52 @@ NSString * MAPref_ShouldSaveFeedSourceBackup = @"ShouldSaveFeedSourceBackup";
 NSString * MAPref_SearchMethod = @"SearchMethod";
 NSString * MAPref_SyncGoogleReader = @"SyncGoogleReader";
 NSString * MAPref_GoogleNewSubscription = @"GoogleNewSubscription";
-NSString * MAPref_ConcurrentDownloads = @"ConcurrentDownloads"; 
+NSString * MAPref_ConcurrentDownloads = @"ConcurrentDownloads";
 NSString * MAPref_SyncServer = @"SyncServer";
+NSString * MAPref_SyncScheme = @"SyncScheme";
 NSString * MAPref_SyncingUser = @"SyncingUser";
 NSString * MAPref_SyncingAppId = @"SyncingAppId";
 NSString * MAPref_SyncingAppKey = @"SyncingAppKey";
 NSString * MAPref_AlwaysAcceptBetas = @"AlwayAcceptBetas";
 NSString * MAPref_UserAgentName = @"UserAgentName";
 
-const NSInteger MA_Default_BackTrackQueueSize = 20;
-const NSInteger MA_Default_RefreshThreads = 20;
-const NSInteger MA_Default_MinimumFontSize = 9;
-const float MA_Default_Read_Interval = 0.5;
-const NSInteger MA_Default_AutoExpireDuration = 0;
-const NSInteger MA_Default_Check_Frequency = 10800;
-const CGFloat MA_Default_Main_Window_Min_Width = 700.0;
-const CGFloat MA_Default_Main_Window_Min_Height = 350.0;
-const NSInteger MA_Default_ConcurrentDownloads = 10;
+// Deprecated defaults keys
+NSString *const MAPref_Deprecated_ArticleListFont = @"MessageListFont";
+NSString *const MAPref_Deprecated_ArticleListSortOrders = @"ArticleSortDescriptors";
+NSString *const MAPref_Deprecated_DownloadItemList = @"DownloadsList";
+NSString *const MAPref_Deprecated_FolderListFont = @"FolderFont";
+
+NSInteger const MA_Default_BackTrackQueueSize = 20;
+NSInteger const MA_Default_RefreshThreads = 20;
+NSInteger const MA_Default_MinimumFontSize = 9;
+float const MA_Default_Read_Interval = 0.5;
+NSInteger const MA_Default_AutoExpireDuration = 0;
+NSInteger const MA_Default_Check_Frequency = 10800;
+CGFloat const MA_Default_Main_Window_Min_Width = 700.0;
+CGFloat const MA_Default_Main_Window_Min_Height = 350.0;
+NSInteger const MA_Default_ConcurrentDownloads = 10;
 
 // Constants for External Weblog Editor Interface according to http://ranchero.com/netnewswire/developers/externalinterface.php
 // We are not using all of them yet, but they might become useful in the future.
-const AEKeyword EditDataItemAppleEventClass = 'EBlg';
-const AEKeyword EditDataItemAppleEventID = 'oitm';
-const AEKeyword DataItemTitle = 'titl';
-const AEKeyword DataItemDescription = 'desc';
-const AEKeyword DataItemSummary = 'summ';
-const AEKeyword DataItemLink = 'link';
-const AEKeyword DataItemPermalink = 'plnk';
-const AEKeyword DataItemSubject = 'subj';
-const AEKeyword DataItemCreator = 'crtr';
-const AEKeyword DataItemCommentsURL = 'curl';
-const AEKeyword DataItemGUID = 'guid';
-const AEKeyword DataItemSourceName = 'snam';
-const AEKeyword DataItemSourceHomeURL = 'hurl';
-const AEKeyword DataItemSourceFeedURL = 'furl';
+AEKeyword const EditDataItemAppleEventClass = 'EBlg';
+AEKeyword const EditDataItemAppleEventID = 'oitm';
+AEKeyword const DataItemTitle = 'titl';
+AEKeyword const DataItemDescription = 'desc';
+AEKeyword const DataItemSummary = 'summ';
+AEKeyword const DataItemLink = 'link';
+AEKeyword const DataItemPermalink = 'plnk';
+AEKeyword const DataItemSubject = 'subj';
+AEKeyword const DataItemCreator = 'crtr';
+AEKeyword const DataItemCommentsURL = 'curl';
+AEKeyword const DataItemGUID = 'guid';
+AEKeyword const DataItemSourceName = 'snam';
+AEKeyword const DataItemSourceHomeURL = 'hurl';
+AEKeyword const DataItemSourceFeedURL = 'furl';
 
 // Custom pasteboard types
-NSString * MA_PBoardType_FolderList = @"ViennaFolderType";
-NSString * MA_PBoardType_RSSSource = @"CorePasteboardFlavorType 0x52535373";
-NSString * MA_PBoardType_RSSItem = @"CorePasteboardFlavorType 0x52535369";
-NSString * MA_PBoardType_url = @"CorePasteboardFlavorType 0x75726C20";
-NSString * MA_PBoardType_urln = @"CorePasteboardFlavorType 0x75726C6E";
+NSPasteboardType const VNAPasteboardTypeFolderList = @"ViennaFolderType";
+NSPasteboardType const VNAPasteboardTypeRSSSource = @"CorePasteboardFlavorType 0x52535373";
+NSPasteboardType const VNAPasteboardTypeRSSItem = @"CorePasteboardFlavorType 0x52535369";
+NSPasteboardType const VNAPasteboardTypeURL = @"CorePasteboardFlavorType 0x75726C20";
+NSPasteboardType const VNAPasteboardTypeURLName = @"CorePasteboardFlavorType 0x75726C6E";
+NSPasteboardType const VNAPasteboardTypeWebURLsWithTitles = @"WebURLsWithTitlesPboardType";

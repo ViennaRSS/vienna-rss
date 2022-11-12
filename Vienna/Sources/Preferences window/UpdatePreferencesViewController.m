@@ -24,11 +24,7 @@
 
 @interface UpdatePreferencesViewController ()
 
-@property (weak) IBOutlet NSButton *checkForUpdates;
 @property (weak) IBOutlet NSButton *alwaysAcceptBetas;
-
-- (IBAction)changeAlwaysAcceptBetas:(id)sender;
-- (IBAction)changeCheckForUpdates:(id)sender;
 
 @end
 
@@ -59,20 +55,9 @@
 -(void)initializePreferences
 {
     Preferences * prefs = [Preferences standardPreferences];
-
-    // Set check for updates when starting
-    self.checkForUpdates.state = prefs.checkForNewOnStartup ? NSControlStateValueOn : NSControlStateValueOff;
     
     // Set search for latest Beta versions when checking for updates
     self.alwaysAcceptBetas.state = prefs.alwaysAcceptBetas ? NSControlStateValueOn : NSControlStateValueOff;
-}
-
-/* changeCheckForUpdates
- * Set whether Vienna checks for updates when it starts.
- */
--(IBAction)changeCheckForUpdates:(id)sender
-{
-    [Preferences standardPreferences].checkForNewOnStartup = [sender state] == NSControlStateValueOn;
 }
 
 /* changeAlwaysAcceptBetas

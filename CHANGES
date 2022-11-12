@@ -8,9 +8,59 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.8.4
+-----
+- Add ability to hide/show the enclosure bar (through the View menu)
+- Various OpenReader related improvements:
+    - Better URL handling in Preferences / Settings window
+    - Allow access over http or https (useful FreshRSS servers used in internal LAN)
+    - When refreshing all folders, prevent same error dialog from popping repeatedly
+    - Fix status discrepancies (especially persisting error icons)
+- Fix width of left hand pane not being kept after application relaunch (on macOS Ventura)
+- Modify details in Preferences / Settings window to better conform to the Human Interface Guidelines
+- Modernize code : use newer APIs when available, prepare to sandboxing
+- Update Sparkle to version 2.3.0
+- Optimized for macOS Ventura : built with macOS 13 SDK (still compatible with macOS 10.12 and above)
+
+3.8.3
+-----
+- Fix "Open Link in New Tab" contextual menu item (on main tab when the new browser option is enabled)
+- When the user uses the Space keyboard shortcut, keep the focus on the article list (as version 3.7.x did) to ease navigation with keyboard
+- Fix a problem that could prevent decompression of the application on some configurations
+- Improve various points of build process
+
+3.8.2
+-----
+- Fix loading of styles when the application is launched from a folder with special characters in its path
+- Fix 'Back' / 'Forward' commands on main tab (items activation and management of queue)
+- Update Italian localization
+- Update Sparkle to version 2.2.1
+- Silence some warnings
+
 3.7.5
 -----
 - Fix backtrack queue used for handling the 'Back' / 'Forward' commands on main tab
+
+3.8.1
+-----
+- Fix and improve display when "Use Web Page for Articles" option is enabled for a feed
+- Fix link preview on legacy browser's article view
+- Restore folder list width between app relaunches
+
+3.8.0
+-----
+- Add a disclosure triangle in feed credentials dialog, in order to provide additional feed details whenever it is needed to disambiguate the feed
+- Remove "Empty Trash…" contextual menu command added in 3.8.0 Beta 3
+- Fix a crash when trying to view a smart folder (problem introduced by 3.8.0 Beta 3)
+- Fix toolbar's item validation problems when text-only mode is used on macOS 12
+- Prevent white background from briefly appearing in article view while appearance is set to dark
+- Optimize code, fix warnings
+- Add a recommended ClangFormat configuration
+- Update localizations
+- Fix unwanted changes of toolbar mode (switches to text+icon while the user requested text-only)
+- Remove floodmagazine.com from default feed list and update other URLs
+- Update scripts building release binaries
+- Update Sparkle to version 2.2.0
 
 3.7.4
 -----
@@ -18,10 +68,47 @@ Thanks!
 - Remove floodmagazine.com from default feed list and update other URLs
 - Fix scripts building release binaries
 
+3.8.0 Beta 3
+------------
+- Add "Empty Trash…" menu command to folder list's contextual menu
+- Add a setting regarding emptying of trash in Preferences window
+- Add "Actual Size" menu command for resetting text zoom
+- Make text zoom menu commands work with new browser
+- Fix copy of articles in article list
+- Fix search method selection with new browser
+- Add a warning in advanced preferences that enabling/disabling Javascript might, for systems prior to macOS 11, require a restart
+- Add Australian and British English as localization variants
+- Improve handling of asynchronous actions in new browser
+- Use NSSecureCoding for encoding/decoding of database fields definitions, download list and some preferences
+- Use NSAlert for emptying trash warning
+- Replace deprecated methods
+- Rename some constants, clean up code
+- Update build architecture
+- Update Sparkle to version 2.1
+
 3.7.3
 -----
 - Fix copy of articles in article list
 - Update Sparkle to version 1.27.1
+
+3.8.0 Beta 2
+------------
+- Change minimum macOS requirement to 10.12 (Sierra)
+- Speed up database handling (the updated database remains fully compatible with all 3.x.x versions of Vienna)
+- When hovering over a link with new browser, display its address on a floating bar
+- Add a hidden preference for always displaying the full date, not using relative dates like Today or Yesterday. This is enabled with the Terminal command: `defaults write uk.co.opencommunity.vienna2 DoesRelativeDateFormatting -bool NO` and can be reversed with `defaults delete uk.co.opencommunity.vienna2 DoesRelativeDateFormatting`
+- Remove support for web plug-ins
+- Respect new browser's preference setting regarding JavaScript (might require application restart)
+- Fix download manager (old browser only at the time) and replace NSURLDownload with NSURLSessionDownloadTask
+- Update AppleScript architecture (use definition files instead of suite/terminology files)
+- Improve handling of URLs containing semicolon character in the path component
+- Update Sparkle to version 2.0 beta 3 and add an EdDSA key
+- Fix some application locks caused by new browser
+- Fix some leaks with new browser
+- Use Sourceforge for downloading binaries updates
+- Replace older logging tools with os_log
+- Silence many warnings
+- Fix Github test action
 
 3.7.2
 -----
@@ -34,6 +121,23 @@ Thanks!
 - Improve handling of URLs containing semicolon character in the path component
 - Update Sparkle to version 1.27 and add an EdDSA key
 - Update procedures for building binaries (use Sourceforge for binaries instead of Bintray, fix notarization and Github test action)
+
+3.8.0 Beta 1
+------------
+- Implement an experimental new browser based on WKWebView : it can be selected in Advanced preferences, and will be available after application restart. It is fastest and more secure.
+- Refactor code:
+    - modify ArticleController to be a NSViewController
+    - structurate code around protocols like Browser, Tab, ArticleContentView, ArticleViewDelegate and BrowserContextMenuDelegate
+    - change many methods of BaseView protocol to be optional and remove unneeded code
+    - introduce new classes : ArticleConverter, ArticleStyleLoader, RSSSubscriber
+- Remove preference setting related to notifications (already handled by System Preferences)
+- Fix image overflow with certain feeds
+- Fix scripts handling in menubar
+- Fix behavior when clicking on Dock icon
+- Update Sparkle to version 1.26
+- Use NSFileManager properties for library paths
+- Migrate some tests to Swift
+- Update procedures for building binaries (don't use Bintray anymore, fix notarization)
 
 3.7.1
 -----

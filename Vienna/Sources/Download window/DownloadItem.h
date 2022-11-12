@@ -28,13 +28,13 @@ typedef NS_ENUM(NSInteger, DownloadState) {
     DownloadStateCancelled
 };
 
-@interface DownloadItem : NSObject <NSCoding>
+@interface DownloadItem : NSObject <NSSecureCoding>
 
 @property (nonatomic) DownloadState state;
 @property (nonatomic) long long expectedSize;
 @property (nonatomic) long long size;
 @property (nonatomic, copy) NSString *filename;
-@property (nonatomic, readonly, copy) NSImage *image;
+@property (readonly, nonatomic) NSImage *image;
 
 @property (nonatomic) NSURLSessionDownloadTask *downloadTask;
 @property (nonatomic) NSURL *fileURL;

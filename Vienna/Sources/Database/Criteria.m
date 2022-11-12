@@ -98,7 +98,7 @@
  */
 -(void)setField:(NSString *)newField
 {
-	field = newField;
+	field = [newField copy];
 }
 
 /* setOperator
@@ -120,7 +120,7 @@
  */
 -(void)setValue:(NSString *)newValue
 {
-	value = newValue;
+	value = [newValue copy];
 }
 
 /* field

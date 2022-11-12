@@ -18,15 +18,14 @@
 //  limitations under the License.
 //
 
-@import Cocoa;
-
 #import "ArticleBaseView.h"
 #import "BaseView.h"
+#import "MessageListView.h"
 
 @class AppController;
 @class ExtendedTableView;
 
-@interface UnifiedDisplayView : NSView <BaseView, ArticleBaseView, NSMenuItemValidation, NSTableViewDelegate, NSTableViewDataSource>
+@interface UnifiedDisplayView : NSView <BaseView, ArticleBaseView, NSMenuItemValidation, MessageListViewDelegate, NSTableViewDataSource, WKScriptMessageHandler>
 {
     IBOutlet ExtendedTableView *articleList;
 
@@ -39,8 +38,7 @@
 @property (weak, nonatomic) AppController *controller;
 
 // Public functions
--(void)updateAlternateMenuTitle;
 -(void)saveTableSettings;
--(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 - (void)webViewLoadFinished:(NSNotification *)notification;
+
 @end

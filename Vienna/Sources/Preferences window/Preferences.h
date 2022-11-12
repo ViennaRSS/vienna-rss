@@ -22,10 +22,10 @@
 
 @class SearchMethod;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface Preferences : NSObject {
-	id userPrefs;
-	NSString * profilePath;
-	NSString * preferencesPath;
+	NSUserDefaults *userPrefs;
 	float markReadInterval;
 	NSInteger minimumFontSize;
 	NSInteger refreshFrequency;
@@ -35,7 +35,6 @@
 	NSInteger newArticlesNotification;
 	NSInteger foldersTreeSortMethod;
 	BOOL refreshOnStartup;
-	BOOL checkForNewOnStartup;
 	BOOL alwaysAcceptBetas;
 	BOOL enableMinimumFontSize;
 	BOOL openLinksInVienna;
@@ -43,7 +42,7 @@
 	BOOL hasPrefs;
 	BOOL showFolderImages;
 	BOOL useJavaScript;
-    BOOL useWebPlugins;
+    BOOL useNewBrowser;
 	BOOL showAppInStatusBar;
 	BOOL showStatusBar;
 	BOOL showFilterBar;
@@ -51,14 +50,9 @@
     BOOL syncGoogleReader;
     BOOL prefersGoogleNewSubscription;
     BOOL markUpdatedAsNew;
-	NSString * downloadFolder;
 	NSString * displayStyle;
 	CGFloat textSizeMultiplier;
 	NSString * defaultDatabase;
-	NSString * imagesFolder;
-	NSString * scriptsFolder;
-	NSString * stylesFolder;
-	NSString * pluginsFolder;
 	NSString * feedSourcesFolder;
 	NSFont * folderFont;
 	NSFont * articleFont;
@@ -66,18 +60,17 @@
 	SearchMethod * searchMethod;
 	NSUInteger concurrentDownloads;
 	NSString * syncServer;
+    NSString * syncScheme;
 	NSString * syncingUser;
 }
 
 // String constants for NSNotificationCenter
 extern NSString * const kMA_Notify_MinimumFontSizeChange;
 extern NSString * const kMA_Notify_UseJavaScriptChange;
-extern NSString * const kMA_Notify_UseWebPluginsChange;
 
-@property (class, readonly) Preferences *standardPreferences;
+@property (class, readonly, nonatomic) Preferences *standardPreferences;
 
 // Accessor functions
--(void)savePreferences;
 -(BOOL)boolForKey:(NSString *)defaultName;
 -(NSInteger)integerForKey:(NSString *)defaultName;
 -(NSString *)stringForKey:(NSString *)defaultName;
@@ -88,31 +81,17 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 -(void)setString:(NSString *)value forKey:(NSString *)defaultName;
 -(void)setArray:(NSArray *)value forKey:(NSString *)defaultName;
 -(void)setObject:(id)value forKey:(NSString *)defaultName;
+- (void)removeObjectForKey:(NSString *)defaultName;
 
 // Path to default database
 -(NSString *)defaultDatabase;
 -(void)setDefaultDatabase:(NSString *)newDatabase;
-
-// Path to scripts folder
-@property (nonatomic, readonly, copy) NSString *scriptsFolder;
-
-// Path to images folder
-@property (nonatomic, readonly, copy) NSString *imagesFolder;
-
-// Path to styles folder
-@property (nonatomic, readonly, copy) NSString *stylesFolder;
-
-// Path to the external plugins folder
-@property (nonatomic, readonly, copy) NSString *pluginsFolder;
 
 // Read-only internal settings
 @property (nonatomic, readonly) NSInteger backTrackQueueSize;
 
 // Auto-expire values
 @property (nonatomic) NSInteger autoExpireDuration;
-
-// Download folder
-@property (nonatomic, copy) NSString *downloadFolder;
 
 // New articles notification method
 @property (nonatomic) NSInteger newArticlesNotification;
@@ -132,9 +111,6 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 // Refresh all subscriptions on startup
 @property (nonatomic) BOOL refreshOnStartup;
 
-// Check for new versions of Vienna on startup
-@property (nonatomic) BOOL checkForNewOnStartup;
-
 // When checking a newer version, always search for Betas versions
 @property (nonatomic) BOOL alwaysAcceptBetas;
 
@@ -150,9 +126,6 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 
 // JavaScript settings
 @property (nonatomic) BOOL useJavaScript;
-
-// Web Plugins settings
-@property (nonatomic) BOOL useWebPlugins;
 
 // Refresh frequency
 @property (nonatomic) NSInteger refreshFrequency;
@@ -171,16 +144,13 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 @property (nonatomic) NSInteger articleListFontSize;
 
 // Article list sort descriptors
-@property (nonatomic, copy) NSArray *articleSortDescriptors;
+@property (null_resettable, nonatomic, copy) NSArray *articleSortDescriptors;
 
 // Automatically sort folders tree
 @property (nonatomic) NSInteger foldersTreeSortMethod;
 
 // Do we show an icon in the status bar?
 @property (nonatomic) BOOL showAppInStatusBar;
-
-// Handle update via Sparkle / ViennaSparkleDelegate
--(void)handleUpdateRestart;
 
 // Show or hide the status bar
 @property (nonatomic) BOOL showStatusBar;
@@ -189,11 +159,11 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 @property (nonatomic) BOOL showFilterBar;
 
 // Should we save the raw feed source XML?
-@property (nonatomic, readonly, copy) NSString *feedSourcesFolder;
+@property (readonly, nonatomic) NSString *feedSourcesFolder;
 @property (nonatomic) BOOL shouldSaveFeedSource;
 
 // Current search method
-@property (nonatomic, strong) SearchMethod *searchMethod;
+@property (nonatomic) SearchMethod *searchMethod;
 
 // Concurrent download settings
 @property (nonatomic) NSUInteger concurrentDownloads;
@@ -204,7 +174,10 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 // User Agent Name
 @property (nonatomic) NSString *userAgentName;
 
-#pragma mark -
+#pragma mark Browser choice
+
+@property (nonatomic) BOOL useNewBrowser;
+
 #pragma mark Open Reader syncing
 
 @property (nonatomic) BOOL syncGoogleReader;
@@ -213,6 +186,7 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 
 // server used for syncing
 @property (nonatomic, copy) NSString *syncServer;
+@property (nonatomic, copy) NSString *syncScheme;
 
 // username used for syncing
 @property (nonatomic, copy) NSString *syncingUser;
@@ -222,3 +196,5 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 @property (nonatomic, copy) NSString *syncingAppKey;
 
 @end
+
+NS_ASSUME_NONNULL_END

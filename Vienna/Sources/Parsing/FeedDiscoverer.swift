@@ -87,9 +87,7 @@ final class FeedDiscoverer: NSObject {
             // According to the UnsafeRawBufferPointer documentation, each byte
             // is addressed as a UInt8 value.
             guard let baseAddress = buffer.baseAddress?.assumingMemoryBound(to: UInt8.self) else {
-                if #available(macOS 10.12, *) {
-                    os_log("Buffer base address is nil", log: .discoverer, type: .debug)
-                }
+                os_log("Buffer base address is nil", log: .discoverer, type: .fault)
                 return
             }
 
@@ -97,9 +95,7 @@ final class FeedDiscoverer: NSObject {
 
             // Even if the base address is not nil, the byte count can be 0.
             guard numberOfBytes > 0 else {
-                if #available(macOS 10.12, *) {
-                    os_log("Buffer data count is 0", log: .discoverer, type: .debug)
-                }
+                os_log("Buffer data count is 0", log: .discoverer, type: .fault)
                 return
             }
 
@@ -223,9 +219,7 @@ private func htmlParserHandler() -> htmlSAXHandler {
 
 private func htmlParserElementStart(_ parser: UnsafeMutableRawPointer?, elementName: UnsafePointer<xmlChar>?, attributesArray: UnsafeMutablePointer<UnsafePointer<xmlChar>?>?) {
     guard let pointer = parser, let cString = elementName else {
-        if #available(macOS 10.12, *) {
-            os_log("Parser returned nil pointers", log: .discoverer, type: .debug)
-        }
+        os_log("Parser returned nil pointers", log: .discoverer, type: .fault)
         return
     }
 
@@ -260,6 +254,7 @@ private func htmlParserElementStart(_ parser: UnsafeMutableRawPointer?, elementN
 // MARK: - Public extensions
 
 extension OSLog {
-    @available(macOS 10.12, *)
-    static let discoverer = OSLog(subsystem: "com.vienna-rss.Vienna", category: "Feed Discoverer")
+
+    static let discoverer = OSLog(subsystem: "--", category: "FeedDiscoverer")
+
 }

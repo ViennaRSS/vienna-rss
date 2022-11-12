@@ -6,11 +6,13 @@
 //
 
 @import Cocoa;
+@import WebKit;
 
 @class AppController;
-@class ArticleView;
+@class ArticleConverter;
+@protocol ArticleContentView;
 
-@interface ArticleCellView : NSTableCellView
+@interface ArticleCellView : NSTableCellView <WKNavigationDelegate>
 {
 	AppController * controller;
 	BOOL inProgress;
@@ -19,11 +21,13 @@
 	NSTableView *__weak _listView;
 }
 
-@property (readonly, strong)ArticleView *articleView;
-@property (readonly, strong)NSProgressIndicator * progressIndicator;
+@property (readonly) NSObject<ArticleContentView> *articleView;
+@property (readonly) ArticleConverter * articleConverter;
+@property (readonly)NSProgressIndicator * progressIndicator;
 @property BOOL inProgress;
 @property NSInteger folderId;
 @property NSUInteger articleRow;
 @property (nonatomic, weak) NSTableView *listView;
+@property CGFloat fittingHeight;
 
 @end

@@ -19,6 +19,10 @@
 
 #import "DateFormatterExtension.h"
 
+#import "Constants.h"
+
+NSString *const MAPref_UseRelativeDates = @"DoesRelativeDateFormatting";
+
 @implementation NSDateFormatter (RelativeDateFormatter)
 
 + (NSDateFormatter *)relativeDateFormatter {
@@ -27,16 +31,19 @@
 
     dispatch_once(&onceToken, ^{
         _relativeDateFormatter = [self new];
-        _relativeDateFormatter.doesRelativeDateFormatting = YES;
         _relativeDateFormatter.dateStyle = NSDateFormatterShortStyle;
         _relativeDateFormatter.timeStyle = NSDateFormatterShortStyle;
         _relativeDateFormatter.formattingContext = NSFormattingContextDynamic;
+
+        NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
+        BOOL value = [defaults boolForKey:MAPref_UseRelativeDates];
+        _relativeDateFormatter.doesRelativeDateFormatting = value;
     });
 
     return _relativeDateFormatter;
 }
 
-+ (NSString *)relativeDateStringFromDate:(NSDate *)date {
++ (NSString *)vna_relativeDateStringFromDate:(NSDate *)date {
     return [NSDateFormatter.relativeDateFormatter stringFromDate:date];
 }
 

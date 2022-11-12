@@ -18,8 +18,8 @@
 //
 
 @import Cocoa;
-@import WebKit;
 @import SystemConfiguration;
+@import WebKit;
 
 #define kLeftArrow  0x7B
 #define kRightArrow 0x7C
@@ -37,14 +37,20 @@
 #define kCapsLock   0x39
 #define kReturn     0x24
 
-void loadMapFromPath(NSString *_Nonnull path, NSMutableDictionary *_Nonnull pathMappings, BOOL foldersOnly,
-                     NSArray *_Nullable validExtensions);
-BOOL isAccessible(NSString *_Nonnull urlString);
-void runOKAlertPanel(NSString *_Nonnull titleString, NSString *_Nonnull bodyText, ...);
-void runOKAlertSheet(NSString *_Nonnull titleString, NSString *_Nonnull bodyText, ...);
-NSMenuItem * _Nullable menuItemWithAction(SEL _Nonnull theSelector);
+NS_ASSUME_NONNULL_BEGIN
+
+void loadMapFromPath(NSString *path,
+                     NSMutableDictionary *pathMappings,
+                     BOOL foldersOnly,
+                     NSArray * _Nullable validExtensions);
+BOOL isAccessible(NSString *urlString);
+void runOKAlertPanelPlain(NSString *titleString, NSString *bodyText);
+void runOKAlertPanel(NSString *titleString, NSString *bodyText, ...);
+void runOKAlertSheet(NSString *titleString, NSString *bodyText, ...);
+NSMenuItem * _Nullable menuItemWithAction(SEL theSelector);
 NSString * _Nullable getDefaultBrowser(void);
-NSURL * _Nullable cleanedUpUrlFromString(NSString *_Nullable urlString);
-NSURL * _Nullable urlFromUserString(NSString *_Nonnull urlString);
+NSURL * _Nullable cleanedUpUrlFromString(NSString * _Nullable urlString);
+NSURL * _Nullable urlFromUserString(NSString *urlString);
 BOOL hasOSScriptsMenu(void);
-NSString * _Nullable percentEscape(NSString *_Nullable string);
+
+NS_ASSUME_NONNULL_END

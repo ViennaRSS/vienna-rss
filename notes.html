@@ -108,10 +108,23 @@ sup {
 
 <h1 id="toc_0">Version Notes</h1>
 
-<h2 id="toc_1">3.7.5</h2>
+<h2 id="toc_1">3.8.4</h2>
 
 <ul>
-<li>Fix backtrack queue used for handling the &#39;Back&#39; / &#39;Forward&#39; commands on main tab</li>
+<li>Add ability to hide/show the enclosure bar (through the View menu)</li>
+<li>Various OpenReader related improvements:
+
+<ul>
+<li>Better URL handling in Preferences / Settings window</li>
+<li>Allow access over http or https (useful FreshRSS servers used in internal LAN)</li>
+<li>When refreshing all folders, prevent same error dialog from popping repeatedly</li>
+<li>Fix status discrepancies (especially persisting error icons)</li>
+</ul></li>
+<li>Fix width of left hand pane not being kept after application relaunch (on macOS Ventura)</li>
+<li>Modify details in Preferences / Settings window to better conform to the Human Interface Guidelines</li>
+<li>Modernize code : use newer APIs when available, prepare to sandboxing</li>
+<li>Update Sparkle to version 2.3.0</li>
+<li>Optimized for macOS Ventura : built with macOS 13 SDK (still compatible with macOS 10.12 and above)</li>
 </ul>
 
 

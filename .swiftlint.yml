@@ -1,13 +1,13 @@
-# SwiftLint 0.42
 # https://realm.github.io/SwiftLint/rule-directory.html
 
 included:
   - Vienna/Sources
   - Vienna Tests
 
-#Rules
+# Rules
 
 disabled_rules:
+  - file_length
   - function_body_length
   - line_length
   - todo
@@ -28,7 +28,6 @@ opt_in_rules:
   - file_header
   - file_name
   - first_where
-  - force_unwrapping
   - identical_operands
   - joined_default_parameter
   - last_where
@@ -80,7 +79,7 @@ file_header:
     \/\/  SWIFTLINT_CURRENT_FILENAME
     \/\/  Vienna(\s?\w+)*
     \/\/
-    \/\/  Copyright (\d{4}|\d{4}-\d{4})(\s?\w+)*
+    \/\/  Copyright (\d{4}|\d{4}-\d{4}|,\s{1}\d{4}|,\s{1}\d{4}-\d{4})+(\s?\w+)*
     \/\/
 
 file_name:

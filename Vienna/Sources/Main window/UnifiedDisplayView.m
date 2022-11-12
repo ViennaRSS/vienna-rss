@@ -3,7 +3,7 @@
 //  Vienna
 //
 //  Created by Steve Palmer, Barijaona Ramaholimihaso and other Vienna contributors
-//  Copyright (c) 2004-2014 Vienna contributors. All rights reserved.
+//  Copyright (c) 2004-2021 Vienna contributors. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@
 #import "Folder.h"
 #import "TableViewExtensions.h"
 #import "Database.h"
+#import "Vienna-Swift.h"
 
 #define LISTVIEW_CELL_IDENTIFIER		@"ArticleCellView"
 // 300 seems a reasonable value to avoid calculating too many frames before being able to update display
@@ -47,6 +48,7 @@
 
 -(void)initTableView;
 -(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
+-(void)handleCellDidResize:(NSNotificationCenter *)nc;
 -(BOOL)viewNextUnreadInCurrentFolder:(NSInteger)currentRow;
 -(void)markCurrentRead:(NSTimer *)aTimer;
 -(void)makeRowSelectedAndVisible:(NSInteger)rowIndex;
@@ -80,6 +82,7 @@
 	// Register for notification
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
+	[nc addObserver:self selector:@selector(handleCellDidResize:) name:@"MA_Notify_CellResize" object:nil];
 
     [self initTableView];
 }
@@ -90,6 +93,7 @@
 -(void)initTableView
 {
 	// Variable initialization here
+	[articleList sizeToFit];
 	[articleList setAllowsMultipleSelection:YES];
 
 	NSMenu * articleListMenu = [[NSMenu alloc] init];
@@ -156,6 +160,24 @@
 	[articleList setDataSource:nil];
 	[articleList setDelegate:nil];
 	[rowHeightArray removeAllObjects];
+}
+
+- (void)handleCellDidResize:(NSNotification *)nc
+{
+    ArticleCellView * cell = nc.object;
+    NSUInteger row = cell.articleRow;
+    CGFloat fittingHeight = cell.fittingHeight;
+    if (row < rowHeightArray.count) {
+        rowHeightArray[row] = @(fittingHeight);
+    } else {
+        NSInteger toAdd = row - rowHeightArray.count;
+        for (NSInteger i = 0; i < toAdd; i++) {
+            [rowHeightArray addObject:@(0)];
+        }
+        [rowHeightArray addObject:@(fittingHeight)];
+    }
+    [articleList noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+    [cell setInProgress:NO];
 }
 
 #pragma mark -
@@ -277,11 +299,21 @@
 	}
 }
 
+- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)webFrame
+{
+    id obj = sender.superview;
+    if ([obj isKindOfClass:[ArticleCellView class]]) {
+        ArticleCellView *cell = (ArticleCellView *)obj;
+        [cell setInProgress:NO];
+    }
+}
+
 #pragma mark -
 #pragma mark webView progress notifications
 
 /* webViewLoadFinished
  * Invoked when a web view load has finished
+ * (called via a WebViewProgressFinishedNotification notification)
  */
 - (void)webViewLoadFinished:(NSNotification *)notification
 {
@@ -302,30 +334,19 @@
 
                 [sender forceJavascript];
                 offsetHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.offsetHeight"];
-                [sender useUserPrefsForJavascriptAndPlugIns];
+                [sender useUserPrefsForJavascript];
                 fittingHeight = offsetHeight.doubleValue;
                 //get the rect of the current webview frame
                 NSRect webViewRect = sender.frame;
                 //calculate the new frame
-                NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
-                                           YPOS_IN_CELL,
+                NSRect newWebViewRect = NSMakeRect(0,
+                                           0,
                                            NSWidth(webViewRect),
                                            fittingHeight);
                 //set the new frame to the webview
                 sender.frame = newWebViewRect;
-
-                if (row < rowHeightArray.count)
-					rowHeightArray[row] = @(fittingHeight);
-                else
-                {	NSInteger toAdd = row - rowHeightArray.count ;
-                    for (NSInteger i = 0 ; i < toAdd ; i++)
-                    {
-                        [rowHeightArray addObject:@DEFAULT_CELL_HEIGHT];
-                    }
-                    [rowHeightArray addObject:@(fittingHeight)];
-                }
-                [cell setInProgress:NO];
-                [articleList noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+                cell.fittingHeight = fittingHeight;
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_CellResize" object:cell];
             }
             else {	//non relevant cell
                 [cell setInProgress:NO];
@@ -341,39 +362,8 @@
 	}
 }
 
-/* updateAlternateMenuTitle
- * Sets the approprate title for the alternate item in the contextual menu
- * when user changes preference for opening pages in external browser
- */
--(void)updateAlternateMenuTitle
-{
-	NSMenuItem * mainMenuItem;
-	NSMenuItem * contextualMenuItem;
-	NSInteger index;
-	NSMenu * articleListMenu = articleList.menu;
-	if (articleListMenu == nil)
-		return;
-	mainMenuItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-	if (mainMenuItem != nil)
-	{
-		index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
-		if (index >= 0)
-		{
-			contextualMenuItem = [articleListMenu itemAtIndex:index];
-			contextualMenuItem.title = mainMenuItem.title;
-		}
-	}
-	mainMenuItem = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
-	if (mainMenuItem != nil)
-	{
-		index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewArticlePagesInAlternateBrowser:)];
-		if (index >= 0)
-		{
-			contextualMenuItem = [articleListMenu itemAtIndex:index];
-			contextualMenuItem.title = mainMenuItem.title;
-		}
-	}
-}
+#pragma mark -
+#pragma ArticleBaseView delegate
 
 /* ensureSelectedArticle
  * Ensure that there is a selected article and that it is visible.
@@ -420,15 +410,6 @@
 	return self;
 }
 
-/* webView
- * Returns the webview used to display the articles
- */
--(WebView *)webView
-{
-	ArticleCellView * cellView = (ArticleCellView *)[articleList viewAtColumn:0 row:0 makeIfNecessary:YES];
-	return cellView.articleView;
-}
-
 /* performFindPanelAction
  * Implement the search action.
  */
@@ -436,7 +417,7 @@
 {
 	[self.controller.articleController reloadArrayOfArticles];
 
-	// This action is send continuously by the filter field, so make sure not the mark read while searching
+	// make sure to not change the mark read while searching
     if (articleList.selectedRow < 0 && self.controller.articleController.allArticles.count > 0 )
 	{
 		BOOL shouldSelectArticle = YES;
@@ -451,35 +432,36 @@
 	}
 }
 
-/* canGoForward
- * Return TRUE if we can go forward in the backtrack queue.
+/* updateAlternateMenuTitle
+ * Sets the approprate title for the alternate item in the contextual menu
+ * when user changes preference for opening pages in external browser
  */
--(BOOL)canGoForward
+- (void)updateAlternateMenuTitle
 {
-	return FALSE;
-}
-
-/* canGoBack
- * Return TRUE if we can go backward in the backtrack queue.
- */
--(BOOL)canGoBack
-{
-	return FALSE;
-}
-
-/* handleGoForward
- * Move forward through the backtrack queue.
- */
--(IBAction)handleGoForward:(id)sender
-{
-}
-
-/* handleGoBack
- * Move backward through the backtrack queue.
- */
--(IBAction)handleGoBack:(id)sender
-{
-}
+    NSMenuItem *mainMenuItem;
+    NSMenuItem *contextualMenuItem;
+    NSInteger index;
+    NSMenu *articleListMenu = articleList.menu;
+    if (articleListMenu == nil) {
+        return;
+    }
+    mainMenuItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+    if (mainMenuItem != nil) {
+        index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
+        if (index >= 0) {
+            contextualMenuItem = [articleListMenu itemAtIndex:index];
+            contextualMenuItem.title = mainMenuItem.title;
+        }
+    }
+    mainMenuItem = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
+    if (mainMenuItem != nil) {
+        index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewArticlePagesInAlternateBrowser:)];
+        if (index >= 0) {
+            contextualMenuItem = [articleListMenu itemAtIndex:index];
+            contextualMenuItem.title = mainMenuItem.title;
+        }
+    }
+} // updateAlternateMenuTitle
 
 /* saveTableSettings
  * Save the current folder and article
@@ -606,6 +588,40 @@
 	return result;
 }
 
+- (void)scrollDownDetailsOrNextUnread
+{
+    NSScrollView *scrollView = [articleList enclosingScrollView];
+    NSClipView *clipView = [scrollView contentView];
+    NSPoint newOrigin = [clipView bounds].origin;
+    newOrigin.y = newOrigin.y + NSHeight(scrollView.documentVisibleRect) -20;
+    if (newOrigin.y < articleList.frame.size.height - 20) {
+        [NSAnimationContext beginGrouping];
+        [[NSAnimationContext currentContext] setDuration:0.3];
+        [[clipView animator] setBoundsOrigin:newOrigin];
+        [scrollView reflectScrolledClipView:[scrollView contentView]];
+        [NSAnimationContext endGrouping];
+    } else {
+        [self.controller skipFolder:nil];
+    }
+}
+
+- (void)scrollUpDetailsOrGoBack
+{
+    NSScrollView *scrollView = [articleList enclosingScrollView];
+    NSClipView *clipView = [scrollView contentView];
+    NSPoint newOrigin = [clipView bounds].origin;
+    if (newOrigin.y > 2) {
+        newOrigin.y = newOrigin.y - NSHeight(scrollView.documentVisibleRect);
+        [NSAnimationContext beginGrouping];
+        [[NSAnimationContext currentContext] setDuration:0.3];
+        [[clipView animator] setBoundsOrigin:newOrigin];
+        [scrollView reflectScrolledClipView:[scrollView contentView]];
+        [NSAnimationContext endGrouping];
+    } else {
+        [self.controller.articleController goBack];
+    }
+}
+
 /* viewLink
  * There's no view link address for article views. If we eventually implement a local
  * scheme such as vienna:<feedurl>/<guid> then we could use that as a link address.
@@ -698,7 +714,7 @@
 	{
 		NSInteger toAdd = row - rowHeightArray.count + 1 ;
 		for (NSInteger i = 0 ; i < toAdd ; i++) {
-			[rowHeightArray addObject:@(DEFAULT_CELL_HEIGHT)];
+			[rowHeightArray addObject:@(0)];
 		}
 		return (CGFloat)DEFAULT_CELL_HEIGHT;
 	}
@@ -731,7 +747,8 @@
 		cellView.identifier = LISTVIEW_CELL_IDENTIFIER;
 	} else {
 	    // recycled cell : minimum safety measures
-	    [cellView.articleView useUserPrefsForJavascriptAndPlugIns];
+	    [cellView setInProgress:NO];
+        self.statusBar.label = nil;
 	}
 
 	NSArray * allArticles = self.controller.articleController.allArticles;
@@ -744,12 +761,20 @@
 	cellView.folderId = articleFolderId;
 	cellView.articleRow = row;
 	cellView.listView = articleList;
-	ArticleView * view = cellView.articleView;
+	NSObject<ArticleContentView> *articleContentView = cellView.articleView;
+    NSView *view;
+    if ([articleContentView isKindOfClass:WebKitArticleView.class])
+    {
+        view = (WebKitArticleView *)articleContentView;
+        ((CustomWKWebView *)view).hoverListener = self;
+    } else {
+        view = ((ArticleView *) articleContentView);
+    }
 	[view removeFromSuperviewWithoutNeedingDisplay];
-	[cellView setInProgress:YES];
-	NSString * htmlText = [view articleTextFromArray:@[theArticle]];
-	[view setHTML:htmlText];
+	view.frame = cellView.frame;
 	[cellView addSubview:view];
+	[cellView setInProgress:YES];
+	[articleContentView setArticles:@[theArticle]];
     return cellView;
 }
 
@@ -778,6 +803,17 @@
 {
 }
 
+/* tableViewColumnDidResize
+ * This notification is called when the user completes resizing a column.
+ */
+- (void)tableViewColumnDidResize:(NSNotification *)notification
+{
+    if ([notification.object isEqualTo:articleList]) {
+        [articleList sizeToFit];
+        [articleList reloadData];
+     }
+}
+
 /* copyTableSelection
  * This is the common copy selection code. We build an array of dictionary entries each of
  * which include details of each selected article in the standard RSS item format defined by
@@ -794,12 +830,12 @@
 	NSInteger count = rowIndexes.count;
 
 	// Set up the pasteboard
-	[pboard declareTypes:@[MA_PBoardType_RSSItem, @"WebURLsWithTitlesPboardType", NSPasteboardTypeString, NSPasteboardTypeHTML] owner:self];
+	[pboard declareTypes:@[VNAPasteboardTypeRSSItem, VNAPasteboardTypeWebURLsWithTitles, NSPasteboardTypeString, NSPasteboardTypeHTML] owner:self];
     if (count == 1) {
         if (@available(macOS 10.13, *)) {
-            [pboard addTypes:@[MA_PBoardType_url, MA_PBoardType_urln, NSPasteboardTypeURL] owner:self];
+            [pboard addTypes:@[VNAPasteboardTypeURL, VNAPasteboardTypeURLName, NSPasteboardTypeURL] owner:self];
         } else {
-            [pboard addTypes:@[MA_PBoardType_url, MA_PBoardType_urln, NSURLPboardType] owner:self];
+            [pboard addTypes:@[VNAPasteboardTypeURL, VNAPasteboardTypeURLName, NSURLPboardType] owner:self];
         }
     }
 
@@ -836,8 +872,8 @@
 
 		if (count == 1)
 		{
-			[pboard setString:msgLink forType:MA_PBoardType_url];
-			[pboard setString:msgTitle forType:MA_PBoardType_urln];
+			[pboard setString:msgLink forType:VNAPasteboardTypeURL];
+			[pboard setString:msgTitle forType:VNAPasteboardTypeURLName];
 
 			// Write the link to the pastboard.
 			[[NSURL URLWithString:msgLink] writeToPasteboard:pboard];
@@ -851,10 +887,10 @@
 	[fullHTMLText appendString:@"</body></html>"];
 
 	// Put string on the pasteboard for external drops.
-	[pboard setPropertyList:arrayOfArticles forType:MA_PBoardType_RSSItem];
-	[pboard setPropertyList:@[arrayOfURLs, arrayOfTitles] forType:@"WebURLsWithTitlesPboardType"];
+	[pboard setPropertyList:arrayOfArticles forType:VNAPasteboardTypeRSSItem];
+	[pboard setPropertyList:@[arrayOfURLs, arrayOfTitles] forType:VNAPasteboardTypeWebURLsWithTitles];
 	[pboard setString:fullPlainText forType:NSPasteboardTypeString];
-	[pboard setString:fullHTMLText.stringByEscapingExtendedCharacters forType:NSPasteboardTypeHTML];
+	[pboard setString:fullHTMLText.vna_stringByEscapingExtendedCharacters forType:NSPasteboardTypeHTML];
 
 	return YES;
 }
@@ -982,4 +1018,15 @@
     }
 }
 
+// MARK: WKScriptMessageHandler
+
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
+{
+    if ([message.name isEqualToString:CustomWKWebView.mouseDidEnterName]) {
+        NSString * link = (NSString *)message.body;
+        self.statusBar.label = link;
+    } else if ([message.name isEqualToString:CustomWKWebView.mouseDidExitName]) {
+        self.statusBar.label = nil;
+    }
+}
 @end

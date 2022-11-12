@@ -109,8 +109,8 @@ There are two distinct ways to get the different files needed to publish an upda
 
    1. Go to Vienna's releases page on Github : <https://github.com/ViennaRSS/vienna-rss/releases>
    2. Choose "Draft a new release", type the tag name (`v/3.3.0_beta4`), a description ("Vienna 3.3.0 Beta 4").
-   3. Upload the `Vienna3.3.0_beta4.tar.gz` file.
-   4. Upload also the compressed dSYM file (whose nome should be something similar to `Vienna3.3.0_beta4.5b272a6-dSYM.tar.gz`)
+   3. Upload the `Vienna3.3.0_beta4.tgz` file (if you use drag and drop, make sure to drop it on the "<i>Attach binaries by dropping them here or selecting them</i>" area and not on the text area).
+   4. Upload also the compressed dSYM file (whose nome should be something similar to `Vienna3.3.0_beta4.5b272a6-dSYM.tgz`)
    5. For beta and release candidates, check the "This is a prerelease" box.
    6. Click the "Publish" button.
    7. Verify the uploaded app: download it, uncompress it and check that it runs OK.
@@ -118,7 +118,7 @@ There are two distinct ways to get the different files needed to publish an upda
 ### On Sourceforge.net:
 
    12. Check that the SourceForge Downloads page for Vienna at <https://sourceforge.net/projects/vienna-rss/files/> got the new files.
-   13. For stable releases only : from the Sourceforge site, choose the ℹ️ button ("View details") of "Vienna3.3.0.tar.gz" (be careful to select the binary and not the code source file or the dSYM file!) and set the file as default download for Mac OS X. Don't do this for beta releases!
+   13. For stable releases only : from the Sourceforge site, choose the ℹ️ button ("View details") of "Vienna3.3.0.tgz" (be careful to select the binary and not the code source file or the dSYM file!) and set the file as default download for Mac OS X. Don't do this for beta releases!
 
 ### On viennarss.github.io
 
@@ -128,20 +128,10 @@ There are two distinct ways to get the different files needed to publish an upda
 
 ### On Brew Cask
 
-17. __For stable releases only :__ follow the steps listed below, adapted from the [Brew Cask Wiki](https://github.com/caskroom/homebrew-cask/blob/master/CONTRIBUTING.md#updating-a-cask):
+17. __Optional and for stable releases only :__ submit the version to Homebrew Casks with a command similar to this one:
 
->We have a [script](https://github.com/vitorgalvao/tiny-scripts/blob/master/cask-repair) that will ask for the new version number, and take care of updating the Cask file and submitting a pull request to homebrew-cask:
-
-```bash
-# install and setup script - only needed once
-brew install vitorgalvao/tiny-scripts/cask-repair
-cask-repair --help
-
-# from time to time (especially on major macOS updates)
-brew upgrade cask-repair
-
-# use to update <outdated_cask>
-cask-repair vienna
-```
+````bash
+brew bump-cask-pr vienna --version=3.3.0
+````
 
 Finally, consider posting an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18> and/or <http://vienna-rss.com>.

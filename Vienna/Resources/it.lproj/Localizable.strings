@@ -5,27 +5,6 @@
 "(Untitled Feed)" = "(Feed Senza Titolo)";
 
 /* No comment provided by engineer. */
-"%d new articles retrieved" = "%d nuovi articoli ricevuti";
-
-/* Notification body */
-"%d new unread articles retrieved" = "%d nuovi articoli non letti ricevuti";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d iscrizioni esportate correttamente";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d iscrizioni importate correttamente";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d articoli non letti";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u articoli";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u non letti";
-
-/* No comment provided by engineer. */
 "A folder with that name already exists" = "Una cartella con lo stesso nome esiste di già";
 
 /* No comment provided by engineer. */
@@ -126,11 +105,17 @@
 /* No comment provided by engineer. */
 "Deleting folder \"%@\"…" = "Elimino cartella '%@'…";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Non mostrare di nuovo questo avviso";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Vuoi davvero importare le iscrizioni dal file OPML specificato?";
 
 /* test for a string */
 "does not contain" = "non contiene";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Non Svuotare il Cestino";
 
 /* No comment provided by engineer. */
 "Download" = "Scarica";
@@ -152,6 +137,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Vuota";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Svuota Cestino";
 
 /* Data field name (URL) visible in menu/article list */
 "Enclosure URL" = "URL enclosure";
@@ -216,7 +204,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "codice HTTP %d riportato dal server";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Vuoi interrompere tutti i download e chiudere Vienna ora?";
 
 /* Title of a button on an alert */
@@ -309,7 +297,7 @@
 /* No comment provided by engineer. */
 "No new articles available" = "Nessun nuovo articolo disponibile";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Ci sono uno o più downloads in corso";
 
 /* Title of a popup menu item */
@@ -468,7 +456,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "Il formato del file del database è cambiato";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "Al suo posto verrà utilizzato lo stile Default.";
 
 /* No comment provided by engineer. */
@@ -477,11 +465,14 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Lo stile '%@' è stato installato nella cartella Styles ed aggiunto al menu Stile.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "Lo stile %@ sembra essere corrotto";
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "L'iscrizione a '%@' richiede un nome utente ed una password per l'accesso.";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "Ci sono degli articoli eliminati nel cestino. Desideri svuotare il cestino prima di uscire?";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Questo articolo contiene un file allegato.";
@@ -497,9 +488,6 @@
 
 /* No comment provided by engineer. */
 "Trash" = "Cestino";
-
-/* No comment provided by engineer. */
-"Unread" = "Non Letti";
 
 /* No comment provided by engineer. */
 "Unread Articles" = "Articoli Non Letti";
