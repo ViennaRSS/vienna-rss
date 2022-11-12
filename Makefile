@@ -17,8 +17,8 @@ development:
 clean:
 	xcodebuild -project $(PROJECT) -scheme "Vienna" -configuration Development clean
 	xcodebuild -project $(PROJECT) -scheme "Vienna" -configuration Deployment clean
-	rm -fr build
-	rm -fr Carthage/Build
+	rm -fr Build
+	rm -fr DerivedData
 
 localize:
 	for locale in $(LOCALES); do \

@@ -1,16 +1,32 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "FMDB",
-        "repositoryURL": "https://github.com/ccgus/fmdb",
-        "state": {
-          "branch": null,
-          "revision": "61e51fde7f7aab6554f30ab061cc588b28a97d04",
-          "version": "2.7.7"
-        }
+  "pins" : [
+    {
+      "identity" : "fmdb",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ccgus/fmdb",
+      "state" : {
+        "revision" : "61e51fde7f7aab6554f30ab061cc588b28a97d04",
+        "version" : "2.7.7"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "mmtabbarview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ViennaRSS/MMTabBarView",
+      "state" : {
+        "branch" : "v/1.4.12",
+        "revision" : "658a980eb7e623e4496087981ac92423b1a36edf"
+      }
+    },
+    {
+      "identity" : "sparkle",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sparkle-project/Sparkle",
+      "state" : {
+        "revision" : "7918c1c8fc68baa37917eeaa67286b077ad5e393",
+        "version" : "1.27.1"
+      }
+    }
+  ],
+  "version" : 2
 }

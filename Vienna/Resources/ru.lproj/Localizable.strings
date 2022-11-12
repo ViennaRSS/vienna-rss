@@ -43,9 +43,6 @@
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Новая база данных Vienna не может быть создана в \"%@\" из-за того, что папка, возможно, находится на удаленном сервере, а текущая версия Vienna не может работать с удаленными базами данных. Пожалуйста, выберите папку на своем компьютере.";
 
-/* Toolbar item name for the Advanced preference pane */
-"Advanced" = "Расширенные";
-
 /* No comment provided by engineer. */
 "After 2 Days" = "Через 2 дня";
 
@@ -63,9 +60,6 @@
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "При последнем обновлении канала произошла ошибка";
-
-/* Toolbar item name for the Appearance preference pane */
-"Appearance" = "Внешний вид";
 
 /* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "Ошибка AppleScript в скрипте '%@'";
@@ -124,9 +118,6 @@
 
 /* No comment provided by engineer. */
 "Click the Open button to open this file." = "Нажмите кнопку Открыть для открытия файла.";
-
-/* No comment provided by engineer. */
-"Click the Play button to play this enclosure in iTunes." = "Нажмите кнопку Воспроизведение , для проигрывания в iTunes.";
 
 /* No comment provided by engineer. */
 "Connecting to %@" = "Соединяюсь с %@";
@@ -281,9 +272,6 @@
 
 /* No comment provided by engineer. */
 "Forcing Refresh subscriptions…" = "Принудительное обновление подписок…";
-
-/* Toolbar item name for the General preference pane */
-"General" = "Общие";
 
 /* Title of a menu item */
 "Get Info" = "Сведения";
@@ -478,13 +466,7 @@
 "Other" = "Иное";
 
 /* No comment provided by engineer. */
-"Play" = "Воспроизведение";
-
-/* No comment provided by engineer. */
 "Plugin installed" = "Плагин установлен";
-
-/* Title of the Preferences window */
-"Preferences" = "Настройки";
 
 /* No comment provided by engineer. */
 "Queue" = "Очередь";
@@ -559,6 +541,11 @@
 /* No comment provided by engineer. */
 "Search all articles or the current web page" = "Поиск в статьях или по текущей веб-странице";
 
+/* Toolbar item label
+   Toolbar item palette label
+   Toolbar item tooltip */
+"Search Articles" = "Искать статьи";
+
 /* Placeholder title of a search field */
 "Search current web page" = "Поиск по текущей веб-странице";
 
@@ -603,9 +590,6 @@
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Выводы";
-
-/* Toolbar item name for the Syncing preference pane */
-"Syncing" = "Синхронизации";
 
 /* Data field name visible in smart folder definition */
 "Text" = "Текст";

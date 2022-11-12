@@ -43,36 +43,31 @@
     {
         rssFeedURL = [NSURL URLWithString:[@"http://" stringByAppendingString:rssFeedURL.absoluteString]];
     }
-    
-    // Use this rather than [NSData dataWithContentsOfURL:],
-    // because that method will not necessarily unzip gzipped content from server.
-    // Thanks to http://www.omnigroup.com/mailman/archive/macosx-dev/2004-March/051547.html
-    NSData * urlContent = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:rssFeedURL] returningResponse:NULL error:NULL];
-    if (urlContent == nil)
-        return rssFeedURL;
-    
-    NSMutableArray * linkArray = [NSMutableArray arrayWithCapacity:10];
-    // Get all the feeds on the page. If there's more than one, use the first one.
-	// TODO : if there are multiple feeds, we should put up an UI inviting the user to pick one
-	// That would require modifying extractFeeds to provide URL strings and titles
-	// as feeds' links are often advertised in the HTML head
-	// as <link rel="alternate" type="application/rss+xml" title="..." href="...">
-    if ([RichXMLParser extractFeeds:urlContent toArray:linkArray])
-    {
-        NSString * feedPart = linkArray.firstObject;
-		NSURL * myURL = [NSURL URLWithString:feedPart relativeToURL:rssFeedURL];
-		if (myURL ==nil)
-		{
-            NSString * urlString = feedPart.stringByUnescapingExtendedCharacters;
-			myURL = [NSURL URLWithString:urlString relativeToURL:rssFeedURL];
-		}
-		return myURL;
-    }
-    else
-    {
-        // no link found, return the original URL
-        return rssFeedURL;
-    }
+
+    __block NSURL * myURL;
+    // semaphore with count equal to zero for synchronizing completion of work
+    dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+    NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:rssFeedURL
+      completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error || (((NSHTTPURLResponse *)response).statusCode != 200)) {
+            myURL = rssFeedURL;
+        } else {
+            VNAFeedDiscoverer *discoverer = [[VNAFeedDiscoverer alloc] initWithData:data
+                                                                            baseURL:rssFeedURL];
+            NSArray<VNAFeedURL *> *urls = [discoverer feedURLs];
+            if (urls.count > 0) {
+                myURL = urls.firstObject.absoluteURL;
+            } else {
+                myURL = rssFeedURL;
+            }
+        }
+        // Signal that we are done
+        dispatch_semaphore_signal(sema);
+    }];
+    [task resume];
+    // Now we wait until the task response block will send a signal
+    dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+    return myURL;
 }
 
 

@@ -40,9 +40,6 @@
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "En ny Vienna-databas kan ej skapas i '%@' för att mappen förmodligen finns på en nätverksdelning och den här versionen av Vienna stöder inte detta. Var vänlig och välj en mapp som finns på din lokala hårddisk.";
 
-/* Toolbar item name for the Advanced preference pane */
-"Advanced" = "Avancerat";
-
 /* No comment provided by engineer. */
 "After 2 Days" = "Efter 2 dagar";
 
@@ -60,9 +57,6 @@
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Ett fel uppstod när denna prenumeration uppdaterades senast";
-
-/* Toolbar item name for the Appearance preference pane */
-"Appearance" = "Utseende";
 
 /* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Är du säker på att du vill radera alla %d markerade mappar? Det här valet går ej att ångra.";
@@ -112,9 +106,6 @@
 
 /* No comment provided by engineer. */
 "Click the Open button to open this file." = "Tryck på Öppna för att öppna denna bilaga.";
-
-/* No comment provided by engineer. */
-"Click the Play button to play this enclosure in iTunes." = "Tryck på Spela för att spela denna bilaga i iTunes";
 
 /* No comment provided by engineer. */
 "Connecting to %@" = "Ansluter till %@";
@@ -254,9 +245,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "Mappar";
-
-/* Toolbar item name for the General preference pane */
-"General" = "Allmänt";
 
 /* Title of a menu item */
 "Get Info" = "Visa info";
@@ -433,13 +421,7 @@
 "Other" = "Annan";
 
 /* No comment provided by engineer. */
-"Play" = "Spela";
-
-/* No comment provided by engineer. */
 "Plugin installed" = "Plugin installerat";
-
-/* Title of the Preferences window */
-"Preferences" = "Inställningar";
 
 /* No comment provided by engineer. */
 "Queue" = "Kö";
@@ -499,6 +481,11 @@
 /* Placeholder title of a search field */
 "Search all articles" = "Sök genom alla artiklar";
 
+/* Toolbar item label
+   Toolbar item palette label
+   Toolbar item tooltip */
+"Search Articles" = "Sök i artiklar";
+
 /* No comment provided by engineer. */
 "Search Results" = "Sökresultat";
 
@@ -540,9 +527,6 @@
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Sammanfattning";
-
-/* Toolbar item name for the Syncing preference pane */
-"Syncing" = "Synkar";
 
 /* No comment provided by engineer. */
 "The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "Din nuvarande %@ stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.";

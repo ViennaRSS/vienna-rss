@@ -42,7 +42,6 @@
 @property (nonatomic) NSFont *cellFont;
 @property (nonatomic) NSFont *boldCellFont;
 @property (nonatomic) NSImage *folderErrorImage;
-@property (nonatomic) NSImage *refreshProgressImage;
 @property (nonatomic) BOOL blockSelectionHandler;
 @property (nonatomic) BOOL canRenameFolders;
 @property (nonatomic) BOOL useToolTips;
@@ -100,9 +99,8 @@
 	tableColumn.dataCell = imageAndTextCell;
 
 	// Folder image
-	self.folderErrorImage = [NSImage imageNamed:@"folderError.tiff"];
+	self.folderErrorImage = [NSImage imageNamed:@"folderError"];
     self.folderErrorImage.accessibilityDescription = NSLocalizedString(@"Error", nil);
-	self.refreshProgressImage = [NSImage imageNamed:@"refreshProgress.tiff"];
 	
 	// Create and set whatever font we're using for the folders
 	[self setFolderListFont];
@@ -126,7 +124,7 @@
 	// Make sure selected row is visible
 	[self.outlineView scrollRowToVisible:self.outlineView.selectedRow];
 
-    [self.outlineView accessibilitySetOverrideValue:NSLocalizedString(@"Folders", nil) forAttribute:NSAccessibilityDescriptionAttribute];
+    self.outlineView.accessibilityValueDescription = NSLocalizedString(@"Folders", nil);
 
 	// Want tooltips
 	self.useToolTips = YES;
@@ -234,7 +232,7 @@
 	[self.rootNode removeChildren];
 	if (![self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode])
 	{
-		[[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_ByName];
+		[[Preferences standardPreferences] setFoldersTreeSortMethod:VNAFolderSortByName];
 		[self.rootNode removeChildren];
 		[self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode];
 	}
@@ -314,7 +312,7 @@
 -(BOOL)loadTree:(NSArray *)listOfFolders rootNode:(TreeNode *)node
 {
 	Folder * folder;
-	if ([Preferences standardPreferences].foldersTreeSortMethod != MA_FolderSort_Manual)
+	if ([Preferences standardPreferences].foldersTreeSortMethod != VNAFolderSortManual)
 	{
 		for (folder in listOfFolders)
 		{
@@ -685,7 +683,7 @@
 {
 	NSInteger selectedFolderId = self.actualSelection;
 	
-	if ([Preferences standardPreferences].foldersTreeSortMethod == MA_FolderSort_Manual)
+	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortManual)
 	{
         [self setManualSortOrderForNode:self.rootNode];
 	}
@@ -795,8 +793,8 @@
 
 	BOOL moveSelection = (folderId == self.actualSelection);
 
-	if ([Preferences standardPreferences].foldersTreeSortMethod == MA_FolderSort_ByName)
-		[parentNode sortChildren:MA_FolderSort_ByName];
+	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortByName)
+		[parentNode sortChildren:VNAFolderSortByName];
 
 	[self reloadFolderItem:parentNode reloadChildren:YES];
 	if (moveSelection)
@@ -840,7 +838,7 @@
 		[node setCanHaveChildren:YES];
 	
 	NSInteger childIndex = -1;
-	if ([Preferences standardPreferences].foldersTreeSortMethod == MA_FolderSort_Manual)
+	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortManual)
 	{
 		NSInteger nextSiblingId = newFolder.nextSiblingId;
 		if (nextSiblingId > 0)
@@ -934,7 +932,7 @@
 		    unreadCount = node.folder.unreadCount;
 		}
 		if (unreadCount) {
-			return [NSString stringWithFormat:NSLocalizedString(@"%d unread articles", nil), unreadCount];
+			return [NSString stringWithFormat:NSLocalizedString(@"%d unread articles", nil), (int)unreadCount];
 		}
 	}
 	return nil;
@@ -963,17 +961,9 @@
 	Folder * folder = node.folder;
     NSMutableDictionary * myInfo = [NSMutableDictionary dictionaryWithDictionary:info];
     if (folder.isUnsubscribed) {
-        if (@available(macOS 10.10, *)) {
-            myInfo[NSForegroundColorAttributeName] = NSColor.secondaryLabelColor;
-        } else {
-            myInfo[NSForegroundColorAttributeName] = NSColor.disabledControlTextColor;
-        }
+        myInfo[NSForegroundColorAttributeName] = NSColor.secondaryLabelColor;
     } else {
-		if (@available(macOS 10.10, *)) {
-			myInfo[NSForegroundColorAttributeName] = NSColor.labelColor;
-		} else {
-			myInfo[NSForegroundColorAttributeName] = NSColor.controlTextColor;
-		}
+		myInfo[NSForegroundColorAttributeName] = NSColor.labelColor;
     }
 	// Set the font
 	if (folder.unreadCount ||  (folder.childUnreadCount && ![olv isItemExpanded:item]))
@@ -1023,12 +1013,10 @@
 		else if (folder.unreadCount)
 		{
 			[realCell setCount:folder.unreadCount];
-			[realCell setCountBackgroundColour:[NSColor colorForControlTint:[NSColor currentControlTint]]];
 		}
 		else if (folder.childUnreadCount && ![olv isItemExpanded:item])
 		{
 			[realCell setCount:folder.childUnreadCount];
-			[realCell setCountBackgroundColour:[NSColor colorForControlTint:[NSColor currentControlTint]]];
 		}
 		else
 		{
@@ -1300,7 +1288,7 @@
 	// we have to watch for is to make sure that we don't re-parent to a subordinate
 	// folder.
 	Database * dbManager = [Database sharedManager];
-	BOOL autoSort = [Preferences standardPreferences].foldersTreeSortMethod != MA_FolderSort_Manual;
+	BOOL autoSort = [Preferences standardPreferences].foldersTreeSortMethod != VNAFolderSortManual;
 
 	while (index < count)
 	{

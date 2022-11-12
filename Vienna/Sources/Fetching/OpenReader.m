@@ -219,9 +219,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     dispatch_semaphore_signal(sema);
 
             }];
-            if (@available(macOS 10.10, *)) {
-                task.priority = NSURLSessionTaskPriorityHigh;
-            };
+            task.priority = NSURLSessionTaskPriorityHigh;
             [task resume];
 
         }];
@@ -301,13 +299,11 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                                                                            repeats:YES];
                     }
                 }
-				// Signal that we are done with the synchronous task
-				dispatch_semaphore_signal(sema);
-          }];
-          if (@available(macOS 10.10, *)) {
-              task.priority = NSURLSessionTaskPriorityHigh;
-          };
-          [task resume];
+                // Signal that we are done with the synchronous task
+                dispatch_semaphore_signal(sema);
+            }];
+            task.priority = NSURLSessionTaskPriorityHigh;
+            [task resume];
         }];
         [tTokenOperation start];
         // we wait until the task response block above will send a signal
@@ -666,12 +662,12 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 });
             } else {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    aItem.status = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
+                    aItem.status = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), (int)newArticlesFromFeed];
                 });
             }
         } else { //other HTTP status response...
             [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil),
-                                 ((NSHTTPURLResponse *)response).statusCode]];
+                                 (int)((NSHTTPURLResponse *)response).statusCode]];
             LOG_EXPR(request.URL);
             LOG_EXPR(request.allHTTPHeaderFields);
             LOG_EXPR([[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);

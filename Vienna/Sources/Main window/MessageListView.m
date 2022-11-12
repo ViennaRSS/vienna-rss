@@ -23,7 +23,7 @@
 
 @interface NSObject(MessageListViewDelegate)
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
-	-(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
+	-(BOOL)copyTableSelection:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard;
 	-(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 	-(IBAction)deleteMessage:(id)sender;
 @end
@@ -53,14 +53,7 @@
 	if (self.selectedRow >= 0)
 	{
 		NSIndexSet * selectedRowIndexes = self.selectedRowIndexes;
-		NSMutableArray *rows = [NSMutableArray arrayWithCapacity:selectedRowIndexes.count];
-		NSUInteger  rowIndex = selectedRowIndexes.firstIndex;
-		while (rowIndex != NSNotFound)
-		{
-			[rows addObject:@(rowIndex)];
-			rowIndex = [selectedRowIndexes indexGreaterThanIndex:rowIndex];
-		}
-        [(id)self.delegate copyTableSelection:rows toPasteboard:[NSPasteboard generalPasteboard]];
+        [(id)self.delegate copyTableSelection:selectedRowIndexes toPasteboard:NSPasteboard.generalPasteboard];
 	}
 }
 

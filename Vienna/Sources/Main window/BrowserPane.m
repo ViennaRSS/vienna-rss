@@ -141,16 +141,16 @@
 	[self showRssPageButton:NO];
 
 	// Set tooltips
-	[addressField setToolTip:NSLocalizedString(@"Enter the URL here", nil)];
-	[addressField.cell accessibilitySetOverrideValue:NSLocalizedString(@"Enter the URL here", nil) forAttribute:NSAccessibilityTitleAttribute];
-	[refreshButton setToolTip:NSLocalizedString(@"Refresh the current page", nil)];
-	[refreshButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Refresh the current page", nil) forAttribute:NSAccessibilityTitleAttribute];
-	[backButton setToolTip:NSLocalizedString(@"Return to the previous page", nil)];
-	[backButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Return to the previous page", nil) forAttribute:NSAccessibilityTitleAttribute];
-	[forwardButton setToolTip:NSLocalizedString(@"Go forward to the next page", nil)];
-	[forwardButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Go forward to the next page", nil) forAttribute:NSAccessibilityTitleAttribute];
-	[rssPageButton setToolTip:NSLocalizedString(@"Subscribe to the feed for this page", nil)];
-	[rssPageButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Subscribe to the feed for this page", nil) forAttribute:NSAccessibilityTitleAttribute];
+    addressField.toolTip = NSLocalizedString(@"Enter the URL here", nil);
+    addressField.cell.accessibilityTitle = NSLocalizedString(@"Enter the URL here", nil);
+	refreshButton.toolTip = NSLocalizedString(@"Refresh the current page", nil);
+	refreshButton.cell.accessibilityTitle = NSLocalizedString(@"Refresh the current page", nil);
+	backButton.toolTip = NSLocalizedString(@"Return to the previous page", nil);
+	backButton.cell.accessibilityTitle = NSLocalizedString(@"Return to the previous page", nil);
+	forwardButton.toolTip = NSLocalizedString(@"Go forward to the next page", nil);
+    forwardButton.cell.accessibilityTitle = NSLocalizedString(@"Go forward to the next page", nil);
+	rssPageButton.toolTip = NSLocalizedString(@"Subscribe to the feed for this page", nil);
+	rssPageButton.cell.accessibilityTitle = NSLocalizedString(@"Subscribe to the feed for this page", nil);
 
     [NSUserDefaults.standardUserDefaults addObserver:self
                                           forKeyPath:MAPref_ShowStatusBar
@@ -526,7 +526,7 @@
 {
     if (frame == self.webPane.mainFrame)
     {
-        [self detectedRSSLink:NO];
+        [self showRssPageButton:NO];
         [self resetError];
     }
 
@@ -577,24 +577,20 @@
     }
 }
 
-/* didFinishLoadForFrame
- * Invoked when a location request for frame has successfully; that is, when all the resources are done loading.
- */
--(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
+- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
-    if (frame == self.webPane.mainFrame)
-    {
-        // Once the frame is loaded, trawl the source for possible links to RSS
-        // pages.
-        NSData * webSrc = frame.dataSource.data;
-        NSMutableArray * arrayOfLinks = [NSMutableArray array];
-
-        if ([RichXMLParser extractFeeds:webSrc toArray:arrayOfLinks])
-        {
-            [self detectedRSSLink:YES];
-        }
-        [self endFrameLoad];
+    if (frame != self.webPane.mainFrame) {
+        return;
     }
+
+    NSData *data = frame.dataSource.data;
+    NSURL *url = frame.dataSource.response.URL;
+    VNAFeedDiscoverer *parser = [[VNAFeedDiscoverer alloc] initWithData:data
+                                                                baseURL:url];
+    hasRSSlink = [parser documentHasFeeds];
+    [self showRssPageButton:hasRSSlink];
+
+    [self endFrameLoad];
 }
 
 /* didReceiveTitle
@@ -657,7 +653,7 @@
     [self setError:error];
 
     // Use a warning sign as favicon
-    iconImage.image = [NSImage imageNamed:@"folderError.tiff"];
+    iconImage.image = [NSImage imageNamed:@"folderError"];
 
     // Load the localized verion of the error page
     NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
@@ -673,11 +669,6 @@
         if (unreachableURL != nil)
             self.url = frame.provisionalDataSource.unreachableURL;
     }
-}
-
-- (void)detectedRSSLink:(BOOL)detected {
-    hasRSSlink = detected;
-    [self showRssPageButton:detected];
 }
 
 #pragma mark - WebUIDelegate helper methods

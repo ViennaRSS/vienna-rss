@@ -31,14 +31,8 @@
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Non è stato possibile creare un nuovo database per Vienna in '%@' poiché probabilmente la cartella si trova su una condivisione di rete remota e questa versione di Vienna non può gestire database remoti. Prego scegli una cartella alternativa che si trovi in locale sulla tua macchina.";
 
-/* Toolbar item name for the Advanced preference pane */
-"Advanced" = "Avanzate";
-
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Si è verificato un errore nell'ultimo aggiornamento di questo feed";
-
-/* Toolbar item name for the Appearance preference pane */
-"Appearance" = "Aspetto";
 
 /* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Sei sicuro di voler eliminare tutte le %d cartelle selezionate? Questa operazione non può essere annullata.";
@@ -85,9 +79,6 @@
 
 /* No comment provided by engineer. */
 "Click the Open button to open this file." = "Fai clic sul pulsante Apri per aprire il file.";
-
-/* No comment provided by engineer. */
-"Click the Play button to play this enclosure in iTunes." = "Fai clic sul pulsante Play per riprodurre l'enclosure in iTunes.";
 
 /* No comment provided by engineer. */
 "Connecting to %@" = "Collegamento in corso a %@";
@@ -206,9 +197,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "Cartelle";
-
-/* Toolbar item name for the General preference pane */
-"General" = "Generale";
 
 /* Title of a menu item */
 "Get Info" = "Ottieni Info";
@@ -369,12 +357,6 @@
 /* No comment provided by engineer. */
 "Other" = "Altro";
 
-/* No comment provided by engineer. */
-"Play" = "Riproduci";
-
-/* Title of the Preferences window */
-"Preferences" = "Preferenze";
-
 /* Title of a button on an alert */
 "Quit" = "Esci";
 
@@ -429,6 +411,11 @@
 
 /* Placeholder title of a search field */
 "Search all articles" = "Cerca in tutti gli articoli";
+
+/* Toolbar item label
+   Toolbar item palette label
+   Toolbar item tooltip */
+"Search Articles" = "Cerca negli Articoli";
 
 /* No comment provided by engineer. */
 "Search Results" = "Cerca nei Risultati";

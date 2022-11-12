@@ -28,7 +28,6 @@
 #import "Constants.h"
 #import "OpenReader.h"
 #import "NSNotificationAdditions.h"
-#import "VTPG_Common.h"
 #import "Debug.h"
 #import "Article.h"
 #import "Folder.h"
@@ -84,15 +83,14 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         networkQueue.name = @"VNAHTTPSession queue";
         networkQueue.maxConcurrentOperationCount = [[Preferences standardPreferences] integerForKey:MAPref_ConcurrentDownloads];
         NSString * osVersion;
-        if (@available(macOS 10.10, *)) {
-            NSOperatingSystemVersion version = [NSProcessInfo processInfo].operatingSystemVersion;
-            osVersion = [NSString stringWithFormat:@"%ld_%ld_%ld", version.majorVersion, version.minorVersion, version.patchVersion];
-        } else {
-            osVersion = @"10_9_x";
-        }
-        NSString * userAgent = [NSString stringWithFormat:MA_DefaultUserAgentString, [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], osVersion];
+        NSOperatingSystemVersion version = [NSProcessInfo processInfo].operatingSystemVersion;
+        osVersion = [NSString stringWithFormat:@"%ld_%ld_%ld", version.majorVersion, version.minorVersion, version.patchVersion];
+        Preferences * prefs = [Preferences standardPreferences];
+        NSString *name = prefs.userAgentName;
+
+        NSString * userAgent = [NSString stringWithFormat:MA_DefaultUserAgentString, name, [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], osVersion];
         NSURLSessionConfiguration * config = [NSURLSessionConfiguration defaultSessionConfiguration];
-        config.timeoutIntervalForRequest = 180;
+        config.timeoutIntervalForResource = 300;
         config.URLCache = nil;
         config.HTTPAdditionalHeaders = @{@"User-Agent": userAgent};
         config.HTTPMaximumConnectionsPerHost = 6;
@@ -424,7 +422,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                     }
                 } else {
                     [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server",
-                                                                                     nil), ((NSHTTPURLResponse *)response).statusCode]];
+                                                                                     nil), (int)((NSHTTPURLResponse *)response).statusCode]];
                 }
 
                 [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
@@ -618,7 +616,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             }
         } else { //other HTTP response codes like 404, 403...
             [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil),
-                                         responseStatusCode]];
+                                         (int)responseStatusCode]];
             [connectorItem appendDetail:[NSHTTPURLResponse localizedStringForStatusCode:responseStatusCode]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [connectorItem setStatus:NSLocalizedString(@"Error", nil)];
@@ -868,7 +866,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             [connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
         });
     } else {
-        NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
+        NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), (int)newArticlesFromFeed];
         dispatch_async(dispatch_get_main_queue(), ^{
             connectorItem.status = logText;
         });
@@ -1076,8 +1074,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 {
     for (id obj in [self.redirect301WaitQueue reverseObjectEnumerator]) {
         NSURLSessionTask *theConnector = (NSURLSessionTask *)obj;
-        NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
         [self.redirect301WaitQueue removeObject:obj];
+        NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
         ActivityItem *connectorItem = ((NSDictionary *)[originalRequest userInfo])[@"log"];
         [connectorItem appendDetail:NSLocalizedString(@"Redirection attempt treated as temporary for safety concern", nil)];
     }
@@ -1093,9 +1091,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 {
     for (id obj in [self.redirect301WaitQueue reverseObjectEnumerator]) {
         NSURLSessionTask *theConnector = (NSURLSessionTask *)obj;
-        NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
         [self.redirect301WaitQueue removeObject:obj];
-        NSString * theNewURLString = theConnector.originalRequest.URL.absoluteString;
+        NSString * theNewURLString = theConnector.currentRequest.URL.absoluteString;
+        NSMutableURLRequest * originalRequest = (NSMutableURLRequest *)theConnector.originalRequest;
         Folder * theFolder = (Folder *)((NSDictionary *)[originalRequest userInfo])[@"folder"];
         [[Database sharedManager] setFeedURL:theNewURLString forFolder:theFolder.itemId];
         ActivityItem *connectorItem = ((NSDictionary *)[originalRequest userInfo])[@"log"];
@@ -1189,16 +1187,11 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
 #pragma mark NSURLSession Authentication delegates
 
--(void)URLSession:(NSURLSession *)session
-    task:(NSURLSessionTask *)task
-    didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
-    completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
+- (void)URLSession:(NSURLSession *)session
+              task:(NSURLSessionTask *)task
+didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
+ completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential *_Nullable))completionHandler
 {
-    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
-        NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
-        completionHandler(NSURLSessionAuthChallengeUseCredential, credential);
-    }
-
     if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodHTTPBasic] ||
         [challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodHTTPDigest])
     {
@@ -1224,6 +1217,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                 [self getCredentialsForFolder];
             }
         }
+    } else {
+        completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
     }
 } // URLSession
 
@@ -1233,5 +1228,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_urlSession invalidateAndCancel];
 }
 @end

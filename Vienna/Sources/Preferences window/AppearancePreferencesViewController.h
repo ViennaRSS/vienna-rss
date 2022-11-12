@@ -18,9 +18,9 @@
 //  limitations under the License.
 //
 
-@import MASPreferences;
+@import Cocoa;
 
-@interface AppearancePreferencesViewController : NSViewController <MASPreferencesViewController> {
+@interface AppearancePreferencesViewController : NSViewController {
     IBOutlet NSTextField * articleFontSample;
     IBOutlet NSTextField * folderFontSample;
     IBOutlet NSButton * articleFontSelectButton;

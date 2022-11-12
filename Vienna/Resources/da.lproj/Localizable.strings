@@ -46,9 +46,6 @@
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "En ny Vienna database kan ikke laves i \"%@\" fordi mappen sandsynligvis ligger på en netværksdelt enhed og denne version af Vienna kan ikke håndtere databaser som ikke ligger lokalt. Vælg venligst en alternativ mappe som ligger på din lokale maskine.";
 
-/* Toolbar item name for the Advanced preference pane */
-"Advanced" = "Avanceret";
-
 /* No comment provided by engineer. */
 "After 2 Days" = "Efter 2 dage";
 
@@ -66,9 +63,6 @@
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "En fejl opstod da dette feed sidst blev refreshet";
-
-/* Toolbar item name for the Appearance preference pane */
-"Appearance" = "Udseende";
 
 /* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "AppleScript-fejl i '%@' skriptet";
@@ -127,9 +121,6 @@
 
 /* No comment provided by engineer. */
 "Click the Open button to open this file." = "Klik Åben-knappen for at åbne dette arkiv.";
-
-/* No comment provided by engineer. */
-"Click the Play button to play this enclosure in iTunes." = "Klik Afspil-knappen for at afspille denne indpakning i iTunes.";
 
 /* No comment provided by engineer. */
 "Connecting to %@" = "Forbinder til %@";
@@ -284,9 +275,6 @@
 
 /* No comment provided by engineer. */
 "Forcing Refresh subscriptions…" = "Gennemtvinger Opdater abonnementer…";
-
-/* Toolbar item name for the General preference pane */
-"General" = "Generelt";
 
 /* Title of a menu item */
 "Get Info" = "Vis info";
@@ -484,13 +472,7 @@
 "Other" = "Andet";
 
 /* No comment provided by engineer. */
-"Play" = "Afspil";
-
-/* No comment provided by engineer. */
 "Plugin installed" = "Udvidelse installeret";
-
-/* Title of the Preferences window */
-"Preferences" = "Indstillinger";
 
 /* No comment provided by engineer. */
 "Queue" = "Kø";
@@ -558,6 +540,11 @@
 /* No comment provided by engineer. */
 "Search all articles or the current web page" = "Søg i alle artikler eller den nuværende hjemmeside";
 
+/* Toolbar item label
+   Toolbar item palette label
+   Toolbar item tooltip */
+"Search Articles" = "Søg i artikler";
+
 /* Placeholder title of a search field */
 "Search current web page" = "Søg nuværende hjemmeside";
 
@@ -602,9 +589,6 @@
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Resumé";
-
-/* Toolbar item name for the Syncing preference pane */
-"Syncing" = "Synkroniserer";
 
 /* Data field name visible in smart folder definition */
 "Text" = "Tekst";

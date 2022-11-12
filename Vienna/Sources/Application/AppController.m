@@ -41,11 +41,9 @@
 #import "SearchPanel.h"
 #import "SearchMethod.h"
 #import "OpenReader.h"
-#import "VTPG_Common.h"
 #import "Debug.h"
 #import "Database.h"
-#import "NSURL+Utils.h"
-#import "PreferencesWindowController.h"
+#import "NSURL+CaminoExtensions.h"
 #import "PluginManager.h"
 #import "ArticleController.h"
 #import "FoldersTree.h"
@@ -60,9 +58,8 @@
 #import "ArticleView.h"
 #import "FolderView.h"
 
-@interface AppController () <InfoPanelControllerDelegate, ActivityPanelControllerDelegate>
+@interface AppController () <InfoPanelControllerDelegate, ActivityPanelControllerDelegate, NSMenuItemValidation, NSToolbarItemValidation>
 
--(void)installSleepHandler;
 -(void)installScriptsFolderWatcher;
 -(void)handleTabChange:(NSNotification *)nc;
 -(void)handleFolderSelection:(NSNotification *)nc;
@@ -79,7 +76,6 @@
 -(void)initColumnsMenu;
 -(void)initScriptsMenu;
 -(void)doEditFolder:(Folder *)folder;
--(void)refreshOnTimer:(NSTimer *)aTimer;
 -(BOOL)installFilename:(NSString *)srcFile toPath:(NSString *)path;
 -(void)setFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
 -(void)setPersistedFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
@@ -91,26 +87,21 @@
 -(void)updateSearchPlaceholderAndSearchMethod;
 -(void)updateCloseCommands;
 @property (nonatomic, getter=isFilterBarVisible, readonly) BOOL filterBarVisible;
-@property (nonatomic, readonly, strong) NSTimer *checkTimer;
 -(IBAction)cancelAllRefreshesToolbar:(id)sender;
+
+@property (nonatomic) NSBackgroundActivityScheduler *scheduler;
 
 @property (nonatomic) MainWindowController *mainWindowController;
 @property (weak, nonatomic) NSWindow *mainWindow;
 @property (nonatomic) ActivityPanelController *activityPanelController;
 @property (nonatomic) DirectoryMonitor *directoryMonitor;
-@property (nonatomic) PreferencesWindowController *preferencesWindowController;
+@property (nonatomic) NSWindowController *preferencesWindowController;
 @property (weak, nonatomic) FolderView *outlineView;
 @property (weak, nonatomic) DisclosureView *filterDisclosureView;
 @property (weak, nonatomic) NSSearchField *filterSearchField;
 @property (weak, nonatomic) NSSearchField *toolbarSearchField;
 
 @end
-
-// Static constant strings that are typically never tweaked
-
-// Awake from sleep
-static io_connect_t root_port;
-static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageArgument);
 
 @implementation AppController
 
@@ -127,7 +118,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		lastCountOfUnread = 0;
 		appStatusItem = nil;
 		scriptsMenuItem = nil;
-		checkTimer = nil;
 		didCompleteInitialisation = NO;
 		emptyTrashWarning = nil;
 		searchString = nil;
@@ -212,75 +202,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
     if (!_rssFeed)
         _rssFeed = [[NewSubscription alloc] initWithDatabase:db];
     return _rssFeed;
-}
-
-#pragma mark IORegisterForSystemPower
-
-/* MySleepCallBack
- * Called in response to an I/O event that we established via IORegisterForSystemPower. The
- * messageType parameter allows us to distinguish between which event occurred.
- */
-static void MySleepCallBack(void * refCon, io_service_t service, natural_t messageType, void * messageArgument)
-{
-	if (messageType == kIOMessageSystemHasPoweredOn)
-	{
-		AppController * app = APPCONTROLLER;
-		if (app != nil)
-		{
-            Preferences * prefs = [Preferences standardPreferences];
-            NSInteger frequency = prefs.refreshFrequency;
-            if (frequency > 0)
-            {
-                NSDate * lastRefresh = [prefs objectForKey:MAPref_LastRefreshDate];
-                if ((lastRefresh == nil) || (app.checkTimer == nil))
-                    [app handleCheckFrequencyChange:nil];
-                else
-                {
-                    // Wait at least 15 seconds after waking to avoid refresh errors.
-                    NSTimeInterval interval = -lastRefresh.timeIntervalSinceNow;
-                    if (interval > frequency)
-                    {
-                        [NSTimer scheduledTimerWithTimeInterval:15.0
-                                                         target:app
-                                                       selector:@selector(refreshOnTimer:)
-                                                       userInfo:nil
-                                                        repeats:NO];
-                        [app handleCheckFrequencyChange:nil];
-                    }
-                    else
-                    {
-                        app.checkTimer.fireDate = [NSDate dateWithTimeIntervalSinceNow:15.0 + frequency - interval];
-                    }
-                }
-            }
-		}
-	}
-	else if (messageType == kIOMessageCanSystemSleep)
-	{
-		// Idle sleep is about to kick in. Allow it otherwise the system
-		// will wait 30 seconds then go to sleep.
-		IOAllowPowerChange(root_port, (long)messageArgument);
-	}
-	else if (messageType == kIOMessageSystemWillSleep)
-	{
-		// The system WILL go to sleep. Allow it otherwise the system will
-		// wait 30 seconds then go to sleep.
-		IOAllowPowerChange(root_port, (long)messageArgument);
-	}
-}
-
-/* installSleepHandler
- * Registers our handler to be notified when the system awakes from sleep. We use this to kick
- * off a refresh if necessary.
- */
--(void)installSleepHandler
-{
-	IONotificationPortRef notify;
-	io_object_t anIterator;
-	
-	root_port = IORegisterForSystemPower((__bridge void *)(self), &notify, MySleepCallBack, &anIterator);
-	if (root_port != 0)
-		CFRunLoopAddSource(CFRunLoopGetCurrent(), IONotificationPortGetRunLoopSource(notify), kCFRunLoopCommonModes);
 }
 
 /* installScriptsFolderWatcher
@@ -375,11 +296,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 		return;
 	}
 
-	// Preload dictionary of standard URLs
-	NSString * pathToPList = [[NSBundle mainBundle] pathForResource:@"StandardURLs.plist" ofType:@""];
-	if (pathToPList != nil)
-		standardURLs = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
-	
 	// Initialize the Sort By and Columns menu
 	[self initSortMenu];
 	[self initColumnsMenu];
@@ -423,11 +339,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	
 	// Set the placeholder string for the global search field
 	SearchMethod * currentSearchMethod = [Preferences standardPreferences].searchMethod;
-    if (@available(macOS 10.10, *)) {
-        self.toolbarSearchField.placeholderString = currentSearchMethod.friendlyName;
-    } else {
-        ((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = currentSearchMethod.friendlyName;
-    }
+    self.toolbarSearchField.placeholderString = currentSearchMethod.friendlyName;
 	
 	// Add Scripts menu if we have any scripts
 	if (!hasOSScriptsMenu())
@@ -439,12 +351,9 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
     // Notification Center delegate
     NSUserNotificationCenter.defaultUserNotificationCenter.delegate = self;
 
-	// Start the check timer
-	[self handleCheckFrequencyChange:nil];
+    // Schedule the background refresh
+    [self scheduleBackgroundRefresh];
 
-	// Register to be informed when the system awakes from sleep
-	[self installSleepHandler];
-	
 	// Register to be notified when the scripts folder changes.
 	if (!hasOSScriptsMenu())
 		[self installScriptsFolderWatcher];
@@ -464,19 +373,21 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 
 }
 
-/* applicationShouldHandleReopen
- * Handle the notification sent when the application is reopened such as when the dock icon
- * is clicked. If the main window was previously hidden, we show it again here.
- */
--(BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
+/// Handle the notification sent when the application is reopened, such as when
+/// the Dock icon is clicked. If the main window was previously hidden, we show
+/// it again here.
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)sender
+                    hasVisibleWindows:(BOOL)flag
 {
-	if (!didCompleteInitialisation)
-		return NO;
-	
-	[self showMainWindow:self];
-	if (emptyTrashWarning != nil)
-		[emptyTrashWarning showWindow:self];
-	return YES;
+    if (!didCompleteInitialisation) {
+        return NO;
+    }
+
+    if (!flag) {
+        [self showMainWindow:self];
+    }
+
+    return YES;
 }
 
 /* applicationShouldTerminate
@@ -485,7 +396,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
-	if ([DownloadManager sharedInstance].activeDownloads > 0)
+	if (DownloadManager.sharedInstance.hasActiveDownloads)
 	{
         NSAlert *alert = [NSAlert new];
         alert.messageText = NSLocalizedString(@"One or more downloads are in progress", nil);
@@ -509,16 +420,16 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	
 	switch ([[Preferences standardPreferences] integerForKey:MAPref_EmptyTrashNotification])
 	{
-		case MA_EmptyTrash_None: break;
+		case VNAEmptyTrashNone: break;
 			
-		case MA_EmptyTrash_WithoutWarning:
+		case VNAEmptyTrashWithoutWarning:
 			if (!db.trashEmpty)
 			{
 				[db purgeDeletedArticles];
 			}
 			break;
 			
-		case MA_EmptyTrash_WithWarning:
+		case VNAEmptyTrashWithWarning:
 			if (!db.trashEmpty)
 			{
 				if (emptyTrashWarning == nil)
@@ -746,13 +657,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = sender.title;
 }
 
-/* standardURLs
- */
--(NSDictionary *)standardURLs
-{
-	return standardURLs;
-}
-
 /* reindexDatabase
  * Reindex the database
  */
@@ -766,7 +670,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(IBAction)reportLayout:(id)sender
 {
-	[self setLayout:MA_Layout_Report withRefresh:YES];
+	[self setLayout:VNALayoutReport withRefresh:YES];
 }
 
 /* condensedLayout
@@ -774,7 +678,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(IBAction)condensedLayout:(id)sender
 {
-	[self setLayout:MA_Layout_Condensed withRefresh:YES];
+	[self setLayout:VNALayoutCondensed withRefresh:YES];
 }
 
 /* unifiedLayout
@@ -782,7 +686,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(IBAction)unifiedLayout:(id)sender
 {
-	[self setLayout:MA_Layout_Unified withRefresh:YES];
+	[self setLayout:VNALayoutUnified withRefresh:YES];
 }
 
 /* setLayout
@@ -792,7 +696,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 {
 	[self.articleController setLayout:newLayout];
     if (refreshFlag) {
-        [self.articleController.mainArticleView refreshFolder:MA_Refresh_RedrawList];
+        [self.articleController.mainArticleView refreshFolder:VNARefreshRedrawList];
     }
 	[self.browser setPrimaryTabItemView:self.articleController.mainArticleView];
 	self.foldersTree.mainView.nextKeyView = [self.browser primaryTabItemView].mainView;
@@ -1002,8 +906,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	// If we have an URL then copy it to the clipboard.
 	if (url != nil)
 	{
-		NSPasteboard * pboard = [NSPasteboard generalPasteboard];
-        [pboard declareTypes:@[NSPasteboardTypeString, NSURLPboardType] owner:self];
+		NSPasteboard *pboard = NSPasteboard.generalPasteboard;
+        if (@available(macOS 10.13, *)) {
+            [pboard declareTypes:@[NSPasteboardTypeString, NSPasteboardTypeURL]
+                           owner:self];
+        } else {
+            [pboard declareTypes:@[NSPasteboardTypeString, NSURLPboardType]
+                           owner:self];
+        }
 		[url writeToPasteboard:pboard];
 		[pboard setString:url.description forType:NSPasteboardTypeString];
 	}
@@ -1201,7 +1111,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
                 NSAlert *alert = [NSAlert new];
                 alert.alertStyle = NSAlertStyleInformational;
                 alert.messageText = NSLocalizedString(@"Export Completed", nil);
-                alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully exported", nil), countExported];
+                alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully exported", nil), (int)countExported];
                 [alert runModal];
             }
         }
@@ -1512,7 +1422,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Scripts Folder", nil) action:@selector(doOpenScriptsFolder:) keyEquivalent:@""];
 		[scriptsMenu addItem:menuItem];
 		
-		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Scripts…", nil) action:@selector(moreScripts:) keyEquivalent:@""];
+		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Scripts…", nil) action:@selector(openScriptsPage:) keyEquivalent:@""];
 		[scriptsMenu addItem:menuItem];
 		
 		// If this is the first call to initScriptsMenu, create the scripts menu. Otherwise we just
@@ -1521,10 +1431,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		{
 			[NSApp.mainMenu removeItem:scriptsMenuItem];
 		}
-		
+
         scriptsMenuItem = [[NSMenuItem alloc] initWithTitle:@"" action:NULL keyEquivalent:@""];
-		scriptsMenuItem.image = [NSImage imageNamed:@"ScriptsTemplate"];
-		
+        scriptsMenuItem.image = [NSImage imageNamed:@"NSScriptTemplate"];
+
 		NSInteger helpMenuIndex = NSApp.mainMenu.numberOfItems - 1;
 		[NSApp.mainMenu insertItem:scriptsMenuItem atIndex:helpMenuIndex];
 		scriptsMenuItem.submenu = scriptsMenu;
@@ -1565,17 +1475,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)updateNewArticlesNotification
 {
-	if (([Preferences standardPreferences].newArticlesNotification
-		& MA_NewArticlesNotification_Badge) == 0)
-	{
-		// Remove the badge if there was one.
-		[NSApp.dockTile setBadgeLabel:nil];
-	}
-	else
-	{
-		lastCountOfUnread = -1;	// Force an update
-		[self showUnreadCountOnApplicationIconAndWindowTitle];
-	}
+	lastCountOfUnread = -1;	// Force an update
+	[self showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 - (void)handleUpdateUnreadCount:(NSNotification *)nc
@@ -1586,36 +1487,38 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 /* showUnreadCountOnApplicationIconAndWindowTitle
  * Update the Vienna application icon to show the number of unread articles.
  */
--(void)showUnreadCountOnApplicationIconAndWindowTitle
-{
-	@synchronized(NSApp.dockTile) {
-	NSInteger currentCountOfUnread = db.countOfUnread;
-	if (currentCountOfUnread == lastCountOfUnread)
-		return;
-	lastCountOfUnread = currentCountOfUnread;
-	
-	// Always update the app status icon first
-	[self setAppStatusBarIcon];
-	
-	// Don't show a count if there are no unread articles
-	if (currentCountOfUnread <= 0)
-	{
-		[NSApp.dockTile setBadgeLabel:nil];
-		self.mainWindow.title = self.appName;
-		return;	
-	}	
-	
-	self.mainWindow.title = [NSString stringWithFormat:@"%@ (%li %@)", self.appName, (long)currentCountOfUnread, NSLocalizedString(@"Unread", nil)];
-	
-	// Exit now if we're not showing the unread count on the application icon
-	if (([Preferences standardPreferences].newArticlesNotification
-		& MA_NewArticlesNotification_Badge) ==0)
-			return;
-	
-	NSString * countdown = [NSString stringWithFormat:@"%li", (long)currentCountOfUnread];
-	NSApp.dockTile.badgeLabel = countdown;
+- (void)showUnreadCountOnApplicationIconAndWindowTitle {
+    @synchronized(NSApp.dockTile) {
+        NSInteger currentCountOfUnread = db.countOfUnread;
+        if (currentCountOfUnread == lastCountOfUnread) {
+            return;
+        }
+        lastCountOfUnread = currentCountOfUnread;
 
-	} // @synchronized
+        // Always update the app status icon first
+        [self setAppStatusBarIcon];
+
+        // Don't show a count if there are no unread articles
+        if (currentCountOfUnread <= 0) {
+            NSApp.dockTile.badgeLabel = nil;
+            if (@available(macOS 11.0, *)) {
+                // Do nothing
+            } else {
+                self.mainWindow.title = self.appName;
+            }
+            return;
+        }
+
+        if (@available(macOS 11.0, *)) {
+            self.mainWindow.subtitle = [NSString stringWithFormat:@"%li %@", (long)currentCountOfUnread, NSLocalizedString(@"Unread", nil)];
+        } else {
+            self.mainWindow.title = [NSString stringWithFormat:@"%@ (%li %@)", self.appName, (long)currentCountOfUnread, NSLocalizedString(@"Unread", nil)];
+        }
+
+        NSString *countdown = [NSString stringWithFormat:@"%li", (long)currentCountOfUnread];
+        NSApp.dockTile.badgeLabel = countdown;
+
+    }
 }
 
 /* emptyTrash
@@ -1726,9 +1629,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	Preferences * prefs = [Preferences standardPreferences];
 	if (prefs.showAppInStatusBar && appStatusItem == nil)
 	{
-		appStatusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-		[self setAppStatusBarIcon];
-		[appStatusItem setHighlightMode:YES];
+		appStatusItem = [NSStatusBar.systemStatusBar statusItemWithLength:NSVariableStatusItemLength];
+        [self setAppStatusBarIcon];
 		
         NSMenu * statusBarMenu = [NSMenu new];
         [statusBarMenu addItemWithTitle:NSLocalizedString(@"Show Main Window…", @"Title of a menu item")
@@ -1749,7 +1651,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else if (!prefs.showAppInStatusBar && appStatusItem != nil)
 	{
-		[[NSStatusBar systemStatusBar] removeStatusItem:appStatusItem];
+		[NSStatusBar.systemStatusBar removeStatusItem:appStatusItem];
 		appStatusItem = nil;
 	}
 }
@@ -1765,18 +1667,22 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		if (lastCountOfUnread == 0)
 		{
             NSImage *statusBarImage = [NSImage imageNamed:@"statusBarIcon"];
-            [statusBarImage setTemplate:YES];
-            appStatusItem.image = statusBarImage;
-			[appStatusItem setTitle:nil];
+            statusBarImage.template = YES;
+            appStatusItem.button.image = statusBarImage;
+            appStatusItem.button.title = @"";
+            appStatusItem.button.imagePosition = NSImageOnly;
 		}
 		else
 		{
             NSImage *statusBarImage = [NSImage imageNamed:@"statusBarIconUnread"];
-            [statusBarImage setTemplate:YES];
-            appStatusItem.image = statusBarImage;
-			appStatusItem.title = [NSString stringWithFormat:@"%ld", (long)lastCountOfUnread];
-			// Yosemite hack : need to insist for displaying correctly icon and text
-            appStatusItem.image = statusBarImage;
+            statusBarImage.template = YES;
+            appStatusItem.button.image = statusBarImage;
+			appStatusItem.button.title = [NSString stringWithFormat:@"%ld", (long)lastCountOfUnread];
+            if (@available(macOS 10.12, *)) {
+                appStatusItem.button.imagePosition = NSImageLeading;
+            } else {
+                appStatusItem.button.imagePosition = NSImageLeft;
+            }
 		}
 	}
 }
@@ -1885,31 +1791,40 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[self showAppInStatusBar];
 }
 
-/* handleCheckFrequencyChange
- * Called when the refresh frequency is changed.
- */
--(void)handleCheckFrequencyChange:(NSNotification *)nc
-{
-	NSInteger newFrequency = [Preferences standardPreferences].refreshFrequency;
-	
-	[checkTimer invalidate];
-	checkTimer = nil;
-	if (newFrequency > 0)
-	{
-		checkTimer = [NSTimer scheduledTimerWithTimeInterval:newFrequency
-													   target:self
-													 selector:@selector(refreshOnTimer:)
-													 userInfo:nil
-													  repeats:NO];
-	}
+- (void)handleCheckFrequencyChange:(NSNotification *)nc {
+    if (self.scheduler) {
+        [self.scheduler invalidate];
+        self.scheduler = nil;
+    }
+    [self scheduleBackgroundRefresh];
 }
 
-/* checkTimer
- * Return the refresh timer object.
- */
--(NSTimer *)checkTimer
-{
-	return checkTimer;
+- (void)scheduleBackgroundRefresh {
+    NSInteger interval = [Preferences standardPreferences].refreshFrequency;
+
+    // NSBackgroundActivityScheduler requires an interval value >= 1. A value
+    // less than that raises an unhandled exception.
+    if (interval < 1) {
+        return;
+    }
+
+    self.scheduler = [[NSBackgroundActivityScheduler alloc] initWithIdentifier:@"com.vienna-rss.Vienna"];
+    self.scheduler.interval = interval;
+    self.scheduler.repeats = YES;
+    self.scheduler.qualityOfService = NSQualityOfServiceUtility;
+
+    typeof(self) __weak weakSelf = self;
+    [self.scheduler scheduleWithBlock:^(NSBackgroundActivityCompletionHandler completionHandler) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([RefreshManager sharedManager].isConnecting) {
+                completionHandler(NSBackgroundActivityResultDeferred);
+                return;
+            }
+
+            [weakSelf refreshAllSubscriptions:weakSelf];
+            completionHandler(NSBackgroundActivityResultFinished);
+        });
+    }];
 }
 
 /* doViewColumn
@@ -2049,14 +1964,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		
 		// Bounce the dock icon for 1 second if the bounce method has been selected.
 		NSInteger newUnread = [RefreshManager sharedManager].countOfNewArticles + [OpenReader sharedManager].countOfNewArticles;
-		if (newUnread > 0 && ((prefs.newArticlesNotification & MA_NewArticlesNotification_Bounce) != 0))
+		if (newUnread > 0 && ((prefs.newArticlesNotification & VNANewArticlesNotificationBounce) != 0))
 			[NSApp requestUserAttention:NSInformationalRequest];
 
         // User notification
         if (newUnread > 0) {
             NSUserNotification *notification = [NSUserNotification new];
             notification.title = NSLocalizedString(@"New articles retrieved", @"Notification title");
-            notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d new unread articles retrieved", @"Notification body"), newUnread];
+            notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d new unread articles retrieved", @"Notification body"), (int)newUnread];
             notification.userInfo = @{UserNotificationContextKey: UserNotificationContextFetchCompleted};
             notification.soundName = NSUserNotificationDefaultSoundName;
 
@@ -2074,24 +1989,18 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 }
 
-/* moreStyles
- * Display the web page where the user can download additional styles.
- */
--(IBAction)moreStyles:(id)sender
+- (IBAction)openStylesPage:(id)sender
 {
-	NSString * stylesPage = [standardURLs valueForKey:@"ViennaMoreStylesPage"];
-	if (stylesPage != nil)
-		[self openURLInDefaultBrowser:[NSURL URLWithString:stylesPage]];
+    NSBundle *bundle = NSBundle.mainBundle;
+    NSString *urlString = [bundle objectForInfoDictionaryKey:@"VNAStylesPage"];
+    [self openURLInDefaultBrowser:[NSURL URLWithString:urlString]];
 }
 
-/* moreScripts
- * Display the web page where the user can download additional scripts.
- */
--(IBAction)moreScripts:(id)sender
+- (IBAction)openScriptsPage:(id)sender
 {
-	NSString * scriptsPage = [standardURLs valueForKey:@"ViennaMoreScriptsPage"];
-	if (scriptsPage != nil)
-		[self openURLInDefaultBrowser:[NSURL URLWithString:scriptsPage]];
+    NSBundle *bundle = NSBundle.mainBundle;
+    NSString *urlString = [bundle objectForInfoDictionaryKey:@"VNAScriptsPage"];
+    [self openURLInDefaultBrowser:[NSURL URLWithString:urlString]];
 }
 
 /* viewArticlePages inPreferredBrowser
@@ -2200,7 +2109,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
     if (keyChar >= '0' && keyChar <= '9' && (flags & NSEventModifierFlagControl))
 	{
-		NSInteger layoutStyle = MA_Layout_Report + (keyChar - '0');
+		NSInteger layoutStyle = VNALayoutReport + (keyChar - '0');
 		[self setLayout:layoutStyle withRefresh:YES];
 		return YES;
 	}
@@ -2381,15 +2290,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(BOOL)isConnecting
 {
 	return [RefreshManager sharedManager].connecting;
-}
-
-/* refreshOnTimer
- * Each time the check timer fires, we see if a connect is not nswindow
- * running and then kick one off.
- */
--(void)refreshOnTimer:(NSTimer *)aTimer
-{
-	[self refreshAllSubscriptions:self];
 }
 
 /* markSelectedFoldersRead
@@ -2731,7 +2631,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else
 	{
-		alertBody = [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to delete all %d selected folders? This operation cannot be undone.", nil), count];
+		alertBody = [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to delete all %d selected folders? This operation cannot be undone.", nil), (unsigned int)count];
 		alertTitle = NSLocalizedString(@"Delete multiple folders", nil);
 	}
 	
@@ -2900,14 +2800,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[self openURLFromString:folder.homePage inPreferredBrowser:NO];
 }
 
-/* showViennaHomePage
- * Open the Vienna home page in the default browser.
- */
--(IBAction)showViennaHomePage:(id)sender
+- (IBAction)openHomePage:(id)sender
 {
-	NSString * homePage = [standardURLs valueForKey:@"ViennaHomePage"];
-	if (homePage != nil)
-		[self openURLInDefaultBrowser:[NSURL URLWithString:homePage]];
+    NSBundle *bundle = NSBundle.mainBundle;
+    NSString *urlString = [bundle objectForInfoDictionaryKey:@"VNAHomePage"];
+    [self openURLInDefaultBrowser:[NSURL URLWithString:urlString]];
 }
 
 #pragma mark Tabs
@@ -3035,11 +2932,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			for (NSMenuItem * menuItem in ((NSSearchFieldCell *)self.toolbarSearchField.cell).searchMenuTemplate.itemArray)
 			{
 				if ([[menuItem.representedObject friendlyName] isEqualToString:[SearchMethod searchCurrentWebPageMethod].friendlyName]) {
-                    if (@available(macOS 10.10, *)) {
-                        self.toolbarSearchField.placeholderString = [SearchMethod searchCurrentWebPageMethod].friendlyName;
-                    } else {
-                        ((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = [SearchMethod searchCurrentWebPageMethod].friendlyName;
-                    }
+                    self.toolbarSearchField.placeholderString = [SearchMethod searchCurrentWebPageMethod].friendlyName;
 					[Preferences standardPreferences].searchMethod = menuItem.representedObject;
 				}
 			}
@@ -3053,25 +2946,17 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			for (NSMenuItem * menuItem in ((NSSearchFieldCell *)self.toolbarSearchField.cell).searchMenuTemplate.itemArray)
 			{
 				if ([[menuItem.representedObject friendlyName] isEqualToString:[SearchMethod searchAllArticlesMethod].friendlyName]) {
-                    if (@available(macOS 10.10, *)) {
-                        self.toolbarSearchField.placeholderString = [SearchMethod searchAllArticlesMethod].friendlyName;
-                    } else {
-                        ((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = [SearchMethod searchAllArticlesMethod].friendlyName;
-                    }
+                    self.toolbarSearchField.placeholderString = [SearchMethod searchAllArticlesMethod].friendlyName;
 					[Preferences standardPreferences].searchMethod = menuItem.representedObject;
 				}
 			}
 		} else {
-            if (@available(macOS 10.10, *)) {
-                self.toolbarSearchField.placeholderString = prefs.searchMethod.friendlyName;
-            } else {
-                ((NSSearchFieldCell *)self.toolbarSearchField.cell).placeholderString = prefs.searchMethod.friendlyName;
-		}
+            self.toolbarSearchField.placeholderString = prefs.searchMethod.friendlyName;
 		}
 	// END of switching between "Search all articles" and "Search current web page".
 	}
 	
-	if ([Preferences standardPreferences].layout == MA_Layout_Unified)
+	if ([Preferences standardPreferences].layout == VNALayoutUnified)
 	{
 		[self.filterSearchField.cell setSendsWholeSearchString:YES];
 		((NSSearchFieldCell *)self.filterSearchField.cell).placeholderString = self.articleController.searchPlaceholderString;
@@ -3237,8 +3122,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             [[OpenReader sharedManager] loadSubscriptions];
         }
 
-        // Reset the refresh timer
-        [self handleCheckFrequencyChange:nil];
         // Kick off the refresh
         [[RefreshManager sharedManager] refreshSubscriptions:[self.foldersTree folders:0]
           ignoringSubscriptionStatus:NO];
@@ -3763,19 +3646,19 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	else if (theAction == @selector(reportLayout:))
 	{
 		Preferences * prefs = [Preferences standardPreferences];
-		menuItem.state = (prefs.layout == MA_Layout_Report) ? NSControlStateValueOn : NSControlStateValueOff;
+		menuItem.state = (prefs.layout == VNALayoutReport) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(condensedLayout:))
 	{
 		Preferences * prefs = [Preferences standardPreferences];
-		menuItem.state = (prefs.layout == MA_Layout_Condensed) ? NSControlStateValueOn : NSControlStateValueOff;
+		menuItem.state = (prefs.layout == VNALayoutCondensed) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(unifiedLayout:))
 	{
 		Preferences * prefs = [Preferences standardPreferences];
-		menuItem.state = (prefs.layout == MA_Layout_Unified) ? NSControlStateValueOn : NSControlStateValueOff;
+		menuItem.state = (prefs.layout == VNALayoutUnified) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(markFlagged:))
@@ -3839,9 +3722,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 #pragma mark Preferences
 
-- (PreferencesWindowController *)preferencesWindowController {
+- (NSWindowController *)preferencesWindowController {
     if (!_preferencesWindowController) {
-        _preferencesWindowController = [PreferencesWindowController new];
+        NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Preferences"
+                                                             bundle:nil];
+        _preferencesWindowController = [storyboard instantiateInitialController];
     }
 
     return _preferencesWindowController;

@@ -33,11 +33,6 @@ static BOOL _credentialsChanged;
 
 @synthesize syncButton;
 
-- (instancetype)init {
-	self = [super initWithNibName:@"SyncingPreferencesView" bundle:nil];
-	return self;
-}
-
 - (void)viewWillAppear {
     // Set up to be notified
     NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -115,24 +110,6 @@ static BOOL _credentialsChanged;
             [openReaderSource setEnabled:NO];
     }
     
-}
-
-
-
-#pragma mark - MASPreferencesViewController
-
-- (NSString *)viewIdentifier {
-    return @"SyncingPreferences";
-}
-
-- (NSImage *)toolbarItemImage
-{
-    return [NSImage imageNamed:@"sync"];
-}
-
-- (NSString *)toolbarItemLabel
-{
-    return NSLocalizedString(@"Syncing", @"Toolbar item name for the Syncing preference pane");
 }
 
 #pragma mark - Vienna Prferences

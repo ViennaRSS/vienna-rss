@@ -18,20 +18,17 @@
 //  limitations under the License.
 //
 
-@import MASPreferences;
+@import Cocoa;
 
-@interface GeneralPreferencesViewController : NSViewController <MASPreferencesViewController> {
+@interface GeneralPreferencesViewController : NSViewController {
     IBOutlet NSPopUpButton * checkFrequency;
     IBOutlet NSPopUpButton * linksHandler;
     IBOutlet NSPopUpButton * expireDuration;
-    IBOutlet NSButton * checkForUpdates;
     IBOutlet NSButton * checkOnStartUp;
-    IBOutlet NSButton * alwaysAcceptBetas;
     IBOutlet NSButton * openLinksInBackground;
     IBOutlet NSButton * openLinksInExternalBrowser;
     IBOutlet NSButton * showAppInMenuBar;
     IBOutlet NSPopUpButton * downloadFolder;
-    IBOutlet NSButtonCell * newArticlesNotificationBadgeButton;
     IBOutlet NSButtonCell * newArticlesNotificationBounceButton;
     IBOutlet NSButtonCell * markReadAfterNext;
     IBOutlet NSButtonCell * markReadAfterDelay;
@@ -42,14 +39,11 @@
 // Action functions
 -(IBAction)changeCheckFrequency:(id)sender;
 -(IBAction)changeCheckOnStartUp:(id)sender;
--(IBAction)changeAlwaysAcceptBetas:(id)sender;
 -(IBAction)selectDefaultLinksHandler:(id)sender;
--(IBAction)changeCheckForUpdates:(id)sender;
 -(IBAction)changeOpenLinksInBackground:(id)sender;
 -(IBAction)changeOpenLinksInExternalBrowser:(id)sender;
 -(IBAction)changeExpireDuration:(id)sender;
 -(IBAction)changeDownloadFolder:(id)sender;
--(IBAction)changeNewArticlesNotificationBadge:(id)sender;
 -(IBAction)changeNewArticlesNotificationBounce:(id)sender;
 -(IBAction)changeMarkReadBehaviour:(id)sender;
 -(IBAction)changeShowAppInMenuBar:(id)sender;

@@ -104,11 +104,11 @@
 /* setHeaderImage
  * Set the image in the header for a column
  */
--(void)setHeaderImage:(NSString *)identifier imageName:(NSString *)name
+-(void)setHeaderImage:(NSString *)identifier image:(NSImage *)image
 {
 	NSTableColumn * tableColumn = [self tableColumnWithIdentifier:identifier];
 	NSTableHeaderCell * headerCell = tableColumn.headerCell;
-	headerCell.image = [NSImage imageNamed:name];
+    headerCell.image = image;
 	
 	NSImageCell * imageCell = [[NSImageCell alloc] init];
 	tableColumn.dataCell = imageCell;

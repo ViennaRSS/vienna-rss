@@ -135,7 +135,6 @@
                                                  context:nil];
 
         queue = dispatch_queue_create("uk.co.opencommunity.vienna2.displayRefresh", DISPATCH_QUEUE_SERIAL);
-        reloadArrayOfArticlesSemaphor = 0;
         requireSelectArticleAfterReload = NO;
     }
     return self;
@@ -150,12 +149,12 @@
 
 	switch (newLayout)
 	{
-		case MA_Layout_Report:
-		case MA_Layout_Condensed:
+		case VNALayoutReport:
+		case VNALayoutCondensed:
 			self.mainArticleView = self.articleListView;
 			break;
 
-		case MA_Layout_Unified:
+		case VNALayoutUnified:
 			self.mainArticleView = self.unifiedListView;
 			break;
 	}
@@ -242,11 +241,7 @@
  */
 -(void)ensureSelectedArticle
 {
-	if (reloadArrayOfArticlesSemaphor <= 0) {
-	    [mainArticleView ensureSelectedArticle];
-	} else {
-	    requireSelectArticleAfterReload = YES;
-	}
+    [mainArticleView ensureSelectedArticle];
 }
 
 /* searchPlaceholderString
@@ -305,7 +300,7 @@
 		[descriptors insertObject:sortDescriptor atIndex:0];
 	}
 	prefs.articleSortDescriptors = descriptors;
-	[mainArticleView refreshFolder:MA_Refresh_SortAndRedraw];
+	[mainArticleView refreshFolder:VNARefreshSortAndRedraw];
 }
 
 /* sortIsAscending
@@ -335,7 +330,7 @@
 	{
 		descriptors[0] = sortDescriptor.reversedSortDescriptor;
 		prefs.articleSortDescriptors = descriptors;
-		[mainArticleView refreshFolder:MA_Refresh_SortAndRedraw];
+		[mainArticleView refreshFolder:VNARefreshSortAndRedraw];
 	}
 }
 
@@ -450,7 +445,7 @@
 		// This can happen with smart folders, which have the same articles as other folders.
 		self.currentArrayOfArticles = @[];
 		self.folderArrayOfArticles = @[];
-		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
+		[mainArticleView refreshFolder:VNARefreshRedrawList];
 
 		currentFolderId = newFolderId;
 		[self reloadArrayOfArticles];
@@ -486,70 +481,46 @@
  */
 -(void)reloadArrayOfArticles
 {
-    reloadArrayOfArticlesSemaphor++;
-    [mainArticleView startLoadIndicator];
-
-    [self getArticlesWithCompletionBlock:^(NSArray *resultArray) {
-      // when multiple refreshes where queued, we update folderArrayOfArticles only once
-      self->reloadArrayOfArticlesSemaphor--;
-      if (self->reloadArrayOfArticlesSemaphor <= 0) {
-          [self->mainArticleView stopLoadIndicator];
-          self.folderArrayOfArticles = resultArray;
-          Article *article = self.selectedArticle;
-
-          if (self->shouldPreserveSelectedArticle) {
-            if (article != nil && !article.deleted) {
-                self->articleToPreserve = article;
-            }
-            self->shouldPreserveSelectedArticle = NO;
-          }
-
-          [self->mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
-
-          if (self->guidOfArticleToSelect != nil) {
-            [self->mainArticleView scrollToArticle:self->guidOfArticleToSelect];
-            self->guidOfArticleToSelect = nil;
-          } else if (self->firstUnreadArticleRequired) {
-            [self->mainArticleView selectFirstUnreadInFolder];
-            self->firstUnreadArticleRequired = NO;
-          }
-
-          if (self->requireSelectArticleAfterReload) {
-            [self ensureSelectedArticle];
-            self->requireSelectArticleAfterReload = NO;
-          }
-
-          // To avoid upsetting the current displayed article after a refresh,
-          // we check to see if the selected article is the same
-          // and if it has been updated
-          Article *currentArticle = self.selectedArticle;
-          if (currentArticle == article &&
-            [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]
-            && currentArticle.revised && !currentArticle.read)
-          {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
-          }
-      }
-    }];
-} // reloadArrayOfArticles
-
-/* getArticlesWithCompletionBlock
- * Launch articlesWithFilter on background queue and perform completion block
- */
-- (void)getArticlesWithCompletionBlock:(void(^)(NSArray * resultArray))completionBlock {
-	Folder * folder = [[Database sharedManager] folderFromID:currentFolderId];
+    Folder *folder = [[Database sharedManager] folderFromID:currentFolderId];
     NSString *filterString = APPCONTROLLER.filterString;
-    dispatch_async(queue, ^{
-        NSArray * articleArray = [folder articlesWithFilter:filterString];
-
-        // call the completion block with the result when finished
-        if (completionBlock) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completionBlock(articleArray);
-            });
-        }        
+    dispatch_sync(queue, ^{
+        self.folderArrayOfArticles = [folder articlesWithFilter:filterString];
     });
-}
+    Article *article = self.selectedArticle;
+
+    if (self->shouldPreserveSelectedArticle) {
+        if (article != nil && !article.deleted) {
+            self->articleToPreserve = article;
+        }
+        self->shouldPreserveSelectedArticle = NO;
+    }
+
+    [self->mainArticleView refreshFolder:VNARefreshReapplyFilter];
+
+    if (self->guidOfArticleToSelect != nil) {
+        [self->mainArticleView scrollToArticle:self->guidOfArticleToSelect];
+        self->guidOfArticleToSelect = nil;
+    } else if (self->firstUnreadArticleRequired) {
+        [self->mainArticleView selectFirstUnreadInFolder];
+        self->firstUnreadArticleRequired = NO;
+    }
+
+    if (self->requireSelectArticleAfterReload) {
+        [self ensureSelectedArticle];
+        self->requireSelectArticleAfterReload = NO;
+    }
+
+    // To avoid upsetting the current displayed article after a refresh,
+    // we check to see if the selected article is the same
+    // and if it has been updated
+    Article *currentArticle = self.selectedArticle;
+    if (currentArticle == article &&
+        [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]
+        && currentArticle.revised && !currentArticle.read)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
+    }
+} // reloadArrayOfArticles
 
 /* refilterArrayOfArticles
  * Reapply the current filter to the article array.
@@ -692,7 +663,7 @@
 		[self reloadArrayOfArticles];
 	else
 	{
-		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
+		[mainArticleView refreshFolder:VNARefreshRedrawList];
 		if (currentArrayOfArticles.count > 0u)
 		{
 			if (guidToSelect != nil)
@@ -762,7 +733,7 @@
 	}
 	self.currentArrayOfArticles = currentArrayCopy;
 	self.folderArrayOfArticles = folderArrayCopy;
-	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
+	[mainArticleView refreshFolder:VNARefreshRedrawList];
 
 	// Ensure there's a valid selection
     if (currentArrayOfArticles.count > 0u) {
@@ -804,7 +775,7 @@
 	[undoManager setActionName:NSLocalizedString(@"Flag", nil)];
 
     [self innerMarkFlaggedByArray:articleArray flagged:flagged];
-	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
+	[mainArticleView refreshFolder:VNARefreshRedrawList];
 }
 
 /* innerMarkFlaggedByArray
@@ -854,7 +825,7 @@
 
     [self innerMarkReadByArray:articleArray readFlag:readFlag];
 
-	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
+	[mainArticleView refreshFolder:VNARefreshRedrawList];
 }
 
 /* innerMarkReadByArray
@@ -958,7 +929,7 @@
 			[theArticle markRead:YES];
 	}
 	
-	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
+	[mainArticleView refreshFolder:VNARefreshRedrawList];
 }
 
 /* wrappedMarkAllFoldersReadInArray
@@ -1049,7 +1020,7 @@
 		[self reloadArrayOfArticles];
 	}
 	else if (needRefilter) {
-		[mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
+		[mainArticleView refreshFolder:VNARefreshReapplyFilter];
 	}
 }
 
@@ -1120,7 +1091,7 @@
     NSInteger folderId = ((NSNumber *)nc.object).integerValue;
     Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
     if ((folderId == currentFolderId) || (currentFolder.type != VNAFolderTypeRSS && currentFolder.type != VNAFolderTypeOpenReader)) {
-        [mainArticleView refreshFolder:MA_Refresh_RedrawList];
+        [mainArticleView refreshFolder:VNARefreshRedrawList];
     }
 }
 
@@ -1147,20 +1118,20 @@
 
 - (BOOL)filterArticle:(Article *)article usingMode:(NSInteger)filterMode {
     switch (filterMode) {
-        case MA_Filter_Unread:
+        case VNAFilterUnread:
             return !article.read;
             break;
-        case MA_Filter_LastRefresh: {
+        case VNAFilterLastRefresh: {
             NSDate *date = article.createdDate;
             Preferences *prefs = [Preferences standardPreferences];
             NSComparisonResult result = [date compare:[prefs objectForKey:MAPref_LastRefreshDate]];
             return result != NSOrderedAscending;
             break;
         }
-        case MA_Filter_Today:
+        case VNAFilterToday:
             return [NSCalendar.currentCalendar isDateInToday:article.date];
             break;
-        case MA_Filter_48h: {
+        case VNAFilterTime48h: {
             NSDate *twoDaysAgo = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay
                                                                         value:-2
                                                                        toDate:[NSDate date]
@@ -1168,10 +1139,10 @@
             return [article.date compare:twoDaysAgo] != NSOrderedAscending;
             break;
         }
-        case MA_Filter_Flagged:
+        case VNAFilterFlagged:
             return article.flagged;
             break;
-        case MA_Filter_Unread_Or_Flagged:
+        case VNAFilterUnreadOrFlagged:
             return (!article.read || article.flagged);
             break;
         default:
@@ -1188,7 +1159,7 @@
     if ([keyPath isEqualToString:MAPref_FilterMode]) {
         // Update the list of articles when the user changes the filter.
         @synchronized(mainArticleView) {
-            [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
+            [mainArticleView refreshFolder:VNARefreshReapplyFilter];
         }
     }
 }

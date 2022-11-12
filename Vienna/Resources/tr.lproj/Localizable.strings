@@ -34,9 +34,6 @@
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Yeni bir Vienna veritabanı \"%@\" konumunda oluşturulamıyor çünkü muhtemelen o klasör ya uzaktaki bir ağa dahil, zira Vienna'nın bu versiyonu ağ üzerindeki klasörler ile çalışacak şekilde tasarlanmamıştır. Bilgisayarınız üzerinde bulunan bir klasörü seçmeyi deneyin.";
 
-/* Toolbar item name for the Advanced preference pane */
-"Advanced" = "Gelişmiş";
-
 /* No comment provided by engineer. */
 "After 2 Days" = "2 Gün Sonra";
 
@@ -54,9 +51,6 @@
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Bu besleme en son yenilendiğinde bir hata oluştu";
-
-/* Toolbar item name for the Appearance preference pane */
-"Appearance" = "Görünüm";
 
 /* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "%d seçili klasörlerini silmek istediğinize emin misiniz? Bu işlem geri alınamaz.";
@@ -103,9 +97,6 @@
 
 /* No comment provided by engineer. */
 "Click the Open button to open this file." = "Bu dosyayı açmak için Aç düğmesine basın.";
-
-/* No comment provided by engineer. */
-"Click the Play button to play this enclosure in iTunes." = "Bu eki iTunes'ta çalmak için Yürüt düğmesine basın.";
 
 /* No comment provided by engineer. */
 "Connecting to %@" = "Bağlanılıyor: %@";
@@ -224,9 +215,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "Klasörler";
-
-/* Toolbar item name for the General preference pane */
-"General" = "Genel";
 
 /* Title of a menu item */
 "Get Info" = "Bilgi Al";
@@ -393,12 +381,6 @@
 /* No comment provided by engineer. */
 "Other" = "Diğer";
 
-/* No comment provided by engineer. */
-"Play" = "Yürüt";
-
-/* Title of the Preferences window */
-"Preferences" = "Seçenekler";
-
 /* Title of a button on an alert */
 "Quit" = "Çık";
 
@@ -456,6 +438,11 @@
 
 /* Placeholder title of a search field */
 "Search all articles" = "Tüm makalelerde ara";
+
+/* Toolbar item label
+   Toolbar item palette label
+   Toolbar item tooltip */
+"Search Articles" = "Makalelerde Ara";
 
 /* No comment provided by engineer. */
 "Search Results" = "Arama Sonuçları";

@@ -100,9 +100,6 @@
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "167"; */
 "167.title" = "Find næste";
 
-/* Class = "NSMenuItem"; title = "Find"; ObjectID = "168"; */
-"168.title" = "Find";
-
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "169"; */
 "169.title" = "Rediger";
 

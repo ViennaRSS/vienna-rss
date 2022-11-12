@@ -11,7 +11,7 @@ N_VCS_TAG="$(echo "${VCS_TAG}" | sed -e 's:^v/::')"
 V_VCS_TAG="$(echo "${N_VCS_TAG}" | sed -e 's:_beta: Beta :' -e 's:_rc: RC :')"
 
 
-OUT_FILE="${SOURCE_ROOT}/build/Post-archive-exports.txt"
+OUT_FILE="${SOURCE_ROOT}/Build/Post-archive-exports.txt"
 
 
 rm "${OUT_FILE}"

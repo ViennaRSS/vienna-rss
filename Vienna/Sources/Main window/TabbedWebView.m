@@ -47,13 +47,8 @@ static NSString * _userAgent ;
 +(NSString *)userAgent
 {
     if (!_userAgent) {
-        NSString *osVersion;
-        if (@available(macOS 10.10, *)) {
-            NSOperatingSystemVersion version = [NSProcessInfo processInfo].operatingSystemVersion;
-            osVersion = [NSString stringWithFormat:@"%ld_%ld_%ld", version.majorVersion, version.minorVersion, version.patchVersion];
-        } else {
-            osVersion = @"10_9_x";
-        }
+        NSOperatingSystemVersion version = [NSProcessInfo processInfo].operatingSystemVersion;
+        NSString *osVersion = [NSString stringWithFormat:@"%ld_%ld_%ld", version.majorVersion, version.minorVersion, version.patchVersion];
         NSString *webkitVersion = [NSBundle bundleWithIdentifier:@"com.apple.WebKit"].infoDictionary[@"CFBundleVersion"];
         if (!webkitVersion) {
             webkitVersion = @"536.30";
@@ -62,8 +57,11 @@ static NSString * _userAgent ;
         if (!shortSafariVersion) {
             shortSafariVersion = @"6.0";
         }
+        Preferences * prefs = [Preferences standardPreferences];
+        NSString *name = prefs.userAgentName;
+
         _userAgent =
-            [NSString stringWithFormat:MA_BrowserUserAgentString, osVersion, webkitVersion, shortSafariVersion,
+            [NSString stringWithFormat:MA_BrowserUserAgentString, osVersion, webkitVersion, shortSafariVersion, name,
              ((ViennaApp *)NSApp).applicationVersion.firstWord];
     }
     return _userAgent;

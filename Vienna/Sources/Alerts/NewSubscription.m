@@ -131,7 +131,7 @@
     //restore from preferences, if it can be done ; otherwise, uncheck this option
     self.googleOptionButton = [Preferences standardPreferences].syncGoogleReader
                               && [Preferences standardPreferences].prefersGoogleNewSubscription;
-    [NSApp beginSheet:newRSSFeedWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
+    [window beginSheet:newRSSFeedWindow completionHandler:nil];
 } // newSubscription
 
 /* editSubscription
@@ -149,7 +149,7 @@
 		editFolderId = folderId;
 		
 		// Open the edit sheet.
-		[NSApp	beginSheet:editRSSFeedWindow modalForWindow:window modalDelegate:self didEndSelector:nil contextInfo:nil];
+        [window beginSheet:editRSSFeedWindow completionHandler:nil];
 	}
 }
 
@@ -212,7 +212,7 @@
 	[APPCONTROLLER createNewSubscription:rssFeedURL.absoluteString underFolder:parentId afterChild:-1];
     
 	// Close the window
-	[NSApp endSheet:newRSSFeedWindow];
+	[newRSSFeedWindow.sheetParent endSheet:newRSSFeedWindow];
 	[newRSSFeedWindow orderOut:self];
 }
 
@@ -227,7 +227,7 @@
     [[Database sharedManager] setFeedURL:feedURLString forFolder:editFolderId];
 	
 	// Close the window
-	[NSApp endSheet:editRSSFeedWindow];
+	[editRSSFeedWindow.sheetParent endSheet:editRSSFeedWindow];
 	[editRSSFeedWindow orderOut:self];
 }
 
@@ -236,7 +236,7 @@
  */
 -(IBAction)doSubscribeCancel:(id)sender
 {
-	[NSApp endSheet:newRSSFeedWindow];
+	[newRSSFeedWindow.sheetParent endSheet:newRSSFeedWindow];
 	[newRSSFeedWindow orderOut:self];
 }
 
@@ -245,7 +245,7 @@
  */
 -(IBAction)doEditCancel:(id)sender
 {
-	[NSApp endSheet:editRSSFeedWindow];
+	[editRSSFeedWindow.sheetParent endSheet:editRSSFeedWindow];
 	[editRSSFeedWindow orderOut:self];
 }
 

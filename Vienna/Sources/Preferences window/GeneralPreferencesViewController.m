@@ -20,7 +20,6 @@
 
 #import "Constants.h"
 #import "GeneralPreferencesViewController.h"
-#import "PopUpButtonExtensions.h"
 #import "Preferences.h"
 
 @interface GeneralPreferencesViewController ()
@@ -37,44 +36,15 @@
 
 @implementation GeneralPreferencesViewController
 
-
-- (instancetype)init {
-	if ((self = [super initWithNibName:@"GeneralPreferencesView" bundle:nil]) != nil)
-	{
-        // Set up to be notified if preferences change outside this window
-        NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-        [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_CheckFrequencyChange" object:nil];
-        [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
-        appToPathMap = [[NSMutableDictionary alloc] init];
-	}
-	return self;
+- (void)viewDidLoad {
+    NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_CheckFrequencyChange" object:nil];
+    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
+    appToPathMap = [[NSMutableDictionary alloc] init];
 }
-
 
 - (void)viewWillAppear {
-    if([NSViewController instancesRespondToSelector:@selector(viewWillAppear)]) {
-        [super viewWillAppear];
-    }
-    
     [self initializePreferences];
-    
-}
-
-
-#pragma mark - MASPreferencesViewController
-
-- (NSString *)viewIdentifier {
-    return @"GeneralPreferences";
-}
-
-- (NSImage *)toolbarItemImage
-{
-    return [NSImage imageNamed:NSImageNamePreferencesGeneral];
-}
-
-- (NSString *)toolbarItemLabel
-{
-    return NSLocalizedString(@"General", @"Toolbar item name for the General preference pane");
 }
 
 #pragma mark - Vienna Preferences handling
@@ -96,12 +66,6 @@
     
     // Set the check frequency
     [checkFrequency selectItemAtIndex:[checkFrequency indexOfItemWithTag:prefs.refreshFrequency]];
-    
-    // Set check for updates when starting
-    checkForUpdates.state = prefs.checkForNewOnStartup ? NSControlStateValueOn : NSControlStateValueOff;
-    
-    // Set search for latest Beta versions when checking for updates
-    alwaysAcceptBetas.state = prefs.alwaysAcceptBetas ? NSControlStateValueOn : NSControlStateValueOff;
 
     // Set check for new articles when starting
     checkOnStartUp.state = prefs.refreshOnStartup ? NSControlStateValueOn : NSControlStateValueOff;
@@ -111,12 +75,12 @@
     // 0 value disables auto-expire.
     // Increments of 1000 specify months, so 1000 = 1 month, 1001 = 1 month and 1 day…
     [expireDuration removeAllItems];
-    [expireDuration insertItemWithTag:NSLocalizedString(@"Never", nil) tag:0 atIndex:0];
-    [expireDuration insertItemWithTag:NSLocalizedString(@"After a Day", nil) tag:1 atIndex:1];
-    [expireDuration insertItemWithTag:NSLocalizedString(@"After 2 Days", nil) tag:2 atIndex:2];
-    [expireDuration insertItemWithTag:NSLocalizedString(@"After a Week", nil) tag:7 atIndex:3];
-    [expireDuration insertItemWithTag:NSLocalizedString(@"After 2 Weeks", nil) tag:14 atIndex:4];
-    [expireDuration insertItemWithTag:NSLocalizedString(@"After a Month", nil) tag:1000 atIndex:5];
+    [expireDuration insertItemWithTitle:NSLocalizedString(@"Never", nil) tag:0 atIndex:0];
+    [expireDuration insertItemWithTitle:NSLocalizedString(@"After a Day", nil) tag:1 atIndex:1];
+    [expireDuration insertItemWithTitle:NSLocalizedString(@"After 2 Days", nil) tag:2 atIndex:2];
+    [expireDuration insertItemWithTitle:NSLocalizedString(@"After a Week", nil) tag:7 atIndex:3];
+    [expireDuration insertItemWithTitle:NSLocalizedString(@"After 2 Weeks", nil) tag:14 atIndex:4];
+    [expireDuration insertItemWithTitle:NSLocalizedString(@"After a Month", nil) tag:1000 atIndex:5];
     
     // Set auto-expire duration
     [expireDuration selectItemAtIndex:[expireDuration indexOfItemWithTag:prefs.autoExpireDuration]];
@@ -138,8 +102,7 @@
     markReadAfterDelay.state = prefs.markReadInterval != 0 ? NSControlStateValueOn : NSControlStateValueOff;
     
     // Show new articles notification options
-    newArticlesNotificationBadgeButton.state = ((prefs.newArticlesNotification & MA_NewArticlesNotification_Badge) !=0) ? NSControlStateValueOn : NSControlStateValueOff;
-    newArticlesNotificationBounceButton.state = ((prefs.newArticlesNotification & MA_NewArticlesNotification_Bounce) !=0) ? NSControlStateValueOn : NSControlStateValueOff;
+    newArticlesNotificationBounceButton.state = ((prefs.newArticlesNotification & VNANewArticlesNotificationBounce) !=0) ? NSControlStateValueOn : NSControlStateValueOff;
     
     // Set whether updated articles are considered as new
     markUpdatedAsNew.state = prefs.markUpdatedAsNew ? NSControlStateValueOn : NSControlStateValueOff;
@@ -182,7 +145,7 @@
     // the new selection.
     if (regAppName != nil) {
         [linksHandler addItemWithTitle:regAppName image:[[NSWorkspace sharedWorkspace] iconForFile:registeredAppURL]];
-        [linksHandler addSeparator];
+        [linksHandler.menu addItem:[NSMenuItem separatorItem]];
         [appToPathMap setValue:registeredAppURL forKey:regAppName];
     }
 
@@ -223,8 +186,8 @@
     
     // Add a Select command so the user can manually pick a registered
     // application.
-    [linksHandler addSeparator];
-    [linksHandler addItemWithTag:NSLocalizedString(@"Select…", nil) tag:-1];
+    [linksHandler.menu addItem:[NSMenuItem separatorItem]];
+    [linksHandler addItemWithTitle:NSLocalizedString(@"Select…", nil) tag:-1];
     
     // Select the registered item
     [linksHandler selectItemAtIndex:0];
@@ -321,14 +284,6 @@
     [downloadFolder selectItemAtIndex:0];
 }
 
-/* changeCheckForUpdates
- * Set whether Vienna checks for updates when it starts.
- */
--(IBAction)changeCheckForUpdates:(id)sender
-{
-    [Preferences standardPreferences].checkForNewOnStartup = [sender state] == NSControlStateValueOn;
-}
-
 /* changeCheckOnStartUp
  * Set whether Vienna checks for new articles when it starts.
  */
@@ -400,23 +355,6 @@
     [Preferences standardPreferences].refreshFrequency = newFrequency;
 }
 
-/* changeNewArticlesNotificationBadge
- * Change if we display badge when new articles are announced.
- */
--(IBAction)changeNewArticlesNotificationBadge:(id)sender
-{
-    Preferences * prefs = [Preferences standardPreferences];
-    NSInteger currentNotificationValue = prefs.newArticlesNotification;
-    if ([sender state] == NSControlStateValueOn)
-    {
-        prefs.newArticlesNotification = currentNotificationValue | MA_NewArticlesNotification_Badge;
-    }
-    else
-    {
-        prefs.newArticlesNotification = currentNotificationValue & ~MA_NewArticlesNotification_Badge;
-    }
-}
-
 /* changeNewArticlesNotificationBounce
  * Change if we require user attention (by bouncing the Dock icon) when new articles are announced.
  */
@@ -426,11 +364,11 @@
     NSInteger currentNotificationValue = prefs.newArticlesNotification;
     if ([sender state] == NSControlStateValueOn)
     {
-        prefs.newArticlesNotification = currentNotificationValue | MA_NewArticlesNotification_Bounce;
+        prefs.newArticlesNotification = currentNotificationValue | VNANewArticlesNotificationBounce;
     }
     else
     {
-        prefs.newArticlesNotification = currentNotificationValue & ~MA_NewArticlesNotification_Bounce;
+        prefs.newArticlesNotification = currentNotificationValue & ~VNANewArticlesNotificationBounce;
     }
 }
 
@@ -441,14 +379,6 @@
 {
     float newReadInterval = ([sender selectedCell] == markReadAfterNext) ? 0 : MA_Default_Read_Interval;
     [Preferences standardPreferences].markReadInterval = newReadInterval;
-}
-
-/* changeAlwaysAcceptBetas
- * Set whether Vienna will always check the cutting edge Beta when checking for updates.
- */
--(IBAction)changeAlwaysAcceptBetas:(id)sender
-{
-    [Preferences standardPreferences].alwaysAcceptBetas = [sender state] == NSControlStateValueOn;
 }
 
 /* dealloc

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,7 +17,6 @@
                 <outlet property="outlineView" destination="Kk7-ax-B3r" id="bhW-7c-vBp"/>
                 <outlet property="statusBar" destination="659-iz-w4S" id="TOq-Cx-3vW"/>
                 <outlet property="statusLabel" destination="917" id="JHA-Ed-cZl"/>
-                <outlet property="toolbarSearchField" destination="uUx-PZ-LTM" id="DtT-Se-fue"/>
                 <outlet property="unifiedDisplayView" destination="1148" id="WY2-tM-sYn"/>
                 <outlet property="window" destination="21" id="AIh-iW-OLE"/>
             </connections>
@@ -29,9 +28,9 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="302" y="347" width="942" height="625"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
             <value key="minSize" type="size" width="700" height="350"/>
-            <view key="contentView" id="2">
+            <view key="contentView" wantsLayer="YES" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="942" height="625"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
@@ -42,7 +41,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="288" height="603"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="o3u-Zs-gsz" userLabel="TreeFilterView" customClass="GradientView" customModule="Vienna" customModuleProvider="target">
+                                    <visualEffectView blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="o3u-Zs-gsz">
                                         <rect key="frame" x="0.0" y="574" width="288" height="29"/>
                                         <subviews>
                                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="2Bf-xM-DeZ">
@@ -69,12 +68,7 @@
                                             <constraint firstItem="CJo-vt-zIx" firstAttribute="leading" secondItem="o3u-Zs-gsz" secondAttribute="leading" constant="5" id="ucW-1x-D1F"/>
                                             <constraint firstAttribute="trailing" secondItem="CJo-vt-zIx" secondAttribute="trailing" constant="5" id="vAZ-Il-h0U"/>
                                         </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="startingColor">
-                                                <color key="value" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </customView>
+                                    </visualEffectView>
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8uX-2t-Ik7">
                                         <rect key="frame" x="0.0" y="0.0" width="288" height="574"/>
                                         <clipView key="contentView" drawsBackground="NO" id="QAa-Gc-i1V">
@@ -88,9 +82,8 @@
                                                     <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
-                                                        <tableColumn identifier="folderColumns" width="285" minWidth="16" maxWidth="1000" id="xXs-dn-GMc">
+                                                        <tableColumn identifier="folderColumns" width="256" minWidth="16" maxWidth="1000" id="xXs-dn-GMc">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
-                                                                <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
                                                             </tableHeaderCell>
@@ -106,11 +99,11 @@
                                             </subviews>
                                             <nil key="backgroundColor"/>
                                         </clipView>
-                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="u6a-gc-Hse">
+                                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="u6a-gc-Hse">
                                             <rect key="frame" x="0.0" y="558" width="248" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
-                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="m9n-zp-NnZ">
+                                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="m9n-zp-NnZ">
                                             <rect key="frame" x="272" y="0.0" width="16" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
@@ -146,14 +139,14 @@
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="cTN-D0-dY2" customClass="DisclosureView">
                                         <rect key="frame" x="0.0" y="551" width="653" height="29"/>
                                         <subviews>
-                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="1300" customClass="FilterView" customModule="Vienna" customModuleProvider="target">
+                                            <visualEffectView blendingMode="withinWindow" material="headerView" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="1300" customClass="FilterView" customModule="Vienna" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="653" height="29"/>
                                                 <subviews>
                                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1391">
                                                         <rect key="frame" x="0.0" y="26" width="653" height="5"/>
                                                     </box>
                                                     <searchField toolTip="Filter displayed articles by matching text" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="1304">
-                                                        <rect key="frame" x="8" y="5" width="250" height="19"/>
+                                                        <rect key="frame" x="8" y="5" width="253" height="19"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="LD9-MT-Msv"/>
                                                         </constraints>
@@ -168,18 +161,18 @@
                                                         </connections>
                                                     </searchField>
                                                     <button toolTip="Close the filter bar" translatesAutoresizingMaskIntoConstraints="NO" id="1313">
-                                                        <rect key="frame" x="633" y="9" width="12" height="13"/>
-                                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="smallCloseButton" imagePosition="only" alignment="center" alternateImage="pressedCloseButton" controlSize="small" inset="2" id="1379">
-                                                            <behavior key="behavior" lightByContents="YES"/>
-                                                            <font key="font" metaFont="smallSystem"/>
+                                                        <rect key="frame" x="632" y="7.5" width="13" height="13"/>
+                                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSStopProgressFreestandingTemplate" imagePosition="only" alignment="center" controlSize="small" lineBreakMode="truncatingTail" inset="2" id="1379">
+                                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="message" size="11"/>
                                                         </buttonCell>
                                                         <accessibility description="Close the filter bar"/>
                                                         <connections>
                                                             <action selector="hideFilterBar:" target="-1" id="FpS-o7-Ir4"/>
                                                         </connections>
                                                     </button>
-                                                    <popUpButton toolTip="Filter articles" horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1306">
-                                                        <rect key="frame" x="392" y="3" width="132" height="22"/>
+                                                    <popUpButton toolTip="Filter articles" wantsLayer="YES" horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1306">
+                                                        <rect key="frame" x="394" y="2" width="130" height="22"/>
                                                         <popUpButtonCell key="cell" type="push" title="All Articles" bezelStyle="rounded" alignment="center" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="JT2-Q7-gRj" id="1378">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
@@ -240,8 +233,8 @@
                                                             </connections>
                                                         </popUpButtonCell>
                                                     </popUpButton>
-                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="1305">
-                                                        <rect key="frame" x="342" y="8" width="50" height="14"/>
+                                                    <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="1305">
+                                                        <rect key="frame" x="345" y="7" width="50" height="14"/>
                                                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="right" title="Filter by:" id="1377">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -251,9 +244,14 @@
                                                             <accessibilityConnection property="title" destination="1306" id="BUw-GU-jKt"/>
                                                         </connections>
                                                     </textField>
+                                                    <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="bQs-EZ-yJW">
+                                                        <rect key="frame" x="0.0" y="-2" width="653" height="5"/>
+                                                    </box>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="bQs-EZ-yJW" secondAttribute="trailing" id="1n0-pe-5iG"/>
                                                     <constraint firstItem="1313" firstAttribute="leading" secondItem="1306" secondAttribute="trailing" multiplier="1.2" priority="250" constant="8" symbolic="YES" id="3Xe-VF-cew"/>
+                                                    <constraint firstItem="bQs-EZ-yJW" firstAttribute="leading" secondItem="1300" secondAttribute="leading" id="7Y2-n9-nH6"/>
                                                     <constraint firstItem="1305" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1304" secondAttribute="trailing" constant="8" symbolic="YES" id="IvL-hE-OcP"/>
                                                     <constraint firstItem="1304" firstAttribute="leading" secondItem="1300" secondAttribute="leading" constant="8" id="Lps-7u-BwX"/>
                                                     <constraint firstItem="1391" firstAttribute="top" secondItem="1300" secondAttribute="top" id="MBs-e8-BUg"/>
@@ -266,20 +264,16 @@
                                                     <constraint firstItem="1304" firstAttribute="top" secondItem="1300" secondAttribute="top" constant="5" id="fVe-Pk-PYH"/>
                                                     <constraint firstItem="1306" firstAttribute="leading" secondItem="1305" secondAttribute="trailing" constant="5" id="hWZ-Ui-5cO"/>
                                                     <constraint firstItem="1313" firstAttribute="centerY" secondItem="1306" secondAttribute="centerY" id="kL8-yf-0ec"/>
+                                                    <constraint firstAttribute="bottom" secondItem="bQs-EZ-yJW" secondAttribute="bottom" id="pnz-je-Gle"/>
                                                     <constraint firstItem="1305" firstAttribute="leading" secondItem="1304" secondAttribute="trailing" multiplier="1.3" priority="250" constant="8" symbolic="YES" id="uRc-Qw-3zZ"/>
                                                     <constraint firstAttribute="trailing" secondItem="1391" secondAttribute="trailing" id="xLw-op-kMY"/>
                                                 </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="startingColor">
-                                                        <color key="value" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <outlet property="filterByLabel" destination="1305" id="Toc-r7-JYz"/>
                                                     <outlet property="filterSearchField" destination="1304" id="1321"/>
                                                     <outlet property="filterViewPopUp" destination="1306" id="1322"/>
                                                 </connections>
-                                            </customView>
+                                            </visualEffectView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="1300" firstAttribute="top" secondItem="cTN-D0-dY2" secondAttribute="top" priority="600" id="As7-9V-DrG"/>
@@ -395,13 +389,11 @@
             </view>
             <toolbar key="toolbar" implicitIdentifier="9BE5691C-FD10-407B-A43E-74580FF42F4B" explicitIdentifier="MA_Toolbar" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="Vtx-1j-Pbt">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="3B81A7E6-BC01-4E5D-8598-E3749E1C39BF" explicitItemIdentifier="Subscribe" label="Add" paletteLabel="Add" toolTip="Subscribe to a feed or add a folder or smart folder." image="NewFeedTemplate" id="CPA-Ha-aj1" userLabel="Add" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
-                        <size key="minSize" width="41" height="28"/>
-                        <size key="maxSize" width="41" height="28"/>
+                    <toolbarItem implicitItemIdentifier="3B81A7E6-BC01-4E5D-8598-E3749E1C39BF" explicitItemIdentifier="Subscribe" label="Add" paletteLabel="Add" toolTip="Subscribe to a feed or add a folder or smart folder." image="NewFeedTemplate" sizingBehavior="auto" id="CPA-Ha-aj1" userLabel="Add" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <popUpButton key="view" verticalHuggingPriority="750" id="DDQ-PY-F2c">
-                            <rect key="frame" x="0.0" y="14" width="41" height="28"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="pdk-MS-QME" id="xAh-aB-Ek3">
+                            <rect key="frame" x="0.0" y="14" width="77" height="25"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NewFeedTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="pdk-MS-QME" id="xAh-aB-Ek3">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" id="tQg-b5-Yiu">
@@ -429,12 +421,10 @@
                             </popUpButtonCell>
                         </popUpButton>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="0E560FB8-D8D4-477F-87CE-D3451015D08F" explicitItemIdentifier="PreviousButton" label="Back" paletteLabel="Back" toolTip="Back" image="PreviousItemTemplate" id="gOG-UJ-Pin" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
-                        <size key="minSize" width="41" height="25"/>
-                        <size key="maxSize" width="41" height="28"/>
+                    <toolbarItem implicitItemIdentifier="0E560FB8-D8D4-477F-87CE-D3451015D08F" explicitItemIdentifier="PreviousButton" label="Back" paletteLabel="Back" toolTip="Back" image="PreviousItemTemplate" sizingBehavior="auto" id="gOG-UJ-Pin" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <button key="view" verticalHuggingPriority="750" id="tUv-uw-U24">
-                            <rect key="frame" x="0.0" y="14" width="41" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <rect key="frame" x="2" y="14" width="30" height="23"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="PreviousItemTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="waE-VF-jGb">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -444,12 +434,10 @@
                             <action selector="goBack:" target="-1" id="vfV-Zh-Djc"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="B455B425-67E7-44CA-8DDA-7188C9BBFDF7" explicitItemIdentifier="NextButton" label="Next Unread" paletteLabel="Next Unread" toolTip="Next Unread" image="NextItemTemplate" id="fpY-CJ-hKU" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
-                        <size key="minSize" width="41" height="25"/>
-                        <size key="maxSize" width="41" height="28"/>
+                    <toolbarItem implicitItemIdentifier="B455B425-67E7-44CA-8DDA-7188C9BBFDF7" explicitItemIdentifier="NextButton" label="Next Unread" paletteLabel="Next Unread" toolTip="Next Unread" image="NextItemTemplate" sizingBehavior="auto" id="fpY-CJ-hKU" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <button key="view" verticalHuggingPriority="750" id="DGs-HX-KGa">
-                            <rect key="frame" x="16" y="14" width="41" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <rect key="frame" x="22" y="14" width="30" height="23"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NextItemTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UUm-Eq-K34">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -459,12 +447,10 @@
                             <action selector="viewNextUnread:" target="-1" id="bxj-nt-KuQ"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="A62CF72C-0A55-43F3-9737-DAD4E0E93C95" explicitItemIdentifier="SkipFolder" label="Skip Folder" paletteLabel="Skip Folder" toolTip="Skip Folder" image="NextFolderTemplate" id="SoG-b2-O1S" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
-                        <size key="minSize" width="41" height="25"/>
-                        <size key="maxSize" width="41" height="28"/>
+                    <toolbarItem implicitItemIdentifier="A62CF72C-0A55-43F3-9737-DAD4E0E93C95" explicitItemIdentifier="SkipFolder" label="Skip Folder" paletteLabel="Skip Folder" toolTip="Skip Folder" image="NextFolderTemplate" sizingBehavior="auto" id="SoG-b2-O1S" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <button key="view" verticalHuggingPriority="750" id="Xbk-bR-TPc">
-                            <rect key="frame" x="13" y="14" width="41" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <rect key="frame" x="18" y="14" width="31" height="23"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NextFolderTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0ub-7J-fFz">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -474,12 +460,10 @@
                             <action selector="skipFolder:" target="-1" id="9Qr-v5-cZv"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="1329F46E-D435-463A-9269-8FA4B1670A89" explicitItemIdentifier="MarkAllItemsAsRead" label="All Read" paletteLabel="Mark All Items as Read" toolTip="Mark all items as read" image="MarkReadTemplate" id="Gyz-dq-ewv" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
-                        <size key="minSize" width="41" height="25"/>
-                        <size key="maxSize" width="41" height="28"/>
+                    <toolbarItem implicitItemIdentifier="1329F46E-D435-463A-9269-8FA4B1670A89" explicitItemIdentifier="MarkAllItemsAsRead" label="All Read" paletteLabel="Mark All Items as Read" toolTip="Mark all items as read" image="MarkReadTemplate" sizingBehavior="auto" id="Gyz-dq-ewv" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <button key="view" verticalHuggingPriority="750" id="21u-wz-hAI">
-                            <rect key="frame" x="43" y="14" width="41" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <rect key="frame" x="48" y="14" width="31" height="23"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="MarkReadTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uJ6-m6-sxk">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -489,12 +473,10 @@
                             <action selector="markAllRead:" target="-1" id="Am6-Sz-pet"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="145A8A8B-193F-46E7-87FD-FE2B915C1B08" explicitItemIdentifier="Refresh" label="Refresh" paletteLabel="Refresh" toolTip="Refresh all your subscriptions" image="SyncTemplate" id="Nmd-zx-Dys" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
-                        <size key="minSize" width="41" height="25"/>
-                        <size key="maxSize" width="41" height="28"/>
+                    <toolbarItem implicitItemIdentifier="145A8A8B-193F-46E7-87FD-FE2B915C1B08" explicitItemIdentifier="Refresh" label="Refresh" paletteLabel="Refresh" toolTip="Refresh all your subscriptions" image="SyncTemplate" sizingBehavior="auto" id="Nmd-zx-Dys" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <button key="view" verticalHuggingPriority="750" id="PJJ-4H-4dE">
-                            <rect key="frame" x="4" y="14" width="41" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <rect key="frame" x="4" y="14" width="41" height="23"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="SyncTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="F19-ww-YfI">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -504,12 +486,10 @@
                             <action selector="refreshAllSubscriptions:" target="-1" id="SRS-ST-tVf"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="006BC31E-0D67-4BDB-95C0-FA6220913D81" explicitItemIdentifier="MailLink" label="Send Link" paletteLabel="Send Link" toolTip="Email a link to the current article or website" image="MailTemplate" id="10h-xf-C6T" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
-                        <size key="minSize" width="41" height="25"/>
-                        <size key="maxSize" width="41" height="28"/>
+                    <toolbarItem implicitItemIdentifier="006BC31E-0D67-4BDB-95C0-FA6220913D81" explicitItemIdentifier="MailLink" label="Send Link" paletteLabel="Send Link" toolTip="Email a link to the current article or website" image="MailTemplate" sizingBehavior="auto" id="10h-xf-C6T" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <button key="view" verticalHuggingPriority="750" id="EJA-2q-HQu">
-                            <rect key="frame" x="9" y="14" width="41" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <rect key="frame" x="15" y="14" width="29" height="23"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="MailTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8Cf-Qg-5OD">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -519,12 +499,10 @@
                             <action selector="mailLinkToArticlePage:" target="-1" id="1ff-ox-Afg"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="A9627EDC-4246-4CE6-B9A2-B1C43C372E58" explicitItemIdentifier="DeleteArticle" label="Delete" paletteLabel="Delete" toolTip="Delete the current article" image="DeleteTemplate" id="Y22-Ul-q6w" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
-                        <size key="minSize" width="41" height="25"/>
-                        <size key="maxSize" width="41" height="28"/>
+                    <toolbarItem implicitItemIdentifier="A9627EDC-4246-4CE6-B9A2-B1C43C372E58" explicitItemIdentifier="DeleteArticle" label="Delete" paletteLabel="Delete" toolTip="Delete the current article" image="DeleteTemplate" sizingBehavior="auto" id="Y22-Ul-q6w" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <button key="view" verticalHuggingPriority="750" id="mYu-BR-T3p">
-                            <rect key="frame" x="0.0" y="14" width="41" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <rect key="frame" x="6" y="14" width="30" height="23"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="DeleteTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uAr-TV-Qaw">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -534,12 +512,10 @@
                             <action selector="deleteMessage:" target="-1" id="K93-nE-1KC"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="1B4A5BDF-4844-487B-A764-D611A54922F0" explicitItemIdentifier="EmptyTrash" label="Empty Trash" paletteLabel="Empty Trash" toolTip="Delete all articles in the trash" image="EmptyTrashTemplate" id="4c1-NR-ofo" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
-                        <size key="minSize" width="41" height="25"/>
-                        <size key="maxSize" width="41" height="28"/>
+                    <toolbarItem implicitItemIdentifier="1B4A5BDF-4844-487B-A764-D611A54922F0" explicitItemIdentifier="EmptyTrash" label="Empty Trash" paletteLabel="Empty Trash" toolTip="Delete all articles in the trash" image="EmptyTrashTemplate" sizingBehavior="auto" id="4c1-NR-ofo" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <button key="view" verticalHuggingPriority="750" id="b4P-2h-b0r">
-                            <rect key="frame" x="16" y="14" width="41" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <rect key="frame" x="21" y="14" width="31" height="23"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="EmptyTrashTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kxj-5W-a2Z">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -549,12 +525,10 @@
                             <action selector="emptyTrash:" target="-1" id="LGn-HP-E1Z"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="3645E290-4147-4201-8018-6E3A685BE640" explicitItemIdentifier="GetInfo" label="Get Info" paletteLabel="Get Info" toolTip="See information about the selected subscription" image="GetInfoTemplate" id="7iy-IN-8oG" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
-                        <size key="minSize" width="41" height="25"/>
-                        <size key="maxSize" width="41" height="28"/>
+                    <toolbarItem implicitItemIdentifier="3645E290-4147-4201-8018-6E3A685BE640" explicitItemIdentifier="GetInfo" label="Get Info" paletteLabel="Get Info" toolTip="See information about the selected subscription" image="GetInfoTemplate" sizingBehavior="auto" id="7iy-IN-8oG" customClass="ButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <button key="view" verticalHuggingPriority="750" id="dU4-uo-rcp">
-                            <rect key="frame" x="4" y="14" width="41" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <rect key="frame" x="10" y="14" width="30" height="23"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="GetInfoTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1Lf-O5-dn9">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -564,12 +538,10 @@
                             <action selector="getInfo:" target="-1" id="Xvh-S3-PIS"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="A51AB11F-9F76-48DF-A4E8-39C7224775BA" explicitItemIdentifier="Action" label="Action" paletteLabel="Action" toolTip="Additional actions for the selected folder" image="NSActionTemplate" id="TSQ-UW-4gU" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
-                        <size key="minSize" width="41" height="28"/>
-                        <size key="maxSize" width="41" height="28"/>
+                    <toolbarItem implicitItemIdentifier="A51AB11F-9F76-48DF-A4E8-39C7224775BA" explicitItemIdentifier="Action" label="Action" paletteLabel="Action" toolTip="Additional actions for the selected folder" image="NSActionTemplate" sizingBehavior="auto" id="TSQ-UW-4gU" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <popUpButton key="view" verticalHuggingPriority="750" id="Tq4-6N-ErM">
-                            <rect key="frame" x="0.0" y="14" width="41" height="28"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <rect key="frame" x="0.0" y="14" width="54" height="25"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="anL-VR-Fny">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
@@ -635,12 +607,10 @@
                             </popUpButtonCell>
                         </popUpButton>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="3C962AB1-0C7E-4CBA-8477-2436ED2B6383" explicitItemIdentifier="Styles" label="Style" paletteLabel="Style" toolTip="Display the list of available styles" image="StyleTemplate" id="azL-oz-mJL" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
-                        <size key="minSize" width="41" height="28"/>
-                        <size key="maxSize" width="41" height="28"/>
+                    <toolbarItem implicitItemIdentifier="3C962AB1-0C7E-4CBA-8477-2436ED2B6383" explicitItemIdentifier="Styles" label="Style" paletteLabel="Style" toolTip="Display the list of available styles" image="StyleTemplate" sizingBehavior="auto" id="azL-oz-mJL" customClass="PopUpButtonToolbarItem" customModule="Vienna" customModuleProvider="target">
                         <popUpButton key="view" verticalHuggingPriority="750" id="gOd-tT-XFQ">
-                            <rect key="frame" x="0.0" y="14" width="41" height="28"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <rect key="frame" x="0.0" y="14" width="54" height="25"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="lu2-BZ-Gxd" id="5CR-Qn-4pP">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
@@ -651,7 +621,7 @@
                                         <menuItem title="More Styles…" id="MaO-r1-tcm">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="moreStyles:" target="-1" id="YsY-VC-HFK"/>
+                                                <action selector="openStylesPage:" target="-1" id="YsY-VC-HFK"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -662,22 +632,6 @@
                             </popUpButtonCell>
                         </popUpButton>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="D7187B4B-C4CE-486D-8310-37941E8CB2C5" explicitItemIdentifier="SearchItem" label="Search Articles" paletteLabel="Search Articles" toolTip="Search Articles" id="OIA-vb-5jR" customClass="SearchFieldToolbarItem" customModule="Vienna" customModuleProvider="target">
-                        <size key="minSize" width="210" height="22"/>
-                        <size key="maxSize" width="210" height="22"/>
-                        <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" id="uUx-PZ-LTM">
-                            <rect key="frame" x="0.0" y="14" width="210" height="22"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="cUS-QL-Jz7">
-                                <font key="font" metaFont="system"/>
-                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                            </searchFieldCell>
-                        </searchField>
-                        <connections>
-                            <action selector="searchUsingToolbarTextField:" target="-1" id="TIn-8i-3eA"/>
-                        </connections>
-                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="oqq-lf-hKd"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="VNl-qM-XKj"/>
                 </allowedToolbarItems>
@@ -685,11 +639,8 @@
                     <toolbarItem reference="CPA-Ha-aj1"/>
                     <toolbarItem reference="SoG-b2-O1S"/>
                     <toolbarItem reference="TSQ-UW-4gU"/>
-                    <toolbarItem reference="oqq-lf-hKd"/>
                     <toolbarItem reference="Nmd-zx-Dys"/>
-                    <toolbarItem reference="10h-xf-C6T"/>
                     <toolbarItem reference="VNl-qM-XKj"/>
-                    <toolbarItem reference="OIA-vb-5jR"/>
                 </defaultToolbarItems>
                 <connections>
                     <outlet property="delegate" destination="-2" id="ceJ-p3-Ezw"/>
@@ -705,7 +656,7 @@
             <rect key="frame" x="0.0" y="0.0" width="700" height="629"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <splitView dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="972">
+                <splitView horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="972">
                     <rect key="frame" x="0.0" y="0.0" width="700" height="630"/>
                     <subviews>
                         <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="976">
@@ -713,7 +664,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                             <clipView key="contentView" copiesOnScroll="NO" id="TOX-JT-adF">
                                 <rect key="frame" x="0.0" y="0.0" width="700" height="310"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowHeight="15" headerView="1386" id="977" customClass="MessageListView">
                                         <rect key="frame" x="0.0" y="0.0" width="700" height="287"/>
@@ -727,15 +678,15 @@
                                     </tableView>
                                 </subviews>
                             </clipView>
-                            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="1385">
+                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="1385">
                                 <rect key="frame" x="0.0" y="-30" width="683" height="15"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </scroller>
-                            <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="1384">
+                            <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="1384">
                                 <rect key="frame" x="-16" y="23" width="16" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </scroller>
-                            <tableHeaderView key="headerView" id="1386">
+                            <tableHeaderView key="headerView" wantsLayer="YES" id="1386">
                                 <rect key="frame" x="0.0" y="0.0" width="700" height="23"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </tableHeaderView>
@@ -784,20 +735,19 @@
                 <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQ8-bu-Pg4">
                     <rect key="frame" x="0.0" y="0.0" width="701" height="607"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <clipView key="contentView" ambiguous="YES" id="emU-La-Fur">
+                    <clipView key="contentView" id="emU-La-Fur">
                         <rect key="frame" x="1" y="1" width="699" height="605"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="NgO-hM-mCz" customClass="ExtendedTableView">
                                 <rect key="frame" x="0.0" y="0.0" width="699" height="605"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
-                                    <tableColumn identifier="ArticleCellView" width="696" minWidth="40" maxWidth="3000" id="8CZ-rM-yXF">
+                                    <tableColumn identifier="ArticleCellView" width="658" minWidth="40" maxWidth="3000" id="8CZ-rM-yXF">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
-                                            <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                         </tableHeaderCell>
@@ -812,11 +762,11 @@
                             </tableView>
                         </subviews>
                     </clipView>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="S05-md-m5A">
+                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="S05-md-m5A">
                         <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="fza-gl-TLT">
+                    <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="fza-gl-TLT">
                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
@@ -839,37 +789,38 @@
                 <box verticalHuggingPriority="750" alphaValue="0.79577457904815674" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1392">
                     <rect key="frame" x="0.0" y="42" width="491" height="5"/>
                 </box>
-                <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="750" verticalStackHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PLo-xw-CXM">
+                <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="PLo-xw-CXM">
                     <rect key="frame" x="8" y="6" width="475" height="32"/>
-                    <beginningViews>
-                        <imageView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1289">
-                            <rect key="frame" x="0.0" y="0.0" width="79" height="32"/>
+                    <subviews>
+                        <imageView id="1289">
+                            <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="32" id="DHh-hp-lMb"/>
                                 <constraint firstAttribute="height" constant="32" id="Nns-hC-vGL"/>
                             </constraints>
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="1372"/>
                         </imageView>
-                        <stackView orientation="vertical" alignment="leading" spacing="3" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RFH-Us-xJO">
-                            <rect key="frame" x="87" y="0.0" width="300" height="32"/>
-                            <beginningViews>
-                                <textField verticalHuggingPriority="750" fixedFrame="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="9000" translatesAutoresizingMaskIntoConstraints="NO" id="1290">
-                                    <rect key="frame" x="-2" y="18" width="304" height="14"/>
+                        <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="3" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RFH-Us-xJO">
+                            <rect key="frame" x="40" y="1" width="347" height="31"/>
+                            <subviews>
+                                <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="9000" translatesAutoresizingMaskIntoConstraints="NO" id="1290">
+                                    <rect key="frame" x="-2" y="17" width="351" height="14"/>
                                     <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" id="1373">
                                         <font key="font" metaFont="smallSystemBold"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="9000" translatesAutoresizingMaskIntoConstraints="NO" id="1292" customClass="DSClickableURLTextField">
-                                    <rect key="frame" x="-2" y="0.0" width="304" height="14"/>
+                                <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="9000" translatesAutoresizingMaskIntoConstraints="NO" id="1292" customClass="DSClickableURLTextField">
+                                    <rect key="frame" x="-2" y="0.0" width="351" height="14"/>
                                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" id="1375">
                                         <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                            </beginningViews>
+                            </subviews>
                             <visibilityPriorities>
                                 <integer value="1000"/>
                                 <integer value="1000"/>
@@ -879,8 +830,8 @@
                                 <real value="3.4028234663852886e+38"/>
                             </customSpacing>
                         </stackView>
-                        <button horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" placeholderIntrinsicWidth="80" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="1291">
-                            <rect key="frame" x="389" y="-1" width="92" height="32"/>
+                        <button horizontalHuggingPriority="251" verticalHuggingPriority="750" placeholderIntrinsicWidth="80" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="1291">
+                            <rect key="frame" x="388" y="-1" width="94" height="33"/>
                             <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="1374">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -889,7 +840,7 @@
                                 <action selector="downloadFile:" target="1288" id="1293"/>
                             </connections>
                         </button>
-                    </beginningViews>
+                    </subviews>
                     <visibilityPriorities>
                         <integer value="1000"/>
                         <integer value="1000"/>
@@ -924,18 +875,17 @@
     <resources>
         <image name="DeleteTemplate" width="18" height="14"/>
         <image name="EmptyTrashTemplate" width="19" height="14"/>
-        <image name="GetInfoTemplate" width="7" height="14"/>
+        <image name="GetInfoTemplate" width="28" height="28"/>
         <image name="MailTemplate" width="17" height="12"/>
         <image name="MarkReadTemplate" width="19" height="14"/>
-        <image name="NSActionTemplate" width="14" height="14"/>
-        <image name="NewFeedTemplate" width="19" height="12"/>
+        <image name="NSActionTemplate" width="15" height="15"/>
+        <image name="NSStopProgressFreestandingTemplate" width="15" height="15"/>
+        <image name="NewFeedTemplate" width="38" height="24"/>
         <image name="NextFolderTemplate" width="19" height="12"/>
         <image name="NextItemTemplate" width="18" height="12"/>
         <image name="PreviousItemTemplate" width="18" height="12"/>
         <image name="StyleTemplate" width="15" height="15"/>
-        <image name="SyncTemplate" width="19" height="12"/>
+        <image name="SyncTemplate" width="38" height="24"/>
         <image name="filter-icon" width="16" height="16"/>
-        <image name="pressedCloseButton" width="12" height="13"/>
-        <image name="smallCloseButton" width="12" height="13"/>
     </resources>
 </document>

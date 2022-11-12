@@ -43,7 +43,7 @@
 		hasCount = NO;
 		count = 0;
         countLabelShadow = [self defaultCountLabelShadow];
-		[self setCountBackgroundColour:[NSColor shadowColor]];
+		[self setCountBackgroundColour:NSColor.systemGrayColor];
 	}
 	return self;
 }
@@ -180,11 +180,6 @@
 		
 		imageSize = image.size;
 		NSDivideRect(*cellFrame, &imageFrame, cellFrame, 3 + imageSize.width, NSMinXEdge);
-		if (self.drawsBackground)
-		{
-			[self.backgroundColor set];
-			NSRectFill(imageFrame);
-		}
 		imageFrame.origin.x += 3;
 		imageFrame.size = imageSize;
 		// vertically center
@@ -232,11 +227,6 @@
 		
 		imageSize = auxiliaryImage.size;
 		NSDivideRect(cellFrame, &imageFrame, &cellFrame, 3 + imageSize.width, NSMaxXEdge);
-		if (self.drawsBackground)
-		{
-			[self.backgroundColor set];
-			NSRectFill(imageFrame);
-		}
 		imageFrame.size = imageSize;
 		// vertically center
 		imageFrame.origin.y += (cellFrame.size.height - imageSize.height) / 2.0;
@@ -264,11 +254,6 @@
 
 		NSRect countFrame;
 		NSDivideRect(cellFrame, &countFrame, &cellFrame, cellWidth, NSMaxXEdge);
-		if (self.drawsBackground)
-		{
-			[self.backgroundColor set];
-			NSRectFill(countFrame);
-		}
         
         // Provide a small amount of additional visual padding beyond the actual
         // count rectangle to ensure the text does not hit the edge of the count bubble
@@ -325,32 +310,26 @@
 	[super selectWithFrame:aRect inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
 }
 
--(NSArray*)accessibilityAttributeNames
-{
-    static NSArray * attributes = nil;
-    if (!attributes)
-    {
-        NSSet * set = [NSSet setWithArray:[super accessibilityAttributeNames]];
-        attributes = [set setByAddingObject:NSAccessibilityDescriptionAttribute].allObjects;
-    }
-    return attributes;
-}
+- (NSString *)accessibilityLabel {
+    NSMutableArray *bits = [NSMutableArray arrayWithCapacity:3];
 
--(id)accessibilityAttributeValue:(NSString *)attribute
-{
-    if ([attribute isEqualToString:NSAccessibilityDescriptionAttribute])
-    {
-        NSMutableArray * bits = [NSMutableArray arrayWithCapacity:3];
-        if (auxiliaryImage && auxiliaryImage.accessibilityDescription)
-            [bits addObject:auxiliaryImage.accessibilityDescription];
-        if (hasCount)
-            [bits addObject:[NSString stringWithFormat:NSLocalizedString(@"%d unread articles", nil), count]];
-        if (inProgress)
-            [bits addObject:NSLocalizedString(@"Loading", nil)];
-        if (bits.count)
-            return [bits componentsJoinedByString:@", "];
+    if (auxiliaryImage && auxiliaryImage.accessibilityDescription) {
+        [bits addObject:auxiliaryImage.accessibilityDescription];
     }
-    return [super accessibilityAttributeValue:attribute];
+
+    if (hasCount) {
+        [bits addObject:[NSString stringWithFormat:NSLocalizedString(@"%d unread articles", nil), (int)count]];
+    }
+
+    if (inProgress) {
+        [bits addObject:NSLocalizedString(@"Loading", nil)];
+    }
+
+    if (bits.count) {
+        return [bits componentsJoinedByString:@", "];
+    } else {
+        return [super accessibilityLabel];
+    }
 }
 
 -(NSShadow *)defaultCountLabelShadow

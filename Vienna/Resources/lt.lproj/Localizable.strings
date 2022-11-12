@@ -40,9 +40,6 @@
 /* No comment provided by engineer. */
 "A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Įdiegtas naujas įskiepis. Jį galima rasti meniu ir įsidėti į įrankių juostą.";
 
-/* Toolbar item name for the Advanced preference pane */
-"Advanced" = "Papildomi nustatymai";
-
 /* No comment provided by engineer. */
 "After 2 Days" = "Po 2 dienų";
 
@@ -60,9 +57,6 @@
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Paskutinįkart atnaujinant šią prenumeratą įvyko klaida";
-
-/* Toolbar item name for the Appearance preference pane */
-"Appearance" = "Išvaizda";
 
 /* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "AppleScript klaida skripte '%@'";
@@ -112,9 +106,6 @@
 
 /* No comment provided by engineer. */
 "Click the Open button to open this file." = "Spustelkite ant mygtuko Atidaryti, kad atvertumėte failą.";
-
-/* No comment provided by engineer. */
-"Click the Play button to play this enclosure in iTunes." = "Spustelkite ant mygtuko Paleisti, kad peržiūrėtumėte programoje iTunes.";
 
 /* No comment provided by engineer. */
 "Connecting to %@" = "Jungiamasi prie %@";
@@ -266,9 +257,6 @@
 
 /* No comment provided by engineer. */
 "Forcing Refresh subscriptions…" = "Priverstinai atnaujinamos prenumeratos…";
-
-/* Toolbar item name for the General preference pane */
-"General" = "Bendri";
 
 /* Title of a menu item */
 "Get Info" = "Gauti informaciją";
@@ -463,13 +451,7 @@
 "Other" = "Kita";
 
 /* No comment provided by engineer. */
-"Play" = "Paleisti";
-
-/* No comment provided by engineer. */
 "Plugin installed" = "Įskiepis įdiegtas";
-
-/* Title of the Preferences window */
-"Preferences" = "Nustatymai";
 
 /* No comment provided by engineer. */
 "Queue" = "Eilė";
@@ -544,6 +526,11 @@
 /* No comment provided by engineer. */
 "Search all articles or the current web page" = "Ieškoti visuose straipsniuose arba šiame puslapyje";
 
+/* Toolbar item label
+   Toolbar item palette label
+   Toolbar item tooltip */
+"Search Articles" = "Ieškoti straipsnių";
+
 /* Placeholder title of a search field */
 "Search current web page" = "Ieškoti šiame puslapyje";
 
@@ -588,9 +575,6 @@
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Santrauka";
-
-/* Toolbar item name for the Syncing preference pane */
-"Syncing" = "Sinchronizuojama...";
 
 /* Data field name visible in smart folder definition */
 "Text" = "Tekstas";

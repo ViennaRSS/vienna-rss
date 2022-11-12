@@ -21,47 +21,21 @@
 @import Cocoa;
 @import WebKit;
 
-typedef NS_ENUM(NSInteger, DownloadState) {
-    DownloadStateInit,
-    DownloadStateStarted,
-    DownloadStateCompleted,
-    DownloadStateFailed,
-    DownloadStateCancelled
-};
+@class DownloadItem;
 
-@interface DownloadItem : NSObject<NSCoding> {
-	long long expectedSize;
-	long long fileSize;
-	DownloadState state;
-	NSImage * image;
-	NSString * filename;
-	NSURLDownload * download;
-	NSDate * startTime;
-}
+@interface DownloadManager : NSObject <NSURLSessionDownloadDelegate, WebDownloadDelegate>
 
-// Public functions
-@property (nonatomic) DownloadState state;
-@property (nonatomic) long long expectedSize;
-@property (nonatomic) long long size;
-@property (nonatomic, strong) NSURLDownload *download;
-@property (nonatomic, copy) NSString *filename;
-@property (nonatomic, readonly, copy) NSImage *image;
-@property (nonatomic, copy) NSDate *startTime;
-@end
+@property (class, readonly) DownloadManager *sharedInstance NS_SWIFT_NAME(shared);
 
-@interface DownloadManager : NSObject <WebDownloadDelegate> {
-	NSMutableArray * downloadsList;
-	NSInteger activeDownloads;
-}
+@property (readonly, copy, nonatomic) NSArray<DownloadItem *> *downloadsList;
+@property (readonly, nonatomic) BOOL hasActiveDownloads;
 
-// Public functions
-+(DownloadManager *)sharedInstance;
-+(BOOL)isFileDownloaded:(NSString *)filename;
-+(NSString *)fullDownloadPath:(NSString *)filename;
-@property (nonatomic, readonly, copy) NSArray *downloadsList;
-@property (nonatomic, readonly) NSInteger activeDownloads;
--(void)clearList;
--(void)cancelItem:(DownloadItem *)item;
--(void)removeItem:(DownloadItem *)item;
--(void)downloadFileFromURL:(NSString *)url;
++ (BOOL)isFileDownloaded:(NSString *)filename;
++ (NSString *)fullDownloadPath:(NSString *)filename;
+
+- (void)clearList;
+- (void)cancelItem:(DownloadItem *)item;
+- (void)removeItem:(DownloadItem *)item;
+- (void)downloadFileFromURL:(NSString *)url;
+
 @end

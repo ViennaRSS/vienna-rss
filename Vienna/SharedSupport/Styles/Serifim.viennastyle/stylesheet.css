@@ -1,0 +1,181 @@
+/* @group Reset */
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+/* custom properties */
+:root {
+    --background-color: #fafafa;
+    --text-color: #111;
+    --title-color: #111;
+    --link-visited: #3c90e8;
+    --img-border: #ccc;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #111111;
+        --text-color: #fefefe;
+        --title-color: #fefefe;
+        --link-visited: #fc804e;
+        --img-border: #eee;
+    }
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* @end */
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: Palatino, Georgia, "Times New Roman", Times, serif;
+}
+
+a,
+a:visited {
+  color: var(--link-visited);
+  text-decoration: none;
+}
+
+.container {
+  width: 95%;
+  max-width: 500px;
+  min-width: 300px;
+  margin: 25px auto;
+}
+
+.byline {
+  display: block;
+  clear: both;
+  padding: 10px 0;
+  border-top: 1px solid #414141;
+  border-bottom: 1px solid #414141;
+  overflow: hidden;
+}
+
+.articleTitle {
+  padding-bottom: 10px;
+  font-size: 2.5em;
+}
+
+.articleTitle a,
+.articleTitle a:visited {
+  color: var(--title-color);
+}
+
+.articleAuthor,
+.feedTitle,
+.articleDate {
+  display: inline-block;
+}
+
+.articleDate {
+  clear: both;
+}
+
+.articleBody {
+  padding-top: 20px;
+  font-size: 1.2em;
+  line-height: 1.6em;
+  overflow:auto;
+}
+
+p,
+blockquote,
+ol,
+ul {
+  margin-bottom: 1em;
+  clear: both;
+}
+
+.articleBody blockquote {
+  padding-left: 25px;
+  font-style: italic;
+}
+
+.articleBody ol {
+  list-style-type: decimal;
+  padding-left: 50px;
+}
+
+.articleBody ul {
+  list-style-type: disc;
+  padding-left: 50px;
+}
+
+.articleBody img,
+.articleBody iframe {
+  max-width: 100%;
+  clear: both;
+  margin-bottom: 1em;
+  height: auto !important;
+}
+
+.articleBody img {
+  border: 4px solid var(--img-border);
+}
+
+/* fix a 100% max size to potentially problematic elements */
+img, table,
+td, blockquote,
+code, pre,
+textarea, input,
+iframe, object,
+embed, video {
+  max-width: 100% !important;
+}
+
+/* specific direction for code */
+code, pre {
+  direction: ltr;
+}
+
+/* keep images ratio and avoid box overflow due to border or padding */
+img {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  height: auto !important;
+}
