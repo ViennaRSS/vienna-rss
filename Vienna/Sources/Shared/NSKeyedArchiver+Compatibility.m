@@ -35,25 +35,14 @@
 
     NSData *data = nil;
 
-    if (@available(macOS 10.13, *)) {
-        NSError *error = nil;
-        data = [NSKeyedArchiver archivedDataWithRootObject:object
-                                     requiringSecureCoding:requiresSecureCoding
-                                                     error:&error];
-        if (error) {
-            os_log_fault(VNA_LOG,
-                         "Failed to archive %{public}@ using keyed archiver",
-                         [object className]);
-        }
-    } else {
-        @try {
-            data = [NSKeyedArchiver archivedDataWithRootObject:object];
-        } @catch (NSException *exception) {
-            os_log_fault(VNA_LOG,
-                         "Failed to archive %{public}@ using keyed archiver. "
-                         "Reason: %{public}@",
-                         [object className], exception.reason);
-        }
+    NSError *error = nil;
+    data = [NSKeyedArchiver archivedDataWithRootObject:object
+                                 requiringSecureCoding:requiresSecureCoding
+                                                 error:&error];
+    if (error) {
+        os_log_fault(VNA_LOG,
+                     "Failed to archive %{public}@ using keyed archiver",
+                     [object className]);
     }
 
     return data;

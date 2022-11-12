@@ -79,10 +79,6 @@
     return [_dataSource outlineView:outlineView acceptDrop:info item:item childIndex:index];
 }
 
-- (NSArray *)outlineView:(NSOutlineView *)outlineView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedItems:(NSArray *)items {
-    return [_dataSource outlineView:outlineView namesOfPromisedFilesDroppedAtDestination:dropDestination forDraggedItems:items];
-}
-
 @end
 
 @implementation FoldersFilterableDataSourceImpl

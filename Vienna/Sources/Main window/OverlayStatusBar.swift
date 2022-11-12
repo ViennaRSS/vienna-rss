@@ -348,27 +348,11 @@ final class OverlayStatusBar: NSView {
 private extension NSColor {
 
     class var overlayStatusBarPrimaryLabelColor: NSColor {
-        if #available(macOS 10.13, *) {
-            return NSColor(named: "OverlayStatusBarPrimaryTextColor")!
-        } else {
-            if NSWorkspace.shared.accessibilityDisplayShouldIncreaseContrast {
-                return .black.withAlphaComponent(0.85)
-            } else {
-                return .black.withAlphaComponent(0.70)
-            }
-        }
+        return NSColor(named: "OverlayStatusBarPrimaryTextColor")!
     }
 
     class var overlayStatusBarSecondaryLabelColor: NSColor {
-        if #available(macOS 10.13, *) {
-            return NSColor(named: "OverlayStatusBarSecondaryTextColor")!
-        } else {
-            if NSWorkspace.shared.accessibilityDisplayShouldIncreaseContrast {
-                return .black.withAlphaComponent(0.70)
-            } else {
-                return .black.withAlphaComponent(0.55)
-            }
-        }
+        return NSColor(named: "OverlayStatusBarSecondaryTextColor")!
     }
 
 }

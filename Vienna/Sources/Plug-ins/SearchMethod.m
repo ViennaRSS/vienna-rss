@@ -116,13 +116,9 @@ static NSString *const VNACodingKeyQueryString = @"searchQueryString";
         // These methods retrieve the value from an undefined coding key. It
         // should be assigned to a defined coding key. One way to do this is by
         // converting the selector from a string (NSSelectorFromString) instead.
-        if (@available(macOS 10.13, *)) {
-            [coder decodeValueOfObjCType:@encode(SEL)
-                                      at:&_handler
-                                    size:sizeof(SEL)];
-        } else {
-            [coder decodeValueOfObjCType:@encode(SEL) at:&_handler];
-        }
+        [coder decodeValueOfObjCType:@encode(SEL)
+                                  at:&_handler
+                                size:sizeof(SEL)];
     }
 
     return self;

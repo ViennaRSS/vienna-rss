@@ -19,7 +19,6 @@
 
 import XCTest
 
-@available(macOS 10.13, *)
 class UnarchiverTests: XCTestCase {
 
     func testUnarchivingDownloadItem() throws {

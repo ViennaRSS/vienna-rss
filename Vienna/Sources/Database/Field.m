@@ -93,10 +93,18 @@ static NSString *const VNACodingKeyWidth = @"width";
             _displayName = [coder decodeObject];
             _name = [coder decodeObject];
             _sqlField = [coder decodeObject];
-            [coder decodeValueOfObjCType:@encode(bool) at:&_visible];
-            [coder decodeValueOfObjCType:@encode(NSInteger) at:&_width];
-            [coder decodeValueOfObjCType:@encode(NSInteger) at:&_tag];
-            [coder decodeValueOfObjCType:@encode(NSInteger) at:&_type];
+            [coder decodeValueOfObjCType:@encode(bool)
+                                      at:&_visible
+                                    size:sizeof(bool)];
+            [coder decodeValueOfObjCType:@encode(NSInteger)
+                                      at:&_width
+                                    size:sizeof(NSInteger)];
+            [coder decodeValueOfObjCType:@encode(NSInteger)
+                                      at:&_tag
+                                    size:sizeof(NSInteger)];
+            [coder decodeValueOfObjCType:@encode(NSInteger)
+                                      at:&_type
+                                    size:sizeof(NSInteger)];
         }
     }
 

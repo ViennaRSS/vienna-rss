@@ -1,12 +1,10 @@
 # Contributing to Vienna
 
-## Debugging
-
-dSYM files containing the debug symbols can be found at [bintray](https://bintray.com/viennarss/vienna-rss/vienna-rss/).
-
 ## Writing code
 
-We currently build Vienna with Xcode 13 and the macOS 12 SDK. Most of Vienna is made with Objective-C, but some newer code is being created in Swift. We welcome both Objective-C and Swift contributions.
+We currently build Vienna with Xcode 14 and the macOS 13 SDK.
+
+Most of Vienna is made with Objective-C, but some newer code is being created in Swift. We welcome both Objective-C and Swift contributions.
 
 You should have a basic knowledge of Git and read this [suggested workflow](https://github.com/ViennaRSS/vienna-rss/wiki/Good-manners-with-Git).
 
