@@ -36,12 +36,7 @@
 -(void)fillFolderValueField;
 -(void)initSearchSheet:(NSString *)folderName;
 -(void)displaySearchSheet:(NSWindow *)window;
--(void)setOperatorsPopup:(NSPopUpButton *)popUpButton operators:(NSArray *)operators;
--(void)addCriteria:(NSUInteger)index;
 -(void)addDefaultCriteria;
--(void)removeCriteria:(NSInteger)index;
--(void)removeAllCriteria;
--(void)resizeSearchWindow;
 
 @end
 
@@ -89,8 +84,6 @@
 	Folder * folder = [db folderFromID:folderId];
 	if (folder != nil)
 	{
-		NSInteger index = 0;
-
 		[self initSearchSheet:folder.name];
 		smartFolderId = folderId;
 		[smartFolderName setEnabled:YES];
@@ -98,61 +91,11 @@
 		// Load the criteria into the fields.
 		CriteriaTree * criteriaTree = [db searchStringForSmartFolder:folderId];
 
-		// Set the criteria condition
-		[criteriaConditionPopup selectItemWithTag:criteriaTree.condition];
-
-		for (Criteria * criteria in criteriaTree.criteriaEnumerator)
-		{
-			//TODO [self initForField:criteria.field inRow:searchCriteriaView];
-
-            [operatorPopup selectItemWithTitle:[Criteria localizedStringFromOperator:criteria.operator]];
-
-			Field * field = [nameToFieldMap valueForKey:criteria.field];
-			[fieldNamePopup selectItemWithTitle:field.displayName];
-			switch (field.type)
-			{
-				case VNAFieldTypeFlag: {
-					NSInteger tag;
-					if([criteria.value isEqualToString:@"Yes"]) {
-						tag=1;
-					} else {
-						tag=2;
-					}
-					BOOL found = [flagValueField selectItemWithTag:tag];
-					NSAssert (found, @"No menu item selected");
-					break;
-				}
-
-				case VNAFieldTypeFolder: {
-					Folder * folder = [db folderFromName:criteria.value];
-					if (folder != nil)
-						[folderValueField selectItemWithTitle:folder.name];
-					break;
-				}
-
-				case VNAFieldTypeString: {
-					valueField.stringValue = criteria.value;
-					break;
-				}
-
-				case VNAFieldTypeInteger: {
-					numberValueField.stringValue = criteria.value;
-					break;
-				}
-
-				case VNAFieldTypeDate: {
-					[dateValueField selectItemAtIndex:[dateValueField indexOfItemWithRepresentedObject:criteria.value]];
-					break;
-				}
-			}
-
-			[self addCriteria:index++];
-		}
+        [[self predicateEditor] setObjectValue:[criteriaTree predicate]];
 
 		// We defer sizing the window until all the criteria are
 		// added and displayed, otherwise it looks crap.
 		[self displaySearchSheet:window];
-		[self resizeSearchWindow];
 	}
 }
 
@@ -160,10 +103,6 @@
  */
 -(void)initSearchSheet:(NSString *)folderName
 {
-	// Clean up from any last run.
-	if (totalCriteria > 0)
-		[self removeAllCriteria];
-
 	// Initialize UI
 	if (!searchWindow)
 	{
@@ -187,7 +126,7 @@
 -(void)fillFolderValueField {
     NSArray<NSExpression *> *folders = [self fillFolderValueField:VNAFolderTypeRoot atIndent:0];
 
-    NSPredicateEditorRowTemplate *folderTemplate = [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:@[[NSExpression expressionForConstantValue:@"folder"]] rightExpressions:folders modifier:NSDirectPredicateModifier operators:@[@(NSEqualToPredicateOperatorType), @(NSNotEqualToPredicateOperatorType)] options:0];
+    NSPredicateEditorRowTemplate *folderTemplate = [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:@[[NSExpression expressionForConstantValue:@"Folder"]] rightExpressions:folders modifier:NSDirectPredicateModifier operators:@[@(NSEqualToPredicateOperatorType), @(NSNotEqualToPredicateOperatorType)] options:0];
 
     _predicateEditor.rowTemplates = [_predicateEditor.rowTemplates arrayByAddingObject:folderTemplate];
 }
@@ -236,22 +175,9 @@
  */
 -(void)addDefaultCriteria
 {
-    NSPredicate *defaultPredicate = [NSPredicate predicateWithFormat:@"'subject' CONTAINS %@", @""];
+    NSPredicate *defaultPredicate = [NSPredicate predicateWithFormat:@"'Subject' CONTAINS %@", @""];
     NSPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[defaultPredicate]];
     [[self predicateEditor] setObjectValue:compoundPredicate];
-}
-
-/* setOperatorsPopup
- * Fills the specified pop up button field with a list of valid operators.
- */
--(void)setOperatorsPopup:(NSPopUpButton *)popUpButton operators:(NSArray *)operators
-{
-	for ( NSNumber * number in operators )
-	{
-        CriteriaOperator operator = number.integerValue;
-		NSString * operatorString = [Criteria localizedStringFromOperator:operator];
-        [popUpButton addItemWithTitle:operatorString tag:operator];
-	}
 }
 
 /* doSave
@@ -260,15 +186,15 @@
  */
 -(IBAction)doSave:(id)sender
 {
-    if (smartFolderId == -1)
-    {
+    NSString *folderName = smartFolderName.stringValue;
+    CriteriaTree *criteriaTree = [[CriteriaTree alloc] initWithPredicate:[self.predicateEditor objectValue]];
+
+    if (smartFolderId == -1) {
         AppController * controller = APPCONTROLLER;
-        //smartFolderId = [[Database sharedManager] addSmartFolder:folderName underParent:parentId withQuery:criteriaTree];
-        //[controller selectFolder:smartFolderId];
-    }
-    else
-    {
-        //[[Database sharedManager] updateSearchFolder:smartFolderId withFolder:folderName withQuery:criteriaTree];
+        smartFolderId = [[Database sharedManager] addSmartFolder:folderName underParent:parentId withQuery:criteriaTree];
+        [controller selectFolder:smartFolderId];
+    } else {
+        [[Database sharedManager] updateSearchFolder:smartFolderId withFolder:folderName withQuery:criteriaTree];
     }
 
     [searchWindow.sheetParent endSheet:searchWindow];
@@ -293,113 +219,6 @@
 {
 	NSString * folderName = smartFolderName.stringValue;
 	saveButton.enabled = !folderName.vna_isBlank;
-}
-
-/* removeAllCriteria
- * Remove all existing criteria (i.e. reset the views back to defaults).
- */
--(void)removeAllCriteria
-{
-	NSInteger c;
-
-	NSArray * subviews = searchCriteriaSuperview.subviews;
-	for (c = subviews.count - 1; c >= 0; --c)
-	{
-		NSView * row = subviews[c];
-		[row removeFromSuperview];
-	}
-	[arrayOfViews removeAllObjects];
-	totalCriteria = 0;
-	// reset the dialog sheet size
-	[searchWindow setFrame:searchWindowFrame display:NO];
-}
-
-/* removeCriteria
- * Remove the criteria at the specified index.
- */
--(void)removeCriteria:(NSInteger)index
-{
-	NSInteger rowHeight = searchCriteriaView.frame.size.height;
-	NSInteger c;
-
-	// Do nothing if there's just one criteria
-	if (totalCriteria <= 1)
-		return;
-	
-	// Remove the view from the parent view
-	NSView * row = arrayOfViews[index];
-	[row removeFromSuperview];
-	[arrayOfViews removeObject:row];
-	--totalCriteria;
-	
-	// Shift up the remaining subviews
-	for (c = index ; c < arrayOfViews.count; ++c) {
-		NSView * row = arrayOfViews[c];
-		NSPoint origin = row.frame.origin;
-		[row setFrameOrigin:NSMakePoint(origin.x, origin.y + rowHeight)];
-	}
-}
-
-/* addCriteria
- * Add a new criteria clause. Before calling this function, initialise the
- * searchView with the settings to be added.
- */
--(void)addCriteria:(NSUInteger)index
-{
-	NSData * archRow;
-	NSInteger rowHeight = searchCriteriaView.frame.size.height;
-	NSUInteger  c;
-
-	if (index > arrayOfViews.count)
-		index = arrayOfViews.count;
-
-	// Now add the new subview
-    //
-    // FIXME: NSArchiver and NSUnarchiver are deprecated since macOS 10.13
-    //
-    // NSArchiver and NSUnarchiver are used here to copy searchCriteriaView.
-    // NSKeyedArchiver is not a replacement for this.
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-	archRow = [NSArchiver archivedDataWithRootObject:searchCriteriaView];
-	NSRect bounds = searchCriteriaSuperview.bounds;
-	NSView * row = (NSView *)[NSUnarchiver unarchiveObjectWithData:archRow];
-#pragma clang diagnostic pop
-	if (onScreen) {
-		[row setFrameOrigin:NSMakePoint(bounds.origin.x, bounds.origin.y + (NSInteger)(totalCriteria - 1 - index) * rowHeight)];
-	} else {  // computation is affected by resizeSearchWindow being called only once, after the search panel is displayed
-		[row setFrameOrigin:NSMakePoint(bounds.origin.x, bounds.origin.y  - index * rowHeight)];
-	}
-	[searchCriteriaSuperview addSubview:row];
-	[arrayOfViews insertObject:row atIndex:index];
-
-	// Shift down the existing subviews by rowHeight
-	for (c = index + 1; c < arrayOfViews.count; ++c) {
-		NSView * row = arrayOfViews[c];
-		NSPoint origin = row.frame.origin;
-		[row setFrameOrigin:NSMakePoint(origin.x, origin.y - rowHeight)];
-	}
-	// Bump up the criteria count
-	++totalCriteria;
-}
-
-/* resizeSearchWindow
- * Resize the search window for the number of criteria 
- */
--(void)resizeSearchWindow
-{
-	NSRect newFrame;
-
-	newFrame = searchWindowFrame;
-	if (totalCriteria > 0)
-	{
-		NSInteger rowHeight = searchCriteriaView.frame.size.height;
-		NSInteger additionalHeight = rowHeight * (totalCriteria - 1);
-		newFrame.origin.y -= additionalHeight;
-		newFrame.size.height += additionalHeight;
-		newFrame = [NSWindow frameRectForContentRect:newFrame styleMask:searchWindow.styleMask];
-	}
-	[searchWindow setFrame:newFrame display:YES animate:YES];
 }
 
 /* dealloc

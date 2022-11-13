@@ -2713,7 +2713,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
                 // where op is the appropriate operator.
                 //
                 Field * titleField = [database fieldByName:MA_Field_Subject];
-                NSString * value = [NSString stringWithFormat:operatorString, criteria.value];
+                NSString * value = [NSString stringWithFormat:operatorString, [NSString stringWithFormat:@"'%@'", criteria.value]];
                 [sqlString appendFormat:@"(%@%@ OR %@%@)", field.sqlField, value, titleField.sqlField, value];
                 break;
             }

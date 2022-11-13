@@ -185,17 +185,6 @@ static NSArray * iconArray = nil;
     return folderImage;
 }
 
-// This currently only used in SearchFolder and the only problematic image is
-// the Group folder type.
-- (NSImage *)archivableImage
-{
-    if (self.type == VNAFolderTypeGroup) {
-        return [NSImage imageNamed:@"rssFolder"];
-    } else {
-        return self.image;
-    }
-}
-
 /*!Check if an RSS or OpenReader folder
  * has an image stored in cache.
  * @return YES if the folder has an image stored in the cache.

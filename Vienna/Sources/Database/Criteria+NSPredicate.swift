@@ -44,11 +44,11 @@ extension CriteriaTree {
         }
     }
 
-    var predicate: NSCompoundPredicate {
+    var predicate: NSPredicate {
         return buildPredicate()
     }
 
-    private func buildPredicate() -> NSCompoundPredicate {
+    private func buildPredicate() -> NSPredicate {
 
         let type: NSCompoundPredicate.LogicalType
         switch condition {
@@ -81,22 +81,52 @@ extension Criteria {
         self.value = comparison.rightExpression.constantValue as? String ?? comparison.rightExpression.keyPath
 
         let criteriaOperator: CriteriaOperator
-        switch comparison.predicateOperatorType {
-        case .equalTo:
+        switch field {
+        case MA_Field_Folder:
+            switch comparison.predicateOperatorType {
+            case .notEqualTo:
+                criteriaOperator = .MA_CritOper_IsNot
+            default:
+                criteriaOperator = .MA_CritOper_Is
+            }
+        case MA_Field_Subject, MA_Field_Author, MA_Field_Text:
+            switch comparison.predicateOperatorType {
+            case .contains:
+                criteriaOperator = .MA_CritOper_Contains
+            case .notEqualTo:
+                criteriaOperator = .MA_CritOper_IsNot
+            default:
+                criteriaOperator = .MA_CritOper_Is
+            }
+        case MA_Field_Date:
+            switch comparison.predicateOperatorType {
+            case .lessThan:
+                criteriaOperator = .MA_CritOper_IsBefore
+            case .lessThanOrEqualTo:
+                criteriaOperator = .MA_CritOper_IsOnOrBefore
+            case .greaterThan:
+                criteriaOperator = .MA_CritOper_IsAfter
+            case .greaterThanOrEqualTo:
+                criteriaOperator = .MA_CritOper_IsOnOrAfter
+            default:
+                criteriaOperator = .MA_CritOper_Is
+            }
+        case MA_Field_Read, MA_Field_Flagged, MA_Field_HasEnclosure, MA_Field_Deleted:
             criteriaOperator = .MA_CritOper_Is
         default:
-            criteriaOperator = .MA_CritOper_IsNot
+            NSLog("Unknown field \(field), will default to \"=\" operator!")
+            criteriaOperator = .MA_CritOper_Is
         }
         //TODO implement all available / valid types
 
         self.operator = criteriaOperator
     }
 
-    var predicate: NSComparisonPredicate {
+    var predicate: NSPredicate {
         return buildPredicate()
     }
 
-    private func buildPredicate() -> NSComparisonPredicate {
+    private func buildPredicate() -> NSPredicate {
 
         let left = NSExpression(forConstantValue: self.field)
         let right = NSExpression(forConstantValue: self.value)
@@ -105,11 +135,41 @@ extension Criteria {
         switch self.operator {
         case .MA_CritOper_Is:
             type = .equalTo
-        default:
+        case .MA_CritOper_IsNot:
             type = .notEqualTo
+        case .MA_CritOper_IsLessThan:
+            type = .lessThan
+        case .MA_CritOper_IsGreaterThan:
+            type = .greaterThan
+        case .MA_CritOper_IsLessThanOrEqual:
+            type = .lessThanOrEqualTo
+        case .MA_CritOper_IsGreaterThanOrEqual:
+            type = .greaterThanOrEqualTo
+        case .MA_CritOper_Contains:
+            type = .contains
+        case .MA_CritOper_NotContains:
+            type = .contains // special case: negated later
+        case .MA_CritOper_IsBefore:
+            type = .lessThan
+        case .MA_CritOper_IsAfter:
+            type = .greaterThan
+        case .MA_CritOper_IsOnOrBefore:
+            type = .lessThanOrEqualTo
+        case .MA_CritOper_IsOnOrAfter:
+            type = .greaterThanOrEqualTo
+        case .MA_CritOper_Under:
+            type = .lessThan
+        case .MA_CritOper_NotUnder:
+            type = .greaterThanOrEqualTo
+        default:
+            type = .equalTo
         }
-        //TODO implement all available / valid types
 
-        return NSComparisonPredicate(leftExpression: left, rightExpression: right, modifier: .direct, type: type)
+        let comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: right, modifier: .direct, type: type)
+        if self.operator != .MA_CritOper_NotContains {
+            return comparisonPredicate
+        } else {
+            return NSCompoundPredicate(type: .not, subpredicates: [comparisonPredicate])
+        }
     }
 }

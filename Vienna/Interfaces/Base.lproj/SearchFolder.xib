@@ -22,7 +22,7 @@
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" tabbingMode="disallowed" id="6" userLabel="Search Folder" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" resizable="YES"/>
             <rect key="contentRect" x="46" y="594" width="658" height="489"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1025"/>
             <value key="minSize" type="size" width="647" height="178"/>
             <view key="contentView" wantsLayer="YES" id="5">
                 <rect key="frame" x="0.0" y="0.0" width="658" height="489"/>
@@ -79,32 +79,32 @@
                                         <predicateEditorRowTemplate rowType="simple" id="oi2-sW-APA">
                                             <array key="leftExpressionObject">
                                                 <expression type="constant">
-                                                    <string key="constantValue">subject</string>
+                                                    <string key="constantValue">Subject</string>
                                                 </expression>
                                                 <expression type="constant">
-                                                    <string key="constantValue">text</string>
+                                                    <string key="constantValue">Text</string>
                                                 </expression>
                                                 <expression type="constant">
-                                                    <string key="constantValue">author</string>
+                                                    <string key="constantValue">Author</string>
                                                 </expression>
                                             </array>
                                             <integer key="rightExpressionObject" value="700"/>
                                             <popUpMenus>
                                                 <menu id="wwc-Nt-Uko">
                                                     <items>
-                                                        <menuItem title="subject" state="on" id="mh1-7i-hNH">
+                                                        <menuItem title="Subject" state="on" id="mh1-7i-hNH">
                                                             <expression key="representedObject" type="constant">
-                                                                <string key="constantValue">subject</string>
+                                                                <string key="constantValue">Subject</string>
                                                             </expression>
                                                         </menuItem>
-                                                        <menuItem title="text" id="Clc-8S-OGO">
+                                                        <menuItem title="Text" id="Clc-8S-OGO">
                                                             <expression key="representedObject" type="constant">
-                                                                <string key="constantValue">text</string>
+                                                                <string key="constantValue">Text</string>
                                                             </expression>
                                                         </menuItem>
-                                                        <menuItem title="author" id="qWf-Iy-fyw">
+                                                        <menuItem title="Author" id="qWf-Iy-fyw">
                                                             <expression key="representedObject" type="constant">
-                                                                <string key="constantValue">author</string>
+                                                                <string key="constantValue">Author</string>
                                                             </expression>
                                                         </menuItem>
                                                     </items>
@@ -113,12 +113,6 @@
                                                     <items>
                                                         <menuItem title="contains" state="on" id="Msm-QS-oTg">
                                                             <integer key="representedObject" value="99"/>
-                                                        </menuItem>
-                                                        <menuItem title="begins with" id="adQ-v4-FHh">
-                                                            <integer key="representedObject" value="8"/>
-                                                        </menuItem>
-                                                        <menuItem title="ends with" id="KsD-v3-sO1">
-                                                            <integer key="representedObject" value="9"/>
                                                         </menuItem>
                                                         <menuItem title="is" id="y4h-OL-Am5">
                                                             <integer key="representedObject" value="4"/>
@@ -133,39 +127,55 @@
                                         <predicateEditorRowTemplate rowType="simple" id="ywR-Au-79H">
                                             <array key="leftExpressionObject">
                                                 <expression type="keyPath">
-                                                    <string key="keyPath">read</string>
+                                                    <string key="keyPath">Marked</string>
                                                 </expression>
                                                 <expression type="constant">
-                                                    <string key="constantValue">marked</string>
+                                                    <string key="constantValue">Deleted</string>
                                                 </expression>
                                                 <expression type="constant">
-                                                    <string key="constantValue">deleted</string>
+                                                    <string key="constantValue">HasEnclosure</string>
+                                                </expression>
+                                                <expression type="constant">
+                                                    <string key="constantValue">Flagged</string>
+                                                </expression>
+                                                <expression type="constant">
+                                                    <string key="constantValue">Read</string>
                                                 </expression>
                                             </array>
                                             <array key="rightExpressionObject">
                                                 <expression type="constant">
-                                                    <string key="constantValue">yes</string>
+                                                    <string key="constantValue">Yes</string>
                                                 </expression>
                                                 <expression type="constant">
-                                                    <string key="constantValue">no</string>
+                                                    <string key="constantValue">No</string>
                                                 </expression>
                                             </array>
                                             <popUpMenus>
                                                 <menu id="8tt-61-w2l">
                                                     <items>
-                                                        <menuItem title="read" state="on" id="L6f-93-jlW">
+                                                        <menuItem title="Marked" state="on" id="L6f-93-jlW">
                                                             <expression key="representedObject" type="keyPath">
-                                                                <string key="keyPath">read</string>
+                                                                <string key="keyPath">Marked</string>
                                                             </expression>
                                                         </menuItem>
-                                                        <menuItem title="marked" id="Dje-sO-bHq">
+                                                        <menuItem title="Deleted" id="Dje-sO-bHq">
                                                             <expression key="representedObject" type="constant">
-                                                                <string key="constantValue">marked</string>
+                                                                <string key="constantValue">Deleted</string>
                                                             </expression>
                                                         </menuItem>
-                                                        <menuItem title="deleted" id="FpK-0L-zGv">
+                                                        <menuItem title="HasEnclosure" id="FpK-0L-zGv">
                                                             <expression key="representedObject" type="constant">
-                                                                <string key="constantValue">deleted</string>
+                                                                <string key="constantValue">HasEnclosure</string>
+                                                            </expression>
+                                                        </menuItem>
+                                                        <menuItem title="Flagged" id="FUp-Hc-WHe">
+                                                            <expression key="representedObject" type="constant">
+                                                                <string key="constantValue">Flagged</string>
+                                                            </expression>
+                                                        </menuItem>
+                                                        <menuItem title="Read" id="JJO-eA-r8N">
+                                                            <expression key="representedObject" type="constant">
+                                                                <string key="constantValue">Read</string>
                                                             </expression>
                                                         </menuItem>
                                                     </items>
@@ -179,56 +189,14 @@
                                                 </menu>
                                                 <menu id="vmd-jB-yAh">
                                                     <items>
-                                                        <menuItem title="yes" state="on" id="2IK-2s-72J">
+                                                        <menuItem title="Yes" state="on" id="2IK-2s-72J">
                                                             <expression key="representedObject" type="constant">
-                                                                <string key="constantValue">yes</string>
+                                                                <string key="constantValue">Yes</string>
                                                             </expression>
                                                         </menuItem>
-                                                        <menuItem title="no" id="CSy-jx-WmX">
+                                                        <menuItem title="No" id="CSy-jx-WmX">
                                                             <expression key="representedObject" type="constant">
-                                                                <string key="constantValue">no</string>
-                                                            </expression>
-                                                        </menuItem>
-                                                    </items>
-                                                </menu>
-                                            </popUpMenus>
-                                        </predicateEditorRowTemplate>
-                                        <predicateEditorRowTemplate rowType="simple" id="B0J-iE-zbx">
-                                            <array key="leftExpressionObject">
-                                                <expression type="keyPath">
-                                                    <string key="keyPath">attachment</string>
-                                                </expression>
-                                            </array>
-                                            <array key="rightExpressionObject">
-                                                <expression type="constant">
-                                                    <string key="constantValue">there</string>
-                                                </expression>
-                                            </array>
-                                            <popUpMenus>
-                                                <menu id="mfm-x7-igR">
-                                                    <items>
-                                                        <menuItem title="attachment" state="on" id="6Va-Bl-dEH">
-                                                            <expression key="representedObject" type="keyPath">
-                                                                <string key="keyPath">attachment</string>
-                                                            </expression>
-                                                        </menuItem>
-                                                    </items>
-                                                </menu>
-                                                <menu id="mqS-bP-aBQ">
-                                                    <items>
-                                                        <menuItem title="is" state="on" id="de1-v6-KwF">
-                                                            <integer key="representedObject" value="4"/>
-                                                        </menuItem>
-                                                        <menuItem title="is not" id="eJR-bU-Grk">
-                                                            <integer key="representedObject" value="5"/>
-                                                        </menuItem>
-                                                    </items>
-                                                </menu>
-                                                <menu id="gHn-aB-fbk">
-                                                    <items>
-                                                        <menuItem title="there" state="on" id="nh7-9l-lKG">
-                                                            <expression key="representedObject" type="constant">
-                                                                <string key="constantValue">there</string>
+                                                                <string key="constantValue">No</string>
                                                             </expression>
                                                         </menuItem>
                                                     </items>
@@ -237,8 +205,8 @@
                                         </predicateEditorRowTemplate>
                                         <predicateEditorRowTemplate rowType="simple" id="npF-oN-pT0">
                                             <array key="leftExpressionObject">
-                                                <expression type="keyPath">
-                                                    <string key="keyPath">date</string>
+                                                <expression type="constant">
+                                                    <string key="constantValue">Date</string>
                                                 </expression>
                                             </array>
                                             <array key="rightExpressionObject">
@@ -253,11 +221,11 @@
                                                 </expression>
                                             </array>
                                             <popUpMenus>
-                                                <menu id="87z-mI-y4A">
+                                                <menu id="Hlp-tU-UKG">
                                                     <items>
-                                                        <menuItem title="date" state="on" id="2DQ-P1-y0U">
-                                                            <expression key="representedObject" type="keyPath">
-                                                                <string key="keyPath">date</string>
+                                                        <menuItem title="Date" state="on" id="FBj-xc-oTC">
+                                                            <expression key="representedObject" type="constant">
+                                                                <string key="constantValue">Date</string>
                                                             </expression>
                                                         </menuItem>
                                                     </items>
