@@ -177,6 +177,7 @@
 {
     NSPredicate *defaultPredicate = [NSPredicate predicateWithFormat:@"'Subject' CONTAINS %@", @""];
     NSPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[defaultPredicate]];
+
     [[self predicateEditor] setObjectValue:compoundPredicate];
 }
 

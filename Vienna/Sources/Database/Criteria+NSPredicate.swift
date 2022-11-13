@@ -27,19 +27,45 @@ extension CriteriaTree {
         guard let compound = predicate as? NSCompoundPredicate else {
             return nil
         }
-        for subPredicate in compound.subpredicates {
+
+        let subPredicates: [NSPredicate]
+        if compound.compoundPredicateType == .not && compound.subpredicates.count == 1,
+           let notOrCompound = compound.subpredicates[0] as? NSCompoundPredicate,
+           let notOrSubpredicates = notOrCompound.subpredicates as? [NSPredicate] {
+            // Special case for "none" predicate, which is modeled by NSPredicateEditor as "not(or(...))"
+            subPredicates = notOrSubpredicates
+        } else if let directSubPredicates = compound.subpredicates as? [NSPredicate] {
+            subPredicates = directSubPredicates
+        } else {
+            NSLog("No subpredicates in compound predicate \(compound)")
+            return nil
+        }
+
+        for subPredicate in subPredicates {
             let criteriaElement: (NSObjectProtocol & CriteriaElement)?
+
             if let subCompound = subPredicate as? NSCompoundPredicate {
-                criteriaElement = CriteriaTree(predicate: subCompound)
+                // Look ahead to detect "not contains" predicate
+                if subCompound.subpredicates.count == 1,
+                   let subOrPredicate = subCompound.subpredicates[0] as? NSCompoundPredicate,
+                   subOrPredicate.compoundPredicateType == .or,
+                   subOrPredicate.subpredicates.count == 1,
+                   let subContainsPredicate = subOrPredicate.subpredicates[0] as? NSComparisonPredicate,
+                   subContainsPredicate.predicateOperatorType == .contains {
+                    criteriaElement = Criteria(predicate: subContainsPredicate, notContains: true)
+                } else {
+                    criteriaElement = CriteriaTree(predicate: subCompound)
+                }
             } else if let basicPredicate = subPredicate as? NSComparisonPredicate {
                 criteriaElement = Criteria(predicate: basicPredicate)
             } else {
                 criteriaElement = nil
             }
+
             if let criteriaElement = criteriaElement {
                 self.criteriaTree.append(criteriaElement)
             } else {
-                NSLog("Subpredicate \(subPredicate) of compound predicate \(self) is corrupted")
+                NSLog("Subpredicate \(subPredicate) of compound predicate \(compound) is corrupted, cannot be converted to CriteriaElement")
             }
         }
     }
@@ -64,7 +90,12 @@ extension CriteriaTree {
 
         let subPredicates = self.criteriaTree.map { $0.predicate }
 
-        return NSCompoundPredicate(type: type, subpredicates: subPredicates)
+        if condition != .MA_CritCondition_None {
+            return NSCompoundPredicate(type: type, subpredicates: subPredicates)
+        } else {
+            // NSPredicateEditor only recognizes "none" predicate if modeled as "not(or(...))"
+            return NSCompoundPredicate(type: type, subpredicates: [NSCompoundPredicate(orPredicateWithSubpredicates: subPredicates)])
+        }
     }
 }
 
@@ -72,6 +103,10 @@ extension CriteriaTree {
 extension Criteria {
 
     public convenience init?(predicate: NSPredicate) {
+        self.init(predicate: predicate, notContains: false)
+    }
+
+    convenience init?(predicate: NSPredicate, notContains: Bool) {
         self.init()
         guard let comparison = predicate as? NSComparisonPredicate else {
             return nil
@@ -92,7 +127,11 @@ extension Criteria {
         case MA_Field_Subject, MA_Field_Author, MA_Field_Text:
             switch comparison.predicateOperatorType {
             case .contains:
-                criteriaOperator = .MA_CritOper_Contains
+                if notContains {
+                    criteriaOperator = .MA_CritOper_NotContains
+                } else {
+                    criteriaOperator = .MA_CritOper_Contains
+                }
             case .notEqualTo:
                 criteriaOperator = .MA_CritOper_IsNot
             default:
@@ -169,7 +208,7 @@ extension Criteria {
         if self.operator != .MA_CritOper_NotContains {
             return comparisonPredicate
         } else {
-            return NSCompoundPredicate(type: .not, subpredicates: [comparisonPredicate])
+            return NSCompoundPredicate(notPredicateWithSubpredicate: NSCompoundPredicate(orPredicateWithSubpredicates: [comparisonPredicate]))
         }
     }
 }

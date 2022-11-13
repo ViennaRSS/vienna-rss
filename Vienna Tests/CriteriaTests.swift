@@ -62,7 +62,7 @@ class CriteriaTests: XCTestCase {
 
         let testCriteriaTreeFromPredicate = CriteriaTree(predicate: predicate)
 
-        XCTAssertEqual(treeStringUnformatted, testCriteriaTreeFromPredicate.string)
+        XCTAssertEqual(treeStringUnformatted, testCriteriaTreeFromPredicate!.string)
     }
 
     func testCriteriaTreeInitWithString2() {
@@ -188,6 +188,53 @@ class CriteriaTests: XCTestCase {
         }
 
         XCTAssertEqual(testCriteriaTree.toSQL(for: database), "\(commentsField.sqlField!) LIKE '%asdf%' AND ( NOT \(flaggedField.sqlField!)=1 AND NOT \(flaggedField.sqlField!)<>0 )")
+    }
+
+    func testAllCriteriaConditions() {
+        let criteriaTreeString = """
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <criteriagroup condition="all">
+            <criteria field="Read"><operator>1</operator><value>Yes</value></criteria>
+            <criteria field="Read"><operator>1</operator><value>No</value></criteria>
+            <criteria field="Flagged"><operator>1</operator><value>Yes</value></criteria>
+            <criteria field="Flagged"><operator>1</operator><value>No</value></criteria>
+            <criteria field="HasEnclosure"><operator>1</operator><value>Yes</value></criteria>
+            <criteria field="HasEnclosure"><operator>1</operator><value>No</value></criteria>
+            <criteria field="Deleted"><operator>1</operator><value>Yes</value></criteria>
+            <criteria field="Deleted"><operator>1</operator><value>No</value></criteria>
+            <criteria field="Subject"><operator>1</operator><value>TestBetreff</value></criteria>
+            <criteria field="Subject"><operator>2</operator><value>NichtTestBetreff</value></criteria>
+            <criteria field="Subject"><operator>7</operator><value>BeinhaltetTestBetreff</value></criteria>
+            <criteria field="Subject"><operator>8</operator><value>BeinhaltetNichtTestBetreff</value></criteria>
+            <criteria field="Folder"><operator>1</operator><value>MacRumors: Mac News and Rumors - All Stories</value></criteria>
+            <criteria field="Folder"><operator>2</operator><value>Mac &amp; i</value></criteria>
+            <criteria field="Date"><operator>1</operator><value>yesterday</value></criteria>
+            <criteria field="Date"><operator>10</operator><value>last week</value></criteria>
+            <criteria field="Date"><operator>9</operator><value>today</value></criteria>
+            <criteria field="Date"><operator>12</operator><value>yesterday</value></criteria>
+            <criteria field="Date"><operator>11</operator><value>yesterday</value></criteria>
+            <criteria field="Author"><operator>1</operator><value>TestAutor</value></criteria>
+            <criteria field="Author"><operator>2</operator><value>NichtTestAutor</value></criteria>
+            <criteria field="Author"><operator>7</operator><value>BeinhaltetTestAutor</value></criteria>
+            <criteria field="Author"><operator>8</operator><value>BeinhaltetNichtTestAutort</value></criteria>
+            <criteria field="Text"><operator>1</operator><value>TestText</value></criteria>
+            <criteria field="Text"><operator>2</operator><value>NichtTestText</value></criteria>
+            <criteria field="Text"><operator>7</operator><value>BeinhaltetTestText</value></criteria>
+            <criteria field="Text"><operator>8</operator><value>BeinhaltetNichtTestText</value></criteria>
+        </criteriagroup>
+        """
+
+        guard let testCriteriaTree = CriteriaTree(string: criteriaTreeString) else {
+            XCTAssert(false)
+            fatalError("cannot happen")
+        }
+
+        let treeStringUnformatted: String = criteriaTreeString.replacingOccurrences(of: "  ", with: "").replacingOccurrences(of: "\n", with: "")
+        XCTAssertEqual(treeStringUnformatted, testCriteriaTree.string, "XML reproducible")
+
+        XCTAssertNotNil(testCriteriaTree.toSQL(for: getDatabase()))
+
+        XCTAssertEqual(CriteriaTree(predicate: testCriteriaTree.predicate)?.string, treeStringUnformatted, "Still same xml after converting to predicate and back")
     }
 
     private func getDatabase() -> Database {

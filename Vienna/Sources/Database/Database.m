@@ -2605,20 +2605,39 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     NSString * operatorString = nil;
     NSString * valueString = nil;
 
-    switch (criteria.operator)
-    {
-        case MA_CritOper_Is:                    operatorString = @"=%@"; break;
-        case MA_CritOper_IsNot:                    operatorString = @"<>%@"; break;
-        case MA_CritOper_IsLessThan:            operatorString = @"<%@"; break;
-        case MA_CritOper_IsGreaterThan:            operatorString = @">%@"; break;
-        case MA_CritOper_IsLessThanOrEqual:        operatorString = @"<=%@"; break;
-        case MA_CritOper_IsGreaterThanOrEqual:  operatorString = @">=%@"; break;
-        case MA_CritOper_Contains:                operatorString = @" LIKE '%%%@%%'"; break;
-        case MA_CritOper_NotContains:            operatorString = @" NOT LIKE '%%%@%%'"; break;
-        case MA_CritOper_IsBefore:                operatorString = @"<%@"; break;
-        case MA_CritOper_IsAfter:                operatorString = @">%@"; break;
-        case MA_CritOper_IsOnOrBefore:            operatorString = @"<=%@"; break;
-        case MA_CritOper_IsOnOrAfter:            operatorString = @">=%@"; break;
+    switch (criteria.operator) {
+        case MA_CritOper_Is:
+            if (field.type == VNAFieldTypeString) {
+                operatorString = @"='%@'"; break;
+            } else {
+                operatorString = @"=%@"; break;
+            }
+        case MA_CritOper_IsNot:
+            if (field.type == VNAFieldTypeString) {
+                operatorString = @"<>'%@'"; break;
+            } else {
+                operatorString = @"<>'%@'"; break;
+            }
+        case MA_CritOper_IsLessThan:
+            operatorString = @"<%@"; break;
+        case MA_CritOper_IsGreaterThan:
+            operatorString = @">%@"; break;
+        case MA_CritOper_IsLessThanOrEqual:
+            operatorString = @"<=%@"; break;
+        case MA_CritOper_IsGreaterThanOrEqual:
+            operatorString = @">=%@"; break;
+        case MA_CritOper_Contains:
+            operatorString = @" LIKE '%%%@%%'"; break;
+        case MA_CritOper_NotContains:
+            operatorString = @" NOT LIKE '%%%@%%'"; break;
+        case MA_CritOper_IsBefore:
+            operatorString = @"<%@"; break;
+        case MA_CritOper_IsAfter:
+            operatorString = @">%@"; break;
+        case MA_CritOper_IsOnOrBefore:
+            operatorString = @"<=%@"; break;
+        case MA_CritOper_IsOnOrAfter:
+            operatorString = @">=%@"; break;
 
         case MA_CritOper_Under:
         case MA_CritOper_NotUnder:
@@ -2638,23 +2657,25 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         case VNAFieldTypeFlag:
             valueString = [criteria.value isEqualToString:@"Yes"] ? @"1" : @"0";
             break;
-
         case VNAFieldTypeFolder: {
             Folder * folder = [database folderFromName:criteria.value];
             NSInteger scopeFlags = 0;
 
-            switch (criteria.operator)
-            {
-                case MA_CritOper_Under:        scopeFlags = VNAQueryScopeSubFolders|VNAQueryScopeInclusive; break;
-                case MA_CritOper_NotUnder:    scopeFlags = VNAQueryScopeSubFolders; break;
-                case MA_CritOper_Is:        scopeFlags = VNAQueryScopeInclusive; break;
-                case MA_CritOper_IsNot:        scopeFlags = 0; break;
-                default:                    NSAssert(false, @"Invalid operator for folder field type");
+            switch (criteria.operator) {
+                case MA_CritOper_Under:
+                    scopeFlags = VNAQueryScopeSubFolders|VNAQueryScopeInclusive; break;
+                case MA_CritOper_NotUnder:
+                    scopeFlags = VNAQueryScopeSubFolders; break;
+                case MA_CritOper_Is:
+                    scopeFlags = VNAQueryScopeInclusive; break;
+                case MA_CritOper_IsNot:
+                    scopeFlags = 0; break;
+                default:
+                    NSAssert(false, @"Invalid operator for folder field type");
             }
             [sqlString appendString:[database sqlScopeForFolder:folder flags:scopeFlags]];
             break;
-            }
-
+        }
         case VNAFieldTypeDate: {
             NSCalendar *calendar = NSCalendar.currentCalendar;
             NSDate *startDate = [calendar startOfDayForDate:[NSDate date]];
@@ -2662,16 +2683,14 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             NSCalendarUnit calendarUnit = NSCalendarUnitDay;
 
             // "yesterday" is a short hand way of specifying the previous day.
-            if ([criteriaValue isEqualToString:@"yesterday"])
-            {
+            if ([criteriaValue isEqualToString:@"yesterday"]) {
                 startDate = [calendar dateByAddingUnit:NSCalendarUnitDay
                                                  value:-1
                                                 toDate:startDate
                                                options:0];
             }
             // "last week" is a short hand way of specifying a range from 7 days ago to today.
-            else if ([criteriaValue isEqualToString:@"last week"])
-            {
+            else if ([criteriaValue isEqualToString:@"last week"]) {
                 startDate = [calendar dateByAddingUnit:NSCalendarUnitWeekOfYear
                                                  value:-1
                                                 toDate:startDate
@@ -2679,8 +2698,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
                 calendarUnit = NSCalendarUnitWeekOfYear;
             }
 
-            if (criteria.operator == MA_CritOper_Is)
-            {
+            if (criteria.operator == MA_CritOper_Is) {
                 NSDate *endDate = [calendar dateByAddingUnit:calendarUnit
                                                        value:1
                                                       toDate:startDate
@@ -2688,23 +2706,19 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
                 NSString *dateIs = [NSString stringWithFormat:@"( %@>=%f AND %@<%f )", field.sqlField, startDate.timeIntervalSince1970, field.sqlField, endDate.timeIntervalSince1970];
                 [sqlString appendString:dateIs];
             }
-            else
-            {
+            else {
                 if ((criteria.operator == MA_CritOper_IsAfter) || (criteria.operator == MA_CritOper_IsOnOrBefore)) {
                     startDate = [calendar dateByAddingUnit:NSCalendarUnitDay
                                                      value:1
                                                     toDate:startDate
                                                    options:0];
                 }
-
                 valueString = [NSString stringWithFormat:@"%f", startDate.timeIntervalSince1970];
             }
             break;
-            }
-
+        }
         case VNAFieldTypeString:
-            if (field.tag == ArticleFieldIDText)
-            {
+            if (field.tag == ArticleFieldIDText) {
                 // Special case for searching the text field. We always include the title field in the
                 // search so the resulting SQL statement becomes:
                 //
@@ -2713,18 +2727,17 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
                 // where op is the appropriate operator.
                 //
                 Field * titleField = [database fieldByName:MA_Field_Subject];
-                NSString * value = [NSString stringWithFormat:operatorString, [NSString stringWithFormat:@"'%@'", criteria.value]];
-                [sqlString appendFormat:@"(%@%@ OR %@%@)", field.sqlField, value, titleField.sqlField, value];
+                NSString * value = [NSString stringWithFormat:operatorString, criteria.value];
+                NSString *op = criteria.operator == MA_CritOper_IsNot || criteria.operator == MA_CritOper_NotContains ? @"AND" : @"OR";
+                [sqlString appendFormat:@"(%@%@ %@ %@%@)", field.sqlField, value, op, titleField.sqlField, value];
                 break;
             }
-
         case VNAFieldTypeInteger:
             valueString = [NSString stringWithFormat:@"%@", criteria.value];
             break;
     }
 
-    if (valueString != nil)
-    {
+    if (valueString != nil) {
         [sqlString appendString:field.sqlField];
         [sqlString appendFormat:operatorString, valueString];
     }
