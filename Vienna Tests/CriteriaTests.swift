@@ -42,7 +42,9 @@ class CriteriaTests: XCTestCase {
 
         // This tests initialising a CriteriaTree with a string.
         // Only called by the Database class when loading smart folders
-        let criteriaTreeString = "<?xml version=\"1.0\" encoding=\"utf-8\"?><criteriagroup condition=\"all\"><criteria field=\"\(flaggedField.name!)\"><operator>1</operator><value>Yes</value></criteria></criteriagroup>"
+        let criteriaTreeString = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><criteriagroup condition=\"all\"><criteria field=\"\(flaggedField.name!)\"><operator>1</operator><value>Yes</value></criteria></criteriagroup>"
+
+        let treeStringUnformatted: String = criteriaTreeString.replacingOccurrences(of: "  ", with: "").replacingOccurrences(of: "\n", with: "")
 
         guard let testCriteriaTree = CriteriaTree(string: criteriaTreeString) else {
             XCTAssert(false)
@@ -50,9 +52,17 @@ class CriteriaTests: XCTestCase {
         }
         XCTAssertTrue(testCriteriaTree.criteriaEnumerator.allObjects.first is Criteria, "Pass")
 
+        XCTAssertEqual(treeStringUnformatted, testCriteriaTree.string)
+
         let sqlString = testCriteriaTree.toSQL(for: database)
 
         XCTAssertEqual("\(flaggedField.sqlField!)=1", sqlString, "Sql correct")
+
+        let predicate = testCriteriaTree.predicate
+
+        let testCriteriaTreeFromPredicate = CriteriaTree(predicate: predicate)
+
+        XCTAssertEqual(treeStringUnformatted, testCriteriaTreeFromPredicate.string)
     }
 
     func testCriteriaTreeInitWithString2() {
@@ -121,7 +131,7 @@ class CriteriaTests: XCTestCase {
         }
 
         let treeStringUnformatted: String = criteriaTreeString.replacingOccurrences(of: "  ", with: "").replacingOccurrences(of: "\n", with: "")
-        XCTAssertEqual(treeStringUnformatted, testCriteriaTree.string!, "XML reproducible")
+        XCTAssertEqual(treeStringUnformatted, testCriteriaTree.string, "XML reproducible")
     }
 
     func testNestedCriteriaSQLConversion() {

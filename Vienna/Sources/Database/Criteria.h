@@ -46,37 +46,42 @@ typedef NS_ENUM(NSUInteger, CriteriaCondition) {
     MA_CritCondition_None,
 };
 
-@interface CriteriaElement : NSObject {
-
-}
+@protocol PredicateConvertible
+    @property(nonnull, readonly) NSPredicate *predicate;
+    -(instancetype _Nullable)initWithPredicate:(NSPredicate *_Nonnull)predicate;
 @end
 
-@interface Criteria : CriteriaElement {
+@protocol CriteriaElement <PredicateConvertible>
+
+@end
+
+@interface Criteria: NSObject <CriteriaElement> {
 	NSString * field;
 	NSString * value;
 	CriteriaOperator operator;
 }
 
 // Public functions
--(instancetype)initWithField:(NSString *)newField withOperator:(CriteriaOperator)newOperator withValue:(NSString *)newValue NS_DESIGNATED_INITIALIZER;
-+(NSString *)localizedStringFromOperator:(CriteriaOperator)operator;
-+(NSArray *)arrayOfOperators;
-@property (nonatomic, copy) NSString *field;
-@property (nonatomic, copy) NSString *value;
+-(instancetype _Nullable)initWithField:(NSString *_Nonnull)newField withOperator:(CriteriaOperator)newOperator withValue:(NSString *_Nonnull)newValue NS_DESIGNATED_INITIALIZER;
++(NSString *_Nonnull)localizedStringFromOperator:(CriteriaOperator)operator;
++(NSArray *_Nonnull)arrayOfOperators;
+@property (nonatomic, copy) NSString *_Nonnull field;
+@property (nonatomic, copy) NSString *_Nonnull value;
 @property (nonatomic) CriteriaOperator operator;
 @end
 
-@interface CriteriaTree : CriteriaElement {
+@interface CriteriaTree: NSObject <CriteriaElement> {
 	CriteriaCondition condition;
-	NSMutableArray<CriteriaElement *> * criteriaTree;
+	NSMutableArray<NSObject<CriteriaElement> *> * criteriaTree;
 }
 
 // Public functions
--(instancetype)initWithString:(NSString *)string;
--(instancetype)initWithXml:(NSXMLElement *)xml NS_DESIGNATED_INITIALIZER;
-@property (nonatomic, readonly) NSEnumerator<CriteriaElement *> *criteriaEnumerator;
--(void)addCriteria:(CriteriaElement *)newCriteria;
-@property (readonly, nonatomic) NSString *string;
+-(instancetype _Nullable)initWithString:(NSString *_Nonnull)string;
+-(instancetype _Nullable)initWithXml:(NSXMLElement *_Nullable)xml NS_DESIGNATED_INITIALIZER;
+@property (nonnull, nonatomic, readonly) NSEnumerator<NSObject<CriteriaElement> *> *criteriaEnumerator;
+-(void)addCriteria:(NSObject<CriteriaElement> *_Nonnull)newCriteria;
+@property (nonnull, readonly, nonatomic) NSString *string;
 @property (nonatomic) CriteriaCondition condition;
+@property (nonnull, nonatomic) NSArray<NSObject<CriteriaElement> *> *criteriaTree;
 
 @end

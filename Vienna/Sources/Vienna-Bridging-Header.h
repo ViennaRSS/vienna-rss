@@ -17,3 +17,4 @@
 #import "WKPreferences+Private.h"
 #import "WKWebView+Private.h"
 #import "WKWebViewConfiguration+Private.h"
+#import "Criteria.h"

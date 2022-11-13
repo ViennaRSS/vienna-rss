@@ -82,6 +82,7 @@
 		2FE328F125CF436C005B9C18 /* CriteriaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE328F025CF436C005B9C18 /* CriteriaTests.swift */; };
 		2FE44CAD25B7995400554E82 /* NSApplication+AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE44CAC25B7995400554E82 /* NSApplication+AppController.swift */; };
 		2FE44CB525B79EDE00554E82 /* WebKitContextMenuCustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE44CB425B79EDD00554E82 /* WebKitContextMenuCustomizer.swift */; };
+		2FEA5829291FD511008C42D3 /* Criteria+NSPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEA5828291FD511008C42D3 /* Criteria+NSPredicate.swift */; };
 		2FF61D2C24F2AE8B00A7E2B5 /* RSSSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF61D2B24F2AE8B00A7E2B5 /* RSSSubscriber.swift */; };
 		2FF61D2E24F2E71500A7E2B5 /* BrowserTab+RSSSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF61D2D24F2E71500A7E2B5 /* BrowserTab+RSSSource.swift */; };
 		2FF61D3024F2ED1500A7E2B5 /* BrowserTab+Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF61D2F24F2ED1500A7E2B5 /* BrowserTab+Interface.swift */; };
@@ -326,6 +327,7 @@
 		2FE328F025CF436C005B9C18 /* CriteriaTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CriteriaTests.swift; sourceTree = "<group>"; };
 		2FE44CAC25B7995400554E82 /* NSApplication+AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+AppController.swift"; sourceTree = "<group>"; };
 		2FE44CB425B79EDD00554E82 /* WebKitContextMenuCustomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKitContextMenuCustomizer.swift; sourceTree = "<group>"; };
+		2FEA5828291FD511008C42D3 /* Criteria+NSPredicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Criteria+NSPredicate.swift"; sourceTree = "<group>"; };
 		2FF61D2B24F2AE8B00A7E2B5 /* RSSSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSSubscriber.swift; sourceTree = "<group>"; };
 		2FF61D2D24F2E71500A7E2B5 /* BrowserTab+RSSSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BrowserTab+RSSSource.swift"; sourceTree = "<group>"; };
 		2FF61D2F24F2ED1500A7E2B5 /* BrowserTab+Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BrowserTab+Interface.swift"; sourceTree = "<group>"; };
@@ -1558,6 +1560,7 @@
 				435026E5165DD8BE0018EDB7 /* ArticleRef.m */,
 				AA8C72F30641DE1F00649BA2 /* Criteria.h */,
 				AA8C72F40641DE1F00649BA2 /* Criteria.m */,
+				2FEA5828291FD511008C42D3 /* Criteria+NSPredicate.swift */,
 				AA26F4C90604927300FE7994 /* Database.h */,
 				AA26F4D50604927300FE7994 /* Database.m */,
 				03A131B11AA54EAC0037471F /* Database+Migration.h */,
@@ -2062,6 +2065,7 @@
 				435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */,
 				F6D0089C1EF95C9D008F2D3B /* InfoPanelManager.m in Sources */,
 				4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */,
+				2FEA5829291FD511008C42D3 /* Criteria+NSPredicate.swift in Sources */,
 				2F82DCB725CEFC2800F00EE8 /* URL+Blank.swift in Sources */,
 				F633157626ED73CB008A3673 /* URLFormatter.swift in Sources */,
 				43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */,

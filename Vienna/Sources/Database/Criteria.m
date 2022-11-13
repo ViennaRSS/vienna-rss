@@ -20,12 +20,13 @@
 
 #import "Criteria.h"
 #import "Database.h"
+#import "Vienna-Swift.h"
 
-@implementation CriteriaElement
-
-@end
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-property-synthesis"
+#pragma clang diagnostic ignored "-Wprotocol"
 @implementation Criteria
+#pragma clang diagnostic pop
 
 /* init
  * Initialise an empty Criteria.
@@ -154,8 +155,13 @@
 
 @end
 
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-property-synthesis"
+#pragma clang diagnostic ignored "-Wprotocol"
 @implementation CriteriaTree
+#pragma clang diagnostic pop
+
+@synthesize criteriaTree;
 
 static NSString *const CRITERIAGROUP_TAG = @"criteriagroup";
 static NSString *const CRITERIAGROUP_CONDITION_ATTRIBUTE = @"condition";
@@ -300,7 +306,7 @@ static NSString *const CRITERIA_OPERATOR_TAG = @"operator";
  * that the criteria will be stored in an NSArray or any other collection
  * object for which NSEnumerator is supported.
  */
--(NSEnumerator<CriteriaElement *> *)criteriaEnumerator
+-(NSEnumerator<NSObject<CriteriaElement> *> *)criteriaEnumerator
 {
 	return [criteriaTree objectEnumerator];
 }
@@ -308,7 +314,7 @@ static NSString *const CRITERIA_OPERATOR_TAG = @"operator";
 /* addCriteria
  * Adds the specified criteria to the criteria array.
  */
--(void)addCriteria:(CriteriaElement *)newCriteria
+-(void)addCriteria:(NSObject<CriteriaElement> *)newCriteria
 {
 	[criteriaTree addObject:newCriteria];
 }

@@ -2740,7 +2740,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     NSMutableString * sqlString = [NSMutableString string];
     NSInteger count = 0;
 
-    for (CriteriaElement * criteria in self.criteriaEnumerator)
+    for (NSObject<CriteriaElement> *criteria in self.criteriaEnumerator)
     {
         NSString *conditionString = @"";
         if (count++ > 0) {
