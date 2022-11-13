@@ -28,6 +28,17 @@ extension CriteriaTree {
             return nil
         }
 
+        switch compound.compoundPredicateType {
+        case .and:
+            self.condition = .MA_CritCondition_All
+        case .or:
+            self.condition = .MA_CritCondition_Any
+        case .not:
+            self.condition = .MA_CritCondition_None
+        default:
+            self.condition = .MA_CritCondition_Invalid
+        }
+
         let subPredicates: [NSPredicate]
         if compound.compoundPredicateType == .not && compound.subpredicates.count == 1,
            let notOrCompound = compound.subpredicates[0] as? NSCompoundPredicate,
@@ -46,7 +57,8 @@ extension CriteriaTree {
 
             if let subCompound = subPredicate as? NSCompoundPredicate {
                 // Look ahead to detect "not contains" predicate
-                if subCompound.subpredicates.count == 1,
+                if compound.compoundPredicateType == .not,
+                   subCompound.subpredicates.count == 1,
                    let subOrPredicate = subCompound.subpredicates[0] as? NSCompoundPredicate,
                    subOrPredicate.compoundPredicateType == .or,
                    subOrPredicate.subpredicates.count == 1,

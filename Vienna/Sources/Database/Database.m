@@ -2729,7 +2729,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
                 Field * titleField = [database fieldByName:MA_Field_Subject];
                 NSString * value = [NSString stringWithFormat:operatorString, criteria.value];
                 NSString *op = criteria.operator == MA_CritOper_IsNot || criteria.operator == MA_CritOper_NotContains ? @"AND" : @"OR";
-                [sqlString appendFormat:@"(%@%@ %@ %@%@)", field.sqlField, value, op, titleField.sqlField, value];
+                [sqlString appendFormat:@"(%1$@%2$@ %3$@ %4$@%2$@)", field.sqlField, value, op, titleField.sqlField];
                 break;
             }
         case VNAFieldTypeInteger:

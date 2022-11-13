@@ -237,6 +237,18 @@ class CriteriaTests: XCTestCase {
         XCTAssertEqual(CriteriaTree(predicate: testCriteriaTree.predicate)?.string, treeStringUnformatted, "Still same xml after converting to predicate and back")
     }
 
+    func testNegation() {
+        let testCriteriaString = """
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <criteriagroup condition="none">
+            <criteria field="Folder"><operator>2</operator><value>Apple Newsroom</value></criteria>
+            <criteria field="Text"><operator>7</operator><value>Apple</value></criteria>
+        </criteriagroup>
+        """
+
+        //TODO same test as above (none predicate at the beginning and "not contains Apple" are the relevant things to test here)
+    }
+
     private func getDatabase() -> Database {
         guard let database = Database.shared else {
             XCTAssertTrue(false)
