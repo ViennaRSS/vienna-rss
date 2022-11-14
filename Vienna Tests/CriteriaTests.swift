@@ -46,23 +46,13 @@ class CriteriaTests: XCTestCase {
 
         let treeStringUnformatted: String = criteriaTreeString.replacingOccurrences(of: "  ", with: "").replacingOccurrences(of: "\n", with: "")
 
-        guard let testCriteriaTree = CriteriaTree(string: criteriaTreeString) else {
-            XCTAssert(false)
-            fatalError("cannot happen")
-        }
-        XCTAssertTrue(testCriteriaTree.criteriaEnumerator.allObjects.first is Criteria, "Pass")
+        let testCriteriaTree = genericConversionChecks(criteriaTreeString)
 
-        XCTAssertEqual(treeStringUnformatted, testCriteriaTree.string)
+        XCTAssertTrue(testCriteriaTree.criteriaEnumerator.allObjects.first is Criteria, "Pass")
 
         let sqlString = testCriteriaTree.toSQL(for: database)
 
         XCTAssertEqual("\(flaggedField.sqlField!)=1", sqlString, "Sql correct")
-
-        let predicate = testCriteriaTree.predicate
-
-        let testCriteriaTreeFromPredicate = CriteriaTree(predicate: predicate)
-
-        XCTAssertEqual(treeStringUnformatted, testCriteriaTreeFromPredicate!.string)
     }
 
     func testCriteriaTreeInitWithString2() {
@@ -76,15 +66,13 @@ class CriteriaTests: XCTestCase {
         // multiple criteria.
         // Only called by the Database class when loading smart folders
         let criteriaTreeString = """
-                                <?xml version="1.0" encoding="utf-8"?><criteriagroup condition="all">
+                                <?xml version="1.0" encoding="UTF-8" standalone="yes"?><criteriagroup condition="all">
                                 <criteria field="\(flaggedField.name!)"><operator>1</operator><value>Yes</value></criteria>
                                 <criteria field="\(dateField.name!)"><operator>1</operator><value>today</value></criteria></criteriagroup>
                                 """
 
-        guard let testCriteriaTree = CriteriaTree(string: criteriaTreeString) else {
-            XCTAssert(false)
-            fatalError("cannot happen")
-        }
+        let testCriteriaTree = genericConversionChecks(criteriaTreeString)
+
         let allCriteria = testCriteriaTree.criteriaEnumerator.allObjects
         XCTAssertGreaterThan(allCriteria.count, 1, "Pass")
 
@@ -97,11 +85,7 @@ class CriteriaTests: XCTestCase {
         // This tests returning a criteria tree as an XML string
         let criteriaTreeString = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><criteriagroup condition=\"all\"><criteria field=\"Flagged\"><operator>1</operator><value>Yes</value></criteria></criteriagroup>"
 
-        guard let testCriteriaTree = CriteriaTree(string: criteriaTreeString) else {
-            XCTAssert(false)
-            fatalError("cannot happen")
-        }
-        XCTAssertEqual(testCriteriaTree.string, criteriaTreeString)
+        let testCriteriaTree = genericConversionChecks(criteriaTreeString)
     }
 
     func testNestedCriteriaXMLConversion() {
@@ -125,10 +109,7 @@ class CriteriaTests: XCTestCase {
                                 </criteriagroup>
                                 """
 
-        guard let testCriteriaTree = CriteriaTree(string: criteriaTreeString) else {
-            XCTAssert(false)
-            fatalError("cannot happen")
-        }
+        let testCriteriaTree = genericConversionChecks(criteriaTreeString)
 
         let treeStringUnformatted: String = criteriaTreeString.replacingOccurrences(of: "  ", with: "").replacingOccurrences(of: "\n", with: "")
         XCTAssertEqual(treeStringUnformatted, testCriteriaTree.string, "XML reproducible")
@@ -136,7 +117,7 @@ class CriteriaTests: XCTestCase {
 
     func testNestedCriteriaSQLConversion() {
         let database = getDatabase()
-        guard let flaggedField = database.field(byName: "Flagged"), let commentsField = database.field(byName: "Comments") else {
+        guard let flaggedField = database.field(byName: "Flagged"), let subjectField = database.field(byName: "Subject") else {
             fatalError("cannot happen")
         }
 
@@ -146,7 +127,7 @@ class CriteriaTests: XCTestCase {
         let criteriaTreeString = """
                                 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
                                 <criteriagroup condition="all">
-                                    <criteria field="\(commentsField.name!)"><operator>\(CriteriaOperator.MA_CritOper_Contains.rawValue)</operator><value>asdf</value></criteria>
+                                    <criteria field="\(subjectField.name!)"><operator>\(CriteriaOperator.MA_CritOper_Contains.rawValue)</operator><value>asdf</value></criteria>
                                     <criteriagroup condition="any">
                                         <criteria field="\(flaggedField.name!)"><operator>\(CriteriaOperator.MA_CritOper_Is.rawValue)</operator><value>Yes</value></criteria>
                                         <criteria field="\(flaggedField.name!)"><operator>\(CriteriaOperator.MA_CritOper_IsNot.rawValue)</operator><value>No</value></criteria>
@@ -154,17 +135,14 @@ class CriteriaTests: XCTestCase {
                                 </criteriagroup>
                                 """
 
-        guard let testCriteriaTree = CriteriaTree(string: criteriaTreeString) else {
-            XCTAssert(false)
-            fatalError("cannot happen")
-        }
+        let testCriteriaTree = genericConversionChecks(criteriaTreeString)
 
-        XCTAssertEqual(testCriteriaTree.toSQL(for: database), "\(commentsField.sqlField!) LIKE '%asdf%' AND ( \(flaggedField.sqlField!)=1 OR \(flaggedField.sqlField!)<>0 )")
+        XCTAssertEqual(testCriteriaTree.toSQL(for: database), "\(subjectField.sqlField!) LIKE '%asdf%' AND ( \(flaggedField.sqlField!)=1 OR \(flaggedField.sqlField!)<>0 )")
     }
 
     func testNestedNotCriteriaSQLConversion() {
         let database = getDatabase()
-        guard let flaggedField = database.field(byName: "Flagged"), let commentsField = database.field(byName: "Comments") else {
+        guard let flaggedField = database.field(byName: "Flagged"), let subjectField = database.field(byName: "Subject") else {
             fatalError("cannot happen")
         }
 
@@ -174,7 +152,7 @@ class CriteriaTests: XCTestCase {
         let criteriaTreeString = """
                                 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
                                 <criteriagroup condition="all">
-                                    <criteria field="\(commentsField.name!)"><operator>\(CriteriaOperator.MA_CritOper_Contains.rawValue)</operator><value>asdf</value></criteria>
+                                    <criteria field="\(subjectField.name!)"><operator>\(CriteriaOperator.MA_CritOper_Contains.rawValue)</operator><value>asdf</value></criteria>
                                     <criteriagroup condition="none">
                                         <criteria field="\(flaggedField.name!)"><operator>\(CriteriaOperator.MA_CritOper_Is.rawValue)</operator><value>Yes</value></criteria>
                                         <criteria field="\(flaggedField.name!)"><operator>\(CriteriaOperator.MA_CritOper_IsNot.rawValue)</operator><value>No</value></criteria>
@@ -182,12 +160,9 @@ class CriteriaTests: XCTestCase {
                                 </criteriagroup>
                                 """
 
-        guard let testCriteriaTree = CriteriaTree(string: criteriaTreeString) else {
-            XCTAssert(false)
-            fatalError("cannot happen")
-        }
+        let testCriteriaTree = genericConversionChecks(criteriaTreeString)
 
-        XCTAssertEqual(testCriteriaTree.toSQL(for: database), "\(commentsField.sqlField!) LIKE '%asdf%' AND ( NOT \(flaggedField.sqlField!)=1 AND NOT \(flaggedField.sqlField!)<>0 )")
+        XCTAssertEqual(testCriteriaTree.toSQL(for: database), "\(subjectField.sqlField!) LIKE '%asdf%' AND ( NOT \(flaggedField.sqlField!)=1 AND NOT \(flaggedField.sqlField!)<>0 )")
     }
 
     func testAllCriteriaConditions() {
@@ -224,17 +199,7 @@ class CriteriaTests: XCTestCase {
         </criteriagroup>
         """
 
-        guard let testCriteriaTree = CriteriaTree(string: criteriaTreeString) else {
-            XCTAssert(false)
-            fatalError("cannot happen")
-        }
-
-        let treeStringUnformatted: String = criteriaTreeString.replacingOccurrences(of: "  ", with: "").replacingOccurrences(of: "\n", with: "")
-        XCTAssertEqual(treeStringUnformatted, testCriteriaTree.string, "XML reproducible")
-
-        XCTAssertNotNil(testCriteriaTree.toSQL(for: getDatabase()))
-
-        XCTAssertEqual(CriteriaTree(predicate: testCriteriaTree.predicate)?.string, treeStringUnformatted, "Still same xml after converting to predicate and back")
+        genericConversionChecks(criteriaTreeString)
     }
 
     func testNegation() {
@@ -246,7 +211,25 @@ class CriteriaTests: XCTestCase {
         </criteriagroup>
         """
 
-        //TODO same test as above (none predicate at the beginning and "not contains Apple" are the relevant things to test here)
+        // Same test as above (none predicate at the beginning and "not contains Apple" are the relevant things to test here)
+
+        genericConversionChecks(testCriteriaString)
+    }
+
+    private func genericConversionChecks(_ criteriaTreeString: String) -> CriteriaTree {
+        guard let testCriteriaTree = CriteriaTree(string: criteriaTreeString) else {
+            XCTAssert(false)
+            fatalError("cannot happen")
+        }
+
+        let treeStringUnformatted: String = criteriaTreeString.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "  ", with: "")
+        XCTAssertEqual(treeStringUnformatted, testCriteriaTree.string, "XML reproducible")
+
+        XCTAssertNotNil(testCriteriaTree.toSQL(for: getDatabase()))
+
+        XCTAssertEqual(CriteriaTree(predicate: testCriteriaTree.predicate)!.string, treeStringUnformatted, "Still same xml after converting to predicate and back")
+
+        return testCriteriaTree
     }
 
     private func getDatabase() -> Database {

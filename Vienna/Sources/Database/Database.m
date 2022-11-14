@@ -2616,7 +2616,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             if (field.type == VNAFieldTypeString) {
                 operatorString = @"<>'%@'"; break;
             } else {
-                operatorString = @"<>'%@'"; break;
+                operatorString = @"<>%@"; break;
             }
         case MA_CritOper_IsLessThan:
             operatorString = @"<%@"; break;

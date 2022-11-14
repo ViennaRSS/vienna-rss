@@ -57,7 +57,7 @@ extension CriteriaTree {
 
             if let subCompound = subPredicate as? NSCompoundPredicate {
                 // Look ahead to detect "not contains" predicate
-                if compound.compoundPredicateType == .not,
+                if subCompound.compoundPredicateType == .not,
                    subCompound.subpredicates.count == 1,
                    let subOrPredicate = subCompound.subpredicates[0] as? NSCompoundPredicate,
                    subOrPredicate.compoundPredicateType == .or,
@@ -163,7 +163,12 @@ extension Criteria {
                 criteriaOperator = .MA_CritOper_Is
             }
         case MA_Field_Read, MA_Field_Flagged, MA_Field_HasEnclosure, MA_Field_Deleted:
-            criteriaOperator = .MA_CritOper_Is
+            switch comparison.predicateOperatorType {
+            case .notEqualTo:
+                criteriaOperator = .MA_CritOper_IsNot
+            default:
+                criteriaOperator = .MA_CritOper_Is
+            }
         default:
             NSLog("Unknown field \(field), will default to \"=\" operator!")
             criteriaOperator = .MA_CritOper_Is

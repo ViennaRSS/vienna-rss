@@ -185,6 +185,9 @@
                                                         <menuItem title="is" state="on" id="1z1-1v-GTV">
                                                             <integer key="representedObject" value="4"/>
                                                         </menuItem>
+                                                        <menuItem title="is not" id="qLI-mg-GMn">
+                                                            <integer key="representedObject" value="5"/>
+                                                        </menuItem>
                                                     </items>
                                                 </menu>
                                                 <menu id="vmd-jB-yAh">
