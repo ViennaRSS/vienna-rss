@@ -165,6 +165,9 @@ extension Criteria {
         case MA_Field_Read, MA_Field_Flagged, MA_Field_HasEnclosure, MA_Field_Deleted:
             switch comparison.predicateOperatorType {
             case .notEqualTo:
+                // Not representable by predicate editor, because it would not
+                // make sense to offer "== false" and "!= true" making things
+                // ambiguous
                 criteriaOperator = .MA_CritOper_IsNot
             default:
                 criteriaOperator = .MA_CritOper_Is
@@ -221,10 +224,19 @@ extension Criteria {
             type = .equalTo
         }
 
-        let comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: right, modifier: .direct, type: type)
+        let comparisonPredicate: NSComparisonPredicate
+        if self.operator == .MA_CritOper_IsNot && (self.value == "No" || self.value == "Yes") {
+            //use canonical "is yes / is no" representation instead of allowing ambiguous "is not yes - is no / is not no - is yes"
+            let invertedRight = NSExpression(forConstantValue: self.value == "No" ? "Yes" : "No")
+            comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: invertedRight, modifier: .direct, type: .equalTo)
+        } else {
+            comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: right, modifier: .direct, type: type)
+        }
+
         if self.operator != .MA_CritOper_NotContains {
             return comparisonPredicate
         } else {
+            //representation for "not contains" in predicate differs because "not contains" is no predicate operator
             return NSCompoundPredicate(notPredicateWithSubpredicate: NSCompoundPredicate(orPredicateWithSubpredicates: [comparisonPredicate]))
         }
     }
