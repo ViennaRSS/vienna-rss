@@ -312,11 +312,21 @@ Gw
                             <action selector="doCancel:" target="-2" id="52"/>
                         </connections>
                     </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tkM-FF-D8y">
+                        <rect key="frame" x="18" y="23" width="248" height="14"/>
+                        <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Hold down the Option key to add nested rules." id="caT-eg-dXm">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
                 <constraints>
                     <constraint firstItem="8" firstAttribute="baseline" secondItem="7" secondAttribute="baseline" id="0wf-A1-ioR"/>
                     <constraint firstAttribute="trailing" secondItem="9" secondAttribute="trailing" constant="20" symbolic="YES" id="2Jz-0s-O2s"/>
+                    <constraint firstItem="tkM-FF-D8y" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="2tg-Qv-npH"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8" secondAttribute="trailing" constant="20" symbolic="YES" id="Moi-of-e0Q"/>
+                    <constraint firstItem="tkM-FF-D8y" firstAttribute="firstBaseline" secondItem="10" secondAttribute="firstBaseline" id="NZp-8N-wNg"/>
                     <constraint firstItem="9" firstAttribute="leading" secondItem="10" secondAttribute="trailing" constant="12" symbolic="YES" id="Ps2-WR-Xnc"/>
                     <constraint firstItem="7" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="TMr-sX-Kob"/>
                     <constraint firstItem="8" firstAttribute="leading" secondItem="7" secondAttribute="trailing" constant="8" symbolic="YES" id="cOu-7h-ifb"/>
@@ -327,6 +337,7 @@ Gw
                     <constraint firstItem="fqA-NR-3TG" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="jdU-oU-YFO"/>
                     <constraint firstAttribute="trailing" secondItem="fqA-NR-3TG" secondAttribute="trailing" constant="20" symbolic="YES" id="nNg-Rk-qfE"/>
                     <constraint firstItem="fqA-NR-3TG" firstAttribute="top" secondItem="8" secondAttribute="bottom" constant="7" id="pNN-zE-CZn"/>
+                    <constraint firstItem="10" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tkM-FF-D8y" secondAttribute="trailing" constant="8" symbolic="YES" id="r2G-so-kap"/>
                     <constraint firstAttribute="bottom" secondItem="9" secondAttribute="bottom" constant="20" symbolic="YES" id="xei-td-6nb"/>
                     <constraint firstItem="10" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="yeF-Av-22K"/>
                 </constraints>
