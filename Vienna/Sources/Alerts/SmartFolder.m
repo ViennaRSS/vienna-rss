@@ -23,6 +23,7 @@
 #import "AppController.h"
 #import "Database.h"
 #import "Folder.h"
+#import "NSPredicateEditor+Private.h"
 #import "StringExtensions.h"
 #import "Vienna-Swift.h"
 
@@ -99,6 +100,9 @@ static NSNibName const VNASmartFolderNibName = @"SearchFolder";
                        owner:self
              topLevelObjects:nil];
         self.folderNameTextField.delegate = self;
+#ifdef DEBUG
+        [self prepareDevelopmentOptionsButton];
+#endif
     }
 
     [self prepareTemplates];
@@ -258,6 +262,52 @@ static NSNibName const VNASmartFolderNibName = @"SearchFolder";
     [self.window.sheetParent endSheet:self.window];
     [self.window orderOut:self];
 }
+
+// MARK: Development options
+
+#ifdef DEBUG
+
+- (void)prepareDevelopmentOptionsButton
+{
+    NSPopUpButton *button = [[NSPopUpButton alloc] initWithFrame:NSZeroRect
+                                                       pullsDown:YES];
+    [button addItemWithTitle:@"Development Options"];
+    [button.menu addItemWithTitle:@"Log Predicate String"
+                           action:@selector(logPredicateString)
+                    keyEquivalent:@""];
+    [button.menu addItemWithTitle:@"Log Formatting Strings"
+                           action:@selector(logFormattingStrings)
+                    keyEquivalent:@""];
+    button.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.window.contentView addSubview:button];
+    NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[button]"
+                                                                    options:0
+                                                                    metrics:nil
+                                                                      views:@{@"button": button}];
+    NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[button]-|"
+                                                                    options:0
+                                                                    metrics:nil
+                                                                      views:@{@"button": button}];
+    [NSLayoutConstraint activateConstraints:vConstraints];
+    [NSLayoutConstraint activateConstraints:hConstraints];
+}
+
+- (void)logPredicateString
+{
+    NSLog(@"Predicate: %@", self.predicateEditor.predicate.description);
+}
+
+- (void)logFormattingStrings
+{
+    if ([self.predicateEditor respondsToSelector:@selector(_generateFormattingDictionaryStringsFile)]) {
+        NSData *data = [self.predicateEditor _generateFormattingDictionaryStringsFile];
+        NSString *strings = [[NSString alloc] initWithData:data
+                                                  encoding:NSUTF16StringEncoding];
+        NSLog(@"Formatting dictionary strings file:\n%@", strings);
+    }
+}
+
+#endif
 
 // MARK: - NSTextFieldDelegate
 
