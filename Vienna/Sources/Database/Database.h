@@ -63,6 +63,7 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL;
 -(Folder *)folderFromRemoteId:(NSString *)wantedRemoteId;
 -(Folder *)folderFromName:(NSString *)wantedName;
+-(NSString *)sqlScopeForFolder:(Folder *)folder criteriaOperator:(CriteriaOperator)op;
 -(NSInteger)addFolder:(NSInteger)parentId afterChild:(NSInteger)predecessorId folderName:(NSString *)name type:(NSInteger)type canAppendIndex:(BOOL)canAppendIndex;
 -(BOOL)deleteFolder:(NSInteger)folderId;
 -(BOOL)setName:(NSString *)newName forFolder:(NSInteger)folderId;
@@ -112,10 +113,4 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 -(void)markStarredArticlesFromFolder:(Folder *)folder guidArray:(NSArray *)guidArray;
 @property (nonatomic, getter=isTrashEmpty, readonly) BOOL trashEmpty;
 -(NSArray *)guidHistoryForFolderId:(NSInteger)folderId;
-@end
-
-@interface CriteriaTree (SQL)
-
--(NSString *)toSQLForDatabase:(Database *)database;
-
 @end

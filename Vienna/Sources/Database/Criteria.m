@@ -19,7 +19,6 @@
 //
 
 #import "Criteria.h"
-#import "Database.h"
 #import "Vienna-Swift.h"
 
 #pragma clang diagnostic push

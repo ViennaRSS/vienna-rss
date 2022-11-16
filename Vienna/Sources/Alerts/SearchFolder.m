@@ -33,7 +33,7 @@
 @property (weak) IBOutlet NSScrollView *predicateView;
 @property (weak) IBOutlet NSPredicateEditor *predicateEditor;
 
--(void)fillFolderValueField;
+-(void)prepareFolderTemplate;
 -(void)initSearchSheet:(NSString *)folderName;
 -(void)displaySearchSheet:(NSWindow *)window;
 -(void)addDefaultCriteria;
@@ -116,19 +116,29 @@
 
 	// Initialise the folder control with a list of all folders
 	// in the database.
-    [self fillFolderValueField];
+    [self prepareFolderTemplate];
+
+    [self prepareNotContainsTemplate];
 	
 	// Init the folder name field and disable the Save button if it is blank
 	smartFolderName.stringValue = folderName;
 	saveButton.enabled = !folderName.vna_isBlank;
 }
 
--(void)fillFolderValueField {
+-(void)prepareFolderTemplate {
     NSArray<NSExpression *> *folders = [self fillFolderValueField:VNAFolderTypeRoot atIndent:0];
 
     NSPredicateEditorRowTemplate *folderTemplate = [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:@[[NSExpression expressionForConstantValue:@"Folder"]] rightExpressions:folders modifier:NSDirectPredicateModifier operators:@[@(NSEqualToPredicateOperatorType), @(NSNotEqualToPredicateOperatorType)] options:0];
 
     _predicateEditor.rowTemplates = [_predicateEditor.rowTemplates arrayByAddingObject:folderTemplate];
+}
+
+-(void)prepareNotContainsTemplate {
+    NSArray *doesNotContainLeftExpressions = @[
+        [NSExpression expressionForConstantValue: MA_Field_Text],
+        [NSExpression expressionForConstantValue: MA_Field_Subject],
+        [NSExpression expressionForConstantValue: MA_Field_Author]];
+    _predicateEditor.rowTemplates = [_predicateEditor.rowTemplates arrayByAddingObject:[[VNANotContainsPredicateEditorRowTemplate alloc] initWithLeftExpressions:doesNotContainLeftExpressions]];
 }
 
 /* fillFolderValueField

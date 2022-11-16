@@ -57,12 +57,10 @@ extension CriteriaTree {
 
             if let subCompound = subPredicate as? NSCompoundPredicate {
                 // Look ahead to detect "not contains" predicate
-                if subCompound.compoundPredicateType == .not,
+                if let subCompound = predicate as? NSCompoundPredicate,
+                   subCompound.compoundPredicateType == .not,
                    subCompound.subpredicates.count == 1,
-                   let subOrPredicate = subCompound.subpredicates[0] as? NSCompoundPredicate,
-                   subOrPredicate.compoundPredicateType == .or,
-                   subOrPredicate.subpredicates.count == 1,
-                   let subContainsPredicate = subOrPredicate.subpredicates[0] as? NSComparisonPredicate,
+                   let subContainsPredicate = subCompound.subpredicates[0] as? NSComparisonPredicate,
                    subContainsPredicate.predicateOperatorType == .contains {
                     criteriaElement = Criteria(predicate: subContainsPredicate, notContains: true)
                 } else {
@@ -237,7 +235,7 @@ extension Criteria {
             return comparisonPredicate
         } else {
             //representation for "not contains" in predicate differs because "not contains" is no predicate operator
-            return NSCompoundPredicate(notPredicateWithSubpredicate: NSCompoundPredicate(orPredicateWithSubpredicates: [comparisonPredicate]))
+            return NSCompoundPredicate(notPredicateWithSubpredicate: comparisonPredicate)
         }
     }
 }
