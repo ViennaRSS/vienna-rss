@@ -18,3 +18,4 @@
 #import "WKWebView+Private.h"
 #import "WKWebViewConfiguration+Private.h"
 #import "Criteria.h"
+#import "Criteria+SQL.h"

@@ -76,7 +76,7 @@ class CriteriaTests: XCTestCase {
         let allCriteria = testCriteriaTree.criteriaEnumerator.allObjects
         XCTAssertGreaterThan(allCriteria.count, 1, "Pass")
 
-        let sqlString = testCriteriaTree.toSQL(for: database)!
+        let sqlString = testCriteriaTree.toSQL(for: database)
 
         XCTAssert(sqlString.contains("\(flaggedField.sqlField!)=1"), "Sql contains flagged criterion")
     }
@@ -104,7 +104,7 @@ class CriteriaTests: XCTestCase {
             fatalError("cannot happen")
         }
 
-        let sqlString = testCriteriaTree.toSQL(for: database)!
+        let sqlString = testCriteriaTree.toSQL(for: database)
 
         XCTAssertEqual(sqlString, "\(flaggedField.sqlField!)=1 AND \(flaggedField.sqlField!)=0 AND \(flaggedField.sqlField!)<>1 AND \(flaggedField.sqlField!)<>0", "Sql correct")
 
@@ -117,7 +117,7 @@ class CriteriaTests: XCTestCase {
         // This tests returning a criteria tree as an XML string
         let criteriaTreeString = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><criteriagroup condition=\"all\"><criteria field=\"Flagged\"><operator>1</operator><value>Yes</value></criteria></criteriagroup>"
 
-        let testCriteriaTree = genericConversionChecks(criteriaTreeString)
+        genericConversionChecks(criteriaTreeString)
     }
 
     func testNestedCriteriaXMLConversion() {
